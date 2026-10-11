@@ -116,7 +116,7 @@ public sealed record PublishingExportRequest(
     }
 }
 
-public enum PublishingItemState { Completed, Failed, Cancelled }
+public enum PublishingItemState { Completed, Failed, Cancelled, Partial }
 public sealed record PublishingItemResult(int Sequence, PublishingItemState State, string SourcePath, string? DestinationPath, long BytesWritten, string? ErrorMessage = null);
 public sealed record PublishingExportResult(Guid TaskId, TaskLifecycleState State, TaskResultSummary Summary, IReadOnlyList<PublishingItemResult> Items);
 

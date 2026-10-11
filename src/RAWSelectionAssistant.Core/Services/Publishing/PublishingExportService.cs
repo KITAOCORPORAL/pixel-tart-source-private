@@ -1,3 +1,4 @@
+using RAWSelectionAssistant.Core.Services.Projects;
 using System.Security.Cryptography;
 using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.Tasks;
@@ -10,12 +11,13 @@ public interface IPublishingRenderer
     Task VerifyAsync(string imagePath, CancellationToken cancellationToken = default);
 }
 
+public interface IPublishingOutputInspector { Task<(int Width,int Height,int BitDepth)> InspectAsync(string path,CancellationToken token); }
 public interface IPublishingExportService
 {
     Task<PublishingExportResult> ExportAsync(Guid taskId, PublishingExportRequest request, IAsyncProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null, CancellationToken cancellationToken = default);
 }
 
-public sealed class PublishingExportService(IPublishingRenderer renderer) : IPublishingExportService
+public sealed class PublishingExportService(IPublishingRenderer renderer,Action<string>? afterOutputCommit=null) : IPublishingExportService
 {
     public Task<PublishingExportResult> ExportAsync(Guid taskId, PublishingExportRequest request, IProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress, CancellationToken cancellationToken = default)
         => ExportAsync(taskId, request, progress is null ? null : new OrderedAsyncProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>((value, _) => { progress.Report(value); return ValueTask.CompletedTask; }), cancellationToken);
@@ -39,6 +41,7 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
             var source = sourceFiles[sourceIndex];
             var index = sequence++;
             var itemLabel = recipe is null ? Path.GetFileName(source) : $"{recipe.Name} · {Path.GetFileName(source)}";
+            string? committedOutput=null;
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -46,6 +49,23 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
                 if (!PublishingDefaults.SupportedExtensions.Contains(Path.GetExtension(source))) throw new InvalidDataException("暂不支持此图片格式；当前支持 JPG、JPEG、PNG、TIFF。");
                 await ReportProgressAsync(progress, total, results, itemLabel, 0.05, "准备", cancellationToken).ConfigureAwait(false);
                 var before = await ComputeHashAsync(source, cancellationToken).ConfigureAwait(false);
+                var structured=ExportRecipeSnapshot.Publishing(recipeOptions) with { RecipeName=recipe?.Name,FilenameTemplate=recipe?.FilenameTemplate };
+                StudioExportReceipt? upstream=null;
+                if(File.Exists(source+".kitao-export.json")){upstream=await ExportRecovery.ReadAsync(source+".kitao-export.json",cancellationToken);if(!string.Equals(upstream.OutputHash,Convert.ToHexString(before),StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("上游输出 hash 不一致。");}
+                var versionId=upstream?.EditVersionId??new Guid(before.AsSpan(0,16));
+                var sourceHash=upstream?.SourceHash??Convert.ToHexString(before);
+                var recovered=false;
+                foreach(var pending in Directory.EnumerateFiles(request.DestinationDirectory,"*.kitao-export.pending.json",SearchOption.AllDirectories))
+                {
+                    var candidate=await ExportRecovery.ReadAsync(pending,cancellationToken);
+                    var expectedOutput=pending[..^".kitao-export.pending.json".Length];
+                    if(!string.Equals(Path.GetFullPath(candidate.OutputPath),Path.GetFullPath(expectedOutput),StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("恢复清单路径不属于该输出。");
+                    if(candidate.EditVersionId!=versionId||candidate.SourceHash!=sourceHash||System.Text.Json.JsonSerializer.Serialize(candidate.RecipeSnapshot is {} savedRecipe?savedRecipe with{OutputWidth=null,OutputHeight=null}:null)!=System.Text.Json.JsonSerializer.Serialize(structured))continue;
+                    var recovery=await ExportRecovery.RecoverAsync(candidate.OutputPath,versionId,sourceHash,cancellationToken);
+                    if(recovery.State!="Completed")throw new IOException(recovery.Error);
+                    results.Add(new(index,PublishingItemState.Completed,source,candidate.OutputPath,new FileInfo(candidate.OutputPath).Length));recovered=true;break;
+                }
+                if(recovered)continue;
                 var destination = ResolveDestination(source, request.DestinationDirectory, recipeOptions, reserved, recipe?.FilenameTemplate, recipe?.Destination);
                 reserved.Add(destination);
                 var temporary = destination + "." + Guid.NewGuid().ToString("N") + ".publishing";
@@ -57,7 +77,9 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
                     await renderer.VerifyAsync(temporary, cancellationToken).ConfigureAwait(false);
                     var after = await ComputeHashAsync(source, cancellationToken).ConfigureAwait(false);
                     if (!CryptographicOperations.FixedTimeEquals(before, after)) throw new IOException("源照片在发布处理期间发生变化，已停止输出。");
-                    File.Move(temporary, destination, false);
+                    committedOutput=destination;
+                    if(renderer is IPublishingOutputInspector inspector){var info=await inspector.InspectAsync(temporary,cancellationToken);structured=structured with{OutputWidth=info.Width,OutputHeight=info.Height,BitDepth=info.BitDepth};}
+                    await StudioExportReceiptStore.CommitOutputAsync(temporary,destination,new(Guid.NewGuid(),upstream?.LibraryId,upstream?.AssetId,sourceHash,versionId,upstream?.ProcessingVersion??1,recipe?.Name??"Publishing",destination,"",DateTimeOffset.UtcNow,structured),cancellationToken,afterOutputCommit);
                     results.Add(new(index, PublishingItemState.Completed, source, destination, new FileInfo(destination).Length));
                 }
                 finally { TryDelete(temporary); }
@@ -75,7 +97,7 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
             }
             catch (Exception error)
             {
-                results.Add(new(index, PublishingItemState.Failed, source, null, 0, UserMessage(error)));
+                results.Add(new(index, committedOutput is not null&&File.Exists(committedOutput)?PublishingItemState.Partial:PublishingItemState.Failed, source, committedOutput, committedOutput is null||!File.Exists(committedOutput)?0:new FileInfo(committedOutput).Length, committedOutput is null?UserMessage(error):"成片已完成，清单待恢复；重新执行将先验证 hash。"));
             }
             var summary = Summarize(total, results);
             if (progress is not null) await progress.ReportAsync((results.Count * 100d / total, itemLabel, summary), cancellationToken).ConfigureAwait(false);
@@ -84,7 +106,7 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
         }
         var finalSummary = Summarize(total, results);
         var state = finalSummary.Succeeded == total ? TaskLifecycleState.Completed
-            : finalSummary.Succeeded > 0 ? TaskLifecycleState.PartiallyCompleted
+            : finalSummary.Succeeded > 0 || results.Any(x=>x.State==PublishingItemState.Partial) ? TaskLifecycleState.PartiallyCompleted
             : finalSummary.Cancelled > 0 && finalSummary.Failed == 0 ? TaskLifecycleState.Cancelled : TaskLifecycleState.Failed;
         return new(taskId, state, finalSummary, results.OrderBy(item => item.Sequence).ToArray());
     }
@@ -114,7 +136,7 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
         stem = SanitizeFilename(stem);
         var desired = Path.Combine(destinationRoot, stem + extension);
         var candidate = desired; var number = 2;
-        while (File.Exists(candidate) || reserved?.Contains(candidate) == true) candidate = Path.Combine(destinationRoot, $"{stem}_{number++}{extension}");
+        while (File.Exists(candidate) || File.Exists(candidate+".kitao-export.json") || File.Exists(candidate+".kitao-export.pending.json") || reserved?.Contains(candidate) == true) candidate = Path.Combine(destinationRoot, $"{stem}_{number++}{extension}");
         return candidate;
     }
 
@@ -174,7 +196,7 @@ public sealed class PublishingExportService(IPublishingRenderer renderer) : IPub
         return progress.ReportAsync((completed * 100d / total, $"{stage}：{currentFile}", Summarize(total, results)), cancellationToken);
     }
 
-    private static TaskResultSummary Summarize(int total, IReadOnlyCollection<PublishingItemResult> results) => new(total, results.Count(item => item.State == PublishingItemState.Completed), results.Count(item => item.State == PublishingItemState.Failed), 0, results.Count(item => item.State == PublishingItemState.Cancelled), 0, 0, results.Sum(item => item.BytesWritten));
+    private static TaskResultSummary Summarize(int total, IReadOnlyCollection<PublishingItemResult> results) => new(total, results.Count(item => item.State == PublishingItemState.Completed), results.Count(item => item.State is PublishingItemState.Failed or PublishingItemState.Partial), 0, results.Count(item => item.State == PublishingItemState.Cancelled), 0, 0, results.Sum(item => item.BytesWritten));
     private static string UserMessage(Exception error) => error switch { FileNotFoundException => "源照片不可用。", UnauthorizedAccessException => "无法写入输出目录。", InvalidDataException invalid => invalid.Message, _ => "发布输出失败，请检查照片和输出目录。" };
     private static void TryDelete(string path) { try { if (File.Exists(path)) File.Delete(path); } catch { } }
 }

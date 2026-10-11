@@ -166,8 +166,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     public ReferenceColorWorkspaceViewModel(IDialogService dialogs, IReferenceRenderBackend? renderBackend = null, IRawDecoder? rawDecoder = null,
         MatchV4ProductExecutor? matchV4Executor = null,
-        Func<IAssetLibraryRepository?>? assetRepositoryFactory = null)
+        Func<IAssetLibraryRepository?>? assetRepositoryFactory = null, StudioVersionRepository? versionRepository = null)
     {
+        _versionRepository=versionRepository;
         _dialogs = dialogs;
         PropertyChangedEventManager.AddHandler(StudioLocalizationService.Current, OnStudioLanguageChanged, nameof(StudioLocalizationService.Language));
         _matchV4Executor = matchV4Executor;
@@ -225,7 +226,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         ExportAllCommand = new AsyncRelayCommand(_ => ExportAsync(VisibleTargets.ToArray()), _ => VisibleTargets.Count > 0 && !IsExporting);
         StopExportCommand = new RelayCommand(_ => _exportCancellation?.Cancel(), _ => IsExporting);
         RetryFailedTargetCommand = new AsyncRelayCommand(_ => FailedTarget is null ? Task.CompletedTask : ActivateTargetAsync(FailedTarget), _ => FailedTarget is not null && !IsLoading);
-        RetryFailedExportCommand = new AsyncRelayCommand(_ => RetryFailedExportsAsync(), _ => Targets.Any(item => item.ExportStatus == ReferenceExportStatus.Failed) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory));
+        RetryFailedExportCommand = new AsyncRelayCommand(_ => RetryFailedExportsAsync(), _ => Targets.Any(item => item.ExportStatus is ReferenceExportStatus.Failed or ReferenceExportStatus.Partial) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory));
         Editor.PropertyChanged += (_, args) =>
         {
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
@@ -348,12 +349,14 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         if (e.PropertyName == nameof(ReferenceTargetItem.Rating))
         {
             var rating = target.Rating;
-            QueueMetadata(() => PersistAssetMetadataAsync(target, assetId, rating, null));
+            var expected=target.AnnotationSnapshot;
+            QueueMetadata(() => PersistAssetMetadataAsync(target, assetId, rating, null,expected));
         }
         else if (e.PropertyName == nameof(ReferenceTargetItem.ColorLabel))
         {
             var color = target.ColorLabel ?? "";
-            QueueMetadata(() => PersistAssetMetadataAsync(target, assetId, null, color));
+            var expected=target.AnnotationSnapshot;
+            QueueMetadata(() => PersistAssetMetadataAsync(target, assetId, null, color,expected));
         }
     }
     public Func<string, Task>? AssetMetadataSaved { get; set; }
@@ -371,7 +374,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     }
     private IAssetLibraryRepository? OpenMetadataRepository(ReferenceTargetItem target) =>
         target.MetadataDatabasePath is { } path ? new SqliteAssetLibraryRepository(path) : _assetRepositoryFactory?.Invoke();
-    private async Task PersistAssetMetadataAsync(ReferenceTargetItem target, Guid assetId, int? rating, string? color)
+    private async Task PersistAssetMetadataAsync(ReferenceTargetItem target, Guid assetId, int? rating, string? color,PhotographerAnnotation? capturedExpected)
     {
         if (target.AssetId != assetId) return;
         if (target.LibraryId.HasValue && !await ValidateTargetIdentityAsync(target, CancellationToken.None)) { target.MetadataStatus = "身份未确认，标注未写入"; return; }
@@ -385,10 +388,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             return;
         }
         target.MetadataDatabasePath = repository.DatabasePath;
-        if (rating is not null) await repository.UpdateAssetMetadataAsync(assetId, rating: rating);
-        if (color is not null) await new AssetPresentationMetadataStore(new AssetLibraryDatabase(repository.DatabasePath)).SaveAsync([assetId], color: color);
-        target.MetadataStatus = "已保存到素材库";
-        if (AssetMetadataSaved is { } refresh) await refresh(repository.DatabasePath);
+        if(capturedExpected is not {} expected){target.MetadataStatus="标注未读取，请刷新后重试";return;}
+        while(target.OwnAnnotationWrites.TryGetValue(expected.Revision,out var own)&&own.Revision>expected.Revision)expected=own;
+        var written=await new PhotographerAnnotationStore(new AssetLibraryDatabase(repository.DatabasePath)).CompareExchangeAsync(expected,expected with{Rating=rating??expected.Rating,Color=color??expected.Color});
+        if(written.Applied)target.OwnAnnotationWrites[expected.Revision]=written.Current;
+        target.AnnotationSnapshot=written.Current;
+        target.MetadataStatus=written.Applied?"已保存到素材库":"标注冲突，已刷新权威状态";
+        if(!written.Applied){_hydratingMetadata.Add(target.Id);try{target.Rating=written.Current.Rating;target.ColorLabel=written.Current.Color;}finally{_hydratingMetadata.Remove(target.Id);}}        if (AssetMetadataSaved is { } refresh) await refresh(repository.DatabasePath);
     }
     private async Task HydrateAssetMetadataAsync(ReferenceTargetItem target)
     {
@@ -404,6 +410,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             if (asset is null || (target.LibraryId is null && !string.Equals(Path.GetFullPath(asset.SourcePath), Path.GetFullPath(target.Path), StringComparison.OrdinalIgnoreCase))) { target.MetadataStatus = "素材库中未确认此照片身份"; return; }
             target.MetadataDatabasePath = repository.DatabasePath;
             _hydratingMetadata.Add(target.Id);
+            target.AnnotationSnapshot=new(asset.AssetId,asset.Rating,asset.ColorLabel,asset.Comment,asset.AnnotationRevision);
             target.Rating = asset.Rating;
             target.ColorLabel = string.IsNullOrWhiteSpace(asset.ColorLabel) ? null : asset.ColorLabel;
             target.MetadataStatus = "素材库标记";
@@ -517,7 +524,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public string ExportFailureSummary { get => _exportFailureSummary; private set => SetProperty(ref _exportFailureSummary, value); }
     public ReferenceTargetItem? FailedTarget { get => _failedTarget; private set { if (SetProperty(ref _failedTarget, value)) { OnPropertyChanged(nameof(HasFailedTarget)); RetryFailedTargetCommand.RaiseCanExecuteChanged(); } } }
     public bool HasFailedTarget => FailedTarget is not null;
-    public bool CanRetryFailedExport => Targets.Any(item => item.ExportStatus == ReferenceExportStatus.Failed) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory);
+    public bool CanRetryFailedExport => Targets.Any(item => item.ExportStatus is ReferenceExportStatus.Failed or ReferenceExportStatus.Partial) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory);
 
     public async Task InitializeAsync(CancellationToken token = default)
     {
@@ -616,6 +623,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             var image = rawProxy is not null ? RawDisplayBitmapAdapter.ToBitmap(rawProxy.ToVisualRgb24()) : await LoadSourcePreviewAsync(target.Path, token);
             if (revision != Volatile.Read(ref _activationRevision)) return;
             target.SourceHash ??= target.ObservedSourceHash;
+            await LoadPersistentVersionsAsync(target,token);
+            if(revision!=Volatile.Read(ref _activationRevision))return;
             QueueMetadata(() => HydrateAssetMetadataAsync(target));
             await FlushMetadataAsync();
             if (revision != Volatile.Read(ref _activationRevision)) return;
@@ -712,7 +721,16 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                 var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + ("_仿色" + StudioQuickExport.Extension(item.Path,format))); var temp = output + ".tmp";
                 try
                 {
-                    if(File.Exists(output) || File.Exists(output+".kitao-export.json"))throw new IOException("输出路径已存在，请选择其他位置，未覆盖。");
+                    if(!File.Exists(output)&&(File.Exists(output+".kitao-export.json")||File.Exists(output+".kitao-export.pending.json")))throw new IOException("清单已存在而输出缺失，未覆盖。");
+                    if(File.Exists(output))
+                    {
+                        var pendingReceipt=File.Exists(output+".kitao-export.pending.json")?await ExportRecovery.ReadAsync(output+".kitao-export.pending.json",_exportCancellation.Token):null;
+                        var adjustmentHash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(new{frozenItem.Look,frozenItem.Stack,frozenItem.Film}))));
+                        if(pendingReceipt?.RecipeSnapshot?.AdjustmentFingerprint!=adjustmentHash)throw new IOException("调整参数已变化，不能恢复旧成片清单。");
+                        var recovery=await ExportRecovery.RecoverAsync(output,frozenItem.VersionId,frozenItem.SourceHash,_exportCancellation.Token);
+                        if(recovery.State=="Completed"){item.OutputPath=output;item.ExportStatus=ReferenceExportStatus.Succeeded;item.Status=ReferenceTargetStatus.Exported;ExportCompleted++;continue;}
+                        throw new IOException("输出/清单冲突："+recovery.Error);
+                    }
                     if (!await ValidateTargetIdentityAsync(item, _exportCancellation.Token)) throw new IOException(item.Error);
                     if (Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_FAIL_ONCE") == "1")
                     {
@@ -724,7 +742,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                         // AtomicTiffWriter validates the temporary TIFF before the destination becomes visible.
                         var master = item.RawMaster ??= await DecodeStudioRawAsync(item.Path, _exportCancellation.Token);
                         if(StudioQuickExport.Extension(item.Path,format)==".tif")
-                            await ExportFrozenRawAsync(master, output, frozenItem.Look, frozenItem.Stack, frozenItem.Film, frozenItem.Engine, frozenItem.Mode, _exportCancellation.Token);
+                        {
+                            await ExportFrozenRawAsync(master, temp, frozenItem.Look, frozenItem.Stack, frozenItem.Film, frozenItem.Engine, frozenItem.Mode, _exportCancellation.Token);
+
+                        }
                         else
                         {
                             var intermediate=temp+".rendered.tif";
@@ -732,7 +753,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                             {
                                 await ExportFrozenRawAsync(master, intermediate, frozenItem.Look, frozenItem.Stack, frozenItem.Film, frozenItem.Engine, frozenItem.Mode, _exportCancellation.Token);
                                 await Task.Run(()=>StudioQuickExport.Encode(StudioQuickExport.Load(intermediate),item.Path,temp,format,_exportCancellation.Token),_exportCancellation.Token);
-                                File.Move(temp,output,overwrite:false);
+
                             }
                             finally { TryDelete(intermediate); }
                         }
@@ -742,18 +763,19 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                         if (frozenItem.Engine == ColorStudioMatchEngine.MatchV4Beta) throw new NotSupportedException("V4 Beta 输出需要 RAW 高精度源；请切换稳定 V3。");
                         var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token, frozenItem.Stack);
                         await Task.Run(() => StudioQuickExport.Encode(processed, item.Path, temp, format, _exportCancellation.Token), _exportCancellation.Token);
-                        File.Move(temp, output, overwrite: false);
+
                     }
+                    var encoded=StudioQuickExport.Load(temp);
                     var versionId = frozenItem.VersionId;
-                    await StudioExportReceiptStore.WriteAsync(output,new(Guid.NewGuid(),frozenItem.LibraryId,frozenItem.AssetId,frozenItem.SourceHash,versionId,frozenItem.Stack?.ProcessingVersion ?? 1,format.ToString(),output,"",DateTimeOffset.UtcNow),_exportCancellation.Token);
+                    await StudioExportReceiptStore.CommitOutputAsync(temp,output,new(Guid.NewGuid(),frozenItem.LibraryId,frozenItem.AssetId,frozenItem.SourceHash,versionId,frozenItem.Stack?.ProcessingVersion ?? 1,format.ToString(),output,"",DateTimeOffset.UtcNow, new ExportRecipeSnapshot(1,Path.GetExtension(output),encoded.Format.BitsPerPixel>32?16:8,"Original",encoded.PixelWidth,encoded.PixelHeight,null,Path.GetExtension(output)==".jpg"?95:null,Path.GetExtension(output)==".tif"?(isRaw?"None":"Zip"):"Codec default","sRGB","Orientation normalized; source metadata discarded","Not applied",AdjustmentFingerprint:Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(new{frozenItem.Look,frozenItem.Stack,frozenItem.Film})))))),_exportCancellation.Token);
                     item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported;
                 }
                 catch (OperationCanceledException) { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Cancelled; item.Status = ReferenceTargetStatus.Pending; throw; }
                 catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
-                { TryDelete(temp); item.Error = ex is NotSupportedException ? "当前图像或调整不支持此导出格式" : ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "导出失败，源文件未修改"; item.ExportStatus = ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; failed.Add(item.FileName); }
+                { TryDelete(temp); item.Error = File.Exists(output+".kitao-export.pending.json") ? "成片已完成，清单待恢复；重试只验证并补清单" : ex is NotSupportedException ? "当前图像或调整不支持此导出格式" : ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "导出失败，源文件未修改"; item.ExportStatus = File.Exists(output+".kitao-export.pending.json")?ReferenceExportStatus.Partial:ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; failed.Add(item.FileName); }
                 ExportCompleted++; ExportStatus = $"{ExportCompleted} / {ExportTotal} · {directory} · {Path.GetExtension(output).ToUpperInvariant()}";
             }
-            ExportFailureSummary = failed.Count == 0 ? "" : StudioLocalizationService.Current.Format("ExportFailures", failed.Count, string.Join(", ", frozen.Where(entry => entry.Item.ExportStatus == ReferenceExportStatus.Failed).Select(entry => entry.Item.FileName + " (" + StudioLocalizationService.Current[entry.Item.Error ?? ""] + ")")));
+            ExportFailureSummary = failed.Count == 0 ? "" : StudioLocalizationService.Current.Format("ExportFailures", failed.Count, string.Join(", ", frozen.Where(entry => entry.Item.ExportStatus is ReferenceExportStatus.Failed or ReferenceExportStatus.Partial).Select(entry => entry.Item.FileName + " (" + StudioLocalizationService.Current[entry.Item.Error ?? ""] + ")")));
             SetStatus("ExportFinished", ExportCompleted - failed.Count, failed.Count);
         }
         catch (OperationCanceledException) { SetExportStatus("ExportStopped", ExportCompleted, ExportTotal); StatusText = "已停止导出；已完成文件保留，未完成文件已清理。"; }
@@ -761,7 +783,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     }
     private async Task RetryFailedExportsAsync()
     {
-        var failed = Targets.Where(item => item.ExportStatus == ReferenceExportStatus.Failed).ToArray();
+        var failed = Targets.Where(item => item.ExportStatus is ReferenceExportStatus.Failed or ReferenceExportStatus.Partial).ToArray();
         if (failed.Length == 0 || string.IsNullOrWhiteSpace(_lastExportDirectory)) return;
         await ExportAsync(failed, _lastExportDirectory);
     }
@@ -778,6 +800,9 @@ public sealed class NodeSyncChoice(Guid id, string name, bool selected) : Observ
 {
     private bool _selected = selected;
     public System.Collections.ObjectModel.ObservableCollection<StudioEditVersion> EditVersions { get; } = [];
+    public bool RestoredSession {get;set;}
+    public long? LoadedCatalogRevision {get;set;}
+    public StudioVersionCatalog? VersionCatalog { get; set; }
     public Guid? ActiveEditVersionId { get; set; }
     public Guid Id { get; } = id;
     public string Name { get; } = name;
@@ -790,7 +815,7 @@ public sealed class AdjustmentSyncChoice(ColorStudioNodeType type, string name, 
     public string Name { get; } = name;
     public bool Selected { get => _selected; set => SetProperty(ref _selected, value); }
 }
-public enum ReferenceExportStatus { None, Queued, Exporting, Succeeded, Failed, Cancelled }
+public enum ReferenceExportStatus { None, Queued, Exporting, Succeeded, Failed, Cancelled, Partial }
 
 public sealed class ReferenceTargetItem : ObservableObject
 {
@@ -799,9 +824,14 @@ public sealed class ReferenceTargetItem : ObservableObject
     private ReferenceTargetStatus _status = ReferenceTargetStatus.Pending;
     public ReferenceTargetItem(string path, Guid? id = null) { Id = id ?? Guid.NewGuid(); Path = path; }
     public System.Collections.ObjectModel.ObservableCollection<StudioEditVersion> EditVersions { get; } = [];
+    public bool RestoredSession {get;set;}
+    public long? LoadedCatalogRevision {get;set;}
+    public StudioVersionCatalog? VersionCatalog { get; set; }
     public Guid? ActiveEditVersionId { get; set; }
     public Guid Id { get; }
     private Guid? _assetId;
+    internal Dictionary<long,PhotographerAnnotation> OwnAnnotationWrites {get;}=[];
+    public PhotographerAnnotation? AnnotationSnapshot { get; set; }
     public Guid? AssetId { get => _assetId; set => SetProperty(ref _assetId, value); }
     public Guid? LibraryId { get; set; }
     public string? SourceHash { get; set; }

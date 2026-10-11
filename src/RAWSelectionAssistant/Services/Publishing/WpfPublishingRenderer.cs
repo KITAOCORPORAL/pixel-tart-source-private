@@ -10,9 +10,12 @@ using RAWSelectionAssistant.Core.Services.Publishing;
 
 namespace RAWSelectionAssistant.Services.Publishing;
 
-public sealed class WpfPublishingRenderer : IPublishingRenderer
+public sealed class WpfPublishingRenderer : IPublishingRenderer, IPublishingOutputInspector
 {
-    public Task RenderAsync(string sourcePath, string destinationPath, PublishingOptions options, CancellationToken cancellationToken = default)
+    public Task<(int Width,int Height,int BitDepth)> InspectAsync(string path,CancellationToken token)=>Task.Run(()=>
+    {
+        token.ThrowIfCancellationRequested();using var stream=File.OpenRead(path);var frame=BitmapDecoder.Create(stream,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];return(frame.PixelWidth,frame.PixelHeight,frame.Format.BitsPerPixel>32?16:8);
+    },token);    public Task RenderAsync(string sourcePath, string destinationPath, PublishingOptions options, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested(); options.Validate();
         return Task.Run(() => Render(sourcePath, destinationPath, options, cancellationToken), cancellationToken);

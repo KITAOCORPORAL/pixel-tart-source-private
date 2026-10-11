@@ -81,6 +81,12 @@
    <WrapPanel x:Name="HeaderActions" Grid.Column="1">
     <Button Content="{views:StudioText OpenBatch}" Command="{Binding OpenSessionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
     <Button Content="{views:StudioText RelocateAsset}" Command="{Binding RelocateTargetCommand}" Style="{StaticResource PixelTart.Button.Ghost}" AutomationProperties.Name="{views:StudioText RelocateAssetHelp}" />
+    <ComboBox ItemsSource="{Binding ActiveTarget.EditVersions}" SelectedItem="{Binding SelectedCatalogVersion}" DisplayMemberPath="Name" Width="100" />
+    <Button Content="{views:StudioText SelectVersion}" Command="{Binding SelectEditVersionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
+    <TextBox Text="{Binding EditVersionName,UpdateSourceTrigger=PropertyChanged}" Width="90" ToolTip="{views:StudioText VersionName}" />
+    <Button Content="{views:StudioText RenameVersion}" Command="{Binding RenameEditVersionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
+    <Button Content="{views:StudioText ArchiveVersion}" Command="{Binding ArchiveEditVersionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
+    <Button Content="{views:StudioText SaveVersions}" Command="{Binding SaveEditVersionsCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
     <Button Content="{views:StudioText NewEditVersion}" Command="{Binding CreateEditVersionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" AutomationProperties.Name="{views:StudioText NewEditVersionHelp}" />
     <Button Content="{views:StudioText SwitchEditVersion}" Command="{Binding NextEditVersionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" AutomationProperties.Name="{views:StudioText SwitchEditVersionHelp}" />
     <Button Content="{views:StudioText SaveBatch}" Command="{Binding SaveSessionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />

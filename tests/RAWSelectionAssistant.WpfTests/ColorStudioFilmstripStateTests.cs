@@ -13,6 +13,21 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class ColorStudioFilmstripStateTests
 {
     [TestMethod]
+    public Task ProductRepositorySharesVersionsAcrossWorkspacesWithoutPathIdentity() => RunSta(async()=>
+    {
+        var root=Path.Combine(Path.GetTempPath(),"Kitao-CrossSession-"+Guid.NewGuid());Directory.CreateDirectory(root);
+        try
+        {
+            var image=SaveImage(root,"a.png",93);var catalog=Path.Combine(root,"versions");Guid version;
+            using(var first=new ReferenceColorWorkspaceViewModel(new Dialogs(),versionRepository:new StudioVersionRepository(catalog)))
+            {await first.LoadTargetAsync(image);first.Editor.Exposure=.65;first.CreateEditVersion();version=first.ActiveTarget!.ActiveEditVersionId!.Value;first.EditVersionName="shared";first.RenameEditVersionCommand.Execute(null);await first.SaveEditVersionsAsync();}
+            var moved=Path.Combine(root,"renamed.png");File.Move(image,moved);
+            using var second=new ReferenceColorWorkspaceViewModel(new Dialogs(),versionRepository:new StudioVersionRepository(catalog));await second.LoadTargetAsync(moved);
+            Assert.AreEqual(version,second.ActiveTarget!.ActiveEditVersionId);Assert.AreEqual(.65,second.Editor.Exposure);Assert.HasCount(2,second.ActiveTarget.EditVersions);
+            await second.ArchiveEditVersionCommand.ExecuteAsync(null);await second.SaveEditVersionsAsync();
+            Assert.HasCount(1,second.ActiveTarget.EditVersions.Where(v=>!v.Archived));
+        }finally{Directory.Delete(root,true);}
+    });    [TestMethod]
     public Task IndependentEditVersionsRestoreTheirOwnExposure() => RunSta(async()=>
     {
         var root=Path.Combine(Path.GetTempPath(),"Kitao-Versions-"+Guid.NewGuid());Directory.CreateDirectory(root);

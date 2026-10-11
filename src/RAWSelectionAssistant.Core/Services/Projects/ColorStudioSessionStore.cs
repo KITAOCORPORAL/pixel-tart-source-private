@@ -6,7 +6,7 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 public sealed record ColorStudioSessionTarget(Guid Id, string Path, Guid? AssetId, bool Selected,
     ReferenceLook? Look, ColorAdjustmentStack? Stack, PixelTartFilmSettings? Film,
     ColorStudioMatchEngine Engine = ColorStudioMatchEngine.Stable, MatchV4ExecutionMode ExecutionMode = MatchV4ExecutionMode.Auto,
-    int? SessionRating = null, string? SessionColorLabel = null, Guid? LibraryId = null, string? SourceHash = null, IReadOnlyList<StudioEditVersion>? EditVersions = null, Guid? ActiveEditVersionId = null);
+    int? SessionRating = null, string? SessionColorLabel = null, Guid? LibraryId = null, string? SourceHash = null, IReadOnlyList<StudioEditVersion>? EditVersions = null, Guid? ActiveEditVersionId = null,long? CatalogRevision=null);
 
 public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double EditingWidth = 340,
     bool AuxiliaryOpen = true, bool EditingOpen = true, int AuxiliaryMode = 0, int ToolMode = 0,

@@ -39,9 +39,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         foreach(var target in Targets) CaptureEditVersion(target);
         var document = new ColorStudioSessionDocument(Targets.Select(item => new ColorStudioSessionTarget(item.Id, item.Path, item.AssetId, item.IsSelected,
             item.AppliedLookSnapshot, item.ColorAdjustmentStackSnapshot, item.FilmSettingsSnapshot, item.EngineSnapshot, item.ExecutionModeSnapshot,
-            item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null, item.LibraryId, item.SourceHash, item.EditVersions.ToArray(), item.ActiveEditVersionId)).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
+            item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null, item.LibraryId, item.SourceHash, item.EditVersions.ToArray(), item.ActiveEditVersionId,item.VersionCatalog?.Revision)).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
             Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen });
         await ColorStudioSessionStore.SaveAsync(path, document, token);
+        await SaveEditVersionsAsync(token);
+        document=document with{Targets=document.Targets.Select(t=>t with{CatalogRevision=Targets.First(x=>x.Id==t.Id).VersionCatalog?.Revision}).ToArray()};
+        await ColorStudioSessionStore.SaveAsync(path,document,token);
         SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath)); StatusText = "SessionSaved";
     }
     public async Task LoadSessionAsync(string path, CancellationToken token = default)
@@ -50,11 +53,11 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var document = await ColorStudioSessionStore.LoadAsync(path, token);
         var restored = document.Targets.Select(item => new ReferenceTargetItem(item.Path, item.Id)
         {
-            AssetId = item.AssetId, LibraryId = item.LibraryId, SourceHash = item.SourceHash, IsSelected = item.Selected, AppliedLookSnapshot = item.Look, ColorAdjustmentStackSnapshot = item.Stack,
+            RestoredSession=true, AssetId = item.AssetId, LibraryId = item.LibraryId, SourceHash = item.SourceHash, IsSelected = item.Selected, AppliedLookSnapshot = item.Look, ColorAdjustmentStackSnapshot = item.Stack,
             FilmSettingsSnapshot = item.Film, EngineSnapshot = item.Engine, ExecutionModeSnapshot = item.ExecutionMode,
             Rating = item.AssetId is null ? item.SessionRating ?? 0 : 0, ColorLabel = item.AssetId is null ? item.SessionColorLabel : null
         }).ToArray();
-        for(var i=0;i<restored.Length;i++) { foreach(var version in document.Targets[i].EditVersions ?? []) restored[i].EditVersions.Add(version); restored[i].ActiveEditVersionId=document.Targets[i].ActiveEditVersionId; }
+        for(var i=0;i<restored.Length;i++) { foreach(var version in document.Targets[i].EditVersions ?? []) restored[i].EditVersions.Add(version); restored[i].ActiveEditVersionId=document.Targets[i].ActiveEditVersionId;restored[i].LoadedCatalogRevision=document.Targets[i].CatalogRevision; }
         _sessionLoading = true; OnPropertyChanged(nameof(IsLoading)); RefreshSyncAvailability();
         try
         {
