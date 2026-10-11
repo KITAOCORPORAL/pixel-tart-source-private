@@ -33,12 +33,13 @@ public sealed class StudioStartupWindow : Window
         protected override void OnRender(DrawingContext dc)
         {
             base.OnRender(dc);var t=_running?_clock.Elapsed.TotalSeconds:0;
-            for(var i=0;i<48;i++)
+            var colors=new[]{Color.FromRgb(147,91,255),Color.FromRgb(66,124,255),Color.FromRgb(59,220,224),Color.FromRgb(235,177,72),Color.FromRgb(198,75,194)};
+            for(var i=0;i<80;i++)
             {
-                var angle=i*2.399963;var radius=25+70*(.5+.5*Math.Sin(i*1.7+t*.18));
+                var angle=i*2.399963;var radius=(i<64?20:90)+(i<64?65:45)*(.5+.5*Math.Sin(i*1.7+t*.18));
                 var x=ActualWidth/2+Math.Cos(angle+t*.08)*radius;var y=100+Math.Sin(angle+t*.08)*radius*.65;
                 var geometry=new StreamGeometry();using(var c=geometry.Open()){c.BeginFigure(new Point(x,y-4),true,true);c.LineTo(new Point(x-4,y+3),true,false);c.LineTo(new Point(x+4,y+3),true,false);}
-                dc.DrawGeometry(new SolidColorBrush(Color.FromRgb((byte)(80+i*43%175),(byte)(80+i*79%175),(byte)(80+i*113%175))),null,geometry);
+                dc.DrawGeometry(null,new Pen(new SolidColorBrush(colors[i%13==0?4:i%4]),.7),geometry);
             }
         }
     }

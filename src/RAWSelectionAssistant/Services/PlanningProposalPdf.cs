@@ -15,6 +15,7 @@ public static class PlanningProposalPdf
 {
     public static FlowDocument CreateDocument(PlanningCenterViewModel vm, int dpi = 300)
     {
+        if(vm.RichTextPackage is {} richDocument)return PlanningDocumentLayout.Load(richDocument,vm.RichLayout);
         var doc = new FlowDocument
         {
             FontFamily = new FontFamily("Microsoft YaHei UI"), FontSize = 14, Foreground = Brushes.Black,
@@ -85,9 +86,13 @@ public static class PlanningProposalPdf
     public static void Export(PlanningCenterViewModel vm, string path, int dpi = 300)
     {
         if (dpi is not (216 or 300)) throw new ArgumentOutOfRangeException(nameof(dpi));
-        var document = CreateDocument(vm, dpi);
+        ExportDocument(CreateDocument(vm,dpi),path,dpi);
+    }
+    public static void ExportDocument(FlowDocument document,string path,int dpi=216)
+    {
+        var width=double.IsFinite(document.PageWidth)?document.PageWidth:794;var height=double.IsFinite(document.PageHeight)?document.PageHeight:1123;
         var paginator = ((IDocumentPaginatorSource)document).DocumentPaginator;
-        paginator.PageSize = new Size(794, 1123); paginator.ComputePageCount();
+        paginator.PageSize = new Size(width, height); paginator.ComputePageCount();
         var pages = new List<byte[]>();
         for (var i = 0; i < paginator.PageCount; i++)
         {
@@ -95,20 +100,20 @@ public static class PlanningProposalPdf
             var visual = new DrawingVisual();
             using (var drawing = visual.RenderOpen())
             {
-                drawing.DrawRectangle(Brushes.White, null, new Rect(0, 0, 794, 1123));
-                drawing.DrawRectangle(new VisualBrush(page.Visual), null, new Rect(0, 0, 794, 1123));
+                drawing.DrawRectangle(Brushes.White, null, new Rect(0, 0, width, height));
+                drawing.DrawRectangle(new VisualBrush(page.Visual), null, new Rect(0, 0, width, height));
                 var footer = new FormattedText($"{i + 1} / {paginator.PageCount}", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Microsoft YaHei UI"), 10, Brushes.Gray, 1);
-                drawing.DrawText(footer, new Point(730 - footer.Width, 1090));
+                drawing.DrawText(footer, new Point(width-64-footer.Width,height-33));
             }
-            var bitmap = new RenderTargetBitmap((int)Math.Ceiling(794d * dpi / 96), (int)Math.Ceiling(1123d * dpi / 96), dpi, dpi, PixelFormats.Pbgra32); bitmap.Render(visual);
+            var bitmap = new RenderTargetBitmap((int)Math.Ceiling(width * dpi / 96), (int)Math.Ceiling(height * dpi / 96), dpi, dpi, PixelFormats.Pbgra32); bitmap.Render(visual);
             var encoder = new JpegBitmapEncoder { QualityLevel = 94 }; encoder.Frames.Add(BitmapFrame.Create(bitmap));
             using var buffer = new MemoryStream(); encoder.Save(buffer); pages.Add(buffer.ToArray());
         }
         var temporary = Path.GetFullPath(path) + "." + Guid.NewGuid().ToString("N") + ".tmp";
-        try { WritePdf(temporary, pages, dpi); File.Move(temporary, Path.GetFullPath(path), true); }
+        try { WritePdf(temporary, pages, dpi,width,height); File.Move(temporary, Path.GetFullPath(path), true); }
         finally { if (File.Exists(temporary)) File.Delete(temporary); }
     }
-    private static void WritePdf(string path, IReadOnlyList<byte[]> pages, int dpi)
+    private static void WritePdf(string path, IReadOnlyList<byte[]> pages, int dpi,double width,double height)
     {
         using var stream = File.Create(path);
         void Write(string value) { var data = Encoding.ASCII.GetBytes(value); stream.Write(data); }
@@ -120,10 +125,10 @@ public static class PlanningProposalPdf
         for (var i = 0; i < pages.Count; i++)
         {
             var n = 3 + i * 3;
-            Object(n, $"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.5 842.25] /Resources << /XObject << /Im0 {n + 1} 0 R >> >> /Contents {n + 2} 0 R >>");
-            offsets.Add(stream.Position); Write($"{n + 1} 0 obj\n<< /Type /XObject /Subtype /Image /Width {(int)Math.Ceiling(794d * dpi / 96)} /Height {(int)Math.Ceiling(1123d * dpi / 96)} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length {pages[i].Length} >>\nstream\n");
+            Object(n, $"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 {(width*.75).ToString(CultureInfo.InvariantCulture)} {(height*.75).ToString(CultureInfo.InvariantCulture)}] /Resources << /XObject << /Im0 {n + 1} 0 R >> >> /Contents {n + 2} 0 R >>");
+            offsets.Add(stream.Position); Write($"{n + 1} 0 obj\n<< /Type /XObject /Subtype /Image /Width {(int)Math.Ceiling(width * dpi / 96)} /Height {(int)Math.Ceiling(height * dpi / 96)} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length {pages[i].Length} >>\nstream\n");
             stream.Write(pages[i]); Write("\nendstream\nendobj\n");
-            const string content = "q 595.5 0 0 842.25 0 0 cm /Im0 Do Q";
+            var content = $"q {(width*.75).ToString(CultureInfo.InvariantCulture)} 0 0 {(height*.75).ToString(CultureInfo.InvariantCulture)} 0 0 cm /Im0 Do Q";
             Object(n + 2, $"<< /Length {content.Length} >>\nstream\n{content}\nendstream");
         }
         var xref = stream.Position; Write($"xref\n0 {offsets.Count}\n0000000000 65535 f \n");

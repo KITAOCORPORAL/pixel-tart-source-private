@@ -40,8 +40,8 @@ public partial class PlanningCenterView : UserControl
             Render();
         };
         Loaded += (_, _) => Render();
-        Unloaded += async (_, _) => { if (_vm is not null) await _vm.FlushAsync(); };
-        IsVisibleChanged += async (_, _) => { if (!IsVisible && _vm is not null) await _vm.FlushAsync(); };
+        Unloaded += async (_, _) => { if (_vm is not null) await FlushDocumentAsync(); };
+        IsVisibleChanged += async (_, _) => { if (!IsVisible && _vm is not null) await FlushDocumentAsync(); };
         SizeChanged += (_, _) => UpdateResponsiveLayout();
         void OverlayChanged(object sender, DependencyPropertyChangedEventArgs args)
         {
@@ -159,7 +159,7 @@ public partial class PlanningCenterView : UserControl
                     Heading(DocumentContent, "自定义");
                     DocumentContent.Children.Add(Text("补充本次拍摄需要的内容，随策划案自动保存。", 14));
                     DocumentContent.Children.Add(Editor(nameof(_vm.DocumentCustomBody), 12));
-                    DocumentContent.Children.Add(AsyncAction("保存", () => _vm.FlushAsync()));
+                    DocumentContent.Children.Add(AsyncAction("保存", FlushDocumentAsync));
                     break;
                 default: RenderImages(_vm.ContentPage, true); break;
             }
@@ -245,7 +245,7 @@ public partial class PlanningCenterView : UserControl
             status.SetBinding(Selector.SelectedItemProperty, new Binding(nameof(_vm.ProposalStatus))); AutomationProperties.SetName(status, "策划案状态"); DocumentContent.Children.Add(status);
             Heading(DocumentContent, "核心概念");
             DocumentContent.Children.Add(Text("正文随项目自动保存；工具栏写入兼容的结构标记，预览和 PDF 使用同一内容。", 12));
-            DocumentContent.Children.Add(new PlanningRichEditor(_vm.RichTextPackage,_vm.DocumentBody,_vm.SaveRichText,_vm.DocumentCanvasRevisions.Where(v=>v.PreviewPngBase64 is not null).Select(v=>v.PreviewPngBase64!)));
+            DocumentContent.Children.Add(new PlanningRichEditor(_vm.RichTextPackage,_vm.DocumentBody,_vm.SaveRichText,_vm.DocumentCanvasRevisions,_vm.RichLayout));
         }
         else
         {
@@ -277,8 +277,7 @@ public partial class PlanningCenterView : UserControl
         }
         if(!editing && _vm.RichTextPackage is { } rich)
         {
-            var document=new FlowDocument();using var input=new MemoryStream(Convert.FromBase64String(rich));
-            new TextRange(document.ContentStart,document.ContentEnd).Load(input,DataFormats.Rtf);
+            var document=PlanningDocumentLayout.Load(rich,_vm.RichLayout);
             DocumentContent.Children.Add(new FlowDocumentScrollViewer{Document=document,IsToolBarVisible=false,VerticalScrollBarVisibility=ScrollBarVisibility.Disabled});
         }
         else if (!editing && !string.IsNullOrWhiteSpace(_vm.DocumentBody)) AddBody(DocumentContent, _vm.DocumentBody);
@@ -590,16 +589,21 @@ public partial class PlanningCenterView : UserControl
         _previewReturnTarget = null;
     }
     private void ClosePreview_Click(object sender, RoutedEventArgs e) => CloseImagePreview();
+    private Task<bool> FlushDocumentAsync()
+    {
+        foreach(var editor in DocumentContent.Children.OfType<PlanningRichEditor>())editor.FlushPending();
+        return _vm?.FlushAsync()??Task.FromResult(true);
+    }
     private async void Export_Click(object sender, RoutedEventArgs e)
     {
-        if (_vm is null || !await _vm.FlushAsync()) return;
+        if (_vm is null || !await FlushDocumentAsync()) return;
         ModalContent.Children.Clear(); Heading(ModalContent, "导出策划案 PDF");
         AutomationProperties.SetAutomationId(ModalContent, "PlanningExportDialog");
         ModalContent.Children.Add(Text("按 A4 排版输出图片式 PDF，文字不可选择。高质量适合审阅和打印。", 14));
         var quality = new ComboBox { ItemsSource = new[] { "高质量 · 300 DPI", "标准 · 216 DPI" }, SelectedIndex = 0, Margin = new Thickness(0, 20, 0, 20) };
         AutomationProperties.SetName(quality, "PDF 导出质量"); ModalContent.Children.Add(quality);
         ModalContent.Children.Add(AsyncAction("导出 PDF", async () => {
-            if (!await _vm.FlushAsync()) return;
+            if (!await FlushDocumentAsync()) return;
             var path = _vm.Dialogs.ChooseSaveFile("导出策划案 PDF", "PDF|*.pdf", ".pdf", _vm.DocumentTitle + ".pdf"); if (path is null) return;
             PlanningProposalPdf.Export(_vm, path, quality.SelectedIndex == 0 ? 300 : 216); ModalOverlay.Visibility = Visibility.Collapsed;
             _vm.Dialogs.ShowInfo("策划案 PDF 已导出（图片式，文字不可选择）。");
@@ -624,9 +628,9 @@ public partial class PlanningCenterView : UserControl
         }
         if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
         {
-            if (e.Key == Key.S) { e.Handled = true; await _vm.FlushAsync(); return; }
+            if (e.Key == Key.S) { e.Handled = true; await FlushDocumentAsync(); return; }
             if (ModalOverlay.Visibility == Visibility.Visible || ImagePreview.Visibility == Visibility.Visible) return;
-            if (e.Key == Key.P) { e.Handled = true; await _vm.PreviewDocumentCommand.ExecuteAsync(null); return; }
+            if (e.Key == Key.P) { e.Handled = true; await FlushDocumentAsync();await _vm.PreviewDocumentCommand.ExecuteAsync(null); return; }
             if (e.Key == Key.F) { e.Handled = true; ProjectSearchBox.Focus(); ProjectSearchBox.SelectAll(); return; }
         }
         if (e.OriginalSource is TextBoxBase || e.Key is Key.ImeProcessed or Key.DeadCharProcessed) return;

@@ -18,11 +18,12 @@ public sealed partial class PlanningCenterViewModel
         SaveStatus = "已明确关联参考与成片；未修改素材归属";
     }
     public Func<Guid,Guid,Task>? RelocateAsset { get; set; }
+    public PlanningRichLayout? RichLayout => _document.Package?.RichLayout;
     public string? RichTextPackage => _document.Package?.RichTextPackageBase64;
-    public void SaveRichText(string data, string plainText)
+    public void SaveRichText(string data, string plainText,PlanningRichLayout layout)
     {
         if(ProjectId is not Guid project)return;
-        UpdateDocument(_document with { Body=plainText, Package=(_document.Package ?? new PlanningDocumentPackage{ProjectId=project}) with {RichTextPackageBase64=data} });
+        UpdateDocument(_document with { Body=plainText, Package=(_document.Package ?? new PlanningDocumentPackage{ProjectId=project}) with {RichTextPackageBase64=data,RichLayout=layout} });
     }
     public IDialogService Dialogs => _dialogs;
     public void OpenLinkedCanvas(RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocument canvas) => CanvasRequested?.Invoke(this, canvas);
