@@ -30,7 +30,7 @@ public sealed record CrossModuleOperation(
     DateTimeOffset CreatedAtUtc,
     DateTimeOffset UpdatedAtUtc);
 
-public sealed class IdentityBridgeRepository(PixelTartDatabase database)
+public sealed partial class IdentityBridgeRepository(PixelTartDatabase database)
 {
     public async Task<TetherAssetLibraryLink> SaveLinkAsync(
         Guid tetherAssetId,
@@ -49,7 +49,7 @@ public sealed class IdentityBridgeRepository(PixelTartDatabase database)
         await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
         var existing = await ReadLinkAsync(connection, transaction, tetherAssetId, libraryId, cancellationToken).ConfigureAwait(false);
-        if (existing is not null && (existing.AssetId != assetId || HashConflicts(existing.SourceContentHash, sourceContentHash)))
+        if (existing is not null && (existing.State == IdentityBridgeState.Conflict || existing.AssetId != assetId || HashConflicts(existing.SourceContentHash, sourceContentHash)))
         {
             await UpdateLinkStateAsync(connection, transaction, tetherAssetId, libraryId, IdentityBridgeState.Conflict,
                 "IDENTITY_CONFLICT", now, cancellationToken).ConfigureAwait(false);
@@ -105,6 +105,9 @@ public sealed class IdentityBridgeRepository(PixelTartDatabase database)
         if (string.IsNullOrWhiteSpace(sourceKind)) throw new ArgumentException("来源类型不能为空。", nameof(sourceKind));
         ValidateIdentity(sourceId, nameof(sourceId));
         if (libraryId == Guid.Empty) throw new ArgumentException("素材库身份不能是空 GUID。", nameof(libraryId));
+        idempotencyKey = idempotencyKey.Trim();
+        operationType = operationType.Trim();
+        sourceKind = sourceKind.Trim();
         payloadHash = NormalizeOptionalHash(payloadHash, nameof(payloadHash));
         var now = DateTimeOffset.UtcNow;
         await using var connection = await database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
@@ -114,28 +117,16 @@ public sealed class IdentityBridgeRepository(PixelTartDatabase database)
         {
             if (!string.Equals(existing.OperationType, operationType, StringComparison.Ordinal) ||
                 !string.Equals(existing.SourceKind, sourceKind, StringComparison.Ordinal) ||
-                existing.SourceId != sourceId || existing.LibraryId != libraryId || HashConflicts(existing.PayloadHash, payloadHash))
+                existing.SourceId != sourceId || existing.LibraryId != libraryId || !string.Equals(existing.PayloadHash, payloadHash, StringComparison.Ordinal))
             {
                 await UpdateOperationStateInternalAsync(connection, transaction, existing.OperationId,
                     CrossModuleOperationState.Conflict, existing.AssetId, "IDEMPOTENCY_CONFLICT", now, cancellationToken).ConfigureAwait(false);
                 await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
                 return existing with { State = CrossModuleOperationState.Conflict, LastErrorCode = "IDEMPOTENCY_CONFLICT", UpdatedAtUtc = now };
             }
-            if (existing.State == CrossModuleOperationState.Ready)
-            {
-                await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
-                return existing;
-            }
-            await using var retry = connection.CreateCommand();
-            retry.Transaction = transaction;
-            retry.CommandText = "UPDATE CrossModuleOperations SET State='Pending',AttemptCount=AttemptCount+1,LastErrorCode=NULL,UpdatedAtUtc=$updated WHERE OperationId=$id;";
-            retry.Parameters.AddWithValue("$updated", now.ToString("O"));
-            retry.Parameters.AddWithValue("$id", existing.OperationId.ToString("D"));
-            await retry.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
             await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
-            return existing with { State = CrossModuleOperationState.Pending, AttemptCount = existing.AttemptCount + 1, LastErrorCode = null, UpdatedAtUtc = now };
+            return existing;
         }
-
         var created = new CrossModuleOperation(Guid.NewGuid(), idempotencyKey.Trim(), operationType.Trim(), sourceKind.Trim(),
             sourceId, libraryId, null, CrossModuleOperationState.Pending, 1, payloadHash, null, now, now);
         await using (var insert = connection.CreateCommand())
@@ -172,6 +163,10 @@ public sealed class IdentityBridgeRepository(PixelTartDatabase database)
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
         var operation = await ReadOperationByIdAsync(connection, transaction, operationId, cancellationToken).ConfigureAwait(false)
             ?? throw new KeyNotFoundException("跨模块操作不存在。");
+        if (operation.State == CrossModuleOperationState.Ready && operation.AssetId != assetId)
+            throw new InvalidOperationException("已完成操作不能改写素材身份。");
+        if (operation.State is CrossModuleOperationState.Running or CrossModuleOperationState.Failed)
+            throw new InvalidOperationException("运行操作必须使用领取凭证完成。");
         if (operation.State == CrossModuleOperationState.Conflict)
             throw new InvalidOperationException("冲突操作不能直接标记为完成。");
         await UpdateOperationStateInternalAsync(connection, transaction, operationId, CrossModuleOperationState.Ready,
