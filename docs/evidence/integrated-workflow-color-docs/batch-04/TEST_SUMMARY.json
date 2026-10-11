@@ -1,0 +1,250 @@
+[
+  {
+    "file": "atomic-export.trx",
+    "sha256": "4A66979D841EDD6F750B869D89A0F4CC537A16A4975AB19F006140BF62495676",
+    "total": 21,
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "core-delivery.trx",
+    "sha256": "486E24C4D1C25B329B396A14596F808106AD49CF0976425025D65074BB7086BF",
+    "total": 1623,
+    "passed": 1617,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "core-final.trx",
+    "sha256": "67E414AB7BD7136EF61047E95BBC48908E46818AD9B2A9A85BAF9AD170363268",
+    "total": 1622,
+    "passed": 1616,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "core-first.trx",
+    "sha256": "FF18CA00BE8DAE3BFA4BE116229CF66FFAD1A7D7D68122A1481E01D4120F0296",
+    "total": 1619,
+    "passed": 1611,
+    "failed": 2,
+    "skipped": 0
+  },
+  {
+    "file": "core-full.trx",
+    "sha256": "F36A581A67F9E05E0FEA1185586A955709AA5E4378F8049F58B001C7E9DFE5CC",
+    "total": 1621,
+    "passed": 1615,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "core-release-verified.trx",
+    "sha256": "7DAC10A3CD811349FFC831F46795BB79463E2D341E83BB951ED3FB76C706BE4E",
+    "total": 114,
+    "passed": 114,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "core-release.trx",
+    "sha256": "590A67B40AF72AB42B8D832D95B7117A0F9EC40A4590EB7165EA1FFB853D26A0",
+    "total": 1622,
+    "passed": 1614,
+    "failed": 2,
+    "skipped": 0
+  },
+  {
+    "file": "core-verified.trx",
+    "sha256": "C5019FEE6009C63D389A45CD7FA0032960D5C3DFFAEAAC3C478D0686DDDA7271",
+    "total": 1622,
+    "passed": 1616,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "cross-session-ui.trx",
+    "sha256": "ED1E9BB19A0CDB087A296B7E1CB54F4B47E98DBB73C8D001FEA61D4254DD1E97",
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "delivery-check.trx",
+    "sha256": "BF891A3517A838C0EF9809653EFA726DBA9B2349873C8604EEB94D20A3A48CCB",
+    "total": 68,
+    "passed": 67,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "export-versions.trx",
+    "sha256": "203019B6355EB7FFA375E21CE89C4A5326E3543CFF3D714C921ACB3EBB7AE400",
+    "total": 19,
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "final-export-ui.trx",
+    "sha256": "5DD362CA7F9BD26508F1A10FDD75FF95354B1F855B64C1A60B0826D4FA729B67",
+    "total": 61,
+    "passed": 61,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "final-ui.trx",
+    "sha256": "D5A7DF1CEBD303240440A07D86EC87AD927EFA49D17CDDD178780D47D6994DB4",
+    "total": 21,
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "flush-metadata.trx",
+    "sha256": "73E5EFE30AF6499FF0561EF56D954DB1749BE336A9CF61AC36A4BF6568E7C4D5",
+    "total": 48,
+    "passed": 47,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "focused.trx",
+    "sha256": "93E54C76F5033ACFFA542F239461168CB9AAE4198DFD7C3DF8035CA6F02AA7A0",
+    "total": 20,
+    "passed": 20,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "layout-output.trx",
+    "sha256": "D076A7808B294A8C93C94F703A1935FDA474894410EED11A7304B6D9783FBEF5",
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "legacy-cas.trx",
+    "sha256": "AE9809747EF4F8AB69D2C6F1EF8B97FF25DDB2FB05642BD0EF66E8B76F84FFC1",
+    "total": 43,
+    "passed": 43,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "legacy-policy.trx",
+    "sha256": "AAF6642C8EAFB47A34FC6EA13ECE4E376FC94DF55A2E532701B923CE3849B116",
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "metadata-repair.trx",
+    "sha256": "C1C6A23763230E3B2E301A50D7FEE380995590FDB28405C0A05F5C3E1F1E3F0F",
+    "total": 91,
+    "passed": 91,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "p3-focused.trx",
+    "sha256": "CF55E0CC78E08FDC0B20B1242B4EE83DFFD41EF105858BB89469CB972A49C222",
+    "total": 95,
+    "passed": 95,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "recovery-production.trx",
+    "sha256": "6341918F16F4DA55D7EC49883E1D90B2989F45AA5F0CC0818280855D588FB56A",
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "release-focused.trx",
+    "sha256": "252C9BD727E4B110BD553D0C2222A49853321E0847AA45ECB13103245B61E839",
+    "total": 67,
+    "passed": 67,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "release-verified.trx",
+    "sha256": "8D59B125DD8C53315EEF87DF73F8DD6A4054DF69578B7867286B919928C59647",
+    "total": 81,
+    "passed": 80,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "undo-cas.trx",
+    "sha256": "43EA35B8B381BC887354AB2B63ACB000D7B98AB12A235DDA7498CB5BBADE0760",
+    "total": 34,
+    "passed": 34,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-final.trx",
+    "sha256": "D9D151E3A6840BD5806D934785ACF2D319447DB15408CEF0F3A35CC32F257320",
+    "total": 1530,
+    "passed": 1517,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-focused.trx",
+    "sha256": "0048A17AE45BBB57976BDE1A6D995A0BCD78DB71A1E9440708254996E7993D3D",
+    "total": 59,
+    "passed": 57,
+    "failed": 1,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-focused2.trx",
+    "sha256": "6D67DDCB94BE2B2BF5187B08111978A8FAED151A167BEF7ECED37544ED046F8E",
+    "total": 60,
+    "passed": 59,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-full.trx",
+    "sha256": "FB5ED41261FD0229A4A5F2B3158DD9B27171C3107FA1098CDDC341DB340FC75F",
+    "total": 1529,
+    "passed": 1510,
+    "failed": 6,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-release.trx",
+    "sha256": "F59BCBC526CAF51C811B900052D3F5D0E8FB0BB46D5838A4CBB07F4BE63D1622",
+    "total": 67,
+    "passed": 67,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-repair.trx",
+    "sha256": "BF7908382A417555D3D22FF7FB3D65F79EE73D7D2B34F41FE29981D02D43B276",
+    "total": 52,
+    "passed": 52,
+    "failed": 0,
+    "skipped": 0
+  },
+  {
+    "file": "wpf-verified.trx",
+    "sha256": "F5CB7A45DF460DC0A8A439BF8F0CEEEF54AE8F9BABF75AD923D88DEB20DDFF00",
+    "total": 1530,
+    "passed": 1517,
+    "failed": 0,
+    "skipped": 0
+  }
+]

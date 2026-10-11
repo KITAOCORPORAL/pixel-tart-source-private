@@ -1,0 +1,209 @@
+{
+  "sourceHead": "4e894e5badb0ef0ac0923c63698d90b7ccebd548",
+  "configuration": "Release",
+  "runtime": "win-x64",
+  "exeRelativePath": "artifacts/batch04/release/win-x64/KitaoPhotoSelector.exe",
+  "exeSha256": "8C657FAE7CD2832FDB3BE5EEE792006FEC5DF3D011B8306598D9AEFC9521F370",
+  "dllSha256": "4B674D16B62F3EC6C7E4FE1859A126DDABD4299BA84B2B15394D4832D9F4E46D",
+  "dllProductVersion": "2.3.0-batch04+4e894e5badb0ef0ac0923c63698d90b7ccebd548",
+  "releaseStartup": "NOT_RUN",
+  "desktopRuntime": "NOT_RUN",
+  "userVisualReview": "NOT_APPROVED",
+  "files": [
+    {
+      "path": "appsettings.license.json",
+      "bytes": 200,
+      "sha256": "AD3D52E6CB7A9012A5615E69E4B5E979F3FDFA455AF71973BCE78DEB7296D6E1"
+    },
+    {
+      "path": "ComputeSharp.Core.dll",
+      "bytes": 828416,
+      "sha256": "4678A441386FC3D58A32756CA456DB9A526AD672967D885A209523132273FD25"
+    },
+    {
+      "path": "ComputeSharp.dll",
+      "bytes": 528384,
+      "sha256": "C06FB300AF75CB12E41875CA00EA176F1CA1BE0B697B741F6C9606A3F2D65240"
+    },
+    {
+      "path": "DocumentFormat.OpenXml.dll",
+      "bytes": 7985120,
+      "sha256": "EE2A31FF79DB570E2EB98EC7513B222F2B8C6BFCB638D66C2CEC8255B0BBE499"
+    },
+    {
+      "path": "DocumentFormat.OpenXml.Framework.dll",
+      "bytes": 478688,
+      "sha256": "FF3ED8318388D84FA5BBC5736DF6144ECFA3165C0B95F6B45B5330F463EDF7AE"
+    },
+    {
+      "path": "e_sqlite3.dll",
+      "bytes": 1978880,
+      "sha256": "B7385D722C83FB52142A00477A726723745916D22A555711EE89834C1111FB2E"
+    },
+    {
+      "path": "jpeg8.dll",
+      "bytes": 621056,
+      "sha256": "3854CEBC61FD5892CB60491719834922030097F7848D29CCCBFCA3E88D7ED1E5"
+    },
+    {
+      "path": "KitaoPhotoSelector.deps.json",
+      "bytes": 12989,
+      "sha256": "BAA9BB4700D64FF06600B396048D1DC4FDFFBB6FA5D80AB7A2B91FF88DF917F9"
+    },
+    {
+      "path": "KitaoPhotoSelector.dll",
+      "bytes": 2832896,
+      "sha256": "4B674D16B62F3EC6C7E4FE1859A126DDABD4299BA84B2B15394D4832D9F4E46D"
+    },
+    {
+      "path": "KitaoPhotoSelector.exe",
+      "bytes": 179200,
+      "sha256": "8C657FAE7CD2832FDB3BE5EEE792006FEC5DF3D011B8306598D9AEFC9521F370"
+    },
+    {
+      "path": "KitaoPhotoSelector.runtimeconfig.json",
+      "bytes": 519,
+      "sha256": "96BC2946DFF8790400D652EC7F8DE7BB043E954980D59470C112788B68A1FBD3"
+    },
+    {
+      "path": "lcms2.dll",
+      "bytes": 346112,
+      "sha256": "87BF94F27F345384420383F247178F825C0101928FEDD3A4887FF60E9D4A76EB"
+    },
+    {
+      "path": "MetadataExtractor.dll",
+      "bytes": 803840,
+      "sha256": "2D4D43F4F10B0655FAFC3A145DBD4DCC79D81459335BB4D8A324CE2AED2F9EC8"
+    },
+    {
+      "path": "Microsoft.Data.Sqlite.dll",
+      "bytes": 177464,
+      "sha256": "1078D41C6C0F2CEE48A8B706E3A54CE145705993F19F703D2B3BDF2ABCC59088"
+    },
+    {
+      "path": "Microsoft.Windows.SDK.NET.dll",
+      "bytes": 24877600,
+      "sha256": "0EC371D93798852E36461C8ADDDBEADCE0F963A04752F0B64E54FE19C1C834A7"
+    },
+    {
+      "path": "PixelTart.Kernel.dll",
+      "bytes": 38912,
+      "sha256": "A6754836C3DFAE82DFC72FABD25B5B83BCA5F14EDFEA0FA0C724C6EC7C195920"
+    },
+    {
+      "path": "PixelTart.MatchV4.Dx12.dll",
+      "bytes": 66560,
+      "sha256": "5937E6D70292D8332ECA2A6542F5C5A882D4F3E3BD81CC6B2692B9892086226D"
+    },
+    {
+      "path": "PixelTart.Modules.AssetLibrary.dll",
+      "bytes": 1162240,
+      "sha256": "538FAC2AC7348ED3EE7F48538BEA1D6A8C5D3B32328AF152B806E845104F27A4"
+    },
+    {
+      "path": "PixelTart.Modules.OnlineSelection.dll",
+      "bytes": 12800,
+      "sha256": "AF6FC78C0D07756CD02BEBBB3949B2AFE6905F0C45700056310167DF8E4047BE"
+    },
+    {
+      "path": "PixelTart.Modules.RawTool.dll",
+      "bytes": 12288,
+      "sha256": "C780D66246093378B6EA264D09C253F3B833B737BB1D2CBCF8CE85855708C822"
+    },
+    {
+      "path": "raw_r.dll",
+      "bytes": 1102848,
+      "sha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9"
+    },
+    {
+      "path": "RAWSelectionAssistant.Core.dll",
+      "bytes": 4110848,
+      "sha256": "9B2FD38DEE79091045630BC482388E3CF96F371FED49BBDC4590527359531BC2"
+    },
+    {
+      "path": "Sdcb.LibRaw.dll",
+      "bytes": 75776,
+      "sha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3"
+    },
+    {
+      "path": "SQLitePCLRaw.batteries_v2.dll",
+      "bytes": 5120,
+      "sha256": "815CE410C9EAB531DD219318E3BA16C5E38E83D361CFBBDBB4BBCA222C497B0B"
+    },
+    {
+      "path": "SQLitePCLRaw.core.dll",
+      "bytes": 51200,
+      "sha256": "AF340AC9EB9195795660D7FC1114F486B6AB63998F33176E2F24C8E0ACB9AA84"
+    },
+    {
+      "path": "SQLitePCLRaw.provider.e_sqlite3.dll",
+      "bytes": 36864,
+      "sha256": "EB6696E55882C3000333146B1CD4970439601E11FDEDAE941105CA921F615BD6"
+    },
+    {
+      "path": "THIRD-PARTY-NOTICES.md",
+      "bytes": 2248,
+      "sha256": "3BCE85DD0AE8618F63EFB7428F9E7BAF1D474F9FB0240DD833FF34BFF33D627A"
+    },
+    {
+      "path": "WinRT.Runtime.dll",
+      "bytes": 528944,
+      "sha256": "BCF3A14E8712A90837FC5C0D8C8A24696AF2BD7F74E9767597EC81EDEDFB23DB"
+    },
+    {
+      "path": "XmpCore.dll",
+      "bytes": 144896,
+      "sha256": "E88FEB22528A78B294B6CFD9390B8CE8A5B27DB025FF976799DF2322BDE51B58"
+    },
+    {
+      "path": "zlib1.dll",
+      "bytes": 87040,
+      "sha256": "4A0BD02C2985974F90DA4A7065ACAC1B72F21A4FE58C5391E14B3E6FE566BC12"
+    },
+    {
+      "path": "Licenses/libjpeg-turbo-2.1.3-LICENSE.md.txt",
+      "bytes": 5347,
+      "sha256": "023CB055A4985373173A587D5E720EDD2013DB7C5204C393A928BA3B48740C2C"
+    },
+    {
+      "path": "Licenses/libjpeg-turbo-2.1.3-README.ijg.txt",
+      "bytes": 12992,
+      "sha256": "4D628C92DF67FED59B1D023DD1B0E2DBA77D62B59238BCD3900B8FD7A4690B6D"
+    },
+    {
+      "path": "Licenses/LibRaw-0.21.1-COPYRIGHT.txt",
+      "bytes": 1182,
+      "sha256": "D9DEF4E378F29C844F8E43BFDAE2AB0B22405CCAF6B344A60A556BCE1D0C50F1"
+    },
+    {
+      "path": "Licenses/LibRaw-0.21.1-LICENSE.CDDL.txt",
+      "bytes": 17248,
+      "sha256": "7308C43E307634B02C7C4350123A9B84935B1E9B418120A1D804D8B0F0A154A7"
+    },
+    {
+      "path": "Licenses/LibRaw-0.21.1-LICENSE.LGPL.txt",
+      "bytes": 24849,
+      "sha256": "3F339F6EF285B1D9D087ED975BDE74F46ACF793E43C927CCE369BB673B1B5EAF"
+    },
+    {
+      "path": "Licenses/Little-CMS-2.12-COPYING.txt",
+      "bytes": 1106,
+      "sha256": "AB1D14FD4FF1B0592B51468C8B8FB61ABDC62F6BE13CF258DABCF002D65C3781"
+    },
+    {
+      "path": "Licenses/Sdcb.LibRaw-0.21.1.7-MIT.txt",
+      "bytes": 1092,
+      "sha256": "8A37B46A201123B4E3EAD7B986B63321CA55D8A4D4EDCCB4E676F1AED005656C"
+    },
+    {
+      "path": "Licenses/zlib-1.2.11-README-LICENSE.txt",
+      "bytes": 5304,
+      "sha256": "38D401BD81CF517E3AEB3410F619C7C853BF7666E5CE346B7D99E7B53E185432"
+    },
+    {
+      "path": "ThirdPartyNotices/OpenXML-LICENSE.txt",
+      "bytes": 1117,
+      "sha256": "3D9E981AD7B321035CA599743B328F65BBC2903C3C9CCE195F3753B08641D5BE"
+    }
+  ]
+}
