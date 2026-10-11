@@ -1,0 +1,226 @@
+[
+  {
+    "file": "batch02-before.trx",
+    "sha256": "A353B26F9FE0378F1F2F8BBB30B2DD275F50FA1C814FF08F56D83B9A0A3D75D5",
+    "total": 3,
+    "passed": 0,
+    "failed": 3,
+    "notExecuted": 0
+  },
+  {
+    "file": "batch02-document-wpf.trx",
+    "sha256": "041A655FCD2FB716AA9BC498DE0916AA9D90D28E50F7A7140F09B55318DC454E",
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "batch02-focused-final.trx",
+    "sha256": "73C4CFDCB1C7C8B404C616BBCCB79002A3BDE454AC7AECFD93196FC631491CED",
+    "total": 15,
+    "passed": 15,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "batch02-focused.trx",
+    "sha256": "0F692EC956FBAB8B59C21FBA39AD6DADB3AF483AC766DA89252A189D346C1A57",
+    "total": 95,
+    "passed": 95,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "batch02-handoff.trx",
+    "sha256": "E76D4886C102478FB994D08DA4FBC5A5DD72B6EA33394BE85410002171A939CF",
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "batch02-identity.trx",
+    "sha256": "89FF3DCF329BB477BB3EE968B522EBF0CC0AC2647E52D176A81F8549CBA611D4",
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "batch02-lease.trx",
+    "sha256": "BC77F1B144C8FAF0781AEEC54494D74ED077CB507303E2A559A41FCDF343C56A",
+    "total": 9,
+    "passed": 9,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "batch02-wpf-repair.trx",
+    "sha256": "B2CC0DBCA9C564D99D2BFFDF8CD7DA061D93A6C2450A96F3F5DD2FC3B5C3E8C8",
+    "total": 40,
+    "passed": 40,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "bridge-reviewed.trx",
+    "sha256": "AA5FDAC5F5C46EC7AA91EEC95F102F5AF869DB72E96CBBCC5D87655595FBAB3C",
+    "total": 19,
+    "passed": 19,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "bridge-validated.trx",
+    "sha256": "3787A07BB343B37458BC14A97E4C2194D8D3908865395F47DA5B339392AFFAC5",
+    "total": 19,
+    "passed": 19,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "concurrent-claim.trx",
+    "sha256": "FBFD10F757BE4C827279AD2034F4534CADC7A05C3F66FE6595CD95AD2019B85A",
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "core-final-targeted.trx",
+    "sha256": "831270FB48C47896D88DEBE0D867D7EF43A4C734BEA951369F636A9E495D6105",
+    "total": 84,
+    "passed": 84,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "core-final.trx",
+    "sha256": "743D931AB8DA7D1AAD0D95200999F69A07D3EBA4711EFF722B61AE714E3D225E",
+    "total": 1609,
+    "passed": 1603,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "core-full.trx",
+    "sha256": "E5B827D0FB1603B86C75435AB15F18F6B63A97D57F4AF010D9A538DB043883B3",
+    "total": 1609,
+    "passed": 1603,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "core-release-focused.trx",
+    "sha256": "7B684E9B7FF0D116A89BE5A270EE642DD88A6DC245EAF4253AF0A18614CF6B42",
+    "total": 21,
+    "passed": 21,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "core-release.trx",
+    "sha256": "7CDBE51DBE7EB9A00CAD0D3D61CC1242CD8C3519C8F4438A15F4943C6B09B13F",
+    "total": 1613,
+    "passed": 1607,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "core-verified.trx",
+    "sha256": "8DC1006282758FC1F83327ABBCE831DE73D1FD880B4673B12AEEDDC3E4A61725",
+    "total": 1612,
+    "passed": 1606,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "docx-final.trx",
+    "sha256": "F0F8E551FF6C04D41BA3105A0D629665AA23D87BD0CD92194362A126C10A94AA",
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "docx-probe.trx",
+    "sha256": "BBDEB1D7D82499E4A9904A800904F3075137414A91F4DD445DC231EE657870C1",
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "final-foundations.trx",
+    "sha256": "4DCB6731139735797840AEACBDD96D574590107236F6B1D8D91A101D0030F358",
+    "total": 19,
+    "passed": 19,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "production-handoff.trx",
+    "sha256": "ED8BBF360D4BF345BA8D802B234EE51D325B8E27592D6D02425FB92DB9DAC941",
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "studio-identity-final.trx",
+    "sha256": "093AB210F0C5F32FCAE8A06C2B36614F1A514E217BBEBECCF5BB372391F4F7E7",
+    "total": 39,
+    "passed": 39,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "wpf-final.trx",
+    "sha256": "D7A950971345104A9364685E337A05E21CD4BDFF52382BAAFD46537FA3E6D3AE",
+    "total": 1524,
+    "passed": 1510,
+    "failed": 1,
+    "notExecuted": 0
+  },
+  {
+    "file": "wpf-full.trx",
+    "sha256": "8BBB6EE5A5540E566A94900EAD0AA8E5A601092065D7264F8696FDFEFE5370B9",
+    "total": 1523,
+    "passed": 1508,
+    "failed": 2,
+    "notExecuted": 0
+  },
+  {
+    "file": "wpf-postreview.trx",
+    "sha256": "DF4E28852F6BA9A4BEF7AF31E43E55DED376986777CDAD04E2D5E77173E5B170",
+    "total": 127,
+    "passed": 126,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "wpf-release-focused.trx",
+    "sha256": "86473C089CAB67CD9F9DFBBFBA285DF3C77D09D229C5FE3F00DAA3B6F46A957C",
+    "total": 15,
+    "passed": 15,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "wpf-source-final.trx",
+    "sha256": "4F6A73B0323BBF1FEC26A15D78118DDDB40521A252D080A7105B7F8385449600",
+    "total": 49,
+    "passed": 49,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  {
+    "file": "wpf-verified.trx",
+    "sha256": "2692D7D05A36C5529E9F5217C669AE28E8197B488E6665FC6A9411789F5FC08D",
+    "total": 1524,
+    "passed": 1511,
+    "failed": 0,
+    "notExecuted": 0
+  }
+]
