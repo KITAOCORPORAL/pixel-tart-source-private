@@ -15,6 +15,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public ColorStudioLayout Layout { get => _layout; set => SetProperty(ref _layout, value.Normalize()); }
     private void InitializeSessionCommands()
     {
+        InitializeVersionCommands();
         UndoBatchAdjustmentCommand = new RelayCommand(_ => RestoreBatchAdjustment(false), _ => _batchUndo.Count > 0 && !IsLoading && !IsExporting);
         RedoBatchAdjustmentCommand = new RelayCommand(_ => RestoreBatchAdjustment(true), _ => _batchRedo.Count > 0 && !IsLoading && !IsExporting);
         SaveSessionCommand = new AsyncRelayCommand(async _ =>
@@ -35,9 +36,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     {
         if (ActiveTarget is { } active) Editor.CopyCurrentLookTo([active]);
         await FlushMetadataAsync();
+        foreach(var target in Targets) CaptureEditVersion(target);
         var document = new ColorStudioSessionDocument(Targets.Select(item => new ColorStudioSessionTarget(item.Id, item.Path, item.AssetId, item.IsSelected,
             item.AppliedLookSnapshot, item.ColorAdjustmentStackSnapshot, item.FilmSettingsSnapshot, item.EngineSnapshot, item.ExecutionModeSnapshot,
-            item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null, item.LibraryId, item.SourceHash)).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
+            item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null, item.LibraryId, item.SourceHash, item.EditVersions.ToArray(), item.ActiveEditVersionId)).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
             Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen });
         await ColorStudioSessionStore.SaveAsync(path, document, token);
         SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath)); StatusText = "SessionSaved";
@@ -52,6 +54,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             FilmSettingsSnapshot = item.Film, EngineSnapshot = item.Engine, ExecutionModeSnapshot = item.ExecutionMode,
             Rating = item.AssetId is null ? item.SessionRating ?? 0 : 0, ColorLabel = item.AssetId is null ? item.SessionColorLabel : null
         }).ToArray();
+        for(var i=0;i<restored.Length;i++) { foreach(var version in document.Targets[i].EditVersions ?? []) restored[i].EditVersions.Add(version); restored[i].ActiveEditVersionId=document.Targets[i].ActiveEditVersionId; }
         _sessionLoading = true; OnPropertyChanged(nameof(IsLoading)); RefreshSyncAvailability();
         try
         {

@@ -24,6 +24,7 @@ public sealed partial class AssetLibraryViewModel
     public bool CanExecuteSelectionTool(string? action)
     {
         if (!IsReady || !HasSelection) return false;
+        if(action=="Relocate") return CaptureOrderedSelection().Count==1;
         var selected = CaptureOrderedSelection();
         if (selected.Count == 0 || selected.Any(item => !File.Exists(GetDisplaySourcePath(item)))) return false;
         return action switch
@@ -48,6 +49,7 @@ public sealed partial class AssetLibraryViewModel
         if (selected.Count == 0) return;
         try
         {
+            if(action=="Relocate"){await RelocateSelectedAssetAsync();return;}
             if (action == "Studio")
             {
                 foreach (var asset in selected)

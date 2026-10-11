@@ -120,7 +120,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         if (OpenPublishing is null || IsExporting) return;
         var items = SelectedTargets.ToArray(); if (items.Length == 0) return;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
-        var frozen = items.Select(item => (Item: item, Look: item.AppliedLookSnapshot, Stack: item.ColorAdjustmentStackSnapshot?.DeepClone(), Film: item.FilmSettingsSnapshot, Engine: item.EngineSnapshot, Mode: item.ExecutionModeSnapshot)).ToArray();
+        foreach(var target in items) CaptureEditVersion(target);
+        var frozen = items.Select(item => (Item: item, VersionId: item.ActiveEditVersionId!.Value, Look: item.AppliedLookSnapshot, Stack: item.ColorAdjustmentStackSnapshot?.DeepClone(), Film: item.FilmSettingsSnapshot, Engine: item.EngineSnapshot, Mode: item.ExecutionModeSnapshot)).ToArray();
         var directory = Path.Combine(Path.GetTempPath(), "PixelTartPublishing", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(directory);
         _exportCancellation = new CancellationTokenSource(); RaiseExportCommands();
@@ -148,6 +149,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                         var bitmap = await Editor.ProcessForExportAsync(item.Item.Path, item.Look, item.Film, _exportCancellation.Token, item.Stack);
                         await Task.Run(() => { var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap)); using var file = File.Create(path); encoder.Save(file); }, _exportCancellation.Token);
                     }
+                    await StudioExportReceiptStore.WriteAsync(path,new(Guid.NewGuid(),item.Item.LibraryId,item.Item.AssetId,item.Item.SourceHash,item.VersionId,item.Stack?.ProcessingVersion??1,"Publishing intermediate",path,"",DateTimeOffset.UtcNow),_exportCancellation.Token);
                     paths.Add(path); SetExportStatus("PrepareProgress", paths.Count + failures.Count, items.Length);
                 }
                 catch (Exception error) when (error is IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
@@ -618,7 +620,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             await FlushMetadataAsync();
             if (revision != Volatile.Read(ref _activationRevision)) return;
             Editor.RestoreTargetEngine(target.EngineSnapshot, target.ExecutionModeSnapshot);
-            Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot, target.ColorAdjustmentStackSnapshot, render: false, targetIdentity: target.Id);
+            Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot, target.ColorAdjustmentStackSnapshot, render: false, targetIdentity: target.ActiveEditVersionId ?? target.Id);
             TargetImage = image; TargetName = target.FileName; ActiveTarget = target; target.IsActive = true;
             foreach (var other in Targets.Where(other => !ReferenceEquals(other, target))) other.IsActive = false;
             await Editor.SetSourceAsync(target.AssetId, image, token, rawPreviewMaster: rawProxy, frozenRawMaster: rawMaster);
@@ -697,7 +699,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         _lastExportDirectory = directory;
         _lastExportFormat = format;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
-        var frozen = items.Select(item => (Item: item, Look: item.AppliedLookSnapshot is { } look ? look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() } : null, Film: item.FilmSettingsSnapshot is { } film ? film with { } : null, Stack: item.ColorAdjustmentStackSnapshot?.Normalize(), Engine: item.EngineSnapshot, Mode: item.ExecutionModeSnapshot)).ToArray();
+        foreach(var target in items) CaptureEditVersion(target);
+        var frozen = items.Select(item => (Item: item, VersionId: item.ActiveEditVersionId!.Value, LibraryId: item.LibraryId, AssetId: item.AssetId, SourceHash: item.SourceHash, Look: item.AppliedLookSnapshot is { } look ? look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() } : null, Film: item.FilmSettingsSnapshot is { } film ? film with { } : null, Stack: item.ColorAdjustmentStackSnapshot?.Normalize(), Engine: item.EngineSnapshot, Mode: item.ExecutionModeSnapshot)).ToArray();
         _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportFailureSummary = ""; ExportStatus = $"0 / {ExportTotal} · {directory} · {format} · sRGB"; RaiseExportCommands();
         var failed = new List<string>();
         try
@@ -709,6 +712,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                 var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + ("_仿色" + StudioQuickExport.Extension(item.Path,format))); var temp = output + ".tmp";
                 try
                 {
+                    if(File.Exists(output) || File.Exists(output+".kitao-export.json"))throw new IOException("输出路径已存在，请选择其他位置，未覆盖。");
                     if (!await ValidateTargetIdentityAsync(item, _exportCancellation.Token)) throw new IOException(item.Error);
                     if (Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_FAIL_ONCE") == "1")
                     {
@@ -740,6 +744,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                         await Task.Run(() => StudioQuickExport.Encode(processed, item.Path, temp, format, _exportCancellation.Token), _exportCancellation.Token);
                         File.Move(temp, output, overwrite: false);
                     }
+                    var versionId = frozenItem.VersionId;
+                    await StudioExportReceiptStore.WriteAsync(output,new(Guid.NewGuid(),frozenItem.LibraryId,frozenItem.AssetId,frozenItem.SourceHash,versionId,frozenItem.Stack?.ProcessingVersion ?? 1,format.ToString(),output,"",DateTimeOffset.UtcNow),_exportCancellation.Token);
                     item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported;
                 }
                 catch (OperationCanceledException) { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Cancelled; item.Status = ReferenceTargetStatus.Pending; throw; }
@@ -771,6 +777,8 @@ public enum ReferenceTargetStatus { Pending, Processing, Synced, Adjusted, Expor
 public sealed class NodeSyncChoice(Guid id, string name, bool selected) : ObservableObject
 {
     private bool _selected = selected;
+    public System.Collections.ObjectModel.ObservableCollection<StudioEditVersion> EditVersions { get; } = [];
+    public Guid? ActiveEditVersionId { get; set; }
     public Guid Id { get; } = id;
     public string Name { get; } = name;
     public bool Selected { get => _selected; set => SetProperty(ref _selected, value); }
@@ -790,6 +798,8 @@ public sealed class ReferenceTargetItem : ObservableObject
     private bool _isActive;
     private ReferenceTargetStatus _status = ReferenceTargetStatus.Pending;
     public ReferenceTargetItem(string path, Guid? id = null) { Id = id ?? Guid.NewGuid(); Path = path; }
+    public System.Collections.ObjectModel.ObservableCollection<StudioEditVersion> EditVersions { get; } = [];
+    public Guid? ActiveEditVersionId { get; set; }
     public Guid Id { get; }
     private Guid? _assetId;
     public Guid? AssetId { get => _assetId; set => SetProperty(ref _assetId, value); }

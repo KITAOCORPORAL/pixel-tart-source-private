@@ -196,6 +196,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         ChooseBackupDestinationCommand = new RelayCommand(_ => ChooseBackupDestination(), _ => !IsRunning && !IsBusy);
         StartCommand = new AsyncRelayCommand(_ => StartAsync(), _ => !IsRunning && !IsBusy && Directory.Exists(WatchDirectory));
         StopCommand = new AsyncRelayCommand(_ => StopAsync(), _ => IsRunning && !IsBusy);
+        RelocateLibraryAssetCommand=new AsyncRelayCommand(async _=>{if(SelectedAsset is {} item && RelocateLibraryAsset is not null)await RelocateLibraryAsset(item.Record.Id);});
         ShowLibraryHandoffsCommand = new AsyncRelayCommand(async _ => { if (DescribeLibraryHandoffs is not null) _dialogs.ShowError(await DescribeLibraryHandoffs()); });
         ResolveAnnotationConflictCommand = new AsyncRelayCommand(async parameter =>
         {
@@ -287,6 +288,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public AsyncRelayCommand StartCommand { get; }
     public AsyncRelayCommand StopCommand { get; }
     public ShootExecutionContext? CaptureContext => _executionContext;
+    public Func<Guid,Task>? RelocateLibraryAsset { get; set; }
+    public AsyncRelayCommand RelocateLibraryAssetCommand { get; private set; } = null!;
     public Func<Task<string>>? DescribeLibraryHandoffs { get; set; }
     public AsyncRelayCommand ShowLibraryHandoffsCommand { get; private set; } = null!;
     public Func<Task<int>>? RetryLibraryHandoffs { get; set; }
@@ -1022,12 +1025,12 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
             var now = DateTimeOffset.UtcNow;
             var existing = item.Annotation;
             var annotation = new TetherAnnotationRecord(existing?.Id ?? Guid.NewGuid(), item.Record.Id, CurrentRating, CurrentColorLabel, PhotographerNote,
-                existing?.CreatedAtUtc ?? now, now, ClientFavorite, ClientNote, IsRejected);
+                existing?.CreatedAtUtc ?? now, now, ClientFavorite, ClientNote, IsRejected, existing?.ExpectedLibraryRevision);
             var result = await _annotationService.SaveAsync(annotation, item.Record.ProjectId, _lifetime.Token);
             if (!result.Success || result.Annotation is null)
             {
                 AnnotationStatus = result.Message ?? "标注未保存。";
-                StatusText = "标注保存失败；照片和原有数据库记录保持不变。";
+                StatusText = "标注未全部完成；产品侧草稿可能已保存，请查看具体状态后重试。";
                 return;
             }
             item.ApplyAnnotation(result.Annotation);

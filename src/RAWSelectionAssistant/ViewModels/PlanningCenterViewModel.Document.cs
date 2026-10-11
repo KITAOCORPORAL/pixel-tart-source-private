@@ -17,6 +17,13 @@ public sealed partial class PlanningCenterViewModel
         _state = await _planning.LoadAsync(project);
         SaveStatus = "已明确关联参考与成片；未修改素材归属";
     }
+    public Func<Guid,Guid,Task>? RelocateAsset { get; set; }
+    public string? RichTextPackage => _document.Package?.RichTextPackageBase64;
+    public void SaveRichText(string data, string plainText)
+    {
+        if(ProjectId is not Guid project)return;
+        UpdateDocument(_document with { Body=plainText, Package=(_document.Package ?? new PlanningDocumentPackage{ProjectId=project}) with {RichTextPackageBase64=data} });
+    }
     public IDialogService Dialogs => _dialogs;
     public void OpenLinkedCanvas(RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocument canvas) => CanvasRequested?.Invoke(this, canvas);
     public async Task CaptureCanvasDocumentAsync(RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocument canvas)

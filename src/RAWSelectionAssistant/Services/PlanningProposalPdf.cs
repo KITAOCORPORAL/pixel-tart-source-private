@@ -48,7 +48,13 @@ public static class PlanningProposalPdf
         }
         Text("摄影策划案 · " + vm.ProposalStatus, 11); Text(vm.DocumentTitle, 32, true); Text(vm.DocumentSubtitle, 20);
         Text(vm.DocumentDate + " · " + vm.DocumentLocation + " · " + vm.DocumentPeople, 12);
-        foreach (var line in vm.DocumentBody.Split('\n'))
+        if(vm.RichTextPackage is { } rich)
+        {
+            var content=new FlowDocument();using var stream=new MemoryStream(Convert.FromBase64String(rich));
+            new TextRange(content.ContentStart,content.ContentEnd).Load(stream,DataFormats.Rtf);
+            while(content.Blocks.FirstBlock is { } block){content.Blocks.Remove(block);doc.Blocks.Add(block);}
+        }
+        else foreach (var line in vm.DocumentBody.Split('\n'))
         {
             if (string.IsNullOrWhiteSpace(line)) continue;
             if (line.Trim() == "---") { doc.Blocks.Add(new Paragraph { BorderBrush = Brushes.LightGray, BorderThickness = new Thickness(0, 0, 0, 1) }); continue; }

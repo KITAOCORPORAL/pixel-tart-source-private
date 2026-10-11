@@ -90,6 +90,7 @@ public sealed class FreeCanvasView : UserControl
     }
     public CanvasEditor Editor { get; }
     public FreeCanvasSurface Surface { get; }
+    public Func<CanvasObject,Task>? RelocateAsset { get; set; }
     public Func<string,string,Task<IReadOnlyList<CanvasObject>>>? SourceLoader { get; set; }
     public Func<IReadOnlyList<CanvasObject>,Guid?,Task>? SaveBoard { get; set; }
     public Func<Task<IReadOnlyList<(Guid Id,string Name)>>>? BoardLoader { get; set; }
@@ -137,6 +138,7 @@ public sealed class FreeCanvasView : UserControl
     {
         var anchor=_moreButton; var menu=new ContextMenu{Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom, PlacementTarget=anchor};
         void Add(string header,Action action){var item=new MenuItem{Header=header};item.Click+=(_,_)=>action();menu.Items.Add(item);}
+        Add("重新定位选中素材",async ()=>{if(Editor.Selected.FirstOrDefault(x=>x.IsImage) is {} item && RelocateAsset is not null){await RelocateAsset(item);await Surface.LoadPreviewsAsync();}});
         Add("新建画布",async ()=>{if(await PrepareDocumentChangeAsync() && OpenDocument is not null)await OpenDocument(new CanvasDocument());});
         Add("打开画布…",()=>_=OpenSavedAsync()); Add("关闭画布",()=>_=CloseAsync());
         AddMenuAction(menu,"保存到灵感板",()=>_=SaveBoardAsync(false),SaveBoard is not null && Editor.Document.Objects.Any(item=>item.IsImage)); menu.IsOpen=true;

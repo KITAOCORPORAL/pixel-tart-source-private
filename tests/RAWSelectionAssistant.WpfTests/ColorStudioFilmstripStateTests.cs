@@ -13,6 +13,19 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class ColorStudioFilmstripStateTests
 {
     [TestMethod]
+    public Task IndependentEditVersionsRestoreTheirOwnExposure() => RunSta(async()=>
+    {
+        var root=Path.Combine(Path.GetTempPath(),"Kitao-Versions-"+Guid.NewGuid());Directory.CreateDirectory(root);
+        try
+        {
+            using var workspace=new ReferenceColorWorkspaceViewModel(new Dialogs());await workspace.LoadTargetAsync(SaveImage(root,"a.png",70));
+            workspace.Editor.Exposure=.5;workspace.CreateEditVersion();var target=workspace.ActiveTarget!;var first=target.EditVersions[0].Id;var second=target.ActiveEditVersionId!.Value;
+            workspace.Editor.Exposure=1.5;await workspace.SwitchEditVersionAsync(first);Assert.AreEqual(.5,workspace.Editor.Exposure);
+            await workspace.SwitchEditVersionAsync(second);Assert.AreEqual(1.5,workspace.Editor.Exposure);
+            var path=Path.Combine(root,"session.ptstudio.json");await workspace.SaveSessionAsync(path);
+            using var reopened=new ReferenceColorWorkspaceViewModel(new Dialogs());await reopened.LoadSessionAsync(path);Assert.HasCount(2,reopened.ActiveTarget!.EditVersions);Assert.AreEqual(1.5,reopened.Editor.Exposure);
+        }finally{Directory.Delete(root,true);}
+    });    [TestMethod]
     public Task ExistingEditedPathCannotBeReboundToDifferentIdentity() => RunSta(async () =>
     {
         var root=Path.Combine(Path.GetTempPath(),"PixelTart-Rebind-"+Guid.NewGuid()); Directory.CreateDirectory(root);

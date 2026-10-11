@@ -245,9 +245,7 @@ public partial class PlanningCenterView : UserControl
             status.SetBinding(Selector.SelectedItemProperty, new Binding(nameof(_vm.ProposalStatus))); AutomationProperties.SetName(status, "策划案状态"); DocumentContent.Children.Add(status);
             Heading(DocumentContent, "核心概念");
             DocumentContent.Children.Add(Text("正文随项目自动保存；工具栏写入兼容的结构标记，预览和 PDF 使用同一内容。", 12));
-            var bodyEditor = Editor(nameof(_vm.DocumentBody), 12);
-            DocumentContent.Children.Add(DocumentFormattingToolbar(bodyEditor));
-            DocumentContent.Children.Add(bodyEditor);
+            DocumentContent.Children.Add(new PlanningRichEditor(_vm.RichTextPackage,_vm.DocumentBody,_vm.SaveRichText,_vm.DocumentCanvasRevisions.Where(v=>v.PreviewPngBase64 is not null).Select(v=>v.PreviewPngBase64!)));
         }
         else
         {
@@ -277,7 +275,13 @@ public partial class PlanningCenterView : UserControl
                 DocumentContent.Children.Add(additional);
             }
         }
-        if (!editing && !string.IsNullOrWhiteSpace(_vm.DocumentBody)) AddBody(DocumentContent, _vm.DocumentBody);
+        if(!editing && _vm.RichTextPackage is { } rich)
+        {
+            var document=new FlowDocument();using var input=new MemoryStream(Convert.FromBase64String(rich));
+            new TextRange(document.ContentStart,document.ContentEnd).Load(input,DataFormats.Rtf);
+            DocumentContent.Children.Add(new FlowDocumentScrollViewer{Document=document,IsToolBarVisible=false,VerticalScrollBarVisibility=ScrollBarVisibility.Disabled});
+        }
+        else if (!editing && !string.IsNullOrWhiteSpace(_vm.DocumentBody)) AddBody(DocumentContent, _vm.DocumentBody);
         Heading(DocumentContent, "视觉方向");
         var direction = new StackPanel();
         var swatches = new WrapPanel();
@@ -414,6 +418,8 @@ public partial class PlanningCenterView : UserControl
         void Add(string label, Action action) { var symbol = label switch { "查看大图" => "Preview", "打开来源" => "Link", "用于灯光" => "Lighting", "用于造型" => "Styling", "用于当前镜头" => "Storyboard", "用于参考仿色" => "ReferenceColor", "上移" => "Back", "下移" => "Forward", "从策划中移除" => "Close", _ when label.Contains("情绪板") => "Collage", _ => "Planning" }; var entry = MenuEntry(label, "PixelTart.Symbol." + symbol); entry.Click += (_, _) => action(); menu.Items.Add(entry); }
         async Task Safely(Func<Task> action) { try { await action(); } catch (Exception error) { System.Diagnostics.Trace.TraceError(error.ToString()); _vm!.Dialogs.ShowError("操作未完成，原资料已保留。请重试。"); } }
         void AddAsync(string label, Func<Task> action) => Add(label, async () => await Safely(action));
+        if(item.Link.Source.LibraryId is Guid library && item.Link.Source.AssetId is Guid asset && _vm!.RelocateAsset is not null)
+            AddAsync("重新定位素材",()=>_vm.RelocateAsset(library,asset));
         Add("查看大图", () => ShowImage(item));
         Add("打开来源", () => _vm!.OpenReferenceSource(item));
         menu.Items.Add(new Separator());

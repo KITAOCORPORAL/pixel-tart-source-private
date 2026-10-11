@@ -242,6 +242,13 @@ public partial class MainWindow : Window
     {
         if (_viewModel is not null)
         {
+            if(_viewModel.TetherPage is {} tether)
+                tether.RelocateLibraryAsset=async id=>
+                {
+                    var link=tether.ResolveLibraryLink is null?null:await tether.ResolveLibraryLink(id);
+                    if(link is null)return;
+                    await RelocateSharedAssetAsync(link.LibraryId,link.AssetId,link.SourceContentHash);
+                };
             _viewModel.ReferenceColorPage.AssetMetadataSaved = null;
             _viewModel.TutorialVisualStateChanged -= ViewModel_TutorialVisualStateChanged;
             _viewModel.CloseRequested -= ViewModel_CloseRequested;
@@ -253,6 +260,13 @@ public partial class MainWindow : Window
         _shellEscapeService = e.NewValue as IShellEscapeService;
         if (_viewModel is not null)
         {
+            if(_viewModel.TetherPage is {} tether)
+                tether.RelocateLibraryAsset=async id=>
+                {
+                    var link=tether.ResolveLibraryLink is null?null:await tether.ResolveLibraryLink(id);
+                    if(link is null)return;
+                    await RelocateSharedAssetAsync(link.LibraryId,link.AssetId,link.SourceContentHash);
+                };
             _viewModel.ReferenceColorPage.AssetMetadataSaved = async _ =>
             {
                 if (GetHostedAssetLibraryPage() is { } page) await page.RefreshForSessionAsync();
@@ -270,6 +284,7 @@ public partial class MainWindow : Window
                             .SelectMany(canvas => canvas.Objects).Where(item => item.IsImage && (string.IsNullOrWhiteSpace(search) || item.Name.Contains(search, StringComparison.CurrentCultureIgnoreCase))).ToArray();
                     return await page.ViewModel.LoadCanvasSourcesAsync(source, search, project);
                 };
+                planning.RelocateAsset=(library,id)=>RelocateSharedAssetAsync(library,id);
                 planning.ReferencePathResolver = async reference =>
                 {
                     var page = GetHostedAssetLibraryPage();
@@ -294,7 +309,17 @@ public partial class MainWindow : Window
         ScheduleTutorialLayout();
     }
 
-    private async void ViewModel_AssetLibraryFilterRequested(object? sender, AssetLibraryNavigationRequestEventArgs request)
+    private async Task RelocateSharedAssetAsync(Guid library,Guid asset,string? hash=null)
+    {
+        try
+        {
+            var host=AssetLibraryWorkspace.Content as PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost;
+            var page=host is null?GetHostedAssetLibraryPage():await host.InitializeForProductHarnessAsync();
+            if(page is null){RAWSelectionAssistant.Views.ThemedMessageDialog.Show(this,"重新定位","请先打开素材库。",RAWSelectionAssistant.Views.ThemedMessageKind.Information);return;}
+            await page.InitializeForSessionAsync();await page.ViewModel.RelocateAssetAsync(library,asset,hash);
+        }
+        catch(Exception error)when(error is IOException or InvalidOperationException){RAWSelectionAssistant.Views.ThemedMessageDialog.Show(this,"重新定位未完成",error.Message,RAWSelectionAssistant.Views.ThemedMessageKind.Error);}
+    }    private async void ViewModel_AssetLibraryFilterRequested(object? sender, AssetLibraryNavigationRequestEventArgs request)
     {
         await Dispatcher.InvokeAsync(() => { }, DispatcherPriority.Loaded);
         if (AssetLibraryWorkspace.Content is PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost host)

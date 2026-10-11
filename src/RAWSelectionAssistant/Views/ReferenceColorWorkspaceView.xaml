@@ -80,6 +80,9 @@
    </StackPanel>
    <WrapPanel x:Name="HeaderActions" Grid.Column="1">
     <Button Content="{views:StudioText OpenBatch}" Command="{Binding OpenSessionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
+    <Button Content="{views:StudioText RelocateAsset}" Command="{Binding RelocateTargetCommand}" Style="{StaticResource PixelTart.Button.Ghost}" AutomationProperties.Name="{views:StudioText RelocateAssetHelp}" />
+    <Button Content="{views:StudioText NewEditVersion}" Command="{Binding CreateEditVersionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" AutomationProperties.Name="{views:StudioText NewEditVersionHelp}" />
+    <Button Content="{views:StudioText SwitchEditVersion}" Command="{Binding NextEditVersionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" AutomationProperties.Name="{views:StudioText SwitchEditVersionHelp}" />
     <Button Content="{views:StudioText SaveBatch}" Command="{Binding SaveSessionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
     <Button Content="{views:StudioText FocusImage}" Command="{Binding Editor.ToggleFocusViewCommand}" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0" />
     <Button x:Name="EditRailButton" Content="{views:StudioText EditPanel}" Click="OnToggleEditRail" Style="{StaticResource PixelTart.Button.Ghost}" Margin="8,0,0,0" />
@@ -941,4 +944,3 @@
   </Border>
  </Grid>
 </UserControl>
-
