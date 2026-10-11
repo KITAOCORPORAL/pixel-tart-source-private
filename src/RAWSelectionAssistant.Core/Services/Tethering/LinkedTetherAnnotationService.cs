@@ -7,7 +7,10 @@ namespace RAWSelectionAssistant.Core.Services.Tethering;
 public sealed class LinkedTetherAnnotationService(ITetherAnnotationService fallback,
     TetherLibraryHandoffService handoff, Func<CancellationToken, Task<AssetLibraryContainerDescriptor?>> currentLibrary) : ITetherAnnotationService
 {
-    private readonly System.Collections.Concurrent.ConcurrentDictionary<Guid, PhotographerAnnotation> _readVersions = new();
+    private readonly Stack<(string Database,AssetLibraryUndoToken Token)> _undo=[];
+    private readonly Stack<(string Database,AssetLibraryUndoToken Token)> _redo=[];
+    public async Task<bool> RestoreAnnotationAsync(bool redo,CancellationToken token=default)
+    {var source=redo?_redo:_undo;var target=redo?_undo:_redo;if(source.Count==0)return false;var item=source.Peek();await using var repo=new SqliteAssetLibraryRepository(item.Database);var result=redo?await repo.RedoAsync(item.Token,token):await repo.UndoAsync(item.Token,token);if(result){source.Pop();target.Push(item);}return result;}    private readonly System.Collections.Concurrent.ConcurrentDictionary<Guid, PhotographerAnnotation> _readVersions = new();
     public async Task<TetherAnnotationRecord?> GetAsync(Guid id, CancellationToken token = default)
     {
         var original = await fallback.GetAsync(id, token);
@@ -47,6 +50,7 @@ public sealed class LinkedTetherAnnotationService(ITetherAnnotationService fallb
         if(annotation.ExpectedLibraryRevision is not long revision || expected.Revision!=revision)return new(false,result.Annotation,"ANNOTATION_CONCURRENT_CONFLICT","标注版本过期或缺失，产品侧草稿已保留，请重新读取后选择冲突处理。");
         var write=await store.CompareExchangeAsync(expected,new(link.AssetId,annotation.Rating,annotation.ColorLabel??"",annotation.PhotographerNote??""),cancellationToken);
         if(!write.Applied)return new(false,result.Annotation,"ANNOTATION_CONCURRENT_CONFLICT","标注版本已改变，产品侧内容保留待处理，请重新读取后明确解决冲突。");
+        if(write.UndoToken is {} undo){_undo.Push((library.DatabasePath,undo));_redo.Clear();}
         _readVersions[annotation.AssetId]=write.Current; return result with { Annotation = annotation with {ExpectedLibraryRevision=write.Current.Revision} };
         }
         catch(Exception error) when(error is IOException or UnauthorizedAccessException or Microsoft.Data.Sqlite.SqliteException or InvalidOperationException)

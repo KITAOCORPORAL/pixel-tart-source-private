@@ -5,6 +5,7 @@ namespace RAWSelectionAssistant.Core.Services.Tethering;
 
 public interface ITetherAnnotationService
 {
+    Task<bool> RestoreAnnotationAsync(bool redo,CancellationToken token=default)=>Task.FromResult(false);
     Task<TetherAnnotationRecord?> GetAsync(Guid assetId, CancellationToken cancellationToken = default);
     Task<IReadOnlyDictionary<Guid, TetherAnnotationRecord>> ListBySessionAsync(Guid sessionId, CancellationToken cancellationToken = default);
     Task<TetherAnnotationSaveResult> SaveAsync(TetherAnnotationRecord annotation, Guid? projectId = null, CancellationToken cancellationToken = default);

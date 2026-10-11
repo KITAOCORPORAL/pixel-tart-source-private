@@ -333,9 +333,12 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
     public async Task UpdateAssetAsync(Guid assetId, int? rating = null, string? comment = null, CancellationToken cancellationToken = default)
         => _ = await UpdateAssetMetadataAsync(assetId, rating, comment, cancellationToken).ConfigureAwait(false);
 
+    /// <summary>Compatibility API: uses an existing read snapshot; without one only untouched empty fields may be populated by background work.</summary>
     public async Task<AssetLibraryBatchResult> UpdateAssetMetadataAsync(Guid assetId, int? rating = null, string? comment = null, CancellationToken cancellationToken = default)
     {
-        var previous = _observedMetadata.TryGetValue(assetId,out var observed)?observed:await GetAssetAsync(assetId, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException($"Asset {assetId} was not found.");
+        var hasSnapshot=_observedMetadata.TryGetValue(assetId,out var observed);
+        var previous = hasSnapshot?observed!:await GetAssetAsync(assetId, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException($"Asset {assetId} was not found.");
+        if(!hasSnapshot){_observedMetadata.TryRemove(assetId,out _);if(previous.AnnotationRevision>0)return new(0,null,["BackgroundProtected:"+assetId.ToString("D")]);rating=previous.Rating==0?rating:previous.Rating;comment=string.IsNullOrEmpty(previous.Comment)?comment:previous.Comment;}
         var nextRating = rating ?? previous.Rating;
         if (nextRating is < 0 or > 5) throw new ArgumentOutOfRangeException(nameof(rating));
         var nextComment = comment ?? previous.Comment;

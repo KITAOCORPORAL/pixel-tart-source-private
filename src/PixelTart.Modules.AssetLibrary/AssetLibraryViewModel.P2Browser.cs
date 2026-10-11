@@ -1823,7 +1823,7 @@ public sealed partial class AssetLibraryViewModel
             var changed = await Task.Run(() => undo
                 ? _browserCommands.UndoAsync(_lifetimeCancellation.Token)
                 : _browserCommands.RedoAsync(_lifetimeCancellation.Token), _lifetimeCancellation.Token);
-            Status = changed ? (undo ? "已撤销素材库操作。" : "已重做素材库操作。") : "没有可恢复的素材库操作。";
+            Status = changed ? (undo ? "已撤销素材库操作。" : "已重做素材库操作。") : "历史已过期或被其他修改影响，未覆盖；正在刷新权威状态。";
             LastUndoToken = _browserCommands.UndoToken;
             await RefreshFilterListsAsync(_lifetimeCancellation.Token);
             await RefreshAsync();

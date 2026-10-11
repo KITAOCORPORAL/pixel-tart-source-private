@@ -17,6 +17,7 @@ public sealed class AssetPresentationMetadataStore(AssetLibraryDatabase database
         return await reader.ReadAsync(token).ConfigureAwait(false) ? new(assetId, reader.GetString(0), reader.GetString(1)) : new(assetId);
     }
 
+    /// <summary>Background compatibility fill: existing or previously edited color values are protected. User changes must use PhotographerAnnotationStore CAS.</summary>
     public async Task SaveAsync(IEnumerable<Guid> assetIds, string? url = null, string? color = null, CancellationToken token = default)
     {
         var ids = assetIds.Distinct().ToArray();
@@ -25,12 +26,13 @@ public sealed class AssetPresentationMetadataStore(AssetLibraryDatabase database
         if (color is not null && color is not ("" or "红" or "橙" or "黄" or "绿" or "蓝" or "紫")) throw new ArgumentException("未知颜色标记。");
         await GetAsync(ids[0], token).ConfigureAwait(false);
         await using var connection = await database.OpenConnectionAsync(write: true, token).ConfigureAwait(false);
+        await PhotographerAnnotationStore.EnsureAsync(connection,token);
         await using var transaction = connection.BeginTransaction();
         foreach (var id in ids)
         {
             await using var command = connection.CreateCommand();
             command.Transaction = transaction;
-            command.CommandText = "INSERT INTO AssetPresentationMetadata(AssetId,Url,Color) VALUES($id,COALESCE($url,''),COALESCE($color,'')) ON CONFLICT(AssetId) DO UPDATE SET Url=COALESCE($url,Url),Color=COALESCE($color,Color);";
+            command.CommandText = "INSERT INTO AssetPresentationMetadata(AssetId,Url,Color) VALUES($id,COALESCE($url,''),CASE WHEN COALESCE((SELECT Revision FROM PhotographerAnnotationVersions WHERE AssetId=$id),0)=0 THEN COALESCE($color,'') ELSE '' END) ON CONFLICT(AssetId) DO UPDATE SET Url=COALESCE($url,Url),Color=CASE WHEN Color='' AND COALESCE((SELECT Revision FROM PhotographerAnnotationVersions WHERE AssetId=$id),0)=0 THEN COALESCE($color,Color) ELSE Color END;";
             command.Parameters.AddWithValue("$id", id.ToString("D"));
             command.Parameters.AddWithValue("$url", (object?)url ?? DBNull.Value);
             command.Parameters.AddWithValue("$color", (object?)color ?? DBNull.Value);

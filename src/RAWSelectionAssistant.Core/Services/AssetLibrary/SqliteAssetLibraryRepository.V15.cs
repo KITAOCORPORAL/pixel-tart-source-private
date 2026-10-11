@@ -31,7 +31,8 @@ public sealed partial class SqliteAssetLibraryRepository
             var oldRating = reader.GetInt32(0); var oldComment = reader.GetString(1);var revision=reader.GetInt64(2);
             if(_observedMetadata.TryGetValue(id,out var observed)&&(observed.AnnotationRevision!=revision||observed.Rating!=oldRating||observed.Comment!=oldComment)){conflicts.Add($"Conflict:{id:D}");continue;}
             await reader.DisposeAsync().ConfigureAwait(false);
-            var nextRating = rating ?? oldRating; var nextComment = comment ?? oldComment;
+            var hasSnapshot=_observedMetadata.ContainsKey(id);if(!hasSnapshot&&revision>0){conflicts.Add($"BackgroundProtected:{id:D}");continue;}
+            var nextRating = !hasSnapshot&&oldRating!=0?oldRating:rating ?? oldRating; var nextComment = !hasSnapshot&&!string.IsNullOrEmpty(oldComment)?oldComment:comment ?? oldComment;
             if (nextRating == oldRating && string.Equals(nextComment, oldComment, StringComparison.Ordinal)) continue;
             previous.Add(new(id, oldRating, oldComment));
             next.Add(new(id, nextRating, nextComment));
@@ -1180,6 +1181,7 @@ public sealed partial class SqliteAssetLibraryRepository
     {
         switch (undo.Kind)
         {
+            case AnnotationCasJournal.Kind: return await AnnotationCasJournal.RestoreAsync(connection,transaction,undo.PayloadJson,false,cancellationToken);
             case "asset-metadata-v2":
                 if (undo.JournalVersion < 2) return false;
                 var change=Deserialize<AssetMetadataChange>(undo.PayloadJson);
@@ -1265,6 +1267,7 @@ public sealed partial class SqliteAssetLibraryRepository
     {
         switch (operation.Kind)
         {
+            case AnnotationCasJournal.Kind: return await AnnotationCasJournal.RestoreAsync(connection,transaction,operation.PayloadJson,true,cancellationToken);
             case "asset-metadata-v2":
                 var change=Deserialize<AssetMetadataChange>(operation.PayloadJson);
                 if(!await MetadataStatesMatchAsync(connection,transaction,change.Before,cancellationToken))return false;
@@ -1427,6 +1430,7 @@ public sealed partial class SqliteAssetLibraryRepository
     {
         switch (undo.Kind)
         {
+
             case "asset-metadata": return false;
             case "folder-membership":
                 var folders = Deserialize<FolderMembershipUndo>(undo.PayloadJson); await ApplyFolderMembershipUndoAsync(folders, cancellationToken).ConfigureAwait(false); return true;

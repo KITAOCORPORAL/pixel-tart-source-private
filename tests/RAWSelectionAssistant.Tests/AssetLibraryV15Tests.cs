@@ -212,7 +212,7 @@ public sealed class AssetLibraryV15Tests
         await using var setup = await TestSetup.CreateAsync();
         var source = setup.WriteFile("undo.jpg", "bytes"); await setup.Repository.ImportAsync([new(source)]);
         var asset = (await setup.Repository.QueryAsync(new())).Items.Single();
-        for (var index = 0; index < 105; index++) await setup.Repository.UpdateAssetMetadataAsync(asset.AssetId, comment: index.ToString());
+        for (var index = 0; index < 105; index++) { await setup.Repository.GetAssetAsync(asset.AssetId); await setup.Repository.UpdateAssetMetadataAsync(asset.AssetId, comment: index.ToString()); }
         Assert.HasCount(100, await setup.Repository.ListUndoJournalAsync(100));
     }
 

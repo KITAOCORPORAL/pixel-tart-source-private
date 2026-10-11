@@ -8,6 +8,7 @@ public sealed partial class AssetLibraryViewModel
     {
         var expected=items.Select(a=>new PhotographerAnnotation(a.AssetId,a.Rating,a.ColorLabel,a.Comment,a.AnnotationRevision)).ToArray();
         LastAnnotationResults=await new PhotographerAnnotationStore(_database).ApplyBatchAsync(expected,rating,color,note,_lifetimeCancellation.Token);
+        if(LastAnnotationResults.FirstOrDefault(x=>x.UndoToken is not null)?.UndoToken is {} undo)RememberBrowserMutationResult(new(LastAnnotationResults.Count(x=>x.Status=="Success"),undo,[]));
         await RefreshAsync();
         Status=$"标注：成功 {LastAnnotationResults.Count(x=>x.Status=="Success")}，冲突 {LastAnnotationResults.Count(x=>x.Status=="Conflict")}，失败 {LastAnnotationResults.Count(x=>x.Status=="Failed")}；已刷新权威状态";
         OnPropertyChanged(nameof(LastAnnotationResults));

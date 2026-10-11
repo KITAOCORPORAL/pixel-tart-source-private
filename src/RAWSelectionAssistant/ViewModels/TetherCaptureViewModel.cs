@@ -196,6 +196,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         ChooseBackupDestinationCommand = new RelayCommand(_ => ChooseBackupDestination(), _ => !IsRunning && !IsBusy);
         StartCommand = new AsyncRelayCommand(_ => StartAsync(), _ => !IsRunning && !IsBusy && Directory.Exists(WatchDirectory));
         StopCommand = new AsyncRelayCommand(_ => StopAsync(), _ => IsRunning && !IsBusy);
+        UndoPhotographerAnnotationCommand=new AsyncRelayCommand(_=>RestorePhotographerAnnotationAsync(false));RedoPhotographerAnnotationCommand=new AsyncRelayCommand(_=>RestorePhotographerAnnotationAsync(true));
         RelocateLibraryAssetCommand=new AsyncRelayCommand(async _=>{if(SelectedAsset is {} item && RelocateLibraryAsset is not null)await RelocateLibraryAsset(item.Record.Id);});
         ShowLibraryHandoffsCommand = new AsyncRelayCommand(async _ => { if (DescribeLibraryHandoffs is not null) _dialogs.ShowError(await DescribeLibraryHandoffs()); });
         ResolveAnnotationConflictCommand = new AsyncRelayCommand(async parameter =>
@@ -289,6 +290,8 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public AsyncRelayCommand StopCommand { get; }
     public ShootExecutionContext? CaptureContext => _executionContext;
     public Func<Guid,Task>? RelocateLibraryAsset { get; set; }
+    public AsyncRelayCommand UndoPhotographerAnnotationCommand {get;private set;}=null!;
+    public AsyncRelayCommand RedoPhotographerAnnotationCommand {get;private set;}=null!;
     public AsyncRelayCommand RelocateLibraryAssetCommand { get; private set; } = null!;
     public Func<Task<string>>? DescribeLibraryHandoffs { get; set; }
     public AsyncRelayCommand ShowLibraryHandoffsCommand { get; private set; } = null!;
@@ -1015,6 +1018,12 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private async Task ToggleFavoriteAsync() { ClientFavorite = !ClientFavorite; await SaveAnnotationAsync(); }
     private async Task ToggleRejectedAsync() { IsRejected = !IsRejected; await SaveAnnotationAsync(); }
 
+    private async Task RestorePhotographerAnnotationAsync(bool redo)
+    {
+        var changed=await _annotationService.RestoreAnnotationAsync(redo,_lifetime.Token);
+        if(SelectedAsset is {} item&&await _annotationService.GetAsync(item.Record.Id,_lifetime.Token) is {} current){item.ApplyAnnotation(current);ApplyAnnotationToEditor(current);}
+        AnnotationStatus=changed?"摄影师标注已恢复；客户字段独立保留":"版本已变化或没有历史，未覆盖；权威值已刷新";
+    }
     private async Task SaveAnnotationAsync()
     {
         var item = ActiveCompareAsset ?? SelectedAsset;
