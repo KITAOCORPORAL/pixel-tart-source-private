@@ -2,10 +2,12 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 public sealed record StudioEditVersion(Guid Id,string Name,DateTimeOffset CreatedAt,Guid? LibraryId,Guid? AssetId,string? SourceHash,
     ReferenceLook? Look,ColorAdjustmentStack? Stack,PixelTartFilmSettings? Film,ColorStudioMatchEngine Engine,MatchV4ExecutionMode Mode)
 {
+    public ProfessionalRawDefinition? RawDefinition {get;init;}
+    public ProfessionalRawContract? RawInput {get;init;}
     public Guid? OriginVersionId {get;init;}
     public string? OriginIdentity {get;init;}
     public bool Archived { get; init; }
-    public int ProcessingVersion => Stack?.ProcessingVersion ?? 1;
+    public int ProcessingVersion => RawDefinition?.ProcessingVersion ?? Stack?.ProcessingVersion ?? 1;
 }
 public sealed record StudioExportReceipt(Guid ExportId,Guid? LibraryId,Guid? AssetId,string? SourceHash,Guid EditVersionId,int ProcessingVersion,
     string Recipe,string OutputPath,string OutputHash,DateTimeOffset CompletedAt, ExportRecipeSnapshot? RecipeSnapshot=null,int ManifestVersion=2,string CompletionState="Completed",Guid? ManagedTaskId=null,string? ManagedArtifactPath=null);

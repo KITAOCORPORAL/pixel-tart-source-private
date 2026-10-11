@@ -29,6 +29,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     private void ScheduleTargetThumbnail(ReferenceTargetItem target)
     {
+        if(target.RawDefinition is not null){CancelTargetThumbnail(target.Id);return;}
         if (_disposed || target.SourceThumbnail is null || !Targets.Contains(target)) return;
         var source = target.SourceThumbnail;
         var look = target.AppliedLookSnapshot?.Normalize(); var stack = target.ColorAdjustmentStackSnapshot?.DeepClone();
@@ -56,13 +57,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                     result = await Task.Run(() => RawDisplayBitmapAdapter.ToBitmap(_rawPipeline.Render(master.Image, look, stack, 320, token, film).Pixels), token);
                 else result = await Editor.RenderFrozenThumbnailAsync(source, look, stack, film, token);
                 token.ThrowIfCancellationRequested();
-                if (!_disposed && _thumbnailJobs.TryGetValue(target.Id, out var current) && ReferenceEquals(current, job) && Targets.Contains(target))
+                if (!_disposed && _thumbnailJobs.TryGetValue(target.Id, out var current) && ReferenceEquals(current, job) && Targets.Contains(target) && target.RawDefinition is null)
                 { target.Thumbnail = result; target.ThumbnailStatus = "当前调整后缩略预览（缩小采样）"; }
             }
             catch (OperationCanceledException) { }
             catch (Exception error) when (error is IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException or InvalidOperationException)
             {
-                if (!_disposed && _thumbnailJobs.TryGetValue(target.Id, out var current) && ReferenceEquals(current, job))
+                if (!_disposed && target.RawDefinition is null && _thumbnailJobs.TryGetValue(target.Id, out var current) && ReferenceEquals(current, job))
                 { target.Thumbnail = source; target.ThumbnailStatus = "原图缩略预览；当前调整预览未能生成"; }
             }
             finally

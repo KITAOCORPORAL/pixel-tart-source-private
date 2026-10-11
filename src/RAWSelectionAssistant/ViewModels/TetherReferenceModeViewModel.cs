@@ -111,6 +111,8 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         else if (State is not ProcessingState.Failed and not ProcessingState.Cancelled) State = ProcessingState.Idle;
         OnPropertyChanged(nameof(IsSettled)); OnPropertyChanged(nameof(IsBusy));
     }
+    public bool IndependentRawMode {get;set;}
+    public void PresentIndependentRaw(BitmapSource image){StopProcessing();Enabled=true;ViewMode="仿色";MatchedImage=image;OnPropertyChanged(nameof(EffectiveViewMode));RaiseViewProperties();}
     public void StopProcessing()
     {
         CancelDetailPreviewRequest();
@@ -125,6 +127,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         var snapshot = SelectedLook?.Normalize();
         foreach (var target in targets)
         {
+            if(target.RawDefinition is not null)continue;
             target.AppliedLookSnapshot = snapshot is null ? null : snapshot with { ReferenceSources = snapshot.ReferenceSources.ToArray() };
             target.FilmSettingsSnapshot = FilmSettings with { };
             target.ColorAdjustmentStackSnapshot = AdjustmentStack.Nodes.Count > 0 ? AdjustmentStack.DeepClone() : null;
@@ -939,6 +942,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     }
     private async Task RenderAsync(CancellationToken outer = default, bool interactive = false)
     {
+        if(IndependentRawMode)return;
         var source = interactive ? _interactiveSource ?? _source : _source; var look = SelectedLook; var asset = _assetId;
         var stack = AdjustmentStack.Nodes.Count > 0 ? AdjustmentStack.DeepClone() : AdjustmentStack;
         if (_presetPreviewNode is { } presetPreview) stack = stack with { Nodes = [.. stack.Nodes, presetPreview] };

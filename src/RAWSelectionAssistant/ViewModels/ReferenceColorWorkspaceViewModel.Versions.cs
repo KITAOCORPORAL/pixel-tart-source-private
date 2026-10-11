@@ -24,7 +24,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         else return false;
         target.EditVersions.Clear();foreach(var version in resolved.Versions)target.EditVersions.Add(version);
         target.VersionCatalog=resolved;target.LoadedCatalogRevision=resolved.Revision;target.ActiveEditVersionId=resolved.SelectedId;
-        if(resolved.Versions.FirstOrDefault(v=>v.Id==resolved.SelectedId) is {} active){target.AppliedLookSnapshot=active.Look;target.ColorAdjustmentStackSnapshot=active.Stack?.DeepClone();target.FilmSettingsSnapshot=active.Film;target.EngineSnapshot=active.Engine;target.ExecutionModeSnapshot=active.Mode;}
+        if(resolved.Versions.FirstOrDefault(v=>v.Id==resolved.SelectedId) is {} active){target.AppliedLookSnapshot=active.Look;target.ColorAdjustmentStackSnapshot=active.Stack?.DeepClone();target.RawDefinition=active.RawDefinition;target.RawInput=active.RawInput;target.FilmSettingsSnapshot=active.Film;target.EngineSnapshot=active.Engine;target.ExecutionModeSnapshot=active.Mode;}
         return true;
     }
     private readonly StudioVersionRepository? _versionRepository;
@@ -49,7 +49,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var embedded=target.EditVersions.ToArray();target.EditVersions.Clear();foreach(var v in catalog.Versions)target.EditVersions.Add(v);
         foreach(var v in embedded.Where(v=>!catalog.Versions.Any(c=>c.Id==v.Id)))target.EditVersions.Add(v);
         var active=target.EditVersions.FirstOrDefault(v=>v.Id==requestedVersion&&!v.Archived)??target.EditVersions.FirstOrDefault(v=>!v.Archived);
-        if(active is not null){target.ActiveEditVersionId=active.Id;target.AppliedLookSnapshot=active.Look;target.ColorAdjustmentStackSnapshot=active.Stack?.DeepClone();target.FilmSettingsSnapshot=active.Film;target.EngineSnapshot=active.Engine;target.ExecutionModeSnapshot=active.Mode;}
+        if(active is not null){target.ActiveEditVersionId=active.Id;target.AppliedLookSnapshot=active.Look;target.ColorAdjustmentStackSnapshot=active.Stack?.DeepClone();target.RawDefinition=active.RawDefinition;target.RawInput=active.RawInput;target.FilmSettingsSnapshot=active.Film;target.EngineSnapshot=active.Engine;target.ExecutionModeSnapshot=active.Mode;}
     }
     public async Task SaveEditVersionsAsync(CancellationToken token=default)
     {
@@ -71,7 +71,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         target.ActiveEditVersionId ??= target.Id; // deterministic default migration for old v1 sessions
         var existing=target.EditVersions.FirstOrDefault(v=>v.Id==target.ActiveEditVersionId);
         var snapshot=new StudioEditVersion(target.ActiveEditVersionId.Value,existing?.Name??"默认版本",existing?.CreatedAt??DateTimeOffset.UtcNow,
-            target.LibraryId,target.AssetId,target.SourceHash,target.AppliedLookSnapshot,target.ColorAdjustmentStackSnapshot?.DeepClone(),target.FilmSettingsSnapshot,target.EngineSnapshot,target.ExecutionModeSnapshot){Archived=existing?.Archived??false,OriginVersionId=existing?.OriginVersionId,OriginIdentity=existing?.OriginIdentity};
+            target.LibraryId,target.AssetId,target.SourceHash,target.AppliedLookSnapshot,target.ColorAdjustmentStackSnapshot?.DeepClone(),target.FilmSettingsSnapshot,target.EngineSnapshot,target.ExecutionModeSnapshot){Archived=existing?.Archived??false,OriginVersionId=existing?.OriginVersionId,OriginIdentity=existing?.OriginIdentity,RawDefinition=target.RawDefinition,RawInput=target.RawInput};
         if(existing is null)target.EditVersions.Add(snapshot);else target.EditVersions[target.EditVersions.IndexOf(existing)]=snapshot;
     }
     public void CreateEditVersion()
@@ -90,7 +90,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);
         Editor.StopProcessing();_activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);
         target.ActiveEditVersionId=id;target.AppliedLookSnapshot=version.Look;target.ColorAdjustmentStackSnapshot=version.Stack?.DeepClone();
-        target.FilmSettingsSnapshot=version.Film;target.EngineSnapshot=version.Engine;target.ExecutionModeSnapshot=version.Mode;
+        target.RawDefinition=version.RawDefinition;target.RawInput=version.RawInput;target.FilmSettingsSnapshot=version.Film;target.EngineSnapshot=version.Engine;target.ExecutionModeSnapshot=version.Mode;
         await ActivateTargetAsync(target);StatusText="当前编辑版本："+version.Name;
     }
     private void InitializeVersionCommands()
@@ -116,6 +116,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             }
             catch(Exception e)when(e is IOException or InvalidOperationException or ArgumentException){StatusText="版本复制未完成："+e.Message;}
         });
+        InitializeProfessionalRawCommands();
         SelectEditVersionCommand=new AsyncRelayCommand(async _=>{if(SelectedCatalogVersion is {} v && !v.Archived)await SwitchEditVersionAsync(v.Id);});
         SaveEditVersionsCommand=new AsyncRelayCommand(async _=>{try{await SaveEditVersionsAsync();}catch(Exception e)when(e is IOException or InvalidOperationException){StatusText="版本保存未完成："+e.Message;}});
         RenameEditVersionCommand=new RelayCommand(_=>{if(ActiveTarget is not {} target||string.IsNullOrWhiteSpace(EditVersionName))return;CaptureEditVersion(target);var index=target.EditVersions.ToList().FindIndex(v=>v.Id==target.ActiveEditVersionId);target.EditVersions[index]=target.EditVersions[index] with{Name=EditVersionName.Trim()};});

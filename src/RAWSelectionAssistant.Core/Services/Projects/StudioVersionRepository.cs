@@ -42,7 +42,7 @@ public sealed class StudioVersionRepository(string directory)
         foreach(var version in versions)
         {
             if(Identity(version.LibraryId,version.AssetId,version.SourceHash??"")!=expected.Identity)throw new InvalidDataException("编辑版本源身份与目录不一致。");
-            version.Stack?.Normalize();version.Film?.Validate();
+            version.Stack?.Normalize();version.Film?.Validate();version.RawDefinition?.Validate();if(version.RawDefinition is not null && (version.Look is not null || version.Stack is not null || version.Film is not null))throw new InvalidDataException("专业 RAW 版本不允许旧调整栈。");
         }
         var next=new StudioVersionCatalog(expected.Identity,current.Revision+1,versions,selected);var temporary=path+"."+Guid.NewGuid().ToString("N")+".tmp";
         try{await using(var stream=new FileStream(temporary,FileMode.CreateNew,FileAccess.Write,FileShare.None)){await JsonSerializer.SerializeAsync(stream,next,cancellationToken:token);await stream.FlushAsync(token);stream.Flush(true);}File.Move(temporary,path,true);return next;}

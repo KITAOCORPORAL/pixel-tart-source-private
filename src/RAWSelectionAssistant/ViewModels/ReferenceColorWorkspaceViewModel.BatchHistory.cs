@@ -26,7 +26,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     {
         var source = redo ? _batchRedo : _batchUndo; var destination = redo ? _batchUndo : _batchRedo;
         if (source.Count == 0) return;
-        var snapshot = source.Pop(); var items = Targets.Where(x => snapshot.ContainsKey(x.Id)).ToArray();
+        var snapshot = source.Pop(); var items = Targets.Where(x => x.RawDefinition is null && snapshot.ContainsKey(x.Id)).ToArray();
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
         destination.Push(items.ToDictionary(x => x.Id, CaptureAdjustment));
         foreach (var item in items)
@@ -53,6 +53,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private void SyncCurrentTo(IReadOnlyList<ReferenceTargetItem> targets)
     {
         if (ActiveTarget is null || targets.Count == 0) return;
+        if(ActiveTarget.RawDefinition is not null){StatusText="RAW v4 尚未适配旧调整同步，未修改目标。";return;}
         RememberBatchAdjustment(targets); Editor.CopyCurrentLookTo(targets);
         _ = ShowSyncFeedbackAsync($"已从 {ActiveTarget.FileName} 同步完整调整到 {targets.Count} 张可见所选照片；评分、色标和素材关系未改变。");
     }

@@ -79,6 +79,7 @@
     <TextBlock Text="{Binding TargetName}" Style="{StaticResource CaptionText}" TextTrimming="CharacterEllipsis" MaxWidth="310" HorizontalAlignment="Left" ToolTip="{Binding TargetName}" Visibility="Collapsed" />
    </StackPanel>
    <WrapPanel x:Name="HeaderActions" Grid.Column="1">
+    <Button Content="{views:StudioText NewRawVersion}" Command="{Binding CreateProfessionalRawCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
     <Button Content="{views:StudioText OpenBatch}" Command="{Binding OpenSessionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
     <Button Content="{views:StudioText RelocateAsset}" Command="{Binding RelocateTargetCommand}" Style="{StaticResource PixelTart.Button.Ghost}" AutomationProperties.Name="{views:StudioText RelocateAssetHelp}" />
     <ComboBox ItemsSource="{Binding ActiveTarget.EditVersions}" SelectedItem="{Binding SelectedCatalogVersion}" DisplayMemberPath="Name" Width="100" />
@@ -144,7 +145,15 @@
       </StackPanel>
      </Expander>
      </StackPanel>
-     <ListBox x:Name="ToolModes" Grid.Row="1" Style="{StaticResource PixelTart.Segmented}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource RailButton}" SelectionChanged="OnToolModeChanged" SelectedIndex="1" AutomationProperties.Name="{views:StudioText Key='工具页'}">
+     <StackPanel Grid.Row="2" Visibility="{Binding IsProfessionalRaw,Converter={StaticResource BoolVisibility}}">
+      <TextBlock Text="{Binding RawPipelineStatus}" TextWrapping="Wrap" Margin="4" />
+      <TextBlock Text="{views:StudioText RawExposure}"/><TextBox Text="{Binding RawExposureEv,UpdateSourceTrigger=PropertyChanged}" />
+      <CheckBox Content="{views:StudioText RawCameraWb}" IsChecked="{Binding RawUseCameraWhiteBalance}" />
+      <TextBlock Text="{views:StudioText RawGains}"/><TextBox Text="{Binding RawRedGain,UpdateSourceTrigger=PropertyChanged}"/><TextBox Text="{Binding RawGreenGain,UpdateSourceTrigger=PropertyChanged}"/><TextBox Text="{Binding RawBlueGain,UpdateSourceTrigger=PropertyChanged}"/>
+      <Button Content="{views:StudioText RawApply}" Command="{Binding ApplyProfessionalRawCommand}" Style="{StaticResource PixelTart.Button.Primary}" />
+      <TextBlock Text="{views:StudioText RawUnsupported}" TextWrapping="Wrap" />
+     </StackPanel>
+     <ListBox Visibility="{Binding IsLegacyRaw,Converter={StaticResource BoolVisibility}}" x:Name="ToolModes" Grid.Row="1" Style="{StaticResource PixelTart.Segmented}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource RailButton}" SelectionChanged="OnToolModeChanged" SelectedIndex="1" AutomationProperties.Name="{views:StudioText Key='工具页'}">
       <ListBox.ItemsPanel>
        <ItemsPanelTemplate>
         <WrapPanel />
@@ -156,7 +165,7 @@
       <ListBoxItem Content="{views:StudioText Details}" Tag="Details" />
       <ListBoxItem Content="{views:StudioText Stylized}" Tag="Stylized" />
      </ListBox>
-     <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+     <ScrollViewer Visibility="{Binding IsLegacyRaw,Converter={StaticResource BoolVisibility}}" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
       <StackPanel x:Name="ToolPages">
        <StackPanel x:Name="BasicToolPage" Visibility="Collapsed">
         <views:StudioToolPanel NodeTypes="WhiteBalance,BasicTone" />
@@ -489,7 +498,7 @@
      </Grid>
     </DockPanel>
    </Border>
-   <Border x:Name="ContextRail" Grid.Column="0" Margin="0,0,8,0" Padding="0" Background="{DynamicResource SurfaceSecondaryBrush}">
+   <Border x:Name="ContextRail" IsEnabled="{Binding IsLegacyRaw}" Grid.Column="0" Margin="0,0,8,0" Padding="0" Background="{DynamicResource SurfaceSecondaryBrush}">
     <Grid>
      <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />

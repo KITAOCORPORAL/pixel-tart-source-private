@@ -531,5 +531,11 @@
   "SelectVersion": "選擇版本",
   "UndoAnnotation": "復原標註",
   "RedoAnnotation": "重做標註",
-  "CopyVersionLibrary": "跨庫複製版本"
+  "CopyVersionLibrary": "跨庫複製版本",
+  "NewRawVersion": "新 RAW 处理版本",
+  "RawExposure": "曝光 EV（-10 至 +10）",
+  "RawCameraWb": "使用相机白平衡",
+  "RawGains": "相机通道增益倍数 R / G / B（0.125–8），非 Kelvin",
+  "RawApply": "应用 RAW 处理定义",
+  "RawUnsupported": "PV4：HDR、仿色、胶片与空间工具尚未适配，已禁用。线性解码仍可能包含已裁切高光。"
 }

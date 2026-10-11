@@ -6,7 +6,7 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 public sealed record ColorStudioSessionTarget(Guid Id, string Path, Guid? AssetId, bool Selected,
     ReferenceLook? Look, ColorAdjustmentStack? Stack, PixelTartFilmSettings? Film,
     ColorStudioMatchEngine Engine = ColorStudioMatchEngine.Stable, MatchV4ExecutionMode ExecutionMode = MatchV4ExecutionMode.Auto,
-    int? SessionRating = null, string? SessionColorLabel = null, Guid? LibraryId = null, string? SourceHash = null, IReadOnlyList<StudioEditVersion>? EditVersions = null, Guid? ActiveEditVersionId = null,long? CatalogRevision=null);
+    int? SessionRating = null, string? SessionColorLabel = null, Guid? LibraryId = null, string? SourceHash = null, IReadOnlyList<StudioEditVersion>? EditVersions = null, Guid? ActiveEditVersionId = null,long? CatalogRevision=null,ProfessionalRawDefinition? RawDefinition=null,ProfessionalRawContract? RawInput=null);
 
 public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double EditingWidth = 340,
     bool AuxiliaryOpen = true, bool EditingOpen = true, int AuxiliaryMode = 0, int ToolMode = 0,
@@ -45,9 +45,11 @@ public sealed record ColorStudioSessionDocument(IReadOnlyList<ColorStudioSession
         }).ToArray();
         foreach (var target in targets)
         {
-            target.Film?.Validate();
+            target.Film?.Validate();target.RawDefinition?.Validate();
+            if(target.RawDefinition is not null && (target.Look is not null || target.Stack is not null || target.Film is not null))throw new InvalidDataException("专业 RAW 定义不能混合旧调整栈。");
+            if(target.EditVersions?.FirstOrDefault(v=>v.Id==target.ActiveEditVersionId) is {} selected && selected.RawDefinition!=target.RawDefinition)throw new InvalidDataException("会话活动版本与 RAW 定义不一致。");
             if (target.EditVersions is { } versions && (versions.Select(v=>v.Id).Distinct().Count()!=versions.Count || versions.Any(v=>v.Id==Guid.Empty || v.LibraryId!=target.LibraryId || v.AssetId!=target.AssetId || v.SourceHash!=target.SourceHash) || (target.ActiveEditVersionId is Guid activeVersion && !versions.Any(v=>v.Id==activeVersion)))) throw new InvalidDataException("编辑版本身份无效。");
-            foreach(var version in target.EditVersions ?? []) { if(string.IsNullOrWhiteSpace(version.Name) || !Enum.IsDefined(version.Engine) || !Enum.IsDefined(version.Mode))throw new InvalidDataException("编辑版本参数无效。");version.Stack?.Normalize(); version.Film?.Validate(); }
+            foreach(var version in target.EditVersions ?? []) { if(string.IsNullOrWhiteSpace(version.Name) || !Enum.IsDefined(version.Engine) || !Enum.IsDefined(version.Mode))throw new InvalidDataException("编辑版本参数无效。");version.Stack?.Normalize(); version.Film?.Validate();version.RawDefinition?.Validate();if(version.RawDefinition is not null && (version.Look is not null || version.Stack is not null || version.Film is not null))throw new InvalidDataException("专业 RAW 版本包含旧调整。"); }
         }
         return this with { Targets = targets, MinimumRating = Math.Clamp(MinimumRating, 0, 5), Layout = Layout?.Normalize() };
     }

@@ -2,7 +2,59 @@ using System.Text.Json;
 using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using Microsoft.Data.Sqlite;
 var mode=args[0];var root=args[1];Directory.CreateDirectory(root);var db=Path.Combine(root,"library.db");
-if(mode=="undo-prepare")
+if(mode=="raw-perf")
+{
+    var input=args[2];var copy=Path.Combine(root,"input"+Path.GetExtension(input));File.Copy(input,copy);var rows=new List<object>();
+    void Measure(string stage,long ms){var p=System.Diagnostics.Process.GetCurrentProcess();p.Refresh();rows.Add(new{stage,ms,workingSet=p.WorkingSet64,peakWorkingSet=p.PeakWorkingSet64,managed=GC.GetTotalMemory(false)});}
+    var definition=new RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition();var watch=System.Diagnostics.Stopwatch.StartNew();
+    var master=await new RAWSelectionAssistant.Core.Services.RawToJpeg.ProfessionalRawDecoder().DecodeAsync(copy,definition);Measure("Decode",watch.ElapsedMilliseconds);
+    for(var i=0;i<4;i++){watch.Restart();var preview=RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.Render(master,definition with{ExposureEv=i*.25},1600);Measure("Preview1600-"+i,watch.ElapsedMilliseconds);GC.KeepAlive(preview);}
+    watch.Restart();var full=RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.Render(master,definition);Measure("RenderFull",watch.ElapsedMilliseconds);
+    watch.Restart();await RAWSelectionAssistant.Core.Services.Export.AtomicTiffWriter.WriteRgb48Async(Path.Combine(root,"output.tif"),full);Measure("WriteTiff16",watch.ElapsedMilliseconds);
+    await File.WriteAllTextAsync(Path.Combine(root,"performance.json"),JsonSerializer.Serialize(new{model=master.Contract.Model,master.Image.Width,master.Image.Height,rows},new JsonSerializerOptions{WriteIndented=true}));return;
+}if(mode=="raw-corpus")
+{
+    var input=args[2];var results=new List<object>();var decoder=new RAWSelectionAssistant.Core.Services.RawToJpeg.ProfessionalRawDecoder();var ordinal=0;
+    foreach(var file in Directory.EnumerateFiles(input).Where(p=>RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline.IsRaw(p)).Order())
+    {
+        var alias="RAW-"+(++ordinal).ToString("00");var copy=Path.Combine(root,alias+Path.GetExtension(file));File.Copy(file,copy,false);
+        var definition=new RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition();var watch=System.Diagnostics.Stopwatch.StartNew();
+        try
+        {
+            var master=await decoder.DecodeAsync(copy,definition);var decodeMs=watch.ElapsedMilliseconds;watch.Restart();
+            var preview=RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.Render(master,definition,1600);var previewMs=watch.ElapsedMilliseconds;watch.Restart();
+            var full=RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.Render(master,definition);var fullMs=watch.ElapsedMilliseconds;watch.Restart();
+            var output=Path.Combine(root,alias+".tif");await RAWSelectionAssistant.Core.Services.Export.AtomicTiffWriter.WriteRgb48Async(output,full);var exportMs=watch.ElapsedMilliseconds;
+            int previewError=0,readBackError=0;double evError=0;
+            for(var y=0;y<preview.Height;y++)for(var x=0;x<preview.Width;x++)for(var c=0;c<3;c++)
+            {var sx=(int)((x+.5)*full.Width/preview.Width);var sy=(int)((y+.5)*full.Height/preview.Height);var p=preview.Rgb32.Span[(y*preview.Width+x)*3+c];var f=full.Rgb32.Span[(sy*full.Width+sx)*3+c];if(p!=f)previewError++;}
+            using(var stream=File.OpenRead(output)){var back=RAWSelectionAssistant.Core.Services.Export.TiffReadBack.Read(stream);for(var i=0;i<back.Rgb48Samples.Length;i++)readBackError=Math.Max(readBackError,Math.Abs(back.Rgb48Samples.Span[i]-(int)Math.Round(full.Rgb32.Span[i]*65535)));}
+            for(var i=0;i<master.Image.Rgb32.Length;i+=3003){var v=master.Image.Rgb32.Span[i];evError=Math.Max(evError,Math.Abs(RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.ApplyExposure(new(v,v,v),1).X-2d*v));}
+            watch.Restart();var gains=definition with{WhiteBalance="CameraGains",RedGain=1.25};var changed=await decoder.DecodeAsync(copy,gains);var wbDecodeMs=watch.ElapsedMilliseconds;var differences=0;
+            for(var i=0;i<master.Image.Rgb32.Length;i+=3003)if(master.Image.Rgb32.Span[i]!=changed.Image.Rgb32.Span[i])differences++;
+            watch.Restart();var reopened=await decoder.DecodeAsync(copy,definition);var reopenMs=watch.ElapsedMilliseconds;
+            var reopenEqual=master.Image.Rgb32.Span.SequenceEqual(reopened.Image.Rgb32.Span);
+            var jpeg=Path.ChangeExtension(file,".JPG");string? pairedJpegHash=null;bool? jpegRejected=null;
+            if(File.Exists(jpeg)){var jpegCopy=Path.Combine(root,alias+".JPG");File.Copy(jpeg,jpegCopy);pairedJpegHash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(await File.ReadAllBytesAsync(jpeg)));try{await decoder.DecodeAsync(jpegCopy,definition);jpegRejected=false;}catch(NotSupportedException){jpegRejected=true;}}
+            var hash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(await File.ReadAllBytesAsync(file)));
+            results.Add(new{alias,master.Contract,master.Image.Width,master.Image.Height,decodeMs,previewMs,fullMs,exportMs,wbDecodeMs,reopenMs,sourceUnchanged=hash==master.Contract.SourceSha256,peakWorkingSet=System.Diagnostics.Process.GetCurrentProcess().PeakWorkingSet64,previewError,readBackError,evError,reopenEqual,wbChangedSamples=differences,normalizedGains=changed.Contract.NormalizedWhiteBalance,pairedJpegHash,jpegRejected,outputHash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(await File.ReadAllBytesAsync(output)))});
+            Console.WriteLine(alias+" "+master.Contract.Model+" "+master.Image.Width+"x"+master.Image.Height+" previewErrors="+previewError+" wbChanged="+differences+" reopen="+reopenEqual);
+        }
+        catch(Exception e){results.Add(new{alias,error=e.GetType().Name,message=e.Message});Console.WriteLine(alias+" FAILED "+e.Message);}
+        GC.Collect();GC.WaitForPendingFinalizers();
+    }
+    await File.WriteAllTextAsync(Path.Combine(root,"results.json"),JsonSerializer.Serialize(results,new JsonSerializerOptions{WriteIndented=true}));return;
+}if(mode=="raw-identify")
+{
+    var candidates=Directory.EnumerateFiles(args[2],"*",SearchOption.AllDirectories).Where(p=>RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline.IsRaw(p));var rows=new List<object>();var index=0;
+    foreach(var file in candidates.Take(1000))try{using var context=Sdcb.LibRaw.RawContext.OpenFile(file);rows.Add(new{alias="AVAILABLE-"+(++index),make=context.ImageParams.Make,model=context.ImageParams.Model,path=file});}catch{};
+    await File.WriteAllTextAsync(Path.Combine(root,"inventory-private.json"),JsonSerializer.Serialize(rows));Console.WriteLine("identified="+rows.Count);return;
+}if(mode=="raw-api")
+{
+    if(args.Length>2){using var context=Sdcb.LibRaw.RawContext.OpenFile(args[2]);Console.WriteLine("LibRaw "+Sdcb.LibRaw.RawContext.Version);Console.WriteLine(JsonSerializer.Serialize(Sdcb.LibRaw.OutputParams.FromLibRaw(context.UnsafeGetHandle())));}
+    foreach(var type in new[]{typeof(Sdcb.LibRaw.OutputParams),typeof(Sdcb.LibRaw.RawContext),typeof(Sdcb.LibRaw.Natives.LibRawColorData)}){Console.WriteLine(type.FullName);foreach(var property in type.GetProperties())Console.WriteLine(property.Name+":"+property.PropertyType);foreach(var field in type.GetFields())Console.WriteLine(field.Name+":"+field.FieldType);}
+    Console.WriteLine(string.Join(",",Enum.GetNames<Sdcb.LibRaw.LibRawColorSpace>()));return;
+}if(mode=="undo-prepare")
 {
     var file=Path.Combine(root,"fixture.bin");await File.WriteAllBytesAsync(file,[1]);await using var repo=new SqliteAssetLibraryRepository(db);var id=(await repo.ImportWithIdentitiesAsync([new(file)])).Items.Single().AssetId;var annotations=new PhotographerAnnotationStore(new AssetLibraryDatabase(db));var before=await annotations.ReadAsync(id);var written=await annotations.CompareExchangeAsync(before,before with{Rating=4});await File.WriteAllTextAsync(Path.Combine(root,"undo.json"),JsonSerializer.Serialize(written.UndoToken));await File.WriteAllTextAsync(Path.Combine(root,"id"),id.ToString());return;
 }

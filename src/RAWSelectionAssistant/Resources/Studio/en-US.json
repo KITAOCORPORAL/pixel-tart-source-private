@@ -531,5 +531,11 @@
   "SelectVersion": "Select version",
   "UndoAnnotation": "Undo annotation",
   "RedoAnnotation": "Redo annotation",
-  "CopyVersionLibrary": "Copy to library"
+  "CopyVersionLibrary": "Copy to library",
+  "NewRawVersion": "New RAW processing version",
+  "RawExposure": "Exposure EV (-10 to +10)",
+  "RawCameraWb": "Use camera white balance",
+  "RawGains": "Camera gain factors R / G / B (0.125–8), not Kelvin",
+  "RawApply": "Apply RAW definition",
+  "RawUnsupported": "PV4: HDR, matching, film and spatial tools are not adapted and are disabled. Linear decode can already contain clipped highlights."
 }
