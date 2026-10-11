@@ -150,7 +150,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                         var bitmap = await Editor.ProcessForExportAsync(item.Item.Path, item.Look, item.Film, _exportCancellation.Token, item.Stack);
                         await Task.Run(() => { var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap)); using var file = File.Create(path); encoder.Save(file); }, _exportCancellation.Token);
                     }
-                    await StudioExportReceiptStore.WriteAsync(path,new(Guid.NewGuid(),item.Item.LibraryId,item.Item.AssetId,item.Item.SourceHash,item.VersionId,item.RawDefinition?.ProcessingVersion ?? item.Stack?.ProcessingVersion??1,"Publishing intermediate",path,"",DateTimeOffset.UtcNow,item.RawDefinition is null ? null : new ExportRecipeSnapshot(1,".tif",16,"Original",item.Item.PixelWidth,item.Item.PixelHeight,null,null,"None","sRGB","TIFF orientation preserved","Not applied",RawDefinition:item.RawDefinition,RawInput:item.RawInput)),_exportCancellation.Token);
+                    await StudioExportReceiptStore.WriteAsync(path,new(Guid.NewGuid(),item.Item.LibraryId,item.Item.AssetId,item.Item.SourceHash,item.VersionId,item.RawDefinition?.ProcessingVersion ?? item.Stack?.ProcessingVersion??1,"Publishing intermediate",path,"",DateTimeOffset.UtcNow,item.RawDefinition is null ? null : new ExportRecipeSnapshot(1,".tif",16,"Original",item.Item.PixelWidth,item.Item.PixelHeight,null,null,"None","sRGB","TIFF orientation preserved","Not applied",RawDefinition:item.RawDefinition,RawInput:item.RawInput,OutputValidation:System.Text.Json.JsonSerializer.Serialize(item.Item.LastProfessionalOutput))),_exportCancellation.Token);
                     paths.Add(path); SetExportStatus("PrepareProgress", paths.Count + failures.Count, items.Length);
                 }
                 catch (Exception error) when (error is InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
@@ -185,7 +185,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         InitializeRangeSelection();
         BuildColorSpaceModelCommand = new AsyncRelayCommand(_ => BuildColorSpaceModelAsync(), _ => Editor.SourceImage is not null);
         ChooseTargetCommand = new AsyncRelayCommand(_ => ChooseTargetAsync());
-        StopProcessingCommand = new RelayCommand(_ => Editor.StopProcessing(), _ => Editor.IsBusy);
+        StopProcessingCommand = new RelayCommand(_ => {Editor.StopProcessing();_activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);InvalidateProfessionalPreview();}, _ => Editor.IsBusy || IsLoading || !ProfessionalDetailWork.IsCompleted);
         CopyAdjustmentsCommand = new RelayCommand(_ => CopyCurrentAdjustments(), _ => ActiveTarget is not null && !IsLoading && !IsProfessionalRaw);
         ApplyAdjustmentsCommand = new RelayCommand(_ => ApplyCopiedAdjustments(), _ => HasCopiedAdjustments && SelectedTargets.Any() && !IsLoading);
         PreparePublishingCommand = new AsyncRelayCommand(_ => PreparePublishingAsync(), _ => OpenPublishing is not null && SelectedTargets.Any() && !IsExporting);
@@ -604,9 +604,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                 var master=item.LinearRawMaster??await _professionalDecoder.DecodeAsync(item.Path,definition,token);
                 if(!string.Equals(master.Contract.SourceSha256,item.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("RAW 缩略图源身份改变。");
                 item.LinearRawMaster=master;item.RawInput=master.Contract;
-                var rendered=await Task.Run(()=>ProfessionalRawPipeline.Render(master,definition,320,token),token);
+                var rendered=await Task.Run(()=>ProfessionalRawPipeline.RenderPreview(master,definition,320,token),token);
                 item.Thumbnail=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(rendered.ToVisualRgb24()),rendered.Orientation);
                 item.PixelWidth=master.Image.Width;item.PixelHeight=master.Image.Height;item.Status=ReferenceTargetStatus.Adjusted;
+                if(!ReferenceEquals(item,ActiveTarget))item.LinearRawMaster=null;
                 return;
             }
             if (RawMatchTiff16ProductPipeline.IsRaw(item.Path))
@@ -626,11 +627,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             ScheduleTargetThumbnail(item);
         }
         catch (OperationCanceledException) { }
-        catch (Exception ex) when (ex is InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException) { item.Status = ReferenceTargetStatus.Failed; item.Error = ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "缩略图无法读取"; }
+        catch (Exception ex) when (ex is System.Runtime.InteropServices.COMException or InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException) { item.Status = ReferenceTargetStatus.Failed; item.Error = ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "缩略图无法读取"; }
     }
 
     private async Task ActivateTargetAsync(ReferenceTargetItem target)
     {
+        InvalidateProfessionalPreview();foreach(var other in Targets.Where(x=>!ReferenceEquals(x,target)))other.LinearRawMaster=null;if(target.RawDefinition is null)target.LinearRawMaster=null;
         var revision = Interlocked.Increment(ref _activationRevision);
         _activationCancellation?.Cancel(); _activationCancellation?.Dispose();
         _activationCancellation = new CancellationTokenSource();
@@ -640,7 +642,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         try
         {
             Editor.StopProcessing();
-            Interlocked.Increment(ref _loadingActivations); IsLoading = true; StatusText = "正在载入活动预览…";
+            Interlocked.Increment(ref _loadingActivations); IsLoading = true; StopProcessingCommand.RaiseCanExecuteChanged();StatusText = "正在载入活动预览…";
             if (!await ValidateTargetIdentityAsync(target, token)) { target.Status = ReferenceTargetStatus.Failed; FailedTarget = target; StatusText = target.Error ?? "素材身份不可用"; RetryFailedTargetCommand.RaiseCanExecuteChanged(); return; }
             if(target.RawDefinition is not null)
             {
@@ -676,9 +678,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             if (ReferenceEquals(FailedTarget, target)) FailedTarget = null;
         }
         catch (OperationCanceledException) { }
-        catch (Exception ex) when (ex is InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
+        catch (Exception ex) when (ex is System.Runtime.InteropServices.COMException or InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
         { if(revision!=Volatile.Read(ref _activationRevision))return; target.Status = ReferenceTargetStatus.Failed; target.Error = target.RawDefinition is not null ? "专业 RAW 失败："+ex.Message : ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "照片无法读取"; if (revision == Volatile.Read(ref _activationRevision)) { FailedTarget = target; StatusText = target.Error + "；现有色彩方案保持不变。请重试。"; } }
-        finally { IsLoading = Interlocked.Decrement(ref _loadingActivations) > 0; }
+        finally { IsLoading = Interlocked.Decrement(ref _loadingActivations) > 0; StopProcessingCommand.RaiseCanExecuteChanged(); }
     }
 
     private async Task<BitmapSource> LoadSourcePreviewAsync(string path, CancellationToken token)
@@ -705,6 +707,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, OnStudioLanguageChanged, nameof(StudioLocalizationService.Language));
         CancelRangeSelection();
         _analysisCancellation?.Cancel(); _analysisCache.Clear();
+        InvalidateProfessionalPreview();_professionalDetailCancellation?.Dispose();foreach(var target in Targets){target.LinearRawMaster=null;target.RawMaster=null;}
         _activationCancellation?.Cancel(); _activationCancellation?.Dispose(); _sourceCache.Clear();
         foreach (var target in _observedTargets)
         {
@@ -798,14 +801,15 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                         await Task.Run(() => StudioQuickExport.Encode(processed, item.Path, temp, format, _exportCancellation.Token), _exportCancellation.Token);
 
                     }
-                    var encoded=StudioQuickExport.Load(temp);
+                    var encoded=frozenItem.RawDefinition is null ? StudioQuickExport.Load(temp) : null;
+                    var actual=frozenItem.RawDefinition is null?null:item.LastProfessionalOutput;
                     var versionId = frozenItem.VersionId;
-                    await StudioExportReceiptStore.CommitOutputAsync(temp,output,new(Guid.NewGuid(),frozenItem.LibraryId,frozenItem.AssetId,frozenItem.SourceHash,versionId,frozenItem.RawDefinition?.ProcessingVersion ?? frozenItem.Stack?.ProcessingVersion ?? 1,format.ToString(),output,"",DateTimeOffset.UtcNow, new ExportRecipeSnapshot(1,Path.GetExtension(output),encoded.Format.BitsPerPixel>32?16:8,"Original",encoded.PixelWidth,encoded.PixelHeight,null,Path.GetExtension(output)==".jpg"?95:null,Path.GetExtension(output)==".tif"?(isRaw?"None":"Zip"):"Codec default","sRGB",(isRaw && Path.GetExtension(output)==".tif" ? "TIFF source orientation preserved; other metadata discarded" : "Orientation normalized; source metadata discarded"),"Not applied",AdjustmentFingerprint:ProcessingFingerprint(frozenItem.Look,frozenItem.Stack,frozenItem.Film,frozenItem.RawDefinition),RawDefinition:frozenItem.RawDefinition,RawInput:frozenItem.RawInput)),_exportCancellation.Token);
+                    await StudioExportReceiptStore.CommitOutputAsync(temp,output,new(Guid.NewGuid(),frozenItem.LibraryId,frozenItem.AssetId,frozenItem.SourceHash,versionId,frozenItem.RawDefinition?.ProcessingVersion ?? frozenItem.Stack?.ProcessingVersion ?? 1,format.ToString(),output,"",DateTimeOffset.UtcNow, new ExportRecipeSnapshot(1,Path.GetExtension(output),actual?.BitDepth ?? (encoded!.Format.BitsPerPixel>32?16:8),"Original",actual?.Width ?? encoded!.PixelWidth,actual?.Height ?? encoded!.PixelHeight,null,Path.GetExtension(output)==".jpg"?95:null,Path.GetExtension(output)==".tif"?(isRaw?"None":"Zip"):actual is not null && Path.GetExtension(output)==".jpg"?"JPEG 4:4:4":"Codec default","sRGB",(isRaw && Path.GetExtension(output)==".tif" ? "TIFF source orientation preserved; other metadata discarded" : "Orientation normalized; source metadata discarded"),"Not applied",AdjustmentFingerprint:ProcessingFingerprint(frozenItem.Look,frozenItem.Stack,frozenItem.Film,frozenItem.RawDefinition),RawDefinition:frozenItem.RawDefinition,RawInput:frozenItem.RawInput,OutputValidation:actual is null?null:System.Text.Json.JsonSerializer.Serialize(actual))),_exportCancellation.Token);
                     item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported;
                 }
                 catch (OperationCanceledException) { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Cancelled; item.Status = ReferenceTargetStatus.Pending; throw; }
-                catch (Exception ex) when (ex is InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
-                { TryDelete(temp); item.Error = File.Exists(output+".kitao-export.pending.json") ? "成片已完成，清单待恢复；重试只验证并补清单" : ex is NotSupportedException ? "当前图像或调整不支持此导出格式" : ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "导出失败，源文件未修改"; item.ExportStatus = File.Exists(output+".kitao-export.pending.json")?ReferenceExportStatus.Partial:ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; failed.Add(item.FileName); }
+                catch (Exception ex) when (ex is System.Runtime.InteropServices.COMException or InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
+                { TryDelete(temp); item.Error = frozenItem.RawDefinition is not null ? "PV4 导出失败："+ex.Message : File.Exists(output+".kitao-export.pending.json") ? "成片已完成，清单待恢复；重试只验证并补清单" : ex is NotSupportedException ? "当前图像或调整不支持此导出格式" : ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "导出失败，源文件未修改"; item.ExportStatus = File.Exists(output+".kitao-export.pending.json")?ReferenceExportStatus.Partial:ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; failed.Add(item.FileName); }
                 ExportCompleted++; ExportStatus = $"{ExportCompleted} / {ExportTotal} · {directory} · {Path.GetExtension(output).ToUpperInvariant()}";
             }
             ExportFailureSummary = failed.Count == 0 ? "" : StudioLocalizationService.Current.Format("ExportFailures", failed.Count, string.Join(", ", frozen.Where(entry => entry.Item.ExportStatus is ReferenceExportStatus.Failed or ReferenceExportStatus.Partial).Select(entry => entry.Item.FileName + " (" + StudioLocalizationService.Current[entry.Item.Error ?? ""] + ")")));
@@ -926,6 +930,7 @@ public sealed class ReferenceTargetItem : ObservableObject
     public MatchV4ExecutionMode ExecutionModeSnapshot { get => _executionModeSnapshot; set => SetProperty(ref _executionModeSnapshot, value); }
     public string? OutputPath { get; set; }
     /// <summary>Session-owned RAW master shared by thumbnail, preview, Match and TIFF export.</summary>
+    public ProfessionalOutputInspection? LastProfessionalOutput {get;set;}
     public ProfessionalRawDefinition? RawDefinition {get;set;}
     public ProfessionalRawContract? RawInput {get;set;}
     public ProfessionalRawMaster? LinearRawMaster {get;set;}

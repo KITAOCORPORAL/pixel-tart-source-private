@@ -38,11 +38,28 @@ public static class TiffExport
         if (options.BitDepth != TiffBitDepth.Sixteen) throw new ArgumentException("High bit-depth export requires 16-bit TIFF.", nameof(options));
         if (options.IccProfile.Length > 16 * 1024 * 1024) throw new ArgumentOutOfRangeException(nameof(options), "ICC profile is too large.");
         if (options.IccProfile.Length > 0 && !IsValidIcc(options.IccProfile.Span)) throw new ArgumentException("ICC profile is invalid.", nameof(options));
-        var bytes = new byte[pixels.Rgb32.Length * 2]; var samples = pixels.ToRgb48();
-        Buffer.BlockCopy(samples, 0, bytes, 0, bytes.Length);
-        return WriteRgb16Samples(destination, pixels.Width, pixels.Height, bytes, options, token);
+        return WriteRgb48Rows(destination,pixels.Width,pixels.Height,(y,row)=>
+        {
+            var input=pixels.Rgb32.Span.Slice(y*pixels.Width*3,pixels.Width*3);var bytes=row.Span;
+            for(var i=0;i<input.Length;i++)System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(bytes[(i*2)..],(ushort)Math.Clamp(Math.Round(input[i]*65535),0,65535));
+        },options,token);
     }
 
+    public static TiffExportResult WriteRgb48Rows(Stream destination,int width,int height,Action<int,Memory<byte>> fillRow,TiffExportOptions? options=null,CancellationToken token=default)
+    {
+        options??=new();ValidateOptions(options);
+        if(width<=0||height<=0||options.BitDepth!=TiffBitDepth.Sixteen||!destination.CanWrite)throw new ArgumentException("Invalid RGB16 dimensions or output.");
+        if(options.IccProfile.Length>16*1024*1024||(options.IccProfile.Length>0&&!IsValidIcc(options.IccProfile.Span)))throw new ArgumentException("Invalid ICC profile.");
+        using var writer=new BinaryWriter(destination,System.Text.Encoding.ASCII,true);
+        var entries=BuildEntries(width,height,options,out var bitsOffset,out var xResolutionOffset,out var yResolutionOffset,out var softwareOffset,out var iccOffset,out var pixelOffset);
+        writer.Write((byte)'I');writer.Write((byte)'I');writer.Write((ushort)42);writer.Write((uint)8);writer.Write((ushort)entries.Count);
+        foreach(var entry in entries){writer.Write(entry.Tag);writer.Write(entry.Type);writer.Write(entry.Count);writer.Write(entry.InlineValue);}writer.Write((uint)0);
+        PadTo(writer,bitsOffset);writer.Write((ushort)16);writer.Write((ushort)16);writer.Write((ushort)16);
+        PadTo(writer,xResolutionOffset);writer.Write((uint)options.Dpi);writer.Write((uint)1);PadTo(writer,yResolutionOffset);writer.Write((uint)options.Dpi);writer.Write((uint)1);
+        PadTo(writer,softwareOffset);writer.Write(System.Text.Encoding.ASCII.GetBytes(options.Software+"\0"));if(iccOffset>0){PadTo(writer,iccOffset);writer.Write(options.IccProfile.Span);}PadTo(writer,pixelOffset);
+        var row=new byte[checked(width*6)];for(var y=0;y<height;y++){token.ThrowIfCancellationRequested();fillRow(y,row);writer.Write(row);}writer.Flush();
+        return new(width,height,TiffBitDepth.Sixteen,TiffCompression.None,destination.Position,options.IccProfile.Length>0);
+    }
     public static TiffExportResult WriteRgb24(Stream destination, VisualPixelBuffer pixels, TiffExportOptions? options = null,
         CancellationToken token = default)
     {
@@ -53,7 +70,7 @@ public static class TiffExport
         if (options.IccProfile.Length > 16 * 1024 * 1024) throw new ArgumentOutOfRangeException(nameof(options), "ICC profile is too large.");
         if (options.IccProfile.Length > 0 && !IsValidIcc(options.IccProfile.Span)) throw new ArgumentException("ICC profile is invalid.", nameof(options));
         using var writer = new BinaryWriter(destination, System.Text.Encoding.ASCII, leaveOpen: true);
-        var entries = BuildEntries(pixels, options, out var bitsOffset, out var xResolutionOffset, out var yResolutionOffset, out var softwareOffset, out var iccOffset, out var pixelOffset);
+        var entries = BuildEntries(pixels.Width, pixels.Height, options, out var bitsOffset, out var xResolutionOffset, out var yResolutionOffset, out var softwareOffset, out var iccOffset, out var pixelOffset);
         writer.Write((byte)'I'); writer.Write((byte)'I'); writer.Write((ushort)42); writer.Write((uint)8);
         writer.Write((ushort)entries.Count);
         foreach (var entry in entries) { writer.Write(entry.Tag); writer.Write(entry.Type); writer.Write(entry.Count); writer.Write(entry.InlineValue); }
@@ -75,28 +92,17 @@ public static class TiffExport
         writer.Flush(); return new(pixels.Width, pixels.Height, options.BitDepth, TiffCompression.None, destination.Position, options.IccProfile.Length > 0);
     }
 
-    private static TiffExportResult WriteRgb16Samples(Stream destination, int width, int height, byte[] samples, TiffExportOptions options, CancellationToken token)
-    {
-        using var writer = new BinaryWriter(destination, System.Text.Encoding.ASCII, leaveOpen: true);
-        var entries = BuildEntries(new VisualPixelBuffer(width, height, new byte[width * height * 3]), options, out var bitsOffset, out var xResolutionOffset, out var yResolutionOffset, out var softwareOffset, out var iccOffset, out var pixelOffset);
-        writer.Write((byte)'I'); writer.Write((byte)'I'); writer.Write((ushort)42); writer.Write((uint)8); writer.Write((ushort)entries.Count);
-        foreach (var entry in entries) { writer.Write(entry.Tag); writer.Write(entry.Type); writer.Write(entry.Count); writer.Write(entry.InlineValue); }
-        writer.Write((uint)0); PadTo(writer, bitsOffset); writer.Write((ushort)16); writer.Write((ushort)16); writer.Write((ushort)16); PadTo(writer, xResolutionOffset); writer.Write((uint)options.Dpi); writer.Write((uint)1); PadTo(writer, yResolutionOffset); writer.Write((uint)options.Dpi); writer.Write((uint)1); PadTo(writer, softwareOffset); writer.Write(System.Text.Encoding.ASCII.GetBytes(options.Software + "\0")); if (iccOffset > 0) { PadTo(writer, iccOffset); writer.Write(options.IccProfile.Span); } PadTo(writer, pixelOffset);
-        for (var i = 0; i < samples.Length; i++) { if ((i & 4095) == 0) token.ThrowIfCancellationRequested(); writer.Write(samples[i]); }
-        writer.Flush(); return new(width, height, TiffBitDepth.Sixteen, TiffCompression.None, destination.Position, options.IccProfile.Length > 0);
-    }
-
     private sealed record Entry(ushort Tag, ushort Type, uint Count, uint InlineValue);
 
-    private static List<Entry> BuildEntries(VisualPixelBuffer pixels, TiffExportOptions options, out int bitsOffset, out int xResolutionOffset, out int yResolutionOffset, out int softwareOffset, out int iccOffset, out int pixelOffset)
+    private static List<Entry> BuildEntries(int width,int height, TiffExportOptions options, out int bitsOffset, out int xResolutionOffset, out int yResolutionOffset, out int softwareOffset, out int iccOffset, out int pixelOffset)
     {
         var entryCount = options.IccProfile.Length == 0 ? 13 : 14; var baseOffset = 8 + 2 + entryCount * 12 + 4; bitsOffset = baseOffset; xResolutionOffset = bitsOffset + 6; yResolutionOffset = xResolutionOffset + 8; softwareOffset = yResolutionOffset + 8; var softwareLength = System.Text.Encoding.ASCII.GetByteCount(options.Software) + 1; iccOffset = options.IccProfile.Length == 0 ? 0 : softwareOffset + softwareLength; var dataEnd = (iccOffset == 0 ? softwareOffset + softwareLength : iccOffset + options.IccProfile.Length); pixelOffset = dataEnd;
         var bits = options.BitDepth == TiffBitDepth.Eight ? 8u : 16u; var bytesPerPixel = options.BitDepth == TiffBitDepth.Eight ? 3u : 6u;
         var entries = new List<Entry>
         {
-            new(256, 4, 1, (uint)pixels.Width), new(257, 4, 1, (uint)pixels.Height), new(258, 3, 3, (uint)bitsOffset),
+            new(256, 4, 1, (uint)width), new(257, 4, 1, (uint)height), new(258, 3, 3, (uint)bitsOffset),
             new(259, 3, 1, 1), new(262, 3, 1, 2), new(273, 4, 1, (uint)pixelOffset), new(274, 3, 1, options.Orientation), new(277, 3, 1, 3),
-            new(278, 4, 1, (uint)pixels.Height), new(279, 4, 1, checked((uint)(pixels.PixelCount * bytesPerPixel))), new(282, 5, 1, (uint)xResolutionOffset),
+            new(278, 4, 1, (uint)height), new(279, 4, 1, checked((uint)((long)width * height * bytesPerPixel))), new(282, 5, 1, (uint)xResolutionOffset),
             new(283, 5, 1, (uint)yResolutionOffset), new(305, 2, (uint)softwareLength, (uint)softwareOffset)
         };
         if (options.IccProfile.Length > 0) entries.Add(new(34675, 7, (uint)options.IccProfile.Length, (uint)iccOffset));

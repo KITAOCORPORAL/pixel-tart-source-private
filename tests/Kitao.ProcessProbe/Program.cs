@@ -2,6 +2,39 @@ using System.Text.Json;
 using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using Microsoft.Data.Sqlite;
 var mode=args[0];var root=args[1];Directory.CreateDirectory(root);var db=Path.Combine(root,"library.db");
+if(mode=="raw-early-signal")
+{
+    var input=args[2];using var context=Sdcb.LibRaw.RawContext.OpenFile(input);context.Unpack();
+    var offset=checked((int)System.Runtime.InteropServices.Marshal.OffsetOf<Sdcb.LibRaw.Natives.LibRawData>(nameof(Sdcb.LibRaw.Natives.LibRawData.RawData)));
+    var raw=System.Runtime.InteropServices.Marshal.PtrToStructure<Sdcb.LibRaw.Natives.LibRawRawData>(IntPtr.Add(context.UnsafeGetHandle(),offset));
+    var sample=new byte[512];if(raw.RawImage!=IntPtr.Zero)System.Runtime.InteropServices.Marshal.Copy(raw.RawImage,sample,0,sample.Length);
+    await File.WriteAllTextAsync(Path.Combine(root,"early-signal.json"),JsonSerializer.Serialize(new{decoder=Sdcb.LibRaw.RawContext.Version,make=context.ImageParams.Make,model=context.ImageParams.Model,rawWidth=context.RawWidth,rawHeight=context.RawHeight,hasMosaic=raw.RawImage!=IntPtr.Zero,hasFloat=raw.FloatImage!=IntPtr.Zero,hasThreeColor=raw.Color3Image!=IntPtr.Zero,hasFourColor=raw.Color4Image!=IntPtr.Zero,black=raw.Color.Black,white=raw.Color.Maximum,rawBps=raw.Color.RawBps,filters=raw.IParams.Filters,earlySampleSha256=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(sample)),claim="Read-only pre-DcrawProcess pointer availability; not reconstruction or recovered highlight"},new JsonSerializerOptions{WriteIndented=true}));return;
+}
+if(mode is "raw-stage-basic" or "raw-stage-stream")
+{
+    var input=args[2];var copy=Path.Combine(root,"input"+Path.GetExtension(input));File.Copy(input,copy);var rows=new List<object>();var watch=System.Diagnostics.Stopwatch.StartNew();
+    void Record(string stage){var p=System.Diagnostics.Process.GetCurrentProcess();p.Refresh();rows.Add(new{stage,ms=watch.ElapsedMilliseconds,workingSet=p.WorkingSet64,peakWorkingSet=p.PeakWorkingSet64,managed=GC.GetTotalMemory(false)});watch.Restart();}
+    var definition=new RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition();
+    var master=await new RAWSelectionAssistant.Core.Services.RawToJpeg.ProfessionalRawDecoder(Record).DecodeAsync(copy,definition);Record("DecodeAndMaster");var output=Path.Combine(root,"output.tif");
+    if(mode=="raw-stage-basic")
+    {
+        var full=RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.Render(master,definition);Record("FullRender");
+        using(var file=new FileStream(output,FileMode.CreateNew,FileAccess.Write,FileShare.None)){RAWSelectionAssistant.Core.Services.Export.TiffExport.WriteRgb48(file,full);file.Flush(true);}Record("Encode");
+        using(var file=File.OpenRead(output)){var back=RAWSelectionAssistant.Core.Services.Export.TiffReadBack.Read(file);GC.KeepAlive(back);}Record("WholeFileValidation");GC.KeepAlive(full);
+    }
+    else
+    {
+        long rowTicks=0;var encodeWatch=System.Diagnostics.Stopwatch.StartNew();
+        await RAWSelectionAssistant.Core.Services.Export.AtomicTiffWriter.WriteRowsAsync(output,master.Image.Width,master.Image.Height,(y,row)=>{var t=System.Diagnostics.Stopwatch.GetTimestamp();RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.FillRgb16Row(master,definition,y,row);rowTicks+=System.Diagnostics.Stopwatch.GetTimestamp()-t;},stage:Record);
+        rows.Add(new{stage="RenderRowAggregate",ms=(long)(rowTicks*1000d/System.Diagnostics.Stopwatch.Frequency),scope="CPU render time accumulated inside render+encode; not extra elapsed time"});
+        Record("AtomicCommit");
+        var timings=new List<object>();for(var i=0;i<3;i++){var preview=RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderPreview(master,definition with{ExposureEv=i*.25},1600);Record("AreaPreview-"+i);GC.KeepAlive(preview);}
+        for(var i=0;i<3;i++){var tile=RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.RenderRegion(master,definition,100+i*100,200,512,512);Record("NativeTile-"+i);GC.KeepAlive(tile);}
+    }
+    string hash;using(var file=File.OpenRead(output)){hash=Convert.ToHexString(await System.Security.Cryptography.SHA256.HashDataAsync(file));}Record("StreamingHash");
+    using var original=File.OpenRead(input);var unchanged=Convert.ToHexString(await System.Security.Cryptography.SHA256.HashDataAsync(original))==master.Contract.SourceSha256;
+    await File.WriteAllTextAsync(Path.Combine(root,"stages.json"),JsonSerializer.Serialize(new{mode,master.Contract.Model,master.Image.Width,master.Image.Height,sourceUnchanged=unchanged,outputSha256=hash,rows},new JsonSerializerOptions{WriteIndented=true}));return;
+}
 if(mode=="raw-perf")
 {
     var input=args[2];var copy=Path.Combine(root,"input"+Path.GetExtension(input));File.Copy(input,copy);var rows=new List<object>();
@@ -74,7 +107,16 @@ if(mode.StartsWith("version-"))
     var catalogExpected=JsonSerializer.Deserialize<RAWSelectionAssistant.Core.Services.Projects.StudioVersionCatalog>(await File.ReadAllTextAsync(Path.Combine(root,"catalog.json")))!;
     if(mode=="version-update"){await repo.SaveAsync(catalogExpected,[catalogExpected.Versions[0] with{Name="other process",Archived=false}],catalogExpected.SelectedId);return;}
     try{await repo.SaveAsync(catalogExpected,[catalogExpected.Versions[0] with{Name="stale"}],catalogExpected.SelectedId);throw new Exception("stale catalog accepted");}catch(InvalidOperationException){Console.WriteLine("STALE_CATALOG_REJECTED");return;}
-}if(mode=="export-crash")
+}if(mode=="export-crash-pv4")
+{
+    var point=args[2];var d=new RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition();var image=new RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer(128,96,Enumerable.Repeat(.18f,128*96*3).ToArray(),"16",RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.WorkingSpace);
+    var master=new RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawMaster(image,new("synthetic","Test","Synthetic",new string('a',64),d.DecodeKey,[1,1,1,1],[1,1,1,1],[],65535));
+    var temp=Path.Combine(root,"encoding.tmp");await RAWSelectionAssistant.Core.Services.Export.AtomicTiffWriter.WriteRowsAsync(temp,128,96,(y,row)=>{RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.FillRgb16Row(master,d,y,row);if(point=="Encoding"&&y==16)Environment.Exit(73);});
+    var id=Guid.Parse("b5555555-5555-5555-5555-555555555555");var output=Path.Combine(root,"out.png");
+    var receipt=new RAWSelectionAssistant.Core.Services.Projects.StudioExportReceipt(id,null,null,new string('a',64),id,4,"TIFF16",output,"",DateTimeOffset.UtcNow,new(1,".tif",16,"Original",128,96,null,null,"None","sRGB","orientation1","none",RawDefinition:d,RawInput:master.Contract));
+    await RAWSelectionAssistant.Core.Services.Projects.StudioExportReceiptStore.CommitOutputAsync(temp,output,receipt,checkpoint:stage=>{if(stage==point)Environment.Exit(73);});return;
+}
+if(mode=="export-crash")
 {
     var stage=args[2];var output=Path.Combine(root,"out.png");var temp=Path.Combine(root,"encoding.tmp");var id=Guid.Parse("b5555555-5555-5555-5555-555555555555");
     if(stage=="Encoding"){await File.WriteAllBytesAsync(temp,[1]);Environment.Exit(73);}

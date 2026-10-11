@@ -65,7 +65,7 @@ public sealed class ProfessionalRawWorkspaceTests
                 var versions=new StudioVersionRepository(Path.Combine(root,"versions"));using var workspace=new ReferenceColorWorkspaceViewModel(new Dialogs(root),versionRepository:versions);
                 await workspace.LoadTargetAsync(input);await workspace.CreateProfessionalRawCommand.ExecuteAsync(null);Assert.IsTrue(workspace.IsProfessionalRaw,workspace.StatusText);
                 workspace.RawExposureEv=1;await workspace.ApplyProfessionalRawCommand.ExecuteAsync(null);Assert.AreEqual(1,workspace.ActiveTarget!.RawDefinition!.ExposureEv);
-                var expected=ProfessionalRawPipeline.Render(workspace.ActiveTarget.LinearRawMaster!,workspace.ActiveTarget.RawDefinition,1600);
+                var expected=ProfessionalRawPipeline.RenderPreview(workspace.ActiveTarget.LinearRawMaster!,workspace.ActiveTarget.RawDefinition,1600);
                 var expectedImage=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(expected.ToVisualRgb24()),expected.Orientation);
                 CollectionAssert.AreEqual(Pixels(expectedImage),Pixels(workspace.Editor.MatchedImage!));
                 var session=Path.Combine(root,"session.ptstudio.json");await workspace.SaveSessionAsync(session);await workspace.ExportSelectedCommand.ExecuteAsync(null);Assert.AreEqual(ReferenceExportStatus.Succeeded,workspace.ActiveTarget.ExportStatus,workspace.ActiveTarget.Error);

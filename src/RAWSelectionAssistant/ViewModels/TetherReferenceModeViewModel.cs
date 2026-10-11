@@ -112,6 +112,13 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         OnPropertyChanged(nameof(IsSettled)); OnPropertyChanged(nameof(IsBusy));
     }
     public bool IndependentRawMode {get;set;}
+    public System.Windows.Size IndependentRawSize {get;private set;}
+    public BitmapSource? IndependentDetailOriginal {get;private set;}
+    public BitmapSource? IndependentDetailMatched {get;private set;}
+    public System.Windows.Rect IndependentDetailRegion {get;private set;}=System.Windows.Rect.Empty;
+    public void SetIndependentRawSize(System.Windows.Size size){IndependentRawSize=size;ClearIndependentDetail();OnPropertyChanged(nameof(SourcePixelSize));}
+    public void ClearIndependentDetail(){IndependentDetailOriginal=null;IndependentDetailMatched=null;IndependentDetailRegion=System.Windows.Rect.Empty;OnPropertyChanged(nameof(IndependentDetailOriginal));OnPropertyChanged(nameof(IndependentDetailMatched));OnPropertyChanged(nameof(IndependentDetailRegion));}
+    public void PresentIndependentDetail(BitmapSource before,BitmapSource after,System.Windows.Rect region){IndependentDetailOriginal=before;IndependentDetailMatched=after;IndependentDetailRegion=region;OnPropertyChanged(nameof(IndependentDetailOriginal));OnPropertyChanged(nameof(IndependentDetailMatched));OnPropertyChanged(nameof(IndependentDetailRegion));}
     public void PresentIndependentRaw(BitmapSource image){StopProcessing();Enabled=true;ViewMode="仿色";MatchedImage=image;OnPropertyChanged(nameof(EffectiveViewMode));RaiseViewProperties();}
     public void StopProcessing()
     {

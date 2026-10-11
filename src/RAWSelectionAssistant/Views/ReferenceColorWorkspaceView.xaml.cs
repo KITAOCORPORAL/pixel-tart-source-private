@@ -73,7 +73,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
         ToneZones.ZoneHovered += (_, zone) => { if (DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.HighlightToneZone(zone); };
         ToneZonesExpander.Collapsed += (_, _) => { ToneZones.ClearHover(); if (DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.ClearPreviewSelection(); };
         ImageViewport.State.Changed += (_, _) => { HighlightOverlay.ViewState = ImageViewport.State; HighlightOverlay.InvalidateVisual(); };
-        _zoomPan.Changed += (_, _) => { ZoomLabel.Text = $"{_zoomPan.Zoom:P0}"; _editor?.RequestPreviewZoom(_zoomPan.Zoom, VisualTreeHelper.GetDpi(ImageViewport).DpiScaleX); };
+        _zoomPan.Changed += (_, _) => { ZoomLabel.Text = $"{_zoomPan.Zoom*VisualTreeHelper.GetDpi(ImageViewport).DpiScaleX:P0}"; RequestImageDetail(); };
         AdjustmentNodeList.DragOver += OnNodeDragOver;
         AdjustmentNodeList.DragLeave += (_, _) => ClearInsertion();
         SizeChanged += (_, _) => UpdateResponsiveLayout();
@@ -176,7 +176,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
     }
     private void OnPreviewLostCapture(object sender, MouseEventArgs e) => _panning = _draggingDivider = false;
     private void OnFitClick(object sender, RoutedEventArgs e) => _zoomPan.Fit();
-    private void OnActualSizeClick(object sender, RoutedEventArgs e) => _zoomPan.SetZoom(1);
+    private void OnActualSizeClick(object sender, RoutedEventArgs e) => _zoomPan.SetZoom(1/VisualTreeHelper.GetDpi(ImageViewport).DpiScaleX);
     private void OnZoomInClick(object sender, RoutedEventArgs e) => _zoomPan.SetZoom(_zoomPan.Zoom * 1.25);
     private void OnZoomOutClick(object sender, RoutedEventArgs e) => _zoomPan.SetZoom(_zoomPan.Zoom / 1.25);
     private void OnNodeEnableClick(object sender, RoutedEventArgs e)
@@ -406,9 +406,15 @@ public partial class ReferenceColorWorkspaceView : UserControl
         }
     }
 
+    private void RequestImageDetail()
+    {
+        var dpi=VisualTreeHelper.GetDpi(ImageViewport).DpiScaleX;
+        if(DataContext is ReferenceColorWorkspaceViewModel workspace && workspace.IsProfessionalRaw)workspace.RequestProfessionalViewport(ImageViewport.VisibleSourceRegion(),_zoomPan.Zoom,dpi);
+        else _editor?.RequestPreviewZoom(_zoomPan.Zoom,dpi);
+    }
     private void EditorOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
-        if (args.PropertyName == nameof(TetherReferenceModeViewModel.SourcePixelSize)) _editor?.RequestPreviewZoom(_zoomPan.Zoom, VisualTreeHelper.GetDpi(ImageViewport).DpiScaleX);
+        if (args.PropertyName == nameof(TetherReferenceModeViewModel.SourcePixelSize)) RequestImageDetail();
         HighlightOverlay.ViewMode = _editor?.EffectiveViewMode ?? "原片";
         HighlightOverlay.SplitPosition = _editor?.SplitPosition ?? .5;
         HighlightOverlay.InvalidateVisual();

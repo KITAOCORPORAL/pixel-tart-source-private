@@ -11,6 +11,7 @@ public interface IPublishingRenderer
     Task VerifyAsync(string imagePath, CancellationToken cancellationToken = default);
 }
 
+public interface IPublishingPixelVerifier { Task<string> VerifyPixelsAsync(string source,string output,PublishingOptions options,CancellationToken token); }
 public interface IPublishingOutputInspector { Task<(int Width,int Height,int BitDepth)> InspectAsync(string path,CancellationToken token); }
 public interface IPublishingExportService
 {
@@ -52,6 +53,13 @@ public sealed class PublishingExportService(IPublishingRenderer renderer,Action<
                 var structured=ExportRecipeSnapshot.Publishing(recipeOptions) with { RecipeName=recipe?.Name,FilenameTemplate=recipe?.FilenameTemplate };
                 StudioExportReceipt? upstream=null;
                 if(File.Exists(source+".kitao-export.json")){upstream=await ExportRecovery.ReadAsync(source+".kitao-export.json",cancellationToken);if(!string.Equals(upstream.OutputHash,Convert.ToHexString(before),StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("上游输出 hash 不一致。");}
+                if(upstream?.RecipeSnapshot?.RawDefinition is {} rawDefinition)
+                {
+                    if(!string.Equals(recipeOptions.ColorSpaceProfile,"sRGB",StringComparison.OrdinalIgnoreCase))throw new NotSupportedException("PV4 Publishing 当前仅支持 sRGB；未执行其他ICC转换。");
+                    if(recipeOptions.OutputFormat==PublishingOutputFormat.Jpeg && recipeOptions.OutputBitDepth!=PublishingOutputBitDepth.Eight)throw new NotSupportedException("JPEG仅支持8位，未忽略请求位深。");
+                    if(recipeOptions.OutputFormat==PublishingOutputFormat.Png && recipeOptions.OutputBitDepth!=PublishingOutputBitDepth.Eight)throw new NotSupportedException("PV4 Publishing PNG 当前仅支持8位；快速导出可输出PNG16。");
+                    structured=structured with{RawDefinition=rawDefinition,RawInput=upstream.RecipeSnapshot.RawInput,AdjustmentFingerprint=upstream.RecipeSnapshot.AdjustmentFingerprint,ColorProfile="sRGB",BitDepth=recipeOptions.OutputFormat==PublishingOutputFormat.Tiff?16:8};
+                }
                 var versionId=upstream?.EditVersionId??new Guid(before.AsSpan(0,16));
                 var sourceHash=upstream?.SourceHash??Convert.ToHexString(before);
                 var recovered=false;
@@ -73,6 +81,7 @@ public sealed class PublishingExportService(IPublishingRenderer renderer,Action<
                     await renderer.RenderAsync(source, temporary, recipeOptions, cancellationToken).ConfigureAwait(false);
                     await ReportProgressAsync(progress, total, results, itemLabel, 0.65, "验证", cancellationToken).ConfigureAwait(false);
                     await renderer.VerifyAsync(temporary, cancellationToken).ConfigureAwait(false);
+                    if(upstream?.RecipeSnapshot?.RawDefinition is not null && renderer is IPublishingPixelVerifier pixels)structured=structured with{OutputValidation=await pixels.VerifyPixelsAsync(source,temporary,recipeOptions,cancellationToken).ConfigureAwait(false)};
                     var after = await ComputeHashAsync(source, cancellationToken).ConfigureAwait(false);
                     if (!CryptographicOperations.FixedTimeEquals(before, after)) throw new IOException("源照片在发布处理期间发生变化，已停止输出。");
                     committedOutput=destination;

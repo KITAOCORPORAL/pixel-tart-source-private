@@ -12,10 +12,14 @@ public interface IProfessionalRawDecoder
     Task<ProfessionalRawMaster> DecodeAsync(string path, ProfessionalRawDefinition definition, CancellationToken token = default);
 }
 
-public sealed class ProfessionalRawDecoder : IProfessionalRawDecoder
+public sealed class ProfessionalRawDecoder(Action<string>? stage = null) : IProfessionalRawDecoder
 {
-    public Task<ProfessionalRawMaster> DecodeAsync(string path, ProfessionalRawDefinition definition, CancellationToken token = default) =>
-        Task.Run(() => Decode(path, definition.Validate(), token), token);
+    public async Task<ProfessionalRawMaster> DecodeAsync(string path, ProfessionalRawDefinition definition, CancellationToken token = default)
+    {
+        await ProfessionalRawResourcePolicy.HeavyWork.WaitAsync(token);
+        try{return await Task.Run(()=>Decode(path,definition.Validate(),token),token);}
+        finally{ProfessionalRawResourcePolicy.HeavyWork.Release();}
+    }
 
     public static double[] ResolveWhiteBalance(double[] camera, bool alreadyApplied, ProfessionalRawDefinition definition)
     {
@@ -52,14 +56,14 @@ public sealed class ProfessionalRawDecoder : IProfessionalRawDecoder
         output.DcbEnhanceFl = 0; output.UseFujiRotate = true;
     }
 
-    private static ProfessionalRawMaster Decode(string path, ProfessionalRawDefinition definition, CancellationToken token)
+    private ProfessionalRawMaster Decode(string path, ProfessionalRawDefinition definition, CancellationToken token)
     {
         if (!RawMatchTiff16ProductPipeline.IsRaw(path)) throw new NotSupportedException("新 RAW 版本不接受已渲染 JPG/PNG。");
         using var source = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
         var hash = Convert.ToHexString(SHA256.HashData(source)); token.ThrowIfCancellationRequested();
         try
         {
-            using var context = RawContext.OpenFile(path); var unpackParameters=ProfessionalLibRawAdapter.ConfigureUnpack(context); context.Unpack(); token.ThrowIfCancellationRequested();
+            using var context = RawContext.OpenFile(path); var unpackParameters=ProfessionalLibRawAdapter.ConfigureUnpack(context); context.Unpack();stage?.Invoke("Unpacked"); token.ThrowIfCancellationRequested();
             var color = ProfessionalLibRawAdapter.ReadColor(context);
             var identity = context.ImageParams;
             // First production contract is three-color Bayer; non-mosaic/sRAW and X-Trans require separate validation.
@@ -71,7 +75,7 @@ public sealed class ProfessionalRawDecoder : IProfessionalRawDecoder
             var matrix = color.RgbCam.Select(x => (double)x).ToArray();
             if (matrix.Any(x => !double.IsFinite(x)) || matrix.Sum(Math.Abs) < .01 || color.Maximum <= color.Black)
                 throw new InvalidDataException("缺少可用相机颜色矩阵或黑白电平，未回退旧处理。");
-            context.DcrawProcess(output => Configure(output, applied)); token.ThrowIfCancellationRequested();
+            context.DcrawProcess(output => Configure(output, applied));stage?.Invoke("DemosaicWBMatrix"); token.ThrowIfCancellationRequested();
             var actual = OutputParams.FromLibRaw(context.UnsafeGetHandle());
             if (actual.UseCameraWb || actual.UseAutoWb || !actual.NoAutoBright || actual.OutputColor != LibRawColorSpace.ProPhotoRgb ||
                 actual.OutputBps != 16 || actual.Gamma[0] != 1 || actual.Gamma[1] != 1 || actual.HighlightMode != 0 ||
@@ -83,13 +87,15 @@ public sealed class ProfessionalRawDecoder : IProfessionalRawDecoder
             var minimum=applied.Min();
             if(Enumerable.Range(0,4).Any(i=>Math.Abs(after.PreMul[i]-applied[i]/minimum)>1e-5*Math.Max(1,applied[i]/minimum)))
                 throw new InvalidDataException("实际白平衡与已选增益不一致，拒绝重复或隐式变换。");
-            using var processed = context.MakeDcrawMemoryImage();
+            using var processed = context.MakeDcrawMemoryImage();stage?.Invoke("NativeRGB16");
             if (processed.Bits != 16 || processed.Channels != 3 || processed.ImageType != ProcessedImageType.Bitmap)
                 throw new InvalidDataException("LibRaw 未返回线性 RGB16。");
             var count = checked(processed.Width * processed.Height * 3);
             if (processed.DataSize < checked(count * 2)) throw new InvalidDataException("RAW 输出不完整。");
+            if((long)count*sizeof(float)>ProfessionalRawResourcePolicy.MasterBudgetBytes)throw new NotSupportedException("RAW master超过512MiB缓存预算；未降低尺寸或位深，当前专业版本拒绝此文件。");
             var samples = processed.AsSpan<ushort>()[..count]; var pixels = new float[count]; var clipped = 0; var zeros = 0;
             for (var i = 0; i < count; i++) { pixels[i] = samples[i] / 65535f; if (samples[i] == 65535) clipped++; if (samples[i] == 0) zeros++; }
+            stage?.Invoke("FloatMaster");
             ushort orientation = 1;
             try
             {

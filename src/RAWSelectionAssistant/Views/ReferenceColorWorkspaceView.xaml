@@ -463,7 +463,7 @@
        <Border x:Name="ColorInspectionHint" Visibility="Collapsed" Panel.ZIndex="2" Background="{DynamicResource SurfaceElevatedBrush}" Padding="10,5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" IsHitTestVisible="False">
         <TextBlock Text="{views:StudioText Key='点选当前显示图像 → 点云高亮 · Esc 退出'}" />
        </Border>
-       <views:ColorStudioImageViewport x:Name="ImageViewport" SourcePixelSize="{Binding Editor.SourcePixelSize}" Original="{Binding Editor.SourceImage}" Matched="{Binding Editor.MatchedImage}" Mode="{Binding Editor.EffectiveViewMode}" Split="{Binding Editor.SplitPosition}" />
+       <views:ColorStudioImageViewport x:Name="ImageViewport" DetailOriginal="{Binding Editor.IndependentDetailOriginal}" DetailMatched="{Binding Editor.IndependentDetailMatched}" DetailRegion="{Binding Editor.IndependentDetailRegion}" SourcePixelSize="{Binding Editor.SourcePixelSize}" Original="{Binding Editor.SourceImage}" Matched="{Binding Editor.MatchedImage}" Mode="{Binding Editor.EffectiveViewMode}" Split="{Binding Editor.SplitPosition}" />
        <views:ImageHighlightOverlay x:Name="HighlightOverlay" PixelIndices="{Binding HighlightedPixels}" ImageWidth="{Binding HighlightImageWidth}" ImageHeight="{Binding HighlightImageHeight}" IsHitTestVisible="False" PixelWeights="{Binding HighlightWeights}" />
        <Border Background="{DynamicResource SurfaceElevatedBrush}" CornerRadius="6" Padding="10,5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,18" Visibility="{Binding Editor.IsSampling, Converter={StaticResource BoolVisibility}}" IsHitTestVisible="False">
         <TextBlock Text="{views:StudioText Key='正在取样 · Esc 退出'}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="SemiBold" />

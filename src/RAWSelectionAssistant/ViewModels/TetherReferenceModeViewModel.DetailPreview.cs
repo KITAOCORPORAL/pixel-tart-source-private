@@ -11,7 +11,7 @@ public sealed partial class TetherReferenceModeViewModel
     private BitmapSource? _fullRawDisplay;
     private CancellationTokenSource? _detailRequest;
     public Task DetailPreviewWork { get; private set; } = Task.CompletedTask;
-    public Size SourcePixelSize => _frozenRawMaster is { } raw ? new(raw.Width, raw.Height)
+    public Size SourcePixelSize => IndependentRawMode && !IndependentRawSize.IsEmpty ? IndependentRawSize : _frozenRawMaster is { } raw ? new(raw.Width, raw.Height)
         : _source is { } image ? new(image.PixelWidth, image.PixelHeight) : Size.Empty;
     public bool IsDetailPreviewRequested => _rawDetailRequested;
     public void RequestPreviewZoom(double zoom, double dpiScale = 1)
