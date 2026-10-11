@@ -236,6 +236,16 @@ public partial class App : Application
                 _compositionRoot.BookingReminderService);
             var tetherProxyCache = new TetherProxyCacheService();
             var tetherPairing = new TetherPairingService(_compositionRoot.TetherAssetRepository);
+            async Task<AssetLibraryContainerDescriptor?> ResolveTetherLibrary(CancellationToken token)
+            {
+                var portable = _mainViewModel?.Settings.AssetLibraryPortable ?? startupSettings.AssetLibraryPortable;
+                if (!AssetLibraryContainerService.TryResolveStartupDatabasePath(portable, out var dbPath)) return null;
+                var root = Directory.GetParent(Path.GetDirectoryName(dbPath)!)?.FullName;
+                return root is null ? null : await new AssetLibraryContainerService().OpenAsync(root, token);
+            }
+            var captureContexts = new RAWSelectionAssistant.Core.Services.Projects.TetherCaptureContextStore(Path.Combine(AppDataPaths.DataDirectory, "TetherCaptureContexts"));
+            var capturePlans = new RAWSelectionAssistant.Core.Services.Projects.PlanningProjectStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectPlanning"));
+            var libraryHandoff = new TetherLibraryHandoffService(new IdentityBridgeRepository(_compositionRoot.Database), ResolveTetherLibrary, _compositionRoot.TetherAnnotationRepository, captureContexts, capturePlans);
             var watchFolderAdapter = new WatchFolderCameraAdapter(
                 _compositionRoot.TetherSessionRepository,
                 _compositionRoot.TetherAssetRepository,
@@ -244,18 +254,23 @@ public partial class App : Application
                 tetherProxyCache,
                 _compositionRoot.TetherTransferService,
                 _compositionRoot.AuditLog,
-                _compositionRoot.NotificationCenter);
+                _compositionRoot.NotificationCenter, libraryHandoff: libraryHandoff);
             var tetherPage = new TetherCaptureViewModel(
                 watchFolderAdapter,
                 _compositionRoot.TetherSessionRepository,
                 _compositionRoot.TetherAssetRepository,
                 tetherProxyCache,
                 dialogService,
-                new TetherAnnotationService(
+                new LinkedTetherAnnotationService(new TetherAnnotationService(
                     _compositionRoot.TetherAnnotationRepository,
                     _compositionRoot.AuditLog,
-                    _compositionRoot.NotificationCenter),
+                    _compositionRoot.NotificationCenter), libraryHandoff, ResolveTetherLibrary),
                 projectRepository: _compositionRoot.ProjectRepository);
+            watchFolderAdapter.CaptureDiscovered = (asset, token) => tetherPage.CaptureContext is { } context && context.ProjectId == asset.ProjectId ? captureContexts.FreezeAsync(asset.Id, context, token) : Task.CompletedTask;
+            tetherPage.DescribeLibraryHandoffs = libraryHandoff.DescribePendingAsync;
+            tetherPage.RetryLibraryHandoffs = () => libraryHandoff.RetryFailedAsync();
+            tetherPage.ResolveLibraryLink = id => libraryHandoff.ResolveLinkAsync(id);
+            tetherPage.ResolveAnnotationConflict = (id, choice) => libraryHandoff.ResolveAnnotationAsync(id, choice);
             var financePage = new FinanceViewModel(
                 _compositionRoot.FinanceService,
                 dialogService,
@@ -641,7 +656,13 @@ public partial class App : Application
                     assetLibraryP1StateController,
                     focusedChrome: true,
                     openCalendarBooking: bookingId => _mainViewModel?.NavigateToCalendarBookingAsync(bookingId) ?? Task.CompletedTask,
-                    selectionToolHandler: (tool, paths) => _mainViewModel?.OpenSelectionToolAsync(tool, paths) ?? Task.CompletedTask),
+                    selectionToolHandler: (tool, paths) => _mainViewModel?.OpenSelectionToolAsync(tool, paths) ?? Task.CompletedTask,
+                    studioHandler: async resolved =>
+                    {
+                        if (_mainViewModel is null || resolved.ResolvedPath is null) return;
+                        await _mainViewModel.ReferenceColorPage.LoadTargetAsync(resolved.ResolvedPath, resolved.AssetId, resolved.LibraryId, resolved.ActualContentHash);
+                        _mainViewModel.NavigateCommand.Execute("ReferenceColor");
+                    }),
                 portableSettings,
                 _mainViewModel is null ? null : () => _mainViewModel.SaveSettingsAsync());
 #endif

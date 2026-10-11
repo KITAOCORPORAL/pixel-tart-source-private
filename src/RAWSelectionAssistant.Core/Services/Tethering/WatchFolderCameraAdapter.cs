@@ -14,12 +14,14 @@ public sealed class WatchFolderCameraAdapter(
     ICameraTransferService transferService,
     IAuditLogService auditLog,
     INotificationCenter notifications,
-    Func<string, IWatchFolderEventSource>? eventSourceFactory = null) : ICameraTetherProvider, ICameraConnectionMonitor
+    Func<string, IWatchFolderEventSource>? eventSourceFactory = null,
+    TetherLibraryHandoffService? libraryHandoff = null) : ICameraTetherProvider, ICameraConnectionMonitor
 {
     private readonly Func<string, IWatchFolderEventSource> _eventSourceFactory = eventSourceFactory ?? (directory => new FileSystemWatcherEventSource(directory));
     private readonly object _sync = new();
     private WatchFolderCameraSession? _activeSession;
 
+    public Func<TetherAssetRecord, CancellationToken, Task>? CaptureDiscovered { get; set; }
     public CameraProviderType ProviderType => CameraProviderType.WatchFolder;
     public string DisplayName => "看守文件夹";
     public CameraProviderType ActiveProvider { get { lock (_sync) return _activeSession is null ? CameraProviderType.None : CameraProviderType.WatchFolder; } }
@@ -64,7 +66,7 @@ public sealed class WatchFolderCameraAdapter(
     {
         if (recovering) await sessionRepository.UpdateAsync(session, cancellationToken).ConfigureAwait(false);
         var runtime = new WatchFolderCameraSession(session, verifySha256, sessionRepository, assetRepository, stabilityProbe, pairingService,
-            proxyCache, transferService, auditLog, notifications, _eventSourceFactory(session.WatchDirectory), ClearActive);
+            proxyCache, transferService, auditLog, notifications, _eventSourceFactory(session.WatchDirectory), ClearActive, libraryHandoff, CaptureDiscovered);
         lock (_sync) _activeSession = runtime;
         try
         {
@@ -101,6 +103,8 @@ internal sealed class WatchFolderCameraSession : ICameraSession
 {
     private const int QueueCapacity = 256;
     private readonly bool _verifySha256;
+    private readonly TetherLibraryHandoffService? _libraryHandoff;
+    private readonly Func<TetherAssetRecord, CancellationToken, Task>? _captureDiscovered;
     private readonly ITetherSessionRepository _sessionRepository;
     private readonly ITetherAssetRepository _assetRepository;
     private readonly IFileStabilityProbe _stabilityProbe;
@@ -134,7 +138,7 @@ internal sealed class WatchFolderCameraSession : ICameraSession
     public WatchFolderCameraSession(TetherSessionRecord session, bool verifySha256, ITetherSessionRepository sessionRepository,
         ITetherAssetRepository assetRepository, IFileStabilityProbe stabilityProbe, TetherPairingService pairingService,
         ITetherProxyCache proxyCache, ICameraTransferService transferService, IAuditLogService auditLog, INotificationCenter notifications,
-        IWatchFolderEventSource eventSource, Action<WatchFolderCameraSession> stopped)
+        IWatchFolderEventSource eventSource, Action<WatchFolderCameraSession> stopped, TetherLibraryHandoffService? libraryHandoff = null, Func<TetherAssetRecord, CancellationToken, Task>? captureDiscovered = null)
     {
         Session = session;
         _verifySha256 = verifySha256;
@@ -148,6 +152,8 @@ internal sealed class WatchFolderCameraSession : ICameraSession
         _notifications = notifications;
         _eventSource = eventSource;
         _stopped = stopped;
+        _libraryHandoff = libraryHandoff;
+        _captureDiscovered = captureDiscovered;
     }
 
     public TetherSessionRecord Session { get; private set; }
@@ -300,6 +306,7 @@ internal sealed class WatchFolderCameraSession : ICameraSession
             var asset = existing ?? new TetherAssetRecord(Guid.NewGuid(), Session.Id, Session.ProjectId, Path.GetFullPath(path), normalized, Path.GetFileName(path),
                 Path.GetExtension(path).ToLowerInvariant(), WatchFolderPathPolicy.MediaKind(path), null, null, now, TetherStabilityState.Pending,
                 TetherProcessingState.Pending, TetherPreviewState.None, now);
+            if (existing is null && _captureDiscovered is not null) await _captureDiscovered(asset, cancellationToken).ConfigureAwait(false);
             asset = await _assetRepository.UpsertDiscoveredAsync(asset, cancellationToken).ConfigureAwait(false);
 
             if (asset.StabilityState == TetherStabilityState.Stable && IsUnchanged(asset))
@@ -369,6 +376,21 @@ internal sealed class WatchFolderCameraSession : ICameraSession
             var state = failed && succeeded ? TetherProcessingState.PartiallyCompleted : failed ? TetherProcessingState.NeedsAttention : TetherProcessingState.Copied;
             latest = latest with { ProcessingState = state, LastErrorCode = failed ? results.First(result => result!.ErrorCode is not null)!.ErrorCode : null, UpdatedAtUtc = DateTimeOffset.UtcNow };
             await _assetRepository.UpdateAsync(latest, cancellationToken).ConfigureAwait(false);
+        }
+        if (_libraryHandoff is not null)
+        {
+            var latest = await _assetRepository.GetAsync(asset.Id, cancellationToken).ConfigureAwait(false) ?? asset;
+            string? error;
+            try { error = await _libraryHandoff.HandoffAsync(latest, cancellationToken).ConfigureAwait(false); }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException) { error = "HANDOFF_IO_FAILED"; }
+            if (error is null && latest.LastErrorCode is { } previousError && (previousError.StartsWith("HANDOFF_", StringComparison.Ordinal) || previousError.StartsWith("LIBRARY_", StringComparison.Ordinal) || previousError == "ANNOTATION_CONFLICT"))
+                await _assetRepository.UpdateAsync(latest with { LastErrorCode = null, ProcessingState = latest.ProjectCopyPath is not null ? TetherProcessingState.Copied : TetherProcessingState.Ready, UpdatedAtUtc = DateTimeOffset.UtcNow }, cancellationToken).ConfigureAwait(false);
+            if (error is not null)
+            {
+                await _assetRepository.UpdateAsync(latest with { ProcessingState = TetherProcessingState.PartiallyCompleted,
+                    LastErrorCode = error, UpdatedAtUtc = DateTimeOffset.UtcNow }, cancellationToken).ConfigureAwait(false);
+                await NotifyAttentionAsync("素材待关联：" + error, cancellationToken).ConfigureAwait(false);
+            }
         }
     }
 

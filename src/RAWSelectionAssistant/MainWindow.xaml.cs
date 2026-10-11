@@ -274,7 +274,8 @@ public partial class MainWindow : Window
                 {
                     var page = GetHostedAssetLibraryPage();
                     if (page is null || reference.LibraryId != page.ViewModel.CanvasLibraryId || reference.AssetId is not Guid id) return null;
-                    return (await page.ViewModel.GetAssetForAnalysisAsync(id))?.SourcePath;
+                    var resolved = await page.ViewModel.ResolveStableAssetAsync(page.ViewModel.CanvasLibraryId, id);
+                    return resolved.Status == RAWSelectionAssistant.Core.Services.AssetLibrary.AssetResolutionStatus.Available ? resolved.ResolvedPath : null;
                 };
                 planning.CanvasRequested += async (_, canvas) =>
                 {

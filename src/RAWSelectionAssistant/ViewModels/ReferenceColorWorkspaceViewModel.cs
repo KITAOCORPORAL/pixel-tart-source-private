@@ -132,6 +132,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                 _exportCancellation.Token.ThrowIfCancellationRequested();
                 try
                 {
+                    if (!await ValidateTargetIdentityAsync(item.Item, _exportCancellation.Token)) throw new IOException(item.Item.Error);
                     var raw = RawMatchTiff16ProductPipeline.IsRaw(item.Item.Path);
                     var itemDirectory = Path.Combine(directory, item.Item.Id.ToString());
                     Directory.CreateDirectory(itemDirectory);
@@ -371,10 +372,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     private async Task PersistAssetMetadataAsync(ReferenceTargetItem target, Guid assetId, int? rating, string? color)
     {
         if (target.AssetId != assetId) return;
+        if (target.LibraryId.HasValue && !await ValidateTargetIdentityAsync(target, CancellationToken.None)) { target.MetadataStatus = "身份未确认，标注未写入"; return; }
         await using var repository = OpenMetadataRepository(target);
         if (repository is null) { target.MetadataStatus = "素材库不可用，尚未保存"; return; }
         await repository.InitializeAsync();
-        if (await repository.GetAssetAsync(assetId) is null)
+        if (await repository.GetAssetAsync(assetId) is not { } metadataAsset ||
+            (target.LibraryId is null && !string.Equals(Path.GetFullPath(metadataAsset.SourcePath), Path.GetFullPath(target.Path), StringComparison.OrdinalIgnoreCase)))
         {
             target.MetadataStatus = "素材库中未找到此照片，尚未保存";
             return;
@@ -390,12 +393,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         if (target.AssetId is not Guid assetId) { target.MetadataStatus = "仅本次会话 · 未加入素材库"; return; }
         try
         {
+            if (target.LibraryId.HasValue && !await ValidateTargetIdentityAsync(target, CancellationToken.None)) { target.MetadataStatus = "身份未确认，未读取其他素材标注"; return; }
             await using var repository = OpenMetadataRepository(target);
             if (repository is null) { target.MetadataStatus = "素材库不可用"; return; }
             await repository.InitializeAsync();
             var asset = await repository.GetAssetAsync(assetId);
             if (target.AssetId != assetId) return;
-            if (asset is null) { target.MetadataStatus = "素材库中未找到此照片"; return; }
+            if (asset is null || (target.LibraryId is null && !string.Equals(Path.GetFullPath(asset.SourcePath), Path.GetFullPath(target.Path), StringComparison.OrdinalIgnoreCase))) { target.MetadataStatus = "素材库中未确认此照片身份"; return; }
             target.MetadataDatabasePath = repository.DatabasePath;
             _hydratingMetadata.Add(target.Id);
             target.Rating = asset.Rating;
@@ -530,10 +534,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         StatusText = "已从联机拍摄带入当前照片和色彩方案；取消或返回不会改写方案。";
     }
 
-    public async Task LoadTargetAsync(string path, Guid? assetId = null)
+    public async Task LoadTargetAsync(string path, Guid? assetId = null, Guid? libraryId = null, string? sourceHash = null)
     {
         var target = GetOrCreateTarget(path);
         if (assetId is not null) target.AssetId = assetId;
+        target.LibraryId = libraryId ?? target.LibraryId;
+        target.SourceHash = sourceHash ?? target.SourceHash;
         target.IsSelected = true;
         // RAW thumbnail and activation must share one session-owned master.  Starting both
         // operations concurrently would allow the ??= assignment below to race and decode
@@ -597,11 +603,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         {
             Editor.StopProcessing();
             Interlocked.Increment(ref _loadingActivations); IsLoading = true; StatusText = "正在载入活动预览…";
+            if (!await ValidateTargetIdentityAsync(target, token)) { target.Status = ReferenceTargetStatus.Failed; StatusText = target.Error ?? "素材身份不可用"; return; }
             var isRaw = RawMatchTiff16ProductPipeline.IsRaw(target.Path);
             var rawMaster = isRaw ? target.RawMaster ??= await DecodeStudioRawAsync(target.Path, token) : null;
             var rawProxy = rawMaster is null ? null : _rawPipeline.PreviewMaster(rawMaster.Image);
             var image = rawProxy is not null ? RawDisplayBitmapAdapter.ToBitmap(rawProxy.ToVisualRgb24()) : await LoadSourcePreviewAsync(target.Path, token);
             if (revision != Volatile.Read(ref _activationRevision)) return;
+            target.SourceHash ??= target.ObservedSourceHash;
             QueueMetadata(() => HydrateAssetMetadataAsync(target));
             await FlushMetadataAsync();
             if (revision != Volatile.Read(ref _activationRevision)) return;
@@ -697,6 +705,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                 var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + ("_仿色" + StudioQuickExport.Extension(item.Path,format))); var temp = output + ".tmp";
                 try
                 {
+                    if (!await ValidateTargetIdentityAsync(item, _exportCancellation.Token)) throw new IOException(item.Error);
                     if (Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_FAIL_ONCE") == "1")
                     {
                         Environment.SetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_FAIL_ONCE", "done");
@@ -776,15 +785,18 @@ public sealed class ReferenceTargetItem : ObservableObject
     private bool _isSelected;
     private bool _isActive;
     private ReferenceTargetStatus _status = ReferenceTargetStatus.Pending;
-    public ReferenceTargetItem(string path, Guid? id = null) { Id = id ?? Guid.NewGuid(); Path = path; FileName = System.IO.Path.GetFileName(path); }
+    public ReferenceTargetItem(string path, Guid? id = null) { Id = id ?? Guid.NewGuid(); Path = path; }
     public Guid Id { get; }
     private Guid? _assetId;
     public Guid? AssetId { get => _assetId; set => SetProperty(ref _assetId, value); }
+    public Guid? LibraryId { get; set; }
+    public string? SourceHash { get; set; }
+    internal string? ObservedSourceHash { get; set; }
     internal string? MetadataDatabasePath { get; set; }
     private string _metadataStatus = "仅本次会话 · 未加入素材库";
     public string MetadataStatus { get => _metadataStatus; internal set => SetProperty(ref _metadataStatus, value); }
-    public string Path { get; }
-    public string FileName { get; }
+    public string Path { get; internal set; }
+    public string FileName => System.IO.Path.GetFileName(Path);
     private BitmapSource? _thumbnail;
     public BitmapSource? Thumbnail { get => _thumbnail; set => SetProperty(ref _thumbnail, value); }
     internal BitmapSource? SourceThumbnail { get; set; }

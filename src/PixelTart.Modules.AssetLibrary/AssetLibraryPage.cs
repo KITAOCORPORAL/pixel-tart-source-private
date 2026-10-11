@@ -66,7 +66,8 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
         string? productDatabasePath = null,
         string? onlineSelectionWorkspaceFile = null,
         string? inspirationTrayDatabasePath = null,
-        Func<string, IReadOnlyList<string>, Task>? selectionToolHandler = null)
+        Func<string, IReadOnlyList<string>, Task>? selectionToolHandler = null,
+        Func<RAWSelectionAssistant.Core.Services.AssetLibrary.AssetResolutionResult, Task>? studioHandler = null)
     {
         InitializeComponent();
         _ = focusedChrome; // Compatibility switch; the migrated toolbar is now the only chrome.
@@ -90,6 +91,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             inspirationTrayDatabasePath,
             thumbnailProvider);
         _viewModel.SelectionToolHandler = selectionToolHandler;
+        _viewModel.OpenStudioHandler = studioHandler;
         _viewModel.OpenCanvasHandler = OpenCanvasAsync;
         _viewModel.DuplicateImportDecision = ShowDuplicateImportAsync;
         _viewModel.SelectionRestoreRequested += ViewModel_SelectionRestoreRequested;

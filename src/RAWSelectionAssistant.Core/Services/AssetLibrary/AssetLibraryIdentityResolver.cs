@@ -18,6 +18,7 @@ public sealed class AssetLibraryIdentityResolver(
         if (request.LibraryId != library.LibraryId)
             return Result(AssetResolutionStatus.Missing, request, message: "素材引用不属于当前素材库。");
 
+        if (!File.Exists(library.DatabasePath)) return Result(AssetResolutionStatus.Offline, request, message: "素材库数据库离线。");
         var asset = await repository.GetAssetAsync(request.AssetId, cancellationToken).ConfigureAwait(false);
         if (asset is null)
             return Result(AssetResolutionStatus.Missing, request, message: "素材库中不存在该素材身份。");

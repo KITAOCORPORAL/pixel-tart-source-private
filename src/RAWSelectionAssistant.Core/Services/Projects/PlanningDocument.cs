@@ -3,6 +3,9 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 // Proposal status is intentionally separate from booking and shot execution status.
 public sealed record PlanningDocument
 {
+    public PlanningDocumentPackage? Package { get; init; }
+    [System.Text.Json.Serialization.JsonExtensionData]
+    public Dictionary<string, System.Text.Json.JsonElement>? Extensions { get; init; }
     public string Title { get; init; } = "";
     public string Subtitle { get; init; } = "";
     public string Body { get; init; } = "";

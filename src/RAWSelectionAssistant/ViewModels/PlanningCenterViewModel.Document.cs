@@ -9,8 +9,27 @@ namespace RAWSelectionAssistant.ViewModels;
 
 public sealed partial class PlanningCenterViewModel
 {
+    public IEnumerable<ShotCaptureRelation> CapturedLibraryAssets => (_state?.CapturedAssets ?? []).Where(x => x.LibraryId.HasValue);
+    public async Task LinkReferenceOutcomeAsync(Guid referenceId, ShotCaptureRelation capture)
+    {
+        if (ProjectId is not Guid project || capture.ProjectId != project || capture.LibraryId is not Guid library) return;
+        await _planning.LinkReferenceOutcomeAsync(project, new(referenceId, library, capture.AssetId, DateTimeOffset.UtcNow));
+        _state = await _planning.LoadAsync(project);
+        SaveStatus = "已明确关联参考与成片；未修改素材归属";
+    }
     public IDialogService Dialogs => _dialogs;
     public void OpenLinkedCanvas(RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocument canvas) => CanvasRequested?.Invoke(this, canvas);
+    public async Task CaptureCanvasDocumentAsync(RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocument canvas)
+    {
+        if (ProjectId is not Guid project) return;
+        canvas = (await _canvases.ListAsync(project)).FirstOrDefault(x => x.CanvasId == canvas.CanvasId) ?? canvas;
+        var preview = PlanningCanvasSnapshot.Render(canvas);
+        var package = _document.Package ?? new PlanningDocumentPackage { ProjectId = project, Body = _document.Body };
+        UpdateDocument(_document with { Package = package.CaptureCanvas(canvas, preview) });
+        SaveStatus = "已插入画布版本；后续更新会保留旧版本";
+        PresentationChanged();
+    }
+    public IReadOnlyList<PlanningCanvasRevision> DocumentCanvasRevisions => _document.Package?.CanvasRevisions ?? [];
     private PlanningDocument _document = new();
     private string _contentPage = "文字";
     private bool _isDocumentEditing, _isPreviewMode, _isShotDrawerOpen, _isCreateOpen, _isBookingOpen;
@@ -106,7 +125,11 @@ public sealed partial class PlanningCenterViewModel
     private void UpdateDocument(PlanningDocument value)
     {
         if (_state is null) return;
-        _document = value;
+        var package = value.Package ?? _document.Package ?? new PlanningDocumentPackage { ProjectId = _state.ProjectId };
+        _document = value with { Package = package with { Body = value.Body,
+            Assets = value.References.Where(r => r.Source.LibraryId.HasValue && r.Source.AssetId.HasValue)
+                .Select(r => new PlanningAssetReference(r.Source.LibraryId!.Value,r.Source.AssetId!.Value)).Distinct().ToArray(),
+            ShotIds = Shots.Select(shot => shot.ShotId).ToArray() } };
         OnPropertyChanged(nameof(DocumentTitle)); OnPropertyChanged(nameof(ProposalStatus));
         QueueDocumentSave();
     }
@@ -171,6 +194,7 @@ public sealed partial class PlanningCenterViewModel
     {
         SelectedDocumentReference = null;
         _document = _state?.Document ?? new PlanningDocument { Title = ProjectName };
+        if (ProjectId is Guid packageProject && _document.Package is null) _document = _document with { Package = new PlanningDocumentPackage { ProjectId = packageProject, Body = _document.Body } };
         if (ProjectId is Guid id && await _planning.LoadDraftAsync(id) is { } draft)
         {
             _document = draft.Document; _state = _state! with { Summary = draft.Summary };

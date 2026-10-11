@@ -43,7 +43,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     private readonly CancellationTokenSource _lifetime = new();
     private readonly Dictionary<Guid, TetherAssetItemViewModel> _assetIndex = [];
     private readonly HashSet<Guid> _knownReadyAssets = [];
-    private readonly Dictionary<Guid, ShootExecutionContext> _captureContexts = [];
+    private readonly TetherCaptureContextStore _captureContextStore = new(Path.Combine(AppDataPaths.DataDirectory,"TetherCaptureContexts"));
     private readonly PlanningProjectStore _planningStore = new(Path.Combine(AppDataPaths.DataDirectory,"ProjectPlanning"));
     private readonly HashSet<Task> _backgroundTasks = [];
     private readonly object _backgroundSync = new();
@@ -196,6 +196,20 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         ChooseBackupDestinationCommand = new RelayCommand(_ => ChooseBackupDestination(), _ => !IsRunning && !IsBusy);
         StartCommand = new AsyncRelayCommand(_ => StartAsync(), _ => !IsRunning && !IsBusy && Directory.Exists(WatchDirectory));
         StopCommand = new AsyncRelayCommand(_ => StopAsync(), _ => IsRunning && !IsBusy);
+        ShowLibraryHandoffsCommand = new AsyncRelayCommand(async _ => { if (DescribeLibraryHandoffs is not null) _dialogs.ShowError(await DescribeLibraryHandoffs()); });
+        ResolveAnnotationConflictCommand = new AsyncRelayCommand(async parameter =>
+        {
+            if (SelectedAsset is not { } selected || ResolveAnnotationConflict is null) return;
+            if (!Enum.TryParse<RAWSelectionAssistant.Core.Services.Tethering.AnnotationConflictChoice>(parameter?.ToString(), out var choice)) return;
+            try
+            {
+                var error = await ResolveAnnotationConflict(selected.Record.Id, choice);
+                AnnotationStatus = error is null ? "标注交接已完成，客户备注保持独立" : "标注待关联：" + error;
+                if (error is null && await _annotationService.GetAsync(selected.Record.Id) is { } saved)
+                { selected.ApplyAnnotation(saved); ApplyAnnotationToEditor(saved); }
+            }
+            catch (Exception) { AnnotationStatus = "标注部分完成，请重试；原片未修改"; }
+        });
         ReconcileCommand = new AsyncRelayCommand(_ => ReconcileAsync(), _ => IsRunning && !IsBusy);
         ClearProxyCacheCommand = new AsyncRelayCommand(_ => ClearProxyCacheAsync(), _ => !IsBusy);
         RevealAssetCommand = new RelayCommand(value => RevealAsset(value as TetherAssetItemViewModel), value => value is TetherAssetItemViewModel);
@@ -272,6 +286,13 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     public RelayCommand ChooseBackupDestinationCommand { get; }
     public AsyncRelayCommand StartCommand { get; }
     public AsyncRelayCommand StopCommand { get; }
+    public ShootExecutionContext? CaptureContext => _executionContext;
+    public Func<Task<string>>? DescribeLibraryHandoffs { get; set; }
+    public AsyncRelayCommand ShowLibraryHandoffsCommand { get; private set; } = null!;
+    public Func<Task<int>>? RetryLibraryHandoffs { get; set; }
+    public Func<Guid, Task<RAWSelectionAssistant.Core.Services.Database.TetherAssetLibraryLink?>>? ResolveLibraryLink { get; set; }
+    public Func<Guid, RAWSelectionAssistant.Core.Services.Tethering.AnnotationConflictChoice, Task<string?>>? ResolveAnnotationConflict { get; set; }
+    public AsyncRelayCommand ResolveAnnotationConflictCommand { get; private set; } = null!;
     public AsyncRelayCommand ReconcileCommand { get; }
     public AsyncRelayCommand ClearProxyCacheCommand { get; }
     public RelayCommand RevealAssetCommand { get; }
@@ -739,7 +760,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
 
         foreach (var record in snapshot.Assets)
         {
-            if(_executionContext is{} context&&record.ProjectId==context.ProjectId&&!_captureContexts.ContainsKey(record.Id))_captureContexts[record.Id]=context;
+            // Capture context is persisted by the production discovery callback before stability processing.
             if (_assetIndex.TryGetValue(record.Id, out var existing)) existing.Update(record, _proxyCache.ResolvePath(record.ProxyCacheKey));
             else
             {
@@ -753,7 +774,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         foreach (var ready in snapshot.Assets.Where(IsReady).OrderBy(asset => asset.ReadyAtUtc ?? asset.FirstSeenAtUtc))
         {
             if (!_knownReadyAssets.Add(ready.Id)) continue;
-            if(_captureContexts.Remove(ready.Id,out var frozen)&&frozen.CurrentShotId is not null)Track(RelationCaptureAsync(frozen,ready));
+            Track(RestoreFrozenCaptureRelationAsync(ready));
             ColorSettings.NotifyLatest(ready.Id);
             var selected = _selectionCoordinator.OnReady(ready.Id);
             if (selected.HasValue && _assetIndex.TryGetValue(selected.Value, out var item)) SetSelected(item, false);
@@ -771,13 +792,18 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
         NotifyCounts();
     }
 
-    private async Task RelationCaptureAsync(ShootExecutionContext context,TetherAssetRecord asset)
+    private async Task RestoreFrozenCaptureRelationAsync(TetherAssetRecord asset)
     {
-        try{await _planningStore.AddCaptureRelationAsync(context.BindTetherCapture(asset.Id,asset.ReadyAtUtc??asset.FirstSeenAtUtc),_lifetime.Token);}
-        catch(OperationCanceledException){}
-        catch(Exception ex)when(ex is IOException or UnauthorizedAccessException or InvalidDataException){StatusText="照片已进入联机监看；拍摄关联将在稍后重试。";}
+        try
+        {
+            var context = await _captureContextStore.LoadAsync(asset.Id, _lifetime.Token);
+            if (context?.CurrentShotId is not null && context.ProjectId == asset.ProjectId)
+                await _planningStore.AddCaptureRelationAsync(context.BindTetherCapture(asset.Id, asset.ReadyAtUtc ?? asset.FirstSeenAtUtc), _lifetime.Token);
+        }
+        catch (OperationCanceledException) { }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidDataException)
+        { StatusText = "拍摄关联待重试；已保留捕获时上下文。"; }
     }
-
     private async Task LoadSelectedAsync(TetherAssetItemViewModel item, CancellationToken cancellationToken)
     {
         var request = _requestCoordinator.Begin(item.Record.Id, cancellationToken);
@@ -1270,7 +1296,7 @@ public sealed class TetherCaptureViewModel : ObservableObject, IAsyncDisposable
     {
         if (_activeSession is null) return;
         IsBusy = true;
-        try { await _activeSession.ReconcileAsync(); StatusText = "顶层目录核对完成。"; }
+        try { if (RetryLibraryHandoffs is not null) await RetryLibraryHandoffs(); await _activeSession.ReconcileAsync(); StatusText = "顶层核对已启动，失败关联已排队重试；冲突需人工处理。"; }
         catch (Exception) { StatusText = "目录核对未完成，源文件保持不变。"; }
         finally { IsBusy = false; }
     }

@@ -6,7 +6,7 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 public sealed record ColorStudioSessionTarget(Guid Id, string Path, Guid? AssetId, bool Selected,
     ReferenceLook? Look, ColorAdjustmentStack? Stack, PixelTartFilmSettings? Film,
     ColorStudioMatchEngine Engine = ColorStudioMatchEngine.Stable, MatchV4ExecutionMode ExecutionMode = MatchV4ExecutionMode.Auto,
-    int? SessionRating = null, string? SessionColorLabel = null);
+    int? SessionRating = null, string? SessionColorLabel = null, Guid? LibraryId = null, string? SourceHash = null);
 
 public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double EditingWidth = 340,
     bool AuxiliaryOpen = true, bool EditingOpen = true, int AuxiliaryMode = 0, int ToolMode = 0,
@@ -32,6 +32,9 @@ public sealed record ColorStudioSessionDocument(IReadOnlyList<ColorStudioSession
         if (Targets.Any(x => x is null || x.Id == Guid.Empty || string.IsNullOrWhiteSpace(x.Path)) || Targets.Select(x => x.Id).Distinct().Count() != Targets.Count)
             throw new InvalidDataException("工作文件中包含无效或重复的照片身份。");
         if (ActiveTargetId is Guid active && Targets.All(x => x.Id != active)) throw new InvalidDataException("当前照片不在工作文件中。");
+        if (Targets.Any(x => x.LibraryId == Guid.Empty || (x.LibraryId.HasValue && !x.AssetId.HasValue) ||
+            (x.SourceHash is not null && (x.SourceHash.Trim().Length != 64 || !x.SourceHash.Trim().All(Uri.IsHexDigit)))))
+            throw new InvalidDataException("素材身份或 SHA-256 无效。");
         var targets = Targets.Select(x => x with
         {
             Path = System.IO.Path.GetFullPath(x.Path), Look = x.Look?.Normalize(), Stack = x.Stack?.DeepClone(),

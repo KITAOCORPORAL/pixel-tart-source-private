@@ -52,10 +52,14 @@ public sealed record PlanningProjectState(Guid ProjectId, Guid? BookingId = null
     DateTimeOffset? UpdatedAt = null, int Version = 1)
 {
     // Optional additive extension: existing version-1 plans and execution relations stay intact.
+    [System.Text.Json.Serialization.JsonExtensionData]
+    public Dictionary<string, JsonElement>? Extensions { get; init; }
     public PlanningDocument? Document { get; init; }
+    public IReadOnlyList<PlanningReferenceOutcome> ReferenceOutcomes { get; init; } = [];
     public PlanningProjectState Normalize()
     {
         if (ProjectId == Guid.Empty || Revision < 0 || Version != 1) throw new ArgumentException("Planning state identity, revision or version is invalid.");
+        if (Document?.Package is { } package) { package.Validate(); if (package.ProjectId != ProjectId) throw new InvalidDataException("文档包项目身份不匹配。"); }
         var links = (VisualLinks ?? []).Select(link => link.Normalize()).GroupBy(link => link.LinkId).Select(group => group.First()).ToArray();
         var captures = (CapturedAssets ?? []).Select(item => item.Validate()).ToArray();
         if (captures.Any(item => item.ProjectId != ProjectId)) throw new ArgumentException("Captured assets must belong to the planning project.");
@@ -67,7 +71,7 @@ public sealed class PlanningProjectStore(string directory)
 {
     public bool Exists(Guid projectId) => File.Exists(FilePath(projectId));
     public Task UpdateDocumentAsync(Guid projectId, PlanningDocument document, PlanningSummary summary, CancellationToken token = default) =>
-        UpdateAsync(projectId, state => state with { Document = document, Summary = summary }, token);
+        UpdateAsync(projectId, state => state with { Document = document with { Package = ((document.Package ?? state.Document?.Package ?? new PlanningDocumentPackage { ProjectId = projectId }) with { Body = document.Body }).Validate() }, Summary = summary }, token);
     public Task LinkBookingAsync(Guid projectId, Guid bookingId, CancellationToken token = default) =>
         UpdateAsync(projectId, state => state with { BookingId = bookingId }, token);
     public string DraftPath(Guid projectId) => FilePath(projectId) + ".draft";
@@ -110,6 +114,8 @@ public sealed class PlanningProjectStore(string directory)
     public Task SetCurrentShotAsync(Guid projectId, Guid? shotId, CancellationToken token = default) => UpdateAsync(projectId, state => state with { CurrentShotId = shotId }, token);
     public Task AddVisualLinkAsync(Guid projectId, PlanningVisualLink link, CancellationToken token = default) => UpdateAsync(projectId, state => state with { VisualLinks = state.VisualLinks!.Where(item => item.LinkId != link.LinkId).Append(link).ToArray() }, token);
     public Task RemoveVisualLinkAsync(Guid projectId, Guid linkId, CancellationToken token = default) => UpdateAsync(projectId, state => state with { VisualLinks = state.VisualLinks!.Where(item => item.LinkId != linkId).ToArray() }, token);
+    public Task LinkReferenceOutcomeAsync(Guid projectId, PlanningReferenceOutcome relation, CancellationToken token = default) =>
+        UpdateAsync(projectId, state => state with { ReferenceOutcomes = state.ReferenceOutcomes.Where(x => x.ReferenceId != relation.ReferenceId || x.LibraryId != relation.LibraryId || x.AssetId != relation.AssetId).Append(relation.Validate()).ToArray() }, token);
     public Task AddCaptureRelationAsync(ShotCaptureRelation relation, CancellationToken token = default) => UpdateAsync(relation.ProjectId, state => state with { CapturedAssets = state.CapturedAssets!.Append(relation).ToArray() }, token);
 
     private static async Task<PlanningProjectState> ReadAsync(Guid projectId, string path, CancellationToken token)

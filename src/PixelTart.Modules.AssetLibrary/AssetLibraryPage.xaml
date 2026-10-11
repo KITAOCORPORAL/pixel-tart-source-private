@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PixelTart.Modules.AssetLibrary.AssetLibraryPage"
+<UserControl x:Class="PixelTart.Modules.AssetLibrary.AssetLibraryPage"
              x:Name="AssetLibraryRoot"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -21,7 +21,8 @@
         <DataTemplate x:Key="InspectorQuickToolsTemplate"><StackPanel><TextBlock Text="查看" Style="{DynamicResource PixelTart.Type.Metadata}"/><WrapPanel>
 <Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="查看大图" Command="{Binding SelectionToolCommand}" CommandParameter="View" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[View]}" Visibility="{Binding HasSingleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
 <Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="拼图" Command="{Binding SelectionToolCommand}" CommandParameter="Collage" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[Collage]}" Visibility="{Binding HasMultipleSelection, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="8,4" Margin="2" />
-</WrapPanel><TextBlock Text="转换 / 处理" Style="{DynamicResource PixelTart.Type.Metadata}"/><WrapPanel><Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="RAW → JPG" Command="{Binding SelectionToolCommand}" CommandParameter="RawToJpeg" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[RawToJpeg]}" Padding="8,4" Margin="2" />
+</WrapPanel><Button Content="进入 Color Studio" AutomationProperties.Name="以素材身份进入调色" Style="{DynamicResource PixelTart.Button.Ghost}" Command="{Binding SelectionToolCommand}" CommandParameter="Studio" />
+<TextBlock Text="转换 / 处理" Style="{DynamicResource PixelTart.Type.Metadata}"/><WrapPanel><Button Style="{DynamicResource PixelTart.Button.Ghost}" Content="RAW → JPG" Command="{Binding SelectionToolCommand}" CommandParameter="RawToJpeg" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[RawToJpeg]}" Padding="8,4" Margin="2" />
 <Button Content="{Binding QuickCompressLabel}" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="BatchCompress" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[BatchCompress]}" Padding="8,4" Margin="2" />
 </WrapPanel><TextBlock Text="输出" Style="{DynamicResource PixelTart.Type.Metadata}"/><WrapPanel><Button Content="发布配方…" AutomationProperties.AutomationId="AssetInspectorExport" Style="{DynamicResource PixelTart.Button.Primary}" Command="{Binding SelectionToolCommand}" CommandParameter="Publishing" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[Publishing]}" Padding="8,4" Margin="2" />
 <Button Content="{Binding QuickExportLabel}" Style="{DynamicResource PixelTart.Button.Secondary}" Command="{Binding SelectionToolCommand}" CommandParameter="Export" ToolTipService.ShowOnDisabled="True" ToolTip="{Binding QuickToolHints[Export]}" Padding="8,4" Margin="2" />

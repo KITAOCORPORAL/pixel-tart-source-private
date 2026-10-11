@@ -7,6 +7,7 @@ namespace PixelTart.Modules.AssetLibrary;
 
 public sealed partial class AssetLibraryViewModel
 {
+    public Func<AssetResolutionResult, Task>? OpenStudioHandler { get; set; }
     public Func<string, IReadOnlyList<string>, Task>? SelectionToolHandler { get; set; }
     public Func<IReadOnlyList<AssetItem>, Task>? OpenCanvasHandler { get; set; }
     public AsyncCommand<string> SelectionToolCommand { get; private set; } = null!;
@@ -16,7 +17,7 @@ public sealed partial class AssetLibraryViewModel
 
     private void InitializeQuickTools() => SelectionToolCommand = new(ExecuteSelectionToolAsync, CanExecuteSelectionTool);
 
-    public IReadOnlyDictionary<string,string> QuickToolHints => new[] { "View", "Canvas", "Export", "RawToJpeg", "Collage", "BatchCompress", "Publishing" }
+    public IReadOnlyDictionary<string,string> QuickToolHints => new[] { "Studio", "View", "Canvas", "Export", "RawToJpeg", "Collage", "BatchCompress", "Publishing" }
         .ToDictionary(action=>action, action=>CanExecuteSelectionTool(action) ? action switch { "Export"=>"复制磁盘原文件，不渲染调整", "Publishing"=>"使用发布配方选择格式、尺寸和输出", _=>"对当前选择执行" } :
             CaptureOrderedSelection().Any(item=>!File.Exists(GetDisplaySourcePath(item))) ? "所选源文件不可访问，请先重新定位" : action=="RawToJpeg" ? "需要选择可访问的 RAW 照片" : "此工具不适用于当前选择或当前工作区");
 
@@ -27,6 +28,7 @@ public sealed partial class AssetLibraryViewModel
         if (selected.Count == 0 || selected.Any(item => !File.Exists(GetDisplaySourcePath(item)))) return false;
         return action switch
         {
+            "Studio" => OpenStudioHandler is not null,
             "View" => selected.Count == 1,
             "Canvas" => OpenCanvasHandler is not null,
             "Export" => true,
@@ -46,6 +48,16 @@ public sealed partial class AssetLibraryViewModel
         if (selected.Count == 0) return;
         try
         {
+            if (action == "Studio")
+            {
+                foreach (var asset in selected)
+                {
+                    var resolved = await ResolveStableAssetAsync(CanvasLibraryId, asset.AssetId, asset.ContentHash);
+                    if (resolved.Status != AssetResolutionStatus.Available) { Status = resolved.Message ?? resolved.Status.ToString(); return; }
+                    if (OpenStudioHandler is not null) await OpenStudioHandler(resolved);
+                }
+                return;
+            }
             if (action == "Canvas")
             {
                 if (OpenCanvasHandler is not null) await OpenCanvasHandler(selected);

@@ -394,7 +394,25 @@ public sealed class AssetLibraryContainerService
 
 public sealed class AssetLibraryWriteLease : IAsyncDisposable
 {
+    private static readonly object SharedGate = new();
+    private static readonly Dictionary<string, AssetLibraryWriteLease> Owners = new(StringComparer.OrdinalIgnoreCase);
     private readonly FileStream _stream; private int _disposed;
+    private int _references = 1;
+    private string? _lockPath;
+    private AssetLibraryWriteLease? _borrowedFrom;
+    public static async Task<AssetLibraryWriteLease> AcquireForHandoffAsync(AssetLibraryContainerDescriptor library, CancellationToken token = default)
+    {
+        var path = Path.Combine(library.ContainerPath, "locks", "writer.lock");
+        lock (SharedGate)
+        {
+            if (Owners.TryGetValue(path, out var owner) && owner.Owner.LibraryId == library.LibraryId)
+            {
+                owner._references++;
+                return new AssetLibraryWriteLease(owner._stream, owner.Owner) { _borrowedFrom = owner };
+            }
+        }
+        return await new AssetLibraryContainerService().AcquireWriteLeaseAsync(library, token);
+    }
     private AssetLibraryWriteLease(FileStream stream, AssetLibraryLockOwner owner) { _stream = stream; Owner = owner; }
     public AssetLibraryLockOwner Owner { get; }
 
@@ -409,12 +427,27 @@ public sealed class AssetLibraryWriteLease : IAsyncDisposable
             var owner = new AssetLibraryLockOwner(1, libraryId, process.Id, process.StartTime.ToUniversalTime(), Environment.MachineName, process.SessionId, Branding.ProductVersion, Guid.NewGuid(), DateTimeOffset.UtcNow);
             var payload = JsonSerializer.SerializeToUtf8Bytes(owner, new JsonSerializerOptions { WriteIndented = true });
             stream.SetLength(0); await stream.WriteAsync(payload, cancellationToken).ConfigureAwait(false); await stream.FlushAsync(cancellationToken).ConfigureAwait(false); stream.Position = 0;
-            return new AssetLibraryWriteLease(stream, owner);
+            var lease = new AssetLibraryWriteLease(stream, owner) { _lockPath = lockPath };
+            lock (SharedGate) Owners.Add(lockPath, lease);
+            return lease;
         }
         catch { await stream.DisposeAsync().ConfigureAwait(false); throw; }
     }
 
-    public async ValueTask DisposeAsync() { if (Interlocked.Exchange(ref _disposed, 1) == 0) await _stream.DisposeAsync().ConfigureAwait(false); }
+    public ValueTask DisposeAsync()
+    {
+        if (Interlocked.Exchange(ref _disposed, 1) != 0) return ValueTask.CompletedTask;
+        lock (SharedGate)
+        {
+            var owner = _borrowedFrom ?? this;
+            if (--owner._references == 0)
+            {
+                if (owner._lockPath is not null) Owners.Remove(owner._lockPath);
+                owner._stream.Dispose();
+            }
+        }
+        return ValueTask.CompletedTask;
+    }
 }
 
 public sealed record AssetLibraryLockOwner(int Version, Guid LibraryId, int ProcessId, DateTime ProcessStartedAt, string MachineName, int SessionId, string AppVersion, Guid LeaseId, DateTimeOffset AcquiredAt);

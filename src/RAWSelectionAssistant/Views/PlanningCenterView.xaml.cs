@@ -389,9 +389,23 @@ public partial class PlanningCenterView : UserControl
         }
         if (page == "情绪板" && interactive)
         {
+            foreach (var revision in _vm.DocumentCanvasRevisions)
+            {
+                DocumentContent.Children.Add(Text("已保存画布版本 · " + revision.CapturedAt.ToLocalTime().ToString("g"), 13));
+                if (revision.PreviewPngBase64 is { } encoded)
+                {
+                    using var bytes = new MemoryStream(Convert.FromBase64String(encoded));
+                    var image = new System.Windows.Media.Imaging.BitmapImage(); image.BeginInit(); image.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad; image.StreamSource = bytes; image.EndInit(); image.Freeze();
+                    DocumentContent.Children.Add(new Image { Source = image, MaxHeight = 420, Stretch = Stretch.Uniform });
+                }
+            }
             Heading(DocumentContent, "关联的灵感板与自由画布", 17);
             foreach (var board in _vm.ProjectBoards) DocumentContent.Children.Add(Text(board.Name + " · " + board.EntryCount + " 张参考", 14));
-            foreach (var canvas in _vm.ProjectCanvases) DocumentContent.Children.Add(Action(canvas.Name, () => _vm.OpenLinkedCanvas(canvas)));
+            foreach (var canvas in _vm.ProjectCanvases)
+            {
+                DocumentContent.Children.Add(Action(canvas.Name, () => _vm.OpenLinkedCanvas(canvas)));
+                DocumentContent.Children.Add(Action("插入/更新画布版本 · " + canvas.Name, async () => { try { await _vm.CaptureCanvasDocumentAsync(canvas); } catch (Exception error) { _vm.Dialogs.ShowError("画布快照未保存：" + error.Message); } }));
+            }
         }
     }
     private ContextMenu ReferenceMenu(PlanningReferenceItem item)
@@ -414,6 +428,15 @@ public partial class PlanningCenterView : UserControl
         var groups = MenuEntry("分组", "IconProjectCenter");
         foreach (var group in _vm.MoodGroups.Concat(_vm.StylingGroups)) { var child = MenuEntry(group); child.Click += async (_, _) => await Safely(() => _vm.UpdateReferenceAsync(item, "分组", group)); groups.Items.Add(child); } menu.Items.Add(groups);
         AddAsync("上移", () => _vm.MoveDocumentReferenceAsync(item, -1)); AddAsync("下移", () => _vm.MoveDocumentReferenceAsync(item, 1));
+        var outcomes = MenuEntry("明确关联到成片", "IconProjectCenter");
+        foreach (var capture in _vm.CapturedLibraryAssets)
+        {
+            var choice = MenuEntry(capture.AssetId.ToString("D"));
+            choice.Click += async (_,_) => await Safely(() => _vm.LinkReferenceOutcomeAsync(item.Id, capture));
+            outcomes.Items.Add(choice);
+        }
+        outcomes.IsEnabled = outcomes.Items.Count > 0;
+        menu.Items.Add(outcomes);
         AddAsync("发送到自由画布", () => _vm.SendToCanvasAsync(item));
         AddAsync("用于参考仿色", () => _vm.UseReferenceForColorAsync(item));
         menu.Items.Add(new Separator());

@@ -38,6 +38,12 @@ public partial class AssetLibraryPage
         if(_canvas is not null&&!await _canvas.PrepareDocumentChangeAsync())return;
         var store=new CanvasDocumentStore(_viewModel.CanvasDirectory);var editor=new CanvasEditor(document);
         var canvas=new FreeCanvasView(editor,_previewProvider,store);
+        canvas.Surface.ResolveSource = async item =>
+        {
+            if (item.AssetId is not Guid id || item.LibraryId == Guid.Empty) return item.SourcePath;
+            var result = await _viewModel.ResolveStableAssetAsync(item.LibraryId, id, string.IsNullOrWhiteSpace(item.ContentHash) ? null : item.ContentHash);
+            return result.Status == RAWSelectionAssistant.Core.Services.AssetLibrary.AssetResolutionStatus.Available ? result.ResolvedPath : null;
+        };
         _canvas=canvas;
         canvas.SourceLoader=(source,search)=>_viewModel.LoadCanvasSourcesAsync(source,search,editor.Document.ProjectId);
         canvas.SaveBoard=(objects,target)=>_viewModel.SaveCanvasBoardAsync(objects,target,editor.Document.ProjectId);

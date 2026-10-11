@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -45,6 +45,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
     public IReadOnlyDictionary<Guid, BitmapSource> LoadedPreviews => _images;
     public Point ScreenToWorld(Point point) => new((point.X - _pan.X) / _zoom, (point.Y - _pan.Y) / _zoom);
     public Point WorldToScreen(Point point) => new(point.X * _zoom + _pan.X, point.Y * _zoom + _pan.Y);
+    public Func<CanvasObject, Task<string?>>? ResolveSource { get; set; }
     public async Task LoadPreviewsAsync()
     {
         var currentIds=Editor.Document.Objects.Select(item=>item.ObjectId).ToHashSet();
@@ -57,8 +58,10 @@ public sealed class FreeCanvasSurface : FrameworkElement
             _loading.Add(item.ObjectId);
             try
             {
-                var result = await _provider.GetAsync(new(item.SourcePath, AssetPreviewPurpose.Canvas, AssetPreviewQuality.High, requested,
-                    File.Exists(item.SourcePath) ? AssetThumbnailState.Available : AssetThumbnailState.Offline, item.AssetId, item.ContentHash));
+                var resolvedPath = ResolveSource is null ? item.SourcePath : await ResolveSource(item);
+                if (resolvedPath is null) { _images.Remove(item.ObjectId); _widths.Remove(item.ObjectId); continue; }
+                var result = await _provider.GetAsync(new(resolvedPath, AssetPreviewPurpose.Canvas, AssetPreviewQuality.High, requested,
+                    File.Exists(resolvedPath) ? AssetThumbnailState.Available : AssetThumbnailState.Offline, item.AssetId, item.ContentHash));
                 if (result.Bitmap is null && !_images.ContainsKey(item.ObjectId))
                     foreach (var width in Enumerable.Range(1,16).Select(value=>value*256).OrderByDescending(value=>value))
                     {

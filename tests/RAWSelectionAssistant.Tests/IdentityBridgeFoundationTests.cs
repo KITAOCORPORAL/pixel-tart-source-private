@@ -103,11 +103,11 @@ public sealed class IdentityBridgeFoundationTests
 
         var operation = await bridge.BeginOperationAsync("tether:" + tetherAssetId.ToString("N"), "TetherToLibrary", "TetherAsset", tetherAssetId, libraryId, hash);
         var retry = await bridge.BeginOperationAsync(operation.IdempotencyKey, operation.OperationType, operation.SourceKind, operation.SourceId, libraryId, hash);
-        Assert.AreEqual(operation.OperationId, retry.OperationId); Assert.AreEqual(2, retry.AttemptCount);
+        Assert.AreEqual(operation.OperationId, retry.OperationId); Assert.AreEqual(1, retry.AttemptCount);
         var completed = await bridge.CompleteOperationAsync(operation.OperationId, assetId);
         Assert.AreEqual(CrossModuleOperationState.Ready, completed.State); Assert.AreEqual(assetId, completed.AssetId);
         var readyRetry = await bridge.BeginOperationAsync(operation.IdempotencyKey, operation.OperationType, operation.SourceKind, operation.SourceId, libraryId, hash);
-        Assert.AreEqual(2, readyRetry.AttemptCount); Assert.AreEqual(CrossModuleOperationState.Ready, readyRetry.State);
+        Assert.AreEqual(1, readyRetry.AttemptCount); Assert.AreEqual(CrossModuleOperationState.Ready, readyRetry.State);
     }
 
     [TestMethod]
@@ -124,7 +124,31 @@ public sealed class IdentityBridgeFoundationTests
         Assert.AreEqual(0L, Convert.ToInt64(await ScalarAsync(connection, "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='TetherAssetLibraryLinks';")));
     }
 
-    private static async Task<Guid> SeedTetherAssetAsync(PixelTartDatabase database, TempDirectory temp)
+    [TestMethod]
+    public async Task StableTetherHandoffReplaysWithoutCopyAndRejectsChangedContent()
+    {
+        using var temp = new TempDirectory(); var db = new PixelTartDatabase(temp.Combine("product.db"));
+        Assert.IsTrue((await new DatabaseMigrator(db, new DatabaseBackupService(db, temp.Combine("backups"))).MigrateAsync()).Success);
+        var id = await SeedTetherAssetAsync(db, temp);
+        var assets = new SqliteTetherAssetRepository(db);
+        var asset = await assets.GetAsync(id); Assert.IsNotNull(asset);
+        var library = await new AssetLibraryContainerService().CreateAsync(temp.Combine("library.ptlibrary"), "fixture");
+        await using var activeHostLease = await new AssetLibraryContainerService().AcquireWriteLeaseAsync(library);
+        var bridge = new IdentityBridgeRepository(db);
+        var handoff = new RAWSelectionAssistant.Core.Services.Tethering.TetherLibraryHandoffService(bridge, _ => Task.FromResult<AssetLibraryContainerDescriptor?>(library));
+        Assert.IsNull(await handoff.HandoffAsync(asset));
+        var first = await bridge.GetLinkAsync(id, library.LibraryId); Assert.IsNotNull(first);
+        Assert.IsNull(await handoff.HandoffAsync(asset));
+        Assert.AreEqual(first.AssetId, (await bridge.GetLinkAsync(id, library.LibraryId))!.AssetId);        var jpegPath=temp.Combine("capture.jpg"); await File.WriteAllBytesAsync(jpegPath,[8,7,6]);
+        var jpeg=await assets.UpsertDiscoveredAsync(asset with { Id=Guid.NewGuid(),SourcePath=jpegPath,NormalizedSourcePath=jpegPath.ToUpperInvariant(),FileName="capture.jpg",Extension=".jpg",MediaKind=TetherMediaKind.PreviewImage });
+        await new RAWSelectionAssistant.Core.Services.Tethering.TetherPairingService(assets).PairAsync(jpeg);
+        Assert.IsNull(await handoff.HandoffAsync(jpeg));
+        Assert.AreNotEqual(first.AssetId,(await bridge.GetLinkAsync(jpeg.Id,library.LibraryId))!.AssetId);
+        CollectionAssert.AreEqual(new byte[]{1},await File.ReadAllBytesAsync(asset.SourcePath));
+        await File.WriteAllBytesAsync(asset.SourcePath, [2]);
+        Assert.AreEqual("IDENTITY_CONFLICT", await handoff.HandoffAsync(asset));
+        Assert.AreEqual(first.AssetId, (await bridge.GetLinkAsync(id, library.LibraryId))!.AssetId);
+    }    private static async Task<Guid> SeedTetherAssetAsync(PixelTartDatabase database, TempDirectory temp)
     {
         var session = Guid.NewGuid(); var asset = Guid.NewGuid(); var now = DateTimeOffset.UtcNow.ToString("O"); var path = temp.Combine("capture.raw"); await File.WriteAllBytesAsync(path, [1]);
         await using var connection = await database.OpenConnectionAsync(write: true); await using var command = connection.CreateCommand();

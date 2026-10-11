@@ -9,6 +9,24 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class Version230WatchFolderSessionTests
 {
     [TestMethod]
+    public async Task ProductionStablePipelineImportsPairedFilesAndReconcilesWithoutDuplicateAssets()
+    {
+        using var setup=await SetupAsync();
+        var container=await new RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryContainerService().CreateAsync(setup.Temp.Combine("ready.ptlibrary"),"Synthetic");
+        var bridge=new IdentityBridgeRepository(setup.Database);
+        var handoff=new TetherLibraryHandoffService(bridge,_=>Task.FromResult<RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryContainerDescriptor?>(container));
+        var source=new FakeEventSource(setup.WatchDirectory);
+        var adapter=new WatchFolderCameraAdapter(setup.Sessions,setup.Assets,new StableProbe(),new TetherPairingService(setup.Assets),new FakeProxyCache(),new RecordingTransfer(),new NullAudit(),new NullNotifications(),_=>source,handoff);
+        var frozen=new List<Guid>(); adapter.CaptureDiscovered=(asset,_)=>{lock(frozen)frozen.Add(asset.Id);return Task.CompletedTask;};
+        setup.Temp.CreateFile("watch/pair.jpg",[1,2,3]); setup.Temp.CreateFile("watch/pair.arw",[4,5,6]);
+        await using var session=await adapter.StartAsync(new(setup.WatchDirectory,ImportExisting:true));
+        await session.ReconcileAsync(); await session.ReconcileAsync();
+        var assets=await setup.Assets.ListBySessionAsync(session.Session.Id); Assert.HasCount(2,assets);
+        var ids=new List<Guid>(); foreach(var asset in assets){var link=await bridge.GetLinkAsync(asset.Id,container.LibraryId);Assert.IsNotNull(link);ids.Add(link.AssetId);}
+        Assert.AreNotEqual(ids[0],ids[1]); Assert.HasCount(2,frozen.Distinct().ToArray());
+        await using var repository=new RAWSelectionAssistant.Core.Services.AssetLibrary.SqliteAssetLibraryRepository(container.DatabasePath);
+        Assert.IsNotNull(await repository.GetAssetAsync(ids[0])); Assert.IsNotNull(await repository.GetAssetAsync(ids[1]));
+    }    [TestMethod]
     public async Task DefaultStart_DoesNotImportExistingTopLevelFile()
     {
         using var setup = await SetupAsync();

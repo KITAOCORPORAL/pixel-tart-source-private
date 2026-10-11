@@ -194,7 +194,12 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         if (PublishingPage is not null) ReferenceColorPage.OpenPublishing = paths => { PublishingPage.AddFiles(paths); Navigate("Publishing"); };
         if (TetherPage is not null) TetherPage.ReferenceMode.FullEditorRequested += async (_, _) =>
         {
-            await ReferenceColorPage.AcceptContextAsync(TetherPage.SelectedProject?.Id, TetherPage.SelectedAsset?.Record.Id, TetherPage.CurrentImage).ConfigureAwait(true);
+            await ReferenceColorPage.AcceptContextAsync(TetherPage.SelectedProject?.Id, null, null).ConfigureAwait(true);
+            if (TetherPage.SelectedAsset?.Record is { } captured)
+            {
+                var link = TetherPage.ResolveLibraryLink is null ? null : await TetherPage.ResolveLibraryLink(captured.Id);
+                await ReferenceColorPage.LoadTargetAsync(captured.ProjectCopyPath ?? captured.SourcePath, link?.AssetId, link?.LibraryId, link?.SourceContentHash).ConfigureAwait(true);
+            }
             NavigateToSurface("ReferenceColor");
         };
         WorkCalendarPage.PropertyChanged += ChildPage_PropertyChanged;

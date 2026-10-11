@@ -37,7 +37,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         await FlushMetadataAsync();
         var document = new ColorStudioSessionDocument(Targets.Select(item => new ColorStudioSessionTarget(item.Id, item.Path, item.AssetId, item.IsSelected,
             item.AppliedLookSnapshot, item.ColorAdjustmentStackSnapshot, item.FilmSettingsSnapshot, item.EngineSnapshot, item.ExecutionModeSnapshot,
-            item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null)).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
+            item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null, item.LibraryId, item.SourceHash)).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
             Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen });
         await ColorStudioSessionStore.SaveAsync(path, document, token);
         SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath)); StatusText = "SessionSaved";
@@ -48,7 +48,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var document = await ColorStudioSessionStore.LoadAsync(path, token);
         var restored = document.Targets.Select(item => new ReferenceTargetItem(item.Path, item.Id)
         {
-            AssetId = item.AssetId, IsSelected = item.Selected, AppliedLookSnapshot = item.Look, ColorAdjustmentStackSnapshot = item.Stack,
+            AssetId = item.AssetId, LibraryId = item.LibraryId, SourceHash = item.SourceHash, IsSelected = item.Selected, AppliedLookSnapshot = item.Look, ColorAdjustmentStackSnapshot = item.Stack,
             FilmSettingsSnapshot = item.Film, EngineSnapshot = item.Engine, ExecutionModeSnapshot = item.ExecutionMode,
             Rating = item.AssetId is null ? item.SessionRating ?? 0 : 0, ColorLabel = item.AssetId is null ? item.SessionColorLabel : null
         }).ToArray();
@@ -64,11 +64,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         foreach (var target in restored)
         {
             token.ThrowIfCancellationRequested();
-            if (!File.Exists(target.Path)) { target.Status = ReferenceTargetStatus.Failed; target.Error = "源文件暂不可用，调整已保留"; missing++; continue; }
+
+            if (!await ValidateTargetIdentityAsync(target, token)) { target.Status = ReferenceTargetStatus.Failed; missing++; continue; }
             await LoadThumbnailAsync(target, token);
         }
         await FlushMetadataAsync();
-        var active = restored.FirstOrDefault(x => x.Id == document.ActiveTargetId && File.Exists(x.Path)) ?? restored.FirstOrDefault(x => File.Exists(x.Path));
+        var active = restored.FirstOrDefault(x => x.Id == document.ActiveTargetId && x.Status != ReferenceTargetStatus.Failed && File.Exists(x.Path)) ?? restored.FirstOrDefault(x => x.Status != ReferenceTargetStatus.Failed && File.Exists(x.Path));
         if (active is not null) await ActivateTargetAsync(active);
         else { TargetImage = null; TargetName = "尚未选择待调色照片"; Editor.ApplyTargetSnapshot(null,null,null,false); await Editor.SetSourceAsync(null, null, token); }
         RefreshFilmstrip(); SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath));

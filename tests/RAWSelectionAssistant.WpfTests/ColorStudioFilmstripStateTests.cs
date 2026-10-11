@@ -13,6 +13,22 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class ColorStudioFilmstripStateTests
 {
     [TestMethod]
+    public Task SavedSessionRejectsChangedSourceInsteadOfDisplayingReplacement() => RunSta(async () =>
+    {
+        var root=Path.Combine(Path.GetTempPath(),"PixelTart-Identity-"+Guid.NewGuid()); Directory.CreateDirectory(root);
+        try
+        {
+            var image=SaveImage(root,"source.png",60); var file=Path.Combine(root,"edit.ptstudio.json");
+            using(var original=new ReferenceColorWorkspaceViewModel(new Dialogs()))
+            { await original.LoadTargetAsync(image); original.Editor.Exposure=.8; await original.SaveSessionAsync(file); }
+            SaveImage(root,"source.png",180);
+            using var reopened=new ReferenceColorWorkspaceViewModel(new Dialogs()); await reopened.LoadSessionAsync(file);
+            Assert.IsNull(reopened.ActiveTarget);
+            Assert.AreEqual(ReferenceTargetStatus.Failed,reopened.Targets[0].Status);
+            Assert.IsNotNull(reopened.Targets[0].ColorAdjustmentStackSnapshot);
+        }
+        finally { Directory.Delete(root,true); }
+    });    [TestMethod]
     public Task SyncDialogFreezesSourceTargetsAndCountsAcrossFilterAndActiveChanges() => RunSta(async () =>
     {
         var root = Path.Combine(Path.GetTempPath(), "PixelTart-FrozenSync-" + Guid.NewGuid()); Directory.CreateDirectory(root);
