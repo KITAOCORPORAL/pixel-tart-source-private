@@ -252,6 +252,9 @@ public sealed class SqliteTetherAnnotationRepository(IPixelTartDatabase database
         command.Parameters.AddWithValue("$rejected", annotation.IsRejected ? 1 : 0); command.Parameters.AddWithValue("$created", annotation.CreatedAtUtc.ToString("O"));
         command.Parameters.AddWithValue("$updated", annotation.UpdatedAtUtc.ToString("O"));
         await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        command.CommandText="CREATE TABLE IF NOT EXISTS TetherAnnotationSyncState(AssetId TEXT PRIMARY KEY,ExpectedRevision INTEGER NULL); INSERT INTO TetherAnnotationSyncState VALUES($asset,$revision) ON CONFLICT(AssetId) DO UPDATE SET ExpectedRevision=excluded.ExpectedRevision;";
+        command.Parameters.AddWithValue("$revision",(object?)annotation.ExpectedLibraryRevision ?? DBNull.Value);
+        await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
     }
 
@@ -259,11 +262,13 @@ public sealed class SqliteTetherAnnotationRepository(IPixelTartDatabase database
     {
         await using var connection = await database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         await using var command = connection.CreateCommand();
-        command.CommandText = "SELECT Id,AssetId,Rating,ColorLabel,PhotographerNote,CreatedAtUtc,UpdatedAtUtc,ClientFavorite,ClientNote,IsRejected FROM TetherAnnotations WHERE AssetId=$asset LIMIT 1;";
+        command.CommandText="CREATE TABLE IF NOT EXISTS TetherAnnotationSyncState(AssetId TEXT PRIMARY KEY,ExpectedRevision INTEGER NULL);";
+        await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        command.CommandText = "SELECT Id,AssetId,Rating,ColorLabel,PhotographerNote,CreatedAtUtc,UpdatedAtUtc,ClientFavorite,ClientNote,IsRejected,(SELECT ExpectedRevision FROM TetherAnnotationSyncState s WHERE s.AssetId=TetherAnnotations.AssetId) FROM TetherAnnotations WHERE AssetId=$asset LIMIT 1;";
         command.Parameters.AddWithValue("$asset", assetId.ToString("D"));
         await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
         if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) return null;
-        return new(Guid.Parse(reader.GetString(0)), Guid.Parse(reader.GetString(1)), reader.GetInt32(2), reader.IsDBNull(3) ? null : reader.GetString(3), reader.IsDBNull(4) ? null : reader.GetString(4), DateTimeOffset.Parse(reader.GetString(5)), DateTimeOffset.Parse(reader.GetString(6)), reader.GetInt32(7) != 0, reader.IsDBNull(8) ? null : reader.GetString(8), reader.GetInt32(9) != 0);
+        return new(Guid.Parse(reader.GetString(0)), Guid.Parse(reader.GetString(1)), reader.GetInt32(2), reader.IsDBNull(3) ? null : reader.GetString(3), reader.IsDBNull(4) ? null : reader.GetString(4), DateTimeOffset.Parse(reader.GetString(5)), DateTimeOffset.Parse(reader.GetString(6)), reader.GetInt32(7) != 0, reader.IsDBNull(8) ? null : reader.GetString(8), reader.GetInt32(9) != 0, reader.IsDBNull(10)?null:reader.GetInt64(10));
     }
 
     public async Task<IReadOnlyList<TetherAnnotationRecord>> ListBySessionAsync(Guid sessionId, CancellationToken cancellationToken = default)

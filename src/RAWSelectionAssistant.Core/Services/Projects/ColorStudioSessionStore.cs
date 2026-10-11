@@ -6,7 +6,7 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 public sealed record ColorStudioSessionTarget(Guid Id, string Path, Guid? AssetId, bool Selected,
     ReferenceLook? Look, ColorAdjustmentStack? Stack, PixelTartFilmSettings? Film,
     ColorStudioMatchEngine Engine = ColorStudioMatchEngine.Stable, MatchV4ExecutionMode ExecutionMode = MatchV4ExecutionMode.Auto,
-    int? SessionRating = null, string? SessionColorLabel = null, Guid? LibraryId = null, string? SourceHash = null);
+    int? SessionRating = null, string? SessionColorLabel = null, Guid? LibraryId = null, string? SourceHash = null, IReadOnlyList<StudioEditVersion>? EditVersions = null, Guid? ActiveEditVersionId = null);
 
 public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double EditingWidth = 340,
     bool AuxiliaryOpen = true, bool EditingOpen = true, int AuxiliaryMode = 0, int ToolMode = 0,
@@ -43,7 +43,12 @@ public sealed record ColorStudioSessionDocument(IReadOnlyList<ColorStudioSession
             Engine = Enum.IsDefined(x.Engine) ? x.Engine : throw new InvalidDataException("不支持的处理引擎。"),
             ExecutionMode = Enum.IsDefined(x.ExecutionMode) ? x.ExecutionMode : throw new InvalidDataException("不支持的执行模式。")
         }).ToArray();
-        foreach (var target in targets) target.Film?.Validate();
+        foreach (var target in targets)
+        {
+            target.Film?.Validate();
+            if (target.EditVersions is { } versions && (versions.Select(v=>v.Id).Distinct().Count()!=versions.Count || versions.Any(v=>v.Id==Guid.Empty || v.LibraryId!=target.LibraryId || v.AssetId!=target.AssetId || v.SourceHash!=target.SourceHash) || (target.ActiveEditVersionId is Guid activeVersion && !versions.Any(v=>v.Id==activeVersion)))) throw new InvalidDataException("编辑版本身份无效。");
+            foreach(var version in target.EditVersions ?? []) { if(string.IsNullOrWhiteSpace(version.Name) || !Enum.IsDefined(version.Engine) || !Enum.IsDefined(version.Mode))throw new InvalidDataException("编辑版本参数无效。");version.Stack?.Normalize(); version.Film?.Validate(); }
+        }
         return this with { Targets = targets, MinimumRating = Math.Clamp(MinimumRating, 0, 5), Layout = Layout?.Normalize() };
     }
 }

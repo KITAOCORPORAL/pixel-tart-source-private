@@ -64,7 +64,7 @@ public sealed record TetherAnnotationRecord(
     DateTimeOffset UpdatedAtUtc,
     bool ClientFavorite = false,
     string? ClientNote = null,
-    bool IsRejected = false);
+    bool IsRejected = false, long? ExpectedLibraryRevision = null);
 
 public sealed record WatchFolderStartRequest(
     string Directory,

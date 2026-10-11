@@ -342,9 +342,10 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
         await using var command = connection.CreateCommand(); command.Transaction = transaction;
-        command.CommandText = "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id;";
+        command.CommandText = "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id AND Rating=$oldRating AND Comment=$oldComment;";
+        command.Parameters.AddWithValue("$oldRating", previous.Rating); command.Parameters.AddWithValue("$oldComment", previous.Comment);
         command.Parameters.AddWithValue("$rating", nextRating); command.Parameters.AddWithValue("$comment", nextComment); command.Parameters.AddWithValue("$id", assetId.ToString("D"));
-        await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        if (await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false) != 1) throw new InvalidOperationException("标注已被另一操作更新，请重新读取。");
         var payload = new AssetMetadataChange(
             [new(assetId, previous.Rating, previous.Comment)],
             [new(assetId, nextRating, nextComment)]);

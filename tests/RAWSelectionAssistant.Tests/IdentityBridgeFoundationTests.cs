@@ -148,7 +148,31 @@ public sealed class IdentityBridgeFoundationTests
         await File.WriteAllBytesAsync(asset.SourcePath, [2]);
         Assert.AreEqual("IDENTITY_CONFLICT", await handoff.HandoffAsync(asset));
         Assert.AreEqual(first.AssetId, (await bridge.GetLinkAsync(id, library.LibraryId))!.AssetId);
-    }    private static async Task<Guid> SeedTetherAssetAsync(PixelTartDatabase database, TempDirectory temp)
+    }    [TestMethod]
+    public async Task AnnotationProductCommitSurvivesLibraryFailureAndRestartRejectsStaleRevision()
+    {
+        using var temp=new TempDirectory();var db=new PixelTartDatabase(temp.Combine("product.db"));
+        Assert.IsTrue((await new DatabaseMigrator(db,new DatabaseBackupService(db,temp.Combine("backups"))).MigrateAsync()).Success);
+        var id=await SeedTetherAssetAsync(db,temp);var assets=new SqliteTetherAssetRepository(db);var asset=(await assets.GetAsync(id))!;
+        var library=await new AssetLibraryContainerService().CreateAsync(temp.Combine("library.ptlibrary"),"fixture");
+        var annotations=new SqliteTetherAnnotationRepository(db);var bridge=new IdentityBridgeRepository(db);
+        var handoff=new RAWSelectionAssistant.Core.Services.Tethering.TetherLibraryHandoffService(bridge,_=>Task.FromResult<AssetLibraryContainerDescriptor?>(library),annotations);
+        await handoff.HandoffAsync(asset);var link=(await bridge.GetLinkAsync(id,library.LibraryId))!;
+        var fallback=new RAWSelectionAssistant.Core.Services.Tethering.TetherAnnotationService(annotations);
+        var fail=false;
+        Task<AssetLibraryContainerDescriptor?> Provider(CancellationToken _) {if(fail)throw new IOException("injected");return Task.FromResult<AssetLibraryContainerDescriptor?>(library);}
+        var service=new RAWSelectionAssistant.Core.Services.Tethering.LinkedTetherAnnotationService(fallback,handoff,Provider);
+        var original=(await service.GetAsync(id))!;fail=true;
+        var changed=original with{Rating=4,PhotographerNote="draft",ClientNote="customer"};
+        var failed=await service.SaveAsync(changed);Assert.IsFalse(failed.Success);Assert.AreEqual("customer",(await annotations.GetByAssetAsync(id))!.ClientNote);
+        fail=false;var restarted=new RAWSelectionAssistant.Core.Services.Tethering.LinkedTetherAnnotationService(fallback,handoff,Provider);
+        Assert.IsTrue((await restarted.SaveAsync((await annotations.GetByAssetAsync(id))!)).Success);
+        var store=new PhotographerAnnotationStore(new AssetLibraryDatabase(library.DatabasePath));var current=await store.ReadAsync(link.AssetId);
+        Assert.AreEqual(4,current.Rating);
+        Assert.IsFalse((await restarted.SaveAsync(changed with{Rating=2})).Success);
+        Assert.AreEqual(4,(await store.ReadAsync(link.AssetId)).Rating);
+    }
+    private static async Task<Guid> SeedTetherAssetAsync(PixelTartDatabase database, TempDirectory temp)
     {
         var session = Guid.NewGuid(); var asset = Guid.NewGuid(); var now = DateTimeOffset.UtcNow.ToString("O"); var path = temp.Combine("capture.raw"); await File.WriteAllBytesAsync(path, [1]);
         await using var connection = await database.OpenConnectionAsync(write: true); await using var command = connection.CreateCommand();

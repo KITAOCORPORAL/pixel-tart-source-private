@@ -12,6 +12,7 @@ public sealed record PlanningDocumentPackage
     public Guid DocumentId { get; init; } = Guid.NewGuid();
     public Guid ProjectId { get; init; }
     public string Body { get; init; } = "";
+    public string? RichTextPackageBase64 { get; init; }
     public IReadOnlyList<PlanningAssetReference> Assets { get; init; } = [];
     public IReadOnlyList<Guid> ShotIds { get; init; } = [];
     public IReadOnlyList<PlanningCanvasRevision> CanvasRevisions { get; init; } = [];
@@ -19,6 +20,7 @@ public sealed record PlanningDocumentPackage
     public PlanningDocumentPackage Validate()
     {
         if (Version != 1 || DocumentId == Guid.Empty || ProjectId == Guid.Empty) throw new InvalidDataException("不支持的文档包版本或身份。");
+        if(RichTextPackageBase64?.Length>64*1024*1024)throw new InvalidDataException("文档正文资源过大。");
         if (Assets is null || ShotIds is null || CanvasRevisions is null) throw new InvalidDataException("文档包集合不能为 null。");
         if (Assets.Any(a => a.LibraryId == Guid.Empty || a.AssetId == Guid.Empty) || ShotIds.Any(id => id == Guid.Empty)) throw new InvalidDataException("文档引用身份无效。");
         if (CanvasRevisions.Any(x => x.RevisionId == Guid.Empty || x.CanvasId == Guid.Empty || x.EditableSnapshot is null || x.EditableSnapshot.CanvasId != x.CanvasId)) throw new InvalidDataException("画布版本身份无效。");

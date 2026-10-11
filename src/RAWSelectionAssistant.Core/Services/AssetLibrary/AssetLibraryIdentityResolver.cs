@@ -10,7 +10,18 @@ public sealed class AssetLibraryIdentityResolver(
     AssetLibraryContainerDescriptor library,
     IAssetLibraryRepository repository)
 {
-    public async Task<AssetResolutionResult> ResolveAsync(
+    public async Task<AssetResolutionResult> ResolveAsync(AssetResolutionRequest request,CancellationToken cancellationToken=default)
+    {
+        ValidateRequest(request);
+        if(request.LibraryId==library.LibraryId && File.Exists(library.DatabasePath))
+        {
+            if(await repository.GetAssetAsync(request.AssetId,cancellationToken) is null) return Result(AssetResolutionStatus.Missing,request,message:"源素材身份不存在，未使用历史映射。");
+            var mapped=await CrossLibraryRelocation.ResolveAsync(library,request,cancellationToken);
+            if(mapped is not null)return mapped;
+        }
+        return await ResolveLocalAsync(request,cancellationToken);
+    }
+    public async Task<AssetResolutionResult> ResolveLocalAsync(
         AssetResolutionRequest request,
         CancellationToken cancellationToken = default)
     {

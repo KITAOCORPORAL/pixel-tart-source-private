@@ -40,11 +40,13 @@ public sealed class TetherLibraryHandoffService(IdentityBridgeRepository bridge,
         await using var repository = new SqliteAssetLibraryRepository(library.DatabasePath);
         var item = await repository.GetAssetAsync(link.AssetId, token);
         if (item is null) return "ASSET_MISSING";
+        var store = new PhotographerAnnotationStore(new AssetLibraryDatabase(library.DatabasePath));
+        var expected = await store.ReadAsync(item.AssetId, token);
         var proposal = TetherAnnotationMerge.Propose(item, captured, choice);
-        await repository.UpdateAssetMetadataAsync(item.AssetId, proposal.Rating, proposal.PhotographerNote, token);
-        await new AssetPresentationMetadataStore(new AssetLibraryDatabase(library.DatabasePath)).SaveAsync([item.AssetId], color: proposal.ColorLabel ?? "", token: token);
+        var written = await store.CompareExchangeAsync(expected, new(item.AssetId, proposal.Rating, proposal.ColorLabel ?? "", proposal.PhotographerNote), token);
+        if (!written.Applied) return "ANNOTATION_CONCURRENT_CONFLICT";
         await annotations.UpsertAsync(captured with { Rating = proposal.Rating, ColorLabel = proposal.ColorLabel,
-            PhotographerNote = proposal.PhotographerNote, UpdatedAtUtc = DateTimeOffset.UtcNow }, token);
+            PhotographerNote = proposal.PhotographerNote, ExpectedLibraryRevision=written.Current.Revision, UpdatedAtUtc = DateTimeOffset.UtcNow }, token);
         return null;
     }
     public async Task<string?> HandoffAsync(TetherAssetRecord asset, CancellationToken token = default)
