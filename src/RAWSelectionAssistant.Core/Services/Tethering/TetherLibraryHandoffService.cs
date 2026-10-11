@@ -115,10 +115,9 @@ public sealed class TetherLibraryHandoffService(IdentityBridgeRepository bridge,
                 var metadata = await repository.GetAssetAsync(result.AssetId, token) ?? throw new InvalidOperationException("ASSET_MISSING");
                 var proposal = TetherAnnotationMerge.Propose(metadata, annotation);
                 if (proposal.Conflicts.Count != 0) throw new InvalidOperationException("ANNOTATION_CONFLICT");
-                await repository.UpdateAssetMetadataAsync(result.AssetId, proposal.Rating, proposal.PhotographerNote, token);
-                if (!string.IsNullOrWhiteSpace(proposal.ColorLabel))
-                    await new AssetPresentationMetadataStore(new AssetLibraryDatabase(library.DatabasePath)).SaveAsync([result.AssetId], color: proposal.ColorLabel, token: token);
-            }
+                var expected=new PhotographerAnnotation(metadata.AssetId,metadata.Rating,metadata.ColorLabel,metadata.Comment,metadata.AnnotationRevision);
+                var imported=await new PhotographerAnnotationStore(new AssetLibraryDatabase(library.DatabasePath)).CompareExchangeAsync(expected,expected with{Rating=proposal.Rating,Color=proposal.ColorLabel??"",Note=proposal.PhotographerNote},token);
+                if(!imported.Applied)throw new InvalidOperationException("ANNOTATION_CONCURRENT_CONFLICT");            }
             if (!await bridge.CompleteClaimAsync(claim, result.AssetId, token)) return "HANDOFF_STALE";
             return null;
         }

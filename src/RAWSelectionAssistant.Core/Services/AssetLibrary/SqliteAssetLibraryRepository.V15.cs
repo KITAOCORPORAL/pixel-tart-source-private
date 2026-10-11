@@ -20,14 +20,16 @@ public sealed partial class SqliteAssetLibraryRepository
         await InitializeAsync(cancellationToken).ConfigureAwait(false);
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        var conflicts=new List<string>();
         var previous = new List<AssetMetadataUndo>();
         var next = new List<AssetMetadataUndo>();
         foreach (var id in ids)
         {
-            await using var read = connection.CreateCommand(); read.Transaction = transaction; read.CommandText = "SELECT Rating,Comment FROM AssetItems WHERE AssetId=$id;"; read.Parameters.AddWithValue("$id", id.ToString("D"));
+            await using var read = connection.CreateCommand(); read.Transaction = transaction; read.CommandText = "SELECT Rating,Comment,COALESCE((SELECT Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=AssetItems.AssetId),0) FROM AssetItems WHERE AssetId=$id;"; read.Parameters.AddWithValue("$id", id.ToString("D"));
             await using var reader = await read.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
             if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) continue;
-            var oldRating = reader.GetInt32(0); var oldComment = reader.GetString(1);
+            var oldRating = reader.GetInt32(0); var oldComment = reader.GetString(1);var revision=reader.GetInt64(2);
+            if(_observedMetadata.TryGetValue(id,out var observed)&&(observed.AnnotationRevision!=revision||observed.Rating!=oldRating||observed.Comment!=oldComment)){conflicts.Add($"Conflict:{id:D}");continue;}
             await reader.DisposeAsync().ConfigureAwait(false);
             var nextRating = rating ?? oldRating; var nextComment = comment ?? oldComment;
             if (nextRating == oldRating && string.Equals(nextComment, oldComment, StringComparison.Ordinal)) continue;
@@ -35,11 +37,12 @@ public sealed partial class SqliteAssetLibraryRepository
             next.Add(new(id, nextRating, nextComment));
             await ExecuteAsync(connection, transaction, "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id;", cancellationToken, ("$rating", nextRating), ("$comment", nextComment), ("$id", id.ToString("D"))).ConfigureAwait(false);
         }
-        if (previous.Count == 0) { await transaction.CommitAsync(cancellationToken).ConfigureAwait(false); return new(0, null, []); }
+        if (previous.Count == 0) { await transaction.CommitAsync(cancellationToken).ConfigureAwait(false); return new(0, null, conflicts); }
         var token = CreateUndoToken("Update asset metadata batch");
         await WriteUndoJournalAsync(connection, transaction, token, "asset-metadata-v2", new AssetMetadataChange(previous.ToArray(), next.ToArray()), cancellationToken, journalVersion: 2).ConfigureAwait(false);
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
-        return new(previous.Count, token, []);
+        foreach(var item in previous)_observedMetadata.TryRemove(item.AssetId,out _);
+        return new(previous.Count, token, conflicts);
     }
 
     public Task<AssetLibraryBatchResult> SetAssetsArchivedAsync(IEnumerable<Guid> assetIds, bool isArchived, CancellationToken cancellationToken = default) =>
@@ -1063,6 +1066,8 @@ public sealed partial class SqliteAssetLibraryRepository
             insert.Parameters.AddWithValue("$id", token.OperationId.ToString("D")); insert.Parameters.AddWithValue("$description", token.Description); insert.Parameters.AddWithValue("$kind", kind); insert.Parameters.AddWithValue("$payload", JsonSerializer.Serialize(payload)); insert.Parameters.AddWithValue("$created", token.CreatedAt.ToString("O")); insert.Parameters.AddWithValue("$version", journalVersion);
             await insert.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         }
+        if(payload is AssetMetadataChange metadata)await CaptureUndoVersionsAsync(connection,transaction,token.OperationId,metadata.After.Select(x=>x.AssetId),cancellationToken);
+        if(payload is P3BatchMetadataChange batch)await CaptureUndoVersionsAsync(connection,transaction,token.OperationId,batch.After.Assets.Select(x=>x.AssetId),cancellationToken);
         await using var trim = connection.CreateCommand();
         trim.Transaction = transaction;
         trim.CommandText = "DELETE FROM AssetLibraryUndoJournal WHERE OperationId NOT IN (SELECT OperationId FROM AssetLibraryUndoJournal ORDER BY CreatedAt DESC LIMIT $limit);";
@@ -1112,8 +1117,10 @@ public sealed partial class SqliteAssetLibraryRepository
             kind = reader.GetString(0); json = reader.GetString(1); journalVersion = reader.GetInt32(2);
         }
 
+        if(!await UndoVersionsMatchAsync(connection,transaction,operationId,kind,cancellationToken))return false;
         var handled = await DispatchPersistentUndoInTransactionAsync(connection, transaction, new(kind, json, journalVersion), cancellationToken).ConfigureAwait(false);
         if (!handled) { await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false); return false; }
+        await RefreshUndoVersionsAsync(connection,transaction,operationId,kind,cancellationToken);
         await using var mark = connection.CreateCommand(); mark.Transaction = transaction; mark.CommandText = "UPDATE AssetLibraryUndoJournal SET UndoneAt=$at WHERE OperationId=$id AND UndoneAt IS NULL;"; mark.Parameters.AddWithValue("$at", DateTimeOffset.UtcNow.ToString("O")); mark.Parameters.AddWithValue("$id", operationId.ToString("D"));
         if (await mark.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false) != 1) { await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false); return false; }
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
@@ -1153,6 +1160,7 @@ public sealed partial class SqliteAssetLibraryRepository
             if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) { await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false); return false; }
             operation = new(reader.GetString(0), reader.GetString(1), reader.GetInt32(2));
         }
+        if(!await UndoVersionsMatchAsync(connection,transaction,operationId,operation.Kind,cancellationToken))return false;
         if (operation.JournalVersion < 2 || !await DispatchPersistentRedoInTransactionAsync(connection, transaction, operation, cancellationToken).ConfigureAwait(false))
         {
             await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false);
@@ -1160,6 +1168,7 @@ public sealed partial class SqliteAssetLibraryRepository
         }
         await using var mark = connection.CreateCommand();
         mark.Transaction = transaction;
+        await RefreshUndoVersionsAsync(connection,transaction,operationId,operation.Kind,cancellationToken);
         mark.CommandText = "UPDATE AssetLibraryUndoJournal SET UndoneAt=NULL WHERE OperationId=$id AND UndoneAt IS NOT NULL;";
         mark.Parameters.AddWithValue("$id", operationId.ToString("D"));
         if (await mark.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false) != 1) { await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false); return false; }
@@ -1173,7 +1182,9 @@ public sealed partial class SqliteAssetLibraryRepository
         {
             case "asset-metadata-v2":
                 if (undo.JournalVersion < 2) return false;
-                await ApplyAssetMetadataStatesInTransactionAsync(connection, transaction, Deserialize<AssetMetadataChange>(undo.PayloadJson).Before, cancellationToken).ConfigureAwait(false);
+                var change=Deserialize<AssetMetadataChange>(undo.PayloadJson);
+                if(!await MetadataStatesMatchAsync(connection,transaction,change.After,cancellationToken))return false;
+                await ApplyAssetMetadataStatesInTransactionAsync(connection, transaction, change.Before, cancellationToken).ConfigureAwait(false);
                 return true;
             case "asset-archive-state-v2":
                 if (undo.JournalVersion < 2) return false;
@@ -1206,17 +1217,8 @@ public sealed partial class SqliteAssetLibraryRepository
                 return true;
             }
             case "asset-metadata":
-            {
-                var payload = Deserialize<AssetMetadataUndo>(undo.PayloadJson);
-                await ExecuteAsync(connection, transaction, "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id;", cancellationToken, ("$rating", payload.Rating), ("$comment", payload.Comment), ("$id", payload.AssetId.ToString("D"))).ConfigureAwait(false);
-                return true;
-            }
             case "asset-metadata-batch":
-            {
-                var payload = Deserialize<AssetMetadataBatchUndo>(undo.PayloadJson);
-                foreach (var item in payload.Items) await ExecuteAsync(connection, transaction, "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id;", cancellationToken, ("$rating", item.Rating), ("$comment", item.Comment), ("$id", item.AssetId.ToString("D"))).ConfigureAwait(false);
-                return true;
-            }
+                return false; // Old journals lack expected after-state; never overwrite current annotations.
             case "folder-membership":
             {
                 var payload = Deserialize<FolderMembershipUndo>(undo.PayloadJson);
@@ -1264,7 +1266,9 @@ public sealed partial class SqliteAssetLibraryRepository
         switch (operation.Kind)
         {
             case "asset-metadata-v2":
-                await ApplyAssetMetadataStatesInTransactionAsync(connection, transaction, Deserialize<AssetMetadataChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false);
+                var change=Deserialize<AssetMetadataChange>(operation.PayloadJson);
+                if(!await MetadataStatesMatchAsync(connection,transaction,change.Before,cancellationToken))return false;
+                await ApplyAssetMetadataStatesInTransactionAsync(connection, transaction, change.After, cancellationToken).ConfigureAwait(false);
                 return true;
             case "asset-archive-state-v2":
                 await ApplyAssetFlagStatesInTransactionAsync(connection, transaction, "IsArchived", Deserialize<AssetFlagChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false);
@@ -1295,6 +1299,10 @@ public sealed partial class SqliteAssetLibraryRepository
         }
     }
 
+    private static async Task<bool> MetadataStatesMatchAsync(SqliteConnection connection,SqliteTransaction transaction,IEnumerable<AssetMetadataUndo> expected,CancellationToken token)
+    {
+        foreach(var item in expected){await using var command=connection.CreateCommand();command.Transaction=transaction;command.CommandText="SELECT COUNT(*) FROM AssetItems WHERE AssetId=$id AND Rating=$rating AND Comment=$note;";command.Parameters.AddWithValue("$id",item.AssetId.ToString("D"));command.Parameters.AddWithValue("$rating",item.Rating);command.Parameters.AddWithValue("$note",item.Comment);if(Convert.ToInt32(await command.ExecuteScalarAsync(token))!=1)return false;}return true;
+    }
     private static async Task ApplyAssetMetadataStatesInTransactionAsync(
         SqliteConnection connection,
         SqliteTransaction transaction,
@@ -1419,8 +1427,7 @@ public sealed partial class SqliteAssetLibraryRepository
     {
         switch (undo.Kind)
         {
-            case "asset-metadata":
-                var metadata = Deserialize<AssetMetadataUndo>(undo.PayloadJson); await UpdateAssetMetadataInternalAsync(metadata.AssetId, metadata.Rating, metadata.Comment, cancellationToken).ConfigureAwait(false); return true;
+            case "asset-metadata": return false;
             case "folder-membership":
                 var folders = Deserialize<FolderMembershipUndo>(undo.PayloadJson); await ApplyFolderMembershipUndoAsync(folders, cancellationToken).ConfigureAwait(false); return true;
             case "tag-membership":

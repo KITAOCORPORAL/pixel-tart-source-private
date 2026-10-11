@@ -26,7 +26,17 @@ public sealed class PhotographerAnnotationStore(AssetLibraryDatabase database)
         command.Parameters.AddWithValue("$note",desired.Note); command.Parameters.AddWithValue("$color",desired.Color);
         await command.ExecuteNonQueryAsync(token); var committed=await ReadAsync(connection,transaction,desired.AssetId,token); transaction.Commit(); return new(true,committed);
     }
-    private static async Task EnsureAsync(SqliteConnection connection,CancellationToken token)
+    public async Task<IReadOnlyList<AnnotationBatchItemResult>> ApplyBatchAsync(IEnumerable<PhotographerAnnotation> expected,int? rating=null,string? color=null,string? note=null,CancellationToken token=default)
+    {
+        var results=new List<AnnotationBatchItemResult>();
+        foreach(var item in expected)
+        {
+            token.ThrowIfCancellationRequested();
+            try{var result=await CompareExchangeAsync(item,item with {Rating=rating??item.Rating,Color=color??item.Color,Note=note??item.Note},token);results.Add(new(item.AssetId,result.Applied?"Success":"Conflict",result.Current));}
+            catch(Exception e)when(e is IOException or SqliteException or InvalidOperationException or KeyNotFoundException or UnauthorizedAccessException){results.Add(new(item.AssetId,"Failed",null,e.GetType().Name));}
+        }
+        return results;
+    }    internal static async Task EnsureAsync(SqliteConnection connection,CancellationToken token)
     {
         await using var command=connection.CreateCommand();command.CommandText="""
         CREATE TABLE IF NOT EXISTS PhotographerAnnotationVersions(AssetId TEXT PRIMARY KEY,Revision INTEGER NOT NULL DEFAULT 0);
@@ -47,3 +57,4 @@ public sealed class PhotographerAnnotationStore(AssetLibraryDatabase database)
         return new(id,reader.GetInt32(0),reader.GetString(1),reader.GetString(2),reader.GetInt64(3));
     }
 }
+public sealed record AnnotationBatchItemResult(Guid AssetId,string Status,PhotographerAnnotation? Current,string? Error=null);

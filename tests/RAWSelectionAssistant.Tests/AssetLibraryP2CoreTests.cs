@@ -188,15 +188,15 @@ public sealed class AssetLibraryP2CoreTests
 
         var legacyToken = await setup.InsertLegacyV1MetadataJournalAsync(asset.AssetId, previousRating: 1, previousComment: "旧值", currentRating: 5, currentComment: "新值");
         await setup.RestartAsync();
-        Assert.IsTrue(await setup.Repository.UndoAsync(legacyToken));
+        Assert.IsFalse(await setup.Repository.UndoAsync(legacyToken));
         var legacyUndone = await setup.Repository.GetAssetAsync(asset.AssetId);
-        Assert.AreEqual(1, legacyUndone!.Rating);
-        Assert.AreEqual("旧值", legacyUndone.Comment);
+        Assert.AreEqual(5, legacyUndone!.Rating);
+        Assert.AreEqual("新值", legacyUndone.Comment);
         await setup.RestartAsync();
         Assert.IsFalse(await setup.Repository.RedoAsync(legacyToken));
         var legacyStillUndone = await setup.Repository.GetAssetAsync(asset.AssetId);
-        Assert.AreEqual(1, legacyStillUndone!.Rating);
-        Assert.AreEqual("旧值", legacyStillUndone.Comment);
+        Assert.AreEqual(5, legacyStillUndone!.Rating);
+        Assert.AreEqual("新值", legacyStillUndone.Comment);
     }
 
     [TestMethod]

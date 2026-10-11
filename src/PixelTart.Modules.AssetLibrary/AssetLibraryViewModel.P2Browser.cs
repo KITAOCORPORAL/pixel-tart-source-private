@@ -1757,8 +1757,7 @@ public sealed partial class AssetLibraryViewModel
     private async Task RateContextAsync(AssetVisualMatchView? card, int rating)
     {
         if (card is null) return;
-        var result = await _browserCommands.RateAsync(ContextIds(card), rating, _lifetimeCancellation.Token);
-        Status = $"已将 {result.ChangedCount} 项评分设为 {rating}。"; RaiseP2CommandStates(); await RefreshAsync();
+        var ids=ContextIds(card).ToHashSet();await ApplyUserAnnotationsAsync(AssetCards.Where(x=>ids.Contains(x.Asset.AssetId)).Select(x=>x.Asset).ToArray(),rating:rating);RaiseP2CommandStates();
     }
     private async Task SetContextMissingAsync(AssetVisualMatchView? card, bool missing)
     {

@@ -32,10 +32,10 @@ public sealed partial class AssetLibraryViewModel
         {
             if (SelectedAsset is not { } asset) return;
             var note = InspectorNote; var url = InspectorUrl;
-            RememberBrowserMutationResult(await _repository.UpdateAssetMetadataAsync(asset.AssetId, comment: note, cancellationToken: _lifetimeCancellation.Token));
+            await ApplyUserAnnotationsAsync([asset],note:note);
             await new AssetPresentationMetadataStore(_database).SaveAsync([asset.AssetId], url: url, token: _lifetimeCancellation.Token);
         }), () => IsReady && HasSingleSelection);
-        ApplyInspectorColorCommand = new(() => InspectorMutationAsync(() => new AssetPresentationMetadataStore(_database).SaveAsync(SelectedAssetIds.ToArray(), color: InspectorColor, token: _lifetimeCancellation.Token)), () => IsReady && HasSelection);
+        ApplyInspectorColorCommand = new(() => InspectorMutationAsync(() => ApplyUserAnnotationsAsync(SelectedAssets.ToArray(),color:InspectorColor)), () => IsReady && HasSelection);
         AddInspectorFolderCommand = new(() =>
         {
             var ids = SelectedAssetIds.ToArray();
@@ -61,7 +61,7 @@ public sealed partial class AssetLibraryViewModel
             await RefreshAsync();
             if (refreshOrganizations) OnP2SelectionChanged(SelectedAssets.ToArray());
             await _p2InspectorTask;
-            Status = "已保存素材库信息，源文件未更改。";
+            if(LastAnnotationResults.Count==0) Status = "已保存素材库信息，源文件未更改。";
         }
         catch (Exception exception) when (exception is System.IO.IOException or UnauthorizedAccessException or Microsoft.Data.Sqlite.SqliteException or ArgumentException)
         { Status = $"未能保存：{exception.Message}"; }

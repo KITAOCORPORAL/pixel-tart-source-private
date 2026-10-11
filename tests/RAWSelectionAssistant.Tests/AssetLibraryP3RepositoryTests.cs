@@ -617,17 +617,17 @@ public sealed class AssetLibraryP3RepositoryTests
     }
 
     [TestMethod]
-    public async Task LegacyV1JournalRemainsUndoOnlyWhileP3V2JournalHasAfterImage()
+    public async Task LegacyV1WithoutExpectedStateIsRejectedWhileP3V2HasAfterImage()
     {
         await using var setup = await AssetLibraryP3TestSetup.CreateCanonicalAsync();
         var legacy = await setup.InsertLegacyV1MetadataJournalAsync(setup.A, 1, "旧值", 5, "新值");
 
         await setup.RestartAsync();
-        Assert.IsTrue(await setup.Repository.UndoAsync(legacy));
-        Assert.AreEqual(1, (await setup.Repository.GetAssetAsync(setup.A))!.Rating);
+        Assert.IsFalse(await setup.Repository.UndoAsync(legacy));
+        Assert.AreEqual(5, (await setup.Repository.GetAssetAsync(setup.A))!.Rating);
         await setup.RestartAsync();
         Assert.IsFalse(await setup.Repository.RedoAsync(legacy));
-        Assert.AreEqual(1, (await setup.Repository.GetAssetAsync(setup.A))!.Rating);
+        Assert.AreEqual(5, (await setup.Repository.GetAssetAsync(setup.A))!.Rating);
 
         var v2 = await setup.Repository.UpdateAssetsMetadataAsync([setup.A], rating: 4, comment: "P3 after image");
         Assert.IsNotNull(v2.UndoToken);

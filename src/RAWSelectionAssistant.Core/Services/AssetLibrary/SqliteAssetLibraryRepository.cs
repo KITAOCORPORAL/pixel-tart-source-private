@@ -18,6 +18,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
 {
     private readonly AssetLibraryDatabase _database;
     private readonly ConcurrentDictionary<Guid, Func<CancellationToken, Task>> _undo = new();
+    private readonly ConcurrentDictionary<Guid,AssetItem> _observedMetadata=new();
     private int _initialized;
 
     public SqliteAssetLibraryRepository(string databasePath) : this(new AssetLibraryDatabase(databasePath)) { }
@@ -32,6 +33,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await CreateSchemaV6BackupIfNeededAsync(connection, cancellationToken).ConfigureAwait(false);
         await AssetLibrarySchema.EnsureAsync(connection, cancellationToken).ConfigureAwait(false);
+        await PhotographerAnnotationStore.EnsureAsync(connection,cancellationToken);
         Volatile.Write(ref _initialized, 1);
     }
 
@@ -333,7 +335,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
 
     public async Task<AssetLibraryBatchResult> UpdateAssetMetadataAsync(Guid assetId, int? rating = null, string? comment = null, CancellationToken cancellationToken = default)
     {
-        var previous = await GetAssetAsync(assetId, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException($"Asset {assetId} was not found.");
+        var previous = _observedMetadata.TryGetValue(assetId,out var observed)?observed:await GetAssetAsync(assetId, cancellationToken).ConfigureAwait(false) ?? throw new KeyNotFoundException($"Asset {assetId} was not found.");
         var nextRating = rating ?? previous.Rating;
         if (nextRating is < 0 or > 5) throw new ArgumentOutOfRangeException(nameof(rating));
         var nextComment = comment ?? previous.Comment;
@@ -342,7 +344,8 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         await using var connection = await _database.OpenConnectionAsync(write: true, cancellationToken).ConfigureAwait(false);
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
         await using var command = connection.CreateCommand(); command.Transaction = transaction;
-        command.CommandText = "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id AND Rating=$oldRating AND Comment=$oldComment;";
+        command.CommandText = "UPDATE AssetItems SET Rating=$rating,Comment=$comment WHERE AssetId=$id AND Rating=$oldRating AND Comment=$oldComment AND COALESCE((SELECT Revision FROM PhotographerAnnotationVersions WHERE AssetId=$id),0)=$expectedRevision;";
+        command.Parameters.AddWithValue("$expectedRevision",previous.AnnotationRevision);
         command.Parameters.AddWithValue("$oldRating", previous.Rating); command.Parameters.AddWithValue("$oldComment", previous.Comment);
         command.Parameters.AddWithValue("$rating", nextRating); command.Parameters.AddWithValue("$comment", nextComment); command.Parameters.AddWithValue("$id", assetId.ToString("D"));
         if (await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false) != 1) throw new InvalidOperationException("标注已被另一操作更新，请重新读取。");
@@ -352,6 +355,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         var token = CreateUndoToken("Update asset metadata");
         await WriteUndoJournalAsync(connection, transaction, token, "asset-metadata-v2", payload, cancellationToken, journalVersion: 2).ConfigureAwait(false);
         await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        _observedMetadata.TryRemove(assetId,out _);
         return new(1, token, []);
     }
 
@@ -892,9 +896,10 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         await using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 131072, true); var hash = await SHA256.HashDataAsync(stream, cancellationToken).ConfigureAwait(false); return Convert.ToHexString(hash);
     }
 
-    private static AssetItem ReadAsset(SqliteDataReader reader)
+    private AssetItem ReadAsset(SqliteDataReader reader)
     {
-        return new(Guid.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt64(5), reader.IsDBNull(6) ? null : reader.GetString(6), reader.IsDBNull(7) ? null : reader.GetInt32(7), reader.IsDBNull(8) ? null : reader.GetInt32(8), reader.IsDBNull(9) ? null : reader.GetString(9), reader.IsDBNull(10) ? null : DateTimeOffset.Parse(reader.GetString(10)), DateTimeOffset.Parse(reader.GetString(11)), DateTimeOffset.Parse(reader.GetString(12)), reader.GetInt32(13), reader.GetString(14), reader.GetInt32(15) != 0, reader.GetInt32(16) != 0, Enum.TryParse<AssetImportMode>(reader.GetString(17), true, out var mode) ? mode : AssetImportMode.Reference, reader.IsDBNull(18) ? null : reader.GetString(18)) { ColorLabel = reader.GetString(19) };
+        var item = new AssetItem(Guid.Parse(reader.GetString(0)), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt64(5), reader.IsDBNull(6) ? null : reader.GetString(6), reader.IsDBNull(7) ? null : reader.GetInt32(7), reader.IsDBNull(8) ? null : reader.GetInt32(8), reader.IsDBNull(9) ? null : reader.GetString(9), reader.IsDBNull(10) ? null : DateTimeOffset.Parse(reader.GetString(10)), DateTimeOffset.Parse(reader.GetString(11)), DateTimeOffset.Parse(reader.GetString(12)), reader.GetInt32(13), reader.GetString(14), reader.GetInt32(15) != 0, reader.GetInt32(16) != 0, Enum.TryParse<AssetImportMode>(reader.GetString(17), true, out var mode) ? mode : AssetImportMode.Reference, reader.IsDBNull(18) ? null : reader.GetString(18)) { ColorLabel = reader.GetString(19), AnnotationRevision = reader.GetInt64(20) };
+        _observedMetadata[item.AssetId]=item;return item;
     }
 
     private static AssetFolder ReadFolder(SqliteDataReader reader)
@@ -902,7 +907,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         return new(Guid.Parse(reader.GetString(0)), reader.IsDBNull(1) ? null : Guid.Parse(reader.GetString(1)), reader.GetString(2), reader.GetString(3), reader.IsDBNull(4) ? null : reader.GetString(4), reader.IsDBNull(5) ? null : reader.GetString(5), reader.GetInt32(6), DateTimeOffset.Parse(reader.GetString(7)), DateTimeOffset.Parse(reader.GetString(8)), reader.GetInt32(9) != 0, reader.GetInt32(10) != 0, []);
     }
 
-    private const string SelectAssetSql = "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),'') FROM AssetItems a";
+    private const string SelectAssetSql = "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),''),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a";
 
     private static string NormalizePath(string path) => OperatingSystem.IsWindows() ? path.ToUpperInvariant() : path;
     private static string NormalizeExtension(string extension) => string.IsNullOrWhiteSpace(extension) ? string.Empty : (extension.StartsWith('.') ? extension : "." + extension).ToUpperInvariant();

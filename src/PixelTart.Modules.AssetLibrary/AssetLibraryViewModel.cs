@@ -1393,10 +1393,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
     {
         rating = Math.Clamp(rating, 0, 5);
         if (SelectedAssets.Count == 1 && SelectedAssets[0].Rating == rating) rating = 0;
-        var result = await _repository.UpdateAssetsMetadataAsync(SelectedAssets.Select(asset => asset.AssetId), rating: rating);
-        RememberBrowserMutationResult(result);
-        Status = rating == 0 ? $"已清除 {SelectionCount} 项评分" : $"已将 {SelectionCount} 项评分设为 {rating}";
-        await RefreshAsync();
+        await ApplyUserAnnotationsAsync(SelectedAssets.ToArray(),rating:rating);
         RaiseActions();
     }
     private async Task UndoAsync()

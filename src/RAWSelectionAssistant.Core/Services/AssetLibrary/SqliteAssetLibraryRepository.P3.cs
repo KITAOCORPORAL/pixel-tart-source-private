@@ -1567,10 +1567,10 @@ public sealed partial class SqliteAssetLibraryRepository
         var result = new List<P3AssetState>();
         await using var command = connection.CreateCommand();
         command.Transaction = transaction;
-        command.CommandText = "SELECT a.AssetId,a.Rating,a.Comment,a.IsArchived,a.IsMissing FROM AssetItems a JOIN P3SelectedAssets s ON s.AssetId=a.AssetId ORDER BY a.AssetId;";
+        command.CommandText = "SELECT a.AssetId,a.Rating,a.Comment,a.IsArchived,a.IsMissing,COALESCE((SELECT Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a JOIN P3SelectedAssets s ON s.AssetId=a.AssetId ORDER BY a.AssetId;";
         await using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
         while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
-            result.Add(new(Guid.Parse(reader.GetString(0)), reader.GetInt32(1), reader.GetString(2), reader.GetInt32(3) != 0, reader.GetInt32(4) != 0));
+            result.Add(new(Guid.Parse(reader.GetString(0)), reader.GetInt32(1), reader.GetString(2), reader.GetInt32(3) != 0, reader.GetInt32(4) != 0,reader.GetInt64(5)));
         return result;
     }
 
@@ -1641,7 +1641,7 @@ public sealed partial class SqliteAssetLibraryRepository
         var afterMemberships = MembershipKeys(after);
         return before.Assets.Count(asset =>
             !afterAssets.TryGetValue(asset.AssetId, out var afterAsset) ||
-            asset != afterAsset ||
+            asset with {AnnotationRevision=0} != afterAsset with {AnnotationRevision=0} ||
             !string.Equals(beforeMemberships[asset.AssetId], afterMemberships.GetValueOrDefault(asset.AssetId), StringComparison.Ordinal));
     }
 
@@ -1716,7 +1716,7 @@ public sealed partial class SqliteAssetLibraryRepository
         if (operation.JournalVersion < 2) return false;
         switch (operation.Kind)
         {
-            case "asset-batch-metadata-v2": await ApplyP3BatchSnapshotAsync(connection, transaction, Deserialize<P3BatchMetadataChange>(operation.PayloadJson).Before, cancellationToken).ConfigureAwait(false); return true;
+            case "asset-batch-metadata-v2": {var change=Deserialize<P3BatchMetadataChange>(operation.PayloadJson);if(!await P3MetadataMatchesAsync(connection,transaction,change.After,cancellationToken))return false;await ApplyP3BatchSnapshotAsync(connection, transaction, change.Before, cancellationToken).ConfigureAwait(false); return true;}
             case "tag-state-v2": await RestoreTagJournalStateInTransactionAsync(connection, transaction, Deserialize<P3TagStateChange>(operation.PayloadJson).Before, cancellationToken).ConfigureAwait(false); return true;
             case "tag-batch-state-v2": foreach (var tag in Deserialize<P3TagBatchStateChange>(operation.PayloadJson).Before) await RestoreTagJournalStateInTransactionAsync(connection, transaction, tag, cancellationToken).ConfigureAwait(false); return true;
             case "tag-merge-v2": await ApplyP3TagMergeStateAsync(connection, transaction, Deserialize<P3TagMergeChange>(operation.PayloadJson).Before, cancellationToken).ConfigureAwait(false); return true;
@@ -1738,7 +1738,7 @@ public sealed partial class SqliteAssetLibraryRepository
         if (operation.JournalVersion < 2) return false;
         switch (operation.Kind)
         {
-            case "asset-batch-metadata-v2": await ApplyP3BatchSnapshotAsync(connection, transaction, Deserialize<P3BatchMetadataChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false); return true;
+            case "asset-batch-metadata-v2": {var change=Deserialize<P3BatchMetadataChange>(operation.PayloadJson);if(!await P3MetadataMatchesAsync(connection,transaction,change.Before,cancellationToken))return false;await ApplyP3BatchSnapshotAsync(connection, transaction, change.After, cancellationToken).ConfigureAwait(false); return true;}
             case "tag-state-v2": await RestoreTagJournalStateInTransactionAsync(connection, transaction, Deserialize<P3TagStateChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false); return true;
             case "tag-batch-state-v2": foreach (var tag in Deserialize<P3TagBatchStateChange>(operation.PayloadJson).After) await RestoreTagJournalStateInTransactionAsync(connection, transaction, tag, cancellationToken).ConfigureAwait(false); return true;
             case "tag-merge-v2": await ApplyP3TagMergeStateAsync(connection, transaction, Deserialize<P3TagMergeChange>(operation.PayloadJson).After, cancellationToken).ConfigureAwait(false); return true;
@@ -1755,6 +1755,10 @@ public sealed partial class SqliteAssetLibraryRepository
         }
     }
 
+    private static async Task<bool> P3MetadataMatchesAsync(SqliteConnection connection,SqliteTransaction transaction,P3BatchSnapshot expected,CancellationToken token)
+    {
+        foreach(var item in expected.Assets){await using var command=connection.CreateCommand();command.Transaction=transaction;command.CommandText="SELECT COUNT(*) FROM AssetItems WHERE AssetId=$id AND Rating=$rating AND Comment=$note AND IsArchived=$archived AND IsMissing=$missing;";command.Parameters.AddWithValue("$id",item.AssetId.ToString("D"));command.Parameters.AddWithValue("$rating",item.Rating);command.Parameters.AddWithValue("$note",item.Comment);command.Parameters.AddWithValue("$archived",item.IsArchived?1:0);command.Parameters.AddWithValue("$missing",item.IsMissing?1:0);if(Convert.ToInt32(await command.ExecuteScalarAsync(token))!=1)return false;}return true;
+    }
     private static async Task ApplyP3BatchSnapshotAsync(SqliteConnection connection, SqliteTransaction transaction, P3BatchSnapshot snapshot, CancellationToken cancellationToken)
     {
         foreach (var asset in snapshot.Assets)
@@ -1771,7 +1775,7 @@ public sealed partial class SqliteAssetLibraryRepository
             await ExecuteAsync(connection, transaction, "INSERT INTO AssetFolderMemberships(AssetId,FolderId,AddedAt) VALUES($asset,$folder,$at);", cancellationToken, ("$asset", row.AssetId.ToString("D")), ("$folder", row.FolderId.ToString("D")), ("$at", row.AddedAt.ToString("O"))).ConfigureAwait(false);
     }
 
-    private sealed record P3AssetState(Guid AssetId, int Rating, string Comment, bool IsArchived, bool IsMissing);
+    private sealed record P3AssetState(Guid AssetId, int Rating, string Comment, bool IsArchived, bool IsMissing,long AnnotationRevision=0);
     private sealed record P3BatchSnapshot(P3AssetState[] Assets, AssetTagMembership[] Tags, AssetFolderMembership[] Folders);
     private sealed record P3BatchSimulation(P3BatchSnapshot Before, P3BatchSnapshot After);
     private sealed record P3BatchMetadataChange(P3BatchSnapshot Before, P3BatchSnapshot After);

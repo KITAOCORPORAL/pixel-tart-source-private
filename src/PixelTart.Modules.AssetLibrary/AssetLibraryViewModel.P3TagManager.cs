@@ -1,3 +1,4 @@
+using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using System.Collections.ObjectModel;
 using System.Security.Cryptography;
 using System.Text;
@@ -526,11 +527,13 @@ public sealed partial class AssetLibraryViewModel
         }
         catch (Exception exception)
         {
+            LastAnnotationResults=request.AssetIds.Select(id=>new AnnotationBatchItemResult(id,exception is InvalidOperationException?"Conflict":"Failed",null,exception.GetType().Name)).ToArray();OnPropertyChanged(nameof(LastAnnotationResults));
             P3BatchPreviewSummary = $"批量修改失败，事务未部分提交：{exception.Message}";
             PublishP3BatchApplyCompletion(AssetLibraryP3BatchApplyOutcome.Failed, operationId: null);
             return;
         }
 
+        LastAnnotationResults=request.AssetIds.Select(id=>new AnnotationBatchItemResult(id,"Success",null)).ToArray();OnPropertyChanged(nameof(LastAnnotationResults));
         RememberP3MetadataResult(result);
         try
         {

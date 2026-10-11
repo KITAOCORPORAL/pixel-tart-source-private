@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Automation;
@@ -256,6 +256,7 @@ public sealed class EmbeddedAssetLibraryWpfTests
                 vm.SaveInspectorDetailsCommand.Execute(null); vm.SaveInspectorDetailsCommand.ExecutionTask.CompleteOnDispatcher();
                 Assert.AreEqual("构图参考", vm.SelectedAsset!.Comment);
                 Assert.AreEqual("https://example.test/reference", vm.InspectorUrl);
+                assets=vm.AssetCards.Select(card=>card.Asset).ToArray();
                 vm.SyncSelection(assets);
                 Assert.IsTrue(vm.IsMultipleInspectorVisible); Assert.IsNull(vm.SelectedAsset);
                 Assert.HasCount(2, vm.InspectorSelectedCards);
