@@ -1,0 +1,330 @@
+[
+  {
+    "name": "core-all.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 1638,
+    "passed": 1632,
+    "failed": 0,
+    "skipped": 6,
+    "sha256": "81517464FE15C04B053B14BAC02CC9FCC6FA5F5D48EE2BFC057FCD608BF42B01",
+    "failures": [],
+    "skippedNames": [
+      "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "CpuGpuParityAcrossEightSceneClasses",
+      "CpuGpuParityOnSyntheticScene",
+      "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled"
+    ]
+  },
+  {
+    "name": "core-current.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 1639,
+    "passed": 1633,
+    "failed": 0,
+    "skipped": 6,
+    "sha256": "287F7C01EE13C189FF74E4761FE11531E3A7DD540BB8558727609A3E7B2BF6FD",
+    "failures": [],
+    "skippedNames": [
+      "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "CpuGpuParityAcrossEightSceneClasses",
+      "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "CpuGpuParityOnSyntheticScene"
+    ]
+  },
+  {
+    "name": "core-delivery.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 1638,
+    "passed": 1632,
+    "failed": 0,
+    "skipped": 6,
+    "sha256": "2AC27835E6A9D9738582C2E88D7D6E7B10554C93452344DC95924E19B503E929",
+    "failures": [],
+    "skippedNames": [
+      "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "CpuGpuParityAcrossEightSceneClasses",
+      "CpuGpuParityOnSyntheticScene",
+      "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled"
+    ]
+  },
+  {
+    "name": "core-final-boundary.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 9,
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "sha256": "E3BBBEAED8242839C0B024E864863AE35FC4FA763631EF44080C6E9EE09CA9E0",
+    "failures": [],
+    "skippedNames": []
+  },
+  {
+    "name": "core-focused-final.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "sha256": "4709DD9248A0020E5BE5CBD7228BAC798E39145D024FD5003733F9E65443E92E",
+    "failures": [],
+    "skippedNames": []
+  },
+  {
+    "name": "core-focused-r3.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "sha256": "D1FA16B3A002108DEF86CAA30CFDB6A09613DA3D94C65F65B319535ADA37E37C",
+    "failures": [],
+    "skippedNames": []
+  },
+  {
+    "name": "core-source-final.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 10,
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0,
+    "sha256": "C4CEDBD9F3F610D888BCD2352D44D186BDEA109088CE4CA05552EDB350C333E4",
+    "failures": [],
+    "skippedNames": []
+  },
+  {
+    "name": "focused.trx",
+    "provenance": "entry-existing draft; not current-source proof",
+    "outcome": "Completed",
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "sha256": "0C991A58AE66BB7EDAE8DB2D398D7142B7B6CAD966E524BF17787E7D69722B24",
+    "failures": [],
+    "skippedNames": []
+  },
+  {
+    "name": "workspace.trx",
+    "provenance": "entry-existing draft; not current-source proof",
+    "outcome": "Completed",
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "sha256": "44120EC7F3D17CE93A1F1392F6A49284F509947625A2B25E7DD365A29C6FFD01",
+    "failures": [],
+    "skippedNames": []
+  },
+  {
+    "name": "wpf-all-r2.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Failed",
+    "total": 1537,
+    "passed": 1522,
+    "failed": 1,
+    "skipped": 14,
+    "sha256": "A9C1C34C111ECEC8D6C701B94D1F28AA11EC486ED2DB31DE362BA284C05B12C9",
+    "failures": [
+      "CorruptTargetAndFailedExportKeepFrameAndRecoverTests"
+    ],
+    "skippedNames": [
+      "BaselineGuard_RequiresExplicitApproval",
+      "ProductionApp_AllRoutes_RenderReviewInventory",
+      "RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+      "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+      "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+      "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+      "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+      "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+      "ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+      "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+      "CompanyRealRawProductAcceptanceGate",
+      "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+      "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts"
+    ]
+  },
+  {
+    "name": "wpf-all.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Failed",
+    "total": 289,
+    "passed": 288,
+    "failed": 0,
+    "skipped": 1,
+    "sha256": "626049BF9C81D61333E568AA9B5B48A31BCCED7B1D005145F115EB160EE7FD5A",
+    "failures": [],
+    "skippedNames": [
+      "ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt"
+    ]
+  },
+  {
+    "name": "wpf-current.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 1537,
+    "passed": 1523,
+    "failed": 0,
+    "skipped": 14,
+    "sha256": "9C29123CA9E6C279F14D6BFA65CA9518C3D268C6F3777B6F48A09ED2A498975F",
+    "failures": [],
+    "skippedNames": [
+      "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+      "CompanyRealRawProductAcceptanceGate",
+      "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+      "ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+      "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+      "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+      "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+      "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+      "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+      "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+      "BaselineGuard_RequiresExplicitApproval",
+      "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+      "ProductionApp_AllRoutes_RenderReviewInventory"
+    ]
+  },
+  {
+    "name": "wpf-delivery.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 1537,
+    "passed": 1523,
+    "failed": 0,
+    "skipped": 14,
+    "sha256": "8A3BA6F5808788D1AE73862D9EF3B4FB015B3240081097032511C73E79F2C680",
+    "failures": [],
+    "skippedNames": [
+      "ProductionApp_AllRoutes_RenderReviewInventory",
+      "BaselineGuard_RequiresExplicitApproval",
+      "RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+      "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+      "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+      "CompanyRealRawProductAcceptanceGate",
+      "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+      "ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+      "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+      "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+      "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+      "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+      "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts"
+    ]
+  },
+  {
+    "name": "wpf-focused-r2.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "sha256": "1297CCD8DA034337138DEEF9A95FD4D81072947443D6F07A14556E4165F36A14",
+    "failures": [],
+    "skippedNames": []
+  },
+  {
+    "name": "wpf-focused-r3.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Failed",
+    "total": 2,
+    "passed": 1,
+    "failed": 1,
+    "skipped": 0,
+    "sha256": "8F63369EA3B01034569011F761F9D8D2AB885D1B10A5C73BD424520367615050",
+    "failures": [
+      "DecodeFailureKeepsOldVersionAndParametersAndLateCreationCannotReplaceAnotherTarget"
+    ],
+    "skippedNames": []
+  },
+  {
+    "name": "wpf-focused-r4.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Failed",
+    "total": 2,
+    "passed": 1,
+    "failed": 1,
+    "skipped": 0,
+    "sha256": "203B2F8587B0AF806369D257061F8D49E6B86C7FC43D6CDAA0317A360A103322",
+    "failures": [
+      "DecodeFailureKeepsOldVersionAndParametersAndLateCreationCannotReplaceAnotherTarget"
+    ],
+    "skippedNames": []
+  },
+  {
+    "name": "wpf-focused-r5.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "sha256": "D83A91A28A9FD2F93656D5E0D45624699CEF63549126E138A48B5006B5ADB49E",
+    "failures": [],
+    "skippedNames": []
+  },
+  {
+    "name": "wpf-product-final.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "sha256": "C21F044FCA78522C975C662BD6DB166BDD342373F4BEDE2A62FE233DAEA8D6FA",
+    "failures": [],
+    "skippedNames": []
+  },
+  {
+    "name": "wpf-product-r3.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "sha256": "D27EF1FB9213DC9C62830D262EE1F14250822D66BF00E79F74E72DF677F8DC6C",
+    "failures": [],
+    "skippedNames": []
+  },
+  {
+    "name": "wpf-source-final-r2.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 4,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 1,
+    "sha256": "BBECC6AFE39987AC9BE9493F627ACB61BBF3B6FE36058AFF4A7912A405052ED3",
+    "failures": [],
+    "skippedNames": [
+      "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport"
+    ]
+  },
+  {
+    "name": "wpf-source-verified.trx",
+    "provenance": "this execution; see failure history",
+    "outcome": "Completed",
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "sha256": "2FDE9EB1EF9E67CFB8D06B2DDD1087D656ABDBD5F5E515732DD35DF33C139E4A",
+    "failures": [],
+    "skippedNames": []
+  }
+]

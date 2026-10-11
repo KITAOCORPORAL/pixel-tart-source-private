@@ -1,0 +1,56 @@
+{
+  "model": "EOS 5D Mark III",
+  "Width": 5796,
+  "Height": 3870,
+  "rows": [
+    {
+      "stage": "Decode",
+      "ms": 1192,
+      "workingSet": 322920448,
+      "peakWorkingSet": 683134976,
+      "managed": 270684560
+    },
+    {
+      "stage": "Preview1600-0",
+      "ms": 158,
+      "workingSet": 343695360,
+      "peakWorkingSet": 683134976,
+      "managed": 290352072
+    },
+    {
+      "stage": "Preview1600-1",
+      "ms": 174,
+      "workingSet": 365527040,
+      "peakWorkingSet": 683134976,
+      "managed": 310859672
+    },
+    {
+      "stage": "Preview1600-2",
+      "ms": 140,
+      "workingSet": 386273280,
+      "peakWorkingSet": 683134976,
+      "managed": 331374512
+    },
+    {
+      "stage": "Preview1600-3",
+      "ms": 133,
+      "workingSet": 406798336,
+      "peakWorkingSet": 683134976,
+      "managed": 351888360
+    },
+    {
+      "stage": "RenderFull",
+      "ms": 1384,
+      "workingSet": 675983360,
+      "peakWorkingSet": 683134976,
+      "managed": 621054624
+    },
+    {
+      "stage": "WriteTiff16",
+      "ms": 500,
+      "workingSet": 1544052736,
+      "peakWorkingSet": 1544052736,
+      "managed": 1097306504
+    }
+  ]
+}

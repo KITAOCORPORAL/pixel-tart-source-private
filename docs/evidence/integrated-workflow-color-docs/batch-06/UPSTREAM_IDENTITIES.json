@@ -1,0 +1,54 @@
+{
+  "LibRawTag": "0.21.1",
+  "LibRawCommit": "cccb97647fcee56801fa68231fa8a38aa8b52ef7",
+  "WrapperVersion": "0.21.1.7",
+  "WrapperCommit": "43e9c1771c2b1387c2170e084e433d8bcef51cab",
+  "sources": [
+    {
+      "path": "artifacts/batch06/libraw-official/src/utils/init_close_utils.cpp",
+      "sha256": "07086D853683AD2D4C6B3C879E7FB5DF13B1D3AD8688DA245C8AE6680306CA26"
+    },
+    {
+      "path": "artifacts/batch06/libraw-official/src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "sha256": "77D8A17AAFFA9B79CD3985384925754140E9BFEF01EDD756085DA4CAAADFE043"
+    },
+    {
+      "path": "artifacts/batch06/libraw-official/src/postprocessing/postprocessing_utils.cpp",
+      "sha256": "DF3DAF229CC0601C452E6270785893545CD969E90E33C512850200C2E9FD7C85"
+    },
+    {
+      "path": "artifacts/batch06/libraw-official/src/postprocessing/mem_image.cpp",
+      "sha256": "CB75F800482EB9DC6C4DA338FA95FB4E0E2B40174E20933C85796F54EC506C2D"
+    },
+    {
+      "path": "artifacts/batch06/libraw-official/src/utils/curves.cpp",
+      "sha256": "2F9DF123B4F7997253ED0D6274F239C468CF5D7D4BEBFA6032C4CB9C77820230"
+    },
+    {
+      "path": "artifacts/batch06/libraw-official/src/tables/colorconst.cpp",
+      "sha256": "8C8D2818E79501E5F1177AD3F4BAB16EDD2009B57626FFA8182C3AECB46F62DE"
+    },
+    {
+      "path": "artifacts/batch06/wrapper-current/Sdcb.LibRaw/RawContext.cs",
+      "sha256": "E54328BD241FD2EFBC3F3C7F5DBA7BCCD9A248F85E0B91F7D9DD429012F3B52B"
+    },
+    {
+      "path": "artifacts/batch06/wrapper-current/Sdcb.LibRaw/OutputParams.cs",
+      "sha256": "7701C0142E980A55882922C67CC392B63A518190A505EDC6C0B38989191904C2"
+    },
+    {
+      "path": "artifacts/batch06/wrapper-current/Sdcb.LibRaw/Natives/LibRawStructures.cs",
+      "sha256": "2257755A363B91D838E824C9B15FD255BD4FA77AA45CDC2B781A7506880C8EDE"
+    },
+    {
+      "path": "artifacts/batch06/wrapper-current/Sdcb.LibRaw/Natives/NativeLibRawData.cs",
+      "sha256": "F83B861DF2DD2EF1E22A3AC943BB762A5597D6A070F0853BC512ED740567B491"
+    },
+    {
+      "path": "artifacts/batch06/libraw-official/src/metadata/identify.cpp",
+      "sha256": "7EB7F94D82860A2750632D03A1DC9502F84D50DA56DCC7860EE795031A588BE7"
+    }
+  ],
+  "webTool": "No source output returned; verified using curl.exe and official Git clones, no browser",
+  "failedFetches": "Initial raw GitHub curl resets and one full wrapper clone failed; bounded retry via shallow clone + exact commit succeeded"
+}
