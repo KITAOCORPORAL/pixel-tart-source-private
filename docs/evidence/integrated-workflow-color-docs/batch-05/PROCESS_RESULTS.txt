@@ -1,0 +1,16 @@
+ABA_REJECTED
+CRASH_LOCK_RELEASED
+PRODUCT_COMMIT_LIBRARY_FAILED
+RESTART_RETRY_SUCCESS
+STALE_PROCESS_REJECTED
+{
+  "race": "PASS",
+  "aba": "PASS",
+  "crashRelease": "PASS",
+  "restartRetry": "PASS",
+  "staleProcess": "PASS",
+  "pids": [
+    51584,
+    39768
+  ]
+}

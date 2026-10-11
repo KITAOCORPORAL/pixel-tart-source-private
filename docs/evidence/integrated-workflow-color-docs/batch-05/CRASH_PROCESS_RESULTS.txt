@@ -1,0 +1,44 @@
+Missing
+Missing
+Completed
+Completed
+Completed
+Completed
+Completed
+Completed
+Completed
+Completed
+STALE_UNDO_REJECTED
+STALE_CATALOG_REJECTED
+[
+  {
+    "stage": "Encoding",
+    "exitCode": 73,
+    "recovered": "Missing",
+    "repeat": "PASS"
+  },
+  {
+    "stage": "Encoded",
+    "exitCode": 73,
+    "recovered": "Completed",
+    "repeat": "PASS"
+  },
+  {
+    "stage": "Pending",
+    "exitCode": 73,
+    "recovered": "Completed",
+    "repeat": "PASS"
+  },
+  {
+    "stage": "Moved",
+    "exitCode": 73,
+    "recovered": "Completed",
+    "repeat": "PASS"
+  },
+  {
+    "stage": "Receipt",
+    "exitCode": 73,
+    "recovered": "Completed",
+    "repeat": "PASS"
+  }
+]

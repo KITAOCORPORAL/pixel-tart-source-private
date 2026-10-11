@@ -1,0 +1,14 @@
+{
+  "processes": [
+    50532,
+    17824
+  ],
+  "states": [
+    "Running",
+    "Completed"
+  ],
+  "repeat": "Completed",
+  "executors": 1,
+  "fixture": "synthetic managed export task",
+  "note": "Two separately launched dotnet processes; no desktop automation"
+}
