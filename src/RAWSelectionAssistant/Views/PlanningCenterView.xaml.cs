@@ -618,6 +618,7 @@ public partial class PlanningCenterView : UserControl
         var overlay = ImagePreview.Visibility == Visibility.Visible ? ImagePreview : ModalOverlay.Visibility == Visibility.Visible ? ModalOverlay : ContextDrawer.Visibility == Visibility.Visible ? ContextDrawer : null;
         if (overlay is not null && e.Key == Key.Tab && (Keyboard.FocusedElement is not DependencyObject focused || !overlay.IsAncestorOf(focused)))
         { FocusOverlay(overlay); e.Handled = true; return; }
+        if(e.Key==Key.Escape && Keyboard.FocusedElement is TextBox {Tag:"PrecisionInput"})return;
         if (e.Key == Key.Escape)
         {
             if (ImagePreview.Visibility == Visibility.Visible) CloseImagePreview();

@@ -16,6 +16,7 @@ public sealed class PlanningRichEditor : DockPanel
     private PlanningPageLayout _page=new();
     private IReadOnlyList<string> _losses=[];
     private Action? _persist;
+    private RichDocumentHistory _history=null!;
     private readonly DispatcherTimer _saveTimer=new(){Interval=TimeSpan.FromMilliseconds(350)};
     public PlanningRichEditor(string? data,string text,Action<string,string,PlanningRichLayout> save,IEnumerable<PlanningCanvasRevision> canvasImages,PlanningRichLayout? layout=null)
     {
@@ -23,7 +24,11 @@ public sealed class PlanningRichEditor : DockPanel
         if(data is not null){using var input=new MemoryStream(Convert.FromBase64String(data));new TextRange(_editor.Document.ContentStart,_editor.Document.ContentEnd).Load(input,DataFormats.Rtf);}
         else _editor.Document=new FlowDocument(new Paragraph(new Run(text)));
         _page=layout?.Page??new();_losses=layout?.ImportLosses??[];PlanningDocumentLayout.Apply(_editor.Document,layout);
-        void Add(string label,Action action){var button=new Button{Content=label,Margin=new Thickness(2),Padding=new Thickness(6,3,6,3)};button.Click+=(_,_)=>{try {action();_persist?.Invoke();_editor.Focus();}catch(Exception ex) when(ex is IOException or NotSupportedException or System.Xml.XmlException or InvalidDataException){ThemedMessageDialog.Show(Window.GetWindow(this),"文档操作未完成",ex.Message,ThemedMessageKind.Error);}};tools.Children.Add(button);}
+        _editor.IsUndoEnabled=false;
+        _editor.PreviewKeyDown+=(_,e)=>{if(Keyboard.Modifiers.HasFlag(ModifierKeys.Control)&&e.Key is Key.Z or Key.Y){if(e.Key==Key.Y||Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))_history.Redo();else _history.Undo();_persist?.Invoke();e.Handled=true;}};_history=new(_editor,()=>PlanningDocumentLayout.Capture(_editor.Document,_page,_losses),value=>{_page=value.Page;_losses=value.ImportLosses;});_history.Initialize();
+        CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo,(_,e)=>{_history.Undo();_persist?.Invoke();e.Handled=true;},(_,e)=>{e.CanExecute=true;e.Handled=true;}));
+        CommandBindings.Add(new CommandBinding(ApplicationCommands.Redo,(_,e)=>{_history.Redo();_persist?.Invoke();e.Handled=true;},(_,e)=>{e.CanExecute=true;e.Handled=true;}));
+        void Add(string label,Action action){var button=new Button{Content=label,Margin=new Thickness(2),Padding=new Thickness(6,3,6,3)};button.Click+=(_,_)=>{try {if(label is "撤销" or "重做")action();else _history.Execute(action);_persist?.Invoke();_editor.Focus();}catch(Exception ex) when(ex is IOException or NotSupportedException or System.Xml.XmlException or InvalidDataException){ThemedMessageDialog.Show(Window.GetWindow(this),"文档操作未完成",ex.Message,ThemedMessageKind.Error);}};tools.Children.Add(button);}
         void Command(string label,System.Windows.Input.RoutedUICommand command)=>Add(label,()=>command.Execute(null,_editor));
         Command("加粗",EditingCommands.ToggleBold);Command("斜体",EditingCommands.ToggleItalic);Command("下划线",EditingCommands.ToggleUnderline);
         void Style(string style){if(_editor.CaretPosition.Paragraph is not {} p)return;p.Tag=new PlanningBlockSemantic(0,style,p.BreakPageBefore);p.FontSize=style switch{"Heading1"=>26,"Heading2"=>21,"Heading3"=>17,_=>14};p.FontWeight=style=="Body"?FontWeights.Normal:FontWeights.Bold;}
@@ -35,14 +40,21 @@ public sealed class PlanningRichEditor : DockPanel
         Add("横/竖页",()=>{_page=_page with{Width=_page.Height,Height=_page.Width};PlanningDocumentLayout.Apply(_editor.Document,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));});
         Add("A4/Letter",()=>{_page=_page.Width==794?new(816,1056):new();PlanningDocumentLayout.Apply(_editor.Document,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));});
         Add("页边距",()=>{var margin=_page.Left==48?72:48;_page=_page with{Left=margin,Top=margin,Right=margin,Bottom=margin};PlanningDocumentLayout.Apply(_editor.Document,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));});        Command("左对齐",EditingCommands.AlignLeft);Command("居中",EditingCommands.AlignCenter);Command("右对齐",EditingCommands.AlignRight);Command("列表",EditingCommands.ToggleBullets);
-        Command("撤销",ApplicationCommands.Undo);Command("重做",ApplicationCommands.Redo);
+        Add("撤销",_history.Undo);Add("重做",_history.Redo);
         Add("表格",()=>{_editor.BeginChange();try{var table=new Table();var group=new TableRowGroup();table.RowGroups.Add(group);for(var r=0;r<3;r++){var row=new TableRow();group.Rows.Add(row);for(var c=0;c<3;c++)row.Cells.Add(new TableCell(new Paragraph(new Run("单元格"))){BorderBrush=Brushes.Gray,BorderThickness=new Thickness(1),Padding=new Thickness(4)});}_editor.Document.Blocks.Add(table);}finally{_editor.EndChange();}});
         TableCell? Cell(){DependencyObject? item=_editor.CaretPosition.Parent;while(item is not null){if(item is TableCell c)return c;item=(item as FrameworkContentElement)?.Parent;}return null;}
         Add("加行",()=>{if(Cell()?.Parent is TableRow row && row.Parent is TableRowGroup group){var added=new TableRow();foreach(var c in row.Cells)added.Cells.Add(new TableCell(new Paragraph(new Run(""))));group.Rows.Insert(group.Rows.IndexOf(row)+1,added);}});
         Add("删行",()=>{if(Cell()?.Parent is TableRow row && row.Parent is TableRowGroup group && group.Rows.Count>1)group.Rows.Remove(row);});
         Add("加列",()=>{if(Cell()?.Parent is TableRow row && row.Parent is TableRowGroup group)foreach(var r in group.Rows)r.Cells.Add(new TableCell(new Paragraph(new Run(""))));});
         Add("删列",()=>{if(Cell() is {} cell && cell.Parent is TableRow row && row.Parent is TableRowGroup group){var index=row.Cells.IndexOf(cell);if(row.Cells.Count>1)foreach(var r in group.Rows)if(r.Cells.Count>index)r.Cells.RemoveAt(index);}});
-        Add("列宽",()=>{if(Cell() is {} cell && cell.Parent is TableRow row && row.Parent is TableRowGroup group && group.Parent is Table table){while(table.Columns.Count<row.Cells.Count)table.Columns.Add(new TableColumn{Width=new GridLength(120)});var column=table.Columns[row.Cells.IndexOf(cell)];column.Width=new GridLength(column.Width.Value==120?180:120);}});
+        void Numeric(string label,double initial,double min,double max,Action<double> commit)
+        {
+            tools.Children.Add(new TextBlock{Text=label,VerticalAlignment=VerticalAlignment.Center});var box=new TextBox{Tag="PrecisionInput",Text=initial.ToString(System.Globalization.CultureInfo.CurrentCulture),Width=62,ToolTip=$"毫米，范围 {min}–{max}；Enter/失焦提交，Esc 取消"};tools.Children.Add(box);var committed=box.Text;
+            void Apply(){if(box.Text==committed)return;if(!double.TryParse(box.Text,out var value)||!double.IsFinite(value)||value<min||value>max){box.ToolTip=$"无效数值：请输入 {min}–{max} 毫米";box.BorderBrush=Brushes.OrangeRed;return;}try{_history.Execute(()=>commit(value));}catch(ArgumentException e){box.ToolTip=e.Message;box.BorderBrush=Brushes.OrangeRed;return;}committed=box.Text;box.ClearValue(Control.BorderBrushProperty);_persist?.Invoke();}
+            box.KeyDown+=(_,e)=>{if(e.Key==Key.Enter){Apply();e.Handled=true;}if(e.Key==Key.Escape){box.Text=committed;box.ClearValue(Control.BorderBrushProperty);e.Handled=true;}};box.LostKeyboardFocus+=(_,_)=>Apply();
+        }
+        Numeric("列宽 mm",40,5,250,value=>{if(Cell() is {} cell&&cell.Parent is TableRow row&&row.Parent is TableRowGroup group&&group.Parent is Table table){while(table.Columns.Count<row.Cells.Count)table.Columns.Add(new TableColumn());table.Columns[row.Cells.IndexOf(cell)].Width=new GridLength(value*96/25.4);}});
+        foreach(var side in new[]{"左","上","右","下"}){var captured=side;Numeric(side+"边距 mm",12.7,0,80,value=>{var dip=value*96/25.4;_page=captured switch{"左"=>_page with{Left=dip},"上"=>_page with{Top=dip},"右"=>_page with{Right=dip},_=>_page with{Bottom=dip}};PlanningDocumentLayout.Apply(_editor.Document,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));});}        Add("列宽",()=>{if(Cell() is {} cell && cell.Parent is TableRow row && row.Parent is TableRowGroup group && group.Parent is Table table){while(table.Columns.Count<row.Cells.Count)table.Columns.Add(new TableColumn{Width=new GridLength(120)});var column=table.Columns[row.Cells.IndexOf(cell)];column.Width=new GridLength(column.Width.Value==120?180:120);}});
         Add("表格对齐",()=>{if(Cell() is {} cell)cell.TextAlignment=cell.TextAlignment==TextAlignment.Left?TextAlignment.Center:TextAlignment.Left;});
         Add("边框",()=>{if(Cell() is {} cell){cell.BorderBrush=Brushes.Gray;cell.BorderThickness=cell.BorderThickness.Left==0?new Thickness(1):new Thickness(0);}});
         void Image(byte[] bytes){_editor.BeginChange();try{using var stream=new MemoryStream(bytes);var bitmap=new BitmapImage();bitmap.BeginInit();bitmap.CacheOption=BitmapCacheOption.OnLoad;bitmap.StreamSource=stream;bitmap.EndInit();bitmap.Freeze();_editor.Document.Blocks.Add(new BlockUIContainer(new Image{Source=bitmap,Width=480,Stretch=Stretch.Uniform}));}finally{_editor.EndChange();}}
@@ -54,10 +66,11 @@ public sealed class PlanningRichEditor : DockPanel
         Add("导出 DOCX",()=>{var dialog=new SaveFileDialog{Filter="DOCX|*.docx"};if(dialog.ShowDialog()==true)Services.PlanningDocxAdapter.Export(_editor.Document,dialog.FileName);});
         Add("导入 DOCX",()=>{var dialog=new OpenFileDialog{Filter="DOCX|*.docx"};if(dialog.ShowDialog()!=true)return;var result=Services.PlanningDocxAdapter.Import(dialog.FileName);if(result.Losses.Count>0&&!ThemedMessageDialog.Show(Window.GetWindow(this),"导入损失报告",string.Join("\n",result.Losses)+"\n是否导入支持的内容？原文件不会修改。",ThemedMessageKind.Question,true))return;_losses=result.Losses;_editor.Document=result.Document;_page=new(double.IsFinite(result.Document.PageWidth)?result.Document.PageWidth:794,double.IsFinite(result.Document.PageHeight)?result.Document.PageHeight:1123,result.Document.PagePadding.Left,result.Document.PagePadding.Top,result.Document.PagePadding.Right,result.Document.PagePadding.Bottom);PlanningDocumentLayout.Apply(_editor.Document,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));});
         _persist=()=>{using var stream=new MemoryStream();new TextRange(_editor.Document.ContentStart,_editor.Document.ContentEnd).Save(stream,DataFormats.Rtf);save(Convert.ToBase64String(stream.ToArray()),new TextRange(_editor.Document.ContentStart,_editor.Document.ContentEnd).Text,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));};
-        _saveTimer.Tick+=(_,_)=>{_saveTimer.Stop();_persist();};
-        _editor.TextChanged+=(_,_)=>{_saveTimer.Stop();_saveTimer.Start();};
+        _saveTimer.Tick+=(_,_)=>{_saveTimer.Stop();_history.Checkpoint();_persist();};
+        _editor.PreviewKeyDown+=(_,e)=>{if(e.Key==Key.Enter)_history.Checkpoint();};
+        _editor.TextChanged+=(_,_)=>{if(_history.Restoring)return;_saveTimer.Stop();_saveTimer.Start();};
         Unloaded+=(_,_)=>{_saveTimer.Stop();_persist();};
     }
-    public void FlushPending(){_saveTimer.Stop();_persist?.Invoke();}
+    public void FlushPending(){_saveTimer.Stop();_history.Checkpoint();_persist?.Invoke();}
     private FlowDocument Clone(){using var stream=new MemoryStream();new TextRange(_editor.Document.ContentStart,_editor.Document.ContentEnd).Save(stream,DataFormats.Rtf);stream.Position=0;var doc=new FlowDocument();new TextRange(doc.ContentStart,doc.ContentEnd).Load(stream,DataFormats.Rtf);PlanningDocumentLayout.Apply(doc,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));return doc;}
 }
