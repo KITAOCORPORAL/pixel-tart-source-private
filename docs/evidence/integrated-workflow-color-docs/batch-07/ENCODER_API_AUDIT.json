@@ -1,0 +1,15 @@
+{
+  "source": "Microsoft win32metadata official SDK header",
+  "commit": "76c04c2021ef4a831a6f1e06d9566002d746139b",
+  "headerSha256": "4430BF41443FE5E54DEA74FB2F21217E823C0723DBEEED94D4319D7B6454A7FB",
+  "format": "Windows in-box WIC JPEG/PNG",
+  "thirdPartyRuntimeAdded": false,
+  "verified": [
+    "WICJpegYCrCbSubsampling444=3",
+    "GUID_WICPixelFormat48bppRGB=...c915",
+    "GUID_WICPixelFormat24bppBGR=...c90c",
+    "IID/IWIC factory encoder frame/color interface vtable declarations"
+  ],
+  "fetch": "web tool returned no source; raw curl reset; official git shallow+sparse succeeded",
+  "localTest": "RGB16/ICC/orientation/lossless row encode round-trip; real cameras separately recorded"
+}

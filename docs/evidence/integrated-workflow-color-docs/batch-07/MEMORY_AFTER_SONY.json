@@ -1,0 +1,115 @@
+{
+  "mode": "raw-stage-stream",
+  "Model": "ILCE-7M4",
+  "Width": 7028,
+  "Height": 4688,
+  "sourceUnchanged": true,
+  "outputSha256": "2F9F37A699E7B37335AF0F1DC220BD9227BA35A321B2F2A93F05A4487EDB109A",
+  "rows": [
+    {
+      "stage": "Unpacked",
+      "ms": 165,
+      "workingSet": 106647552,
+      "peakWorkingSet": 106647552,
+      "managed": 270880
+    },
+    {
+      "stage": "DemosaicWBMatrix",
+      "ms": 543,
+      "workingSet": 372051968,
+      "peakWorkingSet": 434237440,
+      "managed": 467816
+    },
+    {
+      "stage": "NativeRGB16",
+      "ms": 61,
+      "workingSet": 570413056,
+      "peakWorkingSet": 570413056,
+      "managed": 569720
+    },
+    {
+      "stage": "FloatMaster",
+      "ms": 142,
+      "workingSet": 968347648,
+      "peakWorkingSet": 968347648,
+      "managed": 395945064
+    },
+    {
+      "stage": "DecodeAndMaster",
+      "ms": 95,
+      "workingSet": 449064960,
+      "peakWorkingSet": 976109568,
+      "managed": 396825968
+    },
+    {
+      "stage": "Encoded",
+      "ms": 2457,
+      "workingSet": 451252224,
+      "peakWorkingSet": 976109568,
+      "managed": 396950720
+    },
+    {
+      "stage": "Validated",
+      "ms": 122,
+      "workingSet": 451334144,
+      "peakWorkingSet": 976109568,
+      "managed": 396998784
+    },
+    {
+      "stage": "AtomicCommit",
+      "ms": 1,
+      "workingSet": 451358720,
+      "peakWorkingSet": 976109568,
+      "managed": 397007008
+    },
+    {
+      "stage": "AreaPreview-0",
+      "ms": 1724,
+      "workingSet": 472694784,
+      "peakWorkingSet": 976109568,
+      "managed": 416622280
+    },
+    {
+      "stage": "AreaPreview-1",
+      "ms": 1995,
+      "workingSet": 493199360,
+      "peakWorkingSet": 976109568,
+      "managed": 437117496
+    },
+    {
+      "stage": "AreaPreview-2",
+      "ms": 2028,
+      "workingSet": 507740160,
+      "peakWorkingSet": 976109568,
+      "managed": 457611680
+    },
+    {
+      "stage": "NativeTile-0",
+      "ms": 16,
+      "workingSet": 510910464,
+      "peakWorkingSet": 976109568,
+      "managed": 460765656
+    },
+    {
+      "stage": "NativeTile-1",
+      "ms": 16,
+      "workingSet": 514056192,
+      "peakWorkingSet": 976109568,
+      "managed": 463911408
+    },
+    {
+      "stage": "NativeTile-2",
+      "ms": 16,
+      "workingSet": 517201920,
+      "peakWorkingSet": 976109568,
+      "managed": 467062864
+    },
+    {
+      "stage": "StreamingHash",
+      "ms": 288,
+      "workingSet": 517566464,
+      "peakWorkingSet": 976109568,
+      "managed": 467075400
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "model": "ILCE-7M4",
+  "Width": 7028,
+  "Height": 4688,
+  "rows": [
+    {
+      "stage": "Decode",
+      "ms": 1016,
+      "workingSet": 448028672,
+      "peakWorkingSet": 974700544,
+      "managed": 396850560
+    },
+    {
+      "stage": "Preview1600-0",
+      "ms": 152,
+      "workingSet": 468852736,
+      "peakWorkingSet": 974700544,
+      "managed": 416580088
+    },
+    {
+      "stage": "Preview1600-1",
+      "ms": 164,
+      "workingSet": 489529344,
+      "peakWorkingSet": 974700544,
+      "managed": 437067856
+    },
+    {
+      "stage": "Preview1600-2",
+      "ms": 155,
+      "workingSet": 511627264,
+      "peakWorkingSet": 974700544,
+      "managed": 457562992
+    },
+    {
+      "stage": "Preview1600-3",
+      "ms": 134,
+      "workingSet": 532140032,
+      "peakWorkingSet": 974700544,
+      "managed": 478057640
+    },
+    {
+      "stage": "RenderFull",
+      "ms": 2075,
+      "workingSet": 927531008,
+      "peakWorkingSet": 974700544,
+      "managed": 873424832
+    },
+    {
+      "stage": "WriteTiff16",
+      "ms": 724,
+      "workingSet": 2156822528,
+      "peakWorkingSet": 2156822528,
+      "managed": 1475940448
+    }
+  ]
+}

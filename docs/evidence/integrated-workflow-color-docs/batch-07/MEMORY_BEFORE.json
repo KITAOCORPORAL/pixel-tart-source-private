@@ -1,0 +1,43 @@
+{
+  "model": "ILCE-7M4",
+  "Width": 7028,
+  "Height": 4688,
+  "outputSha256": "2F9F37A699E7B37335AF0F1DC220BD9227BA35A321B2F2A93F05A4487EDB109A",
+  "rows": [
+    {
+      "stage": "DecodeAndMaster",
+      "ms": 1052,
+      "workingSet": 447057920,
+      "peakWorkingSet": 973324288,
+      "managed": 396797760
+    },
+    {
+      "stage": "FullRender",
+      "ms": 2117,
+      "workingSet": 844443648,
+      "peakWorkingSet": 973324288,
+      "managed": 791446088
+    },
+    {
+      "stage": "Encode",
+      "ms": 636,
+      "workingSet": 1240178688,
+      "peakWorkingSet": 1240178688,
+      "managed": 1285671032
+    },
+    {
+      "stage": "WholeFileValidation",
+      "ms": 276,
+      "workingSet": 2101633024,
+      "peakWorkingSet": 2101633024,
+      "managed": 2217919424
+    },
+    {
+      "stage": "StreamingHash",
+      "ms": 406,
+      "workingSet": 2102181888,
+      "peakWorkingSet": 2102181888,
+      "managed": 2217950344
+    }
+  ]
+}

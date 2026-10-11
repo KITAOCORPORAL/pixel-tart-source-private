@@ -1,0 +1,115 @@
+{
+  "mode": "raw-stage-stream",
+  "Model": "EOS 5D Mark III",
+  "Width": 5796,
+  "Height": 3870,
+  "sourceUnchanged": true,
+  "outputSha256": "795853B6CBA8818B9D12C77D60B05E154C6EA1D22E1E9A66141C441EFFDF4257",
+  "rows": [
+    {
+      "stage": "Unpacked",
+      "ms": 517,
+      "workingSet": 87216128,
+      "peakWorkingSet": 87216128,
+      "managed": 270920
+    },
+    {
+      "stage": "DemosaicWBMatrix",
+      "ms": 406,
+      "workingSet": 268558336,
+      "peakWorkingSet": 319492096,
+      "managed": 467856
+    },
+    {
+      "stage": "NativeRGB16",
+      "ms": 45,
+      "workingSet": 403832832,
+      "peakWorkingSet": 403832832,
+      "managed": 569856
+    },
+    {
+      "stage": "FloatMaster",
+      "ms": 123,
+      "workingSet": 675471360,
+      "peakWorkingSet": 675471360,
+      "managed": 269744272
+    },
+    {
+      "stage": "DecodeAndMaster",
+      "ms": 93,
+      "workingSet": 322740224,
+      "peakWorkingSet": 683253760,
+      "managed": 270690480
+    },
+    {
+      "stage": "Encoded",
+      "ms": 1704,
+      "workingSet": 324915200,
+      "peakWorkingSet": 683253760,
+      "managed": 270811392
+    },
+    {
+      "stage": "Validated",
+      "ms": 84,
+      "workingSet": 325029888,
+      "peakWorkingSet": 683253760,
+      "managed": 270852064
+    },
+    {
+      "stage": "AtomicCommit",
+      "ms": 1,
+      "workingSet": 325054464,
+      "peakWorkingSet": 683253760,
+      "managed": 270860288
+    },
+    {
+      "stage": "AreaPreview-0",
+      "ms": 1305,
+      "workingSet": 346292224,
+      "peakWorkingSet": 683253760,
+      "managed": 290398272
+    },
+    {
+      "stage": "AreaPreview-1",
+      "ms": 1633,
+      "workingSet": 366858240,
+      "peakWorkingSet": 683253760,
+      "managed": 310917504
+    },
+    {
+      "stage": "AreaPreview-2",
+      "ms": 1386,
+      "workingSet": 387440640,
+      "peakWorkingSet": 683253760,
+      "managed": 331434136
+    },
+    {
+      "stage": "NativeTile-0",
+      "ms": 16,
+      "workingSet": 390602752,
+      "peakWorkingSet": 683253760,
+      "managed": 334588112
+    },
+    {
+      "stage": "NativeTile-1",
+      "ms": 18,
+      "workingSet": 393748480,
+      "peakWorkingSet": 683253760,
+      "managed": 337733864
+    },
+    {
+      "stage": "NativeTile-2",
+      "ms": 14,
+      "workingSet": 396894208,
+      "peakWorkingSet": 683253760,
+      "managed": 340887840
+    },
+    {
+      "stage": "StreamingHash",
+      "ms": 181,
+      "workingSet": 397246464,
+      "peakWorkingSet": 683253760,
+      "managed": 340895968
+    }
+  ]
+}
