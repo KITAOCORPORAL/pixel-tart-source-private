@@ -1,4 +1,4 @@
-#define MyAppName "像素蛋挞"
+#define MyAppName "Kitao Studio 光镜"
 #define MyAppVersion "2.3.0"
 #define MyAppPublisher "像素蛋挞"
 #define MyAppExeName "KitaoPhotoSelector.exe"
@@ -561,4 +561,3 @@ begin
     ConfigurePhysicalPointerDiagnosticEnvironment();
 #endif
 end;
-

@@ -6,7 +6,7 @@ public sealed class UiPolish142Tests
     [TestMethod] public void Sidebar_UsesStableNavigationFooterRows() => Contains(MainXaml(), "x:Name=\"SidebarLayout\"", "<RowDefinition Height=\"10\" />", "<RowDefinition Height=\"*\" />", "<RowDefinition Height=\"Auto\" />");
     [TestMethod] public void Sidebar_NavigationScrollsWithoutVisualScrollbar() => Contains(MainXaml(), "x:Name=\"SidebarNavigationScroll\"", "VerticalScrollBarVisibility=\"Hidden\"", "HorizontalScrollBarVisibility=\"Disabled\"");
     [TestMethod] public void Sidebar_EditionCardIsCompact() => Contains(Text("src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Status.xaml"), "SidebarEditionCard", "Padding\" Value=\"10", "Margin\" Value=\"6,5", "Height\" Value=\"40");
-    [TestMethod] public void Sidebar_DoesNotRepeatBrand() { DoesNotContain(MainXaml(), "<Image Source=\"Assets/AppIcon.ico\"", "本地摄影工具箱"); Contains(MainXaml(), "Title=\"像素蛋挞\""); }
+    [TestMethod] public void Sidebar_DoesNotRepeatBrand() { DoesNotContain(MainXaml(), "<Image Source=\"Assets/AppIcon.ico\"", "本地摄影工具箱"); Contains(MainXaml(), "Title=\"Kitao Studio 光镜\""); }
     [TestMethod] public void GlobalStatusBar_IsIndependentFixedRow() => Contains(MainXaml(), "<RowDefinition Height=\"{DynamicResource StudioV2.StatusBarHeight}\" />", "x:Name=\"BottomStatusBar\" Grid.Row=\"2\"", "BorderThickness=\"0,1,0,0\"");
     [TestMethod] public void Workbench_HasBalancedThreeColumnShell() => Contains(MainXaml(), "x:Name=\"WorkbenchShell\"", "MinWidth=\"760\"", "x:Name=\"WorkbenchTaskColumn\" Width=\"320\"");
     [TestMethod] public void Workbench_UsesDenseVerticalRhythm()

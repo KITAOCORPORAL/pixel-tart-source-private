@@ -32,11 +32,13 @@ public partial class App : Application
     private HttpClient? _weatherHttpClient;
     private WeatherFeatureState? _weatherState;
     private PixelTartModuleRegistry? _moduleRegistry;
+    private StudioStartupWindow? _startupWindow;
     private string _startupStage = "01 Bootstrap";
 
     private void StartupStage(string stage)
     {
         _startupStage = stage;
+        _startupWindow?.Report(stage);
         _logService?.Info("STARTUP_STAGE=" + stage);
     }
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
@@ -95,6 +97,7 @@ public partial class App : Application
 #endif
         new AppDataMigrationService().MigrateLegacyData();
         _logService = new FileLogService();
+
         StartupStage("02 Logging");
         DispatcherUnhandledException += OnDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
@@ -109,6 +112,7 @@ public partial class App : Application
 
         try
         {
+            if(Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE")!="1"){_startupWindow=new StudioStartupWindow();_startupWindow.Show();}
             StartupStage("04 Database and composition");
             _compositionRoot = await ApplicationCompositionRoot.CreateAsync();
             StartupStage("05 Services and modules");
@@ -376,6 +380,7 @@ public partial class App : Application
                 window.ConfigureAssetLibraryP3AutomatedAcceptance(_assetLibraryP3AutomatedController);
             }
 #endif
+            window.ContentRendered+=(_,_)=>{_startupWindow?.Complete();_startupWindow=null;};
             window.Show();
             await ColorStudioAcceptanceFixture.LoadAsync(_mainViewModel, window);
             await _compositionRoot.BookingReminderScheduler.StartAsync();
@@ -384,6 +389,7 @@ public partial class App : Application
         }
         catch (Exception ex)
         {
+            _startupWindow?.Close();_startupWindow=null;
             _logService.Error($"应用程序启动失败。 FAILED_AT_STAGE={_startupStage} ErrorCode={StartupDiagnostics.ErrorCode(_startupStage)}", ex);
 #if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
             _assetLibraryP1AutomatedController?.Fail(ex);
