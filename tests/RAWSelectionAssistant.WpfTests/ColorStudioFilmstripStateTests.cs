@@ -13,6 +13,21 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class ColorStudioFilmstripStateTests
 {
     [TestMethod]
+    public Task ExistingEditedPathCannotBeReboundToDifferentIdentity() => RunSta(async () =>
+    {
+        var root=Path.Combine(Path.GetTempPath(),"PixelTart-Rebind-"+Guid.NewGuid()); Directory.CreateDirectory(root);
+        try
+        {
+            var image=SaveImage(root,"source.png",70);
+            using var workspace=new ReferenceColorWorkspaceViewModel(new Dialogs());
+            await workspace.LoadTargetAsync(image); workspace.Editor.Exposure=.5;
+            var original=workspace.ActiveTarget!; var hash=original.SourceHash;
+            await workspace.LoadTargetAsync(image,sourceHash:new string('f',64));
+            Assert.AreSame(original,workspace.ActiveTarget); Assert.AreEqual(hash,original.SourceHash);
+            Assert.AreEqual(ReferenceTargetStatus.Failed,original.Status); Assert.AreEqual(.5,workspace.Editor.Exposure);
+        }
+        finally { Directory.Delete(root,true); }
+    });    [TestMethod]
     public Task SavedSessionRejectsChangedSourceInsteadOfDisplayingReplacement() => RunSta(async () =>
     {
         var root=Path.Combine(Path.GetTempPath(),"PixelTart-Identity-"+Guid.NewGuid()); Directory.CreateDirectory(root);

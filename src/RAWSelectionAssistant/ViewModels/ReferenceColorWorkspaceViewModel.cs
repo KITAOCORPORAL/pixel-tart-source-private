@@ -537,9 +537,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public async Task LoadTargetAsync(string path, Guid? assetId = null, Guid? libraryId = null, string? sourceHash = null)
     {
         var target = GetOrCreateTarget(path);
+        if ((target.LibraryId.HasValue && libraryId.HasValue && target.LibraryId != libraryId) ||
+            (target.AssetId.HasValue && assetId.HasValue && target.AssetId != assetId) ||
+            (target.SourceHash is not null && sourceHash is not null && !string.Equals(target.SourceHash, sourceHash, StringComparison.OrdinalIgnoreCase)))
+        { target.Status = ReferenceTargetStatus.Failed; target.Error = "路径对应的素材身份已变化，保留原编辑目标"; FailedTarget = target; StatusText = target.Error; return; }
         if (assetId is not null) target.AssetId = assetId;
         target.LibraryId = libraryId ?? target.LibraryId;
-        target.SourceHash = sourceHash ?? target.SourceHash;
+        target.SourceHash ??= sourceHash;
         target.IsSelected = true;
         // RAW thumbnail and activation must share one session-owned master.  Starting both
         // operations concurrently would allow the ??= assignment below to race and decode
@@ -603,7 +607,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         {
             Editor.StopProcessing();
             Interlocked.Increment(ref _loadingActivations); IsLoading = true; StatusText = "正在载入活动预览…";
-            if (!await ValidateTargetIdentityAsync(target, token)) { target.Status = ReferenceTargetStatus.Failed; StatusText = target.Error ?? "素材身份不可用"; return; }
+            if (!await ValidateTargetIdentityAsync(target, token)) { target.Status = ReferenceTargetStatus.Failed; FailedTarget = target; StatusText = target.Error ?? "素材身份不可用"; RetryFailedTargetCommand.RaiseCanExecuteChanged(); return; }
             var isRaw = RawMatchTiff16ProductPipeline.IsRaw(target.Path);
             var rawMaster = isRaw ? target.RawMaster ??= await DecodeStudioRawAsync(target.Path, token) : null;
             var rawProxy = rawMaster is null ? null : _rawPipeline.PreviewMaster(rawMaster.Image);
