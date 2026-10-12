@@ -4,6 +4,8 @@ Production/test changed files and SHA256: SOURCE_FILES.json (12 C# files).
 
 Evidence:
 
+- PUSH_VERIFICATION.md — remote identity verification
+
 - BATCH09_INPUTS.json — structured evidence/hash inventory
 - BENCHMARK_SCOPE.json — structured evidence/hash inventory
 - CORPUS_AUTHORIZATION.md — report/contract
