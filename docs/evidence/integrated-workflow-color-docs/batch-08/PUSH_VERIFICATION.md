@@ -1,0 +1,11 @@
+# 推送与身份复核
+
+源码commit：c3c1ed758f413dde9dd4a9f7c630b9db3bd1c99c。
+
+主证据commit：6b0400b3480b651ee0e3d5c98a5ef70254794d69。
+
+主证据正常push后fetch：LOCAL_HEAD=REMOTE_HEAD=6b0400b3480b651ee0e3d5c98a5ef70254794d69。没有强推。此收尾文档commit仅补推送证明及去除文档末尾空行，不改变发布源码。最终HEAD在交付回复中记录，避免文档自引用commit递归。
+
+Release产品版本2.3.0-batch08+c3c1ed758f413dde9dd4a9f7c630b9db3bd1c99c；EXE SHA256 F4F55DEAE8C68A6CEE782F694F55100BB7CAF8573AC5ED423CDB1C5DA5371881。Core/主DLL已与隔离发布测试文件逐一比对。未启动EXE。
+
+原工作树和未提交研究、两个审计目录保持原状。测试自动生成的三份历史ui-guardian文档已保留新生成副本到artifacts/batch08/generated-historical-reports，原位置恢复起点字节；当前没有本批之外tracked改动。源码28文件、证据文档单独提交；未提交照片、成片、构建二进制、生产数据库或凭据。
