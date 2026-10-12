@@ -1,0 +1,120 @@
+{
+  "mode": "raw-stage-stream",
+  "Model": "ILCE-7M4",
+  "Width": 7028,
+  "Height": 4688,
+  "sourceUnchanged": true,
+  "outputSha256": "2F9F37A699E7B37335AF0F1DC220BD9227BA35A321B2F2A93F05A4487EDB109A",
+  "rows": [
+    {
+      "stage": "Unpacked",
+      "ms": 167,
+      "workingSet": 106987520,
+      "peakWorkingSet": 106987520,
+      "managed": 258896
+    },
+    {
+      "stage": "DemosaicWBMatrix",
+      "ms": 535,
+      "workingSet": 372170752,
+      "peakWorkingSet": 434720768,
+      "managed": 455832
+    },
+    {
+      "stage": "NativeRGB16",
+      "ms": 60,
+      "workingSet": 570359808,
+      "peakWorkingSet": 570359808,
+      "managed": 563840
+    },
+    {
+      "stage": "FloatMaster",
+      "ms": 145,
+      "workingSet": 967942144,
+      "peakWorkingSet": 967942144,
+      "managed": 395947664
+    },
+    {
+      "stage": "DecodeAndMaster",
+      "ms": 95,
+      "workingSet": 448851968,
+      "peakWorkingSet": 976388096,
+      "managed": 396832168
+    },
+    {
+      "stage": "Encoded",
+      "ms": 2377,
+      "workingSet": 451018752,
+      "peakWorkingSet": 976388096,
+      "managed": 396957048
+    },
+    {
+      "stage": "Validated",
+      "ms": 119,
+      "workingSet": 451133440,
+      "peakWorkingSet": 976388096,
+      "managed": 397005112
+    },
+    {
+      "stage": "RenderRowAggregate",
+      "ms": 2129,
+      "scope": "CPU render time accumulated inside render\u002Bencode; not extra elapsed time"
+    },
+    {
+      "stage": "AtomicCommit",
+      "ms": 0,
+      "workingSet": 451141632,
+      "peakWorkingSet": 976388096,
+      "managed": 397013336
+    },
+    {
+      "stage": "AreaPreview-0",
+      "ms": 1092,
+      "workingSet": 472956928,
+      "peakWorkingSet": 976388096,
+      "managed": 417441368
+    },
+    {
+      "stage": "AreaPreview-1",
+      "ms": 1262,
+      "workingSet": 494305280,
+      "peakWorkingSet": 976388096,
+      "managed": 438786080
+    },
+    {
+      "stage": "AreaPreview-2",
+      "ms": 1227,
+      "workingSet": 515727360,
+      "peakWorkingSet": 976388096,
+      "managed": 460117840
+    },
+    {
+      "stage": "NativeTile-0",
+      "ms": 27,
+      "workingSet": 518881280,
+      "peakWorkingSet": 976388096,
+      "managed": 463271816
+    },
+    {
+      "stage": "NativeTile-1",
+      "ms": 25,
+      "workingSet": 522027008,
+      "peakWorkingSet": 976388096,
+      "managed": 466417568
+    },
+    {
+      "stage": "NativeTile-2",
+      "ms": 25,
+      "workingSet": 525172736,
+      "peakWorkingSet": 976388096,
+      "managed": 469571544
+    },
+    {
+      "stage": "StreamingHash",
+      "ms": 287,
+      "workingSet": 525688832,
+      "peakWorkingSet": 976388096,
+      "managed": 469571544
+    }
+  ]
+}

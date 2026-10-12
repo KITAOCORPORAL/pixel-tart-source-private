@@ -1,0 +1,145 @@
+{
+  "sourceCommit": "c3c1ed758f413dde9dd4a9f7c630b9db3bd1c99c",
+  "files": [
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioSessionStore.cs",
+      "gitBlobSha256": "14fe7d68673fd622457e5b0b00490cffb1abbb7d1321bbd09b424be7c20d4688",
+      "bytes": 6553
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantDevelopmentTimeline.cs",
+      "gitBlobSha256": "7246187737e7cbd3162e29a7ddefaccd68aef78c0949403ae428c65999d68ed2",
+      "bytes": 1309
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantFilm.cs",
+      "gitBlobSha256": "639cad47491086c1c9b04b78079c6e891f45a1311a027a3228a2cea12122f081",
+      "bytes": 8441
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawPipeline.cs",
+      "gitBlobSha256": "2de8ae1ed6fca31dfef96837a76928150f15b2b65f5646c652a04d36c2bef587",
+      "bytes": 16264
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/StudioGlobalResources.cs",
+      "gitBlobSha256": "b9fe2daaa53c088ef812106a49ed599dba39cba7d01f1c3b6f57f218d68e5375",
+      "bytes": 2662
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/ProfessionalRawDecoder.cs",
+      "gitBlobSha256": "8489447a11747679ab605e5ea8e4924a73d6b35321c44d02396ff6813f864cfa",
+      "bytes": 9827
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/Studio/en-US.json",
+      "gitBlobSha256": "ccbbcc9b7e68c7cf0b65fa3076d59fe592632a33721c5029f808ba1fb8c69091",
+      "bytes": 28375
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/Studio/zh-CN.json",
+      "gitBlobSha256": "af0094a76d7d74997ec888b7bca888c5de49c54cc866dfad4e2f6938d82a8d4d",
+      "bytes": 27874
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/Studio/zh-TW.json",
+      "gitBlobSha256": "d9c1fb01cbf3a7eed0bbaf592f4195baffae6339a9ca8107785925bf011f10b2",
+      "bytes": 27788
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/InstantFilmJpegInput.cs",
+      "gitBlobSha256": "10fa4569892f7a7a75027f8b60c53247c99b417024f69c130ec037af6d4729f2",
+      "bytes": 3154
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ProfessionalRawExport.cs",
+      "gitBlobSha256": "fecd619203652c88e42112b743f1306cd56dacee868b36f191328781620eabdc",
+      "bytes": 9005
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ProfessionalWicRowEncoder.cs",
+      "gitBlobSha256": "65fd2538692a6dcba929458f84cca2bca7b89d55b2497d70e5920a030ee81dbf",
+      "bytes": 6566
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs",
+      "gitBlobSha256": "14adb37b4c758bf8c067f93a20f99ae4f891797f6b7786495e6695ad47e7c58b",
+      "bytes": 28844
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.HqPreview.cs",
+      "gitBlobSha256": "8bff4d815cce3647bf057b221135845cdf57e56867f3c9a7370ff7902158e719",
+      "bytes": 2116
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.InstantFilm.cs",
+      "gitBlobSha256": "6c0c62650aa71803bb69cbd12f7d03694ec03d7a05ea53dd5e8753655e6be43b",
+      "bytes": 11675
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
+      "gitBlobSha256": "0a4f49af50570acbcb65585f64289c795d58d2ca31185d84c448504cc795210f",
+      "bytes": 11530
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawPreview.cs",
+      "gitBlobSha256": "c9cdfe3c631882731dcfb0876e2740f5a61776ef204cb581f4a0ecd1a43d2b58",
+      "bytes": 6018
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Versions.cs",
+      "gitBlobSha256": "3b6e8acd0c13915ddc4bc6e79d90ab74e259fafca1d569919162f19126116aa2",
+      "bytes": 15352
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "gitBlobSha256": "7b2938d7b88a5dbcac4081aeaef6f1afc301fd27cc5bd7b7020338ea0c0cf7a2",
+      "bytes": 71521
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/StudioDetailTile.cs",
+      "gitBlobSha256": "1f66ab0d6ca53669a0920caa00f96d814b1f8a5326036137cc9dc90a28f28592",
+      "bytes": 192
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+      "gitBlobSha256": "0d0f1789ce6afa643f289c9af4aacc5d8906917a9071a91f2a7648128a6ee25a",
+      "bytes": 94617
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ColorStudioImageViewport.cs",
+      "gitBlobSha256": "941264643842b3c371c903acbb8fc0f40b622051b9f74bef1d7b7bc3d30b8f1f",
+      "bytes": 7197
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/InstantDevelopmentView.cs",
+      "gitBlobSha256": "9770b54cc552b8670217d1810836f38b84e47676096f65780c46427c3a4db246",
+      "bytes": 5309
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml",
+      "gitBlobSha256": "3efb3d6afc8606751b825be319323772892489c7a3c30ce0b401171ef09f05c7",
+      "bytes": 87889
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml.cs",
+      "gitBlobSha256": "a4e4a818b873051b2043b8ac8d8291a3df886155d7a58ecaa7482b04d20075da",
+      "bytes": 39367
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/BatchEightInstantFilmTests.cs",
+      "gitBlobSha256": "ca7a6392c4c83879786fbf873c91c74ecf881c0ff12ee7f079d1c5cd32d57ca8",
+      "bytes": 8189
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/BatchEightInstantFilmProductTests.cs",
+      "gitBlobSha256": "ff18c3d12919c7c0eeeebd51af9e71a74f7a7c2bb91bbbdaa4def974c0c21001",
+      "bytes": 16469
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/BatchEightPublishingOracleTests.cs",
+      "gitBlobSha256": "cf610659411154a6db31d48e86988714fb11176be23258985c7bf57a3fc33d1c",
+      "bytes": 5119
+    }
+  ]
+}

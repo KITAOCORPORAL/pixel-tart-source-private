@@ -1,0 +1,50 @@
+{
+  "assembly": "2.3.0.0",
+  "width": 6000,
+  "height": 4000,
+  "definition": {
+    "ProcessingVersion": 4,
+    "WhiteBalance": "Camera",
+    "RedGain": 1,
+    "GreenGain": 1,
+    "BlueGain": 1,
+    "ExposureEv": 0.5,
+    "InputConfiguration": "LibRaw021LinearProPhotoD65V1",
+    "DisplayTransform": "LuminanceShoulderNeutralGamutV1",
+    "DecodeKey": "LibRaw021LinearProPhotoD65V1:Camera:1:1:1"
+  },
+  "rows": [
+    {
+      "i": 0,
+      "ms": 1480.2497,
+      "allocated": 20530624,
+      "workingSet": 341413888,
+      "peakWorkingSet": 341413888,
+      "hash": "7CC382438E13D3DE5017EBD64416F1E8A79B882076A4C64AD40CF491877A5579"
+    },
+    {
+      "i": 1,
+      "ms": 1421.4651,
+      "allocated": 20489840,
+      "workingSet": 362086400,
+      "peakWorkingSet": 362086400,
+      "hash": "7CC382438E13D3DE5017EBD64416F1E8A79B882076A4C64AD40CF491877A5579"
+    },
+    {
+      "i": 2,
+      "ms": 1431.2285,
+      "allocated": 20490224,
+      "workingSet": 382857216,
+      "peakWorkingSet": 382857216,
+      "hash": "7CC382438E13D3DE5017EBD64416F1E8A79B882076A4C64AD40CF491877A5579"
+    },
+    {
+      "i": 3,
+      "ms": 1432.1462,
+      "allocated": 20489696,
+      "workingSet": 403386368,
+      "peakWorkingSet": 403386368,
+      "hash": "7CC382438E13D3DE5017EBD64416F1E8A79B882076A4C64AD40CF491877A5579"
+    }
+  ]
+}

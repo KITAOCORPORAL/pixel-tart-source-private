@@ -1,0 +1,286 @@
+[
+  {
+    "Model": "EOS 5D Mark III",
+    "Width": 5796,
+    "Height": 3870,
+    "definition": {
+      "ProcessingVersion": 4,
+      "WhiteBalance": "Camera",
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "ExposureEv": 0,
+      "InputConfiguration": "LibRaw021LinearProPhotoD65V1",
+      "DisplayTransform": "LuminanceShoulderNeutralGamutV1",
+      "InstantFilm": {
+        "Enabled": true,
+        "FilmId": "itype-color",
+        "ChemicalGeneration": "ModernIntegralCreative",
+        "ProfileVersion": 1,
+        "AlgorithmVersion": 1,
+        "Amount": 1,
+        "PaperFrame": true,
+        "Border": 0.04,
+        "BottomBorder": 0.16,
+        "Uneven": 0.15,
+        "Unspread": 0.12,
+        "Roller": 0.1,
+        "ArtLightLeak": 0,
+        "EnvironmentCelsius": 21,
+        "DiceEnabled": true,
+        "Tier": "\u8F7B\u5FAE\u5076\u7136",
+        "Snapshot": {
+          "RootSeed": 20261012,
+          "PrngVersion": "SplitMix64SubstreamsV1",
+          "ProfileId": "itype-color",
+          "ProfileVersion": 1,
+          "Tier": "\u8F7B\u5FAE\u5076\u7136",
+          "ColorShift": 0.003612742404780477,
+          "SpreadScale": 0.5097593249138503,
+          "TextureScale": 0.575065919901064,
+          "Geometry": [
+            {
+              "Kind": "Spread",
+              "X": 0.15543352871038107,
+              "Y": 0.41793356088735034,
+              "Radius": 0.38491834217105947,
+              "Strength": 0.3207574666020183,
+              "Period": 0
+            },
+            {
+              "Kind": "Spread",
+              "X": 0.9595621052337929,
+              "Y": 0.48497942788779713,
+              "Radius": 0.26423547156464233,
+              "Strength": 0.3043497533661142,
+              "Period": 0
+            },
+            {
+              "Kind": "Spread",
+              "X": 0.039381555582147065,
+              "Y": 0.8252103349231646,
+              "Radius": 0.3449519506871804,
+              "Strength": 0.2597961144253914,
+              "Period": 0
+            },
+            {
+              "Kind": "Corner",
+              "X": 1,
+              "Y": 0,
+              "Radius": 0.04533746085310658,
+              "Strength": 0.6,
+              "Period": 0
+            },
+            {
+              "Kind": "Roller",
+              "X": 0.7825875244274864,
+              "Y": 0.8492108411176615,
+              "Radius": 0.015418553398380486,
+              "Strength": 0.42,
+              "Period": 0.11540778931781936
+            }
+          ]
+        },
+        "PaperColor": "Warm"
+      },
+      "DecodeKey": "LibRaw021LinearProPhotoD65V1:Camera:1:1:1"
+    },
+    "sourceUnchanged": true,
+    "previewReopenExact": true,
+    "rows": [
+      {
+        "format": "Tiff",
+        "inspection": {
+          "Width": 6106,
+          "Height": 4644,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "PV4RowsV1"
+        },
+        "milliseconds": 15877,
+        "sha256": "2ED6E297A4FCA66AF1DD159055D9794122AB2DBF926126A87BB83E63956752BD"
+      },
+      {
+        "format": "Png",
+        "inspection": {
+          "Width": 6106,
+          "Height": 4644,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "WindowsWIC-PNG16-RowsV1"
+        },
+        "milliseconds": 26072,
+        "sha256": "5FCFA3A9F30B52A4853E6E0B09DC6B4987A8AE58E07B214CABC39CF738A7E04D"
+      },
+      {
+        "format": "Jpeg",
+        "inspection": {
+          "Width": 6106,
+          "Height": 4644,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 2.491343582262224,
+          "RootMeanSquareError": 3.517816909151958,
+          "MaximumError": 26,
+          "EncoderConfiguration": "WindowsWIC-JPEG95-444-RowsV1"
+        },
+        "milliseconds": 24820,
+        "sha256": "95FD1E76FA5F1EAA7FC9CBB08D2FBBCF0C0D885B7C984654F9CE5178283D1503"
+      }
+    ]
+  },
+  {
+    "Model": "ILCE-7M4",
+    "Width": 7028,
+    "Height": 4688,
+    "definition": {
+      "ProcessingVersion": 4,
+      "WhiteBalance": "Camera",
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "ExposureEv": 0,
+      "InputConfiguration": "LibRaw021LinearProPhotoD65V1",
+      "DisplayTransform": "LuminanceShoulderNeutralGamutV1",
+      "InstantFilm": {
+        "Enabled": true,
+        "FilmId": "itype-color",
+        "ChemicalGeneration": "ModernIntegralCreative",
+        "ProfileVersion": 1,
+        "AlgorithmVersion": 1,
+        "Amount": 1,
+        "PaperFrame": true,
+        "Border": 0.04,
+        "BottomBorder": 0.16,
+        "Uneven": 0.15,
+        "Unspread": 0.12,
+        "Roller": 0.1,
+        "ArtLightLeak": 0,
+        "EnvironmentCelsius": 21,
+        "DiceEnabled": true,
+        "Tier": "\u8F7B\u5FAE\u5076\u7136",
+        "Snapshot": {
+          "RootSeed": 20261012,
+          "PrngVersion": "SplitMix64SubstreamsV1",
+          "ProfileId": "itype-color",
+          "ProfileVersion": 1,
+          "Tier": "\u8F7B\u5FAE\u5076\u7136",
+          "ColorShift": 0.003612742404780477,
+          "SpreadScale": 0.5097593249138503,
+          "TextureScale": 0.575065919901064,
+          "Geometry": [
+            {
+              "Kind": "Spread",
+              "X": 0.15543352871038107,
+              "Y": 0.41793356088735034,
+              "Radius": 0.38491834217105947,
+              "Strength": 0.3207574666020183,
+              "Period": 0
+            },
+            {
+              "Kind": "Spread",
+              "X": 0.9595621052337929,
+              "Y": 0.48497942788779713,
+              "Radius": 0.26423547156464233,
+              "Strength": 0.3043497533661142,
+              "Period": 0
+            },
+            {
+              "Kind": "Spread",
+              "X": 0.039381555582147065,
+              "Y": 0.8252103349231646,
+              "Radius": 0.3449519506871804,
+              "Strength": 0.2597961144253914,
+              "Period": 0
+            },
+            {
+              "Kind": "Corner",
+              "X": 1,
+              "Y": 0,
+              "Radius": 0.04533746085310658,
+              "Strength": 0.6,
+              "Period": 0
+            },
+            {
+              "Kind": "Roller",
+              "X": 0.7825875244274864,
+              "Y": 0.8492108411176615,
+              "Radius": 0.015418553398380486,
+              "Strength": 0.42,
+              "Period": 0.11540778931781936
+            }
+          ]
+        },
+        "PaperColor": "Warm"
+      },
+      "DecodeKey": "LibRaw021LinearProPhotoD65V1:Camera:1:1:1"
+    },
+    "sourceUnchanged": true,
+    "previewReopenExact": true,
+    "rows": [
+      {
+        "format": "Tiff",
+        "inspection": {
+          "Width": 7404,
+          "Height": 5626,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "PV4RowsV1"
+        },
+        "milliseconds": 23024,
+        "sha256": "09E2934403CFEEECAB13A2235EECCE343307CD7318CF8725860E255BCAF7C5E3"
+      },
+      {
+        "format": "Png",
+        "inspection": {
+          "Width": 7404,
+          "Height": 5626,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "WindowsWIC-PNG16-RowsV1"
+        },
+        "milliseconds": 37799,
+        "sha256": "D6A7174D84D802DA7023E2BC1CF73C503AAA1D19D5970300946DCF8242D50901"
+      },
+      {
+        "format": "Jpeg",
+        "inspection": {
+          "Width": 7404,
+          "Height": 5626,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 1.0233466948653474,
+          "RootMeanSquareError": 1.4371875553281015,
+          "MaximumError": 23,
+          "EncoderConfiguration": "WindowsWIC-JPEG95-444-RowsV1"
+        },
+        "milliseconds": 35730,
+        "sha256": "A61004B7DFF5A07EAAC0AAB705E37571FD6FF330CD237B9C4BC9A6FAC85D6313"
+      }
+    ]
+  }
+]
