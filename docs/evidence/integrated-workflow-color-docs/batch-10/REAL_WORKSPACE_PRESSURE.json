@@ -1,0 +1,86 @@
+[
+  {
+    "stage": "workspace-0-master-hq",
+    "ledger": 262549440,
+    "workingSet": 2243047424,
+    "privateBytes": 2409480192,
+    "peakWorkingSet": 2590760960
+  },
+  {
+    "stage": "workspace-1-master-hq",
+    "ledger": 525098880,
+    "workingSet": 3540488192,
+    "privateBytes": 3719385088,
+    "peakWorkingSet": 3540492288
+  },
+  {
+    "stage": "queued-tiles",
+    "ledger": 543973248,
+    "workingSet": 3574448128,
+    "privateBytes": 3753373696,
+    "peakWorkingSet": 3574452224
+  },
+  {
+    "stage": "save-session",
+    "ledger": 543973248,
+    "workingSet": 3574448128,
+    "privateBytes": 3753373696,
+    "peakWorkingSet": 3574452224
+  },
+  {
+    "stage": "real-reopen",
+    "ledger": 29942784,
+    "workingSet": 4455800832,
+    "privateBytes": 4642312192,
+    "peakWorkingSet": 4793647104
+  },
+  {
+    "stage": "publishing-full-intermediate",
+    "ledger": 29942784,
+    "workingSet": 4458528768,
+    "privateBytes": 4645470208,
+    "peakWorkingSet": 4793647104
+  },
+  {
+    "stage": "publishing-resize-readback",
+    "ledger": 29942784,
+    "workingSet": 4540235776,
+    "privateBytes": 4722814976,
+    "peakWorkingSet": 4793905152
+  },
+  {
+    "stage": "ledger-pressure-not-physical-allocation",
+    "ledger": 2022237184,
+    "workingSet": 4540235776,
+    "privateBytes": 4722814976,
+    "peakWorkingSet": 4793905152
+  },
+  {
+    "stage": "switch-to-rejected-real-source-preserve-state",
+    "ledger": 0,
+    "workingSet": 4540358656,
+    "privateBytes": 4722884608,
+    "peakWorkingSet": 4793905152
+  },
+  {
+    "stage": "switch-back",
+    "ledger": 262549440,
+    "workingSet": 4048961536,
+    "privateBytes": 4150521856,
+    "peakWorkingSet": 4905312256
+  },
+  {
+    "stage": "close-export-cancel",
+    "ledger": 0,
+    "workingSet": 4048941056,
+    "privateBytes": 4149800960,
+    "peakWorkingSet": 4905312256
+  },
+  {
+    "stage": "disposed",
+    "ledger": 0,
+    "workingSet": 4048941056,
+    "privateBytes": 4149800960,
+    "peakWorkingSet": 4905312256
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "sourceCommit": "061c4cf57a72e59f676142ae629ff7b11cd5fb99",
+  "files": [
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+      "type": "C# production",
+      "sha256": "2f71f26ad839f740c9cf4500f90686e9644c66bb2b1cb150d49b93277591a019"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+      "type": "C# production",
+      "sha256": "428f3f920dab36115985da3eb06f2d6bb3e5521de2b22b8a773c4cb4d620ec77"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantInputRecipe.cs",
+      "type": "C# production",
+      "sha256": "49c855d0add6e78bdccd3804e00a2a9bf6038810174ee71f89823de323df1a02"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/LegacyRawInstantInput.cs",
+      "type": "C# production",
+      "sha256": "20adb0f25aa9d1fce6dff707fa8f9076fa9d298dc12bfa5f49d4c31e70c842b6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawPipeline.cs",
+      "type": "C# production",
+      "sha256": "8219b3e611988a54e88fcf178241178b756b59a70923767c652c1eb934ee8e0e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "type": "C# production",
+      "sha256": "3095552b11b92c476d7b69085a4921388cc4cb8858ba76d7831fb73cee967ee2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ProfessionalRawExport.cs",
+      "type": "C# production",
+      "sha256": "d3e140519014c31890ab23126947a3aaabaa2b767703b422cadfcca4fbb584a7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.InstantFilm.cs",
+      "type": "C# production",
+      "sha256": "e53ae09b45f5c996e2c7415f9c624eade34f40fa0473c8c797a09b4ee633b9da"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
+      "type": "C# production",
+      "sha256": "14c25f7fa818f23ccc42c80c51088f028b34c8d4b91a7e0f10da1ca38a6d43f7"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/BatchTenLegacyRawTests.cs",
+      "type": "C# test",
+      "sha256": "12148a6a609dade10fe6501f3b4d73293dbb024c54544272d69df02d62338da9"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/BatchTenCameraKeyframesTests.cs",
+      "type": "C# test",
+      "sha256": "8e2b829f11dc81896b70b2f6f1ffe9c7e5f6af19adcecef5de8eb1780720fe95"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/BatchTenLegacyRawProductTests.cs",
+      "type": "C# test",
+      "sha256": "570d2944d3110ab92100cc794684c24d81412aafc04c9418f14bb6bfcdf953e3"
+    }
+  ]
+}

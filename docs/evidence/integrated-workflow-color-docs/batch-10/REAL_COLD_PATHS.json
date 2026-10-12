@@ -1,0 +1,393 @@
+[
+  {
+    "name": "TNAN8886.CR3",
+    "status": "PASS",
+    "Width": 5496,
+    "Height": 3670,
+    "definition": {
+      "ProcessingVersion": 6,
+      "WhiteBalance": "Rendered",
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "ExposureEv": 0,
+      "InputConfiguration": "LegacyRawEditsSrgbFloatV1",
+      "DisplayTransform": "LegacyRawEditsIdentityV1",
+      "InstantFilm": {
+        "Enabled": true,
+        "FilmId": "itype-color",
+        "ChemicalGeneration": "ModernIntegralCreative",
+        "ProfileVersion": 1,
+        "AlgorithmVersion": 2,
+        "Amount": 1,
+        "PaperFrame": true,
+        "Border": 0.04,
+        "BottomBorder": 0.16,
+        "Uneven": 0.15,
+        "Unspread": 0.12,
+        "Roller": 0.1,
+        "ArtLightLeak": 0,
+        "EnvironmentCelsius": 21,
+        "DiceEnabled": false,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "Snapshot": null,
+        "PaperColor": "Warm",
+        "PaperGeometry": {
+          "Version": 1,
+          "Fit": "CropFill",
+          "CropX": 0.5,
+          "CropY": 0.5,
+          "WindowAspect": 1,
+          "Side": 0.075,
+          "Top": 0.075,
+          "Bottom": 0.25
+        }
+      },
+      "InstantInput": {
+        "Version": 2,
+        "Mode": "CurrentEdits",
+        "OriginVersionId": "2898f51e-fb36-4bc3-a827-74f8cab627fb",
+        "Look": null,
+        "Stack": {
+          "Nodes": [
+            {
+              "Id": "3b0f64e1-4a3c-4a59-b503-98758cb93364",
+              "Type": 7,
+              "Name": "Exposure",
+              "Enabled": true,
+              "FilmSettings": null,
+              "NumericParameters": {
+                "exposure": 1.25
+              },
+              "Samples": [],
+              "NegativeSamples": []
+            },
+            {
+              "Id": "9b044b8d-5398-456a-bec8-08fbe7417329",
+              "Type": 6,
+              "Name": "Warm",
+              "Enabled": true,
+              "FilmSettings": null,
+              "NumericParameters": {
+                "temperature": 15
+              },
+              "Samples": [],
+              "NegativeSamples": []
+            }
+          ],
+          "Version": 2,
+          "WorkingSpace": "OKLabD65",
+          "ProcessingVersion": 2
+        },
+        "Film": {
+          "Enabled": true,
+          "ProfileId": "PT-N01",
+          "ProfileAmount": 100,
+          "GrainAmount": 5,
+          "GrainSize": 35,
+          "HalationAmount": 0,
+          "BloomAmount": 0,
+          "VignetteAmount": 0,
+          "SurfaceAmount": 0,
+          "TextureId": "None",
+          "TextureAmount": 0,
+          "Seed": 21,
+          "SpatialVersion": 1
+        },
+        "LegacyRaw": {
+          "Version": 1,
+          "ProcessingVersion": 2,
+          "SourceSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+          "DecoderContract": "ProfessionalDecode-RGB16-sRGB-CameraWB-AutoRotateFalse-V1",
+          "OrientationContract": "NormalizePixelsBeforeEditsV1",
+          "RenderContract": "LegacyRawFullResolutionV1",
+          "Engine": 0,
+          "ExecutionMode": 0
+        }
+      },
+      "DecodeKey": "LegacyRawEditsSrgbFloatV1:Rendered:1:1:1:recipe:196CA5CCD9CD19E0C958174516294963C80ECC198ECE94D37E0378AD07116185"
+    },
+    "rows": [
+      {
+        "stage": "source-hash",
+        "milliseconds": 16.6553,
+        "elapsedMs": 16.6553,
+        "ledger": 0,
+        "workingSet": 134127616,
+        "privateBytes": 65343488,
+        "peakWorkingSet": 147582976
+      },
+      {
+        "stage": "legacy-decode-including-source-hash",
+        "milliseconds": 1128.0532,
+        "elapsedMs": 1144.7085,
+        "ledger": 0,
+        "workingSet": 498958336,
+        "privateBytes": 430542848,
+        "peakWorkingSet": 580665344
+      },
+      {
+        "stage": "OrientationStart",
+        "milliseconds": 4.229199999999992,
+        "elapsedMs": 1148.9377,
+        "ledger": 1519371904,
+        "workingSet": 498978816,
+        "privateBytes": 430571520,
+        "peakWorkingSet": 580665344
+      },
+      {
+        "stage": "OrientationComplete",
+        "milliseconds": 3.427699999999959,
+        "elapsedMs": 1152.3654,
+        "ledger": 1519371904,
+        "workingSet": 498978816,
+        "privateBytes": 430571520,
+        "peakWorkingSet": 580665344
+      },
+      {
+        "stage": "CurrentEditsStart",
+        "milliseconds": 3.1233000000001994,
+        "elapsedMs": 1155.4887,
+        "ledger": 1519371904,
+        "workingSet": 498978816,
+        "privateBytes": 430571520,
+        "peakWorkingSet": 580665344
+      },
+      {
+        "stage": "CurrentEditsComplete",
+        "milliseconds": 14509.5713,
+        "elapsedMs": 15665.06,
+        "ledger": 1519371904,
+        "workingSet": 2170949632,
+        "privateBytes": 2396921856,
+        "peakWorkingSet": 2170953728
+      },
+      {
+        "stage": "current-edit-master-ready",
+        "milliseconds": 3.8509000000012747,
+        "elapsedMs": 15668.9109,
+        "ledger": 0,
+        "workingSet": 2170613760,
+        "privateBytes": 2395471872,
+        "peakWorkingSet": 2170953728
+      },
+      {
+        "stage": "instant-effects-only-full-source-scan",
+        "milliseconds": 9771.614799999998,
+        "elapsedMs": 25440.5257,
+        "ledger": 0,
+        "workingSet": 2170363904,
+        "privateBytes": 2394980352,
+        "peakWorkingSet": 2179284992
+      },
+      {
+        "stage": "instant-effects-plus-HQ-cold",
+        "milliseconds": 3418.889000000003,
+        "elapsedMs": 28859.4147,
+        "ledger": 0,
+        "workingSet": 2198790144,
+        "privateBytes": 2423480320,
+        "peakWorkingSet": 2198794240
+      },
+      {
+        "stage": "native-block",
+        "milliseconds": 5.899099999998725,
+        "elapsedMs": 28865.3138,
+        "ledger": 0,
+        "workingSet": 2199576576,
+        "privateBytes": 2424156160,
+        "peakWorkingSet": 2199580672
+      },
+      {
+        "stage": "definition-reopen-block-validation",
+        "milliseconds": 12.986499999999069,
+        "elapsedMs": 28878.3003,
+        "ledger": 0,
+        "workingSet": 2202296320,
+        "privateBytes": 2426527744,
+        "peakWorkingSet": 2202300416
+      },
+      {
+        "stage": "Tiff-render-and-encode-with-built-in-validation",
+        "milliseconds": 7330.8016000000025,
+        "elapsedMs": 36209.1019,
+        "ledger": 0,
+        "workingSet": 2201915392,
+        "privateBytes": 2426048512,
+        "peakWorkingSet": 2202439680
+      },
+      {
+        "stage": "Tiff-independent-call-readback",
+        "milliseconds": 7140.179100000001,
+        "elapsedMs": 43349.281,
+        "ledger": 0,
+        "workingSet": 2200645632,
+        "privateBytes": 2425053184,
+        "peakWorkingSet": 2202439680
+      },
+      {
+        "stage": "Tiff-hash",
+        "milliseconds": 207.55169999999634,
+        "elapsedMs": 43556.8327,
+        "ledger": 0,
+        "workingSet": 2200645632,
+        "privateBytes": 2425053184,
+        "peakWorkingSet": 2202439680
+      },
+      {
+        "stage": "Png-render-and-encode-with-built-in-validation",
+        "milliseconds": 17035.377200000003,
+        "elapsedMs": 60592.2099,
+        "ledger": 0,
+        "workingSet": 2335178752,
+        "privateBytes": 2558488576,
+        "peakWorkingSet": 2335182848
+      },
+      {
+        "stage": "Png-independent-call-readback",
+        "milliseconds": 7696.135500000004,
+        "elapsedMs": 68288.3454,
+        "ledger": 0,
+        "workingSet": 2328248320,
+        "privateBytes": 2551181312,
+        "peakWorkingSet": 2458415104
+      },
+      {
+        "stage": "Png-hash",
+        "milliseconds": 123.42409999998927,
+        "elapsedMs": 68411.7695,
+        "ledger": 0,
+        "workingSet": 2328473600,
+        "privateBytes": 2551554048,
+        "peakWorkingSet": 2458415104
+      },
+      {
+        "stage": "Jpeg-render-and-encode-with-built-in-validation",
+        "milliseconds": 15595.781500000012,
+        "elapsedMs": 84007.551,
+        "ledger": 0,
+        "workingSet": 2240102400,
+        "privateBytes": 2462957568,
+        "peakWorkingSet": 2458415104
+      },
+      {
+        "stage": "Jpeg-independent-call-readback",
+        "milliseconds": 8078.840299999996,
+        "elapsedMs": 92086.3913,
+        "ledger": 0,
+        "workingSet": 2240516096,
+        "privateBytes": 2463289344,
+        "peakWorkingSet": 2458415104
+      },
+      {
+        "stage": "Jpeg-hash",
+        "milliseconds": 20.206399999995483,
+        "elapsedMs": 92106.5977,
+        "ledger": 0,
+        "workingSet": 2240163840,
+        "privateBytes": 2462879744,
+        "peakWorkingSet": 2458415104
+      },
+      {
+        "stage": "source-unchanged-hash",
+        "milliseconds": 15.175199999997858,
+        "elapsedMs": 92121.7729,
+        "ledger": 0,
+        "workingSet": 2240192512,
+        "privateBytes": 2462924800,
+        "peakWorkingSet": 2458415104
+      }
+    ],
+    "formatResults": [
+      {
+        "format": "Tiff",
+        "verification": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "PV4RowsV1"
+        },
+        "outputHash": "67F51ADC4C6A31089B16733B069C65231392808D9EE51E5C4297B29BD9E09A6B"
+      },
+      {
+        "format": "Png",
+        "verification": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "WindowsWIC-PNG16-RowsV1"
+        },
+        "outputHash": "CCD03504AF6276BA4247D1C6B83982768C5DB3D5E6BB0731FA8EF08E227028AE"
+      },
+      {
+        "format": "Jpeg",
+        "verification": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 1.88264681336552,
+          "RootMeanSquareError": 2.8336712999695717,
+          "MaximumError": 24,
+          "EncoderConfiguration": "WindowsWIC-JPEG95-444-RowsV1"
+        },
+        "outputHash": "E47E5581FA098EBB075D113DEBEBC0D9468FFF87D4B2958ECCA6554203EDD1A5"
+      }
+    ]
+  },
+  {
+    "name": "DSC09916.ARW",
+    "status": "REJECTED_OR_FAILED",
+    "error": "RAWSelectionAssistant.Core.Services.RawToJpeg.RawDecodeException: The RAW file could not be decoded safely.\r\n ---\u003E Sdcb.LibRaw.LibRawException: Failed opening file: D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\DSC09916.ARW\r\n   at Sdcb.LibRaw.RawContext.OpenFile(String filePath, LibRawInitFlags flags)\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.DecodeCore(String sourcePath, String extension, RawToJpegOptions options, CancellationToken cancellationToken)\r\n   --- End of inner exception stack trace ---\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.DecodeCore(String sourcePath, String extension, RawToJpegOptions options, CancellationToken cancellationToken)\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.\u003C\u003Ec__DisplayClass4_0.\u003CDecodeAsync\u003Eb__0()\r\n   at System.Threading.Tasks.Task\u00601.InnerInvoke()\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n--- End of stack trace from previous location ---\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task\u0026 currentTaskSlot, Thread threadPoolThread)\r\n--- End of stack trace from previous location ---\r\n   at RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline.DecodeMasterAsync(String path, CancellationToken token)\r\n   at RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline.DecodeFrozenMasterAsync(String path, CancellationToken token)\r\n   at RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure()",
+    "rows": [
+      {
+        "stage": "source-hash",
+        "milliseconds": 33.471,
+        "elapsedMs": 33.471,
+        "ledger": 0,
+        "workingSet": 2178273280,
+        "privateBytes": 2399629312,
+        "peakWorkingSet": 2458415104
+      }
+    ]
+  },
+  {
+    "name": "DSCF0347.RAF",
+    "status": "REJECTED_OR_FAILED",
+    "error": "System.InvalidOperationException: \u5904\u7406\u8BF7\u6C42\u8D85\u8FC7\u5168\u5E94\u7528\u8D44\u6E90\u9884\u7B97\uFF1B\u672A\u964D\u4F4E\u5C3A\u5BF8\u6216\u4F4D\u6DF1\u3002\r\n   at RAWSelectionAssistant.Core.Services.Projects.StudioGlobalResources.ReserveWork(Int64 bytes)\r\n   at RAWSelectionAssistant.Core.Services.Projects.LegacyRawInstantInput.Render(FrozenRawMaster source, ProfessionalRawDefinition definition, RawMatchTiff16ProductPipeline pipeline, CancellationToken token, Action\u00601 stage)\r\n   at RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure()",
+    "rows": [
+      {
+        "stage": "source-hash",
+        "milliseconds": 119.4168,
+        "elapsedMs": 119.4168,
+        "ledger": 0,
+        "workingSet": 1938448384,
+        "privateBytes": 2156646400,
+        "peakWorkingSet": 2458415104
+      },
+      {
+        "stage": "legacy-decode-including-source-hash",
+        "milliseconds": 5532.2197,
+        "elapsedMs": 5651.6365,
+        "ledger": 0,
+        "workingSet": 1396301824,
+        "privateBytes": 1607532544,
+        "peakWorkingSet": 2590760960
+      }
+    ]
+  }
+]
