@@ -13,7 +13,7 @@ public sealed class InstantDevelopmentView : FrameworkElement
     private BitmapSource? _gray;
     private static void OnImageChanged(DependencyObject sender,DependencyPropertyChangedEventArgs args)
     {var view=(InstantDevelopmentView)sender;view._gray=args.NewValue is BitmapSource image?new FormatConvertedBitmap(image,PixelFormats.Gray8,null,0):null;view._gray?.Freeze();}
-    public static readonly DependencyProperty CameraProperty=DependencyProperty.Register(nameof(Camera),typeof(string),typeof(InstantDevelopmentView),new FrameworkPropertyMetadata("SX-70/680",FrameworkPropertyMetadataOptions.AffectsRender));
+    public static readonly DependencyProperty CameraProperty=DependencyProperty.Register(nameof(Camera),typeof(string),typeof(InstantDevelopmentView),new FrameworkPropertyMetadata("SX-70",FrameworkPropertyMetadataOptions.AffectsRender));
     public static readonly DependencyProperty DirectionProperty=DependencyProperty.Register(nameof(Direction),typeof(string),typeof(InstantDevelopmentView),new FrameworkPropertyMetadata("Color",FrameworkPropertyMetadataOptions.AffectsRender));
     public static readonly DependencyProperty ImageRegionProperty=DependencyProperty.Register(nameof(ImageRegion),typeof(Rect),typeof(InstantDevelopmentView),new FrameworkPropertyMetadata(new Rect(0,0,1,1),FrameworkPropertyMetadataOptions.AffectsRender));
     public Rect ImageRegion {get=>(Rect)GetValue(ImageRegionProperty);set=>SetValue(ImageRegionProperty,value);}
@@ -29,17 +29,18 @@ public sealed class InstantDevelopmentView : FrameworkElement
         if(frame.CameraVisible)
         {
             dc.DrawRectangle(new SolidColorBrush(Color.FromArgb(170,18,20,23)),null,new Rect(RenderSize));
-            var body=new Rect(ActualWidth/2-115,ActualHeight/2-110,230,145);
+            var cameraScale=Math.Min(1,Math.Min(ActualWidth/340,ActualHeight/420));
+            var body=new Rect(ActualWidth/2-115*cameraScale,ActualHeight/2-125*cameraScale,230*cameraScale,160*cameraScale);
+            var slot=InstantCameraArtwork.Slot(Camera);
             var progress=frame.Stage==InstantDevelopmentStage.Ejecting?frame.Progress:0;
-            var eject=new Rect(body.Left+28,body.Bottom-8,174,Math.Max(1,130*progress));
+            var width=slot.Width*cameraScale;var height=width*Image.PixelHeight/Image.PixelWidth;
+            var eject=new Rect(body.Left+slot.X*cameraScale,body.Top+slot.Y*cameraScale-height*(1-progress),width,height);
+            dc.PushClip(new RectangleGeometry(new Rect(body.Left,body.Top+slot.Y*cameraScale,body.Width,height)));
             dc.DrawRectangle(Brushes.Ivory,new Pen(Brushes.Silver,1),eject);
-            if(progress>.15){dc.PushClip(new RectangleGeometry(eject));dc.DrawRectangle(Brushes.LightGray,null,new Rect(body.Left+35,body.Bottom-1,160,110));dc.Pop();}
-            dc.DrawRoundedRectangle(Camera=="i-2"?Brushes.DimGray:Brushes.SaddleBrown,new Pen(Brushes.Silver,3),body,Camera=="i-2"?24:5,Camera=="i-2"?24:5);
-            dc.DrawEllipse(Brushes.Black,new Pen(Brushes.DarkGray,9),new Point(body.Left+120,body.Top+73),43,43);
-            dc.DrawEllipse(Brushes.DarkSlateBlue,new Pen(Brushes.SlateGray,3),new Point(body.Left+120,body.Top+73),26,26);
-            dc.DrawRoundedRectangle(Brushes.LightGray,null,new Rect(body.Left+16,body.Top+16,44,24),3,3);
-            dc.DrawEllipse(Brushes.IndianRed,null,new Point(body.Right-24,body.Top+25),9,9);
-            dc.DrawRectangle(Brushes.Black,null,new Rect(body.Left+20,body.Bottom-9,190,6));
+            dc.DrawRectangle(Brushes.LightGray,null,new Rect(eject.X+ImageRegion.X*width,eject.Y+ImageRegion.Y*height,ImageRegion.Width*width,ImageRegion.Height*height));
+            dc.Pop();
+            dc.PushTransform(new TranslateTransform(body.Left,body.Top));dc.PushTransform(new ScaleTransform(cameraScale,cameraScale));
+            InstantCameraArtwork.Draw(dc,Camera);dc.Pop();dc.Pop();
             return;
         }
         // Normal editor background remains visible. Paper is sharp from the first frame.

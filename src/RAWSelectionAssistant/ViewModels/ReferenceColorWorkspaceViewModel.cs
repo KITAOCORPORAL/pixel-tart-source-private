@@ -720,7 +720,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         }
         _observedTargets.Clear();
         foreach (var id in _thumbnailJobs.Keys.ToArray()) CancelTargetThumbnail(id);
-        _exportCancellation?.Cancel(); _exportCancellation?.Dispose(); Editor.Dispose();
+        // The running export owns disposal in its finally block; closing only signals cancellation.
+        _exportCancellation?.Cancel(); Editor.Dispose();
     }
 
     private async Task ChooseTargetAsync()

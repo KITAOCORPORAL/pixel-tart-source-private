@@ -21,7 +21,37 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer, IPublishingOutp
         var aFrame=BitmapDecoder.Create(input,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];var bFrame=BitmapDecoder.Create(result,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];
         if(bFrame.ColorContexts is not {Count:>0})throw new InvalidDataException("Publishing output has no sRGB profile.");
         using(var icc=bFrame.ColorContexts[0].OpenProfileStream()){using var memory=new MemoryStream();icc.CopyTo(memory);if(!memory.ToArray().AsSpan().SequenceEqual(StudioQuickExport.SrgbProfileBytes()))throw new InvalidDataException("Publishing output profile is not sRGB.");}
-        if((options.EffectiveDimensions.Enabled&&options.EffectiveDimensions.Mode!=PublishingSizeMode.Original)||(options.WatermarksEnabled&&options.EffectiveWatermarkLayers.Any(x=>x.Enabled)))return System.Text.Json.JsonSerializer.Serialize(new{mode="EncodedMetadataOnly",bFrame.PixelWidth,bFrame.PixelHeight,pixelComparison="NOT_RUN for resized/watermarked Publishing; not promoted to exact"});
+        if((options.EffectiveDimensions.Enabled&&options.EffectiveDimensions.Mode!=PublishingSizeMode.Original)||(options.WatermarksEnabled&&options.EffectiveWatermarkLayers.Any(x=>x.Enabled)))
+        {
+            // Production verification rerenders the frozen recipe losslessly and reads BOTH encoded files.
+            // Independent algorithm/font oracles belong to tests, not this same-renderer check.
+            var expected=Path.Combine(Path.GetTempPath(),"kitao-pixel-reference-"+Guid.NewGuid()+".tif");
+            try
+            {
+                var referenceOptions=options.OutputFormat==PublishingOutputFormat.Tiff?options:options with{OutputFormat=PublishingOutputFormat.Png};
+                Render(source,expected,referenceOptions,token);
+                using var referenceStream=File.OpenRead(expected);
+                var reference=BitmapDecoder.Create(referenceStream,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];
+                if(reference.PixelWidth!=bFrame.PixelWidth||reference.PixelHeight!=bFrame.PixelHeight)throw new InvalidDataException("Publishing recipe dimensions mismatch.");
+                var high=options.OutputFormat==PublishingOutputFormat.Tiff&&options.OutputBitDepth==PublishingOutputBitDepth.Sixteen;
+                var pixelFormat=high?PixelFormats.Rgb48:PixelFormats.Rgb24;
+                var expectedPixels=new FormatConvertedBitmap(reference,pixelFormat,null,0);var actualPixels=new FormatConvertedBitmap(bFrame,pixelFormat,null,0);
+                var rowBytes=reference.PixelWidth*(high?6:3);var er=new byte[rowBytes];var ar=new byte[rowBytes];double total=0,squared=0;var maxError=0;
+                for(var y=0;y<reference.PixelHeight;y++)
+                {
+                    token.ThrowIfCancellationRequested();var rect=new Int32Rect(0,y,reference.PixelWidth,1);expectedPixels.CopyPixels(rect,er,rowBytes,0);actualPixels.CopyPixels(rect,ar,rowBytes,0);
+                    for(var i=0;i<rowBytes;i+=high?2:1)
+                    {
+                        var e=high?System.Buffers.Binary.BinaryPrimitives.ReadUInt16LittleEndian(er.AsSpan(i)):er[i];var a=high?System.Buffers.Binary.BinaryPrimitives.ReadUInt16LittleEndian(ar.AsSpan(i)):ar[i];
+                        var delta=Math.Abs(e-a);total+=delta;squared+=(double)delta*delta;maxError=Math.Max(maxError,delta);
+                    }
+                }
+                var count=(double)reference.PixelWidth*reference.PixelHeight*3;var mean=total/count;var rms=Math.Sqrt(squared/count);
+                if(options.OutputFormat==PublishingOutputFormat.Jpeg?(mean>5||rms>15):maxError!=0)throw new InvalidDataException("Publishing encoded recipe pixels mismatch.");
+                return System.Text.Json.JsonSerializer.Serialize(new{mode="EncodedRecipePixelComparison",independentAlgorithmOracle=false,bitDepth=high?16:8,mean,rms,maxError,reference.PixelWidth,reference.PixelHeight});
+            }
+            finally{if(File.Exists(expected))File.Delete(expected);}
+        }
         var oriented=StudioQuickExport.ApplyOrientation(aFrame,ReadOrientation(aFrame));var before=new FormatConvertedBitmap(oriented,PixelFormats.Rgb24,null,0);var after=new FormatConvertedBitmap(bFrame,PixelFormats.Rgb24,null,0);
         if(before.PixelWidth!=after.PixelWidth||before.PixelHeight!=after.PixelHeight)throw new InvalidDataException("Publishing orientation/size mismatch.");
         var stride=before.PixelWidth*3;var left=new byte[stride];var right=new byte[stride];double sum=0,squares=0;var max=0;

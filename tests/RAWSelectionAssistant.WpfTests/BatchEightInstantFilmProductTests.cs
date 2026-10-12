@@ -67,7 +67,7 @@ public sealed class BatchEightInstantFilmProductTests
         Assert.IsNotNull(prepared);Assert.HasCount(1,prepared);Assert.AreEqual(".tif",Path.GetExtension(prepared[0]));
         var preparedReceipt=await ExportRecovery.ReadAsync(prepared[0]+".kitao-export.json");Assert.AreEqual(size.Width,preparedReceipt.RecipeSnapshot!.Width);Assert.AreEqual(size.Height,preparedReceipt.RecipeSnapshot.Height);
         Assert.AreEqual(JsonSerializer.Serialize(reopened.ActiveTarget.RawDefinition),JsonSerializer.Serialize(preparedReceipt.RecipeSnapshot.RawDefinition));
-        await reopened.DisableInstantFilmCommand.ExecuteAsync(null);Assert.IsNull(reopened.ActiveTarget.RawDefinition!.InstantFilm);
+        await reopened.DisableInstantFilmCommand.ExecuteAsync(null);Assert.IsTrue(reopened.ActiveTarget.RawDefinition!.InstantFilm!.ImageEffectsDisabled);
     }
     [TestMethod]
     public async Task MultiTileViewportCoversPanDpiAndStaleRequestsNeverWin()
@@ -139,6 +139,87 @@ public sealed class BatchEightInstantFilmProductTests
             results.Add(new{master.Contract.Model,master.Image.Width,master.Image.Height,definition=d,sourceUnchanged=unchanged,previewReopenExact=true,rows});
         }
         await File.WriteAllTextAsync(Path.Combine(evidence,"instant-real.json"),JsonSerializer.Serialize(results,new JsonSerializerOptions{WriteIndented=true}));
+    }
+    [TestMethod]
+    public async Task BatchNineCurrentJpegEditsSurviveGenerationAndReopenWithoutProxy()
+    {
+        using var temp=new Temp();var path=temp.File("edited.jpg");SaveJpeg(path,120,80);
+        using var workspace=new ReferenceColorWorkspaceViewModel(new Dialogs(temp.Root));await workspace.LoadTargetAsync(path);
+        var stack=new ColorAdjustmentStack([new(Guid.NewGuid(),ColorStudioNodeType.BasicTone,"Exposure",NumericParameters:new Dictionary<string,double>{{"exposure",1}})]);
+        workspace.Editor.ApplyTargetSnapshot(null,null,stack,render:false);
+        var expected=await workspace.Editor.ProcessForExportAsync(path,null,null,default,stack);
+        Assert.IsFalse(Pixels(expected).SequenceEqual(Pixels(StudioQuickExport.Load(path))),"Fixture must actually change source pixels.");
+        workspace.InstantLayout="LegacyFree";workspace.InstantPaperFrame=false;workspace.InstantImageEffectsDisabled=true;workspace.InstantCameraAnimation=false;
+        var oldVersion=workspace.ActiveTarget!.ActiveEditVersionId;await workspace.GenerateInstantFilmAsync(false);
+        Assert.IsNotNull(workspace.ActiveTarget.RawDefinition,workspace.StatusText);
+        var recipe=workspace.ActiveTarget.RawDefinition.InstantInput!;Assert.AreEqual("CurrentEdits",recipe.Mode);Assert.AreEqual(oldVersion,recipe.OriginVersionId);Assert.HasCount(1,recipe.Stack!.Nodes);
+        CollectionAssert.AreEqual(Pixels(expected),Pixels(workspace.Editor.MatchedImage!));
+        var session=temp.File("edit.ptstudio.json");await workspace.SaveSessionAsync(session);
+        using var reopened=new ReferenceColorWorkspaceViewModel(new Dialogs(temp.Root));await reopened.LoadSessionAsync(session);
+        CollectionAssert.AreEqual(Pixels(expected),Pixels(reopened.Editor.MatchedImage!));Assert.AreEqual(120,reopened.ActiveTarget!.LinearRawMaster!.Image.Width);
+    }
+    [TestMethod]
+    [DoNotParallelize]
+    public async Task BatchNineMultipleWorkspacesPressureCancellationAndBudgetRelease()
+    {
+        using var temp=new Temp();var workspaces=new List<ReferenceColorWorkspaceViewModel>();var records=new List<object>();
+        var process=System.Diagnostics.Process.GetCurrentProcess();long peakAccounted=0;
+        void Record(string stage){process.Refresh();peakAccounted=Math.Max(peakAccounted,StudioGlobalResources.AccountedBytes);records.Add(new{stage,accounted=StudioGlobalResources.AccountedBytes,workingSet=process.WorkingSet64,peakWorkingSet=process.PeakWorkingSet64,privateBytes=process.PrivateMemorySize64});}
+        try
+        {
+            for(var i=0;i<3;i++)
+            {
+                var path=temp.File($"workspace-{i}.arw");await File.WriteAllBytesAsync(path,[1,2,(byte)i]);
+                var workspace=new ReferenceColorWorkspaceViewModel(new Dialogs(temp.Root),rawDecoder:new Legacy(),professionalRawDecoder:new Linear());workspaces.Add(workspace);
+                await workspace.LoadTargetAsync(path);await workspace.CreateProfessionalRawCommand.ExecuteAsync(null);Record("master-hq-"+i);
+            }
+            await Task.WhenAll(workspaces.Select(w=>w.UpdateProfessionalViewportAsync(new Rect(0,0,1024,800),1,1)));Record("tiles");
+            var active=workspaces[0].ActiveTarget!.LinearRawMaster!;
+            using(var pressure=StudioGlobalResources.ReserveWork(1900L*1024*1024))
+            {
+                Record("eviction-active-reference");Assert.IsTrue(float.IsFinite(active.Image.Rgb32.Span[0]));
+                Assert.Throws<InvalidOperationException>(()=>StudioGlobalResources.ReserveWork(StudioGlobalResources.TotalLimit));
+            }
+            workspaces[0].QuickExportFormat=StudioExportFormat.Tiff;await workspaces[0].ExportSelectedCommand.ExecuteAsync(null);Assert.AreEqual(ReferenceExportStatus.Succeeded,workspaces[0].ActiveTarget!.ExportStatus,workspaces[0].ActiveTarget.Error);Record("export");
+            workspaces[2].QuickExportFormat=StudioExportFormat.Tiff;var exporting=workspaces[2].ExportSelectedCommand.ExecuteAsync(null);workspaces[2].Dispose();await exporting;Record("close-active-export");
+            var pending=workspaces[1].UpdateProfessionalViewportAsync(new Rect(0,0,1000,800),1,1);workspaces[1].Dispose();await pending;Record("cancel-close");
+            var replacement=temp.File("replacement.arw");await File.WriteAllBytesAsync(replacement,[9,8,7]);await workspaces[0].LoadTargetAsync(replacement);Record("switch-photo");
+        }
+        finally{foreach(var workspace in workspaces)workspace.Dispose();}
+        Record("disposed");Assert.AreEqual(0L,StudioGlobalResources.AccountedBytes);Assert.AreEqual(1,ProfessionalRawResourcePolicy.HeavyWork.CurrentCount);
+        var evidence=Environment.GetEnvironmentVariable("KITAO_BATCH09_EVIDENCE");if(!string.IsNullOrEmpty(evidence)){Directory.CreateDirectory(evidence);await File.WriteAllTextAsync(Path.Combine(evidence,"workspace-pressure.json"),JsonSerializer.Serialize(new{scope="Three actual workspace viewmodels, synthetic 1800x1000 decoder; no desktop UI",peakAccounted,records},new JsonSerializerOptions{WriteIndented=true}));}
+    }
+    [TestMethod]
+    public async Task BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately()
+    {
+        var evidence=Environment.GetEnvironmentVariable("KITAO_BATCH09_EVIDENCE");if(string.IsNullOrEmpty(evidence)){Assert.Inconclusive("Measurement opt-in required.");return;}
+        using var temp=new Temp();var master=Master(1800,1200,1);var film=new InstantFilmDefinition(true,AlgorithmVersion:2){PaperGeometry=new()};var d=new ProfessionalRawDefinition{InstantFilm=film};
+        var watch=System.Diagnostics.Stopwatch.StartNew();var sink=0d;
+        for(var i=0;i<100000;i++){var layout=InstantPaperLayout.Create(1800,1200,film);sink+=layout.Width;}
+        var layoutMs=watch.Elapsed.TotalMilliseconds;watch.Restart();
+        for(var y=0;y<1200;y++)for(var x=0;x<1800;x++)sink+=InstantFilmPipeline.Apply(new(.2,.4,.6),(x+.5)/1800,(y+.5)/1200,film).X;
+        var filmMs=watch.Elapsed.TotalMilliseconds;var size=ProfessionalRawPipeline.OutputSize(master,d);var reference=new float[size.Width*size.Height*3];watch.Restart();
+        for(var y=0;y<size.Height;y++)for(var x=0;x<size.Width;x++){var value=ProfessionalRawPipeline.RenderOutputPixel(master,d,x,y);var i=(y*size.Width+x)*3;reference[i]=(float)value.X;reference[i+1]=(float)value.Y;reference[i+2]=(float)value.Z;}
+        var perPixelLayoutMs=watch.Elapsed.TotalMilliseconds;watch.Restart();var optimized=ProfessionalRawPipeline.RenderOutput(master,d);var preparedLayoutMs=watch.Elapsed.TotalMilliseconds;
+        CollectionAssert.AreEqual(reference,optimized.Rgb32.ToArray());watch.Restart();var hq=ProfessionalRawPipeline.RenderPreview(master,d,800);var hqMs=watch.Elapsed.TotalMilliseconds;
+        watch.Restart();using(var stream=File.Create(temp.File("encode.tif")))TiffExport.WriteRgb48(stream,optimized,new(IccProfile:StudioQuickExport.SrgbProfileBytes()));var encodingMs=watch.Elapsed.TotalMilliseconds;
+        Directory.CreateDirectory(evidence);await File.WriteAllTextAsync(Path.Combine(evidence,"cold-stages.json"),JsonSerializer.Serialize(new{input="synthetic 1800x1200",cacheUsed=false,layoutIterations=100000,layoutMs,filmMs,perPixelLayoutMs,preparedLayoutMs,identicalPixels=true,hqMs,hqEdge=800,encodingMs,encoding="TIFF16 from already rendered pixels, excludes film/layout",sink},new JsonSerializerOptions{WriteIndented=true}));
+    }
+    [TestMethod]
+    public async Task BatchNineV2PaperFormatsRoundTripAllExifAndBothFits()
+    {
+        using var temp=new Temp();
+        for(ushort orientation=1;orientation<=8;orientation++)foreach(var fit in new[]{"CropFill","FitEntire"})
+        {
+            var master=Master(48,32,orientation);var d=new ProfessionalRawDefinition{InstantFilm=new(true,AlgorithmVersion:2){PaperGeometry=new(Fit:fit,CropX:.8,CropY:.2)}};
+            foreach(var format in new[]{StudioExportFormat.Tiff,StudioExportFormat.Png,StudioExportFormat.Jpeg})
+            {
+                var path=temp.File($"{orientation}-{fit}-{format}.out");await ProfessionalRawExport.WriteAsync(master,d,path,format);
+                var decoded=ProfessionalRawExport.Inspect(path,master,d,format);var size=ProfessionalRawPipeline.OutputSize(master,d);
+                Assert.AreEqual(size.Width,decoded.Width);Assert.AreEqual(size.Height,decoded.Height);Assert.AreEqual(1,decoded.Orientation);
+                if(format!=StudioExportFormat.Jpeg)Assert.AreEqual(0,decoded.MaximumError);
+            }
+        }
     }
     private static byte[] Pixels(BitmapSource source){var bitmap=new FormatConvertedBitmap(source,PixelFormats.Rgb24,null,0);var pixels=new byte[bitmap.PixelWidth*bitmap.PixelHeight*3];bitmap.CopyPixels(pixels,bitmap.PixelWidth*3,0);return pixels;}
     private static void SaveJpeg(string path,int width,int height){var p=new byte[width*height*3];for(var i=0;i<p.Length;i+=3){p[i]=80;p[i+1]=130;p[i+2]=190;}var encoder=new JpegBitmapEncoder{QualityLevel=95};encoder.Frames.Add(BitmapFrame.Create(BitmapSource.Create(width,height,96,96,PixelFormats.Rgb24,null,p,width*3)));using var file=File.Create(path);encoder.Save(file);}

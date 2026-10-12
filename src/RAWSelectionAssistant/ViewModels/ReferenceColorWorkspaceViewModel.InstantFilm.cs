@@ -16,7 +16,17 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public string InstantTier {get;set;}="稳定出片";
     public bool InstantDiceEnabled {get;private set;}
     public bool InstantCameraAnimation {get;set;}=true;
-    public string InstantCamera {get;private set;}="SX-70/680";
+    public string InstantCamera {get;private set;}="SX-70";
+    public IReadOnlyList<string> InstantInputModes {get;}=["CurrentEdits","Original"];
+    public string InstantInputMode {get;set;}="CurrentEdits";
+    public IReadOnlyList<string> InstantLayouts {get;}=["SquareV1","LegacyFree"];
+    public string InstantLayout {get;set;}="SquareV1";
+    public IReadOnlyList<string> InstantFitModes {get;}=["CropFill","FitEntire"];
+    public string InstantFit {get;set;}="CropFill";
+    public double InstantCropX {get;set;}=.5;
+    public double InstantCropY {get;set;}=.5;
+    public bool InstantImageEffectsDisabled {get;set;}
+    public string InstantDimensions {get;private set;}="";
     public bool IsInstantGenerating {get;private set;}
     public bool InstantEditingAllowed=>!IsInstantGenerating;
     public double InstantUneven {get;set;}=.15;
@@ -27,8 +37,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public IReadOnlyList<string> InstantPaperColors {get;}=["Warm","Neutral","Cool"];
     public string InstantPaperColor {get;set;}="Warm";
     public bool InstantPaperFrame {get;set;}=true;
-    public double InstantBorder {get;set;}=.04;
-    public double InstantBottomBorder {get;set;}=.16;
+    public double InstantBorder {get;set;}=.075;
+    public double InstantBottomBorder {get;set;}=.25;
     public double InstantAmount {get;set;}=1;
     public InstantDevelopmentFrame? InstantDevelopment {get;private set;}
     public BitmapSource? InstantFinalPreview {get;private set;}
@@ -48,17 +58,21 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         DisableInstantFilmCommand=new(async _=>
         {
             if(ActiveTarget is not {} target||target.RawDefinition is not {} d)return;
-            CaptureEditVersion(target);target.ActiveEditVersionId=Guid.NewGuid();target.RawDefinition=d with{InstantFilm=null};
+            CaptureEditVersion(target);target.ActiveEditVersionId=Guid.NewGuid();target.RawDefinition=d with{InstantFilm=(d.InstantFilm??new()) with{AlgorithmVersion=2,ImageEffectsDisabled=true,PaperFrame=InstantPaperFrame}};
             await ActivateTargetAsync(target);CaptureEditVersion(target);
         },Ready);
-        SelectInstantCameraCommand=new(p=>{if(p is "SX-70/680" or "i-2"){InstantCamera=(string)p;OnPropertyChanged(nameof(InstantCamera));}},_=>!IsInstantGenerating);
+        SelectInstantCameraCommand=new(p=>{if(p is "SX-70" or "i-2"){InstantCamera=(string)p;OnPropertyChanged(nameof(InstantCamera));}},_=>!IsInstantGenerating);
     }
     private void RestoreInstantControls(InstantFilmDefinition? film)
     {
-        if(film is null){InstantDiceEnabled=false;OnPropertyChanged(nameof(InstantDiceEnabled));return;}
+        if(film is null){InstantDiceEnabled=false;InstantImageEffectsDisabled=false;InstantLayout="SquareV1";InstantFit="CropFill";InstantCropX=.5;InstantCropY=.5;foreach(var name in new[]{nameof(InstantDiceEnabled),nameof(InstantImageEffectsDisabled),nameof(InstantLayout),nameof(InstantFit),nameof(InstantCropX),nameof(InstantCropY)})OnPropertyChanged(name);return;}
         SelectedInstantProfile=InstantFilmProfiles.Available.Single(x=>x.Id==film.FilmId);InstantTier=film.Tier;InstantDiceEnabled=film.DiceEnabled;
         InstantUneven=film.Uneven;InstantUnspread=film.Unspread;InstantRoller=film.Roller;InstantArtLeak=film.ArtLightLeak;InstantEnvironmentCelsius=film.EnvironmentCelsius;
         InstantPaperColor=film.PaperColor;InstantPaperFrame=film.PaperFrame;InstantBorder=film.Border;InstantBottomBorder=film.BottomBorder;InstantAmount=film.Amount;
+        InstantImageEffectsDisabled=film.ImageEffectsDisabled;InstantLayout=film.PaperGeometry is null?"LegacyFree":"SquareV1";
+        InstantFit=film.PaperGeometry?.Fit??"CropFill";InstantCropX=film.PaperGeometry?.CropX??.5;InstantCropY=film.PaperGeometry?.CropY??.5;
+        if(film.PaperGeometry is {} paper){InstantBorder=paper.Side;InstantBottomBorder=paper.Bottom;}
+        foreach(var name in new[]{nameof(InstantImageEffectsDisabled),nameof(InstantLayout),nameof(InstantFit),nameof(InstantCropX),nameof(InstantCropY)})OnPropertyChanged(name);
         foreach(var name in new[]{nameof(SelectedInstantProfile),nameof(InstantTier),nameof(InstantDiceEnabled),nameof(InstantUneven),nameof(InstantUnspread),nameof(InstantRoller),nameof(InstantArtLeak),nameof(InstantEnvironmentCelsius),nameof(InstantPaperColor),nameof(InstantPaperFrame),nameof(InstantBorder),nameof(InstantBottomBorder),nameof(InstantAmount)})OnPropertyChanged(name);
     }
     public System.Windows.Rect InstantImageRegion {get;private set;}=new(0,0,1,1);
@@ -88,7 +102,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         try
         {
             var profile=SelectedInstantProfile;
-            var film=new InstantFilmDefinition(true,profile.Id,profile.ChemicalGeneration,Amount:InstantAmount,PaperFrame:InstantPaperFrame,Border:InstantBorder,BottomBorder:InstantBottomBorder,Uneven:InstantUneven,Unspread:InstantUnspread,Roller:InstantRoller,ArtLightLeak:InstantArtLeak,EnvironmentCelsius:InstantEnvironmentCelsius,Tier:InstantTier){PaperColor=InstantPaperColor};
+            var film=new InstantFilmDefinition(true,profile.Id,profile.ChemicalGeneration,AlgorithmVersion:2,Amount:InstantAmount,PaperFrame:InstantPaperFrame,Border:InstantBorder,BottomBorder:InstantBottomBorder,Uneven:InstantUneven,Unspread:InstantUnspread,Roller:InstantRoller,ArtLightLeak:InstantArtLeak,EnvironmentCelsius:InstantEnvironmentCelsius,Tier:InstantTier){PaperColor=InstantPaperColor,ImageEffectsDisabled=InstantImageEffectsDisabled,PaperGeometry=InstantLayout=="LegacyFree"?null:new InstantPaperGeometry(Fit:InstantFit,CropX:InstantCropX,CropY:InstantCropY,Side:InstantBorder,Top:InstantBorder,Bottom:InstantBottomBorder)};
             if(InstantDiceEnabled)
             {
                 var snapshot=previous?.InstantFilm?.Snapshot;
@@ -97,15 +111,23 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 film=film with{DiceEnabled=true,Snapshot=snapshot};
             }
             film=InstantFilmPipeline.Freeze(film);
-            var definition=(previous??(RawMatchTiff16ProductPipeline.IsRaw(target.Path)?new ProfessionalRawDefinition():InstantFilmJpegInput.Definition)) with{InstantFilm=film};definition.Validate();
+            Editor.CopyCurrentLookTo([target]);
+            if(previous is null&&RawMatchTiff16ProductPipeline.IsRaw(target.Path)&&InstantInputMode=="CurrentEdits")
+                throw new NotSupportedException("旧RAW编辑叠加尚未适配：保留当前版本；可明确选择Original生成基础RAW胶片。");
+            if(InstantInputMode is not("Original" or "CurrentEdits"))throw new InvalidDataException("请选择明确的输入来源。");
+            var basis=InstantInputMode=="Original"?(RawMatchTiff16ProductPipeline.IsRaw(target.Path)?new ProfessionalRawDefinition():InstantFilmJpegInput.Definition):previous??InstantFilmJpegInput.Definition;
+            if(basis.InputConfiguration=="RenderedSrgbFloatV1"&&(previous is null||InstantInputMode=="Original"))
+                basis=basis with{InstantInput=new(1,InstantInputMode,version,InstantInputMode=="CurrentEdits"?target.AppliedLookSnapshot:null,InstantInputMode=="CurrentEdits"?target.ColorAdjustmentStackSnapshot?.DeepClone():null,InstantInputMode=="CurrentEdits"?target.FilmSettingsSnapshot:null)};
+            var definition=basis with{InstantFilm=film};definition.Validate();
             var camera=InstantCameraAnimation;InstantDirection=profile.Direction;
             if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
             var master=target.LinearRawMaster is {} current&&current.Contract.DecodeKey==definition.DecodeKey?current:await DecodeProfessionalInputAsync(target.Path,definition,token);
             if(!string.Equals(master.Contract.SourceSha256,target.SourceHash??target.ObservedSourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("生成期间源文件身份改变。");
             var preview=await RenderProfessionalPreviewAsync(master,definition,1600,token);
             InstantFinalPreview=RawDisplayBitmapAdapter.ToBitmap(preview.ToVisualRgb24());
-            var original=ProfessionalRawPipeline.OrientedSize(master);var layout=InstantFilmPipeline.Layout(original.Width,original.Height,film);
-            InstantImageRegion=new(layout.Margin/(double)layout.Width,layout.Margin/(double)layout.Height,original.Width/(double)layout.Width,original.Height/(double)layout.Height);
+            var original=ProfessionalRawPipeline.OrientedSize(master);var layout=InstantPaperLayout.Create(original.Width,original.Height,film);
+            InstantDimensions=$"原尺寸 {original.Width} × {original.Height} · 相纸 {layout.Width} × {layout.Height}";OnPropertyChanged(nameof(InstantDimensions));
+            InstantImageRegion=new(layout.Left/(double)layout.Width,layout.Top/(double)layout.Height,layout.WindowWidth/(double)layout.Width,layout.WindowHeight/(double)layout.Height);
             var watch=Stopwatch.StartNew();
             do
             {
@@ -121,7 +143,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);target.ActiveEditVersionId=Guid.NewGuid();committedId=target.ActiveEditVersionId;
             target.RawDefinition=definition;target.RawInput=master.Contract;target.LinearRawMaster=master;target.RawMaster=null;
             target.AppliedLookSnapshot=null;target.ColorAdjustmentStackSnapshot=null;target.FilmSettingsSnapshot=null;
-            CaptureEditVersion(target);target.EditVersions[^1]=target.EditVersions[^1] with{Name=profile.Name+" · 创作 v1",OriginVersionId=version};
+            CaptureEditVersion(target);target.EditVersions[^1]=target.EditVersions[^1] with{Name=profile.Name+" · 创作 v2",OriginVersionId=version};
             IsInstantGenerating=false;await ActivateTargetAsync(target);if(target.Status==ReferenceTargetStatus.Failed)throw new IOException(target.Error);StatusText="即时胶片显影完成 · 创作近似，非实测相纸标定";
         }
         catch(OperationCanceledException){Rollback();StatusText="本次显影已退出，保留上一有效结果";InstantDiceEnabled=previousDice;}

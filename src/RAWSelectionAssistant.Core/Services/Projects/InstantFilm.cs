@@ -12,10 +12,16 @@ public sealed record InstantRandomSnapshot(ulong RootSeed,string PrngVersion,str
 public sealed record InstantFilmDefinition(bool Enabled=false,string FilmId="itype-color",string ChemicalGeneration="ModernIntegralCreative",int ProfileVersion=1,int AlgorithmVersion=1,double Amount=1,bool PaperFrame=true,double Border=.04,double BottomBorder=.16,double Uneven=.15,double Unspread=.12,double Roller=.10,double ArtLightLeak=0,double EnvironmentCelsius=21,bool DiceEnabled=false,string Tier="稳定出片",InstantRandomSnapshot? Snapshot=null)
 {
     public string PaperColor {get;init;}="Warm";
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
+    public bool ImageEffectsDisabled {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public InstantPaperGeometry? PaperGeometry {get;init;}
     public InstantFilmDefinition Validate()
     {
         if(PaperColor is not("Warm" or "Neutral" or "Cool"))throw new InvalidDataException("未知纸框色彩。");
-        if(AlgorithmVersion!=1||ProfileVersion!=1||InstantFilmProfiles.Available.FirstOrDefault(x=>x.Id==FilmId) is not {} profile||profile.ChemicalGeneration!=ChemicalGeneration)throw new InvalidDataException("未知即时胶片定义/世代；研究中相纸不可作为可用预设。");
+        if(AlgorithmVersion is not (1 or 2)||ProfileVersion!=1||InstantFilmProfiles.Available.FirstOrDefault(x=>x.Id==FilmId) is not {} profile||profile.ChemicalGeneration!=ChemicalGeneration)throw new InvalidDataException("未知即时胶片定义/世代；研究中相纸不可作为可用预设。");
+        if(AlgorithmVersion==1&&(ImageEffectsDisabled||PaperGeometry is not null))throw new InvalidDataException("V2 controls require explicit migration.");
+        PaperGeometry?.Validate();
         foreach(var value in new[]{Amount,Uneven,Unspread,Roller,ArtLightLeak})if(!double.IsFinite(value)||value is <0 or >1)throw new InvalidDataException("即时胶片参数越界。");
         if(!double.IsFinite(Border)||Border is <0 or >.2||!double.IsFinite(BottomBorder)||BottomBorder is <0 or >.4||!double.IsFinite(EnvironmentCelsius)||EnvironmentCelsius is <0 or >40||Tier is not("稳定出片" or "轻微偶然" or "实验胶片"))throw new InvalidDataException("相纸/温度/骰子参数无效。");
         if(DiceEnabled&&(Snapshot is null||Snapshot.PrngVersion!="SplitMix64SubstreamsV1"||Snapshot.ProfileId!=FilmId||Snapshot.ProfileVersion!=ProfileVersion||Snapshot.Tier!=Tier))throw new InvalidDataException("骰子必须有与相纸版本一致的冻结快照。");
@@ -47,7 +53,7 @@ public static class InstantFilmPipeline
     }
     public static ColorVector3 Apply(ColorVector3 srgb,double x,double y,InstantFilmDefinition definition)
     {
-        if(!definition.Enabled)return srgb;
+        if(!definition.Enabled||definition.AlgorithmVersion==2&&definition.ImageEffectsDisabled)return srgb;
         var direction=definition.FilmId switch{"itype-bw" or "600-bw" or "sx70-bw"=>"BW","reclaimed-blue600"=>"WhiteBlue","blue-duochrome600"=>"BlackBlue",_=>"Color"};var l=.2126*srgb.X+.7152*srgb.Y+.0722*srgb.Z;
         var tone=Math.Clamp(.035+.93*(l*l*(3-2*l)),0,1);ColorVector3 value;
         if(direction=="BW")value=new(tone*.99,tone,tone*.98);
@@ -62,6 +68,6 @@ public static class InstantFilmPipeline
         return new(Channel(srgb.X,value.X,shift-cold+leak),Channel(srgb.Y,value.Y,0),Channel(srgb.Z,value.Z,-shift+cold));
     }
     public static (int Width,int Height,int Margin,int Bottom) Layout(int width,int height,InstantFilmDefinition? definition)
-    {if(definition?.Enabled!=true||!definition.PaperFrame)return(width,height,0,0);var edge=Math.Min(width,height);var m=Math.Max(0,(int)Math.Round(edge*definition.Border));var b=Math.Max(m,(int)Math.Round(edge*definition.BottomBorder));return(width+2*m,height+m+b,m,b);}
+    {var layout=InstantPaperLayout.Create(width,height,definition);return(layout.Width,layout.Height,layout.Left,layout.Bottom);}
     public static ColorVector3 Paper(double x,double y,InstantFilmDefinition? definition=null)=>definition?.PaperColor switch{"Neutral"=>new(.94-.008*y,.94-.008*y,.94-.008*y),"Cool"=>new(.89-.008*y,.93-.008*x,.96),_=>new(.94-.015*y,.925-.008*x,.875+.01*y)};
 }

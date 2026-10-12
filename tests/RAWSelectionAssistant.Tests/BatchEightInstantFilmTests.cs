@@ -54,7 +54,7 @@ public sealed class BatchEightInstantFilmTests
     [TestMethod]
     public void InvalidVersionsMalformedGeometryAndDuplicateWhiteBalanceAreRejected()
     {
-        Assert.Throws<InvalidDataException>(()=>new InstantFilmDefinition(true,AlgorithmVersion:2).Validate());
+        Assert.Throws<InvalidDataException>(()=>new InstantFilmDefinition(true,AlgorithmVersion:3).Validate());
         Assert.Throws<InvalidDataException>(()=>new InstantFilmDefinition(true,FilmId:"go").Validate());
         var d=new InstantFilmDefinition(true);var s=InstantFilmRandom.Roll(d,1) with{Geometry=[new("Roller",.5,.5,.1,.2,0)]};
         Assert.Throws<InvalidDataException>(()=>(d with{DiceEnabled=true,Snapshot=s}).Validate());

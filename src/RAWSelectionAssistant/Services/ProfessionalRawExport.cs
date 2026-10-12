@@ -23,7 +23,7 @@ public static class ProfessionalRawExport
         await ProfessionalRawResourcePolicy.HeavyWork.WaitAsync(token);
         try
         {
-            using var reservation=StudioGlobalResources.ReserveWork(checked((long)size.Item1*size.Item2*(format is StudioExportFormat.Source or StudioExportFormat.Tiff?12:28)+16*1024*1024));
+            using var reservation=StudioGlobalResources.ReserveWork(checked((long)master.Image.Rgb32.Length*4+(long)size.Item1*size.Item2*(format is StudioExportFormat.Source or StudioExportFormat.Tiff?12:28)+16*1024*1024));
             if(!Enum.IsDefined(format))throw new NotSupportedException("Unknown RAW output format.");
             if(format is StudioExportFormat.Source or StudioExportFormat.Tiff)
             {

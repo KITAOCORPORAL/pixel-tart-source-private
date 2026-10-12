@@ -85,15 +85,25 @@
       <TextBlock Text="{views:StudioText InstantBatch08_1}" TextWrapping="Wrap"/>
       <ComboBox ItemsSource="{Binding InstantProfiles}" SelectedItem="{Binding SelectedInstantProfile}" DisplayMemberPath="Name"/>
       <WrapPanel>
-       <Button Command="{Binding SelectInstantCameraCommand}" CommandParameter="SX-70/680" ToolTip="{views:StudioText InstantBatch08_2}"><StackPanel><Viewbox Width="64" Height="38"><Canvas Width="90" Height="54"><Path Fill="#79503A" Stroke="#CEC7B9" StrokeThickness="2" Data="M 5,20 L 22,4 68,4 84,20 84,48 5,48 Z"/><Ellipse Canvas.Left="33" Canvas.Top="17" Width="27" Height="27" Fill="#18242D" Stroke="#C9C4BD" StrokeThickness="3"/><Rectangle Canvas.Left="10" Canvas.Top="42" Width="66" Height="4" Fill="#17191B"/></Canvas></Viewbox><TextBlock Text="{views:StudioText InstantBatch08_2}"/></StackPanel></Button>
-       <Button Command="{Binding SelectInstantCameraCommand}" CommandParameter="i-2" ToolTip="{views:StudioText InstantBatch08_3}"><StackPanel><Viewbox Width="64" Height="38"><Canvas Width="90" Height="54"><Rectangle Canvas.Left="4" Canvas.Top="4" Width="80" Height="46" RadiusX="12" RadiusY="12" Fill="#404447" Stroke="#D3D2CA" StrokeThickness="2"/><Ellipse Canvas.Left="34" Canvas.Top="13" Width="32" Height="32" Fill="#162733" Stroke="#838A8B" StrokeThickness="4"/><Rectangle Canvas.Left="13" Canvas.Top="13" Width="14" Height="8" Fill="#D7D7D4"/></Canvas></Viewbox><TextBlock Text="{views:StudioText InstantBatch08_3}"/></StackPanel></Button>
+       <Button Command="{Binding SelectInstantCameraCommand}" CommandParameter="SX-70" ToolTip="SX-70"><StackPanel><views:InstantCameraArtwork Width="92" Height="64" Model="SX-70"/><TextBlock Text="SX-70"/></StackPanel></Button>
+       <Button Command="{Binding SelectInstantCameraCommand}" CommandParameter="i-2" ToolTip="i-2"><StackPanel><views:InstantCameraArtwork Width="92" Height="64" Model="i-2"/><TextBlock Text="i-2"/></StackPanel></Button>
       </WrapPanel>
       <TextBlock Text="{Binding InstantCamera}"/>
       <CheckBox Content="{views:StudioText InstantBatch08_4}" IsChecked="{Binding InstantCameraAnimation}"/>
       <TextBlock Text="{views:StudioText InstantBatch08_5}"/><ComboBox ItemsSource="{Binding InstantPaperColors}" SelectedItem="{Binding InstantPaperColor}"/>
       <CheckBox Content="{views:StudioText InstantBatch08_6}" IsChecked="{Binding InstantPaperFrame}"/>
       <TextBlock Text="{views:StudioText InstantBatch08_7}"/><Slider Minimum="0" Maximum="0.2" Value="{Binding InstantBorder}"/><Slider Minimum="0" Maximum="0.4" Value="{Binding InstantBottomBorder}"/>
-      <TextBlock Text="{views:StudioText InstantBatch08_8}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantAmount}"/>
+      <TextBlock Text="{views:StudioText InstantBatch09Amount}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantAmount}"/>
+      <CheckBox Content="{views:StudioText InstantBatch09Disable}" IsChecked="{Binding InstantImageEffectsDisabled}"/>
+      <TextBlock Text="{views:StudioText InstantBatch09Input}" TextWrapping="Wrap"/>
+      <ComboBox ItemsSource="{Binding InstantInputModes}" SelectedItem="{Binding InstantInputMode}"/>
+      <TextBlock Text="{views:StudioText InstantBatch09Layout}" TextWrapping="Wrap"/>
+      <ComboBox ItemsSource="{Binding InstantLayouts}" SelectedItem="{Binding InstantLayout}"/>
+      <TextBlock Text="{views:StudioText InstantBatch09Fit}" TextWrapping="Wrap"/>
+      <ComboBox ItemsSource="{Binding InstantFitModes}" SelectedItem="{Binding InstantFit}"/>
+      <TextBlock Text="{views:StudioText InstantBatch09Crop}"/>
+      <Slider Minimum="0" Maximum="1" Value="{Binding InstantCropX}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantCropY}"/>
+      <TextBlock Text="{Binding InstantDimensions}" TextWrapping="Wrap"/>
       <TextBlock Text="{views:StudioText InstantBatch08_9}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantUneven}"/>
       <TextBlock Text="{views:StudioText InstantBatch08_10}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantUnspread}"/>
       <TextBlock Text="{views:StudioText InstantBatch08_11}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantRoller}"/>

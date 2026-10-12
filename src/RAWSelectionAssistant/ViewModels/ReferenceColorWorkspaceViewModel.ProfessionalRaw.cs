@@ -19,7 +19,17 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public double RawBlueGain {get;set;}=1;
     public bool RawUseCameraWhiteBalance {get;set;}=true;
     public string RawPipelineStatus {get;private set;}="PV4 · 线性 ProPhoto / LibRaw，相机白平衡只在解码应用一次";
-    private Task<ProfessionalRawMaster> DecodeProfessionalInputAsync(string path,ProfessionalRawDefinition definition,CancellationToken token=default)=>definition.InputConfiguration=="RenderedSrgbFloatV1"?InstantFilmJpegInput.ReadAsync(path,definition,token):_professionalDecoder.DecodeAsync(path,definition,token);
+    private async Task<ProfessionalRawMaster> DecodeProfessionalInputAsync(string path,ProfessionalRawDefinition definition,CancellationToken token=default)
+    {
+        if(definition.InputConfiguration!="RenderedSrgbFloatV1")return await _professionalDecoder.DecodeAsync(path,definition,token);
+        if(definition.InstantInput is not {Mode:"CurrentEdits"} recipe)return await InstantFilmJpegInput.ReadAsync(path,definition,token);
+        using var source=System.IO.File.OpenRead(path);
+        var sourceHash=Convert.ToHexString(await System.Security.Cryptography.SHA256.HashDataAsync(source,token));
+        using var reservation=StudioGlobalResources.ReserveWork(StudioGlobalResources.MasterLimit);
+        var rendered=await Editor.ProcessForExportAsync(path,recipe.Look,recipe.Film,token,recipe.Stack);
+        token.ThrowIfCancellationRequested();
+        return InstantFilmJpegInput.FromRendered(rendered,sourceHash,definition);
+    }
     private void InitializeProfessionalRawCommands()
     {
         InitializeInstantFilmCommands();
@@ -83,6 +93,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)return;
         var image=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(rendered.ToVisualRgb24()),rendered.Orientation);var before=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(original.ToVisualRgb24()),original.Orientation);
         target.RawInput=master.Contract;target.PixelWidth=master.Image.Width;target.PixelHeight=master.Image.Height;target.SourceHash=master.Contract.SourceSha256.ToLowerInvariant();
+        var sourceDimensions=ProfessionalRawPipeline.OrientedSize(master);var paperDimensions=ProfessionalRawPipeline.OutputSize(master,definition);
+        InstantDimensions=$"原尺寸 {sourceDimensions.Width} × {sourceDimensions.Height} · 相纸 {paperDimensions.Width} × {paperDimensions.Height}";OnPropertyChanged(nameof(InstantDimensions));
         QueueMetadata(()=>HydrateAssetMetadataAsync(target));await FlushMetadataAsync();
         if(revision!=Volatile.Read(ref _activationRevision))return;
         TrimProfessionalMasters(target);
