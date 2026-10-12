@@ -1,0 +1,105 @@
+{
+  "sourceCommit": "83996c56a18d802ea7c3feeee89759bb8d65f367",
+  "files": [
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantFilm.cs",
+      "type": "C#",
+      "sha256": "078d882e6acf0822650bb58b404fd4c65efb24609438a8635db9d837a3f93613"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantInputRecipe.cs",
+      "type": "C#",
+      "sha256": "cd07d069e5b03b110ee8e64f5595f4fa3eeb05f59c9be1650776a694b111355b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantPaperLayout.cs",
+      "type": "C#",
+      "sha256": "686ed46f3c64abe5cd6016ee0bf1e72bd07f02a0cc06eea6f01465c7d41e1f1d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawPipeline.cs",
+      "type": "C#",
+      "sha256": "08d51901ac5ac8c0026331111e985d82ad22e61864cd77b95b04e28ca72fd4b7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/Studio/en-US.json",
+      "type": "localization",
+      "sha256": "42d6db24a16eb0b51776014dd1e1773296e1861a62d466efa78c79e6e102707d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/Studio/zh-CN.json",
+      "type": "localization",
+      "sha256": "b99637c54592c2fd597b291f3878eea60f16775ce1ed2038975b3d746eca49fd"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/Studio/zh-TW.json",
+      "type": "localization",
+      "sha256": "93d8ea640f1a6e6228084da5948e0f380c9dfa6aa3eabc46653fcfadd95bb49a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/InstantFilmJpegInput.cs",
+      "type": "C#",
+      "sha256": "ba1ce05cf709c60b4201bbaad36050b7d7ca5cbd7e8551e0fd1d7b97e71cecf9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ProfessionalRawExport.cs",
+      "type": "C#",
+      "sha256": "3974e1d3e1997f8e78e8f40cfc86bcfe172e3aebc4d9d45a3c7f89500288b2ef"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs",
+      "type": "C#",
+      "sha256": "2088cb2406f9b0a41b966d4418d096e4c4cfa600d054bb537efa14bdaa362c18"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.InstantFilm.cs",
+      "type": "C#",
+      "sha256": "6ae51ccd038da6760a8c4095ce61a5cc51221f58ba68669ed7b7dc882d52fd04"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
+      "type": "C#",
+      "sha256": "84b48065b5efc58acdab807c224229c2ba2cda5b4518be35b55405fff2224964"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "type": "C#",
+      "sha256": "f310e6c5466eb319b7a6bbebc8cd0fff7b13af213e56f4642f5c7968d3005847"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/InstantCameraArtwork.cs",
+      "type": "C#",
+      "sha256": "d5fd1bb7b76e05a3ec87bbb72db839427670aef33f497a5708b374f53a33db56"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/InstantDevelopmentView.cs",
+      "type": "C#",
+      "sha256": "dc83a8fe2b1dccb352a1a99f613fda27503ee505381f9dae323f5d522f26c5be"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml",
+      "type": "WPF-XAML",
+      "sha256": "bca9ca4d72b584e66925cf9463c2387b3c4d522d961aefb2766cb04c1875251f"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/BatchEightInstantFilmTests.cs",
+      "type": "test",
+      "sha256": "0cad4558d72de78506a5b0801ab80586b4247edcebb5709c25fcc115ec15a173"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/BatchNineInstantFilmTests.cs",
+      "type": "test",
+      "sha256": "a35956ec21043c89bd5d2d457ef23600c0faa6e7c3ec487ec2224740cb7af8b4"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/BatchEightInstantFilmProductTests.cs",
+      "type": "test",
+      "sha256": "43e3b0dfbeb3995b5bca751d66167c9f2e7e0da31cdbf54a80977b5116822e94"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/BatchNinePublishingTests.cs",
+      "type": "test",
+      "sha256": "362f5a626c4cec682e56f3960a29ee6d52197bad15f103e929f5fbf5064cd918"
+    }
+  ]
+}

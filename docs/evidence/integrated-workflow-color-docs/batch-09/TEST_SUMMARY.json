@@ -1,0 +1,291 @@
+{
+  "sourceCommit": "83996c56a18d802ea7c3feeee89759bb8d65f367",
+  "runs": [
+    {
+      "path": "core/core.trx",
+      "sha256": "e9588deab2fe7273c1d2779be3066b9a9f9195ecbac010582438e63c9a25878d",
+      "counts": {
+        "total": 1653,
+        "executed": 1647,
+        "passed": 1647,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "skippedCount": 6,
+      "failed": [],
+      "skipped": [
+        "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+        "CpuGpuParityOnSyntheticScene",
+        "CpuGpuParityAcrossEightSceneClasses",
+        "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+        "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+        "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled"
+      ]
+    },
+    {
+      "path": "focused/focused.trx",
+      "sha256": "0be1b7ba3e92cef839fa2f26f628c14e991085d7e7d7560c297a1399e6de46b3",
+      "counts": {
+        "total": 9,
+        "executed": 8,
+        "passed": 7,
+        "failed": 1,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "skippedCount": 1,
+      "failed": [
+        "EncodedTextWatermarkMatchesIndependentFixedFontRasterAndRejectsTampering"
+      ],
+      "skipped": [
+        "AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition"
+      ]
+    },
+    {
+      "path": "focused2/focused2.trx",
+      "sha256": "e66746edabf37a5d131140674359f75f8bb333a08d2f6f1ef3545c5379a07832",
+      "counts": {
+        "total": 11,
+        "executed": 10,
+        "passed": 10,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "skippedCount": 1,
+      "failed": [],
+      "skipped": [
+        "AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition"
+      ]
+    },
+    {
+      "path": "wpf/wpf.trx",
+      "sha256": "fa085a24178eb4e3ec6a4da48e4ea5a39e3f73ebd379a4076af3911a4db67edb",
+      "counts": {
+        "total": 1553,
+        "executed": 1537,
+        "passed": 1536,
+        "failed": 1,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "skippedCount": 16,
+      "failed": [
+        "ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage"
+      ],
+      "skipped": [
+        "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+        "RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+        "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+        "ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+        "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+        "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+        "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+        "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+        "BaselineGuard_RequiresExplicitApproval",
+        "ProductionApp_AllRoutes_RenderReviewInventory",
+        "CompanyRealRawProductAcceptanceGate",
+        "AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+        "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+        "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+        "AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+        "PremiumPrototype_ThreeRealPages_RenderReviewSet"
+      ]
+    },
+    {
+      "path": "focused3/focused3.trx",
+      "sha256": "49484278227bbd2de5094f6011f9d3a631bf705c0b78a91ffd014b2767a8fcb7",
+      "counts": {
+        "total": 18,
+        "executed": 17,
+        "passed": 17,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "skippedCount": 1,
+      "failed": [],
+      "skipped": [
+        "AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition"
+      ]
+    },
+    {
+      "path": "core-final/core-final.trx",
+      "sha256": "36fbbcb3464ce69c14af838453c9f518473cf721a0fb06bcb3b3f3098a50ef04",
+      "counts": {
+        "total": 1653,
+        "executed": 1647,
+        "passed": 1647,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "skippedCount": 6,
+      "failed": [],
+      "skipped": [
+        "CpuGpuParityOnSyntheticScene",
+        "CpuGpuParityAcrossEightSceneClasses",
+        "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+        "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+        "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+        "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16"
+      ]
+    },
+    {
+      "path": "wpf-final/wpf-final.trx",
+      "sha256": "b394667c0753b3c50ea5b7759c63a9f4f094029ac85cd6d57177098a051511db",
+      "counts": {
+        "total": 1555,
+        "executed": 1539,
+        "passed": 1539,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "skippedCount": 16,
+      "failed": [],
+      "skipped": [
+        "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+        "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+        "CompanyRealRawProductAcceptanceGate",
+        "ProductionApp_AllRoutes_RenderReviewInventory",
+        "RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+        "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+        "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+        "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+        "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+        "ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+        "AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+        "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+        "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+        "AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+        "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+        "BaselineGuard_RequiresExplicitApproval"
+      ]
+    },
+    {
+      "path": "packaged/packaged.trx",
+      "sha256": "ebfcbb5a84a00c70c7ee25a610a98b699a42a41f670680b14ab1dd44d08aa957",
+      "counts": {
+        "total": 0,
+        "executed": 0,
+        "passed": 0,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "skippedCount": 0,
+      "failed": [],
+      "skipped": []
+    },
+    {
+      "path": "packaged2/packaged2.trx",
+      "sha256": "5f841bcc232000899dab1c80edca90e1865ef85f16971dc969062d14b071028b",
+      "counts": {
+        "total": 16,
+        "executed": 14,
+        "passed": 14,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "skippedCount": 2,
+      "failed": [],
+      "skipped": [
+        "AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+        "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport"
+      ]
+    }
+  ]
+}

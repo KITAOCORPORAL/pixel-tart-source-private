@@ -1,0 +1,66 @@
+{
+  "sourceCommit": "83996c56a18d802ea7c3feeee89759bb8d65f367",
+  "build": "Release win-x64 self-contained, non-single-file",
+  "exePath": "D:/AI AGENT/pixel-tart-batch09-20261012/artifacts/batch09/release/win-x64/KitaoPhotoSelector.exe",
+  "productVersion": "2.3.0-batch09+83996c56a18d802ea7c3feeee89759bb8d65f367",
+  "coreInformationalVersionNote": "MSBuild also appends source revision to Core/module informational versions; both revisions equal sourceCommit.",
+  "components": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "bytes": 179200,
+      "sha256": "6bebb50b52687b1819324b44f26d66d54a5c3132e958e174cfb48fa6589aaa91",
+      "packagedTestSha256": "bb1162b354d7bdbb609042f38ca787879dbf79586f0a15957e50436adefc7bc5"
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "bytes": 2978816,
+      "sha256": "0430e835ea6c330d96d2bdce2ced158957ab9b6a2a9eb7ee18e9603890259a79",
+      "packagedTestSha256": "0430e835ea6c330d96d2bdce2ced158957ab9b6a2a9eb7ee18e9603890259a79"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "bytes": 4251136,
+      "sha256": "63bdfd0de07c7a59d67264e4d0028b3aa0565de7c7e80de7b790e2d43543341f",
+      "packagedTestSha256": "63bdfd0de07c7a59d67264e4d0028b3aa0565de7c7e80de7b790e2d43543341f"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "bytes": 38400,
+      "sha256": "74b9b3230bbf0e577d14a4f24241eebd113b7b82e0c9007bf68d3a0c29a20655",
+      "packagedTestSha256": "74b9b3230bbf0e577d14a4f24241eebd113b7b82e0c9007bf68d3a0c29a20655"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "bytes": 1161728,
+      "sha256": "63120e46e695df355eafa311514917bf0d67c2113ba0054b763f388d43482fc7",
+      "packagedTestSha256": "63120e46e695df355eafa311514917bf0d67c2113ba0054b763f388d43482fc7"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "bytes": 11264,
+      "sha256": "e668b60d43c83d5044448bc89dcbba317ada56bc1e4e4ab016aad6966d3ceca7",
+      "packagedTestSha256": "e668b60d43c83d5044448bc89dcbba317ada56bc1e4e4ab016aad6966d3ceca7"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "bytes": 11776,
+      "sha256": "919663c5db12df912957fbd72029417d0fa76be6b2dce52097fd1d26ff987cf6",
+      "packagedTestSha256": "919663c5db12df912957fbd72029417d0fa76be6b2dce52097fd1d26ff987cf6"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "bytes": 66560,
+      "sha256": "fccda72bea3a3361afa75f16fc7aa60bb2a69b6502087fcd09964a36a914cbac",
+      "packagedTestSha256": "fccda72bea3a3361afa75f16fc7aa60bb2a69b6502087fcd09964a36a914cbac"
+    }
+  ],
+  "releaseStartup": "NOT_RUN",
+  "desktopDpi": "NOT_RUN",
+  "visualApproval": "NOT_APPROVED",
+  "firstPackagedTestAttempt": "Aborted: copying full self-contained runtime beside framework-dependent testhost changes host resolution. Retained artifacts/batch09/tests/packaged/packaged.trx. Corrected isolated directory copies only application components.",
+  "packagedTest": {
+    "passed": 14,
+    "failed": 0,
+    "skipped": 2
+  }
+}

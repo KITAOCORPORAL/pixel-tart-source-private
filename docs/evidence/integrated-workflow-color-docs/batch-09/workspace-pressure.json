@@ -1,0 +1,76 @@
+{
+  "scope": "Three actual workspace viewmodels, synthetic 1800x1000 decoder; no desktop UI",
+  "peakAccounted": 2137792000,
+  "records": [
+    {
+      "stage": "master-hq-0",
+      "accounted": 38668800,
+      "workingSet": 324308992,
+      "peakWorkingSet": 324313088,
+      "privateBytes": 267259904
+    },
+    {
+      "stage": "master-hq-1",
+      "accounted": 77337600,
+      "workingSet": 405315584,
+      "peakWorkingSet": 405319680,
+      "privateBytes": 349507584
+    },
+    {
+      "stage": "master-hq-2",
+      "accounted": 116006400,
+      "workingSet": 395489280,
+      "peakWorkingSet": 450691072,
+      "privateBytes": 339304448
+    },
+    {
+      "stage": "tiles",
+      "accounted": 145497600,
+      "workingSet": 419008512,
+      "peakWorkingSet": 450691072,
+      "privateBytes": 347185152
+    },
+    {
+      "stage": "eviction-active-reference",
+      "accounted": 2137792000,
+      "workingSet": 419008512,
+      "peakWorkingSet": 450691072,
+      "privateBytes": 347185152
+    },
+    {
+      "stage": "export",
+      "accounted": 0,
+      "workingSet": 412528640,
+      "peakWorkingSet": 450691072,
+      "privateBytes": 339734528
+    },
+    {
+      "stage": "close-active-export",
+      "accounted": 0,
+      "workingSet": 412528640,
+      "peakWorkingSet": 450691072,
+      "privateBytes": 339734528
+    },
+    {
+      "stage": "cancel-close",
+      "accounted": 0,
+      "workingSet": 412528640,
+      "peakWorkingSet": 450691072,
+      "privateBytes": 339734528
+    },
+    {
+      "stage": "switch-photo",
+      "accounted": 0,
+      "workingSet": 412524544,
+      "peakWorkingSet": 450691072,
+      "privateBytes": 339734528
+    },
+    {
+      "stage": "disposed",
+      "accounted": 0,
+      "workingSet": 412524544,
+      "peakWorkingSet": 450691072,
+      "privateBytes": 339734528
+    }
+  ]
+}
