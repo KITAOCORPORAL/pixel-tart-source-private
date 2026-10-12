@@ -1,0 +1,173 @@
+{
+  "date": "2026-10-12",
+  "timezone": "Europe/Helsinki",
+  "status": "PARTIAL_SOURCE_AUDITED_DESIGN_BASELINE",
+  "docBranch": "docs/kitao-studio-product-master-spec-20261012",
+  "parentSHA": "6a27e166af5c77f8455f44089aa9de5d38e86495",
+  "productionSHA": "061c4cf57a72e59f676142ae629ff7b11cd5fb99",
+  "latestFeatureBranchSHA": "7184966a4921215a1a306019578f23646bcf872a",
+  "stats": {
+    "features": 255,
+    "pages": 82,
+    "actions": 2288,
+    "sourceProbes": 2184,
+    "uniqueActionIds": 2288,
+    "unknownPageRefs": [],
+    "unknownFeatureRefs": [],
+    "featuresWithoutActions": [],
+    "status": {
+      "仅规划": 43,
+      "占位": 1,
+      "实现但尚未接入": 5,
+      "已实现且已接入": 121,
+      "已弃用": 4,
+      "跨分支未集成": 2,
+      "部分实现": 79
+    },
+    "actionStatus": {
+      "仅规划": 44,
+      "占位": 11,
+      "实现但尚未接入": 145,
+      "已实现且已接入": 715,
+      "已弃用": 4,
+      "跨分支未集成": 59,
+      "部分实现": 1310
+    },
+    "entryKinds": {
+      "BRANCH_ENTRY": 59,
+      "CODE_EVENT": 106,
+      "CODE_UI": 156,
+      "CONTROL_VALUE": 416,
+      "DATA_DRIVEN_PARAMETER": 75,
+      "DYNAMIC_MENU": 18,
+      "DYNAMIC_OPTION": 68,
+      "KEYBOARD": 178,
+      "SETTING_WITHOUT_UI": 63,
+      "TEMPLATE_COMMAND": 1,
+      "UNBOUND_COMMAND": 77,
+      "UNRESOLVED_CONTROL": 57,
+      "XAML_COMMAND": 694,
+      "XAML_EVENT": 216
+    },
+    "coverageClaim": "没有百分比。语法候选映射完成不等于所有动态入口已语义验证。",
+    "desktopAcceptance": "NOT_RUN",
+    "productTests": "NOT_RUN_THIS_TASK"
+  },
+  "selfHashPolicy": "Manifest excludes itself; final commit SHA recorded by git, not self-referential",
+  "files": [
+    {
+      "path": "docs/design/product-master/.gitattributes",
+      "type": "git-attributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "docs/design/product-master/ACTION_INVENTORY.csv",
+      "type": "csv",
+      "bytes": 3902720,
+      "sha256": "869bb1797eb6ac0cd6e061be311274750da28aad2a275b4c695d9fe4ef60b855"
+    },
+    {
+      "path": "docs/design/product-master/BATCH_SOURCE_DIFFERENCES.json",
+      "type": "json",
+      "bytes": 905660,
+      "sha256": "d927cae000dc45cceb7e4cdcfca624faab01c762c970436a519f8f88ea3408de"
+    },
+    {
+      "path": "docs/design/product-master/BRANCH_DIFFERENCES.json",
+      "type": "json",
+      "bytes": 1358047,
+      "sha256": "c36800d08dc615fc942f2f4b47fe64b79a285e6e42dbaaffef446f1fb3ff8fef"
+    },
+    {
+      "path": "docs/design/product-master/CORE_USER_FLOWS.md",
+      "type": "md",
+      "bytes": 8567,
+      "sha256": "9454734ee64984bfad842736ad1b1ee48b9d3ba2876e6dbcee61f4e759f74236"
+    },
+    {
+      "path": "docs/design/product-master/CROSS_BRANCH_SOURCE_INDEX.json",
+      "type": "json",
+      "bytes": 14953,
+      "sha256": "f585679bb92f3513da1ff570f506c2b8d2c9be32266d98aa060c47368461fb0c"
+    },
+    {
+      "path": "docs/design/product-master/CROSS_PLATFORM_AND_SYNC.md",
+      "type": "md",
+      "bytes": 7458,
+      "sha256": "f0476349ef17fa95132213067a40ea10035d62e190d48d67fd7d552a6620d96d"
+    },
+    {
+      "path": "docs/design/product-master/DESIGN_HANDOFF.md",
+      "type": "md",
+      "bytes": 5256,
+      "sha256": "7d3df6cf6de829b1474330f6376ca81972d57f985909ac01a7a67f8bec0a0c4e"
+    },
+    {
+      "path": "docs/design/product-master/DESIGN_SYSTEM_REQUIREMENTS.md",
+      "type": "md",
+      "bytes": 7084,
+      "sha256": "1f02fcfdad7ffd13d26758898dfff329a7083ee66895d98c0e3f00e55819e8dc"
+    },
+    {
+      "path": "docs/design/product-master/DIRTY_SOURCE_EVIDENCE.json",
+      "type": "json",
+      "bytes": 123834,
+      "sha256": "549290c62eee51343c3ffa706326fc56fd524f3d076d6fabbd91b2658cfaf70e"
+    },
+    {
+      "path": "docs/design/product-master/ENTRY_COVERAGE.json",
+      "type": "json",
+      "bytes": 580344,
+      "sha256": "44502ea99c2a1633523b8f247e2e6143b28f591a535aff4f36b9e24f317c2cb4"
+    },
+    {
+      "path": "docs/design/product-master/FEATURE_INVENTORY.csv",
+      "type": "csv",
+      "bytes": 307657,
+      "sha256": "1d6dd25712e8e7de71ec083572fcb9177899f7a40cf9e20f0fef420932a35622"
+    },
+    {
+      "path": "docs/design/product-master/GROK_FULL_PRODUCT_MASTER.md",
+      "type": "md",
+      "bytes": 10436898,
+      "sha256": "94e9e45ce5b324f98d40f2b9a1ab5ffb9010c0ee81a3139dae4af6ab2d32e5b5"
+    },
+    {
+      "path": "docs/design/product-master/IMPLEMENTATION_STATUS_AND_GAPS.md",
+      "type": "md",
+      "bytes": 21189,
+      "sha256": "d2dbbd928067db6d1b1677e02f4bf384b7341c1de38aa3ec2cd1d1e3ea91c13b"
+    },
+    {
+      "path": "docs/design/product-master/INFORMATION_ARCHITECTURE.md",
+      "type": "md",
+      "bytes": 7114,
+      "sha256": "cb1f965adac63f65df6c70f554dd4ee7b96d335fa96896030793f7e1e437790c"
+    },
+    {
+      "path": "docs/design/product-master/PAGE_AND_STATE_MATRIX.csv",
+      "type": "csv",
+      "bytes": 163837,
+      "sha256": "cec0894a7f8fe35b9b2bd9ebccc29f4806d100d06cd362ec527660ccded14817"
+    },
+    {
+      "path": "docs/design/product-master/PRODUCT_MASTER_SPEC.md",
+      "type": "md",
+      "bytes": 45116,
+      "sha256": "470f02ed511959f12eee42ac42fb2143cca5975f165878157d668aad0332a0a6"
+    },
+    {
+      "path": "docs/design/product-master/SOURCE_AUDIT.json",
+      "type": "json",
+      "bytes": 2972125,
+      "sha256": "4454d168d9628913dc67e29fe7a898256b9fc86c6201d326d86ad79eb1594b47"
+    },
+    {
+      "path": "docs/design/product-master/VALIDATION_REPORT.json",
+      "type": "json",
+      "bytes": 3028,
+      "sha256": "b3da4e7dfdb05d1e66e66cdb6da40d76f2bd155190ca6311440a78265c028545"
+    }
+  ]
+}

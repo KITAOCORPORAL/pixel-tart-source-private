@@ -1,0 +1,78 @@
+{
+  "status": "PASS_STRUCTURE_ONLY",
+  "productReadiness": "PARTIAL",
+  "checks": {
+    "FEATURE_INVENTORY.csv": {
+      "rows": 255,
+      "columns": 18,
+      "ragged": 0
+    },
+    "ACTION_INVENTORY.csv": {
+      "rows": 2288,
+      "columns": 32,
+      "ragged": 0
+    },
+    "PAGE_AND_STATE_MATRIX.csv": {
+      "rows": 82,
+      "columns": 26,
+      "ragged": 0
+    },
+    "featureUnique": true,
+    "actionUnique": true,
+    "pageUnique": true,
+    "jsonParsed": [
+      "BATCH_SOURCE_DIFFERENCES.json",
+      "BRANCH_DIFFERENCES.json",
+      "CROSS_BRANCH_SOURCE_INDEX.json",
+      "DIRTY_SOURCE_EVIDENCE.json",
+      "ENTRY_COVERAGE.json",
+      "SOURCE_AUDIT.json"
+    ],
+    "featureStatuses": {
+      "部分实现": 79,
+      "已实现且已接入": 121,
+      "仅规划": 43,
+      "跨分支未集成": 2,
+      "实现但尚未接入": 5,
+      "已弃用": 4,
+      "占位": 1
+    },
+    "unresolvedSemanticBucket": 993,
+    "stateDraftsCreated": 0,
+    "desktopAcceptance": "NOT_RUN",
+    "productTests": "NOT_RUN_THIS_TASK",
+    "sourcePaths": "Verified separately against source snapshot manifests; branch and plan records distinguished",
+    "sourcePathErrors": [],
+    "concurrentChanges": {
+      "detected": true,
+      "files": 4,
+      "scope": "batch10 evidence; external task committed/pushed, no production delta",
+      "finalSHA": "7184966a4921215a1a306019578f23646bcf872a"
+    },
+    "preservesOriginalWorktrees": "This task wrote only its independent documentation worktree and temporary authoring files; user changes not reset/merged",
+    "scopeFiles": [
+      "?? docs/design/product-master/ACTION_INVENTORY.csv",
+      "?? docs/design/product-master/BATCH_SOURCE_DIFFERENCES.json",
+      "?? docs/design/product-master/BRANCH_DIFFERENCES.json",
+      "?? docs/design/product-master/CORE_USER_FLOWS.md",
+      "?? docs/design/product-master/CROSS_BRANCH_SOURCE_INDEX.json",
+      "?? docs/design/product-master/CROSS_PLATFORM_AND_SYNC.md",
+      "?? docs/design/product-master/DESIGN_HANDOFF.md",
+      "?? docs/design/product-master/DESIGN_SYSTEM_REQUIREMENTS.md",
+      "?? docs/design/product-master/DIRTY_SOURCE_EVIDENCE.json",
+      "?? docs/design/product-master/ENTRY_COVERAGE.json",
+      "?? docs/design/product-master/FEATURE_INVENTORY.csv",
+      "?? docs/design/product-master/IMPLEMENTATION_STATUS_AND_GAPS.md",
+      "?? docs/design/product-master/INFORMATION_ARCHITECTURE.md",
+      "?? docs/design/product-master/PAGE_AND_STATE_MATRIX.csv",
+      "?? docs/design/product-master/PRODUCT_MASTER_SPEC.md",
+      "?? docs/design/product-master/SOURCE_AUDIT.json",
+      "?? docs/design/product-master/VALIDATION_REPORT.json"
+    ],
+    "bundleFullSources": 17,
+    "requiredOutputsPresent": true,
+    "lineEndingPolicy": "UTF-8; LF; directory .gitattributes -text preserves exact hashes across checkouts",
+    "semanticCompleteness": "PARTIAL; lexical scanner event allowlist is not all WPF routed events; dynamic parameter/callback resolution still open"
+  },
+  "errors": []
+}

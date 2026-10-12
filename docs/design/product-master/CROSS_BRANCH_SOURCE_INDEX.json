@@ -1,0 +1,345 @@
+[
+  {
+    "ref": "refs/remotes/source-private/feature/asset-library-import-foundation-hardening",
+    "sha": "225c589495c3f73d706752aaf31e92c0cd5ef3c1",
+    "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetFormatCapabilityRegistry.cs",
+    "sha256": "194ec59b62500206b4cf3a7d2deac1b82d4919e32cd4553cce1f9d0240d6510d",
+    "lines": 268
+  },
+  {
+    "ref": "refs/remotes/source-private/feature/asset-library-import-foundation-hardening",
+    "sha": "225c589495c3f73d706752aaf31e92c0cd5ef3c1",
+    "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetTechnicalMetadata.cs",
+    "sha256": "d2c4800f30a8c67be4b4d08dca28df01a11be724c8d1405bb286710e73018877",
+    "lines": 405
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/App.xaml",
+    "sha256": "b16cd547535fc9a634dd2a9634d3dc5cf270bac20eba09d874b46afb10e77ecd",
+    "lines": 26
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/App.xaml.cs",
+    "sha256": "68ce3708fceaefff7e96c095b06a6f2e5e70d9d3755649171b28fefddfff54e8",
+    "lines": 6
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/AssetLibraryPreviewViewModel.cs",
+    "sha256": "2ef337ad58749b4f13ae3fdcde903698885fcf67881f7562f857e5a8bc5781ec",
+    "lines": 705
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/AssetThumbnailConverter.cs",
+    "sha256": "f6090f78b6419a8f2e550e577322577a1d726d36fbb9e01a9c310425a140a949",
+    "lines": 39
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/AsyncCommand.cs",
+    "sha256": "3fbcd2d09a86c1deb62711534e3212a1af53fb3c94781f51bffedb8ab2da4759",
+    "lines": 40
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/AsyncThumbnail.cs",
+    "sha256": "9fafd7fee46d316e0d885094e526f362b7b946fb10bd7952592fee9c5048f4af",
+    "lines": 76
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/ClassifierWindow.cs",
+    "sha256": "7275f58a1d151303375759d0aae0f58457dfe01be2cb9583e4411300f9c56516",
+    "lines": 25
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/HistogramDrawing.cs",
+    "sha256": "a5cb7cd4990ed68372cf1f0846cc0e9a0e9cf87ca6be6f5ce08225907e98cdaa",
+    "lines": 34
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/MainWindow.xaml",
+    "sha256": "bd530ffcbee9f6eb0b3af087f7115bdc92517a7a9955012bb18c9acb1a063f97",
+    "lines": 69
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/MainWindow.xaml.cs",
+    "sha256": "71d9f393b04718fccd877bd6423dd21d3dca0dd951a004af0cc00fb7fecb2d6b",
+    "lines": 98
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/PixelTart.AssetLibrary.Preview.csproj",
+    "sha256": "a83c19fb7fa6114e68815cc8090c5f165985e623a51e32e1a786f075d766c3af",
+    "lines": 16
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/PreviewImportDiagnostics.cs",
+    "sha256": "a5b9cc66160094723eeef016edee5a4705756a8bb29a609d6010509501685116",
+    "lines": 97
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/TagManagerWindow.cs",
+    "sha256": "6b118612205205316d5020b2f028383aca3a6762fc1a155739c9fe74d527f96d",
+    "lines": 17
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/ThumbnailSize.cs",
+    "sha256": "79f9b46cbd5fddf8fc49c976befc938f6df342596a88be53d9ab41619fe0ba63",
+    "lines": 4
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/VirtualizingWrapPanel.cs",
+    "sha256": "e86d5ee5ca92250689455aacfed85dcadbe149ef2f98f7ac98c7f489909a563a",
+    "lines": 75
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/PixelTart.AssetLibrary.Preview/WpfVisualAnalysisDecoder.cs",
+    "sha256": "8f8c24c1fcc3798c58b092654fda406a26c3740838a3e39bfab52026ed509cdc",
+    "lines": 62
+  },
+  {
+    "ref": "refs/heads/feature/asset-library-v1",
+    "sha": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "src/RAWSelectionAssistant.Core/Services/AssetSelection/AssetLibrarySelectionSource.cs",
+    "sha256": "6c922f6b4753ce988ec986284afbd636689d6979a614f0b3d68630febf19d47a",
+    "lines": 67
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/App.xaml",
+    "sha256": "9a771b709d83d17f8f9128b1692acf8432f6d7e4e08ffef92fa97767dc97cd54",
+    "lines": 29
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/App.xaml.cs",
+    "sha256": "0cf4fc181976816c79cc03c71a11b7906278c7ceea9f36ced81372fd2c813270",
+    "lines": 44
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/LocalDevOnlineSelectionProvider.cs",
+    "sha256": "e99689c2207563ec9aee23f2ade3d4ee4509296e702809824d8b5daeba21aa4d",
+    "lines": 257
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/LocalDevPreviewDialogService.cs",
+    "sha256": "72ef10e2439bd9c6e323a31f88c96c1e4e164f0c840847c0ec61b9d32f9d0c7c",
+    "lines": 78
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/PixelTart.OnlineSelection.LocalDevPreview.csproj",
+    "sha256": "d362a144c3ccd52d96c509548c1d4493e237469a20753cbc5c4918c7f488ac47",
+    "lines": 18
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/PreviewWindow.xaml",
+    "sha256": "f05e01bfabc57705c9abc66edd6ee18d8ccd8a0f90240e16244a5113b7f0ab37",
+    "lines": 15
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/PreviewWindow.xaml.cs",
+    "sha256": "29cf796663266241309be75cf96477a7c998d662db98a77c6ef21184366b6b03",
+    "lines": 9
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.SelectionApi.Server/LocalDevJpegVariantService.cs",
+    "sha256": "fa9b29d2be7b35e9ae197748a609a4ee2b1411e142ffb81eac5f9356523494d3",
+    "lines": 90
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.SelectionApi.Server/LocalDevSelectionRepository.cs",
+    "sha256": "2b1558e348b5324f8b05ff858ea8e769f12ea8908f4434e41980bb14facd072d",
+    "lines": 845
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.SelectionApi.Server/PixelTart.SelectionApi.Server.csproj",
+    "sha256": "65a2ae19c699c91b717943532b4c01056cb40dfc2d132af574532e94a7acfba5",
+    "lines": 17
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.SelectionApi.Server/Program.cs",
+    "sha256": "7f74b45121be1d811854d81217c5007ce5bd7b371cf6dd9402e7b6eef6153558",
+    "lines": 308
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.SelectionApi.Server/SelectionApiServerContract.cs",
+    "sha256": "8ea7068dd660a44d7e739e7d9bc433fcd52de11cd6136e4f4105f4fbb6db7452",
+    "lines": 44
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/PixelTart.SelectionApi.Server/SelectionObjectStorage.cs",
+    "sha256": "e71344005d8a81a79c4d902c2ad60edeaaf669f44285654da65e19f34485e78c",
+    "lines": 139
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionClientChoiceMock.cs",
+    "sha256": "4b1330a5f3930ee72983212522837266c650cc4d37f5a7914f46cc059e16defe",
+    "lines": 152
+  },
+  {
+    "ref": "refs/heads/feature/online-selection-v1",
+    "sha": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionResultExportService.cs",
+    "sha256": "7fc6732814668359a494024a7f6a005fe6ed8a08a05c8d24d7599b831fe0ef3e",
+    "lines": 76
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/App.xaml",
+    "sha256": "9a771b709d83d17f8f9128b1692acf8432f6d7e4e08ffef92fa97767dc97cd54",
+    "lines": 29
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/App.xaml.cs",
+    "sha256": "0cf4fc181976816c79cc03c71a11b7906278c7ceea9f36ced81372fd2c813270",
+    "lines": 44
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/LocalDevOnlineSelectionProvider.cs",
+    "sha256": "e99689c2207563ec9aee23f2ade3d4ee4509296e702809824d8b5daeba21aa4d",
+    "lines": 257
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/LocalDevPreviewDialogService.cs",
+    "sha256": "72ef10e2439bd9c6e323a31f88c96c1e4e164f0c840847c0ec61b9d32f9d0c7c",
+    "lines": 78
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/PixelTart.OnlineSelection.LocalDevPreview.csproj",
+    "sha256": "d362a144c3ccd52d96c509548c1d4493e237469a20753cbc5c4918c7f488ac47",
+    "lines": 18
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/PreviewWindow.xaml",
+    "sha256": "f05e01bfabc57705c9abc66edd6ee18d8ccd8a0f90240e16244a5113b7f0ab37",
+    "lines": 15
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.OnlineSelection.LocalDevPreview/PreviewWindow.xaml.cs",
+    "sha256": "29cf796663266241309be75cf96477a7c998d662db98a77c6ef21184366b6b03",
+    "lines": 9
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.SelectionApi.Server/LocalDevJpegVariantService.cs",
+    "sha256": "fa9b29d2be7b35e9ae197748a609a4ee2b1411e142ffb81eac5f9356523494d3",
+    "lines": 90
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.SelectionApi.Server/LocalDevSelectionRepository.cs",
+    "sha256": "2b1558e348b5324f8b05ff858ea8e769f12ea8908f4434e41980bb14facd072d",
+    "lines": 845
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.SelectionApi.Server/PixelTart.SelectionApi.Server.csproj",
+    "sha256": "65a2ae19c699c91b717943532b4c01056cb40dfc2d132af574532e94a7acfba5",
+    "lines": 17
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.SelectionApi.Server/Program.cs",
+    "sha256": "7f74b45121be1d811854d81217c5007ce5bd7b371cf6dd9402e7b6eef6153558",
+    "lines": 308
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.SelectionApi.Server/SelectionApiServerContract.cs",
+    "sha256": "8ea7068dd660a44d7e739e7d9bc433fcd52de11cd6136e4f4105f4fbb6db7452",
+    "lines": 44
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/PixelTart.SelectionApi.Server/SelectionObjectStorage.cs",
+    "sha256": "e71344005d8a81a79c4d902c2ad60edeaaf669f44285654da65e19f34485e78c",
+    "lines": 139
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionClientChoiceMock.cs",
+    "sha256": "4b1330a5f3930ee72983212522837266c650cc4d37f5a7914f46cc059e16defe",
+    "lines": 152
+  },
+  {
+    "ref": "refs/remotes/source-private/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionResultExportService.cs",
+    "sha256": "7fc6732814668359a494024a7f6a005fe6ed8a08a05c8d24d7599b831fe0ef3e",
+    "lines": 76
+  }
+]
