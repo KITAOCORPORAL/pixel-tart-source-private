@@ -65,7 +65,7 @@
    <RowDefinition Height="*" />
    <RowDefinition Height="Auto" />
   </Grid.RowDefinitions>
-  <Grid x:Name="SourceHeader" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,6">
+  <Grid IsEnabled="{Binding InstantEditingAllowed}" x:Name="SourceHeader" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,6">
    <Grid.RowDefinitions>
     <RowDefinition Height="Auto" />
     <RowDefinition Height="Auto" />
@@ -79,6 +79,37 @@
     <TextBlock Text="{Binding TargetName}" Style="{StaticResource CaptionText}" TextTrimming="CharacterEllipsis" MaxWidth="310" HorizontalAlignment="Left" ToolTip="{Binding TargetName}" Visibility="Collapsed" />
    </StackPanel>
    <WrapPanel x:Name="HeaderActions" Grid.Column="1">
+    <Grid><ToggleButton x:Name="InstantFilmToggle" Content="{views:StudioText InstantBatch08_0}"/>
+    <Popup IsOpen="{Binding IsChecked,ElementName=InstantFilmToggle}" PlacementTarget="{Binding ElementName=InstantFilmToggle}" Placement="Bottom" StaysOpen="False" AllowsTransparency="True"><Border Style="{StaticResource PixelTart.Popup.V2}" Width="280" Padding="12" Background="{DynamicResource SurfaceSecondaryBrush}"><ScrollViewer MaxHeight="620" VerticalScrollBarVisibility="Auto">
+     <StackPanel IsEnabled="{Binding InstantEditingAllowed}" Background="{DynamicResource SurfaceSecondaryBrush}">
+      <TextBlock Text="{views:StudioText InstantBatch08_1}" TextWrapping="Wrap"/>
+      <ComboBox ItemsSource="{Binding InstantProfiles}" SelectedItem="{Binding SelectedInstantProfile}" DisplayMemberPath="Name"/>
+      <WrapPanel>
+       <Button Command="{Binding SelectInstantCameraCommand}" CommandParameter="SX-70/680" ToolTip="{views:StudioText InstantBatch08_2}"><StackPanel><Viewbox Width="64" Height="38"><Canvas Width="90" Height="54"><Path Fill="#79503A" Stroke="#CEC7B9" StrokeThickness="2" Data="M 5,20 L 22,4 68,4 84,20 84,48 5,48 Z"/><Ellipse Canvas.Left="33" Canvas.Top="17" Width="27" Height="27" Fill="#18242D" Stroke="#C9C4BD" StrokeThickness="3"/><Rectangle Canvas.Left="10" Canvas.Top="42" Width="66" Height="4" Fill="#17191B"/></Canvas></Viewbox><TextBlock Text="{views:StudioText InstantBatch08_2}"/></StackPanel></Button>
+       <Button Command="{Binding SelectInstantCameraCommand}" CommandParameter="i-2" ToolTip="{views:StudioText InstantBatch08_3}"><StackPanel><Viewbox Width="64" Height="38"><Canvas Width="90" Height="54"><Rectangle Canvas.Left="4" Canvas.Top="4" Width="80" Height="46" RadiusX="12" RadiusY="12" Fill="#404447" Stroke="#D3D2CA" StrokeThickness="2"/><Ellipse Canvas.Left="34" Canvas.Top="13" Width="32" Height="32" Fill="#162733" Stroke="#838A8B" StrokeThickness="4"/><Rectangle Canvas.Left="13" Canvas.Top="13" Width="14" Height="8" Fill="#D7D7D4"/></Canvas></Viewbox><TextBlock Text="{views:StudioText InstantBatch08_3}"/></StackPanel></Button>
+      </WrapPanel>
+      <TextBlock Text="{Binding InstantCamera}"/>
+      <CheckBox Content="{views:StudioText InstantBatch08_4}" IsChecked="{Binding InstantCameraAnimation}"/>
+      <TextBlock Text="{views:StudioText InstantBatch08_5}"/><ComboBox ItemsSource="{Binding InstantPaperColors}" SelectedItem="{Binding InstantPaperColor}"/>
+      <CheckBox Content="{views:StudioText InstantBatch08_6}" IsChecked="{Binding InstantPaperFrame}"/>
+      <TextBlock Text="{views:StudioText InstantBatch08_7}"/><Slider Minimum="0" Maximum="0.2" Value="{Binding InstantBorder}"/><Slider Minimum="0" Maximum="0.4" Value="{Binding InstantBottomBorder}"/>
+      <TextBlock Text="{views:StudioText InstantBatch08_8}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantAmount}"/>
+      <TextBlock Text="{views:StudioText InstantBatch08_9}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantUneven}"/>
+      <TextBlock Text="{views:StudioText InstantBatch08_10}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantUnspread}"/>
+      <TextBlock Text="{views:StudioText InstantBatch08_11}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantRoller}"/>
+      <TextBlock Text="{views:StudioText InstantBatch08_12}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantArtLeak}"/>
+      <TextBlock Text="{views:StudioText InstantBatch08_13}" TextWrapping="Wrap"/><Slider Minimum="0" Maximum="40" Value="{Binding InstantEnvironmentCelsius}"/>
+      <WrapPanel>
+       <Button Content="⚄" Command="{Binding ToggleInstantDiceCommand}" ToolTip="{views:StudioText InstantBatch08_14}">
+        <Button.Style><Style TargetType="Button"><Setter Property="Foreground" Value="Gray"/><Style.Triggers><DataTrigger Binding="{Binding InstantDiceEnabled}" Value="True"><Setter Property="Foreground" Value="OrangeRed"/></DataTrigger></Style.Triggers></Style></Button.Style>
+       </Button>
+       <ComboBox Width="120" ItemsSource="{Binding InstantTiers}" SelectedItem="{Binding InstantTier}"/>
+       <Button Content="{views:StudioText InstantBatch08_15}" Command="{Binding RollInstantFilmCommand}"/>
+      </WrapPanel>
+      <Button Content="{views:StudioText InstantBatch08_16}" Command="{Binding GenerateInstantFilmCommand}"/>
+      <Button Content="{views:StudioText InstantBatch08_17}" Command="{Binding DisableInstantFilmCommand}"/>
+     </StackPanel>
+    </ScrollViewer></Border></Popup></Grid>
     <Button Content="{views:StudioText NewRawVersion}" Command="{Binding CreateProfessionalRawCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
     <Button Content="{views:StudioText OpenBatch}" Command="{Binding OpenSessionCommand}" Style="{StaticResource PixelTart.Button.Ghost}" />
     <Button Content="{views:StudioText RelocateAsset}" Command="{Binding RelocateTargetCommand}" Style="{StaticResource PixelTart.Button.Ghost}" AutomationProperties.Name="{views:StudioText RelocateAssetHelp}" />
@@ -101,7 +132,7 @@
     <Button Content="{views:StudioText Import}" Command="{Binding ChooseTargetCommand}" Style="{StaticResource PrimaryButton}" Margin="8,0,0,0" />
    </WrapPanel>
   </Grid>
-  <Grid x:Name="WorkspaceGrid" Grid.Row="1">
+  <Grid IsEnabled="{Binding InstantEditingAllowed}" x:Name="WorkspaceGrid" Grid.Row="1">
    <Grid.RowDefinitions><RowDefinition /><RowDefinition x:Name="AuxDockRow" Height="0" /></Grid.RowDefinitions>
    <Grid.ColumnDefinitions>
     <ColumnDefinition x:Name="LeftColumn" Width="0.19*" MinWidth="206" />
@@ -145,7 +176,7 @@
       </StackPanel>
      </Expander>
      </StackPanel>
-     <StackPanel Grid.Row="2" Visibility="{Binding IsProfessionalRaw,Converter={StaticResource BoolVisibility}}">
+     <StackPanel Grid.Row="2" Visibility="{Binding IsLinearProfessionalRaw,Converter={StaticResource BoolVisibility}}">
       <TextBlock Text="{Binding RawPipelineStatus}" TextWrapping="Wrap" Margin="4" />
       <TextBlock Text="{views:StudioText RawExposure}"/><TextBox Text="{Binding RawExposureEv,UpdateSourceTrigger=PropertyChanged}" />
       <CheckBox Content="{views:StudioText RawCameraWb}" IsChecked="{Binding RawUseCameraWhiteBalance}" />
@@ -463,7 +494,8 @@
        <Border x:Name="ColorInspectionHint" Visibility="Collapsed" Panel.ZIndex="2" Background="{DynamicResource SurfaceElevatedBrush}" Padding="10,5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10" IsHitTestVisible="False">
         <TextBlock Text="{views:StudioText Key='点选当前显示图像 → 点云高亮 · Esc 退出'}" />
        </Border>
-       <views:ColorStudioImageViewport x:Name="ImageViewport" DetailOriginal="{Binding Editor.IndependentDetailOriginal}" DetailMatched="{Binding Editor.IndependentDetailMatched}" DetailRegion="{Binding Editor.IndependentDetailRegion}" SourcePixelSize="{Binding Editor.SourcePixelSize}" Original="{Binding Editor.SourceImage}" Matched="{Binding Editor.MatchedImage}" Mode="{Binding Editor.EffectiveViewMode}" Split="{Binding Editor.SplitPosition}" />
+       <views:ColorStudioImageViewport x:Name="ImageViewport" Tiles="{Binding Editor.IndependentDetailTiles}" DetailOriginal="{Binding Editor.IndependentDetailOriginal}" DetailMatched="{Binding Editor.IndependentDetailMatched}" DetailRegion="{Binding Editor.IndependentDetailRegion}" SourcePixelSize="{Binding Editor.SourcePixelSize}" Original="{Binding Editor.SourceImage}" Matched="{Binding Editor.MatchedImage}" Mode="{Binding Editor.EffectiveViewMode}" Split="{Binding Editor.SplitPosition}" />
+       <views:InstantDevelopmentView Panel.ZIndex="12" IsHitTestVisible="False" ImageRegion="{Binding InstantImageRegion}" Frame="{Binding InstantDevelopment}" Image="{Binding InstantFinalPreview}" Camera="{Binding InstantCamera}" Direction="{Binding InstantDirection}"/>
        <views:ImageHighlightOverlay x:Name="HighlightOverlay" PixelIndices="{Binding HighlightedPixels}" ImageWidth="{Binding HighlightImageWidth}" ImageHeight="{Binding HighlightImageHeight}" IsHitTestVisible="False" PixelWeights="{Binding HighlightWeights}" />
        <Border Background="{DynamicResource SurfaceElevatedBrush}" CornerRadius="6" Padding="10,5" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,18" Visibility="{Binding Editor.IsSampling, Converter={StaticResource BoolVisibility}}" IsHitTestVisible="False">
         <TextBlock Text="{views:StudioText Key='正在取样 · Esc 退出'}" Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="SemiBold" />

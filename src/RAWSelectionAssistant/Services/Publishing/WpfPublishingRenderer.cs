@@ -39,7 +39,13 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer, IPublishingOutp
     {
         cancellationToken.ThrowIfCancellationRequested(); options.Validate();
         await ProfessionalRawResourcePolicy.HeavyWork.WaitAsync(cancellationToken);
-        try{await Task.Run(() => Render(sourcePath, destinationPath, options, cancellationToken), cancellationToken);}
+        try{
+            using var input=File.OpenRead(sourcePath);
+            var header=BitmapDecoder.Create(input,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnDemand).Frames[0];
+            var size=OutputSize(header.PixelWidth,header.PixelHeight,options.EffectiveDimensions);
+            using var reservation=StudioGlobalResources.ReserveWork(checked((long)header.PixelWidth*header.PixelHeight*24+(long)size.Width*size.Height*16+32L*1024*1024));
+            await Task.Run(() => Render(sourcePath, destinationPath, options, cancellationToken), cancellationToken);
+        }
         finally{ProfessionalRawResourcePolicy.HeavyWork.Release();}
     }
 

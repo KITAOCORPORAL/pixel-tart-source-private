@@ -103,7 +103,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public async Task RemoveSelectedFromBatchAsync()
     {
         var selected = SelectedTargets.ToArray();
-        if (selected.Length == 0 || IsExporting) return;
+        if (selected.Length == 0 || IsExporting || IsInstantGenerating) return;
         if (!_dialogs.Confirm(StudioLocalizationService.Current.Format("RemoveBatchConfirm", selected.Length), StudioLocalizationService.Current["移除批次照片"])) return;
         var activeRemoved = ActiveTarget is not null && selected.Contains(ActiveTarget);
         foreach (var item in selected) Targets.Remove(item);
@@ -117,7 +117,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private async Task PreparePublishingAsync()
     {
-        if (OpenPublishing is null || IsExporting) return;
+        if (OpenPublishing is null || IsExporting || IsInstantGenerating) return;
         var items = SelectedTargets.ToArray(); if (items.Length == 0) return;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
         foreach(var target in items) CaptureEditVersion(target);
@@ -137,7 +137,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                     var raw = RawMatchTiff16ProductPipeline.IsRaw(item.Item.Path);
                     var itemDirectory = Path.Combine(directory, item.Item.Id.ToString());
                     Directory.CreateDirectory(itemDirectory);
-                    var path = Path.Combine(itemDirectory, Path.GetFileNameWithoutExtension(item.Item.Path) + (raw ? ".tif" : ".png"));
+                    var path = Path.Combine(itemDirectory, Path.GetFileNameWithoutExtension(item.Item.Path) + (raw || item.RawDefinition is not null ? ".tif" : ".png"));
                     if(item.RawDefinition is {} professional)await ExportProfessionalRawAsync(item.Item,professional,path,StudioExportFormat.Tiff,_exportCancellation.Token);
                     else if (raw)
                     {
@@ -150,10 +150,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                         var bitmap = await Editor.ProcessForExportAsync(item.Item.Path, item.Look, item.Film, _exportCancellation.Token, item.Stack);
                         await Task.Run(() => { var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap)); using var file = File.Create(path); encoder.Save(file); }, _exportCancellation.Token);
                     }
-                    await StudioExportReceiptStore.WriteAsync(path,new(Guid.NewGuid(),item.Item.LibraryId,item.Item.AssetId,item.Item.SourceHash,item.VersionId,item.RawDefinition?.ProcessingVersion ?? item.Stack?.ProcessingVersion??1,"Publishing intermediate",path,"",DateTimeOffset.UtcNow,item.RawDefinition is null ? null : new ExportRecipeSnapshot(1,".tif",16,"Original",item.Item.PixelWidth,item.Item.PixelHeight,null,null,"None","sRGB","TIFF orientation preserved","Not applied",RawDefinition:item.RawDefinition,RawInput:item.RawInput,OutputValidation:System.Text.Json.JsonSerializer.Serialize(item.Item.LastProfessionalOutput))),_exportCancellation.Token);
+                    await StudioExportReceiptStore.WriteAsync(path,new(Guid.NewGuid(),item.Item.LibraryId,item.Item.AssetId,item.Item.SourceHash,item.VersionId,item.RawDefinition?.ProcessingVersion ?? item.Stack?.ProcessingVersion??1,"Publishing intermediate",path,"",DateTimeOffset.UtcNow,item.RawDefinition is null ? null : new ExportRecipeSnapshot(1,".tif",16,"Original",item.Item.LastProfessionalOutput?.Width??item.Item.PixelWidth,item.Item.LastProfessionalOutput?.Height??item.Item.PixelHeight,null,null,"None","sRGB","TIFF orientation preserved","Not applied",RawDefinition:item.RawDefinition,RawInput:item.RawInput,OutputValidation:System.Text.Json.JsonSerializer.Serialize(item.Item.LastProfessionalOutput))),_exportCancellation.Token);
                     paths.Add(path); SetExportStatus("PrepareProgress", paths.Count + failures.Count, items.Length);
                 }
-                catch (Exception error) when (error is InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
+                catch (Exception error) when (error is InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException or InvalidOperationException)
                 { failures.Add(item.Item.FileName); }
             }
             ExportFailureSummary = failures.Count == 0 ? "" : StudioLocalizationService.Current.Format("PrepareFailures", string.Join(", ", failures));
@@ -188,7 +188,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         StopProcessingCommand = new RelayCommand(_ => {Editor.StopProcessing();_activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);InvalidateProfessionalPreview();}, _ => Editor.IsBusy || IsLoading || !ProfessionalDetailWork.IsCompleted);
         CopyAdjustmentsCommand = new RelayCommand(_ => CopyCurrentAdjustments(), _ => ActiveTarget is not null && !IsLoading && !IsProfessionalRaw);
         ApplyAdjustmentsCommand = new RelayCommand(_ => ApplyCopiedAdjustments(), _ => HasCopiedAdjustments && SelectedTargets.Any() && !IsLoading);
-        PreparePublishingCommand = new AsyncRelayCommand(_ => PreparePublishingAsync(), _ => OpenPublishing is not null && SelectedTargets.Any() && !IsExporting);
+        PreparePublishingCommand = new AsyncRelayCommand(_ => PreparePublishingAsync(), _ => OpenPublishing is not null && SelectedTargets.Any() && !IsExporting && !IsInstantGenerating);
         SyncSelectedCommand = new RelayCommand(_ => SyncCurrentTo(SyncDestinationTargets), _ => !IsProfessionalRaw && ActiveTarget is not null && SyncDestinationTargets.Count > 0 && !IsLoading);
         SyncAllCommand = new RelayCommand(_ => SyncCurrentTo(VisibleTargets.Where(x => !ReferenceEquals(x, ActiveTarget)).ToArray()), _ => ActiveTarget is not null && VisibleTargets.Any(x => !ReferenceEquals(x, ActiveTarget)) && !IsLoading);
         OpenNodeSyncCommand = new RelayCommand(_ => { FreezeSync(); _nodeSyncSelection.Clear(); _nodeSyncChoices.Clear(); foreach (var node in _pendingSync?.Adjustment.Stack?.Nodes ?? []) { _nodeSyncSelection.Add(node.Id); _nodeSyncChoices.Add(new NodeSyncChoice(node.Id, node.Name, true)); } NodeSyncOpen = true; }, _ => CanSyncSelectedNodes);
@@ -224,8 +224,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         }, _ => !IsLoading && _pendingSync?.Targets.Length > 0 && _adjustmentSyncChoices.Any(choice => choice.Selected));
         CancelAdjustmentCopyCommand = new RelayCommand(_ => AdjustmentCopyOpen = false);
         ActivateTargetCommand = new AsyncRelayCommand(value => value is ReferenceTargetItem target ? ActivateTargetAsync(target) : Task.CompletedTask, allowConcurrent: true);
-        ExportSelectedCommand = new AsyncRelayCommand(_ => ExportAsync(SelectedTargets.ToArray()), _ => SelectedTargets.Any() && !IsExporting);
-        ExportAllCommand = new AsyncRelayCommand(_ => ExportAsync(VisibleTargets.ToArray()), _ => VisibleTargets.Count > 0 && !IsExporting);
+        ExportSelectedCommand = new AsyncRelayCommand(_ => ExportAsync(SelectedTargets.ToArray()), _ => SelectedTargets.Any() && !IsExporting && !IsInstantGenerating);
+        ExportAllCommand = new AsyncRelayCommand(_ => ExportAsync(VisibleTargets.ToArray()), _ => VisibleTargets.Count > 0 && !IsExporting && !IsInstantGenerating);
         StopExportCommand = new RelayCommand(_ => _exportCancellation?.Cancel(), _ => IsExporting);
         RetryFailedTargetCommand = new AsyncRelayCommand(_ => FailedTarget is null ? Task.CompletedTask : ActivateTargetAsync(FailedTarget), _ => FailedTarget is not null && !IsLoading);
         RetryFailedExportCommand = new AsyncRelayCommand(_ => RetryFailedExportsAsync(), _ => Targets.Any(item => item.ExportStatus is ReferenceExportStatus.Failed or ReferenceExportStatus.Partial) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory));
@@ -601,7 +601,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         {
             if(item.RawDefinition is {} definition)
             {
-                var master=item.LinearRawMaster??await _professionalDecoder.DecodeAsync(item.Path,definition,token);
+                var master=item.LinearRawMaster??await DecodeProfessionalInputAsync(item.Path,definition,token);
                 if(!string.Equals(master.Contract.SourceSha256,item.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("RAW 缩略图源身份改变。");
                 item.LinearRawMaster=master;item.RawInput=master.Contract;
                 var rendered=await Task.Run(()=>ProfessionalRawPipeline.RenderPreview(master,definition,320,token),token);
@@ -627,11 +627,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             ScheduleTargetThumbnail(item);
         }
         catch (OperationCanceledException) { }
-        catch (Exception ex) when (ex is System.Runtime.InteropServices.COMException or InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException) { item.Status = ReferenceTargetStatus.Failed; item.Error = ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "缩略图无法读取"; }
+        catch (Exception ex) when (ex is System.Runtime.InteropServices.COMException or InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException or InvalidOperationException) { item.Status = ReferenceTargetStatus.Failed; item.Error = ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "缩略图无法读取"; }
     }
 
     private async Task ActivateTargetAsync(ReferenceTargetItem target)
     {
+        if(IsInstantGenerating)_instantCancellation?.Cancel();
         InvalidateProfessionalPreview();foreach(var other in Targets.Where(x=>!ReferenceEquals(x,target)))other.LinearRawMaster=null;if(target.RawDefinition is null)target.LinearRawMaster=null;
         var revision = Interlocked.Increment(ref _activationRevision);
         _activationCancellation?.Cancel(); _activationCancellation?.Dispose();
@@ -678,7 +679,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             if (ReferenceEquals(FailedTarget, target)) FailedTarget = null;
         }
         catch (OperationCanceledException) { }
-        catch (Exception ex) when (ex is System.Runtime.InteropServices.COMException or InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
+        catch (Exception ex) when (ex is System.Runtime.InteropServices.COMException or InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException or InvalidOperationException)
         { if(revision!=Volatile.Read(ref _activationRevision))return; target.Status = ReferenceTargetStatus.Failed; target.Error = target.RawDefinition is not null ? "专业 RAW 失败："+ex.Message : ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "照片无法读取"; if (revision == Volatile.Read(ref _activationRevision)) { FailedTarget = target; StatusText = target.Error + "；现有色彩方案保持不变。请重试。"; } }
         finally { IsLoading = Interlocked.Decrement(ref _loadingActivations) > 0; StopProcessingCommand.RaiseCanExecuteChanged(); }
     }
@@ -703,11 +704,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     public void Dispose()
     {
+        if(_disposed)return;
         _disposed = true;
         PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, OnStudioLanguageChanged, nameof(StudioLocalizationService.Language));
         CancelRangeSelection();
         _analysisCancellation?.Cancel(); _analysisCache.Clear();
-        InvalidateProfessionalPreview();_professionalDetailCancellation?.Dispose();foreach(var target in Targets){target.LinearRawMaster=null;target.RawMaster=null;}
+        _instantCancellation?.Cancel();_instantCancellation?.Dispose();
+        ClearHqPreview();InvalidateProfessionalPreview();_professionalDetailCancellation?.Dispose();foreach(var target in Targets){target.LinearRawMaster=null;target.RawMaster=null;}
         _activationCancellation?.Cancel(); _activationCancellation?.Dispose(); _sourceCache.Clear();
         foreach (var target in _observedTargets)
         {
@@ -737,7 +740,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private async Task ExportAsync(IReadOnlyList<ReferenceTargetItem> items, string? retryDirectory = null)
     {
-        if (items.Count == 0 || IsExporting) return;
+        if (items.Count == 0 || IsExporting || IsInstantGenerating) return;
         var format=retryDirectory is null ? QuickExportFormat : _lastExportFormat;
         var acceptanceDirectory = Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_DIRECTORY");
         var directory = retryDirectory ?? (string.IsNullOrWhiteSpace(acceptanceDirectory) ? _dialogs.ChooseFolder(StudioLocalizationService.Current.Format("QuickExportTitle", items.Count, string.Join(" / ", items.Select(x => StudioQuickExport.Extension(x.Path,format).TrimStart('.').ToUpperInvariant()).Distinct())), null) : acceptanceDirectory);
@@ -808,7 +811,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                     item.OutputPath = output; item.ExportStatus = ReferenceExportStatus.Succeeded; item.Status = ReferenceTargetStatus.Exported;
                 }
                 catch (OperationCanceledException) { TryDelete(temp); item.ExportStatus = ReferenceExportStatus.Cancelled; item.Status = ReferenceTargetStatus.Pending; throw; }
-                catch (Exception ex) when (ex is System.Runtime.InteropServices.COMException or InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException)
+                catch (Exception ex) when (ex is System.Runtime.InteropServices.COMException or InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException or InvalidOperationException)
                 { TryDelete(temp); item.Error = frozenItem.RawDefinition is not null ? "PV4 导出失败："+ex.Message : File.Exists(output+".kitao-export.pending.json") ? "成片已完成，清单待恢复；重试只验证并补清单" : ex is NotSupportedException ? "当前图像或调整不支持此导出格式" : ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "导出失败，源文件未修改"; item.ExportStatus = File.Exists(output+".kitao-export.pending.json")?ReferenceExportStatus.Partial:ReferenceExportStatus.Failed; item.Status = ReferenceTargetStatus.Failed; failed.Add(item.FileName); }
                 ExportCompleted++; ExportStatus = $"{ExportCompleted} / {ExportTotal} · {directory} · {Path.GetExtension(output).ToUpperInvariant()}";
             }
@@ -933,7 +936,12 @@ public sealed class ReferenceTargetItem : ObservableObject
     public ProfessionalOutputInspection? LastProfessionalOutput {get;set;}
     public ProfessionalRawDefinition? RawDefinition {get;set;}
     public ProfessionalRawContract? RawInput {get;set;}
-    public ProfessionalRawMaster? LinearRawMaster {get;set;}
+    private ProfessionalRawMaster? _linearRawMaster;
+    public ProfessionalRawMaster? LinearRawMaster
+    {
+        get=>_linearRawMaster;
+        set{_linearRawMaster=value;if(value is null){StudioGlobalResources.Release(Id,"Master");return;}var weak=new WeakReference<ReferenceTargetItem>(this);StudioGlobalResources.Store(Id,"Master",(long)value.Image.Rgb32.Length*sizeof(float),()=>{if(weak.TryGetTarget(out var target))target._linearRawMaster=null;});}
+    }
     public FrozenRawMaster? RawMaster { get; set; }
     public ReferenceExportStatus ExportStatus { get; set; }
 }

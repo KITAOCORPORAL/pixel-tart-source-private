@@ -17,12 +17,12 @@ internal static unsafe class ProfessionalWicRowEncoder
     [StructLayout(LayoutKind.Explicit,Size=24)]private struct Variant{[FieldOffset(0)]public ushort Vt;[FieldOffset(8)]public float Float;[FieldOffset(8)]public byte Byte;}
     public static void Write(string path,ProfessionalRawMaster master,ProfessionalRawDefinition definition,CancellationToken token)
     {
-        var size=ProfessionalRawPipeline.OrientedSize(master);
+        var size=ProfessionalRawPipeline.OutputSize(master,definition);
         WriteRows(path,size.Width,size.Height,95,(y,row)=>{var rgb=ProfessionalRawPipeline.RenderRegion(master,definition,0,y,size.Width,1,token).Rgb32.Span;for(var i=0;i<size.Width;i++){row[i*3]=Q(rgb[i*3+2]);row[i*3+1]=Q(rgb[i*3+1]);row[i*3+2]=Q(rgb[i*3]);}},token);
     }
     public static void WritePng(string path,ProfessionalRawMaster master,ProfessionalRawDefinition definition,CancellationToken token)
     {
-        var size=ProfessionalRawPipeline.OrientedSize(master);
+        var size=ProfessionalRawPipeline.OutputSize(master,definition);
         WriteRows(path,size.Width,size.Height,95,(y,row)=>{var rgb=ProfessionalRawPipeline.RenderRegion(master,definition,0,y,size.Width,1,token).Rgb32.Span;for(var i=0;i<rgb.Length;i++)System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(row.AsSpan(i*2),(ushort)Math.Clamp(Math.Round(rgb[i]*65535),0,65535));},token,png:true);
     }
     public static void WriteBitmap(string path,System.Windows.Media.Imaging.BitmapSource bitmap,int quality,CancellationToken token,int dpi=96,bool png=false)

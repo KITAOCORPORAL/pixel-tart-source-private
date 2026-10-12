@@ -76,7 +76,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     public void CreateEditVersion()
     {
-        if(ActiveTarget is not {} target || IsLoading || IsExporting)return;
+        if(ActiveTarget is not {} target || IsLoading || IsExporting || IsInstantGenerating)return;
         Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);
         target.ActiveEditVersionId=Guid.NewGuid();CaptureEditVersion(target);
         var version=target.EditVersions.Last();target.EditVersions[^1]=version with{Name="版本 "+target.EditVersions.Count};
@@ -84,7 +84,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     public async Task SwitchEditVersionAsync(Guid id)
     {
-        if(ActiveTarget is not {} target || IsLoading || IsExporting)return;
+        if(ActiveTarget is not {} target || IsLoading || IsExporting || IsInstantGenerating)return;
         if(target.ActiveEditVersionId==id)return;
         var version=target.EditVersions.SingleOrDefault(v=>v.Id==id);if(version is null)return;
         Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);

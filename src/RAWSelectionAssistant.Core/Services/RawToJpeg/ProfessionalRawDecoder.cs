@@ -17,7 +17,7 @@ public sealed class ProfessionalRawDecoder(Action<string>? stage = null) : IProf
     public async Task<ProfessionalRawMaster> DecodeAsync(string path, ProfessionalRawDefinition definition, CancellationToken token = default)
     {
         await ProfessionalRawResourcePolicy.HeavyWork.WaitAsync(token);
-        try{return await Task.Run(()=>Decode(path,definition.Validate(),token),token);}
+        try{using var reservation=StudioGlobalResources.ReserveWork(1024L*1024*1024);return await Task.Run(()=>Decode(path,definition.Validate(),token),token);}
         finally{ProfessionalRawResourcePolicy.HeavyWork.Release();}
     }
 
@@ -64,6 +64,7 @@ public sealed class ProfessionalRawDecoder(Action<string>? stage = null) : IProf
         try
         {
             using var context = RawContext.OpenFile(path); var unpackParameters=ProfessionalLibRawAdapter.ConfigureUnpack(context); context.Unpack();stage?.Invoke("Unpacked"); token.ThrowIfCancellationRequested();
+            if(checked((long)context.RawWidth*context.RawHeight*28)>1024L*1024*1024)throw new NotSupportedException("RAW解码工作集估计超过1GiB准入预算，未降低尺寸或位深。");
             var color = ProfessionalLibRawAdapter.ReadColor(context);
             var identity = context.ImageParams;
             // First production contract is three-color Bayer; non-mosaic/sRAW and X-Trans require separate validation.

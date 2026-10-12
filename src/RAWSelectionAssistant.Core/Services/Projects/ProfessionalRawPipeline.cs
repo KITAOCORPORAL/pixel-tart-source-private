@@ -3,8 +3,12 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 public sealed record ProfessionalRawDefinition(int ProcessingVersion=4,string WhiteBalance="Camera",double RedGain=1,double GreenGain=1,double BlueGain=1,double ExposureEv=0,
     string InputConfiguration="LibRaw021LinearProPhotoD65V1",string DisplayTransform="LuminanceShoulderNeutralGamutV1")
 {
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public InstantFilmDefinition? InstantFilm {get;init;}
     public ProfessionalRawDefinition Validate()
     {
+        InstantFilm?.Validate();
+        if(InputConfiguration=="RenderedSrgbFloatV1"){if(ProcessingVersion!=5||DisplayTransform!="RenderedSrgbIdentityV1"||WhiteBalance!="Rendered"||ExposureEv!=0||RedGain!=1||GreenGain!=1||BlueGain!=1)throw new InvalidDataException("JPEG已渲染输入不接受RAW增益。");return this;}
         if(ProcessingVersion!=4||InputConfiguration!="LibRaw021LinearProPhotoD65V1"||DisplayTransform!="LuminanceShoulderNeutralGamutV1"||WhiteBalance is not("Camera" or "CameraGains"))throw new InvalidDataException("不支持的 RAW 处理定义。");
         if(new[]{RedGain,GreenGain,BlueGain}.Any(x=>!double.IsFinite(x)||x<.125||x>8)||!double.IsFinite(ExposureEv)||ExposureEv is < -10 or > 10)throw new InvalidDataException("RAW 增益或曝光越界。");return this;
     }
@@ -58,6 +62,7 @@ public static class ProfessionalRawPipeline
     }
     public static HighBitDepthImageBuffer Render(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int maximumEdge=0,CancellationToken token=default)
     {
+        if(definition.InstantFilm?.Enabled==true||definition.InputConfiguration=="RenderedSrgbFloatV1")return RenderOutput(master,definition,maximumEdge,token);
         definition.Validate();if(master.Contract.DecodeKey!=definition.DecodeKey)throw new InvalidDataException("白平衡定义与 RAW master 不一致，需要重新解码。");
         if(!master.Contract.WhiteBalanceApplied || !master.Contract.CameraMatrixApplied || master.Contract.AutoBright || master.Contract.Gamma!="1,1" || master.Contract.OutputBits!=16 || master.Contract.OutputSpace!=WorkingSpace || master.Image.WorkingColorSpace!=WorkingSpace)throw new InvalidDataException("RAW master 不是已定义的线性输入域。");
         var image=master.Image;var scale=maximumEdge>0?Math.Min(1,maximumEdge/(double)Math.Max(image.Width,image.Height)):1;
@@ -68,14 +73,30 @@ public static class ProfessionalRawPipeline
     public static void ValidateMaster(ProfessionalRawMaster master,ProfessionalRawDefinition definition)
     {
         definition.Validate();
+        if(definition.InputConfiguration=="RenderedSrgbFloatV1"){if(master.Image.WorkingColorSpace!="sRGB"||master.Contract.DecodeKey!=definition.DecodeKey)throw new InvalidDataException("已渲染输入域失配。");return;}
         if(master.Contract.DecodeKey!=definition.DecodeKey||master.Image.WorkingColorSpace!=WorkingSpace||!master.Contract.WhiteBalanceApplied||!master.Contract.CameraMatrixApplied||master.Contract.Gamma!="1,1"||master.Contract.AutoBright||master.Contract.OutputBits!=16||master.Contract.OutputSpace!=WorkingSpace)throw new InvalidDataException("RAW master/definition domain mismatch.");
     }
     public static ColorVector3 RenderPixel(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int x,int y)
     {
         var input=master.Image.Rgb32.Span;var i=(y*master.Image.Width+x)*3;
         if(!float.IsFinite(input[i])||!float.IsFinite(input[i+1])||!float.IsFinite(input[i+2]))throw new InvalidDataException("Non-finite RAW pixel.");
-        return Display(ApplyExposure(new(input[i],input[i+1],input[i+2]),definition.ExposureEv));
+        return definition.InputConfiguration=="RenderedSrgbFloatV1"?new(input[i],input[i+1],input[i+2]):Display(ApplyExposure(new(input[i],input[i+1],input[i+2]),definition.ExposureEv));
     }
+    public static (int Width,int Height) OutputSize(ProfessionalRawMaster master,ProfessionalRawDefinition definition){var size=OrientedSize(master);var layout=InstantFilmPipeline.Layout(size.Width,size.Height,definition.InstantFilm);return(layout.Width,layout.Height);}
+    public static int OutputOrientation(ProfessionalRawMaster master,ProfessionalRawDefinition definition)=>definition.InstantFilm?.Enabled==true||definition.InputConfiguration=="RenderedSrgbFloatV1"?1:master.Image.Orientation;
+    public static ColorVector3 RenderOutputPixel(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int x,int y)
+    {
+        var original=OrientedSize(master);var layout=InstantFilmPipeline.Layout(original.Width,original.Height,definition.InstantFilm);var sx=x-layout.Margin;var sy=y-layout.Margin;
+        if(sx<0||sy<0||sx>=original.Width||sy>=original.Height)return InstantFilmPipeline.Paper(x/(double)layout.Width,y/(double)layout.Height,definition.InstantFilm);
+        var w=master.Image.Width;var h=master.Image.Height;var(px,py)=master.Image.Orientation switch{2=>(w-1-sx,sy),3=>(w-1-sx,h-1-sy),4=>(sx,h-1-sy),5=>(sy,sx),6=>(sy,h-1-sx),7=>(w-1-sy,h-1-sx),8=>(w-1-sy,sx),_=>(sx,sy)};
+        var value=RenderPixel(master,definition,px,py);return definition.InstantFilm is {} film?InstantFilmPipeline.Apply(value,(sx+.5)/original.Width,(sy+.5)/original.Height,film):value;
+    }
+    public static HighBitDepthImageBuffer RenderOutput(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int maxEdge=0,CancellationToken token=default)
+    {
+        ValidateMaster(master,definition);var size=OutputSize(master,definition);var scale=maxEdge>0?Math.Min(1,maxEdge/(double)Math.Max(size.Width,size.Height)):1;var width=Math.Max(1,(int)Math.Round(size.Width*scale));var height=Math.Max(1,(int)Math.Round(size.Height*scale));var data=new float[width*height*3];
+        for(var y=0;y<height;y++){token.ThrowIfCancellationRequested();for(var x=0;x<width;x++){var v=RenderOutputPixel(master,definition,(int)((x+.5)*size.Width/width),(int)((y+.5)*size.Height/height));var i=(y*width+x)*3;data[i]=(float)v.X;data[i+1]=(float)v.Y;data[i+2]=(float)v.Z;}}return new(width,height,data,"16","sRGB",1);
+    }
+    public static void FillOutputRgb16Row(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int y,Memory<byte> row){var width=OutputSize(master,definition).Width;for(var x=0;x<width;x++){var v=RenderOutputPixel(master,definition,x,y);var i=x*6;System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(row.Span[i..],Quantize(v.X));System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(row.Span[(i+2)..],Quantize(v.Y));System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(row.Span[(i+4)..],Quantize(v.Z));}}
     public static void FillRgb16Row(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int y,Memory<byte> row)
     {
         var bytes=row.Span;for(var x=0;x<master.Image.Width;x++){var v=RenderPixel(master,definition,x,y);var i=x*6;
@@ -87,33 +108,44 @@ public static class ProfessionalRawPipeline
     private static double EncodeDisplay(double v)=>v<=.0031308?v*12.92:1.055*Math.Pow(v,1/2.4)-.055;
     public static HighBitDepthImageBuffer RenderPreview(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int maximumEdge=1600,CancellationToken token=default)
     {
-        if(maximumEdge<=0)throw new ArgumentOutOfRangeException(nameof(maximumEdge));ValidateMaster(master,definition);var image=master.Image;var scale=Math.Min(1,maximumEdge/(double)Math.Max(image.Width,image.Height));
-        var width=Math.Max(1,(int)Math.Round(image.Width*scale));var height=Math.Max(1,(int)Math.Round(image.Height*scale));
+        if(maximumEdge<=0)throw new ArgumentOutOfRangeException(nameof(maximumEdge));ValidateMaster(master,definition);var image=master.Image;var transformed=definition.InstantFilm?.Enabled==true||definition.InputConfiguration=="RenderedSrgbFloatV1";var outputSize=transformed?OutputSize(master,definition):(Width:image.Width,Height:image.Height);var scale=Math.Min(1,maximumEdge/(double)Math.Max(outputSize.Width,outputSize.Height));
+        var width=Math.Max(1,(int)Math.Round(outputSize.Width*scale));var height=Math.Max(1,(int)Math.Round(outputSize.Height*scale));
         if(scale==1)return Render(master,definition,token:token);
-        var output=new float[checked(width*height*3)];var ratioX=image.Width/(double)width;var ratioY=image.Height/(double)height;
+        var output=new float[checked(width*height*3)];var ratioX=outputSize.Width/(double)width;var ratioY=outputSize.Height/(double)height;
         // Exact box-footprint integration in display-linear sRGB, after the SAME per-pixel full display transform.
         // Nonlinear tone/gamut must not be applied after averaging scene values: that would not match the full reference.
-        Parallel.For(0,height,new ParallelOptions{CancellationToken=token,MaxDegreeOfParallelism=4},y=>
+        // Contiguous bands reuse the boundary row between adjacent output footprints.
+        // Summation order within each destination pixel is unchanged from the reference.
+        Parallel.For(0,Math.Min(4,height),new ParallelOptions{CancellationToken=token,MaxDegreeOfParallelism=4},band=>
         {
-            token.ThrowIfCancellationRequested();var ya=y*ratioY;var yb=(y+1)*ratioY;
-            for(var x=0;x<width;x++)
+            var row=new double[outputSize.Width*3];var previousRow=-1;
+            var sums=new double[width*3];
+            for(var y=band*height/Math.Min(4,height);y<(band+1)*height/Math.Min(4,height);y++)
             {
-                var xa=x*ratioX;var xb=(x+1)*ratioX;double r=0,g=0,b=0;
-                for(var sy=(int)ya;sy<Math.Min(image.Height,(int)Math.Ceiling(yb));sy++)for(var sx=(int)xa;sx<Math.Min(image.Width,(int)Math.Ceiling(xb));sx++)
-                {var weight=(Math.Min(xb,sx+1)-Math.Max(xa,sx))*(Math.Min(yb,sy+1)-Math.Max(ya,sy));var value=RenderPixel(master,definition,sx,sy);r+=DecodeDisplay((float)value.X)*weight;g+=DecodeDisplay((float)value.Y)*weight;b+=DecodeDisplay((float)value.Z)*weight;}
-                var area=ratioX*ratioY;var i=(y*width+x)*3;output[i]=(float)EncodeDisplay(r/area);output[i+1]=(float)EncodeDisplay(g/area);output[i+2]=(float)EncodeDisplay(b/area);
+                token.ThrowIfCancellationRequested();Array.Clear(sums);var ya=y*ratioY;var yb=(y+1)*ratioY;
+                for(var sy=(int)ya;sy<Math.Min(outputSize.Height,(int)Math.Ceiling(yb));sy++)
+                {
+                    token.ThrowIfCancellationRequested();var wy=Math.Min(yb,sy+1)-Math.Max(ya,sy);
+                    if(previousRow!=sy)
+                    {
+                        for(var sx=0;sx<outputSize.Width;sx++){var v=transformed?RenderOutputPixel(master,definition,sx,sy):RenderPixel(master,definition,sx,sy);var j=sx*3;row[j]=DecodeDisplay((float)v.X);row[j+1]=DecodeDisplay((float)v.Y);row[j+2]=DecodeDisplay((float)v.Z);}
+                        previousRow=sy;
+                    }
+                    for(var x=0;x<width;x++){var xa=x*ratioX;var xb=(x+1)*ratioX;var j=x*3;for(var sx=(int)xa;sx<Math.Min(outputSize.Width,(int)Math.Ceiling(xb));sx++){var weight=(Math.Min(xb,sx+1)-Math.Max(xa,sx))*wy;var k=sx*3;sums[j]+=row[k]*weight;sums[j+1]+=row[k+1]*weight;sums[j+2]+=row[k+2]*weight;}}
+                }
+                var area=ratioX*ratioY;for(var x=0;x<width*3;x++)output[y*width*3+x]=(float)EncodeDisplay(sums[x]/area);
             }
         });
-        return new(width,height,output,"16","sRGB",image.Orientation);
+        return new(width,height,output,"16","sRGB",transformed?(ushort)1:image.Orientation);
     }
     public static (int Width,int Height) OrientedSize(ProfessionalRawMaster master)=>master.Image.Orientation is >=5 and <=8?(master.Image.Height,master.Image.Width):(master.Image.Width,master.Image.Height);
     public static HighBitDepthImageBuffer RenderRegion(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int left,int top,int width,int height,CancellationToken token=default)
     {
-        ValidateMaster(master,definition);var size=OrientedSize(master);
+        ValidateMaster(master,definition);var size=OutputSize(master,definition);
         if(left<0||top<0||width<=0||height<=0||left+width>size.Width||top+height>size.Height)throw new ArgumentOutOfRangeException(nameof(left));
-        var output=new float[checked(width*height*3)];var w=master.Image.Width;var h=master.Image.Height;
+        var output=new float[checked(width*height*3)];
         for(var y=0;y<height;y++){token.ThrowIfCancellationRequested();for(var x=0;x<width;x++){
-            var ox=left+x;var oy=top+y;var (sx,sy)=master.Image.Orientation switch{2=>(w-1-ox,oy),3=>(w-1-ox,h-1-oy),4=>(ox,h-1-oy),5=>(oy,ox),6=>(oy,h-1-ox),7=>(w-1-oy,h-1-ox),8=>(w-1-oy,ox),_=>(ox,oy)};
-            var value=RenderPixel(master,definition,sx,sy);var i=(y*width+x)*3;output[i]=(float)value.X;output[i+1]=(float)value.Y;output[i+2]=(float)value.Z;}}
+            var ox=left+x;var oy=top+y;
+            var value=RenderOutputPixel(master,definition,ox,oy);var i=(y*width+x)*3;output[i]=(float)value.X;output[i+1]=(float)value.Y;output[i+2]=(float)value.Z;}}
         return new(width,height,output,"16","sRGB",1);
     }}
