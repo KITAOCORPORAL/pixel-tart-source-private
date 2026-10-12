@@ -7,15 +7,24 @@ public sealed record ProfessionalRawDefinition(int ProcessingVersion=4,string Wh
     public InstantFilmDefinition? InstantFilm {get;init;}
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
     public InstantInputRecipe? InstantInput {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore]
+    public bool IsRenderedInput => InputConfiguration is "RenderedSrgbFloatV1" or "LegacyRawEditsSrgbFloatV1";
     public ProfessionalRawDefinition Validate()
     {
         InstantFilm?.Validate();
         if(InstantInput is {} input)
         {
-            if(input.Version!=1||input.Mode is not("Original" or "CurrentEdits")||InputConfiguration!="RenderedSrgbFloatV1")throw new InvalidDataException("Unknown instant input recipe.");
+            if(InputConfiguration=="LegacyRawEditsSrgbFloatV1")LegacyRawInstantInput.ValidateRecipe(input);
+            else if(input.Version!=1||input.LegacyRaw is not null||input.Mode is not("Original" or "CurrentEdits")||InputConfiguration!="RenderedSrgbFloatV1")throw new InvalidDataException("Unknown instant input recipe.");
             input.Stack?.Normalize();input.Film?.Validate();
         }
-        if(InputConfiguration=="RenderedSrgbFloatV1"){if(ProcessingVersion!=5||DisplayTransform!="RenderedSrgbIdentityV1"||WhiteBalance!="Rendered"||ExposureEv!=0||RedGain!=1||GreenGain!=1||BlueGain!=1)throw new InvalidDataException("JPEG已渲染输入不接受RAW增益。");return this;}
+        if(IsRenderedInput)
+        {
+            var raw=InputConfiguration=="LegacyRawEditsSrgbFloatV1";
+            if(ProcessingVersion!=(raw?6:5)||DisplayTransform!=(raw?"LegacyRawEditsIdentityV1":"RenderedSrgbIdentityV1")||WhiteBalance!="Rendered"||ExposureEv!=0||RedGain!=1||GreenGain!=1||BlueGain!=1||raw&&InstantInput?.LegacyRaw is null)
+                throw new InvalidDataException("Rendered input rejects repeated RAW gains, exposure and display transforms.");
+            return this;
+        }
         if(ProcessingVersion!=4||InputConfiguration!="LibRaw021LinearProPhotoD65V1"||DisplayTransform!="LuminanceShoulderNeutralGamutV1"||WhiteBalance is not("Camera" or "CameraGains"))throw new InvalidDataException("不支持的 RAW 处理定义。");
         if(new[]{RedGain,GreenGain,BlueGain}.Any(x=>!double.IsFinite(x)||x<.125||x>8)||!double.IsFinite(ExposureEv)||ExposureEv is < -10 or > 10)throw new InvalidDataException("RAW 增益或曝光越界。");return this;
     }
@@ -69,7 +78,7 @@ public static class ProfessionalRawPipeline
     }
     public static HighBitDepthImageBuffer Render(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int maximumEdge=0,CancellationToken token=default)
     {
-        if(definition.InstantFilm?.Enabled==true||definition.InputConfiguration=="RenderedSrgbFloatV1")return RenderOutput(master,definition,maximumEdge,token);
+        if(definition.InstantFilm?.Enabled==true||definition.IsRenderedInput)return RenderOutput(master,definition,maximumEdge,token);
         definition.Validate();if(master.Contract.DecodeKey!=definition.DecodeKey)throw new InvalidDataException("白平衡定义与 RAW master 不一致，需要重新解码。");
         if(!master.Contract.WhiteBalanceApplied || !master.Contract.CameraMatrixApplied || master.Contract.AutoBright || master.Contract.Gamma!="1,1" || master.Contract.OutputBits!=16 || master.Contract.OutputSpace!=WorkingSpace || master.Image.WorkingColorSpace!=WorkingSpace)throw new InvalidDataException("RAW master 不是已定义的线性输入域。");
         var image=master.Image;var scale=maximumEdge>0?Math.Min(1,maximumEdge/(double)Math.Max(image.Width,image.Height)):1;
@@ -80,17 +89,17 @@ public static class ProfessionalRawPipeline
     public static void ValidateMaster(ProfessionalRawMaster master,ProfessionalRawDefinition definition)
     {
         definition.Validate();
-        if(definition.InputConfiguration=="RenderedSrgbFloatV1"){if(master.Image.WorkingColorSpace!="sRGB"||master.Contract.DecodeKey!=definition.DecodeKey)throw new InvalidDataException("已渲染输入域失配。");return;}
+        if(definition.IsRenderedInput){if(master.Image.WorkingColorSpace!="sRGB"||master.Contract.DecodeKey!=definition.DecodeKey)throw new InvalidDataException("已渲染输入域失配。");return;}
         if(master.Contract.DecodeKey!=definition.DecodeKey||master.Image.WorkingColorSpace!=WorkingSpace||!master.Contract.WhiteBalanceApplied||!master.Contract.CameraMatrixApplied||master.Contract.Gamma!="1,1"||master.Contract.AutoBright||master.Contract.OutputBits!=16||master.Contract.OutputSpace!=WorkingSpace)throw new InvalidDataException("RAW master/definition domain mismatch.");
     }
     public static ColorVector3 RenderPixel(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int x,int y)
     {
         var input=master.Image.Rgb32.Span;var i=(y*master.Image.Width+x)*3;
         if(!float.IsFinite(input[i])||!float.IsFinite(input[i+1])||!float.IsFinite(input[i+2]))throw new InvalidDataException("Non-finite RAW pixel.");
-        return definition.InputConfiguration=="RenderedSrgbFloatV1"?new(input[i],input[i+1],input[i+2]):Display(ApplyExposure(new(input[i],input[i+1],input[i+2]),definition.ExposureEv));
+        return definition.IsRenderedInput?new(input[i],input[i+1],input[i+2]):Display(ApplyExposure(new(input[i],input[i+1],input[i+2]),definition.ExposureEv));
     }
     public static (int Width,int Height) OutputSize(ProfessionalRawMaster master,ProfessionalRawDefinition definition){var size=OrientedSize(master);var layout=InstantFilmPipeline.Layout(size.Width,size.Height,definition.InstantFilm);return(layout.Width,layout.Height);}
-    public static int OutputOrientation(ProfessionalRawMaster master,ProfessionalRawDefinition definition)=>definition.InstantFilm?.Enabled==true||definition.InputConfiguration=="RenderedSrgbFloatV1"?1:master.Image.Orientation;
+    public static int OutputOrientation(ProfessionalRawMaster master,ProfessionalRawDefinition definition)=>definition.InstantFilm?.Enabled==true||definition.IsRenderedInput?1:master.Image.Orientation;
     public static ColorVector3 RenderOutputPixel(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int x,int y)
     {
         var size=OrientedSize(master);
@@ -121,7 +130,7 @@ public static class ProfessionalRawPipeline
     private static double EncodeDisplay(double v)=>v<=.0031308?v*12.92:1.055*Math.Pow(v,1/2.4)-.055;
     public static HighBitDepthImageBuffer RenderPreview(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int maximumEdge=1600,CancellationToken token=default)
     {
-        if(maximumEdge<=0)throw new ArgumentOutOfRangeException(nameof(maximumEdge));ValidateMaster(master,definition);var image=master.Image;var transformed=definition.InstantFilm?.Enabled==true||definition.InputConfiguration=="RenderedSrgbFloatV1";var outputSize=transformed?OutputSize(master,definition):(Width:image.Width,Height:image.Height);var scale=Math.Min(1,maximumEdge/(double)Math.Max(outputSize.Width,outputSize.Height));
+        if(maximumEdge<=0)throw new ArgumentOutOfRangeException(nameof(maximumEdge));ValidateMaster(master,definition);var image=master.Image;var transformed=definition.InstantFilm?.Enabled==true||definition.IsRenderedInput;var outputSize=transformed?OutputSize(master,definition):(Width:image.Width,Height:image.Height);var scale=Math.Min(1,maximumEdge/(double)Math.Max(outputSize.Width,outputSize.Height));
         var sourceSize=OrientedSize(master);var preparedLayout=InstantPaperLayout.Create(sourceSize.Width,sourceSize.Height,definition.InstantFilm);
         var width=Math.Max(1,(int)Math.Round(outputSize.Width*scale));var height=Math.Max(1,(int)Math.Round(outputSize.Height*scale));
         if(scale==1)return Render(master,definition,token:token);

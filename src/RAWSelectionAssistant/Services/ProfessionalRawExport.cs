@@ -15,7 +15,7 @@ public static class ProfessionalRawExport
     {
         definition=definition with{InstantFilm=definition.InstantFilm is {} film?InstantFilmPipeline.Freeze(film):null};
         ProfessionalRawPipeline.ValidateMaster(master,definition);
-        var transformed=definition.InstantFilm?.Enabled==true||definition.InputConfiguration=="RenderedSrgbFloatV1";
+        var transformed=definition.InstantFilm?.Enabled==true||definition.IsRenderedInput;
         var size=transformed?ProfessionalRawPipeline.OutputSize(master,definition):(master.Image.Width,master.Image.Height);
         var orientation=ProfessionalRawPipeline.OutputOrientation(master,definition);
         if(File.Exists(destination))throw new IOException("输出已存在，未覆盖。");
@@ -47,7 +47,7 @@ public static class ProfessionalRawExport
     {
         if(format is StudioExportFormat.Source or StudioExportFormat.Tiff)
         {
-            var transformed=definition.InstantFilm?.Enabled==true||definition.InputConfiguration=="RenderedSrgbFloatV1";
+            var transformed=definition.InstantFilm?.Enabled==true||definition.IsRenderedInput;
             var output=transformed?ProfessionalRawPipeline.OutputSize(master,definition):(master.Image.Width,master.Image.Height);
             using var stream=File.OpenRead(path);var expected=new byte[output.Item1*6];
             var result=TiffStreamValidator.Validate(stream,token,(y,row)=>{if(transformed)ProfessionalRawPipeline.FillOutputRgb16Row(master,definition,y,expected);else ProfessionalRawPipeline.FillRgb16Row(master,definition,y,expected);if(!row.Span.SequenceEqual(expected))throw new InvalidDataException("TIFF16 pixels differ from PV4 definition.");});

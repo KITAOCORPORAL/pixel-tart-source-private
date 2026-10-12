@@ -23,7 +23,7 @@ public sealed class ColorStudioRenderPipeline
             if (captureNodeDiagnostics) outputs.Add(current.ToVisualRgb24());
         }
         var descriptor = new ColorPipelineDescriptor(InputInterpretation: "HighPrecision sRGB", WorkingRepresentation: normalized.WorkingSpace, OutputEncoding: "sRGB display adapter");
-        return new(current.ToVisualRgb24(), outputs, descriptor, inputs, current, new PrecisionTrace(precisionStages));
+        return new(current.ToVisualRgb24(token), outputs, descriptor, inputs, current, new PrecisionTrace(precisionStages));
     }
 
     private HighBitDepthImageBuffer ApplyHighPrecision(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, ReferenceLook? reference, AssetVisualAnalysisResult analysis, CancellationToken token, ReadOnlyMemory<byte> alpha)

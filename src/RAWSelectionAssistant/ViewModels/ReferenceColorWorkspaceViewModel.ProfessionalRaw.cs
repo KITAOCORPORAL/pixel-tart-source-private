@@ -21,6 +21,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public string RawPipelineStatus {get;private set;}="PV4 · 线性 ProPhoto / LibRaw，相机白平衡只在解码应用一次";
     private async Task<ProfessionalRawMaster> DecodeProfessionalInputAsync(string path,ProfessionalRawDefinition definition,CancellationToken token=default)
     {
+        if(definition.InputConfiguration=="LegacyRawEditsSrgbFloatV1")return await RebuildLegacyRawInputAsync(path,definition,null,token);
         if(definition.InputConfiguration!="RenderedSrgbFloatV1")return await _professionalDecoder.DecodeAsync(path,definition,token);
         if(definition.InstantInput is not {Mode:"CurrentEdits"} recipe)return await InstantFilmJpegInput.ReadAsync(path,definition,token);
         using var source=System.IO.File.OpenRead(path);
@@ -29,6 +30,22 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var rendered=await Editor.ProcessForExportAsync(path,recipe.Look,recipe.Film,token,recipe.Stack);
         token.ThrowIfCancellationRequested();
         return InstantFilmJpegInput.FromRendered(rendered,sourceHash,definition);
+    }
+    private async Task<ProfessionalRawMaster> RebuildLegacyRawInputAsync(string path,ProfessionalRawDefinition definition,FrozenRawMaster? frozen,CancellationToken token)
+    {
+        definition.Validate();await ProfessionalRawResourcePolicy.HeavyWork.WaitAsync(token);
+        try
+        {
+            if(frozen is null)
+            {
+                using var decodeWork=StudioGlobalResources.ReserveWork(StudioGlobalResources.MasterLimit);
+                frozen=await _rawPipeline.DecodeFrozenMasterAsync(path,token);
+            }
+            else await frozen.ValidateSourceAsync(token);
+            token.ThrowIfCancellationRequested();
+            return await Task.Run(()=>LegacyRawInstantInput.Render(frozen,definition,_rawPipeline,token),token);
+        }
+        finally{ProfessionalRawResourcePolicy.HeavyWork.Release();}
     }
     private void InitializeProfessionalRawCommands()
     {
@@ -54,7 +71,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         });
         ApplyProfessionalRawCommand=new AsyncRelayCommand(async _=>
         {
-            if(ActiveTarget is not {} target||target.RawDefinition is null||target.RawDefinition.InputConfiguration=="RenderedSrgbFloatV1"||IsLoading||IsExporting||IsInstantGenerating)return;
+            if(ActiveTarget is not {} target||target.RawDefinition is null||target.RawDefinition.IsRenderedInput||IsLoading||IsExporting||IsInstantGenerating)return;
             try
             {
                 var previous=target.RawDefinition;var version=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);
@@ -78,6 +95,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     {
         InvalidateProfessionalPreview();
         CancelTargetThumbnail(target.Id);
+        if(target.RawDefinition?.InputConfiguration=="LegacyRawEditsSrgbFloatV1")target.RawMaster=null;
         var definition=target.RawDefinition!.Validate();
         RawPipelineStatus="正在解码新 RAW 版本…";OnPropertyChanged(nameof(RawPipelineStatus));
         var master=target.LinearRawMaster;
@@ -104,7 +122,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         RawExposureEv=definition.ExposureEv;RawRedGain=definition.RedGain;RawGreenGain=definition.GreenGain;RawBlueGain=definition.BlueGain;RawUseCameraWhiteBalance=definition.WhiteBalance=="Camera";
         foreach(var name in new[]{nameof(IsProfessionalRaw),nameof(IsLinearProfessionalRaw),nameof(IsLegacyRaw),nameof(RawExposureEv),nameof(RawRedGain),nameof(RawGreenGain),nameof(RawBlueGain),nameof(RawUseCameraWhiteBalance)})OnPropertyChanged(name);
         RestoreInstantControls(definition.InstantFilm);RefreshSyncAvailability();
-        RawPipelineStatus=definition.InputConfiguration=="RenderedSrgbFloatV1"?"PV5 · 完整JPEG → WIC sRGB · 不重复应用白平衡；创作非标定":$"PV4 · {master.Contract.Model} · LibRaw Linear ProPhoto D65 → sRGB · 解码饱和通道 {master.Contract.SaturatedChannelSamples:N0}；不代表未裁切传感器";OnPropertyChanged(nameof(RawPipelineStatus));
+        RawPipelineStatus=definition.InputConfiguration=="LegacyRawEditsSrgbFloatV1"?"PV6 · 旧RAW完整编辑 → 已渲染sRGB · 不重复白平衡/曝光/显示转换":definition.InputConfiguration=="RenderedSrgbFloatV1"?"PV5 · 完整JPEG → WIC sRGB · 不重复应用白平衡；创作非标定":$"PV4 · {master.Contract.Model} · LibRaw Linear ProPhoto D65 → sRGB · 解码饱和通道 {master.Contract.SaturatedChannelSamples:N0}；不代表未裁切传感器";OnPropertyChanged(nameof(RawPipelineStatus));
         StatusText="原尺寸管线预览完成；即时胶片为创作近似，非相纸标定";CaptureEditVersion(target);await RefreshPreviewAnalysisAsync(token,image);
     }
     private async Task ExportProfessionalRawAsync(ReferenceTargetItem target,ProfessionalRawDefinition definition,string temporary,StudioExportFormat format,CancellationToken token)

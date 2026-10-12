@@ -40,7 +40,8 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
         var state = ColorStudioEffectiveState.Resolve(look, stack, film) ?? (look is not null
             ? ColorStudioLegacyMigration.Migrate(look with { Film = film ?? look.Film }).Stack
             : new ColorAdjustmentStack([new(Guid.NewGuid(), ColorStudioNodeType.Preset, "原图", true)]));
-        var display = working.ToVisualRgb24();
+        token.ThrowIfCancellationRequested();
+        var display = ColorStudioProcessingAnalysis.RequiresSourceAnalysis(state,look) ? working.ToVisualRgb24(token) : new VisualPixelBuffer(1,1,new byte[3]);
         var analysis = ColorStudioProcessingAnalysis.Create(display, state, look, token);
         return new ColorStudioRenderPipeline().Render(working, analysis, look, state, token, captureNodeDiagnostics: false);
     }

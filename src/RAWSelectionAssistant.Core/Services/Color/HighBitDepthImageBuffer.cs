@@ -51,10 +51,12 @@ public sealed class HighBitDepthImageBuffer
         return new(image.Width, image.Height, output, "8", "sRGB");
     }
 
-    public VisualPixelBuffer ToVisualRgb24()
+    public VisualPixelBuffer ToVisualRgb24() => ToVisualRgb24(CancellationToken.None);
+
+    public VisualPixelBuffer ToVisualRgb24(CancellationToken token)
     {
         var output = new byte[Rgb32.Length];
-        for (var i = 0; i < output.Length; i++) output[i] = (byte)Math.Clamp(Math.Round(Rgb32.Span[i] * 255), 0, 255);
+        for (var i = 0; i < output.Length; i++){if((i & 8191)==0)token.ThrowIfCancellationRequested();output[i] = (byte)Math.Clamp(Math.Round(Rgb32.Span[i] * 255), 0, 255);}
         return new(Width, Height, output);
     }
 

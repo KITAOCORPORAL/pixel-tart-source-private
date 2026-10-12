@@ -86,6 +86,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public async Task GenerateInstantFilmAsync(bool roll)
     {
         if(_disposed||IsInstantGenerating||IsLoading||IsExporting||ActiveTarget is not {} target)return;
+        // Establish and freeze the source edit version before async reconstruction starts.
+        Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);
         var version=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);var previous=target.RawDefinition;
         var previousDice=previous?.InstantFilm?.DiceEnabled??false;
         var oldInput=target.RawInput;var oldMaster=target.LinearRawMaster;var oldLook=target.AppliedLookSnapshot;var oldStack=target.ColorAdjustmentStackSnapshot;var oldFilm=target.FilmSettingsSnapshot;
@@ -112,16 +114,21 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             }
             film=InstantFilmPipeline.Freeze(film);
             Editor.CopyCurrentLookTo([target]);
-            if(previous is null&&RawMatchTiff16ProductPipeline.IsRaw(target.Path)&&InstantInputMode=="CurrentEdits")
-                throw new NotSupportedException("旧RAW编辑叠加尚未适配：保留当前版本；可明确选择Original生成基础RAW胶片。");
+            // Legacy RAW CurrentEdits is an explicit, persisted PV6 bridge; old definitions stay untouched.
             if(InstantInputMode is not("Original" or "CurrentEdits"))throw new InvalidDataException("请选择明确的输入来源。");
             var basis=InstantInputMode=="Original"?(RawMatchTiff16ProductPipeline.IsRaw(target.Path)?new ProfessionalRawDefinition():InstantFilmJpegInput.Definition):previous??InstantFilmJpegInput.Definition;
+            if(previous is null&&RawMatchTiff16ProductPipeline.IsRaw(target.Path)&&InstantInputMode=="CurrentEdits")
+                basis=LegacyRawInstantInput.Create(new InstantInputRecipe(2,"CurrentEdits",version,target.AppliedLookSnapshot,target.ColorAdjustmentStackSnapshot?.DeepClone(),target.FilmSettingsSnapshot)
+                {LegacyRaw=new(1,target.ColorAdjustmentStackSnapshot?.ProcessingVersion??1,target.SourceHash??throw new InvalidDataException("Missing source identity."),Engine:target.EngineSnapshot,ExecutionMode:target.ExecutionModeSnapshot)});
             if(basis.InputConfiguration=="RenderedSrgbFloatV1"&&(previous is null||InstantInputMode=="Original"))
                 basis=basis with{InstantInput=new(1,InstantInputMode,version,InstantInputMode=="CurrentEdits"?target.AppliedLookSnapshot:null,InstantInputMode=="CurrentEdits"?target.ColorAdjustmentStackSnapshot?.DeepClone():null,InstantInputMode=="CurrentEdits"?target.FilmSettingsSnapshot:null)};
             var definition=basis with{InstantFilm=film};definition.Validate();
             var camera=InstantCameraAnimation;InstantDirection=profile.Direction;
             if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
-            var master=target.LinearRawMaster is {} current&&current.Contract.DecodeKey==definition.DecodeKey?current:await DecodeProfessionalInputAsync(target.Path,definition,token);
+            // Reuse the exact frozen full source used by legacy editing; never a proxy or a second native
+            // decode on first conversion. After success the new rendered master replaces the old cache.
+            var master=target.LinearRawMaster is {} current&&current.Contract.DecodeKey==definition.DecodeKey?current:
+                definition.InputConfiguration=="LegacyRawEditsSrgbFloatV1"?await RebuildLegacyRawInputAsync(target.Path,definition,target.RawMaster,token):await DecodeProfessionalInputAsync(target.Path,definition,token);
             if(!string.Equals(master.Contract.SourceSha256,target.SourceHash??target.ObservedSourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("生成期间源文件身份改变。");
             var preview=await RenderProfessionalPreviewAsync(master,definition,1600,token);
             InstantFinalPreview=RawDisplayBitmapAdapter.ToBitmap(preview.ToVisualRgb24());
