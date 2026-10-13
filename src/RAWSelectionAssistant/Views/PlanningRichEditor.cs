@@ -71,6 +71,33 @@ public sealed class PlanningRichEditor : DockPanel
         _editor.TextChanged+=(_,_)=>{if(_history.Restoring)return;_saveTimer.Stop();_saveTimer.Start();};
         Unloaded+=(_,_)=>{_saveTimer.Stop();_persist();};
     }
+    public void ApplyPlanningPaperAppearance()
+    {
+        if(Children.OfType<WrapPanel>().FirstOrDefault() is {} tools)
+        {
+            var pages=new Dictionary<string,WrapPanel>{{"开始",new()},{"插入",new()},{"布局",new()},{"文档",new()}};
+            var controls=tools.Children.Cast<UIElement>().ToArray();tools.Children.Clear();Children.Remove(tools);
+            var tabs=new TabControl{Margin=new Thickness(0,6,0,10),Background=new SolidColorBrush(Color.FromRgb(35,35,39)),BorderBrush=new SolidColorBrush(Color.FromRgb(52,52,56))};
+            var style=(Style)System.Windows.Markup.XamlReader.Parse("<Style xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml' TargetType='TabItem'><Setter Property='Foreground' Value='#E7E6E2'/><Setter Property='Background' Value='#232327'/><Setter Property='Padding' Value='12,5'/><Setter Property='Template'><Setter.Value><ControlTemplate TargetType='TabItem'><Border x:Name='tab' Background='{TemplateBinding Background}' BorderBrush='#343438' BorderThickness='0,0,0,2' Padding='{TemplateBinding Padding}'><ContentPresenter ContentSource='Header'/></Border><ControlTemplate.Triggers><Trigger Property='IsSelected' Value='True'><Setter TargetName='tab' Property='BorderBrush' Value='#9CC4BA'/><Setter Property='Background' Value='#303C39'/></Trigger><Trigger Property='IsKeyboardFocused' Value='True'><Setter TargetName='tab' Property='BorderThickness' Value='1'/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter></Style>");tabs.ItemContainerStyle=style;SetDock(tabs,Dock.Top);
+            string group="开始";
+            foreach(var control in controls)
+            {
+                if(control is Button {Content:string label})group=label switch
+                {
+                    "图片" or "画布快照" or "表格"=>"插入",
+                    "分页" or "横/竖页" or "A4/Letter" or "页边距" or "加行" or "删行" or "加列" or "删列" or "列宽" or "表格对齐" or "边框"=>"布局",
+                    "分页预览" or "打印 / PDF" or "导出 DOCX" or "导入 DOCX"=>"文档",_=>"开始"
+                };
+                pages[group].Children.Add(control);
+            }
+            foreach(var pair in pages)tabs.Items.Add(new TabItem{Header=pair.Key,Content=new ScrollViewer{Content=pair.Value,MaxHeight=120,VerticalScrollBarVisibility=ScrollBarVisibility.Auto}});
+            Children.Insert(0,tabs);
+        }
+        _editor.Background=new SolidColorBrush(Color.FromRgb(249,248,244));_editor.Foreground=Brushes.Black;
+        _editor.BorderBrush=new SolidColorBrush(Color.FromRgb(70,70,74));_editor.BorderThickness=new Thickness(1);
+        _editor.Padding=new Thickness(28);_editor.MinHeight=560;_editor.MaxWidth=794;_editor.HorizontalAlignment=HorizontalAlignment.Center;
+        _editor.HorizontalScrollBarVisibility=ScrollBarVisibility.Auto;
+    }
     public void FlushPending(){_saveTimer.Stop();_history.Checkpoint();_persist?.Invoke();}
     private FlowDocument Clone(){using var stream=new MemoryStream();new TextRange(_editor.Document.ContentStart,_editor.Document.ContentEnd).Save(stream,DataFormats.Rtf);stream.Position=0;var doc=new FlowDocument();new TextRange(doc.ContentStart,doc.ContentEnd).Load(stream,DataFormats.Rtf);PlanningDocumentLayout.Apply(doc,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));return doc;}
 }

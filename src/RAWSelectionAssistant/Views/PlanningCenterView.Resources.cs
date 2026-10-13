@@ -26,12 +26,7 @@ public partial class PlanningCenterView
     private void PlanningPicker_Click(object sender, RoutedEventArgs e)
     {
         if (_vm is null || sender is not Button button) return;
-        var menu = new ContextMenu { PlacementTarget = button };
-        foreach(var plan in _vm.PlanningProjects)
-        {
-            var item=new MenuItem{Header=plan.Name};item.Click+=async(_,_)=>{if(await FlushDocumentAsync())await _vm.OpenProjectSafelyAsync(plan.ProjectId);};menu.Items.Add(item);
-        }
-        button.ContextMenu=menu;menu.IsOpen=true;
+        OpenPlanningDock(DocumentListPane,false);
     }
     private void RenderResources(string page)
     {
@@ -41,8 +36,8 @@ public partial class PlanningCenterView
         tools.Children.Add(Action("新增", () => EditPlanningResource((PlanningResource)Activator.CreateInstance(type)!)));
         tools.Children.Add(AsyncAction("撤销上次策划操作", async () => { if (await _vm.UndoPlanningAsync()) Render(); }));
         DocumentContent.Children.Add(tools);
-        if (page == "设备") DocumentContent.Children.Add(Text("工具箱尚无设备目录数据源；不提供假导入按钮。现可手工登记，来源目录+来源ID导入接口已定义。",12));
-        if (page == "场地") DocumentContent.Children.Add(Text("地图、日落、潮汐未连接自动服务；仅保存地点、日期、时区、手动值与来源。",12));
+        if (page == "设备") DocumentContent.Children.Add(Text("手工登记设备。工具箱设备目录尚未连接，原设备资料不会被修改。",12));
+        if (page == "场地") DocumentContent.Children.Add(Text("地点与日落 / 潮汐使用手动资料，请填写日期、时区和来源。",12));
         if (page == "预算")
         {
             DocumentContent.Children.Add(AsyncAction("读取项目实际支出（只读）", async () => { await _vm.RefreshPlanningExpensesAsync(); Render(); }));
@@ -51,29 +46,26 @@ public partial class PlanningCenterView
         }
         if (page == "灯位图")
         {
-            var canvas = new Canvas { Height=320, Background=Brush("SurfaceSecondaryBrush"), ClipToBounds=true };
+            var canvas = new Canvas { Height=360, Background=Brush("SurfaceSecondaryBrush"), ClipToBounds=true };
             AutomationProperties.SetName(canvas,"灯位俯视图");
             canvas.SizeChanged += (_,_) => DrawPlanningLights(canvas);
-            canvas.MouseLeftButtonDown += (_,e) => { if(e.Source != canvas)return; var pt=e.GetPosition(canvas); EditPlanningResource(new PlanningLight { X=Math.Clamp(pt.X/Math.Max(1,canvas.ActualWidth),0,1),Y=Math.Clamp(pt.Y/320,0,1) }); };
-            DocumentContent.Children.Add(Text("点击空白放置灯具；点击灯具编辑。坐标与方向实际保存，非模拟拖动。",12));DocumentContent.Children.Add(canvas);
+            canvas.MouseLeftButtonDown += (_,e) => { if(e.Source != canvas)return; var pt=e.GetPosition(canvas); EditPlanningResource(new PlanningLight { X=Math.Clamp(pt.X/Math.Max(1,canvas.ActualWidth),0,1),Y=Math.Clamp(pt.Y/360,0,1) }); };
+            DocumentContent.Children.Add(Text("点击空白放置灯具；点击灯具编辑位置、方向、功率与修饰器。",12));DocumentContent.Children.Add(canvas);
         }
-        foreach(var item in _vm.ResourceCatalog.Items.Where(i=>i.GetType()==type))
-        {
-            var row=new WrapPanel { Margin=new Thickness(0,8,0,8) };row.Children.Add(Text(item.Name+(item.Archived?"（归档）":""),16));
-            row.Children.Add(Action("编辑",()=>EditPlanningResource(item)));
-            row.Children.Add(AsyncAction("复制",async()=>{if(await _vm.CopyResourceAsync(item.Id))Render();}));
-            row.Children.Add(AsyncAction(item.Archived?"恢复":"归档",async()=>{if(await _vm.ArchiveResourceAsync(item.Id,!item.Archived))Render();}));
-            DocumentContent.Children.Add(row);
-        }
+        RenderR5ResourceTable(type);
         if(page=="灯位图") { Heading(DocumentContent,"灯光参考与已有画布快照"); foreach(var reference in ReferencesFor("灯光图")) DocumentContent.Children.Add(ImageTile(reference,180,true)); foreach(var revision in _vm.DocumentCanvasRevisions)DocumentContent.Children.Add(Text($"画布版本 {revision.RevisionId} · {revision.CapturedAt}",12)); }
         if(page=="服化道与道具") foreach(var reference in ReferencesFor("服化道"))DocumentContent.Children.Add(ImageTile(reference,160,true));
     }
     private void DrawPlanningLights(Canvas canvas)
     {
         canvas.Children.Clear();if(_vm is null)return;
+        for(var x=0d;x<canvas.ActualWidth;x+=40)canvas.Children.Add(new Line{X1=x,X2=x,Y1=0,Y2=360,Stroke=Brush("DividerBrush"),StrokeThickness=.5,IsHitTestVisible=false});
+        for(var y=0d;y<360;y+=40)canvas.Children.Add(new Line{X1=0,X2=canvas.ActualWidth,Y1=y,Y2=y,Stroke=Brush("DividerBrush"),StrokeThickness=.5,IsHitTestVisible=false});
+        var subject=Text("主体",14,true);Canvas.SetLeft(subject,canvas.ActualWidth/2);Canvas.SetTop(subject,160);canvas.Children.Add(subject);
         foreach(var light in _vm.ResourceCatalog.Items.OfType<PlanningLight>().Where(l=>!l.Archived))
         {
-            var button=Action($"◉ {light.Name} {light.PowerPercent}%",()=>EditPlanningResource(light));button.RenderTransform=new RotateTransform(light.DirectionDegrees);
+            var button=Action($"◉ {light.Name} {light.PowerPercent}%",()=>EditPlanningResource(light));button.ToolTip=$"方向 {light.DirectionDegrees}° · {light.Modifier}";
+            var rad=light.DirectionDegrees*Math.PI/180;var x=light.X*Math.Max(1,canvas.ActualWidth-110);var y=light.Y*280;canvas.Children.Add(new Line{X1=x+20,Y1=y+16,X2=x+20+Math.Cos(rad)*48,Y2=y+16+Math.Sin(rad)*48,Stroke=Brush("AccentBrush"),StrokeThickness=2});
             Canvas.SetLeft(button,light.X*Math.Max(1,canvas.ActualWidth-110));Canvas.SetTop(button,light.Y*280);canvas.Children.Add(button);
         }
     }

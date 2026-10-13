@@ -4,6 +4,12 @@ namespace RAWSelectionAssistant.ViewModels;
 
 public sealed partial class PlanningCenterViewModel
 {
+    public PlanningUiLayout UiLayout => _document.UiLayout.Normalize();
+    public async Task<bool> SaveUiLayoutAsync(PlanningUiLayout layout)
+    {
+        if(ProjectId is null || !await FlushAsync())return false;
+        UpdateDocument(_document with{UiLayout=layout.Normalize()});return await FlushAsync();
+    }
     public Guid? PlanningDocumentId => _document.Package?.DocumentId;
     public IReadOnlyList<PlanningShotColumn> ShotColumns => _document.ShotColumns.Where(c => !c.Archived).ToArray();
     public IReadOnlyList<PlanningShotColumn> ArchivedShotColumns => _document.ShotColumns.Where(c => c.Archived).ToArray();

@@ -33,9 +33,10 @@ public partial class PlanningCenterView : UserControl
     public PlanningCenterView()
     {
         InitializeComponent();
+        PlanningDockOverlay.MouseDown+=(_,e)=>{if(e.OriginalSource==PlanningDockOverlay)ClosePlanningDock();};
         DataContextChanged += (_, e) =>
         {
-            if (_vm is not null) { FlushSimpleEditors(); _vm.CapturePendingEditorDraft = null; _vm.DocumentPresentationChanged -= PresentationChanged; _vm.PropertyChanged -= ViewModelChanged; }
+            if (_vm is not null) { ClosePlanningDock(); FlushSimpleEditors(); _vm.CapturePendingEditorDraft = null; _vm.DocumentPresentationChanged -= PresentationChanged; _vm.PropertyChanged -= ViewModelChanged; }
             _vm = e.NewValue as PlanningCenterViewModel;
             if (_vm is not null) { _vm.CapturePendingEditorDraft = FlushSimpleEditors; _vm.DocumentPresentationChanged += PresentationChanged; _vm.PropertyChanged += ViewModelChanged; }
             Render();
@@ -109,7 +110,11 @@ public partial class PlanningCenterView : UserControl
         if (e.PropertyName is nameof(_vm.IsCreateOpen) or nameof(_vm.IsBookingOpen)) RenderModal();
         if (e.PropertyName == nameof(_vm.IsShotDrawerOpen)) RenderShotDrawer();
         if (e.PropertyName == nameof(_vm.OverviewFilter)) RenderNavigation();
-        if (e.PropertyName == nameof(_vm.SaveStatus)) SaveStatusText.Foreground = Brush(_vm.SaveStatus.StartsWith("保存失败", StringComparison.Ordinal) ? "DangerBrush" : "TextSecondaryBrush");
+        if (e.PropertyName == nameof(_vm.SaveStatus))
+        {
+            var failed=_vm.SaveStatus.StartsWith("保存失败",StringComparison.Ordinal);SaveStatusText.Foreground=Brush(failed?"DangerBrush":"TextSecondaryBrush");
+            PlanningSaveRetry.Visibility=failed?Visibility.Visible:Visibility.Collapsed;
+        }
     }
     public void Render()
     {
@@ -166,7 +171,7 @@ public partial class PlanningCenterView : UserControl
                 case "自定义":
                 case "文档内容":
                     Heading(DocumentContent, "文档内容");
-                    if (_vm.RichTextPackage is { } preservedRtf) DocumentContent.Children.Add(new FlowDocumentScrollViewer { Document=PlanningDocumentLayout.Load(preservedRtf,_vm.RichLayout),IsToolBarVisible=false,VerticalScrollBarVisibility=ScrollBarVisibility.Disabled });
+                    if (_vm.RichTextPackage is { } preservedRtf) DocumentContent.Children.Add(new FlowDocumentScrollViewer { Document=PlanningDocumentLayout.Load(preservedRtf,_vm.RichLayout),Background=Brushes.WhiteSmoke,Foreground=Brushes.Black,Padding=new Thickness(20),IsToolBarVisible=false,VerticalScrollBarVisibility=ScrollBarVisibility.Disabled });
                     DocumentContent.Children.Add(Text("补充本次拍摄需要的内容，随策划案自动保存。", 14));
                     DocumentContent.Children.Add(Editor(nameof(_vm.DocumentCustomBody), 12));
                     DocumentContent.Children.Add(AsyncAction("保存", FlushDocumentAsync));
@@ -174,7 +179,7 @@ public partial class PlanningCenterView : UserControl
                 default: RenderImages(_vm.ContentPage, true); break;
             }
         }
-        finally { _rendering = false; UpdateResponsiveLayout(); }
+        finally { RenderR5Inspector(); _rendering = false; UpdateResponsiveLayout(); }
     }
     private void RenderNavigation()
     {
@@ -187,48 +192,9 @@ public partial class PlanningCenterView : UserControl
             if (_vm.OverviewFilter == status) { chip.Foreground = Brush("AccentBrush"); chip.Background = Brush("SurfaceSecondaryBrush"); }
             StatusChips.Children.Add(chip);
         }
-        ContentNavigation.Children.Clear();
-        for (var i = 0; i < PlanningCenterViewModel.ContentPages.Count; i++)
-        {
-            var page = PlanningCenterViewModel.ContentPages[i];
-            var button = AsyncAction(page, async () => { if (await FlushDocumentAsync() && await _vm.SelectContentSafelyAsync(page)) DocumentScroll.ScrollToTop(); });
-            AutomationProperties.SetAutomationId(button, "PlanningPage" + i);
-            button.Padding = new Thickness(5, 12, 5, 12); button.MinWidth = 0;
-            var content = new StackPanel { Orientation = Orientation.Horizontal };
-            content.Children.Add(new System.Windows.Shapes.Path { Data = (Geometry)FindResource("PixelTart.Symbol.Planning"), Width = 14, Height = 14, Stretch = Stretch.Uniform, Fill = Brushes.Transparent, Stroke = Brush(_vm.ContentPage == page ? "AccentBrush" : "TextSecondaryBrush"), StrokeThickness = 1.4, Margin = new Thickness(0, 0, 4, 0) });
-            var label = Text(page, 13); label.TextWrapping = TextWrapping.NoWrap; content.Children.Add(label);
-            button.Content = content;
-            var line = new Border { Child = button, BorderThickness = new Thickness(0, 0, 0, 2), BorderBrush = _vm.ContentPage == page ? Brush("AccentBrush") : Brushes.Transparent };
-            ContentNavigation.Children.Add(line);
-        }
+        RenderR5Navigation();
     }
-    private void UpdateResponsiveLayout()
-    {
-        if (ContentNavigationBorder is null || ActualWidth <= 0) return;
-        DocumentListColumn.Width = new GridLength(_vm?.IsPreviewMode == true || ActualWidth < 1250 ? 0 : 248);
-        SectionOutlineColumn.Width = new GridLength(_vm?.IsPreviewMode == true ? 0 : ActualWidth < 900 ? 136 : 184);
-        var width = Math.Max(0, ActualWidth - DocumentListColumn.Width.Value - SectionOutlineColumn.Width.Value);
-        ContentNavigation.Width = Math.Max(0, SectionOutlineColumn.Width.Value - 16);
-        ContentNavigation.Rows = 0; ContentNavigation.Columns = 1;
-        var compact = width < 700;
-        EditorHeader.Margin = new Thickness(compact ? 16 : 32, 18, compact ? 16 : 32, 12);
-        DocumentContent.Margin = new Thickness(compact ? 20 : 40, compact ? 20 : 28, compact ? 20 : 40, 64);
-        // Keep every module on one line, reducing spacing rather than wrapping labels.
-        foreach (Border line in ContentNavigation.Children)
-        {
-            var button = (Button)line.Child; button.Padding = new Thickness(compact ? 1 : 5, 12, compact ? 1 : 5, 12);
-            var content = (StackPanel)button.Content;
-            var icon = (System.Windows.Shapes.Path)content.Children[0]; icon.Width = icon.Height = compact ? 12 : 14;
-            icon.Margin = new Thickness(0, 0, compact ? 2 : 4, 0);
-            ((TextBlock)content.Children[1]).FontSize = compact ? 12 : 13;
-        }
-        var headerActions = (StackPanel)EditorHeader.Children[1];
-        EditorHeader.RowDefinitions.Clear(); EditorHeader.RowDefinitions.Add(new() { Height = GridLength.Auto });
-        if (width < 650) EditorHeader.RowDefinitions.Add(new() { Height = GridLength.Auto });
-        Grid.SetRow(headerActions, width < 650 ? 1 : 0); Grid.SetColumn(headerActions, width < 650 ? 0 : 1);
-        Grid.SetColumnSpan(headerActions, width < 650 ? 2 : 1);
-        headerActions.Margin = new Thickness(0, width < 650 ? 10 : 0, 0, 0);
-    }
+    private void UpdateResponsiveLayout()=>UpdateR5Layout();
     private IEnumerable<PlanningReferenceItem> ReferencesFor(string page) => _vm!.AllProjectReferences.Where(item => page switch
     { "情绪板" => item.IsMoodboard, "灯光图" => item.Category == "灯光", "服化道" => item.Category == "造型", _ => _vm.ReferenceCategory == "全部" || item.Category == _vm.ReferenceCategory });
     private MenuItem MenuEntry(string label, string icon = "IconPhotoStack")
@@ -631,12 +597,13 @@ public partial class PlanningCenterView : UserControl
     public async Task HandleWorkspaceKeyAsync(KeyEventArgs e)
     {
         if (_vm is null) return;
-        var overlay = ImagePreview.Visibility == Visibility.Visible ? ImagePreview : ModalOverlay.Visibility == Visibility.Visible ? ModalOverlay : ContextDrawer.Visibility == Visibility.Visible ? ContextDrawer : null;
+        FrameworkElement? overlay = ImagePreview.Visibility == Visibility.Visible ? ImagePreview : ModalOverlay.Visibility == Visibility.Visible ? ModalOverlay : ContextDrawer.Visibility == Visibility.Visible ? ContextDrawer : PlanningDockOverlay.Visibility==Visibility.Visible?PlanningDockOverlay:null;
         if (overlay is not null && e.Key == Key.Tab && (Keyboard.FocusedElement is not DependencyObject focused || !overlay.IsAncestorOf(focused)))
         { FocusOverlay(overlay); e.Handled = true; return; }
         if(e.Key==Key.Escape && Keyboard.FocusedElement is TextBox {Tag:"PrecisionInput"})return;
         if (e.Key == Key.Escape)
         {
+            if(PlanningDockOverlay.Visibility==Visibility.Visible && ModalOverlay.Visibility!=Visibility.Visible && ImagePreview.Visibility!=Visibility.Visible){ClosePlanningDock();e.Handled=true;return;}
             if (_shotTable?.IsKeyboardFocusWithin == true) { _shotTable.CancelEdit(DataGridEditingUnit.Cell); _shotTable.CancelEdit(DataGridEditingUnit.Row); e.Handled = true; return; }
             if (ImagePreview.Visibility == Visibility.Visible) CloseImagePreview();
             else if (ModalOverlay.Visibility == Visibility.Visible) { ModalOverlay.Visibility = Visibility.Collapsed; _vm.CancelPlanningModalCommand.Execute(null); }
@@ -649,7 +616,7 @@ public partial class PlanningCenterView : UserControl
             if (e.Key == Key.S) { e.Handled = true; await FlushDocumentAsync(); return; }
             if (ModalOverlay.Visibility == Visibility.Visible || ImagePreview.Visibility == Visibility.Visible) return;
             if (e.Key == Key.P) { e.Handled = true; if (await FlushDocumentAsync()) await _vm.PreviewDocumentCommand.ExecuteAsync(null); return; }
-            if (e.Key == Key.F) { e.Handled = true; ProjectSearchBox.Focus(); ProjectSearchBox.SelectAll(); return; }
+            if (e.Key == Key.F) { e.Handled = true; if(!DocumentListPane.IsVisible)OpenPlanningDock(DocumentListPane,false);ProjectSearchBox.Focus(); ProjectSearchBox.SelectAll(); return; }
         }
         if (e.OriginalSource is TextBoxBase || e.Key is Key.ImeProcessed or Key.DeadCharProcessed) return;
         if (e.Key == Key.Delete && _vm.SelectedDocumentReference is { } reference && _vm.ContentPage is "参考图" or "情绪板" or "灯光图" or "服化道") { e.Handled = true; await _vm.UpdateReferenceAsync(reference, "移除"); }

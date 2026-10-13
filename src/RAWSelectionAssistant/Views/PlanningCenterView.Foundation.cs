@@ -12,15 +12,18 @@ public partial class PlanningCenterView
     private void RenderSimpleOverview()
     {
         if (_vm is null) return;
-        Heading(DocumentContent, "项目概览");
-        DocumentContent.Children.Add(Text($"{_vm.DocumentTitle} · {_vm.DocumentDate} · {_vm.ProgressText}", 16));
-        foreach (var (label, property) in new[] { ("标题", nameof(_vm.DocumentTitle)), ("地点", nameof(_vm.DocumentLocation)),
-            ("人员", nameof(_vm.DocumentPeople)), ("拍摄目标", nameof(_vm.ShootGoal)), ("视觉关键词", nameof(_vm.Keywords)),
-            ("客户要求", nameof(_vm.ClientRequirements)), ("必拍内容", nameof(_vm.MustCapture)),
-            ("注意事项", nameof(_vm.PlanningNotes)), ("交付用途", nameof(_vm.OutputPurpose)) })
-        { DocumentContent.Children.Add(Text(label, 12)); DocumentContent.Children.Add(Editor(property, 2)); }
-        DocumentContent.Children.Add(AsyncAction("保存", async () => { await FlushDocumentAsync(); }));
+        var metrics=new System.Windows.Controls.Primitives.UniformGrid { Columns=4,Margin=new Thickness(0,0,0,16) };
+        foreach(var metric in new[]{("进度",_vm.ProgressText),("时长",_vm.EstimatedTimeText),("素材",_vm.CapturedAssetText),("资料",$"参考 {_vm.AllProjectReferences.Count} · 镜头 {_vm.Shots.Count}")})
+        {var content=new StackPanel();content.Children.Add(Text(metric.Item1,11));content.Children.Add(Text(metric.Item2,15,true));metrics.Children.Add(R5Card(content));}DocumentContent.Children.Add(metrics);
+        var body=new StackPanel();body.Children.Add(Text("创作策划 · "+_vm.DocumentTitle,18,true));
+        var fields=new System.Windows.Controls.Primitives.UniformGrid { Columns=2 };
+        foreach(var (label,property) in new[]{("拍摄目标",nameof(_vm.ShootGoal)),("视觉关键词",nameof(_vm.Keywords)),("客户要求",nameof(_vm.ClientRequirements)),("必拍内容",nameof(_vm.MustCapture)),("注意事项",nameof(_vm.PlanningNotes)),("交付用途",nameof(_vm.OutputPurpose))})
+        {var cell=new StackPanel{Margin=new Thickness(0,10,12,0)};cell.Children.Add(Text(label,11));var editor=Editor(property,2);editor.MinHeight=54;editor.Margin=new Thickness(0,4,0,4);cell.Children.Add(editor);fields.Children.Add(cell);}body.Children.Add(fields);DocumentContent.Children.Add(R5Card(body));
+        var summaries=new System.Windows.Controls.Primitives.UniformGrid{Columns=2};
+        var shots=new StackPanel();shots.Children.Add(Text("镜头摘要",16,true));foreach(var shot in _vm.Shots.Take(4))shots.Children.Add(Text($"{shot.Order+1:00}  {shot.Name} · {shot.Scene}",12));shots.Children.Add(AsyncAction("查看镜头清单",async()=>{if(await FlushDocumentAsync())await _vm.SelectContentSafelyAsync("镜头清单");}));summaries.Children.Add(R5Card(shots));
+        var resources=new StackPanel();resources.Children.Add(Text("服化道与灯位",16,true));resources.Children.Add(Text($"道具 {_vm.ResourceCatalog.Items.OfType<RAWSelectionAssistant.Core.Services.Projects.PlanningProp>().Count(i=>!i.Archived)} · 灯具 {_vm.ResourceCatalog.Items.OfType<RAWSelectionAssistant.Core.Services.Projects.PlanningLight>().Count(i=>!i.Archived)}",13));resources.Children.Add(AsyncAction("编辑灯位图",async()=>{if(await FlushDocumentAsync())await _vm.SelectContentSafelyAsync("灯位图");}));summaries.Children.Add(R5Card(resources));DocumentContent.Children.Add(summaries);
     }
+    private Border R5Card(UIElement child)=>new(){Child=child,Background=Brush("SurfaceSecondaryBrush"),BorderBrush=Brush("DividerBrush"),BorderThickness=new Thickness(1),CornerRadius=new CornerRadius(8),Padding=new Thickness(16),Margin=new Thickness(0,0,10,14)};
     private void RenderEditableShotTable()
     {
         if (_vm is null) return;
@@ -29,8 +32,9 @@ public partial class PlanningCenterView
         _shotTable = new DataGrid { AutoGenerateColumns = false, CanUserAddRows = false, CanUserDeleteRows = false,
             CanUserSortColumns = false, CanUserReorderColumns = false, FrozenColumnCount = 1, MinHeight = 180, MaxHeight = 560,
             ItemsSource = _vm.Shots.OrderBy(s => s.Order).Select(s => new PlanningShotEditRow(_vm.ShotDraft(s.ShotId), _vm.StageShot)).ToArray() };
+        ConfigurePlanningTable(_shotTable);
         AutomationProperties.SetName(_shotTable, "可编辑镜头清单"); AutomationProperties.SetAutomationId(_shotTable, "PlanningEditableShotTable");
-        _shotTable.SelectionChanged += (_, _) => { if (_shotTable.SelectedItem is PlanningShotEditRow row) _vm.SelectedShot = _vm.Shots.FirstOrDefault(s => s.ShotId == row.ShotId); };
+        _shotTable.SelectionChanged += (_, _) => { if (_shotTable.SelectedItem is PlanningShotEditRow row) { _inspectorCapture?.Invoke(); _vm.SelectedShot = _vm.Shots.FirstOrDefault(s => s.ShotId == row.ShotId); RenderR5Inspector(); } };
         void Column(string title, string key, bool readOnly = false, double width = 130)
         {
             _shotTable.Columns.Add(new DataGridTextColumn { Header = title, IsReadOnly = readOnly, Width = width,
@@ -65,6 +69,7 @@ public partial class PlanningCenterView
         foreach(var capture in _structureDraftCaptures.ToArray())capture();
         if (_shotTable?.CommitEdit(DataGridEditingUnit.Cell, true) == false) throw new InvalidOperationException("镜头单元格尚未提交。");
         if (_shotTable?.CommitEdit(DataGridEditingUnit.Row, true) == false) throw new InvalidOperationException("镜头行尚未提交。");
+        _inspectorCapture?.Invoke();
         foreach (var editor in DocumentContent.Children.OfType<PlanningRichEditor>()) editor.FlushPending();
     }
 }

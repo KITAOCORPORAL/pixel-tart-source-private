@@ -3,6 +3,7 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 // Proposal status is intentionally separate from booking and shot execution status.
 public sealed record PlanningDocument
 {
+    public PlanningUiLayout UiLayout { get; init; } = new();
     public PlanningPresentation Presentation { get; init; } = new();
     public PlanningResources Resources { get; init; } = new();
     public int FoundationVersion { get; init; }

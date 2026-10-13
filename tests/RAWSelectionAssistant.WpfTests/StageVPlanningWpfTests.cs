@@ -17,9 +17,10 @@ public sealed class PlanningWorkspaceLayoutTests
     public void TwoColumnDocumentWorkspaceReplacesPermanentShotInspector()
     {
         var xaml = Read("src/RAWSelectionAssistant/Views/PlanningCenterView.xaml");
-        StringAssert.Contains(xaml, "DocumentListColumn\" Width=\"280\"");
+        StringAssert.Contains(xaml, "DocumentListColumn\" Width=\"248\"");
         StringAssert.Contains(xaml, "DocumentContent"); StringAssert.Contains(xaml, "ContextDrawer");
-        Assert.DoesNotContain("InspectorColumn", xaml, StringComparison.Ordinal);
+        StringAssert.Contains(xaml, "PlanningInspectorColumn");
+        StringAssert.Contains(xaml,"PlanningDockOverlay");
         Assert.DoesNotContain("DataGrid", xaml, StringComparison.Ordinal);
         Assert.DoesNotContain("TabControl", xaml, StringComparison.Ordinal);
     }
@@ -56,7 +57,7 @@ public sealed class PlanningWorkspaceLayoutTests
         var xaml = XDocument.Parse(Read("src/RAWSelectionAssistant/Views/PlanningCenterView.xaml"));
         XNamespace ns = "http://schemas.microsoft.com/winfx/2006/xaml";
         var nav = xaml.Descendants().Single(element => element.Attribute(ns + "Name")?.Value == "ContentNavigation");
-        Assert.AreEqual("UniformGrid", nav.Name.LocalName); Assert.AreEqual("1", nav.Attribute("Columns")?.Value);
+        Assert.AreEqual("StackPanel", nav.Name.LocalName);
         var code = Read("src/RAWSelectionAssistant/Services/PlanningProposalPdf.cs");
         StringAssert.Contains(code, "int dpi = 300"); StringAssert.Contains(code, "216 or 300");
         StringAssert.Contains(code, "reference.OriginalPath");

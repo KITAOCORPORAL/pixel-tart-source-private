@@ -5,6 +5,17 @@
  Background="{DynamicResource ContentBackgroundBrush}" Focusable="True"
  PreviewKeyDown="View_PreviewKeyDown" AutomationProperties.AutomationId="PlanningWorkspace" AutomationProperties.Name="摄影策划案工作区">
  <UserControl.Resources>
+  <SolidColorBrush x:Key="ContentBackgroundBrush" Color="#161618"/>
+  <SolidColorBrush x:Key="SurfacePrimaryBrush" Color="#1C1C1F"/>
+  <SolidColorBrush x:Key="SurfaceSecondaryBrush" Color="#232327"/>
+  <SolidColorBrush x:Key="SurfaceElevatedBrush" Color="#2A2A2F"/>
+  <SolidColorBrush x:Key="DividerBrush" Color="#343438"/>
+  <SolidColorBrush x:Key="TextPrimaryBrush" Color="#E7E6E2"/>
+  <SolidColorBrush x:Key="TextSecondaryBrush" Color="#A9A9AE"/>
+  <SolidColorBrush x:Key="AccentBrush" Color="#6E9B91"/>
+  <SolidColorBrush x:Key="InputBackgroundBrush" Color="#29292D"/>
+  <SolidColorBrush x:Key="InputBorderBrush" Color="#3B3B40"/>
+
   <Style x:Key="DocumentListItem" TargetType="ListBoxItem">
    <Setter Property="HorizontalContentAlignment" Value="Stretch"/><Setter Property="Padding" Value="16,18"/><Setter Property="Margin" Value="0,2"/>
    <Setter Property="Background" Value="Transparent"/><Setter Property="BorderBrush" Value="Transparent"/>
@@ -20,7 +31,7 @@
  </UserControl.Resources>
  <Grid>
   <Grid x:Name="WorkspaceLayout">
-   <Grid.ColumnDefinitions><ColumnDefinition x:Name="DocumentListColumn" Width="280"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+   <Grid.ColumnDefinitions><ColumnDefinition x:Name="DocumentListColumn" Width="248"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
    <Border x:Name="DocumentListPane" Background="{DynamicResource SurfacePrimaryBrush}" BorderThickness="0">
     <Grid Margin="12,24,12,12"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
      <Grid Margin="6,0,6,18"><TextBlock Text="策划案" FontSize="{DynamicResource Type.Proposal.ListTitle.FontSize}" FontWeight="SemiBold"/><Button HorizontalAlignment="Right" Style="{StaticResource Av2IconButton}" Command="{Binding ShowCreatePlanningCommand}" ToolTip="新建策划" AutomationProperties.Name="新建策划"><Path Data="{StaticResource IconAdd}" Style="{StaticResource Icon20}"/></Button></Grid>
@@ -40,35 +51,48 @@
      </ListBox>
     </Grid>
    </Border>
-   <Grid Grid.Column="1">
-    <Grid.ColumnDefinitions><ColumnDefinition x:Name="SectionOutlineColumn" Width="184"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+   <GridSplitter x:Name="PlanningListSplitter" Grid.Column="0" Background="{DynamicResource DividerBrush}" Width="5" HorizontalAlignment="Right" ResizeDirection="Columns" ResizeBehavior="CurrentAndNext" DragStarted="LayoutSplitter_DragStarted" DragCompleted="LayoutSplitter_DragCompleted" PreviewKeyDown="LayoutSplitter_KeyDown" MouseDoubleClick="LayoutSplitter_Reset" Focusable="True" AutomationProperties.Name="调整策划列表宽度"/>
+   <Grid x:Name="PlanningBodyGrid" Grid.Column="1">
+    <Grid.ColumnDefinitions><ColumnDefinition x:Name="SectionOutlineColumn" Width="184"/><ColumnDefinition Width="*"/><ColumnDefinition x:Name="PlanningInspectorColumn" Width="300"/></Grid.ColumnDefinitions>
     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
-    <Grid Grid.ColumnSpan="2" x:Name="EditorHeader" Margin="32,22,32,16">
+    <Grid Grid.ColumnSpan="3" x:Name="EditorHeader" Margin="32,22,32,16">
      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
      <StackPanel Margin="0,0,20,0"><TextBlock x:Name="SaveStatusText" Text="{Binding SaveStatus}" Style="{StaticResource CaptionText}"/><TextBlock Text="{Binding DocumentTitle}" FontSize="{DynamicResource Type.Proposal.Header.FontSize}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Margin="0,7,0,0"/></StackPanel>
-     <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" IsEnabled="{Binding HasProject}">
-      <Button Content="简单版" Click="SimpleMode_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="切换简单版"/>
-      <Button Content="进阶版" Click="AdvancedMode_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="切换进阶版"/>
+     <WrapPanel Grid.Column="1" VerticalAlignment="Center" IsEnabled="{Binding HasProject}">
+      <Button x:Name="PlanningSaveRetry" Visibility="Collapsed" Content="重试保存" Click="PlanningRetry_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="重试保存并保留草稿"/>
+      <Button x:Name="PlanningSectionToggle" Content="分区" Click="SectionDrawer_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="打开分区导航"/>
+      <Button x:Name="PlanningInspectorToggle" Content="检查器" Click="InspectorDrawer_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="打开或收起检查器"/>
+      <Button x:Name="PlanningSimpleModeButton" Content="简单版" Click="SimpleMode_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="切换简单版"/>
+      <Button x:Name="PlanningAdvancedModeButton" Content="进阶版" Click="AdvancedMode_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="切换进阶版"/>
       <Button Content="策划案" Click="PlanningPicker_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="切换策划案"/>
       <Button Content="关联档期" Command="{Binding ShowBookingCommand}" Style="{StaticResource GhostButton}" AutomationProperties.Name="关联档期"/>
       <Button Content="预览" Command="{Binding PreviewDocumentCommand}" Style="{StaticResource SecondaryButton}" Margin="10,0" AutomationProperties.Name="预览策划案"/>
       <Button Content="导出" Click="Export_Click" Style="{StaticResource PrimaryButton}" AutomationProperties.Name="导出策划案 PDF"/>
       <Button Click="More_Click" Style="{StaticResource Av2IconButton}" Margin="8,0,0,0" ToolTip="更多：开始拍摄、工作日历" AutomationProperties.Name="更多策划操作"><Path Data="{StaticResource IconMore}" Style="{StaticResource Icon20}"/></Button>
-     </StackPanel>
+     </WrapPanel>
     </Grid>
     <Border x:Name="ContentNavigationBorder" Grid.Row="1" Grid.RowSpan="2" BorderThickness="0">
-     <UniformGrid x:Name="ContentNavigation" Columns="1" Margin="8,0" VerticalAlignment="Top" AutomationProperties.Name="策划内容导航"/>
+     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"><StackPanel x:Name="ContentNavigation" Margin="8,12" AutomationProperties.Name="策划内容导航"/></ScrollViewer>
     </Border>
+    <Border x:Name="PlanningInspectorPane" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="{DynamicResource SurfacePrimaryBrush}" Padding="14,12">
+     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"><StackPanel x:Name="PlanningInspectorContent"/></ScrollViewer>
+    </Border>
+    <GridSplitter x:Name="PlanningInspectorSplitter" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="{DynamicResource DividerBrush}" Width="5" HorizontalAlignment="Left" ResizeDirection="Columns" ResizeBehavior="PreviousAndCurrent" DragStarted="LayoutSplitter_DragStarted" DragCompleted="LayoutSplitter_DragCompleted" PreviewKeyDown="LayoutSplitter_KeyDown" MouseDoubleClick="LayoutSplitter_Reset" Focusable="True" AutomationProperties.Name="调整检查器宽度"/>
     <ScrollViewer x:Name="DocumentScroll" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
      <local:PlanningAutomationScope x:Name="DocumentContent" Margin="40,36,40,64" MaxWidth="1320" HorizontalAlignment="Stretch"/>
     </ScrollViewer>
    </Grid>
   </Grid>
+  <Grid x:Name="PlanningDockOverlay" Visibility="Collapsed" Background="{DynamicResource OverlayBrush}" KeyboardNavigation.TabNavigation="Cycle">
+   <Border x:Name="PlanningDockPanel" HorizontalAlignment="Left" Background="{DynamicResource SurfacePrimaryBrush}" Width="300">
+    <DockPanel><Button x:Name="PlanningDockClose" DockPanel.Dock="Top" Content="关闭面板" Click="ClosePlanningDock_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="关闭面板并返回"/><ContentControl x:Name="PlanningDockContent"/></DockPanel>
+   </Border>
+  </Grid>
   <Border x:Name="ContextDrawer" Width="360" MaxWidth="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=UserControl}}" HorizontalAlignment="Right" Background="{DynamicResource SurfaceElevatedBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="1" CornerRadius="{StaticResource LargePanelCornerRadius}" Padding="24" KeyboardNavigation.TabNavigation="Cycle" Visibility="Collapsed">
    <ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel x:Name="DrawerContent"/></ScrollViewer>
   </Border>
   <Border x:Name="ModalOverlay" Background="{DynamicResource OverlayBrush}" Visibility="Collapsed">
-   <Border Width="500" Padding="28" Margin="16" MaxHeight="780" VerticalAlignment="Center" Background="{DynamicResource SurfaceElevatedBrush}" CornerRadius="{StaticResource DialogCornerRadius}" Effect="{StaticResource Elevation.Dialog}" KeyboardNavigation.TabNavigation="Cycle">
+   <Border x:Name="PlanningModalCard" Width="500" Padding="28" Margin="16" MaxHeight="780" VerticalAlignment="Center" Background="{DynamicResource SurfaceElevatedBrush}" CornerRadius="{StaticResource DialogCornerRadius}" Effect="{StaticResource Elevation.Dialog}" KeyboardNavigation.TabNavigation="Cycle">
     <ScrollViewer VerticalScrollBarVisibility="Auto"><local:PlanningAutomationScope x:Name="ModalContent"/></ScrollViewer>
    </Border>
   </Border>

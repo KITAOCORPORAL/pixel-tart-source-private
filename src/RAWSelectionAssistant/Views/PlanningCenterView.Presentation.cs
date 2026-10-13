@@ -10,7 +10,7 @@ public partial class PlanningCenterView
     private void RenderAdvancedPlanning()
     {
         if(_vm is null)return;
-        Heading(DocumentContent,"进阶版 · 摄影提案");
+        var heading=Text("摄影提案 · 文档工作区",16,true);heading.Margin=new Thickness(0,0,0,6);DocumentContent.Children.Add(heading);
         var ribbon=new WrapPanel();
         ribbon.Children.Add(AsyncAction("保存",async()=>{await FlushDocumentAsync();}));
         ribbon.Children.Add(AsyncAction("撤销策划操作",async()=>{if(await _vm.UndoPlanningAsync())Render();}));
@@ -18,9 +18,10 @@ public partial class PlanningCenterView
         ribbon.Children.Add(AsyncAction("导出摄影DOCX",ExportPlanningDocxFromViewAsync));
         ribbon.Children.Add(AsyncAction("导回摄影DOCX",ImportPlanningDocxFromViewAsync));
         DocumentContent.Children.Add(ribbon);
-        DocumentContent.Children.Add(Text("正文排版与摄影结构使用同一策划身份。结构块按ID引用；移除块不删除镜头或资源。",12));
+        ribbon.ToolTip="正文与结构引用共用同一策划；移除块不删除源镜头。";
         var owner=_vm;var project=owner.ProjectId;var document=owner.PlanningDocumentId;var renderRevision=_documentRenderRevision;
         var editor=new PlanningRichEditor(owner.RichTextPackage,owner.DocumentBody,(rtf,text,layout)=>{if(renderRevision==_documentRenderRevision&&owner.ProjectId==project&&owner.PlanningDocumentId==document)owner.SaveRichText(rtf,text,layout);},owner.DocumentCanvasRevisions,owner.RichLayout);
+        editor.ApplyPlanningPaperAppearance();
         DocumentContent.Children.Add(editor);
         foreach(var block in owner.StructureBlocks.ToArray())
         {

@@ -184,7 +184,7 @@ public sealed class PlanningFoundationWpfTests
         view.Measure(new Size(1100,720));view.Arrange(new Rect(0,0,1100,720));view.UpdateLayout();
         Assert.IsTrue(await f.Vm.SwitchPlanningModeAsync(false));view.DataContext=null;
     });
-    private sealed class Fixture : IDisposable
+    internal sealed class Fixture : IDisposable
     {
         public string Root=Path.Combine(Path.GetTempPath(),"kitao-planning-foundation-"+Guid.NewGuid().ToString("N"));
         public Guid Id=Guid.NewGuid();public string ShotDirectory=>Path.Combine(Root,"shots");
@@ -201,7 +201,7 @@ public sealed class PlanningFoundationWpfTests
         public PlanningCenterViewModel NewVm()=>new(Projects,Bookings,Dialogs,Shots,Planning,new ProjectVisualReferenceStore(Path.Combine(Root,"visuals")),new ReferenceLookStore(Path.Combine(Root,"looks")),new CanvasDocumentStore(Path.Combine(Root,"canvas")));
         public void Dispose(){SqliteConnection.ClearAllPools();try{Directory.Delete(Root,true);}catch(IOException){}}
     }
-    private sealed class Dialogs:IDialogService
+    internal sealed class Dialogs:IDialogService
     {
         public bool Accept=true;
         public IReadOnlyList<string> ChooseFiles(string title,string filter,bool multiselect)=>[];
