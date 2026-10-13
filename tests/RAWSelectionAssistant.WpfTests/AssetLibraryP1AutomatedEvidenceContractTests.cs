@@ -537,8 +537,7 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             start.ArgumentList.Add("--is-ancestor");
             start.ArgumentList.Add(head);
             start.ArgumentList.Add($"refs/heads/{branch}");
-            using var process = Process.Start(start) ?? throw new InvalidOperationException("git merge-base could not start.");
-            process.WaitForExit();
+            var process = BoundedTestProcess.Run(start);
             if (process.ExitCode != 0)
                 throw new InvalidOperationException($"Fixture HEAD '{head}' is not an ancestor of '{branch}'.");
             return branch;
@@ -1326,25 +1325,18 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
             start.ArgumentList.Add("cat-file");
             start.ArgumentList.Add("blob");
             start.ArgumentList.Add(objectName);
-            using var process = Process.Start(start) ?? throw new InvalidOperationException("git cat-file could not start.");
-            using var memory = new MemoryStream();
-            process.StandardOutput.BaseStream.CopyTo(memory);
-            var error = process.StandardError.ReadToEnd();
-            process.WaitForExit();
-            if (process.ExitCode != 0) throw new InvalidOperationException(error);
-            return memory.ToArray();
+            var process = BoundedTestProcess.Run(start);
+            if (process.ExitCode != 0) throw new InvalidOperationException(process.Stderr);
+            return process.Stdout;
         }
 
         private static string GitText(string repositoryRoot, params string[] arguments)
         {
             var start = new ProcessStartInfo("git") { WorkingDirectory = repositoryRoot, UseShellExecute = false, RedirectStandardOutput = true, RedirectStandardError = true, CreateNoWindow = true };
             foreach (var argument in arguments) start.ArgumentList.Add(argument);
-            using var process = Process.Start(start) ?? throw new InvalidOperationException("git could not start.");
-            var output = process.StandardOutput.ReadToEnd();
-            var error = process.StandardError.ReadToEnd();
-            process.WaitForExit();
-            if (process.ExitCode != 0) throw new InvalidOperationException(error);
-            return output.Trim();
+            var process = BoundedTestProcess.Run(start);
+            if (process.ExitCode != 0) throw new InvalidOperationException(process.Stderr);
+            return process.Output.Trim();
         }
     }
 
@@ -1363,23 +1355,15 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
     {
         var start = new ProcessStartInfo("powershell.exe") { UseShellExecute = false, RedirectStandardOutput = true, RedirectStandardError = true, CreateNoWindow = true };
         foreach (var argument in new[] { "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", Path.Combine(Root(), "tools", "AssetLibraryP1AutomatedAcceptance", "Test-P1AssetLibraryAutomatedEvidence.ps1"), "-RunRoot", runRoot }) start.ArgumentList.Add(argument);
-        using var process = Process.Start(start) ?? throw new InvalidOperationException("PowerShell could not start.");
-        var stdout = process.StandardOutput.ReadToEndAsync();
-        var stderr = process.StandardError.ReadToEndAsync();
-        Assert.IsTrue(process.WaitForExit(60_000), "Validator timed out.");
-        Task.WaitAll(stdout, stderr);
-        return (process.ExitCode, stdout.Result + Environment.NewLine + stderr.Result);
+        var process = BoundedTestProcess.Run(start);
+        return (process.ExitCode, process.Output + Environment.NewLine + process.Stderr);
     }
 
     private static (int ExitCode, string Output) RunValidateExistingWrapper(string runRoot)
     {
         var start = new ProcessStartInfo("powershell.exe") { UseShellExecute = false, RedirectStandardOutput = true, RedirectStandardError = true, CreateNoWindow = true };
         foreach (var argument in new[] { "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", Path.Combine(Root(), "tools", "AssetLibraryP1AutomatedAcceptance", "Invoke-P1AssetLibraryAutomatedAcceptance.ps1"), "-Mode", "ValidateExistingRun", "-RunRoot", runRoot }) start.ArgumentList.Add(argument);
-        using var process = Process.Start(start) ?? throw new InvalidOperationException("PowerShell could not start.");
-        var stdout = process.StandardOutput.ReadToEndAsync();
-        var stderr = process.StandardError.ReadToEndAsync();
-        Assert.IsTrue(process.WaitForExit(60_000), "ValidateExistingRun timed out.");
-        Task.WaitAll(stdout, stderr);
-        return (process.ExitCode, stdout.Result + Environment.NewLine + stderr.Result);
+        var process = BoundedTestProcess.Run(start);
+        return (process.ExitCode, process.Output + Environment.NewLine + process.Stderr);
     }
 }
