@@ -1,0 +1,406 @@
+{
+  "capturedUtc": "2026-10-13T05:29:14.6470767+00:00",
+  "pid": 28008,
+  "name": "testhost",
+  "rows": [
+    {
+      "thread": 27092,
+      "threadHex": "0x69D4",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 27092,
+          "waitTime": 21672655,
+          "contextSwitches": 30
+        }
+      ]
+    },
+    {
+      "thread": 29260,
+      "threadHex": "0x724C",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 29260,
+          "waitTime": 21672667,
+          "contextSwitches": 103
+        }
+      ]
+    },
+    {
+      "thread": 32800,
+      "threadHex": "0x8020",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 32800,
+          "waitTime": 21666704,
+          "contextSwitches": 2
+        }
+      ]
+    },
+    {
+      "thread": 32008,
+      "threadHex": "0x7D08",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 32008,
+          "waitTime": 21676381,
+          "contextSwitches": 624
+        }
+      ]
+    },
+    {
+      "thread": 34592,
+      "threadHex": "0x8720",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 34592,
+          "waitTime": 21666736,
+          "contextSwitches": 179
+        }
+      ]
+    },
+    {
+      "thread": 34008,
+      "threadHex": "0x84D8",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 34008,
+          "waitTime": 21666708,
+          "contextSwitches": 2
+        }
+      ]
+    },
+    {
+      "thread": 36584,
+      "threadHex": "0x8EE8",
+      "state": "Wait",
+      "waitReason": "EventPairLow",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 2,
+          "pid": 28008,
+          "tid": 36584,
+          "waitTime": 21666764,
+          "contextSwitches": 5
+        }
+      ]
+    },
+    {
+      "thread": 30524,
+      "threadHex": "0x773C",
+      "state": "Wait",
+      "waitReason": "EventPairLow",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 2,
+          "pid": 28008,
+          "tid": 30524,
+          "waitTime": 21676402,
+          "contextSwitches": 478
+        }
+      ]
+    },
+    {
+      "thread": 8868,
+      "threadHex": "0x22A4",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 8868,
+          "waitTime": 21676414,
+          "contextSwitches": 2461
+        }
+      ]
+    },
+    {
+      "thread": 30260,
+      "threadHex": "0x7634",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 30260,
+          "waitTime": 21676399,
+          "contextSwitches": 172
+        }
+      ]
+    },
+    {
+      "thread": 34728,
+      "threadHex": "0x87A8",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 34728,
+          "waitTime": 21676336,
+          "contextSwitches": 21713
+        }
+      ]
+    },
+    {
+      "thread": 36240,
+      "threadHex": "0x8D90",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 36240,
+          "waitTime": 21666709,
+          "contextSwitches": 3
+        }
+      ]
+    },
+    {
+      "thread": 36472,
+      "threadHex": "0x8E78",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 36472,
+          "waitTime": 21676402,
+          "contextSwitches": 405
+        }
+      ]
+    },
+    {
+      "thread": 37132,
+      "threadHex": "0x910C",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 37132,
+          "waitTime": 21674863,
+          "contextSwitches": 8
+        }
+      ]
+    },
+    {
+      "thread": 36700,
+      "threadHex": "0x8F5C",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 36700,
+          "waitTime": 21676335,
+          "contextSwitches": 1092
+        }
+      ]
+    },
+    {
+      "thread": 37024,
+      "threadHex": "0x90A0",
+      "state": "Wait",
+      "waitReason": "EventPairLow",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 2,
+          "pid": 28008,
+          "tid": 37024,
+          "waitTime": 21666755,
+          "contextSwitches": 2
+        }
+      ]
+    },
+    {
+      "thread": 35096,
+      "threadHex": "0x8918",
+      "state": "Wait",
+      "waitReason": "EventPairLow",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 2,
+          "pid": 28008,
+          "tid": 35096,
+          "waitTime": 21676402,
+          "contextSwitches": 314
+        }
+      ]
+    },
+    {
+      "thread": 37552,
+      "threadHex": "0x92B0",
+      "state": "Wait",
+      "waitReason": "Executive",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 37552,
+          "waitTime": 21676336,
+          "contextSwitches": 280
+        }
+      ]
+    },
+    {
+      "thread": 20520,
+      "threadHex": "0x5028",
+      "state": "Wait",
+      "waitReason": "EventPairLow",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 2,
+          "pid": 28008,
+          "tid": 20520,
+          "waitTime": 21675360,
+          "contextSwitches": 287
+        }
+      ]
+    },
+    {
+      "thread": 31964,
+      "threadHex": "0x7CDC",
+      "state": "Wait",
+      "waitReason": "Executive",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 31964,
+          "waitTime": 21676336,
+          "contextSwitches": 65
+        }
+      ]
+    },
+    {
+      "thread": 12756,
+      "threadHex": "0x31D4",
+      "state": "Wait",
+      "waitReason": "UserRequest",
+      "wctSucceeded": true,
+      "error": 0,
+      "cycle": false,
+      "nodes": [
+        {
+          "type": 8,
+          "status": 3,
+          "pid": 28008,
+          "tid": 12756,
+          "waitTime": 21676331,
+          "contextSwitches": 14
+        }
+      ]
+    }
+  ]
+}

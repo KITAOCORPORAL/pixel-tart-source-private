@@ -1,0 +1,14 @@
+[
+  {
+    "ProcessId": 23140,
+    "ParentProcessId": 28008,
+    "Name": "conhost.exe",
+    "CommandLine": "\\??\\C:\\windows\\system32\\conhost.exe 0x4"
+  },
+  {
+    "ProcessId": 28224,
+    "ParentProcessId": 28008,
+    "Name": "powershell.exe",
+    "CommandLine": "\"powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"D:\\AI AGENT\\pixel-tart-batch12-closure-20261013\\tools\\AssetLibraryP1AutomatedAcceptance\\Test-P1AssetLibraryAutomatedEvidence.ps1\" -RunRoot \"D:\\AI AGENT\\pixel-tart-batch12-closure-20261013\\.validation\\PixelTart-P1-Automated-Contract-06eb1fc47a2541aaaea242623ecb4f54\""
+  }
+]

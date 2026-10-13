@@ -1,0 +1,28 @@
+{
+  "status": "PARTIAL: automated full-suite complete; native acceptance blocked by desktop/input interference",
+  "releaseIdentity": "Original batch12 sealed290file release, source0fec3c60bde763b3ea2df40c1f2cfc9a3f41032f",
+  "pid": 16612,
+  "scenarios": {
+    "startup": "PASS (identity+real window+STARTUP_OK)",
+    "ColorStudioNavigation": "PASS (real control/page and startup log)",
+    "openPhoto": "BLOCKED: actual picker open and path entered, image loading not observed",
+    "switchPhoto": "NOT_RUN",
+    "cancelActiveTask": "NOT_RUN; cancelling picker is not task cancellation",
+    "saveReopen": "NOT_RUN",
+    "errorPrompt": "NOT_RUN",
+    "physicalDpi": "PARTIAL: actual HWND query144dpi, awareness2; no scale transitions or hit-testing proof"
+  },
+  "toolFailures": [
+    "Sky FrameArrived/window capture timed out",
+    "Sky element click geometry unavailable",
+    "OpenComputerUse multiple timeout/no-op or unexpected foreground focus",
+    "User physical Escape on preceding turn; resumed with direct authorization",
+    "Other desktop windows overlap target; no unrelated application operated or private screenshots retained"
+  ],
+  "nextAction": "Await user confirmation of exclusive desktop time before further input",
+  "sourceInvariant": "No src changes, no Grok UI or PV4/PV5/PV6 change",
+  "deferred": [
+    "Sony decoder",
+    "physical Polaroid calibration"
+  ]
+}
