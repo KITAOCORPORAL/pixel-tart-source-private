@@ -28,21 +28,28 @@ public sealed partial class PlanningCenterViewModel
     }
     public Task<bool> ArchiveResourceAsync(Guid id, bool archived) => SaveResourceAsync(ResourceCatalog.Items.First(i => i.Id == id) with { Archived = archived });
     public Task<bool> CopyResourceAsync(Guid id) => SaveResourceAsync(ResourceCatalog.Items.First(i => i.Id == id) with { Id = Guid.NewGuid(), Name = ResourceCatalog.Items.First(i => i.Id == id).Name + " 副本", Archived = false });
+    private async Task<bool> FlushProgrammaticPlanningAsync()
+    {
+        var capture=CapturePendingEditorDraft;CapturePendingEditorDraft=null;
+        try{return await FlushAsync();}finally{CapturePendingEditorDraft=capture;}
+    }
     public async Task<bool> UndoPlanningAsync()
     {
         if (_planningUndo.Count == 0 || _planningUndo.Peek().Project != ProjectId || !await FlushAsync()) return false;
         var snapshot = _planningUndo.Pop(); UpdateDocument(snapshot.Document);
         foreach (var shot in snapshot.Shots) StageShot(shot);
-        var saved = await FlushAsync(); if(saved) PresentationChanged(); return saved;
+        var saved = await FlushProgrammaticPlanningAsync(); if(saved) PresentationChanged(); return saved;
     }
     public async Task<bool> ImportPlanningGearAsync(IEnumerable<PlanningGearItem> source)
     {
         if (!await FlushAsync()) return false;
         var next = ResourceCatalog.ImportGear(source); CapturePlanningUndo(); UpdateDocument(_document with { Resources = next }); return await FlushAsync();
     }
+    private Guid? _planningExpenseProject;
     public async Task RefreshPlanningExpensesAsync()
     {
         if (ProjectId is not Guid id || ReadPlanningExpenses is null) { ResourceStatus = "收支只读来源未连接"; return; }
+        if(_planningExpenseProject!=id){PlanningExpenses=[];_planningExpenseProject=id;}
         try
         {
             var values = await ReadPlanningExpenses(id);

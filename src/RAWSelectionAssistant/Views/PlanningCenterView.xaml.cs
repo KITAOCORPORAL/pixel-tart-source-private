@@ -26,6 +26,7 @@ public partial class PlanningCenterView : UserControl
 {
     private PlanningCenterViewModel? _vm;
     private bool _rendering;
+    private long _documentRenderRevision;
     private bool _switchingDocument;
     private readonly List<TextBlock> _referenceCaptions = [];
     private PlanningReferenceTile? _previewReturnTarget;
@@ -114,6 +115,7 @@ public partial class PlanningCenterView : UserControl
     {
         if (_vm is null || _rendering) return;
         _rendering = true;
+        _documentRenderRevision++;
         try
         {
             var preview = _vm.IsPreviewMode;
@@ -126,7 +128,7 @@ public partial class PlanningCenterView : UserControl
             DocumentListColumn.Width = new GridLength(preview || ActualWidth < 1250 ? 0 : 248);
             DocumentListPane.Visibility = EditorHeader.Visibility = ContentNavigationBorder.Visibility = preview ? Visibility.Collapsed : Visibility.Visible;
             ContextDrawer.Visibility = Visibility.Collapsed;
-            RenderNavigation(); _shotTable = null; DocumentContent.Children.Clear(); _referenceCaptions.Clear();
+            RenderNavigation(); _structureDraftCaptures.Clear(); _shotTable = null; DocumentContent.Children.Clear(); _referenceCaptions.Clear();
             DocumentList.SelectedItem = _vm.PlanningProjects.FirstOrDefault(item => item.ProjectId == _vm.ProjectId);
             DocumentContent.MaxWidth = _vm.ContentPage == "文字" || preview ? 940 : 1320;
             if (!_vm.HasProject || _vm.IsOverview)
@@ -255,9 +257,9 @@ public partial class PlanningCenterView : UserControl
             status.SetBinding(Selector.SelectedItemProperty, new Binding(nameof(_vm.ProposalStatus))); AutomationProperties.SetName(status, "策划案状态"); DocumentContent.Children.Add(status);
             Heading(DocumentContent, "核心概念");
             DocumentContent.Children.Add(Text("正文随项目自动保存；工具栏写入兼容的结构标记，预览和 PDF 使用同一内容。", 12));
-            var owner = _vm; var projectId = owner.ProjectId; var documentId = owner.PlanningDocumentId;
+            var owner = _vm; var projectId = owner.ProjectId; var documentId = owner.PlanningDocumentId; var renderRevision=_documentRenderRevision;
             DocumentContent.Children.Add(new PlanningRichEditor(_vm.RichTextPackage,_vm.DocumentBody,
-                (rtf, text, layout) => { if (owner.ProjectId == projectId && owner.PlanningDocumentId == documentId) owner.SaveRichText(rtf, text, layout); },
+                (rtf, text, layout) => { if (renderRevision==_documentRenderRevision && owner.ProjectId == projectId && owner.PlanningDocumentId == documentId) owner.SaveRichText(rtf, text, layout); },
                 _vm.DocumentCanvasRevisions,_vm.RichLayout));
         }
         else

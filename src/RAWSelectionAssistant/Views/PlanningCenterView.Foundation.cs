@@ -62,6 +62,7 @@ public partial class PlanningCenterView
     }
     private void FlushSimpleEditors()
     {
+        foreach(var capture in _structureDraftCaptures.ToArray())capture();
         if (_shotTable?.CommitEdit(DataGridEditingUnit.Cell, true) == false) throw new InvalidOperationException("镜头单元格尚未提交。");
         if (_shotTable?.CommitEdit(DataGridEditingUnit.Row, true) == false) throw new InvalidOperationException("镜头行尚未提交。");
         foreach (var editor in DocumentContent.Children.OfType<PlanningRichEditor>()) editor.FlushPending();

@@ -132,6 +132,58 @@ public sealed class PlanningFoundationWpfTests
         f.Vm.StageShot(f.Vm.ShotDraft(id) with{Name=""});Assert.IsFalse(await f.Vm.SwitchPlanningModeAsync(false));Assert.IsTrue(f.Vm.IsAdvancedPlanning);
         f.Vm.StageShot(f.Vm.ShotDraft(id) with{Name="修复"});Assert.IsTrue(await f.Vm.FlushAsync());
     });
+    [TestMethod]
+    public Task DocxConfirmDiffRecoveryUndoAndRepeatedImportAreReal() => RunSta(async()=>
+    {
+        using var f=await Fixture.Create();await f.Vm.LoadAsync(f.Id);await f.Vm.NewShotCommand.ExecuteAsync(null);f.Vm.DocumentBody="导出正文";Assert.IsTrue(await f.Vm.FlushAsync());
+        var path=Path.Combine(f.Root,"proposal.docx");Assert.IsTrue(await f.Vm.ExportPlanningDocxAsync(path));
+        using(var package=DocumentFormat.OpenXml.Packaging.WordprocessingDocument.Open(path,true))
+        {
+            var table=package.MainDocumentPart!.Document.Body!.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>().Last();
+            var cell=table.Elements<DocumentFormat.OpenXml.Wordprocessing.TableRow>().Skip(1).First().Elements<DocumentFormat.OpenXml.Wordprocessing.TableCell>().Skip(1).First();
+            cell.Descendants<DocumentFormat.OpenXml.Wordprocessing.Text>().First().Text="DOCX修改镜头";package.MainDocumentPart.Document.Save();
+        }
+        var review=f.Vm.PreviewPlanningDocxImport(path);Assert.HasCount(1,review.Differences);var id=review.Differences[0].ShotId;
+        Assert.IsFalse(await f.Vm.ApplyPlanningDocxImportAsync(review,[id],false));Assert.AreEqual("未命名拍摄",f.Vm.Shots[0].Name);
+        Assert.IsTrue(await f.Vm.ApplyPlanningDocxImportAsync(review,[id],true));Assert.AreEqual("DOCX修改镜头",f.Vm.Shots[0].Name);
+        Assert.HasCount(1,Directory.GetFiles(Path.Combine(f.Root,"planning"),"*.docx-recovery-*.json"));
+        var again=f.Vm.PreviewPlanningDocxImport(path);Assert.IsEmpty(again.Differences);Assert.HasCount(1,f.Vm.Shots);
+        Assert.IsTrue(await f.Vm.UndoPlanningAsync());Assert.AreEqual("未命名拍摄",f.Vm.Shots[0].Name);
+        var stale=f.Vm.PreviewPlanningDocxImport(path);f.Vm.DocumentCustomBody="新编辑";
+        await Assert.ThrowsAsync<InvalidOperationException>(()=>f.Vm.ApplyPlanningDocxImportAsync(stale,[id],true));Assert.IsTrue(await f.Vm.FlushAsync());
+    });
+    [TestMethod]
+    public Task NestedListDocxUsesRealLevelsAndPreservesHierarchy() => RunSta(async()=>
+    {
+        var document=new System.Windows.Documents.FlowDocument();var list=new System.Windows.Documents.List{MarkerStyle=TextMarkerStyle.Decimal};
+        var item=new System.Windows.Documents.ListItem(new System.Windows.Documents.Paragraph(new System.Windows.Documents.Run("一级")));
+        item.Blocks.Add(new System.Windows.Documents.List(new System.Windows.Documents.ListItem(new System.Windows.Documents.Paragraph(new System.Windows.Documents.Run("二级")))){MarkerStyle=TextMarkerStyle.Disc});
+        list.ListItems.Add(item);list.ListItems.Add(new System.Windows.Documents.ListItem(new System.Windows.Documents.Paragraph(new System.Windows.Documents.Run("另一个一级"))));document.Blocks.Add(list);
+        var path=Path.Combine(Path.GetTempPath(),Guid.NewGuid()+".docx");
+        try
+        {
+            PlanningDocxAdapter.Export(document,path);
+            using(var package=DocumentFormat.OpenXml.Packaging.WordprocessingDocument.Open(path,false))Assert.IsEmpty(new DocumentFormat.OpenXml.Validation.OpenXmlValidator().Validate(package).ToArray());
+            var imported=PlanningDocxAdapter.Import(path);var restored=imported.Document.Blocks.OfType<System.Windows.Documents.List>().Single();
+            Assert.HasCount(2,restored.ListItems);Assert.HasCount(1,restored.ListItems.FirstListItem.Blocks.OfType<System.Windows.Documents.List>());
+            Assert.AreEqual(TextMarkerStyle.Decimal,restored.MarkerStyle);
+        }finally{File.Delete(path);}await Task.CompletedTask;
+    });
+    [TestMethod]
+    public Task AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop() => RunSta(async()=>
+    {
+        using var f=await Fixture.Create();await f.Vm.LoadAsync(f.Id);EnsureTestApplication();
+        var view=new PlanningCenterView{DataContext=f.Vm};
+        foreach(var page in PlanningCenterViewModel.ContentPages)
+        {
+            Assert.IsTrue(await f.Vm.SelectContentSafelyAsync(page));view.Render();
+            view.Measure(new Size(860,720));view.Arrange(new Rect(0,0,860,720));view.UpdateLayout();
+            Assert.IsTrue(((StackPanel)view.FindName("DocumentContent")).Children.Count>0,page);
+        }
+        Assert.IsTrue(await f.Vm.SwitchPlanningModeAsync(true));view.Render();
+        view.Measure(new Size(1100,720));view.Arrange(new Rect(0,0,1100,720));view.UpdateLayout();
+        Assert.IsTrue(await f.Vm.SwitchPlanningModeAsync(false));view.DataContext=null;
+    });
     private sealed class Fixture : IDisposable
     {
         public string Root=Path.Combine(Path.GetTempPath(),"kitao-planning-foundation-"+Guid.NewGuid().ToString("N"));

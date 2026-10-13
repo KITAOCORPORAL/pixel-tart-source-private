@@ -47,7 +47,7 @@ public partial class PlanningCenterView
         {
             DocumentContent.Children.Add(AsyncAction("读取项目实际支出（只读）", async () => { await _vm.RefreshPlanningExpensesAsync(); Render(); }));
             DocumentContent.Children.Add(Text(_vm.ResourceStatus,12));
-            foreach(var expense in _vm.PlanningExpenses) DocumentContent.Children.Add(Text($"{expense.OccurredOn} · {expense.Note} · {expense.AmountMinor / (decimal)Math.Pow(10,expense.CurrencyScale)} {expense.CurrencyCode} · {expense.PaymentStatus}",12));
+            foreach(var expense in _vm.PlanningExpenses.Where(e=>e.ProjectId==_vm.ProjectId)) DocumentContent.Children.Add(Text($"{expense.OccurredOn} · {expense.Note} · {expense.AmountMinor / (decimal)Math.Pow(10,expense.CurrencyScale)} {expense.CurrencyCode} · {expense.PaymentStatus}",12));
         }
         if (page == "灯位图")
         {
@@ -82,7 +82,7 @@ public partial class PlanningCenterView
         if(_vm is null)return;
         ModalContent.Children.Clear();Heading(ModalContent,"编辑："+value.Name);
         var fields=new Dictionary<PropertyInfo,TextBox>(); var form=new StackPanel();
-        foreach(var property in value.GetType().GetProperties().Where(p=>ResourceLabels.ContainsKey(p.Name)))
+        foreach(var property in value.GetType().GetProperties().Where(p=>ResourceLabels.ContainsKey(p.Name) && p.Name != "ShotIds"))
         {
             form.Children.Add(Text(ResourceLabels[property.Name],12));var raw=property.GetValue(value);
             var box=new TextBox { Text=raw is Guid[] ids?string.Join(",",ids):Convert.ToString(raw,CultureInfo.InvariantCulture)??"",Margin=new Thickness(0,3,0,8),IsReadOnly=property.Name=="DataStatus" };
@@ -105,6 +105,7 @@ public partial class PlanningCenterView
                     object parsed=property.PropertyType==typeof(Guid[])?related.SelectedItems.Cast<ProjectShot>().Select(s=>s.ShotId).ToArray():property.PropertyType==typeof(DateOnly)?DateOnly.Parse(box.Text,CultureInfo.InvariantCulture):Convert.ChangeType(box.Text,property.PropertyType,CultureInfo.InvariantCulture);
                     property.SetValue(copy,parsed);
                 }
+                copy=copy with{ShotIds=related.SelectedItems.Cast<ProjectShot>().Select(s=>s.ShotId).ToArray()};
                 if(copy is PlanningLight light)copy=light with{CanvasRevisionId=(snapshot.SelectedItem as PlanningCanvasRevision)?.RevisionId};
                 if(await _vm.SaveResourceAsync(copy)){ModalOverlay.Visibility=Visibility.Collapsed;Render();}else status.Text=_vm.ResourceStatus+" "+_vm.SaveStatus;
             }catch(Exception e) when(e is FormatException or OverflowException or ArgumentException){status.Text="输入无效："+e.Message;}
