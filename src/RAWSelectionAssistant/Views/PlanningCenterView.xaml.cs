@@ -150,6 +150,7 @@ public partial class PlanningCenterView : UserControl
                 }
                 return;
             }
+            if (_vm.IsAdvancedPlanning && !preview) { RenderAdvancedPlanning(); return; }
             if (ResourcePages.ContainsKey(_vm.ContentPage)) { RenderResources(_vm.ContentPage); return; }
             switch (_vm.ContentPage)
             {
@@ -163,6 +164,7 @@ public partial class PlanningCenterView : UserControl
                 case "自定义":
                 case "文档内容":
                     Heading(DocumentContent, "文档内容");
+                    if (_vm.RichTextPackage is { } preservedRtf) DocumentContent.Children.Add(new FlowDocumentScrollViewer { Document=PlanningDocumentLayout.Load(preservedRtf,_vm.RichLayout),IsToolBarVisible=false,VerticalScrollBarVisibility=ScrollBarVisibility.Disabled });
                     DocumentContent.Children.Add(Text("补充本次拍摄需要的内容，随策划案自动保存。", 14));
                     DocumentContent.Children.Add(Editor(nameof(_vm.DocumentCustomBody), 12));
                     DocumentContent.Children.Add(AsyncAction("保存", FlushDocumentAsync));

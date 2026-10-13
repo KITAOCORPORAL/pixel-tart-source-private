@@ -47,6 +47,8 @@
      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
      <StackPanel Margin="0,0,20,0"><TextBlock x:Name="SaveStatusText" Text="{Binding SaveStatus}" Style="{StaticResource CaptionText}"/><TextBlock Text="{Binding DocumentTitle}" FontSize="{DynamicResource Type.Proposal.Header.FontSize}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Margin="0,7,0,0"/></StackPanel>
      <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" IsEnabled="{Binding HasProject}">
+      <Button Content="简单版" Click="SimpleMode_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="切换简单版"/>
+      <Button Content="进阶版" Click="AdvancedMode_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="切换进阶版"/>
       <Button Content="策划案" Click="PlanningPicker_Click" Style="{StaticResource GhostButton}" AutomationProperties.Name="切换策划案"/>
       <Button Content="关联档期" Command="{Binding ShowBookingCommand}" Style="{StaticResource GhostButton}" AutomationProperties.Name="关联档期"/>
       <Button Content="预览" Command="{Binding PreviewDocumentCommand}" Style="{StaticResource SecondaryButton}" Margin="10,0" AutomationProperties.Name="预览策划案"/>

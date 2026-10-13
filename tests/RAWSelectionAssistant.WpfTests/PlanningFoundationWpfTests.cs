@@ -117,6 +117,21 @@ public sealed class PlanningFoundationWpfTests
         using(var held=new FileStream(file,FileMode.Open,FileAccess.ReadWrite,FileShare.None))Assert.IsFalse(await f.Vm.SaveResourceAsync(light with{Name="失败草稿"}));
         Assert.IsNotNull(await f.Planning.LoadDraftAsync(f.Id));Assert.IsTrue(await f.Vm.FlushAsync());
     });
+    [TestMethod]
+    public Task ModesKeepIdentityContentAndSourcesWithSingleUndoAndFailureGate() => RunSta(async()=>
+    {
+        using var f=await Fixture.Create();await f.Vm.LoadAsync(f.Id);await f.Vm.NewShotCommand.ExecuteAsync(null);var id=f.Vm.SelectedShot!.ShotId;
+        f.Vm.DocumentBody="普通正文";f.Vm.DocumentCustomBody="普通文档内容";Assert.IsTrue(await f.Vm.FlushAsync());var doc=f.Vm.PlanningDocumentId;
+        Assert.IsTrue(await f.Vm.SwitchPlanningModeAsync(true));var blocks=f.Vm.StructureBlocks.Select(b=>b.Id).ToArray();
+        Assert.AreEqual(doc,f.Vm.PlanningDocumentId);Assert.IsTrue(f.Vm.StructureBlocks[0].SourceIds.Contains(id));
+        Assert.IsTrue(await f.Vm.ApplyStructureShotAsync(f.Vm.ShotDraft(id) with{Name="同步结构"}));Assert.AreEqual("同步结构",f.Vm.Shots[0].Name);
+        Assert.IsTrue(await f.Vm.UndoPlanningAsync());Assert.AreEqual("未命名拍摄",f.Vm.Shots[0].Name);
+        Assert.IsTrue(await f.Vm.SwitchPlanningModeAsync(false));Assert.IsTrue(await f.Vm.SwitchPlanningModeAsync(true));CollectionAssert.AreEqual(blocks,f.Vm.StructureBlocks.Select(b=>b.Id).ToArray());
+        Assert.IsTrue(await f.Vm.RemoveStructureBlockAsync(blocks[0]));Assert.HasCount(1,f.Vm.Shots);Assert.IsTrue(await f.Vm.UndoPlanningAsync());
+        await f.Vm.LoadAsync(f.Id);Assert.IsTrue(f.Vm.IsAdvancedPlanning);Assert.AreEqual(doc,f.Vm.PlanningDocumentId);Assert.AreEqual("普通正文",f.Vm.DocumentBody);Assert.AreEqual("普通文档内容",f.Vm.DocumentCustomBody);
+        f.Vm.StageShot(f.Vm.ShotDraft(id) with{Name=""});Assert.IsFalse(await f.Vm.SwitchPlanningModeAsync(false));Assert.IsTrue(f.Vm.IsAdvancedPlanning);
+        f.Vm.StageShot(f.Vm.ShotDraft(id) with{Name="修复"});Assert.IsTrue(await f.Vm.FlushAsync());
+    });
     private sealed class Fixture : IDisposable
     {
         public string Root=Path.Combine(Path.GetTempPath(),"kitao-planning-foundation-"+Guid.NewGuid().ToString("N"));
