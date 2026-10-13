@@ -174,7 +174,11 @@ public sealed class NavigationSafety204Tests
         Assert.IsFalse(viewModel.Contains("RestoreLastPage", StringComparison.Ordinal));
         StringAssert.Contains(viewModel, "Settings.LastPrimaryPage = value");
         StringAssert.Contains(viewModel, "PrimaryNavigationPolicy.IsPrimaryPage(value)");
-        StringAssert.Contains(viewModel, "public void ReturnToWorkbench() => ApplySurfaceNavigation(SurfaceNavigationHost.ReturnToWorkbench())");
+        var returning = Slice(viewModel, "public void ReturnToWorkbench()", "private bool _planningNavigationSaving");
+        StringAssert.Contains(returning, "DeferPlanningNavigation(ReturnToWorkbench)");
+        StringAssert.Contains(returning, "ApplySurfaceNavigation(SurfaceNavigationHost.ReturnToWorkbench())");
+        Assert.IsTrue(returning.IndexOf("DeferPlanningNavigation", StringComparison.Ordinal) < returning.IndexOf("ApplySurfaceNavigation", StringComparison.Ordinal));
+        StringAssert.Contains(viewModel, "!await PlanningPage.FlushAsync()");
     }
 
     [TestMethod]
