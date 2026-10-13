@@ -1,0 +1,23 @@
+2026-10-13 14:17:51.811 [INFO] STARTUP_STAGE=02 Logging
+2026-10-13 14:17:52.237 [INFO] STARTUP_STAGE=04 Database and composition
+2026-10-13 14:17:52.393 [INFO] STARTUP_STAGE=05 Services and modules
+2026-10-13 14:17:52.414 [INFO] STARTUP_STAGE=03 Settings
+2026-10-13 14:17:52.446 [INFO] STARTUP_STAGE=06 Theme
+2026-10-13 14:17:52.660 [INFO] STARTUP_STAGE=08 Workspace
+2026-10-13 14:17:52.835 [INFO] 导航请求[919a5fb26f004e269d6855c4d29405d3]：Workbench -> Workflow
+2026-10-13 14:17:52.841 [INFO] STARTUP_STAGE=09 Restore Session
+2026-10-13 14:17:52.844 [INFO] STARTUP_STAGE=07 MainWindow
+2026-10-13 14:17:53.905 [INFO] Kitao Studio 光镜已启动。
+2026-10-13 14:17:53.906 [INFO] STARTUP_OK BuildId=2.3.0-dev.924d486 ProductSourceSha=924d48683f9995721335e2dcd1bc89fe7040305d Windows=Microsoft Windows NT 10.0.19045.0 DataRoot=AppData-or-explicit-override LibraryRoot=user-managed LastWorkspace=Workbench
+2026-10-13 14:17:53.907 [ERROR] 发生未处理的界面异常。
+System.InvalidOperationException: Sequence contains no matching element
+   at System.Linq.ThrowHelper.ThrowNoMatchException()
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source, Func`2 predicate)
+   at RAWSelectionAssistant.Views.TetherCaptureView.Group(String header)
+   at RAWSelectionAssistant.Views.TetherCaptureView.LoadWorkspacePreferencesAsync()
+   at RAWSelectionAssistant.Views.TetherCaptureView.<.ctor>b__9_0(Object _, RoutedEventArgs _)
+   at System.Threading.Tasks.Task.<>c.<ThrowAsync>b__124_0(Object state)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+2026-10-13 14:31:55.502 [INFO] 导航请求[e83937399d0f4ee28317e7120a9ae4db]：Workbench -> ReferenceColor
+2026-10-13 14:38:50.501 [INFO] 应用程序已退出。
