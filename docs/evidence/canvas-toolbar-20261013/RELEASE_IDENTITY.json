@@ -1,0 +1,77 @@
+{
+  "sourceCommit": "ea8c437bf44fbaef20556fd5a073e93c4053452a",
+  "baseCommit": "3c5a5ff178198fcedbdfd580a807c68bd5ee1b78",
+  "branch": "feature/kitao-canvas-toolbar-20261013",
+  "exePath": "N:/pixart/kitao-canvas-toolbar-20261013/artifacts/canvas-release/win-x64/KitaoPhotoSelector.exe",
+  "build": "Release win-x64 self-contained non-single-file",
+  "components": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "bytes": 179200,
+      "sha256": "C0E7DC23E7CEAE0CF26AE7F4C62F1FC68813DBEB7C5DC29207AA2D0D241CF5A2",
+      "productVersion": "2.3.0-canvas-toolbar+ea8c437bf44fbaef20556fd5a073e93c4053452a",
+      "wpfTestHash": null,
+      "coreTestHash": null
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "bytes": 3008000,
+      "sha256": "79B64EBBE8686D81DD58B1EA5299D0D1D7D6FCACDCEF64E807FC20F72A927029",
+      "productVersion": "2.3.0-canvas-toolbar+ea8c437bf44fbaef20556fd5a073e93c4053452a",
+      "wpfTestHash": "79B64EBBE8686D81DD58B1EA5299D0D1D7D6FCACDCEF64E807FC20F72A927029",
+      "coreTestHash": null
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "bytes": 4347904,
+      "sha256": "54CFA0199627B3517C984C9168A0636B4BF9654F430115C90EE789C5B1F77404",
+      "productVersion": "2.3.0-canvas-toolbar+ea8c437bf44fbaef20556fd5a073e93c4053452a.ea8c437bf44fbaef20556fd5a073e93c4053452a",
+      "wpfTestHash": "54CFA0199627B3517C984C9168A0636B4BF9654F430115C90EE789C5B1F77404",
+      "coreTestHash": "54CFA0199627B3517C984C9168A0636B4BF9654F430115C90EE789C5B1F77404"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "bytes": 38912,
+      "sha256": "E2BE8C5779B527C518203FC16529ADFF06DF46FF1F4ADB9A4AA542EAF9CE676D",
+      "productVersion": "2.3.0-canvas-toolbar+ea8c437bf44fbaef20556fd5a073e93c4053452a.ea8c437bf44fbaef20556fd5a073e93c4053452a",
+      "wpfTestHash": "E2BE8C5779B527C518203FC16529ADFF06DF46FF1F4ADB9A4AA542EAF9CE676D",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "bytes": 11776,
+      "sha256": "68D0718D24F4F8FED772CFC000F8218131A4864B1D6B0EFCEBEC8E38C732E217",
+      "productVersion": "2.3.0-canvas-toolbar+ea8c437bf44fbaef20556fd5a073e93c4053452a.ea8c437bf44fbaef20556fd5a073e93c4053452a",
+      "wpfTestHash": "68D0718D24F4F8FED772CFC000F8218131A4864B1D6B0EFCEBEC8E38C732E217",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "bytes": 11264,
+      "sha256": "308E8950F1A55E1B6F9541A8089C57784B642CA6C123414E21F16FE3D06DB79D",
+      "productVersion": "2.3.0-canvas-toolbar+ea8c437bf44fbaef20556fd5a073e93c4053452a.ea8c437bf44fbaef20556fd5a073e93c4053452a",
+      "wpfTestHash": "308E8950F1A55E1B6F9541A8089C57784B642CA6C123414E21F16FE3D06DB79D",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "bytes": 67072,
+      "sha256": "3DD708C93819546B1398A12B31497BDDAEF17BA0D45332B127C0B2DF517500ED",
+      "productVersion": "2.3.0-canvas-toolbar+ea8c437bf44fbaef20556fd5a073e93c4053452a.ea8c437bf44fbaef20556fd5a073e93c4053452a",
+      "wpfTestHash": "3DD708C93819546B1398A12B31497BDDAEF17BA0D45332B127C0B2DF517500ED",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "bytes": 1161728,
+      "sha256": "EE21E9DB924072EB97ECAEDC58CD26474312860ED25326F8924F9BA3A9F3CF9D",
+      "productVersion": "2.3.0-canvas-toolbar+ea8c437bf44fbaef20556fd5a073e93c4053452a.ea8c437bf44fbaef20556fd5a073e93c4053452a",
+      "wpfTestHash": "EE21E9DB924072EB97ECAEDC58CD26474312860ED25326F8924F9BA3A9F3CF9D",
+      "coreTestHash": null
+    }
+  ],
+  "nativeStartup": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "visualApproval": "NOT_RUN",
+  "testHostNote": "Release managed product components replace isolated test-folder components. The test host and apphost are not launched as the desktop app; EXE native startup is NOT_RUN."
+}
