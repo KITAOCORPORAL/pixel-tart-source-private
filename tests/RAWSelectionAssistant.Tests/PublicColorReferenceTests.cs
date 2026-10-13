@@ -48,11 +48,18 @@ public sealed class PublicColorReferenceTests
     }
     [TestMethod] public void CatalogKeepsEditionsAndRejectsChangedPayloadAndConditionsUnderSameVersion()
     {
-        var catalog=new ReferenceDataCatalog();var old=Parse(Synthetic());catalog.Add(old);catalog.Add(old);
+        var catalog=new ReferenceDataCatalog();var old=Parse(Synthetic());catalog.Add(old);catalog.Add(Parse(Synthetic()));
         var modern=Parse(Synthetic(ClassicEdition.November2014AndNewer),ClassicEdition.November2014AndNewer);catalog.Add(modern);
-        Assert.AreEqual(old,catalog.Get("SyntheticClassic",ClassicEdition.BeforeNovember2014));
+        var loaded=catalog.Get("SyntheticClassic",ClassicEdition.BeforeNovember2014);Assert.AreEqual(old.Provenance,loaded.Provenance);CollectionAssert.AreEqual(old.Patches.ToArray(),loaded.Patches.ToArray());
         Assert.Throws<InvalidDataException>(()=>catalog.Add(old with{Conditions=D50}));
         Assert.Throws<InvalidDataException>(()=>catalog.Add(Parse(Synthetic().Replace("50.25","51.25"))));
+    }
+    [TestMethod] public void CatalogRejectsForgedReferenceAndSnapshotsMutablePatchList()
+    {
+        var c=Parse(Synthetic());var catalog=new ReferenceDataCatalog();
+        Assert.Throws<InvalidDataException>(()=>catalog.Add(c with{Patches=c.Patches.Take(23).ToArray()}));
+        Assert.Throws<InvalidDataException>(()=>catalog.Add(c with{Patches=c.Patches.Select(p=>p.Number==1?p with{Value=new(double.NaN,0,0)}:p).ToArray()}));
+        var list=c.Patches.ToList();catalog.Add(c with{Patches=list});list.Clear();Assert.HasCount(24,catalog.Get("SyntheticClassic",ClassicEdition.BeforeNovember2014).Patches);
     }
     [TestMethod] public void Xyz100ImportIsExplicitAndRangeChecked()
     {var c=Parse(Synthetic(xyz:true),c:D50);Assert.AreEqual(ReferenceEncoding.Xyz100,c.Patches[0].Encoding);Assert.AreEqual(.5025,ReferenceColorValidation.ToXyz(c.Patches[0],D50).X,1e-12);Assert.Throws<InvalidDataException>(()=>Parse(Synthetic(xyz:true).Replace("50.25","201")));}

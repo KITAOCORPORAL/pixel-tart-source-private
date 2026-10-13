@@ -41,7 +41,28 @@ public sealed record ObservationConditions(string? Illuminant, double? WhiteX, d
 }
 public sealed record ReferencePatch(int Number, string Id, ReferenceEncoding Encoding, ColorVector3 Value);
 public sealed record ChartReference(DataProvenance Provenance, ClassicEdition Edition, ObservationConditions Conditions,
-    IReadOnlyList<ReferencePatch> Patches, string Originator);
+    IReadOnlyList<ReferencePatch> Patches, string Originator)
+{
+    public void Validate()
+    {
+        Provenance.Validate(); Conditions.Validate();
+        if (!Enum.IsDefined(Edition) || Provenance.Version != Edition.ToString() || string.IsNullOrWhiteSpace(Originator) ||
+            Patches is null || Patches.Count != 24 || Patches.Any(p => p is null) ||
+            Patches.Select(p=>p.Id).Distinct(StringComparer.Ordinal).Count()!=24 ||
+            !Patches.Select(p=>p.Number).Order().SequenceEqual(Enumerable.Range(1,24)))
+            throw new InvalidDataException("Invalid reference identity/count/patch numbering.");
+        foreach(var p in Patches)
+        {
+            ReferenceColorValidation.Finite(p.Value);
+            if(p.Id is null || p.Id.Length!=2 || p.Id[0] is <'A' or >'F' || p.Id[1] is <'1' or >'4' ||
+                p.Number!=(p.Id[1]-'1')*6+p.Id[0]-'A'+1 || !Enum.IsDefined(p.Encoding) ||
+                (p.Encoding==ReferenceEncoding.Lab ? p.Value.X is <0 or >100 || Math.Abs(p.Value.Y)>160 || Math.Abs(p.Value.Z)>160 :
+                 p.Value.X is <0 or >200 || p.Value.Y is <0 or >100 || p.Value.Z is <0 or >200))
+                throw new InvalidDataException("Invalid reference patch.");
+        }
+        if(Patches.Select(p=>p.Encoding).Distinct().Count()!=1)throw new InvalidDataException("Mixed reference encodings.");
+    }
+}
 // A camera response cannot be passed to a reference color API without an explicit calibration transform.
 public sealed record CameraPatchResponse(string SampleId, string PatchId, ColorVector3 CameraLinearRgb,
     DataProvenance Provenance, string InputCorrectionVersion);
@@ -115,13 +136,14 @@ public sealed class ReferenceDataCatalog
     private readonly Dictionary<(string, string), ChartReference> entries = [];
     public void Add(ChartReference reference)
     {
+        reference.Validate();
         var key = (reference.Provenance.Dataset, reference.Provenance.Version);
         if (entries.TryGetValue(key, out var old))
         {
             if (old.Provenance != reference.Provenance || old.Edition != reference.Edition || old.Conditions != reference.Conditions || old.Originator != reference.Originator || !old.Patches.SequenceEqual(reference.Patches)) throw new InvalidDataException("Reference identity conflict; assign a new version and review.");
             return;
         }
-        entries.Add(key, reference);
+        entries.Add(key, reference with { Patches = Array.AsReadOnly(reference.Patches.ToArray()) });
     }
     public ChartReference Get(string dataset, ClassicEdition edition) => entries[(dataset, edition.ToString())];
 }

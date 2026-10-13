@@ -72,9 +72,9 @@ public sealed class PairedCaptureImporter : IPairedCaptureImporter
         }
         Need(s.InstantExposure!.Camera == "Polaroid I-2","Instant capture must identify I-2, not digital response.");
         Need(f.ProductionDate<=DateOnly.FromDateTime(s.InstantExposure.CapturedAt.UtcDateTime),"Production after capture.");
-        Need(Finite(d.TemperatureCelsius)&&Finite(d.DurationSeconds)&&d.DurationSeconds>0&&Text(d.LightShielding)&&Text(d.Handling)&&d.EjectedAt!=default,
+        Need(Finite(d.TemperatureCelsius)&&Finite(d.DurationSeconds)&&d.DurationSeconds is >0 and <=864000&&Text(d.LightShielding)&&Text(d.Handling)&&d.EjectedAt!=default,
             "Development temperature/time/handling missing.");
-        Need(d.EjectedAt>=s.InstantExposure.CapturedAt&&scan.ScannedAt>=d.EjectedAt.AddSeconds(Finite(d.DurationSeconds)&&d.DurationSeconds is >0 and <864000?d.DurationSeconds:0)&&s.MeasuredAt>=scan.ScannedAt,
+        Need(d.EjectedAt>=s.InstantExposure.CapturedAt&&scan.ScannedAt>=d.EjectedAt.AddSeconds(Finite(d.DurationSeconds)&&d.DurationSeconds is >0 and <=864000?d.DurationSeconds:0)&&s.MeasuredAt>=scan.ScannedAt,
             "Invalid capture/development/scan/measurement chronology.");
         Need(Text(scan.Device)&&Text(scan.Serial)&&Text(scan.Settings)&&scan.Dpi>0&&scan.BitsPerChannel is 8 or 16&&scan.ScannedAt!=default,"Scanner settings missing.");
         Need(Text(s.CameraInputCorrectionVersion)&&Text(s.FilmCharacterizationVersion)&&Text(s.RegistrationEvidence)&&Text(s.QualityEvidence)&&Text(s.MeasurementMethod),"Stage/registration/quality/measurement identity missing.");
