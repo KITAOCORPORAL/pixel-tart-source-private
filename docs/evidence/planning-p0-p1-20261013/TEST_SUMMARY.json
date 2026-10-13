@@ -1,0 +1,206 @@
+[
+  {
+    "file": "planning-core-focused-final.trx",
+    "sha256": "55EEBABBCCA684F5984456D9BD437371852B287CC31648493E5B9912958F9A32",
+    "total": 23,
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0,
+    "start": "2026-10-13T23:59:31.8349251+08:00",
+    "finish": "2026-10-13T23:59:32.7295207+08:00",
+    "failedTests": [],
+    "skippedTests": []
+  },
+  {
+    "file": "planning-core-focused.trx",
+    "sha256": "45F02D7D5B48C7CB7E8DBBADBED0B8D62AA6B9E92C071454CBF6390C8A10A8AC",
+    "total": 19,
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0,
+    "start": "2026-10-13T23:46:07.2285794+08:00",
+    "finish": "2026-10-13T23:46:08.1748948+08:00",
+    "failedTests": [],
+    "skippedTests": []
+  },
+  {
+    "file": "planning-core-full.trx",
+    "sha256": "40E3DFD132981F08817C22E1BB1ADDC92CF02D3593EA8DCA04BBDFDB5607D7C2",
+    "total": 1689,
+    "passed": 1682,
+    "failed": 0,
+    "skipped": 7,
+    "start": "2026-10-13T23:50:19.3022050+08:00",
+    "finish": "2026-10-13T23:51:23.4641502+08:00",
+    "failedTests": [],
+    "skippedTests": [
+      "CpuGpuParityAcrossEightSceneClasses",
+      "ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+      "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "CpuGpuParityOnSyntheticScene",
+      "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16"
+    ]
+  },
+  {
+    "file": "planning-core-initial-failed.trx",
+    "sha256": "E50CD7D44E69B60D8C9E7BC5C1B7645FD2A6B78402ECEF801251302E9A3B5F92",
+    "total": 1689,
+    "passed": 1681,
+    "failed": 1,
+    "skipped": 7,
+    "start": "2026-10-13T23:48:18.2993730+08:00",
+    "finish": "2026-10-13T23:49:19.1741760+08:00",
+    "failedTests": [
+      "LegacyDocumentGetsStablePackageAndPreservesUnknownFields"
+    ],
+    "skippedTests": [
+      "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+      "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "CpuGpuParityAcrossEightSceneClasses",
+      "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "CpuGpuParityOnSyntheticScene",
+      "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16"
+    ]
+  },
+  {
+    "file": "planning-focused-final.trx",
+    "sha256": "885C0B3A1D77DCA146FA017C702B51C6854A6A4AE79A5A564571D922B3160BD7",
+    "total": 13,
+    "passed": 13,
+    "failed": 0,
+    "skipped": 0,
+    "start": "2026-10-14T00:01:27.4131942+08:00",
+    "finish": "2026-10-14T00:01:29.1115124+08:00",
+    "failedTests": [],
+    "skippedTests": []
+  },
+  {
+    "file": "planning-focused.trx",
+    "sha256": "A026E5C91A1B52005F2868FE95619F9C19D6F562535113CC4BFF9F351AA91BBF",
+    "total": 13,
+    "passed": 12,
+    "failed": 0,
+    "skipped": 1,
+    "start": "2026-10-13T23:45:38.0773030+08:00",
+    "finish": "2026-10-13T23:45:39.6271223+08:00",
+    "failedTests": [],
+    "skippedTests": [
+      "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts"
+    ]
+  },
+  {
+    "file": "planning-release-core-full.trx",
+    "sha256": "5476EC8151C4DE728E2FCC7FF00E31DBDB6C21EEB7C4B58B764197D4D2A1F1E5",
+    "total": 1689,
+    "passed": 1683,
+    "failed": 0,
+    "skipped": 6,
+    "start": "2026-10-14T00:09:44.0914352+08:00",
+    "finish": "2026-10-14T00:10:41.2193635+08:00",
+    "failedTests": [],
+    "skippedTests": [
+      "CpuGpuParityOnSyntheticScene",
+      "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "CpuGpuParityAcrossEightSceneClasses",
+      "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError"
+    ]
+  },
+  {
+    "file": "planning-release-core-initial-failed.trx",
+    "sha256": "2E571F1465ECAFF818A0B98AF95D9ED6D3AFBE0DB6FB744E7B1BA77BFD5719A9",
+    "total": 1689,
+    "passed": 1682,
+    "failed": 1,
+    "skipped": 6,
+    "start": "2026-10-14T00:03:51.9693431+08:00",
+    "finish": "2026-10-14T00:04:55.4070607+08:00",
+    "failedTests": [
+      "ReturningToWorkbenchDoesNotRestoreWizard"
+    ],
+    "skippedTests": [
+      "CpuGpuParityOnSyntheticScene",
+      "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "CpuGpuParityAcrossEightSceneClasses"
+    ]
+  },
+  {
+    "file": "planning-release-wpf-full.trx",
+    "sha256": "645583F09EBDE76A453536A0AEC4F457C323F649A889AE870182A2B771D54136",
+    "total": 1579,
+    "passed": 1556,
+    "failed": 0,
+    "skipped": 23,
+    "start": "2026-10-14T00:03:25.3880176+08:00",
+    "finish": "2026-10-14T00:11:14.1899754+08:00",
+    "failedTests": [],
+    "skippedTests": [
+      "AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+      "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+      "OffscreenSyntheticKeyframesNeverLaunchDesktop",
+      "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+      "AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+      "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+      "BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately",
+      "RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+      "AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+      "SeparatePureTiffEncodingValidationHashAndNodeCosts",
+      "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+      "OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback",
+      "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+      "ProductionApp_AllRoutes_RenderReviewInventory",
+      "BatchElevenAuthorizedRawMemoryAndColor",
+      "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+      "CompanyRealRawProductAcceptanceGate",
+      "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+      "ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+      "BaselineGuard_RequiresExplicitApproval",
+      "RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference",
+      "FilmEffects_WriteTruePerEffectComparisonWhenRequested"
+    ]
+  },
+  {
+    "file": "planning-wpf-full.trx",
+    "sha256": "52A51D659E666D3A4B50E601612A2E4979A2B5C0879062359A2830A370BAA084",
+    "total": 1578,
+    "passed": 1555,
+    "failed": 0,
+    "skipped": 23,
+    "start": "2026-10-13T23:47:28.3251435+08:00",
+    "finish": "2026-10-13T23:56:03.3440488+08:00",
+    "failedTests": [],
+    "skippedTests": [
+      "AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+      "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+      "AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+      "OffscreenSyntheticKeyframesNeverLaunchDesktop",
+      "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+      "ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+      "OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback",
+      "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+      "BaselineGuard_RequiresExplicitApproval",
+      "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+      "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+      "SeparatePureTiffEncodingValidationHashAndNodeCosts",
+      "RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference",
+      "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "CompanyRealRawProductAcceptanceGate",
+      "BatchElevenAuthorizedRawMemoryAndColor",
+      "AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+      "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+      "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+      "ProductionApp_AllRoutes_RenderReviewInventory",
+      "BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately",
+      "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+      "RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes"
+    ]
+  }
+]
