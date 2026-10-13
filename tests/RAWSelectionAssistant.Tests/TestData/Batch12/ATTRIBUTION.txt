@@ -1,0 +1,23 @@
+Cube++ / SimpleCube++ test fixture attribution
+
+Authors: Egor Ershov, Alexey Savchik, Illya Semenkov, Nikola Banic,
+Alexander Belokopytov, Daria Senshina, Karlo Koscevic, Marko Subasic, Sven Loncaric.
+Source: https://zenodo.org/records/4153431 (Cube++ 2020 record)
+Publisher description: https://github.com/Visillect/CubePlusPlus
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+License legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+Paper: Cube++: A New Dataset for Color Constancy (Ershov et al.)
+
+Sample ID: 00_0010, Canon EOS 550D, inherited Cube+ ds_version=1.0.
+00_0010-simple.png: unchanged original member SimpleCube++/test/PNG/00_0010.png.
+00_0010-gt.json: unchanged original Cube++/auxiliary/extra/gt_json/00_0010.json.
+00_0010-sensor-grid.csv: derived sparse code-value samples from the original PNG;
+created with tools/batch12/build_cube_fixture.py, no image color processing.
+00_0010-metrics.json: newly computed validation metrics with explicit black/WB policy.
+Original RAW stays external to Git and software release. No author endorsement claimed.
+
+CC BY 4.0 permits sharing and adaptation, including commercial use, with attribution,
+license link and indication of changes. No extra restriction is imposed on these fixtures.
+X-Rite values are NOT included here. pv456-base-golden.json is synthetic project output,
+NOT a measured color chart or physical film sample.

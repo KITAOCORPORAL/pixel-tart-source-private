@@ -1,0 +1,38 @@
+{
+  "algorithmVersion": "PublicSensorBlackWbV1",
+  "metric": "Gray-world angular error vs published mean illuminant (not a calibrated image metric)",
+  "sampleId": "00_0010",
+  "sensorModel": "Canon EOS 550D",
+  "datasetImageVersion": "1.0 (Cube+ inherited within Cube++)",
+  "orientation": 1,
+  "blackLevels": [
+    2041,
+    2050,
+    2059
+  ],
+  "greenBlackPolicy": "Mean of two EXIF greens (2041+2059)/2; explicit evaluation choice, not measured per-pixel black truth",
+  "whiteLevel": 14582,
+  "width": 648,
+  "height": 432,
+  "gridCount": 415,
+  "groundTruth": [
+    0.38644711202979193,
+    0.45964391382171166,
+    0.15390897414849627
+  ],
+  "grayWorld": [
+    0.39045200030274324,
+    0.459801501431028,
+    0.14974649826622874
+  ],
+  "angularErrorDegrees": 0.5123951154992821,
+  "afterGroundTruthWbNeutralErrorDegrees": 0.9107890202424748,
+  "syntheticGroundTruthBalanceErrorDegrees": 8.537736462515939e-07,
+  "limits": [
+    "SimpleCube++ is downscaled, target-cropped camera RGB, not native RAW or sRGB",
+    "One inherited Cube+ sample, high ISO; not broad camera accuracy",
+    "Published mean is illumination chromaticity, not scene Lab or spectral truth"
+  ],
+  "sourcePngSha256": "249936b735b3c574e92502ccd9c5b2bc62a8508616aaf0cbb70e77034279acd6",
+  "gridSha256": "64dc6750b23e36b1d76983d58a5f01ac4cf8f223fd15d0ac667422fb91df95e6"
+}

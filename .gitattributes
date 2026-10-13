@@ -1,2 +1,5 @@
 # Evidence digests are byte-level contracts; keep their generated JSON/JSONL bytes stable across Windows clones.
 docs/evidence/photography/** -text
+
+# Preserve pinned public dataset and synthetic golden bytes across Windows/Linux checkouts.
+tests/RAWSelectionAssistant.Tests/TestData/Batch12/** -text
