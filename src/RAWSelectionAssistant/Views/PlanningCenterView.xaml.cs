@@ -123,7 +123,7 @@ public partial class PlanningCenterView : UserControl
                 "镜头清单" => "PlanningShotListSurface", "灯光图" => "PlanningLightingSurface",
                 "服化道" => "PlanningStylingSurface", "文件" => "PlanningFilesSurface", "自定义" or "文档内容" => "PlanningCustomSurface", "项目概览" => "PlanningOverviewSurface", _ => "PlanningTextSurface"
             });
-            DocumentListColumn.Width = new GridLength(preview ? 0 : 280);
+            DocumentListColumn.Width = new GridLength(preview || ActualWidth < 1250 ? 0 : 248);
             DocumentListPane.Visibility = EditorHeader.Visibility = ContentNavigationBorder.Visibility = preview ? Visibility.Collapsed : Visibility.Visible;
             ContextDrawer.Visibility = Visibility.Collapsed;
             RenderNavigation(); _shotTable = null; DocumentContent.Children.Clear(); _referenceCaptions.Clear();
@@ -150,8 +150,12 @@ public partial class PlanningCenterView : UserControl
                 }
                 return;
             }
+            if (ResourcePages.ContainsKey(_vm.ContentPage)) { RenderResources(_vm.ContentPage); return; }
             switch (_vm.ContentPage)
             {
+                case "档期":
+                    Heading(DocumentContent,"关联档期");DocumentContent.Children.Add(Text(_vm.DocumentDate+" · "+_vm.DocumentLocation,16));
+                    DocumentContent.Children.Add(AsyncAction("关联档期",async()=>await _vm.ShowBookingCommand.ExecuteAsync(null)));break;
                 case "项目概览": RenderSimpleOverview(); break;
                 case "文字": RenderText(_vm.IsDocumentEditing); break;
                 case "镜头清单": RenderShots(true); break;
@@ -180,15 +184,14 @@ public partial class PlanningCenterView : UserControl
             StatusChips.Children.Add(chip);
         }
         ContentNavigation.Children.Clear();
-        var icons = new[] { "PixelTart.Symbol.Planning", "PixelTart.Symbol.Planning", "PixelTart.Symbol.Preview", "PixelTart.Symbol.Collage", "PixelTart.Symbol.Storyboard", "PixelTart.Symbol.Lighting", "PixelTart.Symbol.Styling", "PixelTart.Symbol.Link", "PixelTart.Symbol.Planning" };
         for (var i = 0; i < PlanningCenterViewModel.ContentPages.Count; i++)
         {
             var page = PlanningCenterViewModel.ContentPages[i];
             var button = AsyncAction(page, async () => { if (await FlushDocumentAsync() && await _vm.SelectContentSafelyAsync(page)) DocumentScroll.ScrollToTop(); });
-            AutomationProperties.SetAutomationId(button, "PlanningPage" + new[] { "Overview", "Text", "References", "Moodboard", "Shots", "Lighting", "Styling", "Files", "Custom" }[i]);
+            AutomationProperties.SetAutomationId(button, "PlanningPage" + i);
             button.Padding = new Thickness(5, 12, 5, 12); button.MinWidth = 0;
             var content = new StackPanel { Orientation = Orientation.Horizontal };
-            content.Children.Add(new System.Windows.Shapes.Path { Data = (Geometry)FindResource(icons[i]), Width = 14, Height = 14, Stretch = Stretch.Uniform, Fill = Brushes.Transparent, Stroke = Brush(_vm.ContentPage == page ? "AccentBrush" : "TextSecondaryBrush"), StrokeThickness = 1.4, Margin = new Thickness(0, 0, 4, 0) });
+            content.Children.Add(new System.Windows.Shapes.Path { Data = (Geometry)FindResource("PixelTart.Symbol.Planning"), Width = 14, Height = 14, Stretch = Stretch.Uniform, Fill = Brushes.Transparent, Stroke = Brush(_vm.ContentPage == page ? "AccentBrush" : "TextSecondaryBrush"), StrokeThickness = 1.4, Margin = new Thickness(0, 0, 4, 0) });
             var label = Text(page, 13); label.TextWrapping = TextWrapping.NoWrap; content.Children.Add(label);
             button.Content = content;
             var line = new Border { Child = button, BorderThickness = new Thickness(0, 0, 0, 2), BorderBrush = _vm.ContentPage == page ? Brush("AccentBrush") : Brushes.Transparent };
@@ -198,8 +201,11 @@ public partial class PlanningCenterView : UserControl
     private void UpdateResponsiveLayout()
     {
         if (ContentNavigationBorder is null || ActualWidth <= 0) return;
-        var width = Math.Max(0, ActualWidth - (_vm?.IsPreviewMode == true ? 0 : 280));
-        ContentNavigation.Width = Math.Max(0, Math.Min(720, width - 32));
+        DocumentListColumn.Width = new GridLength(_vm?.IsPreviewMode == true || ActualWidth < 1250 ? 0 : 248);
+        SectionOutlineColumn.Width = new GridLength(_vm?.IsPreviewMode == true ? 0 : ActualWidth < 900 ? 136 : 184);
+        var width = Math.Max(0, ActualWidth - DocumentListColumn.Width.Value - SectionOutlineColumn.Width.Value);
+        ContentNavigation.Width = Math.Max(0, SectionOutlineColumn.Width.Value - 16);
+        ContentNavigation.Rows = 0; ContentNavigation.Columns = 1;
         var compact = width < 700;
         EditorHeader.Margin = new Thickness(compact ? 16 : 32, 18, compact ? 16 : 32, 12);
         DocumentContent.Margin = new Thickness(compact ? 20 : 40, compact ? 20 : 28, compact ? 20 : 40, 64);

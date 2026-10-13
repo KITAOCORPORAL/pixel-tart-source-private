@@ -26,7 +26,7 @@ public sealed class PlanningWorkspaceLayoutTests
     [TestMethod]
     public void ContentModulesRetainChineseOrderAndAppendCustom()
     {
-        CollectionAssert.AreEqual(new[] { "项目概览", "文字", "参考图", "情绪板", "镜头清单", "灯光图", "服化道", "文件", "文档内容" }, PlanningCenterViewModel.ContentPages.ToArray());
+        CollectionAssert.AreEqual(new[] { "项目概览", "文字", "镜头清单", "参考图", "情绪板", "灯位图", "服化道与道具", "设备", "人员", "场地", "档期", "当天时间表", "预算", "文件", "文档内容" }, PlanningCenterViewModel.ContentPages.ToArray());
     }
     [TestMethod]
     public void DocumentPresentationUsesReadingWidthUniformImagesAndOptInEditing()
@@ -56,7 +56,7 @@ public sealed class PlanningWorkspaceLayoutTests
         var xaml = XDocument.Parse(Read("src/RAWSelectionAssistant/Views/PlanningCenterView.xaml"));
         XNamespace ns = "http://schemas.microsoft.com/winfx/2006/xaml";
         var nav = xaml.Descendants().Single(element => element.Attribute(ns + "Name")?.Value == "ContentNavigation");
-        Assert.AreEqual("UniformGrid", nav.Name.LocalName); Assert.AreEqual("1", nav.Attribute("Rows")?.Value);
+        Assert.AreEqual("UniformGrid", nav.Name.LocalName); Assert.AreEqual("1", nav.Attribute("Columns")?.Value);
         var code = Read("src/RAWSelectionAssistant/Services/PlanningProposalPdf.cs");
         StringAssert.Contains(code, "int dpi = 300"); StringAssert.Contains(code, "216 or 300");
         StringAssert.Contains(code, "reference.OriginalPath");

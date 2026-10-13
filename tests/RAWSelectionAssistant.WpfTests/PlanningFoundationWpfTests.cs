@@ -95,6 +95,28 @@ public sealed class PlanningFoundationWpfTests
         var page = f.Vm.ContentPage; Assert.IsFalse(await f.Vm.SelectContentSafelyAsync("项目概览")); Assert.AreEqual(page, f.Vm.ContentPage);
         f.Vm.CapturePendingEditorDraft = null;
     });
+    [TestMethod]
+    public Task ResourcesRoundTripUndoArchiveDuplicateAndReadOnlyLedger() => RunSta(async () =>
+    {
+        using var f = await Fixture.Create(); await f.Vm.LoadAsync(f.Id); await f.Vm.NewShotCommand.ExecuteAsync(null);
+        var shot=f.Vm.SelectedShot!.ShotId;
+        PlanningResource[] resources=[new PlanningProp(),new PlanningGearItem(),new PlanningCrewMember(),new PlanningVenue(),new PlanningScheduleSlot(),new PlanningBudgetLine(),new PlanningLight{X=.2,Y=.8,DirectionDegrees=45,PowerPercent=30,ReferencePath="synthetic-reference.png"}];
+        foreach(var r in resources)Assert.IsTrue(await f.Vm.SaveResourceAsync(r with{ShotIds=[shot]}));
+        Assert.IsTrue(await f.Vm.CopyResourceAsync(resources[0].Id));Assert.HasCount(8,f.Vm.ResourceCatalog.Items);
+        Assert.IsTrue(await f.Vm.UndoPlanningAsync());Assert.HasCount(7,f.Vm.ResourceCatalog.Items);
+        Assert.IsTrue(await f.Vm.ArchiveResourceAsync(resources[0].Id,true));Assert.IsTrue(f.Vm.ResourceCatalog.Items[6].Archived);
+        await f.Vm.LoadAsync(f.Id);Assert.HasCount(7,f.Vm.ResourceCatalog.Items);
+        var light=f.Vm.ResourceCatalog.Items.OfType<PlanningLight>().Single();Assert.AreEqual(.2,light.X);Assert.AreEqual(45d,light.DirectionDegrees);Assert.AreEqual(shot,light.ShotIds.Single());
+        var gear=new PlanningGearItem{SourceCatalog="synthetic-toolbox",SourceId="gear-1",Name="合成设备"};
+        Assert.IsTrue(await f.Vm.ImportPlanningGearAsync([gear,gear]));Assert.HasCount(2,f.Vm.ResourceCatalog.Items.OfType<PlanningGearItem>());
+        var transaction=new FinanceTransaction{ProjectId=f.Id,Kind=FinanceTransactionKind.Expense,AmountMinor=12345};
+        f.Vm.ReadPlanningExpenses=_=>Task.FromResult<IReadOnlyList<FinanceTransaction>>([transaction,transaction,transaction with{Id=Guid.NewGuid(),ProjectId=Guid.NewGuid()}]);
+        await f.Vm.RefreshPlanningExpensesAsync();Assert.HasCount(1,f.Vm.PlanningExpenses);Assert.AreEqual(12345L,f.Vm.PlanningExpenses[0].AmountMinor);
+        Assert.IsFalse(await f.Vm.SaveResourceAsync(light with{X=double.NaN}));
+        var file=Path.Combine(f.Root,"planning",$"{f.Id:N}.planning.json");
+        using(var held=new FileStream(file,FileMode.Open,FileAccess.ReadWrite,FileShare.None))Assert.IsFalse(await f.Vm.SaveResourceAsync(light with{Name="失败草稿"}));
+        Assert.IsNotNull(await f.Planning.LoadDraftAsync(f.Id));Assert.IsTrue(await f.Vm.FlushAsync());
+    });
     private sealed class Fixture : IDisposable
     {
         public string Root=Path.Combine(Path.GetTempPath(),"kitao-planning-foundation-"+Guid.NewGuid().ToString("N"));

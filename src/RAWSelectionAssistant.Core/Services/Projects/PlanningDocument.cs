@@ -3,12 +3,14 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 // Proposal status is intentionally separate from booking and shot execution status.
 public sealed record PlanningDocument
 {
+    public PlanningResources Resources { get; init; } = new();
     public int FoundationVersion { get; init; }
     public IReadOnlyList<PlanningShotColumn> ShotColumns { get; init; } = [];
     public PlanningDocument EnsureIdentity(Guid projectId)
     {
         if (projectId == Guid.Empty || FoundationVersion is < 0 or > 1 || ShotColumns is null || References is null || Attachments is null)
             throw new System.IO.InvalidDataException("Invalid planning foundation schema.");
+        Resources.Validate();
         foreach (var column in ShotColumns) column.Validate();
         if (ShotColumns.Select(c => c.Id).Distinct().Count() != ShotColumns.Count) throw new System.IO.InvalidDataException("Duplicate custom column identity.");
         // Legacy plans have exactly one document per project. A namespaced deterministic ID

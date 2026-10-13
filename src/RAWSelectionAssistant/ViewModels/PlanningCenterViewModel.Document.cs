@@ -50,7 +50,7 @@ public sealed partial class PlanningCenterViewModel
     private readonly Dictionary<Guid, ProjectShot> _pendingShots = [];
     private string _referenceCategory = "全部";
     private PlanningReferenceItem? _selectedDocumentReference;
-    public static IReadOnlyList<string> ContentPages { get; } = ["项目概览", "文字", "参考图", "情绪板", "镜头清单", "灯光图", "服化道", "文件", "文档内容"];
+    public static IReadOnlyList<string> ContentPages { get; } = ["项目概览", "文字", "镜头清单", "参考图", "情绪板", "灯位图", "服化道与道具", "设备", "人员", "场地", "档期", "当天时间表", "预算", "文件", "文档内容"];
     public IReadOnlyList<string> ReferenceCategories { get; } = ["全部", "主视觉", "场景", "姿势", "造型", "灯光", "色彩", "其他"];
     public IReadOnlyList<string> ProposalStatuses { get; } = ["进行中", "草稿", "已完成"];
     public IReadOnlyList<string> MoodGroups { get; } = ["整体氛围", "材质", "身体姿势", "灯光", "色彩"];

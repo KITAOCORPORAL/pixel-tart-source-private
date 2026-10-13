@@ -49,6 +49,7 @@ public sealed class FinanceTransactionItemViewModel(
 public sealed class FinanceViewModel : ObservableObject
 {
     private readonly IFinanceService _service;
+    public Task<IReadOnlyList<FinanceTransaction>> ReadProjectExpensesAsync(Guid projectId) => _service.QueryAsync(new FinanceQuery(Kind: FinanceTransactionKind.Expense, ProjectId: projectId));
     private readonly IDialogService _dialogs;
     private readonly IProjectRepository? _projectRepository;
     private readonly IShootBookingService? _bookingService;
