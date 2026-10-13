@@ -61,7 +61,7 @@ public static class PixelTartFilmPipeline
         if(settings.HalationAmount!=0||settings.BloomAmount!=0)throw new NotSupportedException("Spatial film requires full-image halo processing.");
         return ApplyCore(input,settings,token,left,top,fullWidth,fullHeight);
     }
-    private static HighBitDepthImageBuffer ApplyCore(HighBitDepthImageBuffer input,PixelTartFilmSettings settings,CancellationToken token,int left,int top,int fullWidth,int fullHeight)
+    internal static HighBitDepthImageBuffer ApplyCore(HighBitDepthImageBuffer input,PixelTartFilmSettings settings,CancellationToken token,int left,int top,int fullWidth,int fullHeight)
     {
         settings.Validate();
         if (!settings.Enabled || IsIdentity(settings)) return input.Clone();

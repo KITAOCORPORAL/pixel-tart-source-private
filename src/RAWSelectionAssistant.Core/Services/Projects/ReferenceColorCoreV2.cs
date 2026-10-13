@@ -163,6 +163,32 @@ public static class ReferenceColorTargetBuilder
         return new(Build(samples, null), Enumerable.Range(0, 3).Select(zone => Build(samples, zone)).ToArray(), samples.Average(sample => sample.Color.L));
     }
 
+    /// <summary>Same traversal/sum order as historical FromPixels, with repeated reads instead of per-pixel lists.</summary>
+    public static ReferenceColorTarget FromPixelsBounded(HighBitDepthImageBuffer pixels,CancellationToken token=default)
+    {
+        OklabColor Read(int i){if((i&2047)==0)token.ThrowIfCancellationRequested();var s=pixels.Rgb32.Span;return OklabColorSpace.FromSrgb(s[i*3],s[i*3+1],s[i*3+2]);}
+        double Weight(OklabColor c,int? zone)
+        {
+            if(zone is null)return 1;
+            static double Smooth(double a,double b,double x){var t=Math.Clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);}
+            var shadow=1-Smooth(.18,.52,c.L);var highlight=Smooth(.52,.86,c.L);var mid=Math.Max(0,1-shadow-highlight);var total=Math.Max(1e-12,shadow+mid+highlight);
+            return (zone.Value==0?shadow:zone.Value==1?mid:highlight)/total;
+        }
+        var total=new double[4];var ls=new double[4];var aa=new double[4];var bb=new double[4];double luminance=0;
+        for(var i=0;i<pixels.PixelCount;i++)
+        {
+            var c=Read(i);luminance+=c.L;
+            for(var z=0;z<4;z++){var w=Weight(c,z==0?null:z-1);if(w<=1e-12)continue;total[z]+=w;ls[z]+=c.L*w;aa[z]+=c.A*w;bb[z]+=c.B*w;}
+        }
+        var centers=new OklabColor[4];for(var z=0;z<4;z++)centers[z]=total[z]<=1e-12?new(.5,0,0):new(ls[z]/total[z],aa[z]/total[z],bb[z]/total[z]);
+        var spreads=new double[4];var squared=new double[4];
+        for(var i=0;i<pixels.PixelCount;i++)
+        {
+            var c=Read(i);for(var z=0;z<4;z++){var w=Weight(c,z==0?null:z-1);if(w<=1e-12)continue;spreads[z]+=Math.Pow(c.Chroma-centers[z].Chroma,2)*w;squared[z]+=w*w;}
+        }
+        var result=new ReferenceZoneStatistic[4];for(var z=0;z<4;z++){if(total[z]<=1e-12){result[z]=new(new(.5,0,0),0,0,0);continue;}var effective=total[z]*total[z]/Math.Max(1e-12,squared[z]);result[z]=new(centers[z],Math.Sqrt(spreads[z]/total[z]),effective,Math.Clamp(effective/12d,0,1));}
+        return new(result[0],result.Skip(1).ToArray(),luminance/pixels.PixelCount);
+    }
     public static double[] SmoothZoneWeights(double lightness)
     {
         static double Smooth(double a, double b, double x) { var t = Math.Clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }

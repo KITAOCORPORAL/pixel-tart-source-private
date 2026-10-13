@@ -144,6 +144,17 @@ public sealed class ReferenceLookMatcher
         return new(look.Parameters, sourceTarget, target, curve, contrast, saturation, new("HighPrecision sRGB", "OKLabD65", "sRGB float"));
     }
 
+    public ReferenceLookTransform BuildTransformBounded(HighBitDepthImageBuffer source,AssetVisualAnalysisResult analysis,ReferenceLook look,CancellationToken token=default)
+    {
+        look=look.Normalize();if(look.AlgorithmVersion==2)return BuildCorrectedTransform(ReferencePixelStatistics.FromPixels(source,token),look);
+        var targetHistogram=Enumerable.Range(0,256).Select(bin=>look.ReferenceSources.Sum(reference=>reference.Weight*reference.Analysis.HistogramLuma[bin]/Math.Max(1d,reference.Analysis.HistogramLuma.Sum(value=>(double)value)))).ToArray();
+        var curve=ReferenceToneMapper.BuildMonotonicQuantileCurve(analysis.HistogramLuma,targetHistogram);
+        var sourceTarget=ReferenceColorTargetBuilder.FromPixelsBounded(source,token);var target=ReferenceColorTargetBuilder.FromLook(look);
+        var sourceSpan=Math.Max(.06,analysis.ContrastMetric);var targetSpan=look.ReferenceSources.Sum(reference=>reference.Weight*reference.Analysis.ContrastMetric);var contrast=Math.Clamp(targetSpan/sourceSpan,.8,1.2);
+        var targetSaturation=look.ReferenceSources.Sum(reference=>reference.Weight*reference.Analysis.AverageSaturation);var saturation=Math.Clamp(targetSaturation/Math.Max(.08,analysis.AverageSaturation),.7,1.3);
+        return new(look.Parameters,sourceTarget,target,curve,contrast,saturation,new("HighPrecision sRGB","OKLabD65","sRGB float"));
+    }
+
     public ReferenceMatchResult Match(VisualPixelBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook look, CancellationToken token = default)
     {
         look = look.Normalize(); var p = look.Parameters;

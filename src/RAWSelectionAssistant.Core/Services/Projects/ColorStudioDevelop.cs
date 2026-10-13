@@ -6,7 +6,8 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 /// Tonal masks are smooth overlapping luminance weights; detail is a bounded luminance unsharp mask.</summary>
 public static class ColorStudioDevelop
 {
-    public static HighBitDepthImageBuffer Apply(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, CancellationToken token = default)
+    public static HighBitDepthImageBuffer Apply(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, CancellationToken token = default) => ApplyRegion(source,node,source.Width,source.Height,token);
+    internal static HighBitDepthImageBuffer ApplyRegion(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node,int fullWidth,int fullHeight,CancellationToken token)
     {
         double P(string key) => node.NumericParameters.TryGetValue(key, out var value) && double.IsFinite(value) ? Math.Clamp(value, key == "exposure" ? -3 : -100, key == "exposure" ? 3 : 100) : 0;
         string[] keys = ["exposure", "brightness", "highlights", "midtones", "shadows", "contrast", "whites", "blacks", "structure", "detail"];
@@ -14,7 +15,7 @@ public static class ColorStudioDevelop
         var input = source.Rgb32.Span; var linear = new float[input.Length]; var luminance = new float[source.PixelCount];
         for (var i = 0; i < input.Length; i++) { if ((i & 8191) == 0) token.ThrowIfCancellationRequested(); linear[i] = (float)Decode(input[i]); }
         for (var p = 0; p < luminance.Length; p++) luminance[p] = (float)(.2126*linear[p*3]+.7152*linear[p*3+1]+.0722*linear[p*3+2]);
-        var radius = Math.Max(1, (int)Math.Round(Math.Min(source.Width, source.Height) * .01));
+        var radius = Math.Max(1, (int)Math.Round(Math.Min(fullWidth, fullHeight) * .01));
         var structure = P("structure") == 0 ? luminance : Blur(luminance, source.Width, source.Height, radius, token);
         var detail = P("detail") == 0 ? luminance : Blur(luminance, source.Width, source.Height, 1, token);
         var exposure = P("exposure") + P("brightness") / 100;

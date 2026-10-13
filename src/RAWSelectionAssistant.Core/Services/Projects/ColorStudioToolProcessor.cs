@@ -157,13 +157,13 @@ public static class ColorStudioToolProcessor
         return Math.Clamp(result, Math.Min(points[i].Y, points[i + 1].Y), Math.Max(points[i].Y, points[i + 1].Y));
     }
 
-    private static HighBitDepthImageBuffer ApplyDetails(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, CancellationToken token)
+    internal static HighBitDepthImageBuffer ApplyDetails(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, CancellationToken token, int fullWidth=0,int fullHeight=0,DetailsTileWorkspace? workspace=null)
     {
         var parameters = ColorStudioToolCatalog.GetParameters(node.Type).ToDictionary(p => p.Key, p => ColorStudioToolCatalog.Value(node, p.Key));
         double P(string key) => parameters.GetValueOrDefault(key);
-        var count = source.PixelCount; var input = source.Rgb32.Span; var labs = new OklabColor[count];
+        var count = source.PixelCount; var input = source.Rgb32.Span; var labs = workspace?.Labs??new OklabColor[count];
         for (var i = 0; i < count; i++) { if ((i & 2047) == 0) token.ThrowIfCancellationRequested(); labs[i] = OklabColorSpace.FromSrgb(input[i * 3], input[i * 3 + 1], input[i * 3 + 2]); }
-        var denoised = new OklabColor[count]; var scale = Math.Max(source.Width, source.Height) / 1600d;
+        var denoised = workspace?.Denoised??new OklabColor[count]; var scale = Math.Max(fullWidth>0?fullWidth:source.Width, fullHeight>0?fullHeight:source.Height) / 1600d;
         var denoiseRadius = Math.Max(.1, scale);
         OklabColor Sample(double x, double y)
         {
@@ -192,11 +192,19 @@ public static class ColorStudioToolProcessor
                 denoised[index] = new(center.L + (l / total - center.L) * P("luma_noise") / 100, center.A + (a / total - center.A) * P("chroma_noise") / 100, center.B + (b / total - center.B) * P("chroma_noise") / 100);
             }
         }
-        var lightness = denoised.Select(p => p.L).ToArray();
-        var sharp = BlurFractional(lightness, source.Width, source.Height, (P("radius") + .5) * scale, token);
-        var structure = BlurFractional(lightness, source.Width, source.Height, 5.5 * scale, token);
-        var clarity = BlurFractional(lightness, source.Width, source.Height, 20.5 * scale, token);
-        var output = new float[input.Length];
+        double[] lightness,sharp,structure,clarity;float[] output;
+        if(workspace is null)
+        {
+            lightness=denoised.Select(p=>p.L).ToArray();sharp=BlurFractional(lightness,source.Width,source.Height,(P("radius")+.5)*scale,token);structure=BlurFractional(lightness,source.Width,source.Height,5.5*scale,token);clarity=BlurFractional(lightness,source.Width,source.Height,20.5*scale,token);output=new float[input.Length];
+        }
+        else
+        {
+            lightness=workspace.Lightness;for(var i=0;i<count;i++)lightness[i]=denoised[i].L;
+            sharp=workspace.Sharp;structure=workspace.Structure;clarity=workspace.Clarity;output=workspace.Output;
+            BlurFractionalInto(lightness,source.Width,source.Height,(P("radius")+.5)*scale,workspace.Horizontal,sharp,workspace.Integral,token);
+            BlurFractionalInto(lightness,source.Width,source.Height,5.5*scale,workspace.Horizontal,structure,workspace.Integral,token);
+            BlurFractionalInto(lightness,source.Width,source.Height,20.5*scale,workspace.Horizontal,clarity,workspace.Integral,token);
+        }
         for (var i = 0; i < count; i++)
         {
             if ((i & 2047) == 0) token.ThrowIfCancellationRequested(); var lab = denoised[i]; var edge = lab.L - sharp[i];
@@ -230,6 +238,22 @@ public static class ColorStudioToolProcessor
         for (var y = 0; y < height; y++) { token.ThrowIfCancellationRequested(); Line(source, horizontal, y * width, 1, width); }
         for (var x = 0; x < width; x++) { token.ThrowIfCancellationRequested(); Line(horizontal, result, x, width, height); }
         return result;
+    }
+    internal sealed class DetailsTileWorkspace
+    {
+        public OklabColor[] Labs,Denoised;public double[] Lightness,Horizontal,Sharp,Structure,Clarity,Integral;public float[] Output;
+        public DetailsTileWorkspace(int width,int height){var n=width*height;Labs=new OklabColor[n];Denoised=new OklabColor[n];Lightness=new double[n];Horizontal=new double[n];Sharp=new double[n];Structure=new double[n];Clarity=new double[n];Integral=new double[Math.Max(width,height)+1];Output=new float[n*3];}
+    }
+    private static void BlurFractionalInto(double[] source,int width,int height,double radius,double[] horizontal,double[] result,double[] integral,CancellationToken token)
+    {
+        radius=Math.Max(.0001,radius);
+        void Line(double[] input,double[] output,int start,int stride,int length)
+        {
+            integral[0]=0;for(var i=0;i<length;i++)integral[i+1]=integral[i]+input[start+i*stride];
+            double At(double p){if(p<=0)return p*input[start];if(p>=length)return integral[length]+(p-length)*input[start+(length-1)*stride];var whole=(int)p;return integral[whole]+(p-whole)*input[start+whole*stride];}
+            for(var i=0;i<length;i++)output[start+i*stride]=(At(i+.5+radius)-At(i+.5-radius))/(2*radius);
+        }
+        for(var y=0;y<height;y++){token.ThrowIfCancellationRequested();Line(source,horizontal,y*width,1,width);}for(var x=0;x<width;x++){token.ThrowIfCancellationRequested();Line(horizontal,result,x,width,height);}
     }
     private readonly record struct LevelTransform(double Black, double White, double Gamma, double OutputBlack, double OutputWhite)
     {
