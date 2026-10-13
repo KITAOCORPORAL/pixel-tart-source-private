@@ -1,0 +1,55 @@
+{
+  "sourceCommit": "924d48683f9995721335e2dcd1bc89fe7040305d",
+  "files": [
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioDevelop.cs",
+      "type": "C# backend",
+      "sha256": "9daf93a9efbd154b0fafb917c6970d3222df9140654ecd3131186f7868f7e7ed"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+      "type": "C# backend",
+      "sha256": "f2b9ffb9107b4d4a91308d801d6655223547504fc9a7e9ab4d03f2e89cd2e3c9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/LegacyRawInstantInput.cs",
+      "type": "C# backend",
+      "sha256": "513b43310f4ed3a64032e6cc255a251604b6ef43ce2db24fd0ff680d9beb1070"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PixelTartFilm.cs",
+      "type": "C# backend",
+      "sha256": "a3820a42f1bdd533ae10408b5e523fa7848f909b1c187d4527c0100b35619672"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ReferenceColorCoreV2.cs",
+      "type": "C# backend",
+      "sha256": "a1afc793d14f6d0a6c0a4fcbd08376207fdbf289aa3232d54921cd88920277dd"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ReferenceLook.cs",
+      "type": "C# backend",
+      "sha256": "d37463c7589dcd7f03b01e17caf74a18975efaa65d94ec4d9f62e56157c7dbd4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/SpatialLegacyRawRenderer.cs",
+      "type": "C# backend",
+      "sha256": "ae7a714eb9b41159c3d065f90c6badd0be8ec4d104001308dabcb61b6e046b90"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ReviewedLibRawCandidate.cs",
+      "type": "C# backend",
+      "sha256": "53545ff8978998d2181de7a17f06518720219abc81e925e01e305ef1b2446504"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/SpatialClosureTests.cs",
+      "type": "C# test",
+      "sha256": "9047a77775a0a293869af79c0570f1c0d113b4941b27ae7d05fdfcdaf1741629"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/SpatialClosureRealTests.cs",
+      "type": "C# test",
+      "sha256": "5fcd5a7ecd0967018ea50ace4229ccb29f7a17cb346d067e8ddb13604abf6557"
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "source": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+  "Width": 5496,
+  "Height": 3670,
+  "rows": [
+    {
+      "node": "ReferenceMatch",
+      "status": "PASS",
+      "plan": {
+        "Node": "ReferenceMatch",
+        "Halo": 0,
+        "TileWidth": 512,
+        "TileHeight": 128,
+        "RequiredBytes": 803726144,
+        "GlobalAnalysis": true,
+        "Boundary": "Global edge clamp; legacy Develop truncated running-sum edge; interior crop excludes artificial tile boundary"
+      },
+      "tiledMs": 30960.4098,
+      "fullMs": 22374.5739,
+      "oracle": "FULL_REAL_PIXELS_COMPARED",
+      "maximum": 0,
+      "tilePeak": {
+        "peakWorking": 1203421184,
+        "peakPrivate": 1161330688,
+        "peakManaged": 1107592152,
+        "peakLedger": 803726144
+      },
+      "fullReferencePeak": {
+        "peakWorking": 4948033536,
+        "peakPrivate": 5382684672,
+        "peakManaged": 4496865088,
+        "peakLedger": 1277328064
+      },
+      "peakWorking": 4948033536,
+      "peakPrivate": 5382684672,
+      "peakManaged": 4496865088,
+      "peakLedger": 1277328064,
+      "processLifetimePeak": 4948037632
+    },
+    {
+      "node": "Details",
+      "status": "PASS",
+      "plan": {
+        "Node": "Details",
+        "Halo": 81,
+        "TileWidth": 512,
+        "TileHeight": 128,
+        "RequiredBytes": 1105976384,
+        "GlobalAnalysis": false,
+        "Boundary": "Global edge clamp; legacy Develop truncated running-sum edge; interior crop excludes artificial tile boundary"
+      },
+      "tiledMs": 22597.4334,
+      "fullMs": null,
+      "oracle": "FULL_REAL_REFERENCE_BUDGET_REJECTED; synthetic full-image golden covers node",
+      "maximum": null,
+      "tilePeak": {
+        "peakWorking": 5754093568,
+        "peakPrivate": 6192947200,
+        "peakManaged": 2383088696,
+        "peakLedger": 1105976384
+      },
+      "fullReferencePeak": {
+        "peakWorking": 0,
+        "peakPrivate": 0,
+        "peakManaged": 0,
+        "peakLedger": 0
+      },
+      "peakWorking": 0,
+      "peakPrivate": 0,
+      "peakManaged": 0,
+      "peakLedger": 0,
+      "processLifetimePeak": 5754675200
+    },
+    {
+      "node": "Structure",
+      "status": "PASS",
+      "plan": {
+        "Node": "Structure",
+        "Halo": 37,
+        "TileWidth": 512,
+        "TileHeight": 128,
+        "RequiredBytes": 812179904,
+        "GlobalAnalysis": false,
+        "Boundary": "Global edge clamp; legacy Develop truncated running-sum edge; interior crop excludes artificial tile boundary"
+      },
+      "tiledMs": 6644.5475,
+      "fullMs": 3749.9067,
+      "oracle": "FULL_REAL_PIXELS_COMPARED",
+      "maximum": 0,
+      "tilePeak": {
+        "peakWorking": 5967998976,
+        "peakPrivate": 6412296192,
+        "peakManaged": 3046609592,
+        "peakLedger": 812179904
+      },
+      "fullReferencePeak": {
+        "peakWorking": 5967998976,
+        "peakPrivate": 4862767104,
+        "peakManaged": 1600503120,
+        "peakLedger": 1277328064
+      },
+      "peakWorking": 5967998976,
+      "peakPrivate": 4862767104,
+      "peakManaged": 1600503120,
+      "peakLedger": 1277328064,
+      "processLifetimePeak": 5972541440
+    },
+    {
+      "node": "Bloom",
+      "status": "PASS",
+      "plan": {
+        "Node": "Bloom",
+        "Halo": 19,
+        "TileWidth": 512,
+        "TileHeight": 128,
+        "RequiredBytes": 807848384,
+        "GlobalAnalysis": false,
+        "Boundary": "Global edge clamp; legacy Develop truncated running-sum edge; interior crop excludes artificial tile boundary"
+      },
+      "tiledMs": 12084.2274,
+      "fullMs": 9086.5638,
+      "oracle": "FULL_REAL_PIXELS_COMPARED",
+      "maximum": 0,
+      "tilePeak": {
+        "peakWorking": 3896471552,
+        "peakPrivate": 4308766720,
+        "peakManaged": 899769920,
+        "peakLedger": 807848384
+      },
+      "fullReferencePeak": {
+        "peakWorking": 3896471552,
+        "peakPrivate": 3355930624,
+        "peakManaged": 1952342648,
+        "peakLedger": 1358009344
+      },
+      "peakWorking": 3896471552,
+      "peakPrivate": 3355930624,
+      "peakManaged": 1952342648,
+      "peakLedger": 1358009344,
+      "processLifetimePeak": 5972541440
+    },
+    {
+      "node": "Halation",
+      "status": "PASS",
+      "plan": {
+        "Node": "Halation",
+        "Halo": 10,
+        "TileWidth": 512,
+        "TileHeight": 128,
+        "RequiredBytes": 805838144,
+        "GlobalAnalysis": false,
+        "Boundary": "Global edge clamp; legacy Develop truncated running-sum edge; interior crop excludes artificial tile boundary"
+      },
+      "tiledMs": 8620.7212,
+      "fullMs": 7527.9312,
+      "oracle": "FULL_REAL_PIXELS_COMPARED",
+      "maximum": 0,
+      "tilePeak": {
+        "peakWorking": 3342303232,
+        "peakPrivate": 3586465792,
+        "peakManaged": 1743042648,
+        "peakLedger": 805838144
+      },
+      "fullReferencePeak": {
+        "peakWorking": 3421192192,
+        "peakPrivate": 3720605696,
+        "peakManaged": 2666731200,
+        "peakLedger": 1358009344
+      },
+      "peakWorking": 3421192192,
+      "peakPrivate": 3720605696,
+      "peakManaged": 2666731200,
+      "peakLedger": 1358009344,
+      "processLifetimePeak": 5972541440
+    }
+  ],
+  "desktopWindowOpened": false
+}

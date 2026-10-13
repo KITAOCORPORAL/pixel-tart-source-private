@@ -1,0 +1,61 @@
+{
+  "sourceCommit": "924d48683f9995721335e2dcd1bc89fe7040305d",
+  "exePath": "D:/AI AGENT/color-studio-closure-20261013/artifacts/spatial-closure/release/win-x64/KitaoPhotoSelector.exe",
+  "productVersion": "2.3.0-spatial-closure+924d48683f9995721335e2dcd1bc89fe7040305d",
+  "build": "Release win-x64 self-contained, non-single-file",
+  "components": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "bytes": 179200,
+      "sha256": "29e8d7395306357904ed149d6fe771c30418dbbc480b81b12e339fa3d7c7c119",
+      "testSha256": null
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "bytes": 2995200,
+      "sha256": "686655b29fb486bef84bc9b42dda3fde344671c0386f94707dcf1b655a63080f",
+      "testSha256": "686655b29fb486bef84bc9b42dda3fde344671c0386f94707dcf1b655a63080f"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "bytes": 4284928,
+      "sha256": "ff427586fd75c8db7b349a63d30a8e608b02e5e7ef4dfc8f5997872884bb6973",
+      "testSha256": "ff427586fd75c8db7b349a63d30a8e608b02e5e7ef4dfc8f5997872884bb6973"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "bytes": 38912,
+      "sha256": "1c0f40589964d46301a7f848762f66a37bebbbb9dae600b828768ee9a578e142",
+      "testSha256": "1c0f40589964d46301a7f848762f66a37bebbbb9dae600b828768ee9a578e142"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "bytes": 1161728,
+      "sha256": "cfc6ee7ac26946ada16519cdf5560eccdaed8bd898c08d11d19fc76107946058",
+      "testSha256": "cfc6ee7ac26946ada16519cdf5560eccdaed8bd898c08d11d19fc76107946058"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "bytes": 11264,
+      "sha256": "d04272fa3271bc668f5556f8c58ac269504d2a89f7dcf056d8bc6e63a1608208",
+      "testSha256": "d04272fa3271bc668f5556f8c58ac269504d2a89f7dcf056d8bc6e63a1608208"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "bytes": 11776,
+      "sha256": "6b6614040239c98567d9bbda457086bf225e31c83c56dbe729ae0277add95b53",
+      "testSha256": "6b6614040239c98567d9bbda457086bf225e31c83c56dbe729ae0277add95b53"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "bytes": 67072,
+      "sha256": "bf140dcb8eb99cc68298e3aceebd25e62096baa7d492068a727142d7cb83a5f8",
+      "testSha256": "bf140dcb8eb99cc68298e3aceebd25e62096baa7d492068a727142d7cb83a5f8"
+    }
+  ],
+  "candidateBinaryIncluded": false,
+  "defaultDecoderChanged": false,
+  "startup": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "visualApproval": "NOT_APPROVED"
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "status": "NOT_ACQUIRED",
+  "entries": [
+    {
+      "id": "grey-neutral",
+      "required": [
+        "owner-consent",
+        "RAW",
+        "target-spectrum",
+        "illuminant-measurement",
+        "exposure",
+        "SHA256"
+      ],
+      "status": "MISSING"
+    },
+    {
+      "id": "colour-chart-daylight",
+      "required": [
+        "chart-certified-reference",
+        "illuminant",
+        "RAW",
+        "ROI",
+        "repeat",
+        "holdout"
+      ],
+      "status": "MISSING"
+    },
+    {
+      "id": "colour-chart-tungsten",
+      "required": [
+        "chart-certified-reference",
+        "illuminant",
+        "RAW",
+        "ROI",
+        "repeat",
+        "holdout"
+      ],
+      "status": "MISSING"
+    },
+    {
+      "id": "exposure-sequence",
+      "required": [
+        "minus4-through-plus4EV",
+        "constant-light",
+        "black-white-level",
+        "clip-count"
+      ],
+      "status": "MISSING"
+    },
+    {
+      "id": "icc-independent-oracle",
+      "required": [
+        "source-profile-license-hash",
+        "destination-profile-license-hash",
+        "intent-BPC",
+        "engine-version",
+        "expected-values"
+      ],
+      "status": "MISSING"
+    }
+  ],
+  "existingPhotosAreCalibration": false
+}

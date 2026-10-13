@@ -1,0 +1,12 @@
+# Reviewed official LibRaw candidate
+
+Official primary source:https://www.libraw.org/download ; pinned packagehttps://www.libraw.org/data/LibRaw-0.22.2-Win64.zip.
+LocalSHA256 AC64FA12BB00A7581332D4C6AB918C0533FB3F119D6B668D47A6875410DCA948. Version0.22.2 includes matching source, headers, officialWin64 utilities and libraw.dll. Copyright/README/completeLGPL2.1/CDDL1.0 reviewed; dual-license choice applies. No restricted dcraw demosaic pack copied. Archive remains ignored local artifact; no candidate executable/DLL is committed or bundled into Release.
+
+Official0.22.2 Changelog explicitly lists SonyYCC Medium/Small pseudo-RAW support andSonyYCC bounds fixes, consistent with batch11's observedYCbCr3component lossless-JPEG main payload. Candidate officialraw-identify recognizesSony/Canon/Fuji; dcraw_emu full decode producedRGB16 for all3 with unchanged source hashes. This does NOT prove camera-wide support, sensor-mosaic recovery or equivalence to historicaldecoder.
+
+ReviewedLibRawCandidate backend interface is explicit opt-in with pinned executableSHA8DF090A80C784FA03182B91AB1679FD08E5FC139D54B0BFB8B003024EF741129 andlibraw.dllSHA6A459C22039ABF0EAC4D263673337C8ED5F223ACBD372FCF77610DEBF80AC8CD. Unknown versions/hash mismatch reject. Invokes officialheadlessdecoder(hidden/no-shell), isolatedtemp, timeout/cancel kills child, source identity checkedbefore/after,RGB16required. Never load0.22DLL intoSdcb0.21ABI or silently fallback after an oldfailure.
+
+Numeric candidate contractOfficialLibRaw0222DcrawRgb16SrgbV1: cameraWB, sRGBprimaries and explicitdcrawgamma2.4/toe12.92, display already baked. Buffer taggedseparateLibRaw0222-sRGBPrimariesGamma2p4Toe12p92, NOT accepted as calibrated/exactICC sRGB orPV4linear. NoICC labeling or existing project recompute. Candidate geometrySony3080x4624, Canon5496x3670, Fuji7752x5178 in priorcandidate run; Fuji differs fromold5184height, so migration must be explicit. Finalrun records authoritative dimensions/hash.
+
+Existing nativeSdcb0.21 path keeps diagnostic refusalRAW_NATIVE_FILE_UNSUPPORTED/-2 for thisSony. New interface tested only with project-authorized fixtures and oldCanon/Fuji; no marketing claim. UIselection/persistence wiring deferred withGrok layout; the candidate currently remains a callable backend probe adapter, not the active default RAW workflow. Candidate redistributable packaging/source-offer/legalrelease workflow remains required before optionalbinary inclusion; this task does not declare legalclearance or silently ship it.

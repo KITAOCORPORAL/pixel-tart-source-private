@@ -1,0 +1,35 @@
+{
+  "url": "https://www.libraw.org/data/LibRaw-0.22.2-Win64.zip",
+  "archiveSha256": "AC64FA12BB00A7581332D4C6AB918C0533FB3F119D6B668D47A6875410DCA948",
+  "reviewedVersion": "0.22.2",
+  "licenseChoice": "LGPL2.1 OR CDDL1.0; legal distribution workflow not completed",
+  "executables": [
+    "bin/dcraw_emu.exe",
+    "bin/raw-identify.exe"
+  ],
+  "native": "bin/libraw.dll",
+  "fullSourceInSameArchive": true,
+  "notCommittedOrBundled": true,
+  "files": [
+    {
+      "name": "COPYRIGHT",
+      "sha256": "574c88f5dd59414cfc896293a63defbc2d525a418ed413d7ab7dcc43cf79c509"
+    },
+    {
+      "name": "LICENSE.LGPL",
+      "sha256": "eea173a556abac0370461e57e12aab266894ea6be3874c2be05fd87871f75449"
+    },
+    {
+      "name": "LICENSE.CDDL",
+      "sha256": "0e3098d2d54a12434715f6679ea408d57da5e8d613c385c58ecc6fe5d30cc81f"
+    },
+    {
+      "name": "README.md",
+      "sha256": "47d6d721c3d3cda045a2780f807a6f3400bc29911df070daa38da4f4d5448fa5"
+    },
+    {
+      "name": "Changelog.txt",
+      "sha256": "e7593922893c92d6227a5da65ffdf92ba1cf0075d8b87068085d390e3b85f42f"
+    }
+  ]
+}

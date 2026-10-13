@@ -1,0 +1,44 @@
+{
+  "configuration": {
+    "Executable": "D:/AI AGENT/color-studio-closure-20261013/artifacts/spatial-closure/decoder-candidate/extracted/LibRaw-0.22.2/bin/dcraw_emu.exe",
+    "ExecutableSha256": "8DF090A80C784FA03182B91AB1679FD08E5FC139D54B0BFB8B003024EF741129",
+    "NativeLibrarySha256": "6A459C22039ABF0EAC4D263673337C8ED5F223ACBD372FCF77610DEBF80AC8CD",
+    "Version": "0.22.2",
+    "TimeoutSeconds": 180
+  },
+  "results": [
+    {
+      "name": "DSC09916.ARW",
+      "status": "PASS",
+      "Width": 3080,
+      "Height": 4624,
+      "DecoderVersion": "OfficialLibRaw0222DcrawRgb16SrgbV1",
+      "NumericDomain": "LibRaw0222 sRGB primaries, explicit dcraw gamma2.4/toe12.92 and camera WB baked; isolated candidate domain, not admitted as exact ICC sRGB/PV4",
+      "milliseconds": 1097.5647,
+      "pixelHash": "2F029E65AAE18CFD3348242652A497B1A4207FFB156782D645778F992F1337DC",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "TNAN8886.CR3",
+      "status": "PASS",
+      "Width": 5496,
+      "Height": 3670,
+      "DecoderVersion": "OfficialLibRaw0222DcrawRgb16SrgbV1",
+      "NumericDomain": "LibRaw0222 sRGB primaries, explicit dcraw gamma2.4/toe12.92 and camera WB baked; isolated candidate domain, not admitted as exact ICC sRGB/PV4",
+      "milliseconds": 2882.9253,
+      "pixelHash": "A5B0D0F3DCF91A3E430F79AC74C1ED275758857E90E305495AB5255BA5C3E77B",
+      "sourceUnchanged": true
+    },
+    {
+      "name": "DSCF0347.RAF",
+      "status": "PASS",
+      "Width": 7752,
+      "Height": 5178,
+      "DecoderVersion": "OfficialLibRaw0222DcrawRgb16SrgbV1",
+      "NumericDomain": "LibRaw0222 sRGB primaries, explicit dcraw gamma2.4/toe12.92 and camera WB baked; isolated candidate domain, not admitted as exact ICC sRGB/PV4",
+      "milliseconds": 21057.818,
+      "pixelHash": "60AEEBE2A955C2681F0BE4DD619B655EB6F9E7ACC8DF4DE887ECF680C6CA10E5",
+      "sourceUnchanged": true
+    }
+  ]
+}
