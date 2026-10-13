@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-13",
+  "timezone": "Europe/Berlin",
+  "authorization": "User explicitly authorized Release EXE startup and Computer Use this turn; browser/webview not authorized.",
+  "productSource": "924d48683f9995721335e2dcd1bc89fe7040305d",
+  "releaseExe": "D:/AI AGENT/color-studio-closure-20261013/artifacts/spatial-closure/release/win-x64/KitaoPhotoSelector.exe",
+  "releaseSha256": "29E8D7395306357904ED149D6FE771C30418DBBC480B81B12E339FA3D7C7C119",
+  "isolatedDataRoot": "D:/AI AGENT/color-studio-closure-20261013/artifacts/spatial-closure/windows-native/data",
+  "processId": 36188,
+  "windows": "Windows NT 10.0.19045.0",
+  "startup": "FAIL_UNHANDLED_UI_EXCEPTION",
+  "exception": {
+    "type": "System.InvalidOperationException",
+    "message": "Sequence contains no matching element",
+    "frames": [
+      "TetherCaptureView.Group(String header)",
+      "TetherCaptureView.LoadWorkspacePreferencesAsync()",
+      "TetherCaptureView constructor Loaded handler"
+    ]
+  },
+  "navigationWorkbench": "OBSERVED",
+  "navigationColorStudio": "PASS_SEMANTIC_INVOKE",
+  "capture": "sky screenshot capture timed out; alternate provider obtained target UI tree and occasional unobscured app view, but also desktop-occluded views",
+  "userInterference": "Foreground changed repeatedly and sky reported user input; stopped keyboard/data import/DPI mutation to avoid wrong-window input.",
+  "physicalDpi": {
+    "100": "NOT_RUN",
+    "125": "NOT_RUN",
+    "150": "NOT_RUN",
+    "175": "NOT_RUN",
+    "200": "NOT_RUN"
+  },
+  "taskCancellation": "NOT_RUN",
+  "photoSwitch": "NOT_RUN",
+  "saveReopen": "NOT_RUN",
+  "memoryReturn": "NOT_RUN_NO_PROCESS_SERIES",
+  "exit": "App exit recorded in own isolated log; process no longer running.",
+  "screenshotsRetained": false,
+  "privateContentRetained": false,
+  "sourceChanged": false,
+  "appLogLocalSha256": "8a1736f2a9e7ce29d854663514666c471ed0b0b61e7154c6949f7ffce1e13c46"
+}
