@@ -1,0 +1,192 @@
+{
+  "baseSha": "9e0fc52b0fd3598bae36ad1ccb5db2b1520ad0d8",
+  "testedSourceCommit": "0fec3c60bde763b3ea2df40c1f2cfc9a3f41032f",
+  "scope": "All changed files except this self-referential manifest; final Git SHA delivered separately",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 467,
+      "sha256": "368f9141e1448a5f2afc8468cbba23dbb221625cd77d3dbde65b585e2f938808"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/DATA_SOURCES_AND_LICENSES.json",
+      "bytes": 4958,
+      "sha256": "1d2fdaacc4956ee73692de52f9f758415bfc609d7d99de1e56d98dba9b2961e5"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/DATA_SOURCES_AND_LICENSES.md",
+      "bytes": 5940,
+      "sha256": "5b4a25580b618fca7e2d3b89af82c20199451de86a472ae0d26d138db70b8719"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/EVIDENCE_REPORT.md",
+      "bytes": 4250,
+      "sha256": "f0919aa59c16aa6b3bff94975227ac8059b3508312612fb7fa723113a16f3c68"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/OFFICIAL_REFERENCE_RESULT.json",
+      "bytes": 2029,
+      "sha256": "2ea7a1aedebffd8c40cfa657c174cdee6771d54764defd2897130d7f15ba753b"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/PAIRED_CAPTURE_SPEC.md",
+      "bytes": 3880,
+      "sha256": "e0a578ab2d02478264b7915e99e0c84e90791898b9cfaadb16383931db579f01"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/PUBLIC_RAW_RESULT.json",
+      "bytes": 5281,
+      "sha256": "6f6e9556a2a0ea7acc30b00e8903c8d64a5456647f76d487ae5060e4c05a9aa8"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/RELEASE_MANIFEST.json",
+      "bytes": 48109,
+      "sha256": "f261cd171a6535e29b686699d49074f9cda6774d1c612e9fb0f417a27f04e4b8"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/REPRODUCE.md",
+      "bytes": 3585,
+      "sha256": "3527fb517cc05051504b91e11438dba410ac644fd3f7441bec4922756012c8b9"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/SOURCE_AND_VERSION_CONTRACT.md",
+      "bytes": 3904,
+      "sha256": "973b51fa76ce54df98b8d44f0dc9dd2a95db082536b8ac7b961a769c865d3cfa"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/TEST_MATRIX.md",
+      "bytes": 4314,
+      "sha256": "7496250fe5562d1701a517961561047e7bd2c9a79116f74ddce2547092f1c45b"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/TEST_SUMMARY.json",
+      "bytes": 30836,
+      "sha256": "e71f78cf47ea6bfcffc683eaf46b1661826be2fb73c9163f2e992483aefcfaa1"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/WORKTREE_STATE_AFTER.json",
+      "bytes": 7239,
+      "sha256": "06cb5fb78b524ec85bcf95c385d88ef7f5d95ef7e42d607add5d2bfa960d0c81"
+    },
+    {
+      "path": "docs/evidence/integrated-workflow-color-docs/batch-12/WORKTREE_STATE_BEFORE.json",
+      "bytes": 6000,
+      "sha256": "a844eadf38c2abe9cb9a6752d5760a6f2315eeb16096480430f22c76dfe37e7c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ColorValidation/ChartReferenceData.cs",
+      "bytes": 10676,
+      "sha256": "0479b2b186b163ac627a78b7cae947e4386b5e25b127cc41883e3e5921231f9a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ColorValidation/PairedCaptureMetadata.cs",
+      "bytes": 8643,
+      "sha256": "fcdad468d98e48be678377217a7754eeb8609c394aaa087e71fbc4798f6210a4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ColorValidation/ReferenceColorValidation.cs",
+      "bytes": 6191,
+      "sha256": "4fb23921f68a348620601170ce332b9b31c92436184535d5f667c2af8cee2f96"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Batch12ReleasedAssemblyTests.cs",
+      "bytes": 834,
+      "sha256": "84d8fac84ef4c76c47456d8eac5953c0844d4d4a3b6df7b92b7f52a514453050"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/PairedCaptureMetadataTests.cs",
+      "bytes": 3794,
+      "sha256": "a1b6caed74455ff0b1d5a8c19b91a368ee8601c85d3c62afb092f879147eb3fb"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/PublicColorReferenceTests.cs",
+      "bytes": 9228,
+      "sha256": "e36534465f3903ca7e2c6d85d6fc8f64059cecc85fe6665ca174117298929e87"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/PublicCubeAndLegacyTests.cs",
+      "bytes": 3107,
+      "sha256": "b45adabef141bda13081f565d5ed6f5508e814f3b2ccb0caa95476bfb568dd2e"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
+      "bytes": 901,
+      "sha256": "467cfb662cfa229c25a8b9c5629ab4cc0fc670ebda36f447b9224dccc3b15055"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/TestData/Batch12/00_0010-gt.json",
+      "bytes": 689,
+      "sha256": "cc83bc6cf991ffd96505d8f4771ae9355193d757e42278a5d499f21dc39465fd"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/TestData/Batch12/00_0010-metrics.json",
+      "bytes": 1388,
+      "sha256": "54db3fa9547a339b3470d97a812f62b7c1027a3f8cac66639763380d25bb8edd"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/TestData/Batch12/00_0010-sensor-grid.csv",
+      "bytes": 9330,
+      "sha256": "64dc6750b23e36b1d76983d58a5f01ac4cf8f223fd15d0ac667422fb91df95e6"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/TestData/Batch12/00_0010-simple.png",
+      "bytes": 966936,
+      "sha256": "249936b735b3c574e92502ccd9c5b2bc62a8508616aaf0cbb70e77034279acd6"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/TestData/Batch12/ATTRIBUTION.txt",
+      "bytes": 1467,
+      "sha256": "d38ed1a8e3c33b9f3a16993c8b2ab0bb8aad42adcab940f37b3585d3059b4834"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/TestData/Batch12/pv456-base-golden.json",
+      "bytes": 7420,
+      "sha256": "07150c76014bc8bef5e41dbf560c20c51e1b970db90c2cffe83716b561925945"
+    },
+    {
+      "path": "tools/batch12/LegacyPixelProbe/LegacyPixelCorpus.cs",
+      "bytes": 2523,
+      "sha256": "042da98cd5f5345d07ebf240529dcba5b8c06278c7a719078c2e481c2c409ebf"
+    },
+    {
+      "path": "tools/batch12/LegacyPixelProbe/LegacyPixelProbe.csproj",
+      "bytes": 403,
+      "sha256": "0291bb6cbf160739ff2573291adf523c8f8ede99e52e2210f8add13025a1e1c2"
+    },
+    {
+      "path": "tools/batch12/LegacyPixelProbe/Program.cs",
+      "bytes": 324,
+      "sha256": "b278c4deeb12210fa5263dbd61e5f6fa9c8a91efb107cc1aa42ec9367ef450bd"
+    },
+    {
+      "path": "tools/batch12/OfficialReferenceProbe/OfficialReferenceProbe.csproj",
+      "bytes": 338,
+      "sha256": "b9057b57af00bbaed6290cb0ccc11295101ffd9e15940c6bfba83ce85f497987"
+    },
+    {
+      "path": "tools/batch12/OfficialReferenceProbe/Program.cs",
+      "bytes": 2421,
+      "sha256": "af69906df0ba957103541437e9ec02379e9f66839dabe0d9e9ccde5db57ea353"
+    },
+    {
+      "path": "tools/batch12/PublicRawProbe/Program.cs",
+      "bytes": 3003,
+      "sha256": "78455a0c7db035b8ac868e671b9cd4b69a7853b159100710e6bc69a55f9bffe9"
+    },
+    {
+      "path": "tools/batch12/PublicRawProbe/PublicRawProbe.csproj",
+      "bytes": 338,
+      "sha256": "b9057b57af00bbaed6290cb0ccc11295101ffd9e15940c6bfba83ce85f497987"
+    },
+    {
+      "path": "tools/batch12/build_cube_fixture.py",
+      "bytes": 3156,
+      "sha256": "c3f025e84970f43f51060fb1e98af87a503678144e0e04efcdb66b100c1e569c"
+    },
+    {
+      "path": "tools/batch12/fetch_public_raw.py",
+      "bytes": 3332,
+      "sha256": "21f95ead2786eb0857960a7e0c37037d8af0ad35d63d33d04844c5f2191c5d6d"
+    }
+  ]
+}

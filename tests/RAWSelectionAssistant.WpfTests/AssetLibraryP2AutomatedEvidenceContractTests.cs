@@ -94,13 +94,12 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
         {
             var escapedPath = Path(relative).Replace("'", "''", StringComparison.Ordinal);
             var script = $"$e=$null;[Management.Automation.Language.Parser]::ParseFile('{escapedPath}',[ref]$null,[ref]$e)|Out-Null;if(@($e).Count){{$e|% Message;exit 1}}";
-            using var process = Process.Start(new ProcessStartInfo("powershell.exe")
+            var process = BoundedTestProcess.Run(new ProcessStartInfo("powershell.exe")
             {
                 UseShellExecute = false, RedirectStandardOutput = true, RedirectStandardError = true,
                 ArgumentList = { "-NoProfile", "-NonInteractive", "-Command", script }
-            })!;
-            process.WaitForExit();
-            Assert.AreEqual(0, process.ExitCode, $"{relative}: {process.StandardOutput.ReadToEnd()} {process.StandardError.ReadToEnd()}");
+            });
+            Assert.AreEqual(0, process.ExitCode, $"{relative}: {process.Output} {process.Stderr}");
         }
     }
 
@@ -273,11 +272,8 @@ public sealed class AssetLibraryP2AutomatedEvidenceContractTests
         foreach (var argument in arguments) start.ArgumentList.Add(argument);
         if (environment is not null)
             foreach (var pair in environment) start.Environment[pair.Key] = pair.Value;
-        using var process = Process.Start(start) ?? throw new InvalidOperationException("PowerShell process did not start.");
-        var outputTask = process.StandardOutput.ReadToEndAsync();
-        var errorTask = process.StandardError.ReadToEndAsync();
-        process.WaitForExit();
-        return (process.ExitCode, outputTask.GetAwaiter().GetResult(), errorTask.GetAwaiter().GetResult());
+        var process = BoundedTestProcess.Run(start);
+        return (process.ExitCode, process.Output, process.Stderr);
     }
 
     private static string TreeFingerprint(string root)

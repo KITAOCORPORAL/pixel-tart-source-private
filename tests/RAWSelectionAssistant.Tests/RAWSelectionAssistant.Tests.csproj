@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -23,4 +23,8 @@
     <Compile Remove="ModularHarnessTests.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestData/Batch12/**" CopyToOutputDirectory="PreserveNewest" />
+    <Compile Include="../../tools/batch12/LegacyPixelProbe/LegacyPixelCorpus.cs" Link="Batch12/LegacyPixelCorpus.cs" />
+  </ItemGroup>
 </Project>

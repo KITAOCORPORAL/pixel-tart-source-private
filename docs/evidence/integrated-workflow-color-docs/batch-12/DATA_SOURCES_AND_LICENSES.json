@@ -1,0 +1,118 @@
+{
+  "checkedDate": "2026-10-13",
+  "timezone": "Europe/Berlin",
+  "originalReferenceConditions": "Whitepoint and observer NOT_DECLARED; conversions refuse",
+  "artifacts": [
+    {
+      "id": "ColorChecker24_Before_Nov2014.zip",
+      "sha256": "8c3dc0f5d24ddbf1b32be2f2fb8f8ef930772d8d9990b10737fc64e159ce4510",
+      "bytes": 781,
+      "source": "https://www.xrite.com/-/media/XRite/Files/Literature/Misc/C/ColorChecker24_Before_Nov2014.zip",
+      "acquired": "2026-10-13",
+      "version": "BeforeNovember2014",
+      "license": "X-Rite website terms; no written redistribution consent",
+      "redistribution": "NotEstablished/Excluded",
+      "localPreservation": "artifacts/batch12/research-originals/ColorChecker24_Before_Nov2014.zip",
+      "git": false,
+      "release": false
+    },
+    {
+      "id": "ColorChecker24_Before_Nov2014.txt",
+      "sha256": "0594f920f656331ca878e5a207173e22c80217dcaa00ae5d45013ccf7f86275f",
+      "bytes": 948,
+      "source": "https://www.xrite.com/-/media/XRite/Files/Literature/Misc/C/ColorChecker24_Before_Nov2014.zip",
+      "acquired": "2026-10-13",
+      "version": "BeforeNovember2014",
+      "license": "X-Rite website terms; no written redistribution consent",
+      "redistribution": "NotEstablished/Excluded",
+      "localPreservation": "artifacts/batch12/research-originals/ColorChecker24_Before_Nov2014.txt",
+      "git": false,
+      "release": false
+    },
+    {
+      "id": "ColorChecker24_After_Nov2014.zip",
+      "sha256": "4fb63f1e33dfaa4f0d3500508db1abb0064518b503143c0a7e21d0d95d3cd39e",
+      "bytes": 794,
+      "source": "https://www.xrite.com/-/media/XRite/Files/Literature/Misc/C/ColorChecker24_After_Nov2014.zip",
+      "acquired": "2026-10-13",
+      "version": "November2014AndNewer",
+      "license": "X-Rite website terms; no written redistribution consent",
+      "redistribution": "NotEstablished/Excluded",
+      "localPreservation": "artifacts/batch12/research-originals/ColorChecker24_After_Nov2014.zip",
+      "git": false,
+      "release": false
+    },
+    {
+      "id": "ColorChecker24_After_Nov2014.txt",
+      "sha256": "2d110e3e8c33cb46fad920817efcf3efa504c2a9eb9cf60c9079b9c111557d29",
+      "bytes": 946,
+      "source": "https://www.xrite.com/-/media/XRite/Files/Literature/Misc/C/ColorChecker24_After_Nov2014.zip",
+      "acquired": "2026-10-13",
+      "version": "November2014AndNewer",
+      "license": "X-Rite website terms; no written redistribution consent",
+      "redistribution": "NotEstablished/Excluded",
+      "localPreservation": "artifacts/batch12/research-originals/ColorChecker24_After_Nov2014.txt",
+      "git": false,
+      "release": false
+    },
+    {
+      "id": "00_0010-gt.json",
+      "sha256": "cc83bc6cf991ffd96505d8f4771ae9355193d757e42278a5d499f21dc39465fd",
+      "bytes": 689,
+      "source": "https://zenodo.org/records/4153431",
+      "version": "Cube++ record4153431; sample00_0010 inherited ds_version1.0",
+      "license": "CC-BY-4.0",
+      "redistribution": "Permitted with attribution",
+      "git": true,
+      "release": false,
+      "changes": "original member unchanged"
+    },
+    {
+      "id": "00_0010-metrics.json",
+      "sha256": "54db3fa9547a339b3470d97a812f62b7c1027a3f8cac66639763380d25bb8edd",
+      "bytes": 1388,
+      "source": "https://zenodo.org/records/4153431",
+      "version": "Cube++ record4153431; sample00_0010 inherited ds_version1.0",
+      "license": "CC-BY-4.0",
+      "redistribution": "Permitted with attribution",
+      "git": true,
+      "release": false,
+      "changes": "derived grid/metrics"
+    },
+    {
+      "id": "00_0010-sensor-grid.csv",
+      "sha256": "64dc6750b23e36b1d76983d58a5f01ac4cf8f223fd15d0ac667422fb91df95e6",
+      "bytes": 9330,
+      "source": "https://zenodo.org/records/4153431",
+      "version": "Cube++ record4153431; sample00_0010 inherited ds_version1.0",
+      "license": "CC-BY-4.0",
+      "redistribution": "Permitted with attribution",
+      "git": true,
+      "release": false,
+      "changes": "derived grid/metrics"
+    },
+    {
+      "id": "00_0010-simple.png",
+      "sha256": "249936b735b3c574e92502ccd9c5b2bc62a8508616aaf0cbb70e77034279acd6",
+      "bytes": 966936,
+      "source": "https://zenodo.org/records/4153431",
+      "version": "Cube++ record4153431; sample00_0010 inherited ds_version1.0",
+      "license": "CC-BY-4.0",
+      "redistribution": "Permitted with attribution",
+      "git": true,
+      "release": false,
+      "changes": "original member unchanged"
+    },
+    {
+      "id": "00_0010.CR2",
+      "sha256": "cd7492209f002050f24e4ae4c2365f8702145d917f4979e2456aeddb33aebc6f",
+      "bytes": 30255385,
+      "source": "https://zenodo.org/api/records/4153431/files/source_CR2_0.zip/content",
+      "member": "Cube++/auxiliary/source/CR2/00_0010.CR2",
+      "license": "CC-BY-4.0",
+      "git": false,
+      "release": false,
+      "integrity": "ZIP CRC32 plus pinned SHA256 verified; archive MD5 not independently verified"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "Parser": "ClassicCgatsV1",
+  "References": [
+    {
+      "source": {
+        "Dataset": "X-Rite ColorChecker Classic",
+        "Version": "BeforeNovember2014",
+        "SourceUri": "https://www.xrite.com/service-support/new_color_specifications_for_colorchecker_sg_and_classic_charts",
+        "License": "X-Rite terms; no redistribution consent",
+        "Redistribution": 0,
+        "Sha256": "0594F920F656331CA878E5A207173E22C80217DCAA00AE5D45013CCF7F86275F"
+      },
+      "Originator": "ColorChecker24 - Before November2014 edition",
+      "PatchCount": 24,
+      "Encoding": "Lab",
+      "Conditions": {
+        "Illuminant": null,
+        "WhiteX": null,
+        "WhiteY": null,
+        "ObserverDegrees": null,
+        "MeasurementCondition": null,
+        "Evidence": "Original source does not declare white point/observer; newer source reports i1Pro2 M0/no filter"
+      },
+      "ConversionRefused": true,
+      "RedistributionRefused": true,
+      "EditionConflictRefused": true
+    },
+    {
+      "source": {
+        "Dataset": "X-Rite ColorChecker Classic",
+        "Version": "November2014AndNewer",
+        "SourceUri": "https://www.xrite.com/service-support/new_color_specifications_for_colorchecker_sg_and_classic_charts",
+        "License": "X-Rite terms; no redistribution consent",
+        "Redistribution": 0,
+        "Sha256": "2D110E3E8C33CB46FAD920817EFCF3EFA504C2A9EB9CF60C9079B9C111557D29"
+      },
+      "Originator": "ColorChecker24 - November2014 edition and newer",
+      "PatchCount": 24,
+      "Encoding": "Lab",
+      "Conditions": {
+        "Illuminant": null,
+        "WhiteX": null,
+        "WhiteY": null,
+        "ObserverDegrees": null,
+        "MeasurementCondition": "M0, no filter",
+        "Evidence": "Original source does not declare white point/observer; newer source reports i1Pro2 M0/no filter"
+      },
+      "ConversionRefused": true,
+      "RedistributionRefused": true,
+      "EditionConflictRefused": true
+    }
+  ]
+}

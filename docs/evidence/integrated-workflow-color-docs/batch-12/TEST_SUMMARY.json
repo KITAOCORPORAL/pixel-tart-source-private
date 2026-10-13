@@ -1,0 +1,682 @@
+{
+  "baseSha": "9e0fc52b0fd3598bae36ad1ccb5db2b1520ad0d8",
+  "testedSourceCommit": "0fec3c60bde763b3ea2df40c1f2cfc9a3f41032f",
+  "sdk": "10.0.401",
+  "runs": [
+    {
+      "path": "artifacts/batch12/baseline/baseline.trx",
+      "sha256": "9e57420770a8e3d9a5993d87b781a6352e50b8499955333b5d48ab744c62a10a",
+      "outcome": "Completed",
+      "counts": {
+        "total": 12,
+        "executed": 12,
+        "passed": 12,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": []
+    },
+    {
+      "path": "artifacts/batch12/core-full/core-final-sealed.trx",
+      "sha256": "6ab7b0093c33294a2e4529133e2c59cec39c9a66b4e01af29164c22fd556b66f",
+      "outcome": "Completed",
+      "counts": {
+        "total": 1683,
+        "executed": 1676,
+        "passed": 1676,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": [
+        "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+        "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+        "CpuGpuParityAcrossEightSceneClasses",
+        "CpuGpuParityOnSyntheticScene",
+        "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+        "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+        "ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence"
+      ]
+    },
+    {
+      "path": "artifacts/batch12/core-full/core-final.trx",
+      "sha256": "6a7dda0cd94d7675a9e0c22e52819da7efe845b1fc72708c42f2419d59bbe68f",
+      "outcome": "Completed",
+      "counts": {
+        "total": 1681,
+        "executed": 1675,
+        "passed": 1675,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": [
+        "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+        "CpuGpuParityOnSyntheticScene",
+        "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+        "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+        "CpuGpuParityAcrossEightSceneClasses",
+        "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16"
+      ]
+    },
+    {
+      "path": "artifacts/batch12/core-full/core-final2.trx",
+      "sha256": "c5f50f067b0d28e95dce00c7d598cfee94dd1cc32c8749bb2758fae903e39cf9",
+      "outcome": "Completed",
+      "counts": {
+        "total": 1682,
+        "executed": 1675,
+        "passed": 1675,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": [
+        "CpuGpuParityAcrossEightSceneClasses",
+        "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+        "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+        "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+        "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+        "CpuGpuParityOnSyntheticScene",
+        "ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence"
+      ]
+    },
+    {
+      "path": "artifacts/batch12/core-full/core-full-dtemp.trx",
+      "sha256": "58cd291a0989f7f07b62e2093cae1fc3bef952b29ef9771a4e88e20ae86b50c4",
+      "outcome": "Completed",
+      "counts": {
+        "total": 1681,
+        "executed": 1675,
+        "passed": 1675,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": [
+        "CpuGpuParityOnSyntheticScene",
+        "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+        "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+        "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+        "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+        "CpuGpuParityAcrossEightSceneClasses"
+      ]
+    },
+    {
+      "path": "artifacts/batch12/core-full/core-full.trx",
+      "sha256": "95671a9a1646a19e36169583d9d36a86426e24070f7036ed862c306662332670",
+      "outcome": "Failed",
+      "counts": {
+        "total": 1681,
+        "executed": 1675,
+        "passed": 1638,
+        "failed": 37,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [
+        {
+          "name": "RecoveredAssociation_RejectsUndoAfterUserModification",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002RecoveredAssociation_RejectsUndoAfterUserModification \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.InvalidOperationException: Sequence contains no elements"
+        },
+        {
+          "name": "AbandonAssociation_UsesRejectOnlyAndNeverInvokesUndoDeletion",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002AbandonAssociation_UsesRejectOnlyAndNeverInvokesUndoDeletion \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object."
+        },
+        {
+          "name": "PendingCopy_UndoRejectsAssociatedManagedCopy",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002PendingCopy_UndoRejectsAssociatedManagedCopy \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object."
+        },
+        {
+          "name": "AbandonAssociation_ConcurrentCallsProduceOnePersistedFinalJournalState",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002AbandonAssociation_ConcurrentCallsProduceOnePersistedFinalJournalState \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object."
+        },
+        {
+          "name": "CopyCommand_ReturnsOnlyAfterTerminalStateIsPersisted",
+          "message": "Assert.IsTrue \u5931\u8d25\u3002\u2018condition\u2019\u8868\u8fbe\u5f0f:\u2018TaskStateMachine.IsTerminal(persisted.State)\u2019\u3002"
+        },
+        {
+          "name": "DatabaseAssociationFailure_ReturnsPartiallyCompletedAndKeepsBothFiles",
+          "message": "Assert.AreEqual \u5931\u8d25\u3002\u5e94\u4e3a: <PartiallyCompleted>\uff0c\u5b9e\u9645\u4e3a: <NeedsAttention>\u3002\u2018expected\u2019\u8868\u8fbe\u5f0f:\u2018TetherProcessingState.PartiallyCompleted\u2019,\u2018actual\u2019\u8868\u8fbe\u5f0f:\u2018result.State\u2019\u3002"
+        },
+        {
+          "name": "CopyConflict_AutoNumbersAndNeverOverwritesExistingFile",
+          "message": "StringAssert.Contains \u5931\u8d25\u3002\u53c2\u6570\u201cvalue\u201d\u65e0\u6548\u3002\u503c\u4e0d\u80fd\u4e3a NULL\u3002\u3002"
+        },
+        {
+          "name": "Copy_StoresSha256AndVerifiedLength",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002Copy_StoresSha256AndVerifiedLength \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.InvalidOperationException: Sequence contains no matching element"
+        },
+        {
+          "name": "Copy_DefaultConflictPolicyAutoNumbersAndNeverOverwrites",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002Copy_DefaultConflictPolicyAutoNumbersAndNeverOverwrites \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.InvalidOperationException: Sequence contains no matching element"
+        },
+        {
+          "name": "Copy_NormalizedDuplicateInputIsCopiedOnlyOnce",
+          "message": "Assert.AreEqual \u5931\u8d25\u3002\u5e94\u4e3a: <1>\uff0c\u5b9e\u9645\u4e3a: <0>\u3002\u2018expected\u2019\u8868\u8fbe\u5f0f:\u20181\u2019,\u2018actual\u2019\u8868\u8fbe\u5f0f:\u2018result.Successful\u2019\u3002"
+        },
+        {
+          "name": "SameDirectory_IsAllowedWithAutoNumberAndSourceIsPreserved",
+          "message": "Assert.AreEqual \u5931\u8d25\u3002\u5e94\u4e3a: <Completed>\uff0c\u5b9e\u9645\u4e3a: <NeedsAttention>\u3002\u2018expected\u2019\u8868\u8fbe\u5f0f:\u2018TaskLifecycleState.Completed\u2019,\u2018actual\u2019\u8868\u8fbe\u5f0f:\u2018result.State\u2019\u3002"
+        },
+        {
+          "name": "Copy_DatabaseFailureReturnsPendingAssociationAndPartialTask",
+          "message": "Assert.IsNotNull \u5931\u8d25\u3002\u2018value\u2019\u8868\u8fbe\u5f0f:\u2018pending\u2019\u3002"
+        },
+        {
+          "name": "VisualQuery_On100KDistributedFeaturesCoversToneHueSaturationContrastAndTagScope",
+          "message": "\u7c7b\u521d\u59cb\u5316\u65b9\u6cd5 RAWSelectionAssistant.Tests.ModularHarnessVisualScaleAcceptanceTests.Initialize \u5f15\u53d1\u5f02\u5e38\u3002Microsoft.Data.Sqlite.SqliteException: SQLite Error 13: 'database or disk is full'.\u3002"
+        },
+        {
+          "name": "Similarity_On100KCandidatesScoresOnlyBoundedPoolAndBuildsNoPairwiseCache",
+          "message": "\u7c7b\u521d\u59cb\u5316\u65b9\u6cd5 RAWSelectionAssistant.Tests.ModularHarnessVisualScaleAcceptanceTests.Initialize \u5f15\u53d1\u5f02\u5e38\u3002Microsoft.Data.Sqlite.SqliteException: SQLite Error 13: 'database or disk is full'.\u3002"
+        },
+        {
+          "name": "ArchivedBookingBlocksRetryingAPendingAssociation",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002ArchivedBookingBlocksRetryingAPendingAssociation \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object."
+        },
+        {
+          "name": "RecoveredAssociation_AbandonPersistsAndNeverDeletesFile",
+          "message": "Assert.AreEqual \u5931\u8d25\u3002\u5e94\u4e3a: <PartiallyCompleted>\uff0c\u5b9e\u9645\u4e3a: <NeedsAttention>\u3002\u2018expected\u2019\u8868\u8fbe\u5f0f:\u2018TaskLifecycleState.PartiallyCompleted\u2019,\u2018actual\u2019\u8868\u8fbe\u5f0f:\u2018persistedBeforeAbandon!.State\u2019\u3002"
+        },
+        {
+          "name": "RecoveredAssociation_CanRetryAndDoesNotAppearAgain",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002RecoveredAssociation_CanRetryAndDoesNotAppearAgain \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.InvalidOperationException: Sequence contains no elements"
+        },
+        {
+          "name": "AbandonAssociation_IsIdempotentAndKeepsBothFiles",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002AbandonAssociation_IsIdempotentAndKeepsBothFiles \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object."
+        },
+        {
+          "name": "RemoveAssociation_NeverDeletesReferenceOrManagedCopy",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002RemoveAssociation_NeverDeletesReferenceOrManagedCopy \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.InvalidOperationException: Sequence contains no matching element"
+        },
+        {
+          "name": "PendingCopy_UndoDeletesOnlyUnchangedTaskOutput",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002PendingCopy_UndoDeletesOnlyUnchangedTaskOutput \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object."
+        },
+        {
+          "name": "Compression_UsesAutoNumberAndPreservesSourceAndExistingOutput",
+          "message": "Assert.AreEqual \u5931\u8d25\u3002\u5e94\u4e3a: <Completed>\uff0c\u5b9e\u9645\u4e3a: <NeedsAttention>\u3002\u2018expected\u2019\u8868\u8fbe\u5f0f:\u2018TaskLifecycleState.Completed\u2019,\u2018actual\u2019\u8868\u8fbe\u5f0f:\u2018result.State\u2019\u3002"
+        },
+        {
+          "name": "PendingAssociation_CanRetryAfterDatabaseRecovers",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002PendingAssociation_CanRetryAfterDatabaseRecovers \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object."
+        },
+        {
+          "name": "PendingCopy_UndoRejectsFileModifiedByUser",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002PendingCopy_UndoRejectsFileModifiedByUser \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object."
+        },
+        {
+          "name": "BackupFailure_DoesNotUndoSuccessfulProjectCopy",
+          "message": "Assert.AreEqual \u5931\u8d25\u3002\u5e94\u4e3a: <Copied>\uff0c\u5b9e\u9645\u4e3a: <NeedsAttention>\u3002\u2018expected\u2019\u8868\u8fbe\u5f0f:\u2018TetherProcessingState.Copied\u2019,\u2018actual\u2019\u8868\u8fbe\u5f0f:\u2018project.State\u2019\u3002"
+        },
+        {
+          "name": "Cancellation_ReturnsCompletedDetailsAndCleansUncommittedFragment",
+          "message": "Assert.AreEqual \u5931\u8d25\u3002\u5e94\u4e3a: <PartiallyCompleted>\uff0c\u5b9e\u9645\u4e3a: <NeedsAttention>\u3002\u2018expected\u2019\u8868\u8fbe\u5f0f:\u2018TaskLifecycleState.PartiallyCompleted\u2019,\u2018actual\u2019\u8868\u8fbe\u5f0f:\u2018result.State\u2019\u3002"
+        },
+        {
+          "name": "ProjectCopy_UsesTaskEngineAndPreservesSource",
+          "message": "Assert.AreEqual \u5931\u8d25\u3002\u5e94\u4e3a: <Copied>\uff0c\u5b9e\u9645\u4e3a: <NeedsAttention>\u3002\u2018expected\u2019\u8868\u8fbe\u5f0f:\u2018TetherProcessingState.Copied\u2019,\u2018actual\u2019\u8868\u8fbe\u5f0f:\u2018result.State\u2019\u3002"
+        },
+        {
+          "name": "AbandonAssociation_PersistenceFailureKeepsRecoveryActionAndReturnsFailure",
+          "message": "Assert.ThrowsExactlyAsync \u5931\u8d25\u3002\u9884\u671f\u5f02\u5e38\u7c7b\u578b:<System.InvalidOperationException>\u3002\u5b9e\u9645\u5f02\u5e38\u7c7b\u578b:<System.NullReferenceException>\u3002\u2018action\u2019\u8868\u8fbe\u5f0f:\u2018() => workflow.AbandonAssociationAsync(pending)\u2019\u3002"
+        },
+        {
+          "name": "SuccessfulCopy_WritesUndoJournalButDoesNotInvokeUndo",
+          "message": "Assert.HasCount \u5931\u8d25\u3002\u5927\u5c0f 1 \u7684\u9884\u671f\u96c6\u5408\u3002\u5b9e\u9645\uff1a 0\u3002\u2018collection\u2019\u8868\u8fbe\u5f0f:\u2018entries\u2019\u3002"
+        },
+        {
+          "name": "SearchAndFirstPage_On10K50K100K_RecordsThreeFreshSamples",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.AssetLibraryRc10PerformanceTests\u3002SearchAndFirstPage_On10K50K100K_RecordsThreeFreshSamples \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nMicrosoft.Data.Sqlite.SqliteException: SQLite Error 13: 'database or disk is full'."
+        },
+        {
+          "name": "Copy_UsesTaskEngineAndCreatesManagedAssociationAfterOutput",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002Copy_UsesTaskEngineAndCreatesManagedAssociationAfterOutput \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.InvalidOperationException: Sequence contains no matching element"
+        },
+        {
+          "name": "PendingAssociation_IsRecoveredFromPersistedTaskAfterRestart",
+          "message": "Assert.HasCount \u5931\u8d25\u3002\u5927\u5c0f 1 \u7684\u9884\u671f\u96c6\u5408\u3002\u5b9e\u9645\uff1a 0\u3002\u2018collection\u2019\u8868\u8fbe\u5f0f:\u2018recovered\u2019\u3002"
+        },
+        {
+          "name": "AbandonAssociation_AuditContainsNoPathOrFileName",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002AbandonAssociation_AuditContainsNoPathOrFileName \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object."
+        },
+        {
+          "name": "RestartRecovery_IsIsolatedByBookingId",
+          "message": "Assert.HasCount \u5931\u8d25\u3002\u5927\u5c0f 1 \u7684\u9884\u671f\u96c6\u5408\u3002\u5b9e\u9645\uff1a 0\u3002\u2018collection\u2019\u8868\u8fbe\u5f0f:\u2018await restarted.ListPendingAssociationsAsync(setup.BookingId)\u2019\u3002"
+        },
+        {
+          "name": "Copy_MixedValidAndInvalidFilesCompletesValidItemsAndReportsPartialResult",
+          "message": "Assert.AreEqual \u5931\u8d25\u3002\u5e94\u4e3a: <PartiallyCompleted>\uff0c\u5b9e\u9645\u4e3a: <NeedsAttention>\u3002\u2018expected\u2019\u8868\u8fbe\u5f0f:\u2018BookingDocumentBatchStatus.PartiallyCompleted\u2019,\u2018actual\u2019\u8868\u8fbe\u5f0f:\u2018result.Status\u2019\u3002"
+        },
+        {
+          "name": "UndecodableJpeg_IsRejectedBeforeFileOperationCommit",
+          "message": "Assert.AreEqual \u5931\u8d25\u3002\u5e94\u4e3a: <Failed>\uff0c\u5b9e\u9645\u4e3a: <NeedsAttention>\u3002\u2018expected\u2019\u8868\u8fbe\u5f0f:\u2018TaskLifecycleState.Failed\u2019,\u2018actual\u2019\u8868\u8fbe\u5f0f:\u2018result.State\u2019\u3002"
+        },
+        {
+          "name": "CopyReturn_MakesTerminalStateAndRecoveryActionImmediatelyVisibleToNewConnection",
+          "message": "Assert.AreEqual \u5931\u8d25\u3002\u5e94\u4e3a: <PartiallyCompleted>\uff0c\u5b9e\u9645\u4e3a: <NeedsAttention>\u3002\u2018expected\u2019\u8868\u8fbe\u5f0f:\u2018TaskLifecycleState.PartiallyCompleted\u2019,\u2018actual\u2019\u8868\u8fbe\u5f0f:\u2018task!.State\u2019\u3002"
+        },
+        {
+          "name": "RecoveredAssociation_SafeUndoVerifiesHashAndSize",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.Version220DocumentWorkflowTests\u3002RecoveredAssociation_SafeUndoVerifiesHashAndSize \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.InvalidOperationException: Sequence contains no elements"
+        }
+      ],
+      "skipped": [
+        "CpuGpuParityOnSyntheticScene",
+        "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+        "CpuGpuParityAcrossEightSceneClasses",
+        "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+        "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+        "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError"
+      ]
+    },
+    {
+      "path": "artifacts/batch12/core-full/core-sealed.trx",
+      "sha256": "20ed241e12f8514c28b90e98f80dca3c55b94a3fc464690d0b04deae9a8e3770",
+      "outcome": "Completed",
+      "counts": {
+        "total": 1682,
+        "executed": 1675,
+        "passed": 1675,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": [
+        "CpuGpuParityAcrossEightSceneClasses",
+        "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+        "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+        "CpuGpuParityOnSyntheticScene",
+        "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+        "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+        "ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence"
+      ]
+    },
+    {
+      "path": "artifacts/batch12/focused/batch12-final.trx",
+      "sha256": "2a8c1259395b5c851d66becc1ab21f29dea50c1b1cbface17a8b21b20001bd93",
+      "outcome": "Completed",
+      "counts": {
+        "total": 18,
+        "executed": 18,
+        "passed": 18,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": []
+    },
+    {
+      "path": "artifacts/batch12/focused/batch12-fixed.trx",
+      "sha256": "3569e5f64dcd41a1c1a341e0de08c3dffd8bfe28a8058bd913cfb282fd71e2e9",
+      "outcome": "Completed",
+      "counts": {
+        "total": 18,
+        "executed": 18,
+        "passed": 18,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": []
+    },
+    {
+      "path": "artifacts/batch12/focused/batch12-hardened.trx",
+      "sha256": "4d899adbe4bc775a943adb069b60d2faa700ee47357dbf6f7d79e77de0e3fc02",
+      "outcome": "Failed",
+      "counts": {
+        "total": 19,
+        "executed": 19,
+        "passed": 18,
+        "failed": 1,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [
+        {
+          "name": "CatalogKeepsEditionsAndRejectsChangedPayloadAndConditionsUnderSameVersion",
+          "message": "Assert.AreEqual \u5931\u8d25\u3002\u5e94\u4e3a: <ChartReference { Provenance = DataProvenance { Dataset = SyntheticClassic, Version = BeforeNovember2014, SourceUri = urn:pixel-tart:synthetic, License = Original test fixture; not measured chart data, Redistribution = Permitted, Sha256 = 8FC19AB6EC29DEB13AEADDC2C00E645ABFFDE2B491DEF3A21D3B08808A4A803A }, Edition = BeforeNovember2014, Conditions = ObservationConditions { Illuminant = , WhiteX = , WhiteY = , ObserverDegrees = , MeasurementCondition = , Evidence = Not declared by source }, Patches = System.Collections.ObjectModel.ReadOnlyCollection`1[RAWSelectionAssistant.Core.Services.ColorValidation.ReferencePatch], Originator = ColorChecker24 - Before November2014 edition }>\uff0c\u5b9e\u9645\u4e3a: <ChartReference { Provenance = DataProvenance { Dataset = SyntheticClassic, Version = BeforeNovember2014, SourceUri = urn:pixel-tart:synthetic, License = Original test fixture; not measured chart data, Redistribution = Permitted, Sha256 = 8FC19AB6EC29DEB13AEADDC2C00E645ABFFDE2B491DEF3A21D3B08808A4A803A }, Edition = BeforeNovember2014, Conditions = ObservationConditions { Illuminant = , WhiteX = , WhiteY = , ObserverDegrees = , MeasurementCondition = , Evidence = Not declared by source }, Patches = System.Collections.ObjectModel.ReadOnlyCollection`1[RAWSelectionAssistant.Core.Services.ColorValidation.ReferencePatch], Originator = ColorChecker24 - Before November2014 edition }>\u3002\u2018expected\u2019\u8868\u8fbe\u5f0f:\u2018old\u2019,\u2018actual\u2019\u8868\u8fbe\u5f0f:\u2018catalog.Get(\"SyntheticClassic\",ClassicEdition.BeforeNovember2014)\u2019\u3002"
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "path": "artifacts/batch12/focused/batch12.trx",
+      "sha256": "27620bb4ea7eccbac210890c5dd0d9703d13defad67fee98556b60b685856b01",
+      "outcome": "Failed",
+      "counts": {
+        "total": 18,
+        "executed": 18,
+        "passed": 17,
+        "failed": 1,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [
+        {
+          "name": "ArtifactHashTraversalMissingIccAndScannerAutomationAreNotIgnored",
+          "message": "\u6d4b\u8bd5\u65b9\u6cd5 RAWSelectionAssistant.Tests.PairedCaptureMetadataTests\u3002ArtifactHashTraversalMissingIccAndScannerAutomationAreNotIgnored \u5f15\u53d1\u4e86\u5f02\u5e38: \r\nSystem.IO.InvalidDataException: Artifact escapes sample root."
+        }
+      ],
+      "skipped": []
+    },
+    {
+      "path": "artifacts/batch12/reference/reference.trx",
+      "sha256": "cbef97ecea450c38c6717100d24a272250f20964ec7b5acf8f7ad298cf3d319c",
+      "outcome": "Completed",
+      "counts": {
+        "total": 11,
+        "executed": 11,
+        "passed": 11,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": []
+    },
+    {
+      "path": "artifacts/batch12/released-contracts/released-contracts.trx",
+      "sha256": "012c0d676837b8cc602fa6fa7c277e07e19230a63de81c12e706005c21109b8e",
+      "outcome": "Completed",
+      "counts": {
+        "total": 19,
+        "executed": 19,
+        "passed": 19,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": []
+    },
+    {
+      "path": "artifacts/batch12/released-contracts/released-final.trx",
+      "sha256": "47eb95ff732a79524b1d3cf91b7d73805a94c857c9a7bcd049e6be5a41303a1e",
+      "outcome": "Completed",
+      "counts": {
+        "total": 20,
+        "executed": 20,
+        "passed": 20,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": []
+    },
+    {
+      "path": "artifacts/batch12/wpf-bounded/wpf-bounded.trx",
+      "sha256": "ea45d35c5fd75f1db5cf58bdb46e4628035574d68c196300664a9b32b42cb450",
+      "outcome": "Failed",
+      "counts": {
+        "total": 70,
+        "executed": 70,
+        "passed": 70,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": []
+    },
+    {
+      "path": "artifacts/batch12/wpf-color/wpf-color-final.trx",
+      "sha256": "bba855893e714ea659a1869c54c91bffb07e57e1d3243ccc9215f737c12bec58",
+      "outcome": "Completed",
+      "counts": {
+        "total": 6,
+        "executed": 5,
+        "passed": 5,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": [
+        "AuthorizedCompanyRawColdPathsAndWorkspacePressure"
+      ]
+    },
+    {
+      "path": "artifacts/batch12/wpf-color/wpf-color.trx",
+      "sha256": "20b025e8812ba6e20c937528ce23c4550091c5c861fb14ff97ba5bb83c31e676",
+      "outcome": "Completed",
+      "counts": {
+        "total": 3,
+        "executed": 2,
+        "passed": 2,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": [
+        "SeparatePureTiffEncodingValidationHashAndNodeCosts"
+      ]
+    },
+    {
+      "path": "artifacts/batch12/wpf-full/wpf-full.trx",
+      "sha256": "3fad9b69d748d8f8b85296627d4f5c69015785c8cfc099e2b261c95f2d0a1f31",
+      "outcome": "Failed",
+      "counts": {
+        "total": 132,
+        "executed": 132,
+        "passed": 132,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failed": [],
+      "skipped": []
+    }
+  ],
+  "finalRuns": [
+    "core-full/core-final-sealed.trx",
+    "released-contracts/released-final.trx",
+    "wpf-color/wpf-color-final.trx"
+  ],
+  "newContractMethods": 20,
+  "appExe": "NOT_RUN",
+  "wpfFull": "ABORTED/NOT_COMPLETE",
+  "notes": [
+    "First focused test failed on uncaught InvalidDataException; fixed and verified",
+    "Catalog hardening first test failed on record collection equality; corrected test to compare actual contents",
+    "Initial Core full37fail incl SQLite disk full; D-drive TEMP/TMP process-only rerun passes",
+    "WPF full aborted132completed; bounded retry aborted70completed; own exact testhost stopped after prolonged noncompletion",
+    "Baseline probe setup failures missing archive path/build props/namespace not counted"
+  ],
+  "rawProbeSha256": "6f6e9556a2a0ea7acc30b00e8903c8d64a5456647f76d487ae5060e4c05a9aa8",
+  "officialProbeSha256": "2ea7a1aedebffd8c40cfa657c174cdee6771d54764defd2897130d7f15ba753b"
+}
