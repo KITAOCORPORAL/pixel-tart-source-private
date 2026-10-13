@@ -1,0 +1,9 @@
+# Stage measurements and scope
+
+Real stages in REAL_RESULTS.json: source SHA; full legacy decode(includes its own identity hash); orientation; row-band rebuild including individual node work; instant-only full scan; HQ with instant math; native block; serialized-definition block; full write/encode/built-in validate; explicit readback; encoded SHA; source unchanged SHA. Rows log GC0/1/2, managed live estimate, heap, working set/private/peak.
+
+Plan/RowBand markers subdivide intervals: CurrentEditsComplete alone is not total rebuild cost. Use elapsed difference from CurrentEditsStart through all bands. Total instant scan and HQ are separate diagnostic executions; do not sum to one product request. Format write contains rendering/codec/verification; it is not pure encoding. Pure TIFF16 serialization of an already-rendered synthetic1800x1200 buffer, stream validation and hash are measured separately in PURE_ENCODING.json. Identity node timings are baselines, not non-default editing throughput.
+
+No controlled batch10 binary timing comparison was performed. Old data is a historical rejected-Fuji baseline, not an isolated performance speedup experiment. OS/JIT/load differ; final release results are diagnostic cold path. HQ cache hits are not substituted for cold cost. Per-node non-default timings and native allocation instrumentation beyond process counters remain an explicit measurement gap; row-band memory plan is based on source-code array lifetime plus true process measurements, not every native allocation callback.
+
+Performance change justified by measured large-source lifetime: bounded pointwise processing no longer simultaneously creates full-size arrays for every node or full RGB8 intermediate.64rowbands preserve pixels and normalized coordinates. Zero Bloom/Halation V1 no longer computes unused blur; both film spatial versions have exact golden parity tests. Full dependencies remain unoptimized and safely rejected if needed.

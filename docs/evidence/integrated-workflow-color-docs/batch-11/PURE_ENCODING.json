@@ -1,0 +1,37 @@
+{
+  "scope": "Synthetic1800x1200, no cache; identity tool baselines only, not real node-speed claims",
+  "timings": [
+    {
+      "stage": "node:BasicTone",
+      "milliseconds": 36.6917,
+      "identity": true
+    },
+    {
+      "stage": "node:WhiteBalance",
+      "milliseconds": 17.2537,
+      "identity": true
+    },
+    {
+      "stage": "node:Levels",
+      "milliseconds": 15.4716,
+      "identity": true
+    },
+    {
+      "stage": "node:Curve",
+      "milliseconds": 16.4379,
+      "identity": true
+    },
+    {
+      "stage": "pure-TIFF16-encoding-already-rendered-source",
+      "milliseconds": 34.0036
+    },
+    {
+      "stage": "stream-readback-validation",
+      "milliseconds": 13.7815
+    },
+    {
+      "stage": "encoded-file-hash",
+      "milliseconds": 19.4916
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+# Actual color domains / version contract
+
+|Path|Numeric domain and actual limits|Orientation/output|
+|---|---|---|
+|PV4 RAW|LibRaw camera WB + built-in matrix, output linear ProPhoto primaries with LibRaw D65 matrix convention, gamma1/1, uint16 normalized tofloat. This is not standard ICC ProPhoto-D50 profiling. Decoder already clips black/saturation and negative/>1 information; later float exposure cannot restore lost sensor data.|Source EXIF retained in master; transformed outputs map EXIF1–8 and normalize to1.|
+|PV4 display|Exposure2^EV in working domain → pinned inverse LibRaw prophoto_rgb matrix to linear sRGB-D65 → luminance shoulder and neutral-axis gamut compression → clamp0–1 → sRGB transfer once. No claim of calibrated camera profile/HDR.|HQ exact area averaging in display-linear sRGB, then sRGB encoding. Full/native pixels share frozen definition.|
+|Legacy RAW→PV6|Existing decoder ProfessionalDecode RGB16 display-sRGB (camera WB/matrix/display already baked) → orientation normalization → legacy stack + old film → full sRGBfloat. PV6 gains1/EV0/WBRendered/identity transform; instantV1/V2 follows.|Full16bit-origin buffer, no RGB8 intermediary; RGB8 only diagnostics/preview. New memory route is bit-identical, no silent color-version migration.|
+|JPEG→PV5|Full-size WIC source; embedded ICC converted once or untagged assumedsRGB; original intrinsic8bit precision remains. Current edits full-source recipe then RGB48 adapter; never an enlarged proxy.|EXIF normalization per existing WIC/export contract. Real authorized JPEG not available; synthetic only.|
+|TIFF16/PNG16|sRGB encoded float quantized directly toRGB16; streamed rows. Embedded existing sRGB profile. Float full/tile equality and lossless encoded readback. No eight-bit transit.|Normalized1 for rendered/instant paths; historical raw TIFF orientation preserved where defined.|
+|JPEG|sRGB RGB8, WIC95/4:4:4; lossyMAE<=5/RMSE<=15, not exact pixels.|Normalized orientation1.|
+|Publishing|Full TIFF16 intermediate from same frozen definition; output-specific resizing/watermark. sRGB supported; unsupported requested profiles/PNG16 paths explicitly reject as existing contract.|DPI metadata affects intended display size, not source crop/coordinate mapping. Same-renderer verifier is not independent science proof.|
+
+Tests: grey0/.04045/.18/1, saturated channel patterns, bounded output, EXIF1–8, no double gamma/gains/exposure, full/native/1:1HQ equality, reducedHQ black-white linear-light area reference(~.735357 not .5), TIFF16/PNG16 original samples+ICC/JPEG tolerance. Old PV1–6/filmV1/V2 tests retained. Boundary clipping statements concern existing operators, not restored scene dynamic range.
+
+No new mathematical transform was added; memory and diagnostic interfaces preserve old pixels. If future confirmed math/profile changes alter pixels, they must use explicit new version rather than rerender old projects. Current source lacks measured camera profile, spectral response, scene HDR recovery, broad ICC proof, neutral grey-card calibration and film stock characterization. Creative presets remain creative approximations.

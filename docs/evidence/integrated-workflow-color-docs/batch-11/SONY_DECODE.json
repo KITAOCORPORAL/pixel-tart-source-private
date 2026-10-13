@@ -1,0 +1,65 @@
+{
+  "hash": "6F596BB234EE5DE206C66594BC84205349C363FD6A89AE188FF76DAB7C5E53B9",
+  "header": "49492A00080000001300FE000400010000000100000003010300010000000600",
+  "architecture": "X64",
+  "wrapper": "0.21.1.7",
+  "nativeVersion": "0.21.1-Release",
+  "rows": [
+    {
+      "entry": "RawContext.OpenFile",
+      "stage": "OpenFile",
+      "code": -2,
+      "name": "FileUnsupported",
+      "explain": "Unsupported file format or not RAW file"
+    },
+    {
+      "entry": "FastPreview",
+      "Stage": "OpenFile",
+      "NativeCode": -2,
+      "NativeName": "FileUnsupported",
+      "ErrorCode": "RAW_NATIVE_FILE_UNSUPPORTED"
+    },
+    {
+      "entry": "ProfessionalDecode",
+      "Stage": "OpenFile",
+      "NativeCode": -2,
+      "NativeName": "FileUnsupported",
+      "ErrorCode": "RAW_NATIVE_FILE_UNSUPPORTED"
+    },
+    {
+      "entry": "PV4",
+      "stage": "OpenFile",
+      "nativeCode": -2,
+      "nativeName": "FileUnsupported",
+      "message": "LibRaw 不支持或无法解码此相机文件，未回退旧处理。"
+    },
+    {
+      "entry": "native.OpenBuffer",
+      "code": -2,
+      "name": "FileUnsupported",
+      "pathIndependent": true
+    }
+  ],
+  "module": [
+    {
+      "name": "raw_r.dll",
+      "path": "D:\\AI AGENT\\pixel-tart-batch11-20261013\\tests\\Kitao.ProcessProbe\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\raw_r.dll",
+      "sha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9"
+    },
+    {
+      "name": "lcms2.dll",
+      "path": "D:\\AI AGENT\\pixel-tart-batch11-20261013\\tests\\Kitao.ProcessProbe\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\lcms2.dll",
+      "sha256": "87BF94F27F345384420383F247178F825C0101928FEDD3A4887FF60E9D4A76EB"
+    },
+    {
+      "name": "jpeg8.dll",
+      "path": "D:\\AI AGENT\\pixel-tart-batch11-20261013\\tests\\Kitao.ProcessProbe\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\jpeg8.dll",
+      "sha256": "3854CEBC61FD5892CB60491719834922030097F7848D29CCCBFCA3E88D7ED1E5"
+    },
+    {
+      "name": "zlib1.dll",
+      "path": "D:\\AI AGENT\\pixel-tart-batch11-20261013\\tests\\Kitao.ProcessProbe\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\zlib1.dll",
+      "sha256": "4A0BD02C2985974F90DA4A7065ACAC1B72F21A4FE58C5391E14B3E6FE566BC12"
+    }
+  ]
+}

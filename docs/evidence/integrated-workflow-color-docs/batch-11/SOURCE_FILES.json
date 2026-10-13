@@ -1,0 +1,100 @@
+{
+  "sourceCommit": "67d67a4818f3f76fb298ee2212bcf08bc4eee256",
+  "files": [
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/BoundedLegacyRawRenderer.cs",
+      "type": "C# backend",
+      "sha256": "a6c7751fcf44640f23bbf0d0ca3bd353218a8fdfbf86abbfc3b542ab49953bd4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+      "type": "C# backend",
+      "sha256": "cf963ee3b2d7d97b7b94275c707c854cb90da547ae47e7d2b35bef3202f5167a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/FrozenRawMaster.cs",
+      "type": "C# backend",
+      "sha256": "ac3d980cb28de3617be965f6d0022b64ef9cc1dc095e7fdf86253e0fb16d0583"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/LegacyRawInstantInput.cs",
+      "type": "C# backend",
+      "sha256": "5d450006c7085887b71011cceb74471893547a41bc2eae92b620290ddf01c8c0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PixelTartFilm.cs",
+      "type": "C# backend",
+      "sha256": "b6da3a8dd113830ae833764b84f2f237d7c8157fc578e910421bfe5b7727e194"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/StudioGlobalResources.cs",
+      "type": "C# backend",
+      "sha256": "8a6c98f4841b14c0eb2b7a4ec0e6d43298de6c30915f4fc55fe27ff84e2c8ccf"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/StudioProcessingFailure.cs",
+      "type": "C# backend",
+      "sha256": "25265688f1be19b9b6c86d29ae086eb67c5d2fa0cbae78e7c39651fc7ebc3f28"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/LibRawDecoder.cs",
+      "type": "C# backend",
+      "sha256": "0345802e0cbacc9d06a7e19ada44794fcbb096e8b9b6c35acd55dba7d1820011"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/ProfessionalRawDecoder.cs",
+      "type": "C# backend",
+      "sha256": "e71b50eb11a9e421543e1047cace68438ab1915cf2697b80aea1290d569f100c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.HqPreview.cs",
+      "type": "C# backend",
+      "sha256": "f3e3693aad4660eb311b7a55e688056f045f6b6b4214e0a99060c9479171d219"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.InstantFilm.cs",
+      "type": "C# backend",
+      "sha256": "aaad050f60d38533c28e93c2d432994d486a950d5ccdb425b6e5d473d3cd3bbb"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
+      "type": "C# backend",
+      "sha256": "48ed4b75746aeca944e0d22738e3a78a91ab91ca6a7775fecd1571645654c554"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawPreview.cs",
+      "type": "C# backend",
+      "sha256": "ed357dc257bf568f590edce4f81cce850d364c757b519fe198d23752346d4b83"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "type": "C# backend",
+      "sha256": "7e3c62d2e1ca2589d57d8014b9777733d1ec73676b1554e3c00b775a5d2ffddb"
+    },
+    {
+      "path": "tests/Kitao.ProcessProbe/Program.cs",
+      "type": "C# test/probe",
+      "sha256": "14d49a83ffdb417aa4986d80b37c43e98d6ddf7986c2899d39449aa6ef80b2cd"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/BatchElevenFoundationTests.cs",
+      "type": "C# test/probe",
+      "sha256": "63d3eaae32749f83b4105c4da0ab985ae5991db70df619bb1537ae229459b810"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/BatchTenLegacyRawTests.cs",
+      "type": "C# test/probe",
+      "sha256": "6e2d02fb44ad58963a0c5c198e4dbb69bf00c173e94f10d00e1632c93f60cb34"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/BatchElevenColorContractTests.cs",
+      "type": "C# test/probe",
+      "sha256": "3b48e0f63c2100a253176659ad070a8dd55739acaa9d05b9da85545b4106ea9c"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/BatchElevenRealTests.cs",
+      "type": "C# test/probe",
+      "sha256": "448459631be832693a3dff81de39da43e8a6a7cd37f2308c2b9789e9f1dc4fde"
+    }
+  ]
+}
