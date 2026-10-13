@@ -1,0 +1,206 @@
+[
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningDocument.cs",
+    "type": "source",
+    "sha256": "25D34B128172DF61B356114608D2DC0EA4C4FAD30EFEA726D0A1C4EE61812048",
+    "bytes": 3756
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningUiLayout.cs",
+    "type": "source",
+    "sha256": "3489C8D8E1FA5415B4E15EFAC0A00B397AA62EDB4C48611B485167DF49DA2EC7",
+    "bytes": 460
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Foundation.cs",
+    "type": "source",
+    "sha256": "1241263CBE903BE80C8E5B283CE0082126A798210015F5C4E9DD847F678157A5",
+    "bytes": 2427
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.Foundation.cs",
+    "type": "source",
+    "sha256": "C74F70A5435D89E1BC1AC1481D22F17B503AB4259934BDA414CDB435AF29A1BB",
+    "bytes": 7648
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.Presentation.cs",
+    "type": "source",
+    "sha256": "98B4847CDC29AA1A6449FCA909881B81363B67DB70BF1ABD93BAA3407D35DB5E",
+    "bytes": 4263
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.R5Layout.cs",
+    "type": "source",
+    "sha256": "6739A1531E8BC653F0976C8C5F48552377ABE71A5ADF019FB9F21A5509DDA7C2",
+    "bytes": 12807
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.R5Tables.cs",
+    "type": "source",
+    "sha256": "69203354024FFDCAA3CF3B08B42C5D42776D489EFA70468E7926E08BC7CC1DAB",
+    "bytes": 3829
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.Resources.cs",
+    "type": "source",
+    "sha256": "29204C5D3DCB9DDACB69AC1727AB76FA24C80D91BDF0B2343B1FEFABF7480363",
+    "bytes": 9363
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml",
+    "type": "source",
+    "sha256": "6C956BED877B7FB052A41533184E8E289C536D7FCBA7FFCFC9F9BF00C69D21F6",
+    "bytes": 12251
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+    "type": "source",
+    "sha256": "320A78958EA8C3C6D9E3B7F0EB65C580470845E01643A7340F4F5D7FE6B2699D",
+    "bytes": 50907
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningRichEditor.cs",
+    "type": "source",
+    "sha256": "D6D0103438BDCE3D42D5FC8B1E5715B663374631D55B71B56EE511C17009BA6F",
+    "bytes": 16584
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningFoundationWpfTests.cs",
+    "type": "test",
+    "sha256": "BE67F7FF3FAA295F9A9177AF9AC9EA5E11E7CC543F5184DE022915C1CC5E1F67",
+    "bytes": 19735
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningR5UiTests.cs",
+    "type": "test",
+    "sha256": "3DF0266538E44257607529A5CE0DF27AC8616253F0E7037FE9CC71A62A018AA3",
+    "bytes": 11180
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/StageVPlanningWpfTests.cs",
+    "type": "test",
+    "sha256": "5D92BAFCA7CDC6392A84F8347035CB159E8BCB4B868D0E5B3A30A94869DC1A03",
+    "bytes": 4905
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/ACCEPTANCE_CASES.md",
+    "type": "md",
+    "sha256": "2AC549886674CFBC6FC592E6A48C924C15D1A4F0F4B354726875B3DCACE638D1",
+    "bytes": 2012
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/COMPARISON_MANIFEST.json",
+    "type": "json",
+    "sha256": "E282E57E6A065DF5CE73E732381F0069F5190018118E9D82836E83B7F5A66066",
+    "bytes": 7415
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/DELIVERY.md",
+    "type": "md",
+    "sha256": "43CA7D83C9A7EA926F9ADA5B4C9945778DF641ADEC5EC5A9EA8C369AC6CBF4A6",
+    "bytes": 3155
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/FAILURES_AND_REPAIRS.md",
+    "type": "md",
+    "sha256": "A5C08EE917E8AD107CDC8C2457DB06B1A75E47F4F73C1EB2DE268B864559A5F6",
+    "bytes": 1447
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/LAYOUT_AND_SAVE_CONTRACT.md",
+    "type": "md",
+    "sha256": "46BFA488376179646C842FE8BA9B0A39CC63C53CE748A3C0C94D60FECEBB6493",
+    "bytes": 1283
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/MANUAL_ACCEPTANCE.md",
+    "type": "md",
+    "sha256": "1F7EEFA33BC95AD9EAB23FEA605881DB815F586727E84B631B558D5BD4948A20",
+    "bytes": 1862
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/OFFSCREEN_MATRIX.json",
+    "type": "json",
+    "sha256": "C20A7D75C113AD5DCD73A340D5877B69EB4E8F1118CDCE686C316352B143811D",
+    "bytes": 51147
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/REFERENCE_PNGS.json",
+    "type": "json",
+    "sha256": "E2BA727FEC22996C5626EFE32CB29E8618B429A82AD2F8BAD56C351CA26B915D",
+    "bytes": 11360
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/REFERENCE_STATE_AUDIT.csv",
+    "type": "csv",
+    "sha256": "1440CE3287B2E3A3EC89B9AD37768195D86A114D0167A9F03471B7E278A2C9D7",
+    "bytes": 11282
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/REFERENCES.json",
+    "type": "json",
+    "sha256": "A7DADAFEE948BB767501E80914CE09E64105484D7D6072941EE97B3B4318578A",
+    "bytes": 531
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/RELEASE_FILES.json",
+    "type": "json",
+    "sha256": "1D9560D57ED8E26A28FC8BF25A174B286E117C59EFE636FD96A122BB6A423EDA",
+    "bytes": 46424
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/RELEASE_IDENTITY.json",
+    "type": "json",
+    "sha256": "DC172A1419721882C98D63FBA27B728F3014592B2DA881ABF73693A8A6C72E09",
+    "bytes": 3927
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/REPRODUCE_AND_ASSETS.md",
+    "type": "md",
+    "sha256": "58FE83DE4BFA3F3C14570C459D983F74BF31E33B6465987C623A3EB3FA9C54CB",
+    "bytes": 1755
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/SCREENSHOT_MANIFEST.json",
+    "type": "json",
+    "sha256": "2495216035F72F897F24CD06B40B50A8CED0E434E86979F2DC3FE9D323FB2B79",
+    "bytes": 47302
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/SECTION_STATUS.csv",
+    "type": "csv",
+    "sha256": "0F647692AEAD5E999F90946A20AA7FD2E4FC0EB49D7EA4BF5C5F69EB15066D64",
+    "bytes": 4239
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/SOURCE_FILES.json",
+    "type": "json",
+    "sha256": "D311E1F34E6FCF3A227A246279709377ACDE93C2A35490C5D58FABF7E90164CC",
+    "bytes": 3020
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/TEST_MATRIX.md",
+    "type": "md",
+    "sha256": "E2F02DA5F3ED48891C68D048C7C96404FE6C54F4EB58907C3F809568650D6356",
+    "bytes": 1349
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/TEST_SUMMARY.json",
+    "type": "json",
+    "sha256": "3DF529E4E6CE293F06E48300760434E9E5B5F0F95517A1F6F070E3FE02F190B7",
+    "bytes": 10706
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/VISUAL_COMPARISONS.json",
+    "type": "json",
+    "sha256": "C514E7FC50A82F22AD9ABF347B8E0872EBBB73810399525B53A7022A37DB3282",
+    "bytes": 14373
+  },
+  {
+    "path": "docs/evidence/planning-r5-ui/VISUAL_REVIEW.md",
+    "type": "md",
+    "sha256": "E0ED7BAD7E8050633D8A1EDB820FDD47714CDEB7D006D88EA2C1A9122D44F1F2",
+    "bytes": 1424
+  }
+]
