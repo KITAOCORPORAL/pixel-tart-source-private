@@ -1,0 +1,65 @@
+{
+  "sourceCommit": "1e418c5f0aa8da45a89c39596f6bd9851f940870",
+  "parents": [
+    "37ee0289dc47d6621d5e3d8f53aa604dfef5dfb4",
+    "5bde6bf8af824e3b2f325e1ff046228ccb0354e0"
+  ],
+  "exePath": "D:/AI AGENT/kitao-integration-20261013/artifacts/integration/release/win-x64/KitaoPhotoSelector.exe",
+  "productVersion": "2.3.0-integrated+1e418c5f0aa8da45a89c39596f6bd9851f940870",
+  "build": "Release win-x64 self-contained non-single-file",
+  "components": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "bytes": 179200,
+      "sha256": "885b10af737edad024bcc2df932f934581ab645829a2cd5a498125fa3af2e1da",
+      "testSha256": null
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "bytes": 2999296,
+      "sha256": "a558e208822fe92205c93c833522a8d411f1acf930a9c7ea84dc979e77f0f59b",
+      "testSha256": "a558e208822fe92205c93c833522a8d411f1acf930a9c7ea84dc979e77f0f59b"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "bytes": 4347904,
+      "sha256": "40f66fe26b5d5e737cf308a8e9f6346a0bd0807cf3c11866da4d877bb846512b",
+      "testSha256": "40f66fe26b5d5e737cf308a8e9f6346a0bd0807cf3c11866da4d877bb846512b"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "bytes": 38912,
+      "sha256": "709addc6176aa7be4a34ecf1ed5bda1f8f773a55e886a3e999e7adc0ee7516eb",
+      "testSha256": "709addc6176aa7be4a34ecf1ed5bda1f8f773a55e886a3e999e7adc0ee7516eb"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "bytes": 1161728,
+      "sha256": "13a919c9677d8347deebc4b105ff7b1d74343075ac5d5938bcdc99f8ef2bf9cd",
+      "testSha256": "13a919c9677d8347deebc4b105ff7b1d74343075ac5d5938bcdc99f8ef2bf9cd"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "bytes": 11264,
+      "sha256": "9fe74719d43eb6853f40fc4c3d15572d4d3ca34600ed7274412ca4d74324d3b9",
+      "testSha256": "9fe74719d43eb6853f40fc4c3d15572d4d3ca34600ed7274412ca4d74324d3b9"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "bytes": 11776,
+      "sha256": "8240b8e78670c22038d15c929c91d32de629de08fd59a488bbae760024446113",
+      "testSha256": "8240b8e78670c22038d15c929c91d32de629de08fd59a488bbae760024446113"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "bytes": 66560,
+      "sha256": "136b13b944a2603e98c19440d9c1db8b70eaffe1f88964097ace9133b7eab4f0",
+      "testSha256": "136b13b944a2603e98c19440d9c1db8b70eaffe1f88964097ace9133b7eab4f0"
+    }
+  ],
+  "oldReleaseIdentityReused": false,
+  "historicalReleaseEvidenceUnchanged": true,
+  "publicTestFixtureInRuntime": false,
+  "startup": "OBSERVED_ISOLATED_START_WITH_NO_ERROR",
+  "desktopComplete": false
+}

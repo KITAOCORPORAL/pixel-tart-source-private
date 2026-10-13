@@ -1,0 +1,85 @@
+{
+  "sourceCommit": "1e418c5f0aa8da45a89c39596f6bd9851f940870",
+  "allIdentical": true,
+  "checks": [
+    {
+      "path": "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml",
+      "origin": "37ee0289dc47d6621d5e3d8f53aa604dfef5dfb4",
+      "originBlob": "45f2663e2b45938a6f8a032e7f4b71b762061c87",
+      "integrationBlob": "45f2663e2b45938a6f8a032e7f4b71b762061c87",
+      "identical": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml.cs",
+      "origin": "37ee0289dc47d6621d5e3d8f53aa604dfef5dfb4",
+      "originBlob": "728fe8471fe06a4ef8e4fa33742bc1f325c39def",
+      "integrationBlob": "728fe8471fe06a4ef8e4fa33742bc1f325c39def",
+      "identical": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/TetherInspectorPreferenceState.cs",
+      "origin": "37ee0289dc47d6621d5e3d8f53aa604dfef5dfb4",
+      "originBlob": "a2f4565dca3a3c9c2ab9a3026021fd7f0852224b",
+      "integrationBlob": "a2f4565dca3a3c9c2ab9a3026021fd7f0852224b",
+      "identical": true
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/TetherStartupPreferenceTests.cs",
+      "origin": "37ee0289dc47d6621d5e3d8f53aa604dfef5dfb4",
+      "originBlob": "825920a1c6ac97edaefec153e893d0174be2df43",
+      "integrationBlob": "825920a1c6ac97edaefec153e893d0174be2df43",
+      "identical": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ColorValidation/ChartReferenceData.cs",
+      "origin": "5bde6bf8af824e3b2f325e1ff046228ccb0354e0",
+      "originBlob": "d58b8d9f314563dabccfbfe3971bc84741f11a47",
+      "integrationBlob": "d58b8d9f314563dabccfbfe3971bc84741f11a47",
+      "identical": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ColorValidation/PairedCaptureMetadata.cs",
+      "origin": "5bde6bf8af824e3b2f325e1ff046228ccb0354e0",
+      "originBlob": "9cd89e5cabc584230dfebe45fa876da0a7d7f318",
+      "integrationBlob": "9cd89e5cabc584230dfebe45fa876da0a7d7f318",
+      "identical": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ColorValidation/ReferenceColorValidation.cs",
+      "origin": "5bde6bf8af824e3b2f325e1ff046228ccb0354e0",
+      "originBlob": "e260d84c7cc6141d4027f3461e1e0665abbcab6f",
+      "integrationBlob": "e260d84c7cc6141d4027f3461e1e0665abbcab6f",
+      "identical": true
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/BoundedTestProcess.cs",
+      "origin": "5bde6bf8af824e3b2f325e1ff046228ccb0354e0",
+      "originBlob": "eedba4b09f36d5a7f04de724f5dad71ad0521660",
+      "integrationBlob": "eedba4b09f36d5a7f04de724f5dad71ad0521660",
+      "identical": true
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/BoundedTestProcessTests.cs",
+      "origin": "5bde6bf8af824e3b2f325e1ff046228ccb0354e0",
+      "originBlob": "3ff87d4e89bf94304c1564284b7d941f5d034020",
+      "integrationBlob": "3ff87d4e89bf94304c1564284b7d941f5d034020",
+      "identical": true
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP1AutomatedEvidenceContractTests.cs",
+      "origin": "5bde6bf8af824e3b2f325e1ff046228ccb0354e0",
+      "originBlob": "86e5cc9b073c4f0525ef8ae8c6928df6f5282947",
+      "integrationBlob": "86e5cc9b073c4f0525ef8ae8c6928df6f5282947",
+      "identical": true
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP2AutomatedEvidenceContractTests.cs",
+      "origin": "5bde6bf8af824e3b2f325e1ff046228ccb0354e0",
+      "originBlob": "647fe6a8fd9ab6457050669bb6362ad70fc023c8",
+      "integrationBlob": "647fe6a8fd9ab6457050669bb6362ad70fc023c8",
+      "identical": true
+    }
+  ],
+  "historicalRendererChangesComparedWithStartupLine": "",
+  "uiLayoutChangesComparedWithStartupLine": ""
+}
