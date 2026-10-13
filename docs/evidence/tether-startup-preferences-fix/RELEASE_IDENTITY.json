@@ -1,0 +1,65 @@
+{
+  "sourceCommit": "cb55960ec622951877311d1a1cc5aa4a7a0057f8",
+  "branch": "fix/kitao-startup-preferences-20261013",
+  "exePath": "D:/AI AGENT/kitao-startup-fix-20261013/artifacts/startup-fix/release/win-x64/KitaoPhotoSelector.exe",
+  "productVersion": "2.3.0-startup-fix+cb55960ec622951877311d1a1cc5aa4a7a0057f8",
+  "build": "Release win-x64 self-contained non-single-file",
+  "components": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "bytes": 179200,
+      "sha256": "d85c8733b24d5bdc96d08bdfdbfb4a08a1b1da5a65adfbe75fdf2454bc9c8a91",
+      "testSha256": null
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "bytes": 2999296,
+      "sha256": "3c45414a6fc277283c82dc6ba6c16ab32fd5515cd36055def3087f909bd276a5",
+      "testSha256": "3c45414a6fc277283c82dc6ba6c16ab32fd5515cd36055def3087f909bd276a5"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "bytes": 4284928,
+      "sha256": "718792c536f9826489a5c168f2cc1584318e26fbc6393a9dae979c7cad673dd9",
+      "testSha256": "718792c536f9826489a5c168f2cc1584318e26fbc6393a9dae979c7cad673dd9"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "bytes": 38912,
+      "sha256": "d64eead0c2405f59d862923aaf11e04bd61a5997804d08f8fa5f3ca55d893b44",
+      "testSha256": "d64eead0c2405f59d862923aaf11e04bd61a5997804d08f8fa5f3ca55d893b44"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "bytes": 1161728,
+      "sha256": "11c6477d7a4b75e98804c49c9dd0109501a8931dfbd6414f46c31dfba6345f9a",
+      "testSha256": "11c6477d7a4b75e98804c49c9dd0109501a8931dfbd6414f46c31dfba6345f9a"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "bytes": 11264,
+      "sha256": "e73d85ae4601db5279398535046af40e76250bcf3a56b63961176603e4237daf",
+      "testSha256": "e73d85ae4601db5279398535046af40e76250bcf3a56b63961176603e4237daf"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "bytes": 11776,
+      "sha256": "a65545c49cb3f6beafdb361e8bea9c841f4139f164ef6a735be44b210947d5d6",
+      "testSha256": "a65545c49cb3f6beafdb361e8bea9c841f4139f164ef6a735be44b210947d5d6"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "bytes": 66560,
+      "sha256": "828fa10f495b389481f4afd25fc7dbd19f9a5de66a9ab7706a6dcef6a828fb43",
+      "testSha256": "828fa10f495b389481f4afd25fc7dbd19f9a5de66a9ab7706a6dcef6a828fb43"
+    }
+  ],
+  "oldReleasePath": "D:/AI AGENT/color-studio-closure-20261013/artifacts/spatial-closure/release/win-x64/KitaoPhotoSelector.exe",
+  "oldReleaseSha256": "29E8D7395306357904ED149D6FE771C30418DBBC480B81B12E339FA3D7C7C119",
+  "testLineReleaseUsed": false,
+  "startup": "PASS_OBSERVED_WITH_NO_ERROR_DIALOG",
+  "workbenchNavigation": "NOT_RUN",
+  "colorStudioNavigation": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "visualApproved": false
+}

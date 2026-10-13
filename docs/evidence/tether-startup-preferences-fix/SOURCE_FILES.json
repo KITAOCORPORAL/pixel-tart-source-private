@@ -1,0 +1,25 @@
+{
+  "sourceCommit": "cb55960ec622951877311d1a1cc5aa4a7a0057f8",
+  "files": [
+    {
+      "path": "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml",
+      "type": "WPF binding-only change",
+      "sha256": "a99121f5585a8a7a6636be9104d00ae23e54604e0f48ea4c4b4d403946856307"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml.cs",
+      "type": "C# lifecycle/state",
+      "sha256": "3aa217f3bf3eb56aa0947699064327bb0c462fbfae5b00c578cabd419c35fb46"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/TetherInspectorPreferenceState.cs",
+      "type": "C# lifecycle/state",
+      "sha256": "febe541d2dc7ed25a82410950674ecf4074fd65c776651875ad753aa96c2e345"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/TetherStartupPreferenceTests.cs",
+      "type": "C# WPF tests",
+      "sha256": "99795ae799b2d8919137c0b4403cf7bca5aa1f1210a82d9a639546b07ccd2df2"
+    }
+  ]
+}
