@@ -1,0 +1,158 @@
+[
+  {
+    "path": "docs/evidence/planning-workflows/stage1/DELIVERY.md",
+    "type": "evidence",
+    "sha256": "42081690213C6138B38C7B8E81A2E92C2DCED8B396FECBFEF0574A236B8EBF1F",
+    "bytes": 2212
+  },
+  {
+    "path": "docs/evidence/planning-workflows/stage1/FILES.txt",
+    "type": "evidence",
+    "sha256": "7D53D446D0330F9B8179276F0A6EDEE878BCEBF94A999E17C131C16EDDBECDF1",
+    "bytes": 785
+  },
+  {
+    "path": "docs/evidence/planning-workflows/stage1/REFERENCES.json",
+    "type": "evidence",
+    "sha256": "C91F4B56D0B0B2632BDD08F86A6CF7AE3F58E5567B78899D4C6D0E320DA4340C",
+    "bytes": 682
+  },
+  {
+    "path": "docs/evidence/planning-workflows/stage2/DELIVERY.md",
+    "type": "evidence",
+    "sha256": "0E9CF6C89937B4BD7D518F65B7D4AB1FA78260F8998A9B779DDF093AB06246D1",
+    "bytes": 1604
+  },
+  {
+    "path": "docs/evidence/planning-workflows/stage2/FILES.txt",
+    "type": "evidence",
+    "sha256": "D1F5D228DA181562AB797F6B94F1768500BF859AF65CC959C06F4BAB0C2FC621",
+    "bytes": 475
+  },
+  {
+    "path": "docs/evidence/planning-workflows/stage3/DELIVERY.md",
+    "type": "evidence",
+    "sha256": "BE28A420C1E17599629E2B4B1318642563AC8D280FF4887D5D7548C91402358B",
+    "bytes": 3204
+  },
+  {
+    "path": "docs/evidence/planning-workflows/stage3/FILES.txt",
+    "type": "evidence",
+    "sha256": "D35E62A3478985303CDE01F4E586D2E70C31FD295F559C6C020E4B70A5B982AA",
+    "bytes": 669
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningDocument.cs",
+    "type": "product-source",
+    "sha256": "205C910B08180B02A166EA6836C9707504448C85DFAD20AAAEEACE0F04C0B8E6",
+    "bytes": 3694
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningPresentation.cs",
+    "type": "product-source",
+    "sha256": "FACCBA04933FFA79695463A530BC080B6EC1B404FC9D2C974B5FFBAE8E1FB8FA",
+    "bytes": 1346
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningResources.cs",
+    "type": "product-source",
+    "sha256": "046640699125BBA637939AEC011770E8688EBF8F7A55A1982B1ECB9F2C814C29",
+    "bytes": 6520
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningDocxAdapter.cs",
+    "type": "product-source",
+    "sha256": "A6468A885BF758CA1D6FE5F775CA6BA5758C3B843D4229106E048DBB2AC43701",
+    "bytes": 17747
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/FinanceViewModel.cs",
+    "type": "product-source",
+    "sha256": "98AC2F6760EEC7DABEBFAA81E099C8D22031B0EFB8527F5C6FDF855D9E4E460D",
+    "bytes": 32827
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/MainViewModel.cs",
+    "type": "product-source",
+    "sha256": "D8CF0D168250FE06AA39417972A389B2256C1519B730C5BB62AF0E7386374FB3",
+    "bytes": 151654
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+    "type": "product-source",
+    "sha256": "A460F4280F7FE7CAF9DF3CBABD0C6FD0BAFB1A189B96594BC4F4837608A127B8",
+    "bytes": 21876
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Docx.cs",
+    "type": "product-source",
+    "sha256": "284929BC0E757B20CB657C87C2853E27C8E92921D0A47DD2A68EF58FBF9F8099",
+    "bytes": 6125
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Presentation.cs",
+    "type": "product-source",
+    "sha256": "5D4B50FB6CA3A16C0B07F1945BB0D92725FED3926A407913FC03236A92C2873B",
+    "bytes": 3052
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Resources.cs",
+    "type": "product-source",
+    "sha256": "7A8BDBB73522DF2575DA7E8784B91DC534493D9AC3C03A2FB2B87B2A271A6FE3",
+    "bytes": 4020
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.Docx.cs",
+    "type": "product-source",
+    "sha256": "D1193154D5F16C5B1CBBDC92C3E9650DD825A127120D8123A25C2E21531C2071",
+    "bytes": 2097
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.Foundation.cs",
+    "type": "product-source",
+    "sha256": "3B9A8C7015857F39D59FAA31DA8A0279B73987B787E4EFF064BB3DF125FE6709",
+    "bytes": 5671
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.Presentation.cs",
+    "type": "product-source",
+    "sha256": "B2792A354BE242689EC4F0D42B1323BBC9709C71ACDD93A503E4459CB8A8595A",
+    "bytes": 4197
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.Resources.cs",
+    "type": "product-source",
+    "sha256": "625DB342CC39A59A9D84E24A0096F39D62CB51262238410EC6F7043F99A59A78",
+    "bytes": 9603
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml",
+    "type": "ui-source",
+    "sha256": "D0B0AAD18193F2CDCBDA55E6421FC4560300AA3753215B31DE4F0B0514B2D2F7",
+    "bytes": 8969
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+    "type": "product-source",
+    "sha256": "9A8CD3D589F40D247A51CD39A04823106ED8C70A24A768FF03AA4C721D99E90C",
+    "bytes": 53281
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningFoundationWpfTests.cs",
+    "type": "test-source",
+    "sha256": "3FA21874AC3C3CB25060B42CD9DF8D27D01922B56805A6E60D597236CFD9FD13",
+    "bytes": 19733
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningProposalAcceptance.cs",
+    "type": "test-source",
+    "sha256": "CAE0097A4D720AF9B169D98DC770058D850E758299668F84E08D51955E884654",
+    "bytes": 17716
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/StageVPlanningWpfTests.cs",
+    "type": "test-source",
+    "sha256": "E15527D65CDDBD36DEC4629D92A45508AC3BB5F780583A31C0A31173024F740A",
+    "bytes": 4919
+  }
+]

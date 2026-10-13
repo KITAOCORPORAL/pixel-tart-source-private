@@ -1,0 +1,79 @@
+{
+  "sourceCommit": "6b3cfc9b91e28675a1b57f59ba846e4de7ea217c",
+  "baseCommit": "0766207a7e3bc4affc3c28374182ee7277bb54e9",
+  "branch": "feature/kitao-planning-workflows-20261013",
+  "exePath": "N:/pixart/kitao-planning-workflows-20261013/artifacts/workflows-release/win-x64/KitaoPhotoSelector.exe",
+  "publishDirectory": "N:/pixart/kitao-planning-workflows-20261013/artifacts/workflows-release/win-x64",
+  "build": "Release win-x64 self-contained non-single-file",
+  "components": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "bytes": 179200,
+      "sha256": "CF32186F958933E2E84659DBADC766FF38BFB6F577D288ED26BBBFE66F5F7722",
+      "productVersion": "2.3.0-planning-workflows+6b3cfc9b91e28675a1b57f59ba846e4de7ea217c",
+      "wpfTestHash": null,
+      "coreTestHash": null
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "bytes": 3096576,
+      "sha256": "D2DD15D3CCF3CDDC3ACD26894C2D60C2E02746416FF785A3976BAD7F637730CC",
+      "productVersion": "2.3.0-planning-workflows+6b3cfc9b91e28675a1b57f59ba846e4de7ea217c",
+      "wpfTestHash": "D2DD15D3CCF3CDDC3ACD26894C2D60C2E02746416FF785A3976BAD7F637730CC",
+      "coreTestHash": null
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "bytes": 4392448,
+      "sha256": "B9CEB215083EF020CE631793AEE71809BA38EAC6DAD2E14B8ACAA882FF73B7A6",
+      "productVersion": "2.3.0-planning-workflows+6b3cfc9b91e28675a1b57f59ba846e4de7ea217c.6b3cfc9b91e28675a1b57f59ba846e4de7ea217c",
+      "wpfTestHash": "B9CEB215083EF020CE631793AEE71809BA38EAC6DAD2E14B8ACAA882FF73B7A6",
+      "coreTestHash": "B9CEB215083EF020CE631793AEE71809BA38EAC6DAD2E14B8ACAA882FF73B7A6"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "bytes": 38912,
+      "sha256": "28EF996F405F6B88B51AD62DDCFFC8032C04D27F5E1761B0FA30A7FA54A06DDB",
+      "productVersion": "2.3.0-planning-workflows+6b3cfc9b91e28675a1b57f59ba846e4de7ea217c.6b3cfc9b91e28675a1b57f59ba846e4de7ea217c",
+      "wpfTestHash": "28EF996F405F6B88B51AD62DDCFFC8032C04D27F5E1761B0FA30A7FA54A06DDB",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "bytes": 11776,
+      "sha256": "3027769E4F466A26C1D326918DC0FCA58E48E6D90659DED65D5ED010B429ED44",
+      "productVersion": "2.3.0-planning-workflows+6b3cfc9b91e28675a1b57f59ba846e4de7ea217c.6b3cfc9b91e28675a1b57f59ba846e4de7ea217c",
+      "wpfTestHash": "3027769E4F466A26C1D326918DC0FCA58E48E6D90659DED65D5ED010B429ED44",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "bytes": 11264,
+      "sha256": "77501F23AB9DE2CE8EADEA7488445B8E9877B1B3685E36F0E4E76BA9FF0BACCF",
+      "productVersion": "2.3.0-planning-workflows+6b3cfc9b91e28675a1b57f59ba846e4de7ea217c.6b3cfc9b91e28675a1b57f59ba846e4de7ea217c",
+      "wpfTestHash": "77501F23AB9DE2CE8EADEA7488445B8E9877B1B3685E36F0E4E76BA9FF0BACCF",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "bytes": 67072,
+      "sha256": "676C2E51CF026DE6F82038D85B14589D342C15AD48915A9D1929DBCF0AEE8B24",
+      "productVersion": "2.3.0-planning-workflows+6b3cfc9b91e28675a1b57f59ba846e4de7ea217c.6b3cfc9b91e28675a1b57f59ba846e4de7ea217c",
+      "wpfTestHash": "676C2E51CF026DE6F82038D85B14589D342C15AD48915A9D1929DBCF0AEE8B24",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "bytes": 1161728,
+      "sha256": "31123561C63CA119308522386C9E90B45DF3E9FDBA7A943DA429B8B3F1704DF0",
+      "productVersion": "2.3.0-planning-workflows+6b3cfc9b91e28675a1b57f59ba846e4de7ea217c.6b3cfc9b91e28675a1b57f59ba846e4de7ea217c",
+      "wpfTestHash": "31123561C63CA119308522386C9E90B45DF3E9FDBA7A943DA429B8B3F1704DF0",
+      "coreTestHash": null
+    }
+  ],
+  "desktopStartup": "NOT_RUN",
+  "navigation": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "visual": "NOT_RUN",
+  "wps": "NOT_RUN"
+}
