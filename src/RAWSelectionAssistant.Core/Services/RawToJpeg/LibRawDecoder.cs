@@ -10,6 +10,9 @@ public sealed class RawDecodeException(string errorCode, string message, Excepti
     : IOException(message, innerException)
 {
     public string ErrorCode { get; } = errorCode;
+    public string Stage {get;init;}="Unknown";
+    public int? NativeCode {get;init;}
+    public string? NativeName {get;init;}
 }
 
 public sealed class LibRawDecoder : IRawDecoder
@@ -84,16 +87,17 @@ public sealed class LibRawDecoder : IRawDecoder
 
         var expectedLength = before.Length;
         var expectedModified = before.LastWriteTimeUtc;
+        var stage="OpenFile";
         try
         {
             using var context = RawContext.OpenFile(sourcePath);
             var imageParams = context.ImageParams;
             var otherParams = context.ImageOtherParams;
             var sourceOrientation = ReadOrientation(sourcePath);
-            context.Unpack();
+            stage="Unpack";context.Unpack();
             cancellationToken.ThrowIfCancellationRequested();
             var professional = options.DecodeMode == RawDecodeMode.ProfessionalDecode;
-            context.DcrawProcess(output =>
+            stage="DcrawProcess";context.DcrawProcess(output =>
             {
                 output.HalfSize = false;
                 output.UseCameraWb = options.UseCameraWhiteBalance;
@@ -157,7 +161,8 @@ public sealed class LibRawDecoder : IRawDecoder
             var code = ex is DllNotFoundException or BadImageFormatException
                 ? ErrorCodeCatalog.UnsupportedFormat
                 : ErrorCodeCatalog.DecodeFailed;
-            throw new RawDecodeException(code, "The RAW file could not be decoded safely.", ex);
+            if(stage=="OpenFile"&&ex is LibRawException unsupported&&unsupported.ErrorCode.ToString()=="FileUnsupported")code="RAW_NATIVE_FILE_UNSUPPORTED";
+            throw new RawDecodeException(code, "The RAW file could not be decoded safely.", ex){Stage=stage,NativeCode=ex is LibRawException native?(int)native.ErrorCode:null,NativeName=ex is LibRawException named?named.ErrorCode.ToString():null};
         }
     }
 

@@ -2,6 +2,25 @@ using System.Text.Json;
 using RAWSelectionAssistant.Core.Services.AssetLibrary;
 using Microsoft.Data.Sqlite;
 var mode=args[0];var root=args[1];Directory.CreateDirectory(root);var db=Path.Combine(root,"library.db");
+if(mode=="batch11-decode")
+{
+    var path=args[2];var rows=new List<object>();
+    try{using var raw=Sdcb.LibRaw.RawContext.OpenFile(path);rows.Add(new{entry="RawContext.OpenFile",status="opened",version=Sdcb.LibRaw.RawContext.Version});}
+    catch(Sdcb.LibRaw.LibRawException error){rows.Add(new{entry="RawContext.OpenFile",stage="OpenFile",code=(int)error.ErrorCode,name=error.ErrorCode.ToString(),explain=error.ErrorExplain});}
+    foreach(var decodeMode in new[]{RAWSelectionAssistant.Core.Models.RawDecodeMode.FastPreview,RAWSelectionAssistant.Core.Models.RawDecodeMode.ProfessionalDecode})
+    {
+        try{var decoded=await new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder().DecodeAsync(path,new(DecodeMode:decodeMode));rows.Add(new{entry=decodeMode.ToString(),status="decoded",decoded.Width,decoded.Height});}
+        catch(RAWSelectionAssistant.Core.Services.RawToJpeg.RawDecodeException e){rows.Add(new{entry=decodeMode.ToString(),e.Stage,e.NativeCode,e.NativeName,e.ErrorCode});}
+    }
+    try{await new RAWSelectionAssistant.Core.Services.RawToJpeg.ProfessionalRawDecoder().DecodeAsync(path,new());rows.Add(new{entry="PV4",status="decoded"});}catch(Exception e){var inner=e as Sdcb.LibRaw.LibRawException??e.InnerException as Sdcb.LibRaw.LibRawException;rows.Add(new{entry="PV4",stage="OpenFile",nativeCode=inner is null?(int?)null:(int)inner.ErrorCode,nativeName=inner?.ErrorCode.ToString(),message=e.Message});}
+    var nativeHandle=Sdcb.LibRaw.Natives.LibRawNative.Initialize(Sdcb.LibRaw.LibRawInitFlags.None);
+    var bytes=File.ReadAllBytes(path);var memory=System.Runtime.InteropServices.Marshal.AllocHGlobal(bytes.Length);
+    try{System.Runtime.InteropServices.Marshal.Copy(bytes,0,memory,bytes.Length);var result=Sdcb.LibRaw.Natives.LibRawNative.OpenBuffer(nativeHandle,memory,bytes.LongLength);rows.Add(new{entry="native.OpenBuffer",code=(int)result,name=result.ToString(),pathIndependent=true});}
+    finally{Sdcb.LibRaw.Natives.LibRawNative.Close(nativeHandle);System.Runtime.InteropServices.Marshal.FreeHGlobal(memory);}
+    var module=System.Diagnostics.Process.GetCurrentProcess().Modules.Cast<System.Diagnostics.ProcessModule>().Where(m=>new[]{"raw_r.dll","jpeg8.dll","lcms2.dll","zlib1.dll"}.Contains(m.ModuleName)).Select(m=>new{name=m.ModuleName,path=m.FileName,sha256=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(m.FileName)))}).ToArray();
+    using var file=File.OpenRead(path);var header=new byte[32];file.ReadExactly(header);file.Position=0;var hash=Convert.ToHexString(await System.Security.Cryptography.SHA256.HashDataAsync(file));
+    await File.WriteAllTextAsync(Path.Combine(root,"sony-decode.json"),JsonSerializer.Serialize(new{hash,header=Convert.ToHexString(header),architecture=System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture.ToString(),wrapper=typeof(Sdcb.LibRaw.RawContext).Assembly.GetName().Version?.ToString(),nativeVersion=Sdcb.LibRaw.RawContext.Version,rows,module},new JsonSerializerOptions{WriteIndented=true}));return;
+}
 if(mode=="raw-early-signal")
 {
     var input=args[2];using var context=Sdcb.LibRaw.RawContext.OpenFile(input);context.Unpack();

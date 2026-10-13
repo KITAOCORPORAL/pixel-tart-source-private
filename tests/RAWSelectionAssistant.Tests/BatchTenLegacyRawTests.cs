@@ -5,6 +5,7 @@ using RAWSelectionAssistant.Core.Services.RawToJpeg;
 using System.Text.Json;
 namespace RAWSelectionAssistant.Tests;
 [TestClass]
+[DoNotParallelize]
 public sealed class BatchTenLegacyRawTests
 {
     internal static InstantInputRecipe Recipe()=>new(2,"CurrentEdits",Guid.NewGuid(),Stack:new([new(Guid.NewGuid(),ColorStudioNodeType.BasicTone,"Exposure",NumericParameters:new Dictionary<string,double>{{"exposure",1.25}})],ProcessingVersion:2),Film:new(true,GrainAmount:12,Seed:42))

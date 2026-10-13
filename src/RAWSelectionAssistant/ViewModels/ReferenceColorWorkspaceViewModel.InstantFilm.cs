@@ -10,6 +10,7 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed partial class ReferenceColorWorkspaceViewModel
 {
     private CancellationTokenSource? _instantCancellation;
+    public StudioProcessingFailure? LastProcessingFailure {get;private set;}
     public IReadOnlyList<InstantFilmProfile> InstantProfiles=>InstantFilmProfiles.Available;
     public IReadOnlyList<string> InstantTiers {get;}=["稳定出片","轻微偶然","实验胶片"];
     public InstantFilmProfile SelectedInstantProfile {get;set;}=InstantFilmProfiles.Available[0];
@@ -99,6 +100,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             var entry=target.EditVersions.FirstOrDefault(v=>v.Id==id);if(entry is not null)target.EditVersions.Remove(entry);
             if(!_disposed&&ReferenceEquals(target,ActiveTarget)&&oldImage is not null){Editor.PresentIndependentRaw(oldImage);Editor.SetIndependentRawSize(oldSize);Editor.IndependentRawMode=previous is not null;}
         }
+        LastProcessingFailure=null;OnPropertyChanged(nameof(LastProcessingFailure));
         _instantCancellation?.Dispose();_instantCancellation=new();var token=_instantCancellation.Token;
         Editor.StopProcessing();InvalidateProfessionalPreview();IsInstantGenerating=true;InstantDevelopment=new(InstantDevelopmentStage.Computing,0,false,false);InstantFinalPreview=null;InstantChanged();
         try
@@ -130,6 +132,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             var master=target.LinearRawMaster is {} current&&current.Contract.DecodeKey==definition.DecodeKey?current:
                 definition.InputConfiguration=="LegacyRawEditsSrgbFloatV1"?await RebuildLegacyRawInputAsync(target.Path,definition,target.RawMaster,token):await DecodeProfessionalInputAsync(target.Path,definition,token);
             if(!string.Equals(master.Contract.SourceSha256,target.SourceHash??target.ObservedSourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("生成期间源文件身份改变。");
+            using var presentationMaster=ReferenceEquals(target.LinearRawMaster,master)?StudioGlobalResources.Pin(target.Id,"Master"):StudioGlobalResources.ReserveWork((long)master.Image.Rgb32.Length*sizeof(float));
             var preview=await RenderProfessionalPreviewAsync(master,definition,1600,token);
             InstantFinalPreview=RawDisplayBitmapAdapter.ToBitmap(preview.ToVisualRgb24());
             var original=ProfessionalRawPipeline.OrientedSize(master);var layout=InstantPaperLayout.Create(original.Width,original.Height,film);
@@ -153,9 +156,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             CaptureEditVersion(target);target.EditVersions[^1]=target.EditVersions[^1] with{Name=profile.Name+" · 创作 v2",OriginVersionId=version};
             IsInstantGenerating=false;await ActivateTargetAsync(target);if(target.Status==ReferenceTargetStatus.Failed)throw new IOException(target.Error);StatusText="即时胶片显影完成 · 创作近似，非实测相纸标定";
         }
-        catch(OperationCanceledException){Rollback();StatusText="本次显影已退出，保留上一有效结果";InstantDiceEnabled=previousDice;}
+        catch(OperationCanceledException error){LastProcessingFailure=StudioProcessingFailure.From(error,"InstantRebuild");OnPropertyChanged(nameof(LastProcessingFailure));Rollback();StatusText="本次显影已退出，保留上一有效结果";InstantDiceEnabled=previousDice;}
         catch(Exception error)when(error is IOException or InvalidDataException or NotSupportedException or ArgumentException or InvalidOperationException or System.Runtime.InteropServices.COMException)
-        {Rollback();StatusText="即时胶片未完成，保留上一有效结果："+error.Message;InstantDiceEnabled=previousDice;}
+        {LastProcessingFailure=StudioProcessingFailure.From(error,"InstantRebuild");OnPropertyChanged(nameof(LastProcessingFailure));Rollback();StatusText="即时胶片未完成，保留上一有效结果："+error.Message;InstantDiceEnabled=previousDice;}
         finally{IsInstantGenerating=false;InstantDevelopment=null;InstantFinalPreview=null;OnPropertyChanged(nameof(InstantDiceEnabled));InstantChanged();}
     }
 }

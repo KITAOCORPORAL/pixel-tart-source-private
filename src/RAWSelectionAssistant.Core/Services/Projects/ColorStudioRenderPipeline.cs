@@ -12,21 +12,21 @@ public sealed class ColorStudioRenderPipeline
 {
     private readonly ReferenceLookMatcher _matcher = new();
 
-    public ColorStudioRenderResult Render(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default, bool captureNodeDiagnostics = true, ReadOnlyMemory<byte> alpha = default)
+    public ColorStudioRenderResult Render(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default, bool captureNodeDiagnostics = true, ReadOnlyMemory<byte> alpha = default,FilmTileCoordinates? tile = null)
     {
         ArgumentNullException.ThrowIfNull(source); var normalized = stack.Normalize(); var current = source.Clone(); var precisionStages = new List<string>(PrecisionTrace.ProfessionalDefault.Stages);
         var outputs = new List<VisualPixelBuffer>(normalized.Nodes.Count); var inputs = new Dictionary<Guid, VisualPixelBuffer>();
         foreach (var node in normalized.Nodes.Where(item => item.Enabled))
         {
             token.ThrowIfCancellationRequested(); if (captureNodeDiagnostics) inputs[node.Id] = current.ToVisualRgb24();
-            current = ApplyHighPrecision(current, node, reference, analysis, token, alpha);
+            current = ApplyHighPrecision(current, node, reference, analysis, token, alpha,tile);
             if (captureNodeDiagnostics) outputs.Add(current.ToVisualRgb24());
         }
         var descriptor = new ColorPipelineDescriptor(InputInterpretation: "HighPrecision sRGB", WorkingRepresentation: normalized.WorkingSpace, OutputEncoding: "sRGB display adapter");
         return new(current.ToVisualRgb24(token), outputs, descriptor, inputs, current, new PrecisionTrace(precisionStages));
     }
 
-    private HighBitDepthImageBuffer ApplyHighPrecision(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, ReferenceLook? reference, AssetVisualAnalysisResult analysis, CancellationToken token, ReadOnlyMemory<byte> alpha)
+    private HighBitDepthImageBuffer ApplyHighPrecision(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, ReferenceLook? reference, AssetVisualAnalysisResult analysis, CancellationToken token, ReadOnlyMemory<byte> alpha,FilmTileCoordinates? tile)
     {
         if (ColorStudioToolCatalog.IsTool(node.Type)) return ColorStudioToolProcessor.Apply(source, node, token);
         if (node.Type == ColorStudioNodeType.Develop) return ColorStudioDevelop.Apply(source, node, token);
@@ -90,7 +90,7 @@ public sealed class ColorStudioRenderPipeline
         }
         else if (node.Type == ColorStudioNodeType.Film)
         {
-            return PixelTartFilmPipeline.Apply(source, FilmSettings(node), token);
+            return tile is {} region?PixelTartFilmPipeline.ApplyPointwiseTile(source,FilmSettings(node),region.Left,region.Top,region.FullWidth,region.FullHeight,token):PixelTartFilmPipeline.Apply(source, FilmSettings(node), token);
         }
         return new(source.Width, source.Height, values, source.SourceBitDepth, source.WorkingColorSpace, source.Orientation, source.Metadata);
     }

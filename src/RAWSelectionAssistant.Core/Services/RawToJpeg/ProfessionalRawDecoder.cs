@@ -61,9 +61,10 @@ public sealed class ProfessionalRawDecoder(Action<string>? stage = null) : IProf
         if (!RawMatchTiff16ProductPipeline.IsRaw(path)) throw new NotSupportedException("新 RAW 版本不接受已渲染 JPG/PNG。");
         using var source = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
         var hash = Convert.ToHexString(SHA256.HashData(source)); token.ThrowIfCancellationRequested();
+        var failureStage="OpenFile";
         try
         {
-            using var context = RawContext.OpenFile(path); var unpackParameters=ProfessionalLibRawAdapter.ConfigureUnpack(context); context.Unpack();stage?.Invoke("Unpacked"); token.ThrowIfCancellationRequested();
+            using var context = RawContext.OpenFile(path); var unpackParameters=ProfessionalLibRawAdapter.ConfigureUnpack(context); failureStage="Unpack";context.Unpack();stage?.Invoke("Unpacked"); token.ThrowIfCancellationRequested();
             if(checked((long)context.RawWidth*context.RawHeight*28)>1024L*1024*1024)throw new NotSupportedException("RAW解码工作集估计超过1GiB准入预算，未降低尺寸或位深。");
             var color = ProfessionalLibRawAdapter.ReadColor(context);
             var identity = context.ImageParams;
@@ -76,7 +77,7 @@ public sealed class ProfessionalRawDecoder(Action<string>? stage = null) : IProf
             var matrix = color.RgbCam.Select(x => (double)x).ToArray();
             if (matrix.Any(x => !double.IsFinite(x)) || matrix.Sum(Math.Abs) < .01 || color.Maximum <= color.Black)
                 throw new InvalidDataException("缺少可用相机颜色矩阵或黑白电平，未回退旧处理。");
-            context.DcrawProcess(output => Configure(output, applied));stage?.Invoke("DemosaicWBMatrix"); token.ThrowIfCancellationRequested();
+            failureStage="DcrawProcess";context.DcrawProcess(output => Configure(output, applied));stage?.Invoke("DemosaicWBMatrix"); token.ThrowIfCancellationRequested();
             var actual = OutputParams.FromLibRaw(context.UnsafeGetHandle());
             if (actual.UseCameraWb || actual.UseAutoWb || !actual.NoAutoBright || actual.OutputColor != LibRawColorSpace.ProPhotoRgb ||
                 actual.OutputBps != 16 || actual.Gamma[0] != 1 || actual.Gamma[1] != 1 || actual.HighlightMode != 0 ||
@@ -115,7 +116,7 @@ public sealed class ProfessionalRawDecoder(Action<string>? stage = null) : IProf
             };
             return new(new HighBitDepthImageBuffer(processed.Width, processed.Height, pixels, "16", ProfessionalRawPipeline.WorkingSpace, orientation), contract);
         }
-        catch (LibRawException ex) { throw new InvalidDataException("LibRaw 不支持或无法解码此相机文件，未回退旧处理。", ex); }
+        catch (LibRawException ex) { throw StudioFailureException.Domain(new(ex.ErrorCode.ToString()=="FileUnsupported"?"RAW_NATIVE_FILE_UNSUPPORTED":"DecodeFailed",failureStage,"LibRaw 不支持或无法解码此相机文件，未回退旧处理。",NativeCode:(int)ex.ErrorCode,NativeName:ex.ErrorCode.ToString()),ex); }
     }
 
     private static string MarshalWarnings(RawContext context)

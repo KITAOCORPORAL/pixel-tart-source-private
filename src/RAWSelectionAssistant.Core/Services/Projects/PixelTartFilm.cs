@@ -55,7 +55,13 @@ public static class PixelTartFilmPipeline
     public static VisualPixelBuffer Apply(VisualPixelBuffer input, PixelTartFilmSettings settings, CancellationToken token = default) =>
         Apply(HighBitDepthImageBuffer.FromVisualRgb24(input), settings, token).ToVisualRgb24();
 
-    public static HighBitDepthImageBuffer Apply(HighBitDepthImageBuffer input, PixelTartFilmSettings settings, CancellationToken token = default)
+    public static HighBitDepthImageBuffer Apply(HighBitDepthImageBuffer input, PixelTartFilmSettings settings, CancellationToken token = default) => ApplyCore(input,settings,token,0,0,input.Width,input.Height);
+    public static HighBitDepthImageBuffer ApplyPointwiseTile(HighBitDepthImageBuffer input,PixelTartFilmSettings settings,int left,int top,int fullWidth,int fullHeight,CancellationToken token=default)
+    {
+        if(settings.HalationAmount!=0||settings.BloomAmount!=0)throw new NotSupportedException("Spatial film requires full-image halo processing.");
+        return ApplyCore(input,settings,token,left,top,fullWidth,fullHeight);
+    }
+    private static HighBitDepthImageBuffer ApplyCore(HighBitDepthImageBuffer input,PixelTartFilmSettings settings,CancellationToken token,int left,int top,int fullWidth,int fullHeight)
     {
         settings.Validate();
         if (!settings.Enabled || IsIdentity(settings)) return input.Clone();
@@ -72,7 +78,7 @@ public static class PixelTartFilmPipeline
                 luminance[pixel] = (float)(.2126 * r + .7152 * g + .0722 * b);
                 highlightMask[pixel] = Math.Clamp((luminance[pixel] - .62f) / .38f, 0, 1);
             }
-            var minDimension = Math.Min(input.Width, input.Height); var bloomRadius = Math.Clamp(minDimension / 320, 2, 8);
+            var minDimension = Math.Min(fullWidth, fullHeight); var bloomRadius = Math.Clamp(minDimension / 320, 2, 8);
             if (settings.SpatialVersion == 2)
             {
                 // Stable fractional image scale, with no full-resolution 8-pixel cap.
@@ -83,10 +89,10 @@ public static class PixelTartFilmPipeline
             }
             else
             {
-                Blur(highlightMask, bloomSpread, scratch, input.Width, input.Height, bloomRadius, token);
-                Blur(highlightMask, halationSpread, scratch, input.Width, input.Height, Math.Max(2, bloomRadius / 2), token);
+                if(settings.BloomAmount>0)Blur(highlightMask, bloomSpread, scratch, input.Width, input.Height, bloomRadius, token);else Array.Clear(bloomSpread,0,input.PixelCount);
+                if(settings.HalationAmount>0)Blur(highlightMask, halationSpread, scratch, input.Width, input.Height, Math.Max(2, bloomRadius / 2), token);else Array.Clear(halationSpread,0,input.PixelCount);
             }
-            var referenceScale = 1600d / Math.Max(input.Width, input.Height);
+            var referenceScale = 1600d / Math.Max(fullWidth, fullHeight);
             for (var y = 0; y < input.Height; y++) for (var x = 0; x < input.Width; x++)
             {
                 var pixel = y * input.Width + x; if ((pixel & 2047) == 0) token.ThrowIfCancellationRequested(); var offset = pixel * 3;
@@ -95,11 +101,11 @@ public static class PixelTartFilmPipeline
                 r += profile.r * profileAmount; g += profile.g * profileAmount; b += profile.b * profileAmount;
                 var halo = Math.Clamp(halationSpread[pixel] - highlightMask[pixel] * .72f, 0, 1) * settings.HalationAmount / 100d; var edge = halo * Math.Clamp((luma - .12f) / .7f, 0, 1); r += edge * .12; g += edge * .020;
                 var bloom = bloomSpread[pixel] * settings.BloomAmount / 100d * .14; r += bloom; g += bloom; b += bloom;
-                var nx = (x + .5) / input.Width * 2 - 1; var ny = (y + .5) / input.Height * 2 - 1; var distance = Math.Clamp(Math.Sqrt(nx * nx + ny * ny) / 1.4143, 0, 1); var vignette = 1 - Math.Clamp(settings.VignetteAmount / 100, 0, 1) * Math.Pow(distance, 1.65) * .55; r *= vignette; g *= vignette; b *= vignette;
-                var gx = settings.SpatialVersion == 2 ? (x + .5) * referenceScale - .5 : x;
-                var gy = settings.SpatialVersion == 2 ? (y + .5) * referenceScale - .5 : y;
+                var nx = (x + left + .5) / fullWidth * 2 - 1; var ny = (y + top + .5) / fullHeight * 2 - 1; var distance = Math.Clamp(Math.Sqrt(nx * nx + ny * ny) / 1.4143, 0, 1); var vignette = 1 - Math.Clamp(settings.VignetteAmount / 100, 0, 1) * Math.Pow(distance, 1.65) * .55; r *= vignette; g *= vignette; b *= vignette;
+                var gx = settings.SpatialVersion == 2 ? (x + left + .5) * referenceScale - .5 : x+left;
+                var gy = settings.SpatialVersion == 2 ? (y + top + .5) * referenceScale - .5 : y+top;
                 var grainScale = 1d + settings.GrainSize / 24d * 5d;
-                var high = settings.SpatialVersion == 2 ? SmoothNoise(gx, gy, settings.Seed) : DeterministicNoise(x, y, settings.Seed);
+                var high = settings.SpatialVersion == 2 ? SmoothNoise(gx, gy, settings.Seed) : DeterministicNoise(x+left, y+top, settings.Seed);
                 var low = SmoothNoise(gx / grainScale, gy / grainScale, settings.Seed + 101); var grain = (high * .62 + low * .38) * settings.GrainAmount / 100d * .042 * Math.Clamp(luma * .95 + .015, 0, 1) * (1 - Math.Clamp(luma - .86f, 0, .14f) * 2.5); r += grain; g += grain; b += grain;
                 var surface = Surface(settings.TextureId, gx, gy, settings.Seed) * Math.Clamp(settings.SurfaceAmount * settings.TextureAmount / 10000, 0, 1) * .06;
                 if (settings.SpatialVersion == 2) surface *= Math.Clamp(luma + .02, 0, 1); // Keep deep shadows from flipping between clipped black and bright paper.

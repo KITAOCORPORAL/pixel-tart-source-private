@@ -34,11 +34,14 @@ input.ProcessingVersion is not(1 or 2)||string.IsNullOrEmpty(input.SourceSha256)
         definition.Validate();var recipe=definition.InstantInput!;ValidateRecipe(recipe);
         if(!string.Equals(source.SourceSha256,recipe.LegacyRaw!.SourceSha256,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("Legacy RAW source identity changed.");
         // Reserve before orientation allocates; retained source and scratch are distinct from physical allocation.
-        using var work=StudioGlobalResources.ReserveWork(checked((long)source.Width*source.Height*72+64L*1024*1024));
+        var memory=BoundedLegacyRawRenderer.Plan(source.Width,source.Height,recipe.Look,recipe.Stack,recipe.Film);
+        using var work=StudioGlobalResources.ReserveWork(memory.RequiredBytes);
         token.ThrowIfCancellationRequested();stage?.Invoke("OrientationStart");
         var upright=RawImageOrientation.NormalizePixels(source.Image,token);stage?.Invoke("OrientationComplete");
+        stage?.Invoke("Plan:"+(memory.Bounded?"RowBandsHalo0":"FullImage")+":"+memory.RequiredBytes);
         token.ThrowIfCancellationRequested();stage?.Invoke("CurrentEditsStart");
-        var rendered=pipeline.Render(upright,recipe.Look,recipe.Stack,maximumEdge:0,token:token,film:recipe.Film).ProcessingPixels
+        var rendered=memory.Bounded?BoundedLegacyRawRenderer.Render(upright,recipe.Look,recipe.Stack,recipe.Film,token,stage):
+            pipeline.Render(upright,recipe.Look,recipe.Stack,maximumEdge:0,token:token,film:recipe.Film).ProcessingPixels
             ??throw new InvalidDataException("Legacy RAW renderer did not provide full precision pixels.");
         token.ThrowIfCancellationRequested();stage?.Invoke("CurrentEditsComplete");
         if(rendered.Width!=upright.Width||rendered.Height!=upright.Height||rendered.Orientation!=1||rendered.WorkingColorSpace!="sRGB"||rendered.SourceBitDepth!="16")throw new InvalidDataException("Legacy render size/domain contract changed.");

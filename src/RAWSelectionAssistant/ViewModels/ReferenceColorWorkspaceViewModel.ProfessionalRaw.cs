@@ -61,13 +61,14 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 var master=await _professionalDecoder.DecodeAsync(target.Path,definition);
                 if(_disposed||!ReferenceEquals(ActiveTarget,target)||target.ActiveEditVersionId!=sourceVersion||revision!=Volatile.Read(ref _activationRevision))return;
                 if(!string.Equals(master.Contract.SourceSha256,target.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("RAW 源身份改变。");
+        using var activeMasterLease=StudioGlobalResources.Pin(target.Id,"Master");
                 Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);CancelTargetThumbnail(target.Id);Editor.StopProcessing();
                 target.LinearRawMaster=master;target.RawMaster=null;target.RawInput=master.Contract;
                 target.ActiveEditVersionId=Guid.NewGuid();target.RawDefinition=definition;target.AppliedLookSnapshot=null;target.ColorAdjustmentStackSnapshot=null;target.FilmSettingsSnapshot=null;
                 CaptureEditVersion(target);target.EditVersions[^1]=target.EditVersions[^1] with{Name="RAW 基础 v4",OriginVersionId=sourceVersion,OriginIdentity=StudioVersionRepository.Identity(target.LibraryId,target.AssetId,target.SourceHash!)};
                 await ActivateTargetAsync(target);
             }
-            catch(Exception e)when(e is InvalidDataException or IOException or ArgumentException or NotSupportedException or InvalidOperationException){StatusText="未创建新 RAW 版本："+e.Message;}
+            catch(Exception e)when(e is InvalidDataException or IOException or ArgumentException or NotSupportedException or InvalidOperationException){LastProcessingFailure=StudioProcessingFailure.From(e,"ProfessionalRaw");OnPropertyChanged(nameof(LastProcessingFailure));StatusText="未创建新 RAW 版本："+e.Message;}
         });
         ApplyProfessionalRawCommand=new AsyncRelayCommand(async _=>
         {
@@ -81,7 +82,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 if(!string.Equals(master.Contract.SourceSha256,target.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("RAW 源身份改变。");
                 target.RawDefinition=next;target.LinearRawMaster=master;target.RawInput=master.Contract;await ActivateTargetAsync(target);CaptureEditVersion(target);
             }
-            catch(Exception e)when(e is InvalidDataException or IOException or ArgumentException or NotSupportedException or InvalidOperationException){StatusText="未应用 RAW 参数，保留上一版本："+e.Message;}
+            catch(Exception e)when(e is InvalidDataException or IOException or ArgumentException or NotSupportedException or InvalidOperationException){LastProcessingFailure=StudioProcessingFailure.From(e,"ProfessionalRaw");OnPropertyChanged(nameof(LastProcessingFailure));StatusText="未应用 RAW 参数，保留上一版本："+e.Message;}
         });
     }
     private static string ProcessingFingerprint(ReferenceLook? look,ColorAdjustmentStack? stack,PixelTartFilmSettings? film,ProfessionalRawDefinition? definition)
@@ -131,6 +132,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var master=target.LinearRawMaster?.Contract.DecodeKey==definition.DecodeKey?target.LinearRawMaster:await DecodeProfessionalInputAsync(target.Path,definition,token);
         if(!string.Equals(master!.Contract.SourceSha256,target.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("RAW 导出源身份改变。");
         var actualFormat=format==StudioExportFormat.Source&&definition.InputConfiguration=="RenderedSrgbFloatV1"?StudioExportFormat.Jpeg:format;
+        using var retainedMaster=StudioGlobalResources.Pin(target.Id,"Master");
         target.LastProfessionalOutput=await ProfessionalRawExport.WriteAsync(master,definition,temporary,actualFormat,token);
         TrimProfessionalMasters(ActiveTarget??target);
     }

@@ -941,7 +941,7 @@ public sealed class ReferenceTargetItem : ObservableObject
     public ProfessionalRawMaster? LinearRawMaster
     {
         get=>_linearRawMaster;
-        set{_linearRawMaster=value;if(value is null){StudioGlobalResources.Release(Id,"Master");return;}var weak=new WeakReference<ReferenceTargetItem>(this);StudioGlobalResources.Store(Id,"Master",(long)value.Image.Rgb32.Length*sizeof(float),()=>{if(weak.TryGetTarget(out var target))target._linearRawMaster=null;});}
+        set{_linearRawMaster=value;if(value is null){StudioGlobalResources.Release(Id,"Master");return;}var weak=new WeakReference<ReferenceTargetItem>(this);StudioGlobalResources.Store(Id,"Master",(long)value.Image.Rgb32.Length*sizeof(float),()=>{if(weak.TryGetTarget(out var target))if(ReferenceEquals(target._linearRawMaster,value))target._linearRawMaster=null;});}
     }
     public FrozenRawMaster? RawMaster { get; set; }
     public ReferenceExportStatus ExportStatus { get; set; }

@@ -36,6 +36,6 @@ public sealed class FrozenRawMaster
         await using var stream = new FileStream(SourcePath, FileMode.Open, FileAccess.Read, FileShare.Read, 1024 * 1024, FileOptions.SequentialScan);
         var hash = Convert.ToHexString(await SHA256.HashDataAsync(stream, token).ConfigureAwait(false));
         if (!string.Equals(hash, SourceSha256, StringComparison.OrdinalIgnoreCase))
-            throw new IOException("The RAW source changed after its frozen master was created.");
+            throw StudioFailureException.SourceChanged("The RAW source changed after its frozen master was created.");
     }
 }
