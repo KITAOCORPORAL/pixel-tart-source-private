@@ -91,9 +91,9 @@ internal static class PlanningProposalAcceptance
         window.WindowState = WindowState.Normal; window.MinWidth = window.Width = 1920; window.MinHeight = window.Height = 1080;
         await Capture("01_planning_overview.png", overview: true);
         await vm.OpenProjectSafelyAsync(project);
-        var names = new[] { "01_文字.png", "02_参考图.png", "03_情绪板.png", "04_镜头清单.png", "05_灯光图.png", "06_服化道.png", "07_文件.png" };
+        var names = new[] { "01_文字.png", "02_参考图.png", "03_情绪板.png", "04_镜头清单.png", "05_灯光图.png", "06_服化道.png", "07_文件.png", "09_文档内容.png" };
         for (var i = 0; i < PlanningCenterViewModel.ContentPages.Count; i++)
-        { vm.ContentPage = PlanningCenterViewModel.ContentPages[i]; await Capture(names[i]); }
+        { vm.ContentPage = PlanningCenterViewModel.ContentPages[i]; await Capture(i == 0 ? "planning-overview.png" : names[i - 1]); }
         vm.ContentPage = "文字"; vm.IsPreviewMode = true; await Capture("08_预览模式.png"); vm.IsPreviewMode = false;
         var englishNames = new[] { "02_planning_text.png", "03_reference_images.png", "04_moodboard.png", "05_shot_list.png", "06_lighting.png", "07_styling.png", "08_files.png" };
         for (var i = 0; i < names.Length; i++) File.Copy(Path.Combine(output, names[i]), Path.Combine(output, englishNames[i]), true);

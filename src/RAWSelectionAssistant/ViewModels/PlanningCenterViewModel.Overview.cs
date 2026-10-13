@@ -120,7 +120,7 @@ public sealed partial class PlanningCenterViewModel
         catch (Exception error) when (IsRecoverableProjectError(error)) { new FileLogService().Error("新建策划失败。", error); OverviewStatus = "新建策划失败，请稍后重试。"; }
     }
 
-    private static bool IsRecoverableProjectError(Exception error) => error is IOException or UnauthorizedAccessException or System.Text.Json.JsonException or Microsoft.Data.Sqlite.SqliteException or ArgumentException;
+    private static bool IsRecoverableProjectError(Exception error) => error is IOException or InvalidDataException or UnauthorizedAccessException or System.Text.Json.JsonException or Microsoft.Data.Sqlite.SqliteException or ArgumentException;
 }
 
 public sealed record PlanningProjectCard(Guid ProjectId, string Name, string? Cover, DateTimeOffset? ShootAt, int Completed, int Total, DateTimeOffset UpdatedAt,

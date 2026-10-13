@@ -12,6 +12,8 @@ public sealed record PlanningSummary(
     string Notes = "",
     string OutputPurpose = "")
 {
+    [System.Text.Json.Serialization.JsonExtensionData]
+    public Dictionary<string, JsonElement>? Extensions { get; init; }
     public PlanningSummary Normalize() => this with
     {
         ShootGoal = ShootGoal.Trim(),
@@ -26,6 +28,8 @@ public enum PlanningCanvasRole { Overview, Scene, Styling, Lighting, Pose, Story
 public sealed record PlanningVisualLink(Guid LinkId, PlanningVisualLinkKind Kind, Guid TargetId, string Title,
     PlanningCanvasRole Role = PlanningCanvasRole.Overview, DateTimeOffset? LinkedAt = null)
 {
+    [System.Text.Json.Serialization.JsonExtensionData]
+    public Dictionary<string, JsonElement>? Extensions { get; init; }
     public PlanningVisualLink Normalize()
     {
         if (LinkId == Guid.Empty || TargetId == Guid.Empty || string.IsNullOrWhiteSpace(Title)) throw new ArgumentException("A visual link requires stable identities and a title.");
@@ -37,6 +41,8 @@ public sealed record PlanningVisualLink(Guid LinkId, PlanningVisualLinkKind Kind
 public sealed record ShotCaptureRelation(Guid? LibraryId, Guid AssetId, Guid ShotId, Guid ProjectId, Guid? BookingId,
     DateTimeOffset CapturedAt, long ExecutionRevision, string SourceKind = "Library")
 {
+    [System.Text.Json.Serialization.JsonExtensionData]
+    public Dictionary<string, JsonElement>? Extensions { get; init; }
     public string StableKey => $"{SourceKind}:{LibraryId?.ToString("N")??"none"}:{AssetId:N}:{ShotId:N}";
     public ShotCaptureRelation Validate()
     {
@@ -63,7 +69,7 @@ public sealed record PlanningProjectState(Guid ProjectId, Guid? BookingId = null
         var links = (VisualLinks ?? []).Select(link => link.Normalize()).GroupBy(link => link.LinkId).Select(group => group.First()).ToArray();
         var captures = (CapturedAssets ?? []).Select(item => item.Validate()).ToArray();
         if (captures.Any(item => item.ProjectId != ProjectId)) throw new ArgumentException("Captured assets must belong to the planning project.");
-        return this with { Summary = (Summary ?? new()).Normalize(), VisualLinks = links, CapturedAssets = captures.GroupBy(item => item.StableKey, StringComparer.Ordinal).Select(group => group.First()).ToArray(), UpdatedAt = UpdatedAt ?? DateTimeOffset.UtcNow };
+        return this with { Document = Document?.EnsureIdentity(ProjectId), Summary = (Summary ?? new()).Normalize(), VisualLinks = links, CapturedAssets = captures.GroupBy(item => item.StableKey, StringComparer.Ordinal).Select(group => group.First()).ToArray(), UpdatedAt = UpdatedAt ?? DateTimeOffset.UtcNow };
     }
 }
 
@@ -71,7 +77,12 @@ public sealed class PlanningProjectStore(string directory)
 {
     public bool Exists(Guid projectId) => File.Exists(FilePath(projectId));
     public Task UpdateDocumentAsync(Guid projectId, PlanningDocument document, PlanningSummary summary, CancellationToken token = default) =>
-        UpdateAsync(projectId, state => state with { Document = document with { Package = ((document.Package ?? state.Document?.Package ?? new PlanningDocumentPackage { ProjectId = projectId }) with { Body = document.Body }).Validate() }, Summary = summary }, token);
+        UpdateAsync(projectId, state => state with { Document = PrepareDocument(document, state.Document?.Package, projectId), Summary = summary }, token);
+    private static PlanningDocument PrepareDocument(PlanningDocument document, PlanningDocumentPackage? existing, Guid projectId)
+    {
+        var migrated = (document with { Package = document.Package ?? existing }).EnsureIdentity(projectId);
+        return migrated with { Package = migrated.Package! with { Body = document.Body } };
+    }
     public Task LinkBookingAsync(Guid projectId, Guid bookingId, CancellationToken token = default) =>
         UpdateAsync(projectId, state => state with { BookingId = bookingId }, token);
     public string DraftPath(Guid projectId) => FilePath(projectId) + ".draft";
@@ -84,7 +95,7 @@ public sealed class PlanningProjectStore(string directory)
         {
             await using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
             { await JsonSerializer.SerializeAsync(stream, new PlanningDocumentDraft(projectId, document, summary, shots), cancellationToken: token).ConfigureAwait(false); await stream.FlushAsync(token).ConfigureAwait(false); stream.Flush(true); }
-            File.Move(temporary, path, true);
+            token.ThrowIfCancellationRequested(); File.Move(temporary, path, true);
         }
         finally { if (File.Exists(temporary)) File.Delete(temporary); }
     }
@@ -139,6 +150,7 @@ public sealed class PlanningProjectStore(string directory)
             next = next.Normalize(); Directory.CreateDirectory(Path.GetDirectoryName(path)!);
             await using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
             { await JsonSerializer.SerializeAsync(stream, next, cancellationToken: token).ConfigureAwait(false); await stream.FlushAsync(token).ConfigureAwait(false); stream.Flush(true); }
+            token.ThrowIfCancellationRequested(); PlanningMigrationBackup.PreserveLegacy(path, shots: false);
             token.ThrowIfCancellationRequested(); File.Move(temporary, path, true);
         }
         finally { if (File.Exists(temporary)) File.Delete(temporary); gate.Release(); }

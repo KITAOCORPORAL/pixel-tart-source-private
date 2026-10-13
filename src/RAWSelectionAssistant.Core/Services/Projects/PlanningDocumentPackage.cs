@@ -3,9 +3,15 @@ using System.Text.Json.Serialization;
 using RAWSelectionAssistant.Core.Services.FreeCanvas;
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
-public sealed record PlanningAssetReference(Guid LibraryId, Guid AssetId, string? ContentHash = null);
+public sealed record PlanningAssetReference(Guid LibraryId, Guid AssetId, string? ContentHash = null)
+{
+    [JsonExtensionData] public Dictionary<string, JsonElement>? Extensions { get; init; }
+}
 public sealed record PlanningCanvasRevision(Guid RevisionId, Guid CanvasId, DateTimeOffset CapturedAt,
-    CanvasDocument EditableSnapshot, string? PreviewPngBase64 = null);
+    CanvasDocument EditableSnapshot, string? PreviewPngBase64 = null)
+{
+    [JsonExtensionData] public Dictionary<string, JsonElement>? Extensions { get; init; }
+}
 public sealed record PlanningDocumentPackage
 {
     public int Version { get; init; } = 1;

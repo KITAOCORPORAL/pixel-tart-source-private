@@ -21,6 +21,8 @@ public sealed record ProjectShotReference(
     bool IsPinned = false,
     IReadOnlyDictionary<string, string>? Details = null)
 {
+    [System.Text.Json.Serialization.JsonExtensionData]
+    public Dictionary<string, JsonElement>? Extensions { get; init; }
     public ProjectShotReference Normalize()
     {
         var isLibrary = LibraryId is not null && AssetId is not null;
@@ -54,18 +56,37 @@ public sealed record ProjectShot(
     DateTimeOffset? CapturedAt = null,
     bool IsArchived = false)
 {
+    public int PlanningFieldsVersion { get; init; }
+    public string ShotSize { get; init; } = "";
+    public string CameraAndLens { get; init; } = "";
+    public string Action { get; init; } = "";
+    public string Remarks { get; init; } = "";
+    public string Props { get; init; } = "";
+    public string Lighting { get; init; } = "";
+    public Dictionary<string, string> CustomValues { get; init; } = [];
+    [System.Text.Json.Serialization.JsonExtensionData]
+    public Dictionary<string, JsonElement>? Extensions { get; init; }
     public ProjectShot Normalize()
     {
         if (ShotId == Guid.Empty || ProjectId == Guid.Empty || Order < 0 || EstimatedMinutes is < 0 or > 1440 || string.IsNullOrWhiteSpace(Name) || Version != 1)
             throw new ArgumentException("Shot identity, project, order and name must be valid.");
+        if (PlanningFieldsVersion is < 0 or > 1 || CustomValues is null || References is null || !Enum.IsDefined(Status))
+            throw new ArgumentException("Unsupported planning fields or invalid shot collections.");
         var references = References.Select(reference => reference.Normalize()).ToArray();
         if (references.Select(reference => reference.ReferenceId).Distinct().Count() != references.Length)
             throw new ArgumentException("Shot reference identities must be unique.");
-        return this with { Name = Name.Trim(), Notes = string.IsNullOrWhiteSpace(Notes) ? null : Notes.Trim(), Scene = string.IsNullOrWhiteSpace(Scene) ? null : Scene.Trim(), References = references };
+        return this with { Name = Name.Trim(), References = references,
+            PlanningFieldsVersion = 1, Action = PlanningFieldsVersion == 0 ? Notes ?? "" : Action,
+            CustomValues = new(CustomValues, StringComparer.Ordinal) };
     }
 }
 
-public sealed record ProjectShotCatalog(Guid ProjectId, IReadOnlyList<ProjectShot> Shots, int Version = 1);
+public sealed record ProjectShotCatalog(Guid ProjectId, IReadOnlyList<ProjectShot> Shots, int Version = 1)
+{
+    public long Revision { get; init; }
+    [System.Text.Json.Serialization.JsonExtensionData]
+    public Dictionary<string, JsonElement>? Extensions { get; init; }
+}
 
 public sealed class ProjectShotStore(string directory)
 {
@@ -89,6 +110,15 @@ public sealed class ProjectShotStore(string directory)
             Shots = catalog.Shots.Where(item => item.ShotId != shot.ShotId).Append(shot)
                 .OrderBy(item => item.Order).ThenBy(item => item.CreatedAt).ToArray()
         }, token);
+    }
+
+    public Task SaveBatchAsync(Guid projectId, IReadOnlyList<ProjectShot> edits, CancellationToken token = default)
+    {
+        var normalized = edits.Select(s => s.Normalize()).ToArray();
+        if (normalized.Any(s => s.ProjectId != projectId) || normalized.Select(s => s.ShotId).Distinct().Count() != normalized.Length)
+            throw new ArgumentException("Batch shot identities must be unique and belong to the project.");
+        return UpdateAsync(projectId, catalog => catalog with
+        { Shots = catalog.Shots.Where(s => !normalized.Any(e => e.ShotId == s.ShotId)).Concat(normalized).OrderBy(s => s.Order).ToArray() }, token);
     }
 
     public Task RemoveAsync(Guid projectId, Guid shotId, CancellationToken token = default) =>
@@ -120,8 +150,9 @@ public sealed class ProjectShotStore(string directory)
         await using var stream = File.OpenRead(path);
         var catalog = await JsonSerializer.DeserializeAsync<ProjectShotCatalog>(stream, cancellationToken: token).ConfigureAwait(false)
             ?? throw new InvalidDataException("Shot catalog is empty.");
-        if (catalog.ProjectId != projectId || catalog.Version != 1 || catalog.Shots.Any(shot => shot.ProjectId != projectId))
+        if (catalog.ProjectId != projectId || catalog.Version != 1 || catalog.Shots is null || catalog.Revision < 0 || catalog.Shots.Any(shot => shot.ProjectId != projectId))
             throw new InvalidDataException("Shot catalog identity or version is invalid.");
+        if (catalog.Shots.Select(s => s.ShotId).Distinct().Count() != catalog.Shots.Count) throw new InvalidDataException("Duplicate shot identity.");
         return catalog with { Shots = catalog.Shots.Select(shot => shot.Normalize()).OrderBy(shot => shot.Order).ToArray() };
     }
 
@@ -132,10 +163,12 @@ public sealed class ProjectShotStore(string directory)
         await gate.WaitAsync(token).ConfigureAwait(false); var temporary = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
         try
         {
-            var updated = update(await ReadAsync(projectId, path, token).ConfigureAwait(false));
+            var current = await ReadAsync(projectId, path, token).ConfigureAwait(false);
+            var updated = update(current) with { Revision = checked(current.Revision + 1) };
             Directory.CreateDirectory(Path.GetDirectoryName(path)!);
             await using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
             { await JsonSerializer.SerializeAsync(stream, updated, cancellationToken: token).ConfigureAwait(false); await stream.FlushAsync(token).ConfigureAwait(false); stream.Flush(true); }
+            token.ThrowIfCancellationRequested(); PlanningMigrationBackup.PreserveLegacy(path, shots: true);
             token.ThrowIfCancellationRequested(); File.Move(temporary, path, true);
         }
         finally { if (File.Exists(temporary)) File.Delete(temporary); gate.Release(); }

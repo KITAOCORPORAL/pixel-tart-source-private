@@ -26,7 +26,7 @@ public sealed class PlanningWorkspaceLayoutTests
     [TestMethod]
     public void ContentModulesRetainChineseOrderAndAppendCustom()
     {
-        CollectionAssert.AreEqual(new[] { "文字", "参考图", "情绪板", "镜头清单", "灯光图", "服化道", "文件", "自定义" }, PlanningCenterViewModel.ContentPages.ToArray());
+        CollectionAssert.AreEqual(new[] { "项目概览", "文字", "参考图", "情绪板", "镜头清单", "灯光图", "服化道", "文件", "文档内容" }, PlanningCenterViewModel.ContentPages.ToArray());
     }
     [TestMethod]
     public void DocumentPresentationUsesReadingWidthUniformImagesAndOptInEditing()

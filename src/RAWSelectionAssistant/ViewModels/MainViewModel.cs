@@ -2296,14 +2296,44 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         ReturnToWorkbench();
     }
 
-    public void ReturnToOrigin() => ApplySurfaceNavigation(SurfaceNavigationHost.ReturnToOrigin());
+    public void ReturnToOrigin()
+    {
+        if (DeferPlanningNavigation(ReturnToOrigin)) return;
+        ApplySurfaceNavigation(SurfaceNavigationHost.ReturnToOrigin());
+    }
 
-    public void ReturnToWorkbench() => ApplySurfaceNavigation(SurfaceNavigationHost.ReturnToWorkbench());
+    public void ReturnToWorkbench()
+    {
+        if (DeferPlanningNavigation(ReturnToWorkbench)) return;
+        ApplySurfaceNavigation(SurfaceNavigationHost.ReturnToWorkbench());
+    }
+    private bool _planningNavigationSaving;
+    private bool _planningNavigationApproved;
+    internal Task PlanningNavigationWork { get; private set; } = Task.CompletedTask;
+    private bool DeferPlanningNavigation(Action continuation)
+    {
+        if (!IsPlanningPage || PlanningPage is null || _planningNavigationApproved) return false;
+        if (!_planningNavigationSaving) PlanningNavigationWork = SavePlanningBeforeNavigationAsync(continuation);
+        return true;
+    }
+    private async Task SavePlanningBeforeNavigationAsync(Action continuation)
+    {
+        _planningNavigationSaving = true;
+        try
+        {
+            if (PlanningPage is null || !await PlanningPage.FlushAsync()) return;
+            _planningNavigationApproved = true;
+            continuation();
+        }
+        catch (Exception error) { _logService.Error("策划离开前保存失败；留在原工作区。", error); }
+        finally { _planningNavigationApproved = false; _planningNavigationSaving = false; }
+    }
 
     private void NavigateToSurface(string targetPage, bool recordHistory = true)
     {
         var normalizedTarget = NormalizeNavigationSurface(targetPage);
         if (string.Equals(CurrentPage, normalizedTarget, StringComparison.Ordinal)) return;
+        if (DeferPlanningNavigation(() => NavigateToSurface(targetPage, recordHistory))) return;
         var navigationCorrelationId = Guid.NewGuid().ToString("N");
         _logService.Info($"导航请求[{navigationCorrelationId}]：{CurrentPage} -> {normalizedTarget}");
         var target = recordHistory

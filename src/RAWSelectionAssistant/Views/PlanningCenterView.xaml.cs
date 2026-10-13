@@ -34,9 +34,9 @@ public partial class PlanningCenterView : UserControl
         InitializeComponent();
         DataContextChanged += (_, e) =>
         {
-            if (_vm is not null) { _vm.DocumentPresentationChanged -= PresentationChanged; _vm.PropertyChanged -= ViewModelChanged; }
+            if (_vm is not null) { FlushSimpleEditors(); _vm.CapturePendingEditorDraft = null; _vm.DocumentPresentationChanged -= PresentationChanged; _vm.PropertyChanged -= ViewModelChanged; }
             _vm = e.NewValue as PlanningCenterViewModel;
-            if (_vm is not null) { _vm.DocumentPresentationChanged += PresentationChanged; _vm.PropertyChanged += ViewModelChanged; }
+            if (_vm is not null) { _vm.CapturePendingEditorDraft = FlushSimpleEditors; _vm.DocumentPresentationChanged += PresentationChanged; _vm.PropertyChanged += ViewModelChanged; }
             Render();
         };
         Loaded += (_, _) => Render();
@@ -121,12 +121,12 @@ public partial class PlanningCenterView : UserControl
             {
                 "参考图" => "PlanningReferencesSurface", "情绪板" => "PlanningMoodboardSurface",
                 "镜头清单" => "PlanningShotListSurface", "灯光图" => "PlanningLightingSurface",
-                "服化道" => "PlanningStylingSurface", "文件" => "PlanningFilesSurface", "自定义" => "PlanningCustomSurface", _ => "PlanningTextSurface"
+                "服化道" => "PlanningStylingSurface", "文件" => "PlanningFilesSurface", "自定义" or "文档内容" => "PlanningCustomSurface", "项目概览" => "PlanningOverviewSurface", _ => "PlanningTextSurface"
             });
             DocumentListColumn.Width = new GridLength(preview ? 0 : 280);
             DocumentListPane.Visibility = EditorHeader.Visibility = ContentNavigationBorder.Visibility = preview ? Visibility.Collapsed : Visibility.Visible;
             ContextDrawer.Visibility = Visibility.Collapsed;
-            RenderNavigation(); DocumentContent.Children.Clear(); _referenceCaptions.Clear();
+            RenderNavigation(); _shotTable = null; DocumentContent.Children.Clear(); _referenceCaptions.Clear();
             DocumentList.SelectedItem = _vm.PlanningProjects.FirstOrDefault(item => item.ProjectId == _vm.ProjectId);
             DocumentContent.MaxWidth = _vm.ContentPage == "文字" || preview ? 940 : 1320;
             if (!_vm.HasProject || _vm.IsOverview)
@@ -152,11 +152,13 @@ public partial class PlanningCenterView : UserControl
             }
             switch (_vm.ContentPage)
             {
+                case "项目概览": RenderSimpleOverview(); break;
                 case "文字": RenderText(_vm.IsDocumentEditing); break;
                 case "镜头清单": RenderShots(true); break;
                 case "文件": RenderFiles(); break;
                 case "自定义":
-                    Heading(DocumentContent, "自定义");
+                case "文档内容":
+                    Heading(DocumentContent, "文档内容");
                     DocumentContent.Children.Add(Text("补充本次拍摄需要的内容，随策划案自动保存。", 14));
                     DocumentContent.Children.Add(Editor(nameof(_vm.DocumentCustomBody), 12));
                     DocumentContent.Children.Add(AsyncAction("保存", FlushDocumentAsync));
@@ -178,12 +180,12 @@ public partial class PlanningCenterView : UserControl
             StatusChips.Children.Add(chip);
         }
         ContentNavigation.Children.Clear();
-        var icons = new[] { "PixelTart.Symbol.Planning", "PixelTart.Symbol.Preview", "PixelTart.Symbol.Collage", "PixelTart.Symbol.Storyboard", "PixelTart.Symbol.Lighting", "PixelTart.Symbol.Styling", "PixelTart.Symbol.Link", "PixelTart.Symbol.Planning" };
+        var icons = new[] { "PixelTart.Symbol.Planning", "PixelTart.Symbol.Planning", "PixelTart.Symbol.Preview", "PixelTart.Symbol.Collage", "PixelTart.Symbol.Storyboard", "PixelTart.Symbol.Lighting", "PixelTart.Symbol.Styling", "PixelTart.Symbol.Link", "PixelTart.Symbol.Planning" };
         for (var i = 0; i < PlanningCenterViewModel.ContentPages.Count; i++)
         {
             var page = PlanningCenterViewModel.ContentPages[i];
-            var button = Action(page, () => { _vm.ContentPage = page; DocumentScroll.ScrollToTop(); });
-            AutomationProperties.SetAutomationId(button, "PlanningPage" + new[] { "Text", "References", "Moodboard", "Shots", "Lighting", "Styling", "Files", "Custom" }[i]);
+            var button = AsyncAction(page, async () => { if (await FlushDocumentAsync() && await _vm.SelectContentSafelyAsync(page)) DocumentScroll.ScrollToTop(); });
+            AutomationProperties.SetAutomationId(button, "PlanningPage" + new[] { "Overview", "Text", "References", "Moodboard", "Shots", "Lighting", "Styling", "Files", "Custom" }[i]);
             button.Padding = new Thickness(5, 12, 5, 12); button.MinWidth = 0;
             var content = new StackPanel { Orientation = Orientation.Horizontal };
             content.Children.Add(new System.Windows.Shapes.Path { Data = (Geometry)FindResource(icons[i]), Width = 14, Height = 14, Stretch = Stretch.Uniform, Fill = Brushes.Transparent, Stroke = Brush(_vm.ContentPage == page ? "AccentBrush" : "TextSecondaryBrush"), StrokeThickness = 1.4, Margin = new Thickness(0, 0, 4, 0) });
@@ -245,7 +247,10 @@ public partial class PlanningCenterView : UserControl
             status.SetBinding(Selector.SelectedItemProperty, new Binding(nameof(_vm.ProposalStatus))); AutomationProperties.SetName(status, "策划案状态"); DocumentContent.Children.Add(status);
             Heading(DocumentContent, "核心概念");
             DocumentContent.Children.Add(Text("正文随项目自动保存；工具栏写入兼容的结构标记，预览和 PDF 使用同一内容。", 12));
-            DocumentContent.Children.Add(new PlanningRichEditor(_vm.RichTextPackage,_vm.DocumentBody,_vm.SaveRichText,_vm.DocumentCanvasRevisions,_vm.RichLayout));
+            var owner = _vm; var projectId = owner.ProjectId; var documentId = owner.PlanningDocumentId;
+            DocumentContent.Children.Add(new PlanningRichEditor(_vm.RichTextPackage,_vm.DocumentBody,
+                (rtf, text, layout) => { if (owner.ProjectId == projectId && owner.PlanningDocumentId == documentId) owner.SaveRichText(rtf, text, layout); },
+                _vm.DocumentCanvasRevisions,_vm.RichLayout));
         }
         else
         {
@@ -308,7 +313,7 @@ public partial class PlanningCenterView : UserControl
                 if (!string.IsNullOrWhiteSpace(shot.Notes)) summary.Children.Add(Text(shot.Notes, 14));
                 DocumentContent.Children.Add(summary);
             }
-            DocumentContent.Children.Add(Action("查看完整镜头清单", () => { _vm.ContentPage = "镜头清单"; DocumentScroll.ScrollToTop(); }));
+            DocumentContent.Children.Add(AsyncAction("查看完整镜头清单", async () => { if (await FlushDocumentAsync()) await _vm.SelectContentSafelyAsync("镜头清单"); }));
         }
         foreach (var section in new[] { ("拍摄目标", nameof(_vm.ShootGoal), _vm.ShootGoal), ("视觉关键词", nameof(_vm.Keywords), _vm.Keywords), ("客户要求", nameof(_vm.ClientRequirements), _vm.ClientRequirements), ("必拍内容", nameof(_vm.MustCapture), _vm.MustCapture), ("注意事项", nameof(_vm.PlanningNotes), _vm.PlanningNotes), ("交付用途", nameof(_vm.OutputPurpose), _vm.OutputPurpose) })
         {
@@ -452,6 +457,7 @@ public partial class PlanningCenterView : UserControl
     private void RenderShots(bool interactive)
     {
         if (_vm is null) return;
+        if (interactive) { RenderEditableShotTable(); return; }
         if (interactive)
         {
             var toolbar = new DockPanel(); toolbar.Children.Add(Text(_vm.ProgressText, 15));
@@ -558,7 +564,7 @@ public partial class PlanningCenterView : UserControl
     {
         if (_rendering || _switchingDocument || _vm is null || DocumentList.SelectedItem is not PlanningProjectCard card || card.ProjectId == _vm.ProjectId && !_vm.IsOverview) return;
         _switchingDocument = true; DocumentList.IsEnabled = false;
-        try { await _vm.OpenProjectSafelyAsync(card.ProjectId); Render(); DocumentScroll.ScrollToTop(); }
+        try { if (!await FlushDocumentAsync()) { DocumentList.SelectedItem = _vm.PlanningProjects.FirstOrDefault(p => p.ProjectId == _vm.ProjectId); return; } await _vm.OpenProjectSafelyAsync(card.ProjectId); Render(); DocumentScroll.ScrollToTop(); }
         finally { _switchingDocument = false; DocumentList.IsEnabled = true; }
     }
     private void More_Click(object sender, RoutedEventArgs e)
@@ -567,7 +573,7 @@ public partial class PlanningCenterView : UserControl
         var menu = new ContextMenu { PlacementTarget = button }; menu.SetResourceReference(StyleProperty, "PixelTart.Menu.Context");
         var start = MenuEntry("开始拍摄", "IconCameraTether"); start.Command = _vm.EnterTetherCommand; menu.Items.Add(start);
         var calendar = MenuEntry("查看关联档期", "IconCalendar"); calendar.Command = _vm.OpenCalendarCommand; menu.Items.Add(calendar);
-        var overview = MenuEntry("返回策划列表", "IconPlanning"); overview.Command = _vm.ShowOverviewCommand; menu.Items.Add(overview); menu.IsOpen = true;
+        var overview = MenuEntry("返回策划列表", "IconPlanning"); overview.Click += async (_, _) => { if (await FlushDocumentAsync()) await _vm.ShowOverviewCommand.ExecuteAsync(null); }; menu.Items.Add(overview); menu.IsOpen = true;
     }
     private async void ShowImage(PlanningReferenceItem item)
     {
@@ -591,7 +597,7 @@ public partial class PlanningCenterView : UserControl
     private void ClosePreview_Click(object sender, RoutedEventArgs e) => CloseImagePreview();
     private Task<bool> FlushDocumentAsync()
     {
-        foreach(var editor in DocumentContent.Children.OfType<PlanningRichEditor>())editor.FlushPending();
+        FlushSimpleEditors();
         return _vm?.FlushAsync()??Task.FromResult(true);
     }
     private async void Export_Click(object sender, RoutedEventArgs e)
@@ -621,6 +627,7 @@ public partial class PlanningCenterView : UserControl
         if(e.Key==Key.Escape && Keyboard.FocusedElement is TextBox {Tag:"PrecisionInput"})return;
         if (e.Key == Key.Escape)
         {
+            if (_shotTable?.IsKeyboardFocusWithin == true) { _shotTable.CancelEdit(DataGridEditingUnit.Cell); _shotTable.CancelEdit(DataGridEditingUnit.Row); e.Handled = true; return; }
             if (ImagePreview.Visibility == Visibility.Visible) CloseImagePreview();
             else if (ModalOverlay.Visibility == Visibility.Visible) { ModalOverlay.Visibility = Visibility.Collapsed; _vm.CancelPlanningModalCommand.Execute(null); }
             else if (_vm.IsShotDrawerOpen) _vm.IsShotDrawerOpen = false;
@@ -631,7 +638,7 @@ public partial class PlanningCenterView : UserControl
         {
             if (e.Key == Key.S) { e.Handled = true; await FlushDocumentAsync(); return; }
             if (ModalOverlay.Visibility == Visibility.Visible || ImagePreview.Visibility == Visibility.Visible) return;
-            if (e.Key == Key.P) { e.Handled = true; await FlushDocumentAsync();await _vm.PreviewDocumentCommand.ExecuteAsync(null); return; }
+            if (e.Key == Key.P) { e.Handled = true; if (await FlushDocumentAsync()) await _vm.PreviewDocumentCommand.ExecuteAsync(null); return; }
             if (e.Key == Key.F) { e.Handled = true; ProjectSearchBox.Focus(); ProjectSearchBox.SelectAll(); return; }
         }
         if (e.OriginalSource is TextBoxBase || e.Key is Key.ImeProcessed or Key.DeadCharProcessed) return;

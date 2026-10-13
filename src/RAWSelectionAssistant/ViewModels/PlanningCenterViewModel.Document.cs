@@ -23,6 +23,8 @@ public sealed partial class PlanningCenterViewModel
     public void SaveRichText(string data, string plainText,PlanningRichLayout layout)
     {
         if(ProjectId is not Guid project)return;
+        if (_document.Package?.RichTextPackageBase64 == data && _document.Body == plainText
+            && System.Text.Json.JsonSerializer.Serialize(_document.Package?.RichLayout) == System.Text.Json.JsonSerializer.Serialize(layout)) return;
         UpdateDocument(_document with { Body=plainText, Package=(_document.Package ?? new PlanningDocumentPackage{ProjectId=project}) with {RichTextPackageBase64=data,RichLayout=layout} });
     }
     public IDialogService Dialogs => _dialogs;
@@ -48,7 +50,7 @@ public sealed partial class PlanningCenterViewModel
     private readonly Dictionary<Guid, ProjectShot> _pendingShots = [];
     private string _referenceCategory = "全部";
     private PlanningReferenceItem? _selectedDocumentReference;
-    public static IReadOnlyList<string> ContentPages { get; } = ["文字", "参考图", "情绪板", "镜头清单", "灯光图", "服化道", "文件", "自定义"];
+    public static IReadOnlyList<string> ContentPages { get; } = ["项目概览", "文字", "参考图", "情绪板", "镜头清单", "灯光图", "服化道", "文件", "文档内容"];
     public IReadOnlyList<string> ReferenceCategories { get; } = ["全部", "主视觉", "场景", "姿势", "造型", "灯光", "色彩", "其他"];
     public IReadOnlyList<string> ProposalStatuses { get; } = ["进行中", "草稿", "已完成"];
     public IReadOnlyList<string> MoodGroups { get; } = ["整体氛围", "材质", "身体姿势", "灯光", "色彩"];
@@ -96,7 +98,7 @@ public sealed partial class PlanningCenterViewModel
     public AsyncRelayCommand AddAttachmentCommand { get; private set; } = null!;
     public RelayCommand OpenColorSchemeCommand { get; private set; } = null!;
     public RelayCommand OpenCalendarCommand { get; private set; } = null!;
-    public RelayCommand SelectContentCommand { get; private set; } = null!;
+    public AsyncRelayCommand SelectContentCommand { get; private set; } = null!;
     public RelayCommand CancelPlanningModalCommand { get; private set; } = null!;
 
     private void InitializeDocument()
@@ -104,7 +106,7 @@ public sealed partial class PlanningCenterViewModel
         FlushPlanningCommand = new AsyncRelayCommand(_ => FlushAsync());
         PreviewDocumentCommand = new AsyncRelayCommand(async _ => { if (await FlushAsync()) IsPreviewMode = !IsPreviewMode; });
         EditDocumentCommand = new RelayCommand(_ => IsDocumentEditing = !IsDocumentEditing);
-        SelectContentCommand = new RelayCommand(value => { if (value is string page && ContentPages.Contains(page)) ContentPage = page; });
+        SelectContentCommand = new AsyncRelayCommand(async value => { if (value is string page) await SelectContentSafelyAsync(page); });
         ShowCreatePlanningCommand = new AsyncRelayCommand(async _ => { AvailableProjects.Clear(); foreach (var p in await _projects.ListAsync()) AvailableProjects.Add(p); IsCreateOpen = true; });
         ShowBookingCommand = new AsyncRelayCommand(async _ =>
         {
@@ -133,24 +135,28 @@ public sealed partial class PlanningCenterViewModel
     private void UpdateDocument(PlanningDocument value)
     {
         if (_state is null) return;
-        var package = value.Package ?? _document.Package ?? new PlanningDocumentPackage { ProjectId = _state.ProjectId };
+        var package = value.Package ?? _document.Package ?? value.EnsureIdentity(_state.ProjectId).Package!;
         _document = value with { Package = package with { Body = value.Body,
             Assets = value.References.Where(r => r.Source.LibraryId.HasValue && r.Source.AssetId.HasValue)
                 .Select(r => new PlanningAssetReference(r.Source.LibraryId!.Value,r.Source.AssetId!.Value)).Distinct().ToArray(),
-            ShotIds = Shots.Select(shot => shot.ShotId).ToArray() } };
+            ShotIds = Shots.Where(shot => !shot.IsArchived).Select(shot => shot.ShotId).ToArray() } };
         OnPropertyChanged(nameof(DocumentTitle)); OnPropertyChanged(nameof(ProposalStatus));
         QueueDocumentSave();
     }
     private void QueueDocumentSave()
     {
         if (_state is null) return;
+        _document = _document.EnsureIdentity(_state.ProjectId);
+        _document = _document with { Package = _document.Package! with {
+            ShotIds = _document.Package!.ShotIds.Concat(Shots.Select(s => s.ShotId))
+                .Concat(_pendingShots.Values.Where(s => s.ProjectId == _state.ProjectId).Select(s => s.ShotId)).Distinct().ToArray() } };
         _pendingDocuments[_state.ProjectId] = (_document, _state.Summary ?? new());
         ScheduleSave();
     }
     private void CaptureShotSave()
     {
         if (SelectedShot is not { } shot) return;
-        _pendingShots[shot.ShotId] = _pendingShots.GetValueOrDefault(shot.ShotId, shot) with { Name = _shotTitle, Scene = _shotScene, Notes = _shotNotes, EstimatedMinutes = _shotEstimatedMinutes, UpdatedAt = DateTimeOffset.UtcNow };
+        _pendingShots[shot.ShotId] = _pendingShots.GetValueOrDefault(shot.ShotId, shot) with { Name = _shotTitle, Scene = _shotScene, Notes = _shotNotes, Action = _shotNotes != shot.Notes ? _shotNotes : _pendingShots.GetValueOrDefault(shot.ShotId, shot).Action, PlanningFieldsVersion = 1, EstimatedMinutes = _shotEstimatedMinutes, UpdatedAt = DateTimeOffset.UtcNow };
         if (_state is not null) _pendingDocuments[_state.ProjectId] = (_document, _state.Summary ?? new());
         ScheduleSave();
     }
@@ -163,37 +169,53 @@ public sealed partial class PlanningCenterViewModel
         try { await Task.Delay(450, token); await FlushAsync(); }
         catch (OperationCanceledException) { }
     }
-    public async Task<bool> FlushAsync()
+    public Action? CapturePendingEditorDraft { get; set; }
+    public async Task<bool> FlushAsync(CancellationToken token = default)
     {
+        // Shell navigation also calls this gate, not necessarily the view's Save handler.
+        try { CapturePendingEditorDraft?.Invoke(); }
+        catch (Exception error) when (error is InvalidOperationException or ArgumentException)
+        { SaveStatus = "保存失败，请完成当前单元格编辑；草稿已保留"; return false; }
         _saveDelay?.Cancel();
-        await _saveGate.WaitAsync();
+        try { await _saveGate.WaitAsync(token); }
+        catch (OperationCanceledException) { SaveStatus = "保存已取消；草稿保留"; return false; }
         try
         {
             while (_pendingDocuments.Count > 0 || _pendingShots.Count > 0)
             {
-            var revision = _editRevision;
-            var drafts = _pendingDocuments.Keys.Concat(_pendingShots.Values.Select(shot => shot.ProjectId)).Distinct().ToArray();
-            foreach (var pair in _pendingDocuments.ToArray())
-            {
-                await _planning.WriteDraftAsync(pair.Key, pair.Value.Document, pair.Value.Summary, shots: _pendingShots.Values.Where(shot => shot.ProjectId == pair.Key).ToArray());
-                await _planning.UpdateDocumentAsync(pair.Key, pair.Value.Document, pair.Value.Summary);
-                if (_pendingDocuments.TryGetValue(pair.Key, out var latest) && latest == pair.Value) _pendingDocuments.Remove(pair.Key);
-            }
-            foreach (var pair in _pendingShots.ToArray())
-            {
-                if (string.IsNullOrWhiteSpace(pair.Value.Name)) throw new InvalidDataException("镜头名称不能为空。");
-                await _shots.SaveAsync(pair.Value);
-                var index = Shots.ToList().FindIndex(shot => shot.ShotId == pair.Key);
-                if (index >= 0) Shots[index] = pair.Value;
-                if (_selectedShot?.ShotId == pair.Key) { _selectedShot = pair.Value; OnPropertyChanged(nameof(SelectedShot)); }
-                if (_pendingShots.TryGetValue(pair.Key, out var latest) && latest == pair.Value) _pendingShots.Remove(pair.Key);
-            }
-            foreach (var id in drafts) if (!_pendingDocuments.ContainsKey(id) && !_pendingShots.Values.Any(shot => shot.ProjectId == id)) _planning.ClearDraft(id);
-            if (_editRevision == revision) break;
+                var documents = _pendingDocuments.ToArray();
+                var shots = _pendingShots.ToArray();
+                // Recovery journal is durable BEFORE validating user drafts or replacing either file.
+                // Keep both pending maps until both writes succeed. Replaying the same IDs is idempotent.
+                foreach (var pair in documents)
+                    await _planning.WriteDraftAsync(pair.Key, pair.Value.Document, pair.Value.Summary, token,
+                        shots.Where(s => s.Value.ProjectId == pair.Key).Select(s => s.Value).ToArray());
+                foreach (var pair in shots) pair.Value.Normalize();
+                foreach (var pair in documents) pair.Value.Document.EnsureIdentity(pair.Key);
+                foreach (var group in shots.GroupBy(p => p.Value.ProjectId))
+                    await _shots.SaveBatchAsync(group.Key, group.Select(p => p.Value).ToArray(), token);
+                foreach (var pair in documents)
+                    await _planning.UpdateDocumentAsync(pair.Key, pair.Value.Document, pair.Value.Summary, token);
+                foreach (var pair in shots)
+                {
+                    if (!_pendingShots.TryGetValue(pair.Key, out var latest) || latest != pair.Value) continue;
+                    _pendingShots.Remove(pair.Key);
+                    var index = Shots.ToList().FindIndex(s => s.ShotId == pair.Key);
+                    if (pair.Value.IsArchived) { if (index >= 0) Shots.RemoveAt(index); }
+                    else if (index >= 0) Shots[index] = pair.Value;
+                    else if (ProjectId == pair.Value.ProjectId) Shots.Add(pair.Value);
+                    if (_selectedShot?.ShotId == pair.Key) _selectedShot = pair.Value.IsArchived ? null : pair.Value;
+                }
+                foreach (var pair in documents)
+                {
+                    if (_pendingDocuments.TryGetValue(pair.Key, out var latest) && latest == pair.Value) _pendingDocuments.Remove(pair.Key);
+                    if (!_pendingDocuments.ContainsKey(pair.Key) && !_pendingShots.Values.Any(s => s.ProjectId == pair.Key)) _planning.ClearDraft(pair.Key);
+                }
             }
             SaveStatus = $"自动保存于 {DateTime.Now:HH:mm}";
             return true;
         }
+        catch (OperationCanceledException) { SaveStatus = "保存已取消；未保存内容和恢复草稿已保留"; return false; }
         catch (Exception error) when (IsRecoverableProjectError(error))
         { new FileLogService().Error("策划保存失败，保留待保存内容与恢复草稿。", error); SaveStatus = "保存失败，请重试；未保存内容已保留"; return false; }
         finally { _saveGate.Release(); }
@@ -202,20 +224,23 @@ public sealed partial class PlanningCenterViewModel
     {
         SelectedDocumentReference = null;
         _document = _state?.Document ?? new PlanningDocument { Title = ProjectName };
-        if (ProjectId is Guid packageProject && _document.Package is null) _document = _document with { Package = new PlanningDocumentPackage { ProjectId = packageProject, Body = _document.Body } };
+        if (ProjectId is Guid packageProject) _document = _document.EnsureIdentity(packageProject);
         if (ProjectId is Guid id && await _planning.LoadDraftAsync(id) is { } draft)
         {
-            _document = draft.Document; _state = _state! with { Summary = draft.Summary };
-            _pendingDocuments[id] = (draft.Document, draft.Summary);
+            _document = draft.Document.EnsureIdentity(id); _state = _state! with { Summary = draft.Summary };
+            _pendingDocuments[id] = (_document, draft.Summary);
             foreach (var shot in draft.Shots ?? [])
             {
                 _pendingShots[shot.ShotId] = shot;
                 var index = Shots.ToList().FindIndex(existing => existing.ShotId == shot.ShotId);
-                if (index >= 0) Shots[index] = shot;
+                if (shot.IsArchived) { if (index >= 0) Shots.RemoveAt(index); }
+                else if (index >= 0) Shots[index] = shot; else Shots.Add(shot);
             }
             if (SelectedShot is { } selected && _pendingShots.TryGetValue(selected.ShotId, out var recovered)) SelectedShot = recovered;
             SaveStatus = "已恢复未完成保存的草稿，请按 Ctrl+S 保存";
         }
+        var orderedShots = Shots.OrderBy(s => s.Order).ToArray();
+        Shots.Clear(); foreach (var shot in orderedShots) Shots.Add(shot);
         RefreshAttachments();
         await RefreshDocumentReferencesAsync();
         OnPropertyChanged(string.Empty); PresentationChanged();
