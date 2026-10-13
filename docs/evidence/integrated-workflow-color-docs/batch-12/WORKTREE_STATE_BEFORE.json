@@ -1,0 +1,119 @@
+[
+  {
+    "status": [],
+    "head": "4dac5f8e4460b7a67309646b6133bd186c121fea",
+    "path": "D:/AI AGENT/RAWSelectionAssistant",
+    "diffHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "status": [
+      " M src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioDevelop.cs",
+      " M src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+      " M src/RAWSelectionAssistant.Core/Services/Projects/LegacyRawInstantInput.cs",
+      " M src/RAWSelectionAssistant.Core/Services/Projects/PixelTartFilm.cs",
+      "?? src/RAWSelectionAssistant.Core/Services/Projects/SpatialLegacyRawRenderer.cs",
+      "?? src/RAWSelectionAssistant/Services/ReviewedLibRawCandidate.cs",
+      "?? tests/RAWSelectionAssistant.Tests/SpatialClosureTests.cs",
+      "?? tests/RAWSelectionAssistant.WpfTests/SpatialClosureRealTests.cs"
+    ],
+    "head": "9e0fc52b0fd3598bae36ad1ccb5db2b1520ad0d8",
+    "path": "D:/AI AGENT/color-studio-closure-20261013",
+    "diffHash": "0287D7C3399CCBE3C231A7A82A0132E24FA7C42515E30D0923CFC48D7EB305C6"
+  },
+  {
+    "status": [],
+    "head": "db1eff37393eae50816f932365e453937c05e8cb",
+    "path": "D:/AI AGENT/kitao-studio-product-master-spec-20261012",
+    "diffHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "status": [],
+    "head": "51b3f4f891a36acb6bd4f8a3a2e0dd83340bd1c2",
+    "path": "D:/AI AGENT/pixel-tart-batch09-20261012",
+    "diffHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "status": [],
+    "head": "7184966a4921215a1a306019578f23646bcf872a",
+    "path": "D:/AI AGENT/pixel-tart-batch10-20261012",
+    "diffHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "status": [],
+    "head": "9e0fc52b0fd3598bae36ad1ccb5db2b1520ad0d8",
+    "path": "D:/AI AGENT/pixel-tart-batch11-20261013",
+    "diffHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "status": [
+      " M tests/RAWSelectionAssistant.Tests/TestSupport.cs",
+      " M tests/RAWSelectionAssistant.Tests/Version210RecoveryCoordinatorTests.cs",
+      " M tests/RAWSelectionAssistant.Tests/Version210StressTests.cs",
+      " M tests/RAWSelectionAssistant.Tests/Version220BookingDomainTests.cs",
+      " M tests/RAWSelectionAssistant.Tests/Version220CalendarSchemaTests.cs",
+      " M tests/RAWSelectionAssistant.Tests/Version220DocumentReminderTests.cs",
+      " M tests/RAWSelectionAssistant.Tests/Version220DocumentWorkflowTests.cs"
+    ],
+    "head": "c9af9ebad8e36fc99d753d330f59a4a3c6b70146",
+    "path": "D:/AI AGENT/RAWSelectionAssistant_sqlite_gate",
+    "diffHash": "DD525779F0DB79A0E2FC8EA467089DBF4CDEFB257C421AD6339670F4E1470D90"
+  },
+  {
+    "status": [],
+    "head": "225c589495c3f73d706752aaf31e92c0cd5ef3c1",
+    "path": "D:/AI AGENT/worktrees/al-f01-foundation",
+    "diffHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "status": [],
+    "head": "3da45d53e4628a743a2809f908cbdfd60d706c43",
+    "path": "D:/AI AGENT/worktrees/asset-library-v1",
+    "diffHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "status": [],
+    "head": "7fd63b5064db774aa3a8f3ce5a24f676f1592993",
+    "path": "D:/AI AGENT/worktrees/migration-asset-library-20260911",
+    "diffHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "status": [
+      " M src/RAWSelectionAssistant.Core/Models/CollageModels.cs",
+      " M src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContainerService.cs",
+      " M src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.P3.cs",
+      " M src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.V15.cs",
+      " M src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.cs",
+      " M src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAnalysisPersistence.cs",
+      " M src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAssetQueryService.cs",
+      " M src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentService.cs",
+      " M src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentWorkflowService.cs",
+      " M src/RAWSelectionAssistant.Core/Services/Business/BusinessServices.cs",
+      " M src/RAWSelectionAssistant.Core/Services/Database/CalendarWorkflowSchemaMigration.cs",
+      " M src/RAWSelectionAssistant.Core/Services/Database/SqliteBookingDocumentRepository.cs",
+      " M src/RAWSelectionAssistant.Core/Services/Database/SqliteBusinessRepositories.cs",
+      " M src/RAWSelectionAssistant.Core/Services/Database/SqliteShootBookingRepository.cs",
+      " M src/RAWSelectionAssistant.Core/Services/OrganizeService.cs",
+      " M src/RAWSelectionAssistant.Core/Services/RawToJpeg/RawToJpegSafeConversionService.cs",
+      " M src/RAWSelectionAssistant.Core/Services/Tethering/WatchFolderCameraAdapter.cs",
+      " M tests/RAWSelectionAssistant.WpfTests/DesignSystemAv2LockTests.cs",
+      "?? docs/design/DESIGN_SYSTEM_IMPLEMENTATION_REPORT.md"
+    ],
+    "head": "ea075b23603d01a393f29621fdeaa39adb627a6a",
+    "path": "D:/AI AGENT/worktrees/modular-harness-v1",
+    "diffHash": "8F6C7EB93383D54C111704931355DD4E98BD18CDEA4040C36F70755AD09D7A20"
+  },
+  {
+    "status": [
+      "?? src/RAWSelectionAssistant/artifacts/"
+    ],
+    "head": "393c1a545bb3d504ac1d3721576dc96f0c220f2f",
+    "path": "D:/AI AGENT/worktrees/online-selection-v1",
+    "diffHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "status": [],
+    "head": "6a27e166af5c77f8455f44089aa9de5d38e86495",
+    "path": "D:/AI AGENT/worktrees/pixel-tart-developer-preview-rc6",
+    "diffHash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  }
+]
