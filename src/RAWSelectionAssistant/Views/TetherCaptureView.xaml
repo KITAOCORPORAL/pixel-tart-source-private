@@ -22,7 +22,7 @@
         <DataTemplate x:Key="InspectorTemplate">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" AutomationProperties.Name="现场监看右侧检查器">
                 <StackPanel Margin="10">
-                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="HistogramGroup" Header="曝光评估" IsExpanded="True" AutomationProperties.Name="曝光评估工具组">
+                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="HistogramGroup" Header="曝光评估" IsExpanded="{Binding WorkspacePreferenceState.ExposureExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}" AutomationProperties.Name="曝光评估工具组">
                         <StackPanel Margin="0,8,0,10">
                             <Grid><TextBlock Text="RGB直方图" Style="{StaticResource SectionTitleText}" /><Button Content="刷新" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Command="{Binding RefreshAnalysisCommand}" AutomationProperties.Name="刷新RGB直方图" /></Grid>
                             <views:TetherHistogramView Histogram="{Binding Histogram}" Height="132" Margin="0,8,0,0" AutomationProperties.Name="RGB直方图" />
@@ -34,7 +34,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="ReferenceModeGroup" Header="参考模式" IsExpanded="True" AutomationProperties.Name="参考仿色工具组">
+                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="ReferenceModeGroup" Header="参考模式" IsExpanded="{Binding WorkspacePreferenceState.ReferenceExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}" AutomationProperties.Name="参考仿色工具组">
                         <StackPanel Margin="0,8,0,10">
                             <TextBlock Text="{Binding ReferenceMode.CurrentLookText}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
                             <Button x:Name="ReferenceSourceButton" Content="选择参考来源" Style="{StaticResource SecondaryButton}" Command="{Binding ReferenceMode.ToggleSourcePickerCommand}" HorizontalAlignment="Stretch" Margin="0,6,0,0" AutomationProperties.Name="打开参考来源选择器" />
@@ -79,7 +79,7 @@
                     </Expander>
 
                     <Button Content="返回策划" Style="{StaticResource GhostButton}" Command="{Binding DataContext.ReturnToPlanningCommand,RelativeSource={RelativeSource AncestorType=Window}}" AutomationProperties.Name="返回当前项目策划"/>
-                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="ShotReferenceGroup" Header="拍摄参考" IsExpanded="True" AutomationProperties.Name="拍摄参考工具组">
+                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="ShotReferenceGroup" Header="拍摄参考" IsExpanded="{Binding WorkspacePreferenceState.ShotExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}" AutomationProperties.Name="拍摄参考工具组">
                         <StackPanel Margin="0,8,0,10">
                             <Grid><Button  Style="{StaticResource GhostButton}" Command="{Binding ShotExecution.PreviousShotCommand}" AutomationProperties.Name="上一个拍摄段落" ><Path Style="{StaticResource PixelTart.Symbol}" Data="{StaticResource PixelTart.Symbol.Back}"/></Button><TextBlock Text="{Binding ShotExecution.ShotPositionText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold" /><Button  Style="{StaticResource GhostButton}" Command="{Binding ShotExecution.NextShotCommand}" HorizontalAlignment="Right" AutomationProperties.Name="下一个拍摄段落" ><Path Style="{StaticResource PixelTart.Symbol}" Data="{StaticResource PixelTart.Symbol.Forward}"/></Button></Grid>
                             <UniformGrid Columns="4" Margin="0,7,0,0"><Button Content="灯位" Style="{StaticResource GhostButton}" Command="{Binding ShotExecution.SelectReferenceKindCommand}" CommandParameter="{x:Static projects:ShotReferenceKind.Lighting}" AutomationProperties.Name="查看灯位参考" /><Button Content="姿势" Style="{StaticResource GhostButton}" Command="{Binding ShotExecution.SelectReferenceKindCommand}" CommandParameter="{x:Static projects:ShotReferenceKind.Pose}" AutomationProperties.Name="查看姿势参考" /><Button Content="分镜" Style="{StaticResource GhostButton}" Command="{Binding ShotExecution.SelectReferenceKindCommand}" CommandParameter="{x:Static projects:ShotReferenceKind.Storyboard}" AutomationProperties.Name="查看分镜参考" /><Button Content="造型" Style="{StaticResource GhostButton}" Command="{Binding ShotExecution.SelectReferenceKindCommand}" CommandParameter="{x:Static projects:ShotReferenceKind.Styling}" AutomationProperties.Name="查看造型参考" /></UniformGrid>
@@ -90,7 +90,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="SessionGroup" Header="相机 / 拍摄会话" IsExpanded="True" AutomationProperties.Name="相机与拍摄会话工具组">
+                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="SessionGroup" Header="相机 / 拍摄会话" IsExpanded="{Binding WorkspacePreferenceState.SessionExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}" AutomationProperties.Name="相机与拍摄会话工具组">
                         <StackPanel Margin="0,8,0,10">
                             <TextBlock Text="{Binding UserFacingProviderText, StringFormat=● {0}}" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" />
                             <TextBlock Text="{Binding StatusText}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" />
@@ -100,7 +100,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="ExifGroup" Header="拍摄信息" IsExpanded="False" AutomationProperties.Name="拍摄信息工具组">
+                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="ExifGroup" Header="拍摄信息" IsExpanded="{Binding WorkspacePreferenceState.InformationExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}" AutomationProperties.Name="拍摄信息工具组">
                         <StackPanel Margin="0,8,0,10">
                     <views:PhotoMetadataInspector DataContext="{Binding PhotoMetadata}" Margin="0,0,0,10" />
                     <TextBlock Text="EXIF 与文件" Style="{StaticResource SectionTitleText}" />
@@ -146,7 +146,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="AnnotationGroup" Header="标记与备注" IsExpanded="True" AutomationProperties.Name="标记与备注工具组">
+                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="AnnotationGroup" Header="标记与备注" IsExpanded="{Binding WorkspacePreferenceState.AnnotationExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}" AutomationProperties.Name="标记与备注工具组">
                         <StackPanel Margin="0,8,0,10">
                     <TextBlock Text="星级与颜色" Style="{StaticResource SectionTitleText}" />
                     <studio:PixelTartRatingControl Rating="{Binding CurrentRating, Mode=TwoWay}" Command="{Binding SetRatingCommand}" AutomationProperties.Name="联机照片评分" />
@@ -159,7 +159,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="LutGroup" Header="LUT 与色彩" IsExpanded="False" AutomationProperties.Name="LUT与色彩工具组">
+                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="LutGroup" Header="LUT 与色彩" IsExpanded="{Binding WorkspacePreferenceState.LutExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}" AutomationProperties.Name="LUT与色彩工具组">
                         <StackPanel Margin="0,8,0,10">
                     <TextBlock Text="LUT 监看" Style="{StaticResource SectionTitleText}" />
                     <TextBlock Text="{Binding ColorSettings.InputSpaceWarning}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,5,0,0" AutomationProperties.HelpText="输入色彩空间可能未知，监看结果仅供现场参考" />
@@ -181,7 +181,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="ClientGroup" Header="客户监看" IsExpanded="False" AutomationProperties.Name="客户监看工具组">
+                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="ClientGroup" Header="客户监看" IsExpanded="{Binding WorkspacePreferenceState.ClientExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}" AutomationProperties.Name="客户监看工具组">
                         <StackPanel Margin="0,8,0,10">
                     <TextBlock Text="ICC 与客户屏" Style="{StaticResource SectionTitleText}" />
                     <TextBlock Text="{Binding ColorSettings.ColorProfileStatus}" Style="{StaticResource CaptionText}" TextWrapping="Wrap" AutomationProperties.HelpText="ICC异常时安全回退sRGB；软件不能替代显示器校准" Margin="0,5,0,0" />
@@ -198,7 +198,7 @@
                         </StackPanel>
                     </Expander>
 
-                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="FileGroup" Header="文件处理" IsExpanded="False" AutomationProperties.Name="文件处理工具组">
+                    <Expander Style="{StaticResource PixelTart.Section}" x:Name="FileGroup" Header="文件处理" IsExpanded="{Binding WorkspacePreferenceState.FileExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}" AutomationProperties.Name="文件处理工具组">
                         <StackPanel Margin="0,8,0,10">
                             <TextBlock Text="看守目录" Style="{StaticResource SectionTitleText}" />
                             <Grid Margin="0,6,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox Text="{Binding WatchDirectory}" IsReadOnly="True" AutomationProperties.Name="看守文件夹路径" /><Button Grid.Column="1" Content="选择目录" Style="{StaticResource SecondaryButton}" Margin="7,0,0,0" Command="{Binding ChooseWatchFolderCommand}" AutomationProperties.Name="选择看守文件夹目录" /></Grid>

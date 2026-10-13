@@ -20,16 +20,23 @@ public partial class TetherCaptureView : UserControl
     private bool _isDragging;
     private Core.Models.Photography.CompareSide _dragCompareSide;
     private bool _isBrowserCollapsed;
-    private readonly Services.TetherWorkspacePreferenceStore _workspacePreferences = new();
+    private readonly Services.TetherWorkspacePreferenceStore _workspacePreferences;
     private bool _preferencesLoaded;
+    private Task? _preferenceLoad;
+    public TetherInspectorPreferenceState WorkspacePreferenceState {get;}=new();
+    public string? WorkspacePreferenceError {get;private set;}
+    public Exception? WorkspacePreferenceException {get;private set;}
+    internal Task PreferenceLifecycleTask {get;private set;}=Task.CompletedTask;
     private ShotReferenceWindow? _shotReferenceWindow;
 
-    public TetherCaptureView()
+    public TetherCaptureView() : this(new Services.TetherWorkspacePreferenceStore()) {}
+    internal TetherCaptureView(Services.TetherWorkspacePreferenceStore workspacePreferences)
     {
+        _workspacePreferences=workspacePreferences;
         InitializeComponent();
         DataContextChanged += View_DataContextChanged;
-        Loaded += async (_, _) => { await LoadWorkspacePreferencesAsync(); UpdateResponsiveLayout(); };
-        Unloaded += async (_, _) => await SaveWorkspacePreferencesAsync();
+        Loaded += (_, _) => PreferenceLifecycleTask=ObservePreferenceLifecycleAsync(async()=>{await LoadWorkspacePreferencesAsync();UpdateResponsiveLayout();});
+        Unloaded += (_, _) => PreferenceLifecycleTask=ObservePreferenceLifecycleAsync(SaveWorkspacePreferencesAsync);
     }
 
     public event EventHandler<TetherFullScreenChangedEventArgs>? FullScreenChanged;
@@ -58,24 +65,38 @@ public partial class TetherCaptureView : UserControl
         ApplyResponsiveLayout(availableWidth);
     }
 
-    private async Task LoadWorkspacePreferencesAsync()
+    internal Task LoadWorkspacePreferencesAsync() => _preferenceLoad ??= ReadWorkspacePreferencesAsync();
+
+    private async Task ReadWorkspacePreferencesAsync()
     {
-        if (_preferencesLoaded) return; var value = await _workspacePreferences.LoadAsync(); _preferencesLoaded = true;
-        InspectorColumn.Width = new GridLength(value.InspectorWidth); InspectorPanel.UpdateLayout();
-        Group("曝光评估").IsExpanded=value.ExposureExpanded; Group("参考模式").IsExpanded=value.ReferenceExpanded;
-        Group("拍摄参考").IsExpanded=value.ShotExpanded; Group("相机 / 拍摄会话").IsExpanded=value.SessionExpanded; Group("拍摄信息").IsExpanded=value.InformationExpanded;
-        Group("标记与备注").IsExpanded=value.AnnotationExpanded; Group("LUT 与色彩").IsExpanded=value.LutExpanded; Group("客户监看").IsExpanded=value.ClientExpanded; Group("文件处理").IsExpanded=value.FileExpanded;
+        var value=await _workspacePreferences.LoadAsync();
+        // Reading does not require selected content, visibility or DataTemplate generation.
+        WorkspacePreferenceState.Restore(value);
+        InspectorColumn.Width=new GridLength(value.InspectorWidth);
+        _preferencesLoaded=true;
     }
 
-    private Task SaveWorkspacePreferencesAsync()
+    internal async Task SaveWorkspacePreferencesAsync()
     {
-        if (!_preferencesLoaded) return Task.CompletedTask;
-        return _workspacePreferences.SaveAsync(new(InspectorColumn.ActualWidth > 0 ? InspectorColumn.ActualWidth : InspectorColumn.Width.Value,
-            Group("曝光评估").IsExpanded,Group("参考模式").IsExpanded,Group("拍摄参考").IsExpanded,Group("相机 / 拍摄会话").IsExpanded,Group("拍摄信息").IsExpanded,
-            Group("标记与备注").IsExpanded,Group("LUT 与色彩").IsExpanded,Group("客户监看").IsExpanded,Group("文件处理").IsExpanded));
+        if(_preferenceLoad is not null)await _preferenceLoad;
+        if(!_preferencesLoaded)return;
+        // Compact layout can set ActualWidth=0. Preserve the last valid logical width.
+        var width=InspectorColumn.ActualWidth is >=320 and <=480 ? InspectorColumn.ActualWidth : InspectorColumn.Width.Value;
+        if(!double.IsFinite(width)||width is <320 or >480)width=WorkspacePreferenceState.InspectorWidth;
+        await _workspacePreferences.SaveAsync(WorkspacePreferenceState.Snapshot(width));
     }
 
-    private Expander Group(string header) => FindVisualChildren<Expander>(InspectorPanel).First(item => string.Equals(item.Header?.ToString(),header,StringComparison.Ordinal));
+    private async Task ObservePreferenceLifecycleAsync(Func<Task> operation)
+    {
+        try{await operation();WorkspacePreferenceError=null;WorkspacePreferenceException=null;}
+        catch(Exception error)when(error is System.IO.IOException or UnauthorizedAccessException or System.Text.Json.JsonException)
+        {
+            WorkspacePreferenceError="检查器偏好读写失败；当前展开状态保留。";
+            WorkspacePreferenceException=error;
+            System.Diagnostics.Trace.TraceError("Tether workspace preference lifecycle: {0}",error);
+        }
+    }
+
 
     public void ApplyReviewPresentation(string state, double windowWidth)
     {
@@ -122,9 +143,19 @@ public partial class TetherCaptureView : UserControl
 
     private void SetReviewGroup(string header, bool expanded)
     {
-        var group = FindVisualChildren<Expander>(InspectorPanel)
-            .FirstOrDefault(item => string.Equals(item.Header?.ToString(), header, StringComparison.Ordinal));
-        if (group is not null) group.IsExpanded = expanded;
+        // Review states update the same logical state even before either template exists.
+        switch(header)
+        {
+            case "曝光评估": WorkspacePreferenceState.ExposureExpanded=expanded;break;
+            case "参考模式": WorkspacePreferenceState.ReferenceExpanded=expanded;break;
+            case "拍摄参考": WorkspacePreferenceState.ShotExpanded=expanded;break;
+            case "相机 / 拍摄会话": WorkspacePreferenceState.SessionExpanded=expanded;break;
+            case "拍摄信息": WorkspacePreferenceState.InformationExpanded=expanded;break;
+            case "标记与备注": WorkspacePreferenceState.AnnotationExpanded=expanded;break;
+            case "LUT 与色彩": WorkspacePreferenceState.LutExpanded=expanded;break;
+            case "客户监看": WorkspacePreferenceState.ClientExpanded=expanded;break;
+            case "文件处理": WorkspacePreferenceState.FileExpanded=expanded;break;
+        }
     }
 
     private void ApplyResponsiveLayout(double windowWidth)
