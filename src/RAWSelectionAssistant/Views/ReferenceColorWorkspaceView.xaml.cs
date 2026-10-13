@@ -68,12 +68,13 @@ public partial class ReferenceColorWorkspaceView : UserControl
     {
         InitializeComponent();
         InitializeFilmstripLayout();
+        InitializeCanvasToolbar();
         ColorSpaceViewport.SelectionChanged += ColorSpaceViewport_SelectionChanged;
         ColorSpaceViewport.SurfaceSelectionChanged += OnSurfaceSelection;
         ToneZones.ZoneHovered += (_, zone) => { if (DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.HighlightToneZone(zone); };
         ToneZonesExpander.Collapsed += (_, _) => { ToneZones.ClearHover(); if (DataContext is ReferenceColorWorkspaceViewModel workspace) workspace.ClearPreviewSelection(); };
         ImageViewport.State.Changed += (_, _) => { HighlightOverlay.ViewState = ImageViewport.State; HighlightOverlay.InvalidateVisual(); };
-        _zoomPan.Changed += (_, _) => { ZoomLabel.Text = $"{_zoomPan.Zoom*VisualTreeHelper.GetDpi(ImageViewport).DpiScaleX:P0}"; RequestImageDetail(); };
+        _zoomPan.Changed += (_, _) => { UpdateCanvasZoomLabel(); RequestImageDetail(); };
         AdjustmentNodeList.DragOver += OnNodeDragOver;
         AdjustmentNodeList.DragLeave += (_, _) => ClearInsertion();
         SizeChanged += (_, _) => UpdateResponsiveLayout();
@@ -100,8 +101,8 @@ public partial class ReferenceColorWorkspaceView : UserControl
     private void OnColorHistoryKeyDown(object sender, KeyEventArgs e)
     {
         // A focused text editor owns Ctrl+Z/Y; it must not edit image history as well.
-        if (Keyboard.FocusedElement is TextBox) return;
-        if (_editor?.IsProMode != true || Keyboard.Modifiers != ModifierKeys.Control) return;
+        if (e.Handled || Keyboard.FocusedElement is System.Windows.Controls.Primitives.TextBoxBase || !CanvasReady) return;
+        if (_editor?.IndependentRawMode == true || _editor?.IsProMode != true || Keyboard.Modifiers != ModifierKeys.Control) return;
         if (e.Key == Key.Z && _editor.UndoAdjustmentCommand.CanExecute(null)) { _editor.UndoAdjustmentCommand.Execute(null); e.Handled = true; }
         else if (e.Key == Key.Y && _editor.RedoAdjustmentCommand.CanExecute(null)) { _editor.RedoAdjustmentCommand.Execute(null); e.Handled = true; }
     }
@@ -129,6 +130,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
     public bool TryClearTransientInspection()
     {
         if (TryCancelNumericDraft()) return true;
+        ReleaseCanvasOriginal();
         if (Keyboard.FocusedElement is DependencyObject focused && FindAncestor<StudioCurveEditor>(focused)?.CancelPointerGesture() == true) return true;
         if (Keyboard.FocusedElement is StudioColorBalanceWheel wheel && wheel.CancelPointerGesture()) return true;
         if (Keyboard.FocusedElement is StudioLevelsGraph levels && levels.CancelPointerGesture()) return true;
@@ -144,6 +146,7 @@ public partial class ReferenceColorWorkspaceView : UserControl
         PreviewCanvas.Cursor = Cursors.Arrow;
         if (_editor?.IsSampling == true) _editor.CancelSamplingCommand.Execute(null);
         workspace?.ClearPreviewSelection(); ToneZones.ClearHover();
+        ActiveCanvasTool = ColorStudioCanvasTool.Select; RefreshCanvasToolbar();
         return true;
     }
     public bool TryCancelNumericDraft() => Keyboard.FocusedElement is StudioNumericEditor number && IsAncestorOf(number) && number.CancelDraft();
@@ -256,9 +259,14 @@ public partial class ReferenceColorWorkspaceView : UserControl
 
     private async void OnPreviewCanvasMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        if (e.ClickCount == 2 && _editor?.IsSampling != true) { _zoomPan.Fit(); e.Handled = true; return; }
-        if ((e.ChangedButton == MouseButton.Left && Keyboard.IsKeyDown(Key.Space)) || e.ChangedButton == MouseButton.Middle)
+        if (!CanvasReady) return;
+        PreviewCanvas.Focus();
+        if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2 && _editor?.IsSampling != true) { _zoomPan.Fit(); e.Handled = true; return; }
+        if ((e.ChangedButton == MouseButton.Left && (Keyboard.IsKeyDown(Key.Space) || ActiveCanvasTool == ColorStudioCanvasTool.Hand)) || e.ChangedButton == MouseButton.Middle)
         { _panning = true; _panStart = e.GetPosition(PreviewCanvas); PreviewCanvas.CaptureMouse(); e.Handled = true; return; }
+        if (e.ChangedButton != MouseButton.Left) return;
+        if (ActiveCanvasTool == ColorStudioCanvasTool.Zoom)
+        { ZoomCanvasAt(e.GetPosition(PreviewCanvas), Keyboard.Modifiers.HasFlag(ModifierKeys.Alt)); e.Handled = true; return; }
         if (_editor?.IsSampling != true && !_inspectingImageColor)
         {
             if (DataContext is ReferenceColorWorkspaceViewModel previewWorkspace) previewWorkspace.ClearColorSpaceHighlight();
@@ -372,17 +380,19 @@ public partial class ReferenceColorWorkspaceView : UserControl
 
     private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs args)
     {
+        ResetCanvasInteraction();
         if (_editor is not null) _editor.PropertyChanged -= EditorOnPropertyChanged;
-        if (args.OldValue is ReferenceColorWorkspaceViewModel oldWorkspace) { oldWorkspace.ExitInstantPresentationForLifecycle();oldWorkspace.PropertyChanged -= WorkspaceOnPropertyChanged; oldWorkspace.ColorSpaceSelectionChanged -= WorkspaceColorSpaceSelectionChanged; }
+        if (args.OldValue is ReferenceColorWorkspaceViewModel oldWorkspace) { oldWorkspace.ClearPreviewSelection();oldWorkspace.ExitInstantPresentationForLifecycle();oldWorkspace.PropertyChanged -= WorkspaceOnPropertyChanged; oldWorkspace.ColorSpaceSelectionChanged -= WorkspaceColorSpaceSelectionChanged; }
         if (args.NewValue is ReferenceColorWorkspaceViewModel newWorkspace) { newWorkspace.PropertyChanged += WorkspaceOnPropertyChanged; newWorkspace.ColorSpaceSelectionChanged += WorkspaceColorSpaceSelectionChanged; }
         _editor = (args.NewValue as ReferenceColorWorkspaceViewModel)?.Editor;
         if (_editor is not null) _editor.PropertyChanged += EditorOnPropertyChanged;
-        RestoreLayout(); UpdateResponsiveLayout();
+        RestoreLayout(); UpdateResponsiveLayout(); RefreshCanvasToolbar();
     }
     private void WorkspaceOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
+        if (args.PropertyName is nameof(ReferenceColorWorkspaceViewModel.IsLoading) or nameof(ReferenceColorWorkspaceViewModel.IsInstantGenerating)) { ReleaseCanvasOriginal(); RefreshCanvasToolbar(); }
         if(args.PropertyName==nameof(ReferenceColorWorkspaceViewModel.IsInstantGenerating)&&sender is ReferenceColorWorkspaceViewModel instant&&instant.IsInstantGenerating)InstantFilmToggle.IsChecked=false;
-        if (args.PropertyName == nameof(ReferenceColorWorkspaceViewModel.Layout)) { RestoreLayout(); UpdateResponsiveLayout(); }
+        if (args.PropertyName == nameof(ReferenceColorWorkspaceViewModel.Layout)) { RestoreLayout(); UpdateResponsiveLayout(); RefreshCanvasToolbar(); }
         if (sender is ReferenceColorWorkspaceViewModel analysis) { HighlightOverlay.IsOriginal = analysis.AnalysisIsOriginal; if (args.PropertyName == nameof(ReferenceColorWorkspaceViewModel.PreviewHistogram)) ToneZones.ClearHover(); }
         if (args.PropertyName == nameof(ReferenceColorWorkspaceViewModel.ColorSpaceModel) && sender is ReferenceColorWorkspaceViewModel workspace)
         {
@@ -416,6 +426,13 @@ public partial class ReferenceColorWorkspaceView : UserControl
     }
     private void EditorOnPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
+        if (args.PropertyName == nameof(TetherReferenceModeViewModel.SourceImage)) ResetCanvasInteraction();
+        if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsSampling))
+        {
+            if (_editor?.IsSampling == true) ActiveCanvasTool = ColorStudioCanvasTool.ColorSample;
+            else if (ActiveCanvasTool == ColorStudioCanvasTool.ColorSample) ActiveCanvasTool = ColorStudioCanvasTool.Select;
+        }
+        RefreshCanvasToolbar();
         if (args.PropertyName == nameof(TetherReferenceModeViewModel.SourcePixelSize)) RequestImageDetail();
         HighlightOverlay.ViewMode = _editor?.EffectiveViewMode ?? "原片";
         HighlightOverlay.SplitPosition = _editor?.SplitPosition ?? .5;

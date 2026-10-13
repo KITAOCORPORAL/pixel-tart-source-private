@@ -561,5 +561,19 @@
   "InstantBatch08_14": "Monochrome off / color on; enabling explicitly rolls",
   "InstantBatch08_15": "Roll again",
   "InstantBatch08_16": "Develop · 4 seconds, no skip",
-  "InstantBatch08_17": "Disable effect / restore base"
+  "InstantBatch08_17": "Disable effect / restore base",
+  "CanvasSelect": "Select",
+  "CanvasHand": "Hand",
+  "CanvasZoom": "Zoom",
+  "CanvasSample": "Sample",
+  "CanvasOriginal": "Original",
+  "CanvasSelectHelp": "Select (V): drag the comparison divider",
+  "CanvasHandHelp": "Hand (H): drag to pan; Space or middle button for temporary pan",
+  "CanvasZoomHelp": "Zoom (Z): click in, Alt-click out; double-click to fit",
+  "CanvasCompareHelp": "Click to lock original or restore; hold B to compare temporarily",
+  "CanvasUndoHelp": "Undo (Ctrl+Z): professional adjustment stack only; independent RAW/film uses version restore",
+  "CanvasRedoHelp": "Redo (Ctrl+Y): professional adjustment stack only; independent RAW/film uses version restore",
+  "CanvasSampleHelp": "Color sample (I): click; Shift adds, Alt subtracts; Esc exits",
+  "CanvasSampleDisabled": "Color sample: load a photo and select a color-range node. Independent RAW/film does not support range editing",
+  "CanvasProxySuffix": " · proxy"
 }
