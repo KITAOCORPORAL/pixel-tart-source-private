@@ -171,7 +171,11 @@ public partial class PlanningCenterView : UserControl
                 case "自定义":
                 case "文档内容":
                     Heading(DocumentContent, "文档内容");
-                    if (_vm.RichTextPackage is { } preservedRtf) DocumentContent.Children.Add(new FlowDocumentScrollViewer { Document=PlanningDocumentLayout.Load(preservedRtf,_vm.RichLayout),Background=Brushes.WhiteSmoke,Foreground=Brushes.Black,Padding=new Thickness(20),IsToolBarVisible=false,VerticalScrollBarVisibility=ScrollBarVisibility.Disabled });
+                    if (_vm.RichTextPackage is { } preservedRtf)
+                    {
+                        var paper=PlanningDocumentLayout.Load(preservedRtf,_vm.RichLayout);paper.Background=Brushes.WhiteSmoke;
+                        DocumentContent.Children.Add(new Border{Background=Brushes.WhiteSmoke,Padding=new Thickness(12),Child=new FlowDocumentScrollViewer{Document=paper,Foreground=Brushes.Black,IsToolBarVisible=false,VerticalScrollBarVisibility=ScrollBarVisibility.Disabled}});
+                    }
                     DocumentContent.Children.Add(Text("补充本次拍摄需要的内容，随策划案自动保存。", 14));
                     DocumentContent.Children.Add(Editor(nameof(_vm.DocumentCustomBody), 12));
                     DocumentContent.Children.Add(AsyncAction("保存", FlushDocumentAsync));
