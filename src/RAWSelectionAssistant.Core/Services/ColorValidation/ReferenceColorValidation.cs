@@ -81,6 +81,3 @@ public static class PublicRawValidation
         return new(linear.X*illuminant.Y/illuminant.X,linear.Y,linear.Z*illuminant.Y/illuminant.Z);
     }
 }
-
-
-

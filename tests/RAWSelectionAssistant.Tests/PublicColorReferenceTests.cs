@@ -75,4 +75,3 @@ public sealed class PublicColorReferenceTests
         Assert.Throws<InvalidOperationException>(()=>PublicRawValidation.Balance(v,illumination,c));Assert.Throws<InvalidOperationException>(()=>PublicRawValidation.Balance(v,illumination,c with{Domain=RawValidationDomain.CameraLinear,WhiteBalanceApplied=true}));Assert.Throws<InvalidOperationException>(()=>PublicRawValidation.SubtractBlack(v,c with{Domain=RawValidationDomain.DisplayEncoded}));Assert.Throws<InvalidDataException>(()=>PublicRawValidation.SubtractBlack(new(20000,0,0),c));Assert.Throws<InvalidDataException>(()=>PublicRawValidation.Balance(v,new(.2,.2,.2),c with{Domain=RawValidationDomain.CameraLinear}));
     }
 }
-

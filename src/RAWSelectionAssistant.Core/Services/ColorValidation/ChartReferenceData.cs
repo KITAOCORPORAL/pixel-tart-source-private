@@ -125,4 +125,3 @@ public sealed class ReferenceDataCatalog
     }
     public ChartReference Get(string dataset, ClassicEdition edition) => entries[(dataset, edition.ToString())];
 }
-

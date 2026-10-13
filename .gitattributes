@@ -2,4 +2,4 @@
 docs/evidence/photography/** -text
 
 # Preserve pinned public dataset and synthetic golden bytes across Windows/Linux checkouts.
-tests/RAWSelectionAssistant.Tests/TestData/Batch12/** -text
+tests/RAWSelectionAssistant.Tests/TestData/Batch12/** -text whitespace=cr-at-eol

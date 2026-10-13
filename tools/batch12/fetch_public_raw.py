@@ -51,4 +51,3 @@ def main():
     with output.open('xb') as file:file.write(data)
     print('Verified',output,len(data),SHA)
 if __name__=='__main__':main()
-

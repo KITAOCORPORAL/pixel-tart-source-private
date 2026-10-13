@@ -20,4 +20,3 @@ var report=new{SampleId="00_0010",DataSource="Cube++ Zenodo4153431, CC-BY-4.0",S
  OutputSpace=native.WorkingColorSpace,NativeHqExact=true,RegionNativeExact=true,OutputMin=values.Min(),OutputMax=values.Max(),OutputFloatSha256=Convert.ToHexString(SHA256.HashData(bytes)),
  Limitations=new[]{"Native raw uses camera metadata WB; NOT Cube ground-truth WB", "Native pipeline has built-in camera matrix and clipping, not calibrated scene truth", "Sample orientation=1; orientations2-8 only synthetic", "Illumination error measured separately on published downscaled sensor PNG"}};
 File.WriteAllText(output,JsonSerializer.Serialize(report,new JsonSerializerOptions{WriteIndented=true})+"\n");Console.WriteLine($"{sourceHash} {master.Contract.Model} {native.Width}x{native.Height} {native.WorkingColorSpace}");
-

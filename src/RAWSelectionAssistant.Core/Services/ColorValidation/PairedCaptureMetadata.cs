@@ -104,5 +104,3 @@ public sealed class PairedCaptureImporter : IPairedCaptureImporter
         catch(Exception e) when(e is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException) { errors.Add("Artifact rejected: "+path+" ("+e.GetType().Name+")"); }
     }
 }
-
-
