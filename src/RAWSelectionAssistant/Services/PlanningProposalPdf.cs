@@ -91,7 +91,7 @@ public static class PlanningProposalPdf
     public static void ExportDocument(FlowDocument document,string path,int dpi=216)
     {
         var width=double.IsFinite(document.PageWidth)?document.PageWidth:794;var height=double.IsFinite(document.PageHeight)?document.PageHeight:1123;
-        var paginator = ((IDocumentPaginatorSource)document).DocumentPaginator;
+        var paginator = new PlanningPaginator(document);
         paginator.PageSize = new Size(width, height); paginator.ComputePageCount();
         var pages = new List<byte[]>();
         for (var i = 0; i < paginator.PageCount; i++)
@@ -102,8 +102,7 @@ public static class PlanningProposalPdf
             {
                 drawing.DrawRectangle(Brushes.White, null, new Rect(0, 0, width, height));
                 drawing.DrawRectangle(new VisualBrush(page.Visual), null, new Rect(0, 0, width, height));
-                var footer = new FormattedText($"{i + 1} / {paginator.PageCount}", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Microsoft YaHei UI"), 10, Brushes.Gray, 1);
-                drawing.DrawText(footer, new Point(width-64-footer.Width,height-33));
+
             }
             var bitmap = new RenderTargetBitmap((int)Math.Ceiling(width * dpi / 96), (int)Math.Ceiling(height * dpi / 96), dpi, dpi, PixelFormats.Pbgra32); bitmap.Render(visual);
             var encoder = new JpegBitmapEncoder { QualityLevel = 94 }; encoder.Frames.Add(BitmapFrame.Create(bitmap));

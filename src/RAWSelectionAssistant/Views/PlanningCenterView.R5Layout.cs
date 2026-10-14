@@ -139,6 +139,7 @@ public partial class PlanningCenterView
         foreach(var (label,property) in new[]{("标题",nameof(_vm.DocumentTitle)),("地点",nameof(_vm.DocumentLocation)),("人员",nameof(_vm.DocumentPeople))})
         {info.Children.Add(Text(label,11));var input=Editor(property);input.MinHeight=30;input.Margin=new Thickness(0,2,0,7);info.Children.Add(input);}AddInspectorGroup("拍摄信息",info);
         if(_vm.ContentPage=="镜头清单"&&_vm.SelectedShot is {} shot)RenderR5ShotInspector(shot);
+        if(_vm.IsAdvancedPlanning){var pages=new StackPanel();pages.Children.Add(Action("编辑页眉页脚 / 页码",()=>DocumentContent.Children.OfType<PlanningRichEditor>().FirstOrDefault()?.EditHeaderFooter()));AddInspectorGroup("页面",pages);}
         var links=new StackPanel();links.Children.Add(AsyncAction("查看关联档期",async()=>await _vm.ShowBookingCommand.ExecuteAsync(null)));links.Children.Add(AsyncAction("开始拍摄",async()=>{if(await FlushDocumentAsync())await _vm.EnterTetherCommand.ExecuteAsync(null);}));AddInspectorGroup("关联",links);
         var status=new TextBlock{TextWrapping=TextWrapping.Wrap,FontSize=12};status.SetBinding(TextBlock.TextProperty,new System.Windows.Data.Binding("SaveStatus"));PlanningInspectorContent.Children.Add(status);
         PlanningInspectorContent.Children.Add(AsyncAction("保存 / 重试",async()=>{await FlushDocumentAsync();}));

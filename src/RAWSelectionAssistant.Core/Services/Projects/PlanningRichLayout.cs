@@ -11,6 +11,7 @@ public sealed record PlanningBlockSemantic(int BlockIndex,string Style="Body",bo
 }
 public sealed record PlanningRichLayout(PlanningPageLayout Page,IReadOnlyList<PlanningBlockSemantic> Blocks,IReadOnlyList<string> ImportLosses,int Version=1)
 {
+    public PlanningHeaderFooter HeaderFooter { get; init; } = new();
     [System.Text.Json.Serialization.JsonExtensionData] public Dictionary<string, System.Text.Json.JsonElement>? Extensions { get; init; }
-    public void Validate(){if(Version!=1||Page is null||Blocks is null||ImportLosses is null)throw new ArgumentException("布局版本无效。");Page.Validate();if(Blocks.Count>100000||ImportLosses.Count>10000)throw new ArgumentException("布局对象过多。");if(Blocks.Any(b=>b.BlockIndex<0||b.Style is not("Body" or "Heading1" or "Heading2" or "Heading3"))||Blocks.Select(b=>b.BlockIndex).Distinct().Count()!=Blocks.Count)throw new ArgumentException("段落语义无效。");}
+    public void Validate(){if(Version!=1||Page is null||Blocks is null||ImportLosses is null)throw new ArgumentException("布局版本无效。");Page.Validate();HeaderFooter.Validate();if(Blocks.Count>100000||ImportLosses.Count>10000)throw new ArgumentException("布局对象过多。");if(Blocks.Any(b=>b.BlockIndex<0||b.Style is not("Body" or "Heading1" or "Heading2" or "Heading3"))||Blocks.Select(b=>b.BlockIndex).Distinct().Count()!=Blocks.Count)throw new ArgumentException("段落语义无效。");}
 }

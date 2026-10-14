@@ -29,7 +29,7 @@ public sealed partial class PlanningRichEditor : DockPanel
         _editor.PreviewKeyDown+=(_,e)=>{if(Keyboard.Modifiers.HasFlag(ModifierKeys.Control)&&e.Key is Key.Z or Key.Y){if(e.Key==Key.Y||Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))_history.Redo();else _history.Undo();_persist?.Invoke();e.Handled=true;}};_history=new(_editor,()=>PlanningDocumentLayout.Capture(_editor.Document,_page,_losses),value=>{_page=value.Page;_losses=value.ImportLosses;});_history.Initialize();
         CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo,(_,e)=>{_history.Undo();_persist?.Invoke();e.Handled=true;},(_,e)=>{e.CanExecute=true;e.Handled=true;}));
         CommandBindings.Add(new CommandBinding(ApplicationCommands.Redo,(_,e)=>{_history.Redo();_persist?.Invoke();e.Handled=true;},(_,e)=>{e.CanExecute=true;e.Handled=true;}));
-        void Add(string label,Action action){var button=new Button{Content=label,Margin=new Thickness(2),Padding=new Thickness(6,3,6,3)};button.Click+=(_,_)=>{try {if(label is "撤销" or "重做")action();else _history.Execute(action);_persist?.Invoke();_editor.Focus();}catch(Exception ex) when(ex is IOException or NotSupportedException or System.Xml.XmlException or InvalidDataException){ThemedMessageDialog.Show(Window.GetWindow(this),"文档操作未完成",ex.Message,ThemedMessageKind.Error);}};tools.Children.Add(button);}
+        void Add(string label,Action action){var button=new Button{Content=label,Margin=new Thickness(2),Padding=new Thickness(6,3,6,3)};button.Click+=(_,_)=>{try {if(label is "查找" or "替换" or "页眉页脚 / 页码"){action();return;}if(label is "撤销" or "重做")action();else _history.Execute(action);_persist?.Invoke();_editor.Focus();}catch(Exception ex) when(ex is IOException or NotSupportedException or System.Xml.XmlException or InvalidDataException){ThemedMessageDialog.Show(Window.GetWindow(this),"文档操作未完成",ex.Message,ThemedMessageKind.Error);}};tools.Children.Add(button);}
         void Command(string label,System.Windows.Input.RoutedUICommand command)=>Add(label,()=>command.Execute(null,_editor));
         Command("加粗",EditingCommands.ToggleBold);Command("斜体",EditingCommands.ToggleItalic);Command("下划线",EditingCommands.ToggleUnderline);
         void Style(string style){if(_editor.CaretPosition.Paragraph is not {} p)return;p.Tag=new PlanningBlockSemantic(0,style,p.BreakPageBefore);p.FontSize=style switch{"Heading1"=>26,"Heading2"=>21,"Heading3"=>17,_=>14};p.FontWeight=style=="Body"?FontWeights.Normal:FontWeights.Bold;}
@@ -44,15 +44,16 @@ public sealed partial class PlanningRichEditor : DockPanel
         Add("撤销",_history.Undo);Add("重做",_history.Redo);
         Add("表格",()=>{_editor.BeginChange();try{var table=new Table();var group=new TableRowGroup();table.RowGroups.Add(group);for(var r=0;r<3;r++){var row=new TableRow();group.Rows.Add(row);for(var c=0;c<3;c++)row.Cells.Add(new TableCell(new Paragraph(new Run("单元格"))){BorderBrush=Brushes.Gray,BorderThickness=new Thickness(1),Padding=new Thickness(4)});}_editor.Document.Blocks.Add(table);}finally{_editor.EndChange();}});
         TableCell? Cell(){DependencyObject? item=_editor.CaretPosition.Parent;while(item is not null){if(item is TableCell c)return c;item=(item as FrameworkContentElement)?.Parent;}return null;}
+        void RejectMergedResize(){if(PlanningTableEditing.TableOf(Cell()) is {} t&&PlanningTableEditing.Map(t).Any(p=>p.Cell.RowSpan>1||p.Cell.ColumnSpan>1))throw new InvalidDataException("请先拆分合并单元格再增删行列，避免破坏网格。");}
         Add("合并单元格",()=>{var cell=Cell();var table=PlanningTableEditing.TableOf(cell)??throw new InvalidDataException("请先选择表格单元格。");
             var chosen=PlanningTableEditing.Map(table).Where(p=>_editor.Selection.Start.CompareTo(p.Cell.ContentEnd)<0&&_editor.Selection.End.CompareTo(p.Cell.ContentStart)>0).Select(p=>p.Cell).ToArray();
             try{PlanningTableEditing.Merge(table,chosen);}catch(InvalidOperationException e){throw new InvalidDataException(e.Message,e);}});
         Add("拆分单元格",()=>{if(Cell() is {} cell&&PlanningTableEditing.TableOf(cell) is {} table)PlanningTableEditing.Split(table,cell);});
         Add("重复表头",()=>{if(PlanningTableEditing.TableOf(Cell()) is {} table){var semantic=table.Tag as PlanningBlockSemantic??new(0);table.Tag=semantic with{RepeatHeader=!semantic.RepeatHeader};}});
-        Add("加行",()=>{if(Cell()?.Parent is TableRow row && row.Parent is TableRowGroup group){var added=new TableRow();foreach(var c in row.Cells)added.Cells.Add(new TableCell(new Paragraph(new Run(""))));group.Rows.Insert(group.Rows.IndexOf(row)+1,added);}});
-        Add("删行",()=>{if(Cell()?.Parent is TableRow row && row.Parent is TableRowGroup group && group.Rows.Count>1)group.Rows.Remove(row);});
-        Add("加列",()=>{if(Cell()?.Parent is TableRow row && row.Parent is TableRowGroup group)foreach(var r in group.Rows)r.Cells.Add(new TableCell(new Paragraph(new Run(""))));});
-        Add("删列",()=>{if(Cell() is {} cell && cell.Parent is TableRow row && row.Parent is TableRowGroup group){var index=row.Cells.IndexOf(cell);if(row.Cells.Count>1)foreach(var r in group.Rows)if(r.Cells.Count>index)r.Cells.RemoveAt(index);}});
+        Add("加行",()=>{RejectMergedResize();if(Cell()?.Parent is TableRow row && row.Parent is TableRowGroup group){var added=new TableRow();foreach(var c in row.Cells)added.Cells.Add(new TableCell(new Paragraph(new Run(""))));group.Rows.Insert(group.Rows.IndexOf(row)+1,added);}});
+        Add("删行",()=>{RejectMergedResize();if(Cell()?.Parent is TableRow row && row.Parent is TableRowGroup group && group.Rows.Count>1)group.Rows.Remove(row);});
+        Add("加列",()=>{RejectMergedResize();if(Cell()?.Parent is TableRow row && row.Parent is TableRowGroup group)foreach(var r in group.Rows)r.Cells.Add(new TableCell(new Paragraph(new Run(""))));});
+        Add("删列",()=>{RejectMergedResize();if(Cell() is {} cell && cell.Parent is TableRow row && row.Parent is TableRowGroup group){var index=row.Cells.IndexOf(cell);if(row.Cells.Count>1)foreach(var r in group.Rows)if(r.Cells.Count>index)r.Cells.RemoveAt(index);}});
         void Numeric(string label,double initial,double min,double max,Action<double> commit)
         {
             tools.Children.Add(new TextBlock{Text=label,VerticalAlignment=VerticalAlignment.Center});var box=new TextBox{Tag="PrecisionInput",Text=initial.ToString(System.Globalization.CultureInfo.CurrentCulture),Width=62,ToolTip=$"毫米，范围 {min}–{max}；Enter/失焦提交，Esc 取消"};tools.Children.Add(box);var committed=box.Text;
@@ -67,9 +68,11 @@ public sealed partial class PlanningRichEditor : DockPanel
         Add("图片",()=>{var dialog=new OpenFileDialog{Filter="图片|*.png;*.jpg;*.jpeg"};if(dialog.ShowDialog()==true)Image(File.ReadAllBytes(dialog.FileName));});
         var canvasPicker=new ComboBox{Width=140,ItemsSource=canvasImages.Where(v=>v.PreviewPngBase64 is not null).GroupBy(v=>v.CanvasId).Select(g=>g.Last()).ToArray(),DisplayMemberPath="EditableSnapshot.Name",ToolTip="选择需插入或更新的画布"};tools.Children.Add(canvasPicker);canvasPicker.SelectedIndex=0;
         Add("画布快照",()=>{var last=canvasPicker.SelectedItem as PlanningCanvasRevision;if(last is not null){var existing=_editor.Document.Blocks.FirstOrDefault(b=>(b.Tag as PlanningBlockSemantic)?.CanvasId==last.CanvasId);Image(Convert.FromBase64String(last.PreviewPngBase64!));var inserted=_editor.Document.Blocks.LastBlock!;inserted.Tag=new PlanningBlockSemantic(0,CanvasId:last.CanvasId,CanvasRevisionId:last.RevisionId);if(existing is not null){_editor.Document.Blocks.Remove(inserted);_editor.Document.Blocks.InsertBefore(existing,inserted);_editor.Document.Blocks.Remove(existing);}}else ThemedMessageDialog.Show(Window.GetWindow(this),"画布快照","请先在情绪板插入或更新画布版本。",ThemedMessageKind.Information);});
+        Add("页眉页脚 / 页码",EditHeaderFooter);
+        Add("导出 PDF",()=>{var dialog=new SaveFileDialog{Filter="PDF|*.pdf"};if(dialog.ShowDialog()==true)PlanningProposalPdf.ExportDocument(Clone(),dialog.FileName);});
         Add("查找",()=>OpenFind(false));Add("替换",()=>OpenFind(true));
         Add("分页预览",()=>OpenPagedPreview());
-        Add("打印 / PDF",()=>{var dialog=new PrintDialog();if(dialog.ShowDialog()==true)dialog.PrintDocument(((IDocumentPaginatorSource)Clone()).DocumentPaginator,"Kitao Studio 光镜 策划");});
+        Add("打印 / PDF",()=>{var dialog=new PrintDialog();if(dialog.ShowDialog()==true)dialog.PrintDocument(new PlanningPaginator(Clone()),"Kitao Studio 光镜 策划");});
         Add("导出 DOCX",()=>{var dialog=new SaveFileDialog{Filter="DOCX|*.docx"};if(dialog.ShowDialog()==true)Services.PlanningDocxAdapter.Export(_editor.Document,dialog.FileName);});
         Add("导入 DOCX",()=>{var dialog=new OpenFileDialog{Filter="DOCX|*.docx"};if(dialog.ShowDialog()!=true)return;var result=Services.PlanningDocxAdapter.Import(dialog.FileName);if(result.Losses.Count>0&&!ThemedMessageDialog.Show(Window.GetWindow(this),"导入损失报告",string.Join("\n",result.Losses)+"\n是否导入支持的内容？原文件不会修改。",ThemedMessageKind.Question,true))return;_losses=result.Losses;_editor.Document=result.Document;_page=new(double.IsFinite(result.Document.PageWidth)?result.Document.PageWidth:794,double.IsFinite(result.Document.PageHeight)?result.Document.PageHeight:1123,result.Document.PagePadding.Left,result.Document.PagePadding.Top,result.Document.PagePadding.Right,result.Document.PagePadding.Bottom);PlanningDocumentLayout.Apply(_editor.Document,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));});
         _persist=()=>{using var stream=new MemoryStream();new TextRange(_editor.Document.ContentStart,_editor.Document.ContentEnd).Save(stream,DataFormats.Rtf);save(Convert.ToBase64String(stream.ToArray()),new TextRange(_editor.Document.ContentStart,_editor.Document.ContentEnd).Text,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));};
@@ -91,9 +94,9 @@ public sealed partial class PlanningRichEditor : DockPanel
             {
                 if(control is Button {Content:string label})group=label switch
                 {
-                    "图片" or "画布快照" or "表格"=>"插入",
-                    "分页" or "横/竖页" or "A4/Letter" or "页边距" or "加行" or "删行" or "加列" or "删列" or "列宽" or "表格对齐" or "边框"=>"布局",
-                    "分页预览" or "打印 / PDF" or "导出 DOCX" or "导入 DOCX"=>"文档",_=>"开始"
+                    "页眉页脚 / 页码" or "图片" or "画布快照" or "表格"=>"插入",
+                    "合并单元格" or "拆分单元格" or "重复表头" or "分页" or "横/竖页" or "A4/Letter" or "页边距" or "加行" or "删行" or "加列" or "删列" or "列宽" or "表格对齐" or "边框"=>"布局",
+                    "导出 PDF" or "分页预览" or "打印 / PDF" or "导出 DOCX" or "导入 DOCX"=>"文档",_=>"开始"
                 };
                 pages[group].Children.Add(control);
             }
@@ -119,6 +122,7 @@ public sealed partial class PlanningRichEditor : DockPanel
     }
     internal DockPanel CreatePagedPreview()
     {
+        if((_editor.Document.Tag as PlanningHeaderFooter??new())!=new PlanningHeaderFooter()||_editor.Document.Blocks.OfType<Table>().Any(t=>(t.Tag as PlanningBlockSemantic)?.RepeatHeader==true))return EnhancedPreview();
         FlushPending();var viewer=CreatePagedViewer();var panel=new DockPanel();var controls=new WrapPanel();SetDock(controls,Dock.Top);panel.Children.Add(controls);panel.Children.Add(viewer);
         var count=new TextBlock{Margin=new Thickness(8),VerticalAlignment=VerticalAlignment.Center};
         viewer.Background=Brushes.White;viewer.Foreground=Brushes.Black;
