@@ -1,0 +1,580 @@
+{
+  "basis": "Literal Markdown links, HTML src/href audited in REFERENCE_AUDIT; code-span file mentions additionally checked here. Repo source-path mentions are not design attachments.",
+  "references": [
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "decisions.md",
+      "status": "PRESENT",
+      "matches": [
+        "decisions.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "cr-all.csv",
+      "status": "PRESENT",
+      "matches": [
+        "cr-all.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "01-design-system.md",
+      "status": "PRESENT",
+      "matches": [
+        "01-design-system.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "shots/nav-icons-sheet.png",
+      "status": "PRESENT",
+      "matches": [
+        "shots/nav-icons-sheet.png"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-shell.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-shell.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "00-information-architecture.md",
+      "status": "PRESENT",
+      "matches": [
+        "00-information-architecture.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "02-module-batch-plan.md",
+      "status": "PRESENT",
+      "matches": [
+        "02-module-batch-plan.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch1-reconciliation.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch1-reconciliation.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "index.html",
+      "status": "PRESENT",
+      "matches": [
+        "index.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch1.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch1.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch1-actions.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch1-actions.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "shots/*.png",
+      "status": "PATTERN_NOT_A_SINGLE_REQUIRED_FILE",
+      "matches": []
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "workbench-home-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "workbench-home-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "workbench-home-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "workbench-home-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-workbench.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-workbench.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch2-workflow-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch2-workflow-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch2-review-resolution.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch2-review-resolution.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch2-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "batch2-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch2.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch2.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch2-actions.csv",
+      "status": "PRESENT",
+      "matches": [
+        "batch2-actions.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch3-library-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch3-library-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch3-review-resolution.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch3-review-resolution.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch3-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "batch3-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch3.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch3.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch3-actions.csv",
+      "status": "PRESENT",
+      "matches": [
+        "batch3-actions.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch4-color-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch4-color-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch4-canvas-toolbar-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch4-canvas-toolbar-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch4-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "batch4-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch4.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch4.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch5-film-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch5-film-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch5-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "batch5-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch5.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch5.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch6-settings-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch6-settings-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch6-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "batch6-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch6.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch6.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "planning-center-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "planning-center-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "planning-newreq-diff.md",
+      "status": "PRESENT",
+      "matches": [
+        "planning-newreq-diff.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "planning-center-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "planning-center-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-planning.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-planning.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch8-canvas-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch8-canvas-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch8-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "batch8-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch8.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch8.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch9-tether-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch9-tether-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch9-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "batch9-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch9.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch9.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch10-selection-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch10-selection-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch10-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "batch10-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch10.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch10.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch11-finance-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch11-finance-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch11-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "batch11-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch11.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch11.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch12-calendar-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch12-calendar-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch12-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "batch12-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch12.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch12.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch14-toolbox-spec.md",
+      "status": "PRESENT",
+      "matches": [
+        "batch14-toolbox-spec.md"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "batch14-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "batch14-prototype.html"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-batch14.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-batch14.csv"
+      ]
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "review-*-A.md",
+      "status": "PATTERN_NOT_A_SINGLE_REQUIRED_FILE",
+      "matches": []
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "review-*-B.md",
+      "status": "PATTERN_NOT_A_SINGLE_REQUIRED_FILE",
+      "matches": []
+    },
+    {
+      "from": "CODEX-REFERENCE.md",
+      "path": "coverage-features-added.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-features-added.csv"
+      ]
+    },
+    {
+      "from": "planning-center-spec.md",
+      "path": "docs/design/product-master/ACTION_INVENTORY.csv",
+      "status": "MISSING_REFERENCED_DOCUMENT",
+      "matches": []
+    },
+    {
+      "from": "planning-center-spec.md",
+      "path": "PRODUCT_MASTER_SPEC.md",
+      "status": "MISSING_REFERENCED_DOCUMENT",
+      "matches": []
+    },
+    {
+      "from": "planning-center-spec.md",
+      "path": "planning-center-prototype.html",
+      "status": "PRESENT",
+      "matches": [
+        "planning-center-prototype.html"
+      ]
+    },
+    {
+      "from": "planning-center-spec.md",
+      "path": "coverage-planning.csv",
+      "status": "PRESENT",
+      "matches": [
+        "coverage-planning.csv"
+      ]
+    },
+    {
+      "from": "planning-center-spec.md",
+      "path": "review-planning-A.md",
+      "status": "PRESENT",
+      "matches": [
+        "review-planning-A.md"
+      ]
+    },
+    {
+      "from": "planning-center-spec.md",
+      "path": "review-planning-B.md",
+      "status": "PRESENT",
+      "matches": [
+        "review-planning-B.md"
+      ]
+    },
+    {
+      "from": "planning-center-spec.md",
+      "path": "inputs/new-brief/brief.md",
+      "status": "PRESENT",
+      "matches": [
+        "inputs/new-brief/brief.md"
+      ]
+    },
+    {
+      "from": "planning-center-spec.md",
+      "path": "planning-newreq-diff.md",
+      "status": "PRESENT",
+      "matches": [
+        "planning-newreq-diff.md"
+      ]
+    },
+    {
+      "from": "planning-center-spec.md",
+      "path": "review-planning-r3-A.md",
+      "status": "PRESENT",
+      "matches": [
+        "review-planning-r3-A.md"
+      ]
+    },
+    {
+      "from": "planning-center-spec.md",
+      "path": "review-planning-r3-B.md",
+      "status": "PRESENT",
+      "matches": [
+        "review-planning-r3-B.md"
+      ]
+    },
+    {
+      "from": "01-design-system.md",
+      "path": "DESIGN_SYSTEM_REQUIREMENTS.md",
+      "status": "MISSING_REFERENCED_DOCUMENT",
+      "matches": []
+    },
+    {
+      "from": "01-design-system.md",
+      "path": "shots/archive/15_accent_compare.png",
+      "status": "PRESENT",
+      "matches": [
+        "shots/archive/15_accent_compare.png"
+      ]
+    },
+    {
+      "from": "01-design-system.md",
+      "path": "shots/nav-icons-sheet.png",
+      "status": "PRESENT",
+      "matches": [
+        "shots/nav-icons-sheet.png"
+      ]
+    }
+  ],
+  "fontFilesPresent": false,
+  "svgStandalonePresent": false,
+  "noCompleteDeliveryAssertion": true
+}

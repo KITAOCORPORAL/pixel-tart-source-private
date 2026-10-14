@@ -1,0 +1,11 @@
+# Manual acceptance — NOT_RUN / NOT_APPROVED
+
+ExactRelease D:/AI AGENT/kitao-planning-company-20261014/artifacts/company-followup/release-sealed/win-x64/KitaoPhotoSelector.exe. VerifySHA256 CE91698483F2C5E1B979BF599FF9132E15F12FA7B913AADCE54138BC78D3314E andSOURCEbeforelaunch. Not startedautomaticallythisbatch.
+
+1. Inauthorizedcopyofplanning, openshots; associateoneexistingreference; scrollhorizontal; ensurethumbnailbelongs toshot,number/statusremainvisibleandrowEscdoesnotcommitdraft. LeftstatuspositiondifferencefromGrok is expectedregisteredgap.
+2. Inspectorwide/narrowdrawer: dragtitle/Alt+arrows/buttonreorder,Escdragcancel,closeandrefocus;save/reopenorderandcollapse. Invalidshotcell/savefailuremustblocklayoutcommitwithoutfalseSaved.
+3. Lightcanvas:clickemptyopensactualeditor,dragfromdifferentgrippositions,0.5msnapin10mschematic, directionlinetracks;Esc/lostcapturecancel,nochangeonfile;releasecommitsonce;UndoandReopensameobjectID+coordinates. Filelock/error mustretainpendingdraft andallowretry, notwriteoldlightovernewdraft.
+4. AdvancedRTFediting: zoom50/100/125/200,save/reopenviewpreference,previewpagerprevious/next/goto,countmatchespaginator. ConfirmnotcompleteWordribbon/headerfooter/thumbnav.
+5. Windowsphysical100/125/150/175/200%DPI,1024/1366andwidewindow,keyboardfocus/Tab/drawermodalblocking:recordactualsteps/errors. Offscreenshotsnotphysicalacceptance. ExistingComputerUseconstraint requiresseparateauthorizedmanualsession.
+
+MissingfullWordandnotimplementedcapabilitiesremainoutofbatch; nofakeenabledbuttons expected.
