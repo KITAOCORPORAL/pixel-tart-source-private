@@ -274,6 +274,15 @@ public partial class MainWindow : Window
             };
             if (_viewModel.PlanningPage is { } planning)
             {
+                planning.ResolveTrayImage = async reference =>
+                {
+                    var host=AssetLibraryWorkspace.Content as PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost;
+                    var page=host is null?GetHostedAssetLibraryPage():await host.InitializeForProductHarnessAsync();
+                    if(page is null)return new(RAWSelectionAssistant.Core.Services.AssetLibrary.AssetResolutionStatus.Offline,reference.LibraryId,reference.AssetId,Message:"请打开所属素材库后重试。");
+                    await page.InitializeForSessionAsync();
+                    if(page.ViewModel.CanvasLibraryId!=reference.LibraryId)return new(RAWSelectionAssistant.Core.Services.AssetLibrary.AssetResolutionStatus.Offline,reference.LibraryId,reference.AssetId,Message:"请明确打开引用所属素材库；不跨库猜测。");
+                    return await page.ViewModel.ResolveStableAssetAsync(reference.LibraryId,reference.AssetId,reference.ContentHash);
+                };
                 planning.ReferenceSourceLoader = async (source, search, project) =>
                 {
                     var host = AssetLibraryWorkspace.Content as PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost;

@@ -327,7 +327,7 @@ public partial class App : Application
                 _compositionRoot.ProjectRepository,
                 _compositionRoot.ShootBookingService,
                 dialogService,
-                inspiration: new SqliteInspirationTrayService(calendarAssetDatabasePath));
+                inspiration: new SqliteInspirationTrayService(Path.Combine(AppDataPaths.Root,"InspirationTray","tray.sqlite")));
             _mainViewModel.AttachPlanningPage(planningPage);
 
             calendarViewModel.FinanceRequested += async (_, request) =>

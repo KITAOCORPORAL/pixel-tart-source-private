@@ -169,6 +169,7 @@ public partial class PlanningCenterView : UserControl
                 }
                 return;
             }
+            RenderOwnedImages();
             if (_vm.IsAdvancedPlanning && !preview) { RenderAdvancedPlanning(); return; }
             if (ResourcePages.ContainsKey(_vm.ContentPage)) { RenderResources(_vm.ContentPage); return; }
             switch (_vm.ContentPage)

@@ -67,7 +67,14 @@ public sealed partial class PlanningCenterViewModel
         await File.WriteAllTextAsync(recovery,JsonSerializer.Serialize(new PlanningDocumentDraft(review.ProjectId,DetachPlanning(_document),_state!.Summary??new(),Shots.Select(s=>ShotDraft(s.ShotId)).ToArray())));
         CapturePlanningUndo();
         EditorGeneration++;
-        SaveRichText(review.Rtf,review.Text,review.Layout);
+        var importedBody=PlanningDocumentLayout.Load(review.Rtf,review.Layout);
+        foreach(var image in PlanningDocumentImages.Images(importedBody).ToArray())
+        {
+            using var bytes=new MemoryStream();var png=new System.Windows.Media.Imaging.PngBitmapEncoder();png.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create((System.Windows.Media.Imaging.BitmapSource)image.Source));png.Save(bytes);
+            var copy=PlanningDocumentImages.Copy(DocumentImageDirectory,review.DocumentId,bytes.ToArray(),null,"正文","文档内图片",image.ToolTip?.ToString()??"",0);
+            image.Tag=copy with{Width=double.IsFinite(image.Width)?image.Width:copy.Width,Height=double.IsFinite(image.Height)?image.Height:copy.Height};
+        }
+        SaveFlowDocument(importedBody);
         foreach(var diff in review.Differences.Where(d=>selectedIds.Contains(d.ShotId)))StageShot(ShotDraft(diff.ShotId) with{Name=diff.AfterName,Scene=diff.AfterScene,Action=diff.AfterAction});
         var saved=await FlushProgrammaticPlanningAsync();
         PresentationChanged(); // Display retained import drafts even if persistence failed.
