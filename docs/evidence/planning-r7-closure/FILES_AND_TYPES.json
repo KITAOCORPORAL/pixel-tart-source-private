@@ -1,0 +1,47 @@
+[
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningDocxAdapter.cs",
+    "type": "product-source",
+    "sha256": "1c9d5ce9caaac3f942bc82d06d9b05a7e4156689e6aa62b14ae55c3823977d03"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningDocxAtomicReplacementTests.cs",
+    "type": "regression-test",
+    "sha256": "8d0180a70490889ad9a03712cdc61ed18199bc9070f8480f4e891e885bc105d7"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/RuntimeCorrectionWpfTests.cs",
+    "type": "regression-test",
+    "sha256": "2ebfdc3c5e78a956cbc70fef1e8a3246cec6bca83f00582916121165b06b1001"
+  },
+  {
+    "path": "tools/VerifiedTestRunner/Program.cs",
+    "type": "runner-source",
+    "sha256": "25c1a07b5b77f7158dc82410fe519dc25a6dfa9ad7ec73120eb7d2941c489ddc"
+  },
+  {
+    "path": "tools/VerifiedTestRunner/VerifiedTestRunner.csproj",
+    "type": "runner-source",
+    "sha256": "4973553713070522414c18192be53cbed30b6326f4f91af4fe6af09eec37204a"
+  },
+  {
+    "path": "tools/planning-r7/.gitignore",
+    "type": "runner-source",
+    "sha256": "7a2bfc130ed619857740b72e503a6487fc4888e9f16887e6f33f1dcac239ebe0"
+  },
+  {
+    "path": "tools/planning-r7/Invoke-IsolatedWpf.ps1",
+    "type": "runner-source",
+    "sha256": "c91784cdbcd8caecfc2aa2965b250062c056ebea17636d0d20fe6e17e3b022bc"
+  },
+  {
+    "path": "tools/planning-r7/test_verified_runner.py",
+    "type": "runner-source",
+    "sha256": "a59e0d13810e622055d642b9a9cfecb275cd53832ffd892c189c490f5881d12e"
+  },
+  {
+    "path": "tools/planning-r7/verified_runner.py",
+    "type": "runner-source",
+    "sha256": "4f880f1c68f3d1f75660b6c3c79ae1f10d6d5ae085790cc03d3432d0731651a5"
+  }
+]

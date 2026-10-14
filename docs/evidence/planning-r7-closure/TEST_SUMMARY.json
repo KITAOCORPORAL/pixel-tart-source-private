@@ -1,0 +1,25 @@
+{
+  "productSource": "1793265990902aa54e0f62befc663e6b04ee83a8",
+  "runnerCheckout": "a202374",
+  "status": "PARTIAL",
+  "strictGate": "FAILED_NOT_EXECUTED",
+  "core": {
+    "Passed": 1682,
+    "NotExecuted": 7
+  },
+  "wpf": {
+    "Passed": 1587,
+    "NotExecuted": 23
+  },
+  "discovery": {
+    "core": 1689,
+    "wpf": 1610
+  },
+  "resultsMatchedDiscovery": true,
+  "mismatchCount": 0,
+  "timeouts": 0,
+  "release": "NOT_BUILT_GATE_NOT_PASSED",
+  "windowsManual": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "wps": "NOT_RUN"
+}
