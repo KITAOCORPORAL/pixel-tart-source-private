@@ -88,4 +88,12 @@ public sealed class PlanningTableContentTests
    var restored=PlanningDocxAdapter.Import(path).Document.Blocks.OfType<Table>().Single().RowGroups[0].Rows[1].Cells[0];Assert.AreEqual(2,restored.RowSpan);var images=PlanningTextSearch.Paragraphs(restored.Blocks).SelectMany(p=>Flat(p.Inlines)).OfType<InlineUIContainer>().ToArray();Assert.HasCount(2,images);for(var n=0;n<2;n++)CollectionAssert.AreEqual(original[n],Pixels((BitmapSource)((Image)images[n].Child).Source));
   }finally{File.Delete(path);}await Task.CompletedTask;
  });
+
+ [TestMethod]
+ public Task SharedCrossCellNumberingIsRejectedInsteadOfRestarted()=>RunSta(async()=>
+ {
+  var path=Path.Combine(Path.GetTempPath(),Guid.NewGuid()+".docx");try{PlanningDocxAdapter.Export(Fixture(2),path);using(var pkg=WordprocessingDocument.Open(path,true)){var cells=pkg.MainDocumentPart!.Document.Descendants<W.TableCell>().Where(c=>c.Descendants<W.NumberingId>().Any()).ToArray();var id=cells[0].Descendants<W.NumberingId>().First().Val;foreach(var n in cells[1].Descendants<W.NumberingId>())n.Val=id!.Value;pkg.MainDocumentPart.Document.Save();}
+   var before=await File.ReadAllBytesAsync(path);Assert.Throws<NotSupportedException>(()=>PlanningDocxAdapter.Import(path));CollectionAssert.AreEqual(before,await File.ReadAllBytesAsync(path));
+  }finally{File.Delete(path);}
+ });
 }

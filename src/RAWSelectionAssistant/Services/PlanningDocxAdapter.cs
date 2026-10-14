@@ -112,6 +112,12 @@ public static partial class PlanningDocxAdapter
         var losses=new List<string>();
         if(body.Descendants<W.TableCell>().Any(c=>c.ChildElements.Any(x=>x is not W.TableCellProperties && x is not W.Paragraph)||c.Descendants<W.Hyperlink>().Any()||c.Descendants<W.SdtRun>().Any()))
             throw new NotSupportedException("单元格内嵌套表格、内容控件或超链接当前不能安全导入；原件和策划均未修改。");
+        // Cross-cell continuation and per-instance level overrides need an explicit numbering
+        // model. Reject them before import rather than silently restarting a shared sequence.
+        var cellNumbers=body.Descendants<W.TableCell>().SelectMany((cell,index)=>cell.Descendants<W.NumberingId>().Select(n=>new{Cell=index,Id=n.Val?.Value??0})).ToArray();
+        if(cellNumbers.GroupBy(n=>n.Id).Any(g=>g.Select(n=>n.Cell).Distinct().Count()>1))throw new NotSupportedException("跨单元格共享续号尚未支持；请在原件将各单元格列表设为独立编号后导入。");
+        var definitions=package.MainDocumentPart!.NumberingDefinitionsPart?.Numbering;
+        if(cellNumbers.Any(n=>definitions?.Elements<W.NumberingInstance>().FirstOrDefault(i=>i.NumberID?.Value==n.Id)?.Elements<W.LevelOverride>().Any()==true))throw new NotSupportedException("表内列表的实例级编号覆盖尚未支持，未修改策划。");
         if(body.Descendants<W.Hyperlink>().Any())losses.Add("超链接内容不在本次支持范围；请在原文档保留原件。");
 
         var supported=new HashSet<string>{"headerReference","footerReference","titlePg","pgNumType","gridSpan","vMerge","trPr","tblHeader","body","pStyle","pageBreakBefore","pgMar","tcBorders","top","left","bottom","right","br","p","pPr","jc","r","rPr","rFonts","b","i","sz","t","tbl","tr","tc","sectPr","pgSz","tblPr","tblGrid","gridCol","tcPr","tblW","u","color","numPr","ilvl","numId","drawing","inline","extent","docPr","graphic","graphicData","pic","nvPicPr","cNvPr","cNvPicPr","blipFill","blip","stretch","fillRect","spPr","xfrm","off","ext","prstGeom","avLst"};

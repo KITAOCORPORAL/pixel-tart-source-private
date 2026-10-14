@@ -13010,6 +13010,12 @@
       "stage": "prepublish"
     },
     {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.SharedCrossCellNumberingIsRejectedInsteadOfRestarted",
+      "category": "required_automatic",
+      "reason": "Explicit rejection prevents silent renumbering across cells.",
+      "stage": "prepublish"
+    },
+    {
       "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.StoryboardImagesListsPaginatePrintPdfAndSaveReopen",
       "category": "required_automatic",
       "reason": "New photography cell-content contract; must execute and pass.",
