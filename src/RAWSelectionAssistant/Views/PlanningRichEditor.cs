@@ -61,7 +61,7 @@ public sealed class PlanningRichEditor : DockPanel
         Add("图片",()=>{var dialog=new OpenFileDialog{Filter="图片|*.png;*.jpg;*.jpeg"};if(dialog.ShowDialog()==true)Image(File.ReadAllBytes(dialog.FileName));});
         var canvasPicker=new ComboBox{Width=140,ItemsSource=canvasImages.Where(v=>v.PreviewPngBase64 is not null).GroupBy(v=>v.CanvasId).Select(g=>g.Last()).ToArray(),DisplayMemberPath="EditableSnapshot.Name",ToolTip="选择需插入或更新的画布"};tools.Children.Add(canvasPicker);canvasPicker.SelectedIndex=0;
         Add("画布快照",()=>{var last=canvasPicker.SelectedItem as PlanningCanvasRevision;if(last is not null){var existing=_editor.Document.Blocks.FirstOrDefault(b=>(b.Tag as PlanningBlockSemantic)?.CanvasId==last.CanvasId);Image(Convert.FromBase64String(last.PreviewPngBase64!));var inserted=_editor.Document.Blocks.LastBlock!;inserted.Tag=new PlanningBlockSemantic(0,CanvasId:last.CanvasId,CanvasRevisionId:last.RevisionId);if(existing is not null){_editor.Document.Blocks.Remove(inserted);_editor.Document.Blocks.InsertBefore(existing,inserted);_editor.Document.Blocks.Remove(existing);}}else ThemedMessageDialog.Show(Window.GetWindow(this),"画布快照","请先在情绪板插入或更新画布版本。",ThemedMessageKind.Information);});
-        Add("分页预览",()=>{var viewer=new FlowDocumentPageViewer{Document=Clone()};new Window{Title="Kitao Studio 光镜 · 分页预览",Content=viewer,Width=900,Height=760,Owner=Window.GetWindow(this)}.Show();});
+        Add("分页预览",()=>OpenPagedPreview());
         Add("打印 / PDF",()=>{var dialog=new PrintDialog();if(dialog.ShowDialog()==true)dialog.PrintDocument(((IDocumentPaginatorSource)Clone()).DocumentPaginator,"Kitao Studio 光镜 策划");});
         Add("导出 DOCX",()=>{var dialog=new SaveFileDialog{Filter="DOCX|*.docx"};if(dialog.ShowDialog()==true)Services.PlanningDocxAdapter.Export(_editor.Document,dialog.FileName);});
         Add("导入 DOCX",()=>{var dialog=new OpenFileDialog{Filter="DOCX|*.docx"};if(dialog.ShowDialog()!=true)return;var result=Services.PlanningDocxAdapter.Import(dialog.FileName);if(result.Losses.Count>0&&!ThemedMessageDialog.Show(Window.GetWindow(this),"导入损失报告",string.Join("\n",result.Losses)+"\n是否导入支持的内容？原文件不会修改。",ThemedMessageKind.Question,true))return;_losses=result.Losses;_editor.Document=result.Document;_page=new(double.IsFinite(result.Document.PageWidth)?result.Document.PageWidth:794,double.IsFinite(result.Document.PageHeight)?result.Document.PageHeight:1123,result.Document.PagePadding.Left,result.Document.PagePadding.Top,result.Document.PagePadding.Right,result.Document.PagePadding.Bottom);PlanningDocumentLayout.Apply(_editor.Document,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));});
@@ -97,6 +97,24 @@ public sealed class PlanningRichEditor : DockPanel
         _editor.BorderBrush=new SolidColorBrush(Color.FromRgb(70,70,74));_editor.BorderThickness=new Thickness(1);
         _editor.Padding=new Thickness(28);_editor.MinHeight=560;_editor.MaxWidth=794;_editor.HorizontalAlignment=HorizontalAlignment.Center;
         _editor.HorizontalScrollBarVisibility=ScrollBarVisibility.Auto;
+        var zoomBar=new WrapPanel{Margin=new Thickness(0,4,0,8)};SetDock(zoomBar,Dock.Top);zoomBar.Children.Add(new TextBlock{Text="页面缩放",VerticalAlignment=VerticalAlignment.Center,Margin=new Thickness(4)});
+        var zoomChoice=new ComboBox{ItemsSource=new[]{50,75,100,125,150,175,200},SelectedItem=100,Width=76,Margin=new Thickness(4)};System.Windows.Automation.AutomationProperties.SetName(zoomChoice,"页面缩放百分比");zoomBar.Children.Add(zoomChoice);zoomChoice.DropDownOpened+=(_,_)=>zoomChoice.SelectedItem=(int)_previewZoom;zoomChoice.SelectionChanged+=(_,_)=>{if(zoomChoice.SelectedItem is int value){SetPageZoom(value);PageZoomChanged?.Invoke(value);}};Children.Insert(0,zoomBar);
+    }
+    private double _previewZoom=100;
+    public double PageZoom=>_previewZoom;
+    public void SetPageZoom(double value){_previewZoom=Math.Clamp(value,50,200);_editor.LayoutTransform=new ScaleTransform(_previewZoom/100,_previewZoom/100);}
+    public event Action<double>? PageZoomChanged;
+    internal FlowDocumentPageViewer CreatePagedViewer()=>new(){Document=Clone(),Zoom=_previewZoom};
+    private void OpenPagedPreview()
+    {
+        FlushPending();var viewer=CreatePagedViewer();var panel=new DockPanel();var controls=new WrapPanel();SetDock(controls,Dock.Top);panel.Children.Add(controls);panel.Children.Add(viewer);
+        var count=new TextBlock{Margin=new Thickness(8),VerticalAlignment=VerticalAlignment.Center};
+        void Update(){var paginator=((IDocumentPaginatorSource)viewer.Document).DocumentPaginator;paginator.ComputePageCount();count.Text=$"第 {viewer.MasterPageNumber} 页 / 共 {paginator.PageCount} 页";}
+        void Button(string label,Action action){var button=new Button{Content=label,Margin=new Thickness(4)};button.Click+=(_,_)=>{action();Update();};controls.Children.Add(button);}
+        Button("上一页",()=>viewer.PreviousPage());Button("下一页",()=>viewer.NextPage());controls.Children.Add(count);
+        var page=new TextBox{Width=48,Margin=new Thickness(4),Text="1"};controls.Children.Add(page);Button("跳转",()=>{if(int.TryParse(page.Text,out var index)&&index>0)viewer.GoToPage(index);});
+        var zoom=new ComboBox{ItemsSource=new[]{50,75,100,125,150,175,200},SelectedItem=(int)_previewZoom,Width=76,Margin=new Thickness(4)};controls.Children.Add(zoom);zoom.SelectionChanged+=(_,_)=>{if(zoom.SelectedItem is int value){viewer.Zoom=value;SetPageZoom(value);PageZoomChanged?.Invoke(value);}};
+        var window=new Window{Title="Kitao Studio 光镜 · 分页预览",Content=panel,Width=900,Height=760,Owner=Window.GetWindow(this)};window.Loaded+=(_,_)=>Update();window.Show();
     }
     public void FlushPending(){_saveTimer.Stop();_history.Checkpoint();_persist?.Invoke();}
     private FlowDocument Clone(){using var stream=new MemoryStream();new TextRange(_editor.Document.ContentStart,_editor.Document.ContentEnd).Save(stream,DataFormats.Rtf);stream.Position=0;var doc=new FlowDocument();new TextRange(doc.ContentStart,doc.ContentEnd).Load(stream,DataFormats.Rtf);PlanningDocumentLayout.Apply(doc,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));return doc;}

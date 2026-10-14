@@ -1,0 +1,5 @@
+# Unit03 advanced document page navigation
+
+ActualFlowDocument paginator drivesnewprevious/next/gotopage/pagecount controls inexisting分页预览. Editorandpreviewzoom50–200% followsper-documentUiLayout.DocumentZoom; lateviewevents validateproject/documentidentitybeforeSavingUiLayout. ExistingRTF/content andrichlayoutSaveRichTextpath unchanged; noDOCXmodel/headerfooter/Wordseven-tabcapability fabricated. Zoomislogicaldocumentviewtransform, NOTWindowsphysicalDPI.
+
+CreatePagedViewer usesfullclone andrealpaginator. Test confirms>=1page, zoom125 andpage1navigation withouteditingdata. Existingpaperappearance/raweditorundo/persisttimer retained. Window UI/nativepagination notclaimedtested. CompleteWordpage-thumbnailsidebarandcustomrepeatingheaderscontinueOPEN.

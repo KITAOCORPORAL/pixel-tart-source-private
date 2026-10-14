@@ -21,7 +21,8 @@ public partial class PlanningCenterView
         ribbon.ToolTip="正文与结构引用共用同一策划；移除块不删除源镜头。";
         var owner=_vm;var project=owner.ProjectId;var document=owner.PlanningDocumentId;var renderRevision=_documentRenderRevision;
         var editor=new PlanningRichEditor(owner.RichTextPackage,owner.DocumentBody,(rtf,text,layout)=>{if(renderRevision==_documentRenderRevision&&owner.ProjectId==project&&owner.PlanningDocumentId==document)owner.SaveRichText(rtf,text,layout);},owner.DocumentCanvasRevisions,owner.RichLayout);
-        editor.ApplyPlanningPaperAppearance();
+        editor.ApplyPlanningPaperAppearance();editor.SetPageZoom(owner.UiLayout.DocumentZoom);
+        editor.PageZoomChanged+=async value=>{if(owner.ProjectId==project&&owner.PlanningDocumentId==document)await owner.SaveUiLayoutAsync(owner.UiLayout with{DocumentZoom=value});};
         DocumentContent.Children.Add(editor);
         foreach(var block in owner.StructureBlocks.ToArray())
         {
