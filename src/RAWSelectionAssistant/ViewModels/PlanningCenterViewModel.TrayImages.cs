@@ -49,7 +49,15 @@ public sealed partial class PlanningCenterViewModel
   if(!await FlushAsync()||RichTextPackage is null)return false;var doc=PlanningDocumentLayout.Load(RichTextPackage,RichLayout);var image=PlanningDocumentImages.Images(doc).Single(i=>(i.Tag as PlanningDocumentImage)?.DocumentImageId==id);var meta=(PlanningDocumentImage)image.Tag;
   CapturePlanningUndo();image.Tag=meta with{Title=title,Caption=caption};if(width is double requested){if(!double.IsFinite(requested)||requested<20||requested>1000)throw new InvalidOperationException("图片宽度须为20–1000 DIP。");image.Width=requested;image.Height=requested*meta.Height/meta.Width;}image.ToolTip=title+"\n"+caption;
   var inline=image.Parent as InlineUIContainer;Paragraph? paragraph=null;for(DependencyObject? node=inline;node is FrameworkContentElement e;node=e.Parent){if(node is Paragraph found){paragraph=found;break;}}
-  if(paragraph is not null){var runs=PlanningDocumentImages.Inlines(paragraph.Inlines).OfType<Run>().ToArray();foreach(var run in runs)if(run.Text==meta.Title+" — "+meta.Caption)run.Text=title+" — "+caption;}
+  if(paragraph is not null && inline is not null)
+  {
+   var nextImage=PlanningDocumentImages.Inlines(paragraph.Inlines).OfType<InlineUIContainer>().FirstOrDefault(i=>i.ElementStart.CompareTo(inline.ElementEnd)>=0 && i.Child is System.Windows.Controls.Image);
+   foreach(var match in PlanningTextSearch.Find(doc,meta.Title+" — "+meta.Caption,true).Where(m=>ReferenceEquals(m.Paragraph,paragraph)).Reverse())
+   {
+    var range=PlanningTextSearch.Range(match);
+    if(range.Start.CompareTo(inline.ElementEnd)>=0 && (nextImage is null||range.End.CompareTo(nextImage.ElementStart)<=0))PlanningTextSearch.Replace(match,title+" — "+caption);
+   }
+  }
   if(direction!=0){if(paragraph?.Parent!=doc)throw new InvalidOperationException("表内图片顺序请在进阶正文中编辑，不跨单元格移动。");var owned=doc.Blocks.OfType<Paragraph>().Where(p=>PlanningDocumentImages.Inlines(p.Inlines).OfType<InlineUIContainer>().Any(i=>i.Child is System.Windows.Controls.Image {Tag:PlanningDocumentImage})).ToArray();var index=Array.IndexOf(owned,paragraph);Block? adjacent=index+direction>=0&&index+direction<owned.Length?owned[index+direction]:null;if(adjacent is not null){doc.Blocks.Remove(paragraph);if(direction<0)doc.Blocks.InsertBefore(adjacent,paragraph);else doc.Blocks.InsertAfter(adjacent,paragraph);}}
   SaveFlowDocument(doc);EditorGeneration++;var saved=await FlushProgrammaticPlanningAsync();PresentationChanged();return saved;
  }
