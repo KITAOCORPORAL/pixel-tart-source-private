@@ -78,7 +78,7 @@ public sealed partial class PlanningRichEditor : DockPanel
         _persist=()=>{using var stream=new MemoryStream();save(PlanningDocumentImages.Serialize(_editor.Document),new TextRange(_editor.Document.ContentStart,_editor.Document.ContentEnd).Text,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));};
         _saveTimer.Tick+=(_,_)=>{_saveTimer.Stop();_history.Checkpoint();_persist?.Invoke();};
         _editor.PreviewKeyDown+=(_,e)=>{if(e.Key==Key.Enter)_history.Checkpoint();};
-        _editor.TextChanged+=(_,_)=>{if(_persist is null||_history.Restoring)return;_saveTimer.Stop();_saveTimer.Start();};
+        _editor.TextChanged+=(_,_)=>{if(_persist is null||_history.Restoring||PlanningDocumentImages.IsSerializing(_editor.Document))return;_saveTimer.Stop();_saveTimer.Start();};
         Unloaded+=(_,_)=>{_saveTimer.Stop();_persist?.Invoke();};
     }
     public void ApplyPlanningPaperAppearance()

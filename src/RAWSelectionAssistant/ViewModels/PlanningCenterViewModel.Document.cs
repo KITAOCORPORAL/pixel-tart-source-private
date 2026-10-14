@@ -24,6 +24,7 @@ public sealed partial class PlanningCenterViewModel
     public void SaveRichText(string data, string plainText,PlanningRichLayout layout)
     {
         if(ProjectId is not Guid project)return;
+        if(layout.Images.Any(i=>i.DocumentId!=PlanningDocumentId))throw new InvalidDataException("图片资源不属于当前策划文档。");
         if (_document.Package?.RichTextPackageBase64 == data && _document.Body == plainText
             && System.Text.Json.JsonSerializer.Serialize(_document.Package?.RichLayout) == System.Text.Json.JsonSerializer.Serialize(layout)) return;
         UpdateDocument(_document with { Body=plainText, Package=(_document.Package ?? new PlanningDocumentPackage{ProjectId=project}) with {RichTextPackageBase64=data,RichLayout=layout} });

@@ -20,5 +20,5 @@ public static class PlanningDocumentLayout
     public static FlowDocument Load(string rich,PlanningRichLayout? layout)
     {var document=new FlowDocument();using var stream=new MemoryStream(Convert.FromBase64String(rich));new TextRange(document.ContentStart,document.ContentEnd).Load(stream,DataFormats.Rtf);Apply(document,layout);return document;}
     public static PlanningRichLayout Capture(FlowDocument document,PlanningPageLayout page,IReadOnlyList<string> losses)
-        =>new(page,document.Blocks.Select((b,i)=>(b.Tag as PlanningBlockSemantic??new(i)) with{BlockIndex=i,PageBreakBefore=b.BreakPageBefore}).ToArray(),losses){Images=PlanningDocumentImages.Images(document).Where(i=>i.Tag is PlanningDocumentImage).Select((i,n)=>((PlanningDocumentImage)i.Tag) with{Width=i.Width,Height=i.Height,Order=n}).ToArray(),HeaderFooter=document.Tag as PlanningHeaderFooter??new()};
+        =>new(page,document.Blocks.Select((b,i)=>(b.Tag as PlanningBlockSemantic??new(i)) with{BlockIndex=i,PageBreakBefore=b.BreakPageBefore}).ToArray(),losses){Images=PlanningDocumentImages.Images(document).Where(i=>i.Tag is PlanningDocumentImage).Select((i,n)=>((PlanningDocumentImage)i.Tag) with{Width=i.Width,Height=i.Height,Order=n,Position=PlanningDocumentImages.Position(i)}).ToArray(),HeaderFooter=document.Tag as PlanningHeaderFooter??new()};
 }

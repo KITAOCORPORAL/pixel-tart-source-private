@@ -6,7 +6,7 @@ using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Services;
 namespace RAWSelectionAssistant.ViewModels;
 public sealed record PlanningShotDifference(Guid ShotId,string BeforeName,string AfterName,string BeforeScene,string AfterScene,string BeforeAction,string AfterAction);
-public sealed record PlanningDocxReview(Guid ProjectId,Guid DocumentId,string Baseline,string Rtf,string Text,PlanningRichLayout Layout,IReadOnlyList<PlanningShotDifference> Differences,IReadOnlyList<string> Losses);
+public sealed record PlanningDocxReview(Guid ProjectId,Guid DocumentId,string Baseline,string Rtf,string Text,PlanningRichLayout Layout,IReadOnlyList<PlanningShotDifference> Differences,IReadOnlyList<string> Losses,IReadOnlyList<string?>? ImageDescriptions=null);
 public sealed partial class PlanningCenterViewModel
 {
     private string? _lastDocxImportContent;
@@ -50,7 +50,7 @@ public sealed partial class PlanningCenterViewModel
         using var stream=new MemoryStream();var range=new TextRange(imported.Document.ContentStart,imported.Document.ContentEnd);range.Save(stream,DataFormats.Rtf);
         var page=new PlanningPageLayout(double.IsFinite(imported.Document.PageWidth)?imported.Document.PageWidth:794,double.IsFinite(imported.Document.PageHeight)?imported.Document.PageHeight:1123,
             imported.Document.PagePadding.Left,imported.Document.PagePadding.Top,imported.Document.PagePadding.Right,imported.Document.PagePadding.Bottom);
-        return new(project,doc,DocxBaseline(),Convert.ToBase64String(stream.ToArray()),range.Text,PlanningDocumentLayout.Capture(imported.Document,page,losses),differences,losses);
+        return new(project,doc,DocxBaseline(),Convert.ToBase64String(stream.ToArray()),range.Text,PlanningDocumentLayout.Capture(imported.Document,page,losses),differences,losses,PlanningDocumentImages.Images(imported.Document).Select(i=>i.ToolTip as string).ToArray());
     }
     public async Task<bool> ApplyPlanningDocxImportAsync(PlanningDocxReview review,IReadOnlyCollection<Guid> selectedIds,bool confirmed)
     {
@@ -65,15 +65,31 @@ public sealed partial class PlanningCenterViewModel
             || (RichTextPackage==review.Rtf && DocumentBody==review.Text && JsonSerializer.Serialize(RichLayout)==JsonSerializer.Serialize(review.Layout)))) return true;
         var recovery=_planning.DraftPath(review.ProjectId)+".docx-recovery-"+Guid.NewGuid().ToString("N")+".json";
         await File.WriteAllTextAsync(recovery,JsonSerializer.Serialize(new PlanningDocumentDraft(review.ProjectId,DetachPlanning(_document),_state!.Summary??new(),Shots.Select(s=>ShotDraft(s.ShotId)).ToArray())));
-        CapturePlanningUndo();
-        EditorGeneration++;
         var importedBody=PlanningDocumentLayout.Load(review.Rtf,review.Layout);
+        var existingImages=DocumentImages.ToDictionary(i=>i.DocumentImageId);
+        var createdCopies=new List<string>();var adoptedIds=new HashSet<Guid>();
+        try
+        {
+        var imageIndex=0;
         foreach(var image in PlanningDocumentImages.Images(importedBody).ToArray())
         {
             using var bytes=new MemoryStream();var png=new System.Windows.Media.Imaging.PngBitmapEncoder();png.Frames.Add(System.Windows.Media.Imaging.BitmapFrame.Create((System.Windows.Media.Imaging.BitmapSource)image.Source));png.Save(bytes);
-            var copy=PlanningDocumentImages.Copy(DocumentImageDirectory,review.DocumentId,bytes.ToArray(),null,"正文","文档内图片",image.ToolTip?.ToString()??"",0);
+            var title="文档内图片";var caption="";var placement="正文";Guid? shot=null;PlanningDocumentImage? existing=null;
+            var description=review.ImageDescriptions?.ElementAtOrDefault(imageIndex++);
+            if(description is string tooltip&&tooltip.StartsWith("KitaoImageV1:",StringComparison.Ordinal))
+            {
+                try{using var metadata=JsonDocument.Parse(tooltip[13..]);var root=metadata.RootElement;title=root.GetProperty("Title").GetString()??title;caption=root.GetProperty("Caption").GetString()??"";
+                    if(root.GetProperty("DocumentId").GetGuid()==review.DocumentId&&existingImages.TryGetValue(root.GetProperty("DocumentImageId").GetGuid(),out var known)){existing=known;placement=known.Placement;shot=known.ShotId;}
+                }catch(Exception e) when(e is JsonException or KeyNotFoundException or FormatException or InvalidOperationException){/* Invalid metadata cannot confer source identity. */}
+            }
+            var copy=PlanningDocumentImages.Copy(DocumentImageDirectory,review.DocumentId,bytes.ToArray(),null,placement,title,caption,0,shot);
+            createdCopies.Add(copy.CopyPath);
+            if(existing is not null&&existing.CopyHash.Equals(copy.CopyHash,StringComparison.OrdinalIgnoreCase)&&adoptedIds.Add(existing.DocumentImageId))copy=copy with{DocumentImageId=existing.DocumentImageId,Source=existing.Source};
             image.Tag=copy with{Width=double.IsFinite(image.Width)?image.Width:copy.Width,Height=double.IsFinite(image.Height)?image.Height:copy.Height};
         }
+        }
+        catch{foreach(var file in createdCopies)if(File.Exists(file))File.Delete(file);throw;}
+        CapturePlanningUndo();EditorGeneration++;
         SaveFlowDocument(importedBody);
         foreach(var diff in review.Differences.Where(d=>selectedIds.Contains(d.ShotId)))StageShot(ShotDraft(diff.ShotId) with{Name=diff.AfterName,Scene=diff.AfterScene,Action=diff.AfterAction});
         var saved=await FlushProgrammaticPlanningAsync();

@@ -5,6 +5,7 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed partial class PlanningCenterViewModel
 {
     private readonly Stack<(Guid Project, PlanningDocument Document, ProjectShot[] Shots)> _planningUndo = new();
+    private readonly Stack<(Guid Project, PlanningDocument Document, ProjectShot[] Shots)> _planningRedo = new();
     public PlanningResources ResourceCatalog => _document.Resources;
     public Func<Guid, Task<IReadOnlyList<FinanceTransaction>>>? ReadPlanningExpenses { get; set; }
     public IReadOnlyList<FinanceTransaction> PlanningExpenses { get; private set; } = [];
@@ -12,6 +13,7 @@ public sealed partial class PlanningCenterViewModel
     private T DetachPlanning<T>(T value) => JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(value))!;
     private void CapturePlanningUndo()
     {
+        _planningRedo.Clear();
         if (ProjectId is Guid id) _planningUndo.Push((id, DetachPlanning(_document), DetachPlanning(Shots.Select(s => ShotDraft(s.ShotId)).ToArray())));
     }
     public async Task<bool> SaveResourceAsync(PlanningResource resource)
@@ -36,9 +38,17 @@ public sealed partial class PlanningCenterViewModel
     public async Task<bool> UndoPlanningAsync()
     {
         if (_planningUndo.Count == 0 || _planningUndo.Peek().Project != ProjectId || !await FlushAsync()) return false;
+        _planningRedo.Push((ProjectId!.Value,DetachPlanning(_document),DetachPlanning(Shots.Select(s=>ShotDraft(s.ShotId)).ToArray())));
         var snapshot = _planningUndo.Pop(); EditorGeneration++; UpdateDocument(snapshot.Document);
         foreach (var shot in snapshot.Shots) StageShot(shot);
         var saved = await FlushProgrammaticPlanningAsync(); PresentationChanged(); return saved;
+    }
+    public async Task<bool> RedoPlanningAsync()
+    {
+        if(_planningRedo.Count==0||_planningRedo.Peek().Project!=ProjectId||!await FlushAsync())return false;
+        _planningUndo.Push((ProjectId!.Value,DetachPlanning(_document),DetachPlanning(Shots.Select(s=>ShotDraft(s.ShotId)).ToArray())));
+        var snapshot=_planningRedo.Pop();EditorGeneration++;UpdateDocument(snapshot.Document);foreach(var shot in snapshot.Shots)StageShot(shot);
+        var saved=await FlushProgrammaticPlanningAsync();PresentationChanged();return saved;
     }
     public async Task<bool> ImportPlanningGearAsync(IEnumerable<PlanningGearItem> source)
     {

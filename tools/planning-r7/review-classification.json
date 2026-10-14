@@ -13028,6 +13028,36 @@
       "stage": "prepublish"
     },
     {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.CellPlacementImageUndoRedoKeepsSidecarAndPosition",
+      "category": "required_automatic",
+      "stage": "prepublish",
+      "reason": "Tray document insertion identity, persistence, or failure contract; mandatory execution."
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.HashFailuresCreateNoCopyAndLockedSaveRetainsRecovery",
+      "category": "required_automatic",
+      "stage": "prepublish",
+      "reason": "Tray document insertion identity, persistence, or failure contract; mandatory execution."
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.RealResolverProjectCollectionPickerCancelAndImageEvidence",
+      "category": "required_automatic",
+      "stage": "prepublish",
+      "reason": "Tray document insertion identity, persistence, or failure contract; mandatory execution."
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.SourceSwitchDuringResolveAndCopyWriteFailureDoNotMutateDocument",
+      "category": "required_automatic",
+      "stage": "prepublish",
+      "reason": "Tray document insertion identity, persistence, or failure contract; mandatory execution."
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.TrayCopySurvivesClearOfflineReopenAndDocxWithoutJsonImagePayload",
+      "category": "required_automatic",
+      "stage": "prepublish",
+      "reason": "Tray document insertion identity, persistence, or failure contract; mandatory execution."
+    },
+    {
       "name": "RAWSelectionAssistant.WpfTests.PlanningWorkspaceLayoutTests.ContentModulesRetainChineseOrderAndAppendCustom",
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",
