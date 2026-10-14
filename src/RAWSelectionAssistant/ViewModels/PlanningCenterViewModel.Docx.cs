@@ -9,6 +9,8 @@ public sealed record PlanningShotDifference(Guid ShotId,string BeforeName,string
 public sealed record PlanningDocxReview(Guid ProjectId,Guid DocumentId,string Baseline,string Rtf,string Text,PlanningRichLayout Layout,IReadOnlyList<PlanningShotDifference> Differences,IReadOnlyList<string> Losses);
 public sealed partial class PlanningCenterViewModel
 {
+    private string? _lastDocxImportContent;
+    private string? _lastDocxImportBaseline;
     private string DocxBaseline()=>JsonSerializer.Serialize(new {Document=_document,Shots=Shots.Select(s=>ShotDraft(s.ShotId)).ToArray()});
     private static string ParagraphText(Block block)=>new TextRange(block.ContentStart,block.ContentEnd).Text.TrimEnd('\r','\n');
     public async Task<bool> ExportPlanningDocxAsync(string path)
@@ -56,11 +58,25 @@ public sealed partial class PlanningCenterViewModel
         if(review.ProjectId!=ProjectId||review.DocumentId!=PlanningDocumentId||review.Baseline!=DocxBaseline())throw new InvalidOperationException("策划已改变，请重新预览导入差异。");
         if(!await FlushAsync())return false;
         if(review.Baseline!=DocxBaseline())throw new InvalidOperationException("当前编辑已改变导入基线，请重新预览。");
+        // Re-confirming the identical review must not create another recovery point or undo step.
+        var selected=review.Differences.Where(d=>selectedIds.Contains(d.ShotId)).ToArray();
+        var contentIdentity=JsonSerializer.Serialize(new {review.Rtf,review.Text,review.Layout});
+        if (selected.Length==0 && ((_lastDocxImportContent==contentIdentity && _lastDocxImportBaseline==DocxBaseline())
+            || (RichTextPackage==review.Rtf && DocumentBody==review.Text && JsonSerializer.Serialize(RichLayout)==JsonSerializer.Serialize(review.Layout)))) return true;
         var recovery=_planning.DraftPath(review.ProjectId)+".docx-recovery-"+Guid.NewGuid().ToString("N")+".json";
         await File.WriteAllTextAsync(recovery,JsonSerializer.Serialize(new PlanningDocumentDraft(review.ProjectId,DetachPlanning(_document),_state!.Summary??new(),Shots.Select(s=>ShotDraft(s.ShotId)).ToArray())));
         CapturePlanningUndo();
+        EditorGeneration++;
         SaveRichText(review.Rtf,review.Text,review.Layout);
         foreach(var diff in review.Differences.Where(d=>selectedIds.Contains(d.ShotId)))StageShot(ShotDraft(diff.ShotId) with{Name=diff.AfterName,Scene=diff.AfterScene,Action=diff.AfterAction});
-        var saved=await FlushProgrammaticPlanningAsync();if(saved)PresentationChanged();return saved;
+        var saved=await FlushProgrammaticPlanningAsync();
+        PresentationChanged(); // Display retained import drafts even if persistence failed.
+        if(saved)
+        {
+            // Capture the new editor's RTF normalization, not the retired editor.
+            saved=await FlushAsync();
+            if(saved){_lastDocxImportContent=contentIdentity;_lastDocxImportBaseline=DocxBaseline();}
+        }
+        return saved;
     }
 }

@@ -12,14 +12,15 @@ public sealed class PlanningShotEditRow : INotifyPropertyChanged, IEditableObjec
     private Dictionary<string,string>? _before;
     private readonly Dictionary<string,string> _cells;
     private readonly Action<ProjectShot> _commit;
+    private readonly Func<ProjectShot>? _latest;
     public Guid ShotId => _value.ShotId;
     public string? ReferencePreviewPath {get;init;}
     public string ReferenceLabel {get;init;}="未关联参考";
     public event PropertyChangedEventHandler? PropertyChanged;
     public static IReadOnlyList<string> StatusLabels { get; } = ["待拍", "当前", "已拍", "跳过"];
-    public PlanningShotEditRow(ProjectShot value, Action<ProjectShot> commit)
+    public PlanningShotEditRow(ProjectShot value, Action<ProjectShot> commit, Func<ProjectShot>? latest = null)
     {
-        _value = value; _commit = commit;
+        _value = value; _commit = commit; _latest = latest;
         _cells = new(value.CustomValues, StringComparer.Ordinal)
         {
             ["Order"] = (value.Order + 1).ToString("00"), ["Name"] = value.Name,
@@ -44,6 +45,17 @@ public sealed class PlanningShotEditRow : INotifyPropertyChanged, IEditableObjec
     public void EndEdit()
     {
         if (_before is null) return;
+        // Merge only this transaction's changed cells into the latest draft. A stale grid row
+        // must not replace fields edited by the inspector, references, or structure blocks.
+        var changes = _cells.Where(p => p.Value != _before.GetValueOrDefault(p.Key, "")).ToArray();
+        if (changes.Length == 0) { _before = null; return; }
+        if (_latest is not null)
+        {
+            _value = _latest();
+            var current = new PlanningShotEditRow(_value, _commit);
+            _cells.Clear(); foreach (var pair in current._cells) _cells[pair.Key] = pair.Value;
+            foreach (var pair in changes) _cells[pair.Key] = pair.Value;
+        }
         // Preserve invalid input as a draft; validation at the save gate blocks navigation.
         var minutes = int.TryParse(this["EstimatedMinutes"], NumberStyles.Integer, CultureInfo.InvariantCulture, out var parsed) ? parsed : -1;
         var custom = new Dictionary<string,string>(_value.CustomValues, StringComparer.Ordinal);

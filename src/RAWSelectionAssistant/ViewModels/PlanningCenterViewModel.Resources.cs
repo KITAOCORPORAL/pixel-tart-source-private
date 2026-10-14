@@ -36,9 +36,9 @@ public sealed partial class PlanningCenterViewModel
     public async Task<bool> UndoPlanningAsync()
     {
         if (_planningUndo.Count == 0 || _planningUndo.Peek().Project != ProjectId || !await FlushAsync()) return false;
-        var snapshot = _planningUndo.Pop(); UpdateDocument(snapshot.Document);
+        var snapshot = _planningUndo.Pop(); EditorGeneration++; UpdateDocument(snapshot.Document);
         foreach (var shot in snapshot.Shots) StageShot(shot);
-        var saved = await FlushProgrammaticPlanningAsync(); if(saved) PresentationChanged(); return saved;
+        var saved = await FlushProgrammaticPlanningAsync(); PresentationChanged(); return saved;
     }
     public async Task<bool> ImportPlanningGearAsync(IEnumerable<PlanningGearItem> source)
     {

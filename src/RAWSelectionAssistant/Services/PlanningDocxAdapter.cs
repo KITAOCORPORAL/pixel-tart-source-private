@@ -21,26 +21,26 @@ public static class PlanningDocxAdapter
             using(var package=WordprocessingDocument.Create(temporary,DocumentFormat.OpenXml.WordprocessingDocumentType.Document))
             {
                 var main=package.AddMainDocumentPart();var body=new W.Body();main.Document=new W.Document(body);
+                uint imageId=0;
                 W.Paragraph Paragraph(Paragraph source)
                 {
                     var p=new W.Paragraph(new W.ParagraphProperties(new W.Justification{Val=source.TextAlignment switch{TextAlignment.Center=>W.JustificationValues.Center,TextAlignment.Right=>W.JustificationValues.Right,_=>W.JustificationValues.Left}}));
                     if(source.BreakPageBefore)p.ParagraphProperties!.PrependChild(new W.PageBreakBefore());
                     if(source.Tag is RAWSelectionAssistant.Core.Services.Projects.PlanningBlockSemantic semantic && semantic.Style.StartsWith("Heading"))p.ParagraphProperties!.PrependChild(new W.ParagraphStyleId{Val=semantic.Style});
                     IEnumerable<Inline> Flatten(InlineCollection items){foreach(var inline in items){if(inline is Span span){foreach(var nested in Flatten(span.Inlines))yield return nested;}else yield return inline;}}
-                    foreach(var inline in Flatten(source.Inlines)){if(inline is LineBreak){p.Append(new W.Run(new W.Break()));continue;}if(inline is not Run run)throw new NotSupportedException("DOCX 导出遇到未支持的内联对象。");var props=new W.RunProperties();if(run.FontWeight==FontWeights.Bold)props.Append(new W.Bold());if(run.FontStyle==FontStyles.Italic)props.Append(new W.Italic());if(run.Foreground is SolidColorBrush brush)props.Append(new W.Color{Val=brush.Color.ToString()[3..]});props.PrependChild(new W.RunFonts{Ascii=run.FontFamily.Source,HighAnsi=run.FontFamily.Source,EastAsia=run.FontFamily.Source});props.Append(new W.FontSize{Val=(run.FontSize*1.5).ToString("0",System.Globalization.CultureInfo.InvariantCulture)});if(run.TextDecorations.Contains(TextDecorations.Underline[0]))props.Append(new W.Underline{Val=W.UnderlineValues.Single});p.Append(new W.Run(props,new W.Text(run.Text){Space=DocumentFormat.OpenXml.SpaceProcessingModeValues.Preserve}));}return p;
+                    foreach(var inline in Flatten(source.Inlines)){if(inline is LineBreak){p.Append(new W.Run(new W.Break()));continue;}if(inline is InlineUIContainer {Child:Image image}){p.Append(ImageRun(image));continue;}if(inline is not Run run)throw new NotSupportedException("DOCX 导出遇到未支持的内联对象。");var props=new W.RunProperties();if(run.FontWeight==FontWeights.Bold)props.Append(new W.Bold());if(run.FontStyle==FontStyles.Italic)props.Append(new W.Italic());if(run.Foreground is SolidColorBrush brush)props.Append(new W.Color{Val=brush.Color.ToString()[3..]});props.PrependChild(new W.RunFonts{Ascii=run.FontFamily.Source,HighAnsi=run.FontFamily.Source,EastAsia=run.FontFamily.Source});props.Append(new W.FontSize{Val=(run.FontSize*1.5).ToString("0",System.Globalization.CultureInfo.InvariantCulture)});if(run.TextDecorations.Contains(TextDecorations.Underline[0]))props.Append(new W.Underline{Val=W.UnderlineValues.Single});p.Append(new W.Run(props,new W.Text(run.Text){Space=DocumentFormat.OpenXml.SpaceProcessingModeValues.Preserve}));}return p;
                 }
-                uint imageId=0;
-                W.Paragraph ImageParagraph(BlockUIContainer container)
+                W.Run ImageRun(Image image)
                 {
-                    if(container.Child is not Image image || image.Source is not BitmapSource bitmap)throw new NotSupportedException("DOCX 暂不支持此嵌入对象。");
+                    if(image.Source is not BitmapSource bitmap)throw new NotSupportedException("DOCX 暂不支持此嵌入对象。");
                     var part=main.AddImagePart(ImagePartType.Png);using(var bytes=new MemoryStream()){var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(bitmap));encoder.Save(bytes);bytes.Position=0;part.FeedData(bytes);}
                     var relationship=main.GetIdOfPart(part);var width=(long)((double.IsFinite(image.Width)?image.Width:480)*9525);var height=(long)(width*(double)bitmap.PixelHeight/bitmap.PixelWidth);var drawing=new W.Drawing();
                     drawing.InnerXml=$"<wp:inline xmlns:wp='http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing' xmlns:a='http://schemas.openxmlformats.org/drawingml/2006/main' xmlns:pic='http://schemas.openxmlformats.org/drawingml/2006/picture' xmlns:r='http://schemas.openxmlformats.org/officeDocument/2006/relationships'><wp:extent cx='{width}' cy='{height}'/><wp:docPr id='{++imageId}' name='Picture {imageId}'/><a:graphic><a:graphicData uri='http://schemas.openxmlformats.org/drawingml/2006/picture'><pic:pic><pic:nvPicPr><pic:cNvPr id='0' name='Image'/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed='{relationship}'/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x='0' y='0'/><a:ext cx='{width}' cy='{height}'/></a:xfrm><a:prstGeom prst='rect'><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline>";
-                    return new W.Paragraph(new W.Run(drawing));
+                    return new W.Run(drawing);
                 }
                 foreach(var block in document.Blocks)
                     if(block is Paragraph p)body.Append(Paragraph(p));
-                    else if(block is BlockUIContainer image)body.Append(ImageParagraph(image));
+                    else if(block is BlockUIContainer image)body.Append(new W.Paragraph(ImageRun(image.Child as Image ?? throw new NotSupportedException("DOCX 暂不支持此嵌入对象。"))));
                     else if(block is List list)
                     {
                         var numbering=main.NumberingDefinitionsPart??main.AddNewPart<NumberingDefinitionsPart>();numbering.Numbering??=new W.Numbering();

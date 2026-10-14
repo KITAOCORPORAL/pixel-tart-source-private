@@ -27,6 +27,7 @@ public partial class PlanningCenterView : UserControl
     private PlanningCenterViewModel? _vm;
     private bool _rendering;
     private long _documentRenderRevision;
+    private long _renderedEditorGeneration = -1;
     private bool _switchingDocument;
     private readonly List<TextBlock> _referenceCaptions = [];
     private PlanningReferenceTile? _previewReturnTarget;
@@ -120,9 +121,14 @@ public partial class PlanningCenterView : UserControl
     {
         if (_vm is null || _rendering) return;
         _rendering = true;
-        _documentRenderRevision++;
         try
         {
+            // Capture an active view before clearing it, but never capture an editor from
+            // before a programmatic load/import/undo into the replacement document.
+            if (_renderedEditorGeneration == _vm.EditorGeneration) FlushSimpleEditors();
+            foreach (var editor in DocumentContent.Children.OfType<PlanningRichEditor>()) editor.Retire();
+            _documentRenderRevision++;
+            _renderedEditorGeneration = _vm.EditorGeneration;
             var preview = _vm.IsPreviewMode;
             AutomationProperties.SetAutomationId(DocumentContent, preview ? "PlanningPreviewSurface" : _vm.ContentPage switch
             {
@@ -147,6 +153,12 @@ public partial class PlanningCenterView : UserControl
             if (preview)
             {
                 var note = Text("策划案预览 · 按 Esc 返回", 12); note.Foreground = Brush("TextSecondaryBrush"); DocumentContent.Children.Add(note);
+                if (_vm.IsAdvancedPlanning)
+                {
+                    var previewEditor=new PlanningRichEditor(_vm.RichTextPackage,_vm.DocumentBody,(_,_,_)=>{},[],_vm.RichLayout);
+                    previewEditor.SetPageZoom(_vm.UiLayout.DocumentZoom);
+                    DocumentContent.Children.Add(previewEditor.CreatePagedPreview());previewEditor.Retire();return;
+                }
                 RenderText(false);
                 foreach (var section in new[] { "情绪板", "镜头清单", "灯光图", "服化道" })
                 {
@@ -227,10 +239,12 @@ public partial class PlanningCenterView : UserControl
             status.SetBinding(Selector.SelectedItemProperty, new Binding(nameof(_vm.ProposalStatus))); AutomationProperties.SetName(status, "策划案状态"); DocumentContent.Children.Add(status);
             Heading(DocumentContent, "核心概念");
             DocumentContent.Children.Add(Text("正文随项目自动保存；工具栏写入兼容的结构标记，预览和 PDF 使用同一内容。", 12));
-            var owner = _vm; var projectId = owner.ProjectId; var documentId = owner.PlanningDocumentId; var renderRevision=_documentRenderRevision;
-            DocumentContent.Children.Add(new PlanningRichEditor(_vm.RichTextPackage,_vm.DocumentBody,
-                (rtf, text, layout) => { if (renderRevision==_documentRenderRevision && owner.ProjectId == projectId && owner.PlanningDocumentId == documentId) owner.SaveRichText(rtf, text, layout); },
-                _vm.DocumentCanvasRevisions,_vm.RichLayout));
+            var owner = _vm; var projectId = owner.ProjectId; var documentId = owner.PlanningDocumentId; var renderRevision=_documentRenderRevision;var generation=owner.EditorGeneration;
+            var editor=new PlanningRichEditor(_vm.RichTextPackage,_vm.DocumentBody,
+                (rtf, text, layout) => { if (generation==owner.EditorGeneration && renderRevision==_documentRenderRevision && owner.ProjectId == projectId && owner.PlanningDocumentId == documentId) owner.SaveRichText(rtf, text, layout); },
+                _vm.DocumentCanvasRevisions,_vm.RichLayout);
+            editor.UsePlanningDocxActions(ExportPlanningDocxFromViewAsync,ImportPlanningDocxFromViewAsync,error=>owner.Dialogs.ShowError("DOCX 操作未完成，原资料保留："+error.Message));
+            DocumentContent.Children.Add(editor);
         }
         else
         {
@@ -577,7 +591,6 @@ public partial class PlanningCenterView : UserControl
     private void ClosePreview_Click(object sender, RoutedEventArgs e) => CloseImagePreview();
     private Task<bool> FlushDocumentAsync()
     {
-        FlushSimpleEditors();
         return _vm?.FlushAsync()??Task.FromResult(true);
     }
     private async void Export_Click(object sender, RoutedEventArgs e)

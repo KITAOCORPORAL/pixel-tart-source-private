@@ -145,12 +145,12 @@ public partial class PlanningCenterView
     }
     private void RenderR5ShotInspector(ProjectShot shot)
     {
-        if(_vm is null)return;var owner=_vm;var project=owner.ProjectId;_inspectorShotId=shot.ShotId;
+        if(_vm is null)return;var owner=_vm;var project=owner.ProjectId;var revision=_documentRenderRevision;var generation=owner.EditorGeneration;_inspectorShotId=shot.ShotId;
         var row=new RAWSelectionAssistant.ViewModels.PlanningShotEditRow(owner.ShotDraft(shot.ShotId),owner.StageShot);row.BeginEdit();var fields=new Dictionary<string,TextBox>();var form=new StackPanel();
         foreach(var (key,label) in new[]{("Name","镜头名称"),("Scene","场景"),("ShotSize","景别"),("CameraAndLens","机位 / 镜头"),("Action","人物动作"),("Props","道具"),("Lighting","灯光"),("Remarks","备注"),("EstimatedMinutes","预计分钟")})
-        {form.Children.Add(Text(label,11));var box=new TextBox{Text=row[key],Margin=new Thickness(0,2,0,8),TextWrapping=TextWrapping.Wrap};System.Windows.Automation.AutomationProperties.SetName(box,label);fields[key]=box;form.Children.Add(box);}
+        {form.Children.Add(Text(label,11));var box=new TextBox{Text=row[key],AcceptsReturn=key is "Action" or "Remarks",MinHeight=key=="Action"?96:30,MaxHeight=180,VerticalScrollBarVisibility=ScrollBarVisibility.Auto,Margin=new Thickness(0,2,0,8),TextWrapping=TextWrapping.Wrap};System.Windows.Automation.AutomationProperties.SetName(box,label);fields[key]=box;form.Children.Add(box);}
         var original=fields.ToDictionary(p=>p.Key,p=>p.Value.Text);
-        _inspectorCapture=()=>{if(owner.ProjectId!=project)return;if(fields.All(p=>p.Value.Text==original[p.Key]))return;var current=new PlanningShotEditRow(owner.ShotDraft(shot.ShotId),owner.StageShot);current.BeginEdit();
+        _inspectorCapture=()=>{if(generation!=owner.EditorGeneration||revision!=_documentRenderRevision||owner.ProjectId!=project)return;if(fields.All(p=>p.Value.Text==original[p.Key]))return;var current=new PlanningShotEditRow(owner.ShotDraft(shot.ShotId),owner.StageShot);current.BeginEdit();
             foreach(var pair in fields)if(pair.Value.Text!=original[pair.Key]){current[pair.Key]=pair.Value.Text;original[pair.Key]=pair.Value.Text;}
             current.EndEdit();};
         form.Children.Add(AsyncAction("应用镜头修改",async()=>{_inspectorCapture?.Invoke();if(await owner.FlushAsync())Render();}));

@@ -33,11 +33,14 @@ public partial class PlanningCenterView
             CanUserSortColumns = false, CanUserReorderColumns = false, FrozenColumnCount = 1, MinHeight = 180, MaxHeight = 560,
             ItemsSource = _vm.Shots.OrderBy(s => s.Order).Select(s => CreatePlanningShotRow(s)).ToArray() };
         ConfigurePlanningTable(_shotTable);
+        _shotTable.RowHeight=double.NaN;_shotTable.MinRowHeight=76;
+        var display=new Style(typeof(TextBlock));display.Setters.Add(new Setter(TextBlock.TextWrappingProperty,TextWrapping.Wrap));display.Setters.Add(new Setter(FrameworkElement.MaxHeightProperty,78d));display.Setters.Add(new Setter(FrameworkElement.ToolTipProperty,new Binding("Text"){RelativeSource=new RelativeSource(RelativeSourceMode.Self)}));
+        var editing=new Style(typeof(TextBox));editing.Setters.Add(new Setter(TextBox.AcceptsReturnProperty,true));editing.Setters.Add(new Setter(TextBox.TextWrappingProperty,TextWrapping.Wrap));editing.Setters.Add(new Setter(FrameworkElement.MaxHeightProperty,160d));editing.Setters.Add(new Setter(ScrollViewer.VerticalScrollBarVisibilityProperty,ScrollBarVisibility.Auto));
         AutomationProperties.SetName(_shotTable, "可编辑镜头清单"); AutomationProperties.SetAutomationId(_shotTable, "PlanningEditableShotTable");
         _shotTable.SelectionChanged += (_, _) => { if (_shotTable.SelectedItem is PlanningShotEditRow row) { _inspectorCapture?.Invoke(); _vm.SelectedShot = _vm.Shots.FirstOrDefault(s => s.ShotId == row.ShotId); RenderR5Inspector(); } };
         void Column(string title, string key, bool readOnly = false, double width = 130)
         {
-            _shotTable.Columns.Add(new DataGridTextColumn { Header = title, IsReadOnly = readOnly, Width = width,
+            _shotTable.Columns.Add(new DataGridTextColumn { Header = title, IsReadOnly = readOnly, Width = width, ElementStyle=display, EditingElementStyle=editing,
                 Binding = new Binding("[" + key + "]") { Mode = readOnly ? BindingMode.OneWay : BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.LostFocus } });
         }
         Column("镜号", "Order", true, 64);
@@ -45,8 +48,8 @@ public partial class PlanningCenterView
         _shotTable.FrozenColumnCount=2;
         var imageFactory=new FrameworkElementFactory(typeof(Image));imageFactory.SetValue(Image.HeightProperty,30d);imageFactory.SetValue(Image.WidthProperty,48d);imageFactory.SetValue(Image.StretchProperty,System.Windows.Media.Stretch.Uniform);imageFactory.SetBinding(Image.SourceProperty,new Binding(nameof(PlanningShotEditRow.ReferencePreviewPath)));imageFactory.SetBinding(FrameworkElement.ToolTipProperty,new Binding(nameof(PlanningShotEditRow.ReferenceLabel)));
         _shotTable.Columns.Add(new DataGridTemplateColumn{Header="参考",Width=74,IsReadOnly=true,CellTemplate=new DataTemplate{VisualTree=imageFactory}});
-        Column("名称", "Name"); Column("场景", "Scene"); Column("景别", "ShotSize", width: 90);
-        Column("机位 / 镜头", "CameraAndLens"); Column("人物动作", "Action"); Column("道具", "Props"); Column("灯光", "Lighting");
+        Column("名称", "Name", width:240); Column("场景", "Scene"); Column("景别", "ShotSize", width: 90);
+        Column("机位 / 镜头", "CameraAndLens"); Column("人物动作", "Action", width:280); Column("道具", "Props"); Column("灯光", "Lighting");
         Column("预计分钟", "EstimatedMinutes", width: 85);
         DocumentContent.Children.Add(Text("可横向滚动；镜号与状态保持可见。参考缩略图来自本镜头已关联资料。",11));
         Column("备注", "Remarks");
@@ -71,7 +74,8 @@ public partial class PlanningCenterView
     private PlanningShotEditRow CreatePlanningShotRow(RAWSelectionAssistant.Core.Services.Projects.ProjectShot shot)
     {
         var ids=shot.References.Select(r=>r.ReferenceId).ToHashSet();var reference=_vm!.AllProjectReferences.FirstOrDefault(r=>ids.Contains(r.Id));
-        return new(_vm.ShotDraft(shot.ShotId),_vm.StageShot){ReferencePreviewPath=reference?.PreviewPath,ReferenceLabel=reference?.Title??"未关联参考"};
+        var owner=_vm;var revision=_documentRenderRevision;var generation=owner.EditorGeneration;
+        return new(owner.ShotDraft(shot.ShotId),value=>{if(generation==owner.EditorGeneration&&revision==_documentRenderRevision)owner.StageShot(value);},()=>owner.ShotDraft(shot.ShotId)){ReferencePreviewPath=reference?.PreviewPath,ReferenceLabel=reference?.Title??"未关联参考"};
     }
     private void FlushSimpleEditors()
     {

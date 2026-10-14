@@ -19,6 +19,7 @@ public sealed partial class PlanningCenterViewModel
     }
     public Func<Guid,Guid,Task>? RelocateAsset { get; set; }
     public PlanningRichLayout? RichLayout => _document.Package?.RichLayout;
+    public long EditorGeneration { get; private set; }
     public string? RichTextPackage => _document.Package?.RichTextPackageBase64;
     public void SaveRichText(string data, string plainText,PlanningRichLayout layout)
     {

@@ -121,6 +121,7 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
     private async Task LoadPlanningCoreAsync(Guid projectId,Guid? bookingId,CancellationToken token)
     {
         if (!await FlushAsync()) throw new IOException("请先保存当前策划。");
+        EditorGeneration++;
         _project=(await _projects.ListAsync(token)).FirstOrDefault(item=>item.Id==projectId);if(_project is null)throw new InvalidOperationException("项目不存在或已归档。");
         _state=await _planning.LoadAsync(projectId,token);_booking=null;if((bookingId??_state.BookingId) is Guid id){_booking=await _bookings.GetAsync(id,false,token);if(_state.BookingId!=id){_state=_state with{BookingId=id};await _planning.SaveAsync(_state,token);_state=await _planning.LoadAsync(projectId,token);}}
         var catalog=await _shots.LoadAsync(projectId,token);Shots.Clear();foreach(var shot in catalog.Shots.Where(item=>!item.IsArchived).OrderBy(item=>item.Order))Shots.Add(shot);SelectedShot=Shots.FirstOrDefault(item=>item.ShotId==_state.CurrentShotId)??Shots.FirstOrDefault();
