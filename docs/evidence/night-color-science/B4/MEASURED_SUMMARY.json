@@ -1,0 +1,97 @@
+[
+  {
+    "node": "ReferenceMatch",
+    "tile": {
+      "ms": 187.1493,
+      "maxError": 0,
+      "peakManaged": 25070440,
+      "peakWorkingSet": 74203136,
+      "peakPrivateBytes": 48500736,
+      "peakLedger": 72541220
+    },
+    "full": {
+      "ms": 250.5468,
+      "maxError": 0,
+      "peakManaged": 44117776,
+      "peakWorkingSet": 87621632,
+      "peakPrivateBytes": 66605056,
+      "peakLedger": 0
+    }
+  },
+  {
+    "node": "Details",
+    "tile": {
+      "ms": 313.6788,
+      "maxError": 3.049318610115481e-19,
+      "peakManaged": 27755520,
+      "peakWorkingSet": 71061504,
+      "peakPrivateBytes": 45191168,
+      "peakLedger": 84101540
+    },
+    "full": {
+      "ms": 215.0049,
+      "maxError": 0,
+      "peakManaged": 27256128,
+      "peakWorkingSet": 78602240,
+      "peakPrivateBytes": 52858880,
+      "peakLedger": 0
+    }
+  },
+  {
+    "node": "Structure",
+    "tile": {
+      "ms": 31.4788,
+      "maxError": 0,
+      "peakManaged": 18618336,
+      "peakWorkingSet": 68096000,
+      "peakPrivateBytes": 42135552,
+      "peakLedger": 72672740
+    },
+    "full": {
+      "ms": 30.1815,
+      "maxError": 0,
+      "peakManaged": 26046056,
+      "peakWorkingSet": 68509696,
+      "peakPrivateBytes": 43184128,
+      "peakLedger": 0
+    }
+  },
+  {
+    "node": "Bloom",
+    "tile": {
+      "ms": 54.2193,
+      "maxError": 0,
+      "peakManaged": 23469840,
+      "peakWorkingSet": 66232320,
+      "peakPrivateBytes": 40480768,
+      "peakLedger": 72627620
+    },
+    "full": {
+      "ms": 46.4163,
+      "maxError": 0,
+      "peakManaged": 20908816,
+      "peakWorkingSet": 66822144,
+      "peakPrivateBytes": 44392448,
+      "peakLedger": 0
+    }
+  },
+  {
+    "node": "Halation",
+    "tile": {
+      "ms": 46.4414,
+      "maxError": 0,
+      "peakManaged": 23220656,
+      "peakWorkingSet": 66007040,
+      "peakPrivateBytes": 40247296,
+      "peakLedger": 72583780
+    },
+    "full": {
+      "ms": 45.7894,
+      "maxError": 0,
+      "peakManaged": 20902176,
+      "peakWorkingSet": 66842624,
+      "peakPrivateBytes": 44429312,
+      "peakLedger": 0
+    }
+  }
+]
