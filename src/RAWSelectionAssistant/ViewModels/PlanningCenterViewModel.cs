@@ -109,7 +109,16 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
     public string ClientRequirements{get=>_state?.Summary?.ClientRequirements??"";set=>UpdateSummary(summary=>summary with{ClientRequirements=value});}public string MustCapture{get=>_state?.Summary?.MustCapture??"";set=>UpdateSummary(summary=>summary with{MustCapture=value});}
     public string PlanningNotes{get=>_state?.Summary?.Notes??"";set=>UpdateSummary(summary=>summary with{Notes=value});}public string OutputPurpose{get=>_state?.Summary?.OutputPurpose??"";set=>UpdateSummary(summary=>summary with{OutputPurpose=value});}
 
+    private bool _isPlanningLoading;
+    public bool IsPlanningLoading{get=>_isPlanningLoading;private set=>SetProperty(ref _isPlanningLoading,value);}
     public async Task LoadAsync(Guid projectId,Guid? bookingId=null,CancellationToken token=default)
+    {
+        if(IsPlanningLoading)throw new InvalidOperationException("策划正在载入，请等待当前操作完成。");
+        IsPlanningLoading=true;
+        try{await LoadPlanningCoreAsync(projectId,bookingId,token);}
+        finally{IsPlanningLoading=false;}
+    }
+    private async Task LoadPlanningCoreAsync(Guid projectId,Guid? bookingId,CancellationToken token)
     {
         if (!await FlushAsync()) throw new IOException("请先保存当前策划。");
         _project=(await _projects.ListAsync(token)).FirstOrDefault(item=>item.Id==projectId);if(_project is null)throw new InvalidOperationException("项目不存在或已归档。");

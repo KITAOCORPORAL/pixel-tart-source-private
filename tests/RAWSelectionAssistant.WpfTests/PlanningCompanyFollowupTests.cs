@@ -69,5 +69,14 @@ public sealed class PlanningCompanyFollowupTests
         foreach(var page in new[]{"镜头清单","灯位图"})foreach(var width in new[]{1366,900}){await f.Vm.SelectContentSafelyAsync(page);view.Render();Arrange(view,width,760);Save(view,Path.Combine(output,page+"-"+width+".png"));}
         await f.Vm.SwitchPlanningModeAsync(true);view.Render();Arrange(view,1366,900);Save(view,Path.Combine(output,"advanced.png"));view.DataContext=null;
     });
+    [TestMethod]
+    public Task LoadingOverlayTracksActualLoadAndClearsAfterFailure()=>RunSta(async()=>
+    {
+        using var f=await PlanningFoundationWpfTests.Fixture.Create();EnsureTestApplication();var view=new PlanningCenterView{DataContext=f.Vm};
+        var states=new List<bool>();f.Vm.PropertyChanged+=(_,e)=>{if(e.PropertyName==nameof(f.Vm.IsPlanningLoading))states.Add(f.Vm.IsPlanningLoading);};
+        var load=f.Vm.LoadAsync(f.Id);await load;CollectionAssert.AreEqual(new[]{true,false},states.ToArray());Assert.IsFalse(f.Vm.IsPlanningLoading);Arrange(view,900,650);
+        Assert.AreEqual(Visibility.Collapsed,((Border)view.FindName("PlanningLoadingOverlay")).Visibility);
+        await Assert.ThrowsAsync<InvalidOperationException>(()=>f.Vm.LoadAsync(Guid.NewGuid()));Assert.IsFalse(f.Vm.IsPlanningLoading);view.DataContext=null;
+    });
     private static void Save(FrameworkElement v,string p){var b=new RenderTargetBitmap((int)v.ActualWidth,(int)v.ActualHeight,96,96,PixelFormats.Pbgra32);b.Render(v);var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(b));using var stream=File.Create(p);encoder.Save(stream);}
 }
