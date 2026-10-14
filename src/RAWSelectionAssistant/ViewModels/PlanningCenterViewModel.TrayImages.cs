@@ -9,11 +9,12 @@ public sealed record PlanningTrayChoice(InspirationTrayEntry Entry,string Collec
 {public string Label=>Collection+" · "+(Entry.OptionalNote??Entry.Reference.AssetId.ToString());}
 public sealed partial class PlanningCenterViewModel
 {
+ public Func<IReadOnlyList<PlanningDocumentImage>>? ReadEditorHistoryImages {get;set;}
  public PlanningImageInventory ListUnreferencedImageCopies()
  {
   var doc=PlanningDocumentId??throw new InvalidOperationException("请先打开策划。");
   var memory=_planningUndo.Concat(_planningRedo).Where(s=>s.Project==ProjectId).SelectMany(s=>s.Document.Package?.RichLayout?.Images??[])
-    .Concat(DocumentImages).Where(i=>i.DocumentId==doc).Select(i=>i.DocumentImageId);
+    .Concat(DocumentImages).Concat(ReadEditorHistoryImages?.Invoke()??[]).Where(i=>i.DocumentId==doc).Select(i=>i.DocumentImageId);
   return PlanningImageInventoryScanner.Scan(_planning.StorageRoot,doc,memory);
  }
  public Func<AssetLibraryStableReference,Task<AssetResolutionResult>>? ResolveTrayImage {get;set;}

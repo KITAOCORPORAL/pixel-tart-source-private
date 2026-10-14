@@ -150,6 +150,7 @@ public sealed partial class PlanningRichEditor : DockPanel
         }
     }
     public void Retire(){_saveTimer.Stop();_persist=null;}
+    public IReadOnlyList<PlanningDocumentImage> RetainedHistoryImages=>_history.RetainedImages;
     public void FlushPending(){_saveTimer.Stop();_history.Checkpoint();_persist?.Invoke();}
     private FlowDocument Clone(){using var stream=new MemoryStream();var data=Convert.FromBase64String(PlanningDocumentImages.Serialize(_editor.Document));stream.Write(data);stream.Position=0;var doc=new FlowDocument();new TextRange(doc.ContentStart,doc.ContentEnd).Load(stream,DataFormats.Rtf);PlanningDocumentLayout.Apply(doc,PlanningDocumentLayout.Capture(_editor.Document,_page,_losses));return doc;}
 }

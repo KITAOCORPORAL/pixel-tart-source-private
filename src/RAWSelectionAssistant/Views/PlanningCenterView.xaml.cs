@@ -38,9 +38,9 @@ public partial class PlanningCenterView : UserControl
         DataContextChanged += (_, e) =>
         {
             _trayPickerVersion++;
-            if (_vm is not null) { ClosePlanningDock(); FlushSimpleEditors(); _vm.CapturePendingEditorDraft = null; _vm.DocumentPresentationChanged -= PresentationChanged; _vm.PropertyChanged -= ViewModelChanged; }
+            if (_vm is not null) { ClosePlanningDock(); FlushSimpleEditors(); _vm.CapturePendingEditorDraft = null; _vm.ReadEditorHistoryImages=null; _vm.DocumentPresentationChanged -= PresentationChanged; _vm.PropertyChanged -= ViewModelChanged; }
             _vm = e.NewValue as PlanningCenterViewModel;
-            if (_vm is not null) { _vm.CapturePendingEditorDraft = FlushSimpleEditors; _vm.DocumentPresentationChanged += PresentationChanged; _vm.PropertyChanged += ViewModelChanged; }
+            if (_vm is not null) { _vm.CapturePendingEditorDraft = FlushSimpleEditors; _vm.ReadEditorHistoryImages=()=>DocumentContent.Children.OfType<PlanningRichEditor>().SelectMany(e=>e.RetainedHistoryImages).ToArray(); _vm.DocumentPresentationChanged += PresentationChanged; _vm.PropertyChanged += ViewModelChanged; }
             Render();
         };
         Loaded += (_, _) => Render();

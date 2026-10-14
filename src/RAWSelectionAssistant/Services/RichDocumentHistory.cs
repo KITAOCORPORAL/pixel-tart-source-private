@@ -9,6 +9,7 @@ public sealed record RichDocumentSnapshot(string Rtf,PlanningRichLayout Layout,i
 public sealed class RichDocumentHistory(RichTextBox editor,Func<PlanningRichLayout> layout,Action<PlanningRichLayout> restoreLayout)
 {
     private readonly Stack<RichDocumentSnapshot> _undo=[];private readonly Stack<RichDocumentSnapshot> _redo=[];private RichDocumentSnapshot? _current;
+    public IReadOnlyList<PlanningDocumentImage> RetainedImages => _undo.Concat(_redo).Concat(_current is null?[]:new[]{_current}).SelectMany(s=>s.Layout.Images).DistinctBy(i=>(i.DocumentId,i.DocumentImageId)).ToArray();
     public bool Restoring {get;private set;}
     public RichDocumentSnapshot Capture(){using var bytes=new MemoryStream();return new(PlanningDocumentImages.Serialize(editor.Document),layout(),editor.Document.ContentStart.GetOffsetToPosition(editor.CaretPosition));}
     public void Initialize()=>_current=Capture();
