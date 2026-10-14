@@ -15864,6 +15864,42 @@
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",
       "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.RelativePathsRequireBoundRootIdentityHashAndRejectTraversal",
+      "category": "required_automatic",
+      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.LegacyExactIdentityFallbackMigratesOnlyAfterHashValidation",
+      "category": "required_automatic",
+      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.InventoryIsReadOnlyProtectsDraftRecoveryAndUnknownFiles",
+      "category": "required_automatic",
+      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.RealRootMoveKeepsRepeatedPicturesCellCaptionsModesHistoryPaginationAndDocx",
+      "category": "required_automatic",
+      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.LegacyAbsoluteRootMoveAndLockedMigrationReplayNeverReplaceWrongImage",
+      "category": "required_automatic",
+      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.UndoRedoAndDiskRecoveryCopiesAreListedButNeverDeleted",
+      "category": "required_automatic",
+      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
+      "stage": "prepublish"
     }
   ]
 }

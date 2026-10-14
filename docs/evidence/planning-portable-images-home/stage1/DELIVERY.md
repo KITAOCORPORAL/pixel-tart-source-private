@@ -1,6 +1,6 @@
 # 阶段1：受控图片路径
 
-2026-10-14 Asia/Shanghai。fetch核验origin/feature/kitao-planning-tray-images-20261014 = 13b0efe689c0114f6f76b70c59a1059cabeddbef。新工作树N:/pixart/kitao-planning-portable-images-home-20261014；分支fix/kitao-planning-portable-images-home-20261014。
+2026-10-14 Europe/Berlin。fetch核验origin/feature/kitao-planning-tray-images-20261014 = 13b0efe689c0114f6f76b70c59a1059cabeddbef。新工作树N:/pixart/kitao-planning-portable-images-home-20261014；分支fix/kitao-planning-portable-images-home-20261014。
 
 读取原DELIVERY/MIGRATION_CONTRACT/OPEN_ITEMS及图片/保存/恢复/历史/DOCX链路。公司D盘Release仅历史参考，未拿来本机运行。家里6个旧工作树已清点，旧源码树3个未跟踪审计/研究目录不动；其他原树干净。不重置、不合并、不删除其他树。
 
