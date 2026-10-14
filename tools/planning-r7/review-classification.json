@@ -15864,6 +15864,42 @@
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",
       "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.NightColorBaselineTests.DiagnosticsRecordNegativeExtendedFiniteAndRejectUnknownIdentity",
+      "category": "required_automatic",
+      "reason": "Night color science mandatory numeric/provenance regression.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.NightColorBaselineTests.SensorProbePreservesExtendedValuesAndCountsActualChannelSaturation",
+      "category": "required_automatic",
+      "reason": "Night color science mandatory numeric/provenance regression.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.NightColorBaselineTests.AcquisitionProtocolNeverAdmitsCalibrationFromMetadataAlone",
+      "category": "required_automatic",
+      "reason": "Night color science mandatory numeric/provenance regression.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.Pv7PrototypeTests.ExposureNeutralMonotonicSingleTransferAndQuantizationAreExplicit",
+      "category": "required_automatic",
+      "reason": "Night color science mandatory numeric/provenance regression.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.Pv7PrototypeTests.ExtendedPrimariesSkinAndBakedWhiteBalanceFailClosed",
+      "category": "required_automatic",
+      "reason": "Night color science mandatory numeric/provenance regression.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.Pv7PrototypeTests.SyntheticD50D65AdaptationAndUnknownProfileRefusal",
+      "category": "required_automatic",
+      "reason": "Night color science mandatory numeric/provenance regression.",
+      "stage": "prepublish"
     }
   ]
 }

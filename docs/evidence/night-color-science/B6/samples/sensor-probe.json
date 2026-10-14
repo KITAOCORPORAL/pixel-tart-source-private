@@ -1,0 +1,118 @@
+{
+  "BlackLevels": [
+    100,
+    100,
+    100
+  ],
+  "WhiteLevel": 1000,
+  "AtSensorWhite": [
+    1,
+    0,
+    1
+  ],
+  "BeforeBlack": {
+    "Pixels": 2,
+    "Minimum": 50,
+    "Maximum": 1200,
+    "Negative": [
+      0,
+      0,
+      0
+    ],
+    "AboveOne": [
+      2,
+      2,
+      2
+    ],
+    "Zero": [
+      0,
+      0,
+      0
+    ],
+    "AtOrAboveOne": [
+      2,
+      2,
+      2
+    ],
+    "NonFinite": 0
+  },
+  "AfterBlack": {
+    "Pixels": 2,
+    "Minimum": -0.0555555559694767,
+    "Maximum": 1.2222222089767456,
+    "Negative": [
+      1,
+      0,
+      0
+    ],
+    "AboveOne": [
+      1,
+      0,
+      0
+    ],
+    "Zero": [
+      0,
+      0,
+      1
+    ],
+    "AtOrAboveOne": [
+      1,
+      0,
+      1
+    ],
+    "NonFinite": 0
+  },
+  "AfterWhiteBalance": {
+    "Pixels": 2,
+    "Minimum": -0.1111111119389534,
+    "Maximum": 3,
+    "Negative": [
+      1,
+      0,
+      0
+    ],
+    "AboveOne": [
+      1,
+      0,
+      1
+    ],
+    "Zero": [
+      0,
+      0,
+      1
+    ],
+    "AtOrAboveOne": [
+      1,
+      0,
+      1
+    ],
+    "NonFinite": 0
+  },
+  "AfterMatrix": {
+    "Pixels": 2,
+    "Minimum": -0.1111111119389534,
+    "Maximum": 3,
+    "Negative": [
+      1,
+      0,
+      0
+    ],
+    "AboveOne": [
+      1,
+      0,
+      1
+    ],
+    "Zero": [
+      0,
+      0,
+      1
+    ],
+    "AtOrAboveOne": [
+      1,
+      0,
+      1
+    ],
+    "NonFinite": 0
+  },
+  "Authority": "Synthetic or explicitly supplied sensor samples only; not LibRaw hidden intermediate observation. Sensor saturation cannot prove recoverable texture."
+}
