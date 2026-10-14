@@ -1,0 +1,41 @@
+{
+  "source": "9446c1997ea88575072f0f9a8b72e4bc95eb8687",
+  "status": "PARTIAL_NOT_FULL_GREEN",
+  "baselineCore": {
+    "passed": 1682,
+    "failed": 0,
+    "skipped": 7
+  },
+  "baselineWpfCombined": {
+    "passed": 1573,
+    "failed": 2,
+    "skipped": 24,
+    "total": 1599
+  },
+  "finalCore": {
+    "passed": 1682,
+    "failed": 0,
+    "skipped": 7
+  },
+  "finalWpf": {
+    "classes": 209,
+    "passed": 1583,
+    "failed": 2,
+    "skipped": 23,
+    "total": 1608,
+    "timeout": 0
+  },
+  "releaseWpfFocused": {
+    "passed": 32,
+    "failed": 0,
+    "skipped": 0
+  },
+  "releaseCoreFull": {
+    "passed": 1682,
+    "failed": 0,
+    "skipped": 7
+  },
+  "manualWindows": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "wps": "NOT_RUN"
+}

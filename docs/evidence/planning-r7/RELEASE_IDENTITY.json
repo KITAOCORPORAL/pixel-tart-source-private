@@ -1,0 +1,51 @@
+{
+  "sourceCommit": "9446c1997ea88575072f0f9a8b72e4bc95eb8687",
+  "configuration": "Release win-x64 self-contained non-single-file",
+  "directory": "D:\\AI AGENT\\kitao-planning-r7-20261014\\artifacts\\r7\\release-final\\win-x64",
+  "productVersion": "2.3.0-planning-r7+9446c1997ea88575072f0f9a8b72e4bc95eb8687",
+  "exe": {
+    "path": "KitaoPhotoSelector.exe",
+    "bytes": 179200,
+    "sha256": "242fa0a9d155d1b301cbc2168eecaeeb09becb35da03a7f6e7b3e3b4861f2fd7"
+  },
+  "components": [
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "sha256": "4f11368217b1fc6f7c63b09b0b9bc8062e2f801bd6c452a531962eb0e0e64cb3",
+      "testSha256": "4f11368217b1fc6f7c63b09b0b9bc8062e2f801bd6c452a531962eb0e0e64cb3"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "sha256": "4efd900fd4ad6d17b5bcbfcf13645938a289cafee7e0f99044b0abb0e2e01526",
+      "testSha256": "4efd900fd4ad6d17b5bcbfcf13645938a289cafee7e0f99044b0abb0e2e01526"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "sha256": "80e03dbe377a40b255e5d2f3b0afb60e93bb7085f1f056af0a000538d29916f7",
+      "testSha256": "80e03dbe377a40b255e5d2f3b0afb60e93bb7085f1f056af0a000538d29916f7"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "sha256": "5da3c2d2fec029f91c0c69a1807013f4018d1e6390ec3e836231a754858ef0e9",
+      "testSha256": "5da3c2d2fec029f91c0c69a1807013f4018d1e6390ec3e836231a754858ef0e9"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "sha256": "4b2b3f9f19f887e1854af6275bbc89c875e29ef04b9522a04d0e6b9b473c4c8e",
+      "testSha256": "4b2b3f9f19f887e1854af6275bbc89c875e29ef04b9522a04d0e6b9b473c4c8e"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "sha256": "53223141c100988c7f4fa4488aed9b30428c3dd61b9453451fded3c40c04fea7",
+      "testSha256": "53223141c100988c7f4fa4488aed9b30428c3dd61b9453451fded3c40c04fea7"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "sha256": "1e52b9c5816d339b08ce4bd2328f2eb8c3125e536e5287e0ee3db70ee8fc0f71",
+      "testSha256": "1e52b9c5816d339b08ce4bd2328f2eb8c3125e536e5287e0ee3db70ee8fc0f71"
+    }
+  ],
+  "releaseStartup": "NOT_RUN",
+  "wps": "NOT_RUN",
+  "status": "REVIEW_BUILD_PARTIAL_NOT_ACCEPTED"
+}

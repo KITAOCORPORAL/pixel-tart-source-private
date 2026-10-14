@@ -1,0 +1,102 @@
+[
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningHeaderFooter.cs",
+    "type": "model",
+    "sha256": "72cad1a66e388e7b0021085bf486099b7d07b05caec9288df7f10ad103798cc1"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningRichLayout.cs",
+    "type": "model",
+    "sha256": "702bb59e92632656eb0428a1b86925b6d0bdcab7b37b7b1f29b92ad1c58b29b2"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningDocumentLayout.cs",
+    "type": "source",
+    "sha256": "9946bd067c78977a045213e7310593f02b7f6cc28233b9a267b3261a05b74209"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningDocxAdapter.Pages.cs",
+    "type": "source",
+    "sha256": "ef7cf6379892dd9cc6d342dc60734e1066e9a3c58e1ea4c27efd6edc0fb60340"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningDocxAdapter.cs",
+    "type": "source",
+    "sha256": "9d49bc0380055092c7121f05297d37d5ddcf36b47e5ea543c01a25ee970bfa96"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningPaginator.cs",
+    "type": "source",
+    "sha256": "5a5dcc9e79df122264bf8618f5b0199e25509ebece83716d11747bbee7c7cacf"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningProposalPdf.cs",
+    "type": "source",
+    "sha256": "565e5dfe97735cd0c9d58ecadae585d23bc9ad4cb4d7abdb55bf6cb759639bf0"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningTableEditing.cs",
+    "type": "source",
+    "sha256": "980b983bba1ef4cbb3cfd172e54ab09a69a510125969e268336d415df94577ac"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningTextSearch.cs",
+    "type": "source",
+    "sha256": "6f1fe881c04887739eb152b117f26298cde21e3218437be4f2708c5f045b2b2d"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.R5Layout.cs",
+    "type": "source",
+    "sha256": "857831129f2a53bdc324a8b31a47f83abc0a8a51c5095ef40eee8a33ac08db8f"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+    "type": "source",
+    "sha256": "c9f34a5afb1320a50d8a3ccc426b981446f7465eaf0bec528acf1ccd6983ac60"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningRichEditor.Pages.cs",
+    "type": "source",
+    "sha256": "d996a86be6320889c7448113d200a6614bb664d3b9ea3a58e82c0bef5c22f011"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningRichEditor.Search.cs",
+    "type": "source",
+    "sha256": "610c1bec238c8d19ac64882551638dbdea8a8eb547334c4103430778fdcddfbc"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningRichEditor.cs",
+    "type": "source",
+    "sha256": "349c9e4e011861ab1fab55082af2581e878848b6538eabbab83e2a11ccc9d854"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningR7ContinuousTests.cs",
+    "type": "test",
+    "sha256": "c76785d314dbea7cd2d2fc6b3bbd129537558df32107777a5478b35aedf5a027"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningR7PageContractTests.cs",
+    "type": "test",
+    "sha256": "aa9c7d92cb214a980880d280b58306f9545ccc5253d38a2ad7696b9bfab1841e"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningR7PageExtrasTests.cs",
+    "type": "test",
+    "sha256": "0936cf2a62ca0a229461fabdb8157abc13402394dad9dd85ab9def348d44ac4a"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningR7SearchTests.cs",
+    "type": "test",
+    "sha256": "531f2a59daba719d0724d964b719682ebd7e4011cd423e7a5b320e1f0d174aed"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningR7TableTests.cs",
+    "type": "test",
+    "sha256": "69344cd210595f13b9c6e1f8447ca5da9999175410e3f07cff2fc0d5fa0c7d9c"
+  },
+  {
+    "path": "tools/planning-r7/Invoke-IsolatedWpf.ps1",
+    "type": "tool",
+    "sha256": "25dddee195c46ac3b0324833fc21723dcb2c0d4b296f857047b1d2fdfa8937e7"
+  }
+]
