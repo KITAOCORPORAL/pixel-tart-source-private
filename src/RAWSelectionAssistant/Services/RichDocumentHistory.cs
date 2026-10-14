@@ -10,7 +10,7 @@ public sealed class RichDocumentHistory(RichTextBox editor,Func<PlanningRichLayo
 {
     private readonly Stack<RichDocumentSnapshot> _undo=[];private readonly Stack<RichDocumentSnapshot> _redo=[];private RichDocumentSnapshot? _current;
     public bool Restoring {get;private set;}
-    public RichDocumentSnapshot Capture(){using var bytes=new MemoryStream();new TextRange(editor.Document.ContentStart,editor.Document.ContentEnd).Save(bytes,DataFormats.Rtf);return new(Convert.ToBase64String(bytes.ToArray()),layout(),editor.Document.ContentStart.GetOffsetToPosition(editor.CaretPosition));}
+    public RichDocumentSnapshot Capture(){using var bytes=new MemoryStream();return new(PlanningDocumentImages.Serialize(editor.Document),layout(),editor.Document.ContentStart.GetOffsetToPosition(editor.CaretPosition));}
     public void Initialize()=>_current=Capture();
     public void Checkpoint(){if(Restoring)return;var next=Capture();if(_current is not null&&(_current.Rtf!=next.Rtf||JsonSerializer.Serialize(_current.Layout)!=JsonSerializer.Serialize(next.Layout))){_undo.Push(_current);Trim();_redo.Clear();} _current=next;}
     private void Trim()
