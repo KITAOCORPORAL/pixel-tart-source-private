@@ -1,0 +1,444 @@
+[
+  {
+    "path": "artifacts/rich-flow/baseline/baseline.trx",
+    "bytes": 6886,
+    "sha256": "79b159032b7b40791b575921e213adab43c0b2ae96d82047029adf3e988ed0d5",
+    "counters": {
+      "total": "2",
+      "executed": "2",
+      "passed": "0",
+      "failed": "2",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": [
+      {
+        "name": "RerenderCapturesRichDraftBeforeRetiringEditor",
+        "outcome": "Failed"
+      },
+      {
+        "name": "ConcurrentRowAndInspectorChangesMergeOnlyEditedFields",
+        "outcome": "Failed"
+      }
+    ]
+  },
+  {
+    "path": "artifacts/rich-flow/continuous-02/continuous.trx",
+    "bytes": 6659,
+    "sha256": "0ca9c718cb3ae3093e46bcc09d00f0d5d432cc0c5432a0069018f293e3de24c8",
+    "counters": {
+      "total": "3",
+      "executed": "3",
+      "passed": "2",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": [
+      {
+        "name": "RichSyntheticContinuousFlowAndOffscreenEvidence",
+        "outcome": "Failed"
+      }
+    ]
+  },
+  {
+    "path": "artifacts/rich-flow/continuous-04/continuous.trx",
+    "bytes": 7032,
+    "sha256": "574361f480e181a55aa21d46fc74410618514d6693a1f824dc9cd7a355be204b",
+    "counters": {
+      "total": "3",
+      "executed": "3",
+      "passed": "2",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": [
+      {
+        "name": "RichSyntheticContinuousFlowAndOffscreenEvidence",
+        "outcome": "Failed"
+      }
+    ]
+  },
+  {
+    "path": "artifacts/rich-flow/continuous-05/continuous.trx",
+    "bytes": 7032,
+    "sha256": "c2b55ffa45da171f339eb4d54b13ce543086a59e238ebff7b4d3f6f6c92c6cce",
+    "counters": {
+      "total": "3",
+      "executed": "3",
+      "passed": "2",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": [
+      {
+        "name": "RichSyntheticContinuousFlowAndOffscreenEvidence",
+        "outcome": "Failed"
+      }
+    ]
+  },
+  {
+    "path": "artifacts/rich-flow/continuous-06/continuous.trx",
+    "bytes": 7032,
+    "sha256": "7da53fc9798e098f47069b943a6611b0f48296f069b030b5c1b52d1767ca9247",
+    "counters": {
+      "total": "3",
+      "executed": "3",
+      "passed": "2",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": [
+      {
+        "name": "RichSyntheticContinuousFlowAndOffscreenEvidence",
+        "outcome": "Failed"
+      }
+    ]
+  },
+  {
+    "path": "artifacts/rich-flow/continuous-07/continuous.trx",
+    "bytes": 5490,
+    "sha256": "68e557d25b7f5a2673b9a6c46eeb12e42e0c514640cdb78cb292e7aa0187bdb2",
+    "counters": {
+      "total": "3",
+      "executed": "3",
+      "passed": "3",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": []
+  },
+  {
+    "path": "artifacts/rich-flow/continuous-08/continuous.trx",
+    "bytes": 5490,
+    "sha256": "383630c494c705cf1fdc080abb9fe820214c86e8f2d00340c43e93f2fcb8de90",
+    "counters": {
+      "total": "3",
+      "executed": "3",
+      "passed": "3",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": []
+  },
+  {
+    "path": "artifacts/rich-flow/core/core.trx",
+    "bytes": 113011,
+    "sha256": "8b2fc67817a72d0f4dc94ed7e04ffdb869bee23480981da92aa871cd0094f058",
+    "counters": {
+      "total": "81",
+      "executed": "81",
+      "passed": "81",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": []
+  },
+  {
+    "path": "artifacts/rich-flow/frozen/tests/core.trx",
+    "bytes": 113011,
+    "sha256": "f051dd3531470c6dabb0ecd29bbd30f0004897b6b83067597504411eb83a8024",
+    "counters": {
+      "total": "81",
+      "executed": "81",
+      "passed": "81",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": []
+  },
+  {
+    "path": "artifacts/rich-flow/frozen/tests/wpf.trx",
+    "bytes": 50192,
+    "sha256": "0d591dcd449b89bbd4e8d3e2c949628509a497a46dd67d8971356a7beb8ca768",
+    "counters": {
+      "total": "34",
+      "executed": "34",
+      "passed": "34",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": []
+  },
+  {
+    "path": "artifacts/rich-flow/release-tests/results/release-core.trx",
+    "bytes": 109914,
+    "sha256": "648606808b9d4f1412aa39e82595bb7c5f0b68bb6bc8a016b7ce5da2bf90b624",
+    "counters": {
+      "total": "81",
+      "executed": "81",
+      "passed": "81",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": []
+  },
+  {
+    "path": "artifacts/rich-flow/release-tests/results/release-wpf.trx",
+    "bytes": 47268,
+    "sha256": "1ed879e4258e3739d98d21b5729e9b1c3058f59892d30fc4c76e13b5ec5f8c20",
+    "counters": {
+      "total": "34",
+      "executed": "34",
+      "passed": "34",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": []
+  },
+  {
+    "path": "artifacts/rich-flow/repaired/repaired.trx",
+    "bytes": 4084,
+    "sha256": "09b03b5bf4aae56bf18903f6ba6123980997ea95efac1bc391c40dee80adc5fd",
+    "counters": {
+      "total": "2",
+      "executed": "2",
+      "passed": "2",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": []
+  },
+  {
+    "path": "artifacts/rich-flow/targeted-01/targeted.trx",
+    "bytes": 37964,
+    "sha256": "4642a38cc17ed469c67fd6685c6869c3c3f2bd8aa6157111f91c5ac6a7a491c2",
+    "counters": {
+      "total": "23",
+      "executed": "22",
+      "passed": "22",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": [
+      {
+        "name": "OffscreenCompletedStatesSeparateFromPhysicalDpi",
+        "outcome": "NotExecuted"
+      }
+    ]
+  },
+  {
+    "path": "artifacts/rich-flow/targeted-02/targeted.trx",
+    "bytes": 34238,
+    "sha256": "b82872eb210437f1fb4cdaf721e9d392da341ccdbc9c9bb64530274abd7531f2",
+    "counters": {
+      "total": "23",
+      "executed": "23",
+      "passed": "23",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": []
+  },
+  {
+    "path": "artifacts/rich-flow/targeted-final/targeted.trx",
+    "bytes": 50192,
+    "sha256": "a3c3295c905c66ad1cddb7ef5aa0f74b31fe7e36ac9a06658ef5d622c3a7e676",
+    "counters": {
+      "total": "34",
+      "executed": "34",
+      "passed": "34",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": []
+  },
+  {
+    "path": "artifacts/rich-flow/targeted-final-02/targeted.trx",
+    "bytes": 50192,
+    "sha256": "e5e7441f0388f0256e9af79c6f42f1a128b728732051cccc2d346dd67704d8f7",
+    "counters": {
+      "total": "34",
+      "executed": "34",
+      "passed": "34",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPass": []
+  }
+]

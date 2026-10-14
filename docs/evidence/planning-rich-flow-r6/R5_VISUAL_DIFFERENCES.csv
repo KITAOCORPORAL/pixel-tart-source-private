@@ -1,0 +1,75 @@
+﻿reference,status,difference,current_evidence,windows
+01_simple_home_1366.png,PARTIAL_OFFSCREEN_REVIEW,同壳与概览接线；合成内容、卡片比例、字体/间距、主导航十项不同,01-overview-wide.png,NOT_RUN
+01_simple_home_1920.png,PARTIAL_OFFSCREEN_REVIEW,同壳与概览接线；合成内容、卡片比例、字体/间距、主导航十项不同,01-overview-wide.png,NOT_RUN
+02_shots_customcol_1366.png,PARTIAL_OFFSCREEN_REVIEW,真实关联缩略；镜号与状态左冻结而非右状态；长文本多行高于r5密度；横向滚动,03-shots-wide.png / 05-shots-horizontal-end.png,NOT_RUN
+02_shots_customcol_1920.png,PARTIAL_OFFSCREEN_REVIEW,真实关联缩略；镜号与状态左冻结而非右状态；长文本多行高于r5密度；横向滚动,03-shots-wide.png / 05-shots-horizontal-end.png,NOT_RUN
+02b_shots_scrolled_1366.png,PARTIAL_OFFSCREEN_REVIEW,真实关联缩略；镜号与状态左冻结而非右状态；长文本多行高于r5密度；横向滚动,03-shots-wide.png / 05-shots-horizontal-end.png,NOT_RUN
+02b_shots_scrolled_1920.png,PARTIAL_OFFSCREEN_REVIEW,真实关联缩略；镜号与状态左冻结而非右状态；长文本多行高于r5密度；横向滚动,03-shots-wide.png / 05-shots-horizontal-end.png,NOT_RUN
+03_customcol_dlg_1366.png,OPEN,原自定义列功能保留；本批未重拍对应弹窗，禁止标记视觉关闭,prior planning-r5-ui evidence,NOT_RUN
+03_customcol_dlg_1920.png,OPEN,原自定义列功能保留；本批未重拍对应弹窗，禁止标记视觉关闭,prior planning-r5-ui evidence,NOT_RUN
+03b_customcol_added_1366.png,OPEN,原自定义列功能保留；本批未重拍对应弹窗，禁止标记视觉关闭,prior planning-r5-ui evidence,NOT_RUN
+03b_customcol_added_1920.png,OPEN,原自定义列功能保留；本批未重拍对应弹窗，禁止标记视觉关闭,prior planning-r5-ui evidence,NOT_RUN
+04_gear_1366.png,PARTIAL_OFFSCREEN_REVIEW,手工设备清单；未提供完整工具箱目录导入；不是原型全部编辑能力,resource-设备-wide.png,NOT_RUN
+04_gear_1920.png,PARTIAL_OFFSCREEN_REVIEW,手工设备清单；未提供完整工具箱目录导入；不是原型全部编辑能力,resource-设备-wide.png,NOT_RUN
+05_crew_1366.png,PARTIAL_OFFSCREEN_REVIEW,真实人员字段与多行检查器；合成人员数据不同，精确样式仍OPEN,resource-人员-wide.png,NOT_RUN
+05_crew_1920.png,PARTIAL_OFFSCREEN_REVIEW,真实人员字段与多行检查器；合成人员数据不同，精确样式仍OPEN,resource-人员-wide.png,NOT_RUN
+06_venue_1366.png,OPEN,手动场地信息仍在；地图/自动天象未实现；本批未单独截图,prior planning-r5-ui evidence,NOT_RUN
+06_venue_1920.png,OPEN,手动场地信息仍在；地图/自动天象未实现；本批未单独截图,prior planning-r5-ui evidence,NOT_RUN
+07_timeline_1366.png,PARTIAL_OFFSCREEN_REVIEW,新增可见日期和时区、跨午夜拆段；非原型时间轴排布/自动排期,resource-当天时间表-wide.png,NOT_RUN
+07_timeline_1920.png,PARTIAL_OFFSCREEN_REVIEW,新增可见日期和时区、跨午夜拆段；非原型时间轴排布/自动排期,resource-当天时间表-wide.png,NOT_RUN
+08_adv_pages_hf_1366.png,PARTIAL_OFFSCREEN_REVIEW,四个真实工具组，RTF连续编辑区+独立真实分页；不是七页签/页缩略侧栏/页眉页脚,07-advanced-wide.png / 11-paged-preview-third.png,NOT_RUN
+08_adv_pages_hf_1920.png,PARTIAL_OFFSCREEN_REVIEW,四个真实工具组，RTF连续编辑区+独立真实分页；不是七页签/页缩略侧栏/页眉页脚,07-advanced-wide.png / 11-paged-preview-third.png,NOT_RUN
+09_hf_dlg_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+09_hf_dlg_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+10_pagenum_dlg_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+10_pagenum_dlg_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+11_find_replace_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+11_find_replace_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+12_repeat_header_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+12_repeat_header_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+13_export_simplify_1366.png,OPEN,基础DOCX图片/表格/正文导回、差异、恢复点与撤销；全Word保真/原型完整损失弹窗未完成,synthetic-roundtrip.docx / release-wpf.trx,NOT_RUN
+13_export_simplify_1920.png,OPEN,基础DOCX图片/表格/正文导回、差异、恢复点与撤销；全Word保真/原型完整损失弹窗未完成,synthetic-roundtrip.docx / release-wpf.trx,NOT_RUN
+14_export_losses_1366.png,OPEN,基础DOCX图片/表格/正文导回、差异、恢复点与撤销；全Word保真/原型完整损失弹窗未完成,synthetic-roundtrip.docx / release-wpf.trx,NOT_RUN
+14_export_losses_1920.png,OPEN,基础DOCX图片/表格/正文导回、差异、恢复点与撤销；全Word保真/原型完整损失弹窗未完成,synthetic-roundtrip.docx / release-wpf.trx,NOT_RUN
+15_import_graded_1366.png,OPEN,基础DOCX图片/表格/正文导回、差异、恢复点与撤销；全Word保真/原型完整损失弹窗未完成,synthetic-roundtrip.docx / release-wpf.trx,NOT_RUN
+15_import_graded_1920.png,OPEN,基础DOCX图片/表格/正文导回、差异、恢复点与撤销；全Word保真/原型完整损失弹窗未完成,synthetic-roundtrip.docx / release-wpf.trx,NOT_RUN
+16_switch_1366.png,OPEN,同文档模式切换和失败保存门禁已回归；原型弹窗像素对齐仍OPEN,release-wpf.trx,NOT_RUN
+16_switch_1920.png,OPEN,同文档模式切换和失败保存门禁已回归；原型弹窗像素对齐仍OPEN,release-wpf.trx,NOT_RUN
+17_switch_fail_1366.png,OPEN,同文档模式切换和失败保存门禁已回归；原型弹窗像素对齐仍OPEN,release-wpf.trx,NOT_RUN
+17_switch_fail_1920.png,OPEN,同文档模式切换和失败保存门禁已回归；原型弹窗像素对齐仍OPEN,release-wpf.trx,NOT_RUN
+18_ext_change_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+18_ext_change_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+19_conflict_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+19_conflict_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+20_zoom125_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+20_zoom125_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+21_zoom150_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+21_zoom150_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+22_docx_matrix_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+22_docx_matrix_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+23_versions_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+23_versions_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+30_import_sync_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+30_import_sync_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+31_sync_diff_1366.png,OPEN,基础DOCX图片/表格/正文导回、差异、恢复点与撤销；全Word保真/原型完整损失弹窗未完成,synthetic-roundtrip.docx / release-wpf.trx,NOT_RUN
+31_sync_diff_1920.png,OPEN,基础DOCX图片/表格/正文导回、差异、恢复点与撤销；全Word保真/原型完整损失弹窗未完成,synthetic-roundtrip.docx / release-wpf.trx,NOT_RUN
+32_synced_1366.png,OPEN,基础DOCX图片/表格/正文导回、差异、恢复点与撤销；全Word保真/原型完整损失弹窗未完成,synthetic-roundtrip.docx / release-wpf.trx,NOT_RUN
+32_synced_1920.png,OPEN,基础DOCX图片/表格/正文导回、差异、恢复点与撤销；全Word保真/原型完整损失弹窗未完成,synthetic-roundtrip.docx / release-wpf.trx,NOT_RUN
+33_conflict_copy_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+33_conflict_copy_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+34_merge_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+34_merge_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+35_versions_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+35_versions_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+36_comment_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+36_comment_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+37_track_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+37_track_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+38_toc_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+38_toc_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+39_section_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+39_section_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+40_hf_first_1366.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+40_hf_first_1920.png,OPEN,继承r5未关闭项：未在本批实现/批准此完整Word、协作、版本或弹窗能力；不得用原型截图充当产品证据,prior planning-r5-ui SECTION_STATUS / MANUAL_ACCEPTANCE,NOT_RUN
+41_export_lossless_1366.png,OPEN,基础DOCX图片/表格/正文导回、差异、恢复点与撤销；全Word保真/原型完整损失弹窗未完成,synthetic-roundtrip.docx / release-wpf.trx,NOT_RUN
+41_export_lossless_1920.png,OPEN,基础DOCX图片/表格/正文导回、差异、恢复点与撤销；全Word保真/原型完整损失弹窗未完成,synthetic-roundtrip.docx / release-wpf.trx,NOT_RUN

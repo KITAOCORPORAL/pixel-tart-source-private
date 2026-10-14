@@ -1,0 +1,149 @@
+{
+  "sourceCommit": "526490439dfc4cad26b98627f6b7cbbfd7290c8e",
+  "capture": "RenderTargetBitmap",
+  "dpi": 96,
+  "nativeInput": "NOT_RUN",
+  "fullShell": {
+    "files": [
+      "13-production-shell-offscreen.png",
+      "14-production-shell-narrow-offscreen.png"
+    ],
+    "xaml": "production MainWindow",
+    "dataContext": "synthetic ShellFixtureContext",
+    "windowHandle": "0",
+    "ShowCalled": false,
+    "notClaimed": "running production MainViewModel / desktop screenshot"
+  },
+  "images": [
+    {
+      "path": "offscreen/01-overview-wide.png",
+      "bytes": 205453,
+      "sha256": "b6e5ecdb6169029c2a9513858fe46133f1804b9f7aa73eb2afcd1f1950eda14b"
+    },
+    {
+      "path": "offscreen/02-overview-narrow.png",
+      "bytes": 132935,
+      "sha256": "841a639f42d326668f65170d6e3136b0cb86cfe17690468d7f9d3d30c49d116b"
+    },
+    {
+      "path": "offscreen/03-shots-wide.png",
+      "bytes": 232324,
+      "sha256": "19a552bafe0cb0731d941147f4c37ed16dfb02283e0a9c8ad72675aef81ab116"
+    },
+    {
+      "path": "offscreen/04-shots-narrow.png",
+      "bytes": 120182,
+      "sha256": "ff26c3874a981c3e0993c2290eb0a9b8cdef0c222f59e8f207cf2480454c4faa"
+    },
+    {
+      "path": "offscreen/05-shots-horizontal-end.png",
+      "bytes": 113543,
+      "sha256": "b0357cacd5b6951ecd2eb5eed4715805a37dcbc64a9a98d78b1a34365d085f1c"
+    },
+    {
+      "path": "offscreen/06-inspector-drawer.png",
+      "bytes": 106207,
+      "sha256": "b511fb7ecdc0114f7e979ca4c00a87a4a50d034fc84fdf5c578a3dcd89c04474"
+    },
+    {
+      "path": "offscreen/07-advanced-wide.png",
+      "bytes": 234958,
+      "sha256": "ff6a74e63406c332505fe624f21f8ed7af3137a6f6f1acdb51632948c3022ef6"
+    },
+    {
+      "path": "offscreen/08-advanced-narrow.png",
+      "bytes": 109542,
+      "sha256": "997deea19cc57d11ae42c101835a53e00c96e37a23a39e4c59c9b592baeb3b4f"
+    },
+    {
+      "path": "offscreen/09-zoom150-edit-position.png",
+      "bytes": 361348,
+      "sha256": "53fad336b9cf6546271328fd9e7f56ad84f005b70beceb5e3b26814ae627af58"
+    },
+    {
+      "path": "offscreen/10-paged-preview-first.png",
+      "bytes": 33960,
+      "sha256": "fc0fa6cf21e88eff081b85593afdff776c1f9e795b49dde62b4bf5bfcb1e1c80"
+    },
+    {
+      "path": "offscreen/11-paged-preview-third.png",
+      "bytes": 137347,
+      "sha256": "20a8d85f31ba9cd9621f8b1418876d3b85b37b7f97afdb9f353b3f36ad112e01"
+    },
+    {
+      "path": "offscreen/12-reopened-advanced.png",
+      "bytes": 210231,
+      "sha256": "83225e8b81051c96b21db22364b31c268fbc3f6a15af8f6d85159c6bf657cc97"
+    },
+    {
+      "path": "offscreen/13-production-shell-offscreen.png",
+      "bytes": 218087,
+      "sha256": "51bbd1766007c93a820c06b32228df94793ecad196457b50aa28eab54919635e"
+    },
+    {
+      "path": "offscreen/14-production-shell-narrow-offscreen.png",
+      "bytes": 195979,
+      "sha256": "c760004d7b0c419146052c2e77ac82eb5ea03c0008214f5c865d2dbba8a3cde5"
+    },
+    {
+      "path": "offscreen/resource-人员-narrow.png",
+      "bytes": 64957,
+      "sha256": "212dbe54c2bce55aa5f4ec3c283abf8a8124615bb1e45b96083f019c98283b20"
+    },
+    {
+      "path": "offscreen/resource-人员-wide.png",
+      "bytes": 121980,
+      "sha256": "9434668f520f42faab195c829edde3d6efa665f84a19c4ea2b284242d1198445"
+    },
+    {
+      "path": "offscreen/resource-当天时间表-narrow.png",
+      "bytes": 73204,
+      "sha256": "501c259ae453a5996b7d4d90fe59644eca5991b126f8636e38b353205d146f81"
+    },
+    {
+      "path": "offscreen/resource-当天时间表-wide.png",
+      "bytes": 136619,
+      "sha256": "a310464146f621ebbee397adcdcacc253255ef6e0b43b26f7e5fc31708ebe146"
+    },
+    {
+      "path": "offscreen/resource-服化道与道具-narrow.png",
+      "bytes": 65932,
+      "sha256": "008b1b583bd17d791decef3571aed88ea09715229ed11b8c1e10797a56a09596"
+    },
+    {
+      "path": "offscreen/resource-服化道与道具-wide.png",
+      "bytes": 123123,
+      "sha256": "94a4267a3eff2f8fa090ae9f2aa89f67bd9bda5528a02451f0cc3879585f095d"
+    },
+    {
+      "path": "offscreen/resource-灯位图-narrow.png",
+      "bytes": 92226,
+      "sha256": "5c021674c1004ae7ee9c13aa4e10454f38d451b345bb05c9f47fdcb04c3d3489"
+    },
+    {
+      "path": "offscreen/resource-灯位图-wide.png",
+      "bytes": 160450,
+      "sha256": "788fbc50b9f48fd601ccaa28d70ab4346203cf400be3878d746183e0989a215e"
+    },
+    {
+      "path": "offscreen/resource-设备-narrow.png",
+      "bytes": 68196,
+      "sha256": "8cd12518bcb70bb455b28e9103be98a9a302876347aec233e68e5c2f2f0b80a8"
+    },
+    {
+      "path": "offscreen/resource-设备-wide.png",
+      "bytes": 126451,
+      "sha256": "c7828bdacb659990b56e945d02e397f68bb82b7f05364bb42c8ba8cca50aaae7"
+    },
+    {
+      "path": "offscreen/resource-预算-narrow.png",
+      "bytes": 64776,
+      "sha256": "356adf0817c4c033d558921a7848d8c4f3aa2e856e2686b1630a945a48f1104c"
+    },
+    {
+      "path": "offscreen/resource-预算-wide.png",
+      "bytes": 123387,
+      "sha256": "c53dd28ddee271cc57d5f78344de0c22d46d3800ab9b4e14b279c504c405b22b"
+    }
+  ]
+}
