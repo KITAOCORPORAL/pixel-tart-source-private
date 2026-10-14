@@ -108,9 +108,27 @@ public partial class PlanningCenterView
     {if(_vm is null)return;await _vm.SaveUiLayoutAsync(_vm.UiLayout with{ListWidth=248,InspectorWidth=300});UpdateR5Layout();e.Handled=true;}
     private void AddInspectorGroup(string title,UIElement body,bool expanded=true)
     {
-        var expander=new Expander{Header=title,Content=body,IsExpanded=!(_vm?.UiLayout.CollapsedGroups??[]).Contains(title)&&expanded,Margin=new Thickness(0,0,0,14)};
+        var header=new DockPanel();var moveUp=new Button{Content="↑",ToolTip="上移分组",Padding=new Thickness(3),Margin=new Thickness(2)};var moveDown=new Button{Content="↓",ToolTip="下移分组",Padding=new Thickness(3),Margin=new Thickness(2)};DockPanel.SetDock(moveUp,Dock.Right);DockPanel.SetDock(moveDown,Dock.Right);header.Children.Add(moveDown);header.Children.Add(moveUp);header.Children.Add(Text(title,13,true));
+        var expander=new Expander{Header=header,Tag=title,Content=body,IsExpanded=!(_vm?.UiLayout.CollapsedGroups??[]).Contains(title)&&expanded,Margin=new Thickness(0,0,0,14)};
+        Point? dragStart=null;header.PreviewMouseLeftButtonDown+=(_,e)=>{if(e.OriginalSource is TextBlock)dragStart=e.GetPosition(header);};
+        header.PreviewMouseMove+=(_,e)=>{if(dragStart is not {} start||e.LeftButton!=MouseButtonState.Pressed||(e.GetPosition(header)-start).Length<4)return;dragStart=null;DragDrop.DoDragDrop(header,new DataObject("Kitao.PlanningInspectorGroup",expander),DragDropEffects.Move);};
+        header.PreviewMouseLeftButtonUp+=(_,_)=>dragStart=null;expander.AllowDrop=true;
+        expander.DragOver+=(_,e)=>{e.Effects=e.Data.GetDataPresent("Kitao.PlanningInspectorGroup")?DragDropEffects.Move:DragDropEffects.None;e.Handled=true;};
+        expander.Drop+=async(_,e)=>{if(e.Data.GetData("Kitao.PlanningInspectorGroup") is Expander source&&PlanningInspectorContent.Children.Contains(source)){var groups=PlanningInspectorContent.Children.OfType<Expander>().ToList();await MoveInspectorGroupAsync(source,groups.IndexOf(expander)-groups.IndexOf(source));}e.Handled=true;};
         async void Save(bool open){if(_vm is null||_rendering)return;var set=(_vm.UiLayout.CollapsedGroups??[]).ToHashSet();if(open)set.Remove(title);else set.Add(title);await _vm.SaveUiLayoutAsync(_vm.UiLayout with{CollapsedGroups=set.ToArray()});}
-        expander.Expanded+=(_,_)=>Save(true);expander.Collapsed+=(_,_)=>Save(false);PlanningInspectorContent.Children.Add(expander);
+        expander.Expanded+=(_,_)=>Save(true);expander.Collapsed+=(_,_)=>Save(false);
+        moveUp.Click+=async(_,e)=>{e.Handled=true;await MoveInspectorGroupAsync(expander,-1);};moveDown.Click+=async(_,e)=>{e.Handled=true;await MoveInspectorGroupAsync(expander,1);};
+        expander.PreviewKeyDown+=async(_,e)=>{if(Keyboard.Modifiers==ModifierKeys.Alt&&e.Key is Key.Up or Key.Down){e.Handled=true;await MoveInspectorGroupAsync(expander,e.Key==Key.Up?-1:1);}};
+        var order=_vm?.UiLayout.InspectorGroupOrder??[];var rank=Array.IndexOf(order,title);var index=PlanningInspectorContent.Children.Count;
+        if(rank>=0){for(var i=0;i<PlanningInspectorContent.Children.Count;i++)if(PlanningInspectorContent.Children[i] is Expander other){var otherRank=Array.IndexOf(order,other.Tag?.ToString()??"");if(otherRank<0||otherRank>rank){index=i;break;}}}
+        PlanningInspectorContent.Children.Insert(index,expander);
+    }
+    internal async Task<bool> MoveInspectorGroupAsync(Expander group,int delta)
+    {
+        if(_vm is null)return false;var groups=PlanningInspectorContent.Children.OfType<Expander>().ToList();var index=groups.IndexOf(group);var next=Math.Clamp(index+delta,0,groups.Count-1);if(index<0||index==next)return false;
+        groups.RemoveAt(index);groups.Insert(next,group);var titles=groups.Select(g=>g.Tag?.ToString()??"").ToArray();
+        if(!await _vm.SaveUiLayoutAsync(_vm.UiLayout with{InspectorGroupOrder=titles}))return false;
+        foreach(var item in groups)PlanningInspectorContent.Children.Remove(item);for(var i=0;i<groups.Count;i++)PlanningInspectorContent.Children.Insert(i,groups[i]);group.Focus();return true;
     }
     private void RenderR5Inspector()
     {

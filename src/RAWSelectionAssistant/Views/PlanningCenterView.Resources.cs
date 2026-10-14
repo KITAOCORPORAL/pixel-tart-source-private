@@ -46,11 +46,10 @@ public partial class PlanningCenterView
         }
         if (page == "灯位图")
         {
-            var canvas = new Canvas { Height=360, Background=Brush("SurfaceSecondaryBrush"), ClipToBounds=true };
+            var owner=_vm;var project=owner.ProjectId;
+            var canvas=new PlanningLightDiagram(owner.ResourceCatalog.Items.OfType<PlanningLight>(),async light=>owner.ProjectId==project&&await owner.SaveResourceAsync(light),EditPlanningResource);
             AutomationProperties.SetName(canvas,"灯位俯视图");
-            canvas.SizeChanged += (_,_) => DrawPlanningLights(canvas);
-            canvas.MouseLeftButtonDown += (_,e) => { if(e.Source != canvas)return; var pt=e.GetPosition(canvas); EditPlanningResource(new PlanningLight { X=Math.Clamp(pt.X/Math.Max(1,canvas.ActualWidth),0,1),Y=Math.Clamp(pt.Y/360,0,1) }); };
-            DocumentContent.Children.Add(Text("点击空白放置灯具；点击灯具编辑位置、方向、功率与修饰器。",12));DocumentContent.Children.Add(canvas);
+            DocumentContent.Children.Add(Text("拖动灯具松手保存，Esc 取消；0.5 m 吸附。标尺为 10×10 m 示意，不代表场地实测尺寸。",12));DocumentContent.Children.Add(canvas);
         }
         RenderR5ResourceTable(type);
         if(page=="灯位图") { Heading(DocumentContent,"灯光参考与已有画布快照"); foreach(var reference in ReferencesFor("灯光图")) DocumentContent.Children.Add(ImageTile(reference,180,true)); foreach(var revision in _vm.DocumentCanvasRevisions)DocumentContent.Children.Add(Text($"画布版本 {revision.RevisionId} · {revision.CapturedAt}",12)); }
