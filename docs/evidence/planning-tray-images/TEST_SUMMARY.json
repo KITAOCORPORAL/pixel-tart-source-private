@@ -1,0 +1,48 @@
+{
+  "source": "6224754c25cb1fabcb1411b7f09315fe04e9afc3",
+  "status": "REVIEW_BUILD_WITH_OPEN_GATES",
+  "suites": {
+    "final-full-core": {
+      "strictStatus": "FAILED",
+      "counts": {
+        "Passed": 1682,
+        "NotExecuted": 7
+      },
+      "selected": 1689
+    },
+    "final-full-wpf": {
+      "strictStatus": "FAILED",
+      "counts": {
+        "Passed": 1599,
+        "NotExecuted": 23
+      },
+      "selected": 1622
+    },
+    "final-component-core": {
+      "strictStatus": "FAILED",
+      "counts": {
+        "Passed": 1683,
+        "NotExecuted": 6
+      },
+      "selected": 1689
+    },
+    "final-component-wpf": {
+      "strictStatus": "PASSED",
+      "counts": {
+        "Passed": 27
+      },
+      "selected": 27
+    },
+    "final-component-identity": {
+      "strictStatus": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "selected": 1
+    }
+  },
+  "Windows": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "WPS": "NOT_RUN",
+  "EXEStarted": false
+}

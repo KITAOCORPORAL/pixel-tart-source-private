@@ -1,0 +1,290 @@
+{
+  "root": "D:\\AI AGENT\\kitao-planning-tray-images-20261014\\artifacts\\tray\\final-component-wpf\\run-20261014-190052-3fa2a206",
+  "assembly": "D:\\AI AGENT\\kitao-planning-tray-images-20261014\\artifacts\\tray\\final-components\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "7ccafa73bb5d73203d6261204fbf22197b7b4cca95503beec198a68b7ee2f730",
+  "discovered": 1622,
+  "selected": 27,
+  "runs": [
+    {
+      "pid": 32060,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningDocxAtomicReplacementTests",
+      "directory": "D:\\AI AGENT\\kitao-planning-tray-images-20261014\\artifacts\\tray\\final-component-wpf\\run-20261014-190052-3fa2a206\\000-PlanningDocxAtomicReplacementTests",
+      "expected": 2,
+      "results": [
+        {
+          "id": "1054862f-d922-8237-85eb-11be03d4630f",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningDocxAtomicReplacementTests.ExistingDestinationWithDeleteSharingReaderCanBeReplaced",
+          "display": "ExistingDestinationWithDeleteSharingReaderCanBeReplaced",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1c7772f9-e67e-8502-ae4e-73a39894b7f1",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningDocxAtomicReplacementTests.LockedReadOnlyAndAclDeniedPreserveOriginalAndCleanTemporary",
+          "display": "LockedReadOnlyAndAclDeniedPreserveOriginalAndCleanTemporary",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 292,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningR7ContinuousTests",
+      "directory": "D:\\AI AGENT\\kitao-planning-tray-images-20261014\\artifacts\\tray\\final-component-wpf\\run-20261014-190052-3fa2a206\\001-PlanningR7ContinuousTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "11d7f5c4-7ff2-82d1-b4d1-5dd539be5122",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningR7ContinuousTests.TwentyFourShotsSearchPagesCancelFailUndoReopenAndDocx",
+          "display": "TwentyFourShotsSearchPagesCancelFailUndoReopenAndDocx",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 30352,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningR7PageContractTests",
+      "directory": "D:\\AI AGENT\\kitao-planning-tray-images-20261014\\artifacts\\tray\\final-component-wpf\\run-20261014-190052-3fa2a206\\002-PlanningR7PageContractTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "188d5765-c109-8603-b329-688ffb01c20d",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningR7PageContractTests.A4LetterAndA3LandscapeConvertActualSizeMarginsAndMessage",
+          "display": "A4LetterAndA3LandscapeConvertActualSizeMarginsAndMessage",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 2116,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningR7PageExtrasTests",
+      "directory": "D:\\AI AGENT\\kitao-planning-tray-images-20261014\\artifacts\\tray\\final-component-wpf\\run-20261014-190052-3fa2a206\\003-PlanningR7PageExtrasTests",
+      "expected": 3,
+      "results": [
+        {
+          "id": "1416a64d-3035-8feb-9ec8-aa62740d35ca",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningR7PageExtrasTests.HeaderFooterPersistenceUndoNativeFieldsAndPdfShareContract",
+          "display": "HeaderFooterPersistenceUndoNativeFieldsAndPdfShareContract",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "16b63992-d19b-8e10-826d-c0db5c44e255",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningR7PageExtrasTests.PrintPipelineSerializesSharedPaginatorToXps",
+          "display": "PrintPipelineSerializesSharedPaginatorToXps",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13401a04-d83e-85dc-95b3-e1436b9ba96a",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningR7PageExtrasTests.RepeatHeaderAllocatesSeparateRowsAndRejectsVerticalMerge",
+          "display": "RepeatHeaderAllocatesSeparateRowsAndRejectsVerticalMerge",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 37316,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningR7TableTests",
+      "directory": "D:\\AI AGENT\\kitao-planning-tray-images-20261014\\artifacts\\tray\\final-component-wpf\\run-20261014-190052-3fa2a206\\004-PlanningR7TableTests",
+      "expected": 2,
+      "results": [
+        {
+          "id": "161fbd74-2596-8a00-b16d-25a591dacb3a",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningR7TableTests.RectangleRejectSplitAndNativeMergeDocxRoundtrip",
+          "display": "RectangleRejectSplitAndNativeMergeDocxRoundtrip",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "150db8e9-c270-85b3-b691-c5e9fdee327d",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningR7TableTests.UnsupportedCellBlocksRejectBeforeReplacingExistingFile",
+          "display": "UnsupportedCellBlocksRejectBeforeReplacingExistingFile",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 4464,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests",
+      "directory": "D:\\AI AGENT\\kitao-planning-tray-images-20261014\\artifacts\\tray\\final-component-wpf\\run-20261014-190052-3fa2a206\\005-PlanningRichFlowTests",
+      "expected": 6,
+      "results": [
+        {
+          "id": "1d0a4a73-02cb-87ec-ae58-3628c236279e",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests.FailedImportRetainsNewDraftAndRecoveryThenRetryUndo",
+          "display": "FailedImportRetainsNewDraftAndRecoveryThenRetryUndo",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "16230649-f99b-8e00-a15b-68f4a440faa7",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests.RichSyntheticContinuousFlowAndOffscreenEvidence",
+          "display": "RichSyntheticContinuousFlowAndOffscreenEvidence",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1a6af4fa-b0ea-8e39-a4fd-64d4068b7a95",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests.RemovedStructureStaysRemovedAndStaleReviewCannotReplaceEdits",
+          "display": "RemovedStructureStaysRemovedAndStaleReviewCannotReplaceEdits",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "193042f1-d748-8f7b-8b98-2033ea453fba",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests.RerenderCapturesRichDraftBeforeRetiringEditor",
+          "display": "RerenderCapturesRichDraftBeforeRetiringEditor",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1ec02309-e4d5-81ef-abf4-fa666e40b25a",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests.ConcurrentRowAndInspectorChangesMergeOnlyEditedFields",
+          "display": "ConcurrentRowAndInspectorChangesMergeOnlyEditedFields",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1f691a59-968d-81f2-8b79-9168aed452aa",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests.RowCancelAndInvalidDraftRecoveryPreserveOtherFields",
+          "display": "RowCancelAndInvalidDraftRecoveryPreserveOtherFields",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 13676,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests",
+      "directory": "D:\\AI AGENT\\kitao-planning-tray-images-20261014\\artifacts\\tray\\final-component-wpf\\run-20261014-190052-3fa2a206\\006-PlanningTableContentTests",
+      "expected": 6,
+      "results": [
+        {
+          "id": "115bfe37-7366-80ac-a7df-930f9beb955f",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.NativeImagesAndListsRoundTripMergedCellsAndRtf",
+          "display": "NativeImagesAndListsRoundTripMergedCellsAndRtf",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "15e3c5d7-a5f2-8fb1-ad78-3d7396c7f88c",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.StoryboardImagesListsPaginatePrintPdfAndSaveReopen",
+          "display": "StoryboardImagesListsPaginatePrintPdfAndSaveReopen",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b655f0e-12e4-8f9a-8a76-11b29fbc7ab9",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.InsertImageUsesCellCaretUndoAndReopen",
+          "display": "InsertImageUsesCellCaretUndoAndReopen",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1790ab2a-8e5e-8e14-9e10-b905300d357b",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.CellListButtonsEditUndoAndVerticalMergeKeepsImagePixels",
+          "display": "CellListButtonsEditUndoAndVerticalMergeKeepsImagePixels",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "151b532c-f2bf-8afe-916e-2eb04c1f64e6",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.TooTallLaterRowAndNestedTableAreRejectedWithoutChangingDestination",
+          "display": "TooTallLaterRowAndNestedTableAreRejectedWithoutChangingDestination",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1c044297-d9d3-893a-8e35-8095001597dc",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.SharedCrossCellNumberingIsRejectedInsteadOfRestarted",
+          "display": "SharedCrossCellNumberingIsRejectedInsteadOfRestarted",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 34024,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests",
+      "directory": "D:\\AI AGENT\\kitao-planning-tray-images-20261014\\artifacts\\tray\\final-component-wpf\\run-20261014-190052-3fa2a206\\007-PlanningTrayImageTests",
+      "expected": 6,
+      "results": [
+        {
+          "id": "173cf378-69d3-8f84-b95d-89719207f492",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.RealResolverProjectCollectionPickerCancelAndImageEvidence",
+          "display": "RealResolverProjectCollectionPickerCancelAndImageEvidence",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13aa5cc3-2c3b-82a1-af3c-2f5676bb0de8",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.CellPlacementImageUndoRedoKeepsSidecarAndPosition",
+          "display": "CellPlacementImageUndoRedoKeepsSidecarAndPosition",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b65ff4d-adae-8d26-a025-b1a950d30a33",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.TrayCopySurvivesClearOfflineReopenAndDocxWithoutJsonImagePayload",
+          "display": "TrayCopySurvivesClearOfflineReopenAndDocxWithoutJsonImagePayload",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d571bd7-db9e-8b15-9606-e2bdfd96b61a",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.PickerMultiInsertAndExternalDocxCarryPicturesWithoutLibraryIdentity",
+          "display": "PickerMultiInsertAndExternalDocxCarryPicturesWithoutLibraryIdentity",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "140bbfe2-ae13-8f90-8e81-e08ea6ca9cad",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.SourceSwitchDuringResolveAndCopyWriteFailureDoNotMutateDocument",
+          "display": "SourceSwitchDuringResolveAndCopyWriteFailureDoNotMutateDocument",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "18049df2-c1d9-8ab5-b64a-95c342a26bc2",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.HashFailuresCreateNoCopyAndLockedSaveRetainsRecovery",
+          "display": "HashFailuresCreateNoCopyAndLockedSaveRetainsRecovery",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "counts": {
+    "Passed": 27
+  }
+}
