@@ -3,6 +3,8 @@ import json,collections,argparse,pathlib
 RELEASE_ID='RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests.ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence'
 def evaluate(summaries,policy,postpublish=False):
  rules={x['name']:x for x in policy['tests']};errors=[];open_gates=[];deferred=[];seen=set()
+ identity_passed=any(v['name']==RELEASE_ID and v['outcome']=='Passed' and not r.get('timeout') and r.get('exitCode')==0 and not r.get('errors') for s in summaries for r in s['runs'] for v in r['results'])
+ if postpublish and not identity_passed:errors.append('required actual release identity evidence missing')
  if len(rules)!=len(policy['tests']):errors.append('duplicate policy name')
  for summary in summaries:
   for run in summary['runs']:
@@ -16,6 +18,7 @@ def evaluate(summaries,policy,postpublish=False):
     if result['outcome']=='Passed':continue
     if result['outcome']!='NotExecuted':errors.append({'failed':name,'outcome':result['outcome']});continue
     if name==RELEASE_ID and not postpublish:deferred.append(name);continue
+    if name==RELEASE_ID and postpublish and identity_passed:continue # Separate actual-payload result satisfies deferred dependency; raw skip is unchanged.
     if rule['category']=='required_automatic':errors.append('required not executed: '+name)
     else:open_gates.append({'name':name,'classification':rule['category'],'reason':rule['reason'],'outcome':result['outcome']})
   if sum(len(r['results']) for r in summary['runs'])!=summary['selected']:errors.append('selected total mismatch')

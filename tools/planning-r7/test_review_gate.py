@@ -11,4 +11,9 @@ class Gate(unittest.TestCase):
   for field,value in [('exitCode',1),('timeout',True),('errors',['missing TRX']),('expected',2)]:
    s=self.summary();s['runs'][0][field]=value;self.assertEqual('BLOCKED',evaluate([s],p)['status'])
   self.assertEqual('BLOCKED',evaluate([self.summary('Failed')],p)['status'])
-if __name__=='__main__':unittest.main()
+ def test_postpublish_requires_actual_identity(self):
+  s=self.summary();s['runs'][0]['results'][0]['name']=RELEASE_ID;p={'tests':[{'name':RELEASE_ID,'category':'required_automatic','reason':'actual release required'}]}
+  self.assertEqual('BLOCKED',evaluate([s],p,True)['status'])
+  release=copy.deepcopy(s);release['runs'][0]['results'][0]['outcome']='Passed';release['runs'][0]['errors']=[]
+  self.assertEqual('REVIEW_BUILD_WITH_OPEN_GATES',evaluate([s,release],p,True)['status']);self.assertEqual('NotExecuted',s['runs'][0]['results'][0]['outcome'])
+if __name__=='__main__' :unittest.main()
