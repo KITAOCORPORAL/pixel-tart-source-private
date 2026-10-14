@@ -12992,6 +12992,36 @@
       "stage": "prepublish"
     },
     {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.CellListButtonsEditUndoAndVerticalMergeKeepsImagePixels",
+      "category": "required_automatic",
+      "reason": "New photography cell-content contract; must execute and pass.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.InsertImageUsesCellCaretUndoAndReopen",
+      "category": "required_automatic",
+      "reason": "New photography cell-content contract; must execute and pass.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.NativeImagesAndListsRoundTripMergedCellsAndRtf",
+      "category": "required_automatic",
+      "reason": "New photography cell-content contract; must execute and pass.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.StoryboardImagesListsPaginatePrintPdfAndSaveReopen",
+      "category": "required_automatic",
+      "reason": "New photography cell-content contract; must execute and pass.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.TooTallLaterRowAndNestedTableAreRejectedWithoutChangingDestination",
+      "category": "required_automatic",
+      "reason": "New photography cell-content contract; must execute and pass.",
+      "stage": "prepublish"
+    },
+    {
       "name": "RAWSelectionAssistant.WpfTests.PlanningWorkspaceLayoutTests.ContentModulesRetainChineseOrderAndAppendCustom",
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",

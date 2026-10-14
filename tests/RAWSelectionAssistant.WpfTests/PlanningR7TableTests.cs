@@ -26,7 +26,7 @@ public sealed class PlanningR7TableTests
  public Task UnsupportedCellBlocksRejectBeforeReplacingExistingFile()=>RunSta(async()=>
  {
   var path=Path.Combine(Path.GetTempPath(),Guid.NewGuid()+".docx");await File.WriteAllTextAsync(path,"original");
-  try{foreach(var block in new Block[]{new List(new ListItem(new Paragraph(new Run("列表")))),Make(1,1),new BlockUIContainer(new System.Windows.Controls.Image())})
+  try{foreach(var block in new Block[]{Make(1,1),new BlockUIContainer(new System.Windows.Controls.Image())})
    {var table=Make(1,1);table.RowGroups[0].Rows[0].Cells[0].Blocks.Add(block);Assert.Throws<NotSupportedException>(()=>PlanningDocxAdapter.Export(new FlowDocument(table),path));Assert.AreEqual("original",await File.ReadAllTextAsync(path));}
   }finally{File.Delete(path);}
  });

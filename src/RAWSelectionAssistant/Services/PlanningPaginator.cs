@@ -45,10 +45,20 @@ public sealed class PlanningPaginator : DocumentPaginator, IDocumentPaginatorSou
 }
 internal static class PlanningRepeatHeaders
 {
+ private static T Clone<T>(T value) where T:Block
+ {
+  // XamlPackage embeds bitmap payloads; plain XamlWriter cannot clone stream-backed images.
+  using var stream=new System.IO.MemoryStream();var holder=new FlowDocument();var originalParent=value.Parent;
+  BlockCollection? original=originalParent switch{FlowDocument d=>d.Blocks,TableCell c=>c.Blocks,ListItem i=>i.Blocks,Section section=>section.Blocks,_=>null};var next=value.NextBlock;
+  if(original is not null)original.Remove(value);holder.Blocks.Add(value);
+  try{new TextRange(holder.ContentStart,holder.ContentEnd).Save(stream,DataFormats.XamlPackage);}
+  finally{holder.Blocks.Remove(value);if(original is not null){if(next is not null)original.InsertBefore(next,value);else original.Add(value);}}
+  stream.Position=0;var restored=new FlowDocument();new TextRange(restored.ContentStart,restored.ContentEnd).Load(stream,DataFormats.XamlPackage);var result=(T)restored.Blocks.FirstBlock;restored.Blocks.Remove(result);return result;
+ }
  private static TableRow Copy(TableRow row)
  {
   var clone=new TableRow();foreach(var cell in row.Cells){var c=new TableCell{ColumnSpan=cell.ColumnSpan,RowSpan=cell.RowSpan,Padding=cell.Padding,BorderBrush=cell.BorderBrush,BorderThickness=cell.BorderThickness};
-   foreach(var block in cell.Blocks)c.Blocks.Add((Block)System.Windows.Markup.XamlReader.Parse(System.Windows.Markup.XamlWriter.Save(block)));clone.Cells.Add(c);}return clone;
+   foreach(var block in cell.Blocks.ToArray())c.Blocks.Add(Clone(block));clone.Cells.Add(c);}return clone;
  }
  private static Table TableLike(Table source){var t=new Table{CellSpacing=source.CellSpacing};foreach(var col in source.Columns)t.Columns.Add(new TableColumn{Width=col.Width});t.RowGroups.Add(new TableRowGroup());return t;}
  public static void Prepare(FlowDocument document,Table table,double availableHeight)
@@ -60,9 +70,10 @@ internal static class PlanningRepeatHeaders
   foreach(var row in rows.Skip(1))
   {
    var next=Copy(row);current.RowGroups[0].Rows.Add(next);
-   var probe=new FlowDocument{PageWidth=document.PageWidth,PageHeight=document.PageHeight,PagePadding=document.PagePadding,ColumnWidth=double.PositiveInfinity,FontFamily=document.FontFamily,FontSize=document.FontSize};
-   var copy=(Table)System.Windows.Markup.XamlReader.Parse(System.Windows.Markup.XamlWriter.Save(current));probe.Blocks.Add(copy);var paginator=((IDocumentPaginatorSource)probe).DocumentPaginator;paginator.PageSize=new Size(document.PageWidth,document.PageHeight-4);paginator.ComputePageCount();
-   if(paginator.PageCount>1){current.RowGroups[0].Rows.Remove(next);if(current.RowGroups[0].Rows.Count==1)throw new NotSupportedException("单行高于一页，不能安全重复表头；请缩短单元格内容。");chunks.Add(current);current=TableLike(table);current.RowGroups[0].Rows.Add(Copy(rows[0]));current.RowGroups[0].Rows.Add(next);}
+   var probe=new FlowDocument{PageWidth=document.PageWidth,PageHeight=document.PageHeight-24,PagePadding=document.PagePadding,ColumnWidth=double.PositiveInfinity,FontFamily=document.FontFamily,FontSize=document.FontSize};
+   var copy=Clone(current);probe.Blocks.Add(new Paragraph(new Run("")){Margin=new Thickness(0),FontSize=1,LineHeight=1});probe.Blocks.Add(copy);var paginator=((IDocumentPaginatorSource)probe).DocumentPaginator;paginator.PageSize=new Size(document.PageWidth,document.PageHeight-4);paginator.ComputePageCount();
+   if(paginator.PageCount>1){current.RowGroups[0].Rows.Remove(next);if(current.RowGroups[0].Rows.Count==1)throw new NotSupportedException("单行高于一页，不能安全重复表头；请缩短单元格内容。");chunks.Add(current);current=TableLike(table);current.RowGroups[0].Rows.Add(Copy(rows[0]));current.RowGroups[0].Rows.Add(next);
+    var single=new FlowDocument(Clone(current)){PageWidth=document.PageWidth,PageHeight=document.PageHeight-4,PagePadding=document.PagePadding,ColumnWidth=double.PositiveInfinity,FontFamily=document.FontFamily,FontSize=document.FontSize};var check=((IDocumentPaginatorSource)single).DocumentPaginator;check.PageSize=new Size(document.PageWidth,document.PageHeight-4);check.ComputePageCount();if(check.PageCount>1)throw new NotSupportedException("单行高于一页，不能安全重复表头；原件未修改。");}
   }
   chunks.Add(current);foreach(var chunk in chunks){document.Blocks.InsertBefore(table,new Paragraph(new Run("")){BreakPageBefore=true,Margin=new Thickness(0),FontSize=1,LineHeight=1});document.Blocks.InsertBefore(table,chunk);}document.Blocks.Remove(table);
  }

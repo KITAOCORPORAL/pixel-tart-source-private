@@ -34,7 +34,7 @@ public sealed partial class PlanningCenterViewModel
             if(marker!="KitaoShotTableV1:"+doc.ToString("D")){losses.Add("摄影分镜表属于另一文档，仅作为普通内容导入，不回写镜头。");continue;}
             if(blocks[i+1] is not Table table){losses.Add("分镜标记后缺少表格，不回写。");continue;}
             var rows=table.RowGroups.SelectMany(g=>g.Rows).ToArray();
-            string[] Cells(TableRow row)=>row.Cells.Select(c=>new TextRange(c.ContentStart,c.ContentEnd).Text.TrimEnd('\r','\n')).ToArray();
+            string[] Cells(TableRow row)=>row.Cells.Select(c=>new TextRange(c.ContentStart,c.ContentEnd).Text.Replace("\r\n","\n").TrimEnd('\r','\n')).ToArray();
             if(rows.Length==0||!Cells(rows[0]).SequenceEqual(new[]{"ShotId","名称","场景","人物动作"})){losses.Add("分镜表头已改变，不能安全回写。");continue;}
             foreach(var row in rows.Skip(1))
             {

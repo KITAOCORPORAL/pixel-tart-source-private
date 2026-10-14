@@ -130,7 +130,7 @@ public sealed class PlanningRichFlowTests
             cell.Descendants<W.Text>().First().Text="DOCX导回的合成镜头名称";package.MainDocumentPart.Document.Body.Elements<W.Paragraph>().First().Descendants<W.Text>().First().Text="DOCX导回正文标记";package.MainDocumentPart.Document.Save();
         }
         var review=f.Vm.PreviewPlanningDocxImport(path);Assert.HasCount(1,review.Differences);
-        Assert.IsTrue(PlanningDocxAdapter.Import(path).Document.Blocks.OfType<BlockUIContainer>().Any(b=>b.Child is Image),"DOCX image survives import");
+        Assert.IsTrue(PlanningTextSearch.Paragraphs(PlanningDocxAdapter.Import(path).Document.Blocks).SelectMany(p=>p.Inlines).OfType<InlineUIContainer>().Any(i=>i.Child is Image),"DOCX image survives inline import in original position");
         Assert.IsFalse(await f.Vm.ApplyPlanningDocxImportAsync(review,[f.Vm.Shots[0].ShotId],false));Assert.IsEmpty(Directory.GetFiles(Path.Combine(f.Root,"planning"),"*.docx-recovery-*.json"));
         Assert.IsTrue(await f.Vm.ApplyPlanningDocxImportAsync(review,[f.Vm.Shots[0].ShotId],true));StringAssert.Contains(f.Vm.DocumentBody,"DOCX导回正文标记");Assert.AreEqual("DOCX导回的合成镜头名称",f.Vm.Shots[0].Name);
         oldEditor.FlushPending();Assert.IsTrue(await f.Vm.FlushAsync());StringAssert.Contains(f.Vm.DocumentBody,"DOCX导回正文标记");
