@@ -18,7 +18,7 @@ public sealed partial class PlanningCenterViewModel
         SaveStatus = "已明确关联参考与成片；未修改素材归属";
     }
     public Func<Guid,Guid,Task>? RelocateAsset { get; set; }
-    public PlanningRichLayout? RichLayout => _document.Package?.RichLayout;
+    public PlanningRichLayout? RichLayout => PlanningImageStorage.BindDocument(_document,_planning.StorageRoot).Package?.RichLayout;
     public long EditorGeneration { get; private set; }
     public string? RichTextPackage => _document.Package?.RichTextPackageBase64;
     public void SaveRichText(string data, string plainText,PlanningRichLayout layout)
@@ -27,6 +27,7 @@ public sealed partial class PlanningCenterViewModel
         if(layout.Images.Any(i=>i.DocumentId!=PlanningDocumentId))throw new InvalidDataException("图片资源不属于当前策划文档。");
         if (_document.Package?.RichTextPackageBase64 == data && _document.Body == plainText
             && System.Text.Json.JsonSerializer.Serialize(_document.Package?.RichLayout) == System.Text.Json.JsonSerializer.Serialize(layout)) return;
+        layout=layout with{Images=layout.Images.Select(i=>PlanningImageStorage.PrepareForSave(i,_planning.StorageRoot)).ToArray()};
         UpdateDocument(_document with { Body=plainText, Package=(_document.Package ?? new PlanningDocumentPackage{ProjectId=project}) with {RichTextPackageBase64=data,RichLayout=layout} });
     }
     public IDialogService Dialogs => _dialogs;

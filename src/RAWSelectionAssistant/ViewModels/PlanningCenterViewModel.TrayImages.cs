@@ -9,9 +9,16 @@ public sealed record PlanningTrayChoice(InspirationTrayEntry Entry,string Collec
 {public string Label=>Collection+" · "+(Entry.OptionalNote??Entry.Reference.AssetId.ToString());}
 public sealed partial class PlanningCenterViewModel
 {
+ public PlanningImageInventory ListUnreferencedImageCopies()
+ {
+  var doc=PlanningDocumentId??throw new InvalidOperationException("请先打开策划。");
+  var memory=_planningUndo.Concat(_planningRedo).Where(s=>s.Project==ProjectId).SelectMany(s=>s.Document.Package?.RichLayout?.Images??[])
+    .Concat(DocumentImages).Where(i=>i.DocumentId==doc).Select(i=>i.DocumentImageId);
+  return PlanningImageInventoryScanner.Scan(_planning.StorageRoot,doc,memory);
+ }
  public Func<AssetLibraryStableReference,Task<AssetResolutionResult>>? ResolveTrayImage {get;set;}
  public IReadOnlyList<PlanningDocumentImage> DocumentImages=>RichLayout?.Images??[];
- public string DocumentImageDirectory=>ProjectId is Guid id?Path.Combine(Path.GetDirectoryName(_planning.DraftPath(id))!,"images",PlanningDocumentId!.Value.ToString("N")):throw new InvalidOperationException("请先打开策划。");
+ public string DocumentImageDirectory=>ProjectId is Guid id?PlanningImageStorage.DocumentDirectory(_planning.StorageRoot,PlanningDocumentId!.Value):throw new InvalidOperationException("请先打开策划。");
  public async Task<IReadOnlyList<PlanningTrayChoice>> ListTrayImagesAsync()
  {
   if(_inspiration is null)return [];await _inspiration.InitializeAsync();var list=new List<PlanningTrayChoice>();list.AddRange((await _inspiration.ListAsync()).Select(e=>new PlanningTrayChoice(e,"当前托盘")));

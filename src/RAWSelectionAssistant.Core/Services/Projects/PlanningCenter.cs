@@ -75,19 +75,21 @@ public sealed record PlanningProjectState(Guid ProjectId, Guid? BookingId = null
 
 public sealed class PlanningProjectStore(string directory)
 {
+    public string StorageRoot => Path.GetFullPath(directory);
     public bool Exists(Guid projectId) => File.Exists(FilePath(projectId));
     public Task UpdateDocumentAsync(Guid projectId, PlanningDocument document, PlanningSummary summary, CancellationToken token = default) =>
         UpdateAsync(projectId, state => state with { Document = PrepareDocument(document, state.Document?.Package, projectId), Summary = summary }, token);
-    private static PlanningDocument PrepareDocument(PlanningDocument document, PlanningDocumentPackage? existing, Guid projectId)
+    private PlanningDocument PrepareDocument(PlanningDocument document, PlanningDocumentPackage? existing, Guid projectId)
     {
         var migrated = (document with { Package = document.Package ?? existing }).EnsureIdentity(projectId);
-        return migrated with { Package = migrated.Package! with { Body = document.Body } };
+        return PlanningImageStorage.BindDocument(migrated with { Package = migrated.Package! with { Body = document.Body } },StorageRoot,saving:true);
     }
     public Task LinkBookingAsync(Guid projectId, Guid bookingId, CancellationToken token = default) =>
         UpdateAsync(projectId, state => state with { BookingId = bookingId }, token);
     public string DraftPath(Guid projectId) => FilePath(projectId) + ".draft";
     public async Task WriteDraftAsync(Guid projectId, PlanningDocument document, PlanningSummary summary, CancellationToken token = default, IReadOnlyList<ProjectShot>? shots = null)
     {
+        document=PlanningImageStorage.BindDocument(document,StorageRoot,saving:true);
         var path = DraftPath(projectId);
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         var temporary = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
@@ -107,7 +109,7 @@ public sealed class PlanningProjectStore(string directory)
         var draft = await JsonSerializer.DeserializeAsync<PlanningDocumentDraft>(stream, cancellationToken: token).ConfigureAwait(false);
         if (draft?.ProjectId != projectId) throw new InvalidDataException("Draft project identity mismatch.");
         if (draft.Shots?.Any(shot => shot.ProjectId != projectId) == true) throw new InvalidDataException("Draft shot project identity mismatch.");
-        return draft;
+        return draft with{Document=PlanningImageStorage.BindDocument(draft.Document,StorageRoot)};
     }
     public void ClearDraft(Guid projectId) { var path = DraftPath(projectId); if (File.Exists(path)) File.Delete(path); }
     private static readonly ConcurrentDictionary<string, SemaphoreSlim> Gates = new(StringComparer.OrdinalIgnoreCase);
@@ -129,13 +131,14 @@ public sealed class PlanningProjectStore(string directory)
         UpdateAsync(projectId, state => state with { ReferenceOutcomes = state.ReferenceOutcomes.Where(x => x.ReferenceId != relation.ReferenceId || x.LibraryId != relation.LibraryId || x.AssetId != relation.AssetId).Append(relation.Validate()).ToArray() }, token);
     public Task AddCaptureRelationAsync(ShotCaptureRelation relation, CancellationToken token = default) => UpdateAsync(relation.ProjectId, state => state with { CapturedAssets = state.CapturedAssets!.Append(relation).ToArray() }, token);
 
-    private static async Task<PlanningProjectState> ReadAsync(Guid projectId, string path, CancellationToken token)
+    private async Task<PlanningProjectState> ReadAsync(Guid projectId, string path, CancellationToken token)
     {
         if (!File.Exists(path)) return new PlanningProjectState(projectId).Normalize();
         await using var stream = File.OpenRead(path);
         var value = await JsonSerializer.DeserializeAsync<PlanningProjectState>(stream, cancellationToken: token).ConfigureAwait(false) ?? throw new InvalidDataException("Planning state is empty.");
         if (value.ProjectId != projectId) throw new InvalidDataException("Planning project identity does not match the file.");
-        return value.Normalize();
+        var normalized=value.Normalize();
+        return normalized.Document is null?normalized:normalized with{Document=PlanningImageStorage.BindDocument(normalized.Document,StorageRoot)};
     }
 
     private async Task UpdateAsync(Guid projectId, Func<PlanningProjectState, PlanningProjectState> update, CancellationToken token)
@@ -147,7 +150,7 @@ public sealed class PlanningProjectStore(string directory)
         {
             var current = await ReadAsync(projectId, path, token).ConfigureAwait(false);
             var next = update(current) with { Revision = current.Revision + 1, UpdatedAt = DateTimeOffset.UtcNow };
-            next = next.Normalize(); Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+            next = next.Normalize();if(next.Document is {} doc)next=next with{Document=PlanningImageStorage.BindDocument(doc,StorageRoot,saving:true)}; Directory.CreateDirectory(Path.GetDirectoryName(path)!);
             await using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
             { await JsonSerializer.SerializeAsync(stream, next, cancellationToken: token).ConfigureAwait(false); await stream.FlushAsync(token).ConfigureAwait(false); stream.Flush(true); }
             token.ThrowIfCancellationRequested(); PlanningMigrationBackup.PreserveLegacy(path, shots: false);

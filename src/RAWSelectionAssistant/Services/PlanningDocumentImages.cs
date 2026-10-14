@@ -42,14 +42,14 @@ public static class PlanningDocumentImages
  }
  public static Image Create(PlanningDocumentImage meta)
  {
-  meta.Validate();using var stream=File.OpenRead(meta.CopyPath);var hash=Convert.ToHexString(SHA256.HashData(stream));if(!hash.Equals(meta.CopyHash,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("文档图片副本哈希不符，停止读取。");stream.Position=0;var bitmap=new BitmapImage();bitmap.BeginInit();bitmap.CacheOption=BitmapCacheOption.OnLoad;bitmap.StreamSource=stream;bitmap.EndInit();bitmap.Freeze();return new Image{Source=bitmap,Width=meta.Width,Height=meta.Height,Stretch=Stretch.Uniform,Tag=meta,ToolTip=meta.Title+"\n"+meta.Caption};
+  meta.Validate();using var stream=File.OpenRead(PlanningImageStorage.Resolve(meta));var hash=Convert.ToHexString(SHA256.HashData(stream));if(!hash.Equals(meta.CopyHash,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException($"文档图片 {meta.DocumentImageId}（{meta.Title}）副本哈希不符，停止读取。");stream.Position=0;var bitmap=new BitmapImage();bitmap.BeginInit();bitmap.CacheOption=BitmapCacheOption.OnLoad;bitmap.StreamSource=stream;bitmap.EndInit();bitmap.Freeze();return new Image{Source=bitmap,Width=meta.Width,Height=meta.Height,Stretch=Stretch.Uniform,Tag=meta,ToolTip=meta.Title+"\n"+meta.Caption};
  }
  public static PlanningDocumentImage Copy(string directory,Guid document,byte[] bytes,AssetLibraryStableReference? source,string placement,string title,string caption,int order,Guid? shot=null)
  {
   var sourceHash=Convert.ToHexString(SHA256.HashData(bytes));if(source is not null&&!sourceHash.Equals(source.ContentHash,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("Changed：素材内容哈希不符，未插入。");
   using var input=new MemoryStream(bytes);var bitmap=new BitmapImage();bitmap.BeginInit();bitmap.CacheOption=BitmapCacheOption.OnLoad;bitmap.StreamSource=input;bitmap.EndInit();bitmap.Freeze();
-  var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(bitmap));using var output=new MemoryStream();encoder.Save(output);var copy=output.ToArray();var hash=Convert.ToHexString(SHA256.HashData(copy));Directory.CreateDirectory(directory);var id=Guid.NewGuid();var path=Path.Combine(directory,id.ToString("N")+".png");var temp=path+".tmp";
+  var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(bitmap));using var output=new MemoryStream();encoder.Save(output);var copy=output.ToArray();var hash=Convert.ToHexString(SHA256.HashData(copy));var fullDirectory=Path.GetFullPath(directory);var parent=Directory.GetParent(fullDirectory);if(parent?.Name!="images"||Path.GetFileName(fullDirectory)!=document.ToString("N"))throw new InvalidDataException("图片副本目录必须为根/images/DocumentId。");var root=parent.Parent!.FullName;PlanningImageStorage.RejectLinks(root,fullDirectory);Directory.CreateDirectory(fullDirectory);var id=Guid.NewGuid();var path=Path.Combine(fullDirectory,id.ToString("N")+".png");var temp=path+".tmp";
   try{using(var file=new FileStream(temp,FileMode.CreateNew,FileAccess.Write,FileShare.None)){file.Write(copy);file.Flush(true);}File.Move(temp,path);}finally{if(File.Exists(temp))File.Delete(temp);}
-  var width=placement=="光标"?160d:360d;return new(id,document,source,path,hash,placement,title,caption,width,width*bitmap.PixelHeight/bitmap.PixelWidth,order,shot);
+  var width=placement=="光标"?160d:360d;return new PlanningDocumentImage(id,document,source,PlanningImageStorage.RelativePath(document,id),hash,placement,title,caption,width,width*bitmap.PixelHeight/bitmap.PixelWidth,order,shot){StorageRoot=root};
  }
 }

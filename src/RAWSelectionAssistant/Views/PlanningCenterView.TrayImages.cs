@@ -32,12 +32,12 @@ public partial class PlanningCenterView
    var prepared=new List<PlanningDocumentImage>();var failures=new List<string>();
    foreach(var choice in selected){try{prepared.Add(await owner.PrepareTrayImageAsync(choice,where,where=="指定镜头"?shot:null));}catch(Exception e){failures.Add(choice.Label+"："+e.Message);}}
    busy=false;
-   if(pickerVersion!=_trayPickerVersion||!active||owner.ProjectId!=project||owner.EditorGeneration!=generation||revision!=_documentRenderRevision||!ReferenceEquals(_vm,owner)||ModalOverlay.Visibility!=Visibility.Visible){foreach(var p in prepared)System.IO.File.Delete(p.CopyPath);return;}
+   if(pickerVersion!=_trayPickerVersion||!active||owner.ProjectId!=project||owner.EditorGeneration!=generation||revision!=_documentRenderRevision||!ReferenceEquals(_vm,owner)||ModalOverlay.Visibility!=Visibility.Visible){foreach(var p in prepared)System.IO.File.Delete(PlanningImageStorage.Resolve(p));return;}
    var saved=true;
    if(prepared.Count>0)
    {
     try{if(rich is not null){rich.InsertOwnedImages(prepared,caret!);saved=await owner.FlushAsync();}else {saved=await owner.InsertSimpleImagesAsync(prepared);}}
-    finally{foreach(var copy in prepared)if(!owner.DocumentImages.Any(i=>i.DocumentImageId==copy.DocumentImageId)&&System.IO.File.Exists(copy.CopyPath))System.IO.File.Delete(copy.CopyPath);}
+    finally{foreach(var copy in prepared)if(!owner.DocumentImages.Any(i=>i.DocumentImageId==copy.DocumentImageId)&&System.IO.File.Exists(PlanningImageStorage.Resolve(copy)))System.IO.File.Delete(PlanningImageStorage.Resolve(copy));}
    }
    if(!saved)failures.Add(owner.SaveStatus+"；图片副本和恢复草稿已保留，使用保存/重试，不要重复插入。");
    status.Text=string.Join("\n",failures);if(failures.Count==0){active=false;ModalOverlay.Visibility=Visibility.Collapsed;Render();}

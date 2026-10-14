@@ -83,8 +83,8 @@ public sealed partial class PlanningCenterViewModel
                 }catch(Exception e) when(e is JsonException or KeyNotFoundException or FormatException or InvalidOperationException){/* Invalid metadata cannot confer source identity. */}
             }
             var copy=PlanningDocumentImages.Copy(DocumentImageDirectory,review.DocumentId,bytes.ToArray(),null,placement,title,caption,0,shot);
-            createdCopies.Add(copy.CopyPath);
-            if(existing is not null&&existing.CopyHash.Equals(copy.CopyHash,StringComparison.OrdinalIgnoreCase)&&adoptedIds.Add(existing.DocumentImageId))copy=copy with{DocumentImageId=existing.DocumentImageId,Source=existing.Source};
+            createdCopies.Add(PlanningImageStorage.Resolve(copy));
+            if(existing is not null&&existing.CopyHash.Equals(copy.CopyHash,StringComparison.OrdinalIgnoreCase)&&adoptedIds.Add(existing.DocumentImageId))copy=existing with{Title=title,Caption=caption};
             image.Tag=copy with{Width=double.IsFinite(image.Width)?image.Width:copy.Width,Height=double.IsFinite(image.Height)?image.Height:copy.Height};
         }
         }
@@ -103,3 +103,4 @@ public sealed partial class PlanningCenterViewModel
         return saved;
     }
 }
+
