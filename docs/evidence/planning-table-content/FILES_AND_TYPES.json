@@ -1,0 +1,67 @@
+[
+  {
+    "path": "docs/evidence/planning-table-content/CLOSURE_REVIEW_FILES.json",
+    "type": "evidence",
+    "sha256": "5a0276882dad8b83355ae0b6866f8862cfce084e1564eba7251b84f34b9c73f5"
+  },
+  {
+    "path": "docs/evidence/planning-table-content/CLOSURE_REVIEW_IDENTITY.json",
+    "type": "evidence",
+    "sha256": "340e7c3d3e2a174f648314d0cb9c507a0958107d182b6ef77e711bb2912117be"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningDocxAdapter.cs",
+    "type": "source",
+    "sha256": "64f049a6afcbf57f8d22d3e53938ccf1d8e9c91c7b79922be55b6e476e6eaa54"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningPaginator.cs",
+    "type": "source",
+    "sha256": "5489cee3e6d4dfd7d51c58505d536f56f2baddb80ccb500b9fbd5504254df723"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Docx.cs",
+    "type": "source",
+    "sha256": "04e47bf5c9b6a1827dad9d27c308d4cdcb06b8193dc460346344f9a7c89e7605"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningRichEditor.TableContent.cs",
+    "type": "source",
+    "sha256": "81e7eb082862cb8a114da7b773145c5f6c7fae526bba457642b54789a3396426"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningRichEditor.cs",
+    "type": "source",
+    "sha256": "9f70568af89611f193db32cd2a4a22796395e5094ecd97e21f6e01df0ba92681"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningR7TableTests.cs",
+    "type": "test",
+    "sha256": "c42b3036882490b7851736e07b5af4abe40238d3632fefec7983b301c8bf1aad"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningRichFlowTests.cs",
+    "type": "test",
+    "sha256": "8fcff93eaa897793aab47db901b1b7e7b46ee840e441a784c5e7de8adaca8240"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningTableContentTests.cs",
+    "type": "test",
+    "sha256": "2f6b2294a90c3cd089b9444618b0eda5cceb92044a686451838ecaa9def116cf"
+  },
+  {
+    "path": "tools/planning-r7/review-classification.json",
+    "type": "policy/tool",
+    "sha256": "bf6028041bb4852a91090f6c472f9a046f27bac637cc103e9bfdd8f96f8bb57a"
+  },
+  {
+    "path": "tools/planning-r7/review_gate.py",
+    "type": "policy/tool",
+    "sha256": "a6d578d34bb40719e27d6b173e937d132f017ae2ef083fc1e51d98605a5b4f5e"
+  },
+  {
+    "path": "tools/planning-r7/test_review_gate.py",
+    "type": "policy/tool",
+    "sha256": "d9cec5d0981cc8e3afdba19b23ed1e013ec0301c8bffb1706ae2184ea49be618"
+  }
+]

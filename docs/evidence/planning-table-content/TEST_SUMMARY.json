@@ -1,0 +1,62 @@
+{
+  "productSource": "355ecbe4da09d921ef67ead8cffc05cf28bc1459",
+  "reviewStatus": "REVIEW_BUILD_WITH_OPEN_GATES",
+  "strictResults": {
+    "final-full-core": {
+      "status": "FAILED",
+      "counts": {
+        "Passed": 1682,
+        "NotExecuted": 7
+      },
+      "selected": 1689,
+      "discovered": 1689
+    },
+    "final-full-wpf": {
+      "status": "FAILED",
+      "counts": {
+        "Passed": 1593,
+        "NotExecuted": 23
+      },
+      "selected": 1616,
+      "discovered": 1616
+    },
+    "final-component-core": {
+      "status": "FAILED",
+      "counts": {
+        "Passed": 1683,
+        "NotExecuted": 6
+      },
+      "selected": 1689,
+      "discovered": 1689
+    },
+    "final-component-wpf": {
+      "status": "PASSED",
+      "counts": {
+        "Passed": 32
+      },
+      "selected": 32,
+      "discovered": 1616
+    },
+    "final-identity": {
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "selected": 1,
+      "discovered": 1689
+    }
+  },
+  "actualReleaseIdentity": [
+    {
+      "id": "1c262ba3-4116-862d-aea7-d52ed9863bfa",
+      "name": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests.ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+      "display": "ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+      "outcome": "Passed",
+      "error": ""
+    }
+  ],
+  "Windows": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "WPS": "NOT_RUN",
+  "EXEStarted": false
+}
