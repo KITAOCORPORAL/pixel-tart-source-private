@@ -11,6 +11,8 @@ class Gate(unittest.TestCase):
   for field,value in [('exitCode',1),('timeout',True),('errors',['missing TRX']),('expected',2)]:
    s=self.summary();s['runs'][0][field]=value;self.assertEqual('BLOCKED',evaluate([s],p)['status'])
   self.assertEqual('BLOCKED',evaluate([self.summary('Failed')],p)['status'])
+ def test_missing_required_test_cannot_pass_subset(self):
+  p={'tests':[{'name':'Exact.Class.Test','category':'required_automatic','reason':'required'},{'name':'Exact.Class.Other','category':'required_automatic','reason':'required'}]};self.assertEqual('BLOCKED',evaluate([self.summary('Passed')],p)['status'])
  def test_postpublish_requires_actual_identity(self):
   s=self.summary();s['runs'][0]['results'][0]['name']=RELEASE_ID;p={'tests':[{'name':RELEASE_ID,'category':'required_automatic','reason':'actual release required'}]}
   self.assertEqual('BLOCKED',evaluate([s],p,True)['status'])

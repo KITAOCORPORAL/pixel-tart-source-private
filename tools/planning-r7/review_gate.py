@@ -22,6 +22,8 @@ def evaluate(summaries,policy,postpublish=False):
     if rule['category']=='required_automatic':errors.append('required not executed: '+name)
     else:open_gates.append({'name':name,'classification':rule['category'],'reason':rule['reason'],'outcome':result['outcome']})
   if sum(len(r['results']) for r in summary['runs'])!=summary['selected']:errors.append('selected total mismatch')
+ missing=set(rules)-seen
+ if missing:errors.append({'missingClassifiedTests':sorted(missing)})
  return {'status':'BLOCKED' if errors else 'REVIEW_BUILD_WITH_OPEN_GATES','errors':errors,'openGates':open_gates,'postpublishRequired':deferred,'tested':len(seen),'strictUnchanged':True,'manual':{'Windows':'NOT_RUN','physicalDpi':'NOT_RUN','WPS':'NOT_RUN'}}
 if __name__=='__main__':
  a=argparse.ArgumentParser();a.add_argument('--summary',nargs='+',required=True);a.add_argument('--policy',required=True);a.add_argument('--output',required=True);a.add_argument('--postpublish',action='store_true');args=a.parse_args()
