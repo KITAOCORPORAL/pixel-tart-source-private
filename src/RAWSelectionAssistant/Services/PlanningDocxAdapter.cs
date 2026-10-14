@@ -63,7 +63,25 @@ public static class PlanningDocxAdapter
                         }
                         WriteList(list,0);numbering.Numbering.Append(definition);numbering.Numbering.Append(new W.NumberingInstance(new W.AbstractNumId{Val=numberId}){NumberID=numberId});numbering.Numbering.Save();
                     }
-                    else if(block is Table table){var t=new W.Table(new W.TableProperties(),new W.TableGrid(Enumerable.Range(0,Math.Max(1,table.RowGroups.SelectMany(g=>g.Rows).Select(r=>r.Cells.Count).DefaultIfEmpty(1).Max())).Select(i=>new W.GridColumn{Width=(i<table.Columns.Count&&table.Columns[i].Width.IsAbsolute?(int)(table.Columns[i].Width.Value*15):2000).ToString()})));foreach(var group in table.RowGroups)foreach(var row in group.Rows){var r=new W.TableRow();foreach(var cell in row.Cells){if(cell.ColumnSpan!=1||cell.RowSpan!=1)throw new NotSupportedException("合并单元格尚未支持，未写入输出文件。");var c=new W.TableCell();var border=cell.BorderThickness.Left>0?W.BorderValues.Single:W.BorderValues.Nil;c.Append(new W.TableCellProperties(new W.TableCellBorders(new W.TopBorder{Val=border,Size=8},new W.LeftBorder{Val=border,Size=8},new W.BottomBorder{Val=border,Size=8},new W.RightBorder{Val=border,Size=8})));foreach(var child in cell.Blocks){if(child is not Paragraph cp)throw new NotSupportedException("嵌套表格尚未支持。");c.Append(Paragraph(cp));}r.Append(c);}t.Append(r);}body.Append(t);}
+                    else if(block is Table table)
+                    {
+                        var map=PlanningTableEditing.Map(table);var cols=map.Max(p=>p.Column+p.Cell.ColumnSpan);
+                        var t=new W.Table(new W.TableProperties(),new W.TableGrid(Enumerable.Range(0,cols).Select(i=>new W.GridColumn{Width=(i<table.Columns.Count&&table.Columns[i].Width.IsAbsolute?(int)(table.Columns[i].Width.Value*15):2000).ToString()})));
+                        for(var y=0;y<table.RowGroups[0].Rows.Count;y++)
+                        {
+                            var row=new W.TableRow();if(y==0&&(table.Tag as RAWSelectionAssistant.Core.Services.Projects.PlanningBlockSemantic)?.RepeatHeader==true)row.Append(new W.TableRowProperties(new W.TableHeader()));
+                            foreach(var pos in map.Where(pos=>pos.Row<=y&&pos.Row+pos.Cell.RowSpan>y).OrderBy(pos=>pos.Column))
+                            {
+                                var props=new W.TableCellProperties();if(pos.Cell.ColumnSpan>1)props.Append(new W.GridSpan{Val=pos.Cell.ColumnSpan});
+                                if(pos.Cell.RowSpan>1)props.Append(new W.VerticalMerge{Val=pos.Row==y?W.MergedCellValues.Restart:W.MergedCellValues.Continue});
+                                var c=new W.TableCell(props);
+                                if(pos.Row==y)foreach(var child in pos.Cell.Blocks){if(child is not Paragraph cp)throw new NotSupportedException("表内列表、图片块和嵌套表格当前不能导出；未写入目标，请保留原件。");c.Append(Paragraph(cp));}
+                                if(!c.Elements<W.Paragraph>().Any())c.Append(new W.Paragraph());row.Append(c);
+                            }
+                            t.Append(row);
+                        }
+                        body.Append(t);
+                    }
                 body.Append(new W.SectionProperties(new W.PageSize{Width=(uint)(double.IsFinite(document.PageWidth)?document.PageWidth*15:11906),Height=(uint)(double.IsFinite(document.PageHeight)?document.PageHeight*15:16838),Orient=document.PageWidth>document.PageHeight?W.PageOrientationValues.Landscape:W.PageOrientationValues.Portrait},new W.PageMargin{Left=(uint)(document.PagePadding.Left*15),Right=(uint)(document.PagePadding.Right*15),Top=(int)(document.PagePadding.Top*15),Bottom=(int)(document.PagePadding.Bottom*15),Header=0,Footer=0,Gutter=0}));main.Document.Save();
             }
             File.Move(temporary,path,true);
@@ -74,16 +92,16 @@ public static class PlanningDocxAdapter
     {
         using var package=WordprocessingDocument.Open(path,false);var body=package.MainDocumentPart?.Document?.Body??throw new InvalidDataException("DOCX 正文为空。");
         var losses=new List<string>();
-        if(body.Descendants<W.TableCell>().SelectMany(c=>c.Elements<W.Paragraph>()).Any(p=>p.ParagraphProperties?.NumberingProperties is not null))losses.Add("表格单元格内列表降为段落，编号结构未保留。");
+        if(body.Descendants<W.TableCell>().Any(c=>c.Descendants<W.Drawing>().Any()||c.Descendants<W.Table>().Any()||c.Descendants<W.NumberingProperties>().Any()))
+            throw new NotSupportedException("表内图片、列表或嵌套表格当前不能安全导入；未修改策划，请在原文件拆分后再导入。");
         if(body.Descendants<W.Hyperlink>().Any())losses.Add("超链接内容不在本次支持范围；请在原文档保留原件。");
-        if(body.Descendants<W.TableCell>().Any(c=>c.Descendants<W.Drawing>().Any()||c.Descendants<W.Table>().Any()))losses.Add("表格内图片或嵌套表格未导入。");
         if(body.Elements<W.Paragraph>().Any(p=>p.Descendants<W.Drawing>().Any()&&p.Elements<W.Run>().Any(r=>r.Elements<W.Text>().Any())))losses.Add("同段图文被拆分为图片块和文字段落。");
-        var supported=new HashSet<string>{"body","pStyle","pageBreakBefore","pgMar","tcBorders","top","left","bottom","right","br","p","pPr","jc","r","rPr","rFonts","b","i","sz","t","tbl","tr","tc","sectPr","pgSz","tblPr","tblGrid","gridCol","tcPr","tblW","u","color","numPr","ilvl","numId","drawing","inline","extent","docPr","graphic","graphicData","pic","nvPicPr","cNvPr","cNvPicPr","blipFill","blip","stretch","fillRect","spPr","xfrm","off","ext","prstGeom","avLst"};
+        var supported=new HashSet<string>{"gridSpan","vMerge","trPr","tblHeader","body","pStyle","pageBreakBefore","pgMar","tcBorders","top","left","bottom","right","br","p","pPr","jc","r","rPr","rFonts","b","i","sz","t","tbl","tr","tc","sectPr","pgSz","tblPr","tblGrid","gridCol","tcPr","tblW","u","color","numPr","ilvl","numId","drawing","inline","extent","docPr","graphic","graphicData","pic","nvPicPr","cNvPr","cNvPicPr","blipFill","blip","stretch","fillRect","spPr","xfrm","off","ext","prstGeom","avLst"};
         foreach(var name in body.Descendants().Select(x=>x.LocalName).Distinct().Where(x=>!supported.Contains(x)))losses.Add("未支持内容/属性："+name);
         if(package.MainDocumentPart!.HeaderParts.Any()||package.MainDocumentPart.FooterParts.Any())losses.Add("页眉/页脚未导入。");
         if(body.Descendants<W.SectionProperties>().Count()>1)losses.Add("多分节布局转换为单节 A4。");
         if(package.MainDocumentPart.StyleDefinitionsPart is not null)losses.Add("样式表继承尚未完整支持，仅导入直接字符格式。");
-        if(body.Descendants<W.TableProperties>().Any(x=>x.HasChildren)||body.Descendants<W.TableCellProperties>().Any(x=>x.ChildElements.Any(e=>e is not W.TableCellBorders)))losses.Add("表格样式、宽度和单元格属性不保证保真；仅保留基础行列内容。");
+        if(body.Descendants<W.TableProperties>().Any(x=>x.HasChildren)||body.Descendants<W.TableCellProperties>().Any(x=>x.ChildElements.Any(e=>e is not W.TableCellBorders && e is not W.GridSpan && e is not W.VerticalMerge)))losses.Add("表格样式、宽度和单元格属性不保证保真；仅保留基础行列内容。");
         var document=new FlowDocument();var section=body.Elements<W.SectionProperties>().LastOrDefault();
         var size=section?.GetFirstChild<W.PageSize>();var sourceWidth=(double)(size?.Width?.Value??11906);var sourceHeight=(double)(size?.Height?.Value??16838);
         if(sourceWidth<=0||sourceHeight<=0)throw new InvalidDataException("DOCX 页面尺寸无效，未导入。");
@@ -136,7 +154,30 @@ public static class PlanningDocxAdapter
                     else {listStack.Clear();currentNumber=null;document.Blocks.Add(paragraph);}
                 }
             }
-            else if(child is W.Table t){listStack.Clear();currentNumber=null;var table=new Table();foreach(var col in t.GetFirstChild<W.TableGrid>()?.Elements<W.GridColumn>()??[]){if(double.TryParse(col.Width?.Value,out var width))table.Columns.Add(new TableColumn{Width=new GridLength(width/15)});}var group=new TableRowGroup();table.RowGroups.Add(group);foreach(var row in t.Elements<W.TableRow>()){var r=new TableRow();group.Rows.Add(r);foreach(var cell in row.Elements<W.TableCell>()){var c=new TableCell();if(cell.TableCellProperties?.GetFirstChild<W.TableCellBorders>()?.TopBorder?.Val?.Value==W.BorderValues.Single){c.BorderBrush=Brushes.Gray;c.BorderThickness=new Thickness(1);}r.Cells.Add(c);foreach(var cellParagraph in cell.Elements<W.Paragraph>())c.Blocks.Add(Paragraph(cellParagraph));}}document.Blocks.Add(table);}
+            else if(child is W.Table t)
+            {
+                listStack.Clear();currentNumber=null;var table=new Table();var group=new TableRowGroup();table.RowGroups.Add(group);
+                foreach(var col in t.GetFirstChild<W.TableGrid>()?.Elements<W.GridColumn>()??[])if(double.TryParse(col.Width?.Value,out var cw))table.Columns.Add(new TableColumn{Width=new GridLength(cw/15)});
+                var active=new Dictionary<int,(TableCell Cell,int Width)>();var first=true;
+                foreach(var sourceRow in t.Elements<W.TableRow>())
+                {
+                    var row=new TableRow();group.Rows.Add(row);var column=0;var next=new Dictionary<int,(TableCell,int)>();
+                    if(first&&sourceRow.TableRowProperties?.GetFirstChild<W.TableHeader>() is not null)table.Tag=new RAWSelectionAssistant.Core.Services.Projects.PlanningBlockSemantic(0){RepeatHeader=true};first=false;
+                    foreach(var sourceCell in sourceRow.Elements<W.TableCell>())
+                    {
+                        var span=sourceCell.TableCellProperties?.GetFirstChild<W.GridSpan>()?.Val?.Value??1;if(span<1||span>1000)throw new InvalidDataException("无效合并列宽。");
+                        var merge=sourceCell.TableCellProperties?.GetFirstChild<W.VerticalMerge>();
+                        if(merge is not null&&merge.Val?.Value!=W.MergedCellValues.Restart)
+                        {if(!active.TryGetValue(column,out var above)||above.Width!=span)throw new InvalidDataException("垂直合并缺少匹配起点，未导入。");
+                         if(sourceCell.Descendants<W.Text>().Any(x=>!string.IsNullOrWhiteSpace(x.Text)))throw new InvalidDataException("合并延续格含额外内容，不能安全丢弃。");above.Cell.RowSpan++;next[column]=above;}
+                        else
+                        {var cell=new TableCell{ColumnSpan=span};foreach(var cp in sourceCell.Elements<W.Paragraph>())cell.Blocks.Add(Paragraph(cp));if(cell.Blocks.Count==0)cell.Blocks.Add(new Paragraph());row.Cells.Add(cell);if(merge is not null)next[column]=(cell,span);}
+                        column+=span;
+                    }
+                    active=next;
+                }
+                PlanningTableEditing.Map(table);document.Blocks.Add(table);
+            }
         return new(document,losses);
     }
 }

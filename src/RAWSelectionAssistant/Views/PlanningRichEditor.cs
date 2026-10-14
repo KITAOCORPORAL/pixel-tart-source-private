@@ -44,6 +44,11 @@ public sealed partial class PlanningRichEditor : DockPanel
         Add("撤销",_history.Undo);Add("重做",_history.Redo);
         Add("表格",()=>{_editor.BeginChange();try{var table=new Table();var group=new TableRowGroup();table.RowGroups.Add(group);for(var r=0;r<3;r++){var row=new TableRow();group.Rows.Add(row);for(var c=0;c<3;c++)row.Cells.Add(new TableCell(new Paragraph(new Run("单元格"))){BorderBrush=Brushes.Gray,BorderThickness=new Thickness(1),Padding=new Thickness(4)});}_editor.Document.Blocks.Add(table);}finally{_editor.EndChange();}});
         TableCell? Cell(){DependencyObject? item=_editor.CaretPosition.Parent;while(item is not null){if(item is TableCell c)return c;item=(item as FrameworkContentElement)?.Parent;}return null;}
+        Add("合并单元格",()=>{var cell=Cell();var table=PlanningTableEditing.TableOf(cell)??throw new InvalidDataException("请先选择表格单元格。");
+            var chosen=PlanningTableEditing.Map(table).Where(p=>_editor.Selection.Start.CompareTo(p.Cell.ContentEnd)<0&&_editor.Selection.End.CompareTo(p.Cell.ContentStart)>0).Select(p=>p.Cell).ToArray();
+            try{PlanningTableEditing.Merge(table,chosen);}catch(InvalidOperationException e){throw new InvalidDataException(e.Message,e);}});
+        Add("拆分单元格",()=>{if(Cell() is {} cell&&PlanningTableEditing.TableOf(cell) is {} table)PlanningTableEditing.Split(table,cell);});
+        Add("重复表头",()=>{if(PlanningTableEditing.TableOf(Cell()) is {} table){var semantic=table.Tag as PlanningBlockSemantic??new(0);table.Tag=semantic with{RepeatHeader=!semantic.RepeatHeader};}});
         Add("加行",()=>{if(Cell()?.Parent is TableRow row && row.Parent is TableRowGroup group){var added=new TableRow();foreach(var c in row.Cells)added.Cells.Add(new TableCell(new Paragraph(new Run(""))));group.Rows.Insert(group.Rows.IndexOf(row)+1,added);}});
         Add("删行",()=>{if(Cell()?.Parent is TableRow row && row.Parent is TableRowGroup group && group.Rows.Count>1)group.Rows.Remove(row);});
         Add("加列",()=>{if(Cell()?.Parent is TableRow row && row.Parent is TableRowGroup group)foreach(var r in group.Rows)r.Cells.Add(new TableCell(new Paragraph(new Run(""))));});

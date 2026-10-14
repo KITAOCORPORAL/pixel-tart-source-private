@@ -6,6 +6,7 @@ public sealed record PlanningPageLayout(double Width=794,double Height=1123,doub
 }
 public sealed record PlanningBlockSemantic(int BlockIndex,string Style="Body",bool PageBreakBefore=false,Guid? CanvasId=null,Guid? CanvasRevisionId=null)
 {
+    public bool RepeatHeader { get; init; }
     [System.Text.Json.Serialization.JsonExtensionData] public Dictionary<string, System.Text.Json.JsonElement>? Extensions { get; init; }
 }
 public sealed record PlanningRichLayout(PlanningPageLayout Page,IReadOnlyList<PlanningBlockSemantic> Blocks,IReadOnlyList<string> ImportLosses,int Version=1)
