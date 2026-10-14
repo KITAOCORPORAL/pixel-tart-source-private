@@ -1,0 +1,190 @@
+{
+  "status": "REVIEW_BUILD_WITH_OPEN_GATES",
+  "errors": [],
+  "openGates": [
+    {
+      "name": "RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses",
+      "classification": "conditional_hardware",
+      "reason": "No validated GPU compute device on this host.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "classification": "conditional_external_data",
+      "reason": "Authorized real spatial RAW evidence unavailable in task scope.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "classification": "manual_acceptance",
+      "reason": "Production resolution benchmark requires explicit bounded measurement opt-in. Separate controlled performance measurement acceptance remains OPEN; not a functional correctness exemption.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.ReferenceFilmPerformanceTests.FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "classification": "manual_acceptance",
+      "reason": "Local CPU benchmark evidence output and measurement run not authorized in this photography-table change. Separate controlled performance measurement acceptance remains OPEN; not a functional correctness exemption.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "classification": "conditional_external_data",
+      "reason": "Explicitly authorized real RAW corpus unavailable in task scope.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene",
+      "classification": "conditional_hardware",
+      "reason": "No validated GPU compute device on this host.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests.ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+      "classification": "conditional_external_data",
+      "reason": "Requires existing captured non-reparse P2 evidence packet, absent in isolated run.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+      "classification": "conditional_external_data",
+      "reason": "Requires explicit fresh 10128-asset performance fixture and measurement output.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+      "classification": "conditional_external_data",
+      "reason": "Requires authorized local RAW corpus.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately",
+      "classification": "manual_acceptance",
+      "reason": "Cold stage measurement session opt-in, not needed for table correctness. Separate controlled performance measurement acceptance remains OPEN; not a functional correctness exemption.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts",
+      "classification": "manual_acceptance",
+      "reason": "Requires explicit TIFF performance evidence run. Separate controlled performance measurement acceptance remains OPEN; not a functional correctness exemption.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.BatchElevenRealTests.BatchElevenAuthorizedRawMemoryAndColor",
+      "classification": "conditional_external_data",
+      "reason": "Requires authorized company RAW fixtures.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+      "classification": "conditional_external_data",
+      "reason": "Requires authorized local RAW corpus.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop",
+      "classification": "manual_acceptance",
+      "reason": "Separate visual keyframe collection gate; not claimed as current visual acceptance.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+      "classification": "conditional_external_data",
+      "reason": "Requires authorized company camera fixtures.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "classification": "conditional_external_data",
+      "reason": "Requires explicitly authorized real JPEG samples.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+      "classification": "manual_acceptance",
+      "reason": "Production peer/native-window evidence opt-in; not Windows acceptance in this task.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+      "classification": "conditional_external_data",
+      "reason": "Requires authorized batch06 camera corpus.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.RealAppStartupIntegrationTests.ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+      "classification": "manual_acceptance",
+      "reason": "Product startup session not authorized; no product EXE auto launch.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests.CompanyRealRawProductAcceptanceGate",
+      "classification": "conditional_external_data",
+      "reason": "Company real camera directory unavailable.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+      "classification": "manual_acceptance",
+      "reason": "Separate film visual review sheets not accepted in this task.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+      "classification": "manual_acceptance",
+      "reason": "Separate film-effect visual evidence collection remains open.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+      "classification": "manual_acceptance",
+      "reason": "Reference workspace visual/DPI evidence not photography-table acceptance.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference",
+      "classification": "conditional_external_data",
+      "reason": "Requires authorized Canon originals.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback",
+      "classification": "conditional_external_data",
+      "reason": "Requires authorized Sony and legacy-camera originals.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+      "classification": "manual_acceptance",
+      "reason": "Separate Studio visual evidence and review not approved by this table task.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet",
+      "classification": "manual_acceptance",
+      "reason": "Premium prototype visual review not table acceptance.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval",
+      "classification": "manual_acceptance",
+      "reason": "Visual baseline approval must not be supplied by automated run.",
+      "outcome": "NotExecuted"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.WholeAppVisualAcceptanceTests.ProductionApp_AllRoutes_RenderReviewInventory",
+      "classification": "manual_acceptance",
+      "reason": "Whole product startup/route visual acceptance not authorized.",
+      "outcome": "NotExecuted"
+    }
+  ],
+  "postpublishRequired": [
+    "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests.ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence"
+  ],
+  "tested": 2646,
+  "strictUnchanged": true,
+  "manual": {
+    "Windows": "NOT_RUN",
+    "physicalDpi": "NOT_RUN",
+    "WPS": "NOT_RUN"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "root": "N:\\pixart\\kitao-night-A-portability-20261014\\artifacts\\A-release-identity\\run-20261015-025214-31fe2e88",
+  "assembly": "N:\\pixart\\kitao-night-A-portability-20261014\\artifacts\\A-components\\core\\RAWSelectionAssistant.Tests.dll",
+  "assemblySha256": "e825afce7313005aa2c24d81b2090df6c0d67a5a5fdbed0120e1dc9abc73e9c5",
+  "discovered": 1693,
+  "selected": 1,
+  "runs": [
+    {
+      "pid": 29404,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests",
+      "directory": "N:\\pixart\\kitao-night-A-portability-20261014\\artifacts\\A-release-identity\\run-20261015-025214-31fe2e88\\000-Batch12ReleasedAssemblyTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "1c262ba3-4116-862d-aea7-d52ed9863bfa",
+          "name": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests.ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+          "display": "ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "counts": {
+    "Passed": 1
+  }
+}

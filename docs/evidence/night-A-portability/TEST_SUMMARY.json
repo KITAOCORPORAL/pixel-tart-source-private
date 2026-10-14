@@ -1,0 +1,46 @@
+{
+  "source": "ed1280f031ca8772a9bdda1b938c392ecccd31bf",
+  "suites": {
+    "A-source-core": {
+      "strictStatus": "FAILED",
+      "selected": 1693,
+      "counts": {
+        "Passed": 1686,
+        "NotExecuted": 7
+      }
+    },
+    "A-source-wpf": {
+      "strictStatus": "FAILED",
+      "selected": 1625,
+      "counts": {
+        "Passed": 1602,
+        "NotExecuted": 23
+      }
+    },
+    "A-release-core": {
+      "strictStatus": "FAILED",
+      "selected": 1693,
+      "counts": {
+        "Passed": 1687,
+        "NotExecuted": 6
+      }
+    },
+    "A-release-wpf": {
+      "strictStatus": "PASSED",
+      "selected": 28,
+      "counts": {
+        "Passed": 28
+      }
+    },
+    "A-release-identity": {
+      "strictStatus": "PASSED",
+      "selected": 1,
+      "counts": {
+        "Passed": 1
+      }
+    }
+  },
+  "reviewStatus": "REVIEW_BUILD_WITH_OPEN_GATES",
+  "gateErrors": [],
+  "uniqueOpenGates": 29
+}

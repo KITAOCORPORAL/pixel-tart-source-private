@@ -1,0 +1,248 @@
+[
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningCenter.cs",
+    "type": "production-source",
+    "bytes": 15044,
+    "sha256": "C76A7ED4C17B2C7A5F9FC75D7C3C06B0815E881FDEB3378BC897BCEA34CC7CC1"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningDocumentImage.cs",
+    "type": "production-source",
+    "bytes": 921,
+    "sha256": "19AA4DEFF4A12485021E164EAB7495D73BC682FF21531AFE46DAB0120E62EE99"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningImageInventory.cs",
+    "type": "production-source",
+    "bytes": 3637,
+    "sha256": "35820AB2774E5BC4B9302A6AFC8B2069BD8B67CFCDEEB273B9AA5605B635A10B"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningImageStorage.cs",
+    "type": "production-source",
+    "bytes": 6200,
+    "sha256": "D25A5C3F4DFDD708216696089D0AFB2ED2F745784963DD711C716FAD8EC9EE0A"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningDocumentImages.cs",
+    "type": "production-source",
+    "bytes": 6156,
+    "sha256": "D3F09A4D30A72F12738A4F5BDCB36780F966F2C9FF649F45CC676B467AE7EB84"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/RichDocumentHistory.cs",
+    "type": "production-source",
+    "bytes": 2519,
+    "sha256": "5E9AE350F7D79B3C71B6D8D177272CDBA6F1884BB2268808754EF8B8D471B8D4"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+    "type": "production-source",
+    "bytes": 22384,
+    "sha256": "F5D91BAB316A9F68EF573AD34F2CE25F2245C1EBF0B6B251E3F7119E07D092ED"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Docx.cs",
+    "type": "production-source",
+    "bytes": 9615,
+    "sha256": "0DBD0B675612CEA393930D77004F2F5AA557670FB6ADB1675D42E31D688D2C1C"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Overview.cs",
+    "type": "production-source",
+    "bytes": 9428,
+    "sha256": "62F4778FE93B2C99AC30A297941EBDB3B9BC64823D2BDB6092DD8D5B9C17226A"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Resources.cs",
+    "type": "production-source",
+    "bytes": 5039,
+    "sha256": "00860227765D90B50E3A670D24ED1A72887190BC5EBD1BF9F516B752830F16D7"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.TrayImages.cs",
+    "type": "production-source",
+    "bytes": 7160,
+    "sha256": "D2226F4A17C1104FA150541429542310EC8A8A1F72D416828AEC59C59F8146E0"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.TrayImages.cs",
+    "type": "production-source",
+    "bytes": 7557,
+    "sha256": "95B295C38AB24D45F9E9CD364F5E7A5E84EF96A9E7AA8A91AB83A52069A521D7"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+    "type": "production-source",
+    "bytes": 52993,
+    "sha256": "0940E335989F98BD8233DF43A80AFA98EAC66B45F09F560E7A13650C6FB0478A"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningRichEditor.cs",
+    "type": "production-source",
+    "bytes": 22596,
+    "sha256": "27329A7071D923455A64CCFEE4A35C89F05E9C4F649A78F393D4AE0574E6497F"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.Tests/PlanningImageStorageTests.cs",
+    "type": "test-source",
+    "bytes": 5024,
+    "sha256": "B87B4BA4DFA3C0611722EBFA09CFB9FE47020821A95ADBA7B161425D2EF14F1C"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningPortableImageTests.cs",
+    "type": "test-source",
+    "bytes": 13462,
+    "sha256": "6944C4AE6CB6BD9B7A4C4FB6601D8383AE3CDB19E081FAD1235F515CFDFF551A"
+  },
+  {
+    "path": "tools/planning-r7/review-classification.json",
+    "type": "required-policy",
+    "bytes": 755839,
+    "sha256": "9AF9DC8B15BC90BA0A70F7052CEFE8936FD74EBD24F73E097FBBE3A0D839CD00"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\A-release-core-discovery.json",
+    "type": "json",
+    "bytes": 753921,
+    "sha256": "7804A35AD012738E135ABE3FEAD00FB876A791F771EC2FCEABD95A5138305140"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\A-release-core-summary.json",
+    "type": "json",
+    "bytes": 572594,
+    "sha256": "50C69DF75DEE8BCA22FBA8C71CB1B322A3FAD0098B3C95A072EC206DE51229B5"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\A-release-identity-discovery.json",
+    "type": "json",
+    "bytes": 753921,
+    "sha256": "7804A35AD012738E135ABE3FEAD00FB876A791F771EC2FCEABD95A5138305140"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\A-release-identity-summary.json",
+    "type": "json",
+    "bytes": 1223,
+    "sha256": "4FCDC477B3377C36A1A2D62E93951EE554AE936C5F89FD5D76F86A2C4A4D0C86"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\A-release-wpf-discovery.json",
+    "type": "json",
+    "bytes": 780470,
+    "sha256": "544021DBB243FDF8783490CC8A53A48CAC577AB648919D477E346B5BBE304483"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\A-release-wpf-summary.json",
+    "type": "json",
+    "bytes": 12746,
+    "sha256": "B0646F4254A9692D52D9D8FABD7C2EA1EB66EAC56B6D4639B635F751AFCB0E14"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\A-source-core-discovery.json",
+    "type": "json",
+    "bytes": 809790,
+    "sha256": "FDFAA5C140B92912FCAFFEDDF3EDE169A227FCE4BC6A43198C788283BE2E8B04"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\A-source-core-summary.json",
+    "type": "json",
+    "bytes": 573223,
+    "sha256": "9D8E443CB6EFED888E9523937E60EB9BB57C6B353D69A9CF6B063FF50F4A7792"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\A-source-wpf-discovery.json",
+    "type": "json",
+    "bytes": 873095,
+    "sha256": "AD02749EFC37E2E3C97BCAC910A1DE8D0D8409015C3D9578EF19D2EDC6C62D49"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\A-source-wpf-summary.json",
+    "type": "json",
+    "bytes": 691099,
+    "sha256": "B52393C892261D70507951E8CC6F367E72DE4E9F47B4DD6CACCF6C0E187DB357"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\A1.md",
+    "type": "md",
+    "bytes": 967,
+    "sha256": "C4F0B3C881132E4AB4D05675E653DB98736F5F1B3B7549CC7DC671F35D6C5E63"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\A2.md",
+    "type": "md",
+    "bytes": 654,
+    "sha256": "56550DF5586F2EB1A250287EFED7D75511DA14A428F6DDDDE8F8CC8EBD496E73"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\DELIVERY.md",
+    "type": "md",
+    "bytes": 2798,
+    "sha256": "6EF4633968CAF76B965A5EBFCC7CC0119BB3A7713BFB0F2E2CF4EA104D19AFD2"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\OPEN_GATES.json",
+    "type": "json",
+    "bytes": 9128,
+    "sha256": "BE8B0AF2F46B93040134359761B8481848777CD9582B35B2AF2C71613CB83D43"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\POSTPUBLISH_GATE.json",
+    "type": "json",
+    "bytes": 11799,
+    "sha256": "018103776D04BA8BBDAE8618EA4A229ACC1C90DDDC74C7E0FA7CFCF875ABEECB"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\PREPUBLISH_GATE.json",
+    "type": "json",
+    "bytes": 9870,
+    "sha256": "1B2786D41F00014199DE054F0B197F666AD953855C0D534D364C7A1CB49E6410"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\RAW_TEST_MANIFEST.json",
+    "type": "json",
+    "bytes": 193494,
+    "sha256": "600D3B11E7984CC2F180387FE7DA372F0756315339D762982F9D5935E9811065"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\RAW_TEST_RESULTS.zip",
+    "type": "zip",
+    "bytes": 2602962,
+    "sha256": "40C8899292462E1017879BA63492D113A26CE5F7D0885130FF6E34BC00FC5EFA"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\RELEASE_FILES.json",
+    "type": "json",
+    "bytes": 46424,
+    "sha256": "86DF2A4CD6647BF3D13CEB87179371857266459E1E3A50E887B4B7010A296BDF"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\RELEASE_IDENTITY.json",
+    "type": "json",
+    "bytes": 3785,
+    "sha256": "E86CC51368B5CC7A32BEAEA64C117D949B88251B58EF109E4394217B75CBEF63"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\TEST_SUMMARY.json",
+    "type": "json",
+    "bytes": 965,
+    "sha256": "6B25BDEF4ED2F902FE029569529FBBDB9778092903AF349EFAC39A825D4F76BC"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\samples\\legacy-after.json",
+    "type": "json",
+    "bytes": 4213,
+    "sha256": "4B34E098A62CFEEC226A315A7CA236198E7C68A5A406FD45A77B7E284B992F87"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\samples\\legacy-before.json",
+    "type": "json",
+    "bytes": 4217,
+    "sha256": "86DF45E69EE27F3576EA897085B87197129146497AC3AA5AA5322048764C9A56"
+  },
+  {
+    "path": "docs\\evidence\\night-A-portability\\samples\\relative-after.json",
+    "type": "json",
+    "bytes": 1874,
+    "sha256": "FBBD68435B91366D9EA93B6896B54F49233C278917A44B53A54C2926E8AD62B2"
+  }
+]

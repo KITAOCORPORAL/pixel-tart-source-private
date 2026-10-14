@@ -1,0 +1,275 @@
+{
+  "root": "N:\\pixart\\kitao-night-A-portability-20261014\\artifacts\\A-release-wpf\\run-20261015-024943-efee9c5e",
+  "assembly": "N:\\pixart\\kitao-night-A-portability-20261014\\artifacts\\A-components\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "3a7711988679d679b23d0975160cfccb9c20fb5d01aa17b1362c6c42d0d4d423",
+  "discovered": 1625,
+  "selected": 28,
+  "runs": [
+    {
+      "pid": 33212,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningDocxAtomicReplacementTests",
+      "directory": "N:\\pixart\\kitao-night-A-portability-20261014\\artifacts\\A-release-wpf\\run-20261015-024943-efee9c5e\\000-PlanningDocxAtomicReplacementTests",
+      "expected": 2,
+      "results": [
+        {
+          "id": "1c7772f9-e67e-8502-ae4e-73a39894b7f1",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningDocxAtomicReplacementTests.LockedReadOnlyAndAclDeniedPreserveOriginalAndCleanTemporary",
+          "display": "LockedReadOnlyAndAclDeniedPreserveOriginalAndCleanTemporary",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1054862f-d922-8237-85eb-11be03d4630f",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningDocxAtomicReplacementTests.ExistingDestinationWithDeleteSharingReaderCanBeReplaced",
+          "display": "ExistingDestinationWithDeleteSharingReaderCanBeReplaced",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 31404,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests",
+      "directory": "N:\\pixart\\kitao-night-A-portability-20261014\\artifacts\\A-release-wpf\\run-20261015-024943-efee9c5e\\001-PlanningPortableImageTests",
+      "expected": 3,
+      "results": [
+        {
+          "id": "108b8223-6341-89fa-a0fb-6a3c770fe1ec",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.RealRootMoveKeepsRepeatedPicturesCellCaptionsModesHistoryPaginationAndDocx",
+          "display": "RealRootMoveKeepsRepeatedPicturesCellCaptionsModesHistoryPaginationAndDocx",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1652bf82-7694-8339-87c0-b2774f5e9069",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.UndoRedoAndDiskRecoveryCopiesAreListedButNeverDeleted",
+          "display": "UndoRedoAndDiskRecoveryCopiesAreListedButNeverDeleted",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "186f73d9-e361-8ef2-a2f2-8589ef0b0451",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.LegacyAbsoluteRootMoveAndLockedMigrationReplayNeverReplaceWrongImage",
+          "display": "LegacyAbsoluteRootMoveAndLockedMigrationReplayNeverReplaceWrongImage",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 22188,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests",
+      "directory": "N:\\pixart\\kitao-night-A-portability-20261014\\artifacts\\A-release-wpf\\run-20261015-024943-efee9c5e\\002-PlanningRichFlowTests",
+      "expected": 6,
+      "results": [
+        {
+          "id": "16230649-f99b-8e00-a15b-68f4a440faa7",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests.RichSyntheticContinuousFlowAndOffscreenEvidence",
+          "display": "RichSyntheticContinuousFlowAndOffscreenEvidence",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "193042f1-d748-8f7b-8b98-2033ea453fba",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests.RerenderCapturesRichDraftBeforeRetiringEditor",
+          "display": "RerenderCapturesRichDraftBeforeRetiringEditor",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1f691a59-968d-81f2-8b79-9168aed452aa",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests.RowCancelAndInvalidDraftRecoveryPreserveOtherFields",
+          "display": "RowCancelAndInvalidDraftRecoveryPreserveOtherFields",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1a6af4fa-b0ea-8e39-a4fd-64d4068b7a95",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests.RemovedStructureStaysRemovedAndStaleReviewCannotReplaceEdits",
+          "display": "RemovedStructureStaysRemovedAndStaleReviewCannotReplaceEdits",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d0a4a73-02cb-87ec-ae58-3628c236279e",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests.FailedImportRetainsNewDraftAndRecoveryThenRetryUndo",
+          "display": "FailedImportRetainsNewDraftAndRecoveryThenRetryUndo",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1ec02309-e4d5-81ef-abf4-fa666e40b25a",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningRichFlowTests.ConcurrentRowAndInspectorChangesMergeOnlyEditedFields",
+          "display": "ConcurrentRowAndInspectorChangesMergeOnlyEditedFields",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 19472,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests",
+      "directory": "N:\\pixart\\kitao-night-A-portability-20261014\\artifacts\\A-release-wpf\\run-20261015-024943-efee9c5e\\003-PlanningTableContentTests",
+      "expected": 6,
+      "results": [
+        {
+          "id": "151b532c-f2bf-8afe-916e-2eb04c1f64e6",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.TooTallLaterRowAndNestedTableAreRejectedWithoutChangingDestination",
+          "display": "TooTallLaterRowAndNestedTableAreRejectedWithoutChangingDestination",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1790ab2a-8e5e-8e14-9e10-b905300d357b",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.CellListButtonsEditUndoAndVerticalMergeKeepsImagePixels",
+          "display": "CellListButtonsEditUndoAndVerticalMergeKeepsImagePixels",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "15e3c5d7-a5f2-8fb1-ad78-3d7396c7f88c",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.StoryboardImagesListsPaginatePrintPdfAndSaveReopen",
+          "display": "StoryboardImagesListsPaginatePrintPdfAndSaveReopen",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b655f0e-12e4-8f9a-8a76-11b29fbc7ab9",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.InsertImageUsesCellCaretUndoAndReopen",
+          "display": "InsertImageUsesCellCaretUndoAndReopen",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "115bfe37-7366-80ac-a7df-930f9beb955f",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.NativeImagesAndListsRoundTripMergedCellsAndRtf",
+          "display": "NativeImagesAndListsRoundTripMergedCellsAndRtf",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1c044297-d9d3-893a-8e35-8095001597dc",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTableContentTests.SharedCrossCellNumberingIsRejectedInsteadOfRestarted",
+          "display": "SharedCrossCellNumberingIsRejectedInsteadOfRestarted",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 11372,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests",
+      "directory": "N:\\pixart\\kitao-night-A-portability-20261014\\artifacts\\A-release-wpf\\run-20261015-024943-efee9c5e\\004-PlanningTrayImageTests",
+      "expected": 6,
+      "results": [
+        {
+          "id": "140bbfe2-ae13-8f90-8e81-e08ea6ca9cad",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.SourceSwitchDuringResolveAndCopyWriteFailureDoNotMutateDocument",
+          "display": "SourceSwitchDuringResolveAndCopyWriteFailureDoNotMutateDocument",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "173cf378-69d3-8f84-b95d-89719207f492",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.RealResolverProjectCollectionPickerCancelAndImageEvidence",
+          "display": "RealResolverProjectCollectionPickerCancelAndImageEvidence",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13aa5cc3-2c3b-82a1-af3c-2f5676bb0de8",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.CellPlacementImageUndoRedoKeepsSidecarAndPosition",
+          "display": "CellPlacementImageUndoRedoKeepsSidecarAndPosition",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b65ff4d-adae-8d26-a025-b1a950d30a33",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.TrayCopySurvivesClearOfflineReopenAndDocxWithoutJsonImagePayload",
+          "display": "TrayCopySurvivesClearOfflineReopenAndDocxWithoutJsonImagePayload",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "18049df2-c1d9-8ab5-b64a-95c342a26bc2",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.HashFailuresCreateNoCopyAndLockedSaveRetainsRecovery",
+          "display": "HashFailuresCreateNoCopyAndLockedSaveRetainsRecovery",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d571bd7-db9e-8b15-9606-e2bdfd96b61a",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.PickerMultiInsertAndExternalDocxCarryPicturesWithoutLibraryIdentity",
+          "display": "PickerMultiInsertAndExternalDocxCarryPicturesWithoutLibraryIdentity",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 31060,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.TetherStartupPreferenceTests",
+      "directory": "N:\\pixart\\kitao-night-A-portability-20261014\\artifacts\\A-release-wpf\\run-20261015-024943-efee9c5e\\005-TetherStartupPreferenceTests",
+      "expected": 5,
+      "results": [
+        {
+          "id": "1b4e7c5a-c3ae-85bb-bced-e64cf7c52fde",
+          "name": "RAWSelectionAssistant.WpfTests.TetherStartupPreferenceTests.FirstLoadAndSaveWithoutSelectionOrGeneratedTemplateNeverReadVisualGroups",
+          "display": "FirstLoadAndSaveWithoutSelectionOrGeneratedTemplateNeverReadVisualGroups",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1fdf4c7a-c2cf-8782-8d1c-03fc3f847088",
+          "name": "RAWSelectionAssistant.WpfTests.TetherStartupPreferenceTests.SaveFailureIsRecordedInsteadOfHiddenAndCurrentStateRetained",
+          "display": "SaveFailureIsRecordedInsteadOfHiddenAndCurrentStateRetained",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "137e550f-b8a0-87fb-b9fb-7e9ea11f3f55",
+          "name": "RAWSelectionAssistant.WpfTests.TetherStartupPreferenceTests.DeferredMainAndDrawerTemplatesShareExpansionAndSurviveCollapseSaveReopen",
+          "display": "DeferredMainAndDrawerTemplatesShareExpansionAndSurviveCollapseSaveReopen",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "19ecd3ed-b482-81e0-a9de-6e326ca9ae94",
+          "name": "RAWSelectionAssistant.WpfTests.TetherStartupPreferenceTests.LateTemplateGenerationWithNoSelectedPhotoAppliesStoredGroupState",
+          "display": "LateTemplateGenerationWithNoSelectedPhotoAppliesStoredGroupState",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1774920c-6333-839d-91e5-ec7e3552c55d",
+          "name": "RAWSelectionAssistant.WpfTests.TetherStartupPreferenceTests.NarrowFirstStartupRestoresStoredWidthEvenWithBothHostsCollapsed",
+          "display": "NarrowFirstStartupRestoresStoredWidthEvenWithBothHostsCollapsed",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "counts": {
+    "Passed": 28
+  }
+}
