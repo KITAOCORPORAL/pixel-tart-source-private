@@ -220,7 +220,7 @@ public sealed partial class PlanningCenterViewModel
         }
         catch (OperationCanceledException) { SaveStatus = "保存已取消；未保存内容和恢复草稿已保留"; return false; }
         catch (Exception error) when (IsRecoverableProjectError(error))
-        { new FileLogService().Error("策划保存失败，保留待保存内容与恢复草稿。", error); SaveStatus = "保存失败，请重试；未保存内容已保留"; return false; }
+        { new FileLogService().Error("策划保存失败，保留待保存内容与恢复草稿。", error); SaveStatus = PlanningImageStorage.IsImageIntegrityError(error) ? "保存失败："+error.Message+" 未保存内容已保留。" : "保存失败，请重试；未保存内容已保留"; return false; }
         finally { _saveGate.Release(); }
     }
     private async Task LoadDocumentAsync()

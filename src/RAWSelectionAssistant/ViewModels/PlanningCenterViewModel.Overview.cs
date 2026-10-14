@@ -97,7 +97,7 @@ public sealed partial class PlanningCenterViewModel
             _project = null; _state = null; _booking = null; Shots.Clear(); SelectedShot = null; NotifyAll();
             ProjectContextChanged?.Invoke(this, EventArgs.Empty);
             await ShowOverviewAsync();
-            OverviewStatus = "上次策划暂时无法打开，已返回总览。原有资料已保留。";
+            OverviewStatus = PlanningImageStorage.IsImageIntegrityError(error) ? error.Message+" 原有策划未修改。" : "上次策划暂时无法打开，已返回总览。原有资料已保留。";
         }
     }
 

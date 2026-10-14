@@ -6,7 +6,12 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 public static class PlanningImageStorage
 {
     public static string RelativePath(Guid documentId, Guid imageId) => $"images/{documentId:N}/{imageId:N}.png";
-    private static InvalidDataException Problem(PlanningDocumentImage image, string reason) => new($"策划图片“{image.Title}” [文档 {image.DocumentId:D} / 图片 {image.DocumentImageId:D}]：{reason}");
+    private static InvalidDataException Problem(PlanningDocumentImage image, string reason)
+    {
+        var error=new InvalidDataException($"策划图片“{image.Title}” [文档 {image.DocumentId:D} / 图片 {image.DocumentImageId:D}]：{reason}");
+        error.Data["PlanningImageIntegrity"]=true;return error;
+    }
+    public static bool IsImageIntegrityError(Exception error)=>error.Data["PlanningImageIntegrity"] is true;
     public static string DocumentDirectory(string root, Guid documentId)
     { var path=Path.GetFullPath(Path.Combine(root,"images",documentId.ToString("N")));RejectLinks(root,path);return path; }
     public static void RejectLinks(string root,string path)

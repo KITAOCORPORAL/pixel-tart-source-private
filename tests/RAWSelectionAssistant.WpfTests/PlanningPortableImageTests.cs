@@ -63,6 +63,8 @@ public sealed class PlanningPortableImageTests
         using(var json=JsonDocument.Parse(await File.ReadAllTextAsync(movedFile)))Assert.AreEqual(image.CopyPath,json.RootElement.GetProperty("Document").GetProperty("Package").GetProperty("RichLayout").GetProperty("Images")[0].GetProperty("CopyPath").GetString());
         var copy=PlanningImageStorage.Resolve(replay.DocumentImages.Single());var verified=await File.ReadAllBytesAsync(copy);File.WriteAllBytes(copy,[1,2,3]);var error=await Assert.ThrowsAsync<InvalidDataException>(()=>new PlanningProjectStore(moved).LoadAsync(f.Id));StringAssert.Contains(error.Message,image.DocumentImageId.ToString("D"));await File.WriteAllBytesAsync(copy,verified);File.Delete(copy);
         var missing=await Assert.ThrowsAsync<InvalidDataException>(()=>Reopen(f,moved).LoadAsync(f.Id));StringAssert.Contains(missing.Message,image.Title);
+        var safeOpen=Reopen(f,moved);await safeOpen.OpenProjectSafelyAsync(f.Id);StringAssert.Contains(safeOpen.OverviewStatus,image.Title);StringAssert.Contains(safeOpen.OverviewStatus,image.DocumentImageId.ToString("D"));
+        replay.DocumentTitle="缺图不能保存";Assert.IsFalse(await replay.FlushAsync());StringAssert.Contains(replay.SaveStatus,image.Title);StringAssert.Contains(replay.SaveStatus,image.DocumentImageId.ToString("D"));
         var evidence=Environment.GetEnvironmentVariable("KITAO_PORTABLE_IMAGE_EVIDENCE");if(!string.IsNullOrWhiteSpace(evidence)){Directory.CreateDirectory(evidence);await File.WriteAllTextAsync(Path.Combine(evidence,"legacy-before.json"),System.Text.Encoding.UTF8.GetString(before));await File.WriteAllTextAsync(Path.Combine(evidence,"legacy-after.json"),await File.ReadAllTextAsync(movedFile));}
     });
     [TestMethod]
