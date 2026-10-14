@@ -12,4 +12,9 @@ public sealed class NightColorBaselineTests
   var result=PixelPipelineDiagnostics.Explain(m,d,new string('b',64));Assert.IsFalse(result.CalibrationEligible);Assert.AreEqual(2,result.Stages.Count);Assert.AreEqual("Linear",result.Stages[0].Transfer);Assert.AreEqual(0L,result.Stages[1].Range.NonFinite);Assert.Throws<InvalidDataException>(()=>PixelPipelineDiagnostics.Explain(m,d,"unknown"));
   var probe=PixelPipelineDiagnostics.ProbeTransform(source,new(1,0,0,0,1,0,0,0,1),"before-clipping");Assert.AreEqual(s.Maximum,probe.Range.Maximum);StringAssert.Contains(probe.Limitations,"Not an observation");
  }
+ [TestMethod] public void SensorProbePreservesExtendedValuesAndCountsActualChannelSaturation()
+ {
+  var result=LinearInputProbe.Measure(new float[]{50,150,1000,1200,250,100},[100,100,100],1000,new(2,1,3),new(1,0,0,0,1,0,0,0,1));
+  CollectionAssert.AreEqual(new long[]{1,0,1},result.AtSensorWhite);Assert.IsTrue(result.AfterBlack.Minimum<0);Assert.IsTrue(result.AfterWhiteBalance.Maximum>1);Assert.AreEqual(result.AfterWhiteBalance.Maximum,result.AfterMatrix.Maximum);Assert.Throws<ArgumentException>(()=>LinearInputProbe.Measure([1,2,3],[10,10,10],5,new(1,1,1),new()));
+ }
 }
