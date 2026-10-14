@@ -8,11 +8,12 @@ using RAWSelectionAssistant.Services;
 namespace RAWSelectionAssistant.Views;
 public partial class PlanningCenterView
 {
+ private long _trayPickerVersion;
  internal async Task OpenTrayPickerAsync()
  {
-  if(_vm is not {} owner||!await FlushDocumentAsync())return;var project=owner.ProjectId;var document=owner.PlanningDocumentId;var generation=owner.EditorGeneration;var revision=_documentRenderRevision;
+  if(_vm is not {} owner||!await FlushDocumentAsync())return;var project=owner.ProjectId;var document=owner.PlanningDocumentId;var generation=owner.EditorGeneration;var revision=_documentRenderRevision;var pickerVersion=++_trayPickerVersion;
   var rich=DocumentContent.Children.OfType<PlanningRichEditor>().FirstOrDefault();var caret=rich?.CaptureImageInsertion();var choices=await owner.ListTrayImagesAsync();
-  if(owner.ProjectId!=project||owner.PlanningDocumentId!=document)return;
+  if(pickerVersion!=_trayPickerVersion||owner.ProjectId!=project||owner.PlanningDocumentId!=document)return;
   ModalContent.Children.Clear();Heading(ModalContent,"从灵感托盘插入");var search=new TextBox{Margin=new Thickness(4),ToolTip="搜索托盘/收藏名称、说明或素材ID"};ModalContent.Children.Add(search);
   var list=new ListBox{SelectionMode=SelectionMode.Extended,DisplayMemberPath="Label",ItemsSource=choices,Height=200};ModalContent.Children.Add(list);
   search.TextChanged+=(_,_)=>list.ItemsSource=choices.Where(c=>c.Label.Contains(search.Text,StringComparison.CurrentCultureIgnoreCase)).ToArray();
@@ -23,7 +24,7 @@ public partial class PlanningCenterView
   ModalContent.Children.Add(AsyncAction("插入选中图片",async()=>
   {
    if(busy)return;
-   if(!active||owner.ProjectId!=project||owner.PlanningDocumentId!=document||owner.EditorGeneration!=generation||revision!=_documentRenderRevision){status.Text="文档已变化，请重新打开选图。";return;}
+   if(pickerVersion!=_trayPickerVersion||!active||owner.ProjectId!=project||owner.PlanningDocumentId!=document||owner.EditorGeneration!=generation||revision!=_documentRenderRevision){status.Text="文档已变化，请重新打开选图。";return;}
    var selected=list.SelectedItems.Cast<PlanningTrayChoice>().ToArray();if(selected.Length==0){status.Text="请选择图片，可多选。";return;}
    var where=placement.SelectedItem?.ToString()??"参考图";var shot=(shots.SelectedItem as RAWSelectionAssistant.Core.Services.Projects.ProjectShot)?.ShotId;
    if(where=="指定镜头"&&shot is null){status.Text="请选择目标镜头。";return;}
@@ -31,7 +32,7 @@ public partial class PlanningCenterView
    var prepared=new List<PlanningDocumentImage>();var failures=new List<string>();
    foreach(var choice in selected){try{prepared.Add(await owner.PrepareTrayImageAsync(choice,where,where=="指定镜头"?shot:null));}catch(Exception e){failures.Add(choice.Label+"："+e.Message);}}
    busy=false;
-   if(!active||owner.ProjectId!=project||owner.EditorGeneration!=generation||revision!=_documentRenderRevision||!ReferenceEquals(_vm,owner)||ModalOverlay.Visibility!=Visibility.Visible){foreach(var p in prepared)System.IO.File.Delete(p.CopyPath);return;}
+   if(pickerVersion!=_trayPickerVersion||!active||owner.ProjectId!=project||owner.EditorGeneration!=generation||revision!=_documentRenderRevision||!ReferenceEquals(_vm,owner)||ModalOverlay.Visibility!=Visibility.Visible){foreach(var p in prepared)System.IO.File.Delete(p.CopyPath);return;}
    var saved=true;
    if(prepared.Count>0)
    {

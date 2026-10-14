@@ -13040,6 +13040,12 @@
       "reason": "Tray document insertion identity, persistence, or failure contract; mandatory execution."
     },
     {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.PickerMultiInsertAndExternalDocxCarryPicturesWithoutLibraryIdentity",
+      "category": "required_automatic",
+      "stage": "prepublish",
+      "reason": "Real picker multi-select event and external offline document portability."
+    },
+    {
       "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.RealResolverProjectCollectionPickerCancelAndImageEvidence",
       "category": "required_automatic",
       "stage": "prepublish",

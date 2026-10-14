@@ -66,6 +66,16 @@ public sealed class PlanningTrayImageTests
   await File.WriteAllBytesAsync(path,PlanningRichFlowFixture.ReferencePng(0));await Assert.ThrowsAsync<InvalidOperationException>(()=>vm.PrepareTrayImageAsync(choices[0],"参考图",null));Assert.HasCount(1,await tray.ListAsync());view.DataContext=null;
  });
 
+
+ [TestMethod]
+ public Task PickerMultiInsertAndExternalDocxCarryPicturesWithoutLibraryIdentity()=>RunSta(async()=>
+ {
+  EnsureTestApplication();using var f=await PlanningFoundationWpfTests.Fixture.Create();await using var tray=new SqliteInspirationTrayService(Path.Combine(f.Root,"tray.db"));var path=Path.Combine(f.Root,"source.png");var bytes=PlanningRichFlowFixture.ReferencePng(0);await File.WriteAllBytesAsync(path,bytes);var reference=new AssetLibraryStableReference(Guid.NewGuid(),Guid.NewGuid(),Convert.ToHexString(SHA256.HashData(bytes)));await tray.AddAsync(reference,note:"multi");var collection=await tray.CreateCollectionAsync("project",f.Id);await tray.AddEntriesToCollectionAsync(collection.CollectionId,(await tray.ListAsync()).Select(x=>x.TrayEntryId));
+  var vm=new PlanningCenterViewModel(f.Projects,f.Bookings,f.Dialogs,f.Shots,f.Planning,inspiration:tray);await vm.LoadAsync(f.Id);vm.ResolveTrayImage=r=>Task.FromResult(new AssetResolutionResult(AssetResolutionStatus.Available,r.LibraryId,r.AssetId,path,r.ContentHash));var view=new PlanningCenterView{DataContext=vm};await view.OpenTrayPickerAsync();var modal=(Panel)view.FindName("ModalContent");var list=modal.Children.OfType<ListBox>().Single();list.SelectAll();modal.Children.OfType<Button>().Single(b=>Equals(b.Content,"插入选中图片")).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+  for(var n=0;n<100&&vm.DocumentImages.Count!=2;n++)await Task.Delay(20);Assert.HasCount(2,vm.DocumentImages);Assert.IsTrue(await vm.FlushAsync());Assert.HasCount(1,await tray.ListAsync());
+  var export=Path.Combine(f.Root,"portable.docx");await vm.ExportPlanningDocxAsync(export);view.DataContext=null;
+  var other=Guid.NewGuid();await f.Projects.UpsertAsync(new RAWSelectionAssistant.Core.Models.PhotoProjectRecord{Id=other,Name="无素材库的接收端"});var recipient=f.NewVm();await recipient.LoadAsync(other);var review=recipient.PreviewPlanningDocxImport(export);await recipient.ApplyPlanningDocxImportAsync(review,[],true);Assert.HasCount(2,recipient.DocumentImages);Assert.IsTrue(recipient.DocumentImages.All(i=>i.Source is null&&i.OriginLabel=="文档内图片"));File.Delete(path);await tray.ClearAsync();var again=f.NewVm();await again.LoadAsync(other);Assert.HasCount(2,PlanningDocumentImages.Images(PlanningDocumentLayout.Load(again.RichTextPackage!,again.RichLayout)));
+ });
  [TestMethod]
  public Task SourceSwitchDuringResolveAndCopyWriteFailureDoNotMutateDocument()=>RunSta(async()=>
  {

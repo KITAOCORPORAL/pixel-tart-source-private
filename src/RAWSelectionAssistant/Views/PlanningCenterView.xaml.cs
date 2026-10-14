@@ -37,13 +37,14 @@ public partial class PlanningCenterView : UserControl
         PlanningDockOverlay.MouseDown+=(_,e)=>{if(e.OriginalSource==PlanningDockOverlay)ClosePlanningDock();};
         DataContextChanged += (_, e) =>
         {
+            _trayPickerVersion++;
             if (_vm is not null) { ClosePlanningDock(); FlushSimpleEditors(); _vm.CapturePendingEditorDraft = null; _vm.DocumentPresentationChanged -= PresentationChanged; _vm.PropertyChanged -= ViewModelChanged; }
             _vm = e.NewValue as PlanningCenterViewModel;
             if (_vm is not null) { _vm.CapturePendingEditorDraft = FlushSimpleEditors; _vm.DocumentPresentationChanged += PresentationChanged; _vm.PropertyChanged += ViewModelChanged; }
             Render();
         };
         Loaded += (_, _) => Render();
-        Unloaded += async (_, _) => { if (_vm is not null) await FlushDocumentAsync(); };
+        Unloaded += async (_, _) => { _trayPickerVersion++; if (_vm is not null) await FlushDocumentAsync(); };
         IsVisibleChanged += async (_, _) => { if (!IsVisible && _vm is not null) await FlushDocumentAsync(); };
         SizeChanged += (_, _) => UpdateResponsiveLayout();
         void OverlayChanged(object sender, DependencyPropertyChangedEventArgs args)
