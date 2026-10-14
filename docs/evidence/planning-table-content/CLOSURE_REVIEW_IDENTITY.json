@@ -1,0 +1,45 @@
+{
+  "source": "ca83ee1215d421300570e7bb5636477e3055c4eb",
+  "status": "REVIEW_BUILD_WITH_OPEN_GATES",
+  "directory": "D:\\AI AGENT\\kitao-planning-table-content-20261014\\artifacts\\table-content\\closure-review\\win-x64",
+  "exeSha256": "c57d8f8b60a3bd7cc4b0b72c22b294f7b74c5a882188995f8aea193b9f52929c",
+  "components": [
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "sha256": "819c59106e94da65f3fd85bba92c2962ed0c73843d1cdcec15926e0d33ba1b0c"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "sha256": "5e8e117ac273d02e8daaf228db859adc509e37becdb0c798ae98895124a2997e"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "sha256": "d8a53e9f573204d4ca5e092ccaa3bcaf6b5a7334e38dc1384601ca22ebcb27dc"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "sha256": "927706ebbaf7e69a6540047aa2176775404e67a18d57f9f5f0facd4a394778cf"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "sha256": "eb31a852f003b12363f729b23521cb11a649adf9ec563618b6d90183c32fe409"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "sha256": "02b9688a34da623a5439a3c019198929f3a1144f50303c630f074cb1fa5b44c5"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "sha256": "fcb8475c22c7fda8c64821abc1beb4a538a7f8c02b2e0d384978b2eed3c261de"
+    }
+  ],
+  "tests": [
+    {
+      "Passed": 26
+    },
+    {
+      "Passed": 1
+    }
+  ],
+  "EXEStarted": false
+}
