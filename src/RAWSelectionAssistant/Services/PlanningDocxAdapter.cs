@@ -86,8 +86,14 @@ public static partial class PlanningDocxAdapter
                     }
                 body.Append(new W.SectionProperties(new W.PageSize{Width=(uint)(double.IsFinite(document.PageWidth)?document.PageWidth*15:11906),Height=(uint)(double.IsFinite(document.PageHeight)?document.PageHeight*15:16838),Orient=document.PageWidth>document.PageHeight?W.PageOrientationValues.Landscape:W.PageOrientationValues.Portrait},new W.PageMargin{Left=(uint)(document.PagePadding.Left*15),Right=(uint)(document.PagePadding.Right*15),Top=(int)(document.PagePadding.Top*15),Bottom=(int)(document.PagePadding.Bottom*15),Header=0,Footer=0,Gutter=0}));WritePageExtras(main,body.Elements<W.SectionProperties>().Last(),document.Tag as RAWSelectionAssistant.Core.Services.Projects.PlanningHeaderFooter??new());main.Document.Save();
             }
-            File.Move(temporary,path,true);
+            // Replacing an existing document is not a rename-overwrite. On Windows,
+            // MoveFileEx refuses a destination with a delete-sharing reader; ReplaceFile
+            // supports that reader and preserves the destination security descriptor.
+            if(File.Exists(path))File.Replace(temporary,path,null);
+            else File.Move(temporary,path);
         }
+        catch(UnauthorizedAccessException error){throw new UnauthorizedAccessException("DOCX 导出未完成：目标只读或文件/目录权限拒绝替换；原目标未被本次输出覆盖。路径："+Path.GetFullPath(path),error);}
+        catch(IOException error){throw new IOException("DOCX 导出未完成：文件占用或磁盘写入失败；原目标未被本次输出覆盖。路径："+Path.GetFullPath(path),error);}
         finally{if(File.Exists(temporary))File.Delete(temporary);}
     }
     public static ImportResult Import(string path)

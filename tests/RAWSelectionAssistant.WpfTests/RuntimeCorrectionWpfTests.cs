@@ -1,4 +1,4 @@
-﻿using System.Xml.Linq;
+using System.Xml.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -200,8 +200,15 @@ public sealed class RuntimeCorrectionWpfTests
     {
         EnsureTestApplication();
         var root = await Fixture();
-        await using var page = new AssetLibraryPage(System.IO.Path.Combine(root, "assets.db"), new RAWSelectionAssistant.Core.Services.Tasks.TaskOperationBridge(), []);
+        await using var page = new AssetLibraryPage(System.IO.Path.Combine(root, "assets.db"), new RAWSelectionAssistant.Core.Services.Tasks.TaskOperationBridge(), [],
+            productDatabasePath: System.IO.Path.Combine(root,"product.db"),
+            onlineSelectionWorkspaceFile: System.IO.Path.Combine(root,"online.json"),
+            inspirationTrayDatabasePath: System.IO.Path.Combine(root,"tray.db"));
         await page.InitializeForSessionAsync();
+        var product = new RAWSelectionAssistant.Core.Services.Database.PixelTartDatabase(System.IO.Path.Combine(root,"product.db"));
+        var projectId=Guid.NewGuid();var projects=new RAWSelectionAssistant.Core.Services.Database.SqliteProjectRepository(product);
+        await projects.UpsertAsync(new RAWSelectionAssistant.Core.Models.PhotoProjectRecord{Id=projectId,Name="独立画布关闭项目"});
+        var choices=await page.ViewModel.CanvasProjectsAsync();Assert.IsTrue(choices.Any(p=>p.Id==projectId),"Canvas uses the migrated fixture database, not AppDataPaths/default database.");
         var owner = new Window { Width = 1180, Height = 720, ShowInTaskbar = false, ShowActivated = false, Left = -32000 };
         // Exercise the actual closing handler and saved canvas against a real HWND.
         // Keep the page disconnected: the suite's process-wide Application belongs to
