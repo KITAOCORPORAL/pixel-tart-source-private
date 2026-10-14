@@ -15900,6 +15900,18 @@
       "category": "required_automatic",
       "reason": "Night color science mandatory numeric/provenance regression.",
       "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.SyntheticIccFixtureTests.ActualSyntheticIccBinaryHasKnownD50LinearContractAndComputedReference",
+      "category": "required_automatic",
+      "reason": "Required binary ICC synthetic subset refusal/PCS regression.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.SyntheticIccFixtureTests.UnknownLutAndEscapingIccTagsRefuseInsteadOfFallback",
+      "category": "required_automatic",
+      "reason": "Required binary ICC synthetic subset refusal/PCS regression.",
+      "stage": "prepublish"
     }
   ]
 }
