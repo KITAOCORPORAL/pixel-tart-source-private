@@ -1,0 +1,5 @@
+# Unit01 shot-table follow-up
+
+Base23473ac3b470b38b04781ee687b830bb831c7d86. Actualr5PNG02/02b1366 inspected. Addedreferencecolumnusingonlyshot.References matching existing reference identity and previewpath; unavailable/unassociatedreference remains blank withtooltip, not unrelated fallbackimage. Status and shotnumber now frozenonlefttostayvisiblewhilehorizontalgridscrolls. This differs fromGrokright-fixedstatusposition and is explicitlyNOTpixel-identical. Existingeditable rowtransaction/CancelEdit/StageShot/dataidentityunchanged.
+
+Focusedfirst5tests passed, laterexistingfoundation12columnassertion correctly failed becauseone realreferencecolumnwasadded. Expected13plusunique-referencecolumnupdated, not hidingedit/persistencefailure. Table/narrow/rowdraftregressions continue. No completeWordornewLUTcodeadded.

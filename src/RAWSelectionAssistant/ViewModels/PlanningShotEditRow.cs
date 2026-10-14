@@ -13,6 +13,8 @@ public sealed class PlanningShotEditRow : INotifyPropertyChanged, IEditableObjec
     private readonly Dictionary<string,string> _cells;
     private readonly Action<ProjectShot> _commit;
     public Guid ShotId => _value.ShotId;
+    public string? ReferencePreviewPath {get;init;}
+    public string ReferenceLabel {get;init;}="未关联参考";
     public event PropertyChangedEventHandler? PropertyChanged;
     public static IReadOnlyList<string> StatusLabels { get; } = ["待拍", "当前", "已拍", "跳过"];
     public PlanningShotEditRow(ProjectShot value, Action<ProjectShot> commit)

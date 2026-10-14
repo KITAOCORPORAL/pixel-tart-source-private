@@ -31,7 +31,7 @@ public partial class PlanningCenterView
         DocumentContent.Children.Add(Text("双击单元格编辑；Esc 取消当前行修改。自定义列移除后保留数据，可恢复。", 12));
         _shotTable = new DataGrid { AutoGenerateColumns = false, CanUserAddRows = false, CanUserDeleteRows = false,
             CanUserSortColumns = false, CanUserReorderColumns = false, FrozenColumnCount = 1, MinHeight = 180, MaxHeight = 560,
-            ItemsSource = _vm.Shots.OrderBy(s => s.Order).Select(s => new PlanningShotEditRow(_vm.ShotDraft(s.ShotId), _vm.StageShot)).ToArray() };
+            ItemsSource = _vm.Shots.OrderBy(s => s.Order).Select(s => CreatePlanningShotRow(s)).ToArray() };
         ConfigurePlanningTable(_shotTable);
         AutomationProperties.SetName(_shotTable, "可编辑镜头清单"); AutomationProperties.SetAutomationId(_shotTable, "PlanningEditableShotTable");
         _shotTable.SelectionChanged += (_, _) => { if (_shotTable.SelectedItem is PlanningShotEditRow row) { _inspectorCapture?.Invoke(); _vm.SelectedShot = _vm.Shots.FirstOrDefault(s => s.ShotId == row.ShotId); RenderR5Inspector(); } };
@@ -40,11 +40,15 @@ public partial class PlanningCenterView
             _shotTable.Columns.Add(new DataGridTextColumn { Header = title, IsReadOnly = readOnly, Width = width,
                 Binding = new Binding("[" + key + "]") { Mode = readOnly ? BindingMode.OneWay : BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.LostFocus } });
         }
-        Column("镜号", "Order", true, 64); Column("名称", "Name"); Column("场景", "Scene"); Column("景别", "ShotSize", width: 90);
+        Column("镜号", "Order", true, 64);
+        _shotTable.Columns.Add(new DataGridComboBoxColumn { Header="状态",Width=90,ItemsSource=PlanningShotEditRow.StatusLabels,SelectedItemBinding=new Binding("[Status]"){Mode=BindingMode.TwoWay,UpdateSourceTrigger=UpdateSourceTrigger.PropertyChanged}});
+        _shotTable.FrozenColumnCount=2;
+        var imageFactory=new FrameworkElementFactory(typeof(Image));imageFactory.SetValue(Image.HeightProperty,30d);imageFactory.SetValue(Image.WidthProperty,48d);imageFactory.SetValue(Image.StretchProperty,System.Windows.Media.Stretch.Uniform);imageFactory.SetBinding(Image.SourceProperty,new Binding(nameof(PlanningShotEditRow.ReferencePreviewPath)));imageFactory.SetBinding(FrameworkElement.ToolTipProperty,new Binding(nameof(PlanningShotEditRow.ReferenceLabel)));
+        _shotTable.Columns.Add(new DataGridTemplateColumn{Header="参考",Width=74,IsReadOnly=true,CellTemplate=new DataTemplate{VisualTree=imageFactory}});
+        Column("名称", "Name"); Column("场景", "Scene"); Column("景别", "ShotSize", width: 90);
         Column("机位 / 镜头", "CameraAndLens"); Column("人物动作", "Action"); Column("道具", "Props"); Column("灯光", "Lighting");
         Column("预计分钟", "EstimatedMinutes", width: 85);
-        _shotTable.Columns.Add(new DataGridComboBoxColumn { Header = "状态", Width = 90, ItemsSource = PlanningShotEditRow.StatusLabels,
-            SelectedItemBinding = new Binding("[Status]") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged } });
+        DocumentContent.Children.Add(Text("可横向滚动；镜号与状态保持可见。参考缩略图来自本镜头已关联资料。",11));
         Column("备注", "Remarks");
         foreach (var column in _vm.ShotColumns) Column(column.Name, "custom:" + column.Id.ToString("N"));
         DocumentContent.Children.Add(_shotTable);
@@ -63,6 +67,11 @@ public partial class PlanningCenterView
         foreach (var column in _vm.ArchivedShotColumns)
             columns.Children.Add(AsyncAction("恢复列：" + column.Name, async () => { if (await FlushDocumentAsync() && await _vm.SetShotColumnArchivedAsync(column.Id, false)) Render(); }));
         DocumentContent.Children.Add(columns);
+    }
+    private PlanningShotEditRow CreatePlanningShotRow(RAWSelectionAssistant.Core.Services.Projects.ProjectShot shot)
+    {
+        var ids=shot.References.Select(r=>r.ReferenceId).ToHashSet();var reference=_vm!.AllProjectReferences.FirstOrDefault(r=>ids.Contains(r.Id));
+        return new(_vm.ShotDraft(shot.ShotId),_vm.StageShot){ReferencePreviewPath=reference?.PreviewPath,ReferenceLabel=reference?.Title??"未关联参考"};
     }
     private void FlushSimpleEditors()
     {

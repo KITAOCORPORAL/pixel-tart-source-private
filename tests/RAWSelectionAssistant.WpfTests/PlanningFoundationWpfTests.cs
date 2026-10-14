@@ -41,7 +41,7 @@ public sealed class PlanningFoundationWpfTests
         Assert.AreEqual("A01",original.CustomValues["custom:"+column.Id.ToString("N")]);
         EnsureTestApplication();var view=new PlanningCenterView{DataContext=vm};await vm.SelectContentSafelyAsync("镜头清单");view.Render();
         var table=((StackPanel)view.FindName("DocumentContent")).Children.OfType<DataGrid>().Single();
-        Assert.HasCount(12,table.Columns);
+        Assert.HasCount(13,table.Columns);Assert.HasCount(1,table.Columns.Where(c=>Equals(c.Header,"参考")));
         // Exercise the production grid commit callback, not only the row helper.
         table.Measure(new Size(1100, 400)); table.Arrange(new Rect(0, 0, 1100, 400)); table.UpdateLayout();
         var boundRow = (PlanningShotEditRow)table.Items[0]; boundRow.BeginEdit(); boundRow["Name"] = "表格提交"; boundRow.EndEdit();
