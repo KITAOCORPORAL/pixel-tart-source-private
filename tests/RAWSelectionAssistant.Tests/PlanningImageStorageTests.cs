@@ -33,6 +33,15 @@ public sealed class PlanningImageStorageTests
         File.WriteAllBytes(target,[88]);Assert.Throws<InvalidDataException>(()=>PlanningImageStorage.Bind(image,moved));
     }
     [TestMethod]
+    public void ReparseEscapeIsRefusedWithoutOpeningForeignCopy()
+    {
+        using var temp=new TempDirectory();var root=Path.Combine(temp.Path,"root");var foreign=Path.Combine(temp.Path,"foreign");var (image,path)=Fixture(foreign);
+        Directory.CreateDirectory(root);var junction=Path.Combine(root,"images");
+        using var command=System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("cmd.exe"){UseShellExecute=false,CreateNoWindow=true,ArgumentList={"/c","mklink","/J",junction,Path.Combine(foreign,"images")}})!;command.WaitForExit();Assert.AreEqual(0,command.ExitCode,"Required junction test could not prepare fixture.");
+        try{Assert.Throws<InvalidDataException>(()=>PlanningImageStorage.Bind(image with{StorageRoot=root},root));Assert.IsTrue(File.Exists(path));}
+        finally{Directory.Delete(junction);}
+    }
+    [TestMethod]
     public void InventoryIsReadOnlyProtectsDraftRecoveryAndUnknownFiles()
     {
         using var temp=new TempDirectory();var (image,path)=Fixture(temp.Path);var extra=Path.Combine(Path.GetDirectoryName(path)!,Guid.NewGuid().ToString("N")+".png");File.WriteAllBytes(extra,[7]);

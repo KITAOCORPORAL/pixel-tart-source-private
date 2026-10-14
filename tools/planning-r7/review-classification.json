@@ -15900,6 +15900,12 @@
       "category": "required_automatic",
       "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
       "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.ReparseEscapeIsRefusedWithoutOpeningForeignCopy",
+      "category": "required_automatic",
+      "reason": "Required actual junction containment regression.",
+      "stage": "prepublish"
     }
   ]
 }
