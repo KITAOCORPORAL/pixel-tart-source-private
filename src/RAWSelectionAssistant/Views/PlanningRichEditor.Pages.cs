@@ -10,6 +10,7 @@ public sealed partial class PlanningRichEditor
  {value.Validate();_history.Execute(()=>_editor.Document.Tag=value);_persist?.Invoke();}
  internal void EditHeaderFooter()
  {
+  if(_findPanel is not null)_findPanel.Visibility=Visibility.Collapsed;
   if(_pageSettingsPanel is not null){_pageSettingsPanel.Visibility=Visibility.Visible;return;}
   var initial=_editor.Document.Tag as PlanningHeaderFooter??new();var panel=new StackPanel{Margin=new Thickness(14)};
   panel.Children.Add(new TextBlock{Text="页眉、页脚和页码 · 整份文档（单节）",FontWeight=FontWeights.Bold});

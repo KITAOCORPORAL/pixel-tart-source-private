@@ -623,6 +623,7 @@ public partial class PlanningCenterView : UserControl
         if(e.Key==Key.Escape && Keyboard.FocusedElement is TextBox {Tag:"PrecisionInput"})return;
         if (e.Key == Key.Escape)
         {
+            if(DocumentContent.Children.OfType<PlanningRichEditor>().Any(editor=>editor.DismissEditorPanel())){e.Handled=true;return;}
             if(PlanningDockOverlay.Visibility==Visibility.Visible && ModalOverlay.Visibility!=Visibility.Visible && ImagePreview.Visibility!=Visibility.Visible){ClosePlanningDock();e.Handled=true;return;}
             if (_shotTable?.IsKeyboardFocusWithin == true) { _shotTable.CancelEdit(DataGridEditingUnit.Cell); _shotTable.CancelEdit(DataGridEditingUnit.Row); e.Handled = true; return; }
             if (ImagePreview.Visibility == Visibility.Visible) CloseImagePreview();

@@ -22,4 +22,12 @@ public sealed class PlanningR7TableTests
    var back=PlanningDocxAdapter.Import(path).Document.Blocks.OfType<Table>().Single();Assert.AreEqual(2,back.RowGroups[0].Rows[0].Cells[0].RowSpan);Assert.AreEqual(2,back.RowGroups[0].Rows[0].Cells[0].ColumnSpan);PlanningTableEditing.Split(back,back.RowGroups[0].Rows[0].Cells[0]);Assert.HasCount(9,PlanningTableEditing.Map(back));StringAssert.Contains(new TextRange(back.ContentStart,back.ContentEnd).Text,"R1C1");
   }finally{File.Delete(path);}await Task.CompletedTask;
  });
+ [TestMethod]
+ public Task UnsupportedCellBlocksRejectBeforeReplacingExistingFile()=>RunSta(async()=>
+ {
+  var path=Path.Combine(Path.GetTempPath(),Guid.NewGuid()+".docx");await File.WriteAllTextAsync(path,"original");
+  try{foreach(var block in new Block[]{new List(new ListItem(new Paragraph(new Run("列表")))),Make(1,1),new BlockUIContainer(new System.Windows.Controls.Image())})
+   {var table=Make(1,1);table.RowGroups[0].Rows[0].Cells[0].Blocks.Add(block);Assert.Throws<NotSupportedException>(()=>PlanningDocxAdapter.Export(new FlowDocument(table),path));Assert.AreEqual("original",await File.ReadAllTextAsync(path));}
+  }finally{File.Delete(path);}
+ });
 }

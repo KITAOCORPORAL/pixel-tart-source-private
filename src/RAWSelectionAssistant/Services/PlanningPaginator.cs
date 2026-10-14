@@ -61,7 +61,7 @@ internal static class PlanningRepeatHeaders
   {
    var next=Copy(row);current.RowGroups[0].Rows.Add(next);
    var probe=new FlowDocument{PageWidth=document.PageWidth,PageHeight=document.PageHeight,PagePadding=document.PagePadding,ColumnWidth=double.PositiveInfinity,FontFamily=document.FontFamily,FontSize=document.FontSize};
-   var copy=(Table)System.Windows.Markup.XamlReader.Parse(System.Windows.Markup.XamlWriter.Save(current));probe.Blocks.Add(copy);var paginator=((IDocumentPaginatorSource)probe).DocumentPaginator;paginator.PageSize=new Size(document.PageWidth,document.PageHeight);paginator.ComputePageCount();
+   var copy=(Table)System.Windows.Markup.XamlReader.Parse(System.Windows.Markup.XamlWriter.Save(current));probe.Blocks.Add(copy);var paginator=((IDocumentPaginatorSource)probe).DocumentPaginator;paginator.PageSize=new Size(document.PageWidth,document.PageHeight-4);paginator.ComputePageCount();
    if(paginator.PageCount>1){current.RowGroups[0].Rows.Remove(next);if(current.RowGroups[0].Rows.Count==1)throw new NotSupportedException("单行高于一页，不能安全重复表头；请缩短单元格内容。");chunks.Add(current);current=TableLike(table);current.RowGroups[0].Rows.Add(Copy(rows[0]));current.RowGroups[0].Rows.Add(next);}
   }
   chunks.Add(current);foreach(var chunk in chunks){document.Blocks.InsertBefore(table,new Paragraph(new Run("")){BreakPageBefore=true,Margin=new Thickness(0),FontSize=1,LineHeight=1});document.Blocks.InsertBefore(table,chunk);}document.Blocks.Remove(table);

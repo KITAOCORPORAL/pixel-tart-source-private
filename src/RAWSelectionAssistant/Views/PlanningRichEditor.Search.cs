@@ -13,6 +13,11 @@ public sealed partial class PlanningRichEditor
  private CheckBox? _whole;
  private TextBlock? _findStatus;
  private int _matchIndex=-1;
+ internal bool DismissEditorPanel()
+ {
+  if(_pageSettingsPanel?.Visibility==Visibility.Visible){Children.Remove(_pageSettingsPanel);_pageSettingsPanel=null;_editor.Focus();return true;}
+  if(_findPanel?.Visibility==Visibility.Visible){_findPanel.Visibility=Visibility.Collapsed;_editor.Focus();return true;}return false;
+ }
  public bool OwnsBodyFocus=>_editor.IsKeyboardFocusWithin||_findPanel?.IsKeyboardFocusWithin==true;
  internal int ReplaceBody(string query,string replacement,bool matchCase,bool wholeWord,bool all)
  {
@@ -25,8 +30,9 @@ public sealed partial class PlanningRichEditor
  }
  internal void OpenFind(bool replace)
  {
+  if(_pageSettingsPanel is not null)_pageSettingsPanel.Visibility=Visibility.Collapsed;
   if(_findPanel is not null){_findPanel.Visibility=Visibility.Visible;_replacement!.Visibility=replace?Visibility.Visible:Visibility.Collapsed;_query!.Focus();return;}
-  var content=new StackPanel{Margin=new Thickness(14)};var tabs=new TabControl{Background=System.Windows.Media.Brushes.Transparent,Foreground=System.Windows.Media.Brushes.Black};tabs.Items.Add(new TabItem{Header="查找"});tabs.Items.Add(new TabItem{Header="替换"});tabs.SelectedIndex=replace?1:0;content.Children.Add(tabs);
+  var content=new StackPanel{Margin=new Thickness(14)};var tabs=new TabControl{Background=System.Windows.Media.Brushes.Transparent,Foreground=System.Windows.Media.Brushes.Black};tabs.Items.Add(new TabItem{Header="查找"});tabs.Items.Add(new TabItem{Header="替换"});tabs.SelectedIndex=replace?1:0;tabs.ItemContainerStyle=(Style)System.Windows.Markup.XamlReader.Parse("<Style xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' TargetType='TabItem'><Setter Property='Foreground' Value='#E7E6E2'/><Setter Property='Background' Value='#303C39'/><Setter Property='Template'><Setter.Value><ControlTemplate TargetType='TabItem'><Border Background='{TemplateBinding Background}' Padding='14,6' BorderBrush='#9CC4BA' BorderThickness='0,0,0,2'><ContentPresenter ContentSource='Header'/></Border></ControlTemplate></Setter.Value></Setter></Style>");content.Children.Add(tabs);
   content.Children.Add(new TextBlock{Text="范围：普通正文（含表格、嵌套列表）；不含摄影结构字段、页眉页脚。",TextWrapping=TextWrapping.Wrap});
   _query=new TextBox{MinWidth=180,Margin=new Thickness(0,8,0,4)};_replacement=new TextBox{MinWidth=180,Margin=new Thickness(0,4,0,4),Visibility=replace?Visibility.Visible:Visibility.Collapsed};
   AutomationProperties.SetName(_query,"查找正文");AutomationProperties.SetName(_replacement,"替换为");content.Children.Add(new TextBlock{Text="查找内容"});content.Children.Add(_query);content.Children.Add(new TextBlock{Text="替换为"});content.Children.Add(_replacement);
