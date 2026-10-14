@@ -1,0 +1,79 @@
+{
+  "sourceCommit": "bbebec8d28628e847ef12d58cce32603c558569e",
+  "baseCommit": "13b0efe689c0114f6f76b70c59a1059cabeddbef",
+  "branch": "fix/kitao-planning-portable-images-home-20261014",
+  "exePath": "N:/pixart/kitao-planning-portable-images-home-20261014/artifacts/home-review-final/win-x64/KitaoPhotoSelector.exe",
+  "publishDirectory": "N:/pixart/kitao-planning-portable-images-home-20261014/artifacts/home-review-final/win-x64",
+  "build": "Release win-x64 self-contained non-single-file",
+  "components": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "bytes": 179200,
+      "sha256": "1ECBE5A3A9E36A6301997E59C467E8BB49B260F08639083B20D4CB851DEABBBE",
+      "productVersion": "2.3.0-portable-images-home-review+bbebec8d28628e847ef12d58cce32603c558569e",
+      "wpfTestHash": null,
+      "coreTestHash": null
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "bytes": 3245568,
+      "sha256": "AD22E4811A333883C7D01CDA37545CD271F6221E7CC360B408188370A4D00556",
+      "productVersion": "2.3.0-portable-images-home-review+bbebec8d28628e847ef12d58cce32603c558569e",
+      "wpfTestHash": "AD22E4811A333883C7D01CDA37545CD271F6221E7CC360B408188370A4D00556",
+      "coreTestHash": null
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "bytes": 4417024,
+      "sha256": "4D4129C0D37C92FDCB3D22E09D299FA8853877C5294DA684282BB82CBD888D14",
+      "productVersion": "2.3.0-portable-images-home-review+bbebec8d28628e847ef12d58cce32603c558569e.bbebec8d28628e847ef12d58cce32603c558569e",
+      "wpfTestHash": "4D4129C0D37C92FDCB3D22E09D299FA8853877C5294DA684282BB82CBD888D14",
+      "coreTestHash": "4D4129C0D37C92FDCB3D22E09D299FA8853877C5294DA684282BB82CBD888D14"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "bytes": 38912,
+      "sha256": "33A5A11B9120C31C1C085855AB2C3BA08E527D88D0003A030798E47517FB647E",
+      "productVersion": "2.3.0-portable-images-home-review+bbebec8d28628e847ef12d58cce32603c558569e.bbebec8d28628e847ef12d58cce32603c558569e",
+      "wpfTestHash": "33A5A11B9120C31C1C085855AB2C3BA08E527D88D0003A030798E47517FB647E",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "bytes": 11776,
+      "sha256": "4E3311F0B129848CBE306AB55722B8FD2B56334C3815B00E9B8DD9696D61F5CE",
+      "productVersion": "2.3.0-portable-images-home-review+bbebec8d28628e847ef12d58cce32603c558569e.bbebec8d28628e847ef12d58cce32603c558569e",
+      "wpfTestHash": "4E3311F0B129848CBE306AB55722B8FD2B56334C3815B00E9B8DD9696D61F5CE",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "bytes": 11264,
+      "sha256": "4E98BC810FC0BEA910850D27862C3EE23413ACD4049250714E7DAA92106521DF",
+      "productVersion": "2.3.0-portable-images-home-review+bbebec8d28628e847ef12d58cce32603c558569e.bbebec8d28628e847ef12d58cce32603c558569e",
+      "wpfTestHash": "4E98BC810FC0BEA910850D27862C3EE23413ACD4049250714E7DAA92106521DF",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "bytes": 67072,
+      "sha256": "CA3F3903F3A2E85B33482C2242C7998B62AF9C5E39A3F32517E0B858404BA5A0",
+      "productVersion": "2.3.0-portable-images-home-review+bbebec8d28628e847ef12d58cce32603c558569e.bbebec8d28628e847ef12d58cce32603c558569e",
+      "wpfTestHash": "CA3F3903F3A2E85B33482C2242C7998B62AF9C5E39A3F32517E0B858404BA5A0",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "bytes": 1161728,
+      "sha256": "48BE61E71A11040C2FD01BEAFB87B7B2F8307320745223D85000D7F00DCFEB09",
+      "productVersion": "2.3.0-portable-images-home-review+bbebec8d28628e847ef12d58cce32603c558569e.bbebec8d28628e847ef12d58cce32603c558569e",
+      "wpfTestHash": "48BE61E71A11040C2FD01BEAFB87B7B2F8307320745223D85000D7F00DCFEB09",
+      "coreTestHash": null
+    }
+  ],
+  "status": "BLOCKED",
+  "nativeStartup": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "wps": "NOT_RUN",
+  "blocker": "Required AssetLibraryP3PerformanceTests scope-switch metric 673.8ms exceeds unchanged 400ms threshold on final released Core. Not approved for review."
+}

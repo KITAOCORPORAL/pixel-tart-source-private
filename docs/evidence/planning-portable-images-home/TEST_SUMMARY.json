@@ -1,0 +1,131 @@
+{
+  "source": "bbebec8d28628e847ef12d58cce32603c558569e",
+  "suites": {
+    "strict-source-core": {
+      "status": "FAILED",
+      "selected": 1692,
+      "counts": {
+        "Passed": 1685,
+        "NotExecuted": 7
+      },
+      "timeouts": 0,
+      "nonzero": 0
+    },
+    "strict-source-wpf": {
+      "status": "FAILED",
+      "selected": 1625,
+      "counts": {
+        "Passed": 1602,
+        "NotExecuted": 23
+      },
+      "timeouts": 0,
+      "nonzero": 0
+    },
+    "strict-released-core": {
+      "status": "FAILED",
+      "selected": 1692,
+      "counts": {
+        "Passed": 1686,
+        "NotExecuted": 6
+      },
+      "timeouts": 0,
+      "nonzero": 0
+    },
+    "strict-released-wpf": {
+      "status": "PASSED",
+      "selected": 35,
+      "counts": {
+        "Passed": 35
+      },
+      "timeouts": 0,
+      "nonzero": 0
+    },
+    "strict-released-identity": {
+      "status": "PASSED",
+      "selected": 1,
+      "counts": {
+        "Passed": 1
+      },
+      "timeouts": 0,
+      "nonzero": 0
+    },
+    "final-strict-source-core": {
+      "status": "FAILED",
+      "selected": 1692,
+      "counts": {
+        "Passed": 1684,
+        "NotExecuted": 7,
+        "Failed": 1
+      },
+      "timeouts": 0,
+      "nonzero": 1
+    },
+    "final-strict-source-wpf": {
+      "status": "FAILED",
+      "selected": 1625,
+      "counts": {
+        "Passed": 1602,
+        "NotExecuted": 23
+      },
+      "timeouts": 0,
+      "nonzero": 0
+    },
+    "final-quiet-source-core": {
+      "status": "FAILED",
+      "selected": 1692,
+      "counts": {
+        "Passed": 1685,
+        "NotExecuted": 7
+      },
+      "timeouts": 0,
+      "nonzero": 0
+    },
+    "final-strict-released-core": {
+      "status": "FAILED",
+      "selected": 1692,
+      "counts": {
+        "Passed": 1685,
+        "Failed": 1,
+        "NotExecuted": 6
+      },
+      "timeouts": 0,
+      "nonzero": 1
+    },
+    "final-strict-released-wpf": {
+      "status": "PASSED",
+      "selected": 35,
+      "counts": {
+        "Passed": 35
+      },
+      "timeouts": 0,
+      "nonzero": 0
+    },
+    "final-strict-released-identity": {
+      "status": "PASSED",
+      "selected": 1,
+      "counts": {
+        "Passed": 1
+      },
+      "timeouts": 0,
+      "nonzero": 0
+    }
+  },
+  "reviewStatus": "BLOCKED",
+  "gateErrors": [
+    {
+      "infrastructure": "ALL",
+      "errors": [
+        "non-passing or not-executed tests",
+        "nonzero child exit"
+      ]
+    },
+    "nonzero process: ALL",
+    {
+      "failed": "RAWSelectionAssistant.Tests.AssetLibraryP3PerformanceTests.TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds",
+      "outcome": "Failed"
+    }
+  ],
+  "uniqueOpenGates": 29,
+  "existingClassificationsUnchanged": true,
+  "newRequiredTests": 6
+}

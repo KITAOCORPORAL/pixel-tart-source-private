@@ -1,0 +1,32 @@
+{
+  "root": "N:\\pixart\\kitao-planning-portable-images-home-20261014\\artifacts\\strict-released-identity\\run-20261015-010803-49beb5c5",
+  "assembly": "N:\\pixart\\kitao-planning-portable-images-home-20261014\\artifacts\\home-review-components\\core\\RAWSelectionAssistant.Tests.dll",
+  "assemblySha256": "fd6d93428ef585d0edc0789b41b2444e1bd9f42d5ae3718ef1edef8d6c6bdba4",
+  "discovered": 1692,
+  "selected": 1,
+  "runs": [
+    {
+      "pid": 5676,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests",
+      "directory": "N:\\pixart\\kitao-planning-portable-images-home-20261014\\artifacts\\strict-released-identity\\run-20261015-010803-49beb5c5\\000-Batch12ReleasedAssemblyTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "1c262ba3-4116-862d-aea7-d52ed9863bfa",
+          "name": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests.ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+          "display": "ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "counts": {
+    "Passed": 1
+  },
+  "historicalOnly": "Earlier freeze 0bbf617. Superseded by FINAL_* results for bbebec8; not final approval."
+}

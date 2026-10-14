@@ -1,0 +1,368 @@
+[
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningCenter.cs",
+    "type": "production-source",
+    "bytes": 15044,
+    "sha256": "C76A7ED4C17B2C7A5F9FC75D7C3C06B0815E881FDEB3378BC897BCEA34CC7CC1"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningDocumentImage.cs",
+    "type": "production-source",
+    "bytes": 921,
+    "sha256": "19AA4DEFF4A12485021E164EAB7495D73BC682FF21531AFE46DAB0120E62EE99"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningImageInventory.cs",
+    "type": "production-source",
+    "bytes": 3592,
+    "sha256": "D4B4FF6E43780BB0D534A1FFCE9005C9C1626B22EF740FB99193838481307E1F"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningImageStorage.cs",
+    "type": "production-source",
+    "bytes": 6200,
+    "sha256": "D25A5C3F4DFDD708216696089D0AFB2ED2F745784963DD711C716FAD8EC9EE0A"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Services/PlanningDocumentImages.cs",
+    "type": "production-source",
+    "bytes": 6156,
+    "sha256": "D3F09A4D30A72F12738A4F5BDCB36780F966F2C9FF649F45CC676B467AE7EB84"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+    "type": "production-source",
+    "bytes": 22384,
+    "sha256": "F5D91BAB316A9F68EF573AD34F2CE25F2245C1EBF0B6B251E3F7119E07D092ED"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Docx.cs",
+    "type": "production-source",
+    "bytes": 9615,
+    "sha256": "0DBD0B675612CEA393930D77004F2F5AA557670FB6ADB1675D42E31D688D2C1C"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Overview.cs",
+    "type": "production-source",
+    "bytes": 9428,
+    "sha256": "62F4778FE93B2C99AC30A297941EBDB3B9BC64823D2BDB6092DD8D5B9C17226A"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Resources.cs",
+    "type": "production-source",
+    "bytes": 5039,
+    "sha256": "00860227765D90B50E3A670D24ED1A72887190BC5EBD1BF9F516B752830F16D7"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.TrayImages.cs",
+    "type": "production-source",
+    "bytes": 7026,
+    "sha256": "98F5350E5504DD61A2B6CDBD1123CB34EA64EF194C3F765E479A495FA1D5B8F6"
+  },
+  {
+    "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.TrayImages.cs",
+    "type": "production-source",
+    "bytes": 7557,
+    "sha256": "95B295C38AB24D45F9E9CD364F5E7A5E84EF96A9E7AA8A91AB83A52069A521D7"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.Tests/PlanningImageStorageTests.cs",
+    "type": "test-source",
+    "bytes": 4098,
+    "sha256": "735D57D171857088C39569F8695AFA3220EFB92F9B4BFF9A2C0383B7F9114F9E"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningPortableImageTests.cs",
+    "type": "test-source",
+    "bytes": 12579,
+    "sha256": "0099EB9FADF37BC065DCEA56C7A0E939CCA07F49A608B6276144AC4065D5F050"
+  },
+  {
+    "path": "tools/planning-r7/review-classification.json",
+    "type": "required-test-policy",
+    "bytes": 755565,
+    "sha256": "C3BD5DDC802C0B05EEC0043514D41DA932083D907B358AB3AEB3C085465F2201"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\COMMITS.json",
+    "type": "json",
+    "bytes": 693,
+    "sha256": "D133CD092B6AB5BE978FED904E2BB2628F472ED28069C55F1B4849B47C1C96F0"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\DELIVERY.md",
+    "type": "md",
+    "bytes": 4792,
+    "sha256": "8460D3959BCD6B4DC9516F18CE024BF926B08B57DF6C96715D6D06FEA6B2008A"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\FAILURES_AND_REPAIRS.md",
+    "type": "md",
+    "bytes": 1444,
+    "sha256": "3AA334296A0399D32BFE4A82A027A361DA881F787E10D644DB08BDD7C6B2B5DC"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\OPEN_GATES.json",
+    "type": "json",
+    "bytes": 9128,
+    "sha256": "0FD64FF91425889664D5AA49C745482EFBA7EBDE381D8711D4D07169836DD195"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\OPEN_ITEMS.md",
+    "type": "md",
+    "bytes": 1463,
+    "sha256": "B3A0D2C734C930157601E3700C6B742F0A00DE9D77A05027034501BBBF353D01"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\RAW_TEST_MANIFEST.json",
+    "type": "json",
+    "bytes": 411553,
+    "sha256": "BE6068F40204B4D476E820D473170903F4F6528AE39546C4995D11BF2731E57B"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\RAW_TEST_RESULTS.zip",
+    "type": "zip",
+    "bytes": 5944275,
+    "sha256": "8FC92F95D1734FDE0ADD1AC8161D7E173653D6AF2054B81C5625E92DC725ED10"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\REPRODUCE.md",
+    "type": "md",
+    "bytes": 1421,
+    "sha256": "903AF0F5E0F624B86DB2A95E79518BD0F979C43C3082827F4DD97B0A11296CD8"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\TEST_SUMMARY.json",
+    "type": "json",
+    "bytes": 2898,
+    "sha256": "4D9B233F6AC7A72DDAC99C011F0A4449FECC1649172D03437DF50789DB92BD6C"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\WORKTREES_PRESERVED.json",
+    "type": "json",
+    "bytes": 4542,
+    "sha256": "0FEBB1E903C525DF4B0FCD153995462E1300D138474AC2309AF551B85925B648"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\samples\\legacy-after.json",
+    "type": "json",
+    "bytes": 4213,
+    "sha256": "A32FBF2B78105274DF57D6386AD2D73F46E82903F3289003F4B306D72F339CA6"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\samples\\legacy-before.json",
+    "type": "json",
+    "bytes": 4226,
+    "sha256": "E801E6F3FDBB01ADF469CD2108799BAACDEA20713973B779F04D7A702C8A89B0"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\samples\\README.md",
+    "type": "md",
+    "bytes": 798,
+    "sha256": "2AEC028F848BBB71DB07CB5897A57BA2BE166CF1A1EC5209D00E7EAC0ABC6E28"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\samples\\relative-after.json",
+    "type": "json",
+    "bytes": 1515,
+    "sha256": "EEEFF449A4D8A0B9312B070E69BDE50A0095CD9EA74F334C2F743183D2AAA445"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage1\\DELIVERY.md",
+    "type": "md",
+    "bytes": 2067,
+    "sha256": "87CB8319F4EF8A261834D4A5C5557EC90308D9DC22C68AAA7AB908FA1B18F4B2"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage2\\DELIVERY.md",
+    "type": "md",
+    "bytes": 1668,
+    "sha256": "119E4B2A95ECF077EFF15B0ABF93F2ED89DFDC0B2DD6411981E68F0EF81060B0"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\FINAL_POSTPUBLISH_GATE.json",
+    "type": "json",
+    "bytes": 12158,
+    "sha256": "7387F903E63A13E5E90359921667549493DC66024A6CBD55874DBFA1D6AA2A27"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\FINAL_PREPUBLISH_GATE.json",
+    "type": "json",
+    "bytes": 9870,
+    "sha256": "DFBB2434B79F6407437B6516E7A6C640A5E85A57B1BB8DDE155FF0251AAEFDCD"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\FINAL_RELEASED_CORE_DISCOVERY.json",
+    "type": "json",
+    "bytes": 785628,
+    "sha256": "D5FDB63559FEE77BF34417C2FAABFE4AED9F2CEC1E6C0CF7AF605EC6970049E4"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\FINAL_RELEASED_CORE_SUMMARY.json",
+    "type": "json",
+    "bytes": 574160,
+    "sha256": "F8528E438503563D309478205ECE098F9C6EC2D691CB3E8B6321D16B36581529"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\FINAL_RELEASED_IDENTITY_DISCOVERY.json",
+    "type": "json",
+    "bytes": 785628,
+    "sha256": "D5FDB63559FEE77BF34417C2FAABFE4AED9F2CEC1E6C0CF7AF605EC6970049E4"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\FINAL_RELEASED_IDENTITY_SUMMARY.json",
+    "type": "json",
+    "bytes": 1286,
+    "sha256": "267B314FA6C85FC703F93A142CF056119D0AA9BE033D3A73797BCF6D5620C250"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\FINAL_RELEASED_WPF_DISCOVERY.json",
+    "type": "json",
+    "bytes": 811345,
+    "sha256": "EEBCC132553B0463A17B06AFA4CC152986C6F8AD0784BD63AD9E7BAF90D82D01"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\FINAL_RELEASED_WPF_SUMMARY.json",
+    "type": "json",
+    "bytes": 16962,
+    "sha256": "3D2CF733B93A62F09F6A2C5A61583398C6DE031BFD8BBDD378395DD8926F4A3F"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\FINAL_SOURCE_CORE_DISCOVERY.json",
+    "type": "json",
+    "bytes": 826236,
+    "sha256": "4F9DC5820C249A832333BCF660990AFDB8FC7B2201EEA88F4A6E7DCB84119176"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\FINAL_SOURCE_CORE_SUMMARY.json",
+    "type": "json",
+    "bytes": 572941,
+    "sha256": "C0F87BEA6E6B118C2862B267B09E9C6A367EBB1CC2361896AFD65FF6C4C00F0E"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\FINAL_SOURCE_WPF_DISCOVERY.json",
+    "type": "json",
+    "bytes": 889345,
+    "sha256": "A4B6AC7BA39F6B6A54DE9E41049BA2F926049EE78AC3C3B1570C475F40B88015"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\FINAL_SOURCE_WPF_SUMMARY.json",
+    "type": "json",
+    "bytes": 695562,
+    "sha256": "FA9542B11C743C3F31FEBB91238E99558E594036FA73B7AE35441D4BA371C922"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\POSTPUBLISH_GATE.json",
+    "type": "json",
+    "bytes": 11910,
+    "sha256": "CAABBC2503D27464C4B3CCBCCC3533E929053B87CA4BAAFA1C2DC6D5B29C2D45"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\PREPUBLISH_GATE.json",
+    "type": "json",
+    "bytes": 9981,
+    "sha256": "3D3279CFD772C0B6241D8BC8FB15695CCA6C1DE40AF14EBD097720A0B48EAA44"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\REFREEZE_CONCURRENT_BLOCKED_GATE.json",
+    "type": "json",
+    "bytes": 10229,
+    "sha256": "6CD2CB58CA0E0C1C30C122CDA17D3B22375A0E8E770CA77D7F2453EBFB275EC2"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\REFREEZE_CONCURRENT_CORE_FAILED_SUMMARY.json",
+    "type": "json",
+    "bytes": 574781,
+    "sha256": "4D083488EA703ACE8251FF8E62B4E7E5AB57C18120A3C85EB4F39065C3F070BD"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\REFREEZE_FAILURE.md",
+    "type": "md",
+    "bytes": 1427,
+    "sha256": "AA41FA57BE228EDC577E20D37EAFBD99159AB487F86BCD2C6AB8989AC2CE2DF9"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\RELEASE_FILES.json",
+    "type": "json",
+    "bytes": 46424,
+    "sha256": "D5DAE370A7692B879964FF9E123A18B4C259AF70CAB1A1CD21A9EB7ED2C11101"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\RELEASE_IDENTITY.json",
+    "type": "json",
+    "bytes": 4178,
+    "sha256": "34292554428C2397A42496DA5430719049B6DD8D95B46F2248C803E1B999CFE1"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\RELEASED_CORE_DISCOVERY.json",
+    "type": "json",
+    "bytes": 787320,
+    "sha256": "1D3E37A183C294C09A69465F15EC4553DEBBA406D8EB482BAF7D8E96B3B38C70"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\RELEASED_CORE_SUMMARY.json",
+    "type": "json",
+    "bytes": 572425,
+    "sha256": "7C3835DEFF916AF5DBA1A5B881E02428C6B681F6F07C0A0B07642FA9F8DD63EB"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\RELEASED_IDENTITY_DISCOVERY.json",
+    "type": "json",
+    "bytes": 787320,
+    "sha256": "1D3E37A183C294C09A69465F15EC4553DEBBA406D8EB482BAF7D8E96B3B38C70"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\RELEASED_IDENTITY_SUMMARY.json",
+    "type": "json",
+    "bytes": 1385,
+    "sha256": "7E113CDF9980F5067DD02ECD7BBBBF559DC43C4BB34EF663E46F360057BC27A0"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\RELEASED_WPF_DISCOVERY.json",
+    "type": "json",
+    "bytes": 812970,
+    "sha256": "BBCFD4DCADED619C71CDAB3094B96FB26E6583B009067316EABC653B782918FC"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\RELEASED_WPF_SUMMARY.json",
+    "type": "json",
+    "bytes": 17007,
+    "sha256": "EBDCB1AD7418B97D3653930EFF98069C398C5A4A877CC7D1639D3387CEE0FD87"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\SOURCE_CORE_DISCOVERY.json",
+    "type": "json",
+    "bytes": 826236,
+    "sha256": "4F9DC5820C249A832333BCF660990AFDB8FC7B2201EEA88F4A6E7DCB84119176"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\SOURCE_CORE_SUMMARY.json",
+    "type": "json",
+    "bytes": 573042,
+    "sha256": "A3E34BD7BA9D1362CE3EFB52EBF57786897CA2244372851A0F66DCF457989A52"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\SOURCE_WPF_DISCOVERY.json",
+    "type": "json",
+    "bytes": 889345,
+    "sha256": "A4B6AC7BA39F6B6A54DE9E41049BA2F926049EE78AC3C3B1570C475F40B88015"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\SOURCE_WPF_SUMMARY.json",
+    "type": "json",
+    "bytes": 694414,
+    "sha256": "4BF8A7724A7D4D4E30F0E7608E3EFE32A31865D6D41594BAA5B6900AECCF5839"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage3\\STRICT_GATE_CONTRACT.md",
+    "type": "md",
+    "bytes": 1104,
+    "sha256": "B974B8EA4351696D4A20E893889767E599E3D83BE25D4BBAF0DEB6C1F7ECEBBD"
+  },
+  {
+    "path": "docs\\evidence\\planning-portable-images-home\\stage4\\NOT_RUN.md",
+    "type": "md",
+    "bytes": 878,
+    "sha256": "D4F50705151F8A8D88B6A83FA40AB12C71B0378D3FBA2381207F5EF90E69B349"
+  }
+]

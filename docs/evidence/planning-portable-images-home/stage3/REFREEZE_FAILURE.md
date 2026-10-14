@@ -1,0 +1,11 @@
+# 再冻结期间必需性能失败
+
+新源码bbebec8增加真实打开/保存入口的精确图片错误传播，防底层图片ID被UI通用文案隐藏。搬迁/托盘9项专项已通过。
+
+再次完整Core与WPF同时执行时，必需AssetLibraryP3PerformanceTests.TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds出现当前/全库范围切换2499.7ms > 400ms失败。保持原TRX、完整summary、nonzero child exit和REFREEZE_CONCURRENT_BLOCKED_GATE，当前冻结不能沿用前一0bbf617审阅结果构建。
+
+不改门槛、不将必需项降条件，不改素材库生产代码。先等并行WPF结束，再同机器无并行测试负载跑原完整Core；若仍失败继续BLOCKED。单项重跑不能替代完整Core结果。执行负载相关性是待验证假设，不预先声称根因已证实。
+
+顺序执行复验：待完整WPF结束后，无并行测试host，完整Core同1692项1685Passed/7NotExecuted，必需性能项Passed，阈值和分类未改。新源码完整WPF1625项1602Passed/23NotExecuted，逐项审阅FINAL_PREPUBLISH_GATE errors0。该负载相关性不作为原失败豁免，失败记录继续保留；最终发布后Core也顺序执行。
+
+最终发布顺序完整Core仍同项673.8ms>400ms失败，非并行测试host运行；不能把原并行负载假设当唯一根因。最终FINAL_POSTPUBLISH_GATE BLOCKED，后续不反复重跑挑绿结果。
