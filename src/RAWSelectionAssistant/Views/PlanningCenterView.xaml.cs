@@ -636,6 +636,7 @@ public partial class PlanningCenterView : UserControl
             if (e.Key == Key.S) { e.Handled = true; await FlushDocumentAsync(); return; }
             if (ModalOverlay.Visibility == Visibility.Visible || ImagePreview.Visibility == Visibility.Visible) return;
             if (e.Key == Key.P) { e.Handled = true; if (await FlushDocumentAsync()) await _vm.PreviewDocumentCommand.ExecuteAsync(null); return; }
+            if(e.Key is Key.F or Key.H && DocumentContent.Children.OfType<PlanningRichEditor>().FirstOrDefault(x=>x.OwnsBodyFocus) is {} bodyEditor){e.Handled=true;bodyEditor.OpenFind(e.Key==Key.H);return;}
             if (e.Key == Key.F) { e.Handled = true; if(!DocumentListPane.IsVisible)OpenPlanningDock(DocumentListPane,false);ProjectSearchBox.Focus(); ProjectSearchBox.SelectAll(); return; }
         }
         if (e.OriginalSource is TextBoxBase || e.Key is Key.ImeProcessed or Key.DeadCharProcessed) return;

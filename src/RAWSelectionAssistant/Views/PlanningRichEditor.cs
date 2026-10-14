@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 namespace RAWSelectionAssistant.Views;
-public sealed class PlanningRichEditor : DockPanel
+public sealed partial class PlanningRichEditor : DockPanel
 {
     private readonly RichTextBox _editor=new(){MinHeight=420,AcceptsTab=true,VerticalScrollBarVisibility=ScrollBarVisibility.Auto};
     private PlanningPageLayout _page=new();
@@ -25,6 +25,7 @@ public sealed class PlanningRichEditor : DockPanel
         else _editor.Document=new FlowDocument(new Paragraph(new Run(text)));
         _page=layout?.Page??new();_losses=layout?.ImportLosses??[];PlanningDocumentLayout.Apply(_editor.Document,layout);
         _editor.IsUndoEnabled=false;
+        _editor.PreviewKeyDown+=(_,e)=>{if(Keyboard.Modifiers.HasFlag(ModifierKeys.Control)&&e.Key is Key.F or Key.H){OpenFind(e.Key==Key.H);e.Handled=true;}};
         _editor.PreviewKeyDown+=(_,e)=>{if(Keyboard.Modifiers.HasFlag(ModifierKeys.Control)&&e.Key is Key.Z or Key.Y){if(e.Key==Key.Y||Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))_history.Redo();else _history.Undo();_persist?.Invoke();e.Handled=true;}};_history=new(_editor,()=>PlanningDocumentLayout.Capture(_editor.Document,_page,_losses),value=>{_page=value.Page;_losses=value.ImportLosses;});_history.Initialize();
         CommandBindings.Add(new CommandBinding(ApplicationCommands.Undo,(_,e)=>{_history.Undo();_persist?.Invoke();e.Handled=true;},(_,e)=>{e.CanExecute=true;e.Handled=true;}));
         CommandBindings.Add(new CommandBinding(ApplicationCommands.Redo,(_,e)=>{_history.Redo();_persist?.Invoke();e.Handled=true;},(_,e)=>{e.CanExecute=true;e.Handled=true;}));
@@ -61,6 +62,7 @@ public sealed class PlanningRichEditor : DockPanel
         Add("图片",()=>{var dialog=new OpenFileDialog{Filter="图片|*.png;*.jpg;*.jpeg"};if(dialog.ShowDialog()==true)Image(File.ReadAllBytes(dialog.FileName));});
         var canvasPicker=new ComboBox{Width=140,ItemsSource=canvasImages.Where(v=>v.PreviewPngBase64 is not null).GroupBy(v=>v.CanvasId).Select(g=>g.Last()).ToArray(),DisplayMemberPath="EditableSnapshot.Name",ToolTip="选择需插入或更新的画布"};tools.Children.Add(canvasPicker);canvasPicker.SelectedIndex=0;
         Add("画布快照",()=>{var last=canvasPicker.SelectedItem as PlanningCanvasRevision;if(last is not null){var existing=_editor.Document.Blocks.FirstOrDefault(b=>(b.Tag as PlanningBlockSemantic)?.CanvasId==last.CanvasId);Image(Convert.FromBase64String(last.PreviewPngBase64!));var inserted=_editor.Document.Blocks.LastBlock!;inserted.Tag=new PlanningBlockSemantic(0,CanvasId:last.CanvasId,CanvasRevisionId:last.RevisionId);if(existing is not null){_editor.Document.Blocks.Remove(inserted);_editor.Document.Blocks.InsertBefore(existing,inserted);_editor.Document.Blocks.Remove(existing);}}else ThemedMessageDialog.Show(Window.GetWindow(this),"画布快照","请先在情绪板插入或更新画布版本。",ThemedMessageKind.Information);});
+        Add("查找",()=>OpenFind(false));Add("替换",()=>OpenFind(true));
         Add("分页预览",()=>OpenPagedPreview());
         Add("打印 / PDF",()=>{var dialog=new PrintDialog();if(dialog.ShowDialog()==true)dialog.PrintDocument(((IDocumentPaginatorSource)Clone()).DocumentPaginator,"Kitao Studio 光镜 策划");});
         Add("导出 DOCX",()=>{var dialog=new SaveFileDialog{Filter="DOCX|*.docx"};if(dialog.ShowDialog()==true)Services.PlanningDocxAdapter.Export(_editor.Document,dialog.FileName);});
