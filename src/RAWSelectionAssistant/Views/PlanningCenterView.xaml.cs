@@ -598,12 +598,15 @@ public partial class PlanningCenterView : UserControl
         ModalOverlay.Visibility = Visibility.Visible; FocusOverlay(ModalContent);
     }
     private void FocusOverlay(FrameworkElement content) => Dispatcher.BeginInvoke(new Action(() => content.MoveFocus(new TraversalRequest(FocusNavigationDirection.First))));
+    internal bool TryCancelLightingGesture()
+    {if(DocumentContent.Children.OfType<PlanningLightDiagram>().FirstOrDefault(d=>d.HasPendingDrag) is not {} lighting)return false;lighting.CancelPositionEdit();return true;}
     public async Task HandleWorkspaceKeyAsync(KeyEventArgs e)
     {
         if (_vm is null) return;
         FrameworkElement? overlay = ImagePreview.Visibility == Visibility.Visible ? ImagePreview : ModalOverlay.Visibility == Visibility.Visible ? ModalOverlay : ContextDrawer.Visibility == Visibility.Visible ? ContextDrawer : PlanningDockOverlay.Visibility==Visibility.Visible?PlanningDockOverlay:null;
         if (overlay is not null && e.Key == Key.Tab && (Keyboard.FocusedElement is not DependencyObject focused || !overlay.IsAncestorOf(focused)))
         { FocusOverlay(overlay); e.Handled = true; return; }
+        if(e.Key==Key.Escape&&TryCancelLightingGesture()){e.Handled=true;return;}
         if(e.Key==Key.Escape && Keyboard.FocusedElement is TextBox {Tag:"PrecisionInput"})return;
         if (e.Key == Key.Escape)
         {

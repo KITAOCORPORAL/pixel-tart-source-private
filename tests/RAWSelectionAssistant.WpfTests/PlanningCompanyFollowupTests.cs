@@ -36,6 +36,7 @@ public sealed class PlanningCompanyFollowupTests
         var commits=0;var diagram=new PlanningLightDiagram([light],async next=>{commits++;return await f.Vm.SaveResourceAsync(next);},_=>{});Arrange(diagram,800,360);
         // Creating/cancelling without a commit has no side effects; only explicit completed transaction persists.
         diagram.BeginPositionEdit(light);Assert.IsTrue(diagram.HasPendingDrag);diagram.CancelPositionEdit();Assert.IsFalse(diagram.HasPendingDrag);Assert.AreEqual(.2,f.Vm.ResourceCatalog.Items.OfType<PlanningLight>().Single().X);
+        var workspace=new PlanningCenterView{DataContext=f.Vm};await f.Vm.SelectContentSafelyAsync("灯位图");workspace.Render();Arrange(workspace,900,650);var live=Walk<PlanningLightDiagram>(workspace).Single();live.BeginPositionEdit(light);Assert.IsTrue(workspace.TryCancelLightingGesture());Assert.IsFalse(live.HasPendingDrag);Assert.IsFalse(workspace.TryCancelLightingGesture());workspace.DataContext=null;
         Assert.AreEqual(0,commits);Assert.IsTrue(await diagram.CommitPositionAsync(light,new(.823,.676)));Assert.AreEqual(1,commits);
         var current=f.Vm.ResourceCatalog.Items.OfType<PlanningLight>().Single();Assert.AreEqual(light.Id,current.Id);Assert.AreEqual(.8,current.X);Assert.AreEqual(.7,current.Y);
         await f.Vm.LoadAsync(f.Id);Assert.AreEqual(.8,f.Vm.ResourceCatalog.Items.OfType<PlanningLight>().Single().X);Assert.IsTrue(await f.Vm.UndoPlanningAsync());Assert.AreEqual(.2,f.Vm.ResourceCatalog.Items.OfType<PlanningLight>().Single().X);

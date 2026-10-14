@@ -1,0 +1,3 @@
+# Unit05 routed Escape contract
+
+Planning workspace ownsPreviewKeyDown andotherwiseconsumesEscape. AddedearlycheckforactivePlanningLightDiagramgesturebeforemodal/table/previewfallback; itcancelsstagedpositionwithoutSaveResource. Thispreventsparentpreviewhandlerfromswallowingdiagramcancel. Nocolour/math/sharedglobalinputchanges. Existingdrawer/rowescapecontractsremainorderedafterlighting-onlygesturecancel.
