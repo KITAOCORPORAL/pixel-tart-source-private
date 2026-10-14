@@ -1,0 +1,55 @@
+{
+  "source": "f8c1da56279149496639105db11f5b16efb77b9d",
+  "suites": {
+    "B6-source-core": {
+      "strictStatus": "FAILED",
+      "selected": 1695,
+      "counts": {
+        "Passed": 1688,
+        "NotExecuted": 7
+      }
+    },
+    "B6-final-core": {
+      "strictStatus": "FAILED",
+      "selected": 1697,
+      "counts": {
+        "Passed": 1690,
+        "NotExecuted": 7
+      }
+    },
+    "B6-source-wpf": {
+      "strictStatus": "FAILED",
+      "selected": 1622,
+      "counts": {
+        "Passed": 1599,
+        "NotExecuted": 23
+      }
+    },
+    "B-final-release-core": {
+      "strictStatus": "FAILED",
+      "selected": 1697,
+      "counts": {
+        "Passed": 1691,
+        "NotExecuted": 6
+      }
+    },
+    "B-final-release-wpf": {
+      "strictStatus": "FAILED",
+      "selected": 21,
+      "counts": {
+        "Passed": 17,
+        "NotExecuted": 4
+      }
+    },
+    "B-final-release-identity": {
+      "strictStatus": "PASSED",
+      "selected": 1,
+      "counts": {
+        "Passed": 1
+      }
+    }
+  },
+  "reviewStatus": "REVIEW_BUILD_WITH_OPEN_GATES",
+  "gateErrors": [],
+  "uniqueOpenGates": 29
+}

@@ -12,4 +12,4 @@ PV7新冻结记录包含SourceSha、DecoderIdentity、Domain、WB-baked、Matrix
 3. Sony候选：历史固定官方0.22.2身份与源码检查，当前未找到本机二进制和同hash授权原件，本轮NOT_RUN；默认未启用且Release不带candidate。
 4. 宝丽来：CreativeApproximationV1预设与采集协议，不是准确现代相纸LUT。
 
-B2真实RAW探针/B4大图逐节点/原生allocator归属/自然释放系列/图像可视对照/真正ICC文件合成编码未完成，明确OPEN；不替换成小图PASS。本轮不声称性能改善，无证据生产优化零改。
+B2真实RAW探针/B4大图逐节点/原生allocator归属/自然释放系列/图像可视对照/输出ICC编码集成未完成（受控二进制ICC matrix/linear子集已补，仍非全ICC），明确OPEN；不替换成小图PASS。本轮不声称性能改善，无证据生产优化零改。

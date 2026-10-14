@@ -1,0 +1,31 @@
+{
+  "root": "N:\\pixart\\kitao-night-B-color-science-20261014\\artifacts\\B-final-release-identity\\run-20261015-025514-646bcb08",
+  "assembly": "N:\\pixart\\kitao-night-B-color-science-20261014\\artifacts\\B-final-components\\core\\RAWSelectionAssistant.Tests.dll",
+  "assemblySha256": "c4bd0cc237592240ab626b8c58d9d49b7395952f430162346039c3f7981b8cff",
+  "discovered": 1697,
+  "selected": 1,
+  "runs": [
+    {
+      "pid": 33252,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests",
+      "directory": "N:\\pixart\\kitao-night-B-color-science-20261014\\artifacts\\B-final-release-identity\\run-20261015-025514-646bcb08\\000-Batch12ReleasedAssemblyTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "1c262ba3-4116-862d-aea7-d52ed9863bfa",
+          "name": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests.ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+          "display": "ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "counts": {
+    "Passed": 1
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "sourceCommit": "f8c1da56279149496639105db11f5b16efb77b9d",
+  "baseCommit": "13b0efe689c0114f6f76b70c59a1059cabeddbef",
+  "publishDirectory": "N:/pixart/kitao-night-B-color-science-20261014/artifacts/B-final-review/win-x64",
+  "build": "Release win-x64 self-contained non-single-file",
+  "components": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "bytes": 179200,
+      "sha256": "D139BF37BD38BD57590C769C901331741F695C7C70D05BC2C924AD43EA879868",
+      "productVersion": "2.3.0-night-B-color-review+f8c1da56279149496639105db11f5b16efb77b9d",
+      "wpfTestHash": null,
+      "coreTestHash": null
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "bytes": 3242496,
+      "sha256": "5AED4E14434FA2F00094213D22F9600B268DF1737E9BB43AD71D935F305F87DC",
+      "productVersion": "2.3.0-night-B-color-review+f8c1da56279149496639105db11f5b16efb77b9d",
+      "wpfTestHash": "5AED4E14434FA2F00094213D22F9600B268DF1737E9BB43AD71D935F305F87DC",
+      "coreTestHash": null
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "bytes": 4462080,
+      "sha256": "D29063387776D414C4E03954B4250BD550DADC8F1B8E1DD7831174765372EC87",
+      "productVersion": "2.3.0-night-B-color-review+f8c1da56279149496639105db11f5b16efb77b9d.f8c1da56279149496639105db11f5b16efb77b9d",
+      "wpfTestHash": "D29063387776D414C4E03954B4250BD550DADC8F1B8E1DD7831174765372EC87",
+      "coreTestHash": "D29063387776D414C4E03954B4250BD550DADC8F1B8E1DD7831174765372EC87"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "bytes": 38912,
+      "sha256": "11D050E8397C9335A7B2B9DC5989C0F39081948ABEDB23E174613E080F1AF99E",
+      "productVersion": "2.3.0-night-B-color-review+f8c1da56279149496639105db11f5b16efb77b9d.f8c1da56279149496639105db11f5b16efb77b9d",
+      "wpfTestHash": "11D050E8397C9335A7B2B9DC5989C0F39081948ABEDB23E174613E080F1AF99E",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "bytes": 11776,
+      "sha256": "1B7A356899168E76CA12F190DE54380A0DED54B5E1831F78C04296CE158BDFE5",
+      "productVersion": "2.3.0-night-B-color-review+f8c1da56279149496639105db11f5b16efb77b9d.f8c1da56279149496639105db11f5b16efb77b9d",
+      "wpfTestHash": "1B7A356899168E76CA12F190DE54380A0DED54B5E1831F78C04296CE158BDFE5",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "bytes": 11264,
+      "sha256": "03B299A8AE5778BDB3FDD8193FD532779330D1E10E826818CC80FFB42B031EFA",
+      "productVersion": "2.3.0-night-B-color-review+f8c1da56279149496639105db11f5b16efb77b9d.f8c1da56279149496639105db11f5b16efb77b9d",
+      "wpfTestHash": "03B299A8AE5778BDB3FDD8193FD532779330D1E10E826818CC80FFB42B031EFA",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "bytes": 67072,
+      "sha256": "CFD7F7245A82B2470B1DB7E1CDB62F002E98389C56FF2C147056FF820C4B634D",
+      "productVersion": "2.3.0-night-B-color-review+f8c1da56279149496639105db11f5b16efb77b9d.f8c1da56279149496639105db11f5b16efb77b9d",
+      "wpfTestHash": "CFD7F7245A82B2470B1DB7E1CDB62F002E98389C56FF2C147056FF820C4B634D",
+      "coreTestHash": null
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "bytes": 1161728,
+      "sha256": "38FB1EA697E6B58D9108CA93A648D34EDE1CB371FDB4191010693EC7B5A00DB8",
+      "productVersion": "2.3.0-night-B-color-review+f8c1da56279149496639105db11f5b16efb77b9d.f8c1da56279149496639105db11f5b16efb77b9d",
+      "wpfTestHash": "38FB1EA697E6B58D9108CA93A648D34EDE1CB371FDB4191010693EC7B5A00DB8",
+      "coreTestHash": null
+    }
+  ],
+  "status": "REVIEW_BUILD_WITH_OPEN_GATES",
+  "desktop": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "realAccuracy": "UNPROVEN",
+  "sonyCandidate": "HISTORICAL_PROBE_NOT_ENABLED",
+  "polaroid": "CREATIVE_PRESET"
+}

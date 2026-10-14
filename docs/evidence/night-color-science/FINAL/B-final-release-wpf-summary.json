@@ -1,0 +1,233 @@
+{
+  "root": "N:\\pixart\\kitao-night-B-color-science-20261014\\artifacts\\B-final-release-wpf\\run-20261015-024903-5d0eab15",
+  "assembly": "N:\\pixart\\kitao-night-B-color-science-20261014\\artifacts\\B-final-components\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "37a458fce4c75b576eeb29c816227397417b22087484be3560e60831a889de80",
+  "discovered": 1622,
+  "selected": 21,
+  "runs": [
+    {
+      "pid": 15056,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.BatchEightPublishingOracleTests",
+      "directory": "N:\\pixart\\kitao-night-B-color-science-20261014\\artifacts\\B-final-release-wpf\\run-20261015-024903-5d0eab15\\000-BatchEightPublishingOracleTests",
+      "expected": 2,
+      "results": [
+        {
+          "id": "1d58717c-b8c8-8fb9-b22e-b4ee099561a8",
+          "name": "RAWSelectionAssistant.WpfTests.BatchEightPublishingOracleTests.Tiff16ResizeMatchesIndependentBilinearOracleWithoutEightBitQuantization",
+          "display": "Tiff16ResizeMatchesIndependentBilinearOracleWithoutEightBitQuantization",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1f1f0812-b0a2-8936-acd3-7724e16a58e4",
+          "name": "RAWSelectionAssistant.WpfTests.BatchEightPublishingOracleTests.ResizeOrientationDpiAndImageAlphaHaveIndependentPixelOracleAtNinePositions",
+          "display": "ResizeOrientationDpiAndImageAlphaHaveIndependentPixelOracleAtNinePositions",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 35420,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests",
+      "directory": "N:\\pixart\\kitao-night-B-color-science-20261014\\artifacts\\B-final-release-wpf\\run-20261015-024903-5d0eab15\\001-BatchElevenColorContractTests",
+      "expected": 3,
+      "results": [
+        {
+          "id": "18249c62-d9c7-82ec-858d-5d280020d884",
+          "name": "RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.ReducedHqUsesExpectedLinearLightBoxInsteadOfDoubleGamma",
+          "display": "ReducedHqUsesExpectedLinearLightBoxInsteadOfDoubleGamma",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13754610-0f94-804d-881e-11bd58d32f56",
+          "name": "RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.ControlledGreySaturationExifAndSixteenBitCodecsKeepSameFrozenPixels",
+          "display": "ControlledGreySaturationExifAndSixteenBitCodecsKeepSameFrozenPixels",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1193c5d9-b6ba-843e-b094-30dd8eebb51f",
+          "name": "RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts",
+          "display": "SeparatePureTiffEncodingValidationHashAndNodeCosts",
+          "outcome": "NotExecuted",
+          "error": "Assert.Inconclusive 失败。Performance output opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+        }
+      ],
+      "errors": [
+        "non-passing or not-executed tests"
+      ]
+    },
+    {
+      "pid": 18416,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests",
+      "directory": "N:\\pixart\\kitao-night-B-color-science-20261014\\artifacts\\B-final-release-wpf\\run-20261015-024903-5d0eab15\\002-BatchSevenRawProductTests",
+      "expected": 5,
+      "results": [
+        {
+          "id": "1320b307-7473-8738-bd24-dc51fd121a16",
+          "name": "RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.CancellingRowEncoderPreservesExistingDestinationAndLeavesNoPartialOutput",
+          "display": "CancellingRowEncoderPreservesExistingDestinationAndLeavesNoPartialOutput",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1f7a3875-86de-832b-8fb3-8902fe5c8025",
+          "name": "RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+          "display": "AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+          "outcome": "NotExecuted",
+          "error": "Assert.Inconclusive 失败。Authorized local corpus opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+        },
+        {
+          "id": "1940753d-cb9a-8b4a-a098-ff19edd8d233",
+          "name": "RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.NativeViewportDebouncesAndRejectsStaleExposureAndKeepsOneMaster",
+          "display": "NativeViewportDebouncesAndRejectsStaleExposureAndKeepsOneMaster",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "102b9315-1b51-8c3b-b99f-15b15ccdd627",
+          "name": "RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.PublishingKeepsRawDefinitionRejectsFakeIccAndUsesActualJpegQuality",
+          "display": "PublishingKeepsRawDefinitionRejectsFakeIccAndUsesActualJpegQuality",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "10a0429b-8fee-81a6-960f-8ac8073d52d0",
+          "name": "RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.ThreeRealEncodersPreservePrecisionOrientationProfileAndPixelContract",
+          "display": "ThreeRealEncodersPreservePrecisionOrientationProfileAndPixelContract",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": [
+        "non-passing or not-executed tests"
+      ]
+    },
+    {
+      "pid": 26000,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.SpatialClosureRealTests",
+      "directory": "N:\\pixart\\kitao-night-B-color-science-20261014\\artifacts\\B-final-release-wpf\\run-20261015-024903-5d0eab15\\003-SpatialClosureRealTests",
+      "expected": 2,
+      "results": [
+        {
+          "id": "169fc6fe-ddc9-8b56-99d4-4b60579260aa",
+          "name": "RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback",
+          "display": "OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback",
+          "outcome": "NotExecuted",
+          "error": "Assert.Inconclusive 失败。Reviewed official candidate opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+        },
+        {
+          "id": "17e19016-3ab7-8b34-b64a-9120db541ae4",
+          "name": "RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference",
+          "display": "RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference",
+          "outcome": "NotExecuted",
+          "error": "Assert.Inconclusive 失败。Authorized real measurement opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+        }
+      ],
+      "errors": [
+        "non-passing or not-executed tests"
+      ]
+    },
+    {
+      "pid": 25968,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests",
+      "directory": "N:\\pixart\\kitao-night-B-color-science-20261014\\artifacts\\B-final-release-wpf\\run-20261015-024903-5d0eab15\\004-StudioQuickExportFormatTests",
+      "expected": 4,
+      "results": [
+        {
+          "id": "19871803-7a96-8de5-967c-6f6404b4c066",
+          "name": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.ChosenEncodersPreservePrecisionAlphaAndEmbedSrgb",
+          "display": "ChosenEncodersPreservePrecisionAlphaAndEmbedSrgb",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b6ae82a-5710-87f0-8de5-947ef86f7f5a",
+          "name": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.RawToPngAndJpegReuseOneFrozenMasterAndCleanupIntermediates",
+          "display": "RawToPngAndJpegReuseOneFrozenMasterAndCleanupIntermediates",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "167abfde-6518-82cc-ab9a-9fa5cea960b6",
+          "name": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.JpegAndTiffExifDirectionsAreNormalizedOnceWithoutLosingPrecisionOrAlpha",
+          "display": "JpegAndTiffExifDirectionsAreNormalizedOnceWithoutLosingPrecisionOrAlpha",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "17d8f5b6-29c1-8bcb-ac69-10a7f90a24c3",
+          "name": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.SubclassSelectorsUseTheActualDarkComboBoxTemplate",
+          "display": "SubclassSelectorsUseTheActualDarkComboBoxTemplate",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 34448,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.TetherStartupPreferenceTests",
+      "directory": "N:\\pixart\\kitao-night-B-color-science-20261014\\artifacts\\B-final-release-wpf\\run-20261015-024903-5d0eab15\\005-TetherStartupPreferenceTests",
+      "expected": 5,
+      "results": [
+        {
+          "id": "19ecd3ed-b482-81e0-a9de-6e326ca9ae94",
+          "name": "RAWSelectionAssistant.WpfTests.TetherStartupPreferenceTests.LateTemplateGenerationWithNoSelectedPhotoAppliesStoredGroupState",
+          "display": "LateTemplateGenerationWithNoSelectedPhotoAppliesStoredGroupState",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b4e7c5a-c3ae-85bb-bced-e64cf7c52fde",
+          "name": "RAWSelectionAssistant.WpfTests.TetherStartupPreferenceTests.FirstLoadAndSaveWithoutSelectionOrGeneratedTemplateNeverReadVisualGroups",
+          "display": "FirstLoadAndSaveWithoutSelectionOrGeneratedTemplateNeverReadVisualGroups",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1774920c-6333-839d-91e5-ec7e3552c55d",
+          "name": "RAWSelectionAssistant.WpfTests.TetherStartupPreferenceTests.NarrowFirstStartupRestoresStoredWidthEvenWithBothHostsCollapsed",
+          "display": "NarrowFirstStartupRestoresStoredWidthEvenWithBothHostsCollapsed",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "137e550f-b8a0-87fb-b9fb-7e9ea11f3f55",
+          "name": "RAWSelectionAssistant.WpfTests.TetherStartupPreferenceTests.DeferredMainAndDrawerTemplatesShareExpansionAndSurviveCollapseSaveReopen",
+          "display": "DeferredMainAndDrawerTemplatesShareExpansionAndSurviveCollapseSaveReopen",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1fdf4c7a-c2cf-8782-8d1c-03fc3f847088",
+          "name": "RAWSelectionAssistant.WpfTests.TetherStartupPreferenceTests.SaveFailureIsRecordedInsteadOfHiddenAndCurrentStateRetained",
+          "display": "SaveFailureIsRecordedInsteadOfHiddenAndCurrentStateRetained",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "FAILED",
+  "counts": {
+    "Passed": 17,
+    "NotExecuted": 4
+  }
+}

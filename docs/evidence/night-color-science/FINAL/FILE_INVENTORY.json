@@ -1,0 +1,344 @@
+[
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Color/CameraChartCaptureProtocol.cs",
+    "type": "independent-experiment-source",
+    "bytes": 1449,
+    "sha256": "2E45286A418439B3E56FF3D619C8C4D5F1F155976AAD1BE3A9524E9209278D26"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Color/LinearInputProbe.cs",
+    "type": "independent-experiment-source",
+    "bytes": 1879,
+    "sha256": "9760973F0EFFEC31FC105E396E16B5418A0C356AE10A1CB96A331B81CC653FD0"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Color/PixelPipelineDiagnostics.cs",
+    "type": "independent-experiment-source",
+    "bytes": 4033,
+    "sha256": "1B7C873B9FDA419E5E9EE7D9F07A1B8A8F6D448141F9606DE5A865CF6637309F"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Color/Pv7ColorPrototype.cs",
+    "type": "independent-experiment-source",
+    "bytes": 6063,
+    "sha256": "6106D55DC1BE7A92224DD90D4731096DD8AF90876EBB225C1238EA54C248DCA3"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/Color/SyntheticIccMatrixReader.cs",
+    "type": "independent-experiment-source",
+    "bytes": 4234,
+    "sha256": "AB7218A609F367F409BA01BA7E9DBC168AA49709FD3315C53D8D54CE1AEC580A"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.Tests/NightColorBaselineTests.cs",
+    "type": "test-source",
+    "bytes": 2592,
+    "sha256": "106B0E89B79CEC3D24653D818E3C1C365DE94945CEDC4C658EF0036CADD0757C"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.Tests/Pv7PrototypeTests.cs",
+    "type": "test-source",
+    "bytes": 3574,
+    "sha256": "8588F3DBEEBCCB2978C573C77D4D0EFDB177F43D562D7CD6F8375E7C12C6786F"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.Tests/SyntheticIccFixtureTests.cs",
+    "type": "test-source",
+    "bytes": 3082,
+    "sha256": "8BF48EED5C25FC1F819E3758A9C8DBFBF56CC72E6CA640EBCB1AAFD670A9AAC1"
+  },
+  {
+    "path": "tools/NightColorReport/NightColorReport.csproj",
+    "type": "probe-or-required-policy",
+    "bytes": 335,
+    "sha256": "CE69E7799D6407CDD89BB78EA4BF1DBB1EF34A71A0F16D5132C97999AB9DCD0F"
+  },
+  {
+    "path": "tools/NightColorReport/Program.cs",
+    "type": "probe-or-required-policy",
+    "bytes": 1749,
+    "sha256": "AB8253F86396141ADFA19F87344B6B70550A37A6E8FF89134FCF28BD122A8662"
+  },
+  {
+    "path": "tools/NightSpatialProbe/NightSpatialProbe.csproj",
+    "type": "probe-or-required-policy",
+    "bytes": 335,
+    "sha256": "CE69E7799D6407CDD89BB78EA4BF1DBB1EF34A71A0F16D5132C97999AB9DCD0F"
+  },
+  {
+    "path": "tools/NightSpatialProbe/Program.cs",
+    "type": "probe-or-required-policy",
+    "bytes": 3897,
+    "sha256": "DCAC38DA298A579BDBE77140AEF53F2AD8FD30A8690BBDFDF730EBF61F5C38C0"
+  },
+  {
+    "path": "tools/planning-r7/review-classification.json",
+    "type": "probe-or-required-policy",
+    "bytes": 755821,
+    "sha256": "F08C11CE8C386D422B49EAD493F1236DDD7B104F4DB8FD0E23744AE81EF487FF"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B1\\PIXEL_CONTRACT.md",
+    "type": "md",
+    "bytes": 2474,
+    "sha256": "150DB51796305A60B535CB9482DF73FA9BD7342D8794EAC96B16EF2A97F05D4A"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B2\\INPUT_PROBES_AND_CANDIDATE.md",
+    "type": "md",
+    "bytes": 1751,
+    "sha256": "DE4684DFF7356CF1F9CD0A23F41F228A277FDDBD6437AC5A6E0D05CA9E895972"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B3\\PV7_CONTRACT.md",
+    "type": "md",
+    "bytes": 1407,
+    "sha256": "6DD9729165A67312B7F93882BC0C1513B01C63BAFE468F6A4259B3A442BD91DF"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B4\\Bloom-full.json",
+    "type": "json",
+    "bytes": 5859,
+    "sha256": "9F40946C7F21CCA1541E4851639B7FD8A32832B46D29551AEFEE6148FDBD195B"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B4\\Bloom-tile.json",
+    "type": "json",
+    "bytes": 5978,
+    "sha256": "F1366ECC0148FAA3D5621A647ED0F35C94DF5034238B882C763EFF2D8AA13E61"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B4\\Details-full.json",
+    "type": "json",
+    "bytes": 7257,
+    "sha256": "45DC756E1D996BBFE0D79965D1A2C6596A5A4482FCE1E88BA519F2DA37132BDB"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B4\\Details-tile.json",
+    "type": "json",
+    "bytes": 8476,
+    "sha256": "D431E5B41A619C6D1613B010BD2FC678835F6E2B8E12A575F05204E5A8968EEF"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B4\\Halation-full.json",
+    "type": "json",
+    "bytes": 5750,
+    "sha256": "63D3709322942BD1B3E1F8DB413396518F408CA65D0FFA71174004323CBF9498"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B4\\Halation-tile.json",
+    "type": "json",
+    "bytes": 5835,
+    "sha256": "975D7BDD812DCD0D08CA7C20FB23C440621D112900792E60BE95EA40D503B25E"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B4\\MEASURED_SUMMARY.json",
+    "type": "json",
+    "bytes": 2180,
+    "sha256": "9F52C2FE43E7FA4498D4FFFC4D7CD7CB89B24A7E0CA55FC1C763AFD66B1B2A96"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B4\\MEASUREMENT_BOUNDARY.md",
+    "type": "md",
+    "bytes": 1389,
+    "sha256": "AD15874F244BFA62AD54F599EC0A7A0C7C9B657DA05B6BA7B04A75B203B7BE82"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B4\\ReferenceMatch-full.json",
+    "type": "json",
+    "bytes": 7778,
+    "sha256": "EF80DFE247BC3E4A3A7E786399A8CC589149F61792D9C8CC387EDC1CADA96C79"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B4\\ReferenceMatch-tile.json",
+    "type": "json",
+    "bytes": 7152,
+    "sha256": "1ACFC864E4CBD81E8C60001C9AD010499A45EB3D1B5D884793791D0859FDFFD4"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B4\\Structure-full.json",
+    "type": "json",
+    "bytes": 5680,
+    "sha256": "4EBF7A1980194A8F8DF6286D941AFCFEA16E6A424E8D43202A136285A4FBAC12"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B4\\Structure-tile.json",
+    "type": "json",
+    "bytes": 5684,
+    "sha256": "1F5BA7721E7C1270DAB14E59E7EFA3CBE2958CF299227ACDAEE92AB39CB7C07C"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B5\\CAPTURE_PROTOCOL.md",
+    "type": "md",
+    "bytes": 1729,
+    "sha256": "82F21B52689C8E614EAB10BFA06F7F634DD8C05CFAE68F0BAC0A0F5974E62628"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B6\\FINAL_PREPUBLISH_GATE.json",
+    "type": "json",
+    "bytes": 9870,
+    "sha256": "A2E855B8938FF4728436B6A8494A93EFF313201A0A3E9CFE024AE0555685155E"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B6\\FREEZE_AND_CONCLUSIONS.md",
+    "type": "md",
+    "bytes": 1837,
+    "sha256": "46A6A645B6024141F1C0A4AF54EEF5405F05346966E251C654DF71207AD45E4E"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B6\\INPUT_EVIDENCE_MANIFEST.json",
+    "type": "json",
+    "bytes": 18306,
+    "sha256": "569791703C171BA530064D22895F24B31CC371D4CA2DB99876A05BB730999FDF"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B6\\PREPUBLISH_GATE.json",
+    "type": "json",
+    "bytes": 9870,
+    "sha256": "A0138B3465AF4E978C9EC9CFAA9F7CE5FE7E558DF21810EB4DB354106C4CD09B"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B6\\SYNTHETIC_ICC_SUBSET.md",
+    "type": "md",
+    "bytes": 581,
+    "sha256": "6E7EC6CEAB50FE06AAABA29D7BBF84B429684B78EFB3E6DE642DC13A68B900CF"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B6\\samples\\sample-manifest.json",
+    "type": "json",
+    "bytes": 40235,
+    "sha256": "578287322B10B8DC4569DED7D99DEC7B4FF59435D3074821014C27802DD7F3C4"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\B6\\samples\\sensor-probe.json",
+    "type": "json",
+    "bytes": 1685,
+    "sha256": "E8301B67800A96A2F74634025ED91C91CF236E425A1B4FC11AADA15920CFD77C"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\B-final-release-core-discovery.json",
+    "type": "json",
+    "bytes": 769357,
+    "sha256": "6C859464957F220FA7EF1818582BF959BF0E1FBF6CF60D0647F671F51E375C40"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\B-final-release-core-summary.json",
+    "type": "json",
+    "bytes": 574042,
+    "sha256": "6D1253F86A5498BCD51C8A510F67E15A491497A57F0F4DECC766A629C488515C"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\B-final-release-identity-discovery.json",
+    "type": "json",
+    "bytes": 769357,
+    "sha256": "6C859464957F220FA7EF1818582BF959BF0E1FBF6CF60D0647F671F51E375C40"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\B-final-release-identity-summary.json",
+    "type": "json",
+    "bytes": 1247,
+    "sha256": "8C1FC7EFB3C1B7431B9DD18FAD56D08FE66D9AA708907766F3DAFF9E98DA2C1D"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\B-final-release-wpf-discovery.json",
+    "type": "json",
+    "bytes": 791997,
+    "sha256": "E157C0E2718604FB726AFF37912686A49C92329A3F982A6E218937B6C61E7029"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\B-final-release-wpf-summary.json",
+    "type": "json",
+    "bytes": 13386,
+    "sha256": "778FC0D6CF7CD55B756A3BF07F17D30A40D92B90FE9E84DC6CA9F41E911502B2"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\B6-final-core-discovery.json",
+    "type": "json",
+    "bytes": 815176,
+    "sha256": "7F6DAAA27FBB5FE7015D3625AF7652A0FA550B3AA96C90F5C32B0BD8DBB8D144"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\B6-final-core-summary.json",
+    "type": "json",
+    "bytes": 574652,
+    "sha256": "6C0060439CE96DD3F7EAA636DA6527DD4E8C54184C71937C3B9428FAA0ADD3F8"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\B6-source-wpf-discovery.json",
+    "type": "json",
+    "bytes": 874719,
+    "sha256": "ABCC586A7C19FB4500DE2CABFBD755BA7FF0FB6393115B7C83BD8BD6DA4705DF"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\B6-source-wpf-summary.json",
+    "type": "json",
+    "bytes": 690237,
+    "sha256": "7A7FD71FCF9A82BBC153866D2FFE4A064F45B2B031B75B4D663454B8ADC93598"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\DELIVERY.md",
+    "type": "md",
+    "bytes": 4222,
+    "sha256": "B47ED80D2068498966ACC9F84A6036875CA992A65D7CA07273DB5246B7CFF205"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\OPEN_GATES.json",
+    "type": "json",
+    "bytes": 9128,
+    "sha256": "F4B5A9793E0F2493AED8273D1F9B23FB8FD2B6BD550E9EA4A09F826F8E8B28CE"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\OPEN_ITEMS.md",
+    "type": "md",
+    "bytes": 1863,
+    "sha256": "EDDB2F2CFFBCDD21EEC76CA97C2656ACC0CAA63EF8DF642AB7E0E049BF0A5206"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\POSTPUBLISH_GATE.json",
+    "type": "json",
+    "bytes": 13124,
+    "sha256": "46E615F8DF7924A6262D55620AD69A4CA87465C19615796227143139D8622841"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\PROVENANCE_LIMITS.md",
+    "type": "md",
+    "bytes": 637,
+    "sha256": "51161ABA9DA6F253B2B370E505848DC86B7627F0362D7AF1F7238EB322723C51"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\RAW_TEST_MANIFEST.json",
+    "type": "json",
+    "bytes": 195294,
+    "sha256": "17DF8F9AEBA5E179A8E0A5C3085CCA4315B4BCA7B099A53CE57FB73C6C9F3DFB"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\RAW_TEST_RESULTS.zip",
+    "type": "zip",
+    "bytes": 3291733,
+    "sha256": "319AD19F69215E4BF018F27B92B1C0AF2D7E9FBEF718EE8A91FBF5E4346B9230"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\RELEASE_FILES.json",
+    "type": "json",
+    "bytes": 46424,
+    "sha256": "0AE05FB82BF47FF8221913CA633873E6C7933122550885406495E4C2E8C4CAF9"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\RELEASE_IDENTITY.json",
+    "type": "json",
+    "bytes": 3858,
+    "sha256": "C79A99CCECCC9982D71132DBAE8251BC59C3542F8FB5321AEA5FBD0B24812BBD"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\SYNTHETIC_VISUAL.json",
+    "type": "json",
+    "bytes": 201,
+    "sha256": "12E03BB6730D2A6538B6DF39AEA930527DDE3AE3A68A96184354C82C820BC92D"
+  },
+  {
+    "path": "docs\\evidence\\night-color-science\\FINAL\\TEST_SUMMARY.json",
+    "type": "json",
+    "bytes": 1181,
+    "sha256": "4C81958D75CF802C7127D90DF99172D7B3C72785AC6B14AB52D4251B154D679A"
+  }
+]
