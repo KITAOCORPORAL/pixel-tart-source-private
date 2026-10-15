@@ -1,0 +1,8 @@
+E:\Kitao-Worktrees\kitao-icc-reliability-20261015\artifacts\icc-reliability\jpeg-success-1.partial-a1337b2d1c514518a02e6a4160121151\result.json
+Diagnostic partial output retained, never published: E:\Kitao-Worktrees\kitao-icc-reliability-20261015\artifacts\icc-reliability\jpeg-success-1.partial-a1337b2d1c514518a02e6a4160121151
+System.IO.IOException: Access to the path 'E:\Kitao-Worktrees\kitao-icc-reliability-20261015\artifacts\icc-reliability\jpeg-success-1.partial-a1337b2d1c514518a02e6a4160121151' is denied.
+   at System.IO.FileSystem.MoveDirectory(String sourceFullPath, String destFullPath, Boolean _)
+   at System.IO.FileSystem.MoveDirectory(String sourceFullPath, String destFullPath)
+   at BoundedWorkflow.Run(String[] args)
+   at Program.Run(String[] args)
+   at Program.Main(String[] args)

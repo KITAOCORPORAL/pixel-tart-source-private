@@ -98,7 +98,7 @@ internal static class Program
             var data=new byte[n];s.ReadExactly(data);s.Position+=4;
             if(System.Text.Encoding.ASCII.GetString(h,4,4)=="iCCP")
             {
-                int z=Array.IndexOf(data,(byte)0);if(z<0||z+2>=data.Length||data[z+1]!=0)throw new InvalidDataException();using var input=new MemoryStream(data,z+2,data.Length-z-2);using var zip=new System.IO.Compression.ZLibStream(input,System.IO.Compression.CompressionMode.Decompress);using var output=new MemoryStream();zip.CopyTo(output);if(output.Length>ControlledIccProfile.MaximumBytes)throw new InvalidDataException();return output.ToArray();
+                int z=Array.IndexOf(data,(byte)0);if(z<0||z+2>=data.Length||data[z+1]!=0)throw new InvalidDataException();using var input=new MemoryStream(data,z+2,data.Length-z-2);using var zip=new System.IO.Compression.ZLibStream(input,System.IO.Compression.CompressionMode.Decompress);using var output=new MemoryStream();var buffer=new byte[8192];int read;while((read=zip.Read(buffer,0,buffer.Length))>0){if(output.Length+read>ControlledIccProfile.MaximumBytes)throw new ControlledIccException("ICC_TOO_LARGE","PNGprofiledecompressedlimit.");output.Write(buffer,0,read);}return output.ToArray();
             }
         }
         throw new ControlledIccException("ICC_MISSING","Export lacks iCCP.");

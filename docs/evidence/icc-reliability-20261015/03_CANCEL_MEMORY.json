@@ -1,0 +1,4598 @@
+{
+  "samples": [
+    {
+      "wallMs": 4.6885,
+      "stage": "startup",
+      "managed": 102424,
+      "allocated": 102232,
+      "workingSet": 24309760,
+      "privateBytes": 7737344,
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "cpuMs": 78.125
+    },
+    {
+      "wallMs": 33.0572,
+      "stage": "startup",
+      "managed": 261848,
+      "allocated": 261248,
+      "workingSet": 31391744,
+      "privateBytes": 9662464,
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "cpuMs": 109.375
+    },
+    {
+      "wallMs": 63.7403,
+      "stage": "bounded-wic-cache",
+      "managed": 307000,
+      "allocated": 306280,
+      "workingSet": 37588992,
+      "privateBytes": 11243520,
+      "gc": [
+        0,
+        0,
+        0
+      ],
+      "cpuMs": 156.25
+    },
+    {
+      "wallMs": 94.6928,
+      "stage": "bounded-wic-cache",
+      "managed": 242203744,
+      "allocated": 242375376,
+      "workingSet": 82362368,
+      "privateBytes": 258129920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 203.125
+    },
+    {
+      "wallMs": 126.56,
+      "stage": "bounded-wic-cache",
+      "managed": 242219984,
+      "allocated": 242391592,
+      "workingSet": 162267136,
+      "privateBytes": 258179072,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 234.375
+    },
+    {
+      "wallMs": 156.5589,
+      "stage": "bounded-wic-cache",
+      "managed": 242236432,
+      "allocated": 242407992,
+      "workingSet": 162242560,
+      "privateBytes": 257298432,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 281.25
+    },
+    {
+      "wallMs": 187.7393,
+      "stage": "bounded-wic-cache",
+      "managed": 242244528,
+      "allocated": 242416088,
+      "workingSet": 162250752,
+      "privateBytes": 257298432,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 328.125
+    },
+    {
+      "wallMs": 218.517,
+      "stage": "natural-release-no-GC",
+      "managed": 243299784,
+      "allocated": 243471344,
+      "workingSet": 162246656,
+      "privateBytes": 258367488,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 343.75
+    },
+    {
+      "wallMs": 249.3655,
+      "stage": "natural-release-no-GC",
+      "managed": 243308008,
+      "allocated": 243479544,
+      "workingSet": 162250752,
+      "privateBytes": 258338816,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 359.375
+    },
+    {
+      "wallMs": 279.3704,
+      "stage": "natural-release-no-GC",
+      "managed": 243308008,
+      "allocated": 243479544,
+      "workingSet": 162250752,
+      "privateBytes": 258338816,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 359.375
+    },
+    {
+      "wallMs": 309.3586,
+      "stage": "natural-release-no-GC",
+      "managed": 243316232,
+      "allocated": 243487744,
+      "workingSet": 162525184,
+      "privateBytes": 259207168,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 359.375
+    },
+    {
+      "wallMs": 341.3813,
+      "stage": "natural-release-no-GC",
+      "managed": 243316232,
+      "allocated": 243487744,
+      "workingSet": 162562048,
+      "privateBytes": 258408448,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 359.375
+    },
+    {
+      "wallMs": 372.3737,
+      "stage": "natural-release-no-GC",
+      "managed": 243324456,
+      "allocated": 243495944,
+      "workingSet": 162578432,
+      "privateBytes": 258408448,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 359.375
+    },
+    {
+      "wallMs": 403.373,
+      "stage": "natural-release-no-GC",
+      "managed": 243324456,
+      "allocated": 243495944,
+      "workingSet": 162615296,
+      "privateBytes": 258433024,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 359.375
+    },
+    {
+      "wallMs": 435.3975,
+      "stage": "natural-release-no-GC",
+      "managed": 243332680,
+      "allocated": 243504144,
+      "workingSet": 162639872,
+      "privateBytes": 258433024,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 359.375
+    },
+    {
+      "wallMs": 467.3978,
+      "stage": "natural-release-no-GC",
+      "managed": 243332680,
+      "allocated": 243504144,
+      "workingSet": 162664448,
+      "privateBytes": 258433024,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 359.375
+    },
+    {
+      "wallMs": 499.3863,
+      "stage": "natural-release-no-GC",
+      "managed": 243340904,
+      "allocated": 243512344,
+      "workingSet": 162693120,
+      "privateBytes": 258433024,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 390.625
+    },
+    {
+      "wallMs": 530.3649,
+      "stage": "natural-release-no-GC",
+      "managed": 243340904,
+      "allocated": 243512344,
+      "workingSet": 162693120,
+      "privateBytes": 258433024,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 390.625
+    },
+    {
+      "wallMs": 562.3595,
+      "stage": "natural-release-no-GC",
+      "managed": 243349128,
+      "allocated": 243520544,
+      "workingSet": 162701312,
+      "privateBytes": 258433024,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 406.25
+    },
+    {
+      "wallMs": 594.379,
+      "stage": "natural-release-no-GC",
+      "managed": 243349128,
+      "allocated": 243520544,
+      "workingSet": 162701312,
+      "privateBytes": 258433024,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 421.875
+    },
+    {
+      "wallMs": 625.8173,
+      "stage": "natural-release-no-GC",
+      "managed": 243357352,
+      "allocated": 243528744,
+      "workingSet": 162770944,
+      "privateBytes": 258445312,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 453.125
+    },
+    {
+      "wallMs": 656.8814,
+      "stage": "natural-release-no-GC",
+      "managed": 243357352,
+      "allocated": 243528744,
+      "workingSet": 162807808,
+      "privateBytes": 258441216,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 468.75
+    },
+    {
+      "wallMs": 687.8724,
+      "stage": "natural-release-no-GC",
+      "managed": 243365576,
+      "allocated": 243536944,
+      "workingSet": 162816000,
+      "privateBytes": 258441216,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 484.375
+    },
+    {
+      "wallMs": 719.3902,
+      "stage": "natural-release-no-GC",
+      "managed": 243365576,
+      "allocated": 243536944,
+      "workingSet": 162816000,
+      "privateBytes": 258441216,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 500
+    },
+    {
+      "wallMs": 749.4146,
+      "stage": "natural-release-no-GC",
+      "managed": 243365576,
+      "allocated": 243536944,
+      "workingSet": 162816000,
+      "privateBytes": 258441216,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 515.625
+    },
+    {
+      "wallMs": 780.8257,
+      "stage": "natural-release-no-GC",
+      "managed": 243372528,
+      "allocated": 243543872,
+      "workingSet": 162918400,
+      "privateBytes": 258473984,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 811.4485,
+      "stage": "natural-release-no-GC",
+      "managed": 243380752,
+      "allocated": 243552072,
+      "workingSet": 163049472,
+      "privateBytes": 259284992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 841.0887,
+      "stage": "natural-release-no-GC",
+      "managed": 243380752,
+      "allocated": 243552072,
+      "workingSet": 163049472,
+      "privateBytes": 259284992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 873.1941,
+      "stage": "natural-release-no-GC",
+      "managed": 243388976,
+      "allocated": 243560272,
+      "workingSet": 163061760,
+      "privateBytes": 259284992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 903.0568,
+      "stage": "natural-release-no-GC",
+      "managed": 243388976,
+      "allocated": 243560272,
+      "workingSet": 163061760,
+      "privateBytes": 259284992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 934.0927,
+      "stage": "natural-release-no-GC",
+      "managed": 243388976,
+      "allocated": 243560272,
+      "workingSet": 163061760,
+      "privateBytes": 259284992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 964.1017,
+      "stage": "natural-release-no-GC",
+      "managed": 243397200,
+      "allocated": 243568472,
+      "workingSet": 163065856,
+      "privateBytes": 258662400,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 995.1768,
+      "stage": "natural-release-no-GC",
+      "managed": 243397200,
+      "allocated": 243568472,
+      "workingSet": 163065856,
+      "privateBytes": 258662400,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 1027.1999,
+      "stage": "natural-release-no-GC",
+      "managed": 243405424,
+      "allocated": 243576672,
+      "workingSet": 163074048,
+      "privateBytes": 258662400,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 1057.6329,
+      "stage": "natural-release-no-GC",
+      "managed": 243405424,
+      "allocated": 243576672,
+      "workingSet": 163074048,
+      "privateBytes": 258662400,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 1089.5794,
+      "stage": "natural-release-no-GC",
+      "managed": 243413648,
+      "allocated": 243584872,
+      "workingSet": 163082240,
+      "privateBytes": 258662400,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 1121.1673,
+      "stage": "natural-release-no-GC",
+      "managed": 243413648,
+      "allocated": 243584872,
+      "workingSet": 163082240,
+      "privateBytes": 258662400,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 1152.1669,
+      "stage": "natural-release-no-GC",
+      "managed": 243421872,
+      "allocated": 243593072,
+      "workingSet": 163090432,
+      "privateBytes": 258662400,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 1182.0272,
+      "stage": "natural-release-no-GC",
+      "managed": 243421872,
+      "allocated": 243593072,
+      "workingSet": 163090432,
+      "privateBytes": 258662400,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 1212.9724,
+      "stage": "natural-release-no-GC",
+      "managed": 243430096,
+      "allocated": 243601272,
+      "workingSet": 163110912,
+      "privateBytes": 258662400,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 546.875
+    },
+    {
+      "wallMs": 1244.8464,
+      "stage": "natural-release-no-GC",
+      "managed": 243442456,
+      "allocated": 243613608,
+      "workingSet": 163762176,
+      "privateBytes": 259387392,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 578.125
+    },
+    {
+      "wallMs": 1274.8328,
+      "stage": "natural-release-no-GC",
+      "managed": 243449296,
+      "allocated": 243620448,
+      "workingSet": 163827712,
+      "privateBytes": 258772992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1306.4391,
+      "stage": "natural-release-no-GC",
+      "managed": 243449296,
+      "allocated": 243620448,
+      "workingSet": 163831808,
+      "privateBytes": 258772992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1338.4229,
+      "stage": "natural-release-no-GC",
+      "managed": 243457520,
+      "allocated": 243628648,
+      "workingSet": 163840000,
+      "privateBytes": 258772992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1369.503,
+      "stage": "natural-release-no-GC",
+      "managed": 243457520,
+      "allocated": 243628648,
+      "workingSet": 163840000,
+      "privateBytes": 258772992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1400.4729,
+      "stage": "natural-release-no-GC",
+      "managed": 243465744,
+      "allocated": 243636848,
+      "workingSet": 163848192,
+      "privateBytes": 258772992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1432.6205,
+      "stage": "natural-release-no-GC",
+      "managed": 243465744,
+      "allocated": 243636848,
+      "workingSet": 163848192,
+      "privateBytes": 258772992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1463.3695,
+      "stage": "natural-release-no-GC",
+      "managed": 243473968,
+      "allocated": 243645048,
+      "workingSet": 163856384,
+      "privateBytes": 258772992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1495.2124,
+      "stage": "natural-release-no-GC",
+      "managed": 243473968,
+      "allocated": 243645048,
+      "workingSet": 163856384,
+      "privateBytes": 258772992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1527.2059,
+      "stage": "natural-release-no-GC",
+      "managed": 243482192,
+      "allocated": 243653248,
+      "workingSet": 163864576,
+      "privateBytes": 258772992,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1559.24,
+      "stage": "natural-release-no-GC",
+      "managed": 243482192,
+      "allocated": 243653248,
+      "workingSet": 163860480,
+      "privateBytes": 258695168,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1591.2158,
+      "stage": "natural-release-no-GC",
+      "managed": 243490416,
+      "allocated": 243661448,
+      "workingSet": 163868672,
+      "privateBytes": 258695168,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1622.5471,
+      "stage": "natural-release-no-GC",
+      "managed": 243490416,
+      "allocated": 243661448,
+      "workingSet": 163868672,
+      "privateBytes": 258695168,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1653.4283,
+      "stage": "natural-release-no-GC",
+      "managed": 243498640,
+      "allocated": 243669648,
+      "workingSet": 163876864,
+      "privateBytes": 258695168,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1683.6221,
+      "stage": "natural-release-no-GC",
+      "managed": 243498640,
+      "allocated": 243669648,
+      "workingSet": 163876864,
+      "privateBytes": 258695168,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1715.2109,
+      "stage": "natural-release-no-GC",
+      "managed": 243502216,
+      "allocated": 243673200,
+      "workingSet": 163876864,
+      "privateBytes": 258695168,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1747.1946,
+      "stage": "natural-release-no-GC",
+      "managed": 243510440,
+      "allocated": 243681400,
+      "workingSet": 163885056,
+      "privateBytes": 258760704,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1779.2774,
+      "stage": "natural-release-no-GC",
+      "managed": 243510440,
+      "allocated": 243681400,
+      "workingSet": 163885056,
+      "privateBytes": 258760704,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1810.3075,
+      "stage": "natural-release-no-GC",
+      "managed": 243518664,
+      "allocated": 243689600,
+      "workingSet": 163897344,
+      "privateBytes": 258760704,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1840.8868,
+      "stage": "natural-release-no-GC",
+      "managed": 243518664,
+      "allocated": 243689600,
+      "workingSet": 163897344,
+      "privateBytes": 258760704,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1872.9146,
+      "stage": "natural-release-no-GC",
+      "managed": 243518664,
+      "allocated": 243689600,
+      "workingSet": 163897344,
+      "privateBytes": 258760704,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1902.9103,
+      "stage": "natural-release-no-GC",
+      "managed": 243526888,
+      "allocated": 243697800,
+      "workingSet": 163905536,
+      "privateBytes": 258760704,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1934.7432,
+      "stage": "natural-release-no-GC",
+      "managed": 243526888,
+      "allocated": 243697800,
+      "workingSet": 163905536,
+      "privateBytes": 258760704,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1966.7232,
+      "stage": "natural-release-no-GC",
+      "managed": 243535112,
+      "allocated": 243706000,
+      "workingSet": 164577280,
+      "privateBytes": 259424256,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 1996.9284,
+      "stage": "natural-release-no-GC",
+      "managed": 243535112,
+      "allocated": 243706000,
+      "workingSet": 164577280,
+      "privateBytes": 259424256,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 2029.0002,
+      "stage": "natural-release-no-GC",
+      "managed": 243543336,
+      "allocated": 243714200,
+      "workingSet": 164585472,
+      "privateBytes": 259424256,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 2060.3518,
+      "stage": "natural-release-no-GC",
+      "managed": 243543336,
+      "allocated": 243714200,
+      "workingSet": 163930112,
+      "privateBytes": 258768896,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 2092.3338,
+      "stage": "natural-release-no-GC",
+      "managed": 243551560,
+      "allocated": 243722400,
+      "workingSet": 163938304,
+      "privateBytes": 258768896,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 2123.8974,
+      "stage": "natural-release-no-GC",
+      "managed": 243551560,
+      "allocated": 243722400,
+      "workingSet": 163938304,
+      "privateBytes": 258768896,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 593.75
+    },
+    {
+      "wallMs": 2155.8933,
+      "stage": "natural-release-no-GC",
+      "managed": 243559784,
+      "allocated": 243730600,
+      "workingSet": 163946496,
+      "privateBytes": 258768896,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 609.375
+    },
+    {
+      "wallMs": 2187.2154,
+      "stage": "natural-release-no-GC",
+      "managed": 243559784,
+      "allocated": 243730600,
+      "workingSet": 164474880,
+      "privateBytes": 259461120,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 656.25
+    },
+    {
+      "wallMs": 2218.4149,
+      "stage": "natural-release-no-GC",
+      "managed": 243567752,
+      "allocated": 243738544,
+      "workingSet": 164511744,
+      "privateBytes": 259182592,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 671.875
+    },
+    {
+      "wallMs": 2249.7296,
+      "stage": "natural-release-no-GC",
+      "managed": 243567752,
+      "allocated": 243738544,
+      "workingSet": 164511744,
+      "privateBytes": 259182592,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 687.5
+    },
+    {
+      "wallMs": 2280.8087,
+      "stage": "natural-release-no-GC",
+      "managed": 243575976,
+      "allocated": 243746744,
+      "workingSet": 164519936,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 703.125
+    },
+    {
+      "wallMs": 2311.7978,
+      "stage": "natural-release-no-GC",
+      "managed": 243575976,
+      "allocated": 243746744,
+      "workingSet": 164519936,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 703.125
+    },
+    {
+      "wallMs": 2342.8148,
+      "stage": "natural-release-no-GC",
+      "managed": 243584200,
+      "allocated": 243754944,
+      "workingSet": 164532224,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 703.125
+    },
+    {
+      "wallMs": 2374.8891,
+      "stage": "natural-release-no-GC",
+      "managed": 243584200,
+      "allocated": 243754944,
+      "workingSet": 164532224,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 718.75
+    },
+    {
+      "wallMs": 2406.902,
+      "stage": "natural-release-no-GC",
+      "managed": 243592424,
+      "allocated": 243763144,
+      "workingSet": 164540416,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 734.375
+    },
+    {
+      "wallMs": 2438.5349,
+      "stage": "natural-release-no-GC",
+      "managed": 243592424,
+      "allocated": 243763144,
+      "workingSet": 164540416,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 750
+    },
+    {
+      "wallMs": 2469.3802,
+      "stage": "natural-release-no-GC",
+      "managed": 243600648,
+      "allocated": 243771344,
+      "workingSet": 164548608,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 765.625
+    },
+    {
+      "wallMs": 2500.6092,
+      "stage": "natural-release-no-GC",
+      "managed": 243600648,
+      "allocated": 243771344,
+      "workingSet": 164548608,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 781.25
+    },
+    {
+      "wallMs": 2532.184,
+      "stage": "natural-release-no-GC",
+      "managed": 243608872,
+      "allocated": 243779544,
+      "workingSet": 164556800,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 796.875
+    },
+    {
+      "wallMs": 2562.1883,
+      "stage": "natural-release-no-GC",
+      "managed": 243608872,
+      "allocated": 243779544,
+      "workingSet": 164556800,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2592.2304,
+      "stage": "natural-release-no-GC",
+      "managed": 243617096,
+      "allocated": 243787744,
+      "workingSet": 164564992,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2623.0677,
+      "stage": "natural-release-no-GC",
+      "managed": 243617096,
+      "allocated": 243787744,
+      "workingSet": 164564992,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2653.143,
+      "stage": "natural-release-no-GC",
+      "managed": 243617096,
+      "allocated": 243787744,
+      "workingSet": 164564992,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2684.0121,
+      "stage": "natural-release-no-GC",
+      "managed": 243625320,
+      "allocated": 243795944,
+      "workingSet": 164573184,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2715.4553,
+      "stage": "natural-release-no-GC",
+      "managed": 243625320,
+      "allocated": 243795944,
+      "workingSet": 164573184,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2747.4582,
+      "stage": "natural-release-no-GC",
+      "managed": 243633288,
+      "allocated": 243803888,
+      "workingSet": 164577280,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2777.4555,
+      "stage": "natural-release-no-GC",
+      "managed": 243633288,
+      "allocated": 243803888,
+      "workingSet": 164577280,
+      "privateBytes": 259248128,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2809.6389,
+      "stage": "natural-release-no-GC",
+      "managed": 243641512,
+      "allocated": 243812088,
+      "workingSet": 164585472,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2841.2046,
+      "stage": "natural-release-no-GC",
+      "managed": 243641512,
+      "allocated": 243812088,
+      "workingSet": 164585472,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2872.313,
+      "stage": "natural-release-no-GC",
+      "managed": 243649736,
+      "allocated": 243820288,
+      "workingSet": 164597760,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2903.5606,
+      "stage": "natural-release-no-GC",
+      "managed": 243649736,
+      "allocated": 243820288,
+      "workingSet": 164597760,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2935.483,
+      "stage": "natural-release-no-GC",
+      "managed": 243657960,
+      "allocated": 243828488,
+      "workingSet": 164605952,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2965.5042,
+      "stage": "natural-release-no-GC",
+      "managed": 243657960,
+      "allocated": 243828488,
+      "workingSet": 164605952,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 2995.4861,
+      "stage": "natural-release-no-GC",
+      "managed": 243666184,
+      "allocated": 243836688,
+      "workingSet": 164614144,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3027.5081,
+      "stage": "natural-release-no-GC",
+      "managed": 243666184,
+      "allocated": 243836688,
+      "workingSet": 164614144,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3057.5724,
+      "stage": "natural-release-no-GC",
+      "managed": 243674408,
+      "allocated": 243844888,
+      "workingSet": 164622336,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3089.549,
+      "stage": "natural-release-no-GC",
+      "managed": 243674408,
+      "allocated": 243844888,
+      "workingSet": 164622336,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3120.8917,
+      "stage": "natural-release-no-GC",
+      "managed": 243682632,
+      "allocated": 243853088,
+      "workingSet": 164634624,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3152.2091,
+      "stage": "natural-release-no-GC",
+      "managed": 243682632,
+      "allocated": 243853088,
+      "workingSet": 164634624,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3183.4833,
+      "stage": "natural-release-no-GC",
+      "managed": 243690856,
+      "allocated": 243861288,
+      "workingSet": 164642816,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3213.5009,
+      "stage": "natural-release-no-GC",
+      "managed": 243690856,
+      "allocated": 243861288,
+      "workingSet": 164642816,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3243.5139,
+      "stage": "natural-release-no-GC",
+      "managed": 243690856,
+      "allocated": 243861288,
+      "workingSet": 164642816,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3273.5801,
+      "stage": "natural-release-no-GC",
+      "managed": 243698824,
+      "allocated": 243869232,
+      "workingSet": 164646912,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3305.6211,
+      "stage": "natural-release-no-GC",
+      "managed": 243698824,
+      "allocated": 243869232,
+      "workingSet": 164646912,
+      "privateBytes": 259313664,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3337.7802,
+      "stage": "natural-release-no-GC",
+      "managed": 243707048,
+      "allocated": 243877432,
+      "workingSet": 164655104,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3368.698,
+      "stage": "natural-release-no-GC",
+      "managed": 243707048,
+      "allocated": 243877432,
+      "workingSet": 164655104,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3400.325,
+      "stage": "natural-release-no-GC",
+      "managed": 243715272,
+      "allocated": 243885632,
+      "workingSet": 164667392,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3432.1096,
+      "stage": "natural-release-no-GC",
+      "managed": 243715272,
+      "allocated": 243885632,
+      "workingSet": 164667392,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3464.1192,
+      "stage": "natural-release-no-GC",
+      "managed": 243723496,
+      "allocated": 243893832,
+      "workingSet": 164675584,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3496.1646,
+      "stage": "natural-release-no-GC",
+      "managed": 243723496,
+      "allocated": 243893832,
+      "workingSet": 164675584,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3528.2126,
+      "stage": "natural-release-no-GC",
+      "managed": 243731720,
+      "allocated": 243902032,
+      "workingSet": 164683776,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3560.1831,
+      "stage": "natural-release-no-GC",
+      "managed": 243731720,
+      "allocated": 243902032,
+      "workingSet": 164683776,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3592.0316,
+      "stage": "natural-release-no-GC",
+      "managed": 243739944,
+      "allocated": 243910232,
+      "workingSet": 164691968,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3623.1114,
+      "stage": "natural-release-no-GC",
+      "managed": 243739944,
+      "allocated": 243910232,
+      "workingSet": 164691968,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3652.9939,
+      "stage": "natural-release-no-GC",
+      "managed": 243748168,
+      "allocated": 243918432,
+      "workingSet": 164700160,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3683.0126,
+      "stage": "natural-release-no-GC",
+      "managed": 243748168,
+      "allocated": 243918432,
+      "workingSet": 164700160,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3713.6066,
+      "stage": "natural-release-no-GC",
+      "managed": 243756392,
+      "allocated": 243926632,
+      "workingSet": 164708352,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3745.6009,
+      "stage": "natural-release-no-GC",
+      "managed": 243756392,
+      "allocated": 243926632,
+      "workingSet": 164708352,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3777.1336,
+      "stage": "natural-release-no-GC",
+      "managed": 243764360,
+      "allocated": 243934576,
+      "workingSet": 164712448,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3808.1828,
+      "stage": "natural-release-no-GC",
+      "managed": 243764360,
+      "allocated": 243934576,
+      "workingSet": 164712448,
+      "privateBytes": 259379200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3839.5967,
+      "stage": "natural-release-no-GC",
+      "managed": 243772584,
+      "allocated": 243942776,
+      "workingSet": 164720640,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3870.8417,
+      "stage": "natural-release-no-GC",
+      "managed": 243772584,
+      "allocated": 243942776,
+      "workingSet": 164720640,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3902.0932,
+      "stage": "natural-release-no-GC",
+      "managed": 243772584,
+      "allocated": 243942776,
+      "workingSet": 164720640,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3934.0994,
+      "stage": "natural-release-no-GC",
+      "managed": 243780808,
+      "allocated": 243950976,
+      "workingSet": 164732928,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3966.1069,
+      "stage": "natural-release-no-GC",
+      "managed": 243780808,
+      "allocated": 243950976,
+      "workingSet": 164732928,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 3998.0935,
+      "stage": "natural-release-no-GC",
+      "managed": 243789032,
+      "allocated": 243959176,
+      "workingSet": 164741120,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 4030.1994,
+      "stage": "natural-release-no-GC",
+      "managed": 243797256,
+      "allocated": 243967376,
+      "workingSet": 164749312,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 812.5
+    },
+    {
+      "wallMs": 4062.2124,
+      "stage": "natural-release-no-GC",
+      "managed": 243797256,
+      "allocated": 243967376,
+      "workingSet": 164749312,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 828.125
+    },
+    {
+      "wallMs": 4093.5434,
+      "stage": "natural-release-no-GC",
+      "managed": 243805480,
+      "allocated": 243975576,
+      "workingSet": 164757504,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 843.75
+    },
+    {
+      "wallMs": 4124.4969,
+      "stage": "natural-release-no-GC",
+      "managed": 243805480,
+      "allocated": 243975576,
+      "workingSet": 164757504,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 859.375
+    },
+    {
+      "wallMs": 4155.6757,
+      "stage": "natural-release-no-GC",
+      "managed": 243813704,
+      "allocated": 243983776,
+      "workingSet": 164765696,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 875
+    },
+    {
+      "wallMs": 4187.6571,
+      "stage": "natural-release-no-GC",
+      "managed": 243813704,
+      "allocated": 243983776,
+      "workingSet": 164765696,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 890.625
+    },
+    {
+      "wallMs": 4219.6526,
+      "stage": "natural-release-no-GC",
+      "managed": 243813704,
+      "allocated": 243983776,
+      "workingSet": 164765696,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4251.6772,
+      "stage": "natural-release-no-GC",
+      "managed": 243821928,
+      "allocated": 243991976,
+      "workingSet": 164773888,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4283.2789,
+      "stage": "natural-release-no-GC",
+      "managed": 243821928,
+      "allocated": 243991976,
+      "workingSet": 164773888,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4315.2564,
+      "stage": "natural-release-no-GC",
+      "managed": 243829896,
+      "allocated": 243999920,
+      "workingSet": 164777984,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4345.8187,
+      "stage": "natural-release-no-GC",
+      "managed": 243829896,
+      "allocated": 243999920,
+      "workingSet": 164777984,
+      "privateBytes": 259444736,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4377.0202,
+      "stage": "natural-release-no-GC",
+      "managed": 243838120,
+      "allocated": 244008120,
+      "workingSet": 164786176,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4407.9749,
+      "stage": "natural-release-no-GC",
+      "managed": 243838120,
+      "allocated": 244008120,
+      "workingSet": 164786176,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4439.7583,
+      "stage": "natural-release-no-GC",
+      "managed": 243846344,
+      "allocated": 244016320,
+      "workingSet": 164798464,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4471.7675,
+      "stage": "natural-release-no-GC",
+      "managed": 243846344,
+      "allocated": 244016320,
+      "workingSet": 164798464,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4503.5521,
+      "stage": "natural-release-no-GC",
+      "managed": 243854568,
+      "allocated": 244024520,
+      "workingSet": 164806656,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4535.3605,
+      "stage": "natural-release-no-GC",
+      "managed": 243854568,
+      "allocated": 244024520,
+      "workingSet": 164806656,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4566.3953,
+      "stage": "natural-release-no-GC",
+      "managed": 243862792,
+      "allocated": 244032720,
+      "workingSet": 164814848,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4597.3902,
+      "stage": "natural-release-no-GC",
+      "managed": 243862792,
+      "allocated": 244032720,
+      "workingSet": 164814848,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4629.5218,
+      "stage": "natural-release-no-GC",
+      "managed": 243871016,
+      "allocated": 244040920,
+      "workingSet": 164823040,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4661.3428,
+      "stage": "natural-release-no-GC",
+      "managed": 243871016,
+      "allocated": 244040920,
+      "workingSet": 164823040,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4693.3397,
+      "stage": "natural-release-no-GC",
+      "managed": 243879240,
+      "allocated": 244049120,
+      "workingSet": 164831232,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4724.9325,
+      "stage": "natural-release-no-GC",
+      "managed": 243879240,
+      "allocated": 244049120,
+      "workingSet": 164831232,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4756.9391,
+      "stage": "natural-release-no-GC",
+      "managed": 243887464,
+      "allocated": 244057320,
+      "workingSet": 164839424,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4786.909,
+      "stage": "natural-release-no-GC",
+      "managed": 243887464,
+      "allocated": 244057320,
+      "workingSet": 164839424,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4819.0128,
+      "stage": "natural-release-no-GC",
+      "managed": 243887464,
+      "allocated": 244057320,
+      "workingSet": 164839424,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4850.765,
+      "stage": "natural-release-no-GC",
+      "managed": 243895432,
+      "allocated": 244065264,
+      "workingSet": 164843520,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4882.9269,
+      "stage": "natural-release-no-GC",
+      "managed": 243895432,
+      "allocated": 244065264,
+      "workingSet": 164843520,
+      "privateBytes": 259510272,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4914.3909,
+      "stage": "natural-release-no-GC",
+      "managed": 243903656,
+      "allocated": 244073464,
+      "workingSet": 164851712,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4946.3942,
+      "stage": "natural-release-no-GC",
+      "managed": 243903656,
+      "allocated": 244073464,
+      "workingSet": 164851712,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 4978.3578,
+      "stage": "natural-release-no-GC",
+      "managed": 243911880,
+      "allocated": 244081664,
+      "workingSet": 164864000,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5010.3549,
+      "stage": "natural-release-no-GC",
+      "managed": 243911880,
+      "allocated": 244081664,
+      "workingSet": 164864000,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5042.3586,
+      "stage": "natural-release-no-GC",
+      "managed": 243920104,
+      "allocated": 244089864,
+      "workingSet": 164872192,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5072.3441,
+      "stage": "natural-release-no-GC",
+      "managed": 243920104,
+      "allocated": 244089864,
+      "workingSet": 164872192,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5104.4553,
+      "stage": "natural-release-no-GC",
+      "managed": 243928328,
+      "allocated": 244098064,
+      "workingSet": 164880384,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5135.7775,
+      "stage": "natural-release-no-GC",
+      "managed": 243928328,
+      "allocated": 244098064,
+      "workingSet": 164880384,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5166.921,
+      "stage": "natural-release-no-GC",
+      "managed": 243936552,
+      "allocated": 244106264,
+      "workingSet": 164888576,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5198.9667,
+      "stage": "natural-release-no-GC",
+      "managed": 243936552,
+      "allocated": 244106264,
+      "workingSet": 164888576,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5230.5491,
+      "stage": "natural-release-no-GC",
+      "managed": 243944776,
+      "allocated": 244114464,
+      "workingSet": 164896768,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5262.5434,
+      "stage": "natural-release-no-GC",
+      "managed": 243944776,
+      "allocated": 244114464,
+      "workingSet": 164896768,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5294.5291,
+      "stage": "natural-release-no-GC",
+      "managed": 243953000,
+      "allocated": 244122664,
+      "workingSet": 164904960,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5326.5378,
+      "stage": "natural-release-no-GC",
+      "managed": 243953000,
+      "allocated": 244122664,
+      "workingSet": 164904960,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5357.711,
+      "stage": "natural-release-no-GC",
+      "managed": 243960968,
+      "allocated": 244130608,
+      "workingSet": 164909056,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5389.9222,
+      "stage": "natural-release-no-GC",
+      "managed": 243960968,
+      "allocated": 244130608,
+      "workingSet": 164909056,
+      "privateBytes": 259575808,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 906.25
+    },
+    {
+      "wallMs": 5421.3796,
+      "stage": "natural-release-no-GC",
+      "managed": 243969192,
+      "allocated": 244138808,
+      "workingSet": 164917248,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 921.875
+    },
+    {
+      "wallMs": 5454.0614,
+      "stage": "natural-release-no-GC",
+      "managed": 243969192,
+      "allocated": 244138808,
+      "workingSet": 164917248,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 937.5
+    },
+    {
+      "wallMs": 5484.4183,
+      "stage": "natural-release-no-GC",
+      "managed": 243969192,
+      "allocated": 244138808,
+      "workingSet": 164917248,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 953.125
+    },
+    {
+      "wallMs": 5516.4307,
+      "stage": "natural-release-no-GC",
+      "managed": 243977416,
+      "allocated": 244147008,
+      "workingSet": 164929536,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5548.4785,
+      "stage": "natural-release-no-GC",
+      "managed": 243977416,
+      "allocated": 244147008,
+      "workingSet": 164929536,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5580.6138,
+      "stage": "natural-release-no-GC",
+      "managed": 243985640,
+      "allocated": 244155208,
+      "workingSet": 164937728,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5612.5251,
+      "stage": "natural-release-no-GC",
+      "managed": 243985640,
+      "allocated": 244155208,
+      "workingSet": 164937728,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5643.7212,
+      "stage": "natural-release-no-GC",
+      "managed": 243993864,
+      "allocated": 244163408,
+      "workingSet": 164945920,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5674.8599,
+      "stage": "natural-release-no-GC",
+      "managed": 243993864,
+      "allocated": 244163408,
+      "workingSet": 164945920,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5706.4569,
+      "stage": "natural-release-no-GC",
+      "managed": 244002088,
+      "allocated": 244171608,
+      "workingSet": 164954112,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5737.4814,
+      "stage": "natural-release-no-GC",
+      "managed": 244002088,
+      "allocated": 244171608,
+      "workingSet": 164954112,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5769.5073,
+      "stage": "natural-release-no-GC",
+      "managed": 244010312,
+      "allocated": 244179808,
+      "workingSet": 164962304,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5800.6886,
+      "stage": "natural-release-no-GC",
+      "managed": 244010312,
+      "allocated": 244179808,
+      "workingSet": 164962304,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5832.6892,
+      "stage": "natural-release-no-GC",
+      "managed": 244018536,
+      "allocated": 244188008,
+      "workingSet": 164970496,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5863.2288,
+      "stage": "natural-release-no-GC",
+      "managed": 244018536,
+      "allocated": 244188008,
+      "workingSet": 164970496,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5894.3062,
+      "stage": "natural-release-no-GC",
+      "managed": 244026504,
+      "allocated": 244195952,
+      "workingSet": 164974592,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5926.3283,
+      "stage": "natural-release-no-GC",
+      "managed": 244026504,
+      "allocated": 244195952,
+      "workingSet": 164974592,
+      "privateBytes": 259641344,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5958.3109,
+      "stage": "natural-release-no-GC",
+      "managed": 244034728,
+      "allocated": 244204152,
+      "workingSet": 164982784,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 5990.0179,
+      "stage": "natural-release-no-GC",
+      "managed": 244034728,
+      "allocated": 244204152,
+      "workingSet": 164982784,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6021.8766,
+      "stage": "natural-release-no-GC",
+      "managed": 244042952,
+      "allocated": 244212352,
+      "workingSet": 164995072,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6053.8297,
+      "stage": "natural-release-no-GC",
+      "managed": 244042952,
+      "allocated": 244212352,
+      "workingSet": 164995072,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6085.8487,
+      "stage": "natural-release-no-GC",
+      "managed": 244051176,
+      "allocated": 244220552,
+      "workingSet": 165003264,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6116.3962,
+      "stage": "natural-release-no-GC",
+      "managed": 244051176,
+      "allocated": 244220552,
+      "workingSet": 165003264,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6146.4011,
+      "stage": "natural-release-no-GC",
+      "managed": 244051176,
+      "allocated": 244220552,
+      "workingSet": 165003264,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6177.23,
+      "stage": "natural-release-no-GC",
+      "managed": 244059400,
+      "allocated": 244228752,
+      "workingSet": 165011456,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6209.1386,
+      "stage": "natural-release-no-GC",
+      "managed": 244059400,
+      "allocated": 244228752,
+      "workingSet": 165011456,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6240.9688,
+      "stage": "natural-release-no-GC",
+      "managed": 244067624,
+      "allocated": 244236952,
+      "workingSet": 165019648,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6272.3695,
+      "stage": "natural-release-no-GC",
+      "managed": 244067624,
+      "allocated": 244236952,
+      "workingSet": 165019648,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6303.7264,
+      "stage": "natural-release-no-GC",
+      "managed": 244075848,
+      "allocated": 244245152,
+      "workingSet": 165027840,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6333.9908,
+      "stage": "natural-release-no-GC",
+      "managed": 244075848,
+      "allocated": 244245152,
+      "workingSet": 165027840,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6365.9192,
+      "stage": "natural-release-no-GC",
+      "managed": 244084072,
+      "allocated": 244253352,
+      "workingSet": 165036032,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6397.35,
+      "stage": "natural-release-no-GC",
+      "managed": 244084072,
+      "allocated": 244253352,
+      "workingSet": 165036032,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6428.5203,
+      "stage": "natural-release-no-GC",
+      "managed": 244092040,
+      "allocated": 244261296,
+      "workingSet": 165040128,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6460.5467,
+      "stage": "natural-release-no-GC",
+      "managed": 244092040,
+      "allocated": 244261296,
+      "workingSet": 165040128,
+      "privateBytes": 259706880,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6492.0267,
+      "stage": "natural-release-no-GC",
+      "managed": 244100264,
+      "allocated": 244269496,
+      "workingSet": 165048320,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6523.2103,
+      "stage": "natural-release-no-GC",
+      "managed": 244100264,
+      "allocated": 244269496,
+      "workingSet": 165048320,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6554.5554,
+      "stage": "natural-release-no-GC",
+      "managed": 244108488,
+      "allocated": 244277696,
+      "workingSet": 165060608,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6584.7638,
+      "stage": "natural-release-no-GC",
+      "managed": 244108488,
+      "allocated": 244277696,
+      "workingSet": 165060608,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6615.6453,
+      "stage": "natural-release-no-GC",
+      "managed": 244116712,
+      "allocated": 244285896,
+      "workingSet": 165068800,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6646.7288,
+      "stage": "natural-release-no-GC",
+      "managed": 244116712,
+      "allocated": 244285896,
+      "workingSet": 165068800,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6677.7225,
+      "stage": "natural-release-no-GC",
+      "managed": 244124936,
+      "allocated": 244294096,
+      "workingSet": 165076992,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6708.7511,
+      "stage": "natural-release-no-GC",
+      "managed": 244124936,
+      "allocated": 244294096,
+      "workingSet": 165076992,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6740.0455,
+      "stage": "natural-release-no-GC",
+      "managed": 244124936,
+      "allocated": 244294096,
+      "workingSet": 165076992,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6772.082,
+      "stage": "natural-release-no-GC",
+      "managed": 244133160,
+      "allocated": 244302296,
+      "workingSet": 165085184,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6802.0803,
+      "stage": "natural-release-no-GC",
+      "managed": 244133160,
+      "allocated": 244302296,
+      "workingSet": 165085184,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6833.6176,
+      "stage": "natural-release-no-GC",
+      "managed": 244141384,
+      "allocated": 244310496,
+      "workingSet": 165093376,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6864.7515,
+      "stage": "natural-release-no-GC",
+      "managed": 244141384,
+      "allocated": 244310496,
+      "workingSet": 165093376,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6896.6664,
+      "stage": "natural-release-no-GC",
+      "managed": 244149608,
+      "allocated": 244318696,
+      "workingSet": 165101568,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6928.3854,
+      "stage": "natural-release-no-GC",
+      "managed": 244149608,
+      "allocated": 244318696,
+      "workingSet": 165101568,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6959.3455,
+      "stage": "natural-release-no-GC",
+      "managed": 244157576,
+      "allocated": 244326640,
+      "workingSet": 165105664,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 6990.3279,
+      "stage": "natural-release-no-GC",
+      "managed": 244157576,
+      "allocated": 244326640,
+      "workingSet": 165105664,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7022.3662,
+      "stage": "natural-release-no-GC",
+      "managed": 244165800,
+      "allocated": 244334840,
+      "workingSet": 165113856,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7054.3324,
+      "stage": "natural-release-no-GC",
+      "managed": 244165800,
+      "allocated": 244334840,
+      "workingSet": 165113856,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7085.3568,
+      "stage": "natural-release-no-GC",
+      "managed": 244174024,
+      "allocated": 244343040,
+      "workingSet": 165126144,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7115.5609,
+      "stage": "natural-release-no-GC",
+      "managed": 244174024,
+      "allocated": 244343040,
+      "workingSet": 165089280,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7146.5822,
+      "stage": "natural-release-no-GC",
+      "managed": 244182248,
+      "allocated": 244351240,
+      "workingSet": 165097472,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7176.6039,
+      "stage": "natural-release-no-GC",
+      "managed": 244182248,
+      "allocated": 244351240,
+      "workingSet": 165097472,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7207.8263,
+      "stage": "natural-release-no-GC",
+      "managed": 244190472,
+      "allocated": 244359440,
+      "workingSet": 165105664,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7239.4379,
+      "stage": "natural-release-no-GC",
+      "managed": 244190472,
+      "allocated": 244359440,
+      "workingSet": 165105664,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7270.4614,
+      "stage": "natural-release-no-GC",
+      "managed": 244198696,
+      "allocated": 244367640,
+      "workingSet": 165113856,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7301.865,
+      "stage": "natural-release-no-GC",
+      "managed": 244198696,
+      "allocated": 244367640,
+      "workingSet": 165113856,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7332.4552,
+      "stage": "natural-release-no-GC",
+      "managed": 244198696,
+      "allocated": 244367640,
+      "workingSet": 165113856,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7363.9304,
+      "stage": "natural-release-no-GC",
+      "managed": 244206920,
+      "allocated": 244375840,
+      "workingSet": 165122048,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7395.3616,
+      "stage": "natural-release-no-GC",
+      "managed": 244206920,
+      "allocated": 244375840,
+      "workingSet": 165122048,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7427.38,
+      "stage": "natural-release-no-GC",
+      "managed": 244215144,
+      "allocated": 244384040,
+      "workingSet": 165130240,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7458.0433,
+      "stage": "natural-release-no-GC",
+      "managed": 244215144,
+      "allocated": 244384040,
+      "workingSet": 165130240,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7489.7712,
+      "stage": "natural-release-no-GC",
+      "managed": 244223112,
+      "allocated": 244391984,
+      "workingSet": 165134336,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7520.7654,
+      "stage": "natural-release-no-GC",
+      "managed": 244223112,
+      "allocated": 244391984,
+      "workingSet": 165134336,
+      "privateBytes": 259772416,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7551.7996,
+      "stage": "natural-release-no-GC",
+      "managed": 244231336,
+      "allocated": 244400184,
+      "workingSet": 165142528,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7581.8054,
+      "stage": "natural-release-no-GC",
+      "managed": 244231336,
+      "allocated": 244400184,
+      "workingSet": 165142528,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7613.7576,
+      "stage": "natural-release-no-GC",
+      "managed": 244239560,
+      "allocated": 244408384,
+      "workingSet": 165154816,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7643.7038,
+      "stage": "natural-release-no-GC",
+      "managed": 244239560,
+      "allocated": 244408384,
+      "workingSet": 165154816,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7673.7486,
+      "stage": "natural-release-no-GC",
+      "managed": 244247784,
+      "allocated": 244416584,
+      "workingSet": 165163008,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 968.75
+    },
+    {
+      "wallMs": 7704.4806,
+      "stage": "natural-release-no-GC",
+      "managed": 244247784,
+      "allocated": 244416584,
+      "workingSet": 165163008,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 984.375
+    },
+    {
+      "wallMs": 7735.534,
+      "stage": "natural-release-no-GC",
+      "managed": 244256008,
+      "allocated": 244424784,
+      "workingSet": 165171200,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1000
+    },
+    {
+      "wallMs": 7767.4433,
+      "stage": "natural-release-no-GC",
+      "managed": 244256008,
+      "allocated": 244424784,
+      "workingSet": 165171200,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1000
+    },
+    {
+      "wallMs": 7797.9952,
+      "stage": "natural-release-no-GC",
+      "managed": 244256008,
+      "allocated": 244424784,
+      "workingSet": 165171200,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 7829.4687,
+      "stage": "natural-release-no-GC",
+      "managed": 244264232,
+      "allocated": 244432984,
+      "workingSet": 165179392,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 7860.9601,
+      "stage": "natural-release-no-GC",
+      "managed": 244264232,
+      "allocated": 244432984,
+      "workingSet": 165179392,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 7893.1768,
+      "stage": "natural-release-no-GC",
+      "managed": 244272456,
+      "allocated": 244441184,
+      "workingSet": 165187584,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 7925.1046,
+      "stage": "natural-release-no-GC",
+      "managed": 244272456,
+      "allocated": 244441184,
+      "workingSet": 165187584,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 7956.513,
+      "stage": "natural-release-no-GC",
+      "managed": 244280680,
+      "allocated": 244449384,
+      "workingSet": 165195776,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 7987.4305,
+      "stage": "natural-release-no-GC",
+      "managed": 244280680,
+      "allocated": 244449384,
+      "workingSet": 165195776,
+      "privateBytes": 259837952,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8019.4456,
+      "stage": "natural-release-no-GC",
+      "managed": 244288648,
+      "allocated": 244457328,
+      "workingSet": 163205120,
+      "privateBytes": 257904640,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8051.0201,
+      "stage": "natural-release-no-GC",
+      "managed": 244296872,
+      "allocated": 244465528,
+      "workingSet": 163147776,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8082.3307,
+      "stage": "natural-release-no-GC",
+      "managed": 244296872,
+      "allocated": 244465528,
+      "workingSet": 163147776,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8113.9948,
+      "stage": "natural-release-no-GC",
+      "managed": 244305096,
+      "allocated": 244473728,
+      "workingSet": 163160064,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8145.2512,
+      "stage": "natural-release-no-GC",
+      "managed": 244305096,
+      "allocated": 244473728,
+      "workingSet": 163160064,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8177.1692,
+      "stage": "natural-release-no-GC",
+      "managed": 244313320,
+      "allocated": 244481928,
+      "workingSet": 163168256,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8208.6889,
+      "stage": "natural-release-no-GC",
+      "managed": 244313320,
+      "allocated": 244481928,
+      "workingSet": 163168256,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8240.7166,
+      "stage": "natural-release-no-GC",
+      "managed": 244321544,
+      "allocated": 244490128,
+      "workingSet": 163176448,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8272.1685,
+      "stage": "natural-release-no-GC",
+      "managed": 244321544,
+      "allocated": 244490128,
+      "workingSet": 163176448,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8302.8617,
+      "stage": "natural-release-no-GC",
+      "managed": 244321544,
+      "allocated": 244490128,
+      "workingSet": 163176448,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8333.889,
+      "stage": "natural-release-no-GC",
+      "managed": 244329768,
+      "allocated": 244498328,
+      "workingSet": 163184640,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8364.3828,
+      "stage": "natural-release-no-GC",
+      "managed": 244329768,
+      "allocated": 244498328,
+      "workingSet": 163184640,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8395.6895,
+      "stage": "natural-release-no-GC",
+      "managed": 244337992,
+      "allocated": 244506528,
+      "workingSet": 163192832,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8427.5612,
+      "stage": "natural-release-no-GC",
+      "managed": 244337992,
+      "allocated": 244506528,
+      "workingSet": 163192832,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8458.1565,
+      "stage": "natural-release-no-GC",
+      "managed": 244346216,
+      "allocated": 244514728,
+      "workingSet": 163201024,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8489.3113,
+      "stage": "natural-release-no-GC",
+      "managed": 244346216,
+      "allocated": 244514728,
+      "workingSet": 163201024,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8520.2799,
+      "stage": "natural-release-no-GC",
+      "managed": 244354184,
+      "allocated": 244522672,
+      "workingSet": 163205120,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8550.9688,
+      "stage": "natural-release-no-GC",
+      "managed": 244354184,
+      "allocated": 244522672,
+      "workingSet": 163205120,
+      "privateBytes": 257843200,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8582.5339,
+      "stage": "natural-release-no-GC",
+      "managed": 244362408,
+      "allocated": 244530872,
+      "workingSet": 163880960,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8612.5085,
+      "stage": "natural-release-no-GC",
+      "managed": 244362408,
+      "allocated": 244530872,
+      "workingSet": 163880960,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8642.8402,
+      "stage": "natural-release-no-GC",
+      "managed": 244370632,
+      "allocated": 244539072,
+      "workingSet": 163893248,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8674.5944,
+      "stage": "natural-release-no-GC",
+      "managed": 244370632,
+      "allocated": 244539072,
+      "workingSet": 163893248,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8704.4955,
+      "stage": "natural-release-no-GC",
+      "managed": 244378856,
+      "allocated": 244547272,
+      "workingSet": 163901440,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1015.625
+    },
+    {
+      "wallMs": 8735.5075,
+      "stage": "natural-release-no-GC",
+      "managed": 244378856,
+      "allocated": 244547272,
+      "workingSet": 163901440,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1031.25
+    },
+    {
+      "wallMs": 8765.9685,
+      "stage": "natural-release-no-GC",
+      "managed": 244378856,
+      "allocated": 244547272,
+      "workingSet": 163901440,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1046.875
+    },
+    {
+      "wallMs": 8797.0092,
+      "stage": "natural-release-no-GC",
+      "managed": 244387080,
+      "allocated": 244555472,
+      "workingSet": 163909632,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1062.5
+    },
+    {
+      "wallMs": 8827.5546,
+      "stage": "natural-release-no-GC",
+      "managed": 244387080,
+      "allocated": 244555472,
+      "workingSet": 163909632,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1078.125
+    },
+    {
+      "wallMs": 8857.6593,
+      "stage": "natural-release-no-GC",
+      "managed": 244395304,
+      "allocated": 244563672,
+      "workingSet": 163917824,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1078.125
+    },
+    {
+      "wallMs": 8888.6414,
+      "stage": "natural-release-no-GC",
+      "managed": 244395304,
+      "allocated": 244563672,
+      "workingSet": 163917824,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1078.125
+    },
+    {
+      "wallMs": 8920.6475,
+      "stage": "natural-release-no-GC",
+      "managed": 244403528,
+      "allocated": 244571872,
+      "workingSet": 163926016,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1093.75
+    },
+    {
+      "wallMs": 8952.6523,
+      "stage": "natural-release-no-GC",
+      "managed": 244403528,
+      "allocated": 244571872,
+      "workingSet": 163926016,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1109.375
+    },
+    {
+      "wallMs": 8984.6342,
+      "stage": "natural-release-no-GC",
+      "managed": 244411752,
+      "allocated": 244580072,
+      "workingSet": 163934208,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1125
+    },
+    {
+      "wallMs": 9014.641,
+      "stage": "natural-release-no-GC",
+      "managed": 244411752,
+      "allocated": 244580072,
+      "workingSet": 163934208,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1125
+    },
+    {
+      "wallMs": 9046.6392,
+      "stage": "natural-release-no-GC",
+      "managed": 244419720,
+      "allocated": 244588016,
+      "workingSet": 163938304,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1140.625
+    },
+    {
+      "wallMs": 9077.603,
+      "stage": "natural-release-no-GC",
+      "managed": 244419720,
+      "allocated": 244588016,
+      "workingSet": 163938304,
+      "privateBytes": 258576384,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1156.25
+    },
+    {
+      "wallMs": 9109.6568,
+      "stage": "natural-release-no-GC",
+      "managed": 244427944,
+      "allocated": 244596216,
+      "workingSet": 163946496,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1171.875
+    },
+    {
+      "wallMs": 9141.1442,
+      "stage": "natural-release-no-GC",
+      "managed": 244427944,
+      "allocated": 244596216,
+      "workingSet": 163946496,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1187.5
+    },
+    {
+      "wallMs": 9173.0019,
+      "stage": "natural-release-no-GC",
+      "managed": 244436168,
+      "allocated": 244604416,
+      "workingSet": 163958784,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1203.125
+    },
+    {
+      "wallMs": 9203.0062,
+      "stage": "natural-release-no-GC",
+      "managed": 244436168,
+      "allocated": 244604416,
+      "workingSet": 163958784,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1218.75
+    },
+    {
+      "wallMs": 9234.6848,
+      "stage": "natural-release-no-GC",
+      "managed": 244436168,
+      "allocated": 244604416,
+      "workingSet": 163958784,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1234.375
+    },
+    {
+      "wallMs": 9266.3978,
+      "stage": "natural-release-no-GC",
+      "managed": 244444392,
+      "allocated": 244612616,
+      "workingSet": 163966976,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1250
+    },
+    {
+      "wallMs": 9298.1969,
+      "stage": "natural-release-no-GC",
+      "managed": 244444392,
+      "allocated": 244612616,
+      "workingSet": 163966976,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1265.625
+    },
+    {
+      "wallMs": 9329.3039,
+      "stage": "natural-release-no-GC",
+      "managed": 244452616,
+      "allocated": 244620816,
+      "workingSet": 163975168,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1281.25
+    },
+    {
+      "wallMs": 9359.8717,
+      "stage": "natural-release-no-GC",
+      "managed": 244452616,
+      "allocated": 244620816,
+      "workingSet": 163975168,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1296.875
+    },
+    {
+      "wallMs": 9391.4675,
+      "stage": "natural-release-no-GC",
+      "managed": 244460840,
+      "allocated": 244629016,
+      "workingSet": 163983360,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1312.5
+    },
+    {
+      "wallMs": 9423.0315,
+      "stage": "natural-release-no-GC",
+      "managed": 244460840,
+      "allocated": 244629016,
+      "workingSet": 163983360,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9455.1231,
+      "stage": "natural-release-no-GC",
+      "managed": 244469064,
+      "allocated": 244637216,
+      "workingSet": 163991552,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9486.8391,
+      "stage": "natural-release-no-GC",
+      "managed": 244469064,
+      "allocated": 244637216,
+      "workingSet": 163991552,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9518.867,
+      "stage": "natural-release-no-GC",
+      "managed": 244477288,
+      "allocated": 244645416,
+      "workingSet": 163999744,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9550.8443,
+      "stage": "natural-release-no-GC",
+      "managed": 244477288,
+      "allocated": 244645416,
+      "workingSet": 163999744,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9581.6053,
+      "stage": "natural-release-no-GC",
+      "managed": 244485256,
+      "allocated": 244653360,
+      "workingSet": 164003840,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9611.9739,
+      "stage": "natural-release-no-GC",
+      "managed": 244485256,
+      "allocated": 244653360,
+      "workingSet": 164003840,
+      "privateBytes": 258641920,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9643.2682,
+      "stage": "natural-release-no-GC",
+      "managed": 244493480,
+      "allocated": 244661560,
+      "workingSet": 164012032,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9675.2719,
+      "stage": "natural-release-no-GC",
+      "managed": 244493480,
+      "allocated": 244661560,
+      "workingSet": 164012032,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9706.1825,
+      "stage": "natural-release-no-GC",
+      "managed": 244493480,
+      "allocated": 244661560,
+      "workingSet": 164012032,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9737.7115,
+      "stage": "natural-release-no-GC",
+      "managed": 244501704,
+      "allocated": 244669760,
+      "workingSet": 164024320,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9769.7141,
+      "stage": "natural-release-no-GC",
+      "managed": 244501704,
+      "allocated": 244669760,
+      "workingSet": 164024320,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9801.7178,
+      "stage": "natural-release-no-GC",
+      "managed": 244509928,
+      "allocated": 244677960,
+      "workingSet": 164032512,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9832.7321,
+      "stage": "natural-release-no-GC",
+      "managed": 244509928,
+      "allocated": 244677960,
+      "workingSet": 164032512,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9863.2876,
+      "stage": "natural-release-no-GC",
+      "managed": 244518152,
+      "allocated": 244686160,
+      "workingSet": 164040704,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9894.3625,
+      "stage": "natural-release-no-GC",
+      "managed": 244518152,
+      "allocated": 244686160,
+      "workingSet": 164040704,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9926.2986,
+      "stage": "natural-release-no-GC",
+      "managed": 244526376,
+      "allocated": 244694360,
+      "workingSet": 164048896,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9957.1118,
+      "stage": "natural-release-no-GC",
+      "managed": 244526376,
+      "allocated": 244694360,
+      "workingSet": 164048896,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 9988.0505,
+      "stage": "natural-release-no-GC",
+      "managed": 244534600,
+      "allocated": 244702560,
+      "workingSet": 164057088,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 10019.5141,
+      "stage": "natural-release-no-GC",
+      "managed": 244534600,
+      "allocated": 244702560,
+      "workingSet": 164057088,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 10050.6974,
+      "stage": "natural-release-no-GC",
+      "managed": 244542824,
+      "allocated": 244710760,
+      "workingSet": 164065280,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 10082.4788,
+      "stage": "natural-release-no-GC",
+      "managed": 244542824,
+      "allocated": 244710760,
+      "workingSet": 164065280,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 10114.1523,
+      "stage": "natural-release-no-GC",
+      "managed": 244550792,
+      "allocated": 244718704,
+      "workingSet": 164069376,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 10145.7856,
+      "stage": "natural-release-no-GC",
+      "managed": 244550792,
+      "allocated": 244718704,
+      "workingSet": 164069376,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 10177.7035,
+      "stage": "natural-release-no-GC",
+      "managed": 244550792,
+      "allocated": 244718704,
+      "workingSet": 164069376,
+      "privateBytes": 258707456,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 10209.8007,
+      "stage": "natural-release-no-GC",
+      "managed": 244559016,
+      "allocated": 244726904,
+      "workingSet": 164831232,
+      "privateBytes": 258953216,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    },
+    {
+      "wallMs": 10212.4666,
+      "stage": "natural-release-no-GC",
+      "managed": 244559016,
+      "allocated": 244726904,
+      "workingSet": 164208640,
+      "privateBytes": 258293760,
+      "gc": [
+        3,
+        3,
+        3
+      ],
+      "cpuMs": 1328.125
+    }
+  ],
+  "nativeOwnership": "LCMS contexts/transforms finally-released; WIC/allocator attribution UNAVAILABLE; WS is measured independently",
+  "forcedGc": false
+}

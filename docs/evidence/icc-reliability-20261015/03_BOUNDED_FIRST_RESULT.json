@@ -1,0 +1,27 @@
+{
+  "status": "ISOLATED_BOUNDED_EXPERIMENT",
+  "w": 5496,
+  "h": 3670,
+  "estimatedBudgetBytes": 1539542224,
+  "budget": 2147483648,
+  "bandHeight": 32,
+  "recipe": {
+    "AlgorithmVersion": "ControlledIccLinearV1",
+    "SourceFileSha256": "a6be3f84ddb65600cbe203dd13d451859c6fe94fff10919fdfadd22d60d0f50b",
+    "InputProfileSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+    "WorkingProfileSha256": "954e3bb304651951681989671ef99eed11183e9179a61a036243d655986c5ea1",
+    "OutputProfileSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+    "LinearExposureEv": -1,
+    "Intent": 1,
+    "Bpc": false,
+    "Adaptation": 1
+  },
+  "inputFloatSha256": "84F89FFDD1AB45B29E0D2C58258D357047D8DE5D69C8C37A6DED8BF66CF1197D",
+  "outputFloatSha256": "529C32B21C014FF43C6A42123C55815CA37B598694AF9BD06AC53056D9BCAC6D",
+  "linearCodeSha256": "d09c7b85f17a35fd99dcf87ff40599a7865cb4d6f4cc122057e3bdfb5d7c13c8",
+  "displayCodeSha256": "0a41cc40d1c3224815006b2d1efd3acf2f824c3f7b0c8bb6c22ea90bd02c14ac",
+  "reopenMax": 0,
+  "displayContract": "linear-sRGB -\u003E IECsRGBOETF -\u003E RGB8; explicitstandardsRGBICC; notphysicalmonitorcalibration",
+  "workingOutput": "linearTIFF16/PNG16ICCunchanged",
+  "CalibrationEligible": false
+}

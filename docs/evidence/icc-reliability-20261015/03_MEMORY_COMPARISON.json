@@ -1,0 +1,240 @@
+[
+  {
+    "mode": "old",
+    "peakWs": 4248453120,
+    "peakPrivate": 4257632256,
+    "last": {
+      "wallMs": 26383.7925,
+      "stage": "natural-release-no-GC",
+      "managed": 3598876088,
+      "allocated": 4400676584,
+      "workingSet": 4240519168,
+      "privateBytes": 4249550848,
+      "gc": [
+        12,
+        5,
+        4
+      ],
+      "cpuMs": 17171.875
+    },
+    "stages": {
+      "startup": {
+        "peakWs": 24412160,
+        "peakPrivate": 7888896,
+        "peakManaged": 102424,
+        "firstMs": 4.7177,
+        "lastMs": 4.7177
+      },
+      "profile-read": {
+        "peakWs": 151269376,
+        "peakPrivate": 131051520,
+        "peakManaged": 121289688,
+        "firstMs": 34.9568,
+        "lastMs": 128.4101
+      },
+      "wic-cache": {
+        "peakWs": 239316992,
+        "peakPrivate": 256659456,
+        "peakManaged": 121305152,
+        "firstMs": 158.3869,
+        "lastMs": 221.9803
+      },
+      "ushort-input": {
+        "peakWs": 283168768,
+        "peakPrivate": 255930368,
+        "peakManaged": 121193808,
+        "firstMs": 253.9914,
+        "lastMs": 253.9914
+      },
+      "float-input": {
+        "peakWs": 493060096,
+        "peakPrivate": 501088256,
+        "peakManaged": 363239920,
+        "firstMs": 285.9898,
+        "lastMs": 346.0546
+      },
+      "lcms-working": {
+        "peakWs": 1012002816,
+        "peakPrivate": 992448512,
+        "peakManaged": 847607224,
+        "firstMs": 378.0081,
+        "lastMs": 2606.8758
+      },
+      "frozen-edit": {
+        "peakWs": 1241858048,
+        "peakPrivate": 1237069824,
+        "peakManaged": 1089667536,
+        "firstMs": 2638.8645,
+        "lastMs": 2731.873
+      },
+      "lcms-output": {
+        "peakWs": 1862762496,
+        "peakPrivate": 1851363328,
+        "peakManaged": 1695302232,
+        "firstMs": 2762.8928,
+        "lastMs": 5092.6115
+      },
+      "reopen-recompute": {
+        "peakWs": 3073400832,
+        "peakPrivate": 3074625536,
+        "peakManaged": 2300307880,
+        "firstMs": 5124.6125,
+        "lastMs": 9766.3753
+      },
+      "preview-copy": {
+        "peakWs": 3400495104,
+        "peakPrivate": 3444023296,
+        "peakManaged": 2542376440,
+        "firstMs": 9798.3646,
+        "lastMs": 9954.0814
+      },
+      "encode-tiff": {
+        "peakWs": 3437383680,
+        "peakPrivate": 3444187136,
+        "peakManaged": 2542442392,
+        "firstMs": 9986.0921,
+        "lastMs": 10143.3639
+      },
+      "encode-png": {
+        "peakWs": 3449610240,
+        "peakPrivate": 3454672896,
+        "peakManaged": 2551241248,
+        "firstMs": 10173.3408,
+        "lastMs": 12310.3369
+      },
+      "encode-jpg": {
+        "peakWs": 3449540608,
+        "peakPrivate": 3454906368,
+        "peakManaged": 2548176400,
+        "firstMs": 12341.0213,
+        "lastMs": 12468.9988
+      },
+      "readback-tif": {
+        "peakWs": 3577286656,
+        "peakPrivate": 3582496768,
+        "peakManaged": 2790387680,
+        "firstMs": 12501.0187,
+        "lastMs": 12880.2389
+      },
+      "readback-png": {
+        "peakWs": 3698851840,
+        "peakPrivate": 3704033280,
+        "peakManaged": 2989198376,
+        "firstMs": 12912.2225,
+        "lastMs": 13693.8971
+      },
+      "readback-jpg": {
+        "peakWs": 3760070656,
+        "peakPrivate": 3765334016,
+        "peakManaged": 3110281120,
+        "firstMs": 13725.9109,
+        "lastMs": 14011.6032
+      },
+      "diagnostic-buffer-copy": {
+        "peakWs": 4246888448,
+        "peakPrivate": 4256976896,
+        "peakManaged": 3597379920,
+        "firstMs": 14043.6168,
+        "lastMs": 16351.2056
+      },
+      "natural-release-no-GC": {
+        "peakWs": 4248453120,
+        "peakPrivate": 4257632256,
+        "peakManaged": 3598876088,
+        "firstMs": 16383.2859,
+        "lastMs": 26383.7925
+      }
+    }
+  },
+  {
+    "mode": "bounded",
+    "peakWs": 1207984128,
+    "peakPrivate": 1247412224,
+    "last": {
+      "wallMs": 24687.9461,
+      "stage": "natural-release-no-GC",
+      "managed": 312855384,
+      "allocated": 3190285040,
+      "workingSet": 772526080,
+      "privateBytes": 742305792,
+      "gc": [
+        25,
+        15,
+        15
+      ],
+      "cpuMs": 16218.75
+    },
+    "stages": {
+      "startup": {
+        "peakWs": 24485888,
+        "peakPrivate": 7950336,
+        "peakManaged": 102424,
+        "firstMs": 4.5955,
+        "lastMs": 4.5955
+      },
+      "bounded-wic-cache": {
+        "peakWs": 161902592,
+        "peakPrivate": 257462272,
+        "peakManaged": 242218840,
+        "firstMs": 41.4158,
+        "lastMs": 169.003
+      },
+      "bounded-decode-band": {
+        "peakWs": 1200599040,
+        "peakPrivate": 1247412224,
+        "peakManaged": 802980672,
+        "firstMs": 201.0302,
+        "lastMs": 9759.027
+      },
+      "bounded-lcms-edit": {
+        "peakWs": 1207984128,
+        "peakPrivate": 1247412224,
+        "peakManaged": 1062749904,
+        "firstMs": 297.2039,
+        "lastMs": 9945.6872
+      },
+      "bounded-reopen-band": {
+        "peakWs": 1207984128,
+        "peakPrivate": 1247412224,
+        "peakManaged": 1079651440,
+        "firstMs": 359.1059,
+        "lastMs": 10007.6755
+      },
+      "bounded-tiff": {
+        "peakWs": 520269824,
+        "peakPrivate": 488722432,
+        "peakManaged": 122868304,
+        "firstMs": 10039.6975,
+        "lastMs": 10071.6806
+      },
+      "bounded-png16": {
+        "peakWs": 531095552,
+        "peakPrivate": 498995200,
+        "peakManaged": 132226000,
+        "firstMs": 10103.6793,
+        "lastMs": 12237.4293
+      },
+      "display-oetf-rgb8": {
+        "peakWs": 651612160,
+        "peakPrivate": 620167168,
+        "peakManaged": 188099512,
+        "firstMs": 12268.1195,
+        "lastMs": 13680.9659
+      },
+      "display-jpeg8": {
+        "peakWs": 772837376,
+        "peakPrivate": 742952960,
+        "peakManaged": 311370184,
+        "firstMs": 13710.9722,
+        "lastMs": 14670.0986
+      },
+      "natural-release-no-GC": {
+        "peakWs": 773799936,
+        "peakPrivate": 743890944,
+        "peakManaged": 312855384,
+        "firstMs": 14701.4646,
+        "lastMs": 24687.9461
+      }
+    }
+  }
+]
