@@ -146,6 +146,10 @@ public sealed class FreeCanvasView : UserControl
     private void OpenEditMenu(Button anchor)
     {
         var menu=new ContextMenu { Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom, PlacementTarget=anchor };
+        // Expose the current menu through its owner; an old closing Popup HWND can
+        // remain in PresentationSource.CurrentSources until the dispatcher drains.
+        if(anchor.ContextMenu is { } previous)previous.IsOpen=false;
+        anchor.ContextMenu=menu;
         AddMenuAction(menu,"复制",Editor.Copy,Editor.Selected.Count>0,"Ctrl+C");
         AddMenuAction(menu,"粘贴",Editor.Paste,Editor.CanPaste,"Ctrl+V");
         AddMenuAction(menu,"创建副本",Editor.Duplicate,Editor.Selected.Count>0,"Ctrl+D");

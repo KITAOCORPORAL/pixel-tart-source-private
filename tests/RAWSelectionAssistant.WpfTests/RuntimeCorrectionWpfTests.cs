@@ -132,26 +132,23 @@ public sealed class RuntimeCorrectionWpfTests
             }
         }
         var edit=Descendants(view.HeaderPanel).OfType<Button>().Single(b=>Equals(b.Content,"编辑"));
+        // Use the exact owner/menu identity, not arbitrary global popup enumeration.
+        var window=new Window { Content=view,Width=1180,Height=720,ShowInTaskbar=false,ShowActivated=false };
+        try
+        {
+        window.Show();await window.Dispatcher.InvokeAsync(()=>{},System.Windows.Threading.DispatcherPriority.ApplicationIdle);
         edit.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
-        // Discover the real popup created by the click, not source-text assertions.
-        var menu=System.Windows.PresentationSource.CurrentSources.OfType<System.Windows.Interop.HwndSource>().Where(source=>source.Dispatcher.CheckAccess())
-            .SelectMany(source=>source.RootVisual is DependencyObject root?Descendants(root):[]).OfType<ContextMenu>().FirstOrDefault();
-        // A disconnected view may not host a popup HWND: use a real host for behavior below.
-        var window=new Window { Content=view,Width=1180,Height=720,ShowInTaskbar=false };window.Show();
+        var emptyMenu=edit.ContextMenu;Assert.IsNotNull(emptyMenu);Assert.IsTrue(emptyMenu.IsOpen);Assert.AreSame(edit,emptyMenu.PlacementTarget);
+        Assert.IsFalse(emptyMenu.Items.OfType<MenuItem>().Single(x=>Equals(x.Header,"粘贴")).IsEnabled);emptyMenu.IsOpen=false;
+        editor.AddText(0,0,"测试文字");Assert.HasCount(1,editor.Selected);editor.Copy();Assert.IsTrue(editor.CanPaste,"Pure editor clipboard must be populated before opening the menu.");
         edit.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
-        await Task.Delay(30);
-        menu=System.Windows.PresentationSource.CurrentSources.OfType<System.Windows.Interop.HwndSource>().Where(source=>source.Dispatcher.CheckAccess())
-            .SelectMany(source=>source.RootVisual is DependencyObject root?Descendants(root):[]).OfType<ContextMenu>().LastOrDefault(x => x.IsOpen && ReferenceEquals(x.PlacementTarget, edit));
-        Assert.IsNotNull(menu);Assert.IsFalse(menu.Items.OfType<MenuItem>().Single(x=>Equals(x.Header,"粘贴")).IsEnabled);menu.IsOpen=false;
-        editor.AddText(0,0,"测试文字");editor.Copy();
-        edit.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));await Task.Delay(30);
-        menu=System.Windows.PresentationSource.CurrentSources.OfType<System.Windows.Interop.HwndSource>().Where(source=>source.Dispatcher.CheckAccess())
-            .SelectMany(source=>source.RootVisual is DependencyObject root?Descendants(root):[]).OfType<ContextMenu>().Last(x => x.IsOpen && ReferenceEquals(x.PlacementTarget, edit));
+        var menu=edit.ContextMenu;Assert.IsNotNull(menu);Assert.AreNotSame(emptyMenu,menu);Assert.IsTrue(menu.IsOpen);Assert.AreSame(edit,menu.PlacementTarget);
         var paste=menu.Items.OfType<MenuItem>().Single(x=>Equals(x.Header,"粘贴"));Assert.IsTrue(paste.IsEnabled);
         paste.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));Assert.HasCount(2,editor.Document.Objects);menu.IsOpen=false;
         view.Surface.SetZoom(1.5);
         Assert.HasCount(1,Descendants(view.HeaderPanel).OfType<Button>().Where(x=>x.Content?.ToString()?.Contains("150%") == true).ToArray());
-        await view.FlushAsync();window.Close();
+        await view.FlushAsync();
+        }finally{if(edit.ContextMenu is {} menu)menu.IsOpen=false;window.Close();}
     });
     [TestMethod]
     public Task EscapeClearsTransientInspectionBeforeShellNavigation() => RunSta(async () =>
