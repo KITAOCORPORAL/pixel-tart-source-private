@@ -1,0 +1,42 @@
+[
+  {
+    "node": "Details",
+    "source": "SpatialLegacyRawRenderer.Plan source frozen baseline",
+    "budget": "full-frame36 bytes/pixel + expandedtile*(Details1600 else160) +64MiB; no budget expansion",
+    "fullImageDependency": "global dimensions for scaledradius; full source/output; finitehalo",
+    "streamingClaim": false,
+    "experimentOnly": false
+  },
+  {
+    "node": "Structure",
+    "source": "SpatialLegacyRawRenderer.Plan source frozen baseline",
+    "budget": "full-frame36 bytes/pixel + expandedtile*(Details1600 else160) +64MiB; no budget expansion",
+    "fullImageDependency": "global dimensions for radius; full source/output; finite halo",
+    "streamingClaim": false,
+    "experimentOnly": true
+  },
+  {
+    "node": "Bloom",
+    "source": "SpatialLegacyRawRenderer.Plan source frozen baseline",
+    "budget": "full-frame36 bytes/pixel + expandedtile*(Details1600 else160) +64MiB; no budget expansion",
+    "fullImageDependency": "global dimensions and grain coordinates; full source/output; finitehalo",
+    "streamingClaim": false,
+    "experimentOnly": false
+  },
+  {
+    "node": "Halation",
+    "source": "SpatialLegacyRawRenderer.Plan source frozen baseline",
+    "budget": "full-frame36 bytes/pixel + expandedtile*(Details1600 else160) +64MiB; no budget expansion",
+    "fullImageDependency": "global dimensions and grain coordinates; full source/output; finitehalo",
+    "streamingClaim": false,
+    "experimentOnly": false
+  },
+  {
+    "node": "ReferenceMatch",
+    "source": "SpatialLegacyRawRenderer.Plan source frozen baseline",
+    "budget": "full-frame36 bytes/pixel + expandedtile*(Details1600 else160) +64MiB; no budget expansion",
+    "fullImageDependency": "global analysis then full output",
+    "streamingClaim": false,
+    "experimentOnly": false
+  }
+]

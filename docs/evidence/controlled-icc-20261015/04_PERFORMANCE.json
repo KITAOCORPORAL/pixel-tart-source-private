@@ -1,0 +1,189 @@
+{
+  "runs": [
+    {
+      "file": "1-candidate.json",
+      "mode": "candidate",
+      "status": "MEASURED",
+      "ms": 6762.3399,
+      "alloc": 282500352,
+      "peakWs": 950468608,
+      "peakPrivate": 928944128,
+      "endWs": 944046080,
+      "baselineWs": 667430912,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "scratch": 45511200
+    },
+    {
+      "file": "1-full.json",
+      "mode": "full",
+      "status": "MEASURED",
+      "ms": 4163.581,
+      "alloc": 1190631136,
+      "peakWs": 1853657088,
+      "peakPrivate": 1843634176,
+      "endWs": 1849815040,
+      "baselineWs": 667262976,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "scratch": 0
+    },
+    {
+      "file": "1-tile.json",
+      "mode": "tile",
+      "status": "MEASURED",
+      "ms": 7140.4473,
+      "alloc": 2249732440,
+      "peakWs": 2008846336,
+      "peakPrivate": 1993838592,
+      "endWs": 2002587648,
+      "baselineWs": 667357184,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "scratch": 0
+    },
+    {
+      "file": "2-candidate.json",
+      "mode": "candidate",
+      "status": "MEASURED",
+      "ms": 9051.8594,
+      "alloc": 282639392,
+      "peakWs": 947728384,
+      "peakPrivate": 926912512,
+      "endWs": 943898624,
+      "baselineWs": 667131904,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "scratch": 45511200
+    },
+    {
+      "file": "2-full.json",
+      "mode": "full",
+      "status": "MEASURED",
+      "ms": 4162.3353,
+      "alloc": 1190631024,
+      "peakWs": 1853640704,
+      "peakPrivate": 1843585024,
+      "endWs": 1850310656,
+      "baselineWs": 667209728,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "scratch": 0
+    },
+    {
+      "file": "2-tile.json",
+      "mode": "tile",
+      "status": "MEASURED",
+      "ms": 7052.7443,
+      "alloc": 2249720960,
+      "peakWs": 2008760320,
+      "peakPrivate": 1993682944,
+      "endWs": 2002423808,
+      "baselineWs": 667172864,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "scratch": 0
+    },
+    {
+      "file": "3-candidate.json",
+      "mode": "candidate",
+      "status": "MEASURED",
+      "ms": 6902.7174,
+      "alloc": 282523840,
+      "peakWs": 950390784,
+      "peakPrivate": 928894976,
+      "endWs": 944013312,
+      "baselineWs": 667238400,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "scratch": 45511200
+    },
+    {
+      "file": "3-full.json",
+      "mode": "full",
+      "status": "MEASURED",
+      "ms": 4249.4832,
+      "alloc": 1190646936,
+      "peakWs": 1853759488,
+      "peakPrivate": 1843826688,
+      "endWs": 1849933824,
+      "baselineWs": 667324416,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "scratch": 0
+    },
+    {
+      "file": "3-tile.json",
+      "mode": "tile",
+      "status": "MEASURED",
+      "ms": 7173.4916,
+      "alloc": 2249747920,
+      "peakWs": 2009206784,
+      "peakPrivate": 1994027008,
+      "endWs": 2002931712,
+      "baselineWs": 667549696,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "scratch": 0
+    },
+    {
+      "file": "cancel.json",
+      "mode": "cancel",
+      "status": "CANCELLED",
+      "ms": 112.2983,
+      "alloc": 266132080,
+      "peakWs": 696041472,
+      "peakPrivate": 913965056,
+      "endWs": 689176576,
+      "baselineWs": 667590656,
+      "hash": null,
+      "scratch": 0
+    },
+    {
+      "file": "candidate-cancel.json",
+      "mode": "candidate-cancel",
+      "status": "CANCELLED",
+      "ms": 110.4402,
+      "alloc": 251835360,
+      "peakWs": 682074112,
+      "peakPrivate": 899518464,
+      "endWs": 675618816,
+      "baselineWs": 667353088,
+      "hash": null,
+      "scratch": 11236500
+    },
+    {
+      "file": "full-cancel.json",
+      "mode": "full-cancel",
+      "status": "CANCELLED",
+      "ms": 106.6459,
+      "alloc": 564810592,
+      "peakWs": 916164608,
+      "peakPrivate": 1217363968,
+      "endWs": 910192640,
+      "baselineWs": 667197440,
+      "hash": null,
+      "scratch": 0
+    }
+  ],
+  "aggregate": [
+    {
+      "mode": "full",
+      "count": 3,
+      "medianMs": 4163.581,
+      "worstMs": 4249.4832,
+      "medianAlloc": 1190631136,
+      "worstWs": 1853759488,
+      "allHashesFrozen": true
+    },
+    {
+      "mode": "tile",
+      "count": 3,
+      "medianMs": 7140.4473,
+      "worstMs": 7173.4916,
+      "medianAlloc": 2249732440,
+      "worstWs": 2009206784,
+      "allHashesFrozen": true
+    },
+    {
+      "mode": "candidate",
+      "count": 3,
+      "medianMs": 6902.7174,
+      "worstMs": 9051.8594,
+      "medianAlloc": 282523840,
+      "worstWs": 950468608,
+      "allHashesFrozen": true
+    }
+  ]
+}
