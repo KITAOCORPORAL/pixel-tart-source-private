@@ -1,0 +1,5 @@
+# Mapping distinction
+
+V1 input/profile/refusal contract is byte-identical tobase; V2 doesnotloosenV1tolerance. NewnamedExportClip0To1V2 is per-channel outputclipping, NOT perceptualgamutmapping. LCMSand skcms actualintegerstoreclippingis numerical precedent only, not a recommendationforrenderingintent/skin/highlightquality. Above1highlightsloseenergyatsink; negativecolorcomponentsloseoutgamutinformation; before-mapfloatTIFFandpixelcountsretainmeasurement. No absolutecoloraccuracyclaim.
+
+Fiveinputauditunits are renderedphotoTIFFderivatives (threeRTresults,twoCanonlinear variants), notfiveindependentcameraoriginals. 1/5passesV1; strictprofileadmissionvsnumericrejectionreportedseparately. ThreeauthorizedRAWhashesinheritedandnotusedasdecodedlinearassumption. Expandingprofileadmission/generalTIFFformatsnotimplemented. Newalgorithmremainstoolmode and productentrygateCLOSED.

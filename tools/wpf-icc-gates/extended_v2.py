@@ -50,6 +50,9 @@ def run(source,out,dll,work,output,display):
  # Same mapped linear codes define preview and exports; display is explicit nonlinear sRGB, never rawlinearonscreen.
  linear=c.astype(np.float64)/65535;encoded=np.where(linear<=.0031308,12.92*linear,1.055*np.power(linear,1/2.4)-.055);preview=np.rint(encoded*255).astype(np.uint8);Image.fromarray(preview).save(out/'display.png',icc_profile=display_icc);Image.fromarray(preview).save(out/'display.jpg',quality=100,subsampling=0,icc_profile=display_icc)
  png,pi=read_png16(out/'output-linear.png');assert np.array_equal(png,c) and pi==target;assert np.array_equal(tifffile.imread(out/'output-linear.tif'),c);assert np.array_equal(np.asarray(Image.open(out/'display.png')),preview)
+ with tifffile.TiffFile(out/'output-linear.tif') as tf:assert tf.pages[0].tags[34675].value==target
+ with tifffile.TiffFile(out/'before-map-extended-float.tif') as tf:assert np.array_equal(tf.asarray(),l) and tf.pages[0].tags[34675].value==target
+ for displayfile in ['display.png','display.jpg']:assert Image.open(out/displayfile).info['icc_profile']==display_icc
  loss=np.abs(np.asarray(Image.open(out/'display.jpg')).astype(float)-preview.astype(float))/255;mae=float(loss.mean());rmse=float(np.sqrt(np.mean(loss*loss)));psnr=float(-20*np.log10(rmse)) if rmse else None
  assert mae<.02 and (psnr is None or psnr>30)
  stats=lambda a:dict(min=float(a.min()),max=float(a.max()),negative=int(np.count_nonzero(a<0)),aboveOne=int(np.count_nonzero(a>1)),pixelsOutside=int(np.count_nonzero(np.any((a<0)|(a>1),axis=-1))))
