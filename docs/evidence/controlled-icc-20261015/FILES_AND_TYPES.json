@@ -1,0 +1,828 @@
+{
+  "hashDomain": "Exact working tree bytes, raw logs/TRX/ZIP binary; manifest/VALIDATION self excluded; git canonicalsha separate",
+  "count": 137,
+  "files": [
+    {
+      "path": "docs/evidence/controlled-icc-20261015/.gitattributes",
+      "bytes": 53,
+      "type": "repository metadata",
+      "workingSha256": "c4fb74cc807a2470efd5d865977344a7bee415c01c0c2bb8bf6ba8d5e010a577"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/01_ACCEPTANCE_MATRIX.json",
+      "bytes": 1699,
+      "type": "structured evidence/configuration",
+      "workingSha256": "9dea11f8a0384f046651c93b06d54dfae57e3dcc87a8546ff4ec7e59f1646883"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/01_BASELINE.json",
+      "bytes": 84858,
+      "type": "structured evidence/configuration",
+      "workingSha256": "1fe0937c79d0be1289c30701a4efdd774005331d961d5ea57409f0489108261e"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/01_FROZEN_CONTRACTS.json",
+      "bytes": 1623,
+      "type": "structured evidence/configuration",
+      "workingSha256": "90d1023399099f0cac03615b62b384a67861b61dc45dbfa8780dcc29f154375e"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/01_START.json",
+      "bytes": 25626,
+      "type": "structured evidence/configuration",
+      "workingSha256": "1437174b1b0abb2b42e6e2d88d5847310d68b1bca764f467237500830e205f56"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/01_TIMEZONE_ERRATUM.md",
+      "bytes": 950,
+      "type": "documentation",
+      "workingSha256": "e6e8040863f91c4a4741a1ac1682bcb8f3bc49289eddc1395c18a25a986a65ff"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/01_TIMEZONE_FIELDS.json",
+      "bytes": 2316,
+      "type": "structured evidence/configuration",
+      "workingSha256": "5e95216f1b486a58d05682ff7e8cd47257fd5afae285bf910f07d8324ac5be09"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_BUILD_01.log",
+      "bytes": 633,
+      "type": "raw process log",
+      "workingSha256": "52f299ff2d3aa996fd5fa8fac31906c7d0c771df549e7a60f069c77e871a78d2"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_BUILD_02.log",
+      "bytes": 491,
+      "type": "raw process log",
+      "workingSha256": "6e4ff3fcbbf186f96748ba198ce109228823ce5c09a527717d494d25d8eae1c4"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_BUILD_03.log",
+      "bytes": 491,
+      "type": "raw process log",
+      "workingSha256": "686329bc850b2520ec647a3378568b5b0dcfb025024bb817625ca5accd548b66"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_COMPARABLE_CONDITIONS.json",
+      "bytes": 58468,
+      "type": "structured evidence/configuration",
+      "workingSha256": "7586a68df3782e6a024725f14f551dc4398905f6305ddc8618df3738bc8d05af"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_CORE_BUILD_FINAL.log",
+      "bytes": 16668,
+      "type": "raw process log",
+      "workingSha256": "ce78412b861195b7c706483500e89fb45c002bf919e51829e9cf885bf10d523a"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_DIRECT_COMPARISON.json",
+      "bytes": 394,
+      "type": "structured evidence/configuration",
+      "workingSha256": "77e77a40990e67e825d4c9b0ffd839ee8891a692ee32d439c517980bb2aa385c"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_FAILED_GAMUT.log",
+      "bytes": 125,
+      "type": "raw process log",
+      "workingSha256": "13502059e2ae0dee81ccc19e8ce7cdcae242a892ad8ed0b356a8f0e49c3bbcc6"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_FAILED_PROFILE.log",
+      "bytes": 116,
+      "type": "raw process log",
+      "workingSha256": "8d9abea39d8e5f34b5f0268303815e1e094b2f1dfd53ea968b2b3b8b04fa2ede"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_FAILED_PROFILE_ADMISSION.log",
+      "bytes": 116,
+      "type": "raw process log",
+      "workingSha256": "8d9abea39d8e5f34b5f0268303815e1e094b2f1dfd53ea968b2b3b8b04fa2ede"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_FINAL_SAFETY_ADDENDUM.md",
+      "bytes": 424,
+      "type": "documentation",
+      "workingSha256": "52fa79f76a214425cdd9677e88c0623ab81cbebc9729762848e36653c68eb1b8"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_IDENTITY_PHOTO_RESULT.json",
+      "bytes": 2339,
+      "type": "structured evidence/configuration",
+      "workingSha256": "6db119d25af16146af7ef0faa7dcb1d06a9c7b36b3507d4814e4905ac746391c"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_IMPLEMENTATION_SCOPE.md",
+      "bytes": 270,
+      "type": "documentation",
+      "workingSha256": "dfe7e80b3d45cc86eff563aeecaec513f7c3fee7723c00d8f605d4cdea903e7e"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_LICENSE_GATE.json",
+      "bytes": 936,
+      "type": "structured evidence/configuration",
+      "workingSha256": "306cf42fd7f3a8255fc719e91723f91bbd7af3cd94361429a585b5f6228aed03"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_MATRIX_REFERENCE_RUN.json",
+      "bytes": 6325,
+      "type": "structured evidence/configuration",
+      "workingSha256": "362d903f18f499cc3d18c00c165f8bc060c32145e5ab077f35e5a2b44e05652d"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_NATIVE_SELFTEST.log",
+      "bytes": 205,
+      "type": "raw process log",
+      "workingSha256": "e46523caf05fbfc17184255dfd47b4891a87ec6b22c4799dcfbfba5b78f1d821"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_NODE_COMPARISON.md",
+      "bytes": 3141,
+      "type": "documentation",
+      "workingSha256": "96fc25bdb89da8e9d1d96decb60fc19005378a481a0c15e7c98111dadf78b5bc"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_PHOTO_PREPARATION.json",
+      "bytes": 1191,
+      "type": "structured evidence/configuration",
+      "workingSha256": "cef357f36f8a2d659ae1e7f4ca1e4b9766fe02f4239de66d350f8b73b9b13187"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_PHOTO_RESULT.json",
+      "bytes": 2340,
+      "type": "structured evidence/configuration",
+      "workingSha256": "adb4d59ed58c00651e7ecc747f5da83e2c663e9c3d3862abf4d32c4b08249f20"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_PROFILE_SCOPE_ADDENDUM.md",
+      "bytes": 319,
+      "type": "documentation",
+      "workingSha256": "b3508eca02dc03721d11536c7dde9e5231826a2e4b91d5a17f88bd7e8d3f3a39"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_RESULTS_AND_LIMITS.md",
+      "bytes": 2642,
+      "type": "documentation",
+      "workingSha256": "ec3dcce7cfd9825b4d5168e28501874d0883cfc95ad74b8e25e6d9fd896673a4"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_UNIT_TESTS_FINAL.trx",
+      "bytes": 5587,
+      "type": "raw test results",
+      "workingSha256": "07d6ac9f08bb6553fc9cd3a07f52206ab986a75200a48b3e9b379cfc4aa40281"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/02_WORKFLOW_BUILD_FINAL.log",
+      "bytes": 491,
+      "type": "raw process log",
+      "workingSha256": "e8b12de51d1be9b095355982dc8cc0d22d2bd3e9c19092cf3906643cc558e67b"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_CANDIDATE_ADMISSION.md",
+      "bytes": 2286,
+      "type": "documentation",
+      "workingSha256": "3ff2366cb02e7787929d2e0a6ccba832c646a69da3ac2d6e0d0d4443ca1362dd"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_DSC09916.ARW.candidate.log",
+      "bytes": 1856,
+      "type": "raw process log",
+      "workingSha256": "0862a4edba250bdf5a7e0ca234be42e39f63c5b27a82a442fd853985307e7b42"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_DSC09916.ARW.identity.json",
+      "bytes": 189,
+      "type": "structured evidence/configuration",
+      "workingSha256": "b0f7bd55df6847082d577bd5406f97e5069a29b4f21a7c73e9bab41f267fdab3"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_DSC09916.ARW.legacy.json",
+      "bytes": 5958,
+      "type": "structured evidence/configuration",
+      "workingSha256": "557fe5442598289124c45fc4478dfac93d540615a3161e583a98ed63d740d3f4"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_DSC09916.ARW.legacy.log",
+      "bytes": 0,
+      "type": "raw process log",
+      "workingSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_DSCF0347.RAF.candidate.log",
+      "bytes": 2047,
+      "type": "raw process log",
+      "workingSha256": "2effec7e9cd59fc908da526f8a1e900d7b441a54977d0221e595a04aad76b1f3"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_DSCF0347.RAF.identity.json",
+      "bytes": 189,
+      "type": "structured evidence/configuration",
+      "workingSha256": "909271311996b2bab04341e1d83c442c7289bc0bd2c5b1e86b31fd9ecb800c75"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_DSCF0347.RAF.legacy.json",
+      "bytes": 3799,
+      "type": "structured evidence/configuration",
+      "workingSha256": "71f5a8ba4c1deaf80f6e4050730caa7cd40f71b817b51a62a4c2981affc1126d"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_DSCF0347.RAF.legacy.log",
+      "bytes": 0,
+      "type": "raw process log",
+      "workingSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_PE_LCMS.json",
+      "bytes": 426,
+      "type": "structured evidence/configuration",
+      "workingSha256": "2bf71290109d5080a34a39a9ede62daaab746d51e152648dad4737bd7f565563"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_PE_LIBRAW.json",
+      "bytes": 958,
+      "type": "structured evidence/configuration",
+      "workingSha256": "082c107d87e2ad82a063c63483a32e4222f8472180c7616597c5d5010943d7f8"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_RAW_SUMMARY.json",
+      "bytes": 4246,
+      "type": "structured evidence/configuration",
+      "workingSha256": "4fa90dd63e45e5810a5bd5d1d10664447508c161fc8ef9818a2f0e54903b140a"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_RT_SUMMARY.json",
+      "bytes": 5005,
+      "type": "structured evidence/configuration",
+      "workingSha256": "31156519d0d9abfec9b814177041143d66e4736d6c7a5bb3cf16cf7a1d3515fa"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_RT_false_DSC09916.ARW.json",
+      "bytes": 24114,
+      "type": "structured evidence/configuration",
+      "workingSha256": "b478a068cbda33401dc3d9478510f190f58cdecce8b69c8652b0f7f7bfebe6c6"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_RT_false_DSCF0347.RAF.json",
+      "bytes": 25916,
+      "type": "structured evidence/configuration",
+      "workingSha256": "226dcf105996bb3558cddd289943c37308bc7f6784196364b5cdf521e9432a12"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_RT_false_TNAN8886.CR3.json",
+      "bytes": 25869,
+      "type": "structured evidence/configuration",
+      "workingSha256": "580e2bf71d36adc626824a2a6a658b7a42b59b2352629203b6cd5cfe17e04e3a"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_RT_true_DSC09916.ARW.json",
+      "bytes": 25771,
+      "type": "structured evidence/configuration",
+      "workingSha256": "026bae34aff83688ba3aaa45b47c9ea6ae3585312d318dc1c82829bbf81e152b"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_RT_true_DSCF0347.RAF.json",
+      "bytes": 25916,
+      "type": "structured evidence/configuration",
+      "workingSha256": "8941b1df81724f9688ecdc5accb01eb849756b4c7f51bd8502bf61c977328505"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_RT_true_TNAN8886.CR3.json",
+      "bytes": 25867,
+      "type": "structured evidence/configuration",
+      "workingSha256": "f2e8baed6d1bc99cc14d7d1723bd7d88bfdc83a7d6f23c7773dd10b49c969c95"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_TNAN8886.CR3.candidate.log",
+      "bytes": 2018,
+      "type": "raw process log",
+      "workingSha256": "82c7865b8e36784e09913242840f7b990f0d15b086a21b48e76be3d1b3c1c046"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_TNAN8886.CR3.identity.json",
+      "bytes": 189,
+      "type": "structured evidence/configuration",
+      "workingSha256": "e8f9e491a28ab99471d0de7c04d4d5b26cbbd458dd9e8e4edee2fe45c906b15b"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_TNAN8886.CR3.legacy.json",
+      "bytes": 4809,
+      "type": "structured evidence/configuration",
+      "workingSha256": "6568a6ef4b3bef5bc037a2d467e8983632c10f6052349da66ab3873ceaef9d2d"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_TNAN8886.CR3.legacy.log",
+      "bytes": 0,
+      "type": "raw process log",
+      "workingSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/03_build.log",
+      "bytes": 611,
+      "type": "raw process log",
+      "workingSha256": "a9646c4028903cf609ad2be7109d83fe89d889f8ff5568fd08c6c9f792b50edb"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_BUILD.log",
+      "bytes": 638,
+      "type": "raw process log",
+      "workingSha256": "37e985998b5f94992d79770ed80138acebe0f330d4bb9cfff3ec82e9c45afaaa"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_DECISION.md",
+      "bytes": 1392,
+      "type": "documentation",
+      "workingSha256": "d5969dc77180dbbecf03bfec8f8cae012ab6d31d2312d926b4326db936b6b2f0"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_FILTER_REFERENCES.json",
+      "bytes": 634,
+      "type": "structured evidence/configuration",
+      "workingSha256": "83ebacdc98a2936167249b77b52820aa376e66d3956952f1623e6e11999d3467"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_NODE_COMPARISON.md",
+      "bytes": 1504,
+      "type": "documentation",
+      "workingSha256": "aac49aad8b58f36b818f1dee70902f0485455669d55567d29c9d5cc2b5634410"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_OTHER_NODE_BUDGETS.json",
+      "bytes": 1796,
+      "type": "structured evidence/configuration",
+      "workingSha256": "8d6e801c52bf5a55ba3c4f07a7a7f3c61ac2045e046b97fc949d08573a1a6721"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_PERFORMANCE.json",
+      "bytes": 4876,
+      "type": "structured evidence/configuration",
+      "workingSha256": "2a5db37f450145cab82176813da0e644d36058f44510e85d6afd36e5cde251c1"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_SELFTEST.log",
+      "bytes": 2655,
+      "type": "raw process log",
+      "workingSha256": "3561ca47c6e96140668e884a8ede28725f957f4fa8308c4cf72945be60491632"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_series/1-candidate.json",
+      "bytes": 115013,
+      "type": "structured evidence/configuration",
+      "workingSha256": "fa2028138b28b06925c21fbeaf58c5d1d88ea70308af44d3632fe82605114165"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_series/1-full.json",
+      "bytes": 99349,
+      "type": "structured evidence/configuration",
+      "workingSha256": "a348682a589f6c4174bb39ba121ff250a4c56a94adde019eee1d733983b1b82c"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_series/1-tile.json",
+      "bytes": 119499,
+      "type": "structured evidence/configuration",
+      "workingSha256": "2755ced1016872cfed0551ce471bfec083ed49ce64a41b01bbe26b8db5105e11"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_series/2-candidate.json",
+      "bytes": 115829,
+      "type": "structured evidence/configuration",
+      "workingSha256": "6be5e556784ddcedb5fa4915c4ccaba5ef20523b7e733f7d35d00f4910cfc3cc"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_series/2-full.json",
+      "bytes": 99135,
+      "type": "structured evidence/configuration",
+      "workingSha256": "31b7c29699cb84486bf74dc303c0e12a461f54b8f7a276578981f3a793992316"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_series/2-tile.json",
+      "bytes": 118886,
+      "type": "structured evidence/configuration",
+      "workingSha256": "704a740fc955c1a4a6eaf319df2e4e8bf595e9d29358537e65732432bce49f11"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_series/3-candidate.json",
+      "bytes": 116554,
+      "type": "structured evidence/configuration",
+      "workingSha256": "9dc1a3c29fe876f6e4b7a122b91ec5f8eb50202e00262dbca794f955da9c66dd"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_series/3-full.json",
+      "bytes": 100637,
+      "type": "structured evidence/configuration",
+      "workingSha256": "650c1bef0630cd2a38f77d948d976fc6888fe4908c475fd672d28f6a6b3427c3"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_series/3-tile.json",
+      "bytes": 120842,
+      "type": "structured evidence/configuration",
+      "workingSha256": "8e7c74b1831326ec497b6bc1b8e86b3ec00eeb48fa49a1a6bdeb4e3ec19e0e64"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_series/cancel.json",
+      "bytes": 72254,
+      "type": "structured evidence/configuration",
+      "workingSha256": "f88422c057d03adc0d9c71c399eb31a1e24991791f6ac364b3482be485a182a2"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_series/candidate-cancel.json",
+      "bytes": 71905,
+      "type": "structured evidence/configuration",
+      "workingSha256": "b41eea671453828e2d3c7b46523c60b651065705bd334395e1b48ebc793e6580"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/04_series/full-cancel.json",
+      "bytes": 72568,
+      "type": "structured evidence/configuration",
+      "workingSha256": "3445f8b26e21ec697719ad2828686785883d8e3ad6791e9af877993e076529ed"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/05_BACKEND_RESULTS.md",
+      "bytes": 1186,
+      "type": "documentation",
+      "workingSha256": "43400341a5ba432852decbbe0850da3b76a072fb3ac0e4991317b7488a68e442"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/05_DESKTOP_OBSERVATION.json",
+      "bytes": 182,
+      "type": "structured evidence/configuration",
+      "workingSha256": "c0ec996459f027b068d339aee7a88713d054502df9c3ed90b9fddc4db7e44086"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/05_FAILURE_HOST_ROOT_CAUSE.md",
+      "bytes": 877,
+      "type": "documentation",
+      "workingSha256": "67a4892569d577a9bc07c000fc2227d8debce865104910e796c44a6eca253196"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/05_NATIVE_BOUNDARY.md",
+      "bytes": 520,
+      "type": "documentation",
+      "workingSha256": "e10854bcf6d51f96905f84399969520ae4e229eb87e8ddcd9e53a50bd638557d"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/05_NATIVE_RESULTS.json",
+      "bytes": 2502,
+      "type": "structured evidence/configuration",
+      "workingSha256": "a81aec5cd88c4e792fc1b6cd65f252e7c65a440c3c01c86a4906755e498fa12f"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/05_P3_FAILED_PATH.log",
+      "bytes": 442,
+      "type": "raw process log",
+      "workingSha256": "89aa37f482c21786993f7d7ea775e8da4e62183d2f078a791119b0630d23d340"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/05_P3_VM.json",
+      "bytes": 13660,
+      "type": "structured evidence/configuration",
+      "workingSha256": "3726436ee5cfd81c3ae24dc5460731cb21e41be2233e68b2a1cdeb8f1392cfe1"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/05_P3_VM.log",
+      "bytes": 0,
+      "type": "raw process log",
+      "workingSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/DELIVERY.md",
+      "bytes": 6250,
+      "type": "documentation",
+      "workingSha256": "669591a7086e76b3d46411b4c8542b3f18a31e984c4ec02b8cb84a478c49c55b"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/ENV_ARTIFACT_RELOCATION.json",
+      "bytes": 8855,
+      "type": "structured evidence/configuration",
+      "workingSha256": "8560c66801caf611e18c2cbd6ce0da33b7d70e11232dd0a691786db8ac33c573"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FAILED_ROUNDS.md",
+      "bytes": 1665,
+      "type": "documentation",
+      "workingSha256": "b91d7e58fe97a85b4d408fa50366b2b68b27dfa703da81bfc13085da5d5295b7"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_CORE_BUILD.log",
+      "bytes": 16668,
+      "type": "raw process log",
+      "workingSha256": "8ddf16983ffcfe776c56ff0dd9a1e9581cbeb2d80ac9b8f2d29e2d60e416d200"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_CORE_DISCOVERY.json",
+      "bytes": 802066,
+      "type": "structured evidence/configuration",
+      "workingSha256": "7cf1c7fc2a4644d7acdd0f2f3844e1d8528c849efb5f4269151efe08b744cba0"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_CORE_SUMMARY.json",
+      "bytes": 565942,
+      "type": "structured evidence/configuration",
+      "workingSha256": "b1d738b505e73bb22012db607da1f3a07504772fcaaca5267accad444ea7a862"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_DIRECT_COMPARE.json",
+      "bytes": 394,
+      "type": "structured evidence/configuration",
+      "workingSha256": "77e77a40990e67e825d4c9b0ffd839ee8891a692ee32d439c517980bb2aa385c"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_FROZEN_GOLDEN_IDENTITY.json",
+      "bytes": 1159,
+      "type": "structured evidence/configuration",
+      "workingSha256": "a5c71f1863d2a2dad622975ff572b37dbd7a49c1147cc00724dc6f9ea33bda45"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_FROZEN_RECIPE.json",
+      "bytes": 504,
+      "type": "structured evidence/configuration",
+      "workingSha256": "e170baf629ca6e3a989012ddbfb2cb4c5faebcc148b6bdfb1b3c26b62220e67e"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_INSPECT_UNSUPPORTED.log",
+      "bytes": 225,
+      "type": "raw process log",
+      "workingSha256": "98faae416f521db04683c3325560f771180dcc2d169c84b9b1c02a4914bf01e4"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_ISOLATED_ICC_RESULT.json",
+      "bytes": 2833,
+      "type": "structured evidence/configuration",
+      "workingSha256": "4953437396a26201f65fc5da4a6faf490e46a292f8916a380bbe0b2e7f67052d"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_NATIVE_LIFECYCLE.log",
+      "bytes": 205,
+      "type": "raw process log",
+      "workingSha256": "e46523caf05fbfc17184255dfd47b4891a87ec6b22c4799dcfbfba5b78f1d821"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_SOURCE_IDENTITY.json",
+      "bytes": 998,
+      "type": "structured evidence/configuration",
+      "workingSha256": "d83440893bc113abd63df13dfe1c00cdf494ab7c2f4e2f3c3584cbb6f38db57e"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_WPF_BUILD.log",
+      "bytes": 64547,
+      "type": "raw process log",
+      "workingSha256": "26d498e47dd8e5c69edfecd232933d3d33f5f06c36d1bc1034414356611c37e1"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_WPF_NOT_RUN.json",
+      "bytes": 448258,
+      "type": "structured evidence/configuration",
+      "workingSha256": "3d70e8b61b891645199caef33ddcae423d32bcd9e0dae63b558c48531b91d15e"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_publishedCoreFailedHost_DISCOVERY.json",
+      "bytes": 737276,
+      "type": "structured evidence/configuration",
+      "workingSha256": "5f40c353d54a3b87091d19471f5902fcc52322109205f2c0044c001b2b331c02"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_publishedCoreFailedHost_SUMMARY.json",
+      "bytes": 883155,
+      "type": "structured evidence/configuration",
+      "workingSha256": "b9c593a7bf672590f24b47ec8fd3496ac398c7416a69497215030ce7cfec92ae"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_publishedCore_DISCOVERY.json",
+      "bytes": 776491,
+      "type": "structured evidence/configuration",
+      "workingSha256": "4af7c0aa4b508b9ddf036e4c4a81ab8718fb8c0419d02d2df4857b9528a08b88"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_publishedCore_SUMMARY.json",
+      "bytes": 564810,
+      "type": "structured evidence/configuration",
+      "workingSha256": "aae62d753a2119d1afdf4a780930dfda072c1908f8c800c6c380ff830c8db3ad"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_publishedWpfSafe_DISCOVERY.json",
+      "bytes": 797220,
+      "type": "structured evidence/configuration",
+      "workingSha256": "59819bfe896467bc71097815c451674ab9f185653b1b021e52dd61a2d53dd0cf"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_publishedWpfSafe_SUMMARY.json",
+      "bytes": 8032,
+      "type": "structured evidence/configuration",
+      "workingSha256": "54008729f954172e1d89d7d42a29eb8d23ae52c87b6aa3ffac4c32bcbd575ba8"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_wpfSafe_DISCOVERY.json",
+      "bytes": 860634,
+      "type": "structured evidence/configuration",
+      "workingSha256": "8e39ed874fdc784132d7b118c8e875abf86247d78329e9d7d31c474d299a14eb"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/FINAL_wpfSafe_SUMMARY.json",
+      "bytes": 7976,
+      "type": "structured evidence/configuration",
+      "workingSha256": "ec137de9af8d06a48c44921727dd7d1d82859c058e993c1f4a3112d22f80ea1e"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/PUBLISHED_COMPONENT_BINDING.json",
+      "bytes": 2160,
+      "type": "structured evidence/configuration",
+      "workingSha256": "8602d9d570504cebcef834e5e0d82b9311180f88360b8c71c8b84cda13b7f466"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/PUBLISHED_WPF_FAILED_SUMMARY.json",
+      "bytes": 16302,
+      "type": "structured evidence/configuration",
+      "workingSha256": "2f2b2f6bbaa23eed81195c380a38da46b2ec7daad3051c62505c2af77bdbbb59"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/PUBLISH_FAILED_VERSION.log",
+      "bytes": 1169,
+      "type": "raw process log",
+      "workingSha256": "29cec1096ccd99f66db9f62b7359acd47fb354a7503d073c944730c092c050d0"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/PUBLISH_ISOLATED_TOOL.log",
+      "bytes": 674,
+      "type": "raw process log",
+      "workingSha256": "1d70aea482faaf41bc4cc02e0cf39f125563d74c78207c7420ff99d8ef653774"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/PUBLISH_SUCCESS.log",
+      "bytes": 2269,
+      "type": "raw process log",
+      "workingSha256": "84e167258d2a299a55ec7a3b3bcfe0929da45ae34ed67fc050643d49dd89d846"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/RAW_TEST_RESULTS.zip",
+      "bytes": 2388665,
+      "type": "raw tests archive",
+      "workingSha256": "145f893c7c8d59c7d4caf86d77571ec98e73ea0e7e1d3353fdddae7d1d220e17"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/RAW_TEST_RUNS.json",
+      "bytes": 1015,
+      "type": "structured evidence/configuration",
+      "workingSha256": "3ac5881159291c94301e9c27a4f3f3b0df2483110d63f8f13b879a03aa9536e0"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/RELEASE_FILES.json",
+      "bytes": 145824,
+      "type": "structured evidence/configuration",
+      "workingSha256": "74189eecb72fcde55ac582efe9cd724752f00f097e87b987350bb7a4d8442078"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/RELEASE_FILES_INITIAL.json",
+      "bytes": 92364,
+      "type": "structured evidence/configuration",
+      "workingSha256": "4eba45b5e7a19091b2203c4dd536da9000d5973b412e380f48c88ea31b80b24c"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/RELEASE_IDENTITY.json",
+      "bytes": 1225,
+      "type": "structured evidence/configuration",
+      "workingSha256": "f2b311e4941d6905fd66abb3a25e75395b5880be190b4bc5353673ed16b8b5db"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/RELEASE_NATIVE_BOUNDARY.json",
+      "bytes": 799,
+      "type": "structured evidence/configuration",
+      "workingSha256": "74d6fb92ae72b5ca27e6b6113ed72c17be9e56d08b2173949ccbb508228ffc1a"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/TESTS.md",
+      "bytes": 1510,
+      "type": "documentation",
+      "workingSha256": "24dc10fca5c1e14ac7dcf067e23fe2a24561882fc4c53e7c012a413c06d41579"
+    },
+    {
+      "path": "docs/evidence/controlled-icc-20261015/TEST_CLASSIFICATION.json",
+      "bytes": 8170,
+      "type": "structured evidence/configuration",
+      "workingSha256": "ed8a5ad5d9f15ca4aac75fcb07ba2daf73f5b92ddeb2db8f71794d2a03853deb"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/ControlledIcc/ControlledIccProfile.cs",
+      "bytes": 9961,
+      "type": "CSharp executable source",
+      "workingSha256": "0724b705372ff5e3be0e1946f2a4f24d02eb94b25f93ac77ca1a460c4fac1ea6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/ControlledIcc/ControlledIccTransform.cs",
+      "bytes": 8977,
+      "type": "CSharp executable source",
+      "workingSha256": "d71b0f743e7fc87e6eff2ced2b9a56fd84affeab49e656d2eb8a758d32d8eac4"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/ControlledIccTests.cs",
+      "bytes": 3612,
+      "type": "CSharp executable source",
+      "workingSha256": "38b6f15e40ef6ecaad32b08b6067b7dc27421ee13cd936af2b528c38dcc6ec02"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/TestData/controlled-linear-prophoto.icc",
+      "bytes": 640,
+      "type": "original mathematical ICC fixture",
+      "workingSha256": "954e3bb304651951681989671ef99eed11183e9179a61a036243d655986c5ea1"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/TestData/controlled-linear-srgb.icc",
+      "bytes": 640,
+      "type": "original mathematical ICC fixture",
+      "workingSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407"
+    },
+    {
+      "path": "tools/ControlledIccWorkflow/ControlledIccWorkflow.csproj",
+      "bytes": 374,
+      "type": "build project",
+      "workingSha256": "afd35ed1a9ebd8e3e62de9e20e1a8064b62625a60ca80849268baee35471a763"
+    },
+    {
+      "path": "tools/ControlledIccWorkflow/Program.cs",
+      "bytes": 11308,
+      "type": "CSharp executable source",
+      "workingSha256": "29786d35ba4645f186d5dce04bb971f01ade9482535d08103420299b15971b58"
+    },
+    {
+      "path": "tools/ControlledIccWorkflow/README.md",
+      "bytes": 2640,
+      "type": "documentation",
+      "workingSha256": "f056aecf6f2830d623244234bba32dd263bd67974ef931756dd8ec21efbb2a35"
+    },
+    {
+      "path": "tools/StructureScratchExperiment/CandidateTiles.cs",
+      "bytes": 2459,
+      "type": "CSharp executable source",
+      "workingSha256": "1a1ddbcbbff8b783cee36a38e59a06f734f7dc2bc132c10c289a63656b1f76ab"
+    },
+    {
+      "path": "tools/StructureScratchExperiment/OwnedDevelopScratch.cs",
+      "bytes": 4795,
+      "type": "CSharp executable source",
+      "workingSha256": "2d58e6d0e65260736bf275ac421bd8c03bfdce56f30c156c47c4e7ae65e95b57"
+    },
+    {
+      "path": "tools/StructureScratchExperiment/Program.cs",
+      "bytes": 7291,
+      "type": "CSharp executable source",
+      "workingSha256": "4c6ebae01e4a1680b0f2680bee0769060c23e3dc6764224be96dff036561b889"
+    },
+    {
+      "path": "tools/StructureScratchExperiment/SelfTests.cs",
+      "bytes": 2098,
+      "type": "CSharp executable source",
+      "workingSha256": "910a00608b167aa6997a337e9aca5c5556b9df8b5fb940ae2c6ca910cf18595f"
+    },
+    {
+      "path": "tools/StructureScratchExperiment/StructureScratchExperiment.csproj",
+      "bytes": 333,
+      "type": "build project",
+      "workingSha256": "b0a26f80d3d2fa59c1243bd155cb3df340324d7dbfbabc47f9bd0974375f6d29"
+    },
+    {
+      "path": "tools/controlled-icc/README.md",
+      "bytes": 1776,
+      "type": "documentation",
+      "workingSha256": "d45c00b5d09cc0224ea5c0d2b064d7cf050347ee37f8af218478be26910baf2e"
+    },
+    {
+      "path": "tools/controlled-icc/archive_runs.py",
+      "bytes": 593,
+      "type": "reproduction/validation script",
+      "workingSha256": "51188c7c0ad5e173598a08a49e6d66026277c3a3163d65d063ca4c742a660f9d"
+    },
+    {
+      "path": "tools/controlled-icc/check_matrix_references.py",
+      "bytes": 1691,
+      "type": "reproduction/validation script",
+      "workingSha256": "76c7340e33fd11c13c99b048915e4196b8eb2d13c0bcd6471839b1176c7920bd"
+    },
+    {
+      "path": "tools/controlled-icc/direct_compare.py",
+      "bytes": 1641,
+      "type": "reproduction/validation script",
+      "workingSha256": "0efd8b7bd0cb520b927fbec049d409db35601c0f47812a40dada78f895b1b50b"
+    },
+    {
+      "path": "tools/controlled-icc/native_imports.py",
+      "bytes": 997,
+      "type": "reproduction/validation script",
+      "workingSha256": "53ec8f6d56b0a2c4696b8cc0e7141ba468b8065f068f727d09f10eb97389d197"
+    },
+    {
+      "path": "tools/controlled-icc/prepare_photo.py",
+      "bytes": 4188,
+      "type": "reproduction/validation script",
+      "workingSha256": "d84bd86bf499ca4abc9e939cc262423b46760f8508ff11fa0ed8f8db3e31bd09"
+    },
+    {
+      "path": "tools/controlled-icc/raw_rerun.ps1",
+      "bytes": 1216,
+      "type": "isolated run script",
+      "workingSha256": "bac07dd707f1e86317a6da5e1fc26667c5a1c9a665e8253ada3bc12c3e0f1d1b"
+    },
+    {
+      "path": "tools/controlled-icc/verify_delivery.py",
+      "bytes": 3292,
+      "type": "reproduction/validation script",
+      "workingSha256": "9f64d096b6ca82504de4911c112c10e21359c7d65bc5eb5ca8e172fd2d48a54b"
+    }
+  ]
+}

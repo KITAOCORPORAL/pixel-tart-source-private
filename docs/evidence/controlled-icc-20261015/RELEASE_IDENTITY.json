@@ -1,0 +1,28 @@
+{
+  "sourceSha": "e230038e2b882ef413a1b53972854efbd80e264e",
+  "base": "63ca45ababbfc4780fe46febb767ef5ec76d8377",
+  "productChanged": true,
+  "normalUserIccEntry": false,
+  "oldWorkflowsUnchanged": true,
+  "candidateRawInProduct": false,
+  "structureProductionChanged": false,
+  "binaries": [
+    {
+      "path": "D:\\AI AGENT\\kitao-controlled-icc-20261015\\artifacts\\controlled-icc\\release\\win-x64\\KitaoPhotoSelector.exe",
+      "sha256": "77B781AFEC63A4513929CCEFF2B2FA48D87A10957CFCC3FBB50978CD646719B4",
+      "fileVersion": "2.3.0.0",
+      "version": "2.3.0-controlled-icc+e230038e2b882ef413a1b53972854efbd80e264e"
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-controlled-icc-20261015\\artifacts\\controlled-icc\\isolated-icc\\win-x64\\ControlledIccWorkflow.exe",
+      "sha256": "6EB1B123FF4E43C44E43D7DA234726521C56C0C96385B0DDCB3B42CAC86E198C",
+      "fileVersion": "2.3.0.0",
+      "version": "2.3.0-controlled-icc+e230038e2b882ef413a1b53972854efbd80e264e.e230038e2b882ef413a1b53972854efbd80e264e"
+    }
+  ],
+  "status": "EXPERIMENTAL_ISOLATED_ICC_WITH_OPEN_ACCEPTANCE_GATES",
+  "fullWpfGate": "NOT_MET",
+  "nativeGate": "NOT_MET",
+  "strictCore": "FAILED_NOTEXECUTED",
+  "newBuildNotRenamedOldExe": true
+}

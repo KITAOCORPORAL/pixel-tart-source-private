@@ -1,0 +1,23 @@
+{
+  "productSource": "e230038e2b882ef413a1b53972854efbd80e264e",
+  "postFreezeDiff": {
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "sourceChanges": {
+    "code": 0,
+    "stdout": "A\tsrc/RAWSelectionAssistant.Core/Services/Color/ControlledIcc/ControlledIccProfile.cs\nA\tsrc/RAWSelectionAssistant.Core/Services/Color/ControlledIcc/ControlledIccTransform.cs\nA\ttests/RAWSelectionAssistant.Tests/ControlledIccTests.cs\nA\ttests/RAWSelectionAssistant.Tests/TestData/controlled-linear-prophoto.icc\nA\ttests/RAWSelectionAssistant.Tests/TestData/controlled-linear-srgb.icc\n",
+    "stderr": ""
+  },
+  "historicalFrozenFiles": [
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/PublicCubeAndLegacyTests.cs",
+      "sha256": "c03a6d0653db50becef17567cc450f5ced28538313497c3784052e717c3497d7"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/AssetLibraryP3PerformanceTests.cs",
+      "sha256": "3c66ec4cb12d877d10793b30aa4d25bae4b4c6cabbf93a480fa18e6008634648"
+    }
+  ]
+}
