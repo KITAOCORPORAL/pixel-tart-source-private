@@ -1,0 +1,33 @@
+{
+  "businessTimezone": "Asia/Shanghai",
+  "sourceFreeze": "61ed030098cc198019a45188210ef174cb2dc0d1",
+  "researchFreeze": "5b07b0ad9af8b36b9c99c9f15a24eed808b484b1",
+  "noFurtherSourceChanges": true,
+  "productSrcUnchangedFromBase": true,
+  "releaseCoreAndWpf": "actual bound releaseDLLs in C/E separatehost",
+  "openFailures": [
+    {
+      "scope": "published-A-full",
+      "tests": [
+        "AssetLibraryP3AutomatedRunSetContractTests.RunSetScriptWritesPassedSummaryOutsideAllThreeRunRoots",
+        "AssetLibraryP3AutomatedRunSetContractTests.RunSetScriptRejectsWrongCountInternalOutputAndCrossRunIdentityReuse"
+      ],
+      "failure": "nested PowerShell Process.Start invalid directory; no fix/retry after freeze"
+    },
+    {
+      "scope": "extra published opt-in",
+      "test": "StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet",
+      "failure": "Shell close collision at reference-simple.png; real geometry failure; not a path fix"
+    },
+    {
+      "scope": "published-A-full",
+      "test": "TetherSplitCompareTests.SplitUsesGeometryAndSharedParentTransform",
+      "failure": "RepoRoot DirectoryNotFoundException on published host; unmodified afterfreeze"
+    }
+  ],
+  "cleanMachine": "NOT_RUN noVM; minimalPATHcurrenthostdoesnotreplace",
+  "nativeAcceptance": "PREPARED_ONLY noforegroundinputthisbatch",
+  "sony": "notbundled",
+  "structure": "notreplaced",
+  "CalibrationEligible": false
+}

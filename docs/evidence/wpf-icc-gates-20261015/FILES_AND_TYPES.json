@@ -1,0 +1,678 @@
+{
+  "files": [
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/.gitattributes",
+      "bytes": 53,
+      "extension": "",
+      "type": "repository metadata",
+      "sha256": "6f0a85762bf23c92117fd0fa075a7b54ab76fed2a96fc218bbd4f00d66f9a0c2"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_BEHAVIOR_AUDIT.json",
+      "bytes": 268610,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "59376c28a980fdef5e303e6544777d5f026f406eef2ebe13def3d9b3519729f8"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_BEHAVIOR_AUDIT_RESOLVED.json",
+      "bytes": 309481,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "4b7381cad7840e20f8855b40b0f24d8efafa4bc48c0805121af98fdde5631bf0"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_FIRST_FULL_CLASSIFICATION.json",
+      "bytes": 847397,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "618ab4f68fca56501a141605060ecae2460086560a15bb6064e018e87394dbdd"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_FIRST_NOT_EXECUTED.json",
+      "bytes": 23576,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "da66767cd8a583ef4fb67df10d0ab39177d82eba6cace704d176f791808f2acf"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_FIRST_PRIVATE_HOST.json",
+      "bytes": 263,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "cc2ee96339104883ce5d36548b2698e55337d5d6f0718df4fea504996ebad779"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_FULL_WPF_FIRST_SUMMARY.json",
+      "bytes": 740516,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "a4980ec2506dc790475f93a450e9c63bf9fe58dceae81e533c166aa39e3202e2"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_OPTIN_FAILURE_GATE.json",
+      "bytes": 492,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "bd3b2029074a5acc20938150fbb9726563b6e1882ad6a27165f470b0e10d327c"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_OPTIN_SUMMARY.json",
+      "bytes": 5672,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "793aa2d30ec173c7fade1fdc82ed85611a40c257d87f61ddb0cca18812d1c2fb"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_PRIVATE_CHILD_STATION.json",
+      "bytes": 96,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "41357bf352047731e6cc80c50db358a4f7db386826118a102d1b55bb603ed4d1"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_PRIVATE_HOST.md",
+      "bytes": 1287,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "ff0e4756a3c0f0de189f34fdf3e345fc6978ac4de737a4e55ae6d2090d3d97cb"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_PRIVATE_SMOKE_HOST.json",
+      "bytes": 263,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b6855390a53549f915f50aeb9bd7c1a10b48e68f7f922cfa6f3d92af99ba52c8"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_REMOTE_REFRESH.json",
+      "bytes": 137,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "938bff3fbab9cc25bc881add341b281515af8b8a171b979e9a6857ebbf34125d"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/01_TEST_SIDE_EFFECT_FIX.json",
+      "bytes": 385,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b828cf414e41ab3c6d0098180eff8523fff0869b8d2f2071ef2756a5450b1f8f"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_EXTENDED_COMPARISON.json",
+      "bytes": 24764,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "c9da4ab2d088542f0750f6fc3fefe392a673f2c89d9905e0c2d1396f2a861fc1"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_EXTENDED_NUMERIC_SUMMARY.json",
+      "bytes": 800,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "4ed346641a6f4f568e44fe97e14c145e4a7ba6dde4b949ab50221edd50843f1f"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_EXTENDED_REFERENCE_BUILD.json",
+      "bytes": 48,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b8155bc7dc340db60f4819d65af7d615dafffe12803c3e98c1200e8ed22bc79e"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_NODE_COMPARISON.md",
+      "bytes": 2196,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "41ca571a8d6bd3bcc5046dc0b636e69190335b874a1c6f9d6072a15b9fb56a57"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_PHOTO_DOMAIN_AUDIT.json",
+      "bytes": 5380,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "f686929ba31258323edc10a638bc629539acc8ee69c58db37994a89d8bd64c80"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_V2_FINAL_EXECUTION.json",
+      "bytes": 2787,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "6d601de41e95b3258dd4ade75eaf420f49b109276780289ec7e8391249d464a1"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_V2_FINAL_SUITE.json",
+      "bytes": 7803,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "09dada0c2206bb055fdb267675811d5f1c141016aecfb95202cd26be895de5d8"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_V2_FROZEN_POLICY_RUN.json",
+      "bytes": 2787,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "6d601de41e95b3258dd4ade75eaf420f49b109276780289ec7e8391249d464a1"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_V2_FROZEN_POLICY_SUITE.json",
+      "bytes": 7803,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "09dada0c2206bb055fdb267675811d5f1c141016aecfb95202cd26be895de5d8"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_V2_MAPPING_LIMITS.md",
+      "bytes": 882,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "e4afcb1b92fc7ec5ee753dd755b5274b150cc07c6c49e91cd540d421a5c4ef21"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_V2_SCOPE.md",
+      "bytes": 605,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "d3aadfde7d474b1fda74e11db76ecbc88e8211470162596bc354378d1b5bd4a7"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_V2_SUITE.json",
+      "bytes": 7803,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "09dada0c2206bb055fdb267675811d5f1c141016aecfb95202cd26be895de5d8"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_V2_SUITE_EXECUTION.json",
+      "bytes": 2787,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "6d601de41e95b3258dd4ade75eaf420f49b109276780289ec7e8391249d464a1"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_V2_VERIFIED_RUN.json",
+      "bytes": 2787,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "6d601de41e95b3258dd4ade75eaf420f49b109276780289ec7e8391249d464a1"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/02_V2_VERIFIED_SUITE.json",
+      "bytes": 7803,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "09dada0c2206bb055fdb267675811d5f1c141016aecfb95202cd26be895de5d8"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/03_BUILD_CORRESPONDENCE.json",
+      "bytes": 6695,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "76412d813208dae8f193ee2aafb6df1f52440a9d343a923db63af07d5e9ec63c"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/03_ENTRY_GATE.json",
+      "bytes": 838,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "cecc77ab68636feacd7e265e07483b6c2da0940556c0a238d6ae8937a00face5"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/03_LICENSE_RECORD.json",
+      "bytes": 1370,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "cc5801f79421dd3781a62e5340f18e17ed72f0e77cb929236f227f4375d149ff"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/03_MINIMAL_LOAD.json",
+      "bytes": 291,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "a2671def41ff34bd89651d36cfb94a6144de0f5a6e3a8a45efab969fc8fd6ad8"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/03_NATIVE_GATE_DECISION.md",
+      "bytes": 1339,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "0e280499dd633e34659b09688b52d4c539b191fae079027913fb934c23699641"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/03_PACKAGE_AUDIT_RUN.json",
+      "bytes": 15278,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "67f0a2f3c67275275b6b65110eb690a1b08b27c6ab07751337e6cc00263af1ce"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/03_PACKAGE_METADATA_FILES.json",
+      "bytes": 19501,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "a8debddae1ecee26a53969d12d1f9d26f309afd60688dbe21a6410572fadcaf8"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/03_PE_IMPORTS.json",
+      "bytes": 454,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "8a66336d4d730d45712a5b2babd2b29063e9438dccda26a326c926273680ac63"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/03_SOURCE_ARCHIVE.json",
+      "bytes": 187,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "2507a475e9cd24900f9fb7c347dda3acede605c9be0faea356f81af8e39cb387"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/04_NATIVE_PREPARED.json",
+      "bytes": 4586,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "dd1d8510327fd360a0fda5a2c1f0c8b9b371c365ded9175b77b6ec8823caf428"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/04_PREPARED_ONLY.md",
+      "bytes": 429,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "e090d2b53c277f410737eefb8b762cffe7b415c242981c70cbe9d22de6c682af"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/05_FAILURES_AND_HISTORY.md",
+      "bytes": 595,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "18f1736a850497cd764bce131103ad65ea8c75e3903c211fc58c28f13bac4999"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/05_SCOPE_CONTROL.md",
+      "bytes": 355,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "cabccf0a2d52d78a3d6fb7749c817db8765eb97b54c5ac4ad3ee06b8cbb7f3d9"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/DELIVERY.md",
+      "bytes": 5166,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "9565c907c33ff5d007600e5d2f27d077062595c5bc7f47a733c3a7d2510619f1"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_B_WPF.json",
+      "bytes": 31738,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "926b3325e0d1a7788890a75c73d071ec9c6b99496c35d9ff06a9ebf755ae5a96"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_GOLDEN_P3.json",
+      "bytes": 687,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "7fc0d2ddd14a476af0bfc400f5a5e2d5f56ffa283fa60152b95e6cb8319430d0"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_PRIVATE_A_HOST.json",
+      "bytes": 263,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "3036728ce27994e127a3958dc2795193a53e4ef54dede8226d1d7bba95d74a1f"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_PRIVATE_A_STATION.json",
+      "bytes": 113,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "7d35c43314ca3e4a457e8438977ef9ea852d131310b7e40d131ae40adbcc5f4c"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_PRIVATE_B_HOST.json",
+      "bytes": 263,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "0ae647339fc9bf12a00bcebd73c7dc51f2a5d2be9dfd46706aebe551c96101f7"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_PRIVATE_B_STATION.json",
+      "bytes": 113,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "1b31c8add41f9aa949927f50408b92224ff5252494c825529346fb1dc308d4d7"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_PUBLISHED_B_WPF_SUMMARY.json",
+      "bytes": 31738,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "926b3325e0d1a7788890a75c73d071ec9c6b99496c35d9ff06a9ebf755ae5a96"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_PUBLISHED_CORE_DISCOVERY.json",
+      "bytes": 701052,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "6dcfa26e33e463df346f67bccd123c407a40252b543827deda6b99947418ea8c"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_PUBLISHED_CORE_SUMMARY.json",
+      "bytes": 565842,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "3059476a0447761c085f3fe03555d46a7e68e7d6201785eb412c0fec038f40cb"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_PUBLISHED_FULL_WPF_DISCOVERY.json",
+      "bytes": 724050,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "27760fd7bec2508daff08bfa20e5662174064c9d2d7040be5ccb8c15c63c7548"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_PUBLISHED_FULL_WPF_SUMMARY.json",
+      "bytes": 689066,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "ebae17736a067f9ccca1c3c4053121d5e528b4bd14d447cae54574e7c950f66a"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_SOURCE_CORE_DISCOVERY.json",
+      "bytes": 813780,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "28eabfa5d6c08d86b61241f7dc642bd332f2b05b549999fb7fe7fa6faf01b1a6"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_SOURCE_CORE_SUMMARY.json",
+      "bytes": 566572,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "30a91bc4eff089e9e51d0f3bbbc2d9c818400dc8f1b053bcec76e03b76e830c2"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_SOURCE_IDENTITY.json",
+      "bytes": 1678,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "c7a125908fd957521a54ebd7e1731ae2949792c8dfccab29fd60fc7e349442fd"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_WPF_CLASSIFICATION.json",
+      "bytes": 1606790,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "d34a9b3e5c3ea9c96d2606d85e0284494aed25e4aa7ff9a2b7bc8a5a49978c7c"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FINAL_WPF_NONPASSING.json",
+      "bytes": 28935,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "10d7a1edf549471cd228e24576a3f81b5a27ed3c24e13f95995c38d48d1f1a08"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/FREEZE_AND_OPEN_ITEMS.json",
+      "bytes": 1449,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "f0a1663bfb71ddcca85d01ec2aa72b7fdf98cac409154536a3163b49315d8292"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/HISTORICAL_EVIDENCE_PRESERVATION.json",
+      "bytes": 1102,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "51292b8cf3de6d2746fd7a994da5a564820d6b4764b2f70b6791b5c3998c9f0f"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/PRESEAL_TEST_COUNTS.json",
+      "bytes": 1417,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "fbb34a291a85876eebaf537f25be448673f9b30b6c880f624d0e3b80c271e03a"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/PUBLISHED_COMPONENT_BINDINGS.json",
+      "bytes": 5085,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "f0e563ab27f9585d49061a46d76ea9db0f920fc926e95ae1db826becb9ca1241"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/RAW_TEST_RESULTS.zip",
+      "bytes": 4013634,
+      "extension": ".zip",
+      "type": "raw test evidence archive",
+      "sha256": "56e3723ad25d1e8a182a24e3e02f9cb911daac316ddfe920cb625dabfb412e59"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/RELEASE_FILES.json",
+      "bytes": 145302,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "ae4bd81557381a0186e53ee6257ae8ec694517cd25402ab25f0df891b0c58e8f"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/RELEASE_IDENTITY.json",
+      "bytes": 1200,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "6816a68514baf03dd8afa514278afa58705fc401e6a9adbf22b31f3086df25ab"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/STAGE_COMMITS.json",
+      "bytes": 5568,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "30bde5a16ecc02a3bbd5bf857ea13413e299a112512e131f38f3ef60d3417053"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/START.json",
+      "bytes": 17220,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "9377362cbb3516dddd7e1d1edeed85768bb57efbccca5971b5c7c2629d749801"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/TEST_CLASSIFICATION.json",
+      "bytes": 1356,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "bb3279a6149c8e5beede701188058ebd3c9539ef9ac28604ac779538207e6a3a"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/VERIFY_EVIDENCE.py",
+      "bytes": 3585,
+      "extension": ".py",
+      "type": "isolated research/validation script",
+      "sha256": "8ddec80bddac2b41eb3edd430287e22ae41852a1772d73d2cd828d9001d8fd67"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryLoadMoreHardeningTests.cs",
+      "bytes": 5372,
+      "extension": ".cs",
+      "type": "test/host CSharp source",
+      "sha256": "05d91ea1aca642391811ebf35b812b1f2fd4580303ab59c8bf9049d1493be332"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP2BrowserWpfTests.cs",
+      "bytes": 11290,
+      "extension": ".cs",
+      "type": "test/host CSharp source",
+      "sha256": "49a645f065aa9c2ccdced8f84b9f24b74e17826187185cff6fa8b7a0186a82d3"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP2DragDropHardeningTests.cs",
+      "bytes": 13355,
+      "extension": ".cs",
+      "type": "test/host CSharp source",
+      "sha256": "55b92c01de5ab8442e60f4898a588bd0f3c54cb363f69c32e68eba776d8c01dd"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP2KeyboardSelectionWpfTests.cs",
+      "bytes": 11197,
+      "extension": ".cs",
+      "type": "test/host CSharp source",
+      "sha256": "2bd5dbb2f2bccf6fd3fb0e310faa0e0e84ac221019eb8067f4b19aea5032c0b1"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3AccessibilityTests.cs",
+      "bytes": 9547,
+      "extension": ".cs",
+      "type": "test/host CSharp source",
+      "sha256": "e7569aeb4266ba08bf98ae551eb87585b3a382e65d64f243d336180a8adccd06"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3WpfTests.cs",
+      "bytes": 88910,
+      "extension": ".cs",
+      "type": "test/host CSharp source",
+      "sha256": "39b7885019cee2cb1ae3f71bc258c3eadddca0634bf307add106f60bc9073495"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibrarySmartFolderEditorWpfTests.cs",
+      "bytes": 17276,
+      "extension": ".cs",
+      "type": "test/host CSharp source",
+      "sha256": "992d396fe3e6f4641cab479837fef4e97ea953941fecbaa5eb6329aa2b107102"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/P0RootCauseAnalysis.cs",
+      "bytes": 5108,
+      "extension": ".cs",
+      "type": "test/host CSharp source",
+      "sha256": "7244a5c69a34d6d870125dcd27d6fcbbe8553a5d6ef21264c5dc85b2fbbe403a"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/StudioComponentContractTests.cs",
+      "bytes": 6735,
+      "extension": ".cs",
+      "type": "test/host CSharp source",
+      "sha256": "48738d823db4b6c262290d150047e742838f9a5048394439817ffa25dc4dcfa9"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/UiDesignLintTests.cs",
+      "bytes": 4163,
+      "extension": ".cs",
+      "type": "test/host CSharp source",
+      "sha256": "bfc871305d89eaa2b4a629adb9d3ab355988f9e45e13d3d8d8be52765e9b99f8"
+    },
+    {
+      "path": "tools/PrivateWpfHost/PrivateWpfHost.csproj",
+      "bytes": 218,
+      "extension": ".csproj",
+      "type": "host build project",
+      "sha256": "3d55f5ed23e338958baac4ea4315d0e8a96a906ab324d8056c49410a1e2d6fbb"
+    },
+    {
+      "path": "tools/PrivateWpfHost/Program.cs",
+      "bytes": 3712,
+      "extension": ".cs",
+      "type": "test/host CSharp source",
+      "sha256": "c99d900eba665f99ff9cc05aed5d99ebe07e966b61ab001ffb8febc0fa8785e7"
+    },
+    {
+      "path": "tools/planning-r7/verified_runner.py",
+      "bytes": 6658,
+      "extension": ".py",
+      "type": "isolated research/validation script",
+      "sha256": "a51aa5e855a91007fe24011577b787dd0ea8ae32cd5fba1284f492a8ebd8c31c"
+    },
+    {
+      "path": "tools/wpf-icc-gates/.gitignore",
+      "bytes": 13,
+      "extension": "",
+      "type": "repository metadata",
+      "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+    },
+    {
+      "path": "tools/wpf-icc-gates/NATIVE_ACCEPTANCE.md",
+      "bytes": 1819,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "f5ac43216792953706943eeb1cdf69612f541f5a7cd268cccae8f16e05fe6aa7"
+    },
+    {
+      "path": "tools/wpf-icc-gates/Prepare-NativeAcceptance.ps1",
+      "bytes": 3083,
+      "extension": ".ps1",
+      "type": "prepare-only native script",
+      "sha256": "fb30dd2993250acdaa9e2c51345a06ccf65ab11e2947ca199702a86ac668469a"
+    },
+    {
+      "path": "tools/wpf-icc-gates/README.md",
+      "bytes": 2262,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "007d7e82bed0504ba3dd2b39c7eec4d6ac728d8663d8bb296ee52baeba27bc90"
+    },
+    {
+      "path": "tools/wpf-icc-gates/domain_audit.py",
+      "bytes": 2881,
+      "extension": ".py",
+      "type": "isolated research/validation script",
+      "sha256": "f51912246ee3b8f7e9a4aae5e76c4f653f6c039dd03fe8f28ed1be62badb65c7"
+    },
+    {
+      "path": "tools/wpf-icc-gates/extended_compare.py",
+      "bytes": 2183,
+      "extension": ".py",
+      "type": "isolated research/validation script",
+      "sha256": "8afa5589b4de61dea8a65a6d0ef7d2be0d83d87332378c53a87748387af6fdae"
+    },
+    {
+      "path": "tools/wpf-icc-gates/extended_refs.cpp",
+      "bytes": 886,
+      "extension": ".cpp",
+      "type": "original reference API wrapper",
+      "sha256": "f33998b6e60d572330653104be6b39b17fe7111573599f1591100cf7691ec8cd"
+    },
+    {
+      "path": "tools/wpf-icc-gates/extended_v2.py",
+      "bytes": 7637,
+      "extension": ".py",
+      "type": "isolated research/validation script",
+      "sha256": "00bede469e0bb14b6ba681682c6996c223272c97425c51bf589c037efceb0f4d"
+    },
+    {
+      "path": "tools/wpf-icc-gates/native_package_audit.py",
+      "bytes": 1358,
+      "extension": ".py",
+      "type": "isolated research/validation script",
+      "sha256": "cb722b7f6539f671b1268e8c56bdaf4ec00a61c89c8cfb5bcbde0313d341c2e4"
+    },
+    {
+      "path": "tools/wpf-icc-gates/pe_audit.py",
+      "bytes": 1278,
+      "extension": ".py",
+      "type": "isolated research/validation script",
+      "sha256": "3619971680c86a014bedc4428d378d731e87d349475ac01e1eebf3ed55137712"
+    },
+    {
+      "path": "tools/wpf-icc-gates/private_suite.py",
+      "bytes": 1291,
+      "extension": ".py",
+      "type": "isolated research/validation script",
+      "sha256": "89608100843dbad4874f6b5307ecf0e1a5dd146fcbdfea069eeb392463b9c5bb"
+    },
+    {
+      "path": "tools/wpf-icc-gates/run_v2_suite.py",
+      "bytes": 2214,
+      "extension": ".py",
+      "type": "isolated research/validation script",
+      "sha256": "aa25eae337c2d23ac7607ba37c08d210348160ef55004547b24f737e6f9ee55c"
+    },
+    {
+      "path": "docs/evidence/wpf-icc-gates-20261015/SEAL_DIAGNOSTICS.json",
+      "bytes": 264,
+      "extension": ".json",
+      "type": "integrity diagnostic",
+      "sha256": "7c7dff5f047652e59d7af2c138dec5e6f83e99d59f7ed16a4b3a37bb191dcc43"
+    }
+  ],
+  "hashDomain": "workingtree exactbytes; rawzipbinary; excludes manifestself/VALIDATION",
+  "noThirdPartyBinaryPhotoDatabaseReleaseInGit": true
+}

@@ -1,0 +1,103 @@
+{
+  "root": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-optin\\results\\run-20261015-180516-70ae080c",
+  "assembly": "E:\\Kitao-IsolatedHosts\\wpf-gates-B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "a5b00f979c052b30882b90a55d597c90f10a1349a41345709afb91e3d466825c",
+  "discovered": 1626,
+  "selected": 6,
+  "runs": [
+    {
+      "pid": 5168,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-optin\\results\\run-20261015-180516-70ae080c\\000-BatchTenCameraKeyframesTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "1f208120-3063-8194-a3bb-0796b16d614f",
+          "name": "RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop",
+          "display": "OffscreenSyntheticKeyframesNeverLaunchDesktop",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 25688,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-optin\\results\\run-20261015-180516-70ae080c\\001-ReferenceWorkspaceDpiEvidenceTests",
+      "expected": 3,
+      "results": [
+        {
+          "id": "12672b5c-78cf-8f35-b773-161951fe459d",
+          "name": "RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.FiveHundredTargetsRealizeOnlyVisibleFilmstripContainers",
+          "display": "FiveHundredTargetsRealizeOnlyVisibleFilmstripContainers",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1e31a67b-996c-8b2b-9f1f-73f2fc3a2cb8",
+          "name": "RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.FilmstripActiveAndSelectionRemainDistinctAcrossLogicalViewportSizes",
+          "display": "FilmstripActiveAndSelectionRemainDistinctAcrossLogicalViewportSizes",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "100f9d0f-6abb-8b71-bb7e-5274ecec1432",
+          "name": "RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+          "display": "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 4552,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-optin\\results\\run-20261015-180516-70ae080c\\002-StudioRebuildVisualEvidenceTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "1ee59ed7-0e11-84dd-b7b9-2c0f2f56db30",
+          "name": "RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+          "display": "RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 28892,
+      "exitCode": 1,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-optin\\results\\run-20261015-180516-70ae080c\\003-StudioV2PremiumPrototypeEvidenceTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "14c5a5ea-787a-8d3f-a403-00c51b4a1904",
+          "name": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet",
+          "display": "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+          "outcome": "Failed",
+          "error": "System.InvalidOperationException: Shell close collision at reference-simple.png: [{\"Type\":\"StudioExportMenu\",\"Name\":\"\",\"AutomationId\":\"\",\"Text\":\"\\u5BFC\\u51FA\",\"Bounds\":[1850,58,52.666666666666664,40.666666666666664]},{\"Type\":\"TextBlock\",\"Name\":\"\",\"AutomationId\":\"\",\"Text\":\"\\u5BFC\\u51FA\",\"Bounds\":[1863.3333333333333,70,26.666666666666668,18]},{\"Type\":\"Button\",\"Name\":\"\",\"AutomationId\":\"\",\"Text\":\"\\u5BFC\\u5165\",\"Bounds\":[1910.6666666666667,58,52.666666666666664,40.666666666666664]}]\r\n   at RAWSelectionAssistant.WpfTests.StudioVisualEvidence.AssertNoShellCloseCollision(FrameworkElement root, String state, String output)\r\n   at RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.Capture(Window window, String output, String name, Double scale)\r\n   at RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.<>c__DisplayClass0_1.<<PremiumPrototype_ThreeRealPages_RenderReviewSet>b__2>d.MoveNext()\n             at RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+        }
+      ],
+      "errors": [
+        "non-passing or not-executed tests",
+        "nonzero child exit"
+      ]
+    }
+  ],
+  "status": "FAILED",
+  "counts": {
+    "Passed": 5,
+    "Failed": 1
+  }
+}

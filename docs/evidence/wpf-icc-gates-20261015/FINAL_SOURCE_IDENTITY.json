@@ -1,0 +1,43 @@
+{
+  "source": "61ed030098cc198019a45188210ef174cb2dc0d1",
+  "research": "5b07b0ad9af8b36b9c99c9f15a24eed808b484b1",
+  "productSrcDiffFromBase": {
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "testAndCsharpFrozenDiff": {
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "oldContracts": [
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/TestData/Batch12/pv456-base-golden.json",
+      "baseSha256": "07150c76014bc8bef5e41dbf560c20c51e1b970db90c2cffe83716b561925945",
+      "currentSha256": "07150c76014bc8bef5e41dbf560c20c51e1b970db90c2cffe83716b561925945",
+      "unchanged": true,
+      "workingBytesEqual": true,
+      "comparison": "Git content equal with CRLF checkout normalized; raw hashes recorded separately",
+      "gitDiff": ""
+    },
+    {
+      "path": "tools/batch12/LegacyPixelProbe/LegacyPixelCorpus.cs",
+      "baseSha256": "5e53a88a523ba630ee1d38032ee03a9fae2c1bb49c9d4072f4e495337ff057e3",
+      "currentSha256": "ea748315af01a1938251e1b1660a8955bc779ffc2348a9d8b0b1b636698ea484",
+      "unchanged": true,
+      "workingBytesEqual": false,
+      "comparison": "Git content equal with CRLF checkout normalized; raw hashes recorded separately",
+      "gitDiff": ""
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/AssetLibraryP3PerformanceTests.cs",
+      "baseSha256": "1708a4f6e3cd2a3265162bbf8ce2ea32670d5333086ea0d7d9b40b8a6024a682",
+      "currentSha256": "3c66ec4cb12d877d10793b30aa4d25bae4b4c6cabbf93a480fa18e6008634648",
+      "unchanged": true,
+      "workingBytesEqual": false,
+      "comparison": "Git content equal with CRLF checkout normalized; raw hashes recorded separately",
+      "gitDiff": ""
+    }
+  ]
+}

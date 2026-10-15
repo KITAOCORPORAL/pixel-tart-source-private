@@ -1,0 +1,11 @@
+{
+  "status": "BLOCKED_REAL_GEOMETRY_FAILURE",
+  "test": "StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet",
+  "case": "reference-simple.png",
+  "error": "Shell close collision",
+  "scope": "offscreenactualWPFgeometry; no physicaldisplayapproval",
+  "firstFailedRun": "published-optin",
+  "noAssertionRemoved": true,
+  "noProductionFixClaim": true,
+  "followup": "Inspect shellreservedbounds/referencepageheader minwidth/density; not suppresscollision"
+}

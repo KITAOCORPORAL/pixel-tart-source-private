@@ -1,0 +1,45 @@
+{
+  "sourceCore": {
+    "assembly": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\tests\\RAWSelectionAssistant.Tests\\bin\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+    "assemblySha256": "bfb4f063252e0f1d019b9f3caf2abef29fecf12f397f6c0b851209b5cc438c9c",
+    "discovered": 1708,
+    "selected": 1708,
+    "status": "FAILED",
+    "counts": {
+      "Passed": 1701,
+      "NotExecuted": 7
+    }
+  },
+  "publishedCore": {
+    "assembly": "C:\\Kitao-IsolatedHosts\\wpf-gates-A\\core\\RAWSelectionAssistant.Tests.dll",
+    "assemblySha256": "bfb4f063252e0f1d019b9f3caf2abef29fecf12f397f6c0b851209b5cc438c9c",
+    "discovered": 1708,
+    "selected": 1708,
+    "status": "FAILED",
+    "counts": {
+      "Passed": 1702,
+      "NotExecuted": 6
+    }
+  },
+  "publishedB": {
+    "assembly": "E:\\Kitao-IsolatedHosts\\wpf-gates-B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+    "assemblySha256": "a5b00f979c052b30882b90a55d597c90f10a1349a41345709afb91e3d466825c",
+    "discovered": 1626,
+    "selected": 73,
+    "status": "PASSED",
+    "counts": {
+      "Passed": 73
+    }
+  },
+  "extraOptin": {
+    "assembly": "E:\\Kitao-IsolatedHosts\\wpf-gates-B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+    "assemblySha256": "a5b00f979c052b30882b90a55d597c90f10a1349a41345709afb91e3d466825c",
+    "discovered": 1626,
+    "selected": 6,
+    "status": "FAILED",
+    "counts": {
+      "Passed": 5,
+      "Failed": 1
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "businessTimezone": "Asia/Shanghai",
+  "productAndTestSource": "61ed030098cc198019a45188210ef174cb2dc0d1",
+  "researchSource": "5b07b0ad9af8b36b9c99c9f15a24eed808b484b1",
+  "sourceCore": {
+    "discovered": 1708,
+    "selected": 1708,
+    "counts": {
+      "Passed": 1701,
+      "NotExecuted": 7
+    },
+    "status": "FAILED"
+  },
+  "actualPublishedCore": {
+    "discovered": 1708,
+    "selected": 1708,
+    "counts": {
+      "Passed": 1702,
+      "NotExecuted": 6
+    },
+    "status": "FAILED"
+  },
+  "actualPublishedFullWpf": {
+    "discovered": 1626,
+    "selected": 1626,
+    "counts": {
+      "Passed": 1600,
+      "NotExecuted": 23,
+      "Failed": 3
+    },
+    "status": "FAILED",
+    "classes": 212
+  },
+  "actualPublishedSecondRootWpf": {
+    "discovered": 1626,
+    "selected": 73,
+    "counts": {
+      "Passed": 73
+    },
+    "status": "PASSED"
+  },
+  "extraOptin": {
+    "selected": 6,
+    "counts": {
+      "Passed": 5,
+      "Failed": 1
+    },
+    "status": "FAILED",
+    "separateRunNotMergedToFullCounts": true
+  },
+  "firstFullWpf": {
+    "counts": {
+      "Passed": 1569,
+      "Failed": 34,
+      "NotExecuted": 23
+    },
+    "strict": "FAILED_RETAINED"
+  },
+  "allResultsFromAdapter": true,
+  "noFailuresOrInconclusivePromoted": true,
+  "native": "PREPARED_ONLY_NOT_RUN",
+  "fullWpfPassed": false,
+  "CalibrationEligible": false
+}

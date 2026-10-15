@@ -1,0 +1,111 @@
+[
+  {
+    "sha": "43ec11331cc300f1fb2c7bb9aa0de9d00c4b87a5",
+    "subject": "test(wpf): add private window-station host and repair file resource helpers",
+    "files": [
+      "A\tdocs/evidence/wpf-icc-gates-20261015/.gitattributes",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/01_BEHAVIOR_AUDIT.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/01_PRIVATE_HOST.md",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/START.json",
+      "M\ttests/RAWSelectionAssistant.WpfTests/AssetLibraryLoadMoreHardeningTests.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/AssetLibraryP2BrowserWpfTests.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/AssetLibraryP2DragDropHardeningTests.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/AssetLibraryP2KeyboardSelectionWpfTests.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/AssetLibraryP3AccessibilityTests.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/AssetLibraryP3WpfTests.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/AssetLibrarySmartFolderEditorWpfTests.cs",
+      "A\ttools/PrivateWpfHost/PrivateWpfHost.csproj",
+      "A\ttools/PrivateWpfHost/Program.cs",
+      "A\ttools/wpf-icc-gates/private_suite.py"
+    ]
+  },
+  {
+    "sha": "a74ad3587fc53808814df65d68f037652ca98373",
+    "subject": "research(icc): measure photo rejection and add explicit extended-linear V2 sink experiment",
+    "files": [
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_EXTENDED_COMPARISON.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_EXTENDED_REFERENCE_BUILD.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_NODE_COMPARISON.md",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_PHOTO_DOMAIN_AUDIT.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_V2_SUITE.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_V2_SUITE_EXECUTION.json",
+      "A\ttools/wpf-icc-gates/.gitignore",
+      "A\ttools/wpf-icc-gates/domain_audit.py",
+      "A\ttools/wpf-icc-gates/extended_compare.py",
+      "A\ttools/wpf-icc-gates/extended_refs.cpp",
+      "A\ttools/wpf-icc-gates/extended_v2.py",
+      "A\ttools/wpf-icc-gates/run_v2_suite.py"
+    ]
+  },
+  {
+    "sha": "2428db7a2b1aad919493b71eb069d787b9a89985",
+    "subject": "docs(native): audit exact LCMS recipe imports and keep product entry gated",
+    "files": [
+      "A\tdocs/evidence/wpf-icc-gates-20261015/03_BUILD_CORRESPONDENCE.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/03_ENTRY_GATE.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/03_MINIMAL_LOAD.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/03_NATIVE_GATE_DECISION.md",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/03_PACKAGE_AUDIT_RUN.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/03_PE_IMPORTS.json",
+      "A\ttools/wpf-icc-gates/native_package_audit.py",
+      "A\ttools/wpf-icc-gates/pe_audit.py"
+    ]
+  },
+  {
+    "sha": "e1d40d3d66c567d33b91ffbffc687ae90cc0e5f0",
+    "subject": "test(native): prepare sealed-release isolated acceptance without shared-desktop input",
+    "files": [
+      "A\ttools/wpf-icc-gates/NATIVE_ACCEPTANCE.md",
+      "A\ttools/wpf-icc-gates/Prepare-NativeAcceptance.ps1"
+    ]
+  },
+  {
+    "sha": "61ed030098cc198019a45188210ef174cb2dc0d1",
+    "subject": "fix(test): preserve design resource paths and isolate generated UI reports",
+    "files": [
+      "A\tdocs/evidence/wpf-icc-gates-20261015/01_TEST_SIDE_EFFECT_FIX.json",
+      "M\ttests/RAWSelectionAssistant.WpfTests/P0RootCauseAnalysis.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/StudioComponentContractTests.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/UiDesignLintTests.cs",
+      "M\ttools/planning-r7/verified_runner.py"
+    ]
+  },
+  {
+    "sha": "95c244b32249c9873eefc1760ee1389a95caf7e7",
+    "subject": "test(icc-v2): reopen frozen recipe from disk and keep mapping scope explicit",
+    "files": [
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_V2_SCOPE.md",
+      "M\ttools/wpf-icc-gates/extended_v2.py"
+    ]
+  },
+  {
+    "sha": "0609d00a2851a6d768df9fb29dc439a8aaa4274f",
+    "subject": "test(icc-v2): assert embedded profiles and preserved pre-map float readback",
+    "files": [
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_V2_MAPPING_LIMITS.md",
+      "M\ttools/wpf-icc-gates/extended_v2.py"
+    ]
+  },
+  {
+    "sha": "5b07b0ad9af8b36b9c99c9f15a24eed808b484b1",
+    "subject": "docs(gates): freeze research scope and retain blocked native visual acceptance",
+    "files": [
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_EXTENDED_NUMERIC_SUMMARY.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_V2_FINAL_EXECUTION.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_V2_FINAL_SUITE.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_V2_FROZEN_POLICY_RUN.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_V2_FROZEN_POLICY_SUITE.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_V2_VERIFIED_RUN.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/02_V2_VERIFIED_SUITE.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/03_LICENSE_RECORD.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/03_PACKAGE_METADATA_FILES.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/03_SOURCE_ARCHIVE.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/04_NATIVE_PREPARED.json",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/04_PREPARED_ONLY.md",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/05_FAILURES_AND_HISTORY.md",
+      "A\tdocs/evidence/wpf-icc-gates-20261015/05_SCOPE_CONTROL.md",
+      "A\ttools/wpf-icc-gates/README.md",
+      "M\ttools/wpf-icc-gates/extended_v2.py"
+    ]
+  }
+]

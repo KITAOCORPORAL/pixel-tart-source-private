@@ -1,0 +1,667 @@
+{
+  "root": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf",
+  "assembly": "E:\\Kitao-IsolatedHosts\\wpf-gates-B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "a5b00f979c052b30882b90a55d597c90f10a1349a41345709afb91e3d466825c",
+  "discovered": 1626,
+  "selected": 73,
+  "runs": [
+    {
+      "pid": 17008,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.AssetLibraryLoadMoreHardeningTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\000-AssetLibraryLoadMoreHardeningTests",
+      "expected": 2,
+      "results": [
+        {
+          "id": "176d636a-ebae-8832-a862-dc19ab163fe7",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryLoadMoreHardeningTests.LoadMoreAppendsOnlyTheNextCursorPageAndExposesRetryAffordance",
+          "display": "LoadMoreAppendsOnlyTheNextCursorPageAndExposesRetryAffordance",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "17a14faf-4284-8415-8eb0-d8e27518d271",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryLoadMoreHardeningTests.LoadMoreDeclaresCancellationGenerationAndVisibleStateContract",
+          "display": "LoadMoreDeclaresCancellationGenerationAndVisibleStateContract",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 9488,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.AssetLibraryP2BrowserWpfTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\001-AssetLibraryP2BrowserWpfTests",
+      "expected": 4,
+      "results": [
+        {
+          "id": "1d19350c-a3da-8034-a0c3-c5e9816332ee",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2BrowserWpfTests.EveryViewUsesTheSameAssetGridAndRealizesOnlyTheVisibleWindow",
+          "display": "EveryViewUsesTheSameAssetGridAndRealizesOnlyTheVisibleWindow",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "10cdf1a9-8905-8d30-a98e-78170d15d7f8",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2BrowserWpfTests.XamlKeepsP1IdsAndDeclaresP2TreeViewsSafeContextCommandsAndInspectorStates",
+          "display": "XamlKeepsP1IdsAndDeclaresP2TreeViewsSafeContextCommandsAndInspectorStates",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "18191020-db6b-8de3-990e-1eb785e10674",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2BrowserWpfTests.FourLayoutAlgorithmsKeepFiveHundredItemsInsideOneVerticalExtent",
+          "display": "FourLayoutAlgorithmsKeepFiveHundredItemsInsideOneVerticalExtent",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13e3fae9-2113-80c1-9e28-117d8c90c512",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2BrowserWpfTests.VisibleSelectionChangesDoNotDiscardSelectedIdsOutsideTheLoadedPage",
+          "display": "VisibleSelectionChangesDoNotDiscardSelectedIdsOutsideTheLoadedPage",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 29176,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.AssetLibraryP2DragDropHardeningTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\002-AssetLibraryP2DragDropHardeningTests",
+      "expected": 7,
+      "results": [
+        {
+          "id": "1794dda4-a972-88cc-bc69-dbd5e6656b05",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2DragDropHardeningTests.DragDropSourceContainsFailClosedTargetAndPayloadGates",
+          "display": "DragDropSourceContainsFailClosedTargetAndPayloadGates",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "150415cb-fa23-87d8-96be-6795cb0ff5cb",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2DragDropHardeningTests.ExternalMetadataResultsJoinTheSameLifoUndoServiceAcrossRestart",
+          "display": "ExternalMetadataResultsJoinTheSameLifoUndoServiceAcrossRestart",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b6fc978-af13-88bd-abdb-e5cdd5da5fab",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2DragDropHardeningTests.VisibleUndoRedoStateRestoresFromDurableJournalAcrossServiceRestart",
+          "display": "VisibleUndoRedoStateRestoresFromDurableJournalAcrossServiceRestart",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1a0f76a2-8539-8a73-98f7-e57e562dc178",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2DragDropHardeningTests.BrowserCommandSourceValidatesArchivedAndMissingTargetsBeforeMutation",
+          "display": "BrowserCommandSourceValidatesArchivedAndMissingTargetsBeforeMutation",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1097a167-998c-835b-a008-73521518f7bc",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2DragDropHardeningTests.ThumbnailFailureOverlayIsDeclaredForAllP2Views",
+          "display": "ThumbnailFailureOverlayIsDeclaredForAllP2Views",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1289c46e-5e72-8c1e-86aa-5766b2d43a95",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2DragDropHardeningTests.DropPreviewRejectsArchivedAndUnknownTargetsWithoutMutation",
+          "display": "DropPreviewRejectsArchivedAndUnknownTargetsWithoutMutation",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "19069994-291c-8163-8947-22736bdc00e1",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2DragDropHardeningTests.MissingThumbnailPublishesVisibleFailureStateAndClearsOnReset",
+          "display": "MissingThumbnailPublishesVisibleFailureStateAndClearsOnReset",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 12112,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.AssetLibraryP2KeyboardSelectionWpfTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\003-AssetLibraryP2KeyboardSelectionWpfTests",
+      "expected": 4,
+      "results": [
+        {
+          "id": "1059fbeb-acf3-8cc4-8d90-eda5ae910942",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2KeyboardSelectionWpfTests.BulkGridSelectionIsCoalescedIntoOneDispatcherSynchronization",
+          "display": "BulkGridSelectionIsCoalescedIntoOneDispatcherSynchronization",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "18b9161b-c06e-893f-a761-5d997c8da62c",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2KeyboardSelectionWpfTests.MarqueeGeometryNormalizesReverseDragAndCtrlToggleIsDeterministic",
+          "display": "MarqueeGeometryNormalizesReverseDragAndCtrlToggleIsDeterministic",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1741d49d-1d0b-8a02-985b-2b818041375b",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2KeyboardSelectionWpfTests.KeyboardNavigationUsesLayoutPagesAndCtrlASelectsAllVisibleCards",
+          "display": "KeyboardNavigationUsesLayoutPagesAndCtrlASelectsAllVisibleCards",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1ed157b3-47f5-8203-965e-6603ed93cd88",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2KeyboardSelectionWpfTests.AssetGridDeclaresKeyboardNavigationAndMarqueeSelectionContracts",
+          "display": "AssetGridDeclaresKeyboardNavigationAndMarqueeSelectionContracts",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 25516,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.AssetLibraryP3AccessibilityTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\004-AssetLibraryP3AccessibilityTests",
+      "expected": 4,
+      "results": [
+        {
+          "id": "1cf8e42d-c64b-8591-bb0d-f3627051c61f",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3AccessibilityTests.DarkStatePairsKeepReadableTextContrast",
+          "display": "DarkStatePairsKeepReadableTextContrast",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "19931181-1c6a-8f87-b913-c7f84a6e4b8c",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3AccessibilityTests.NarrowAndScaledLayoutsHaveNoLargeFixedMinimumAndPopupIsScrollBounded",
+          "display": "NarrowAndScaledLayoutsHaveNoLargeFixedMinimumAndPopupIsScrollBounded",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1f34c344-c88c-8d05-8954-ff7e058a3870",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3AccessibilityTests.ToggleComboAndPopupOwnTheirCompleteDarkVisualTrees",
+          "display": "ToggleComboAndPopupOwnTheirCompleteDarkVisualTrees",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13c25f3f-b6a6-8f2b-8b30-8f394c010e9d",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3AccessibilityTests.HighContrastTracksWindowsAndUsesOnlyDynamicSystemBrushes",
+          "display": "HighContrastTracksWindowsAndUsesOnlyDynamicSystemBrushes",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 27872,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\005-AssetLibraryP3WpfTests",
+      "expected": 32,
+      "results": [
+        {
+          "id": "19ccdb24-b9e0-8029-b85b-544e23e4da55",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.RuleTemplateUsesTypedEditorsAndRejectsNewFreeTextReferences",
+          "display": "RuleTemplateUsesTypedEditorsAndRejectsNewFreeTextReferences",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1287c328-e1a5-8fe4-abdf-832365b4c5e2",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.ComposerSaveThenEditorNoOpSaveAndRestartKeepsJsonHashAndResults",
+          "display": "ComposerSaveThenEditorNoOpSaveAndRestartKeepsJsonHashAndResults",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "14ad750e-03fe-8802-abe5-d042f9641df1",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.RuntimePageCreatesAllP3UserControlsWithSharedViewModel",
+          "display": "RuntimePageCreatesAllP3UserControlsWithSharedViewModel",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "111805bd-ddc2-8bd5-8998-f8437714be88",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.BrowserToolbarDoesNotConsumeVerticalSpaceInExactFormalViewports",
+          "display": "BrowserToolbarDoesNotConsumeVerticalSpaceInExactFormalViewports",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "144bb9c1-3213-8f8c-bf91-2a307c171e9d",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.RearmedSearchDebounceIgnoresQueuedTickFromPriorTimer",
+          "display": "RearmedSearchDebounceIgnoresQueuedTickFromPriorTimer",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1c4ae145-99ac-8af7-b931-f60addaca60c",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.EveryP3InteractiveControlHasAnExplicitDarkStyleAndAccessibleIdentity",
+          "display": "EveryP3InteractiveControlHasAnExplicitDarkStyleAndAccessibleIdentity",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "127dd85e-3d53-8105-88fa-1b6afa8d050e",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.BulkCardReplacementPublishesOneResetNotification",
+          "display": "BulkCardReplacementPublishesOneResetNotification",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1579a41f-0680-8ee2-b184-a888e244e84b",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.ExpandedTagManagerKeepsBrowserWorkspaceInsideSmallViewport",
+          "display": "ExpandedTagManagerKeepsBrowserWorkspaceInsideSmallViewport",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1606810c-0f66-83e3-8528-20547b48571c",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.SearchSuggestionsAreViewportBoundedAndScrollable",
+          "display": "SearchSuggestionsAreViewportBoundedAndScrollable",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b7afb1c-94f5-8da9-ae0d-6af867a4a95f",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.SmartFolderEditorNoOpSavePreservesCompleteDocumentJsonHashAndResultsAcrossRestart",
+          "display": "SmartFolderEditorNoOpSavePreservesCompleteDocumentJsonHashAndResultsAcrossRestart",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "16c4a617-0d6e-8287-8d31-fd9585be570d",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.PageBatchApplyCompletionSurvivesDeferredGridSelectionReconciliation",
+          "display": "PageBatchApplyCompletionSurvivesDeferredGridSelectionReconciliation",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1a776521-90b6-890b-8a59-75b1baf95342",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.P3DarkRolesMeetTextContrastAndExposeFocusPressedDisabledStates",
+          "display": "P3DarkRolesMeetTextContrastAndExposeFocusPressedDisabledStates",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1e11dfc1-75c9-8f09-afb8-0dbe63e2ff3f",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.SavingCurrentFolderScopeMaterializesStableSourceRuleAndSameResults",
+          "display": "SavingCurrentFolderScopeMaterializesStableSourceRuleAndSameResults",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1e8ad987-2826-88d4-97b8-7b04f574730a",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.ComposerAndEditorSaveFailuresKeepRetryableContentAndRetrySuccessfully",
+          "display": "ComposerAndEditorSaveFailuresKeepRetryableContentAndRetrySuccessfully",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "158a0cf6-7cc3-8be9-ac6d-0a380f2fde98",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.SubmittedSearchCancelsPendingSuggestionsAndKeepsThemClosed",
+          "display": "SubmittedSearchCancelsPendingSuggestionsAndKeepsThemClosed",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1609fe06-f3ea-83c6-b9aa-c3535622a0d2",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.QueryNodeRoundTripsCaseSensitivityAndUsesTheCoreOperatorMatrix",
+          "display": "QueryNodeRoundTripsCaseSensitivityAndUsesTheCoreOperatorMatrix",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "114be01d-30de-8859-88ce-563d4e5d208a",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.ClearUnlockedAndClearAllAlsoRemoveVisibleSearchText",
+          "display": "ClearUnlockedAndClearAllAlsoRemoveVisibleSearchText",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1f5ad66c-cc5c-8025-8d72-7a29b7f9d0fa",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.BatchApplyPublishesSuccessOnlyAfterUiRefreshCompletes",
+          "display": "BatchApplyPublishesSuccessOnlyAfterUiRefreshCompletes",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "133c03cd-1d60-8a3f-94c9-96cb75f741ba",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.PageConcurrentDisposeCallersAwaitTheSameViewModelCleanup",
+          "display": "PageConcurrentDisposeCallersAwaitTheSameViewModelCleanup",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "15e9a0b7-7ce5-8e21-8b68-c88b0545efc0",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.NestedRuleViewRoundTripsAndClearUnlockedPreservesOnlyLockedRules",
+          "display": "NestedRuleViewRoundTripsAndClearUnlockedPreservesOnlyLockedRules",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d35bd1b-82ca-8e90-83db-6953c9f35c55",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.SavingCurrentFilterPreservesAllAssetsRegexAndCurrentEffectiveSystemSort",
+          "display": "SavingCurrentFilterPreservesAllAssetsRegexAndCurrentEffectiveSystemSort",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d1845cc-919a-8667-83ab-291b3076233e",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.PageMountsThreeP3ControlsWithoutCreatingAnotherAssetGrid",
+          "display": "PageMountsThreeP3ControlsWithoutCreatingAnotherAssetGrid",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1a38521c-0c68-8f5f-83a7-90d1df0ab563",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.QueryNodeAutomationIdsAreStableAcrossRebuildsAndScopedPerEditor",
+          "display": "QueryNodeAutomationIdsAreStableAcrossRebuildsAndScopedPerEditor",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "15b71f51-011d-802f-ab8b-0d456ad3f985",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.TagManagerRefreshPreservesTheSelectedGroupForConsecutiveTagCreates",
+          "display": "TagManagerRefreshPreservesTheSelectedGroupForConsecutiveTagCreates",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1c093bbf-ea63-87fb-947c-0a19895d876f",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.BatchApplyCompletesAgainstRealRepositoryAndSameSelectionResyncPreservesStableUiState",
+          "display": "BatchApplyCompletesAgainstRealRepositoryAndSameSelectionResyncPreservesStableUiState",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "18be65bb-4ab0-8cdf-97f5-6c8b9095de41",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.InactiveTemporaryVisualExitDoesNotConsumeTheNarrowFourViewViewport",
+          "display": "InactiveTemporaryVisualExitDoesNotConsumeTheNarrowFourViewViewport",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b1c3c04-68c6-855d-85f4-0c8c8f55895e",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.DisposeClosesP3GateDrainsTrackedWorkAndOnlyThenDisposesRepository",
+          "display": "DisposeClosesP3GateDrainsTrackedWorkAndOnlyThenDisposesRepository",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "17c14f84-53f0-8e7c-bc5c-ab51ebf818d7",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.ImeSeamDefersSearchDocumentUntilCompositionCompletesAndScopePersists",
+          "display": "ImeSeamDefersSearchDocumentUntilCompositionCompletesAndScopePersists",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "18de7bc8-bd88-8207-9029-0aa7c05353e0",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.FolderAndTagReferenceEditorsRoundTripMultipleStableIdsAsTypedChips",
+          "display": "FolderAndTagReferenceEditorsRoundTripMultipleStableIdsAsTypedChips",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "16990ad2-2b0c-8fa5-b801-78177e347541",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.TagManagerButtonsRefreshWhenReadinessAndSelectionsChange",
+          "display": "TagManagerButtonsRefreshWhenReadinessAndSelectionsChange",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b0ddcf4-2b49-81cc-ad1e-978f15fb07e9",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.TagManagerAndSelectionSourcesExposeRaceSafeMultiSourceAndArchivedSemantics",
+          "display": "TagManagerAndSelectionSourcesExposeRaceSafeMultiSourceAndArchivedSemantics",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "12aa63a1-5fa9-87d1-ba6b-7bca754339fd",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3WpfTests.CurrentSmartFolderKeepsLiveComposerDocumentAndArchiveRuleExpandsCandidatePool",
+          "display": "CurrentSmartFolderKeepsLiveComposerDocumentAndArchiveRuleExpandsCandidatePool",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 27268,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.AssetLibrarySmartFolderEditorWpfTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\006-AssetLibrarySmartFolderEditorWpfTests",
+      "expected": 5,
+      "results": [
+        {
+          "id": "16a2c0dd-fc26-854b-b5ff-7593ce9721f3",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibrarySmartFolderEditorWpfTests.SmartFolderEditorXamlExposesStableBasicFieldAutomationIds",
+          "display": "SmartFolderEditorXamlExposesStableBasicFieldAutomationIds",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13efffdc-face-8ac3-9fe9-cf52b8c22b0e",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibrarySmartFolderEditorWpfTests.MissingConditionDefaultsToAnyAndRoundTripsBothPolarityValues",
+          "display": "MissingConditionDefaultsToAnyAndRoundTripsBothPolarityValues",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b159d56-1fdc-8002-be19-dc3140311e82",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibrarySmartFolderEditorWpfTests.ExistingRulesLoadIntoEditorAndSavePreservesSemanticsAndStableProjectionIds",
+          "display": "ExistingRulesLoadIntoEditorAndSavePreservesSemanticsAndStableProjectionIds",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "18ee97e7-c147-81da-b82c-b51fe55c5ae7",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibrarySmartFolderEditorWpfTests.LegacyVisualRulesRemainWhenAddingABasicEditorRule",
+          "display": "LegacyVisualRulesRemainWhenAddingABasicEditorRule",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1ca5aad8-100c-8b0d-9f11-abe11b1840ea",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibrarySmartFolderEditorWpfTests.SmartFolderConditionHeadersUseStackedLayoutAtNarrowWidths",
+          "display": "SmartFolderConditionHeadersUseStackedLayoutAtNarrowWidths",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 24128,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.P0RootCauseAnalysis",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\007-P0RootCauseAnalysis",
+      "expected": 1,
+      "results": [
+        {
+          "id": "1278084a-4c3f-8a3b-bec2-fa4dcda35139",
+          "name": "RAWSelectionAssistant.WpfTests.P0RootCauseAnalysis.AggregateCaptureAudits_IntoRootCauseReport",
+          "display": "AggregateCaptureAudits_IntoRootCauseReport",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 27960,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\008-RuntimeCorrectionWpfTests",
+      "expected": 9,
+      "results": [
+        {
+          "id": "19002b35-0fb3-8c17-93cf-5964e3204078",
+          "name": "RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests.ClosingOwnerWithSavedCanvasDefersCloseAndCoalescesRequests",
+          "display": "ClosingOwnerWithSavedCanvasDefersCloseAndCoalescesRequests",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1e92cbd2-045f-8c0b-b00d-43048b8df59c",
+          "name": "RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests.SidebarRenameRefreshesTreeInspectorAndSameSelectedTagQuery",
+          "display": "SidebarRenameRefreshesTreeInspectorAndSameSelectedTagQuery",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "18dd25ae-0770-8243-9623-3a49a8428120",
+          "name": "RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests.RightHistogramsAndToolsRemainBoundedAcrossViewportSizes",
+          "display": "RightHistogramsAndToolsRemainBoundedAcrossViewportSizes",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13187e55-041e-8159-944c-9e817ce02b98",
+          "name": "RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests.CloudInspectionControlsShareTransientSettings",
+          "display": "CloudInspectionControlsShareTransientSettings",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "10c5f812-a2cf-8db1-aa0f-beff3275f5d8",
+          "name": "RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests.AnalysisInvalidatesOnTargetChangeAndMappingDoesNotEditParameters",
+          "display": "AnalysisInvalidatesOnTargetChangeAndMappingDoesNotEditParameters",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "164cffb5-aba2-8b98-87ca-8a21a966b046",
+          "name": "RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests.EscapeClearsTransientInspectionBeforeShellNavigation",
+          "display": "EscapeClearsTransientInspectionBeforeShellNavigation",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b955c5e-9587-899d-a8d8-97a392c80750",
+          "name": "RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests.CompactInspectionNeverCoversTargetAndCollapseReclaimsSpace",
+          "display": "CompactInspectionNeverCoversTargetAndCollapseReclaimsSpace",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1c13b88f-1a73-8293-b3ca-b6bccd1d4890",
+          "name": "RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests.InspectionCanAnalyzeResultWithoutChangingViewOrAdjustmentState",
+          "display": "InspectionCanAnalyzeResultWithoutChangingViewOrAdjustmentState",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1fa3249b-6252-886f-b8b1-6f5e8e5aed42",
+          "name": "RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests.CanvasMenusExecuteClipboardAndShareZoomStateAtAllViewportSizes",
+          "display": "CanvasMenusExecuteClipboardAndShareZoomStateAtAllViewportSizes",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 17892,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.StudioButtonStateTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\009-StudioButtonStateTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "188cbb3c-d941-867b-9d24-e3685ae759fd",
+          "name": "RAWSelectionAssistant.WpfTests.StudioButtonStateTests.ProductionResources_ContainRequiredContract",
+          "display": "ProductionResources_ContainRequiredContract",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 15404,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.StudioColorsTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\010-StudioColorsTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "1a182d2e-0e6c-85eb-9230-376e875cf60f",
+          "name": "RAWSelectionAssistant.WpfTests.StudioColorsTests.ProductionResources_ContainRequiredContract",
+          "display": "ProductionResources_ContainRequiredContract",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 26968,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.StudioNoWhiteSurfaceLeakTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\011-StudioNoWhiteSurfaceLeakTests",
+      "expected": 2,
+      "results": [
+        {
+          "id": "17835faf-8ae6-8609-ae1d-7b3e6b18c01f",
+          "name": "RAWSelectionAssistant.WpfTests.StudioNoWhiteSurfaceLeakTests.SegmentedAndDatePicker_UseExplicitDarkTemplates",
+          "display": "SegmentedAndDatePicker_UseExplicitDarkTemplates",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "17204039-837f-86e9-a1c5-058830c220ab",
+          "name": "RAWSelectionAssistant.WpfTests.StudioNoWhiteSurfaceLeakTests.StudioTemplates_DoNotHardcodeWhiteSurfaces",
+          "display": "StudioTemplates_DoNotHardcodeWhiteSurfaces",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 27556,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.UiDesignLintTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\published-B-focused\\results\\run-20261015-175540-03b4a3cf\\012-UiDesignLintTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "112e9e71-364a-81b3-a7b1-1a692f22252f",
+          "name": "RAWSelectionAssistant.WpfTests.UiDesignLintTests.ProductionXaml_HasNoUnapprovedP0Patterns",
+          "display": "ProductionXaml_HasNoUnapprovedP0Patterns",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "counts": {
+    "Passed": 73
+  }
+}

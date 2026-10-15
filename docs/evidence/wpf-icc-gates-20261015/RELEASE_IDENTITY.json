@@ -1,0 +1,31 @@
+{
+  "productAndCSharpToolSource": "61ed030098cc198019a45188210ef174cb2dc0d1",
+  "V2ResearchScriptSource": "separatelyfrozenwithfinalcommit; notpackedordinaryproduct",
+  "binaries": [
+    {
+      "path": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\release\\win-x64\\KitaoPhotoSelector.exe",
+      "sha256": "1A2D08E466426C302E3D99E08060D79CA08872EA865048AFA4BF892AA3ACCA69",
+      "version": "2.3.0-wpf-icc-gates+61ed030098cc198019a45188210ef174cb2dc0d1"
+    },
+    {
+      "path": "E:\\Kitao-Worktrees\\kitao-wpf-icc-gates-20261015\\artifacts\\wpf-icc-gates\\tool-release\\win-x64\\ControlledIccWorkflow.exe",
+      "sha256": "92489906B16A4A88C0FF8601E6BFCAACE473D3E2AC71F604958C1036665F05FD",
+      "version": "2.3.0-wpf-icc-gates+61ed030098cc198019a45188210ef174cb2dc0d1"
+    }
+  ],
+  "newLcmsBundled": false,
+  "candidateRawBundled": false,
+  "normalExperimentalEntry": false,
+  "status": "BLOCKED_VISUAL_OPTIN_FAILURE_AND_OPEN_NATIVE_GATES",
+  "actualPrivateRegression": {
+    "discovered": 1626,
+    "selected": 1626,
+    "counts": {
+      "Passed": 1600,
+      "NotExecuted": 23,
+      "Failed": 3
+    },
+    "status": "FAILED"
+  },
+  "noRenameOldExe": true
+}
