@@ -1,0 +1,180 @@
+{
+  "root": "E:\\Kitao-IsolatedRuns\\controlled-icc-20261015\\wpf-safe\\run-20261015-153558-58ee5b6b",
+  "assembly": "D:\\AI AGENT\\kitao-controlled-icc-20261015\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "2cde56007ef51408a9d7ff629084d1a24babde033e2215b4c4d257900dea46f1",
+  "discovered": 1626,
+  "selected": 16,
+  "runs": [
+    {
+      "pid": 21212,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.CompanyScopeSwitchTests",
+      "directory": "E:\\Kitao-IsolatedRuns\\controlled-icc-20261015\\wpf-safe\\run-20261015-153558-58ee5b6b\\000-CompanyScopeSwitchTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "1c6e5010-4274-8d91-a46d-6587863aa181",
+          "name": "RAWSelectionAssistant.WpfTests.CompanyScopeSwitchTests.ScopeSwitchReusesGlobalCountsAndPreservesVisibleSortAndMutationRefresh",
+          "display": "ScopeSwitchReusesGlobalCountsAndPreservesVisibleSortAndMutationRefresh",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 22388,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningDocxAtomicReplacementTests",
+      "directory": "E:\\Kitao-IsolatedRuns\\controlled-icc-20261015\\wpf-safe\\run-20261015-153558-58ee5b6b\\001-PlanningDocxAtomicReplacementTests",
+      "expected": 2,
+      "results": [
+        {
+          "id": "1054862f-d922-8237-85eb-11be03d4630f",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningDocxAtomicReplacementTests.ExistingDestinationWithDeleteSharingReaderCanBeReplaced",
+          "display": "ExistingDestinationWithDeleteSharingReaderCanBeReplaced",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1c7772f9-e67e-8502-ae4e-73a39894b7f1",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningDocxAtomicReplacementTests.LockedReadOnlyAndAclDeniedPreserveOriginalAndCleanTemporary",
+          "display": "LockedReadOnlyAndAclDeniedPreserveOriginalAndCleanTemporary",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 1980,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests",
+      "directory": "E:\\Kitao-IsolatedRuns\\controlled-icc-20261015\\wpf-safe\\run-20261015-153558-58ee5b6b\\002-PlanningPortableImageTests",
+      "expected": 3,
+      "results": [
+        {
+          "id": "108b8223-6341-89fa-a0fb-6a3c770fe1ec",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.RealRootMoveKeepsRepeatedPicturesCellCaptionsModesHistoryPaginationAndDocx",
+          "display": "RealRootMoveKeepsRepeatedPicturesCellCaptionsModesHistoryPaginationAndDocx",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "186f73d9-e361-8ef2-a2f2-8589ef0b0451",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.LegacyAbsoluteRootMoveAndLockedMigrationReplayNeverReplaceWrongImage",
+          "display": "LegacyAbsoluteRootMoveAndLockedMigrationReplayNeverReplaceWrongImage",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1652bf82-7694-8339-87c0-b2774f5e9069",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.UndoRedoAndDiskRecoveryCopiesAreListedButNeverDeleted",
+          "display": "UndoRedoAndDiskRecoveryCopiesAreListedButNeverDeleted",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 23716,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests",
+      "directory": "E:\\Kitao-IsolatedRuns\\controlled-icc-20261015\\wpf-safe\\run-20261015-153558-58ee5b6b\\003-PlanningTrayImageTests",
+      "expected": 6,
+      "results": [
+        {
+          "id": "140bbfe2-ae13-8f90-8e81-e08ea6ca9cad",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.SourceSwitchDuringResolveAndCopyWriteFailureDoNotMutateDocument",
+          "display": "SourceSwitchDuringResolveAndCopyWriteFailureDoNotMutateDocument",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d571bd7-db9e-8b15-9606-e2bdfd96b61a",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.PickerMultiInsertAndExternalDocxCarryPicturesWithoutLibraryIdentity",
+          "display": "PickerMultiInsertAndExternalDocxCarryPicturesWithoutLibraryIdentity",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "18049df2-c1d9-8ab5-b64a-95c342a26bc2",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.HashFailuresCreateNoCopyAndLockedSaveRetainsRecovery",
+          "display": "HashFailuresCreateNoCopyAndLockedSaveRetainsRecovery",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "173cf378-69d3-8f84-b95d-89719207f492",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.RealResolverProjectCollectionPickerCancelAndImageEvidence",
+          "display": "RealResolverProjectCollectionPickerCancelAndImageEvidence",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b65ff4d-adae-8d26-a025-b1a950d30a33",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.TrayCopySurvivesClearOfflineReopenAndDocxWithoutJsonImagePayload",
+          "display": "TrayCopySurvivesClearOfflineReopenAndDocxWithoutJsonImagePayload",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13aa5cc3-2c3b-82a1-af3c-2f5676bb0de8",
+          "name": "RAWSelectionAssistant.WpfTests.PlanningTrayImageTests.CellPlacementImageUndoRedoKeepsSidecarAndPosition",
+          "display": "CellPlacementImageUndoRedoKeepsSidecarAndPosition",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 20644,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests",
+      "directory": "E:\\Kitao-IsolatedRuns\\controlled-icc-20261015\\wpf-safe\\run-20261015-153558-58ee5b6b\\004-StudioQuickExportFormatTests",
+      "expected": 4,
+      "results": [
+        {
+          "id": "19871803-7a96-8de5-967c-6f6404b4c066",
+          "name": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.ChosenEncodersPreservePrecisionAlphaAndEmbedSrgb",
+          "display": "ChosenEncodersPreservePrecisionAlphaAndEmbedSrgb",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "17d8f5b6-29c1-8bcb-ac69-10a7f90a24c3",
+          "name": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.SubclassSelectorsUseTheActualDarkComboBoxTemplate",
+          "display": "SubclassSelectorsUseTheActualDarkComboBoxTemplate",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "167abfde-6518-82cc-ab9a-9fa5cea960b6",
+          "name": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.JpegAndTiffExifDirectionsAreNormalizedOnceWithoutLosingPrecisionOrAlpha",
+          "display": "JpegAndTiffExifDirectionsAreNormalizedOnceWithoutLosingPrecisionOrAlpha",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b6ae82a-5710-87f0-8de5-947ef86f7f5a",
+          "name": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.RawToPngAndJpegReuseOneFrozenMasterAndCleanupIntermediates",
+          "display": "RawToPngAndJpegReuseOneFrozenMasterAndCleanupIntermediates",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "counts": {
+    "Passed": 16
+  }
+}

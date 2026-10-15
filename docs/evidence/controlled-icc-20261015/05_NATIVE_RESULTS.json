@@ -1,0 +1,105 @@
+{
+  "inputSent": false,
+  "executableStarted": false,
+  "reason": "Shared Chrome foreground; idle16ms; stop before input/startup",
+  "tests": [
+    {
+      "id": "startupNoDialog",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "WorkbenchToPlanning",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "WorkbenchToColorStudio",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "TrayInsertSimple",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "TrayInsertAdvanced",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "SameImageMultipleReferences",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "MoveOriginalDirectoryReopen",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "UndoRedo",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "Pagination",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "DOCXExportReadback",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "MissingImageRefusal",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "TamperedImageRefusal",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "JsonOnlyMoveRefusal",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "NoSameNameSubstitution",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "NoAutoOrphanDelete",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "PhotoSwitchCancellation",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "ColorSaveReopen",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "ColorExportParity",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "ColorNaturalRelease10s",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "PhysicalDPI100",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "PhysicalDPI125",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "PhysicalDPI150",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "PhysicalDPI200",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    },
+    {
+      "id": "WPSActualOpenEditSaveImport",
+      "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE"
+    }
+  ],
+  "notPermissionDenied": true,
+  "backgroundNotReplacement": true
+}

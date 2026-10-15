@@ -1,0 +1,67 @@
+{
+  "status": "VERIFIED_ISOLATED_WORKFLOW_NOT_PRODUCT_ADMISSION",
+  "version": "ControlledIccLinearV1",
+  "inputProfileVersion": "2.1",
+  "workingProfileVersion": "2.1",
+  "outputProfileVersion": "2.1",
+  "workingDomain": "linear ProPhoto if working hash954e..., otherwise linear sRGB; matrix PCS XYZ D50",
+  "outputTransfer": "linear; not encoded display sRGB",
+  "inputBitDepth": 16,
+  "intentRequested": 1,
+  "intentEffective": 1,
+  "bpcRequested": false,
+  "bpcEffective": false,
+  "adaptation": 1,
+  "quantization": "nearest-even code=round(float*65535); JPEG8 separately lossy",
+  "sourceHash": "a6be3f84ddb65600cbe203dd13d451859c6fe94fff10919fdfadd22d60d0f50b",
+  "inputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+  "workingProfile": "954e3bb304651951681989671ef99eed11183e9179a61a036243d655986c5ea1",
+  "outputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+  "EngineVersion": 2160,
+  "EngineSha256": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+  "width": 5496,
+  "height": 3670,
+  "recipe": {
+    "AlgorithmVersion": "ControlledIccLinearV1",
+    "SourceFileSha256": "a6be3f84ddb65600cbe203dd13d451859c6fe94fff10919fdfadd22d60d0f50b",
+    "InputProfileSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+    "WorkingProfileSha256": "954e3bb304651951681989671ef99eed11183e9179a61a036243d655986c5ea1",
+    "OutputProfileSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+    "LinearExposureEv": -1,
+    "Intent": 1,
+    "Bpc": false,
+    "Adaptation": 1
+  },
+  "previewReopenExact": true,
+  "output": [
+    {
+      "format": "tif",
+      "iccSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "sha256": "a12f7b1eca20c67e734a917e2587e95d30a2232ea8deb4792706f6a691a17496",
+      "bitDepth": 16,
+      "maxAbs": 7.63313727274173E-06,
+      "meanAbs": 3.2965280458817025E-06,
+      "lossy": false
+    },
+    {
+      "format": "png",
+      "iccSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "sha256": "770314f063fd9f5ba27394736ff5adabb25e08fa5bb213d5e4b479286089e271",
+      "bitDepth": 16,
+      "maxAbs": 7.63313727274173E-06,
+      "meanAbs": 3.2965280458817025E-06,
+      "lossy": false
+    },
+    {
+      "format": "jpg",
+      "iccSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "sha256": "17be6047f0a5cfba46a3a1cc88ef1d46a080196456d4ced5d8531fe8bafb94b2",
+      "bitDepth": 8,
+      "maxAbs": 0.11439690712620229,
+      "meanAbs": 0.002496011260426739,
+      "lossy": true
+    }
+  ],
+  "display": "Detached RGB48 \u002B explicit output profile; no physical display calibration claim",
+  "CalibrationEligible": false
+}

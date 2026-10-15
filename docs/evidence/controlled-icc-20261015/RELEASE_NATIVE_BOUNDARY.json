@@ -1,0 +1,17 @@
+{
+  "newEvaluatedLcms": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+  "presentInRelease": false,
+  "inheritedLibRawDependency": {
+    "name": "lcms2.dll",
+    "sha256": "87bf94f27f345384420383f247178f825c0101928fedd3a4887ff60e9d4a76eb",
+    "oldReleaseRecord": {
+      "path": "lcms2.dll",
+      "bytes": 346112,
+      "sha256": "87bf94f27f345384420383f247178f825c0101928fedd3a4887ff60e9d4a76eb",
+      "matches": true,
+      "actualSha256": "87bf94f27f345384420383f247178f825c0101928fedd3a4887ff60e9d4a76eb"
+    },
+    "note": "Existing Sdcb.LibRaw runtime dependency already shipped in old290 files. Not evaluated external LCMS2.16 and never used by new adapter; statement noLCMS DLL inRelease must distinguish inherited dependency."
+  },
+  "candidate0222Present": false
+}

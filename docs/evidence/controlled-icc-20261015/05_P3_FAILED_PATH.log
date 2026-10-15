@@ -1,0 +1,5 @@
+可能造成此问题的原因包括:
+ *内置 dotnet 命令拼写错误。
+ *你打算执行 .NET 程序，但 dotnet-D:/AI AGENT/kitao-controlled-icc-20261015/tools/company-validation/P3UiProbe/bin/Release/net10.0-windows10.0.19041.0/P3UiProbe.dll 不存在。
+ *你打算运行全局工具，但在 PATH 上找不到具有此名称且带有 dotnet 前缀的可执行文件。
+无法执行，因为找不到指定的命令或文件。

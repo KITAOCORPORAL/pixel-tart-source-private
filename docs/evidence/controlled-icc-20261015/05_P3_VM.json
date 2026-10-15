@@ -1,0 +1,324 @@
+{
+  "database": "D:\\AI AGENT\\kitao-controlled-icc-20261015\\artifacts\\controlled-icc\\p3-ui-02\\ui-10128.db",
+  "samples": [
+    {
+      "cycle": 0,
+      "state": "priming",
+      "refreshMs": 31.5081,
+      "idleMs": 31.5269,
+      "dispatcherGapsMs": [
+        25.3945,
+        5.2267
+      ]
+    },
+    {
+      "cycle": 1,
+      "state": "warm",
+      "refreshMs": 31.3607,
+      "idleMs": 31.3698,
+      "dispatcherGapsMs": [
+        9.2448,
+        19.0255
+      ]
+    },
+    {
+      "cycle": 2,
+      "state": "warm",
+      "refreshMs": 30.6728,
+      "idleMs": 30.7587,
+      "dispatcherGapsMs": [
+        8.6073,
+        21.1598
+      ]
+    },
+    {
+      "cycle": 3,
+      "state": "warm",
+      "refreshMs": 30.2027,
+      "idleMs": 30.2116,
+      "dispatcherGapsMs": [
+        18.7629,
+        7.3826
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$limit": 501
+      },
+      "CountMs": 7.8007,
+      "PageMs": 12.3193,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3
+      },
+      "PageParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3,
+        "$limit": 501
+      },
+      "CountMs": 9.309,
+      "PageMs": 9.8194,
+      "Total": 49
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$limit": 501
+      },
+      "CountMs": 7.8739,
+      "PageMs": 13.9646,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3
+      },
+      "PageParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3,
+        "$limit": 501
+      },
+      "CountMs": 8.6112,
+      "PageMs": 9.3114,
+      "Total": 49
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$limit": 501
+      },
+      "CountMs": 8.1061,
+      "PageMs": 12.6451,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3
+      },
+      "PageParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3,
+        "$limit": 501
+      },
+      "CountMs": 9.1644,
+      "PageMs": 12.3043,
+      "Total": 49
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$limit": 501
+      },
+      "CountMs": 7.6435,
+      "PageMs": 13.1077,
+      "Total": 4999
+    }
+  ],
+  "timings": [
+    {
+      "Phase": "viewmodel.cards",
+      "ElapsedMs": 0.4103,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.selection-reconcile",
+      "ElapsedMs": 0.0093,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.refresh",
+      "ElapsedMs": 29.6699,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "repository.collection-bytes-aggregate",
+      "ElapsedMs": 8.3183,
+      "StartThread": 7,
+      "EndThread": 7
+    },
+    {
+      "Phase": "viewmodel.cards",
+      "ElapsedMs": 0.0541,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.selection-reconcile",
+      "ElapsedMs": 0.0022,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.refresh",
+      "ElapsedMs": 26.1456,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "repository.collection-bytes-aggregate",
+      "ElapsedMs": 8.9751,
+      "StartThread": 5,
+      "EndThread": 5
+    },
+    {
+      "Phase": "viewmodel.cards",
+      "ElapsedMs": 0.117,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.selection-reconcile",
+      "ElapsedMs": 0.0023,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.refresh",
+      "ElapsedMs": 31.2137,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "repository.collection-bytes-aggregate",
+      "ElapsedMs": 8.4508,
+      "StartThread": 7,
+      "EndThread": 7
+    },
+    {
+      "Phase": "viewmodel.cards",
+      "ElapsedMs": 0.0489,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.selection-reconcile",
+      "ElapsedMs": 0.0022,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.refresh",
+      "ElapsedMs": 26.7705,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "repository.collection-bytes-aggregate",
+      "ElapsedMs": 8.3377,
+      "StartThread": 5,
+      "EndThread": 5
+    },
+    {
+      "Phase": "viewmodel.cards",
+      "ElapsedMs": 0.1237,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.selection-reconcile",
+      "ElapsedMs": 0.0027,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.refresh",
+      "ElapsedMs": 29.6308,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "repository.collection-bytes-aggregate",
+      "ElapsedMs": 8.0608,
+      "StartThread": 7,
+      "EndThread": 7
+    },
+    {
+      "Phase": "viewmodel.cards",
+      "ElapsedMs": 0.0494,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.selection-reconcile",
+      "ElapsedMs": 0.0024,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.refresh",
+      "ElapsedMs": 28.9445,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "repository.collection-bytes-aggregate",
+      "ElapsedMs": 8.8929,
+      "StartThread": 5,
+      "EndThread": 5
+    },
+    {
+      "Phase": "viewmodel.cards",
+      "ElapsedMs": 0.1186,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.selection-reconcile",
+      "ElapsedMs": 0.0021,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "viewmodel.refresh",
+      "ElapsedMs": 30.0435,
+      "StartThread": 2,
+      "EndThread": 2
+    },
+    {
+      "Phase": "repository.collection-bytes-aggregate",
+      "ElapsedMs": 10.0054,
+      "StartThread": 7,
+      "EndThread": 7
+    }
+  ],
+  "window": "NOT_SHOWN",
+  "physicalInput": "NOT_RUN",
+  "authority": "Actual viewmodel P3QueryScope refresh awaited plus dispatcher idle; not desktop latency"
+}

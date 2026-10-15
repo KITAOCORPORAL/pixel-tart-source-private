@@ -1,0 +1,129 @@
+{
+  "sourceSha": "e230038e2b882ef413a1b53972854efbd80e264e",
+  "inherited": {
+    "oldProductSource": "3d526ae7e7589a0d735689883dcf62a4ef272720",
+    "oldPublishedCore": {
+      "Passed": 1696,
+      "NotExecuted": 6,
+      "strict": "FAILED"
+    },
+    "oldSealedWpf": {
+      "Passed": 1603,
+      "NotExecuted": 23,
+      "strict": "FAILED"
+    }
+  },
+  "thisBatch": {
+    "sourceCore": {
+      "Passed": 1698,
+      "NotExecuted": 7,
+      "Failed": 0,
+      "strict": "FAILED",
+      "discovered": 1705
+    },
+    "sourceWpfSafe": {
+      "Passed": 16,
+      "Failed": 0,
+      "strict": "PASSED_SUBSET_ONLY",
+      "discovered": 1626,
+      "selected": 16
+    },
+    "publishedCore": {
+      "Passed": 1699,
+      "NotExecuted": 6,
+      "Failed": 0,
+      "strict": "FAILED",
+      "discovered": 1705
+    },
+    "publishedWpfSafe": {
+      "Passed": 16,
+      "Failed": 0,
+      "strict": "PASSED_SUBSET_ONLY",
+      "discovered": 1626,
+      "selected": 16
+    },
+    "fullWpf": "NOT_RUN_SHARED_DESKTOP_ACTIVE;1610 unselected tests listed",
+    "native": "24 items NOT_RUN",
+    "golden72": "Passed in source and actual published Core",
+    "p3Original400": "Passed source and actual published Core"
+  },
+  "notExecuted": [
+    {
+      "id": "1ab0635e-4995-864d-9c7a-cff8d561d0c6",
+      "name": "RAWSelectionAssistant.Tests.ReferenceFilmPerformanceTests.FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "display": "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。Set PIXEL_TART_PERFORMANCE_EVIDENCE to collect local CPU evidence.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ReferenceFilmPerformanceTests.FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested()\r\n   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+    },
+    {
+      "id": "1182f715-ec3c-836b-9814-bc1869300528",
+      "name": "RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "display": "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。Real spatial evidence is explicitly opt-in.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+    },
+    {
+      "id": "17854b2f-a47a-8489-8aca-2aba2fed9d10",
+      "name": "RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "display": "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。Set PIXEL_TART_RUN_V4_BENCHMARK=1 for the bounded production-size run.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled()\r\n   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+    },
+    {
+      "id": "1d03f246-6ea4-8bde-9c8a-50b9e8590a6e",
+      "name": "RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene",
+      "display": "CpuGpuParityOnSyntheticScene",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。No validated GPU compute device on this host.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene()\r\n   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+    },
+    {
+      "id": "113a3cd2-db36-82ba-82e3-61a9ec276a04",
+      "name": "RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "display": "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。Explicitly authorized real corpus is opt-in; not a synthetic RAW replacement.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+    },
+    {
+      "id": "1baaeb0b-4956-84c1-be6e-4c9e00329ccf",
+      "name": "RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses",
+      "display": "CpuGpuParityAcrossEightSceneClasses",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。No validated GPU compute device on this host.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses()\r\n   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+    }
+  ],
+  "publishedFirstFailedHost": {
+    "core": {
+      "Passed": 1330,
+      "Failed": 369,
+      "NotExecuted": 6
+    },
+    "wpf": {
+      "Passed": 10,
+      "Failed": 6
+    },
+    "reason": "testhost moved outside repository ancestor; exact failures kept"
+  },
+  "newTests": [
+    {
+      "id": "182577e3-2f83-8066-a2b0-8b9c92ef5128",
+      "name": "RAWSelectionAssistant.Tests.ControlledIccTests.EmbeddedInspectorDistinguishesMissingAndCorruptProfileWithoutFallback",
+      "display": "EmbeddedInspectorDistinguishesMissingAndCorruptProfileWithoutFallback",
+      "outcome": "Passed",
+      "error": ""
+    },
+    {
+      "id": "19c6e78b-ce48-8ee2-a257-19a981e83dd6",
+      "name": "RAWSelectionAssistant.Tests.ControlledIccTests.DefaultOffAndRecipeCannotMigrateLegacyVersions",
+      "display": "DefaultOffAndRecipeCannotMigrateLegacyVersions",
+      "outcome": "Passed",
+      "error": ""
+    },
+    {
+      "id": "13cd53d0-da46-855d-abfe-799256bb20f5",
+      "name": "RAWSelectionAssistant.Tests.ControlledIccTests.StrictProfileRejectsLengthsBoundsUnknownVersionIntentAndLut",
+      "display": "StrictProfileRejectsLengthsBoundsUnknownVersionIntentAndLut",
+      "outcome": "Passed",
+      "error": ""
+    }
+  ]
+}
