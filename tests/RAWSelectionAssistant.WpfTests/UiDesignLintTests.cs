@@ -15,7 +15,7 @@ public sealed class UiDesignLintTests
         var findings = ScanProductionXaml();
         var p0 = findings.Where(f => f.Severity == "P0").ToArray();
         var reportRoot = Environment.GetEnvironmentVariable("PIXEL_TART_UI_GUARDIAN_REPORT_ROOT")
-            ?? Path.Combine(Root(), "docs", "evidence", "ui-guardian");
+            ?? Path.Combine(Environment.GetEnvironmentVariable("KITAO_TEST_EVIDENCE_ROOT") ?? Path.Combine(Path.GetTempPath(),"KitaoTestEvidence",Guid.NewGuid().ToString("N")),"ui-guardian");
         Directory.CreateDirectory(reportRoot);
         File.WriteAllText(Path.Combine(reportRoot, "static-xaml-lint.json"), System.Text.Json.JsonSerializer.Serialize(findings, new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
         Assert.IsEmpty(p0, "UI Guardian P0 static XAML findings: " + string.Join("; ", p0.Select(f => f.ToString())));

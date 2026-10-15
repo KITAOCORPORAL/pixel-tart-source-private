@@ -1,0 +1,8 @@
+{
+  "test": "P0RootCauseAnalysis.AggregateCaptureAudits_IntoRootCauseReport",
+  "oldBehavior": "wrote tracked historical docs report eachrun",
+  "newBehavior": "KITAO_TEST_EVIDENCE_ROOT or unique temporary test-evidence",
+  "firstRunGeneratedSaved": "artifacts/wpf-icc-gates/generated-inherited-reports",
+  "historicalRestoredFromExactBase": true,
+  "noUserChangesOverwritten": true
+}

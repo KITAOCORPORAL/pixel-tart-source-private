@@ -41,7 +41,7 @@ def main():
     write();print(root,flush=True)
     for index,(name,cases) in enumerate(sorted(selected.items())):
         folder=root/f'{index:03}-{name.rsplit(".",1)[-1]}';folder.mkdir(exist_ok=False);temp=folder/'temp';temp.mkdir();local=env.copy();local.update({'TEMP':str(temp),'TMP':str(temp),'PIXEL_TART_ISOLATED_RUNTIME':'1','PIXEL_TART_ISOLATED_RUNTIME_ROOT':str(folder/'runtime')})
-        local.update({'KITAO_R7_EVIDENCE':str(folder/'r7-evidence'),'KITAO_RICH_FLOW_EVIDENCE':str(folder/'rich-flow'),'KITAO_PLANNING_COMPANY_SCREENSHOTS':str(folder/'company')})
+        local.update({'KITAO_R7_EVIDENCE':str(folder/'r7-evidence'),'KITAO_RICH_FLOW_EVIDENCE':str(folder/'rich-flow'),'KITAO_PLANNING_COMPANY_SCREENSHOTS':str(folder/'company'),'KITAO_TEST_EVIDENCE_ROOT':str(folder/'test-evidence')})
         filter_='|'.join('FullyQualifiedName='+t for t in sorted(set(c['fullyQualifiedName'] for c in cases)))
         # Long suites may exceed Windows argv; runsettings holds exact disjunction.
         settings=ET.Element('RunSettings');config=ET.SubElement(settings,'RunConfiguration');ET.SubElement(config,'TestCaseFilter').text=filter_;ET.SubElement(config,'ResultsDirectory').text=str(folder)
