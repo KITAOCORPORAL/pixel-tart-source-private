@@ -18,4 +18,4 @@
 
 02_FINAL_COMPARISON / 02_NO_AUTO_COMPARISON保留同几何 Canon/Fuji 最终RGB16逐点与全帧max/MAE/RMSE，分类 CONFIGURATION_NOT_EQUIVALENT_NO_ACCURACY_PASS。消除自动提亮不是证明其余阶段等价；不能据此批准新像素实现。完整同阶段传感器参考/矩阵来源/预矩阵WB仍OPEN。CalibrationEligible=false。
 
-失败保留：初次 C++ ABI 链接失败，随后只调用公开 C API 构建成功，不改DLL。02_BUILD_FAILED_CPP_ABI.json为原始失败。日期统一2026-10-15 Asia/Shanghai；01_START时区字段沿用了旧记录的Asia/Shanghai，是元数据标记错误，不代表此次用户本地时区；此处明确纠正。
+失败保留：初次 C++ ABI 链接失败，随后只调用公开 C API 构建成功，不改DLL。02_BUILD_FAILED_CPP_ABI.json为原始失败。用户当地日期为2026-10-15 Europe/Berlin；01_START时区字段沿用了旧记录的Europe/Berlin，是元数据标记错误，不代表此次用户本地时区；此处明确纠正。

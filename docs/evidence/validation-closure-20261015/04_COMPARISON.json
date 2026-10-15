@@ -1,0 +1,230 @@
+[
+  {
+    "mode": "full",
+    "status": "MEASURED",
+    "ms": 4709.0448,
+    "alloc": 1190717448,
+    "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+    "peakWs": 1854062592,
+    "peakPrivate": 1844068352,
+    "baseline": {
+      "wallMs": 0.8143,
+      "stage": "baseline",
+      "managed": 614490688,
+      "workingSet": 667693056,
+      "privateBytes": 645873664,
+      "ledger": 0
+    },
+    "last": {
+      "wallMs": 15635.5516,
+      "stage": "natural-release-no-GC",
+      "managed": 546753880,
+      "workingSet": 1850368000,
+      "privateBytes": 1840222208,
+      "ledger": 0
+    },
+    "events": [
+      {
+        "type": "System.Single[]",
+        "sampledEvents": 9,
+        "sampledBytes": 1371581952
+      },
+      {
+        "type": "System.Double[]",
+        "sampledEvents": 1,
+        "sampledBytes": 161362584
+      },
+      {
+        "type": "System.Byte[]",
+        "sampledEvents": 5,
+        "sampledBytes": 142379992
+      },
+      {
+        "type": "System.UInt16[]",
+        "sampledEvents": 1,
+        "sampledBytes": 121021944
+      },
+      {
+        "type": "RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis.VisualLab[]",
+        "sampledEvents": 39,
+        "sampledBytes": 5400504
+      }
+    ],
+    "gc": [
+      4,
+      4,
+      3
+    ]
+  },
+  {
+    "mode": "tile",
+    "status": "MEASURED",
+    "ms": 8772.0523,
+    "alloc": 2249960824,
+    "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+    "peakWs": 2006159360,
+    "peakPrivate": 1991839744,
+    "baseline": {
+      "wallMs": 1.9514,
+      "stage": "baseline",
+      "managed": 614488040,
+      "workingSet": 667164672,
+      "privateBytes": 645423104,
+      "ledger": 0
+    },
+    "last": {
+      "wallMs": 19712.0644,
+      "stage": "natural-release-no-GC",
+      "managed": 1513176800,
+      "workingSet": 2002628608,
+      "privateBytes": 1987801088,
+      "ledger": 0
+    },
+    "events": [
+      {
+        "type": "System.Single[]",
+        "sampledEvents": 2554,
+        "sampledBytes": 2489347304
+      },
+      {
+        "type": "System.Double[]",
+        "sampledEvents": 1,
+        "sampledBytes": 161362584
+      },
+      {
+        "type": "System.UInt16[]",
+        "sampledEvents": 1,
+        "sampledBytes": 121021944
+      },
+      {
+        "type": "System.Byte[]",
+        "sampledEvents": 4,
+        "sampledBytes": 81869032
+      },
+      {
+        "type": "RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis.VisualLab[]",
+        "sampledEvents": 38,
+        "sampledBytes": 5271616
+      }
+    ],
+    "gc": [
+      5,
+      5,
+      4
+    ]
+  },
+  {
+    "mode": "full-cancel",
+    "status": "CANCELLED",
+    "ms": 103.3001,
+    "alloc": 564813584,
+    "hash": null,
+    "peakWs": 911302656,
+    "peakPrivate": 1218146304,
+    "baseline": {
+      "wallMs": 0.8164,
+      "stage": "baseline",
+      "managed": 614511560,
+      "workingSet": 667385856,
+      "privateBytes": 645292032,
+      "ledger": 0
+    },
+    "last": {
+      "wallMs": 10600.7527,
+      "stage": "natural-release-no-GC",
+      "managed": 1180743320,
+      "workingSet": 905609216,
+      "privateBytes": 1211748352,
+      "ledger": 0
+    },
+    "events": [
+      {
+        "type": "System.Single[]",
+        "sampledEvents": 4,
+        "sampledBytes": 806812872
+      },
+      {
+        "type": "System.Double[]",
+        "sampledEvents": 1,
+        "sampledBytes": 161362584
+      },
+      {
+        "type": "System.UInt16[]",
+        "sampledEvents": 1,
+        "sampledBytes": 121021944
+      },
+      {
+        "type": "System.Byte[]",
+        "sampledEvents": 4,
+        "sampledBytes": 81869032
+      },
+      {
+        "type": "RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis.VisualLab[]",
+        "sampledEvents": 39,
+        "sampledBytes": 5393440
+      }
+    ],
+    "gc": [
+      3,
+      3,
+      2
+    ]
+  },
+  {
+    "mode": "cancel",
+    "status": "CANCELLED",
+    "ms": 103.6844,
+    "alloc": 260706808,
+    "hash": null,
+    "peakWs": 689201152,
+    "peakPrivate": 908140544,
+    "baseline": {
+      "wallMs": 1.211,
+      "stage": "baseline",
+      "managed": 614487584,
+      "workingSet": 667340800,
+      "privateBytes": 644997120,
+      "ledger": 0
+    },
+    "last": {
+      "wallMs": 10597.28,
+      "stage": "natural-release-no-GC",
+      "managed": 876626552,
+      "workingSet": 683397120,
+      "privateBytes": 902291456,
+      "ledger": 0
+    },
+    "events": [
+      {
+        "type": "System.Single[]",
+        "sampledEvents": 29,
+        "sampledBytes": 502697744
+      },
+      {
+        "type": "System.Double[]",
+        "sampledEvents": 1,
+        "sampledBytes": 161362584
+      },
+      {
+        "type": "System.UInt16[]",
+        "sampledEvents": 1,
+        "sampledBytes": 121021944
+      },
+      {
+        "type": "System.Byte[]",
+        "sampledEvents": 4,
+        "sampledBytes": 81869032
+      },
+      {
+        "type": "RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis.VisualLab[]",
+        "sampledEvents": 39,
+        "sampledBytes": 5399360
+      }
+    ],
+    "gc": [
+      3,
+      3,
+      2
+    ]
+  }
+]

@@ -2,7 +2,7 @@
 No correction is applied to reference output. All differences are preserved.
 """
 import pathlib,ctypes as C,json,struct,hashlib,subprocess,sys
-ROOT=pathlib.Path(__file__).resolve().parents[2];OLD=pathlib.Path('D:/AI AGENT/kitao-company-validation-20261015/artifacts/company-validation/icc');OUT=ROOT/'artifacts/validation-closure/icc-stages';OUT.mkdir(exist_ok=True)
+ROOT=pathlib.Path(__file__).resolve().parents[2];OLD=pathlib.Path('D:/AI AGENT/kitao-company-validation-20261015/artifacts/company-validation/icc');OUT=ROOT/'artifacts/validation-closure/icc-stages';OUT.mkdir(parents=True,exist_ok=True)
 L=C.CDLL(str(OLD/'lcms/Library/bin/lcms2.dll'));P=C.c_void_p;U=C.c_uint;F=C.c_float;D=C.c_double
 
 def fn(n,r,a):f=getattr(L,n);f.restype=r;f.argtypes=a;return f

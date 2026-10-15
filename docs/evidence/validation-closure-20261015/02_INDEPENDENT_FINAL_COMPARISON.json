@@ -1,0 +1,60 @@
+[
+  {
+    "file": "TNAN8886.CR3",
+    "stage": "FINAL_ENCODED_RGB16",
+    "classification": "CONFIGURATION_NOT_EQUIVALENT_NO_ACCURACY_PASS",
+    "shape": [
+      3670,
+      5496,
+      3
+    ],
+    "maxAbs": 0.3501182574196994,
+    "meanAbs": 0.041418019223191674,
+    "rmse": 0.04899013800760839,
+    "points": [
+      {
+        "y": 0,
+        "x": 0,
+        "libraw": [
+          10107,
+          8557,
+          9894
+        ],
+        "rawtherapee": [
+          14173,
+          12633,
+          13965
+        ]
+      },
+      {
+        "y": 1835,
+        "x": 2748,
+        "libraw": [
+          252,
+          0,
+          288
+        ],
+        "rawtherapee": [
+          400,
+          0,
+          217
+        ]
+      },
+      {
+        "y": 3669,
+        "x": 5495,
+        "libraw": [
+          900,
+          405,
+          819
+        ],
+        "rawtherapee": [
+          2599,
+          1185,
+          2369
+        ]
+      }
+    ],
+    "noCropping": true
+  }
+]

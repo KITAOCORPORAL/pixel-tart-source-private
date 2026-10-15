@@ -1,0 +1,68 @@
+[
+  {
+    "file": "FINAL_CORE_SUMMARY.json",
+    "sha256": "27ecb41f7aecce1b9126be1b52a7bebb6f7047d0cb51df2ee097c1f73e822163",
+    "counts": {
+      "Passed": 1695,
+      "NotExecuted": 7
+    },
+    "status": "FAILED",
+    "selected": 1702,
+    "note": "INHERITED_NOT_RERUN_THIS_PHASE"
+  },
+  {
+    "file": "FINAL_WPF_SUMMARY.json",
+    "sha256": "dffd010ee2f94effc274e64e86ee0575a4b60e03a073238c22aefef859020f90",
+    "counts": {
+      "Passed": 1602,
+      "NotExecuted": 23,
+      "Failed": 1
+    },
+    "status": "FAILED",
+    "selected": 1626,
+    "note": "INHERITED_NOT_RERUN_THIS_PHASE"
+  },
+  {
+    "file": "SEALED_CORE_SUMMARY.json",
+    "sha256": "82ba8739dc2b570c1fcf55b02c98a227ed8291bfa8469baf9ac0d9c2ed23fb0b",
+    "counts": {
+      "Passed": 1695,
+      "NotExecuted": 7
+    },
+    "status": "FAILED",
+    "selected": 1702,
+    "note": "INHERITED_NOT_RERUN_THIS_PHASE"
+  },
+  {
+    "file": "SEALED_WPF_SUMMARY.json",
+    "sha256": "848d7248aba4081b24f59fc1f18fc82f17b5c72374d11fffb0e05bfea283f1a8",
+    "counts": {
+      "Passed": 1603,
+      "NotExecuted": 23
+    },
+    "status": "FAILED",
+    "selected": 1626,
+    "note": "INHERITED_NOT_RERUN_THIS_PHASE"
+  },
+  {
+    "file": "SEALED_RELEASE_CORE_SUMMARY.json",
+    "sha256": "728f2d9ec24ed6d714bede6180200d0e4c9dd4d5091f78940d6133f9cd9a7787",
+    "counts": {
+      "Passed": 1696,
+      "NotExecuted": 6
+    },
+    "status": "FAILED",
+    "selected": 1702,
+    "note": "INHERITED_NOT_RERUN_THIS_PHASE"
+  },
+  {
+    "file": "SEALED_RELEASE_WPF_SUMMARY.json",
+    "sha256": "2ae6bb08643bea306745bd144bb9a21170f05f81f254a50b60a883736b961f39",
+    "counts": {
+      "Passed": 36
+    },
+    "status": "PASSED",
+    "selected": 36,
+    "note": "INHERITED_NOT_RERUN_THIS_PHASE"
+  }
+]

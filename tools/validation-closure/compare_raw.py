@@ -1,7 +1,8 @@
 import sys,pathlib,json
-sys.path.insert(0,str(pathlib.Path(__file__).parent/'python-deps'))
+ROOT=pathlib.Path(__file__).resolve().parents[2]/'artifacts/validation-closure'
+sys.path.insert(0,str(ROOT/'python-deps'))
 import tifffile,numpy as np
-root=pathlib.Path(__file__).parent/'raw';rows=[]
+root=ROOT/'raw';rows=[]
 for n in ['TNAN8886.CR3','DSCF0347.RAF']:
  a=tifffile.imread(root/(n+'.tif'));b=tifffile.imread(root/(n+'.configured.rt.tif')); assert a.shape==b.shape
  d=a.astype('float64')/65535-b.astype('float64')/65535

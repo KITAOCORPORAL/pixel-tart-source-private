@@ -1,0 +1,46 @@
+{
+  "suite": "sealed-release-core",
+  "counts": {
+    "Passed": 1696,
+    "NotExecuted": 6
+  },
+  "strictStatus": "FAILED",
+  "selected": 1702,
+  "discovered": 1702,
+  "rawTrx": "04_raw-tests/results.trx",
+  "p3": {
+    "thresholdMs": 400,
+    "warm": [
+      61.894,
+      44.814,
+      39.057
+    ],
+    "worst": 61.894,
+    "status": "Passed"
+  },
+  "pv456": {
+    "cases": 72,
+    "status": "Passed"
+  },
+  "performanceRuns": [
+    {
+      "mode": "full",
+      "status": "MEASURED"
+    },
+    {
+      "mode": "tile",
+      "status": "MEASURED"
+    },
+    {
+      "mode": "full-cancel",
+      "status": "CANCELLED"
+    },
+    {
+      "mode": "cancel",
+      "status": "CANCELLED"
+    }
+  ],
+  "nativeWpfDpiWps": "NOT_RUN_ACTIVE_SHARED_DESKTOP",
+  "pixelCodeDiff": "NONE",
+  "newRelease": false
+}

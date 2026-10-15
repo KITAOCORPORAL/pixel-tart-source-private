@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15",
-  "timezone": "Asia/Shanghai",
+  "timezone": "Europe/Berlin",
   "requestedBase": "af78bb56b1eeec4e7c1a0b2de6f320dbbe33d458",
   "remote": {
     "code": 0,
@@ -197,5 +197,7 @@
       "stdout": "## integration/pixel-tart-developer-preview...source-private/integration/pixel-tart-developer-preview\n",
       "stderr": ""
     }
-  ]
+  ],
+  "hostTimestampOffset": "+08:00",
+  "metadataCorrection": "Prior timezone field mistakenly copied from inherited report; corrected without altering raw host timestamps"
 }

@@ -1,0 +1,24 @@
+{
+  "W": 5496,
+  "H": 3670,
+  "halo": 37,
+  "tiles": 319,
+  "sourcePixels": 20170320,
+  "expandedTilePixels": 35807112,
+  "pixelRepeatRatio": 1.7752376759515962,
+  "minimumArrayPayloadPerExpandedPixel": 56,
+  "estimatedTileArrayPayloadBytes": 2247242112,
+  "formula": "copyRGB12+linearRGB12+luminance4+structure blur8+detail blur8+outputRGB12=56 plus full output12; excludes headers/GC/cache/render wrapper",
+  "cache": "Details workspace dictionary unused for Develop; Structure no persistent scratch cache",
+  "shapes": {
+    "549x165": 1,
+    "586x165": 9,
+    "413x165": 1,
+    "549x202": 27,
+    "586x202": 243,
+    "413x202": 27,
+    "549x123": 1,
+    "586x123": 9,
+    "413x123": 1
+  }
+}
