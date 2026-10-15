@@ -1,7 +1,7 @@
 {
   "requestedHistoricalAcceptanceZone": "Asia/Shanghai",
   "taskDate": "2026-10-15",
-  "clientClockZone": "Europe/Helsinki",
+  "clientClockZone": "America/Chicago",
   "scope": "User supplied business-acceptance timezone correction; client session context remains separately recorded",
   "originalFilesUnchanged": true,
   "originalTimestampBytesUnchanged": true,
@@ -36,5 +36,6 @@
       "text": "用户当地日期2026-10-15（Europe/Berlin）。主机原始采样+08时间戳原样保留。未向main合并、不强推；基线af78bb56b1eeec4e7c1a0b2de6f320dbbe33d458，从远端integration/kitao-company-validation-20261015核对后建立新独立research/kitao-validation-closure-20261015工作树。其他用户脏文件/分支/原失败/旧Release保留。",
       "impact": "narrative only; no pixel/profile/hash/timestamp change"
     }
-  ]
+  ],
+  "clientClockAuthority": "developer codex_apps_client_time_context; not host clock"
 }

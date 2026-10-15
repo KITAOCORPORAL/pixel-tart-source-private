@@ -1,6 +1,6 @@
 # 追加时区勘误（原始证据不重写）
 
-用户指定本批业务验收当地日期／时区为 **2026-10-15 Asia/Shanghai**。客户端会话另提供 Europe/Helsinki；业务标签和客户端时钟分别记录，不互相替代。
+用户指定本批业务验收当地日期／时区为 **2026-10-15 Asia/Shanghai**。客户端会话另提供 America/Chicago；业务标签和客户端时钟分别记录，不互相替代。
 
 旧证据误写 Europe/Berlin 的位置：
 - 01_START.json 第3行 timezone：运行上下文标签；
