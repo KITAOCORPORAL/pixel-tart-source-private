@@ -1,0 +1,5 @@
+#include "skcms.h"
+#include <cstdio>
+#include <vector>
+#include <cstdlib>
+int main(int argc,char** argv){if(argc!=4)return 2;FILE* f=fopen(argv[1],"rb");if(!f)return 3;fseek(f,0,SEEK_END);long n=ftell(f);rewind(f);std::vector<unsigned char> bytes(n+4);fread(bytes.data(),1,n,f);fclose(f);skcms_ICCProfile p;int priority=atoi(argv[2]);if(priority==3)priority=1;if(!skcms_ParseWithA2BPriority(bytes.data(),n,&priority,1,&p)){fprintf(stderr,"PROFILE_PARSE_REFUSED\n");return 4;}float rgb[3],out[3];while(scanf("%f %f %f",rgb,rgb+1,rgb+2)==3){bool ok;if(argv[3][0]=='u'){unsigned short in[3];for(int c=0;c<3;c++)in[c]=(unsigned short)(rgb[c]*65535+.5f);ok=skcms_Transform(in,skcms_PixelFormat_RGB_161616LE,skcms_AlphaFormat_Unpremul,&p,out,skcms_PixelFormat_RGB_fff,skcms_AlphaFormat_Unpremul,skcms_XYZD50_profile(),1);}else ok=skcms_Transform(rgb,skcms_PixelFormat_RGB_fff,skcms_AlphaFormat_Unpremul,&p,out,skcms_PixelFormat_RGB_fff,skcms_AlphaFormat_Unpremul,skcms_XYZD50_profile(),1);if(!ok)return 5;printf("%.10g %.10g %.10g\n",out[0],out[1],out[2]);}return 0;}
