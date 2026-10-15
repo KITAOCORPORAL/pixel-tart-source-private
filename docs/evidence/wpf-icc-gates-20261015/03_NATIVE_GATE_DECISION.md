@@ -1,0 +1,7 @@
+# Exact native package / productentry gate
+
+Current exactcondaLCMS2.16dll2f864... packagef9fd9e... auditedinfo. SourcearchiveLCMS2.16tarSHA d873d34ad8b9b4cea010631f1a6228d2087475e4dc5e763eb81acc23d9d45a51; feedstockd2e58a917308df1ca5ed790ffc695a1b18eecc5b,vs2019_win6419.29.30139,msbuildProjects/VC2019/lcms2.slnRelease/x64,win_jpegturbo.patchaffectsjpegicc utility. MITtextpreviouslyhashverified. Packageindexincludeslibtiff/jpeg/ucrt/vcruntime dependencies; ordinaryPEKERNEL32, delayimportsnoneinexactDLL(03_PE_IMPORTS). Packageutilitydependenciescannotblindlydropfromwholepackageinventory.
+
+Buildsourcecorrespondencehasrecipeproofnow, notbyte-reproduciblerebuild/originalCIattestation. Currentminimaldirectory+PATHSystem32onlyloads2160butNOTcleanmachineVM. CleanVMnotavailable; no appinstall/hostsystemconfigchangesperformed. Thus no new DLLdistribution, no productexperimentalbutton. ExistingSdcbDLLdifferenthashnotusedasreplacement.
+
+User-visibleexperimentalentrydesign03_ENTRY_GATE: explicit opt-in isolatedsettings; input/output/working/displayprofileSHA+algorithm+mapping/reason visible; oldprojectsno migration. Because clean-machine/nativebundle/fullregression/nativepathgate notallclosed, remaintool-only. V2script is callableexplicitresearch, notordinaryentry. No legalcompletionclaim fromMIT alone. CalibrationEligible=false.

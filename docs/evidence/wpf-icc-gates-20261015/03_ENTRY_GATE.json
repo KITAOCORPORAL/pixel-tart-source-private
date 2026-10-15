@@ -1,0 +1,29 @@
+{
+  "mode": "TOOL_ONLY_BLOCKED",
+  "defaultEnabled": false,
+  "required": [
+    "exactLCMSartifactsourcebuildcorrespondence",
+    "MITtextandpackagecomponentinventory",
+    "dependencyresolution",
+    "cleanVMload",
+    "frozenpreviewreopenexportparity",
+    "completeCoreWPFwithclassifiedNotExecuted",
+    "nativepathacceptance"
+  ],
+  "visibleStateDesign": [
+    "Input profile SHA/version/space",
+    "Working/output/display profiles separately",
+    "Algorithm version V1 or explicitV2",
+    "Mappingstage and clippedpixelcount",
+    "Unsupportedreason stablecode",
+    "Not calibrated"
+  ],
+  "blockers": [
+    "No clean VM available",
+    "Source recipe observed but binary rebuild not proven",
+    "FullWPF in progress",
+    "Native prior input detection; prepared only"
+  ],
+  "legacyMigration": false,
+  "newLcmsBundled": false
+}
