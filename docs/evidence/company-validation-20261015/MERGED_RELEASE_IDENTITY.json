@@ -1,0 +1,50 @@
+{
+  "source": "8c3986e52c501b86111aa7124af9f9f24379659a",
+  "mergeCommit": "dc67b443b57a8ebe78af640d6f28030a47403ae9",
+  "mergeParents": [
+    "b1630f0e55780d746d4377d209899a09d2773b0e",
+    "419c9c165b119fc992ee34e9e947b05f93835e6d"
+  ],
+  "directory": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\merged-release\\win-x64",
+  "exe": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\merged-release\\win-x64\\KitaoPhotoSelector.exe",
+  "exeSha256": "99cb5861d4e99b65bb5dc0bcfaee361001559402f861bab5db6c7419ffdbb2ae",
+  "components": [
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "sha256": "61289cad0b263216d73fad4da6866fe8c4e4787a7ac0a4d1bb1f5353fec7f13e",
+      "testedSha256": "61289cad0b263216d73fad4da6866fe8c4e4787a7ac0a4d1bb1f5353fec7f13e"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "sha256": "c2ad975a7b54cb4641fbb4ca9997e8b56452305045dfd8fec3daadcf05769314",
+      "testedSha256": "c2ad975a7b54cb4641fbb4ca9997e8b56452305045dfd8fec3daadcf05769314"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "sha256": "8f71b19ae2b6e3793e4c15c44359618b2e1d864534156ebf11595ff8267d23e0",
+      "testedSha256": "8f71b19ae2b6e3793e4c15c44359618b2e1d864534156ebf11595ff8267d23e0"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "sha256": "89b7fad1ae5c9a3f888aa05a0b1ab1d187c6b06da5f99b37c772026faf6f18bf",
+      "testedSha256": "89b7fad1ae5c9a3f888aa05a0b1ab1d187c6b06da5f99b37c772026faf6f18bf"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "sha256": "09fc9a4896b89a8ef9ac158e9c21dec84fe8b56fe169cfa7dc783c91563312e8",
+      "testedSha256": "09fc9a4896b89a8ef9ac158e9c21dec84fe8b56fe169cfa7dc783c91563312e8"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "sha256": "d79fe50babe8c43b9f6a151accf9243a20a423692404e33b99451cf3e09caa2c",
+      "testedSha256": "d79fe50babe8c43b9f6a151accf9243a20a423692404e33b99451cf3e09caa2c"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "sha256": "e1fdf03b14fa2cfb1c5c8d8c912c549800cda39c7cf28b823c2cdff3025160ae",
+      "testedSha256": "e1fdf03b14fa2cfb1c5c8d8c912c549800cda39c7cf28b823c2cdff3025160ae"
+    }
+  ],
+  "status": "REVIEW_BUILD_WITH_OPEN_GATES",
+  "exeStarted": false
+}

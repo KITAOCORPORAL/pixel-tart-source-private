@@ -1,0 +1,31 @@
+{
+  "root": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\release-identity\\run-20261015-112042-98bafdba",
+  "assembly": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\published\\core\\RAWSelectionAssistant.Tests.dll",
+  "assemblySha256": "4c218df17af1cdde720c4b83e9cc3ad88e74ca687011801840935756850dd23b",
+  "discovered": 1701,
+  "selected": 1,
+  "runs": [
+    {
+      "pid": 14476,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests",
+      "directory": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\release-identity\\run-20261015-112042-98bafdba\\000-Batch12ReleasedAssemblyTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "1c262ba3-4116-862d-aea7-d52ed9863bfa",
+          "name": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests.ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+          "display": "ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "counts": {
+    "Passed": 1
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "A": 7,
+  "B": 8,
+  "tests": [
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.InventoryIsReadOnlyProtectsDraftRecoveryAndUnknownFiles",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "1a5f48df-f116-8c36-bb5f-368550b8ab65"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.LegacyExactIdentityFallbackMigratesOnlyAfterHashValidation",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "1ab6e379-a2b3-8144-9ada-4070f97f3a65"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.RelativePathsRequireBoundRootIdentityHashAndRejectTraversal",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "10417b2b-6d1b-8fa9-950d-36e53da86650"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.ReparseEscapeIsRefusedWithoutOpeningForeignCopy",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "1722cde4-36f3-8127-9900-3f11cfc205ee"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.LegacyAbsoluteRootMoveAndLockedMigrationReplayNeverReplaceWrongImage",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "186f73d9-e361-8ef2-a2f2-8589ef0b0451"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.RealRootMoveKeepsRepeatedPicturesCellCaptionsModesHistoryPaginationAndDocx",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "108b8223-6341-89fa-a0fb-6a3c770fe1ec"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.UndoRedoAndDiskRecoveryCopiesAreListedButNeverDeleted",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "1652bf82-7694-8339-87c0-b2774f5e9069"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.NightColorBaselineTests.AcquisitionProtocolNeverAdmitsCalibrationFromMetadataAlone",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "1c7ebb48-f91e-8b2b-9173-a51aec08bae5"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.NightColorBaselineTests.DiagnosticsRecordNegativeExtendedFiniteAndRejectUnknownIdentity",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "199b064f-74ab-8638-98a2-88a8d077e447"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.NightColorBaselineTests.SensorProbePreservesExtendedValuesAndCountsActualChannelSaturation",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "1757a5c8-a5be-89ef-ad4d-d10f1c70fc23"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.Pv7PrototypeTests.ExposureNeutralMonotonicSingleTransferAndQuantizationAreExplicit",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "138dd9d2-c610-8b8d-8ea4-efa0488e401f"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.Pv7PrototypeTests.ExtendedPrimariesSkinAndBakedWhiteBalanceFailClosed",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "14fd283b-f6d0-82dc-86f3-fcc938905a33"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.Pv7PrototypeTests.SyntheticD50D65AdaptationAndUnknownProfileRefusal",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "113680d4-da17-8904-b0a5-57d2915679b3"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.SyntheticIccFixtureTests.ActualSyntheticIccBinaryHasKnownD50LinearContractAndComputedReference",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "10c05091-388d-8641-ba9c-02839dc07ebf"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.SyntheticIccFixtureTests.UnknownLutAndEscapingIccTagsRefuseInsteadOfFallback",
+      "count": 1,
+      "outcome": "Passed",
+      "id": "1633e2bc-77e5-8d9b-96ae-48fd65af5321"
+    }
+  ],
+  "duplicateExecution": false
+}

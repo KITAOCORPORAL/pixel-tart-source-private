@@ -1,0 +1,40 @@
+{
+  "full-core": {
+    "strictStatus": "FAILED",
+    "counts": {
+      "Passed": 1694,
+      "NotExecuted": 7
+    },
+    "selected": 1701
+  },
+  "full-wpf": {
+    "strictStatus": "FAILED",
+    "counts": {
+      "Passed": 1602,
+      "NotExecuted": 23
+    },
+    "selected": 1625
+  },
+  "release-core": {
+    "strictStatus": "FAILED",
+    "counts": {
+      "Passed": 1695,
+      "NotExecuted": 6
+    },
+    "selected": 1701
+  },
+  "release-wpf": {
+    "strictStatus": "PASSED",
+    "counts": {
+      "Passed": 26
+    },
+    "selected": 26
+  },
+  "release-identity": {
+    "strictStatus": "PASSED",
+    "counts": {
+      "Passed": 1
+    },
+    "selected": 1
+  }
+}
