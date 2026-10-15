@@ -1,0 +1,118 @@
+[
+  {
+    "file": "TNAN8886.CR3",
+    "stage": "FINAL_ENCODED_RGB16",
+    "classification": "CONFIGURATION_NOT_EQUIVALENT_NO_ACCURACY_PASS",
+    "shape": [
+      3670,
+      5496,
+      3
+    ],
+    "maxAbs": 0.3501182574196994,
+    "meanAbs": 0.041418019223191674,
+    "rmse": 0.04899013800760839,
+    "points": [
+      {
+        "y": 0,
+        "x": 0,
+        "libraw": [
+          10107,
+          8557,
+          9894
+        ],
+        "rawtherapee": [
+          14173,
+          12633,
+          13965
+        ]
+      },
+      {
+        "y": 1835,
+        "x": 2748,
+        "libraw": [
+          252,
+          0,
+          288
+        ],
+        "rawtherapee": [
+          400,
+          0,
+          217
+        ]
+      },
+      {
+        "y": 3669,
+        "x": 5495,
+        "libraw": [
+          900,
+          405,
+          819
+        ],
+        "rawtherapee": [
+          2599,
+          1185,
+          2369
+        ]
+      }
+    ],
+    "noCropping": true
+  },
+  {
+    "file": "DSCF0347.RAF",
+    "stage": "FINAL_ENCODED_RGB16",
+    "classification": "CONFIGURATION_NOT_EQUIVALENT_NO_ACCURACY_PASS",
+    "shape": [
+      5178,
+      7752,
+      3
+    ],
+    "maxAbs": 0.17256427862973983,
+    "meanAbs": 0.01968237313423106,
+    "rmse": 0.027782288998041905,
+    "points": [
+      {
+        "y": 0,
+        "x": 0,
+        "libraw": [
+          0,
+          0,
+          0
+        ],
+        "rawtherapee": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "y": 2589,
+        "x": 3876,
+        "libraw": [
+          15119,
+          8933,
+          1957
+        ],
+        "rawtherapee": [
+          18954,
+          12950,
+          5581
+        ]
+      },
+      {
+        "y": 5177,
+        "x": 7751,
+        "libraw": [
+          288,
+          256,
+          117
+        ],
+        "rawtherapee": [
+          843,
+          739,
+          344
+        ]
+      }
+    ],
+    "noCropping": true
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "source": "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\TNAN8886.CR3",
+  "sha256": "b7d358517db0cd5b5c54215aa089a5a30c79234aef50e9381931128493e33401",
+  "run": {
+    "code": 0,
+    "stdout": "{\"stage\":\"container\",\"version\":\"0.22.2-Release\",\"rawWidth\":5568,\"rawHeight\":3708,\"width\":5496,\"height\":3670,\"top\":38,\"left\":72,\"black\":0,\"white\":16383,\"cblack\":[0,0,0,0],\"wb\":[1833,1024,1618,1024],\"preMul\":[1.98464215,0.937663794,1.3421849,0],\"rgbCam\":[1.74715269,-0.848595023,0.1014423,0,-0.179429799,1.65529621,-0.475866437,0,0.00177408487,-0.607358456,1.60558438,0],\"rawAvailable\":false}\r\n{\"stage\":\"unpack-before-black\",\"version\":\"0.22.2-Release\",\"rawWidth\":5568,\"rawHeight\":3708,\"width\":5496,\"height\":3670,\"top\":38,\"left\":72,\"black\":2048,\"white\":16383,\"cblack\":[0,0,0,0],\"wb\":[1833,1024,1618,1024],\"preMul\":[1.98464215,0.937663794,1.3421849,0],\"rgbCam\":[1.74715269,-0.848595023,0.1014423,0,-0.179429799,1.65529621,-0.475866437,0,0.00177408487,-0.607358456,1.60558438,0],\"rawAvailable\":true,\"sensorMin\":1907,\"sensorMax\":4557,\"sensorSum\":47327980258,\"samplesIncludingPitch\":20646144}\r\n{\"stage\":\"processed\",\"version\":\"0.22.2-Release\",\"rawWidth\":5568,\"rawHeight\":3708,\"width\":5496,\"height\":3670,\"top\":38,\"left\":72,\"black\":0,\"white\":14335,\"cblack\":[0,0,0,0],\"wb\":[1833,1024,1618,1024],\"preMul\":[1.79003906,1,1.58007812,1],\"rgbCam\":[1.74715269,-0.848595023,0.1014423,0,-0.179429799,1.65529621,-0.475866437,0,0.00177408487,-0.607358456,1.60558438,0],\"rawAvailable\":true,\"sensorMin\":1907,\"sensorMax\":4557,\"sensorSum\":47327980258,\"samplesIncludingPitch\":20646144}\r\n",
+    "stderr": ""
+  },
+  "afterSha256": "b7d358517db0cd5b5c54215aa089a5a30c79234aef50e9381931128493e33401"
+}

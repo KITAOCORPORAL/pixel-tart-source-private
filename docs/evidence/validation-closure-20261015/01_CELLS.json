@@ -63,7 +63,7 @@
     "profile": "matrix-v2.1-g1.0.icc",
     "intent": 3,
     "inputType": "float",
-    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsArgyll": "ABSOLUTE_ADAPTATION_EQUIVALENCE_OPEN",
     "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
     "maxArgyll": 4.97411616943999e-7,
     "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
@@ -72,7 +72,7 @@
     "profile": "matrix-v2.1-g1.0.icc",
     "intent": 3,
     "inputType": "uint16",
-    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsArgyll": "ABSOLUTE_ADAPTATION_EQUIVALENCE_OPEN",
     "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
     "maxArgyll": 4.97411616943999e-7,
     "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
@@ -141,7 +141,7 @@
     "profile": "matrix-v2.1-g2.2.icc",
     "intent": 3,
     "inputType": "float",
-    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsArgyll": "ABSOLUTE_ADAPTATION_EQUIVALENCE_OPEN",
     "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
     "maxArgyll": 4.97411616943999e-7,
     "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
@@ -150,7 +150,7 @@
     "profile": "matrix-v2.1-g2.2.icc",
     "intent": 3,
     "inputType": "uint16",
-    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsArgyll": "ABSOLUTE_ADAPTATION_EQUIVALENCE_OPEN",
     "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
     "maxArgyll": 4.97411616943999e-7,
     "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
@@ -219,7 +219,7 @@
     "profile": "lut-v2.1.icc",
     "intent": 3,
     "inputType": "float",
-    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsArgyll": "ABSOLUTE_ADAPTATION_EQUIVALENCE_OPEN",
     "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
     "maxArgyll": 0.000018477604296462946,
     "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
@@ -228,7 +228,7 @@
     "profile": "lut-v2.1.icc",
     "intent": 3,
     "inputType": "uint16",
-    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsArgyll": "ABSOLUTE_ADAPTATION_EQUIVALENCE_OPEN",
     "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
     "maxArgyll": 0.00001755865442476523,
     "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"

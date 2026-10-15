@@ -1,0 +1,118 @@
+[
+  {
+    "file": "TNAN8886.CR3",
+    "stage": "FINAL_ENCODED_RGB16",
+    "classification": "CONFIGURATION_NOT_EQUIVALENT_NO_ACCURACY_PASS",
+    "shape": [
+      3670,
+      5496,
+      3
+    ],
+    "maxAbs": 1.0,
+    "meanAbs": 0.2546072049351958,
+    "rmse": 0.3181714114177629,
+    "points": [
+      {
+        "y": 0,
+        "x": 0,
+        "libraw": [
+          41281,
+          36824,
+          40670
+        ],
+        "rawtherapee": [
+          14173,
+          12633,
+          13965
+        ]
+      },
+      {
+        "y": 1835,
+        "x": 2748,
+        "libraw": [
+          2636,
+          0,
+          3013
+        ],
+        "rawtherapee": [
+          400,
+          0,
+          217
+        ]
+      },
+      {
+        "y": 3669,
+        "x": 5495,
+        "libraw": [
+          8784,
+          4237,
+          8149
+        ],
+        "rawtherapee": [
+          2599,
+          1185,
+          2369
+        ]
+      }
+    ],
+    "noCropping": true
+  },
+  {
+    "file": "DSCF0347.RAF",
+    "stage": "FINAL_ENCODED_RGB16",
+    "classification": "CONFIGURATION_NOT_EQUIVALENT_NO_ACCURACY_PASS",
+    "shape": [
+      5178,
+      7752,
+      3
+    ],
+    "maxAbs": 0.759990844586862,
+    "meanAbs": 0.09282064881831562,
+    "rmse": 0.14792597695571583,
+    "points": [
+      {
+        "y": 0,
+        "x": 0,
+        "libraw": [
+          0,
+          0,
+          0
+        ],
+        "rawtherapee": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "y": 2589,
+        "x": 3876,
+        "libraw": [
+          58090,
+          39614,
+          16020
+        ],
+        "rawtherapee": [
+          18954,
+          12950,
+          5581
+        ]
+      },
+      {
+        "y": 5177,
+        "x": 7751,
+        "libraw": [
+          3276,
+          2918,
+          1331
+        ],
+        "rawtherapee": [
+          843,
+          739,
+          344
+        ]
+      }
+    ],
+    "noCropping": true
+  }
+]

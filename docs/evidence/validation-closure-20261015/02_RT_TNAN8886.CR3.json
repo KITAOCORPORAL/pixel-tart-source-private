@@ -1,0 +1,26 @@
+{
+  "source": "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\TNAN8886.CR3",
+  "inputSha256": "b7d358517db0cd5b5c54215aa089a5a30c79234aef50e9381931128493e33401",
+  "command": [
+    "-q",
+    "-O",
+    "D:/AI AGENT/kitao-validation-closure-20261015/artifacts/validation-closure/raw/TNAN8886.CR3.rt.tif",
+    "-t",
+    "-b16",
+    "-c",
+    "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\TNAN8886.CR3"
+  ],
+  "run": {
+    "code": 0,
+    "stdout": "RawTherapee, version 5.11, command line.\r\nOutput is 16-bit integer.\r\nProcessing: D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\TNAN8886.CR3\r\n",
+    "stderr": ""
+  },
+  "stageAvailability": {
+    "container": "successful conversion implies read; native metadata UNAVAILABLE",
+    "sensor": "UNAVAILABLE",
+    "postBlack": "UNAVAILABLE",
+    "preMatrixWB": "UNAVAILABLE",
+    "matrix": "UNAVAILABLE from CLI",
+    "final": "TIFF if exit zero"
+  }
+}

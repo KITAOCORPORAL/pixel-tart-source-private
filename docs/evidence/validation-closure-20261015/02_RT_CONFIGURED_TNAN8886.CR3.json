@@ -1,0 +1,18 @@
+{
+  "command": [
+    "-q",
+    "-O",
+    "D:/AI AGENT/kitao-validation-closure-20261015/artifacts/validation-closure/raw/TNAN8886.CR3.configured.rt.tif",
+    "-p",
+    "D:/AI AGENT/kitao-validation-closure-20261015/tools/validation-closure/raw-reference.pp3",
+    "-t",
+    "-b16",
+    "-c",
+    "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\TNAN8886.CR3"
+  ],
+  "run": {
+    "code": 0,
+    "stdout": "RawTherapee, version 5.11, command line.\r\nOutput is 16-bit integer.\r\nProcessing: D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\TNAN8886.CR3\r\n  Merging procparams #0\r\n",
+    "stderr": ""
+  }
+}
