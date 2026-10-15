@@ -208,14 +208,7 @@ public sealed class AssetLibraryP2DragDropHardeningTests
     }
 
     private static string FindRepositoryFile(params string[] parts)
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-        {
-            var candidate = Path.Combine([directory.FullName, .. parts]);
-            if (File.Exists(candidate)) return candidate;
-        }
-        throw new FileNotFoundException(string.Join(Path.DirectorySeparatorChar, parts));
-    }
+    { return TestResources.Root; }
 
     private static Task RunSta(Action action)
     {

@@ -160,5 +160,5 @@ public sealed class Version220StageCDocumentUiArchitectureTests
     private static void DoesNotContain(string text, params string[] values) { foreach (var value in values) Assert.IsFalse(text.Contains(value, StringComparison.Ordinal), value); }
     private static int Count(string text, string value) { var result = 0; for (var index = 0; (index = text.IndexOf(value, index, StringComparison.Ordinal)) >= 0; index += value.Length) result++; return result; }
     private static string Slice(string text, string startValue, string endValue, bool includeEnd = false) { var start = text.IndexOf(startValue, StringComparison.Ordinal); var end = text.IndexOf(endValue, start + startValue.Length, StringComparison.Ordinal); return text[start..(includeEnd ? end + endValue.Length : end)]; }
-    private static string FindRoot() { for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent) if (File.Exists(System.IO.Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName; throw new DirectoryNotFoundException(); }
+    private static string FindRoot() { return TestResources.Root; }
 }

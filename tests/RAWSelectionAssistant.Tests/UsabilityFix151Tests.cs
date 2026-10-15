@@ -50,5 +50,5 @@ public sealed class UsabilityFix151Tests
     private static void Contains(string text, params string[] values) { foreach (var value in values) StringAssert.Contains(text, value); }
     private static void DoesNotContain(string text, params string[] values) { foreach (var value in values) Assert.IsFalse(text.Contains(value, StringComparison.Ordinal), $"不应包含：{value}"); }
     private static string Text(string relativePath) => File.ReadAllText(Path.Combine(Root(), relativePath.Replace('/', Path.DirectorySeparatorChar)));
-    private static string Root() { var directory = new DirectoryInfo(AppContext.BaseDirectory); while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) directory = directory.Parent; return directory?.FullName ?? throw new DirectoryNotFoundException(); }
+    private static string Root() { return TestResources.Root; }
 }

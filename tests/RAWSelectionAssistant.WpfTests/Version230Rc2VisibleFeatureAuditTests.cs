@@ -43,9 +43,5 @@ public sealed class Version230Rc2VisibleFeatureAuditTests
     }
 
     private static string Root()
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-            if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName;
-        throw new DirectoryNotFoundException();
-    }
+    { return TestResources.Root; }
 }

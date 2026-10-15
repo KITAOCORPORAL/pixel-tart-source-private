@@ -60,7 +60,7 @@ public sealed class Version230StageDColorCoreTests
     private static DisplayColorProfile Profile(string key) => new(key, key, key, null, "sRGB", DisplayProfileStatus.FallbackSrgb, false, DateTimeOffset.UtcNow, "sRGB");
     private static string OneD(int size) => $"TITLE \"Test\"\nLUT_1D_SIZE {size}\n" + string.Join('\n', Enumerable.Range(0, size).Select(index => { var v = index / (float)(size - 1); return $"{v.ToString(CultureInfo.InvariantCulture)} {v.ToString(CultureInfo.InvariantCulture)} {v.ToString(CultureInfo.InvariantCulture)}"; })) + "\n";
     private static string ThreeD(int size) => "LUT_3D_SIZE 2\n" + string.Join('\n', Enumerable.Repeat("0 0 0", 8)) + "\n";
-    private static string RepoRoot() { for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent) if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName; throw new DirectoryNotFoundException(); }
+    private static string RepoRoot() { return TestResources.Root; }
     private static string Slice(string text, string start, string end) { var from = text.IndexOf(start, StringComparison.Ordinal); var to = text.IndexOf(end, from + start.Length, StringComparison.Ordinal); return text[from..to]; }
     private sealed class TempDirectory : IDisposable { public TempDirectory() { Path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "PixelTart.StageD", Guid.NewGuid().ToString("N")); Directory.CreateDirectory(Path); } public string Path { get; } public string File(string name, string text) { var path = System.IO.Path.Combine(Path, name); System.IO.File.WriteAllText(path, text); return path; } public void Dispose() { try { Directory.Delete(Path, true); } catch { } } }
 }

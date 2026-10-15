@@ -115,11 +115,7 @@ public sealed class OnlineSelectionPersistenceWpfTests
     }
 
     private static string FindRepoRoot()
-    {
-        var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) directory = directory.Parent;
-        return directory?.FullName ?? throw new DirectoryNotFoundException("Repository root not found.");
-    }
+    { return TestResources.Root; }
 
     private sealed class SnapshotBeforeDelayStore : ISelectionWorkspaceStore
     {

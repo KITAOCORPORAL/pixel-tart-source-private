@@ -3,12 +3,7 @@ using System.Xml.Linq;
 namespace RAWSelectionAssistant.WpfTests;
 internal static class StudioTestSource
 {
-    internal static string Read(string file) {
-        for(var d = new DirectoryInfo(AppContext.BaseDirectory); d is not null; d = d.Parent)
-            if(File.Exists(Path.Combine(d.FullName, "RAWSelectionAssistant.sln")))
-                return File.ReadAllText(Path.Combine(d.FullName,"src/RAWSelectionAssistant/Resources/DesignSystem",file));
-        throw new DirectoryNotFoundException();
-    }
+    internal static string Read(string file) { return File.ReadAllText(Path.Combine(TestResources.Root,file)); }
     internal static void Contains(string file, params string[] values) { var source=Read(file); XDocument.Parse(source); foreach(var value in values) StringAssert.Contains(source,value); }
 }
 [TestClass] public sealed class StudioColorsTests { [TestMethod] public void ProductionResources_ContainRequiredContract() => StudioTestSource.Contains("Colors.Dark.xaml","AppBackgroundColor","SurfaceElevatedColor","TextPrimaryColor","PrimaryColor"); }

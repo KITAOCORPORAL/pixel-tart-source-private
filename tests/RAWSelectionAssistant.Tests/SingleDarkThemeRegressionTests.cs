@@ -72,10 +72,6 @@ public sealed class SingleDarkThemeRegressionTests
     }
 
     private static string Text(string relativePath)
-    {
-        var root = new DirectoryInfo(AppContext.BaseDirectory);
-        while (root is not null && !File.Exists(Path.Combine(root.FullName, "RAWSelectionAssistant.sln"))) root = root.Parent;
-        return File.ReadAllText(Path.Combine(root!.FullName, relativePath.Replace('/', Path.DirectorySeparatorChar)));
-    }
+    { return File.ReadAllText(Path.Combine(TestResources.Root,relativePath.Replace('/',Path.DirectorySeparatorChar))); }
 }
 

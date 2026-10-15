@@ -101,12 +101,7 @@ public sealed class RawToJpegWpfTests
     }
 
     private static string Text(string relative)
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-            if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln")))
-                return File.ReadAllText(Path.Combine(directory.FullName, relative.Replace('/', Path.DirectorySeparatorChar)));
-        throw new DirectoryNotFoundException();
-    }
+    { return File.ReadAllText(Path.Combine(TestResources.Root,relative)); }
 
     private static Task RunSta(Func<Task> action)
     {

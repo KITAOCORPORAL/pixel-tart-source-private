@@ -252,8 +252,7 @@ public sealed class RuntimeCorrectionWpfTests
     {
         if (Application.Current is not null) return;
         var app = new Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
-        var root = new System.IO.DirectoryInfo(AppContext.BaseDirectory);
-        while (root is not null && !System.IO.File.Exists(System.IO.Path.Combine(root.FullName, "RAWSelectionAssistant.sln"))) root = root.Parent;
+        var root = new System.IO.DirectoryInfo(TestResources.Root);
         var document = System.Xml.Linq.XDocument.Load(System.IO.Path.Combine(root!.FullName, "src/RAWSelectionAssistant/App.xaml"));
         foreach (var source in document.Descendants().Attributes("Source"))
             app.Resources.MergedDictionaries.Add((ResourceDictionary)Application.LoadComponent(new Uri("/KitaoPhotoSelector;component/" + source.Value, UriKind.Relative)));

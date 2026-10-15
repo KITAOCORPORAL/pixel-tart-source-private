@@ -230,9 +230,5 @@ public sealed class NavigationSafety204Tests
     }
 
     private static string FindRepositoryRoot()
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-            if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName;
-        throw new DirectoryNotFoundException("Repository root was not found.");
-    }
+    { return TestResources.Root; }
 }

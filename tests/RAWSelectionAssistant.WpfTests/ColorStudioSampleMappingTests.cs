@@ -39,8 +39,7 @@ public sealed class ColorStudioSampleMappingTests
     [TestMethod]
     public void ColorStudioParameterValueColorTests()
     {
-        var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) directory = directory.Parent;
+        var directory = new System.IO.DirectoryInfo(TestResources.Root);
         Assert.IsNotNull(directory);
         var xaml = File.ReadAllText(Path.Combine(directory!.FullName, "src", "RAWSelectionAssistant", "Views", "ReferenceColorWorkspaceView.xaml"));
         StringAssert.Contains(xaml, "x:Key=\"ParameterValue\"");

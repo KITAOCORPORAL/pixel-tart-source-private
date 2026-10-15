@@ -47,9 +47,5 @@ public sealed class BookingCalendarSafetyContractTests
     private static string Text(string relativePath) => File.ReadAllText(Path.Combine(Root(), relativePath.Replace('/', Path.DirectorySeparatorChar)));
 
     private static string Root()
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-            if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName;
-        throw new DirectoryNotFoundException("RAWSelectionAssistant.sln was not found.");
-    }
+    { return TestResources.Root; }
 }

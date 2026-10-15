@@ -254,11 +254,7 @@ public sealed class AssetLibraryP3AutomatedRunSetContractTests
     private static string Read(string relative) => File.ReadAllText(Path(relative));
     private static string Path(string relative) => System.IO.Path.Combine(RepositoryRoot(), relative.Replace('/', System.IO.Path.DirectorySeparatorChar));
     private static string RepositoryRoot()
-    {
-        var cursor = new DirectoryInfo(AppContext.BaseDirectory);
-        while (cursor is not null && !File.Exists(System.IO.Path.Combine(cursor.FullName, "RAWSelectionAssistant.sln"))) cursor = cursor.Parent;
-        return cursor?.FullName ?? throw new DirectoryNotFoundException("Repository root not found.");
-    }
+    { return TestResources.Root; }
 
     private sealed class TemporaryPackage(string root, string scriptPath) : IDisposable
     {

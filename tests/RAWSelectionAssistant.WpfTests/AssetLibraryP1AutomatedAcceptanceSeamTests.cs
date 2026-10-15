@@ -981,10 +981,5 @@ public sealed class AssetLibraryP1AutomatedAcceptanceSeamTests
         relativePath.Replace('/', System.IO.Path.DirectorySeparatorChar));
 
     private static string FindRepositoryRoot()
-    {
-        var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (directory is not null && !Directory.Exists(System.IO.Path.Combine(directory.FullName, "src")))
-            directory = directory.Parent;
-        return directory?.FullName ?? throw new DirectoryNotFoundException("Repository root not found.");
-    }
+    { return TestResources.Root; }
 }

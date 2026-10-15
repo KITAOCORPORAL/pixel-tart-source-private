@@ -57,11 +57,7 @@ public sealed class Version230Rc2NavigationTests
 
     private static string Text(string relativePath) => File.ReadAllText(Path.Combine(RepoRoot(), relativePath.Replace('/', Path.DirectorySeparatorChar)));
     private static string RepoRoot()
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-            if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName;
-        throw new DirectoryNotFoundException();
-    }
+    { return TestResources.Root; }
     private static int Count(string text, string value) => (text.Length - text.Replace(value, string.Empty, StringComparison.Ordinal).Length) / value.Length;
     private static string Slice(string text, string start, string end)
     {

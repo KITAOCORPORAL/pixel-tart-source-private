@@ -19,11 +19,7 @@ internal readonly record struct VisualCaptureSize(int Width, int Height)
 internal static class UiGuardianCapture
 {
     internal static string RepositoryRoot()
-    {
-        for (var d = new DirectoryInfo(AppContext.BaseDirectory); d != null; d = d.Parent)
-            if (File.Exists(Path.Combine(d.FullName, "RAWSelectionAssistant.sln"))) return d.FullName;
-        throw new DirectoryNotFoundException();
-    }
+    { return TestResources.Root; }
     internal static async Task Run(Window window, MainViewModel vm, string fixtures, string output)
     {
         Assert.AreEqual("1", Environment.GetEnvironmentVariable("PIXEL_TART_UI_GUARDIAN_HARD_GATE"));

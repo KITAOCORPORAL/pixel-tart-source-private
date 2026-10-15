@@ -91,5 +91,5 @@ public sealed class StageIVReferenceWorkflowTests
         foreach(var value in new[]{"选择照片","待调色照片","参考图片","核心调整","高级调整","保存当前色彩方案","导出参考仿色 3D LUT","ColorStudioImageViewport"}) StringAssert.Contains(workspace,value);
     }
 
-    private static string Root(){for(var directory=new DirectoryInfo(AppContext.BaseDirectory);directory is not null;directory=directory.Parent)if(File.Exists(Path.Combine(directory.FullName,"RAWSelectionAssistant.sln")))return directory.FullName;throw new DirectoryNotFoundException();}
+    private static string Root(){ return TestResources.Root; }
 }

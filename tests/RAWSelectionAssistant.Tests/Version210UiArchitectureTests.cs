@@ -29,5 +29,5 @@ public sealed class Version210UiArchitectureTests
     private static void Contains(string text,params string[] values){foreach(var value in values)StringAssert.Contains(text,value);}
 
     private static int Count(string text,string value){var count=0;var start=0;while((start=text.IndexOf(value,start,StringComparison.Ordinal))>=0){count++;start+=value.Length;}return count;}
-    private static string FindRoot(){var directory=new DirectoryInfo(AppContext.BaseDirectory);while(directory is not null&&!File.Exists(Path.Combine(directory.FullName,"RAWSelectionAssistant.sln")))directory=directory.Parent;return directory?.FullName??throw new DirectoryNotFoundException();}
+    private static string FindRoot(){ return TestResources.Root; }
 }

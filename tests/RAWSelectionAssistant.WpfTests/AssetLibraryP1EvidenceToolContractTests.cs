@@ -172,9 +172,5 @@ public sealed class AssetLibraryP1EvidenceToolContractTests
         File.ReadAllText(Path.Combine(Root(), relativePath.Replace('/', Path.DirectorySeparatorChar)), Encoding.UTF8);
 
     private static string Root()
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-            if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName;
-        throw new DirectoryNotFoundException("Repository root not found.");
-    }
+    { return TestResources.Root; }
 }

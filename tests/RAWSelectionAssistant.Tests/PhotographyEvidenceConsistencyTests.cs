@@ -48,10 +48,5 @@ public sealed class PhotographyEvidenceConsistencyTests
     }
 
     private static string EvidenceRoot()
-    {
-        var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) directory = directory.Parent;
-        Assert.IsNotNull(directory);
-        return Path.Combine(directory!.FullName, "docs", "evidence", "photography", "20260923-b37ab5a3");
-    }
+    { return Path.Combine(TestResources.Root,"docs","evidence","photography","20260923-b37ab5a3"); }
 }

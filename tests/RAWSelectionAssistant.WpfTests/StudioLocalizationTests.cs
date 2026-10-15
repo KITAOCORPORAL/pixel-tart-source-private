@@ -18,8 +18,7 @@ public sealed class StudioLocalizationTests
     [TestMethod]
     public void ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage()
     {
-        var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (directory is not null && !Directory.Exists(Path.Combine(directory.FullName, "src", "RAWSelectionAssistant"))) directory = directory.Parent;
+        var directory = new DirectoryInfo(TestResources.Root);
         Assert.IsNotNull(directory);
         var source = File.ReadAllText(Path.Combine(directory.FullName, "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml"));
         Assert.IsFalse(System.Text.RegularExpressions.Regex.IsMatch(source, "(?:Text|Content|Header|ToolTip|AutomationProperties.Name)=\"[^\"{]*[\\u4e00-\\u9fff][^\"{]*\""), "Product literals must use resources, not hard-coded Chinese.");

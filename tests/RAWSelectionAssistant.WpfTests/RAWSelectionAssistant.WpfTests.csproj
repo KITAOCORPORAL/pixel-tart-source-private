@@ -13,4 +13,8 @@
     <ProjectReference Include="..\..\src\RAWSelectionAssistant\RAWSelectionAssistant.csproj" />
   </ItemGroup>
   <ItemGroup><Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" /></ItemGroup>
+  <ItemGroup><Compile Include="../Shared/TestResources.cs" Link="TestResources.cs" /></ItemGroup>
+  <Target Name="WriteExplicitTestResources" AfterTargets="Build">
+    <WriteLinesToFile File="$(TargetDir)test-resource-root.txt" Lines="$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)/../..'))" Overwrite="true" />
+  </Target>
 </Project>

@@ -97,10 +97,5 @@ public sealed class PhotographyAcceptanceManifestTests
     private static string Hash(string relative) => PhotographyEvidenceManifest.HashFile(Path.Combine(Root(), relative));
 
     private static string Root()
-    {
-        var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) directory = directory.Parent;
-        Assert.IsNotNull(directory);
-        return Path.Combine(directory!.FullName, "docs", "evidence", "photography", RunId);
-    }
+    { return Path.Combine(TestResources.Root,"docs","evidence","photography",RunId); }
 }

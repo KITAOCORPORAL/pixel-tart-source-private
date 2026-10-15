@@ -233,11 +233,7 @@ public sealed class Version204FeatureTests
     }
 
     private static string Root()
-    {
-        var directory=new DirectoryInfo(AppContext.BaseDirectory);
-        while(directory is not null&&!File.Exists(Path.Combine(directory.FullName,"RAWSelectionAssistant.sln")))directory=directory.Parent;
-        return directory?.FullName??throw new DirectoryNotFoundException();
-    }
+    { return TestResources.Root; }
 
     private sealed class CallbackProgress<T>(Action<T> callback):IProgress<T>{public void Report(T value)=>callback(value);}
 }

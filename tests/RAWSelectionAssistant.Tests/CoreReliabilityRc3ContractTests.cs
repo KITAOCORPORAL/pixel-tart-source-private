@@ -76,9 +76,5 @@ public sealed class CoreReliabilityRc3ContractTests
     private static string Text(string relative) => File.ReadAllText(Full(relative));
     private static string Full(string relative) => Path.Combine(Root(), relative.Replace('/', Path.DirectorySeparatorChar));
     private static string Root()
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-            if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName;
-        throw new DirectoryNotFoundException();
-    }
+    { return TestResources.Root; }
 }

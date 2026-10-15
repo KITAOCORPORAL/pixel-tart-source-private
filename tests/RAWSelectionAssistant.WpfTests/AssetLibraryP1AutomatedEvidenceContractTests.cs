@@ -1349,7 +1349,7 @@ public sealed class AssetLibraryP1AutomatedEvidenceContractTests
     private static string ShaBytes(byte[] bytes) => Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
     private static void ContainsAll(string source, params string[] values) { foreach (var value in values) StringAssert.Contains(source, value); }
     private static string Read(string relativePath) => File.ReadAllText(Path.Combine(Root(), relativePath.Replace('/', Path.DirectorySeparatorChar)), Encoding.UTF8);
-    private static string Root() { for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent) if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName; throw new DirectoryNotFoundException("Repository root not found."); }
+    private static string Root() { return TestResources.Root; }
 
     private static (int ExitCode, string Output) RunValidator(string runRoot)
     {

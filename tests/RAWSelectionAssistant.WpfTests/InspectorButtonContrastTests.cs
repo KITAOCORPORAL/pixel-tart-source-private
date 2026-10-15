@@ -18,9 +18,5 @@ public sealed class InspectorButtonContrastTests
 
     private static string? Attribute(XElement element, string suffix) => element.Attributes().FirstOrDefault(attribute => attribute.Name.LocalName.EndsWith(suffix, StringComparison.Ordinal))?.Value;
     private static string RepositoryRoot()
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-            if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName;
-        throw new DirectoryNotFoundException();
-    }
+    { return TestResources.Root; }
 }

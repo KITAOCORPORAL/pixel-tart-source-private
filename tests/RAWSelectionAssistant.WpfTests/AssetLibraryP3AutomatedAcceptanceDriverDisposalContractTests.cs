@@ -48,14 +48,5 @@ public sealed class AssetLibraryP3AutomatedAcceptanceDriverDisposalContractTests
         "AssetLibraryP3AutomatedAcceptanceDriver.cs"));
 
     private static string RepositoryRoot()
-    {
-        var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (directory is not null)
-        {
-            if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return directory.FullName;
-            directory = directory.Parent;
-        }
-
-        throw new DirectoryNotFoundException("Could not locate the Pixel Tart repository root.");
-    }
+    { return TestResources.Root; }
 }

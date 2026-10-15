@@ -348,9 +348,5 @@ catch {
 """;
 
     private static string RepositoryRoot()
-    {
-        var cursor = new DirectoryInfo(AppContext.BaseDirectory);
-        while (cursor is not null && !File.Exists(System.IO.Path.Combine(cursor.FullName, "RAWSelectionAssistant.sln"))) cursor = cursor.Parent;
-        return cursor?.FullName ?? throw new DirectoryNotFoundException("Repository root not found.");
-    }
+    { return TestResources.Root; }
 }

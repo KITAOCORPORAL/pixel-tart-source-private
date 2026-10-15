@@ -411,10 +411,7 @@ public sealed class PhysicalPointerDiagnosticContractTests
     {
         get
         {
-            var directory = new DirectoryInfo(AppContext.BaseDirectory);
-            while (directory is not null && !Directory.Exists(Path.Combine(directory.FullName, "src")))
-                directory = directory.Parent;
-            return directory?.FullName ?? throw new DirectoryNotFoundException("Repository root was not found.");
+            return TestResources.Root;
         }
     }
 }

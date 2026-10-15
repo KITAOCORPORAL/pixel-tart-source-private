@@ -40,5 +40,5 @@ public sealed class WorkbenchEnhancement203Tests
     private static string Light() => Text("src/RAWSelectionAssistant/Resources/DesignSystem/Theme.Light.xaml");
     private static void Contains(string text, params string[] values) { foreach (var value in values) StringAssert.Contains(text, value); }
     private static string Text(string path) => File.ReadAllText(Path.Combine(Root(), path.Replace('/', Path.DirectorySeparatorChar)));
-    private static string Root() { var directory = new DirectoryInfo(AppContext.BaseDirectory); while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) directory = directory.Parent; return directory?.FullName ?? throw new DirectoryNotFoundException(); }
+    private static string Root() { return TestResources.Root; }
 }

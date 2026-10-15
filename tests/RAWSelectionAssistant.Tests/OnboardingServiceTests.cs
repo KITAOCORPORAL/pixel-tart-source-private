@@ -345,11 +345,7 @@ public sealed class OnboardingServiceTests
     }
 
     private static string FindRepositoryRoot()
-    {
-        var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) directory = directory.Parent;
-        return directory?.FullName ?? throw new DirectoryNotFoundException("未找到解决方案目录。");
-    }
+    { return TestResources.Root; }
 
     private sealed record OnboardingFixture(
         AppSettings Settings,

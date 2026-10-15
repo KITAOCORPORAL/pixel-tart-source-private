@@ -1546,9 +1546,5 @@ public sealed class EmbeddedAssetLibraryWpfTests
     }
 
     private static string FindRepositoryRoot()
-    {
-        var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (directory is not null && !Directory.Exists(Path.Combine(directory.FullName, "src"))) directory = directory.Parent;
-        return directory?.FullName ?? throw new DirectoryNotFoundException("Repository root not found.");
-    }
+    { return TestResources.Root; }
 }

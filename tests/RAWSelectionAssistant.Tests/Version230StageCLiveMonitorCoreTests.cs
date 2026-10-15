@@ -211,11 +211,7 @@ public sealed class Version230StageCLiveMonitorCoreTests
     }
 
     private static string Text(string relative)
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-            if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return File.ReadAllText(Path.Combine(directory.FullName, relative.Replace('/', Path.DirectorySeparatorChar)));
-        throw new DirectoryNotFoundException();
-    }
+    { return File.ReadAllText(Path.Combine(TestResources.Root,relative.Replace('/',Path.DirectorySeparatorChar))); }
 
     private sealed record Setup(TempDirectory Temp, PixelTartDatabase Database, TetherSessionRecord Session, TetherAssetRecord Asset, SqliteTetherAnnotationRepository Annotations) : IDisposable
     {

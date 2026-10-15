@@ -8,11 +8,7 @@ namespace RAWSelectionAssistant.WpfTests;
 public sealed class PlanningWorkspaceLayoutTests
 {
     internal static string Read(string file)
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-            if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return File.ReadAllText(Path.Combine(directory.FullName, file));
-        throw new DirectoryNotFoundException();
-    }
+    { return File.ReadAllText(Path.Combine(TestResources.Root,file)); }
     [TestMethod]
     public void TwoColumnDocumentWorkspaceReplacesPermanentShotInspector()
     {

@@ -129,11 +129,7 @@ public sealed class AssetLibraryP3DatabaseEvidenceBehaviorTests
     }
 
     private static string RepositoryRoot()
-    {
-        for (var cursor = new DirectoryInfo(AppContext.BaseDirectory); cursor is not null; cursor = cursor.Parent)
-            if (File.Exists(Path.Combine(cursor.FullName, "RAWSelectionAssistant.sln"))) return cursor.FullName;
-        throw new DirectoryNotFoundException();
-    }
+    { return TestResources.Root; }
 
     private static async Task<(int Code, string Output, string Error)> Start(string executable, string[] arguments)
     {

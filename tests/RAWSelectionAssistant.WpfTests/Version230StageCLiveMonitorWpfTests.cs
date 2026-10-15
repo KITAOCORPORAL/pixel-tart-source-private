@@ -297,7 +297,7 @@ public sealed class Version230StageCLiveMonitorWpfTests
     }
     private static string TetherXaml() => Text("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml");
     private static string ViewModelSource() => Text("src/RAWSelectionAssistant/ViewModels/TetherCaptureViewModel.cs");
-    private static string Text(string relative) { for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent) if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return File.ReadAllText(Path.Combine(directory.FullName, relative.Replace('/', Path.DirectorySeparatorChar))); throw new DirectoryNotFoundException(); }
+    private static string Text(string relative) { return File.ReadAllText(Path.Combine(TestResources.Root,relative)); }
     private static Task RunSta(Func<Task> action) { var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously); var thread = new Thread(async () => { try { await action(); completion.SetResult(); } catch (Exception ex) { completion.SetException(ex); } }); thread.SetApartmentState(ApartmentState.STA); thread.Start(); return completion.Task; }
 
     private sealed class AssetRepositoryStub(params TetherAssetRecord[] initial) : ITetherAssetRepository

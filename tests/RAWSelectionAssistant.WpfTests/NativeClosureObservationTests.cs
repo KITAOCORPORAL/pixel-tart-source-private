@@ -83,11 +83,7 @@ public sealed class NativeClosureObservationTests
     }
 
     private static string Read(string path)
-    {
-        for (var root = new DirectoryInfo(AppContext.BaseDirectory); root is not null; root = root.Parent)
-            if (File.Exists(Path.Combine(root.FullName, "RAWSelectionAssistant.sln"))) return File.ReadAllText(Path.Combine(root.FullName, path));
-        throw new DirectoryNotFoundException();
-    }
+    { return File.ReadAllText(Path.Combine(TestResources.Root,path)); }
     private static void Sta(Action action)
     {
         Exception? error = null;

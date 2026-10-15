@@ -15,9 +15,10 @@ def load_results(trx,expected):
     return results,errors
 
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--assembly',required=True);ap.add_argument('--output',required=True);ap.add_argument('--dotnet',default='D:/AI AGENT/.dotnet/dotnet.exe');ap.add_argument('--sdk',default='D:/AI AGENT/.dotnet/sdk/10.0.302');ap.add_argument('--timeout',type=int,default=180);ap.add_argument('--classes',nargs='*');ap.add_argument('--single-process',action='store_true');a=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('--assembly',required=True);ap.add_argument('--output',required=True);ap.add_argument('--dotnet',default='D:/AI AGENT/.dotnet/dotnet.exe');ap.add_argument('--sdk',default='D:/AI AGENT/.dotnet/sdk/10.0.302');ap.add_argument('--timeout',type=int,default=180);ap.add_argument('--classes',nargs='*');ap.add_argument('--single-process',action='store_true');ap.add_argument('--resource-root',help='Explicit source/resource root; may differ from testhost directory');a=ap.parse_args()
     assembly=pathlib.Path(a.assembly).resolve();repo=pathlib.Path(__file__).resolve().parents[2];root=pathlib.Path(a.output).resolve()/('run-'+time.strftime('%Y%m%d-%H%M%S')+'-'+uuid.uuid4().hex[:8]);root.mkdir(parents=True,exist_ok=False)
     env=os.environ.copy();env['PATH']=str(pathlib.Path(a.dotnet).parent)+os.pathsep+env.get('PATH','');env['DOTNET_ROOT']=str(pathlib.Path(a.dotnet).parent);env['VSTEST_CONNECTION_TIMEOUT']='30'
+    if a.resource_root:env['KITAO_TEST_RESOURCE_ROOT']=str(pathlib.Path(a.resource_root).resolve())
     helper=repo/'tools/VerifiedTestRunner/bin/Release/net10.0/VerifiedTestRunner.dll';discovery=root/'discovery.json'
     def run(cmd,folder,timeout,localenv):
         with (folder/'stdout.log').open('wb') as out,(folder/'stderr.log').open('wb') as err:

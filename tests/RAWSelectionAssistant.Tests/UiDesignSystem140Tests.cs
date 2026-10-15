@@ -145,9 +145,5 @@ public sealed class UiDesignSystem140Tests
     private static string Text(string relativePath) => File.ReadAllText(Path.Combine(Root(), relativePath.Replace('/', Path.DirectorySeparatorChar)));
 
     private static string Root()
-    {
-        var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (directory is not null && !File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) directory = directory.Parent;
-        return directory?.FullName ?? throw new DirectoryNotFoundException("未找到解决方案目录。");
-    }
+    { return TestResources.Root; }
 }

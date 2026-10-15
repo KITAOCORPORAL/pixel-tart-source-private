@@ -276,11 +276,7 @@ public sealed class Version230WatchFolderCoreTests
     }
 
     private static string Text(string relative)
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-            if (File.Exists(Path.Combine(directory.FullName, "RAWSelectionAssistant.sln"))) return File.ReadAllText(Path.Combine(directory.FullName, relative.Replace('/', Path.DirectorySeparatorChar)));
-        throw new DirectoryNotFoundException();
-    }
+    { return File.ReadAllText(Path.Combine(TestResources.Root,relative.Replace('/',Path.DirectorySeparatorChar))); }
 
     private sealed class Setup(TempDirectory temp, PixelTartDatabase database, TetherSessionRecord session, SqliteTetherAssetRepository assets) : IDisposable
     {
