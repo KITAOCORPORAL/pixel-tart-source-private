@@ -1,0 +1,47 @@
+[
+  {
+    "route": "preview",
+    "file": "src/RAWSelectionAssistant/Services/StudioQuickExport.cs",
+    "contract": "Load; WIC embedded profile to sRGB and orientation; legacy default",
+    "baseline": "3d526ae7e7589a0d735689883dcf62a4ef272720",
+    "oldPathUnchanged": true,
+    "backend": "PENDING_NEW_RUN",
+    "native": "NOT_RUN_YET"
+  },
+  {
+    "route": "save-reopen",
+    "file": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioSchemeStore.cs",
+    "contract": "SaveAsync/LoadAsync scheme catalog; existing recipes unchanged",
+    "baseline": "3d526ae7e7589a0d735689883dcf62a4ef272720",
+    "oldPathUnchanged": true,
+    "backend": "PENDING_NEW_RUN",
+    "native": "NOT_RUN_YET"
+  },
+  {
+    "route": "TIFF16",
+    "file": "src/RAWSelectionAssistant.Core/Services/Export/TiffExport.cs",
+    "contract": "TiffExport.Export output profile bytes; readback TiffReadBack",
+    "baseline": "3d526ae7e7589a0d735689883dcf62a4ef272720",
+    "oldPathUnchanged": true,
+    "backend": "PENDING_NEW_RUN",
+    "native": "NOT_RUN_YET"
+  },
+  {
+    "route": "PNG16/JPEG",
+    "file": "src/RAWSelectionAssistant/Services/StudioQuickExport.cs",
+    "contract": "WriteFrame/Rgb48 WPF encoders; format/alpha contracts",
+    "baseline": "3d526ae7e7589a0d735689883dcf62a4ef272720",
+    "oldPathUnchanged": true,
+    "backend": "PENDING_NEW_RUN",
+    "native": "NOT_RUN_YET"
+  },
+  {
+    "route": "RAW TIFF16",
+    "file": "src/RAWSelectionAssistant/Services/ProfessionalRawExport.cs",
+    "contract": "existing professional legacy workflow",
+    "baseline": "3d526ae7e7589a0d735689883dcf62a4ef272720",
+    "oldPathUnchanged": true,
+    "backend": "PENDING_NEW_RUN",
+    "native": "NOT_RUN_YET"
+  }
+]

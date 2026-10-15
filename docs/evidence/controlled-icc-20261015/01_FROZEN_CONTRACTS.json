@@ -1,0 +1,42 @@
+{
+  "goldenCases": 72,
+  "goldenTest": "PublicCubeAndLegacyTests.Pv4Pv5Pv6ReopenedLegacyPixelsMatchIndependentBaseShaGoldenForAllOrientations",
+  "thresholdMs": 400,
+  "fullCanonHash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+  "inputs": [
+    {
+      "file": "DSC09916.ARW",
+      "path": "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\DSC09916.ARW",
+      "sha256": "6f596bb234ee5de206c66594bc84205349c363fd6a89ae188ff76dab7c5e53b9",
+      "rechecked": true
+    },
+    {
+      "file": "DSCF0347.RAF",
+      "path": "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\DSCF0347.RAF",
+      "sha256": "52d054ed9a90306db0b7eb5d6c408a2e006532b976ac88ed792692f9f744e865",
+      "rechecked": true
+    },
+    {
+      "file": "TNAN8886.CR3",
+      "path": "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\TNAN8886.CR3",
+      "sha256": "b7d358517db0cd5b5c54215aa089a5a30c79234aef50e9381931128493e33401",
+      "rechecked": true
+    }
+  ],
+  "oldDecodeEvidence": [
+    "docs/evidence/company-validation-20261015/raw-inputs/TNAN8886.CR3.json",
+    "docs/evidence/company-validation-20261015/raw-inputs/DSCF0347.RAF.json",
+    "docs/evidence/company-validation-20261015/raw-inputs/DSC09916.ARW.json"
+  ],
+  "frozenFiles": [
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/PublicCubeAndLegacyTests.cs",
+      "sha256": "c03a6d0653db50becef17567cc450f5ced28538313497c3784052e717c3497d7"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/AssetLibraryP3PerformanceTests.cs",
+      "sha256": "3c66ec4cb12d877d10793b30aa4d25bae4b4c6cabbf93a480fa18e6008634648"
+    }
+  ],
+  "migration": false
+}

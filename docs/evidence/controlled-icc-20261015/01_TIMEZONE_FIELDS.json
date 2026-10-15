@@ -1,0 +1,40 @@
+{
+  "requestedHistoricalAcceptanceZone": "Asia/Shanghai",
+  "taskDate": "2026-10-15",
+  "clientClockZone": "Europe/Berlin",
+  "scope": "User supplied business-acceptance timezone correction; client session context remains separately recorded",
+  "originalFilesUnchanged": true,
+  "originalTimestampBytesUnchanged": true,
+  "fields": [
+    {
+      "file": "docs/evidence/validation-closure-20261015/01_START.json",
+      "line": 3,
+      "text": "  \"timezone\": \"Europe/Berlin\",",
+      "impact": "context metadata only"
+    },
+    {
+      "file": "docs/evidence/validation-closure-20261015/02_RAW_CONCLUSION.md",
+      "line": 21,
+      "text": "失败保留：初次 C++ ABI 链接失败，随后只调用公开 C API 构建成功，不改DLL。02_BUILD_FAILED_CPP_ABI.json为原始失败。用户当地日期为2026-10-15 Europe/Berlin；01_START时区字段沿用了旧记录的Europe/Berlin，是元数据标记错误，不代表此次用户本地时区；此处明确纠正。",
+      "impact": "narrative only; no pixel/profile/hash/timestamp change"
+    },
+    {
+      "file": "docs/evidence/validation-closure-20261015/03_NATIVE_CONCLUSION.md",
+      "line": 7,
+      "text": "所有本轮观察文件带主机+08时区，用户当地日期/时区按2026-10-15 Europe/Berlin解释；不将主机时区当用户时区。02_RAW_CONCLUSION末尾沿用日期标签现于此更正为Europe/Berlin。本阶段是有证据的未执行记录，不是验收通过。",
+      "impact": "narrative only; no pixel/profile/hash/timestamp change"
+    },
+    {
+      "file": "docs/evidence/validation-closure-20261015/BUILD_PROVENANCE.json",
+      "line": 36,
+      "text": "  \"timeZone\": \"Europe/Berlin\"",
+      "impact": "context metadata only"
+    },
+    {
+      "file": "docs/evidence/validation-closure-20261015/DELIVERY.md",
+      "line": 3,
+      "text": "用户当地日期2026-10-15（Europe/Berlin）。主机原始采样+08时间戳原样保留。未向main合并、不强推；基线af78bb56b1eeec4e7c1a0b2de6f320dbbe33d458，从远端integration/kitao-company-validation-20261015核对后建立新独立research/kitao-validation-closure-20261015工作树。其他用户脏文件/分支/原失败/旧Release保留。",
+      "impact": "narrative only; no pixel/profile/hash/timestamp change"
+    }
+  ]
+}
