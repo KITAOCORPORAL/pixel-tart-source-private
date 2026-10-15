@@ -44,8 +44,9 @@ def run(source,out,dll,work,output,display):
  def render(recipe):
   assert recipe['algorithm']==VERSION and recipe['mapping']=='ExportClip0To1V2 ONLY after outputlinearconversion'
   working_values=transform(x,embedded,working,lib);edited=working_values*np.float32(2**recipe['exposureEv']);linear=transform(edited,working,target,lib);mapped=np.clip(linear,0,1);codes=np.rint(mapped*65535).astype(np.uint16);return working_values,linear,codes
- w,l,c=render(recipe);w2,l2,c2=render(json.loads(json.dumps(recipe)));assert np.array_equal(l,l2) and np.array_equal(c,c2)
- out.mkdir(parents=True);tifffile.imwrite(out/'before-map-extended-float.tif',l,photometric='rgb',extratags=[(34675,'B',len(target),target,False)]);tifffile.imwrite(out/'output-linear.tif',c,photometric='rgb',extratags=[(34675,'B',len(target),target,False)]);png16(out/'output-linear.png',c,target)
+ out.mkdir(parents=True);(out/'recipe.json').write_text(json.dumps(recipe,indent=2));saved=json.loads((out/'recipe.json').read_text());assert saved['sourceSha256']==digest(source.read_bytes()) and saved['inputProfile']==digest(embedded) and saved['workingProfile']==digest(working) and saved['outputProfile']==digest(target)
+ w,l,c=render(recipe);w2,l2,c2=render(saved);assert np.array_equal(l,l2) and np.array_equal(c,c2)
+ tifffile.imwrite(out/'before-map-extended-float.tif',l,photometric='rgb',extratags=[(34675,'B',len(target),target,False)]);tifffile.imwrite(out/'output-linear.tif',c,photometric='rgb',extratags=[(34675,'B',len(target),target,False)]);png16(out/'output-linear.png',c,target)
  # Same mapped linear codes define preview and exports; display is explicit nonlinear sRGB, never rawlinearonscreen.
  linear=c.astype(np.float64)/65535;encoded=np.where(linear<=.0031308,12.92*linear,1.055*np.power(linear,1/2.4)-.055);preview=np.rint(encoded*255).astype(np.uint8);Image.fromarray(preview).save(out/'display.png',icc_profile=display_icc);Image.fromarray(preview).save(out/'display.jpg',quality=100,subsampling=0,icc_profile=display_icc)
  png,pi=read_png16(out/'output-linear.png');assert np.array_equal(png,c) and pi==target;assert np.array_equal(tifffile.imread(out/'output-linear.tif'),c);assert np.array_equal(np.asarray(Image.open(out/'display.png')),preview)
