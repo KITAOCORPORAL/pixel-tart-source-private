@@ -100,13 +100,8 @@ public sealed partial class AssetLibraryViewModel
             if (IsTemporaryVisualMode) bytes = AssetCards.Sum(card => card.Asset.FileSize);
             else
             {
-                do
-                {
-                    var page = await _repository.QueryAsync(query, _lifetimeCancellation.Token);
-                    if (generation != Volatile.Read(ref _collectionSummaryGeneration)) return;
-                    bytes += page.Items.Sum(asset => asset.FileSize);
-                    query = query with { Cursor = page.NextCursor };
-                } while (query.Cursor is not null);
+                bytes=await Task.Run(()=>_repository.QueryTotalBytesAsync(query,_lifetimeCancellation.Token),_lifetimeCancellation.Token);
+                if(generation!=Volatile.Read(ref _collectionSummaryGeneration))return;
             }
             if (generation == Volatile.Read(ref _collectionSummaryGeneration)) CollectionTotalSize = FormatInspectorBytes(bytes);
             OnPropertyChanged(nameof(InspectorFilterSummary));

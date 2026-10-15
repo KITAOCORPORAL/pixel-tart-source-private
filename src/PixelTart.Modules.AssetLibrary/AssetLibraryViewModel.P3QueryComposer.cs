@@ -78,7 +78,7 @@ public sealed partial class AssetLibraryViewModel
             // Scope changes are explicit navigation, not free-text input. Refresh
             // immediately so the user does not pay the search debounce twice.
             CommitP3QueryDocument(scheduleRefresh: false);
-            if (IsReady && !_isRestoringWorkspace) _p3ScopeRefreshTask = RefreshAsync();
+            if (IsReady && !_isRestoringWorkspace) _p3ScopeRefreshTask = RefreshScopeAsync();
         }
     }
 

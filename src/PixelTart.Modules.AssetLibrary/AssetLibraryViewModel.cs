@@ -1022,7 +1022,14 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             _ = await RefreshAsync(initializationAttempt: null, _lifetimeCancellation.Token));
     }
 
-    private async Task<AssetLibraryRefreshOutcome> RefreshAsync(int? initializationAttempt, CancellationToken cancellationToken)
+    private async Task RefreshScopeAsync()
+    {
+        // Scope changes alter only the visible query, not library-wide collection
+        // membership. Counts were established at load and are refreshed on mutations.
+        await RunTrackedP3OperationAsync(async()=>_ = await RefreshAsync(null,_lifetimeCancellation.Token,refreshSystemCounts:false));
+    }
+
+    private async Task<AssetLibraryRefreshOutcome> RefreshAsync(int? initializationAttempt, CancellationToken cancellationToken, bool refreshSystemCounts=true)
     {
         using var timing = AssetLibraryOperationTiming.Measure("viewmodel.refresh");
         CancelLoadMoreRequest();
@@ -1085,7 +1092,7 @@ public sealed partial class AssetLibraryViewModel : ObservableObject, IAsyncDisp
             }
             await ReconcilePersistedSelectionAsync(token);
             if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
-            await RefreshSystemCollectionCountsAsync(token);
+            if(refreshSystemCounts)await RefreshSystemCollectionCountsAsync(token);
             if (generation != Volatile.Read(ref _queryGeneration)) return AssetLibraryRefreshOutcome.Superseded;
             OnPropertyChanged(nameof(VisibleCount)); NotifyLoadMoreState();
 #if ASSET_LIBRARY_P3_AUTOMATED_ACCEPTANCE

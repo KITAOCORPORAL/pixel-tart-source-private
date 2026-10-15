@@ -22,6 +22,9 @@ public sealed class AssetLibraryP3PerformanceTests
     public async Task TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds()
     {
         await using var setup = await AssetLibraryP3TestSetup.CreateAsync();
+        var trace=new List<RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryQueryDiagnostics.Query>();
+        using var capture=RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryQueryDiagnostics.Capture(trace.Add);
+        try{
         var now = new DateTimeOffset(2026, 9, 2, 0, 0, 0, TimeSpan.Zero);
         var seeds = Enumerable.Range(0, 10_000)
             .Select(index => new AssetLibraryP3Seed(
@@ -109,6 +112,18 @@ public sealed class AssetLibraryP3PerformanceTests
         var batch500 = await MeasureOnceAsync(() => setup.Repository.ApplyBatchMetadataAsync(batch500Request, batch500Preview));
         Assert.AreEqual(500, batch500.Value.ChangedCount);
         AssertWithin("500 项批量标签操作", batch500.Elapsed, Batch500Limit);
+        }finally{
+            if(Environment.GetEnvironmentVariable("KITAO_P3_TRACE") is {} output)
+            {
+                Directory.CreateDirectory(output);var plans=new List<object>();
+                await using var connection=new Microsoft.Data.Sqlite.SqliteConnection("Data Source="+setup.DatabasePath);await connection.OpenAsync();
+                foreach(var q in trace){var explanations=new List<object>();foreach(var (sql,parameters) in new[]{(q.CountSql,q.CountParameters),(q.PageSql,q.PageParameters)}){await using var command=connection.CreateCommand();command.CommandText="EXPLAIN QUERY PLAN "+sql;foreach(var pair in parameters)command.Parameters.AddWithValue(pair.Key,pair.Value??DBNull.Value);var rows=new List<string>();await using var reader=await command.ExecuteReaderAsync();while(await reader.ReadAsync())rows.Add(reader.GetString(3));explanations.Add(new{sql,parameters,rows});}plans.Add(new{query=q,explanations});}
+                var settings=new Dictionary<string,object?>();foreach(var pragma in new[]{"journal_mode","synchronous","cache_size","page_size","data_version"}){await using var command=connection.CreateCommand();command.CommandText="PRAGMA "+pragma;settings[pragma]=await command.ExecuteScalarAsync();}
+                var drive=new DriveInfo(Path.GetPathRoot(setup.DatabasePath)!);var report=new{database=setup.DatabasePath,sqlite=connection.ServerVersion,settings,drive.AvailableFreeSpace,drive.DriveFormat,observations=plans,cache="Initial first-screen call labeled cold-process; subsequent same-connection-pool queries warm; OS cache not forcibly evicted",thresholdMs=400};
+                await File.WriteAllTextAsync(Path.Combine(output,Guid.NewGuid()+".json"),System.Text.Json.JsonSerializer.Serialize(report,new System.Text.Json.JsonSerializerOptions{WriteIndented=true}));
+            }
+        }
+
     }
 
     private static AssetQueryDocument CreateEightRuleThreeLevelDocument() => new()
@@ -140,14 +155,15 @@ public sealed class AssetLibraryP3PerformanceTests
         return new Guid(bytes);
     }
 
-    private static async Task<(TimeSpan Worst, T Value)> WorstOfThreeAsync<T>(Func<Task<T>> action)
+    private async Task<(TimeSpan Worst, T Value)> WorstOfThreeAsync<T>(Func<Task<T>> action)
     {
-        _ = await action();
+        var cold=await MeasureOnceAsync(action);TestContext.WriteLine($"Cold/priming {typeof(T).Name}: {cold.Elapsed.TotalMilliseconds:F3}ms");
         var worst = TimeSpan.Zero;
         T value = default!;
         for (var run = 0; run < 3; run++)
         {
             var measured = await MeasureOnceAsync(action);
+            TestContext.WriteLine($"Warm sample {run+1}/3 {typeof(T).Name}: {measured.Elapsed.TotalMilliseconds:F3}ms");
             if (measured.Elapsed > worst) worst = measured.Elapsed;
             value = measured.Value;
         }

@@ -11,6 +11,24 @@ namespace RAWSelectionAssistant.Core.Services.AssetLibrary;
 
 public sealed partial class SqliteAssetLibraryRepository
 {
+    public async Task<long> QueryTotalBytesAsync(AssetLibraryQuery query,CancellationToken cancellationToken=default)
+    {
+        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        // Keep the existing general/regex/visual semantics as fallback. The ordinary
+        // canonical P3 query can be aggregated in SQL without materializing every page.
+        if(query.Document is null||query.SmartFolderId is not null||!string.IsNullOrWhiteSpace(query.FileNameRegex))
+        {long bytes=0;string? cursor=null;do{var page=await QueryAsync(query with{Cursor=cursor,PageSize=500},cancellationToken).ConfigureAwait(false);bytes+=page.Items.Sum(x=>x.FileSize);cursor=page.NextCursor;}while(cursor is not null);return bytes;}
+        var normalized=AssetQueryDocumentCodec.Normalize(query.Document);
+        if(!normalized.IsValid||normalized.Document is null)throw new InvalidDataException(normalized.ErrorMessage);
+        query=ApplyP3DocumentBaseQuery(query with{Cursor=null},normalized.Document);
+        await using var connection=await _database.OpenConnectionAsync(cancellationToken:cancellationToken).ConfigureAwait(false);
+        var references=await ValidateQueryReferencesAsync(connection,normalized.Document,cancellationToken).ConfigureAwait(false);
+        if(references.Count!=0)throw new InvalidDataException(string.Join(";",references.Select(x=>x.Message)));
+        var runtime=ValidateRuntimeRules(normalized.Document.RootGroup);if(runtime is not null)throw new InvalidDataException(runtime);
+        await using var command=connection.CreateCommand();command.CommandText="SELECT COALESCE(SUM(a.FileSize),0) FROM AssetItems a WHERE "+BuildIndexedWhere(query,command)+" AND "+CompileP3Node(normalized.Document.RootGroup,command)+";";
+        using var timing=AssetLibraryOperationTiming.Measure("repository.collection-bytes-aggregate");return Convert.ToInt64(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false),CultureInfo.InvariantCulture);
+    }
+
     public async Task<AssetQueryExecutionPlan> ExplainQueryPlanAsync(
         AssetLibraryQuery query,
         CancellationToken cancellationToken = default)
@@ -217,7 +235,9 @@ public sealed partial class SqliteAssetLibraryRepository
         var countWhere = BuildIndexedWhere(query, count);
         countWhere += " AND " + CompileP3Node(document.RootGroup, count);
         count.CommandText = "SELECT COUNT(*) FROM AssetItems a WHERE " + countWhere + ";";
+        var countStart=System.Diagnostics.Stopwatch.GetTimestamp();
         var total = Convert.ToInt32(await count.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false), CultureInfo.InvariantCulture);
+        var countMs=System.Diagnostics.Stopwatch.GetElapsedTime(countStart).TotalMilliseconds;
 
         await using var page = connection.CreateCommand();
         var pageWhere = BuildIndexedWhere(query, page);
@@ -225,6 +245,7 @@ public sealed partial class SqliteAssetLibraryRepository
         if (cursor is not null) pageWhere = AddQueryCursorPredicate(pageWhere, query, cursor, page);
         page.CommandText = SelectAssetSql + " WHERE " + pageWhere + " ORDER BY " + BuildQueryOrderBy(query) + " LIMIT $limit;";
         page.Parameters.AddWithValue("$limit", pageSize + 1);
+        var pageStart=System.Diagnostics.Stopwatch.GetTimestamp();
         var items = new List<AssetItem>(Math.Min(total, pageSize + 1));
         await using var reader = await page.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
         while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) items.Add(ReadAsset(reader));
@@ -233,6 +254,7 @@ public sealed partial class SqliteAssetLibraryRepository
         var next = hasMore && items.Count != 0
             ? await CreateQueryCursorAsync(query, items[^1], cancellationToken).ConfigureAwait(false)
             : null;
+        AssetLibraryQueryDiagnostics.Emit(count,page,countMs,System.Diagnostics.Stopwatch.GetElapsedTime(pageStart).TotalMilliseconds,total);
         return new(items, next, total);
     }
 

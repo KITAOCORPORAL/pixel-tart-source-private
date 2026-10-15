@@ -69,6 +69,10 @@ public interface IAssetLibraryRepository : IAsyncDisposable
         throw new NotSupportedException("此素材库仓储尚未提供带身份的导入结果。");
 
     Task<AssetItem?> GetAssetAsync(Guid assetId, CancellationToken cancellationToken = default);
+    async Task<long> QueryTotalBytesAsync(AssetLibraryQuery query,CancellationToken cancellationToken=default)
+    {
+        long bytes=0;string? cursor=null;do{var page=await QueryAsync(query with{Cursor=cursor,PageSize=500},cancellationToken);bytes+=page.Items.Sum(x=>x.FileSize);cursor=page.NextCursor;}while(cursor is not null);return bytes;
+    }
     Task<AssetDimensionBackfillResult> BackfillMissingDimensionsAsync(CancellationToken cancellationToken = default, IProgress<int>? progress = null);
     Task<AssetLibraryPage> QueryAsync(AssetLibraryQuery query, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<AssetQueryValidationIssue>> ValidateQueryReferencesAsync(AssetQueryDocument document, CancellationToken cancellationToken = default);

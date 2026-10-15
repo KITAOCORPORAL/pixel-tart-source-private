@@ -2075,6 +2075,12 @@
       "stage": "prepublish"
     },
     {
+      "name": "RAWSelectionAssistant.Tests.CompanyQueryAggregateTests.AggregateBytesMatchesPagedOracleAcrossScopeArchiveAndFilter",
+      "category": "required_automatic",
+      "stage": "prepublish",
+      "reason": "Aggregate must preserve exact query byte/count scope semantics."
+    },
+    {
       "name": "RAWSelectionAssistant.Tests.CoreReliabilityRc3ContractTests.FailurePayload_IsValidJsonAfterProtocolPrefix",
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",
@@ -11957,6 +11963,12 @@
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",
       "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.CompanyScopeSwitchTests.ScopeSwitchReusesGlobalCountsAndPreservesVisibleSortAndMutationRefresh",
+      "category": "required_automatic",
+      "stage": "prepublish",
+      "reason": "Scope-only UI refresh must preserve global counts, visible sort, and mutation refresh."
     },
     {
       "name": "RAWSelectionAssistant.WpfTests.ContextMenuPlacementTests.InspectionStaysWithOwnerOnNegativeOriginMonitorAtEveryDpi",
