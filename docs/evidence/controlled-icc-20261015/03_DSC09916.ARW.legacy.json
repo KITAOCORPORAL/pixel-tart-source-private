@@ -1,0 +1,183 @@
+{
+  "source": "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\DSC09916.ARW",
+  "sourceSha256": "6F596BB234EE5DE206C66594BC84205349C363FD6A89AE188FF76DAB7C5E53B9",
+  "sourceUnchanged": true,
+  "tags": [
+    {
+      "directory": "Exif IFD0",
+      "Name": "Make",
+      "Description": "SONY"
+    },
+    {
+      "directory": "Exif IFD0",
+      "Name": "Model",
+      "Description": "ILCE-7M4"
+    },
+    {
+      "directory": "Exif IFD0",
+      "Name": "Orientation",
+      "Description": "Left side, bottom (Rotate 270 CW)"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Image Width",
+      "Description": "5120 pixels"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Image Height",
+      "Description": "3584 pixels"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Bits Per Sample",
+      "Description": "15 15 15 bits/component/pixel"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Reference Black/White",
+      "Description": "[0,16384,16384] [16383,16384,16384]"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Tile Width",
+      "Description": "512"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Compressed Bits Per Pixel",
+      "Description": "15 bits/pixel"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "White Balance",
+      "Description": "Flash"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Color Space",
+      "Description": "sRGB"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Exif Image Width",
+      "Description": "4096 pixels"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Exif Image Height",
+      "Description": "3072 pixels"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "White Balance Mode",
+      "Description": "Manual white balance"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Lens Model",
+      "Description": "FE 24-70mm F2.8 GM"
+    },
+    {
+      "directory": "Sony Makernote",
+      "Name": "White Balance Fine Tune Value",
+      "Description": "0"
+    },
+    {
+      "directory": "Sony Makernote",
+      "Name": "White Balance",
+      "Description": "Flash"
+    },
+    {
+      "directory": "Sony Makernote",
+      "Name": "Sony Model ID",
+      "Description": "Unknown (388)"
+    },
+    {
+      "directory": "Sony Makernote",
+      "Name": "White Balance 2",
+      "Description": "15"
+    },
+    {
+      "directory": "Exif Thumbnail",
+      "Name": "Make",
+      "Description": "SONY"
+    },
+    {
+      "directory": "Exif Thumbnail",
+      "Name": "Model",
+      "Description": "ILCE-7M4"
+    },
+    {
+      "directory": "Exif Thumbnail",
+      "Name": "Orientation",
+      "Description": "Left side, bottom (Rotate 270 CW)"
+    },
+    {
+      "directory": "Exif Image",
+      "Name": "Image Width",
+      "Description": "4096 pixels"
+    },
+    {
+      "directory": "Exif Image",
+      "Name": "Image Height",
+      "Description": "3072 pixels"
+    },
+    {
+      "directory": "Exif Image",
+      "Name": "Bits Per Sample",
+      "Description": "8 8 8 bits/component/pixel"
+    },
+    {
+      "directory": "Exif Image",
+      "Name": "Orientation",
+      "Description": "Left side, bottom (Rotate 270 CW)"
+    },
+    {
+      "directory": "Exif Image",
+      "Name": "Reference Black/White",
+      "Description": "[0,128,128] [255,128,128]"
+    }
+  ],
+  "decoder": {
+    "IsAvailable": true,
+    "DecoderName": "LibRaw",
+    "Version": "0.21.1-Release",
+    "CandidateExtensions": [
+      ".3FR",
+      ".ARW",
+      ".CR2",
+      ".CR3",
+      ".DNG",
+      ".FFF",
+      ".IIQ",
+      ".NEF",
+      ".NRW",
+      ".ORF",
+      ".ORI",
+      ".PEF",
+      ".RAF",
+      ".RW2",
+      ".RWL",
+      ".SRW",
+      ".X3F"
+    ],
+    "VerifiedExtensions": [],
+    "UnavailableReason": null
+  },
+  "milliseconds": 58.1888,
+  "decoded": {
+    "status": "DECODE_REFUSED",
+    "error": "RAWSelectionAssistant.Core.Services.RawToJpeg.RawDecodeException: The RAW file could not be decoded safely.\r\n ---\u003E Sdcb.LibRaw.LibRawException: Failed opening file: D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\DSC09916.ARW\r\n   at Sdcb.LibRaw.RawContext.OpenFile(String filePath, LibRawInitFlags flags)\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.DecodeCore(String sourcePath, String extension, RawToJpegOptions options, CancellationToken cancellationToken)\r\n   --- End of inner exception stack trace ---\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.DecodeCore(String sourcePath, String extension, RawToJpegOptions options, CancellationToken cancellationToken)\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.\u003C\u003Ec__DisplayClass4_0.\u003CDecodeAsync\u003Eb__0()\r\n   at System.Threading.Tasks.Task\u00601.InnerInvoke()\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n--- End of stack trace from previous location ---\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task\u0026 currentTaskSlot, Thread threadPoolThread)\r\n--- End of stack trace from previous location ---\r\n   at Program.\u003CMain\u003E$(String[] args)",
+    "code": "RAW_NATIVE_FILE_UNSUPPORTED",
+    "retainedHistoricalSonyUnsupported": true
+  },
+  "stages": {
+    "sensorBeforeBlack": "UNAVAILABLE",
+    "afterBlackBeforeMatrix": "UNAVAILABLE",
+    "whiteBalancedPreMatrix": "UNAVAILABLE",
+    "finalRgb16": "Observed only on successful decode"
+  },
+  "CalibrationEligible": false,
+  "notUploaded": true
+}

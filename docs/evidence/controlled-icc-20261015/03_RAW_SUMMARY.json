@@ -1,0 +1,94 @@
+[
+  {
+    "file": "DSC09916.ARW",
+    "legacyVersion": "0.21.1-Release",
+    "legacy": {
+      "status": "DECODE_REFUSED",
+      "error": "RAWSelectionAssistant.Core.Services.RawToJpeg.RawDecodeException: The RAW file could not be decoded safely.\r\n ---> Sdcb.LibRaw.LibRawException: Failed opening file: D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\DSC09916.ARW\r\n   at Sdcb.LibRaw.RawContext.OpenFile(String filePath, LibRawInitFlags flags)\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.DecodeCore(String sourcePath, String extension, RawToJpegOptions options, CancellationToken cancellationToken)\r\n   --- End of inner exception stack trace ---\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.DecodeCore(String sourcePath, String extension, RawToJpegOptions options, CancellationToken cancellationToken)\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.<>c__DisplayClass4_0.<DecodeAsync>b__0()\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n--- End of stack trace from previous location ---\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)\r\n--- End of stack trace from previous location ---\r\n   at Program.<Main>$(String[] args)",
+      "code": "RAW_NATIVE_FILE_UNSUPPORTED",
+      "retainedHistoricalSonyUnsupported": true
+    },
+    "candidateLog": "03_DSC09916.ARW.candidate.log",
+    "identity": {
+      "sha256": "6F596BB234EE5DE206C66594BC84205349C363FD6A89AE188FF76DAB7C5E53B9",
+      "after": "6F596BB234EE5DE206C66594BC84205349C363FD6A89AE188FF76DAB7C5E53B9",
+      "candidateExit": 0
+    }
+  },
+  {
+    "file": "DSCF0347.RAF",
+    "legacyVersion": "0.21.1-Release",
+    "legacy": {
+      "status": "OBSERVED_FINAL_RGB16_ONLY",
+      "Width": 7752,
+      "Height": 5184,
+      "BitsPerChannel": 16,
+      "PixelFormat": "RGB48",
+      "Metadata": {
+        "CameraMake": "Fujifilm",
+        "CameraModel": "X-T5",
+        "CapturedAt": "2026-09-27T11:20:32+00:00",
+        "Orientation": 1,
+        "ColorSpace": "sRGB"
+      },
+      "min": 0,
+      "max": 65535,
+      "zero": [
+        1516449,
+        2487546,
+        4005931
+      ],
+      "saturation": [
+        404194,
+        91007,
+        19003
+      ],
+      "pixelSha256": "68A3DA7D3DA14D70ACEA04D7A8B8A0B51BE54BFD53AEECC60FB2FFA5835FBA78",
+      "domain": "Legacy LibRaw output: camera WB baked, sRGB primaries and decoder gamma; not PV4 ProPhoto; no sensor intermediate claims"
+    },
+    "candidateLog": "03_DSCF0347.RAF.candidate.log",
+    "identity": {
+      "sha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+      "after": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+      "candidateExit": 0
+    }
+  },
+  {
+    "file": "TNAN8886.CR3",
+    "legacyVersion": "0.21.1-Release",
+    "legacy": {
+      "status": "OBSERVED_FINAL_RGB16_ONLY",
+      "Width": 5496,
+      "Height": 3670,
+      "BitsPerChannel": 16,
+      "PixelFormat": "RGB48",
+      "Metadata": {
+        "CameraMake": "Canon",
+        "CameraModel": "EOS R6",
+        "CapturedAt": "2023-11-26T10:36:56+00:00",
+        "Orientation": 1,
+        "ColorSpace": "sRGB"
+      },
+      "min": 0,
+      "max": 65535,
+      "zero": [
+        1294743,
+        1329091,
+        1029562
+      ],
+      "saturation": [
+        205816,
+        1,
+        1
+      ],
+      "pixelSha256": "44B64876390F0B95F2EC6E64864C81A7AE02DA04865E614B36A44D67448581C1",
+      "domain": "Legacy LibRaw output: camera WB baked, sRGB primaries and decoder gamma; not PV4 ProPhoto; no sensor intermediate claims"
+    },
+    "candidateLog": "03_TNAN8886.CR3.candidate.log",
+    "identity": {
+      "sha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+      "after": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+      "candidateExit": 0
+    }
+  }
+]

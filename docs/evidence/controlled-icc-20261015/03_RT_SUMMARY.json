@@ -1,0 +1,94 @@
+[
+  {
+    "file": "DSC09916.ARW",
+    "mode": true,
+    "code": 0,
+    "stages": [
+      "raw dimensions: 4624 x 3080\r",
+      "black levels: R:512 G1:512 B:512 G2:512 (provided by libraw)\r",
+      "white levels: R:32767 G1:32767 B:32767 G2:32767 (provided by libraw)\r",
+      "raw crop: 0 0 4624 3080 (provided by libraw)\r",
+      "color matrix provided by camconst.json\r",
+      "pre_mul:[1.000000 0.388762 0.701215 0.388762], scale_mul:[2.031778 0.789879 1.424713 0.789879], cblack:[512.000000 512.000000 512.000000 512.000000]\r",
+      "Raw As Shot White balance: temp 5114.742279, tint 0.840151\r",
+      "pre_mul:[0.913711 0.984684 1.000000 0.984684], scale_mul:[1.856457 2.000660 2.031778 2.000660], cblack:[512.000000 512.000000 512.000000 512.000000]\r",
+      "Raw Reference white balance: temp 4079.280853, tint 4.139114, multipliers [3.715997 0.617199 1.399181 | 2.679023 1.293448 0.946433]\r"
+    ],
+    "stderr": ""
+  },
+  {
+    "file": "DSCF0347.RAF",
+    "mode": true,
+    "code": 0,
+    "stages": [
+      "raw dimensions: 7872 x 5196\r",
+      "black levels: R:1020 G1:1020 B:1020 G2:1020 (provided by libraw)\r",
+      "white levels: R:16383 G1:16383 B:16383 G2:16383 (provided by libraw)\r",
+      "raw crop: 0 6 7752 5178 (provided by camconst.json)\r",
+      "color matrix provided by camconst.json\r",
+      "pre_mul:[0.897436 0.516239 1.000000 0.516239], scale_mul:[3.828254 2.202157 4.265769 2.202157], cblack:[1020.000000 1020.000000 1020.000000 1020.000000]\r",
+      "Raw As Shot White balance: temp 4536.312103, tint 1.073038\r",
+      "pre_mul:[0.304167 0.269459 1.000000 0.269459], scale_mul:[1.297506 1.149448 4.265769 1.149448], cblack:[1020.000000 1020.000000 1020.000000 1020.000000]\r",
+      "Raw Reference white balance: temp 2613.567352, tint 0.897288, multipliers [8.477997 3.748873 0.720802 | 7.110519 1.433589 3.475697]\r"
+    ],
+    "stderr": ""
+  },
+  {
+    "file": "TNAN8886.CR3",
+    "mode": true,
+    "code": 0,
+    "stages": [
+      "raw dimensions: 5568 x 3708\r",
+      "black levels: R:2048 G1:2048 B:2048 G2:2048 (provided by camconst.json)\r",
+      "white levels: R:16382 G1:16382 B:16382 G2:16382 (provided by camconst.json)\r",
+      "raw crop: 72 38 5496 3670 (provided by camconst.json)\r",
+      "color matrix provided by camconst.json\r",
+      "pre_mul:[1.000000 0.558647 0.882706 0.558647], scale_mul:[4.571997 2.554132 4.035728 2.554132], cblack:[2048.000000 2048.000000 2048.000000 2048.000000]\r",
+      "Raw As Shot White balance: temp 5134.380341, tint 1.096031\r",
+      "pre_mul:[0.886763 0.590587 1.000000 0.590587], scale_mul:[4.054279 2.700160 4.571997 2.700160], cblack:[2048.000000 2048.000000 2048.000000 2048.000000]\r",
+      "Raw Reference white balance: temp 4344.394684, tint 1.243783, multipliers [2.699009 1.587981 1.194960 | 2.238087 1.342454 1.587847]\r"
+    ],
+    "stderr": ""
+  },
+  {
+    "file": "DSC09916.ARW",
+    "mode": false,
+    "code": 4294967294,
+    "stages": [],
+    "stderr": "Error loading file: D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\DSC09916.ARW\r\n"
+  },
+  {
+    "file": "DSCF0347.RAF",
+    "mode": false,
+    "code": 0,
+    "stages": [
+      "raw dimensions: 7872 x 5196\r",
+      "black levels: R:1020 G1:1020 B:1020 G2:1020 (provided by dcraw)\r",
+      "white levels: R:16383 G1:16383 B:16383 G2:16383 (provided by dcraw)\r",
+      "raw crop: 0 5 7752 5184 (provided by camconst.json)\r",
+      "color matrix provided by camconst.json\r",
+      "pre_mul:[0.897436 0.516239 1.000000 0.516239], scale_mul:[3.828254 2.202157 4.265769 2.202157], cblack:[1020.000000 1020.000000 1020.000000 1020.000000]\r",
+      "Raw As Shot White balance: temp 4536.312103, tint 1.073038\r",
+      "pre_mul:[0.304177 0.269480 1.000000 0.269480], scale_mul:[1.297548 1.149540 4.265769 1.149540], cblack:[1020.000000 1020.000000 1020.000000 1020.000000]\r",
+      "Raw Reference white balance: temp 2613.567352, tint 0.897353, multipliers [8.477719 3.748476 0.720902 | 7.110288 1.433589 3.475419]\r"
+    ],
+    "stderr": ""
+  },
+  {
+    "file": "TNAN8886.CR3",
+    "mode": false,
+    "code": 0,
+    "stages": [
+      "raw dimensions: 5568 x 3708\r",
+      "black levels: R:2048 G1:2048 B:2048 G2:2048 (provided by camconst.json)\r",
+      "white levels: R:16382 G1:16382 B:16382 G2:16382 (provided by camconst.json)\r",
+      "raw crop: 72 38 5496 3670 (provided by camconst.json)\r",
+      "color matrix provided by camconst.json\r",
+      "pre_mul:[1.000000 0.558647 0.882706 0.558647], scale_mul:[4.571997 2.554132 4.035728 2.554132], cblack:[2048.000000 2048.000000 2048.000000 2048.000000]\r",
+      "Raw As Shot White balance: temp 5134.380341, tint 1.096031\r",
+      "pre_mul:[0.886763 0.590587 1.000000 0.590587], scale_mul:[4.054279 2.700160 4.571997 2.700160], cblack:[2048.000000 2048.000000 2048.000000 2048.000000]\r",
+      "Raw Reference white balance: temp 4344.394684, tint 1.243783, multipliers [2.699009 1.587981 1.194960 | 2.238087 1.342454 1.587847]\r"
+    ],
+    "stderr": ""
+  }
+]

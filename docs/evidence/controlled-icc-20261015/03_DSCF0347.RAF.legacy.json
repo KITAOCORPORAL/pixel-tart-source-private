@@ -1,0 +1,157 @@
+{
+  "source": "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\DSCF0347.RAF",
+  "sourceSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+  "sourceUnchanged": true,
+  "tags": [
+    {
+      "directory": "JPEG",
+      "Name": "Image Height",
+      "Description": "2944 pixels"
+    },
+    {
+      "directory": "JPEG",
+      "Name": "Image Width",
+      "Description": "4416 pixels"
+    },
+    {
+      "directory": "Exif IFD0",
+      "Name": "Make",
+      "Description": "FUJIFILM"
+    },
+    {
+      "directory": "Exif IFD0",
+      "Name": "Model",
+      "Description": "X-T5"
+    },
+    {
+      "directory": "Exif IFD0",
+      "Name": "Orientation",
+      "Description": "Top, left side (Horizontal / normal)"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Compressed Bits Per Pixel",
+      "Description": "3.2 bits/pixel"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "White Balance",
+      "Description": "Unknown"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Color Space",
+      "Description": "sRGB"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Exif Image Width",
+      "Description": "4416 pixels"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Exif Image Height",
+      "Description": "2944 pixels"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "White Balance Mode",
+      "Description": "Manual white balance"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Lens Make",
+      "Description": "FUJIFILM"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Lens Model",
+      "Description": "XF16-55mmF2.8 R LM WR II"
+    },
+    {
+      "directory": "Fujifilm Makernote",
+      "Name": "Makernote Version",
+      "Description": "1.30"
+    },
+    {
+      "directory": "Fujifilm Makernote",
+      "Name": "White Balance",
+      "Description": "Kelvin"
+    },
+    {
+      "directory": "Fujifilm Makernote",
+      "Name": "White Balance Fine Tune",
+      "Description": "0 0"
+    },
+    {
+      "directory": "Exif Thumbnail",
+      "Name": "Orientation",
+      "Description": "Top, left side (Horizontal / normal)"
+    }
+  ],
+  "decoder": {
+    "IsAvailable": true,
+    "DecoderName": "LibRaw",
+    "Version": "0.21.1-Release",
+    "CandidateExtensions": [
+      ".3FR",
+      ".ARW",
+      ".CR2",
+      ".CR3",
+      ".DNG",
+      ".FFF",
+      ".IIQ",
+      ".NEF",
+      ".NRW",
+      ".ORF",
+      ".ORI",
+      ".PEF",
+      ".RAF",
+      ".RW2",
+      ".RWL",
+      ".SRW",
+      ".X3F"
+    ],
+    "VerifiedExtensions": [
+      ".RAF"
+    ],
+    "UnavailableReason": null
+  },
+  "milliseconds": 5026.4597,
+  "decoded": {
+    "status": "OBSERVED_FINAL_RGB16_ONLY",
+    "Width": 7752,
+    "Height": 5184,
+    "BitsPerChannel": 16,
+    "PixelFormat": "RGB48",
+    "Metadata": {
+      "CameraMake": "Fujifilm",
+      "CameraModel": "X-T5",
+      "CapturedAt": "2026-09-27T11:20:32+00:00",
+      "Orientation": 1,
+      "ColorSpace": "sRGB"
+    },
+    "min": 0,
+    "max": 65535,
+    "zero": [
+      1516449,
+      2487546,
+      4005931
+    ],
+    "saturation": [
+      404194,
+      91007,
+      19003
+    ],
+    "pixelSha256": "68A3DA7D3DA14D70ACEA04D7A8B8A0B51BE54BFD53AEECC60FB2FFA5835FBA78",
+    "domain": "Legacy LibRaw output: camera WB baked, sRGB primaries and decoder gamma; not PV4 ProPhoto; no sensor intermediate claims"
+  },
+  "stages": {
+    "sensorBeforeBlack": "UNAVAILABLE",
+    "afterBlackBeforeMatrix": "UNAVAILABLE",
+    "whiteBalancedPreMatrix": "UNAVAILABLE",
+    "finalRgb16": "Observed only on successful decode"
+  },
+  "CalibrationEligible": false,
+  "notUploaded": true
+}

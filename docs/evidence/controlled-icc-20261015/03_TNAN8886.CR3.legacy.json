@@ -1,0 +1,202 @@
+{
+  "source": "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\TNAN8886.CR3",
+  "sourceSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+  "sourceUnchanged": true,
+  "tags": [
+    {
+      "directory": "Exif IFD0",
+      "Name": "Image Width",
+      "Description": "5472 pixels"
+    },
+    {
+      "directory": "Exif IFD0",
+      "Name": "Image Height",
+      "Description": "3648 pixels"
+    },
+    {
+      "directory": "Exif IFD0",
+      "Name": "Bits Per Sample",
+      "Description": "8 8 8 bits/component/pixel"
+    },
+    {
+      "directory": "Exif IFD0",
+      "Name": "Make",
+      "Description": "Canon"
+    },
+    {
+      "directory": "Exif IFD0",
+      "Name": "Model",
+      "Description": "Canon EOS R6"
+    },
+    {
+      "directory": "Exif IFD0",
+      "Name": "Orientation",
+      "Description": "Top, left side (Horizontal / normal)"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Color Space",
+      "Description": "sRGB"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Exif Image Width",
+      "Description": "5472 pixels"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Exif Image Height",
+      "Description": "3648 pixels"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "White Balance Mode",
+      "Description": "Auto white balance"
+    },
+    {
+      "directory": "Exif SubIFD",
+      "Name": "Lens Model",
+      "Description": "85mm F1.4 DG HSM | Art 016"
+    },
+    {
+      "directory": "Canon Makernote",
+      "Name": "Zoom Source Width",
+      "Description": "257"
+    },
+    {
+      "directory": "Canon Makernote",
+      "Name": "Zoom Target Width",
+      "Description": "0"
+    },
+    {
+      "directory": "Canon Makernote",
+      "Name": "White Balance",
+      "Description": "0"
+    },
+    {
+      "directory": "Canon Makernote",
+      "Name": "Canon Model ID",
+      "Description": "2147484755"
+    },
+    {
+      "directory": "Canon Makernote",
+      "Name": "Lens Model",
+      "Description": "85mm F1.4 DG HSM | Art 016"
+    },
+    {
+      "directory": "Canon Makernote",
+      "Name": "Color Space",
+      "Description": "1"
+    },
+    {
+      "directory": "Canon Makernote",
+      "Name": "Black Level",
+      "Description": "129 129 129"
+    },
+    {
+      "directory": "QuickTime Track Header",
+      "Name": "Width",
+      "Description": "5472"
+    },
+    {
+      "directory": "QuickTime Track Header",
+      "Name": "Height",
+      "Description": "3648"
+    },
+    {
+      "directory": "QuickTime Track Header",
+      "Name": "Width",
+      "Description": "1624"
+    },
+    {
+      "directory": "QuickTime Track Header",
+      "Name": "Height",
+      "Description": "1080"
+    },
+    {
+      "directory": "QuickTime Track Header",
+      "Name": "Width",
+      "Description": "5472"
+    },
+    {
+      "directory": "QuickTime Track Header",
+      "Name": "Height",
+      "Description": "3648"
+    },
+    {
+      "directory": "QuickTime Track Header",
+      "Name": "Width",
+      "Description": "0"
+    },
+    {
+      "directory": "QuickTime Track Header",
+      "Name": "Height",
+      "Description": "0"
+    }
+  ],
+  "decoder": {
+    "IsAvailable": true,
+    "DecoderName": "LibRaw",
+    "Version": "0.21.1-Release",
+    "CandidateExtensions": [
+      ".3FR",
+      ".ARW",
+      ".CR2",
+      ".CR3",
+      ".DNG",
+      ".FFF",
+      ".IIQ",
+      ".NEF",
+      ".NRW",
+      ".ORF",
+      ".ORI",
+      ".PEF",
+      ".RAF",
+      ".RW2",
+      ".RWL",
+      ".SRW",
+      ".X3F"
+    ],
+    "VerifiedExtensions": [
+      ".CR3"
+    ],
+    "UnavailableReason": null
+  },
+  "milliseconds": 1051.2164,
+  "decoded": {
+    "status": "OBSERVED_FINAL_RGB16_ONLY",
+    "Width": 5496,
+    "Height": 3670,
+    "BitsPerChannel": 16,
+    "PixelFormat": "RGB48",
+    "Metadata": {
+      "CameraMake": "Canon",
+      "CameraModel": "EOS R6",
+      "CapturedAt": "2023-11-26T10:36:56+00:00",
+      "Orientation": 1,
+      "ColorSpace": "sRGB"
+    },
+    "min": 0,
+    "max": 65535,
+    "zero": [
+      1294743,
+      1329091,
+      1029562
+    ],
+    "saturation": [
+      205816,
+      1,
+      1
+    ],
+    "pixelSha256": "44B64876390F0B95F2EC6E64864C81A7AE02DA04865E614B36A44D67448581C1",
+    "domain": "Legacy LibRaw output: camera WB baked, sRGB primaries and decoder gamma; not PV4 ProPhoto; no sensor intermediate claims"
+  },
+  "stages": {
+    "sensorBeforeBlack": "UNAVAILABLE",
+    "afterBlackBeforeMatrix": "UNAVAILABLE",
+    "whiteBalancedPreMatrix": "UNAVAILABLE",
+    "finalRgb16": "Observed only on successful decode"
+  },
+  "CalibrationEligible": false,
+  "notUploaded": true
+}
