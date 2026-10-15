@@ -3131,6 +3131,24 @@
       "stage": "prepublish"
     },
     {
+      "name": "RAWSelectionAssistant.Tests.NightColorBaselineTests.AcquisitionProtocolNeverAdmitsCalibrationFromMetadataAlone",
+      "category": "required_automatic",
+      "reason": "Night color science mandatory numeric/provenance regression.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.NightColorBaselineTests.DiagnosticsRecordNegativeExtendedFiniteAndRejectUnknownIdentity",
+      "category": "required_automatic",
+      "reason": "Night color science mandatory numeric/provenance regression.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.NightColorBaselineTests.SensorProbePreservesExtendedValuesAndCountsActualChannelSaturation",
+      "category": "required_automatic",
+      "reason": "Night color science mandatory numeric/provenance regression.",
+      "stage": "prepublish"
+    },
+    {
       "name": "RAWSelectionAssistant.Tests.OnboardingRequirementTests.BackButton_PersistsRequiredTutorialProgress",
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",
@@ -3821,6 +3839,30 @@
       "stage": "prepublish"
     },
     {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.InventoryIsReadOnlyProtectsDraftRecoveryAndUnknownFiles",
+      "category": "required_automatic",
+      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.LegacyExactIdentityFallbackMigratesOnlyAfterHashValidation",
+      "category": "required_automatic",
+      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.RelativePathsRequireBoundRootIdentityHashAndRejectTraversal",
+      "category": "required_automatic",
+      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.ReparseEscapeIsRefusedWithoutOpeningForeignCopy",
+      "category": "required_automatic",
+      "reason": "Required actual junction containment regression.",
+      "stage": "prepublish"
+    },
+    {
       "name": "RAWSelectionAssistant.Tests.PlanningPerformanceSmokeTests.DuplicateCaptureRelationsRemainIdempotentAtScale",
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",
@@ -4202,6 +4244,24 @@
       "name": "RAWSelectionAssistant.Tests.PublishingTiffAndXmpBatchTests.XmpImportProcessesFilesAndReportsProgress",
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.Pv7PrototypeTests.ExposureNeutralMonotonicSingleTransferAndQuantizationAreExplicit",
+      "category": "required_automatic",
+      "reason": "Night color science mandatory numeric/provenance regression.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.Pv7PrototypeTests.ExtendedPrimariesSkinAndBakedWhiteBalanceFailClosed",
+      "category": "required_automatic",
+      "reason": "Night color science mandatory numeric/provenance regression.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.Pv7PrototypeTests.SyntheticD50D65AdaptationAndUnknownProfileRefusal",
+      "category": "required_automatic",
+      "reason": "Night color science mandatory numeric/provenance regression.",
       "stage": "prepublish"
     },
     {
@@ -4926,6 +4986,18 @@
       "name": "RAWSelectionAssistant.Tests.StartupSettingsCompatibilityTests.OldUserSettingsMigrationTests",
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.SyntheticIccFixtureTests.ActualSyntheticIccBinaryHasKnownD50LinearContractAndComputedReference",
+      "category": "required_automatic",
+      "reason": "Required binary ICC synthetic subset refusal/PCS regression.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.SyntheticIccFixtureTests.UnknownLutAndEscapingIccTagsRefuseInsteadOfFallback",
+      "category": "required_automatic",
+      "reason": "Required binary ICC synthetic subset refusal/PCS regression.",
       "stage": "prepublish"
     },
     {
@@ -12884,6 +12956,24 @@
       "stage": "prepublish"
     },
     {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.LegacyAbsoluteRootMoveAndLockedMigrationReplayNeverReplaceWrongImage",
+      "category": "required_automatic",
+      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.RealRootMoveKeepsRepeatedPicturesCellCaptionsModesHistoryPaginationAndDocx",
+      "category": "required_automatic",
+      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.UndoRedoAndDiskRecoveryCopiesAreListedButNeverDeleted",
+      "category": "required_automatic",
+      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
+      "stage": "prepublish"
+    },
+    {
       "name": "RAWSelectionAssistant.WpfTests.PlanningR5UiTests.AllSectionsOffscreenMatrixAndSyntheticSnapshots",
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",
@@ -15863,48 +15953,6 @@
       "name": "RAWSelectionAssistant.WpfTests.WorkbenchOverviewClosureTests.ProjectOverview_UsesExistingDataAndRaisesTargetedNotifications",
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",
-      "stage": "prepublish"
-    },
-    {
-      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.RelativePathsRequireBoundRootIdentityHashAndRejectTraversal",
-      "category": "required_automatic",
-      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
-      "stage": "prepublish"
-    },
-    {
-      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.LegacyExactIdentityFallbackMigratesOnlyAfterHashValidation",
-      "category": "required_automatic",
-      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
-      "stage": "prepublish"
-    },
-    {
-      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.InventoryIsReadOnlyProtectsDraftRecoveryAndUnknownFiles",
-      "category": "required_automatic",
-      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
-      "stage": "prepublish"
-    },
-    {
-      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.RealRootMoveKeepsRepeatedPicturesCellCaptionsModesHistoryPaginationAndDocx",
-      "category": "required_automatic",
-      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
-      "stage": "prepublish"
-    },
-    {
-      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.LegacyAbsoluteRootMoveAndLockedMigrationReplayNeverReplaceWrongImage",
-      "category": "required_automatic",
-      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
-      "stage": "prepublish"
-    },
-    {
-      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.UndoRedoAndDiskRecoveryCopiesAreListedButNeverDeleted",
-      "category": "required_automatic",
-      "reason": "Required home portability regression; relocation, identity/hash, recovery and no-delete inventory must run.",
-      "stage": "prepublish"
-    },
-    {
-      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.ReparseEscapeIsRefusedWithoutOpeningForeignCopy",
-      "category": "required_automatic",
-      "reason": "Required actual junction containment regression.",
       "stage": "prepublish"
     }
   ]

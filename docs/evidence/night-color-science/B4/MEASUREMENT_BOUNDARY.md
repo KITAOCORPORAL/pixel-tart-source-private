@@ -1,0 +1,11 @@
+# B4 逐节点独立进程小图基线
+
+NightSpatialProbe分别启动5节点×tile/full的10个独立进程，固定合成513×257、完整float16来源标签、67×64tile，读取实际Plan halo。每进程记录时间、GC managed、进程workingSet/privateBytes、2GiB账本和500ms释放系列。oracle为既有独立full renderer，逐值最大误差见JSON。
+
+不是大图或授权相机实测。不能把privateBytes-managed差额当原生allocator准确值：进程runtime/JIT/分配器保留都混在里面，native allocations明确NOT_ATTRIBUTED。系列是强制GC诊断，不是桌面任务完成/返回导航的内存回落。
+
+原真实Canon节点证据为历史；本机未提供同hash授权文件。大图Details全图oracle需要先预算准入，原BUDGET_REJECTED保持，不用小完整图冒充大图。2GiB门禁未提高、未缩真实原图/降低位深。
+
+本轮没有生产性能优化：10进程仅小图基线不足证明大图热点或可复用缓冲能显著改善，不能拿微基准预承诺收益。保留SpatialBandsV2原像素，不做无益改动。现有SpatialClosure3项测试（halo/full一致与预算/取消）通过。
+
+探针初次source标签32f不满足旧full RAW renderer的16bit输入合同而退出；改为明确16bit-synthetic来源标签，同尺寸数值不变后执行成功。没有放宽renderer校验，失败记录明确。

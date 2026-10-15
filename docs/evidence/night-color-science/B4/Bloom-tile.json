@@ -1,0 +1,277 @@
+{
+  "nodeName": "Bloom",
+  "mode": "tile",
+  "status": "PASS_SYNTHETIC_SMALL_ONLY",
+  "width": 513,
+  "height": 257,
+  "halo": 2,
+  "requiredLedgerBytes": 72627620,
+  "totalLimit": 2147483648,
+  "milliseconds": 54.2193,
+  "maxAbsoluteError": 0,
+  "oracle": "Independent existing full renderer",
+  "samples": [
+    {
+      "ms": 156.25,
+      "managed": 18618296,
+      "workingSet": 57417728,
+      "privateBytes": 32063488,
+      "ledger": 72627620
+    },
+    {
+      "ms": 187.5,
+      "managed": 20621032,
+      "workingSet": 58441728,
+      "privateBytes": 34029568,
+      "ledger": 72627620
+    },
+    {
+      "ms": 218.75,
+      "managed": 21815264,
+      "workingSet": 60260352,
+      "privateBytes": 35475456,
+      "ledger": 72627620
+    },
+    {
+      "ms": 250,
+      "managed": 23469840,
+      "workingSet": 62689280,
+      "privateBytes": 37113856,
+      "ledger": 72627620
+    },
+    {
+      "ms": 281.25,
+      "managed": 5977040,
+      "workingSet": 65040384,
+      "privateBytes": 39505920,
+      "ledger": 0
+    },
+    {
+      "ms": 281.25,
+      "managed": 5985264,
+      "workingSet": 65040384,
+      "privateBytes": 39505920,
+      "ledger": 0
+    },
+    {
+      "ms": 296.875,
+      "managed": 5985264,
+      "workingSet": 65040384,
+      "privateBytes": 39505920,
+      "ledger": 0
+    },
+    {
+      "ms": 312.5,
+      "managed": 5993488,
+      "workingSet": 65040384,
+      "privateBytes": 39505920,
+      "ledger": 0
+    },
+    {
+      "ms": 328.125,
+      "managed": 5993488,
+      "workingSet": 65040384,
+      "privateBytes": 39505920,
+      "ledger": 0
+    },
+    {
+      "ms": 343.75,
+      "managed": 6001712,
+      "workingSet": 65040384,
+      "privateBytes": 39505920,
+      "ledger": 0
+    },
+    {
+      "ms": 359.375,
+      "managed": 6001712,
+      "workingSet": 65040384,
+      "privateBytes": 39505920,
+      "ledger": 0
+    },
+    {
+      "ms": 359.375,
+      "managed": 6001712,
+      "workingSet": 65261568,
+      "privateBytes": 39645184,
+      "ledger": 0
+    },
+    {
+      "ms": 359.375,
+      "managed": 6009936,
+      "workingSet": 65302528,
+      "privateBytes": 39624704,
+      "ledger": 0
+    },
+    {
+      "ms": 375,
+      "managed": 6009936,
+      "workingSet": 65318912,
+      "privateBytes": 39632896,
+      "ledger": 0
+    },
+    {
+      "ms": 375,
+      "managed": 6018160,
+      "workingSet": 65355776,
+      "privateBytes": 39657472,
+      "ledger": 0
+    },
+    {
+      "ms": 390.625,
+      "managed": 6018160,
+      "workingSet": 65363968,
+      "privateBytes": 39653376,
+      "ledger": 0
+    },
+    {
+      "ms": 406.25,
+      "managed": 6018160,
+      "workingSet": 65384448,
+      "privateBytes": 39653376,
+      "ledger": 0
+    },
+    {
+      "ms": 421.875,
+      "managed": 6026384,
+      "workingSet": 65392640,
+      "privateBytes": 39653376,
+      "ledger": 0
+    },
+    {
+      "ms": 437.5,
+      "managed": 6026384,
+      "workingSet": 65396736,
+      "privateBytes": 39653376,
+      "ledger": 0
+    },
+    {
+      "ms": 437.5,
+      "managed": 6034608,
+      "workingSet": 65396736,
+      "privateBytes": 39653376,
+      "ledger": 0
+    },
+    {
+      "ms": 453.125,
+      "managed": 6034608,
+      "workingSet": 66179072,
+      "privateBytes": 40419328,
+      "ledger": 0
+    },
+    {
+      "ms": 468.75,
+      "managed": 6042832,
+      "workingSet": 66232320,
+      "privateBytes": 40427520,
+      "ledger": 0
+    },
+    {
+      "ms": 484.375,
+      "managed": 6042832,
+      "workingSet": 65470464,
+      "privateBytes": 39665664,
+      "ledger": 0
+    },
+    {
+      "ms": 484.375,
+      "managed": 6042832,
+      "workingSet": 65474560,
+      "privateBytes": 39665664,
+      "ledger": 0
+    },
+    {
+      "ms": 500,
+      "managed": 6051056,
+      "workingSet": 65478656,
+      "privateBytes": 39665664,
+      "ledger": 0
+    },
+    {
+      "ms": 500,
+      "managed": 6051056,
+      "workingSet": 65478656,
+      "privateBytes": 39665664,
+      "ledger": 0
+    },
+    {
+      "ms": 515.625,
+      "managed": 6059280,
+      "workingSet": 65552384,
+      "privateBytes": 40431616,
+      "ledger": 0
+    },
+    {
+      "ms": 546.875,
+      "managed": 6059280,
+      "workingSet": 65572864,
+      "privateBytes": 39661568,
+      "ledger": 0
+    },
+    {
+      "ms": 562.5,
+      "managed": 6059280,
+      "workingSet": 65572864,
+      "privateBytes": 39661568,
+      "ledger": 0
+    },
+    {
+      "ms": 562.5,
+      "managed": 6067504,
+      "workingSet": 65572864,
+      "privateBytes": 39661568,
+      "ledger": 0
+    },
+    {
+      "ms": 562.5,
+      "managed": 6067504,
+      "workingSet": 65572864,
+      "privateBytes": 39661568,
+      "ledger": 0
+    },
+    {
+      "ms": 578.125,
+      "managed": 6075728,
+      "workingSet": 65576960,
+      "privateBytes": 39661568,
+      "ledger": 0
+    },
+    {
+      "ms": 593.75,
+      "managed": 6075728,
+      "workingSet": 65576960,
+      "privateBytes": 39661568,
+      "ledger": 0
+    },
+    {
+      "ms": 609.375,
+      "managed": 6083952,
+      "workingSet": 65576960,
+      "privateBytes": 39661568,
+      "ledger": 0
+    },
+    {
+      "ms": 625,
+      "managed": 6083952,
+      "workingSet": 65576960,
+      "privateBytes": 39661568,
+      "ledger": 0
+    },
+    {
+      "ms": 640.625,
+      "managed": 6083952,
+      "workingSet": 65576960,
+      "privateBytes": 39661568,
+      "ledger": 0
+    },
+    {
+      "ms": 656.25,
+      "managed": 6100400,
+      "workingSet": 65630208,
+      "privateBytes": 40480768,
+      "ledger": 0
+    }
+  ],
+  "nativeAllocations": "Not individually attributed; privateBytes minus managed is not native allocator authority",
+  "largeReal": "NOT_RUN",
+  "releaseSeries": "500ms forced-GC diagnostic only; not desktop memory return"
+}

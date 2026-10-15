@@ -1,0 +1,28 @@
+{
+  "ancestor": "13b0efe689c0114f6f76b70c59a1059cabeddbef",
+  "A": "b1630f0e55780d746d4377d209899a09d2773b0e",
+  "B": "419c9c165b119fc992ee34e9e947b05f93835e6d",
+  "baseUniqueNames": 2639,
+  "A_added": [
+    "RAWSelectionAssistant.Tests.PlanningImageStorageTests.InventoryIsReadOnlyProtectsDraftRecoveryAndUnknownFiles",
+    "RAWSelectionAssistant.Tests.PlanningImageStorageTests.LegacyExactIdentityFallbackMigratesOnlyAfterHashValidation",
+    "RAWSelectionAssistant.Tests.PlanningImageStorageTests.RelativePathsRequireBoundRootIdentityHashAndRejectTraversal",
+    "RAWSelectionAssistant.Tests.PlanningImageStorageTests.ReparseEscapeIsRefusedWithoutOpeningForeignCopy",
+    "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.LegacyAbsoluteRootMoveAndLockedMigrationReplayNeverReplaceWrongImage",
+    "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.RealRootMoveKeepsRepeatedPicturesCellCaptionsModesHistoryPaginationAndDocx",
+    "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.UndoRedoAndDiskRecoveryCopiesAreListedButNeverDeleted"
+  ],
+  "B_added": [
+    "RAWSelectionAssistant.Tests.NightColorBaselineTests.AcquisitionProtocolNeverAdmitsCalibrationFromMetadataAlone",
+    "RAWSelectionAssistant.Tests.NightColorBaselineTests.DiagnosticsRecordNegativeExtendedFiniteAndRejectUnknownIdentity",
+    "RAWSelectionAssistant.Tests.NightColorBaselineTests.SensorProbePreservesExtendedValuesAndCountsActualChannelSaturation",
+    "RAWSelectionAssistant.Tests.Pv7PrototypeTests.ExposureNeutralMonotonicSingleTransferAndQuantizationAreExplicit",
+    "RAWSelectionAssistant.Tests.Pv7PrototypeTests.ExtendedPrimariesSkinAndBakedWhiteBalanceFailClosed",
+    "RAWSelectionAssistant.Tests.Pv7PrototypeTests.SyntheticD50D65AdaptationAndUnknownProfileRefusal",
+    "RAWSelectionAssistant.Tests.SyntheticIccFixtureTests.ActualSyntheticIccBinaryHasKnownD50LinearContractAndComputedReference",
+    "RAWSelectionAssistant.Tests.SyntheticIccFixtureTests.UnknownLutAndEscapingIccTagsRefuseInsteadOfFallback"
+  ],
+  "mergedUniqueNames": 2654,
+  "ancestorChanges": [],
+  "duplicates": []
+}

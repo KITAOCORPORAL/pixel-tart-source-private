@@ -1,0 +1,2012 @@
+[
+  {
+    "sampleId": "neutral-toe-mid-white",
+    "originalSha256": "A6CBAE06F443AD41B4D1AB45E6E4795F64E7E90CEEE6F6271235E9E1D1D619AD",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": -2,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "5C8BD6F144E77329A7DED5422BF505A0D347A420F5015C05F1621D41DCDEF3C6",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 0.25,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 0.5370987057685852,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0.010112484,
+      0.010112484,
+      0.010112484,
+      0.23479508,
+      0.23479508,
+      0.23479508,
+      0.47021404,
+      0.47021404,
+      0.47021404,
+      0.5370987,
+      0.5370987,
+      0.5370987
+    ],
+    "export16": [
+      0,
+      0,
+      0,
+      663,
+      663,
+      663,
+      15387,
+      15387,
+      15387,
+      30815,
+      30815,
+      30815,
+      35199,
+      35199,
+      35199
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "neutral-toe-mid-white",
+    "originalSha256": "A6CBAE06F443AD41B4D1AB45E6E4795F64E7E90CEEE6F6271235E9E1D1D619AD",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": -1,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "BD0548BAE139CCC8CA0352FB6876DFFA9520A64D00B283AD64BCAAB7E97D1690",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 0.5,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 0.7353569865226746,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0.020224968,
+      0.020224968,
+      0.020224968,
+      0.33183002,
+      0.33183002,
+      0.33183002,
+      0.6460766,
+      0.6460766,
+      0.6460766,
+      0.735357,
+      0.735357,
+      0.735357
+    ],
+    "export16": [
+      0,
+      0,
+      0,
+      1325,
+      1325,
+      1325,
+      21746,
+      21746,
+      21746,
+      42341,
+      42341,
+      42341,
+      48192,
+      48192,
+      48192
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "neutral-toe-mid-white",
+    "originalSha256": "A6CBAE06F443AD41B4D1AB45E6E4795F64E7E90CEEE6F6271235E9E1D1D619AD",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": 0,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "70C0699E993B3A32C5AE12845F8ED5CB5C2AF4B836275C829361705B9C54B6E2",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 0.9584311246871948,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0.04044991,
+      0.04044991,
+      0.04044991,
+      0.46135613,
+      0.46135613,
+      0.46135613,
+      0.88082504,
+      0.88082504,
+      0.88082504,
+      0.9584311,
+      0.9584311,
+      0.9584311
+    ],
+    "export16": [
+      0,
+      0,
+      0,
+      2651,
+      2651,
+      2651,
+      30235,
+      30235,
+      30235,
+      57725,
+      57725,
+      57725,
+      62811,
+      62811,
+      62811
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "neutral-toe-mid-white",
+    "originalSha256": "A6CBAE06F443AD41B4D1AB45E6E4795F64E7E90CEEE6F6271235E9E1D1D619AD",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": 1,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "A1728ED70A42EEA55DECD1112F2E333D7A406D404EAF8A5B2A954DF0BC9F3F73",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 2,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          2,
+          2,
+          2
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          2,
+          2,
+          2
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 0.9992591738700867,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0.072410345,
+      0.072410345,
+      0.072410345,
+      0.6342527,
+      0.6342527,
+      0.6342527,
+      0.9945086,
+      0.9945086,
+      0.9945086,
+      0.9992592,
+      0.9992592,
+      0.9992592
+    ],
+    "export16": [
+      0,
+      0,
+      0,
+      4745,
+      4745,
+      4745,
+      41566,
+      41566,
+      41566,
+      65175,
+      65175,
+      65175,
+      65486,
+      65486,
+      65486
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "neutral-toe-mid-white",
+    "originalSha256": "A6CBAE06F443AD41B4D1AB45E6E4795F64E7E90CEEE6F6271235E9E1D1D619AD",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": 2,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "318D3BAE3E83ECD98BD7C2F5CB93C92DEDB755A24DC538C6210A36D1D3F9809B",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 4,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          2,
+          2,
+          2
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          2,
+          2,
+          2
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 0.9999997615814209,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          1,
+          1
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0.1150724,
+      0.1150724,
+      0.1150724,
+      0.86504203,
+      0.86504203,
+      0.86504203,
+      0.9999864,
+      0.9999864,
+      0.9999864,
+      0.99999976,
+      0.99999976,
+      0.99999976
+    ],
+    "export16": [
+      0,
+      0,
+      0,
+      7541,
+      7541,
+      7541,
+      56691,
+      56691,
+      56691,
+      65534,
+      65534,
+      65534,
+      65535,
+      65535,
+      65535
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "primaries-and-skin",
+    "originalSha256": "F8F1F10C4D43D87E952248A0B864DB99A8DDD0C0F35DBFCE2728075ABE554B4E",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": -2,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "5C8BD6F144E77329A7DED5422BF505A0D347A420F5015C05F1621D41DCDEF3C6",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 0.25,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 0.5370987057685852,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      0.5370987,
+      0,
+      0,
+      0,
+      0.5370987,
+      0,
+      0,
+      0,
+      0.5370987,
+      0.3491902,
+      0.27730417,
+      0.23479508,
+      0.35337022,
+      0.27730417,
+      0.23479508
+    ],
+    "export16": [
+      35199,
+      0,
+      0,
+      0,
+      35199,
+      0,
+      0,
+      0,
+      35199,
+      22884,
+      18173,
+      15387,
+      23158,
+      18173,
+      15387
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "primaries-and-skin",
+    "originalSha256": "F8F1F10C4D43D87E952248A0B864DB99A8DDD0C0F35DBFCE2728075ABE554B4E",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": -1,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "BD0548BAE139CCC8CA0352FB6876DFFA9520A64D00B283AD64BCAAB7E97D1690",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 0.5,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 0.7353569865226746,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      0.735357,
+      0,
+      0,
+      0,
+      0.735357,
+      0,
+      0,
+      0,
+      0.735357,
+      0.4845292,
+      0.38857287,
+      0.33183002,
+      0.49010885,
+      0.38857287,
+      0.33183002
+    ],
+    "export16": [
+      48192,
+      0,
+      0,
+      0,
+      48192,
+      0,
+      0,
+      0,
+      48192,
+      31754,
+      25465,
+      21746,
+      32119,
+      25465,
+      21746
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "primaries-and-skin",
+    "originalSha256": "F8F1F10C4D43D87E952248A0B864DB99A8DDD0C0F35DBFCE2728075ABE554B4E",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": 0,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "70C0699E993B3A32C5AE12845F8ED5CB5C2AF4B836275C829361705B9C54B6E2",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0.6651851,
+      0.5370987,
+      0.46135613,
+      0.672633,
+      0.5370987,
+      0.46135613
+    ],
+    "export16": [
+      65535,
+      0,
+      0,
+      0,
+      65535,
+      0,
+      0,
+      0,
+      65535,
+      43593,
+      35199,
+      30235,
+      44081,
+      35199,
+      30235
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "primaries-and-skin",
+    "originalSha256": "F8F1F10C4D43D87E952248A0B864DB99A8DDD0C0F35DBFCE2728075ABE554B4E",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": 1,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "A1728ED70A42EEA55DECD1112F2E333D7A406D404EAF8A5B2A954DF0BC9F3F73",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 2,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          1,
+          1,
+          1
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0.3090857267379761,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      1,
+      0.5563957,
+      0.5563957,
+      0.97418064,
+      1,
+      0.97418064,
+      0.30908573,
+      0.30908573,
+      1,
+      0.9063318,
+      0.735357,
+      0.6342527,
+      0.91627353,
+      0.735357,
+      0.6342527
+    ],
+    "export16": [
+      65535,
+      36463,
+      36463,
+      63843,
+      65535,
+      63843,
+      20256,
+      20256,
+      65535,
+      59396,
+      48192,
+      41566,
+      60048,
+      48192,
+      41566
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "primaries-and-skin",
+    "originalSha256": "F8F1F10C4D43D87E952248A0B864DB99A8DDD0C0F35DBFCE2728075ABE554B4E",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": 2,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "318D3BAE3E83ECD98BD7C2F5CB93C92DEDB755A24DC538C6210A36D1D3F9809B",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0,
+        "Maximum": 4,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          3,
+          1,
+          1
+        ],
+        "Zero": [
+          2,
+          2,
+          2
+        ],
+        "AtOrAboveOne": [
+          3,
+          3,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 5,
+        "Minimum": 0.5204454660415649,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          3,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      1,
+      0.900051,
+      0.900051,
+      0.9999169,
+      1,
+      0.9999169,
+      0.52044547,
+      0.52044547,
+      1,
+      1,
+      0.96724164,
+      0.9514394,
+      1,
+      0.96827793,
+      0.9539571
+    ],
+    "export16": [
+      65535,
+      58985,
+      58985,
+      65530,
+      65535,
+      65530,
+      34107,
+      34107,
+      65535,
+      65535,
+      63388,
+      62353,
+      65535,
+      63456,
+      62518
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "negative-extended",
+    "originalSha256": "2375974B813045929312813BAE08ADE06D2FDEB716A9625F701A43A85D3FC9F1",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": -2,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "5C8BD6F144E77329A7DED5422BF505A0D347A420F5015C05F1621D41DCDEF3C6",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 2,
+        "Minimum": -0.10000000149011612,
+        "Maximum": 2,
+        "Negative": [
+          1,
+          0,
+          0
+        ],
+        "AboveOne": [
+          1,
+          1,
+          2
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          2
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 2,
+        "Minimum": -0.02500000037252903,
+        "Maximum": 0.5,
+        "Negative": [
+          1,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 2,
+        "Minimum": 0,
+        "Maximum": 0.7353569865226746,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      0,
+      0.25347468,
+      0.56463456,
+      0.735357,
+      0.735357,
+      0.735357
+    ],
+    "export16": [
+      0,
+      16611,
+      37003,
+      48192,
+      48192,
+      48192
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "negative-extended",
+    "originalSha256": "2375974B813045929312813BAE08ADE06D2FDEB716A9625F701A43A85D3FC9F1",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": -1,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "BD0548BAE139CCC8CA0352FB6876DFFA9520A64D00B283AD64BCAAB7E97D1690",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 2,
+        "Minimum": -0.10000000149011612,
+        "Maximum": 2,
+        "Negative": [
+          1,
+          0,
+          0
+        ],
+        "AboveOne": [
+          1,
+          1,
+          2
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          2
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 2,
+        "Minimum": -0.05000000074505806,
+        "Maximum": 1,
+        "Negative": [
+          1,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          1
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 2,
+        "Minimum": 0,
+        "Maximum": 0.9584311246871948,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          1,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          0
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      0,
+      0.3567643,
+      0.7721129,
+      0.9584311,
+      0.9584311,
+      0.9584311
+    ],
+    "export16": [
+      0,
+      23381,
+      50600,
+      62811,
+      62811,
+      62811
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "negative-extended",
+    "originalSha256": "2375974B813045929312813BAE08ADE06D2FDEB716A9625F701A43A85D3FC9F1",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": 0,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "70C0699E993B3A32C5AE12845F8ED5CB5C2AF4B836275C829361705B9C54B6E2",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 2,
+        "Minimum": -0.10000000149011612,
+        "Maximum": 2,
+        "Negative": [
+          1,
+          0,
+          0
+        ],
+        "AboveOne": [
+          1,
+          1,
+          2
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          2
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 2,
+        "Minimum": -0.10000000149011612,
+        "Maximum": 2,
+        "Negative": [
+          1,
+          0,
+          0
+        ],
+        "AboveOne": [
+          1,
+          1,
+          2
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          2
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 2,
+        "Minimum": 0.18961545825004578,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          1
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      0.18961546,
+      0.49761826,
+      1,
+      0.9992592,
+      0.9992592,
+      0.9992592
+    ],
+    "export16": [
+      12426,
+      32611,
+      65535,
+      65486,
+      65486,
+      65486
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "negative-extended",
+    "originalSha256": "2375974B813045929312813BAE08ADE06D2FDEB716A9625F701A43A85D3FC9F1",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": 1,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "A1728ED70A42EEA55DECD1112F2E333D7A406D404EAF8A5B2A954DF0BC9F3F73",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 2,
+        "Minimum": -0.10000000149011612,
+        "Maximum": 2,
+        "Negative": [
+          1,
+          0,
+          0
+        ],
+        "AboveOne": [
+          1,
+          1,
+          2
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          2
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 2,
+        "Minimum": -0.20000000298023224,
+        "Maximum": 4,
+        "Negative": [
+          1,
+          0,
+          0
+        ],
+        "AboveOne": [
+          1,
+          1,
+          2
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          2
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 2,
+        "Minimum": 0.6011098623275757,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          0,
+          0,
+          1
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      0.60110986,
+      0.69956774,
+      1,
+      0.99999976,
+      0.99999976,
+      0.99999976
+    ],
+    "export16": [
+      39394,
+      45846,
+      65535,
+      65535,
+      65535,
+      65535
+    ],
+    "CalibrationEligible": false
+  },
+  {
+    "sampleId": "negative-extended",
+    "originalSha256": "2375974B813045929312813BAE08ADE06D2FDEB716A9625F701A43A85D3FC9F1",
+    "inputType": "AnalystSyntheticLinearSrgbD65Float32",
+    "decoder": "No decoder synthetic V1",
+    "matrixSource": "IdentityLinearSrgbD65V1",
+    "whitePoint": "D65",
+    "transfer": "Linear input; sRGB OETF output",
+    "whiteBalanceAlreadyApplied": true,
+    "renderVersion": 7,
+    "recipe": {
+      "ProcessingVersion": 7,
+      "AlgorithmVersion": 1,
+      "InputDomain": 0,
+      "WhiteBalanceAlreadyApplied": true,
+      "ExposureEv": 2,
+      "RedGain": 1,
+      "GreenGain": 1,
+      "BlueGain": 1,
+      "OutputProfileId": "SyntheticSrgbMatrixTrcV1",
+      "MatrixId": "IdentityLinearSrgbD65V1"
+    },
+    "recipeKey": "318D3BAE3E83ECD98BD7C2F5CB93C92DEDB755A24DC538C6210A36D1D3F9809B",
+    "outputProfile": "SyntheticSrgbMatrixTrcV1 (descriptor only; no device profile)",
+    "stages": [
+      {
+        "Pixels": 2,
+        "Minimum": -0.10000000149011612,
+        "Maximum": 2,
+        "Negative": [
+          1,
+          0,
+          0
+        ],
+        "AboveOne": [
+          1,
+          1,
+          2
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          2
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 2,
+        "Minimum": -0.4000000059604645,
+        "Maximum": 8,
+        "Negative": [
+          1,
+          0,
+          0
+        ],
+        "AboveOne": [
+          1,
+          1,
+          2
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          2
+        ],
+        "NonFinite": 0
+      },
+      {
+        "Pixels": 2,
+        "Minimum": 0.9263812303543091,
+        "Maximum": 1,
+        "Negative": [
+          0,
+          0,
+          0
+        ],
+        "AboveOne": [
+          0,
+          0,
+          0
+        ],
+        "Zero": [
+          0,
+          0,
+          0
+        ],
+        "AtOrAboveOne": [
+          1,
+          1,
+          2
+        ],
+        "NonFinite": 0
+      }
+    ],
+    "values": [
+      0.92638123,
+      0.94076884,
+      1,
+      1,
+      1,
+      1
+    ],
+    "export16": [
+      60710,
+      61653,
+      65535,
+      65535,
+      65535,
+      65535
+    ],
+    "CalibrationEligible": false
+  }
+]
