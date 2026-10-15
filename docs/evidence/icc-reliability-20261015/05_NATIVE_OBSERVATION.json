@@ -1,0 +1,86 @@
+{
+  "businessTimezone": "Asia/Shanghai",
+  "releaseSource": "6cea361464e27c4fc224bc0cc019b55cf600a884",
+  "started": true,
+  "startup": {
+    "status": "OBSERVED_WORKBENCH_READY_AX",
+    "evidence": "native-workbench.ax.txt",
+    "noBlockingDialogInObservedTree": true,
+    "visualApproval": false,
+    "screenshot": "UNAVAILABLE FrameArrived timedout"
+  },
+  "navigation": {
+    "status": "NOT_VERIFIED",
+    "attempt": "PlanningNavigation click",
+    "error": "user input detected in this window; stop",
+    "inputOutcome": "UNKNOWN; not countedPassed"
+  },
+  "stoppedForUser": true,
+  "backendSeparate": true,
+  "remaining": [
+    {
+      "id": "PlanningCenterNavigation",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "ColorStudioNavigation",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "TraySimpleInsert",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "TrayAdvancedInsert",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "RepeatedImage",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "MoveReopen",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "UndoRedo",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "DocxExport",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "WpsOpenEditSaveImport",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "PhotoSwitchCancel",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "ColorSaveReopen",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "ColorExport",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "PhysicalDPI100",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "PhysicalDPI125",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "PhysicalDPI150",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    },
+    {
+      "id": "PhysicalDPI200",
+      "status": "NOT_RUN_USER_INPUT_DETECTED"
+    }
+  ]
+}

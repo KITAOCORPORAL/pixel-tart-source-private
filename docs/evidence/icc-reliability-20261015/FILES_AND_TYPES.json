@@ -1,0 +1,1687 @@
+{
+  "businessTimezone": "Asia/Shanghai",
+  "files": [
+    {
+      "path": "docs/evidence/icc-reliability-20261015/.gitattributes",
+      "bytes": 53,
+      "extension": "",
+      "type": "repository metadata",
+      "sha256": "4119728c4ccd91fea32d986660cf5e12f6eed5af984bdb06a4fb6850261dda94"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/01_FAILED_BUILD.log",
+      "bytes": 18060,
+      "extension": ".log",
+      "type": "raw log",
+      "sha256": "9804f4341c357b885ae709f5567328d36656896cd0c374902497dcba480236ec"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/01_FINAL_ROOT_A_core.json",
+      "bytes": 566530,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "2877fe7fc3644ec901e1395e3e91a1e8f19b7a94e53e3813d1cd6fd8ae0bf8f0"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/01_FINAL_ROOT_A_wpf.json",
+      "bytes": 8141,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "e5806a383d0ae995629c29e37f6998d742419e3212dc92bd203ba119bdb30f6c"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/01_FINAL_ROOT_B_core.json",
+      "bytes": 566530,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "10323a4164eb8dca2ad45ff700e4896e03914c5f019a129fa6e64755512f411a"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/01_FINAL_ROOT_B_wpf.json",
+      "bytes": 8140,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "cfdab0f89c512cfafbafc0625229a81e6ec96a7e23c34ad49e1d87af137a160b"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/01_FIX.md",
+      "bytes": 595,
+      "extension": ".md",
+      "type": "documentation",
+      "sha256": "c77bebc07e66eed52eff0311a4d102e9c9bb7769e38595b4f1b7067dbc42e8e7"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/01_FIXED_ROOT_A_CORE.json",
+      "bytes": 566530,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "2877fe7fc3644ec901e1395e3e91a1e8f19b7a94e53e3813d1cd6fd8ae0bf8f0"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/01_HOST_IDENTITIES.json",
+      "bytes": 1171,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "31506af8fb71050053f7a77d96feb0668a815c15bf38a182e0b2192ce5df441e"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/01_REPAIRED_FILES.json",
+      "bytes": 9936,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "c214a2ca94d266251c0241990652ab29473edb76722a1448b8afa8e9f84cf7b5"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/01_ROOT_A_CORE.json",
+      "bytes": 578691,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "1694cebfb75fd329ca0eb0574b4b8320ab2550b455451602a31b908430d6da44"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/01_ROOT_A_WPF.json",
+      "bytes": 8283,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "43ab3738f202cbda1680d463e4c8003a550ce8f0dd118e8b53292c5e8b2ad02b"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/01_ROOT_DEPENDENCIES.json",
+      "bytes": 8982,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "3429718ace31fbdbbf64f31fe28eeae1803533e8f95e0ffa4ea3c2ed862b9b90"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/02_CONTAINERS.trx",
+      "bytes": 4282,
+      "extension": ".trx",
+      "type": "raw tests",
+      "sha256": "825207b157e2d28be83633c10664c2e254a7a658a17b9439629692497ff34451"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/02_DISPLAY_NODE_GATE.md",
+      "bytes": 1214,
+      "extension": ".md",
+      "type": "documentation",
+      "sha256": "852c88c69531a17e9ba765639c7d4c5846c5032400be587b865d174e9e8b8d42"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/02_DISPLAY_REFERENCE.json",
+      "bytes": 5872,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "b40eb6ccee284fe0c9d9b98f83219b762461ed88d8c6c7f7d1b1f9195d31fa09"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/02_FULLRANGE_REFUSAL.log",
+      "bytes": 125,
+      "extension": ".log",
+      "type": "raw log",
+      "sha256": "13502059e2ae0dee81ccc19e8ce7cdcae242a892ad8ed0b356a8f0e49c3bbcc6"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/02_INPUT_DISPLAY_CONTRACT.md",
+      "bytes": 889,
+      "extension": ".md",
+      "type": "documentation",
+      "sha256": "0643c346acd2c0048ea1ebd58e2c08ecf709df768e67d6c8a908154652c2d34e"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/02_INPUT_TRANSPORT.json",
+      "bytes": 5275,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "d6880b62f76e7153143357fd1666486e245604090252bd5c4d7b1ed4ad80e5f4"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/02_INPUT_TRANSPORT_FINAL.json",
+      "bytes": 6323,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "d48e41849728d08627bc3a6512c719cb287cd3be4821bb1d7104e1935701ad92"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/02_JPEG_WORKFLOW.json",
+      "bytes": 511,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "2b1592e51fb2961a0b1075fc837bd339f7277be520ec66876ed7a3a2087cbaf5"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/02_OUTPUT_COMPARE.json",
+      "bytes": 543,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "03bcbfed11c12a64eb182ec280be2f3de245f08c6414404654b91530bd4c63c3"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/02_SKCMS_ACTUAL_PROFILE_REFUSAL.json",
+      "bytes": 327,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "7a8d39ec8789f7a4d9bd83ab7b6aa567af93f719205e0cea180a7564ca90677b"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_BOUNDED_FIRST_RESULT.json",
+      "bytes": 1297,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "98688f99752f93b20e27d863e524afa83530b6ca1ab02e6be92df741d127630d"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_BOUNDED_VERIFIED_RESULT.json",
+      "bytes": 1297,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "98688f99752f93b20e27d863e524afa83530b6ca1ab02e6be92df741d127630d"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_CANCEL.log",
+      "bytes": 24,
+      "extension": ".log",
+      "type": "raw log",
+      "sha256": "bf4e55e6e4cddc8d7c4577b9722dcc6ebe50bb8d7f30a238daa97f10a98a88ea"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_CANCEL_MEMORY.json",
+      "bytes": 96267,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "f56486d84751d6bc47895f5c8acebbb7acc2dc9dc8d46465846612b020c9f279"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_FAILED_STAGING_HANDLE.log",
+      "bytes": 813,
+      "extension": ".log",
+      "type": "raw log",
+      "sha256": "578c5a6a1cd7e09c192da138c72b16bf9c33a6db7744c5599c9f50a6fb9c320a"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_FINAL_PIXEL_COMPARE.json",
+      "bytes": 278,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "e18dbbe491ef9ec1bd185d5c883b187f601f830b522b2e098de58cb9d998c088"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_MEMORY_BOUNDED.json",
+      "bytes": 233542,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "88ee7f17f84bd5116b8387893369d6c8ebedf5656179820c5652c7edaaeb48c2"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_MEMORY_BOUNDED_VERIFIED.json",
+      "bytes": 239438,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "70d10287b028ad7ca56c85121c5f43483cc34489ba933a7d0647cc669476e357"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_MEMORY_COMPARISON.json",
+      "bytes": 6143,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "142b51b69327bdf486eaab66b3db1a805bf74bedaecf4527ec8f23adf36bb3d5"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_MEMORY_DECISION.md",
+      "bytes": 1985,
+      "extension": ".md",
+      "type": "documentation",
+      "sha256": "6f0e1be53e7985dbc1b17699993f6dbf7482822e0e2d3a5e2efd98b8d5a73655"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_MEMORY_OLD.json",
+      "bytes": 248460,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "8414984018f83ea7c03b2e14886a089a1815067be8b721e1b9a3b6fc1e50c728"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_NATIVE_LICENSE_REVIEW.json",
+      "bytes": 2310,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "2572a0c2bb004b96eb4712aaa4bef21c813543384aa46839e588d01ad6291563"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_NATIVE_PACKAGE_DECISION.md",
+      "bytes": 387,
+      "extension": ".md",
+      "type": "documentation",
+      "sha256": "5d25b4c0604737070f042171ab8fe78a3ca7536f084275472f402e7e0b989dfd"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/03_PUBLICATION_FIX.md",
+      "bytes": 480,
+      "extension": ".md",
+      "type": "documentation",
+      "sha256": "e288463980fa59e43519e7dd83468175b9581b07b84417e215fac205d30f469b"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_DECISION.md",
+      "bytes": 1144,
+      "extension": ".md",
+      "type": "documentation",
+      "sha256": "b122cdad11907fc58b2f0906977a45c3a85623168ef5f7e3e14a6c066c620604"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_FILTER_NUMERICS.json",
+      "bytes": 2131,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "87f9a6eeb71bd87ad1cad05f359d578454b87def88d0e4542918580e38c69840"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_RAW_BUILD.json",
+      "bytes": 48,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "b8155bc7dc340db60f4819d65af7d615dafffe12803c3e98c1200e8ed22bc79e"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_REFERENCE_BUILD.json",
+      "bytes": 48,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "b8155bc7dc340db60f4819d65af7d615dafffe12803c3e98c1200e8ed22bc79e"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_REFERENCE_BUILD_FAILED.json",
+      "bytes": 5356,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "8afd33669bbfafb16ce7d773055d309ca38381d521011126381cb398296ae54c"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_REFERENCE_RETRIEVAL.json",
+      "bytes": 568,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "02ed03bc2868bf8639384feae5706e3db4fd33b6aa3a8dc0b997ec5ef2b125bf"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_SCOPE.md",
+      "bytes": 1269,
+      "extension": ".md",
+      "type": "documentation",
+      "sha256": "e5efc049025bade9a93a1eb714f1d49b39fdd0517d02b5da81f7b0de597c5b06"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_SONY_CANCEL.log",
+      "bytes": 1184,
+      "extension": ".log",
+      "type": "raw log",
+      "sha256": "45cfc28fd6eb1cd0ad77acfe4b8f3faf11690386c66be8066f02d995ba27224b"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_SONY_LIFECYCLE.log",
+      "bytes": 1360,
+      "extension": ".log",
+      "type": "raw log",
+      "sha256": "2cb88361bc663a1ad64e5c76732cbf5f2085abbfac5df83f02d0f1f4c4a1a7d1"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_STRUCTURE_REPEATS.json",
+      "bytes": 17269,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "0e46ec842eae2bf46ebf96d0adcfd931f1df55c7095257d255441dfb4e1f02d0"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_structure/1-candidate.json",
+      "bytes": 118280,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "b699229ff31704d8637c0d7f573a353a992eaa96f9a55152ea424c8c3d7da423"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_structure/1-full.json",
+      "bytes": 101999,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "31396dc422885a830a24b802451a5b4579ae0c25bc0f3bda41db412c7f812287"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_structure/1-tile.json",
+      "bytes": 149040,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "114ce4e5141f157bb085ecca64b86ae90d85c3f480c1dca0f4ccc38aab9ee204"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_structure/2-candidate.json",
+      "bytes": 118240,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "8a12c56aafa96fa544ecb5413fa0d0e67ae0d58ef2104f976b6f1a86a856eedc"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_structure/2-full.json",
+      "bytes": 101816,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "53dd07c803dcbdb268c57d2d3433edddf170d39b430c58683a4e7ea1504cf675"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_structure/2-tile.json",
+      "bytes": 148571,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "da1d572960182c98a49bde0cf231fd08812831188fdb0d7f84ee441b4fff95d8"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_structure/3-candidate.json",
+      "bytes": 118299,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "24589c4e1881909ce317f9ee4db84b949f85a832a955709b4a4060bb8c25097a"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_structure/3-full.json",
+      "bytes": 101656,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "0287e27fe85fdc150940dc9862d12c0ccbba8edb490f46c7699e853d36d0b4e9"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/04_structure/3-tile.json",
+      "bytes": 148804,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "3f8d3a496d9292b20e37be3e9a7b8e2ae25cf88a8ffa6231d53ded98e7a9a40a"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/05_ACCEPTANCE_BOUNDARY.md",
+      "bytes": 561,
+      "extension": ".md",
+      "type": "documentation",
+      "sha256": "cd4d8a35d6f70810316c0cfab5be8aaf622b9427737d999793f24ca534253ddd"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/05_DESKTOP.json",
+      "bytes": 174,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "24c516bd259d2da0dd46c0ce30d07bf73e9f3ea76f852ad6d159fc78befad3ec"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/05_DESKTOP_BEFORE_START.json",
+      "bytes": 186,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "ec34d0bec63e2f508a0502290c8ee822580f17d122f41e1fd429abbc3c1d302c"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/05_NATIVE_OBSERVATION.json",
+      "bytes": 2075,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "9f95419cc9b0ddb2d830ae4c9e25a2a7ab9045dfb457d0afe812f3b42b46cd6f"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/05_NATIVE_START.json",
+      "bytes": 311,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "fc9e2c12d4c3aae9fdd8014c35fcdd4488d573974ed020f8ed8ccdd4f17fa169"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/05_NATIVE_WORKBENCH.ax.txt",
+      "bytes": 13246,
+      "extension": ".txt",
+      "type": "repository metadata",
+      "sha256": "c6b150ad637ab3e91bb759a8b71306df46871bb0602eadeca5497fcad77e8aaa"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/DELIVERY.md",
+      "bytes": 6397,
+      "extension": ".md",
+      "type": "documentation",
+      "sha256": "43d64eb8504917f153fb0e3521a2ca16f66a5e5f5cf3ee0dc240c346ac2e2baa"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FAILED_ROUNDS.md",
+      "bytes": 473,
+      "extension": ".md",
+      "type": "documentation",
+      "sha256": "53e22f905928690dae37d4e82c36b64f501e03e2e11087803bafd032cef3f99c"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_FROZEN_CONTRACTS.json",
+      "bytes": 872,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "7cb19717367a9e15add78e09df826097e7e9939b3e3f98573d328b4ed7ccfca8"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_GOLDEN_P3.json",
+      "bytes": 687,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "bbe3f373ceca625768820c6e8cc857510c1b5e8c1cb7055a607b4b676772eecd"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_MEMORY_TOTALS.json",
+      "bytes": 4300,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "2e8820debb39e7682372c0f317704fb66ea549190a1e96c434b6c79809d63c6c"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_PUBLISHED_CANCEL.log",
+      "bytes": 24,
+      "extension": ".log",
+      "type": "raw log",
+      "sha256": "bf4e55e6e4cddc8d7c4577b9722dcc6ebe50bb8d7f30a238daa97f10a98a88ea"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_PUBLISHED_ICC_RESULT.json",
+      "bytes": 1297,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "98688f99752f93b20e27d863e524afa83530b6ca1ab02e6be92df741d127630d"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_PUBLISHED_MEMORY.json",
+      "bytes": 237358,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "c66126088c04f2643e5674ce2bf213dfc575c0b6379b0a86c6d262b1393a6b6f"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_PUBLISHED_PIXELS.json",
+      "bytes": 180,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "a4f429b618f975b62c51792b0454025cb19dbe3fdd7c01a80aa6e4ef5485b10d"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_PUBLISHED_RANGE_REFUSAL.log",
+      "bytes": 125,
+      "extension": ".log",
+      "type": "raw log",
+      "sha256": "13502059e2ae0dee81ccc19e8ce7cdcae242a892ad8ed0b356a8f0e49c3bbcc6"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_WPF_CLASSIFICATION.json",
+      "bytes": 487684,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "45eb9b933b3613d2be61c9a2db0375a0de30e13ad9607f9a8dc501a5754fea1d"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_publishedCore_DISCOVERY.json",
+      "bytes": 801824,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "c33edf35ff8a55749dcb077d1d151b3ea800d79e73b42653850dd149f3d96d35"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_publishedCore_SUMMARY.json",
+      "bytes": 565909,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "02529d16194d60b939ce091c8e8f06fab77ba99a4b0b49e12699c6f08aa32080"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_publishedWpfSafe_DISCOVERY.json",
+      "bytes": 819984,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "69596534e78edf307b2522b40d57f12a3163c309184a0f360f10e5d502dc0603"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_publishedWpfSafe_SUMMARY.json",
+      "bytes": 8203,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "d50de9acd8fb96877b20221b2824cb3c3ddbeaffb86c759cbee2d61de064ec21"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_sourceCore_DISCOVERY.json",
+      "bytes": 817196,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "f9c3049e983f777da2075018d9321d133f0a8c7563f24cf86c9f0ce5eea663d7"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_sourceCore_SUMMARY.json",
+      "bytes": 566580,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "80c8558f45a5fb8138c211309ce2b60121ee37a917255d2bfc39a7841d8c49b5"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/PUBLISHED_COMPONENT_BINDING.json",
+      "bytes": 2144,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "9a0b15999519febf65648be82ce28b9a927db0129cc48703ada31529cbe2a339"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/RAW_TEST_RESULTS.zip",
+      "bytes": 4579451,
+      "extension": ".zip",
+      "type": "raw evidence archive",
+      "sha256": "faac7fa2fe9f530ebcaa71020d1038caddb5d1a33f2f12b6602bb8913d0c5a88"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/RELEASE_FILES.json",
+      "bytes": 145188,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "75c2d52c35cd51d802719659ee5fb46756cb1a78d6f5f0a5ad0c18573ab28241"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/RELEASE_IDENTITY.json",
+      "bytes": 1166,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "d63ee7e2c589bad6f1a18b24f0cf7783cea472bda596e583e3b2a754ee04606e"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/START.json",
+      "bytes": 16652,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "433f29fbe4934719d23bdc67ff78827dd1202a2c0a2f265d2b6f458c3950b45d"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/TEST_CLASSIFICATION.json",
+      "bytes": 7906,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "23be05ba6f6ae60a74d76cafb6feb0a84c4db88e04f13d7914de669cb232f22c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/ControlledIcc/ControlledIccProfile.cs",
+      "bytes": 10533,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "ce7fdd1e03d2194193b875b08095a880b76d1cf6e2aaa68ed987a145ec1b54ca"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/AssetLibraryP35AcceptanceTests.cs",
+      "bytes": 9592,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "bd47cd56dae7ca116e7db10c8096f92b5aac7c590043a0cde78f0c14f91fc8e4"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Baseline2031AcceptanceTests.cs",
+      "bytes": 3907,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "d9dae29492360513d109fa8bc2ef93912c325217fa67752bf738748a1c202d1b"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/BookingCalendarSafetyContractTests.cs",
+      "bytes": 2689,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "1e86560b2be5c242a2a79166a2ba0064e3982ae12669ae34066ba1af61899fd4"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/CoreReliabilityRc3ContractTests.cs",
+      "bytes": 3946,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "a89d9b50d1d4d21bc0f565361a57775de25b30dd1a388db6e82971495cb1cbc3"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/EmbeddedIccContainerTests.cs",
+      "bytes": 3437,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "8d84ac67f1d68092871e1ca3b8cea97020f658ac36611893f9c6adce26194c1f"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/FeedbackSidebar143Tests.cs",
+      "bytes": 9587,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "d9a48723f13b8ae26ce5bdd82f8b8589a9adb1295f85598cb275ca3d5db9230c"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/NavigationSafety204Tests.cs",
+      "bytes": 11992,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "1c396e864ebccf6c7133d6085e6ff0567497863f8f8fdb4e8c7faed3b2296a70"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/OnboardingServiceTests.cs",
+      "bytes": 18942,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "72f26a51b5af65125f1ca0b1ba0dd8bb490117d8507c8d60ffbb6934493efbc6"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/OnlineSelectionV1Tests.cs",
+      "bytes": 20407,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f1816585ad7180f3cf295f156f28c7592581c4cc10c51a937d75f1790463fcb9"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/PhotographyAcceptanceManifestTests.cs",
+      "bytes": 5821,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f94326f452847d86c4b714d35f14644b9a7bb28b2c132f6205064287a9a571c2"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/PhotographyEvidenceConsistencyTests.cs",
+      "bytes": 2717,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "66b2a1c744f913f658d74b1a5501da3ac07ef543259c851cd30db0760b314d1d"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
+      "bytes": 1243,
+      "extension": ".csproj",
+      "type": "build configuration",
+      "sha256": "edb5f35f0fe91de0c0ba00325308fd8e9869b7205f1ba25fcfc32a5dac90d4c5"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/SidebarInteractionFix202Tests.cs",
+      "bytes": 8025,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "8357600f50dfeb2c34fec9b54bc8dea03a9ac73cca2dbd2ddf382dd6c84d6664"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/SingleDarkThemeRegressionTests.cs",
+      "bytes": 3664,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "8790f90f78d7a0fa3dc95b0c55e83ba32c9fbaddae76da62e9c42c5503bc2cd0"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/TestResourceLocationTests.cs",
+      "bytes": 1008,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "250e4807a54694e33137ada49cb55c6c320606968f792040da8f4dcd956fe84d"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/UiDesignSystem140Tests.cs",
+      "bytes": 13507,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "3024a05813925f1aa7bbed2b22bbe333155e0a7923be9a05ef8b0aae4ca6ff3b"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/UiFix141Tests.cs",
+      "bytes": 6987,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "eae681ebc1a694d42ba7850e04dbd0f18eb62284bcedb3032377e2e2a06c4d5d"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/UiPolish142Tests.cs",
+      "bytes": 3531,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "199fce6c2aab48c338121e6d47cebd3e770b258431d4ac8eb178500262d8f6f1"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/UiSimplification144Tests.cs",
+      "bytes": 3982,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "bb5d29e772d8bf7666077421ab1bb1a0e27cac8000b91ca1ad1e615587acf875"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/UsabilityFix151Tests.cs",
+      "bytes": 6909,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "4430e6df9c469d512688174a39da293f80ce0a72122e0201ea587082fbfc14e5"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version204FeatureTests.cs",
+      "bytes": 14983,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "9fa0a999991f6d4dbfd33f9c8b1426c998859aaa83c651e035c3f38a3b2796c3"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version210UiArchitectureTests.cs",
+      "bytes": 3454,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "7538fe06cbdc36ca0a9d99a2ca4bfe29d290eebd60852524603758144e80ec53"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version220AcceptanceIsolationTests.cs",
+      "bytes": 3176,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f095abf71153df5a4c23fe024e1d9349091fe68eb84cd2ceaeff0fa2bcf0fd5c"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version220DocumentWorkflowTests.cs",
+      "bytes": 60113,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "cc7d6a7d60d7aedaf7c966bfb9e68da61c90e4c2669f909542049b9c8cdb39e0"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version220StageBUiArchitectureTests.cs",
+      "bytes": 9325,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "5334e69fbf58959ff8fcd7c45d9e54aea31ac77b100a2d62dbd01586b1ec0465"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version220StageCDocumentUiArchitectureTests.cs",
+      "bytes": 11626,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "8af6944cd81371d46de037380479517fc2000cfebb4f617edee8ec4c917b7c59"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version220StageDReminderWorkbenchTests.cs",
+      "bytes": 37928,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "891f0fff473603f4fdc7ef3b8ad7834c40942422d682fdde08fda6daf1b09844"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version220WeatherTests.cs",
+      "bytes": 20513,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "a00373982ad9f8a7b42813b42d1a296681a14c77eed25bfd25087701204f9638"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version230Rc3BusinessCoreTests.cs",
+      "bytes": 17971,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "a78c9faff4ce271ae135a05cdfcf659d7b2d0e46eb5445150baf17a269f8fe38"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version230StageCLiveMonitorCoreTests.cs",
+      "bytes": 16805,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "760e04ab53d90d11834314819a7607eaef586c02f52b00f5e0ffee7263f1f246"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version230StageDColorCoreTests.cs",
+      "bytes": 16223,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "4f4bd6f789bf4f3983e7a2bbd8d423be216cccc09b676bb87d0039a503b8ae43"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version230TetherSafeCopyTests.cs",
+      "bytes": 11925,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "10368bafdf9ec14ba6be17a90c22d1f42cba76c852251ffc33bff01598e54dfd"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/Version230WatchFolderCoreTests.cs",
+      "bytes": 16283,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "02676c21d90bd41c63e01dace6a035c7c2966225eab55108275f83e28fa62afd"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/WorkbenchEnhancement203Tests.cs",
+      "bytes": 7089,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "4beb2945b684a9236dd3ca245e804645106f0beb5a9950e79a9632882e4c2fb9"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.Tests/WorkbenchVisualCorrection201Tests.cs",
+      "bytes": 10884,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "2964f18b68534eb75954eebc32173ecd4b344caaf63e5af14919c68b67eae8c6"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetCollectionCountTests.cs",
+      "bytes": 1307,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f3eb92cb461d2447a09773fd9f866d474f6e977d59a5daffcbba078e7ba588db"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetContextMenuVisualTests.cs",
+      "bytes": 4136,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "9615ad1e377dfc35f2ae31abe5ea78c03a1b2c156f0ee43252a37a7c2a078c33"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetFolderTreeLayoutTests.cs",
+      "bytes": 730,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "fa8c1e5aab997151be70b979cb87f679f32be890596e916dd7a197fbff42ff84"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryButtonReadabilityContractTests.cs",
+      "bytes": 7855,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "4a11ca834e82c4dcd4b39fc99aafa74fe505f243f234d3ac7086fd8199f4cce7"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryEagleLayoutReconstructionTests.cs",
+      "bytes": 9134,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "10830e8245705526dfdd4ce0e7cdc47f67d91dbdcdeff8933f508f447feda6fe"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryLoadMoreHardeningTests.cs",
+      "bytes": 5327,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "75b8b4d80731ef5d56ece18e035773aeaac857b87ae7411ed31e4b71ff568dc6"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP1AutomatedAcceptanceSeamTests.cs",
+      "bytes": 45212,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "c4f046dbc749235632e7c01a8a23178ed2aa750185429882f60280e16f96247b"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP1AutomatedEvidenceContractTests.cs",
+      "bytes": 85353,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "254affa25440f002ce842a42a287d326e661f0ecfbc204a6f661309069e0750c"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP1EvidenceToolContractTests.cs",
+      "bytes": 8705,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "70644809629203264d5ecacc0e60c09cc9a526a23d26bd3f1527e17d8dd51627"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP1GateAEvidenceContractTests.cs",
+      "bytes": 108871,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "45045c397ddfa672a9f77625d82f0ef887cd06ab6ba97f385ca3d5f4a7dcbb05"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP1ManualPacketV2ContractTests.cs",
+      "bytes": 36959,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "a9cc36e984a07847a664ed69b7c082c42a02763126a8d56d0d6da28c6c59bc76"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP1StateSeamContractTests.cs",
+      "bytes": 17340,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "6d027f0c47a2a80d71ccfd506f10075b2912aa3b54b15804d487033660a4c342"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP2AutomatedAcceptanceSeamTests.cs",
+      "bytes": 10020,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "73dc32bec34c7713af890e28e9557c7ccb50fcab8eabb4899f79abf6262b4b61"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP2AutomatedEvidenceContractTests.cs",
+      "bytes": 20592,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "e46706e00946d0ecf4c8c13c08c2f0eeb6b9450edf06932a81f8ddfd8f7db6da"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP2BrowserWpfTests.cs",
+      "bytes": 11245,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "bef2b20b8d44374e0d65eecee368cf1b3fb2fa78ea1b6768808707d400371039"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP2DragDropHardeningTests.cs",
+      "bytes": 13310,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "1b10ef5c99936474707aa789fb8d6757253f17af174c9f4e9fece46ed7cc79f2"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP2KeyboardSelectionWpfTests.cs",
+      "bytes": 11152,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "12adef1bba886c844a40c1a52b5567b0477771fcea23be93ea8ba6bb76078cbc"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP35FocusAcceptanceTests.cs",
+      "bytes": 7451,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "3bfaf9c27ef7108941ef656c8ab0ed060c89f45206cad1057be93fca8426c2e0"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP36ContextMenuContractTests.cs",
+      "bytes": 2762,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "03d6c54217a10270bc703168d947dc4da183a5ade027d603a68a89dbd0d101b6"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3AccessibilityTests.cs",
+      "bytes": 9502,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "07e6b922f5ba61d52044b56d89c86b0d0292442de40bb6ceebacfb996558a8ec"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3AutomatedAcceptanceDriverDisposalContractTests.cs",
+      "bytes": 2641,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "6322eda0bf1b9a24c895240f11fab41423369bf2de2f31cc6bf680b57999d24a"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3AutomatedAcceptanceSeamTests.cs",
+      "bytes": 35494,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "d9b1913dc43e953d859be056b6e9514f2a78b5c05f225c3c8470f97f64ee92b9"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3AutomatedEvidenceContractTests.cs",
+      "bytes": 136239,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "9119f992e1999f101065821289fd8dc4d64756a86776936340cfa1e99ba95bdb"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3AutomatedRunSetContractTests.cs",
+      "bytes": 14220,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "ee973d7c2bd67a3c7e387a8555b66e6b47a67223bf5e5d8a55f548bea409362b"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3DatabaseEvidenceBehaviorTests.cs",
+      "bytes": 9854,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "b8adc1fe23da19487ba6c7b81510a2d99b048d6c5d8b2024e39eee4c1b9cb0fa"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3RunSealContractTests.cs",
+      "bytes": 16355,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "cc6ee504e8ce4f12ff9343638480c81e827ed76a565bb2845731a92ecb098478"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3WpfTests.cs",
+      "bytes": 88865,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "9f879fe1d5568c9e078fd599884a7a190b22fedc14767ad2fca4aa437132605a"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryProductRelationUiTests.cs",
+      "bytes": 3384,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "0fbdfe2cef2f72b1190d4ece5d26ae02977683d99c8bb7af7521702a7b3d0be5"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibrarySmartFolderEditorWpfTests.cs",
+      "bytes": 17231,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "ac8f2edf183fe8ff2de398c123e26cc640f8617619e9f52e51a4a5e272a82643"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetNoLetterboxTests.cs",
+      "bytes": 1160,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f5f20fde0210141f7c8ae1f667294d57dd6b66f46aabdf485ec566b8de27f407"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetQuickLoupeTests.cs",
+      "bytes": 1775,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "533d3a1707a7b27df5680d3c29352b2bf3e852570b131a565a231f84217d2a90"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetResolutionLabelTests.cs",
+      "bytes": 1244,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "a15ad7bb528a9dc5501f93c53dbedc506bed992b0586c78a722bd9d1c4d6d54f"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetViewerWindowTests.cs",
+      "bytes": 957,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "8c0acf5f0235b47ebcb83db58a470134a08984df2b27bc5c64c369106885cbc3"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/BookingContinuePlanningAndResponsiveToolsTests.cs",
+      "bytes": 13228,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "7e1142963205318b4917589ab039699353b41cbde0a54ee9b564f0a357a0f9b9"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/CapabilityConsistencyTests.cs",
+      "bytes": 2449,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "ac342af21ba9e089e3f8cac3234cfc88c3852142ed737d3b2ccc14b4bc233dd2"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/ClickRoutingFixFocusedTests.cs",
+      "bytes": 7296,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "289e020b728641b1d8d819bf19fd2e1b335467577324843485036878f8b6b122"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/ColorStudioSampleMappingTests.cs",
+      "bytes": 2485,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "08c89ee9055f7d37b3d8c971fb69363dbc140a34c02bc0b2c733dd3aedaa3e3f"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/DesignSystemAv2LockTests.cs",
+      "bytes": 10854,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "c6f93af0c88a29a8fa95145aa6136db6d2ef8f4457d212fc27197f915f1f28c8"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/EmbeddedAssetLibraryWpfTests.cs",
+      "bytes": 91038,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "09fa5e5099ec8ed2c774e90e72d6df6d2435d68534b30776564ccdf2d40111fc"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/FirstTimePhotographerUXTests.cs",
+      "bytes": 1899,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "901a15bbcbf8e1a0203fd25f38c2550b4f11bf18eb9d1ea1bac2779258d1e9c4"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/GlobalCloseSafeAreaTests.cs",
+      "bytes": 3224,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "c1873b229eb32770fd9f08082c42a9c2e0843fcfd4e88950721a18327d717e6b"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/GlobalSurfaceCloseSmokeTests.cs",
+      "bytes": 13486,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f76a053ba224ebec2e18da5a22653cd57059f33db5cd527695a1b5575290dada"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/InputRoutingHitTestSmokeTests.cs",
+      "bytes": 23090,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "572f0b8f97bc04e6e20a1d8bccdc99c20f294f8adcc948a190026296791874a8"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/InspectorButtonContrastTests.cs",
+      "bytes": 1261,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "46f70c9ce7bb4009b39fbd187a655f69275ebc35e614296dc3f975f2991d1202"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/InspectorStarRatingTests.cs",
+      "bytes": 3607,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "56b8fe36da2bb38a8c9b197243a3c75066b0e24aabfa9fc444c08ab4e2982c5d"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/InspirationBoardUnifiedUxTests.cs",
+      "bytes": 1593,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "83d9144f0c62629e48ee7bb6af993b41998504a1c5ca63b34034a282a09e72aa"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/ModalCloseSmokeTests.cs",
+      "bytes": 8563,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "bb70e5436aa6a2247a15a2d1477b34aa52531af2388d3fdd6f3816c06775b31c"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/ModularHarnessEmbeddedEvidenceContractTests.cs",
+      "bytes": 24200,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "fbce4392f7f41f5fddcc7a41a6145afab8e6dd6f00fd5b7742b3b81c7fa534e7"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/NativeClosureObservationTests.cs",
+      "bytes": 5576,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "1ea6d80201f33e2330a84ae9865b61faba4ca35924b4a3fdf0bd3348e3ecd917"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/NavigationWorkbenchClosureTests.cs",
+      "bytes": 10550,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "e573c47bb25508efc9aea99961681863d98d1d95243cf2ee69e8edb5f64aec7a"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/OnlineSelectionPersistenceWpfTests.cs",
+      "bytes": 7468,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "c6d359f76894aa166cef13185c20fbd4deba2232df2a749cf064a69d6c9f13ca"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/OnlineSelectionV1WpfTests.cs",
+      "bytes": 3885,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "a6c5df5eb9aae303fd26d9e7c780ecc5a0743731b7cb5f88465703faf65ad971"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/P0RootCauseAnalysis.cs",
+      "bytes": 4966,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "6c427b646bace24171d542d82d960ded4f75390bd1054b4f07d25d25b042b082"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/PhysicalPointerDiagnosticContractTests.cs",
+      "bytes": 20408,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f1f84c696c660fcd8bdb3909475e373eeb8069c510b6ccb490a96c50b3168900"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/ProductLanguageLeakTests.cs",
+      "bytes": 5661,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "740cca1380e7414417c124a25e92e18446f4d32fbd388f9b3957ff3c85cad62d"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/ProductQuickToolsRuntimeTests.cs",
+      "bytes": 2970,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f602bbc279df8190e06e402d6bab8eb3d462a07e9d4e603aa5eb5ea098cae4b6"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/ProductRedesignEvidenceTests.cs",
+      "bytes": 6284,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "664b0de2b6c639497d393a64f9d4480fc1391cea55e1a3de669eb640b7a639bf"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/ProductToolboxWpfTests.cs",
+      "bytes": 3482,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "c1291089ba0ebad019c85525804e9e930b4d2ca2c58a6102790850532e230cd3"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+      "bytes": 1458,
+      "extension": ".csproj",
+      "type": "build configuration",
+      "sha256": "71d5b522a1ec5fc38f333f5ea0fea318ce84125e0029b544d9738c5d6f7143eb"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/RawToJpegWpfTests.cs",
+      "bytes": 5694,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "218f73c6aacc5cbe29ea84a74af7d47d557800d3949fe8a02f088871ee4e430f"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/RealLayoutRegressionTests.cs",
+      "bytes": 15004,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "b05d96cb9cc7075c693b620acec5e26002a136facf1068715d1ee47c34add58f"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/ReferenceWorkspaceWideRatioTests.cs",
+      "bytes": 16201,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "b0b5f33738f68d04c7b78a4d7222d9df8dc9ab8fb22103aab9564aa67bd57dbe"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/RuntimeCorrectionWpfTests.cs",
+      "bytes": 19766,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "240275aea572af6c972a0489c95c6c2ccd1a1ddc1bf325a4a298476599d8c4a7"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/SingleCloseAuthorityTests.cs",
+      "bytes": 10761,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "2c137e639cf29a8b2c538fc269eac689dc06684683372d4bbabe898181ef25cc"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/StageIVReferenceWorkflowTests.cs",
+      "bytes": 6379,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "85f2931a124d55f661863b7a7fb76449ccde767f40e6a61e81890c54f131ecd0"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/StageIVUserFacingLanguageTests.cs",
+      "bytes": 3762,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "6fcb8bda98b04303b6839fc1f2b953876b4e7ac0b4ea958ce7072ad0eeae832a"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/StageV2StartupCompatibilityTests.cs",
+      "bytes": 2157,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "5892db6b7ef41c226f37afdd5f70bce02610fdd0579431c5400d0383956cc2f1"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/StageVPlanningWpfTests.cs",
+      "bytes": 4629,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "404f78b334bdd68e34b11be2517b037bf5f6890b97315a344802afa3db542a28"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/StudioComponentContractTests.cs",
+      "bytes": 6684,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "172e56d694b9c30a1fd5c55437ef593e8a78c00e5d533ee3fbfbdb1f65d7a877"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/StudioDesignSystemContractTests.cs",
+      "bytes": 5903,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "a8289ae09aabf80d36b8cffb2c6f27966da542c91995c04553d6058e934bd25b"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/StudioLocalizationTests.cs",
+      "bytes": 9759,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f983bc35dea3d9816dba421a04313ca4517bba984f0386e0e0d7164d6d1e37d6"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/TaskCenterConsistencyTests.cs",
+      "bytes": 3027,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "53ec361300765c2677f1b1155be6b66a6a3e3d0ab8d1445438c6f18b34890287"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/ToolProgressBindingSafetyTests.cs",
+      "bytes": 1475,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "d31bb5f51ee0c85c44bfe04b68bd39783695397b64696d080d6d0d9f024c1827"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/UXSimplificationRegressionTests.cs",
+      "bytes": 6258,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "8d4dc1dcefbbe6b633d0977c44b7b5eb29f90772b9e81bac5774650425cda305"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/UiDesignLintTests.cs",
+      "bytes": 4043,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "b3e963d1b4ff458110e36a688d3358907e73feed9aac87c50d62487af4eeecb7"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/UiGuardianCapture.cs",
+      "bytes": 11762,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "bb8905627a9a7c3bab3f824c44ec05a0c0c22acba4c5c91ea204f5205553d38d"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/UiVisualRegressionTests.cs",
+      "bytes": 3977,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "affcb68a666ae270d5b13b467a6d54702bb0f7ae76128d4b98e83825f9e20c82"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/UnifiedFilterColorPickerTests.cs",
+      "bytes": 2185,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "3abddf27b01cc024e6ae4880403a97385f30f75d5a252d0ba8178b6b0f40be8a"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version220CalendarUiTests.cs",
+      "bytes": 22051,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "6f98635063182eaca3d6b20d0ac7c3c0c6ba7434f77e895fa17c4c55fe95a580"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version220StageDUiTests.cs",
+      "bytes": 7581,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "bf55da52ed61b1fa7d7b7c1e07ae1a7d38cfa09454281f92d1075e07a490ffa0"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version220WeatherUiTests.cs",
+      "bytes": 11116,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f095fd153ca3ad025dca125b313515982664317353a52caecaf37a940ba3a968"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230Rc2CalendarTetherTests.cs",
+      "bytes": 6463,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "991dbdc4bae5cacf11ad6c6f55d6c85a9824e01de403949157472fb49026a51d"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230Rc2NavigationTests.cs",
+      "bytes": 3778,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "47bb5293885a957eac0c8a2a1b739b7613e2b510100d9e1954feaa798abca83a"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230Rc2VisibleFeatureAuditTests.cs",
+      "bytes": 2129,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "8a0ee6cdb8fbe1813125ffdab48142b2225fa346165fb59ae5a316b01c199fbb"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230Rc3RuntimeUiTests.cs",
+      "bytes": 9713,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "e45f2db12d7c42660bcc62ceef22280355fe856bb857dfbd89be6eaf0cfaf756"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230Rc4RuntimeWorkflowUiTests.cs",
+      "bytes": 23693,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "24ba729f2ddeba45de32562c0ff8cb639f9e553b50af12f2e5d59295f3422b77"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230Rc5CalendarTaskCenterLayoutTests.cs",
+      "bytes": 8966,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "13a01871b7beb1288bbeeed4a2e4d90415daeef995de1f0f3cea113cf7bb7be2"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230Rc5CoreHotfix2InteractionTests.cs",
+      "bytes": 24095,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f3b186f40ad8327a3a1265fe43e466bbf96ec2088055eb88745e28ec76f94d88"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230Rc5CoreInteractionHotfixTests.cs",
+      "bytes": 10625,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "cee2a4157babd59ff5e690d6be4dd9975ca5fdf49cac1ed5735bf077806b2221"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230Rc5MiniCalendarHotfixLayoutTests.cs",
+      "bytes": 10762,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "62313503210adb1e142961fbffd1a582c8b627eb0e84052ef9dd31ec512202e6"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230Rc5RuntimePolishTests.cs",
+      "bytes": 10356,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "53957b044cf77684ea7f2cd4ea3ee0117893e5c4105b7dee068866d6b45e0361"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230Rc5RuntimeUiPolishRound2Tests.cs",
+      "bytes": 9312,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "421ac5454e9b87e3fc057d76d4300833d7d4ad0fb4809559b968f10c1535fb24"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230Rc6RegressionContractTests.cs",
+      "bytes": 3177,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "0578c9f0f8361304ca57d1fea472400c58267a320f257185ba707b947e09ef10"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230StageCLiveMonitorWpfTests.cs",
+      "bytes": 26369,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f4421cc294bfdc2da186305cb5fbfd7b597c2c8efe3867522da6ee76a171a5ac"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230StageDColorWpfTests.cs",
+      "bytes": 12255,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "122af77f1969eb1636a1622b9b198f932889dfa1fff575f6b82f954177858761"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230StageEAccessibilityTests.cs",
+      "bytes": 2932,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "0725d60b6a300778df1f6e2e91e2e4f0cc52d1e26c238007d57a190e5737b0ef"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/Version230TetherUiTests.cs",
+      "bytes": 10030,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "05892cd15645db1e4c8ee966a55f7ce7162766480876dd538c779694f47d09b2"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/WorkbenchOverviewClosureTests.cs",
+      "bytes": 2685,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "a77816da9bb99f53be6bea7489b2d47e605ec4a5524daac2c709ac33bc97e694"
+    },
+    {
+      "path": "tests/Shared/TestResources.cs",
+      "bytes": 1300,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "1a785025e9614e11cfa36c9c2544a23a600f510dfe3479c78d12c1d2375fe95d"
+    },
+    {
+      "path": "tools/ControlledIccWorkflow/BoundedWorkflow.cs",
+      "bytes": 9002,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "f31b543e6ad6ca44523ba94bd399e237aafd8d1c09cea2dfdb37bc7b43c68e1f"
+    },
+    {
+      "path": "tools/ControlledIccWorkflow/InputTransportTests.cs",
+      "bytes": 5997,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "3b9a0fe76b2e649ad1440539b08972b65e9dc19439d6a053096d3ab203215ec4"
+    },
+    {
+      "path": "tools/ControlledIccWorkflow/Program.cs",
+      "bytes": 12279,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "daf3deaeae55ab4e78b9603c5a710155558a94e5c388ff71bc5214419641e157"
+    },
+    {
+      "path": "tools/ControlledIccWorkflow/WorkflowMemory.cs",
+      "bytes": 1640,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "0945463f2acafd0e20b6ea5da4118e1ab1308ae9ffb533c6c6ae64c4bd24e0e7"
+    },
+    {
+      "path": "tools/StructureScratchExperiment/CandidateTiles.cs",
+      "bytes": 2517,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "20800ad95b14f05d1222a9ed26e52cc21314d5a39593dfb103c0280e5a8608f0"
+    },
+    {
+      "path": "tools/StructureScratchExperiment/Program.cs",
+      "bytes": 7911,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "5e26b9045902e7a30e8d6e177c3a660d73a6a124e1ba4c4879ea20a62cc940e8"
+    },
+    {
+      "path": "tools/icc-reliability/README.md",
+      "bytes": 1493,
+      "extension": ".md",
+      "type": "documentation",
+      "sha256": "708b946368eec58b11b30e108b06f4f6880ee8faf227db0e48f0b7a689f9f3f4"
+    },
+    {
+      "path": "tools/icc-reliability/build_filter_refs.py",
+      "bytes": 2141,
+      "extension": ".py",
+      "type": "reproduction/integrity script",
+      "sha256": "cceb689e4c0ad633c6e276faa6c0679cef37bc4ade3a2ad27297d0a5512800b1"
+    },
+    {
+      "path": "tools/icc-reliability/compare_outputs.py",
+      "bytes": 2781,
+      "extension": ".py",
+      "type": "reproduction/integrity script",
+      "sha256": "9c538c8f41a8bfd3f4e7a24d3528942d69702e39eabe047f5ff1748dee46450c"
+    },
+    {
+      "path": "tools/icc-reliability/display_compare.py",
+      "bytes": 1943,
+      "extension": ".py",
+      "type": "reproduction/integrity script",
+      "sha256": "8b9cc250ee935d61ba7b27501054e842f5eed22daf8da3abf0468a6ed32fe742"
+    },
+    {
+      "path": "tools/icc-reliability/display_reference.cpp",
+      "bytes": 707,
+      "extension": ".cpp",
+      "type": "original external-reference wrapper",
+      "sha256": "8e7bdb0cd6a03b970bbbb540b1b4ed796fff3cacd516601ac96c2b336ce95446"
+    },
+    {
+      "path": "tools/icc-reliability/fast_compare.py",
+      "bytes": 1335,
+      "extension": ".py",
+      "type": "reproduction/integrity script",
+      "sha256": "d43d1c339abde0faaf2d064130be5a1455ea529e63e923d392314d80a55ada50"
+    },
+    {
+      "path": "tools/icc-reliability/filter_reference_replay.py",
+      "bytes": 1439,
+      "extension": ".py",
+      "type": "reproduction/integrity script",
+      "sha256": "64fa156f9f5eca1869c8580d1a6b72d0aedfc06f6511c94387ae2c706e3cbbc1"
+    },
+    {
+      "path": "tools/icc-reliability/raw_lifecycle.cpp",
+      "bytes": 2131,
+      "extension": ".cpp",
+      "type": "original external-reference wrapper",
+      "sha256": "ea697383979b1ae17d9d2a339cac5673bb24b5dcbc3e37d61f5cad0e7de22d8e"
+    },
+    {
+      "path": "tools/icc-reliability/run-memory.ps1",
+      "bytes": 1011,
+      "extension": ".ps1",
+      "type": "isolated run script",
+      "sha256": "ce7c0cf582632cc117f68f29dde3e02fd34fcd09d1e7cccb6d7d82ce8c20dba1"
+    },
+    {
+      "path": "tools/icc-reliability/seal.py",
+      "bytes": 1103,
+      "extension": ".py",
+      "type": "reproduction/integrity script",
+      "sha256": "daae94806fe424cc6e71c8246205dd6311da37619b21372dff1bbf73324f476c"
+    },
+    {
+      "path": "tools/icc-reliability/verify.py",
+      "bytes": 2572,
+      "extension": ".py",
+      "type": "reproduction/integrity script",
+      "sha256": "70e28faed0527204c28b04807b846b1a47b11059cf156929efc26760f959a9b1"
+    },
+    {
+      "path": "tools/planning-r7/verified_runner.py",
+      "bytes": 6602,
+      "extension": ".py",
+      "type": "reproduction/integrity script",
+      "sha256": "a32ba98556d87e5c668f150204115fd458ad0e05dd22fb3042856c913093c11d"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/FINAL_RAW_INPUT_HASHES.json",
+      "bytes": 648,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "4ee55216ac2b09ed7abffff8be7bccbf80f39ce3a00e7c6f4b296287793e58db"
+    },
+    {
+      "path": "docs/evidence/icc-reliability-20261015/STAGE_COMMITS.json",
+      "bytes": 16061,
+      "extension": ".json",
+      "type": "structured evidence",
+      "sha256": "00bde7d8bda2adaedff44ded9ad91df3ae69378433baf4c33a3ff51ec86f403d"
+    }
+  ],
+  "exclusions": "self and VALIDATION only; thirdparty source/binary/photo/db/release excluded fromgit",
+  "hashDomain": "workingtree bytes; raw zip/log binary"
+}

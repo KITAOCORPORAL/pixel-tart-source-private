@@ -1,0 +1,17 @@
+{
+  "binarySha256": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+  "origin": "conda-forge lcms2-2.16-h67d730c_0.conda",
+  "sourceCommit": "453bafeb85b4ef96498866b7a8eadcc74dff9223",
+  "license": "MIT; copyright/permission text required with substantial copies",
+  "licenseSha256": "6dbd60437f8ef91d8de1f08ad75882547fd4931bfcc3566a0735f28db1484d31",
+  "licenseText": "MIT License\n\nCopyright (c) 2023 Marti Maria Saguer\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the \n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to \npermit persons to whom the Software is furnished to do so, subject\nto the following conditions:\n\nThe above copyright notice and this permission notice shall be \nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF \nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE \nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+  "PE": {
+    "code": 0,
+    "stdout": "{\r\n  \"path\": \"D:\\\\AI AGENT\\\\kitao-company-validation-20261015\\\\artifacts\\\\company-validation\\\\icc\\\\lcms\\\\Library\\\\bin\\\\lcms2.dll\",\r\n  \"sha256\": \"2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4\",\r\n  \"imports\": [\r\n    \"KERNEL32.dll\"\r\n  ],\r\n  \"delayImports\": \"NOT_INSPECTED\",\r\n  \"notLicenseApproval\": true\r\n}\r\n",
+    "stderr": ""
+  },
+  "sourceBinaryBuildCorrespondence": "OPEN; exact source commit/recipe/toolchain correspondence not independently rebuilt",
+  "transitiveAndDelayImports": "OPEN; tool inventories ordinary importsonly",
+  "distribution": "NOT_APPROVED; no exactnewLCMSincluded; inheritedSdcbLibRawdifferenthashnotused",
+  "productPaths": "startupobserved only; full UIacceptanceOPEN"
+}

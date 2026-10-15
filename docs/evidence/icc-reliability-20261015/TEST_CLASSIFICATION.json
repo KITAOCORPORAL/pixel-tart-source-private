@@ -1,0 +1,119 @@
+{
+  "businessTimezone": "Asia/Shanghai",
+  "frozenSource": "6cea361464e27c4fc224bc0cc019b55cf600a884",
+  "sourceCore": {
+    "counts": {
+      "Passed": 1701,
+      "NotExecuted": 7
+    },
+    "discovered": 1708,
+    "selected": 1708,
+    "status": "FAILED"
+  },
+  "publishedCore": {
+    "counts": {
+      "Passed": 1702,
+      "NotExecuted": 6
+    },
+    "discovered": 1708,
+    "selected": 1708,
+    "status": "FAILED"
+  },
+  "publishedWpfSafe": {
+    "counts": {
+      "Passed": 16
+    },
+    "discovered": 1626,
+    "selected": 16,
+    "status": "PASSED"
+  },
+  "fullWpf": "NOT_RUN; userinputdetected afterstartup; potentialforeground",
+  "native": "startupAXobserved; navigationstopbeforeconfirmedclick; WPS/DPI/visualNOT_RUN",
+  "notExecuted": [
+    {
+      "id": "17854b2f-a47a-8489-8aca-2aba2fed9d10",
+      "name": "RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "display": "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。Set PIXEL_TART_RUN_V4_BENCHMARK=1 for the bounded production-size run.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled()\r\n   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+    },
+    {
+      "id": "113a3cd2-db36-82ba-82e3-61a9ec276a04",
+      "name": "RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "display": "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。Explicitly authorized real corpus is opt-in; not a synthetic RAW replacement.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+    },
+    {
+      "id": "1182f715-ec3c-836b-9814-bc1869300528",
+      "name": "RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "display": "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。Real spatial evidence is explicitly opt-in.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+    },
+    {
+      "id": "1baaeb0b-4956-84c1-be6e-4c9e00329ccf",
+      "name": "RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses",
+      "display": "CpuGpuParityAcrossEightSceneClasses",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。No validated GPU compute device on this host.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses()\r\n   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+    },
+    {
+      "id": "1ab0635e-4995-864d-9c7a-cff8d561d0c6",
+      "name": "RAWSelectionAssistant.Tests.ReferenceFilmPerformanceTests.FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "display": "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。Set PIXEL_TART_PERFORMANCE_EVIDENCE to collect local CPU evidence.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ReferenceFilmPerformanceTests.FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested()\r\n   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+    },
+    {
+      "id": "1d03f246-6ea4-8bde-9c8a-50b9e8590a6e",
+      "name": "RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene",
+      "display": "CpuGpuParityOnSyntheticScene",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。No validated GPU compute device on this host.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene()\r\n   at System.RuntimeMethodHandle.InvokeMethod(ObjectHandleOnStack target, Void** arguments, ObjectHandleOnStack sig, BOOL isConstructor, ObjectHandleOnStack result)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+    }
+  ],
+  "newTests": [
+    {
+      "id": "136f3d2e-2482-85f9-87d1-2a7f2a9ed07e",
+      "name": "RAWSelectionAssistant.Tests.EmbeddedIccContainerTests.TiffBothEndianDuplicateAndOtherIfdPolicyIsExplicit",
+      "display": "TiffBothEndianDuplicateAndOtherIfdPolicyIsExplicit",
+      "outcome": "Passed",
+      "error": ""
+    },
+    {
+      "id": "15805e29-d072-88be-b971-4bf217e44d7f",
+      "name": "RAWSelectionAssistant.Tests.TestResourceLocationTests.ExplicitConfigurationDoesNotDependOnAssemblyAncestorOrDrive",
+      "display": "ExplicitConfigurationDoesNotDependOnAssemblyAncestorOrDrive",
+      "outcome": "Passed",
+      "error": ""
+    },
+    {
+      "id": "1781be3e-c5c2-8440-986b-735d0d52b881",
+      "name": "RAWSelectionAssistant.Tests.EmbeddedIccContainerTests.JpegSingleMultiMissingDuplicateAndDamagedProfileHaveStableOutcomes",
+      "display": "JpegSingleMultiMissingDuplicateAndDamagedProfileHaveStableOutcomes",
+      "outcome": "Passed",
+      "error": ""
+    }
+  ],
+  "originalFailedHost": {
+    "inherited": "369Core/6WPF retained priorarchive",
+    "thisBatchInitialA": {
+      "Passed": 1688,
+      "Failed": 11,
+      "NotExecuted": 7
+    },
+    "reason": "Photographysubdirectorycontract andsrcsentinel遗漏; correctedwithoutassertiondrop"
+  },
+  "rootsRepaired": {
+    "A": {
+      "Passed": 1701,
+      "NotExecuted": 7
+    },
+    "B": {
+      "Passed": 1701,
+      "NotExecuted": 7
+    },
+    "WpfEach": 16
+  }
+}

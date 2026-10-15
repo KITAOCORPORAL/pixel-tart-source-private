@@ -1,0 +1,365 @@
+Window: "Kitao Studio 光镜", App: KitaoPhotoSelector.exe.
+	0 窗口 Kitao Studio 光镜 Secondary Actions: Raise
+		1 文本 PT
+		2 文本 PIXEL TART
+		3 文本 当前工作区 · 工作台
+		4 菜单 ID: TopMenu
+			5 菜单项 文件(F)
+				6 文本 文件(_F)
+			7 菜单项 项目(P)
+				8 文本 项目(_P)
+			9 菜单项 编辑(E)
+				10 文本 编辑(_E)
+			11 菜单项 视图(V)
+				12 文本 视图(_V)
+			13 菜单项 工具(T)
+				14 文本 工具(_T)
+			15 菜单项 帮助(H)
+				16 文本 帮助(_H)
+		17 按钮 最小化窗口
+			18 文本 —
+		19 按钮 最大化或还原窗口
+			20 文本 □
+		21 按钮 关闭窗口
+			22 文本 ×
+		23 按钮
+		24 窗格 侧栏根区域 ID: SidebarRoot
+		25 窗格 ID: SidebarNavigationScroll
+			26 文本 工作
+			27 按钮 工作台 Description: 工作台 ID: PrimaryNavigationWorkbench
+			28 按钮 素材库 Description: 素材库 ID: AssetLibraryNavigationButton
+			29 按钮 归片工作区 Description: 归片工作区 ID: PrimaryNavigationWorkflow
+			30 按钮 工作日历 Description: 工作日历 ID: PrimaryNavigationWorkCalendar
+			31 按钮 策划中心 Description: 策划中心 ID: PrimaryNavigationPlanning
+			32 按钮 联机拍摄 Description: 联机拍摄 ID: PrimaryNavigationTether
+			33 按钮 参考仿色 Description: 参考仿色 / Color Studio ID: PrimaryNavigationReferenceColor
+			34 按钮 在线选片 Description: 在线选片 ID: PrimaryNavigationOnlineSelection
+			35 按钮 摄影收支 Description: 摄影收支 ID: PrimaryNavigationFinance
+			36 按钮 项目历史 Description: 项目历史 ID: PrimaryNavigationHistory
+			37 分隔符 (disabled)
+			38 文本 工具
+			39 按钮 工具箱 Description: 打开完整工具集合。 ID: PrimaryNavigationToolbox
+			40 分隔符 (disabled)
+			41 文本 系统
+			42 按钮 授权与版本 Description: 授权与版本
+			43 按钮 设置 Description: 设置 ID: SidebarSettingsButton
+			44 按钮 帮助 Description: 帮助
+		45 文本 免费版
+		46 按钮 查看授权与版本 Description: 查看授权与版本
+			47 文本 升级
+		48 文本 授权与版本
+		49 按钮 收起侧栏 Description: 收起侧栏 ID: SidebarCollapseButton
+		108 窗格 工作台根区域 ID: WorkbenchRoot
+		127 窗格
+			128 按钮 开始本地分片 Description: 导入 TXT、客户选图 JPG 或照片编号，匹配本地 JPG、RAW 及相关文件。 ID: StartLocalSplitCard
+			129 文本 开始本地分片
+			130 按钮 本地分片说明 Description: 导入 TXT、客户选图 JPG 或照片编号，匹配本地 JPG、RAW 及相关文件。 ID: LocalSplitHelpButton
+				131 文本 ?
+			132 列表视图 ID: PinnedQuickToolsList
+				133 数据项 RAWSelectionAssistant.ViewModels.ToolboxItemViewModel
+					134 按钮 整理图片 Description: 按日期、相机或自定义规则安全整理照片。 ID: WorkbenchQuickTool_PhotoOrganize
+						135 文本 整理图片
+				136 数据项 RAWSelectionAssistant.ViewModels.ToolboxItemViewModel
+					137 按钮 RAW 转 JPG Description: 只读解码 RAW 并输出 JPG，源文件始终保留。 ID: WorkbenchQuickTool_RawToJpeg
+						138 文本 RAW 转 JPG
+				139 数据项 RAWSelectionAssistant.ViewModels.ToolboxItemViewModel
+					140 按钮 批量压缩 Description: 将照片压缩到独立输出目录，不覆盖源文件。 ID: WorkbenchQuickTool_BatchCompress
+						141 文本 批量压缩
+				142 数据项 RAWSelectionAssistant.ViewModels.ToolboxItemViewModel
+					143 按钮 拼图 Description: 使用模板制作拼图并安全导出到新文件。 ID: WorkbenchQuickTool_Collage
+						144 文本 拼图
+			145 按钮 工具箱 Description: 打开完整工具集合。 ID: WorkbenchToolboxButton
+				146 文本 工具箱
+			147 文本 项目概览
+			148 按钮 查看全部
+				149 文本 查看全部
+			150 文本 0
+			151 文本 进行中
+			152 文本 0
+			153 文本 待确认
+			154 文本 0
+			155 文本 后期待处理
+			156 文本 0
+			157 文本 已完成
+			158 文本 处理任务
+			159 按钮 查看任务历史
+				160 文本 查看全部
+			161 文本 暂无待处理任务
+			162 文本 扫描、复制、压缩和转档任务会显示在这里
+			163 自定义 工作台拍摄日历摘要
+				164 自定义 近期拍摄
+					165 按钮 查看今日拍摄
+						166 文本 今日 0
+					167 按钮 查看未来七天拍摄
+						168 文本 未来7天 0
+					169 按钮 打开工作日历查看全部排期
+						170 文本 查看全部
+					171 按钮 刷新近期拍摄
+						172 文本 刷新
+					173 窗格
+						174 文本 今天没有待开始的拍摄
+						175 列表视图
+					176 文本 今天暂无拍摄安排
+					177 按钮 从空状态打开工作日历
+						178 文本 打开工作日历
+					179 文本
+			180 按钮 最近项目 ID: RecentAllTab
+				181 文本 最近项目
+			182 按钮 本地分片
+				183 文本 本地分片
+			184 按钮 归片项目
+				185 文本 归片项目
+			186 按钮 已完成
+				187 文本 已完成
+			188 按钮 查看全部
+				189 文本 查看全部
+			190 窗格 ID: RecentProjectsScroll
+				191 列表视图
+			192 文本 还没有本地项目
+			193 文本 创建第一个本地分片任务，项目会保存在当前电脑
+			194 按钮 创建本地分片任务
+				195 文本 创建本地分片任务
+			196 滚动条 (settable, float) Value: 0 ID: PART_VerticalScrollBar
+				197 按钮 ID: PageUp
+				198 缩略
+				199 按钮 ID: PageDown
+		200 自定义 工作台右侧工作日历 Description: 与完整工作日历共享同一排期数据源
+			201 文本 工作日历
+			202 按钮 打开完整工作日历
+				203 文本 打开完整日历
+			204 按钮 新建拍摄排期 Description: 新建拍摄排期
+			205 文本 空闲
+			206 文本 有拍摄
+			207 文本 待返图
+			208 文本 已返图
+			209 按钮 上个月 ID: PreviousMonthButton
+			210 按钮 返回今天 Description: 返回今天
+				211 文本 2026年10月
+			212 按钮 下个月 ID: NextMonthButton
+			213 文本 一
+			214 文本 二
+			215 文本 三
+			216 文本 四
+			217 文本 五
+			218 文本 六
+			219 文本 日
+			220 列表视图 ID: CalendarDaysGrid
+				221 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					222 文本 28 ID: DayNumberText
+					223 文本
+					224 文本
+				225 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					226 文本 29 ID: DayNumberText
+					227 文本
+					228 文本
+				229 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					230 文本 30 ID: DayNumberText
+					231 文本
+					232 文本
+				233 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					234 文本 1 ID: DayNumberText
+					235 文本
+					236 文本
+				237 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					238 文本 2 ID: DayNumberText
+					239 文本
+					240 文本
+				241 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					242 文本 3 ID: DayNumberText
+					243 文本
+					244 文本
+				245 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					246 文本 4 ID: DayNumberText
+					247 文本
+					248 文本
+				249 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					250 文本 5 ID: DayNumberText
+					251 文本
+					252 文本
+				253 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					254 文本 6 ID: DayNumberText
+					255 文本
+					256 文本
+				257 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					258 文本 7 ID: DayNumberText
+					259 文本
+					260 文本
+				261 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					262 文本 8 ID: DayNumberText
+					263 文本
+					264 文本
+				265 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					266 文本 9 ID: DayNumberText
+					267 文本
+					268 文本
+				269 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					270 文本 10 ID: DayNumberText
+					271 文本
+					272 文本
+				273 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					274 文本 11 ID: DayNumberText
+					275 文本
+					276 文本
+				277 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					278 文本 12 ID: DayNumberText
+					279 文本
+					280 文本
+				281 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					282 文本 13 ID: DayNumberText
+					283 文本
+					284 文本
+				285 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					286 文本 14 ID: DayNumberText
+					287 文本
+					288 文本
+				289 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					290 文本 15 ID: DayNumberText
+					291 文本
+					292 文本
+				293 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					294 文本 16 ID: DayNumberText
+					295 文本
+					296 文本
+				297 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					298 文本 17 ID: DayNumberText
+					299 文本
+					300 文本
+				301 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					302 文本 18 ID: DayNumberText
+					303 文本
+					304 文本
+				305 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					306 文本 19 ID: DayNumberText
+					307 文本
+					308 文本
+				309 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					310 文本 20 ID: DayNumberText
+					311 文本
+					312 文本
+				313 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					314 文本 21 ID: DayNumberText
+					315 文本
+					316 文本
+				317 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					318 文本 22 ID: DayNumberText
+					319 文本
+					320 文本
+				321 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					322 文本 23 ID: DayNumberText
+					323 文本
+					324 文本
+				325 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					326 文本 24 ID: DayNumberText
+					327 文本
+					328 文本
+				329 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					330 文本 25 ID: DayNumberText
+					331 文本
+					332 文本
+				333 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					334 文本 26 ID: DayNumberText
+					335 文本
+					336 文本
+				337 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					338 文本 27 ID: DayNumberText
+					339 文本
+					340 文本
+				341 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					342 文本 28 ID: DayNumberText
+					343 文本
+					344 文本
+				345 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					346 文本 29 ID: DayNumberText
+					347 文本
+					348 文本
+				349 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					350 文本 30 ID: DayNumberText
+					351 文本
+					352 文本
+				353 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					354 文本 31 ID: DayNumberText
+					355 文本
+					356 文本
+				357 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					358 文本 1 ID: DayNumberText
+					359 文本
+					360 文本
+				361 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					362 文本 2 ID: DayNumberText
+					363 文本
+					364 文本
+				365 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					366 文本 3 ID: DayNumberText
+					367 文本
+					368 文本
+				369 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					370 文本 4 ID: DayNumberText
+					371 文本
+					372 文本
+				373 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					374 文本 5 ID: DayNumberText
+					375 文本
+					376 文本
+				377 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					378 文本 6 ID: DayNumberText
+					379 文本
+					380 文本
+				381 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					382 文本 7 ID: DayNumberText
+					383 文本
+					384 文本
+				385 数据项 RAWSelectionAssistant.ViewModels.MonthDayViewModel
+					386 文本 8 ID: DayNumberText
+					387 文本
+					388 文本
+			389 文本 10月15日 当天详情
+			390 按钮 为选中日期新建拍摄排期
+				391 文本 新建拍摄
+			392 文本 当天暂无排期，双击日期或点击“新建拍摄”。
+			393 窗格
+				394 列表视图
+			395 按钮 查看选中日期的完整排期
+				396 文本
+		397 文本 任务中心
+		398 按钮 新建任务
+			399 文本 新建任务
+		400 文本 0
+		401 文本 处理中
+		402 文本 0
+		403 文本 等待确认
+		404 窗格 当前任务列表 ID: TaskCenterRuntimeContent
+			405 文本 暂无处理任务
+			406 文本 扫描、复制、压缩、归片和联机任务会显示在这里。
+			407 按钮 查看任务历史
+				408 文本 查看任务历史
+			409 列表视图
+		410 文本 需要处理
+		411 文本 冲突文件
+		412 文本 0
+		413 文本 未找到文件
+		414 文本 0
+		415 按钮 打开任务历史
+			416 文本 打开任务历史
+		417 菜单
+			418 菜单项 更多任务操作
+				419 文本 更多
+		109 文本 工作台准备就绪
+		110 文本 今天没有待开始的拍摄
+		111 文本 ·
+		112 文本 ·
+		113 文本
+		114 进度栏 Value: 0
+		115 自定义 拍摄提醒通知
+			116 窗格
+				117 列表视图
+
+Document text: ```
+今日 0
+未来7天 0
+查看全部
+刷新
+今天没有待开始的拍摄
+今天暂无拍摄安排
+打开工作日历
+未来7天暂无拍摄安排
+```
