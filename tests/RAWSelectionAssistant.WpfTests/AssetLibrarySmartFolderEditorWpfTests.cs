@@ -296,7 +296,7 @@ public sealed class AssetLibrarySmartFolderEditorWpfTests
         viewModel?.DisposeAsync().AsTask().GetAwaiter().GetResult();
 
     private static string FindRepositoryFile(params string[] parts)
-    { return TestResources.Root; }
+    { return Path.Combine(new[]{TestResources.Root}.Concat(parts).ToArray()); }
 
     private static Task RunSta(Action action)
     {

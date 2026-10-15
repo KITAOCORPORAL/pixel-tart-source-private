@@ -1,0 +1,7 @@
+# Private WPF host / scope
+
+Create unique noninteractive windowstation +desktop perrun; children inherit assignedlpDesktop, includingtesthost/process-launchedvalidator. Assert Python childstationname beforeadapterrun. NoSwitchDesktop/SendInput/SetCursorPos, originalinputdesktop notactivated; windowstation ownclipboardisnotuserclipboard. RealWPFHWND/resources/Dispatcher/popup/closing code still executed, notmocked. RuntimeCorrection9actualPassed initialsmoke. Thisdoesnotvalidatephysicalinput/DPI/GPUdriver/displaycomposition/WPS. DWM/rendercapturemayremainUNAVAILABLEandinconclusive, neverreclassifyPassed.
+
+Full1626testinventoryactualadapter,212classesprocessisolated. Sourcebehavioraudit includes window/clipboard/focus sites perclass, categories refinedbyactualresults. Firstfullrunpreserved. It exposed7 FindRepositoryFile(params string[]parts) helpers accidentally returningonlyrootinpreviousbranch; fixedPath.Combine(root,parts), assertionsunchanged. No normalproductbehaviorchanged. Rerunfixedclassesandpublishedhostsseparately; fullstrictwillfailwhileNotExecutedremain.
+
+Explicitresource-rootstillused; absolutecheckoutconfigcantravelwithhost. Twodifferentrootpublishedcomponenttestsrequired. Hostisdiagnosticnotnativeapproval. No foreground desktop polling/input thisbatch.

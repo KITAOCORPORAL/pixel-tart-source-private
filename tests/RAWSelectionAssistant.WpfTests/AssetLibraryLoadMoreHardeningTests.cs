@@ -114,5 +114,5 @@ public sealed class AssetLibraryLoadMoreHardeningTests
     }
 
     private static string FindRepositoryFile(params string[] parts)
-    { return TestResources.Root; }
+    { return Path.Combine(new[]{TestResources.Root}.Concat(parts).ToArray()); }
 }

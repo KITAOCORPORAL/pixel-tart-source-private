@@ -170,5 +170,5 @@ public sealed class AssetLibraryP3AccessibilityTests
         "src", "PixelTart.Modules.AssetLibrary", "AssetLibraryP3Styles.xaml");
 
     private static string FindRepositoryFile(params string[] parts)
-    { return TestResources.Root; }
+    { return Path.Combine(new[]{TestResources.Root}.Concat(parts).ToArray()); }
 }
