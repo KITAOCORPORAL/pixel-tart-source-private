@@ -15,7 +15,8 @@
       "RT_CACHE": "D:/AI AGENT/kitao-validation-closure-20261015/artifacts/validation-closure/rt-cache",
       "OMP_NUM_THREADS": "2"
     },
-    "effectivePp3Files": "artifacts/validation-closure/raw/*.pp3"
+    "effectivePp3Files": "artifacts/validation-closure/raw/*.pp3",
+    "decoderConfiguration": "Default shared LibRaw group retained; final independent group forces EnableLibRaw=false; Sony unsupported; see addendum"
   },
   "files": [
     {
