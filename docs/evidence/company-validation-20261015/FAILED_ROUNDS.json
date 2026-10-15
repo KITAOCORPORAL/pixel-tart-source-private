@@ -1,0 +1,10 @@
+[
+  {
+    "suite": "final-wpf",
+    "id": "1fa3249b-6252-886f-b8b1-6f5e8e5aed42",
+    "name": "RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests.CanvasMenusExecuteClipboardAndShareZoomStateAtAllViewportSizes",
+    "display": "CanvasMenusExecuteClipboardAndShareZoomStateAtAllViewportSizes",
+    "outcome": "Failed",
+    "error": "调试跟踪:\r\n{\"Event\":\"CanvasFit\",\"Utc\":\"2026-10-15T04:01:32.3553656+00:00\",\"Before\":{\"Zoom\":1,\"PanX\":80,\"PanY\":70},\"Zoom\":1,\"PanX\":480,\"PanY\":231,\"ActualWidth\":960,\"ActualHeight\":462,\"Bounds\":{\"X\":0,\"Y\":0,\"Width\":1,\"Height\":1},\"VisibleTopLeft\":{\"X\":480,\"Y\":231},\"VisibleBottomRight\":{\"X\":481,\"Y\":232},\"Dpi\":1.5}\n        \n          Assert.IsTrue 失败。‘condition’表达式:‘paste.IsEnabled’。\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153\r\n   at RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests.<>c.<<CanvasMenusExecuteClipboardAndShareZoomStateAtAllViewportSizes>b__5_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+  }
+]

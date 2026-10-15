@@ -1,0 +1,170 @@
+[
+  {
+    "reference": "Argyll",
+    "command": [
+      "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\argyll35\\Argyll_V3.5.0\\bin\\xicclu.exe",
+      "-v0",
+      "-ff",
+      "-ir",
+      "-px",
+      "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\results\\matrix-v2.1-g1.0.icc"
+    ],
+    "points": 48000,
+    "exitCode": 0,
+    "elapsedMs": 73.64870002493262,
+    "outputSha256": "bea2a98735acd7a1e7da2c41c00268d2e991e3bdd6b9b444930cbc28b7c5b610",
+    "stderr": "",
+    "samples": [
+      {
+        "ms": 0.5216000135987997,
+        "workingSet": 2170880,
+        "privateBytes": 3051520
+      },
+      {
+        "ms": 5.764800007455051,
+        "workingSet": 2625536,
+        "privateBytes": 3162112
+      },
+      {
+        "ms": 11.782300018239766,
+        "workingSet": 2625536,
+        "privateBytes": 3162112
+      },
+      {
+        "ms": 17.772499995771796,
+        "workingSet": 3858432,
+        "privateBytes": 3448832
+      },
+      {
+        "ms": 23.83770002052188,
+        "workingSet": 5083136,
+        "privateBytes": 3588096
+      },
+      {
+        "ms": 29.770600027404726,
+        "workingSet": 5083136,
+        "privateBytes": 3588096
+      },
+      {
+        "ms": 35.271900007501245,
+        "workingSet": 5083136,
+        "privateBytes": 3588096
+      },
+      {
+        "ms": 41.276800038758665,
+        "workingSet": 5083136,
+        "privateBytes": 3588096
+      },
+      {
+        "ms": 47.284900036174804,
+        "workingSet": 5083136,
+        "privateBytes": 3588096
+      },
+      {
+        "ms": 53.27849998138845,
+        "workingSet": 5083136,
+        "privateBytes": 3588096
+      },
+      {
+        "ms": 59.28400001721457,
+        "workingSet": 5083136,
+        "privateBytes": 3588096
+      }
+    ],
+    "nativeAllocations": "UNAVAILABLE",
+    "comparison": "Includes process launch/parse/text I/O; not LCMS pure transform benchmark"
+  },
+  {
+    "reference": "skcms",
+    "command": [
+      "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\skcms_probe.exe",
+      "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\results\\matrix-v4.3-g1.0.icc",
+      "1",
+      "f"
+    ],
+    "points": 48000,
+    "exitCode": 0,
+    "elapsedMs": 95.62620002543554,
+    "outputSha256": "6638b55f8b05045f324f3b457bd67a015801faacbafa9592a799245b2f6be910",
+    "stderr": "",
+    "samples": [
+      {
+        "ms": 0.16569998115301132,
+        "workingSet": 2093056,
+        "privateBytes": 413696
+      },
+      {
+        "ms": 5.738699983339757,
+        "workingSet": 2625536,
+        "privateBytes": 425984
+      },
+      {
+        "ms": 11.755599989555776,
+        "workingSet": 2625536,
+        "privateBytes": 425984
+      },
+      {
+        "ms": 17.75840000482276,
+        "workingSet": 3215360,
+        "privateBytes": 479232
+      },
+      {
+        "ms": 23.74249999411404,
+        "workingSet": 3858432,
+        "privateBytes": 528384
+      },
+      {
+        "ms": 29.722200008109212,
+        "workingSet": 3858432,
+        "privateBytes": 528384
+      },
+      {
+        "ms": 35.72490002261475,
+        "workingSet": 3858432,
+        "privateBytes": 528384
+      },
+      {
+        "ms": 41.74600000260398,
+        "workingSet": 3858432,
+        "privateBytes": 528384
+      },
+      {
+        "ms": 47.72360000060871,
+        "workingSet": 3858432,
+        "privateBytes": 528384
+      },
+      {
+        "ms": 53.766799974255264,
+        "workingSet": 3858432,
+        "privateBytes": 528384
+      },
+      {
+        "ms": 59.74320002133027,
+        "workingSet": 3858432,
+        "privateBytes": 528384
+      },
+      {
+        "ms": 65.74270001146942,
+        "workingSet": 3858432,
+        "privateBytes": 528384
+      },
+      {
+        "ms": 71.74919999670237,
+        "workingSet": 3858432,
+        "privateBytes": 528384
+      },
+      {
+        "ms": 77.73109996924177,
+        "workingSet": 3858432,
+        "privateBytes": 528384
+      },
+      {
+        "ms": 83.8017999776639,
+        "workingSet": 3858432,
+        "privateBytes": 528384
+      }
+    ],
+    "nativeAllocations": "UNAVAILABLE",
+    "comparison": "Includes process launch/parse/text I/O; not LCMS pure transform benchmark"
+  }
+]

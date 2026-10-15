@@ -1,0 +1,273 @@
+[
+  {
+    "profile": "bad-size.icc",
+    "exitCode": 0,
+    "result": {
+      "status": "REFUSED",
+      "hash": "C5E407B40EBE3D62427829DAEBFB9A15E5A73891CFC62374E7AAA46914932193",
+      "error": "NotSupportedException",
+      "message": "Only ICC v2 RGB/XYZ matrix fixture supported."
+    }
+  },
+  {
+    "profile": "declared-seven-tag-v2.icc",
+    "exitCode": 0,
+    "result": {
+      "status": "ACCEPTED_DECLARED_SYNTHETIC_SUBSET",
+      "hash": "172FE0BF0E7F60C709E97FAA3312DCE643330BEBA287DE7287A9E2263EEFD990",
+      "profile": {
+        "Sha256": "172FE0BF0E7F60C709E97FAA3312DCE643330BEBA287DE7287A9E2263EEFD990",
+        "RgbToPcsD50": {
+          "M11": 0.79766845703125,
+          "M12": 0.13519287109375,
+          "M13": 0.0313568115234375,
+          "M21": 0.2880401611328125,
+          "M22": 0.7118682861328125,
+          "M23": 9.1552734375e-05,
+          "M31": 0,
+          "M32": 0,
+          "M33": 0.8249053955078125
+        },
+        "ProfileId": "AnalystSyntheticIccLinearMatrixV1",
+        "Transfer": "Linear identity curv(0)",
+        "PcsWhitePoint": "ICC PCS D50"
+      },
+      "results": [
+        {
+          "input": [
+            0,
+            0,
+            0
+          ],
+          "linearSrgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "input": [
+            0.001,
+            0.001,
+            0.001
+          ],
+          "linearSrgb": [
+            0.0009998951030206458,
+            0.0010000055422259505,
+            0.00100024883029386
+          ]
+        },
+        {
+          "input": [
+            0.18,
+            0.18,
+            0.18
+          ],
+          "linearSrgb": [
+            0.1799811185437162,
+            0.18000099760067106,
+            0.18004478945289482
+          ]
+        },
+        {
+          "input": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "linearSrgb": [
+            0.4999475515103225,
+            0.5000027711129754,
+            0.5001244151469301
+          ]
+        },
+        {
+          "input": [
+            1,
+            1,
+            1
+          ],
+          "linearSrgb": [
+            0.999895103020645,
+            1.0000055422259508,
+            1.0002488302938601
+          ]
+        },
+        {
+          "input": [
+            1,
+            0,
+            0
+          ],
+          "linearSrgb": [
+            2.033896757682819,
+            -0.22879962913888002,
+            -0.008558179441036819
+          ]
+        },
+        {
+          "input": [
+            0,
+            1,
+            0
+          ],
+          "linearSrgb": [
+            -0.7274045470775479,
+            1.2317409889228366,
+            -0.15332129771758576
+          ]
+        },
+        {
+          "input": [
+            0,
+            0,
+            1
+          ],
+          "linearSrgb": [
+            -0.3065971075846259,
+            -0.0029358175580056767,
+            1.1621283074524829
+          ]
+        },
+        {
+          "input": [
+            0.9,
+            0.2,
+            0.1
+          ],
+          "linearSrgb": [
+            1.6543664617405653,
+            0.040134949803774585,
+            0.07784620970479797
+          ]
+        },
+        {
+          "input": [
+            0.1,
+            0.9,
+            0.3
+          ],
+          "linearSrgb": [
+            -0.5432535488768989,
+            1.0848061818492631,
+            0.2097935063458139
+          ]
+        },
+        {
+          "input": [
+            -0.1,
+            0.2,
+            1.2
+          ],
+          "linearSrgb": [
+            -0.7167871142853424,
+            0.2657051796288485,
+            1.3647455273435656
+          ]
+        },
+        {
+          "input": [
+            2,
+            2,
+            2
+          ],
+          "linearSrgb": [
+            1.99979020604129,
+            2.0000110844519017,
+            2.0004976605877203
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "profile": "lut-v2.1.icc",
+    "exitCode": 0,
+    "result": {
+      "status": "REFUSED",
+      "hash": "33E522E2A3EB38C94FAF899D751EFB72D01A5ECD505D2774DDF672FB046B0E2C",
+      "error": "NotSupportedException",
+      "message": "Only ICC v2 RGB/XYZ matrix fixture supported."
+    }
+  },
+  {
+    "profile": "lut-v4.3-explicit-matrix.icc",
+    "exitCode": 0,
+    "result": {
+      "status": "REFUSED",
+      "hash": "322B709A1886D246DBA450A41C562C50F81BFDBC523F34CB42920FA2D45A5ABF",
+      "error": "NotSupportedException",
+      "message": "Only ICC v2 RGB/XYZ matrix fixture supported."
+    }
+  },
+  {
+    "profile": "lut-v4.3.icc",
+    "exitCode": 0,
+    "result": {
+      "status": "REFUSED",
+      "hash": "96FF21F78885C75A3A9E4D2D073A882CC8D451FA1061BD91E4421368E953B978",
+      "error": "NotSupportedException",
+      "message": "Only ICC v2 RGB/XYZ matrix fixture supported."
+    }
+  },
+  {
+    "profile": "matrix-v2.1-g1.0.icc",
+    "exitCode": 0,
+    "result": {
+      "status": "REFUSED",
+      "hash": "DAFBFF7207D22B526BAA8F61A280E197B639AF68CBE2E48529455157612B7407",
+      "error": "NotSupportedException",
+      "message": "Unexpected ICC tag table; no implicit LUT/transfer fallback."
+    }
+  },
+  {
+    "profile": "matrix-v2.1-g2.2.icc",
+    "exitCode": 0,
+    "result": {
+      "status": "REFUSED",
+      "hash": "0D36C514E0651F60CAB5FBE26411B7CC7DF2087ABB07F0C00893B467DA1F2E1D",
+      "error": "NotSupportedException",
+      "message": "Unexpected ICC tag table; no implicit LUT/transfer fallback."
+    }
+  },
+  {
+    "profile": "matrix-v4.3-g1.0.icc",
+    "exitCode": 0,
+    "result": {
+      "status": "REFUSED",
+      "hash": "901685C8B491AD68B856C765EF1DBED69A80B8FDC0B735B6ECA0C80255B74412",
+      "error": "NotSupportedException",
+      "message": "Only ICC v2 RGB/XYZ matrix fixture supported."
+    }
+  },
+  {
+    "profile": "matrix-v4.3-g2.2.icc",
+    "exitCode": 0,
+    "result": {
+      "status": "REFUSED",
+      "hash": "F2AF46B48DE7B7F3770DCEE022C47A00AEF61B9706D3C5F5772A5EBE92C0A184",
+      "error": "NotSupportedException",
+      "message": "Only ICC v2 RGB/XYZ matrix fixture supported."
+    }
+  },
+  {
+    "profile": "tag-out-of-range.icc",
+    "exitCode": 0,
+    "result": {
+      "status": "REFUSED",
+      "hash": "5F215FAF53A9138FF96D376EC1E77A21B14D854E9767A822C35061AA49F33753",
+      "error": "NotSupportedException",
+      "message": "Only ICC v2 RGB/XYZ matrix fixture supported."
+    }
+  },
+  {
+    "profile": "truncated.icc",
+    "exitCode": 0,
+    "result": {
+      "status": "REFUSED",
+      "hash": "402D5AA034E226807E4A6C61977DD8E0F34C7E9D0AC4BD6E2C3B43461899A7BF",
+      "error": "InvalidDataException",
+      "message": "ICC fixture hash or size mismatch."
+    }
+  }
+]

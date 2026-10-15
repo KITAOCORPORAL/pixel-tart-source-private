@@ -1,0 +1,222 @@
+[
+  {
+    "path": "docs/evidence/company-validation-20261015/AB_EXECUTION_AUDIT.json",
+    "type": "evidence",
+    "sha256": "b92fe200aa78ab2b4bc0d0b5d4c273767382250c1f94cd7cc90d41f9ed136853"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/AUTHORIZED_RAW_INPUTS.json",
+    "type": "evidence",
+    "sha256": "9b4c9eeb6a280d78da5f0cac9602c5edee694e190bf30c6a4efa85d40c283a4e"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/FULL_CORE_DISCOVERY.json",
+    "type": "evidence",
+    "sha256": "9f48fa0bbaca27be6c58219b4ed5c871c14b46984a40165869360423896f9a66"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/FULL_CORE_SUMMARY.json",
+    "type": "evidence",
+    "sha256": "8b7a914bbb7bd20949f7fcb8799042ec683cd897e78a0af9ea2bf171a1d96f65"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/FULL_WPF_DISCOVERY.json",
+    "type": "evidence",
+    "sha256": "b26d24fefdf4314261c69383d9d030e82e40a455f61f8d9612d4c765c7fba42f"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/FULL_WPF_SUMMARY.json",
+    "type": "evidence",
+    "sha256": "05d8a650a4a73c798e163501ea8928e46e5b60a0eacc4ea84aada738f144ad3a"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/INTEGRATION_REVIEW_GATE.json",
+    "type": "evidence",
+    "sha256": "8e49abcfd1c94b54be437aae344ce444746a6d8f476adcbf95ae4ddba3cdf01b"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/INTEGRATION_TESTS.json",
+    "type": "evidence",
+    "sha256": "3832a8fb3511c45ad79a7f771cf9ea061e5b890b7a1fe9758838e2c259f8f3af"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/MERGED_RELEASE_FILES.json",
+    "type": "evidence",
+    "sha256": "4c7c080d5dabf8ed2a9829c2acae5e986c7b055b6fdd10b0fa1ba027a9ba2ffc"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/MERGED_RELEASE_IDENTITY.json",
+    "type": "evidence",
+    "sha256": "ea80f7589a7ac3ff4d0e19599e5a719173236e119d7ea13372507a190c0fdabf"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/RELEASE_CORE_DISCOVERY.json",
+    "type": "evidence",
+    "sha256": "21342b45ccc47e60ef22c0554f2dc3e74c2092130bd03ee978add9bf774163c3"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/RELEASE_CORE_SUMMARY.json",
+    "type": "evidence",
+    "sha256": "e856c6260d748d5d87327d539155777070fef4e4bef3a5db64456f004a262dc4"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/RELEASE_IDENTITY_DISCOVERY.json",
+    "type": "evidence",
+    "sha256": "21342b45ccc47e60ef22c0554f2dc3e74c2092130bd03ee978add9bf774163c3"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/RELEASE_IDENTITY_SUMMARY.json",
+    "type": "evidence",
+    "sha256": "435f0b7443b9b9508069b83373ad3550e374144578c2093029ef22920fbad1c4"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/RELEASE_WPF_DISCOVERY.json",
+    "type": "evidence",
+    "sha256": "41ea8817bb1d854a2e1971aa101d26eccdca8ce351ff03073f105b1eeb417c4e"
+  },
+  {
+    "path": "docs/evidence/company-validation-20261015/RELEASE_WPF_SUMMARY.json",
+    "type": "evidence",
+    "sha256": "719683ba895634ffe6d8b9f40a17aaecffd2f043a222b2a4a9fef11b432ab2a5"
+  },
+  {
+    "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.ContextualInspector.cs",
+    "type": "product-source",
+    "sha256": "8331f9f0d7cbfca063183542e625a013244beaee6f4c8751f14a15f876d0140d"
+  },
+  {
+    "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.P3QueryComposer.cs",
+    "type": "product-source",
+    "sha256": "bc8b659d63f1434118ce0121da0365c20ec2e303d0df0efee30156c956c1704e"
+  },
+  {
+    "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.cs",
+    "type": "product-source",
+    "sha256": "048f4c94d78c798fd0225200ee94dd601315d7121748649f30067fae8e76b42f"
+  },
+  {
+    "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+    "type": "product-source",
+    "sha256": "84f3e3ed17d6fecab49081be874a2264fca0e708bdd86144ef9ee9cffc2d8254"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContracts.cs",
+    "type": "product-source",
+    "sha256": "01c539f861178084d43eea4be0fa72e1f26eb997198e065e88a2a71aa592ca06"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryQueryDiagnostics.cs",
+    "type": "product-source",
+    "sha256": "653bbaf9369e9d49ca25829d4fb46af01ae988f91d3575048ee36904b70a85af"
+  },
+  {
+    "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.P3.cs",
+    "type": "product-source",
+    "sha256": "1a4f6883db270b753945300b8eb0c7ef2aed66abb042b251da10984d49a66a77"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.Tests/AssetLibraryP3PerformanceTests.cs",
+    "type": "regression-test",
+    "sha256": "3c66ec4cb12d877d10793b30aa4d25bae4b4c6cabbf93a480fa18e6008634648"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.Tests/CompanyQueryAggregateTests.cs",
+    "type": "regression-test",
+    "sha256": "621d5bfc12e75f757f476c756d70d991570a3d6e62ceb9285cb90dbcca90205a"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/CompanyScopeSwitchTests.cs",
+    "type": "regression-test",
+    "sha256": "bcb6303527e8e8ff2f557d0cff02dcdb33195a5c0a3e12a75ac7c81816b96896"
+  },
+  {
+    "path": "tests/RAWSelectionAssistant.WpfTests/RuntimeCorrectionWpfTests.cs",
+    "type": "regression-test",
+    "sha256": "cc20d2b69c7e92e18a12b71a88632314a0d1ea6251babac8ba6db95cef18b74c"
+  },
+  {
+    "path": "tools/company-validation/.gitignore",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "7a2bfc130ed619857740b72e503a6487fc4888e9f16887e6f33f1dcac239ebe0"
+  },
+  {
+    "path": "tools/company-validation/LargeSpatialProbe/LargeSpatialProbe.csproj",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "a5057e58b14e641d176b5213a8b2a8b9e5595af3741c50e8d2c4daa4f86cac89"
+  },
+  {
+    "path": "tools/company-validation/LargeSpatialProbe/Program.cs",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "0725dd109613ec08cca31b8baaa75f0a90f1302323d8f5e169718fec35cd1ffb"
+  },
+  {
+    "path": "tools/company-validation/P3Probe/P3Probe.csproj",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "a5057e58b14e641d176b5213a8b2a8b9e5595af3741c50e8d2c4daa4f86cac89"
+  },
+  {
+    "path": "tools/company-validation/P3Probe/Program.cs",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "9c8adcc7854b12be835f6f52b635e21c74091a6ec6a5c31f551e433e1a427b61"
+  },
+  {
+    "path": "tools/company-validation/P3UiProbe/P3UiProbe.csproj",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "c844ac518d8232d728975987decec0ca9ef55e999285072b80ac66fba63dcd07"
+  },
+  {
+    "path": "tools/company-validation/P3UiProbe/Program.cs",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "f95b48fad1c7e4eb0939c11c6b55110ae16bbc930ac3190196e38489ff58355c"
+  },
+  {
+    "path": "tools/company-validation/RawInputProbe/Program.cs",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "a28196de6260b209bd06e63a2fddf974ea246ec1d711f1f0eea974b1d41ef5bb"
+  },
+  {
+    "path": "tools/company-validation/RawInputProbe/RawInputProbe.csproj",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "a5057e58b14e641d176b5213a8b2a8b9e5595af3741c50e8d2c4daa4f86cac89"
+  },
+  {
+    "path": "tools/company-validation/SyntheticIccProbe/Program.cs",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "ee14a8db7115b5fe5591357cba81497d066c6d55158a41c26d7806a575f1bcbd"
+  },
+  {
+    "path": "tools/company-validation/SyntheticIccProbe/SyntheticIccProbe.csproj",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "a5057e58b14e641d176b5213a8b2a8b9e5595af3741c50e8d2c4daa4f86cac89"
+  },
+  {
+    "path": "tools/company-validation/acquire_icc_references.py",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "b99f95980ded4a5d7654bc5836bd09ba6a58bb66a0de8b197568812f147d05ec"
+  },
+  {
+    "path": "tools/company-validation/icc_compare.py",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "ca9ad8dcd9f17e70c8cd0de3be40611b2f0d6b1ba8e2909c17a5d07e981ade89"
+  },
+  {
+    "path": "tools/company-validation/icc_reference_memory.py",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "71da128f9920e93f817fd38069cdc2bc4fa9b0c1ef49391fa7df950c4fc14ef8"
+  },
+  {
+    "path": "tools/company-validation/icc_subset_compare.py",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "aec1540413d60a74ddf53c2570bf919f819e4b35ceaf94856a0843d4972baf60"
+  },
+  {
+    "path": "tools/company-validation/skcms_probe.cpp",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "391448100276ca026486d4ea236169e89385cf1cfc66dfaefed7dfdb597dcda4"
+  },
+  {
+    "path": "tools/planning-r7/review-classification.json",
+    "type": "research-or-diagnostic-tool",
+    "sha256": "81647ae8c19b56f941c6f1614dae2a78febc29a6334c1ea00bcec9640045ace4"
+  }
+]

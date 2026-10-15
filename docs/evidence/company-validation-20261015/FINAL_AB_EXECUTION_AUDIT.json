@@ -1,0 +1,113 @@
+{
+  "source": "3d526ae7e7589a0d735689883dcf62a4ef272720",
+  "checks": [
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.InventoryIsReadOnlyProtectsDraftRecoveryAndUnknownFiles",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.LegacyExactIdentityFallbackMigratesOnlyAfterHashValidation",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.RelativePathsRequireBoundRootIdentityHashAndRejectTraversal",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.PlanningImageStorageTests.ReparseEscapeIsRefusedWithoutOpeningForeignCopy",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.LegacyAbsoluteRootMoveAndLockedMigrationReplayNeverReplaceWrongImage",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.RealRootMoveKeepsRepeatedPicturesCellCaptionsModesHistoryPaginationAndDocx",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PlanningPortableImageTests.UndoRedoAndDiskRecoveryCopiesAreListedButNeverDeleted",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.NightColorBaselineTests.AcquisitionProtocolNeverAdmitsCalibrationFromMetadataAlone",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.NightColorBaselineTests.DiagnosticsRecordNegativeExtendedFiniteAndRejectUnknownIdentity",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.NightColorBaselineTests.SensorProbePreservesExtendedValuesAndCountsActualChannelSaturation",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.Pv7PrototypeTests.ExposureNeutralMonotonicSingleTransferAndQuantizationAreExplicit",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.Pv7PrototypeTests.ExtendedPrimariesSkinAndBakedWhiteBalanceFailClosed",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.Pv7PrototypeTests.SyntheticD50D65AdaptationAndUnknownProfileRefusal",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.SyntheticIccFixtureTests.ActualSyntheticIccBinaryHasKnownD50LinearContractAndComputedReference",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.SyntheticIccFixtureTests.UnknownLutAndEscapingIccTagsRefuseInsteadOfFallback",
+      "sourceCount": 1,
+      "sourceOutcome": "Passed",
+      "publishedCount": 1,
+      "publishedOutcome": "Passed"
+    }
+  ],
+  "A_new": 7,
+  "B_new": 8,
+  "notMerelyPolicyPresence": true
+}

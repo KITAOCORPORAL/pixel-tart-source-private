@@ -1,0 +1,14 @@
+{
+  "nightlyFinalArchivesFailedAssertions": [],
+  "historicalRequiredFailure": {
+    "test": "RAWSelectionAssistant.Tests.AssetLibraryP3PerformanceTests.TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds",
+    "scopeMs": [
+      673.8,
+      2499.7
+    ],
+    "thresholdMs": 400,
+    "authority": "Direct user instruction and inherited A narrative; raw failed archive not present in the two final-night ZIPs",
+    "notOverwritten": true,
+    "attribution": "Historical failure lacks contemporaneous segmented trace. Current UI diagnosis must not be asserted as its proven cause."
+  }
+}

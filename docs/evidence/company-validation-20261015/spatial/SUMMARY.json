@@ -1,0 +1,90 @@
+{
+  "source": "8c3986e52c501b86111aa7124af9f9f24379659a + measurement-only tool",
+  "input": "Authorized Canon TNAN8886.CR3",
+  "dimensions": [
+    5496,
+    3670
+  ],
+  "sameFloatBytesSha256": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+  "fullTileDifference": "BITWISE_IDENTICAL output float bytes; maximum absolute error 0 for these exact runs",
+  "tileMs": 7224.2082,
+  "fullMs": 4232.7982,
+  "peaks": {
+    "canon-Details-full": {
+      "status": "MEASURED",
+      "milliseconds": 18430.4889,
+      "peaks": {
+        "managed": 2887148368,
+        "workingSet": 3086548992,
+        "privateBytes": 3093053440,
+        "ledger": 0
+      },
+      "last": {
+        "wallMs": 22374.1764,
+        "stage": "natural-release-no-GC",
+        "managed": 2887148368,
+        "workingSet": 3086548992,
+        "privateBytes": 3093053440,
+        "ledger": 0
+      }
+    },
+    "canon-Structure-cancel": {
+      "status": "CANCELLED",
+      "milliseconds": 110.4192,
+      "peaks": {
+        "managed": 881439200,
+        "workingSet": 693723136,
+        "privateBytes": 913395712,
+        "ledger": 812179904
+      },
+      "last": {
+        "wallMs": 3619.7134,
+        "stage": "natural-release-no-GC",
+        "managed": 881439200,
+        "workingSet": 693698560,
+        "privateBytes": 913362944,
+        "ledger": 0
+      }
+    },
+    "canon-Structure-full": {
+      "status": "MEASURED",
+      "milliseconds": 4232.7982,
+      "peaks": {
+        "managed": 1744257752,
+        "workingSet": 1850449920,
+        "privateBytes": 1842688000,
+        "ledger": 0
+      },
+      "last": {
+        "wallMs": 8178.4941,
+        "stage": "natural-release-no-GC",
+        "managed": 545545464,
+        "workingSet": 1850437632,
+        "privateBytes": 1842561024,
+        "ledger": 0
+      }
+    },
+    "canon-Structure-tile": {
+      "status": "MEASURED",
+      "milliseconds": 7224.2082,
+      "peaks": {
+        "managed": 1632588920,
+        "workingSet": 2012028928,
+        "privateBytes": 1999360000,
+        "ledger": 812179904
+      },
+      "last": {
+        "wallMs": 11155.7513,
+        "stage": "natural-release-no-GC",
+        "managed": 1517365744,
+        "workingSet": 2009391104,
+        "privateBytes": 1996623872,
+        "ledger": 0
+      }
+    }
+  },
+  "productionOptimization": false,
+  "nativeAllocatorAttribution": "UNAVAILABLE",
+  "oracleBudgetStatus": "MEASURED",
+  "note": "No forced GC. Source retained; no claim process memory returns to baseline. Tile was slower and higher working-set in these runs."
+}

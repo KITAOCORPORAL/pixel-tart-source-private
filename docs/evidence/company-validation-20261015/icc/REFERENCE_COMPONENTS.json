@@ -1,0 +1,91 @@
+{
+  "LCMS": "2.16 conda-forge win64 h67d730c_0",
+  "LCMSSourceCommit": "453bafeb85b4ef96498866b7a8eadcc74dff9223",
+  "Argyll": "3.5.0 executable; independent icclib",
+  "skcmsCommit": "97adcbb67e98d633a65b29fd405941970f3b476d",
+  "compiler": "ziglang 0.16.0 pip-local; zig c++ -O2 -std=c++17 -DSKCMS_PORTABLE -DSKCMS_DISABLE_HSW -DSKCMS_DISABLE_SKX",
+  "files": [
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\lcms2-2.16.conda",
+      "bytes": 507632,
+      "sha256": "f9fd9e80e46358a57d9bb97b1e37a03da4022143b019aa3c4476d8a7795de290"
+    },
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\lcms\\Library\\bin\\lcms2.dll",
+      "bytes": 560128,
+      "sha256": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4"
+    },
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\lcms\\info\\licenses\\LICENSE",
+      "bytes": 1080,
+      "sha256": "6dbd60437f8ef91d8de1f08ad75882547fd4931bfcc3566a0735f28db1484d31"
+    },
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\argyll-3.5.0-bin.zip",
+      "bytes": 35511159,
+      "sha256": "c80f78ba30e715079a00a14c2e7c9f533c58e6c8fdbc27f2d32b3d7813f9d132"
+    },
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\argyll-3.5.0-src.zip",
+      "bytes": 15352322,
+      "sha256": "f8576ce5589fd15620abb73ff049ea31f55ddbd1bba6d1ffa87452658e7bc85f"
+    },
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\argyll35\\Argyll_V3.5.0\\bin\\xicclu.exe",
+      "bytes": 3574272,
+      "sha256": "96cd706411021e886318b9172ad2b622aa5c5f0ac2d35496c39df9574c42a9fb"
+    },
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\argyll35\\Argyll_V3.5.0\\License.txt",
+      "bytes": 34521,
+      "sha256": "432d251a78dbc966e6add13f9f3b40a53daca222208e50cb514cfc77e7d85af6"
+    },
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\argyll35\\Argyll_V3.5.0\\icc\\License4.txt",
+      "bytes": 1212,
+      "sha256": "9fc31dc893958bf17aaf452ae68eb6595d035d0e40294c77d8d6d5da8709d1f1"
+    },
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\skcms\\LICENSE",
+      "bytes": 1664,
+      "sha256": "5fad7f1a5143034fc76c976e9d34694663764808df7b777943048674a4c87ff1"
+    },
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\skcms\\skcms.cc",
+      "bytes": 123804,
+      "sha256": "a4bb109dbd1b13b04dd7cc79ef75194a3c5b3304133f810d0eed5fa0135e948c"
+    },
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\skcms\\src\\skcms_TransformBaseline.cc",
+      "bytes": 1484,
+      "sha256": "16a3bc6246fb107abd3cefca8a7257c3b4ae79b92799ba4331e676210c0ad22f"
+    },
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\skcms_probe.exe",
+      "bytes": 428544,
+      "sha256": "0a93d52907517f39e4a774fd3ebde5d0217e926701e8e684b579931129df5b65"
+    },
+    {
+      "localPath": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\compiler\\ziglang\\zig.exe",
+      "bytes": 177108480,
+      "sha256": "086ce9d47ba42f33a514e1a6e04eb1d4a8fa1d75e0868e0213caad447c91e864"
+    }
+  ],
+  "bundledInProduct": false,
+  "licenses": "LCMS MIT; skcms BSD3; Argyll xicclu AGPL3 and icclib MIT separately; isolated research executables only",
+  "downloadOrigins": {
+    "lcms": "https://api.anaconda.org/download/conda-forge/lcms2/2.16/win-64/lcms2-2.16-h67d730c_0.conda",
+    "argyllBinary": "https://www.argyllcms.com/Argyll_V3.5.0_win64_exe.zip",
+    "argyllSource": "https://www.argyllcms.com/Argyll_V3.5.0_src.zip",
+    "skcms": "https://skia.googlesource.com/skcms",
+    "zig": "PyPI ziglang 0.16.0 local --target artifacts; compiler identity recorded"
+  },
+  "sourceEntryPoints": {
+    "lcms": "src/cmsxform.c::cmsCreateTransformTHR, cmsDoTransform; cmsCreateRGBProfile, cmsPipelineInsertStage; testbed/testcms2.c",
+    "skcms": "skcms.cc::skcms_ParseWithA2BPriority/read_tag_mab/read_tag_mft2; src/skcms_TransformBaseline.cc; skcms_Transform; tests.c",
+    "argyll": "xicc/xicclu.c main; icc/icc.c independent icclib 3.0.0 lookup; library file-level MIT, CLI AGPL3"
+  },
+  "skcmsCommitDate": "2026-10-13T13:16:25-07:00",
+  "comparisonExecution": "Real compiled and DLL entry calls; independent references, research-only",
+  "remainingApproval": "No product license linkage or ICC admission approval"
+}

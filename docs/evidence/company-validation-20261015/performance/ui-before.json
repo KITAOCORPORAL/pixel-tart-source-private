@@ -1,0 +1,871 @@
+{
+  "database": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\p3-ui\\ui-10128.db",
+  "samples": [
+    {
+      "cycle": 0,
+      "state": "priming",
+      "refreshMs": 522.7242,
+      "idleMs": 522.7488,
+      "dispatcherGapsMs": [
+        9.3293,
+        20.5112,
+        491.7608
+      ]
+    },
+    {
+      "cycle": 1,
+      "state": "warm",
+      "refreshMs": 482.927,
+      "idleMs": 482.9361,
+      "dispatcherGapsMs": [
+        16.9214,
+        465.9863
+      ]
+    },
+    {
+      "cycle": 2,
+      "state": "warm",
+      "refreshMs": 467.2716,
+      "idleMs": 468.4903,
+      "dispatcherGapsMs": [
+        5.3109,
+        461.9164
+      ]
+    },
+    {
+      "cycle": 3,
+      "state": "warm",
+      "refreshMs": 472.4946,
+      "idleMs": 472.5061,
+      "dispatcherGapsMs": [
+        14.8167,
+        457.6264
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$limit": 501
+      },
+      "CountMs": 9.6346,
+      "PageMs": 12.56,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$limit": 501
+      },
+      "CountMs": 8.1787,
+      "PageMs": 12.2923,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "ea7cdaac-7875-4923-befa-8027547ec44d",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T23:43:20.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.7968,
+      "PageMs": 12.4857,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "395d58f8-603c-4135-bb4f-196e6b869d7d",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T23:26:39.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.999,
+      "PageMs": 12.2401,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "5fd103c0-f0db-47b8-9333-9e6530d9a646",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T23:10:01.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 8.2374,
+      "PageMs": 12.3247,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "08359264-8f50-4d14-bf9a-a975ae21cc58",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:53:20.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.72,
+      "PageMs": 12.0571,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "7c83cf7d-7497-43b1-8e00-1cb0a9451ac2",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:36:39.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.8954,
+      "PageMs": 11.8648,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "83417b14-9346-4d32-93a9-703e39f2b19c",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:20:01.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.7718,
+      "PageMs": 11.8682,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "3731c41d-3414-4616-9875-d535ece68f2d",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:03:20.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.8599,
+      "PageMs": 18.8052,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "a60ec3ab-5336-4071-8867-1a2f14e559e1",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T21:46:39.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 10.3615,
+      "PageMs": 12.3396,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "cdaf061a-51d7-4784-863e-c29c7c8a0c50",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T21:30:01.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.8399,
+      "PageMs": 16.607,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3
+      },
+      "PageParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3,
+        "$limit": 501
+      },
+      "CountMs": 8.6144,
+      "PageMs": 9.0283,
+      "Total": 49
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3
+      },
+      "PageParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3,
+        "$limit": 501
+      },
+      "CountMs": 8.7416,
+      "PageMs": 9.0455,
+      "Total": 49
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$limit": 501
+      },
+      "CountMs": 7.928,
+      "PageMs": 11.9756,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$limit": 501
+      },
+      "CountMs": 7.674,
+      "PageMs": 12.2785,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "ea7cdaac-7875-4923-befa-8027547ec44d",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T23:43:20.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 8.1371,
+      "PageMs": 12.3883,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "395d58f8-603c-4135-bb4f-196e6b869d7d",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T23:26:39.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.9888,
+      "PageMs": 12.1079,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "5fd103c0-f0db-47b8-9333-9e6530d9a646",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T23:10:01.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.9183,
+      "PageMs": 12.1427,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "08359264-8f50-4d14-bf9a-a975ae21cc58",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:53:20.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.9388,
+      "PageMs": 11.9178,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "7c83cf7d-7497-43b1-8e00-1cb0a9451ac2",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:36:39.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.853,
+      "PageMs": 11.3011,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "83417b14-9346-4d32-93a9-703e39f2b19c",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:20:01.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.9843,
+      "PageMs": 11.3634,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "3731c41d-3414-4616-9875-d535ece68f2d",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:03:20.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.7682,
+      "PageMs": 11.346,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "a60ec3ab-5336-4071-8867-1a2f14e559e1",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T21:46:39.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.6219,
+      "PageMs": 11.279,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "cdaf061a-51d7-4784-863e-c29c7c8a0c50",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T21:30:01.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.7377,
+      "PageMs": 10.6651,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3
+      },
+      "PageParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3,
+        "$limit": 501
+      },
+      "CountMs": 8.6838,
+      "PageMs": 8.8327,
+      "Total": 49
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3
+      },
+      "PageParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3,
+        "$limit": 501
+      },
+      "CountMs": 8.534,
+      "PageMs": 8.7923,
+      "Total": 49
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$limit": 501
+      },
+      "CountMs": 7.7089,
+      "PageMs": 11.0966,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$limit": 501
+      },
+      "CountMs": 7.742,
+      "PageMs": 11.5188,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "ea7cdaac-7875-4923-befa-8027547ec44d",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T23:43:20.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 8.1152,
+      "PageMs": 11.4215,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "395d58f8-603c-4135-bb4f-196e6b869d7d",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T23:26:39.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.7782,
+      "PageMs": 10.9796,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "5fd103c0-f0db-47b8-9333-9e6530d9a646",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T23:10:01.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.619,
+      "PageMs": 21.9248,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "08359264-8f50-4d14-bf9a-a975ae21cc58",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:53:20.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.9429,
+      "PageMs": 10.8478,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "7c83cf7d-7497-43b1-8e00-1cb0a9451ac2",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:36:39.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.8047,
+      "PageMs": 10.6466,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "83417b14-9346-4d32-93a9-703e39f2b19c",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:20:01.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.6304,
+      "PageMs": 10.8215,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "3731c41d-3414-4616-9875-d535ece68f2d",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:03:20.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.8294,
+      "PageMs": 10.8512,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "a60ec3ab-5336-4071-8867-1a2f14e559e1",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T21:46:39.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 8.0152,
+      "PageMs": 10.7773,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "cdaf061a-51d7-4784-863e-c29c7c8a0c50",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T21:30:01.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.8788,
+      "PageMs": 10.0086,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3
+      },
+      "PageParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3,
+        "$limit": 501
+      },
+      "CountMs": 9.0745,
+      "PageMs": 9.2088,
+      "Total": 49
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3
+      },
+      "PageParameters": {
+        "$folder": "69b89fcc-285c-4fc0-9a6a-93249ff67558",
+        "$p31": 3,
+        "$limit": 501
+      },
+      "CountMs": 8.3619,
+      "PageMs": 8.8808,
+      "Total": 49
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$limit": 501
+      },
+      "CountMs": 7.7435,
+      "PageMs": 11.1305,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$limit": 501
+      },
+      "CountMs": 7.8663,
+      "PageMs": 14.0887,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "ea7cdaac-7875-4923-befa-8027547ec44d",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T23:43:20.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 8.0189,
+      "PageMs": 11.1903,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "395d58f8-603c-4135-bb4f-196e6b869d7d",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T23:26:39.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.8488,
+      "PageMs": 11.5012,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "5fd103c0-f0db-47b8-9333-9e6530d9a646",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T23:10:01.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.9242,
+      "PageMs": 11.3954,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "08359264-8f50-4d14-bf9a-a975ae21cc58",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:53:20.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.7897,
+      "PageMs": 11.4512,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "7c83cf7d-7497-43b1-8e00-1cb0a9451ac2",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:36:39.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 8.0031,
+      "PageMs": 10.8795,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "83417b14-9346-4d32-93a9-703e39f2b19c",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:20:01.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.928,
+      "PageMs": 10.725,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "3731c41d-3414-4616-9875-d535ece68f2d",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T22:03:20.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.8355,
+      "PageMs": 10.6536,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "a60ec3ab-5336-4071-8867-1a2f14e559e1",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T21:46:39.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.6715,
+      "PageMs": 10.3211,
+      "Total": 4999
+    },
+    {
+      "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+      "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) AND (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END\u003E$cursorNull OR (CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END=$cursorNull AND ((a.AddedAt)\u003C$cursorSort OR ((a.AddedAt)=$cursorSort AND a.AssetId\u003E$cursorAsset)))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+      "CountParameters": {
+        "$p30": 3
+      },
+      "PageParameters": {
+        "$p30": 3,
+        "$cursorAsset": "cdaf061a-51d7-4784-863e-c29c7c8a0c50",
+        "$cursorNull": 0,
+        "$cursorSort": "2026-09-01T21:30:01.0000000\u002B00:00",
+        "$limit": 501
+      },
+      "CountMs": 7.5774,
+      "PageMs": 9.815,
+      "Total": 4999
+    }
+  ],
+  "window": "NOT_SHOWN",
+  "physicalInput": "NOT_RUN",
+  "authority": "Actual viewmodel P3QueryScope refresh awaited plus dispatcher idle; not desktop latency"
+}

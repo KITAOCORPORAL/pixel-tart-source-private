@@ -1,0 +1,63 @@
+{
+  "source": "3d526ae7e7589a0d735689883dcf62a4ef272720",
+  "reviewStatus": "REVIEW_BUILD_WITH_OPEN_GATES",
+  "suites": {
+    "sealed-core": {
+      "strictStatus": "FAILED",
+      "counts": {
+        "Passed": 1695,
+        "NotExecuted": 7
+      },
+      "selected": 1702,
+      "discovered": 1702
+    },
+    "sealed-wpf": {
+      "strictStatus": "FAILED",
+      "counts": {
+        "Passed": 1603,
+        "NotExecuted": 23
+      },
+      "selected": 1626,
+      "discovered": 1626
+    },
+    "sealed-release-core": {
+      "strictStatus": "FAILED",
+      "counts": {
+        "Passed": 1696,
+        "NotExecuted": 6
+      },
+      "selected": 1702,
+      "discovered": 1702
+    },
+    "sealed-release-wpf": {
+      "strictStatus": "PASSED",
+      "counts": {
+        "Passed": 36
+      },
+      "selected": 36,
+      "discovered": 1626
+    },
+    "sealed-release-identity": {
+      "strictStatus": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "selected": 1,
+      "discovered": 1702
+    }
+  },
+  "originalMergedCore": {
+    "Passed": 1694,
+    "NotExecuted": 7
+  },
+  "originalMergedWpf": {
+    "Passed": 1602,
+    "NotExecuted": 23
+  },
+  "intermediateFailure": "RuntimeCorrectionWpfTests.CanvasMenusExecuteClipboardAndShareZoomStateAtAllViewportSizes retained in FAILED_ROUNDS and RAW_TEST_RESULTS",
+  "A7_B8_verifiedInSourceAndPublished": true,
+  "WindowsManual": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "WPS": "NOT_RUN",
+  "calibrationEligible": false
+}

@@ -1,0 +1,70 @@
+{
+  "productSource": "3d526ae7e7589a0d735689883dcf62a4ef272720",
+  "baseMerge": "dc67b443b57a8ebe78af640d6f28030a47403ae9",
+  "mergeParents": [
+    "b1630f0e55780d746d4377d209899a09d2773b0e",
+    "419c9c165b119fc992ee34e9e947b05f93835e6d"
+  ],
+  "configuration": "Release win-x64 self-contained non-single-file",
+  "directory": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\sealed-release\\win-x64",
+  "exe": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\sealed-release\\win-x64\\KitaoPhotoSelector.exe",
+  "exeSha256": "003ac23a2f1e440e4ac71e94e9f0270300819d8215ecdcea8f96471d68de1663",
+  "productVersion": "2.3.0-company-ab+3d526ae7e7589a0d735689883dcf62a4ef272720",
+  "components": [
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "bytes": 3247104,
+      "sha256": "ad3b192cfb71eb0eef47140dea31a5f36c4938617ec4548344818a9d993e0e3e",
+      "testedSha256": "ad3b192cfb71eb0eef47140dea31a5f36c4938617ec4548344818a9d993e0e3e"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "bytes": 4482048,
+      "sha256": "b056e6fd652a7c3da32ec3628b848b5eb642d0424a9fce5d7e7fa198ce9c6761",
+      "testedSha256": "b056e6fd652a7c3da32ec3628b848b5eb642d0424a9fce5d7e7fa198ce9c6761"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "bytes": 38912,
+      "sha256": "1f3bd315844ea6b8a81a14605cfdca179c77417f4d7d3f7dff24ada1c957e1e4",
+      "testedSha256": "1f3bd315844ea6b8a81a14605cfdca179c77417f4d7d3f7dff24ada1c957e1e4"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "bytes": 1163264,
+      "sha256": "ae157a3c4eb75828b62e8b875e6f9c99edde1b2bacfe54e33d67edf75cda4ffd",
+      "testedSha256": "ae157a3c4eb75828b62e8b875e6f9c99edde1b2bacfe54e33d67edf75cda4ffd"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "bytes": 11264,
+      "sha256": "930b9d5e7b39441019952fe7d4db3e3e0884fcc11e4b60d2e26556797ca1372f",
+      "testedSha256": "930b9d5e7b39441019952fe7d4db3e3e0884fcc11e4b60d2e26556797ca1372f"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "bytes": 11776,
+      "sha256": "3ede42632704d0b23358dd63f61ca1bf0f7eec8257cabbcdb2aaa04b11704a56",
+      "testedSha256": "3ede42632704d0b23358dd63f61ca1bf0f7eec8257cabbcdb2aaa04b11704a56"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "bytes": 66560,
+      "sha256": "59e99393e1c25cecbe3c483c39f4a54c1f8c46af18a4b2b9140e3eb2517fe5de",
+      "testedSha256": "59e99393e1c25cecbe3c483c39f4a54c1f8c46af18a4b2b9140e3eb2517fe5de"
+    }
+  ],
+  "testedAssemblies": [
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\sealed-published\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+      "sha256": "6a48a64ae63f7dfc3db11f8cbd5779b53d7c766ae6352f0a6e8235d6f01664b0"
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\sealed-published\\core\\RAWSelectionAssistant.Tests.dll",
+      "sha256": "8c0cec3d54df90c325481eb73d2482a0b1e1f5308851f57443491a79916f0b5f"
+    }
+  ],
+  "reviewStatus": "REVIEW_BUILD_WITH_OPEN_GATES",
+  "notPixelOrIccAccuracyApproval": true,
+  "exeStarted": false
+}

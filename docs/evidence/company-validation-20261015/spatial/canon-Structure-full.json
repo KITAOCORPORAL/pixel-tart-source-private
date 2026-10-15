@@ -1,0 +1,2138 @@
+{
+  "nodeName": "Structure",
+  "mode": "full",
+  "status": "MEASURED",
+  "error": null,
+  "sourcePath": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/TNAN8886.CR3",
+  "sourceSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+  "width": 5496,
+  "height": 3670,
+  "parameters": {
+    "Id": "1650c215-b875-4e4a-bfa2-96231fb7a89c",
+    "Type": 5,
+    "Name": "Structure",
+    "Enabled": true,
+    "FilmSettings": null,
+    "NumericParameters": {
+      "structure": 25,
+      "detail": 15
+    },
+    "Samples": [],
+    "NegativeSamples": []
+  },
+  "plan": {
+    "Node": "Structure",
+    "Halo": 37,
+    "TileWidth": 512,
+    "TileHeight": 128,
+    "RequiredBytes": 812179904,
+    "GlobalAnalysis": false,
+    "Boundary": "Global edge clamp; legacy Develop truncated running-sum edge; interior crop excludes artificial tile boundary"
+  },
+  "milliseconds": 4232.7982,
+  "pixelHash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+  "min": 0,
+  "max": 1,
+  "samples": [
+    {
+      "wallMs": 0.8105,
+      "stage": "baseline",
+      "managed": 614117000,
+      "workingSet": 664145920,
+      "privateBytes": 644149248,
+      "ledger": 0
+    },
+    {
+      "wallMs": 42.9378,
+      "stage": "baseline",
+      "managed": 614117000,
+      "workingSet": 663932928,
+      "privateBytes": 643813376,
+      "ledger": 0
+    },
+    {
+      "wallMs": 74.6741,
+      "stage": "baseline",
+      "managed": 614125192,
+      "workingSet": 663896064,
+      "privateBytes": 643600384,
+      "ledger": 0
+    },
+    {
+      "wallMs": 105.3825,
+      "stage": "baseline",
+      "managed": 614125192,
+      "workingSet": 663896064,
+      "privateBytes": 643600384,
+      "ledger": 0
+    },
+    {
+      "wallMs": 136.5649,
+      "stage": "baseline",
+      "managed": 614133416,
+      "workingSet": 663896064,
+      "privateBytes": 643608576,
+      "ledger": 0
+    },
+    {
+      "wallMs": 167.5334,
+      "stage": "baseline",
+      "managed": 614133416,
+      "workingSet": 663900160,
+      "privateBytes": 643608576,
+      "ledger": 0
+    },
+    {
+      "wallMs": 198.3462,
+      "stage": "baseline",
+      "managed": 614141640,
+      "workingSet": 664023040,
+      "privateBytes": 643604480,
+      "ledger": 0
+    },
+    {
+      "wallMs": 230.464,
+      "stage": "baseline",
+      "managed": 614141640,
+      "workingSet": 664031232,
+      "privateBytes": 643604480,
+      "ledger": 0
+    },
+    {
+      "wallMs": 262.529,
+      "stage": "baseline",
+      "managed": 614141640,
+      "workingSet": 664043520,
+      "privateBytes": 643604480,
+      "ledger": 0
+    },
+    {
+      "wallMs": 293.6697,
+      "stage": "baseline",
+      "managed": 614149864,
+      "workingSet": 664043520,
+      "privateBytes": 643604480,
+      "ledger": 0
+    },
+    {
+      "wallMs": 323.6868,
+      "stage": "baseline",
+      "managed": 614149864,
+      "workingSet": 664055808,
+      "privateBytes": 643608576,
+      "ledger": 0
+    },
+    {
+      "wallMs": 354.8494,
+      "stage": "baseline",
+      "managed": 614158088,
+      "workingSet": 664064000,
+      "privateBytes": 643608576,
+      "ledger": 0
+    },
+    {
+      "wallMs": 386.9445,
+      "stage": "baseline",
+      "managed": 614158088,
+      "workingSet": 664104960,
+      "privateBytes": 643649536,
+      "ledger": 0
+    },
+    {
+      "wallMs": 418.5488,
+      "stage": "baseline",
+      "managed": 614166312,
+      "workingSet": 664113152,
+      "privateBytes": 643649536,
+      "ledger": 0
+    },
+    {
+      "wallMs": 449.6123,
+      "stage": "baseline",
+      "managed": 614166312,
+      "workingSet": 664113152,
+      "privateBytes": 643649536,
+      "ledger": 0
+    },
+    {
+      "wallMs": 481.2422,
+      "stage": "baseline",
+      "managed": 614174536,
+      "workingSet": 664137728,
+      "privateBytes": 643637248,
+      "ledger": 0
+    },
+    {
+      "wallMs": 513.3683,
+      "stage": "baseline",
+      "managed": 614174536,
+      "workingSet": 664293376,
+      "privateBytes": 643653632,
+      "ledger": 0
+    },
+    {
+      "wallMs": 545.252,
+      "stage": "render",
+      "managed": 856242616,
+      "workingSet": 749543424,
+      "privateBytes": 888324096,
+      "ledger": 0
+    },
+    {
+      "wallMs": 577.2659,
+      "stage": "render",
+      "managed": 856242616,
+      "workingSet": 871915520,
+      "privateBytes": 888324096,
+      "ledger": 0
+    },
+    {
+      "wallMs": 609.2676,
+      "stage": "render",
+      "managed": 1178974720,
+      "workingSet": 910274560,
+      "privateBytes": 1216217088,
+      "ledger": 0
+    },
+    {
+      "wallMs": 641.2655,
+      "stage": "render",
+      "managed": 1178974720,
+      "workingSet": 917299200,
+      "privateBytes": 1216184320,
+      "ledger": 0
+    },
+    {
+      "wallMs": 673.2663,
+      "stage": "render",
+      "managed": 1178982944,
+      "workingSet": 924356608,
+      "privateBytes": 1216184320,
+      "ledger": 0
+    },
+    {
+      "wallMs": 705.23,
+      "stage": "render",
+      "managed": 1178982944,
+      "workingSet": 931409920,
+      "privateBytes": 1216184320,
+      "ledger": 0
+    },
+    {
+      "wallMs": 737.2653,
+      "stage": "render",
+      "managed": 1178991168,
+      "workingSet": 938475520,
+      "privateBytes": 1216184320,
+      "ledger": 0
+    },
+    {
+      "wallMs": 769.2518,
+      "stage": "render",
+      "managed": 1178991168,
+      "workingSet": 945553408,
+      "privateBytes": 1216188416,
+      "ledger": 0
+    },
+    {
+      "wallMs": 801.2287,
+      "stage": "render",
+      "managed": 1178999392,
+      "workingSet": 952623104,
+      "privateBytes": 1216184320,
+      "ledger": 0
+    },
+    {
+      "wallMs": 833.2519,
+      "stage": "render",
+      "managed": 1178999392,
+      "workingSet": 959602688,
+      "privateBytes": 1216188416,
+      "ledger": 0
+    },
+    {
+      "wallMs": 865.2674,
+      "stage": "render",
+      "managed": 1179007616,
+      "workingSet": 966504448,
+      "privateBytes": 1216184320,
+      "ledger": 0
+    },
+    {
+      "wallMs": 897.2616,
+      "stage": "render",
+      "managed": 1179007616,
+      "workingSet": 973496320,
+      "privateBytes": 1216266240,
+      "ledger": 0
+    },
+    {
+      "wallMs": 929.2497,
+      "stage": "render",
+      "managed": 1179015840,
+      "workingSet": 980578304,
+      "privateBytes": 1216237568,
+      "ledger": 0
+    },
+    {
+      "wallMs": 961.2679,
+      "stage": "render",
+      "managed": 1179015840,
+      "workingSet": 987623424,
+      "privateBytes": 1216237568,
+      "ledger": 0
+    },
+    {
+      "wallMs": 993.28,
+      "stage": "render",
+      "managed": 1179024064,
+      "workingSet": 994451456,
+      "privateBytes": 1216237568,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1025.3568,
+      "stage": "render",
+      "managed": 1179024064,
+      "workingSet": 1001312256,
+      "privateBytes": 1216237568,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1056.3546,
+      "stage": "render",
+      "managed": 1179032288,
+      "workingSet": 1008136192,
+      "privateBytes": 1216237568,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1087.3967,
+      "stage": "render",
+      "managed": 1179032288,
+      "workingSet": 1015304192,
+      "privateBytes": 1216303104,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1117.9286,
+      "stage": "render",
+      "managed": 1179052872,
+      "workingSet": 1022717952,
+      "privateBytes": 1217036288,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1148.9772,
+      "stage": "render",
+      "managed": 1179052872,
+      "workingSet": 1030270976,
+      "privateBytes": 1216401408,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1180.3985,
+      "stage": "render",
+      "managed": 1179061024,
+      "workingSet": 1038258176,
+      "privateBytes": 1216360448,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1212.3314,
+      "stage": "render",
+      "managed": 1179061024,
+      "workingSet": 1047179264,
+      "privateBytes": 1216360448,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1244.3263,
+      "stage": "render",
+      "managed": 1179069248,
+      "workingSet": 1055342592,
+      "privateBytes": 1216372736,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1276.3801,
+      "stage": "render",
+      "managed": 1179069248,
+      "workingSet": 1063346176,
+      "privateBytes": 1216372736,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1306.3211,
+      "stage": "render",
+      "managed": 1179069248,
+      "workingSet": 1070899200,
+      "privateBytes": 1216372736,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1337.9018,
+      "stage": "render",
+      "managed": 1179077472,
+      "workingSet": 1079230464,
+      "privateBytes": 1216372736,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1369.931,
+      "stage": "render",
+      "managed": 1179077472,
+      "workingSet": 1088860160,
+      "privateBytes": 1216372736,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1401.9226,
+      "stage": "render",
+      "managed": 1179085696,
+      "workingSet": 1099132928,
+      "privateBytes": 1216372736,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1433.8893,
+      "stage": "render",
+      "managed": 1179085696,
+      "workingSet": 1109426176,
+      "privateBytes": 1216372736,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1464.5683,
+      "stage": "render",
+      "managed": 1179093920,
+      "workingSet": 1120604160,
+      "privateBytes": 1216372736,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1495.5943,
+      "stage": "render",
+      "managed": 1179093920,
+      "workingSet": 1134227456,
+      "privateBytes": 1216372736,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1525.5895,
+      "stage": "render",
+      "managed": 1179102144,
+      "workingSet": 1144291328,
+      "privateBytes": 1216372736,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1557.7352,
+      "stage": "render",
+      "managed": 1179102144,
+      "workingSet": 1158410240,
+      "privateBytes": 1216360448,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1588.5877,
+      "stage": "render",
+      "managed": 1179110368,
+      "workingSet": 1180434432,
+      "privateBytes": 1216360448,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1619.5679,
+      "stage": "render",
+      "managed": 1179110368,
+      "workingSet": 1203146752,
+      "privateBytes": 1216360448,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1649.5994,
+      "stage": "render",
+      "managed": 1179118592,
+      "workingSet": 1225273344,
+      "privateBytes": 1216360448,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1679.5634,
+      "stage": "render",
+      "managed": 1340481200,
+      "workingSet": 1240428544,
+      "privateBytes": 1379622912,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1710.5591,
+      "stage": "render",
+      "managed": 1340489424,
+      "workingSet": 1255370752,
+      "privateBytes": 1379622912,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1741.5947,
+      "stage": "render",
+      "managed": 1340489424,
+      "workingSet": 1270386688,
+      "privateBytes": 1379622912,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1773.5887,
+      "stage": "render",
+      "managed": 1340497648,
+      "workingSet": 1285726208,
+      "privateBytes": 1379635200,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1805.5895,
+      "stage": "render",
+      "managed": 1340497648,
+      "workingSet": 1300975616,
+      "privateBytes": 1379622912,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1835.6233,
+      "stage": "render",
+      "managed": 1340505872,
+      "workingSet": 1328726016,
+      "privateBytes": 1379635200,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1867.6164,
+      "stage": "render",
+      "managed": 1340505872,
+      "workingSet": 1342341120,
+      "privateBytes": 1379635200,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1897.8098,
+      "stage": "render",
+      "managed": 1340514096,
+      "workingSet": 1354334208,
+      "privateBytes": 1379635200,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1929.5939,
+      "stage": "render",
+      "managed": 1340514096,
+      "workingSet": 1367838720,
+      "privateBytes": 1379622912,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1961.5938,
+      "stage": "render",
+      "managed": 1340514096,
+      "workingSet": 1381695488,
+      "privateBytes": 1379622912,
+      "ledger": 0
+    },
+    {
+      "wallMs": 1993.5738,
+      "stage": "render",
+      "managed": 1340522320,
+      "workingSet": 1391677440,
+      "privateBytes": 1379622912,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2025.589,
+      "stage": "render",
+      "managed": 1501884928,
+      "workingSet": 1395179520,
+      "privateBytes": 1542889472,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2055.5582,
+      "stage": "render",
+      "managed": 1501893152,
+      "workingSet": 1409773568,
+      "privateBytes": 1542934528,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2087.5978,
+      "stage": "render",
+      "managed": 1501901376,
+      "workingSet": 1423060992,
+      "privateBytes": 1542905856,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2118.1465,
+      "stage": "render",
+      "managed": 1501901376,
+      "workingSet": 1437687808,
+      "privateBytes": 1542897664,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2148.1107,
+      "stage": "render",
+      "managed": 1501901376,
+      "workingSet": 1452208128,
+      "privateBytes": 1542897664,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2178.7055,
+      "stage": "render",
+      "managed": 1501909600,
+      "workingSet": 1466777600,
+      "privateBytes": 1542897664,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2210.6979,
+      "stage": "render",
+      "managed": 1501909600,
+      "workingSet": 1495072768,
+      "privateBytes": 1542897664,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2242.6977,
+      "stage": "render",
+      "managed": 1501917824,
+      "workingSet": 1508929536,
+      "privateBytes": 1542897664,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2274.7094,
+      "stage": "render",
+      "managed": 1501917824,
+      "workingSet": 1522204672,
+      "privateBytes": 1542897664,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2305.7414,
+      "stage": "render",
+      "managed": 1501926048,
+      "workingSet": 1535356928,
+      "privateBytes": 1542897664,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2335.6993,
+      "stage": "render",
+      "managed": 1501926048,
+      "workingSet": 1548156928,
+      "privateBytes": 1542897664,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2365.7022,
+      "stage": "render",
+      "managed": 1501934272,
+      "workingSet": 1553092608,
+      "privateBytes": 1542897664,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2395.7227,
+      "stage": "render",
+      "managed": 1743978136,
+      "workingSet": 1554620416,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2426.6939,
+      "stage": "render",
+      "managed": 1743986360,
+      "workingSet": 1557504000,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2457.2806,
+      "stage": "render",
+      "managed": 1743986360,
+      "workingSet": 1560363008,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2489.2753,
+      "stage": "render",
+      "managed": 1743994584,
+      "workingSet": 1563361280,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2521.2715,
+      "stage": "render",
+      "managed": 1743994584,
+      "workingSet": 1566339072,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2553.3888,
+      "stage": "render",
+      "managed": 1744002808,
+      "workingSet": 1568911360,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2585.2699,
+      "stage": "render",
+      "managed": 1744002808,
+      "workingSet": 1571651584,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2616.2723,
+      "stage": "render",
+      "managed": 1744011032,
+      "workingSet": 1574526976,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2647.2685,
+      "stage": "render",
+      "managed": 1744011032,
+      "workingSet": 1577406464,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2677.4462,
+      "stage": "render",
+      "managed": 1744019256,
+      "workingSet": 1579786240,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2709.2925,
+      "stage": "render",
+      "managed": 1744019256,
+      "workingSet": 1582542848,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2741.262,
+      "stage": "render",
+      "managed": 1744027480,
+      "workingSet": 1585602560,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2772.2602,
+      "stage": "render",
+      "managed": 1744027480,
+      "workingSet": 1588432896,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2803.2695,
+      "stage": "render",
+      "managed": 1744027480,
+      "workingSet": 1591336960,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2835.2886,
+      "stage": "render",
+      "managed": 1744035704,
+      "workingSet": 1594331136,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2866.2568,
+      "stage": "render",
+      "managed": 1744035704,
+      "workingSet": 1597214720,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2897.2651,
+      "stage": "render",
+      "managed": 1744043928,
+      "workingSet": 1600110592,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2927.2696,
+      "stage": "render",
+      "managed": 1744043928,
+      "workingSet": 1602891776,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2959.2635,
+      "stage": "render",
+      "managed": 1744052152,
+      "workingSet": 1605857280,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 2991.2798,
+      "stage": "render",
+      "managed": 1744052152,
+      "workingSet": 1608777728,
+      "privateBytes": 1787518976,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3023.3622,
+      "stage": "render",
+      "managed": 1744060376,
+      "workingSet": 1611759616,
+      "privateBytes": 1787527168,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3055.2702,
+      "stage": "render",
+      "managed": 1744060376,
+      "workingSet": 1614745600,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3086.2767,
+      "stage": "render",
+      "managed": 1744068600,
+      "workingSet": 1617649664,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3117.8525,
+      "stage": "render",
+      "managed": 1744068600,
+      "workingSet": 1620606976,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3149.9278,
+      "stage": "render",
+      "managed": 1744076824,
+      "workingSet": 1623601152,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3181.3805,
+      "stage": "render",
+      "managed": 1744076824,
+      "workingSet": 1626517504,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3213.3795,
+      "stage": "render",
+      "managed": 1744085048,
+      "workingSet": 1629515776,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3245.3855,
+      "stage": "render",
+      "managed": 1744085048,
+      "workingSet": 1632509952,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3275.4075,
+      "stage": "render",
+      "managed": 1744093272,
+      "workingSet": 1635385344,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3306.3714,
+      "stage": "render",
+      "managed": 1744093272,
+      "workingSet": 1638182912,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3337.4102,
+      "stage": "render",
+      "managed": 1744101496,
+      "workingSet": 1640845312,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3367.3914,
+      "stage": "render",
+      "managed": 1744101496,
+      "workingSet": 1643626496,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3397.3801,
+      "stage": "render",
+      "managed": 1744101496,
+      "workingSet": 1646452736,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3427.3744,
+      "stage": "render",
+      "managed": 1744109720,
+      "workingSet": 1649311744,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3457.9762,
+      "stage": "render",
+      "managed": 1744109720,
+      "workingSet": 1652273152,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3489.9792,
+      "stage": "render",
+      "managed": 1744117944,
+      "workingSet": 1655300096,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3520.9668,
+      "stage": "render",
+      "managed": 1744117944,
+      "workingSet": 1658343424,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3550.9925,
+      "stage": "render",
+      "managed": 1744126168,
+      "workingSet": 1661493248,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3582.039,
+      "stage": "render",
+      "managed": 1744126168,
+      "workingSet": 1664827392,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3627.0006,
+      "stage": "render",
+      "managed": 1744134392,
+      "workingSet": 1669316608,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3658.0077,
+      "stage": "render",
+      "managed": 1744134392,
+      "workingSet": 1672630272,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3687.998,
+      "stage": "render",
+      "managed": 1744142616,
+      "workingSet": 1675599872,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3719.9694,
+      "stage": "render",
+      "managed": 1744142616,
+      "workingSet": 1679294464,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3750.0316,
+      "stage": "render",
+      "managed": 1744150840,
+      "workingSet": 1682620416,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3782.061,
+      "stage": "render",
+      "managed": 1744150840,
+      "workingSet": 1686384640,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3811.9843,
+      "stage": "render",
+      "managed": 1744159064,
+      "workingSet": 1690120192,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3844.0105,
+      "stage": "render",
+      "managed": 1744159064,
+      "workingSet": 1694023680,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3876.002,
+      "stage": "render",
+      "managed": 1744167288,
+      "workingSet": 1697714176,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3907.9967,
+      "stage": "render",
+      "managed": 1744167288,
+      "workingSet": 1701281792,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3938.9986,
+      "stage": "render",
+      "managed": 1744175512,
+      "workingSet": 1704755200,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3969.0037,
+      "stage": "render",
+      "managed": 1744175512,
+      "workingSet": 1708097536,
+      "privateBytes": 1787523072,
+      "ledger": 0
+    },
+    {
+      "wallMs": 3999.9712,
+      "stage": "render",
+      "managed": 1744183736,
+      "workingSet": 1708347392,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4029.9759,
+      "stage": "render",
+      "managed": 1744183736,
+      "workingSet": 1711722496,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4061.9964,
+      "stage": "render",
+      "managed": 1744191960,
+      "workingSet": 1715408896,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4093.9918,
+      "stage": "render",
+      "managed": 1744191960,
+      "workingSet": 1719209984,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4125.5879,
+      "stage": "render",
+      "managed": 1744200184,
+      "workingSet": 1723121664,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4157.5338,
+      "stage": "render",
+      "managed": 1744200184,
+      "workingSet": 1727467520,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4189.1107,
+      "stage": "render",
+      "managed": 1744208408,
+      "workingSet": 1731788800,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4221.0972,
+      "stage": "render",
+      "managed": 1744208408,
+      "workingSet": 1736380416,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4253.1147,
+      "stage": "render",
+      "managed": 1744216632,
+      "workingSet": 1740951552,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4284.1406,
+      "stage": "render",
+      "managed": 1744216632,
+      "workingSet": 1745342464,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4314.1179,
+      "stage": "render",
+      "managed": 1744224856,
+      "workingSet": 1749585920,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4345.1627,
+      "stage": "render",
+      "managed": 1744224856,
+      "workingSet": 1754099712,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4376.1186,
+      "stage": "render",
+      "managed": 1744233080,
+      "workingSet": 1758654464,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4407.1073,
+      "stage": "render",
+      "managed": 1744233080,
+      "workingSet": 1763962880,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4439.223,
+      "stage": "render",
+      "managed": 1744233080,
+      "workingSet": 1769086976,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4470.6883,
+      "stage": "render",
+      "managed": 1744241304,
+      "workingSet": 1774657536,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4502.6861,
+      "stage": "render",
+      "managed": 1744241304,
+      "workingSet": 1779875840,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4534.6759,
+      "stage": "render",
+      "managed": 1744249528,
+      "workingSet": 1784668160,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4565.7163,
+      "stage": "render",
+      "managed": 1744249528,
+      "workingSet": 1788383232,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4595.678,
+      "stage": "render",
+      "managed": 1744257752,
+      "workingSet": 1791754240,
+      "privateBytes": 1784246272,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4625.6852,
+      "stage": "render",
+      "managed": 545085360,
+      "workingSet": 1800630272,
+      "privateBytes": 1841987584,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4655.6714,
+      "stage": "render",
+      "managed": 545093976,
+      "workingSet": 1813053440,
+      "privateBytes": 1841983488,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4686.6898,
+      "stage": "render",
+      "managed": 545093976,
+      "workingSet": 1825783808,
+      "privateBytes": 1841983488,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4718.671,
+      "stage": "render",
+      "managed": 545102200,
+      "workingSet": 1838968832,
+      "privateBytes": 1841983488,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4748.6973,
+      "stage": "render",
+      "managed": 545110424,
+      "workingSet": 1849540608,
+      "privateBytes": 1841983488,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4780.7399,
+      "stage": "render",
+      "managed": 545117840,
+      "workingSet": 1849540608,
+      "privateBytes": 1841983488,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4810.6832,
+      "stage": "render",
+      "managed": 545117840,
+      "workingSet": 1849540608,
+      "privateBytes": 1841983488,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4840.6887,
+      "stage": "render",
+      "managed": 545126064,
+      "workingSet": 1849540608,
+      "privateBytes": 1841983488,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4872.681,
+      "stage": "render",
+      "managed": 545126064,
+      "workingSet": 1849630720,
+      "privateBytes": 1842049024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4904.6799,
+      "stage": "render",
+      "managed": 545134288,
+      "workingSet": 1850359808,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4936.6759,
+      "stage": "render",
+      "managed": 545134288,
+      "workingSet": 1850449920,
+      "privateBytes": 1842688000,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4966.6938,
+      "stage": "render",
+      "managed": 545142512,
+      "workingSet": 1850449920,
+      "privateBytes": 1842688000,
+      "ledger": 0
+    },
+    {
+      "wallMs": 4998.6737,
+      "stage": "render",
+      "managed": 545142512,
+      "workingSet": 1850449920,
+      "privateBytes": 1842688000,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5029.6689,
+      "stage": "render",
+      "managed": 545150736,
+      "workingSet": 1850449920,
+      "privateBytes": 1842688000,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5060.7179,
+      "stage": "render",
+      "managed": 545150736,
+      "workingSet": 1850449920,
+      "privateBytes": 1842688000,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5090.6972,
+      "stage": "render",
+      "managed": 545158960,
+      "workingSet": 1850449920,
+      "privateBytes": 1842688000,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5122.2653,
+      "stage": "render",
+      "managed": 545158960,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5154.2552,
+      "stage": "render",
+      "managed": 545167184,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5186.0609,
+      "stage": "natural-release-no-GC",
+      "managed": 545167184,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5218.0746,
+      "stage": "natural-release-no-GC",
+      "managed": 545167184,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5250.1659,
+      "stage": "natural-release-no-GC",
+      "managed": 545175384,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5281.1766,
+      "stage": "natural-release-no-GC",
+      "managed": 545175384,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5312.2106,
+      "stage": "natural-release-no-GC",
+      "managed": 545175384,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5343.2664,
+      "stage": "natural-release-no-GC",
+      "managed": 545183608,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5374.051,
+      "stage": "natural-release-no-GC",
+      "managed": 545183608,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5406.167,
+      "stage": "natural-release-no-GC",
+      "managed": 545191832,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5437.0593,
+      "stage": "natural-release-no-GC",
+      "managed": 545191832,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5468.6842,
+      "stage": "natural-release-no-GC",
+      "managed": 545200056,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5499.4211,
+      "stage": "natural-release-no-GC",
+      "managed": 545200056,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5529.5378,
+      "stage": "natural-release-no-GC",
+      "managed": 545208280,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5560.6299,
+      "stage": "natural-release-no-GC",
+      "managed": 545208280,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5592.1647,
+      "stage": "natural-release-no-GC",
+      "managed": 545216504,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5623.3555,
+      "stage": "natural-release-no-GC",
+      "managed": 545216504,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5654.8596,
+      "stage": "natural-release-no-GC",
+      "managed": 545224728,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5686.8462,
+      "stage": "natural-release-no-GC",
+      "managed": 545224728,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5717.7996,
+      "stage": "natural-release-no-GC",
+      "managed": 545232952,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5747.7152,
+      "stage": "natural-release-no-GC",
+      "managed": 545232952,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5778.1078,
+      "stage": "natural-release-no-GC",
+      "managed": 545241176,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5808.3705,
+      "stage": "natural-release-no-GC",
+      "managed": 545241176,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5840.4374,
+      "stage": "natural-release-no-GC",
+      "managed": 545249400,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5871.1657,
+      "stage": "natural-release-no-GC",
+      "managed": 545249400,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5902.1706,
+      "stage": "natural-release-no-GC",
+      "managed": 545257624,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5933.1705,
+      "stage": "natural-release-no-GC",
+      "managed": 545257624,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5965.1241,
+      "stage": "natural-release-no-GC",
+      "managed": 545257624,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 5996.2828,
+      "stage": "natural-release-no-GC",
+      "managed": 545265848,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6027.8249,
+      "stage": "natural-release-no-GC",
+      "managed": 545265848,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6059.6212,
+      "stage": "natural-release-no-GC",
+      "managed": 545274072,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6090.6226,
+      "stage": "natural-release-no-GC",
+      "managed": 545274072,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6120.8408,
+      "stage": "natural-release-no-GC",
+      "managed": 545282296,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6152.9771,
+      "stage": "natural-release-no-GC",
+      "managed": 545282296,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6184.8601,
+      "stage": "natural-release-no-GC",
+      "managed": 545290520,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6217.0728,
+      "stage": "natural-release-no-GC",
+      "managed": 545290520,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6247.1455,
+      "stage": "natural-release-no-GC",
+      "managed": 545298744,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6279.2335,
+      "stage": "natural-release-no-GC",
+      "managed": 545298744,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6310.4731,
+      "stage": "natural-release-no-GC",
+      "managed": 545306968,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6342.3956,
+      "stage": "natural-release-no-GC",
+      "managed": 545306968,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6374.2512,
+      "stage": "natural-release-no-GC",
+      "managed": 545315192,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6405.1314,
+      "stage": "natural-release-no-GC",
+      "managed": 545315192,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6436.802,
+      "stage": "natural-release-no-GC",
+      "managed": 545323416,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6468.1732,
+      "stage": "natural-release-no-GC",
+      "managed": 545323416,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6499.2591,
+      "stage": "natural-release-no-GC",
+      "managed": 545331640,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6529.2524,
+      "stage": "natural-release-no-GC",
+      "managed": 545331640,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6559.0608,
+      "stage": "natural-release-no-GC",
+      "managed": 545339864,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6590.052,
+      "stage": "natural-release-no-GC",
+      "managed": 545339864,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6621.057,
+      "stage": "natural-release-no-GC",
+      "managed": 545339864,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6652.1964,
+      "stage": "natural-release-no-GC",
+      "managed": 545348088,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6683.3955,
+      "stage": "natural-release-no-GC",
+      "managed": 545348088,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6714.4519,
+      "stage": "natural-release-no-GC",
+      "managed": 545356312,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6746.1966,
+      "stage": "natural-release-no-GC",
+      "managed": 545356312,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6777.4855,
+      "stage": "natural-release-no-GC",
+      "managed": 545364536,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6809.4948,
+      "stage": "natural-release-no-GC",
+      "managed": 545364536,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6839.6571,
+      "stage": "natural-release-no-GC",
+      "managed": 545372760,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6871.2981,
+      "stage": "natural-release-no-GC",
+      "managed": 545372760,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6903.185,
+      "stage": "natural-release-no-GC",
+      "managed": 545380984,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6934.3507,
+      "stage": "natural-release-no-GC",
+      "managed": 545380984,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6965.5768,
+      "stage": "natural-release-no-GC",
+      "managed": 545389208,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 6996.7078,
+      "stage": "natural-release-no-GC",
+      "managed": 545389208,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7027.3167,
+      "stage": "natural-release-no-GC",
+      "managed": 545397432,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7058.4125,
+      "stage": "natural-release-no-GC",
+      "managed": 545397432,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7089.4492,
+      "stage": "natural-release-no-GC",
+      "managed": 545405656,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7121.2466,
+      "stage": "natural-release-no-GC",
+      "managed": 545405656,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7152.5177,
+      "stage": "natural-release-no-GC",
+      "managed": 545413880,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7183.1811,
+      "stage": "natural-release-no-GC",
+      "managed": 545413880,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7214.2438,
+      "stage": "natural-release-no-GC",
+      "managed": 545422104,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7245.7658,
+      "stage": "natural-release-no-GC",
+      "managed": 545422104,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7276.2371,
+      "stage": "natural-release-no-GC",
+      "managed": 545422104,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7307.6285,
+      "stage": "natural-release-no-GC",
+      "managed": 545430328,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7339.6047,
+      "stage": "natural-release-no-GC",
+      "managed": 545430328,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7369.6299,
+      "stage": "natural-release-no-GC",
+      "managed": 545438552,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7399.5954,
+      "stage": "natural-release-no-GC",
+      "managed": 545438552,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7429.6743,
+      "stage": "natural-release-no-GC",
+      "managed": 545446776,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7460.7273,
+      "stage": "natural-release-no-GC",
+      "managed": 545446776,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7492.7747,
+      "stage": "natural-release-no-GC",
+      "managed": 545455000,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7522.8787,
+      "stage": "natural-release-no-GC",
+      "managed": 545455000,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7554.1636,
+      "stage": "natural-release-no-GC",
+      "managed": 545463224,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7584.5935,
+      "stage": "natural-release-no-GC",
+      "managed": 545463224,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7615.149,
+      "stage": "natural-release-no-GC",
+      "managed": 545471448,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7646.266,
+      "stage": "natural-release-no-GC",
+      "managed": 545471448,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7676.2533,
+      "stage": "natural-release-no-GC",
+      "managed": 545479672,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7707.2161,
+      "stage": "natural-release-no-GC",
+      "managed": 545479672,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7737.9156,
+      "stage": "natural-release-no-GC",
+      "managed": 545487896,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7769.1182,
+      "stage": "natural-release-no-GC",
+      "managed": 545487896,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7801.1454,
+      "stage": "natural-release-no-GC",
+      "managed": 545496120,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7833.1762,
+      "stage": "natural-release-no-GC",
+      "managed": 545496120,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7863.7997,
+      "stage": "natural-release-no-GC",
+      "managed": 545504344,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7895.1943,
+      "stage": "natural-release-no-GC",
+      "managed": 545504344,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7926.6195,
+      "stage": "natural-release-no-GC",
+      "managed": 545504344,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7957.7046,
+      "stage": "natural-release-no-GC",
+      "managed": 545512568,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 7988.9394,
+      "stage": "natural-release-no-GC",
+      "managed": 545512568,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 8020.4383,
+      "stage": "natural-release-no-GC",
+      "managed": 545520792,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 8052.0999,
+      "stage": "natural-release-no-GC",
+      "managed": 545529016,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 8083.9827,
+      "stage": "natural-release-no-GC",
+      "managed": 545529016,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 8114.7651,
+      "stage": "natural-release-no-GC",
+      "managed": 545537240,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 8146.7934,
+      "stage": "natural-release-no-GC",
+      "managed": 545537240,
+      "workingSet": 1850433536,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    },
+    {
+      "wallMs": 8178.4941,
+      "stage": "natural-release-no-GC",
+      "managed": 545545464,
+      "workingSet": 1850437632,
+      "privateBytes": 1842561024,
+      "ledger": 0
+    }
+  ],
+  "nativeAllocations": "UNAVAILABLE allocator attribution; working set/private bytes sampled, not native allocation ownership",
+  "releaseSeries": "3s natural, no forced GC; source retained as baseline",
+  "oracle": "existing full renderer",
+  "productionChanged": false
+}
