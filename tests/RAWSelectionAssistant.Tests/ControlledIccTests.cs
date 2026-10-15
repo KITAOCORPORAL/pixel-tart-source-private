@@ -22,6 +22,7 @@ public sealed class ControlledIccTests
         b=Profile();b[8]=5;Refuses(b,"ICC_VERSION");b=Profile();BinaryPrimitives.WriteUInt32BigEndian(b.AsSpan(64),9);Refuses(b,"ICC_INTENT");
         b=Profile();"A2B0"u8.CopyTo(b.AsSpan(132));Refuses(b,"ICC_UNSUPPORTED_PROFILE");Refuses(new byte[ControlledIccProfile.MaximumBytes+1],"ICC_TOO_LARGE");
         using var c=new CancellationTokenSource();c.Cancel();Assert.Throws<OperationCanceledException>(()=>ControlledIccProfile.Read(Profile(),c.Token));
+        b=Profile();BinaryPrimitives.WriteUInt32BigEndian(b.AsSpan(140+4*12),8);Refuses(b,"ICC_UNSUPPORTED_TRC");
     }
     [TestMethod] public void DefaultOffAndRecipeCannotMigrateLegacyVersions()
     {
@@ -34,7 +35,7 @@ public sealed class ControlledIccTests
     [TestMethod] public void EmbeddedInspectorDistinguishesMissingAndCorruptProfileWithoutFallback()
     {
         string root=Path.Combine(Path.GetTempPath(),Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);
-        try{string path=Path.Combine(root,"a.jpg");File.WriteAllBytes(path,[255,216,255,217]);Assert.AreEqual("ICC_MISSING",Assert.Throws<ControlledIccException>(()=>EmbeddedIccInspector.Read(path)).Code);
+        try{string path=Path.Combine(root,"a.jpg");File.WriteAllBytes(path,[255,216,255,217]);Assert.AreEqual("ICC_MISSING",Assert.Throws<ControlledIccException>(()=>EmbeddedIccInspector.Read(path)).Code);Assert.AreEqual("ICC_MISSING",EmbeddedIccInspector.Inspect(path).RejectionCode);
         File.WriteAllBytes(path,[255,216,255,226,255,255]);Assert.AreEqual("ICC_CONTAINER",Assert.Throws<ControlledIccException>(()=>EmbeddedIccInspector.Read(path)).Code);
         }finally{Directory.Delete(root,true);}
     }

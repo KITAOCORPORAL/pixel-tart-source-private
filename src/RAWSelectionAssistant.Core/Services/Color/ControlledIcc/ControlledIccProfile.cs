@@ -66,7 +66,18 @@ public sealed class ControlledIccProfile
 /// <summary>Bounded embedded-profile inspection without decoding pixels or touching source files.</summary>
 public static class EmbeddedIccInspector
 {
-    public static ControlledIccProfile Read(string file,CancellationToken token=default)
+    public sealed record Inspection(string Status,string? Sha256,string? Version,string? ColorSpace,string? Pcs,string? RejectionCode,string? Reason);
+    public static Inspection Inspect(string file,CancellationToken token=default)
+    {
+        byte[] bytes;try{bytes=ReadEmbeddedBytes(file,token);}catch(ControlledIccException e){return new("REFUSED",null,null,null,null,e.Code,e.Message);}
+        var sha=Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
+        string? version=bytes.Length>9?$"{bytes[8]}.{bytes[9]>>4}":null;
+        string? space=bytes.Length>=20?Encoding.ASCII.GetString(bytes,16,4):null;string? pcs=bytes.Length>=24?Encoding.ASCII.GetString(bytes,20,4):null;
+        try{ControlledIccProfile.Read(bytes,token);return new("SUPPORTED_RESEARCH_SUBSET_NOT_ACCURACY_APPROVAL",sha,version,space,pcs,null,null);}
+        catch(ControlledIccException e){return new("REFUSED",sha,version,space,pcs,e.Code,e.Message);}
+    }
+    public static ControlledIccProfile Read(string file,CancellationToken token=default)=>ControlledIccProfile.Read(ReadEmbeddedBytes(file,token),token);
+    private static byte[] ReadEmbeddedBytes(string file,CancellationToken token)
     {
         token.ThrowIfCancellationRequested();using var s=new FileStream(file,FileMode.Open,FileAccess.Read,FileShare.Read);
         if(s.Length<4)throw new ControlledIccException("ICC_CONTAINER","Container header incomplete.");
@@ -75,7 +86,7 @@ public static class EmbeddedIccInspector
         if(magic[0]==0xff&&magic[1]==0xd8)profile=Jpeg(s,token);
         else if((magic[0]==73&&magic[1]==73)||(magic[0]==77&&magic[1]==77))profile=Tiff(s,token);
         else throw new ControlledIccException("ICC_CONTAINER","Only classic TIFF/JPEG profile inspection supported.");
-        return ControlledIccProfile.Read(profile,token);
+        return profile;
     }
     private static byte[] Jpeg(Stream s,CancellationToken token)
     {

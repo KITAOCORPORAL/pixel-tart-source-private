@@ -18,9 +18,19 @@ internal static class Program
     static string Hash(byte[] b)=>Convert.ToHexString(SHA256.HashData(b)).ToLowerInvariant();
     static int Run(string[] args)
     {
+        if(args.Length==4&&args[0]=="--native-selftest")
+        {
+            var profile=ControlledIccProfile.Read(File.ReadAllBytes(args[2]));var target=ControlledIccProfile.Read(File.ReadAllBytes(args[3]));
+            using var engine=new ControlledIccTransform(new(true,args[1],"2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",new[]{profile.Sha256,target.Sha256}));
+            var x=new float[3000000];Array.Fill(x,.25f);using var cancelled=new CancellationTokenSource();cancelled.Cancel();bool pre=false;try{engine.ConvertRgb(x,profile,target,cancelled.Token);}catch(OperationCanceledException){pre=true;}
+            using var flight=new CancellationTokenSource();flight.CancelAfter(1);bool inflight=false;try{engine.ConvertRgb(x,profile,target,flight.Token);}catch(OperationCanceledException){inflight=true;}
+            var after=engine.ConvertRgb(new float[]{.1f,.2f,.3f},profile,target);engine.Dispose();bool disposed=false;try{engine.ConvertRgb(new float[]{.1f,.2f,.3f},profile,target);}catch(ObjectDisposedException){disposed=true;}
+            if(!pre||!inflight||!disposed||after.Any(v=>!float.IsFinite(v)))throw new InvalidDataException("Native lifecycle selftest failed.");
+            Console.WriteLine(JsonSerializer.Serialize(new{preCancelled=pre,inflightCancelled=inflight,reusableAfterCancel=true,disposedRejected=disposed,nativeOwnership="Every transform/context/profile freed in finally; process memory release not inferred"}));return 0;
+        }
         if(args.Length==2&&args[0]=="inspect")
         {
-            var p=EmbeddedIccInspector.Read(args[1]);Console.WriteLine(JsonSerializer.Serialize(new{status="INSPECTED_NOT_COLOR_ACCURACY_APPROVAL",p.Sha256,p.Version,p.ColorSpace,p.Pcs,p.Tags}));return 0;
+            var report=EmbeddedIccInspector.Inspect(args[1]);Console.WriteLine(JsonSerializer.Serialize(report));return report.RejectionCode is null?0:2;
         }
         if(args.Length!=6||args[0]!="--explicit-research")throw new ControlledIccException("ICC_DISABLED","Usage: --explicit-research sourcePhoto outputNewDirectory externalLcms workingIcc outputIcc. No product defaults changed.");
         var sourcePath=Path.GetFullPath(args[1]);var directory=Path.GetFullPath(args[2]);
@@ -36,6 +46,7 @@ internal static class Program
         {
             foreach(var q in new[]{"/ifd/{ushort=274}","/app1/ifd/{ushort=274}"})if(md.ContainsQuery(q)&&Convert.ToInt32(md.GetQuery(q))!=1)throw new ControlledIccException("ICC_ORIENTATION","V1 requires orientation1; no silent project geometry change.");
         }
+        if(frame.Format!=PixelFormats.Rgb48&&frame.Format!=PixelFormats.Rgb24&&frame.Format!=PixelFormats.Bgr24)throw new ControlledIccException("ICC_PIXEL_FORMAT","V1 requires proven opaque RGB24/48; alpha/gray/CMYK not discarded.");
         var rgb48=new FormatConvertedBitmap(frame,PixelFormats.Rgb48,null,0);var pixels=new ushort[checked(frame.PixelWidth*frame.PixelHeight*3)];rgb48.CopyPixels(pixels,frame.PixelWidth*6,0);
         var floats=pixels.Select(x=>x/65535f).ToArray();
         var recipe=new ControlledIccRecipe(ControlledIccTransform.AlgorithmVersion,sourceHash,input.Sha256,working.Sha256,output.Sha256,-1);recipe.Validate();
@@ -74,7 +85,7 @@ internal static class Program
         }
         File.WriteAllBytes(Path.Combine(directory,"decoded-input-f32.bin"),System.Runtime.InteropServices.MemoryMarshal.AsBytes(floats.AsSpan()).ToArray());
         File.WriteAllBytes(Path.Combine(directory,"preview-output-f32.bin"),System.Runtime.InteropServices.MemoryMarshal.AsBytes(encoded.AsSpan()).ToArray());
-        File.WriteAllText(Path.Combine(directory,"result.json"),JsonSerializer.Serialize(new{status="VERIFIED_ISOLATED_WORKFLOW_NOT_PRODUCT_ADMISSION",version=recipe.AlgorithmVersion,sourceHash,inputProfile=input.Sha256,workingProfile=working.Sha256,outputProfile=output.Sha256,adapter.EngineVersion,adapter.EngineSha256,width=frame.PixelWidth,height=frame.PixelHeight,recipe,previewReopenExact=true,output=results,display="Detached RGB48 + explicit output profile; no physical display calibration claim",CalibrationEligible=false},new JsonSerializerOptions{WriteIndented=true}));
+        File.WriteAllText(Path.Combine(directory,"result.json"),JsonSerializer.Serialize(new{status="VERIFIED_ISOLATED_WORKFLOW_NOT_PRODUCT_ADMISSION",version=recipe.AlgorithmVersion,inputProfileVersion=input.Version,workingProfileVersion=working.Version,outputProfileVersion=output.Version,workingDomain="linear ProPhoto if working hash954e..., otherwise linear sRGB; matrix PCS XYZ D50",outputTransfer="linear; not encoded display sRGB",inputBitDepth=frame.Format.BitsPerPixel/3,intentRequested=1,intentEffective=1,bpcRequested=false,bpcEffective=false,adaptation=1,quantization="nearest-even code=round(float*65535); JPEG8 separately lossy",sourceHash,inputProfile=input.Sha256,workingProfile=working.Sha256,outputProfile=output.Sha256,adapter.EngineVersion,adapter.EngineSha256,width=frame.PixelWidth,height=frame.PixelHeight,recipe,previewReopenExact=true,output=results,display="Detached RGB48 + explicit output profile; no physical display calibration claim",CalibrationEligible=false},new JsonSerializerOptions{WriteIndented=true}));
         Console.WriteLine(Path.Combine(directory,"result.json"));return 0;
     }
     static byte[] ReadPngIcc(string path)
