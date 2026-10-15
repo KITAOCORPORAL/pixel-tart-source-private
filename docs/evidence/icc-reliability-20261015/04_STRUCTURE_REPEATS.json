@@ -1,0 +1,786 @@
+{
+  "runs": [
+    {
+      "file": "1-candidate.json",
+      "mode": "candidate",
+      "ms": 6856.0017,
+      "allocation": 282510248,
+      "peakWs": 950624256,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "halo": 37,
+      "expectedTiles": 319,
+      "observedTiles": 0,
+      "maxTileMs": null,
+      "gcBefore": [
+        3,
+        3,
+        2
+      ],
+      "gcAfter": [
+        3,
+        3,
+        2
+      ],
+      "processLoad": [
+        {
+          "ProcessName": "Memory Compression",
+          "bytes": 1252081664,
+          "cpu": 17859.375
+        },
+        {
+          "ProcessName": "VBCSCompiler",
+          "bytes": 863473664,
+          "cpu": 215750
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 618364928,
+          "cpu": 200343.75
+        },
+        {
+          "ProcessName": "ChatGPT",
+          "bytes": 532443136,
+          "cpu": 90843.75
+        },
+        {
+          "ProcessName": "msedgewebview2",
+          "bytes": 526766080,
+          "cpu": 366156.25
+        },
+        {
+          "ProcessName": "Weixin",
+          "bytes": 522190848,
+          "cpu": 175953.125
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 486825984,
+          "cpu": 174750
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 406179840,
+          "cpu": 115562.5
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 400797696,
+          "cpu": 28500
+        },
+        {
+          "ProcessName": "SogouCloud",
+          "bytes": 348065792,
+          "cpu": 31359.375
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 347922432,
+          "cpu": 1022968.75
+        },
+        {
+          "ProcessName": "Feishu",
+          "bytes": 334102528,
+          "cpu": 86250
+        }
+      ]
+    },
+    {
+      "file": "1-full.json",
+      "mode": "full",
+      "ms": 4226.3388,
+      "allocation": 1190651144,
+      "peakWs": 1854361600,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "halo": 37,
+      "expectedTiles": 319,
+      "observedTiles": 0,
+      "maxTileMs": null,
+      "gcBefore": [
+        3,
+        3,
+        2
+      ],
+      "gcAfter": [
+        4,
+        4,
+        3
+      ],
+      "processLoad": [
+        {
+          "ProcessName": "Memory Compression",
+          "bytes": 1251950592,
+          "cpu": 17859.375
+        },
+        {
+          "ProcessName": "msedgewebview2",
+          "bytes": 965349376,
+          "cpu": 367484.375
+        },
+        {
+          "ProcessName": "VBCSCompiler",
+          "bytes": 768884736,
+          "cpu": 216234.375
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 592343040,
+          "cpu": 204031.25
+        },
+        {
+          "ProcessName": "ChatGPT",
+          "bytes": 532439040,
+          "cpu": 90890.625
+        },
+        {
+          "ProcessName": "Weixin",
+          "bytes": 522190848,
+          "cpu": 176015.625
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 486842368,
+          "cpu": 174750
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 406478848,
+          "cpu": 115703.125
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 402984960,
+          "cpu": 28500
+        },
+        {
+          "ProcessName": "SogouCloud",
+          "bytes": 348069888,
+          "cpu": 31359.375
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 348041216,
+          "cpu": 1032250
+        },
+        {
+          "ProcessName": "Feishu",
+          "bytes": 333385728,
+          "cpu": 86625
+        }
+      ]
+    },
+    {
+      "file": "1-tile.json",
+      "mode": "tile",
+      "ms": 7188.0428,
+      "allocation": 2249835176,
+      "peakWs": 2009145344,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "halo": 37,
+      "expectedTiles": 319,
+      "observedTiles": 319,
+      "maxTileMs": 45.121,
+      "gcBefore": [
+        3,
+        3,
+        2
+      ],
+      "gcAfter": [
+        5,
+        5,
+        4
+      ],
+      "processLoad": [
+        {
+          "ProcessName": "Memory Compression",
+          "bytes": 1251950592,
+          "cpu": 17859.375
+        },
+        {
+          "ProcessName": "VBCSCompiler",
+          "bytes": 768847872,
+          "cpu": 216234.375
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 604188672,
+          "cpu": 206687.5
+        },
+        {
+          "ProcessName": "ChatGPT",
+          "bytes": 532443136,
+          "cpu": 90890.625
+        },
+        {
+          "ProcessName": "Weixin",
+          "bytes": 522137600,
+          "cpu": 176109.375
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 488361984,
+          "cpu": 174781.25
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 405958656,
+          "cpu": 115859.375
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 401858560,
+          "cpu": 28500
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 348143616,
+          "cpu": 1039812.5
+        },
+        {
+          "ProcessName": "SogouCloud",
+          "bytes": 348069888,
+          "cpu": 31359.375
+        },
+        {
+          "ProcessName": "Feishu",
+          "bytes": 332931072,
+          "cpu": 86812.5
+        },
+        {
+          "ProcessName": "ChatGPT",
+          "bytes": 295661568,
+          "cpu": 46921.875
+        }
+      ]
+    },
+    {
+      "file": "2-candidate.json",
+      "mode": "candidate",
+      "ms": 6831.9072,
+      "allocation": 282522584,
+      "peakWs": 950743040,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "halo": 37,
+      "expectedTiles": 319,
+      "observedTiles": 0,
+      "maxTileMs": null,
+      "gcBefore": [
+        3,
+        3,
+        2
+      ],
+      "gcAfter": [
+        3,
+        3,
+        2
+      ],
+      "processLoad": [
+        {
+          "ProcessName": "Memory Compression",
+          "bytes": 1251999744,
+          "cpu": 17859.375
+        },
+        {
+          "ProcessName": "msedgewebview2",
+          "bytes": 683286528,
+          "cpu": 370187.5
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 616763392,
+          "cpu": 210109.375
+        },
+        {
+          "ProcessName": "VBCSCompiler",
+          "bytes": 570601472,
+          "cpu": 216250
+        },
+        {
+          "ProcessName": "ChatGPT",
+          "bytes": 531767296,
+          "cpu": 90984.375
+        },
+        {
+          "ProcessName": "Weixin",
+          "bytes": 522166272,
+          "cpu": 176312.5
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 488361984,
+          "cpu": 174781.25
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 406200320,
+          "cpu": 116031.25
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 401272832,
+          "cpu": 28500
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 348196864,
+          "cpu": 1046968.75
+        },
+        {
+          "ProcessName": "SogouCloud",
+          "bytes": 348012544,
+          "cpu": 31359.375
+        },
+        {
+          "ProcessName": "Feishu",
+          "bytes": 336187392,
+          "cpu": 87375
+        }
+      ]
+    },
+    {
+      "file": "2-full.json",
+      "mode": "full",
+      "ms": 4209.2242,
+      "allocation": 1190632104,
+      "peakWs": 1854451712,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "halo": 37,
+      "expectedTiles": 319,
+      "observedTiles": 0,
+      "maxTileMs": null,
+      "gcBefore": [
+        3,
+        3,
+        2
+      ],
+      "gcAfter": [
+        4,
+        4,
+        3
+      ],
+      "processLoad": [
+        {
+          "ProcessName": "Memory Compression",
+          "bytes": 1252032512,
+          "cpu": 17859.375
+        },
+        {
+          "ProcessName": "msedgewebview2",
+          "bytes": 1106710528,
+          "cpu": 371390.625
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 629493760,
+          "cpu": 213062.5
+        },
+        {
+          "ProcessName": "VBCSCompiler",
+          "bytes": 559206400,
+          "cpu": 216250
+        },
+        {
+          "ProcessName": "ChatGPT",
+          "bytes": 532426752,
+          "cpu": 91093.75
+        },
+        {
+          "ProcessName": "Weixin",
+          "bytes": 520003584,
+          "cpu": 176453.125
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 488366080,
+          "cpu": 174781.25
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 405987328,
+          "cpu": 116062.5
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 401272832,
+          "cpu": 28500
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 348213248,
+          "cpu": 1053156.25
+        },
+        {
+          "ProcessName": "SogouCloud",
+          "bytes": 348012544,
+          "cpu": 31359.375
+        },
+        {
+          "ProcessName": "Feishu",
+          "bytes": 334213120,
+          "cpu": 87578.125
+        }
+      ]
+    },
+    {
+      "file": "2-tile.json",
+      "mode": "tile",
+      "ms": 7161.4076,
+      "allocation": 2249834360,
+      "peakWs": 2009165824,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "halo": 37,
+      "expectedTiles": 319,
+      "observedTiles": 319,
+      "maxTileMs": 44.8054,
+      "gcBefore": [
+        3,
+        3,
+        2
+      ],
+      "gcAfter": [
+        5,
+        5,
+        4
+      ],
+      "processLoad": [
+        {
+          "ProcessName": "Memory Compression",
+          "bytes": 1251426304,
+          "cpu": 17859.375
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 611332096,
+          "cpu": 215609.375
+        },
+        {
+          "ProcessName": "VBCSCompiler",
+          "bytes": 540880896,
+          "cpu": 216296.875
+        },
+        {
+          "ProcessName": "ChatGPT",
+          "bytes": 533843968,
+          "cpu": 91140.625
+        },
+        {
+          "ProcessName": "Weixin",
+          "bytes": 520003584,
+          "cpu": 176484.375
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 488366080,
+          "cpu": 174781.25
+        },
+        {
+          "ProcessName": "msedgewebview2",
+          "bytes": 420675584,
+          "cpu": 372796.875
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 405962752,
+          "cpu": 116187.5
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 401272832,
+          "cpu": 28500
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 348200960,
+          "cpu": 1058015.625
+        },
+        {
+          "ProcessName": "SogouCloud",
+          "bytes": 348057600,
+          "cpu": 31359.375
+        },
+        {
+          "ProcessName": "Feishu",
+          "bytes": 332972032,
+          "cpu": 87671.875
+        }
+      ]
+    },
+    {
+      "file": "3-candidate.json",
+      "mode": "candidate",
+      "ms": 6820.4385,
+      "allocation": 282506528,
+      "peakWs": 950882304,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "halo": 37,
+      "expectedTiles": 319,
+      "observedTiles": 0,
+      "maxTileMs": null,
+      "gcBefore": [
+        3,
+        3,
+        2
+      ],
+      "gcAfter": [
+        3,
+        3,
+        2
+      ],
+      "processLoad": [
+        {
+          "ProcessName": "Memory Compression",
+          "bytes": 1251164160,
+          "cpu": 17859.375
+        },
+        {
+          "ProcessName": "msedgewebview2",
+          "bytes": 840912896,
+          "cpu": 374078.125
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 618516480,
+          "cpu": 218453.125
+        },
+        {
+          "ProcessName": "VBCSCompiler",
+          "bytes": 540848128,
+          "cpu": 216296.875
+        },
+        {
+          "ProcessName": "ChatGPT",
+          "bytes": 536883200,
+          "cpu": 91843.75
+        },
+        {
+          "ProcessName": "Weixin",
+          "bytes": 519991296,
+          "cpu": 176625
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 488366080,
+          "cpu": 174781.25
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 406032384,
+          "cpu": 116375
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 401272832,
+          "cpu": 28500
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 348979200,
+          "cpu": 1063812.5
+        },
+        {
+          "ProcessName": "SogouCloud",
+          "bytes": 348057600,
+          "cpu": 31359.375
+        },
+        {
+          "ProcessName": "Feishu",
+          "bytes": 339947520,
+          "cpu": 88015.625
+        }
+      ]
+    },
+    {
+      "file": "3-full.json",
+      "mode": "full",
+      "ms": 4221.8912,
+      "allocation": 1190635960,
+      "peakWs": 1854500864,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "halo": 37,
+      "expectedTiles": 319,
+      "observedTiles": 0,
+      "maxTileMs": null,
+      "gcBefore": [
+        3,
+        3,
+        2
+      ],
+      "gcAfter": [
+        4,
+        4,
+        3
+      ],
+      "processLoad": [
+        {
+          "ProcessName": "Memory Compression",
+          "bytes": 1251147776,
+          "cpu": 17859.375
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 573419520,
+          "cpu": 222531.25
+        },
+        {
+          "ProcessName": "ChatGPT",
+          "bytes": 530067456,
+          "cpu": 91875
+        },
+        {
+          "ProcessName": "VBCSCompiler",
+          "bytes": 529551360,
+          "cpu": 216296.875
+        },
+        {
+          "ProcessName": "Weixin",
+          "bytes": 519999488,
+          "cpu": 176875
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 488366080,
+          "cpu": 174781.25
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 405798912,
+          "cpu": 116562.5
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 401272832,
+          "cpu": 28500
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 349159424,
+          "cpu": 1071062.5
+        },
+        {
+          "ProcessName": "SogouCloud",
+          "bytes": 348057600,
+          "cpu": 31359.375
+        },
+        {
+          "ProcessName": "Feishu",
+          "bytes": 334323712,
+          "cpu": 88140.625
+        },
+        {
+          "ProcessName": "ChatGPT",
+          "bytes": 297558016,
+          "cpu": 47343.75
+        }
+      ]
+    },
+    {
+      "file": "3-tile.json",
+      "mode": "tile",
+      "ms": 7176.9923,
+      "allocation": 2249838328,
+      "peakWs": 2009214976,
+      "hash": "CC85E4AA22C9750B3AF0C50DA9BC28BE6C5F507E75645EC318062974D63D2421",
+      "halo": 37,
+      "expectedTiles": 319,
+      "observedTiles": 319,
+      "maxTileMs": 40.059,
+      "gcBefore": [
+        3,
+        3,
+        2
+      ],
+      "gcAfter": [
+        5,
+        5,
+        4
+      ],
+      "processLoad": [
+        {
+          "ProcessName": "Memory Compression",
+          "bytes": 1251151872,
+          "cpu": 17859.375
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 600227840,
+          "cpu": 225015.625
+        },
+        {
+          "ProcessName": "msedgewebview2",
+          "bytes": 558936064,
+          "cpu": 376812.5
+        },
+        {
+          "ProcessName": "ChatGPT",
+          "bytes": 533803008,
+          "cpu": 91953.125
+        },
+        {
+          "ProcessName": "VBCSCompiler",
+          "bytes": 523476992,
+          "cpu": 216296.875
+        },
+        {
+          "ProcessName": "Weixin",
+          "bytes": 520122368,
+          "cpu": 177484.375
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 488366080,
+          "cpu": 174781.25
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 406331392,
+          "cpu": 116625
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 401272832,
+          "cpu": 28500
+        },
+        {
+          "ProcessName": "chrome",
+          "bytes": 349274112,
+          "cpu": 1077437.5
+        },
+        {
+          "ProcessName": "SogouCloud",
+          "bytes": 348057600,
+          "cpu": 31359.375
+        },
+        {
+          "ProcessName": "Feishu",
+          "bytes": 333991936,
+          "cpu": 88250
+        }
+      ]
+    }
+  ],
+  "aggregate": [
+    {
+      "mode": "candidate",
+      "median": 6831.9072,
+      "worst": 6856.0017,
+      "count": 3,
+      "allFrozenHash": true,
+      "worstWs": 950882304
+    },
+    {
+      "mode": "full",
+      "median": 4221.8912,
+      "worst": 4226.3388,
+      "count": 3,
+      "allFrozenHash": true,
+      "worstWs": 1854500864
+    },
+    {
+      "mode": "tile",
+      "median": 7176.9923,
+      "worst": 7188.0428,
+      "count": 3,
+      "allFrozenHash": true,
+      "worstWs": 2009214976
+    }
+  ]
+}

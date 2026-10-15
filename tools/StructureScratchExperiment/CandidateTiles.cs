@@ -6,7 +6,7 @@ public static class CandidateTiles
     public static long LastOwnedScratchBytes {get;private set;}
     private sealed class Workspace(int width,int height)
     {public readonly float[] Input=new float[width*height*3];public readonly OwnedDevelopScratch.Scratch Develop=new(width*height);public long Bytes=>(long)width*height*12+Develop.Bytes;}
-    public static HighBitDepthImageBuffer Render(HighBitDepthImageBuffer source,ColorAdjustmentStackNode node,CancellationToken token=default,int tileWidth=512,int tileHeight=128)
+    public static HighBitDepthImageBuffer Render(HighBitDepthImageBuffer source,ColorAdjustmentStackNode node,CancellationToken token=default,int tileWidth=512,int tileHeight=128,Action<string>? stage=null)
     {
         LastOwnedScratchBytes=0;if(tileWidth<=0||tileHeight<=0)throw new ArgumentOutOfRangeException();
         node.Normalize();var plan=SpatialLegacyRawRenderer.Plan(source,node,tileWidth,tileHeight);

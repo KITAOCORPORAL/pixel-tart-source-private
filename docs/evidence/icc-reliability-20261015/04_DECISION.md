@@ -1,0 +1,7 @@
+# Structure/RAW decision
+
+Structurecandidate3boundedrounds6831.9072msmedian/6856.0017worst vsfull4221.8912/4226.3388;oldtile7176.9923/7188.0428. FrozenfloatSHAall9runsidentical. Peakcandidate~951MB/full1.855GB/tile2.009GB. Currentworstvariationnarrowerthanprevious9.05s, butpastfailure/slowrunretainedandnotuniquelyattributed. All319tile/h37 andpertilestages/processload/GC captured; source/fullanalysisbeforetimerandnativeallocationownershipstilllimits. Notfasterthanfull => no productionreplacement.
+
+FixedRTactualscalarfunction/DTactualhorizontalhelper2Dcompositionnumeric~1e-7 to5.6e-7 finitewindow; configurationlimitednotfullcolorStructureproof. Productiontwoimplementation gate remainsOPEN. NoGPLcodeproductcopy.
+
+Sonycandidatecallbackcancel returns-100010(CANCELLED_BY_CALLBACK), RAIIlibraw_closeexecutes. FullnormalprocessRGB16TIFF4624x3080 noautorotate; color4available(notBayerclaim). BeforecloseWS266.75MB→afterclose5.67MB, stays~5.67MB for10seconds inthissmallnativeprobe; baseline4.15MB. ThisrealWSdropnotledger, butnotproductdecoder/UIrecipeacceptance. Oldrefusal/oldrecipekept. No bundledcandidate, lifecycletoolresearchonly.
