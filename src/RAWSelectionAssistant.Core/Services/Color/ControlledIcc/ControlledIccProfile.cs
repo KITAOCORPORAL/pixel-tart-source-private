@@ -102,6 +102,10 @@ public static class EmbeddedIccInspector
             if(marker==0xe2)
             {
                 var b=new byte[n];s.ReadExactly(b);
+                if(n>=12&&b.AsSpan(0,12).SequenceEqual("ICC_PROFILE\0"u8))
+                {
+                    if(n<14)throw new ControlledIccException("ICC_CHUNKS","ICC APP2 sequence header incomplete.");
+                }
                 if(n>=14&&b.AsSpan(0,12).SequenceEqual("ICC_PROFILE\0"u8))
                 {
                     int index=b[12],total=b[13];if(index<1||index>total||total==0||(expected!=0&&total!=expected)||!chunks.TryAdd(index,b[14..]))throw new ControlledIccException("ICC_CHUNKS","Missing/duplicate ICC chunks.");
@@ -132,6 +136,8 @@ public static class EmbeddedIccInspector
             if(n<132||(ulong)pos+n>(ulong)s.Length)throw new ControlledIccException("ICC_LENGTH","ICC TIFF extent invalid.");
             long cursor=s.Position;s.Position=pos;result=new byte[n];s.ReadExactly(result);s.Position=cursor;
         }
+        byte[] next=new byte[4];s.ReadExactly(next);
+        if(U32(next)!=0)throw new ControlledIccException("ICC_CONTAINER","V1 accepts single-image first-IFD TIFF only; non-first IFD/multipage rejected.");
         return result??throw new ControlledIccException("ICC_MISSING","No embedded profile; no silent sRGB assignment.");
     }
 }

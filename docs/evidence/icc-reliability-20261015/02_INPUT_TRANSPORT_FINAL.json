@@ -1,0 +1,313 @@
+{
+  "status": "PASSED",
+  "orientations": [
+    {
+      "file": "orientation-1.jpg",
+      "orientation": 1,
+      "policy": "SUPPORTED"
+    },
+    {
+      "file": "orientation-2.jpg",
+      "orientation": 2,
+      "policy": "ICC_ORIENTATION_REFUSED_BY_WORKFLOW"
+    },
+    {
+      "file": "orientation-3.jpg",
+      "orientation": 3,
+      "policy": "ICC_ORIENTATION_REFUSED_BY_WORKFLOW"
+    },
+    {
+      "file": "orientation-4.jpg",
+      "orientation": 4,
+      "policy": "ICC_ORIENTATION_REFUSED_BY_WORKFLOW"
+    },
+    {
+      "file": "orientation-5.jpg",
+      "orientation": 5,
+      "policy": "ICC_ORIENTATION_REFUSED_BY_WORKFLOW"
+    },
+    {
+      "file": "orientation-6.jpg",
+      "orientation": 6,
+      "policy": "ICC_ORIENTATION_REFUSED_BY_WORKFLOW"
+    },
+    {
+      "file": "orientation-7.jpg",
+      "orientation": 7,
+      "policy": "ICC_ORIENTATION_REFUSED_BY_WORKFLOW"
+    },
+    {
+      "file": "orientation-8.jpg",
+      "orientation": 8,
+      "policy": "ICC_ORIENTATION_REFUSED_BY_WORKFLOW"
+    }
+  ],
+  "wic": "10.0.19041.5129 (WinBuild.160101.0800)",
+  "formatConversion": "RGB24-\u003ERGB48 exactcode*257; noColorConvertedBitmap; decoder IgnoreColorProfile",
+  "observations": [
+    {
+      "file": "rgb48-0.tif",
+      "source": [
+        0,
+        32768,
+        65535
+      ],
+      "wic": [
+        0,
+        32768,
+        65535
+      ],
+      "lcmsInput": [
+        0,
+        0.5000076,
+        1
+      ],
+      "lcmsOutput": [
+        0,
+        0.5000076,
+        1
+      ],
+      "exact": true
+    },
+    {
+      "file": "rgb24-0-1.jpg",
+      "pieces": 1,
+      "source": [
+        0,
+        128,
+        255
+      ],
+      "wic": [
+        0,
+        128,
+        255
+      ],
+      "upcast": [
+        0,
+        32896,
+        65535
+      ],
+      "lcmsInput": [
+        0,
+        0.5019608,
+        1
+      ],
+      "lcmsOutput": [
+        0,
+        0.5019608,
+        1
+      ],
+      "maxAbsLossy": 0,
+      "profile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "sha256": "91613902693CBBFF85AD503732E841AAFC69F29DC929C351374965D5FA390858"
+    },
+    {
+      "file": "rgb24-0-3.jpg",
+      "pieces": 3,
+      "source": [
+        0,
+        128,
+        255
+      ],
+      "wic": [
+        0,
+        128,
+        255
+      ],
+      "upcast": [
+        0,
+        32896,
+        65535
+      ],
+      "lcmsInput": [
+        0,
+        0.5019608,
+        1
+      ],
+      "lcmsOutput": [
+        0,
+        0.5019608,
+        1
+      ],
+      "maxAbsLossy": 0,
+      "profile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "sha256": "FF7095D50CDD57F1F76308733280AA41B1AA77ECBC3CEE724EC66A803CB68070"
+    },
+    {
+      "file": "rgb48-8192.tif",
+      "source": [
+        8192,
+        16384,
+        49152
+      ],
+      "wic": [
+        8192,
+        16384,
+        49152
+      ],
+      "lcmsInput": [
+        0.1250019,
+        0.2500038,
+        0.75001144
+      ],
+      "lcmsOutput": [
+        0.1250019,
+        0.2500038,
+        0.75001144
+      ],
+      "exact": true
+    },
+    {
+      "file": "rgb24-8192-1.jpg",
+      "pieces": 1,
+      "source": [
+        32,
+        64,
+        191
+      ],
+      "wic": [
+        33,
+        64,
+        191
+      ],
+      "upcast": [
+        8481,
+        16448,
+        49087
+      ],
+      "lcmsInput": [
+        0.12941177,
+        0.2509804,
+        0.7490196
+      ],
+      "lcmsOutput": [
+        0.12941177,
+        0.2509804,
+        0.7490196
+      ],
+      "maxAbsLossy": 0.00392156862745098,
+      "profile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "sha256": "3578218762F694B18E7C9A1672338BA33C3882E0A1D485B9E34D523AECC61E1B"
+    },
+    {
+      "file": "rgb24-8192-3.jpg",
+      "pieces": 3,
+      "source": [
+        32,
+        64,
+        191
+      ],
+      "wic": [
+        33,
+        64,
+        191
+      ],
+      "upcast": [
+        8481,
+        16448,
+        49087
+      ],
+      "lcmsInput": [
+        0.12941177,
+        0.2509804,
+        0.7490196
+      ],
+      "lcmsOutput": [
+        0.12941177,
+        0.2509804,
+        0.7490196
+      ],
+      "maxAbsLossy": 0.00392156862745098,
+      "profile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "sha256": "722178C922DC10F00EA172E115D9F834BC4ECE5E57D081B76875AFA4F3E38307"
+    },
+    {
+      "file": "rgb48-16384.tif",
+      "source": [
+        16384,
+        16384,
+        16384
+      ],
+      "wic": [
+        16384,
+        16384,
+        16384
+      ],
+      "lcmsInput": [
+        0.2500038,
+        0.2500038,
+        0.2500038
+      ],
+      "lcmsOutput": [
+        0.2500038,
+        0.2500038,
+        0.2500038
+      ],
+      "exact": true
+    },
+    {
+      "file": "rgb24-16384-1.jpg",
+      "pieces": 1,
+      "source": [
+        64,
+        64,
+        64
+      ],
+      "wic": [
+        64,
+        64,
+        64
+      ],
+      "upcast": [
+        16448,
+        16448,
+        16448
+      ],
+      "lcmsInput": [
+        0.2509804,
+        0.2509804,
+        0.2509804
+      ],
+      "lcmsOutput": [
+        0.2509804,
+        0.2509804,
+        0.2509804
+      ],
+      "maxAbsLossy": 0,
+      "profile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "sha256": "7EA1A4D0DE75931052F4E4E2C87A234CEF7547E189741EDBD0E67888D3FA3493"
+    },
+    {
+      "file": "rgb24-16384-3.jpg",
+      "pieces": 3,
+      "source": [
+        64,
+        64,
+        64
+      ],
+      "wic": [
+        64,
+        64,
+        64
+      ],
+      "upcast": [
+        16448,
+        16448,
+        16448
+      ],
+      "lcmsInput": [
+        0.2509804,
+        0.2509804,
+        0.2509804
+      ],
+      "lcmsOutput": [
+        0.2509804,
+        0.2509804,
+        0.2509804
+      ],
+      "maxAbsLossy": 0,
+      "profile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "sha256": "914457D4F1ED4B602BA13195A6F8B899DD264423D8446EA0462F0B430F92682A"
+    }
+  ]
+}

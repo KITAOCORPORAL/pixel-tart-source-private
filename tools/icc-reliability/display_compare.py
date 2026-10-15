@@ -1,0 +1,9 @@
+import ctypes as C,pathlib,subprocess,json,math,hashlib
+R=pathlib.Path(__file__).resolve().parents[2];A=R/'artifacts/icc-reliability';L=C.CDLL(r'D:/AI AGENT/kitao-company-validation-20261015/artifacts/company-validation/icc/lcms/Library/bin/lcms2.dll');P=C.c_void_p;U=C.c_uint;F=C.c_float
+for n,rest,args in [('cmsOpenProfileFromFile',P,[C.c_char_p,C.c_char_p]),('cmsCreateTransform',P,[P,U,P,U,U,U]),('cmsDoTransform',None,[P,P,P,U]),('cmsCloseProfile',C.c_int,[P]),('cmsDeleteTransform',None,[P])]:f=getattr(L,n);f.restype=rest;f.argtypes=args
+source=R/'tests/RAWSelectionAssistant.Tests/TestData/controlled-linear-srgb.icc';dest=A/'photo-bounded/display-srgb.icc';s=L.cmsOpenProfileFromFile(str(source).encode(),b'r');d=L.cmsOpenProfileFromFile(str(dest).encode(),b'r');fmt=(1<<22)|(4<<16)|(3<<3)|4;t=L.cmsCreateTransform(s,fmt,d,fmt,1,0x144);assert t
+points=[[v,v,v] for v in [0,.001,.0031308,.01,.18,.5,.9,1]]+[[.1,.2,.3],[.8,.1,.02]];sk=subprocess.run([str(A/'display_reference.exe'),str(source),str(dest)],input='\n'.join(' '.join(map(str,p)) for p in points)+'\n',capture_output=True,text=True);print('skcms exit',sk.returncode,sk.stderr,file=__import__('sys').stderr);assert sk.returncode==0;skv=[[float(v) for v in l.split()] for l in sk.stdout.splitlines()];rows=[]
+for p,skrow in zip(points,skv):
+ x=(F*3)(*p);y=(F*3)();L.cmsDoTransform(t,x,y,1);formula=[12.92*v if v<=.0031308 else 1.055*v**(1/2.4)-.055 for v in p];rows.append(dict(input=p,lcms=list(y),skcms=skrow,formula=formula,maxFormulaLcms=max(abs(a-b) for a,b in zip(formula,y)),maxFormulaSkcms=max(abs(a-b) for a,b in zip(formula,skrow))))
+L.cmsDeleteTransform(t);L.cmsCloseProfile(s);L.cmsCloseProfile(d)
+print(json.dumps(dict(rows=rows,targetSha256=hashlib.sha256(dest.read_bytes()).hexdigest(),scope='standard sRGB encoded display proxy; not physical monitor',maxLcms=max(r['maxFormulaLcms'] for r in rows),maxSkcms=max(r['maxFormulaSkcms'] for r in rows)),indent=2))

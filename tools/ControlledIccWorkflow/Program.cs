@@ -11,13 +11,15 @@ internal static class Program
 {
     [STAThread] static int Main(string[] args)
     {
-        try{return Run(args);}catch(ControlledIccException e){Console.Error.WriteLine(JsonSerializer.Serialize(new{status="REFUSED",code=e.Code,message=e.Message}));return 2;}
+        try{using var memory=WorkflowMemory.Begin(args);return Run(args);}catch(ControlledIccException e){Console.Error.WriteLine(JsonSerializer.Serialize(new{status="REFUSED",code=e.Code,message=e.Message}));return 2;}
         catch(OperationCanceledException){Console.Error.WriteLine("{\"status\":\"CANCELLED\"}");return 3;}
         catch(Exception e){Console.Error.WriteLine(e.ToString());return 1;}
     }
     static string Hash(byte[] b)=>Convert.ToHexString(SHA256.HashData(b)).ToLowerInvariant();
     static int Run(string[] args)
     {
+        if(args.Length>0&&args[0]=="--input-selftest")return InputTransportTests.Run(args);
+        if(args.Length>0&&args[0]=="--bounded-research")return BoundedWorkflow.Run(args);
         if(args.Length==4&&args[0]=="--native-selftest")
         {
             var profile=ControlledIccProfile.Read(File.ReadAllBytes(args[2]));var target=ControlledIccProfile.Read(File.ReadAllBytes(args[3]));
@@ -35,38 +37,38 @@ internal static class Program
         if(args.Length!=6||args[0]!="--explicit-research")throw new ControlledIccException("ICC_DISABLED","Usage: --explicit-research sourcePhoto outputNewDirectory externalLcms workingIcc outputIcc. No product defaults changed.");
         var sourcePath=Path.GetFullPath(args[1]);var directory=Path.GetFullPath(args[2]);
         if(Directory.Exists(directory))throw new IOException("New directory required; never overwrite prior results.");
-        var input=EmbeddedIccInspector.Read(sourcePath);var working=ControlledIccProfile.Read(File.ReadAllBytes(args[4]));var output=ControlledIccProfile.Read(File.ReadAllBytes(args[5]));
+        WorkflowMemory.Stage("profile-read");var input=EmbeddedIccInspector.Read(sourcePath);var working=ControlledIccProfile.Read(File.ReadAllBytes(args[4]));var output=ControlledIccProfile.Read(File.ReadAllBytes(args[5]));
         var sourceHash=Hash(File.ReadAllBytes(sourcePath));
         using var adapter=new ControlledIccTransform(new(true,args[3],"2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",new[]{input.Sha256,working.Sha256,output.Sha256}));
         using var file=File.OpenRead(sourcePath);
         // IgnoreColorProfile prevents WIC auto-conversion; LCMS below owns exactly one conversion.
-        var frame=BitmapDecoder.Create(file,BitmapCreateOptions.PreservePixelFormat|BitmapCreateOptions.IgnoreColorProfile,BitmapCacheOption.OnLoad).Frames[0];
+        WorkflowMemory.Stage("wic-cache");var frame=BitmapDecoder.Create(file,BitmapCreateOptions.PreservePixelFormat|BitmapCreateOptions.IgnoreColorProfile,BitmapCacheOption.OnLoad).Frames[0];
         if(frame.PixelWidth<=0||frame.PixelHeight<=0||(long)frame.PixelWidth*frame.PixelHeight>50000000)throw new ControlledIccException("ICC_IMAGE_BUDGET","First experiment capped at50MP.");
         if(frame.Metadata is BitmapMetadata md)
         {
             foreach(var q in new[]{"/ifd/{ushort=274}","/app1/ifd/{ushort=274}"})if(md.ContainsQuery(q)&&Convert.ToInt32(md.GetQuery(q))!=1)throw new ControlledIccException("ICC_ORIENTATION","V1 requires orientation1; no silent project geometry change.");
         }
         if(frame.Format!=PixelFormats.Rgb48&&frame.Format!=PixelFormats.Rgb24&&frame.Format!=PixelFormats.Bgr24)throw new ControlledIccException("ICC_PIXEL_FORMAT","V1 requires proven opaque RGB24/48; alpha/gray/CMYK not discarded.");
-        var rgb48=new FormatConvertedBitmap(frame,PixelFormats.Rgb48,null,0);var pixels=new ushort[checked(frame.PixelWidth*frame.PixelHeight*3)];rgb48.CopyPixels(pixels,frame.PixelWidth*6,0);
-        var floats=pixels.Select(x=>x/65535f).ToArray();
+        WorkflowMemory.Stage("ushort-input");var rgb48=new FormatConvertedBitmap(frame,PixelFormats.Rgb48,null,0);var pixels=new ushort[checked(frame.PixelWidth*frame.PixelHeight*3)];rgb48.CopyPixels(pixels,frame.PixelWidth*6,0);
+        WorkflowMemory.Stage("float-input");var floats=pixels.Select(x=>x/65535f).ToArray();
         var recipe=new ControlledIccRecipe(ControlledIccTransform.AlgorithmVersion,sourceHash,input.Sha256,working.Sha256,output.Sha256,-1);recipe.Validate();
-        var linear=adapter.ConvertRgb(floats,input,working);var edit=recipe.ApplyFrozenEdit(linear);var encoded=adapter.ConvertRgb(edit,working,output);
+        WorkflowMemory.Stage("lcms-working");var linear=adapter.ConvertRgb(floats,input,working);WorkflowMemory.Stage("frozen-edit");var edit=recipe.ApplyFrozenEdit(linear);WorkflowMemory.Stage("lcms-output");var encoded=adapter.ConvertRgb(edit,working,output);
         Directory.CreateDirectory(directory);
         var recipePath=Path.Combine(directory,"recipe.json");File.WriteAllText(recipePath,JsonSerializer.Serialize(recipe,new JsonSerializerOptions{WriteIndented=true}));
         var reopened=JsonSerializer.Deserialize<ControlledIccRecipe>(File.ReadAllText(recipePath))??throw new InvalidDataException();reopened.Validate();
         if(reopened.SourceFileSha256!=Hash(File.ReadAllBytes(sourcePath))||reopened.InputProfileSha256!=input.Sha256||reopened.WorkingProfileSha256!=working.Sha256||reopened.OutputProfileSha256!=output.Sha256)throw new ControlledIccException("ICC_RECIPE_IDENTITY","Reopen identity mismatch.");
-        var reencoded=adapter.ConvertRgb(reopened.ApplyFrozenEdit(adapter.ConvertRgb(floats,input,working)),working,output);
+        WorkflowMemory.Stage("reopen-recompute");var reencoded=adapter.ConvertRgb(reopened.ApplyFrozenEdit(adapter.ConvertRgb(floats,input,working)),working,output);
         if(!encoded.SequenceEqual(reencoded))throw new InvalidDataException("Preview/reopen differs.");
         // Preview pixels are a detached48-bit bitmap with explicit output-profile identity, not the old default preview path.
-        var quantized=encoded.Select(v=>(ushort)Math.Clamp(Math.Round(v*65535),0,65535)).ToArray();
+        WorkflowMemory.Stage("preview-copy");var quantized=encoded.Select(v=>(ushort)Math.Clamp(Math.Round(v*65535),0,65535)).ToArray();
         var preview=BitmapSource.Create(frame.PixelWidth,frame.PixelHeight,96,96,PixelFormats.Rgb48,null,quantized,frame.PixelWidth*6);preview.Freeze();
         var previewCopy=new ushort[quantized.Length];preview.CopyPixels(previewCopy,frame.PixelWidth*6,0);if(!previewCopy.SequenceEqual(quantized))throw new InvalidDataException("Preview copy differs.");
-        using(var stream=new FileStream(Path.Combine(directory,"output.tif"),FileMode.CreateNew))TiffExport.WriteRgb48(stream,new(frame.PixelWidth,frame.PixelHeight,encoded,"32f","ControlledIccLinearV1-output",1),new(IccProfile:output.CopyBytes(),Software:ControlledIccTransform.AlgorithmVersion));
+        WorkflowMemory.Stage("encode-tiff");using(var stream=new FileStream(Path.Combine(directory,"output.tif"),FileMode.CreateNew))TiffExport.WriteRgb48(stream,new(frame.PixelWidth,frame.PixelHeight,encoded,"32f","ControlledIccLinearV1-output",1),new(IccProfile:output.CopyBytes(),Software:ControlledIccTransform.AlgorithmVersion));
         string profilePath=Path.Combine(directory,"output.icc");File.WriteAllBytes(profilePath,output.CopyBytes());
         var context=new ColorContext(new Uri(profilePath));
         foreach(var format in new[]{"png","jpg"})
         {
-            BitmapEncoder encoder=format=="png"?new PngBitmapEncoder():new JpegBitmapEncoder{QualityLevel=100};
+            WorkflowMemory.Stage("encode-"+format);BitmapEncoder encoder=format=="png"?new PngBitmapEncoder():new JpegBitmapEncoder{QualityLevel=100};
             BitmapSource image=format=="png"?preview:new FormatConvertedBitmap(preview,PixelFormats.Rgb24,null,0);
             encoder.Frames.Add(BitmapFrame.Create(image,null,null,new System.Collections.ObjectModel.ReadOnlyCollection<ColorContext>(new[]{context})));
             using var stream=new FileStream(Path.Combine(directory,"output."+format),FileMode.CreateNew);encoder.Save(stream);
@@ -74,7 +76,7 @@ internal static class Program
         var results=new List<object>();
         foreach(var format in new[]{"tif","png","jpg"})
         {
-            string p=Path.Combine(directory,"output."+format);byte[] embedded;
+            WorkflowMemory.Stage("readback-"+format);string p=Path.Combine(directory,"output."+format);byte[] embedded;
             if(format=="png")embedded=ReadPngIcc(p);else embedded=EmbeddedIccInspector.Read(p).CopyBytes();
             if(Hash(embedded)!=output.Sha256)throw new InvalidDataException("Output ICC hash differs.");
             using var s=File.OpenRead(p);var f=BitmapDecoder.Create(s,BitmapCreateOptions.PreservePixelFormat|BitmapCreateOptions.IgnoreColorProfile,BitmapCacheOption.OnLoad).Frames[0];
@@ -83,7 +85,7 @@ internal static class Program
             if(format!="jpg"&&!read.SequenceEqual(quantized))throw new InvalidDataException("Lossless16-bit export mismatch.");
             results.Add(new{format,iccSha256=Hash(embedded),sha256=Hash(File.ReadAllBytes(p)),bitDepth=format=="jpg"?8:16,maxAbs=max,meanAbs=sum/read.Length,lossy=format=="jpg"});
         }
-        File.WriteAllBytes(Path.Combine(directory,"decoded-input-f32.bin"),System.Runtime.InteropServices.MemoryMarshal.AsBytes(floats.AsSpan()).ToArray());
+        WorkflowMemory.Stage("diagnostic-buffer-copy");File.WriteAllBytes(Path.Combine(directory,"decoded-input-f32.bin"),System.Runtime.InteropServices.MemoryMarshal.AsBytes(floats.AsSpan()).ToArray());
         File.WriteAllBytes(Path.Combine(directory,"preview-output-f32.bin"),System.Runtime.InteropServices.MemoryMarshal.AsBytes(encoded.AsSpan()).ToArray());
         File.WriteAllText(Path.Combine(directory,"result.json"),JsonSerializer.Serialize(new{status="VERIFIED_ISOLATED_WORKFLOW_NOT_PRODUCT_ADMISSION",version=recipe.AlgorithmVersion,inputProfileVersion=input.Version,workingProfileVersion=working.Version,outputProfileVersion=output.Version,workingDomain="linear ProPhoto if working hash954e..., otherwise linear sRGB; matrix PCS XYZ D50",outputTransfer="linear; not encoded display sRGB",inputBitDepth=frame.Format.BitsPerPixel/3,intentRequested=1,intentEffective=1,bpcRequested=false,bpcEffective=false,adaptation=1,quantization="nearest-even code=round(float*65535); JPEG8 separately lossy",sourceHash,inputProfile=input.Sha256,workingProfile=working.Sha256,outputProfile=output.Sha256,adapter.EngineVersion,adapter.EngineSha256,width=frame.PixelWidth,height=frame.PixelHeight,recipe,previewReopenExact=true,output=results,display="Detached RGB48 + explicit output profile; no physical display calibration claim",CalibrationEligible=false},new JsonSerializerOptions{WriteIndented=true}));
         Console.WriteLine(Path.Combine(directory,"result.json"));return 0;
