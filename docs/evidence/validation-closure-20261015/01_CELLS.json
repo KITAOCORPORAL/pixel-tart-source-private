@@ -1,0 +1,548 @@
+[
+  {
+    "profile": "matrix-v2.1-g1.0.icc",
+    "intent": 0,
+    "inputType": "float",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 3.1439358894047587e-8,
+    "maxArgyll": 4.74361212782215e-7,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v2.1-g1.0.icc",
+    "intent": 0,
+    "inputType": "uint16",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 3.677132726087606e-8,
+    "maxArgyll": 4.983122813412288e-7,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v2.1-g1.0.icc",
+    "intent": 1,
+    "inputType": "float",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 3.1439358894047587e-8,
+    "maxArgyll": 4.74361212782215e-7,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v2.1-g1.0.icc",
+    "intent": 1,
+    "inputType": "uint16",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 3.677132726087606e-8,
+    "maxArgyll": 4.983122813412288e-7,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v2.1-g1.0.icc",
+    "intent": 2,
+    "inputType": "float",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 3.1439358894047587e-8,
+    "maxArgyll": 4.74361212782215e-7,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v2.1-g1.0.icc",
+    "intent": 2,
+    "inputType": "uint16",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 3.677132726087606e-8,
+    "maxArgyll": 4.983122813412288e-7,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v2.1-g1.0.icc",
+    "intent": 3,
+    "inputType": "float",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": 4.97411616943999e-7,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v2.1-g1.0.icc",
+    "intent": 3,
+    "inputType": "uint16",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": 4.97411616943999e-7,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v2.1-g2.2.icc",
+    "intent": 0,
+    "inputType": "float",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.00013011512427962835,
+    "maxArgyll": 4.946759661339506e-7,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v2.1-g2.2.icc",
+    "intent": 0,
+    "inputType": "uint16",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.00012689628542428277,
+    "maxArgyll": 4.465342691717389e-7,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v2.1-g2.2.icc",
+    "intent": 1,
+    "inputType": "float",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.00013011512427962835,
+    "maxArgyll": 4.946759661339506e-7,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v2.1-g2.2.icc",
+    "intent": 1,
+    "inputType": "uint16",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.00012689628542428277,
+    "maxArgyll": 4.465342691717389e-7,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v2.1-g2.2.icc",
+    "intent": 2,
+    "inputType": "float",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.00013011512427962835,
+    "maxArgyll": 4.946759661339506e-7,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v2.1-g2.2.icc",
+    "intent": 2,
+    "inputType": "uint16",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.00012689628542428277,
+    "maxArgyll": 4.465342691717389e-7,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v2.1-g2.2.icc",
+    "intent": 3,
+    "inputType": "float",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": 4.97411616943999e-7,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v2.1-g2.2.icc",
+    "intent": 3,
+    "inputType": "uint16",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": 4.97411616943999e-7,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "lut-v2.1.icc",
+    "intent": 0,
+    "inputType": "float",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.49999237036716937,
+    "maxArgyll": 0.000018477604296462946,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "lut-v2.1.icc",
+    "intent": 0,
+    "inputType": "uint16",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.49999237036716937,
+    "maxArgyll": 0.00001755865442476523,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "lut-v2.1.icc",
+    "intent": 1,
+    "inputType": "float",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.49999237036716937,
+    "maxArgyll": 0.000018477604296462946,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "lut-v2.1.icc",
+    "intent": 1,
+    "inputType": "uint16",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.49999237036716937,
+    "maxArgyll": 0.00001755865442476523,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "lut-v2.1.icc",
+    "intent": 2,
+    "inputType": "float",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.49999237036716937,
+    "maxArgyll": 0.000018477604296462946,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "lut-v2.1.icc",
+    "intent": 2,
+    "inputType": "uint16",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.49999237036716937,
+    "maxArgyll": 0.00001755865442476523,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "lut-v2.1.icc",
+    "intent": 3,
+    "inputType": "float",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": 0.000018477604296462946,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "lut-v2.1.icc",
+    "intent": 3,
+    "inputType": "uint16",
+    "lcmsArgyll": "COMPARABLE_WITH_RECORDED_PARAMETERS",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": 0.00001755865442476523,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v4.3-g1.0.icc",
+    "intent": 0,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 3.1439358894047587e-8,
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v4.3-g1.0.icc",
+    "intent": 0,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 3.677132726087606e-8,
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v4.3-g1.0.icc",
+    "intent": 1,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 3.1439358894047587e-8,
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v4.3-g1.0.icc",
+    "intent": 1,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 3.677132726087606e-8,
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v4.3-g1.0.icc",
+    "intent": 2,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 3.1439358894047587e-8,
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v4.3-g1.0.icc",
+    "intent": 2,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 3.677132726087606e-8,
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v4.3-g1.0.icc",
+    "intent": 3,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v4.3-g1.0.icc",
+    "intent": 3,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v4.3-g2.2.icc",
+    "intent": 0,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 0.00012719529240923233,
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v4.3-g2.2.icc",
+    "intent": 0,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 0.00012951975355390832,
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v4.3-g2.2.icc",
+    "intent": 1,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.00012719529240923233,
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v4.3-g2.2.icc",
+    "intent": 1,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.00012951975355390832,
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v4.3-g2.2.icc",
+    "intent": 2,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 0.00012719529240923233,
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v4.3-g2.2.icc",
+    "intent": 2,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 0.00012951975355390832,
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "matrix-v4.3-g2.2.icc",
+    "intent": 3,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "matrix-v4.3-g2.2.icc",
+    "intent": 3,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "lut-v4.3.icc",
+    "intent": 0,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 0.49999237036716937,
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "lut-v4.3.icc",
+    "intent": 0,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 0.49999237036716937,
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "lut-v4.3.icc",
+    "intent": 1,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.49999237036716937,
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "lut-v4.3.icc",
+    "intent": 1,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.49999237036716937,
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "lut-v4.3.icc",
+    "intent": 2,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 0.49999237036716937,
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "lut-v4.3.icc",
+    "intent": 2,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 0.49999237036716937,
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "lut-v4.3.icc",
+    "intent": 3,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "lut-v4.3.icc",
+    "intent": 3,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "lut-v4.3-explicit-matrix.icc",
+    "intent": 0,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 0.0034852045565259004,
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "lut-v4.3-explicit-matrix.icc",
+    "intent": 0,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 0.0034852045565259004,
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "lut-v4.3-explicit-matrix.icc",
+    "intent": 1,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.000016880447886336025,
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "lut-v4.3-explicit-matrix.icc",
+    "intent": 1,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "COMPARABLE_DOMAIN_WITH_NUMERICAL_DIVERGENCES",
+    "maxSkcms": 0.000013355736248166217,
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "lut-v4.3-explicit-matrix.icc",
+    "intent": 2,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 0.0034852045565259004,
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "lut-v4.3-explicit-matrix.icc",
+    "intent": 2,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "CONFIGURATION_NOT_EQUIVALENT_V4_BPC",
+    "maxSkcms": 0.0034852045565259004,
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  },
+  {
+    "profile": "lut-v4.3-explicit-matrix.icc",
+    "intent": 3,
+    "inputType": "float",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": null,
+    "extendedDomain": "NEGATIVE_OR_ABOVE_ONE_LUT_POINTS_OUTSIDE_SPEC_DOMAIN"
+  },
+  {
+    "profile": "lut-v4.3-explicit-matrix.icc",
+    "intent": 3,
+    "inputType": "uint16",
+    "lcmsArgyll": "REFERENCE_UNSUPPORTED_V4",
+    "lcmsSkcms": "REFERENCE_UNSUPPORTED_ABSOLUTE",
+    "maxArgyll": null,
+    "extendedDomain": "CLAMP_ROUND_QUANTIZED_AS_RECORDED"
+  }
+]

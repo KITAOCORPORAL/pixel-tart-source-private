@@ -1,0 +1,247 @@
+{
+  "checks": [
+    {
+      "profile": "matrix-v2.1-g1.0.icc",
+      "bytes": 640,
+      "expected": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "actual": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "matches": true
+    },
+    {
+      "profile": "matrix-v2.1-g2.2.icc",
+      "bytes": 640,
+      "expected": "0d36c514e0651f60cab5fbe26411b7cc7df2087abb07f0c00893b467da1f2e1d",
+      "actual": "0d36c514e0651f60cab5fbe26411b7cc7df2087abb07f0c00893b467da1f2e1d",
+      "matches": true
+    },
+    {
+      "profile": "lut-v2.1.icc",
+      "bytes": 1216,
+      "expected": "33e522e2a3eb38c94faf899d751efb72d01a5ecd505d2774ddf672fb046b0e2c",
+      "actual": "33e522e2a3eb38c94faf899d751efb72d01a5ecd505d2774ddf672fb046b0e2c",
+      "matches": true
+    },
+    {
+      "profile": "matrix-v4.3-g1.0.icc",
+      "bytes": 600,
+      "expected": "901685c8b491ad68b856c765ef1dbed69a80b8fdc0b735b6eca0c80255b74412",
+      "actual": "901685c8b491ad68b856c765ef1dbed69a80b8fdc0b735b6eca0c80255b74412",
+      "matches": true
+    },
+    {
+      "profile": "matrix-v4.3-g2.2.icc",
+      "bytes": 600,
+      "expected": "f2af46b48de7b7f3770dcee022c47a00aef61b9706d3c5f5772a5ebe92c0a184",
+      "actual": "f2af46b48de7b7f3770dcee022c47a00aef61b9706d3c5f5772a5ebe92c0a184",
+      "matches": true
+    },
+    {
+      "profile": "lut-v4.3.icc",
+      "bytes": 1408,
+      "expected": "96ff21f78885c75a3a9e4d2d073a882cc8d451fa1061bd91e4421368e953b978",
+      "actual": "96ff21f78885c75a3a9e4d2d073a882cc8d451fa1061bd91e4421368e953b978",
+      "matches": true
+    },
+    {
+      "profile": "lut-v4.3-explicit-matrix.icc",
+      "bytes": 1648,
+      "expected": "322b709a1886d246dba450a41c562c50f81bfdbc523f34cb42920fa2d45a5abf",
+      "actual": "322b709a1886d246dba450a41c562c50f81bfdbc523f34cb42920fa2d45a5abf",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\lcms2-2.16.conda",
+      "expected": "f9fd9e80e46358a57d9bb97b1e37a03da4022143b019aa3c4476d8a7795de290",
+      "actual": "f9fd9e80e46358a57d9bb97b1e37a03da4022143b019aa3c4476d8a7795de290",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\lcms\\Library\\bin\\lcms2.dll",
+      "expected": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+      "actual": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\lcms\\info\\licenses\\LICENSE",
+      "expected": "6dbd60437f8ef91d8de1f08ad75882547fd4931bfcc3566a0735f28db1484d31",
+      "actual": "6dbd60437f8ef91d8de1f08ad75882547fd4931bfcc3566a0735f28db1484d31",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\argyll-3.5.0-bin.zip",
+      "expected": "c80f78ba30e715079a00a14c2e7c9f533c58e6c8fdbc27f2d32b3d7813f9d132",
+      "actual": "c80f78ba30e715079a00a14c2e7c9f533c58e6c8fdbc27f2d32b3d7813f9d132",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\argyll-3.5.0-src.zip",
+      "expected": "f8576ce5589fd15620abb73ff049ea31f55ddbd1bba6d1ffa87452658e7bc85f",
+      "actual": "f8576ce5589fd15620abb73ff049ea31f55ddbd1bba6d1ffa87452658e7bc85f",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\argyll35\\Argyll_V3.5.0\\bin\\xicclu.exe",
+      "expected": "96cd706411021e886318b9172ad2b622aa5c5f0ac2d35496c39df9574c42a9fb",
+      "actual": "96cd706411021e886318b9172ad2b622aa5c5f0ac2d35496c39df9574c42a9fb",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\argyll35\\Argyll_V3.5.0\\License.txt",
+      "expected": "432d251a78dbc966e6add13f9f3b40a53daca222208e50cb514cfc77e7d85af6",
+      "actual": "432d251a78dbc966e6add13f9f3b40a53daca222208e50cb514cfc77e7d85af6",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\argyll35\\Argyll_V3.5.0\\icc\\License4.txt",
+      "expected": "9fc31dc893958bf17aaf452ae68eb6595d035d0e40294c77d8d6d5da8709d1f1",
+      "actual": "9fc31dc893958bf17aaf452ae68eb6595d035d0e40294c77d8d6d5da8709d1f1",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\skcms\\LICENSE",
+      "expected": "5fad7f1a5143034fc76c976e9d34694663764808df7b777943048674a4c87ff1",
+      "actual": "5fad7f1a5143034fc76c976e9d34694663764808df7b777943048674a4c87ff1",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\skcms\\skcms.cc",
+      "expected": "a4bb109dbd1b13b04dd7cc79ef75194a3c5b3304133f810d0eed5fa0135e948c",
+      "actual": "a4bb109dbd1b13b04dd7cc79ef75194a3c5b3304133f810d0eed5fa0135e948c",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\skcms\\src\\skcms_TransformBaseline.cc",
+      "expected": "16a3bc6246fb107abd3cefca8a7257c3b4ae79b92799ba4331e676210c0ad22f",
+      "actual": "16a3bc6246fb107abd3cefca8a7257c3b4ae79b92799ba4331e676210c0ad22f",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\skcms_probe.exe",
+      "expected": "0a93d52907517f39e4a774fd3ebde5d0217e926701e8e684b579931129df5b65",
+      "actual": "0a93d52907517f39e4a774fd3ebde5d0217e926701e8e684b579931129df5b65",
+      "matches": true
+    },
+    {
+      "path": "D:\\AI AGENT\\kitao-company-validation-20261015\\artifacts\\company-validation\\icc\\compiler\\ziglang\\zig.exe",
+      "expected": "086ce9d47ba42f33a514e1a6e04eb1d4a8fa1d75e0868e0213caad447c91e864",
+      "actual": "086ce9d47ba42f33a514e1a6e04eb1d4a8fa1d75e0868e0213caad447c91e864",
+      "matches": true
+    }
+  ],
+  "sevenProfiles": [
+    {
+      "profile": "matrix-v2.1-g1.0.icc",
+      "bytes": 640,
+      "expected": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "actual": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "matches": true
+    },
+    {
+      "profile": "matrix-v2.1-g2.2.icc",
+      "bytes": 640,
+      "expected": "0d36c514e0651f60cab5fbe26411b7cc7df2087abb07f0c00893b467da1f2e1d",
+      "actual": "0d36c514e0651f60cab5fbe26411b7cc7df2087abb07f0c00893b467da1f2e1d",
+      "matches": true
+    },
+    {
+      "profile": "lut-v2.1.icc",
+      "bytes": 1216,
+      "expected": "33e522e2a3eb38c94faf899d751efb72d01a5ecd505d2774ddf672fb046b0e2c",
+      "actual": "33e522e2a3eb38c94faf899d751efb72d01a5ecd505d2774ddf672fb046b0e2c",
+      "matches": true
+    },
+    {
+      "profile": "matrix-v4.3-g1.0.icc",
+      "bytes": 600,
+      "expected": "901685c8b491ad68b856c765ef1dbed69a80b8fdc0b735b6eca0c80255b74412",
+      "actual": "901685c8b491ad68b856c765ef1dbed69a80b8fdc0b735b6eca0c80255b74412",
+      "matches": true
+    },
+    {
+      "profile": "matrix-v4.3-g2.2.icc",
+      "bytes": 600,
+      "expected": "f2af46b48de7b7f3770dcee022c47a00aef61b9706d3c5f5772a5ebe92c0a184",
+      "actual": "f2af46b48de7b7f3770dcee022c47a00aef61b9706d3c5f5772a5ebe92c0a184",
+      "matches": true
+    },
+    {
+      "profile": "lut-v4.3.icc",
+      "bytes": 1408,
+      "expected": "96ff21f78885c75a3a9e4d2d073a882cc8d451fa1061bd91e4421368e953b978",
+      "actual": "96ff21f78885c75a3a9e4d2d073a882cc8d451fa1061bd91e4421368e953b978",
+      "matches": true
+    },
+    {
+      "profile": "lut-v4.3-explicit-matrix.icc",
+      "bytes": 1648,
+      "expected": "322b709a1886d246dba450a41c562c50f81bfdbc523f34cb42920fa2d45a5abf",
+      "actual": "322b709a1886d246dba450a41c562c50f81bfdbc523f34cb42920fa2d45a5abf",
+      "matches": true
+    }
+  ],
+  "points": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0.001,
+      0.001,
+      0.001
+    ],
+    [
+      0.18,
+      0.18,
+      0.18
+    ],
+    [
+      0.5,
+      0.5,
+      0.5
+    ],
+    [
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      0.9,
+      0.2,
+      0.1
+    ],
+    [
+      0.1,
+      0.9,
+      0.3
+    ],
+    [
+      -0.1,
+      0.2,
+      1.2
+    ],
+    [
+      2,
+      2,
+      2
+    ]
+  ],
+  "priorComparisonSha256": "d1c758fca5898bc9c8baf1d805e49524c1da14fa43c788f46719405c32128244",
+  "allMatches": true,
+  "stageProbeSha256": "49eb082645f4cdb76d3ef35e3270b4336a862f796ad67d08d12fe87f207ff2df"
+}
