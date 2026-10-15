@@ -1,0 +1,202 @@
+[
+  {
+    "case": "gray",
+    "recipe": {
+      "algorithm": "ExtendedLinearClipSinkV2",
+      "sourceSha256": "1f54a7bcf00e305fbbd4c9cc27c5905892201b5d3749bb8a8534310e05772376",
+      "inputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "workingProfile": "954e3bb304651951681989671ef99eed11183e9179a61a036243d655986c5ea1",
+      "outputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "displayProfile": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "engine": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+      "relativeIntent": 1,
+      "bpc": false,
+      "exposureEv": -1,
+      "workingDomain": "extendedlinearRGB32f",
+      "mapping": "ExportClip0To1V2 ONLY after outputlinearconversion",
+      "quantization": "nearest-even16bit"
+    },
+    "working": {
+      "min": -0.2500002086162567,
+      "max": 2.0000016689300537,
+      "negative": 1392,
+      "aboveOne": 5472,
+      "pixelsOutside": 2288
+    },
+    "beforeMapping": {
+      "min": -0.1250000149011612,
+      "max": 1.0000001192092896,
+      "negative": 1392,
+      "aboveOne": 16,
+      "pixelsOutside": 480
+    },
+    "pixelsClipped": 480,
+    "floatPreservedSha256": "c2d3191df19b95bedc748c18e6894ea1bcb3bae4d9e7fa8b6e591eb077902f10",
+    "reopenExact": true,
+    "TIFF16PNG16PreviewCodesExact": true,
+    "jpegMae": 0.0,
+    "jpegPsnr": null,
+    "CalibrationEligible": false,
+    "productAdmission": false
+  },
+  {
+    "case": "saturated",
+    "recipe": {
+      "algorithm": "ExtendedLinearClipSinkV2",
+      "sourceSha256": "e75a234a4b1803e923bc639add77f326ae820b5522097ca3de6a149ba37c39e7",
+      "inputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "workingProfile": "954e3bb304651951681989671ef99eed11183e9179a61a036243d655986c5ea1",
+      "outputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "displayProfile": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "engine": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+      "relativeIntent": 1,
+      "bpc": false,
+      "exposureEv": -1,
+      "workingDomain": "extendedlinearRGB32f",
+      "mapping": "ExportClip0To1V2 ONLY after outputlinearconversion",
+      "quantization": "nearest-even16bit"
+    },
+    "working": {
+      "min": 0.0658416673541069,
+      "max": 1.7561442852020264,
+      "negative": 0,
+      "aboveOne": 3072,
+      "pixelsOutside": 3072
+    },
+    "beforeMapping": {
+      "min": -0.04999999701976776,
+      "max": 1.0,
+      "negative": 3072,
+      "aboveOne": 0,
+      "pixelsOutside": 3072
+    },
+    "pixelsClipped": 3072,
+    "floatPreservedSha256": "a740466d8615a38736c4c60538214067ab40c13d7eae5874d2cc54962eec5193",
+    "reopenExact": true,
+    "TIFF16PNG16PreviewCodesExact": true,
+    "jpegMae": 0.00130718954248366,
+    "jpegPsnr": 52.90201615587573,
+    "CalibrationEligible": false,
+    "productAdmission": false
+  },
+  {
+    "case": "skin-neighbor",
+    "recipe": {
+      "algorithm": "ExtendedLinearClipSinkV2",
+      "sourceSha256": "fdaa863691bd8918d7069ce502abff7363b47c2cd9d3858462a25f584a395289",
+      "inputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "workingProfile": "954e3bb304651951681989671ef99eed11183e9179a61a036243d655986c5ea1",
+      "outputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "displayProfile": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "engine": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+      "relativeIntent": 1,
+      "bpc": false,
+      "exposureEv": -1,
+      "workingDomain": "extendedlinearRGB32f",
+      "mapping": "ExportClip0To1V2 ONLY after outputlinearconversion",
+      "quantization": "nearest-even16bit"
+    },
+    "working": {
+      "min": 0.1879165917634964,
+      "max": 0.6016908884048462,
+      "negative": 0,
+      "aboveOne": 0,
+      "pixelsOutside": 0
+    },
+    "beforeMapping": {
+      "min": 0.08500000089406967,
+      "max": 0.4000000059604645,
+      "negative": 0,
+      "aboveOne": 0,
+      "pixelsOutside": 0
+    },
+    "pixelsClipped": 0,
+    "floatPreservedSha256": "cd9ef30feecdd5521ae17e34daa01e51ce6dc581214188aa17e261200a1ac64b",
+    "reopenExact": true,
+    "TIFF16PNG16PreviewCodesExact": true,
+    "jpegMae": 0.0011450575062066169,
+    "jpegPsnr": 53.477128824034025,
+    "CalibrationEligible": false,
+    "productAdmission": false
+  },
+  {
+    "case": "highlight",
+    "recipe": {
+      "algorithm": "ExtendedLinearClipSinkV2",
+      "sourceSha256": "f3720034b50067637080579f06ea22cd3ce89f98e3fb9d2e332e1701a0539509",
+      "inputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "workingProfile": "954e3bb304651951681989671ef99eed11183e9179a61a036243d655986c5ea1",
+      "outputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "displayProfile": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "engine": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+      "relativeIntent": 1,
+      "bpc": false,
+      "exposureEv": -1,
+      "workingDomain": "extendedlinearRGB32f",
+      "mapping": "ExportClip0To1V2 ONLY after outputlinearconversion",
+      "quantization": "nearest-even16bit"
+    },
+    "working": {
+      "min": 0.5828619599342346,
+      "max": 3.6992595195770264,
+      "negative": 0,
+      "aboveOne": 5424,
+      "pixelsOutside": 1872
+    },
+    "beforeMapping": {
+      "min": 0.2800000011920929,
+      "max": 2.0,
+      "negative": 0,
+      "aboveOne": 3168,
+      "pixelsOutside": 1280
+    },
+    "pixelsClipped": 1280,
+    "floatPreservedSha256": "79d4cd0008df0b7e672258a1866e8652d8da5dc4a798ef72cba9b11a8dad7a94",
+    "reopenExact": true,
+    "TIFF16PNG16PreviewCodesExact": true,
+    "jpegMae": 0.0008309266859198459,
+    "jpegPsnr": 54.869774735031044,
+    "CalibrationEligible": false,
+    "productAdmission": false
+  },
+  {
+    "case": "authorizedCanonFullRange",
+    "recipe": {
+      "algorithm": "ExtendedLinearClipSinkV2",
+      "sourceSha256": "ec81ef66bfa8353ac23e84bef6d489bae1e53d7b028a9abd66465455a51ecb13",
+      "inputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "workingProfile": "954e3bb304651951681989671ef99eed11183e9179a61a036243d655986c5ea1",
+      "outputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "displayProfile": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+      "engine": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+      "relativeIntent": 1,
+      "bpc": false,
+      "exposureEv": -1,
+      "workingDomain": "extendedlinearRGB32f",
+      "mapping": "ExportClip0To1V2 ONLY after outputlinearconversion",
+      "quantization": "nearest-even16bit"
+    },
+    "working": {
+      "min": 0.0,
+      "max": 0.2897585928440094,
+      "negative": 0,
+      "aboveOne": 0,
+      "pixelsOutside": 0
+    },
+    "beforeMapping": {
+      "min": -2.82230738779532e-10,
+      "max": 0.2735103368759155,
+      "negative": 1557374,
+      "aboveOne": 0,
+      "pixelsOutside": 1392846
+    },
+    "pixelsClipped": 1392846,
+    "floatPreservedSha256": "f69b7d81138a06575252b0d3782c9c33e84bd0e783297c4c6785b3a96c6ee63a",
+    "reopenExact": true,
+    "TIFF16PNG16PreviewCodesExact": true,
+    "jpegMae": 0.0018206284043257553,
+    "jpegPsnr": 50.4860154545098,
+    "CalibrationEligible": false,
+    "productAdmission": false
+  }
+]

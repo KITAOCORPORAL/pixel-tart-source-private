@@ -34,10 +34,17 @@ def read_png16(p):
  raw=zlib.decompress(data);rows=[];stride=w*6
  for y in range(h):assert raw[y*(stride+1)]==0;rows.append(np.frombuffer(raw[y*(stride+1)+1:(y+1)*(stride+1)],'>u2').reshape(w,3))
  return np.stack(rows).astype(np.uint16),icc
+def profile_check(b,allowed):
+ if len(b)<132 or len(b)>4*1024*1024 or struct.unpack_from('>I',b,0)[0]!=len(b) or b[36:40]!=b'acsp':raise ValueError('ICCidentity/lengthrefused')
+ if digest(b) not in allowed:raise ValueError('V2profileoutsidefrozenresearchset')
 def run(source,out,dll,work,output,display):
  if out.exists():raise ValueError('Newoutputdirectoryrequired')
  engine=pathlib.Path(dll).read_bytes();assert digest(engine)==ENGINE_SHA;lib=C.CDLL(str(dll));working=work.read_bytes();target=output.read_bytes();display_icc=display.read_bytes()
- with tifffile.TiffFile(source) as tf:raw=tf.asarray();embedded=tf.pages[0].tags[34675].value
+ with tifffile.TiffFile(source) as tf:
+  if len(tf.pages)!=1:raise ValueError('V2singleimageTIFFonly')
+  raw=tf.asarray();embedded=tf.pages[0].tags[34675].value
+ allowed={'dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407','954e3bb304651951681989671ef99eed11183e9179a61a036243d655986c5ea1','17aebbdf8a88c39b07eb881dcd824eb1cf9828914d5e74a7324d7a31045e8871'}
+ for b in [embedded,working,target]:profile_check(b,allowed)
  x=raw.astype(np.float32) if raw.dtype.kind=='f' else raw.astype(np.float32)/np.float32(65535 if raw.dtype.itemsize==2 else 255)
  if x.ndim!=3 or x.shape[2]!=3 or not np.isfinite(x).all():raise ValueError('finiteRGBonly')
  recipe=dict(algorithm=VERSION,sourceSha256=digest(source.read_bytes()),inputProfile=digest(embedded),workingProfile=digest(working),outputProfile=digest(target),displayProfile=digest(display_icc),engine=ENGINE_SHA,relativeIntent=1,bpc=False,exposureEv=-1,workingDomain='extendedlinearRGB32f',mapping='ExportClip0To1V2 ONLY after outputlinearconversion',quantization='nearest-even16bit')

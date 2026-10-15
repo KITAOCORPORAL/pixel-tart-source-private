@@ -1,0 +1,25 @@
+{
+  "comparisons": [
+    {
+      "source": "controlled-linear-srgb.icc",
+      "target": "controlled-linear-prophoto.icc",
+      "maxFloatAbs": 1.1905584718086004e-7,
+      "integerCodeMaxDifference": 0
+    },
+    {
+      "source": "controlled-linear-prophoto.icc",
+      "target": "controlled-linear-srgb.icc",
+      "maxFloatAbs": 4.773007811209595e-7,
+      "integerCodeMaxDifference": 0
+    },
+    {
+      "source": "controlled-linear-srgb.icc",
+      "target": "controlled-linear-srgb.icc",
+      "maxFloatAbs": 3.162841100134983e-10,
+      "integerCodeMaxDifference": 1
+    }
+  ],
+  "claim": "fixedlinearprofilepairs/relativeonly; perchannelintegerclippingNOTperceptualgamutmapping",
+  "lcms": "453bafeb85b4ef96498866b7a8eadcc74dff9223",
+  "skcms": "97adcbb67e98d633a65b29fd405941970f3b476d"
+}

@@ -1,0 +1,1 @@
+Sony0.22.2stillisolated, productrecipe/pixelpath/distributionobligationsOPEN; no newcandidateDLLbundled. Structurecandidate~6.8s vsfull~4.2s remainsproductionunchanged; priorreferencespartialnotapprovedgamut/streaming. PV456basegolden/P3400msunchanged. CalibrationEligible=false. No chartpurchase or A7M4absolutecoloraccuracy/Polaroidprecisereplicaclaim.
