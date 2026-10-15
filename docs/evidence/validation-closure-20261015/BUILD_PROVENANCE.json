@@ -1,0 +1,37 @@
+{
+  "base": "af78bb56b1eeec4e7c1a0b2de6f320dbbe33d458",
+  "productSource": "3d526ae7e7589a0d735689883dcf62a4ef272720",
+  "researchOnly": true,
+  "productChanged": false,
+  "tools": [
+    {
+      "path": "D:/AI AGENT/kitao-validation-closure-20261015/artifacts/validation-closure/skcms_stages.exe",
+      "bytes": 429568,
+      "sha256": "49eb082645f4cdb76d3ef35e3270b4336a862f796ad67d08d12fe87f207ff2df"
+    },
+    {
+      "path": "D:/AI AGENT/kitao-validation-closure-20261015/artifacts/validation-closure/raw_stages_v3.exe",
+      "bytes": 193024,
+      "sha256": "da07d67996e3c422868281c070f52d9ab449033b935da312d82128bc7c3baba1"
+    },
+    {
+      "path": "D:/AI AGENT/kitao-validation-closure-20261015/artifacts/validation-closure/raw_stages_no_auto.exe",
+      "bytes": 193024,
+      "sha256": "91445a35b1d4f93feb4983c4f9b242e6b681be1d27f3f74fd436478c867bb8f5"
+    },
+    {
+      "path": "D:/AI AGENT/kitao-validation-closure-20261015/tools/validation-closure/SpatialAllocationProbe/bin/Release/net10.0/SpatialAllocationProbe.dll",
+      "bytes": 34304,
+      "sha256": "de8be1a989e02acbb035b29479e3c9c8310edcef720c9600f750f214d43d9058"
+    },
+    {
+      "path": "D:/AI AGENT/kitao-validation-closure-20261015/tools/validation-closure/SpatialAllocationProbe/bin/Release/net10.0/RAWSelectionAssistant.Core.dll",
+      "bytes": 4482048,
+      "sha256": "82a8e046f18a8b9d57e1334c629e12d3bf1c382d7db8fa72a6e836d4b09eeb10"
+    }
+  ],
+  "coreTestAssemblySha256": "8c0cec3d54df90c325481eb73d2482a0b1e1f5308851f57443491a79916f0b5f",
+  "sdk": "10.0.302",
+  "compiler": "Zig0.16.0",
+  "timeZone": "Europe/Berlin"
+}

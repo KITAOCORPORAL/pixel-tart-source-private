@@ -1,0 +1,1627 @@
+{
+  "status": "PASSED",
+  "checks": [
+    {
+      "name": "fixed references",
+      "passed": true
+    },
+    {
+      "name": "seven profiles",
+      "passed": true
+    },
+    {
+      "name": "56 cells",
+      "passed": true
+    },
+    {
+      "name": "290 sealed files",
+      "passed": true
+    },
+    {
+      "name": "sealed Accessibility.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed appsettings.license.json",
+      "passed": true
+    },
+    {
+      "name": "sealed clretwrc.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed clrgc.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed clrgcexp.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed clrjit.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed ComputeSharp.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed ComputeSharp.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed coreclr.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed createdump.exe",
+      "passed": true
+    },
+    {
+      "name": "sealed D3DCompiler_47_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed DirectWriteForwarder.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed DocumentFormat.OpenXml.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed DocumentFormat.OpenXml.Framework.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed e_sqlite3.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed hostfxr.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed hostpolicy.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed jpeg8.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed KitaoPhotoSelector.deps.json",
+      "passed": true
+    },
+    {
+      "name": "sealed KitaoPhotoSelector.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed KitaoPhotoSelector.exe",
+      "passed": true
+    },
+    {
+      "name": "sealed KitaoPhotoSelector.runtimeconfig.json",
+      "passed": true
+    },
+    {
+      "name": "sealed lcms2.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed Licenses/libjpeg-turbo-2.1.3-LICENSE.md.txt",
+      "passed": true
+    },
+    {
+      "name": "sealed Licenses/libjpeg-turbo-2.1.3-README.ijg.txt",
+      "passed": true
+    },
+    {
+      "name": "sealed Licenses/LibRaw-0.21.1-COPYRIGHT.txt",
+      "passed": true
+    },
+    {
+      "name": "sealed Licenses/LibRaw-0.21.1-LICENSE.CDDL.txt",
+      "passed": true
+    },
+    {
+      "name": "sealed Licenses/LibRaw-0.21.1-LICENSE.LGPL.txt",
+      "passed": true
+    },
+    {
+      "name": "sealed Licenses/Little-CMS-2.12-COPYING.txt",
+      "passed": true
+    },
+    {
+      "name": "sealed Licenses/Sdcb.LibRaw-0.21.1.7-MIT.txt",
+      "passed": true
+    },
+    {
+      "name": "sealed Licenses/zlib-1.2.11-README-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "name": "sealed MetadataExtractor.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed Microsoft.CSharp.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed Microsoft.Data.Sqlite.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed Microsoft.DiaSymReader.Native.amd64.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed Microsoft.VisualBasic.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed Microsoft.VisualBasic.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed Microsoft.Win32.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed Microsoft.Win32.Registry.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed Microsoft.Win32.Registry.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed Microsoft.Win32.SystemEvents.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed Microsoft.Windows.SDK.NET.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed mscordaccore.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed mscordaccore_amd64_amd64_10.0.1026.32716.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed mscordbi.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed mscorlib.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed mscorrc.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed msquic.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed netstandard.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PenImc_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PixelTart.Kernel.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PixelTart.MatchV4.Dx12.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PixelTart.Modules.AssetLibrary.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PixelTart.Modules.OnlineSelection.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PixelTart.Modules.RawTool.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationCore.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework-SystemCore.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework-SystemData.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework-SystemDrawing.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework-SystemXml.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework-SystemXmlLinq.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework.Aero.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework.Aero2.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework.AeroLite.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework.Classic.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework.Fluent.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework.Luna.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationFramework.Royale.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationNative_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed PresentationUI.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed raw_r.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed RAWSelectionAssistant.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed ReachFramework.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed Sdcb.LibRaw.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed SQLitePCLRaw.batteries_v2.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed SQLitePCLRaw.core.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed SQLitePCLRaw.provider.e_sqlite3.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.AppContext.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Buffers.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.CodeDom.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Collections.Concurrent.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Collections.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Collections.Immutable.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Collections.NonGeneric.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Collections.Specialized.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.ComponentModel.Annotations.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.ComponentModel.DataAnnotations.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.ComponentModel.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.ComponentModel.EventBasedAsync.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.ComponentModel.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.ComponentModel.TypeConverter.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Configuration.ConfigurationManager.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Configuration.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Console.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Data.Common.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Data.DataSetExtensions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Data.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.Contracts.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.Debug.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.DiagnosticSource.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.EventLog.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.EventLog.Messages.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.FileVersionInfo.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.PerformanceCounter.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.Process.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.StackTrace.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.TextWriterTraceListener.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.Tools.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.TraceSource.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Diagnostics.Tracing.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.DirectoryServices.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Drawing.Common.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Drawing.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Drawing.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Dynamic.Runtime.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Formats.Asn1.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Formats.Nrbf.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Formats.Tar.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Globalization.Calendars.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Globalization.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Globalization.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.Compression.Brotli.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.Compression.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.Compression.FileSystem.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.Compression.Native.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.Compression.ZipFile.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.FileSystem.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.FileSystem.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.FileSystem.DriveInfo.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.FileSystem.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.FileSystem.Watcher.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.IsolatedStorage.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.MemoryMappedFiles.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.Packaging.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.Pipelines.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.Pipes.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.Pipes.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.IO.UnmanagedMemoryStream.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Linq.AsyncEnumerable.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Linq.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Linq.Expressions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Linq.Parallel.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Linq.Queryable.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Memory.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.Http.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.Http.Json.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.HttpListener.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.Mail.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.NameResolution.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.NetworkInformation.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.Ping.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.Quic.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.Requests.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.Security.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.ServerSentEvents.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.ServicePoint.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.Sockets.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.WebClient.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.WebHeaderCollection.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.WebProxy.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.WebSockets.Client.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Net.WebSockets.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Numerics.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Numerics.Vectors.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.ObjectModel.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Printing.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Private.CoreLib.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Private.DataContractSerialization.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Private.Uri.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Private.Windows.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Private.Windows.GdiPlus.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Private.Xml.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Private.Xml.Linq.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Reflection.DispatchProxy.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Reflection.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Reflection.Emit.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Reflection.Emit.ILGeneration.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Reflection.Emit.Lightweight.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Reflection.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Reflection.Metadata.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Reflection.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Reflection.TypeExtensions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Resources.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Resources.Reader.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Resources.ResourceManager.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Resources.Writer.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.CompilerServices.Unsafe.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.CompilerServices.VisualC.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.Handles.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.InteropServices.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.InteropServices.JavaScript.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.InteropServices.RuntimeInformation.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.Intrinsics.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.Loader.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.Numerics.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.Serialization.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.Serialization.Formatters.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.Serialization.Json.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.Serialization.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Runtime.Serialization.Xml.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Claims.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Cryptography.Algorithms.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Cryptography.Cng.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Cryptography.Csp.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Cryptography.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Cryptography.Encoding.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Cryptography.OpenSsl.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Cryptography.Pkcs.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Cryptography.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Cryptography.ProtectedData.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Cryptography.X509Certificates.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Cryptography.Xml.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Permissions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Principal.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.Principal.Windows.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Security.SecureString.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.ServiceModel.Web.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.ServiceProcess.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Text.Encoding.CodePages.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Text.Encoding.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Text.Encoding.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Text.Encodings.Web.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Text.Json.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Text.RegularExpressions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Threading.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Threading.Channels.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Threading.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Threading.Overlapped.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Threading.Tasks.Dataflow.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Threading.Tasks.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Threading.Tasks.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Threading.Tasks.Parallel.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Threading.Thread.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Threading.ThreadPool.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Threading.Timer.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Transactions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Transactions.Local.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.ValueTuple.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Web.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Web.HttpUtility.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Windows.Controls.Ribbon.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Windows.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Windows.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Windows.Input.Manipulations.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Windows.Presentation.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Windows.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Xaml.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Xml.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Xml.Linq.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Xml.ReaderWriter.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Xml.Serialization.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Xml.XDocument.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Xml.XmlDocument.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Xml.XmlSerializer.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Xml.XPath.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed System.Xml.XPath.XDocument.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed THIRD-PARTY-NOTICES.md",
+      "passed": true
+    },
+    {
+      "name": "sealed ThirdPartyNotices/OpenXML-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "name": "sealed UIAutomationClient.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed UIAutomationClientSideProviders.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed UIAutomationProvider.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed UIAutomationTypes.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed vcruntime140_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed WindowsBase.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed WinRT.Runtime.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed wpfgfx_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed XmpCore.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zh-Hans/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zh-Hans/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zh-Hans/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zh-Hans/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zh-Hans/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zh-Hans/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zh-Hans/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zh-Hans/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zh-Hans/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zh-Hans/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zh-Hans/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zh-Hans/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "sealed zlib1.dll",
+      "passed": true
+    },
+    {
+      "name": "exact core counts",
+      "passed": true
+    },
+    {
+      "name": "discovery coverage",
+      "passed": true
+    },
+    {
+      "name": "strict not green",
+      "passed": true
+    },
+    {
+      "name": "full tile historic pixel hash",
+      "passed": true
+    },
+    {
+      "name": "cancel",
+      "passed": true
+    },
+    {
+      "name": "full-cancel",
+      "passed": true
+    },
+    {
+      "name": "src tests unchanged",
+      "passed": true
+    },
+    {
+      "name": "source DSC09916.ARW",
+      "passed": true
+    },
+    {
+      "name": "source DSCF0347.RAF",
+      "passed": true
+    },
+    {
+      "name": "source TNAN8886.CR3",
+      "passed": true
+    },
+    {
+      "name": "nonempty complete manifest",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/.gitattributes",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/01_BUILD.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/01_CELLS.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/01_FIXED_IDENTITIES.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/01_ICC_CONCLUSION.md",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/01_ICC_STAGE_TRACE.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/01_SOURCE_EVIDENCE.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/01_SPEC.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/01_START.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/01_TESTS.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/01_TRACE_LIMITATIONS.md",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_BUILD.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_BUILD_FAILED_CPP_ABI.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_BUILD_METADATA.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_BUILD_NO_AUTO.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_DSC09916.ARW.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_DSCF0347.RAF.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_effective-pp3/DSC09916.ARW.pp3",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_effective-pp3/DSCF0347.RAF.pp3",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_effective-pp3/TNAN8886.CR3.pp3",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_FINAL_COMPARISON.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_FUJI_SIZE.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_IDENTIFY.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_INDEPENDENCE_ADDENDUM.md",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_INDEPENDENT_FINAL_COMPARISON.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_INPUT_AFTER.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_NO_AUTO_COMPARISON.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_NO_AUTO_DSC09916.ARW.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_NO_AUTO_DSCF0347.RAF.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_NO_AUTO_TNAN8886.CR3.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_OBSERVED_DSC09916.ARW.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_OBSERVED_DSCF0347.RAF.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_OBSERVED_TNAN8886.CR3.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_OUTPUTS.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_OUTPUTS_ALL.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_OUTPUTS_FINAL.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RAW_CONCLUSION.md",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_REFERENCES.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_CONFIGURED_DSC09916.ARW.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_CONFIGURED_DSCF0347.RAF.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_CONFIGURED_TNAN8886.CR3.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_DSC09916.ARW.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_DSCF0347.RAF.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_INTERNAL_DSC09916.ARW.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_INTERNAL_DSCF0347.RAF.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_INTERNAL_PROVENANCE.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_INTERNAL_TNAN8886.CR3.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_ISOLATED_OPTIONS.txt",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_RUNTIME_PROVENANCE.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_TNAN8886.CR3.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_VERBOSE_DSC09916.ARW.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_VERBOSE_DSCF0347.RAF.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_RT_VERBOSE_TNAN8886.CR3.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_SOURCE_EVIDENCE.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/02_TNAN8886.CR3.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/03_DESKTOP_OBSERVATION.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/03_DESKTOP_OBSERVATION_FIXED.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/03_NATIVE_CONCLUSION.md",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/03_NATIVE_RESULTS.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/03_RELEASE_RECHECK.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_ALLOCATION_SOURCE.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_BUILD_FAILED_ENV.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_BUILD_FAILED_TOKEN.log",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_BUILD_SUCCESS.log",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_cancel.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_COMMIT_WHITESPACE_FINDING.txt",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_COMPARISON.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_full-cancel.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_full.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_HALO_COST.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_INHERITED_TEST_CLASSIFICATION.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_NODE_GATE.md",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_PERFORMANCE_DECISION.md",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_raw-tests/results.trx",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_raw-tests/runsettings.xml",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_raw-tests/stderr.log",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_raw-tests/stdout.log",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_RELEASE_CORE_DISCOVERY.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_RELEASE_CORE_SUMMARY.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_RUNNER_BUILD.log",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_TESTS.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_TEST_CLASSIFICATION.md",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/04_tile.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/BUILD_PROVENANCE.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/DELIVERY.md",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/REMOTE_PREPUSH.json",
+      "passed": true
+    },
+    {
+      "name": "manifest docs/evidence/validation-closure-20261015/VALIDATOR_FAILURES.md",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/analyze_raw.py",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/compare_independent_raw.py",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/compare_raw.py",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/observe-desktop.ps1",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/raw-reference.pp3",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/raw_stages.cpp",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/raw_stages_no_auto.cpp",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/README.md",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/skcms_stages.cpp",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/SpatialAllocationProbe/Program.cs",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/SpatialAllocationProbe/SpatialAllocationProbe.csproj",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/trace_icc.py",
+      "passed": true
+    },
+    {
+      "name": "manifest tools/validation-closure/verify_evidence.py",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "notNativeAcceptance": true
+}

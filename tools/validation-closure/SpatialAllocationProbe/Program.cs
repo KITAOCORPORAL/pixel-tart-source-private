@@ -38,4 +38,3 @@ sealed class AllocationEvents:System.Diagnostics.Tracing.EventListener {
  protected override void OnEventWritten(System.Diagnostics.Tracing.EventWrittenEventArgs e){if(e.EventName?.StartsWith("GCAllocationTick")==true&&e.PayloadNames is {} names&&e.Payload is {} p){var ti=names.IndexOf("TypeName");var si=names.IndexOf("AllocationAmount64");if(ti<0)return;var name=p[ti]?.ToString()??"unknown";long amount=si>=0?Convert.ToInt64(p[si]):0;lock(counts){counts[name]=counts.GetValueOrDefault(name)+1;bytes[name]=bytes.GetValueOrDefault(name)+amount;}}}
  public object Snapshot(){lock(counts)return counts.Select(k=>new{type=k.Key,sampledEvents=k.Value,sampledBytes=bytes[k.Key]}).OrderByDescending(k=>k.sampledBytes).ToArray();}
 }
-
