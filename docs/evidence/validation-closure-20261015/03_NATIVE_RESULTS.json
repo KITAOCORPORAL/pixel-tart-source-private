@@ -1,0 +1,70 @@
+{
+  "status": "NOT_RUN_SHARED_DESKTOP_ACTIVE",
+  "observation": "Weixin foreground; idle875ms; input not sent; executable not started",
+  "notPermissionDenied": true,
+  "isolatedDataDirectory": "D:/AI AGENT/kitao-validation-closure-20261015/artifacts/validation-closure/product-data",
+  "releaseRechecked": "03_RELEASE_RECHECK.json",
+  "tests": [
+    {
+      "id": "WindowsStartup",
+      "status": "NOT_RUN",
+      "reason": "User activity on shared Windows session; stopped before any product input/startup"
+    },
+    {
+      "id": "WorkbenchToPlanningCenter",
+      "status": "NOT_RUN",
+      "reason": "User activity on shared Windows session; stopped before any product input/startup"
+    },
+    {
+      "id": "WorkbenchToColorStudio",
+      "status": "NOT_RUN",
+      "reason": "User activity on shared Windows session; stopped before any product input/startup"
+    },
+    {
+      "id": "PlanningInsertImage",
+      "status": "NOT_RUN",
+      "reason": "User activity on shared Windows session; stopped before any product input/startup"
+    },
+    {
+      "id": "MoveIsolatedOriginalDirectoryAndReopen",
+      "status": "NOT_RUN",
+      "reason": "User activity on shared Windows session; stopped before any product input/startup"
+    },
+    {
+      "id": "UndoRedo",
+      "status": "NOT_RUN",
+      "reason": "User activity on shared Windows session; stopped before any product input/startup"
+    },
+    {
+      "id": "DOCXExport",
+      "status": "NOT_RUN",
+      "reason": "User activity on shared Windows session; stopped before any product input/startup"
+    },
+    {
+      "id": "ColorPhotoSwitch",
+      "status": "NOT_RUN",
+      "reason": "User activity on shared Windows session; stopped before any product input/startup"
+    },
+    {
+      "id": "ColorCancellation",
+      "status": "NOT_RUN",
+      "reason": "User activity on shared Windows session; stopped before any product input/startup"
+    },
+    {
+      "id": "ColorSaveReopen",
+      "status": "NOT_RUN",
+      "reason": "User activity on shared Windows session; stopped before any product input/startup"
+    },
+    {
+      "id": "PhysicalDPI",
+      "status": "NOT_RUN",
+      "reason": "User activity on shared Windows session; stopped before any product input/startup"
+    },
+    {
+      "id": "WPSActualRoundtrip",
+      "status": "NOT_RUN",
+      "reason": "User activity on shared Windows session; stopped before any product input/startup"
+    }
+  ],
+  "backendTestsDoNotSubstitute": true
+}
