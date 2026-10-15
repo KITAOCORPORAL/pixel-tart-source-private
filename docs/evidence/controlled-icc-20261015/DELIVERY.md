@@ -1,6 +1,6 @@
 # 受控 ICC 产品增量交付：PARTIAL / OPEN GATES
 
-业务验收日期／时区按用户要求为2026-10-15 Asia/Shanghai；客户端会话时区另为Asia/Shanghai。旧证据5处Europe/Berlin错误采用追加勘误，未重写旧文件及原始+08日志。
+业务验收日期／时区按用户要求为2026-10-15 Asia/Shanghai；客户端会话时区另为America/Chicago。旧证据5处Europe/Berlin错误采用追加勘误，未重写旧文件及原始+08日志。
 
 ## 身份与可执行交付
 - 起点：远端research/kitao-validation-closure-20261015核对为63ca45ababbfc4780fe46febb767ef5ec76d8377。
