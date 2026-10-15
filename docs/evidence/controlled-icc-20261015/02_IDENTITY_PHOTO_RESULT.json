@@ -1,0 +1,55 @@
+{
+  "status": "VERIFIED_ISOLATED_WORKFLOW_NOT_PRODUCT_ADMISSION",
+  "version": "ControlledIccLinearV1",
+  "sourceHash": "ec81ef66bfa8353ac23e84bef6d489bae1e53d7b028a9abd66465455a51ecb13",
+  "inputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+  "workingProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+  "outputProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+  "EngineVersion": 2160,
+  "EngineSha256": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+  "width": 5496,
+  "height": 3670,
+  "recipe": {
+    "AlgorithmVersion": "ControlledIccLinearV1",
+    "SourceFileSha256": "ec81ef66bfa8353ac23e84bef6d489bae1e53d7b028a9abd66465455a51ecb13",
+    "InputProfileSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+    "WorkingProfileSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+    "OutputProfileSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+    "LinearExposureEv": -1,
+    "Intent": 1,
+    "Bpc": false,
+    "Adaptation": 1
+  },
+  "previewReopenExact": true,
+  "output": [
+    {
+      "format": "tif",
+      "iccSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "sha256": "773dde01839a28f07f3bfc7745b623adf71df215a0176f4ba5fd638115b3fc17",
+      "bitDepth": 16,
+      "maxAbs": 7.632215372116447E-06,
+      "meanAbs": 3.611261966782278E-06,
+      "lossy": false
+    },
+    {
+      "format": "png",
+      "iccSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "sha256": "8783f69537ce7ff42e54f9d1cd4bdea50cf138549f0ea198e45998b0669f60d9",
+      "bitDepth": 16,
+      "maxAbs": 7.632215372116447E-06,
+      "meanAbs": 3.611261966782278E-06,
+      "lossy": false
+    },
+    {
+      "format": "jpg",
+      "iccSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+      "sha256": "5891b09a7e35beb2a97d212a095dba30ab8c5011bc4cd54417bcac91944b2bd6",
+      "bitDepth": 8,
+      "maxAbs": 0.1401770035425822,
+      "meanAbs": 0.002047769080253202,
+      "lossy": true
+    }
+  ],
+  "display": "Detached RGB48 \u002B explicit output profile; no physical display calibration claim",
+  "CalibrationEligible": false
+}

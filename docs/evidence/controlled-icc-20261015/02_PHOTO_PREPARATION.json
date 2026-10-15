@@ -1,0 +1,22 @@
+{
+  "derivativeOf": "authorized Canon TNAN8886.CR3",
+  "originalSha256": "b7d358517db0cd5b5c54215aa089a5a30c79234aef50e9381931128493e33401",
+  "renderedSource": "D:\\AI AGENT\\kitao-validation-closure-20261015\\artifacts\\validation-closure\\raw\\TNAN8886.CR3.configured.rt.tif",
+  "renderedSourceSha256": "3086f3e9e4795abf07f706baea0604f0c27ef3eff35b5fcf7d419edea4473514",
+  "sourceEmbeddedIccSha256": "17aebbdf8a88c39b07eb881dcd824eb1cf9828914d5e74a7324d7a31045e8871",
+  "targetProfileSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+  "photoSha256": "ec81ef66bfa8353ac23e84bef6d489bae1e53d7b028a9abd66465455a51ecb13",
+  "preparation": "direct LCMS relative intent1 flags0x144; source RTv4_sRGB actual embedded to linear-sRGB; full resolution; explicit uint16 nearest-even quantization",
+  "clippedSamples": 0,
+  "size": [
+    3670,
+    5496,
+    3
+  ],
+  "noSourceModified": true,
+  "headroomFixture": {
+    "file": "canon-linear-headroom.tif",
+    "operation": "linear .8*x+.05 before fixture input; not an output correction or decoder accuracy test",
+    "sha256": "a6be3f84ddb65600cbe203dd13d451859c6fe94fff10919fdfadd22d60d0f50b"
+  }
+}

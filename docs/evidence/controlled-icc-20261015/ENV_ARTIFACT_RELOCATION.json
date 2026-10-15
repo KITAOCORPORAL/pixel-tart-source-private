@@ -1,0 +1,270 @@
+{
+  "fileCount": 52,
+  "Efree": 912633634816,
+  "target": "E:\\Kitao-IsolatedRuns\\controlled-icc-20261015",
+  "Dfree": 1715499008,
+  "mismatch": [],
+  "manifest": [
+    {
+      "Path": "canon-linear-headroom.tif",
+      "Bytes": 121022848,
+      "Sha256": "A6BE3F84DDB65600CBE203DD13D451859C6FE94FFF10919FDFADD22D60D0F50B"
+    },
+    {
+      "Path": "canon-linear.tif",
+      "Bytes": 121022848,
+      "Sha256": "EC81EF66BFA8353AC23E84BEF6D489BAE1E53D7B028A9ABD66465455A51ECB13"
+    },
+    {
+      "Path": "core-build-01.log",
+      "Bytes": 419,
+      "Sha256": "FB70B8D79B189434801FD0A3E3B335B90B410DBEE78A3DA464734E954EFC6DFD"
+    },
+    {
+      "Path": "core-final-build.log",
+      "Bytes": 243,
+      "Sha256": "28CC469E5B530A639608B0F6ED2B8B8FA4A559B9ED0D9715AC4AE49211D4349F"
+    },
+    {
+      "Path": "icc-tests-final.log",
+      "Bytes": 271,
+      "Sha256": "AF695995702C1EB7D3270834C14D009040F2D2F1BB3A64AA0948A339E121D35F"
+    },
+    {
+      "Path": "icc-tests.log",
+      "Bytes": 377,
+      "Sha256": "C4DFFD631FC4E489C314F4541C8E9297C9C721E28FB5174054C0D8FFD00CDF5C"
+    },
+    {
+      "Path": "linear-prophoto.icc",
+      "Bytes": 640,
+      "Sha256": "954E3BB304651951681989671EF99EED11183E9179A61A036243D655986C5EA1"
+    },
+    {
+      "Path": "linear-srgb.icc",
+      "Bytes": 640,
+      "Sha256": "DAFBFF7207D22B526BAA8F61A280E197B639AF68CBE2E48529455157612B7407"
+    },
+    {
+      "Path": "photo-preparation.json",
+      "Bytes": 1191,
+      "Sha256": "CEF357F36F8A2D659AE1E7F4CA1E4B9766FE02F4239DE66D350F8B73B9B13187"
+    },
+    {
+      "Path": "photo-run-01.log",
+      "Bytes": 116,
+      "Sha256": "8D9ABEA39D8E5F34B5F0268303815E1E094B2F1DFD53EA968B2B3B8B04FA2EDE"
+    },
+    {
+      "Path": "photo-run-02.log",
+      "Bytes": 93,
+      "Sha256": "5F7CF0127CA6693877BCD72231C00C5977C72B286CEB2F1D31C1F6C70BBAE623"
+    },
+    {
+      "Path": "photo-run-03.log",
+      "Bytes": 125,
+      "Sha256": "13502059E2AE0DEE81CCC19E8CE7CDCAE242A892AD8ED0B356A8F0E49C3BBCC6"
+    },
+    {
+      "Path": "photo-run-04.log",
+      "Bytes": 93,
+      "Sha256": "6FB8E940B0D52AA07B179403F407653772C73F14AC4CBE589792244061ACC842"
+    },
+    {
+      "Path": "tests-build.log",
+      "Bytes": 16822,
+      "Sha256": "FBBD7A9A8F6134757E0E3D9481C9423ECB3320CD71DC01DA615322D821BF5283"
+    },
+    {
+      "Path": "workflow-build-02.log",
+      "Bytes": 491,
+      "Sha256": "6E4FF3FCBBF186F96748BA198CE109228823CE5C09A527717D494D25D8EAE1C4"
+    },
+    {
+      "Path": "workflow-build-03.log",
+      "Bytes": 491,
+      "Sha256": "686329BC850B2520EC647A3378568B5B0DCFB025024BB817625CA5ACCD548B66"
+    },
+    {
+      "Path": "workflow-build.log",
+      "Bytes": 633,
+      "Sha256": "52F299FF2D3AA996FD5FA8FAC31906C7D0C771DF549E7A60F069C77E871A78D2"
+    },
+    {
+      "Path": "workflow-final-build.log",
+      "Bytes": 491,
+      "Sha256": "E8B12DE51D1BE9B095355982DC8CC0D22D2BD3E9C19092CF3906643CC558E67B"
+    },
+    {
+      "Path": "icc-tests\\icc-tests.trx",
+      "Bytes": 5587,
+      "Sha256": "7E7F1E965DDE19877D582028C3F269B8D685DD9AD901C5505ACBE4FF1515CCF0"
+    },
+    {
+      "Path": "icc-tests-final\\icc-tests.trx",
+      "Bytes": 0,
+      "Sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "Path": "photo-run-02\\decoded-input-f32.bin",
+      "Bytes": 242043840,
+      "Sha256": "C71F4C3BDBCA2FC45B918E0942348B73E9603DE33ED2403B8022EC1AD7D810B2"
+    },
+    {
+      "Path": "photo-run-02\\output.icc",
+      "Bytes": 640,
+      "Sha256": "DAFBFF7207D22B526BAA8F61A280E197B639AF68CBE2E48529455157612B7407"
+    },
+    {
+      "Path": "photo-run-02\\output.jpg",
+      "Bytes": 3159497,
+      "Sha256": "5891B09A7E35BEB2A97D212A095DBA30AB8C5011BC4CD54417BCAC91944B2BD6"
+    },
+    {
+      "Path": "photo-run-02\\output.png",
+      "Bytes": 79313298,
+      "Sha256": "8783F69537CE7FF42E54F9D1CD4BDEA50CF138549F0EA198E45998B0669F60D9"
+    },
+    {
+      "Path": "photo-run-02\\output.tif",
+      "Bytes": 121022786,
+      "Sha256": "773DDE01839A28F07F3BFC7745B623ADF71DF215A0176F4BA5FD638115B3FC17"
+    },
+    {
+      "Path": "photo-run-02\\preview-output-f32.bin",
+      "Bytes": 242043840,
+      "Sha256": "8661A99F38497CE5CB90A9892F2999A4BFFBD616705C46935DBF5207C023E387"
+    },
+    {
+      "Path": "photo-run-02\\recipe.json",
+      "Bytes": 504,
+      "Sha256": "57772C3A3E9BF43A88A29305E79161202D253DA018D9DBC34BFBBAD89561E392"
+    },
+    {
+      "Path": "photo-run-02\\result.json",
+      "Bytes": 2339,
+      "Sha256": "6DB119D25AF16146AF7EF0FAA7DCB1D06A9C7B36B3507D4814E4905AC746391C"
+    },
+    {
+      "Path": "photo-run-04\\decoded-input-f32.bin",
+      "Bytes": 242043840,
+      "Sha256": "84F89FFDD1AB45B29E0D2C58258D357047D8DE5D69C8C37A6DED8BF66CF1197D"
+    },
+    {
+      "Path": "photo-run-04\\output.icc",
+      "Bytes": 640,
+      "Sha256": "DAFBFF7207D22B526BAA8F61A280E197B639AF68CBE2E48529455157612B7407"
+    },
+    {
+      "Path": "photo-run-04\\output.jpg",
+      "Bytes": 2698517,
+      "Sha256": "17BE6047F0A5CFBA46A3A1CC88EF1D46A080196456D4CED5D8531FE8BAFB94B2"
+    },
+    {
+      "Path": "photo-run-04\\output.png",
+      "Bytes": 77542981,
+      "Sha256": "770314F063FD9F5BA27394736FF5ADABB25E08FA5BB213D5E4B479286089E271"
+    },
+    {
+      "Path": "photo-run-04\\output.tif",
+      "Bytes": 121022786,
+      "Sha256": "A12F7B1ECA20C67E734A917E2587E95D30A2232EA8DEB4792706F6A691A17496"
+    },
+    {
+      "Path": "photo-run-04\\preview-output-f32.bin",
+      "Bytes": 242043840,
+      "Sha256": "529C32B21C014FF43C6A42123C55815CA37B598694AF9BD06AC53056D9BCAC6D"
+    },
+    {
+      "Path": "photo-run-04\\recipe.json",
+      "Bytes": 504,
+      "Sha256": "E170BAF629CA6E3A989012DDBFB2CB4C5FAEBCC148B6BDFB1B3C26B62220E67E"
+    },
+    {
+      "Path": "photo-run-04\\result.json",
+      "Bytes": 2340,
+      "Sha256": "ADB4D59ED58C00651E7ECC747F5DA83E2C663E9C3D3862ABF4D32C4B08249F20"
+    },
+    {
+      "Path": "raw\\build.log",
+      "Bytes": 611,
+      "Sha256": "A9646C4028903CF609AD2BE7109D83FE89D889F8FF5568FD08C6C9F792B50EDB"
+    },
+    {
+      "Path": "raw\\DSC09916.ARW.candidate.log",
+      "Bytes": 1856,
+      "Sha256": "0862A4EDBA250BDF5A7E0CA234BE42E39F63C5B27A82A442FD853985307E7B42"
+    },
+    {
+      "Path": "raw\\DSC09916.ARW.candidate.tif",
+      "Bytes": 85453392,
+      "Sha256": "AE6950BD1394BC5375525B14543F68E3B18E2E38BB72D2A18F5F72B70903E6A4"
+    },
+    {
+      "Path": "raw\\DSC09916.ARW.identity.json",
+      "Bytes": 189,
+      "Sha256": "B0F7BD55DF6847082D577BD5406F97E5069A29B4F21A7C73E9BAB41F267FDAB3"
+    },
+    {
+      "Path": "raw\\DSC09916.ARW.legacy.json",
+      "Bytes": 5958,
+      "Sha256": "557FE5442598289124C45FC4478DFAC93D540615A3161E583A98ED63D740D3F4"
+    },
+    {
+      "Path": "raw\\DSC09916.ARW.legacy.log",
+      "Bytes": 0,
+      "Sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "Path": "raw\\DSCF0347.RAF.candidate.log",
+      "Bytes": 2047,
+      "Sha256": "2EFFEC7E9CD59FC908DA526F8A1E900D7B441A54977D0221E595A04AAD76B1F3"
+    },
+    {
+      "Path": "raw\\DSCF0347.RAF.candidate.tif",
+      "Bytes": 14934016,
+      "Sha256": "8DA021B9A2FE5C8EF23EAE4DF92B0C665F1B9CDA35F8353A19F1E330C1F03A28"
+    },
+    {
+      "Path": "raw\\DSCF0347.RAF.identity.json",
+      "Bytes": 189,
+      "Sha256": "909271311996B2BAB04341E1D83C442C7289BC0BD2C5B1E86B31FD9ECB800C75"
+    },
+    {
+      "Path": "raw\\DSCF0347.RAF.legacy.json",
+      "Bytes": 3799,
+      "Sha256": "71F5A8BA4C1DEAF80F6E4050730CAA7CD40F71B817B51A62A4C2981AFFC1126D"
+    },
+    {
+      "Path": "raw\\DSCF0347.RAF.legacy.log",
+      "Bytes": 0,
+      "Sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "Path": "raw\\TNAN8886.CR3.candidate.log",
+      "Bytes": 2018,
+      "Sha256": "82C7865B8E36784E09913242840F7B990F0D15B086A21B48E76BE3D1B3C1C046"
+    },
+    {
+      "Path": "raw\\TNAN8886.CR3.candidate.tif",
+      "Bytes": 4096,
+      "Sha256": "A2FF2E57B9CD42F586B76D063A25F156896E86C7AB762B9E391E91DEAFA0B737"
+    },
+    {
+      "Path": "raw\\TNAN8886.CR3.identity.json",
+      "Bytes": 189,
+      "Sha256": "E8F9E491A28AB99471D0DE7C04D4D5B26CBBD458DD9E8E4EDEE2FE45C906B15B"
+    },
+    {
+      "Path": "raw\\TNAN8886.CR3.legacy.json",
+      "Bytes": 4809,
+      "Sha256": "6568A6EF4B3BEF5BC037A2D467E8983632C10F6052349DA66AB3873CEAEF9D2D"
+    },
+    {
+      "Path": "raw\\TNAN8886.CR3.legacy.log",
+      "Bytes": 0,
+      "Sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    }
+  ],
+  "source": "D:\\AI AGENT\\kitao-controlled-icc-20261015\\artifacts\\controlled-icc"
+}

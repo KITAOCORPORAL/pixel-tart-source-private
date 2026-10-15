@@ -1,0 +1,1 @@
+The actual fixed LCMS-generated sRGB linear profile uses chrm descriptive tag and curveType(count1,gamma=0x0100), not only count0 identity. Both encode gamma1.0. Initial refusal retained; scope now explicitly allows this identity encoding and descriptive chrm after bounds validation. No LUT/nonidentity TRC admission.

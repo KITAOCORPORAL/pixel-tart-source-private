@@ -1,0 +1,1 @@
+Source is an explicitly opted-in isolated adapter, not a normal Color Studio entry. Native DLL never copied to build/Release. Profile subset/allowlist and stable rejections are implemented, not a report-only proposal. No historical recipe conversion or PV7 integration.

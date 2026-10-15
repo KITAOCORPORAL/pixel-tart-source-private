@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6a3227cf-8f22-475a-9030-d509e52cef21" name="Administrator@PC-20250309WEIZ 2026-10-15 15:18:37" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-15T15:18:37.1861011+08:00" queuing="2026-10-15T15:18:37.1861013+08:00" start="2026-10-15T15:18:36.6004145+08:00" finish="2026-10-15T15:18:37.1906996+08:00" />
+  <TestSettings name="default" id="ce9cc5f2-177c-4abe-8398-b1a3d2e044f5">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-10-15_15_18_37" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="b3227855-3758-4862-8222-2d531d8c02cd" testId="19c6e78b-ce48-8ee2-a257-19a981e83dd6" testName="DefaultOffAndRecipeCannotMigrateLegacyVersions" computerName="PC-20250309WEIZ" duration="00:00:00.0092104" startTime="2026-10-15T15:18:37.0672151+08:00" endTime="2026-10-15T15:18:37.0929169+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b3227855-3758-4862-8222-2d531d8c02cd" />
+    <UnitTestResult executionId="e27a781e-a5c8-44b7-9d7a-339b2d65409f" testId="13cd53d0-da46-855d-abfe-799256bb20f5" testName="StrictProfileRejectsLengthsBoundsUnknownVersionIntentAndLut" computerName="PC-20250309WEIZ" duration="00:00:00.0092075" startTime="2026-10-15T15:18:37.0672212+08:00" endTime="2026-10-15T15:18:37.0929169+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e27a781e-a5c8-44b7-9d7a-339b2d65409f" />
+    <UnitTestResult executionId="513cbb19-b863-43ec-8e27-aa409b7b211a" testId="182577e3-2f83-8066-a2b0-8b9c92ef5128" testName="EmbeddedInspectorDistinguishesMissingAndCorruptProfileWithoutFallback" computerName="PC-20250309WEIZ" duration="00:00:00.0092077" startTime="2026-10-15T15:18:37.0672070+08:00" endTime="2026-10-15T15:18:37.0929169+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="513cbb19-b863-43ec-8e27-aa409b7b211a" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="StrictProfileRejectsLengthsBoundsUnknownVersionIntentAndLut" storage="d:/ai agent/kitao-controlled-icc-20261015/tests/rawselectionassistant.tests/bin/release/net10.0/rawselectionassistant.tests.dll" id="13cd53d0-da46-855d-abfe-799256bb20f5">
+      <Execution id="e27a781e-a5c8-44b7-9d7a-339b2d65409f" />
+      <TestMethod codeBase="D:/AI AGENT/kitao-controlled-icc-20261015/tests/RAWSelectionAssistant.Tests/bin/Release/net10.0/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ControlledIccTests" name="StrictProfileRejectsLengthsBoundsUnknownVersionIntentAndLut" />
+    </UnitTest>
+    <UnitTest name="DefaultOffAndRecipeCannotMigrateLegacyVersions" storage="d:/ai agent/kitao-controlled-icc-20261015/tests/rawselectionassistant.tests/bin/release/net10.0/rawselectionassistant.tests.dll" id="19c6e78b-ce48-8ee2-a257-19a981e83dd6">
+      <Execution id="b3227855-3758-4862-8222-2d531d8c02cd" />
+      <TestMethod codeBase="D:/AI AGENT/kitao-controlled-icc-20261015/tests/RAWSelectionAssistant.Tests/bin/Release/net10.0/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ControlledIccTests" name="DefaultOffAndRecipeCannotMigrateLegacyVersions" />
+    </UnitTest>
+    <UnitTest name="EmbeddedInspectorDistinguishesMissingAndCorruptProfileWithoutFallback" storage="d:/ai agent/kitao-controlled-icc-20261015/tests/rawselectionassistant.tests/bin/release/net10.0/rawselectionassistant.tests.dll" id="182577e3-2f83-8066-a2b0-8b9c92ef5128">
+      <Execution id="513cbb19-b863-43ec-8e27-aa409b7b211a" />
+      <TestMethod codeBase="D:/AI AGENT/kitao-controlled-icc-20261015/tests/RAWSelectionAssistant.Tests/bin/Release/net10.0/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ControlledIccTests" name="EmbeddedInspectorDistinguishesMissingAndCorruptProfileWithoutFallback" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="19c6e78b-ce48-8ee2-a257-19a981e83dd6" executionId="b3227855-3758-4862-8222-2d531d8c02cd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13cd53d0-da46-855d-abfe-799256bb20f5" executionId="e27a781e-a5c8-44b7-9d7a-339b2d65409f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="182577e3-2f83-8066-a2b0-8b9c92ef5128" executionId="513cbb19-b863-43ec-8e27-aa409b7b211a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 D:/AI AGENT/kitao-controlled-icc-20261015/tests/RAWSelectionAssistant.Tests/bin/Release/net10.0/RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 12，Scope: MethodLevel)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

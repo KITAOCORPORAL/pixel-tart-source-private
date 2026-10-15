@@ -1,0 +1,23 @@
+{
+  "lcms": {
+    "sourceCommit": "453bafeb85b4ef96498866b7a8eadcc74dff9223",
+    "version": 2160,
+    "binary": "D:/AI AGENT/kitao-company-validation-20261015/artifacts/company-validation/icc/lcms/Library/bin/lcms2.dll",
+    "sha256": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+    "license": "MIT",
+    "licenseSha256": "6dbd60437f8ef91d8de1f08ad75882547fd4931bfcc3566a0735f28db1484d31",
+    "dependencies": "PE import inventory pending; no bundling"
+  },
+  "skcms": {
+    "commit": "97adcbb67e98d633a65b29fd405941970f3b476d",
+    "license": "BSD3",
+    "usage": "external reference only"
+  },
+  "decision": "ISOLATED_ADAPTER_ONLY_NO_USER_ENTRY_NO_NATIVE_DLL_IN_RELEASE",
+  "open": [
+    "Native PE import and source-build correspondence review",
+    "Product-native package provenance and notice integration",
+    "Full real-profile input surface and approved support scope"
+  ],
+  "productDefault": false
+}
