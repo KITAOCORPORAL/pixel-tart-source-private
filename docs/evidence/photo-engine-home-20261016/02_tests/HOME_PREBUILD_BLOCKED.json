@@ -1,0 +1,37 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    {
+      "strictReview": [
+        {
+          "infrastructure": "ALL",
+          "errors": [
+            "non-passing or not-executed tests",
+            "nonzero child exit"
+          ]
+        },
+        "nonzero process: ALL",
+        "unclassified test: RAWSelectionAssistant.Tests.EmbeddedIccContainerTests.TiffBothEndianDuplicateAndOtherIfdPolicyIsExplicit",
+        "unclassified test: RAWSelectionAssistant.Tests.ControlledIccTests.DefaultOffAndRecipeCannotMigrateLegacyVersions",
+        "unclassified test: RAWSelectionAssistant.Tests.EmbeddedIccContainerTests.JpegSingleMultiMissingDuplicateAndDamagedProfileHaveStableOutcomes",
+        "unclassified test: RAWSelectionAssistant.Tests.ControlledIccTests.EmbeddedInspectorDistinguishesMissingAndCorruptProfileWithoutFallback",
+        "unclassified test: RAWSelectionAssistant.Tests.ControlledIccTests.StrictProfileRejectsLengthsBoundsUnknownVersionIntentAndLut",
+        {
+          "failed": "RAWSelectionAssistant.Tests.AssetLibraryP3PerformanceTests.TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds",
+          "outcome": "Failed"
+        },
+        "unclassified test: RAWSelectionAssistant.Tests.TestResourceLocationTests.ExplicitConfigurationDoesNotDependOnAssemblyAncestorOrDrive"
+      ]
+    },
+    {
+      "requiredProductRepeatability": "Fuji default legacy output differs for identical source",
+      "changedChannelSamples": 38375,
+      "maximum16BitCodeDifference": 11713
+    }
+  ],
+  "legacyOpenConditionsPreserved": true,
+  "nativeDesktop": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "candidateDistributionApproved": false,
+  "monitorPixelConversionImplemented": false
+}
