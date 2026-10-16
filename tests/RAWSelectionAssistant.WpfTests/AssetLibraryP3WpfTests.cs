@@ -742,8 +742,13 @@ public sealed class AssetLibraryP3WpfTests
                 foreach (var name in new[] { "连续标签甲", "连续标签乙" })
                 {
                     page.ViewModel.P3TagNameInput = name;
+                    await WaitForAsync(() => page.ViewModel.CreateP3TagCommand.CanExecute(null));
                     Assert.IsTrue(page.ViewModel.CreateP3TagCommand.CanExecute(null));
                     page.ViewModel.CreateP3TagCommand.Execute(null);
+                    // Populating the refreshed list precedes AsyncCommand's finally which
+                    // releases its running guard. Observe command completion, not a partial
+                    // repository/UI state, before attempting the next consecutive mutation.
+                    await page.ViewModel.CreateP3TagCommand.ExecutionTask;
                     await WaitForAsync(() => !page.ViewModel.P3TagManagerLoading &&
                                              page.ViewModel.P3ManagedTags.Any(tag => tag.Name == name));
                     Assert.AreEqual(group.TagGroupId, page.ViewModel.P3SelectedManagedTagGroup?.TagGroupId,

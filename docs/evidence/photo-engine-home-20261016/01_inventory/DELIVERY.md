@@ -1,6 +1,6 @@
 # 阶段1：家里本机只读清点
 
-2026-10-16 Asia/Shanghai。fetch核验feature/kitao-photo-engine-candidate-20261016为2ca931e0e1550942ed2c37ff58c51a0382a3d18d，与预期一致，无远端新增差异。独立工作树N:/pixart/kitao-photo-engine-home-20261016，分支feature/kitao-photo-engine-home-20261016；原9树及旧源码树3个未跟踪审计/研究目录保留，未重置或清理。
+2026-10-16 Europe/Berlin。fetch核验feature/kitao-photo-engine-candidate-20261016为2ca931e0e1550942ed2c37ff58c51a0382a3d18d，与预期一致，无远端新增差异。独立工作树N:/pixart/kitao-photo-engine-home-20261016，分支feature/kitao-photo-engine-home-20261016；原9树及旧源码树3个未跟踪审计/研究目录保留，未重置或清理。
 
 仅核对既有授权清单的精确文件名：N:/pixart/RAW/Real/canon/TNAN8886.CR3与fuji/DSCF0347.RAF SHA同原授权记录；sony/DSC09916.ARW未在此准确位置找到，不搜索私人目录或凭相似名代替。原照片只读，后续计算用隔离副本。既有7个Release路径/EXE hash见EXISTING_RELEASES，全部保留。
 
