@@ -1,0 +1,6 @@
+import pathlib,sys,json
+A=pathlib.Path(__file__).resolve().parents[2]/'artifacts/photo-engine';sys.path.insert(0,str(A/'python-deps'));import PyOpenColorIO as o,colour,numpy as np
+s=colour.RGB_COLOURSPACES['sRGB'].copy();ap1=colour.RGB_COLOURSPACES['ACEScg'].copy();s.use_derived_transformation_matrices(True);ap1.use_derived_transformation_matrices(True);pts=np.array([[0,0,0],[.18,.18,.18],[1,0,0],[0,1,0],[0,0,1],[-.1,.2,1.4]],np.float32)
+# Match OCIO explicitly Bradford-adapted AP1 -> linearRec709, invert for working transform.
+t=o.BuiltinTransform(style='UTILITY - ACES-AP1_to_LINEAR-REC709_BFD',direction=o.TRANSFORM_DIR_INVERSE);cpu=o.Config.CreateRaw().getProcessor(t).getDefaultCPUProcessor();oc=np.array([cpu.applyRGB(p.tolist()) for p in pts]);co=colour.RGB_to_RGB(pts,s,ap1,chromatic_adaptation_transform='Bradford',apply_cctf_decoding=False,apply_cctf_encoding=False)
+m=np.array(colour.matrix_RGB_to_RGB(s,ap1,chromatic_adaptation_transform='Bradford'));back=np.linalg.inv(m);print(json.dumps(dict(ocioVersion=o.__version__,colour=colour.__version__,chain='linear sRGB D65 -> Bradford -> ACEScg AP1 D60; extendedfloat',builtin=t.getStyle(),points=pts.tolist(),ocioValues=oc.tolist(),colourValues=co.tolist(),maxAbs=float(np.max(np.abs(oc-co))),matrix=m.tolist(),inverse=back.tolist(),notCameraCalibration=True),indent=2))

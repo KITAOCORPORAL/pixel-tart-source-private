@@ -1,0 +1,156 @@
+{
+  "cases": [
+    {
+      "case": "authorizedCanonFullTIFF",
+      "recipe": {
+        "algorithm": "PhotoSrgbLinear1",
+        "sourceSha256": "1e184167d5a3a97ede122287b891bcf8813382a5f9a22b505fd28abee3c5b369",
+        "inputProfile": "17aebbdf8a88c39b07eb881dcd824eb1cf9828914d5e74a7324d7a31045e8871",
+        "workingProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+        "outputProfile": "43a86e39836b4f56029aae55090f2b73c1577d74d3394fc4f395d3e35f70b653",
+        "engine": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+        "intent": 1,
+        "BPC": false,
+        "adaptation": 1,
+        "EV": -0.5,
+        "workingDomain": "extendedlinear-sRGBD65/PCSXYZD50",
+        "outputSink": "PhotoSrgbRelativeIntegerSink1 explicitLCMSuint16saturation",
+        "display": "encodedsRGBfromsameoutputcodes"
+      },
+      "width": 5496,
+      "height": 3670,
+      "inputPrecision": "16bit",
+      "working": {
+        "min": 0.0,
+        "max": 0.5470209717750549,
+        "negativeSamples": 0,
+        "aboveOneSamples": 0
+      },
+      "edited": {
+        "min": 0.0,
+        "max": 0.38680222630500793,
+        "negativeSamples": 0,
+        "aboveOneSamples": 0
+      },
+      "beforeIntegerSink": {
+        "min": 0.0,
+        "max": 0.6551841497421265,
+        "negativeSamples": 0,
+        "aboveOneSamples": 0
+      },
+      "sinkPixelsOutside": 0,
+      "codesSha256": "5ae1243f851cbe773762560f5fae24289d7938f27b0a1bc31a6f346508b19af7",
+      "previewReopenCodesExact": true,
+      "TIFF16PNG16CodesExact": true,
+      "JpegMae": 0.0018326060108715485,
+      "JpegPsnr": 50.43996437425518,
+      "CalibrationEligible": false,
+      "distributionApproval": false
+    },
+    {
+      "case": "CanonPhotographicJPEGDerivative",
+      "recipe": {
+        "algorithm": "PhotoSrgbLinear1",
+        "sourceSha256": "85bde4fb0199b1f655c30decc73f757afbb5081bb586604f72a3a5066f35f228",
+        "inputProfile": "43a86e39836b4f56029aae55090f2b73c1577d74d3394fc4f395d3e35f70b653",
+        "workingProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+        "outputProfile": "43a86e39836b4f56029aae55090f2b73c1577d74d3394fc4f395d3e35f70b653",
+        "engine": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+        "intent": 1,
+        "BPC": false,
+        "adaptation": 1,
+        "EV": -0.5,
+        "workingDomain": "extendedlinear-sRGBD65/PCSXYZD50",
+        "outputSink": "PhotoSrgbRelativeIntegerSink1 explicitLCMSuint16saturation",
+        "display": "encodedsRGBfromsameoutputcodes"
+      },
+      "width": 5496,
+      "height": 3670,
+      "inputPrecision": "JPEG8",
+      "working": {
+        "min": 0.0,
+        "max": 0.5457279086112976,
+        "negativeSamples": 0,
+        "aboveOneSamples": 0
+      },
+      "edited": {
+        "min": 0.0,
+        "max": 0.38588789105415344,
+        "negativeSamples": 0,
+        "aboveOneSamples": 0
+      },
+      "beforeIntegerSink": {
+        "min": 0.0,
+        "max": 0.6544841527938843,
+        "negativeSamples": 0,
+        "aboveOneSamples": 0
+      },
+      "sinkPixelsOutside": 0,
+      "codesSha256": "8b669f9d33436577bc3b71228983fd0b1947b31c61a1d1f910086b638a839164",
+      "previewReopenCodesExact": true,
+      "TIFF16PNG16CodesExact": true,
+      "JpegMae": 0.0017168376459016194,
+      "JpegPsnr": 50.79389181666289,
+      "CalibrationEligible": false,
+      "distributionApproval": false
+    },
+    {
+      "case": "knownGraySaturatedSkinCodes",
+      "recipe": {
+        "algorithm": "PhotoSrgbLinear1",
+        "sourceSha256": "8cfd9b87c2b2d8da2b829b07db60141f132afb639f5f1026c8304048c3619108",
+        "inputProfile": "43a86e39836b4f56029aae55090f2b73c1577d74d3394fc4f395d3e35f70b653",
+        "workingProfile": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+        "outputProfile": "43a86e39836b4f56029aae55090f2b73c1577d74d3394fc4f395d3e35f70b653",
+        "engine": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+        "intent": 1,
+        "BPC": false,
+        "adaptation": 1,
+        "EV": -0.5,
+        "workingDomain": "extendedlinear-sRGBD65/PCSXYZD50",
+        "outputSink": "PhotoSrgbRelativeIntegerSink1 explicitLCMSuint16saturation",
+        "display": "encodedsRGBfromsameoutputcodes"
+      },
+      "width": 192,
+      "height": 32,
+      "inputPrecision": "16bit",
+      "working": {
+        "min": 0.0,
+        "max": 1.0,
+        "negativeSamples": 0,
+        "aboveOneSamples": 0
+      },
+      "edited": {
+        "min": 0.0,
+        "max": 0.7071067690849304,
+        "negativeSamples": 0,
+        "aboveOneSamples": 0
+      },
+      "beforeIntegerSink": {
+        "min": 0.0,
+        "max": 0.8581397533416748,
+        "negativeSamples": 0,
+        "aboveOneSamples": 0
+      },
+      "sinkPixelsOutside": 0,
+      "codesSha256": "91b7ccb23e027b4c54ef43d96d91bbf1573f63f00c9698836ded25f0e54b4473",
+      "previewReopenCodesExact": true,
+      "TIFF16PNG16CodesExact": true,
+      "JpegMae": 0.0008714596949891067,
+      "JpegPsnr": 54.66292874643254,
+      "CalibrationEligible": false,
+      "distributionApproval": false
+    }
+  ],
+  "independentEotfMaxAbs": 4.095212655153002e-06,
+  "rejections": [
+    {
+      "case": "missing-profile",
+      "reason": "ICC_MISSING"
+    },
+    {
+      "case": "unsupported-linear",
+      "reason": "ICC_NOT_EVALUATED"
+    }
+  ]
+}
