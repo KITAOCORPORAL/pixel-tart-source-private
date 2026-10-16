@@ -66,4 +66,3 @@ internal static class BoundedTestProcess
         lock(LogGate)File.AppendAllText(target,System.Text.Json.JsonSerializer.Serialize(new{atUtc=DateTimeOffset.UtcNow,phase,ownerPid=Environment.ProcessId,detail})+Environment.NewLine);
     }
 }
-
