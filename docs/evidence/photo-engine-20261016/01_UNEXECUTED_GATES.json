@@ -1,0 +1,838 @@
+{
+  "counts": {
+    "WPF": 23,
+    "PublishedCore": 6
+  },
+  "items": [
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests.ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。No captured non-reparse P2 run root is available for the read-only integration probe.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP2AutomatedEvidenceContractTests.cs",
+          "method": "ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+          "lines": [
+            "        var candidate = Directory.Exists(validationRoot)\r",
+            "        if (candidate is null) Assert.Inconclusive(\"No captured non-reparse P2 run root is available for the read-only integration probe.\");\r",
+            "        Assert.AreEqual(0, result.ExitCode, $\"ValidateExistingRun rejected a captured run. {result.Output} {result.Error}\");\r",
+            "        Assert.AreEqual(before, TreeFingerprint(candidate), \"ValidateExistingRun changed the sealed run root.\");\r",
+            "        StringAssert.Contains(runner, \"[ValidateSet('Run', 'DryRun', 'ValidateExistingRun', 'RecoveryTest')]\");\r",
+            "        StringAssert.Contains(runner, \"$restartScenarios = @('restart-persistence/v1')\");\r",
+            "        StringAssert.Contains(runner, \"New-P2SyntheticFixture\");\r",
+            "        StringAssert.Contains(runner, \"Test-P2AssetLibraryAutomatedEvidence.ps1\");\r",
+            "    public void FixtureGeneratorCreatesDeterministic512MetadataContract()\r",
+            "        Assert.DoesNotContain(\"Get-FileHash\", validator, StringComparison.Ordinal);\r",
+            "            Assert.IsFalse(validator.Contains(forbidden, StringComparison.OrdinalIgnoreCase), $\"validator contains mutator {forbidden}\");\r",
+            "        var package = string.Join(\"\\n\", Directory.GetFiles(Path(\"tools/AssetLibraryP2AutomatedAcceptance\"), \"*\", SearchOption.AllDirectories).Select(File.ReadAllText));\r",
+            "            Assert.IsFalse(package.Contains(forbidden, StringComparison.OrdinalIgnoreCase));\r",
+            "            Assert.IsFalse(driver.Contains(forbidden, StringComparison.OrdinalIgnoreCase));\r",
+            "        foreach (var value in values) StringAssert.Contains(text, value);\r",
+            "        var rows = Directory.EnumerateFiles(fullRoot, \"*\", SearchOption.AllDirectories)\r"
+          ]
+        }
+      ],
+      "required": "new isolatedfixture/output opt-in or realcapturedP2run",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "DIAGNOSTIC_NOT_AUTOMATIC_LEGACY_RELEASE_BLOCKER",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Opt-in diagnostic: provide a new synthetic fixture and new output directory.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3PerformanceDiagnosticsTests.cs",
+          "method": "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+          "lines": [
+            "    public async Task ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture()\r",
+            "        var fixture = Environment.GetEnvironmentVariable(\"PIXEL_TART_P3_DIAGNOSTIC_FIXTURE\");\r",
+            "        var output = Environment.GetEnvironmentVariable(\"PIXEL_TART_P3_DIAGNOSTIC_OUTPUT\");\r",
+            "        if (string.IsNullOrWhiteSpace(fixture) || string.IsNullOrWhiteSpace(output))\r",
+            "            Assert.Inconclusive(\"Opt-in diagnostic: provide a new synthetic fixture and new output directory.\");\r",
+            "        Assert.IsTrue(Path.IsPathFullyQualified(fixture));\r",
+            "        Assert.IsTrue(Path.IsPathFullyQualified(output));\r",
+            "        Assert.IsFalse(Directory.Exists(output), \"Never overwrite an earlier diagnostic.\");\r",
+            "                File.Copy(fixture, database, overwrite: false);\r",
+            "                Assert.AreEqual(10128, (await repository.QueryAsync(new(IncludeArchived: true, PageSize: 1))).TotalCount);\r",
+            "                                Assert.AreEqual(size, page.ViewModel.SelectionCount);\r",
+            "                                Assert.IsTrue(page.ViewModel.PreviewP3BatchMetadataCommand.CanExecute(null));\r",
+            "                                Assert.IsTrue(page.ViewModel.P3BatchPreviewReady, page.ViewModel.P3BatchPreviewSummary);\r",
+            "                                Assert.IsTrue(page.ViewModel.ApplyP3BatchMetadataCommand.CanExecute(null));\r",
+            "                                StringAssert.Contains(page.ViewModel.P3BatchPreviewSummary, \"已安全更新\");\r",
+            "                                Assert.IsFalse(page.ViewModel.IsLoading || page.ViewModel.HasLoadError || page.ViewModel.IsOrganizationLoading);\r",
+            "                            Assert.HasCount(size, await repository.ListTagMembershipsAsync(tagId: tag.TagId));\r",
+            "                                Assert.IsTrue(page.ViewModel.P2UndoCommand.CanExecute(null));\r",
+            "                                Assert.IsEmpty(await repository.ListTagMembershipsAsync(tagId: tag.TagId));\r"
+          ]
+        }
+      ],
+      "required": "new isolatedfixture/output opt-in or realcapturedP2run",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "DIAGNOSTIC_NOT_AUTOMATIC_LEGACY_RELEASE_BLOCKER",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Measurement opt-in required.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/BatchEightInstantFilmProductTests.cs",
+          "method": "BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately",
+          "lines": [
+            "        var evidence=Environment.GetEnvironmentVariable(\"KITAO_BATCH09_EVIDENCE\");if(string.IsNullOrEmpty(evidence)){Assert.Inconclusive(\"Measurement opt-in required.\");return;}\r",
+            "        CollectionAssert.AreEqual(reference,optimized.Rgb32.ToArray());watch.Restart();var hq=ProfessionalRawPipeline.RenderPreview(master,d,800);var hqMs=watch.Elapsed.TotalMilliseconds;\r",
+            "                Assert.AreEqual(size.Width,decoded.Width);Assert.AreEqual(size.Height,decoded.Height);Assert.AreEqual(1,decoded.Orientation);\r",
+            "                if(format!=StudioExportFormat.Jpeg)Assert.AreEqual(0,decoded.MaximumError);\r"
+          ]
+        }
+      ],
+      "required": "new isolatedfixture/output opt-in or realcapturedP2run",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "DIAGNOSTIC_NOT_AUTOMATIC_LEGACY_RELEASE_BLOCKER",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Authorized local RAW corpus and evidence opt-in required.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/BatchEightInstantFilmProductTests.cs",
+          "method": "AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+          "lines": [
+            "        var corpus=Environment.GetEnvironmentVariable(\"KITAO_BATCH08_CORPUS\");var evidence=Environment.GetEnvironmentVariable(\"KITAO_BATCH08_EVIDENCE\");\r",
+            "        if(string.IsNullOrEmpty(corpus)||string.IsNullOrEmpty(evidence)){Assert.Inconclusive(\"Authorized local RAW corpus and evidence opt-in required.\");return;}\r",
+            "            using var temp=new Temp();var source=Path.Combine(corpus,name);var d=new ProfessionalRawDefinition();\r",
+            "            CollectionAssert.AreEqual(preview.Rgb32.ToArray(),ProfessionalRawPipeline.RenderPreview(master,restored,1600).Rgb32.ToArray());\r",
+            "            var unchanged=Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(source)))==master.Contract.SourceSha256;Assert.IsTrue(unchanged);\r",
+            "        Assert.IsFalse(Pixels(expected).SequenceEqual(Pixels(StudioQuickExport.Load(path))),\"Fixture must actually change source pixels.\");\r",
+            "        Assert.IsNotNull(workspace.ActiveTarget.RawDefinition,workspace.StatusText);\r",
+            "        var recipe=workspace.ActiveTarget.RawDefinition.InstantInput!;Assert.AreEqual(\"CurrentEdits\",recipe.Mode);Assert.AreEqual(oldVersion,recipe.OriginVersionId);Assert.HasCount(1,recipe.Stack!.Nodes);\r",
+            "        CollectionAssert.AreEqual(Pixels(expected),Pixels(workspace.Editor.MatchedImage!));\r",
+            "        CollectionAssert.AreEqual(Pixels(expected),Pixels(reopened.Editor.MatchedImage!));Assert.AreEqual(120,reopened.ActiveTarget!.LinearRawMaster!.Image.Width);\r",
+            "                Record(\"eviction-active-reference\");Assert.IsTrue(float.IsFinite(active.Image.Rgb32.Span[0]));\r",
+            "                Assert.Throws<InvalidOperationException>(()=>StudioGlobalResources.ReserveWork(StudioGlobalResources.TotalLimit));\r",
+            "            workspaces[0].QuickExportFormat=StudioExportFormat.Tiff;await workspaces[0].ExportSelectedCommand.ExecuteAsync(null);Assert.AreEqual(ReferenceExportStatus.Succeeded,workspaces[0].ActiveTarget!.ExportStatus,workspaces[0].ActiveTarget.Error);Record(\"export\");\r"
+          ]
+        }
+      ],
+      "required": "same authorized original corpus plus explicit opt-in evidence/output and dependencies",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Performance output opt-in required.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/BatchElevenColorContractTests.cs",
+          "method": "SeparatePureTiffEncodingValidationHashAndNodeCosts",
+          "lines": [
+            "        var evidence=Environment.GetEnvironmentVariable(\"KITAO_BATCH11_EVIDENCE\");if(string.IsNullOrEmpty(evidence)){Assert.Inconclusive(\"Performance output opt-in required.\");return;}\r",
+            "        finally{if(File.Exists(path))File.Delete(path);}\r",
+            "        foreach(var value in hq.Rgb32.ToArray())Assert.AreEqual(encoded,value,1e-6);\r",
+            "        Assert.AreNotEqual(.5f,hq.Rgb32.Span[0]);\r"
+          ]
+        }
+      ],
+      "required": "new isolatedfixture/output opt-in or realcapturedP2run",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "DIAGNOSTIC_NOT_AUTOMATIC_LEGACY_RELEASE_BLOCKER",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.BatchElevenRealTests.BatchElevenAuthorizedRawMemoryAndColor",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Explicit authorized company fixtures required.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/BatchElevenRealTests.cs",
+          "method": "BatchElevenAuthorizedRawMemoryAndColor",
+          "lines": [
+            "        var corpus=Environment.GetEnvironmentVariable(\"KITAO_BATCH11_CORPUS\");var evidence=Environment.GetEnvironmentVariable(\"KITAO_BATCH11_EVIDENCE\");\r",
+            "        if(string.IsNullOrEmpty(corpus)||string.IsNullOrEmpty(evidence)){Assert.Inconclusive(\"Explicit authorized company fixtures required.\");return;}\r",
+            "        var fixtures=new[]{(\"TNAN8886.CR3\",\"B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401\"),(\"DSC09916.ARW\",\"6F596BB234EE5DE206C66594BC84205349C363FD6A89AE188FF76DAB7C5E53B9\"),(\"DSCF0347.RAF\",\"52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865\")};\r",
+            "        foreach(var (name,hash) in fixtures)\r",
+            "            using var temp=new Temp();var source=Path.Combine(corpus,name);var rows=new List<object>();var watch=Stopwatch.StartNew();double last=0;\r",
+            "                using(var input=File.OpenRead(source))Assert.AreEqual(hash,Convert.ToHexString(await SHA256.HashDataAsync(input)));Stage(\"source-hash\");\r",
+            "                var original=RawImageOrientation.NormalizePixels(decoded.Image);Assert.IsFalse(original.Rgb32.Span.SequenceEqual(master.Image.Rgb32.Span));\r",
+            "                var colorSink=0d;for(var y=0;y<master.Image.Height;y++)for(var x=0;x<master.Image.Width;x++){var i=(y*master.Image.Width+x)*3;var rgb=master.Image.Rgb32.Span;colorSink+=InstantFilmPipeline.Apply(new(rgb[i],rgb[i+1],rgb[i+2]),(x+.5)/master.Image.Width,(y+.5)/master.Image.Height,definition.InstantFilm!).X;}Stage(\"instant-effects-only-full-source-scan\");Assert.IsTrue(double.IsFinite(colorSink));\r",
+            "                var restored=JsonSerializer.Deserialize<ProfessionalRawDefinition>(JsonSerializer.Serialize(definition))!;CollectionAssert.AreEqual(block.Rgb32.ToArray(),ProfessionalRawPipeline.RenderRegion(master,restored,50,50,256,256).Rgb32.ToArray());Stage(\"definition-reopen-block-validation\");\r",
+            "                using(var unchanged=File.OpenRead(source))Assert.AreEqual(hash,Convert.ToHexString(await SHA256.HashDataAsync(unchanged)));Stage(\"source-unchanged-hash\");\r",
+            "                var w=new ReferenceColorWorkspaceViewModel(new Dialogs(temp.Root));workspaces.Add(w);await w.LoadTargetAsync(Path.Combine(corpus,\"TNAN8886.CR3\"));Assert.IsNotNull(w.ActiveTarget?.RawMaster,w.StatusText);\r",
+            "                await w.GenerateInstantFilmAsync(false);Assert.AreEqual(6,w.ActiveTarget!.RawDefinition?.ProcessingVersion,w.StatusText);Sample(\"workspace-\"+i+\"-master-hq\");\r"
+          ]
+        }
+      ],
+      "required": "same authorized original corpus plus explicit opt-in evidence/output and dependencies",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Authorized local corpus opt-in required.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/BatchSevenRawProductTests.cs",
+          "method": "AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+          "lines": [
+            "        var corpus=Environment.GetEnvironmentVariable(\"KITAO_BATCH07_CORPUS\");var evidence=Environment.GetEnvironmentVariable(\"KITAO_BATCH07_EVIDENCE\");\r",
+            "        if(string.IsNullOrEmpty(corpus)||string.IsNullOrEmpty(evidence)){Assert.Inconclusive(\"Authorized local corpus opt-in required.\");return;}\r",
+            "                var input=Path.Combine(root,name);File.Copy(Path.Combine(corpus,name),input);var hash=Convert.ToHexString(SHA256.HashData(await File.ReadAllBytesAsync(input)));\r",
+            "                using var workspace=new ReferenceColorWorkspaceViewModel(new Dialogs(root));await workspace.LoadTargetAsync(input);await workspace.CreateProfessionalRawCommand.ExecuteAsync(null);Assert.IsTrue(workspace.IsProfessionalRaw,workspace.StatusText);\r",
+            "                var timer=System.Diagnostics.Stopwatch.StartNew();await workspace.UpdateProfessionalViewportAsync(new(200,200,512,512),1,1);var detailMs=timer.ElapsedMilliseconds;Assert.AreEqual(512,workspace.Editor.IndependentDetailMatched!.PixelWidth);\r",
+            "                    workspace.QuickExportFormat=format;timer.Restart();await workspace.ExportSelectedCommand.ExecuteAsync(null);var exportMs=timer.ElapsedMilliseconds;Assert.AreEqual(ReferenceExportStatus.Succeeded,workspace.ActiveTarget!.ExportStatus,format+\" \"+workspace.ActiveTarget.Error);\r",
+            "                    var output=workspace.ActiveTarget.OutputPath!;var actual=ProfessionalRawExport.Inspect(output,workspace.ActiveTarget.LinearRawMaster!,workspace.ActiveTarget.RawDefinition!,format);var receipt=await ExportRecovery.ReadAsync(output+\".kitao-export.json\");Assert.AreEqual(actual.BitDepth,receipt.RecipeSnapshot!.BitDepth);Assert.IsNotNull(receipt.RecipeSnapshot.OutputValidation);records.Add(new{model=workspace.ActiveTarget.RawInput!.Model,format=format.ToString(),actual,detailMs,exportMs,peakWorkingSet=System.Diagnostics.Process.GetCurrentProcess().PeakWorkingSet64,receipt.OutputHash});\r",
+            "                var publish=new PublishingExportService(new WpfPublishingRenderer());string? intermediate=null;workspace.OpenPublishing=paths=>intermediate=paths.Single();await workspace.PreparePublishingCommand.ExecuteAsync(null);Assert.IsNotNull(intermediate);\r",
+            "                    var result=await publish.ExportAsync(Guid.NewGuid(),new([intermediate!],Path.Combine(root,\"publish-\"+format),options));Assert.AreEqual(PublishingItemState.Completed,result.Items[0].State,result.Items[0].ErrorMessage);var receipt=await ExportRecovery.ReadAsync(result.Items[0].DestinationPath+\".kitao-export.json\");Assert.IsNotNull(receipt.RecipeSnapshot!.RawDefinition);Assert.IsNotNull(receipt.RecipeSnapshot.OutputValidation);records.Add(new{model=workspace.ActiveTarget!.RawInput!.Model,publishing=format.ToString(),receipt.RecipeSnapshot,receipt.OutputHash});\r",
+            "                Assert.AreEqual(hash,Convert.ToHexString(SHA256.HashData(await File.ReadAllBytesAsync(input))));\r",
+            "            var master=Master(97,73);var occupied=Path.Combine(root,\"occupied\");await File.WriteAllBytesAsync(occupied,[7,8,9]);await Assert.ThrowsAsync<IOException>(()=>ProfessionalRawExport.WriteAsync(master,new(),occupied,StudioExportFormat.Jpeg));CollectionAssert.AreEqual(new byte[]{7,8,9},await File.ReadAllBytesAsync(occupied));\r",
+            "            foreach(var format in new[]{StudioExportFormat.Jpeg,StudioExportFormat.Png,StudioExportFormat.Tiff}){using var cancelled=new CancellationTokenSource();var path=Path.Combine(root,format.ToString());await Assert.ThrowsAsync<OperationCanceledException>(()=>ProfessionalRawExport.WriteAsync(master,new(),path,format,cancelled.Token,stage:stage=>{if(stage==\"Encoded\")cancelled.Cancel();}));Assert.IsFalse(File.Exists(path));Assert.AreEqual(0,Directory.GetFiles(root,\"*.tmp\").Length);}\r",
+            "            Assert.AreEqual(1,ProfessionalRawResourcePolicy.HeavyWork.CurrentCount);\r"
+          ]
+        }
+      ],
+      "required": "same authorized original corpus plus explicit opt-in evidence/output and dependencies",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Offscreen artifact output opt-in required.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/BatchTenCameraKeyframesTests.cs",
+          "method": "OffscreenSyntheticKeyframesNeverLaunchDesktop",
+          "lines": [
+            "        var output=Environment.GetEnvironmentVariable(\"KITAO_BATCH10_FRAMES\");if(string.IsNullOrWhiteSpace(output)){Assert.Inconclusive(\"Offscreen artifact output opt-in required.\");return;}\r",
+            "                    var frame=InstantDevelopmentTimeline.Sample(state.Item2,true);Assert.AreEqual(state.Item2<1.35,frame.CameraVisible);\r"
+          ]
+        }
+      ],
+      "required": "new isolatedfixture/output opt-in or realcapturedP2run",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "DIAGNOSTIC_NOT_AUTOMATIC_LEGACY_RELEASE_BLOCKER",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Explicit authorized company fixtures required.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/BatchTenLegacyRawProductTests.cs",
+          "method": "AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+          "lines": [
+            "        var corpus=Environment.GetEnvironmentVariable(\"KITAO_BATCH10_CORPUS\");var evidence=Environment.GetEnvironmentVariable(\"KITAO_BATCH10_EVIDENCE\");\r",
+            "        if(string.IsNullOrEmpty(corpus)||string.IsNullOrEmpty(evidence)){Assert.Inconclusive(\"Explicit authorized company fixtures required.\");return;}\r",
+            "        var fixtures=new[]{(\"TNAN8886.CR3\",\"B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401\"),(\"DSC09916.ARW\",\"6F596BB234EE5DE206C66594BC84205349C363FD6A89AE188FF76DAB7C5E53B9\"),(\"DSCF0347.RAF\",\"52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865\")};\r",
+            "        foreach(var (name,hash) in fixtures)\r",
+            "            using var temp=new Temp();var source=Path.Combine(corpus,name);var rows=new List<object>();var watch=Stopwatch.StartNew();double last=0;\r",
+            "                using(var input=File.OpenRead(source))Assert.AreEqual(hash,Convert.ToHexString(await SHA256.HashDataAsync(input)));Stage(\"source-hash\");\r",
+            "                var original=RawImageOrientation.NormalizePixels(decoded.Image);Assert.IsFalse(original.Rgb32.Span.SequenceEqual(master.Image.Rgb32.Span));\r",
+            "                var colorSink=0d;for(var y=0;y<master.Image.Height;y++)for(var x=0;x<master.Image.Width;x++){var i=(y*master.Image.Width+x)*3;var rgb=master.Image.Rgb32.Span;colorSink+=InstantFilmPipeline.Apply(new(rgb[i],rgb[i+1],rgb[i+2]),(x+.5)/master.Image.Width,(y+.5)/master.Image.Height,definition.InstantFilm!).X;}Stage(\"instant-effects-only-full-source-scan\");Assert.IsTrue(double.IsFinite(colorSink));\r",
+            "                var restored=JsonSerializer.Deserialize<ProfessionalRawDefinition>(JsonSerializer.Serialize(definition))!;CollectionAssert.AreEqual(block.Rgb32.ToArray(),ProfessionalRawPipeline.RenderRegion(master,restored,50,50,256,256).Rgb32.ToArray());Stage(\"definition-reopen-block-validation\");\r",
+            "                using(var unchanged=File.OpenRead(source))Assert.AreEqual(hash,Convert.ToHexString(await SHA256.HashDataAsync(unchanged)));Stage(\"source-unchanged-hash\");\r",
+            "                var w=new ReferenceColorWorkspaceViewModel(new Dialogs(temp.Root));workspaces.Add(w);await w.LoadTargetAsync(Path.Combine(corpus,\"TNAN8886.CR3\"));Assert.IsNotNull(w.ActiveTarget?.RawMaster,w.StatusText);\r",
+            "                await w.GenerateInstantFilmAsync(false);Assert.AreEqual(6,w.ActiveTarget!.RawDefinition?.ProcessingVersion,w.StatusText);Sample(\"workspace-\"+i+\"-master-hq\");\r",
+            "            workspaces[1].Dispose();using(var reopen=new ReferenceColorWorkspaceViewModel(new Dialogs(temp.Root))){await reopen.LoadSessionAsync(saved);Assert.AreEqual(6,reopen.ActiveTarget!.RawDefinition!.ProcessingVersion);CollectionAssert.AreEqual(sessionPixels,Profe"
+          ]
+        }
+      ],
+      "required": "same authorized original corpus plus explicit opt-in evidence/output and dependencies",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Authorized real JPEG corpus requires explicit opt-in.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/ColorStudioToolExportParityTests.cs",
+          "method": "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+          "lines": [
+            "        var inputRoot = Environment.GetEnvironmentVariable(\"PIXEL_TART_NEW_STUDIO_CORPUS\"); var outputRoot = Environment.GetEnvironmentVariable(\"PIXEL_TART_NEW_STUDIO_CORPUS_OUTPUT\");\r",
+            "        if (string.IsNullOrEmpty(inputRoot) || string.IsNullOrEmpty(outputRoot)) { Assert.Inconclusive(\"Authorized real JPEG corpus requires explicit opt-in.\"); return; }\r",
+            "            CollectionAssert.AreEqual(expected, Bgr(StudioQuickExport.Load(exact)));\r",
+            "            Assert.IsLessThan(4, deltas.Average()); Assert.IsFalse(Bgr(proxy).SequenceEqual(expected));\r",
+            "            await File.WriteAllTextAsync(Path.Combine(outputRoot, \"REAL_JPEG_TOOL_MATRIX.json\"), JsonSerializer.Serialize(new { sourceHead = Environment.GetEnvironmentVariable(\"PIXEL_TART_TEST_SOURCE_HEAD\") ?? \"WORKTREE\", cases = rows }, new JsonSerializerOptions { WriteIndented = true }));\r",
+            "        Assert.AreEqual(1, editor.FilmSettings.SpatialVersion);\r",
+            "        Assert.AreEqual(1, editor.AdjustmentStack.Nodes[0].FilmSettings!.SpatialVersion);\r",
+            "        Assert.AreEqual(2, editor.FilmSettings.SpatialVersion);\r",
+            "        Assert.AreEqual(2, editor.AdjustmentStack.Nodes[0].FilmSettings!.SpatialVersion);\r",
+            "        Assert.AreEqual(1, editor.FilmSettings.SpatialVersion); Assert.AreEqual(40, editor.FilmGrainAmount);\r",
+            "        Assert.IsTrue(film.Enabled); Assert.IsTrue(film.FilmSettings!.Enabled); Assert.AreEqual(\"PT-W01\", film.FilmSettings.ProfileId);\r",
+            "        Assert.IsFalse(withoutFilm.SequenceEqual(withFilm));\r",
+            "        editor.FilmEnabled = false; Assert.IsFalse(editor.AdjustmentStack.Nodes.Single(n => n.Type == ColorStudioNodeType.Film).Enabled);\r",
+            "        CollectionAssert.AreEqual(withoutFilm, Bgr(ColorStudioBitmapRenderer.Render(image, editor.AdjustmentStack, null)));\r",
+            "        editor.UndoAdjustmentCommand.Execute(null); Assert.IsTrue(editor.FilmEnabled);\r",
+            "        CollectionAssert.AreEqual(withFilm, Bgr(ColorStudioBitmapRenderer.Render(image, editor.AdjustmentStack, null)));\r",
+            "        Assert.IsFalse(editor.FilmEnabled); Assert.IsFalse(editor.SelectedAdjustmentNode!.Enabled);\r",
+            "        Assert.IsTrue(editor.FilmEnabled); Assert.HasCount(1, editor.AdjustmentStack.Nodes.Where(n => n.Type == ColorStudioNodeType.Film));\r",
+            "        CollectionAssert.AreEqual(withFilm, Bgr(ColorStudioBitmapRenderer.Render(image, editor.AdjustmentStack, null)), \"Old stack with standalone film is migrated into one real film node.\");\r"
+          ]
+        }
+      ],
+      "required": "same authorized original corpus plus explicit opt-in evidence/output and dependencies",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Opt-in production peer evidence is not enabled in this bounded regression run.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/PlanningAutomationContractTests.cs",
+          "method": "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+          "lines": [
+            "        if (Environment.GetEnvironmentVariable(\"PIXEL_TART_HUMAN_ACCEPTANCE\") != \"1\")\r",
+            "            Assert.Inconclusive(\"Opt-in production peer evidence is not enabled in this bounded regression run.\");\r",
+            "                Assert.AreEqual(\"1\", Environment.GetEnvironmentVariable(\"PIXEL_TART_HUMAN_ACCEPTANCE\"));\r",
+            "                Assert.IsFalse(string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable(\"PIXEL_TART_ACCEPTANCE_ROOT\")));\r",
+            "        Assert.IsTrue(thread.Join(TimeSpan.FromSeconds(180)), \"Production peer test timeout\");\r",
+            "        Assert.IsTrue(completed);\r",
+            "        var output = Environment.GetEnvironmentVariable(\"PIXEL_TART_CONTRACT_EVIDENCE\") ?? throw new InvalidOperationException(\"Evidence directory required\");\r",
+            "            Assert.AreEqual(AutomationControlType.Pane, Peer(nav).GetAutomationControlType());\r",
+            "                Assert.AreEqual(AutomationControlType.Button, match.GetAutomationControlType()); Assert.IsNotNull(match.GetPattern(PatternInterface.Invoke));\r"
+          ]
+        }
+      ],
+      "required": "isolatedcaptureoutput and/or manualbaselineapproval; realDPIseparate",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "physicalDPI/WPS/visualapproval separate fromautomaticcapture",
+      "photoReleaseBlocker": "BLOCKS_VISUAL_OR_NATIVE_APPROVAL_IF_CLAIMED",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Set authorized batch06 corpus and evidence directory; not a synthetic test.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/ProfessionalRawWorkspaceTests.cs",
+          "method": "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+          "lines": [
+            "        var corpus=Environment.GetEnvironmentVariable(\"KITAO_BATCH06_CORPUS\");var evidence=Environment.GetEnvironmentVariable(\"KITAO_BATCH06_EVIDENCE\");\r",
+            "        if(string.IsNullOrEmpty(corpus)||string.IsNullOrEmpty(evidence)){Assert.Inconclusive(\"Set authorized batch06 corpus and evidence directory; not a synthetic test.\");return;}\r",
+            "                var input=Path.Combine(root,name);File.Copy(Path.Combine(corpus,name),input);var hash=Convert.ToHexString(SHA256.HashData(await File.ReadAllBytesAsync(input)));\r",
+            "                await workspace.LoadTargetAsync(input);await workspace.CreateProfessionalRawCommand.ExecuteAsync(null);Assert.IsTrue(workspace.IsProfessionalRaw,workspace.StatusText);\r",
+            "                workspace.RawExposureEv=1;await workspace.ApplyProfessionalRawCommand.ExecuteAsync(null);Assert.AreEqual(1,workspace.ActiveTarget!.RawDefinition!.ExposureEv);\r",
+            "                CollectionAssert.AreEqual(Pixels(expectedImage),Pixels(workspace.Editor.MatchedImage!));\r",
+            "                var session=Path.Combine(root,\"session.ptstudio.json\");await workspace.SaveSessionAsync(session);await workspace.ExportSelectedCommand.ExecuteAsync(null);Assert.AreEqual(ReferenceExportStatus.Succeeded,workspace.ActiveTarget.ExportStatus,workspace.ActiveTarget.Error);\r",
+            "                using(var stream=File.OpenRead(workspace.ActiveTarget.OutputPath!)){var tiff=TiffReadBack.Read(stream);Assert.AreEqual(16,tiff.BitsPerSample);Assert.IsTrue(tiff.IccProfile.Length>0);Assert.AreEqual(expected.Orientation,tiff.Orientation);}\r",
+            "                var receipt=await ExportRecovery.ReadAsync(workspace.ActiveTarget.OutputPath+\".kitao-export.json\");Assert.AreEqual(workspace.ActiveTarget.RawDefinition,receipt.RecipeSnapshot!.RawDefinition);Assert.AreEqual(4,receipt.ProcessingVersion);\r",
+            "                using var restored=new ReferenceColorWorkspaceViewModel(new Dialogs(root),versionRepository:versions);await restored.LoadSessionAsync(session);Assert.IsTrue(restored.IsProfessionalRaw,restored.StatusText);CollectionAssert.AreEqual(Pixels(workspace.Editor.MatchedImage!),Pixels(restored.Editor.MatchedImage!));\r",
+            "                Assert.AreEqual(hash,Convert.ToHexString(SHA256.HashData(await File.ReadAllBytesAsync(input))));\r"
+          ]
+        }
+      ],
+      "required": "same authorized original corpus plus explicit opt-in evidence/output and dependencies",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.RealAppStartupIntegrationTests.ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Opt-in production startup evidence is not enabled in this bounded regression run.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/RealAppStartupIntegrationTests.cs",
+          "method": "ProductionCompositionAndToolCatalog_RealAppLoadedAndNavigated",
+          "lines": [
+            "        if (Environment.GetEnvironmentVariable(\"PIXEL_TART_HUMAN_ACCEPTANCE\") != \"1\")\r",
+            "            Assert.Inconclusive(\"Opt-in production startup evidence is not enabled in this bounded regression run.\");\r",
+            "                Require(Environment.GetEnvironmentVariable(\"PIXEL_TART_HUMAN_ACCEPTANCE\") == \"1\",\r",
+            "                Require(!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable(\"PIXEL_TART_ACCEPTANCE_ROOT\")),\r",
+            "                    \"Explicit isolated root required for synthetic fixtures.\");\r",
+            "                Require(migration.Success, \"Synthetic fixture database initialization failed\");\r",
+            "                        var screenshotRoot = Environment.GetEnvironmentVariable(\"PIXEL_TART_NAVIGATION_EVIDENCE\");\r"
+          ]
+        }
+      ],
+      "required": "isolatedcaptureoutput and/or manualbaselineapproval; realDPIseparate",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "physicalDPI/WPS/visualapproval separate fromautomaticcapture",
+      "photoReleaseBlocker": "BLOCKS_VISUAL_OR_NATIVE_APPROVAL_IF_CLAIMED",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests.CompanyRealRawProductAcceptanceGate",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。NOT RUN — real camera fixture directory unavailable; set PIXEL_TART_COMPANY_RAW_ROOT.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/RealCameraProductAcceptanceTests.cs",
+          "method": "CompanyRealRawProductAcceptanceGate",
+          "lines": [
+            "        var fixtureRoot = Environment.GetEnvironmentVariable(\"PIXEL_TART_COMPANY_RAW_ROOT\");\r",
+            "        var evidenceRoot = Environment.GetEnvironmentVariable(\"PIXEL_TART_COMPANY_RAW_EVIDENCE_ROOT\");\r",
+            "        if (string.IsNullOrWhiteSpace(fixtureRoot) || !Directory.Exists(fixtureRoot))\r",
+            "            Assert.Inconclusive(\"NOT RUN — real camera fixture directory unavailable; set PIXEL_TART_COMPANY_RAW_ROOT.\");\r",
+            "            Assert.Inconclusive(\"NOT RUN — explicitly set an external PIXEL_TART_COMPANY_RAW_EVIDENCE_ROOT.\");\r",
+            "        fixtureRoot = Path.GetFullPath(fixtureRoot);\r",
+            "        Assert.IsFalse(evidenceRoot.StartsWith(fixtureRoot + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase));\r",
+            "        Assert.IsFalse(IsInsideGitCheckout(fixtureRoot), \"Private RAW binaries must live outside the checkout.\");\r",
+            "        Assert.IsFalse(IsInsideGitCheckout(evidenceRoot), \"Private TIFF/PNG results must live outside the checkout.\");\r",
+            "        var fixtures = Directory.EnumerateFiles(fixtureRoot, \"*\", SearchOption.AllDirectories)\r",
+            "        if (fixtures.Length < 2) { Assert.Inconclusive(\"NOT RUN — at least two independent RAW fixtures required.\"); return; }\r",
+            "        foreach (var path in fixtures)\r"
+          ]
+        }
+      ],
+      "required": "same authorized original corpus plus explicit opt-in evidence/output and dependencies",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Set PIXEL_TART_FILM_EVIDENCE to collect review evidence.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/ReferenceFilmVisualEvidenceTests.cs",
+          "method": "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+          "lines": [
+            "        var output = Environment.GetEnvironmentVariable(\"PIXEL_TART_FILM_EVIDENCE\");\r",
+            "        if (string.IsNullOrWhiteSpace(output)) Assert.Inconclusive(\"Set PIXEL_TART_FILM_EVIDENCE to collect review evidence.\");\r",
+            "        var source = Fixture(1200, 800);\r",
+            "    private static VisualPixelBuffer Fixture(int width, int height)\r"
+          ]
+        }
+      ],
+      "required": "isolatedcaptureoutput and/or manualbaselineapproval; realDPIseparate",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "physicalDPI/WPS/visualapproval separate fromautomaticcapture",
+      "photoReleaseBlocker": "BLOCKS_VISUAL_OR_NATIVE_APPROVAL_IF_CLAIMED",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Set review evidence paths.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/ReferenceFilmVisualEvidenceTests.cs",
+          "method": "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+          "lines": [
+            "        var source = Environment.GetEnvironmentVariable(\"PIXEL_TART_REVIEW_SOURCE\");\r",
+            "        var output = Environment.GetEnvironmentVariable(\"PIXEL_TART_REVIEW_OUTPUT\");\r",
+            "        var closeOutput = Environment.GetEnvironmentVariable(\"PIXEL_TART_CLOSE_EVIDENCE\");\r",
+            "        if (string.IsNullOrWhiteSpace(source) || string.IsNullOrWhiteSpace(output) || string.IsNullOrWhiteSpace(closeOutput)) Assert.Inconclusive(\"Set review evidence paths.\");\r",
+            "        File.Copy(Path.Combine(Environment.GetEnvironmentVariable(\"PIXEL_TART_FILM_EVIDENCE\")!, \"07_FILM_EFFECTS.png\"), Path.Combine(output!, \"07_FILM_EFFECTS.png\"), true);\r",
+            "        var output = Environment.GetEnvironmentVariable(\"PIXEL_TART_FILM_EVIDENCE\");\r",
+            "        if (string.IsNullOrWhiteSpace(output)) Assert.Inconclusive(\"Set PIXEL_TART_FILM_EVIDENCE to collect review evidence.\");\r",
+            "        var source = Fixture(1200, 800);\r"
+          ]
+        }
+      ],
+      "required": "isolatedcaptureoutput and/or manualbaselineapproval; realDPIseparate",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "physicalDPI/WPS/visualapproval separate fromautomaticcapture",
+      "photoReleaseBlocker": "BLOCKS_VISUAL_OR_NATIVE_APPROVAL_IF_CLAIMED",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Set an isolated current-run output directory.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/ReferenceWorkspaceDpiEvidenceTests.cs",
+          "method": "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+          "lines": [
+            "        var output = Environment.GetEnvironmentVariable(\"PIXEL_TART_PHOTOGRAPHY_DPI_OUTPUT\");\r",
+            "        if (string.IsNullOrWhiteSpace(output)) Assert.Inconclusive(\"Set an isolated current-run output directory.\");\r",
+            "        Assert.IsTrue(thread.Join(TimeSpan.FromSeconds(40)), \"In-process DPI render exceeded 40 seconds.\");\r",
+            "            Assert.IsTrue(File.Exists(Path.Combine(output!, $\"ReferenceBatch-1180x720-{percent}.png\")));\r"
+          ]
+        }
+      ],
+      "required": "isolatedcaptureoutput and/or manualbaselineapproval; realDPIseparate",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "physicalDPI/WPS/visualapproval separate fromautomaticcapture",
+      "photoReleaseBlocker": "BLOCKS_VISUAL_OR_NATIVE_APPROVAL_IF_CLAIMED",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Authorized real measurement opt-in required.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/SpatialClosureRealTests.cs",
+          "method": "RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference",
+          "lines": [
+            "        var evidence=Environment.GetEnvironmentVariable(\"KITAO_SPATIAL_EVIDENCE\");if(string.IsNullOrWhiteSpace(evidence)){Assert.Inconclusive(\"Authorized real measurement opt-in required.\");return;}\r",
+            "                else{using var admission=StudioGlobalResources.ReserveWork(referenceEstimate);watch.Restart();var expected=pipeline.Render(source,node.Type==ColorStudioNodeType.ReferenceMatch?look:null,new([node])).ProcessingPixels!;fullMs=watch.Elapsed.TotalMilliseconds;double max=0;for(var i=0;i<actual.Rgb32.Length;i++)max=Math.Max(max,Math.Abs(actual.Rgb32.Span[i]-expected.Rgb32.Span[i]));maximum=max;Assert.IsLessThanOrEqualTo(node.Type==ColorStudioNodeType.Details||node.Type==ColorStudioNodeType.Develop?2e-6:0,max);oracle=\"FULL_REAL_PIXELS_COMPARED\";}\r",
+            "        Assert.AreEqual(5,rows.Count);Assert.AreEqual(0,failures,\"Per-node failed/rejected outcomes must not be promoted to test pass.\");\r"
+          ]
+        }
+      ],
+      "required": "same authorized original corpus plus explicit opt-in evidence/output and dependencies",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Reviewed official candidate opt-in required.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/SpatialClosureRealTests.cs",
+          "method": "OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback",
+          "lines": [
+            "        var executable=Environment.GetEnvironmentVariable(\"KITAO_REVIEWED_LIBRAW\");var evidence=Environment.GetEnvironmentVariable(\"KITAO_SPATIAL_EVIDENCE\");\r",
+            "        if(string.IsNullOrWhiteSpace(executable)||string.IsNullOrWhiteSpace(evidence)){Assert.Inconclusive(\"Reviewed official candidate opt-in required.\");return;}\r",
+            "            var path=Path.Combine(\"D:/AI AGENT/PixelTart-TestAssets/CompanyRAW\",name);Assert.AreEqual(sourceHash,Hash(path));var watch=Stopwatch.StartNew();\r",
+            "            try{var actual=await ReviewedLibRawCandidate.DecodeAsync(path,config);Assert.AreEqual(\"16\",actual.Pixels.SourceBitDepth);Assert.AreEqual(sourceHash,actual.SourceSha256);Assert.IsGreaterThan(3000,actual.Pixels.Width);Assert.IsGreaterThan(3000,actual.Pixels.Height);results.Add(new{name,status=\"PASS\",actual.Pixels.Width,actual.Pixels.Height,actual.DecoderVersion,actual.NumericDomain,milliseconds=watch.Elapsed.TotalMilliseconds,pixelHash=Convert.ToHexString(SHA256.HashData(System.Runtime.InteropServices.MemoryMarshal.AsBytes(actual.Pixels.Rgb32.Span))),sourceUnchanged=Hash(path)==sourceHash});}\r",
+            "        await Assert.ThrowsAsync<InvalidDataException>(()=>ReviewedLibRawCandidate.DecodeAsync(\"D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/DSC09916.ARW\",config with{ExecutableSha256=new string('0',64)}));\r",
+            "        using var cancelled=new CancellationTokenSource();cancelled.Cancel();await Assert.ThrowsAsync<OperationCanceledException>(()=>ReviewedLibRawCandidate.DecodeAsync(\"D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/DSC09916.ARW\",config,cancelled.Token));\r",
+            "        var evidence=Environment.GetEnvironmentVariable(\"KITAO_SPATIAL_EVIDENCE\");if(string.IsNullOrWhiteSpace(evidence)){Assert.Inconclusive(\"Authorized real measurement opt-in required.\");return;}\r",
+            "                else{using var admission=StudioGlobalResources.ReserveWork(referenceEstimate);watch.Restart();var expected=pipeline.Render(source,node.Type==ColorStudioNodeType.ReferenceMatch?look:null,new([node])).ProcessingPixels!;fullMs=watch.Elapsed.TotalMilliseconds;double max=0;for(var i=0;i<actual.Rgb32.Length;i++)max=Math.Max(max,Math.Abs(actual.Rgb32.Span[i]-expected.Rgb32.Span[i]));maximum=max;Assert.IsLessThanOrEqualTo(node.Type==ColorStudioNodeType.Details||node.Type==Co"
+          ]
+        }
+      ],
+      "required": "same authorized original corpus plus explicit opt-in evidence/output and dependencies",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Opt-in automatic screenshot evidence; not native UI acceptance.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/StudioRebuildVisualEvidenceTests.cs",
+          "method": "RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+          "lines": [
+            "        var output = Environment.GetEnvironmentVariable(\"PIXEL_TART_REBUILD_VISUAL_OUTPUT\");\r",
+            "        if (string.IsNullOrWhiteSpace(output)) Assert.Inconclusive(\"Opt-in automatic screenshot evidence; not native UI acceptance.\");\r",
+            "            Assert.IsNotNull(workspace.PreviewHistogram);\r",
+            "            Assert.IsNotNull(navigator.Image);\r",
+            "                    Assert.IsGreaterThan(200, ((FrameworkElement)view.FindName(\"PreviewCanvas\")).ActualWidth);\r"
+          ]
+        }
+      ],
+      "required": "isolatedcaptureoutput and/or manualbaselineapproval; realDPIseparate",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "physicalDPI/WPS/visualapproval separate fromautomaticcapture",
+      "photoReleaseBlocker": "BLOCKS_VISUAL_OR_NATIVE_APPROVAL_IF_CLAIMED",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Opt-in visual evidence is not enabled in this bounded regression run.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/StudioV2PremiumPrototypeEvidenceTests.cs",
+          "method": "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+          "lines": [
+            "        if (Environment.GetEnvironmentVariable(\"PIXEL_TART_STUDIO_V2_EVIDENCE\") != \"1\")\r",
+            "            Assert.Inconclusive(\"Opt-in visual evidence is not enabled in this bounded regression run.\");\r",
+            "                var rootPath = Environment.GetEnvironmentVariable(\"PIXEL_TART_ACCEPTANCE_ROOT\")\r",
+            "                var output = Environment.GetEnvironmentVariable(\"PIXEL_TART_STUDIO_V2_OUTPUT\")\r",
+            "                        var fixtureDirectory = Path.Combine(rootPath, \"SyntheticAssets\");\r",
+            "                        Directory.CreateDirectory(fixtureDirectory);\r",
+            "                        for (var i = 0; i < 12; i++) CreateFixture(Path.Combine(fixtureDirectory, $\"premium-shot-{i + 1:00}.png\"), i);\r",
+            "                        var container = Directory.Exists(containerPath)\r",
+            "                        await host.CurrentPage!.ViewModel.ImportDemoDirectoryAsync(fixtureDirectory);\r",
+            "                        await vm.ReferenceColorPage.LoadTargetAsync(Path.Combine(fixtureDirectory, \"premium-shot-01.png\"));\r",
+            "                        var reference = new BitmapImage(new Uri(Path.Combine(fixtureDirectory, \"premium-shot-02.png\")));\r"
+          ]
+        }
+      ],
+      "required": "isolatedcaptureoutput and/or manualbaselineapproval; realDPIseparate",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "physicalDPI/WPS/visualapproval separate fromautomaticcapture",
+      "photoReleaseBlocker": "BLOCKS_VISUAL_OR_NATIVE_APPROVAL_IF_CLAIMED",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。BASELINE_MISSING: capture current UI before requesting approval.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/UiVisualRegressionTests.cs",
+          "method": "BaselineGuard_RequiresExplicitApproval",
+          "lines": [
+            "        var approved = Environment.GetEnvironmentVariable(\"PIXEL_TART_APPROVE_VISUAL_BASELINE\") == \"1\";\r",
+            "        var baselineCount = Directory.EnumerateFiles(Path.Combine(root, \"Baselines\"), \"*.png\", SearchOption.AllDirectories).Count();\r",
+            "        if (baselineCount == 0) Assert.Inconclusive(\"BASELINE_MISSING: capture current UI before requesting approval.\");\r",
+            "        Assert.IsFalse(approved, \"Baseline approval is an explicit human action and must not be enabled in the default test run.\");\r",
+            "        if (!File.Exists(path)) Assert.Inconclusive(\"SCREENSHOT_MATRIX.json has not been generated by the opt-in capture.\");\r",
+            "        Assert.HasCount(33, matrix);\r",
+            "        Assert.IsTrue(matrix.All(item => item.TryGetProperty(\"Status\", out var status) && status.GetString() is \"CAPTURED\" or \"FAILED\" or \"NOT_REACHABLE\"));\r"
+          ]
+        }
+      ],
+      "required": "isolatedcaptureoutput and/or manualbaselineapproval; realDPIseparate",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "EXPLICIT_BASELINE_APPROVAL_REQUIRED",
+      "photoReleaseBlocker": "BLOCKS_VISUAL_OR_NATIVE_APPROVAL_IF_CLAIMED",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "WPF",
+      "name": "RAWSelectionAssistant.WpfTests.WholeAppVisualAcceptanceTests.ProductionApp_AllRoutes_RenderReviewInventory",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Opt-in whole-app visual evidence is not enabled in this bounded regression run.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.WpfTests/WholeAppVisualAcceptanceTests.cs",
+          "method": "ProductionApp_AllRoutes_RenderReviewInventory",
+          "lines": [
+            "        if (Environment.GetEnvironmentVariable(\"PIXEL_TART_HUMAN_ACCEPTANCE\") != \"1\")\r",
+            "            Assert.Inconclusive(\"Opt-in whole-app visual evidence is not enabled in this bounded regression run.\");\r",
+            "                Assert.AreEqual(\"1\", Environment.GetEnvironmentVariable(\"PIXEL_TART_HUMAN_ACCEPTANCE\"));\r",
+            "                var output = Environment.GetEnvironmentVariable(\"PIXEL_TART_WHOLE_APP_EVIDENCE\");\r",
+            "                Assert.IsFalse(string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable(\"PIXEL_TART_ACCEPTANCE_ROOT\")));\r",
+            "                output ??= Path.Combine(Environment.GetEnvironmentVariable(\"PIXEL_TART_ACCEPTANCE_ROOT\")!, \"whole-app\");\r",
+            "                        var fixtureDirectory = Path.Combine(Environment.GetEnvironmentVariable(\"PIXEL_TART_ACCEPTANCE_ROOT\")!, \"SyntheticAssets\");\r",
+            "                        Directory.CreateDirectory(fixtureDirectory);\r",
+            "                            using var stream = File.Create(Path.Combine(fixtureDirectory, $\"demo-shot-{index + 1:00}.png\")); encoder.Save(stream);\r",
+            "                            References = Enumerable.Range(0, 6).Select(i => new RAWSelectionAssistant.Core.Services.Projects.PlanningDocumentReference(new RAWSelectionAssistant.Core.Services.Projects.ProjectShotReference(Guid.NewGuid(), RAWSelectionAssistant.Core.Services.Projects.ShotReferenceKind.Pose, ExternalReference: Path.Combine(fixtureDirectory, $\"demo-shot-{i + 1:00}.png\"), Title: $\"合成布局参考 {i + 1:00}\"), \"主视觉\", IsHero: i < 3, IsMoodboard: true)).ToArray()\r",
+            "                        if (Environment.GetEnvironmentVariable(\"PIXEL_TART_UI_GUARDIAN_CAPTURE\") == \"1\")\r",
+            "                            await UiGuardianCapture.Run(window, vm, fixtureDirectory, output);\r"
+          ]
+        }
+      ],
+      "required": "isolatedcaptureoutput and/or manualbaselineapproval; realDPIseparate",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "physicalDPI/WPS/visualapproval separate fromautomaticcapture",
+      "photoReleaseBlocker": "BLOCKS_VISUAL_OR_NATIVE_APPROVAL_IF_CLAIMED",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "PublishedCore",
+      "name": "RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。No validated GPU compute device on this host.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.Tests/ReferenceMatchV4Tests.cs",
+          "method": "CpuGpuParityAcrossEightSceneClasses",
+          "lines": [
+            "        if (!GpuCapabilityDetector.Detect().BackendAvailable) Assert.Inconclusive(\"No validated GPU compute device on this host.\");\r",
+            "            var source = Fixture(48, 32, scene.R, scene.G, scene.B);\r",
+            "            var reference = Fixture(48, 32, (byte)(255 - scene.R), (byte)(255 - scene.G), (byte)(255 - scene.B));\r",
+            "            Assert.AreEqual(ReferenceMatchV4BackendKind.Gpu, gpu.Backend);\r",
+            "            Assert.IsLessThanOrEqualTo(3, maximum);\r",
+            "            Assert.IsLessThanOrEqualTo(.3, sum / cpu.Pixels.Rgb24.Length);\r",
+            "        var result = engine.Match(Fixture(24, 16, 40, 70, 110), Fixture(24, 16, 180, 120, 80),\r",
+            "        Assert.AreEqual(ReferenceMatchV4BackendKind.Cpu, result.Backend);\r",
+            "        Assert.IsTrue(result.UsedCpuFallback);\r",
+            "        Assert.AreEqual(GpuFailureReason.ExecutionFailure, result.GpuFailure);\r",
+            "        Assert.AreEqual(GpuFallbackStage.Dispatch, result.FallbackStage);\r",
+            "    private static VisualPixelBuffer Fixture(int width, int height, byte r, byte g, byte b)\r"
+          ]
+        }
+      ],
+      "required": "validatedGPUcompute device/runtime",
+      "canRunIsolated": "HOST_GPU_DEPENDENT",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "PublishedCore",
+      "name": "RAWSelectionAssistant.Tests.ReferenceFilmPerformanceTests.FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Set PIXEL_TART_PERFORMANCE_EVIDENCE to collect local CPU evidence.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.Tests/ReferenceFilmPerformanceTests.cs",
+          "method": "FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested",
+          "lines": [
+            "        var output = Environment.GetEnvironmentVariable(\"PIXEL_TART_PERFORMANCE_EVIDENCE\");\r",
+            "            Assert.Inconclusive(\"Set PIXEL_TART_PERFORMANCE_EVIDENCE to collect local CPU evidence.\");\r",
+            "        File.WriteAllText(Path.Combine(output!, \"film-performance.json\"), JsonSerializer.Serialize(new { source_commit = Environment.GetEnvironmentVariable(\"PIXEL_TART_PRODUCT_SOURCE_SHA\") ?? \"UNFROZEN_WORKTREE\", rows }, new JsonSerializerOptions { WriteIndented = true }));\r"
+          ]
+        }
+      ],
+      "required": "new isolatedfixture/output opt-in or realcapturedP2run",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "DIAGNOSTIC_NOT_AUTOMATIC_LEGACY_RELEASE_BLOCKER",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "PublishedCore",
+      "name": "RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。No validated GPU compute device on this host.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.Tests/ReferenceMatchV4Tests.cs",
+          "method": "CpuGpuParityOnSyntheticScene",
+          "lines": [
+            "        if (!GpuCapabilityDetector.Detect().BackendAvailable) Assert.Inconclusive(\"No validated GPU compute device on this host.\");\r",
+            "        var source = Fixture(64, 48, 72, 98, 130); var reference = Fixture(64, 48, 190, 140, 82);\r",
+            "        Assert.AreEqual(ReferenceMatchV4BackendKind.Gpu, gpu.Backend);\r",
+            "        Assert.IsLessThanOrEqualTo(3, maximum);\r",
+            "        Assert.IsLessThanOrEqualTo(.3, sum / cpuBytes.Length);\r",
+            "        if (!GpuCapabilityDetector.Detect().BackendAvailable) Assert.Inconclusive(\"No validated GPU compute device on this host.\");\r",
+            "            var source = Fixture(48, 32, scene.R, scene.G, scene.B);\r",
+            "            var reference = Fixture(48, 32, (byte)(255 - scene.R), (byte)(255 - scene.G), (byte)(255 - scene.B));\r",
+            "            Assert.AreEqual(ReferenceMatchV4BackendKind.Gpu, gpu.Backend);\r",
+            "            Assert.IsLessThanOrEqualTo(3, maximum);\r",
+            "            Assert.IsLessThanOrEqualTo(.3, sum / cpu.Pixels.Rgb24.Length);\r",
+            "        var result = engine.Match(Fixture(24, 16, 40, 70, 110), Fixture(24, 16, 180, 120, 80),\r",
+            "        Assert.AreEqual(ReferenceMatchV4BackendKind.Cpu, result.Backend);\r",
+            "        Assert.IsTrue(result.UsedCpuFallback);\r",
+            "        Assert.AreEqual(GpuFailureReason.ExecutionFailure, result.GpuFailure);\r",
+            "        Assert.AreEqual(GpuFallbackStage.Dispatch, result.FallbackStage);\r",
+            "    private static VisualPixelBuffer Fixture(int width, int height, byte r, byte g, byte b)\r"
+          ]
+        }
+      ],
+      "required": "validatedGPUcompute device/runtime",
+      "canRunIsolated": "HOST_GPU_DEPENDENT",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "PublishedCore",
+      "name": "RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Real spatial evidence is explicitly opt-in.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.Tests/ColorStudioSpatialScaleTests.cs",
+          "method": "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+          "lines": [
+            "        var inputRoot = Environment.GetEnvironmentVariable(\"PIXEL_TART_NEW_STUDIO_CORPUS\");\r",
+            "        var outputRoot = Environment.GetEnvironmentVariable(\"PIXEL_TART_SPATIAL_OUTPUT\");\r",
+            "        if (string.IsNullOrEmpty(inputRoot) || string.IsNullOrEmpty(outputRoot)) { Assert.Inconclusive(\"Real spatial evidence is explicitly opt-in.\"); return; }\r",
+            "                Assert.IsLessThanOrEqualTo(budget.Mean, delta.MeanL, name + \" mean L\");\r",
+            "                Assert.IsLessThanOrEqualTo(budget.P95, delta.P95L, name + \" P95 L\");\r",
+            "                Assert.IsLessThanOrEqualTo(budget.Max, delta.MaxL, name + \" maximum L\");\r",
+            "            Assert.AreEqual(0, delta.MaxL, 1e-7, \"Aligned centers must share texture phase: \" + texture);\r",
+            "            Assert.IsFalse(b.Rgb32.ToArray().SequenceEqual(proxy.Rgb32.ToArray()));\r",
+            "            CollectionAssert.AreEqual(b.Rgb32.ToArray(), PixelTartFilmPipeline.Apply(proxy, settings).Rgb32.ToArray());\r",
+            "        Assert.AreEqual(1, old.SpatialVersion);\r",
+            "        CollectionAssert.AreEqual(PixelTartFilmPipeline.Apply(image, old).Rgb32.ToArray(), PixelTartFilmPipeline.Apply(image, old with { SpatialVersion = 1 }).Rgb32.ToArray());\r",
+            "        Assert.IsLessThan(.04f, result.Rgb32.ToArray().Max(), \"Deep-black paper must not become broad bright blotches.\");\r",
+            "        Assert.AreEqual(texture, JsonSerializer.Deserialize<PixelTartFilmSettings>(JsonSerializer.Serialize(texture)));\r"
+          ]
+        }
+      ],
+      "required": "same authorized original corpus plus explicit opt-in evidence/output and dependencies",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "PublishedCore",
+      "name": "RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Set PIXEL_TART_RUN_V4_BENCHMARK=1 for the bounded production-size run.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.Tests/ReferenceMatchV4BenchmarkTests.cs",
+          "method": "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+          "lines": [
+            "Assert.HasCount(5, rows);\r",
+            "        if (Environment.GetEnvironmentVariable(\"PIXEL_TART_RUN_V4_BENCHMARK\") != \"1\") { Assert.Inconclusive(\"Set PIXEL_TART_RUN_V4_BENCHMARK=1 for the bounded production-size run.\"); return; }\r",
+            "                var target = Fixture(width, height, repeat + width); var reference = Fixture(width, height, repeat + width + 100);\r",
+            "        Assert.HasCount(24, results);\r",
+            "    private static VisualPixelBuffer Fixture(int width, int height, int seed)\r"
+          ]
+        }
+      ],
+      "required": "new isolatedfixture/output opt-in or realcapturedP2run",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "DIAGNOSTIC_NOT_AUTOMATIC_LEGACY_RELEASE_BLOCKER",
+      "statusUnchanged": true
+    },
+    {
+      "suite": "PublishedCore",
+      "name": "RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+      "originalOutcome": "NotExecuted",
+      "originalReason": "Assert.Inconclusive 失败。Explicitly authorized real corpus is opt-in; not a synthetic RAW replacement.",
+      "sources": [
+        {
+          "file": "tests/RAWSelectionAssistant.Tests/ColorStudioRealCorpusTests.cs",
+          "method": "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+          "lines": [
+            "olorStudioRealCorpusTests\r",
+            "    public async Task AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16()\r",
+            "        var inputRoot = Environment.GetEnvironmentVariable(\"PIXEL_TART_NEW_STUDIO_CORPUS\");\r",
+            "        var outputRoot = Environment.GetEnvironmentVariable(\"PIXEL_TART_NEW_STUDIO_CORPUS_OUTPUT\");\r",
+            "        { Assert.Inconclusive(\"Explicitly authorized real corpus is opt-in; not a synthetic RAW replacement.\"); return; }\r",
+            "        // Named fixture list prevents implicit traversal of private unrelated photographs.\r",
+            "        var requested = Environment.GetEnvironmentVariable(\"PIXEL_TART_NEW_STUDIO_CORPUS_FILE\");\r",
+            "            var metrics = CompareNearest(preview, full); Assert.IsLessThanOrEqualTo(1e-6, metrics.MaxOklabDelta, \"Point operations must commute with the declared nearest proxy.\");\r",
+            "            await AtomicTiffWriter.WriteRgb48Async(output, full, new(TiffBitDepth.Sixteen, Software: \"Pixel Tart real corpus\", Orientation: full.Orientation), overwrite: true);\r",
+            "            var expected = full.ToRgb48(); CollectionAssert.AreEqual(expected, tiff.Rgb48Samples.ToArray()); var encodeMs = watch.Elapsed.TotalMilliseconds;\r",
+            "            rows.Add(new { sourceFile = name, sourceSha256 = master.SourceSha256, dimensions = new { master.Image.Width, master.Image.Height }, master.Image.SourceBitDepth, master.Image.WorkingColorSpace, derivedTiff = Path.GetFileName(output), derivedFromRaw = true, decodeMs, previewMs, interactive800Ms, fullMs, encodeMs, proxyPointToolsParity = metrics, encodedTiffMaxU16Delta = 0, tools = toolRows, status = \"PASS_PROGRAMMATIC_ONLY\", limitations = \"Full-resolution details/proxy parity and UI/visual acceptance not covered by this fixture.\" });\r",
+            "            await File.WriteAllTextAsync(Path.Combine(outputRoot, \"REAL_RAW_TOOL_MATRIX.json\"), JsonSerializer.Serialize(new { scope = \"Authorized real Sony RAW cases listed below; same nearest-center proxy/full point-tool stack; real derived TIFF16 files\", sourceHead = Environment.GetEnvironmentVariable(\"PIXEL_TART_TEST_SOURCE_HEAD\") ?? \"WORKTREE\", cases = rows }, new JsonSerializerOptions { WriteIndented = true }));\r"
+          ]
+        }
+      ],
+      "required": "same authorized original corpus plus explicit opt-in evidence/output and dependencies",
+      "canRunIsolated": "YES_IF_EXPLICIT_INPUTS_AND_GATES; no user desktoprequiredforbackend",
+      "humanAction": "none forbackend; productnative separate",
+      "photoReleaseBlocker": "BLOCKS_CLAIMED_REAL_RAW_OR_GPU_FEATURE_ACCEPTANCE; do not gateunrelatedlegacyfeaturesmechanically",
+      "statusUnchanged": true
+    }
+  ],
+  "noStateMutation": true
+}
