@@ -16,7 +16,7 @@ Input: already WB/matrix/EXIF-resolved display-referred sRGB D65 floats. Decode 
 Chain: oriented product display input -> linear EOTF -> creative exposure, black/toe/shoulder -> luminance-conditioned color relationship and chroma compression -> spatial optics -> emulsion -> final OETF -> paper/scan. No precision physical concentration claim. i-Type/600 share the exact modern response family; SX70 remains a creative variation; Blue and Duochrome are different palette mappings.
 
 Reference 1: darktable release-4.8.1, fb0eb997e62c6dd52966cd35911c74afa150e209, src/iop/filmicrgb.c, process/filmic spline and gamut sections; src/iop/exposure.c process. GPL-3 reference only, NOT copied/translated into product. Numerical execution **NOT_RUN** (no admitted executable). Parameters/domain intentionally not interchangeable with this creative display-domain response.
-Reference 2: RawTherapee 5.11, db575c6690d30ce6428c0e1383bec8b8f1fb8d21 (repository pinned index; release label must be rechecked), rtengine/curves.cc and rtengine/curves.h tone curve classes / curve evaluation. GPL-3 reference only, NOT copied. Numerical execution **NOT_RUN**. File/entry verification pending; do not promote a project-name list to approval.
+Reference 2: RawTherapee 5.11, db575c6690d30ce6428c0e1383bec8b8f1fb8d21, rtengine/curves.cc and rtengine/curves.h tone curve classes / curve evaluation. GPL-3 reference only, NOT copied. Numerical execution **NOT_RUN**. File/entry verification pending; do not promote a project-name list to approval.
 Decision: independent research math; not physical-film inversion or arbitrary web-patch fitting. Reference source/binary hashes and individual file license review remain pending.
 
 ## Optics — InstantFiniteOpticsV3
