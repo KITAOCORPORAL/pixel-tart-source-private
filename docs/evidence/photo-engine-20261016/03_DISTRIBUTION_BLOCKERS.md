@@ -1,0 +1,1 @@
+有限照片profile子集数值闭环已经可执行，但NOT_APPROVED_FOR_DISTRIBUTION。未证明exactnativeWindowsbuild/source提供义务、cleanVM加载/完整发布UIpath；新工具依赖本地外部LCMS/Python包，不将现有Sdcb不同hashDLL替换。RawSpeedWindows原件对照NOT_RUN；photo_srgb tools只给评审，不打开普通用户按钮。原V1只线性profile、研究V2hardclip保留，P672golden不改。新工作域名带linear-sRGB/D65/PCSXYZD50，不把处理域名ACES或Profilehash当相机色准证明。
