@@ -12,6 +12,17 @@ namespace RAWSelectionAssistant.WpfTests;
 [TestClass]
 public sealed class AssetLibraryP1AutomatedEvidenceContractTests
 {
+    public TestContext TestContext { get; set; } = null!;
+    private Stopwatch? _caseWatch;
+    [TestInitialize] public void RecordCaseStart(){_caseWatch=Stopwatch.StartNew();RecordCase("start");}
+    [TestCleanup] public void RecordCaseEnd()=>RecordCase("end");
+    private void RecordCase(string phase)
+    {
+        var target=Environment.GetEnvironmentVariable("KITAO_TEST_CASE_EVENTS");if(string.IsNullOrWhiteSpace(target))return;
+        using var p=Process.GetCurrentProcess();p.Refresh();
+        File.AppendAllText(target,JsonSerializer.Serialize(new{atUtc=DateTimeOffset.UtcNow,phase,test=TestContext.TestName,outcome=TestContext.CurrentTestOutcome.ToString(),elapsedMs=_caseWatch?.Elapsed.TotalMilliseconds,pid=p.Id,workingDirectory=Environment.CurrentDirectory,temp=Path.GetTempPath(),tempLength=Path.GetTempPath().Length,cpuMs=p.TotalProcessorTime.TotalMilliseconds,workingSet=p.WorkingSet64,privateBytes=p.PrivateMemorySize64,managed=GC.GetTotalMemory(false)})+Environment.NewLine);
+    }
+
 
     private static readonly string[] ScenarioIds =
     [

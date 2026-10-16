@@ -1,0 +1,673 @@
+[
+  {
+    "label": "final-full",
+    "assembly": "C:\\KH\\F16A\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+    "assemblySha256": "8722e78731f42a49c9339ebb8697791769cc42b3fca44be602ae1c6d4b72700e",
+    "run": {
+      "pid": 32408,
+      "exitCode": 1,
+      "timeout": true,
+      "class": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests",
+      "directory": "E:\\KR\\F16\\full\\results\\run-20261016-110136-ae7ce805\\010-AssetLibraryP1AutomatedEvidenceContractTests",
+      "expected": 42,
+      "results": [],
+      "errors": [
+        "missing TRX",
+        "nonzero child exit",
+        "timeout"
+      ]
+    },
+    "directoryLength": 100,
+    "tempLength": 105,
+    "rawFiles": [
+      {
+        "path": "E:\\KR\\F16\\full\\results\\run-20261016-110136-ae7ce805\\010-AssetLibraryP1AutomatedEvidenceContractTests\\stdout.log",
+        "sha256": "95ff5ffb33816bc528863ec2a194147f58312186127b7f89ed0c8463b98d67a6",
+        "bytes": 124
+      },
+      {
+        "path": "E:\\KR\\F16\\full\\results\\run-20261016-110136-ae7ce805\\010-AssetLibraryP1AutomatedEvidenceContractTests\\stderr.log",
+        "sha256": "237da515dcb56fb6026738151aa896245159e3aa58ccc1b24ef11c8fd252b05d",
+        "bytes": 277
+      },
+      {
+        "path": "E:\\KR\\F16\\full\\results\\run-20261016-110136-ae7ce805\\010-AssetLibraryP1AutomatedEvidenceContractTests\\runsettings.xml",
+        "sha256": "b6a0ec337dbfaf6244bb3eacdeb74ca87640884023533d62c93122a354e4b950",
+        "bytes": 1897
+      }
+    ]
+  },
+  {
+    "label": "short-class",
+    "assembly": "E:\\Kitao-IsolatedHosts\\fixed-B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+    "assemblySha256": "00c7d26d564b3e74389584cdde7aa951226d818e90b34e9d38769aea6869c4dc",
+    "run": {
+      "pid": 18744,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests",
+      "directory": "E:\\KitaoRuns\\fixed-P1\\results\\run-20261016-104458-f62562af\\000-AssetLibraryP1AutomatedEvidenceContractTests",
+      "expected": 42,
+      "results": [
+        {
+          "id": "1d30e49b-a85a-8314-9b9d-26ec8735cf4e",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"dpi-overflow\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "167e77d5-3799-8fe4-a8f6-c4d7d7cc24dd",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"organization-splitter/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1815f2c5-2e5e-8654-a545-2507443d93da",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"missing-screenshot\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1a19f2dd-9cc4-8964-b68c-fe12d3a4b475",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"pane-collapse-expand/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1607f1c6-fe9c-89f9-ac2b-b5b60778261a",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"cross-run-splice\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1c22a29f-3742-840b-8204-041181a2e014",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"runner-session-splice\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "14571721-4bed-8bc1-868f-0b4f4941f8b8",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"dll-hash-mismatch\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "10ffb782-f2f1-88a6-ad82-8418b2293ab2",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"uncleared-process\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "174cb525-4c99-81eb-9b4c-c458f510e1fe",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.AutomatedContractIsIndependentFailClosedAndNeverClaimsManualEvidence",
+          "display": "AutomatedContractIsIndependentFailClosedAndNeverClaimsManualEvidence",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b92cf26-61d2-82a5-82db-6339a2fd6893",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"mutated-hash\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1e3b5c36-8fc9-88fe-af29-9cf85925f8a0",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorUsesRunOwnedBinariesAfterRepositoryBuildOutputChanges",
+          "display": "IndependentValidatorUsesRunOwnedBinariesAfterRepositoryBuildOutputChanges",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1ebdc8a3-5579-8831-89b0-5fe97dc24139",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"application-hash-mismatch\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "16f03dc0-8ced-8318-867e-20f6d9103cf9",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"database-not-v6\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "125c5e5a-98a3-8bc9-ba33-66e8aacac8c9",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"sealed-dependency-mutation\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b900400-bc0b-8a3f-9e53-055b179bd482",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorAcceptsCompleteApplicationEvidence",
+          "display": "IndependentValidatorAcceptsCompleteApplicationEvidence",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "172cd1aa-e350-8c1c-826f-a65afbd0ea10",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"direct-width-mutation\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1542410c-c1c2-81c9-8e8d-1b5ff2bb7728",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"sealed-binary-mutation\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "17f27ca4-d2c9-8e85-a794-7804adc40966",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"first-empty/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1ec5afa1-2f67-8aff-85c4-4fb2314fdfc9",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"thumbnail-slider/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d35ea05-eebd-8cc9-8ca2-0be6c10556a8",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"direct-settings-mutation\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "15994104-48e6-825e-a1e8-dd3179e40465",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"cleanup-path-splice\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13f504ab-aeba-8171-8810-a3bc8c4da5be",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"import-contamination\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "19c95e19-d497-8e7b-bb6f-1027df41cfd4",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"pre-cleanup-audit-hash\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1650ecf7-bd08-8fd7-86b4-44deb1a0f64d",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsFabricatedLiveButtonProbeWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsFabricatedLiveButtonProbeWithoutChangingInputTree",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "18b4f21c-bad9-86be-ae81-97d96ad8d801",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"wrong-pid-or-hwnd\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b0a19fb-e432-89cc-ba31-769956532993",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"build-log-hash\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1a23e6e9-de2f-8c27-be11-bcbe97759c51",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.P1CompatibilityAcceptsAnyNamedDevelopmentBranch",
+          "display": "P1CompatibilityAcceptsAnyNamedDevelopmentBranch",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1486e161-9c51-806e-b934-6eb0cc4188ca",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"actual-product-version-mismatch\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "19a911e7-1aca-869d-958f-2366bdf95243",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"selection-navigation-restart/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "106d9777-a31e-8eb0-bcb3-d3cc99a357dc",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"inspector-splitter/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "178a7358-6637-8c90-b291-839cf2e1e874",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"sealed-application-mutation\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1c938344-4042-80f5-8d18-1fc49e863ac4",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"navigation-ime/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "194a9169-6f23-8171-a9e6-f3b8d967e144",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsLegacyCamelCaseButtonRowWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsLegacyCamelCaseButtonRowWithoutChangingInputTree",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1af44a5a-091d-8fa6-b590-230667ae0889",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"manifest-product-version-forgery\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1798cdc1-94fd-8548-94e9-66e3f8c96815",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"wrong-scenario-order\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1ff6ec41-ecf6-8772-bce6-01cb5c5622a9",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"retry-twice\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1782a5f4-d97d-8e74-9c28-3fc28ec9c517",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"process-session-splice\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1dbf8391-5d3b-873d-8548-69b753ba9f17",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"layout-dpi-buttons/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "139de31b-77d2-8060-856c-58534028e475",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"loading-error-retry-recovered/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "106d7a3b-e7c7-86d2-84fc-fa09891c2d2b",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsScrollDecorationInMustFitBoundsWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsScrollDecorationInMustFitBoundsWithoutChangingInputTree",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d0dcadd-5f0e-8d49-aca6-4cf324fe3c20",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.ValidateExistingRunWrapperKeepsTheSealedRunTreeImmutable",
+          "display": "ValidateExistingRunWrapperKeepsTheSealedRunTreeImmutable",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1e729dee-46f4-8410-bef9-6a2f14b5d987",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"binary-tree-manifest-mismatch\")",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    "directoryLength": 107,
+    "tempLength": 112,
+    "rawFiles": [
+      {
+        "path": "E:\\KitaoRuns\\fixed-P1\\results\\run-20261016-104458-f62562af\\000-AssetLibraryP1AutomatedEvidenceContractTests\\stdout.log",
+        "sha256": "dc9cd94c447d70685c10292c7915fbe8085bca5dae87cd782cd09c1a4f6255b5",
+        "bytes": 412
+      },
+      {
+        "path": "E:\\KitaoRuns\\fixed-P1\\results\\run-20261016-104458-f62562af\\000-AssetLibraryP1AutomatedEvidenceContractTests\\stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "E:\\KitaoRuns\\fixed-P1\\results\\run-20261016-104458-f62562af\\000-AssetLibraryP1AutomatedEvidenceContractTests\\runsettings.xml",
+        "sha256": "d4f741762085832e19899e9cd50a1ba0707f7b2b4da7702a9ac96c9a69f38d16",
+        "bytes": 1904
+      },
+      {
+        "path": "E:\\KitaoRuns\\fixed-P1\\results\\run-20261016-104458-f62562af\\000-AssetLibraryP1AutomatedEvidenceContractTests\\results.trx",
+        "sha256": "ed6388d75096f1a30d58dc8ec90a86148817cc6001d3ddb7c61ce85bdf7155b5",
+        "bytes": 112688
+      }
+    ],
+    "cases": [
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"dpi-overflow\")",
+        "durationSeconds": 12.7623267,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=13004 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=13004 exit=0 elapsed_ms=58 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=18392 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=18392 exit=0 elapsed_ms=63 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=29000 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29000 exit=0 elapsed_ms=60 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=29920 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29920 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31532 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31532 exit=0 elapsed_ms=57 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=30768 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30768 exit=0 elapsed_ms=55 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=22420 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=22420 exit=0 elapsed_ms=56 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=25960 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=25960 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=28492 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=28492 exit=1 elapsed_ms=6111 stdout_bytes=0 stderr_chars=835\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"organization-splitter/v1\")",
+        "durationSeconds": 12.4348531,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=24496 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24496 exit=0 elapsed_ms=60 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=33360 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33360 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=3608 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=3608 exit=0 elapsed_ms=58 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=21108 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=21108 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=20892 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=20892 exit=0 elapsed_ms=56 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=17740 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=17740 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=2540 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=2540 exit=0 elapsed_ms=57 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=29104 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29104 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=17576 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=17576 exit=1 elapsed_ms=6233 stdout_bytes=0 stderr_chars=1097\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"missing-screenshot\")",
+        "durationSeconds": 15.0881974,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=33504 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33504 exit=0 elapsed_ms=59 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=18452 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=18452 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31684 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31684 exit=0 elapsed_ms=62 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=24356 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24356 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=29920 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29920 exit=0 elapsed_ms=56 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=11352 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=11352 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32352 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32352 exit=0 elapsed_ms=62 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=22064 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=22064 exit=0 elapsed_ms=63 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=27036 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=27036 exit=1 elapsed_ms=6199 stdout_bytes=0 stderr_chars=918\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"pane-collapse-expand/v1\")",
+        "durationSeconds": 13.0466076,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=26536 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26536 exit=0 elapsed_ms=61 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=29592 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29592 exit=0 elapsed_ms=61 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31272 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31272 exit=0 elapsed_ms=59 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=29708 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29708 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32384 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32384 exit=0 elapsed_ms=61 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=8120 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=8120 exit=0 elapsed_ms=64 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=17996 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=17996 exit=0 elapsed_ms=60 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=32720 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32720 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33244 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=33244 exit=1 elapsed_ms=6085 stdout_bytes=0 stderr_chars=767\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"cross-run-splice\")",
+        "durationSeconds": 12.275828,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=11352 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=11352 exit=0 elapsed_ms=71 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=32700 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32700 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=16136 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=16136 exit=0 elapsed_ms=61 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=29116 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29116 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32832 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32832 exit=0 elapsed_ms=57 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=27776 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27776 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=26152 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26152 exit=0 elapsed_ms=61 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=24080 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24080 exit=0 elapsed_ms=61 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=15868 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=15868 exit=1 elapsed_ms=6131 stdout_bytes=0 stderr_chars=878\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"runner-session-splice\")",
+        "durationSeconds": 12.4279988,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=29108 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29108 exit=0 elapsed_ms=60 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=27124 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27124 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=19488 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=19488 exit=0 elapsed_ms=60 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=33584 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33584 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32784 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32784 exit=0 elapsed_ms=57 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=31572 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31572 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32244 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32244 exit=0 elapsed_ms=59 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=22388 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=22388 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=5692 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=5692 exit=1 elapsed_ms=6059 stdout_bytes=0 stderr_chars=794\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"dll-hash-mismatch\")",
+        "durationSeconds": 13.2082478,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=28160 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28160 exit=0 elapsed_ms=62 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=18952 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=18952 exit=0 elapsed_ms=62 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=16140 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=16140 exit=0 elapsed_ms=59 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=24080 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24080 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=25720 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=25720 exit=0 elapsed_ms=62 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=22540 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=22540 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31372 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31372 exit=0 elapsed_ms=57 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=29348 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29348 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=17948 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=17948 exit=1 elapsed_ms=6522 stdout_bytes=0 stderr_chars=1090\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"uncleared-process\")",
+        "durationSeconds": 12.3965196,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=17676 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=17676 exit=0 elapsed_ms=63 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=27304 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27304 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=27320 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27320 exit=0 elapsed_ms=58 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=31140 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31140 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31792 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31792 exit=0 elapsed_ms=57 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=31068 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31068 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=17848 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=17848 exit=0 elapsed_ms=63 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=10212 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=10212 exit=0 elapsed_ms=55 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=29848 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=29848 exit=1 elapsed_ms=6057 stdout_bytes=0 stderr_chars=773\n      \n    "
+      },
+      {
+        "name": "AutomatedContractIsIndependentFailClosedAndNeverClaimsManualEvidence",
+        "durationSeconds": 0.0077754,
+        "subprocessStarts": 0,
+        "subprocessEnds": 0,
+        "events": ""
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"mutated-hash\")",
+        "durationSeconds": 13.4930118,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=27672 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27672 exit=0 elapsed_ms=59 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=26112 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26112 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=23312 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=23312 exit=0 elapsed_ms=56 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=29288 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29288 exit=0 elapsed_ms=55 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=17996 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=17996 exit=0 elapsed_ms=54 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=31472 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31472 exit=0 elapsed_ms=54 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=26428 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26428 exit=0 elapsed_ms=58 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=15780 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=15780 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33168 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=33168 exit=1 elapsed_ms=6431 stdout_bytes=0 stderr_chars=922\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorUsesRunOwnedBinariesAfterRepositoryBuildOutputChanges",
+        "durationSeconds": 15.4116124,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=32896 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32896 exit=0 elapsed_ms=63 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=27320 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27320 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33504 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33504 exit=0 elapsed_ms=59 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=18452 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=18452 exit=0 elapsed_ms=65 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31684 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31684 exit=0 elapsed_ms=60 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=22176 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=22176 exit=0 elapsed_ms=61 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=29920 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29920 exit=0 elapsed_ms=60 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=12828 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=12828 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31060 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=31060 exit=0 elapsed_ms=6181 stdout_bytes=139 stderr_chars=0\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"application-hash-mismatch\")",
+        "durationSeconds": 14.8044938,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=32844 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32844 exit=0 elapsed_ms=61 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=5464 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=5464 exit=0 elapsed_ms=62 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=29704 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29704 exit=0 elapsed_ms=55 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=18452 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=18452 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31060 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31060 exit=0 elapsed_ms=57 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=27492 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27492 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31536 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31536 exit=0 elapsed_ms=61 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=33712 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33712 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=17108 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=17108 exit=1 elapsed_ms=5964 stdout_bytes=0 stderr_chars=1095\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"database-not-v6\")",
+        "durationSeconds": 14.8903632,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=32656 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32656 exit=0 elapsed_ms=63 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=32960 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32960 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=23280 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=23280 exit=0 elapsed_ms=59 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=18640 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=18640 exit=0 elapsed_ms=61 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=21268 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=21268 exit=0 elapsed_ms=64 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=33336 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33336 exit=0 elapsed_ms=63 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=27276 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27276 exit=0 elapsed_ms=59 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=32524 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32524 exit=0 elapsed_ms=67 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=25524 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=25524 exit=1 elapsed_ms=6772 stdout_bytes=0 stderr_chars=776\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"sealed-dependency-mutation\")",
+        "durationSeconds": 14.8978241,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=28364 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28364 exit=0 elapsed_ms=57 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=23312 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=23312 exit=0 elapsed_ms=54 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31116 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31116 exit=0 elapsed_ms=58 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=26608 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26608 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=29936 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29936 exit=0 elapsed_ms=59 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=11572 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=11572 exit=0 elapsed_ms=55 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=27276 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27276 exit=0 elapsed_ms=56 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=12632 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=12632 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=26652 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=26652 exit=1 elapsed_ms=6127 stdout_bytes=0 stderr_chars=1055\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorAcceptsCompleteApplicationEvidence",
+        "durationSeconds": 12.9444501,
+        "subprocessStarts": 11,
+        "subprocessEnds": 11,
+        "events": "\n      \n        SUBPROCESS_START pid=23820 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=23820 exit=0 elapsed_ms=56 stdout_bytes=32 stderr_chars=0\r\nSUBPROCESS_START pid=6296 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=6296 exit=0 elapsed_ms=58 stdout_bytes=0 stderr_chars=0\r\nSUBPROCESS_START pid=17324 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=17324 exit=0 elapsed_ms=63 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=3472 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=3472 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33476 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33476 exit=0 elapsed_ms=61 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=31040 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31040 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=23656 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=23656 exit=0 elapsed_ms=60 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=33612 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33612 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=15652 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=15652 exit=0 elapsed_ms=61 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=5088 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=5088 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32076 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=32076 exit=0 elapsed_ms=6229 stdout_bytes=139 stderr_chars=0\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"direct-width-mutation\")",
+        "durationSeconds": 12.874217,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=29864 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29864 exit=0 elapsed_ms=59 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=26792 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26792 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=28544 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28544 exit=0 elapsed_ms=58 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=28476 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28476 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=23464 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=23464 exit=0 elapsed_ms=64 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=26084 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26084 exit=0 elapsed_ms=63 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31464 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31464 exit=0 elapsed_ms=61 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=32760 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32760 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31368 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=31368 exit=1 elapsed_ms=6638 stdout_bytes=0 stderr_chars=968\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"sealed-binary-mutation\")",
+        "durationSeconds": 12.2759229,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=9800 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=9800 exit=0 elapsed_ms=64 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=19492 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=19492 exit=0 elapsed_ms=62 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=30796 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30796 exit=0 elapsed_ms=56 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=33304 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33304 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=24696 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24696 exit=0 elapsed_ms=58 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=23272 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=23272 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=22596 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=22596 exit=0 elapsed_ms=56 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=26536 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26536 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=18640 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=18640 exit=1 elapsed_ms=6210 stdout_bytes=0 stderr_chars=1239\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"first-empty/v1\")",
+        "durationSeconds": 12.1598223,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=33704 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33704 exit=0 elapsed_ms=64 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=24300 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24300 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32440 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32440 exit=0 elapsed_ms=60 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=33564 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33564 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=22680 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=22680 exit=0 elapsed_ms=63 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=29824 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29824 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=19076 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=19076 exit=0 elapsed_ms=58 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=20432 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=20432 exit=0 elapsed_ms=67 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=10580 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=10580 exit=1 elapsed_ms=5977 stdout_bytes=0 stderr_chars=763\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"thumbnail-slider/v1\")",
+        "durationSeconds": 12.4526273,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=23312 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=23312 exit=0 elapsed_ms=66 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=11384 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=11384 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=28696 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28696 exit=0 elapsed_ms=58 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=4948 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=4948 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=28536 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28536 exit=0 elapsed_ms=61 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=32656 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32656 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=30984 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30984 exit=0 elapsed_ms=59 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=13172 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=13172 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=28072 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=28072 exit=1 elapsed_ms=6376 stdout_bytes=0 stderr_chars=772\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"direct-settings-mutation\")",
+        "durationSeconds": 12.8291262,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=32356 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32356 exit=0 elapsed_ms=69 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=32796 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32796 exit=0 elapsed_ms=61 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=26280 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26280 exit=0 elapsed_ms=61 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=25960 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=25960 exit=0 elapsed_ms=61 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=22728 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=22728 exit=0 elapsed_ms=69 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=20740 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=20740 exit=0 elapsed_ms=65 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31440 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31440 exit=0 elapsed_ms=61 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=14068 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=14068 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31868 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=31868 exit=1 elapsed_ms=6546 stdout_bytes=0 stderr_chars=789\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"cleanup-path-splice\")",
+        "durationSeconds": 12.3250086,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=27304 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27304 exit=0 elapsed_ms=58 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=31972 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31972 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32752 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32752 exit=0 elapsed_ms=58 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=31120 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31120 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32672 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32672 exit=0 elapsed_ms=67 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=22604 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=22604 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=10580 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=10580 exit=0 elapsed_ms=58 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=24484 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24484 exit=0 elapsed_ms=66 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=19492 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=19492 exit=1 elapsed_ms=6180 stdout_bytes=0 stderr_chars=1560\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"import-contamination\")",
+        "durationSeconds": 13.0040835,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=20740 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=20740 exit=0 elapsed_ms=72 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=31680 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31680 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=23732 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=23732 exit=0 elapsed_ms=57 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=32072 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32072 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=29144 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29144 exit=0 elapsed_ms=59 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=30780 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30780 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=1704 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=1704 exit=0 elapsed_ms=65 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=29832 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29832 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33328 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=33328 exit=1 elapsed_ms=6535 stdout_bytes=0 stderr_chars=787\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"pre-cleanup-audit-hash\")",
+        "durationSeconds": 14.105748,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=32116 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32116 exit=0 elapsed_ms=60 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=21428 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=21428 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31248 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31248 exit=0 elapsed_ms=66 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=20220 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=20220 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=22552 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=22552 exit=0 elapsed_ms=59 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=30956 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30956 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=19844 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=19844 exit=0 elapsed_ms=59 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=29000 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29000 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=21864 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=21864 exit=1 elapsed_ms=6321 stdout_bytes=0 stderr_chars=898\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsFabricatedLiveButtonProbeWithoutChangingInputTree",
+        "durationSeconds": 11.9651518,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=10184 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=10184 exit=0 elapsed_ms=62 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=16792 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=16792 exit=0 elapsed_ms=61 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=17988 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=17988 exit=0 elapsed_ms=70 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=32072 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32072 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31760 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31760 exit=0 elapsed_ms=61 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=22816 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=22816 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33612 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33612 exit=0 elapsed_ms=60 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=33388 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33388 exit=0 elapsed_ms=62 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=28212 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=28212 exit=1 elapsed_ms=5775 stdout_bytes=0 stderr_chars=836\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"wrong-pid-or-hwnd\")",
+        "durationSeconds": 12.7714109,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=31100 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31100 exit=0 elapsed_ms=65 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=13912 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=13912 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31140 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31140 exit=0 elapsed_ms=59 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=9944 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=9944 exit=0 elapsed_ms=55 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=3276 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=3276 exit=0 elapsed_ms=60 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=22364 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=22364 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32584 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32584 exit=0 elapsed_ms=58 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=26728 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26728 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=30972 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=30972 exit=1 elapsed_ms=6421 stdout_bytes=0 stderr_chars=1087\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"build-log-hash\")",
+        "durationSeconds": 15.6090502,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=19076 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=19076 exit=0 elapsed_ms=62 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=18928 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=18928 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=21680 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=21680 exit=0 elapsed_ms=54 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=32256 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32256 exit=0 elapsed_ms=55 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=24356 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24356 exit=0 elapsed_ms=56 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=32068 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32068 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=30428 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30428 exit=0 elapsed_ms=57 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=28476 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28476 exit=0 elapsed_ms=62 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=21848 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=21848 exit=1 elapsed_ms=6148 stdout_bytes=0 stderr_chars=906\n      \n    "
+      },
+      {
+        "name": "P1CompatibilityAcceptsAnyNamedDevelopmentBranch",
+        "durationSeconds": 0.0005858,
+        "subprocessStarts": 0,
+        "subprocessEnds": 0,
+        "events": ""
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"actual-product-version-mismatch\")",
+        "durationSeconds": 12.5578658,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=29704 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29704 exit=0 elapsed_ms=70 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=17988 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=17988 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=14348 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=14348 exit=0 elapsed_ms=68 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=31124 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31124 exit=0 elapsed_ms=64 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=30012 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30012 exit=0 elapsed_ms=57 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=18452 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=18452 exit=0 elapsed_ms=55 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=13536 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=13536 exit=0 elapsed_ms=57 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=32040 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32040 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=2104 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=2104 exit=1 elapsed_ms=6281 stdout_bytes=0 stderr_chars=1283\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"selection-navigation-restart/v1\")",
+        "durationSeconds": 14.1839949,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=32116 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32116 exit=0 elapsed_ms=61 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=33380 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33380 exit=0 elapsed_ms=62 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=19928 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=19928 exit=0 elapsed_ms=62 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=24580 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24580 exit=0 elapsed_ms=64 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=4528 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=4528 exit=0 elapsed_ms=62 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=23312 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=23312 exit=0 elapsed_ms=63 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33160 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33160 exit=0 elapsed_ms=66 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=32660 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32660 exit=0 elapsed_ms=65 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=24816 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=24816 exit=1 elapsed_ms=7933 stdout_bytes=0 stderr_chars=770\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"inspector-splitter/v1\")",
+        "durationSeconds": 11.8726621,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=24132 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24132 exit=0 elapsed_ms=67 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=30012 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30012 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=30924 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30924 exit=0 elapsed_ms=57 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=19076 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=19076 exit=0 elapsed_ms=55 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31592 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31592 exit=0 elapsed_ms=60 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=28568 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28568 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=21616 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=21616 exit=0 elapsed_ms=62 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=26400 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26400 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33384 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=33384 exit=1 elapsed_ms=6111 stdout_bytes=0 stderr_chars=1096\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"sealed-application-mutation\")",
+        "durationSeconds": 12.7365782,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=20576 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=20576 exit=0 elapsed_ms=59 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=12704 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=12704 exit=0 elapsed_ms=66 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=29336 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29336 exit=0 elapsed_ms=60 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=31100 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31100 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=28444 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28444 exit=0 elapsed_ms=59 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=11272 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=11272 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33132 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33132 exit=0 elapsed_ms=59 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=27892 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27892 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33136 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=33136 exit=1 elapsed_ms=5975 stdout_bytes=0 stderr_chars=1249\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"navigation-ime/v1\")",
+        "durationSeconds": 13.0420105,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=33388 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33388 exit=0 elapsed_ms=72 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=11484 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=11484 exit=0 elapsed_ms=61 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=30620 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30620 exit=0 elapsed_ms=60 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=33472 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33472 exit=0 elapsed_ms=61 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=13892 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=13892 exit=0 elapsed_ms=59 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=33612 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33612 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32556 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32556 exit=0 elapsed_ms=62 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=32880 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32880 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=29852 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=29852 exit=1 elapsed_ms=6968 stdout_bytes=0 stderr_chars=751\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsLegacyCamelCaseButtonRowWithoutChangingInputTree",
+        "durationSeconds": 11.6521362,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=26728 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26728 exit=0 elapsed_ms=62 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=31548 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31548 exit=0 elapsed_ms=63 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33136 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33136 exit=0 elapsed_ms=69 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=32744 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32744 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=29744 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29744 exit=0 elapsed_ms=56 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=27128 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27128 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=26280 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=26280 exit=0 elapsed_ms=56 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=33268 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33268 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=11352 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=11352 exit=1 elapsed_ms=5734 stdout_bytes=0 stderr_chars=2656\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"manifest-product-version-forgery\")",
+        "durationSeconds": 12.6321633,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=21428 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=21428 exit=0 elapsed_ms=61 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=32152 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32152 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31900 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31900 exit=0 elapsed_ms=57 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=11524 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=11524 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32048 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32048 exit=0 elapsed_ms=60 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=27276 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=27276 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31084 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31084 exit=0 elapsed_ms=58 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=30124 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30124 exit=0 elapsed_ms=63 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31896 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=31896 exit=1 elapsed_ms=5980 stdout_bytes=0 stderr_chars=878\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"wrong-scenario-order\")",
+        "durationSeconds": 12.6335322,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=23416 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=23416 exit=0 elapsed_ms=62 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=24864 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24864 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=25860 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=25860 exit=0 elapsed_ms=57 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=1664 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=1664 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32124 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32124 exit=0 elapsed_ms=58 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=28612 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28612 exit=0 elapsed_ms=63 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=3496 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=3496 exit=0 elapsed_ms=68 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=604 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=604 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=14680 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=14680 exit=1 elapsed_ms=6113 stdout_bytes=0 stderr_chars=898\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"retry-twice\")",
+        "durationSeconds": 12.2820943,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=31364 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31364 exit=0 elapsed_ms=63 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=8540 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=8540 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=25212 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=25212 exit=0 elapsed_ms=57 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=31760 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31760 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=10164 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=10164 exit=0 elapsed_ms=56 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=31116 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31116 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=5040 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=5040 exit=0 elapsed_ms=57 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=28412 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28412 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32356 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=32356 exit=1 elapsed_ms=6455 stdout_bytes=0 stderr_chars=1102\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"process-session-splice\")",
+        "durationSeconds": 14.8784749,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=24340 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24340 exit=0 elapsed_ms=67 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=24864 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=24864 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=25976 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=25976 exit=0 elapsed_ms=58 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=28896 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28896 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33120 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33120 exit=0 elapsed_ms=62 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=32732 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32732 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=29944 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29944 exit=0 elapsed_ms=58 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=18176 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=18176 exit=0 elapsed_ms=68 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=18044 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=18044 exit=1 elapsed_ms=6325 stdout_bytes=0 stderr_chars=2119\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"layout-dpi-buttons/v1\")",
+        "durationSeconds": 12.2366688,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=21932 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=21932 exit=0 elapsed_ms=67 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=31248 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31248 exit=0 elapsed_ms=65 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=30944 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30944 exit=0 elapsed_ms=72 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=32880 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32880 exit=0 elapsed_ms=75 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=10148 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=10148 exit=0 elapsed_ms=59 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=31516 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31516 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32280 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32280 exit=0 elapsed_ms=56 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=11484 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=11484 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=30596 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=30596 exit=1 elapsed_ms=6172 stdout_bytes=0 stderr_chars=835\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"loading-error-retry-recovered/v1\")",
+        "durationSeconds": 14.3717105,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=25048 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=25048 exit=0 elapsed_ms=59 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=21268 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=21268 exit=0 elapsed_ms=61 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=28792 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28792 exit=0 elapsed_ms=56 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=30976 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30976 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=20940 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=20940 exit=0 elapsed_ms=58 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=23180 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=23180 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31776 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31776 exit=0 elapsed_ms=59 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=21512 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=21512 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=30184 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=30184 exit=1 elapsed_ms=5939 stdout_bytes=0 stderr_chars=783\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsScrollDecorationInMustFitBoundsWithoutChangingInputTree",
+        "durationSeconds": 11.4773112,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=32464 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32464 exit=0 elapsed_ms=60 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=9192 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=9192 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=29976 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=29976 exit=0 elapsed_ms=56 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=17996 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=17996 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31588 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31588 exit=0 elapsed_ms=56 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=28596 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=28596 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31512 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31512 exit=0 elapsed_ms=57 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=31760 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31760 exit=0 elapsed_ms=56 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31544 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=31544 exit=1 elapsed_ms=5587 stdout_bytes=0 stderr_chars=942\n      \n    "
+      },
+      {
+        "name": "ValidateExistingRunWrapperKeepsTheSealedRunTreeImmutable",
+        "durationSeconds": 13.7459438,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=14216 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=14216 exit=0 elapsed_ms=63 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=32116 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32116 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32344 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32344 exit=0 elapsed_ms=63 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=32548 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32548 exit=0 elapsed_ms=64 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31368 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31368 exit=0 elapsed_ms=58 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=16648 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=16648 exit=0 elapsed_ms=55 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=33720 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=33720 exit=0 elapsed_ms=66 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=32652 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32652 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=24628 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=24628 exit=0 elapsed_ms=7755 stdout_bytes=125 stderr_chars=0\n      \n    "
+      },
+      {
+        "name": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"binary-tree-manifest-mismatch\")",
+        "durationSeconds": 14.1931875,
+        "subprocessStarts": 9,
+        "subprocessEnds": 9,
+        "events": "\n      \n        SUBPROCESS_START pid=30784 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30784 exit=0 elapsed_ms=61 stdout_bytes=155366 stderr_chars=0\r\nSUBPROCESS_START pid=32772 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32772 exit=0 elapsed_ms=60 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=31468 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31468 exit=0 elapsed_ms=58 stdout_bytes=4676 stderr_chars=0\r\nSUBPROCESS_START pid=31532 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=31532 exit=0 elapsed_ms=58 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=13892 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=13892 exit=0 elapsed_ms=58 stdout_bytes=4488 stderr_chars=0\r\nSUBPROCESS_START pid=30672 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=30672 exit=0 elapsed_ms=59 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=32784 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32784 exit=0 elapsed_ms=60 stdout_bytes=5734 stderr_chars=0\r\nSUBPROCESS_START pid=32360 file=git timeout_ms=60000\r\nSUBPROCESS_END pid=32360 exit=0 elapsed_ms=57 stdout_bytes=41 stderr_chars=0\r\nSUBPROCESS_START pid=30584 file=powershell.exe timeout_ms=60000\r\nSUBPROCESS_END pid=30584 exit=1 elapsed_ms=6461 stdout_bytes=0 stderr_chars=8616\n      \n    "
+      }
+    ],
+    "sumTestSeconds": 526.9591985,
+    "subprocessStarts": 362,
+    "subprocessEnds": 362
+  }
+]
