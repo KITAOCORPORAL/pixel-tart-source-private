@@ -2,7 +2,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using RAWSelectionAssistant.Services;
-if(args.Length==3&&args[0]=="instant-review-full"){await InstantReviewAudit.Run(args[1],args[2],true);return;}
 if(args.Length==3&&args[0]=="instant-review"){await InstantReviewAudit.Run(args[1],args[2]);return;}
 if(args.Length==4&&args[0]=="legacy-codes"){await RawRepeatAudit.Run(args[1],args[2],args[3]);return;}
 if(args.Length==4&&args[0]=="compare-tiff"){RawRepeatAudit.CompareTiff(args[1],args[2],args[3]);return;}

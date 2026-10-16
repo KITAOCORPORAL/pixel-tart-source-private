@@ -1,0 +1,250 @@
+[
+  {
+    "project": "darktable",
+    "commit": "fb0eb997e62c6dd52966cd35911c74afa150e209",
+    "path": "src/iop/filmicrgb.c",
+    "url": "https://raw.githubusercontent.com/darktable-org/darktable/fb0eb997e62c6dd52966cd35911c74afa150e209/src/iop/filmicrgb.c",
+    "status": "SOURCE_READ_NOT_EXECUTED",
+    "bytes": 207399,
+    "sha256": "46edf338818f949aaec051a27bff8cfa5071b56b5d6babd206f15b160c3aab85",
+    "entryLineEvidence": [
+      {
+        "line": 2102,
+        "text": "void process(dt_iop_module_t *self,"
+      }
+    ]
+  },
+  {
+    "project": "darktable",
+    "commit": "fb0eb997e62c6dd52966cd35911c74afa150e209",
+    "path": "src/iop/exposure.c",
+    "url": "https://raw.githubusercontent.com/darktable-org/darktable/fb0eb997e62c6dd52966cd35911c74afa150e209/src/iop/exposure.c",
+    "status": "SOURCE_READ_NOT_EXECUTED",
+    "bytes": 42911,
+    "sha256": "2b52c149c5dba1a7c47acdb7f2a18f6482710b8861b64971cd766b22f312af28",
+    "entryLineEvidence": [
+      {
+        "line": 526,
+        "text": "void process(struct dt_iop_module_t *self,"
+      }
+    ]
+  },
+  {
+    "project": "darktable",
+    "commit": "fb0eb997e62c6dd52966cd35911c74afa150e209",
+    "path": "src/common/gaussian.c",
+    "url": "https://raw.githubusercontent.com/darktable-org/darktable/fb0eb997e62c6dd52966cd35911c74afa150e209/src/common/gaussian.c",
+    "status": "SOURCE_READ_NOT_EXECUTED",
+    "bytes": 20619,
+    "sha256": "2b32f97f5e7f9642bc52f1910c29daa75440ecf461b702219ea1c91eaa703cb9",
+    "entryLineEvidence": [
+      {
+        "line": 153,
+        "text": "void dt_gaussian_blur(dt_gaussian_t *g, const float *const in, float *const out)"
+      }
+    ]
+  },
+  {
+    "project": "darktable",
+    "commit": "fb0eb997e62c6dd52966cd35911c74afa150e209",
+    "path": "src/iop/grain.c",
+    "url": "https://raw.githubusercontent.com/darktable-org/darktable/fb0eb997e62c6dd52966cd35911c74afa150e209/src/iop/grain.c",
+    "status": "SOURCE_READ_NOT_EXECUTED",
+    "bytes": 18725,
+    "sha256": "e65ded8770663b1df762c407d4d4b956c7c56694b2530f4d7236a6146a0cdfd6",
+    "entryLineEvidence": [
+      {
+        "line": 434,
+        "text": "void process(struct dt_iop_module_t *self,"
+      }
+    ]
+  },
+  {
+    "project": "darktable",
+    "commit": "fb0eb997e62c6dd52966cd35911c74afa150e209",
+    "path": "LICENSE",
+    "url": "https://raw.githubusercontent.com/darktable-org/darktable/fb0eb997e62c6dd52966cd35911c74afa150e209/LICENSE",
+    "status": "SOURCE_READ_NOT_EXECUTED",
+    "bytes": 35147,
+    "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "entryLineEvidence": []
+  },
+  {
+    "project": "RawTherapee",
+    "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+    "path": "rtengine/curves.cc",
+    "url": "https://raw.githubusercontent.com/RawTherapee/RawTherapee/db575c6690d30ce6428c0e1383bec8b8f1fb8d21/rtengine/curves.cc",
+    "status": "SOURCE_READ_NOT_EXECUTED",
+    "bytes": 116193,
+    "sha256": "4a8bc2215d5a1ac62120df52a9eef17842e72ebede890a11cc2d34a8053663bb",
+    "entryLineEvidence": [
+      {
+        "line": 41,
+        "text": "void fillCurveArray(const rtengine::DiagonalCurve* diagCurve, LUTf &outCurve, int skip, bool needed)"
+      },
+      {
+        "line": 242,
+        "text": "DiagonalCurve tcurve(curvePoints3, CURVES_MIN_POLY_POINTS / skip);"
+      },
+      {
+        "line": 257,
+        "text": "DiagonalCurve tcurve(curvePoints2, CURVES_MIN_POLY_POINTS / skip);"
+      },
+      {
+        "line": 273,
+        "text": "DiagonalCurve tcurve(curvePoints1, CURVES_MIN_POLY_POINTS / skip);"
+      },
+      {
+        "line": 302,
+        "text": "DiagonalCurve tcurve(curvePointsbw2, CURVES_MIN_POLY_POINTS / skip);"
+      },
+      {
+        "line": 317,
+        "text": "DiagonalCurve tcurve(curvePointsbw, CURVES_MIN_POLY_POINTS / skip);"
+      },
+      {
+        "line": 338,
+        "text": "std::unique_ptr<DiagonalCurve> dCurve;"
+      },
+      {
+        "line": 343,
+        "text": "dCurve.reset(new DiagonalCurve(curvePoints, CURVES_MIN_POLY_POINTS / skip));"
+      },
+      {
+        "line": 365,
+        "text": "std::unique_ptr<DiagonalCurve> dCurve;"
+      },
+      {
+        "line": 368,
+        "text": "dCurve.reset(new DiagonalCurve(curvePoints, CURVES_MIN_POLY_POINTS / skip));"
+      },
+      {
+        "line": 387,
+        "text": "std::unique_ptr<DiagonalCurve> dCurve;"
+      },
+      {
+        "line": 391,
+        "text": "dCurve.reset(new DiagonalCurve(acurvePoints, CURVES_MIN_POLY_POINTS / skip));"
+      },
+      {
+        "line": 405,
+        "text": "dCurve.reset(new DiagonalCurve(bcurvePoints, CURVES_MIN_POLY_POINTS / skip));"
+      },
+      {
+        "line": 419,
+        "text": "dCurve.reset(new DiagonalCurve(cccurvePoints, CURVES_MIN_POLY_POINTS / skip));"
+      },
+      {
+        "line": 433,
+        "text": "dCurve.reset(new DiagonalCurve(lccurvePoints, CURVES_MIN_POLY_POINTS / skip));"
+      }
+    ]
+  },
+  {
+    "project": "RawTherapee",
+    "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+    "path": "rtengine/curves.h",
+    "url": "https://raw.githubusercontent.com/RawTherapee/RawTherapee/db575c6690d30ce6428c0e1383bec8b8f1fb8d21/rtengine/curves.h",
+    "status": "SOURCE_READ_NOT_EXECUTED",
+    "bytes": 54578,
+    "sha256": "fee25e75d0dc863cb5cf3fbc37dc8649c0fa8c71466ab9f91f7d8176860db83c",
+    "entryLineEvidence": [
+      {
+        "line": 482,
+        "text": "class DiagonalCurve final : public Curve"
+      },
+      {
+        "line": 486,
+        "text": "DiagonalCurveType kind;"
+      },
+      {
+        "line": 493,
+        "text": "explicit DiagonalCurve(const std::vector<double>& points, int ppn = CURVES_MIN_POLY_POINTS);"
+      },
+      {
+        "line": 494,
+        "text": "~DiagonalCurve() override;"
+      }
+    ]
+  },
+  {
+    "project": "RawTherapee",
+    "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+    "path": "rtengine/gauss.h",
+    "url": "https://raw.githubusercontent.com/RawTherapee/RawTherapee/db575c6690d30ce6428c0e1383bec8b8f1fb8d21/rtengine/gauss.h",
+    "status": "SOURCE_READ_NOT_EXECUTED",
+    "bytes": 1068,
+    "sha256": "21c795d771c8efa18619f6de0e44b9fa4cb35cfd2fceeab1ab5f502d1cd60c80",
+    "entryLineEvidence": [
+      {
+        "line": 25,
+        "text": "void gaussianBlur(float** src, float** dst, const int W, const int H, const double sigma, bool useBoxBlur = false, eGaussType gausstype = GAUSS_STANDARD, float** buffer2 = nullptr);"
+      }
+    ]
+  },
+  {
+    "project": "RawTherapee",
+    "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+    "path": "rtengine/ipgrain.cc",
+    "url": "https://raw.githubusercontent.com/RawTherapee/RawTherapee/db575c6690d30ce6428c0e1383bec8b8f1fb8d21/rtengine/ipgrain.cc",
+    "status": "SOURCE_READ_NOT_EXECUTED",
+    "bytes": 14462,
+    "sha256": "f33d8774a0ad0ec78385bf893860850cc8bc55039ab74e7a8f6270d71759dffa",
+    "entryLineEvidence": [
+      {
+        "line": 21,
+        "text": "/* film grain emulation."
+      },
+      {
+        "line": 22,
+        "text": "* Ported from darktable (src/iop/grain.c). Original copyright/license follows"
+      },
+      {
+        "line": 101,
+        "text": "evaluate_grain_lut(mb, divgr);"
+      },
+      {
+        "line": 297,
+        "text": "// parametrization of octaves to match power spectrum of real grain scans"
+      },
+      {
+        "line": 330,
+        "text": "void evaluate_grain_lut(const float mb, float divgr)"
+      },
+      {
+        "line": 339,
+        "text": "grain_lut[j * GRAIN_LUT_SIZE + i] = 32768.f * (paper_resp(gu + paper_resp_inverse(l, mb, divg * GRAIN_LUT_PAPER_GAMMA, divgr), mb, divg * GRAIN_LUT_PAPER_GAMMA, divgr) - l);"
+      },
+      {
+        "line": 358,
+        "text": "const float l00 = grain_lut[_y0 * GRAIN_LUT_SIZE + _x0];"
+      },
+      {
+        "line": 359,
+        "text": "const float l01 = grain_lut[_y0 * GRAIN_LUT_SIZE + _x1];"
+      },
+      {
+        "line": 360,
+        "text": "const float l10 = grain_lut[_y1 * GRAIN_LUT_SIZE + _x0];"
+      },
+      {
+        "line": 361,
+        "text": "const float l11 = grain_lut[_y1 * GRAIN_LUT_SIZE + _x1];"
+      },
+      {
+        "line": 374,
+        "text": "float grain_lut[GRAIN_LUT_SIZE * GRAIN_LUT_SIZE];"
+      }
+    ]
+  },
+  {
+    "project": "RawTherapee",
+    "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+    "path": "LICENSE",
+    "url": "https://raw.githubusercontent.com/RawTherapee/RawTherapee/db575c6690d30ce6428c0e1383bec8b8f1fb8d21/LICENSE",
+    "status": "SOURCE_READ_NOT_EXECUTED",
+    "bytes": 32473,
+    "sha256": "8c75a9231db8906865e29706ed63aad18fd918c92c15dbefbb13c25fe42850b4",
+    "entryLineEvidence": []
+  }
+]

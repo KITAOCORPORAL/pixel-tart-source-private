@@ -62,6 +62,7 @@ public static class CandidateSpatial
                     var original=new ColorVector3(source[originalIndex],source[originalIndex+1],source[originalIndex+2]);
                     // Validate original even at zero strength. Exact endpoint; no EOTF/OETF roundtrip drift.
                     CandidateTone.Decode(original);
+                    original=new(Math.Clamp(original.X,0,1),Math.Clamp(original.Y,0,1),Math.Clamp(original.Z,0,1));
                     var encoded=recipe.Amount==0?original:CandidateTone.Mix(original,CandidateTone.Encode(textured),recipe.Amount);
                     var o=((ty+y)*width+tx+x)*3;result[o]=(float)encoded.X;result[o+1]=(float)encoded.Y;result[o+2]=(float)encoded.Z;
                 }

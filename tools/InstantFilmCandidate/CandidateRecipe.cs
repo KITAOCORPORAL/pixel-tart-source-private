@@ -7,12 +7,13 @@ public sealed record CandidateProvenance(string EvidenceStatus, string[] SourceI
     string[] Observations, string[] ContraryEvidence, bool CalibrationEligible=false);
 public sealed record CandidateProfile(string Id, string LegacyId, string ChemicalFamily, string PaperEra,
     string Palette, CandidateResponse Response, CandidateProvenance Provenance);
+public sealed record CandidateIdentity(string ChemicalFamily,string PaperEra,int ProfileVersion=1);
 public sealed record CandidateOptics(int Version=1, double DetailMix=.1, double HighlightDiffusion=.07, int Radius=2);
 public sealed record CandidateEmulsion(int Version=1, double Microstructure=.0015, double DevelopmentUnevenness=.004,
     double DevelopmentDefects=0, double ExpiredAging=0);
 public sealed record CandidateSurface(int Version=1, bool Frame=true, string BaseColor="Warm", double PaperTexture=.002,
     double PaperScratches=0, double ScanDust=0);
-public sealed record CandidateRecipe(int AlgorithmVersion, string ProfileId, CandidateResponse Response,
+public sealed record CandidateRecipe(int AlgorithmVersion, string ProfileId, CandidateIdentity Identity, CandidateResponse Response,
     CandidateProvenance Provenance, CandidateOptics Optics, CandidateEmulsion Emulsion, CandidateSurface Surface,
     InstantPaperGeometry Geometry, InstantRandomSnapshot Random, double Amount=1)
 {
@@ -21,9 +22,10 @@ public sealed record CandidateRecipe(int AlgorithmVersion, string ProfileId, Can
     public CandidateProfile Profile=>CandidateProfiles.Available.Single(p=>p.Id==ProfileId);
     public CandidateRecipe Validate()
     {
-        if(AlgorithmVersion!=3 || !CandidateProfiles.Available.Any(p=>p.Id==ProfileId) || Response is null || Provenance is null || Optics is null || Emulsion is null || Surface is null || Geometry is null || Random is null)
+        if(AlgorithmVersion!=3 || !CandidateProfiles.Available.Any(p=>p.Id==ProfileId) || Identity is null || Response is null || Provenance is null || Optics is null || Emulsion is null || Surface is null || Geometry is null || Random is null)
             throw new InvalidDataException("Incomplete/unknown research recipe.");
         static void Range(double v,double lo,double hi){if(!double.IsFinite(v)||v<lo||v>hi)throw new InvalidDataException("Candidate parameter out of bounds.");}
+        if(Identity.ProfileVersion!=1||Identity.ChemicalFamily!=Profile.ChemicalFamily||Identity.PaperEra!=Profile.PaperEra)throw new InvalidDataException("Frozen candidate identity differs from registered version.");
         Range(Amount,0,1); Range(Response.ExposureEv,-2,2);Range(Response.Toe,0,.3);Range(Response.Shoulder,0,2);
         Range(Response.Black,0,.15);Range(Response.Saturation,0,1.5);Range(Response.ApparentDensity,.5,2);
         if(Provenance.EvidenceStatus!="CreativeSimulation"||Provenance.CalibrationEligible||Provenance.SourceIds is null||Provenance.SampleIds is null||Provenance.Observations is null||Provenance.ContraryEvidence is null)
@@ -39,7 +41,7 @@ public sealed record CandidateRecipe(int AlgorithmVersion, string ProfileId, Can
         var p=CandidateProfiles.Available.Single(p=>p.Id==id);
         var old=InstantFilmProfiles.Available.Single(old=>old.Id==p.LegacyId);
         var d=new InstantFilmDefinition(true,old.Id,old.ChemicalGeneration);
-        return new(3,id,p.Response,p.Provenance,new(),new(),new(),new(),InstantFilmRandom.Roll(d,seed));
+        return new(3,id,new(p.ChemicalFamily,p.PaperEra),p.Response,p.Provenance,new(),new(),new(),new(),InstantFilmRandom.Roll(d,seed));
     }
 }
 public static class CandidateProfiles

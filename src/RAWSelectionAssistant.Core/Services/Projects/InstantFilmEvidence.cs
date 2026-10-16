@@ -56,6 +56,7 @@ public sealed record InstantReferenceLibrary(int SchemaVersion, string AuditDate
             throw new InvalidDataException("Dangling evidence reference, invalid hash or unsupported quantitative assertion.");
         foreach(var relation in Relationships)
         {
+            if(relation.Kind is not("SourceGroupOnly" or "SameScenePair") || relation.Left==relation.Right)throw new InvalidDataException("Unknown or self relation.");
             if(relation.Kind!="SameScenePair"&&!ids.Contains(relation.Left))throw new InvalidDataException("Unknown relation owner.");
             // Source-group identity is NOT an image pair. Pair endpoints must be actual scan versions.
             if(relation.Kind=="SourceGroupOnly" && relation.VerifiedScenePair)throw new InvalidDataException("Source association is not a verified scene pair.");

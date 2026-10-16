@@ -1,0 +1,305 @@
+{
+  "baseline/baseline.trx": {
+    "sha256": "2d29604a9c8e04c75ced57774fb21d6ae1451d860614fd29d204313e8af5b21b",
+    "bytes": 20960,
+    "counters": {
+      "total": "14",
+      "executed": "14",
+      "passed": "14",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failed": []
+  },
+  "intake/intake.trx": {
+    "sha256": "c4e61a3f602a3923fbe7c060525a5b5d4bb58888a69016f1d384ae163beab7c5",
+    "bytes": 4332,
+    "counters": {
+      "total": "2",
+      "executed": "2",
+      "passed": "2",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failed": []
+  },
+  "candidate-tests/candidate.trx": {
+    "sha256": "83096bc0489a7d6b0bdddafde0bcbfbb24f03a12cc5c23e4aad97b2c6353eb15",
+    "bytes": 8054,
+    "counters": {
+      "total": "5",
+      "executed": "5",
+      "passed": "5",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failed": []
+  },
+  "candidate-final/candidate-final.trx": {
+    "sha256": "f050070775c7ba0111bc1d1166d309577eeb95444546212617c8df88419f8b9c",
+    "bytes": 8054,
+    "counters": {
+      "total": "5",
+      "executed": "5",
+      "passed": "5",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failed": []
+  },
+  "instant-final/instant-final.trx": {
+    "sha256": "17f9f8e949c60a725b8eb6d912e9b41a9f4bbd75c617d959247e15693814588c",
+    "bytes": 23798,
+    "counters": {
+      "total": "16",
+      "executed": "16",
+      "passed": "16",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failed": []
+  },
+  "dpi-isolated/dpi-isolated.trx": {
+    "sha256": "6b24e9756dabc400655c6e1e470fb0b4275803684d0d25a8347540152ded1bd0",
+    "bytes": 163079,
+    "counters": {
+      "total": "91",
+      "executed": "91",
+      "passed": "74",
+      "failed": "17",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failed": [
+      {
+        "name": "EveryRequiredProductStatePassesAtAllFourDpis (\"AssetLibraryGrid\")",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "EveryRequiredProductStatePassesAtAllFourDpis (\"CalendarBookingAssets\")",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "EveryRequiredProductStatePassesAtAllFourDpis (\"AssetContextMenu\")",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "EachCurrentDpiHasEightPassingProductStates (150)",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EachCurrentDpiHasEightPassingProductStates 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "EachCurrentDpiHasEightPassingProductStates (100)",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EachCurrentDpiHasEightPassingProductStates 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "EveryRequiredProductStatePassesAtAllFourDpis (\"AssetInspirationCollection\")",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "DpiScreenshotsAndMetadataAreCompleteAndByteValid",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。DpiScreenshotsAndMetadataAreCompleteAndByteValid 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "CurrentEvidenceCaptureSetMatchesTheCurrentProducerContract",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。CurrentEvidenceCaptureSetMatchesTheCurrentProducerContract 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "EachCurrentDpiHasEightPassingProductStates (125)",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EachCurrentDpiHasEightPassingProductStates 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "CurrentProducerUsesRealApplicationDarkThemeAndProcessIsolation",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。CurrentProducerUsesRealApplicationDarkThemeAndProcessIsolation 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "EveryRequiredProductStatePassesAtAllFourDpis (\"MainWindow\")",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "EveryRequiredProductStatePassesAtAllFourDpis (\"AssetFilter\")",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "IsolatedSyntheticSourceImagesRemainByteIdentical",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。IsolatedSyntheticSourceImagesRemainByteIdentical 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "EachCurrentDpiHasEightPassingProductStates (200)",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EachCurrentDpiHasEightPassingProductStates 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.Version220StageDDpiGateTests。PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\dpi-current'."
+      },
+      {
+        "name": "EveryRequiredProductStatePassesAtAllFourDpis (\"AssetRecentLibraries\")",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      },
+      {
+        "name": "EveryRequiredProductStatePassesAtAllFourDpis (\"AssetViewer\")",
+        "message": "测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常: \r\nSystem.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\artifacts\\current-run-visual\\current-run-visual-evidence.json'."
+      }
+    ]
+  },
+  "full-regression/full-regression.trx": {
+    "sha256": "9da960959aa0ec928cd326b8097e06a041d827565c73b5ab2524496d7c2ff7b7",
+    "bytes": 2473955,
+    "counters": {
+      "total": "1628",
+      "executed": "1604",
+      "passed": "1604",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failed": []
+  },
+  "solutionConsoleCounts": [
+    "失败!  - 失败:    17，通过:    74，已跳过:     0，总计:    91，持续时间: 296 ms - RAWSelectionAssistant.DpiTests.dll (net10.0)",
+    "已通过! - 失败:     0，通过:    14，已跳过:     0，总计:    14，持续时间: 1 s - PixelTart.ModularHarness.Tests.dll (net10.0)",
+    "已通过! - 失败:     0，通过:  1703，已跳过:     7，总计:  1710，持续时间: 56 s - RAWSelectionAssistant.Tests.dll (net10.0)",
+    "已通过! - 失败:     0，通过:  1604，已跳过:    24，总计:  1628，持续时间: 9 m 12 s - RAWSelectionAssistant.WpfTests.dll (net10.0)"
+  ],
+  "solutionTrxWarning": "Initial solution invocation used same LogFileName across projects; final TRX is WPF only, not combined coverage. Original solution console and isolated DPI TRX preserved. No result inferred for overwritten TRX.",
+  "core-final/core-final.trx": {
+    "sha256": "f5c2d220f02141f745a83ae1aa1e8a16b022f86152fb149b6d816c7458f05d1d",
+    "bytes": 2330091,
+    "counters": {
+      "total": "1710",
+      "executed": "1703",
+      "passed": "1703",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    }
+  },
+  "candidate-final-2/candidate-final-2.trx": {
+    "sha256": "51d1b9822fb31e0bb3744c3d3fe0097ffcc7c90692636559f4ce3179cbe11552",
+    "bytes": 9414,
+    "counters": {
+      "total": "6",
+      "executed": "6",
+      "passed": "6",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    }
+  },
+  "candidate-final-3/candidate-final-3.trx": {
+    "sha256": "fc2009a1040dac56fe94fff0822c84d7ccf287aa6b257b9a57ed9968cbfe26f1",
+    "bytes": 9414,
+    "counters": {
+      "total": "6",
+      "executed": "6",
+      "passed": "6",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    }
+  }
+}

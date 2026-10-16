@@ -23,6 +23,7 @@ internal static class InstantReviewAudit
         if(frame.Format.BitsPerPixel!=48||frame.ColorContexts is not {Count:>0})throw new InvalidDataException("Expected frozen product RGB16 with embedded sRGB.");
         using(var stream=frame.ColorContexts[0].OpenProfileStream()){using var bytes=new MemoryStream();stream.CopyTo(bytes);if(!bytes.ToArray().SequenceEqual(StudioQuickExport.SrgbProfileBytes()))throw new InvalidDataException("Frozen product ICC differs from expected sRGB; no implicit transform.");}
         ushort orientation=1;if(frame.Metadata is BitmapMetadata meta){try{if(meta.GetQuery("/ifd/{ushort=274}") is ushort o)orientation=o;}catch(NotSupportedException){}}
+        if(checked((long)frame.PixelWidth*frame.PixelHeight*24)>1024L*1024*1024)throw new StudioBudgetException(checked((long)frame.PixelWidth*frame.PixelHeight*24),1024L*1024*1024);
         var converted=new FormatConvertedBitmap(frame,PixelFormats.Rgb48,null,0);var data=new float[checked(frame.PixelWidth*frame.PixelHeight*3)];var row=new ushort[frame.PixelWidth*3];
         for(var y=0;y<frame.PixelHeight;y++){converted.CopyPixels(new System.Windows.Int32Rect(0,y,frame.PixelWidth,1),row,row.Length*2,0);for(var x=0;x<row.Length;x++)data[y*row.Length+x]=row[x]/65535f;}
         return new(frame.PixelWidth,frame.PixelHeight,data,"16","sRGB",orientation);
@@ -33,7 +34,7 @@ internal static class InstantReviewAudit
         foreach(var v in image.Rgb32.Span){if(!float.IsFinite(v))nonfinite++;if(v<=0)low++;if(v>=1)high++;sum+=v;}
         return new{image.Width,image.Height,samples=image.Rgb32.Length,zeroChannelSamples=low,oneChannelSamples=high,nonfinite,mean=sum/image.Rgb32.Length};
     }
-    public static async Task Run(string manifest,string output,bool fullSource=false)
+    public static async Task Run(string manifest,string output)
     {
         if(Directory.Exists(output))throw new IOException("New isolated review output required.");Directory.CreateDirectory(output);
         var inputs=JsonSerializer.Deserialize<InstantReviewInput[]>(File.ReadAllText(manifest))!;var reports=new List<object>();
@@ -51,14 +52,15 @@ internal static class InstantReviewAudit
                 await ProfessionalRawExport.WriteAsync(m,Rendered,p,StudioExportFormat.Png);var pi=ProfessionalRawExport.Inspect(p,m,Rendered,StudioExportFormat.Png);
                 return new{tiff=Path.GetFileName(t),png=Path.GetFileName(p),tiffSha256=Hash(t),pngSha256=Hash(p),ti,pi,exportMs=watch.Elapsed.TotalMilliseconds,allocatedBytes=GC.GetTotalAllocatedBytes()-before,statistics=Statistics(image)};
             }
-            foreach(var profile in CandidateProfiles.Available.Where(p=>fullSource?p.Id=="modern-itype-v3":p.Id!="modern-600-v3"))
+            foreach(var profile in CandidateProfiles.Available.Where(p=>p.Id!="modern-600-v3"))
             {
                 var recipe=CandidateRecipe.Create(profile.Id);recipe.Validate();var stem=profile.Id;
                 File.WriteAllText(Path.Combine(dir,stem+".recipe.json"),JsonSerializer.Serialize(recipe,Json));
                 var restored=JsonSerializer.Deserialize<CandidateRecipe>(File.ReadAllText(Path.Combine(dir,stem+".recipe.json")))!;restored.Validate();
+                using var retainedCandidate=StudioGlobalResources.ReserveWork(checked((long)display.Width*display.Height*3*4*5));
                 var watch=Stopwatch.StartNew();var allocated=GC.GetTotalAllocatedBytes();process.Refresh();var beforePrivate=process.PrivateMemorySize64;
                 var candidate=CandidateRenderer.Render(display,restored);var renderMs=watch.Elapsed.TotalMilliseconds;
-                if(!fullSource){var reopened=CandidateRenderer.Render(display,restored);if(!candidate.Rgb32.Span.SequenceEqual(reopened.Rgb32.Span))throw new InvalidDataException("Candidate reopen mismatch.");}
+                var reopened=CandidateRenderer.Render(display,restored);if(!candidate.Rgb32.Span.SequenceEqual(reopened.Rgb32.Span))throw new InvalidDataException("Candidate reopen mismatch.");
                 var old=InstantFilmProfiles.Available.Single(p=>p.Id==profile.LegacyId);
                 var legacyFilm=new InstantFilmDefinition(true,old.Id,old.ChemicalGeneration,AlgorithmVersion:2){PaperGeometry=recipe.Geometry};
                 legacyFilm=legacyFilm with{DiceEnabled=true,Snapshot=recipe.Random};
@@ -75,17 +77,15 @@ internal static class InstantReviewAudit
         {
             if(Hash(input.Original)!=input.ExpectedOriginalSha256||Hash(input.FrozenTiff)!=input.ExpectedFrozenSha256)throw new InvalidDataException("Authorized original or frozen derivative identity mismatch: "+input.Id);
             var copy=Path.Combine(output,input.Id+"-isolated-frozen.tif");File.Copy(input.FrozenTiff,copy,false);
-            using(var lease=StudioGlobalResources.ReserveWork(fullSource?0:1024L*1024*1024))
+            using(var lease=StudioGlobalResources.ReserveWork(1024L*1024*1024))
             {
                 var full=ReadFrozen(copy);var fullSize=ProfessionalRawPipeline.OrientedSize(Master(full,"frozen"));
-                var preview=fullSource?ProfessionalRawPipeline.RenderOutput(Master(full,"frozen"),Rendered):ProfessionalRawPipeline.RenderPreview(Master(full,"frozen"),Rendered,512);
-                using var retainedSource=fullSource?StudioGlobalResources.ReserveWork(checked((long)full.Rgb32.Length*4+(long)preview.Rgb32.Length*4)):null;
+                var preview=ProfessionalRawPipeline.RenderPreview(Master(full,"frozen"),Rendered,512);
                 await Review(input.Id,preview,new{input.Id,input.ExpectedOriginalSha256,input.ExpectedFrozenSha256,fullSize,reviewWidth=preview.Width,reviewHeight=preview.Height,
-                    precision=fullSource?"Full-source oriented frozen product RGB16 -> candidate; no proxy":"Frozen product RGB16 -> display-linear box preview <=512 -> candidate; these are review-resolution NOT full-source renders",nativeDecodeThisRun=false,fujiRepeatabilityClaim=false});
+                    precision="Frozen product RGB16 -> display-linear box preview <=512 -> candidate; these are review-resolution NOT full-source renders",nativeDecodeThisRun=false,fujiRepeatabilityClaim=false});
             }
             if(Hash(input.Original)!=input.ExpectedOriginalSha256||Hash(input.FrozenTiff)!=input.ExpectedFrozenSha256||Hash(copy)!=input.ExpectedFrozenSha256)throw new InvalidDataException("Source changed.");
         }
-        if(fullSource)return;
         var data=new float[192*128*3];for(var y=0;y<128;y++)for(var x=0;x<192;x++){var i=(y*192+x)*3;data[i]=x/191f;data[i+1]=y/127f;data[i+2]=(x+y)%32<16?1:0;}
         await Review("synthetic",new(192,128,data,"16","sRGB",1),new{precision="Full synthetic float raster",inputSha256=Convert.ToHexString(SHA256.HashData(System.Runtime.InteropServices.MemoryMarshal.AsBytes<float>(data.AsSpan())))});
         if(StudioGlobalResources.AccountedBytes!=baseline)throw new InvalidDataException("Resource lease leak.");

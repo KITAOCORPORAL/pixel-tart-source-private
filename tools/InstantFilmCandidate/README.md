@@ -1,0 +1,13 @@
+# Instant V3 — research candidate, not a shipping engine upgrade
+
+Separate tools-only library. Product csproj does not reference this library. V1/V2/PV4/5/6 production math is unchanged. Run tests with `dotnet test tools/InstantFilmCandidate.Tests/InstantFilmCandidate.Tests.csproj -c Release`.
+
+CandidateRecipe persists creative response and version, frozen chemical family/paper era/profile version checked against registry, evidence provenance, optics, separate emulsion/paper/scan controls, frame geometry and frozen legacy-compatible random snapshot. No calibrated type or automatic calibration admission. New fixed-seed normalized noise substreams do not change the existing random API.
+
+Input is oriented (EXIF 1) sRGB display float. Finite out-of-range values clamp to [0,1]; NaN/Inf rejected. Linear-luminance B&W, exact i-Type/600 modern aliases, distinct blue families. No camera WB or white adaptation. Optical finite binomial kernel radius 2, global-coordinate halo reads, clamp edge, 256x64 tile default. Budgeted scratch (424,320 bytes default), not full-frame scratch. Region callers must supply global source canvas, not independently cropped local images. Normal texture, defects, aging, frame and scan dust are separate. No reference imagery in assemblies.
+
+Caveats: normalized defects stay positioned through output scaling; optical radius is fixed source-pixel support, not a resolution-invariant measured PSF. Preview must be reduced AFTER processing the full source for true product equivalence. Current photo review intentionally applies candidates at <=512 resolution to a product-decoded preview, so it is not that proof. Reusable region API is tested; full-source product pipeline integration and bounded row export are pending. Returned outputs are caller-owned; retained source/output leases must be maintained by an eventual product wrapper. Whole-canvas convenience renderer is a research helper, not an approved full-source render path.
+
+Review harness: existing PhotoEngineHomeAudit gains `instant-review <input-manifest.json> <new-output-directory>`. Requires exact original and frozen TIFF SHA256, RGB16 embedded product sRGB. Runs on isolated TIFF copies. Exports original/old/candidate via actual ProfessionalRawExport and validates TIFF16/PNG16. Does not claim live project/UI recipe integration, native GUI acceptance, full-source candidate performance, arbitrary ICC support, or Fuji decode stability.
+
+See docs/research/instant-film-v3-20261016/FINAL_REPORT.md and NODE_COMPARISONS.md. Two mature executable comparisons and licenses remain OPEN; RawTherapee grain is ported from darktable and cannot count as an independent second reference.

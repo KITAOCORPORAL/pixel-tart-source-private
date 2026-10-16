@@ -1,0 +1,13 @@
+  正在确定要还原的项目…
+  已还原 N:\pixart\kitao-instant-film-evidence-v3-20261016\tools\InstantFilmCandidate\InstantFilmCandidate.csproj (用时 170 毫秒)。
+  1 个项目(共 2 个)是最新的，无法还原。
+  RAWSelectionAssistant.Core -> N:\pixart\kitao-instant-film-evidence-v3-20261016\src\RAWSelectionAssistant.Core\bin\Release\net10.0\RAWSelectionAssistant.Core.dll
+N:\pixart\kitao-instant-film-evidence-v3-20261016\tools\InstantFilmCandidate\CandidateRecipe.cs(40,65): error CS1061: “InstantFilmProfile”未包含“LegacyId”的定义，并且找不到可接受第一个“InstantFilmProfile”类型参数的可访问扩展方法“LegacyId”(是否缺少 using 指令或程序集引用?) [N:\pixart\kitao-instant-film-evidence-v3-20261016\tools\InstantFilmCandidate\InstantFilmCandidate.csproj]
+
+生成失败。
+
+N:\pixart\kitao-instant-film-evidence-v3-20261016\tools\InstantFilmCandidate\CandidateRecipe.cs(40,65): error CS1061: “InstantFilmProfile”未包含“LegacyId”的定义，并且找不到可接受第一个“InstantFilmProfile”类型参数的可访问扩展方法“LegacyId”(是否缺少 using 指令或程序集引用?) [N:\pixart\kitao-instant-film-evidence-v3-20261016\tools\InstantFilmCandidate\InstantFilmCandidate.csproj]
+    0 个警告
+    1 个错误
+
+已用时间 00:00:02.03

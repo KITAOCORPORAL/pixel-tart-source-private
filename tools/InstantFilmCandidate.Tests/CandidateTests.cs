@@ -2,6 +2,7 @@ using System.Text.Json;
 using Kitao.InstantFilm.Research;
 using RAWSelectionAssistant.Core.Services.Color;
 using RAWSelectionAssistant.Core.Services.Projects;
+[assembly: DoNotParallelize]
 namespace Kitao.InstantFilm.Research.Tests;
 [TestClass]
 [DoNotParallelize]
@@ -30,7 +31,7 @@ public sealed class CandidateTests
             var x=CandidateTone.ApplyLinear(v,r);Assert.AreEqual(x.X,x.Y);Assert.AreEqual(x.Y,x.Z);
             Assert.IsTrue(double.IsFinite(x.X)&&x.X>=0&&x.X<=1);
         }
-        var a=CandidateTone.ApplyLinear(new(1,0,0),r);var b=CandidateTone.ApplyLinear(new(0,1,0),r);Assert.IsTrue(b.X>a.X);
+        var a=CandidateTone.ApplyLinear(new(1,0,0),r);var b=CandidateTone.ApplyLinear(new(0,1,0),r);Assert.IsGreaterThan(a.X,b.X);
         Assert.Throws<InvalidDataException>(()=>CandidateTone.ApplyLinear(new(double.NaN,0,0),r));
         Assert.Throws<InvalidDataException>(()=>CandidateTone.Decode(double.PositiveInfinity));
         var image=CandidateSpatial.RenderRegion(Input(),r,0,0,37,23);
@@ -79,6 +80,23 @@ public sealed class CandidateTests
         using(var lease=StudioGlobalResources.ReserveWork(StudioGlobalResources.TotalLimit-before))
             Assert.Throws<StudioBudgetException>(()=>CandidateSpatial.RenderRegion(Input(),r,0,0,37,23));
         Assert.AreEqual(before,StudioGlobalResources.AccountedBytes);
-        Assert.AreEqual(2,CandidateSpatial.Plan().Halo);Assert.IsTrue(CandidateSpatial.Plan().ScratchBytes<1024*1024);
+        Assert.AreEqual(2,CandidateSpatial.Plan().Halo);Assert.IsLessThan(1024L*1024,CandidateSpatial.Plan().ScratchBytes);
     }
+    [TestMethod]
+    public void ImpulseHasFiniteHaloAndFlatFieldsStayFiniteWithNoSeams()
+    {
+        var recipe=CandidateRecipe.Create("modern-bw-v3") with{Emulsion=new(Microstructure:0,DevelopmentUnevenness:0),Surface=new(Frame:false)};
+        var flat=new HighBitDepthImageBuffer(15,15,new float[15*15*3],"16","sRGB",1);
+        var impulse=flat.Rgb32.ToArray();for(var c=0;c<3;c++)impulse[(7*15+7)*3+c]=1;
+        var a=CandidateSpatial.RenderRegion(flat,recipe,0,0,15,15);var b=CandidateSpatial.RenderRegion(new(15,15,impulse,"16","sRGB",1),recipe,0,0,15,15,tileWidth:3,tileHeight:3);
+        for(var y=0;y<15;y++)for(var x=0;x<15;x++)for(var c=0;c<3;c++)
+        {
+            var i=(y*15+x)*3+c;Assert.IsTrue(float.IsFinite(b.Rgb32.Span[i]));
+            if(Math.Abs(x-7)>2||Math.Abs(y-7)>2)Assert.AreEqual(a.Rgb32.Span[i],b.Rgb32.Span[i]);
+        }
+        Assert.IsGreaterThan(a.Rgb32.Span[(7*15+6)*3],b.Rgb32.Span[(7*15+6)*3]);
+        Assert.Throws<InvalidDataException>(()=>(recipe with{Optics=new(Radius:20)}).Validate());
+        Assert.Throws<InvalidDataException>(()=>CandidateSpatial.RenderRegion(new(15,15,impulse,"16","sRGB",6),recipe,0,0,15,15));
+    }
+
 }
