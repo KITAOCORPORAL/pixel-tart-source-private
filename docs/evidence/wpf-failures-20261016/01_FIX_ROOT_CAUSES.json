@@ -1,0 +1,49 @@
+{
+  "P3": {
+    "original": "nested powershell Start invalid directory",
+    "cause": "lpCurrentDirectory deep run-owned validator directory; .NETFramework/WindowsPowerShell CreateProcess long working directory unsupported",
+    "fix": "absolute PowerShell executable and short verified Environment.SpecialFolder.System cwd; absolute -File/-RunRoot unchanged",
+    "assertionsChanged": false
+  },
+  "Tether": {
+    "cause": "RepoRoot walked assembly ancestors for src; published C/E hosts not undercheckout",
+    "fix": "existing TestResources.Root explicitconfig",
+    "assertionsChanged": false
+  },
+  "privateHost": {
+    "originalWait": "WaitForSingleObject INFINITE",
+    "newTimeoutDefaultSeconds": 10800,
+    "configRangeSeconds": [
+      1,
+      21600
+    ],
+    "cleanup": "create suspended, assign kill-on-close JobObject, resume, terminate owned job ontimeout, bounded10s termination wait",
+    "test": "2sec parent+child actualkilled, exit124",
+    "remainingPids": []
+  },
+  "premium": {
+    "beforeCloseRect": [
+      1872,
+      64,
+      40,
+      40
+    ],
+    "beforeActionRect": [
+      [
+        1850,
+        58,
+        52.6666667,
+        40.6666667
+      ],
+      [
+        1910.6666667,
+        58,
+        52.6666667,
+        40.6666667
+      ]
+    ],
+    "cause": "HeaderActions WrapPanel in Auto column receives unbounded width; paints beyond shell reserved column",
+    "fix": "boundedfullwidth secondrow of SourceHeader; allactionsretained",
+    "noPixelAlgorithmChange": true
+  }
+}

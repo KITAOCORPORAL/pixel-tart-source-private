@@ -1,0 +1,31 @@
+{
+  "root": "E:\\Kitao-Worktrees\\kitao-wpf-failures-20261016\\artifacts\\wpf-failures\\premium-fixed-run\\results\\run-20261016-102249-ae601354",
+  "assembly": "E:\\Kitao-Worktrees\\kitao-wpf-failures-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "44b1c4a8e70b2b1e17c6b88eaa10d3b182141e60e362615e2f3bb43e5972dcd6",
+  "discovered": 1626,
+  "selected": 1,
+  "runs": [
+    {
+      "pid": 18256,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-failures-20261016\\artifacts\\wpf-failures\\premium-fixed-run\\results\\run-20261016-102249-ae601354\\000-StudioV2PremiumPrototypeEvidenceTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "14c5a5ea-787a-8d3f-a403-00c51b4a1904",
+          "name": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet",
+          "display": "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "counts": {
+    "Passed": 1
+  }
+}

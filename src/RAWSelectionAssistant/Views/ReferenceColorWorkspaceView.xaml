@@ -78,7 +78,9 @@
     <TextBlock Text="{views:StudioText StudioTitle}" Style="{StaticResource SectionTitleText}" />
     <TextBlock Text="{Binding TargetName}" Style="{StaticResource CaptionText}" TextTrimming="CharacterEllipsis" MaxWidth="310" HorizontalAlignment="Left" ToolTip="{Binding TargetName}" Visibility="Collapsed" />
    </StackPanel>
-   <WrapPanel x:Name="HeaderActions" Grid.Column="1">
+   <!-- Keep actions within the page width: an Auto column measures an unbounded
+        WrapPanel and lets it paint into the shell reserved close area. -->
+   <WrapPanel x:Name="HeaderActions" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
     <Grid><ToggleButton x:Name="InstantFilmToggle" Content="{views:StudioText InstantBatch08_0}"/>
     <Popup IsOpen="{Binding IsChecked,ElementName=InstantFilmToggle}" PlacementTarget="{Binding ElementName=InstantFilmToggle}" Placement="Bottom" StaysOpen="False" AllowsTransparency="True"><Border Style="{StaticResource PixelTart.Popup.V2}" Width="280" Padding="12" Background="{DynamicResource SurfaceSecondaryBrush}"><ScrollViewer MaxHeight="620" VerticalScrollBarVisibility="Auto">
      <StackPanel IsEnabled="{Binding InstantEditingAllowed}" Background="{DynamicResource SurfaceSecondaryBrush}">

@@ -151,9 +151,26 @@ public sealed class StudioV2PremiumPrototypeEvidenceTests
         var root = (FrameworkElement)window.Content;
         await window.Dispatcher.InvokeAsync(root.UpdateLayout, DispatcherPriority.ApplicationIdle);
         await Task.Delay(180);
+        // Capture the real failure as well as successful states; do not erase collision assertions.
+        StudioVisualEvidence.Png(root, Path.Combine(output, "geometry-"+name), scale);
         StudioVisualEvidence.AssertNoShellCloseCollision(root, name, output);
+        if(window.DataContext is MainViewModel {IsReferenceColorPage:true}) AssertHeaderHitTargets(root,output,name);
         StudioVisualEvidence.AuditGeometry(root, name, scale, output);
         StudioVisualEvidence.Png(root, Path.Combine(output, name), scale);
+    }
+
+    private static void AssertHeaderHitTargets(FrameworkElement root,string output,string state)
+    {
+        var actions=Descendants<WrapPanel>(root).Single(p=>p.Name=="HeaderActions");
+        var rows=new List<object>();
+        foreach(var button in Descendants<System.Windows.Controls.Primitives.ButtonBase>(actions).Where(b=>b.IsVisible&&b.IsEnabled&&b.ActualWidth>0&&b.ActualHeight>0))
+        {
+            var point=button.TranslatePoint(new Point(button.ActualWidth/2,button.ActualHeight/2),root);var hit=root.InputHitTest(point) as DependencyObject;bool reaches=false;
+            for(var node=hit;node!=null;node=VisualTreeHelper.GetParent(node))if(ReferenceEquals(node,button)){reaches=true;break;}
+            rows.Add(new{state,button=button.Name,text=(button as ContentControl)?.Content?.ToString(),point=new[]{point.X,point.Y},hit=hit?.GetType().Name,reaches});
+            Assert.IsTrue(reaches,"Header action center must reach its own button, not shell close/overlay: "+button.Name);
+        }
+        File.AppendAllText(Path.Combine(output,"header-hit-targets.jsonl"),System.Text.Json.JsonSerializer.Serialize(rows)+Environment.NewLine);
     }
 
     private static void CreateFixture(string path, int index)

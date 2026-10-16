@@ -518,10 +518,11 @@ public partial class ReferenceColorWorkspaceView : UserControl
         EditRailButton.Visibility = ContextRailButton.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
         CentralAnalysis.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
         ToneZonesExpander.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
-        var headerWrap = width < 1050;
+        // Header actions must never be measured in an unbounded Auto column.
+        var headerWrap = true;
         Grid.SetRow(HeaderActions, headerWrap ? 1 : 0); Grid.SetColumn(HeaderActions, headerWrap ? 0 : 1);
         Grid.SetColumnSpan(HeaderActions, headerWrap ? 2 : 1); Grid.SetColumnSpan(SourceBars, headerWrap ? 2 : 1);
-        HeaderActions.Margin = new Thickness(0); HeaderActions.HorizontalAlignment = HorizontalAlignment.Right;
+        HeaderActions.Margin = new Thickness(0); HeaderActions.HorizontalAlignment = HorizontalAlignment.Stretch;
         if (ActualHeight is > 0 and < 530 && !_wasLowWindow) FilmstripExpander.IsExpanded = false;
         _wasLowWindow = ActualHeight is > 0 and < 530;
         UpdateAnalysisSpace();
