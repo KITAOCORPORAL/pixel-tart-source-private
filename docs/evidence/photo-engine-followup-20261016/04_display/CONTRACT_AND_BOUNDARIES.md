@@ -33,3 +33,5 @@ LittleCMS2.16参考索引commit453bafeb85b4ef96498866b7a8eadcc74dff9223/src/cmsx
 ## 追加独立精确profile数值定位
 
 本机两个显示profile都是XYZ matrix+单值gamma TRC；sRGB源profile为1024点TRC。独立按实际源TRC→PCS矩阵→目标逆矩阵→目标逆TRC计算，已在INDEPENDENT_PROFILE_ORACLE.json记录与LCMS、WIC的逐样本差异。PCS矩阵已D50，不重复chad。这仅覆盖三份固定profile，不是任意ICC实现；不改变WIC差异或真实合成器未验收边界。
+
+独立oracle本次实际FAILED：最大133码>预定16码（源输入1/65535近黑处；其余本组最大2码），与WIC仍最大820码。完整失败保留，未放宽阈值或删近黑样本。精确profile模型/原生暗部量化仍须定位，故显示转换继续不接生产。
