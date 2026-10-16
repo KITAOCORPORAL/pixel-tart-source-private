@@ -1,0 +1,27 @@
+{
+  "Width": 7752,
+  "Height": 5184,
+  "Orientation": 1,
+  "rgbHash": "94CA1B5FFA49593484BA99CB5D9F84955CC094E033DD7CC4AB8E1F91C2FA7107",
+  "renderedHash": "94CA1B5FFA49593484BA99CB5D9F84955CC094E033DD7CC4AB8E1F91C2FA7107",
+  "sourceSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+  "OMP_NUM_THREADS": "14",
+  "decoder": "0.21.1-Release",
+  "modules": [
+    {
+      "name": "raw_r.dll",
+      "path": "N:\\pixart\\kitao-photo-engine-home-20261016\\tools\\PhotoEngineHomeAudit\\bin\\Release\\net10.0-windows10.0.19041.0\\win-x64\\raw_r.dll",
+      "sha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9"
+    },
+    {
+      "name": "jpeg8.dll",
+      "path": "N:\\pixart\\kitao-photo-engine-home-20261016\\tools\\PhotoEngineHomeAudit\\bin\\Release\\net10.0-windows10.0.19041.0\\win-x64\\jpeg8.dll",
+      "sha256": "3854CEBC61FD5892CB60491719834922030097F7848D29CCCBFCA3E88D7ED1E5"
+    },
+    {
+      "name": "lcms2.dll",
+      "path": "N:\\pixart\\kitao-photo-engine-home-20261016\\tools\\PhotoEngineHomeAudit\\bin\\Release\\net10.0-windows10.0.19041.0\\win-x64\\lcms2.dll",
+      "sha256": "87BF94F27F345384420383F247178F825C0101928FEDD3A4887FF60E9D4A76EB"
+    }
+  ]
+}

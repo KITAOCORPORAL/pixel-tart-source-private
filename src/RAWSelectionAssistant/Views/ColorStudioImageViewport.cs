@@ -5,7 +5,7 @@ using System.Windows.Media.Imaging;
 namespace RAWSelectionAssistant.Views;
 
 /// <summary>Displays processed bitmaps; color processing remains in the existing renderer.</summary>
-public sealed class ColorStudioImageViewport : FrameworkElement
+public sealed partial class ColorStudioImageViewport : FrameworkElement
 {
     public static readonly DependencyProperty SourcePixelSizeProperty = DependencyProperty.Register(nameof(SourcePixelSize), typeof(Size), typeof(ColorStudioImageViewport), new FrameworkPropertyMetadata(Size.Empty, FrameworkPropertyMetadataOptions.AffectsRender, Changed));
     public Size SourcePixelSize { get => (Size)GetValue(SourcePixelSizeProperty); set => SetValue(SourcePixelSizeProperty, value); }
@@ -32,7 +32,7 @@ public sealed class ColorStudioImageViewport : FrameworkElement
         return new((visible.Left-image.Left)/State.Zoom,(visible.Top-image.Top)/State.Zoom,visible.Width/State.Zoom,visible.Height/State.Zoom);
     }
     public ColorStudioZoomPanState State { get; } = new();
-    public ColorStudioImageViewport() { ClipToBounds = true; SizeChanged += (_, _) => Configure(); State.Changed += (_, _) => InvalidateVisual(); }
+    public ColorStudioImageViewport() { AttachProfileDiagnostics(); ClipToBounds = true; SizeChanged += (_, _) => Configure(); State.Changed += (_, _) => InvalidateVisual(); }
     private static void Changed(DependencyObject sender, DependencyPropertyChangedEventArgs e) => ((ColorStudioImageViewport)sender).Configure();
     public void Configure() { if (Original is { } image) State.Configure(ColorStudioSampleMapping.Viewport(RenderSize, Mode == "并排对比", false).Size, SourcePixelSize.IsEmpty ? new Size(image.PixelWidth, image.PixelHeight) : SourcePixelSize); }
     protected override void OnRender(DrawingContext dc)
