@@ -37,7 +37,7 @@ public sealed record CandidateRecipe(int AlgorithmVersion, string ProfileId, Can
     public static CandidateRecipe Create(string id,ulong seed=20261016)
     {
         var p=CandidateProfiles.Available.Single(p=>p.Id==id);
-        var old=InstantFilmProfiles.Available.Single(p=>p.Id==p.LegacyId);
+        var old=InstantFilmProfiles.Available.Single(old=>old.Id==p.LegacyId);
         var d=new InstantFilmDefinition(true,old.Id,old.ChemicalGeneration);
         return new(3,id,p.Response,p.Provenance,new(),new(),new(),new(),InstantFilmRandom.Roll(d,seed));
     }
