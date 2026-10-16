@@ -1,0 +1,32 @@
+{
+  "identity": "Sony_DSC08015",
+  "nativeSha256": "6a459c22039abf0eac4d263673337c8ed5f223acbd372fcf77610debf80ac8cd",
+  "status": "CANCELLED_BY_NATIVE_CALLBACK",
+  "openCode": 0,
+  "unpackCode": -100010,
+  "processCode": null,
+  "elapsedMs": 81.15930002531968,
+  "callbacks": [
+    {
+      "ms": 8.083100023213774,
+      "stage": 2,
+      "iteration": 1,
+      "expected": 2
+    },
+    {
+      "ms": 8.112500014249235,
+      "stage": 8,
+      "iteration": 0,
+      "expected": 2
+    },
+    {
+      "ms": 73.69630000903271,
+      "stage": 8,
+      "iteration": 1,
+      "expected": 2
+    }
+  ],
+  "outputProduced": false,
+  "scope": "Direct fixed-candidate C API cancellation on isolated copy, not product switch/UI cancellation",
+  "nativeClosed": true
+}
