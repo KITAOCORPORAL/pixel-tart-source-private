@@ -1,0 +1,88 @@
+{
+  "root": "E:\\Kitao-Worktrees\\kitao-wpf-failures-20261016\\artifacts\\wpf-failures\\published-premium-run\\results\\run-20261016-103137-dc13a57b",
+  "assembly": "E:\\Kitao-IsolatedHosts\\fixed-B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "00c7d26d564b3e74389584cdde7aa951226d818e90b34e9d38769aea6869c4dc",
+  "discovered": 1626,
+  "selected": 6,
+  "runs": [
+    {
+      "pid": 4540,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.AssetLibraryP3AutomatedRunSetContractTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-failures-20261016\\artifacts\\wpf-failures\\published-premium-run\\results\\run-20261016-103137-dc13a57b\\000-AssetLibraryP3AutomatedRunSetContractTests",
+      "expected": 3,
+      "results": [
+        {
+          "id": "109f3cd3-1a3a-88c6-9e9a-90a6595fc9a3",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3AutomatedRunSetContractTests.RunSetScriptPinsThreeValidatedDisjointRunsAndExternalOutput",
+          "display": "RunSetScriptPinsThreeValidatedDisjointRunsAndExternalOutput",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "116ab535-1685-83c1-8afb-5115851c12b9",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3AutomatedRunSetContractTests.RunSetScriptWritesPassedSummaryOutsideAllThreeRunRoots",
+          "display": "RunSetScriptWritesPassedSummaryOutsideAllThreeRunRoots",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "10b73f28-102a-8e90-9a61-dcb2e3e55d69",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3AutomatedRunSetContractTests.RunSetScriptRejectsWrongCountInternalOutputAndCrossRunIdentityReuse",
+          "display": "RunSetScriptRejectsWrongCountInternalOutputAndCrossRunIdentityReuse",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 33600,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-failures-20261016\\artifacts\\wpf-failures\\published-premium-run\\results\\run-20261016-103137-dc13a57b\\001-StudioV2PremiumPrototypeEvidenceTests",
+      "expected": 1,
+      "results": [
+        {
+          "id": "14c5a5ea-787a-8d3f-a403-00c51b4a1904",
+          "name": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet",
+          "display": "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 21052,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.TetherSplitCompareTests",
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-failures-20261016\\artifacts\\wpf-failures\\published-premium-run\\results\\run-20261016-103137-dc13a57b\\002-TetherSplitCompareTests",
+      "expected": 2,
+      "results": [
+        {
+          "id": "1d9f0855-9073-8a52-9baa-a3cef6f20a1b",
+          "name": "RAWSelectionAssistant.WpfTests.TetherSplitCompareTests.SplitAccepts25_50_75AndClampsBounds",
+          "display": "SplitAccepts25_50_75AndClampsBounds",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "12546ee3-9d04-82cf-99c6-8703b2008d8b",
+          "name": "RAWSelectionAssistant.WpfTests.TetherSplitCompareTests.SplitUsesGeometryAndSharedParentTransform",
+          "display": "SplitUsesGeometryAndSharedParentTransform",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "counts": {
+    "Passed": 6
+  }
+}

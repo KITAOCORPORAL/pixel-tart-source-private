@@ -1,0 +1,15 @@
+# 本批失败关闭与色彩路径：待全量结果封存
+
+基线validation/kitao-wpf-icc-gates-20261015/444551295dcc6d92d612dccfaf5e520a811c3e75，远端与fix/kitao-icc-reliability/4e70d024实际核对；merge-base4e70d024，src相同。旧研究63ca45仅祖先资料复用，不整分支merge。独立工作树E:/Kitao-Worktrees/kitao-wpf-failures-20261016。业务验收时区Asia/Shanghai，原主机时间戳保留。
+
+产品/测试/宿主冻结3213805d585b8fa9e873a0dac40552e9a142a23b；色彩研究脚本另94309e0。真实产品改动仅ReferenceHeader有限宽度换行，不改变任何像素算法。V1仍defaultoff，V2研究版不接入生产，PV456golden原样。
+
+已关闭原失败：P3嵌套PowerShell不能使用过深evidence路径作lpCurrentDirectory，改短verifiedSystem目录+绝对exe/args；TetherRepoRoot用显式TestResources，5原测试unchangedPassed。PrivatehostINFINITE改boundedJobObjectparent/treeownership，2sec实际timeout124+parentchildgone。PremiumAuto列infiniteWrap测量+responsivecode重置导致close撞导入导出；修复finite独立行和responsive，实际publishedspecial6Passed含Premium独立1不混fullcounts。7stateclosecollision0，buttoncenterrealInputHitTestownancestor通过，RenderTargetBitmap截图已保存及视读，不叫physicalDPI/nativeclick。
+
+数学：Canonfixedmatrix回程1,557,374负样本全来自恰零输入通道，最小-2.8223e-10，maxhalfroundtrip7.45058e-9，double5.55e-17，directidentity0，skcms同类crosscheck。大负值ProPhotoprimaries是真超色域；不全局clamp/加epsilon/EVheadroom。候选LumaRayStudy不是批准感知映射，灰阶高光level损失与肤色/saturation误差明确；matrixperceptualintent不提供gamutmapping。当前不生产新tolerance或算法。
+
+NativeLCMScleanWindowsVMnotavailable=>NOT_RUN，精确binary/source/MIT/PE元数据和build对应仍open，不用不同hashDLL。Sony候选/recipe义务/完整pixelgate仍research不捆绑；Fujiactivearea按版本/origin保留，不后裁图；Structure~6.8svsfull~4.2s不替换。
+
+Native验收仅封存manifest/newisolatedruntime准备，不争抢共享桌面；无reservation不做input，startup/navigation/tray/relocation/undo-redo/DOCX/Colorcancel/reopen/export/WPS/physicalDPI/nativevisual/memory未实跑。后台WPF/AX/逻辑DPI/截图分别，不冒充人机通过。CalibrationEligible=false，无色卡需求或绝对色准宣传。
+
+最终完整Core/WPF、超时/missingTRX和NotExecuted以实际summary为准；专项不替代。本轮fullrun仍在既定上限执行，单类超时不改绿/不无限重跑。原失败/trx/logs及新失败都保留。Release290/Tool414全目录hash+treehash已封存；最终普通push/remote确认另记录。

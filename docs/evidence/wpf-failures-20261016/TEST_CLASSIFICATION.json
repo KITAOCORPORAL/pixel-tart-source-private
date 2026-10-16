@@ -1,0 +1,91 @@
+{
+  "businessTimezone": "Asia/Shanghai",
+  "finalSource": "c6142c14c7fb4d1c9af500b42673ddb7a4a910ae",
+  "finalPublishedCore": {
+    "discovered": 1708,
+    "selected": 1708,
+    "Passed": 1702,
+    "Failed": 0,
+    "NotExecuted": 6,
+    "strict": "FAILED"
+  },
+  "finalSourceCore": {
+    "discovered": 1708,
+    "selected": 1708,
+    "Passed": 1701,
+    "Failed": 0,
+    "NotExecuted": 7,
+    "strict": "FAILED"
+  },
+  "finalPublishedFullWpf": {
+    "discovered": 1626,
+    "selected": 1626,
+    "returned": 1584,
+    "Passed": 1561,
+    "Failed": 0,
+    "NotExecuted": 23,
+    "MissingResultTimeout": 42,
+    "strict": "FAILED",
+    "classes": 212
+  },
+  "finalPublishedSecondRootSpecial": {
+    "discovered": 1626,
+    "selected": 18,
+    "Passed": 18,
+    "Failed": 0,
+    "NotExecuted": 0,
+    "strict": "PASSED_SUBSET_ONLY",
+    "premiumOptinSeparateFromFull": true
+  },
+  "firstFullRound": {
+    "source": "3213805d585b8fa9e873a0dac40552e9a142a23b",
+    "Passed": 1532,
+    "Failed": 1,
+    "NotExecuted": 23,
+    "MissingResultTimeout": 70,
+    "strict": "FAILED_RETAINED"
+  },
+  "P1SeparateDiagnostic": {
+    "Passed": 42,
+    "doesNotReplaceFinalFullTimeout": true
+  },
+  "originalThreeTests": [
+    {
+      "id": "116ab535-1685-83c1-8afb-5115851c12b9",
+      "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3AutomatedRunSetContractTests.RunSetScriptWritesPassedSummaryOutsideAllThreeRunRoots",
+      "display": "RunSetScriptWritesPassedSummaryOutsideAllThreeRunRoots",
+      "outcome": "Passed",
+      "error": ""
+    },
+    {
+      "id": "109f3cd3-1a3a-88c6-9e9a-90a6595fc9a3",
+      "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3AutomatedRunSetContractTests.RunSetScriptPinsThreeValidatedDisjointRunsAndExternalOutput",
+      "display": "RunSetScriptPinsThreeValidatedDisjointRunsAndExternalOutput",
+      "outcome": "Passed",
+      "error": ""
+    },
+    {
+      "id": "10b73f28-102a-8e90-9a61-dcb2e3e55d69",
+      "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3AutomatedRunSetContractTests.RunSetScriptRejectsWrongCountInternalOutputAndCrossRunIdentityReuse",
+      "display": "RunSetScriptRejectsWrongCountInternalOutputAndCrossRunIdentityReuse",
+      "outcome": "Passed",
+      "error": ""
+    },
+    {
+      "id": "1d9f0855-9073-8a52-9baa-a3cef6f20a1b",
+      "name": "RAWSelectionAssistant.WpfTests.TetherSplitCompareTests.SplitAccepts25_50_75AndClampsBounds",
+      "display": "SplitAccepts25_50_75AndClampsBounds",
+      "outcome": "Passed",
+      "error": ""
+    },
+    {
+      "id": "12546ee3-9d04-82cf-99c6-8703b2008d8b",
+      "name": "RAWSelectionAssistant.WpfTests.TetherSplitCompareTests.SplitUsesGeometryAndSharedParentTransform",
+      "display": "SplitUsesGeometryAndSharedParentTransform",
+      "outcome": "Passed",
+      "error": ""
+    }
+  ],
+  "native": "NOT_RUN_NO_RESERVED_DESKTOP",
+  "CalibrationEligible": false
+}

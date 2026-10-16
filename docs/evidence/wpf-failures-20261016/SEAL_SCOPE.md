@@ -1,0 +1,1 @@
+封存阶段不改产品/测试/算法源码、不重启完整回归。以c6142c14c7fb4d1c9af500b42673ddb7a4a910ae为最终源码；首轮3213805仍保留。最终WPF1626 selected/1584returned/1561Passed/23NotExecuted/42missingtimeout，0实测Failed但严格不通过。单独P1诊断42Passed不补数。独立Premium/高度/原3失败专项18Passed不当完整结果。原始日志/缺TRX/超时/cleanup和截图身份保留；照片/DB/研究二进制/Release不入Git。

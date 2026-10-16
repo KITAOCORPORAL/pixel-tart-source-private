@@ -1,0 +1,66 @@
+{
+  "firstPublishedCore": {
+    "assembly": "C:\\Kitao-IsolatedHosts\\fixed-A\\core\\RAWSelectionAssistant.Tests.dll",
+    "sha256": "d92e5699c3edaa02b82d14a2b8cd6ade3fbbdb032424e703ce44d601bdd71982",
+    "selected": 1708,
+    "discovered": 1708,
+    "status": "FAILED",
+    "counts": {
+      "Passed": 1702,
+      "NotExecuted": 6
+    }
+  },
+  "firstSourceCore": {
+    "assembly": "E:\\Kitao-Worktrees\\kitao-wpf-failures-20261016\\tests\\RAWSelectionAssistant.Tests\\bin\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+    "sha256": "d92e5699c3edaa02b82d14a2b8cd6ade3fbbdb032424e703ce44d601bdd71982",
+    "selected": 1708,
+    "discovered": 1708,
+    "status": "FAILED",
+    "counts": {
+      "Passed": 1701,
+      "NotExecuted": 7
+    }
+  },
+  "finalPublishedCore": {
+    "assembly": "C:\\KH\\F16A\\core\\RAWSelectionAssistant.Tests.dll",
+    "sha256": "eed380be89c7f4ffb9b004401fb18db50bd352368e1b9dbbcbb25ab5d980d0cc",
+    "selected": 1708,
+    "discovered": 1708,
+    "status": "FAILED",
+    "counts": {
+      "Passed": 1702,
+      "NotExecuted": 6
+    }
+  },
+  "finalSpecial": {
+    "assembly": "E:\\KH\\F16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+    "sha256": "8722e78731f42a49c9339ebb8697791769cc42b3fca44be602ae1c6d4b72700e",
+    "selected": 18,
+    "discovered": 1626,
+    "status": "PASSED",
+    "counts": {
+      "Passed": 18
+    }
+  },
+  "initialAffected": {
+    "assembly": "E:\\Kitao-Worktrees\\kitao-wpf-failures-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+    "sha256": "c4777318cd73be236601204f4be5b2a4055e9a8c96e372d6193b72a9b5f90d81",
+    "selected": 5,
+    "discovered": 1626,
+    "status": "PASSED",
+    "counts": {
+      "Passed": 5
+    }
+  },
+  "finalSourceCore": {
+    "assembly": "E:\\Kitao-Worktrees\\kitao-wpf-failures-20261016\\tests\\RAWSelectionAssistant.Tests\\bin\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+    "sha256": "eed380be89c7f4ffb9b004401fb18db50bd352368e1b9dbbcbb25ab5d980d0cc",
+    "discovered": 1708,
+    "selected": 1708,
+    "status": "FAILED",
+    "counts": {
+      "Passed": 1701,
+      "NotExecuted": 7
+    }
+  }
+}

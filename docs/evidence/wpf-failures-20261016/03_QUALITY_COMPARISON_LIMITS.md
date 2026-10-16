@@ -1,0 +1,1 @@
+灰阶/高光研究比较用linearRGB/luminance/unique16bitcodes，并非DeltaE感知真值。Skin-neighbor限输入已在线性sRGB域的小邻域，本候选不改这些值，不能泛化人像色准。饱和ProPhoto色度压缩与hardclip的meanRGB变化不同，没有凭“更少裁切像素”判断更好。高光0.8..4在explicitclamp后层次数512→102，candidate50，更差；未批准candidate，更未接产品。维持extendedfloat能保留512levels，但integerexport需明确mapping/encoding，不把float保存等同显示成功。

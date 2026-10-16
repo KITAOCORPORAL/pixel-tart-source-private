@@ -1,0 +1,12 @@
+{
+  "scope": "specificfixedmatrixroundtrip, diagnosticcomparisonnotapprovedepsilon",
+  "minNegative": -2.82230738779532e-10,
+  "floatRoundtripMaxAbs": 7.450580596923828e-9,
+  "half16bitCode": 0.000007629510948348211,
+  "maxFloatErrorIn16bitCodes": 0.0004882737994194031,
+  "minNegativeIn16bitCodes": -0.000018495991465916628,
+  "doubleRoundtripMaxAbs": 5.551115123125783e-17,
+  "allNegativeInputChannelsWereZero": true,
+  "conclusion": "Tinyroundtripzerochannelerrorsmanyordersbelow1code; doesNOTjustifyignoringrealoutgamutprofiledata",
+  "noToleranceChange": true
+}

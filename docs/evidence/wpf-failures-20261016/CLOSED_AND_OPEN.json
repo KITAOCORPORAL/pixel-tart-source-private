@@ -1,0 +1,61 @@
+{
+  "closed": [
+    {
+      "issue": "P3nestedPowerShellcwd",
+      "evidence": "actualpublishedspecial3Passed; fullresultsseparate"
+    },
+    {
+      "issue": "TetherexplicitresourceRoot",
+      "evidence": "actualpublishedspecial2Passed; noancestorwalk"
+    },
+    {
+      "issue": "Premiumshellclosecollision",
+      "evidence": "actualpublishedPremium1Passed;7state0collision;headercentrehitownbutton;RenderTargetBitmapviewed"
+    },
+    {
+      "issue": "PrivatehostINFINITEwait",
+      "evidence": "2secJobtimeout124parentchildgone rawUTCevents"
+    }
+  ],
+  "open": [
+    {
+      "issue": "FinalfullWPF",
+      "status": "FAILED_INCOMPLETE_RESULTS",
+      "counts": {
+        "discovered": 1626,
+        "selected": 1626,
+        "returned": 1584,
+        "Passed": 1561,
+        "Failed": 0,
+        "NotExecuted": 23,
+        "MissingResultTimeout": 42,
+        "strict": "FAILED",
+        "classes": 212
+      },
+      "problem": "P1class600stimeout42missingTRX; separate42diagnosticpassednotreplacement"
+    },
+    {
+      "issue": "CleanWindowsnative",
+      "status": "NOT_RUN_NO_VM"
+    },
+    {
+      "issue": "Perceptualmapping",
+      "status": "CANDIDATE_NOT_APPROVED_NO_PRODUCTION_PIXEL_CHANGE"
+    },
+    {
+      "issue": "Native/WPS/physicalDPI",
+      "status": "NOT_RUN_NO_RESERVED_DESKTOP"
+    },
+    {
+      "issue": "Sonycandidatepackaging/recipe",
+      "status": "RESEARCH_ONLY"
+    },
+    {
+      "issue": "Structurefulltimebenefit",
+      "status": "NOT_MET"
+    }
+  ],
+  "allActualReleaseBindingsMatch": true,
+  "noGlobalEpsilonOrClamp": true,
+  "CalibrationEligible": false
+}

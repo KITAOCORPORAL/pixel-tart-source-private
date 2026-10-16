@@ -1,0 +1,73 @@
+[
+  {
+    "sha": "407ad9d15150c8b40cd6e1864ef7a682a08ecca4",
+    "message": "fix(validation): bound private host job lifetime and repair P3 Tether resource execution",
+    "files": [
+      "A\tdocs/evidence/wpf-failures-20261016/.gitattributes",
+      "A\tdocs/evidence/wpf-failures-20261016/01_AFFECTED_SUMMARY.json",
+      "A\tdocs/evidence/wpf-failures-20261016/01_ROOT_PROCESS_FIX.md",
+      "A\tdocs/evidence/wpf-failures-20261016/01_TIMEOUT_CLEANUP.json",
+      "A\tdocs/evidence/wpf-failures-20261016/01_TIMEOUT_HOST.json",
+      "A\tdocs/evidence/wpf-failures-20261016/START.json",
+      "M\ttests/RAWSelectionAssistant.WpfTests/StageIIIReferenceTetherWpfTests.cs",
+      "M\ttools/AssetLibraryP3AutomatedAcceptance/Test-P3AssetLibraryAutomatedRunSet.ps1",
+      "M\ttools/PrivateWpfHost/Program.cs",
+      "A\ttools/wpf-failures/host_timeout_smoke.py"
+    ]
+  },
+  {
+    "sha": "3213805d585b8fa9e873a0dac40552e9a142a23b",
+    "message": "fix(studio): constrain header actions outside shell close area with geometry and hit tests",
+    "files": [
+      "A\tdocs/evidence/wpf-failures-20261016/01_FIX_ROOT_CAUSES.json",
+      "A\tdocs/evidence/wpf-failures-20261016/02_COLLISION_BEFORE.jsonl",
+      "A\tdocs/evidence/wpf-failures-20261016/02_COLLISION_FIXED.jsonl",
+      "A\tdocs/evidence/wpf-failures-20261016/02_COLLISION_HIT_FIXED.jsonl",
+      "A\tdocs/evidence/wpf-failures-20261016/02_HEADER_HIT_TARGETS.jsonl",
+      "A\tdocs/evidence/wpf-failures-20261016/02_LAYOUT_FIX.md",
+      "A\tdocs/evidence/wpf-failures-20261016/02_PREMIUM_FIXED_SUMMARY.json",
+      "A\tdocs/evidence/wpf-failures-20261016/02_PREMIUM_HIT_SUMMARY.json",
+      "A\tdocs/evidence/wpf-failures-20261016/02_SCREENSHOT_FILES.json",
+      "M\tsrc/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml",
+      "M\tsrc/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/StudioV2PremiumPrototypeEvidenceTests.cs"
+    ]
+  },
+  {
+    "sha": "94309e08ceed1d6f5681a24cb89f9e8cfb34595c",
+    "message": "research(color): attribute Canon zero-channel roundoff and compare explicit output strategies",
+    "files": [
+      "A\tdocs/evidence/wpf-failures-20261016/03_COLOR_CHAIN_CONTRACT.md",
+      "A\tdocs/evidence/wpf-failures-20261016/03_MAPPING_RESEARCH_GATE.md",
+      "A\tdocs/evidence/wpf-failures-20261016/03_MAPPING_STUDY.json",
+      "A\tdocs/evidence/wpf-failures-20261016/03_NEGATIVE_ATTRIBUTION.json",
+      "A\tdocs/evidence/wpf-failures-20261016/03_NEGATIVE_ATTRIBUTION_FINAL.json",
+      "A\tdocs/evidence/wpf-failures-20261016/03_NEGATIVE_ATTRIBUTION_FINAL_RUN.json",
+      "A\tdocs/evidence/wpf-failures-20261016/03_NEGATIVE_ATTRIBUTION_RUN.json",
+      "A\tdocs/evidence/wpf-failures-20261016/03_NUMERICAL_CONCLUSION.md",
+      "A\tdocs/evidence/wpf-failures-20261016/03_REFERENCE_BUILD.json",
+      "A\ttools/wpf-failures/mapping_study.py",
+      "A\ttools/wpf-failures/negative_attribution.py"
+    ]
+  },
+  {
+    "sha": "ce2d6fe36eda1a7d69ea13476b49d493c85e4d22",
+    "message": "docs(gates): keep exact native and reserved-desktop acceptance requirements open",
+    "files": [
+      "A\tdocs/evidence/wpf-failures-20261016/04_EXACT_NATIVE_RECHECK.json",
+      "A\tdocs/evidence/wpf-failures-20261016/04_NATIVE_DEPENDENCIES_AND_SCOPE.md",
+      "A\tdocs/evidence/wpf-failures-20261016/05_NATIVE_PLAN.md"
+    ]
+  },
+  {
+    "sha": "c6142c14c7fb4d1c9af500b42673ddb7a4a910ae",
+    "message": "fix(studio): retain image height with explicitly bounded responsive header actions",
+    "files": [
+      "A\tdocs/evidence/wpf-failures-20261016/02_BOUNDED_HEADER_COLLISION.jsonl",
+      "A\tdocs/evidence/wpf-failures-20261016/02_BOUNDED_HEADER_HITS.jsonl",
+      "A\tdocs/evidence/wpf-failures-20261016/02_HEIGHT_AND_PREMIUM_SUMMARY.json",
+      "A\tdocs/evidence/wpf-failures-20261016/02_HEIGHT_REGRESSION_HISTORY.md",
+      "M\tsrc/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml.cs"
+    ]
+  }
+]

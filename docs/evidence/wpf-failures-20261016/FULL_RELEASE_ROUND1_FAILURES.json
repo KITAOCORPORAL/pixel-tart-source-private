@@ -1,0 +1,40 @@
+{
+  "counts": {
+    "Passed": 1532,
+    "NotExecuted": 23,
+    "Failed": 1
+  },
+  "missing": [
+    {
+      "class": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests",
+      "timeout": true,
+      "expected": 42,
+      "actual": 0,
+      "errors": [
+        "missing TRX",
+        "nonzero child exit",
+        "timeout"
+      ]
+    },
+    {
+      "class": "RAWSelectionAssistant.WpfTests.BatchExportProcessedPixelsTests",
+      "timeout": true,
+      "expected": 28,
+      "actual": 0,
+      "errors": [
+        "missing TRX",
+        "nonzero child exit",
+        "timeout"
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "id": "17b75445-82d7-81de-806b-a63814c1fad8",
+      "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.FilmstripKeepsCompactHeightAndCollapseReturnsSpaceToMainImage",
+      "display": "FilmstripKeepsCompactHeightAndCollapseReturnsSpaceToMainImage",
+      "outcome": "Failed",
+      "error": "Assert.IsTrue 失败。‘condition’表达式:‘image.ActualHeight > size.Height * .55’。 Image area 386.7 at 1180,720.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AssertIsTrueInterpolatedStringHandler.ComputeAssertion(String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 40\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, AssertIsTrueInterpolatedStringHandler& message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 129\r\n   at RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.<>c.<<FilmstripKeepsCompactHeightAndCollapseReturnsSpaceToMainImage>b__11_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+    }
+  ]
+}

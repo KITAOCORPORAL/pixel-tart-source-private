@@ -1,0 +1,176 @@
+{
+  "date": "2026-10-16",
+  "businessTimezone": "Asia/Shanghai",
+  "startedThisBatch": false,
+  "inputSentThisBatch": false,
+  "desktopReservation": "NOT_AVAILABLE_NOT_PROBED_REPEATEDLY",
+  "previousInputDetection": "inheritedUNKNOWNnotretested",
+  "backend": "privateWpfactualHWND/geometry/hittest separate",
+  "AX": "NOT_RUN_THIS_BATCH",
+  "screenshot": "offscreenRenderTargetBitmapEXISTS; nativecaptureNOT_RUN",
+  "visualApproval": "limitedscreenshotreviewonlynotphysicaldisplay",
+  "WPS": "NOT_RUN",
+  "DPI": {
+    "physical100": "NOT_RUN",
+    "physical125": "NOT_RUN",
+    "physical150": "NOT_RUN",
+    "physical200": "NOT_RUN",
+    "logicalScale": "Premiumoffscreenmatrixtested"
+  },
+  "runtime": "E:/Kitao-Worktrees/kitao-wpf-failures-20261016/artifacts/wpf-failures/native-prepared/runtime",
+  "items": [
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "StartupNoBlockingDialog",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "WorkbenchToPlanning",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "WorkbenchToColorStudio",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "TrayImageSimple",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "TrayImageAdvanced",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "RepeatedImageReferences",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "MoveProjectAndOriginalFolderThenReopen",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "UndoRedo",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "DocxExportAndReadback",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "ColorPhotoSwitchCancellation",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "ColorRecipeSaveReopen",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "Tiff16Png16JpegExport",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "PhysicalDPI100",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "PhysicalDPI125",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "PhysicalDPI150",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "PhysicalDPI200",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    },
+    {
+      "evidence": [],
+      "wpsRoundtrip": "NOT_RUN",
+      "id": "WpsOpenEditSaveReimport",
+      "backend": "SEPARATE",
+      "visualApproval": "NOT_RUN",
+      "nativeClick": "NOT_RUN",
+      "reason": "Await reserved idle desktop"
+    }
+  ]
+}

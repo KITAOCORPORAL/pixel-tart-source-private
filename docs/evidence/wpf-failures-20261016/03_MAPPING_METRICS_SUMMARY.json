@@ -1,0 +1,150 @@
+[
+  {
+    "scene": "gray",
+    "lcmsPerceptualVsRelativeMaxAbs": 0,
+    "metrics": [
+      {
+        "mode": "preserveExtended",
+        "negativeSamples": 171,
+        "aboveOne": 684,
+        "changedPixels": 0,
+        "meanLinearRgbAbsChange": 0,
+        "meanLumaChange": 0,
+        "unique16bitLumaLevels": 512,
+        "skinMaxDelta": null
+      },
+      {
+        "mode": "ExportClip0To1V2",
+        "negativeSamples": 0,
+        "aboveOne": 0,
+        "changedPixels": 285,
+        "meanLinearRgbAbsChange": 0.2368718276557047,
+        "meanLumaChange": 0.2368718276557047,
+        "unique16bitLumaLevels": 229,
+        "skinMaxDelta": null
+      },
+      {
+        "mode": "LumaRayCompressStudy1_NOT_APPROVED",
+        "negativeSamples": 0,
+        "aboveOne": 0,
+        "changedPixels": 285,
+        "meanLinearRgbAbsChange": 0.2368718276557047,
+        "meanLumaChange": 0.2368718276557047,
+        "unique16bitLumaLevels": 229,
+        "skinMaxDelta": null
+      }
+    ],
+    "candidateApproved": false
+  },
+  {
+    "scene": "saturated",
+    "lcmsPerceptualVsRelativeMaxAbs": 0,
+    "metrics": [
+      {
+        "mode": "preserveExtended",
+        "negativeSamples": 8,
+        "aboveOne": 5,
+        "changedPixels": 0,
+        "meanLinearRgbAbsChange": 0,
+        "meanLumaChange": 0,
+        "unique16bitLumaLevels": 5,
+        "skinMaxDelta": null
+      },
+      {
+        "mode": "ExportClip0To1V2",
+        "negativeSamples": 0,
+        "aboveOne": 0,
+        "changedPixels": 5,
+        "meanLinearRgbAbsChange": 0.39428696770531435,
+        "meanLumaChange": 0.0929386301885173,
+        "unique16bitLumaLevels": 5,
+        "skinMaxDelta": null
+      },
+      {
+        "mode": "LumaRayCompressStudy1_NOT_APPROVED",
+        "negativeSamples": 0,
+        "aboveOne": 0,
+        "changedPixels": 5,
+        "meanLinearRgbAbsChange": 0.6202415654278925,
+        "meanLumaChange": 3.3306690738754695e-17,
+        "unique16bitLumaLevels": 5,
+        "skinMaxDelta": null
+      }
+    ],
+    "candidateApproved": false
+  },
+  {
+    "scene": "skin",
+    "lcmsPerceptualVsRelativeMaxAbs": 0,
+    "metrics": [
+      {
+        "mode": "preserveExtended",
+        "negativeSamples": 0,
+        "aboveOne": 0,
+        "changedPixels": 0,
+        "meanLinearRgbAbsChange": 0,
+        "meanLumaChange": 0,
+        "unique16bitLumaLevels": 256,
+        "skinMaxDelta": 0
+      },
+      {
+        "mode": "ExportClip0To1V2",
+        "negativeSamples": 0,
+        "aboveOne": 0,
+        "changedPixels": 0,
+        "meanLinearRgbAbsChange": 0,
+        "meanLumaChange": 0,
+        "unique16bitLumaLevels": 256,
+        "skinMaxDelta": 0
+      },
+      {
+        "mode": "LumaRayCompressStudy1_NOT_APPROVED",
+        "negativeSamples": 0,
+        "aboveOne": 0,
+        "changedPixels": 0,
+        "meanLinearRgbAbsChange": 0,
+        "meanLumaChange": 0,
+        "unique16bitLumaLevels": 256,
+        "skinMaxDelta": 0
+      }
+    ],
+    "candidateApproved": false
+  },
+  {
+    "scene": "highlight",
+    "lcmsPerceptualVsRelativeMaxAbs": 0,
+    "metrics": [
+      {
+        "mode": "preserveExtended",
+        "negativeSamples": 0,
+        "aboveOne": 1353,
+        "changedPixels": 0,
+        "meanLinearRgbAbsChange": 0,
+        "meanLumaChange": 0,
+        "unique16bitLumaLevels": 512,
+        "skinMaxDelta": null
+      },
+      {
+        "mode": "ExportClip0To1V2",
+        "negativeSamples": 0,
+        "aboveOne": 0,
+        "changedPixels": 480,
+        "meanLinearRgbAbsChange": 1.1012843979988247,
+        "meanLumaChange": 1.1907928990341257,
+        "unique16bitLumaLevels": 102,
+        "skinMaxDelta": null
+      },
+      {
+        "mode": "LumaRayCompressStudy1_NOT_APPROVED",
+        "negativeSamples": 0,
+        "aboveOne": 0,
+        "changedPixels": 480,
+        "meanLinearRgbAbsChange": 1.1064079907475317,
+        "meanLumaChange": 1.189599416676932,
+        "unique16bitLumaLevels": 50,
+        "skinMaxDelta": null
+      }
+    ],
+    "candidateApproved": false
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "oldResearchBranch": "63ca45ababbfc4780fe46febb767ef5ec76d8377",
+  "note": "Ancestor only; reusablemethodsselectivelyrecorded, no wholebranchmerge or rollback",
+  "adoptedMethods": [
+    {
+      "file": "tools/wpf-icc-gates/extended_compare.py",
+      "commit": "444551295dcc6d92d612dccfaf5e520a811c3e75",
+      "role": "pinnedmaturematrix/integersinknumericreplay",
+      "notProductApproval": true
+    },
+    {
+      "file": "docs/evidence/wpf-icc-gates-20261015/02_V2_FROZEN_POLICY_SUITE.json",
+      "role": "extendedfloat+namedclip/readbackreference",
+      "sha256": "33edb270f890329d0e7a51005a6afa108cfebd8a7d2851d8438dfc40fed234e8",
+      "notPerceptualMapping": true
+    }
+  ],
+  "v2Cases": [
+    {
+      "case": "gray",
+      "clipped": 480,
+      "reopenExact": true
+    },
+    {
+      "case": "saturated",
+      "clipped": 3072,
+      "reopenExact": true
+    },
+    {
+      "case": "skin-neighbor",
+      "clipped": 0,
+      "reopenExact": true
+    },
+    {
+      "case": "highlight",
+      "clipped": 1280,
+      "reopenExact": true
+    },
+    {
+      "case": "authorizedCanonFullRange",
+      "clipped": 1392846,
+      "reopenExact": true
+    }
+  ],
+  "newProductionPixelCodeChanged": false
+}

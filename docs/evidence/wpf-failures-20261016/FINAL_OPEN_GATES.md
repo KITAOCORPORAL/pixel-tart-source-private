@@ -1,0 +1,1 @@
+原三项WPF失败和Premium碰撞专项修复真实Passed，但全量最终以原始runnersummary为准。完整第一轮产生高度失败+42/28缺TRX超时全部保留。第二轮只对直接布局回归做finiteMaxWidth修复后同原门槛完整重跑，短root规避目录干扰而不是修改assertions。PrivateHost默认10800秒整个job有界，class90/600秒原门槛不增。没有独占桌面/干净WindowsVM，native/WPS/physicalDPI/loadfullpackageNOT_RUN。数值微负归因限固定matrixEV回程，不自动以epsilon放行；候选映射高光损失显著，不批准产品。V1/V2/LibRaw/Structure默认状态不变。CalibrationEligible=false。

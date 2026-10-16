@@ -1,0 +1,1 @@
+本批未取得独占/预约桌面，不因 idle 自动发送输入。所有真实启动、导航、托盘插图/搬迁、撤销重做、DOCX/WPS、照片切换取消、保存导出、物理DPI、系统自然内存序列均NOT_RUN。独立私有station WPF创建HWND、几何/命中与RenderTargetBitmap属于后台模型证据，不等于鼠标点击、AX/截图抓屏或物理DPI。预约后可用05_FINAL_NATIVE_PREPARED对应的最终发布目录和新runtime，遇用户输入检测立即停止，当前点击UNKNOWN。旧轮native启动AXready及截图超时/输入检测记录仍继承，不改Passed。

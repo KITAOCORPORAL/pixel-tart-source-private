@@ -1,0 +1,783 @@
+{
+  "hashDomain": "workingtree bytes; self/VALIDATION excluded",
+  "files": [
+    {
+      "path": "docs/evidence/wpf-failures-20261016/.gitattributes",
+      "bytes": 66,
+      "extension": "",
+      "type": "repository metadata",
+      "sha256": "0820a84b587afc2f7c1ebbbc3d8b3e955a2c29cbac16bce2bdd1f83d793d1dcf"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/01_AFFECTED_SUMMARY.json",
+      "bytes": 3142,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "1cb561a7dd17c5cf4997f55719647be23b7a7eca1698272544965ab9328791fb"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/01_FIX_ROOT_CAUSES.json",
+      "bytes": 1514,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "966d92439624b28a8e2a602c04cada6ffce4f7b020f01045a0a733ad1350e4c4"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/01_ROOT_PROCESS_FIX.md",
+      "bytes": 649,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "a866378b81cf0a518d12a4fc22ed4900c03846a2aeeffa1e3a1720a87849e22a"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/01_TIMEOUT_CLEANUP.json",
+      "bytes": 65,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "ff6941fba4a9422924515a331a97fcb08a33e4364eb79a8ca198bdcdc9003051"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/01_TIMEOUT_HOST.json",
+      "bytes": 1731,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "8d7125ab84a57d0aec73f0776ffdf347fee2772a5c39f1721a9e5907f7384266"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_BOUNDED_HEADER_COLLISION.jsonl",
+      "bytes": 964,
+      "extension": ".jsonl",
+      "type": "raw geometry/hit evidence",
+      "sha256": "accac73fec1bf3b5d9b19921eb344c4e4f5312d0826b48063df39893f3b02be0"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_BOUNDED_HEADER_HITS.jsonl",
+      "bytes": 21940,
+      "extension": ".jsonl",
+      "type": "raw geometry/hit evidence",
+      "sha256": "2e987fb8ca18b2032e45225d601ee04db851885de2ba2084f4329959bcaa6f2c"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_COLLISION_BEFORE.jsonl",
+      "bytes": 537,
+      "extension": ".jsonl",
+      "type": "raw geometry/hit evidence",
+      "sha256": "423c0c07d9f49938c530fd1bb4655aa8c741a4ef9411552a6730002ffbcec520"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_COLLISION_FIXED.jsonl",
+      "bytes": 964,
+      "extension": ".jsonl",
+      "type": "raw geometry/hit evidence",
+      "sha256": "accac73fec1bf3b5d9b19921eb344c4e4f5312d0826b48063df39893f3b02be0"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_COLLISION_HIT_FIXED.jsonl",
+      "bytes": 964,
+      "extension": ".jsonl",
+      "type": "raw geometry/hit evidence",
+      "sha256": "accac73fec1bf3b5d9b19921eb344c4e4f5312d0826b48063df39893f3b02be0"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_HEADER_HIT_TARGETS.jsonl",
+      "bytes": 21983,
+      "extension": ".jsonl",
+      "type": "raw geometry/hit evidence",
+      "sha256": "069fde49451d91f6e55277bd00a9bd180d07883598a8e4cf5d979d1ad59a3afa"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_HEIGHT_AND_PREMIUM_SUMMARY.json",
+      "bytes": 5866,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "f121c18d8fc143e6de07496d2cbd5e88cf44e1cc3bae5d4d2ccf65a057542e3a"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_HEIGHT_REGRESSION_HISTORY.md",
+      "bytes": 438,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "877dca1a62f627de117539b83597ee64b905d41c9331b6b3ceaa6dc2112cf523"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_LAYOUT_FIX.md",
+      "bytes": 679,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "45dee508e37ceb1181805fe6493cb1fa6705815bdf3bb1f1355ad4e2c23d2738"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_PREMIUM_FIXED_SUMMARY.json",
+      "bytes": 1330,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "67d49b5d73f4f31ac7724353cdbd72618501088fcb9ec936ec204e34fc5dba48"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_PREMIUM_HIT_SUMMARY.json",
+      "bytes": 1326,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "f0e965c19120ce901cdc3fdd3cb68d18311fd77b0c3913b162785500c83b1d56"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_PUBLISHED_SCREENSHOT_IDENTITY.json",
+      "bytes": 742,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b0dae3e544da94836d1b5113c234ca859f96aaf52718ab6a030d083bf68dddfe"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_SCREENSHOT_FILES.json",
+      "bytes": 7360,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "a32b50736dc86d097559a5212a5f0c88383cacdfcfb94632ceb2e773199555cb"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_screenshots/final-reference-dpi-200.png",
+      "bytes": 307787,
+      "extension": ".png",
+      "type": "synthetic actualWPF screenshot",
+      "sha256": "44cae0a7c2237eb17d9866c6733cc9671b1706ae634efecf0584a6faa70cfa4d"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_screenshots/final-reference-simple.png",
+      "bytes": 179484,
+      "extension": ".png",
+      "type": "synthetic actualWPF screenshot",
+      "sha256": "284f73dabda2ab7ef6b8da57b9fcd10d89d9b5b401304f4902ff501a55866656"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_screenshots/reference-dpi-200.png",
+      "bytes": 307787,
+      "extension": ".png",
+      "type": "synthetic actualWPF screenshot",
+      "sha256": "44cae0a7c2237eb17d9866c6733cc9671b1706ae634efecf0584a6faa70cfa4d"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_screenshots/reference-pro.png",
+      "bytes": 179894,
+      "extension": ".png",
+      "type": "synthetic actualWPF screenshot",
+      "sha256": "524ae49757625532a5a7192a9c7e418315409ca24abf9f093bad35532df55b8c"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/02_screenshots/reference-simple.png",
+      "bytes": 176564,
+      "extension": ".png",
+      "type": "synthetic actualWPF screenshot",
+      "sha256": "8312921d6a70691de9e3f49f5849f1a213a5354ee47e7050b86f0a6a55938265"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_COLOR_CHAIN_CONTRACT.md",
+      "bytes": 2302,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "92916079720c1583f5639b92db92d1e8480621f80f5060d8eaedd8c4a9c5c567"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_FLOAT_ERROR_SCALE.json",
+      "bytes": 567,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "09837e82f4c266f43451bcb829e3544f2e1cae5718c7da00698dd1076c21e674"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_MAPPING_METRICS_SUMMARY.json",
+      "bytes": 3996,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "cbf50061911e51e57da870c5b28e64ec72026b41ded85e8c8cddf5874baad5ec"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_MAPPING_RESEARCH_GATE.md",
+      "bytes": 1683,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "8351654dcd0f5418c111a8c0585c0e1a867d218f2b0313d8ca927cd8668fa575"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_MAPPING_STUDY.json",
+      "bytes": 7668,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "c2bd6bf76c2896950c4b331087b98f3c4d74430466839716eb91ff34657931ff"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_NEGATIVE_ATTRIBUTION.json",
+      "bytes": 9016,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "57b19dea59366959046fa40f239620e7a1048e667376c424e6743b71df245e06"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_NEGATIVE_ATTRIBUTION_FINAL.json",
+      "bytes": 14210,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "1607cdc1282c4bb1864f56da248a68803740a550210dd36b1ac282b36778d2d4"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_NEGATIVE_ATTRIBUTION_FINAL_RUN.json",
+      "bytes": 15964,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "7ef1043fe4177a37b50aeaf9150eefea25179e556ff3fdba13d4dd2931ba3759"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_NEGATIVE_ATTRIBUTION_RUN.json",
+      "bytes": 10112,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "ba88ede2695eecb75fccbb3eb56d215f84a98f6622ef97ebf9259dbc21b26256"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_NUMERICAL_CONCLUSION.md",
+      "bytes": 1745,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "db1b42164cbe302df4a82eb2d24d2add0f70cbcac0a55bd4e570a2e9907e9789"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_QUALITY_COMPARISON_LIMITS.md",
+      "bytes": 551,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "10cfbc4359aa48c2b5fb0faf56130a266a518e056a97f10711e5691d8474fd64"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_REFERENCE_BUILD.json",
+      "bytes": 48,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b8155bc7dc340db60f4819d65af7d615dafffe12803c3e98c1200e8ed22bc79e"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_REUSED_REFERENCE_INDEX.json",
+      "bytes": 1211,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "809da57a027f8066d01e584f3a2f8bd6cfed6dc6ffed48bc6718f3ecb0fa6755"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/03_TOLERANCE_DECISION.json",
+      "bytes": 813,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "35dc68e58515d79726b8e45b347929e74e2f44f83336d6262f24cda5d402fde3"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/04_EXACT_NATIVE_RECHECK.json",
+      "bytes": 1009,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "9458f0991ed5aa670214a8ae8831e47065adf40d6c79e31dd42b0bf1a0d200da"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/04_NATIVE_DEPENDENCIES_AND_SCOPE.md",
+      "bytes": 695,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "cacf55a4e08230bb338033e0e8711c6914be8e21638b7656c8478db64290f9de"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/05_ACTUAL_NATIVE_STATUS.json",
+      "bytes": 4995,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "dcdceb9fac27322c68b1c39895cd27d68bc638bb4b25eeade87e745e2a0ccce9"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/05_FINAL_NATIVE_PREPARED.json",
+      "bytes": 4522,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "d71792809f86a4401ed283cdfce0877e391bbef96e72bef55f5775487073358f"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/05_NATIVE_PLAN.md",
+      "bytes": 705,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "b520b7c4275802ee90efd050c04d32815c053ba4eb3502c35627fe7940119955"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/05_NATIVE_PREPARED.json",
+      "bytes": 4584,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "a0d8dcd13c2d5bada0c6f59fe089149b22c06b3471505f427a7bb7d5b5b6a75e"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/CLOSED_AND_OPEN.json",
+      "bytes": 1609,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "70a8efd264c07671c71ab87027beea4319874152c1573e73608ff8e223283aa3"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/DELIVERY.md",
+      "bytes": 6221,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "bc5df39a7f3887080653a43c6557c4b0153877f7873c99cd4aaf3d907eae8265"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/DELIVERY_DRAFT.md",
+      "bytes": 2744,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "a7a96d596f58eff46286d001270f35f60c98ae149d9cf98e1ece636985d974a8"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FAILURE_HISTORY.md",
+      "bytes": 670,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "860642bc4949e631c6262d3d2c2556816f3d51af39cc357c9a30b90724fa9c4b"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_AFFECTED_PUBLISHED_SUMMARY.json",
+      "bytes": 3878,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "5296ab660459ce2585b6270593eaeaaadde80d714adc9679a383e0a3c2750de3"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_GOLDEN_P3.json",
+      "bytes": 687,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "7fc0d2ddd14a476af0bfc400f5a5e2d5f56ffa283fa60152b95e6cb8319430d0"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_OPEN_GATES.md",
+      "bytes": 667,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "a1fbedada613691f76ff83c73e5f6144f0aaca6a1f0cc4d1b8243b8ed965ffbe"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_PREMIUM_COLLISION.jsonl",
+      "bytes": 1125,
+      "extension": ".jsonl",
+      "type": "raw geometry/hit evidence",
+      "sha256": "aca5efe1054a7ac69de16cfc60da8f6fe0e5dd15a2f42a9d03e01195cc163d3e"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_PREMIUM_HIT_TARGETS.jsonl",
+      "bytes": 21983,
+      "extension": ".jsonl",
+      "type": "raw geometry/hit evidence",
+      "sha256": "069fde49451d91f6e55277bd00a9bd180d07883598a8e4cf5d979d1ad59a3afa"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_PREMIUM_HOST.json",
+      "bytes": 1311,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "7ec5e5ff86bcded095b071eceeb38b6f63e7fcc91710948b4c3f65e53418d8bd"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_PRIVATE_FULL_HOST.json",
+      "bytes": 1307,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "4652410ec054c0d55a51349886e29c62dbfcfb528b5d3969a6d5aa2678542bdb"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_PRIVATE_STATION.json",
+      "bytes": 113,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "7198ea24423ad2440cb1016f8ea0731f5b01ed1d8e34918fe5cee05850d36721"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_PUBLISHED_CORE_DISCOVERY.json",
+      "bytes": 694220,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "a3b261fcb5dd07a79daba9a64c90c69667765166adf78e7c295faaa8012fa5f9"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_PUBLISHED_CORE_SUMMARY.json",
+      "bytes": 565834,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "bdd79646ea83ade6a73b64244fdeaa6452d2d1eee419755f1faec0bb301ce792"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_REGRESSION_INTERPRETATION.md",
+      "bytes": 743,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "664dd22fcc638b97efc825870032b1b8cc9b9bda0608020faf08d658fdfed5f5"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_RELEASE_COLLISION.jsonl",
+      "bytes": 1125,
+      "extension": ".jsonl",
+      "type": "raw geometry/hit evidence",
+      "sha256": "50d1370156064287f56ee4ffaa67c26f19e9fe69a3a6448bd59a0f7ef982e555"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_RELEASE_CORE_DISCOVERY.json",
+      "bytes": 660060,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "e9ef8c8fe673c7e1d9157e9496dbba613647edda9d3aec424aa4bb98ca9cd046"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_RELEASE_CORE_SUMMARY.json",
+      "bytes": 566242,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "7d714a284dde010614a8b31de0d1c15de61b31b33aa6be292c99fcca070a9480"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_RELEASE_FLAGS.json",
+      "bytes": 445,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "0ebd2ce97b40802b5d9cb024c7348bf14b8002a34ee40e8ddfda8277d359b385"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_RELEASE_FULL_WPF_DISCOVERY.json",
+      "bytes": 665530,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "9253b908027d589eeaad1a71db2bdf1f128fa53e2b2e12aa58e10a7b6bf4af25"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_RELEASE_FULL_WPF_SUMMARY.json",
+      "bytes": 651409,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "c181a2e869af3dbe0ed2fa9b1ff7f271ad3611294a4510e7f3da7662392176bb"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_RELEASE_HITS.jsonl",
+      "bytes": 21940,
+      "extension": ".jsonl",
+      "type": "raw geometry/hit evidence",
+      "sha256": "2e987fb8ca18b2032e45225d601ee04db851885de2ba2084f4329959bcaa6f2c"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_RELEASE_SOURCE_CORE_DISCOVERY.json",
+      "bytes": 812072,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "d09ee9d8a7bcd304fb01ec663cd419ba75f3d6eedc136212fb1634736e6ed290"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_RELEASE_SOURCE_CORE_SUMMARY.json",
+      "bytes": 566443,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "f190b137f348c75c4c19f7f99772fe42cdf11eeb242c07dd741edffca902bc52"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_RELEASE_SPECIAL_DISCOVERY.json",
+      "bytes": 685026,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "40bd0d73529c2288469b774b4027cedc9ec21e3f76b3496f89535e961d31bea5"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_RELEASE_SPECIAL_HOST.json",
+      "bytes": 1308,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "a942691039c30cf7a2162ed3e950b677629d79505043f660e91e5fd8b87868c8"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_RELEASE_SPECIAL_SUMMARY.json",
+      "bytes": 8016,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "fc661896282d6710dcc936a1b66c74b101792e7597f8aa725700f2d9f258f8db"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_SCREENSHOTS.json",
+      "bytes": 7698,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "d94032da14e72fbaa9c1c5c68596de7030cc950c4aa83acc48bce140e56f4e29"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_SCREENSHOT_MANIFEST.json",
+      "bytes": 6944,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "8cf492ba6941b1599cff56c15c2c702be39a870757c1b3376574418fbc0cb1e8"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_SOURCE_CORE_DISCOVERY.json",
+      "bytes": 812072,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "d09ee9d8a7bcd304fb01ec663cd419ba75f3d6eedc136212fb1634736e6ed290"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_SOURCE_CORE_SUMMARY.json",
+      "bytes": 566567,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "6774e9e9a7426d821a113bd640d72ed0ead9d26f2b98abf04d66fac7926d7706"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_SOURCE_FREEZE.json",
+      "bytes": 976,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "fcccd2930e197ea7d37519afb7d8b2cb74dc0424a29ec8d41f131b9fd4352fe9"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_SOURCE_IDENTITY.json",
+      "bytes": 214,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "cf0ab0dd75e29d3244c0fc49f1072b9e0551934c5f9797837dbdf91ae1b65fb9"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_WPF_CLASSIFICATION.json",
+      "bytes": 587774,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "ab04db787e8ee742b89bc26f0b4ca3953db5130226a80719860be2c23f036d06"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_WPF_COUNTS.md",
+      "bytes": 654,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "17c28342f917d8bc93db62e1133dff43368989fe4bd856a37d3cafb0bf451b47"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_WPF_MISSING_RESULTS.json",
+      "bytes": 6641,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "fc11a7bbfab9a446b247bd0420cafb26fe55a6d2855568fd7a55303eaf4ea39b"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FINAL_WPF_NONPASSING.json",
+      "bytes": 23484,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b6582392fa82540fb07677d70db0c777dc1d3dacbaa339f3e2d8e912cd3f516c"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FROZEN_STATUS.json",
+      "bytes": 257,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "1353fc9773fb2cd2d6e113e084d96714bbb7fe38820ecdf3960c3d5ab9c70155"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FULL_RELEASE_ROUND1_FAILURES.json",
+      "bytes": 2203,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "1822e49fd1fdc34c96ef10a62b075744d25662a24dd60bc17205f915d021213a"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/FULL_RELEASE_ROUND1_SUMMARY.json",
+      "bytes": 659113,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "73d9d9c0f8d043b2a69d43f6c8f1dc1277c6200a670840704535b4154eab8e15"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/NATIVE_ACCEPTANCE_STATUS.md",
+      "bytes": 611,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "2fa2746be4de7561ad75b88b9c6cdbcce6fe5fadfe20423f19bd9121c07eab97"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/P1_SHORT_ROOT_DIAGNOSTIC_SUMMARY.json",
+      "bytes": 18143,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "dbdc64c743e1a394adf8ec89c81dd2fff4bcfe4c4e734b45b4260858917630ea"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/PRESEAL_COUNTS.json",
+      "bytes": 2171,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "6f971ef857ccd7f0fa708c29d549e1a78c2e223732d4e8069f56e6c5a1975927"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/PUBLISHED_COMPONENT_BINDINGS.json",
+      "bytes": 5021,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "d224dc9f504e68f683a79788360c35bde6baf9fa08c723f813d7c1b41c54c439"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/PUBLISHED_COMPONENT_BINDINGS_FINAL.json",
+      "bytes": 4733,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "c0c6783390fd3e62b989a6ed97d4be93754f5fccbfa410c45ece277ad4ea80cf"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/RAW_TEST_RESULTS.zip",
+      "bytes": 5870377,
+      "extension": ".zip",
+      "type": "raw test archive",
+      "sha256": "7f6423940b85d8d44c52d565ff74916f9412b0c6381420137c70fecea4dc9c94"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/RELEASE_EXE_FINAL.json",
+      "bytes": 497,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "09a692603a950066044c339f26b12c7976efda4ed55863f88b776f0a6deab988"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/RELEASE_FILES.json",
+      "bytes": 149552,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "e68b7020535fdb16224829fa6d7241f37c46889dacddb681d861834d8ef2187f"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/RELEASE_FILES_FINAL.json",
+      "bytes": 149412,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "4beebc576f5a994c00600a575d78d726be3374dac77a8e2f58b11cfef0a422d8"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/RELEASE_IDENTITY.json",
+      "bytes": 948,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "a7a13a99a2d4e0ff3a7a14bdd6ce0a7d35971c61055c1f15268ea229a69763c5"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/RELEASE_TREE_HASHES.json",
+      "bytes": 438,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "16d0e845bbc5d3bedc3d57d96f7dcf5305d890603b0eb14b55a0dc91151f316a"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/RELEASE_TREE_HASHES_FINAL.json",
+      "bytes": 478,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "2c6c601e20c16903654397665bff5bd59e3827634d5c565f6f9a2a5777298d81"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/SEAL_SCOPE.md",
+      "bytes": 475,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "e09fbf598946fe7ccdbbbe3754bf5a8c8e42fc844cc3a7bb4b1d9b174a6ea177"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/STAGE_COMMITS.json",
+      "bytes": 3969,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "d21d88198a3a5d349c901da2fac07998a837c18bc58ad2ab84df2d31aebc1708"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/START.json",
+      "bytes": 18039,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "8e6714883cd7375cf74758f4d3038b5bffae5b940b4d89fede6bbd825c5008b3"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/TEST_CLASSIFICATION.json",
+      "bytes": 2874,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "dbcd7c708a212a5d6fde7572517701d4eae5c7c09921833b189646da35ee95ca"
+    },
+    {
+      "path": "docs/evidence/wpf-failures-20261016/VERIFY_EVIDENCE.py",
+      "bytes": 4058,
+      "extension": ".py",
+      "type": "research/validation script",
+      "sha256": "3e12a9752ba1427269622b77b8b07ecede31b2bc8bc13fa33a57b0e642189e8e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml",
+      "bytes": 90713,
+      "extension": ".xaml",
+      "type": "repository metadata",
+      "sha256": "9bb0155d2e7af1984109ed02c07e48addcb589c7c5f382ee9df0d5d508384d68"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml.cs",
+      "bytes": 41669,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "d58b1c69bfaeb9fa5f4fb7314d24a74f0cafe24d7ea57119f164ae1e9a2d8562"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/StageIIIReferenceTetherWpfTests.cs",
+      "bytes": 2030,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "7d3c25c99e186de950ff78f0adf08640088083ad35a93a44e6c48f1788da018c"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/StudioV2PremiumPrototypeEvidenceTests.cs",
+      "bytes": 12528,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "d65debd542c2e4751e2a53459183b85d62152e990e8080ff24deab87d9f3fc09"
+    },
+    {
+      "path": "tools/AssetLibraryP3AutomatedAcceptance/Test-P3AssetLibraryAutomatedRunSet.ps1",
+      "bytes": 15534,
+      "extension": ".ps1",
+      "type": "process validation script",
+      "sha256": "94616b679f7ebfb94f7ac2b73d1cd7c8699091add7f8d8285c9321200c61e68d"
+    },
+    {
+      "path": "tools/PrivateWpfHost/Program.cs",
+      "bytes": 7605,
+      "extension": ".cs",
+      "type": "CSharp source/test",
+      "sha256": "0dabf399bfd15ff446812cc1dc91a792bc5a919a71da01ef7abc5e7120c6d9b7"
+    },
+    {
+      "path": "tools/wpf-failures/README.md",
+      "bytes": 1849,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "f4e0493c134da51b68b742e0fd1b977a25c8d196f1d1493b52fce3e9e8301b2f"
+    },
+    {
+      "path": "tools/wpf-failures/host_timeout_smoke.py",
+      "bytes": 296,
+      "extension": ".py",
+      "type": "research/validation script",
+      "sha256": "c985c303c82e806c012b149699dbb6f4ab2f0fea47103609e58830a2d31b6fd9"
+    },
+    {
+      "path": "tools/wpf-failures/mapping_study.py",
+      "bytes": 3592,
+      "extension": ".py",
+      "type": "research/validation script",
+      "sha256": "9ac0308222caaf0cf085d21d1b00772e9ff2f6fd11ac6a0e149ca4717e7d999e"
+    },
+    {
+      "path": "tools/wpf-failures/negative_attribution.py",
+      "bytes": 5219,
+      "extension": ".py",
+      "type": "research/validation script",
+      "sha256": "ef8bcade13f0b69d454a9aa41d6a5dca40f619cc4bd260840b27e68d33ac7869"
+    }
+  ],
+  "noPhotosDbBinariesReleaseInGit": true
+}
