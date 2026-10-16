@@ -70,4 +70,3 @@ internal static class ProductRawAudit
   }
  }
 }
-

@@ -1,0 +1,97 @@
+{
+  "sourceProfileSha256": "DAFBFF7207D22B526BAA8F61A280E197B639AF68CBE2E48529455157612B7407",
+  "outputProfileSha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+  "samples": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1
+    ],
+    [
+      205,
+      205,
+      205
+    ],
+    [
+      11800,
+      11800,
+      11800
+    ],
+    [
+      32768,
+      32768,
+      32768
+    ],
+    [
+      65535,
+      65535,
+      65535
+    ],
+    [
+      65535,
+      0,
+      0
+    ],
+    [
+      0,
+      65535,
+      0
+    ],
+    [
+      0,
+      0,
+      65535
+    ],
+    [
+      28000,
+      17000,
+      12000
+    ]
+  ],
+  "inputCodes": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    205,
+    205,
+    205,
+    11800,
+    11800,
+    11800,
+    32768,
+    32768,
+    32768,
+    65535,
+    65535,
+    65535,
+    65535,
+    0,
+    0,
+    0,
+    65535,
+    0,
+    0,
+    0,
+    65535,
+    28000,
+    17000,
+    12000
+  ],
+  "wicCodes": null,
+  "status": "UNSUPPORTED_PIXEL_FORMAT",
+  "failure": "System.NotSupportedException: \u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002\r\n ---\u003E System.Runtime.InteropServices.COMException (0x88982F80): \u4F4D\u56FE\u50CF\u7D20\u683C\u5F0F\u4E0D\u53D7\u652F\u6301\u3002 (0x88982F80)\r\n   --- End of inner exception stack trace ---\r\n   at System.Windows.Media.Imaging.ColorConvertedBitmap.FinalizeCreation()\r\n   at WicIccReference.Run(String output)",
+  "sourceDomain": "linear-sRGB D65 primaries with ICC PCS D50",
+  "outputDomain": "encoded sRGB 16bit",
+  "intent": "WIC API has no explicit intent argument; profile/default behavior",
+  "engine": "Windows WIC ColorConvertedBitmap",
+  "windowsCodecs": "10.0.26100.9711 (WinBuild.160101.0800)",
+  "scope": "Synthetic reference only; not arbitrary ICC approval or monitor transform"
+}

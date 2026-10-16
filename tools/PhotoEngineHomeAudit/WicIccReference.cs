@@ -23,4 +23,3 @@ internal static class WicIccReference
   File.WriteAllText(Path.Combine(output,"wic-reference.json"),JsonSerializer.Serialize(new{sourceProfileSha256=Convert.ToHexString(SHA256.HashData(linear)),outputProfileSha256=Convert.ToHexString(SHA256.HashData(target)),samples,inputCodes=input,wicCodes=codes,status,failure,sourceDomain="linear-sRGB D65 primaries with ICC PCS D50",outputDomain="encoded sRGB 16bit",intent="WIC API has no explicit intent argument; profile/default behavior",engine="Windows WIC ColorConvertedBitmap",windowsCodecs=System.Diagnostics.FileVersionInfo.GetVersionInfo(Path.Combine(Environment.SystemDirectory,"WindowsCodecs.dll")).FileVersion,scope="Synthetic reference only; not arbitrary ICC approval or monitor transform"},new JsonSerializerOptions{WriteIndented=true}));
  }
 }
-

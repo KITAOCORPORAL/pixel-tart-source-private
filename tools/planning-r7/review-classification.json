@@ -15966,6 +15966,18 @@
       "category": "required_automatic",
       "reason": "Required automatic regression; no skip permission.",
       "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.HomeMonitorProfileTests.NoWindowDoesNotPretendMonitorCalibrationOrConversion",
+      "category": "required_automatic",
+      "reason": "Home monitor association diagnostics required, no pixel transform/default fallback claims.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.HomeMonitorProfileTests.AssociatedProfileCorruptionAndMissingAreExplicitAndDoNotTouchPixels",
+      "category": "required_automatic",
+      "reason": "Home monitor association diagnostics required, no pixel transform/default fallback claims.",
+      "stage": "prepublish"
     }
   ]
 }

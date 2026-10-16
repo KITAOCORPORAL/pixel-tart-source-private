@@ -1,0 +1,1094 @@
+{
+  "status": "PASSED_REFERENCE_SUBSET",
+  "nativePath": "N:\\pixart\\kitao-photo-engine-home-20261016\\src\\RAWSelectionAssistant\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\win-x64\\lcms2.dll",
+  "nativeSha256": "87bf94f27f345384420383f247178f825c0101928fedd3a4887ff60e9d4a76eb",
+  "nativeVersion": 2120,
+  "pillowVersion": "12.3.0",
+  "pillowLcmsVersion": "2.19",
+  "pillowModuleSha256": "c89c633ae1bf3f26a327d14ff688db66628e19c9866ab925479f27dcb60a2d6f",
+  "sourceProfileSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+  "targetProfileSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+  "intent": 1,
+  "bpc": false,
+  "adaptation": "default1",
+  "lcmsFlags": "NOOPTIMIZE|NOCACHE, 0x140",
+  "rows": [
+    {
+      "input": [
+        0,
+        0,
+        0
+      ],
+      "lcms212": [
+        0,
+        0,
+        0
+      ],
+      "analyticSrgb": [
+        0,
+        0,
+        0
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        1,
+        1,
+        1
+      ],
+      "lcms212": [
+        13,
+        13,
+        13
+      ],
+      "analyticSrgb": [
+        13,
+        13,
+        13
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        205,
+        205,
+        205
+      ],
+      "lcms212": [
+        2652,
+        2652,
+        2652
+      ],
+      "analyticSrgb": [
+        2649,
+        2649,
+        2649
+      ],
+      "maxAbsCodeError": 3
+    },
+    {
+      "input": [
+        11800,
+        11800,
+        11800
+      ],
+      "lcms212": [
+        30237,
+        30240,
+        30236
+      ],
+      "analyticSrgb": [
+        30239,
+        30239,
+        30239
+      ],
+      "maxAbsCodeError": 3
+    },
+    {
+      "input": [
+        32768,
+        32768,
+        32768
+      ],
+      "lcms212": [
+        48188,
+        48195,
+        48185
+      ],
+      "analyticSrgb": [
+        48192,
+        48192,
+        48192
+      ],
+      "maxAbsCodeError": 7
+    },
+    {
+      "input": [
+        65535,
+        65535,
+        65535
+      ],
+      "lcms212": [
+        65529,
+        65535,
+        65527
+      ],
+      "analyticSrgb": [
+        65535,
+        65535,
+        65535
+      ],
+      "maxAbsCodeError": 8
+    },
+    {
+      "input": [
+        65535,
+        0,
+        0
+      ],
+      "lcms212": [
+        65532,
+        26,
+        0
+      ],
+      "analyticSrgb": [
+        65535,
+        0,
+        0
+      ],
+      "maxAbsCodeError": 26
+    },
+    {
+      "input": [
+        0,
+        65535,
+        0
+      ],
+      "lcms212": [
+        0,
+        65535,
+        0
+      ],
+      "analyticSrgb": [
+        0,
+        65535,
+        0
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        0,
+        0,
+        65535
+      ],
+      "lcms212": [
+        38,
+        13,
+        65528
+      ],
+      "analyticSrgb": [
+        0,
+        0,
+        65535
+      ],
+      "maxAbsCodeError": 38
+    },
+    {
+      "input": [
+        28000,
+        17000,
+        12000
+      ],
+      "lcms212": [
+        44903,
+        35803,
+        30472
+      ],
+      "analyticSrgb": [
+        44907,
+        35800,
+        30477
+      ],
+      "maxAbsCodeError": 5
+    },
+    {
+      "input": [
+        0,
+        0,
+        0
+      ],
+      "lcms212": [
+        0,
+        0,
+        0
+      ],
+      "analyticSrgb": [
+        0,
+        0,
+        0
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        257,
+        257,
+        257
+      ],
+      "lcms212": [
+        3267,
+        3267,
+        3267
+      ],
+      "analyticSrgb": [
+        3266,
+        3266,
+        3266
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        11822,
+        11822,
+        11822
+      ],
+      "lcms212": [
+        30263,
+        30267,
+        30262
+      ],
+      "analyticSrgb": [
+        30266,
+        30266,
+        30266
+      ],
+      "maxAbsCodeError": 4
+    },
+    {
+      "input": [
+        32896,
+        32896,
+        32896
+      ],
+      "lcms212": [
+        48272,
+        48279,
+        48269
+      ],
+      "analyticSrgb": [
+        48276,
+        48276,
+        48276
+      ],
+      "maxAbsCodeError": 7
+    },
+    {
+      "input": [
+        65535,
+        65535,
+        65535
+      ],
+      "lcms212": [
+        65529,
+        65535,
+        65527
+      ],
+      "analyticSrgb": [
+        65535,
+        65535,
+        65535
+      ],
+      "maxAbsCodeError": 8
+    },
+    {
+      "input": [
+        65535,
+        0,
+        0
+      ],
+      "lcms212": [
+        65532,
+        26,
+        0
+      ],
+      "analyticSrgb": [
+        65535,
+        0,
+        0
+      ],
+      "maxAbsCodeError": 26
+    },
+    {
+      "input": [
+        0,
+        65535,
+        0
+      ],
+      "lcms212": [
+        0,
+        65535,
+        0
+      ],
+      "analyticSrgb": [
+        0,
+        65535,
+        0
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        0,
+        0,
+        65535
+      ],
+      "lcms212": [
+        38,
+        13,
+        65528
+      ],
+      "analyticSrgb": [
+        0,
+        0,
+        65535
+      ],
+      "maxAbsCodeError": 38
+    },
+    {
+      "input": [
+        28270,
+        17990,
+        11565
+      ],
+      "lcms212": [
+        45098,
+        36744,
+        29952
+      ],
+      "analyticSrgb": [
+        45101,
+        36741,
+        29957
+      ],
+      "maxAbsCodeError": 5
+    }
+  ],
+  "independentExactProfile": [
+    {
+      "input": [
+        0,
+        0,
+        0
+      ],
+      "sourcePcsD50": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "targetLinear": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "independentExactProfileCodes": [
+        0,
+        0,
+        0
+      ],
+      "lcms212": [
+        0,
+        0,
+        0
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        1,
+        1,
+        1
+      ],
+      "sourcePcsD50": [
+        1.4712792871890975e-05,
+        1.5259021896696422e-05,
+        1.2587016658560312e-05
+      ],
+      "targetLinear": [
+        1.5256105156773976e-05,
+        1.5260952461079936e-05,
+        1.5254577582320996e-05
+      ],
+      "independentExactProfileCodes": [
+        13,
+        13,
+        13
+      ],
+      "lcms212": [
+        13,
+        13,
+        13
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        205,
+        205,
+        205
+      ],
+      "sourcePcsD50": [
+        0.00301612253873765,
+        0.0031280994888227666,
+        0.0025803384150048635
+      ],
+      "targetLinear": [
+        0.003127501557138666,
+        0.003128495254521387,
+        0.003127188404375803
+      ],
+      "independentExactProfileCodes": [
+        2652,
+        2652,
+        2651
+      ],
+      "lcms212": [
+        2652,
+        2652,
+        2652
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        11800,
+        11800,
+        11800
+      ],
+      "sourcePcsD50": [
+        0.1736109558883135,
+        0.18005645838101778,
+        0.14852679657101167
+      ],
+      "targetLinear": [
+        0.18002204084993284,
+        0.18007923904074322,
+        0.18000401547138772
+      ],
+      "independentExactProfileCodes": [
+        30237,
+        30241,
+        30235
+      ],
+      "lcms212": [
+        30237,
+        30240,
+        30236
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        32768,
+        32768,
+        32768
+      ],
+      "sourcePcsD50": [
+        0.48210879682612345,
+        0.5000076295109483,
+        0.4124513618677043
+      ],
+      "targetLinear": [
+        0.49991205377716963,
+        0.5000708902446673,
+        0.4998619982174944
+      ],
+      "independentExactProfileCodes": [
+        48188,
+        48195,
+        48186
+      ],
+      "lcms212": [
+        48188,
+        48195,
+        48185
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        65535,
+        65535,
+        65535
+      ],
+      "sourcePcsD50": [
+        0.964202880859375,
+        1.0,
+        0.82489013671875
+      ],
+      "targetLinear": [
+        0.9998088514491823,
+        1.0001265195368736,
+        0.9997087418574063
+      ],
+      "independentExactProfileCodes": [
+        65530,
+        65535,
+        65527
+      ],
+      "lcms212": [
+        65529,
+        65535,
+        65527
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        65535,
+        0,
+        0
+      ],
+      "sourcePcsD50": [
+        0.43603515625,
+        0.2224884033203125,
+        0.013916015625
+      ],
+      "targetLinear": [
+        0.9999043544875085,
+        2.987021777765619e-05,
+        -2.196748180714747e-06
+      ],
+      "independentExactProfileCodes": [
+        65532,
+        25,
+        0
+      ],
+      "lcms212": [
+        65532,
+        26,
+        0
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        0,
+        65535,
+        0
+      ],
+      "sourcePcsD50": [
+        0.3851165771484375,
+        0.7169036865234375,
+        0.0970611572265625
+      ],
+      "targetLinear": [
+        -0.00013751794160762193,
+        1.0000878399513382,
+        -3.062931702958044e-05
+      ],
+      "independentExactProfileCodes": [
+        0,
+        65535,
+        0
+      ],
+      "lcms212": [
+        0,
+        65535,
+        0
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        0,
+        0,
+        65535
+      ],
+      "sourcePcsD50": [
+        0.1430511474609375,
+        0.06060791015625,
+        0.7139129638671875
+      ],
+      "targetLinear": [
+        4.201490328144264e-05,
+        8.80936775760413e-06,
+        0.9997415679226167
+      ],
+      "independentExactProfileCodes": [
+        35,
+        7,
+        65528
+      ],
+      "lcms212": [
+        38,
+        13,
+        65528
+      ],
+      "maxAbsCodeError": 6
+    },
+    {
+      "input": [
+        28000,
+        17000,
+        12000
+      ],
+      "sourcePcsD50": [
+        0.31239154583130674,
+        0.29212379470118544,
+        0.1618470081141041
+      ],
+      "targetLinear": [
+        0.4271837689705086,
+        0.2594405334200598,
+        0.1830520577970983
+      ],
+      "independentExactProfileCodes": [
+        44904,
+        35803,
+        30473
+      ],
+      "lcms212": [
+        44903,
+        35803,
+        30472
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        0,
+        0,
+        0
+      ],
+      "sourcePcsD50": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "targetLinear": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "independentExactProfileCodes": [
+        0,
+        0,
+        0
+      ],
+      "lcms212": [
+        0,
+        0,
+        0
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        257,
+        257,
+        257
+      ],
+      "sourcePcsD50": [
+        0.0037811877680759805,
+        0.00392156862745098,
+        0.00323486328125
+      ],
+      "targetLinear": [
+        0.0039208190252909125,
+        0.003922064782497544,
+        0.003920426438656496
+      ],
+      "independentExactProfileCodes": [
+        3267,
+        3267,
+        3266
+      ],
+      "lcms212": [
+        3267,
+        3267,
+        3267
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        11822,
+        11822,
+        11822
+      ],
+      "sourcePcsD50": [
+        0.1739346373314951,
+        0.18039215686274512,
+        0.1488037109375
+      ],
+      "targetLinear": [
+        0.18035767516338197,
+        0.18041497999488706,
+        0.18033961617819877
+      ],
+      "independentExactProfileCodes": [
+        30263,
+        30267,
+        30261
+      ],
+      "lcms212": [
+        30263,
+        30267,
+        30262
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        32896,
+        32896,
+        32896
+      ],
+      "sourcePcsD50": [
+        0.4839920343137255,
+        0.5019607843137255,
+        0.4140625
+      ],
+      "targetLinear": [
+        0.5018648352372368,
+        0.5020242921596856,
+        0.5018145841480315
+      ],
+      "independentExactProfileCodes": [
+        48272,
+        48279,
+        48270
+      ],
+      "lcms212": [
+        48272,
+        48279,
+        48269
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        65535,
+        65535,
+        65535
+      ],
+      "sourcePcsD50": [
+        0.964202880859375,
+        1.0,
+        0.82489013671875
+      ],
+      "targetLinear": [
+        0.9998088514491823,
+        1.0001265195368736,
+        0.9997087418574063
+      ],
+      "independentExactProfileCodes": [
+        65530,
+        65535,
+        65527
+      ],
+      "lcms212": [
+        65529,
+        65535,
+        65527
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        65535,
+        0,
+        0
+      ],
+      "sourcePcsD50": [
+        0.43603515625,
+        0.2224884033203125,
+        0.013916015625
+      ],
+      "targetLinear": [
+        0.9999043544875085,
+        2.987021777765619e-05,
+        -2.196748180714747e-06
+      ],
+      "independentExactProfileCodes": [
+        65532,
+        25,
+        0
+      ],
+      "lcms212": [
+        65532,
+        26,
+        0
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        0,
+        65535,
+        0
+      ],
+      "sourcePcsD50": [
+        0.3851165771484375,
+        0.7169036865234375,
+        0.0970611572265625
+      ],
+      "targetLinear": [
+        -0.00013751794160762193,
+        1.0000878399513382,
+        -3.062931702958044e-05
+      ],
+      "independentExactProfileCodes": [
+        0,
+        65535,
+        0
+      ],
+      "lcms212": [
+        0,
+        65535,
+        0
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        0,
+        0,
+        65535
+      ],
+      "sourcePcsD50": [
+        0.1430511474609375,
+        0.06060791015625,
+        0.7139129638671875
+      ],
+      "targetLinear": [
+        4.201490328144264e-05,
+        8.80936775760413e-06,
+        0.9997415679226167
+      ],
+      "independentExactProfileCodes": [
+        35,
+        7,
+        65528
+      ],
+      "lcms212": [
+        38,
+        13,
+        65528
+      ],
+      "maxAbsCodeError": 6
+    },
+    {
+      "input": [
+        28270,
+        17990,
+        11565
+      ],
+      "sourcePcsD50": [
+        0.3190561930338542,
+        0.3034679936427696,
+        0.15863186705346202
+      ],
+      "targetLinear": [
+        0.43130095454259243,
+        0.2745483566356796,
+        0.17641562690990512
+      ],
+      "independentExactProfileCodes": [
+        45098,
+        36743,
+        29952
+      ],
+      "lcms212": [
+        45098,
+        36744,
+        29952
+      ],
+      "maxAbsCodeError": 1
+    }
+  ],
+  "sourcePcsMatrix": [
+    [
+      0.43603515625,
+      0.3851165771484375,
+      0.1430511474609375
+    ],
+    [
+      0.2224884033203125,
+      0.7169036865234375,
+      0.06060791015625
+    ],
+    [
+      0.013916015625,
+      0.0970611572265625,
+      0.7139129638671875
+    ]
+  ],
+  "targetPcsMatrix": [
+    [
+      0.436065673828125,
+      0.3851470947265625,
+      0.14306640625
+    ],
+    [
+      0.2224884033203125,
+      0.7168731689453125,
+      0.06060791015625
+    ],
+    [
+      0.013916015625,
+      0.097076416015625,
+      0.7140960693359375
+    ]
+  ],
+  "independent8bit": [
+    {
+      "input": [
+        0,
+        0,
+        0
+      ],
+      "lcms212Quantized8": [
+        0,
+        0,
+        0
+      ],
+      "pillowLcms219": [
+        0,
+        0,
+        0
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        1,
+        1,
+        1
+      ],
+      "lcms212Quantized8": [
+        13,
+        13,
+        13
+      ],
+      "pillowLcms219": [
+        13,
+        13,
+        13
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        46,
+        46,
+        46
+      ],
+      "lcms212Quantized8": [
+        118,
+        118,
+        118
+      ],
+      "pillowLcms219": [
+        118,
+        118,
+        118
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        128,
+        128,
+        128
+      ],
+      "lcms212Quantized8": [
+        188,
+        188,
+        188
+      ],
+      "pillowLcms219": [
+        188,
+        188,
+        188
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        255,
+        255,
+        255
+      ],
+      "lcms212Quantized8": [
+        255,
+        255,
+        255
+      ],
+      "pillowLcms219": [
+        255,
+        255,
+        255
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        255,
+        0,
+        0
+      ],
+      "lcms212Quantized8": [
+        255,
+        0,
+        0
+      ],
+      "pillowLcms219": [
+        255,
+        0,
+        0
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        0,
+        255,
+        0
+      ],
+      "lcms212Quantized8": [
+        0,
+        255,
+        0
+      ],
+      "pillowLcms219": [
+        0,
+        255,
+        0
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        0,
+        0,
+        255
+      ],
+      "lcms212Quantized8": [
+        0,
+        0,
+        255
+      ],
+      "pillowLcms219": [
+        0,
+        0,
+        255
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        110,
+        70,
+        45
+      ],
+      "lcms212Quantized8": [
+        175,
+        143,
+        117
+      ],
+      "pillowLcms219": [
+        175,
+        143,
+        117
+      ],
+      "maxAbs8": 0
+    }
+  ],
+  "wicStatus": "UNSUPPORTED_PIXEL_FORMAT",
+  "productAdmitted": false,
+  "limits": "Known synthetic linear-sRGB -> exact Windows sRGB profile only; ideal OETF mismatch not erased. PCS matrices already D50, no repeated chad; table-TRC inverse explicit. Pillow8/native16 rounding separate. Not arbitrary ICC, monitor compensation or reviewed LCMS2.16 identity."
+}

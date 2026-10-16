@@ -1,0 +1,526 @@
+{
+  "status": "FAILED_REFERENCE_SUBSET",
+  "nativePath": "N:\\pixart\\kitao-photo-engine-home-20261016\\src\\RAWSelectionAssistant\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\win-x64\\lcms2.dll",
+  "nativeSha256": "87bf94f27f345384420383f247178f825c0101928fedd3a4887ff60e9d4a76eb",
+  "nativeVersion": 2120,
+  "pillowVersion": "12.3.0",
+  "pillowLcmsVersion": "2.19",
+  "pillowModuleSha256": "c89c633ae1bf3f26a327d14ff688db66628e19c9866ab925479f27dcb60a2d6f",
+  "sourceProfileSha256": "dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407",
+  "targetProfileSha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+  "intent": 1,
+  "bpc": false,
+  "adaptation": "default1",
+  "lcmsFlags": "NOOPTIMIZE|NOCACHE, 0x140",
+  "rows": [
+    {
+      "input": [
+        0,
+        0,
+        0
+      ],
+      "lcms212": [
+        0,
+        0,
+        0
+      ],
+      "analyticSrgb": [
+        0,
+        0,
+        0
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        1,
+        1,
+        1
+      ],
+      "lcms212": [
+        13,
+        13,
+        13
+      ],
+      "analyticSrgb": [
+        13,
+        13,
+        13
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        205,
+        205,
+        205
+      ],
+      "lcms212": [
+        2652,
+        2652,
+        2652
+      ],
+      "analyticSrgb": [
+        2649,
+        2649,
+        2649
+      ],
+      "maxAbsCodeError": 3
+    },
+    {
+      "input": [
+        11800,
+        11800,
+        11800
+      ],
+      "lcms212": [
+        30237,
+        30240,
+        30236
+      ],
+      "analyticSrgb": [
+        30239,
+        30239,
+        30239
+      ],
+      "maxAbsCodeError": 3
+    },
+    {
+      "input": [
+        32768,
+        32768,
+        32768
+      ],
+      "lcms212": [
+        48188,
+        48195,
+        48185
+      ],
+      "analyticSrgb": [
+        48192,
+        48192,
+        48192
+      ],
+      "maxAbsCodeError": 7
+    },
+    {
+      "input": [
+        65535,
+        65535,
+        65535
+      ],
+      "lcms212": [
+        65529,
+        65535,
+        65527
+      ],
+      "analyticSrgb": [
+        65535,
+        65535,
+        65535
+      ],
+      "maxAbsCodeError": 8
+    },
+    {
+      "input": [
+        65535,
+        0,
+        0
+      ],
+      "lcms212": [
+        65532,
+        26,
+        0
+      ],
+      "analyticSrgb": [
+        65535,
+        0,
+        0
+      ],
+      "maxAbsCodeError": 26
+    },
+    {
+      "input": [
+        0,
+        65535,
+        0
+      ],
+      "lcms212": [
+        0,
+        65535,
+        0
+      ],
+      "analyticSrgb": [
+        0,
+        65535,
+        0
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        0,
+        0,
+        65535
+      ],
+      "lcms212": [
+        38,
+        13,
+        65528
+      ],
+      "analyticSrgb": [
+        0,
+        0,
+        65535
+      ],
+      "maxAbsCodeError": 38
+    },
+    {
+      "input": [
+        28000,
+        17000,
+        12000
+      ],
+      "lcms212": [
+        44903,
+        35803,
+        30472
+      ],
+      "analyticSrgb": [
+        44907,
+        35800,
+        30477
+      ],
+      "maxAbsCodeError": 5
+    },
+    {
+      "input": [
+        0,
+        0,
+        0
+      ],
+      "lcms212": [
+        0,
+        0,
+        0
+      ],
+      "analyticSrgb": [
+        0,
+        0,
+        0
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        257,
+        257,
+        257
+      ],
+      "lcms212": [
+        3267,
+        3267,
+        3267
+      ],
+      "analyticSrgb": [
+        3266,
+        3266,
+        3266
+      ],
+      "maxAbsCodeError": 1
+    },
+    {
+      "input": [
+        11822,
+        11822,
+        11822
+      ],
+      "lcms212": [
+        30263,
+        30267,
+        30262
+      ],
+      "analyticSrgb": [
+        30266,
+        30266,
+        30266
+      ],
+      "maxAbsCodeError": 4
+    },
+    {
+      "input": [
+        32896,
+        32896,
+        32896
+      ],
+      "lcms212": [
+        48272,
+        48279,
+        48269
+      ],
+      "analyticSrgb": [
+        48276,
+        48276,
+        48276
+      ],
+      "maxAbsCodeError": 7
+    },
+    {
+      "input": [
+        65535,
+        65535,
+        65535
+      ],
+      "lcms212": [
+        65529,
+        65535,
+        65527
+      ],
+      "analyticSrgb": [
+        65535,
+        65535,
+        65535
+      ],
+      "maxAbsCodeError": 8
+    },
+    {
+      "input": [
+        65535,
+        0,
+        0
+      ],
+      "lcms212": [
+        65532,
+        26,
+        0
+      ],
+      "analyticSrgb": [
+        65535,
+        0,
+        0
+      ],
+      "maxAbsCodeError": 26
+    },
+    {
+      "input": [
+        0,
+        65535,
+        0
+      ],
+      "lcms212": [
+        0,
+        65535,
+        0
+      ],
+      "analyticSrgb": [
+        0,
+        65535,
+        0
+      ],
+      "maxAbsCodeError": 0
+    },
+    {
+      "input": [
+        0,
+        0,
+        65535
+      ],
+      "lcms212": [
+        38,
+        13,
+        65528
+      ],
+      "analyticSrgb": [
+        0,
+        0,
+        65535
+      ],
+      "maxAbsCodeError": 38
+    },
+    {
+      "input": [
+        28270,
+        17990,
+        11565
+      ],
+      "lcms212": [
+        45098,
+        36744,
+        29952
+      ],
+      "analyticSrgb": [
+        45101,
+        36741,
+        29957
+      ],
+      "maxAbsCodeError": 5
+    }
+  ],
+  "independent8bit": [
+    {
+      "input": [
+        0,
+        0,
+        0
+      ],
+      "lcms212Quantized8": [
+        0,
+        0,
+        0
+      ],
+      "pillowLcms219": [
+        0,
+        0,
+        0
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        1,
+        1,
+        1
+      ],
+      "lcms212Quantized8": [
+        13,
+        13,
+        13
+      ],
+      "pillowLcms219": [
+        13,
+        13,
+        13
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        46,
+        46,
+        46
+      ],
+      "lcms212Quantized8": [
+        118,
+        118,
+        118
+      ],
+      "pillowLcms219": [
+        118,
+        118,
+        118
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        128,
+        128,
+        128
+      ],
+      "lcms212Quantized8": [
+        188,
+        188,
+        188
+      ],
+      "pillowLcms219": [
+        188,
+        188,
+        188
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        255,
+        255,
+        255
+      ],
+      "lcms212Quantized8": [
+        255,
+        255,
+        255
+      ],
+      "pillowLcms219": [
+        255,
+        255,
+        255
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        255,
+        0,
+        0
+      ],
+      "lcms212Quantized8": [
+        255,
+        0,
+        0
+      ],
+      "pillowLcms219": [
+        255,
+        0,
+        0
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        0,
+        255,
+        0
+      ],
+      "lcms212Quantized8": [
+        0,
+        255,
+        0
+      ],
+      "pillowLcms219": [
+        0,
+        255,
+        0
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        0,
+        0,
+        255
+      ],
+      "lcms212Quantized8": [
+        0,
+        0,
+        255
+      ],
+      "pillowLcms219": [
+        0,
+        0,
+        255
+      ],
+      "maxAbs8": 0
+    },
+    {
+      "input": [
+        110,
+        70,
+        45
+      ],
+      "lcms212Quantized8": [
+        175,
+        143,
+        117
+      ],
+      "pillowLcms219": [
+        175,
+        143,
+        117
+      ],
+      "maxAbs8": 0
+    }
+  ],
+  "wicStatus": "UNSUPPORTED_PIXEL_FORMAT",
+  "productAdmitted": false,
+  "limits": "Reference execution of known synthetic linear-sRGB -> encoded sRGB only. Pillow 8bit and native16 rounding explicitly separated. Not arbitrary ICC, device calibration, monitor compensation or identity with reviewed external LCMS2.16."
+}
