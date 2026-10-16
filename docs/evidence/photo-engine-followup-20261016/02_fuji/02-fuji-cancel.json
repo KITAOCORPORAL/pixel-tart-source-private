@@ -1,0 +1,59 @@
+{
+  "status": "CANCELLED",
+  "sourceSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+  "nativeSha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+  "wrapperSha256": "6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3",
+  "version": "0.21.1-Release",
+  "OMP_NUM_THREADS": "14",
+  "cancelMs": 100,
+  "geometry": {
+    "RawWidth": 7872,
+    "RawHeight": 5196,
+    "width": 7752,
+    "height": 5184,
+    "TopMargin": 6,
+    "LeftMargin": 60,
+    "Flip": 0,
+    "DecoderInfo": {
+      "DecoderName": "unpacked_load_raw()",
+      "DecoderFlags": 4096
+    },
+    "model": "X-T5",
+    "make": "Fujifilm"
+  },
+  "outputSha": null,
+  "callbackError": null,
+  "failure": {
+    "nativeCode": -100010,
+    "nativeName": "CancelledByCallback",
+    "Message": "ErrorCode: -100010(CancelledByCallback), Cancelled by user callback"
+  },
+  "rows": [
+    {
+      "stage": "unpacked-sensor",
+      "width": 7872,
+      "height": 5196,
+      "channels": 1,
+      "bits": 16,
+      "bytes": 81805824,
+      "sha256": "4BE0F11AA19CF1607C72A38513567B60F0E8D46204E4417470777646A1AA6207",
+      "localFile": "unpacked-sensor.private-pixels.bin",
+      "ms": 125.1788,
+      "workingSet": 116453376,
+      "privateBytes": 94076928,
+      "peakWorkingSet": 116453376,
+      "black": 0,
+      "maximum": 16383
+    },
+    {
+      "stage": "after-native-close",
+      "ms": 233.3555,
+      "workingSet": 34824192,
+      "privateBytes": 12001280,
+      "peakWorkingSet": 437821440
+    }
+  ],
+  "earliestStageClaim": "Only actually captured buffers; stage names tied to pinned upstream progress callback sites; no unobserved stage inferred.",
+  "contract": "LegacyRenderedSrgb16UnrotatedAudit1; WB/matrix/gamma defaults baked, not sensor-linear; sensor dump is separately labelled.",
+  "productModified": false
+}
