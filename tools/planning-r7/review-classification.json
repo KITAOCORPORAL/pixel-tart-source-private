@@ -15978,6 +15978,42 @@
       "category": "required_automatic",
       "reason": "Home monitor association diagnostics required, no pixel transform/default fallback claims.",
       "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.EmbeddedIccContainerTests.TiffBothEndianDuplicateAndOtherIfdPolicyIsExplicit",
+      "category": "required_automatic",
+      "reason": "Inherited mandatory ICC/resource-root automatic regression; no permission to skip.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.ControlledIccTests.DefaultOffAndRecipeCannotMigrateLegacyVersions",
+      "category": "required_automatic",
+      "reason": "Inherited mandatory ICC/resource-root automatic regression; no permission to skip.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.EmbeddedIccContainerTests.JpegSingleMultiMissingDuplicateAndDamagedProfileHaveStableOutcomes",
+      "category": "required_automatic",
+      "reason": "Inherited mandatory ICC/resource-root automatic regression; no permission to skip.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.ControlledIccTests.EmbeddedInspectorDistinguishesMissingAndCorruptProfileWithoutFallback",
+      "category": "required_automatic",
+      "reason": "Inherited mandatory ICC/resource-root automatic regression; no permission to skip.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.ControlledIccTests.StrictProfileRejectsLengthsBoundsUnknownVersionIntentAndLut",
+      "category": "required_automatic",
+      "reason": "Inherited mandatory ICC/resource-root automatic regression; no permission to skip.",
+      "stage": "prepublish"
+    },
+    {
+      "name": "RAWSelectionAssistant.Tests.TestResourceLocationTests.ExplicitConfigurationDoesNotDependOnAssemblyAncestorOrDrive",
+      "category": "required_automatic",
+      "reason": "Inherited mandatory ICC/resource-root automatic regression; no permission to skip.",
+      "stage": "prepublish"
     }
   ]
 }
