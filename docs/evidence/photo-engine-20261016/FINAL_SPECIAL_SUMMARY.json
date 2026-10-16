@@ -1,0 +1,341 @@
+{
+  "root": "E:\\KR\\P16\\special\\results\\run-20261016-184348-a598579a",
+  "assembly": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "ba659b20bd6253065a5271dd166a54fbaf22081385fcf24f221eff58f5d7fd57",
+  "discovered": 1626,
+  "selected": 17,
+  "runs": [
+    {
+      "pid": 22300,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-16T10:43:49Z",
+      "elapsedSeconds": 12.03200000000652,
+      "command": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:E:\\KR\\P16\\special\\results\\run-20261016-184348-a598579a\\000\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "E:\\Kitao-Worktrees\\kitao-photo-engine-candidate-20261016\\artifacts\\photo-engine",
+      "temporaryDirectory": "E:\\KR\\P16\\special\\results\\run-20261016-184348-a598579a\\000\\temp",
+      "limitSeconds": 90,
+      "class": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests",
+      "directory": "E:\\KR\\P16\\special\\results\\run-20261016-184348-a598579a\\000",
+      "expected": 12,
+      "results": [
+        {
+          "id": "17b75445-82d7-81de-806b-a63814c1fad8",
+          "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.FilmstripKeepsCompactHeightAndCollapseReturnsSpaceToMainImage",
+          "display": "FilmstripKeepsCompactHeightAndCollapseReturnsSpaceToMainImage",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13637974-ca0b-8019-8430-879febd6802e",
+          "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.SmartEditorPinsControlsOutsideScrollableRules",
+          "display": "SmartEditorPinsControlsOutsideScrollableRules",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1df9a2aa-8462-8dbb-aa42-41109867c8eb",
+          "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.FitIncludesRotatedObjectsResizesAndIsIdempotent",
+          "display": "FitIncludesRotatedObjectsResizesAndIsIdempotent",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1828770f-5930-8c6b-b69f-fef7f9a18a6d",
+          "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.LoadedThemeCannotMakeMarqueeOpaqueAndFolderInputHasTextRoom",
+          "display": "LoadedThemeCannotMakeMarqueeOpaqueAndFolderInputHasTextRoom",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "18cce92e-5a87-8fe3-ac00-060817cca5bd",
+          "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.DevelopResetRestoreAndRealTiffPreviewExportAgree",
+          "display": "DevelopResetRestoreAndRealTiffPreviewExportAgree",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1e185817-a263-8657-9f6a-3414f9d809bd",
+          "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.ToneHoverUsesSamePixelsAndEscapeAndTargetSwitchClearIt",
+          "display": "ToneHoverUsesSamePixelsAndEscapeAndTargetSwitchClearIt",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "119f4bf0-9ea4-8f32-8cde-02dd4a288609",
+          "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.QuickExportKeepsPngAlphaAndTiff16RealPrecision",
+          "display": "QuickExportKeepsPngAlphaAndTiff16RealPrecision",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "15edb49c-41fe-87ae-8575-ba2e0b29a1dc",
+          "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.ShellEscapeClosesAssetFilterAndPreservesUnsavedSmartFolder",
+          "display": "ShellEscapeClosesAssetFilterAndPreservesUnsavedSmartFolder",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "172dcba3-f1e5-8368-b073-78f0fc838067",
+          "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.LoadedTargetRemainsVisibleInShortStudioAndAnalysisCanReclaimSpace",
+          "display": "LoadedTargetRemainsVisibleInShortStudioAndAnalysisCanReclaimSpace",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "19657cbc-6866-8f0d-a1ae-314211fdaa44",
+          "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.RuleTreeWheelAndKeyboardReachEndWithBoundedViewport",
+          "display": "RuleTreeWheelAndKeyboardReachEndWithBoundedViewport",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "11ff34e8-7bb0-815e-b599-1337eb2c8c75",
+          "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.LoadedPngDevelopRendersThroughBoundWorkspace",
+          "display": "LoadedPngDevelopRendersThroughBoundWorkspace",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "14319297-cc18-835a-a057-8d2bd4a4ffbe",
+          "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.ProcessingStopButtonDoesNotMoveFittedPhotograph",
+          "display": "ProcessingStopButtonDoesNotMoveFittedPhotograph",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 27368,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-16T10:44:01Z",
+      "elapsedSeconds": 4.23399999999674,
+      "command": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:E:\\KR\\P16\\special\\results\\run-20261016-184348-a598579a\\001\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "E:\\Kitao-Worktrees\\kitao-photo-engine-candidate-20261016\\artifacts\\photo-engine",
+      "temporaryDirectory": "E:\\KR\\P16\\special\\results\\run-20261016-184348-a598579a\\001\\temp",
+      "limitSeconds": 90,
+      "class": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests",
+      "directory": "E:\\KR\\P16\\special\\results\\run-20261016-184348-a598579a\\001",
+      "expected": 4,
+      "results": [
+        {
+          "id": "1b6ae82a-5710-87f0-8de5-947ef86f7f5a",
+          "name": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.RawToPngAndJpegReuseOneFrozenMasterAndCleanupIntermediates",
+          "display": "RawToPngAndJpegReuseOneFrozenMasterAndCleanupIntermediates",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "19871803-7a96-8de5-967c-6f6404b4c066",
+          "name": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.ChosenEncodersPreservePrecisionAlphaAndEmbedSrgb",
+          "display": "ChosenEncodersPreservePrecisionAlphaAndEmbedSrgb",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "167abfde-6518-82cc-ab9a-9fa5cea960b6",
+          "name": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.JpegAndTiffExifDirectionsAreNormalizedOnceWithoutLosingPrecisionOrAlpha",
+          "display": "JpegAndTiffExifDirectionsAreNormalizedOnceWithoutLosingPrecisionOrAlpha",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "17d8f5b6-29c1-8bcb-ac69-10a7f90a24c3",
+          "name": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.SubclassSelectorsUseTheActualDarkComboBoxTemplate",
+          "display": "SubclassSelectorsUseTheActualDarkComboBoxTemplate",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 28972,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-16T10:44:05Z",
+      "elapsedSeconds": 13,
+      "command": [
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "vstest",
+        "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:E:\\KR\\P16\\special\\results\\run-20261016-184348-a598579a\\002\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "E:\\Kitao-Worktrees\\kitao-photo-engine-candidate-20261016\\artifacts\\photo-engine",
+      "temporaryDirectory": "E:\\KR\\P16\\special\\results\\run-20261016-184348-a598579a\\002\\temp",
+      "limitSeconds": 90,
+      "class": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests",
+      "directory": "E:\\KR\\P16\\special\\results\\run-20261016-184348-a598579a\\002",
+      "expected": 1,
+      "results": [
+        {
+          "id": "14c5a5ea-787a-8d3f-a403-00c51b4a1904",
+          "name": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet",
+          "display": "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "p1ExecutionUnit": "method",
+  "executionPlan": [
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests",
+      "cases": [
+        {
+          "id": "15edb49c-41fe-87ae-8575-ba2e0b29a1dc",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.ShellEscapeClosesAssetFilterAndPreservesUnsavedSmartFolder",
+          "displayName": "ShellEscapeClosesAssetFilterAndPreservesUnsavedSmartFolder",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "11ff34e8-7bb0-815e-b599-1337eb2c8c75",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.LoadedPngDevelopRendersThroughBoundWorkspace",
+          "displayName": "LoadedPngDevelopRendersThroughBoundWorkspace",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1828770f-5930-8c6b-b69f-fef7f9a18a6d",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.LoadedThemeCannotMakeMarqueeOpaqueAndFolderInputHasTextRoom",
+          "displayName": "LoadedThemeCannotMakeMarqueeOpaqueAndFolderInputHasTextRoom",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "19657cbc-6866-8f0d-a1ae-314211fdaa44",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.RuleTreeWheelAndKeyboardReachEndWithBoundedViewport",
+          "displayName": "RuleTreeWheelAndKeyboardReachEndWithBoundedViewport",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1df9a2aa-8462-8dbb-aa42-41109867c8eb",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.FitIncludesRotatedObjectsResizesAndIsIdempotent",
+          "displayName": "FitIncludesRotatedObjectsResizesAndIsIdempotent",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "119f4bf0-9ea4-8f32-8cde-02dd4a288609",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.QuickExportKeepsPngAlphaAndTiff16RealPrecision",
+          "displayName": "QuickExportKeepsPngAlphaAndTiff16RealPrecision",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "13637974-ca0b-8019-8430-879febd6802e",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.SmartEditorPinsControlsOutsideScrollableRules",
+          "displayName": "SmartEditorPinsControlsOutsideScrollableRules",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1e185817-a263-8657-9f6a-3414f9d809bd",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.ToneHoverUsesSamePixelsAndEscapeAndTargetSwitchClearIt",
+          "displayName": "ToneHoverUsesSamePixelsAndEscapeAndTargetSwitchClearIt",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "18cce92e-5a87-8fe3-ac00-060817cca5bd",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.DevelopResetRestoreAndRealTiffPreviewExportAgree",
+          "displayName": "DevelopResetRestoreAndRealTiffPreviewExportAgree",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "172dcba3-f1e5-8368-b073-78f0fc838067",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.LoadedTargetRemainsVisibleInShortStudioAndAnalysisCanReclaimSpace",
+          "displayName": "LoadedTargetRemainsVisibleInShortStudioAndAnalysisCanReclaimSpace",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "14319297-cc18-835a-a057-8d2bd4a4ffbe",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.ProcessingStopButtonDoesNotMoveFittedPhotograph",
+          "displayName": "ProcessingStopButtonDoesNotMoveFittedPhotograph",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "17b75445-82d7-81de-806b-a63814c1fad8",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.FilmstripKeepsCompactHeightAndCollapseReturnsSpaceToMainImage",
+          "displayName": "FilmstripKeepsCompactHeightAndCollapseReturnsSpaceToMainImage",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    },
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests",
+      "cases": [
+        {
+          "id": "167abfde-6518-82cc-ab9a-9fa5cea960b6",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.JpegAndTiffExifDirectionsAreNormalizedOnceWithoutLosingPrecisionOrAlpha",
+          "displayName": "JpegAndTiffExifDirectionsAreNormalizedOnceWithoutLosingPrecisionOrAlpha",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "19871803-7a96-8de5-967c-6f6404b4c066",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.ChosenEncodersPreservePrecisionAlphaAndEmbedSrgb",
+          "displayName": "ChosenEncodersPreservePrecisionAlphaAndEmbedSrgb",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1b6ae82a-5710-87f0-8de5-947ef86f7f5a",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.RawToPngAndJpegReuseOneFrozenMasterAndCleanupIntermediates",
+          "displayName": "RawToPngAndJpegReuseOneFrozenMasterAndCleanupIntermediates",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "17d8f5b6-29c1-8bcb-ac69-10a7f90a24c3",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests.SubclassSelectorsUseTheActualDarkComboBoxTemplate",
+          "displayName": "SubclassSelectorsUseTheActualDarkComboBoxTemplate",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    },
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests",
+      "cases": [
+        {
+          "id": "14c5a5ea-787a-8d3f-a403-00c51b4a1904",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet",
+          "displayName": "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+          "source": "E:\\KH\\P16B\\wpf\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "Passed": 17
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "station": "KitaoTests_5d056caac42148e5a5bfcb1766cb2b8e",
+  "desktop": "Isolated",
+  "exitCode": 1,
+  "timeoutSeconds": 10800,
+  "timedOut": false,
+  "failure": null,
+  "jobAssigned": true,
+  "interactiveStation": false,
+  "inputInjected": false,
+  "switchedInputDesktop": false,
+  "clipboard": "privatewindowstation",
+  "completed": true,
+  "events": [
+    {
+      "atUtc": "2026-10-16T10:26:26.0798158+00:00",
+      "elapsedMs": 2.6659,
+      "stage": "start",
+      "detail": {
+        "station": "KitaoTests_5d056caac42148e5a5bfcb1766cb2b8e",
+        "executable": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+        "script": "E:/Kitao-Worktrees/kitao-photo-engine-candidate-20261016/tools/wpf-icc-gates/private_suite.py"
+      }
+    },
+    {
+      "atUtc": "2026-10-16T10:26:26.1377792+00:00",
+      "elapsedMs": 60.6006,
+      "stage": "child-resumed",
+      "detail": {
+        "pid": 3104,
+        "jobAssigned": true
+      }
+    },
+    {
+      "atUtc": "2026-10-16T10:47:05.6497833+00:00",
+      "elapsedMs": 1239572.6095,
+      "stage": "child-exited",
+      "detail": {
+        "code": 1
+      }
+    },
+    {
+      "stage": "owned-job-closed",
+      "killRemainingOwnedDescendants": true
+    }
+  ]
+}

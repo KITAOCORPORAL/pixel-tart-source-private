@@ -1,0 +1,3385 @@
+{
+  "status": "PASSED",
+  "count": 844,
+  "errors": [],
+  "checks": [
+    {
+      "name": "29originalgatesclassified",
+      "passed": true
+    },
+    {
+      "name": "notpromoted",
+      "passed": true
+    },
+    {
+      "name": "fullWpfcoverage",
+      "passed": true
+    },
+    {
+      "name": "fullWpf1603/23",
+      "passed": true
+    },
+    {
+      "name": "noTimeoutNoMissing",
+      "passed": true
+    },
+    {
+      "name": "missing0",
+      "passed": true
+    },
+    {
+      "name": "publishedCore1702/6",
+      "passed": true
+    },
+    {
+      "name": "sourceCore1701/7",
+      "passed": true
+    },
+    {
+      "name": "special17",
+      "passed": true
+    },
+    {
+      "name": "releasecountrelease/win-x64",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Accessibility.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/appsettings.license.json",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/clretwrc.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/clrgc.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/clrgcexp.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/clrjit.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/ComputeSharp.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/ComputeSharp.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/coreclr.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/createdump.exe",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/D3DCompiler_47_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/DirectWriteForwarder.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/DocumentFormat.OpenXml.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/DocumentFormat.OpenXml.Framework.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/e_sqlite3.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/hostfxr.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/hostpolicy.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/jpeg8.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/KitaoPhotoSelector.deps.json",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/KitaoPhotoSelector.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/KitaoPhotoSelector.exe",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/KitaoPhotoSelector.runtimeconfig.json",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/lcms2.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/MetadataExtractor.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Microsoft.CSharp.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Microsoft.Data.Sqlite.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Microsoft.DiaSymReader.Native.amd64.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Microsoft.VisualBasic.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Microsoft.VisualBasic.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Microsoft.Win32.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Microsoft.Win32.Registry.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Microsoft.Win32.Registry.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Microsoft.Win32.SystemEvents.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Microsoft.Windows.SDK.NET.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/mscordaccore_amd64_amd64_10.0.1026.32716.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/mscordaccore.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/mscordbi.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/mscorlib.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/mscorrc.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/msquic.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/netstandard.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PenImc_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PixelTart.Kernel.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PixelTart.MatchV4.Dx12.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PixelTart.Modules.AssetLibrary.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PixelTart.Modules.OnlineSelection.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PixelTart.Modules.RawTool.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationCore.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework-SystemCore.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework-SystemData.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework-SystemDrawing.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework-SystemXml.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework-SystemXmlLinq.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework.Aero.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework.Aero2.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework.AeroLite.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework.Classic.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework.Fluent.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework.Luna.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationFramework.Royale.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationNative_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/PresentationUI.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/raw_r.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/RAWSelectionAssistant.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/ReachFramework.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Sdcb.LibRaw.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/SQLitePCLRaw.batteries_v2.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/SQLitePCLRaw.core.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/SQLitePCLRaw.provider.e_sqlite3.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.AppContext.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Buffers.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.CodeDom.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Collections.Concurrent.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Collections.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Collections.Immutable.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Collections.NonGeneric.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Collections.Specialized.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.ComponentModel.Annotations.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.ComponentModel.DataAnnotations.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.ComponentModel.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.ComponentModel.EventBasedAsync.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.ComponentModel.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.ComponentModel.TypeConverter.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Configuration.ConfigurationManager.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Configuration.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Console.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Data.Common.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Data.DataSetExtensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Data.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.Contracts.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.Debug.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.DiagnosticSource.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.EventLog.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.EventLog.Messages.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.FileVersionInfo.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.PerformanceCounter.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.Process.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.StackTrace.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.TextWriterTraceListener.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.Tools.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.TraceSource.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Diagnostics.Tracing.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.DirectoryServices.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Drawing.Common.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Drawing.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Drawing.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Dynamic.Runtime.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Formats.Asn1.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Formats.Nrbf.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Formats.Tar.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Globalization.Calendars.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Globalization.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Globalization.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.Compression.Brotli.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.Compression.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.Compression.FileSystem.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.Compression.Native.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.Compression.ZipFile.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.FileSystem.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.FileSystem.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.FileSystem.DriveInfo.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.FileSystem.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.FileSystem.Watcher.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.IsolatedStorage.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.MemoryMappedFiles.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.Packaging.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.Pipelines.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.Pipes.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.Pipes.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.IO.UnmanagedMemoryStream.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Linq.AsyncEnumerable.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Linq.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Linq.Expressions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Linq.Parallel.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Linq.Queryable.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Memory.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.Http.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.Http.Json.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.HttpListener.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.Mail.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.NameResolution.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.NetworkInformation.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.Ping.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.Quic.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.Requests.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.Security.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.ServerSentEvents.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.ServicePoint.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.Sockets.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.WebClient.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.WebHeaderCollection.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.WebProxy.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.WebSockets.Client.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Net.WebSockets.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Numerics.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Numerics.Vectors.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.ObjectModel.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Printing.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Private.CoreLib.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Private.DataContractSerialization.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Private.Uri.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Private.Windows.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Private.Windows.GdiPlus.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Private.Xml.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Private.Xml.Linq.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Reflection.DispatchProxy.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Reflection.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Reflection.Emit.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Reflection.Emit.ILGeneration.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Reflection.Emit.Lightweight.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Reflection.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Reflection.Metadata.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Reflection.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Reflection.TypeExtensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Resources.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Resources.Reader.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Resources.ResourceManager.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Resources.Writer.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.CompilerServices.Unsafe.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.CompilerServices.VisualC.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.Handles.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.InteropServices.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.InteropServices.JavaScript.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.InteropServices.RuntimeInformation.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.Intrinsics.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.Loader.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.Numerics.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.Serialization.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.Serialization.Formatters.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.Serialization.Json.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.Serialization.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Runtime.Serialization.Xml.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Claims.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Cryptography.Algorithms.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Cryptography.Cng.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Cryptography.Csp.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Cryptography.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Cryptography.Encoding.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Cryptography.OpenSsl.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Cryptography.Pkcs.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Cryptography.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Cryptography.ProtectedData.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Cryptography.X509Certificates.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Cryptography.Xml.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Permissions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Principal.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.Principal.Windows.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Security.SecureString.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.ServiceModel.Web.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.ServiceProcess.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Text.Encoding.CodePages.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Text.Encoding.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Text.Encoding.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Text.Encodings.Web.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Text.Json.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Text.RegularExpressions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Threading.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Threading.Channels.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Threading.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Threading.Overlapped.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Threading.Tasks.Dataflow.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Threading.Tasks.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Threading.Tasks.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Threading.Tasks.Parallel.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Threading.Thread.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Threading.ThreadPool.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Threading.Timer.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Transactions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Transactions.Local.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.ValueTuple.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Web.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Web.HttpUtility.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Windows.Controls.Ribbon.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Windows.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Windows.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Windows.Input.Manipulations.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Windows.Presentation.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Windows.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Xaml.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Xml.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Xml.Linq.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Xml.ReaderWriter.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Xml.Serialization.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Xml.XDocument.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Xml.XmlDocument.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Xml.XmlSerializer.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Xml.XPath.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/System.Xml.XPath.XDocument.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/THIRD-PARTY-NOTICES.md",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/UIAutomationClient.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/UIAutomationClientSideProviders.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/UIAutomationProvider.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/UIAutomationTypes.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/vcruntime140_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/WindowsBase.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/WinRT.Runtime.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/wpfgfx_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/XmpCore.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zlib1.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Licenses/libjpeg-turbo-2.1.3-LICENSE.md.txt",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Licenses/libjpeg-turbo-2.1.3-README.ijg.txt",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Licenses/LibRaw-0.21.1-COPYRIGHT.txt",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Licenses/LibRaw-0.21.1-LICENSE.CDDL.txt",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Licenses/LibRaw-0.21.1-LICENSE.LGPL.txt",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Licenses/Little-CMS-2.12-COPYING.txt",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Licenses/Sdcb.LibRaw-0.21.1.7-MIT.txt",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/Licenses/zlib-1.2.11-README-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/ThirdPartyNotices/OpenXML-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zh-Hans/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zh-Hans/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zh-Hans/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zh-Hans/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zh-Hans/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zh-Hans/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zh-Hans/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zh-Hans/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zh-Hans/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zh-Hans/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zh-Hans/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releaserelease/win-x64/zh-Hans/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasecounttool/win-x64",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/Accessibility.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/clretwrc.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/clrgc.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/clrgcexp.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/clrjit.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ControlledIccWorkflow.deps.json",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ControlledIccWorkflow.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ControlledIccWorkflow.exe",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ControlledIccWorkflow.runtimeconfig.json",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/coreclr.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/createdump.exe",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/D3DCompiler_47_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/DirectWriteForwarder.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/e_sqlite3.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/hostfxr.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/hostpolicy.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/jpeg8.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/lcms2.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/MetadataExtractor.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/Microsoft.CSharp.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/Microsoft.Data.Sqlite.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/Microsoft.DiaSymReader.Native.amd64.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/Microsoft.VisualBasic.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/Microsoft.VisualBasic.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/Microsoft.Win32.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/Microsoft.Win32.Registry.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/Microsoft.Win32.Registry.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/Microsoft.Win32.SystemEvents.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/Microsoft.Windows.SDK.NET.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/mscordaccore_amd64_amd64_10.0.1026.32716.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/mscordaccore.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/mscordbi.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/mscorlib.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/mscorrc.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/msquic.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/netstandard.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PenImc_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationCore.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework-SystemCore.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework-SystemData.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework-SystemDrawing.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework-SystemXml.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework-SystemXmlLinq.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework.Aero.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework.Aero2.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework.AeroLite.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework.Classic.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework.Fluent.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework.Luna.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationFramework.Royale.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationNative_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/PresentationUI.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/raw_r.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/RAWSelectionAssistant.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ReachFramework.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/Sdcb.LibRaw.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/SQLitePCLRaw.batteries_v2.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/SQLitePCLRaw.core.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/SQLitePCLRaw.provider.e_sqlite3.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.AppContext.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Buffers.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.CodeDom.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Collections.Concurrent.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Collections.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Collections.Immutable.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Collections.NonGeneric.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Collections.Specialized.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.ComponentModel.Annotations.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.ComponentModel.DataAnnotations.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.ComponentModel.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.ComponentModel.EventBasedAsync.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.ComponentModel.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.ComponentModel.TypeConverter.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Configuration.ConfigurationManager.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Configuration.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Console.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Data.Common.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Data.DataSetExtensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Data.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.Contracts.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.Debug.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.DiagnosticSource.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.EventLog.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.EventLog.Messages.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.FileVersionInfo.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.PerformanceCounter.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.Process.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.StackTrace.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.TextWriterTraceListener.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.Tools.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.TraceSource.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Diagnostics.Tracing.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.DirectoryServices.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Drawing.Common.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Drawing.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Drawing.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Dynamic.Runtime.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Formats.Asn1.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Formats.Nrbf.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Formats.Tar.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Globalization.Calendars.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Globalization.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Globalization.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.Compression.Brotli.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.Compression.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.Compression.FileSystem.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.Compression.Native.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.Compression.ZipFile.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.FileSystem.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.FileSystem.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.FileSystem.DriveInfo.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.FileSystem.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.FileSystem.Watcher.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.IsolatedStorage.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.MemoryMappedFiles.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.Packaging.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.Pipelines.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.Pipes.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.Pipes.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.IO.UnmanagedMemoryStream.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Linq.AsyncEnumerable.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Linq.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Linq.Expressions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Linq.Parallel.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Linq.Queryable.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Memory.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.Http.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.Http.Json.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.HttpListener.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.Mail.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.NameResolution.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.NetworkInformation.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.Ping.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.Quic.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.Requests.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.Security.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.ServerSentEvents.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.ServicePoint.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.Sockets.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.WebClient.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.WebHeaderCollection.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.WebProxy.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.WebSockets.Client.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Net.WebSockets.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Numerics.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Numerics.Vectors.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.ObjectModel.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Printing.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Private.CoreLib.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Private.DataContractSerialization.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Private.Uri.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Private.Windows.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Private.Windows.GdiPlus.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Private.Xml.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Private.Xml.Linq.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Reflection.DispatchProxy.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Reflection.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Reflection.Emit.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Reflection.Emit.ILGeneration.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Reflection.Emit.Lightweight.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Reflection.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Reflection.Metadata.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Reflection.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Reflection.TypeExtensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Resources.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Resources.Reader.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Resources.ResourceManager.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Resources.Writer.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.CompilerServices.Unsafe.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.CompilerServices.VisualC.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.Handles.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.InteropServices.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.InteropServices.JavaScript.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.InteropServices.RuntimeInformation.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.Intrinsics.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.Loader.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.Numerics.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.Serialization.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.Serialization.Formatters.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.Serialization.Json.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.Serialization.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Runtime.Serialization.Xml.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Claims.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Cryptography.Algorithms.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Cryptography.Cng.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Cryptography.Csp.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Cryptography.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Cryptography.Encoding.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Cryptography.OpenSsl.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Cryptography.Pkcs.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Cryptography.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Cryptography.ProtectedData.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Cryptography.X509Certificates.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Cryptography.Xml.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Permissions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Principal.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.Principal.Windows.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Security.SecureString.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.ServiceModel.Web.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.ServiceProcess.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Text.Encoding.CodePages.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Text.Encoding.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Text.Encoding.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Text.Encodings.Web.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Text.Json.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Text.RegularExpressions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Threading.AccessControl.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Threading.Channels.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Threading.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Threading.Overlapped.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Threading.Tasks.Dataflow.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Threading.Tasks.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Threading.Tasks.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Threading.Tasks.Parallel.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Threading.Thread.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Threading.ThreadPool.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Threading.Timer.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Transactions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Transactions.Local.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.ValueTuple.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Web.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Web.HttpUtility.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Windows.Controls.Ribbon.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Windows.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Windows.Extensions.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Windows.Input.Manipulations.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Windows.Presentation.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Windows.Primitives.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Xaml.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Xml.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Xml.Linq.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Xml.ReaderWriter.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Xml.Serialization.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Xml.XDocument.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Xml.XmlDocument.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Xml.XmlSerializer.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Xml.XPath.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/System.Xml.XPath.XDocument.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/UIAutomationClient.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/UIAutomationClientSideProviders.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/UIAutomationProvider.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/UIAutomationTypes.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/vcruntime140_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/WindowsBase.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/WinRT.Runtime.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/wpfgfx_cor3.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/XmpCore.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zlib1.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/cs/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/cs/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/cs/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/cs/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/cs/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/cs/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/cs/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/cs/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/cs/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/cs/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/cs/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/cs/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/de/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/de/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/de/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/de/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/de/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/de/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/de/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/de/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/de/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/de/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/de/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/de/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/es/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/es/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/es/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/es/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/es/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/es/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/es/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/es/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/es/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/es/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/es/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/es/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/fr/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/fr/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/fr/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/fr/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/fr/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/fr/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/fr/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/fr/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/fr/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/fr/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/fr/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/fr/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/it/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/it/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/it/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/it/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/it/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/it/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/it/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/it/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/it/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/it/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/it/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/it/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ja/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ja/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ja/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ja/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ja/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ja/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ja/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ja/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ja/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ja/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ja/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ja/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ko/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ko/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ko/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ko/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ko/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ko/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ko/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ko/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ko/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ko/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ko/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ko/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pl/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pl/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pl/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pl/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pl/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pl/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pl/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pl/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pl/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pl/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pl/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pl/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pt-BR/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pt-BR/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pt-BR/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pt-BR/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pt-BR/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pt-BR/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pt-BR/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pt-BR/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pt-BR/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pt-BR/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pt-BR/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/pt-BR/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ru/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ru/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ru/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ru/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ru/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ru/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ru/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ru/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ru/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ru/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ru/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/ru/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/tr/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/tr/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/tr/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/tr/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/tr/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/tr/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/tr/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/tr/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/tr/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/tr/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/tr/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/tr/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hans/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hans/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hans/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hans/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hans/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hans/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hans/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hans/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hans/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hans/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hans/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hans/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hant/PresentationCore.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hant/PresentationFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hant/PresentationUI.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hant/ReachFramework.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hant/System.Windows.Controls.Ribbon.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hant/System.Windows.Input.Manipulations.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hant/System.Xaml.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hant/UIAutomationClient.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hant/UIAutomationClientSideProviders.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hant/UIAutomationProvider.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hant/UIAutomationTypes.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "releasetool/win-x64/zh-Hant/WindowsBase.resources.dll",
+      "passed": true
+    },
+    {
+      "name": "boundC:/KH/P16AcoreRAWSelectionAssistant.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "boundC:/KH/P16AwpfKitaoPhotoSelector.dll",
+      "passed": true
+    },
+    {
+      "name": "boundC:/KH/P16AwpfRAWSelectionAssistant.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "boundC:/KH/P16AwpfPixelTart.Kernel.dll",
+      "passed": true
+    },
+    {
+      "name": "boundC:/KH/P16AwpfPixelTart.Modules.AssetLibrary.dll",
+      "passed": true
+    },
+    {
+      "name": "boundC:/KH/P16AwpfPixelTart.Modules.RawTool.dll",
+      "passed": true
+    },
+    {
+      "name": "boundC:/KH/P16AwpfPixelTart.Modules.OnlineSelection.dll",
+      "passed": true
+    },
+    {
+      "name": "boundC:/KH/P16AwpfPixelTart.MatchV4.Dx12.dll",
+      "passed": true
+    },
+    {
+      "name": "boundE:/KH/P16BcoreRAWSelectionAssistant.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "boundE:/KH/P16BwpfKitaoPhotoSelector.dll",
+      "passed": true
+    },
+    {
+      "name": "boundE:/KH/P16BwpfRAWSelectionAssistant.Core.dll",
+      "passed": true
+    },
+    {
+      "name": "boundE:/KH/P16BwpfPixelTart.Kernel.dll",
+      "passed": true
+    },
+    {
+      "name": "boundE:/KH/P16BwpfPixelTart.Modules.AssetLibrary.dll",
+      "passed": true
+    },
+    {
+      "name": "boundE:/KH/P16BwpfPixelTart.Modules.RawTool.dll",
+      "passed": true
+    },
+    {
+      "name": "boundE:/KH/P16BwpfPixelTart.Modules.OnlineSelection.dll",
+      "passed": true
+    },
+    {
+      "name": "boundE:/KH/P16BwpfPixelTart.MatchV4.Dx12.dll",
+      "passed": true
+    },
+    {
+      "name": "product/test/runnerunchanged",
+      "passed": true
+    },
+    {
+      "name": "goldenP3unchanged",
+      "passed": true
+    },
+    {
+      "name": "originalhashes",
+      "passed": true
+    },
+    {
+      "name": "3fullRAW",
+      "passed": true
+    },
+    {
+      "name": "callbackcancel",
+      "passed": true
+    },
+    {
+      "name": "boundarynofakeoutput",
+      "passed": true
+    },
+    {
+      "name": "exactcandidateDLL",
+      "passed": true
+    },
+    {
+      "name": "3photoworkflowsreopen/readback",
+      "passed": true
+    },
+    {
+      "name": "independentEOTF",
+      "passed": true
+    },
+    {
+      "name": "missingunsupportedreject",
+      "passed": true
+    },
+    {
+      "name": "OCIOColourderived",
+      "passed": true
+    },
+    {
+      "name": "18referencecomparisons",
+      "passed": true
+    },
+    {
+      "name": "DTpartialnotfull",
+      "passed": true
+    },
+    {
+      "name": "nativeNOTRUN",
+      "passed": true
+    },
+    {
+      "name": "noSRCchange",
+      "passed": true
+    },
+    {
+      "name": "rawarchiveCRC",
+      "passed": true
+    },
+    {
+      "name": "inventorynonempty",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/.gitattributes",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/01_GATES.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/01_UNEXECUTED_GATES.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/01_UNEXECUTED_GATES_FINAL.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_FUJI_VERSION_CONTRACT.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_GEOMETRY_AND_TYPES.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAWSPEED_SCOPE.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_BUILD.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_CANDIDATE_DECISION.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_EMBEDDED_ICC_INSPECTION.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_FINAL_BUILD.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_FINAL_SONY.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_NATIVE_IDENTITIES.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_NODE_GATE.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_OUTPUT_CONTRACT.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_OUTPUT_PIXELS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_RESULTS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_RUN.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_VARIANTS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RAW_VARIANT_BUILD.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_RT_BOTH_MODES.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_UPSTREAM_FILES.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/02_UPSTREAM_REFS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_CHAIN_TYPES.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_DISTRIBUTION_BLOCKERS.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_FINAL_PHOTO_SUITE_RESULTS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_FINAL_PHOTO_SUITE_RUN.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_INSTALLED_REFERENCE_COMPONENTS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_OCIO_COLOUR_DERIVED_MATRIX.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_OCIO_COLOUR_MATRIX.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_PHOTO_CONTRACT_UNIT_TESTS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_PHOTO_NODE_GATE.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_PHOTO_SUITE_RESULTS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_PHOTO_SUITE_RUN.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_PROFILE_IDENTITIES.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_REFERENCE_INSTALL.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/03_SAFE_SUBSET_LIMITS.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_ACES_LICENSE.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_ACES_VERSION_CLARIFICATION.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_BLIND_REVIEW_TEMPLATE.csv",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_DARKTABLE_BUILD_FAILED_ENCODING.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_DARKTABLE_SUBSTAGE_BUILD.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_OPENDRT_BUILD.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_OPENDRT_SOURCE.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_OUTPUT_LIMITS.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_OUTPUT_NODE_REVIEW.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_OUTPUT_RESEARCH_FAILED.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_OUTPUT_RESEARCH_INITIAL_RESULTS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_OUTPUT_RESEARCH_RESULTS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_OUTPUT_RESEARCH_RUN.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_OUTPUT_SUMMARY.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/04_REFERENCE_LICENSES.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/05_NATIVE_PREPARED.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/05_NATIVE_STATUS.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/05_PRODUCT_VS_RESEARCH.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/DELIVERY.md",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_AUTHORIZED_INPUT_HASHES.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_COLLISION.jsonl",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_FROZEN_CONTRACTS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_FULL_WPF_DISCOVERY.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_FULL_WPF_SUMMARY.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_GOLDEN_P3.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_HEADER_HITS.jsonl",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_PRIVATE_HOST.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_PUBLISHED_CORE_DISCOVERY.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_PUBLISHED_CORE_SUMMARY.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_SOURCE_CORE_DISCOVERY.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_SOURCE_CORE_SUMMARY.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_SOURCE_IDENTITY.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_SPECIAL_SUMMARY.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_WORKTREE_PRESERVATION.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_WPF_CLASSIFICATION.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_WPF_MISSING_RESULTS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/FINAL_WPF_NONPASSING.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/PUBLISHED_COMPONENT_BINDINGS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/RAW_TEST_RESULTS.zip",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/RELEASE_EXE.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/RELEASE_FILES.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/RELEASE_TREE_HASHES.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/STAGE_COMMITS.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/START.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/TEST_CLASSIFICATION.json",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/VERIFY_EVIDENCE.py",
+      "passed": true
+    },
+    {
+      "name": "evidencedocs/evidence/photo-engine-20261016/screenshots/reference-simple.png",
+      "passed": true
+    },
+    {
+      "name": "evidencetools/photo-engine/.gitignore",
+      "passed": true
+    },
+    {
+      "name": "evidencetools/photo-engine/README.md",
+      "passed": true
+    },
+    {
+      "name": "evidencetools/photo-engine/build_darktable_substage.py",
+      "passed": true
+    },
+    {
+      "name": "evidencetools/photo-engine/build_opendrt_reference.py",
+      "passed": true
+    },
+    {
+      "name": "evidencetools/photo-engine/ocio_colour_contract.py",
+      "passed": true
+    },
+    {
+      "name": "evidencetools/photo-engine/output_research.py",
+      "passed": true
+    },
+    {
+      "name": "evidencetools/photo-engine/photo_srgb_workflow.py",
+      "passed": true
+    },
+    {
+      "name": "evidencetools/photo-engine/prepare_standard_profile.py",
+      "passed": true
+    },
+    {
+      "name": "evidencetools/photo-engine/raw_candidate.cpp",
+      "passed": true
+    },
+    {
+      "name": "evidencetools/photo-engine/run_photo_suite.py",
+      "passed": true
+    },
+    {
+      "name": "evidencetools/photo-engine/run_raw_candidate.py",
+      "passed": true
+    },
+    {
+      "name": "evidencetools/photo-engine/test_photo_contract.py",
+      "passed": true
+    }
+  ],
+  "distributionApproval": false,
+  "nativeApproval": false
+}

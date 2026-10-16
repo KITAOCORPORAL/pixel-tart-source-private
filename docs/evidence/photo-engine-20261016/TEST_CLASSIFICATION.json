@@ -1,0 +1,72 @@
+{
+  "businessTimezone": "Asia/Shanghai",
+  "productBuildSource": "d174d26af591a7143c3a47536030620357a70f40",
+  "researchSource": "d8ce36a",
+  "productSrcChanged": false,
+  "sourceCore": {
+    "discovered": 1708,
+    "selected": 1708,
+    "returned": 1708,
+    "Passed": 1701,
+    "Failed": 0,
+    "NotExecuted": 7,
+    "Missing": 0,
+    "strict": "FAILED"
+  },
+  "publishedCore": {
+    "discovered": 1708,
+    "selected": 1708,
+    "returned": 1708,
+    "Passed": 1702,
+    "Failed": 0,
+    "NotExecuted": 6,
+    "Missing": 0,
+    "strict": "FAILED"
+  },
+  "publishedFullWpf": {
+    "discovered": 1626,
+    "selected": 1626,
+    "returned": 1626,
+    "Passed": 1603,
+    "Failed": 0,
+    "NotExecuted": 23,
+    "Missing": 0,
+    "strict": "FAILED",
+    "executionUnits": 221,
+    "originalClasses": 212
+  },
+  "publishedSpecial": {
+    "selected": 17,
+    "returned": 17,
+    "Passed": 17,
+    "Failed": 0,
+    "NotExecuted": 0,
+    "premiumOptinSeparate": true
+  },
+  "noOriginalInconclusiveChanged": true,
+  "RAWResearch": {
+    "fullOriginalsPassed": 3,
+    "SonyCallbackCancelled": true,
+    "boundaryInvalidRefused": 2,
+    "RawSpeedWindows": "NOT_RUN",
+    "RTSharedLibRawSuccess": 3,
+    "RTInternalSuccess": 2,
+    "RTInternalSony": "REFUSED"
+  },
+  "PhotoResearch": {
+    "realPhotographicTIFF": true,
+    "photographicJPEGDerivative": true,
+    "knownCodes": true,
+    "reopenTIFF16PNG16ICCExact": true,
+    "JpegLossySeparate": true
+  },
+  "outputReference": {
+    "ACES_OCIO": "EXECUTED_STATIC_SDR",
+    "OpenDRT": "EXECUTED_EXTERNAL_SCALAR",
+    "darktable": "SUBSTAGE_ONLY_FULL_NOT_RUN",
+    "subjective": "PENDING"
+  },
+  "native": "NOT_RUN_NO_RESERVED_DESKTOP",
+  "cleanWindows": "NOT_RUN_NO_VM",
+  "CalibrationEligible": false
+}

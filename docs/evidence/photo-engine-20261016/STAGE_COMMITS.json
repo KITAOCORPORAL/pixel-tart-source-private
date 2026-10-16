@@ -1,0 +1,103 @@
+[
+  {
+    "sha": "838748167e7517fb395d89e8e01e572c0dd2830a",
+    "message": "docs(photo): freeze photo-only scope and classify all 29 external test gates",
+    "files": [
+      "A\tdocs/evidence/photo-engine-20261016/.gitattributes",
+      "A\tdocs/evidence/photo-engine-20261016/01_GATES.md",
+      "A\tdocs/evidence/photo-engine-20261016/01_UNEXECUTED_GATES.json",
+      "A\tdocs/evidence/photo-engine-20261016/START.json"
+    ]
+  },
+  {
+    "sha": "9b3168dfd2f53133be818dbf8553843c4c21150b",
+    "message": "research(photo-raw): pin decoders and exercise isolated full-size linear candidate",
+    "files": [
+      "A\tdocs/evidence/photo-engine-20261016/02_RAW_BUILD.json",
+      "A\tdocs/evidence/photo-engine-20261016/02_RAW_CANDIDATE_DECISION.md",
+      "A\tdocs/evidence/photo-engine-20261016/02_RAW_NODE_GATE.md",
+      "A\tdocs/evidence/photo-engine-20261016/02_RAW_RESULTS.json",
+      "A\tdocs/evidence/photo-engine-20261016/02_RAW_RUN.json",
+      "A\tdocs/evidence/photo-engine-20261016/02_UPSTREAM_FILES.json",
+      "A\tdocs/evidence/photo-engine-20261016/02_UPSTREAM_REFS.json",
+      "A\ttools/photo-engine/raw_candidate.cpp",
+      "A\ttools/photo-engine/run_raw_candidate.py"
+    ]
+  },
+  {
+    "sha": "d174d26af591a7143c3a47536030620357a70f40",
+    "message": "research(photo-icc): close fixed encoded-sRGB photo workflow with explicit linear and output contracts",
+    "files": [
+      "A\tdocs/evidence/photo-engine-20261016/03_CHAIN_TYPES.md",
+      "A\tdocs/evidence/photo-engine-20261016/03_OCIO_COLOUR_DERIVED_MATRIX.json",
+      "A\tdocs/evidence/photo-engine-20261016/03_OCIO_COLOUR_MATRIX.json",
+      "A\tdocs/evidence/photo-engine-20261016/03_PHOTO_NODE_GATE.md",
+      "A\tdocs/evidence/photo-engine-20261016/03_PHOTO_SUITE_RESULTS.json",
+      "A\tdocs/evidence/photo-engine-20261016/03_PHOTO_SUITE_RUN.json",
+      "A\tdocs/evidence/photo-engine-20261016/03_PROFILE_IDENTITIES.json",
+      "A\tdocs/evidence/photo-engine-20261016/03_REFERENCE_INSTALL.json",
+      "A\ttools/photo-engine/ocio_colour_contract.py",
+      "A\ttools/photo-engine/photo_srgb_workflow.py",
+      "A\ttools/photo-engine/run_photo_suite.py"
+    ]
+  },
+  {
+    "sha": "2c4862ea2fb85600e7893c397fcc32b036059290",
+    "message": "research(photo-output): execute fixed ACES OpenDRT and limited darktable stage comparisons",
+    "files": [
+      "A\tdocs/evidence/photo-engine-20261016/04_DARKTABLE_BUILD_FAILED_ENCODING.json",
+      "A\tdocs/evidence/photo-engine-20261016/04_DARKTABLE_SUBSTAGE_BUILD.json",
+      "A\tdocs/evidence/photo-engine-20261016/04_OPENDRT_BUILD.json",
+      "A\tdocs/evidence/photo-engine-20261016/04_OPENDRT_SOURCE.json",
+      "A\tdocs/evidence/photo-engine-20261016/04_OUTPUT_LIMITS.md",
+      "A\tdocs/evidence/photo-engine-20261016/04_OUTPUT_NODE_REVIEW.md",
+      "A\tdocs/evidence/photo-engine-20261016/04_OUTPUT_RESEARCH_FAILED.json",
+      "A\tdocs/evidence/photo-engine-20261016/04_OUTPUT_RESEARCH_INITIAL_RESULTS.json",
+      "A\tdocs/evidence/photo-engine-20261016/04_OUTPUT_RESEARCH_RESULTS.json",
+      "A\tdocs/evidence/photo-engine-20261016/04_OUTPUT_RESEARCH_RUN.json",
+      "A\ttools/photo-engine/.gitignore",
+      "A\ttools/photo-engine/build_darktable_substage.py",
+      "A\ttools/photo-engine/build_opendrt_reference.py",
+      "A\ttools/photo-engine/output_research.py"
+    ]
+  },
+  {
+    "sha": "c2093db72136beef5c314c056892154ecf592c1a",
+    "message": "research(raw): distinguish CFA from Sony color buffer and retain independent decoder gaps",
+    "files": [
+      "A\tdocs/evidence/photo-engine-20261016/02_FUJI_VERSION_CONTRACT.md",
+      "A\tdocs/evidence/photo-engine-20261016/02_GEOMETRY_AND_TYPES.json",
+      "A\tdocs/evidence/photo-engine-20261016/02_RAWSPEED_SCOPE.md",
+      "A\tdocs/evidence/photo-engine-20261016/02_RAW_FINAL_BUILD.json",
+      "A\tdocs/evidence/photo-engine-20261016/02_RAW_FINAL_SONY.json",
+      "A\tdocs/evidence/photo-engine-20261016/02_RAW_NATIVE_IDENTITIES.json",
+      "A\tdocs/evidence/photo-engine-20261016/02_RAW_VARIANTS.json",
+      "A\tdocs/evidence/photo-engine-20261016/02_RAW_VARIANT_BUILD.json",
+      "A\tdocs/evidence/photo-engine-20261016/02_RT_BOTH_MODES.json",
+      "M\ttools/photo-engine/raw_candidate.cpp"
+    ]
+  },
+  {
+    "sha": "e32b8d91c0bc49a6b5d960aac388cf87ced6751c",
+    "message": "test(photo): freeze profile reproducibility and disclose candidate distribution blockers",
+    "files": [
+      "A\tdocs/evidence/photo-engine-20261016/03_DISTRIBUTION_BLOCKERS.md",
+      "A\tdocs/evidence/photo-engine-20261016/03_INSTALLED_REFERENCE_COMPONENTS.json",
+      "A\tdocs/evidence/photo-engine-20261016/03_PHOTO_CONTRACT_UNIT_TESTS.json",
+      "A\tdocs/evidence/photo-engine-20261016/04_ACES_LICENSE.json",
+      "A\tdocs/evidence/photo-engine-20261016/04_BLIND_REVIEW_TEMPLATE.csv",
+      "A\tdocs/evidence/photo-engine-20261016/04_REFERENCE_LICENSES.json",
+      "A\ttools/photo-engine/README.md",
+      "A\ttools/photo-engine/prepare_standard_profile.py",
+      "A\ttools/photo-engine/test_photo_contract.py"
+    ]
+  },
+  {
+    "sha": "d8ce36a0162f3f25660d1db8f16864c8701f59fd",
+    "message": "fix(photo-tool): lock output to evaluated standard sRGB profile only",
+    "files": [
+      "A\tdocs/evidence/photo-engine-20261016/03_SAFE_SUBSET_LIMITS.md",
+      "M\ttools/photo-engine/photo_srgb_workflow.py"
+    ]
+  }
+]

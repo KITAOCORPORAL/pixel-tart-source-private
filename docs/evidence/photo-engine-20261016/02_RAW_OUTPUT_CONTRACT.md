@@ -1,0 +1,1 @@
+候选输出TIFF16实际像素哈希/size/零值饱和值/ICC见02_RAW_OUTPUT_PIXELS。嵌入ICC a179...496bytes，三TRC curv count1 gamma0x0100=1.0实际检查，与gamma1/1参数一致；不是仅凭参数命名线性。Sony输出4624x3080禁方向应用，文件无orientationtag；源EXIFflip5需随独立recipe元数据保留，不能普通入口静默丢方向。Fuji/Canon同样无tag，本批候选rawmetadata日志含源方向/activeorigin；尚未产品recipe保存/显示合同，门禁OPEN。可量化零值/饱和含decoderclipping/量化不当原传感器黑白值；不从此反推sensor。

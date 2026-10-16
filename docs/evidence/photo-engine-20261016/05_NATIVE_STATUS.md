@@ -1,0 +1,1 @@
+本批未预约独占桌面或干净WindowsVM：真实新Release启动/工作台→ColorStudio、两图切换取消、保存重开、16bit导出和10s系统自然内存、physicalDPI全部NOT_RUN。策划中心/WPS原生门禁独立NOT_RUN。privateWindowStation/RenderTargetBitmap/InputHitTest是backend证据，不实机批准。Preparednewruntime已逐290files核对，不Launch/不查询共享微信内容。上一批AXready/截图超时/用户inputUNKNOWN继承保留不改。CalibrationEligible=false。

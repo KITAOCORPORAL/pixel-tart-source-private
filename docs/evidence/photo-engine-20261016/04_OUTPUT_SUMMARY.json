@@ -1,0 +1,52 @@
+{
+  "scenes": 6,
+  "executedComparisons": 18,
+  "actualFullReferences": [
+    "ACES1.0SDRcomponents viaOCIO2.4.2",
+    "OpenDRT1.1.0 externalCPUscalar"
+  ],
+  "partialReferences": [
+    "darktable4.8.1log+splinehelperonly NOTfullfilmic"
+  ],
+  "fullDarktable": "NOT_RUN_NO_REVIEWED_WINDOWS_CLI",
+  "highlights": [
+    {
+      "scene": "gray",
+      "transform": "ACES1SDR_OCIO",
+      "levels": 512,
+      "clipped": 0
+    },
+    {
+      "scene": "gray",
+      "transform": "OpenDRT1.1Standard_sRGB2.2",
+      "levels": 512,
+      "clipped": 0
+    },
+    {
+      "scene": "gray",
+      "transform": "DT_LOG_SPLINE_SUBSTAGE_ONLY",
+      "levels": 369,
+      "clipped": 0
+    },
+    {
+      "scene": "backlit",
+      "transform": "ACES1SDR_OCIO",
+      "levels": 507,
+      "clipped": 0.001953125
+    },
+    {
+      "scene": "backlit",
+      "transform": "OpenDRT1.1Standard_sRGB2.2",
+      "levels": 512,
+      "clipped": 0
+    },
+    {
+      "scene": "backlit",
+      "transform": "DT_LOG_SPLINE_SUBSTAGE_ONLY",
+      "levels": 249,
+      "clipped": 0
+    }
+  ],
+  "photographerBlindReview": "PENDING_NOT_APPROVED",
+  "productAlgorithmChange": false
+}

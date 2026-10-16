@@ -1,0 +1,678 @@
+{
+  "files": [
+    {
+      "path": "docs/evidence/photo-engine-20261016/.gitattributes",
+      "bytes": 66,
+      "extension": "",
+      "type": "repositorymetadata",
+      "sha256": "0820a84b587afc2f7c1ebbbc3d8b3e955a2c29cbac16bce2bdd1f83d793d1dcf"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/01_GATES.md",
+      "bytes": 504,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "d061d0da3f777e3fec19d414d40390d8cb1c8a2585c1afc5711903fa968fd576"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/01_UNEXECUTED_GATES.json",
+      "bytes": 71448,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b19352f241ac91f551bb6d9765702400aa630d2936206e57a305aca02327027e"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/01_UNEXECUTED_GATES_FINAL.json",
+      "bytes": 72928,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "0e067a211b16e06b86dcdf41c290663e2801873ec18953961ccb3847fda57419"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_FUJI_VERSION_CONTRACT.md",
+      "bytes": 518,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "898fc8a4e6692d953ce71687b2dc88cec6c1c7ed0f0406baac0f65fc7d41b234"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_GEOMETRY_AND_TYPES.json",
+      "bytes": 4444,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "8c6f35c339203c15f6cc88ec21817f8fe21f0f801d8bcebbef6fdf2a80702602"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAWSPEED_SCOPE.md",
+      "bytes": 519,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "a21a56651d978986305b4d30b9b6dc03c3c31ee575e0142128b87533b730a46b"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_BUILD.json",
+      "bytes": 48,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b8155bc7dc340db60f4819d65af7d615dafffe12803c3e98c1200e8ed22bc79e"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_CANDIDATE_DECISION.md",
+      "bytes": 1628,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "a1220f36504d3ce2322bd74270d1c1754dce8d5286128828dc9e5518dbf11c8f"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_EMBEDDED_ICC_INSPECTION.json",
+      "bytes": 1118,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "cd4d38511ec3efcee1d22f1240be81f6757ed1fa2763dd560f938f9752a549c8"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_FINAL_BUILD.json",
+      "bytes": 48,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b8155bc7dc340db60f4819d65af7d615dafffe12803c3e98c1200e8ed22bc79e"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_FINAL_SONY.json",
+      "bytes": 3706,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "96585378c907990e4d92ff77a10839b7faa4c660fb880778c4a3a646be114546"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_NATIVE_IDENTITIES.json",
+      "bytes": 1869,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "7274f6ef28d9e5b41d5b97f74a5c09e1e5e551722311508aca4598ae9316c1fd"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_NODE_GATE.md",
+      "bytes": 1785,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "20d951fadacfc1bd2ca743a1554f400465a9cf0b4054ebf94c4ece017112bb1a"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_OUTPUT_CONTRACT.md",
+      "bytes": 607,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "b700627a73e4db297713b73c790a6d3243da6c6559ae3267bc12af71de9aacbc"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_OUTPUT_PIXELS.json",
+      "bytes": 1738,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "289784df33db41f11234450b3e3bbe810249ff62d3c761b4135af061dcae3039"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_RESULTS.json",
+      "bytes": 15053,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "2a18aa8b8919df9dc1ee4d4bd98acf6b7eea36478055b63afc16c70542dca17c"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_RUN.json",
+      "bytes": 1078,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "bc9404ab01f5d97d491bda5609724f09d29bc528047325a5d8e1426ec7b54d91"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_VARIANTS.json",
+      "bytes": 11780,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "f99baaab401780f2f4fcd50d0f6c006c80f23f6d2a80f985cc67ee2df1633c4d"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RAW_VARIANT_BUILD.json",
+      "bytes": 48,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b8155bc7dc340db60f4819d65af7d615dafffe12803c3e98c1200e8ed22bc79e"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_RT_BOTH_MODES.json",
+      "bytes": 154694,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "e30a88f69227e36081060fc2d7df210bacf6d75278960bb7efec09f366457a0a"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_UPSTREAM_FILES.json",
+      "bytes": 1784,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "567ba88a0bbe5a6f5ad6bcd038b4ae9e9bcf49dead097960ca5158a0a8c0c6c7"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/02_UPSTREAM_REFS.json",
+      "bytes": 1840,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "0ee1436db90d04a3fefebd449bc7b09afd2565dc2e4b13ebf268d4249cd7763d"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_CHAIN_TYPES.md",
+      "bytes": 1599,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "d937043662c979108b439b507e84684662f727183898280118416ebc873448c8"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_DISTRIBUTION_BLOCKERS.md",
+      "bytes": 534,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "3779622d08f48b1a22be8ccb402b8660396fe33116f0e20175bca9858ecfddcb"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_FINAL_PHOTO_SUITE_RESULTS.json",
+      "bytes": 5560,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "e4aaad47105ba354707561db7e96beb92e2b97f27948bdd89ce72f378cf33d96"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_FINAL_PHOTO_SUITE_RUN.json",
+      "bytes": 1205,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "62bb03cf3c68af31c13a37329c4df03c017cfae320139706bc8ec95d6e4300e9"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_INSTALLED_REFERENCE_COMPONENTS.json",
+      "bytes": 3396,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "06cf27988afc91b0c1051906f1e53e926a7c9e67e40b614efee1ff2af276f30a"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_OCIO_COLOUR_DERIVED_MATRIX.json",
+      "bytes": 3158,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "1df2ef83bade3479e5f667bf25db138fec82ff37a54fc84f3bc4e00fe2150072"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_OCIO_COLOUR_MATRIX.json",
+      "bytes": 3154,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "8fa23d4fb6d47c785e48fb31b619aa6d10e117b4c0cb987fd7bf887355219e0d"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_PHOTO_CONTRACT_UNIT_TESTS.json",
+      "bytes": 165,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "358def0a2dcdeca5963ae291622aa9cfef6d07cf86ea1c931978625af3092fa5"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_PHOTO_NODE_GATE.md",
+      "bytes": 1790,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "3cff8ddd5f176368599df675d73da42ae788e6155392aa4d6a2ac443ab8c691a"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_PHOTO_SUITE_RESULTS.json",
+      "bytes": 5560,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "e4aaad47105ba354707561db7e96beb92e2b97f27948bdd89ce72f378cf33d96"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_PHOTO_SUITE_RUN.json",
+      "bytes": 1205,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "62bb03cf3c68af31c13a37329c4df03c017cfae320139706bc8ec95d6e4300e9"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_PROFILE_IDENTITIES.json",
+      "bytes": 615,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "26c772b0efe677d8472e2adc7d26331bf3fe1c95587d2c62f010909344c94b0f"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_REFERENCE_INSTALL.json",
+      "bytes": 2122,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "e1b729f4a62c87ea8189cfcda5ab71f28044db4d8ec9feac503c5a2329f83fbb"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/03_SAFE_SUBSET_LIMITS.md",
+      "bytes": 582,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "3bfffa339722e240fd6abf3456099dbf29d1a075e4fc895794a3e41bea52f2d1"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_ACES_LICENSE.json",
+      "bytes": 3168,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "aec070700e36b3ecd2f8e7e368ed291dce284b028e52fbb0d48d65a52c30042c"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_ACES_VERSION_CLARIFICATION.json",
+      "bytes": 355,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "33df5d53739853b97fe08cd267d0e7f904d85784b9717057012254e4def14431"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_BLIND_REVIEW_TEMPLATE.csv",
+      "bytes": 262,
+      "extension": ".csv",
+      "type": "photographerreviewtemplate",
+      "sha256": "2278d39e4260139015c66f2a8c21849f527d0c7990389d661c1d44609c306411"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_DARKTABLE_BUILD_FAILED_ENCODING.json",
+      "bytes": 1485,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "ee322b5fb343d66d0c9d1439a63da83432f9835413ad498d36dfe0dc74b824e9"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_DARKTABLE_SUBSTAGE_BUILD.json",
+      "bytes": 462,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "0284430c3843ce819fbb1c00888a7eea8ed91039f634135d7adb3f7518983612"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_OPENDRT_BUILD.json",
+      "bytes": 619,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "326031a1b3e54c4078f4cb1a820bb511118b35daa36fe3c519a8ca99d815a775"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_OPENDRT_SOURCE.json",
+      "bytes": 353,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "cf0de13f68d5e0f0b7e087298020d808d81d486727b01da5f4fa4852bdadac61"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_OUTPUT_LIMITS.md",
+      "bytes": 692,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "f1fe8ddccf1ee6beabbc960080b34445ed0b14e0c14fe69491b35990cf18d89c"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_OUTPUT_NODE_REVIEW.md",
+      "bytes": 1630,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "bc160e1ed61607abd619c0cdb35ab009ce96cfc4b263d0bbd889f7aad43384b9"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_OUTPUT_RESEARCH_FAILED.json",
+      "bytes": 1896,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "4a14933562eca54c03c74be74d515a2624d9f5d9afd7f66e5aa64f903f30b8ae"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_OUTPUT_RESEARCH_INITIAL_RESULTS.json",
+      "bytes": 14184,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b0e0a7402de67fffa4cc1adf2ea735111c9fd277ba8cbc80bdcdfefae1518bf4"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_OUTPUT_RESEARCH_RESULTS.json",
+      "bytes": 14136,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "90e07d887e43c95a3601c04954387d01140b0a2b44c90d995c8a7ac61952fd5c"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_OUTPUT_RESEARCH_RUN.json",
+      "bytes": 15118,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "9627e8c01a2c0c06606ff0b8329089372b70bf3edad32b3cdbbc9a83abb0c218"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_OUTPUT_SUMMARY.json",
+      "bytes": 1152,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "0ae4bc06b24a017b64d80ee0e71d0160b972f11f85d70d30efc47480143c51ad"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/04_REFERENCE_LICENSES.json",
+      "bytes": 2599,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "34f93c2068e571d2601642b4328b285827ce6ac2c42b1bf777468fbf2de54bcc"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/05_NATIVE_PREPARED.json",
+      "bytes": 4522,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "05db731210219bc115115d13d29cb085600b81b6f6b3929d0a1f3176477bc34f"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/05_NATIVE_STATUS.md",
+      "bytes": 510,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "57c4a78c261bf94211fe9425a41ceef11519d944894373fa8954bc19605e6246"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/05_PRODUCT_VS_RESEARCH.md",
+      "bytes": 1509,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "821fdac3b0849d91cc65dde49f9bbbb9ed0c4a5b5b736175fe1a0765f3aa0b16"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/DELIVERY.md",
+      "bytes": 8532,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "e64fd14fdf2bd1e90ccdf2f1a4a6245133dc480b216c901a0ba918e6893c18a5"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_AUTHORIZED_INPUT_HASHES.json",
+      "bytes": 420,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b17318d28bde4d8a104b712dee24837f7f426b94890554cfe65605e6b7380d7a"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_COLLISION.jsonl",
+      "bytes": 894,
+      "extension": ".jsonl",
+      "type": "repositorymetadata",
+      "sha256": "78909bb5a8f56316b982e22831ae6567bfeca84e62096f29e1d0219366141fae"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_FROZEN_CONTRACTS.json",
+      "bytes": 632,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "93527bb7ab8acbc6a9d8d921fef2d98023d28f9a144a03cfd3b90ac2047226f3"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_FULL_WPF_DISCOVERY.json",
+      "bytes": 665530,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "5b24e50176bfe6a55d596d86de943a0611ca11de748cd597addce18c015cc22f"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_FULL_WPF_SUMMARY.json",
+      "bytes": 1582014,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "13c1dd17baeec209d3b48dbb7f25ec58e02e3df058043d15694d762154b45eda"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_GOLDEN_P3.json",
+      "bytes": 687,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "bbe3f373ceca625768820c6e8cc857510c1b5e8c1cb7055a607b4b676772eecd"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_HEADER_HITS.jsonl",
+      "bytes": 21940,
+      "extension": ".jsonl",
+      "type": "repositorymetadata",
+      "sha256": "2e987fb8ca18b2032e45225d601ee04db851885de2ba2084f4329959bcaa6f2c"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_PRIVATE_HOST.json",
+      "bytes": 1318,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "965f7a485fe37d284b520e187dda2489fb8a849fcdefab91b1e5ab0b1a2ca078"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_PUBLISHED_CORE_DISCOVERY.json",
+      "bytes": 660060,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "2f730578ca499d42f1d3fede066be3e0a30cdde345b1598be17382bc74b69c3c"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_PUBLISHED_CORE_SUMMARY.json",
+      "bytes": 1284587,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "f2c6e36aa636ca03a25c247a6bb9d257d1198c0d578249124b8f8c106f0fc7db"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_SOURCE_CORE_DISCOVERY.json",
+      "bytes": 829152,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "2cd9dbc4844a43f87a021f1dc4b7b3849ada54a26c336ecf0aa87702ac5196d9"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_SOURCE_CORE_SUMMARY.json",
+      "bytes": 1454576,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "5310f27663f791c7565cf244e4e098fff00cca949bda3e2b0a7ffe56f02da2b8"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_SOURCE_IDENTITY.json",
+      "bytes": 400,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "1b7addbebc46ef92af159ed7018ed7a54338a1eafa56d6305b3b96360ae1291e"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_SPECIAL_SUMMARY.json",
+      "bytes": 16968,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "ddb048c15b663accc56e5978ee9bdb47e07c89ca6bf87c6e759c4c955cdda320"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_WORKTREE_PRESERVATION.json",
+      "bytes": 12079,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "b92e7585e5d82e3bc99c4d0d96388849ed979f07b78a2301b5e1054e0caa31ae"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_WPF_CLASSIFICATION.json",
+      "bytes": 836798,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "6f17f44f0e63cd65da8ce16b1dbad5b4d3aed141a9fe136e7ef575cd4d114abd"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_WPF_MISSING_RESULTS.json",
+      "bytes": 3,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/FINAL_WPF_NONPASSING.json",
+      "bytes": 25266,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "83d93e5d398f309dfc467e4d987ad75785e76adf2a5873d24f1ff81e12c39e4b"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/PUBLISHED_COMPONENT_BINDINGS.json",
+      "bytes": 4701,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "c4638b3e70c2261404656abd5b9e0158c5eedacf5a2fb426ef4954ef351370c7"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/RAW_TEST_RESULTS.zip",
+      "bytes": 2866199,
+      "extension": ".zip",
+      "type": "rawtestandprocessarchive",
+      "sha256": "6a3c31f517a29721dc53e27cdd7c0a14ea71bf58dbc658a6d167f46188bbcbe0"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/RELEASE_EXE.json",
+      "bytes": 495,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "1bfa3193df77b5dba9cc2a5d6b9be0bf9bc2f58129773f757750c7c1d3beafe3"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/RELEASE_FILES.json",
+      "bytes": 149346,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "381a1ef762f0fab8c9d0b8efea0b780a28853b7461b9a3f280a92f0bb8547e21"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/RELEASE_TREE_HASHES.json",
+      "bytes": 448,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "61ac7103645e8a4159d310811a929bae286e61f01e7d9c0acac413e2d741f37e"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/STAGE_COMMITS.json",
+      "bytes": 5342,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "f649de32f5dcfb0d4bac2967e8f7bf6075689aceb00c426c5925af61627b9908"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/START.json",
+      "bytes": 18377,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "40b845fa14d0f529b82627b75dc8399e3361f52a0ffa33a7ec792dcf5da1be0d"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/TEST_CLASSIFICATION.json",
+      "bytes": 1746,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "a7922e8cef4e690d865907dcbf03050c86a1bc051dbd2c3a83260dabffd2738c"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/VERIFY_EVIDENCE.py",
+      "bytes": 3891,
+      "extension": ".py",
+      "type": "photo-onlyresearch/validation script",
+      "sha256": "1170bb64ecb58985e1bd9d4b01920757ada4c1b95a41fdc049c860a307c4ff1a"
+    },
+    {
+      "path": "docs/evidence/photo-engine-20261016/screenshots/reference-simple.png",
+      "bytes": 179484,
+      "extension": ".png",
+      "type": "syntheticactualWPFcapture",
+      "sha256": "284f73dabda2ab7ef6b8da57b9fcd10d89d9b5b401304f4902ff501a55866656"
+    },
+    {
+      "path": "tools/photo-engine/.gitignore",
+      "bytes": 13,
+      "extension": "",
+      "type": "repositorymetadata",
+      "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+    },
+    {
+      "path": "tools/photo-engine/README.md",
+      "bytes": 2311,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "b4d704314a92db656df6e822301254ed89bbbef85ceed73ff3fca5f4f469cf32"
+    },
+    {
+      "path": "tools/photo-engine/build_darktable_substage.py",
+      "bytes": 1818,
+      "extension": ".py",
+      "type": "photo-onlyresearch/validation script",
+      "sha256": "2303ca1cb9e1876f385fbaeace456e40808e0ff0012c3d47f688bcf3ed805dd3"
+    },
+    {
+      "path": "tools/photo-engine/build_opendrt_reference.py",
+      "bytes": 2460,
+      "extension": ".py",
+      "type": "photo-onlyresearch/validation script",
+      "sha256": "53b4d236bc15ab851a3b3ec2e0b4b85cfbe16751c4cb074ed67a04507f1dd1c0"
+    },
+    {
+      "path": "tools/photo-engine/ocio_colour_contract.py",
+      "bytes": 1337,
+      "extension": ".py",
+      "type": "photo-onlyresearch/validation script",
+      "sha256": "bb0bcd701a14a520e8a69c8956d5d5f6249228cef0671803a11099e272481d06"
+    },
+    {
+      "path": "tools/photo-engine/output_research.py",
+      "bytes": 3541,
+      "extension": ".py",
+      "type": "photo-onlyresearch/validation script",
+      "sha256": "7fff70afe11c3e7e668327a7d59d9cfe594762efdc17e735db1e67552869de1b"
+    },
+    {
+      "path": "tools/photo-engine/photo_srgb_workflow.py",
+      "bytes": 8145,
+      "extension": ".py",
+      "type": "photo-onlyresearch/validation script",
+      "sha256": "cc8cd42e88b72c5e91dd8a4c94b1e81f1eba3dc799c6a47ca76c5626015a52bf"
+    },
+    {
+      "path": "tools/photo-engine/prepare_standard_profile.py",
+      "bytes": 1007,
+      "extension": ".py",
+      "type": "photo-onlyresearch/validation script",
+      "sha256": "ffdb315248907eaa48cfe385de180241197a7daa0757d8c1811d027ecd5e56c4"
+    },
+    {
+      "path": "tools/photo-engine/raw_candidate.cpp",
+      "bytes": 4915,
+      "extension": ".cpp",
+      "type": "originalresearchAPIwrapper",
+      "sha256": "207253e9d505866f5982ff10364f9db15900cb1e8b84001e15fc86da0ef5bca5"
+    },
+    {
+      "path": "tools/photo-engine/run_photo_suite.py",
+      "bytes": 2765,
+      "extension": ".py",
+      "type": "photo-onlyresearch/validation script",
+      "sha256": "7e2ff6d150ca49f04a59089b93ef3780725d0293c4a349eec19485149af8b535"
+    },
+    {
+      "path": "tools/photo-engine/run_raw_candidate.py",
+      "bytes": 2108,
+      "extension": ".py",
+      "type": "photo-onlyresearch/validation script",
+      "sha256": "ce8ff6b60a8c411692bfe664504a805dea1a31813559f73603da74e9ccb20553"
+    },
+    {
+      "path": "tools/photo-engine/test_photo_contract.py",
+      "bytes": 1223,
+      "extension": ".py",
+      "type": "photo-onlyresearch/validation script",
+      "sha256": "ebf08655d11d8a446a732f9164413f4f6fdfa1a8495dc66aefad43d584a8c545"
+    }
+  ],
+  "hashDomain": "workingtreebytes; self/VALIDATIONexcluded",
+  "noPhotosDatabasesThirdPartySourceBinaryReleaseInGit": true
+}
