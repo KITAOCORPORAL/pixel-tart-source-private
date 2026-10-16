@@ -1,0 +1,16 @@
+{
+  "lcms": {
+    "path": "D:/AI AGENT/kitao-company-validation-20261015/artifacts/company-validation/icc/lcms/Library/bin/lcms2.dll",
+    "sha256": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4",
+    "expected": "2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4"
+  },
+  "licenseSha256": "6dbd60437f8ef91d8de1f08ad75882547fd4931bfcc3566a0735f28db1484d31",
+  "cleanWindows": "NOT_RUN_NO_ISOLATED_VM",
+  "buildSourceCorrespondence": "PACKAGE_RECIPE_ONLY_NOT_REBUILD",
+  "PEAudit": {
+    "code": 0,
+    "stdout": "{\r\n  \"path\": \"D:\\\\AI AGENT\\\\kitao-company-validation-20261015\\\\artifacts\\\\company-validation\\\\icc\\\\lcms\\\\Library\\\\bin\\\\lcms2.dll\",\r\n  \"sha256\": \"2f864b9f1bf5839fbc963265a0c9c94a4709124439e5ab5bfcae5f522483a1c4\",\r\n  \"ordinaryImports\": [\r\n    \"KERNEL32.dll\"\r\n  ],\r\n  \"delayImports\": [],\r\n  \"peArchitecture\": \"0x20b\",\r\n  \"noTransitiveClaim\": true\r\n}\r\n",
+    "stderr": ""
+  },
+  "bundleDecision": "CLOSED"
+}

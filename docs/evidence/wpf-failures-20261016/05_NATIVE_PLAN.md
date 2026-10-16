@@ -1,0 +1,1 @@
+本批不检查或争抢共享桌面；先前用户输入检测UNKNOWN保留，不自动重试。复用Prepare-NativeAcceptance短脚本对本批最终封存Release逐文件校验并准备全新隔离runtime，默认prepareonly。预约人工窗口后可启动；idle10分钟本身不是许可。启动/策划导航/Color导航/托盘simple+advanced插图/重复引用/原目录搬迁重开/undo-redo/DOCX/切图取消/recipe重开/导出/真WPS往返/physicalDPI100125150200/视觉碰撞/10s内存逐项人工记录。私有WPF实际geometry+InputHitTest是后台交互模型，不是原生鼠标点击。RenderTargetBitmap截图不是physicalmonitor/DPI批准。无桌面预约则全部nativeNOT_RUN。
