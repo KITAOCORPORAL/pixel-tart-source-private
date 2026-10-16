@@ -1,0 +1,91 @@
+{
+  "status": "RESEARCH_PREBUILT_PROBED_NOT_PRODUCT",
+  "executableSha256": "8df090a80c784fa03182b91ab1679fd08e5fc139d54b0bfb8b003024ef741129",
+  "nativeSha256": "6a459c22039abf0eac4d263673337c8ed5f223acbd372fcf77610debf80ac8cd",
+  "sourceRebuilt": false,
+  "cleanVM": "NOT_RUN",
+  "distributionApproved": false,
+  "productEnabled": false,
+  "rows": [
+    {
+      "sourceSha256": "b7d358517db0cd5b5c54215aa089a5a30c79234aef50e9381931128493e33401",
+      "copySha256": "b7d358517db0cd5b5c54215aa089a5a30c79234aef50e9381931128493e33401",
+      "sourceFile": "TNAN8886.CR3",
+      "command": [
+        "N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\candidate-local\\extracted\\LibRaw-0.22.2\\bin\\dcraw_emu.exe",
+        "-w",
+        "-6",
+        "-o",
+        "4",
+        "-g",
+        "1",
+        "1",
+        "-W",
+        "-q",
+        "3",
+        "-t",
+        "0",
+        "-Z",
+        "N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\05-official-probe\\TNAN8886.linear-prophoto.ppm",
+        "N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\05-official-probe\\copy.CR3"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 1.6979901000158861,
+      "status": "RESEARCH_PREBUILT_DECODED",
+      "contract": "HomeOfficial0222LinearProPhoto16ResearchV1",
+      "domain": "LibRaw ProPhoto primaries/D65 convention, linear gamma1/1, camera WB baked; quantized rendered RGB, not sensor or ICC ProPhotoD50",
+      "orientation": "-t0: not applied; original metadata remains authoritative",
+      "width": 5496,
+      "height": 3670,
+      "bits": 16,
+      "pixelBytes": 121021920,
+      "pixelSha256": "ec73495a3d2876a22a2c2d89ebaa893a4efef6ba0c0f60dcb8cd4c8cf64cf445"
+    },
+    {
+      "sourceSha256": "52d054ed9a90306db0b7eb5d6c408a2e006532b976ac88ed792692f9f744e865",
+      "copySha256": "52d054ed9a90306db0b7eb5d6c408a2e006532b976ac88ed792692f9f744e865",
+      "sourceFile": "DSCF0347.RAF",
+      "command": [
+        "N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\candidate-local\\extracted\\LibRaw-0.22.2\\bin\\dcraw_emu.exe",
+        "-w",
+        "-6",
+        "-o",
+        "4",
+        "-g",
+        "1",
+        "1",
+        "-W",
+        "-q",
+        "3",
+        "-t",
+        "0",
+        "-Z",
+        "N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\05-official-probe\\DSCF0347.linear-prophoto.ppm",
+        "N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\05-official-probe\\copy.RAF"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 19.293183300003875,
+      "status": "RESEARCH_PREBUILT_DECODED",
+      "contract": "HomeOfficial0222LinearProPhoto16ResearchV1",
+      "domain": "LibRaw ProPhoto primaries/D65 convention, linear gamma1/1, camera WB baked; quantized rendered RGB, not sensor or ICC ProPhotoD50",
+      "orientation": "-t0: not applied; original metadata remains authoritative",
+      "width": 7752,
+      "height": 5178,
+      "bits": 16,
+      "pixelBytes": 240839136,
+      "pixelSha256": "871c9556a87851c185d31ca9389bbdce506080dd2bdda77671c42c7e9f60f34d"
+    },
+    {
+      "source": "N:/pixart/RAW/Real/sony/DSC09916.ARW",
+      "status": "NOT_RUN_MISSING_AUTHORIZED_ORIGINAL"
+    },
+    {
+      "operation": "TerminateOwnedResearchProcessAfter50ms",
+      "cancelRequested": true,
+      "exitCode": 1,
+      "outputExists": false,
+      "productCallbackCancel": "NOT_RUN",
+      "sourceUnchanged": true
+    }
+  ]
+}

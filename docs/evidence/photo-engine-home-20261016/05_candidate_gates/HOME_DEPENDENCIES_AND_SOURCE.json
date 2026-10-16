@@ -1,0 +1,93 @@
+{
+  "rows": [
+    {
+      "file": "artifacts\\home-photo\\candidate-local\\extracted\\LibRaw-0.22.2\\bin\\libraw.dll",
+      "sha256": "6a459c22039abf0eac4d263673337c8ed5f223acbd372fcf77610debf80ac8cd",
+      "machine": "0x8664",
+      "architecture": "AMD64",
+      "imports": [
+        "MSVCP140.dll",
+        "WS2_32.dll",
+        "KERNEL32.dll",
+        "VCRUNTIME140.dll",
+        "VCRUNTIME140_1.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll"
+      ]
+    },
+    {
+      "file": "artifacts\\home-photo\\candidate-local\\extracted\\LibRaw-0.22.2\\bin\\dcraw_emu.exe",
+      "sha256": "8df090a80c784fa03182b91ab1679fd08e5fc139d54b0bfb8b003024ef741129",
+      "machine": "0x8664",
+      "architecture": "AMD64",
+      "imports": [
+        "libraw.dll",
+        "MSVCP140.dll",
+        "KERNEL32.dll",
+        "VCRUNTIME140.dll",
+        "VCRUNTIME140_1.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll"
+      ]
+    }
+  ],
+  "source": [
+    {
+      "file": "Makefile.msvc",
+      "exists": true,
+      "sha256": "d98c891e54002eb71db90fd7eefe961a661e309539098b7beb373b369aaaf865"
+    },
+    {
+      "file": "samples/dcraw_emu.cpp",
+      "exists": true,
+      "sha256": "16c923c033f1aa70c52e46a6cd7e520263ad1eb7a8896c8081276b58680756fc"
+    },
+    {
+      "file": "src/decoders/sonycc.cpp",
+      "exists": true,
+      "sha256": "35e5077e11699ac26266258e5fc13ad9c09f416db66e8fad53f43d8103f310c3"
+    },
+    {
+      "file": "src/postprocessing/dcraw_process.cpp",
+      "exists": true,
+      "sha256": "6b50457c0267d3beda5155f661f05f6ad72e6e1f1d2c9013651aa068ce6db365"
+    },
+    {
+      "file": "libraw/libraw_version.h",
+      "exists": true,
+      "sha256": "b693f77b382dc4b9920625cc30671c99f336b16ba8bd4601474cebc1e7b3d0c5"
+    },
+    {
+      "file": "LICENSE.LGPL",
+      "exists": true,
+      "sha256": "eea173a556abac0370461e57e12aab266894ea6be3874c2be05fd87871f75449"
+    },
+    {
+      "file": "LICENSE.CDDL",
+      "exists": true,
+      "sha256": "0e3098d2d54a12434715f6679ea408d57da5e8d613c385c58ecc6fe5d30cc81f"
+    },
+    {
+      "file": "COPYRIGHT",
+      "exists": true,
+      "sha256": "574c88f5dd59414cfc896293a63defbc2d525a418ed413d7ab7dcc43cf79c509"
+    }
+  ],
+  "compilerAvailableFromKnownPaths": false,
+  "cleanRebuild": "NOT_RUN",
+  "distributionElection": "OPEN_NOT_APPROVED"
+}

@@ -1,0 +1,9 @@
+# Home package probe update (supersedes “absent” observation at initial audit)
+
+Official https://www.libraw.org/data/LibRaw-0.22.2-Win64.zip downloaded into ignored local artifacts; SHA AC64FA12BB00A7581332D4C6AB918C0533FB3F119D6B668D47A6875410DCA948 matches pinned prior artifact. Extracted official dcraw_emu/libraw.dll hashes exactly8df090.../6a459c..., architecture AMD64 and PE import dependencies separately recorded. Source, Makefile.msvc, licenses and entry-point samples read from same package, file hashes retained; no foreign source copied into product/Git.
+
+Explicit isolated prebuilt *research* probe on hash-authorized copies: Canon5496x3670, Fuji7752x5178, complete linear RGB16 PPM payload lengths validated. Flags cameraWB, noautobright, gamma1/1, ProPhoto4, AHD3, userflip0. Domain differs from old encoded-sRGB product; no pixel-equality or PV4 admission claim. Sony exact fixture missing→NOT_RUN. A50ms terminate-owned-process probe left no output; NOT equivalent to LibRawcallback cancellation or product UI.
+
+No compiler found in PATH or checked standardLLVM/MSVC/CMake locations; clean Windows rebuild/native source-to-binary correspondence and cleanVM loading not executed. Local official binary loading is not clean-environment build verification. DualLGPL2.1/CDDL1 texts read; license election, exact dependency/source provision obligations remain OPEN. Package copyright covers secondary BSD/MIT code; no unconditional redistribution approval.
+
+Product-chain gate still CLOSED: no candidate experiment toggle/default/version migration/thumbnail/1:1/region/save-reopen/export wired. CandidateDLL remains only ignored artifacts, ordinaryRelease uses originalraw_r0.21.1. Research prebuilt success cannot replace oldSonyFileUnsupported expectation or close defaultFuji repeatability defect.
