@@ -1,0 +1,155 @@
+[
+  {
+    "file": "DSC09916.ARW",
+    "sha256": "6f596bb234ee5de206c66594bc84205349c363fd6a89ae188ff76dab7c5e53b9",
+    "containerType": "TIFF-family ARW perheader/decoder",
+    "compression": "LibRawSonyRawFileType=4 metadata declaration; sony_ycbcr_load_raw; exactbitstreamequivalenceUNVERIFIED",
+    "CFA": "UNAVAILABLE_NON_CFA color4; libraw_COLOR returned6isnotvalidCFA",
+    "activeOrigin": {
+      "left": 0,
+      "top": 0,
+      "width": 4624,
+      "height": 3080
+    },
+    "rawDimensions": {
+      "width": 5120,
+      "height": 3584
+    },
+    "orientation": "GEOMETRY raw=5120,3584 active=0,0,4624,3080 flip=5 filters=0 raw_bps=15 inset=264,4,4096,3072\r",
+    "containerBlackWhite": {
+      "black": 512,
+      "white": 32767
+    },
+    "unpackedBlackWhite": {
+      "black": 1024,
+      "white": 17536
+    },
+    "WB": [
+      2634,
+      1024,
+      1847,
+      1024
+    ],
+    "rgbCam": [
+      1.63606179,
+      -0.44861874,
+      -0.187443003,
+      0,
+      -0.115164764,
+      1.48897076,
+      -0.37380603,
+      0,
+      -0.00474022795,
+      -0.323601246,
+      1.32834148,
+      0
+    ],
+    "matrixProvenance": "UNAVAILABLE runtime sourcehooknotimplemented; coefficientfieldnotprovenance",
+    "finalDomain": "LibRaw output_color4 linearProPhoto RGB16, cameraWBapplied/demosaiced/matrixapplied/quantized, notsensorlinear",
+    "postBlackPreMatrixPixels": "UNAVAILABLE",
+    "postWbPreMatrixPixels": "UNAVAILABLE",
+    "oldProductDecoder": "0.21.1 unchanged; SonyFileUnsupported retained"
+  },
+  {
+    "file": "DSCF0347.RAF",
+    "sha256": "52d054ed9a90306db0b7eb5d6c408a2e006532b976ac88ed792692f9f744e865",
+    "containerType": "FUJIFILM RAF perheader/decoder",
+    "compression": "unpacked_load_raw reported; RAF compressionbitstreamindependentparseUNAVAILABLE",
+    "CFA": "LibRawfilters9,6x6XTranspatternobserved",
+    "activeOrigin": {
+      "left": 0,
+      "top": 6,
+      "width": 7752,
+      "height": 5178
+    },
+    "rawDimensions": {
+      "width": 7872,
+      "height": 5196
+    },
+    "orientation": "GEOMETRY raw=7872,5196 active=0,6,7752,5178 flip=0 filters=9 raw_bps=14 inset=12,24,7728,5149\r",
+    "containerBlackWhite": {
+      "black": 0,
+      "white": 16383
+    },
+    "unpackedBlackWhite": {
+      "black": 0,
+      "white": 16383
+    },
+    "WB": [
+      525,
+      302,
+      585,
+      0
+    ],
+    "rgbCam": [
+      1.25604749,
+      -0.0421249792,
+      -0.213922545,
+      0,
+      -0.149639323,
+      1.54978108,
+      -0.400141776,
+      0,
+      0.00458681909,
+      -0.361770719,
+      1.35718393,
+      0
+    ],
+    "matrixProvenance": "UNAVAILABLE runtime sourcehooknotimplemented; coefficientfieldnotprovenance",
+    "finalDomain": "LibRaw output_color4 linearProPhoto RGB16, cameraWBapplied/demosaiced/matrixapplied/quantized, notsensorlinear",
+    "postBlackPreMatrixPixels": "UNAVAILABLE",
+    "postWbPreMatrixPixels": "UNAVAILABLE",
+    "oldProductDecoder": "0.21.1 unchanged; SonyFileUnsupported retained"
+  },
+  {
+    "file": "TNAN8886.CR3",
+    "sha256": "b7d358517db0cd5b5c54215aa089a5a30c79234aef50e9381931128493e33401",
+    "containerType": "ISO-BMFF CR3 perdecoder",
+    "compression": "crxLoadRaw reported; CRX variantindependentparseUNAVAILABLE",
+    "CFA": "LibRawBayeralternating0/1and3/2, twoGreenIDs distinct",
+    "activeOrigin": {
+      "left": 72,
+      "top": 38,
+      "width": 5496,
+      "height": 3670
+    },
+    "rawDimensions": {
+      "width": 5568,
+      "height": 3708
+    },
+    "orientation": "GEOMETRY raw=5568,3708 active=72,38,5496,3670 flip=0 filters=3031741620 raw_bps=14 inset=84,50,5472,3648\r",
+    "containerBlackWhite": {
+      "black": 0,
+      "white": 16383
+    },
+    "unpackedBlackWhite": {
+      "black": 2048,
+      "white": 16383
+    },
+    "WB": [
+      1833,
+      1024,
+      1618,
+      1024
+    ],
+    "rgbCam": [
+      1.74715269,
+      -0.848595023,
+      0.1014423,
+      0,
+      -0.179429799,
+      1.65529621,
+      -0.475866437,
+      0,
+      0.00177408487,
+      -0.607358456,
+      1.60558438,
+      0
+    ],
+    "matrixProvenance": "UNAVAILABLE runtime sourcehooknotimplemented; coefficientfieldnotprovenance",
+    "finalDomain": "LibRaw output_color4 linearProPhoto RGB16, cameraWBapplied/demosaiced/matrixapplied/quantized, notsensorlinear",
+    "postBlackPreMatrixPixels": "UNAVAILABLE",
+    "postWbPreMatrixPixels": "UNAVAILABLE",
+    "oldProductDecoder": "0.21.1 unchanged; SonyFileUnsupported retained"
+  }
+]

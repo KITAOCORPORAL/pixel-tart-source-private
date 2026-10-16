@@ -1,0 +1,1 @@
+固定RawSpeed0c16fee...LICENSE/fileheadersLGPL2-orlater，RawParser实际入口和RafDecoder cropPos/cropSize/vendorCrop源码已读。CR3路径源文件404不证明整个上游绝不支持CR3；本机无已审WindowsRawSpeedbinary/build，实际原件解码NOT_RUN。不得将RTsharedLibRaw当第二独立实现。RTinternaldcraw本轮Canon/Fuji成功Sonyexit-2，来源相同原件SHA，独立结果保留。照片RAW产品候选仍依赖singleapprovedengine，双实现对照缺口公开，不批准发布接入。

@@ -1,0 +1,1 @@
+Fuji原件SHA52d054...；metadataSizeTable7752x5184，0.22.2identify.cpp固定raw_width7872/CropMode0设置active(left0,top6,width7752,height5178)。旧0.21.1保持7752x5184和原坐标；RTinternaldcraw/camconst日志另有top5/5184，RTsharedLibRaw top6/5178，不后裁图，不把输出边界相同叫物理有效区域真值。任何未来recipe必须pin decoderVersion/activeOrigin/orientationpolicy；本批候选PhotoRaw0222Research1只输出隔离TIFF，不保存进旧recipe或自动更新productgeometry。
