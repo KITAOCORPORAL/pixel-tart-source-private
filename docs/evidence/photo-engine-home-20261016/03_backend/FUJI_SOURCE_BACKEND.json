@@ -1,0 +1,174 @@
+{
+  "status": "COMPLETED_PRODUCT_BACKEND_NOT_DESKTOP",
+  "sourceSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+  "isolatedCopySha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+  "rows": [
+    {
+      "path": "legacy",
+      "operation": "pre-cancel",
+      "status": "PASSED"
+    },
+    {
+      "path": "legacy",
+      "operation": "full-TIFF16",
+      "status": "PASSED",
+      "Width": 7752,
+      "Height": 5184,
+      "Orientation": 1,
+      "BitsPerSample": 16,
+      "pixelSha256": "7756B417B619945BDCFDE2A6142BC1999266C721EAC3814F208E89B7E4B26B94",
+      "fileSha256": "75CFA0EB767DC6E72C9588E60731AF83D703FB5D05AF7653C638B89A20AF909F"
+    },
+    {
+      "path": "legacy",
+      "operation": "full-quick-PNG16",
+      "status": "PASSED",
+      "PixelWidth": 7752,
+      "PixelHeight": 5184,
+      "bitsPerChannel": 16,
+      "orientationNormalized": 1,
+      "iccExact": true,
+      "pixelsExact": true,
+      "fileSha256": "4BDFEFB636FBDE85DD9B2B4FAC396D1110D0B8AF1B533FC11FC2811A815F4FAC"
+    },
+    {
+      "path": "PV4",
+      "operation": "decode",
+      "status": "REFUSED",
+      "reason": "RAW\u89E3\u7801\u5DE5\u4F5C\u96C6\u4F30\u8BA1\u8D85\u8FC71GiB\u51C6\u5165\u9884\u7B97\uFF0C\u672A\u964D\u4F4E\u5C3A\u5BF8\u6216\u4F4D\u6DF1\u3002"
+    }
+  ],
+  "timeline": [
+    {
+      "stage": "baseline",
+      "ms": 0.9506,
+      "managed": 710992,
+      "workingSet": 29925376,
+      "privateBytes": 8593408,
+      "ledgerBytes": 0
+    },
+    {
+      "stage": "legacy-decoded",
+      "ms": 2281.6097,
+      "managed": 724858952,
+      "workingSet": 770215936,
+      "privateBytes": 748453888,
+      "ledgerBytes": 0
+    },
+    {
+      "stage": "legacy-released-for-next-operation",
+      "ms": 15440.0137,
+      "managed": 1689514576,
+      "workingSet": 3654942720,
+      "privateBytes": 3648454656,
+      "ledgerBytes": 0
+    },
+    {
+      "stage": "natural-after-task-0",
+      "ms": 16799.5768,
+      "managed": 1689693360,
+      "workingSet": 3657965568,
+      "privateBytes": 3648667648,
+      "ledgerBytes": 0
+    },
+    {
+      "stage": "natural-after-task-1",
+      "ms": 17811.8084,
+      "managed": 1689693360,
+      "workingSet": 3657883648,
+      "privateBytes": 3648573440,
+      "ledgerBytes": 0
+    },
+    {
+      "stage": "natural-after-task-2",
+      "ms": 18824.0438,
+      "managed": 1689701552,
+      "workingSet": 3657883648,
+      "privateBytes": 3648573440,
+      "ledgerBytes": 0
+    },
+    {
+      "stage": "natural-after-task-3",
+      "ms": 19840.2312,
+      "managed": 1689709776,
+      "workingSet": 3657863168,
+      "privateBytes": 3648704512,
+      "ledgerBytes": 0
+    },
+    {
+      "stage": "natural-after-task-4",
+      "ms": 20856.0608,
+      "managed": 1689709776,
+      "workingSet": 3657805824,
+      "privateBytes": 3648512000,
+      "ledgerBytes": 0
+    },
+    {
+      "stage": "natural-after-task-5",
+      "ms": 21878.4804,
+      "managed": 1689718000,
+      "workingSet": 3657814016,
+      "privateBytes": 3648512000,
+      "ledgerBytes": 0
+    },
+    {
+      "stage": "natural-after-task-6",
+      "ms": 22892.785,
+      "managed": 1689718000,
+      "workingSet": 3657748480,
+      "privateBytes": 3648655360,
+      "ledgerBytes": 0
+    },
+    {
+      "stage": "natural-after-task-7",
+      "ms": 23905.1761,
+      "managed": 1689726224,
+      "workingSet": 3657224192,
+      "privateBytes": 3647873024,
+      "ledgerBytes": 0
+    },
+    {
+      "stage": "natural-after-task-8",
+      "ms": 24920.5501,
+      "managed": 1689726224,
+      "workingSet": 3657248768,
+      "privateBytes": 3647873024,
+      "ledgerBytes": 0
+    },
+    {
+      "stage": "natural-after-task-9",
+      "ms": 25932.2661,
+      "managed": 1689734448,
+      "workingSet": 3657248768,
+      "privateBytes": 3647873024,
+      "ledgerBytes": 0
+    }
+  ],
+  "modules": [
+    {
+      "name": "raw_r.dll",
+      "path": "N:\\pixart\\kitao-photo-engine-home-20261016\\tools\\PhotoEngineHomeAudit\\bin\\Release\\net10.0-windows10.0.19041.0\\win-x64\\raw_r.dll",
+      "sha256": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9"
+    },
+    {
+      "name": "jpeg8.dll",
+      "path": "N:\\pixart\\kitao-photo-engine-home-20261016\\tools\\PhotoEngineHomeAudit\\bin\\Release\\net10.0-windows10.0.19041.0\\win-x64\\jpeg8.dll",
+      "sha256": "3854CEBC61FD5892CB60491719834922030097F7848D29CCCBFCA3E88D7ED1E5"
+    },
+    {
+      "name": "lcms2.dll",
+      "path": "N:\\pixart\\kitao-photo-engine-home-20261016\\tools\\PhotoEngineHomeAudit\\bin\\Release\\net10.0-windows10.0.19041.0\\win-x64\\lcms2.dll",
+      "sha256": "87BF94F27F345384420383F247178F825C0101928FEDD3A4887FF60E9D4A76EB"
+    },
+    {
+      "name": "zlib1.dll",
+      "path": "N:\\pixart\\kitao-photo-engine-home-20261016\\tools\\PhotoEngineHomeAudit\\bin\\Release\\net10.0-windows10.0.19041.0\\win-x64\\zlib1.dll",
+      "sha256": "4A0BD02C2985974F90DA4A7065ACAC1B72F21A4FE58C5391E14B3E6FE566BC12"
+    }
+  ],
+  "desktopStartup": "NOT_RUN",
+  "navigation": "NOT_RUN",
+  "inflightCancel": "NOT_RUN",
+  "saveReopen": "Covered separately by product regression, not this probe",
+  "notes": "Backend product APIs with full source dimensions; not foreground/native UI acceptance. Natural process series is not workspace-disposal proof."
+}

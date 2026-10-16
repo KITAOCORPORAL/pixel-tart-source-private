@@ -1,0 +1,17 @@
+﻿项,分类,依据/限制
+旧ColorStudio RAW/JPEG工作流与PV4/5/6,产品已实现（继承）,旧数学/decoder未改；不能扩大为新Sony支持
+当前显示器ICC关联/hash/错误诊断与位置/激活刷新,产品已实现（本轮诊断）,只查询与说明，绝不修改像素，不等实际显示器转换
+按显示器profile转换预览/跨屏像素更新,未实现/未运行,现DrawImage直接sRGB；OS/compositor作用未证明
+Canon5496x3670 TIFF16/PNG16与ICC回读,产品后端已验证,授权副本、发布组件后端API；不是原生桌面操作
+Fuji7752x5184 TIFF16/PNG16单次回读,产品后端已验证但重复性阻断,默认同源重复输出不一致，不能当稳定引擎通过
+Fuji PV4,产品明确拒绝,原1GiB准入预算拒绝，未缩尺寸/降位深
+Sony0.22.2完整产品缩略/1:1/编辑/保存导出,未接入/未运行,exactSony原件缺失，发行/cleanVM/产品链gate OPEN
+官方0.22.2 Windows包与Canon/Fuji全尺寸线性输出,研究工具证实（本机预编译）,固定hash完整payload；非cleanbuild/发行批准，Fuji5178不同于旧5184
+Sony研究成功,仅继承历史证据,本机缺指定Sony，NOT_RUN，不能写本机通过
+旧Fuji并行路径相关,推测,default14thread不一致、audit1thread一致；不是完整根因证明，不改产品
+LCMS2.12/2.19与exactProfile独立参考,研究工具证实（有限样本）,矩阵+TRC max6code，8bit max0，不是任意ICC或设备色准
+WIC RGB48目标转换,实际拒绝,0x88982F80；不以低位深代替通过
+ACES/OpenDRT/darktable替换生产曲线,未运行/不批准,继承配置不等价/子阶段限制，无盲评不替换
+真实启动/导航/切图取消/前台保存重开,未运行,ComputerUse禁用、桌面独占未确认
+物理100/150/200DPI与真实显示器视觉,未运行,只读清点，未改任何DPI或profile，不冒充复原已执行
+A7M4绝对色准/全ICC/宝丽来精确标定,未证明,CalibrationEligible=false，不要求购买色卡

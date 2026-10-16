@@ -1,0 +1,59 @@
+{
+  "root": "N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\08-published-identity\\run-20261017-000638-2f7b2f26",
+  "assembly": "N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\08-published-tests\\core\\RAWSelectionAssistant.Tests.dll",
+  "assemblySha256": "ec8b9d0777f392c387607105a6cf9b3168f61ba0680e5d1d318cf14ee42b2bbe",
+  "discovered": 1708,
+  "selected": 1,
+  "runs": [
+    {
+      "pid": 32560,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-16T16:06:39Z",
+      "elapsedSeconds": 0.7969999999913853,
+      "command": [
+        "C:/Program Files/dotnet/dotnet.exe",
+        "vstest",
+        "N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\08-published-tests\\core\\RAWSelectionAssistant.Tests.dll",
+        "/Settings:N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\08-published-identity\\run-20261017-000638-2f7b2f26\\000\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-photo-engine-home-20261016",
+      "temporaryDirectory": "N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\08-published-identity\\run-20261017-000638-2f7b2f26\\000\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests",
+      "executionUnit": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests",
+      "directory": "N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\08-published-identity\\run-20261017-000638-2f7b2f26\\000",
+      "expected": 1,
+      "results": [
+        {
+          "id": "1c262ba3-4116-862d-aea7-d52ed9863bfa",
+          "name": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests.ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+          "display": "ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "p1ExecutionUnit": "method",
+  "executionPlan": [
+    {
+      "unit": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests",
+      "cases": [
+        {
+          "id": "1c262ba3-4116-862d-aea7-d52ed9863bfa",
+          "fullyQualifiedName": "RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests.ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+          "displayName": "ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence",
+          "source": "N:\\pixart\\kitao-photo-engine-home-20261016\\artifacts\\home-photo\\08-published-tests\\core\\RAWSelectionAssistant.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "Passed": 1
+  }
+}

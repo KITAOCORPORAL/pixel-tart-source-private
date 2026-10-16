@@ -1,0 +1,43 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    {
+      "strictReview": [
+        {
+          "infrastructure": "ALL",
+          "errors": [
+            "non-passing or not-executed tests",
+            "nonzero child exit"
+          ]
+        },
+        "nonzero process: ALL",
+        {
+          "failed": "RAWSelectionAssistant.Tests.AssetLibraryP3PerformanceTests.TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds",
+          "outcome": "Failed"
+        },
+        {
+          "infrastructure": "ALL",
+          "errors": [
+            "non-passing or not-executed tests",
+            "nonzero child exit"
+          ]
+        },
+        "nonzero process: ALL",
+        {
+          "failed": "RAWSelectionAssistant.Tests.AssetLibraryP3PerformanceTests.TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds",
+          "outcome": "Failed"
+        }
+      ]
+    },
+    {
+      "requiredProductRepeatability": "Fuji default legacy output differs for identical source",
+      "changedChannelSamples": 38375,
+      "maximum16BitCodeDifference": 11713
+    }
+  ],
+  "legacyOpenConditionsPreserved": true,
+  "nativeDesktop": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "candidateDistributionApproved": false,
+  "monitorPixelConversionImplemented": false
+}

@@ -1,0 +1,130 @@
+{
+  "status": "EVIDENCE_INTEGRITY_VERIFIED_NOT_PRODUCT_ACCEPTANCE",
+  "releaseSourceCommit": "ff1df9b27db4b14530d1d9a85107e9351a6a623b",
+  "releaseFilesVerified": 290,
+  "releaseStatusUnchanged": "BLOCKED_DIAGNOSTIC_BUILD_NOT_APPROVED",
+  "suites": {
+    "02-baseline-core": {
+      "discovered": 1708,
+      "selected": 1708,
+      "results": 1708,
+      "executed": 1701,
+      "counts": {
+        "Passed": 1701,
+        "NotExecuted": 7
+      },
+      "missing": [],
+      "extra": [],
+      "originalStatus": "FAILED",
+      "recordedTestAssemblySha256": "ec8b9d0777f392c387607105a6cf9b3168f61ba0680e5d1d318cf14ee42b2bbe",
+      "currentTestAssemblyMatchesRecorded": true,
+      "rawTrxReadbackVerified": true
+    },
+    "02-baseline-wpf": {
+      "discovered": 1626,
+      "selected": 1626,
+      "results": 1626,
+      "executed": 1603,
+      "counts": {
+        "Passed": 1602,
+        "NotExecuted": 23,
+        "Failed": 1
+      },
+      "missing": [],
+      "extra": [],
+      "originalStatus": "FAILED",
+      "recordedTestAssemblySha256": "99dace94a1d18f89a35ef879f85b6874e2cf314fe5b8ea33b6ca7a6aab03c26b",
+      "currentTestAssemblyMatchesRecorded": false,
+      "assemblyLimitation": "Original baseline assembly overwritten by documented rebuild; recorded discovery/hash/logs retained, original binary not recoverable from current output.",
+      "rawTrxReadbackVerified": true
+    },
+    "02-final-core": {
+      "discovered": 1708,
+      "selected": 1708,
+      "results": 1708,
+      "executed": 1701,
+      "counts": {
+        "Passed": 1700,
+        "NotExecuted": 7,
+        "Failed": 1
+      },
+      "missing": [],
+      "extra": [],
+      "originalStatus": "FAILED",
+      "recordedTestAssemblySha256": "ec8b9d0777f392c387607105a6cf9b3168f61ba0680e5d1d318cf14ee42b2bbe",
+      "currentTestAssemblyMatchesRecorded": true,
+      "rawTrxReadbackVerified": true
+    },
+    "02-final-wpf": {
+      "discovered": 1628,
+      "selected": 1628,
+      "results": 1628,
+      "executed": 1605,
+      "counts": {
+        "Passed": 1605,
+        "NotExecuted": 23
+      },
+      "missing": [],
+      "extra": [],
+      "originalStatus": "FAILED",
+      "recordedTestAssemblySha256": "359d51a3b2fa3a52343bc577060157919d3eaa5470e862d63b26ea523f2f4f17",
+      "currentTestAssemblyMatchesRecorded": true,
+      "rawTrxReadbackVerified": true
+    },
+    "08-published-core": {
+      "discovered": 1708,
+      "selected": 1708,
+      "results": 1708,
+      "executed": 1702,
+      "counts": {
+        "Passed": 1701,
+        "NotExecuted": 6,
+        "Failed": 1
+      },
+      "missing": [],
+      "extra": [],
+      "originalStatus": "FAILED",
+      "recordedTestAssemblySha256": "ec8b9d0777f392c387607105a6cf9b3168f61ba0680e5d1d318cf14ee42b2bbe",
+      "currentTestAssemblyMatchesRecorded": true,
+      "rawTrxReadbackVerified": true
+    },
+    "08-published-wpf": {
+      "discovered": 1628,
+      "selected": 1628,
+      "results": 1628,
+      "executed": 1605,
+      "counts": {
+        "Passed": 1605,
+        "NotExecuted": 23
+      },
+      "missing": [],
+      "extra": [],
+      "originalStatus": "FAILED",
+      "recordedTestAssemblySha256": "359d51a3b2fa3a52343bc577060157919d3eaa5470e862d63b26ea523f2f4f17",
+      "currentTestAssemblyMatchesRecorded": true,
+      "rawTrxReadbackVerified": true
+    },
+    "08-published-identity": {
+      "discovered": 1708,
+      "selected": 1,
+      "results": 1,
+      "executed": 1,
+      "counts": {
+        "Passed": 1
+      },
+      "missing": [],
+      "extra": [],
+      "originalStatus": "PASSED",
+      "recordedTestAssemblySha256": "ec8b9d0777f392c387607105a6cf9b3168f61ba0680e5d1d318cf14ee42b2bbe",
+      "currentTestAssemblyMatchesRecorded": true,
+      "rawTrxReadbackVerified": true
+    }
+  },
+  "archive": {
+    "name": "RAW_TEST_RESULTS.zip",
+    "sha256": "95BDD25F9BD14553D58CE7A2877E99F8A7A5E86A2448F996082CC07219D15FFF",
+    "bytes": 5925438,
+    "memberCount": 2741
+  },
+  "privacyBoundary": "Exact runner TRX/settings/logs/discovery/summary and direct build logs only; no runtime trees, photos, databases, ICC or binaries."
+}
