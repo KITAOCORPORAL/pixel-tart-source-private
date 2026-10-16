@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="21856243-66f2-4b83-8add-a83110552ff6" name="Admin@DESKTOP-HO0JJEQ 2026-10-17 02:55:05" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-17T02:55:05.5218158+08:00" queuing="2026-10-17T02:55:05.5218159+08:00" start="2026-10-17T02:55:03.9489726+08:00" finish="2026-10-17T02:55:05.5251561+08:00" />
+  <TestSettings name="default" id="e0938718-4c99-4a13-8973-ee9fad863312">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-17_02_55_05" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="1be5125f-6a42-4770-8d1f-58159aebb23e" testId="1503fc39-99c9-877f-acb6-e58e67f96f02" testName="TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds" computerName="DESKTOP-HO0JJEQ" duration="00:00:01.0263178" startTime="2026-10-17T02:55:04.3834548+08:00" endTime="2026-10-17T02:55:05.4226950+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1be5125f-6a42-4770-8d1f-58159aebb23e">
+      <Output>
+        <StdOut>TestContext 消息:&#xD;
+Cold/priming AssetLibraryPage: 85.132ms&#xD;
+Warm sample 1/3 AssetLibraryPage: 11.086ms&#xD;
+Warm sample 2/3 AssetLibraryPage: 8.397ms&#xD;
+Warm sample 3/3 AssetLibraryPage: 8.212ms&#xD;
+10,000 项默认首屏: 11.1 ms / 1500 ms&#xD;
+Cold/priming IReadOnlyList`1: 5.683ms&#xD;
+Warm sample 1/3 IReadOnlyList`1: 4.257ms&#xD;
+Warm sample 2/3 IReadOnlyList`1: 4.279ms&#xD;
+Warm sample 3/3 IReadOnlyList`1: 4.072ms&#xD;
+普通文本建议: 4.3 ms / 200 ms&#xD;
+Cold/priming AssetLibraryPage: 51.923ms&#xD;
+Warm sample 1/3 AssetLibraryPage: 19.764ms&#xD;
+Warm sample 2/3 AssetLibraryPage: 18.402ms&#xD;
+Warm sample 3/3 AssetLibraryPage: 18.030ms&#xD;
+单条件筛选更新: 19.8 ms / 300 ms&#xD;
+Cold/priming AssetLibraryPage: 27.462ms&#xD;
+Warm sample 1/3 AssetLibraryPage: 25.805ms&#xD;
+Warm sample 2/3 AssetLibraryPage: 28.739ms&#xD;
+Warm sample 3/3 AssetLibraryPage: 25.128ms&#xD;
+8 条规则、3 层嵌套组合查询: 28.7 ms / 600 ms&#xD;
+Cold/priming AssetLibraryPage: 35.829ms&#xD;
+Warm sample 1/3 AssetLibraryPage: 26.579ms&#xD;
+Warm sample 2/3 AssetLibraryPage: 25.131ms&#xD;
+Warm sample 3/3 AssetLibraryPage: 24.846ms&#xD;
+智能文件夹预览: 26.6 ms / 750 ms&#xD;
+Cold/priming AssetLibraryPage: 18.930ms&#xD;
+Warm sample 1/3 AssetLibraryPage: 19.661ms&#xD;
+Warm sample 2/3 AssetLibraryPage: 17.769ms&#xD;
+Warm sample 3/3 AssetLibraryPage: 17.438ms&#xD;
+当前/全库范围切换: 19.7 ms / 400 ms&#xD;
+100 项批量标签操作: 7.9 ms / 750 ms&#xD;
+500 项批量标签操作: 18.8 ms / 2000 ms</StdOut>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds" storage="n:\pixart\kitao-photo-engine-followup-20261016\tests\rawselectionassistant.tests\bin\x64\release\net10.0\rawselectionassistant.tests.dll" id="1503fc39-99c9-877f-acb6-e58e67f96f02">
+      <TestCategory>
+        <TestCategoryItem TestCategory="Performance" />
+      </TestCategory>
+      <Execution id="1be5125f-6a42-4770-8d1f-58159aebb23e" />
+      <TestMethod codeBase="N:\pixart\kitao-photo-engine-followup-20261016\tests\RAWSelectionAssistant.Tests\bin\x64\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.AssetLibraryP3PerformanceTests" name="TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1503fc39-99c9-877f-acb6-e58e67f96f02" executionId="1be5125f-6a42-4770-8d1f-58159aebb23e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 N:\pixart\kitao-photo-engine-followup-20261016\tests\RAWSelectionAssistant.Tests\bin\x64\Release\net10.0\RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 28，Scope: MethodLevel)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

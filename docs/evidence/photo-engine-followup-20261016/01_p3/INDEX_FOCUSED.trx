@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="fb8e7d47-c797-461d-a35b-46ad0bbfdc22" name="Admin@DESKTOP-HO0JJEQ 2026-10-17 03:04:48" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-17T03:04:48.0876085+08:00" queuing="2026-10-17T03:04:48.0876089+08:00" start="2026-10-17T03:04:46.8702313+08:00" finish="2026-10-17T03:04:48.0915199+08:00" />
+  <TestSettings name="default" id="1279b57e-50d8-4e18-a61a-dd1088ead511">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-17_03_04_48" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="86fda5d8-d495-4a2f-89f8-8044e05e73f9" testId="18e81e23-ea3a-892c-9d0a-72b3c7722208" testName="CommonMembershipRatingAndVisualQueriesUseDeclaredIndexes" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0790199" startTime="2026-10-17T03:04:47.3128368+08:00" endTime="2026-10-17T03:04:47.4051755+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="86fda5d8-d495-4a2f-89f8-8044e05e73f9" />
+    <UnitTestResult executionId="166cc4ac-4182-45f0-a009-d6166126cce5" testId="11ba7e67-bfe7-82ee-8ef9-0b4a493d7d90" testName="OrderedScopeQueryUsesExactOrderIndexAndPreservesRowsAndBytes" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.2526628" startTime="2026-10-17T03:04:47.3128438+08:00" endTime="2026-10-17T03:04:47.5765470+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="166cc4ac-4182-45f0-a009-d6166126cce5" />
+    <UnitTestResult executionId="c82ad321-278f-4361-aec0-9d2a12758dd9" testId="1503fc39-99c9-877f-acb6-e58e67f96f02" testName="TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.6491584" startTime="2026-10-17T03:04:47.3128494+08:00" endTime="2026-10-17T03:04:47.9749004+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c82ad321-278f-4361-aec0-9d2a12758dd9">
+      <Output>
+        <StdOut>TestContext 消息:&#xD;
+Runtime sample: elapsed=4.301ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Cold/priming AssetLibraryPage: 4.301ms&#xD;
+Runtime sample: elapsed=1.821ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 1/3 AssetLibraryPage: 1.821ms&#xD;
+Runtime sample: elapsed=2.061ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 2/3 AssetLibraryPage: 2.061ms&#xD;
+Runtime sample: elapsed=1.308ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 3/3 AssetLibraryPage: 1.308ms&#xD;
+10,000 项默认首屏: 2.1 ms / 1500 ms&#xD;
+Runtime sample: elapsed=10.425ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Cold/priming IReadOnlyList`1: 10.425ms&#xD;
+Runtime sample: elapsed=8.868ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 1/3 IReadOnlyList`1: 8.868ms&#xD;
+Runtime sample: elapsed=8.495ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 2/3 IReadOnlyList`1: 8.495ms&#xD;
+Runtime sample: elapsed=11.500ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 3/3 IReadOnlyList`1: 11.500ms&#xD;
+普通文本建议: 11.5 ms / 200 ms&#xD;
+Runtime sample: elapsed=2.494ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Cold/priming AssetLibraryPage: 2.494ms&#xD;
+Runtime sample: elapsed=1.316ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 1/3 AssetLibraryPage: 1.316ms&#xD;
+Runtime sample: elapsed=1.254ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 2/3 AssetLibraryPage: 1.254ms&#xD;
+Runtime sample: elapsed=1.720ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 3/3 AssetLibraryPage: 1.720ms&#xD;
+单条件筛选更新: 1.7 ms / 300 ms&#xD;
+Runtime sample: elapsed=8.135ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Cold/priming AssetLibraryPage: 8.135ms&#xD;
+Runtime sample: elapsed=6.247ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 1/3 AssetLibraryPage: 6.247ms&#xD;
+Runtime sample: elapsed=6.960ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 2/3 AssetLibraryPage: 6.960ms&#xD;
+Runtime sample: elapsed=6.375ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 3/3 AssetLibraryPage: 6.375ms&#xD;
+8 条规则、3 层嵌套组合查询: 7.0 ms / 600 ms&#xD;
+Runtime sample: elapsed=15.605ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Cold/priming AssetLibraryPage: 15.605ms&#xD;
+Runtime sample: elapsed=7.511ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 1/3 AssetLibraryPage: 7.511ms&#xD;
+Runtime sample: elapsed=6.671ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 2/3 AssetLibraryPage: 6.671ms&#xD;
+Runtime sample: elapsed=6.387ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 3/3 AssetLibraryPage: 6.387ms&#xD;
+智能文件夹预览: 7.5 ms / 750 ms&#xD;
+Runtime sample: elapsed=1.819ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Cold/priming AssetLibraryPage: 1.819ms&#xD;
+Runtime sample: elapsed=1.268ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 1/3 AssetLibraryPage: 1.268ms&#xD;
+Runtime sample: elapsed=1.210ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 2/3 AssetLibraryPage: 1.210ms&#xD;
+Runtime sample: elapsed=1.190ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+Warm sample 3/3 AssetLibraryPage: 1.190ms&#xD;
+当前/全库范围切换: 1.3 ms / 400 ms&#xD;
+Runtime sample: elapsed=8.610ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+100 项批量标签操作: 8.6 ms / 750 ms&#xD;
+Runtime sample: elapsed=21.700ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=11&#xD;
+500 项批量标签操作: 21.7 ms / 2000 ms</StdOut>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds" storage="n:\pixart\kitao-photo-engine-followup-20261016\tests\rawselectionassistant.tests\bin\x64\release\net10.0\rawselectionassistant.tests.dll" id="1503fc39-99c9-877f-acb6-e58e67f96f02">
+      <TestCategory>
+        <TestCategoryItem TestCategory="Performance" />
+      </TestCategory>
+      <Execution id="c82ad321-278f-4361-aec0-9d2a12758dd9" />
+      <TestMethod codeBase="N:\pixart\kitao-photo-engine-followup-20261016\tests\RAWSelectionAssistant.Tests\bin\x64\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.AssetLibraryP3PerformanceTests" name="TenThousandSyntheticItemsMeetP3QuerySuggestionSmartFolderAndBatchThresholds" />
+    </UnitTest>
+    <UnitTest name="OrderedScopeQueryUsesExactOrderIndexAndPreservesRowsAndBytes" storage="n:\pixart\kitao-photo-engine-followup-20261016\tests\rawselectionassistant.tests\bin\x64\release\net10.0\rawselectionassistant.tests.dll" id="11ba7e67-bfe7-82ee-8ef9-0b4a493d7d90">
+      <Execution id="166cc4ac-4182-45f0-a009-d6166126cce5" />
+      <TestMethod codeBase="N:\pixart\kitao-photo-engine-followup-20261016\tests\RAWSelectionAssistant.Tests\bin\x64\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.AssetLibraryP3ScopeOrderingRegressionTests" name="OrderedScopeQueryUsesExactOrderIndexAndPreservesRowsAndBytes" />
+    </UnitTest>
+    <UnitTest name="CommonMembershipRatingAndVisualQueriesUseDeclaredIndexes" storage="n:\pixart\kitao-photo-engine-followup-20261016\tests\rawselectionassistant.tests\bin\x64\release\net10.0\rawselectionassistant.tests.dll" id="18e81e23-ea3a-892c-9d0a-72b3c7722208">
+      <Execution id="86fda5d8-d495-4a2f-89f8-8044e05e73f9" />
+      <TestMethod codeBase="N:\pixart\kitao-photo-engine-followup-20261016\tests\RAWSelectionAssistant.Tests\bin\x64\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.AssetLibraryP3QueryPlanTests" name="CommonMembershipRatingAndVisualQueriesUseDeclaredIndexes" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="18e81e23-ea3a-892c-9d0a-72b3c7722208" executionId="86fda5d8-d495-4a2f-89f8-8044e05e73f9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11ba7e67-bfe7-82ee-8ef9-0b4a493d7d90" executionId="166cc4ac-4182-45f0-a009-d6166126cce5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1503fc39-99c9-877f-acb6-e58e67f96f02" executionId="c82ad321-278f-4361-aec0-9d2a12758dd9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 N:\pixart\kitao-photo-engine-followup-20261016\tests\RAWSelectionAssistant.Tests\bin\x64\Release\net10.0\RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 28，Scope: MethodLevel)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

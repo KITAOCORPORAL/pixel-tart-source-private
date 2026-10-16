@@ -1,0 +1,242 @@
+[
+  {
+    "run": "FIRST_ISOLATED",
+    "lastFourScopeQueries": [
+      {
+        "countMs": 8.9088,
+        "pageMs": 9.6648,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_Rating (Rating>?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      },
+      {
+        "countMs": 10.042,
+        "pageMs": 9.4534,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_Rating (Rating>?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      },
+      {
+        "countMs": 8.3129,
+        "pageMs": 9.2718,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_Rating (Rating>?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      },
+      {
+        "countMs": 8.2277,
+        "pageMs": 9.0109,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_Rating (Rating>?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      }
+    ]
+  },
+  {
+    "run": "FIRST_FULL",
+    "lastFourScopeQueries": [
+      {
+        "countMs": 22.3538,
+        "pageMs": 36.2711,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_Rating (Rating>?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      },
+      {
+        "countMs": 23.6315,
+        "pageMs": 28.3602,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_Rating (Rating>?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      },
+      {
+        "countMs": 23.7847,
+        "pageMs": 22.7485,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_Rating (Rating>?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      },
+      {
+        "countMs": 27.4235,
+        "pageMs": 32.0945,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_Rating (Rating>?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      }
+    ]
+  },
+  {
+    "run": "INSTRUMENTED_FULL",
+    "lastFourScopeQueries": [
+      {
+        "countMs": 23.7757,
+        "pageMs": 40.2103,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_Rating (Rating>?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      },
+      {
+        "countMs": 15.3921,
+        "pageMs": 33.008,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_Rating (Rating>?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      },
+      {
+        "countMs": 23.5798,
+        "pageMs": 36.4295,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_Rating (Rating>?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      },
+      {
+        "countMs": 25.2044,
+        "pageMs": 36.4809,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_Rating (Rating>?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      }
+    ]
+  },
+  {
+    "run": "INDEX_FULL",
+    "lastFourScopeQueries": [
+      {
+        "countMs": 1.7122,
+        "pageMs": 25.4212,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_ActiveAddedOrder (IsArchived=?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)"
+        ]
+      },
+      {
+        "countMs": 1.2019,
+        "pageMs": 7.9048,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_ActiveAddedOrder (IsArchived=?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)"
+        ]
+      },
+      {
+        "countMs": 7.1546,
+        "pageMs": 8.3471,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_ActiveAddedOrder (IsArchived=?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)"
+        ]
+      },
+      {
+        "countMs": 0.8101,
+        "pageMs": 7.0228,
+        "plan": [
+          "SEARCH a USING INDEX IX_AssetItems_ActiveAddedOrder (IsArchived=?)",
+          "CORRELATED SCALAR SUBQUERY 3",
+          "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 1",
+          "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+          "CORRELATED SCALAR SUBQUERY 2",
+          "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)"
+        ]
+      }
+    ]
+  }
+]
