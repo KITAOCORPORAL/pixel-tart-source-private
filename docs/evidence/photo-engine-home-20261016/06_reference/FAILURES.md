@@ -6,3 +6,5 @@
 4. Native-reference imports succeed from current existingproductLCMS2.12, not reviewedLCMS2.16. We do not change production hash allowlist, replace nativeDLL, or count this as cleanVM/source-build approval. Python dependency versions and binary hashes captured; no global install performed.
 
 Both corrected reference and the original failures are retained. Fuji default-path nondeterminism is a separate product acceptance blocker regardless of these numerical passes.
+
+5. Home acceptance selftests strengthened: missing Canon/Fuji pair or missing/invalid sourceSHA blocks instead of empty-evidence approval. No change to the inherited strict classifications. Candidate termination command corrected to use already-created authorized copy; no global environment changes.

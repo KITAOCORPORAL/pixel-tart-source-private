@@ -3,10 +3,11 @@ import argparse,json,pathlib
 
 def evaluate(review,products,repeatability,reference):
  errors=[]
+ if len(products)<2:errors.append('required Canon and Fuji product-probe evidence not both present')
  if review.get('status')=='BLOCKED' or review.get('errors'):errors.append({'strictReview':review.get('errors',[])})
  for name,result in products.items():
   if result.get('status')!='COMPLETED_PRODUCT_BACKEND_NOT_DESKTOP':errors.append({'productProbe':name,'status':result.get('status')})
-  if not result.get('sourceSha256') or result.get('sourceSha256')!=result.get('isolatedCopySha256'):errors.append({'sourceIdentity':name})
+  if not isinstance(result.get('sourceSha256'),str) or len(result['sourceSha256'])!=64 or any(c not in '0123456789abcdefABCDEF' for c in result['sourceSha256']) or result.get('sourceSha256')!=result.get('isolatedCopySha256'):errors.append({'sourceIdentity':name})
   for row in result.get('rows',[]):
    if row.get('status')=='FAILED':errors.append({'failedProductOperation':name,'detail':row})
  if repeatability.get('changedChannelSamples',1)!=0:errors.append({'requiredProductRepeatability':'Fuji default legacy output differs for identical source','changedChannelSamples':repeatability.get('changedChannelSamples'),'maximum16BitCodeDifference':repeatability.get('maximum16BitCodeDifference')})

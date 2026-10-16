@@ -30,7 +30,7 @@ for entry in json.loads(a.input_manifest.read_text(encoding='utf-8-sig')):
 # Process termination probe is NOT callback cancellation/product cancellation proof.
 valid=next((v for v in json.loads(a.input_manifest.read_text(encoding='utf-8-sig')) if v['authorizedIdentityMatch']),None)
 if valid:
- noresult=a.output/'cancelled.ppm';cmd=[str(exe.resolve()),*flags,'-Z',str(noresult.resolve()),str(pathlib.Path(valid['path']).resolve())]
+ noresult=a.output/'cancelled.ppm';cmd=[str(exe.resolve()),*flags,'-Z',str(noresult.resolve()),str((a.output/('copy'+pathlib.Path(valid['path']).suffix)).resolve())]
  proc=subprocess.Popen(cmd,stdout=subprocess.PIPE,stderr=subprocess.PIPE,cwd=a.output,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0));time.sleep(.05);cancelled=proc.poll() is None
  if cancelled:proc.terminate()
  stdout,stderr=proc.communicate(timeout=30);rows.append(dict(operation='TerminateOwnedResearchProcessAfter50ms',cancelRequested=cancelled,exitCode=proc.returncode,outputExists=noresult.exists(),productCallbackCancel='NOT_RUN',sourceUnchanged=sha(pathlib.Path(valid['path']))==valid['expectedSha256'].lower()))
