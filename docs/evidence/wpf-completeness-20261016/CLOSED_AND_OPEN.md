@@ -1,0 +1,7 @@
+# 已关闭与仍开放
+
+关闭：新完整WPF 1626/1626结果全归属，P1原42缺失在同一freshsuite返回Passed；runner按原方法/dataRows拆10unit，原42断言不变；原顶栏collision/height/hits发布专项20Passed；PV45672golden/P3400Passed。
+
+保留：旧完整600秒timeout/missing42和旧短类42Passed；历史没有percasewait/resource，不能唯一恢复当时机器慢速原因。结构累计预算654s>600而maxunit382s明确，新的rawtelemetry支持；不把线程WaitReason当WCTlockowner。
+
+开放：23WPF/6发布Core条件未执行严格FAILED，native/cleanVM/WPS/physicalDPI没有独占桌面或VM=NOT_RUN；ICCnative分发/感知映射/Sony候选/Structure替换仍未获批；没有色准标定。CalibrationEligible=false。

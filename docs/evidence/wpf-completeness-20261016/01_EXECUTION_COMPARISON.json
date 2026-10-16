@@ -1,0 +1,41 @@
+{
+  "archivedWholeClass": {
+    "passedRows": 42,
+    "sumCaseSeconds": 526.9591985,
+    "children": 362,
+    "returned42": true,
+    "assemblyDiffersFromPriorFull": true,
+    "tempLength": 112
+  },
+  "archivedFinalWholeClass": {
+    "limit": 600,
+    "returned": 0,
+    "missing": 42,
+    "tempLength": 105,
+    "perCaseTiming": "UNAVAILABLE",
+    "resourceWaitEvents": "UNAVAILABLE"
+  },
+  "currentInstrumentedWholeClass": {
+    "rows": 42,
+    "sumCaseSeconds": 463.7407852,
+    "children": 362,
+    "tempLength": 140,
+    "childTimeouts": 0,
+    "pipeEOFAfterExitBlocked": 0
+  },
+  "currentCompleteRunMethodUnits": {
+    "rows": 42,
+    "units": 10,
+    "sumUnitWallSeconds": 654.4830000000075,
+    "maxUnitWallSeconds": 381.6719999999914,
+    "sumCaseSeconds": 643.9628455999999,
+    "childStarts": 376,
+    "childEnds": 376,
+    "maxChildSeconds": 10.5963604,
+    "maxObservedChildWS": 309039104,
+    "maxObservedChildPrivate": 295796736,
+    "allWithinUnchanged600": true,
+    "eachRowReturnedInSameFreshSuite": true
+  },
+  "noTimeoutIncrease": true
+}

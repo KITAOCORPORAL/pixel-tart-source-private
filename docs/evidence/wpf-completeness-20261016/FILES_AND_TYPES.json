@@ -1,0 +1,419 @@
+{
+  "files": [
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/.gitattributes",
+      "bytes": 66,
+      "extension": "",
+      "type": "repository metadata",
+      "sha256": "0820a84b587afc2f7c1ebbbc3d8b3e955a2c29cbac16bce2bdd1f83d793d1dcf"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/01_CLASS_DIAGNOSTIC_HOST.json",
+      "bytes": 1321,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "1978ed15df879b26de085473aac779e1941ff2279d0ba8b553338b89ffabe464"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/01_CLASS_DIAGNOSTIC_SUMMARY.json",
+      "bytes": 45204,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "139615f1d1834428a4b5ce334f12bafc9876d09561373d370184e53a13bd094f"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/01_CLASS_TELEMETRY_ANALYSIS.json",
+      "bytes": 74247,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "1895759c28effe27283072b6d3273d190e883e7e5cc72d1c83d2b927c985023a"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/01_EXECUTION_COMPARISON.json",
+      "bytes": 1059,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "f3ae0896b74f22f3f5255bbe7cc12bf97207ec36055af80c9f7b04138f1ec1d1"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/01_FRESH_P1_METHOD_UNITS.json",
+      "bytes": 28417,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "0b7891508f824969f5ff5c249d5bbd53f24d9a77fb282cc1334b3a94a84def9d"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/01_FRESH_UNIT_TELEMETRY.json",
+      "bytes": 65273,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "70bd1ccf5fba244e8cd0c1c5baba73d392b6b97e93176eea10aaeac0c6c495b1"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/01_HISTORICAL_LIMITATIONS.md",
+      "bytes": 703,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "beaa13979c84edb3f6a4671caeddf364e1b035e97374cd533ccb0301bffe5297"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/01_PATCH_CHECK_DIAGNOSTIC.json",
+      "bytes": 135,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "4c66657075e63243c2b36e02be92793fafa71192539aedd2d04a70aea158a7c4"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/01_PRIOR_COMPARISON.json",
+      "bytes": 82708,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "a46ad3160c5f54e2f91d051929f233f61f8b7bc82caa6463f57870ca66f8fc5b"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/01_ROOT_CAUSE_CONFIRMED.md",
+      "bytes": 1592,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "28c358b58eb59ad3a4d7fc0558535d4d1e63fdaaf76d4c8947d8100d5f4e924a"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/01_ROOT_CAUSE_FINAL_SCOPE.md",
+      "bytes": 1882,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "ec382d0af4e7ab12828284d31f384f6919c941a59baa6020d9e96bc2aabaed6f"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/01_ROOT_CAUSE_PRELIMINARY.md",
+      "bytes": 880,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "52138c71d312480c48af07ff43288a990edbe4c6337b24a16b5dcf6dbeac6838"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/03_COLOR_BOUNDARY_DECISION.md",
+      "bytes": 1118,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "0b079200e3ca86cab9d6ffb374dcbe2a93537904251f865ef11e2f6537ea6a8f"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/03_CONDITIONAL_BOUND.json",
+      "bytes": 1260,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "2f457a7a9831d4ad536e188cdbb04597a8fb013ac7132057ac66bf0ebbf6851e"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/04_ENVIRONMENT_GATES.md",
+      "bytes": 572,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "f93ed0d3d167c1ba9ee1b75be77c8e41a014400daaedc63057679e602694c01a"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/05_NATIVE_PREPARED.json",
+      "bytes": 4522,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "26171210efa07c3efb3c5294af060887fb736329fc2417c204be251c8d515535"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/CLOSED_AND_OPEN.md",
+      "bytes": 765,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "729bd41d88e5d001648876189d92215d00606084441bd1960ec7f6ff14241cec"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/DELIVERY.md",
+      "bytes": 4915,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "b69f08c848aca194c07063bf6bedd0866672766fef5ef60ab5916942a85fc291"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_COLLISION.jsonl",
+      "bytes": 1125,
+      "extension": ".jsonl",
+      "type": "raw geometry/hit observations",
+      "sha256": "14c7bc1d259b167457d3d73b10926e98917fc867253bacc11a4a0fd290aea62f"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_COUNTS.md",
+      "bytes": 604,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "5ae91965955f42d5cca7c21dfbfe631d99106ebdf29bdc45ab784653a27f8bef"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_FROZEN_CONTRACTS.json",
+      "bytes": 581,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "3549470359647495ad10162e07542edc1e0e83640d3907941ce9efd850b1e427"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_FULL_EVENT_ANALYSIS.json",
+      "bytes": 66560,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "c54ed121bdeba1d08226c3a04db474689ee59349f958e5263c0635337f8ba1cc"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_FULL_WPF_DISCOVERY.json",
+      "bytes": 685026,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "794875274c4603fd2934ee2a3de195cc40f42f7f5b0d9211ea015ca7bf3a3669"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_FULL_WPF_SUMMARY.json",
+      "bytes": 1582234,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "a9b3b556aa56b44b7fbc9e38abe6cc35851596456eae6603d2f897db1b5b1ef9"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_GOLDEN_P3.json",
+      "bytes": 687,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "7fc0d2ddd14a476af0bfc400f5a5e2d5f56ffa283fa60152b95e6cb8319430d0"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_HEADER_HITS.jsonl",
+      "bytes": 21940,
+      "extension": ".jsonl",
+      "type": "raw geometry/hit observations",
+      "sha256": "2e987fb8ca18b2032e45225d601ee04db851885de2ba2084f4329959bcaa6f2c"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_P1_OWNERSHIP.json",
+      "bytes": 39127,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "c8fae52659b461474e1ce1b1a76770ca86cc9f96d6dd9211f8b9f17891d383c6"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_PRIVATE_HOST.json",
+      "bytes": 1320,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "7e0f6e55e98bcb815570881de621d2d24968e9dac80716ccbcc13875d62f7409"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_PRIVATE_STATION.json",
+      "bytes": 113,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "730b8a2ada924c43e8f18f17f886d01707ad08126d0c8dd6354250aadf130ad3"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_PUBLISHED_CORE_DISCOVERY.json",
+      "bytes": 660060,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "0f440eac7bed95f08829d90bdffbfae366bb965a11fa81b642906013e9c0e4f7"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_PUBLISHED_CORE_SUMMARY.json",
+      "bytes": 1284588,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "bf06f9789c00304920cd86a4f9b5c48fbde8a2cf3f431af50944aeab0d661174"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_SOURCE_CORE_DISCOVERY.json",
+      "bytes": 830860,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "bb023a055b16f6f7f580896feabbb96fc3c1be6cd787bcc6ee5ee167aa17b255"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_SOURCE_CORE_SUMMARY.json",
+      "bytes": 1456270,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "edadf0973e34e0de30edfa011e1d4e79b48554f665ac5e2142e28dfae133127a"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_SOURCE_IDENTITY.json",
+      "bytes": 404,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "5158b616da554e2e145c3fb9af15dddda181014bbe23e05393ca27db691228ef"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_SPECIAL_DISCOVERY.json",
+      "bytes": 685026,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "903379deca4e0dcafad54986487d40649a9450972a5fb65d4af5dd0353725e99"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_SPECIAL_SUMMARY.json",
+      "bytes": 22065,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "7b7d40709cc027cd72914953c8e1a537c78e1ed9baee42f37942b1a4b99f936d"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_WPF_CLASSIFICATION.json",
+      "bytes": 851432,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "1715da7dbde3e197a835eb4584014480eb54f9c591bc7f34324f7e2b6331af73"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_WPF_MISSING_RESULTS.json",
+      "bytes": 3,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/FINAL_WPF_NONPASSING.json",
+      "bytes": 25473,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "9bb1033090f813c68ae4f483d0ac91402e4a9b05c7ab32ac5de0d6505f898b23"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/PUBLISHED_COMPONENT_BINDINGS.json",
+      "bytes": 4733,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "c9f2b26ac25cef3a21d05ad0d7b6d41224fda7e33fdbd3e1d2d563b29052daed"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/RAW_TEST_RESULTS.zip",
+      "bytes": 4239294,
+      "extension": ".zip",
+      "type": "raw tests/process archive",
+      "sha256": "ee46930a199e7c66cc7370d29ecc900ae890ce9777f12a3106d8a9f004d09544"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/RELEASE_EXE.json",
+      "bytes": 509,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "86b36a7c2a9e856f9c78496d65798ef07fbeac95bd33d10a296da0a08a7bc947"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/RELEASE_FILES.json",
+      "bytes": 149412,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "2cb68d1fa67925865700e9e209a713682c19269f1e997fae32c82de448ad379f"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/RELEASE_TREE_HASHES.json",
+      "bytes": 464,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "621884ecc31763b8c2c5249942d7cb9e235623ae65e8991e5cada21a7a87c718"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/STAGE_COMMITS.json",
+      "bytes": 2130,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "0d4ef3c7b23c7321768e12291b32f67eba645b72c1aa1ffe606d51302d81ebd4"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/START.json",
+      "bytes": 17797,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "4b0de963f32c4ea7f5a2f2a4cea30c9ebef932da6f16a3852223eff6db853b84"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/TEST_CLASSIFICATION.json",
+      "bytes": 23330,
+      "extension": ".json",
+      "type": "structured evidence/configuration",
+      "sha256": "ff6fbbf16cf9b184a0fe94f3a9e4bbd3e31016095823443d43b6b6a3f3d5189a"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/VERIFY_EVIDENCE.py",
+      "bytes": 3322,
+      "extension": ".py",
+      "type": "runner/research/integrity script",
+      "sha256": "df608c7725f3a7e4c2fa3455de25bd90e3dfd8e380a8f7948fb0357c869c6ac9"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/screenshots/reference-dpi-200.png",
+      "bytes": 307787,
+      "extension": ".png",
+      "type": "synthetic actualWPF screenshot",
+      "sha256": "44cae0a7c2237eb17d9866c6733cc9671b1706ae634efecf0584a6faa70cfa4d"
+    },
+    {
+      "path": "docs/evidence/wpf-completeness-20261016/screenshots/reference-simple.png",
+      "bytes": 179484,
+      "extension": ".png",
+      "type": "synthetic actualWPF screenshot",
+      "sha256": "284f73dabda2ab7ef6b8da57b9fcd10d89d9b5b401304f4902ff501a55866656"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP1AutomatedEvidenceContractTests.cs",
+      "bytes": 84989,
+      "extension": ".cs",
+      "type": "test telemetry CSharp",
+      "sha256": "4556d7a89d4ca678999cb48ec3d391c096852861ae4f94ed1f4235e461b4b356"
+    },
+    {
+      "path": "tests/RAWSelectionAssistant.WpfTests/BoundedTestProcess.cs",
+      "bytes": 5178,
+      "extension": ".cs",
+      "type": "test telemetry CSharp",
+      "sha256": "ed7fa39b7cbee19bb9ed7623b9f3b88651a0fe1b5f74f08c4860aa455cfad632"
+    },
+    {
+      "path": "tools/planning-r7/verified_runner.py",
+      "bytes": 8711,
+      "extension": ".py",
+      "type": "runner/research/integrity script",
+      "sha256": "0a48ee21cdc6e62a2f2fd53eaac3d94b21a26e86e01580754c241e92e5bdea55"
+    },
+    {
+      "path": "tools/wpf-completeness/.gitignore",
+      "bytes": 13,
+      "extension": "",
+      "type": "repository metadata",
+      "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b"
+    },
+    {
+      "path": "tools/wpf-completeness/README.md",
+      "bytes": 1678,
+      "extension": ".md",
+      "type": "report/instructions",
+      "sha256": "c6820abd2f8c24a4eac5e53d78196b0a2df572d205b82ee962b8ff11205b4b17"
+    },
+    {
+      "path": "tools/wpf-completeness/analyze_events.py",
+      "bytes": 1930,
+      "extension": ".py",
+      "type": "runner/research/integrity script",
+      "sha256": "2c3b4242aa4aef606d49300625683bbedc54043512f8987bc52a128d5718dd2f"
+    },
+    {
+      "path": "tools/wpf-completeness/rounding_bound.py",
+      "bytes": 2908,
+      "extension": ".py",
+      "type": "runner/research/integrity script",
+      "sha256": "39465dc03703876860213a9abdef52169ffd8f2b41280d3675fc231e45d9f210"
+    },
+    {
+      "path": "tools/wpf-completeness/test_execution_units.py",
+      "bytes": 1116,
+      "extension": ".py",
+      "type": "runner/research/integrity script",
+      "sha256": "5ac3b7e9978f522f2e4993325b7dc6e67c6c093032114a247631a4cb5c9c513f"
+    }
+  ],
+  "hashDomain": "exactworkingtreebytes; excludes manifestself/VALIDATION",
+  "noUserPhotosDbThirdPartyBinariesOrReleaseInGit": true
+}

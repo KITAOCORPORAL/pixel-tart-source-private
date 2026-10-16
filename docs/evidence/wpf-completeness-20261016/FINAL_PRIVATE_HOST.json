@@ -1,0 +1,47 @@
+{
+  "station": "KitaoTests_0a4641c003194e6c986d0d62259e7a78",
+  "desktop": "Isolated",
+  "exitCode": 1,
+  "timeoutSeconds": 10800,
+  "timedOut": false,
+  "failure": null,
+  "jobAssigned": true,
+  "interactiveStation": false,
+  "inputInjected": false,
+  "switchedInputDesktop": false,
+  "clipboard": "privatewindowstation",
+  "completed": true,
+  "events": [
+    {
+      "atUtc": "2026-10-16T09:05:54.1322771+00:00",
+      "elapsedMs": 3.3405,
+      "stage": "start",
+      "detail": {
+        "station": "KitaoTests_0a4641c003194e6c986d0d62259e7a78",
+        "executable": "C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+        "script": "E:/Kitao-Worktrees/kitao-wpf-result-completeness-20261016/tools/wpf-icc-gates/private_suite.py"
+      }
+    },
+    {
+      "atUtc": "2026-10-16T09:05:54.2197856+00:00",
+      "elapsedMs": 90.7963,
+      "stage": "child-resumed",
+      "detail": {
+        "pid": 37796,
+        "jobAssigned": true
+      }
+    },
+    {
+      "atUtc": "2026-10-16T09:28:30.3273307+00:00",
+      "elapsedMs": 1354684.9754,
+      "stage": "child-exited",
+      "detail": {
+        "code": 1
+      }
+    },
+    {
+      "stage": "owned-job-closed",
+      "killRemainingOwnedDescendants": true
+    }
+  ]
+}

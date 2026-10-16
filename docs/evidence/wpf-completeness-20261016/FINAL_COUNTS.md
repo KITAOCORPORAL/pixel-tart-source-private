@@ -1,0 +1,5 @@
+# 最终实际结果
+
+完整发布WPF adapter发现1626、选中1626、返回1626：1603Passed、0Failed、23NotExecuted、Missing0。P1在同一完整运行10方法单元共42Passed，不拼接旧结果。全部221unit无timeout/missingTRX/非预期infrastructureerror，strictFAILED仅23条件Inconclusive。
+
+源码Core1708/1708/1708=1701Passed7NotExecuted；发布Core1708/1708/1708=1702Passed6NotExecuted；独立发布B专项20/20Passed，Premiumoptin不加入fullsuite计数。历史timeout/42missing和诊断结果单列，不覆盖。Native/cleanVM均NOT_RUN，完整性与外部验收分开。

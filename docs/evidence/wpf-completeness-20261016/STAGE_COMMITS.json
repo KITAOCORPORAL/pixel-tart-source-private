@@ -1,0 +1,42 @@
+[
+  {
+    "sha": "15807e486361cb4530452e8cd089c7add1f06bbc",
+    "message": "fix(runner): shard cumulative P1 evidence units with exact row coverage and wait telemetry",
+    "files": [
+      "A\tdocs/evidence/wpf-completeness-20261016/.gitattributes",
+      "A\tdocs/evidence/wpf-completeness-20261016/01_PRIOR_COMPARISON.json",
+      "A\tdocs/evidence/wpf-completeness-20261016/01_ROOT_CAUSE_PRELIMINARY.md",
+      "A\tdocs/evidence/wpf-completeness-20261016/START.json",
+      "M\ttests/RAWSelectionAssistant.WpfTests/AssetLibraryP1AutomatedEvidenceContractTests.cs",
+      "M\ttests/RAWSelectionAssistant.WpfTests/BoundedTestProcess.cs",
+      "M\ttools/planning-r7/verified_runner.py",
+      "A\ttools/wpf-completeness/.gitignore",
+      "A\ttools/wpf-completeness/test_execution_units.py"
+    ]
+  },
+  {
+    "sha": "3162cb10e0bc4838331a9325a1169baff051f2a9",
+    "message": "style(test): remove telemetry EOF whitespace before frozen validation",
+    "files": [
+      "A\tdocs/evidence/wpf-completeness-20261016/01_PATCH_CHECK_DIAGNOSTIC.json",
+      "M\ttests/RAWSelectionAssistant.WpfTests/BoundedTestProcess.cs"
+    ]
+  },
+  {
+    "sha": "acd19e8b302c9f9f43af2536a57ee40dade1d9d2",
+    "message": "research(validation): document cumulative deadline evidence and conditional matrix error bound",
+    "files": [
+      "A\tdocs/evidence/wpf-completeness-20261016/01_CLASS_DIAGNOSTIC_HOST.json",
+      "A\tdocs/evidence/wpf-completeness-20261016/01_CLASS_DIAGNOSTIC_SUMMARY.json",
+      "A\tdocs/evidence/wpf-completeness-20261016/01_CLASS_TELEMETRY_ANALYSIS.json",
+      "A\tdocs/evidence/wpf-completeness-20261016/01_HISTORICAL_LIMITATIONS.md",
+      "A\tdocs/evidence/wpf-completeness-20261016/01_ROOT_CAUSE_FINAL_SCOPE.md",
+      "A\tdocs/evidence/wpf-completeness-20261016/03_COLOR_BOUNDARY_DECISION.md",
+      "A\tdocs/evidence/wpf-completeness-20261016/03_CONDITIONAL_BOUND.json",
+      "A\tdocs/evidence/wpf-completeness-20261016/04_ENVIRONMENT_GATES.md",
+      "A\ttools/wpf-completeness/README.md",
+      "A\ttools/wpf-completeness/analyze_events.py",
+      "A\ttools/wpf-completeness/rounding_bound.py"
+    ]
+  }
+]
