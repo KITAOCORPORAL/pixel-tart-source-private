@@ -1,0 +1,5 @@
+# Conditional proof, not production epsilon
+
+Frozen ICC rXYZ/gXYZ/bXYZ are exact rationals(k/65536). Rational inverses/composition prove sameprofilematrixroundtripidentityEXACT beforefloatingarithmetic. ModelcoefficientsroundtoIEEEfloat32, threerowmul/twoaddgamma5 andexacthalfpropagated: conditionalabsoluteRGBbounds ~9.55e-7/4.61e-7/4.15e-7, <.063/.031/.028ofone16bitcode. Assumptionsnormal/nooverflow/knownoperationorder/inputfinitefloat32[0,1]/no nonlinearstages explicit. ThisdoesNOTproveLCMSinternalcoefficientconstruction, LUT,otherprofiles,displayorperceptualmapping. MeasuredCanonnegsbelowbound is crossvalidation, not universalproof. V1 epsilon unchanged0: no silentclamp or thresholdadded.
+
+Meaningfulnegative/above1ProPhotodata/highlight remainextendedlinear untilnamedresearchsink. ExistingLCMS453baf...MIT/skcms97adc...BSD3actualcomparisonsreuseperhash; V2explicitclip irreversibleandcandidateLumaRayStudyhighlightsworse (512→50vsclip102) cannotenterproduction. Thisbatchonlynewconditionalboundscript, no colormathsrc changes,noEV/headroomchange. PV456/P3400originsretained. CalibrationEligible=false.

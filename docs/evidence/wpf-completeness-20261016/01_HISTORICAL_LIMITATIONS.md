@@ -1,0 +1,1 @@
+旧完整600秒timeout没有TRX、per-case timing或subprocess资源/线程事件，无法事后唯一证明当时某个线程/负载。旧短类TRX362start/end、526.96s累计，pathLength反而比full长，足以反驳仅短path神奇修复。当前instrumentedclass在same600limit连续完成用例、childWait/EOF无长期死锁证据；可能因负载降低而整类通过，不能删除旧timeout。可复现结构根因是将42重工作/362child累积绑在单600deadline，超过时adapter仅末尾落盘导致42归属丢失；按method拆单元保留cases,rowidentity,assertions，每unit相同600limit使缺失故障隔离。最终完整suite实测才决定42缺失是否关闭，不拼接。

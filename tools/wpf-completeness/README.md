@@ -1,0 +1,9 @@
+# Complete result ownership
+
+P1evidenceclasshas42adapterrows/10methods,362subprocesses; previousclass exactarchivedsum526.959seconds,limit600. FullsuitefailuremissingTRX retained. Newrunnerdefaultmethodunits preservesalloriginalcaseID/FQN/displaynameCounter, resultvalidatesP1dataRowsdisplayCounter. Noassertionsremoved,no600limitincrease. Executionunitnamesseparateclassfield; per-unitordinaldirectoriesavoidlongclassnamepaths. --p1-unit class is diagnostic only, notcompletepassreplacement. --single-process retainsrequestedfullCoremode; WPFdefaultperclass/p1method.
+
+Per-caseevents testinit/cleanupincludeelapsed/cpu/WS/private/temp/cwd; BoundedTestProcessstart/end/sample250msincludeactualchildren threads/waits/EOFstates. No auditmetadata substitutesassertions. Existingclassdiagnosticreturned42Passed464s; archivedshort42Passed527s, originalfullnoTRX/telemetrymeanshistoricaluniquewaitrootUNAVAILABLE. Cumulativebudgetcoupling is observedstructuralrisk; finalfullpublishedcaseownership closesmissingresults onlyifall1626returned.
+
+Test build/releasework anddiagnosticmustnotsharewritableoutputsimultaneously; firstbuildfailedDLLlockedbyown21936diagnostic while running, retained. Waitfordiagnosticexitthenbuild; no globalprocesskill/configchanges. Privatehostboundedjoblifetimeunchanged.
+
+Run test_execution_units.py/test_verified_runner.py; analyze_events.py <runroot> producescount/timing/threadwait/currentCPU+memory, no historicalinventedresourcevalues. rounding_bound.py conditionalfixedmatrixproof notLCMSenginegeneralproof/noV1epsilon. Native/VMnotavailable=NOT_RUN, no physicalDPIorWPSapproval. No newproductpixels/sourcechanges except testinstrumentation/runner.

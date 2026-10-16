@@ -1,0 +1,622 @@
+{
+  "root": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\artifacts\\wpf-completeness\\class-diagnostic\\run-20261016-165412-21ad4e6c",
+  "assembly": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "7aaf00377c988feff1224294778e400286f4f0edbccd195b285abed5d44335ce",
+  "discovered": 1626,
+  "selected": 42,
+  "runs": [
+    {
+      "pid": 39504,
+      "exitCode": 0,
+      "timeout": false,
+      "class": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests",
+      "limitSeconds": 600,
+      "directory": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\artifacts\\wpf-completeness\\class-diagnostic\\run-20261016-165412-21ad4e6c\\000",
+      "expected": 42,
+      "results": [
+        {
+          "id": "1ebdc8a3-5579-8831-89b0-5fe97dc24139",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"application-hash-mismatch\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "10ffb782-f2f1-88a6-ad82-8418b2293ab2",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"uncleared-process\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1a19f2dd-9cc4-8964-b68c-fe12d3a4b475",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"pane-collapse-expand/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1a23e6e9-de2f-8c27-be11-bcbe97759c51",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.P1CompatibilityAcceptsAnyNamedDevelopmentBranch",
+          "display": "P1CompatibilityAcceptsAnyNamedDevelopmentBranch",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "17f27ca4-d2c9-8e85-a794-7804adc40966",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"first-empty/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1e729dee-46f4-8410-bef9-6a2f14b5d987",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"binary-tree-manifest-mismatch\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "14571721-4bed-8bc1-868f-0b4f4941f8b8",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"dll-hash-mismatch\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1607f1c6-fe9c-89f9-ac2b-b5b60778261a",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"cross-run-splice\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "174cb525-4c99-81eb-9b4c-c458f510e1fe",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.AutomatedContractIsIndependentFailClosedAndNeverClaimsManualEvidence",
+          "display": "AutomatedContractIsIndependentFailClosedAndNeverClaimsManualEvidence",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1c22a29f-3742-840b-8204-041181a2e014",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"runner-session-splice\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "19a911e7-1aca-869d-958f-2366bdf95243",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"selection-navigation-restart/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1c938344-4042-80f5-8d18-1fc49e863ac4",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"navigation-ime/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d35ea05-eebd-8cc9-8ca2-0be6c10556a8",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"direct-settings-mutation\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1798cdc1-94fd-8548-94e9-66e3f8c96815",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"wrong-scenario-order\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b0a19fb-e432-89cc-ba31-769956532993",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"build-log-hash\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "139de31b-77d2-8060-856c-58534028e475",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"loading-error-retry-recovered/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1e3b5c36-8fc9-88fe-af29-9cf85925f8a0",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorUsesRunOwnedBinariesAfterRepositoryBuildOutputChanges",
+          "display": "IndependentValidatorUsesRunOwnedBinariesAfterRepositoryBuildOutputChanges",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "194a9169-6f23-8171-a9e6-f3b8d967e144",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsLegacyCamelCaseButtonRowWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsLegacyCamelCaseButtonRowWithoutChangingInputTree",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1782a5f4-d97d-8e74-9c28-3fc28ec9c517",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"process-session-splice\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b92cf26-61d2-82a5-82db-6339a2fd6893",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"mutated-hash\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "16f03dc0-8ced-8318-867e-20f6d9103cf9",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"database-not-v6\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1ff6ec41-ecf6-8772-bce6-01cb5c5622a9",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"retry-twice\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d30e49b-a85a-8314-9b9d-26ec8735cf4e",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"dpi-overflow\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1650ecf7-bd08-8fd7-86b4-44deb1a0f64d",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsFabricatedLiveButtonProbeWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsFabricatedLiveButtonProbeWithoutChangingInputTree",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13f504ab-aeba-8171-8810-a3bc8c4da5be",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"import-contamination\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1486e161-9c51-806e-b934-6eb0cc4188ca",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"actual-product-version-mismatch\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1b900400-bc0b-8a3f-9e53-055b179bd482",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorAcceptsCompleteApplicationEvidence",
+          "display": "IndependentValidatorAcceptsCompleteApplicationEvidence",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "19c95e19-d497-8e7b-bb6f-1027df41cfd4",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"pre-cleanup-audit-hash\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "178a7358-6637-8c90-b291-839cf2e1e874",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"sealed-application-mutation\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "172cd1aa-e350-8c1c-826f-a65afbd0ea10",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"direct-width-mutation\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "125c5e5a-98a3-8bc9-ba33-66e8aacac8c9",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"sealed-dependency-mutation\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1af44a5a-091d-8fa6-b590-230667ae0889",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"manifest-product-version-forgery\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "106d7a3b-e7c7-86d2-84fc-fa09891c2d2b",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsScrollDecorationInMustFitBoundsWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsScrollDecorationInMustFitBoundsWithoutChangingInputTree",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1ec5afa1-2f67-8aff-85c4-4fb2314fdfc9",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"thumbnail-slider/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1dbf8391-5d3b-873d-8548-69b753ba9f17",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"layout-dpi-buttons/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "15994104-48e6-825e-a1e8-dd3179e40465",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"cleanup-path-splice\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1542410c-c1c2-81c9-8e8d-1b5ff2bb7728",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"sealed-binary-mutation\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d0dcadd-5f0e-8d49-aca6-4cf324fe3c20",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.ValidateExistingRunWrapperKeepsTheSealedRunTreeImmutable",
+          "display": "ValidateExistingRunWrapperKeepsTheSealedRunTreeImmutable",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "167e77d5-3799-8fe4-a8f6-c4d7d7cc24dd",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"organization-splitter/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "106d9777-a31e-8eb0-bcb3-d3cc99a357dc",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"inspector-splitter/v1\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "18b4f21c-bad9-86be-ae81-97d96ad8d801",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"wrong-pid-or-hwnd\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1815f2c5-2e5e-8654-a545-2507443d93da",
+          "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "display": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"missing-screenshot\")",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "p1ExecutionUnit": "class",
+  "executionPlan": [
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests",
+      "cases": [
+        {
+          "id": "174cb525-4c99-81eb-9b4c-c458f510e1fe",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.AutomatedContractIsIndependentFailClosedAndNeverClaimsManualEvidence",
+          "displayName": "AutomatedContractIsIndependentFailClosedAndNeverClaimsManualEvidence",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1a23e6e9-de2f-8c27-be11-bcbe97759c51",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.P1CompatibilityAcceptsAnyNamedDevelopmentBranch",
+          "displayName": "P1CompatibilityAcceptsAnyNamedDevelopmentBranch",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1b900400-bc0b-8a3f-9e53-055b179bd482",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorAcceptsCompleteApplicationEvidence",
+          "displayName": "IndependentValidatorAcceptsCompleteApplicationEvidence",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1d0dcadd-5f0e-8d49-aca6-4cf324fe3c20",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.ValidateExistingRunWrapperKeepsTheSealedRunTreeImmutable",
+          "displayName": "ValidateExistingRunWrapperKeepsTheSealedRunTreeImmutable",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1e3b5c36-8fc9-88fe-af29-9cf85925f8a0",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorUsesRunOwnedBinariesAfterRepositoryBuildOutputChanges",
+          "displayName": "IndependentValidatorUsesRunOwnedBinariesAfterRepositoryBuildOutputChanges",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1815f2c5-2e5e-8654-a545-2507443d93da",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"missing-screenshot\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1b92cf26-61d2-82a5-82db-6339a2fd6893",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"mutated-hash\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1798cdc1-94fd-8548-94e9-66e3f8c96815",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"wrong-scenario-order\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1ff6ec41-ecf6-8772-bce6-01cb5c5622a9",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"retry-twice\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "172cd1aa-e350-8c1c-826f-a65afbd0ea10",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"direct-width-mutation\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1d35ea05-eebd-8cc9-8ca2-0be6c10556a8",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"direct-settings-mutation\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1607f1c6-fe9c-89f9-ac2b-b5b60778261a",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"cross-run-splice\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "18b4f21c-bad9-86be-ae81-97d96ad8d801",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"wrong-pid-or-hwnd\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "14571721-4bed-8bc1-868f-0b4f4941f8b8",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"dll-hash-mismatch\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "16f03dc0-8ced-8318-867e-20f6d9103cf9",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"database-not-v6\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "13f504ab-aeba-8171-8810-a3bc8c4da5be",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"import-contamination\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "10ffb782-f2f1-88a6-ad82-8418b2293ab2",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"uncleared-process\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1d30e49b-a85a-8314-9b9d-26ec8735cf4e",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"dpi-overflow\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1c22a29f-3742-840b-8204-041181a2e014",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"runner-session-splice\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1782a5f4-d97d-8e74-9c28-3fc28ec9c517",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"process-session-splice\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "19c95e19-d497-8e7b-bb6f-1027df41cfd4",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"pre-cleanup-audit-hash\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "15994104-48e6-825e-a1e8-dd3179e40465",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"cleanup-path-splice\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1b0a19fb-e432-89cc-ba31-769956532993",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"build-log-hash\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1542410c-c1c2-81c9-8e8d-1b5ff2bb7728",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"sealed-binary-mutation\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1ebdc8a3-5579-8831-89b0-5fe97dc24139",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"application-hash-mismatch\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "178a7358-6637-8c90-b291-839cf2e1e874",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"sealed-application-mutation\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "125c5e5a-98a3-8bc9-ba33-66e8aacac8c9",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"sealed-dependency-mutation\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1e729dee-46f4-8410-bef9-6a2f14b5d987",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"binary-tree-manifest-mismatch\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1af44a5a-091d-8fa6-b590-230667ae0889",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"manifest-product-version-forgery\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1486e161-9c51-806e-b934-6eb0cc4188ca",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsRequiredFaultWithoutChangingInputTree (\"actual-product-version-mismatch\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "17f27ca4-d2c9-8e85-a794-7804adc40966",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"first-empty/v1\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "139de31b-77d2-8060-856c-58534028e475",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"loading-error-retry-recovered/v1\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "167e77d5-3799-8fe4-a8f6-c4d7d7cc24dd",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"organization-splitter/v1\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "106d9777-a31e-8eb0-bcb3-d3cc99a357dc",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"inspector-splitter/v1\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1a19f2dd-9cc4-8964-b68c-fe12d3a4b475",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"pane-collapse-expand/v1\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1ec5afa1-2f67-8aff-85c4-4fb2314fdfc9",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"thumbnail-slider/v1\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "19a911e7-1aca-869d-958f-2366bdf95243",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"selection-navigation-restart/v1\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1c938344-4042-80f5-8d18-1fc49e863ac4",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"navigation-ime/v1\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1dbf8391-5d3b-873d-8548-69b753ba9f17",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsEveryScenarioFaultWithoutChangingInputTree (\"layout-dpi-buttons/v1\")",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1650ecf7-bd08-8fd7-86b4-44deb1a0f64d",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsFabricatedLiveButtonProbeWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsFabricatedLiveButtonProbeWithoutChangingInputTree",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "194a9169-6f23-8171-a9e6-f3b8d967e144",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsLegacyCamelCaseButtonRowWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsLegacyCamelCaseButtonRowWithoutChangingInputTree",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "106d7a3b-e7c7-86d2-84fc-fa09891c2d2b",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.AssetLibraryP1AutomatedEvidenceContractTests.IndependentValidatorRejectsScrollDecorationInMustFitBoundsWithoutChangingInputTree",
+          "displayName": "IndependentValidatorRejectsScrollDecorationInMustFitBoundsWithoutChangingInputTree",
+          "source": "E:\\Kitao-Worktrees\\kitao-wpf-result-completeness-20261016\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "Passed": 42
+  }
+}
