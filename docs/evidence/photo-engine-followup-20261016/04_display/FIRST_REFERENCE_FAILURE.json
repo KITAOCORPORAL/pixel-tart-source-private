@@ -1,0 +1,9 @@
+{
+  "status": "FAILED",
+  "step": "LCMS same-profile transform exact identity assertion",
+  "result": "Native LCMS2.12 roundtrip did not preserve every 16bit code",
+  "rawError": "System.IO.InvalidDataException: sRGB identity changed",
+  "correction": "After profile allowlist hash validation, exact source/target profile identity returns original codes without lossy engine roundtrip",
+  "productChanged": false,
+  "retainedLocal": "artifacts/followup/04-display-reference contains first run private profiles, no product output overwritten"
+}

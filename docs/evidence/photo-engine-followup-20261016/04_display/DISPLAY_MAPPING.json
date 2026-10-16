@@ -1,0 +1,53 @@
+{
+  "rows": [
+    {
+      "adapter": "\\\\.\\DISPLAY1",
+      "description": "NVIDIA GeForce RTX 5060 Ti",
+      "monitors": [
+        {
+          "name": "\\\\.\\DISPLAY1\\Monitor0",
+          "description": "Generic PnP Monitor",
+          "id": "\\\\?\\DISPLAY#AUS27E1#5\u002612301c98\u00260\u0026UID4625#{e6f07b5f-ee97-4a90-b076-33f57bf4eaa7}",
+          "key": "\\Registry\\Machine\\System\\CurrentControlSet\\Control\\Class\\{4d36e96e-e325-11ce-bfc1-08002be10318}\\0002",
+          "state": 3
+        }
+      ],
+      "association": {
+        "Device": "\\\\.\\DISPLAY1",
+        "State": "AssociatedRgbProfileHeaderVerified",
+        "ProfilePath": "C:\\WINDOWS\\system32\\spool\\drivers\\color\\ASUS PA279CV-12026625.icm",
+        "ProfileSha256": "D1CA53DF625D4BB2EA73A6B1D541819DFBE1F9474DB621BF8C8FE331EC96A0D0",
+        "NativeError": 0,
+        "PreviewConversion": "NotAppliedByColorStudio",
+        "Authority": "GetICMProfileW display DC association; not calibration or WPF compositor verification"
+      }
+    },
+    {
+      "adapter": "\\\\.\\DISPLAY2",
+      "description": "NVIDIA GeForce RTX 5060 Ti",
+      "monitors": [
+        {
+          "name": "\\\\.\\DISPLAY2\\Monitor0",
+          "description": "Generic PnP Monitor",
+          "id": "\\\\?\\DISPLAY#AOC2710#5\u002612301c98\u00260\u0026UID4352#{e6f07b5f-ee97-4a90-b076-33f57bf4eaa7}",
+          "key": "\\Registry\\Machine\\System\\CurrentControlSet\\Control\\Class\\{4d36e96e-e325-11ce-bfc1-08002be10318}\\0001",
+          "state": 3
+        }
+      ],
+      "association": {
+        "Device": "\\\\.\\DISPLAY2",
+        "State": "AssociatedRgbProfileHeaderVerified",
+        "ProfilePath": "C:\\WINDOWS\\system32\\spool\\drivers\\color\\Generic PnP Monitor-22026625.icm",
+        "ProfileSha256": "691FDDD2773EEF6F13032B0D34CA89B76E472676E494D06DA95D3B75BE806E57",
+        "NativeError": 0,
+        "PreviewConversion": "NotAppliedByColorStudio",
+        "Authority": "GetICMProfileW display DC association; not calibration or WPF compositor verification"
+      }
+    }
+  ],
+  "offscreenWpfRgb24Preserved": true,
+  "scope": "WPF offscreen DrawImage/RenderTargetBitmap only; NOT physical screen or DWM compositor proof",
+  "systemSettingsModified": false,
+  "foregroundInteraction": false,
+  "physicalCrossMonitor": "NOT_RUN"
+}

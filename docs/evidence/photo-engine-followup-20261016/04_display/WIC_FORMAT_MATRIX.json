@@ -1,0 +1,328 @@
+{
+  "rows": [
+    {
+      "input": "Rgb24",
+      "output": "Bgra32",
+      "profileKind": "linear-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "936A00FFDEC9B0FF6E1CF0FF",
+      "bits": 32
+    },
+    {
+      "input": "Rgb24",
+      "output": "Bgra32",
+      "profileKind": "srgb-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "4A2400FFB9946FFF2700DEFF",
+      "bits": 32
+    },
+    {
+      "input": "Rgb24",
+      "output": "Rgb48",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb24",
+      "output": "Rgb48",
+      "profileKind": "srgb-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb24",
+      "output": "Rgba64",
+      "profileKind": "linear-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "1300BD6A3093FFFFE6B032C92ADEFFFFDCF0581CBF6EFFFF",
+      "bits": 64
+    },
+    {
+      "input": "Rgb24",
+      "output": "Rgba64",
+      "profileKind": "srgb-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "6B002D253E4AFFFF7F6F8D94B8B9FFFFD9DE22033928FFFF",
+      "bits": 64
+    },
+    {
+      "input": "Rgb24",
+      "output": "Rgb128Float",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb24",
+      "output": "Rgb128Float",
+      "profileKind": "srgb-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Bgra32",
+      "output": "Bgra32",
+      "profileKind": "linear-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "006A936FC9DEF0036E95B297",
+      "bits": 32
+    },
+    {
+      "input": "Bgra32",
+      "output": "Bgra32",
+      "profileKind": "srgb-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "00254A6F94B9DE03284D7297",
+      "bits": 32
+    },
+    {
+      "input": "Bgra32",
+      "output": "Rgb48",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Bgra32",
+      "output": "Rgb48",
+      "profileKind": "srgb-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Bgra32",
+      "output": "Rgba64",
+      "profileKind": "linear-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "3293BB6A0C006F6FDCF02EDE2EC9030300B3E895B86E9797",
+      "bits": 64
+    },
+    {
+      "input": "Bgra32",
+      "output": "Rgba64",
+      "profileKind": "srgb-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "494A272504006F6FDBDEB7B9929403037B72474D34289797",
+      "bits": 64
+    },
+    {
+      "input": "Bgra32",
+      "output": "Rgb128Float",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Bgra32",
+      "output": "Rgb128Float",
+      "profileKind": "srgb-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb48",
+      "output": "Bgra32",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb48",
+      "output": "Bgra32",
+      "profileKind": "srgb-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb48",
+      "output": "Rgb48",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb48",
+      "output": "Rgb48",
+      "profileKind": "srgb-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "00254A6F94B9DE03284D7297BCE1062B5075",
+      "bits": 48
+    },
+    {
+      "input": "Rgb48",
+      "output": "Rgba64",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb48",
+      "output": "Rgba64",
+      "profileKind": "srgb-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb48",
+      "output": "Rgb128Float",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb48",
+      "output": "Rgb128Float",
+      "profileKind": "srgb-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgba64",
+      "output": "Bgra32",
+      "profileKind": "linear-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "DEB16B03F2CB962B37E1B553",
+      "bits": 32
+    },
+    {
+      "input": "Rgba64",
+      "output": "Bgra32",
+      "profileKind": "srgb-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "BA6F2503E2974D2B0AC07553",
+      "bits": 32
+    },
+    {
+      "input": "Rgba64",
+      "output": "Rgb48",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgba64",
+      "output": "Rgb48",
+      "profileKind": "srgb-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgba64",
+      "output": "Rgba64",
+      "profileKind": "linear-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "9A6AC7B016DEDE03CA95F1CA28F2062B0AB544E17F372E53",
+      "bits": 64
+    },
+    {
+      "input": "Rgba64",
+      "output": "Rgba64",
+      "profileKind": "srgb-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "00254A6F94B9DE03284D7297BCE1062B50759ABFE4092E53",
+      "bits": 64
+    },
+    {
+      "input": "Rgba64",
+      "output": "Rgb128Float",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgba64",
+      "output": "Rgb128Float",
+      "profileKind": "srgb-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb128Float",
+      "output": "Bgra32",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb128Float",
+      "output": "Bgra32",
+      "profileKind": "srgb-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb128Float",
+      "output": "Rgb48",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb128Float",
+      "output": "Rgb48",
+      "profileKind": "srgb-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb128Float",
+      "output": "Rgba64",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb128Float",
+      "output": "Rgba64",
+      "profileKind": "srgb-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb128Float",
+      "output": "Rgb128Float",
+      "profileKind": "linear-to-srgb",
+      "status": "REFUSED",
+      "hresult": -2146233067,
+      "message": "\u4E0D\u652F\u6301\u50CF\u7D20\u683C\u5F0F\u3002"
+    },
+    {
+      "input": "Rgb128Float",
+      "output": "Rgb128Float",
+      "profileKind": "srgb-to-srgb",
+      "status": "EXECUTED",
+      "resultHex": "EC51383EEC51383EEC51383E0000803F0000003FCDCC4C3ECDCCCC3D0000803F0000803F00000000000000000000803F",
+      "bits": 128
+    }
+  ],
+  "nativeDesktop": "NOT_RUN",
+  "sourceSha256": "DAFBFF7207D22B526BAA8F61A280E197B639AF68CBE2E48529455157612B7407",
+  "targetSha256": "2B3AA1645779A9E634744FAF9B01E9102B0C9B88FD6DECED7934DF86B949AF7E",
+  "precisionPolicy": "No 16-bit request substituted with 8-bit"
+}
