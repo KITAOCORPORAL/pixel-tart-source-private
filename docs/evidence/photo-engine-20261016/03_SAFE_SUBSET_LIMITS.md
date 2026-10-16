@@ -1,0 +1,1 @@
+PhotoSrgbLinear1只允许两个明确已评估输入SHA，输出仅标准sRGB43a86...，禁止把RTv4profile再作为任意输出。内部LCMS有限扩展float保留，uint16饱和sink显式命名/统计，不称感知映射。TIFF单图orientation1/uint16RGB与JPEG8RGB/EXIF1，CMYK/alpha/任意ICC/multipage拒绝。输出为新目录，失败可能留诊断新目录而不覆原件；还未移植入产品atomicexport/预算/cancelhost，不宣称可供普通用户生产。真实照片闭环只Canon已授权渲染派生TIFF和JPEG派生，不冒称三相机profile泛支持。

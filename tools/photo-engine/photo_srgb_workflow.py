@@ -45,7 +45,7 @@ def run(source,out,dllpath,outputprofile,ev=-.5):
  if out.exists():raise ValueError('OUTPUT_EXISTS')
  if not -3<=ev<=0:raise ValueError('EV_RANGE')
  if sha(dllpath.read_bytes())!=ENGINE:raise ValueError('ENGINE_HASH')
- dll=C.CDLL(str(dllpath));target=outputprofile.read_bytes();profile(target,INPUTS);linear=(R/'tests/RAWSelectionAssistant.Tests/TestData/controlled-linear-srgb.icc').read_bytes();profile(linear,{'dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407'})
+ dll=C.CDLL(str(dllpath));target=outputprofile.read_bytes();profile(target,{'43a86e39836b4f56029aae55090f2b73c1577d74d3394fc4f395d3e35f70b653'});linear=(R/'tests/RAWSelectionAssistant.Tests/TestData/controlled-linear-srgb.icc').read_bytes();profile(linear,{'dafbff7207d22b526baa8f61a280e197b639af68cbe2e48529455157612b7407'})
  if source.suffix.lower() in ['.tif','.tiff']:
   with tifffile.TiffFile(source) as tf:
    if len(tf.pages)!=1:raise ValueError('MULTIPAGE_REFUSED')
