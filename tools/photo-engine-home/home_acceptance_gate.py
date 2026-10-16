@@ -4,7 +4,10 @@ import argparse,json,pathlib
 def evaluate(review,products,repeatability,reference):
  errors=[]
  if len(products)<2:errors.append('required Canon and Fuji product-probe evidence not both present')
- if review.get('status')=='BLOCKED' or review.get('errors'):errors.append({'strictReview':review.get('errors',[])})
+ if review.get('status')!='REVIEW_BUILD_WITH_OPEN_GATES' or review.get('errors'):errors.append({'strictReview':review.get('errors',[])})
+ expected_sources={'B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401','52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865'}
+ observed_sources={str(r.get('sourceSha256','')).upper() for r in products.values()}
+ if not expected_sources.issubset(observed_sources):errors.append('Exact authorized Canon/Fuji identities required, not two arbitrary reports')
  for name,result in products.items():
   if result.get('status')!='COMPLETED_PRODUCT_BACKEND_NOT_DESKTOP':errors.append({'productProbe':name,'status':result.get('status')})
   if not isinstance(result.get('sourceSha256'),str) or len(result['sourceSha256'])!=64 or any(c not in '0123456789abcdefABCDEF' for c in result['sourceSha256']) or result.get('sourceSha256')!=result.get('isolatedCopySha256'):errors.append({'sourceIdentity':name})
