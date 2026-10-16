@@ -39,7 +39,6 @@ public sealed class TetherSplitCompareTests
     private static void OnSta(Action action) => OnSta(() => { action(); return true; });
     private static string RepoRoot()
     {
-        var path = AppContext.BaseDirectory; while (path is not null && !Directory.Exists(Path.Combine(path, "src"))) path = Directory.GetParent(path)?.FullName;
-        return path ?? throw new DirectoryNotFoundException();
+        return TestResources.Root;
     }
 }

@@ -72,12 +72,17 @@ function Quote-ProcessArgument([AllowEmptyString()][string]$Value) {
 }
 function Invoke-NormalValidator([string]$ValidatorPath, [string]$RunRoot, [int]$TimeoutSeconds) {
     $startInfo = [Diagnostics.ProcessStartInfo]::new()
-    $startInfo.FileName = 'powershell.exe'
+    $systemDirectory = [Environment]::GetFolderPath([Environment+SpecialFolder]::System)
+    if (-not [IO.Directory]::Exists($systemDirectory)) { Fail "normal validator runtime directory is missing: $systemDirectory" }
+    $startInfo.FileName = Join-Path $systemDirectory 'WindowsPowerShell/v1.0/powershell.exe'
     $startInfo.Arguments = (@(
         '-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass',
         '-File', $ValidatorPath, '-RunRoot', $RunRoot
     ) | ForEach-Object { Quote-ProcessArgument ([string]$_) }) -join ' '
-    $startInfo.WorkingDirectory = Split-Path -Parent $ValidatorPath
+    # Both inputs are absolute. Windows PowerShell/.NET Framework cannot use a deeply nested
+    # >MAX_PATH evidence directory as CreateProcess lpCurrentDirectory. Do not depend on
+    # that directory for resolution or shorten/alter evidence identities.
+    $startInfo.WorkingDirectory = $systemDirectory
     $startInfo.UseShellExecute = $false
     $startInfo.CreateNoWindow = $true
     $startInfo.RedirectStandardOutput = $true
