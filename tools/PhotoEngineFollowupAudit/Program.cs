@@ -3,6 +3,7 @@ using Sdcb.LibRaw;
 using Sdcb.LibRaw.Natives;
 if(args.Length==5&&args[0]=="native-stages"){NativeRawAudit.Run(args[1],args[2],args[3],int.Parse(args[4]));return;}
 if(args.Length==2&&args[0]=="display-mapping"){DisplayMappingAudit.Run(args[1]);return;}
+if(args.Length==3&&args[0]=="sony-workspace"){await SonyWorkspaceAudit.Run(args[1],args[2]);return;}
 if(args.Length==3&&args[0]=="blind-pack"){await BlindReviewPack.Run(args[1],args[2]);return;}
 if(args.Length==3&&args[0]=="display-reference"){DisplayReferenceAudit.Run(args[1],args[2]);return;}
 if(args.Length==3&&args[0]=="wic-matrix"){WicMatrixAudit.Run(args[1],args[2]);return;}

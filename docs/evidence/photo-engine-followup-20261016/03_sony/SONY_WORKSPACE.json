@@ -1,0 +1,42 @@
+{
+  "status": "PASSED_REAL_VIEWMODEL_NOT_DESKTOP",
+  "sourceSha256": "1FE22BE78C66AB0DDCCF753D10187F142B980146FFF7F5D188533905B7F38B93",
+  "rows": [
+    {
+      "operation": "real-workspace-legacy-load-thumbnail",
+      "status": "PASSED",
+      "PixelWidth": 4688,
+      "PixelHeight": 7028
+    },
+    {
+      "operation": "workspace-nondefault-and-native-detail",
+      "status": "PASSED",
+      "RawPipelineStatus": "\u53EF\u89C1\u89C6\u53E3100%\u539F\u50CF\u7D20\u5DF2\u8865\u9F50 \u00B7 1\u5757",
+      "RawDefinition": {
+        "ProcessingVersion": 4,
+        "WhiteBalance": "CameraGains",
+        "RedGain": 1.05,
+        "GreenGain": 1,
+        "BlueGain": 0.95,
+        "ExposureEv": 0.5,
+        "InputConfiguration": "LibRaw021LinearProPhotoD65V1",
+        "DisplayTransform": "LuminanceShoulderNeutralGamutV1",
+        "DecodeKey": "LibRaw021LinearProPhotoD65V1:CameraGains:1.05:1:0.95"
+      }
+    },
+    {
+      "operation": "workspace-save-reopen-preview-exact",
+      "status": "PASSED",
+      "previewSha256": "3E4CBF35709AC28BDFE745AA4A68114C18EE070B91A5EF71B2F0DF913F14EC8B"
+    },
+    {
+      "operation": "workspace-stop-command",
+      "status": "EXECUTED_AFTER_DETAIL",
+      "limitation": "Not claimed as in-flight native decode or real foreground switch cancellation"
+    }
+  ],
+  "desktopStartup": "NOT_RUN",
+  "physicalDpi": "NOT_RUN",
+  "noWindowCreated": true,
+  "backendOnly": true
+}

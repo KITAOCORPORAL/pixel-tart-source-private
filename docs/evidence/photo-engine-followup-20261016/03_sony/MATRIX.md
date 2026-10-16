@@ -23,3 +23,7 @@
 候选独立合同PhotoRaw0222Research1：源SHA/几何/方向、原生和wrapper可执行身份、WB baked/线性传递/量化RGB16/颜色原色及未应用ICC单列；输出不是sensor raw或标准ProPhoto ICC D50。原照片私有衍生图像留ignored artifacts，不入Git。
 
 发行决定仍NOT_APPROVED：LibRaw双LGPL2.1/CDDL1须选择并完成可审查义务，依赖/compiler/flags/源码对应/可重建源码提供/cleanVM仍未闭。此阶段不作法律兼容性结论，不将新DLL放普通Release，不打开候选假入口。旧项目/旧FileUnsupported合同保留，DSC09916独立身份不改；本文件通过不推广所有A7M4/A7S3/ARW。
+
+## 追加真实工作台 ViewModel（仍非前台桌面）
+
+在显式隔离AppData根运行真实ReferenceColorWorkspaceViewModel，未创建窗口：旧链加载和实际缩略图、创建PV4、非默认1.05/1/.95增益及+.5EV、Request/UpdateProfessionalViewport可见128×128细节实际补齐1块、真实工作台SaveSession/LoadSession后预览字节一致，全部通过。StopProcessingCommand在细节完成后执行，**不是处理中取消成功**。详情SONY_WORKSPACE.json。原件SHA再次只读核对不变。没有操作日常数据库/系统ICC/DPI。
