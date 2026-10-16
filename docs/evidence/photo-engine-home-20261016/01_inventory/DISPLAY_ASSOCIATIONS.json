@@ -1,0 +1,35 @@
+{
+  "observations": [
+    {
+      "Name": "\\\\.\\DISPLAY1",
+      "adapter": "NVIDIA GeForce RTX 5060 Ti",
+      "stateFlags": 5,
+      "profile": {
+        "Device": "\\\\.\\DISPLAY1",
+        "State": "AssociatedRgbProfileHeaderVerified",
+        "ProfilePath": "C:\\WINDOWS\\system32\\spool\\drivers\\color\\ASUS PA279CV-12026625.icm",
+        "ProfileSha256": "D1CA53DF625D4BB2EA73A6B1D541819DFBE1F9474DB621BF8C8FE331EC96A0D0",
+        "NativeError": 0,
+        "PreviewConversion": "NotAppliedByColorStudio",
+        "Authority": "GetICMProfileW display DC association; not calibration or WPF compositor verification"
+      }
+    },
+    {
+      "Name": "\\\\.\\DISPLAY2",
+      "adapter": "NVIDIA GeForce RTX 5060 Ti",
+      "stateFlags": 1,
+      "profile": {
+        "Device": "\\\\.\\DISPLAY2",
+        "State": "AssociatedRgbProfileHeaderVerified",
+        "ProfilePath": "C:\\WINDOWS\\system32\\spool\\drivers\\color\\Generic PnP Monitor-22026625.icm",
+        "ProfileSha256": "691FDDD2773EEF6F13032B0D34CA89B76E472676E494D06DA95D3B75BE806E57",
+        "NativeError": 0,
+        "PreviewConversion": "NotAppliedByColorStudio",
+        "Authority": "GetICMProfileW display DC association; not calibration or WPF compositor verification"
+      }
+    }
+  ],
+  "desktopLaunched": false,
+  "dpiModified": false,
+  "claim": "Read-only display association; not physical calibration, WPF ICC conversion or HDR desktop proof."
+}

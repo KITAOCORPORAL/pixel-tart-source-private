@@ -1,0 +1,26 @@
+[
+  {
+    "path": "N:/pixart/RAW/Real/canon/TNAN8886.CR3",
+    "expectedSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "exists": true,
+    "actualSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "authorizedIdentityMatch": true,
+    "authority": "Exact-name read-only check in existing authorized RAW/Real fixture root, no private-photo scan"
+  },
+  {
+    "path": "N:/pixart/RAW/Real/fuji/DSCF0347.RAF",
+    "expectedSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+    "exists": true,
+    "actualSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+    "authorizedIdentityMatch": true,
+    "authority": "Exact-name read-only check in existing authorized RAW/Real fixture root, no private-photo scan"
+  },
+  {
+    "path": "N:/pixart/RAW/Real/sony/DSC09916.ARW",
+    "expectedSha256": "6F596BB234EE5DE206C66594BC84205349C363FD6A89AE188FF76DAB7C5E53B9",
+    "exists": false,
+    "actualSha256": null,
+    "authorizedIdentityMatch": false,
+    "authority": "Exact-name read-only check in existing authorized RAW/Real fixture root, no private-photo scan"
+  }
+]
