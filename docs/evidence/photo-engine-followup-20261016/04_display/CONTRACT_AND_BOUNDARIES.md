@@ -29,3 +29,7 @@ WIC40种输入/目标/profile组合：14可执行/26拒绝。RGB48→RGB48线性
 LittleCMS2.16参考索引commit453bafeb85b4ef96498866b7a8eadcc74dff9223/src/cmsxform.c、RawTherapee5.11 db575c6690d30ce6428c0e1383bec8b8f1fb8d21/rtengine/improcfun.cc/iccstore.cc为待独立实现对照。实际运行的是本机LCMS2.12与Pillow2.19（同引擎两个构建），WIC第三参考差异仍开，**未满足两成熟独立实现完整准入**；不复制GPL代码，不把框架/同引擎交叉验证当生产像素批准。
 
 准入OPEN_RESEARCH_ONLY：仍需配平WIC意图/引擎差异、独立成熟实现、alpha/高精度、真实屏幕合成器与跨屏、所有原图/对比/细节块一致路径、导出不变的实际集成测试。未过这些门禁不接WPF预览开关。PV4/PV5/PV6数学和golden不改。
+
+## 追加独立精确profile数值定位
+
+本机两个显示profile都是XYZ matrix+单值gamma TRC；sRGB源profile为1024点TRC。独立按实际源TRC→PCS矩阵→目标逆矩阵→目标逆TRC计算，已在INDEPENDENT_PROFILE_ORACLE.json记录与LCMS、WIC的逐样本差异。PCS矩阵已D50，不重复chad。这仅覆盖三份固定profile，不是任意ICC实现；不改变WIC差异或真实合成器未验收边界。
