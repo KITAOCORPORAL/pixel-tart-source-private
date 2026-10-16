@@ -1,0 +1,117 @@
+TestContext 消息:
+
+Runtime sample: elapsed=8.987ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Cold/priming AssetLibraryPage: 8.987ms
+
+Runtime sample: elapsed=3.488ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 1/3 AssetLibraryPage: 3.488ms
+
+Runtime sample: elapsed=3.313ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 2/3 AssetLibraryPage: 3.313ms
+
+Runtime sample: elapsed=3.301ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 3/3 AssetLibraryPage: 3.301ms
+
+10,000 项默认首屏: 3.5 ms / 1500 ms
+
+Runtime sample: elapsed=27.270ms, GC-pause=5.361ms, GC-collections=1,0,0, thread=16
+
+Cold/priming IReadOnlyList`1: 27.270ms
+
+Runtime sample: elapsed=19.373ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 1/3 IReadOnlyList`1: 19.373ms
+
+Runtime sample: elapsed=17.930ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 2/3 IReadOnlyList`1: 17.930ms
+
+Runtime sample: elapsed=19.050ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 3/3 IReadOnlyList`1: 19.050ms
+
+普通文本建议: 19.4 ms / 200 ms
+
+Runtime sample: elapsed=13.585ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Cold/priming AssetLibraryPage: 13.585ms
+
+Runtime sample: elapsed=14.181ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 1/3 AssetLibraryPage: 14.181ms
+
+Runtime sample: elapsed=11.783ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 2/3 AssetLibraryPage: 11.783ms
+
+Runtime sample: elapsed=11.019ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 3/3 AssetLibraryPage: 11.019ms
+
+单条件筛选更新: 14.2 ms / 300 ms
+
+Runtime sample: elapsed=20.805ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Cold/priming AssetLibraryPage: 20.805ms
+
+Runtime sample: elapsed=31.902ms, GC-pause=6.099ms, GC-collections=1,0,0, thread=16
+
+Warm sample 1/3 AssetLibraryPage: 31.902ms
+
+Runtime sample: elapsed=27.134ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 2/3 AssetLibraryPage: 27.134ms
+
+Runtime sample: elapsed=27.581ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 3/3 AssetLibraryPage: 27.581ms
+
+8 条规则、3 层嵌套组合查询: 31.9 ms / 600 ms
+
+Runtime sample: elapsed=15.389ms, GC-pause=4.983ms, GC-collections=1,0,0, thread=16
+
+Cold/priming AssetLibraryPage: 15.389ms
+
+Runtime sample: elapsed=35.322ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 1/3 AssetLibraryPage: 35.322ms
+
+Runtime sample: elapsed=27.861ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 2/3 AssetLibraryPage: 27.861ms
+
+Runtime sample: elapsed=30.919ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 3/3 AssetLibraryPage: 30.919ms
+
+智能文件夹预览: 35.3 ms / 750 ms
+
+Runtime sample: elapsed=11.713ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Cold/priming AssetLibraryPage: 11.713ms
+
+Runtime sample: elapsed=12.705ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 1/3 AssetLibraryPage: 12.705ms
+
+Runtime sample: elapsed=11.129ms, GC-pause=5.052ms, GC-collections=1,0,0, thread=16
+
+Warm sample 2/3 AssetLibraryPage: 11.129ms
+
+Runtime sample: elapsed=11.712ms, GC-pause=0.000ms, GC-collections=0,0,0, thread=16
+
+Warm sample 3/3 AssetLibraryPage: 11.712ms
+
+当前/全库范围切换: 12.7 ms / 400 ms
+
+Runtime sample: elapsed=48.316ms, GC-pause=6.075ms, GC-collections=1,0,0, thread=16
+
+100 项批量标签操作: 48.3 ms / 750 ms
+
+Runtime sample: elapsed=77.134ms, GC-pause=14.837ms, GC-collections=2,1,0, thread=16
+
+500 项批量标签操作: 77.1 ms / 2000 ms

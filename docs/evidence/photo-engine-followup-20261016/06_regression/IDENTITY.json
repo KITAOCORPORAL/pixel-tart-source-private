@@ -1,0 +1,20 @@
+{
+  "status": "BLOCKED_DIAGNOSTIC_BUILD",
+  "sourceCommit": "52d2f3dbedbddcdd1314773fa331099d5c4a2e10",
+  "baseCommit": "fe73d02cf85df518c4eaebf4a09f9a5157451eab",
+  "branch": "feature/kitao-photo-engine-followup-20261016",
+  "directory": "N:\\pixart\\kitao-photo-engine-followup-20261016\\artifacts\\followup\\06-blocked-diagnostic\\win-x64",
+  "files": 290,
+  "exeSha256": "C80E76CC17A1CAEF4B1E020250F34F83FB5A27823F358AF3EB3FE55C28D0D317",
+  "coreSha256": "C804B2431BF24D814456989597549D73F6AF4B6667C73865577AFBDFF8B57BEE",
+  "productExeLaunched": false,
+  "candidate0222Bundled": false,
+  "displayTransformEnabled": false,
+  "blockers": [
+    "Fuji legacy default diverges first after demosaic; no safe source-level fix/version admission",
+    "Display preview not connected: independent near-black oracle failed and WIC disagreement; physical compositor/cross-screen NOT_RUN",
+    "Candidate source rebuild/license election/provision and clean Windows load NOT_RUN; no ordinary Release inclusion",
+    "Foreground desktop/navigation/switch cancellation/physical DPI NOT_RUN",
+    "Full ACES/OpenDRT/darktable equivalent comparison and photographer blind review NOT_RUN"
+  ]
+}
