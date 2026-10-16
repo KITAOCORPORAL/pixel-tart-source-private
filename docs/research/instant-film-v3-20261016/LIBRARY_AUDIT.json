@@ -1,0 +1,2569 @@
+{
+  "schemaVersion": 1,
+  "auditDate": "2026-10-16",
+  "calibrationEligible": false,
+  "packages": [
+    {
+      "provider": "GROK",
+      "bytes": 11952399,
+      "sha256": "42a13ac29a9df5ca3627890f81b015dd6f491852fcdbba3f15ed859466031f8b",
+      "integrity": "CompleteZipCrcVerified",
+      "entries": [
+        {
+          "path": "Polaroid-Reference-Library/technical-references.md",
+          "bytes": 1700,
+          "sha256": "be7fec8115052cc8b6ddbd3c5a34641f40b8a73e8a847c286bfa128c851ef003"
+        },
+        {
+          "path": "Polaroid-Reference-Library/material-observations.md",
+          "bytes": 865,
+          "sha256": "f51c1797076586890fa85f915a313d7edd9edabde76a165d829d7c186de6bdfb"
+        },
+        {
+          "path": "Polaroid-Reference-Library/sources.csv",
+          "bytes": 2123,
+          "sha256": "457d9929dd0bf841661af043556f1b85ae3908de33bd829cb333115bda5481e2"
+        },
+        {
+          "path": "Polaroid-Reference-Library/ENGINE_HANDOFF.md",
+          "bytes": 2245,
+          "sha256": "6479467dbe340c95637edeb7b946ee26844ea8c771265e9f23ee02fd47d6b13b"
+        },
+        {
+          "path": "Polaroid-Reference-Library/samples.csv",
+          "bytes": 20188,
+          "sha256": "5d9ff8e5d3eeac59be6d2e24ee3715ce53a344dbef68441009b8d829b015b2f1"
+        },
+        {
+          "path": "Polaroid-Reference-Library/samples.json",
+          "bytes": 39898,
+          "sha256": "66008b20f47c966557843c33315cfc4aef2ba8ccd2718700ea3af13d0fdbacc1"
+        },
+        {
+          "path": "Polaroid-Reference-Library/licenses.csv",
+          "bytes": 2641,
+          "sha256": "f0a21af365c2d9097f7df8802084d9be0f3c208999c45bd4a89237957b42903a"
+        },
+        {
+          "path": "Polaroid-Reference-Library/README.md",
+          "bytes": 1181,
+          "sha256": "4b1a9d2133cc59ccff89735dd8e18cae97271d5eb382e29e8972b701a527571c"
+        },
+        {
+          "path": "Polaroid-Reference-Library/color-observations.md",
+          "bytes": 1234,
+          "sha256": "abb385a1a49f6f3d43e51994bc5c2d62b616aef8e2a516238bf9db9b944bec02"
+        },
+        {
+          "path": "Polaroid-Reference-Library/gaps.md",
+          "bytes": 1352,
+          "sha256": "3f7dd4ff6fbbd7bc27897266d7760ea574f4c0289826d7b596a13fd134589b01"
+        },
+        {
+          "path": "Polaroid-Reference-Library/authorized-originals/GROK-POL-0003_NickPage_Gherkin_iType.jpg",
+          "bytes": 1112136,
+          "sha256": "1b3dcce7671eada6f114c4d8c80cbe925798317027ebe863197cd7563158ade0"
+        },
+        {
+          "path": "Polaroid-Reference-Library/authorized-originals/GROK-POL-0002_NickPage_Clacton_iType.jpg",
+          "bytes": 988758,
+          "sha256": "99fdb9ff6be7198c79aef2f804f502ca4cf678d54febb50f4df48ee7ee708ccb"
+        },
+        {
+          "path": "Polaroid-Reference-Library/authorized-originals/GROK-POL-0007_Notch_Sunflower_expired600.jpg",
+          "bytes": 147809,
+          "sha256": "ec8ed61a742be0953a122d44536ff28544be864b8d5a79029159d730f9237b31"
+        },
+        {
+          "path": "Polaroid-Reference-Library/authorized-originals/GROK-POL-0005_Pawlowski_Pittsburgh_Impossible.jpg",
+          "bytes": 799355,
+          "sha256": "c08b7ce4572f915f3bc396e74c5e4ce0a67000363c7bd869350a41d19805f3ca"
+        },
+        {
+          "path": "Polaroid-Reference-Library/authorized-originals/GROK-POL-0001_NickPage_StPauls_iType.jpg",
+          "bytes": 999543,
+          "sha256": "e646934e1d3a84c9b2b7e97d1523d5429c6816b867de501fb61aee0d6c35633d"
+        },
+        {
+          "path": "Polaroid-Reference-Library/authorized-originals/GROK-POL-0008_hnt6581_expiredTZArtistic.jpg",
+          "bytes": 5161829,
+          "sha256": "33294c94adc455c5af6a604883083a229d40f18fd3fb32e08b893d8ed5ed2c4b"
+        },
+        {
+          "path": "Polaroid-Reference-Library/authorized-originals/GROK-POL-0006_Pawlowski_CrazyMocha.jpg",
+          "bytes": 1807809,
+          "sha256": "dd0ead680c6b3acb26c910b9b5f91671a775faa38b34147287c532ffd6ce0d02"
+        },
+        {
+          "path": "Polaroid-Reference-Library/authorized-originals/GROK-POL-0009_DeLorenzo_Type51_expired.jpg",
+          "bytes": 525305,
+          "sha256": "48b0e76469dc9ca5ea652b13a1dfdbc8bbabcaf2c8f1afd482222c7fb5b6dfcd"
+        },
+        {
+          "path": "Polaroid-Reference-Library/authorized-originals/GROK-POL-0004_Sgroey_Color600.jpg",
+          "bytes": 106455,
+          "sha256": "57a020216d55e0b1e852010ddaf09b661c753d65a756592aa85cf8ce988b97e5"
+        },
+        {
+          "path": "Polaroid-Reference-Library/authorized-originals/GROK-POL-0010_Fisher_Selma_unknownfilm.jpg",
+          "bytes": 159180,
+          "sha256": "3c60af704c293e8a044fc436dcca13f48bc884ce6d6769f03d3c0d7ffe819e2d"
+        },
+        {
+          "path": "Polaroid-Reference-Library/derived-analysis/naive_patch_stats.csv",
+          "bytes": 1565,
+          "sha256": "cf6b5c26854281944d0f9f3b814bc40b89dcac417040bcc19323864fc5e0d850"
+        },
+        {
+          "path": "Polaroid-Reference-Library/derived-analysis/contact_sheet.jpg",
+          "bytes": 241364,
+          "sha256": "b07ea3396ad282ea73970be283fe59c94dd88b8fd7126522169927e0afff8d56"
+        }
+      ],
+      "jsonRecords": 22,
+      "csvRecords": 22,
+      "csvJsonEqual": true
+    }
+  ],
+  "records": [
+    {
+      "id": "GROK-POL-0001",
+      "provider": "GROK",
+      "kind": "Image",
+      "original": {
+        "sample_id": "GROK-POL-0001",
+        "source_group_id": "SG-NICKPAGE",
+        "original_post_url": "https://commons.wikimedia.org/wiki/File:Polaroid_of_St_Paul%27s_Cathedral,_London.jpg",
+        "highest_res_url": "https://commons.wikimedia.org/wiki/File:Polaroid_of_St_Paul%27s_Cathedral,_London.jpg",
+        "author_institution": "Nick Page (Commons/Flickr)",
+        "shot_date": "2019-07-29 (EXIF DateTimeOriginal，三张相同→可能为扫描/导出时间 speculation)",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Color i-Type (source-stated)",
+        "production_era_version": "Polaroid Originals 时期 2017–2020 (由相机+日期推断 speculation)",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "Polaroid Originals OneStep 2 (source-stated)",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "1356x1663 (file)",
+        "embedded_icc_detected": "无 ICC（实测）",
+        "auto_enhance_post": "EXIF Software=Adobe Photoshop CC 2019（实测）→存在后期处理可能，程度未知",
+        "evidence_real_instant_film": "含完整白框与底部宽边、相纸比例（image-observed）",
+        "scene_color_patches": "圣保罗大教堂，晴空；天空蓝/石材灰白/绿植",
+        "observed_traits": "整体低反差、阴影抬升偏蓝紫、高光偏暖粉/奶黄、饱和度中低（image-observed，仅限本扫描）",
+        "anomalies_causes": "无明显缺陷",
+        "linked_pair_ids": "0001/0002/0003 同作者同相机同工作流系列",
+        "resolution_watermark": "1356x1663，无水印",
+        "authenticity_grade": "高",
+        "authenticity_reason": "作者明确标注相机与胶片，图像具备实体相纸特征",
+        "reference_grade": "C",
+        "reference_reason": "可追溯视觉样本，无对照、无曝光/扫描信息",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "redistribution_allowed": "是（需署名 Nick Page, CC BY 2.0）",
+        "in_app_bundling_allowed": "许可证允许但需署名；建议法务确认",
+        "local_filename": "authorized-originals/GROK-POL-0001_NickPage_StPauls_iType.jpg",
+        "sha256": "e646934e1d3a84c9b2b7e97d1523d5429c6816b867de501fb61aee0d6c35633d",
+        "group": "core-P0-color",
+        "use_tags": "color;tone;paper-frame;scene-outdoor-daylight",
+        "limitations_unknowns": "扫描设备/白平衡/后期未知；批次未知；Photoshop 处理过"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Claimed pair retained in original; same author/workflow is not a verified same-scene pair",
+        "Software tag is not evidence that color was edited"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "VisualInspiration",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0002",
+      "provider": "GROK",
+      "kind": "Image",
+      "original": {
+        "sample_id": "GROK-POL-0002",
+        "source_group_id": "SG-NICKPAGE",
+        "original_post_url": "https://commons.wikimedia.org/wiki/File:Polaroid_of_a_Helter-skelter_on_Clacton_Pier.jpg",
+        "highest_res_url": "https://commons.wikimedia.org/wiki/File:Polaroid_of_a_Helter-skelter_on_Clacton_Pier.jpg",
+        "author_institution": "Nick Page (Commons/Flickr)",
+        "shot_date": "2019-07-29 (EXIF DateTimeOriginal，三张相同→可能为扫描/导出时间 speculation)",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Color i-Type (source-stated)",
+        "production_era_version": "Polaroid Originals 时期 2017–2020 (由相机+日期推断 speculation)",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "Polaroid Originals OneStep 2 (source-stated)",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "1356x1663 (file)",
+        "embedded_icc_detected": "无 ICC（实测）",
+        "auto_enhance_post": "EXIF Software=Adobe Photoshop CC 2019（实测）→存在后期处理可能，程度未知",
+        "evidence_real_instant_film": "含完整白框与底部宽边、相纸比例（image-observed）",
+        "scene_color_patches": "海边滑梯塔，红白条纹+天空云",
+        "observed_traits": "整体低反差、阴影抬升偏蓝紫、高光偏暖粉/奶黄、饱和度中低（image-observed，仅限本扫描）",
+        "anomalies_causes": "无明显缺陷",
+        "linked_pair_ids": "0001/0002/0003 同作者同相机同工作流系列",
+        "resolution_watermark": "1356x1663，无水印",
+        "authenticity_grade": "高",
+        "authenticity_reason": "作者明确标注相机与胶片，图像具备实体相纸特征",
+        "reference_grade": "C",
+        "reference_reason": "可追溯视觉样本，无对照、无曝光/扫描信息",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "redistribution_allowed": "是（需署名 Nick Page, CC BY 2.0）",
+        "in_app_bundling_allowed": "许可证允许但需署名；建议法务确认",
+        "local_filename": "authorized-originals/GROK-POL-0002_NickPage_Clacton_iType.jpg",
+        "sha256": "99fdb9ff6be7198c79aef2f804f502ca4cf678d54febb50f4df48ee7ee708ccb",
+        "group": "core-P0-color",
+        "use_tags": "color;tone;paper-frame;scene-outdoor-daylight",
+        "limitations_unknowns": "扫描设备/白平衡/后期未知；批次未知；Photoshop 处理过"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Claimed pair retained in original; same author/workflow is not a verified same-scene pair",
+        "Software tag is not evidence that color was edited"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "VisualInspiration",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0003",
+      "provider": "GROK",
+      "kind": "Image",
+      "original": {
+        "sample_id": "GROK-POL-0003",
+        "source_group_id": "SG-NICKPAGE",
+        "original_post_url": "https://commons.wikimedia.org/wiki/File:Polaroid_of_30_St_Mary_Axe_(The_Gherkin)_in_London.jpg",
+        "highest_res_url": "https://commons.wikimedia.org/wiki/File:Polaroid_of_30_St_Mary_Axe_(The_Gherkin)_in_London.jpg",
+        "author_institution": "Nick Page (Commons/Flickr)",
+        "shot_date": "2019-07-29 (EXIF DateTimeOriginal，三张相同→可能为扫描/导出时间 speculation)",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Color i-Type (source-stated)",
+        "production_era_version": "Polaroid Originals 时期 2017–2020 (由相机+日期推断 speculation)",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "Polaroid Originals OneStep 2 (source-stated)",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "1356x1663 (file)",
+        "embedded_icc_detected": "无 ICC（实测）",
+        "auto_enhance_post": "EXIF Software=Adobe Photoshop CC 2019（实测）→存在后期处理可能，程度未知",
+        "evidence_real_instant_film": "含完整白框与底部宽边、相纸比例（image-observed）",
+        "scene_color_patches": "玻璃幕墙蓝、钢架、石材建筑",
+        "observed_traits": "整体低反差、阴影抬升偏蓝紫、高光偏暖粉/奶黄、饱和度中低（image-observed，仅限本扫描）",
+        "anomalies_causes": "无明显缺陷",
+        "linked_pair_ids": "0001/0002/0003 同作者同相机同工作流系列",
+        "resolution_watermark": "1356x1663，无水印",
+        "authenticity_grade": "高",
+        "authenticity_reason": "作者明确标注相机与胶片，图像具备实体相纸特征",
+        "reference_grade": "C",
+        "reference_reason": "可追溯视觉样本，无对照、无曝光/扫描信息",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "redistribution_allowed": "是（需署名 Nick Page, CC BY 2.0）",
+        "in_app_bundling_allowed": "许可证允许但需署名；建议法务确认",
+        "local_filename": "authorized-originals/GROK-POL-0003_NickPage_Gherkin_iType.jpg",
+        "sha256": "1b3dcce7671eada6f114c4d8c80cbe925798317027ebe863197cd7563158ade0",
+        "group": "core-P0-color",
+        "use_tags": "color;tone;paper-frame;scene-outdoor-daylight",
+        "limitations_unknowns": "扫描设备/白平衡/后期未知；批次未知；Photoshop 处理过"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Claimed pair retained in original; same author/workflow is not a verified same-scene pair",
+        "Software tag is not evidence that color was edited"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "VisualInspiration",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0004",
+      "provider": "GROK",
+      "kind": "Image",
+      "original": {
+        "sample_id": "GROK-POL-0004",
+        "source_group_id": "SG-SGROEY",
+        "original_post_url": "https://commons.wikimedia.org/wiki/File:Polaroid_Photograph.jpg",
+        "highest_res_url": "https://commons.wikimedia.org/wiki/File:Polaroid_Photograph.jpg",
+        "author_institution": "Sgroey (Commons)",
+        "shot_date": "2011-08-01 (metadata)",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "'Colour 600' (source-stated)；2011 年只可能是 Impossible Project 早期 PX 系列或过期原厂 600 → 具体 UNKNOWN",
+        "production_era_version": "待核实",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN（若为原厂 600 则 2011 已过期 speculation）",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "室内暖光+可能闪光（image-observed speculation）",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "1086x1306",
+        "embedded_icc_detected": "无 ICC（实测）",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "白框、底部宽边（image-observed）",
+        "scene_color_patches": "室内台球桌人群，暖黄/暗部",
+        "observed_traits": "暗部厚重、偏暖黄绿、高光偏洋红（image-observed）",
+        "anomalies_causes": "低光欠曝可能",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "1086x1306 无水印",
+        "authenticity_grade": "中",
+        "authenticity_reason": "真实相纸外观，但胶片代际不清",
+        "reference_grade": "D",
+        "reference_reason": "代际不清、无参数",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "redistribution_allowed": "是（CC BY-SA 4.0，署名+相同方式共享）",
+        "in_app_bundling_allowed": "不建议：BY-SA 共享条款对打包产品有传染风险",
+        "local_filename": "authorized-originals/GROK-POL-0004_Sgroey_Color600.jpg",
+        "sha256": "57a020216d55e0b1e852010ddaf09b661c753d65a756592aa85cf8ce988b97e5",
+        "group": "era-unverified",
+        "use_tags": "inspiration;low-light",
+        "limitations_unknowns": "胶片代际、相机、扫描全未知；含可识别人物"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Historical/experimental/aged material excluded from modern i-Type characterization"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "VisualInspiration",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0005",
+      "provider": "GROK",
+      "kind": "Image",
+      "original": {
+        "sample_id": "GROK-POL-0005",
+        "source_group_id": "SG-PAWLOWSKI",
+        "original_post_url": "https://www.flickr.com/photos/42024379@N00/6956933718",
+        "highest_res_url": "https://commons.wikimedia.org/wiki/File:Pittsburgh,_under_the_bridge_(impossible_polaroid)_(6956933718).jpg",
+        "author_institution": "Peter Pawlowski",
+        "shot_date": "2012-04-15 (metadata)",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Impossible Project 彩色（具体 PX 70/680 UNKNOWN）",
+        "production_era_version": "Impossible 2012 早期化学，非现代 Polaroid 配方",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "平板扫描（EXIF Model=9000F 实测，推定 CanoScan 9000F）",
+        "scan_device_resolution": "2106x2563",
+        "embedded_icc_detected": "sRGB IEC61966-2.1（实测）",
+        "auto_enhance_post": "EXIF Software=Aperture 3.2.3（实测）",
+        "evidence_real_instant_film": "完整白框+平板扫描",
+        "scene_color_patches": "逆光桥梁水面，橙黄天空/剪影",
+        "observed_traits": "强暖橙偏色、阴影棕褐、低饱和蓝（image-observed）",
+        "anomalies_causes": "早期 Impossible 化学典型暖偏？（speculation，不作为现代外观）",
+        "linked_pair_ids": "与 0006 同作者同扫描仪",
+        "resolution_watermark": "无水印",
+        "authenticity_grade": "高",
+        "authenticity_reason": "作者标注 + 扫描仪 EXIF",
+        "reference_grade": "C",
+        "reference_reason": "扫描链可追溯但无对照",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "redistribution_allowed": "是（署名）",
+        "in_app_bundling_allowed": "许可允许，需署名",
+        "local_filename": "authorized-originals/GROK-POL-0005_Pawlowski_Pittsburgh_Impossible.jpg",
+        "sha256": "c08b7ce4572f915f3bc396e74c5e4ce0a67000363c7bd869350a41d19805f3ca",
+        "group": "historical-Impossible",
+        "use_tags": "scan-chain;era-comparison",
+        "limitations_unknowns": "不代表现代 Polaroid Color"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Claimed pair retained in original; same author/workflow is not a verified same-scene pair"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "VisualInspiration",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0006",
+      "provider": "GROK",
+      "kind": "Image",
+      "original": {
+        "sample_id": "GROK-POL-0006",
+        "source_group_id": "SG-PAWLOWSKI",
+        "original_post_url": "https://commons.wikimedia.org/wiki/File:Crazy_Mocha_polaroid.jpg",
+        "highest_res_url": "https://commons.wikimedia.org/wiki/File:Crazy_Mocha_polaroid.jpg",
+        "author_institution": "Peter Pawlowski",
+        "shot_date": "2011-11-26",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "UNKNOWN（单色，疑 Impossible B&W，未陈述）",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "CanoScan 9000F（EXIF 实测）",
+        "scan_device_resolution": "2220x1712（横幅裁切，无边框）",
+        "embedded_icc_detected": "无 ICC（实测）",
+        "auto_enhance_post": "GIMP 2.8.0（实测）",
+        "evidence_real_instant_film": "弱：已裁去边框",
+        "scene_color_patches": "咖啡店室内，B&W",
+        "observed_traits": "中性黑白、高光吊灯溢出（image-observed）",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "无水印",
+        "authenticity_grade": "待核实",
+        "authenticity_reason": "胶片类型未陈述，边框被裁",
+        "reference_grade": "D",
+        "reference_reason": "身份未核实",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "redistribution_allowed": "是（署名）",
+        "in_app_bundling_allowed": "需人物肖像审查",
+        "local_filename": "authorized-originals/GROK-POL-0006_Pawlowski_CrazyMocha.jpg",
+        "sha256": "dd0ead680c6b3acb26c910b9b5f91671a775faa38b34147287c532ffd6ce0d02",
+        "group": "unverified-identity",
+        "use_tags": "inspiration",
+        "limitations_unknowns": "不计入核心"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "VisualInspiration",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0007",
+      "provider": "GROK",
+      "kind": "Image",
+      "original": {
+        "sample_id": "GROK-POL-0007",
+        "source_group_id": "SG-NOTCH",
+        "original_post_url": "https://commons.wikimedia.org/wiki/File:Polaroid_600_sunflower.jpg",
+        "highest_res_url": "https://commons.wikimedia.org/wiki/File:Polaroid_600_sunflower.jpg",
+        "author_institution": "Ryan Notch",
+        "shot_date": "2009-07-01",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "原厂 Polaroid 600（source-stated）",
+        "production_era_version": "Polaroid Corp. 原厂（停产前）",
+        "batch": "UNKNOWN",
+        "expired": "是，'slightly expired'（source-stated）",
+        "camera_lens": "Polaroid 600 相机（型号未述）",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "1207x1248（边框裁切）",
+        "embedded_icc_detected": "无 ICC（实测）",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "中：边框裁切",
+        "scene_color_patches": "向日葵黄、蓝天、草地",
+        "observed_traits": "高饱和暖黄、天空青蓝（image-observed）",
+        "anomalies_causes": "过期",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "无水印",
+        "authenticity_grade": "中",
+        "authenticity_reason": "作者陈述，但已裁边",
+        "reference_grade": "D",
+        "reference_reason": "过期原厂化学，与现代配方不同",
+        "license_url": "https://creativecommons.org/licenses/by/3.0",
+        "redistribution_allowed": "是（署名）",
+        "in_app_bundling_allowed": "许可允许需署名",
+        "local_filename": "authorized-originals/GROK-POL-0007_Notch_Sunflower_expired600.jpg",
+        "sha256": "ec8ed61a742be0953a122d44536ff28544be864b8d5a79029159d730f9237b31",
+        "group": "expired-aged",
+        "use_tags": "historical-600;inspiration",
+        "limitations_unknowns": "不可用于现代 Color 600 建模"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "VisualInspiration",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0008",
+      "provider": "GROK",
+      "kind": "Image",
+      "original": {
+        "sample_id": "GROK-POL-0008",
+        "source_group_id": "SG-HNT6581",
+        "original_post_url": "https://www.flickr.com/photos/42639139@N08/ (Commons: 600_-_Flickr_-_hnt6581.jpg)",
+        "highest_res_url": "https://commons.wikimedia.org/wiki/File:600_-_Flickr_-_hnt6581.jpg",
+        "author_institution": "hnt6581",
+        "shot_date": "2013-02-19",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Polaroid Time-Zero (TZ) Artistic，过期（source-stated）",
+        "production_era_version": "原厂 Time-Zero 系",
+        "batch": "UNKNOWN",
+        "expired": "是",
+        "camera_lens": "Polaroid SX-70（source-stated）",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "4170x5051",
+        "embedded_icc_detected": "EPSON Standard RGB - Gamma 1.8（实测）",
+        "auto_enhance_post": "Photoshop CS6（实测）",
+        "evidence_real_instant_film": "完整白框，高分辨率扫描",
+        "scene_color_patches": "铁路桥，黄绿天空、青绿阴影",
+        "observed_traits": "整体黄绿偏色、对比低（image-observed）",
+        "anomalies_causes": "过期 TZ Artistic 典型漂移（speculation）",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "高分辨率无水印",
+        "authenticity_grade": "高",
+        "authenticity_reason": "标注+高分辨率完整相纸",
+        "reference_grade": "C",
+        "reference_reason": "历史/过期组可追溯视觉；ICC 非 sRGB 必须转换",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "redistribution_allowed": "是（署名）",
+        "in_app_bundling_allowed": "许可允许需署名",
+        "local_filename": "authorized-originals/GROK-POL-0008_hnt6581_expiredTZArtistic.jpg",
+        "sha256": "33294c94adc455c5af6a604883083a229d40f18fd3fb32e08b893d8ed5ed2c4b",
+        "group": "expired-aged/historical-TimeZero",
+        "use_tags": "optics-detail;scan-ICC-case;aging",
+        "limitations_unknowns": "过期，不计核心"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Software tag is not evidence that color was edited",
+        "Historical/experimental/aged material excluded from modern i-Type characterization"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "VisualInspiration",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0009",
+      "provider": "GROK",
+      "kind": "Image",
+      "original": {
+        "sample_id": "GROK-POL-0009",
+        "source_group_id": "SG-DELORENZO",
+        "original_post_url": "https://www.flickr.com/photos/71902268@N00/8367166552",
+        "highest_res_url": "https://commons.wikimedia.org/wiki/File:Polaroid_self-portrait_(8367166552).jpg",
+        "author_institution": "Anthony DeLorenzo",
+        "shot_date": "2013-01-09",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Type 51（4x5 B&W，1981 年过期，source-stated）",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "是（1981）",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "Epson Perfection V500（EXIF 实测）",
+        "scan_device_resolution": "1200x1521",
+        "embedded_icc_detected": "sRGB IEC61966-2.1（实测）",
+        "auto_enhance_post": "Lightroom 3.5（实测）",
+        "evidence_real_instant_film": "不规则黑边、化学斑驳（image-observed）",
+        "scene_color_patches": "人像 B&W",
+        "observed_traits": "严重斑点/雾化（image-observed）",
+        "anomalies_causes": "32 年过期试剂",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "无水印",
+        "authenticity_grade": "高",
+        "authenticity_reason": "标注+扫描仪 EXIF",
+        "reference_grade": "D",
+        "reference_reason": "缺陷库样本，非默认外观",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "redistribution_allowed": "是（署名）",
+        "in_app_bundling_allowed": "需肖像审查",
+        "local_filename": "authorized-originals/GROK-POL-0009_DeLorenzo_Type51_expired.jpg",
+        "sha256": "48b0e76469dc9ca5ea652b13a1dfdbc8bbabcaf2c8f1afd482222c7fb5b6dfcd",
+        "group": "expired-aged/defect-library",
+        "use_tags": "emulsion-artifact",
+        "limitations_unknowns": "不计核心"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Historical/experimental/aged material excluded from modern i-Type characterization"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "VisualInspiration",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0010",
+      "provider": "GROK",
+      "kind": "Image",
+      "original": {
+        "sample_id": "GROK-POL-0010",
+        "source_group_id": "SG-FISHER",
+        "original_post_url": "https://www.flickr.com/photos/50204706@N07/",
+        "highest_res_url": "https://commons.wikimedia.org/wiki/File:Selma_Plantation_Mansion_(Polaroid_photo)_-_Flickr.jpg",
+        "author_institution": "Will Fisher",
+        "shot_date": "2017-08-16",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "UNKNOWN（仅称 Polaroid photo）",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "906x927",
+        "embedded_icc_detected": "无 ICC（实测）",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "弱：底边疑似显影剂扩散边缘（image-observed）",
+        "scene_color_patches": "废弃宅邸草地",
+        "observed_traits": "低饱和、暖灰",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "低分辨率",
+        "authenticity_grade": "待核实",
+        "authenticity_reason": "胶片未陈述、边框裁切",
+        "reference_grade": "D",
+        "reference_reason": "身份未核实",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+        "redistribution_allowed": "是（BY-SA）",
+        "in_app_bundling_allowed": "不建议（BY-SA）",
+        "local_filename": "authorized-originals/GROK-POL-0010_Fisher_Selma_unknownfilm.jpg",
+        "sha256": "3c60af704c293e8a044fc436dcca13f48bc884ce6d6769f03d3c0d7ffe819e2d",
+        "group": "unverified-identity",
+        "use_tags": "inspiration",
+        "limitations_unknowns": "不计核心"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "VisualInspiration",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0011",
+      "provider": "GROK",
+      "kind": "WebOrLiterature",
+      "original": {
+        "sample_id": "GROK-POL-0011",
+        "source_group_id": "SG-POLAROID-OFFICIAL",
+        "original_post_url": "https://support.polaroid.com/hc/en-us/articles/115012361067",
+        "highest_res_url": "UNKNOWN",
+        "author_institution": "Polaroid 官方 Support",
+        "shot_date": "UNKNOWN",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Color i-Type/600/SX-70 通用",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "最佳 13–28°C；<13°C 过曝、低反差、绿/青偏；>28°C 黄/红偏（source-stated）。注意两篇官方文章分别写 green 与 cyan(blue)",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "UNKNOWN",
+        "embedded_icc_detected": "未下载",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "UNKNOWN",
+        "scene_color_patches": "UNKNOWN",
+        "observed_traits": "UNKNOWN",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "UNKNOWN",
+        "authenticity_grade": "高",
+        "authenticity_reason": "官方",
+        "reference_grade": "B",
+        "reference_reason": "定性方向性说明，无数值",
+        "license_url": "UNKNOWN",
+        "redistribution_allowed": "否/未知（公开≠可再分发）",
+        "in_app_bundling_allowed": "否",
+        "local_filename": "未下载",
+        "sha256": "未下载",
+        "group": "technical-official",
+        "use_tags": "temperature;color",
+        "limitations_unknowns": "无量化数据；无示例图对"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "LiteratureContext",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0012",
+      "provider": "GROK",
+      "kind": "WebOrLiterature",
+      "original": {
+        "sample_id": "GROK-POL-0012",
+        "source_group_id": "SG-POLAROID-OFFICIAL",
+        "original_post_url": "https://www.polaroid.com/en_us/products/color-itype-instant-film ; https://media.dustin.eu/media/d200001001830311/color-film-i-type-black-frame-edition-product-data-sheet-brochure.pdf",
+        "highest_res_url": "UNKNOWN",
+        "author_institution": "Polaroid 官方产品页/数据单",
+        "shot_date": "UNKNOWN",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Color i-Type",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "ASA 640，±1/3 档；显影 10–15 min；彩色避光约 6 min、B&W 约 1 min（source-stated）",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "UNKNOWN",
+        "embedded_icc_detected": "未下载",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "UNKNOWN",
+        "scene_color_patches": "UNKNOWN",
+        "observed_traits": "UNKNOWN",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "UNKNOWN",
+        "authenticity_grade": "高",
+        "authenticity_reason": "官方",
+        "reference_grade": "B",
+        "reference_reason": "规格参数，无特性曲线",
+        "license_url": "UNKNOWN",
+        "redistribution_allowed": "否/未知（公开≠可再分发）",
+        "in_app_bundling_allowed": "否",
+        "local_filename": "未下载",
+        "sha256": "未下载",
+        "group": "technical-official",
+        "use_tags": "spec",
+        "limitations_unknowns": "官方未公开现代特性曲线/光谱；图像区尺寸两页面写法不一 79x77 vs 79x79"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "LiteratureContext",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0013",
+      "provider": "GROK",
+      "kind": "WebOrLiterature",
+      "original": {
+        "sample_id": "GROK-POL-0013",
+        "source_group_id": "SG-125PX-DATASHEETS",
+        "original_post_url": "https://125px.com/docs/film/polaroid/55fds.pdf ; 665fds.pdf ; 669fds.pdf",
+        "highest_res_url": "UNKNOWN",
+        "author_institution": "Polaroid Corp. 历史数据单（125px 镜像）",
+        "shot_date": "UNKNOWN",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Type 55 / 665 / 669",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "T-55: ISO 50，20–25 s @70°F；正片 Dmax 1.65/Dmin 0.01，负片 Dmax 1.55（经二手摘要，需打开 PDF 复核）",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "UNKNOWN",
+        "embedded_icc_detected": "未下载",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "UNKNOWN",
+        "scene_color_patches": "UNKNOWN",
+        "observed_traits": "UNKNOWN",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "UNKNOWN",
+        "authenticity_grade": "高",
+        "authenticity_reason": "原厂数据单扫描",
+        "reference_grade": "A",
+        "reference_reason": "含 H&D 曲线与冷/热显影曲线（历史产品）",
+        "license_url": "UNKNOWN",
+        "redistribution_allowed": "否/未知（公开≠可再分发）",
+        "in_app_bundling_allowed": "否",
+        "local_filename": "未下载",
+        "sha256": "未下载",
+        "group": "historical-datasheet",
+        "use_tags": "historical;tone-curve",
+        "limitations_unknowns": "仅历史剥离式胶片，不代表现代 integral"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Historical/experimental/aged material excluded from modern i-Type characterization"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "LiteratureContext",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0014",
+      "provider": "GROK",
+      "kind": "WebOrLiterature",
+      "original": {
+        "sample_id": "GROK-POL-0014",
+        "source_group_id": "SG-POLAROID-PATENTS",
+        "original_post_url": "https://www.freepatentsonline.com/4006025.html ; https://www.freepatentsonline.com/4387155.html ; US3990898 (Land)",
+        "highest_res_url": "UNKNOWN",
+        "author_institution": "Polaroid Corporation 专利",
+        "shot_date": "UNKNOWN",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "SX-70 格式实验涂层",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "US4006025 表1/2：SX-70 格式 蓝层 Dmax≈1.97/Dmin 0.20；绿层 Dmax≈2.34/Dmin 0.16（source-stated）",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "UNKNOWN",
+        "embedded_icc_detected": "未下载",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "UNKNOWN",
+        "scene_color_patches": "UNKNOWN",
+        "observed_traits": "UNKNOWN",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "UNKNOWN",
+        "authenticity_grade": "高",
+        "authenticity_reason": "专利原文",
+        "reference_grade": "A",
+        "reference_reason": "受控感光测量（实验品，非商品配方）",
+        "license_url": "专利文本公有",
+        "redistribution_allowed": "否/未知（公开≠可再分发）",
+        "in_app_bundling_allowed": "否",
+        "local_filename": "未下载",
+        "sha256": "未下载",
+        "group": "historical-patent",
+        "use_tags": "dye-response;historical",
+        "limitations_unknowns": "不代表现代 Polaroid B.V. 配方"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Historical/experimental/aged material excluded from modern i-Type characterization"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "LiteratureContext",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0015",
+      "provider": "GROK",
+      "kind": "WebOrLiterature",
+      "original": {
+        "sample_id": "GROK-POL-0015",
+        "source_group_id": "SG-ANALOGCAFE",
+        "original_post_url": "https://www.analog.cafe/r/polaroid-600-colour-film-review-kxll ; https://www.analog.cafe/r/polaroid-film-characteristic-curves-qz4s",
+        "highest_res_url": "UNKNOWN",
+        "author_institution": "Dmitri / Analog.Cafe",
+        "shot_date": "UNKNOWN",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Color 600（及其他现代胶片曲线 PDF）",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "自制均匀照明纸张逐档曝光→扫描→RGB 曲线，约 3.5 档动态范围（source-stated）",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "UNKNOWN",
+        "embedded_icc_detected": "未下载",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "UNKNOWN",
+        "scene_color_patches": "UNKNOWN",
+        "observed_traits": "UNKNOWN",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "UNKNOWN",
+        "authenticity_grade": "高",
+        "authenticity_reason": "方法公开",
+        "reference_grade": "A",
+        "reference_reason": "家庭受控测量（扫描 RGB 非密度，需降级理解）",
+        "license_url": "未声明开放许可；曲线 PDF 需登录（未绕过）",
+        "redistribution_allowed": "否/未知（公开≠可再分发）",
+        "in_app_bundling_allowed": "否",
+        "local_filename": "未下载",
+        "sha256": "未下载",
+        "group": "controlled-experiment",
+        "use_tags": "tone-curve;dynamic-range",
+        "limitations_unknowns": "扫描值非反射密度；批次未知"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "LiteratureContext",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0016",
+      "provider": "GROK",
+      "kind": "WebOrLiterature",
+      "original": {
+        "sample_id": "GROK-POL-0016",
+        "source_group_id": "SG-ANALOGCAFE",
+        "original_post_url": "https://www.analog.cafe/r/polaroid-reclaimed-blue-600-film-review-hq74",
+        "highest_res_url": "UNKNOWN",
+        "author_institution": "Analog.Cafe",
+        "shot_date": "UNKNOWN",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Reclaimed Blue 600",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "约 15 min 完全显色；RGB 曲线：G≈B，R 弱；白点为浅灰低于边框（source-stated）",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "UNKNOWN",
+        "embedded_icc_detected": "未下载",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "UNKNOWN",
+        "scene_color_patches": "UNKNOWN",
+        "observed_traits": "UNKNOWN",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "UNKNOWN",
+        "authenticity_grade": "高",
+        "authenticity_reason": "方法公开",
+        "reference_grade": "A",
+        "reference_reason": "同方法逐档测量",
+        "license_url": "UNKNOWN",
+        "redistribution_allowed": "否/未知（公开≠可再分发）",
+        "in_app_bundling_allowed": "否",
+        "local_filename": "未下载",
+        "sha256": "未下载",
+        "group": "controlled-experiment-P1",
+        "use_tags": "tone-curve;Reclaimed-Blue",
+        "limitations_unknowns": "单批次单扫描"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "LiteratureContext",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0017",
+      "provider": "GROK",
+      "kind": "WebOrLiterature",
+      "original": {
+        "sample_id": "GROK-POL-0017",
+        "source_group_id": "SG-POLAROID-OFFICIAL",
+        "original_post_url": "https://press.polaroid.com/224112-reclaimed-blue-600-film-faq/",
+        "highest_res_url": "UNKNOWN",
+        "author_institution": "Polaroid Newsroom",
+        "shot_date": "UNKNOWN",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Reclaimed Blue 600 vs Blue Duochrome vs Cyan Monochrome",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "化学：彩色体系+TBHQ，无蓝染料；Blue Duochrome=B&W体系+蓝染料（source-stated）；含 X 光损伤/未损伤对照图（Polaroid Lab 拍摄）",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "UNKNOWN",
+        "embedded_icc_detected": "未下载",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "UNKNOWN",
+        "scene_color_patches": "UNKNOWN",
+        "observed_traits": "UNKNOWN",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "页内 X-ray 对照图对",
+        "resolution_watermark": "UNKNOWN",
+        "authenticity_grade": "高",
+        "authenticity_reason": "官方",
+        "reference_grade": "B",
+        "reference_reason": "官方受控对照图（X-ray）",
+        "license_url": "UNKNOWN",
+        "redistribution_allowed": "否/未知（公开≠可再分发）",
+        "in_app_bundling_allowed": "否",
+        "local_filename": "未下载",
+        "sha256": "未下载",
+        "group": "technical-official-P1",
+        "use_tags": "chemistry-family;defect-xray",
+        "limitations_unknowns": "图片未下载、许可未知"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Claimed pair retained in original; same author/workflow is not a verified same-scene pair"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "LiteratureContext",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0018",
+      "provider": "GROK",
+      "kind": "WebOrLiterature",
+      "original": {
+        "sample_id": "GROK-POL-0018",
+        "source_group_id": "SG-REDDIT-GYPANT",
+        "original_post_url": "https://www.reddit.com/r/Polaroid/comments/gypant/",
+        "highest_res_url": "UNKNOWN",
+        "author_institution": "r/Polaroid 用户（匿名）",
+        "shot_date": "UNKNOWN",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Color i-Type (12/19) vs Color 600 (10/19)",
+        "production_era_version": "UNKNOWN",
+        "batch": "生产月份 source-stated",
+        "expired": "UNKNOWN",
+        "camera_lens": "OneStep+ 与 SLR680（i-Type 装入 600 盒）",
+        "exposure": "称相机/设置/光线一致（source-stated）",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "UNKNOWN",
+        "embedded_icc_detected": "未下载",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "UNKNOWN",
+        "scene_color_patches": "UNKNOWN",
+        "observed_traits": "UNKNOWN",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "同场景 A/B（imgur 相册，未下载）",
+        "resolution_watermark": "UNKNOWN",
+        "authenticity_grade": "中",
+        "authenticity_reason": "社区陈述，相册未核",
+        "reference_grade": "B",
+        "reference_reason": "同场景对照，但单次、手持",
+        "license_url": "UNKNOWN",
+        "redistribution_allowed": "否/未知（公开≠可再分发）",
+        "in_app_bundling_allowed": "否",
+        "local_filename": "未下载",
+        "sha256": "未下载",
+        "group": "pair-film-vs-film",
+        "use_tags": "itype-vs-600;counterexample",
+        "limitations_unknowns": "i-Type 更饱和——评论者归因批次差异，非配方差异；属反例/批次证据"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Claimed pair retained in original; same author/workflow is not a verified same-scene pair"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "LiteratureContext",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0019",
+      "provider": "GROK",
+      "kind": "WebOrLiterature",
+      "original": {
+        "sample_id": "GROK-POL-0019",
+        "source_group_id": "SG-COCKROFT",
+        "original_post_url": "https://www.jamescockroft.com/20210416/photography/polaroid-itype-vs-600/ ; https://www.jamescockroft.com/20171020/photography/polaroidweek-1/",
+        "highest_res_url": "UNKNOWN",
+        "author_institution": "James Cockroft",
+        "shot_date": "UNKNOWN",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "i-Type vs 600；Impossible 600 vs PO i-Type",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "Mint SLR670-S vs OneStep+；Impulse SE vs OneStep 2",
+        "exposure": "自动/遥控，作者自认非科学",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "UNKNOWN",
+        "embedded_icc_detected": "未下载",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "UNKNOWN",
+        "scene_color_patches": "UNKNOWN",
+        "observed_traits": "UNKNOWN",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "近似同场景对",
+        "resolution_watermark": "UNKNOWN",
+        "authenticity_grade": "中",
+        "authenticity_reason": "个人博客原图",
+        "reference_grade": "C",
+        "reference_reason": "相机/镜头/曝光混杂，不能归因胶片",
+        "license_url": "UNKNOWN",
+        "redistribution_allowed": "否/未知（公开≠可再分发）",
+        "in_app_bundling_allowed": "否",
+        "local_filename": "未下载",
+        "sha256": "未下载",
+        "group": "pair-confounded",
+        "use_tags": "optics-vs-film;counterexample",
+        "limitations_unknowns": "作者明确承认混杂"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Claimed pair retained in original; same author/workflow is not a verified same-scene pair"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "LiteratureContext",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0020",
+      "provider": "GROK",
+      "kind": "WebOrLiterature",
+      "original": {
+        "sample_id": "GROK-POL-0020",
+        "source_group_id": "SG-BLUEMOON",
+        "original_post_url": "https://bluemooncameracodex.com/film-fridays/ffpolaroid600",
+        "highest_res_url": "UNKNOWN",
+        "author_institution": "Blue Moon Camera",
+        "shot_date": "UNKNOWN",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Color 600 & B&W 600",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "UNKNOWN",
+        "embedded_icc_detected": "未下载",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "UNKNOWN",
+        "scene_color_patches": "UNKNOWN",
+        "observed_traits": "UNKNOWN",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "UNKNOWN",
+        "authenticity_grade": "高",
+        "authenticity_reason": "专业店评测原图",
+        "reference_grade": "C",
+        "reference_reason": "可追溯视觉，彩色阴影比 B&W 更堵（source-stated）",
+        "license_url": "UNKNOWN",
+        "redistribution_allowed": "否/未知（公开≠可再分发）",
+        "in_app_bundling_allowed": "否",
+        "local_filename": "未下载",
+        "sha256": "未下载",
+        "group": "review-P0-BW",
+        "use_tags": "BW;tone",
+        "limitations_unknowns": "未逐张记录参数（未全文核）"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "LiteratureContext",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0021",
+      "provider": "GROK",
+      "kind": "WebOrLiterature",
+      "original": {
+        "sample_id": "GROK-POL-0021",
+        "source_group_id": "SG-LUYCKX",
+        "original_post_url": "http://www.alexluyckx.com/blog/2022/07/11/film-review-blog-no-85-polaroid-black-white-600/",
+        "highest_res_url": "UNKNOWN",
+        "author_institution": "Alex Luyckx",
+        "shot_date": "UNKNOWN",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "B&W 600",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "UNKNOWN",
+        "embedded_icc_detected": "未下载",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "UNKNOWN",
+        "scene_color_patches": "UNKNOWN",
+        "observed_traits": "UNKNOWN",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "UNKNOWN",
+        "authenticity_grade": "高",
+        "authenticity_reason": "作者原博",
+        "reference_grade": "C",
+        "reference_reason": "可追溯视觉",
+        "license_url": "UNKNOWN",
+        "redistribution_allowed": "否/未知（公开≠可再分发）",
+        "in_app_bundling_allowed": "否",
+        "local_filename": "未下载",
+        "sha256": "未下载",
+        "group": "review-P0-BW",
+        "use_tags": "BW",
+        "limitations_unknowns": "页面未全文抓取"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "LiteratureContext",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    },
+    {
+      "id": "GROK-POL-0022",
+      "provider": "GROK",
+      "kind": "WebOrLiterature",
+      "original": {
+        "sample_id": "GROK-POL-0022",
+        "source_group_id": "SG-AIC-20x24",
+        "original_post_url": "https://jcolore.gruppodelcolore.it/ojs/index.php/CCSJ/article/view/415",
+        "highest_res_url": "UNKNOWN",
+        "author_institution": "Art Institute of Chicago 研究（Color Culture and Science 2025）",
+        "shot_date": "UNKNOWN",
+        "publish_date": "UNKNOWN",
+        "retrieval_date": "2026-10-17",
+        "exact_film_type": "Polaroid 20x24 Polacolor ER/Pro100/7",
+        "production_era_version": "UNKNOWN",
+        "batch": "UNKNOWN",
+        "expired": "UNKNOWN",
+        "camera_lens": "UNKNOWN",
+        "exposure": "UNKNOWN",
+        "light_source": "UNKNOWN",
+        "storage": "UNKNOWN",
+        "dev_temp_time": "UNKNOWN",
+        "scan_method": "UNKNOWN",
+        "scan_device_resolution": "UNKNOWN",
+        "embedded_icc_detected": "未下载",
+        "auto_enhance_post": "UNKNOWN",
+        "evidence_real_instant_film": "UNKNOWN",
+        "scene_color_patches": "UNKNOWN",
+        "observed_traits": "UNKNOWN",
+        "anomalies_causes": "UNKNOWN",
+        "linked_pair_ids": "UNKNOWN",
+        "resolution_watermark": "UNKNOWN",
+        "authenticity_grade": "高",
+        "authenticity_reason": "同行评议",
+        "reference_grade": "A",
+        "reference_reason": "微褪色测试（MFT）数据",
+        "license_url": "见期刊页",
+        "redistribution_allowed": "否/未知（公开≠可再分发）",
+        "in_app_bundling_allowed": "否",
+        "local_filename": "未下载",
+        "sha256": "未下载",
+        "group": "aging-research",
+        "use_tags": "aging;historical",
+        "limitations_unknowns": "剥离式大画幅，非 integral"
+      },
+      "reviewStatus": "ContextOnlyPendingProvenance",
+      "reviewReasons": [
+        "No controlled color-managed paired measurement; not eligible for modern-film calibration",
+        "Provider retrieval date is in the future relative to audit date; retained as claim only",
+        "Historical/experimental/aged material excluded from modern i-Type characterization"
+      ],
+      "useAssessments": [
+        {
+          "use": "ModernFilmCalibration",
+          "grade": "D",
+          "reason": "No controlled color-managed paired measurement; not eligible for modern-film calibration"
+        },
+        {
+          "use": "LiteratureContext",
+          "grade": "C",
+          "reason": "Traceable provider claim; original source and workflow not independently verified"
+        },
+        {
+          "use": "ControlledScanComparison",
+          "grade": "D",
+          "reason": "No verified same-original multi-scan pair"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "GROK-POL-0001:source",
+      "recordId": "GROK-POL-0001",
+      "url": "https://commons.wikimedia.org/wiki/File:Polaroid_of_St_Paul%27s_Cathedral,_London.jpg",
+      "kind": "Image",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0002:source",
+      "recordId": "GROK-POL-0002",
+      "url": "https://commons.wikimedia.org/wiki/File:Polaroid_of_a_Helter-skelter_on_Clacton_Pier.jpg",
+      "kind": "Image",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0003:source",
+      "recordId": "GROK-POL-0003",
+      "url": "https://commons.wikimedia.org/wiki/File:Polaroid_of_30_St_Mary_Axe_(The_Gherkin)_in_London.jpg",
+      "kind": "Image",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0004:source",
+      "recordId": "GROK-POL-0004",
+      "url": "https://commons.wikimedia.org/wiki/File:Polaroid_Photograph.jpg",
+      "kind": "Image",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0005:source",
+      "recordId": "GROK-POL-0005",
+      "url": "https://www.flickr.com/photos/42024379@N00/6956933718",
+      "kind": "Image",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0006:source",
+      "recordId": "GROK-POL-0006",
+      "url": "https://commons.wikimedia.org/wiki/File:Crazy_Mocha_polaroid.jpg",
+      "kind": "Image",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0007:source",
+      "recordId": "GROK-POL-0007",
+      "url": "https://commons.wikimedia.org/wiki/File:Polaroid_600_sunflower.jpg",
+      "kind": "Image",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0008:source",
+      "recordId": "GROK-POL-0008",
+      "url": "https://www.flickr.com/photos/42639139@N08/ (Commons: 600_-_Flickr_-_hnt6581.jpg)",
+      "kind": "Image",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0009:source",
+      "recordId": "GROK-POL-0009",
+      "url": "https://www.flickr.com/photos/71902268@N00/8367166552",
+      "kind": "Image",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0010:source",
+      "recordId": "GROK-POL-0010",
+      "url": "https://www.flickr.com/photos/50204706@N07/",
+      "kind": "Image",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0011:source",
+      "recordId": "GROK-POL-0011",
+      "url": "https://support.polaroid.com/hc/en-us/articles/115012361067",
+      "kind": "WebOrLiterature",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0012:source",
+      "recordId": "GROK-POL-0012",
+      "url": "https://www.polaroid.com/en_us/products/color-itype-instant-film ; https://media.dustin.eu/media/d200001001830311/color-film-i-type-black-frame-edition-product-data-sheet-brochure.pdf",
+      "kind": "WebOrLiterature",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0013:source",
+      "recordId": "GROK-POL-0013",
+      "url": "https://125px.com/docs/film/polaroid/55fds.pdf ; 665fds.pdf ; 669fds.pdf",
+      "kind": "WebOrLiterature",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0014:source",
+      "recordId": "GROK-POL-0014",
+      "url": "https://www.freepatentsonline.com/4006025.html ; https://www.freepatentsonline.com/4387155.html ; US3990898 (Land)",
+      "kind": "WebOrLiterature",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0015:source",
+      "recordId": "GROK-POL-0015",
+      "url": "https://www.analog.cafe/r/polaroid-600-colour-film-review-kxll ; https://www.analog.cafe/r/polaroid-film-characteristic-curves-qz4s",
+      "kind": "WebOrLiterature",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0016:source",
+      "recordId": "GROK-POL-0016",
+      "url": "https://www.analog.cafe/r/polaroid-reclaimed-blue-600-film-review-hq74",
+      "kind": "WebOrLiterature",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0017:source",
+      "recordId": "GROK-POL-0017",
+      "url": "https://press.polaroid.com/224112-reclaimed-blue-600-film-faq/",
+      "kind": "WebOrLiterature",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0018:source",
+      "recordId": "GROK-POL-0018",
+      "url": "https://www.reddit.com/r/Polaroid/comments/gypant/",
+      "kind": "WebOrLiterature",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0019:source",
+      "recordId": "GROK-POL-0019",
+      "url": "https://www.jamescockroft.com/20210416/photography/polaroid-itype-vs-600/ ; https://www.jamescockroft.com/20171020/photography/polaroidweek-1/",
+      "kind": "WebOrLiterature",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0020:source",
+      "recordId": "GROK-POL-0020",
+      "url": "https://bluemooncameracodex.com/film-fridays/ffpolaroid600",
+      "kind": "WebOrLiterature",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0021:source",
+      "recordId": "GROK-POL-0021",
+      "url": "http://www.alexluyckx.com/blog/2022/07/11/film-review-blog-no-85-polaroid-black-white-600/",
+      "kind": "WebOrLiterature",
+      "verification": "ProviderClaimNotPageVerified"
+    },
+    {
+      "id": "GROK-POL-0022:source",
+      "recordId": "GROK-POL-0022",
+      "url": "https://jcolore.gruppodelcolore.it/ojs/index.php/CCSJ/article/view/415",
+      "kind": "WebOrLiterature",
+      "verification": "ProviderClaimNotPageVerified"
+    }
+  ],
+  "images": [
+    {
+      "id": "GROK-POL-0001:scan:1",
+      "recordId": "GROK-POL-0001",
+      "sourceId": "GROK-POL-0001:source",
+      "localRelativePath": "authorized-originals/GROK-POL-0001_NickPage_StPauls_iType.jpg",
+      "bytes": 999543,
+      "sha256": "e646934e1d3a84c9b2b7e97d1523d5429c6816b867de501fb61aee0d6c35633d",
+      "claimedSha256": "e646934e1d3a84c9b2b7e97d1523d5429c6816b867de501fb61aee0d6c35633d",
+      "hashMatchesProvider": true,
+      "width": 1356,
+      "height": 1663,
+      "mode": "RGB",
+      "icc": {
+        "status": "NotEmbedded",
+        "bytes": 0,
+        "sha256": null,
+        "interpretation": "NotParsed; profile presence alone does not explain a cast"
+      },
+      "software": "Adobe Photoshop CC 2019 (Macintosh)",
+      "scanWorkflow": "Unknown",
+      "releaseBundling": "NotApproved"
+    },
+    {
+      "id": "GROK-POL-0002:scan:1",
+      "recordId": "GROK-POL-0002",
+      "sourceId": "GROK-POL-0002:source",
+      "localRelativePath": "authorized-originals/GROK-POL-0002_NickPage_Clacton_iType.jpg",
+      "bytes": 988758,
+      "sha256": "99fdb9ff6be7198c79aef2f804f502ca4cf678d54febb50f4df48ee7ee708ccb",
+      "claimedSha256": "99fdb9ff6be7198c79aef2f804f502ca4cf678d54febb50f4df48ee7ee708ccb",
+      "hashMatchesProvider": true,
+      "width": 1356,
+      "height": 1663,
+      "mode": "RGB",
+      "icc": {
+        "status": "NotEmbedded",
+        "bytes": 0,
+        "sha256": null,
+        "interpretation": "NotParsed; profile presence alone does not explain a cast"
+      },
+      "software": "Adobe Photoshop CC 2019 (Macintosh)",
+      "scanWorkflow": "Unknown",
+      "releaseBundling": "NotApproved"
+    },
+    {
+      "id": "GROK-POL-0003:scan:1",
+      "recordId": "GROK-POL-0003",
+      "sourceId": "GROK-POL-0003:source",
+      "localRelativePath": "authorized-originals/GROK-POL-0003_NickPage_Gherkin_iType.jpg",
+      "bytes": 1112136,
+      "sha256": "1b3dcce7671eada6f114c4d8c80cbe925798317027ebe863197cd7563158ade0",
+      "claimedSha256": "1b3dcce7671eada6f114c4d8c80cbe925798317027ebe863197cd7563158ade0",
+      "hashMatchesProvider": true,
+      "width": 1356,
+      "height": 1663,
+      "mode": "RGB",
+      "icc": {
+        "status": "NotEmbedded",
+        "bytes": 0,
+        "sha256": null,
+        "interpretation": "NotParsed; profile presence alone does not explain a cast"
+      },
+      "software": "Adobe Photoshop CC 2019 (Macintosh)",
+      "scanWorkflow": "Unknown",
+      "releaseBundling": "NotApproved"
+    },
+    {
+      "id": "GROK-POL-0004:scan:1",
+      "recordId": "GROK-POL-0004",
+      "sourceId": "GROK-POL-0004:source",
+      "localRelativePath": "authorized-originals/GROK-POL-0004_Sgroey_Color600.jpg",
+      "bytes": 106455,
+      "sha256": "57a020216d55e0b1e852010ddaf09b661c753d65a756592aa85cf8ce988b97e5",
+      "claimedSha256": "57a020216d55e0b1e852010ddaf09b661c753d65a756592aa85cf8ce988b97e5",
+      "hashMatchesProvider": true,
+      "width": 1086,
+      "height": 1306,
+      "mode": "RGB",
+      "icc": {
+        "status": "NotEmbedded",
+        "bytes": 0,
+        "sha256": null,
+        "interpretation": "NotParsed; profile presence alone does not explain a cast"
+      },
+      "software": "Unknown",
+      "scanWorkflow": "Unknown",
+      "releaseBundling": "NotApproved"
+    },
+    {
+      "id": "GROK-POL-0005:scan:1",
+      "recordId": "GROK-POL-0005",
+      "sourceId": "GROK-POL-0005:source",
+      "localRelativePath": "authorized-originals/GROK-POL-0005_Pawlowski_Pittsburgh_Impossible.jpg",
+      "bytes": 799355,
+      "sha256": "c08b7ce4572f915f3bc396e74c5e4ce0a67000363c7bd869350a41d19805f3ca",
+      "claimedSha256": "c08b7ce4572f915f3bc396e74c5e4ce0a67000363c7bd869350a41d19805f3ca",
+      "hashMatchesProvider": true,
+      "width": 2106,
+      "height": 2563,
+      "mode": "RGB",
+      "icc": {
+        "status": "BytesRead",
+        "bytes": 3144,
+        "sha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+        "interpretation": "NotParsed; profile presence alone does not explain a cast"
+      },
+      "software": "Aperture 3.2.3",
+      "scanWorkflow": "Unknown",
+      "releaseBundling": "NotApproved"
+    },
+    {
+      "id": "GROK-POL-0006:scan:1",
+      "recordId": "GROK-POL-0006",
+      "sourceId": "GROK-POL-0006:source",
+      "localRelativePath": "authorized-originals/GROK-POL-0006_Pawlowski_CrazyMocha.jpg",
+      "bytes": 1807809,
+      "sha256": "dd0ead680c6b3acb26c910b9b5f91671a775faa38b34147287c532ffd6ce0d02",
+      "claimedSha256": "dd0ead680c6b3acb26c910b9b5f91671a775faa38b34147287c532ffd6ce0d02",
+      "hashMatchesProvider": true,
+      "width": 2220,
+      "height": 1712,
+      "mode": "RGB",
+      "icc": {
+        "status": "NotEmbedded",
+        "bytes": 0,
+        "sha256": null,
+        "interpretation": "NotParsed; profile presence alone does not explain a cast"
+      },
+      "software": "GIMP 2.8.0",
+      "scanWorkflow": "Unknown",
+      "releaseBundling": "NotApproved"
+    },
+    {
+      "id": "GROK-POL-0007:scan:1",
+      "recordId": "GROK-POL-0007",
+      "sourceId": "GROK-POL-0007:source",
+      "localRelativePath": "authorized-originals/GROK-POL-0007_Notch_Sunflower_expired600.jpg",
+      "bytes": 147809,
+      "sha256": "ec8ed61a742be0953a122d44536ff28544be864b8d5a79029159d730f9237b31",
+      "claimedSha256": "ec8ed61a742be0953a122d44536ff28544be864b8d5a79029159d730f9237b31",
+      "hashMatchesProvider": true,
+      "width": 1207,
+      "height": 1248,
+      "mode": "RGB",
+      "icc": {
+        "status": "NotEmbedded",
+        "bytes": 0,
+        "sha256": null,
+        "interpretation": "NotParsed; profile presence alone does not explain a cast"
+      },
+      "software": "Unknown",
+      "scanWorkflow": "Unknown",
+      "releaseBundling": "NotApproved"
+    },
+    {
+      "id": "GROK-POL-0008:scan:1",
+      "recordId": "GROK-POL-0008",
+      "sourceId": "GROK-POL-0008:source",
+      "localRelativePath": "authorized-originals/GROK-POL-0008_hnt6581_expiredTZArtistic.jpg",
+      "bytes": 5161829,
+      "sha256": "33294c94adc455c5af6a604883083a229d40f18fd3fb32e08b893d8ed5ed2c4b",
+      "claimedSha256": "33294c94adc455c5af6a604883083a229d40f18fd3fb32e08b893d8ed5ed2c4b",
+      "hashMatchesProvider": true,
+      "width": 4170,
+      "height": 5051,
+      "mode": "RGB",
+      "icc": {
+        "status": "BytesRead",
+        "bytes": 628,
+        "sha256": "24e1d7a0b59cd6a81755b3ba5027b60fd9630c0ba7f5740abfef508b302cbda2",
+        "interpretation": "NotParsed; profile presence alone does not explain a cast"
+      },
+      "software": "Adobe Photoshop CS6 (Windows)",
+      "scanWorkflow": "Unknown",
+      "releaseBundling": "NotApproved"
+    },
+    {
+      "id": "GROK-POL-0009:scan:1",
+      "recordId": "GROK-POL-0009",
+      "sourceId": "GROK-POL-0009:source",
+      "localRelativePath": "authorized-originals/GROK-POL-0009_DeLorenzo_Type51_expired.jpg",
+      "bytes": 525305,
+      "sha256": "48b0e76469dc9ca5ea652b13a1dfdbc8bbabcaf2c8f1afd482222c7fb5b6dfcd",
+      "claimedSha256": "48b0e76469dc9ca5ea652b13a1dfdbc8bbabcaf2c8f1afd482222c7fb5b6dfcd",
+      "hashMatchesProvider": true,
+      "width": 1200,
+      "height": 1521,
+      "mode": "RGB",
+      "icc": {
+        "status": "BytesRead",
+        "bytes": 3144,
+        "sha256": "2b3aa1645779a9e634744faf9b01e9102b0c9b88fd6deced7934df86b949af7e",
+        "interpretation": "NotParsed; profile presence alone does not explain a cast"
+      },
+      "software": "Adobe Photoshop Lightroom 3.5 (Windows)",
+      "scanWorkflow": "Unknown",
+      "releaseBundling": "NotApproved"
+    },
+    {
+      "id": "GROK-POL-0010:scan:1",
+      "recordId": "GROK-POL-0010",
+      "sourceId": "GROK-POL-0010:source",
+      "localRelativePath": "authorized-originals/GROK-POL-0010_Fisher_Selma_unknownfilm.jpg",
+      "bytes": 159180,
+      "sha256": "3c60af704c293e8a044fc436dcca13f48bc884ce6d6769f03d3c0d7ffe819e2d",
+      "claimedSha256": "3c60af704c293e8a044fc436dcca13f48bc884ce6d6769f03d3c0d7ffe819e2d",
+      "hashMatchesProvider": true,
+      "width": 906,
+      "height": 927,
+      "mode": "RGB",
+      "icc": {
+        "status": "NotEmbedded",
+        "bytes": 0,
+        "sha256": null,
+        "interpretation": "NotParsed; profile presence alone does not explain a cast"
+      },
+      "software": "Unknown",
+      "scanWorkflow": "Unknown",
+      "releaseBundling": "NotApproved"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "GROK-POL-0001:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0001",
+      "right": "SG-NICKPAGE",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0002:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0002",
+      "right": "SG-NICKPAGE",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0003:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0003",
+      "right": "SG-NICKPAGE",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0004:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0004",
+      "right": "SG-SGROEY",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0005:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0005",
+      "right": "SG-PAWLOWSKI",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0006:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0006",
+      "right": "SG-PAWLOWSKI",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0007:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0007",
+      "right": "SG-NOTCH",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0008:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0008",
+      "right": "SG-HNT6581",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0009:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0009",
+      "right": "SG-DELORENZO",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0010:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0010",
+      "right": "SG-FISHER",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0011:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0011",
+      "right": "SG-POLAROID-OFFICIAL",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0012:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0012",
+      "right": "SG-POLAROID-OFFICIAL",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0013:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0013",
+      "right": "SG-125PX-DATASHEETS",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0014:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0014",
+      "right": "SG-POLAROID-PATENTS",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0015:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0015",
+      "right": "SG-ANALOGCAFE",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0016:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0016",
+      "right": "SG-ANALOGCAFE",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0017:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0017",
+      "right": "SG-POLAROID-OFFICIAL",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0018:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0018",
+      "right": "SG-REDDIT-GYPANT",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0019:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0019",
+      "right": "SG-COCKROFT",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0020:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0020",
+      "right": "SG-BLUEMOON",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0021:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0021",
+      "right": "SG-LUYCKX",
+      "verifiedScenePair": false
+    },
+    {
+      "id": "GROK-POL-0022:source-group",
+      "kind": "SourceGroupOnly",
+      "left": "GROK-POL-0022",
+      "right": "SG-AIC-20x24",
+      "verifiedScenePair": false
+    }
+  ],
+  "observations": [
+    {
+      "id": "GROK-POL-0001:observation",
+      "recordId": "GROK-POL-0001",
+      "claim": "整体低反差、阴影抬升偏蓝紫、高光偏暖粉/奶黄、饱和度中低（image-observed，仅限本扫描）",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0002:observation",
+      "recordId": "GROK-POL-0002",
+      "claim": "整体低反差、阴影抬升偏蓝紫、高光偏暖粉/奶黄、饱和度中低（image-observed，仅限本扫描）",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0003:observation",
+      "recordId": "GROK-POL-0003",
+      "claim": "整体低反差、阴影抬升偏蓝紫、高光偏暖粉/奶黄、饱和度中低（image-observed，仅限本扫描）",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0004:observation",
+      "recordId": "GROK-POL-0004",
+      "claim": "暗部厚重、偏暖黄绿、高光偏洋红（image-observed）",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0005:observation",
+      "recordId": "GROK-POL-0005",
+      "claim": "强暖橙偏色、阴影棕褐、低饱和蓝（image-observed）",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0006:observation",
+      "recordId": "GROK-POL-0006",
+      "claim": "中性黑白、高光吊灯溢出（image-observed）",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0007:observation",
+      "recordId": "GROK-POL-0007",
+      "claim": "高饱和暖黄、天空青蓝（image-observed）",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0008:observation",
+      "recordId": "GROK-POL-0008",
+      "claim": "整体黄绿偏色、对比低（image-observed）",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0009:observation",
+      "recordId": "GROK-POL-0009",
+      "claim": "严重斑点/雾化（image-observed）",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0010:observation",
+      "recordId": "GROK-POL-0010",
+      "claim": "低饱和、暖灰",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0011:observation",
+      "recordId": "GROK-POL-0011",
+      "claim": "UNKNOWN",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0012:observation",
+      "recordId": "GROK-POL-0012",
+      "claim": "UNKNOWN",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0013:observation",
+      "recordId": "GROK-POL-0013",
+      "claim": "UNKNOWN",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0014:observation",
+      "recordId": "GROK-POL-0014",
+      "claim": "UNKNOWN",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0015:observation",
+      "recordId": "GROK-POL-0015",
+      "claim": "UNKNOWN",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0016:observation",
+      "recordId": "GROK-POL-0016",
+      "claim": "UNKNOWN",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0017:observation",
+      "recordId": "GROK-POL-0017",
+      "claim": "UNKNOWN",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0018:observation",
+      "recordId": "GROK-POL-0018",
+      "claim": "UNKNOWN",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0019:observation",
+      "recordId": "GROK-POL-0019",
+      "claim": "UNKNOWN",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0020:observation",
+      "recordId": "GROK-POL-0020",
+      "claim": "UNKNOWN",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0021:observation",
+      "recordId": "GROK-POL-0021",
+      "claim": "UNKNOWN",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    },
+    {
+      "id": "GROK-POL-0022:observation",
+      "recordId": "GROK-POL-0022",
+      "claim": "UNKNOWN",
+      "authority": "ProviderObservationUnverified",
+      "quantitativeFitAllowed": false,
+      "contraryEvidence": "Unknown; uncontrolled exposure, scan, postprocessing and aging"
+    }
+  ],
+  "permissions": [
+    {
+      "recordId": "GROK-POL-0001",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "providerClaim": "是（需署名 Nick Page, CC BY 2.0）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0002",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "providerClaim": "是（需署名 Nick Page, CC BY 2.0）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0003",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "providerClaim": "是（需署名 Nick Page, CC BY 2.0）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0004",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "providerClaim": "是（CC BY-SA 4.0，署名+相同方式共享）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0005",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "providerClaim": "是（署名）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0006",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "providerClaim": "是（署名）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0007",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "providerClaim": "是（署名）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0008",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "providerClaim": "是（署名）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0009",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "providerClaim": "是（署名）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0010",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "providerClaim": "是（BY-SA）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0011",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "UNKNOWN",
+      "providerClaim": "否/未知（公开≠可再分发）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0012",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "UNKNOWN",
+      "providerClaim": "否/未知（公开≠可再分发）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0013",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "UNKNOWN",
+      "providerClaim": "否/未知（公开≠可再分发）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0014",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "专利文本公有",
+      "providerClaim": "否/未知（公开≠可再分发）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0015",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "未声明开放许可；曲线 PDF 需登录（未绕过）",
+      "providerClaim": "否/未知（公开≠可再分发）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0016",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "UNKNOWN",
+      "providerClaim": "否/未知（公开≠可再分发）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0017",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "UNKNOWN",
+      "providerClaim": "否/未知（公开≠可再分发）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0018",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "UNKNOWN",
+      "providerClaim": "否/未知（公开≠可再分发）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0019",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "UNKNOWN",
+      "providerClaim": "否/未知（公开≠可再分发）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0020",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "UNKNOWN",
+      "providerClaim": "否/未知（公开≠可再分发）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0021",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "UNKNOWN",
+      "providerClaim": "否/未知（公开≠可再分发）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    },
+    {
+      "recordId": "GROK-POL-0022",
+      "status": "Unknown",
+      "imageRedistribution": "Unknown",
+      "codeLicense": "NotApplicableToImage",
+      "claimedLicenseUrl": "见期刊页",
+      "providerClaim": "否/未知（公开≠可再分发）",
+      "reason": "License claim retained; source/license scope not independently verified; unknown is neither denied nor allowed"
+    }
+  ],
+  "gaps": [
+    "MUSE independent samples.csv/samples.json/ENGINE_HANDOFF.md not found in scoped local search; not imported from GROK archive",
+    "User's 41 original-record expectation is not an observed merged count; counts above reflect actual received providers only"
+  ],
+  "duplicates": [],
+  "counts": {
+    "rawRecords": 22,
+    "imageRecords": 10,
+    "webOrLiteratureRecords": 12,
+    "downloadedImages": 10,
+    "uniqueImageBytes": 10,
+    "exactUniqueSourceUrls": 22,
+    "verifiedScenePairs": 0
+  }
+}
