@@ -1,6 +1,6 @@
 # 正常推送记录
 
-日期：2026-10-16，Asia/Shanghai。
+日期：2026-10-16，Europe/Berlin。
 
 - 交付分支：feature/kitao-photo-engine-home-20261016。
 - 已正常执行git push -u origin feature/kitao-photo-engine-home-20261016，新建同名远端分支并设置跟踪。
