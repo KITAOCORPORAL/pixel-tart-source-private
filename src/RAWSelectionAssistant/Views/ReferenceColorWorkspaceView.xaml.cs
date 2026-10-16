@@ -518,11 +518,13 @@ public partial class ReferenceColorWorkspaceView : UserControl
         EditRailButton.Visibility = ContextRailButton.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
         CentralAnalysis.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
         ToneZonesExpander.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
-        // Header actions must never be measured in an unbounded Auto column.
-        var headerWrap = true;
+        // Bound the Auto-column actions explicitly so WrapPanel can wrap without
+        // sacrificing a title row in medium/wide studios. Narrow studios use both columns.
+        var headerWrap = width < 1050;
+        HeaderActions.MaxWidth = Math.Max(1, width - (headerWrap ? 16 : 220));
         Grid.SetRow(HeaderActions, headerWrap ? 1 : 0); Grid.SetColumn(HeaderActions, headerWrap ? 0 : 1);
         Grid.SetColumnSpan(HeaderActions, headerWrap ? 2 : 1); Grid.SetColumnSpan(SourceBars, headerWrap ? 2 : 1);
-        HeaderActions.Margin = new Thickness(0); HeaderActions.HorizontalAlignment = HorizontalAlignment.Stretch;
+        HeaderActions.Margin = new Thickness(0); HeaderActions.HorizontalAlignment = headerWrap ? HorizontalAlignment.Stretch : HorizontalAlignment.Right;
         if (ActualHeight is > 0 and < 530 && !_wasLowWindow) FilmstripExpander.IsExpanded = false;
         _wasLowWindow = ActualHeight is > 0 and < 530;
         UpdateAnalysisSpace();
