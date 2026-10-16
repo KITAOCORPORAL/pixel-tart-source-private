@@ -1,0 +1,7 @@
+# 正常推送与独立核验
+
+交付主体LOCAL_HEAD=9062f680e74dfdb44e7de232a7e09656b51fe8b0，独立git ls-remote查询REMOTE_HEAD=9062f680e74dfdb44e7de232a7e09656b51fe8b0，相同。分支feature/kitao-photo-engine-followup-20261016，正常git push -u已成功，无强推、无合并main。原基准分支未改。
+
+本文件是尾部记录，另正常提交推送后在最终回复报告最后LOCAL_HEAD/REMOTE_HEAD；文件不嵌入自身提交SHA，避免自引用。交付文件清单不含本尾部推送记录和自身。
+
+发布冻结源码52d2f3dbedbddcdd1314773fa331099d5c4a2e10不变；本文件及后续文档HEAD不当作Release构建身份。原EXE未启动，BLOCKED_DIAGNOSTIC_BUILD和所有NOT_RUN保持。
