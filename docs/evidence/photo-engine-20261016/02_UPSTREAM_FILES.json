@@ -1,0 +1,44 @@
+[
+  {
+    "name": "rawspeed-license",
+    "url": "https://raw.githubusercontent.com/darktable-org/rawspeed/0c16fee7772594e98897bded01fc31bc3409b4cb/LICENSE",
+    "status": 200,
+    "sha256": "592987e8510228d546540b84a22444bde98e48d03078d3b2eefcd889bec5ce8c",
+    "bytes": 26521
+  },
+  {
+    "name": "rawspeed-parser",
+    "url": "https://raw.githubusercontent.com/darktable-org/rawspeed/0c16fee7772594e98897bded01fc31bc3409b4cb/src/librawspeed/parsers/RawParser.cpp",
+    "status": 200,
+    "sha256": "cdd7396dd3578eece55d678ff8b43887e972d9827b1411088280388504f7c3bf",
+    "bytes": 3295
+  },
+  {
+    "name": "rawspeed-raf",
+    "url": "https://raw.githubusercontent.com/darktable-org/rawspeed/0c16fee7772594e98897bded01fc31bc3409b4cb/src/librawspeed/decoders/RafDecoder.cpp",
+    "status": 200,
+    "sha256": "6cf321e37464f78b14193a7bd95dc6f6ce03d46ac8568e36353975a52081f88a",
+    "bytes": 15255
+  },
+  {
+    "name": "rawspeed-cr3",
+    "url": "https://raw.githubusercontent.com/darktable-org/rawspeed/0c16fee7772594e98897bded01fc31bc3409b4cb/src/librawspeed/decoders/Cr3Decoder.cpp",
+    "status": 404,
+    "sha256": "d5558cd419c8d46bdc958064cb97f963d1ea793866414c025906ec15033512ed",
+    "bytes": 14
+  },
+  {
+    "name": "opendrt-readme",
+    "url": "https://raw.githubusercontent.com/jedypod/open-display-transform/af683323e2a8a63501f02c0a724ec538e3228ad0/README.md",
+    "status": 200,
+    "sha256": "8e2305139d3ffc2bc1dcdb33ee51f70b11e5709e46f5988a71dec733b9ae3eec",
+    "bytes": 1475
+  },
+  {
+    "name": "opendrt-license",
+    "url": "https://raw.githubusercontent.com/jedypod/open-display-transform/af683323e2a8a63501f02c0a724ec538e3228ad0/LICENSE",
+    "status": 200,
+    "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "bytes": 35149
+  }
+]

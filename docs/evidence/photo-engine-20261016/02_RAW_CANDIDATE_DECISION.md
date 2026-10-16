@@ -1,0 +1,9 @@
+# RAW候选判定（研究工具证实，不是产品支持）
+
+本轮三份原件hash前后一致，候选0.22.2 gamma1/1、WBcamera、autoWBoff/no_auto_bright1、outputProPhoto4、user_flip0、AHD3，全尺寸三份实际成功；Sonycallback100ms CANCELLED，未输出；截断/未知格式返回稳定OpenFile阶段拒绝，无embeddedJPEG回退。原生RAIIclose后10sWS逐点日志保留，非产品UI或recipe释放证明。candidateVersion PhotoRaw0222Research1 与旧decoder0.21.1区分，未写旧recipe或改几何。
+
+Sonycolor4_image是sony_ycbcr_load_raw生成的多通道缓冲，不能称Bayer线性传感器；候选RGB16线性ProPhoto是已WB/矩阵/去马赛克的渲染域，且已量化/可能裁切，不可还原传感器。黑位/WB后矩阵前像素UNAVAILABLE。matrix实际来源尚未hook证明，字段日志不代替来源。Compression变体仅decoder/metadata观测，未独立解析部分UNKNOWN。Fuji原5184坐标表与0.22.2active5178/top6版本差保留，未后裁图。
+
+RawSpeed固定源码已读，Windows构建/实际解码NOT_RUN，本轮不能宣称三个原件第二独立decoder通过。RawTherapee defaultsharedLibRaw与内部dcraw证据继承且本轮命令单列重跑；Sony内部拒绝必须保留。候选依赖原officialDLLhash/header/source固定，Zig仅原创wrapper；精确Windows重建对应、LGPL/CDDL选择及提供义务、cleanVM、完整产品preview/reopen/export/gate未完成 => NOT_ADMITTED。DLL不入产品Release，不开普通入口；旧FileUnsupported继续稳定存在。
+
+CalibrationEligible=false；照片专用，不开发视频/Log/FFmpeg/BRAW。

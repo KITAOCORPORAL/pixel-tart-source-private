@@ -1,0 +1,86 @@
+[
+  {
+    "file": "DSC09916.ARW",
+    "sourceSha256": "6f596bb234ee5de206c66594bc84205349c363fd6a89ae188ff76dab7c5e53b9",
+    "command": [
+      "E:\\Kitao-Worktrees\\kitao-photo-engine-candidate-20261016\\artifacts\\photo-engine\\raw_candidate.exe",
+      "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\DSC09916.ARW",
+      "E:\\Kitao-Worktrees\\kitao-photo-engine-candidate-20261016\\artifacts\\photo-engine\\raw-runs\\DSC09916.ARW.linear-prophoto.tif",
+      "4",
+      "0"
+    ],
+    "code": 0,
+    "milliseconds": 10720.780399991781,
+    "stdout": "{\"stage\":\"container\",\"version\":\"0.22.2-Release\",\"rawWidth\":5120,\"rawHeight\":3584,\"width\":4624,\"height\":3080,\"top\":0,\"left\":0,\"black\":512,\"white\":32767,\"cblack\":[0,0,0,0],\"wb\":[2634,1024,1847,1024],\"preMul\":[2.44781637,0.931927919,1.29336596,0],\"rgbCam\":[1.63606179,-0.44861874,-0.187443003,0,-0.115164764,1.48897076,-0.37380603,0,-0.00474022795,-0.323601246,1.32834148,0],\"rawAvailable\":false}\n{\"stage\":\"unpack-before-black\",\"version\":\"0.22.2-Release\",\"rawWidth\":5120,\"rawHeight\":3584,\"width\":4624,\"height\":3080,\"top\":0,\"left\":0,\"black\":1024,\"white\":17536,\"cblack\":[0,0,0,0],\"wb\":[2634,1024,1847,1024],\"preMul\":[2.44781637,0.931927919,1.29336596,0],\"rgbCam\":[1.63606179,-0.44861874,-0.187443003,0,-0.115164764,1.48897076,-0.37380603,0,-0.00474022795,-0.323601246,1.32834148,0],\"rawAvailable\":false}\n{\"stage\":\"processed\",\"version\":\"0.22.2-Release\",\"rawWidth\":5120,\"rawHeight\":3584,\"width\":4624,\"height\":3080,\"top\":0,\"left\":0,\"black\":0,\"white\":14249,\"cblack\":[0,0,0,0],\"wb\":[2634,1024,1847,1024],\"preMul\":[1,1,1,1],\"rgbCam\":[1.63606179,-0.44861874,-0.187443003,0,-0.115164764,1.48897076,-0.37380603,0,-0.00474022795,-0.323601246,1.32834148,0],\"rawAvailable\":false}\n{\"status\":\"RGB16_DECODED\",\"stage\":\"ProcessOrExport\",\"nativeCode\":0,\"candidateVersion\":\"PhotoRaw0222Research1\",\"outputColor\":4,\"gamma\":\"1,1\",\"cameraWB\":true,\"autoBright\":false,\"orientationApplied\":false}\n",
+    "stderr": "MEM stage=baseline ws=4440064 private=1044480\nGEOMETRY raw=5120,3584 active=0,0,4624,3080 flip=5 filters=0 raw_bps=15 inset=264,4,4096,3072\nmodel=Sony ILCE-7M4; decoder=sony_ycbcr_load_raw(); FujiCropModeMetadata=0; FujiGeneration=0; FujiSizeTable=0,0; cblackPattern=0,0,0; rawPitch=0; color3=no; color4=no; gamma=0.45,4.5; noAutoBright=0; userQual=-1; fujiRotate=1\nGEOMETRY raw=5120,3584 active=0,0,4624,3080 flip=5 filters=0 raw_bps=15 inset=264,4,4096,3072\nmodel=Sony ILCE-7M4; decoder=sony_ycbcr_load_raw(); FujiCropModeMetadata=0; FujiGeneration=0; FujiSizeTable=0,0; cblackPattern=0,0,0; rawPitch=40960; color3=no; color4=yes; gamma=0.45,4.5; noAutoBright=0; userQual=-1; fujiRotate=1\nGEOMETRY raw=5120,3584 active=0,0,4624,3080 flip=0 filters=0 raw_bps=15 inset=264,4,4096,3072\nmodel=Sony ILCE-7M4; decoder=sony_ycbcr_load_raw(); FujiCropModeMetadata=0; FujiGeneration=0; FujiSizeTable=0,0; cblackPattern=0,0,0; rawPitch=40960; color3=no; color4=yes; gamma=1,1; noAutoBright=1; userQual=3; fujiRotate=1\nMEM stage=before-close ws=267096064 private=264212480\nMEM stage=after-native-close ws=5947392 private=1908736\nMEM stage=natural-release ws=5947392 private=1908736\nMEM stage=natural-release ws=5947392 private=1908736\nMEM stage=natural-release ws=5947392 private=1908736\nMEM stage=natural-release ws=5947392 private=1908736\nMEM stage=natural-release ws=5947392 private=1908736\nMEM stage=natural-release ws=5947392 private=1908736\nMEM stage=natural-release ws=5947392 private=1908736\nMEM stage=natural-release ws=5947392 private=1908736\nMEM stage=natural-release ws=5947392 private=1908736\nMEM stage=natural-release ws=5947392 private=1908736\n",
+    "sourceUnchanged": true,
+    "outputSha256": "7d8fd2a0b2c66618b2607be3b169df2ecb4ec072fbcd8760a9c7aad27490eaf7"
+  },
+  {
+    "file": "DSCF0347.RAF",
+    "sourceSha256": "52d054ed9a90306db0b7eb5d6c408a2e006532b976ac88ed792692f9f744e865",
+    "command": [
+      "E:\\Kitao-Worktrees\\kitao-photo-engine-candidate-20261016\\artifacts\\photo-engine\\raw_candidate.exe",
+      "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\DSCF0347.RAF",
+      "E:\\Kitao-Worktrees\\kitao-photo-engine-candidate-20261016\\artifacts\\photo-engine\\raw-runs\\DSCF0347.RAF.linear-prophoto.tif",
+      "4",
+      "0"
+    ],
+    "code": 0,
+    "milliseconds": 27717.64180000173,
+    "stdout": "{\"stage\":\"container\",\"version\":\"0.22.2-Release\",\"rawWidth\":7872,\"rawHeight\":5196,\"width\":7752,\"height\":5178,\"top\":6,\"left\":0,\"black\":0,\"white\":16383,\"cblack\":[0,0,0,0],\"wb\":[525,302,585,0],\"preMul\":[2.16274929,0.936545849,1.43349934,0],\"rgbCam\":[1.25604749,-0.0421249792,-0.213922545,0,-0.149639323,1.54978108,-0.400141776,0,0.00458681909,-0.361770719,1.35718393,0],\"rawAvailable\":false}\n{\"stage\":\"unpack-before-black\",\"version\":\"0.22.2-Release\",\"rawWidth\":7872,\"rawHeight\":5196,\"width\":7752,\"height\":5178,\"top\":6,\"left\":0,\"black\":0,\"white\":16383,\"cblack\":[0,0,0,0],\"wb\":[525,302,585,0],\"preMul\":[2.16274929,0.936545849,1.43349934,0],\"rgbCam\":[1.25604749,-0.0421249792,-0.213922545,0,-0.149639323,1.54978108,-0.400141776,0,0.00458681909,-0.361770719,1.35718393,0],\"rawAvailable\":true,\"sensorMin\":0,\"sensorMax\":4744,\"sensorSum\":43334197888,\"samplesIncludingPitch\":40902912}\n{\"stage\":\"processed\",\"version\":\"0.22.2-Release\",\"rawWidth\":7872,\"rawHeight\":5196,\"width\":7752,\"height\":5178,\"top\":6,\"left\":0,\"black\":0,\"white\":15363,\"cblack\":[0,0,0,0],\"wb\":[525,302,585,0],\"preMul\":[1.73841059,1,1.93708611,1],\"rgbCam\":[1.25604749,-0.0421249792,-0.213922545,0,-0.149639323,1.54978108,-0.400141776,0,0.00458681909,-0.361770719,1.35718393,0],\"rawAvailable\":true,\"sensorMin\":0,\"sensorMax\":4744,\"sensorSum\":43334197888,\"samplesIncludingPitch\":40902912}\n{\"status\":\"RGB16_DECODED\",\"stage\":\"ProcessOrExport\",\"nativeCode\":0,\"candidateVersion\":\"PhotoRaw0222Research1\",\"outputColor\":4,\"gamma\":\"1,1\",\"cameraWB\":true,\"autoBright\":false,\"orientationApplied\":false}\n",
+    "stderr": "MEM stage=baseline ws=4136960 private=991232\nGEOMETRY raw=7872,5196 active=0,6,7752,5178 flip=0 filters=9 raw_bps=14 inset=12,24,7728,5149\nmodel=Fujifilm X-T5; decoder=unpacked_load_raw(); FujiCropModeMetadata=0; FujiGeneration=4; FujiSizeTable=7752,5184; cblackPattern=6,6,1020; rawPitch=0; color3=no; color4=no; gamma=0.45,4.5; noAutoBright=0; userQual=-1; fujiRotate=1\nGEOMETRY raw=7872,5196 active=0,6,7752,5178 flip=0 filters=9 raw_bps=14 inset=12,24,7728,5149\nmodel=Fujifilm X-T5; decoder=unpacked_load_raw(); FujiCropModeMetadata=0; FujiGeneration=4; FujiSizeTable=7752,5184; cblackPattern=6,6,1020; rawPitch=15744; color3=no; color4=no; gamma=0.45,4.5; noAutoBright=0; userQual=-1; fujiRotate=1\nGEOMETRY raw=7872,5196 active=0,6,7752,5178 flip=0 filters=9 raw_bps=14 inset=12,24,7728,5149\nmodel=Fujifilm X-T5; decoder=unpacked_load_raw(); FujiCropModeMetadata=0; FujiGeneration=4; FujiSizeTable=7752,5184; cblackPattern=0,0,0; rawPitch=15744; color3=no; color4=no; gamma=1,1; noAutoBright=1; userQual=3; fujiRotate=1\nMEM stage=before-close ws=409219072 private=406949888\nMEM stage=after-native-close ws=5623808 private=1855488\nMEM stage=natural-release ws=5623808 private=1855488\nMEM stage=natural-release ws=5623808 private=1855488\nMEM stage=natural-release ws=5623808 private=1855488\nMEM stage=natural-release ws=5623808 private=1855488\nMEM stage=natural-release ws=5623808 private=1855488\nMEM stage=natural-release ws=5623808 private=1855488\nMEM stage=natural-release ws=5623808 private=1855488\nMEM stage=natural-release ws=5623808 private=1855488\nMEM stage=natural-release ws=5623808 private=1855488\nMEM stage=natural-release ws=5623808 private=1855488\n",
+    "sourceUnchanged": true,
+    "outputSha256": "07162b2e8b976f8f977191044f9735bd41bb6e2fd42217f37c8dd6a552e5e3ea"
+  },
+  {
+    "file": "TNAN8886.CR3",
+    "sourceSha256": "b7d358517db0cd5b5c54215aa089a5a30c79234aef50e9381931128493e33401",
+    "command": [
+      "E:\\Kitao-Worktrees\\kitao-photo-engine-candidate-20261016\\artifacts\\photo-engine\\raw_candidate.exe",
+      "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\TNAN8886.CR3",
+      "E:\\Kitao-Worktrees\\kitao-photo-engine-candidate-20261016\\artifacts\\photo-engine\\raw-runs\\TNAN8886.CR3.linear-prophoto.tif",
+      "4",
+      "0"
+    ],
+    "code": 0,
+    "milliseconds": 12268.317099995329,
+    "stdout": "{\"stage\":\"container\",\"version\":\"0.22.2-Release\",\"rawWidth\":5568,\"rawHeight\":3708,\"width\":5496,\"height\":3670,\"top\":38,\"left\":72,\"black\":0,\"white\":16383,\"cblack\":[0,0,0,0],\"wb\":[1833,1024,1618,1024],\"preMul\":[1.98464215,0.937663794,1.3421849,0],\"rgbCam\":[1.74715269,-0.848595023,0.1014423,0,-0.179429799,1.65529621,-0.475866437,0,0.00177408487,-0.607358456,1.60558438,0],\"rawAvailable\":false}\n{\"stage\":\"unpack-before-black\",\"version\":\"0.22.2-Release\",\"rawWidth\":5568,\"rawHeight\":3708,\"width\":5496,\"height\":3670,\"top\":38,\"left\":72,\"black\":2048,\"white\":16383,\"cblack\":[0,0,0,0],\"wb\":[1833,1024,1618,1024],\"preMul\":[1.98464215,0.937663794,1.3421849,0],\"rgbCam\":[1.74715269,-0.848595023,0.1014423,0,-0.179429799,1.65529621,-0.475866437,0,0.00177408487,-0.607358456,1.60558438,0],\"rawAvailable\":true,\"sensorMin\":1907,\"sensorMax\":4557,\"sensorSum\":47327980258,\"samplesIncludingPitch\":20646144}\n{\"stage\":\"processed\",\"version\":\"0.22.2-Release\",\"rawWidth\":5568,\"rawHeight\":3708,\"width\":5496,\"height\":3670,\"top\":38,\"left\":72,\"black\":0,\"white\":14335,\"cblack\":[0,0,0,0],\"wb\":[1833,1024,1618,1024],\"preMul\":[1.79003906,1,1.58007812,1],\"rgbCam\":[1.74715269,-0.848595023,0.1014423,0,-0.179429799,1.65529621,-0.475866437,0,0.00177408487,-0.607358456,1.60558438,0],\"rawAvailable\":true,\"sensorMin\":1907,\"sensorMax\":4557,\"sensorSum\":47327980258,\"samplesIncludingPitch\":20646144}\n{\"status\":\"RGB16_DECODED\",\"stage\":\"ProcessOrExport\",\"nativeCode\":0,\"candidateVersion\":\"PhotoRaw0222Research1\",\"outputColor\":4,\"gamma\":\"1,1\",\"cameraWB\":true,\"autoBright\":false,\"orientationApplied\":false}\n",
+    "stderr": "MEM stage=baseline ws=4128768 private=983040\nGEOMETRY raw=5568,3708 active=72,38,5496,3670 flip=0 filters=3031741620 raw_bps=14 inset=84,50,5472,3648\nmodel=Canon EOS R6; decoder=crxLoadRaw(); FujiCropModeMetadata=0; FujiGeneration=0; FujiSizeTable=0,0; cblackPattern=0,0,0; rawPitch=0; color3=no; color4=no; gamma=0.45,4.5; noAutoBright=0; userQual=-1; fujiRotate=1\nGEOMETRY raw=5568,3708 active=72,38,5496,3670 flip=0 filters=3031741620 raw_bps=14 inset=84,50,5472,3648\nmodel=Canon EOS R6; decoder=crxLoadRaw(); FujiCropModeMetadata=0; FujiGeneration=0; FujiSizeTable=0,0; cblackPattern=0,0,0; rawPitch=11136; color3=no; color4=no; gamma=0.45,4.5; noAutoBright=0; userQual=-1; fujiRotate=1\nGEOMETRY raw=5568,3708 active=72,38,5496,3670 flip=0 filters=2492765332 raw_bps=14 inset=84,50,5472,3648\nmodel=Canon EOS R6; decoder=crxLoadRaw(); FujiCropModeMetadata=0; FujiGeneration=0; FujiSizeTable=0,0; cblackPattern=0,0,0; rawPitch=11136; color3=no; color4=no; gamma=1,1; noAutoBright=1; userQual=3; fujiRotate=1\nMEM stage=before-close ws=209084416 private=206270464\nMEM stage=after-native-close ws=5681152 private=1986560\nMEM stage=natural-release ws=5681152 private=1986560\nMEM stage=natural-release ws=5681152 private=1986560\nMEM stage=natural-release ws=5681152 private=1986560\nMEM stage=natural-release ws=5681152 private=1986560\nMEM stage=natural-release ws=5681152 private=1986560\nMEM stage=natural-release ws=5681152 private=1986560\nMEM stage=natural-release ws=5681152 private=1986560\nMEM stage=natural-release ws=5681152 private=1986560\nMEM stage=natural-release ws=5681152 private=1986560\nMEM stage=natural-release ws=5681152 private=1986560\n",
+    "sourceUnchanged": true,
+    "outputSha256": "63420b4a66bf2077ed19dec319d8b1d7c17eeddb4389e6502fcdede2a8a9375a"
+  },
+  {
+    "file": "DSC09916.ARW",
+    "operation": "callbackCancel100ms",
+    "command": [
+      "E:\\Kitao-Worktrees\\kitao-photo-engine-candidate-20261016\\artifacts\\photo-engine\\raw_candidate.exe",
+      "D:\\AI AGENT\\PixelTart-TestAssets\\CompanyRAW\\DSC09916.ARW",
+      "E:\\Kitao-Worktrees\\kitao-photo-engine-candidate-20261016\\artifacts\\photo-engine\\raw-runs\\cancel-should-not-exist.tif",
+      "4",
+      "100"
+    ],
+    "code": 3,
+    "stdout": "{\"stage\":\"container\",\"version\":\"0.22.2-Release\",\"rawWidth\":5120,\"rawHeight\":3584,\"width\":4624,\"height\":3080,\"top\":0,\"left\":0,\"black\":512,\"white\":32767,\"cblack\":[0,0,0,0],\"wb\":[2634,1024,1847,1024],\"preMul\":[2.44781637,0.931927919,1.29336596,0],\"rgbCam\":[1.63606179,-0.44861874,-0.187443003,0,-0.115164764,1.48897076,-0.37380603,0,-0.00474022795,-0.323601246,1.32834148,0],\"rawAvailable\":false}\n{\"status\":\"CANCELLED\",\"stage\":\"ProcessOrExport\",\"nativeCode\":-100010,\"candidateVersion\":\"PhotoRaw0222Research1\",\"outputColor\":4,\"gamma\":\"1,1\",\"cameraWB\":true,\"autoBright\":false,\"orientationApplied\":false}\n",
+    "stderr": "MEM stage=baseline ws=4132864 private=991232\nGEOMETRY raw=5120,3584 active=0,0,4624,3080 flip=5 filters=0 raw_bps=15 inset=264,4,4096,3072\nmodel=Sony ILCE-7M4; decoder=sony_ycbcr_load_raw(); FujiCropModeMetadata=0; FujiGeneration=0; FujiSizeTable=0,0; cblackPattern=0,0,0; rawPitch=0; color3=no; color4=no; gamma=0.45,4.5; noAutoBright=0; userQual=-1; fujiRotate=1\nMEM stage=before-close ws=5640192 private=2260992\nMEM stage=after-native-close ws=5595136 private=1843200\nMEM stage=natural-release ws=5595136 private=1843200\nMEM stage=natural-release ws=5595136 private=1843200\nMEM stage=natural-release ws=5595136 private=1843200\nMEM stage=natural-release ws=5595136 private=1843200\nMEM stage=natural-release ws=5595136 private=1843200\nMEM stage=natural-release ws=5595136 private=1843200\nMEM stage=natural-release ws=5595136 private=1843200\nMEM stage=natural-release ws=5595136 private=1843200\nMEM stage=natural-release ws=5595136 private=1843200\nMEM stage=natural-release ws=5595136 private=1843200\n",
+    "outputExists": false
+  },
+  {
+    "file": "truncated.ARW",
+    "operation": "boundaryInvalid",
+    "sha256": "5ed37d1f40a13b1c3174f7d2a9d47f5a53e925c4323098e1f810ab77672a641f",
+    "code": 4,
+    "stdout": "{\"status\":\"REFUSED\",\"stableCode\":\"RAW_OPEN_FAILED\",\"stage\":\"OpenFile\",\"nativeCode\":-100009}\n",
+    "stderr": "MEM stage=baseline ws=4132864 private=987136\n",
+    "outputExists": false
+  },
+  {
+    "file": "unknown.CR3",
+    "operation": "boundaryInvalid",
+    "sha256": "200f5d4bf61595cb25a81c85b7bacfd1b89bf4328edf3ae37790e15a386cbb74",
+    "code": 4,
+    "stdout": "{\"status\":\"REFUSED\",\"stableCode\":\"RAW_OPEN_FAILED\",\"stage\":\"OpenFile\",\"nativeCode\":-100009}\n",
+    "stderr": "MEM stage=baseline ws=4128768 private=978944\n",
+    "outputExists": false
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "code": 0,
+  "stdout": "[\r\n  {\r\n    \"file\": \"DSC09916.ARW\",\r\n    \"operation\": \"fullLinearDecode\",\r\n    \"code\": 0,\r\n    \"output\": \"7d8fd2a0b2c66618b2607be3b169df2ecb4ec072fbcd8760a9c7aad27490eaf7\"\r\n  },\r\n  {\r\n    \"file\": \"DSCF0347.RAF\",\r\n    \"operation\": \"fullLinearDecode\",\r\n    \"code\": 0,\r\n    \"output\": \"07162b2e8b976f8f977191044f9735bd41bb6e2fd42217f37c8dd6a552e5e3ea\"\r\n  },\r\n  {\r\n    \"file\": \"TNAN8886.CR3\",\r\n    \"operation\": \"fullLinearDecode\",\r\n    \"code\": 0,\r\n    \"output\": \"63420b4a66bf2077ed19dec319d8b1d7c17eeddb4389e6502fcdede2a8a9375a\"\r\n  },\r\n  {\r\n    \"file\": \"DSC09916.ARW\",\r\n    \"operation\": \"callbackCancel100ms\",\r\n    \"code\": 3,\r\n    \"output\": null\r\n  },\r\n  {\r\n    \"file\": \"truncated.ARW\",\r\n    \"operation\": \"boundaryInvalid\",\r\n    \"code\": 4,\r\n    \"output\": null\r\n  },\r\n  {\r\n    \"file\": \"unknown.CR3\",\r\n    \"operation\": \"boundaryInvalid\",\r\n    \"code\": 4,\r\n    \"output\": null\r\n  }\r\n]\r\n",
+  "stderr": ""
+}
