@@ -1,6 +1,6 @@
 # Instant V3 candidate admission — OPEN / NOT APPROVED FOR PRODUCTION
 
-Date: 2026-10-16 Asia/Shanghai. Base fe73d02cf85df518c4eaebf4a09f9a5157451eab.
+Date: 2026-10-16 Europe/Berlin. Base fe73d02cf85df518c4eaebf4a09f9a5157451eab.
 Read before implementation: AGENTS.md and docs/color-science/open-source-first/POLICY.md.
 
 ## Scope decision

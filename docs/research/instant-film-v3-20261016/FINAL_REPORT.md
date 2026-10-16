@@ -1,6 +1,6 @@
 # 即时成像 V3：阶段交付，不是产品放行
 
-日期：2026-10-16（Asia/Shanghai）；宿主日志可显示次日亚洲本地时间。分支 `feature/kitao-instant-film-evidence-v3-20261016`，起点 `fe73d02cf85df518c4eaebf4a09f9a5157451eab`，已 fetch 并确认原基准远端未更新。未合并 main、未改旧 Release、未提交原件/图片/数据库/DLL。
+日期：2026-10-16（Europe/Berlin）；宿主日志可显示次日亚洲本地时间。分支 `feature/kitao-instant-film-evidence-v3-20261016`，起点 `fe73d02cf85df518c4eaebf4a09f9a5157451eab`，已 fetch 并确认原基准远端未更新。未合并 main、未改旧 Release、未提交原件/图片/数据库/DLL。
 
 ## 产品已实现
 
