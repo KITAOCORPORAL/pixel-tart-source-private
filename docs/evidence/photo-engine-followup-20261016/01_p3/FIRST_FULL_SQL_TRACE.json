@@ -1,0 +1,997 @@
+{
+  "database": "N:\\pixart\\kitao-photo-engine-followup-20261016\\artifacts\\followup\\01-baseline-full-core\\run-20261017-025618-c1706b69\\000\\temp\\PixelTart-P3CoreTests\\84b9f5b648894534a4479636746f1001\\asset-library.db",
+  "sqlite": "3.53.3",
+  "settings": {
+    "journal_mode": "wal",
+    "synchronous": 2,
+    "cache_size": -2000,
+    "page_size": 4096,
+    "data_version": 2
+  },
+  "AvailableFreeSpace": 995250110464,
+  "DriveFormat": "NTFS",
+  "observations": [
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 19.9425,
+        "PageMs": 34.1455,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 14.7068,
+        "PageMs": 39.8895,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 30.4627,
+        "PageMs": 36.2642,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 28.9703,
+        "PageMs": 38.4431,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 101
+        },
+        "CountMs": 36.393,
+        "PageMs": 52.9145,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 101
+        },
+        "CountMs": 31.5363,
+        "PageMs": 49.8091,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 101
+        },
+        "CountMs": 34.3992,
+        "PageMs": 61.2265,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 101
+        },
+        "CountMs": 23.6684,
+        "PageMs": 45.6132,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 13
+        },
+        "CountMs": 28.1284,
+        "PageMs": 40.1916,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 13
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 13
+        },
+        "CountMs": 31.0519,
+        "PageMs": 43.0197,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 13
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 13
+        },
+        "CountMs": 43.3685,
+        "PageMs": 42.0737,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 13
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 13
+        },
+        "CountMs": 34.8326,
+        "PageMs": 44.5422,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 13
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$folder": "07dde1c3-235b-42aa-aaac-7b82fac5203c",
+          "$p31": 3
+        },
+        "PageParameters": {
+          "$folder": "07dde1c3-235b-42aa-aaac-7b82fac5203c",
+          "$p31": 3,
+          "$limit": 101
+        },
+        "CountMs": 29.1041,
+        "PageMs": 35.9818,
+        "Total": 49
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+          "parameters": {
+            "$folder": "07dde1c3-235b-42aa-aaac-7b82fac5203c",
+            "$p31": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "SEARCH fm EXISTS USING COVERING INDEX sqlite_autoindex_AssetFolderMemberships_1 (AssetId=? AND FolderId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$folder": "07dde1c3-235b-42aa-aaac-7b82fac5203c",
+            "$p31": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "SEARCH fm EXISTS USING COVERING INDEX sqlite_autoindex_AssetFolderMemberships_1 (AssetId=? AND FolderId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 22.3538,
+        "PageMs": 36.2711,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 23.6315,
+        "PageMs": 28.3602,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 23.7847,
+        "PageMs": 22.7485,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 27.4235,
+        "PageMs": 32.0945,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    }
+  ],
+  "cache": "Initial first-screen call labeled cold-process; subsequent same-connection-pool queries warm; OS cache not forcibly evicted",
+  "thresholdMs": 400
+}

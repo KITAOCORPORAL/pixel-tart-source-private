@@ -220,40 +220,60 @@ public sealed partial class SqliteAssetLibraryRepository
         AssetLibraryQueryCursor? cursor,
         CancellationToken cancellationToken)
     {
+        using var totalTiming = AssetLibraryOperationTiming.Measure("query.p3.total");
         var normalization = AssetQueryDocumentCodec.Normalize(query.Document!);
         if (!normalization.IsValid || normalization.Document is null)
             return new([], null, 0, normalization.ErrorMessage);
         var document = normalization.Document;
-        await using var connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
-        var referenceErrors = await ValidateQueryReferencesAsync(connection, document, cancellationToken).ConfigureAwait(false);
+        Microsoft.Data.Sqlite.SqliteConnection connection;
+        using (AssetLibraryOperationTiming.Measure("query.connection-open"))
+            connection = await _database.OpenConnectionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+        await using var ownedConnection = connection;
+        IReadOnlyList<AssetQueryValidationIssue> referenceErrors;
+        using (AssetLibraryOperationTiming.Measure("query.reference-validation"))
+            referenceErrors = await ValidateQueryReferencesAsync(connection, document, cancellationToken).ConfigureAwait(false);
         if (referenceErrors.Count != 0)
             return new([], null, 0, string.Join("；", referenceErrors.Select(error => $"{error.Path}: {error.Message}")));
         var runtimeError = ValidateRuntimeRules(document.RootGroup);
         if (runtimeError is not null) return new([], null, 0, runtimeError);
 
         await using var count = connection.CreateCommand();
-        var countWhere = BuildIndexedWhere(query, count);
-        countWhere += " AND " + CompileP3Node(document.RootGroup, count);
-        count.CommandText = "SELECT COUNT(*) FROM AssetItems a WHERE " + countWhere + ";";
+        using (AssetLibraryOperationTiming.Measure("query.count-sql-generation"))
+        {
+            var countWhere = BuildIndexedWhere(query, count);
+            countWhere += " AND " + CompileP3Node(document.RootGroup, count);
+            count.CommandText = "SELECT COUNT(*) FROM AssetItems a WHERE " + countWhere + ";";
+        }
         var countStart=System.Diagnostics.Stopwatch.GetTimestamp();
-        var total = Convert.ToInt32(await count.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false), CultureInfo.InvariantCulture);
+        int total;
+        using (AssetLibraryOperationTiming.Measure("query.count"))
+            total = Convert.ToInt32(await count.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false), CultureInfo.InvariantCulture);
         var countMs=System.Diagnostics.Stopwatch.GetElapsedTime(countStart).TotalMilliseconds;
 
         await using var page = connection.CreateCommand();
-        var pageWhere = BuildIndexedWhere(query, page);
-        pageWhere += " AND " + CompileP3Node(document.RootGroup, page);
-        if (cursor is not null) pageWhere = AddQueryCursorPredicate(pageWhere, query, cursor, page);
-        page.CommandText = SelectAssetSql + " WHERE " + pageWhere + " ORDER BY " + BuildQueryOrderBy(query) + " LIMIT $limit;";
-        page.Parameters.AddWithValue("$limit", pageSize + 1);
+        using (AssetLibraryOperationTiming.Measure("query.page-sql-generation"))
+        {
+            var pageWhere = BuildIndexedWhere(query, page);
+            pageWhere += " AND " + CompileP3Node(document.RootGroup, page);
+            if (cursor is not null) pageWhere = AddQueryCursorPredicate(pageWhere, query, cursor, page);
+            page.CommandText = SelectAssetSql + " WHERE " + pageWhere + " ORDER BY " + BuildQueryOrderBy(query) + " LIMIT $limit;";
+            page.Parameters.AddWithValue("$limit", pageSize + 1);
+        }
         var pageStart=System.Diagnostics.Stopwatch.GetTimestamp();
         var items = new List<AssetItem>(Math.Min(total, pageSize + 1));
-        await using var reader = await page.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
-        while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) items.Add(ReadAsset(reader));
+        Microsoft.Data.Sqlite.SqliteDataReader reader;
+        using (AssetLibraryOperationTiming.Measure("query.page-execute"))
+            reader = await page.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+        await using var ownedReader = reader;
+        using (AssetLibraryOperationTiming.Measure("query.rows-read-materialize"))
+            while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false)) items.Add(ReadAsset(reader));
         var hasMore = items.Count > pageSize;
         if (hasMore) items.RemoveAt(items.Count - 1);
-        var next = hasMore && items.Count != 0
-            ? await CreateQueryCursorAsync(query, items[^1], cancellationToken).ConfigureAwait(false)
-            : null;
+        string? next;
+        using (AssetLibraryOperationTiming.Measure("query.cursor"))
+            next = hasMore && items.Count != 0
+                ? await CreateQueryCursorAsync(query, items[^1], cancellationToken).ConfigureAwait(false)
+                : null;
         AssetLibraryQueryDiagnostics.Emit(count,page,countMs,System.Diagnostics.Stopwatch.GetElapsedTime(pageStart).TotalMilliseconds,total);
         return new(items, next, total);
     }

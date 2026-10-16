@@ -169,7 +169,8 @@ public sealed class AssetLibraryDatabase
         var directory = Path.GetDirectoryName(DatabasePath);
         if (write && !string.IsNullOrWhiteSpace(directory)) Directory.CreateDirectory(directory);
         var connection = new Microsoft.Data.Sqlite.SqliteConnection(CreateConnectionString(write));
-        await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
+        using (AssetLibraryOperationTiming.Measure("database.open"))
+            await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
         connection.CreateFunction<string, string, bool>("regexp", (pattern, input) =>
         {
             if (string.IsNullOrEmpty(pattern) || input is null) return false;
@@ -194,7 +195,8 @@ public sealed class AssetLibraryDatabase
         });
         await using var pragma = connection.CreateCommand();
         pragma.CommandText = "PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000; PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL;";
-        await pragma.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+        using (AssetLibraryOperationTiming.Measure("database.pragmas"))
+            await pragma.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
         return connection;
     }
 

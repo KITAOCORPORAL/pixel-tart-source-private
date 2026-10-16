@@ -1,0 +1,2955 @@
+{
+  "database": "N:\\pixart\\kitao-photo-engine-followup-20261016\\artifacts\\followup\\01-instrumented-full-core\\run-20261017-030039-73f38a67\\000\\temp\\PixelTart-P3CoreTests\\b63b2a6499554e7d9c62c9e283958527\\asset-library.db",
+  "sqlite": "3.53.3",
+  "settings": {
+    "journal_mode": "wal",
+    "synchronous": 2,
+    "cache_size": -2000,
+    "page_size": 4096,
+    "data_version": 3
+  },
+  "AvailableFreeSpace": 995195502592,
+  "DriveFormat": "NTFS",
+  "observations": [
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 27.667,
+        "PageMs": 33.9163,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 16.2539,
+        "PageMs": 32.0008,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 20.5361,
+        "PageMs": 24.9465,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 23.2886,
+        "PageMs": 30.7069,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 101
+        },
+        "CountMs": 29.4751,
+        "PageMs": 36.4189,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 101
+        },
+        "CountMs": 36.1323,
+        "PageMs": 43.7159,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 101
+        },
+        "CountMs": 32.1238,
+        "PageMs": 50.637,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 101
+        },
+        "CountMs": 37.0011,
+        "PageMs": 54.1623,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36)));",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 13
+        },
+        "CountMs": 46.8291,
+        "PageMs": 42.8594,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 13
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 13
+        },
+        "CountMs": 46.4682,
+        "PageMs": 57.169,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 13
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 13
+        },
+        "CountMs": 36.2033,
+        "PageMs": 45.8913,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 13
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600
+        },
+        "PageParameters": {
+          "$p30": "Image",
+          "$p31": 0,
+          "$p32": 2,
+          "$p33": "%batch%",
+          "$p34": "Landscape",
+          "$p35": 1000,
+          "$p36": 600,
+          "$limit": 13
+        },
+        "CountMs": 45.4553,
+        "PageMs": 40.3519,
+        "Total": 5000
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1);",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND ((a.MediaType=$p30 COLLATE NOCASE AND a.FileSize\u003E$p31 AND a.Rating\u003E=$p32 AND NOT (a.IsMissing=1) AND a.Comment LIKE $p33 ESCAPE \u0027\\\u0027 COLLATE NOCASE AND (a.Orientation=$p34 COLLATE NOCASE OR (a.Width\u003E=$p35 AND a.Height\u003E=$p36))) AND 1=1) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": "Image",
+            "$p31": 0,
+            "$p32": 2,
+            "$p33": "%batch%",
+            "$p34": "Landscape",
+            "$p35": 1000,
+            "$p36": 600,
+            "$limit": 13
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$folder": "c92cfa11-e0ff-4141-baf7-85a0823dcbc1",
+          "$p31": 3
+        },
+        "PageParameters": {
+          "$folder": "c92cfa11-e0ff-4141-baf7-85a0823dcbc1",
+          "$p31": 3,
+          "$limit": 101
+        },
+        "CountMs": 25.137,
+        "PageMs": 30.2887,
+        "Total": 49
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31);",
+          "parameters": {
+            "$folder": "c92cfa11-e0ff-4141-baf7-85a0823dcbc1",
+            "$p31": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "SEARCH fm EXISTS USING COVERING INDEX sqlite_autoindex_AssetFolderMemberships_1 (AssetId=? AND FolderId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND EXISTS(SELECT 1 FROM AssetFolderMemberships fm WHERE fm.AssetId=a.AssetId AND fm.FolderId=$folder) AND (a.Rating\u003E=$p31) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$folder": "c92cfa11-e0ff-4141-baf7-85a0823dcbc1",
+            "$p31": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "SEARCH fm EXISTS USING COVERING INDEX sqlite_autoindex_AssetFolderMemberships_1 (AssetId=? AND FolderId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 23.7757,
+        "PageMs": 40.2103,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 15.3921,
+        "PageMs": 33.008,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 23.5798,
+        "PageMs": 36.4295,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    },
+    {
+      "query": {
+        "CountSql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+        "PageSql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+        "CountParameters": {
+          "$p30": 3
+        },
+        "PageParameters": {
+          "$p30": 3,
+          "$limit": 101
+        },
+        "CountMs": 25.2044,
+        "PageMs": 36.4809,
+        "Total": 4999
+      },
+      "explanations": [
+        {
+          "sql": "SELECT COUNT(*) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30);",
+          "parameters": {
+            "$p30": 3
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)"
+          ]
+        },
+        {
+          "sql": "SELECT a.AssetId,a.SourcePath,a.DisplayName,a.Extension,a.MediaType,a.FileSize,a.ContentHash,a.Width,a.Height,a.Orientation,a.CaptureTime,a.AddedAt,a.ModifiedAt,a.Rating,a.Comment,a.IsMissing,a.IsArchived,a.ImportMode,a.ManagedCopyPath,COALESCE((SELECT pm.Color FROM AssetPresentationMetadata pm WHERE pm.AssetId=a.AssetId),\u0027\u0027),COALESCE((SELECT v.Revision FROM PhotographerAnnotationVersions v WHERE v.AssetId=a.AssetId),0) FROM AssetItems a WHERE a.IsArchived=0 AND NOT EXISTS(SELECT 1 FROM AssetTrashEntries trash WHERE trash.AssetId=a.AssetId) AND (a.Rating\u003E=$p30) ORDER BY CASE WHEN a.AddedAt IS NULL THEN 1 ELSE 0 END ASC,a.AddedAt DESC,a.AssetId ASC LIMIT $limit;",
+          "parameters": {
+            "$p30": 3,
+            "$limit": 101
+          },
+          "rows": [
+            "SEARCH a USING INDEX IX_AssetItems_Rating (Rating\u003E?)",
+            "CORRELATED SCALAR SUBQUERY 3",
+            "SEARCH trash USING COVERING INDEX sqlite_autoindex_AssetTrashEntries_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 1",
+            "SEARCH pm USING INDEX sqlite_autoindex_AssetPresentationMetadata_1 (AssetId=?)",
+            "CORRELATED SCALAR SUBQUERY 2",
+            "SEARCH v USING INDEX sqlite_autoindex_PhotographerAnnotationVersions_1 (AssetId=?)",
+            "USE TEMP B-TREE FOR ORDER BY"
+          ]
+        }
+      ]
+    }
+  ],
+  "phases": [
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.1911,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0466,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0033,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0175,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0024,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0208,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0016,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0174,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0015,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.016,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0019,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0118,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0037,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0021,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0218,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 35.7812,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0012,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0017,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0254,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 24.8026,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0005,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0017,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0139,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 23.8788,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0013,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0027,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0212,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 33.209,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0026,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0204,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0019,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0129,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0023,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0164,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0019,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0181,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0013,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0545,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0014,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0138,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0414,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0056,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0159,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 27.6654,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.038,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 33.057,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 0.7011,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.1513,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 62.9602,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 63.0253,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0026,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0386,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0043,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0244,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.1269,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0052,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0251,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 16.2509,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.0838,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 30.5489,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 1.2793,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.1644,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 49.0704,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 49.1189,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0012,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0299,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0021,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0195,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0606,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0036,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0182,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 20.5346,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.032,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 23.6491,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 1.1033,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.1857,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 46.2597,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 46.2949,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0009,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0218,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0014,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0131,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0335,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0043,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0166,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 23.2869,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.0275,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 29.3806,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 1.1249,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.1952,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 54.9466,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 54.9751,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0014,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0531,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0018,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0194,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.056,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0074,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0222,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 29.4739,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.038,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 35.3563,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 0.5381,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.5168,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 66.4607,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 66.5198,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0011,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0377,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0033,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0182,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0727,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0066,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0187,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 36.1295,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.0215,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 42.9741,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 0.5265,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.2102,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 80.8618,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 80.906,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0009,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0465,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0021,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0172,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0512,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0077,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0208,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 32.1225,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.0323,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 49.7706,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 0.5459,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.3146,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 84.3596,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 84.4114,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.001,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.046,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0015,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0152,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0461,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0073,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0192,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 36.9979,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.1023,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 45.2957,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 8.5382,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.3199,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 92.0048,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 92.0561,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0029,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0161,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0018,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0116,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0008,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0023,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0164,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0452,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.002,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0193,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0575,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0067,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0266,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 46.8269,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.0472,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 42.0364,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 0.3752,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.4395,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 91.2969,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 91.8439,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0006,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0018,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0213,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0446,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0017,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0223,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0564,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0076,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0296,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 46.4666,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.0339,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 56.6904,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 0.1721,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.2956,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 104.1467,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 104.8458,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0008,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0043,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0161,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0235,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0019,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0146,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.044,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0063,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0214,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 36.2016,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.0692,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 45.5091,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 0.1465,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.2294,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 82.6798,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 83.1762,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0007,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0017,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0135,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0136,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0011,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.009,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0284,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0061,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0172,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 45.4529,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.0963,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 39.7402,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 0.2295,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.373,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 86.2891,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 86.6159,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0047,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0201,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0029,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0208,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0685,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.004,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0196,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 25.1347,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.047,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 29.6666,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 0.615,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.0003,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 56.6452,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 56.677,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0018,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0686,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0029,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0197,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0661,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0043,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0205,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 23.7735,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.0391,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 39.4728,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 0.5666,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.164,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 65.1901,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 65.2653,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0009,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0218,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0023,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0153,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0629,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0039,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0189,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 15.3903,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.0499,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 32.1107,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 0.6958,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.194,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 49.7149,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 49.7419,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0009,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0224,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0023,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0167,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0476,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0028,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0153,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 23.5783,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.0325,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 35.3575,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 0.9415,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.1252,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 61.0955,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 61.1233,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.initialize",
+      "ElapsedMs": 0.0008,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.document-normalization",
+      "ElapsedMs": 0.0222,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0023,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0188,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.connection-open",
+      "ElapsedMs": 0.0578,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.reference-validation",
+      "ElapsedMs": 0.0032,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count-sql-generation",
+      "ElapsedMs": 0.0145,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.count",
+      "ElapsedMs": 25.2016,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-sql-generation",
+      "ElapsedMs": 0.0645,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.page-execute",
+      "ElapsedMs": 34.0482,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.rows-read-materialize",
+      "ElapsedMs": 2.2513,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.cursor",
+      "ElapsedMs": 0.1749,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.p3.total",
+      "ElapsedMs": 63.1708,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "query.public-total",
+      "ElapsedMs": 63.1971,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.003,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0202,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0025,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0217,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.selection-table",
+      "ElapsedMs": 3.7692,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.before-state",
+      "ElapsedMs": 2.2664,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.scalar-writes",
+      "ElapsedMs": 27.9029,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.membership-writes",
+      "ElapsedMs": 0.9005,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.after-state",
+      "ElapsedMs": 1.1955,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "repository.preview",
+      "ElapsedMs": 46.9688,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0049,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 25.1824,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.selection-table",
+      "ElapsedMs": 3.8789,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.before-state",
+      "ElapsedMs": 2.0846,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.scalar-writes",
+      "ElapsedMs": 25.9884,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.membership-writes",
+      "ElapsedMs": 0.9367,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.after-state",
+      "ElapsedMs": 1.1763,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.journal",
+      "ElapsedMs": 5.0321,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.commit",
+      "ElapsedMs": 0.5374,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "repository.apply",
+      "ElapsedMs": 65.7617,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0036,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0177,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0023,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0156,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.selection-table",
+      "ElapsedMs": 5.3456,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.before-state",
+      "ElapsedMs": 2.6336,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.scalar-writes",
+      "ElapsedMs": 93.4933,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.membership-writes",
+      "ElapsedMs": 13.6687,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.after-state",
+      "ElapsedMs": 3.4333,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "repository.preview",
+      "ElapsedMs": 121.4949,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.open",
+      "ElapsedMs": 0.0031,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "database.pragmas",
+      "ElapsedMs": 0.0174,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.selection-table",
+      "ElapsedMs": 5.5359,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.before-state",
+      "ElapsedMs": 10.4557,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.scalar-writes",
+      "ElapsedMs": 79.7491,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.membership-writes",
+      "ElapsedMs": 8.7886,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.after-state",
+      "ElapsedMs": 4.4163,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.journal",
+      "ElapsedMs": 11.1405,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "batch.commit",
+      "ElapsedMs": 2.0507,
+      "StartThread": 17,
+      "EndThread": 17
+    },
+    {
+      "Phase": "repository.apply",
+      "ElapsedMs": 123.9896,
+      "StartThread": 17,
+      "EndThread": 17
+    }
+  ],
+  "cache": "Initial first-screen call labeled cold-process; subsequent same-connection-pool queries warm; OS cache not forcibly evicted",
+  "thresholdMs": 400
+}

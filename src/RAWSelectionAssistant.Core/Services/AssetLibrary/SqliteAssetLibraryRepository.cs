@@ -232,7 +232,9 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
 
     public async Task<AssetLibraryPage> QueryAsync(AssetLibraryQuery query, CancellationToken cancellationToken = default)
     {
-        await InitializeAsync(cancellationToken).ConfigureAwait(false);
+        using var totalTiming = AssetLibraryOperationTiming.Measure("query.public-total");
+        using (AssetLibraryOperationTiming.Measure("query.initialize"))
+            await InitializeAsync(cancellationToken).ConfigureAwait(false);
         if (query.SmartFolderId is Guid smartFolderId &&
             (query.Document is null || query.Document.Scope == AssetQueryScope.Current))
         {
@@ -256,6 +258,7 @@ public sealed partial class SqliteAssetLibraryRepository : IAssetLibraryReposito
         }
         if (query.Document is not null)
         {
+            using var normalizeTiming = AssetLibraryOperationTiming.Measure("query.document-normalization");
             var normalized = AssetQueryDocumentCodec.Normalize(query.Document);
             if (!normalized.IsValid || normalized.Document is null)
                 return new([], null, 0, normalized.ErrorMessage);

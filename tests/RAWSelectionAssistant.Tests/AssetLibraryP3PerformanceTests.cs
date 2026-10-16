@@ -24,6 +24,8 @@ public sealed class AssetLibraryP3PerformanceTests
         await using var setup = await AssetLibraryP3TestSetup.CreateAsync();
         var trace=new List<RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryQueryDiagnostics.Query>();
         using var capture=RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryQueryDiagnostics.Capture(trace.Add);
+        var phases = new System.Collections.Concurrent.ConcurrentQueue<RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryOperationTiming.Sample>();
+        using var phaseCapture = RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryOperationTiming.Capture(phases.Enqueue);
         try{
         var now = new DateTimeOffset(2026, 9, 2, 0, 0, 0, TimeSpan.Zero);
         var seeds = Enumerable.Range(0, 10_000)
@@ -119,7 +121,7 @@ public sealed class AssetLibraryP3PerformanceTests
                 await using var connection=new Microsoft.Data.Sqlite.SqliteConnection("Data Source="+setup.DatabasePath);await connection.OpenAsync();
                 foreach(var q in trace){var explanations=new List<object>();foreach(var (sql,parameters) in new[]{(q.CountSql,q.CountParameters),(q.PageSql,q.PageParameters)}){await using var command=connection.CreateCommand();command.CommandText="EXPLAIN QUERY PLAN "+sql;foreach(var pair in parameters)command.Parameters.AddWithValue(pair.Key,pair.Value??DBNull.Value);var rows=new List<string>();await using var reader=await command.ExecuteReaderAsync();while(await reader.ReadAsync())rows.Add(reader.GetString(3));explanations.Add(new{sql,parameters,rows});}plans.Add(new{query=q,explanations});}
                 var settings=new Dictionary<string,object?>();foreach(var pragma in new[]{"journal_mode","synchronous","cache_size","page_size","data_version"}){await using var command=connection.CreateCommand();command.CommandText="PRAGMA "+pragma;settings[pragma]=await command.ExecuteScalarAsync();}
-                var drive=new DriveInfo(Path.GetPathRoot(setup.DatabasePath)!);var report=new{database=setup.DatabasePath,sqlite=connection.ServerVersion,settings,drive.AvailableFreeSpace,drive.DriveFormat,observations=plans,cache="Initial first-screen call labeled cold-process; subsequent same-connection-pool queries warm; OS cache not forcibly evicted",thresholdMs=400};
+                var drive=new DriveInfo(Path.GetPathRoot(setup.DatabasePath)!);var report=new{database=setup.DatabasePath,sqlite=connection.ServerVersion,settings,drive.AvailableFreeSpace,drive.DriveFormat,observations=plans,phases=phases.ToArray(),cache="Initial first-screen call labeled cold-process; subsequent same-connection-pool queries warm; OS cache not forcibly evicted",thresholdMs=400};
                 await File.WriteAllTextAsync(Path.Combine(output,Guid.NewGuid()+".json"),System.Text.Json.JsonSerializer.Serialize(report,new System.Text.Json.JsonSerializerOptions{WriteIndented=true}));
             }
         }
@@ -170,11 +172,15 @@ public sealed class AssetLibraryP3PerformanceTests
         return (worst, value);
     }
 
-    private static async Task<(TimeSpan Elapsed, T Value)> MeasureOnceAsync<T>(Func<Task<T>> action)
+    private async Task<(TimeSpan Elapsed, T Value)> MeasureOnceAsync<T>(Func<Task<T>> action)
     {
+        var gcBefore = Enumerable.Range(0, 3).Select(GC.CollectionCount).ToArray();
+        var pauseBefore = GC.GetTotalPauseDuration();
         var stopwatch = Stopwatch.StartNew();
         var value = await action();
         stopwatch.Stop();
+        if (Environment.GetEnvironmentVariable("KITAO_P3_TRACE") is not null)
+            TestContext.WriteLine($"Runtime sample: elapsed={stopwatch.Elapsed.TotalMilliseconds:F3}ms, GC-pause={(GC.GetTotalPauseDuration()-pauseBefore).TotalMilliseconds:F3}ms, GC-collections={string.Join(",", Enumerable.Range(0,3).Select(g => GC.CollectionCount(g)-gcBefore[g]))}, thread={Environment.CurrentManagedThreadId}");
         return (stopwatch.Elapsed, value);
     }
 
