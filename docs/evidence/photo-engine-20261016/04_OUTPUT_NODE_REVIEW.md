@@ -1,0 +1,9 @@
+# Photo still-image output research, not production
+
+FixedOCIO2.4.2/6918...BSD3 ACESbuiltin: scene-linearRec709D65→derivedBradfordAP0D60 (Colour0.4.6independent)→ACES2065-1toXYZD65SDR100component→DISPLAYsRGB. UpstreamstylecontainswordVIDEOforviewingconditionidentifieronly; no videoIO/Log/FFmpeg/BRAW featurescreated. ACESv1.3core1256...referencefixed, OCIOactualbuiltinversionrecorded; notcameraIDT/calibration.
+
+OpenDRTv1.1.0fixedaf683... GPL3 filehash645ba... compiledexternalonly scalarcompatvector/intrinsics/UIdefaults, inputlinearRec7095/oetflinear0/outputpreset1sRGB2.2power/100nit/Standard, noResolveinstallation/plugin/video. Exactsourceactualrun, adapterCPU notupstreamGPUcrossvalidation. DifferentEOTFpiecewisevs2.2power/looksnotconfigurationequal, metricsresearchnotengineaccuracyranking.
+
+darktable4.8.1fb0e...filmicrgb.cGPL3 exactlog_tonemapping_v2_1ch/filmic_splinefunctions compiledstandalonewithdeclaredsamplecurveparams. Thisisa runnablefilmicSUBSTAGEreference, notfullDTfilmicmoduleequivalence (gamutmapping/highlightreconstruct/sceneprofileintegrationnotrun). ExplicitUNAVAILABLEfullDTWinCLI; doNOTclaimthreefullDRT A/Bpassed. NoGPLimplementationingit/product; generatedreferencecode/artifactlocalonly.
+
+Comparegray/gradient/backlithighlight/redblue/skin/highISOsyntheticstaticscenes (seed/paramsfixed) inclnegative/above1, integeroutputlevels/hue/saturation/clipping/meansteps/time. PhotographerblindreviewfieldsPENDING, nochartpurchase. Existingcandidate50/512highlightlevelsbelowhardclip102remainsrejected. Noalgorithmproductionproposedthisstage, defaultoffresearchonly, CalibrationEligible=false。

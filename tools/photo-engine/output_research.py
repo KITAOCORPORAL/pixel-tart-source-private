@@ -1,0 +1,17 @@
+import pathlib,sys,json,subprocess,time,hashlib
+R=pathlib.Path(__file__).resolve().parents[2];A=R/'artifacts/photo-engine';sys.path.insert(0,str(A/'python-deps'));import numpy as np,colour,PyOpenColorIO as ocio
+s=colour.RGB_COLOURSPACES['sRGB'].copy();ap0=colour.RGB_COLOURSPACES['ACES2065-1'].copy();s.use_derived_transformation_matrices(True);ap0.use_derived_transformation_matrices(True);toAP0=colour.matrix_RGB_to_RGB(s,ap0,chromatic_adaptation_transform='Bradford')
+aces=ocio.Config.CreateRaw().getProcessor(ocio.GroupTransform([ocio.BuiltinTransform(style='ACES-OUTPUT - ACES2065-1_to_CIE-XYZ-D65 - SDR-VIDEO_1.0'),ocio.BuiltinTransform(style='DISPLAY - CIE-XYZ-D65_to_sRGB')])).getDefaultCPUProcessor()
+rng=np.random.default_rng(713);v=np.linspace(0,4,512);scenes={'gray':np.repeat(v[:,None],3,axis=1),'gradient':np.stack([v,.7*v,.3*v],axis=1),'backlit':np.stack([v**2,v**2*.9,v**2*.75],axis=1),'saturatedRedBlue':np.concatenate([np.stack([v,.02*v,.01*v],axis=1),np.stack([.01*v,.04*v,v],axis=1)]),'skin':np.array([[.65+d,.35+d/2,.22+d/3] for d in np.linspace(-.2,.2,512)]),'highISO':np.repeat(np.linspace(.005,.1,512)[:,None],3,axis=1)+rng.normal(0,.008,(512,3))}
+results=[];outputs=A/'output-research';outputs.mkdir(exist_ok=True)
+def hue_sat(a):
+ lab=colour.XYZ_to_Lab(colour.RGB_to_XYZ(np.maximum(a,0),s,apply_cctf_decoding=True));h=np.degrees(np.arctan2(lab[:,2],lab[:,1]));c=np.sqrt(lab[:,1]**2+lab[:,2]**2);return h,c
+for name,x in scenes.items():
+ x=x.astype(np.float32);variants=[];start=time.perf_counter();a=np.array([aces.applyRGB(v.tolist()) for v in x@toAP0.T]);variants.append(('ACES1SDR_OCIO',a,(time.perf_counter()-start)*1000))
+ text='\n'.join(' '.join(map(str,row)) for row in x)+'\n'
+ for label,exe in [('OpenDRT1.1Standard_sRGB2.2',A/'opendrt_scalar.exe'),('DT_LOG_SPLINE_SUBSTAGE_ONLY',A/'dt_substage.exe')]:
+  start=time.perf_counter();p=subprocess.run([str(exe)],input=text,capture_output=True,text=True,timeout=30);assert p.returncode==0;pixels=np.array([[float(z) for z in l.split()] for l in p.stdout.splitlines()]);assert pixels.shape==x.shape and np.isfinite(pixels).all();variants.append((label,pixels,(time.perf_counter()-start)*1000))
+ for label,a,elapsed in variants:
+  outside=np.any((a<0)|(a>1),axis=1);codes=np.rint(np.clip(a,0,1)*65535).astype(np.uint16);lum=codes.astype(float)@np.array([.2126,.7152,.0722]);h,c=hue_sat(np.clip(a,0,1));hin,cin=hue_sat(np.clip(x,0,1));delta=np.abs((h-hin+180)%360-180);np.save(outputs/(name+'-'+label+'.npy'),a)
+  results.append(dict(scene=name,transform=label,rows=len(x),millisecondsIncludingProcessIo=elapsed,outputMin=float(a.min()),outputMax=float(a.max()),outOfRangePixelRatio=float(outside.mean()),unique16bitLumaLevels=len(np.unique(lum)),adjacentCodeMax=float(np.abs(np.diff(codes.astype(float),axis=0)).max()),plateauAdjacentRatio=float(np.mean(np.all(np.diff(codes,axis=0)==0,axis=1))),meanHueShiftDegrees=float(delta.mean()) if name not in ['gray'] else None,meanChroma=float(c.mean()),relativeChromaVsClippedInput=float(c.mean()/cin.mean()) if cin.mean()>1e-3 else None,photographerBlindReview='PENDING_NOT_APPROVED',configurationEquivalent=False,scope='DTsubstageNOTfullDRT; OpenDRT2.2vsACESpiecewisesRGBdifferentencoding; outputcoordinateengineeringmetricsnotperceptualgroundtruth'))
+(A/'output-research-results.json').write_text(json.dumps(dict(ocio=ocio.__version__,colour=colour.__version__,seed=713,ACESBuiltin='1.0SDRXYZD65+sRGB',results=results,CalibrationEligible=False,productAdmission=False),indent=2));print(json.dumps(results,indent=2))
