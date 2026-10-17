@@ -81,6 +81,7 @@
    <!-- Keep actions within the page width: an Auto column measures an unbounded
         WrapPanel and lets it paint into the shell reserved close area. -->
    <WrapPanel x:Name="HeaderActions" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
+    <Button Content="{views:StudioText PhotoGradeTitle}" Command="{Binding TogglePhotoGradePageCommand}"/>
     <Grid><ToggleButton x:Name="InstantFilmToggle" Content="{views:StudioText InstantBatch08_0}"/>
     <Popup IsOpen="{Binding IsChecked,ElementName=InstantFilmToggle}" PlacementTarget="{Binding ElementName=InstantFilmToggle}" Placement="Bottom" StaysOpen="False" AllowsTransparency="True"><Border Style="{StaticResource PixelTart.Popup.V2}" Width="280" Padding="12" Background="{DynamicResource SurfaceSecondaryBrush}"><ScrollViewer MaxHeight="620" VerticalScrollBarVisibility="Auto">
      <StackPanel IsEnabled="{Binding InstantEditingAllowed}" Background="{DynamicResource SurfaceSecondaryBrush}">

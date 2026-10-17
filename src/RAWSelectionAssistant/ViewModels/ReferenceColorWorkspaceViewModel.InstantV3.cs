@@ -60,8 +60,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private string _instantV3DefectKind="None";
  public string InstantV3DefectKind {get=>_instantV3DefectKind;set{if(EqualityComparer<string>.Default.Equals(_instantV3DefectKind,value))return;_instantV3DefectKind=value;OnPropertyChanged(nameof(InstantV3DefectKind));}}
  private double _instantV3EmulsionDefects;
- public double InstantV3WindowHighlight {get;set;}
- public double InstantV3WindowPressed {get;set;}
+ private double _instantV3WindowHighlight;
+ public double InstantV3WindowHighlight {get=>_instantV3WindowHighlight;set{SetProperty(ref _instantV3WindowHighlight,value);}}
+ private double _instantV3WindowPressed;
+ public double InstantV3WindowPressed {get=>_instantV3WindowPressed;set{SetProperty(ref _instantV3WindowPressed,value);}}
  public double InstantV3EmulsionDefects {get=>_instantV3EmulsionDefects;set{if(EqualityComparer<double>.Default.Equals(_instantV3EmulsionDefects,value))return;_instantV3EmulsionDefects=value;OnPropertyChanged(nameof(InstantV3EmulsionDefects));}}
  private double _instantV3DefectAmount;
  public double InstantV3DefectAmount {get=>_instantV3DefectAmount;set{if(EqualityComparer<double>.Default.Equals(_instantV3DefectAmount,value))return;_instantV3DefectAmount=value;OnPropertyChanged(nameof(InstantV3DefectAmount));}}

@@ -1,0 +1,7 @@
+# PhotoGradePageV1: minimal independent page shell on admitted existing photo tools
+
+Existing Color Studio remains default and retained. Explicit new-page button switches only layout version; shared actual workspace/session/target identities, no fake second engine. Large central viewport/source-before-after/view modes, horizontal photo strip with explicit activation and selected targets, ordered adjustment steps, current step's real StudioToolPanel, collapsible preset/V3/history/status. Exposure/contrast/saturation BasicTone and Curve reuse prior admitted implementations. New V3 remains frozen photo recipe; PhotoWideV1 is NOT automatically connected to the display-sRGB edit chain.
+
+Actual control test opens two synthetic photos, bound exposure Slider edits existing node, undo/redo, selected-node synchronization to checked target, SaveSession/LoadSession, actual existing ExportSelectedCommand output, page toggle back and text-labelled/non-red-green-only selection focus colour. First failure ActiveTarget two-way read-only binding retained; fixed explicit OneWay and activation command, not test assertion.
+
+Accessibility: labels/number fields from existing StudioToolPanel, stored stable IDs untranslated, three language labels, selectable Cyan/Yellow/Magenta/White focus border. This focus colour is NOT a computed selective-colour mask; real mask-colour/advanced scopes/wheels pending. No dummy timeline or freeform node graph. Native foreground user actions/physical DPI remain separate acceptance, not inferred from ViewModel/control tests.
