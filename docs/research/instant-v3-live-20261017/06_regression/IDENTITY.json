@@ -1,0 +1,21 @@
+{
+  "status": "BLOCKED_DIAGNOSTIC_BUILD_WITH_PRODUCT_V3",
+  "source": "7087a50cc70b6dbc27b083dd45c013e6946096b6",
+  "base": "a51bcf96efc0e3d03438138dfa525ab61c7449b7",
+  "directory": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery\\win-x64",
+  "exeSha256": "420329D3BE362C0037B3E681415738387C8C0963D069291D391C55BB38198D4C",
+  "coreSha256": "D3F5D79A25BEB48992941D901A1D3B3FC77F8982A135C74E1B878659946787D3",
+  "toolCandidateDllBundled": false,
+  "implementation": "Formal Core InstantV3",
+  "actualDeliveryFullSuites": [
+    "06-delivery-full-wpf",
+    "06-delivery-core"
+  ],
+  "physicalDesktop": "NOT_RUN_ACTIVE_INPUT",
+  "releaseBlockers": [
+    "Inherited Fuji native nondeterminism",
+    "P3 historical long-tail failures retained; one green run not root-cause closure",
+    "No physical DPI/native foreground acceptance",
+    "Extension visual/aliasing extreme matrix incomplete; multiple-exposure second-layer UI not implemented"
+  ]
+}

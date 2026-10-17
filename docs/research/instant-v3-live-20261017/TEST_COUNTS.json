@@ -1,0 +1,128 @@
+[
+  {
+    "suite": "06-source-core",
+    "discovered": 1711,
+    "selected": 1711,
+    "executed": 1704,
+    "counts": {
+      "Passed": 1704,
+      "NotExecuted": 7
+    },
+    "missing": [],
+    "timeouts": [],
+    "rawStatus": "FAILED"
+  },
+  {
+    "suite": "06-source-frozen-wpf",
+    "discovered": 1631,
+    "selected": 1631,
+    "executed": 1608,
+    "counts": {
+      "Passed": 1608,
+      "NotExecuted": 23
+    },
+    "missing": [],
+    "timeouts": [],
+    "rawStatus": "FAILED"
+  },
+  {
+    "suite": "06-published-core",
+    "discovered": 1711,
+    "selected": 1711,
+    "executed": 1705,
+    "counts": {
+      "Passed": 1705,
+      "NotExecuted": 6
+    },
+    "missing": [],
+    "timeouts": [],
+    "rawStatus": "FAILED"
+  },
+  {
+    "suite": "06-published-wpf",
+    "discovered": 1631,
+    "selected": 1631,
+    "executed": 1608,
+    "counts": {
+      "Passed": 1608,
+      "NotExecuted": 23
+    },
+    "missing": [],
+    "timeouts": [],
+    "rawStatus": "FAILED"
+  },
+  {
+    "suite": "06-delivery-full-wpf",
+    "discovered": 1631,
+    "selected": 1631,
+    "executed": 1608,
+    "counts": {
+      "Passed": 1608,
+      "NotExecuted": 23
+    },
+    "missing": [],
+    "timeouts": [],
+    "rawStatus": "FAILED"
+  },
+  {
+    "suite": "06-delivery-core",
+    "discovered": 1711,
+    "selected": 1711,
+    "executed": 1705,
+    "counts": {
+      "Passed": 1705,
+      "NotExecuted": 6
+    },
+    "missing": [],
+    "timeouts": [],
+    "rawStatus": "FAILED"
+  },
+  {
+    "suite": "06-delivery-candidate",
+    "discovered": 21,
+    "selected": 21,
+    "executed": 21,
+    "counts": {
+      "Passed": 21
+    },
+    "missing": [],
+    "timeouts": [],
+    "rawStatus": "PASSED"
+  },
+  {
+    "suite": "06-candidate-final",
+    "discovered": 21,
+    "selected": 21,
+    "executed": 21,
+    "counts": {
+      "Passed": 21
+    },
+    "missing": [],
+    "timeouts": [],
+    "rawStatus": "PASSED"
+  },
+  {
+    "suite": "06-delivery-specialized",
+    "discovered": 1631,
+    "selected": 12,
+    "executed": 11,
+    "counts": {
+      "Passed": 11,
+      "NotExecuted": 1
+    },
+    "missing": [],
+    "timeouts": [],
+    "rawStatus": "FAILED"
+  },
+  {
+    "suite": "06-dpi-logical-current",
+    "discovered": 91,
+    "selected": 91,
+    "executed": 91,
+    "counts": {
+      "Passed": 91
+    },
+    "missing": [],
+    "timeouts": []
+  }
+]

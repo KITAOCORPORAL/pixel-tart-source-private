@@ -1,0 +1,33 @@
+TestContext 消息:
+Cold/priming AssetLibraryPage: 25.248ms
+Warm sample 1/3 AssetLibraryPage: 11.326ms
+Warm sample 2/3 AssetLibraryPage: 13.558ms
+Warm sample 3/3 AssetLibraryPage: 11.945ms
+10,000 项默认首屏: 13.6 ms / 1500 ms
+Cold/priming IReadOnlyList`1: 33.432ms
+Warm sample 1/3 IReadOnlyList`1: 22.372ms
+Warm sample 2/3 IReadOnlyList`1: 22.376ms
+Warm sample 3/3 IReadOnlyList`1: 20.305ms
+普通文本建议: 22.4 ms / 200 ms
+Cold/priming AssetLibraryPage: 10.991ms
+Warm sample 1/3 AssetLibraryPage: 8.967ms
+Warm sample 2/3 AssetLibraryPage: 6.191ms
+Warm sample 3/3 AssetLibraryPage: 13.149ms
+单条件筛选更新: 13.1 ms / 300 ms
+Cold/priming AssetLibraryPage: 55.774ms
+Warm sample 1/3 AssetLibraryPage: 36.697ms
+Warm sample 2/3 AssetLibraryPage: 33.219ms
+Warm sample 3/3 AssetLibraryPage: 31.232ms
+8 条规则、3 层嵌套组合查询: 36.7 ms / 600 ms
+Cold/priming AssetLibraryPage: 34.311ms
+Warm sample 1/3 AssetLibraryPage: 42.739ms
+Warm sample 2/3 AssetLibraryPage: 29.419ms
+Warm sample 3/3 AssetLibraryPage: 19.122ms
+智能文件夹预览: 42.7 ms / 750 ms
+Cold/priming AssetLibraryPage: 2.459ms
+Warm sample 1/3 AssetLibraryPage: 2.154ms
+Warm sample 2/3 AssetLibraryPage: 2.128ms
+Warm sample 3/3 AssetLibraryPage: 2.087ms
+当前/全库范围切换: 2.2 ms / 400 ms
+100 项批量标签操作: 22.8 ms / 750 ms
+500 项批量标签操作: 40.5 ms / 2000 ms

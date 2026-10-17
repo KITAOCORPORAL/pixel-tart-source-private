@@ -1,0 +1,274 @@
+{
+  "root": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-specialized\\run-20261017-163703-a1cb7f08",
+  "assembly": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "3e49773661924019a7d6a5414419fcce4a8f34321f91cb25fc3eb9197c88dcfe",
+  "discovered": 1631,
+  "selected": 12,
+  "runs": [
+    {
+      "pid": 52876,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T08:37:04Z",
+      "elapsedSeconds": 27.5,
+      "command": [
+        "C:/Program Files/dotnet/dotnet.exe",
+        "vstest",
+        "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-specialized\\run-20261017-163703-a1cb7f08\\000\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-instant-film-v3-live-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-specialized\\run-20261017-163703-a1cb7f08\\000\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests",
+      "directory": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-specialized\\run-20261017-163703-a1cb7f08\\000",
+      "expected": 3,
+      "results": [
+        {
+          "id": "11551ab4-a149-8c27-9292-84ba6cce9030",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests.InflightGenerationSwitchDoesNotCommitOntoNextPhoto",
+          "display": "InflightGenerationSwitchDoesNotCommitOntoNextPhoto",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d608419-42a5-8aa3-9129-622c404f89e2",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests.FiveFamiliesUseSameFormalModuleAndUnknownVersionDoesNotMigrate",
+          "display": "FiveFamiliesUseSameFormalModuleAndUnknownVersionDoesNotMigrate",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1c607b95-48c0-8a1a-9e54-93f665931970",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests.RealV3ChoiceParametersUndoRedoProjectAndDirectExports",
+          "display": "RealV3ChoiceParametersUndoRedoProjectAndDirectExports",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 46496,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T08:37:31Z",
+      "elapsedSeconds": 2.14000000001397,
+      "command": [
+        "C:/Program Files/dotnet/dotnet.exe",
+        "vstest",
+        "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-specialized\\run-20261017-163703-a1cb7f08\\001\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-instant-film-v3-live-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-specialized\\run-20261017-163703-a1cb7f08\\001\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests",
+      "directory": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-specialized\\run-20261017-163703-a1cb7f08\\001",
+      "expected": 3,
+      "results": [
+        {
+          "id": "1273a176-596d-8edf-9b05-8b74f65ee9af",
+          "name": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.ExplicitVersionPreviewSaveReloadAndFullExportUseSameDefinition",
+          "display": "ExplicitVersionPreviewSaveReloadAndFullExportUseSameDefinition",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "14a555a3-0286-8794-9141-556c731917d2",
+          "name": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.DecodeFailureKeepsOldVersionAndParametersAndLateCreationCannotReplaceAnotherTarget",
+          "display": "DecodeFailureKeepsOldVersionAndParametersAndLateCreationCannotReplaceAnotherTarget",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "166fd959-7415-8c57-bfae-590de7fd3a3f",
+          "name": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+          "display": "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+          "outcome": "NotExecuted",
+          "error": "Assert.Inconclusive 失败。Set authorized batch06 corpus and evidence directory; not a synthetic test.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+        }
+      ],
+      "errors": [
+        "non-passing or not-executed tests"
+      ]
+    },
+    {
+      "pid": 50180,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T08:37:33Z",
+      "elapsedSeconds": 1.6570000000065193,
+      "command": [
+        "C:/Program Files/dotnet/dotnet.exe",
+        "vstest",
+        "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-specialized\\run-20261017-163703-a1cb7f08\\002\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-instant-film-v3-live-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-specialized\\run-20261017-163703-a1cb7f08\\002\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests",
+      "directory": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-specialized\\run-20261017-163703-a1cb7f08\\002",
+      "expected": 6,
+      "results": [
+        {
+          "id": "169620fc-3060-8273-a41a-d16460617c9f",
+          "name": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.ParameterAndCurveLabelsSwitchWithoutMutatingStackKeysOrUserNodeName",
+          "display": "ParameterAndCurveLabelsSwitchWithoutMutatingStackKeysOrUserNodeName",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1229441a-0753-8f36-a5a1-d1c9f59de467",
+          "name": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.RealStudioModeLabelsSwitchWhileStableTagsRemainUnchanged",
+          "display": "RealStudioModeLabelsSwitchWhileStableTagsRemainUnchanged",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1543e1db-2dfc-89ed-87ea-3d7008417c42",
+          "name": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.BoundPresentationUpdatesWithoutTranslatingTagsOrUserNames",
+          "display": "BoundPresentationUpdatesWithoutTranslatingTagsOrUserNames",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "144cdab1-6100-8ed9-9eb6-b37743c93273",
+          "name": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage",
+          "display": "ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "10e62154-60fa-8ae6-a466-301e05595733",
+          "name": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.ComposedImportSummaryRefreshesAfterLanguageSwitchWithoutReimport",
+          "display": "ComposedImportSummaryRefreshesAfterLanguageSwitchWithoutReimport",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "17b3f929-526c-806f-928a-2e968d6ba3a8",
+          "name": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.StudioLanguagePersistsAndDoesNotChangeStableIdentifiers",
+          "display": "StudioLanguagePersistsAndDoesNotChangeStableIdentifiers",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "FAILED",
+  "p1ExecutionUnit": "method",
+  "executionPlan": [
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests",
+      "cases": [
+        {
+          "id": "1c607b95-48c0-8a1a-9e54-93f665931970",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests.RealV3ChoiceParametersUndoRedoProjectAndDirectExports",
+          "displayName": "RealV3ChoiceParametersUndoRedoProjectAndDirectExports",
+          "source": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1d608419-42a5-8aa3-9129-622c404f89e2",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests.FiveFamiliesUseSameFormalModuleAndUnknownVersionDoesNotMigrate",
+          "displayName": "FiveFamiliesUseSameFormalModuleAndUnknownVersionDoesNotMigrate",
+          "source": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "11551ab4-a149-8c27-9292-84ba6cce9030",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests.InflightGenerationSwitchDoesNotCommitOntoNextPhoto",
+          "displayName": "InflightGenerationSwitchDoesNotCommitOntoNextPhoto",
+          "source": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    },
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests",
+      "cases": [
+        {
+          "id": "1273a176-596d-8edf-9b05-8b74f65ee9af",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.ExplicitVersionPreviewSaveReloadAndFullExportUseSameDefinition",
+          "displayName": "ExplicitVersionPreviewSaveReloadAndFullExportUseSameDefinition",
+          "source": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "14a555a3-0286-8794-9141-556c731917d2",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.DecodeFailureKeepsOldVersionAndParametersAndLateCreationCannotReplaceAnotherTarget",
+          "displayName": "DecodeFailureKeepsOldVersionAndParametersAndLateCreationCannotReplaceAnotherTarget",
+          "source": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "166fd959-7415-8c57-bfae-590de7fd3a3f",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+          "displayName": "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+          "source": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    },
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests",
+      "cases": [
+        {
+          "id": "144cdab1-6100-8ed9-9eb6-b37743c93273",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage",
+          "displayName": "ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage",
+          "source": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "17b3f929-526c-806f-928a-2e968d6ba3a8",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.StudioLanguagePersistsAndDoesNotChangeStableIdentifiers",
+          "displayName": "StudioLanguagePersistsAndDoesNotChangeStableIdentifiers",
+          "source": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1543e1db-2dfc-89ed-87ea-3d7008417c42",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.BoundPresentationUpdatesWithoutTranslatingTagsOrUserNames",
+          "displayName": "BoundPresentationUpdatesWithoutTranslatingTagsOrUserNames",
+          "source": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1229441a-0753-8f36-a5a1-d1c9f59de467",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.RealStudioModeLabelsSwitchWhileStableTagsRemainUnchanged",
+          "displayName": "RealStudioModeLabelsSwitchWhileStableTagsRemainUnchanged",
+          "source": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "169620fc-3060-8273-a41a-d16460617c9f",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.ParameterAndCurveLabelsSwitchWithoutMutatingStackKeysOrUserNodeName",
+          "displayName": "ParameterAndCurveLabelsSwitchWithoutMutatingStackKeysOrUserNodeName",
+          "source": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "10e62154-60fa-8ae6-a466-301e05595733",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.ComposedImportSummaryRefreshesAfterLanguageSwitchWithoutReimport",
+          "displayName": "ComposedImportSummaryRefreshesAfterLanguageSwitchWithoutReimport",
+          "source": "N:\\pixart\\kitao-instant-film-v3-live-20261017\\artifacts\\v3-live\\06-delivery-test-host\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "Passed": 11,
+    "NotExecuted": 1
+  }
+}

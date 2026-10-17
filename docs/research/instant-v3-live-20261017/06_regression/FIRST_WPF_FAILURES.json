@@ -1,0 +1,12 @@
+{
+  "source": "Early host before localization correction",
+  "failures": [
+    {
+      "id": "144cdab1-6100-8ed9-9eb6-b37743c93273",
+      "name": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage",
+      "display": "ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage",
+      "outcome": "Failed",
+      "error": "Assert.IsFalse 失败。‘condition’表达式:‘System.Text.RegularExpressions.Regex.IsMatch(source, \"(?:Text|Content|Header|ToolTip|AutomationProperties.Name)=\\\"[^\\\"{]*[\\\\u4e00-\\\\u9fff][^\\\"{]*\\\"\")’。 Product literals must use resources, not hard-coded Chinese.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsFalseFailed(String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 200\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsFalse(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 191\r\n   at RAWSelectionAssistant.WpfTests.StudioLocalizationTests.ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+    }
+  ]
+}
