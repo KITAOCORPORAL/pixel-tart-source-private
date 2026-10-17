@@ -6,9 +6,10 @@ using Kitao.InstantFilm.Research;
 using RAWSelectionAssistant.Core.Services.Color;
 using RAWSelectionAssistant.Core.Services.Projects;
 namespace RAWSelectionAssistant.Services;
-public sealed class SecondExposureDecoder:ISecondExposureDecoder
+public sealed class SecondExposureDecoder:ISecondExposureDecoder,ISecondExposurePixelDecoder
 {
  public bool ValidatesSourceIdentity=>true;
+ public ISecondExposureSource OpenPixels(CandidateMultipleInput input,CancellationToken token)=>new BoundedTiffPixelSource(input,token);
  public HighBitDepthImageBuffer Read(CandidateMultipleInput input,CancellationToken token)
  {
   using var measurement=StudioPreviewDiagnostics.Measure("SecondDecode");
