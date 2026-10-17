@@ -85,42 +85,42 @@
     <Popup IsOpen="{Binding IsChecked,ElementName=InstantFilmToggle}" PlacementTarget="{Binding ElementName=InstantFilmToggle}" Placement="Bottom" StaysOpen="False" AllowsTransparency="True"><Border Style="{StaticResource PixelTart.Popup.V2}" Width="280" Padding="12" Background="{DynamicResource SurfaceSecondaryBrush}"><ScrollViewer MaxHeight="620" VerticalScrollBarVisibility="Auto">
      <StackPanel IsEnabled="{Binding InstantEditingAllowed}" Background="{DynamicResource SurfaceSecondaryBrush}">
       <TextBlock Text="{views:StudioText InstantBatch08_1}" TextWrapping="Wrap"/>
-      <TextBlock Text="即时成像引擎 · V3 创作模拟（非相纸标定）" TextWrapping="Wrap"/>
+      <TextBlock Text="{views:StudioText InstantV3Live0}" TextWrapping="Wrap"/>
       <ComboBox ItemsSource="{Binding InstantEngineVersions}" SelectedItem="{Binding InstantEngineVersion}"/>
-      <TextBlock Text="V3 曝光 / 趾部 / 肩部 / 表观密度"/>
+      <TextBlock Text="{views:StudioText InstantV3Live1}"/>
       <Slider Minimum="-2" Maximum="2" Value="{Binding InstantV3Exposure}"/>
       <Slider Minimum="0" Maximum="0.3" Value="{Binding InstantV3Toe}"/>
       <Slider Minimum="0" Maximum="2" Value="{Binding InstantV3Shoulder}"/>
       <Slider Minimum="0.5" Maximum="2" Value="{Binding InstantV3Density}"/>
-      <TextBlock Text="V3 光学柔化 / 高光扩散 / 乳剂微结构 / 过期强度"/>
+      <TextBlock Text="{views:StudioText InstantV3Live2}"/>
       <Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Softness}"/>
       <Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Diffusion}"/>
       <Slider Minimum="0" Maximum="0.05" Value="{Binding InstantV3Texture}"/>
       <Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Aging}"/>
-      <TextBlock Text="旧版公式创作风格（非旧 App 输出）"/><ComboBox ItemsSource="{Binding InstantV3Stocks}" SelectedItem="{Binding InstantV3Stock}"/>
-      <TextBlock Text="V3 底雾"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Fog}"/>
-      <TextBlock Text="V3 暗部分区色偏"/><Slider Minimum="-1" Maximum="1" Value="{Binding InstantV3ShadowCast}"/>
-      <TextBlock Text="V3 高光冷暖"/><Slider Minimum="-1" Maximum="1" Value="{Binding InstantV3Warmth}"/>
-      <TextBlock Text="V3 帧间漂移"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3FrameDrift}"/>
-      <TextBlock Text="V3 褪色强度"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Fade}"/>
-      <TextBlock Text="V3 光学暗角"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Vignette}"/>
-      <TextBlock Text="V3 显影边缘压暗"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3DevelopmentEdge}"/>
-      <TextBlock Text="V3 纸纹"/><Slider Minimum="0" Maximum="0.05" Value="{Binding InstantV3PaperTexture}"/>
-      <TextBlock Text="V3 纸面划痕"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3PaperScratches}"/>
-      <TextBlock Text="V3 扫描灰尘"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3ScanDust}"/>
-      <TextBlock Text="V3 压纹"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Emboss}"/>
-      <TextBlock Text="V3 边沿亮线"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3EdgeLine}"/>
-      <TextBlock Text="V3 覆膜反射"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Reflection}"/>
-      <TextBlock Text="V3 反射方向"/><Slider Minimum="-180" Maximum="180" Value="{Binding InstantV3ReflectionAngle}"/>
-      <TextBlock Text="V3 明显缺陷"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3DefectAmount}"/>
-      <TextBlock Text="V3 结晶"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Crystal}"/>
-      <TextBlock Text="V3 边缘漏液"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Leak}"/>
-      <ComboBox ItemsSource="{Binding InstantV3Patterns}" SelectedItem="{Binding InstantV3Pattern}"/><CheckBox Content="V3 圆形照片窗口" IsChecked="{Binding InstantV3Circle}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live3}"/><ComboBox ItemsSource="{Binding InstantV3Stocks}" SelectedItem="{Binding InstantV3Stock}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live4}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Fog}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live5}"/><Slider Minimum="-1" Maximum="1" Value="{Binding InstantV3ShadowCast}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live6}"/><Slider Minimum="-1" Maximum="1" Value="{Binding InstantV3Warmth}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live7}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3FrameDrift}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live8}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Fade}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live9}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Vignette}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live10}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3DevelopmentEdge}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live11}"/><Slider Minimum="0" Maximum="0.05" Value="{Binding InstantV3PaperTexture}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live12}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3PaperScratches}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live13}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3ScanDust}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live14}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Emboss}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live15}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3EdgeLine}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live16}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Reflection}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live17}"/><Slider Minimum="-180" Maximum="180" Value="{Binding InstantV3ReflectionAngle}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live18}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3DefectAmount}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live19}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Crystal}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live20}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Leak}"/>
+      <ComboBox ItemsSource="{Binding InstantV3Patterns}" SelectedItem="{Binding InstantV3Pattern}"/><CheckBox Content="{views:StudioText InstantV3Live21}" IsChecked="{Binding InstantV3Circle}"/>
       <ComboBox ItemsSource="{Binding InstantV3DefectKinds}" SelectedItem="{Binding InstantV3DefectKind}"/>
-      <TextBlock Text="V3 覆膜宽度 / 构图缩放"/><Slider Minimum="0.01" Maximum="1" Value="{Binding InstantV3ReflectionWidth}"/><Slider Minimum="1" Maximum="4" Value="{Binding InstantV3Zoom}"/>
-      <TextBlock Text="V3 固定根种子（显式重新显影才重抽）"/>
+      <TextBlock Text="{views:StudioText InstantV3Live22}"/><Slider Minimum="0.01" Maximum="1" Value="{Binding InstantV3ReflectionWidth}"/><Slider Minimum="1" Maximum="4" Value="{Binding InstantV3Zoom}"/>
+      <TextBlock Text="{views:StudioText InstantV3Live23}"/>
       <TextBox Text="{Binding InstantV3Seed, UpdateSourceTrigger=LostFocus}"/>
-      <WrapPanel><Button Content="撤销显影" Command="{Binding UndoInstantV3Command}"/><Button Content="重做显影" Command="{Binding RedoInstantV3Command}"/></WrapPanel>
+      <WrapPanel><Button Content="{views:StudioText InstantV3Live24}" Command="{Binding UndoInstantV3Command}"/><Button Content="{views:StudioText InstantV3Live25}" Command="{Binding RedoInstantV3Command}"/></WrapPanel>
       <ComboBox ItemsSource="{Binding InstantProfiles}" SelectedItem="{Binding SelectedInstantProfile}" DisplayMemberPath="Name"/>
       <WrapPanel>
        <Button Command="{Binding SelectInstantCameraCommand}" CommandParameter="SX-70" ToolTip="SX-70"><StackPanel><views:InstantCameraArtwork Width="92" Height="64" Model="SX-70"/><TextBlock Text="SX-70"/></StackPanel></Button>

@@ -10,7 +10,7 @@ using RAWSelectionAssistant.Services;
 internal static class InstantProductAudit
 {
  private static string Hash(string p){using var s=File.OpenRead(p);return Convert.ToHexString(SHA256.HashData(s));}
- public static async Task Run(string manifest,string output)
+ public static async Task Run(string manifest,string output,string? existingDirectOutput=null)
  {
   if(Directory.Exists(output))throw new IOException("New product audit output");Directory.CreateDirectory(output);var results=new List<object>();
   foreach(var item in JsonSerializer.Deserialize<InstantReviewInput[]>(File.ReadAllText(manifest))!)
@@ -30,12 +30,12 @@ internal static class InstantProductAudit
     var folder=Path.Combine(output,item.Id,profile.Id);Directory.CreateDirectory(folder);var id=Guid.NewGuid();var version=Guid.NewGuid();var edit=new StudioEditVersion(version,"V3 actual product",DateTimeOffset.UtcNow,null,null,item.ExpectedOriginalSha256,null,null,null,ColorStudioMatchEngine.Stable,MatchV4ExecutionMode.Auto){RawDefinition=definition,RawInput=contract};
     var session=Path.Combine(folder,"session.private.ptstudio.json");await ColorStudioSessionStore.SaveAsync(session,new([new(id,item.FrozenTiff,null,true,null,null,null,SourceHash:item.ExpectedOriginalSha256,EditVersions:[edit],ActiveEditVersionId:version,RawDefinition:definition,RawInput:contract)],id));var reopened=await ColorStudioSessionStore.LoadAsync(session);var restored=reopened.Targets.Single().RawDefinition!;
     using var preview=ProfessionalRawPipeline.RenderPreview(master,restored,512);using var region=ProfessionalRawPipeline.RenderRegion(master,restored,16,16,64,64);
-    var formats=new List<object>();foreach(var format in new[]{StudioExportFormat.Tiff,StudioExportFormat.Png,StudioExportFormat.Jpeg})
+    var formats=new List<object>();foreach(var format in existingDirectOutput is null?new[]{StudioExportFormat.Tiff,StudioExportFormat.Png,StudioExportFormat.Jpeg}:Array.Empty<StudioExportFormat>())
     {
      var file=Path.Combine(folder,"direct"+StudioQuickExport.Extension("x.arw",format));var receipt=await ProfessionalRawExport.WriteAsync(master,restored,file,format);formats.Add(new{format=format.ToString(),receipt,sha256=Hash(file),bytes=new FileInfo(file).Length});
     }
     double previewMaximum=0;
-    var tiff=Path.Combine(folder,"direct.tif");TiffStreamValidation tv;using(var file=File.OpenRead(tiff))tv=TiffStreamValidator.Validate(file);
+    var tiff=existingDirectOutput is null?Path.Combine(folder,"direct.tif"):Path.Combine(existingDirectOutput,item.Id,profile.Id,"direct.tif");TiffStreamValidation tv;using(var file=File.OpenRead(tiff))tv=TiffStreamValidator.Validate(file);
     using(var compareBudget=StudioGlobalResources.ReserveWork((long)preview.Width*preview.Height*3*8+tv.Width*6L))
     using(var file=File.OpenRead(tiff))
     {
