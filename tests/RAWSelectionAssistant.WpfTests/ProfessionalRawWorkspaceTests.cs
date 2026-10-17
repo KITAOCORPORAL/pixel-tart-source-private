@@ -94,6 +94,9 @@ public sealed class ProfessionalRawWorkspaceTests
             first.Editor.Exposure=.8;restored.Editor.Exposure=.8;await Task.Delay(650);
             Assert.IsNotNull(first.Editor.MatchedImage);Assert.IsNotNull(restored.Editor.MatchedImage);
             CollectionAssert.AreEqual(Pixels(first.Editor.MatchedImage),Pixels(restored.Editor.MatchedImage));
+            using(var capture=Kitao.InstantFilm.Research.CandidateProcessingEvidence.Capture(p=>{if(p=="SessionTransfer")throw new IOException("rollback legacy source");}))await Assert.ThrowsAsync<IOException>(()=>restored.LoadSessionAsync(session));
+            first.Editor.Exposure=.6;restored.Editor.Exposure=.6;await Task.Delay(650);
+            CollectionAssert.AreEqual(Pixels(first.Editor.MatchedImage!),Pixels(restored.Editor.MatchedImage!));
             // Bitmap identity alone is insufficient: the next edit must retain the same
             // high precision RAW branch and frozen generation, not a decoded RGB24 proxy.
             Assert.AreSame(restored.ActiveTarget.RawMaster,typeof(TetherReferenceModeViewModel).GetField("_frozenRawMaster",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic)!.GetValue(restored.Editor));

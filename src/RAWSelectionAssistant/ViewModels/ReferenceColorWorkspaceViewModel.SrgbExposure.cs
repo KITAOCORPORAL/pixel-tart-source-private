@@ -16,7 +16,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
    if(!SrgbExposureAvailable||ActiveTarget is not{} target||IsLoading||IsExporting||IsInstantGenerating)return;
    Editor.CopyCurrentLookTo([target]);
    var prior=target.RawDefinition;var active=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);
-   var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldMode=Editor.IndependentRawMode;var oldHistory=Editor.CaptureSessionHistory();var oldSize=Editor.SourcePixelSize;var oldStatus=target.Status;var oldError=target.Error;
+   var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldMode=Editor.IndependentRawMode;var oldHistory=Editor.CaptureSessionHistory();var oldEditorSource=Editor.CapturePreparedSource();var oldSize=Editor.SourcePixelSize;var oldStatus=target.Status;var oldError=target.Error;
    var oldRawMaster=target.RawMaster;var oldWidth=target.PixelWidth;var oldHeight=target.PixelHeight;var oldThumb=target.Thumbnail;var oldSourceThumb=target.SourceThumbnail;var oldEnabled=Editor.Enabled;var oldView=Editor.ViewMode;var oldTargetImage=TargetImage;var oldFailed=FailedTarget;
         var oldInput=target.RawInput;var oldMaster=target.LinearRawMaster;using var oldMasterLease=oldMaster is null?null:StudioGlobalResources.RetainBuffer(oldMaster.Image,(long)oldMaster.Image.Rgb32.Length*4);var oldLook=target.AppliedLookSnapshot;var oldStack=target.ColorAdjustmentStackSnapshot;var oldFilm=target.FilmSettingsSnapshot;Guid? committed=null;
    _instantCancellation?.Dispose();_instantCancellation=new();var token=_instantCancellation.Token;IsInstantGenerating=true;InstantChanged();
@@ -40,7 +40,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     {target.ActiveEditVersionId=active;target.RawDefinition=prior;target.RawInput=oldInput;target.RawMaster=_disposed?null:oldRawMaster;target.LinearRawMaster=_disposed||!ReferenceEquals(ActiveTarget,target)?null:oldMaster;target.PixelWidth=oldWidth;target.PixelHeight=oldHeight;target.Thumbnail=oldThumb;target.SourceThumbnail=oldSourceThumb;target.AppliedLookSnapshot=oldLook;target.ColorAdjustmentStackSnapshot=oldStack;target.FilmSettingsSnapshot=oldFilm;var version=target.EditVersions.FirstOrDefault(x=>x.Id==id);if(version is not null)target.EditVersions.Remove(version);}
     if(!_disposed&&!IsLoading&&ReferenceEquals(ActiveTarget,target))
     {
-     RestoreInstantControls(prior?.InstantFilm);Editor.ApplyTargetSnapshot(oldLook,oldFilm,oldStack,render:false,targetIdentity:active??target.Id);await Editor.SetSourceAsync(target.AssetId,oldSource,render:false);
+     RestoreInstantControls(prior?.InstantFilm);Editor.ApplyTargetSnapshot(oldLook,oldFilm,oldStack,render:false,targetIdentity:active??target.Id);Editor.RestorePreparedSource(oldEditorSource,target.AssetId);
      if(oldImage is not null)Editor.PresentIndependentRaw(oldImage);Editor.SetIndependentRawSize(oldSize);Editor.IndependentRawMode=oldMode;Editor.Enabled=oldEnabled;Editor.ViewMode=oldView;TargetImage=oldTargetImage;FailedTarget=oldFailed;Editor.RestoreSessionHistory(oldHistory);target.Status=oldStatus;target.Error=oldError;
     }
     LastProcessingFailure=StudioProcessingFailure.From(e,"RenderedSrgbExposure");OnPropertyChanged(nameof(LastProcessingFailure));StatusText="sRGB 曝光未提交，保留此前版本："+e.Message;

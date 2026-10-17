@@ -136,7 +136,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   var definition=target.RawDefinition;var input=target.RawInput;var master=target.LinearRawMaster;var rawMaster=target.RawMaster;
   var look=target.AppliedLookSnapshot;var adjustments=target.ColorAdjustmentStackSnapshot;var film=target.FilmSettingsSnapshot;
   var engine=target.EngineSnapshot;var mode=target.ExecutionModeSnapshot;var status=target.Status;var error=target.Error;
-  var image=Editor.MatchedImage;var source=Editor.SourceImage;var size=Editor.SourcePixelSize;var editorHistory=Editor.CaptureSessionHistory();var oldEditorMode=Editor.IndependentRawMode;var enabled=Editor.Enabled;var view=Editor.ViewMode;
+  var image=Editor.MatchedImage;var source=Editor.SourceImage;var size=Editor.SourcePixelSize;var editorHistory=Editor.CaptureSessionHistory();var oldEditorSource=Editor.CapturePreparedSource();var oldEditorMode=Editor.IndependentRawMode;var enabled=Editor.Enabled;var view=Editor.ViewMode;
   await SwitchEditVersionAsync(next);
   if(target.Status==ReferenceTargetStatus.Failed)
   {
@@ -146,7 +146,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
    target.FilmSettingsSnapshot=film;target.EngineSnapshot=engine;target.ExecutionModeSnapshot=mode;target.Status=status;target.Error=error;
    if(ReferenceEquals(ActiveTarget,target))
    {
-    Editor.ApplyTargetSnapshot(look,film,adjustments,render:false,targetIdentity:active);await Editor.SetSourceAsync(target.AssetId,source,render:false);
+    Editor.ApplyTargetSnapshot(look,film,adjustments,render:false,targetIdentity:active);Editor.RestorePreparedSource(oldEditorSource,target.AssetId);
     RestoreInstantControls(definition?.InstantFilm);
     if(image is not null){Editor.PresentIndependentRaw(image);Editor.SetIndependentRawSize(size);Editor.IndependentRawMode=oldEditorMode;}Editor.Enabled=enabled;Editor.ViewMode=view;Editor.RestoreSessionHistory(editorHistory);
    }
