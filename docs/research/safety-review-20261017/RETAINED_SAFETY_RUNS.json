@@ -1,0 +1,59 @@
+[
+  {
+    "suite": "03-focused",
+    "status": "FAILED",
+    "counts": {
+      "Passed": 44,
+      "Failed": 1
+    },
+    "failures": [
+      {
+        "id": "1df5093d-4cd9-8d52-afe7-0b3c34991fa9",
+        "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.SavedSessionRejectsChangedSourceInsteadOfDisplayingReplacement",
+        "display": "SavedSessionRejectsChangedSourceInsteadOfDisplayingReplacement",
+        "outcome": "Failed",
+        "error": "测试方法 RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests。SavedSessionRejectsChangedSourceInsteadOfDisplayingReplacement 引发了异常: \r\nSystem.IO.InvalidDataException: 项目激活失败，旧工作区保持。\n             at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.LoadSessionAsync(String path, CancellationToken token)\r\n   at RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.<>c.<<SavedSessionRejectsChangedSourceInsteadOfDisplayingReplacement>b__4_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "suite": "04-focused",
+    "status": "PASSED",
+    "counts": {
+      "Passed": 45
+    },
+    "failures": []
+  },
+  {
+    "suite": "05-focused",
+    "status": "PASSED",
+    "counts": {
+      "Passed": 45
+    },
+    "failures": []
+  },
+  {
+    "suite": "06-focused",
+    "status": "PASSED",
+    "counts": {
+      "Passed": 45
+    },
+    "failures": []
+  },
+  {
+    "suite": "07-focused",
+    "status": "PASSED",
+    "counts": {
+      "Passed": 45
+    },
+    "failures": []
+  },
+  {
+    "suite": "09-focused",
+    "status": "PASSED",
+    "counts": {
+      "Passed": 18
+    },
+    "failures": []
+  }
+]

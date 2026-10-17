@@ -5,7 +5,7 @@ if(args.Length>=1&&args[0]=="linear-stages")
  var vectors=values.Select(x=>new ColorVector3(x,x,x)).Concat(new[]{new ColorVector3(-.1,.003,.8),new(.04045,.5,1),new(1.5,2,.2),new(1,0,0),new(0,1,0),new(0,0,1)}).ToList();
  if(args.Length==2){var extra=JsonSerializer.Deserialize<double[][]>(File.ReadAllText(args[1]))!;vectors.AddRange(extra.Select(x=>new ColorVector3(x[0],x[1],x[2])));}
  ColorVector3 Map(ColorVector3 v,Func<double,double> f)=>new(f(v.X),f(v.Y),f(v.Z));
- var result=from ev in new[]{-2d,0,.7,2} from input in vectors let decoded=Map(input,PhotoColorMathV1.DecodeSrgb) let exposed=Map(decoded,x=>x*Math.Pow(2,ev)) let encoded=Map(exposed,PhotoColorMathV1.EncodeSrgb) select new{input,ev,decoded,exposed,encoded,output=Map(encoded,x=>Math.Clamp(x,0,1))};
+ var result=from ev in new[]{-2d,0,.7,2} from input in vectors let decoded=Map(input,PhotoColorMathV1.DecodeSrgb) let exposed=Map(decoded,x=>x*Math.Pow(2,ev)) let encoded=Map(exposed,PhotoColorMathV1.EncodeSrgb) select new{input,ev,decoded,exposed,encoded,output=Map(encoded,x=>Math.Clamp(x,0,1)),productionOutput=new RenderedSrgbExposure(ExposureEv:ev).Apply(input)};
  Console.WriteLine(JsonSerializer.Serialize(result));return;
 }
 if(args.Length==1&&args[0]=="linear-chain")

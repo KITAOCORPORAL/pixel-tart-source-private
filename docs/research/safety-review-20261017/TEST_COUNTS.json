@@ -1,0 +1,107 @@
+[
+  {
+    "suite": "source-focused",
+    "sourceCommit": "8b8161e13c65c6628e04d7ed400c23066757dbd2",
+    "assemblySha256": "0c245726af41269fc9b30df47f628e1ddfe54364e9f7c9570f00f837975d2da7",
+    "discovered": 1656,
+    "selected": 42,
+    "executed": 42,
+    "counts": {
+      "Passed": 42
+    },
+    "missing": [],
+    "timeouts": [],
+    "runnerStatus": "PASSED",
+    "interpretation": "PASSED"
+  },
+  {
+    "suite": "published-focused",
+    "sourceCommit": "8b8161e13c65c6628e04d7ed400c23066757dbd2",
+    "assemblySha256": "0c245726af41269fc9b30df47f628e1ddfe54364e9f7c9570f00f837975d2da7",
+    "discovered": 1656,
+    "selected": 42,
+    "executed": 42,
+    "counts": {
+      "Passed": 42
+    },
+    "missing": [],
+    "timeouts": [],
+    "runnerStatus": "PASSED",
+    "interpretation": "PASSED"
+  },
+  {
+    "suite": "source-core",
+    "sourceCommit": "8b8161e13c65c6628e04d7ed400c23066757dbd2",
+    "assemblySha256": "d3d2a02313d9a84d0e4194a519b01dfe219874e79ad986939d82c13d549fb36c",
+    "discovered": 1713,
+    "selected": 1713,
+    "executed": 1706,
+    "counts": {
+      "Passed": 1706,
+      "NotExecuted": 7
+    },
+    "missing": [],
+    "timeouts": [],
+    "runnerStatus": "FAILED",
+    "interpretation": "NO_EXECUTED_FAILURES_WITH_CONDITIONALS"
+  },
+  {
+    "suite": "published-core",
+    "sourceCommit": "8b8161e13c65c6628e04d7ed400c23066757dbd2",
+    "assemblySha256": "d3d2a02313d9a84d0e4194a519b01dfe219874e79ad986939d82c13d549fb36c",
+    "discovered": 1713,
+    "selected": 1713,
+    "executed": 1707,
+    "counts": {
+      "Passed": 1707,
+      "NotExecuted": 6
+    },
+    "missing": [],
+    "timeouts": [],
+    "runnerStatus": "FAILED",
+    "interpretation": "NO_EXECUTED_FAILURES_WITH_CONDITIONALS"
+  },
+  {
+    "suite": "candidate",
+    "sourceCommit": "8b8161e13c65c6628e04d7ed400c23066757dbd2",
+    "assemblySha256": "a79b62d12c34fb9a568e1903301c4483d556d612f7d7b37b0aea312456467524",
+    "discovered": 25,
+    "selected": 25,
+    "executed": 25,
+    "counts": {
+      "Passed": 25
+    },
+    "missing": [],
+    "timeouts": [],
+    "runnerStatus": "PASSED",
+    "interpretation": "PASSED"
+  },
+  {
+    "suite": "published-wpf",
+    "sourceCommit": "8b8161e13c65c6628e04d7ed400c23066757dbd2",
+    "assemblySha256": "0c245726af41269fc9b30df47f628e1ddfe54364e9f7c9570f00f837975d2da7",
+    "discovered": 1656,
+    "selected": 1656,
+    "executed": 1632,
+    "counts": {
+      "Passed": 1632,
+      "NotExecuted": 24
+    },
+    "missing": [],
+    "timeouts": [],
+    "runnerStatus": "FAILED",
+    "interpretation": "NO_EXECUTED_FAILURES_WITH_CONDITIONALS"
+  },
+  {
+    "suite": "logical-dpi",
+    "discovered": 91,
+    "selected": 91,
+    "executed": 91,
+    "counts": {
+      "Passed": 91
+    },
+    "missing": [],
+    "timeouts": [],
+    "interpretation": "LOGICAL_ONLY_NOT_PHYSICAL"
+  }
+]

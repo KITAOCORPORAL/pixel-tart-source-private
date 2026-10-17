@@ -1,0 +1,865 @@
+{
+  "root": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92",
+  "assembly": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "0c245726af41269fc9b30df47f628e1ddfe54364e9f7c9570f00f837975d2da7",
+  "discovered": 1656,
+  "selected": 42,
+  "runs": [
+    {
+      "pid": 26652,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T17:18:55Z",
+      "elapsedSeconds": 2.2660000000032596,
+      "command": [
+        "C:\\Program Files\\dotnet\\dotnet.EXE",
+        "vstest",
+        "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\000\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\000\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests",
+      "directory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\000",
+      "expected": 14,
+      "results": [
+        {
+          "id": "16e6d31b-877f-8efa-b62b-94c982079685",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.PerTargetUndoDoesNotImportPreviousPhotographsAdjustments",
+          "display": "PerTargetUndoDoesNotImportPreviousPhotographsAdjustments",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1783d425-ccc8-8db5-b866-94cfd9067333",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.ProductRepositorySharesVersionsAcrossWorkspacesWithoutPathIdentity",
+          "display": "ProductRepositorySharesVersionsAcrossWorkspacesWithoutPathIdentity",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "148c74f2-a92d-8371-b983-f426f97785d9",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.FilteredSelectionRangeAndHiddenTargetsUseOneVisibleOrder",
+          "display": "FilteredSelectionRangeAndHiddenTargetsUseOneVisibleOrder",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1403d4af-668b-8f37-8749-14cd39bab30b",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.IndependentEditVersionsRestoreTheirOwnExposure",
+          "display": "IndependentEditVersionsRestoreTheirOwnExposure",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "15294d23-e173-803f-b974-2ec9f8ac0d09",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.SyncExcludesSourceAndHiddenTargetsAndBatchUndoRestoresTargets",
+          "display": "SyncExcludesSourceAndHiddenTargetsAndBatchUndoRestoresTargets",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "19878cfb-75d8-8291-a03f-473cb5c59e6a",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.SyncDialogFreezesSourceTargetsAndCountsAcrossFilterAndActiveChanges",
+          "display": "SyncDialogFreezesSourceTargetsAndCountsAcrossFilterAndActiveChanges",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1440f963-a70a-8d09-98ce-49a2e62f0ed7",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.InvalidSessionAndMissingSourcesDoNotDiscardStoredAdjustments",
+          "display": "InvalidSessionAndMissingSourcesDoNotDiscardStoredAdjustments",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1df5093d-4cd9-8d52-afe7-0b3c34991fa9",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.SavedSessionRejectsChangedSourceInsteadOfDisplayingReplacement",
+          "display": "SavedSessionRejectsChangedSourceInsteadOfDisplayingReplacement",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1a2ebc45-6115-85f5-9cc2-0f8b33a4cea2",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.AdjustedThumbnailsFollowFrozenLatestStackForActiveAndSyncedTargets",
+          "display": "AdjustedThumbnailsFollowFrozenLatestStackForActiveAndSyncedTargets",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "11960076-c5ea-8c78-a9de-63b3702409f1",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.V4RefusesUnsupportedStackInsteadOfDroppingDevelopOrFilm",
+          "display": "V4RefusesUnsupportedStackInsteadOfDroppingDevelopOrFilm",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "19b22751-1ac4-8c0c-af8e-4fb6bec10511",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.SessionReloadRestoresFilteredBatchAndActiveImageWithoutRewritingFiles",
+          "display": "SessionReloadRestoresFilteredBatchAndActiveImageWithoutRewritingFiles",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1233e001-1735-8c7e-a33a-6a9823fdf18e",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.ExistingEditedPathCannotBeReboundToDifferentIdentity",
+          "display": "ExistingEditedPathCannotBeReboundToDifferentIdentity",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "16d13a43-b564-8e28-9427-07d2959fb3f2",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.ConflictHandlerPreservesLocalAndRejectsSecondConcurrentUpdate",
+          "display": "ConflictHandlerPreservesLocalAndRejectsSecondConcurrentUpdate",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13dafc8c-4a7a-833b-a181-a399b8c1434c",
+          "name": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.SyncRefreshesActiveEditorAndNewProcessingVersionSurvivesSnapshot",
+          "display": "SyncRefreshesActiveEditorAndNewProcessingVersionSurvivesSnapshot",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 38036,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T17:18:58Z",
+      "elapsedSeconds": 2.875,
+      "command": [
+        "C:\\Program Files\\dotnet\\dotnet.EXE",
+        "vstest",
+        "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\001\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\001\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.InstantV3CorrectionBindingTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.InstantV3CorrectionBindingTests",
+      "directory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\001",
+      "expected": 2,
+      "results": [
+        {
+          "id": "119c36dc-b424-86a6-b4d8-616f61e6d063",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3CorrectionBindingTests.RealSliderAndSeedBindingResetOnNewPhotoAndShapesDoNotCouple",
+          "display": "RealSliderAndSeedBindingResetOnNewPhotoAndShapesDoNotCouple",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1ce9a88d-9aa3-8954-8152-bef8600af532",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3CorrectionBindingTests.BoundPageHistoryIncludesV3DisableAndFailureDoesNotDiscardRedo",
+          "display": "BoundPageHistoryIncludesV3DisableAndFailureDoesNotDiscardRedo",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 40656,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T17:19:01Z",
+      "elapsedSeconds": 2.14000000001397,
+      "command": [
+        "C:\\Program Files\\dotnet\\dotnet.EXE",
+        "vstest",
+        "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\002\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\002\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.InstantV3MultipleInputTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.InstantV3MultipleInputTests",
+      "directory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\002",
+      "expected": 1,
+      "results": [
+        {
+          "id": "12e25c40-8931-8acc-b5e9-04dea4149ee2",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3MultipleInputTests.SelectedSecondSourcePersistsRendersDirectExportsAndRejectsChangedSource",
+          "display": "SelectedSecondSourcePersistsRendersDirectExportsAndRejectsChangedSource",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 53212,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T17:19:03Z",
+      "elapsedSeconds": 2.0160000000032596,
+      "command": [
+        "C:\\Program Files\\dotnet\\dotnet.EXE",
+        "vstest",
+        "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\003\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\003\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests",
+      "directory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\003",
+      "expected": 4,
+      "results": [
+        {
+          "id": "1f84b8ba-e311-8030-93e6-7d8494bb5737",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests.GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport",
+          "display": "GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport (\"Decode\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "10f9acce-961f-8694-97a8-2e5d04615701",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests.GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport",
+          "display": "GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport (\"DevelopmentAnimation\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "128f53df-0861-88b7-862c-2caad09abbfe",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests.CancelAtActualPixelEncodeAndValidationKeepsNoPartialAndOldDefinitionExportable",
+          "display": "CancelAtActualPixelEncodeAndValidationKeepsNoPartialAndOldDefinitionExportable",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "186a09d1-06c4-86bd-ba54-b765e214c372",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests.GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport",
+          "display": "GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport (\"PixelRender\")",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 25476,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T17:19:05Z",
+      "elapsedSeconds": 3.452999999979511,
+      "command": [
+        "C:\\Program Files\\dotnet\\dotnet.EXE",
+        "vstest",
+        "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\004\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\004\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests",
+      "directory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\004",
+      "expected": 3,
+      "results": [
+        {
+          "id": "1c607b95-48c0-8a1a-9e54-93f665931970",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests.RealV3ChoiceParametersUndoRedoProjectAndDirectExports",
+          "display": "RealV3ChoiceParametersUndoRedoProjectAndDirectExports",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d608419-42a5-8aa3-9129-622c404f89e2",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests.FiveFamiliesUseSameFormalModuleAndUnknownVersionDoesNotMigrate",
+          "display": "FiveFamiliesUseSameFormalModuleAndUnknownVersionDoesNotMigrate",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "11551ab4-a149-8c27-9292-84ba6cce9030",
+          "name": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests.InflightGenerationSwitchDoesNotCommitOntoNextPhoto",
+          "display": "InflightGenerationSwitchDoesNotCommitOntoNextPhoto",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 54172,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T17:19:08Z",
+      "elapsedSeconds": 2.25,
+      "command": [
+        "C:\\Program Files\\dotnet\\dotnet.EXE",
+        "vstest",
+        "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\005\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\005\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.LinearSrgbAndImmediateTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.LinearSrgbAndImmediateTests",
+      "directory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\005",
+      "expected": 2,
+      "results": [
+        {
+          "id": "1a5bc693-7ef5-8c32-942e-e37f5781db8a",
+          "name": "RAWSelectionAssistant.WpfTests.LinearSrgbAndImmediateTests.LinearExposureUsesActualProductionRenderHistoryReopenAndThreeOutputs",
+          "display": "LinearExposureUsesActualProductionRenderHistoryReopenAndThreeOutputs",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d3e5bd7-ceb6-870f-ac6d-d7e96fcf2f6b",
+          "name": "RAWSelectionAssistant.WpfTests.LinearSrgbAndImmediateTests.ImmediateAndSkippedDemoKeepSamePixelsRecipeSeedAndOneHistoryStep",
+          "display": "ImmediateAndSkippedDemoKeepSamePixelsRecipeSeedAndOneHistoryStep",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 18908,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T17:19:10Z",
+      "elapsedSeconds": 32.625,
+      "command": [
+        "C:\\Program Files\\dotnet\\dotnet.EXE",
+        "vstest",
+        "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\006\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\006\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests",
+      "directory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\006",
+      "expected": 5,
+      "results": [
+        {
+          "id": "1f5e92a1-4891-8512-abc8-13f05ace7b0a",
+          "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.RealPageOpenAdjustHistorySaveSyncAndExportKeepsLegacyPage",
+          "display": "RealPageOpenAdjustHistorySaveSyncAndExportKeepsLegacyPage",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1e0984bc-ff7d-8b71-81bc-85b9d4d0d09b",
+          "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.RepeatedPageLifecycleAndDraftDragsDoNotStartObsoleteRenders",
+          "display": "RepeatedPageLifecycleAndDraftDragsDoNotStartObsoleteRenders",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "16627443-d328-8418-bfae-f2f06073dfa9",
+          "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters",
+          "display": "SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "12f603ee-dca1-8712-9ce9-e5e71dc52774",
+          "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+          "display": "AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13f91347-a5c4-8996-b2cf-8c221f2ec6e0",
+          "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents",
+          "display": "FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 52304,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T17:19:43Z",
+      "elapsedSeconds": 1.5310000000172295,
+      "command": [
+        "C:\\Program Files\\dotnet\\dotnet.EXE",
+        "vstest",
+        "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\007\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\007\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.ReviewSafetyTests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.ReviewSafetyTests",
+      "directory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\007",
+      "expected": 4,
+      "results": [
+        {
+          "id": "147791e6-4bc0-89c9-b6e6-c900bf35f5a7",
+          "name": "RAWSelectionAssistant.WpfTests.ReviewSafetyTests.SessionTwoInstancesAndInvalidActivationKeepOldHistoryAndFile",
+          "display": "SessionTwoInstancesAndInvalidActivationKeepOldHistoryAndFile",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "14d71cfd-8112-8701-b9e1-401c2e1843e4",
+          "name": "RAWSelectionAssistant.WpfTests.ReviewSafetyTests.PublishingLeaseReleaseNeedsOwnerLockAndPreservesUnknownOrChangedFiles",
+          "display": "PublishingLeaseReleaseNeedsOwnerLockAndPreservesUnknownOrChangedFiles",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1209da79-779f-85c1-9527-8e67f8fda592",
+          "name": "RAWSelectionAssistant.WpfTests.ReviewSafetyTests.PortableSessionKeepsEmbeddedEditsWithoutImplicitRepositoryOverwrite",
+          "display": "PortableSessionKeepsEmbeddedEditsWithoutImplicitRepositoryOverwrite",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "12ac0695-ffd2-8872-a6d0-cf91ad2e9922",
+          "name": "RAWSelectionAssistant.WpfTests.ReviewSafetyTests.RasterExportFailureCancelExistingAndRetryOnlyOwnArtifacts",
+          "display": "RasterExportFailureCancelExistingAndRetryOnlyOwnArtifacts",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    },
+    {
+      "pid": 40624,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T17:19:45Z",
+      "elapsedSeconds": 0.9689999999827705,
+      "command": [
+        "C:\\Program Files\\dotnet\\dotnet.EXE",
+        "vstest",
+        "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\008\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\008\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests",
+      "directory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\source-focused\\run-20261018-011854-81873a92\\008",
+      "expected": 7,
+      "results": [
+        {
+          "id": "150e620d-17ce-8084-a46e-f79fcd3fc7e4",
+          "name": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged",
+          "display": "TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged (\"png\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13659093-a6f0-8829-b78f-8afdcbb46b0a",
+          "name": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.IdentityDamageMissingAndPhaseCancellationReleaseWorkspace",
+          "display": "IdentityDamageMissingAndPhaseCancellationReleaseWorkspace",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "15e41750-0450-8843-aafb-9ca0facfa72b",
+          "name": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb",
+          "display": "OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb (6)",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "12151b43-a766-87c8-82b9-3590b526f15d",
+          "name": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.UnsupportedSyntheticIccRejectsInsteadOfSilentlyRelabeling",
+          "display": "UnsupportedSyntheticIccRejectsInsteadOfSilentlyRelabeling",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1685eb62-7840-82a0-85ca-28ceda76a035",
+          "name": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb",
+          "display": "OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb (6)",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13491438-7feb-815e-a862-c0d9ab8cb90e",
+          "name": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged",
+          "display": "TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged (\"tif\")",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "115f9e3f-6ca3-86a5-bdae-ecc4f3537ab7",
+          "name": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.BoundedProductTiff3MatchesOldRgbPixelsWithoutFullWicIntermediate",
+          "display": "BoundedProductTiff3MatchesOldRgbPixelsWithoutFullWicIntermediate",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "p1ExecutionUnit": "method",
+  "executionPlan": [
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests",
+      "cases": [
+        {
+          "id": "16d13a43-b564-8e28-9427-07d2959fb3f2",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.ConflictHandlerPreservesLocalAndRejectsSecondConcurrentUpdate",
+          "displayName": "ConflictHandlerPreservesLocalAndRejectsSecondConcurrentUpdate",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1783d425-ccc8-8db5-b866-94cfd9067333",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.ProductRepositorySharesVersionsAcrossWorkspacesWithoutPathIdentity",
+          "displayName": "ProductRepositorySharesVersionsAcrossWorkspacesWithoutPathIdentity",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1403d4af-668b-8f37-8749-14cd39bab30b",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.IndependentEditVersionsRestoreTheirOwnExposure",
+          "displayName": "IndependentEditVersionsRestoreTheirOwnExposure",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1233e001-1735-8c7e-a33a-6a9823fdf18e",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.ExistingEditedPathCannotBeReboundToDifferentIdentity",
+          "displayName": "ExistingEditedPathCannotBeReboundToDifferentIdentity",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1df5093d-4cd9-8d52-afe7-0b3c34991fa9",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.SavedSessionRejectsChangedSourceInsteadOfDisplayingReplacement",
+          "displayName": "SavedSessionRejectsChangedSourceInsteadOfDisplayingReplacement",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "19878cfb-75d8-8291-a03f-473cb5c59e6a",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.SyncDialogFreezesSourceTargetsAndCountsAcrossFilterAndActiveChanges",
+          "displayName": "SyncDialogFreezesSourceTargetsAndCountsAcrossFilterAndActiveChanges",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "148c74f2-a92d-8371-b983-f426f97785d9",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.FilteredSelectionRangeAndHiddenTargetsUseOneVisibleOrder",
+          "displayName": "FilteredSelectionRangeAndHiddenTargetsUseOneVisibleOrder",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "16e6d31b-877f-8efa-b62b-94c982079685",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.PerTargetUndoDoesNotImportPreviousPhotographsAdjustments",
+          "displayName": "PerTargetUndoDoesNotImportPreviousPhotographsAdjustments",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "19b22751-1ac4-8c0c-af8e-4fb6bec10511",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.SessionReloadRestoresFilteredBatchAndActiveImageWithoutRewritingFiles",
+          "displayName": "SessionReloadRestoresFilteredBatchAndActiveImageWithoutRewritingFiles",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "15294d23-e173-803f-b974-2ec9f8ac0d09",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.SyncExcludesSourceAndHiddenTargetsAndBatchUndoRestoresTargets",
+          "displayName": "SyncExcludesSourceAndHiddenTargetsAndBatchUndoRestoresTargets",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "11960076-c5ea-8c78-a9de-63b3702409f1",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.V4RefusesUnsupportedStackInsteadOfDroppingDevelopOrFilm",
+          "displayName": "V4RefusesUnsupportedStackInsteadOfDroppingDevelopOrFilm",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1440f963-a70a-8d09-98ce-49a2e62f0ed7",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.InvalidSessionAndMissingSourcesDoNotDiscardStoredAdjustments",
+          "displayName": "InvalidSessionAndMissingSourcesDoNotDiscardStoredAdjustments",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "13dafc8c-4a7a-833b-a181-a399b8c1434c",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.SyncRefreshesActiveEditorAndNewProcessingVersionSurvivesSnapshot",
+          "displayName": "SyncRefreshesActiveEditorAndNewProcessingVersionSurvivesSnapshot",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1a2ebc45-6115-85f5-9cc2-0f8b33a4cea2",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.AdjustedThumbnailsFollowFrozenLatestStackForActiveAndSyncedTargets",
+          "displayName": "AdjustedThumbnailsFollowFrozenLatestStackForActiveAndSyncedTargets",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    },
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.InstantV3CorrectionBindingTests",
+      "cases": [
+        {
+          "id": "119c36dc-b424-86a6-b4d8-616f61e6d063",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3CorrectionBindingTests.RealSliderAndSeedBindingResetOnNewPhotoAndShapesDoNotCouple",
+          "displayName": "RealSliderAndSeedBindingResetOnNewPhotoAndShapesDoNotCouple",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1ce9a88d-9aa3-8954-8152-bef8600af532",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3CorrectionBindingTests.BoundPageHistoryIncludesV3DisableAndFailureDoesNotDiscardRedo",
+          "displayName": "BoundPageHistoryIncludesV3DisableAndFailureDoesNotDiscardRedo",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    },
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.InstantV3MultipleInputTests",
+      "cases": [
+        {
+          "id": "12e25c40-8931-8acc-b5e9-04dea4149ee2",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3MultipleInputTests.SelectedSecondSourcePersistsRendersDirectExportsAndRejectsChangedSource",
+          "displayName": "SelectedSecondSourcePersistsRendersDirectExportsAndRejectsChangedSource",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    },
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests",
+      "cases": [
+        {
+          "id": "128f53df-0861-88b7-862c-2caad09abbfe",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests.CancelAtActualPixelEncodeAndValidationKeepsNoPartialAndOldDefinitionExportable",
+          "displayName": "CancelAtActualPixelEncodeAndValidationKeepsNoPartialAndOldDefinitionExportable",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1f84b8ba-e311-8030-93e6-7d8494bb5737",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests.GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport",
+          "displayName": "GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport (\"Decode\")",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "186a09d1-06c4-86bd-ba54-b765e214c372",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests.GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport",
+          "displayName": "GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport (\"PixelRender\")",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "10f9acce-961f-8694-97a8-2e5d04615701",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests.GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport",
+          "displayName": "GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport (\"DevelopmentAnimation\")",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    },
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests",
+      "cases": [
+        {
+          "id": "1c607b95-48c0-8a1a-9e54-93f665931970",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests.RealV3ChoiceParametersUndoRedoProjectAndDirectExports",
+          "displayName": "RealV3ChoiceParametersUndoRedoProjectAndDirectExports",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1d608419-42a5-8aa3-9129-622c404f89e2",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests.FiveFamiliesUseSameFormalModuleAndUnknownVersionDoesNotMigrate",
+          "displayName": "FiveFamiliesUseSameFormalModuleAndUnknownVersionDoesNotMigrate",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "11551ab4-a149-8c27-9292-84ba6cce9030",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.InstantV3ProductTests.InflightGenerationSwitchDoesNotCommitOntoNextPhoto",
+          "displayName": "InflightGenerationSwitchDoesNotCommitOntoNextPhoto",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    },
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.LinearSrgbAndImmediateTests",
+      "cases": [
+        {
+          "id": "1d3e5bd7-ceb6-870f-ac6d-d7e96fcf2f6b",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.LinearSrgbAndImmediateTests.ImmediateAndSkippedDemoKeepSamePixelsRecipeSeedAndOneHistoryStep",
+          "displayName": "ImmediateAndSkippedDemoKeepSamePixelsRecipeSeedAndOneHistoryStep",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1a5bc693-7ef5-8c32-942e-e37f5781db8a",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.LinearSrgbAndImmediateTests.LinearExposureUsesActualProductionRenderHistoryReopenAndThreeOutputs",
+          "displayName": "LinearExposureUsesActualProductionRenderHistoryReopenAndThreeOutputs",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    },
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests",
+      "cases": [
+        {
+          "id": "1f5e92a1-4891-8512-abc8-13f05ace7b0a",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.RealPageOpenAdjustHistorySaveSyncAndExportKeepsLegacyPage",
+          "displayName": "RealPageOpenAdjustHistorySaveSyncAndExportKeepsLegacyPage",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "13f91347-a5c4-8996-b2cf-8c221f2ec6e0",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents",
+          "displayName": "FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "12f603ee-dca1-8712-9ce9-e5e71dc52774",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+          "displayName": "AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "16627443-d328-8418-bfae-f2f06073dfa9",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters",
+          "displayName": "SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1e0984bc-ff7d-8b71-81bc-85b9d4d0d09b",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.RepeatedPageLifecycleAndDraftDragsDoNotStartObsoleteRenders",
+          "displayName": "RepeatedPageLifecycleAndDraftDragsDoNotStartObsoleteRenders",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    },
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.ReviewSafetyTests",
+      "cases": [
+        {
+          "id": "12ac0695-ffd2-8872-a6d0-cf91ad2e9922",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ReviewSafetyTests.RasterExportFailureCancelExistingAndRetryOnlyOwnArtifacts",
+          "displayName": "RasterExportFailureCancelExistingAndRetryOnlyOwnArtifacts",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "147791e6-4bc0-89c9-b6e6-c900bf35f5a7",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ReviewSafetyTests.SessionTwoInstancesAndInvalidActivationKeepOldHistoryAndFile",
+          "displayName": "SessionTwoInstancesAndInvalidActivationKeepOldHistoryAndFile",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1209da79-779f-85c1-9527-8e67f8fda592",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ReviewSafetyTests.PortableSessionKeepsEmbeddedEditsWithoutImplicitRepositoryOverwrite",
+          "displayName": "PortableSessionKeepsEmbeddedEditsWithoutImplicitRepositoryOverwrite",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "14d71cfd-8112-8701-b9e1-401c2e1843e4",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.ReviewSafetyTests.PublishingLeaseReleaseNeedsOwnerLockAndPreservesUnknownOrChangedFiles",
+          "displayName": "PublishingLeaseReleaseNeedsOwnerLockAndPreservesUnknownOrChangedFiles",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    },
+    {
+      "unit": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests",
+      "cases": [
+        {
+          "id": "150e620d-17ce-8084-a46e-f79fcd3fc7e4",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged",
+          "displayName": "TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged (\"png\")",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "13491438-7feb-815e-a862-c0d9ab8cb90e",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged",
+          "displayName": "TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged (\"tif\")",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "15e41750-0450-8843-aafb-9ca0facfa72b",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb",
+          "displayName": "OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb (6)",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1685eb62-7840-82a0-85ca-28ceda76a035",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb",
+          "displayName": "OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb (6)",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "12151b43-a766-87c8-82b9-3590b526f15d",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.UnsupportedSyntheticIccRejectsInsteadOfSilentlyRelabeling",
+          "displayName": "UnsupportedSyntheticIccRejectsInsteadOfSilentlyRelabeling",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "115f9e3f-6ca3-86a5-bdae-ecc4f3537ab7",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.BoundedProductTiff3MatchesOldRgbPixelsWithoutFullWicIntermediate",
+          "displayName": "BoundedProductTiff3MatchesOldRgbPixelsWithoutFullWicIntermediate",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "13659093-a6f0-8829-b78f-8afdcbb46b0a",
+          "fullyQualifiedName": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.IdentityDamageMissingAndPhaseCancellationReleaseWorkspace",
+          "displayName": "IdentityDamageMissingAndPhaseCancellationReleaseWorkspace",
+          "source": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\safety-review\\11-delivery\\build-tests\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "Passed": 42
+  }
+}
