@@ -20,4 +20,10 @@ public sealed class ProductOwnershipTests
   var task=Task.Run(()=>session.RenderRegion(0,0,session.Layout.Width,session.Layout.Height));var timer=System.Diagnostics.Stopwatch.StartNew();while(StudioGlobalResources.AccountedBytes<=before+source.Bytes&&!task.IsCompleted){if(timer.Elapsed>TimeSpan.FromSeconds(5))Assert.Fail("No active work");await Task.Delay(1);}
   Assert.IsFalse(task.IsCompleted);session.Dispose();source.Dispose();Assert.IsTrue(StudioGlobalResources.AccountedBytes>before);using var result=await task;result.Dispose();Assert.AreEqual(before,StudioGlobalResources.AccountedBytes);
  }
+ [TestMethod] public void OriginalComparisonPreservesZoomCircleAndPaperGeometry()
+ {
+  var r=CandidateRecipe.Create("modern-itype-v3") with{Paper=new(Version:2,Window:"Circle",Zoom:2,Reflection:1,Emboss:1),Creative=new(Fog:1)};
+  var definition=new ProfessionalRawDefinition(){InstantFilm=new(true,AlgorithmVersion:3){V3=r}};
+  var original=InstantV3ProductPipeline.Original(definition);Assert.AreEqual(0d,original.InstantFilm!.V3!.Amount);Assert.AreEqual(2d,original.InstantFilm.V3.Paper!.Zoom);Assert.AreEqual("Circle",original.InstantFilm.V3.Paper.Window);Assert.AreEqual(0d,original.InstantFilm.V3.Paper.Reflection);
+ }
 }

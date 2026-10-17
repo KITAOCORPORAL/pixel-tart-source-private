@@ -6,7 +6,7 @@ public static class InstantV3ProductPipeline
  public static ProfessionalRawDefinition Original(ProfessionalRawDefinition definition)
  {
   if(definition.InstantFilm?.V3 is not{} recipe)return definition with{ExposureEv=0};
-  return definition with{InstantFilm=definition.InstantFilm with{V3=recipe with{Amount=0,Creative=null,Defects=null,Paper=null}}};
+  return definition with{InstantFilm=definition.InstantFilm with{V3=recipe with{Amount=0,Creative=null,Defects=null,Paper=recipe.Paper is{} paper?paper with{Pattern="Plain",Emboss=0,EdgeLine=0,Reflection=0}:null}}};
  }
  public static bool IsV3(ProfessionalRawDefinition definition)=>definition.InstantFilm?.AlgorithmVersion==3;
  private sealed class Source(ProfessionalRawMaster master,ProfessionalRawDefinition basis):ICandidatePixelSource
