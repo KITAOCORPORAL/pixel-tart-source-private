@@ -5,7 +5,10 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed partial class ReferenceColorWorkspaceViewModel
 {
  public IReadOnlyList<string> InstantEngineVersions {get;}=["V2","V3"];
- public string InstantEngineVersion {get;set;}="V2";
+ private string _instantEngineVersion="V2";
+ public string InstantEngineVersion {get=>_instantEngineVersion;set{if(_instantEngineVersion==value)return;_instantEngineVersion=value;OnPropertyChanged(nameof(InstantEngineVersion));OnPropertyChanged(nameof(IsInstantV3Selected));OnPropertyChanged(nameof(IsInstantV2Selected));}}
+ public bool IsInstantV3Selected=>InstantEngineVersion=="V3";
+ public bool IsInstantV2Selected=>!IsInstantV3Selected;
  public double InstantV3Exposure {get;set;}
  public double InstantV3Toe {get;set;}=.025;
  public double InstantV3Shoulder {get;set;}=.3;

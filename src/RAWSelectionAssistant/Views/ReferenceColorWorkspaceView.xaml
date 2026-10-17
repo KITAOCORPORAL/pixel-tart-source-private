@@ -87,6 +87,7 @@
       <TextBlock Text="{views:StudioText InstantBatch08_1}" TextWrapping="Wrap"/>
       <TextBlock Text="{views:StudioText InstantV3Live0}" TextWrapping="Wrap"/>
       <ComboBox ItemsSource="{Binding InstantEngineVersions}" SelectedItem="{Binding InstantEngineVersion}"/>
+      <StackPanel Visibility="{Binding IsInstantV3Selected,Converter={StaticResource BoolVisibility}}">
       <TextBlock Text="{views:StudioText InstantV3Live1}"/>
       <Slider Minimum="-2" Maximum="2" Value="{Binding InstantV3Exposure}"/>
       <Slider Minimum="0" Maximum="0.3" Value="{Binding InstantV3Toe}"/>
@@ -121,6 +122,7 @@
       <TextBlock Text="{views:StudioText InstantV3Live23}"/>
       <TextBox Text="{Binding InstantV3Seed, UpdateSourceTrigger=LostFocus}"/>
       <WrapPanel><Button Content="{views:StudioText InstantV3Live24}" Command="{Binding UndoInstantV3Command}"/><Button Content="{views:StudioText InstantV3Live25}" Command="{Binding RedoInstantV3Command}"/></WrapPanel>
+      </StackPanel>
       <ComboBox ItemsSource="{Binding InstantProfiles}" SelectedItem="{Binding SelectedInstantProfile}" DisplayMemberPath="Name"/>
       <WrapPanel>
        <Button Command="{Binding SelectInstantCameraCommand}" CommandParameter="SX-70" ToolTip="SX-70"><StackPanel><views:InstantCameraArtwork Width="92" Height="64" Model="SX-70"/><TextBlock Text="SX-70"/></StackPanel></Button>
@@ -143,9 +145,11 @@
       <Slider Minimum="0" Maximum="1" Value="{Binding InstantCropX}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantCropY}"/>
       <TextBlock Text="{Binding InstantDimensions}" TextWrapping="Wrap"/>
       <TextBlock Text="{views:StudioText InstantBatch08_9}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantUneven}"/>
+      <StackPanel Visibility="{Binding IsInstantV2Selected,Converter={StaticResource BoolVisibility}}">
       <TextBlock Text="{views:StudioText InstantBatch08_10}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantUnspread}"/>
       <TextBlock Text="{views:StudioText InstantBatch08_11}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantRoller}"/>
       <TextBlock Text="{views:StudioText InstantBatch08_12}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantArtLeak}"/>
+      </StackPanel>
       <TextBlock Text="{views:StudioText InstantBatch08_13}" TextWrapping="Wrap"/><Slider Minimum="0" Maximum="40" Value="{Binding InstantEnvironmentCelsius}"/>
       <WrapPanel>
        <Button Content="⚄" Command="{Binding ToggleInstantDiceCommand}" ToolTip="{views:StudioText InstantBatch08_14}">
