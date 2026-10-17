@@ -1,0 +1,227 @@
+{
+  "root": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\artifacts\\v3-product\\07-candidate-final-verified\\run-20261017-142148-3c6c0775",
+  "assembly": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+  "assemblySha256": "0128eb14dd5e398e7821f302b7afdf0d4d3bff4ec3654aaafdf2cd7539d5a580",
+  "discovered": 13,
+  "selected": 13,
+  "runs": [
+    {
+      "pid": 5880,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T06:21:49Z",
+      "elapsedSeconds": 0.9060000000172295,
+      "command": [
+        "C:/Program Files/dotnet/dotnet.exe",
+        "vstest",
+        "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+        "/Settings:N:\\pixart\\kitao-instant-film-product-v3-20261017\\artifacts\\v3-product\\07-candidate-final-verified\\run-20261017-142148-3c6c0775\\000\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-instant-film-product-v3-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\artifacts\\v3-product\\07-candidate-final-verified\\run-20261017-142148-3c6c0775\\000\\temp",
+      "limitSeconds": 600,
+      "class": "ALL",
+      "executionUnit": "ALL",
+      "directory": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\artifacts\\v3-product\\07-candidate-final-verified\\run-20261017-142148-3c6c0775\\000",
+      "expected": 13,
+      "results": [
+        {
+          "id": "1916682b-0ccd-8eeb-8594-a903f1ec3bea",
+          "name": "Kitao.InstantFilm.Research.Tests.OwnershipTests.SnapshotDetachesEvidenceAndRandomGeometryFromExternalMutation",
+          "display": "SnapshotDetachesEvidenceAndRandomGeometryFromExternalMutation",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1151321e-6e01-8039-b87f-28e1805a5efc",
+          "name": "Kitao.InstantFilm.Research.Tests.CoordinateTests.StripsRegionsAndFullOutputMatchWithoutLocalCoordinateReset",
+          "display": "StripsRegionsAndFullOutputMatchWithoutLocalCoordinateReset",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "10b8b67d-4a31-8224-8f5e-0f53dce634f5",
+          "name": "Kitao.InstantFilm.Research.Tests.CoordinateTests.PreviewIsLinearLightAreaReductionOfFullSourceEffect",
+          "display": "PreviewIsLinearLightAreaReductionOfFullSourceEffect",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1d1a8952-d8e6-811c-b567-c7aa6410c87f",
+          "name": "Kitao.InstantFilm.Research.Tests.CandidateTests.FullTilesRegionsAndReopenAreBitExactAcrossHaloEdges",
+          "display": "FullTilesRegionsAndReopenAreBitExactAcrossHaloEdges",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "108303a0-f512-8486-8672-9695da4bd2b4",
+          "name": "Kitao.InstantFilm.Research.Tests.OwnershipTests.RunningCancellationDoesNotLeakOutputOrScratch",
+          "display": "RunningCancellationDoesNotLeakOutputOrScratch",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "14b67e05-b78d-8819-a2f4-4cb5a64f3ebf",
+          "name": "Kitao.InstantFilm.Research.Tests.OwnershipTests.BorrowedTaskKeepsRetiredCacheEntryChargedUntilLastUse",
+          "display": "BorrowedTaskKeepsRetiredCacheEntryChargedUntilLastUse",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "15627b8c-b70a-8c67-8aa7-06a182fcd11d",
+          "name": "Kitao.InstantFilm.Research.Tests.CandidateTests.StrengthIsSmoothZeroIsExactAndSeedChangesOnlyMaterial",
+          "display": "StrengthIsSmoothZeroIsExactAndSeedChangesOnlyMaterial",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "137f4386-5818-8041-8439-d6e91419af31",
+          "name": "Kitao.InstantFilm.Research.Tests.OwnershipTests.RetainedOutputsStayChargedAndDisposeIsIdempotent",
+          "display": "RetainedOutputsStayChargedAndDisposeIsIdempotent",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "124d6259-c3f7-8070-aaee-bad378a53365",
+          "name": "Kitao.InstantFilm.Research.Tests.CandidateTests.CancelFailureAndBudgetRefusalReleaseAllScratch",
+          "display": "CancelFailureAndBudgetRefusalReleaseAllScratch",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "1cdd709b-b055-88d5-beab-a84b5dfe1b62",
+          "name": "Kitao.InstantFilm.Research.Tests.ProfileHotspotMeasurementTests.MeasureRepeatedRegistryResolutionAgainstTaskLocalPalette",
+          "display": "MeasureRepeatedRegistryResolutionAgainstTaskLocalPalette",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "19e3e9ec-7aa3-866b-be9d-dd443f18b7dd",
+          "name": "Kitao.InstantFilm.Research.Tests.CandidateTests.ImpulseHasFiniteHaloAndFlatFieldsStayFiniteWithNoSeams",
+          "display": "ImpulseHasFiniteHaloAndFlatFieldsStayFiniteWithNoSeams",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "16dca085-4f26-851f-8198-e6f7d1d4dd90",
+          "name": "Kitao.InstantFilm.Research.Tests.CandidateTests.ModernAliasesShareResponseBlueFamiliesDifferAndNoCalibratedProfilesExist",
+          "display": "ModernAliasesShareResponseBlueFamiliesDifferAndNoCalibratedProfilesExist",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "137f5efd-af59-816f-ae49-08ce53261102",
+          "name": "Kitao.InstantFilm.Research.Tests.CandidateTests.LinearLuminanceBwIsNeutralAndNonfiniteInputsAreRefused",
+          "display": "LinearLuminanceBwIsNeutralAndNonfiniteInputsAreRefused",
+          "outcome": "Passed",
+          "error": ""
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "status": "PASSED",
+  "p1ExecutionUnit": "method",
+  "executionPlan": [
+    {
+      "unit": "ALL",
+      "cases": [
+        {
+          "id": "16dca085-4f26-851f-8198-e6f7d1d4dd90",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.CandidateTests.ModernAliasesShareResponseBlueFamiliesDifferAndNoCalibratedProfilesExist",
+          "displayName": "ModernAliasesShareResponseBlueFamiliesDifferAndNoCalibratedProfilesExist",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "137f5efd-af59-816f-ae49-08ce53261102",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.CandidateTests.LinearLuminanceBwIsNeutralAndNonfiniteInputsAreRefused",
+          "displayName": "LinearLuminanceBwIsNeutralAndNonfiniteInputsAreRefused",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1d1a8952-d8e6-811c-b567-c7aa6410c87f",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.CandidateTests.FullTilesRegionsAndReopenAreBitExactAcrossHaloEdges",
+          "displayName": "FullTilesRegionsAndReopenAreBitExactAcrossHaloEdges",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "15627b8c-b70a-8c67-8aa7-06a182fcd11d",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.CandidateTests.StrengthIsSmoothZeroIsExactAndSeedChangesOnlyMaterial",
+          "displayName": "StrengthIsSmoothZeroIsExactAndSeedChangesOnlyMaterial",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "124d6259-c3f7-8070-aaee-bad378a53365",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.CandidateTests.CancelFailureAndBudgetRefusalReleaseAllScratch",
+          "displayName": "CancelFailureAndBudgetRefusalReleaseAllScratch",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "19e3e9ec-7aa3-866b-be9d-dd443f18b7dd",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.CandidateTests.ImpulseHasFiniteHaloAndFlatFieldsStayFiniteWithNoSeams",
+          "displayName": "ImpulseHasFiniteHaloAndFlatFieldsStayFiniteWithNoSeams",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1151321e-6e01-8039-b87f-28e1805a5efc",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.CoordinateTests.StripsRegionsAndFullOutputMatchWithoutLocalCoordinateReset",
+          "displayName": "StripsRegionsAndFullOutputMatchWithoutLocalCoordinateReset",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "10b8b67d-4a31-8224-8f5e-0f53dce634f5",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.CoordinateTests.PreviewIsLinearLightAreaReductionOfFullSourceEffect",
+          "displayName": "PreviewIsLinearLightAreaReductionOfFullSourceEffect",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "137f4386-5818-8041-8439-d6e91419af31",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.OwnershipTests.RetainedOutputsStayChargedAndDisposeIsIdempotent",
+          "displayName": "RetainedOutputsStayChargedAndDisposeIsIdempotent",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "14b67e05-b78d-8819-a2f4-4cb5a64f3ebf",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.OwnershipTests.BorrowedTaskKeepsRetiredCacheEntryChargedUntilLastUse",
+          "displayName": "BorrowedTaskKeepsRetiredCacheEntryChargedUntilLastUse",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1916682b-0ccd-8eeb-8594-a903f1ec3bea",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.OwnershipTests.SnapshotDetachesEvidenceAndRandomGeometryFromExternalMutation",
+          "displayName": "SnapshotDetachesEvidenceAndRandomGeometryFromExternalMutation",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "108303a0-f512-8486-8672-9695da4bd2b4",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.OwnershipTests.RunningCancellationDoesNotLeakOutputOrScratch",
+          "displayName": "RunningCancellationDoesNotLeakOutputOrScratch",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        },
+        {
+          "id": "1cdd709b-b055-88d5-beab-a84b5dfe1b62",
+          "fullyQualifiedName": "Kitao.InstantFilm.Research.Tests.ProfileHotspotMeasurementTests.MeasureRepeatedRegistryResolutionAgainstTaskLocalPalette",
+          "displayName": "MeasureRepeatedRegistryResolutionAgainstTaskLocalPalette",
+          "source": "N:\\pixart\\kitao-instant-film-product-v3-20261017\\tools\\InstantFilmCandidate.Tests\\bin\\Release\\net10.0\\InstantFilmCandidate.Tests.dll",
+          "executor": "executor://mstestadapter/v4"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "Passed": 13
+  }
+}
