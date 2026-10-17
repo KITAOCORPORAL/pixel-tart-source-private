@@ -4,7 +4,7 @@
 
 ## 基准和提交
 
-前轮fetch/ls-remote核对远端feature/kitao-v3-corrections-colorpage-20261017为b40bccfd459902d8761fd53a6f05c0894350a148；本轮再次fetch在2026-10-17因GitHub 443连接失败，当前远端状态无法独立复核。本地后续52efba2d已有独立色彩链、即时演示、原尺寸不同照片代码，保留后继续安全修复。
+历史阶段：最初远端为b40bccfd459902d8761fd53a6f05c0894350a148，2026-10-17某次fetch曾因GitHub 443连接失败而无法当时复核；这不是当前状态。后续正常push和独立ls-remote已确认该轮最终HEAD为1a2ca91716d0680afa6357a0730a5bcda156a805。本次承接再次fetch/ls-remote一致确认该基准，保留已有色彩链、即时演示、项目安全和原尺寸成果。最新预览复用优化的交付及远端身份另见相邻preview-reuse-20261017报告。
 
 冻结产品源码：9ad468e851202ba35d7154803673d3c08aa9dde8；诊断交付提交8b8161e13c65c6628e04d7ed400c23066757dbd2只修正旧RAW版本目录测试的显式保存语义，未改src像素链。
 隔离290文件目录：N:/pixart/kitao-v3-corrections-colorpage-20261017/artifacts/safety-review/11-delivery/release/win-x64。

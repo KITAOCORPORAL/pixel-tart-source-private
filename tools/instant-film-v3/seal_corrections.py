@@ -22,6 +22,7 @@ def main():
     parser.add_argument("--baseline", default="0fac23a4f17f137b4118b209f07c964fcc756757")
     parser.add_argument("--linear-chain", action="store_true")
     parser.add_argument("--safety-review", action="store_true")
+    parser.add_argument("--preview-reuse", action="store_true")
     args = parser.parse_args()
     delivery = args.delivery.resolve()
     evidence = args.evidence_dir.resolve() if args.evidence_dir else ROOT / "docs/research/v3-corrections-colorpage-20261017"
@@ -140,6 +141,26 @@ def main():
         for name in ["05-full-run.log", "05-full-run-fixed.log", "05-full-build.log", "09-full-run.log", "09-full-memory.json", "09-full-bindings.json", "07-linear-run.log", "08-installed-reference.log"]:
             file = base / name
             if file.exists(): paths.add(file)
+    if args.preview_reuse:
+        base=ROOT/"artifacts/preview-reuse"
+        for label in ["02-focused","03-focused","04-focused","05-risk","06-risk","07-key","08-risk","09-risk","11-risk","13-risk","14-risk","15-risk","17-mapping","19-risk","21-risk"]:
+            paths.update((base/label).glob("*.trx"))
+        for name in ["01-baseline-memory.json","01-baseline-run.log","10-memory.json","10-run.log","16-memory.json","16-audit-run.log","18-memory.json","18-audit-run.log","18-audit-bindings.json","18-audit-build.log","18-probe-build.log","18-stages.log","18-linear-run.log","18-linear-reference.log","20-memory.json","20-audit-run.log","22-memory.json","22-audit-run.log","22-audit-bindings.json","22-audit-build.log","22-stages.log","22-linear-run.log","22-linear-reference.log"]:
+            file=base/name
+            if file.exists():paths.add(file)
+        for label in ["01-baseline-output","10-output","16-output","18-output","20-output","22-output"]:
+            for name in ["FULL_PAGE_RESULT.json","APPLY_WORK.json","REOPEN_WORK.json","CONTINUOUS_WORK.json","LIFECYCLE_WORK.json"]:
+                file=base/label/name
+                if file.exists():paths.add(file)
+        for label in ["12-delivery","16-delivery","18-delivery","20-delivery"]:
+            for suite in ["source-focused","published-focused","source-core","published-core","published-wpf","candidate"]:
+                for file in (base/label/suite).glob("run-*/summary.json"):
+                    paths.add(file)
+                    old=load(file)
+                    for run in old["runs"]:
+                        folder=pathlib.Path(run["directory"])
+                        for name in ["results.trx","stdout.log","stderr.log","runsettings.xml"]:
+                            if (folder/name).exists():paths.add(folder/name)
     paths.update(delivery.glob("*.log"))
     paths.update([delivery / "commands.json", delivery / "bindings.json", delivery / "release-files.json", delivery / "source-commit.txt"])
     for name in ([] if args.evidence_dir else ["07-reference-negative-controls.json", "07-negative-wrong-matrix.log", "07-negative-nonfinite.log",

@@ -1,0 +1,777 @@
+{
+  "baselineSource": "b1411670 (instrumentation-only on 1a2ca917)",
+  "finalSource": "72e916dcef46100c1fb6d96e8ff61745d6fb1d29",
+  "first": {
+    "Width": 5496,
+    "Height": 3670
+  },
+  "second": {
+    "Width": 4688,
+    "Height": 7028
+  },
+  "outputSize": {
+    "Width": 4220,
+    "Height": 4863
+  },
+  "apply": {
+    "beforeMs": 40884.9447,
+    "afterMs": 28151.4958,
+    "savedMs": 12733.4489,
+    "percent": 31.14459122651082,
+    "beforeTimings": {
+      "DecodeMs": 658.4896,
+      "PixelMs": 13482.0569,
+      "DemoMs": 0.0006,
+      "CommitMs": 26273.5854,
+      "MasterCacheHit": false
+    },
+    "afterTimings": {
+      "DecodeMs": 685.7904,
+      "PixelMs": 13463.1333,
+      "DemoMs": 0.0007,
+      "CommitMs": 488.7949,
+      "MasterCacheHit": false,
+      "CompareMs": 12998.9459
+    },
+    "beforeWork": [
+      {
+        "stage": "SecondDecode",
+        "count": 4,
+        "elapsedMs": 2794.4694
+      },
+      {
+        "stage": "DecodeMaster",
+        "count": 1,
+        "elapsedMs": 599.1322
+      },
+      {
+        "stage": "EffectPreview",
+        "count": 2,
+        "elapsedMs": 26600.362500000003
+      },
+      {
+        "stage": "ComparePreview",
+        "count": 1,
+        "elapsedMs": 12693.4576
+      },
+      {
+        "stage": "Present",
+        "count": 1,
+        "elapsedMs": 198.8389
+      }
+    ],
+    "afterWork": [
+      {
+        "stage": "SecondDecode",
+        "count": 1,
+        "elapsedMs": 467.2046
+      },
+      {
+        "stage": "DecodeMaster",
+        "count": 1,
+        "elapsedMs": 679.7761
+      },
+      {
+        "stage": "SecondMappedOpen",
+        "count": 2,
+        "elapsedMs": 674.1107
+      },
+      {
+        "stage": "EffectPreview",
+        "count": 1,
+        "elapsedMs": 13456.4174
+      },
+      {
+        "stage": "ComparePreview",
+        "count": 1,
+        "elapsedMs": 12644.3181
+      },
+      {
+        "stage": "Present",
+        "count": 1,
+        "elapsedMs": 198.4073
+      }
+    ]
+  },
+  "reopen": {
+    "beforeMs": 80686.1136,
+    "afterMs": 29140.2685,
+    "savedMs": 51545.8451,
+    "percent": 63.88440687023002,
+    "beforeWork": [
+      {
+        "stage": "SecondDecode",
+        "count": 10,
+        "elapsedMs": 6064.4658
+      },
+      {
+        "stage": "DecodeMaster",
+        "count": 4,
+        "elapsedMs": 2164.413
+      },
+      {
+        "stage": "EffectPreview",
+        "count": 2,
+        "elapsedMs": 26095.418700000002
+      },
+      {
+        "stage": "ComparePreview",
+        "count": 2,
+        "elapsedMs": 26622.6072
+      },
+      {
+        "stage": "Present",
+        "count": 2,
+        "elapsedMs": 386.2777
+      }
+    ],
+    "afterWork": [
+      {
+        "stage": "SecondDecode",
+        "count": 1,
+        "elapsedMs": 401.149
+      },
+      {
+        "stage": "DecodeMaster",
+        "count": 1,
+        "elapsedMs": 549.328
+      },
+      {
+        "stage": "SecondMappedOpen",
+        "count": 2,
+        "elapsedMs": 680.8167000000001
+      },
+      {
+        "stage": "EffectPreview",
+        "count": 1,
+        "elapsedMs": 12892.1484
+      },
+      {
+        "stage": "ComparePreview",
+        "count": 1,
+        "elapsedMs": 12621.5131
+      },
+      {
+        "stage": "Present",
+        "count": 1,
+        "elapsedMs": 194.9606
+      }
+    ]
+  },
+  "pixels": {
+    "previewHash": "44F41908921EB387EDE946007AE648ADCA596FDF2CA539685A97185C60BC4963",
+    "previewError": 2.165012152555157e-06,
+    "limit": 3.0518043793392844e-05,
+    "allExportFileHashesEqual": true,
+    "allRegionChangesEqual": true,
+    "formats": [
+      {
+        "format": 3,
+        "sha256": "910B55A2248136FDE5B86C59EC99F22A9E1DCA1FAE756CF18CB0B219E4DD2A22",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        }
+      },
+      {
+        "format": 2,
+        "sha256": "F09CC9C401EE4D23EF4F3BC24B1859F29313F3EDEAD0DEC6B19D99E94D10CF26",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        }
+      },
+      {
+        "format": 1,
+        "sha256": "D7B5D7F96067A58A2B96041A7A49D1979870F5945E118B8C4E4DB72196F6C90B",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.5186500801259405,
+          "RootMeanSquareError": 0.8984023364650413,
+          "MaximumError": 15,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        }
+      }
+    ]
+  },
+  "memory": {
+    "beforePrivatePeak": 4664594432,
+    "afterPrivatePeak": 2106720256,
+    "beforeWorkingSetPeak": 4548444160,
+    "afterWorkingSetPeak": 2138370048,
+    "finalLifetimeWorkingSetPeak": 2138861568,
+    "baselineSeconds": 309.5113323999685,
+    "finalSeconds": 331.26810709998244,
+    "baselineSamples": 1236,
+    "finalSamples": 1323,
+    "firstFloatBytes": 242043840,
+    "secondOldFloatBytes": 395367168,
+    "secondMappedPixelBytes": 197683584,
+    "limitations": "One fresh process per build, 250ms sample, not CPU-exclusive. Final includes two extra continuous applies; baseline does not. Timing is observation, not statistical guarantee. OS mapping residency is charged to ledger but private/working set are separate."
+  },
+  "continuous": [
+    {
+      "weight": 0.52,
+      "elapsedMs": 28269.0347,
+      "timings": {
+        "DecodeMs": 0.3486,
+        "PixelMs": 12827.3792,
+        "DemoMs": 0.0006,
+        "CommitMs": 851.8716,
+        "MasterCacheHit": true,
+        "CompareMs": 14203.1164
+      },
+      "events": [
+        {
+          "Stage": "BeforeContinuous",
+          "ElapsedMs": 0,
+          "PrivateBytes": 907304960,
+          "WorkingSet": 967745536,
+          "AccountedBytes": 244806180,
+          "SinceCaptureMs": 4.6402
+        },
+        {
+          "Stage": "SecondMappedOpen",
+          "ElapsedMs": 325.5033,
+          "PrivateBytes": 910188544,
+          "WorkingSet": 970641408,
+          "AccountedBytes": 443580508,
+          "SinceCaptureMs": 495.1569
+        },
+        {
+          "Stage": "EffectPreview",
+          "ElapsedMs": 12822.282,
+          "PrivateBytes": 1009082368,
+          "WorkingSet": 1042501632,
+          "AccountedBytes": 271455780,
+          "SinceCaptureMs": 12992.1527
+        },
+        {
+          "Stage": "SecondMappedOpen",
+          "ElapsedMs": 337.1052,
+          "PrivateBytes": 1018216448,
+          "WorkingSet": 1055088640,
+          "AccountedBytes": 443580508,
+          "SinceCaptureMs": 13348.3338
+        },
+        {
+          "Stage": "ComparePreview",
+          "ElapsedMs": 13682.5027,
+          "PrivateBytes": 988758016,
+          "WorkingSet": 1048526848,
+          "AccountedBytes": 271455780,
+          "SinceCaptureMs": 26695.4697
+        },
+        {
+          "Stage": "Present",
+          "ElapsedMs": 279.1392,
+          "PrivateBytes": 1018757120,
+          "WorkingSet": 1078263808,
+          "AccountedBytes": 244806180,
+          "SinceCaptureMs": 28267.6428
+        },
+        {
+          "Stage": "AfterContinuous",
+          "ElapsedMs": 0,
+          "PrivateBytes": 1018757120,
+          "WorkingSet": 1078263808,
+          "AccountedBytes": 244806180,
+          "SinceCaptureMs": 28273.6744
+        }
+      ]
+    },
+    {
+      "weight": 0.37,
+      "elapsedMs": 31182.9157,
+      "timings": {
+        "DecodeMs": 0.1037,
+        "PixelMs": 17072.5434,
+        "DemoMs": 0.0008,
+        "CommitMs": 469.4103,
+        "MasterCacheHit": true,
+        "CompareMs": 12929.4133
+      },
+      "events": [
+        {
+          "Stage": "BeforeContinuous",
+          "ElapsedMs": 0,
+          "PrivateBytes": 1018757120,
+          "WorkingSet": 1078263808,
+          "AccountedBytes": 244806180,
+          "SinceCaptureMs": 4.8265
+        },
+        {
+          "Stage": "SecondMappedOpen",
+          "ElapsedMs": 578.6651,
+          "PrivateBytes": 1024372736,
+          "WorkingSet": 1084805120,
+          "AccountedBytes": 443580508,
+          "SinceCaptureMs": 1117.8815
+        },
+        {
+          "Stage": "EffectPreview",
+          "ElapsedMs": 17067.3942,
+          "PrivateBytes": 979959808,
+          "WorkingSet": 1026211840,
+          "AccountedBytes": 271455780,
+          "SinceCaptureMs": 17606.7423
+        },
+        {
+          "Stage": "SecondMappedOpen",
+          "ElapsedMs": 327.237,
+          "PrivateBytes": 985907200,
+          "WorkingSet": 1032945664,
+          "AccountedBytes": 443580508,
+          "SinceCaptureMs": 17951.6781
+        },
+        {
+          "Stage": "ComparePreview",
+          "ElapsedMs": 12639.4688,
+          "PrivateBytes": 907894784,
+          "WorkingSet": 972984320,
+          "AccountedBytes": 271455780,
+          "SinceCaptureMs": 30263.4941
+        },
+        {
+          "Stage": "Present",
+          "ElapsedMs": 189.9577,
+          "PrivateBytes": 915886080,
+          "WorkingSet": 980561920,
+          "AccountedBytes": 244806180,
+          "SinceCaptureMs": 31183.8696
+        },
+        {
+          "Stage": "AfterContinuous",
+          "ElapsedMs": 0,
+          "PrivateBytes": 915886080,
+          "WorkingSet": 980561920,
+          "AccountedBytes": 244806180,
+          "SinceCaptureMs": 31187.7386
+        }
+      ]
+    }
+  ],
+  "lifecycle": [
+    {
+      "Stage": "ColdStart",
+      "ElapsedMs": 0,
+      "PrivateBytes": 17666048,
+      "WorkingSet": 59432960,
+      "AccountedBytes": 0,
+      "SinceCaptureMs": 8.8643
+    },
+    {
+      "Stage": "SourceLoaded",
+      "ElapsedMs": 0,
+      "PrivateBytes": 389545984,
+      "WorkingSet": 442777600,
+      "AccountedBytes": 0,
+      "SinceCaptureMs": 988.5749
+    },
+    {
+      "Stage": "FirstApplied",
+      "ElapsedMs": 0,
+      "PrivateBytes": 955445248,
+      "WorkingSet": 1005375488,
+      "AccountedBytes": 242043840,
+      "SinceCaptureMs": 29756.7003
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 327.9526,
+      "PrivateBytes": 956424192,
+      "WorkingSet": 1007759360,
+      "AccountedBytes": 440818168,
+      "SinceCaptureMs": 30089.8726
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 323.7205,
+      "PrivateBytes": 906899456,
+      "WorkingSet": 967008256,
+      "AccountedBytes": 443546104,
+      "SinceCaptureMs": 42242.849
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 325.035,
+      "PrivateBytes": 906010624,
+      "WorkingSet": 966664192,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 42574.8437
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 323.7199,
+      "PrivateBytes": 907264000,
+      "WorkingSet": 967589888,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 42905.9209
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 322.5701,
+      "PrivateBytes": 907714560,
+      "WorkingSet": 967749632,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 43235.8996
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 334.3131,
+      "PrivateBytes": 919695360,
+      "WorkingSet": 984162304,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 103039.999
+    },
+    {
+      "Stage": "ContinuousCompleted",
+      "ElapsedMs": 0,
+      "PrivateBytes": 931012608,
+      "WorkingSet": 976359424,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 114801.3513
+    },
+    {
+      "Stage": "SecondDecode",
+      "ElapsedMs": 401.0344,
+      "PrivateBytes": 1060114432,
+      "WorkingSet": 1123512320,
+      "AccountedBytes": 486850020,
+      "SinceCaptureMs": 115505.4241
+    },
+    {
+      "Stage": "DecodeMaster",
+      "ElapsedMs": 544.0926,
+      "PrivateBytes": 1060114432,
+      "WorkingSet": 1123512320,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 115509.885
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 336.3105,
+      "PrivateBytes": 1060503552,
+      "WorkingSet": 1123573760,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 115851.6724
+    },
+    {
+      "Stage": "EffectPreview",
+      "ElapsedMs": 17727.0982,
+      "PrivateBytes": 1612734464,
+      "WorkingSet": 1543966720,
+      "AccountedBytes": 271455780,
+      "SinceCaptureMs": 133241.5288
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 444.6853,
+      "PrivateBytes": 1619980288,
+      "WorkingSet": 1554370560,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 133709.1417
+    },
+    {
+      "Stage": "ComparePreview",
+      "ElapsedMs": 12884.3106,
+      "PrivateBytes": 1813823488,
+      "WorkingSet": 1832808448,
+      "AccountedBytes": 271455780,
+      "SinceCaptureMs": 146148.5092
+    },
+    {
+      "Stage": "Present",
+      "ElapsedMs": 193.0061,
+      "PrivateBytes": 1824116736,
+      "WorkingSet": 1842692096,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 146907.0253
+    },
+    {
+      "Stage": "SecondDecode",
+      "ElapsedMs": 404.338,
+      "PrivateBytes": 2078347264,
+      "WorkingSet": 2095259648,
+      "AccountedBytes": 486850020,
+      "SinceCaptureMs": 147624.8226
+    },
+    {
+      "Stage": "DecodeMaster",
+      "ElapsedMs": 549.915,
+      "PrivateBytes": 2078347264,
+      "WorkingSet": 2095206400,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 147629.6434
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 337.7753,
+      "PrivateBytes": 2078736384,
+      "WorkingSet": 2095210496,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 147972.2642
+    },
+    {
+      "Stage": "EffectPreview",
+      "ElapsedMs": 12778.8019,
+      "PrivateBytes": 2024005632,
+      "WorkingSet": 2041487360,
+      "AccountedBytes": 271455780,
+      "SinceCaptureMs": 160413.0845
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 336.7323,
+      "PrivateBytes": 2032930816,
+      "WorkingSet": 2049896448,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 160767.3085
+    },
+    {
+      "Stage": "ComparePreview",
+      "ElapsedMs": 12663.01,
+      "PrivateBytes": 1640710144,
+      "WorkingSet": 1702432768,
+      "AccountedBytes": 271455780,
+      "SinceCaptureMs": 173093.898
+    },
+    {
+      "Stage": "Present",
+      "ElapsedMs": 193.2416,
+      "PrivateBytes": 1647878144,
+      "WorkingSet": 1709346816,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 173863.1803
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 333.8353,
+      "PrivateBytes": 1650659328,
+      "WorkingSet": 1711632384,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 174203.0292
+    },
+    {
+      "Stage": "SecondDecode",
+      "ElapsedMs": 402.7991,
+      "PrivateBytes": 1549602816,
+      "WorkingSet": 1623498752,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 187601.7058
+    },
+    {
+      "Stage": "DecodeMaster",
+      "ElapsedMs": 548.1392,
+      "PrivateBytes": 1549602816,
+      "WorkingSet": 1623502848,
+      "AccountedBytes": 2762340,
+      "SinceCaptureMs": 187606.315
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 337.082,
+      "PrivateBytes": 1549987840,
+      "WorkingSet": 1623486464,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 187948.187
+    },
+    {
+      "Stage": "EffectPreview",
+      "ElapsedMs": 12856.5968,
+      "PrivateBytes": 1466425344,
+      "WorkingSet": 1424265216,
+      "AccountedBytes": 271455780,
+      "SinceCaptureMs": 200468.8696
+    },
+    {
+      "Stage": "Present",
+      "ElapsedMs": 187.9086,
+      "PrivateBytes": 1480589312,
+      "WorkingSet": 1438613504,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 201212.2878
+    },
+    {
+      "Stage": "FirstWorkspaceClosed",
+      "ElapsedMs": 0,
+      "PrivateBytes": 1481089024,
+      "WorkingSet": 1439526912,
+      "AccountedBytes": 2762340,
+      "SinceCaptureMs": 201261.3538
+    },
+    {
+      "Stage": "Reopened",
+      "ElapsedMs": 0,
+      "PrivateBytes": 1310306304,
+      "WorkingSet": 1359986688,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 230414.3335
+    },
+    {
+      "Stage": "BeforeExportTiff",
+      "ElapsedMs": 0,
+      "PrivateBytes": 1310306304,
+      "WorkingSet": 1359986688,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 230419.0105
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 332.8716,
+      "PrivateBytes": 1312329728,
+      "WorkingSet": 1361629184,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 231102.0934
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 334.3805,
+      "PrivateBytes": 1226457088,
+      "WorkingSet": 1285578752,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 241642.5762
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 333.4152,
+      "PrivateBytes": 1126576128,
+      "WorkingSet": 1202753536,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 252275.8519
+    },
+    {
+      "Stage": "AfterExportTiff",
+      "ElapsedMs": 0,
+      "PrivateBytes": 1154134016,
+      "WorkingSet": 1220186112,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 262489.5007
+    },
+    {
+      "Stage": "BeforeExportPng",
+      "ElapsedMs": 0,
+      "PrivateBytes": 1153503232,
+      "WorkingSet": 1219866624,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 262494.0518
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 333.3905,
+      "PrivateBytes": 1153933312,
+      "WorkingSet": 1219874816,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 263170.6861
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 330.6742,
+      "PrivateBytes": 1147908096,
+      "WorkingSet": 1207824384,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 275048.2284
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 331.9387,
+      "PrivateBytes": 1177710592,
+      "WorkingSet": 1257713664,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 285996.3478
+    },
+    {
+      "Stage": "AfterExportPng",
+      "ElapsedMs": 0,
+      "PrivateBytes": 1259962368,
+      "WorkingSet": 1317855232,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 296514.4067
+    },
+    {
+      "Stage": "BeforeExportJpeg",
+      "ElapsedMs": 0,
+      "PrivateBytes": 1258795008,
+      "WorkingSet": 1316818944,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 296520.0864
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 332.7984,
+      "PrivateBytes": 1259982848,
+      "WorkingSet": 1317564416,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 297196.9871
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 334.0028,
+      "PrivateBytes": 1102917632,
+      "WorkingSet": 1164840960,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 307599.8121
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 332.9949,
+      "PrivateBytes": 1135042560,
+      "WorkingSet": 1193766912,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 318253.769
+    },
+    {
+      "Stage": "AfterExportJpeg",
+      "ElapsedMs": 0,
+      "PrivateBytes": 1019035648,
+      "WorkingSet": 1100652544,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 328477.3646
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 332.345,
+      "PrivateBytes": 1019576320,
+      "WorkingSet": 1100910592,
+      "AccountedBytes": 443580508,
+      "SinceCaptureMs": 330412.7286
+    },
+    {
+      "Stage": "EffectPreview",
+      "ElapsedMs": 608.893,
+      "PrivateBytes": 1009672192,
+      "WorkingSet": 1040232448,
+      "AccountedBytes": 244806180,
+      "SinceCaptureMs": 330689.0166
+    },
+    {
+      "Stage": "WorkspaceClosed",
+      "ElapsedMs": 0,
+      "PrivateBytes": 1009672192,
+      "WorkingSet": 1040248832,
+      "AccountedBytes": 0,
+      "SinceCaptureMs": 330694.9393
+    }
+  ]
+}

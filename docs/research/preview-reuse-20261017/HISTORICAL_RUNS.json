@@ -1,0 +1,42 @@
+[
+  {
+    "run": "01-baseline",
+    "seconds": 309.5113323999685,
+    "exitCode": 0,
+    "privateMax": 4664594432,
+    "workingSetMax": 4548444160,
+    "status": "BASELINE"
+  },
+  {
+    "run": "10",
+    "seconds": 216.43347520002862,
+    "exitCode": 0,
+    "privateMax": 2507894784,
+    "workingSetMax": 2538917888,
+    "status": "SUPERSEDED_NOT_FINAL"
+  },
+  {
+    "run": "16",
+    "seconds": 331.5684800000163,
+    "exitCode": 0,
+    "privateMax": 2105892864,
+    "workingSetMax": 2138038272,
+    "status": "SUPERSEDED_NOT_FINAL"
+  },
+  {
+    "run": "18",
+    "seconds": 331.24088489997666,
+    "exitCode": 0,
+    "privateMax": 2106294272,
+    "workingSetMax": 2137927680,
+    "status": "SUPERSEDED_NOT_FINAL"
+  },
+  {
+    "run": "20",
+    "seconds": 344.1611531000235,
+    "exitCode": 0,
+    "privateMax": 2101948416,
+    "workingSetMax": 2122674176,
+    "status": "SUPERSEDED_NOT_FINAL"
+  }
+]

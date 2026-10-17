@@ -1,0 +1,218 @@
+[
+  {
+    "delivery": "12",
+    "source": "e2a87967227e615d62d0cf558149268e91bac63d",
+    "suites": [
+      {
+        "suite": "source-focused",
+        "status": "PASSED",
+        "recordedRuns": 10,
+        "selected": 59,
+        "assemblySha256": "b43ff5d55eabff5598eab3337097ae594dafcf55a74ad0d38fa21d3f74af3374",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "published-focused",
+        "status": "PASSED",
+        "recordedRuns": 10,
+        "selected": 59,
+        "assemblySha256": "b43ff5d55eabff5598eab3337097ae594dafcf55a74ad0d38fa21d3f74af3374",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "source-core",
+        "status": "FAILED",
+        "recordedRuns": 1,
+        "selected": 1713,
+        "assemblySha256": "fef7a8abe147efffef3aa0bb0499d03454e7e0692d050e070b34c8df0cd086e1",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "published-core",
+        "status": "FAILED",
+        "recordedRuns": 1,
+        "selected": 1713,
+        "assemblySha256": "fef7a8abe147efffef3aa0bb0499d03454e7e0692d050e070b34c8df0cd086e1",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "published-wpf",
+        "status": "RUNNING",
+        "recordedRuns": 15,
+        "selected": 1673,
+        "assemblySha256": "b43ff5d55eabff5598eab3337097ae594dafcf55a74ad0d38fa21d3f74af3374",
+        "classification": "SUPERSEDED_INCOMPLETE_NOT_A_PASS"
+      },
+      {
+        "suite": "candidate",
+        "status": "PASSED",
+        "recordedRuns": 1,
+        "selected": 25,
+        "assemblySha256": "506164bfdfbfda250690f798314e995be443a94ac6fb1ebd176dc19b4c25c2fc",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      }
+    ]
+  },
+  {
+    "delivery": "16",
+    "source": "097d9b5665f1963d0451c7b4f1cc743449e77080",
+    "suites": [
+      {
+        "suite": "source-focused",
+        "status": "PASSED",
+        "recordedRuns": 10,
+        "selected": 60,
+        "assemblySha256": "4765a43aa7022bc404236182448ebd287a0d93633a9a106735c4d01aed2bf038",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "published-focused",
+        "status": "PASSED",
+        "recordedRuns": 10,
+        "selected": 60,
+        "assemblySha256": "4765a43aa7022bc404236182448ebd287a0d93633a9a106735c4d01aed2bf038",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "source-core",
+        "status": "FAILED",
+        "recordedRuns": 1,
+        "selected": 1713,
+        "assemblySha256": "0938164fc5cab7ad1827eac69eed6088f4e696d0da47ad3fa0d716d2f5aeaafd",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "published-core",
+        "status": "FAILED",
+        "recordedRuns": 1,
+        "selected": 1713,
+        "assemblySha256": "0938164fc5cab7ad1827eac69eed6088f4e696d0da47ad3fa0d716d2f5aeaafd",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "published-wpf",
+        "status": "RUNNING",
+        "recordedRuns": 15,
+        "selected": 1674,
+        "assemblySha256": "4765a43aa7022bc404236182448ebd287a0d93633a9a106735c4d01aed2bf038",
+        "classification": "SUPERSEDED_INCOMPLETE_NOT_A_PASS"
+      },
+      {
+        "suite": "candidate",
+        "status": "PASSED",
+        "recordedRuns": 1,
+        "selected": 25,
+        "assemblySha256": "e2af3a3716ed56ca99789f998fbf19af42fc2edad2bb99936a86af27e6b8c31d",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      }
+    ]
+  },
+  {
+    "delivery": "18",
+    "source": "a12ba8b9bea0dff0db9d6d0fac5df14995985047",
+    "suites": [
+      {
+        "suite": "source-focused",
+        "status": "PASSED",
+        "recordedRuns": 10,
+        "selected": 60,
+        "assemblySha256": "90fa3f57f922f91992841397fe786c940f6a88d283afc374ae78715bad688be5",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "published-focused",
+        "status": "PASSED",
+        "recordedRuns": 10,
+        "selected": 60,
+        "assemblySha256": "90fa3f57f922f91992841397fe786c940f6a88d283afc374ae78715bad688be5",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "source-core",
+        "status": "FAILED",
+        "recordedRuns": 1,
+        "selected": 1713,
+        "assemblySha256": "1b4ee65cea5e35ad98989889b7e96c07034cee3d6a06f1d9021c380a6bee1e22",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "published-core",
+        "status": "FAILED",
+        "recordedRuns": 1,
+        "selected": 1713,
+        "assemblySha256": "1b4ee65cea5e35ad98989889b7e96c07034cee3d6a06f1d9021c380a6bee1e22",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "published-wpf",
+        "status": "FAILED",
+        "recordedRuns": 231,
+        "selected": 1674,
+        "assemblySha256": "90fa3f57f922f91992841397fe786c940f6a88d283afc374ae78715bad688be5",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "candidate",
+        "status": "PASSED",
+        "recordedRuns": 1,
+        "selected": 25,
+        "assemblySha256": "3e801dba1860f3f04188699889615d1d444e75eb528f9e9bed3623ee339b5b07",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      }
+    ]
+  },
+  {
+    "delivery": "20",
+    "source": "628e91f61378b55a999b69c59aa974a3a20ff1c9",
+    "suites": [
+      {
+        "suite": "source-focused",
+        "status": "PASSED",
+        "recordedRuns": 10,
+        "selected": 60,
+        "assemblySha256": "319c54e272fc787bc0d7279de5caaa6703d549c42df04ad8da91049ad6b8dd4e",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "published-focused",
+        "status": "PASSED",
+        "recordedRuns": 10,
+        "selected": 60,
+        "assemblySha256": "319c54e272fc787bc0d7279de5caaa6703d549c42df04ad8da91049ad6b8dd4e",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "source-core",
+        "status": "FAILED",
+        "recordedRuns": 1,
+        "selected": 1713,
+        "assemblySha256": "7b4850d90134983414eba5ef8fe74c6b9ad7680097b62f5ee51d54ca10c35194",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "published-core",
+        "status": "FAILED",
+        "recordedRuns": 1,
+        "selected": 1713,
+        "assemblySha256": "7b4850d90134983414eba5ef8fe74c6b9ad7680097b62f5ee51d54ca10c35194",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      },
+      {
+        "suite": "published-wpf",
+        "status": "RUNNING",
+        "recordedRuns": 3,
+        "selected": 1675,
+        "assemblySha256": "319c54e272fc787bc0d7279de5caaa6703d549c42df04ad8da91049ad6b8dd4e",
+        "classification": "SUPERSEDED_INCOMPLETE_NOT_A_PASS"
+      },
+      {
+        "suite": "candidate",
+        "status": "PASSED",
+        "recordedRuns": 1,
+        "selected": 25,
+        "assemblySha256": "d9a23635fcab50622d65576b0aa0d241cc0f714f54d7c2ad7e4dc1e9ba4239ad",
+        "classification": "SUPERSEDED_NOT_FINAL"
+      }
+    ]
+  }
+]

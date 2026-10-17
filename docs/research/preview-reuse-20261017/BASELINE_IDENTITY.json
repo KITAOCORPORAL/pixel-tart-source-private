@@ -1,0 +1,22 @@
+{
+  "referenceBase": "1a2ca91716d0680afa6357a0730a5bcda156a805",
+  "instrumentedCommit": "b1411670",
+  "scope": "Instrumentation-only, same pixel implementation; source built immediately before instrumentation commit",
+  "binaries": [
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "sha256": "D38D569615F6DDF2E42FBFCDDC3827BF4437DBE5B41E40430831D0370D14BD1C",
+      "bytes": 3381248
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "sha256": "0F164EABE78AD1832FBE6ABCEF1C5A0230F47E9CF38EDED9B62774F4C7FC6E37",
+      "bytes": 4654080
+    },
+    {
+      "name": "PhotoEngineHomeAudit.dll",
+      "sha256": "E3DD4A8E1531BD020A561A23321B08AA513C632243E68F0617268494F5DA44ED",
+      "bytes": 175616
+    }
+  ]
+}
