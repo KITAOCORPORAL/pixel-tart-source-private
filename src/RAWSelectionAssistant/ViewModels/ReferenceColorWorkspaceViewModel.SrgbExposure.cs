@@ -14,6 +14,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   ApplySrgbExposureCommand=new(async _=>
   {
    if(!SrgbExposureAvailable||ActiveTarget is not{} target||IsLoading||IsExporting||IsInstantGenerating)return;
+   Editor.CopyCurrentLookTo([target]);
    var prior=target.RawDefinition;var active=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);
    var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldMode=Editor.IndependentRawMode;var oldHistory=Editor.CaptureSessionHistory();var oldSize=Editor.SourcePixelSize;var oldStatus=target.Status;var oldError=target.Error;
    var oldRawMaster=target.RawMaster;var oldWidth=target.PixelWidth;var oldHeight=target.PixelHeight;var oldThumb=target.Thumbnail;var oldSourceThumb=target.SourceThumbnail;var oldEnabled=Editor.Enabled;var oldView=Editor.ViewMode;var oldTargetImage=TargetImage;var oldFailed=FailedTarget;
@@ -37,7 +38,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
    {
     if(committed is Guid id&&target.ActiveEditVersionId==id)
     {target.ActiveEditVersionId=active;target.RawDefinition=prior;target.RawInput=oldInput;target.RawMaster=_disposed?null:oldRawMaster;target.LinearRawMaster=_disposed||!ReferenceEquals(ActiveTarget,target)?null:oldMaster;target.PixelWidth=oldWidth;target.PixelHeight=oldHeight;target.Thumbnail=oldThumb;target.SourceThumbnail=oldSourceThumb;target.AppliedLookSnapshot=oldLook;target.ColorAdjustmentStackSnapshot=oldStack;target.FilmSettingsSnapshot=oldFilm;var version=target.EditVersions.FirstOrDefault(x=>x.Id==id);if(version is not null)target.EditVersions.Remove(version);}
-    if(!_disposed&&revision==Volatile.Read(ref _activationRevision)&&ReferenceEquals(ActiveTarget,target))
+    if(!_disposed&&!IsLoading&&ReferenceEquals(ActiveTarget,target))
     {
      RestoreInstantControls(prior?.InstantFilm);Editor.ApplyTargetSnapshot(oldLook,oldFilm,oldStack,render:false,targetIdentity:active??target.Id);await Editor.SetSourceAsync(target.AssetId,oldSource,render:false);
      if(oldImage is not null)Editor.PresentIndependentRaw(oldImage);Editor.SetIndependentRawSize(oldSize);Editor.IndependentRawMode=oldMode;Editor.Enabled=oldEnabled;Editor.ViewMode=oldView;TargetImage=oldTargetImage;FailedTarget=oldFailed;Editor.RestoreSessionHistory(oldHistory);target.Status=oldStatus;target.Error=oldError;

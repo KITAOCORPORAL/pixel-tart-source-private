@@ -147,6 +147,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 if(staged.Editor.MatchedImage is {} image)Editor.PresentIndependentRaw(image);
                 Editor.Enabled=staged.Editor.Enabled;Editor.ViewMode=staged.Editor.ViewMode;
                 Editor.SetIndependentRawSize(staged.Editor.SourcePixelSize);
+                RawExposureEv=staged.RawExposureEv;RawRedGain=staged.RawRedGain;RawGreenGain=staged.RawGreenGain;RawBlueGain=staged.RawBlueGain;RawUseCameraWhiteBalance=staged.RawUseCameraWhiteBalance;
+                RawPipelineStatus=staged.RawPipelineStatus;InstantDimensions=staged.InstantDimensions;FailedTarget=staged.FailedTarget;
+                foreach(var name in new[]{nameof(RawExposureEv),nameof(RawRedGain),nameof(RawGreenGain),nameof(RawBlueGain),nameof(RawUseCameraWhiteBalance),nameof(RawPipelineStatus),nameof(InstantDimensions)})OnPropertyChanged(name);
                 RestoreInstantControls(active.RawDefinition?.InstantFilm);
                 Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("SessionTransfer",token);
                 foreach(var item in restored)
@@ -173,7 +176,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         }
         catch
         {
-            _activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);
+            if(!_disposed)_activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);
+            if(_disposed)
+            {
+                foreach(var item in oldTargets.Concat(restored)){item.LinearRawMaster=null;item.RawMaster=null;}
+                throw;
+            }
             Targets.Clear();foreach(var item in oldTargets)Targets.Add(item);
             FailedTarget=oldFailed;Editor.RestoreTargetEngine(oldEngine,oldMode);
             FilterScope=oldFilter;MinimumRating=oldRating;ColorLabelFilter=oldLabel;Layout=oldLayout;Editor.ContextRailOpen=oldAux;SessionPath=oldSession;

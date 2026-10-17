@@ -732,7 +732,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         _observedTargets.Clear();
         foreach (var id in _thumbnailJobs.Keys.ToArray()) CancelTargetThumbnail(id);
         // The running export owns disposal in its finally block; closing only signals cancellation.
-        _exportCancellation?.Cancel(); Editor.Dispose();
+        _exportCancellation?.Cancel(); Editor.Dispose();TargetImage=null;foreach(var target in Targets){target.Thumbnail=null;target.SourceThumbnail=null;}
     }
 
     private async Task ChooseTargetAsync()
@@ -956,7 +956,7 @@ public sealed class ReferenceTargetItem : ObservableObject
     public ProfessionalRawMaster? LinearRawMaster
     {
         get=>_linearRawMaster;
-        set{_linearRawMaster=value;if(value is null){StudioGlobalResources.Release(MasterResourceOwner,"Master");return;}var weak=new WeakReference<ReferenceTargetItem>(this);StudioGlobalResources.Store(MasterResourceOwner,"Master",(long)value.Image.Rgb32.Length*sizeof(float),()=>{if(weak.TryGetTarget(out var target))if(ReferenceEquals(target._linearRawMaster,value))target._linearRawMaster=null;});StudioGlobalResources.BindRetainedBuffer(value.Image,MasterResourceOwner,"Master");}
+        set{if(value is not null&&ReferenceEquals(_linearRawMaster?.Image,value.Image)){_linearRawMaster=value;return;}_linearRawMaster=value;if(value is null){StudioGlobalResources.Release(MasterResourceOwner,"Master");return;}var weak=new WeakReference<ReferenceTargetItem>(this);StudioGlobalResources.Store(MasterResourceOwner,"Master",(long)value.Image.Rgb32.Length*sizeof(float),()=>{if(weak.TryGetTarget(out var target))if(ReferenceEquals(target._linearRawMaster,value))target._linearRawMaster=null;});StudioGlobalResources.BindRetainedBuffer(value.Image,MasterResourceOwner,"Master");}
     }
     public FrozenRawMaster? RawMaster { get; set; }
     public ReferenceExportStatus ExportStatus { get; set; }

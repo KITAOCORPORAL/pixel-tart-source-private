@@ -80,7 +80,7 @@ public sealed class PreparedPreviewTransactionTests
         EnsureTestApplication();var root=NewRoot();try
         {
             using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));await vm.LoadTargetAsync(Image(root,"input.png",82));vm.SrgbExposureEv=.2;await vm.ApplySrgbExposureCommand.ExecuteAsync(null);var id=vm.ActiveTarget!.ActiveEditVersionId;var count=vm.ActiveTarget.EditVersions.Count;var pixels=Pixels(vm.Editor.MatchedImage!);
-            bool visited=false;using(var capture=CandidateProcessingEvidence.Capture(p=>{if(p=="PreviewCommit"){visited=true;Assert.IsTrue(vm.IsInstantGenerating);Assert.IsFalse(vm.ApplySrgbExposureCommand.CanExecute(null));vm.ExitInstantPresentationForLifecycle();}}))await vm.ApplySrgbExposureCommand.ExecuteAsync(null);
+            bool visited=false;using(var capture=CandidateProcessingEvidence.Capture(p=>{if(p=="PreviewCommit"){visited=true;Assert.IsTrue(vm.IsInstantGenerating);Assert.IsFalse(vm.ApplySrgbExposureCommand.CanExecute(null));vm.StopProcessingCommand.Execute(null);}}))await vm.ApplySrgbExposureCommand.ExecuteAsync(null);
             Assert.IsTrue(visited);Assert.AreEqual(id,vm.ActiveTarget.ActiveEditVersionId);Assert.AreEqual(count,vm.ActiveTarget.EditVersions.Count);Assert.AreEqual(pixels,Pixels(vm.Editor.MatchedImage!));
         }finally{Directory.Delete(root,true);}
     });
@@ -120,6 +120,17 @@ public sealed class PreparedPreviewTransactionTests
             var pixels=Pixels(vm.Editor.MatchedImage!);var id=target.ActiveEditVersionId;target.LinearRawMaster=null;
             using(var capture=CandidateProcessingEvidence.Capture(p=>{if(p=="SecondDecode")throw new System.Runtime.InteropServices.COMException("codec boundary");}))await vm.ApplySrgbExposureCommand.ExecuteAsync(null);
             Assert.IsNotNull(vm.LastProcessingFailure);Assert.AreEqual(id,target.ActiveEditVersionId);Assert.AreEqual(pixels,Pixels(vm.Editor.MatchedImage!));Assert.IsFalse(vm.IsInstantGenerating);
+        }finally{Directory.Delete(root,true);}
+    });
+    [TestMethod] public Task SessionCancellationKeepsOldPixelsAndDisposalDoesNotReacquireMaster()=>RunSta(async()=>
+    {
+        EnsureTestApplication();var root=NewRoot();try
+        {
+            var input=Image(root,"input.png",77);var project=Path.Combine(root,"project.ptstudio.json");using(var creator=new ReferenceColorWorkspaceViewModel(new Dialogs(root))){await creator.LoadTargetAsync(input);creator.SrgbExposureEv=.4;await creator.ApplySrgbExposureCommand.ExecuteAsync(null);await creator.SaveSessionAsync(project);}
+            using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));await vm.LoadTargetAsync(Image(root,"old.png",23));var old=vm.ActiveTarget;var image=Pixels(vm.Editor.MatchedImage??vm.Editor.SourceImage!);
+            using(var capture=CandidateProcessingEvidence.Capture(p=>{if(p=="SessionPrepared")vm.StopProcessingCommand.Execute(null);}))await Assert.ThrowsAsync<OperationCanceledException>(()=>vm.LoadSessionAsync(project));
+            Assert.AreSame(old,vm.ActiveTarget);Assert.AreEqual(image,Pixels(vm.Editor.MatchedImage??vm.Editor.SourceImage!));Assert.IsFalse(vm.IsLoading);
+            using(var capture=CandidateProcessingEvidence.Capture(p=>{if(p=="SessionTransfer")vm.Dispose();}))await Assert.ThrowsAsync<OperationCanceledException>(()=>vm.LoadSessionAsync(project));Assert.IsTrue(vm.Targets.All(x=>x.LinearRawMaster is null));Assert.IsNull(vm.Editor.SourceImage);Assert.IsNull(vm.Editor.MatchedImage);
         }finally{Directory.Delete(root,true);}
     });
     [DataTestMethod][DataRow(1)][DataRow(2)][DataRow(3)][DataRow(4)][DataRow(5)][DataRow(6)][DataRow(7)][DataRow(8)]

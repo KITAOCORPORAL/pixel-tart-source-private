@@ -1147,7 +1147,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         OnPropertyChanged(nameof(StatusText));
     }
     private void OnLanguageChanged(object? sender, PropertyChangedEventArgs args) => OnPropertyChanged(nameof(StatusText));
-    public void Dispose(){PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, OnLanguageChanged, nameof(StudioLocalizationService.Language));Interlocked.Increment(ref _revision);_lifetime.Cancel();_lifetime.Dispose();_render?.Cancel();_render?.Dispose();_previewCache.Clear();}
+    public void Dispose(){PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, OnLanguageChanged, nameof(StudioLocalizationService.Language));Interlocked.Increment(ref _revision);_lifetime.Cancel();_lifetime.Dispose();_render?.Cancel();_render?.Dispose();_previewCache.Clear();_source=null;_interactiveSource=null;_rawPreviewMaster=null;_interactiveRawMaster=null;_frozenRawMaster=null;_matchV4Session=null;MatchedImage=null;ClearIndependentDetail();}
 }
 
 public sealed record ReferenceSourceCategory(string Label, string? Kind);
