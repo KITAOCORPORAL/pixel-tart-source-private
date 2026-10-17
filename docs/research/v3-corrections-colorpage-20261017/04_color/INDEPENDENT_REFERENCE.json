@@ -1,0 +1,56 @@
+{
+  "status": "PASSED_INDEPENDENT_REFERENCE",
+  "errors": [],
+  "colourVersion": "0.4.7",
+  "ocioVersion": "2.4.2",
+  "colourModuleSha256": "396cbaf3eb6d4ac32539eac8068c1df5020db642cb75184edb886e1dc3897c74",
+  "ocioModule": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\v3-corrections\\reference-python\\PyOpenColorIO\\__init__.py",
+  "comparisons": [
+    {
+      "name": "DaVinciIntermediate",
+      "maxAbs": 0.0,
+      "limit": 2e-10
+    },
+    {
+      "name": "ACEScct",
+      "maxAbs": 0.0,
+      "limit": 2e-10
+    },
+    {
+      "name": "sRGB",
+      "maxAbs": 0.0,
+      "limit": 2e-10
+    },
+    {
+      "name": "BT709",
+      "maxAbs": 0.0,
+      "limit": 2e-10
+    },
+    {
+      "name": "BT2020",
+      "maxAbs": 0.0,
+      "limit": 2e-10
+    },
+    {
+      "name": "DWG matrix",
+      "maxAbs": 4.924456703525593e-09,
+      "limit": 6e-09
+    },
+    {
+      "name": "PQ cd/m2",
+      "maxAbs": 0.0,
+      "limit": 1e-12
+    },
+    {
+      "name": "CDL Clamp",
+      "maxAbs": 2.5243622359116813e-08,
+      "limit": 2e-06
+    },
+    {
+      "name": "CDL NoClamp",
+      "maxAbs": 1.3669836196328333e-07,
+      "limit": 2e-06
+    }
+  ],
+  "scope": "Colour0.4.7 actual encoding/matrix and OCIO2.4.2 actual CDL; not self roundtrip or full Resolve output"
+}

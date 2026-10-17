@@ -1,0 +1,69 @@
+{
+  "package": "Resolve-Color-Reference.zip",
+  "sha256": "3299FD66983DF362C8AE79DE6A368E74034E74DC67DE27EE29D5328A35F67DAB",
+  "entries": [
+    {
+      "path": "Resolve-Color-Reference/formulas.md",
+      "bytes": 4317,
+      "sha256": "6CB1646747AB6101468B80DC0C5E5510BC272685693D8D473716C615D508C9E8"
+    },
+    {
+      "path": "Resolve-Color-Reference/official-docs.md",
+      "bytes": 4319,
+      "sha256": "89F3C975B8C653206E4C463668D3D0BE0EB32DEC99A4DC5F67A0D2E287E6D636"
+    },
+    {
+      "path": "Resolve-Color-Reference/standards.md",
+      "bytes": 1623,
+      "sha256": "F92025720FB09ACD8FBBE0145D9F4AABF71166A2725E6AFD7EA0CE6E7B7947DF"
+    },
+    {
+      "path": "Resolve-Color-Reference/community-implementations.md",
+      "bytes": 4233,
+      "sha256": "AAD3B9CB28E8153EC0E722E70E3C6C26899605D203811312E4B4FC5F3DF9FC69"
+    },
+    {
+      "path": "Resolve-Color-Reference/open-source-projects.md",
+      "bytes": 6927,
+      "sha256": "18A7BF897D4279A700AA470EF4A498A711B901AAA2EFB292809A72B3EC859DDE"
+    },
+    {
+      "path": "Resolve-Color-Reference/engine-architecture-proposal.md",
+      "bytes": 3913,
+      "sha256": "D3407E1D5F2F1876D6AF91F66AACB17ABBE65EC0E26BF72599197EE2CCECBDD0"
+    },
+    {
+      "path": "Resolve-Color-Reference/gaps.md",
+      "bytes": 1705,
+      "sha256": "1470863B3741DA93A55E8C7B3A9A7B5152386760ACF9FEAAD835EFA061B00597"
+    },
+    {
+      "path": "Resolve-Color-Reference/sources.csv",
+      "bytes": 6501,
+      "sha256": "E8B4332B5D3C9C672C91CE1A6A9729426F051A4CA2D7763A4A8B7F8FDC260950"
+    },
+    {
+      "path": "Resolve-Color-Reference/README.md",
+      "bytes": 1473,
+      "sha256": "3700798620467B4F23914C824294ECA484D46BC41740B55974E041415E3C81D0"
+    },
+    {
+      "path": "Resolve-Color-Reference/reference_impl/rcr.py",
+      "bytes": 4215,
+      "sha256": "BC279479BE0AABD5FCE9E976BFA433F81F0CC7D33B4787627F84D707E84DE3AD"
+    },
+    {
+      "path": "Resolve-Color-Reference/reference_impl/test_rcr.py",
+      "bytes": 2048,
+      "sha256": "829370B98D039D25E41F7F67FFA037CB790F9EAC93BDD0B077C3CEDCC0B849FE"
+    },
+    {
+      "path": "Resolve-Color-Reference/reference_impl/test_output.txt",
+      "bytes": 775,
+      "sha256": "13E6B66181693A3516A5A544F2AADAC97B15D73F1F7088A1FA2FFD7FAA975857"
+    }
+  ],
+  "fourSeparateAttachments": "NOT_LOCATED_IN_EXACT_NAMED_DOWNLOADS; one supplied archive available",
+  "documentsAreDataNotInstructions": true,
+  "originalReferenceTestLimit": "Original test exits normally after printed FAIL, not trusted as gate; actual new driver exits nonzero on comparison failure"
+}
