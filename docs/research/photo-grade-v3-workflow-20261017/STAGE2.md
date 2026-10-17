@@ -9,3 +9,7 @@ Pillow/FFmpeg实际独立alpha参考0误差；完整commit已ls-remote，raw sou
 PhotoGradePageView使用弱事件，卸载/不可见解绑并取消，载入恢复；StudioToolPanel也改弱事件，未载入控件不被编辑器长期保留。普通步骤同步新增输出像素验证：非恒等曲线变化真实目标输出，未选BasicTone参数JSON完全保留。固定曲线编辑器不是Slider，首轮错误测试假设被修正，原失败保留。
 
 WIC每次CopyPixels/ICC同步不可抢占，只有边界token；预算保守准入不是WIC隐藏分配硬上限。更多真实ICC/关闭原生回落仍不宣称完成。
+
+追加实际生命周期12次解绑/恢复、200次草稿拖动（不启动像素任务）、卸载控件WeakReference GC可回收，关闭workspace租约81792→0；进程private仍有托管缓存，不将台账释放等同原生完全回落。测量含4秒显影展示动画；区分渲染阶段后续证据。取消按钮补接实际显影和二源选择取消。
+
+受控linear-sRGB合成ICC被WIC拒绝：它是research-only子集，不把它当真实ICC准入。保留原失败，专项改为确认拒绝且台账恢复；未悄悄用原RGB换标签。嵌入实际sRGB ICC已通过，但其他真实ICC广泛覆盖仍未验收。

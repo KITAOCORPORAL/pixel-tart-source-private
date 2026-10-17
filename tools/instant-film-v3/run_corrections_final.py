@@ -7,6 +7,7 @@ import argparse, hashlib, json, os, pathlib, shutil, subprocess, sys
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=pathlib.Path, required=True)
+    parser.add_argument("--authorized-manifest", type=pathlib.Path)
     args = parser.parse_args()
     root = pathlib.Path(__file__).resolve().parents[2]
     os.chdir(root)
@@ -75,8 +76,11 @@ def main():
         # A nonzero result from the fail-closed runner is recorded, not silenced.
         run(label, command, timeout=3600, env=env)
 
-    focused = ["RAWSelectionAssistant.WpfTests." + name for name in ["PhotoGradePageV1Tests", "InstantV3CorrectionBindingTests", "InstantV3PhaseCancellationTests", "InstantV3MultipleInputTests", "InstantV3ProductTests"]]
-    suite("source-focused", output / "build-tests/bin/RAWSelectionAssistant.WpfTests/release/RAWSelectionAssistant.WpfTests.dll", classes=focused)
+    focused = ["RAWSelectionAssistant.WpfTests." + name for name in ["PhotoGradePageV1Tests", "InstantV3CorrectionBindingTests", "InstantV3PhaseCancellationTests", "InstantV3MultipleInputTests", "InstantV3ProductTests", "SecondExposureV2Tests"]]
+    focused_env = os.environ.copy()
+    if args.authorized_manifest: focused_env["KITAO_PHOTO_PAGE_AUTHORIZED_MANIFEST"] = str(args.authorized_manifest.resolve())
+    suite("source-focused", output / "build-tests/bin/RAWSelectionAssistant.WpfTests/release/RAWSelectionAssistant.WpfTests.dll", classes=focused, env=focused_env)
+    suite("published-focused", host / "wpf/RAWSelectionAssistant.WpfTests.dll", classes=focused, env=focused_env)
     suite("source-core", output / "build-core/bin/RAWSelectionAssistant.Tests/release/RAWSelectionAssistant.Tests.dll", single=True)
     env = os.environ.copy()
     env["PIXEL_TART_BATCH12_RELEASE_CORE"] = str(host / "core/RAWSelectionAssistant.Core.dll")

@@ -186,7 +186,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         InitializeRangeSelection();
         BuildColorSpaceModelCommand = new AsyncRelayCommand(_ => BuildColorSpaceModelAsync(), _ => Editor.SourceImage is not null);
         ChooseTargetCommand = new AsyncRelayCommand(_ => ChooseTargetAsync());
-        StopProcessingCommand = new RelayCommand(_ => {Editor.StopProcessing();_activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);InvalidateProfessionalPreview();}, _ => Editor.IsBusy || IsLoading || !ProfessionalDetailWork.IsCompleted);
+        StopProcessingCommand = new RelayCommand(_ => {ExitInstantPresentationForLifecycle();Editor.StopProcessing();_activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);InvalidateProfessionalPreview();}, _ => Editor.IsBusy || IsLoading || IsInstantGenerating || SelectSecondExposureCommand?.CanExecute(null)==false || !ProfessionalDetailWork.IsCompleted);
         CopyAdjustmentsCommand = new RelayCommand(_ => CopyCurrentAdjustments(), _ => ActiveTarget is not null && !IsLoading && !IsProfessionalRaw);
         ApplyAdjustmentsCommand = new RelayCommand(_ => ApplyCopiedAdjustments(), _ => HasCopiedAdjustments && SelectedTargets.Any() && !IsLoading);
         PreparePublishingCommand = new AsyncRelayCommand(_ => PreparePublishingAsync(), _ => OpenPublishing is not null && SelectedTargets.Any() && !IsExporting && !IsInstantGenerating);

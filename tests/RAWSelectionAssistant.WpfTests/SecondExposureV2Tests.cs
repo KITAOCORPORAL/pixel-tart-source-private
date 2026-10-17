@@ -40,6 +40,22 @@ public sealed class SecondExposureV2Tests
   }
   finally{Directory.Delete(root,true);}
  }
+ [TestMethod]public void UnsupportedSyntheticIccRejectsInsteadOfSilentlyRelabeling()
+ {
+  var root=Path.Combine(Path.GetTempPath(),"SecondIcc-"+Guid.NewGuid());Directory.CreateDirectory(root);
+  try
+  {
+   var profile=Path.Combine(TestResources.Root,"tests/RAWSelectionAssistant.Tests/TestData/controlled-linear-srgb.icc");
+   var path=Path.Combine(root,"linear.tif");var bitmap=BitmapSource.Create(2,1,96,96,PixelFormats.Rgb48,null,new ushort[]{11796,11796,11796,32768,32768,32768},12);
+   var encoder=new TiffBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(bitmap,null,null,new System.Collections.ObjectModel.ReadOnlyCollection<ColorContext>([new ColorContext(new Uri(profile))])));using(var file=File.Create(path))encoder.Save(file);
+   var held=StudioGlobalResources.AccountedBytes;
+   // This controlled matrix profile is a research-only synthetic subset, not a WIC-admitted real profile.
+   Assert.Throws<NotSupportedException>(()=>new SecondExposureDecoder().Read(SecondExposureDecoder.Describe(path),CancellationToken.None));
+   Assert.AreEqual(held,StudioGlobalResources.AccountedBytes);
+
+  }
+  finally{Directory.Delete(root,true);}
+ }
  [TestMethod]public void IdentityDamageMissingAndPhaseCancellationReleaseWorkspace()
  {
   var root=Path.Combine(Path.GetTempPath(),"SecondFailure-"+Guid.NewGuid());Directory.CreateDirectory(root);

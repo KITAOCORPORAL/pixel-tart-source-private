@@ -108,6 +108,31 @@ namespace RAWSelectionAssistant.WpfTests;
   }
   finally{Directory.Delete(root,true);}
  });
+ [TestMethod]public Task RepeatedPageLifecycleAndDraftDragsDoNotStartObsoleteRenders()=>RunSta(async()=>
+ {
+  EnsureTestApplication();var root=Path.Combine(Path.GetTempPath(),"PageLifecycle-"+Guid.NewGuid());Directory.CreateDirectory(root);
+  try
+  {
+   var path=Path.Combine(root,"photo.jpg");StudioQuickExport.Encode(BitmapSource.Create(96,71,96,96,PixelFormats.Rgb24,null,Enumerable.Range(0,96*71*3).Select(x=>(byte)(x%251)).ToArray(),96*3),path,path,StudioExportFormat.Jpeg);
+   var held=StudioGlobalResources.AccountedBytes;var process=Process.GetCurrentProcess();process.Refresh();long privateBefore=process.PrivateMemorySize64;var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));
+   var clock=Stopwatch.StartNew();await vm.LoadTargetAsync(path);var firstLoadMs=clock.Elapsed.TotalMilliseconds;clock.Restart();await vm.ActivateTargetCommand.ExecuteAsync(vm.ActiveTarget);var cachedActivationMs=clock.Elapsed.TotalMilliseconds;
+   vm.InstantCameraAnimation=false;vm.InstantEngineVersion="V3";await vm.GenerateInstantFilmCommand.ExecuteAsync(null);var recipe=JsonSerializer.Serialize(vm.ActiveTarget!.RawDefinition);var pixels=vm.Editor.MatchedImage;int renders=0;
+   var view=new PhotoGradePageView{DataContext=vm};view.Measure(new Size(1400,850));view.Arrange(new Rect(0,0,1400,850));view.UpdateLayout();var panel=(InstantV3Editor)view.FindName("V3Editor");var slider=(Slider)panel.FindName("InstantV3ExposureControl");
+   using(var capture=Kitao.InstantFilm.Research.CandidateProcessingEvidence.Capture(p=>{if(p=="PixelRender")renders++;}))
+   {
+    clock.Restart();for(int i=0;i<200;i++)slider.SetCurrentValue(Slider.ValueProperty,(i%40)/20d-1);await Dispatcher.Yield(DispatcherPriority.DataBind);var dragMs=clock.Elapsed.TotalMilliseconds;
+    Assert.AreEqual(0,renders,"Draft dragging must not create full-resolution work per tick");Assert.AreEqual(recipe,JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition));Assert.AreSame(pixels,vm.Editor.MatchedImage);
+    for(int i=0;i<12;i++){view.RaiseEvent(new RoutedEventArgs(FrameworkElement.UnloadedEvent));vm.PhotoMaskColor=i%2==0?"Yellow":"Cyan";view.RaiseEvent(new RoutedEventArgs(FrameworkElement.LoadedEvent));}
+    var temporary=MakeUnloadedView(vm);await Dispatcher.Yield(DispatcherPriority.ContextIdle);for(int i=0;i<3&&temporary.IsAlive;i++){GC.Collect();GC.WaitForPendingFinalizers();GC.Collect();await Dispatcher.Yield(DispatcherPriority.ContextIdle);}Assert.IsFalse(temporary.IsAlive,"Unloaded view must not be retained by model/editor events");
+    clock.Restart();await vm.GenerateInstantFilmCommand.ExecuteAsync(null);var applyMs=clock.Elapsed.TotalMilliseconds;var beforeClose=StudioGlobalResources.AccountedBytes;view.RaiseEvent(new RoutedEventArgs(FrameworkElement.UnloadedEvent));view.DataContext=null;vm.Dispose();await Dispatcher.Yield(DispatcherPriority.ContextIdle);process.Refresh();var afterClose=StudioGlobalResources.AccountedBytes;Assert.IsTrue(afterClose<=beforeClose);
+    var output=Environment.GetEnvironmentVariable("KITAO_TEST_EVIDENCE_ROOT");if(!string.IsNullOrWhiteSpace(output)){Directory.CreateDirectory(output);await File.WriteAllTextAsync(Path.Combine(output,"LIFECYCLE_PERFORMANCE.json"),JsonSerializer.Serialize(new{firstLoadMs,cachedActivationMs,draft200ChangesMs=dragMs,applyMs,pixelRenderEntries=renders,held,beforeClose,afterClose,privateBefore,privateAfter=process.PrivateMemorySize64,peakWorkingSet=process.PeakWorkingSet64,scope="Actual synthetic page/weak-reference/lease observations; process private includes managed/native; not physical close native memory proof"},new JsonSerializerOptions{WriteIndented=true}));}
+   }
+  }
+  finally{Directory.Delete(root,true);}
+ });
+ [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+ private static WeakReference MakeUnloadedView(ReferenceColorWorkspaceViewModel vm)
+ {var view=new PhotoGradePageView{DataContext=vm};view.RaiseEvent(new RoutedEventArgs(FrameworkElement.UnloadedEvent));return new WeakReference(view);}
  private static IEnumerable<T> Descendants<T>(DependencyObject d)where T:DependencyObject{for(int i=0;i<VisualTreeHelper.GetChildrenCount(d);i++){var c=VisualTreeHelper.GetChild(d,i);if(c is T t)yield return t;foreach(var v in Descendants<T>(c))yield return v;}}
  private sealed class Dialogs(string root,string? second=null):IDialogService
  {public string? ChooseFolder(string title,string? initialDirectory=null)=>root;public IReadOnlyList<string> ChooseFiles(string title,string filter,bool multiselect=true)=>second is null?[]:[second];public string? ChooseSaveFile(string title,string filter,string defaultExtension,string? suggestedFileName=null)=>null;public IReadOnlyList<string>? ManageQuickTools(IReadOnlyList<string> ids)=>null;public void ShowInfo(string m){}public void ShowError(string m){}public bool Confirm(string m,string t)=>true;public HelpAction ShowHelp()=>HelpAction.None;public void ShowFeedback(){}public RAWSelectionAssistant.Core.Models.RawFileEntry? ChooseRawCandidate(IReadOnlyList<RAWSelectionAssistant.Core.Models.RawFileEntry> c)=>null;public bool ShowMediaDetails(RAWSelectionAssistant.Core.Models.MediaSelectionItem i,bool a)=>false;public void RevealFile(string p){}}

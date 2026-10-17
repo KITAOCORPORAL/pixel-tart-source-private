@@ -112,6 +112,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         foreach(var name in new[]{nameof(IsInstantGenerating),nameof(InstantEditingAllowed),nameof(InstantDevelopment),nameof(InstantFinalPreview),nameof(InstantDirection),nameof(InstantImageRegion)})OnPropertyChanged(name);
         GenerateInstantFilmCommand.RaiseCanExecuteChanged();RollInstantFilmCommand.RaiseCanExecuteChanged();ToggleInstantDiceCommand.RaiseCanExecuteChanged();DisableInstantFilmCommand.RaiseCanExecuteChanged();SelectInstantCameraCommand.RaiseCanExecuteChanged();
         OnPropertyChanged(nameof(PhotoGradeRasterToolsEnabled));OnPropertyChanged(nameof(PhotoGradeCanSyncStep));
+        StopProcessingCommand.RaiseCanExecuteChanged();
         PhotoGradeUndoCommand.RaiseCanExecuteChanged();PhotoGradeRedoCommand.RaiseCanExecuteChanged();ResetPhotoV3DraftCommand.RaiseCanExecuteChanged();
         ExportSelectedCommand.RaiseCanExecuteChanged();ExportAllCommand.RaiseCanExecuteChanged();PreparePublishingCommand.RaiseCanExecuteChanged();
     }
