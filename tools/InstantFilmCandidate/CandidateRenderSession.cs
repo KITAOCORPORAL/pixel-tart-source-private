@@ -6,6 +6,8 @@ namespace Kitao.InstantFilm.Research;
 public sealed class CandidateRenderSession : IDisposable
 {
     private CandidateImageLease.BorrowedImage? source;
+    private readonly object gate=new();
+    private CandidateImageLease.BorrowedImage RetainSource(){lock(gate)return source?.Retain()??throw new ObjectDisposedException(nameof(CandidateRenderSession));}
     public CandidateRecipe Recipe { get; }
     public InstantPaperLayout Layout { get; }
     public const string Coordinates="FullOrientedSourcePixelsRadius2_NormalizedFullCanvasNoise_AreaPreviewAfterFullEffectV1";
@@ -22,7 +24,7 @@ public sealed class CandidateRenderSession : IDisposable
     }
     public CandidateImageLease RenderRegion(int left,int top,int width,int height,CancellationToken token=default)
     {
-        var image=source?.Image??throw new ObjectDisposedException(nameof(CandidateRenderSession));
+        using var activeSource=RetainSource();var image=activeSource.Image;
         if(left<0||top<0||width<=0||height<=0||(long)left+width>Layout.Width||(long)top+height>Layout.Height)throw new ArgumentOutOfRangeException(nameof(left));
         token.ThrowIfCancellationRequested();var lease=StudioGlobalResources.ReserveWork(checked((long)width*height*3*sizeof(float)));
         try
@@ -84,5 +86,5 @@ public sealed class CandidateRenderSession : IDisposable
         }
         catch{lease.Dispose();throw;}
     }
-    public void Dispose(){source?.Dispose();source=null;}
+    public void Dispose(){lock(gate){source?.Dispose();source=null;}}
 }

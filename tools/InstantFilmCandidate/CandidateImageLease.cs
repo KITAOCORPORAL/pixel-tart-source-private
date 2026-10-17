@@ -13,7 +13,7 @@ public sealed class CandidateImageLease : IDisposable
     public long Bytes { get; }
     private CandidateImageLease(HighBitDepthImageBuffer value,IDisposable lease,long bytes)
     { image=value;reservation=lease;Bytes=bytes; }
-    internal static CandidateImageLease Transfer(HighBitDepthImageBuffer value,IDisposable lease)
+    public static CandidateImageLease Transfer(HighBitDepthImageBuffer value,IDisposable lease)
         =>new(value,lease,checked((long)value.Rgb32.Length*sizeof(float)));
     /// <summary>Caller transfers exclusive ownership; it must not retain a mutable alias.</summary>
     public static CandidateImageLease Adopt(HighBitDepthImageBuffer value)
@@ -31,6 +31,15 @@ public sealed class CandidateImageLease : IDisposable
         private HighBitDepthImageBuffer? value;
         internal BorrowedImage(CandidateImageLease owner,HighBitDepthImageBuffer value){this.owner=owner;this.value=value;}
         public HighBitDepthImageBuffer Image=>value??throw new ObjectDisposedException(nameof(BorrowedImage));
+        public BorrowedImage Retain()
+        {
+            var held=owner??throw new ObjectDisposedException(nameof(BorrowedImage));
+            lock(held.gate)
+            {
+                if(value is null)throw new ObjectDisposedException(nameof(BorrowedImage));
+                held.borrowers++;return new(held,value);
+            }
+        }
         public void Dispose(){var o=Interlocked.Exchange(ref owner,null);value=null;if(o is not null)o.ReturnBorrow();}
     }
     private void ReturnBorrow()
