@@ -121,7 +121,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     {
         if(_disposed||IsInstantGenerating||IsLoading||IsExporting||ActiveTarget is not {} target)return;
         // Establish and freeze the source edit version before async reconstruction starts.
-        if(target.ActiveEditVersionId is null||target.RawDefinition is null){Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);}
+        if(InstantEngineVersion=="V3"&&(target.ActiveEditVersionId is null||target.RawDefinition is null)||target.RawDefinition is null&&RawMatchTiff16ProductPipeline.IsRaw(target.Path)){Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);}
         var version=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);var previous=target.RawDefinition;
         var previousDice=previous?.InstantFilm?.DiceEnabled??false;
         var oldInput=target.RawInput;var oldMaster=target.LinearRawMaster;var oldLook=target.AppliedLookSnapshot;var oldStack=target.ColorAdjustmentStackSnapshot;var oldFilm=target.FilmSettingsSnapshot;
