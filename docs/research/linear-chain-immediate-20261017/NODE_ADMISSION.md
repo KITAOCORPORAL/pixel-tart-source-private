@@ -17,3 +17,7 @@
 原尺寸二源原WIC64N+文件缓冲预算会拒绝Canon/Sony（各76N≈1.53/2.50GB，未加总预算）。新增TIFF输入组件3只支持产品单条带未压缩RGB16、精确sRGB ICC，用TiffStreamValidator逐行解码，最终float12N+一行；不暗缩小，不改变1/2。真实多ICC/透明仍旧2，不以新3冒充通用TIFF。独立WIC旧1逐码比较及源指纹回归要求。
 
 独立产品输出已跑：3授权冻结照片各64×48区域，经实际ProfessionalRawPipeline新节点和三格式编码，输出文件重新解码像素独立对scikit transfer（不是产品oracle）TIFF/PNG逐码0，JPEG最高MAE2.216/RMSE3.077，沿既有5/15门槛；INDEPENDENT_ENCODED_OUTPUT.json。范围升级EXPLICIT_VERSION_APPROVED仅Rendered sRGB exposure1；场景RAW/DWG/显示ICC不批准。
+
+最终复核：新sRGB曝光显式RenderedInputVersion2写项目/DecodeKey，避免旧CurrentEdits缓存相同decode-key被当成新原片输入；禁止旧look暗中叠加，输入说明为从已渲染原片解释。新管线状态文本不再误报PV5旧链。原RAW/V3与旧recipe空字段无变化。
+
+installed scikit原API还存在矩阵乘逆的数值往返，在舍入不连续阈值处会把约1e-18扰动放大成分支差；作为差异列保留，不能把矩阵往返说成精确transfer。隔离transfer只用原库函数与identity矩阵，原本新链不转换XYZ；不将此不相干矩阵误差计入准入来放宽门槛。

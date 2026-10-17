@@ -24,7 +24,7 @@ namespace RAWSelectionAssistant.WpfTests;
   try
   {
    var path=Make(root);using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));await vm.LoadTargetAsync(path);var before=Pixels(vm.Editor.MatchedImage??vm.Editor.SourceImage!);vm.SrgbExposureEv=.7;await vm.ApplySrgbExposureCommand.ExecuteAsync(null);
-   Assert.AreEqual(.7,vm.ActiveTarget!.RawDefinition!.SrgbExposure!.ExposureEv,vm.StatusText);var after=Pixels(vm.Editor.MatchedImage!);Assert.AreNotEqual(before,after);var serialized=JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition);
+   Assert.AreEqual(.7,vm.ActiveTarget!.RawDefinition!.SrgbExposure!.ExposureEv,vm.StatusText);Assert.AreEqual(2,vm.ActiveTarget.RawDefinition.RenderedInputVersion);var after=Pixels(vm.Editor.MatchedImage!);Assert.AreNotEqual(before,after);var serialized=JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition);
    var master=vm.ActiveTarget.LinearRawMaster!;using var actual=ProfessionalRawPipeline.Render(master,vm.ActiveTarget.RawDefinition);var expected=new RenderedSrgbExposure(ExposureEv:.7);
    for(int i=0;i<actual.Rgb32.Length;i+=3){var p=master.Image.Rgb32.Span;var e=expected.Apply(new(p[i],p[i+1],p[i+2]));Assert.AreEqual((float)e.X,actual.Rgb32.Span[i]);Assert.AreEqual((float)e.Y,actual.Rgb32.Span[i+1]);Assert.AreEqual((float)e.Z,actual.Rgb32.Span[i+2]);}
    await vm.PhotoGradeUndoCommand.ExecuteAsync(null);Assert.IsNull(vm.ActiveTarget.RawDefinition);Assert.AreEqual(before,Pixels(vm.Editor.MatchedImage??vm.Editor.SourceImage!));await vm.PhotoGradeRedoCommand.ExecuteAsync(null);Assert.AreEqual(after,Pixels(vm.Editor.MatchedImage!));

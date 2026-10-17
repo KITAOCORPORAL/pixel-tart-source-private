@@ -20,7 +20,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
    _instantCancellation?.Dispose();_instantCancellation=new();var token=_instantCancellation.Token;IsInstantGenerating=true;InstantChanged();
    try
    {
-    var basis=InstantFilmJpegInput.Definition;var next=basis with{SrgbExposure=new RenderedSrgbExposure(ExposureEv:SrgbExposureEv).Validate()};next.Validate();
+    var basis=InstantFilmJpegInput.Definition;var next=basis with{RenderedInputVersion=2,SrgbExposure=new RenderedSrgbExposure(ExposureEv:SrgbExposureEv).Validate()};next.Validate();
     var master=target.LinearRawMaster?.Contract.DecodeKey==next.DecodeKey?target.LinearRawMaster:await RenderedSrgbInput.ReadAsync(target.Path,next,token);
     using var preview=await Task.Run(()=>ProfessionalRawPipeline.RenderPreview(master,next,1600,token),token);
     if(_disposed||revision!=Volatile.Read(ref _activationRevision)||!ReferenceEquals(ActiveTarget,target)||target.RawDefinition!=prior||target.ActiveEditVersionId!=active)throw new OperationCanceledException(token);
