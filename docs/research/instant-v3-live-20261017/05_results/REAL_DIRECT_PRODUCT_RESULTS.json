@@ -1,0 +1,3290 @@
+[
+  {
+    "input": "sony-dsc08015",
+    "profile": "modern-itype-v3",
+    "originalSha": "1FE22BE78C66AB0DDCCF753D10187F142B980146FFF7F5D188533905B7F38B93",
+    "frozenSha": "5C06A14160C9B57015CFEBD9CD1E882620FFC817CFDCA061596746CDD82D1CA7",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "modern-itype-v3",
+      "Identity": {
+        "ChemicalFamily": "ModernIntegralColor",
+        "PaperEra": "Modern; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0.9,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0001:source",
+          "GROK-POL-0002:source",
+          "GROK-POL-0003:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0001",
+          "GROK-POL-0002",
+          "GROK-POL-0003"
+        ],
+        "Observations": [
+          "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "itype-color",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "modern-itype-v3",
+        "LegacyId": "itype-color",
+        "ChemicalFamily": "ModernIntegralColor",
+        "PaperEra": "Modern; batch unknown",
+        "Palette": "Color",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0.9,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0001:source",
+            "GROK-POL-0002:source",
+            "GROK-POL-0003:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0001",
+            "GROK-POL-0002",
+            "GROK-POL-0003"
+          ],
+          "Observations": [
+            "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "518802F921FB641A6DC1CD206883155205DB5F0763F4708618F6E5711CD1354F",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "47D1E18210B0710656DE5056D7142FE93910B02C7040A8024B776D6F057F8A26",
+        "bytes": 200973991
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "0AF54E55B0E758B7AE2F0852709A1703E6EC120EC8667231B92BC577CB3B4B56",
+        "bytes": 141039836
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.578529636251714,
+          "RootMeanSquareError": 1.0077828505278348,
+          "MaximumError": 25,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "C33B8B9AEA23C62402BD40ADF621D725CA5B12E83544C25131FF692562DBF226",
+        "bytes": 4789443
+      }
+    ],
+    "milliseconds": 81900.7711,
+    "privateBytes": 1497026560,
+    "peakWorkingSet": 2015748096,
+    "ledger": 398144256,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "sony-dsc08015",
+    "profile": "modern-bw-v3",
+    "originalSha": "1FE22BE78C66AB0DDCCF753D10187F142B980146FFF7F5D188533905B7F38B93",
+    "frozenSha": "5C06A14160C9B57015CFEBD9CD1E882620FFC817CFDCA061596746CDD82D1CA7",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "modern-bw-v3",
+      "Identity": {
+        "ChemicalFamily": "ModernIntegralSilver",
+        "PaperEra": "Modern; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0020:source",
+          "GROK-POL-0021:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0020",
+          "GROK-POL-0021"
+        ],
+        "Observations": [
+          "Literature links only; neutral linear-luminance response is a creative choice."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "itype-bw",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "modern-bw-v3",
+        "LegacyId": "itype-bw",
+        "ChemicalFamily": "ModernIntegralSilver",
+        "PaperEra": "Modern; batch unknown",
+        "Palette": "NeutralBW",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0020:source",
+            "GROK-POL-0021:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0020",
+            "GROK-POL-0021"
+          ],
+          "Observations": [
+            "Literature links only; neutral linear-luminance response is a creative choice."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "518802F921FB641A6DC1CD206883155205DB5F0763F4708618F6E5711CD1354F",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "9B0A0684287B100540B0D3DD6FA9C86F47717181654E8BE084534161519E2A12",
+        "bytes": 200973991
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "ECD1ECED02CBD31068CF0B26A9E24FA0A674AD3919BB8706FC8930B299F981DD",
+        "bytes": 83501144
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.15429863023165016,
+          "RootMeanSquareError": 0.39757335632094004,
+          "MaximumError": 4,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "E6747FE69FA13C812A62CC8E2C8E30DF5CF147ED0696BDEFD5FF8F4571173C06",
+        "bytes": 2519326
+      }
+    ],
+    "milliseconds": 79751.8427,
+    "privateBytes": 1191428096,
+    "peakWorkingSet": 2015748096,
+    "ledger": 398144256,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "sony-dsc08015",
+    "profile": "sx70-v3",
+    "originalSha": "1FE22BE78C66AB0DDCCF753D10187F142B980146FFF7F5D188533905B7F38B93",
+    "frozenSha": "5C06A14160C9B57015CFEBD9CD1E882620FFC817CFDCA061596746CDD82D1CA7",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "sx70-v3",
+      "Identity": {
+        "ChemicalFamily": "SX70CreativeCandidate",
+        "PaperEra": "Modern SX-70 candidate, not historical Time-Zero",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.04,
+        "Shoulder": 0.4,
+        "Black": 0.018,
+        "Saturation": 0.83,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0011:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0011"
+        ],
+        "Observations": [
+          "General technical context, not measured SX-70 color; warm response is creative."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "sx70-color",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "sx70-v3",
+        "LegacyId": "sx70-color",
+        "ChemicalFamily": "SX70CreativeCandidate",
+        "PaperEra": "Modern SX-70 candidate, not historical Time-Zero",
+        "Palette": "Color",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.04,
+          "Shoulder": 0.4,
+          "Black": 0.018,
+          "Saturation": 0.83,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0011:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0011"
+          ],
+          "Observations": [
+            "General technical context, not measured SX-70 color; warm response is creative."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "518802F921FB641A6DC1CD206883155205DB5F0763F4708618F6E5711CD1354F",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "B62C6CD2AA892468E4D790CF0537A9D41E9E161629E00B1B0A8CB791C5F52EC9",
+        "bytes": 200973991
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "1D26097FD299380651CD1CD6D5B6E7B6E79214BD684BBC4662D79205FAB72DB9",
+        "bytes": 140488738
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.5919809354823917,
+          "RootMeanSquareError": 1.0353952170240008,
+          "MaximumError": 23,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "F1DD09F286D0E1894055C04BD365ADD186D96F55BD033740B9201A50052A38C9",
+        "bytes": 4835377
+      }
+    ],
+    "milliseconds": 78454.5244,
+    "privateBytes": 1084432384,
+    "peakWorkingSet": 2015748096,
+    "ledger": 398144256,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "sony-dsc08015",
+    "profile": "reclaimed-blue-v3",
+    "originalSha": "1FE22BE78C66AB0DDCCF753D10187F142B980146FFF7F5D188533905B7F38B93",
+    "frozenSha": "5C06A14160C9B57015CFEBD9CD1E882620FFC817CFDCA061596746CDD82D1CA7",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "reclaimed-blue-v3",
+      "Identity": {
+        "ChemicalFamily": "ReclaimedBlue",
+        "PaperEra": "Modern special edition; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0016:source",
+          "GROK-POL-0017:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0016",
+          "GROK-POL-0017"
+        ],
+        "Observations": [
+          "Blue-to-light mapping is a creative interpretation; no fetched controlled measurement."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "reclaimed-blue600",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "reclaimed-blue-v3",
+        "LegacyId": "reclaimed-blue600",
+        "ChemicalFamily": "ReclaimedBlue",
+        "PaperEra": "Modern special edition; batch unknown",
+        "Palette": "WhiteBlue",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0016:source",
+            "GROK-POL-0017:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0016",
+            "GROK-POL-0017"
+          ],
+          "Observations": [
+            "Blue-to-light mapping is a creative interpretation; no fetched controlled measurement."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "518802F921FB641A6DC1CD206883155205DB5F0763F4708618F6E5711CD1354F",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "3177B3D936CB6607751D299ECE10B20EB598F6E00951E748451EE864C42D5B56",
+        "bytes": 200973991
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "0FC0F5375FA0973074052828A912E4EF53127C0ECADF7156A097CAA5488DB690",
+        "bytes": 92157831
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.3694266083385401,
+          "RootMeanSquareError": 0.623657139442641,
+          "MaximumError": 6,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "A9FE42A6F98404AF89074903AFB7574C51313DB948C3A1D4EAF509985C90D4E3",
+        "bytes": 2301133
+      }
+    ],
+    "milliseconds": 75718.0735,
+    "privateBytes": 1226055680,
+    "peakWorkingSet": 2015748096,
+    "ledger": 398144256,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "sony-dsc08015",
+    "profile": "blue-duochrome-v3",
+    "originalSha": "1FE22BE78C66AB0DDCCF753D10187F142B980146FFF7F5D188533905B7F38B93",
+    "frozenSha": "5C06A14160C9B57015CFEBD9CD1E882620FFC817CFDCA061596746CDD82D1CA7",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "blue-duochrome-v3",
+      "Identity": {
+        "ChemicalFamily": "BlueDuochrome",
+        "PaperEra": "Modern special edition; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.004,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0017:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0017"
+        ],
+        "Observations": [
+          "Black-to-blue palette intentionally differs from Reclaimed Blue; literature context only."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "blue-duochrome600",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "blue-duochrome-v3",
+        "LegacyId": "blue-duochrome600",
+        "ChemicalFamily": "BlueDuochrome",
+        "PaperEra": "Modern special edition; batch unknown",
+        "Palette": "BlackBlue",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.004,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0017:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0017"
+          ],
+          "Observations": [
+            "Black-to-blue palette intentionally differs from Reclaimed Blue; literature context only."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "518802F921FB641A6DC1CD206883155205DB5F0763F4708618F6E5711CD1354F",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "8C2FC5C1CD563AB0386F291CE718E1E01A9BDF4EEB06FB4B2508FE165C26AB4B",
+        "bytes": 200973991
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "E68628A495C39536E0F936BD31A72FBC72750704503B1AB91F59D117D75FEF37",
+        "bytes": 99794300
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 5392,
+          "Height": 6212,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.277732202294401,
+          "RootMeanSquareError": 0.5479587376059775,
+          "MaximumError": 6,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "AACB241C708EFD9D694713AF0721D6BC3803145AF557AE7E86B0808141167D26",
+        "bytes": 2279371
+      }
+    ],
+    "milliseconds": 75979.5849,
+    "privateBytes": 1222553600,
+    "peakWorkingSet": 2015748096,
+    "ledger": 398144256,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "canon-tnan8886",
+    "profile": "modern-itype-v3",
+    "originalSha": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "frozenSha": "B9A86CC1AF49A6D887DDFAFFC400CFC8C4644449BD826A695FA820F12A153178",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "modern-itype-v3",
+      "Identity": {
+        "ChemicalFamily": "ModernIntegralColor",
+        "PaperEra": "Modern; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0.9,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0001:source",
+          "GROK-POL-0002:source",
+          "GROK-POL-0003:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0001",
+          "GROK-POL-0002",
+          "GROK-POL-0003"
+        ],
+        "Observations": [
+          "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "itype-color",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "modern-itype-v3",
+        "LegacyId": "itype-color",
+        "ChemicalFamily": "ModernIntegralColor",
+        "PaperEra": "Modern; batch unknown",
+        "Palette": "Color",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0.9,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0001:source",
+            "GROK-POL-0002:source",
+            "GROK-POL-0003:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0001",
+            "GROK-POL-0002",
+            "GROK-POL-0003"
+          ],
+          "Observations": [
+            "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "C13125055D5B52ADF72F42DBA25A25D3619C28BBE75A647D47C86A624E517D81",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "BEF602AC9DF33A4A1F4B712A0E56F87C22E59B328FFC2CAB6D0CF23091F34553",
+        "bytes": 123134527
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "4657B21BA914A287DE13EF0F96B5FA7C13C4895C5A659AE3D0383D34648C37F6",
+        "bytes": 89489319
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 1.2476602185831758,
+          "RootMeanSquareError": 2.0903504002400215,
+          "MaximumError": 26,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "0E39BCC2B01880A827B4A783BAC188313B274E55EA2A5A1A6997F8D96A90798C",
+        "bytes": 6943990
+      }
+    ],
+    "milliseconds": 44544.1864,
+    "privateBytes": 816967680,
+    "peakWorkingSet": 2015748096,
+    "ledger": 244820928,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "canon-tnan8886",
+    "profile": "modern-bw-v3",
+    "originalSha": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "frozenSha": "B9A86CC1AF49A6D887DDFAFFC400CFC8C4644449BD826A695FA820F12A153178",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "modern-bw-v3",
+      "Identity": {
+        "ChemicalFamily": "ModernIntegralSilver",
+        "PaperEra": "Modern; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0020:source",
+          "GROK-POL-0021:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0020",
+          "GROK-POL-0021"
+        ],
+        "Observations": [
+          "Literature links only; neutral linear-luminance response is a creative choice."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "itype-bw",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "modern-bw-v3",
+        "LegacyId": "itype-bw",
+        "ChemicalFamily": "ModernIntegralSilver",
+        "PaperEra": "Modern; batch unknown",
+        "Palette": "NeutralBW",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0020:source",
+            "GROK-POL-0021:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0020",
+            "GROK-POL-0021"
+          ],
+          "Observations": [
+            "Literature links only; neutral linear-luminance response is a creative choice."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "C13125055D5B52ADF72F42DBA25A25D3619C28BBE75A647D47C86A624E517D81",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "022C9E10FF53948931C4E3FB4577FA023EE9439B6691E25C8827A8F7C82EC078",
+        "bytes": 123134527
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "E42D853008C9155C9D1E272F54CCE0F45FBA119A39B98FA6D9FAD6CD6C69F7AE",
+        "bytes": 54661492
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.3745318081954235,
+          "RootMeanSquareError": 0.7011836570266813,
+          "MaximumError": 10,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "0F79A73A1C9059AF1C05D30FFA17935820C8E1E4CBE67E27519316F79D6A8AD7",
+        "bytes": 2378198
+      }
+    ],
+    "milliseconds": 45349.7783,
+    "privateBytes": 919412736,
+    "peakWorkingSet": 2015748096,
+    "ledger": 244820928,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "canon-tnan8886",
+    "profile": "sx70-v3",
+    "originalSha": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "frozenSha": "B9A86CC1AF49A6D887DDFAFFC400CFC8C4644449BD826A695FA820F12A153178",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "sx70-v3",
+      "Identity": {
+        "ChemicalFamily": "SX70CreativeCandidate",
+        "PaperEra": "Modern SX-70 candidate, not historical Time-Zero",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.04,
+        "Shoulder": 0.4,
+        "Black": 0.018,
+        "Saturation": 0.83,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0011:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0011"
+        ],
+        "Observations": [
+          "General technical context, not measured SX-70 color; warm response is creative."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "sx70-color",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "sx70-v3",
+        "LegacyId": "sx70-color",
+        "ChemicalFamily": "SX70CreativeCandidate",
+        "PaperEra": "Modern SX-70 candidate, not historical Time-Zero",
+        "Palette": "Color",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.04,
+          "Shoulder": 0.4,
+          "Black": 0.018,
+          "Saturation": 0.83,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0011:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0011"
+          ],
+          "Observations": [
+            "General technical context, not measured SX-70 color; warm response is creative."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "C13125055D5B52ADF72F42DBA25A25D3619C28BBE75A647D47C86A624E517D81",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "6AD03A96C92387B5F908C3EC176B53C6699894C963FEE4ADA70A80C106BF9783",
+        "bytes": 123134527
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "58A76D6FA4A338223F9693A0A70DFCE8F10F46CC5D897446E35F3DC9807CF3BB",
+        "bytes": 89194424
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 1.2285256144748413,
+          "RootMeanSquareError": 2.085882346841852,
+          "MaximumError": 28,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "09D1E2B4F86CB81D115F965E045F444903C3A246E76280EE5EF1342B341FC12B",
+        "bytes": 6960516
+      }
+    ],
+    "milliseconds": 44286.7524,
+    "privateBytes": 728100864,
+    "peakWorkingSet": 2015748096,
+    "ledger": 244820928,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "canon-tnan8886",
+    "profile": "reclaimed-blue-v3",
+    "originalSha": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "frozenSha": "B9A86CC1AF49A6D887DDFAFFC400CFC8C4644449BD826A695FA820F12A153178",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "reclaimed-blue-v3",
+      "Identity": {
+        "ChemicalFamily": "ReclaimedBlue",
+        "PaperEra": "Modern special edition; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0016:source",
+          "GROK-POL-0017:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0016",
+          "GROK-POL-0017"
+        ],
+        "Observations": [
+          "Blue-to-light mapping is a creative interpretation; no fetched controlled measurement."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "reclaimed-blue600",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "reclaimed-blue-v3",
+        "LegacyId": "reclaimed-blue600",
+        "ChemicalFamily": "ReclaimedBlue",
+        "PaperEra": "Modern special edition; batch unknown",
+        "Palette": "WhiteBlue",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0016:source",
+            "GROK-POL-0017:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0016",
+            "GROK-POL-0017"
+          ],
+          "Observations": [
+            "Blue-to-light mapping is a creative interpretation; no fetched controlled measurement."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "C13125055D5B52ADF72F42DBA25A25D3619C28BBE75A647D47C86A624E517D81",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "6AFECCCFA373D39C1B7293ADC627BA1AC998AD3570DA6CEA958CB64586F3C3FA",
+        "bytes": 123134527
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "F553BCB8343E6C5012C5FEECA48DEE1900CAF20C1BF8572C12D58CDE59C21B02",
+        "bytes": 74672898
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.44353718425133004,
+          "RootMeanSquareError": 0.7400393372744364,
+          "MaximumError": 20,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "B721522D3B6CB50F0F6B4E1D3CF3100125B8F62BC0EBA1B6AD177DFACBFA6EB0",
+        "bytes": 2021347
+      }
+    ],
+    "milliseconds": 43389.1144,
+    "privateBytes": 998604800,
+    "peakWorkingSet": 2015748096,
+    "ledger": 244820928,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "canon-tnan8886",
+    "profile": "blue-duochrome-v3",
+    "originalSha": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "frozenSha": "B9A86CC1AF49A6D887DDFAFFC400CFC8C4644449BD826A695FA820F12A153178",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "blue-duochrome-v3",
+      "Identity": {
+        "ChemicalFamily": "BlueDuochrome",
+        "PaperEra": "Modern special edition; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.004,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0017:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0017"
+        ],
+        "Observations": [
+          "Black-to-blue palette intentionally differs from Reclaimed Blue; literature context only."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "blue-duochrome600",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "blue-duochrome-v3",
+        "LegacyId": "blue-duochrome600",
+        "ChemicalFamily": "BlueDuochrome",
+        "PaperEra": "Modern special edition; batch unknown",
+        "Palette": "BlackBlue",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.004,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0017:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0017"
+          ],
+          "Observations": [
+            "Black-to-blue palette intentionally differs from Reclaimed Blue; literature context only."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "C13125055D5B52ADF72F42DBA25A25D3619C28BBE75A647D47C86A624E517D81",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "C71BC8DC59FBF32C06BC3D6E47CA191210564AD68BE23F8AA2F47BB05F69CD70",
+        "bytes": 123134527
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "A4D8382D5FBBCB4EC0A790F92438D089B02C7EAAE7CCE31B990DF472244BA7E9",
+        "bytes": 76492764
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 4220,
+          "Height": 4863,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.341305710106199,
+          "RootMeanSquareError": 0.6699745338668333,
+          "MaximumError": 25,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "E4F7A6B70892A9E796D857EC3923A61A556BFD7377C755CC061E20DBA2E90F39",
+        "bytes": 1820722
+      }
+    ],
+    "milliseconds": 43131.1115,
+    "privateBytes": 836366336,
+    "peakWorkingSet": 2015748096,
+    "ledger": 244820928,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "fuji-dscf0347-frozen",
+    "profile": "modern-itype-v3",
+    "originalSha": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+    "frozenSha": "5668EBCEA230AC91920C094B6AAC9C5896DE2A647C0F6165DE9FFF4105F870D7",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "modern-itype-v3",
+      "Identity": {
+        "ChemicalFamily": "ModernIntegralColor",
+        "PaperEra": "Modern; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0.9,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0001:source",
+          "GROK-POL-0002:source",
+          "GROK-POL-0003:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0001",
+          "GROK-POL-0002",
+          "GROK-POL-0003"
+        ],
+        "Observations": [
+          "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "itype-color",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "modern-itype-v3",
+        "LegacyId": "itype-color",
+        "ChemicalFamily": "ModernIntegralColor",
+        "PaperEra": "Modern; batch unknown",
+        "Palette": "Color",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0.9,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0001:source",
+            "GROK-POL-0002:source",
+            "GROK-POL-0003:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0001",
+            "GROK-POL-0002",
+            "GROK-POL-0003"
+          ],
+          "Observations": [
+            "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "1D01031AF9037A968673DEF4131B2BAC2CCCE618DFB77B8D28BE7D6DFD324813",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "5131A06375BC5E4976EBB818DE258C5C66E7E10110BB1D4B0E027A69C063039B",
+        "bytes": 245721235
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "681705E87952B8A2F86B93A8CE8D67BA326E57BB7698E67EEFD99D26BD0E7EF3",
+        "bytes": 185543683
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 1.4425362017222125,
+          "RootMeanSquareError": 2.2790374813186536,
+          "MaximumError": 25,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "8A820522B32DCCD4B0C628090D0E2B6E67EFF4D4E2BF23B5093B6CF9E2EEB237",
+        "bytes": 15754753
+      }
+    ],
+    "milliseconds": 89854.0466,
+    "privateBytes": 1651613696,
+    "peakWorkingSet": 2015748096,
+    "ledger": 485013504,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "fuji-dscf0347-frozen",
+    "profile": "modern-bw-v3",
+    "originalSha": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+    "frozenSha": "5668EBCEA230AC91920C094B6AAC9C5896DE2A647C0F6165DE9FFF4105F870D7",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "modern-bw-v3",
+      "Identity": {
+        "ChemicalFamily": "ModernIntegralSilver",
+        "PaperEra": "Modern; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0020:source",
+          "GROK-POL-0021:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0020",
+          "GROK-POL-0021"
+        ],
+        "Observations": [
+          "Literature links only; neutral linear-luminance response is a creative choice."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "itype-bw",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "modern-bw-v3",
+        "LegacyId": "itype-bw",
+        "ChemicalFamily": "ModernIntegralSilver",
+        "PaperEra": "Modern; batch unknown",
+        "Palette": "NeutralBW",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0020:source",
+            "GROK-POL-0021:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0020",
+            "GROK-POL-0021"
+          ],
+          "Observations": [
+            "Literature links only; neutral linear-luminance response is a creative choice."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "1D01031AF9037A968673DEF4131B2BAC2CCCE618DFB77B8D28BE7D6DFD324813",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "5A0B94E207B51916217BC18F8C5A174383D2C8CDD841F02B4306FD62D630AC1A",
+        "bytes": 245721235
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "D225BAE1B0C4B8CA13048B1DC70B32F425CE7C4F17DC06255E1FAB061613448B",
+        "bytes": 149411822
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.6675282889887356,
+          "RootMeanSquareError": 1.1116779278811824,
+          "MaximumError": 10,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "55F5DE900725AB0F13CB8860BE7AF3AEEEDD08B40DD6D46B975877EF56F80FEC",
+        "bytes": 8145332
+      }
+    ],
+    "milliseconds": 88911.5823,
+    "privateBytes": 1898033152,
+    "peakWorkingSet": 2015748096,
+    "ledger": 485013504,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "fuji-dscf0347-frozen",
+    "profile": "sx70-v3",
+    "originalSha": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+    "frozenSha": "5668EBCEA230AC91920C094B6AAC9C5896DE2A647C0F6165DE9FFF4105F870D7",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "sx70-v3",
+      "Identity": {
+        "ChemicalFamily": "SX70CreativeCandidate",
+        "PaperEra": "Modern SX-70 candidate, not historical Time-Zero",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.04,
+        "Shoulder": 0.4,
+        "Black": 0.018,
+        "Saturation": 0.83,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0011:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0011"
+        ],
+        "Observations": [
+          "General technical context, not measured SX-70 color; warm response is creative."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "sx70-color",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "sx70-v3",
+        "LegacyId": "sx70-color",
+        "ChemicalFamily": "SX70CreativeCandidate",
+        "PaperEra": "Modern SX-70 candidate, not historical Time-Zero",
+        "Palette": "Color",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.04,
+          "Shoulder": 0.4,
+          "Black": 0.018,
+          "Saturation": 0.83,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0011:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0011"
+          ],
+          "Observations": [
+            "General technical context, not measured SX-70 color; warm response is creative."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "1D01031AF9037A968673DEF4131B2BAC2CCCE618DFB77B8D28BE7D6DFD324813",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "18B9FA69038523EE2E634C4281447E55B4B9C0AA4DD3BADE2EFCFD9B856ECC92",
+        "bytes": 245721235
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "43FC87AFC2FFF219ED0CEE75AB27105FA12DD35683EED5BE98B868B6F700060C",
+        "bytes": 185384185
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 1.4214507021524376,
+          "RootMeanSquareError": 2.2560843086434224,
+          "MaximumError": 24,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "A1329F60D95DD235F5A6961968A2F1C1BAF88BABA53BA691FFEE31FF81DD2535",
+        "bytes": 15087141
+      }
+    ],
+    "milliseconds": 90877.8606,
+    "privateBytes": 1892691968,
+    "peakWorkingSet": 2071248896,
+    "ledger": 485013504,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "fuji-dscf0347-frozen",
+    "profile": "reclaimed-blue-v3",
+    "originalSha": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+    "frozenSha": "5668EBCEA230AC91920C094B6AAC9C5896DE2A647C0F6165DE9FFF4105F870D7",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "reclaimed-blue-v3",
+      "Identity": {
+        "ChemicalFamily": "ReclaimedBlue",
+        "PaperEra": "Modern special edition; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0016:source",
+          "GROK-POL-0017:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0016",
+          "GROK-POL-0017"
+        ],
+        "Observations": [
+          "Blue-to-light mapping is a creative interpretation; no fetched controlled measurement."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "reclaimed-blue600",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "reclaimed-blue-v3",
+        "LegacyId": "reclaimed-blue600",
+        "ChemicalFamily": "ReclaimedBlue",
+        "PaperEra": "Modern special edition; batch unknown",
+        "Palette": "WhiteBlue",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0016:source",
+            "GROK-POL-0017:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0016",
+            "GROK-POL-0017"
+          ],
+          "Observations": [
+            "Blue-to-light mapping is a creative interpretation; no fetched controlled measurement."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "1D01031AF9037A968673DEF4131B2BAC2CCCE618DFB77B8D28BE7D6DFD324813",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "DD5EEDC52B9ED013B840C43635A5F8657E61086B7D1817B25127437A4C40285B",
+        "bytes": 245721235
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "17A736585ADBC269195FD078477C865A9DB6DD2CDAC1C3A08B8035A2F04C806C",
+        "bytes": 178117767
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.6884846974172835,
+          "RootMeanSquareError": 1.1975564572477004,
+          "MaximumError": 21,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "47E943292A85E2428BBE4685448BCD9C5CF859DE5A6087FE8DDF01BBC4F7110B",
+        "bytes": 7606833
+      }
+    ],
+    "milliseconds": 89773.2698,
+    "privateBytes": 1752367104,
+    "peakWorkingSet": 2071248896,
+    "ledger": 485013504,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  },
+  {
+    "input": "fuji-dscf0347-frozen",
+    "profile": "blue-duochrome-v3",
+    "originalSha": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+    "frozenSha": "5668EBCEA230AC91920C094B6AAC9C5896DE2A647C0F6165DE9FFF4105F870D7",
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "blue-duochrome-v3",
+      "Identity": {
+        "ChemicalFamily": "BlueDuochrome",
+        "PaperEra": "Modern special edition; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0.2,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.004,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0017:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0017"
+        ],
+        "Observations": [
+          "Black-to-blue palette intentionally differs from Reclaimed Blue; literature context only."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.002,
+        "DevelopmentUnevenness": 0.003,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261017,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "blue-duochrome600",
+        "ProfileVersion": 1,
+        "Tier": "\u7a33\u5b9a\u51fa\u7247",
+        "ColorShift": 0.005365892730024123,
+        "SpreadScale": 0.689795833092194,
+        "TextureScale": 0.6367605297857575,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.6281967054663238,
+            "Y": 0.3773555563567548,
+            "Radius": 0.3551195361523293,
+            "Strength": 0.13867208895094624,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.14800113297205741,
+            "Y": 0.03634583006186831,
+            "Radius": 0.3269907811387596,
+            "Strength": 0.18781727411541294,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.4607686445686676,
+            "Y": 0.6577785865415269,
+            "Radius": 0.3093574396701533,
+            "Strength": 0.0758385558108653,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 0,
+            "Radius": 0.10672301440338089,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.07111145078428316,
+            "Y": 0.43268922401502874,
+            "Radius": 0.005179344202560572,
+            "Strength": 0.175,
+            "Period": 0.1248172791106416
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "blue-duochrome-v3",
+        "LegacyId": "blue-duochrome600",
+        "ChemicalFamily": "BlueDuochrome",
+        "PaperEra": "Modern special edition; batch unknown",
+        "Palette": "BlackBlue",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.004,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0017:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0017"
+          ],
+          "Observations": [
+            "Black-to-blue palette intentionally differs from Reclaimed Blue; literature context only."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "previewWidth": 444,
+    "previewHeight": 512,
+    "regionPixelSha": "1D01031AF9037A968673DEF4131B2BAC2CCCE618DFB77B8D28BE7D6DFD324813",
+    "sessionRecipeExact": true,
+    "formats": [
+      {
+        "format": "Tiff",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        },
+        "sha256": "E872FD3FBE5DADAA258B875EEE617F293B971CF032F07F6F8C3EA44C334BEA99",
+        "bytes": 245721235
+      },
+      {
+        "format": "Png",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        },
+        "sha256": "E895BF0F4077AC4F7CE29DB7BA80F4D3EEBD3D9C7C1CCF12ED37F2A705B3723C",
+        "bytes": 176402117
+      },
+      {
+        "format": "Jpeg",
+        "receipt": {
+          "Width": 5962,
+          "Height": 6869,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.6554626137322663,
+          "RootMeanSquareError": 1.2023675336639215,
+          "MaximumError": 20,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        },
+        "sha256": "B3D6F7A26BAD6015A037C84B284C207B212FC14D8CFD827C6C30FE42DE06E516",
+        "bytes": 6996816
+      }
+    ],
+    "milliseconds": 87244.6437,
+    "privateBytes": 1216282624,
+    "peakWorkingSet": 2071248896,
+    "ledger": 485013504,
+    "scope": "Formal Core module + actual ProfessionalRawExport direct stripes; no intermediate TIFF feeding PNG/JPEG; foreground UI separate"
+  }
+]
