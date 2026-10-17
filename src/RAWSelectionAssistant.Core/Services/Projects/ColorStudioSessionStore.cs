@@ -26,6 +26,8 @@ public sealed record ColorStudioSessionDocument(IReadOnlyList<ColorStudioSession
     string FilterScope = "All", int MinimumRating = 0, string ColorLabelFilter = "All", int Version = 1,
     ColorStudioLayout? Layout = null)
 {
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
+    public bool EmbeddedVersionsAuthoritative {get;init;}
     public ColorStudioSessionDocument Normalize()
     {
         if (Version != 1 || Targets is null || Targets.Count > 10000) throw new InvalidDataException("不支持的 Color Studio 工作文件版本或照片数量。");

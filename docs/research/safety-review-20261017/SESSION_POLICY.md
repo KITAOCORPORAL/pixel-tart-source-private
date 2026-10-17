@@ -7,3 +7,5 @@
 加载解析Normalize、源存在/身份/缩略图、active真实渲染在隔离workspace准备；成功再提交。传入冻结document，准备期间项目hash变化拒绝。提交仍可能源变/取消，因此保留旧活动target、source/matched/尺寸、look/stack/film/engine、layout/filter/session、目标历史字典与undo/redo，并在catch恢复。失败不清旧batch历史，不报SessionRestored。
 
 这不是仅回填Targets。真实测试在SessionCommit抛故障与SessionPrepared之后替换源，参数/undo/redo/保存可用。原尺寸stage准备会额外解码，内存和性能记录不能忽略。
+
+新增显式EmbeddedVersionsAuthoritative标记，只由本轮portable save写入。新项目重开以嵌入版本为准，不会被同ID旧共享仓储覆盖；共享版本目录仍捕获项目时修订，后续显式SaveEditVersions冲突处理保留。旧项目默认false维持旧解释；这不是像素处理迁移。真实fixture：repo曝光.2→project曝光.9→重开仍.9；repo后续修改时显式版本保存拒绝且项目仍能另存。

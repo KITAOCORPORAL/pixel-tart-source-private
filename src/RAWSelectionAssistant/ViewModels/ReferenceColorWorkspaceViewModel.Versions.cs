@@ -39,6 +39,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(_versionRepository is null||target.SourceHash is null||target.VersionCatalog is not null)return;
         var key=StudioVersionRepository.Identity(target.LibraryId,target.AssetId,target.SourceHash);
         var catalog=await _versionRepository.LoadAsync(key,token);
+        if(target.RestoredSession&&target.EmbeddedVersionsAuthoritative&&target.EditVersions.Count>0)
+        {
+            // Portable project is authoritative for its own edit snapshot. Shared repository
+            // remains independent; a later explicit save still compares the frozen revision.
+            target.VersionCatalog=new(key,target.LoadedCatalogRevision??catalog.Revision,target.EditVersions.ToArray(),target.ActiveEditVersionId);
+            return;
+        }
         if(target.LoadedCatalogRevision is long sessionRevision && catalog.Revision!=sessionRevision && target.EditVersions.Count>0 && !StudioVersionRepository.SameContent(catalog,target.EditVersions.ToArray(),target.ActiveEditVersionId)){if(!await ResolveConflictAsync(target,catalog,"会话与仓储修订不同",token))throw new IOException("已取消，恢复快照保留。");return;}
         if(target.RestoredSession && target.LoadedCatalogRevision is null && target.EditVersions.Any(v=>catalog.Versions.Any(c=>c.Id==v.Id&&System.Text.Json.JsonSerializer.Serialize(c)!=System.Text.Json.JsonSerializer.Serialize(v)))){if(!await ResolveConflictAsync(target,catalog,"旧会话与同 ID 仓储版本不同",token))throw new IOException("已取消，旧快照保留。");return;}
         target.VersionCatalog=catalog;

@@ -43,6 +43,18 @@ namespace RAWSelectionAssistant.WpfTests;
    second.Editor.UndoAdjustmentCommand.Execute(null);second.Editor.RedoAdjustmentCommand.Execute(null);second.Editor.Exposure=.7;await second.SaveSessionAsync(Path.Combine(root,"recover.ptstudio.json"));Assert.IsTrue(File.Exists(Path.Combine(root,"recover.ptstudio.json")));
   }finally{Directory.Delete(root,true);}
  });
+ [TestMethod]public Task PortableSessionKeepsEmbeddedEditsWithoutImplicitRepositoryOverwrite()=>RunSta(async()=>
+ {
+  EnsureTestApplication();var root=NewRoot();try
+  {
+   var image=Image(root,"photo.png",83);var repository=new StudioVersionRepository(Path.Combine(root,"versions"));var path=Path.Combine(root,"portable.ptstudio.json");
+   using var first=new ReferenceColorWorkspaceViewModel(new Dialogs(root),versionRepository:repository);await first.LoadTargetAsync(image);first.Editor.Exposure=.2;await first.SaveEditVersionsAsync();var catalog=first.ActiveTarget!.VersionCatalog!;
+   first.Editor.Exposure=.9;await first.SaveSessionAsync(path);var unchanged=await repository.LoadAsync(catalog.Identity);Assert.AreEqual(catalog.Revision,unchanged.Revision);Assert.AreEqual(System.Text.Json.JsonSerializer.Serialize(catalog.Versions),System.Text.Json.JsonSerializer.Serialize(unchanged.Versions));
+   using var restored=new ReferenceColorWorkspaceViewModel(new Dialogs(root),versionRepository:repository);await restored.LoadSessionAsync(path);Assert.AreEqual(.9,restored.Editor.Exposure,"Project must not silently reload older repository edit with same version ID");
+   await repository.SaveAsync(unchanged,unchanged.Versions.Select(v=>v with{Name="remote change"}).ToArray(),unchanged.SelectedId);
+   await Assert.ThrowsAsync<IOException>(()=>restored.SaveEditVersionsAsync());Assert.AreEqual(.9,restored.Editor.Exposure);await restored.SaveSessionAsync(Path.Combine(root,"copy.ptstudio.json"));
+  }finally{Directory.Delete(root,true);}
+ });
  [TestMethod]public void PublishingLeaseReleaseNeedsOwnerLockAndPreservesUnknownOrChangedFiles()
  {
   var root=NewRoot();try

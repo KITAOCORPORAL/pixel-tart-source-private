@@ -50,7 +50,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var document = new ColorStudioSessionDocument(Targets.Select(item => new ColorStudioSessionTarget(item.Id, item.Path, item.AssetId, item.IsSelected,
             item.AppliedLookSnapshot, item.ColorAdjustmentStackSnapshot, item.FilmSettingsSnapshot, item.EngineSnapshot, item.ExecutionModeSnapshot,
             item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null, item.LibraryId, item.SourceHash, item.EditVersions.ToArray(), item.ActiveEditVersionId,item.VersionCatalog?.Revision,item.RawDefinition,item.RawInput)).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
-            Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen });
+            Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen }){EmbeddedVersionsAuthoritative=true};
         path=Path.GetFullPath(path);
         if(Targets.Any(t=>string.Equals(Path.GetFullPath(t.Path),path,StringComparison.OrdinalIgnoreCase)))throw new IOException("不能将工作文件保存到源照片路径。");
         // Session embeds its versions as one portable snapshot. Repository persistence is an
@@ -87,7 +87,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
 
         var restored = document.Targets.Select(item => new ReferenceTargetItem(item.Path, item.Id)
         {
-            RawDefinition=item.RawDefinition,RawInput=item.RawInput,RestoredSession=true, AssetId = item.AssetId, LibraryId = item.LibraryId, SourceHash = item.SourceHash, IsSelected = item.Selected, AppliedLookSnapshot = item.Look, ColorAdjustmentStackSnapshot = item.Stack,
+            RawDefinition=item.RawDefinition,RawInput=item.RawInput,RestoredSession=true,EmbeddedVersionsAuthoritative=document.EmbeddedVersionsAuthoritative, AssetId = item.AssetId, LibraryId = item.LibraryId, SourceHash = item.SourceHash, IsSelected = item.Selected, AppliedLookSnapshot = item.Look, ColorAdjustmentStackSnapshot = item.Stack,
             FilmSettingsSnapshot = item.Film, EngineSnapshot = item.Engine, ExecutionModeSnapshot = item.ExecutionMode,
             Rating = item.AssetId is null ? item.SessionRating ?? 0 : 0, ColorLabel = item.AssetId is null ? item.SessionColorLabel : null
         }).ToArray();

@@ -948,6 +948,7 @@ public sealed class ReferenceTargetItem : ObservableObject
     public string? OutputPath { get; set; }
     /// <summary>Session-owned RAW master shared by thumbnail, preview, Match and TIFF export.</summary>
     public ProfessionalOutputInspection? LastProfessionalOutput {get;set;}
+    public bool EmbeddedVersionsAuthoritative {get;set;}
     public ProfessionalRawDefinition? RawDefinition {get;set;}
     public ProfessionalRawContract? RawInput {get;set;}
     private ProfessionalRawMaster? _linearRawMaster;
