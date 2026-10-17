@@ -1,0 +1,92 @@
+[
+  {
+    "suite": "source-focused",
+    "sourceCommit": "ecc41699e5af0cbcffa1d9372c4244d3fa21bb2e",
+    "assemblySha256": "c83190b784bb292ef28ef74c115e1519c854d95ee0f90413c00c42874cd91c15",
+    "discovered": 1639,
+    "selected": 11,
+    "executed": 11,
+    "counts": {
+      "Passed": 11
+    },
+    "missing": [],
+    "timeouts": [],
+    "runnerStatus": "PASSED",
+    "interpretation": "PASSED"
+  },
+  {
+    "suite": "source-core",
+    "sourceCommit": "ecc41699e5af0cbcffa1d9372c4244d3fa21bb2e",
+    "assemblySha256": "4826d77e5d3162ef2177da8f53f6648bc3f0c6220e4d6df80d15ea78557f9615",
+    "discovered": 1713,
+    "selected": 1713,
+    "executed": 1706,
+    "counts": {
+      "Passed": 1706,
+      "NotExecuted": 7
+    },
+    "missing": [],
+    "timeouts": [],
+    "runnerStatus": "FAILED",
+    "interpretation": "NO_EXECUTED_FAILURES_WITH_CONDITIONALS"
+  },
+  {
+    "suite": "published-core",
+    "sourceCommit": "ecc41699e5af0cbcffa1d9372c4244d3fa21bb2e",
+    "assemblySha256": "4826d77e5d3162ef2177da8f53f6648bc3f0c6220e4d6df80d15ea78557f9615",
+    "discovered": 1713,
+    "selected": 1713,
+    "executed": 1707,
+    "counts": {
+      "Passed": 1707,
+      "NotExecuted": 6
+    },
+    "missing": [],
+    "timeouts": [],
+    "runnerStatus": "FAILED",
+    "interpretation": "NO_EXECUTED_FAILURES_WITH_CONDITIONALS"
+  },
+  {
+    "suite": "candidate",
+    "sourceCommit": "ecc41699e5af0cbcffa1d9372c4244d3fa21bb2e",
+    "assemblySha256": "d960333fdc3a2e4e494ec71e9f24476384c9aacb1ae71cba75eb41d33c153a4d",
+    "discovered": 25,
+    "selected": 25,
+    "executed": 25,
+    "counts": {
+      "Passed": 25
+    },
+    "missing": [],
+    "timeouts": [],
+    "runnerStatus": "PASSED",
+    "interpretation": "PASSED"
+  },
+  {
+    "suite": "published-wpf",
+    "sourceCommit": "ecc41699e5af0cbcffa1d9372c4244d3fa21bb2e",
+    "assemblySha256": "c83190b784bb292ef28ef74c115e1519c854d95ee0f90413c00c42874cd91c15",
+    "discovered": 1639,
+    "selected": 1639,
+    "executed": 1616,
+    "counts": {
+      "Passed": 1616,
+      "NotExecuted": 23
+    },
+    "missing": [],
+    "timeouts": [],
+    "runnerStatus": "FAILED",
+    "interpretation": "NO_EXECUTED_FAILURES_WITH_CONDITIONALS"
+  },
+  {
+    "suite": "logical-dpi",
+    "discovered": 91,
+    "selected": 91,
+    "executed": 91,
+    "counts": {
+      "Passed": 91
+    },
+    "missing": [],
+    "timeouts": [],
+    "interpretation": "LOGICAL_ONLY_NOT_PHYSICAL"
+  }
+]

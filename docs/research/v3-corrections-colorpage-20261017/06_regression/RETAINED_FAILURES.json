@@ -1,0 +1,44 @@
+[
+  {
+    "label": "initial-full-wpf",
+    "summaryPath": "artifacts\\v3-corrections\\06-source-wpf\\run-20261017-174804-03b302c9\\summary.json",
+    "status": "FAILED",
+    "failed": [
+      {
+        "id": "17b75445-82d7-81de-806b-a63814c1fad8",
+        "name": "RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.FilmstripKeepsCompactHeightAndCollapseReturnsSpaceToMainImage",
+        "display": "FilmstripKeepsCompactHeightAndCollapseReturnsSpaceToMainImage",
+        "outcome": "Failed",
+        "error": "Assert.IsTrue 失败。‘condition’表达式:‘image.ActualHeight > size.Height * .55’。 Image area 375.0 at 1180,720.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AssertIsTrueInterpolatedStringHandler.ComputeAssertion(String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 40\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, AssertIsTrueInterpolatedStringHandler& message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 129\r\n   at RAWSelectionAssistant.WpfTests.EveningFeedbackWpfTests.<>c.<<FilmstripKeepsCompactHeightAndCollapseReturnsSpaceToMainImage>b__11_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "16b85f77-69e7-8426-82cc-fa825fc9af0b",
+        "name": "RAWSelectionAssistant.WpfTests.StudioDesignSystemContractTests.FormalViews_NoUnclassifiedUnicodeActionIcons",
+        "display": "FormalViews_NoUnclassifiedUnicodeActionIcons",
+        "outcome": "Failed",
+        "error": "Assert.DoesNotContain 失败。预期集合不包含指定项。‘notExpected’表达式:‘attribute.Value’,‘collection’表达式:‘symbols’。 PhotoGradePageView.xaml: Content=\"↑\"\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertDoesNotContainItemFailed(String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.Contains.cs:line 733\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.DoesNotContain[T](T notExpected, IEnumerable`1 collection, String message, String notExpectedExpression, String collectionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.Contains.cs:line 433\r\n   at RAWSelectionAssistant.WpfTests.StudioDesignSystemContractTests.FormalViews_NoUnclassifiedUnicodeActionIcons()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "144cdab1-6100-8ed9-9eb6-b37743c93273",
+        "name": "RAWSelectionAssistant.WpfTests.StudioLocalizationTests.ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage",
+        "display": "ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage",
+        "outcome": "Failed",
+        "error": "Assert.IsTrue 失败。‘condition’表达式:‘service.HasTranslation(language.Code, key)’。 Missing zh-CN/V3DefectGeometry\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AssertIsTrueInterpolatedStringHandler.ComputeAssertion(String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 40\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, AssertIsTrueInterpolatedStringHandler& message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 129\r\n   at RAWSelectionAssistant.WpfTests.StudioLocalizationTests.ProductXamlLiteralsAndResourcesHaveThreeLanguageCoverage()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      }
+    ]
+  },
+  {
+    "label": "resume-bound-layout",
+    "summaryPath": "artifacts\\v3-corrections\\07-focused\\run-20261017-183738-c64f7dfe\\summary.json",
+    "status": "FAILED",
+    "failed": [
+      {
+        "id": "1ce9a88d-9aa3-8954-8152-bef8600af532",
+        "name": "RAWSelectionAssistant.WpfTests.InstantV3CorrectionBindingTests.BoundPageHistoryIncludesV3DisableAndFailureDoesNotDiscardRedo",
+        "display": "BoundPageHistoryIncludesV3DisableAndFailureDoesNotDiscardRedo",
+        "outcome": "Failed",
+        "error": "Assert.AreSame 失败。‘expected’表达式:‘vm.PhotoGradeUndoCommand’,‘actual’表达式:‘((Button)view.FindName(\"PhotoUndo\")).Command’。\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreSameFailed[T](T expected, T actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreSame.cs:line 199\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreSame[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreSame.cs:line 181\r\n   at RAWSelectionAssistant.WpfTests.InstantV3CorrectionBindingTests.<>c.<<BoundPageHistoryIncludesV3DisableAndFailureDoesNotDiscardRedo>b__1_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  }
+]
