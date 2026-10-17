@@ -710,7 +710,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         RefreshSourceChoices();
     }
     public async Task SetProjectAsync(Guid? projectId, CancellationToken token = default) { if (_projectId != projectId) { SelectedLook = null; _sessionLookId = null; } _projectId = projectId; await LoadAsync(token); }
-    public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default, HighBitDepthImageBuffer? rawPreviewMaster = null, FrozenRawMaster? frozenRawMaster = null)
+    public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default, HighBitDepthImageBuffer? rawPreviewMaster = null, FrozenRawMaster? frozenRawMaster = null, bool render = true)
     {
         _rawPreviewMaster = rawPreviewMaster;
         _interactiveRawMaster = rawPreviewMaster is null ? null : new RawMatchTiff16ProductPipeline(new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder()).PreviewMaster(rawPreviewMaster, 800, token);
@@ -720,7 +720,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         _render?.Cancel(); Interlocked.Increment(ref _revision);
         _assetId = assetId; _source = source; _interactiveSource = source is null ? null : CreateInteractiveProxy(source, 800); OnPropertyChanged(nameof(SourceImage)); OnPropertyChanged(nameof(SourcePixelSize)); MatchedImage = null; ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged();
         RaiseViewProperties();
-        if ((_allowReferenceManagement || ApplyToFollowing) && Enabled && source is not null) await RenderAsync(token);
+        if (render && (_allowReferenceManagement || ApplyToFollowing) && Enabled && source is not null) await RenderAsync(token);
     }
 
     public void SetResponsiveContext(bool compact)

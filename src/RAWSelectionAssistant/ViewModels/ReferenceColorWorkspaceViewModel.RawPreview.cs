@@ -12,7 +12,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(!double.IsFinite(zoom)||zoom<=0||!double.IsFinite(dpiScale)||dpiScale<=0)return;
         var revision=Interlocked.Increment(ref _professionalDetailRevision);_professionalDetailCancellation?.Cancel();_professionalDetailCancellation?.Dispose();_professionalDetailCancellation=CancellationTokenSource.CreateLinkedTokenSource(outer);var token=_professionalDetailCancellation.Token;
         if(ActiveTarget is not {} target||target.RawDefinition is not {} definition||target.LinearRawMaster is not {} master)return;
-        using var retainedMaster=StudioGlobalResources.Pin(target.Id,"Master");
+        using var retainedMaster=StudioGlobalResources.Pin(target.MasterResourceOwner,"Master");
         Editor.ClearIndependentDetail();if(visible.IsEmpty||zoom*dpiScale<=1600d/Math.Max(master.Image.Width,master.Image.Height)*1.01)return;
         var version=target.ActiveEditVersionId;var size=ProfessionalRawPipeline.OutputSize(master,definition);var left=Math.Clamp((int)Math.Floor(visible.Left),0,size.Width-1);var top=Math.Clamp((int)Math.Floor(visible.Top),0,size.Height-1);var right=Math.Clamp((int)Math.Ceiling(visible.Right),left+1,size.Width);var bottom=Math.Clamp((int)Math.Ceiling(visible.Bottom),top+1,size.Height);
         var tiles=new List<StudioDetailTile>();long retained=0;RawPipelineStatus="代理占位 · 正在分块补齐可见原像素";OnPropertyChanged(nameof(RawPipelineStatus));

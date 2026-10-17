@@ -62,39 +62,54 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public async Task LoadSessionAsync(string path, CancellationToken token = default)
     {
         if(_skipSessionPreparation){await LoadSessionCoreAsync(path,token);return;}
+        if(_disposed||IsLoading||IsInstantGenerating||IsExporting)throw new InvalidOperationException("工作区正在处理，未开始加载项目。");
+        _sessionLoading=true;OnPropertyChanged(nameof(IsLoading));RefreshSyncAvailability();
+        try
+        {
         // Validate the complete document before touching the active edit session.
         var fingerprint=await ColorStudioSessionStore.FingerprintAsync(path,token);
         var document = await ColorStudioSessionStore.LoadAsync(path, token);
         if(fingerprint!=await ColorStudioSessionStore.FingerprintAsync(path,token))throw new IOException("项目在读取期间改变，工作区未修改。");
-        // Prepare all required files and active processing in an isolated workspace first.
-        using(var staged=_sessionStagingFactory())
-        {
-            staged._skipSessionPreparation=true;
-            await staged.LoadSessionCoreAsync(path,token,document);
-            if(document.Targets.Count>0&&(staged.ActiveTarget is null||staged.ActiveTarget.Status==ReferenceTargetStatus.Failed))throw new InvalidDataException("项目激活失败，旧工作区保持。");
-            if(staged.Targets.Any(t=>t.Status==ReferenceTargetStatus.Failed))throw new InvalidDataException("项目存在不可用照片，旧工作区保持。");
-        }
+        // Staging owns prepared targets until the complete transfer succeeds. The real
+        // workspace remains unchanged during decode/render. Never create a second set.
+        using var oldMasterLease=ActiveTarget?.LinearRawMaster is {} oldMaster?StudioGlobalResources.RetainBuffer(oldMaster.Image,(long)oldMaster.Image.Rgb32.Length*4):null;
+        using var staged=_sessionStagingFactory();
+        var expectedActive=ActiveTarget;var expectedRevision=Volatile.Read(ref _activationRevision);
+        staged._skipSessionPreparation=true;
+        await staged.LoadSessionCoreAsync(path,token,document);
+        if(document.Targets.Count>0&&(staged.ActiveTarget is null||staged.ActiveTarget.Status==ReferenceTargetStatus.Failed))throw new InvalidDataException("项目激活失败，旧工作区保持。");
+        if(staged.Targets.Any(t=>t.Status==ReferenceTargetStatus.Failed))throw new InvalidDataException("项目存在不可用照片，旧工作区保持。");
         if(fingerprint!=await ColorStudioSessionStore.FingerprintAsync(path,token))throw new IOException("项目在准备期间改变，工作区未修改。");
         Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("SessionPrepared",token);
-        await LoadSessionCoreAsync(path,token,document);
+        foreach(var target in staged.Targets)
+        {
+            if(!await staged.ValidateTargetIdentityAsync(target,token))throw new InvalidDataException(target.Error);
+            target.RawDefinition?.InstantFilm?.V3?.MultipleInput?.ValidateSource(token);
+        }
+        token.ThrowIfCancellationRequested();
+        if(fingerprint!=await ColorStudioSessionStore.FingerprintAsync(path,token))throw new IOException("项目在移交前改变，工作区未修改。");
+        if(_disposed||!ReferenceEquals(ActiveTarget,expectedActive)||expectedRevision!=Volatile.Read(ref _activationRevision))throw new OperationCanceledException("项目准备期间工作区已改变。",token);
+        await LoadSessionCoreAsync(path,token,document,staged);
         _sessionFingerprints[Path.GetFullPath(path)]=fingerprint;
+        }
+        finally{_sessionLoading=false;OnPropertyChanged(nameof(IsLoading));RefreshSyncAvailability();}
     }
     private bool _skipSessionPreparation;
-    private async Task LoadSessionCoreAsync(string path,CancellationToken token,ColorStudioSessionDocument? prepared=null)
+    private async Task LoadSessionCoreAsync(string path,CancellationToken token,ColorStudioSessionDocument? prepared=null,ReferenceColorWorkspaceViewModel? staged=null)
     {
         var document=prepared??await ColorStudioSessionStore.LoadAsync(path,token);
         foreach(var item in document.Targets)if(!File.Exists(item.Path))throw new FileNotFoundException("项目源照片缺失，旧工作区保持。",item.Path);
 
-        var restored = document.Targets.Select(item => new ReferenceTargetItem(item.Path, item.Id)
+        var restored = staged?.Targets.ToArray() ?? document.Targets.Select(item => new ReferenceTargetItem(item.Path, item.Id)
         {
             RawDefinition=item.RawDefinition,RawInput=item.RawInput,RestoredSession=true,EmbeddedVersionsAuthoritative=document.EmbeddedVersionsAuthoritative, AssetId = item.AssetId, LibraryId = item.LibraryId, SourceHash = item.SourceHash, IsSelected = item.Selected, AppliedLookSnapshot = item.Look, ColorAdjustmentStackSnapshot = item.Stack,
             FilmSettingsSnapshot = item.Film, EngineSnapshot = item.Engine, ExecutionModeSnapshot = item.ExecutionMode,
             Rating = item.AssetId is null ? item.SessionRating ?? 0 : 0, ColorLabel = item.AssetId is null ? item.SessionColorLabel : null
         }).ToArray();
-        for(var i=0;i<restored.Length;i++) { foreach(var version in document.Targets[i].EditVersions ?? []) restored[i].EditVersions.Add(version); restored[i].ActiveEditVersionId=document.Targets[i].ActiveEditVersionId;restored[i].LoadedCatalogRevision=document.Targets[i].CatalogRevision; }
+        if(staged is null)for(var i=0;i<restored.Length;i++) { foreach(var version in document.Targets[i].EditVersions ?? []) restored[i].EditVersions.Add(version); restored[i].ActiveEditVersionId=document.Targets[i].ActiveEditVersionId;restored[i].LoadedCatalogRevision=document.Targets[i].CatalogRevision; }
         if(ActiveTarget is{} current)Editor.CopyCurrentLookTo([current]);
         var history=Editor.CaptureSessionHistory();
-        var oldTargets=Targets.ToArray();var oldActive=ActiveTarget;var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldSize=Editor.SourcePixelSize;
+        var oldTargets=Targets.ToArray();var oldActive=ActiveTarget;var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldSize=Editor.SourcePixelSize;var oldIndependent=Editor.IndependentRawMode;var oldEnabled=Editor.Enabled;var oldView=Editor.ViewMode;
         var oldFilter=FilterScope;var oldRating=MinimumRating;var oldLabel=ColorLabelFilter;var oldLayout=Layout;var oldSession=SessionPath;var oldAux=Editor.ContextRailOpen;var oldFailed=FailedTarget;var oldEngine=Editor.MatchEngine;var oldMode=Editor.MatchV4ExecutionMode;
         _sessionLoading = true; OnPropertyChanged(nameof(IsLoading)); RefreshSyncAvailability();
         try
@@ -111,16 +126,40 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             token.ThrowIfCancellationRequested();
 
             if (!await ValidateTargetIdentityAsync(target, token)) { target.Status = ReferenceTargetStatus.Failed; missing++; continue; }
-            await LoadThumbnailAsync(target, token);
+            if(staged is null && target.Id!=document.ActiveTargetId)await LoadThumbnailAsync(target, token);
         }
         await FlushMetadataAsync();token.ThrowIfCancellationRequested();
         if(restored.Any(t=>t.Status==ReferenceTargetStatus.Failed))throw new InvalidDataException("项目照片准备或激活失败，旧工作区保持。");
         var active = restored.FirstOrDefault(x => x.Id == document.ActiveTargetId && x.Status != ReferenceTargetStatus.Failed && File.Exists(x.Path)) ?? restored.FirstOrDefault(x => x.Status != ReferenceTargetStatus.Failed && File.Exists(x.Path));
-        if (active is not null){await ActivateTargetAsync(active);token.ThrowIfCancellationRequested();if(active.Status==ReferenceTargetStatus.Failed)throw new InvalidDataException(active.Error??"项目激活失败");}
+        if (active is not null)
+        {
+            if(staged is null)await ActivateTargetAsync(active);
+            else
+            {
+                ActiveTarget=active;TargetName=active.FileName;TargetImage=staged.TargetImage;
+                Editor.RestoreTargetEngine(active.EngineSnapshot,active.ExecutionModeSnapshot);
+                Editor.ApplyTargetSnapshot(active.AppliedLookSnapshot,active.FilmSettingsSnapshot,active.ColorAdjustmentStackSnapshot,render:false,targetIdentity:active.ActiveEditVersionId??active.Id);
+                Editor.IndependentRawMode=staged.Editor.IndependentRawMode;
+                await Editor.SetSourceAsync(active.AssetId,staged.Editor.SourceImage,token,render:false);
+                if(staged.Editor.MatchedImage is {} image)Editor.PresentIndependentRaw(image);
+                Editor.Enabled=staged.Editor.Enabled;Editor.ViewMode=staged.Editor.ViewMode;
+                Editor.SetIndependentRawSize(staged.Editor.SourcePixelSize);
+                RestoreInstantControls(active.RawDefinition?.InstantFilm);
+                Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("SessionTransfer",token);
+            }
+            token.ThrowIfCancellationRequested();if(active.Status==ReferenceTargetStatus.Failed)throw new InvalidDataException(active.Error??"项目激活失败");
+        }
         else { TargetImage = null; TargetName = "尚未选择待调色照片"; Editor.ApplyTargetSnapshot(null,null,null,false); await Editor.SetSourceAsync(null, null, token); }
         RefreshFilmstrip(); SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath));
         _batchUndo.Clear();_batchRedo.Clear();RaiseBatchHistory();
         SetStatus("SessionRestored", restored.Length, missing);
+        if(staged is not null)
+        {
+            // Ownership of these exact target instances is now held only by this workspace.
+            staged.Targets.Clear();staged.ActiveTarget=null;
+            _comparisonKey=staged._comparisonKey;_comparisonImage=staged._comparisonImage;
+            foreach(var old in oldTargets){old.LinearRawMaster=null;old.RawMaster=null;}
+        }
         }
         catch
         {
@@ -134,8 +173,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 ActiveTarget=oldActive;TargetImage=oldSource;TargetName=oldActive.FileName;
                 Editor.RestoreTargetEngine(oldActive.EngineSnapshot,oldActive.ExecutionModeSnapshot);
                 Editor.ApplyTargetSnapshot(oldActive.AppliedLookSnapshot,oldActive.FilmSettingsSnapshot,oldActive.ColorAdjustmentStackSnapshot,render:false,targetIdentity:oldActive.ActiveEditVersionId??oldActive.Id);
-                await Editor.SetSourceAsync(oldActive.AssetId,oldSource,CancellationToken.None);Editor.StopProcessing();
-                if(oldImage is not null){Editor.PresentIndependentRaw(oldImage);Editor.SetIndependentRawSize(oldSize);Editor.IndependentRawMode=oldActive.RawDefinition is not null;}
+                await Editor.SetSourceAsync(oldActive.AssetId,oldSource,CancellationToken.None,render:false);Editor.StopProcessing();
+                if(oldImage is not null){Editor.PresentIndependentRaw(oldImage);Editor.SetIndependentRawSize(oldSize);Editor.IndependentRawMode=oldIndependent;Editor.Enabled=oldEnabled;Editor.ViewMode=oldView;}
                 RestoreInstantControls(oldActive.RawDefinition?.InstantFilm);
             }
             else {ActiveTarget=null;TargetImage=oldSource;TargetName="尚未选择待调色照片";await Editor.SetSourceAsync(null,oldSource,CancellationToken.None);}

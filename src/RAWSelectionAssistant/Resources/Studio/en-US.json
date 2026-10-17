@@ -686,6 +686,6 @@
   "InstantDemoMode": "Development demonstration (off: immediate result)",
   "InstantSkipDemo": "Skip demonstration",
   "SrgbExposureTitle": "Linear sRGB exposure",
-  "SrgbExposureHelp": "Rendered PNG/TIFF/JPEG only; linear sRGB D65 exposure, sRGB output. RAW/V3 unavailable; undo returns to previous processing.",
-  "SrgbExposureApply": "Apply linear exposure"
+  "SrgbExposureHelp": "Create a new version from the original rendered file, not the current Look/Stack/Film. Previous edits are retained; undo restores them. Linear sRGB D65 exposure, sRGB output, not scene RAW. TIFF3 accepts only product uncompressed RGB16 with exact sRGB profile.",
+  "SrgbExposureApply": "New exposure version from source"
 }

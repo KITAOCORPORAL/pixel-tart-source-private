@@ -686,6 +686,6 @@
   "InstantDemoMode": "显影演示（关闭：即时结果）",
   "InstantSkipDemo": "跳过演示",
   "SrgbExposureTitle": "线性 sRGB 曝光",
-  "SrgbExposureHelp": "仅已渲染 PNG/TIFF/JPEG：线性 sRGB D65 曝光、sRGB 输出。RAW/V3 不混用；撤销可返回旧处理。",
-  "SrgbExposureApply": "应用线性曝光"
+  "SrgbExposureHelp": "从原始已渲染文件创建新版本，不叠加当前 Look／Stack／Film；此前编辑版本保留，可撤销返回。线性 sRGB D65 曝光、sRGB 输出，非场景 RAW。TIFF3 仅支持产品未压缩 RGB16／精确 sRGB 子集。",
+  "SrgbExposureApply": "从原文件创建曝光版本"
 }

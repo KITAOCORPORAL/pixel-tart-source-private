@@ -21,7 +21,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         }
         var key=JsonSerializer.Serialize(new{master.Contract.SourceSha256,master.Contract.DecodeKey,master.Image.Width,master.Image.Height,master.Image.Orientation,Definition=definition,Edge=edge,Quality="DisplayLinearBoxBandsV1"});
         lock(_hqGate)if(_hqPreview.TryGetValue(key,out var cached))return cached;
-        using var retainedMaster=StudioGlobalResources.Pin(Targets.FirstOrDefault(x=>ReferenceEquals(x.LinearRawMaster,master))?.Id??Guid.Empty,"Master");
+        using var retainedMaster=StudioGlobalResources.Pin(Targets.FirstOrDefault(x=>ReferenceEquals(x.LinearRawMaster,master))?.MasterResourceOwner??Guid.Empty,"Master");
         await ProfessionalRawResourcePolicy.HeavyWork.WaitAsync(token);
         try
         {

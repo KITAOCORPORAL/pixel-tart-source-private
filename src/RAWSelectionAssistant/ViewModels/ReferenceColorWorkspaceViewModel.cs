@@ -721,7 +721,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         _analysisCancellation?.Cancel(); _analysisCache.Clear();
         _secondSelectionCancellation?.Cancel();_secondSelectionCancellation?.Dispose();
         _instantCancellation?.Cancel();_instantCancellation?.Dispose();
-        ClearHqPreview();InvalidateProfessionalPreview();_professionalDetailCancellation?.Dispose();foreach(var target in Targets){target.LinearRawMaster=null;target.RawMaster=null;}
+        _comparisonKey=null;_comparisonImage=null;ClearHqPreview();InvalidateProfessionalPreview();_professionalDetailCancellation?.Dispose();foreach(var target in Targets){target.LinearRawMaster=null;target.RawMaster=null;}
         _activationCancellation?.Cancel(); _activationCancellation?.Dispose(); _sourceCache.Clear();
         foreach (var target in _observedTargets)
         {
@@ -951,11 +951,12 @@ public sealed class ReferenceTargetItem : ObservableObject
     public bool EmbeddedVersionsAuthoritative {get;set;}
     public ProfessionalRawDefinition? RawDefinition {get;set;}
     public ProfessionalRawContract? RawInput {get;set;}
+    internal Guid MasterResourceOwner {get;}=Guid.NewGuid();
     private ProfessionalRawMaster? _linearRawMaster;
     public ProfessionalRawMaster? LinearRawMaster
     {
         get=>_linearRawMaster;
-        set{_linearRawMaster=value;if(value is null){StudioGlobalResources.Release(Id,"Master");return;}var weak=new WeakReference<ReferenceTargetItem>(this);StudioGlobalResources.Store(Id,"Master",(long)value.Image.Rgb32.Length*sizeof(float),()=>{if(weak.TryGetTarget(out var target))if(ReferenceEquals(target._linearRawMaster,value))target._linearRawMaster=null;});StudioGlobalResources.BindRetainedBuffer(value.Image,Id,"Master");}
+        set{_linearRawMaster=value;if(value is null){StudioGlobalResources.Release(MasterResourceOwner,"Master");return;}var weak=new WeakReference<ReferenceTargetItem>(this);StudioGlobalResources.Store(MasterResourceOwner,"Master",(long)value.Image.Rgb32.Length*sizeof(float),()=>{if(weak.TryGetTarget(out var target))if(ReferenceEquals(target._linearRawMaster,value))target._linearRawMaster=null;});StudioGlobalResources.BindRetainedBuffer(value.Image,MasterResourceOwner,"Master");}
     }
     public FrozenRawMaster? RawMaster { get; set; }
     public ReferenceExportStatus ExportStatus { get; set; }

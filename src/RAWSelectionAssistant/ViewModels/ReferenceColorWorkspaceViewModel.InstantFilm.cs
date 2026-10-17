@@ -133,14 +133,15 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(InstantEngineVersion=="V3"&&(target.ActiveEditVersionId is null||target.RawDefinition is null)||target.RawDefinition is null&&RawMatchTiff16ProductPipeline.IsRaw(target.Path)){Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);}
         var version=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);var previous=target.RawDefinition;
         var previousDice=previous?.InstantFilm?.DiceEnabled??false;
+        var oldRawMaster=target.RawMaster;var oldWidth=target.PixelWidth;var oldHeight=target.PixelHeight;var oldThumb=target.Thumbnail;var oldSourceThumb=target.SourceThumbnail;var oldEnabled=Editor.Enabled;var oldView=Editor.ViewMode;var oldTargetImage=TargetImage;var oldFailed=FailedTarget;
         var oldInput=target.RawInput;var oldMaster=target.LinearRawMaster;var oldLook=target.AppliedLookSnapshot;var oldStack=target.ColorAdjustmentStackSnapshot;var oldFilm=target.FilmSettingsSnapshot;
-        var oldImage=Editor.MatchedImage;var oldSize=Editor.SourcePixelSize;Guid? committedId=null;
+        var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldMode=Editor.IndependentRawMode;var oldSize=Editor.SourcePixelSize;var oldStatus=target.Status;var oldError=target.Error;var oldHistory=Editor.CaptureSessionHistory();Guid? committedId=null;
         void Rollback()
         {
             if(committedId is not {} id||target.ActiveEditVersionId!=id)return;
-            target.ActiveEditVersionId=version;target.RawDefinition=previous;target.RawInput=oldInput;target.LinearRawMaster=oldMaster;target.AppliedLookSnapshot=oldLook;target.ColorAdjustmentStackSnapshot=oldStack;target.FilmSettingsSnapshot=oldFilm;
+            target.ActiveEditVersionId=version;target.RawDefinition=previous;target.RawInput=oldInput;target.RawMaster=_disposed?null:oldRawMaster;target.LinearRawMaster=_disposed||!ReferenceEquals(ActiveTarget,target)?null:oldMaster;target.PixelWidth=oldWidth;target.PixelHeight=oldHeight;target.Thumbnail=oldThumb;target.SourceThumbnail=oldSourceThumb;target.AppliedLookSnapshot=oldLook;target.ColorAdjustmentStackSnapshot=oldStack;target.FilmSettingsSnapshot=oldFilm;
             var entry=target.EditVersions.FirstOrDefault(v=>v.Id==id);if(entry is not null)target.EditVersions.Remove(entry);
-            if(!_disposed&&ReferenceEquals(target,ActiveTarget)&&oldImage is not null){Editor.PresentIndependentRaw(oldImage);Editor.SetIndependentRawSize(oldSize);Editor.IndependentRawMode=previous is not null;}
+            if(!_disposed&&revision==Volatile.Read(ref _activationRevision)&&ReferenceEquals(target,ActiveTarget)&&oldImage is not null){Editor.ApplyTargetSnapshot(oldLook,oldFilm,oldStack,render:false,targetIdentity:version??target.Id);Editor.SetSourceAsync(target.AssetId,oldSource,render:false).GetAwaiter().GetResult();Editor.PresentIndependentRaw(oldImage);Editor.SetIndependentRawSize(oldSize);Editor.IndependentRawMode=oldMode;Editor.Enabled=oldEnabled;Editor.ViewMode=oldView;TargetImage=oldTargetImage;FailedTarget=oldFailed;Editor.RestoreSessionHistory(oldHistory);target.Status=oldStatus;target.Error=oldError;}
         }
         _skipInstantDemo=false;LastInstantApplyTimings=null;LastProcessingFailure=null;OnPropertyChanged(nameof(LastProcessingFailure));
         _instantCancellation?.Dispose();_instantCancellation=new();var token=_instantCancellation.Token;
@@ -178,15 +179,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
             // Reuse the exact frozen full source used by legacy editing; never a proxy or a second native
             // decode on first conversion. After success the new rendered master replaces the old cache.
-            var decodeWatch=Stopwatch.StartNew();var cacheHit=target.LinearRawMaster?.Contract.DecodeKey==definition.DecodeKey;
-            var master=target.LinearRawMaster is {} current&&current.Contract.DecodeKey==definition.DecodeKey?current:
-                definition.InputConfiguration=="LegacyRawEditsSrgbFloatV1"?await RebuildLegacyRawInputAsync(target.Path,definition,target.RawMaster,token):await DecodeProfessionalInputAsync(target.Path,definition,token);
+            var decodeWatch=Stopwatch.StartNew();var reusable=ReusableMaster(target,definition);var cacheHit=reusable is not null;
+            var master=reusable??(definition.InputConfiguration=="LegacyRawEditsSrgbFloatV1"?await RebuildLegacyRawInputAsync(target.Path,definition,target.RawMaster,token):await DecodeProfessionalInputAsync(target.Path,definition,token));
             if(!string.Equals(master.Contract.SourceSha256,target.SourceHash??target.ObservedSourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("生成期间源文件身份改变。");
             var decodeMs=decodeWatch.Elapsed.TotalMilliseconds;var pixelWatch=Stopwatch.StartNew();
-            using var presentationMaster=ReferenceEquals(target.LinearRawMaster,master)?StudioGlobalResources.Pin(target.Id,"Master"):StudioGlobalResources.ReserveWork((long)master.Image.Rgb32.Length*sizeof(float));
-            var preview=await RenderProfessionalPreviewAsync(master,definition,1600,token);
-            InstantFinalPreview=RawDisplayBitmapAdapter.ToBitmap(preview.ToVisualRgb24());
-            if(film.AlgorithmVersion==3)preview.Dispose();
+            using var presentationMaster=StudioGlobalResources.RetainBuffer(master.Image,(long)master.Image.Rgb32.Length*sizeof(float));
+            var prepared=await PrepareProfessionalPreviewAsync(target,master,definition,token);
+            InstantFinalPreview=prepared.Image;
             var original=ProfessionalRawPipeline.OrientedSize(master);var layout=InstantPaperLayout.Create(original.Width,original.Height,film);
             InstantDimensions=$"原尺寸 {original.Width} × {original.Height} · 相纸 {layout.Width} × {layout.Height}";OnPropertyChanged(nameof(InstantDimensions));
             InstantImageRegion=new(layout.Left/(double)layout.Width,layout.Top/(double)layout.Height,layout.WindowWidth/(double)layout.Width,layout.WindowHeight/(double)layout.Height);
@@ -212,7 +211,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             target.RawDefinition=definition;target.RawInput=master.Contract;target.LinearRawMaster=master;target.RawMaster=null;
             target.AppliedLookSnapshot=null;target.ColorAdjustmentStackSnapshot=null;target.FilmSettingsSnapshot=null;
             CaptureEditVersion(target);target.EditVersions[^1]=target.EditVersions[^1] with{Name=profile.Name+(film.AlgorithmVersion==3?" · 创作 V3":" · 创作 v2"),OriginVersionId=version};
-            IsInstantGenerating=false;await ActivateTargetAsync(target);if(target.Status==ReferenceTargetStatus.Failed)throw new IOException(target.Error);StatusText="即时胶片显影完成 · 创作近似，非实测相纸标定";
+            EnsurePreparedCurrent(target,definition,committedId,revision,token);await PresentProfessionalPreviewAsync(target,prepared,revision,token);if(target.Status==ReferenceTargetStatus.Failed)throw new IOException(target.Error);StatusText="即时胶片显影完成 · 创作近似，非实测相纸标定";
             LastInstantApplyTimings=new(decodeMs,pixelMs,demoMs,commitWatch.Elapsed.TotalMilliseconds,cacheHit);OnPropertyChanged(nameof(LastInstantApplyTimings));
             if(film.AlgorithmVersion==3){if(!_instantV3Undo.TryGetValue(target.Id,out var undo))_instantV3Undo[target.Id]=undo=new();if(version is Guid prior)undo.Push(prior);if(_instantV3Redo.TryGetValue(target.Id,out var redo))redo.Clear();}
         }

@@ -63,7 +63,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 var master=await _professionalDecoder.DecodeAsync(target.Path,definition);
                 if(_disposed||!ReferenceEquals(ActiveTarget,target)||target.ActiveEditVersionId!=sourceVersion||revision!=Volatile.Read(ref _activationRevision))return;
                 if(!string.Equals(master.Contract.SourceSha256,target.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("RAW 源身份改变。");
-        using var activeMasterLease=StudioGlobalResources.Pin(target.Id,"Master");
+        using var activeMasterLease=StudioGlobalResources.Pin(target.MasterResourceOwner,"Master");
                 Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);CancelTargetThumbnail(target.Id);Editor.StopProcessing();
                 target.LinearRawMaster=master;target.RawMaster=null;target.RawInput=master.Contract;
                 target.ActiveEditVersionId=Guid.NewGuid();target.RawDefinition=definition;target.AppliedLookSnapshot=null;target.ColorAdjustmentStackSnapshot=null;target.FilmSettingsSnapshot=null;
@@ -102,34 +102,43 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var definition=target.RawDefinition!.Validate();
         RawPipelineStatus="正在解码新 RAW 版本…";OnPropertyChanged(nameof(RawPipelineStatus));
         var master=target.LinearRawMaster;
-        if(master is null||master.Contract.DecodeKey!=definition.DecodeKey)
+        if(master is null||master.Contract.DecodeKey!=definition.DecodeKey||!string.Equals(master.Contract.SourceSha256,target.SourceHash??target.ObservedSourceHash,StringComparison.OrdinalIgnoreCase))
         {master=await DecodeProfessionalInputAsync(target.Path,definition,token);token.ThrowIfCancellationRequested();if(revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)return;target.LinearRawMaster=master;}
         if(!string.Equals(master.Contract.SourceSha256,target.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("RAW 解码源身份改变，未呈现结果。");
-        using var quick=definition.InstantFilm?.AlgorithmVersion==3?null:await Task.Run(()=>ProfessionalRawPipeline.Render(master,definition,800,token),token);
+        var prepared=await PrepareProfessionalPreviewAsync(target,master,definition,token);
         if(revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)return;
-        if(quick is not null&&ReferenceEquals(ActiveTarget,target)&&Editor.IndependentRawMode)
-        {Editor.PresentIndependentRaw(StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(quick.ToVisualRgb24()),quick.Orientation));RawPipelineStatus="快速800代理 · 正在更新线性光抗混叠高质量预览";OnPropertyChanged(nameof(RawPipelineStatus));}
-        var rendered=await RenderProfessionalPreviewAsync(master,definition,1600,token);
-        using var renderedOwner=definition.InstantFilm?.AlgorithmVersion==3?rendered:null;
-        var original=definition.ExposureEv==0&&definition.InstantFilm?.AlgorithmVersion!=3&&definition.SrgbExposure is null?rendered:await RenderProfessionalPreviewAsync(master,(definition.InstantFilm?.AlgorithmVersion==3?Kitao.InstantFilm.Research.InstantV3ProductPipeline.Original(definition):definition with{ExposureEv=0,SrgbExposure=null}),1600,token,"ComparePreview");
-        using var originalOwner=definition.InstantFilm?.AlgorithmVersion==3&&!ReferenceEquals(original,rendered)?original:null;
-        if(revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)return;
-        var image=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(rendered.ToVisualRgb24()),rendered.Orientation);var before=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(original.ToVisualRgb24()),original.Orientation);
+        await PresentProfessionalPreviewAsync(target,prepared,revision,token);
+    }
+    private async Task PresentProfessionalPreviewAsync(ReferenceTargetItem target,PreparedProfessionalPreview prepared,long revision,CancellationToken token)
+    {
+        var master=prepared.Master;var definition=prepared.Definition;var image=prepared.Image;var before=prepared.Before;
+        token.ThrowIfCancellationRequested();
+        if(_disposed||revision!=Volatile.Read(ref _activationRevision)||prepared.Revision!=revision||prepared.TargetId!=target.Id||target.RawDefinition!=definition)throw new OperationCanceledException(token);
         target.RawInput=master.Contract;target.PixelWidth=master.Image.Width;target.PixelHeight=master.Image.Height;target.SourceHash=master.Contract.SourceSha256.ToLowerInvariant();
         var sourceDimensions=ProfessionalRawPipeline.OrientedSize(master);var paperDimensions=ProfessionalRawPipeline.OutputSize(master,definition);
         InstantDimensions=$"原尺寸 {sourceDimensions.Width} × {sourceDimensions.Height} · 相纸 {paperDimensions.Width} × {paperDimensions.Height}";OnPropertyChanged(nameof(InstantDimensions));
         QueueMetadata(()=>HydrateAssetMetadataAsync(target));await FlushMetadataAsync();
-        if(revision!=Volatile.Read(ref _activationRevision))return;
+        if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
+        definition.InstantFilm?.V3?.MultipleInput?.ValidateSource(token);
+        if(_disposed||revision!=Volatile.Read(ref _activationRevision))throw new OperationCanceledException(token);
         TrimProfessionalMasters(target);
         ActiveTarget=target;TargetImage=image;TargetName=target.FileName;target.IsActive=true;foreach(var other in Targets.Where(x=>!ReferenceEquals(x,target)))other.IsActive=false;
+        Editor.RestoreTargetEngine(target.EngineSnapshot,target.ExecutionModeSnapshot);
+        Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot,target.FilmSettingsSnapshot,target.ColorAdjustmentStackSnapshot,render:false,targetIdentity:target.ActiveEditVersionId??target.Id);
         using var presentationMeasurement=StudioPreviewDiagnostics.Measure("Present");
-        Editor.IndependentRawMode=true;await Editor.SetSourceAsync(target.AssetId,before,token);Editor.StopProcessing();if(revision!=Volatile.Read(ref _activationRevision)||token.IsCancellationRequested)return;Editor.PresentIndependentRaw(image);var oriented=ProfessionalRawPipeline.OutputSize(master,definition);Editor.SetIndependentRawSize(new(oriented.Width,oriented.Height));
+        Editor.IndependentRawMode=true;await Editor.SetSourceAsync(target.AssetId,before,token,render:false);Editor.StopProcessing();if(_disposed||revision!=Volatile.Read(ref _activationRevision)||token.IsCancellationRequested)throw new OperationCanceledException(token);Editor.PresentIndependentRaw(image);var oriented=ProfessionalRawPipeline.OutputSize(master,definition);Editor.SetIndependentRawSize(new(oriented.Width,oriented.Height));
         var thumb=new TransformedBitmap(image,new System.Windows.Media.ScaleTransform(Math.Min(1,320d/image.PixelWidth),Math.Min(1,320d/image.PixelWidth)));thumb.Freeze();target.Thumbnail=thumb;target.SourceThumbnail=before;target.Status=ReferenceTargetStatus.Adjusted;target.Error=null;if(ReferenceEquals(FailedTarget,target))FailedTarget=null;
         RawExposureEv=definition.ExposureEv;RawRedGain=definition.RedGain;RawGreenGain=definition.GreenGain;RawBlueGain=definition.BlueGain;RawUseCameraWhiteBalance=definition.WhiteBalance=="Camera";
         foreach(var name in new[]{nameof(PhotoGradeRasterToolsEnabled),nameof(IsProfessionalRaw),nameof(IsLinearProfessionalRaw),nameof(IsLegacyRaw),nameof(RawExposureEv),nameof(RawRedGain),nameof(RawGreenGain),nameof(RawBlueGain),nameof(RawUseCameraWhiteBalance)})OnPropertyChanged(name);
         RestoreInstantControls(definition.InstantFilm);RefreshSyncAvailability();
         RawPipelineStatus=definition.SrgbExposure is not null?"Rendered sRGB D65 → Linear sRGB exposure v1 → sRGB encode/clip；非场景RAW/显示ICC":definition.InputConfiguration=="LegacyRawEditsSrgbFloatV1"?"PV6 · 旧RAW完整编辑 → 已渲染sRGB · 不重复白平衡/曝光/显示转换":definition.InputConfiguration=="RenderedSrgbFloatV1"?"PV5 · 完整JPEG → WIC sRGB · 不重复应用白平衡；创作非标定":$"PV4 · {master.Contract.Model} · LibRaw Linear ProPhoto D65 → sRGB · 解码饱和通道 {master.Contract.SaturatedChannelSamples:N0}；不代表未裁切传感器";OnPropertyChanged(nameof(RawPipelineStatus));
-        StatusText="原尺寸管线预览完成；即时胶片为创作近似，非相纸标定";CaptureEditVersion(target);await RefreshPreviewAnalysisAsync(token,image);
+        StatusText="原尺寸管线预览完成；即时胶片为创作近似，非相纸标定";
+        Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("PreviewCommit",token);
+        if(_disposed||revision!=Volatile.Read(ref _activationRevision))throw new OperationCanceledException(token);
+        var comparison=Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition)?Kitao.InstantFilm.Research.InstantV3ProductPipeline.Original(definition):definition with{ExposureEv=0,SrgbExposure=null};
+        _comparisonKey=System.Text.Json.JsonSerializer.Serialize(new{master.Contract.SourceSha256,DecodeKey=ComparisonIdentity(comparison).DecodeKey,master.Image.Width,master.Image.Height,master.Image.Orientation,Definition=ComparisonIdentity(comparison),Edge=1600,Quality="DisplayLinearBoxBandsV1"});_comparisonImage=before;
+        CaptureEditVersion(target);await RefreshPreviewAnalysisAsync(token,image);
+        token.ThrowIfCancellationRequested();if(_disposed||revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)throw new OperationCanceledException(token);
     }
     private async Task ExportProfessionalRawAsync(ReferenceTargetItem target,ProfessionalRawDefinition definition,string temporary,StudioExportFormat format,CancellationToken token)
     {
@@ -137,7 +146,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var master=target.LinearRawMaster?.Contract.DecodeKey==definition.DecodeKey?target.LinearRawMaster:await DecodeProfessionalInputAsync(target.Path,definition,token);
         if(!string.Equals(master!.Contract.SourceSha256,target.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("RAW 导出源身份改变。");
         var actualFormat=format==StudioExportFormat.Source&&definition.InputConfiguration=="RenderedSrgbFloatV1"?StudioExportFormat.Jpeg:format;
-        using var retainedMaster=StudioGlobalResources.Pin(target.Id,"Master");
+        using var retainedMaster=StudioGlobalResources.Pin(target.MasterResourceOwner,"Master");
         target.LastProfessionalOutput=await ProfessionalRawExport.WriteAsync(master,definition,temporary,actualFormat,token);
         TrimProfessionalMasters(ActiveTarget??target);
     }
