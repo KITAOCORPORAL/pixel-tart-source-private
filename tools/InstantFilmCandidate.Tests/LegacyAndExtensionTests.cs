@@ -26,5 +26,12 @@ public sealed class LegacyAndExtensionTests
   var r=CandidateRecipe.Create("modern-itype-v3");Assert.Throws<InvalidDataException>(()=>(r with{Creative=new(Version:99)}).Validate());Assert.Throws<InvalidDataException>(()=>(r with{Paper=new(Reflection:double.NaN)}).Validate());Assert.Throws<InvalidDataException>(()=>(r with{Defects=new(Streams:"random-global")} ).Validate());
   var raw=new ProfessionalRawDefinition();Assert.AreEqual(4,raw.ProcessingVersion);Assert.AreEqual(1,new InstantFilmDefinition().AlgorithmVersion);
  }
+ [TestMethod] public void MultipleExposureIsLinearLightNotEncodedBlendAndHasExactEndpoints()
+ {
+  var zero=new ColorVector3(0,0,0);var white=new ColorVector3(1,1,1);var mixed=CandidateExtensions.MultipleExposure(zero,white,.5);
+  Assert.AreEqual(CandidateTone.Encode(.5),mixed.X,1e-12);Assert.IsTrue(Math.Abs(mixed.X-.5)>.2);
+  Assert.AreEqual(zero,CandidateExtensions.MultipleExposure(zero,white,0));Assert.AreEqual(1,CandidateExtensions.MultipleExposure(zero,white,1).X,1e-12);
+  Assert.Throws<InvalidDataException>(()=>CandidateExtensions.MultipleExposure(zero,white,double.NaN));
+ }
  private static string TestRoot(){for(var p=new DirectoryInfo(AppContext.BaseDirectory);p!=null;p=p.Parent)if(File.Exists(Path.Combine(p.FullName,"RAWSelectionAssistant.sln")))return p.FullName;throw new DirectoryNotFoundException();}
 }
