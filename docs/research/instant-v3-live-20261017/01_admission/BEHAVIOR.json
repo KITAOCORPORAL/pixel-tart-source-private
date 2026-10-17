@@ -1,0 +1,421 @@
+{
+  "status": "BASE_NODES_BEHAVIOR_COMPARED",
+  "rows": [
+    {
+      "sample": "gray",
+      "inputSha256": "662B1727715CA19A9E67395FC9CD8E4158A5C175CEC2EDBDF1D0159A5CDCC949",
+      "domain": "display sRGB clamp/EOTF -\u003E linear reference exposure and filters; original creative tone not required identical",
+      "maxExposure": 5.15096791886549E-08,
+      "dtMs": 34.3847,
+      "rtMs": 29.2971,
+      "dtGaussianMs": 27.0374,
+      "rtFiniteMs": 26.4568,
+      "noiseMs": 54.207300000000004,
+      "referencePeak": 2736128,
+      "candidateMs": 17.1561,
+      "candidatePeak": 299282432,
+      "filterMaximumDifference": 0.024454355200000055,
+      "noiseDarktable": {
+        "mean": -0.012791666723386627,
+        "variance": 0.38625013735535185,
+        "rowDftPower": [
+          0.09258932037985798,
+          0.9796311362058271,
+          0.31298681283005597,
+          0.35338474326943864
+        ]
+      },
+      "noiseStb": {
+        "mean": -0.015327633794719206,
+        "variance": 0.07963473937987559,
+        "rowDftPower": [
+          0.006124864889913226,
+          0.006098255835206842,
+          0.00985073546833304,
+          0.004598784008427511
+        ]
+      },
+      "candidateStatistics": {
+        "mean": 0.4751534639808639,
+        "variance": 0.06323210701971323,
+        "rowDftPower": [
+          0.04594271114438784,
+          0.003983672010456982,
+          0.0006391941534609643,
+          0.00025460533376333975
+        ]
+      },
+      "acceptance": "Domain finite/range, exposure2e-6, tile1e-6, flat1e-6, repeat exact; creative appearance has no equality threshold"
+    },
+    {
+      "sample": "saturated",
+      "inputSha256": "4EDBBFC9E443381911F0E38883FFEEA21CE016D71B205201564ABD7E4488E8C2",
+      "domain": "display sRGB clamp/EOTF -\u003E linear reference exposure and filters; original creative tone not required identical",
+      "maxExposure": 0,
+      "dtMs": 24.6905,
+      "rtMs": 25.4226,
+      "dtGaussianMs": 23.5847,
+      "rtFiniteMs": 23.4497,
+      "noiseMs": 50.4795,
+      "referencePeak": 2732032,
+      "candidateMs": 1.0217,
+      "candidatePeak": 299282432,
+      "filterMaximumDifference": 0.2742526531,
+      "noiseDarktable": {
+        "mean": -0.012791666723386627,
+        "variance": 0.38625013735535185,
+        "rowDftPower": [
+          0.09258932037985798,
+          0.9796311362058271,
+          0.31298681283005597,
+          0.35338474326943864
+        ]
+      },
+      "noiseStb": {
+        "mean": -0.015327633794719206,
+        "variance": 0.07963473937987559,
+        "rowDftPower": [
+          0.006124864889913226,
+          0.006098255835206842,
+          0.00985073546833304,
+          0.004598784008427511
+        ]
+      },
+      "candidateStatistics": {
+        "mean": 0.49847871482111933,
+        "variance": 0.06192965643424442,
+        "rowDftPower": [
+          0.0027800021780044607,
+          0.004999197689263178,
+          0.8966963210832306,
+          5.636916920644095E-06
+        ]
+      },
+      "acceptance": "Domain finite/range, exposure2e-6, tile1e-6, flat1e-6, repeat exact; creative appearance has no equality threshold"
+    },
+    {
+      "sample": "impulse",
+      "inputSha256": "E91C1CA40B365445DC02550B3DD9811C3C75A741BA1F05ECB30D31DD5016CDBA",
+      "domain": "display sRGB clamp/EOTF -\u003E linear reference exposure and filters; original creative tone not required identical",
+      "maxExposure": 0,
+      "dtMs": 23.8939,
+      "rtMs": 23.5488,
+      "dtGaussianMs": 28.0071,
+      "rtFiniteMs": 26.7375,
+      "noiseMs": 51.2679,
+      "referencePeak": 2736128,
+      "candidateMs": 1.0767,
+      "candidatePeak": 299282432,
+      "filterMaximumDifference": 0.0739914179,
+      "noiseDarktable": {
+        "mean": -0.012791666723386627,
+        "variance": 0.38625013735535185,
+        "rowDftPower": [
+          0.09258932037985798,
+          0.9796311362058271,
+          0.31298681283005597,
+          0.35338474326943864
+        ]
+      },
+      "noiseStb": {
+        "mean": -0.015327633794719206,
+        "variance": 0.07963473937987559,
+        "rowDftPower": [
+          0.006124864889913226,
+          0.006098255835206842,
+          0.00985073546833304,
+          0.004598784008427511
+        ]
+      },
+      "candidateStatistics": {
+        "mean": 0.11999949663389324,
+        "variance": 0.0005450268315107973,
+        "rowDftPower": [
+          2.1350237479372676E-07,
+          1.423667332425912E-06,
+          4.561604630556047E-06,
+          2.937065649759438E-05
+        ]
+      },
+      "acceptance": "Domain finite/range, exposure2e-6, tile1e-6, flat1e-6, repeat exact; creative appearance has no equality threshold"
+    },
+    {
+      "sample": "edge",
+      "inputSha256": "D0389FE8CA81045011A078BF6F9614D4A9E362DD23EDB0AD4570203962D38244",
+      "domain": "display sRGB clamp/EOTF -\u003E linear reference exposure and filters; original creative tone not required identical",
+      "maxExposure": 0,
+      "dtMs": 27.4724,
+      "rtMs": 26.6347,
+      "dtGaussianMs": 24.1603,
+      "rtFiniteMs": 23.1116,
+      "noiseMs": 49.6016,
+      "referencePeak": 2736128,
+      "candidateMs": 1.4549,
+      "candidatePeak": 299282432,
+      "filterMaximumDifference": 0.0826478526,
+      "noiseDarktable": {
+        "mean": -0.012791666723386627,
+        "variance": 0.38625013735535185,
+        "rowDftPower": [
+          0.09258932037985798,
+          0.9796311362058271,
+          0.31298681283005597,
+          0.35338474326943864
+        ]
+      },
+      "noiseStb": {
+        "mean": -0.015327633794719206,
+        "variance": 0.07963473937987559,
+        "rowDftPower": [
+          0.006124864889913226,
+          0.006098255835206842,
+          0.00985073546833304,
+          0.004598784008427511
+        ]
+      },
+      "candidateStatistics": {
+        "mean": 0.5178798582611304,
+        "variance": 0.14492334392558123,
+        "rowDftPower": [
+          2.1350237479372676E-07,
+          1.423667332425912E-06,
+          4.561604630556047E-06,
+          2.937065649759438E-05
+        ]
+      },
+      "acceptance": "Domain finite/range, exposure2e-6, tile1e-6, flat1e-6, repeat exact; creative appearance has no equality threshold"
+    },
+    {
+      "sample": "flat",
+      "inputSha256": "5319BE6487982452612F54F97BED4CC376256FABC0F3E6EC936E029225B65986",
+      "domain": "display sRGB clamp/EOTF -\u003E linear reference exposure and filters; original creative tone not required identical",
+      "maxExposure": 1.0317377993618315E-09,
+      "dtMs": 29.9633,
+      "rtMs": 26.3684,
+      "dtGaussianMs": 27.3504,
+      "rtFiniteMs": 25.6042,
+      "noiseMs": 48.0662,
+      "referencePeak": 2732032,
+      "candidateMs": 1.116,
+      "candidatePeak": 299282432,
+      "filterMaximumDifference": 1.870000002068828E-09,
+      "noiseDarktable": {
+        "mean": -0.012791666723386627,
+        "variance": 0.38625013735535185,
+        "rowDftPower": [
+          0.09258932037985798,
+          0.9796311362058271,
+          0.31298681283005597,
+          0.35338474326943864
+        ]
+      },
+      "noiseStb": {
+        "mean": -0.015327633794719206,
+        "variance": 0.07963473937987559,
+        "rowDftPower": [
+          0.006124864889913226,
+          0.006098255835206842,
+          0.00985073546833304,
+          0.004598784008427511
+        ]
+      },
+      "candidateStatistics": {
+        "mean": 0.17994216182519593,
+        "variance": 4.0393059177091807E-05,
+        "rowDftPower": [
+          6.666323722188455E-08,
+          5.796130529170404E-07,
+          1.7274365909828309E-06,
+          1.279724411355723E-05
+        ]
+      },
+      "acceptance": "Domain finite/range, exposure2e-6, tile1e-6, flat1e-6, repeat exact; creative appearance has no equality threshold"
+    },
+    {
+      "sample": "negative-overrange",
+      "inputSha256": "3AA4D526A8AB8E4E3DEA48ECBDA0A05232CC9650C0C07F28C9CD92394F063A7B",
+      "domain": "display sRGB clamp/EOTF -\u003E linear reference exposure and filters; original creative tone not required identical",
+      "maxExposure": 2.9768068454671948E-08,
+      "dtMs": 24.21,
+      "rtMs": 27.6004,
+      "dtGaussianMs": 24.8358,
+      "rtFiniteMs": 23.6337,
+      "noiseMs": 47.385400000000004,
+      "referencePeak": 2736128,
+      "candidateMs": 1.0782,
+      "candidatePeak": 299282432,
+      "filterMaximumDifference": 0.01878005270000005,
+      "noiseDarktable": {
+        "mean": -0.012791666723386627,
+        "variance": 0.38625013735535185,
+        "rowDftPower": [
+          0.09258932037985798,
+          0.9796311362058271,
+          0.31298681283005597,
+          0.35338474326943864
+        ]
+      },
+      "noiseStb": {
+        "mean": -0.015327633794719206,
+        "variance": 0.07963473937987559,
+        "rowDftPower": [
+          0.006124864889913226,
+          0.006098255835206842,
+          0.00985073546833304,
+          0.004598784008427511
+        ]
+      },
+      "candidateStatistics": {
+        "mean": 0.5673707686944344,
+        "variance": 0.1102917466221946,
+        "rowDftPower": [
+          0.018657240719111727,
+          0.004383697670369003,
+          0.0005799204136177502,
+          0.0003645163970989476
+        ]
+      },
+      "acceptance": "Domain finite/range, exposure2e-6, tile1e-6, flat1e-6, repeat exact; creative appearance has no equality threshold"
+    },
+    {
+      "sample": "sony-dsc08015",
+      "inputSha256": "9660AFA3A3FF96477B4923415DE009946112D1996EE0585E75856AEDB1BA18D4",
+      "domain": "display sRGB clamp/EOTF -\u003E linear reference exposure and filters; original creative tone not required identical",
+      "maxExposure": 1.860423960720059E-09,
+      "dtMs": 27.5594,
+      "rtMs": 26.4152,
+      "dtGaussianMs": 24.686,
+      "rtFiniteMs": 24.092,
+      "noiseMs": 47.9572,
+      "referencePeak": 2736128,
+      "candidateMs": 1.2076,
+      "candidatePeak": 299282432,
+      "filterMaximumDifference": 0.0006654011079999991,
+      "noiseDarktable": {
+        "mean": -0.012791666723386627,
+        "variance": 0.38625013735535185,
+        "rowDftPower": [
+          0.09258932037985798,
+          0.9796311362058271,
+          0.31298681283005597,
+          0.35338474326943864
+        ]
+      },
+      "noiseStb": {
+        "mean": -0.015327633794719206,
+        "variance": 0.07963473937987559,
+        "rowDftPower": [
+          0.006124864889913226,
+          0.006098255835206842,
+          0.00985073546833304,
+          0.004598784008427511
+        ]
+      },
+      "candidateStatistics": {
+        "mean": 0.13347464885716226,
+        "variance": 0.000489586987399136,
+        "rowDftPower": [
+          1.8491550935558343E-06,
+          1.670504082661262E-05,
+          1.2502960993447918E-05,
+          0.0001281406757446853
+        ]
+      },
+      "acceptance": "Domain finite/range, exposure2e-6, tile1e-6, flat1e-6, repeat exact; creative appearance has no equality threshold"
+    },
+    {
+      "sample": "canon-tnan8886",
+      "inputSha256": "1000F9279E2222B891424A604309B8134FDA76B40ADA6165F72F500118BB702B",
+      "domain": "display sRGB clamp/EOTF -\u003E linear reference exposure and filters; original creative tone not required identical",
+      "maxExposure": 2.318516359803291E-10,
+      "dtMs": 28.9031,
+      "rtMs": 26.3606,
+      "dtGaussianMs": 23.707,
+      "rtFiniteMs": 23.6332,
+      "noiseMs": 46.749700000000004,
+      "referencePeak": 2732032,
+      "candidateMs": 2.2216,
+      "candidatePeak": 299282432,
+      "filterMaximumDifference": 0.0007467814719999998,
+      "noiseDarktable": {
+        "mean": -0.012791666723386627,
+        "variance": 0.38625013735535185,
+        "rowDftPower": [
+          0.09258932037985798,
+          0.9796311362058271,
+          0.31298681283005597,
+          0.35338474326943864
+        ]
+      },
+      "noiseStb": {
+        "mean": -0.015327633794719206,
+        "variance": 0.07963473937987559,
+        "rowDftPower": [
+          0.006124864889913226,
+          0.006098255835206842,
+          0.00985073546833304,
+          0.004598784008427511
+        ]
+      },
+      "candidateStatistics": {
+        "mean": 0.12402087343852115,
+        "variance": 0.00531196839236408,
+        "rowDftPower": [
+          0.004110270388510743,
+          0.0006385989054336956,
+          0.0004143111103809546,
+          0.01838062523838029
+        ]
+      },
+      "acceptance": "Domain finite/range, exposure2e-6, tile1e-6, flat1e-6, repeat exact; creative appearance has no equality threshold"
+    },
+    {
+      "sample": "fuji-dscf0347-frozen",
+      "inputSha256": "11211004B19116C1BB8A04D1C10EF92F2CDB80971007A95D9D5EEBDE77B27C03",
+      "domain": "display sRGB clamp/EOTF -\u003E linear reference exposure and filters; original creative tone not required identical",
+      "maxExposure": 5.949251935533084E-08,
+      "dtMs": 24.4629,
+      "rtMs": 26.381,
+      "dtGaussianMs": 23.5522,
+      "rtFiniteMs": 23.9832,
+      "noiseMs": 47.1633,
+      "referencePeak": 2691072,
+      "candidateMs": 0.9831,
+      "candidatePeak": 299282432,
+      "filterMaximumDifference": 0.04400131099999999,
+      "noiseDarktable": {
+        "mean": -0.012791666723386627,
+        "variance": 0.38625013735535185,
+        "rowDftPower": [
+          0.09258932037985798,
+          0.9796311362058271,
+          0.31298681283005597,
+          0.35338474326943864
+        ]
+      },
+      "noiseStb": {
+        "mean": -0.015327633794719206,
+        "variance": 0.07963473937987559,
+        "rowDftPower": [
+          0.006124864889913226,
+          0.006098255835206842,
+          0.00985073546833304,
+          0.004598784008427511
+        ]
+      },
+      "candidateStatistics": {
+        "mean": 0.5193066736680707,
+        "variance": 0.03593279689335369,
+        "rowDftPower": [
+          0.19718589636402445,
+          0.013712123718587823,
+          0.003775669057495994,
+          0.002151660318396422
+        ]
+      },
+      "acceptance": "Domain finite/range, exposure2e-6, tile1e-6, flat1e-6, repeat exact; creative appearance has no equality threshold"
+    }
+  ],
+  "fullFilmic": false,
+  "calibrated": false
+}

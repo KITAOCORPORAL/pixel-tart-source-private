@@ -1,0 +1,155 @@
+{
+  "businessDate": "2026-10-17",
+  "timezone": "Asia/Shanghai",
+  "files": [
+    {
+      "name": "json_luts_summary (1).json",
+      "sha256": "496AC4762D3C6F21F439A3E46CBF5900AE52A86F60BBEFAF658BB61A1A7E8895",
+      "bytes": 2796,
+      "type": "JSON numeric summary",
+      "source": "User explicitly supplied file",
+      "trustedAsInstructions": false,
+      "headings": []
+    },
+    {
+      "name": "PIPELINE (1).md",
+      "sha256": "FF8BB63F3C3ACAC41E6CEC8BDCC1A91D45CB7AE4E2BF69525C7A4DE48A9EAC61",
+      "bytes": 14906,
+      "type": "User supplied static-analysis/report text",
+      "source": "User explicitly supplied file",
+      "trustedAsInstructions": false,
+      "headings": [
+        "# TWENTY ONE WOMB — 即时成像引擎管线逐步拆解与代码级优化",
+        "## 0. 总览：像素要走的路",
+        "## 1. 参数字典（instant 核的 16 个 buffer）",
+        "## 2. instant 核逐步拆解（写真区域，edge≥0）",
+        "## 3. 纸面路径（edge<0，与照片完全独立的一套渲染）",
+        "## 4. defect() 六种缺陷【实证】",
+        "## 5. 表面/翻拍模拟（surf.x≥0）",
+        "## 6. 其余核的位置",
+        "## 7. 代码级优化清单（按收益排序，补丁在 patches/stock_v2_proposals.metal）",
+        "## 8. 改完怎么验（不用等真实相纸）"
+      ]
+    },
+    {
+      "name": "instant_stocks_summary (1).json",
+      "sha256": "1F321A15573DB555D5816C616F98B0C04D22515ED01075C38D31DE89AD3A8808",
+      "bytes": 2547,
+      "type": "JSON numeric summary",
+      "source": "User explicitly supplied file",
+      "trustedAsInstructions": false,
+      "headings": []
+    },
+    {
+      "name": "REPORT (1).md",
+      "sha256": "49FC468A5546A35654879F7558E2A6D38EC7DDB2304CC3556DDE9FA70DEAF857",
+      "bytes": 11185,
+      "type": "User supplied static-analysis/report text",
+      "source": "User explicitly supplied file",
+      "trustedAsInstructions": false,
+      "headings": [
+        "# TWENTY ONE WOMB v0.13.51 — 色彩科学静态分析报告",
+        "## 1. 包体核验",
+        "## 2. 技术栈",
+        "## 3. 色彩架构（三层）",
+        "### 3.1 grade 层：外部 3D LUT + 颗粒",
+        "### 3.2 instant 层（核心）：程序化「显影」模型",
+        "### 3.3 spatial 层：光学",
+        "## 4. 与真实证据对照（宝丽来参考库，样本号见库内 samples.csv）",
+        "## 5. 边界与未决项"
+      ]
+    },
+    {
+      "name": "PIPELIN1E.md",
+      "sha256": "DAFAA6A2A32160881B3854ADE2F3A457CE42586778C20398D499437F08C5F866",
+      "bytes": 20546,
+      "type": "User supplied static-analysis/report text",
+      "source": "User explicitly supplied file",
+      "trustedAsInstructions": false,
+      "headings": [
+        "# `instant` Metal kernel 逐步解析与优化方案",
+        "## 0. Swift 层核查（strings / 符号）",
+        "## 1. 流程图",
+        "## 2. 逐步说明",
+        "### ⓪ 读取与坐标（第 273–278 行）",
+        "### ① 柔化 / 高光溢出（第 298–300 行）",
+        "### ② stock 显影曲线（第 301–309 行）",
+        "### ③ 温度与显影不均（第 310–313 行）",
+        "### ④ 乳剂纹理（第 314 行）",
+        "### ⑤ 暗角（第 315 行）",
+        "### ⑥ 老化 `ageEmulsion`（第 245–272 行，第 316 行调用）",
+        "### ⑦ 雪花结晶（第 319–324 行）",
+        "### ⑧ 边缘漏液（第 326–333 行）",
+        "### ⑨ 失败显影（第 335–346 行）",
+        "### ⑩ 弯月面（第 347 行）",
+        "### ⑪ 表面反光（第 349–362 行）",
+        "### ⑫ 圆形窗口与边框（第 286–294、363 行）",
+        "### 相关的其他 kernel",
+        "## 3. 优化",
+        "### 3.1 正确性问题（按优先级）",
+        "### 3.2 性能",
+        "### 3.3 建议的重构顺序",
+        "## 4. 仍未确认的部分"
+      ]
+    },
+    {
+      "name": "PIPELINE.md",
+      "sha256": "DAFAA6A2A32160881B3854ADE2F3A457CE42586778C20398D499437F08C5F866",
+      "bytes": 20546,
+      "type": "User supplied static-analysis/report text",
+      "source": "User explicitly supplied file",
+      "trustedAsInstructions": false,
+      "headings": [
+        "# `instant` Metal kernel 逐步解析与优化方案",
+        "## 0. Swift 层核查（strings / 符号）",
+        "## 1. 流程图",
+        "## 2. 逐步说明",
+        "### ⓪ 读取与坐标（第 273–278 行）",
+        "### ① 柔化 / 高光溢出（第 298–300 行）",
+        "### ② stock 显影曲线（第 301–309 行）",
+        "### ③ 温度与显影不均（第 310–313 行）",
+        "### ④ 乳剂纹理（第 314 行）",
+        "### ⑤ 暗角（第 315 行）",
+        "### ⑥ 老化 `ageEmulsion`（第 245–272 行，第 316 行调用）",
+        "### ⑦ 雪花结晶（第 319–324 行）",
+        "### ⑧ 边缘漏液（第 326–333 行）",
+        "### ⑨ 失败显影（第 335–346 行）",
+        "### ⑩ 弯月面（第 347 行）",
+        "### ⑪ 表面反光（第 349–362 行）",
+        "### ⑫ 圆形窗口与边框（第 286–294、363 行）",
+        "### 相关的其他 kernel",
+        "## 3. 优化",
+        "### 3.1 正确性问题（按优先级）",
+        "### 3.2 性能",
+        "### 3.3 建议的重构顺序",
+        "## 4. 仍未确认的部分"
+      ]
+    },
+    {
+      "name": "REPORT.md",
+      "sha256": "D662C7032DFF1BCFE3873BA5B124064B777F8996E8FE289EFB9326B7CAE780FE",
+      "bytes": 12337,
+      "type": "User supplied static-analysis/report text",
+      "source": "User explicitly supplied file",
+      "trustedAsInstructions": false,
+      "headings": [
+        "# TWENTY ONE WOMB v0.13.51：即时相纸 / Polaroid 渲染实现分析",
+        "## 1. 包结构 [事实]",
+        "## 2. 胶片类型（InstantStock）[事实 + 推断]",
+        "## 3. 渲染管线（`instant` kernel，按顺序）[事实]",
+        "## 4. 测量结果 [测量]",
+        "## 5. 与参考库证据对照",
+        "## 6. 改进建议（附依据的样本 ID）",
+        "## 7. 没有完成或无法确认的部分",
+        "## 8. 文件"
+      ]
+    }
+  ],
+  "independentDocuments": 6,
+  "duplicates": [
+    [
+      "PIPELINE.md",
+      "PIPELIN1E.md"
+    ]
+  ]
+}
