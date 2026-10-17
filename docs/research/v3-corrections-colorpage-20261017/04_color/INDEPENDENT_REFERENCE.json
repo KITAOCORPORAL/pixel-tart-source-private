@@ -32,6 +32,18 @@
       "limit": 2e-10
     },
     {
+      "name": "DI decode",
+      "maxAbs": 0.0,
+      "maxRelative": 0.0,
+      "relativeLimit": 2e-10
+    },
+    {
+      "name": "ACEScct decode",
+      "maxAbs": 0.0,
+      "maxRelative": 0.0,
+      "relativeLimit": 2e-10
+    },
+    {
       "name": "DWG matrix",
       "maxAbs": 4.924456703525593e-09,
       "limit": 6e-09

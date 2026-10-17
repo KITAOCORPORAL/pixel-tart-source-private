@@ -64,7 +64,7 @@ public sealed class ProfessionalRawDecoder(Action<string>? stage = null) : IProf
         var failureStage="OpenFile";
         try
         {
-            using var context = RawContext.OpenFile(path); var unpackParameters=ProfessionalLibRawAdapter.ConfigureUnpack(context); failureStage="Unpack";context.Unpack();stage?.Invoke("Unpacked"); token.ThrowIfCancellationRequested();
+            using var context = RawContext.OpenFile(path); var unpackParameters=ProfessionalLibRawAdapter.ConfigureUnpack(context); failureStage="Unpack";context.Unpack();stage?.Invoke("Unpacked");Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("RawUnpacked",token); token.ThrowIfCancellationRequested();
             if(checked((long)context.RawWidth*context.RawHeight*28)>1024L*1024*1024)throw new NotSupportedException("RAW解码工作集估计超过1GiB准入预算，未降低尺寸或位深。");
             var color = ProfessionalLibRawAdapter.ReadColor(context);
             var identity = context.ImageParams;

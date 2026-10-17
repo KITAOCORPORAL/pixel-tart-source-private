@@ -7,7 +7,7 @@ public sealed record CandidateMultipleInput(int Version,string Path,string Sha25
  {
   if(Version!=1||!System.IO.Path.IsPathFullyQualified(Path)||Sha256.Length!=64||!Sha256.All(Uri.IsHexDigit)||Width<=0||Height<=0||Orientation!=1||Mode is not("NormalizedMix" or "ExposureSum")||Domain!="OrientedDisplaySrgbD65V1"||!double.IsFinite(Weight)||Weight<0||Weight>1||!double.IsFinite(CropX)||CropX<0||CropX>1||!double.IsFinite(CropY)||CropY<0||CropY>1||!double.IsFinite(Zoom)||Zoom<1||Zoom>4)throw new InvalidDataException("Unknown/invalid second exposure contract");return this;
  }
- public void ValidateSource(){Validate();using var file=File.OpenRead(Path);if(!Convert.ToHexString(SHA256.HashData(file)).Equals(Sha256,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("SECOND_SOURCE_CHANGED");}
+ public void ValidateSource(){Validate();if(!File.Exists(Path))throw new FileNotFoundException("SECOND_SOURCE_MISSING",Path);using var file=File.OpenRead(Path);if(!Convert.ToHexString(SHA256.HashData(file)).Equals(Sha256,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("SECOND_SOURCE_CHANGED");}
 }
 public interface ISecondExposureDecoder { HighBitDepthImageBuffer Read(CandidateMultipleInput input,CancellationToken token); }
 public static class SecondExposureInputs

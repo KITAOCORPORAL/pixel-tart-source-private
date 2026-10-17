@@ -5,6 +5,9 @@ raw=pathlib.Path('artifacts/v3-corrections/04-formula-output.json').read_text(en
 for name,fn,key in [('DaVinciIntermediate',colour.models.oetf_DaVinciIntermediate,'di'),('ACEScct',colour.models.log_encoding_ACEScct,'acescct'),('sRGB',colour.models.eotf_inverse_sRGB,'srgb'),('BT709',colour.models.oetf_BT709,'bt709'),('BT2020',lambda x:colour.models.oetf_BT2020(x,is_12_bits_system=True),'bt2020')]:
  x=np.array([r['x'] for r in d['rows']]);actual=np.array([r[key] for r in d['rows']]);expected=fn(x);maximum=float(abs(actual-expected).max());comparisons.append(dict(name=name,maxAbs=maximum,limit=2e-10));
  if maximum>2e-10:errors.append(name)
+for name,fn,key in [('DI decode',colour.models.oetf_inverse_DaVinciIntermediate,'di'),('ACEScct decode',colour.models.log_decoding_ACEScct,'acescct')]:
+ x=np.array([r['x'] for r in d['inverseSamples']]);actual=np.array([r[key] for r in d['inverseSamples']]);expected=fn(x);maximum=float(abs(actual-expected).max());relative=float((abs(actual-expected)/np.maximum(1,abs(expected))).max());comparisons.append(dict(name=name,maxAbs=maximum,maxRelative=relative,relativeLimit=2e-10))
+ if relative>2e-10:errors.append(name)
 xyz=np.array(d['dwg']);matrix=colour.RGB_COLOURSPACES['DaVinci Wide Gamut'].matrix_RGB_to_XYZ;maximum=float(abs(xyz-matrix).max());comparisons.append(dict(name='DWG matrix',maxAbs=maximum,limit=6e-9))
 if maximum>6e-9:errors.append('DWG matrix')
 x=np.array([r['x'] for r in d['pq']]);got=np.array([r['encoded'] for r in d['pq']]);expected=colour.models.eotf_inverse_ST2084(x);maximum=float(abs(got-expected).max());comparisons.append(dict(name='PQ cd/m2',maxAbs=maximum,limit=1e-12))

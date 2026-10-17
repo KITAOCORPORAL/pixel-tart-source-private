@@ -85,12 +85,17 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public ulong InstantV3Seed {get=>_instantV3Seed;set{if(EqualityComparer<ulong>.Default.Equals(_instantV3Seed,value))return;_instantV3Seed=value;OnPropertyChanged(nameof(InstantV3Seed));}}
  public CandidateMultipleInput? InstantSecondInput {get;private set;}
  public string InstantSecondSourceName=>InstantSecondInput is null?"—":System.IO.Path.GetFileName(InstantSecondInput.Path);
- public double InstantSecondWeight {get;set;}=.5;
- public double InstantSecondCropX {get;set;}=.5;
- public double InstantSecondCropY {get;set;}=.5;
- public double InstantSecondZoom {get;set;}=1;
+ private double _instantSecondWeight=.5;
+ public double InstantSecondWeight {get=>_instantSecondWeight;set{SetProperty(ref _instantSecondWeight,value);}}
+ private double _instantSecondCropX=.5;
+ public double InstantSecondCropX {get=>_instantSecondCropX;set{SetProperty(ref _instantSecondCropX,value);}}
+ private double _instantSecondCropY=.5;
+ public double InstantSecondCropY {get=>_instantSecondCropY;set{SetProperty(ref _instantSecondCropY,value);}}
+ private double _instantSecondZoom=1;
+ public double InstantSecondZoom {get=>_instantSecondZoom;set{SetProperty(ref _instantSecondZoom,value);}}
  public IReadOnlyList<string> InstantSecondModes {get;}=["NormalizedMix","ExposureSum"];
- public string InstantSecondMode {get;set;}="NormalizedMix";
+ private string _instantSecondMode="NormalizedMix";
+ public string InstantSecondMode {get=>_instantSecondMode;set{SetProperty(ref _instantSecondMode,value);}}
  public AsyncRelayCommand SelectSecondExposureCommand {get;private set;}=null!;
  public RelayCommand ClearSecondExposureCommand {get;private set;}=null!;
  public AsyncRelayCommand UndoInstantV3Command {get;private set;}=null!;

@@ -68,7 +68,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private void RestoreInstantControls(InstantFilmDefinition? film)
     {
         RestoreV3(film);
-        if(film is null){InstantDiceEnabled=false;InstantImageEffectsDisabled=false;InstantLayout="SquareV1";InstantFit="CropFill";InstantCropX=.5;InstantCropY=.5;foreach(var name in new[]{nameof(InstantDiceEnabled),nameof(InstantImageEffectsDisabled),nameof(InstantLayout),nameof(InstantFit),nameof(InstantCropX),nameof(InstantCropY)})OnPropertyChanged(name);return;}
+        if(film is null)
+        {
+            SelectedInstantProfile=InstantFilmProfiles.Available[0];InstantTier="稳定出片";InstantDiceEnabled=false;InstantImageEffectsDisabled=false;
+            InstantLayout="SquareV1";InstantFit="CropFill";InstantCropX=.5;InstantCropY=.5;InstantAmount=1;InstantUneven=.15;InstantUnspread=.12;InstantRoller=.10;InstantArtLeak=0;InstantEnvironmentCelsius=21;InstantPaperColor="Warm";InstantPaperFrame=true;InstantBorder=.075;InstantBottomBorder=.25;
+            foreach(var name in new[]{nameof(SelectedInstantProfile),nameof(InstantTier),nameof(InstantDiceEnabled),nameof(InstantImageEffectsDisabled),nameof(InstantLayout),nameof(InstantFit),nameof(InstantCropX),nameof(InstantCropY),nameof(InstantAmount),nameof(InstantUneven),nameof(InstantEnvironmentCelsius),nameof(InstantPaperColor),nameof(InstantPaperFrame),nameof(InstantBorder),nameof(InstantBottomBorder)})OnPropertyChanged(name);return;
+        }
         SelectedInstantProfile=InstantFilmProfiles.Available.Single(x=>x.Id==film.FilmId);InstantTier=film.Tier;InstantDiceEnabled=film.DiceEnabled;
         InstantUneven=film.Uneven;InstantUnspread=film.Unspread;InstantRoller=film.Roller;InstantArtLeak=film.ArtLightLeak;InstantEnvironmentCelsius=film.EnvironmentCelsius;
         InstantPaperColor=film.PaperColor;InstantPaperFrame=film.PaperFrame;InstantBorder=film.Border;InstantBottomBorder=film.BottomBorder;InstantAmount=film.Amount;

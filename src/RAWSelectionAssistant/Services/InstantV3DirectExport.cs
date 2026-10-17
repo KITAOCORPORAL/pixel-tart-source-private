@@ -23,7 +23,7 @@ internal static class InstantV3DirectExport
  public static async Task<ProfessionalOutputInspection> Write(ProfessionalRawMaster master,ProfessionalRawDefinition definition,string destination,StudioExportFormat format,CancellationToken token,Action<string>? stage)
  {
   definition=definition with{InstantFilm=InstantFilmPipeline.Freeze(definition.InstantFilm!)};
-  if(File.Exists(destination))throw new IOException("Output exists");var temporary=Path.Combine(Path.GetDirectoryName(Path.GetFullPath(destination))!,".v3-"+Guid.NewGuid().ToString("N")+".tmp");
+  if(File.Exists(destination))throw new IOException("Output exists");Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(destination))!);var temporary=Path.Combine(Path.GetDirectoryName(Path.GetFullPath(destination))!,".v3-"+Guid.NewGuid().ToString("N")+".tmp");
   await ProfessionalRawResourcePolicy.HeavyWork.WaitAsync(token);
   try
   {
