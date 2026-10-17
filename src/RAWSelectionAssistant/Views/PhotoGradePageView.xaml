@@ -10,6 +10,7 @@
    <Button DockPanel.Dock="Left" Content="{views:StudioText PhotoGradeUndo}" x:Name="PhotoUndo" Command="{Binding PhotoGradeUndoCommand}"/>
    <Button DockPanel.Dock="Left" Content="{views:StudioText PhotoGradeRedo}" x:Name="PhotoRedo" Command="{Binding PhotoGradeRedoCommand}"/>
    <Button DockPanel.Dock="Left" Content="{views:StudioText Cancel}" Command="{Binding StopProcessingCommand}"/>
+   <Button DockPanel.Dock="Left" Content="{views:StudioText InstantSkipDemo}" Command="{Binding SkipInstantDemoCommand}"/>
    <views:StudioExportMenu DockPanel.Dock="Left"/>
    <TextBlock Text="{views:StudioText PhotoGradeTitle}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" Margin="12,0"/>
   </DockPanel>
@@ -29,6 +30,7 @@
    </Grid>
    <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto"><StackPanel>
     <TextBlock Text="{views:StudioText PhotoGradeParameters}" Foreground="{DynamicResource TextPrimaryBrush}"/>
+    <Expander Header="{views:StudioText SrgbExposureTitle}"><StackPanel><TextBlock Text="{views:StudioText SrgbExposureHelp}" TextWrapping="Wrap"/><StackPanel IsEnabled="{Binding SrgbExposureAvailable}"><Slider Minimum="-5" Maximum="5" Value="{Binding SrgbExposureEv}"/><TextBox Text="{Binding SrgbExposureEv}"/><Button Content="{views:StudioText SrgbExposureApply}" Command="{Binding ApplySrgbExposureCommand}"/></StackPanel></StackPanel></Expander>
     <Expander x:Name="V3Controls" Header="{views:StudioText PhotoGradePresets}" IsExpanded="True"><views:InstantV3Editor x:Name="V3Editor"/></Expander>
     <TextBlock Text="{views:StudioText PhotoGradeRasterHelp}" TextWrapping="Wrap"/>
     <views:StudioToolPanel x:Name="CurrentParameters" IsEnabled="{Binding PhotoGradeRasterToolsEnabled}" NodeTypes="BasicTone"/>

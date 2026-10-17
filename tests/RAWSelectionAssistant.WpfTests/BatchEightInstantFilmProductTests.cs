@@ -51,7 +51,7 @@ public sealed class BatchEightInstantFilmProductTests
         var definition=InstantFilmJpegInput.Definition;var master=await InstantFilmJpegInput.ReadAsync(path,definition,CancellationToken.None);
         Assert.AreEqual(120,master.Image.Width);Assert.IsFalse(master.Contract.WhiteBalanceApplied);Assert.AreEqual("sRGB",master.Image.WorkingColorSpace);
         using var workspace=new ReferenceColorWorkspaceViewModel(new Dialogs(temp.Root));await workspace.LoadTargetAsync(path);
-        workspace.InstantCameraAnimation=false;var watch=System.Diagnostics.Stopwatch.StartNew();var task=workspace.ToggleInstantDiceCommand.ExecuteAsync(null);
+        workspace.InstantDevelopmentDemo=true;workspace.InstantCameraAnimation=false;var watch=System.Diagnostics.Stopwatch.StartNew();var task=workspace.ToggleInstantDiceCommand.ExecuteAsync(null);
         Assert.IsTrue(workspace.IsInstantGenerating);Assert.IsFalse(workspace.GenerateInstantFilmCommand.CanExecute(null));Assert.IsFalse(workspace.ExportSelectedCommand.CanExecute(null));
         await task;Assert.IsGreaterThanOrEqualTo(4000L,watch.ElapsedMilliseconds);Assert.IsNotNull(workspace.ActiveTarget!.RawDefinition,workspace.StatusText);Assert.AreEqual(5,workspace.ActiveTarget.RawDefinition.ProcessingVersion);
         var json=temp.File("session.ptstudio.json");await workspace.SaveSessionAsync(json);
@@ -104,7 +104,7 @@ public sealed class BatchEightInstantFilmProductTests
         using var workspace=new ReferenceColorWorkspaceViewModel(new Dialogs(temp.Root));await workspace.LoadTargetAsync(path);
         var frames=new List<(InstantDevelopmentFrame Frame,long Milliseconds)>();var watch=System.Diagnostics.Stopwatch.StartNew();
         workspace.PropertyChanged+=(_,args)=>{if(args.PropertyName==nameof(workspace.InstantDevelopment)&&workspace.InstantDevelopment is {} f)frames.Add((f,watch.ElapsedMilliseconds));};
-        workspace.InstantCameraAnimation=true;await workspace.GenerateInstantFilmAsync(false);
+        workspace.InstantDevelopmentDemo=true;workspace.InstantCameraAnimation=true;await workspace.GenerateInstantFilmAsync(false);
         Assert.IsNotNull(workspace.ActiveTarget!.RawDefinition,workspace.StatusText);
         Assert.IsTrue(frames.Any(x=>x.Frame.Stage==InstantDevelopmentStage.Camera));
         Assert.IsTrue(frames.Any(x=>x.Frame.Stage==InstantDevelopmentStage.Ejecting&&x.Frame.Progress>=.999));

@@ -3,6 +3,7 @@
   <TextBlock Text="{views:StudioText V3DraftHelp}" TextWrapping="Wrap" Margin="0,4,0,8"/>
   <ComboBox x:Name="RecipeChoice" ItemsSource="{Binding InstantProfiles}" SelectedItem="{Binding SelectedInstantProfile}" DisplayMemberPath="Name"/>
   <ComboBox ItemsSource="{Binding InstantEngineVersions}" SelectedItem="{Binding InstantEngineVersion}"/>
+  <CheckBox Content="{views:StudioText InstantDemoMode}" IsChecked="{Binding InstantDevelopmentDemo}"/>
   <WrapPanel><Button x:Name="ApplyV3" Content="{views:StudioText V3Apply}" Command="{Binding GenerateInstantFilmCommand}"/><Button Content="{views:StudioText V3Roll}" Command="{Binding RollInstantFilmCommand}"/><Button Content="{views:StudioText V3Reset}" Command="{Binding ResetPhotoV3DraftCommand}"/></WrapPanel>
   <WrapPanel><Button Content="{views:StudioText InstantV3Live24}" Command="{Binding UndoInstantV3Command}"/><Button Content="{views:StudioText InstantV3Live25}" Command="{Binding RedoInstantV3Command}"/><Button Content="{views:StudioText InstantBatch09Disable}" Command="{Binding DisableInstantFilmCommand}"/></WrapPanel>
   <CheckBox Content="{views:StudioText InstantBatch09Disable}" IsChecked="{Binding InstantImageEffectsDisabled}"/>

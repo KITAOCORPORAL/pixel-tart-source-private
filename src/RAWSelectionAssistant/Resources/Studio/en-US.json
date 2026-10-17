@@ -682,5 +682,10 @@
   "LabelInstantSecondCropX": "CropX",
   "LabelInstantSecondCropY": "CropY",
   "LabelInstantSecondZoom": "Zoom",
-  "V3OriginalHelp": "Original is available for RAW/JPEG. PNG/TIFF use current edits; unsupported Original is disabled."
+  "V3OriginalHelp": "Original is available for RAW/JPEG. PNG/TIFF use current edits; unsupported Original is disabled.",
+  "InstantDemoMode": "Development demonstration (off: immediate result)",
+  "InstantSkipDemo": "Skip demonstration",
+  "SrgbExposureTitle": "Linear sRGB exposure",
+  "SrgbExposureHelp": "Rendered PNG/TIFF/JPEG only; linear sRGB D65 exposure, sRGB output. RAW/V3 unavailable; undo returns to previous processing.",
+  "SrgbExposureApply": "Apply linear exposure"
 }

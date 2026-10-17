@@ -56,6 +56,17 @@ public sealed class SecondExposureV2Tests
   }
   finally{Directory.Delete(root,true);}
  }
+ [TestMethod]public async Task BoundedProductTiff3MatchesOldRgbPixelsWithoutFullWicIntermediate()
+ {
+  var root=Path.Combine(Path.GetTempPath(),"BoundedTiff3-"+Guid.NewGuid());Directory.CreateDirectory(root);
+  try
+  {
+   var path=Path.Combine(root,"source.tif");var row=new byte[19*6];
+   await RAWSelectionAssistant.Core.Services.Export.AtomicTiffWriter.WriteRowsAsync(path,19,13,(y,m)=>{for(int i=0;i<19*3;i++)System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(m.Span[(i*2)..],(ushort)((i*379+y*121)%65536));},new(IccProfile:StudioQuickExport.SrgbProfileBytes(),Orientation:1));
+   var input=SecondExposureDecoder.Describe(path);Assert.AreEqual(3,input.Version);using var actual=new SecondExposureDecoder().Read(input,CancellationToken.None);using var old=new SecondExposureDecoder().Read(input with{Version=1},CancellationToken.None);CollectionAssert.AreEqual(old.Rgb32.ToArray(),actual.Rgb32.ToArray());
+  }
+  finally{Directory.Delete(root,true);}
+ }
  [TestMethod]public void IdentityDamageMissingAndPhaseCancellationReleaseWorkspace()
  {
   var root=Path.Combine(Path.GetTempPath(),"SecondFailure-"+Guid.NewGuid());Directory.CreateDirectory(root);
