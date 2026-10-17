@@ -7,9 +7,10 @@ namespace RAWSelectionAssistant.Services;
 public static class StudioPreviewDiagnostics
 {
     private static readonly AsyncLocal<Capture?> Current = new();
-    public sealed record Observation(string Stage, double ElapsedMs, long PrivateBytes, long WorkingSet, long AccountedBytes);
+    public sealed record Observation(string Stage, double ElapsedMs, long PrivateBytes, long WorkingSet, long AccountedBytes,double SinceCaptureMs);
     public sealed class Capture : IDisposable
     {
+        private readonly Stopwatch clock=Stopwatch.StartNew();
         private readonly Capture? previous;
         private readonly List<Observation> observations = [];
         internal Capture() { previous = Current.Value; }
@@ -18,7 +19,7 @@ public static class StudioPreviewDiagnostics
         internal void Record(string name, double elapsed)
         {
             using var process=Process.GetCurrentProcess(); process.Refresh();
-            lock(observations) observations.Add(new(name,elapsed,process.PrivateMemorySize64,process.WorkingSet64,StudioGlobalResources.AccountedBytes));
+            lock(observations) observations.Add(new(name,elapsed,process.PrivateMemorySize64,process.WorkingSet64,StudioGlobalResources.AccountedBytes,clock.Elapsed.TotalMilliseconds));
         }
         public void Dispose() { Current.Value=previous; }
     }

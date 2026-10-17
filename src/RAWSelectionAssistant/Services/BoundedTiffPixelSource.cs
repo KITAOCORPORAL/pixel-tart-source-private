@@ -38,7 +38,9 @@ public sealed unsafe class BoundedTiffPixelSource : ISecondExposureSource
             Width=orientation>=5?rawHeight:rawWidth;Height=orientation>=5?rawWidth:rawHeight;
             if(Width!=input.Width||Height!=input.Height||checked((long)Width*Height*12)>512L*1024*1024)throw new InvalidDataException("SECOND_SOURCE_DIMENSIONS_CHANGED");
             offset=stream.Length-meta.PixelBytes;
-            reservation=StudioGlobalResources.ReserveWork(rawWidth*6L+1024*1024);
+            // Charge the full potentially resident mapping as well as row scratch;
+            // file-backed pages are not private float allocations, but not free memory.
+            reservation=StudioGlobalResources.ReserveWork(meta.PixelBytes+rawWidth*6L+1024*1024);
             mapping=MemoryMappedFile.CreateFromFile(stream,null,0,MemoryMappedFileAccess.Read,HandleInheritability.None,true);
             view=mapping.CreateViewAccessor(0,0,MemoryMappedFileAccess.Read);
             view.SafeMemoryMappedViewHandle.AcquirePointer(ref pointer);acquired=true;pointer+=view.PointerOffset;
