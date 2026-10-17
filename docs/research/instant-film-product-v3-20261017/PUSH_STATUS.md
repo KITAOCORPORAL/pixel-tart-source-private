@@ -1,0 +1,7 @@
+# 正常推送与远端核验
+
+业务日期2026-10-17 Asia/Shanghai。交付主体LOCAL_HEAD=c088b00d6e12a4d2df21948b985bd3796e4bdc64，正常git push -u成功，随后独立git ls-remote得到REMOTE_HEAD=c088b00d6e12a4d2df21948b985bd3796e4bdc64，两者一致。
+
+分支feature/kitao-instant-film-product-v3-20261017，基准e70d111633b4e41479215f6edd17d70741b09044未改；无强推、无合并main、无照片/原件/数据库/构建二进制上传。日志ZIP仅精确文本测试结果与发现清单。
+
+本记录另作尾部提交正常推送，最终回复再查最后LOCAL_HEAD/REMOTE_HEAD，不嵌入自身SHA以免自引用。诊断Release源码8f35f5157cd1001368b8a3777d2ba237b666ca5f不变；最后文档HEAD不是Release身份。V3产品入口未完成、P3失败/Fuji/准入/物理DPI等门禁仍保留。
