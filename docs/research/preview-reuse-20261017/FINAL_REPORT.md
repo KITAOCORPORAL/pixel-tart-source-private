@@ -2,7 +2,7 @@
 
 ## 当前基准与交付身份
 
-2026-10-17（Asia/Shanghai）承接前工作树干净，fetch与独立ls-remote均确认为1a2ca91716d0680afa6357a0730a5bcda156a805，没有后续远端提交。原safety-review报告开头的GitHub连接失败已明确改成历史阶段，与后续正常push/独立核验分开。本轮源码按阶段提交，未重做已关闭的数据安全功能。
+2026-10-17（Europe/Berlin）承接前工作树干净，fetch与独立ls-remote均确认为1a2ca91716d0680afa6357a0730a5bcda156a805，没有后续远端提交。原safety-review报告开头的GitHub连接失败已明确改成历史阶段，与后续正常push/独立核验分开。本轮源码按阶段提交，未重做已关闭的数据安全功能。
 
 冻结产品源码：72e916dcef46100c1fb6d96e8ff61745d6fb1d29。最终290文件诊断发布：`N:\pixart\kitao-v3-corrections-colorpage-20261017\artifacts\preview-reuse\22-delivery\release\win-x64`。EXE SHA256：1061CF07B681F4DCB91B314BF22DE070E8A4C16BAF9ED5920A44BE5DBB9EFB9F。工具加载本次发布DLL后逐文件比对，见FINAL_AUDIT_BINDINGS.json；完整回归也替换为相同交付DLL。诊断状态不是正式发行批准。
 
