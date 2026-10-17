@@ -423,6 +423,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     }
     private void RefreshSyncAvailability()
     {
+        OnPropertyChanged(nameof(PhotoGradeRasterToolsEnabled));OnPropertyChanged(nameof(PhotoGradeCanSyncStep));OnPropertyChanged(nameof(InstantEditingAllowed));
         OnPropertyChanged(nameof(SelectedTargetCount)); OnPropertyChanged(nameof(CanSyncSelectedNodes));
         OnPropertyChanged(nameof(VisibleTargetCount)); OnPropertyChanged(nameof(HiddenSelectedTargetCount)); OnPropertyChanged(nameof(FilmstripSummary)); OnPropertyChanged(nameof(SyncSummary));
         SetSelectedRatingCommand?.RaiseCanExecuteChanged(); SetSelectedColorLabelCommand?.RaiseCanExecuteChanged();

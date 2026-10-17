@@ -9,8 +9,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public AsyncRelayCommand PhotoGradeUndoCommand {get;private set;}=null!;
  public AsyncRelayCommand PhotoGradeRedoCommand {get;private set;}=null!;
  private bool HasInstantHistory(Dictionary<Guid,Stack<Guid>> history)=>ActiveTarget is{} target&&history.TryGetValue(target.Id,out var entries)&&entries.Count>0;
+ public RelayCommand ResetPhotoV3DraftCommand {get;private set;}=null!;
  private void InitializePhotoGradeHistoryCommands()
  {
+  ResetPhotoV3DraftCommand=new(_=>{ResetV3PhotoControls();InstantImageEffectsDisabled=false;InstantEngineVersion="V3";},_=>!IsInstantGenerating&&!IsLoading&&!IsExporting&&ActiveTarget is not null);
   PhotoGradeUndoCommand=new(async _=>
   {
    if(HasInstantHistory(_instantV3Undo))await UndoInstantV3Command.ExecuteAsync(null);
@@ -28,9 +30,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public string PhotoMaskColor {get=>_photoMaskColor;set{if(!PhotoMaskColors.Contains(value))throw new ArgumentException("Unsupported mask colour");SetProperty(ref _photoMaskColor,value);}}
  public RelayCommand PhotoGradeSyncStepCommand=>new(_=>
  {
-  if(Editor.SelectedAdjustmentNode is not{} selected||IsProfessionalRaw)return;
+  if(!PhotoGradeCanSyncStep||Editor.SelectedAdjustmentNode is not{} selected)return;
   SyncSelectedColorNodes(Editor.AdjustmentStack,new HashSet<Guid>{selected.Id},SelectedTargets.Where(x=>!ReferenceEquals(x,ActiveTarget)).ToArray());
- });
- public bool PhotoGradeRasterToolsEnabled=>!IsProfessionalRaw;
+ },_=>PhotoGradeCanSyncStep);
+ public bool PhotoGradeCanSyncStep=>PhotoGradeRasterToolsEnabled&&Editor.SelectedAdjustmentNode is not null&&SelectedTargets.Any(t=>!ReferenceEquals(t,ActiveTarget)&&t.RawDefinition is null);
+ public bool PhotoGradeRasterToolsEnabled=>ActiveTarget is not null&&!IsProfessionalRaw&&!IsLoading&&!IsExporting&&!IsInstantGenerating;
  public string PhotoGradeContract=>"PhotoGradePageV1 · existing display-sRGB tools · V3 follows the selected photo recipe; wide-gamut math is not silently connected";
 }

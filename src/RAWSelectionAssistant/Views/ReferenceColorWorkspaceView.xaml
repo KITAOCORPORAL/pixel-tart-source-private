@@ -88,51 +88,8 @@
       <TextBlock Text="{views:StudioText InstantBatch08_1}" TextWrapping="Wrap"/>
       <TextBlock Text="{views:StudioText InstantV3Live0}" TextWrapping="Wrap"/>
       <ComboBox ItemsSource="{Binding InstantEngineVersions}" SelectedItem="{Binding InstantEngineVersion}"/>
-      <StackPanel Visibility="{Binding IsInstantV3Selected,Converter={StaticResource BoolVisibility}}">
-      <TextBlock Text="{views:StudioText InstantV3Live1}"/>
-      <Slider Minimum="-2" Maximum="2" Value="{Binding InstantV3Exposure}"/>
-      <Slider Minimum="0" Maximum="0.3" Value="{Binding InstantV3Toe}"/>
-      <Slider Minimum="0" Maximum="2" Value="{Binding InstantV3Shoulder}"/>
-      <Slider Minimum="0.5" Maximum="2" Value="{Binding InstantV3Density}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live2}"/>
-      <Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Softness}"/>
-      <Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Diffusion}"/>
-      <Slider Minimum="0" Maximum="0.05" Value="{Binding InstantV3Texture}"/>
-      <Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Aging}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live3}"/><ComboBox ItemsSource="{Binding InstantV3Stocks}" SelectedItem="{Binding InstantV3Stock}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live4}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Fog}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live5}"/><Slider Minimum="-1" Maximum="1" Value="{Binding InstantV3ShadowCast}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live6}"/><Slider Minimum="-1" Maximum="1" Value="{Binding InstantV3Warmth}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live7}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3FrameDrift}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live8}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Fade}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live9}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Vignette}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live10}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3DevelopmentEdge}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live11}"/><Slider Minimum="0" Maximum="0.05" Value="{Binding InstantV3PaperTexture}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live12}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3PaperScratches}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live13}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3ScanDust}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live14}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Emboss}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live15}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3EdgeLine}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live16}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Reflection}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live17}"/><Slider Minimum="-180" Maximum="180" Value="{Binding InstantV3ReflectionAngle}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live18}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3DefectAmount}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live19}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Crystal}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live20}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Leak}"/>
-      <ComboBox ItemsSource="{Binding InstantV3Patterns}" SelectedItem="{Binding InstantV3Pattern}"/><CheckBox Content="{views:StudioText InstantV3Live21}" IsChecked="{Binding InstantV3Circle}"/>
-      <TextBlock Text="{views:StudioText V3DefectGeometry}"/>
-      <Slider Minimum="0" Maximum="1" Value="{Binding InstantV3DefectX}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3DefectY}"/><Slider Minimum="-180" Maximum="180" Value="{Binding InstantV3DefectAngle}"/><Slider Minimum="0.25" Maximum="4" Value="{Binding InstantV3DefectScale}"/>
-      <TextBlock Text="{views:StudioText V3WindowRim}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3WindowHighlight}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3WindowPressed}"/>
-      <WrapPanel><Button Content="{views:StudioText V3SecondSelect}" Command="{Binding SelectSecondExposureCommand}"/><Button Content="{views:StudioText V3SecondClear}" Command="{Binding ClearSecondExposureCommand}"/></WrapPanel>
-      <TextBlock Text="{Binding InstantSecondSourceName}"/>
-      <ComboBox ItemsSource="{Binding InstantSecondModes}" SelectedItem="{Binding InstantSecondMode}"/>
-      <TextBlock Text="{views:StudioText V3SecondControls}"/>
-      <Slider Minimum="0" Maximum="1" Value="{Binding InstantSecondWeight}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantSecondCropX}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantSecondCropY}"/><Slider Minimum="1" Maximum="4" Value="{Binding InstantSecondZoom}"/>
-      <TextBlock Text="{views:StudioText InstantV3EmulsionDefects}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3EmulsionDefects}"/>
-      <ComboBox ItemsSource="{Binding InstantV3DefectKinds}" SelectedItem="{Binding InstantV3DefectKind}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live22}"/><Slider Minimum="0.01" Maximum="1" Value="{Binding InstantV3ReflectionWidth}"/><Slider Minimum="1" Maximum="4" Value="{Binding InstantV3Zoom}"/>
-      <TextBlock Text="{views:StudioText InstantV3Live23}"/>
-      <TextBox Text="{Binding InstantV3Seed, UpdateSourceTrigger=LostFocus}"/>
-      <WrapPanel><Button Content="{views:StudioText InstantV3Live24}" Command="{Binding UndoInstantV3Command}"/><Button Content="{views:StudioText InstantV3Live25}" Command="{Binding RedoInstantV3Command}"/></WrapPanel>
-      </StackPanel>
+      <views:InstantV3Editor Visibility="{Binding IsInstantV3Selected,Converter={StaticResource BoolVisibility}}"/>
+
       <ComboBox ItemsSource="{Binding InstantProfiles}" SelectedItem="{Binding SelectedInstantProfile}" DisplayMemberPath="Name"/>
       <WrapPanel>
        <Button Command="{Binding SelectInstantCameraCommand}" CommandParameter="SX-70" ToolTip="SX-70"><StackPanel><views:InstantCameraArtwork Width="92" Height="64" Model="SX-70"/><TextBlock Text="SX-70"/></StackPanel></Button>

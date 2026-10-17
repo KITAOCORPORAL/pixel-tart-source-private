@@ -13,34 +13,49 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public StudioProcessingFailure? LastProcessingFailure {get;private set;}
     public IReadOnlyList<InstantFilmProfile> InstantProfiles=>InstantFilmProfiles.Available;
     public IReadOnlyList<string> InstantTiers {get;}=["稳定出片","轻微偶然","实验胶片"];
-    public InstantFilmProfile SelectedInstantProfile {get;set;}=InstantFilmProfiles.Available[0];
+    private InstantFilmProfile _draftSelectedInstantProfile=InstantFilmProfiles.Available[0];
+    public InstantFilmProfile SelectedInstantProfile {get=>_draftSelectedInstantProfile;set=>SetProperty(ref _draftSelectedInstantProfile,value);}
     public string InstantTier {get;set;}="稳定出片";
     public bool InstantDiceEnabled {get;private set;}
-    public bool InstantCameraAnimation {get;set;}=true;
+    private bool _draftInstantCameraAnimation=true;
+    public bool InstantCameraAnimation {get=>_draftInstantCameraAnimation;set=>SetProperty(ref _draftInstantCameraAnimation,value);}
     public string InstantCamera {get;private set;}="SX-70";
     public IReadOnlyList<string> InstantInputModes {get;}=["CurrentEdits","Original"];
-    public string InstantInputMode {get;set;}="CurrentEdits";
+    private string _draftInstantInputMode="CurrentEdits";
+    public string InstantInputMode {get=>_draftInstantInputMode;set=>SetProperty(ref _draftInstantInputMode,value);}
     public IReadOnlyList<string> InstantLayouts {get;}=["SquareV1","LegacyFree"];
-    public string InstantLayout {get;set;}="SquareV1";
+    private string _draftInstantLayout="SquareV1";
+    public string InstantLayout {get=>_draftInstantLayout;set=>SetProperty(ref _draftInstantLayout,value);}
     public IReadOnlyList<string> InstantFitModes {get;}=["CropFill","FitEntire"];
-    public string InstantFit {get;set;}="CropFill";
-    public double InstantCropX {get;set;}=.5;
-    public double InstantCropY {get;set;}=.5;
-    public bool InstantImageEffectsDisabled {get;set;}
+    private string _draftInstantFit="CropFill";
+    public string InstantFit {get=>_draftInstantFit;set=>SetProperty(ref _draftInstantFit,value);}
+    private double _draftInstantCropX=.5;
+    public double InstantCropX {get=>_draftInstantCropX;set=>SetProperty(ref _draftInstantCropX,value);}
+    private double _draftInstantCropY=.5;
+    public double InstantCropY {get=>_draftInstantCropY;set=>SetProperty(ref _draftInstantCropY,value);}
+    private bool _draftInstantImageEffectsDisabled=false;
+    public bool InstantImageEffectsDisabled {get=>_draftInstantImageEffectsDisabled;set=>SetProperty(ref _draftInstantImageEffectsDisabled,value);}
     public string InstantDimensions {get;private set;}="";
     public bool IsInstantGenerating {get;private set;}
-    public bool InstantEditingAllowed=>!IsInstantGenerating;
-    public double InstantUneven {get;set;}=.15;
+    public bool InstantEditingAllowed=>ActiveTarget is not null&&!IsLoading&&!IsExporting&&!IsInstantGenerating;
+    private double _draftInstantUneven=.15;
+    public double InstantUneven {get=>_draftInstantUneven;set=>SetProperty(ref _draftInstantUneven,value);}
     public double InstantUnspread {get;set;}=.12;
     public double InstantRoller {get;set;}=.10;
     public double InstantArtLeak {get;set;}
-    public double InstantEnvironmentCelsius {get;set;}=21;
+    private double _draftInstantEnvironmentCelsius=21;
+    public double InstantEnvironmentCelsius {get=>_draftInstantEnvironmentCelsius;set=>SetProperty(ref _draftInstantEnvironmentCelsius,value);}
     public IReadOnlyList<string> InstantPaperColors {get;}=["Warm","Neutral","Cool"];
-    public string InstantPaperColor {get;set;}="Warm";
-    public bool InstantPaperFrame {get;set;}=true;
-    public double InstantBorder {get;set;}=.075;
-    public double InstantBottomBorder {get;set;}=.25;
-    public double InstantAmount {get;set;}=1;
+    private string _draftInstantPaperColor="Warm";
+    public string InstantPaperColor {get=>_draftInstantPaperColor;set=>SetProperty(ref _draftInstantPaperColor,value);}
+    private bool _draftInstantPaperFrame=true;
+    public bool InstantPaperFrame {get=>_draftInstantPaperFrame;set=>SetProperty(ref _draftInstantPaperFrame,value);}
+    private double _draftInstantBorder=.075;
+    public double InstantBorder {get=>_draftInstantBorder;set=>SetProperty(ref _draftInstantBorder,value);}
+    private double _draftInstantBottomBorder=.25;
+    public double InstantBottomBorder {get=>_draftInstantBottomBorder;set=>SetProperty(ref _draftInstantBottomBorder,value);}
+    private double _draftInstantAmount=1;
+    public double InstantAmount {get=>_draftInstantAmount;set=>SetProperty(ref _draftInstantAmount,value);}
     public InstantDevelopmentFrame? InstantDevelopment {get;private set;}
     public BitmapSource? InstantFinalPreview {get;private set;}
     public string InstantDirection {get;private set;}="Color";
@@ -96,13 +111,15 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(_disposed)return;
         foreach(var name in new[]{nameof(IsInstantGenerating),nameof(InstantEditingAllowed),nameof(InstantDevelopment),nameof(InstantFinalPreview),nameof(InstantDirection),nameof(InstantImageRegion)})OnPropertyChanged(name);
         GenerateInstantFilmCommand.RaiseCanExecuteChanged();RollInstantFilmCommand.RaiseCanExecuteChanged();ToggleInstantDiceCommand.RaiseCanExecuteChanged();DisableInstantFilmCommand.RaiseCanExecuteChanged();SelectInstantCameraCommand.RaiseCanExecuteChanged();
+        OnPropertyChanged(nameof(PhotoGradeRasterToolsEnabled));OnPropertyChanged(nameof(PhotoGradeCanSyncStep));
+        PhotoGradeUndoCommand.RaiseCanExecuteChanged();PhotoGradeRedoCommand.RaiseCanExecuteChanged();ResetPhotoV3DraftCommand.RaiseCanExecuteChanged();
         ExportSelectedCommand.RaiseCanExecuteChanged();ExportAllCommand.RaiseCanExecuteChanged();PreparePublishingCommand.RaiseCanExecuteChanged();
     }
     public async Task GenerateInstantFilmAsync(bool roll)
     {
         if(_disposed||IsInstantGenerating||IsLoading||IsExporting||ActiveTarget is not {} target)return;
         // Establish and freeze the source edit version before async reconstruction starts.
-        if(target.RawDefinition is null&&RawMatchTiff16ProductPipeline.IsRaw(target.Path)){Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);}
+        if(target.ActiveEditVersionId is null||target.RawDefinition is null){Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);}
         var version=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);var previous=target.RawDefinition;
         var previousDice=previous?.InstantFilm?.DiceEnabled??false;
         var oldInput=target.RawInput;var oldMaster=target.LinearRawMaster;var oldLook=target.AppliedLookSnapshot;var oldStack=target.ColorAdjustmentStackSnapshot;var oldFilm=target.FilmSettingsSnapshot;
