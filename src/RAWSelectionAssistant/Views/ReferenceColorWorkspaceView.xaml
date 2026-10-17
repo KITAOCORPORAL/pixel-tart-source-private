@@ -117,6 +117,7 @@
       <TextBlock Text="{views:StudioText InstantV3Live19}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Crystal}"/>
       <TextBlock Text="{views:StudioText InstantV3Live20}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Leak}"/>
       <ComboBox ItemsSource="{Binding InstantV3Patterns}" SelectedItem="{Binding InstantV3Pattern}"/><CheckBox Content="{views:StudioText InstantV3Live21}" IsChecked="{Binding InstantV3Circle}"/>
+      <TextBlock Text="{views:StudioText InstantV3EmulsionDefects}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3EmulsionDefects}"/>
       <ComboBox ItemsSource="{Binding InstantV3DefectKinds}" SelectedItem="{Binding InstantV3DefectKind}"/>
       <TextBlock Text="{views:StudioText InstantV3Live22}"/><Slider Minimum="0.01" Maximum="1" Value="{Binding InstantV3ReflectionWidth}"/><Slider Minimum="1" Maximum="4" Value="{Binding InstantV3Zoom}"/>
       <TextBlock Text="{views:StudioText InstantV3Live23}"/>

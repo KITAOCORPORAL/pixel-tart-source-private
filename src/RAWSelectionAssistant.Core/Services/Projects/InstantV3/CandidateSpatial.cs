@@ -48,7 +48,17 @@ public static class CandidateSpatial
                     var sx=Math.Clamp(left+tx+x,0,orientedDisplay.Width-1);var sy=Math.Clamp(top+ty+y,0,orientedDisplay.Height-1);
                     var sourcePixel=orientedDisplay.Read(sx,sy);
                     if(recipe.Creative?.LensVignette is >0){var radial=Math.Pow((sx+.5)/orientedDisplay.Width-.5,2)+Math.Pow((sy+.5)/orientedDisplay.Height-.5,2);var linear=CandidateTone.Decode(sourcePixel);var gain=1-recipe.Creative.LensVignette*Math.Clamp(radial,0,.5);sourcePixel=CandidateTone.Encode(new ColorVector3(linear.X*gain,linear.Y*gain,linear.Z*gain));}
-                    var value=CandidateTone.ApplyLinear(sourcePixel,recipe,palette);
+                    // Creative2 makes Womb a colour node rather than a late replacement.
+                    // The standalone formula remains encoded-domain; exposure is linear and precedes it.
+                    var toneRecipe=recipe;
+                    if(recipe.Creative is{Version:2,Stock:not "Base"} creative)
+                    {
+                        var exposed=CandidateTone.Decode(sourcePixel);var gain=Math.Pow(2,recipe.Response.ExposureEv);
+                        sourcePixel=CandidateTone.Encode(new ColorVector3(exposed.X*gain,exposed.Y*gain,exposed.Z*gain));
+                        sourcePixel=Womb01351Reference.Apply(sourcePixel,creative.Stock);
+                        toneRecipe=recipe with{Response=recipe.Response with{ExposureEv=0}};
+                    }
+                    var value=CandidateTone.ApplyLinear(sourcePixel,toneRecipe,palette);
                     var i=(y+2)*stride+(x+2)*3;scratch[i]=value.X;scratch[i+1]=value.Y;scratch[i+2]=value.Z;
                 }
             }
@@ -77,7 +87,7 @@ public static class CandidateSpatial
                     CandidateTone.Decode(original);
                     original=new(Math.Clamp(original.X,0,1),Math.Clamp(original.Y,0,1),Math.Clamp(original.Z,0,1));
                     var developed=CandidateTone.Encode(textured);
-                    if(recipe.Creative?.Stock is{} stock&&stock!="Base")developed=Womb01351Reference.Apply(original,stock);
+                    if(recipe.Creative is{Version:1,Stock:not "Base"} oldCreative && oldCreative.Stock is{} stock)developed=Womb01351Reference.Apply(original,stock);
                     developed=CandidateExtensions.Creative(developed,(gx+.5)/orientedDisplay.Width,(gy+.5)/orientedDisplay.Height,recipe,palette);
                     developed=CandidateExtensions.Defects(developed,(gx+.5)/orientedDisplay.Width,(gy+.5)/orientedDisplay.Height,recipe,palette);
                     var encoded=recipe.Amount==0?original:CandidateTone.Mix(original,developed,recipe.Amount);

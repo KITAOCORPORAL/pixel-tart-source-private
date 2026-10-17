@@ -9,41 +9,75 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public string InstantEngineVersion {get=>_instantEngineVersion;set{if(_instantEngineVersion==value)return;_instantEngineVersion=value;OnPropertyChanged(nameof(InstantEngineVersion));OnPropertyChanged(nameof(IsInstantV3Selected));OnPropertyChanged(nameof(IsInstantV2Selected));}}
  public bool IsInstantV3Selected=>InstantEngineVersion=="V3";
  public bool IsInstantV2Selected=>!IsInstantV3Selected;
- public double InstantV3Exposure {get;set;}
- public double InstantV3Toe {get;set;}=.025;
- public double InstantV3Shoulder {get;set;}=.3;
- public double InstantV3Density {get;set;}=1;
- public double InstantV3Softness {get;set;}=.1;
- public double InstantV3Diffusion {get;set;}=.07;
- public double InstantV3Texture {get;set;}=.0015;
- public double InstantV3Aging {get;set;}
+ private double _instantV3Exposure;
+ public double InstantV3Exposure {get=>_instantV3Exposure;set{if(EqualityComparer<double>.Default.Equals(_instantV3Exposure,value))return;_instantV3Exposure=value;OnPropertyChanged(nameof(InstantV3Exposure));}}
+ private double _instantV3Toe=.025;
+ public double InstantV3Toe {get=>_instantV3Toe;set{if(EqualityComparer<double>.Default.Equals(_instantV3Toe,value))return;_instantV3Toe=value;OnPropertyChanged(nameof(InstantV3Toe));}}
+ private double _instantV3Shoulder=.3;
+ public double InstantV3Shoulder {get=>_instantV3Shoulder;set{if(EqualityComparer<double>.Default.Equals(_instantV3Shoulder,value))return;_instantV3Shoulder=value;OnPropertyChanged(nameof(InstantV3Shoulder));}}
+ private double _instantV3Density=1;
+ public double InstantV3Density {get=>_instantV3Density;set{if(EqualityComparer<double>.Default.Equals(_instantV3Density,value))return;_instantV3Density=value;OnPropertyChanged(nameof(InstantV3Density));}}
+ private double _instantV3Softness=.1;
+ public double InstantV3Softness {get=>_instantV3Softness;set{if(EqualityComparer<double>.Default.Equals(_instantV3Softness,value))return;_instantV3Softness=value;OnPropertyChanged(nameof(InstantV3Softness));}}
+ private double _instantV3Diffusion=.07;
+ public double InstantV3Diffusion {get=>_instantV3Diffusion;set{if(EqualityComparer<double>.Default.Equals(_instantV3Diffusion,value))return;_instantV3Diffusion=value;OnPropertyChanged(nameof(InstantV3Diffusion));}}
+ private double _instantV3Texture=.0015;
+ public double InstantV3Texture {get=>_instantV3Texture;set{if(EqualityComparer<double>.Default.Equals(_instantV3Texture,value))return;_instantV3Texture=value;OnPropertyChanged(nameof(InstantV3Texture));}}
+ private double _instantV3Aging;
+ public double InstantV3Aging {get=>_instantV3Aging;set{if(EqualityComparer<double>.Default.Equals(_instantV3Aging,value))return;_instantV3Aging=value;OnPropertyChanged(nameof(InstantV3Aging));}}
  public IReadOnlyList<string> InstantV3Stocks {get;}=["Base","Womb01351.Stock0","Womb01351.Stock1","Womb01351.Stock2","Womb01351.Stock3","Womb01351.Stock4","Womb01351.Stock5"];
- public string InstantV3Stock {get;set;}="Base";
- public double InstantV3Fog {get;set;}
- public double InstantV3ShadowCast {get;set;}
- public double InstantV3Warmth {get;set;}
- public double InstantV3FrameDrift {get;set;}
- public double InstantV3Fade {get;set;}
+ private string _instantV3Stock="Base";
+ public string InstantV3Stock {get=>_instantV3Stock;set{if(EqualityComparer<string>.Default.Equals(_instantV3Stock,value))return;_instantV3Stock=value;OnPropertyChanged(nameof(InstantV3Stock));}}
+ private double _instantV3Fog;
+ public double InstantV3Fog {get=>_instantV3Fog;set{if(EqualityComparer<double>.Default.Equals(_instantV3Fog,value))return;_instantV3Fog=value;OnPropertyChanged(nameof(InstantV3Fog));}}
+ private double _instantV3ShadowCast;
+ public double InstantV3ShadowCast {get=>_instantV3ShadowCast;set{if(EqualityComparer<double>.Default.Equals(_instantV3ShadowCast,value))return;_instantV3ShadowCast=value;OnPropertyChanged(nameof(InstantV3ShadowCast));}}
+ private double _instantV3Warmth;
+ public double InstantV3Warmth {get=>_instantV3Warmth;set{if(EqualityComparer<double>.Default.Equals(_instantV3Warmth,value))return;_instantV3Warmth=value;OnPropertyChanged(nameof(InstantV3Warmth));}}
+ private double _instantV3FrameDrift;
+ public double InstantV3FrameDrift {get=>_instantV3FrameDrift;set{if(EqualityComparer<double>.Default.Equals(_instantV3FrameDrift,value))return;_instantV3FrameDrift=value;OnPropertyChanged(nameof(InstantV3FrameDrift));}}
+ private double _instantV3Fade;
+ public double InstantV3Fade {get=>_instantV3Fade;set{if(EqualityComparer<double>.Default.Equals(_instantV3Fade,value))return;_instantV3Fade=value;OnPropertyChanged(nameof(InstantV3Fade));}}
  public IReadOnlyList<string> InstantV3Patterns {get;}=["Plain","Leather","Dots","Stripes","Foil"];
- public string InstantV3Pattern {get;set;}="Plain";
- public bool InstantV3Circle {get;set;}
- public double InstantV3Reflection {get;set;}
- public double InstantV3ReflectionAngle {get;set;}
- public double InstantV3ReflectionWidth {get;set;}=.15;
- public double InstantV3Zoom {get;set;}=1;
- public double InstantV3Emboss {get;set;}
- public double InstantV3EdgeLine {get;set;}
+ private string _instantV3Pattern="Plain";
+ public string InstantV3Pattern {get=>_instantV3Pattern;set{if(EqualityComparer<string>.Default.Equals(_instantV3Pattern,value))return;_instantV3Pattern=value;OnPropertyChanged(nameof(InstantV3Pattern));}}
+ private bool _instantV3Circle;
+ public bool InstantV3Circle {get=>_instantV3Circle;set{if(EqualityComparer<bool>.Default.Equals(_instantV3Circle,value))return;_instantV3Circle=value;OnPropertyChanged(nameof(InstantV3Circle));}}
+ private double _instantV3Reflection;
+ public double InstantV3Reflection {get=>_instantV3Reflection;set{if(EqualityComparer<double>.Default.Equals(_instantV3Reflection,value))return;_instantV3Reflection=value;OnPropertyChanged(nameof(InstantV3Reflection));}}
+ private double _instantV3ReflectionAngle;
+ public double InstantV3ReflectionAngle {get=>_instantV3ReflectionAngle;set{if(EqualityComparer<double>.Default.Equals(_instantV3ReflectionAngle,value))return;_instantV3ReflectionAngle=value;OnPropertyChanged(nameof(InstantV3ReflectionAngle));}}
+ private double _instantV3ReflectionWidth=.15;
+ public double InstantV3ReflectionWidth {get=>_instantV3ReflectionWidth;set{if(EqualityComparer<double>.Default.Equals(_instantV3ReflectionWidth,value))return;_instantV3ReflectionWidth=value;OnPropertyChanged(nameof(InstantV3ReflectionWidth));}}
+ private double _instantV3Zoom=1;
+ public double InstantV3Zoom {get=>_instantV3Zoom;set{if(EqualityComparer<double>.Default.Equals(_instantV3Zoom,value))return;_instantV3Zoom=value;OnPropertyChanged(nameof(InstantV3Zoom));}}
+ private double _instantV3Emboss;
+ public double InstantV3Emboss {get=>_instantV3Emboss;set{if(EqualityComparer<double>.Default.Equals(_instantV3Emboss,value))return;_instantV3Emboss=value;OnPropertyChanged(nameof(InstantV3Emboss));}}
+ private double _instantV3EdgeLine;
+ public double InstantV3EdgeLine {get=>_instantV3EdgeLine;set{if(EqualityComparer<double>.Default.Equals(_instantV3EdgeLine,value))return;_instantV3EdgeLine=value;OnPropertyChanged(nameof(InstantV3EdgeLine));}}
  public IReadOnlyList<string> InstantV3DefectKinds {get;}=["None","Unspread","Bands","Fog","Islands","Crescent","BlueFailure"];
- public string InstantV3DefectKind {get;set;}="None";
- public double InstantV3DefectAmount {get;set;}
- public double InstantV3Crystal {get;set;}
- public double InstantV3Leak {get;set;}
- public double InstantV3Vignette {get;set;}
- public double InstantV3DevelopmentEdge {get;set;}
- public double InstantV3PaperTexture {get;set;}=.002;
- public double InstantV3PaperScratches {get;set;}
- public double InstantV3ScanDust {get;set;}
- public ulong InstantV3Seed {get;set;}=20261017;
+ private string _instantV3DefectKind="None";
+ public string InstantV3DefectKind {get=>_instantV3DefectKind;set{if(EqualityComparer<string>.Default.Equals(_instantV3DefectKind,value))return;_instantV3DefectKind=value;OnPropertyChanged(nameof(InstantV3DefectKind));}}
+ private double _instantV3EmulsionDefects;
+ public double InstantV3EmulsionDefects {get=>_instantV3EmulsionDefects;set{if(EqualityComparer<double>.Default.Equals(_instantV3EmulsionDefects,value))return;_instantV3EmulsionDefects=value;OnPropertyChanged(nameof(InstantV3EmulsionDefects));}}
+ private double _instantV3DefectAmount;
+ public double InstantV3DefectAmount {get=>_instantV3DefectAmount;set{if(EqualityComparer<double>.Default.Equals(_instantV3DefectAmount,value))return;_instantV3DefectAmount=value;OnPropertyChanged(nameof(InstantV3DefectAmount));}}
+ private double _instantV3Crystal;
+ public double InstantV3Crystal {get=>_instantV3Crystal;set{if(EqualityComparer<double>.Default.Equals(_instantV3Crystal,value))return;_instantV3Crystal=value;OnPropertyChanged(nameof(InstantV3Crystal));}}
+ private double _instantV3Leak;
+ public double InstantV3Leak {get=>_instantV3Leak;set{if(EqualityComparer<double>.Default.Equals(_instantV3Leak,value))return;_instantV3Leak=value;OnPropertyChanged(nameof(InstantV3Leak));}}
+ private double _instantV3Vignette;
+ public double InstantV3Vignette {get=>_instantV3Vignette;set{if(EqualityComparer<double>.Default.Equals(_instantV3Vignette,value))return;_instantV3Vignette=value;OnPropertyChanged(nameof(InstantV3Vignette));}}
+ private double _instantV3DevelopmentEdge;
+ public double InstantV3DevelopmentEdge {get=>_instantV3DevelopmentEdge;set{if(EqualityComparer<double>.Default.Equals(_instantV3DevelopmentEdge,value))return;_instantV3DevelopmentEdge=value;OnPropertyChanged(nameof(InstantV3DevelopmentEdge));}}
+ private double _instantV3PaperTexture=.002;
+ public double InstantV3PaperTexture {get=>_instantV3PaperTexture;set{if(EqualityComparer<double>.Default.Equals(_instantV3PaperTexture,value))return;_instantV3PaperTexture=value;OnPropertyChanged(nameof(InstantV3PaperTexture));}}
+ private double _instantV3PaperScratches;
+ public double InstantV3PaperScratches {get=>_instantV3PaperScratches;set{if(EqualityComparer<double>.Default.Equals(_instantV3PaperScratches,value))return;_instantV3PaperScratches=value;OnPropertyChanged(nameof(InstantV3PaperScratches));}}
+ private double _instantV3ScanDust;
+ public double InstantV3ScanDust {get=>_instantV3ScanDust;set{if(EqualityComparer<double>.Default.Equals(_instantV3ScanDust,value))return;_instantV3ScanDust=value;OnPropertyChanged(nameof(InstantV3ScanDust));}}
+ private ulong _instantV3Seed=20261017;
+ public ulong InstantV3Seed {get=>_instantV3Seed;set{if(EqualityComparer<ulong>.Default.Equals(_instantV3Seed,value))return;_instantV3Seed=value;OnPropertyChanged(nameof(InstantV3Seed));}}
  public AsyncRelayCommand UndoInstantV3Command {get;private set;}=null!;
  public AsyncRelayCommand RedoInstantV3Command {get;private set;}=null!;
  private readonly Dictionary<Guid,Stack<Guid>> _instantV3Undo=[];
@@ -56,7 +90,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private async Task MoveInstantVersion(Dictionary<Guid,Stack<Guid>> from,Dictionary<Guid,Stack<Guid>> to)
  {
   if(ActiveTarget is not{} target||IsInstantGenerating||IsLoading||IsExporting||!from.TryGetValue(target.Id,out var stack)||stack.Count==0)return;
-  if(!to.TryGetValue(target.Id,out var other))to[target.Id]=other=new();if(target.ActiveEditVersionId is not Guid active)return;other.Push(active);await SwitchEditVersionAsync(stack.Pop());
+  if(target.ActiveEditVersionId is not Guid active)return;
+  while(stack.Count>0&&!target.EditVersions.Any(v=>v.Id==stack.Peek()&&!v.Archived))stack.Pop();
+  if(stack.Count==0)return;var next=stack.Peek();await SwitchEditVersionAsync(next);
+  if(target.ActiveEditVersionId==next){stack.Pop();if(!to.TryGetValue(target.Id,out var other))to[target.Id]=other=new();other.Push(active);}
  }
  private CandidateRecipe FreezeV3(InstantFilmDefinition film,bool roll)
  {
@@ -66,16 +103,25 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   return (recipe with{Amount=InstantImageEffectsDisabled?0:InstantAmount,
    Response=recipe.Response with{ExposureEv=InstantV3Exposure,Toe=InstantV3Toe,Shoulder=InstantV3Shoulder,ApparentDensity=InstantV3Density},
    Optics=recipe.Optics with{DetailMix=InstantV3Softness,HighlightDiffusion=InstantV3Diffusion},
-   Emulsion=recipe.Emulsion with{Microstructure=InstantV3Texture,DevelopmentUnevenness=InstantUneven*.026,DevelopmentDefects=InstantV3DefectAmount,ExpiredAging=InstantV3Aging},
+   Emulsion=recipe.Emulsion with{Microstructure=InstantV3Texture,DevelopmentUnevenness=InstantUneven*.026,DevelopmentDefects=InstantV3EmulsionDefects,ExpiredAging=InstantV3Aging},
    Surface=recipe.Surface with{Frame=InstantPaperFrame,BaseColor=InstantPaperColor,PaperTexture=InstantV3PaperTexture,PaperScratches=InstantV3PaperScratches,ScanDust=InstantV3ScanDust},Geometry=film.PaperGeometry??new(),
-   Creative=new(Stock:InstantV3Stock,ShadowCast:InstantV3ShadowCast,HighlightWarmth:InstantV3Warmth,Fog:InstantV3Fog,TemperatureAppearance:(InstantEnvironmentCelsius-21)/21,FrameDrift:InstantV3FrameDrift,Fade:InstantV3Fade,LensVignette:InstantV3Vignette,DevelopmentEdge:InstantV3DevelopmentEdge),
+   Creative=new(Version:2,Stock:InstantV3Stock,ShadowCast:InstantV3ShadowCast,HighlightWarmth:InstantV3Warmth,Fog:InstantV3Fog,TemperatureAppearance:(InstantEnvironmentCelsius-21)/21,FrameDrift:InstantV3FrameDrift,Fade:InstantV3Fade,LensVignette:InstantV3Vignette,DevelopmentEdge:InstantV3DevelopmentEdge),
    Paper=new(Version:2,Pattern:InstantV3Pattern,Window:InstantV3Circle?"Circle":"Rectangle",Emboss:InstantV3Emboss,EdgeLine:InstantV3EdgeLine,Reflection:InstantV3Reflection,ReflectionAngle:InstantV3ReflectionAngle,ReflectionWidth:InstantV3ReflectionWidth,Zoom:InstantV3Zoom),
    Defects=new(Kind:InstantV3DefectKind,Amount:InstantV3DefectAmount,Crystal:InstantV3Crystal,Leak:InstantV3Leak)}).Freeze();
  }
+ private void ResetV3PhotoControls()
+ {
+  // Photo state, not a mutable cross-photo user default. No random seed is drawn here.
+  InstantV3Exposure=0;InstantV3Toe=.025;InstantV3Shoulder=.3;InstantV3Density=1;InstantV3Softness=.1;InstantV3Diffusion=.07;
+  InstantV3Texture=.0015;InstantV3Aging=0;InstantV3Stock="Base";InstantV3Fog=0;InstantV3ShadowCast=0;InstantV3Warmth=0;InstantV3FrameDrift=0;InstantV3Fade=0;
+  InstantV3Pattern="Plain";InstantV3Circle=false;InstantV3Reflection=0;InstantV3ReflectionAngle=0;InstantV3ReflectionWidth=.15;InstantV3Zoom=1;
+  InstantV3Emboss=0;InstantV3EdgeLine=0;InstantV3DefectKind="None";InstantV3DefectAmount=0;InstantV3EmulsionDefects=0;InstantV3Crystal=0;InstantV3Leak=0;
+  InstantV3Vignette=0;InstantV3DevelopmentEdge=0;InstantV3PaperTexture=.002;InstantV3PaperScratches=0;InstantV3ScanDust=0;InstantV3Seed=20261017;
+ }
  private void RestoreV3(InstantFilmDefinition? film)
  {
-  InstantEngineVersion=film?.AlgorithmVersion==3?"V3":"V2";
-  if(film?.V3 is{} r){InstantV3Exposure=r.Response.ExposureEv;InstantV3Toe=r.Response.Toe;InstantV3Shoulder=r.Response.Shoulder;InstantV3Density=r.Response.ApparentDensity;InstantV3Softness=r.Optics.DetailMix;InstantV3Diffusion=r.Optics.HighlightDiffusion;InstantV3Texture=r.Emulsion.Microstructure;InstantV3Aging=r.Emulsion.ExpiredAging;InstantV3Seed=r.Random.RootSeed;
+  ResetV3PhotoControls();InstantEngineVersion=film?.AlgorithmVersion==3?"V3":"V2";
+  if(film?.V3 is{} r){InstantV3Exposure=r.Response.ExposureEv;InstantV3Toe=r.Response.Toe;InstantV3Shoulder=r.Response.Shoulder;InstantV3Density=r.Response.ApparentDensity;InstantV3Softness=r.Optics.DetailMix;InstantV3Diffusion=r.Optics.HighlightDiffusion;InstantV3EmulsionDefects=r.Emulsion.DevelopmentDefects;InstantV3Texture=r.Emulsion.Microstructure;InstantV3Aging=r.Emulsion.ExpiredAging;InstantV3Seed=r.Random.RootSeed;
    InstantV3Stock=r.Creative?.Stock??"Base";InstantV3Fog=r.Creative?.Fog??0;InstantV3ShadowCast=r.Creative?.ShadowCast??0;InstantV3Warmth=r.Creative?.HighlightWarmth??0;InstantV3FrameDrift=r.Creative?.FrameDrift??0;InstantV3Fade=r.Creative?.Fade??0;InstantV3Vignette=r.Creative?.LensVignette??0;InstantV3DevelopmentEdge=r.Creative?.DevelopmentEdge??0;
    InstantV3Pattern=r.Paper?.Pattern??"Plain";InstantV3Circle=r.Paper?.Window=="Circle";InstantV3Reflection=r.Paper?.Reflection??0;InstantV3ReflectionAngle=r.Paper?.ReflectionAngle??0;InstantV3ReflectionWidth=r.Paper?.ReflectionWidth??.15;InstantV3Zoom=r.Paper?.Zoom??1;InstantV3Emboss=r.Paper?.Emboss??0;InstantV3EdgeLine=r.Paper?.EdgeLine??0;
    InstantV3DefectKind=r.Defects?.Kind??"None";InstantV3DefectAmount=r.Defects?.Amount??0;InstantV3Crystal=r.Defects?.Crystal??0;InstantV3Leak=r.Defects?.Leak??0;InstantV3PaperTexture=r.Surface.PaperTexture;InstantV3PaperScratches=r.Surface.PaperScratches;InstantV3ScanDust=r.Surface.ScanDust;}

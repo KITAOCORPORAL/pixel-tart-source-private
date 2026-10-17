@@ -159,16 +159,16 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
             token.ThrowIfCancellationRequested();
             // Commit only the ready, frozen result. Failure/cancellation leaves the old version and preview intact.
-            if(film.AlgorithmVersion==3){if(!_instantV3Undo.TryGetValue(target.Id,out var undo))_instantV3Undo[target.Id]=undo=new();if(version is Guid prior)undo.Push(prior);if(_instantV3Redo.TryGetValue(target.Id,out var redo))redo.Clear();}
             Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);target.ActiveEditVersionId=Guid.NewGuid();committedId=target.ActiveEditVersionId;
             target.RawDefinition=definition;target.RawInput=master.Contract;target.LinearRawMaster=master;target.RawMaster=null;
             target.AppliedLookSnapshot=null;target.ColorAdjustmentStackSnapshot=null;target.FilmSettingsSnapshot=null;
             CaptureEditVersion(target);target.EditVersions[^1]=target.EditVersions[^1] with{Name=profile.Name+(film.AlgorithmVersion==3?" · 创作 V3":" · 创作 v2"),OriginVersionId=version};
             IsInstantGenerating=false;await ActivateTargetAsync(target);if(target.Status==ReferenceTargetStatus.Failed)throw new IOException(target.Error);StatusText="即时胶片显影完成 · 创作近似，非实测相纸标定";
+            if(film.AlgorithmVersion==3){if(!_instantV3Undo.TryGetValue(target.Id,out var undo))_instantV3Undo[target.Id]=undo=new();if(version is Guid prior)undo.Push(prior);if(_instantV3Redo.TryGetValue(target.Id,out var redo))redo.Clear();}
         }
-        catch(OperationCanceledException error){LastProcessingFailure=StudioProcessingFailure.From(error,"InstantRebuild");OnPropertyChanged(nameof(LastProcessingFailure));Rollback();StatusText="本次显影已退出，保留上一有效结果";InstantDiceEnabled=previousDice;}
+        catch(OperationCanceledException error){LastProcessingFailure=StudioProcessingFailure.From(error,"InstantRebuild");OnPropertyChanged(nameof(LastProcessingFailure));Rollback();if(ReferenceEquals(ActiveTarget,target))RestoreInstantControls(previous?.InstantFilm);StatusText="本次显影已退出，保留上一有效结果";InstantDiceEnabled=previousDice;}
         catch(Exception error)when(error is IOException or InvalidDataException or NotSupportedException or ArgumentException or InvalidOperationException or System.Runtime.InteropServices.COMException)
-        {LastProcessingFailure=StudioProcessingFailure.From(error,"InstantRebuild");OnPropertyChanged(nameof(LastProcessingFailure));Rollback();StatusText="即时胶片未完成，保留上一有效结果："+error.Message;InstantDiceEnabled=previousDice;}
+        {LastProcessingFailure=StudioProcessingFailure.From(error,"InstantRebuild");OnPropertyChanged(nameof(LastProcessingFailure));Rollback();if(ReferenceEquals(ActiveTarget,target))RestoreInstantControls(previous?.InstantFilm);StatusText="即时胶片未完成，保留上一有效结果："+error.Message;InstantDiceEnabled=previousDice;}
         finally{IsInstantGenerating=false;InstantDevelopment=null;InstantFinalPreview=null;OnPropertyChanged(nameof(InstantDiceEnabled));InstantChanged();}
     }
 }

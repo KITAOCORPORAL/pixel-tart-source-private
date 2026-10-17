@@ -9,3 +9,7 @@ fatal: unable to access 'https://github.com/KITAOCORPORAL/pixel-tart-source-priv
 REMOTE_HEAD=UNKNOWN，不声称LOCAL_HEAD=REMOTE_HEAD，不强推、不合并main、不改凭据/网络配置。网络恢复后正常git push -u origin feature/kitao-instant-film-v3-live-20261017，再独立git ls-remote origin refs/heads/feature/kitao-instant-film-v3-live-20261017并比较最后本地HEAD。最终本地SHA以最终回复及git rev-parse为准。
 
 本尾部文件独立本地提交，没有为了假装成功而继续无限重试；Release来源7087a50cc70b6dbc27b083dd45c013e6946096b6不变，工作树保持干净。正式发行仍BLOCKED，与网络状态独立。
+
+## 2026-10-17 恢复推送核验（保留以上历史失败）
+
+用户后续要求重试正常推送成功。当前本轮fetch与独立ls-remote再次核验origin/feature/kitao-instant-film-v3-live-20261017=cd6d3ce072948d6739cd789d749c2bfaadffc59e，与已审核本地基准相同。旧Release身份不改，历史失败不删。
