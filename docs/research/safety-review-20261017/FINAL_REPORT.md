@@ -47,4 +47,4 @@ EXE SHA256：E44A571C7C4A8ED83CA99A6D5EF24CE127009C52C2202B7385E13E34F04A389D。
 - 发布中间源为重试保留，重启不自动清旧无owner目录；显式释放需要完整owner/hash。
 - Fuji原生重复性、显示ICC分歧、物理DPI/前台操作、缺完整LUT/贴图继续开放。不改系统ICC/DPI、不发送用户桌面输入、不Browser/CDP/ComputerUse。
 
-推送状态另见PUSH_STATUS.md；远端连接失败时不声称已推送。不强推、不main、不上传照片/RAW/数据库/凭据/构建二进制。
+推送状态另见PUSH_STATUS.md；正常推送成功后以独立ls-remote核对完整HEAD。不强推、不main、不上传照片/RAW/数据库/凭据/构建二进制。
