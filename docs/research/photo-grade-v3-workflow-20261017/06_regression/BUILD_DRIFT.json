@@ -1,0 +1,16 @@
+{
+  "productSource": "40d71ef9fb35b3b70cf228633d2d5c1349094ad5",
+  "laterSourceChanges": false,
+  "finalProductAssembly": "05-delivery/release/win-x64/KitaoPhotoSelector.dll",
+  "finalSuiteTestBuild": "05-delivery/build-tests",
+  "measurementOnlyTestBuild": "04-visual-tests",
+  "measurementChanges": "Only timing/screenshot fields in pre-final test; final product has explicit final reset/input capability fix",
+  "supersededBuild": "04-delivery",
+  "supersededReason": "Saved component1 RAW secondary decoder compatibility corrected before final freeze",
+  "physicalAcceptance": "NOT_RUN",
+  "supersededBuilds": [
+    "04-delivery",
+    "04-final-delivery"
+  ],
+  "priorCompleteRegression": "04-sealed-delivery: 1624 Passed / 24 NotExecuted / 1 V2 origin-identity failure; corrected original exact test passed in 05-compat, latest full suite independently rerun"
+}

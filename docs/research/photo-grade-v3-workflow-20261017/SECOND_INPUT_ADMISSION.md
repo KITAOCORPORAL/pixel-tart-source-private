@@ -7,3 +7,5 @@
 SHA按1MiB块取消，头/WIC CopyPixels/ICC不可抢占只能前后检查；像素行内每4096检查。同次输入持FileShare.Read读句柄禁止普通写入替换，前后两次全SHA，避免Core/decoder原先重复4次。组件1保留旧途径。预算最终12N由Core租约，另外64N+文件长度为解码/ICC潜在缓存预算、逐行临时另计；预算是保守准入而非WIC分配上限保证。
 
 适用范围：渲染sRGB主链副输入，不恢复已剪裁RAW信息。真实照片沿用授权冻结RGB16与本轮页面派生身份；精度、取消、损坏/缺失/变更与租约释放专项独立验证。历史组件/原V3像素仍回归。
+
+可复现参考驱动tools/photo-color-v1/check_second_alpha.py，显式新output-dir，合成字节输入、外部版本、逐码差与退出码；本轮再次运行0。Pillow/FFmpeg源文件网络hash失败记录保留，本次未复制或引入其实现；通用ICC引擎准入未完成。

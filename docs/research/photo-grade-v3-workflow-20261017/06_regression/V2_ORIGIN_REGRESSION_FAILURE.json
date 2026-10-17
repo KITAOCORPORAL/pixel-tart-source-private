@@ -1,0 +1,18 @@
+{
+  "source": "78134e105e5c8b600ae1038dc46d06e213508c8c",
+  "failed": [
+    {
+      "id": "14221e7d-16bc-8bae-95eb-9b2226fce047",
+      "name": "RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineCurrentJpegEditsSurviveGenerationAndReopenWithoutProxy",
+      "display": "BatchNineCurrentJpegEditsSurviveGenerationAndReopenWithoutProxy",
+      "outcome": "Failed",
+      "error": "Assert.AreEqual 失败。应为: <>，实际为: <7e0e8f71-b5a8-47fe-92b1-2fe1195bbe1e>。‘expected’表达式:‘oldVersion’,‘actual’表达式:‘recipe.OriginVersionId’。\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405\r\n   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineCurrentJpegEditsSurviveGenerationAndReopenWithoutProxy()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+    }
+  ],
+  "completeCounts": {
+    "Passed": 1624,
+    "NotExecuted": 24,
+    "Failed": 1
+  },
+  "correctedTest": "BatchNineCurrentJpegEditsSurviveGenerationAndReopenWithoutProxy passed in 05-compat; no assertion/threshold change"
+}

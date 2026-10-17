@@ -1,0 +1,18 @@
+{
+  "status": "PASSED",
+  "discovered": 1649,
+  "selected": 32,
+  "counts": {
+    "Passed": 32
+  },
+  "assemblySha256": "e36e6d58a02ecc67d97cb339395f8b768885116c20651a5e1bb4f73f1107cb9b",
+  "source": "78134e105e5c8b600ae1038dc46d06e213508c8c",
+  "classes": [
+    "RAWSelectionAssistant.WpfTests.DesignSystemAv2LockTests",
+    "RAWSelectionAssistant.WpfTests.ReferenceWorkspaceWideRatioTests",
+    "RAWSelectionAssistant.WpfTests.StudioDesignSystemContractTests",
+    "RAWSelectionAssistant.WpfTests.StudioLocalizationTests",
+    "RAWSelectionAssistant.WpfTests.UiDesignLintTests",
+    "RAWSelectionAssistant.WpfTests.UserFacingChineseLanguageTests"
+  ]
+}

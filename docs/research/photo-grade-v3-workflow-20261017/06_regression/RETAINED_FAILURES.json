@@ -1,0 +1,83 @@
+[
+  {
+    "label": "01-focused",
+    "runnerStatus": "FAILED",
+    "failed": [
+      {
+        "id": "13f91347-a5c4-8996-b2cf-8c221f2ec6e0",
+        "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents",
+        "display": "FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents",
+        "outcome": "Failed",
+        "error": "Assert.IsNull 失败。‘value’表达式:‘vm.ActiveTarget.RawDefinition’。\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsNullFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 162\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsNull(Object value, String message, String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 155\r\n   at RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.<>c.<<FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents>b__1_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ],
+    "conditional": []
+  },
+  {
+    "label": "02-focused",
+    "runnerStatus": "FAILED",
+    "failed": [
+      {
+        "id": "1685eb62-7840-82a0-85ca-28ceda76a035",
+        "name": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb",
+        "display": "OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb (6)",
+        "outcome": "Failed",
+        "error": "Assert.AreEqual 失败。应为: <3>，实际为: <2>。‘expected’表达式:‘3’,‘actual’表达式:‘input.Width’。\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405\r\n   at RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb(Object orientation)\r\n   at InvokeStub_SecondExposureV2Tests.OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb(Object, Span`1)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+      },
+      {
+        "id": "15e41750-0450-8843-aafb-9ca0facfa72b",
+        "name": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb",
+        "display": "OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb (6)",
+        "outcome": "Failed",
+        "error": "Assert.AreEqual 失败。应为: <3>，实际为: <2>。‘expected’表达式:‘3’,‘actual’表达式:‘input.Width’。\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405\r\n   at RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.OrientationNormalizesShortAndLongAndPreservesEmbeddedSrgb(Object orientation)\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "13491438-7feb-815e-a862-c0d9ab8cb90e",
+        "name": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged",
+        "display": "TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged (\"tif\")",
+        "outcome": "Failed",
+        "error": "Assert.AreNotEqual 失败。应为: <1> 以外的任意值，实际为: <1>。‘notExpected’表达式:‘image.Rgb32.Span[0]’,‘actual’表达式:‘legacy.Rgb32.Span[0]’。\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreNotEqualFailed(Object notExpected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 1440\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreNotEqual[T](T notExpected, T actual, IEqualityComparer`1 comparer, String message, String notExpectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 795\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreNotEqual[T](T notExpected, T actual, String message, String notExpectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 738\r\n   at RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged(String extension)\r\n   at InvokeStub_SecondExposureV2Tests.TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged(Object, Span`1)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+      },
+      {
+        "id": "150e620d-17ce-8084-a46e-f79fcd3fc7e4",
+        "name": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged",
+        "display": "TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged (\"png\")",
+        "outcome": "Failed",
+        "error": "Assert.AreNotEqual 失败。应为: <1> 以外的任意值，实际为: <1>。‘notExpected’表达式:‘image.Rgb32.Span[0]’,‘actual’表达式:‘legacy.Rgb32.Span[0]’。\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreNotEqualFailed(Object notExpected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 1440\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreNotEqual[T](T notExpected, T actual, IEqualityComparer`1 comparer, String message, String notExpectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 795\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreNotEqual[T](T notExpected, T actual, String message, String notExpectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 738\r\n   at RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.TransparentPixelsCompositeWhiteAndLegacyVersionRemainsUnchanged(String extension)\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)"
+      }
+    ],
+    "conditional": []
+  },
+  {
+    "label": "02-sync",
+    "runnerStatus": "FAILED",
+    "failed": [
+      {
+        "id": "16627443-d328-8418-bfae-f2f06073dfa9",
+        "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters",
+        "display": "SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters",
+        "outcome": "Failed",
+        "error": "Assert.IsTrue 失败。‘condition’表达式:‘sliders.Length>0’。\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153\r\n   at RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.<>c.<<SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters>b__3_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ],
+    "conditional": [
+      "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity"
+    ]
+  },
+  {
+    "label": "02-final-focused",
+    "runnerStatus": "FAILED",
+    "failed": [
+      {
+        "id": "1b0e51f1-1f9a-8a08-a90d-da5c5677272c",
+        "name": "RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.LinearSrgbIccIsConvertedOnceRatherThanRelabeled",
+        "display": "LinearSrgbIccIsConvertedOnceRatherThanRelabeled",
+        "outcome": "Failed",
+        "error": "测试方法 RAWSelectionAssistant.WpfTests.SecondExposureV2Tests。LinearSrgbIccIsConvertedOnceRatherThanRelabeled 引发了异常: \r\nSystem.NotSupportedException: 不支持像素格式。 ---> System.Runtime.InteropServices.COMException: 位图像素格式不受支持。 (0x88982F80)\n             at System.Windows.Media.Imaging.ColorConvertedBitmap.FinalizeCreation()\r\n   at RAWSelectionAssistant.Services.SecondExposureDecoder.Read(CandidateMultipleInput input, CancellationToken token)\r\n   at RAWSelectionAssistant.WpfTests.SecondExposureV2Tests.LinearSrgbIccIsConvertedOnceRatherThanRelabeled()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      }
+    ],
+    "conditional": [
+      "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity"
+    ]
+  }
+]

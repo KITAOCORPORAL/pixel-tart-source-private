@@ -9,3 +9,5 @@
 RAW最小生产链还需要独立场景输入profile/矩阵准入，不能拿LibRaw已剪裁display输出冒充scene-linear，显示器ICC分歧仍独立。输出sRGB文件转换、WPF显示和系统显示ICC不是同一验收。原PV4/5/6与已存V3未改解释。
 
 本阶段未达到用户要求的最小生产接入，是剩余任务而非产品完成项。
+
+复现命令：先 `dotnet run --project tools/PhotoColorFormulaProbe/PhotoColorFormulaProbe.csproj -c Release -- linear-chain` 写探针输出，再 `python tools/photo-color-v1/check_minimal_chain.py --input <探针JSON> --output <结果JSON>`。固定参考目录由上轮外部依赖安装保留，版本错或NaN拒绝。实际再次运行退出1，LINEAR_CHAIN_REPRODUCED.json保留。不是打印FAIL却0退出。

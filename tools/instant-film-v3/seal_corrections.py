@@ -18,16 +18,17 @@ def sha(path):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--delivery", type=pathlib.Path, required=True)
+    parser.add_argument("--evidence-dir", type=pathlib.Path)
     args = parser.parse_args()
     delivery = args.delivery.resolve()
-    evidence = ROOT / "docs/research/v3-corrections-colorpage-20261017"
+    evidence = args.evidence_dir.resolve() if args.evidence_dir else ROOT / "docs/research/v3-corrections-colorpage-20261017"
     out = evidence / "06_regression"
     out.mkdir(exist_ok=True)
     runner_spec = importlib.util.spec_from_file_location("verified_runner", ROOT / "tools/planning-r7/verified_runner.py")
     runner = importlib.util.module_from_spec(runner_spec)
     runner_spec.loader.exec_module(runner)
     paths, counts, conditionals = set(), [], []
-    for label in ["source-focused", "source-core", "published-core", "candidate", "published-wpf"]:
+    for label in ["source-focused"] + (["published-focused"] if (delivery / "published-focused").exists() else []) + ["source-core", "published-core", "candidate", "published-wpf"]:
         matches = list((delivery / label).glob("run-*/summary.json"))
         assert len(matches) == 1, (label, "Ambiguous/missing run")
         file = matches[0]
@@ -69,7 +70,7 @@ def main():
                        counts={"Passed": len(values)}, missing=[], timeouts=[], interpretation="LOGICAL_ONLY_NOT_PHYSICAL"))
     # Preserve original failures and superseded measurements, without representing them as current green runs.
     artifacts = ROOT / "artifacts/v3-corrections"
-    for label in ["06-source-wpf", "06-latest-source-wpf", "06-final-published-wpf", "06-final-source-core", "06-final-published-core", "07-focused", "07-focused-retry", "07-history"]:
+    for label in ([] if args.evidence_dir else ["06-source-wpf", "06-latest-source-wpf", "06-final-published-wpf", "06-final-source-core", "06-final-published-core", "07-focused", "07-focused-retry", "07-history"]):
         for summary in (artifacts / label).glob("run-*/summary.json"):
             old = load(summary)
             assert old["status"] != "RUNNING"
@@ -80,14 +81,40 @@ def main():
                 for name in ["results.trx", "runsettings.xml", "stdout.log", "stderr.log"]:
                     file = pathlib.Path(run["directory"]) / name
                     if file.exists(): paths.add(file)
+    if args.evidence_dir:
+        for label in ["01-focused", "01-real-page", "02-focused", "02-second-fixed", "02-sync", "02-sync-fixed", "02-life", "02-final-focused", "04-measure", "04-visual", "04-final-fix", "04-ui-contract"]:
+            for old_summary in (ROOT / "artifacts/photo-grade-v3" / label).glob("run-*/summary.json"):
+                old = load(old_summary)
+                assert old["status"] != "RUNNING"
+                paths.update([old_summary, old_summary.parent / "discovery.json"])
+                for run in old["runs"]:
+                    for name in ["results.trx", "runsettings.xml", "stdout.log", "stderr.log"]:
+                        file = pathlib.Path(run["directory"]) / name
+                        if file.exists(): paths.add(file)
+    if args.evidence_dir:
+        for name in ["03-chain-probe-before.json", "03-chain-reproduced.json", "03-chain-reproduced.log", "04-measure-build.log", "04-visual-build.log"]:
+            file = ROOT / "artifacts/photo-grade-v3" / name
+            if file.exists(): paths.add(file)
+    if args.evidence_dir:
+        for suite in ["source-focused", "published-focused", "source-core", "published-core", "candidate", "published-wpf"]:
+            for previous_summary in (ROOT / "artifacts/photo-grade-v3/04-sealed-delivery" / suite).glob("run-*/summary.json"):
+                previous = load(previous_summary)
+                assert previous["status"] != "RUNNING"
+                for name in ["summary.json", "discovery.json", "stdout.log", "stderr.log"]:
+                    file = previous_summary.parent / name
+                    if file.exists(): paths.add(file)
+                for run in previous["runs"]:
+                    for name in ["results.trx", "runsettings.xml", "stdout.log", "stderr.log"]:
+                        file = pathlib.Path(run["directory"]) / name
+                        if file.exists(): paths.add(file)
     paths.update(delivery.glob("*.log"))
     paths.update([delivery / "commands.json", delivery / "bindings.json", delivery / "release-files.json", delivery / "source-commit.txt"])
-    for name in ["07-reference-negative-controls.json", "07-negative-wrong-matrix.log", "07-negative-nonfinite.log",
+    for name in ([] if args.evidence_dir else ["07-reference-negative-controls.json", "07-negative-wrong-matrix.log", "07-negative-nonfinite.log",
                  "07-extension-risk.log", "07-extension-risk-fixed.log", "07-extension-build-fixed.log", "07-final-formula-reference.log",
-                 "07-final-formula-output.json", "07-final-risk-driver.log", "07-final-risk-driver-retry.log", "07-desktop-readonly.json"]:
+                 "07-final-formula-output.json", "07-final-risk-driver.log", "07-final-risk-driver-retry.log", "07-desktop-readonly.json"]):
         file = artifacts / name
         if file.exists(): paths.add(file)
-    paths.update([artifacts / "07-final-risk/process-memory.json", artifacts / "07-final-risk/build.log", artifacts / "07-final-risk/run.log", artifacts / "07-final-risk/bindings.json"])
+    if not args.evidence_dir: paths.update([artifacts / "07-final-risk/process-memory.json", artifacts / "07-final-risk/build.log", artifacts / "07-final-risk/run.log", artifacts / "07-final-risk/bindings.json"])
     release = delivery / "release/win-x64"
     inventory = load(delivery / "release-files.json")
     for row in inventory:
@@ -116,8 +143,8 @@ def main():
     (out / "RAW_TEST_RESULTS_MANIFEST.json").write_text(json.dumps(members, indent=2) + "\n", encoding="utf-8")
     (evidence / "TEST_COUNTS.json").write_text(json.dumps(counts, indent=2) + "\n", encoding="utf-8")
     (out / "CONDITIONAL_NAMES.json").write_text(json.dumps(conditionals, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    identity = dict(status="BLOCKED_DIAGNOSTIC_BUILD_WITH_V3_CORRECTIONS", sourceCommit=(delivery / "source-commit.txt").read_text().strip(),
-                    reviewedBaseline="cd6d3ce072948d6739cd789d749c2bfaadffc59e", releaseDirectory=str(release),
+    identity = dict(status="BLOCKED_DIAGNOSTIC_WITH_PHOTO_PAGE_V3" if args.evidence_dir else "BLOCKED_DIAGNOSTIC_BUILD_WITH_V3_CORRECTIONS", sourceCommit=(delivery / "source-commit.txt").read_text().strip(),
+                    reviewedBaseline="0fac23a4f17f137b4118b209f07c964fcc756757" if args.evidence_dir else "cd6d3ce072948d6739cd789d749c2bfaadffc59e", releaseDirectory=str(release),
                     fileCount=len(inventory), exeSha256=sha(release / "KitaoPhotoSelector.exe"), coreSha256=sha(release / "RAWSelectionAssistant.Core.dll"),
                     physicalDesktop="NOT_RUN", physicalDpi="NOT_RUN", formulaLibrary="INDEPENDENT_NOT_WIRED_TO_V3",
                     candidateToolBundled=any("InstantFilmCandidate" in row["path"] for row in inventory))
