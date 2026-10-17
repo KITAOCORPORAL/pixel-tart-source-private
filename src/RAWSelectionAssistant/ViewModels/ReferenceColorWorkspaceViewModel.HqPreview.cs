@@ -8,7 +8,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private readonly Guid _hqOwner=Guid.NewGuid();
     private readonly Dictionary<string,HighBitDepthImageBuffer> _hqPreview=[];
     private readonly object _hqGate=new();
-    private void ClearHqPreview(){lock(_hqGate){foreach(var image in _hqPreview.Values)image.Dispose();_hqPreview.Clear();}StudioGlobalResources.Release(_hqOwner,"Detail");}
+    private void ClearHqPreview(){lock(_hqGate){foreach(var image in _hqPreview.Values)if(image.OwnsReservation)image.Dispose();_hqPreview.Clear();}StudioGlobalResources.Release(_hqOwner,"Detail");}
     private async Task<HighBitDepthImageBuffer> RenderProfessionalPreviewAsync(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int edge,CancellationToken token)
     {
         if(Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition))
@@ -30,7 +30,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             long retained;
             lock(_hqGate)
             {
-                if(_hqPreview.Count>=2){foreach(var image in _hqPreview.Values)image.Dispose();_hqPreview.Clear();}
+                if(_hqPreview.Count>=2){foreach(var image in _hqPreview.Values)if(image.OwnsReservation)image.Dispose();_hqPreview.Clear();}
                 _hqPreview[key]=rendered;
                 retained=_hqPreview.Values.Where(x=>!Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition)).Sum(x=>(long)x.Rgb32.Length*4);
             }

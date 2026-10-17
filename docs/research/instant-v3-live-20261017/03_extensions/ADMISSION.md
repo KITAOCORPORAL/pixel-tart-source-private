@@ -1,0 +1,9 @@
+# Extensions admission and limitations
+
+Version1 creative/formula and defect layers are original implementation of described mathematics/shape, not translated proprietary shader. Encoded formula identities Womb01351.Stock0–5 intentionally operate encoded sRGB and keep Stock2 unclipped until final display boundary. Gray table42 rows4decimal tolerance5.1e-5; no legacy runtime claim. Modern color family remains shared, BlueStock4 does not overwrite Reclaimed/BlueDuochrome.
+
+Independent domain references remain pinned DT/RT exposure/tone/filter, DT+stb noise. Expected comparisons are linear gain2e-6, bounded/sample finite/seed-repeat exact, area-preview1e-6 (float) or2/65535 (quantized TIFF reference), BW exactly neutral; creative appearance does not have a physical target. Formula output and mask layering tests are required; extension visual aesthetic approval is not a calibration statement.
+
+Paper/defect patterns implement original bounded analytic masks and independent procedural substreams501/502/503/601/401; no downloaded textures. Paper/lamination is encoded presentation, reflection mixes in decoded linear light; lens vignette is pre-creative-tone in linear light, development edge is post-tone. Default defects/fade/reflection0; disabled stochastic branches bypass expensive samples. Geometry zoom is explicit paper component2; component1 rejects changed zoom to preserve saved interpretation. Existing null-extension recipes are unchanged by new options.
+
+Current limitations: multi-exposure second-layer source/registration contract not yet implemented, source textures/complete33³ LUT missing; procedural crystal is ridged-noise appearance, not physical dendritic chemistry. Existing preview is full-resolution effect then linear-light area average; no fake claim of measured paper dimensions/PSF. Full alias/visual review of every extreme combination still needed, so release stays diagnostic independently of base product functionality.

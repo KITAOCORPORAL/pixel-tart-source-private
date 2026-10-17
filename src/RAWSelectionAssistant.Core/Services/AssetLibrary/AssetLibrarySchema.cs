@@ -256,6 +256,9 @@ internal static class AssetLibrarySchema
             "CREATE INDEX IF NOT EXISTS IX_AssetItems_AddedAt ON AssetItems(AddedAt DESC);",
             "CREATE INDEX IF NOT EXISTS IX_AssetItems_CaptureTime ON AssetItems(CaptureTime DESC);",
             "CREATE INDEX IF NOT EXISTS IX_AssetItems_Rating ON AssetItems(Rating);",
+            // Match the public null-bucket/AddedAt/AssetId order exactly. Existing
+            // AddedAt indexes do not cover the CASE expression, so LIMIT sorts all matches.
+            "CREATE INDEX IF NOT EXISTS IX_AssetItems_ActiveAddedOrder ON AssetItems(IsArchived,(CASE WHEN AddedAt IS NULL THEN 1 ELSE 0 END),AddedAt DESC,AssetId,Rating);",
             "CREATE INDEX IF NOT EXISTS IX_AssetItems_ContentHash ON AssetItems(ContentHash) WHERE ContentHash IS NOT NULL;",
             "CREATE INDEX IF NOT EXISTS IX_AssetItems_MissingName ON AssetItems(IsMissing,DisplayName COLLATE NOCASE);",
             "CREATE INDEX IF NOT EXISTS IX_AssetFolderMemberships_Folder ON AssetFolderMemberships(FolderId,AssetId);",

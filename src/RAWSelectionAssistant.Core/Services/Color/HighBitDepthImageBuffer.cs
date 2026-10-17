@@ -26,6 +26,7 @@ public sealed class HighBitDepthImageBuffer : IDisposable
     private IDisposable? ownedReservation;
     private bool disposed;
     public ReadOnlyMemory<float> Rgb32 { get=>!disposed?pixels:throw new ObjectDisposedException(nameof(HighBitDepthImageBuffer)); private set=>pixels=value; }
+    public bool OwnsReservation=>ownedReservation is not null;
     public void TakeReservation(IDisposable reservation)
     {
         if(disposed||ownedReservation is not null)throw new InvalidOperationException("Buffer already owned/disposed");

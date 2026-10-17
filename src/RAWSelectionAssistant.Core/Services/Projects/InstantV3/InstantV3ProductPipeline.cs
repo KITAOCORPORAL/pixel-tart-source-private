@@ -3,12 +3,22 @@ using RAWSelectionAssistant.Core.Services.Projects;
 namespace Kitao.InstantFilm.Research;
 public static class InstantV3ProductPipeline
 {
+ public static ProfessionalRawDefinition Original(ProfessionalRawDefinition definition)
+ {
+  if(definition.InstantFilm?.V3 is not{} recipe)return definition with{ExposureEv=0};
+  return definition with{InstantFilm=definition.InstantFilm with{V3=recipe with{Amount=0,Creative=null,Defects=null,Paper=null}}};
+ }
  public static bool IsV3(ProfessionalRawDefinition definition)=>definition.InstantFilm?.AlgorithmVersion==3;
  private sealed class Source(ProfessionalRawMaster master,ProfessionalRawDefinition basis):ICandidatePixelSource
  {
   public int Width=>ProfessionalRawPipeline.OrientedSize(master).Width;
   public int Height=>ProfessionalRawPipeline.OrientedSize(master).Height;
-  public ColorVector3 Read(int x,int y)=>ProfessionalRawPipeline.RenderOutputPixel(master,basis,x,y);
+  public ColorVector3 Read(int x,int y)
+  {
+   var w=master.Image.Width;var h=master.Image.Height;
+   var(px,py)=master.Image.Orientation switch{2=>(w-1-x,y),3=>(w-1-x,h-1-y),4=>(x,h-1-y),5=>(y,x),6=>(y,h-1-x),7=>(w-1-y,h-1-x),8=>(w-1-y,x),_=>(x,y)};
+   return ProfessionalRawPipeline.RenderPixel(master,basis,px,py);
+  }
  }
  public static CandidateRenderSession Open(ProfessionalRawMaster master,ProfessionalRawDefinition definition)
  {

@@ -26,6 +26,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public bool InstantV3Circle {get;set;}
  public double InstantV3Reflection {get;set;}
  public double InstantV3ReflectionAngle {get;set;}
+ public double InstantV3ReflectionWidth {get;set;}=.15;
+ public double InstantV3Zoom {get;set;}=1;
  public double InstantV3Emboss {get;set;}
  public double InstantV3EdgeLine {get;set;}
  public IReadOnlyList<string> InstantV3DefectKinds {get;}=["None","Unspread","Bands","Fog","Islands","Crescent","BlueFailure"];
@@ -64,7 +66,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
    Emulsion=recipe.Emulsion with{Microstructure=InstantV3Texture,DevelopmentUnevenness=InstantUneven*.026,DevelopmentDefects=InstantUnspread,ExpiredAging=InstantV3Aging},
    Surface=recipe.Surface with{Frame=InstantPaperFrame,BaseColor=InstantPaperColor,PaperTexture=InstantV3PaperTexture,PaperScratches=InstantV3PaperScratches,ScanDust=InstantV3ScanDust},Geometry=film.PaperGeometry??new(),
    Creative=new(Stock:InstantV3Stock,ShadowCast:InstantV3ShadowCast,HighlightWarmth:InstantV3Warmth,Fog:InstantV3Fog,TemperatureAppearance:(InstantEnvironmentCelsius-21)/21,FrameDrift:InstantV3FrameDrift,Fade:InstantV3Fade,LensVignette:InstantV3Vignette,DevelopmentEdge:InstantV3DevelopmentEdge),
-   Paper=new(Pattern:InstantV3Pattern,Window:InstantV3Circle?"Circle":"Rectangle",Emboss:InstantV3Emboss,EdgeLine:InstantV3EdgeLine,Reflection:InstantV3Reflection,ReflectionAngle:InstantV3ReflectionAngle),
+   Paper=new(Version:2,Pattern:InstantV3Pattern,Window:InstantV3Circle?"Circle":"Rectangle",Emboss:InstantV3Emboss,EdgeLine:InstantV3EdgeLine,Reflection:InstantV3Reflection,ReflectionAngle:InstantV3ReflectionAngle,ReflectionWidth:InstantV3ReflectionWidth,Zoom:InstantV3Zoom),
    Defects=new(Kind:InstantV3DefectKind,Amount:InstantV3DefectAmount,Crystal:InstantV3Crystal,Leak:InstantV3Leak)}).Freeze();
  }
  private void RestoreV3(InstantFilmDefinition? film)
@@ -72,7 +74,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   InstantEngineVersion=film?.AlgorithmVersion==3?"V3":"V2";
   if(film?.V3 is{} r){InstantV3Exposure=r.Response.ExposureEv;InstantV3Toe=r.Response.Toe;InstantV3Shoulder=r.Response.Shoulder;InstantV3Density=r.Response.ApparentDensity;InstantV3Softness=r.Optics.DetailMix;InstantV3Diffusion=r.Optics.HighlightDiffusion;InstantV3Texture=r.Emulsion.Microstructure;InstantV3Aging=r.Emulsion.ExpiredAging;InstantV3Seed=r.Random.RootSeed;
    InstantV3Stock=r.Creative?.Stock??"Base";InstantV3Fog=r.Creative?.Fog??0;InstantV3ShadowCast=r.Creative?.ShadowCast??0;InstantV3Warmth=r.Creative?.HighlightWarmth??0;InstantV3FrameDrift=r.Creative?.FrameDrift??0;InstantV3Fade=r.Creative?.Fade??0;InstantV3Vignette=r.Creative?.LensVignette??0;InstantV3DevelopmentEdge=r.Creative?.DevelopmentEdge??0;
-   InstantV3Pattern=r.Paper?.Pattern??"Plain";InstantV3Circle=r.Paper?.Window=="Circle";InstantV3Reflection=r.Paper?.Reflection??0;InstantV3ReflectionAngle=r.Paper?.ReflectionAngle??0;InstantV3Emboss=r.Paper?.Emboss??0;InstantV3EdgeLine=r.Paper?.EdgeLine??0;
+   InstantV3Pattern=r.Paper?.Pattern??"Plain";InstantV3Circle=r.Paper?.Window=="Circle";InstantV3Reflection=r.Paper?.Reflection??0;InstantV3ReflectionAngle=r.Paper?.ReflectionAngle??0;InstantV3ReflectionWidth=r.Paper?.ReflectionWidth??.15;InstantV3Zoom=r.Paper?.Zoom??1;InstantV3Emboss=r.Paper?.Emboss??0;InstantV3EdgeLine=r.Paper?.EdgeLine??0;
    InstantV3DefectKind=r.Defects?.Kind??"None";InstantV3DefectAmount=r.Defects?.Amount??0;InstantV3Crystal=r.Defects?.Crystal??0;InstantV3Leak=r.Defects?.Leak??0;InstantV3PaperTexture=r.Surface.PaperTexture;InstantV3PaperScratches=r.Surface.PaperScratches;InstantV3ScanDust=r.Surface.ScanDust;}
   foreach(var property in GetType().GetProperties().Where(p=>p.Name.StartsWith("InstantV3",StringComparison.Ordinal)))OnPropertyChanged(property.Name);
   foreach(var name in new[]{nameof(InstantEngineVersion),nameof(InstantV3Exposure),nameof(InstantV3Toe),nameof(InstantV3Shoulder),nameof(InstantV3Density),nameof(InstantV3Softness),nameof(InstantV3Diffusion),nameof(InstantV3Texture),nameof(InstantV3Aging),nameof(InstantV3Seed)})OnPropertyChanged(name);

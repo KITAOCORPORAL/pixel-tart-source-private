@@ -41,12 +41,18 @@ public static class StudioGlobalResources
         private Entry? held=entry;
         public void Dispose(){lock(Gate){var value=held;held=null;if(value is null)return;value.Pins--;if(value.Pins==0&&value.Retired)Retired.Remove(value);}}
     }
+    private sealed class BufferBinding(Entry entry){public Entry Entry=entry;}
+    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<object,BufferBinding> RegisteredBuffers=new();
+    public static void BindRetainedBuffer(object buffer,Guid owner,string kind)
+    {lock(Gate){RegisteredBuffers.Remove(buffer);if(Entries.TryGetValue((owner,kind),out var entry))RegisteredBuffers.Add(buffer,new(entry));}}
     private sealed class BufferEntry(IDisposable lease){public IDisposable Lease=lease;public int Count;}
     private static readonly Dictionary<object,BufferEntry> BufferReservations=new(ReferenceEqualityComparer.Instance);
     public static IDisposable RetainBuffer(object buffer,long bytes)
     {
         lock(Gate)
         {
+            if(RegisteredBuffers.TryGetValue(buffer,out var binding)&&!binding.Entry.Retired)
+            {binding.Entry.Pins++;return new Lease(binding.Entry);}
             if(!BufferReservations.TryGetValue(buffer,out var entry))BufferReservations[buffer]=entry=new(ReserveWork(bytes));
             entry.Count++;return new BufferBorrow(buffer);
         }

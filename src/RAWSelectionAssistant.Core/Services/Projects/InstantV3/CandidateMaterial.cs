@@ -24,16 +24,16 @@ public static class CandidateMaterial
     internal static ColorVector3 Emulsion(ColorVector3 linear,double x,double y,CandidateRecipe recipe,string palette)
     {
         var seed=recipe.Random.RootSeed;var p=recipe.Emulsion;var l=CandidateTone.Luma(linear);
-        var shared=p.Microstructure*(Noise(seed,x,y,1200,1)*.65+Noise(seed,x,y,430,2)*.35);
-        var uneven=p.DevelopmentUnevenness*(Noise(seed,x,y,5,3)*.65+Noise(seed,x,y,17,4)*.35);
+        var shared=p.Microstructure==0?0:p.Microstructure*(Noise(seed,x,y,1200,1)*.65+Noise(seed,x,y,430,2)*.35);
+        var uneven=p.DevelopmentUnevenness==0?0:p.DevelopmentUnevenness*(Noise(seed,x,y,5,3)*.65+Noise(seed,x,y,17,4)*.35);
         var defect=0d;
-        foreach(var d in recipe.Random.Geometry)
+        foreach(var d in p.DevelopmentDefects==0?Array.Empty<InstantDefect>():recipe.Random.Geometry)
         {
             var dx=x-d.X;var dy=y-d.Y;
             defect+=p.DevelopmentDefects*d.Strength*Math.Exp(-(dx*dx+dy*dy)/(d.Radius*d.Radius))*.1;
         }
-        var age=p.ExpiredAging*(.008+.025*Noise(seed,x,y,3,5));
-        double Channel(double v,ulong stream,double aging)=>Math.Clamp(v+(shared+.2*p.Microstructure*Noise(seed,x,y,900,stream))*Math.Sqrt(Math.Max(.005,l)) +uneven*v +defect*(.8-v)+aging,0,1);
+        var age=p.ExpiredAging==0?0:p.ExpiredAging*(.008+.025*Noise(seed,x,y,3,5));
+        double Channel(double v,ulong stream,double aging)=>Math.Clamp(v+(shared+(p.Microstructure==0?0:.2*p.Microstructure*Noise(seed,x,y,900,stream)))*Math.Sqrt(Math.Max(.005,l)) +uneven*v +defect*(.8-v)+aging,0,1);
         var r=Channel(linear.X,11,age);var g=Channel(linear.Y,12,.2*age);var b=Channel(linear.Z,13,-.6*age);
         // A neutral B&W family stays neutral, even though color emulsions have correlated channel variation.
         return palette=="NeutralBW"?new(r,r,r):new(r,g,b);
@@ -42,13 +42,13 @@ public static class CandidateMaterial
     {
         var p=recipe.Surface;var seed=recipe.Random.RootSeed;
         var baseColor=p.BaseColor switch{"Neutral"=>new ColorVector3(.94,.94,.94),"Cool"=>new(.91,.94,.96),_=>new(.95,.935,.9)};
-        var texture=p.PaperTexture*(.7*Noise(seed,x,y,1700,21)+.3*Noise(seed,x,y,260,22));
-        var scratch=p.PaperScratches*Math.Pow(Math.Max(0,Noise(seed,x,y,300,23)),20)*.08;
+        var texture=p.PaperTexture==0?0:p.PaperTexture*(.7*Noise(seed,x,y,1700,21)+.3*Noise(seed,x,y,260,22));
+        var scratch=p.PaperScratches==0?0:p.PaperScratches*Math.Pow(Math.Max(0,Noise(seed,x,y,300,23)),20)*.08;
         return new(Math.Clamp(baseColor.X+texture-scratch,0,1),Math.Clamp(baseColor.Y+texture-scratch,0,1),Math.Clamp(baseColor.Z+texture-scratch,0,1));
     }
     public static ColorVector3 Scan(ColorVector3 display,double x,double y,CandidateRecipe recipe)
     {
-        var dust=recipe.Surface.ScanDust*Math.Pow(Math.Max(0,Noise(recipe.Random.RootSeed,x,y,1000,31)),30)*.4;
+        var dust=recipe.Surface.ScanDust==0?0:recipe.Surface.ScanDust*Math.Pow(Math.Max(0,Noise(recipe.Random.RootSeed,x,y,1000,31)),30)*.4;
         return new(Math.Clamp(display.X-dust,0,1),Math.Clamp(display.Y-dust,0,1),Math.Clamp(display.Z-dust,0,1));
     }
 }
@@ -62,6 +62,12 @@ public static class CandidateRenderer
     public static CandidateImageLease Render(HighBitDepthImageBuffer orientedDisplay,CandidateRecipe recipe,CancellationToken token=default)
     {
         recipe=recipe.Freeze();token.ThrowIfCancellationRequested();
+        if(recipe.Creative is not null||recipe.Paper is not null||recipe.Defects is not null)
+        {
+            using var inputPin=StudioGlobalResources.RetainBuffer(orientedDisplay,(long)orientedDisplay.Rgb32.Length*4);
+            using var session=new CandidateRenderSession(new BufferCandidateSource(orientedDisplay),recipe,StudioGlobalResources.RetainBuffer(orientedDisplay,(long)orientedDisplay.Rgb32.Length*4));
+            return session.RenderRegion(0,0,session.Layout.Width,session.Layout.Height,token);
+        }
         var frame=new InstantFilmDefinition(true,AlgorithmVersion:2,PaperFrame:recipe.Surface.Frame){PaperGeometry=recipe.Geometry};
         var layout=InstantPaperLayout.Create(orientedDisplay.Width,orientedDisplay.Height,frame);
         var outputLease=StudioGlobalResources.ReserveWork(checked((long)layout.Width*layout.Height*3*sizeof(float)));

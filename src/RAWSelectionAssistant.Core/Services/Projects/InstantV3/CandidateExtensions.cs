@@ -36,7 +36,7 @@ public static class CandidateExtensions
   if(p.FrameDrift!=0){var n=CandidateMaterial.Noise(recipe.Random.RootSeed,.371,.739,7,401)*p.FrameDrift*.004;c=new(c.X+n,c.Y+n*.7,c.Z+n*.3);}
   if(p.Fade!=0){var n=CandidateTone.Luma(c);c=CandidateTone.Mix(c,new(.15+.72*n,.15+.72*n,.15+.72*n),p.Fade);}
   if(p.DevelopmentEdge!=0){double edge=Math.Clamp(4*Math.Min(Math.Min(x,1-x),Math.Min(y,1-y)),0,1),gain=1-p.DevelopmentEdge*.2*(1-edge)*(1-edge);c=new(c.X*gain,c.Y*gain,c.Z*gain);}
-  c=Clamp(c);return palette=="NeutralBW"?new(c.X,c.X,c.X):c;
+  c=Clamp(c);return palette=="NeutralBW"?new(CandidateTone.Luma(c),CandidateTone.Luma(c),CandidateTone.Luma(c)):c;
  }
  public static ColorVector3 Defects(ColorVector3 c,double x,double y,CandidateRecipe recipe,string palette)
  {

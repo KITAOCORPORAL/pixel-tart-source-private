@@ -55,7 +55,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         InitializeInstantV3Commands();
         bool Ready(object? _)=>!_disposed&&!IsInstantGenerating&&!IsLoading&&!IsExporting&&ActiveTarget is not null;
         GenerateInstantFilmCommand=new(_=>GenerateInstantFilmAsync(false),Ready);
-        RollInstantFilmCommand=new(_=>GenerateInstantFilmAsync(true),_=>Ready(null)&&InstantDiceEnabled);
+        RollInstantFilmCommand=new(_=>GenerateInstantFilmAsync(true),_=>Ready(null)&&(InstantDiceEnabled||InstantEngineVersion=="V3"));
         ToggleInstantDiceCommand=new(async _=>{InstantDiceEnabled=!InstantDiceEnabled;OnPropertyChanged(nameof(InstantDiceEnabled));await GenerateInstantFilmAsync(InstantDiceEnabled);},Ready);
         DisableInstantFilmCommand=new(async _=>
         {
@@ -109,7 +109,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         {
             var profile=SelectedInstantProfile;
             var film=new InstantFilmDefinition(true,profile.Id,profile.ChemicalGeneration,AlgorithmVersion:2,Amount:InstantAmount,PaperFrame:InstantPaperFrame,Border:InstantBorder,BottomBorder:InstantBottomBorder,Uneven:InstantUneven,Unspread:InstantUnspread,Roller:InstantRoller,ArtLightLeak:InstantArtLeak,EnvironmentCelsius:InstantEnvironmentCelsius,Tier:InstantTier){PaperColor=InstantPaperColor,ImageEffectsDisabled=InstantImageEffectsDisabled,PaperGeometry=InstantLayout=="LegacyFree"?null:new InstantPaperGeometry(Fit:InstantFit,CropX:InstantCropX,CropY:InstantCropY,Side:InstantBorder,Top:InstantBorder,Bottom:InstantBottomBorder)};
-            if(InstantDiceEnabled)
+            if(InstantDiceEnabled&&InstantEngineVersion!="V3")
             {
                 var snapshot=previous?.InstantFilm?.Snapshot;
                 if(roll)snapshot=InstantFilmRandom.Roll(film,BitConverter.ToUInt64(RandomNumberGenerator.GetBytes(8)));

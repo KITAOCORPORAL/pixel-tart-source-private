@@ -39,6 +39,17 @@ public sealed class CandidateRenderSession : IDisposable
         try{Layout=InstantPaperLayout.Create(pixels.Width,pixels.Height,new InstantFilmDefinition(true,AlgorithmVersion:2,PaperFrame:Recipe.Surface.Frame){PaperGeometry=Recipe.Geometry});}
         catch{retainedMaster.Dispose();provider=null;externalPin=null;throw;}
     }
+    private bool TrySource(int x,int y,out int sx,out int sy)
+    {
+        if(!Layout.TrySource(x,y,out sx,out sy))return false;
+        if(Recipe.Paper is{Version:2,Zoom:>1} paper)
+        {
+            var centerX=Recipe.Geometry.CropX*Layout.SourceWidth;var centerY=Recipe.Geometry.CropY*Layout.SourceHeight;
+            sx=Math.Clamp((int)Math.Floor(centerX+(sx+.5-centerX)/paper.Zoom),0,Layout.SourceWidth-1);
+            sy=Math.Clamp((int)Math.Floor(centerY+(sy+.5-centerY)/paper.Zoom),0,Layout.SourceHeight-1);
+        }
+        return true;
+    }
     public CandidateImageLease RenderRegion(int left,int top,int width,int height,CancellationToken token=default)
     {
         using var activeSource=RetainSource();var image=provider??throw new ObjectDisposedException(nameof(CandidateRenderSession));
@@ -51,19 +62,19 @@ public sealed class CandidateRenderSession : IDisposable
             {
                 token.ThrowIfCancellationRequested();var tw=Math.Min(256,width-tx);var th=Math.Min(64,height-ty);
                 int minX=int.MaxValue,minY=int.MaxValue,maxX=-1,maxY=-1;
-                for(int y=0;y<th;y++)for(int x=0;x<tw;x++)if(Layout.TrySource(left+tx+x,top+ty+y,out var sx,out var sy))
+                for(int y=0;y<th;y++)for(int x=0;x<tw;x++)if(TrySource(left+tx+x,top+ty+y,out var sx,out var sy))
                 {minX=Math.Min(minX,sx);minY=Math.Min(minY,sy);maxX=Math.Max(maxX,sx);maxY=Math.Max(maxY,sy);}
                 using var region=maxX>=minX?CandidateSpatial.RenderRegion(image,Recipe,minX,minY,maxX-minX+1,maxY-minY+1,token):null;
                 using var borrow=region?.Borrow();
                 for(int y=0;y<th;y++)for(int x=0;x<tw;x++)
                 {
                     var gx=left+tx+x;var gy=top+ty+y;ColorVector3 value;
-                    if(Layout.TrySource(gx,gy,out var sx,out var sy))
+                    if(TrySource(gx,gy,out var sx,out var sy))
                     {var p=((sy-minY)*borrow!.Image.Width+sx-minX)*3;var rgb=borrow.Image.Rgb32.Span;value=new(rgb[p],rgb[p+1],rgb[p+2]);}
                     else value=CandidateMaterial.Paper((gx+.5)/Layout.Width,(gy+.5)/Layout.Height,Recipe);
                     if(Recipe.Paper is not null)
                     {
-                        bool photo=Layout.TrySource(gx,gy,out _,out _);var nx=(gx+.5)/Layout.Width;var ny=(gy+.5)/Layout.Height;
+                        bool photo=TrySource(gx,gy,out _,out _);var nx=(gx+.5)/Layout.Width;var ny=(gy+.5)/Layout.Height;
                         if(Recipe.Paper.Window=="Circle"&&photo){var u=(gx-Layout.Left+.5)/Layout.WindowWidth-.5;var v=(gy-Layout.Top+.5)/Layout.WindowHeight-.5;if(u*u+v*v>.25){photo=false;value=CandidateMaterial.Paper(nx,ny,Recipe);}}
                         value=CandidateExtensions.Surface(value,nx,ny,Recipe,photo,Layout.Width,Layout.Height);
                     }

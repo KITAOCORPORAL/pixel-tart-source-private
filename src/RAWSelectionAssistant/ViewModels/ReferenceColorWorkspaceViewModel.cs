@@ -604,7 +604,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                 var master=item.LinearRawMaster??await DecodeProfessionalInputAsync(item.Path,definition,token);
                 if(!string.Equals(master.Contract.SourceSha256,item.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("RAW 缩略图源身份改变。");
                 item.LinearRawMaster=master;item.RawInput=master.Contract;
-                var rendered=await Task.Run(()=>ProfessionalRawPipeline.RenderPreview(master,definition,320,token),token);
+                using var rendered=await Task.Run(()=>ProfessionalRawPipeline.RenderPreview(master,definition,320,token),token);
                 item.Thumbnail=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(rendered.ToVisualRgb24()),rendered.Orientation);
                 item.PixelWidth=master.Image.Width;item.PixelHeight=master.Image.Height;item.Status=ReferenceTargetStatus.Adjusted;
                 if(!ReferenceEquals(item,ActiveTarget))item.LinearRawMaster=null;
@@ -941,7 +941,7 @@ public sealed class ReferenceTargetItem : ObservableObject
     public ProfessionalRawMaster? LinearRawMaster
     {
         get=>_linearRawMaster;
-        set{_linearRawMaster=value;if(value is null){StudioGlobalResources.Release(Id,"Master");return;}var weak=new WeakReference<ReferenceTargetItem>(this);StudioGlobalResources.Store(Id,"Master",(long)value.Image.Rgb32.Length*sizeof(float),()=>{if(weak.TryGetTarget(out var target))if(ReferenceEquals(target._linearRawMaster,value))target._linearRawMaster=null;});}
+        set{_linearRawMaster=value;if(value is null){StudioGlobalResources.Release(Id,"Master");return;}var weak=new WeakReference<ReferenceTargetItem>(this);StudioGlobalResources.Store(Id,"Master",(long)value.Image.Rgb32.Length*sizeof(float),()=>{if(weak.TryGetTarget(out var target))if(ReferenceEquals(target._linearRawMaster,value))target._linearRawMaster=null;});StudioGlobalResources.BindRetainedBuffer(value.Image,Id,"Master");}
     }
     public FrozenRawMaster? RawMaster { get; set; }
     public ReferenceExportStatus ExportStatus { get; set; }
