@@ -19,11 +19,40 @@ namespace RAWSelectionAssistant.WpfTests;
   }
   finally{Directory.Delete(root,true);}
  }
+ [DataTestMethod]
+ [DataRow("Decode")][DataRow("PixelRender")][DataRow("DevelopmentAnimation")]
+ public async Task GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport(string phase)
+ {
+  var root=Path.Combine(Path.GetTempPath(),"V3GenerationPhase-"+Guid.NewGuid());Directory.CreateDirectory(root);
+  try
+  {
+   var a=Path.Combine(root,"a.arw");var b=Path.Combine(root,"b.arw");await File.WriteAllBytesAsync(a,[1,2,3]);await File.WriteAllBytesAsync(b,[4,5,6]);
+   using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root),rawDecoder:new FakeLegacy(),professionalRawDecoder:new FakeLinear());
+   await vm.LoadTargetAsync(a);await vm.CreateProfessionalRawCommand.ExecuteAsync(null);vm.InstantEngineVersion="V3";vm.InstantCameraAnimation=false;
+   await vm.GenerateInstantFilmCommand.ExecuteAsync(null);var first=vm.ActiveTarget!;var definition=first.RawDefinition!;var active=first.ActiveEditVersionId;var versions=first.EditVersions.Select(x=>x.Id).ToArray();
+   if(phase=="Decode")first.LinearRawMaster=null;
+   var entered=new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);using var allow=new ManualResetEventSlim();
+   using(var observation=CandidateProcessingEvidence.Capture(p=>{if(p==phase&&entered.TrySetResult())allow.Wait(TimeSpan.FromSeconds(10));}))
+   {
+    var task=Task.Run(()=>vm.GenerateInstantFilmAsync(false));
+    try
+    {
+     await entered.Task.WaitAsync(TimeSpan.FromSeconds(10));Assert.IsFalse(task.IsCompleted);vm.ExitInstantPresentationForLifecycle();await vm.LoadTargetAsync(b);
+    }
+    finally{allow.Set();}
+    await task.WaitAsync(TimeSpan.FromSeconds(10));
+   }
+   Assert.AreEqual(b,vm.ActiveTarget!.Path);Assert.IsNull(vm.ActiveTarget.RawDefinition);Assert.AreEqual(active,first.ActiveEditVersionId);Assert.AreEqual(definition,first.RawDefinition);
+   CollectionAssert.AreEqual(versions,first.EditVersions.Select(x=>x.Id).ToArray());Assert.AreEqual(0,vm.InstantV3Exposure);
+   var master=await new FakeLinear().DecodeAsync(a,definition);await ProfessionalRawExport.WriteAsync(master,definition,Path.Combine(root,"old-valid.tif"),StudioExportFormat.Tiff);Assert.IsTrue(File.Exists(Path.Combine(root,"old-valid.tif")));
+  }
+  finally{Directory.Delete(root,true);}
+ }
     private sealed class FakeLinear:IProfessionalRawDecoder
     {
         public int Decodes; public bool Fail;
         public async Task<ProfessionalRawMaster> DecodeAsync(string path,ProfessionalRawDefinition definition,CancellationToken token=default)
-        {if(Fail)throw new InvalidDataException("缺少配置");Decodes++;var hash=Convert.ToHexString(SHA256.HashData(await File.ReadAllBytesAsync(path,token)));var contract=new ProfessionalRawContract("synthetic","Test","Synthetic",hash,definition.DecodeKey,[1,1,1,1],[1,1,1,1],[1,0,0,0,0,1,0,0,0,0,1,0],65535);return new(new HighBitDepthImageBuffer(12,8,Enumerable.Repeat(.18f,12*8*3).ToArray(),"16","LibRaw Linear ProPhoto D65"),contract);}
+        {CandidateProcessingEvidence.Enter("Decode",token);if(Fail)throw new InvalidDataException("缺少配置");Decodes++;var hash=Convert.ToHexString(SHA256.HashData(await File.ReadAllBytesAsync(path,token)));var contract=new ProfessionalRawContract("synthetic","Test","Synthetic",hash,definition.DecodeKey,[1,1,1,1],[1,1,1,1],[1,0,0,0,0,1,0,0,0,0,1,0],65535);return new(new HighBitDepthImageBuffer(12,8,Enumerable.Repeat(.18f,12*8*3).ToArray(),"16","LibRaw Linear ProPhoto D65"),contract);}
     }
     private sealed class FakeLegacy:IRawDecoder
     {public int Decodes; public bool Fail;public RawDecoderCapability GetCapability()=>throw new NotSupportedException();public Task<RawDecodedImage> DecodeAsync(string path,RawToJpegOptions options,CancellationToken token=default){Decodes++;return Task.FromResult(RawDecodedImage.FromRgb48(12,8,72,Enumerable.Repeat((ushort)20000,12*8*3).ToArray(),new("Test","Synthetic",null,1,"sRGB")));}}

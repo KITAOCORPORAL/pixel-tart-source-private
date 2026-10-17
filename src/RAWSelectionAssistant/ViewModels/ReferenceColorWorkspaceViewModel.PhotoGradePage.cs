@@ -6,6 +6,23 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public bool UsePhotoGradePage {get=>_usePhotoGradePage;set{if(SetProperty(ref _usePhotoGradePage,value))OnPropertyChanged(nameof(UseLegacyGradePage));}}
  public bool UseLegacyGradePage=>!UsePhotoGradePage;
  public RelayCommand TogglePhotoGradePageCommand=>new(_=>UsePhotoGradePage=!UsePhotoGradePage);
+ public AsyncRelayCommand PhotoGradeUndoCommand {get;private set;}=null!;
+ public AsyncRelayCommand PhotoGradeRedoCommand {get;private set;}=null!;
+ private bool HasInstantHistory(Dictionary<Guid,Stack<Guid>> history)=>ActiveTarget is{} target&&history.TryGetValue(target.Id,out var entries)&&entries.Count>0;
+ private void InitializePhotoGradeHistoryCommands()
+ {
+  PhotoGradeUndoCommand=new(async _=>
+  {
+   if(HasInstantHistory(_instantV3Undo))await UndoInstantV3Command.ExecuteAsync(null);
+   else if(!IsProfessionalRaw)Editor.UndoAdjustmentCommand.Execute(null);
+  },_=>!IsInstantGenerating&&!IsLoading&&!IsExporting);
+  PhotoGradeRedoCommand=new(async _=>
+  {
+   // Undo can return to a raster version, so route by history, not only current engine.
+   if(HasInstantHistory(_instantV3Redo))await RedoInstantV3Command.ExecuteAsync(null);
+   else if(!IsProfessionalRaw)Editor.RedoAdjustmentCommand.Execute(null);
+  },_=>!IsInstantGenerating&&!IsLoading&&!IsExporting);
+ }
  private string _photoMaskColor="Cyan";
  public IReadOnlyList<string> PhotoMaskColors {get;}=["Cyan","Yellow","Magenta","White"];
  public string PhotoMaskColor {get=>_photoMaskColor;set{if(!PhotoMaskColors.Contains(value))throw new ArgumentException("Unsupported mask colour");SetProperty(ref _photoMaskColor,value);}}

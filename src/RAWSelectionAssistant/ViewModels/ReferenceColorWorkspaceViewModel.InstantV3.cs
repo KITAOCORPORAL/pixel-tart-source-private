@@ -116,13 +116,32 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   ClearSecondExposureCommand=new(_=>{InstantSecondInput=null;OnPropertyChanged(nameof(InstantSecondSourceName));});
   UndoInstantV3Command=new(async _=>await MoveInstantVersion(_instantV3Undo,_instantV3Redo));
   RedoInstantV3Command=new(async _=>await MoveInstantVersion(_instantV3Redo,_instantV3Undo));
+  InitializePhotoGradeHistoryCommands();
  }
  private async Task MoveInstantVersion(Dictionary<Guid,Stack<Guid>> from,Dictionary<Guid,Stack<Guid>> to)
  {
   if(ActiveTarget is not{} target||IsInstantGenerating||IsLoading||IsExporting||!from.TryGetValue(target.Id,out var stack)||stack.Count==0)return;
   if(target.ActiveEditVersionId is not Guid active)return;
   while(stack.Count>0&&!target.EditVersions.Any(v=>v.Id==stack.Peek()&&!v.Archived))stack.Pop();
-  if(stack.Count==0)return;var next=stack.Peek();await SwitchEditVersionAsync(next);
+  if(stack.Count==0)return;var next=stack.Peek();
+  var definition=target.RawDefinition;var input=target.RawInput;var master=target.LinearRawMaster;var rawMaster=target.RawMaster;
+  var look=target.AppliedLookSnapshot;var adjustments=target.ColorAdjustmentStackSnapshot;var film=target.FilmSettingsSnapshot;
+  var engine=target.EngineSnapshot;var mode=target.ExecutionModeSnapshot;var status=target.Status;var error=target.Error;
+  var image=Editor.MatchedImage;var size=Editor.SourcePixelSize;
+  await SwitchEditVersionAsync(next);
+  if(target.Status==ReferenceTargetStatus.Failed)
+  {
+   // A missing/changed second source must not consume undo/redo or replace the valid view.
+   var diagnostic=target.Error;target.ActiveEditVersionId=active;target.RawDefinition=definition;target.RawInput=input;
+   target.LinearRawMaster=master;target.RawMaster=rawMaster;target.AppliedLookSnapshot=look;target.ColorAdjustmentStackSnapshot=adjustments;
+   target.FilmSettingsSnapshot=film;target.EngineSnapshot=engine;target.ExecutionModeSnapshot=mode;target.Status=status;target.Error=error;
+   if(ReferenceEquals(ActiveTarget,target))
+   {
+    RestoreInstantControls(definition?.InstantFilm);
+    if(image is not null){Editor.PresentIndependentRaw(image);Editor.SetIndependentRawSize(size);Editor.IndependentRawMode=definition is not null;}
+   }
+   StatusText="History restore failed; previous valid result retained: "+diagnostic;return;
+  }
   if(target.ActiveEditVersionId==next){stack.Pop();if(!to.TryGetValue(target.Id,out var other))to[target.Id]=other=new();other.Push(active);}
  }
  private CandidateRecipe FreezeV3(InstantFilmDefinition film,bool roll)

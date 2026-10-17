@@ -20,6 +20,28 @@ namespace RAWSelectionAssistant.WpfTests;
   }
   finally{Directory.Delete(root,true);}
  });
+ [TestMethod] public Task BoundPageHistoryIncludesV3DisableAndFailureDoesNotDiscardRedo()=>RunSta(async()=>
+ {
+  EnsureTestApplication();var root=Path.Combine(Path.GetTempPath(),"V3HistoryClosure-"+Guid.NewGuid());Directory.CreateDirectory(root);
+  try
+  {
+   var input=Path.Combine(root,"first.arw");await File.WriteAllBytesAsync(input,[1,2,3]);
+   using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root),rawDecoder:new FakeLegacy(),professionalRawDecoder:new FakeLinear());
+   await vm.LoadTargetAsync(input);await vm.CreateProfessionalRawCommand.ExecuteAsync(null);vm.InstantEngineVersion="V3";vm.InstantCameraAnimation=false;
+   await vm.GenerateInstantFilmCommand.ExecuteAsync(null);var target=vm.ActiveTarget!;var enabled=target.ActiveEditVersionId;
+   var view=new RAWSelectionAssistant.Views.PhotoGradePageView{DataContext=vm};view.Measure(new Size(1400,850));view.Arrange(new Rect(0,0,1400,850));view.UpdateLayout();
+   Assert.AreSame(vm.PhotoGradeUndoCommand,((Button)view.FindName("PhotoUndo")).Command);
+   await vm.DisableInstantFilmCommand.ExecuteAsync(null);var disabled=target.ActiveEditVersionId;
+   Assert.AreNotEqual(enabled,disabled);Assert.AreEqual(0,target.RawDefinition!.InstantFilm!.V3!.Amount);Assert.IsTrue(vm.InstantImageEffectsDisabled);
+   await vm.PhotoGradeUndoCommand.ExecuteAsync(null);Assert.AreEqual(enabled,target.ActiveEditVersionId);Assert.IsFalse(vm.InstantImageEffectsDisabled);
+   await vm.PhotoGradeRedoCommand.ExecuteAsync(null);Assert.AreEqual(disabled,target.ActiveEditVersionId);Assert.IsTrue(vm.InstantImageEffectsDisabled);
+   await vm.PhotoGradeUndoCommand.ExecuteAsync(null);var versions=target.EditVersions.Select(x=>x.Id).ToArray();
+   vm.InstantV3DefectScale=double.NaN;await vm.DisableInstantFilmCommand.ExecuteAsync(null);
+   Assert.AreEqual(enabled,target.ActiveEditVersionId);CollectionAssert.AreEqual(versions,target.EditVersions.Select(x=>x.Id).ToArray());Assert.IsFalse(vm.InstantImageEffectsDisabled);
+   await vm.PhotoGradeRedoCommand.ExecuteAsync(null);Assert.AreEqual(disabled,target.ActiveEditVersionId);
+  }
+  finally{Directory.Delete(root,true);}
+ });
     private sealed class FakeLinear:IProfessionalRawDecoder
     {
         public int Decodes; public bool Fail;

@@ -14,6 +14,17 @@ namespace RAWSelectionAssistant.WpfTests;
    var definition=vm.ActiveTarget!.RawDefinition!;Assert.IsNotNull(definition.InstantFilm!.V3!.MultipleInput,vm.StatusText);Assert.AreEqual(.35,definition.InstantFilm.V3.MultipleInput.Weight);
    var file=Path.Combine(root,"multi.ptstudio.json");await vm.SaveSessionAsync(file);using var restored=new ReferenceColorWorkspaceViewModel(new Dialogs(root),versionRepository:versions,rawDecoder:new FakeLegacy(),professionalRawDecoder:new FakeLinear());await restored.LoadSessionAsync(file);Assert.AreEqual(.35,restored.InstantSecondWeight);Assert.AreEqual(1.25,restored.InstantSecondZoom);Assert.AreEqual("second.png",restored.InstantSecondSourceName);
    var master=await new FakeLinear().DecodeAsync(input,definition);foreach(var format in new[]{StudioExportFormat.Tiff,StudioExportFormat.Png,StudioExportFormat.Jpeg}){var output=Path.Combine(root,"result-"+format+StudioQuickExport.Extension(input,format));await ProfessionalRawExport.WriteAsync(master,definition,output,format);Assert.IsTrue(File.Exists(output));}
+   var held=StudioGlobalResources.AccountedBytes;
+   using(var session=Kitao.InstantFilm.Research.InstantV3ProductPipeline.Open(master,definition))
+   {Assert.IsTrue(StudioGlobalResources.AccountedBytes>=held+17L*13*12);}
+   Assert.AreEqual(held,StudioGlobalResources.AccountedBytes);
+   await vm.UndoInstantV3Command.ExecuteAsync(null);var beforeMulti=vm.ActiveTarget!.ActiveEditVersionId;var beforeDefinition=vm.ActiveTarget.RawDefinition;
+   var beforePixels=vm.Editor.MatchedImage;File.Move(second,second+".held");
+   await vm.RedoInstantV3Command.ExecuteAsync(null);Assert.AreEqual(beforeMulti,vm.ActiveTarget.ActiveEditVersionId);Assert.AreEqual(beforeDefinition,vm.ActiveTarget.RawDefinition);Assert.AreSame(beforePixels,vm.Editor.MatchedImage);
+
+   await Assert.ThrowsAsync<FileNotFoundException>(async()=>await ProfessionalRawExport.WriteAsync(master,definition,Path.Combine(root,"missing.tif"),StudioExportFormat.Tiff));Assert.IsFalse(File.Exists(Path.Combine(root,"missing.tif")));File.Move(second+".held",second);
+   await vm.RedoInstantV3Command.ExecuteAsync(null);Assert.IsNotNull(vm.ActiveTarget.RawDefinition!.InstantFilm!.V3!.MultipleInput);Assert.AreEqual(.35,vm.InstantSecondWeight);
+   Assert.AreEqual(held,StudioGlobalResources.AccountedBytes);
    await File.AppendAllTextAsync(second,"changed");await Assert.ThrowsAsync<InvalidDataException>(async()=>await ProfessionalRawExport.WriteAsync(master,definition,Path.Combine(root,"changed.tif"),StudioExportFormat.Tiff));Assert.IsFalse(File.Exists(Path.Combine(root,"changed.tif")));
   }
   finally{Directory.Delete(root,true);}

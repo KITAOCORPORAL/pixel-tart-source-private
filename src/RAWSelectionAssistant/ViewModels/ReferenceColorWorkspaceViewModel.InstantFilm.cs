@@ -60,6 +60,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         DisableInstantFilmCommand=new(async _=>
         {
             if(ActiveTarget is not {} target||target.RawDefinition is not {} d)return;
+            if(d.InstantFilm?.AlgorithmVersion==3)
+            {
+                // Use the same render-before-commit transaction and history as a V3 edit.
+                InstantImageEffectsDisabled=true;
+                await GenerateInstantFilmAsync(false);
+                return;
+            }
             CaptureEditVersion(target);target.ActiveEditVersionId=Guid.NewGuid();target.RawDefinition=d with{InstantFilm=(d.InstantFilm??new()) with{AlgorithmVersion=d.InstantFilm?.AlgorithmVersion??2,ImageEffectsDisabled=true,PaperFrame=InstantPaperFrame,V3=d.InstantFilm?.V3 is{} v3?v3 with{Amount=0}:null}};
             await ActivateTargetAsync(target);CaptureEditVersion(target);
         },Ready);

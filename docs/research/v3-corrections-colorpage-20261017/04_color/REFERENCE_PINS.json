@@ -1,0 +1,67 @@
+{
+  "verifiedDate": "2026-10-17",
+  "identityMethod": "git ls-remote tag and annotated-tag peeling",
+  "references": [
+    {
+      "name": "colour-science",
+      "repository": "https://github.com/colour-science/colour.git",
+      "tag": "v0.4.7",
+      "commit": "a3bfe349685f528100672e5c8ca2dfeeef64a273",
+      "license": "BSD-3-Clause",
+      "distribution": "External comparison only; no reference binary or implementation copied into product",
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "cd9efcd4b6ac5218189d90ffc25f9766f8411e62c5526c452145e1cc8b19baf7",
+          "bytes": 1465
+        },
+        {
+          "path": "colour/models/rgb/transfer_functions/davinci_intermediate.py",
+          "sha256": "62c846160fba31ae107b3edd0aeab396ad2cc8d616b98115f0b46ffdfc232209",
+          "bytes": 4706
+        },
+        {
+          "path": "colour/models/rgb/transfer_functions/aces.py",
+          "sha256": "aafa90438319e951c2bbd4619179f41f9e8a9ac34c6e448e2707d45745ce1b22",
+          "bytes": 16344
+        },
+        {
+          "path": "colour/models/rgb/transfer_functions/st_2084.py",
+          "sha256": "08cf394d694204c6d3125618f61c8290dea702c177613c498854c0e8b3df459b",
+          "bytes": 6653
+        },
+        {
+          "path": "colour/models/rgb/datasets/davinci_wide_gamut.py",
+          "sha256": "e3b7076a2a948f698a92dc9abcc5dbf22ef01056b4a1409bd34e930d469f041c",
+          "bytes": 3169
+        }
+      ]
+    },
+    {
+      "name": "OpenColorIO",
+      "repository": "https://github.com/AcademySoftwareFoundation/OpenColorIO.git",
+      "tag": "v2.4.2",
+      "commit": "6918fad3f5d22ac3ef2397c754bf4268c2b58dd0",
+      "license": "BSD-3-Clause",
+      "distribution": "External comparison only; no reference binary or implementation copied into product",
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "82a40c52065ee968aa62015735e84378ac11425db7a233e6a2dcd2c83fc24276",
+          "bytes": 1485
+        },
+        {
+          "path": "src/OpenColorIO/ops/cdl/CDLOpCPU.cpp",
+          "sha256": "44deec76ffd7600cf5b8500de805d9fc344381b24fe83be8d047de1531c1265a",
+          "bytes": 13765
+        },
+        {
+          "path": "src/OpenColorIO/transforms/CDLTransform.cpp",
+          "sha256": "42fdb5efb1f29cc21f411da271b2907140d079bf13aa86453b6b70b2e3f6557c",
+          "bytes": 10341
+        }
+      ]
+    }
+  ],
+  "scope": "Pinned formula comparison references; not whole-engine, camera calibration or ICC admission"
+}

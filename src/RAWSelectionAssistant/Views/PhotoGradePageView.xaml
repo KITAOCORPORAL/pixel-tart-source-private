@@ -7,15 +7,15 @@
    <Button DockPanel.Dock="Left" Content="{views:StudioText Import}" Command="{Binding ChooseTargetCommand}"/>
    <Button DockPanel.Dock="Left" Content="{views:StudioText SaveBatch}" Command="{Binding SaveSessionCommand}"/>
    <Button DockPanel.Dock="Left" Content="{views:StudioText OpenBatch}" Command="{Binding OpenSessionCommand}"/>
-   <Button DockPanel.Dock="Left" Content="{views:StudioText PhotoGradeUndo}" Command="{Binding Editor.UndoAdjustmentCommand}"/>
-   <Button DockPanel.Dock="Left" Content="{views:StudioText PhotoGradeRedo}" Command="{Binding Editor.RedoAdjustmentCommand}"/>
+   <Button DockPanel.Dock="Left" Content="{views:StudioText PhotoGradeUndo}" x:Name="PhotoUndo" Command="{Binding PhotoGradeUndoCommand}"/>
+   <Button DockPanel.Dock="Left" Content="{views:StudioText PhotoGradeRedo}" x:Name="PhotoRedo" Command="{Binding PhotoGradeRedoCommand}"/>
    <views:StudioExportMenu DockPanel.Dock="Left"/>
    <TextBlock Text="{views:StudioText PhotoGradeTitle}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" Margin="12,0"/>
   </DockPanel>
   <Grid Grid.Row="1"><Grid.ColumnDefinitions><ColumnDefinition Width="220"/><ColumnDefinition/><ColumnDefinition Width="330"/></Grid.ColumnDefinitions>
    <StackPanel Grid.Column="0" Margin="0,0,8,0">
     <TextBlock Text="{views:StudioText PhotoGradeSteps}" Foreground="{DynamicResource TextPrimaryBrush}"/>
-    <WrapPanel><Button Content="{views:StudioText BasicTone}" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="BasicTone"/><Button Content="{views:StudioText Curve}" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="Curve"/></WrapPanel>
+    <WrapPanel><Button Content="{views:StudioText PhotoGradeBasic}" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="BasicTone"/><Button Content="{views:StudioText Curve}" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="Curve"/></WrapPanel>
     <ListBox x:Name="OrderedSteps" ItemsSource="{Binding Editor.AdjustmentNodes}" SelectedItem="{Binding Editor.SelectedAdjustmentNode}" DisplayMemberPath="Name" MaxHeight="350"/>
     <WrapPanel><Button Content="{views:StudioText PhotoGradeMoveUp}" Command="{Binding Editor.MoveAdjustmentNodeUpCommand}"/><Button Content="{views:StudioText PhotoGradeMoveDown}" Command="{Binding Editor.MoveAdjustmentNodeDownCommand}"/><Button Content="{views:StudioText PhotoGradeRemove}" Command="{Binding Editor.DeleteAdjustmentNodeCommand}"/></WrapPanel>
     <Expander Header="{views:StudioText PhotoGradeHistory}"><StackPanel><ListBox ItemsSource="{Binding ActiveTarget.EditVersions}" SelectedItem="{Binding SelectedCatalogVersion}" DisplayMemberPath="Name" MaxHeight="170"/><Button Content="{views:StudioText SelectVersion}" Command="{Binding SelectEditVersionCommand}"/></StackPanel></Expander>
