@@ -83,10 +83,14 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public double InstantV3ScanDust {get=>_instantV3ScanDust;set{if(EqualityComparer<double>.Default.Equals(_instantV3ScanDust,value))return;_instantV3ScanDust=value;OnPropertyChanged(nameof(InstantV3ScanDust));}}
  private ulong _instantV3Seed=20261017;
  public ulong InstantV3Seed {get=>_instantV3Seed;set{if(EqualityComparer<ulong>.Default.Equals(_instantV3Seed,value))return;_instantV3Seed=value;OnPropertyChanged(nameof(InstantV3Seed));}}
- public double InstantV3DefectX {get;set;}=.5;
- public double InstantV3DefectY {get;set;}=.5;
- public double InstantV3DefectAngle {get;set;}
- public double InstantV3DefectScale {get;set;}=1;
+ private double _instantV3DefectX=.5;
+ public double InstantV3DefectX {get=>_instantV3DefectX;set{SetProperty(ref _instantV3DefectX,value);}}
+ private double _instantV3DefectY=.5;
+ public double InstantV3DefectY {get=>_instantV3DefectY;set{SetProperty(ref _instantV3DefectY,value);}}
+ private double _instantV3DefectAngle=0;
+ public double InstantV3DefectAngle {get=>_instantV3DefectAngle;set{SetProperty(ref _instantV3DefectAngle,value);}}
+ private double _instantV3DefectScale=1;
+ public double InstantV3DefectScale {get=>_instantV3DefectScale;set{SetProperty(ref _instantV3DefectScale,value);}}
  public CandidateMultipleInput? InstantSecondInput {get;private set;}
  public string InstantSecondSourceName=>InstantSecondInput is null?"—":System.IO.Path.GetFileName(InstantSecondInput.Path);
  private double _instantSecondWeight=.5;
