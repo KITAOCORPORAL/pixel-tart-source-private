@@ -26,6 +26,7 @@ public sealed class PublishingExportService(IPublishingRenderer renderer,Action<
     public async Task<PublishingExportResult> ExportAsync(Guid taskId, PublishingExportRequest request, IAsyncProgress<(double Progress, string CurrentFile, TaskResultSummary Summary)>? progress = null, CancellationToken cancellationToken = default)
     {
         request.Validate();
+        using var sourceLifetime=PublishingIntermediateUse.Acquire(request.SourceFiles);
         Directory.CreateDirectory(request.DestinationDirectory);
         var sourceFiles = request.SourceFiles.Select(Path.GetFullPath).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
         IReadOnlyList<ExportRecipe?> recipes = request.Recipes is { Count: > 0 } ? request.Recipes.Cast<ExportRecipe?>().ToArray() : [null];

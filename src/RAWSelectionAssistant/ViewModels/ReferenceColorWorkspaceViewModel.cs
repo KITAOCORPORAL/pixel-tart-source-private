@@ -16,6 +16,7 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject, IDisposable
 {
     private readonly IDialogService _dialogs;
+    private readonly Func<ReferenceColorWorkspaceViewModel> _sessionStagingFactory;
     private readonly RawMatchTiff16ProductPipeline _rawPipeline;
     private readonly MatchV4ProductExecutor? _matchV4Executor;
     private BitmapSource? _targetImage;
@@ -122,8 +123,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
         foreach(var target in items) CaptureEditVersion(target);
         var frozen = items.Select(item => (Item: item, VersionId: item.ActiveEditVersionId!.Value, Look: item.AppliedLookSnapshot, Stack: item.ColorAdjustmentStackSnapshot?.DeepClone(), Film: item.FilmSettingsSnapshot, Engine: item.EngineSnapshot, Mode: item.ExecutionModeSnapshot, RawDefinition:item.RawDefinition, RawInput:item.RawInput)).ToArray();
-        var directory = Path.Combine(Path.GetTempPath(), "PixelTartPublishing", Guid.NewGuid().ToString("N"));
-        Directory.CreateDirectory(directory);
+        var publishingLease=new PublishingIntermediateLease();
+        var directory=publishingLease.DirectoryPath;var handedOff=false;
         _exportCancellation = new CancellationTokenSource(); RaiseExportCommands();
         var paths = new List<string>(); var failures = new List<string>();
         try
@@ -138,6 +139,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                     var itemDirectory = Path.Combine(directory, item.Item.Id.ToString());
                     Directory.CreateDirectory(itemDirectory);
                     var path = Path.Combine(itemDirectory, Path.GetFileNameWithoutExtension(item.Item.Path) + (raw || item.RawDefinition is not null ? ".tif" : ".png"));
+                    publishingLease.OwnNewFile(path);publishingLease.OwnNewFile(path+".kitao-export.json");publishingLease.OwnNewFile(path+".kitao-export.pending.json");
                     if(item.RawDefinition is {} professional)await ExportProfessionalRawAsync(item.Item,professional,path,StudioExportFormat.Tiff,_exportCancellation.Token);
                     else if (raw)
                     {
@@ -151,6 +153,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                         await Task.Run(() => { var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(bitmap)); using var file = File.Create(path); encoder.Save(file); }, _exportCancellation.Token);
                     }
                     await StudioExportReceiptStore.WriteAsync(path,new(Guid.NewGuid(),item.Item.LibraryId,item.Item.AssetId,item.Item.SourceHash,item.VersionId,item.RawDefinition?.ProcessingVersion ?? item.Stack?.ProcessingVersion??1,"Publishing intermediate",path,"",DateTimeOffset.UtcNow,item.RawDefinition is null ? null : new ExportRecipeSnapshot(1,".tif",16,"Original",item.Item.LastProfessionalOutput?.Width??item.Item.PixelWidth,item.Item.LastProfessionalOutput?.Height??item.Item.PixelHeight,null,null,"None","sRGB","TIFF orientation preserved","Not applied",RawDefinition:item.RawDefinition,RawInput:item.RawInput,OutputValidation:System.Text.Json.JsonSerializer.Serialize(item.Item.LastProfessionalOutput))),_exportCancellation.Token);
+                    publishingLease.Complete(path);publishingLease.Complete(path+".kitao-export.json");
                     paths.Add(path); SetExportStatus("PrepareProgress", paths.Count + failures.Count, items.Length);
                 }
                 catch (Exception error) when (error is InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException or InvalidOperationException)
@@ -159,10 +162,14 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             ExportFailureSummary = failures.Count == 0 ? "" : StudioLocalizationService.Current.Format("PrepareFailures", string.Join(", ", failures));
             SetExportStatus("PrepareFinished", paths.Count, items.Length, failures.Count);
             if (failures.Count > 0) _dialogs.ShowInfo(ExportStatus + "\n" + ExportFailureSummary);
-            if (paths.Count > 0) OpenPublishing(paths);
+            if (paths.Count > 0){publishingLease.CompleteExisting();publishingLease.Handoff();publishingLease.Dispose();OpenPublishing(paths);handedOff=true;}
         }
         catch (OperationCanceledException) { ExportStatus = "已停止准备发布"; }
-        finally { _exportCancellation.Dispose(); _exportCancellation = null; RaiseExportCommands(); }
+        finally
+        {
+            try{if(!handedOff){publishingLease.CompleteExisting();publishingLease.Dispose();PublishingIntermediateLease.Release(publishingLease.ManifestPath);}}
+            finally{publishingLease.Dispose();_exportCancellation.Dispose(); _exportCancellation = null; RaiseExportCommands();}
+        }
     }
 
     public ReferenceColorWorkspaceViewModel(IDialogService dialogs, IReferenceRenderBackend? renderBackend = null, IRawDecoder? rawDecoder = null,
@@ -173,6 +180,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         _professionalDecoder=professionalRawDecoder??new ProfessionalRawDecoder();
         _versionRepository=versionRepository;
         _dialogs = dialogs;
+        _sessionStagingFactory=()=>new ReferenceColorWorkspaceViewModel(dialogs,renderBackend:renderBackend,rawDecoder:rawDecoder,matchV4Executor:matchV4Executor,assetRepositoryFactory:assetRepositoryFactory,versionRepository:versionRepository,professionalRawDecoder:professionalRawDecoder);
         PropertyChangedEventManager.AddHandler(StudioLocalizationService.Current, OnStudioLanguageChanged, nameof(StudioLocalizationService.Language));
         _matchV4Executor = matchV4Executor;
         _assetRepositoryFactory = assetRepositoryFactory;
@@ -762,7 +770,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             {
                 var item = frozenItem.Item; _exportCancellation.Token.ThrowIfCancellationRequested(); item.Status = ReferenceTargetStatus.Processing; ExportStatus = $"{ExportCompleted} / {ExportTotal} · {item.FileName}";
                 var isRaw = RawMatchTiff16ProductPipeline.IsRaw(item.Path);
-                var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + ("_仿色" + StudioQuickExport.Extension(item.Path,format))); var temp = output + ".tmp";
+                var output = Path.Combine(directory, Path.GetFileNameWithoutExtension(item.FileName) + ("_仿色" + StudioQuickExport.Extension(item.Path,format))); var temp = Path.Combine(directory,".kitao-stage-"+Guid.NewGuid().ToString("N")+".tmp");
                 try
                 {
                     var pendingReceipt=(await ExportRecovery.FindRecoverableAsync(directory,_exportCancellation.Token)).FirstOrDefault(x=>string.Equals(x.OutputPath,Path.GetFullPath(output),StringComparison.OrdinalIgnoreCase));
@@ -805,7 +813,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                     {
                         if (frozenItem.Engine == ColorStudioMatchEngine.MatchV4Beta) throw new NotSupportedException("V4 Beta 输出需要 RAW 高精度源；请切换稳定 V3。");
                         var processed = await Editor.ProcessForExportAsync(item.Path, frozenItem.Look, frozenItem.Film, _exportCancellation.Token, frozenItem.Stack);
+                        Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("RasterExportEncode",_exportCancellation.Token);
                         await Task.Run(() => StudioQuickExport.Encode(processed, item.Path, temp, format, _exportCancellation.Token), _exportCancellation.Token);
+                        Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("RasterExportEncoded",_exportCancellation.Token);
 
                     }
                     var encoded=frozenItem.RawDefinition is null ? StudioQuickExport.Load(temp) : null;

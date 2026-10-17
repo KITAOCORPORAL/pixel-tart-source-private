@@ -58,6 +58,21 @@ public sealed record ColorStudioSessionDocument(IReadOnlyList<ColorStudioSession
 public static class ColorStudioSessionStore
 {
     private static readonly JsonSerializerOptions Options = new(JsonSerializerDefaults.Web) { WriteIndented = true };
+    public static async Task<string?> FingerprintAsync(string path,CancellationToken token=default)
+    {
+        if(!File.Exists(path))return null;
+        await using var input=new FileStream(path,FileMode.Open,FileAccess.Read,FileShare.Read);
+        return Convert.ToHexString(await System.Security.Cryptography.SHA256.HashDataAsync(input,token));
+    }
+    public static async Task<string> SaveCheckedAsync(string path,ColorStudioSessionDocument document,string? expectedFingerprint,CancellationToken token=default)
+    {
+        path=Path.GetFullPath(path);Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        // Cross-process lock plus exact file content identity. Dialog overwrite is not concurrency control.
+        await using var gate=new FileStream(path+".session.lock",FileMode.OpenOrCreate,FileAccess.ReadWrite,FileShare.None);
+        var current=await FingerprintAsync(path,token);
+        if(!string.Equals(current,expectedFingerprint,StringComparison.OrdinalIgnoreCase))throw new InvalidOperationException("工作文件已被其他实例修改；未覆盖。请另存副本或重新打开后合并。");
+        await SaveAsync(path,document,token);return (await FingerprintAsync(path,token))!;
+    }
     public static async Task SaveAsync(string path, ColorStudioSessionDocument document, CancellationToken token = default)
     {
         document = document.Normalize(); path = System.IO.Path.GetFullPath(path);

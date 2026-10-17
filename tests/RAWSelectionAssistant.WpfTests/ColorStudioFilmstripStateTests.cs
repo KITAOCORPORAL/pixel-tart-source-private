@@ -80,10 +80,9 @@ public sealed class ColorStudioFilmstripStateTests
             using(var original=new ReferenceColorWorkspaceViewModel(new Dialogs()))
             { await original.LoadTargetAsync(image); original.Editor.Exposure=.8; await original.SaveSessionAsync(file); }
             SaveImage(root,"source.png",180);
-            using var reopened=new ReferenceColorWorkspaceViewModel(new Dialogs()); await reopened.LoadSessionAsync(file);
-            Assert.IsNull(reopened.ActiveTarget);
-            Assert.AreEqual(ReferenceTargetStatus.Failed,reopened.Targets[0].Status);
-            Assert.IsNotNull(reopened.Targets[0].ColorAdjustmentStackSnapshot);
+            using var reopened=new ReferenceColorWorkspaceViewModel(new Dialogs());await Assert.ThrowsAsync<InvalidDataException>(()=>reopened.LoadSessionAsync(file));
+            Assert.IsNull(reopened.ActiveTarget);Assert.HasCount(0,reopened.Targets);
+            var stored=await ColorStudioSessionStore.LoadAsync(file);Assert.IsNotNull(stored.Targets[0].Stack);
         }
         finally { Directory.Delete(root,true); }
     });    [TestMethod]
@@ -217,8 +216,8 @@ public sealed class ColorStudioFilmstripStateTests
             await Assert.ThrowsAsync<InvalidDataException>(() => workspace.LoadSessionAsync(invalid));
             Assert.AreEqual(path, workspace.ActiveTarget!.Path); Assert.AreEqual(.8, workspace.Editor.Exposure);
             var session = Path.Combine(root, "missing.ptstudio.json"); await workspace.SaveSessionAsync(session); File.Delete(path);
-            await workspace.LoadSessionAsync(session);
-            Assert.IsNull(workspace.ActiveTarget); Assert.HasCount(1, workspace.Targets); Assert.AreEqual(ReferenceTargetStatus.Failed, workspace.Targets[0].Status);
+            var previous=workspace.ActiveTarget;await Assert.ThrowsAsync<FileNotFoundException>(()=>workspace.LoadSessionAsync(session));
+            Assert.AreSame(previous,workspace.ActiveTarget);Assert.HasCount(1,workspace.Targets);
             Assert.AreEqual(.8, workspace.Targets[0].ColorAdjustmentStackSnapshot!.Nodes.Single(x => x.Type == ColorStudioNodeType.Develop).NumericParameters["exposure"]);
         }
         finally { Directory.Delete(root, true); }

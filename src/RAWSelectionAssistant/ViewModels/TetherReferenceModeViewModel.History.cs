@@ -38,6 +38,14 @@ public sealed partial class TetherReferenceModeViewModel
         }
         OnPropertyChanged(nameof(SelectedAdjustmentNode)); RaiseAdjustmentCommands(); NotifySchemeState();
     }
+    internal object CaptureSessionHistory()
+    {CaptureTargetHistory();return (_historyTarget,new Dictionary<Guid,TargetHistory>(_targetHistories));}
+    internal void RestoreSessionHistory(object snapshot)
+    {
+        var saved=((Guid? Active,Dictionary<Guid,TargetHistory> Histories))snapshot;
+        _targetHistories.Clear();foreach(var pair in saved.Histories)_targetHistories[pair.Key]=pair.Value;
+        _historyTarget=saved.Active;if(saved.Active is Guid active)RestoreTargetHistory(active);else ClearTargetHistories();
+    }
     public void ClearTargetHistories()
     {
         _historyTarget = null; _targetHistories.Clear(); _undoStacks.Clear(); _redoStacks.Clear(); _undoSelections.Clear(); _redoSelections.Clear();
