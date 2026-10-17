@@ -24,7 +24,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public bool InstantDevelopmentDemo {get=>_instantDevelopmentDemo;set=>SetProperty(ref _instantDevelopmentDemo,value);}
     private bool _skipInstantDemo;
     public RelayCommand SkipInstantDemoCommand {get;private set;}=null!;
-    public sealed record InstantApplyTimings(double DecodeMs,double PixelMs,double DemoMs,double CommitMs,bool MasterCacheHit);
+    public sealed record InstantApplyTimings(double DecodeMs,double PixelMs,double DemoMs,double CommitMs,bool MasterCacheHit,double CompareMs=0);
     public InstantApplyTimings? LastInstantApplyTimings {get;private set;}
     public string InstantCamera {get;private set;}="SX-70";
     public IReadOnlyList<string> InstantInputModes {get;}=["CurrentEdits","Original"];
@@ -134,7 +134,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var version=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);var previous=target.RawDefinition;
         var previousDice=previous?.InstantFilm?.DiceEnabled??false;
         var oldRawMaster=target.RawMaster;var oldWidth=target.PixelWidth;var oldHeight=target.PixelHeight;var oldThumb=target.Thumbnail;var oldSourceThumb=target.SourceThumbnail;var oldEnabled=Editor.Enabled;var oldView=Editor.ViewMode;var oldTargetImage=TargetImage;var oldFailed=FailedTarget;
-        var oldInput=target.RawInput;var oldMaster=target.LinearRawMaster;var oldLook=target.AppliedLookSnapshot;var oldStack=target.ColorAdjustmentStackSnapshot;var oldFilm=target.FilmSettingsSnapshot;
+        var oldInput=target.RawInput;var oldMaster=target.LinearRawMaster;using var oldMasterLease=oldMaster is null?null:StudioGlobalResources.RetainBuffer(oldMaster.Image,(long)oldMaster.Image.Rgb32.Length*4);var oldLook=target.AppliedLookSnapshot;var oldStack=target.ColorAdjustmentStackSnapshot;var oldFilm=target.FilmSettingsSnapshot;
         var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldMode=Editor.IndependentRawMode;var oldSize=Editor.SourcePixelSize;var oldStatus=target.Status;var oldError=target.Error;var oldHistory=Editor.CaptureSessionHistory();Guid? committedId=null;
         void Rollback()
         {
@@ -189,7 +189,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             var original=ProfessionalRawPipeline.OrientedSize(master);var layout=InstantPaperLayout.Create(original.Width,original.Height,film);
             InstantDimensions=$"原尺寸 {original.Width} × {original.Height} · 相纸 {layout.Width} × {layout.Height}";OnPropertyChanged(nameof(InstantDimensions));
             InstantImageRegion=new(layout.Left/(double)layout.Width,layout.Top/(double)layout.Height,layout.WindowWidth/(double)layout.Width,layout.WindowHeight/(double)layout.Height);
-            var pixelMs=pixelWatch.Elapsed.TotalMilliseconds;
+            var pixelMs=prepared.RenderMs;
             Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("DevelopmentAnimation",token);
             var watch=Stopwatch.StartNew();
             while(InstantDevelopmentDemo&&!_skipInstantDemo)
@@ -212,7 +212,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             target.AppliedLookSnapshot=null;target.ColorAdjustmentStackSnapshot=null;target.FilmSettingsSnapshot=null;
             CaptureEditVersion(target);target.EditVersions[^1]=target.EditVersions[^1] with{Name=profile.Name+(film.AlgorithmVersion==3?" · 创作 V3":" · 创作 v2"),OriginVersionId=version};
             EnsurePreparedCurrent(target,definition,committedId,revision,token);await PresentProfessionalPreviewAsync(target,prepared,revision,token);if(target.Status==ReferenceTargetStatus.Failed)throw new IOException(target.Error);StatusText="即时胶片显影完成 · 创作近似，非实测相纸标定";
-            LastInstantApplyTimings=new(decodeMs,pixelMs,demoMs,commitWatch.Elapsed.TotalMilliseconds,cacheHit);OnPropertyChanged(nameof(LastInstantApplyTimings));
+            LastInstantApplyTimings=new(decodeMs,pixelMs,demoMs,commitWatch.Elapsed.TotalMilliseconds,cacheHit,prepared.CompareMs);OnPropertyChanged(nameof(LastInstantApplyTimings));
             if(film.AlgorithmVersion==3){if(!_instantV3Undo.TryGetValue(target.Id,out var undo))_instantV3Undo[target.Id]=undo=new();if(version is Guid prior)undo.Push(prior);if(_instantV3Redo.TryGetValue(target.Id,out var redo))redo.Clear();}
         }
         catch(OperationCanceledException error){LastProcessingFailure=StudioProcessingFailure.From(error,"InstantRebuild");OnPropertyChanged(nameof(LastProcessingFailure));Rollback();if(ReferenceEquals(ActiveTarget,target))RestoreInstantControls(previous?.InstantFilm);StatusText="本次显影已退出，保留上一有效结果";InstantDiceEnabled=previousDice;}

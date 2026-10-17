@@ -11,14 +11,16 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private string? _comparisonKey;
     private BitmapSource? _comparisonImage;
     private sealed record PreparedProfessionalPreview(ProfessionalRawMaster Master, ProfessionalRawDefinition Definition,
-        string SourceHash, Guid TargetId, Guid? SourceVersion, long Revision, BitmapSource Image, BitmapSource Before, double CompareMs);
+        string SourceHash, Guid TargetId, Guid? SourceVersion, long Revision, BitmapSource Image, BitmapSource Before, double RenderMs, double CompareMs);
     private async Task<PreparedProfessionalPreview> PrepareProfessionalPreviewAsync(ReferenceTargetItem target,
         ProfessionalRawMaster master, ProfessionalRawDefinition definition, CancellationToken token)
     {
         if(master.Contract.DecodeKey!=definition.DecodeKey || !string.Equals(master.Contract.SourceSha256,
             target.SourceHash??target.ObservedSourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("预览输入身份或 DecodeKey 不一致。");
         using var masterLease=StudioGlobalResources.RetainBuffer(master.Image,(long)master.Image.Rgb32.Length*4);
+        var renderWatch=Stopwatch.StartNew();
         var rendered=await RenderProfessionalPreviewAsync(master,definition,1600,token);
+        var renderMs=renderWatch.Elapsed.TotalMilliseconds;
         BitmapSource image;
         try { image=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(rendered.ToVisualRgb24(token)),rendered.Orientation); }
         finally { if(InstantV3ProductPipeline.IsV3(definition))rendered.Dispose(); }
@@ -37,7 +39,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         CandidateProcessingEvidence.Enter("PreviewPrepared",token);
         if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
         definition.InstantFilm?.V3?.MultipleInput?.ValidateSource(token);
-        return new(master,definition,master.Contract.SourceSha256,target.Id,target.ActiveEditVersionId,Volatile.Read(ref _activationRevision),image,before,watch.Elapsed.TotalMilliseconds);
+        return new(master,definition,master.Contract.SourceSha256,target.Id,target.ActiveEditVersionId,Volatile.Read(ref _activationRevision),image,before,renderMs,watch.Elapsed.TotalMilliseconds);
     }
     // Original raster recipe lineage is history, not input pixels. Keep persisted DecodeKey
     // unchanged; explicitly rebind only after proving all pixel-affecting input fields match.

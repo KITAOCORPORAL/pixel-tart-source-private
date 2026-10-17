@@ -11,6 +11,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public AsyncRelayCommand OpenSessionCommand { get; private set; } = null!;
     public string? SessionPath { get; private set; }
     private bool _sessionLoading;
+    private CancellationTokenSource? _sessionPreparationCancellation;
     private readonly Dictionary<string,string?> _sessionFingerprints=new(StringComparer.OrdinalIgnoreCase);
     private ColorStudioLayout _layout = new();
     public ColorStudioLayout Layout { get => _layout; set => SetProperty(ref _layout, value.Normalize()); }
@@ -63,6 +64,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     {
         if(_skipSessionPreparation){await LoadSessionCoreAsync(path,token);return;}
         if(_disposed||IsLoading||IsInstantGenerating||IsExporting)throw new InvalidOperationException("工作区正在处理，未开始加载项目。");
+        using var preparation=CancellationTokenSource.CreateLinkedTokenSource(token);
+        _sessionPreparationCancellation=preparation;token=preparation.Token;
         _sessionLoading=true;OnPropertyChanged(nameof(IsLoading));RefreshSyncAvailability();
         try
         {
@@ -92,7 +95,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         await LoadSessionCoreAsync(path,token,document,staged);
         _sessionFingerprints[Path.GetFullPath(path)]=fingerprint;
         }
-        finally{_sessionLoading=false;OnPropertyChanged(nameof(IsLoading));RefreshSyncAvailability();}
+        finally{_sessionPreparationCancellation=null;_sessionLoading=false;OnPropertyChanged(nameof(IsLoading));RefreshSyncAvailability();}
     }
     private bool _skipSessionPreparation;
     private async Task LoadSessionCoreAsync(string path,CancellationToken token,ColorStudioSessionDocument? prepared=null,ReferenceColorWorkspaceViewModel? staged=null)
@@ -115,7 +118,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         try
         {
         Editor.StopProcessing(); _activationCancellation?.Cancel(); Interlocked.Increment(ref _activationRevision);
-        await FlushMetadataAsync(); ActiveTarget = null; Targets.Clear();
+        await FlushMetadataAsync();token.ThrowIfCancellationRequested();if(_disposed)throw new OperationCanceledException(token); ActiveTarget = null; Targets.Clear();
         foreach (var target in restored) Targets.Add(target);
         if(!_skipSessionPreparation)Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("SessionCommit",token);
         FilterScope = document.FilterScope; MinimumRating = document.MinimumRating; ColorLabelFilter = document.ColorLabelFilter;
@@ -146,6 +149,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 Editor.SetIndependentRawSize(staged.Editor.SourcePixelSize);
                 RestoreInstantControls(active.RawDefinition?.InstantFilm);
                 Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("SessionTransfer",token);
+                foreach(var item in restored)
+                {
+                    if(!await ValidateTargetIdentityAsync(item,token))throw new InvalidDataException(item.Error);
+                    item.RawDefinition?.InstantFilm?.V3?.MultipleInput?.ValidateSource(token);
+                }
+                token.ThrowIfCancellationRequested();if(_disposed)throw new OperationCanceledException(token);
+                await RefreshPreviewAnalysisAsync(token,Editor.MatchedImage??Editor.SourceImage);
             }
             token.ThrowIfCancellationRequested();if(active.Status==ReferenceTargetStatus.Failed)throw new InvalidDataException(active.Error??"项目激活失败");
         }

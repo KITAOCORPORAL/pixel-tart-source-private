@@ -17,7 +17,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
    var prior=target.RawDefinition;var active=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);
    var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldMode=Editor.IndependentRawMode;var oldHistory=Editor.CaptureSessionHistory();var oldSize=Editor.SourcePixelSize;var oldStatus=target.Status;var oldError=target.Error;
    var oldRawMaster=target.RawMaster;var oldWidth=target.PixelWidth;var oldHeight=target.PixelHeight;var oldThumb=target.Thumbnail;var oldSourceThumb=target.SourceThumbnail;var oldEnabled=Editor.Enabled;var oldView=Editor.ViewMode;var oldTargetImage=TargetImage;var oldFailed=FailedTarget;
-        var oldInput=target.RawInput;var oldMaster=target.LinearRawMaster;var oldLook=target.AppliedLookSnapshot;var oldStack=target.ColorAdjustmentStackSnapshot;var oldFilm=target.FilmSettingsSnapshot;Guid? committed=null;
+        var oldInput=target.RawInput;var oldMaster=target.LinearRawMaster;using var oldMasterLease=oldMaster is null?null:StudioGlobalResources.RetainBuffer(oldMaster.Image,(long)oldMaster.Image.Rgb32.Length*4);var oldLook=target.AppliedLookSnapshot;var oldStack=target.ColorAdjustmentStackSnapshot;var oldFilm=target.FilmSettingsSnapshot;Guid? committed=null;
    _instantCancellation?.Dispose();_instantCancellation=new();var token=_instantCancellation.Token;IsInstantGenerating=true;InstantChanged();
    Editor.StopProcessing();InvalidateProfessionalPreview();LastProcessingFailure=null;
    try
