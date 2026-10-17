@@ -1,0 +1,2615 @@
+[
+  {
+    "input": "sony-dsc08015",
+    "profile": "modern-itype-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 4688,
+    "sourceHeight": 7028,
+    "outputWidth": 5392,
+    "outputHeight": 6212,
+    "bytesSource": 395367168,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "modern-itype-v3",
+      "Identity": {
+        "ChemicalFamily": "ModernIntegralColor",
+        "PaperEra": "Modern; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0.9,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0001:source",
+          "GROK-POL-0002:source",
+          "GROK-POL-0003:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0001",
+          "GROK-POL-0002",
+          "GROK-POL-0003"
+        ],
+        "Observations": [
+          "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "itype-color",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "modern-itype-v3",
+        "LegacyId": "itype-color",
+        "ChemicalFamily": "ModernIntegralColor",
+        "PaperEra": "Modern; batch unknown",
+        "Palette": "Color",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0.9,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0001:source",
+            "GROK-POL-0002:source",
+            "GROK-POL-0003:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0001",
+            "GROK-POL-0002",
+            "GROK-POL-0003"
+          ],
+          "Observations": [
+            "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "DDF971661871B7CCE16AF3C6510B4D4B02261DC717DFA947FBD5E1AF012B27E6",
+    "renderRegionMs": 34.7675,
+    "totalMs": 13832.4355,
+    "pixelSha256": "525D89DCB921249365C2A910A2650829B4A5185B3D14144AE67F5086B200BF4C",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 395399520,
+    "processPrivate": 2067148800,
+    "peakWorkingSet": 1784131584,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "sony-dsc08015",
+    "profile": "modern-bw-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 4688,
+    "sourceHeight": 7028,
+    "outputWidth": 5392,
+    "outputHeight": 6212,
+    "bytesSource": 395367168,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "modern-bw-v3",
+      "Identity": {
+        "ChemicalFamily": "ModernIntegralSilver",
+        "PaperEra": "Modern; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0020:source",
+          "GROK-POL-0021:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0020",
+          "GROK-POL-0021"
+        ],
+        "Observations": [
+          "Literature links only; neutral linear-luminance response is a creative choice."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "itype-bw",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "modern-bw-v3",
+        "LegacyId": "itype-bw",
+        "ChemicalFamily": "ModernIntegralSilver",
+        "PaperEra": "Modern; batch unknown",
+        "Palette": "NeutralBW",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0020:source",
+            "GROK-POL-0021:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0020",
+            "GROK-POL-0021"
+          ],
+          "Observations": [
+            "Literature links only; neutral linear-luminance response is a creative choice."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "BD2C8A14F5B624FF9BA89078B8EDC30392F5C39A87D3AFA000DF06009D7763F1",
+    "renderRegionMs": 1.146,
+    "totalMs": 14376.0932,
+    "pixelSha256": "DCB55A1C9189E78F45FE59B4ADB4495A697436B3046AC93C55209621BD82E573",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 395399520,
+    "processPrivate": 2066788352,
+    "peakWorkingSet": 2070937600,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "sony-dsc08015",
+    "profile": "sx70-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 4688,
+    "sourceHeight": 7028,
+    "outputWidth": 5392,
+    "outputHeight": 6212,
+    "bytesSource": 395367168,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "sx70-v3",
+      "Identity": {
+        "ChemicalFamily": "SX70CreativeCandidate",
+        "PaperEra": "Modern SX-70 candidate, not historical Time-Zero",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.04,
+        "Shoulder": 0.4,
+        "Black": 0.018,
+        "Saturation": 0.83,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0011:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0011"
+        ],
+        "Observations": [
+          "General technical context, not measured SX-70 color; warm response is creative."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "sx70-color",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "sx70-v3",
+        "LegacyId": "sx70-color",
+        "ChemicalFamily": "SX70CreativeCandidate",
+        "PaperEra": "Modern SX-70 candidate, not historical Time-Zero",
+        "Palette": "Color",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.04,
+          "Shoulder": 0.4,
+          "Black": 0.018,
+          "Saturation": 0.83,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0011:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0011"
+          ],
+          "Observations": [
+            "General technical context, not measured SX-70 color; warm response is creative."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "C59DA26EB89E8CE4EEF1C1F1B29B11C2BA8233DA612BA59D630696CD33713723",
+    "renderRegionMs": 0.8853,
+    "totalMs": 14154.1287,
+    "pixelSha256": "7EEE958D789F5D075B6797888BD0B88CAB45D3895BE7B6AB26767C0BC6FDCEE0",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 395399520,
+    "processPrivate": 2029846528,
+    "peakWorkingSet": 2072461312,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "sony-dsc08015",
+    "profile": "reclaimed-blue-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 4688,
+    "sourceHeight": 7028,
+    "outputWidth": 5392,
+    "outputHeight": 6212,
+    "bytesSource": 395367168,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "reclaimed-blue-v3",
+      "Identity": {
+        "ChemicalFamily": "ReclaimedBlue",
+        "PaperEra": "Modern special edition; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0016:source",
+          "GROK-POL-0017:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0016",
+          "GROK-POL-0017"
+        ],
+        "Observations": [
+          "Blue-to-light mapping is a creative interpretation; no fetched controlled measurement."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "reclaimed-blue600",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "reclaimed-blue-v3",
+        "LegacyId": "reclaimed-blue600",
+        "ChemicalFamily": "ReclaimedBlue",
+        "PaperEra": "Modern special edition; batch unknown",
+        "Palette": "WhiteBlue",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0016:source",
+            "GROK-POL-0017:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0016",
+            "GROK-POL-0017"
+          ],
+          "Observations": [
+            "Blue-to-light mapping is a creative interpretation; no fetched controlled measurement."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "5D3F52A99F97C9F226A56455428EF39C823FAEAEDCFFC05442FB8207B0C4EA95",
+    "renderRegionMs": 0.8842,
+    "totalMs": 14180.7312,
+    "pixelSha256": "DE50DB9D5BDE68B988A1284D45C33F2812CA20EDC061242AD8F1D22BB46ACC2A",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 395399520,
+    "processPrivate": 1994747904,
+    "peakWorkingSet": 2072461312,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "sony-dsc08015",
+    "profile": "blue-duochrome-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 4688,
+    "sourceHeight": 7028,
+    "outputWidth": 5392,
+    "outputHeight": 6212,
+    "bytesSource": 395367168,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "blue-duochrome-v3",
+      "Identity": {
+        "ChemicalFamily": "BlueDuochrome",
+        "PaperEra": "Modern special edition; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.004,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0017:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0017"
+        ],
+        "Observations": [
+          "Black-to-blue palette intentionally differs from Reclaimed Blue; literature context only."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "blue-duochrome600",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "blue-duochrome-v3",
+        "LegacyId": "blue-duochrome600",
+        "ChemicalFamily": "BlueDuochrome",
+        "PaperEra": "Modern special edition; batch unknown",
+        "Palette": "BlackBlue",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.004,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0017:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0017"
+          ],
+          "Observations": [
+            "Black-to-blue palette intentionally differs from Reclaimed Blue; literature context only."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "C3EF2CB187951BA6C5EEAAAC6EDA212B34F09FC22CCE0BA733E1BA71926C4718",
+    "renderRegionMs": 0.7923,
+    "totalMs": 13854.5671,
+    "pixelSha256": "5E2C7224856DA6386DE09FACB6D5FBF63327AC5057DFECFA2C6C66426D9EAD70",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 395399520,
+    "processPrivate": 1962340352,
+    "peakWorkingSet": 2072461312,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "canon-tnan8886",
+    "profile": "modern-itype-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 5496,
+    "sourceHeight": 3670,
+    "outputWidth": 4220,
+    "outputHeight": 4863,
+    "bytesSource": 242043840,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "modern-itype-v3",
+      "Identity": {
+        "ChemicalFamily": "ModernIntegralColor",
+        "PaperEra": "Modern; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0.9,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0001:source",
+          "GROK-POL-0002:source",
+          "GROK-POL-0003:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0001",
+          "GROK-POL-0002",
+          "GROK-POL-0003"
+        ],
+        "Observations": [
+          "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "itype-color",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "modern-itype-v3",
+        "LegacyId": "itype-color",
+        "ChemicalFamily": "ModernIntegralColor",
+        "PaperEra": "Modern; batch unknown",
+        "Palette": "Color",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0.9,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0001:source",
+            "GROK-POL-0002:source",
+            "GROK-POL-0003:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0001",
+            "GROK-POL-0002",
+            "GROK-POL-0003"
+          ],
+          "Observations": [
+            "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "0879FCC112C4C3DCA533FDE95822A159D05E3F1513D1A670DF77D162E978EA99",
+    "renderRegionMs": 0.9972,
+    "totalMs": 8762.1664,
+    "pixelSha256": "56C0CF1C18A85A4ADBF1EE8CA127C496979D65F174CEF58E98DA709DAB50FA14",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 242069160,
+    "processPrivate": 2126004224,
+    "peakWorkingSet": 2355892224,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "canon-tnan8886",
+    "profile": "modern-bw-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 5496,
+    "sourceHeight": 3670,
+    "outputWidth": 4220,
+    "outputHeight": 4863,
+    "bytesSource": 242043840,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "modern-bw-v3",
+      "Identity": {
+        "ChemicalFamily": "ModernIntegralSilver",
+        "PaperEra": "Modern; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0020:source",
+          "GROK-POL-0021:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0020",
+          "GROK-POL-0021"
+        ],
+        "Observations": [
+          "Literature links only; neutral linear-luminance response is a creative choice."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "itype-bw",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "modern-bw-v3",
+        "LegacyId": "itype-bw",
+        "ChemicalFamily": "ModernIntegralSilver",
+        "PaperEra": "Modern; batch unknown",
+        "Palette": "NeutralBW",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0020:source",
+            "GROK-POL-0021:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0020",
+            "GROK-POL-0021"
+          ],
+          "Observations": [
+            "Literature links only; neutral linear-luminance response is a creative choice."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "2EA8D6B886618E9EB6B29363954DBD15C88692969D9608A6B416C03C506885F7",
+    "renderRegionMs": 0.7427,
+    "totalMs": 9273.8886,
+    "pixelSha256": "FBAE095E83B8FB37EF87456C77FF8686B75FED23A1A90906AA9DBD04A8F1C02D",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 242069160,
+    "processPrivate": 1416650752,
+    "peakWorkingSet": 2355892224,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "canon-tnan8886",
+    "profile": "sx70-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 5496,
+    "sourceHeight": 3670,
+    "outputWidth": 4220,
+    "outputHeight": 4863,
+    "bytesSource": 242043840,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "sx70-v3",
+      "Identity": {
+        "ChemicalFamily": "SX70CreativeCandidate",
+        "PaperEra": "Modern SX-70 candidate, not historical Time-Zero",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.04,
+        "Shoulder": 0.4,
+        "Black": 0.018,
+        "Saturation": 0.83,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0011:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0011"
+        ],
+        "Observations": [
+          "General technical context, not measured SX-70 color; warm response is creative."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "sx70-color",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "sx70-v3",
+        "LegacyId": "sx70-color",
+        "ChemicalFamily": "SX70CreativeCandidate",
+        "PaperEra": "Modern SX-70 candidate, not historical Time-Zero",
+        "Palette": "Color",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.04,
+          "Shoulder": 0.4,
+          "Black": 0.018,
+          "Saturation": 0.83,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0011:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0011"
+          ],
+          "Observations": [
+            "General technical context, not measured SX-70 color; warm response is creative."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "05BB8217AF9986F3E46B87DA46285AA93F49FA324F658148D3DBC737493BB5BD",
+    "renderRegionMs": 0.866,
+    "totalMs": 9033.6799,
+    "pixelSha256": "4D272225BD21BC020A2EA3ADB8ADBE2014FE2275F12D1FE2076277A44A43FE4B",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 242069160,
+    "processPrivate": 1252544512,
+    "peakWorkingSet": 2355892224,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "canon-tnan8886",
+    "profile": "reclaimed-blue-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 5496,
+    "sourceHeight": 3670,
+    "outputWidth": 4220,
+    "outputHeight": 4863,
+    "bytesSource": 242043840,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "reclaimed-blue-v3",
+      "Identity": {
+        "ChemicalFamily": "ReclaimedBlue",
+        "PaperEra": "Modern special edition; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0016:source",
+          "GROK-POL-0017:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0016",
+          "GROK-POL-0017"
+        ],
+        "Observations": [
+          "Blue-to-light mapping is a creative interpretation; no fetched controlled measurement."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "reclaimed-blue600",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "reclaimed-blue-v3",
+        "LegacyId": "reclaimed-blue600",
+        "ChemicalFamily": "ReclaimedBlue",
+        "PaperEra": "Modern special edition; batch unknown",
+        "Palette": "WhiteBlue",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0016:source",
+            "GROK-POL-0017:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0016",
+            "GROK-POL-0017"
+          ],
+          "Observations": [
+            "Blue-to-light mapping is a creative interpretation; no fetched controlled measurement."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "52CA59E0DBB15EFB482B9F2FCDF8E99B7AA668AE2F8E025AF1A4A78127D734E5",
+    "renderRegionMs": 0.743,
+    "totalMs": 8614.6732,
+    "pixelSha256": "242CEB82AAC036DA4080D5AB00AE13AC1A282BDB5E49E5048847E93DDEF5914D",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 242069160,
+    "processPrivate": 1277677568,
+    "peakWorkingSet": 2355892224,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "canon-tnan8886",
+    "profile": "blue-duochrome-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 5496,
+    "sourceHeight": 3670,
+    "outputWidth": 4220,
+    "outputHeight": 4863,
+    "bytesSource": 242043840,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "blue-duochrome-v3",
+      "Identity": {
+        "ChemicalFamily": "BlueDuochrome",
+        "PaperEra": "Modern special edition; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.004,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0017:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0017"
+        ],
+        "Observations": [
+          "Black-to-blue palette intentionally differs from Reclaimed Blue; literature context only."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "blue-duochrome600",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "blue-duochrome-v3",
+        "LegacyId": "blue-duochrome600",
+        "ChemicalFamily": "BlueDuochrome",
+        "PaperEra": "Modern special edition; batch unknown",
+        "Palette": "BlackBlue",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.004,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0017:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0017"
+          ],
+          "Observations": [
+            "Black-to-blue palette intentionally differs from Reclaimed Blue; literature context only."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "2EFA8EF64229FFC527E22DC281FEFDBF9970D0A75952CD5E1049093C44161D52",
+    "renderRegionMs": 0.8068,
+    "totalMs": 8485.6914,
+    "pixelSha256": "19588446CA6A4FEA6A64F103AFCF0B5E315FDCCA31FA9BAD4057725CCE97222D",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 242069160,
+    "processPrivate": 1278361600,
+    "peakWorkingSet": 2355892224,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "fuji-dscf0347-frozen",
+    "profile": "modern-itype-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 7752,
+    "sourceHeight": 5184,
+    "outputWidth": 5962,
+    "outputHeight": 6869,
+    "bytesSource": 482236416,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "modern-itype-v3",
+      "Identity": {
+        "ChemicalFamily": "ModernIntegralColor",
+        "PaperEra": "Modern; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0.9,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0001:source",
+          "GROK-POL-0002:source",
+          "GROK-POL-0003:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0001",
+          "GROK-POL-0002",
+          "GROK-POL-0003"
+        ],
+        "Observations": [
+          "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "itype-color",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "modern-itype-v3",
+        "LegacyId": "itype-color",
+        "ChemicalFamily": "ModernIntegralColor",
+        "PaperEra": "Modern; batch unknown",
+        "Palette": "Color",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0.9,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0001:source",
+            "GROK-POL-0002:source",
+            "GROK-POL-0003:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0001",
+            "GROK-POL-0002",
+            "GROK-POL-0003"
+          ],
+          "Observations": [
+            "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "D4D860B7300F7308606A99B0E38FCFB6E866BCB44F6E8F644A00F4116B91416F",
+    "renderRegionMs": 0.836,
+    "totalMs": 17986.7473,
+    "pixelSha256": "BBBF40DC3312BF9869CC42544293A5B617B395C77A92CF0BF143500229D6B966",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 482272188,
+    "processPrivate": 2718613504,
+    "peakWorkingSet": 2606927872,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "fuji-dscf0347-frozen",
+    "profile": "modern-bw-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 7752,
+    "sourceHeight": 5184,
+    "outputWidth": 5962,
+    "outputHeight": 6869,
+    "bytesSource": 482236416,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "modern-bw-v3",
+      "Identity": {
+        "ChemicalFamily": "ModernIntegralSilver",
+        "PaperEra": "Modern; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0020:source",
+          "GROK-POL-0021:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0020",
+          "GROK-POL-0021"
+        ],
+        "Observations": [
+          "Literature links only; neutral linear-luminance response is a creative choice."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "itype-bw",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "modern-bw-v3",
+        "LegacyId": "itype-bw",
+        "ChemicalFamily": "ModernIntegralSilver",
+        "PaperEra": "Modern; batch unknown",
+        "Palette": "NeutralBW",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0020:source",
+            "GROK-POL-0021:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0020",
+            "GROK-POL-0021"
+          ],
+          "Observations": [
+            "Literature links only; neutral linear-luminance response is a creative choice."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "290A219364BDAB7A115F12DC3F81A5ED39BCD49796BCF093D07AB590D1ACBD72",
+    "renderRegionMs": 0.8116,
+    "totalMs": 18178.4587,
+    "pixelSha256": "1FF9B64B08721F54E2FA73EE7901F5AD9EA18C64626DC9587E26D9824E71EB45",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 482272188,
+    "processPrivate": 2514976768,
+    "peakWorkingSet": 2749120512,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "fuji-dscf0347-frozen",
+    "profile": "sx70-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 7752,
+    "sourceHeight": 5184,
+    "outputWidth": 5962,
+    "outputHeight": 6869,
+    "bytesSource": 482236416,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "sx70-v3",
+      "Identity": {
+        "ChemicalFamily": "SX70CreativeCandidate",
+        "PaperEra": "Modern SX-70 candidate, not historical Time-Zero",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.04,
+        "Shoulder": 0.4,
+        "Black": 0.018,
+        "Saturation": 0.83,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0011:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0011"
+        ],
+        "Observations": [
+          "General technical context, not measured SX-70 color; warm response is creative."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "sx70-color",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "sx70-v3",
+        "LegacyId": "sx70-color",
+        "ChemicalFamily": "SX70CreativeCandidate",
+        "PaperEra": "Modern SX-70 candidate, not historical Time-Zero",
+        "Palette": "Color",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.04,
+          "Shoulder": 0.4,
+          "Black": 0.018,
+          "Saturation": 0.83,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0011:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0011"
+          ],
+          "Observations": [
+            "General technical context, not measured SX-70 color; warm response is creative."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "146357D34F2B46B19B6DE08BDB694330391C6964469847CDF8BFA7002179337A",
+    "renderRegionMs": 0.8855,
+    "totalMs": 18118.7013,
+    "pixelSha256": "809868F5775B4876D23BBE91544E25E5CF37F4287D7DA94B16339D6AEEE5A2FB",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 482272188,
+    "processPrivate": 2515750912,
+    "peakWorkingSet": 2749120512,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "fuji-dscf0347-frozen",
+    "profile": "reclaimed-blue-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 7752,
+    "sourceHeight": 5184,
+    "outputWidth": 5962,
+    "outputHeight": 6869,
+    "bytesSource": 482236416,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "reclaimed-blue-v3",
+      "Identity": {
+        "ChemicalFamily": "ReclaimedBlue",
+        "PaperEra": "Modern special edition; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.012,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0016:source",
+          "GROK-POL-0017:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0016",
+          "GROK-POL-0017"
+        ],
+        "Observations": [
+          "Blue-to-light mapping is a creative interpretation; no fetched controlled measurement."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "reclaimed-blue600",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "reclaimed-blue-v3",
+        "LegacyId": "reclaimed-blue600",
+        "ChemicalFamily": "ReclaimedBlue",
+        "PaperEra": "Modern special edition; batch unknown",
+        "Palette": "WhiteBlue",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0016:source",
+            "GROK-POL-0017:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0016",
+            "GROK-POL-0017"
+          ],
+          "Observations": [
+            "Blue-to-light mapping is a creative interpretation; no fetched controlled measurement."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "1F910A59F619D789909D0DC4F809AD452E84C071B6D84AA445E87072CF4B0835",
+    "renderRegionMs": 0.8077,
+    "totalMs": 17754.0202,
+    "pixelSha256": "65BC66DF49D582570451A8EFB27A5AAA6861E767489A3CCC75BBE3331AD77613",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 482272188,
+    "processPrivate": 2481696768,
+    "peakWorkingSet": 2749120512,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  },
+  {
+    "input": "fuji-dscf0347-frozen",
+    "profile": "blue-duochrome-v3",
+    "scope": "FULL_SIZE_RESEARCH_STRIP_TIFF_NOT_PRODUCT_UI",
+    "sourceWidth": 7752,
+    "sourceHeight": 5184,
+    "outputWidth": 5962,
+    "outputHeight": 6869,
+    "bytesSource": 482236416,
+    "recipe": {
+      "AlgorithmVersion": 3,
+      "ProfileId": "blue-duochrome-v3",
+      "Identity": {
+        "ChemicalFamily": "BlueDuochrome",
+        "PaperEra": "Modern special edition; batch unknown",
+        "ProfileVersion": 1
+      },
+      "Response": {
+        "ExposureEv": 0,
+        "Toe": 0.025,
+        "Shoulder": 0.3,
+        "Black": 0.004,
+        "Saturation": 0,
+        "ApparentDensity": 1
+      },
+      "Provenance": {
+        "EvidenceStatus": "CreativeSimulation",
+        "SourceIds": [
+          "GROK-POL-0017:source"
+        ],
+        "SampleIds": [
+          "GROK-POL-0017"
+        ],
+        "Observations": [
+          "Black-to-blue palette intentionally differs from Reclaimed Blue; literature context only."
+        ],
+        "ContraryEvidence": [
+          "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+        ],
+        "CalibrationEligible": false
+      },
+      "Optics": {
+        "Version": 1,
+        "DetailMix": 0.1,
+        "HighlightDiffusion": 0.07,
+        "Radius": 2
+      },
+      "Emulsion": {
+        "Version": 1,
+        "Microstructure": 0.0015,
+        "DevelopmentUnevenness": 0.004,
+        "DevelopmentDefects": 0,
+        "ExpiredAging": 0
+      },
+      "Surface": {
+        "Version": 1,
+        "Frame": true,
+        "BaseColor": "Warm",
+        "PaperTexture": 0.002,
+        "PaperScratches": 0,
+        "ScanDust": 0
+      },
+      "Geometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      },
+      "Random": {
+        "RootSeed": 20261016,
+        "PrngVersion": "SplitMix64SubstreamsV1",
+        "ProfileId": "blue-duochrome600",
+        "ProfileVersion": 1,
+        "Tier": "\u7A33\u5B9A\u51FA\u7247",
+        "ColorShift": 0.005352844019536341,
+        "SpreadScale": 0.7494162649131916,
+        "TextureScale": 0.7287762467761749,
+        "Geometry": [
+          {
+            "Kind": "Spread",
+            "X": 0.8225459715952749,
+            "Y": 0.5673826244775128,
+            "Radius": 0.39253863017517143,
+            "Strength": 0.12588177138886575,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.6813547378007233,
+            "Y": 0.6991749557759708,
+            "Radius": 0.18240547004416605,
+            "Strength": 0.0786081253205276,
+            "Period": 0
+          },
+          {
+            "Kind": "Spread",
+            "X": 0.018960869152806592,
+            "Y": 0.6905987485300852,
+            "Radius": 0.12111954976909732,
+            "Strength": 0.12003248531226285,
+            "Period": 0
+          },
+          {
+            "Kind": "Corner",
+            "X": 1,
+            "Y": 1,
+            "Radius": 0.10678393004621721,
+            "Strength": 0.25,
+            "Period": 0
+          },
+          {
+            "Kind": "Roller",
+            "X": 0.21256175078549,
+            "Y": 0.5147176785123291,
+            "Radius": 0.017075828205978857,
+            "Strength": 0.175,
+            "Period": 0.06947621170636978
+          }
+        ]
+      },
+      "Amount": 1,
+      "Profile": {
+        "Id": "blue-duochrome-v3",
+        "LegacyId": "blue-duochrome600",
+        "ChemicalFamily": "BlueDuochrome",
+        "PaperEra": "Modern special edition; batch unknown",
+        "Palette": "BlackBlue",
+        "Response": {
+          "ExposureEv": 0,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.004,
+          "Saturation": 0,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0017:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0017"
+          ],
+          "Observations": [
+            "Black-to-blue palette intentionally differs from Reclaimed Blue; literature context only."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        }
+      }
+    },
+    "regionHash": "8887399DDD20AAC2DB34DCF3A5195786794937F280D89A0EC79A6A0209494B2D",
+    "renderRegionMs": 1.4817,
+    "totalMs": 17061.9489,
+    "pixelSha256": "717FAFD7DA50EB3DFE3D2268A8E233EBC807DB23A11454E7239CEFD7A4283056",
+    "iccExact": true,
+    "orientation": 1,
+    "bits": 16,
+    "retainedLedger": 482272188,
+    "processPrivate": 2481049600,
+    "peakWorkingSet": 2749120512,
+    "pngJpeg": "NOT_RUN_THIS_PASS",
+    "preview": "Synthetic area oracle tested; full-photo preview not generated in this pass",
+    "reopen": "JSON frozen recipe; not native product project"
+  }
+]
