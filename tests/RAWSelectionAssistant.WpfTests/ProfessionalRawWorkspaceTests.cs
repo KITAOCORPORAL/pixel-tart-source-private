@@ -81,6 +81,26 @@ public sealed class ProfessionalRawWorkspaceTests
         }
         await File.WriteAllTextAsync(Path.Combine(evidence,"product-real.json"),System.Text.Json.JsonSerializer.Serialize(results,new System.Text.Json.JsonSerializerOptions{WriteIndented=true}));
     }
+    [TestMethod]
+    public async Task LegacyRawSessionTransferKeepsHighPrecisionSourceForSubsequentEditing()
+    {
+        var root=Path.Combine(Path.GetTempPath(),"Kitao-LegacyTransfer-"+Guid.NewGuid());Directory.CreateDirectory(root);
+        try
+        {
+            var input=Path.Combine(root,"synthetic.arw");await File.WriteAllBytesAsync(input,[1,2,3]);var session=Path.Combine(root,"legacy.ptstudio.json");
+            using var first=new ReferenceColorWorkspaceViewModel(new Dialogs(root),rawDecoder:new FakeLegacy());await first.LoadTargetAsync(input);first.Editor.Exposure=.3;await Task.Delay(500);await first.SaveSessionAsync(session);
+            using var restored=new ReferenceColorWorkspaceViewModel(new Dialogs(root),rawDecoder:new FakeLegacy());await restored.LoadSessionAsync(session);
+            Assert.IsNull(restored.ActiveTarget!.RawDefinition);Assert.IsFalse(restored.Editor.IndependentRawMode);
+            first.Editor.Exposure=.8;restored.Editor.Exposure=.8;await Task.Delay(650);
+            Assert.IsNotNull(first.Editor.MatchedImage);Assert.IsNotNull(restored.Editor.MatchedImage);
+            CollectionAssert.AreEqual(Pixels(first.Editor.MatchedImage),Pixels(restored.Editor.MatchedImage));
+            // Bitmap identity alone is insufficient: the next edit must retain the same
+            // high precision RAW branch and frozen generation, not a decoded RGB24 proxy.
+            Assert.AreSame(restored.ActiveTarget.RawMaster,typeof(TetherReferenceModeViewModel).GetField("_frozenRawMaster",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic)!.GetValue(restored.Editor));
+            Assert.IsNotNull(typeof(TetherReferenceModeViewModel).GetField("_rawPreviewMaster",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic)!.GetValue(restored.Editor));
+        }
+        finally{Directory.Delete(root,true);}
+    }
     private sealed class Failing:IProfessionalRawDecoder
     {public Task<ProfessionalRawMaster> DecodeAsync(string path,ProfessionalRawDefinition definition,CancellationToken token=default)=>throw new InvalidDataException("缺少配置");}
     private sealed class Delayed:IProfessionalRawDecoder

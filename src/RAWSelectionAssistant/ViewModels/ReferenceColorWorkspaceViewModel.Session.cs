@@ -142,11 +142,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 ActiveTarget=active;TargetName=active.FileName;TargetImage=staged.TargetImage;
                 Editor.RestoreTargetEngine(active.EngineSnapshot,active.ExecutionModeSnapshot);
                 Editor.ApplyTargetSnapshot(active.AppliedLookSnapshot,active.FilmSettingsSnapshot,active.ColorAdjustmentStackSnapshot,render:false,targetIdentity:active.ActiveEditVersionId??active.Id);
-                Editor.IndependentRawMode=staged.Editor.IndependentRawMode;
-                await Editor.SetSourceAsync(active.AssetId,staged.Editor.SourceImage,token,render:false);
-                if(staged.Editor.MatchedImage is {} image)Editor.PresentIndependentRaw(image);
-                Editor.Enabled=staged.Editor.Enabled;Editor.ViewMode=staged.Editor.ViewMode;
-                Editor.SetIndependentRawSize(staged.Editor.SourcePixelSize);
+                Editor.AdoptPreparedSource(staged.Editor,active.AssetId,token);
+                Editor.RestoreSessionHistory(staged.Editor.CaptureSessionHistory());
                 RawExposureEv=staged.RawExposureEv;RawRedGain=staged.RawRedGain;RawGreenGain=staged.RawGreenGain;RawBlueGain=staged.RawBlueGain;RawUseCameraWhiteBalance=staged.RawUseCameraWhiteBalance;
                 RawPipelineStatus=staged.RawPipelineStatus;InstantDimensions=staged.InstantDimensions;FailedTarget=staged.FailedTarget;
                 foreach(var name in new[]{nameof(RawExposureEv),nameof(RawRedGain),nameof(RawGreenGain),nameof(RawBlueGain),nameof(RawUseCameraWhiteBalance),nameof(RawPipelineStatus),nameof(InstantDimensions)})OnPropertyChanged(name);

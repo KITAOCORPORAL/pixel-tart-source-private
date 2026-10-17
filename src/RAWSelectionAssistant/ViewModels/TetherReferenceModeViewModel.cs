@@ -723,6 +723,22 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         if (render && (_allowReferenceManagement || ApplyToFollowing) && Enabled && source is not null) await RenderAsync(token);
     }
 
+    /// <summary>Adopt only immutable/managed prepared inputs; no decode, proxy creation or render.
+    /// The staging editor may release its references after the workspace transfer commits.</summary>
+    internal void AdoptPreparedSource(TetherReferenceModeViewModel prepared, Guid? assetId,CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();
+        ResetDetailPreview();_presetPreviewNode=null;NotifyPresetPreview();
+        _render?.Cancel();Interlocked.Increment(ref _revision);
+        _assetId=assetId;_source=prepared._source;_interactiveSource=prepared._interactiveSource;
+        _rawPreviewMaster=prepared._rawPreviewMaster;_interactiveRawMaster=prepared._interactiveRawMaster;
+        _frozenRawMaster=prepared._frozenRawMaster;_matchV4Session=null;_matchV4SessionKey=null;
+        IndependentRawMode=prepared.IndependentRawMode;IndependentRawSize=prepared.IndependentRawSize;
+        Enabled=prepared.Enabled;ViewMode=prepared.ViewMode;MatchedImage=prepared.MatchedImage;
+        OnPropertyChanged(nameof(SourceImage));OnPropertyChanged(nameof(SourcePixelSize));
+        ApplyCommand.RaiseCanExecuteChanged();ExportCubeCommand.RaiseCanExecuteChanged();RaiseViewProperties();
+    }
+
     public void SetResponsiveContext(bool compact)
     {
         if (compact && !FocusView && ContextRailOpen) ContextRailOpen = false;
