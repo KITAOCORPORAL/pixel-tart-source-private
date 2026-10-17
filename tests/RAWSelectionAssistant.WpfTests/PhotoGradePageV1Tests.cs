@@ -86,6 +86,28 @@ namespace RAWSelectionAssistant.WpfTests;
   }
   finally{Directory.Delete(root,true);}
  });
+ [TestMethod]public Task SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters()=>RunSta(async()=>
+ {
+  EnsureTestApplication();var root=Path.Combine(Path.GetTempPath(),"PhotoSyncPixels-"+Guid.NewGuid());Directory.CreateDirectory(root);
+  try
+  {
+   string Input(string name){var p=Path.Combine(root,name);StudioQuickExport.Encode(BitmapSource.Create(80,53,96,96,PixelFormats.Rgb24,null,Enumerable.Range(0,80*53*3).Select(x=>(byte)(20+x%200)).ToArray(),80*3),p,p,StudioExportFormat.Png);return p;}
+   string Pixels(BitmapSource b){var converted=new FormatConvertedBitmap(b,PixelFormats.Rgb24,null,0);var bytes=new byte[b.PixelWidth*b.PixelHeight*3];converted.CopyPixels(bytes,b.PixelWidth*3,0);return Convert.ToHexString(SHA256.HashData(bytes));}
+   using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));await vm.LoadTargetAsync(Input("a.png"));await vm.LoadTargetAsync(Input("b.png"));var target=vm.ActiveTarget!;
+   var view=new PhotoGradePageView{DataContext=vm};view.Measure(new Size(1400,850));view.Arrange(new Rect(0,0,1400,850));view.UpdateLayout();var panel=(StudioToolPanel)view.FindName("CurrentParameters");
+   var saturation=Descendants<Slider>(panel).Single(x=>Equals(x.Tag,"saturation"));saturation.SetCurrentValue(Slider.ValueProperty,.35);await Dispatcher.Yield(DispatcherPriority.DataBind);
+   vm.Editor.CopyCurrentLookTo([target]);var original=target.ColorAdjustmentStackSnapshot!.DeepClone();
+   var before=Pixels(await vm.Editor.ProcessForExportAsync(target.Path,target.AppliedLookSnapshot,target.FilmSettingsSnapshot,CancellationToken.None,target.ColorAdjustmentStackSnapshot));
+   await vm.ActivateTargetCommand.ExecuteAsync(vm.Targets[0]);vm.Editor.AddAdjustmentNodeCommand.Execute("Curve");var selected=vm.Editor.SelectedAdjustmentNode!;Assert.AreEqual(ColorStudioNodeType.Curve,selected.Type);
+   // Curve node must have a non-identity shape, not merely exist.
+   vm.Editor.SetCurvePoints("rgb",[new(0,0),new(.5,.8),new(1,1)]);await Dispatcher.Yield(DispatcherPriority.DataBind);
+   target.IsSelected=true;Assert.IsTrue(vm.PhotoGradeSyncStepCommand.CanExecute(null));vm.PhotoGradeSyncStepCommand.Execute(null);
+   var after=Pixels(await vm.Editor.ProcessForExportAsync(target.Path,target.AppliedLookSnapshot,target.FilmSettingsSnapshot,CancellationToken.None,target.ColorAdjustmentStackSnapshot));Assert.AreNotEqual(before,after);
+   var existing=original.Nodes.Single(x=>x.Type==ColorStudioNodeType.BasicTone);Assert.AreEqual(JsonSerializer.Serialize(existing),JsonSerializer.Serialize(target.ColorAdjustmentStackSnapshot!.Nodes.Single(x=>x.Id==existing.Id)));
+   view.RaiseEvent(new RoutedEventArgs(FrameworkElement.UnloadedEvent));
+  }
+  finally{Directory.Delete(root,true);}
+ });
  private static IEnumerable<T> Descendants<T>(DependencyObject d)where T:DependencyObject{for(int i=0;i<VisualTreeHelper.GetChildrenCount(d);i++){var c=VisualTreeHelper.GetChild(d,i);if(c is T t)yield return t;foreach(var v in Descendants<T>(c))yield return v;}}
  private sealed class Dialogs(string root,string? second=null):IDialogService
  {public string? ChooseFolder(string title,string? initialDirectory=null)=>root;public IReadOnlyList<string> ChooseFiles(string title,string filter,bool multiselect=true)=>second is null?[]:[second];public string? ChooseSaveFile(string title,string filter,string defaultExtension,string? suggestedFileName=null)=>null;public IReadOnlyList<string>? ManageQuickTools(IReadOnlyList<string> ids)=>null;public void ShowInfo(string m){}public void ShowError(string m){}public bool Confirm(string m,string t)=>true;public HelpAction ShowHelp()=>HelpAction.None;public void ShowFeedback(){}public RAWSelectionAssistant.Core.Models.RawFileEntry? ChooseRawCandidate(IReadOnlyList<RAWSelectionAssistant.Core.Models.RawFileEntry> c)=>null;public bool ShowMediaDetails(RAWSelectionAssistant.Core.Models.MediaSelectionItem i,bool a)=>false;public void RevealFile(string p){}}

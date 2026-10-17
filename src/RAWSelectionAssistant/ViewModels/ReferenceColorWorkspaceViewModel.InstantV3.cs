@@ -91,6 +91,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public double InstantV3DefectAngle {get=>_instantV3DefectAngle;set{SetProperty(ref _instantV3DefectAngle,value);}}
  private double _instantV3DefectScale=1;
  public double InstantV3DefectScale {get=>_instantV3DefectScale;set{SetProperty(ref _instantV3DefectScale,value);}}
+ private CancellationTokenSource? _secondSelectionCancellation;
  public CandidateMultipleInput? InstantSecondInput {get;private set;}
  public string InstantSecondSourceName=>InstantSecondInput is null?"—":System.IO.Path.GetFileName(InstantSecondInput.Path);
  private double _instantSecondWeight=.5;
@@ -112,7 +113,15 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private readonly Dictionary<Guid,Stack<Guid>> _instantV3Redo=[];
  private void InitializeInstantV3Commands()
  {
-  SelectSecondExposureCommand=new(_=>{var selected=_dialogs.ChooseFiles("Select second photo","Photo|*.png;*.tif;*.tiff;*.jpg;*.jpeg",false).FirstOrDefault();if(selected is not null){try{InstantSecondInput=SecondExposureDecoder.Describe(selected);OnPropertyChanged(nameof(InstantSecondSourceName));}catch(Exception e)when(e is IOException or NotSupportedException or InvalidDataException){StatusText="Second exposure: "+e.Message;}}return Task.CompletedTask;});
+  SelectSecondExposureCommand=new(async _=>
+  {
+   if(ActiveTarget is not{} target)return;var revision=Volatile.Read(ref _activationRevision);
+   var selected=_dialogs.ChooseFiles("Select second photo","Photo|*.png;*.tif;*.tiff;*.jpg;*.jpeg",false).FirstOrDefault();if(selected is null)return;
+   _secondSelectionCancellation?.Cancel();_secondSelectionCancellation?.Dispose();_secondSelectionCancellation=new();var token=_secondSelectionCancellation.Token;
+   try{var input=await Task.Run(()=>SecondExposureDecoder.Describe(selected,token),token);if(!_disposed&&ReferenceEquals(ActiveTarget,target)&&revision==Volatile.Read(ref _activationRevision)){InstantSecondInput=input;OnPropertyChanged(nameof(InstantSecondSourceName));}}
+   catch(OperationCanceledException){}
+   catch(Exception e)when(e is IOException or NotSupportedException or InvalidDataException or System.Runtime.InteropServices.COMException){StatusText="Second exposure: "+e.Message;}
+  },_=>InstantEditingAllowed);
   ClearSecondExposureCommand=new(_=>{InstantSecondInput=null;OnPropertyChanged(nameof(InstantSecondSourceName));});
   UndoInstantV3Command=new(async _=>await MoveInstantVersion(_instantV3Undo,_instantV3Redo));
   RedoInstantV3Command=new(async _=>await MoveInstantVersion(_instantV3Redo,_instantV3Undo));

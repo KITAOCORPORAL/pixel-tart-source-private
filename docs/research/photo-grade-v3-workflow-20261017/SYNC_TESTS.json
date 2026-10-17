@@ -1,0 +1,69 @@
+{
+  "root": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\photo-grade-v3\\02-sync-fixed\\run-20261017-200407-d590b1be",
+  "assembly": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\photo-grade-v3\\02-sync-tests-fixed\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+  "assemblySha256": "a3492082ac39555264786dce90c7f528db03b7e2d6411778187032a5ab3854da",
+  "discovered": 1647,
+  "selected": 4,
+  "runs": [
+    {
+      "pid": 38636,
+      "exitCode": 0,
+      "timeout": false,
+      "startedUtc": "2026-10-17T12:04:08Z",
+      "elapsedSeconds": 6.592999999993481,
+      "command": [
+        "C:/Program Files/dotnet/dotnet.exe",
+        "vstest",
+        "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\photo-grade-v3\\02-sync-tests-fixed\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+        "/Settings:N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\photo-grade-v3\\02-sync-fixed\\run-20261017-200407-d590b1be\\000\\runsettings.xml",
+        "/Logger:trx;LogFileName=results.trx"
+      ],
+      "workingDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017",
+      "temporaryDirectory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\photo-grade-v3\\02-sync-fixed\\run-20261017-200407-d590b1be\\000\\temp",
+      "limitSeconds": 180,
+      "class": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests",
+      "executionUnit": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests",
+      "directory": "N:\\pixart\\kitao-v3-corrections-colorpage-20261017\\artifacts\\photo-grade-v3\\02-sync-fixed\\run-20261017-200407-d590b1be\\000",
+      "expected": 4,
+      "results": [
+        {
+          "id": "1f5e92a1-4891-8512-abc8-13f05ace7b0a",
+          "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.RealPageOpenAdjustHistorySaveSyncAndExportKeepsLegacyPage",
+          "display": "RealPageOpenAdjustHistorySaveSyncAndExportKeepsLegacyPage",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "13f91347-a5c4-8996-b2cf-8c221f2ec6e0",
+          "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents",
+          "display": "FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "16627443-d328-8418-bfae-f2f06073dfa9",
+          "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters",
+          "display": "SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters",
+          "outcome": "Passed",
+          "error": ""
+        },
+        {
+          "id": "12f603ee-dca1-8712-9ce9-e5e71dc52774",
+          "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+          "display": "AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+          "outcome": "NotExecuted",
+          "error": "Assert.Inconclusive 失败。Explicit authorized frozen-photo manifest is required; no directory scan.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.<>c.<<AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity>b__2_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+        }
+      ],
+      "errors": [
+        "non-passing or not-executed tests"
+      ]
+    }
+  ],
+  "status": "FAILED",
+  "p1ExecutionUnit": "method",
+  "counts": {
+    "Passed": 3,
+    "NotExecuted": 1
+  }
+}

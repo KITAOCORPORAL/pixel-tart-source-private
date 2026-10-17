@@ -5,11 +5,16 @@ public sealed record CandidateMultipleInput(int Version,string Path,string Sha25
 {
  public CandidateMultipleInput Validate()
  {
-  if(Version!=1||!System.IO.Path.IsPathFullyQualified(Path)||Sha256.Length!=64||!Sha256.All(Uri.IsHexDigit)||Width<=0||Height<=0||Orientation!=1||Mode is not("NormalizedMix" or "ExposureSum")||Domain!="OrientedDisplaySrgbD65V1"||!double.IsFinite(Weight)||Weight<0||Weight>1||!double.IsFinite(CropX)||CropX<0||CropX>1||!double.IsFinite(CropY)||CropY<0||CropY>1||!double.IsFinite(Zoom)||Zoom<1||Zoom>4)throw new InvalidDataException("Unknown/invalid second exposure contract");return this;
+  if(Version is not(1 or 2)||!System.IO.Path.IsPathFullyQualified(Path)||Sha256.Length!=64||!Sha256.All(Uri.IsHexDigit)||Width<=0||Height<=0||Orientation!=1||Mode is not("NormalizedMix" or "ExposureSum")||Domain!="OrientedDisplaySrgbD65V1"||!double.IsFinite(Weight)||Weight<0||Weight>1||!double.IsFinite(CropX)||CropX<0||CropX>1||!double.IsFinite(CropY)||CropY<0||CropY>1||!double.IsFinite(Zoom)||Zoom<1||Zoom>4)throw new InvalidDataException("Unknown/invalid second exposure contract");return this;
  }
- public void ValidateSource(){Validate();if(!File.Exists(Path))throw new FileNotFoundException("SECOND_SOURCE_MISSING",Path);using var file=File.OpenRead(Path);if(!Convert.ToHexString(SHA256.HashData(file)).Equals(Sha256,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("SECOND_SOURCE_CHANGED");}
+ public void ValidateSource(CancellationToken token=default){Validate();if(!File.Exists(Path))throw new FileNotFoundException("SECOND_SOURCE_MISSING",Path);using var file=File.OpenRead(Path);if(!HashSource(file,token).Equals(Sha256,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("SECOND_SOURCE_CHANGED");}
+  public static string HashSource(Stream stream,CancellationToken token=default)
+  {
+   using var hash=IncrementalHash.CreateHash(HashAlgorithmName.SHA256);var buffer=new byte[1024*1024];int read;
+   while(true){token.ThrowIfCancellationRequested();read=stream.Read(buffer);if(read==0)break;hash.AppendData(buffer,0,read);}token.ThrowIfCancellationRequested();return Convert.ToHexString(hash.GetHashAndReset());
+  }
 }
-public interface ISecondExposureDecoder { HighBitDepthImageBuffer Read(CandidateMultipleInput input,CancellationToken token); }
+public interface ISecondExposureDecoder { bool ValidatesSourceIdentity=>false; HighBitDepthImageBuffer Read(CandidateMultipleInput input,CancellationToken token); }
 public static class SecondExposureInputs
 {
  // Application supplies its existing colour-managed decoder; Core never scans paths or guesses profiles.

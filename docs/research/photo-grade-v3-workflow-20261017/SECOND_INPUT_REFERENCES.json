@@ -1,0 +1,44 @@
+[
+  {
+    "repository": "python-pillow/Pillow",
+    "commit": "bb1d8e8ab8d29048624d96e3ee53cecf7c13d13d",
+    "license": "MIT-CMU",
+    "entryPoints": "ImagingAlphaComposite",
+    "redistribution": "Not bundled or copied",
+    "files": [
+      {
+        "path": "src/libImaging/AlphaComposite.c",
+        "sha256": null,
+        "fetchExitCode": 35,
+        "alternateFetchExitCode": 22
+      },
+      {
+        "path": "LICENSE",
+        "sha256": null,
+        "fetchExitCode": 35,
+        "alternateFetchExitCode": 22
+      }
+    ]
+  },
+  {
+    "repository": "FFmpeg/FFmpeg",
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "license": "LGPL2.1+; local executable GPL research only",
+    "entryPoints": "blend_slice_packed_rgb / alpha straight overlay",
+    "redistribution": "Not bundled or copied",
+    "files": [
+      {
+        "path": "libavfilter/vf_overlay.c",
+        "sha256": null,
+        "fetchExitCode": 28,
+        "alternateFetchExitCode": 28
+      },
+      {
+        "path": "COPYING.LGPLv2.1",
+        "sha256": null,
+        "fetchExitCode": 35,
+        "alternateFetchExitCode": 22
+      }
+    ]
+  }
+]

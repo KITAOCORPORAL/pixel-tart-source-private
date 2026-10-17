@@ -38,15 +38,15 @@ public sealed class StudioToolPanel : StackPanel
     {
         DataContextChanged += (_, _) => BindEditor();
         Loaded += (_, _) => BindEditor();
-        Unloaded += (_, _) => { if (_editor is not null) _editor.PropertyChanged -= Changed; _editor = null; };
+        Unloaded += (_, _) => { if (_editor is not null) PropertyChangedEventManager.RemoveHandler(_editor,Changed,string.Empty); _editor = null; };
     }
     private void BindEditor()
     {
         var editor = (DataContext as ReferenceColorWorkspaceViewModel)?.Editor ?? DataContext as TetherReferenceModeViewModel;
         if (ReferenceEquals(editor, _editor)) return;
-        if (_editor is not null) _editor.PropertyChanged -= Changed;
+        if (_editor is not null) PropertyChangedEventManager.RemoveHandler(_editor,Changed,string.Empty);
         _editor = editor;
-        if (_editor is not null) _editor.PropertyChanged += Changed;
+        if (_editor is not null) PropertyChangedEventManager.AddHandler(_editor,Changed,string.Empty);
         Build();
     }
     private static void Rebuild(DependencyObject d, DependencyPropertyChangedEventArgs e) => ((StudioToolPanel)d).Build();

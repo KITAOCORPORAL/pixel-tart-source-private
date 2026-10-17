@@ -634,7 +634,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private async Task ActivateTargetAsync(ReferenceTargetItem target)
     {
-        if(IsInstantGenerating)_instantCancellation?.Cancel();
+        _secondSelectionCancellation?.Cancel();if(IsInstantGenerating)_instantCancellation?.Cancel();
         InvalidateProfessionalPreview();foreach(var other in Targets.Where(x=>!ReferenceEquals(x,target)))other.LinearRawMaster=null;if(target.RawDefinition is null)target.LinearRawMaster=null;
         var revision = Interlocked.Increment(ref _activationRevision);
         _activationCancellation?.Cancel(); _activationCancellation?.Dispose();
@@ -711,6 +711,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, OnStudioLanguageChanged, nameof(StudioLocalizationService.Language));
         CancelRangeSelection();
         _analysisCancellation?.Cancel(); _analysisCache.Clear();
+        _secondSelectionCancellation?.Cancel();_secondSelectionCancellation?.Dispose();
         _instantCancellation?.Cancel();_instantCancellation?.Dispose();
         ClearHqPreview();InvalidateProfessionalPreview();_professionalDetailCancellation?.Dispose();foreach(var target in Targets){target.LinearRawMaster=null;target.RawMaster=null;}
         _activationCancellation?.Cancel(); _activationCancellation?.Dispose(); _sourceCache.Clear();
