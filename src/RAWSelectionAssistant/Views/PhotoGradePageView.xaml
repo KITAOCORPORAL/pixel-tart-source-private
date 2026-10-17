@@ -28,7 +28,7 @@
    </Grid>
    <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto"><StackPanel>
     <TextBlock Text="{views:StudioText PhotoGradeParameters}" Foreground="{DynamicResource TextPrimaryBrush}"/>
-    <views:StudioToolPanel x:Name="CurrentParameters" NodeTypes="BasicTone"/>
+    <views:StudioToolPanel x:Name="CurrentParameters" IsEnabled="{Binding PhotoGradeRasterToolsEnabled}" NodeTypes="BasicTone"/>
     <Expander Header="{views:StudioText PhotoGradeAnalysis}"><StackPanel><TextBlock Text="{Binding RawPipelineStatus}" TextWrapping="Wrap" Foreground="{DynamicResource TextPrimaryBrush}"/><TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" Foreground="{DynamicResource TextPrimaryBrush}"/></StackPanel></Expander>
     <TextBlock Text="{views:StudioText PhotoGradeMask}"/><ComboBox ItemsSource="{Binding PhotoMaskColors}" SelectedItem="{Binding PhotoMaskColor}"/>
     <TextBlock Text="{views:StudioText PhotoGradeSync}" TextWrapping="Wrap"/>

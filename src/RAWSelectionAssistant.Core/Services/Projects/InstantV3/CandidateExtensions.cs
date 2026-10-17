@@ -10,7 +10,7 @@ public static class Womb01351Reference
 {
  public static ColorVector3 Apply(ColorVector3 c,string identity)
  {
-  if(new[]{c.X,c.Y,c.Z}.Any(x=>!double.IsFinite(x)))throw new InvalidDataException("Non-finite legacy formula input");
+  if(!double.IsFinite(c.X)||!double.IsFinite(c.Y)||!double.IsFinite(c.Z))throw new InvalidDataException("Non-finite legacy formula input");
   var l=.2126*c.X+.7152*c.Y+.0722*c.Z;
   ColorVector3 Mix(double saturation)=>new(l+(c.X-l)*saturation,l+(c.Y-l)*saturation,l+(c.Z-l)*saturation);
   return identity switch

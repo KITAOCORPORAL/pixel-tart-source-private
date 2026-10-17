@@ -28,6 +28,9 @@ public static class CandidateSpatial
         int left,int top,int width,int height,CancellationToken token=default,int tileWidth=256,int tileHeight=64)
     {
         recipe=recipe.Freeze();var palette=recipe.Profile.Palette;var plan=Plan(tileWidth,tileHeight);
+        var womb=recipe.Creative is{Version:2,Stock:not "Base"};
+        var toneRecipe=womb?recipe with{Response=recipe.Response with{ExposureEv=0}}:recipe;
+        var exposureGain=Math.Pow(2,recipe.Response.ExposureEv);
         if(left<0||top<0||width<=0||height<=0||left+width>orientedDisplay.Width||top+height>orientedDisplay.Height)throw new ArgumentOutOfRangeException(nameof(left));
         CandidateProcessingEvidence.Enter("PixelRender",token);
         // Output owned by caller; this method accounts output during construction and all halo scratch.
@@ -50,13 +53,11 @@ public static class CandidateSpatial
                     if(recipe.Creative?.LensVignette is >0){var radial=Math.Pow((sx+.5)/orientedDisplay.Width-.5,2)+Math.Pow((sy+.5)/orientedDisplay.Height-.5,2);var linear=CandidateTone.Decode(sourcePixel);var gain=1-recipe.Creative.LensVignette*Math.Clamp(radial,0,.5);sourcePixel=CandidateTone.Encode(new ColorVector3(linear.X*gain,linear.Y*gain,linear.Z*gain));}
                     // Creative2 makes Womb a colour node rather than a late replacement.
                     // The standalone formula remains encoded-domain; exposure is linear and precedes it.
-                    var toneRecipe=recipe;
-                    if(recipe.Creative is{Version:2,Stock:not "Base"} creative)
+                    if(womb&&recipe.Creative is{} creative)
                     {
-                        var exposed=CandidateTone.Decode(sourcePixel);var gain=Math.Pow(2,recipe.Response.ExposureEv);
+                        var exposed=CandidateTone.Decode(sourcePixel);var gain=exposureGain;
                         sourcePixel=CandidateTone.Encode(new ColorVector3(exposed.X*gain,exposed.Y*gain,exposed.Z*gain));
                         sourcePixel=Womb01351Reference.Apply(sourcePixel,creative.Stock);
-                        toneRecipe=recipe with{Response=recipe.Response with{ExposureEv=0}};
                     }
                     var value=CandidateTone.ApplyLinear(sourcePixel,toneRecipe,palette);
                     var i=(y+2)*stride+(x+2)*3;scratch[i]=value.X;scratch[i+1]=value.Y;scratch[i+2]=value.Z;

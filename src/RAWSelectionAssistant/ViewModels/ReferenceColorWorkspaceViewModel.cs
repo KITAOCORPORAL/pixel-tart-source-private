@@ -665,10 +665,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             QueueMetadata(() => HydrateAssetMetadataAsync(target));
             await FlushMetadataAsync();
             if (revision != Volatile.Read(ref _activationRevision)) return;
-            OnPropertyChanged(nameof(IsProfessionalRaw));OnPropertyChanged(nameof(IsLegacyRaw));
+            OnPropertyChanged(nameof(IsProfessionalRaw));OnPropertyChanged(nameof(PhotoGradeRasterToolsEnabled));OnPropertyChanged(nameof(IsLegacyRaw));
             Editor.RestoreTargetEngine(target.EngineSnapshot, target.ExecutionModeSnapshot);
             Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot, target.FilmSettingsSnapshot, target.ColorAdjustmentStackSnapshot, render: false, targetIdentity: target.ActiveEditVersionId ?? target.Id);
-            TargetImage = image; TargetName = target.FileName; ActiveTarget = target; RestoreInstantControls(target.RawDefinition?.InstantFilm); target.IsActive = true;OnPropertyChanged(nameof(IsProfessionalRaw));OnPropertyChanged(nameof(IsLegacyRaw));
+            TargetImage = image; TargetName = target.FileName; ActiveTarget = target; RestoreInstantControls(target.RawDefinition?.InstantFilm); target.IsActive = true;OnPropertyChanged(nameof(IsProfessionalRaw));OnPropertyChanged(nameof(PhotoGradeRasterToolsEnabled));OnPropertyChanged(nameof(IsLegacyRaw));
             foreach (var other in Targets.Where(other => !ReferenceEquals(other, target))) other.IsActive = false;
             await Editor.SetSourceAsync(target.AssetId, image, token, rawPreviewMaster: rawProxy, frozenRawMaster: rawMaster);
             if (revision != Volatile.Read(ref _activationRevision)) return;

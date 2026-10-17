@@ -1,0 +1,1532 @@
+[
+  {
+    "input": "01-real-canon-tnan8886-matrix",
+    "rows": [
+      {
+        "stock": "Base",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.0009758249,
+        "mean": 8.72514e-05,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.0005264282,
+        "mean": 4.5599896e-05,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 5.2154064e-08,
+        "mean": 1.1071205e-09,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.13702977,
+        "mean": 0.022501443,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.045817833,
+        "mean": 0.0071571236,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.15314919,
+        "mean": 0.026713045,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.00025968254,
+        "mean": 1.3738519e-05,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.01878488,
+        "mean": 0.002947351,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.0032627434,
+        "mean": 0.0011495145,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 1.475215e-06,
+        "mean": 2.7606848e-07,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.024142295,
+        "mean": 0.0021681036,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.028504848,
+        "mean": 0.0064346134,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.12234707,
+        "mean": 0.028462583,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.011403054,
+        "mean": 0.0007108387,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.018229857,
+        "mean": 0.0026604244,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.00256823,
+        "mean": 0.0012141266,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 1.1995435e-06,
+        "mean": 2.9239226e-07,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.021740824,
+        "mean": 0.0019505877,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.028463632,
+        "mean": 0.006262812,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.11558223,
+        "mean": 0.026378436,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.009665534,
+        "mean": 0.0006329435,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.28890872,
+        "mean": 0.019394075,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 8.571148e-05,
+        "mean": 9.452204e-08,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Shoulder",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.1438376,
+        "mean": 0.0051568,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.03145487,
+        "mean": 0.006376497,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.1437396,
+        "mean": 0.027176932,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.2832206,
+        "mean": 0.0022594295,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.0018026605,
+        "mean": 0.00024272656,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.0016934574,
+        "mean": 0.0005850334,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 5.438924e-07,
+        "mean": 7.5255066e-08,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.00076990575,
+        "mean": 0.00010562309,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.029016905,
+        "mean": 0.0063015325,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.11828383,
+        "mean": 0.027344787,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.00041996688,
+        "mean": 4.78619e-05,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.0077967867,
+        "mean": 0.001680463,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.015769914,
+        "mean": 0.007195001,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 4.0367246e-05,
+        "mean": 1.0558199e-05,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.008077592,
+        "mean": 0.0010359283,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.049864043,
+        "mean": 0.0076580625,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.13625592,
+        "mean": 0.028011346,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.003202714,
+        "mean": 0.00041279243,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.018788591,
+        "mean": 0.0025189857,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.003191352,
+        "mean": 0.0014905753,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 1.8030405e-06,
+        "mean": 4.5471438e-07,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.020355493,
+        "mean": 0.0017760923,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.028333046,
+        "mean": 0.006361128,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.124727465,
+        "mean": 0.027483704,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.009063318,
+        "mean": 0.00059119705,
+        "inputSha256": "B79A3E0C8DF816CF39D3DDE8C430F8EA0081DF37AB1E8DA2670E867CFCF42FF5",
+        "component": 2
+      }
+    ],
+    "inactiveExplanation": "Highlight diffusion needs local linear highlights>.45. Crop may have none; Canon Stock2 toe input clipped to black can suppress shoulder sensitivity. Synthetic diagnostic keeps all8 active."
+  },
+  {
+    "input": "01-real-fuji-dscf0347-frozen-matrix",
+    "rows": [
+      {
+        "stock": "Base",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.1696614,
+        "mean": 0.11244173,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.110182166,
+        "mean": 0.060658544,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.081034124,
+        "mean": 0.039536238,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.054824144,
+        "mean": 0.006574083,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.036633775,
+        "mean": 0.0058627212,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.12022266,
+        "mean": 0.008494859,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.13502991,
+        "mean": 0.030428655,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.13392109,
+        "mean": 0.097492866,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.1112954,
+        "mean": 0.061642867,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.07592827,
+        "mean": 0.036806587,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.045263603,
+        "mean": 0.005956603,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.03798324,
+        "mean": 0.006026169,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.114088394,
+        "mean": 0.008557657,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.124049366,
+        "mean": 0.028437993,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.1353327,
+        "mean": 0.095679834,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.104586184,
+        "mean": 0.06284579,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.06963217,
+        "mean": 0.03504361,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.053403407,
+        "mean": 0.0060034334,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.031380013,
+        "mean": 0.005732854,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.08580923,
+        "mean": 0.008125306,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.12416327,
+        "mean": 0.027840838,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.14997804,
+        "mean": 0.10414621,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.11177796,
+        "mean": 0.059180114,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.08554727,
+        "mean": 0.041063264,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.05593711,
+        "mean": 0.006863676,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.03966835,
+        "mean": 0.0059480257,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.12339439,
+        "mean": 0.009104823,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.14188021,
+        "mean": 0.03209777,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.12408143,
+        "mean": 0.09912681,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.081131786,
+        "mean": 0.06466696,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.062303245,
+        "mean": 0.036371794,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.03896922,
+        "mean": 0.0055026775,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.02037409,
+        "mean": 0.005197088,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.05639012,
+        "mean": 0.007493158,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.108134925,
+        "mean": 0.028036902,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.096782625,
+        "mean": 0.07572383,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.08915207,
+        "mean": 0.06846979,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.05338633,
+        "mean": 0.031209264,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.03201279,
+        "mean": 0.0042714784,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.028154999,
+        "mean": 0.0053875423,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.063684374,
+        "mean": 0.0076893857,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.08556962,
+        "mean": 0.021733776,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.13624358,
+        "mean": 0.09756642,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.10479826,
+        "mean": 0.06252985,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.07376748,
+        "mean": 0.03746875,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.0558303,
+        "mean": 0.0061317403,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.031081185,
+        "mean": 0.005671892,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.0820632,
+        "mean": 0.007839612,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.12492567,
+        "mean": 0.028363539,
+        "inputSha256": "16E47881E469C280FECDBBC548D767410334319798E6C2D90ABF57675B017489",
+        "component": 2
+      }
+    ],
+    "inactiveExplanation": "Highlight diffusion needs local linear highlights>.45. Crop may have none; Canon Stock2 toe input clipped to black can suppress shoulder sensitivity. Synthetic diagnostic keeps all8 active."
+  },
+  {
+    "input": "01-real-sony-dsc08015-matrix",
+    "rows": [
+      {
+        "stock": "Base",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.032173082,
+        "mean": 0.013817759,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.025265053,
+        "mean": 0.009543287,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.00013160706,
+        "mean": 2.3441451e-05,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.011193834,
+        "mean": 0.0010545058,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.02943074,
+        "mean": 0.006099212,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.10167739,
+        "mean": 0.023275295,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Base",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.014140874,
+        "mean": 0.0026521543,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.030312583,
+        "mean": 0.015612938,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.02924417,
+        "mean": 0.014471767,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.00020553172,
+        "mean": 5.354961e-05,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.0102952495,
+        "mean": 0.0009356243,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.02923613,
+        "mean": 0.0061267777,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.111905314,
+        "mean": 0.022666031,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock0",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.015933007,
+        "mean": 0.003335834,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.030631453,
+        "mean": 0.01579086,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.031790882,
+        "mean": 0.015507671,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.00023958087,
+        "mean": 6.0552637e-05,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.008629739,
+        "mean": 0.0008636486,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.028348379,
+        "mean": 0.0061229547,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.09715482,
+        "mean": 0.022411317,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock1",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.015902087,
+        "mean": 0.0033627492,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.027752414,
+        "mean": 0.010002164,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.017364725,
+        "mean": 0.004884364,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 5.51641e-05,
+        "mean": 6.7858164e-06,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.016696252,
+        "mean": 0.0012675744,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.03167232,
+        "mean": 0.0061272923,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.10743989,
+        "mean": 0.024195975,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock2",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.010031015,
+        "mean": 0.001661379,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.030040666,
+        "mean": 0.015985359,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.029769912,
+        "mean": 0.014190239,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.00022123754,
+        "mean": 5.3559634e-05,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.0028485507,
+        "mean": 0.00049413764,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.028146073,
+        "mean": 0.0062228693,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.10285553,
+        "mean": 0.023436144,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock3",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.015899435,
+        "mean": 0.003344312,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.032894135,
+        "mean": 0.02153842,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.059830323,
+        "mean": 0.036171634,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.0010948777,
+        "mean": 0.0003920455,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.004215166,
+        "mean": 0.0007711618,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.03987577,
+        "mean": 0.0066257482,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.10567584,
+        "mean": 0.020859245,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock4",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.023039982,
+        "mean": 0.005350318,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Exposure",
+        "effective": true,
+        "maximum": 0.033677235,
+        "mean": 0.01741276,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Toe",
+        "effective": true,
+        "maximum": 0.03372352,
+        "mean": 0.01723737,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Shoulder",
+        "effective": true,
+        "maximum": 0.0002861023,
+        "mean": 7.646565e-05,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Softness",
+        "effective": true,
+        "maximum": 0.008472256,
+        "mean": 0.00087594584,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Diffusion",
+        "effective": false,
+        "maximum": 0,
+        "mean": 0,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Emulsion",
+        "effective": true,
+        "maximum": 0.028130956,
+        "mean": 0.0061237416,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Expired",
+        "effective": true,
+        "maximum": 0.094279625,
+        "mean": 0.022103503,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      },
+      {
+        "stock": "Womb01351.Stock5",
+        "parameter": "Vignette",
+        "effective": true,
+        "maximum": 0.018660009,
+        "mean": 0.0038032455,
+        "inputSha256": "7A94A42C6779007DC7B6C39B1C3FF31EC0AE0C6508970C6222B23C0B06B153BB",
+        "component": 2
+      }
+    ],
+    "inactiveExplanation": "Highlight diffusion needs local linear highlights>.45. Crop may have none; Canon Stock2 toe input clipped to black can suppress shoulder sensitivity. Synthetic diagnostic keeps all8 active."
+  }
+]

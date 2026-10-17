@@ -14,5 +14,6 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   if(Editor.SelectedAdjustmentNode is not{} selected||IsProfessionalRaw)return;
   SyncSelectedColorNodes(Editor.AdjustmentStack,new HashSet<Guid>{selected.Id},SelectedTargets.Where(x=>!ReferenceEquals(x,ActiveTarget)).ToArray());
  });
+ public bool PhotoGradeRasterToolsEnabled=>!IsProfessionalRaw;
  public string PhotoGradeContract=>"PhotoGradePageV1 · existing display-sRGB tools · V3 follows the selected photo recipe; wide-gamut math is not silently connected";
 }

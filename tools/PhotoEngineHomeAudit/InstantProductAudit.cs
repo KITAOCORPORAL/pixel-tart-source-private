@@ -10,7 +10,7 @@ using RAWSelectionAssistant.Services;
 internal static class InstantProductAudit
 {
  private static string Hash(string p){using var s=File.OpenRead(p);return Convert.ToHexString(SHA256.HashData(s));}
- public static async Task Run(string manifest,string output,string? existingDirectOutput=null)
+ public static async Task Run(string manifest,string output,string? existingDirectOutput=null,bool corrections=false)
  {
   if(Directory.Exists(output))throw new IOException("New product audit output");Directory.CreateDirectory(output);var results=new List<object>();
   foreach(var item in JsonSerializer.Deserialize<InstantReviewInput[]>(File.ReadAllText(manifest))!)
@@ -23,16 +23,17 @@ internal static class InstantProductAudit
    var basis=new ProfessionalRawDefinition(5,"Rendered",InputConfiguration:"RenderedSrgbFloatV1",DisplayTransform:"RenderedSrgbIdentityV1");
    var image=new HighBitDepthImageBuffer(source.Width,source.Height,data,"16","sRGB",(ushort)source.Orientation);
    var contract=new ProfessionalRawContract("AuthorizedFrozenProductSrgb16","Frozen",item.Id,item.ExpectedOriginalSha256,basis.DecodeKey,[],[],[],65535,OutputSpace:"sRGB",WhiteBalanceApplied:false,CameraMatrixApplied:false,Gamma:"sRGB");var master=new ProfessionalRawMaster(image,contract);
-   foreach(var profile in CandidateProfiles.Available.Where(p=>p.Id!="modern-600-v3"))
+   foreach(var profile in CandidateProfiles.Available.Where(p=>p.Id!="modern-600-v3"&&(!corrections||p.Id=="modern-itype-v3")))
    {
     var sw=Stopwatch.StartNew();var r=CandidateRecipe.Create(profile.Id,20261017) with{Response=profile.Response with{ExposureEv=.2},Emulsion=new(Microstructure:.002,DevelopmentUnevenness:.003),Surface=new(Frame:true)};
+    if(corrections)r=r with{Creative=new(Version:2,Stock:"Womb01351.Stock0",LensVignette:.2),Paper=new(Version:3,Window:"Circle",Zoom:1.17,WindowHighlight:.3,WindowPressed:.4),Defects=new(Kind:"Bands",Amount:.1)};
     var legacy=InstantFilmProfiles.Available.Single(p=>p.Id==profile.LegacyId);var film=new InstantFilmDefinition(true,legacy.Id,legacy.ChemicalGeneration,AlgorithmVersion:3){V3=r};var definition=basis with{InstantFilm=film};
     var folder=Path.Combine(output,item.Id,profile.Id);Directory.CreateDirectory(folder);var id=Guid.NewGuid();var version=Guid.NewGuid();var edit=new StudioEditVersion(version,"V3 actual product",DateTimeOffset.UtcNow,null,null,item.ExpectedOriginalSha256,null,null,null,ColorStudioMatchEngine.Stable,MatchV4ExecutionMode.Auto){RawDefinition=definition,RawInput=contract};
     var session=Path.Combine(folder,"session.private.ptstudio.json");await ColorStudioSessionStore.SaveAsync(session,new([new(id,item.FrozenTiff,null,true,null,null,null,SourceHash:item.ExpectedOriginalSha256,EditVersions:[edit],ActiveEditVersionId:version,RawDefinition:definition,RawInput:contract)],id));var reopened=await ColorStudioSessionStore.LoadAsync(session);var restored=reopened.Targets.Single().RawDefinition!;
     using var preview=ProfessionalRawPipeline.RenderPreview(master,restored,512);using var region=ProfessionalRawPipeline.RenderRegion(master,restored,16,16,64,64);
     var formats=new List<object>();foreach(var format in existingDirectOutput is null?new[]{StudioExportFormat.Tiff,StudioExportFormat.Png,StudioExportFormat.Jpeg}:Array.Empty<StudioExportFormat>())
     {
-     var file=Path.Combine(folder,"direct"+StudioQuickExport.Extension("x.arw",format));var receipt=await ProfessionalRawExport.WriteAsync(master,restored,file,format);formats.Add(new{format=format.ToString(),receipt,sha256=Hash(file),bytes=new FileInfo(file).Length});
+     var file=Path.Combine(folder,"direct"+StudioQuickExport.Extension("x.arw",format));var stages=new List<string>();var receipt=await ProfessionalRawExport.WriteAsync(master,restored,file,format,stage:stages.Add);formats.Add(new{stages,format=format.ToString(),receipt,sha256=Hash(file),bytes=new FileInfo(file).Length});
     }
     double previewMaximum=0;
     var tiff=existingDirectOutput is null?Path.Combine(folder,"direct.tif"):Path.Combine(existingDirectOutput,item.Id,profile.Id,"direct.tif");TiffStreamValidation tv;using(var file=File.OpenRead(tiff))tv=TiffStreamValidator.Validate(file);
