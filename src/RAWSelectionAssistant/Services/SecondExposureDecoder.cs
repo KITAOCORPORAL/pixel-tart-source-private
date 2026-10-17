@@ -46,6 +46,12 @@ public sealed class SecondExposureDecoder:ISecondExposureDecoder
  private static HighBitDepthImageBuffer ReadLegacy(CandidateMultipleInput input,CancellationToken token)
  {
   input.ValidateSource(token);CandidateProcessingEvidence.Enter("SecondDecode",token);
+  // Saved component1 RAW secondary inputs keep their original decoder contract.
+  if(RawMatchTiff16ProductPipeline.IsRaw(input.Path))
+  {
+   var decoded=new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder().DecodeAsync(input.Path,new RAWSelectionAssistant.Core.Models.RawToJpegOptions(AutoRotate:true,DecodeMode:RAWSelectionAssistant.Core.Models.RawDecodeMode.ProfessionalDecode),token).GetAwaiter().GetResult();
+   return HighBitDepthImageBuffer.FromRaw(decoded);
+  }
   var bitmap=StudioQuickExport.Load(input.Path);var rgb=new FormatConvertedBitmap(bitmap,PixelFormats.Rgb48,null,0);var values=new float[checked(rgb.PixelWidth*rgb.PixelHeight*3)];var row=new ushort[rgb.PixelWidth*3];
   for(int y=0;y<rgb.PixelHeight;y++){token.ThrowIfCancellationRequested();rgb.CopyPixels(new Int32Rect(0,y,rgb.PixelWidth,1),row,row.Length*2,0);for(int i=0;i<row.Length;i++)values[y*row.Length+i]=row[i]/65535f;}return new(rgb.PixelWidth,rgb.PixelHeight,values,"16","sRGB",1);
  }
