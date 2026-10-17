@@ -83,6 +83,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public double InstantV3ScanDust {get=>_instantV3ScanDust;set{if(EqualityComparer<double>.Default.Equals(_instantV3ScanDust,value))return;_instantV3ScanDust=value;OnPropertyChanged(nameof(InstantV3ScanDust));}}
  private ulong _instantV3Seed=20261017;
  public ulong InstantV3Seed {get=>_instantV3Seed;set{if(EqualityComparer<ulong>.Default.Equals(_instantV3Seed,value))return;_instantV3Seed=value;OnPropertyChanged(nameof(InstantV3Seed));}}
+ public double InstantV3DefectX {get;set;}=.5;
+ public double InstantV3DefectY {get;set;}=.5;
+ public double InstantV3DefectAngle {get;set;}
+ public double InstantV3DefectScale {get;set;}=1;
  public CandidateMultipleInput? InstantSecondInput {get;private set;}
  public string InstantSecondSourceName=>InstantSecondInput is null?"—":System.IO.Path.GetFileName(InstantSecondInput.Path);
  private double _instantSecondWeight=.5;
@@ -129,11 +133,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel
    Surface=recipe.Surface with{Frame=InstantPaperFrame,BaseColor=InstantPaperColor,PaperTexture=InstantV3PaperTexture,PaperScratches=InstantV3PaperScratches,ScanDust=InstantV3ScanDust},Geometry=film.PaperGeometry??new(),
    Creative=new(Version:2,Stock:InstantV3Stock,ShadowCast:InstantV3ShadowCast,HighlightWarmth:InstantV3Warmth,Fog:InstantV3Fog,TemperatureAppearance:(InstantEnvironmentCelsius-21)/21,FrameDrift:InstantV3FrameDrift,Fade:InstantV3Fade,LensVignette:InstantV3Vignette,DevelopmentEdge:InstantV3DevelopmentEdge),
    Paper=new(Version:3,Pattern:InstantV3Pattern,Window:InstantV3Circle?"Circle":"Rectangle",Emboss:InstantV3Emboss,EdgeLine:InstantV3EdgeLine,Reflection:InstantV3Reflection,ReflectionAngle:InstantV3ReflectionAngle,ReflectionWidth:InstantV3ReflectionWidth,Zoom:InstantV3Zoom,WindowHighlight:InstantV3WindowHighlight,WindowPressed:InstantV3WindowPressed),
-   Defects=new(Kind:InstantV3DefectKind,Amount:InstantV3DefectAmount,Crystal:InstantV3Crystal,Leak:InstantV3Leak)}).Freeze();
+   Defects=new(Version:2,Kind:InstantV3DefectKind,Amount:InstantV3DefectAmount,Crystal:InstantV3Crystal,Leak:InstantV3Leak,Geometry:new(InstantV3DefectX,InstantV3DefectY,InstantV3DefectAngle,InstantV3DefectScale))}).Freeze();
  }
  private void ResetV3PhotoControls()
  {
   // Photo state, not a mutable cross-photo user default. No random seed is drawn here.
+  InstantV3DefectX=.5;InstantV3DefectY=.5;InstantV3DefectAngle=0;InstantV3DefectScale=1;
   InstantSecondInput=null;InstantSecondWeight=.5;InstantSecondCropX=.5;InstantSecondCropY=.5;InstantSecondZoom=1;InstantSecondMode="NormalizedMix";OnPropertyChanged(nameof(InstantSecondSourceName));
   InstantV3Exposure=0;InstantV3Toe=.025;InstantV3Shoulder=.3;InstantV3Density=1;InstantV3Softness=.1;InstantV3Diffusion=.07;
   InstantV3Texture=.0015;InstantV3Aging=0;InstantV3Stock="Base";InstantV3Fog=0;InstantV3ShadowCast=0;InstantV3Warmth=0;InstantV3FrameDrift=0;InstantV3Fade=0;
@@ -147,7 +152,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   if(film?.V3 is{} r){InstantSecondInput=r.MultipleInput;if(r.MultipleInput is{} second){InstantSecondWeight=second.Weight;InstantSecondMode=second.Mode;InstantSecondCropX=second.CropX;InstantSecondCropY=second.CropY;InstantSecondZoom=second.Zoom;}OnPropertyChanged(nameof(InstantSecondSourceName));InstantV3Exposure=r.Response.ExposureEv;InstantV3Toe=r.Response.Toe;InstantV3Shoulder=r.Response.Shoulder;InstantV3Density=r.Response.ApparentDensity;InstantV3Softness=r.Optics.DetailMix;InstantV3Diffusion=r.Optics.HighlightDiffusion;InstantV3EmulsionDefects=r.Emulsion.DevelopmentDefects;InstantV3Texture=r.Emulsion.Microstructure;InstantV3Aging=r.Emulsion.ExpiredAging;InstantV3Seed=r.Random.RootSeed;
    InstantV3Stock=r.Creative?.Stock??"Base";InstantV3Fog=r.Creative?.Fog??0;InstantV3ShadowCast=r.Creative?.ShadowCast??0;InstantV3Warmth=r.Creative?.HighlightWarmth??0;InstantV3FrameDrift=r.Creative?.FrameDrift??0;InstantV3Fade=r.Creative?.Fade??0;InstantV3Vignette=r.Creative?.LensVignette??0;InstantV3DevelopmentEdge=r.Creative?.DevelopmentEdge??0;
    InstantV3WindowHighlight=r.Paper?.WindowHighlight??0;InstantV3WindowPressed=r.Paper?.WindowPressed??0;InstantV3Pattern=r.Paper?.Pattern??"Plain";InstantV3Circle=r.Paper?.Window=="Circle";InstantV3Reflection=r.Paper?.Reflection??0;InstantV3ReflectionAngle=r.Paper?.ReflectionAngle??0;InstantV3ReflectionWidth=r.Paper?.ReflectionWidth??.15;InstantV3Zoom=r.Paper?.Zoom??1;InstantV3Emboss=r.Paper?.Emboss??0;InstantV3EdgeLine=r.Paper?.EdgeLine??0;
-   InstantV3DefectKind=r.Defects?.Kind??"None";InstantV3DefectAmount=r.Defects?.Amount??0;InstantV3Crystal=r.Defects?.Crystal??0;InstantV3Leak=r.Defects?.Leak??0;InstantV3PaperTexture=r.Surface.PaperTexture;InstantV3PaperScratches=r.Surface.PaperScratches;InstantV3ScanDust=r.Surface.ScanDust;}
+   InstantV3DefectX=r.Defects?.Geometry?.CenterX??.5;InstantV3DefectY=r.Defects?.Geometry?.CenterY??.5;InstantV3DefectAngle=r.Defects?.Geometry?.AngleDegrees??0;InstantV3DefectScale=r.Defects?.Geometry?.Scale??1;InstantV3DefectKind=r.Defects?.Kind??"None";InstantV3DefectAmount=r.Defects?.Amount??0;InstantV3Crystal=r.Defects?.Crystal??0;InstantV3Leak=r.Defects?.Leak??0;InstantV3PaperTexture=r.Surface.PaperTexture;InstantV3PaperScratches=r.Surface.PaperScratches;InstantV3ScanDust=r.Surface.ScanDust;}
   foreach(var property in GetType().GetProperties().Where(p=>p.Name.StartsWith("InstantV3",StringComparison.Ordinal)))OnPropertyChanged(property.Name);
   foreach(var name in new[]{nameof(InstantEngineVersion),nameof(InstantV3Exposure),nameof(InstantV3Toe),nameof(InstantV3Shoulder),nameof(InstantV3Density),nameof(InstantV3Softness),nameof(InstantV3Diffusion),nameof(InstantV3Texture),nameof(InstantV3Aging),nameof(InstantV3Seed)})OnPropertyChanged(name);
  }

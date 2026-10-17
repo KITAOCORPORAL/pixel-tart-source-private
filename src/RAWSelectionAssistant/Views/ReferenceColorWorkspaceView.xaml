@@ -76,12 +76,12 @@
    </Grid.ColumnDefinitions>
    <StackPanel x:Name="SourceBars">
     <TextBlock Text="{views:StudioText StudioTitle}" Style="{StaticResource SectionTitleText}" />
+    <Button Content="{views:StudioText PhotoGradeTitle}" Command="{Binding TogglePhotoGradePageCommand}" HorizontalAlignment="Left" Padding="5,1" FontSize="11"/>
     <TextBlock Text="{Binding TargetName}" Style="{StaticResource CaptionText}" TextTrimming="CharacterEllipsis" MaxWidth="310" HorizontalAlignment="Left" ToolTip="{Binding TargetName}" Visibility="Collapsed" />
    </StackPanel>
    <!-- Keep actions within the page width: an Auto column measures an unbounded
         WrapPanel and lets it paint into the shell reserved close area. -->
    <WrapPanel x:Name="HeaderActions" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
-    <Button Content="{views:StudioText PhotoGradeTitle}" Command="{Binding TogglePhotoGradePageCommand}"/>
     <Grid><ToggleButton x:Name="InstantFilmToggle" Content="{views:StudioText InstantBatch08_0}"/>
     <Popup IsOpen="{Binding IsChecked,ElementName=InstantFilmToggle}" PlacementTarget="{Binding ElementName=InstantFilmToggle}" Placement="Bottom" StaysOpen="False" AllowsTransparency="True"><Border Style="{StaticResource PixelTart.Popup.V2}" Width="280" Padding="12" Background="{DynamicResource SurfaceSecondaryBrush}"><ScrollViewer MaxHeight="620" VerticalScrollBarVisibility="Auto">
      <StackPanel IsEnabled="{Binding InstantEditingAllowed}" Background="{DynamicResource SurfaceSecondaryBrush}">
@@ -118,6 +118,8 @@
       <TextBlock Text="{views:StudioText InstantV3Live19}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Crystal}"/>
       <TextBlock Text="{views:StudioText InstantV3Live20}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3Leak}"/>
       <ComboBox ItemsSource="{Binding InstantV3Patterns}" SelectedItem="{Binding InstantV3Pattern}"/><CheckBox Content="{views:StudioText InstantV3Live21}" IsChecked="{Binding InstantV3Circle}"/>
+      <TextBlock Text="{views:StudioText V3DefectGeometry}"/>
+      <Slider Minimum="0" Maximum="1" Value="{Binding InstantV3DefectX}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3DefectY}"/><Slider Minimum="-180" Maximum="180" Value="{Binding InstantV3DefectAngle}"/><Slider Minimum="0.25" Maximum="4" Value="{Binding InstantV3DefectScale}"/>
       <TextBlock Text="{views:StudioText V3WindowRim}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3WindowHighlight}"/><Slider Minimum="0" Maximum="1" Value="{Binding InstantV3WindowPressed}"/>
       <WrapPanel><Button Content="{views:StudioText V3SecondSelect}" Command="{Binding SelectSecondExposureCommand}"/><Button Content="{views:StudioText V3SecondClear}" Command="{Binding ClearSecondExposureCommand}"/></WrapPanel>
       <TextBlock Text="{Binding InstantSecondSourceName}"/>

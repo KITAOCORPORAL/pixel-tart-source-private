@@ -4,7 +4,8 @@ namespace Kitao.InstantFilm.Research;
 public sealed record CandidateCreativeControls(int Version=1,string Stock="Base",double ShadowCast=0,double HighlightWarmth=0,double Fog=0,double TemperatureAppearance=0,double FrameDrift=0,double Fade=0,double LensVignette=0,double DevelopmentEdge=0);
 public sealed record CandidatePaperControls(int Version=1,string Pattern="Plain",string Window="Rectangle",double Emboss=0,double EdgeLine=0,double Reflection=0,double ReflectionAngle=0,double ReflectionWidth=.15,double Zoom=1,double WindowHighlight=0,double WindowPressed=0);
 public sealed record CandidateMultipleExposure(int Version,string SecondSourceSha256,double Mix=.5,string Domain="LinearLightSrgbD65BeforeCreativeToneV1");
-public sealed record CandidateDefectControls(int Version=1,string Kind="None",double Amount=0,double Crystal=0,double Leak=0,string Streams="V3IndependentStreams1");
+public sealed record CandidateShapeGeometry(double CenterX=.5,double CenterY=.5,double AngleDegrees=0,double Scale=1);
+public sealed record CandidateDefectControls(int Version=1,string Kind="None",double Amount=0,double Crystal=0,double Leak=0,string Streams="V3IndependentStreams1",CandidateShapeGeometry? Geometry=null);
 /// <summary>Calculation reproduction from user supplied formula summary; NOT legacy application output or stock chemistry.</summary>
 public static class Womb01351Reference
 {
@@ -43,6 +44,11 @@ public static class CandidateExtensions
  public static ColorVector3 Defects(ColorVector3 c,double x,double y,CandidateRecipe recipe,string palette)
  {
   var d=recipe.Defects;if(d is null||d.Amount==0&&d.Crystal==0&&d.Leak==0)return c;
+  if(d.Version==2&&d.Geometry is{} geometry)
+  {
+   var angle=geometry.AngleDegrees*Math.PI/180;var dx=(x-geometry.CenterX)/geometry.Scale;var dy=(y-geometry.CenterY)/geometry.Scale;
+   x=.5+dx*Math.Cos(angle)-dy*Math.Sin(angle);y=.5+dx*Math.Sin(angle)+dy*Math.Cos(angle);
+  }
   var seed=recipe.Random.RootSeed;double n=CandidateMaterial.Noise(seed,x,y,9,501),edge=Math.Min(Math.Min(x,1-x),Math.Min(y,1-y));double mask=0;ColorVector3 tint=new(.2,.13,.07);
   if(d.Amount!=0)
   {
