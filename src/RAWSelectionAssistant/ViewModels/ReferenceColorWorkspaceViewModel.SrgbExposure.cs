@@ -15,6 +15,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   {
    if(!SrgbExposureAvailable||ActiveTarget is not{} target||IsLoading||IsExporting||IsInstantGenerating)return;
    var prior=target.RawDefinition;var active=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);
+   var oldImage=Editor.MatchedImage;var oldSize=Editor.SourcePixelSize;var oldStatus=target.Status;var oldError=target.Error;
    var oldInput=target.RawInput;var oldMaster=target.LinearRawMaster;var oldLook=target.AppliedLookSnapshot;var oldStack=target.ColorAdjustmentStackSnapshot;var oldFilm=target.FilmSettingsSnapshot;Guid? committed=null;
    _instantCancellation?.Dispose();_instantCancellation=new();var token=_instantCancellation.Token;IsInstantGenerating=true;InstantChanged();
    try
@@ -33,7 +34,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
    {
     if(committed is Guid id&&target.ActiveEditVersionId==id)
     {target.ActiveEditVersionId=active;target.RawDefinition=prior;target.RawInput=oldInput;target.LinearRawMaster=oldMaster;target.AppliedLookSnapshot=oldLook;target.ColorAdjustmentStackSnapshot=oldStack;target.FilmSettingsSnapshot=oldFilm;var version=target.EditVersions.FirstOrDefault(x=>x.Id==id);if(version is not null)target.EditVersions.Remove(version);}
-    if(ReferenceEquals(ActiveTarget,target))RestoreInstantControls(prior?.InstantFilm);StatusText="sRGB exposure: "+e.Message;
+    if(ReferenceEquals(ActiveTarget,target)){RestoreInstantControls(prior?.InstantFilm);if(oldImage is not null){Editor.PresentIndependentRaw(oldImage);Editor.SetIndependentRawSize(oldSize);}target.Status=oldStatus;target.Error=oldError;}StatusText="sRGB exposure: "+e.Message;
    }
    finally{IsInstantGenerating=false;InstantChanged();ApplySrgbExposureCommand.RaiseCanExecuteChanged();}
   },_=>SrgbExposureAvailable&&!IsLoading&&!IsExporting&&!IsInstantGenerating);

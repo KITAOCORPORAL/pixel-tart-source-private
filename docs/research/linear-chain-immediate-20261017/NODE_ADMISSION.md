@@ -15,3 +15,5 @@
 已补48个授权原冻结RGB16不同坐标样本（原件/冻结hash在授权manifest核对），边界与真实样本合并288组EV/RGB逐阶段两参考最大0。新链实际workspace命令/撤销重做/保存重开/三格式回读已通过synthetic，首次测试假设普通照片MatchedImage不为null错误，改用SourceImage fallback，原失败保留。产品仅声明sRGB输入解释/线性曝光/OETF+最终裁切；不碰旧PhotoColorMathV1/PV4/5/6。
 
 原尺寸二源原WIC64N+文件缓冲预算会拒绝Canon/Sony（各76N≈1.53/2.50GB，未加总预算）。新增TIFF输入组件3只支持产品单条带未压缩RGB16、精确sRGB ICC，用TiffStreamValidator逐行解码，最终float12N+一行；不暗缩小，不改变1/2。真实多ICC/透明仍旧2，不以新3冒充通用TIFF。独立WIC旧1逐码比较及源指纹回归要求。
+
+独立产品输出已跑：3授权冻结照片各64×48区域，经实际ProfessionalRawPipeline新节点和三格式编码，输出文件重新解码像素独立对scikit transfer（不是产品oracle）TIFF/PNG逐码0，JPEG最高MAE2.216/RMSE3.077，沿既有5/15门槛；INDEPENDENT_ENCODED_OUTPUT.json。范围升级EXPLICIT_VERSION_APPROVED仅Rendered sRGB exposure1；场景RAW/DWG/显示ICC不批准。
