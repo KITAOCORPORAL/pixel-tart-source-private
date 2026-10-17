@@ -1,0 +1,14 @@
+[
+  {
+    "repository": "scikit-image/scikit-image",
+    "tag": "v0.25.2",
+    "status": "TIMEOUT"
+  },
+  {
+    "repository": "AcademySoftwareFoundation/OpenColorIO",
+    "tag": "v2.4.2",
+    "exitCode": 128,
+    "output": "",
+    "error": "fatal: unable to access 'https://github.com/AcademySoftwareFoundation/OpenColorIO.git/': Failed to connect to github.com port 443 after 21064 ms: Could not connect to server\n"
+  }
+]
