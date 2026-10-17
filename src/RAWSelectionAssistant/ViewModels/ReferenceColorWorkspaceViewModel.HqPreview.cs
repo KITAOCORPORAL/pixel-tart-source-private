@@ -1,3 +1,4 @@
+using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.Core.Services.Color;
 using RAWSelectionAssistant.Core.Services.Projects;
 using System.Text.Json;
@@ -9,8 +10,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private readonly Dictionary<string,HighBitDepthImageBuffer> _hqPreview=[];
     private readonly object _hqGate=new();
     private void ClearHqPreview(){lock(_hqGate){foreach(var image in _hqPreview.Values)if(image.OwnsReservation)image.Dispose();_hqPreview.Clear();}StudioGlobalResources.Release(_hqOwner,"Detail");}
-    private async Task<HighBitDepthImageBuffer> RenderProfessionalPreviewAsync(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int edge,CancellationToken token)
+    private async Task<HighBitDepthImageBuffer> RenderProfessionalPreviewAsync(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int edge,CancellationToken token,string role="EffectPreview")
     {
+        using var measurement=StudioPreviewDiagnostics.Measure(role);
         if(Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition))
         {
             await ProfessionalRawResourcePolicy.HeavyWork.WaitAsync(token);

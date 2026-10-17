@@ -11,6 +11,7 @@ public sealed class SecondExposureDecoder:ISecondExposureDecoder
  public bool ValidatesSourceIdentity=>true;
  public HighBitDepthImageBuffer Read(CandidateMultipleInput input,CancellationToken token)
  {
+  using var measurement=StudioPreviewDiagnostics.Measure("SecondDecode");
   input.Validate();if(input.Version==3)return BoundedSrgbTiffInput.Read(input,token);if(input.Version==1)return ReadLegacy(input,token);
   CandidateProcessingEvidence.Enter("SecondHashBefore",token);
   using var stream=new FileStream(input.Path,FileMode.Open,FileAccess.Read,FileShare.Read);

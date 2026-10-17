@@ -21,6 +21,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public string RawPipelineStatus {get;private set;}="PV4 · 线性 ProPhoto / LibRaw，相机白平衡只在解码应用一次";
     private async Task<ProfessionalRawMaster> DecodeProfessionalInputAsync(string path,ProfessionalRawDefinition definition,CancellationToken token=default)
     {
+        using var decodeMeasurement=StudioPreviewDiagnostics.Measure("DecodeMaster");
         if(definition.SrgbExposure is not null||definition.RenderedInputVersion==2)return await RenderedSrgbInput.ReadAsync(path,definition,token);
         if(definition.InputConfiguration=="LegacyRawEditsSrgbFloatV1")return await RebuildLegacyRawInputAsync(path,definition,null,token);
         if(definition.InputConfiguration!="RenderedSrgbFloatV1")return await _professionalDecoder.DecodeAsync(path,definition,token);
@@ -110,7 +111,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         {Editor.PresentIndependentRaw(StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(quick.ToVisualRgb24()),quick.Orientation));RawPipelineStatus="快速800代理 · 正在更新线性光抗混叠高质量预览";OnPropertyChanged(nameof(RawPipelineStatus));}
         var rendered=await RenderProfessionalPreviewAsync(master,definition,1600,token);
         using var renderedOwner=definition.InstantFilm?.AlgorithmVersion==3?rendered:null;
-        var original=definition.ExposureEv==0&&definition.InstantFilm?.AlgorithmVersion!=3&&definition.SrgbExposure is null?rendered:await RenderProfessionalPreviewAsync(master,(definition.InstantFilm?.AlgorithmVersion==3?Kitao.InstantFilm.Research.InstantV3ProductPipeline.Original(definition):definition with{ExposureEv=0,SrgbExposure=null}),1600,token);
+        var original=definition.ExposureEv==0&&definition.InstantFilm?.AlgorithmVersion!=3&&definition.SrgbExposure is null?rendered:await RenderProfessionalPreviewAsync(master,(definition.InstantFilm?.AlgorithmVersion==3?Kitao.InstantFilm.Research.InstantV3ProductPipeline.Original(definition):definition with{ExposureEv=0,SrgbExposure=null}),1600,token,"ComparePreview");
         using var originalOwner=definition.InstantFilm?.AlgorithmVersion==3&&!ReferenceEquals(original,rendered)?original:null;
         if(revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)return;
         var image=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(rendered.ToVisualRgb24()),rendered.Orientation);var before=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(original.ToVisualRgb24()),original.Orientation);
@@ -121,6 +122,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(revision!=Volatile.Read(ref _activationRevision))return;
         TrimProfessionalMasters(target);
         ActiveTarget=target;TargetImage=image;TargetName=target.FileName;target.IsActive=true;foreach(var other in Targets.Where(x=>!ReferenceEquals(x,target)))other.IsActive=false;
+        using var presentationMeasurement=StudioPreviewDiagnostics.Measure("Present");
         Editor.IndependentRawMode=true;await Editor.SetSourceAsync(target.AssetId,before,token);Editor.StopProcessing();if(revision!=Volatile.Read(ref _activationRevision)||token.IsCancellationRequested)return;Editor.PresentIndependentRaw(image);var oriented=ProfessionalRawPipeline.OutputSize(master,definition);Editor.SetIndependentRawSize(new(oriented.Width,oriented.Height));
         var thumb=new TransformedBitmap(image,new System.Windows.Media.ScaleTransform(Math.Min(1,320d/image.PixelWidth),Math.Min(1,320d/image.PixelWidth)));thumb.Freeze();target.Thumbnail=thumb;target.SourceThumbnail=before;target.Status=ReferenceTargetStatus.Adjusted;target.Error=null;if(ReferenceEquals(FailedTarget,target))FailedTarget=null;
         RawExposureEv=definition.ExposureEv;RawRedGain=definition.RedGain;RawGreenGain=definition.GreenGain;RawBlueGain=definition.BlueGain;RawUseCameraWhiteBalance=definition.WhiteBalance=="Camera";
