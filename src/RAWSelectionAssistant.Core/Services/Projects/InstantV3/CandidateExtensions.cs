@@ -2,6 +2,7 @@ using RAWSelectionAssistant.Core.Services.Color;
 namespace Kitao.InstantFilm.Research;
 public sealed record CandidateCreativeControls(int Version=1,string Stock="Base",double ShadowCast=0,double HighlightWarmth=0,double Fog=0,double TemperatureAppearance=0,double FrameDrift=0,double Fade=0,double LensVignette=0,double DevelopmentEdge=0);
 public sealed record CandidatePaperControls(int Version=1,string Pattern="Plain",string Window="Rectangle",double Emboss=0,double EdgeLine=0,double Reflection=0,double ReflectionAngle=0,double ReflectionWidth=.15,double Zoom=1);
+public sealed record CandidateMultipleExposure(int Version,string SecondSourceSha256,double Mix=.5,string Domain="LinearLightSrgbD65BeforeCreativeToneV1");
 public sealed record CandidateDefectControls(int Version=1,string Kind="None",double Amount=0,double Crystal=0,double Leak=0,string Streams="V3IndependentStreams1");
 /// <summary>Calculation reproduction from user supplied formula summary; NOT legacy application output or stock chemistry.</summary>
 public static class Womb01351Reference
@@ -70,6 +71,11 @@ public static class CandidateExtensions
   if(p.EdgeLine!=0){var edge=Math.Min(Math.Min(x,1-x),Math.Min(y,1-y));var line=Math.Exp(-edge*900)*p.EdgeLine*.08;c=new(c.X+line,c.Y+line,c.Z+line);}
   if(p.Reflection!=0){var angle=p.ReflectionAngle*Math.PI/180;var axis=(x-.5)*Math.Cos(angle)+(y-.5)*Math.Sin(angle);var weight=Math.Exp(-Math.Pow(axis/p.ReflectionWidth,2))*p.Reflection*.2;var linear=CandidateTone.Decode(c);c=CandidateTone.Encode(CandidateTone.Mix(linear,new(1,1,1),weight));}
   return Clamp(c);
+ }
+ public static ColorVector3 MultipleExposure(ColorVector3 first,ColorVector3 second,double mix)
+ {
+  if(!double.IsFinite(mix)||mix<0||mix>1)throw new InvalidDataException("Multiple-exposure mix out of range");
+  var a=CandidateTone.Decode(first);var b=CandidateTone.Decode(second);return CandidateTone.Encode(CandidateTone.Mix(a,b,mix));
  }
  private static double Smooth(double a,double b,double v){var t=Math.Clamp((v-a)/(b-a),0,1);return t*t*(3-2*t);}
  private static ColorVector3 Clamp(ColorVector3 c)=>new(Math.Clamp(c.X,0,1),Math.Clamp(c.Y,0,1),Math.Clamp(c.Z,0,1));

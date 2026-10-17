@@ -18,7 +18,7 @@ public sealed class InstantV3ProductTests
    var input=Path.Combine(root,"synthetic.arw");await File.WriteAllBytesAsync(input,[1,2,3]);var versions=new StudioVersionRepository(Path.Combine(root,"versions"));
    using var workspace=new ReferenceColorWorkspaceViewModel(new Dialogs(root),rawDecoder:new FakeLegacy(),versionRepository:versions,professionalRawDecoder:new FakeLinear());
    await workspace.LoadTargetAsync(input);await workspace.CreateProfessionalRawCommand.ExecuteAsync(null);
-   workspace.InstantEngineVersion="V3";workspace.InstantCameraAnimation=false;workspace.InstantV3Exposure=.4;workspace.InstantV3Texture=.02;workspace.InstantV3Seed=777;workspace.InstantV3Stock="Womb01351.Stock0";workspace.InstantV3Pattern="Leather";workspace.InstantV3Reflection=.15;workspace.InstantV3DefectKind="Crescent";workspace.InstantV3DefectAmount=.12;
+   workspace.InstantEngineVersion="V3";workspace.InstantCameraAnimation=false;workspace.InstantV3Exposure=.4;workspace.InstantV3Texture=.02;workspace.InstantV3Seed=777;workspace.InstantV3Stock="Womb01351.Stock0";workspace.InstantV3Pattern="Leather";workspace.InstantV3Reflection=.15;workspace.InstantV3Zoom=1.2;workspace.InstantV3ReflectionWidth=.2;workspace.InstantV3DefectKind="Crescent";workspace.InstantV3DefectAmount=.12;
    await workspace.GenerateInstantFilmCommand.ExecuteAsync(null);
    Assert.AreEqual(3,workspace.ActiveTarget!.RawDefinition!.InstantFilm!.AlgorithmVersion,workspace.StatusText);
    Assert.AreEqual(.4,workspace.ActiveTarget.RawDefinition.InstantFilm.V3!.Response.ExposureEv);
@@ -26,7 +26,7 @@ public sealed class InstantV3ProductTests
    await workspace.RedoInstantV3Command.ExecuteAsync(null);Assert.AreEqual(active,workspace.ActiveTarget.ActiveEditVersionId);
    var session=Path.Combine(root,"project.ptstudio.json");await workspace.SaveSessionAsync(session);
    using var restored=new ReferenceColorWorkspaceViewModel(new Dialogs(root),rawDecoder:new FakeLegacy(),versionRepository:versions,professionalRawDecoder:new FakeLinear());await restored.LoadSessionAsync(session);
-   Assert.AreEqual("V3",restored.InstantEngineVersion);Assert.AreEqual("Womb01351.Stock0",restored.InstantV3Stock);Assert.AreEqual("Leather",restored.InstantV3Pattern);Assert.AreEqual(.15,restored.InstantV3Reflection);Assert.AreEqual(777UL,restored.InstantV3Seed);
+   Assert.AreEqual("V3",restored.InstantEngineVersion);Assert.AreEqual("Womb01351.Stock0",restored.InstantV3Stock);Assert.AreEqual("Leather",restored.InstantV3Pattern);Assert.AreEqual(.15,restored.InstantV3Reflection);Assert.AreEqual(1.2,restored.InstantV3Zoom);Assert.AreEqual(777UL,restored.InstantV3Seed);
    var master=await new FakeLinear().DecodeAsync(input,restored.ActiveTarget!.RawDefinition!);
    foreach(var format in new[]{StudioExportFormat.Tiff,StudioExportFormat.Png,StudioExportFormat.Jpeg})
    {

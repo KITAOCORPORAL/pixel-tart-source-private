@@ -63,7 +63,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   return (recipe with{Amount=InstantImageEffectsDisabled?0:InstantAmount,
    Response=recipe.Response with{ExposureEv=InstantV3Exposure,Toe=InstantV3Toe,Shoulder=InstantV3Shoulder,ApparentDensity=InstantV3Density},
    Optics=recipe.Optics with{DetailMix=InstantV3Softness,HighlightDiffusion=InstantV3Diffusion},
-   Emulsion=recipe.Emulsion with{Microstructure=InstantV3Texture,DevelopmentUnevenness=InstantUneven*.026,DevelopmentDefects=InstantUnspread,ExpiredAging=InstantV3Aging},
+   Emulsion=recipe.Emulsion with{Microstructure=InstantV3Texture,DevelopmentUnevenness=InstantUneven*.026,DevelopmentDefects=InstantV3DefectAmount,ExpiredAging=InstantV3Aging},
    Surface=recipe.Surface with{Frame=InstantPaperFrame,BaseColor=InstantPaperColor,PaperTexture=InstantV3PaperTexture,PaperScratches=InstantV3PaperScratches,ScanDust=InstantV3ScanDust},Geometry=film.PaperGeometry??new(),
    Creative=new(Stock:InstantV3Stock,ShadowCast:InstantV3ShadowCast,HighlightWarmth:InstantV3Warmth,Fog:InstantV3Fog,TemperatureAppearance:(InstantEnvironmentCelsius-21)/21,FrameDrift:InstantV3FrameDrift,Fade:InstantV3Fade,LensVignette:InstantV3Vignette,DevelopmentEdge:InstantV3DevelopmentEdge),
    Paper=new(Version:2,Pattern:InstantV3Pattern,Window:InstantV3Circle?"Circle":"Rectangle",Emboss:InstantV3Emboss,EdgeLine:InstantV3EdgeLine,Reflection:InstantV3Reflection,ReflectionAngle:InstantV3ReflectionAngle,ReflectionWidth:InstantV3ReflectionWidth,Zoom:InstantV3Zoom),
