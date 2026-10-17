@@ -147,6 +147,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             var original=ProfessionalRawPipeline.OrientedSize(master);var layout=InstantPaperLayout.Create(original.Width,original.Height,film);
             InstantDimensions=$"原尺寸 {original.Width} × {original.Height} · 相纸 {layout.Width} × {layout.Height}";OnPropertyChanged(nameof(InstantDimensions));
             InstantImageRegion=new(layout.Left/(double)layout.Width,layout.Top/(double)layout.Height,layout.WindowWidth/(double)layout.Width,layout.WindowHeight/(double)layout.Height);
+            Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("DevelopmentAnimation",token);
             var watch=Stopwatch.StartNew();
             do
             {

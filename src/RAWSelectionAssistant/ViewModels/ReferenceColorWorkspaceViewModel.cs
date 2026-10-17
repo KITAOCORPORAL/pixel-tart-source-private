@@ -169,6 +169,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         MatchV4ProductExecutor? matchV4Executor = null,
         Func<IAssetLibraryRepository?>? assetRepositoryFactory = null, StudioVersionRepository? versionRepository = null, IProfessionalRawDecoder? professionalRawDecoder=null)
     {
+        SecondExposureDecoder.EnsureRegistered();
         _professionalDecoder=professionalRawDecoder??new ProfessionalRawDecoder();
         _versionRepository=versionRepository;
         _dialogs = dialogs;

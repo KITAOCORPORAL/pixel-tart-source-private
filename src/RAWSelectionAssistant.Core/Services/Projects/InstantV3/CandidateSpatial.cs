@@ -29,7 +29,7 @@ public static class CandidateSpatial
     {
         recipe=recipe.Freeze();var palette=recipe.Profile.Palette;var plan=Plan(tileWidth,tileHeight);
         if(left<0||top<0||width<=0||height<=0||left+width>orientedDisplay.Width||top+height>orientedDisplay.Height)throw new ArgumentOutOfRangeException(nameof(left));
-        token.ThrowIfCancellationRequested();
+        CandidateProcessingEvidence.Enter("PixelRender",token);
         // Output owned by caller; this method accounts output during construction and all halo scratch.
         var outputLease=StudioGlobalResources.ReserveWork(checked((long)width*height*3*sizeof(float)));
         try

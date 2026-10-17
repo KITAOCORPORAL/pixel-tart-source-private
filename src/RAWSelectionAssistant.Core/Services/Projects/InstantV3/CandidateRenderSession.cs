@@ -50,6 +50,13 @@ public sealed class CandidateRenderSession : IDisposable
         }
         return true;
     }
+    private (double X,double Y) SourcePosition(int x,int y)
+    {
+        double sx=Layout.SourceX+(x-Layout.Left+.5)/Layout.Scale-.5;
+        double sy=Layout.SourceY+(y-Layout.Top+.5)/Layout.Scale-.5;
+        if(Recipe.Paper is{Zoom:>1} p){double cx=Recipe.Geometry.CropX*Layout.SourceWidth-.5,cy=Recipe.Geometry.CropY*Layout.SourceHeight-.5;sx=cx+(sx-cx)/p.Zoom;sy=cy+(sy-cy)/p.Zoom;}
+        return(Math.Clamp(sx,0,Layout.SourceWidth-1),Math.Clamp(sy,0,Layout.SourceHeight-1));
+    }
     public CandidateImageLease RenderRegion(int left,int top,int width,int height,CancellationToken token=default)
     {
         using var activeSource=RetainSource();var image=provider??throw new ObjectDisposedException(nameof(CandidateRenderSession));
@@ -63,19 +70,31 @@ public sealed class CandidateRenderSession : IDisposable
                 token.ThrowIfCancellationRequested();var tw=Math.Min(256,width-tx);var th=Math.Min(64,height-ty);
                 int minX=int.MaxValue,minY=int.MaxValue,maxX=-1,maxY=-1;
                 for(int y=0;y<th;y++)for(int x=0;x<tw;x++)if(TrySource(left+tx+x,top+ty+y,out var sx,out var sy))
-                {minX=Math.Min(minX,sx);minY=Math.Min(minY,sy);maxX=Math.Max(maxX,sx);maxY=Math.Max(maxY,sy);}
+                {if(Recipe.Paper is{Version:3}){var pos=SourcePosition(left+tx+x,top+ty+y);minX=Math.Min(minX,(int)Math.Floor(pos.X));minY=Math.Min(minY,(int)Math.Floor(pos.Y));maxX=Math.Max(maxX,Math.Min(image.Width-1,(int)Math.Floor(pos.X)+1));maxY=Math.Max(maxY,Math.Min(image.Height-1,(int)Math.Floor(pos.Y)+1));}else{minX=Math.Min(minX,sx);minY=Math.Min(minY,sy);maxX=Math.Max(maxX,sx);maxY=Math.Max(maxY,sy);}}
                 using var region=maxX>=minX?CandidateSpatial.RenderRegion(image,Recipe,minX,minY,maxX-minX+1,maxY-minY+1,token):null;
                 using var borrow=region?.Borrow();
                 for(int y=0;y<th;y++)for(int x=0;x<tw;x++)
                 {
                     var gx=left+tx+x;var gy=top+ty+y;ColorVector3 value;
                     if(TrySource(gx,gy,out var sx,out var sy))
-                    {var p=((sy-minY)*borrow!.Image.Width+sx-minX)*3;var rgb=borrow.Image.Rgb32.Span;value=new(rgb[p],rgb[p+1],rgb[p+2]);}
+                    {
+                     var rgb=borrow!.Image.Rgb32;var rw=borrow.Image.Width;
+                     ColorVector3 Read(int xx,int yy){var k=((yy-minY)*rw+xx-minX)*3;return new(rgb.Span[k],rgb.Span[k+1],rgb.Span[k+2]);}
+                     if(Recipe.Paper is{Version:3}){var pos=SourcePosition(gx,gy);int x0=(int)Math.Floor(pos.X),y0=(int)Math.Floor(pos.Y),x1=Math.Min(image.Width-1,x0+1),y1=Math.Min(image.Height-1,y0+1);value=CandidateTone.Mix(CandidateTone.Mix(Read(x0,y0),Read(x1,y0),pos.X-x0),CandidateTone.Mix(Read(x0,y1),Read(x1,y1),pos.X-x0),pos.Y-y0);}
+                     else value=Read(sx,sy);
+                    }
                     else value=CandidateMaterial.Paper((gx+.5)/Layout.Width,(gy+.5)/Layout.Height,Recipe);
                     if(Recipe.Paper is not null)
                     {
                         bool photo=TrySource(gx,gy,out _,out _);var nx=(gx+.5)/Layout.Width;var ny=(gy+.5)/Layout.Height;
-                        if(Recipe.Paper.Window=="Circle"&&photo){var u=(gx-Layout.Left+.5)/Layout.WindowWidth-.5;var v=(gy-Layout.Top+.5)/Layout.WindowHeight-.5;if(u*u+v*v>.25){photo=false;value=CandidateMaterial.Paper(nx,ny,Recipe);}}
+                        if(Recipe.Paper.Version<3&&Recipe.Paper.Window=="Circle"&&photo){var u=(gx-Layout.Left+.5)/Layout.WindowWidth-.5;var v=(gy-Layout.Top+.5)/Layout.WindowHeight-.5;if(u*u+v*v>.25){photo=false;value=CandidateMaterial.Paper(nx,ny,Recipe);}}
+                        if(Recipe.Paper.Version==3)
+                        {
+                            var distance=CandidateExtensions.WindowDistance(gx+.5,gy+.5,Layout,Recipe.Paper.Window);
+                            var coverage=Math.Clamp(distance+.5,0,1);
+                            value=CandidateTone.Mix(CandidateMaterial.Paper(nx,ny,Recipe),value,photo?coverage:0);
+                            value=CandidateExtensions.WindowRim(value,distance,Recipe.Paper);
+                        }
                         value=CandidateExtensions.Surface(value,nx,ny,Recipe,photo,Layout.Width,Layout.Height);
                     }
                     value=CandidateMaterial.Scan(value,(gx+.5)/Layout.Width,(gy+.5)/Layout.Height,Recipe);

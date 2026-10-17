@@ -1,6 +1,7 @@
 using Kitao.InstantFilm.Research;
 using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Utilities;
+using RAWSelectionAssistant.Services;
 namespace RAWSelectionAssistant.ViewModels;
 public sealed partial class ReferenceColorWorkspaceViewModel
 {
@@ -59,6 +60,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private string _instantV3DefectKind="None";
  public string InstantV3DefectKind {get=>_instantV3DefectKind;set{if(EqualityComparer<string>.Default.Equals(_instantV3DefectKind,value))return;_instantV3DefectKind=value;OnPropertyChanged(nameof(InstantV3DefectKind));}}
  private double _instantV3EmulsionDefects;
+ public double InstantV3WindowHighlight {get;set;}
+ public double InstantV3WindowPressed {get;set;}
  public double InstantV3EmulsionDefects {get=>_instantV3EmulsionDefects;set{if(EqualityComparer<double>.Default.Equals(_instantV3EmulsionDefects,value))return;_instantV3EmulsionDefects=value;OnPropertyChanged(nameof(InstantV3EmulsionDefects));}}
  private double _instantV3DefectAmount;
  public double InstantV3DefectAmount {get=>_instantV3DefectAmount;set{if(EqualityComparer<double>.Default.Equals(_instantV3DefectAmount,value))return;_instantV3DefectAmount=value;OnPropertyChanged(nameof(InstantV3DefectAmount));}}
@@ -78,12 +81,24 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public double InstantV3ScanDust {get=>_instantV3ScanDust;set{if(EqualityComparer<double>.Default.Equals(_instantV3ScanDust,value))return;_instantV3ScanDust=value;OnPropertyChanged(nameof(InstantV3ScanDust));}}
  private ulong _instantV3Seed=20261017;
  public ulong InstantV3Seed {get=>_instantV3Seed;set{if(EqualityComparer<ulong>.Default.Equals(_instantV3Seed,value))return;_instantV3Seed=value;OnPropertyChanged(nameof(InstantV3Seed));}}
+ public CandidateMultipleInput? InstantSecondInput {get;private set;}
+ public string InstantSecondSourceName=>InstantSecondInput is null?"—":System.IO.Path.GetFileName(InstantSecondInput.Path);
+ public double InstantSecondWeight {get;set;}=.5;
+ public double InstantSecondCropX {get;set;}=.5;
+ public double InstantSecondCropY {get;set;}=.5;
+ public double InstantSecondZoom {get;set;}=1;
+ public IReadOnlyList<string> InstantSecondModes {get;}=["NormalizedMix","ExposureSum"];
+ public string InstantSecondMode {get;set;}="NormalizedMix";
+ public AsyncRelayCommand SelectSecondExposureCommand {get;private set;}=null!;
+ public RelayCommand ClearSecondExposureCommand {get;private set;}=null!;
  public AsyncRelayCommand UndoInstantV3Command {get;private set;}=null!;
  public AsyncRelayCommand RedoInstantV3Command {get;private set;}=null!;
  private readonly Dictionary<Guid,Stack<Guid>> _instantV3Undo=[];
  private readonly Dictionary<Guid,Stack<Guid>> _instantV3Redo=[];
  private void InitializeInstantV3Commands()
  {
+  SelectSecondExposureCommand=new(_=>{var selected=_dialogs.ChooseFiles("Select second photo","Photo|*.png;*.tif;*.tiff;*.jpg;*.jpeg",false).FirstOrDefault();if(selected is not null){try{InstantSecondInput=SecondExposureDecoder.Describe(selected);OnPropertyChanged(nameof(InstantSecondSourceName));}catch(Exception e)when(e is IOException or NotSupportedException or InvalidDataException){StatusText="Second exposure: "+e.Message;}}return Task.CompletedTask;});
+  ClearSecondExposureCommand=new(_=>{InstantSecondInput=null;OnPropertyChanged(nameof(InstantSecondSourceName));});
   UndoInstantV3Command=new(async _=>await MoveInstantVersion(_instantV3Undo,_instantV3Redo));
   RedoInstantV3Command=new(async _=>await MoveInstantVersion(_instantV3Redo,_instantV3Undo));
  }
@@ -100,30 +115,31 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   var profile=film.FilmId switch{"itype-bw" or "600-bw" or "sx70-bw"=>"modern-bw-v3","sx70-color"=>"sx70-v3","reclaimed-blue600"=>"reclaimed-blue-v3","blue-duochrome600"=>"blue-duochrome-v3",_=>"modern-itype-v3"};
   if(roll)InstantV3Seed=BitConverter.ToUInt64(System.Security.Cryptography.RandomNumberGenerator.GetBytes(8));
   var recipe=CandidateRecipe.Create(profile,InstantV3Seed);
-  return (recipe with{Amount=InstantImageEffectsDisabled?0:InstantAmount,
+  return (recipe with{MultipleInput=InstantSecondInput is{} second?second with{Weight=InstantSecondWeight,Mode=InstantSecondMode,CropX=InstantSecondCropX,CropY=InstantSecondCropY,Zoom=InstantSecondZoom}:null,Amount=InstantImageEffectsDisabled?0:InstantAmount,
    Response=recipe.Response with{ExposureEv=InstantV3Exposure,Toe=InstantV3Toe,Shoulder=InstantV3Shoulder,ApparentDensity=InstantV3Density},
    Optics=recipe.Optics with{DetailMix=InstantV3Softness,HighlightDiffusion=InstantV3Diffusion},
    Emulsion=recipe.Emulsion with{Microstructure=InstantV3Texture,DevelopmentUnevenness=InstantUneven*.026,DevelopmentDefects=InstantV3EmulsionDefects,ExpiredAging=InstantV3Aging},
    Surface=recipe.Surface with{Frame=InstantPaperFrame,BaseColor=InstantPaperColor,PaperTexture=InstantV3PaperTexture,PaperScratches=InstantV3PaperScratches,ScanDust=InstantV3ScanDust},Geometry=film.PaperGeometry??new(),
    Creative=new(Version:2,Stock:InstantV3Stock,ShadowCast:InstantV3ShadowCast,HighlightWarmth:InstantV3Warmth,Fog:InstantV3Fog,TemperatureAppearance:(InstantEnvironmentCelsius-21)/21,FrameDrift:InstantV3FrameDrift,Fade:InstantV3Fade,LensVignette:InstantV3Vignette,DevelopmentEdge:InstantV3DevelopmentEdge),
-   Paper=new(Version:2,Pattern:InstantV3Pattern,Window:InstantV3Circle?"Circle":"Rectangle",Emboss:InstantV3Emboss,EdgeLine:InstantV3EdgeLine,Reflection:InstantV3Reflection,ReflectionAngle:InstantV3ReflectionAngle,ReflectionWidth:InstantV3ReflectionWidth,Zoom:InstantV3Zoom),
+   Paper=new(Version:3,Pattern:InstantV3Pattern,Window:InstantV3Circle?"Circle":"Rectangle",Emboss:InstantV3Emboss,EdgeLine:InstantV3EdgeLine,Reflection:InstantV3Reflection,ReflectionAngle:InstantV3ReflectionAngle,ReflectionWidth:InstantV3ReflectionWidth,Zoom:InstantV3Zoom,WindowHighlight:InstantV3WindowHighlight,WindowPressed:InstantV3WindowPressed),
    Defects=new(Kind:InstantV3DefectKind,Amount:InstantV3DefectAmount,Crystal:InstantV3Crystal,Leak:InstantV3Leak)}).Freeze();
  }
  private void ResetV3PhotoControls()
  {
   // Photo state, not a mutable cross-photo user default. No random seed is drawn here.
+  InstantSecondInput=null;InstantSecondWeight=.5;InstantSecondCropX=.5;InstantSecondCropY=.5;InstantSecondZoom=1;InstantSecondMode="NormalizedMix";OnPropertyChanged(nameof(InstantSecondSourceName));
   InstantV3Exposure=0;InstantV3Toe=.025;InstantV3Shoulder=.3;InstantV3Density=1;InstantV3Softness=.1;InstantV3Diffusion=.07;
   InstantV3Texture=.0015;InstantV3Aging=0;InstantV3Stock="Base";InstantV3Fog=0;InstantV3ShadowCast=0;InstantV3Warmth=0;InstantV3FrameDrift=0;InstantV3Fade=0;
   InstantV3Pattern="Plain";InstantV3Circle=false;InstantV3Reflection=0;InstantV3ReflectionAngle=0;InstantV3ReflectionWidth=.15;InstantV3Zoom=1;
-  InstantV3Emboss=0;InstantV3EdgeLine=0;InstantV3DefectKind="None";InstantV3DefectAmount=0;InstantV3EmulsionDefects=0;InstantV3Crystal=0;InstantV3Leak=0;
+  InstantV3WindowHighlight=0;InstantV3WindowPressed=0;InstantV3Emboss=0;InstantV3EdgeLine=0;InstantV3DefectKind="None";InstantV3DefectAmount=0;InstantV3EmulsionDefects=0;InstantV3Crystal=0;InstantV3Leak=0;
   InstantV3Vignette=0;InstantV3DevelopmentEdge=0;InstantV3PaperTexture=.002;InstantV3PaperScratches=0;InstantV3ScanDust=0;InstantV3Seed=20261017;
  }
  private void RestoreV3(InstantFilmDefinition? film)
  {
   ResetV3PhotoControls();InstantEngineVersion=film?.AlgorithmVersion==3?"V3":"V2";
-  if(film?.V3 is{} r){InstantV3Exposure=r.Response.ExposureEv;InstantV3Toe=r.Response.Toe;InstantV3Shoulder=r.Response.Shoulder;InstantV3Density=r.Response.ApparentDensity;InstantV3Softness=r.Optics.DetailMix;InstantV3Diffusion=r.Optics.HighlightDiffusion;InstantV3EmulsionDefects=r.Emulsion.DevelopmentDefects;InstantV3Texture=r.Emulsion.Microstructure;InstantV3Aging=r.Emulsion.ExpiredAging;InstantV3Seed=r.Random.RootSeed;
+  if(film?.V3 is{} r){InstantSecondInput=r.MultipleInput;if(r.MultipleInput is{} second){InstantSecondWeight=second.Weight;InstantSecondMode=second.Mode;InstantSecondCropX=second.CropX;InstantSecondCropY=second.CropY;InstantSecondZoom=second.Zoom;}OnPropertyChanged(nameof(InstantSecondSourceName));InstantV3Exposure=r.Response.ExposureEv;InstantV3Toe=r.Response.Toe;InstantV3Shoulder=r.Response.Shoulder;InstantV3Density=r.Response.ApparentDensity;InstantV3Softness=r.Optics.DetailMix;InstantV3Diffusion=r.Optics.HighlightDiffusion;InstantV3EmulsionDefects=r.Emulsion.DevelopmentDefects;InstantV3Texture=r.Emulsion.Microstructure;InstantV3Aging=r.Emulsion.ExpiredAging;InstantV3Seed=r.Random.RootSeed;
    InstantV3Stock=r.Creative?.Stock??"Base";InstantV3Fog=r.Creative?.Fog??0;InstantV3ShadowCast=r.Creative?.ShadowCast??0;InstantV3Warmth=r.Creative?.HighlightWarmth??0;InstantV3FrameDrift=r.Creative?.FrameDrift??0;InstantV3Fade=r.Creative?.Fade??0;InstantV3Vignette=r.Creative?.LensVignette??0;InstantV3DevelopmentEdge=r.Creative?.DevelopmentEdge??0;
-   InstantV3Pattern=r.Paper?.Pattern??"Plain";InstantV3Circle=r.Paper?.Window=="Circle";InstantV3Reflection=r.Paper?.Reflection??0;InstantV3ReflectionAngle=r.Paper?.ReflectionAngle??0;InstantV3ReflectionWidth=r.Paper?.ReflectionWidth??.15;InstantV3Zoom=r.Paper?.Zoom??1;InstantV3Emboss=r.Paper?.Emboss??0;InstantV3EdgeLine=r.Paper?.EdgeLine??0;
+   InstantV3WindowHighlight=r.Paper?.WindowHighlight??0;InstantV3WindowPressed=r.Paper?.WindowPressed??0;InstantV3Pattern=r.Paper?.Pattern??"Plain";InstantV3Circle=r.Paper?.Window=="Circle";InstantV3Reflection=r.Paper?.Reflection??0;InstantV3ReflectionAngle=r.Paper?.ReflectionAngle??0;InstantV3ReflectionWidth=r.Paper?.ReflectionWidth??.15;InstantV3Zoom=r.Paper?.Zoom??1;InstantV3Emboss=r.Paper?.Emboss??0;InstantV3EdgeLine=r.Paper?.EdgeLine??0;
    InstantV3DefectKind=r.Defects?.Kind??"None";InstantV3DefectAmount=r.Defects?.Amount??0;InstantV3Crystal=r.Defects?.Crystal??0;InstantV3Leak=r.Defects?.Leak??0;InstantV3PaperTexture=r.Surface.PaperTexture;InstantV3PaperScratches=r.Surface.PaperScratches;InstantV3ScanDust=r.Surface.ScanDust;}
   foreach(var property in GetType().GetProperties().Where(p=>p.Name.StartsWith("InstantV3",StringComparison.Ordinal)))OnPropertyChanged(property.Name);
   foreach(var name in new[]{nameof(InstantEngineVersion),nameof(InstantV3Exposure),nameof(InstantV3Toe),nameof(InstantV3Shoulder),nameof(InstantV3Density),nameof(InstantV3Softness),nameof(InstantV3Diffusion),nameof(InstantV3Texture),nameof(InstantV3Aging),nameof(InstantV3Seed)})OnPropertyChanged(name);

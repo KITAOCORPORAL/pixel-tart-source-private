@@ -8,6 +8,7 @@ public static class InstantV3ProductPipeline
   if(definition.InstantFilm?.V3 is not{} recipe)return definition with{ExposureEv=0};
   return definition with{InstantFilm=definition.InstantFilm with{V3=recipe with{Amount=0,Creative=null,Defects=null,Paper=recipe.Paper is{} paper?paper with{Pattern="Plain",Emboss=0,EdgeLine=0,Reflection=0}:null}}};
  }
+ private sealed class PairLease(IDisposable first,IDisposable second,HighBitDepthImageBuffer pixels):IDisposable{public void Dispose(){pixels.Dispose();second.Dispose();first.Dispose();}}
  public static bool IsV3(ProfessionalRawDefinition definition)=>definition.InstantFilm?.AlgorithmVersion==3;
  private sealed class Source(ProfessionalRawMaster master,ProfessionalRawDefinition basis):ICandidatePixelSource
  {
@@ -20,19 +21,28 @@ public static class InstantV3ProductPipeline
    return ProfessionalRawPipeline.RenderPixel(master,basis,px,py);
   }
  }
- public static CandidateRenderSession Open(ProfessionalRawMaster master,ProfessionalRawDefinition definition)
+ public static CandidateRenderSession Open(ProfessionalRawMaster master,ProfessionalRawDefinition definition,CancellationToken token=default)
  {
   ProfessionalRawPipeline.ValidateMaster(master,definition);
   var recipe=definition.InstantFilm?.V3?.Freeze()??throw new InvalidDataException("V3 full recipe required");
   var bytes=checked((long)master.Image.Rgb32.Length*4);
   // Borrow existing exact registered source when possible; otherwise explicitly reserve caller-retained master.
   var pin=StudioGlobalResources.RetainBuffer(master.Image,bytes);
-  return new(new Source(master,definition with{InstantFilm=null}),recipe,pin);
+  if(recipe.MultipleInput is not{} second)return new(new Source(master,definition with{InstantFilm=null}),recipe,pin);
+  IDisposable? secondLease=null;HighBitDepthImageBuffer? pixels=null;
+  try
+  {
+   token.ThrowIfCancellationRequested();second.ValidateSource();secondLease=StudioGlobalResources.ReserveWork(checked((long)second.Width*second.Height*12));
+   pixels=(SecondExposureInputs.Decoder??throw new NotSupportedException("SECOND_SOURCE_DECODER_UNAVAILABLE")).Read(second,token);
+   if(pixels.Width!=second.Width||pixels.Height!=second.Height||pixels.Orientation!=1||pixels.WorkingColorSpace!="sRGB")throw new InvalidDataException("SECOND_SOURCE_DOMAIN_CHANGED");second.ValidateSource();
+   return new(new MultiplePixelSource(new Source(master,definition with{InstantFilm=null}),pixels,second),recipe,new PairLease(pin,secondLease,pixels));
+  }
+  catch{pixels?.Dispose();secondLease?.Dispose();pin.Dispose();throw;}
  }
  public static (int Width,int Height) Size(ProfessionalRawMaster master,ProfessionalRawDefinition definition)
  {var size=ProfessionalRawPipeline.OrientedSize(master);var r=definition.InstantFilm!.V3!;var l=InstantPaperLayout.Create(size.Width,size.Height,new InstantFilmDefinition(true,AlgorithmVersion:2,PaperFrame:r.Surface.Frame){PaperGeometry=r.Geometry});return(l.Width,l.Height);}
  public static HighBitDepthImageBuffer Preview(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int edge,CancellationToken token)
- {using var session=Open(master,definition);using var owner=session.RenderPreview(edge,token);return owner.TransferToBuffer();}
+ {using var session=Open(master,definition,token);using var owner=session.RenderPreview(edge,token);return owner.TransferToBuffer();}
  public static HighBitDepthImageBuffer Region(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int x,int y,int w,int h,CancellationToken token)
- {using var session=Open(master,definition);using var owner=session.RenderRegion(x,y,w,h,token);return owner.TransferToBuffer();}
+ {using var session=Open(master,definition,token);using var owner=session.RenderRegion(x,y,w,h,token);return owner.TransferToBuffer();}
 }
