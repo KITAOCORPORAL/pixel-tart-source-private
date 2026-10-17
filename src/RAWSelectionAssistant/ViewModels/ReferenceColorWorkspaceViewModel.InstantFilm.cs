@@ -90,6 +90,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private void RestoreInstantControls(InstantFilmDefinition? film)
     {
         RestoreV3(film);
+        InstantInputMode=ActiveTarget?.RawDefinition?.InstantInput?.Mode??"CurrentEdits";
         if(film is null)
         {
             SelectedInstantProfile=InstantFilmProfiles.Available[0];InstantTier="稳定出片";InstantDiceEnabled=false;InstantImageEffectsDisabled=false;

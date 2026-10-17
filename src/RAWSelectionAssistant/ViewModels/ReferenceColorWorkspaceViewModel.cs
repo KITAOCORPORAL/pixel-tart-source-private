@@ -233,7 +233,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         Editor.PropertyChanged += (_, args) =>
         {
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
-            if (args.PropertyName is nameof(TetherReferenceModeViewModel.IsProMode) or nameof(TetherReferenceModeViewModel.AdjustmentStack)) RefreshSyncAvailability();
+            if (args.PropertyName is nameof(TetherReferenceModeViewModel.IsProMode) or nameof(TetherReferenceModeViewModel.AdjustmentStack) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode)) RefreshSyncAvailability();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.SourceImage) or nameof(TetherReferenceModeViewModel.MatchedImage) or nameof(TetherReferenceModeViewModel.EffectiveViewMode))
                 SchedulePreviewAnalysis();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.MatchedImage) or nameof(TetherReferenceModeViewModel.AdjustmentStack)
@@ -423,7 +423,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     }
     private void RefreshSyncAvailability()
     {
-        OnPropertyChanged(nameof(PhotoGradeRasterToolsEnabled));OnPropertyChanged(nameof(PhotoGradeCanSyncStep));OnPropertyChanged(nameof(InstantEditingAllowed));
+        OnPropertyChanged(nameof(PhotoGradeRasterToolsEnabled));OnPropertyChanged(nameof(PhotoGradeCanSyncStep));OnPropertyChanged(nameof(PhotoGradeOriginalInputAllowed));OnPropertyChanged(nameof(InstantEditingAllowed));
         OnPropertyChanged(nameof(SelectedTargetCount)); OnPropertyChanged(nameof(CanSyncSelectedNodes));
         OnPropertyChanged(nameof(VisibleTargetCount)); OnPropertyChanged(nameof(HiddenSelectedTargetCount)); OnPropertyChanged(nameof(FilmstripSummary)); OnPropertyChanged(nameof(SyncSummary));
         SetSelectedRatingCommand?.RaiseCanExecuteChanged(); SetSelectedColorLabelCommand?.RaiseCanExecuteChanged();

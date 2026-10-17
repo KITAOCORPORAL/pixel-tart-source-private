@@ -12,7 +12,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public RelayCommand ResetPhotoV3DraftCommand {get;private set;}=null!;
  private void InitializePhotoGradeHistoryCommands()
  {
-  ResetPhotoV3DraftCommand=new(_=>{ResetV3PhotoControls();InstantImageEffectsDisabled=false;InstantEngineVersion="V3";},_=>!IsInstantGenerating&&!IsLoading&&!IsExporting&&ActiveTarget is not null);
+  ResetPhotoV3DraftCommand=new(_=>{var profile=SelectedInstantProfile;RestoreInstantControls(null);SelectedInstantProfile=profile;InstantEngineVersion="V3";},_=>!IsInstantGenerating&&!IsLoading&&!IsExporting&&ActiveTarget is not null);
   PhotoGradeUndoCommand=new(async _=>
   {
    if(HasInstantHistory(_instantV3Undo))await UndoInstantV3Command.ExecuteAsync(null);
@@ -33,6 +33,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   if(!PhotoGradeCanSyncStep||Editor.SelectedAdjustmentNode is not{} selected)return;
   SyncSelectedColorNodes(Editor.AdjustmentStack,new HashSet<Guid>{selected.Id},SelectedTargets.Where(x=>!ReferenceEquals(x,ActiveTarget)).ToArray());
  },_=>PhotoGradeCanSyncStep);
+ public bool PhotoGradeOriginalInputAllowed=>ActiveTarget is{} target&&(RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline.IsRaw(target.Path)||System.IO.Path.GetExtension(target.Path).ToLowerInvariant() is ".jpg" or ".jpeg");
  public bool PhotoGradeCanSyncStep=>PhotoGradeRasterToolsEnabled&&Editor.SelectedAdjustmentNode is not null&&SelectedTargets.Any(t=>!ReferenceEquals(t,ActiveTarget)&&t.RawDefinition is null);
  public bool PhotoGradeRasterToolsEnabled=>ActiveTarget is not null&&!IsProfessionalRaw&&!IsLoading&&!IsExporting&&!IsInstantGenerating;
  public string PhotoGradeContract=>"PhotoGradePageV1 · existing display-sRGB tools · V3 follows the selected photo recipe; wide-gamut math is not silently connected";
