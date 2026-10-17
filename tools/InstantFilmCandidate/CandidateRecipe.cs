@@ -3,8 +3,8 @@ namespace Kitao.InstantFilm.Research;
 
 public sealed record CandidateResponse(double ExposureEv=0, double Toe=.025, double Shoulder=.3,
     double Black=.012, double Saturation=.9, double ApparentDensity=1);
-public sealed record CandidateProvenance(string EvidenceStatus, string[] SourceIds, string[] SampleIds,
-    string[] Observations, string[] ContraryEvidence, bool CalibrationEligible=false);
+public sealed record CandidateProvenance(string EvidenceStatus, IReadOnlyList<string> SourceIds, IReadOnlyList<string> SampleIds,
+    IReadOnlyList<string> Observations, IReadOnlyList<string> ContraryEvidence, bool CalibrationEligible=false);
 public sealed record CandidateProfile(string Id, string LegacyId, string ChemicalFamily, string PaperEra,
     string Palette, CandidateResponse Response, CandidateProvenance Provenance);
 public sealed record CandidateIdentity(string ChemicalFamily,string PaperEra,int ProfileVersion=1);
@@ -35,6 +35,17 @@ public sealed record CandidateRecipe(int AlgorithmVersion, string ProfileId, Can
         Geometry.Validate();
         new InstantFilmDefinition(true,Profile.LegacyId,InstantFilmProfiles.Available.Single(p=>p.Id==Profile.LegacyId).ChemicalGeneration,DiceEnabled:true,Tier:Random.Tier,Snapshot:Random).Validate();
         return this;
+    }
+    public CandidateRecipe Freeze()
+    {
+        Validate();
+        return this with
+        {
+            Provenance=Provenance with { SourceIds=Array.AsReadOnly(Provenance.SourceIds.ToArray()),
+                SampleIds=Array.AsReadOnly(Provenance.SampleIds.ToArray()), Observations=Array.AsReadOnly(Provenance.Observations.ToArray()),
+                ContraryEvidence=Array.AsReadOnly(Provenance.ContraryEvidence.ToArray()) },
+            Random=Random with { Geometry=Array.AsReadOnly(Random.Geometry.ToArray()) }
+        };
     }
     public static CandidateRecipe Create(string id,ulong seed=20261016)
     {

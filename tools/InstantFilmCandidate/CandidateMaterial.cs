@@ -20,6 +20,8 @@ public static class CandidateMaterial
         return 2*(a*(1-fy)+b*fy)-1;
     }
     public static ColorVector3 Emulsion(ColorVector3 linear,double x,double y,CandidateRecipe recipe)
+        =>Emulsion(linear,x,y,recipe,recipe.Profile.Palette);
+    internal static ColorVector3 Emulsion(ColorVector3 linear,double x,double y,CandidateRecipe recipe,string palette)
     {
         var seed=recipe.Random.RootSeed;var p=recipe.Emulsion;var l=CandidateTone.Luma(linear);
         var shared=p.Microstructure*(Noise(seed,x,y,1200,1)*.65+Noise(seed,x,y,430,2)*.35);
@@ -34,7 +36,7 @@ public static class CandidateMaterial
         double Channel(double v,ulong stream,double aging)=>Math.Clamp(v+(shared+.2*p.Microstructure*Noise(seed,x,y,900,stream))*Math.Sqrt(Math.Max(.005,l)) +uneven*v +defect*(.8-v)+aging,0,1);
         var r=Channel(linear.X,11,age);var g=Channel(linear.Y,12,.2*age);var b=Channel(linear.Z,13,-.6*age);
         // A neutral B&W family stays neutral, even though color emulsions have correlated channel variation.
-        return recipe.Profile.Palette=="NeutralBW"?new(r,r,r):new(r,g,b);
+        return palette=="NeutralBW"?new(r,r,r):new(r,g,b);
     }
     public static ColorVector3 Paper(double x,double y,CandidateRecipe recipe)
     {
@@ -53,12 +55,18 @@ public static class CandidateMaterial
 
 public static class CandidateRenderer
 {
-    public static HighBitDepthImageBuffer Render(HighBitDepthImageBuffer orientedDisplay,CandidateRecipe recipe,CancellationToken token=default)
+    public static CandidateImageLease Render(CandidateImageLease source,CandidateRecipe recipe,CancellationToken token=default)
     {
-        recipe.Validate();token.ThrowIfCancellationRequested();
+        using var borrow=source.Borrow();return Render(borrow.Image,recipe,token);
+    }
+    public static CandidateImageLease Render(HighBitDepthImageBuffer orientedDisplay,CandidateRecipe recipe,CancellationToken token=default)
+    {
+        recipe=recipe.Freeze();token.ThrowIfCancellationRequested();
         var frame=new InstantFilmDefinition(true,AlgorithmVersion:2,PaperFrame:recipe.Surface.Frame){PaperGeometry=recipe.Geometry};
         var layout=InstantPaperLayout.Create(orientedDisplay.Width,orientedDisplay.Height,frame);
-        using var outputLease=StudioGlobalResources.ReserveWork(checked((long)layout.Width*layout.Height*3*sizeof(float)));
+        var outputLease=StudioGlobalResources.ReserveWork(checked((long)layout.Width*layout.Height*3*sizeof(float)));
+        try
+        {
         var output=new float[checked(layout.Width*layout.Height*3)];
         // Bounded rows/strips. Source coordinates, not tile coordinates, drive all random material.
         for(var top=0;top<layout.Height;top+=64)
@@ -66,9 +74,9 @@ public static class CandidateRenderer
             token.ThrowIfCancellationRequested();var bottom=Math.Min(top+64,layout.Height);
             var firstSy=int.MaxValue;var lastSy=-1;
             for(var y=top;y<bottom;y++)for(var x=0;x<layout.Width;x++)if(layout.TrySource(x,y,out _,out var sy)){firstSy=Math.Min(firstSy,sy);lastSy=Math.Max(lastSy,sy);}
-            HighBitDepthImageBuffer? strip=null;
-            using var stripLease=lastSy>=firstSy?StudioGlobalResources.ReserveWork(checked((long)orientedDisplay.Width*(lastSy-firstSy+1)*3*sizeof(float))):null;
-            if(lastSy>=firstSy)strip=CandidateSpatial.RenderRegion(orientedDisplay,recipe,0,firstSy,orientedDisplay.Width,lastSy-firstSy+1,token);
+            using var stripLease=lastSy>=firstSy?CandidateSpatial.RenderRegion(orientedDisplay,recipe,0,firstSy,orientedDisplay.Width,lastSy-firstSy+1,token):null;
+            using var stripBorrow=stripLease?.Borrow();
+            var strip=stripBorrow?.Image;
             for(var y=top;y<bottom;y++)
             {
                 token.ThrowIfCancellationRequested();
@@ -84,6 +92,8 @@ public static class CandidateRenderer
                 }
             }
         }
-        return new(layout.Width,layout.Height,output,"16","sRGB",1);
+        return CandidateImageLease.Transfer(new(layout.Width,layout.Height,output,"16","sRGB",1),outputLease);
+        }
+        catch{outputLease.Dispose();throw;}
     }
 }

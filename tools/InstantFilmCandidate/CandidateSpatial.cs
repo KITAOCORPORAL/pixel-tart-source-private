@@ -12,15 +12,23 @@ public static class CandidateSpatial
         if(tileWidth is <1 or >512||tileHeight is <1 or >128)throw new ArgumentOutOfRangeException(nameof(tileWidth));
         return new(2,tileWidth,tileHeight,checked((long)(tileWidth+4)*(tileHeight+4)*3*sizeof(double)),"ClampToSourceEdge","LinearSrgbD65AfterCreativeResponse");
     }
-    public static HighBitDepthImageBuffer RenderRegion(HighBitDepthImageBuffer orientedDisplay,CandidateRecipe recipe,
+    public static CandidateImageLease RenderRegion(CandidateImageLease source,CandidateRecipe recipe,
         int left,int top,int width,int height,CancellationToken token=default,int tileWidth=256,int tileHeight=64)
     {
-        recipe.Validate();var plan=Plan(tileWidth,tileHeight);
+        using var borrow=source.Borrow();
+        return RenderRegion(borrow.Image,recipe,left,top,width,height,token,tileWidth,tileHeight);
+    }
+    public static CandidateImageLease RenderRegion(HighBitDepthImageBuffer orientedDisplay,CandidateRecipe recipe,
+        int left,int top,int width,int height,CancellationToken token=default,int tileWidth=256,int tileHeight=64)
+    {
+        recipe=recipe.Freeze();var palette=recipe.Profile.Palette;var plan=Plan(tileWidth,tileHeight);
         if(orientedDisplay.Orientation!=1||orientedDisplay.WorkingColorSpace!="sRGB")throw new InvalidDataException("Candidate requires an already oriented sRGB display master.");
         if(left<0||top<0||width<=0||height<=0||left+width>orientedDisplay.Width||top+height>orientedDisplay.Height)throw new ArgumentOutOfRangeException(nameof(left));
         token.ThrowIfCancellationRequested();
         // Output owned by caller; this method accounts output during construction and all halo scratch.
-        using var outputLease=StudioGlobalResources.ReserveWork(checked((long)width*height*3*sizeof(float)));
+        var outputLease=StudioGlobalResources.ReserveWork(checked((long)width*height*3*sizeof(float)));
+        try
+        {
         using var haloLease=StudioGlobalResources.ReserveWork(plan.ScratchBytes);
         var result=new float[checked(width*height*3)];
         var scratch=new double[checked((tileWidth+4)*(tileHeight+4)*3)];
@@ -34,7 +42,7 @@ public static class CandidateSpatial
                 {
                     var sx=Math.Clamp(left+tx+x,0,orientedDisplay.Width-1);var sy=Math.Clamp(top+ty+y,0,orientedDisplay.Height-1);
                     var sourceIndex=(sy*orientedDisplay.Width+sx)*3;var input=orientedDisplay.Rgb32.Span;
-                    var value=CandidateTone.ApplyLinear(new(input[sourceIndex],input[sourceIndex+1],input[sourceIndex+2]),recipe);
+                    var value=CandidateTone.ApplyLinear(new(input[sourceIndex],input[sourceIndex+1],input[sourceIndex+2]),recipe,palette);
                     var i=(y+2)*stride+(x+2)*3;scratch[i]=value.X;scratch[i+1]=value.Y;scratch[i+2]=value.Z;
                 }
             }
@@ -57,7 +65,7 @@ public static class CandidateSpatial
                     var spread=recipe.Optics.HighlightDiffusion*(1-Math.Clamp(CandidateTone.Luma(v),0,1));
                     blurred=new(blurred.X+spread*hr,blurred.Y+spread*hg,blurred.Z+spread*hb);
                     var gx=left+tx+x;var gy=top+ty+y;
-                    var textured=CandidateMaterial.Emulsion(blurred,(gx+.5)/orientedDisplay.Width,(gy+.5)/orientedDisplay.Height,recipe);
+                    var textured=CandidateMaterial.Emulsion(blurred,(gx+.5)/orientedDisplay.Width,(gy+.5)/orientedDisplay.Height,recipe,palette);
                     var originalIndex=(gy*orientedDisplay.Width+gx)*3;var source=orientedDisplay.Rgb32.Span;
                     var original=new ColorVector3(source[originalIndex],source[originalIndex+1],source[originalIndex+2]);
                     // Validate original even at zero strength. Exact endpoint; no EOTF/OETF roundtrip drift.
@@ -68,6 +76,8 @@ public static class CandidateSpatial
                 }
             }
         }
-        return new(width,height,result,"16","sRGB",1);
+        return CandidateImageLease.Transfer(new(width,height,result,"16","sRGB",1),outputLease);
+        }
+        catch{outputLease.Dispose();throw;}
     }
 }

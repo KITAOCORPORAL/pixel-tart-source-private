@@ -57,10 +57,10 @@ internal static class InstantReviewAudit
                 var recipe=CandidateRecipe.Create(profile.Id);recipe.Validate();var stem=profile.Id;
                 File.WriteAllText(Path.Combine(dir,stem+".recipe.json"),JsonSerializer.Serialize(recipe,Json));
                 var restored=JsonSerializer.Deserialize<CandidateRecipe>(File.ReadAllText(Path.Combine(dir,stem+".recipe.json")))!;restored.Validate();
-                using var retainedCandidate=StudioGlobalResources.ReserveWork(checked((long)display.Width*display.Height*3*4*5));
+
                 var watch=Stopwatch.StartNew();var allocated=GC.GetTotalAllocatedBytes();process.Refresh();var beforePrivate=process.PrivateMemorySize64;
-                var candidate=CandidateRenderer.Render(display,restored);var renderMs=watch.Elapsed.TotalMilliseconds;
-                var reopened=CandidateRenderer.Render(display,restored);if(!candidate.Rgb32.Span.SequenceEqual(reopened.Rgb32.Span))throw new InvalidDataException("Candidate reopen mismatch.");
+                using var candidateOwner=CandidateRenderer.Render(display,restored);using var candidateBorrow=candidateOwner.Borrow();var candidate=candidateBorrow.Image;var renderMs=watch.Elapsed.TotalMilliseconds;
+                using var reopenedOwner=CandidateRenderer.Render(display,restored);using var reopenedBorrow=reopenedOwner.Borrow();var reopened=reopenedBorrow.Image;if(!candidate.Rgb32.Span.SequenceEqual(reopened.Rgb32.Span))throw new InvalidDataException("Candidate reopen mismatch.");
                 var old=InstantFilmProfiles.Available.Single(p=>p.Id==profile.LegacyId);
                 var legacyFilm=new InstantFilmDefinition(true,old.Id,old.ChemicalGeneration,AlgorithmVersion:2){PaperGeometry=recipe.Geometry};
                 legacyFilm=legacyFilm with{DiceEnabled=true,Snapshot=recipe.Random};

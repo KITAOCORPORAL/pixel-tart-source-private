@@ -1,0 +1,7 @@
+# 资源所有权修复（候选隔离，非生产准入）
+
+旧方法返回HighBitDepthImageBuffer时using输出租约随栈退出，真实像素仍被调用者保留。新返回CandidateImageLease；输入可Adopt独占移交或由外层已有租约负责。输出租约移交给owner，Borrow用于任务只读活跃期；owner/cache退休后有borrow时继续计费，最后borrow释放才退出账本。Dispose幂等，清空可访问引用；不用finalizer、强制GC或“账本0”声称实际OS释放。
+
+CandidateRenderer条带不再重复Reserve后调用另一同额Reserve；条带owner作用域跨整个消费阶段，输出保持直到调用者Dispose。异常/非有限/运行中取消/预算拒绝各释放构建租约，输入不提前释放。测试保留多输出、缓存替换含活跃任务、重复Dispose和真运行中取消，10/10通过；3处target-typed new重载歧义编译失败已留原日志，显式类型修正，未改断言。
+
+每次任务Freeze配方；provenance数组和随机geometry复制为只读集合。热路径原recipe.Profile每像素LINQ Single现先解析palette一次，避免重复查找；色调/空间/乳剂数学未改。原6项逐像素/种子/区域/纸框回归继续通过。源图、条带和输出必须有唯一责任者，不把未接产品的合同宣称已覆盖生产缓存。

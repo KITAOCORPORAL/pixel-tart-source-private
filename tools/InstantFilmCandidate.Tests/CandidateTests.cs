@@ -34,7 +34,7 @@ public sealed class CandidateTests
         var a=CandidateTone.ApplyLinear(new(1,0,0),r);var b=CandidateTone.ApplyLinear(new(0,1,0),r);Assert.IsGreaterThan(a.X,b.X);
         Assert.Throws<InvalidDataException>(()=>CandidateTone.ApplyLinear(new(double.NaN,0,0),r));
         Assert.Throws<InvalidDataException>(()=>CandidateTone.Decode(double.PositiveInfinity));
-        var image=CandidateSpatial.RenderRegion(Input(),r,0,0,37,23);
+        using var imageOwner=CandidateSpatial.RenderRegion(Input(),r,0,0,37,23);using var imageBorrow=imageOwner.Borrow();var image=imageBorrow.Image;
         for(var i=0;i<image.Rgb32.Length;i+=3){Assert.AreEqual(image.Rgb32.Span[i],image.Rgb32.Span[i+1]);Assert.AreEqual(image.Rgb32.Span[i],image.Rgb32.Span[i+2]);}
     }
     [TestMethod]
@@ -43,25 +43,27 @@ public sealed class CandidateTests
         foreach(var p in CandidateProfiles.Available)
         {
             var r=CandidateRecipe.Create(p.Id);var input=Input();
-            var full=CandidateSpatial.RenderRegion(input,r,0,0,37,23,tileWidth:7,tileHeight:5);
-            var other=CandidateSpatial.RenderRegion(input,r,0,0,37,23,tileWidth:19,tileHeight:13);
+            using var fullOwner=CandidateSpatial.RenderRegion(input,r,0,0,37,23,tileWidth:7,tileHeight:5);using var fullBorrow=fullOwner.Borrow();var full=fullBorrow.Image;
+            using var otherOwner=CandidateSpatial.RenderRegion(input,r,0,0,37,23,tileWidth:19,tileHeight:13);using var otherBorrow=otherOwner.Borrow();var other=otherBorrow.Image;
             CollectionAssert.AreEqual(full.Rgb32.ToArray(),other.Rgb32.ToArray());
             var restored=JsonSerializer.Deserialize<CandidateRecipe>(JsonSerializer.Serialize(r))!;restored.Validate();
-            var reopened=CandidateSpatial.RenderRegion(input,restored,0,0,37,23);CollectionAssert.AreEqual(full.Rgb32.ToArray(),reopened.Rgb32.ToArray());
+            using var reopenedOwner=CandidateSpatial.RenderRegion(input,restored,0,0,37,23);using var reopenedBorrow=reopenedOwner.Borrow();var reopened=reopenedBorrow.Image;CollectionAssert.AreEqual(full.Rgb32.ToArray(),reopened.Rgb32.ToArray());
             for(var y=0;y<23;y+=6)for(var x=0;x<37;x+=9)
             {
-                var w=Math.Min(9,37-x);var h=Math.Min(6,23-y);var tile=CandidateSpatial.RenderRegion(input,r,x,y,w,h,tileWidth:3,tileHeight:4);
+                var w=Math.Min(9,37-x);var h=Math.Min(6,23-y);using var tileOwner=CandidateSpatial.RenderRegion(input,r,x,y,w,h,tileWidth:3,tileHeight:4);using var tileBorrow=tileOwner.Borrow();var tile=tileBorrow.Image;
                 for(var dy=0;dy<h;dy++)for(var dx=0;dx<w;dx++)for(var c=0;c<3;c++)Assert.AreEqual(full.Rgb32.Span[((y+dy)*37+x+dx)*3+c],tile.Rgb32.Span[(dy*w+dx)*3+c]);
             }
-            CollectionAssert.AreEqual(CandidateRenderer.Render(input,r).Rgb32.ToArray(),CandidateRenderer.Render(input,restored).Rgb32.ToArray());
+            using var renderedOwner=CandidateRenderer.Render(input,r);using var rendered=renderedOwner.Borrow();
+            using var restoredOwner=CandidateRenderer.Render(input,restored);using var restoredImage=restoredOwner.Borrow();
+            CollectionAssert.AreEqual(rendered.Image.Rgb32.ToArray(),restoredImage.Image.Rgb32.ToArray());
         }
     }
     [TestMethod]
     public void StrengthIsSmoothZeroIsExactAndSeedChangesOnlyMaterial()
     {
         var input=Input();var r=CandidateRecipe.Create("modern-itype-v3");
-        var zero=CandidateSpatial.RenderRegion(input,r with{Amount=0},0,0,37,23);CollectionAssert.AreEqual(input.Rgb32.ToArray(),zero.Rgb32.ToArray());
-        var half=CandidateSpatial.RenderRegion(input,r with{Amount=.5},0,0,37,23);var full=CandidateSpatial.RenderRegion(input,r,0,0,37,23);
+        using var zeroOwner=CandidateSpatial.RenderRegion(input,r with{Amount=0},0,0,37,23);using var zeroBorrow=zeroOwner.Borrow();var zero=zeroBorrow.Image;CollectionAssert.AreEqual(input.Rgb32.ToArray(),zero.Rgb32.ToArray());
+        using var halfOwner=CandidateSpatial.RenderRegion(input,r with{Amount=.5},0,0,37,23);using var halfBorrow=halfOwner.Borrow();var half=halfBorrow.Image;using var fullOwner=CandidateSpatial.RenderRegion(input,r,0,0,37,23);using var fullBorrow=fullOwner.Borrow();var full=fullBorrow.Image;
         for(var i=0;i<half.Rgb32.Length;i++)Assert.AreEqual((input.Rgb32.Span[i]+full.Rgb32.Span[i])/2,half.Rgb32.Span[i],1e-7);
         var a=CandidateTone.ApplyLinear(new(.2,.4,.6),r);var other=CandidateRecipe.Create(r.ProfileId,42);Assert.AreEqual(a,CandidateTone.ApplyLinear(new(.2,.4,.6),other));
         Assert.AreNotEqual(CandidateMaterial.Noise(r.Random.RootSeed,.2,.3,5,1),CandidateMaterial.Noise(other.Random.RootSeed,.2,.3,5,1));
@@ -75,7 +77,7 @@ public sealed class CandidateTests
         Assert.Throws<OperationCanceledException>(()=>CandidateRenderer.Render(Input(),r,cancel.Token));
         Assert.AreEqual(before,StudioGlobalResources.AccountedBytes);
         var bad=Input();var values=bad.Rgb32.ToArray();values[20]=float.NaN;
-        Assert.Throws<InvalidDataException>(()=>CandidateSpatial.RenderRegion(new(37,23,values,"16","sRGB",1),r,0,0,37,23));
+        Assert.Throws<InvalidDataException>(()=>CandidateSpatial.RenderRegion(new HighBitDepthImageBuffer(37,23,values,"16","sRGB",1),r,0,0,37,23));
         Assert.AreEqual(before,StudioGlobalResources.AccountedBytes);
         using(var lease=StudioGlobalResources.ReserveWork(StudioGlobalResources.TotalLimit-before))
             Assert.Throws<StudioBudgetException>(()=>CandidateSpatial.RenderRegion(Input(),r,0,0,37,23));
@@ -88,7 +90,7 @@ public sealed class CandidateTests
         var recipe=CandidateRecipe.Create("modern-bw-v3") with{Emulsion=new(Microstructure:0,DevelopmentUnevenness:0),Surface=new(Frame:false)};
         var flat=new HighBitDepthImageBuffer(15,15,new float[15*15*3],"16","sRGB",1);
         var impulse=flat.Rgb32.ToArray();for(var c=0;c<3;c++)impulse[(7*15+7)*3+c]=1;
-        var a=CandidateSpatial.RenderRegion(flat,recipe,0,0,15,15);var b=CandidateSpatial.RenderRegion(new(15,15,impulse,"16","sRGB",1),recipe,0,0,15,15,tileWidth:3,tileHeight:3);
+        using var aOwner=CandidateSpatial.RenderRegion(flat,recipe,0,0,15,15);using var aBorrow=aOwner.Borrow();var a=aBorrow.Image;using var bOwner=CandidateSpatial.RenderRegion(new HighBitDepthImageBuffer(15,15,impulse,"16","sRGB",1),recipe,0,0,15,15,tileWidth:3,tileHeight:3);using var bBorrow=bOwner.Borrow();var b=bBorrow.Image;
         for(var y=0;y<15;y++)for(var x=0;x<15;x++)for(var c=0;c<3;c++)
         {
             var i=(y*15+x)*3+c;Assert.IsTrue(float.IsFinite(b.Rgb32.Span[i]));
@@ -96,7 +98,7 @@ public sealed class CandidateTests
         }
         Assert.IsGreaterThan(a.Rgb32.Span[(7*15+6)*3],b.Rgb32.Span[(7*15+6)*3]);
         Assert.Throws<InvalidDataException>(()=>(recipe with{Optics=new(Radius:20)}).Validate());
-        Assert.Throws<InvalidDataException>(()=>CandidateSpatial.RenderRegion(new(15,15,impulse,"16","sRGB",6),recipe,0,0,15,15));
+        Assert.Throws<InvalidDataException>(()=>CandidateSpatial.RenderRegion(new HighBitDepthImageBuffer(15,15,impulse,"16","sRGB",6),recipe,0,0,15,15));
     }
 
 }

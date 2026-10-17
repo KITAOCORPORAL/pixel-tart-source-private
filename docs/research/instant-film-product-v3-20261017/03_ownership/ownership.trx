@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="842deead-a88c-4ebe-b2b9-f31c44f31335" name="Admin@DESKTOP-HO0JJEQ 2026-10-17 13:12:44" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-17T13:12:44.8419952+08:00" queuing="2026-10-17T13:12:44.8419954+08:00" start="2026-10-17T13:12:44.3341869+08:00" finish="2026-10-17T13:12:44.8648607+08:00" />
+  <TestSettings name="default" id="cca94f92-3232-45bb-88d6-d2c417768370">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-17_13_12_44" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="ef9bae2c-ab77-4ef4-bedc-f5b512a2a068" testId="1916682b-0ccd-8eeb-8594-a903f1ec3bea" testName="SnapshotDetachesEvidenceAndRandomGeometryFromExternalMutation" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0005180" startTime="2026-10-17T13:12:44.7975980+08:00" endTime="2026-10-17T13:12:44.7981371+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ef9bae2c-ab77-4ef4-bedc-f5b512a2a068" />
+    <UnitTestResult executionId="14869b62-e76f-4277-98b9-613e3438a376" testId="14b67e05-b78d-8819-a2f4-4cb5a64f3ebf" testName="BorrowedTaskKeepsRetiredCacheEntryChargedUntilLastUse" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0004951" startTime="2026-10-17T13:12:44.7970681+08:00" endTime="2026-10-17T13:12:44.7975865+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="14869b62-e76f-4277-98b9-613e3438a376" />
+    <UnitTestResult executionId="793297c9-45b5-445e-830f-cfae8138c1cc" testId="19e3e9ec-7aa3-866b-be9d-dd443f18b7dd" testName="ImpulseHasFiniteHaloAndFlatFieldsStayFiniteWithNoSeams" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0010283" startTime="2026-10-17T13:12:44.7928680+08:00" endTime="2026-10-17T13:12:44.7942703+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="793297c9-45b5-445e-830f-cfae8138c1cc" />
+    <UnitTestResult executionId="3a661f52-8b48-4a73-924c-d568f96c9ee4" testId="124d6259-c3f7-8070-aaee-bad378a53365" testName="CancelFailureAndBudgetRefusalReleaseAllScratch" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0015817" startTime="2026-10-17T13:12:44.7912305+08:00" endTime="2026-10-17T13:12:44.7928454+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3a661f52-8b48-4a73-924c-d568f96c9ee4" />
+    <UnitTestResult executionId="9d9e7bdd-d090-40e3-85e3-954600dff254" testId="1d1a8952-d8e6-811c-b567-c7aa6410c87f" testName="FullTilesRegionsAndReopenAreBitExactAcrossHaloEdges" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0890890" startTime="2026-10-17T13:12:44.6994277+08:00" endTime="2026-10-17T13:12:44.7885770+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9d9e7bdd-d090-40e3-85e3-954600dff254" />
+    <UnitTestResult executionId="0fc0ba67-c792-478f-8a96-a9e804976171" testId="108303a0-f512-8486-8672-9695da4bd2b4" testName="RunningCancellationDoesNotLeakOutputOrScratch" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0097381" startTime="2026-10-17T13:12:44.8146170+08:00" endTime="2026-10-17T13:12:44.8258935+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0fc0ba67-c792-478f-8a96-a9e804976171" />
+    <UnitTestResult executionId="a7dd6a86-3857-41cf-8fbe-e4a4c9811183" testId="137f5efd-af59-816f-ae49-08ce53261102" testName="LinearLuminanceBwIsNeutralAndNonfiniteInputsAreRefused" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0136949" startTime="2026-10-17T13:12:44.6851918+08:00" endTime="2026-10-17T13:12:44.6992189+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a7dd6a86-3857-41cf-8fbe-e4a4c9811183" />
+    <UnitTestResult executionId="fd3ecf9f-adbc-4788-85f0-fed2710a7768" testId="16dca085-4f26-851f-8198-e6f7d1d4dd90" testName="ModernAliasesShareResponseBlueFamiliesDifferAndNoCalibratedProfilesExist" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0106856" startTime="2026-10-17T13:12:44.6611235+08:00" endTime="2026-10-17T13:12:44.6823796+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fd3ecf9f-adbc-4788-85f0-fed2710a7768" />
+    <UnitTestResult executionId="231d6159-c109-4bca-bfbf-ba628355b30a" testId="137f4386-5818-8041-8439-d6e91419af31" testName="RetainedOutputsStayChargedAndDisposeIsIdempotent" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0026996" startTime="2026-10-17T13:12:44.7942864+08:00" endTime="2026-10-17T13:12:44.7970533+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="231d6159-c109-4bca-bfbf-ba628355b30a" />
+    <UnitTestResult executionId="e822f12e-f3e2-4a67-bac8-6a3796801e01" testId="15627b8c-b70a-8c67-8aa7-06a182fcd11d" testName="StrengthIsSmoothZeroIsExactAndSeedChangesOnlyMaterial" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0025469" startTime="2026-10-17T13:12:44.7886111+08:00" endTime="2026-10-17T13:12:44.7912028+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e822f12e-f3e2-4a67-bac8-6a3796801e01" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="RetainedOutputsStayChargedAndDisposeIsIdempotent" storage="n:\pixart\kitao-instant-film-product-v3-20261017\tools\instantfilmcandidate.tests\bin\release\net10.0\instantfilmcandidate.tests.dll" id="137f4386-5818-8041-8439-d6e91419af31">
+      <Execution id="231d6159-c109-4bca-bfbf-ba628355b30a" />
+      <TestMethod codeBase="N:\pixart\kitao-instant-film-product-v3-20261017\tools\InstantFilmCandidate.Tests\bin\Release\net10.0\InstantFilmCandidate.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="Kitao.InstantFilm.Research.Tests.OwnershipTests" name="RetainedOutputsStayChargedAndDisposeIsIdempotent" />
+    </UnitTest>
+    <UnitTest name="LinearLuminanceBwIsNeutralAndNonfiniteInputsAreRefused" storage="n:\pixart\kitao-instant-film-product-v3-20261017\tools\instantfilmcandidate.tests\bin\release\net10.0\instantfilmcandidate.tests.dll" id="137f5efd-af59-816f-ae49-08ce53261102">
+      <Execution id="a7dd6a86-3857-41cf-8fbe-e4a4c9811183" />
+      <TestMethod codeBase="N:\pixart\kitao-instant-film-product-v3-20261017\tools\InstantFilmCandidate.Tests\bin\Release\net10.0\InstantFilmCandidate.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="Kitao.InstantFilm.Research.Tests.CandidateTests" name="LinearLuminanceBwIsNeutralAndNonfiniteInputsAreRefused" />
+    </UnitTest>
+    <UnitTest name="RunningCancellationDoesNotLeakOutputOrScratch" storage="n:\pixart\kitao-instant-film-product-v3-20261017\tools\instantfilmcandidate.tests\bin\release\net10.0\instantfilmcandidate.tests.dll" id="108303a0-f512-8486-8672-9695da4bd2b4">
+      <Execution id="0fc0ba67-c792-478f-8a96-a9e804976171" />
+      <TestMethod codeBase="N:\pixart\kitao-instant-film-product-v3-20261017\tools\InstantFilmCandidate.Tests\bin\Release\net10.0\InstantFilmCandidate.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="Kitao.InstantFilm.Research.Tests.OwnershipTests" name="RunningCancellationDoesNotLeakOutputOrScratch" />
+    </UnitTest>
+    <UnitTest name="ImpulseHasFiniteHaloAndFlatFieldsStayFiniteWithNoSeams" storage="n:\pixart\kitao-instant-film-product-v3-20261017\tools\instantfilmcandidate.tests\bin\release\net10.0\instantfilmcandidate.tests.dll" id="19e3e9ec-7aa3-866b-be9d-dd443f18b7dd">
+      <Execution id="793297c9-45b5-445e-830f-cfae8138c1cc" />
+      <TestMethod codeBase="N:\pixart\kitao-instant-film-product-v3-20261017\tools\InstantFilmCandidate.Tests\bin\Release\net10.0\InstantFilmCandidate.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="Kitao.InstantFilm.Research.Tests.CandidateTests" name="ImpulseHasFiniteHaloAndFlatFieldsStayFiniteWithNoSeams" />
+    </UnitTest>
+    <UnitTest name="FullTilesRegionsAndReopenAreBitExactAcrossHaloEdges" storage="n:\pixart\kitao-instant-film-product-v3-20261017\tools\instantfilmcandidate.tests\bin\release\net10.0\instantfilmcandidate.tests.dll" id="1d1a8952-d8e6-811c-b567-c7aa6410c87f">
+      <Execution id="9d9e7bdd-d090-40e3-85e3-954600dff254" />
+      <TestMethod codeBase="N:\pixart\kitao-instant-film-product-v3-20261017\tools\InstantFilmCandidate.Tests\bin\Release\net10.0\InstantFilmCandidate.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="Kitao.InstantFilm.Research.Tests.CandidateTests" name="FullTilesRegionsAndReopenAreBitExactAcrossHaloEdges" />
+    </UnitTest>
+    <UnitTest name="ModernAliasesShareResponseBlueFamiliesDifferAndNoCalibratedProfilesExist" storage="n:\pixart\kitao-instant-film-product-v3-20261017\tools\instantfilmcandidate.tests\bin\release\net10.0\instantfilmcandidate.tests.dll" id="16dca085-4f26-851f-8198-e6f7d1d4dd90">
+      <Execution id="fd3ecf9f-adbc-4788-85f0-fed2710a7768" />
+      <TestMethod codeBase="N:\pixart\kitao-instant-film-product-v3-20261017\tools\InstantFilmCandidate.Tests\bin\Release\net10.0\InstantFilmCandidate.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="Kitao.InstantFilm.Research.Tests.CandidateTests" name="ModernAliasesShareResponseBlueFamiliesDifferAndNoCalibratedProfilesExist" />
+    </UnitTest>
+    <UnitTest name="StrengthIsSmoothZeroIsExactAndSeedChangesOnlyMaterial" storage="n:\pixart\kitao-instant-film-product-v3-20261017\tools\instantfilmcandidate.tests\bin\release\net10.0\instantfilmcandidate.tests.dll" id="15627b8c-b70a-8c67-8aa7-06a182fcd11d">
+      <Execution id="e822f12e-f3e2-4a67-bac8-6a3796801e01" />
+      <TestMethod codeBase="N:\pixart\kitao-instant-film-product-v3-20261017\tools\InstantFilmCandidate.Tests\bin\Release\net10.0\InstantFilmCandidate.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="Kitao.InstantFilm.Research.Tests.CandidateTests" name="StrengthIsSmoothZeroIsExactAndSeedChangesOnlyMaterial" />
+    </UnitTest>
+    <UnitTest name="SnapshotDetachesEvidenceAndRandomGeometryFromExternalMutation" storage="n:\pixart\kitao-instant-film-product-v3-20261017\tools\instantfilmcandidate.tests\bin\release\net10.0\instantfilmcandidate.tests.dll" id="1916682b-0ccd-8eeb-8594-a903f1ec3bea">
+      <Execution id="ef9bae2c-ab77-4ef4-bedc-f5b512a2a068" />
+      <TestMethod codeBase="N:\pixart\kitao-instant-film-product-v3-20261017\tools\InstantFilmCandidate.Tests\bin\Release\net10.0\InstantFilmCandidate.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="Kitao.InstantFilm.Research.Tests.OwnershipTests" name="SnapshotDetachesEvidenceAndRandomGeometryFromExternalMutation" />
+    </UnitTest>
+    <UnitTest name="BorrowedTaskKeepsRetiredCacheEntryChargedUntilLastUse" storage="n:\pixart\kitao-instant-film-product-v3-20261017\tools\instantfilmcandidate.tests\bin\release\net10.0\instantfilmcandidate.tests.dll" id="14b67e05-b78d-8819-a2f4-4cb5a64f3ebf">
+      <Execution id="14869b62-e76f-4277-98b9-613e3438a376" />
+      <TestMethod codeBase="N:\pixart\kitao-instant-film-product-v3-20261017\tools\InstantFilmCandidate.Tests\bin\Release\net10.0\InstantFilmCandidate.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="Kitao.InstantFilm.Research.Tests.OwnershipTests" name="BorrowedTaskKeepsRetiredCacheEntryChargedUntilLastUse" />
+    </UnitTest>
+    <UnitTest name="CancelFailureAndBudgetRefusalReleaseAllScratch" storage="n:\pixart\kitao-instant-film-product-v3-20261017\tools\instantfilmcandidate.tests\bin\release\net10.0\instantfilmcandidate.tests.dll" id="124d6259-c3f7-8070-aaee-bad378a53365">
+      <Execution id="3a661f52-8b48-4a73-924c-d568f96c9ee4" />
+      <TestMethod codeBase="N:\pixart\kitao-instant-film-product-v3-20261017\tools\InstantFilmCandidate.Tests\bin\Release\net10.0\InstantFilmCandidate.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="Kitao.InstantFilm.Research.Tests.CandidateTests" name="CancelFailureAndBudgetRefusalReleaseAllScratch" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1916682b-0ccd-8eeb-8594-a903f1ec3bea" executionId="ef9bae2c-ab77-4ef4-bedc-f5b512a2a068" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14b67e05-b78d-8819-a2f4-4cb5a64f3ebf" executionId="14869b62-e76f-4277-98b9-613e3438a376" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19e3e9ec-7aa3-866b-be9d-dd443f18b7dd" executionId="793297c9-45b5-445e-830f-cfae8138c1cc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="124d6259-c3f7-8070-aaee-bad378a53365" executionId="3a661f52-8b48-4a73-924c-d568f96c9ee4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d1a8952-d8e6-811c-b567-c7aa6410c87f" executionId="9d9e7bdd-d090-40e3-85e3-954600dff254" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="108303a0-f512-8486-8672-9695da4bd2b4" executionId="0fc0ba67-c792-478f-8a96-a9e804976171" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="137f5efd-af59-816f-ae49-08ce53261102" executionId="a7dd6a86-3857-41cf-8fbe-e4a4c9811183" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16dca085-4f26-851f-8198-e6f7d1d4dd90" executionId="fd3ecf9f-adbc-4788-85f0-fed2710a7768" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="137f4386-5818-8041-8439-d6e91419af31" executionId="231d6159-c109-4bca-bfbf-ba628355b30a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15627b8c-b70a-8c67-8aa7-06a182fcd11d" executionId="e822f12e-f3e2-4a67-bac8-6a3796801e01" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="10" executed="10" passed="10" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -15,14 +15,16 @@ public static class CandidateTone
     public static double Luma(ColorVector3 v)=>.2126*v.X+.7152*v.Y+.0722*v.Z;
     public static ColorVector3 Mix(ColorVector3 a,ColorVector3 b,double t)=>new(a.X+(b.X-a.X)*t,a.Y+(b.Y-a.Y)*t,a.Z+(b.Z-a.Z)*t);
     public static ColorVector3 ApplyLinear(ColorVector3 display,CandidateRecipe recipe)
+        =>ApplyLinear(display,recipe,recipe.Profile.Palette);
+    internal static ColorVector3 ApplyLinear(ColorVector3 display,CandidateRecipe recipe,string palette)
     {
         var c=Decode(display);var p=recipe.Response;var l=Luma(c);var e=l*Math.Pow(2,p.ExposureEv);
         var toe=e*e/(e+p.Toe+1e-12);var u=toe/(1+p.Shoulder*toe);
         var t=p.Black+(1-p.Black)*Math.Pow(Math.Clamp(u,0,1),p.ApparentDensity);
         ColorVector3 mapped;
-        if(recipe.Profile.Palette=="NeutralBW")mapped=new(t,t,t);
-        else if(recipe.Profile.Palette=="WhiteBlue")mapped=new(.015+.88*t,.07+.86*t,.32+.62*t);
-        else if(recipe.Profile.Palette=="BlackBlue")mapped=new(.002+.035*t,.004+.19*t,.009+.68*t);
+        if(palette=="NeutralBW")mapped=new(t,t,t);
+        else if(palette=="WhiteBlue")mapped=new(.015+.88*t,.07+.86*t,.32+.62*t);
+        else if(palette=="BlackBlue")mapped=new(.002+.035*t,.004+.19*t,.009+.68*t);
         else
         {
             var saturation=p.Saturation/(1+.25*Math.Max(Math.Max(c.X,c.Y),c.Z));
