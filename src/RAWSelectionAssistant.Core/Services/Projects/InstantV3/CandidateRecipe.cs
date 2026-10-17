@@ -17,8 +17,11 @@ public sealed record CandidateRecipe(int AlgorithmVersion, string ProfileId, Can
     CandidateProvenance Provenance, CandidateOptics Optics, CandidateEmulsion Emulsion, CandidateSurface Surface,
     InstantPaperGeometry Geometry, InstantRandomSnapshot Random, double Amount=1)
 {
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)] public CandidateCreativeControls? Creative {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)] public CandidatePaperControls? Paper {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)] public CandidateDefectControls? Defects {get;init;}
     public const string Domain="OrientedDisplaySrgbD65Float-EotfOnce-LinearResponseOpticsEmulsion-OetfOnce-PaperScanV3";
-    public const string Admission="ResearchOnly_OpenMatureReferenceComparisonGate";
+    public const string Admission="ExplicitCreativeV3_BaseNodesScopedAdmission20261017";
     public CandidateProfile Profile=>CandidateProfiles.Available.Single(p=>p.Id==ProfileId);
     public CandidateRecipe Validate()
     {
@@ -32,6 +35,9 @@ public sealed record CandidateRecipe(int AlgorithmVersion, string ProfileId, Can
             throw new InvalidDataException("Uncontrolled research recipes cannot assert calibration.");
         if(Optics.Version!=1||Optics.Radius!=2||Emulsion.Version!=1||Surface.Version!=1||Surface.BaseColor is not("Warm" or "Neutral" or "Cool"))throw new InvalidDataException("Unknown candidate component version.");
         foreach(var v in new[]{Optics.DetailMix,Optics.HighlightDiffusion,Emulsion.Microstructure,Emulsion.DevelopmentUnevenness,Emulsion.DevelopmentDefects,Emulsion.ExpiredAging,Surface.PaperTexture,Surface.PaperScratches,Surface.ScanDust})Range(v,0,1);
+        if(Creative is{} creative){if(creative.Version!=1||creative.Stock!="Base"&&!Enumerable.Range(0,6).Any(i=>creative.Stock=="Womb01351.Stock"+i))throw new InvalidDataException("Unknown creative version");foreach(var v in new[]{creative.ShadowCast,creative.HighlightWarmth,creative.TemperatureAppearance})Range(v,-1,1);foreach(var v in new[]{creative.Fog,creative.FrameDrift,creative.Fade,creative.LensVignette,creative.DevelopmentEdge})Range(v,0,1);}
+        if(Paper is{} paper){if(paper.Version!=1||paper.Pattern is not("Plain" or "Leather" or "Dots" or "Stripes" or "Foil")||paper.Window is not("Rectangle" or "Circle"))throw new InvalidDataException("Unknown paper version");foreach(var v in new[]{paper.Emboss,paper.EdgeLine,paper.Reflection})Range(v,0,1);Range(paper.ReflectionAngle,-180,180);Range(paper.ReflectionWidth,.01,1);Range(paper.Zoom,1,4);}
+        if(Defects is{} defect){if(defect.Version!=1||defect.Streams!="V3IndependentStreams1"||defect.Kind is not("None" or "Unspread" or "Bands" or "Fog" or "Islands" or "Crescent" or "BlueFailure"))throw new InvalidDataException("Unknown defect version");foreach(var v in new[]{defect.Amount,defect.Crystal,defect.Leak})Range(v,0,1);}
         Geometry.Validate();
         new InstantFilmDefinition(true,Profile.LegacyId,InstantFilmProfiles.Available.Single(p=>p.Id==Profile.LegacyId).ChemicalGeneration,DiceEnabled:true,Tier:Random.Tier,Snapshot:Random).Validate();
         return this;

@@ -18,6 +18,14 @@ public sealed class CandidateImageLease : IDisposable
     /// <summary>Caller transfers exclusive ownership; it must not retain a mutable alias.</summary>
     public static CandidateImageLease Adopt(HighBitDepthImageBuffer value)
         =>new(value,StudioGlobalResources.ReserveWork(checked((long)value.Rgb32.Length*sizeof(float))),checked((long)value.Rgb32.Length*sizeof(float)));
+    public HighBitDepthImageBuffer TransferToBuffer()
+    {
+        lock(gate)
+        {
+            ThrowDisposed();if(borrowers!=0)throw new InvalidOperationException("Active borrowers prevent ownership transfer");
+            var value=image!;value.TakeReservation(reservation!);image=null;reservation=null;retired=true;return value;
+        }
+    }
     public int Width {get{lock(gate){ThrowDisposed();return image!.Width;}}}
     public int Height {get{lock(gate){ThrowDisposed();return image!.Height;}}}
     public BorrowedImage Borrow()

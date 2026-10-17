@@ -41,6 +41,21 @@ public static class StudioGlobalResources
         private Entry? held=entry;
         public void Dispose(){lock(Gate){var value=held;held=null;if(value is null)return;value.Pins--;if(value.Pins==0&&value.Retired)Retired.Remove(value);}}
     }
+    private sealed class BufferEntry(IDisposable lease){public IDisposable Lease=lease;public int Count;}
+    private static readonly Dictionary<object,BufferEntry> BufferReservations=new(ReferenceEqualityComparer.Instance);
+    public static IDisposable RetainBuffer(object buffer,long bytes)
+    {
+        lock(Gate)
+        {
+            if(!BufferReservations.TryGetValue(buffer,out var entry))BufferReservations[buffer]=entry=new(ReserveWork(bytes));
+            entry.Count++;return new BufferBorrow(buffer);
+        }
+    }
+    private sealed class BufferBorrow(object buffer):IDisposable
+    {
+        private object? held=buffer;
+        public void Dispose(){lock(Gate){var value=held;held=null;if(value is null)return;var entry=BufferReservations[value];if(--entry.Count==0){BufferReservations.Remove(value);entry.Lease.Dispose();}}}
+    }
     public static IDisposable ReserveWork(long bytes)
     {
         var owner=Guid.NewGuid();if(!Store(owner,"Work",bytes,()=>{}))throw new StudioBudgetException(bytes,Math.Max(0,TotalLimit-AccountedBytes));return new Reservation(owner);

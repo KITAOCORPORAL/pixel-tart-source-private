@@ -21,8 +21,13 @@ public static class CandidateSpatial
     public static CandidateImageLease RenderRegion(HighBitDepthImageBuffer orientedDisplay,CandidateRecipe recipe,
         int left,int top,int width,int height,CancellationToken token=default,int tileWidth=256,int tileHeight=64)
     {
-        recipe=recipe.Freeze();var palette=recipe.Profile.Palette;var plan=Plan(tileWidth,tileHeight);
         if(orientedDisplay.Orientation!=1||orientedDisplay.WorkingColorSpace!="sRGB")throw new InvalidDataException("Candidate requires an already oriented sRGB display master.");
+        return RenderRegion(new BufferCandidateSource(orientedDisplay),recipe,left,top,width,height,token,tileWidth,tileHeight);
+    }
+    public static CandidateImageLease RenderRegion(ICandidatePixelSource orientedDisplay,CandidateRecipe recipe,
+        int left,int top,int width,int height,CancellationToken token=default,int tileWidth=256,int tileHeight=64)
+    {
+        recipe=recipe.Freeze();var palette=recipe.Profile.Palette;var plan=Plan(tileWidth,tileHeight);
         if(left<0||top<0||width<=0||height<=0||left+width>orientedDisplay.Width||top+height>orientedDisplay.Height)throw new ArgumentOutOfRangeException(nameof(left));
         token.ThrowIfCancellationRequested();
         // Output owned by caller; this method accounts output during construction and all halo scratch.
@@ -41,8 +46,9 @@ public static class CandidateSpatial
                 for(var x=-2;x<tw+2;x++)
                 {
                     var sx=Math.Clamp(left+tx+x,0,orientedDisplay.Width-1);var sy=Math.Clamp(top+ty+y,0,orientedDisplay.Height-1);
-                    var sourceIndex=(sy*orientedDisplay.Width+sx)*3;var input=orientedDisplay.Rgb32.Span;
-                    var value=CandidateTone.ApplyLinear(new(input[sourceIndex],input[sourceIndex+1],input[sourceIndex+2]),recipe,palette);
+                    var sourcePixel=orientedDisplay.Read(sx,sy);
+                    if(recipe.Creative?.LensVignette is >0){var radial=Math.Pow((sx+.5)/orientedDisplay.Width-.5,2)+Math.Pow((sy+.5)/orientedDisplay.Height-.5,2);var linear=CandidateTone.Decode(sourcePixel);var gain=1-recipe.Creative.LensVignette*Math.Clamp(radial,0,.5);sourcePixel=CandidateTone.Encode(new ColorVector3(linear.X*gain,linear.Y*gain,linear.Z*gain));}
+                    var value=CandidateTone.ApplyLinear(sourcePixel,recipe,palette);
                     var i=(y+2)*stride+(x+2)*3;scratch[i]=value.X;scratch[i+1]=value.Y;scratch[i+2]=value.Z;
                 }
             }
@@ -66,12 +72,15 @@ public static class CandidateSpatial
                     blurred=new(blurred.X+spread*hr,blurred.Y+spread*hg,blurred.Z+spread*hb);
                     var gx=left+tx+x;var gy=top+ty+y;
                     var textured=CandidateMaterial.Emulsion(blurred,(gx+.5)/orientedDisplay.Width,(gy+.5)/orientedDisplay.Height,recipe,palette);
-                    var originalIndex=(gy*orientedDisplay.Width+gx)*3;var source=orientedDisplay.Rgb32.Span;
-                    var original=new ColorVector3(source[originalIndex],source[originalIndex+1],source[originalIndex+2]);
+                    var original=orientedDisplay.Read(gx,gy);
                     // Validate original even at zero strength. Exact endpoint; no EOTF/OETF roundtrip drift.
                     CandidateTone.Decode(original);
                     original=new(Math.Clamp(original.X,0,1),Math.Clamp(original.Y,0,1),Math.Clamp(original.Z,0,1));
-                    var encoded=recipe.Amount==0?original:CandidateTone.Mix(original,CandidateTone.Encode(textured),recipe.Amount);
+                    var developed=CandidateTone.Encode(textured);
+                    if(recipe.Creative?.Stock is{} stock&&stock!="Base")developed=Womb01351Reference.Apply(original,stock);
+                    developed=CandidateExtensions.Creative(developed,(gx+.5)/orientedDisplay.Width,(gy+.5)/orientedDisplay.Height,recipe,palette);
+                    developed=CandidateExtensions.Defects(developed,(gx+.5)/orientedDisplay.Width,(gy+.5)/orientedDisplay.Height,recipe,palette);
+                    var encoded=recipe.Amount==0?original:CandidateTone.Mix(original,developed,recipe.Amount);
                     var o=((ty+y)*width+tx+x)*3;result[o]=(float)encoded.X;result[o+1]=(float)encoded.Y;result[o+2]=(float)encoded.Z;
                 }
             }

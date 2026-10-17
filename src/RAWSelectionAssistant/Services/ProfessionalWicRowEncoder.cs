@@ -31,7 +31,7 @@ internal static unsafe class ProfessionalWicRowEncoder
         WriteRows(path,bitmap.PixelWidth,bitmap.PixelHeight,quality,(y,row)=>converted.CopyPixels(new System.Windows.Int32Rect(0,y,bitmap.PixelWidth,1),row,row.Length,0),token,png:png,highDepth:false,dpi:dpi);
     }
     private static byte Q(float v)=>(byte)Math.Clamp(Math.Round(v*255),0,255);
-    private static void WriteRows(string path,int width,int height,int quality,Action<int,byte[]> fillRow,CancellationToken token,bool png=false,bool highDepth=true,int dpi=96)
+    internal static void WriteRows(string path,int width,int height,int quality,Action<int,byte[]> fillRow,CancellationToken token,bool png=false,bool highDepth=true,int dpi=96)
     {
         if(File.Exists(path))throw new IOException("编码目的文件已存在，未覆盖。");
         var init=CoInitializeEx(IntPtr.Zero,0);if(init<0&&init!=unchecked((int)0x80010106))Check(init);

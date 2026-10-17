@@ -103,14 +103,15 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(master is null||master.Contract.DecodeKey!=definition.DecodeKey)
         {master=await DecodeProfessionalInputAsync(target.Path,definition,token);token.ThrowIfCancellationRequested();if(revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)return;target.LinearRawMaster=master;}
         if(!string.Equals(master.Contract.SourceSha256,target.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("RAW 解码源身份改变，未呈现结果。");
-        var quick=await Task.Run(()=>ProfessionalRawPipeline.Render(master,definition,800,token),token);
+        using var quick=await Task.Run(()=>ProfessionalRawPipeline.Render(master,definition,800,token),token);
         if(revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)return;
         if(ReferenceEquals(ActiveTarget,target)&&Editor.IndependentRawMode)
         {Editor.PresentIndependentRaw(StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(quick.ToVisualRgb24()),quick.Orientation));RawPipelineStatus="快速800代理 · 正在更新线性光抗混叠高质量预览";OnPropertyChanged(nameof(RawPipelineStatus));}
         var rendered=await RenderProfessionalPreviewAsync(master,definition,1600,token);
-        var original=definition.ExposureEv==0?rendered:await RenderProfessionalPreviewAsync(master,definition with{ExposureEv=0},1600,token);
+        var original=definition.ExposureEv==0&&definition.InstantFilm?.AlgorithmVersion!=3?rendered:await RenderProfessionalPreviewAsync(master,definition with{ExposureEv=0,InstantFilm=definition.InstantFilm?.AlgorithmVersion==3?null:definition.InstantFilm},1600,token);
         if(revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)return;
         var image=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(rendered.ToVisualRgb24()),rendered.Orientation);var before=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(original.ToVisualRgb24()),original.Orientation);
+        if(definition.InstantFilm?.AlgorithmVersion==3)rendered.Dispose();
         target.RawInput=master.Contract;target.PixelWidth=master.Image.Width;target.PixelHeight=master.Image.Height;target.SourceHash=master.Contract.SourceSha256.ToLowerInvariant();
         var sourceDimensions=ProfessionalRawPipeline.OrientedSize(master);var paperDimensions=ProfessionalRawPipeline.OutputSize(master,definition);
         InstantDimensions=$"原尺寸 {sourceDimensions.Width} × {sourceDimensions.Height} · 相纸 {paperDimensions.Width} × {paperDimensions.Height}";OnPropertyChanged(nameof(InstantDimensions));

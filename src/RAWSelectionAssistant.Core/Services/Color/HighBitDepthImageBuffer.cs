@@ -4,7 +4,7 @@ using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 namespace RAWSelectionAssistant.Core.Services.Color;
 
 /// <summary>Display-referred, nonlinear sRGB float RGB (0..1); three channels, no alpha. RAW metadata owns orientation.</summary>
-public sealed class HighBitDepthImageBuffer
+public sealed class HighBitDepthImageBuffer : IDisposable
 {
     public HighBitDepthImageBuffer(int width, int height, ReadOnlyMemory<float> rgb32, string sourceBitDepth = "32f", string workingColorSpace = "sRGB", ushort orientation = 1, RawImageMetadata? metadata = null)
     {
@@ -22,7 +22,16 @@ public sealed class HighBitDepthImageBuffer
 
     public int Width { get; }
     public int Height { get; }
-    public ReadOnlyMemory<float> Rgb32 { get; }
+    private ReadOnlyMemory<float> pixels;
+    private IDisposable? ownedReservation;
+    private bool disposed;
+    public ReadOnlyMemory<float> Rgb32 { get=>!disposed?pixels:throw new ObjectDisposedException(nameof(HighBitDepthImageBuffer)); private set=>pixels=value; }
+    public void TakeReservation(IDisposable reservation)
+    {
+        if(disposed||ownedReservation is not null)throw new InvalidOperationException("Buffer already owned/disposed");
+        ownedReservation=reservation;
+    }
+    public void Dispose(){if(disposed)return;disposed=true;pixels=default;Interlocked.Exchange(ref ownedReservation,null)?.Dispose();}
     public string SourceBitDepth { get; } = "32f";
     public string WorkingColorSpace { get; } = "sRGB";
     public ushort Orientation { get; } = 1;

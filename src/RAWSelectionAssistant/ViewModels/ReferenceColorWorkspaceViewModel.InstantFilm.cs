@@ -52,6 +52,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public void ExitInstantPresentationForLifecycle()=>_instantCancellation?.Cancel();
     private void InitializeInstantFilmCommands()
     {
+        InitializeInstantV3Commands();
         bool Ready(object? _)=>!_disposed&&!IsInstantGenerating&&!IsLoading&&!IsExporting&&ActiveTarget is not null;
         GenerateInstantFilmCommand=new(_=>GenerateInstantFilmAsync(false),Ready);
         RollInstantFilmCommand=new(_=>GenerateInstantFilmAsync(true),_=>Ready(null)&&InstantDiceEnabled);
@@ -59,13 +60,14 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         DisableInstantFilmCommand=new(async _=>
         {
             if(ActiveTarget is not {} target||target.RawDefinition is not {} d)return;
-            CaptureEditVersion(target);target.ActiveEditVersionId=Guid.NewGuid();target.RawDefinition=d with{InstantFilm=(d.InstantFilm??new()) with{AlgorithmVersion=2,ImageEffectsDisabled=true,PaperFrame=InstantPaperFrame}};
+            CaptureEditVersion(target);target.ActiveEditVersionId=Guid.NewGuid();target.RawDefinition=d with{InstantFilm=(d.InstantFilm??new()) with{AlgorithmVersion=d.InstantFilm?.AlgorithmVersion??2,ImageEffectsDisabled=true,PaperFrame=InstantPaperFrame,V3=d.InstantFilm?.V3 is{} v3?v3 with{Amount=0}:null}};
             await ActivateTargetAsync(target);CaptureEditVersion(target);
         },Ready);
         SelectInstantCameraCommand=new(p=>{if(p is "SX-70" or "i-2"){InstantCamera=(string)p;OnPropertyChanged(nameof(InstantCamera));}},_=>!IsInstantGenerating);
     }
     private void RestoreInstantControls(InstantFilmDefinition? film)
     {
+        RestoreV3(film);
         if(film is null){InstantDiceEnabled=false;InstantImageEffectsDisabled=false;InstantLayout="SquareV1";InstantFit="CropFill";InstantCropX=.5;InstantCropY=.5;foreach(var name in new[]{nameof(InstantDiceEnabled),nameof(InstantImageEffectsDisabled),nameof(InstantLayout),nameof(InstantFit),nameof(InstantCropX),nameof(InstantCropY)})OnPropertyChanged(name);return;}
         SelectedInstantProfile=InstantFilmProfiles.Available.Single(x=>x.Id==film.FilmId);InstantTier=film.Tier;InstantDiceEnabled=film.DiceEnabled;
         InstantUneven=film.Uneven;InstantUnspread=film.Unspread;InstantRoller=film.Roller;InstantArtLeak=film.ArtLightLeak;InstantEnvironmentCelsius=film.EnvironmentCelsius;
@@ -115,6 +117,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 film=film with{DiceEnabled=true,Snapshot=snapshot};
             }
             film=InstantFilmPipeline.Freeze(film);
+            if(InstantEngineVersion=="V3")
+            {
+                var v3=FreezeV3(film,roll);var identity=v3.Profile;
+                film=film with{AlgorithmVersion=3,FilmId=identity.LegacyId,ChemicalGeneration=InstantFilmProfiles.Available.Single(p=>p.Id==identity.LegacyId).ChemicalGeneration,V3=v3};
+            }
+            else if(InstantEngineVersion!="V2")throw new InvalidDataException("Unknown instant algorithm version");
             Editor.CopyCurrentLookTo([target]);
             // Legacy RAW CurrentEdits is an explicit, persisted PV6 bridge; old definitions stay untouched.
             if(InstantInputMode is not("Original" or "CurrentEdits"))throw new InvalidDataException("请选择明确的输入来源。");
@@ -135,6 +143,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             using var presentationMaster=ReferenceEquals(target.LinearRawMaster,master)?StudioGlobalResources.Pin(target.Id,"Master"):StudioGlobalResources.ReserveWork((long)master.Image.Rgb32.Length*sizeof(float));
             var preview=await RenderProfessionalPreviewAsync(master,definition,1600,token);
             InstantFinalPreview=RawDisplayBitmapAdapter.ToBitmap(preview.ToVisualRgb24());
+            if(film.AlgorithmVersion==3)preview.Dispose();
             var original=ProfessionalRawPipeline.OrientedSize(master);var layout=InstantPaperLayout.Create(original.Width,original.Height,film);
             InstantDimensions=$"原尺寸 {original.Width} × {original.Height} · 相纸 {layout.Width} × {layout.Height}";OnPropertyChanged(nameof(InstantDimensions));
             InstantImageRegion=new(layout.Left/(double)layout.Width,layout.Top/(double)layout.Height,layout.WindowWidth/(double)layout.Width,layout.WindowHeight/(double)layout.Height);
@@ -150,10 +159,11 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
             token.ThrowIfCancellationRequested();
             // Commit only the ready, frozen result. Failure/cancellation leaves the old version and preview intact.
+            if(film.AlgorithmVersion==3){if(!_instantV3Undo.TryGetValue(target.Id,out var undo))_instantV3Undo[target.Id]=undo=new();if(version is Guid prior)undo.Push(prior);if(_instantV3Redo.TryGetValue(target.Id,out var redo))redo.Clear();}
             Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);target.ActiveEditVersionId=Guid.NewGuid();committedId=target.ActiveEditVersionId;
             target.RawDefinition=definition;target.RawInput=master.Contract;target.LinearRawMaster=master;target.RawMaster=null;
             target.AppliedLookSnapshot=null;target.ColorAdjustmentStackSnapshot=null;target.FilmSettingsSnapshot=null;
-            CaptureEditVersion(target);target.EditVersions[^1]=target.EditVersions[^1] with{Name=profile.Name+" · 创作 v2",OriginVersionId=version};
+            CaptureEditVersion(target);target.EditVersions[^1]=target.EditVersions[^1] with{Name=profile.Name+(film.AlgorithmVersion==3?" · 创作 V3":" · 创作 v2"),OriginVersionId=version};
             IsInstantGenerating=false;await ActivateTargetAsync(target);if(target.Status==ReferenceTargetStatus.Failed)throw new IOException(target.Error);StatusText="即时胶片显影完成 · 创作近似，非实测相纸标定";
         }
         catch(OperationCanceledException error){LastProcessingFailure=StudioProcessingFailure.From(error,"InstantRebuild");OnPropertyChanged(nameof(LastProcessingFailure));Rollback();StatusText="本次显影已退出，保留上一有效结果";InstantDiceEnabled=previousDice;}

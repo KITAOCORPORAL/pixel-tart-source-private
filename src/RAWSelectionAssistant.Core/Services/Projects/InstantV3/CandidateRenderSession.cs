@@ -6,8 +6,18 @@ namespace Kitao.InstantFilm.Research;
 public sealed class CandidateRenderSession : IDisposable
 {
     private CandidateImageLease.BorrowedImage? source;
+    private ICandidatePixelSource? provider;
+    private IDisposable? externalPin;
     private readonly object gate=new();
-    private CandidateImageLease.BorrowedImage RetainSource(){lock(gate)return source?.Retain()??throw new ObjectDisposedException(nameof(CandidateRenderSession));}
+    private bool retired;private int active;
+    private IDisposable RetainSource()
+    {
+        lock(gate){if(retired||provider is null)throw new ObjectDisposedException(nameof(CandidateRenderSession));active++;return new Active(this);}
+    }
+    private sealed class Active(CandidateRenderSession owner):IDisposable
+    {private CandidateRenderSession? held=owner;public void Dispose(){var value=Interlocked.Exchange(ref held,null);if(value is null)return;lock(value.gate){value.active--;if(value.retired&&value.active==0)value.ReleaseSource();}}}
+    private void ReleaseSource(){source?.Dispose();source=null;externalPin?.Dispose();externalPin=null;provider=null;}
+
     public CandidateRecipe Recipe { get; }
     public InstantPaperLayout Layout { get; }
     public const string Coordinates="FullOrientedSourcePixelsRadius2_NormalizedFullCanvasNoise_AreaPreviewAfterFullEffectV1";
@@ -18,13 +28,20 @@ public sealed class CandidateRenderSession : IDisposable
         {
             var image=source.Image;
             if(image.Orientation!=1||image.WorkingColorSpace!="sRGB")throw new InvalidDataException("Already oriented sRGB source required");
+            provider=new BufferCandidateSource(image);
             Layout=InstantPaperLayout.Create(image.Width,image.Height,new InstantFilmDefinition(true,AlgorithmVersion:2,PaperFrame:Recipe.Surface.Frame){PaperGeometry=Recipe.Geometry});
         }
         catch{source.Dispose();source=null;throw;}
     }
+    public CandidateRenderSession(ICandidatePixelSource pixels,CandidateRecipe recipe,IDisposable retainedMaster)
+    {
+        Recipe=recipe.Freeze();provider=pixels;externalPin=retainedMaster;
+        try{Layout=InstantPaperLayout.Create(pixels.Width,pixels.Height,new InstantFilmDefinition(true,AlgorithmVersion:2,PaperFrame:Recipe.Surface.Frame){PaperGeometry=Recipe.Geometry});}
+        catch{retainedMaster.Dispose();provider=null;externalPin=null;throw;}
+    }
     public CandidateImageLease RenderRegion(int left,int top,int width,int height,CancellationToken token=default)
     {
-        using var activeSource=RetainSource();var image=activeSource.Image;
+        using var activeSource=RetainSource();var image=provider??throw new ObjectDisposedException(nameof(CandidateRenderSession));
         if(left<0||top<0||width<=0||height<=0||(long)left+width>Layout.Width||(long)top+height>Layout.Height)throw new ArgumentOutOfRangeException(nameof(left));
         token.ThrowIfCancellationRequested();var lease=StudioGlobalResources.ReserveWork(checked((long)width*height*3*sizeof(float)));
         try
@@ -44,6 +61,12 @@ public sealed class CandidateRenderSession : IDisposable
                     if(Layout.TrySource(gx,gy,out var sx,out var sy))
                     {var p=((sy-minY)*borrow!.Image.Width+sx-minX)*3;var rgb=borrow.Image.Rgb32.Span;value=new(rgb[p],rgb[p+1],rgb[p+2]);}
                     else value=CandidateMaterial.Paper((gx+.5)/Layout.Width,(gy+.5)/Layout.Height,Recipe);
+                    if(Recipe.Paper is not null)
+                    {
+                        bool photo=Layout.TrySource(gx,gy,out _,out _);var nx=(gx+.5)/Layout.Width;var ny=(gy+.5)/Layout.Height;
+                        if(Recipe.Paper.Window=="Circle"&&photo){var u=(gx-Layout.Left+.5)/Layout.WindowWidth-.5;var v=(gy-Layout.Top+.5)/Layout.WindowHeight-.5;if(u*u+v*v>.25){photo=false;value=CandidateMaterial.Paper(nx,ny,Recipe);}}
+                        value=CandidateExtensions.Surface(value,nx,ny,Recipe,photo,Layout.Width,Layout.Height);
+                    }
                     value=CandidateMaterial.Scan(value,(gx+.5)/Layout.Width,(gy+.5)/Layout.Height,Recipe);
                     var o=((ty+y)*width+tx+x)*3;result[o]=(float)value.X;result[o+1]=(float)value.Y;result[o+2]=(float)value.Z;
                 }
@@ -55,12 +78,14 @@ public sealed class CandidateRenderSession : IDisposable
     /// <summary>Borrow is valid only within callback; retaining requires caller-owned copied/leased pixels.</summary>
     public void StreamStrips(Action<int,HighBitDepthImageBuffer> consume,int stripHeight=32,CancellationToken token=default)
     {
+        using var activeStream=RetainSource();
         if(stripHeight is <1 or >64)throw new ArgumentOutOfRangeException(nameof(stripHeight));
         for(int y=0;y<Layout.Height;y+=stripHeight)
         {token.ThrowIfCancellationRequested();using var region=RenderRegion(0,y,Layout.Width,Math.Min(stripHeight,Layout.Height-y),token);using var borrow=region.Borrow();consume(y,borrow.Image);}
     }
     public CandidateImageLease RenderPreview(int maximumEdge,CancellationToken token=default)
     {
+        using var activePreview=RetainSource();
         if(maximumEdge<=0)throw new ArgumentOutOfRangeException(nameof(maximumEdge));
         var ratio=Math.Min(1,maximumEdge/(double)Math.Max(Layout.Width,Layout.Height));var width=Math.Max(1,(int)Math.Round(Layout.Width*ratio));var height=Math.Max(1,(int)Math.Round(Layout.Height*ratio));
         var bytes=checked((long)width*height*3*sizeof(float));var lease=StudioGlobalResources.ReserveWork(bytes);
@@ -86,5 +111,5 @@ public sealed class CandidateRenderSession : IDisposable
         }
         catch{lease.Dispose();throw;}
     }
-    public void Dispose(){lock(gate){source?.Dispose();source=null;}}
+    public void Dispose(){lock(gate){if(retired)return;retired=true;if(active==0)ReleaseSource();}}
 }

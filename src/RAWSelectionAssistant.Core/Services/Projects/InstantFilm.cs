@@ -11,6 +11,8 @@ public sealed record InstantDefect(string Kind,double X,double Y,double Radius,d
 public sealed record InstantRandomSnapshot(ulong RootSeed,string PrngVersion,string ProfileId,int ProfileVersion,string Tier,double ColorShift,double SpreadScale,double TextureScale,IReadOnlyList<InstantDefect> Geometry);
 public sealed record InstantFilmDefinition(bool Enabled=false,string FilmId="itype-color",string ChemicalGeneration="ModernIntegralCreative",int ProfileVersion=1,int AlgorithmVersion=1,double Amount=1,bool PaperFrame=true,double Border=.04,double BottomBorder=.16,double Uneven=.15,double Unspread=.12,double Roller=.10,double ArtLightLeak=0,double EnvironmentCelsius=21,bool DiceEnabled=false,string Tier="稳定出片",InstantRandomSnapshot? Snapshot=null)
 {
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public Kitao.InstantFilm.Research.CandidateRecipe? V3 {get;init;}
     public string PaperColor {get;init;}="Warm";
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
     public bool ImageEffectsDisabled {get;init;}
@@ -18,6 +20,8 @@ public sealed record InstantFilmDefinition(bool Enabled=false,string FilmId="ity
     public InstantPaperGeometry? PaperGeometry {get;init;}
     public InstantFilmDefinition Validate()
     {
+        if(AlgorithmVersion==3){if(V3 is null)throw new InvalidDataException("V3 recipe missing");V3.Validate();if(V3.Profile.LegacyId!=FilmId)throw new InvalidDataException("V3 profile identity mismatch");return this;}
+        if(V3 is not null)throw new InvalidDataException("V3 payload cannot reinterpret V1/V2");
         if(PaperColor is not("Warm" or "Neutral" or "Cool"))throw new InvalidDataException("未知纸框色彩。");
         if(AlgorithmVersion is not (1 or 2)||ProfileVersion!=1||InstantFilmProfiles.Available.FirstOrDefault(x=>x.Id==FilmId) is not {} profile||profile.ChemicalGeneration!=ChemicalGeneration)throw new InvalidDataException("未知即时胶片定义/世代；研究中相纸不可作为可用预设。");
         if(AlgorithmVersion==1&&(ImageEffectsDisabled||PaperGeometry is not null))throw new InvalidDataException("V2 controls require explicit migration.");
@@ -49,7 +53,7 @@ public static class InstantFilmPipeline
     public static InstantFilmDefinition Freeze(InstantFilmDefinition definition)
     {
         definition.Validate();
-        return definition with { Snapshot=definition.Snapshot is {} s ? s with { Geometry=Array.AsReadOnly(s.Geometry.ToArray()) } : null };
+        return definition with { V3=definition.V3?.Freeze(), Snapshot=definition.Snapshot is {} s ? s with { Geometry=Array.AsReadOnly(s.Geometry.ToArray()) } : null };
     }
     public static ColorVector3 Apply(ColorVector3 srgb,double x,double y,InstantFilmDefinition definition)
     {
