@@ -7,3 +7,5 @@ OCIO2.4.2 monCurveFwd按offset/(gamma-1)=.055/1.4≈.03928571428571429推切点�
 新参考对照：colour仅配置其内部scalar decode阈值.04045，向量公式仍原库；独立scikit-image0.25.2原rgb2xyz/xyz2rgb函数保留，矩阵设identity隔离transfer；为记录未裁切encode仅去掉末尾np.clip，未重写任何transfer算式。不是拿项目函数充第二参考。scikit原mask>x cutoff与项目<=分支等价。两库逐阶段decode/exposure/encode/clamp最大误差0，沿用2e-10，不放宽。含原.04045、两cutoff两侧与double/f32相邻、灰阶/原色/负/>1，原colour/OCIO逐阶段差异同表保留。
 
 上述仅数学定义匹配，真实输入/产品/来源完整commit仍须准入合同补证。
+
+实际来源修复：GitHub contents API可以返回固定commit的base64原件，已取回Pillow AlphaComposite/许可证、FFmpeg overlay/LGPL许可证及OCIO Gamma CPU/Data/许可证；RECOVERED_REFERENCES.json包含git blob与SHA。scikit固定commit e8a42ba85aaf5fd9322ef9ca51bc21063b22fcae已解引用tag，源与wheel仅CRLF差异，改用git原件重跑通过。没有伪造缺失hash。

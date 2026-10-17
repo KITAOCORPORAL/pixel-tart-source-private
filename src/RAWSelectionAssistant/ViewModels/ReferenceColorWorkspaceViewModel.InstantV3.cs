@@ -7,7 +7,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
 {
  public IReadOnlyList<string> InstantEngineVersions {get;}=["V2","V3"];
  private string _instantEngineVersion="V2";
- public string InstantEngineVersion {get=>_instantEngineVersion;set{if(_instantEngineVersion==value)return;_instantEngineVersion=value;OnPropertyChanged(nameof(InstantEngineVersion));OnPropertyChanged(nameof(IsInstantV3Selected));OnPropertyChanged(nameof(IsInstantV2Selected));}}
+ public string InstantEngineVersion {get=>_instantEngineVersion;set{if(_instantEngineVersion==value)return;_instantEngineVersion=value;OnPropertyChanged(nameof(InstantEngineVersion));OnPropertyChanged(nameof(IsInstantV3Selected));OnPropertyChanged(nameof(IsInstantV2Selected));OnPropertyChanged(nameof(PhotoGradeOriginalInputAllowed));}}
  public bool IsInstantV3Selected=>InstantEngineVersion=="V3";
  public bool IsInstantV2Selected=>!IsInstantV3Selected;
  private double _instantV3Exposure;

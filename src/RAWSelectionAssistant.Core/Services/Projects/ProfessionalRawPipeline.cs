@@ -7,11 +7,17 @@ public sealed record ProfessionalRawDefinition(int ProcessingVersion=4,string Wh
     public InstantFilmDefinition? InstantFilm {get;init;}
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
     public InstantInputRecipe? InstantInput {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public RAWSelectionAssistant.Core.Services.Color.PhotoWideV1.RenderedSrgbExposure? SrgbExposure {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public int? RenderedInputVersion {get;init;}
     [System.Text.Json.Serialization.JsonIgnore]
     public bool IsRenderedInput => InputConfiguration is "RenderedSrgbFloatV1" or "LegacyRawEditsSrgbFloatV1";
     public ProfessionalRawDefinition Validate()
     {
         InstantFilm?.Validate();
+        if(RenderedInputVersion is not null&&(RenderedInputVersion!=2||InputConfiguration!="RenderedSrgbFloatV1"))throw new InvalidDataException("Unknown rendered input version");
+        if(SrgbExposure is{} exposure){exposure.Validate();if(InputConfiguration!="RenderedSrgbFloatV1"||InstantFilm is not null)throw new InvalidDataException("Rendered exposure does not accept scene RAW or mixed V3 chain");}
         if(InstantInput is {} input)
         {
             if(InputConfiguration=="LegacyRawEditsSrgbFloatV1")LegacyRawInstantInput.ValidateRecipe(input);
@@ -28,7 +34,7 @@ public sealed record ProfessionalRawDefinition(int ProcessingVersion=4,string Wh
         if(ProcessingVersion!=4||InputConfiguration!="LibRaw021LinearProPhotoD65V1"||DisplayTransform!="LuminanceShoulderNeutralGamutV1"||WhiteBalance is not("Camera" or "CameraGains"))throw new InvalidDataException("不支持的 RAW 处理定义。");
         if(new[]{RedGain,GreenGain,BlueGain}.Any(x=>!double.IsFinite(x)||x<.125||x>8)||!double.IsFinite(ExposureEv)||ExposureEv is < -10 or > 10)throw new InvalidDataException("RAW 增益或曝光越界。");return this;
     }
-    public string DecodeKey=>FormattableString.Invariant($"{InputConfiguration}:{WhiteBalance}:{(WhiteBalance=="Camera"?1:RedGain):R}:{(WhiteBalance=="Camera"?1:GreenGain):R}:{(WhiteBalance=="Camera"?1:BlueGain):R}") + (InstantInput is null ? "" : ":recipe:"+Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(InstantInput)))));
+    public string DecodeKey=>FormattableString.Invariant($"{InputConfiguration}:{WhiteBalance}:{(WhiteBalance=="Camera"?1:RedGain):R}:{(WhiteBalance=="Camera"?1:GreenGain):R}:{(WhiteBalance=="Camera"?1:BlueGain):R}") + (RenderedInputVersion is null?"":":rasterInput2") + (InstantInput is null ? "" : ":recipe:"+Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(InstantInput)))));
 }
 public sealed record ProfessionalRawContract(string DecoderVersion,string Make,string Model,string SourceSha256,string DecodeKey,
     double[] CameraWhiteBalance,double[] AppliedWhiteBalance,double[] CameraToRgbMatrix,int WhiteLevel,
@@ -97,7 +103,7 @@ public static class ProfessionalRawPipeline
     {
         var input=master.Image.Rgb32.Span;var i=(y*master.Image.Width+x)*3;
         if(!float.IsFinite(input[i])||!float.IsFinite(input[i+1])||!float.IsFinite(input[i+2]))throw new InvalidDataException("Non-finite RAW pixel.");
-        return definition.IsRenderedInput?new(input[i],input[i+1],input[i+2]):Display(ApplyExposure(new(input[i],input[i+1],input[i+2]),definition.ExposureEv));
+        var encoded=new ColorVector3(input[i],input[i+1],input[i+2]);return definition.IsRenderedInput?(definition.SrgbExposure is{} exposure?exposure.Apply(encoded):encoded):Display(ApplyExposure(encoded,definition.ExposureEv));
     }
     public static (int Width,int Height) OutputSize(ProfessionalRawMaster master,ProfessionalRawDefinition definition){if(Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition))return Kitao.InstantFilm.Research.InstantV3ProductPipeline.Size(master,definition);var size=OrientedSize(master);var layout=InstantFilmPipeline.Layout(size.Width,size.Height,definition.InstantFilm);return(layout.Width,layout.Height);}
     public static int OutputOrientation(ProfessionalRawMaster master,ProfessionalRawDefinition definition)=>definition.InstantFilm?.Enabled==true||definition.IsRenderedInput?1:master.Image.Orientation;

@@ -11,3 +11,7 @@
 准入范围：合成数学VERIFIED_RESEARCH，真实输入与产品入口/保存重开/导出独立比较完成才EXPLICIT_VERSION_APPROVED；未完成前不宣布生产验收。不同真实ICC、RAW场景宽域、DWG、显示器ICC未准入。负值输出最终clamp明确，不恢复剪裁。
 
 产品验证计划：实际授权冻结Sony/Canon RGB16取样及代表/原尺寸，双参考逐阶段，真正项目重开/undo/redo/输出16bit逐码与JPEG既有门槛，预览线性面积oracle；未来未通过保留失败。
+
+已补48个授权原冻结RGB16不同坐标样本（原件/冻结hash在授权manifest核对），边界与真实样本合并288组EV/RGB逐阶段两参考最大0。新链实际workspace命令/撤销重做/保存重开/三格式回读已通过synthetic，首次测试假设普通照片MatchedImage不为null错误，改用SourceImage fallback，原失败保留。产品仅声明sRGB输入解释/线性曝光/OETF+最终裁切；不碰旧PhotoColorMathV1/PV4/5/6。
+
+原尺寸二源原WIC64N+文件缓冲预算会拒绝Canon/Sony（各76N≈1.53/2.50GB，未加总预算）。新增TIFF输入组件3只支持产品单条带未压缩RGB16、精确sRGB ICC，用TiffStreamValidator逐行解码，最终float12N+一行；不暗缩小，不改变1/2。真实多ICC/透明仍旧2，不以新3冒充通用TIFF。独立WIC旧1逐码比较及源指纹回归要求。

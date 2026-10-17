@@ -32,7 +32,7 @@ public static class InstantV3ProductPipeline
   IDisposable? secondLease=null;HighBitDepthImageBuffer? pixels=null;
   try
   {
-   token.ThrowIfCancellationRequested();var decoder=SecondExposureInputs.Decoder??throw new NotSupportedException("SECOND_SOURCE_DECODER_UNAVAILABLE");var verified=second.Version==2&&decoder.ValidatesSourceIdentity;if(!verified)second.ValidateSource(token);secondLease=StudioGlobalResources.ReserveWork(checked((long)second.Width*second.Height*12));
+   token.ThrowIfCancellationRequested();var decoder=SecondExposureInputs.Decoder??throw new NotSupportedException("SECOND_SOURCE_DECODER_UNAVAILABLE");var verified=second.Version>=2&&decoder.ValidatesSourceIdentity;if(!verified)second.ValidateSource(token);secondLease=StudioGlobalResources.ReserveWork(checked((long)second.Width*second.Height*12));
    pixels=decoder.Read(second,token);
    if(pixels.Width!=second.Width||pixels.Height!=second.Height||pixels.Orientation!=1||pixels.WorkingColorSpace!="sRGB")throw new InvalidDataException("SECOND_SOURCE_DOMAIN_CHANGED");if(!verified)second.ValidateSource(token);
    return new(new MultiplePixelSource(new Source(master,definition with{InstantFilm=null}),pixels,second),recipe,new PairLease(pin,secondLease,pixels));

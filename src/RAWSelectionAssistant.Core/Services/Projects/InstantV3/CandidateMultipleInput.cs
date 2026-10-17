@@ -5,7 +5,7 @@ public sealed record CandidateMultipleInput(int Version,string Path,string Sha25
 {
  public CandidateMultipleInput Validate()
  {
-  if(Version is not(1 or 2)||!System.IO.Path.IsPathFullyQualified(Path)||Sha256.Length!=64||!Sha256.All(Uri.IsHexDigit)||Width<=0||Height<=0||Orientation!=1||Mode is not("NormalizedMix" or "ExposureSum")||Domain!="OrientedDisplaySrgbD65V1"||!double.IsFinite(Weight)||Weight<0||Weight>1||!double.IsFinite(CropX)||CropX<0||CropX>1||!double.IsFinite(CropY)||CropY<0||CropY>1||!double.IsFinite(Zoom)||Zoom<1||Zoom>4)throw new InvalidDataException("Unknown/invalid second exposure contract");return this;
+  if(Version is not(1 or 2 or 3)||!System.IO.Path.IsPathFullyQualified(Path)||Sha256.Length!=64||!Sha256.All(Uri.IsHexDigit)||Width<=0||Height<=0||Orientation!=1||Mode is not("NormalizedMix" or "ExposureSum")||Domain!="OrientedDisplaySrgbD65V1"||!double.IsFinite(Weight)||Weight<0||Weight>1||!double.IsFinite(CropX)||CropX<0||CropX>1||!double.IsFinite(CropY)||CropY<0||CropY>1||!double.IsFinite(Zoom)||Zoom<1||Zoom>4)throw new InvalidDataException("Unknown/invalid second exposure contract");return this;
  }
  public void ValidateSource(CancellationToken token=default){Validate();if(!File.Exists(Path))throw new FileNotFoundException("SECOND_SOURCE_MISSING",Path);using var file=File.OpenRead(Path);if(!HashSource(file,token).Equals(Sha256,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("SECOND_SOURCE_CHANGED");}
   public static string HashSource(Stream stream,CancellationToken token=default)

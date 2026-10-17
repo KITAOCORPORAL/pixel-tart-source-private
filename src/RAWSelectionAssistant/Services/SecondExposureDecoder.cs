@@ -11,7 +11,7 @@ public sealed class SecondExposureDecoder:ISecondExposureDecoder
  public bool ValidatesSourceIdentity=>true;
  public HighBitDepthImageBuffer Read(CandidateMultipleInput input,CancellationToken token)
  {
-  input.Validate();if(input.Version==1)return ReadLegacy(input,token);
+  input.Validate();if(input.Version==3)return BoundedSrgbTiffInput.Read(input,token);if(input.Version==1)return ReadLegacy(input,token);
   CandidateProcessingEvidence.Enter("SecondHashBefore",token);
   using var stream=new FileStream(input.Path,FileMode.Open,FileAccess.Read,FileShare.Read);
   Verify(stream,input,token);stream.Position=0;
@@ -58,7 +58,10 @@ public sealed class SecondExposureDecoder:ISecondExposureDecoder
  public static void EnsureRegistered()=>SecondExposureInputs.Decoder??=new SecondExposureDecoder();
  public static CandidateMultipleInput Describe(string path,CancellationToken token=default)
  {
-  path=Path.GetFullPath(path);if(Path.GetExtension(path).ToLowerInvariant() is not(".png" or ".tif" or ".tiff" or ".jpg" or ".jpeg"))throw new NotSupportedException("Second exposure supports PNG, TIFF and JPEG only");
+  path=Path.GetFullPath(path);
+  if(Path.GetExtension(path).ToLowerInvariant() is ".tif" or ".tiff")
+  {try{return BoundedSrgbTiffInput.Describe(path,token);}catch(Exception e)when(e is InvalidDataException or NotSupportedException){/* Ordinary TIFF remains WIC2, never downsample. */}}
+  if(Path.GetExtension(path).ToLowerInvariant() is not(".png" or ".tif" or ".tiff" or ".jpg" or ".jpeg"))throw new NotSupportedException("Second exposure supports PNG, TIFF and JPEG only");
   using var stream=new FileStream(path,FileMode.Open,FileAccess.Read,FileShare.Read);token.ThrowIfCancellationRequested();
   var frame=BitmapDecoder.Create(stream,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnDemand).Frames[0];token.ThrowIfCancellationRequested();var o=ReadOrientation(frame);
   int w=o>=5?frame.PixelHeight:frame.PixelWidth,h=o>=5?frame.PixelWidth:frame.PixelHeight;

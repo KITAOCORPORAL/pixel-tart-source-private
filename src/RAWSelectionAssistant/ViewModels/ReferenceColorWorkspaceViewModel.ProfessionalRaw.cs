@@ -21,6 +21,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public string RawPipelineStatus {get;private set;}="PV4 · 线性 ProPhoto / LibRaw，相机白平衡只在解码应用一次";
     private async Task<ProfessionalRawMaster> DecodeProfessionalInputAsync(string path,ProfessionalRawDefinition definition,CancellationToken token=default)
     {
+        if(definition.SrgbExposure is not null||definition.RenderedInputVersion==2)return await RenderedSrgbInput.ReadAsync(path,definition,token);
         if(definition.InputConfiguration=="LegacyRawEditsSrgbFloatV1")return await RebuildLegacyRawInputAsync(path,definition,null,token);
         if(definition.InputConfiguration!="RenderedSrgbFloatV1")return await _professionalDecoder.DecodeAsync(path,definition,token);
         if(definition.InstantInput is not {Mode:"CurrentEdits"} recipe)return await InstantFilmJpegInput.ReadAsync(path,definition,token);
@@ -109,7 +110,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         {Editor.PresentIndependentRaw(StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(quick.ToVisualRgb24()),quick.Orientation));RawPipelineStatus="快速800代理 · 正在更新线性光抗混叠高质量预览";OnPropertyChanged(nameof(RawPipelineStatus));}
         var rendered=await RenderProfessionalPreviewAsync(master,definition,1600,token);
         using var renderedOwner=definition.InstantFilm?.AlgorithmVersion==3?rendered:null;
-        var original=definition.ExposureEv==0&&definition.InstantFilm?.AlgorithmVersion!=3?rendered:await RenderProfessionalPreviewAsync(master,(definition.InstantFilm?.AlgorithmVersion==3?Kitao.InstantFilm.Research.InstantV3ProductPipeline.Original(definition):definition with{ExposureEv=0}),1600,token);
+        var original=definition.ExposureEv==0&&definition.InstantFilm?.AlgorithmVersion!=3&&definition.SrgbExposure is null?rendered:await RenderProfessionalPreviewAsync(master,(definition.InstantFilm?.AlgorithmVersion==3?Kitao.InstantFilm.Research.InstantV3ProductPipeline.Original(definition):definition with{ExposureEv=0,SrgbExposure=null}),1600,token);
         using var originalOwner=definition.InstantFilm?.AlgorithmVersion==3&&!ReferenceEquals(original,rendered)?original:null;
         if(revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)return;
         var image=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(rendered.ToVisualRgb24()),rendered.Orientation);var before=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(original.ToVisualRgb24()),original.Orientation);
