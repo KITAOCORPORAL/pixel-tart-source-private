@@ -241,6 +241,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         RetryFailedExportCommand = new AsyncRelayCommand(_ => RetryFailedExportsAsync(), _ => Targets.Any(item => item.ExportStatus is ReferenceExportStatus.Failed or ReferenceExportStatus.Partial) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory));
         Editor.PropertyChanged += (_, args) =>
         {
+            if(args.PropertyName==nameof(TetherReferenceModeViewModel.ViewMode))OnPropertyChanged(nameof(PhotographerComparisonValue));
             if((args.PropertyName is nameof(TetherReferenceModeViewModel.ViewMode) or nameof(TetherReferenceModeViewModel.ShowOriginal))&&Editor.ComparisonUnavailable&&(Editor.ShowOriginal||Editor.ViewMode is "左右对比" or "并排对比"))_ = RequestComparisonAsync();
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.IsProMode) or nameof(TetherReferenceModeViewModel.AdjustmentStack) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode)) RefreshSyncAvailability();
@@ -433,6 +434,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     }
     private void RefreshSyncAvailability()
     {
+        OnPropertyChanged(nameof(PaperPreviewAvailabilityReason));OnPropertyChanged(nameof(RasterAvailabilityReason));OnPropertyChanged(nameof(PhotographerComparisonHelp));PreviewPhotographerPapersCommand?.RaiseCanExecuteChanged();
         OnPropertyChanged(nameof(PhotoGradeRasterToolsEnabled));OnPropertyChanged(nameof(PhotoGradeCanSyncStep));OnPropertyChanged(nameof(PhotoGradeOriginalInputAllowed));OnPropertyChanged(nameof(SrgbExposureAvailable));ApplySrgbExposureCommand?.RaiseCanExecuteChanged();OnPropertyChanged(nameof(InstantEditingAllowed));
         OnPropertyChanged(nameof(SelectedTargetCount)); OnPropertyChanged(nameof(CanSyncSelectedNodes));
         OnPropertyChanged(nameof(VisibleTargetCount)); OnPropertyChanged(nameof(HiddenSelectedTargetCount)); OnPropertyChanged(nameof(FilmstripSummary)); OnPropertyChanged(nameof(SyncSummary));
@@ -644,7 +646,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private async Task ActivateTargetAsync(ReferenceTargetItem target)
     {
-        await StopComparisonAsync();
+        if(!ReferenceEquals(ActiveTarget,target))ClearPhotographerPreviews();
+        _paperPreviewCancellation?.Cancel();await StopComparisonAsync();
         _secondSelectionCancellation?.Cancel();if(IsInstantGenerating)_instantCancellation?.Cancel();
         InvalidateProfessionalPreview();foreach(var other in Targets.Where(x=>!ReferenceEquals(x,target)))other.LinearRawMaster=null;if(target.RawDefinition is null)target.LinearRawMaster=null;
         var revision = Interlocked.Increment(ref _activationRevision);
@@ -718,7 +721,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public void Dispose()
     {
         if(_disposed)return;
-        CancelComparison();_disposed = true;
+        _paperPreviewCancellation?.Cancel();CancelComparison();_disposed = true;
         PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, OnStudioLanguageChanged, nameof(StudioLocalizationService.Language));
         CancelRangeSelection();
         _analysisCancellation?.Cancel(); _analysisCache.Clear();

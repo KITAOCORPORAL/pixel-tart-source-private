@@ -62,7 +62,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     public async Task LoadSessionAsync(string path, CancellationToken token = default)
     {
-        await StopComparisonAsync();
+        ClearPhotographerPreviews();await StopComparisonAsync();
         if(_skipSessionPreparation){await LoadSessionCoreAsync(path,token);return;}
         if(_disposed||IsLoading||IsInstantGenerating||IsExporting)throw new InvalidOperationException("工作区正在处理，未开始加载项目。");
         using var preparation=CancellationTokenSource.CreateLinkedTokenSource(token);

@@ -14,7 +14,7 @@ namespace RAWSelectionAssistant.WpfTests;
    Assert.AreEqual("仿色结果",vm.Editor.EffectiveViewMode);
    var viewport=(ColorStudioImageViewport)view.FindName("PhotoViewport");view.UpdateLayout();Assert.IsNull(viewport.Original);Assert.IsNotNull(viewport.Matched);
    var rendered=new RenderTargetBitmap(1600,1000,96,96,PixelFormats.Pbgra32);rendered.Render(view);var renderedBytes=new byte[1600*1000*4];rendered.CopyPixels(renderedBytes,1600*4,0);Assert.IsTrue(renderedBytes.Any(x=>x!=0),"Effect-only viewport must draw while comparison absent");Assert.IsTrue(vm.PrepareComparisonCommand.CanExecute(null));
-   var combo=(ComboBox)view.FindName("ComparisonMode");combo.SetCurrentValue(ComboBox.SelectedItemProperty,"并排对比");await vm.ComparisonWork;
+   var combo=(ComboBox)view.FindName("ComparisonMode");combo.SetCurrentValue(ComboBox.SelectedValueProperty,"并排对比");await vm.ComparisonWork;
    Assert.IsTrue(vm.IsComparisonReady,vm.ComparisonStatus);Assert.IsNotNull(vm.Editor.SourceImage);Assert.AreEqual("并排对比",vm.Editor.EffectiveViewMode);
    Assert.AreEqual(effect,Pixels(vm.Editor.MatchedImage!));Assert.AreEqual(id,target.ActiveEditVersionId);Assert.AreEqual(count,target.EditVersions.Count);Assert.AreEqual(recipe,JsonSerializer.Serialize(target.RawDefinition));
    var master=target.LinearRawMaster!;using var expected=ProfessionalRawPipeline.RenderPreview(master,InstantV3ProductPipeline.Original(target.RawDefinition!),1600);

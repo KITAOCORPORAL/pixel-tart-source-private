@@ -1,25 +1,30 @@
 <UserControl x:Class="RAWSelectionAssistant.Views.InstantV3Editor" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:views="clr-namespace:RAWSelectionAssistant.Views">
  <StackPanel IsEnabled="{Binding InstantEditingAllowed}">
-  <TextBlock Text="{views:StudioText V3DraftHelp}" TextWrapping="Wrap" Margin="0,4,0,8"/>
-  <ComboBox x:Name="RecipeChoice" ItemsSource="{Binding InstantProfiles}" SelectedItem="{Binding SelectedInstantProfile}" DisplayMemberPath="Name"/>
-  <ComboBox ItemsSource="{Binding InstantEngineVersions}" SelectedItem="{Binding InstantEngineVersion}"/>
-  <CheckBox Content="{views:StudioText InstantDemoMode}" IsChecked="{Binding InstantDevelopmentDemo}"/>
-  <WrapPanel><Button x:Name="ApplyV3" Content="{views:StudioText V3Apply}" Command="{Binding GenerateInstantFilmCommand}"/><Button Content="{views:StudioText V3Roll}" Command="{Binding RollInstantFilmCommand}"/><Button Content="{views:StudioText V3Reset}" Command="{Binding ResetPhotoV3DraftCommand}"/></WrapPanel>
-  <WrapPanel><Button Content="{views:StudioText InstantV3Live24}" Command="{Binding UndoInstantV3Command}"/><Button Content="{views:StudioText InstantV3Live25}" Command="{Binding RedoInstantV3Command}"/><Button Content="{views:StudioText InstantBatch09Disable}" Command="{Binding DisableInstantFilmCommand}"/></WrapPanel>
-  <CheckBox Content="{views:StudioText InstantBatch09Disable}" IsChecked="{Binding InstantImageEffectsDisabled}"/>
-  <TextBlock Text="{views:StudioText V3Input}"/><ComboBox ItemsSource="{Binding InstantInputModes}" SelectedItem="{Binding InstantInputMode}"><ComboBox.ItemContainerStyle><Style TargetType="ComboBoxItem"><Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding}" Value="Original"/><Condition Binding="{Binding DataContext.PhotoGradeOriginalInputAllowed,RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="False"/></MultiDataTrigger.Conditions><Setter Property="IsEnabled" Value="False"/></MultiDataTrigger></Style.Triggers></Style></ComboBox.ItemContainerStyle></ComboBox><TextBlock Text="{views:StudioText V3OriginalHelp}" TextWrapping="Wrap"/>
-  <Expander IsEnabled="{Binding IsInstantV3Selected}" Header="{views:StudioText V3Tone}" IsExpanded="True"><StackPanel>
-<ComboBox ItemsSource="{Binding InstantV3Stocks}" SelectedItem="{Binding InstantV3Stock}"/>
+  <TextBlock Text="选择相纸" FontSize="18" FontWeight="SemiBold"/><TextBlock Text="创作模拟，不是胶片实测标定。先看色彩，再调整纸框与材质。" TextWrapping="Wrap" FontSize="11" Margin="0,6,0,10"/>
+  <ListBox x:Name="PaperChoices" ItemsSource="{Binding PhotographerPapers}" SelectedValuePath="ProfileId" SelectedValue="{Binding SelectedPhotographerPaperId,Mode=TwoWay}" MaxHeight="220">
+   <ListBox.ItemTemplate><DataTemplate><Grid Margin="2,4"><Grid.ColumnDefinitions><ColumnDefinition Width="86"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><Border Background="#202323" Height="58"><Image Source="{Binding Preview}" Stretch="Uniform"/></Border><StackPanel Grid.Column="1" Margin="9,0,0,0"><TextBlock Text="{Binding Name}" FontWeight="SemiBold"/><TextBlock Text="{Binding Description}" TextWrapping="Wrap" FontSize="10"/></StackPanel></Grid></DataTemplate></ListBox.ItemTemplate>
+  </ListBox>
+  <Button x:Name="PreviewPaperChoices" Content="预览这些相纸 · 当前照片" Command="{Binding PreviewPhotographerPapersCommand}"/>
+  <TextBlock Text="{Binding PaperPreviewAvailabilityReason}" TextWrapping="Wrap" FontSize="10"/>
+  <TextBlock Text="{Binding PaperPreviewStatus}" TextWrapping="Wrap" FontSize="10" Margin="0,4,0,10"/>
+  <TextBlock Text="{Binding PhotographerPaperDetail}" TextWrapping="Wrap" FontSize="11"/>
+   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantAmount,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantAmount}" TextWrapping="Wrap"/></DockPanel>
+   <Slider x:Name="InstantAmountControl" Tag="InstantAmount" Minimum="0" Maximum="1" Value="{Binding InstantAmount,Mode=TwoWay}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Exposure,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Exposure}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3ExposureControl" Tag="InstantV3Exposure" Minimum="-2" Maximum="2" Value="{Binding InstantV3Exposure,Mode=TwoWay}"/>
+
+  <Button x:Name="ApplyV3" Content="应用相纸效果" Command="{Binding GenerateInstantFilmCommand}" Margin="0,8,0,8"/>
+  <TextBlock Text="色彩与外观分开控制" FontWeight="SemiBold" Margin="0,6,0,6"/>
+  <CheckBox Content="添加纸框（不改变色彩配方）" IsChecked="{Binding InstantPaperFrame}"/>
+  <TextBlock Text="效果强度只控制色彩／成像；纸框、纸面在下方单独调整。" TextWrapping="Wrap" FontSize="10" Margin="0,4,0,10"/>
+  <Expander IsEnabled="{Binding IsInstantV3Selected}" x:Name="ToneAdvanced" Header="进阶色彩与层次" IsExpanded="False"><StackPanel>
+<ComboBox ItemsSource="{Binding InstantV3Stocks}" SelectedItem="{Binding InstantV3Stock}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Toe,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Toe}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3ToeControl" Tag="InstantV3Toe" Minimum="0" Maximum="0.3" Value="{Binding InstantV3Toe,Mode=TwoWay}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Shoulder,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Shoulder}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3ShoulderControl" Tag="InstantV3Shoulder" Minimum="0" Maximum="2" Value="{Binding InstantV3Shoulder,Mode=TwoWay}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Density,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Density}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3DensityControl" Tag="InstantV3Density" Minimum="0.5" Maximum="2" Value="{Binding InstantV3Density,Mode=TwoWay}"/>
-   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantAmount,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantAmount}" TextWrapping="Wrap"/></DockPanel>
-   <Slider x:Name="InstantAmountControl" Tag="InstantAmount" Minimum="0" Maximum="1" Value="{Binding InstantAmount,Mode=TwoWay}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Fog,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Fog}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3FogControl" Tag="InstantV3Fog" Minimum="0" Maximum="1" Value="{Binding InstantV3Fog,Mode=TwoWay}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3ShadowCast,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3ShadowCast}" TextWrapping="Wrap"/></DockPanel>
@@ -35,7 +40,7 @@
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3DevelopmentEdge,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3DevelopmentEdge}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3DevelopmentEdgeControl" Tag="InstantV3DevelopmentEdge" Minimum="0" Maximum="1" Value="{Binding InstantV3DevelopmentEdge,Mode=TwoWay}"/>
   </StackPanel></Expander>
-  <Expander IsEnabled="{Binding IsInstantV3Selected}" Header="{views:StudioText V3Optics}" IsExpanded="False"><StackPanel>
+  <Expander IsEnabled="{Binding IsInstantV3Selected}" x:Name="GrainAdvanced" Header="柔光、颗粒与乳剂" IsExpanded="False"><StackPanel>
 <TextBlock Text="{views:StudioText InstantV3Live23}"/><TextBox x:Name="Seed" Text="{Binding InstantV3Seed,UpdateSourceTrigger=PropertyChanged}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Softness,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Softness}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3SoftnessControl" Tag="InstantV3Softness" Minimum="0" Maximum="1" Value="{Binding InstantV3Softness,Mode=TwoWay}"/>
@@ -52,7 +57,7 @@
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3EmulsionDefects,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3EmulsionDefects}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3EmulsionDefectsControl" Tag="InstantV3EmulsionDefects" Minimum="0" Maximum="1" Value="{Binding InstantV3EmulsionDefects,Mode=TwoWay}"/>
   </StackPanel></Expander>
-  <Expander IsEnabled="{Binding IsInstantV3Selected}" Header="{views:StudioText V3Defects}" IsExpanded="False"><StackPanel>
+  <Expander IsEnabled="{Binding IsInstantV3Selected}" x:Name="DefectsAdvanced" Header="乳剂缺陷与漏光" IsExpanded="False"><StackPanel>
 <ComboBox ItemsSource="{Binding InstantV3DefectKinds}" SelectedItem="{Binding InstantV3DefectKind}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3DefectAmount,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3DefectAmount}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3DefectAmountControl" Tag="InstantV3DefectAmount" Minimum="0" Maximum="1" Value="{Binding InstantV3DefectAmount,Mode=TwoWay}"/>
@@ -69,7 +74,7 @@
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3DefectScale,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3DefectScale}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3DefectScaleControl" Tag="InstantV3DefectScale" Minimum="0.25" Maximum="4" Value="{Binding InstantV3DefectScale,Mode=TwoWay}"/>
   </StackPanel></Expander>
-  <Expander IsEnabled="{Binding IsInstantV3Selected}" Header="{views:StudioText V3Paper}" IsExpanded="False"><StackPanel>
+  <Expander IsEnabled="{Binding IsInstantV3Selected}" x:Name="PaperAdvanced" Header="纸框、纸面与构图" IsExpanded="False"><StackPanel>
 <CheckBox Content="{views:StudioText InstantBatch08_6}" IsChecked="{Binding InstantPaperFrame}"/><ComboBox ItemsSource="{Binding InstantPaperColors}" SelectedItem="{Binding InstantPaperColor}"/><ComboBox ItemsSource="{Binding InstantLayouts}" SelectedItem="{Binding InstantLayout}"/><ComboBox ItemsSource="{Binding InstantFitModes}" SelectedItem="{Binding InstantFit}"/><ComboBox ItemsSource="{Binding InstantV3Patterns}" SelectedItem="{Binding InstantV3Pattern}"/><CheckBox Content="{views:StudioText InstantV3Live21}" IsChecked="{Binding InstantV3Circle}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantBorder,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantBorder}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantBorderControl" Tag="InstantBorder" Minimum="0" Maximum="0.2" Value="{Binding InstantBorder,Mode=TwoWay}"/>
@@ -102,7 +107,7 @@
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3ReflectionWidth,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3ReflectionWidth}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3ReflectionWidthControl" Tag="InstantV3ReflectionWidth" Minimum="0.01" Maximum="1" Value="{Binding InstantV3ReflectionWidth,Mode=TwoWay}"/>
   </StackPanel></Expander>
-  <Expander IsEnabled="{Binding IsInstantV3Selected}" Header="{views:StudioText V3Multiple}" IsExpanded="False"><StackPanel>
+  <Expander IsEnabled="{Binding IsInstantV3Selected}" x:Name="MultipleAdvanced" Header="双重曝光 · 第二张照片" IsExpanded="False"><StackPanel>
 <WrapPanel><Button Content="{views:StudioText V3SecondSelect}" Command="{Binding SelectSecondExposureCommand}"/><Button Content="{views:StudioText V3SecondClear}" Command="{Binding ClearSecondExposureCommand}"/></WrapPanel><TextBlock Text="{Binding InstantSecondSourceName}" TextWrapping="Wrap"/><ComboBox ItemsSource="{Binding InstantSecondModes}" SelectedItem="{Binding InstantSecondMode}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantSecondWeight,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantSecondWeight}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantSecondWeightControl" Tag="InstantSecondWeight" Minimum="0" Maximum="1" Value="{Binding InstantSecondWeight,Mode=TwoWay}"/>
@@ -112,6 +117,11 @@
    <Slider x:Name="InstantSecondCropYControl" Tag="InstantSecondCropY" Minimum="0" Maximum="1" Value="{Binding InstantSecondCropY,Mode=TwoWay}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantSecondZoom,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantSecondZoom}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantSecondZoomControl" Tag="InstantSecondZoom" Minimum="1" Maximum="4" Value="{Binding InstantSecondZoom,Mode=TwoWay}"/>
+  </StackPanel></Expander>
+  <Expander Header="输入来源与版本详情" IsExpanded="False"><StackPanel><TextBlock Text="输入来源：Original 为原文件，CurrentEdits 为冻结的当前编辑。" TextWrapping="Wrap"/><ComboBox ItemsSource="{Binding InstantInputModes}" SelectedItem="{Binding InstantInputMode}"/><TextBlock Text="{views:StudioText V3OriginalHelp}" TextWrapping="Wrap"/>
+   <ComboBox x:Name="RecipeChoice" ItemsSource="{Binding InstantProfiles}" SelectedItem="{Binding SelectedInstantProfile}" DisplayMemberPath="Name"/><ComboBox ItemsSource="{Binding InstantEngineVersions}" SelectedItem="{Binding InstantEngineVersion}"/>
+   <TextBlock Text="{Binding PaperTechnicalDetail}" TextWrapping="Wrap"/><TextBlock Text="随机种子（同种子可重复）："/><TextBox Text="{Binding InstantV3Seed}"/><CheckBox Content="显影演示（只改变展示，不改变成片）" IsChecked="{Binding InstantDevelopmentDemo}"/><Button Content="跳过演示" Command="{Binding SkipInstantDemoCommand}"/>
+   <Button Content="重新随机一张" Command="{Binding RollInstantFilmCommand}"/><Button Content="重置待应用参数" Command="{Binding ResetPhotoV3DraftCommand}"/><Button Content="关闭成像效果，保留外观" Command="{Binding DisableInstantFilmCommand}"/>
   </StackPanel></Expander>
  </StackPanel>
 </UserControl>

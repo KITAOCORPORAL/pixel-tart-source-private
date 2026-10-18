@@ -38,7 +38,7 @@ public sealed class StudioCurveEditor : StackPanel
         {
             Focusable = true; ClipToBounds = true;
             Loaded += (_, _) => { Attach(); PropertyChangedEventManager.AddHandler(StudioLocalizationService.Current, LanguageChanged, nameof(StudioLocalizationService.Language)); }; DataContextChanged += (_, _) => Attach();
-            Unloaded += (_, _) => { if (_editor is not null) _editor.PropertyChanged -= Changed; _editor = null; PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, LanguageChanged, nameof(StudioLocalizationService.Language)); };
+            Unloaded += (_, _) => { if (_editor is not null) PropertyChangedEventManager.RemoveHandler(_editor,Changed,string.Empty); _editor = null; PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, LanguageChanged, nameof(StudioLocalizationService.Language)); };
             MouseLeftButtonDown += Down; MouseMove += Move; MouseLeftButtonUp += (_, _) => Finish();
             LostMouseCapture += (_, _) => { _editor?.CommitEditTransaction(); _before = null; };
             KeyDown += (_, e) => { if (e.Key == Key.Delete) { DeletePoint(); e.Handled = true; } else if (e.Key == Key.Escape && CancelPointerGesture()) e.Handled = true; };
@@ -55,8 +55,8 @@ public sealed class StudioCurveEditor : StackPanel
         {
             var next = (DataContext as ReferenceColorWorkspaceViewModel)?.Editor;
             if (ReferenceEquals(next, _editor)) return;
-            if (_editor is not null) _editor.PropertyChanged -= Changed;
-            _editor = next; if (_editor is not null) _editor.PropertyChanged += Changed; InvalidateVisual();
+            if (_editor is not null) PropertyChangedEventManager.RemoveHandler(_editor,Changed,string.Empty);
+            _editor = next; if (_editor is not null) PropertyChangedEventManager.AddHandler(_editor,Changed,string.Empty); InvalidateVisual();
         }
         private void Changed(object? sender, PropertyChangedEventArgs e) { if (e.PropertyName is nameof(TetherReferenceModeViewModel.AdjustmentStack) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode)) InvalidateVisual(); }
         private IReadOnlyList<ColorStudioToolProcessor.CurvePoint> Points => ColorStudioToolProcessor.ReadCurve(_editor?.ToolNode(ColorStudioNodeType.Curve) ?? new(Guid.NewGuid(), ColorStudioNodeType.Curve, "曲线"), Channel);

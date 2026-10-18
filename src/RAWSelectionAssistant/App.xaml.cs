@@ -61,6 +61,13 @@ public partial class App : Application
 
     protected override async void OnStartup(StartupEventArgs e)
     {
+#if PHOTOGRAPHER_TRIAL
+        if(Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME")!="1")
+        {
+            Environment.SetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME","1");
+            Environment.SetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT",Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"PixelTart.PhotographerTrial"));
+        }
+#endif
         base.OnStartup(e);
         ColorStudioAcceptanceFixture.ValidateIsolation();
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
@@ -156,6 +163,11 @@ public partial class App : Application
             var settingsService = new SettingsService(_logService, settingsPath);
             StartupStage("03 Settings");
             var startupSettings = await settingsService.LoadAsync();
+#if PHOTOGRAPHER_TRIAL
+            // This focused trial opens the photographer editor, not unrelated onboarding.
+            startupSettings.OnboardingLegacyUser=true;startupSettings.OnboardingUpgradeOfferShown=true;
+            await settingsService.SaveAsync(startupSettings);
+#endif
             if (ColorStudioAcceptanceFixture.Requested)
             {
                 startupSettings.OnboardingLegacyUser = true;
@@ -339,6 +351,9 @@ public partial class App : Application
             StartupStage("08 Workspace");
             await _mainViewModel.InitializeAsync();
             StartupStage("09 Restore Session");
+#if PHOTOGRAPHER_TRIAL
+            _mainViewModel.NavigateCommand.Execute("ReferenceColor");
+#endif
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
             _assetLibraryP1StateController?.ApplyAcceptanceStartRoute(_mainViewModel);
 #endif

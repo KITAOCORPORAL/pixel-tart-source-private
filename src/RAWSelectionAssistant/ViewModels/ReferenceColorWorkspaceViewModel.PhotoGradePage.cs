@@ -2,7 +2,11 @@ using RAWSelectionAssistant.Utilities;
 namespace RAWSelectionAssistant.ViewModels;
 public sealed partial class ReferenceColorWorkspaceViewModel
 {
+#if PHOTOGRAPHER_TRIAL
+ private bool _usePhotoGradePage=true;
+#else
  private bool _usePhotoGradePage;
+#endif
  public bool UsePhotoGradePage {get=>_usePhotoGradePage;set{if(SetProperty(ref _usePhotoGradePage,value))OnPropertyChanged(nameof(UseLegacyGradePage));}}
  public bool UseLegacyGradePage=>!UsePhotoGradePage;
  public RelayCommand TogglePhotoGradePageCommand=>new(_=>UsePhotoGradePage=!UsePhotoGradePage);
@@ -12,7 +16,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public RelayCommand ResetPhotoV3DraftCommand {get;private set;}=null!;
  private void InitializePhotoGradeHistoryCommands()
  {
-  InitializeSrgbExposureCommands();InitializeComparison();
+  InitializeSrgbExposureCommands();InitializeComparison();InitializePhotographerCommands();
   ResetPhotoV3DraftCommand=new(_=>{var profile=SelectedInstantProfile;RestoreInstantControls(null);SelectedInstantProfile=profile;InstantEngineVersion="V3";},_=>!IsInstantGenerating&&!IsLoading&&!IsExporting&&ActiveTarget is not null);
   PhotoGradeUndoCommand=new(async _=>
   {

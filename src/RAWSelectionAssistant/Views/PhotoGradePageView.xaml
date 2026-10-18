@@ -1,50 +1,49 @@
 <UserControl x:Class="RAWSelectionAssistant.Views.PhotoGradePageView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:views="clr-namespace:RAWSelectionAssistant.Views">
- <UserControl.Resources><BooleanToVisibilityConverter x:Key="Bool"/></UserControl.Resources>
- <Grid Background="{DynamicResource CanvasBackgroundBrush}" Margin="12">
-  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="120"/></Grid.RowDefinitions>
-  <DockPanel Grid.Row="0" Margin="0,0,0,8">
-   <Button DockPanel.Dock="Right" Content="{views:StudioText PhotoGradeLegacy}" Command="{Binding TogglePhotoGradePageCommand}"/>
-   <Button DockPanel.Dock="Left" Content="{views:StudioText Import}" Command="{Binding ChooseTargetCommand}"/>
-   <Button DockPanel.Dock="Left" Content="{views:StudioText SaveBatch}" Command="{Binding SaveSessionCommand}"/>
-   <Button DockPanel.Dock="Left" Content="{views:StudioText OpenBatch}" Command="{Binding OpenSessionCommand}"/>
-   <Button DockPanel.Dock="Left" Content="{views:StudioText PhotoGradeUndo}" x:Name="PhotoUndo" Command="{Binding PhotoGradeUndoCommand}"/>
-   <Button DockPanel.Dock="Left" Content="{views:StudioText PhotoGradeRedo}" x:Name="PhotoRedo" Command="{Binding PhotoGradeRedoCommand}"/>
-   <Button DockPanel.Dock="Left" Content="{views:StudioText Cancel}" Command="{Binding StopProcessingCommand}"/>
-   <Button DockPanel.Dock="Left" Content="{views:StudioText InstantSkipDemo}" Command="{Binding SkipInstantDemoCommand}"/>
-   <views:StudioExportMenu DockPanel.Dock="Left"/>
-   <TextBlock Text="{views:StudioText PhotoGradeTitle}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center" Margin="12,0"/>
+ <UserControl.Resources><BooleanToVisibilityConverter x:Key="Bool"/>
+  <Style TargetType="TabControl"><Setter Property="Background" Value="{DynamicResource CanvasBackgroundBrush}"/><Setter Property="BorderBrush" Value="{DynamicResource SurfaceSecondaryBrush}"/></Style>
+  <Style TargetType="TabItem"><Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/><Setter Property="Padding" Value="14,9"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TabItem"><Border x:Name="Tab" Background="{DynamicResource SurfaceSecondaryBrush}" Margin="0,0,3,0" Padding="{TemplateBinding Padding}"><ContentPresenter ContentSource="Header"/></Border><ControlTemplate.Triggers><Trigger Property="IsSelected" Value="True"><Setter TargetName="Tab" Property="BorderBrush" Value="{DynamicResource AccentBrush}"/><Setter TargetName="Tab" Property="BorderThickness" Value="0,0,0,2"/></Trigger></ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter></Style>
+ </UserControl.Resources>
+ <Grid Background="{DynamicResource CanvasBackgroundBrush}" Margin="14">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="104"/></Grid.RowDefinitions>
+  <DockPanel Margin="0,0,0,12">
+   <Button DockPanel.Dock="Right" Content="返回旧版调色" Command="{Binding TogglePhotoGradePageCommand}"/>
+   <StackPanel DockPanel.Dock="Left" Margin="0,0,22,0"><TextBlock Text="照片调色" FontSize="21" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/><TextBlock Text="调整光色 · 选择相纸 · 保留每次创作" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/></StackPanel>
+   <WrapPanel VerticalAlignment="Center"><Button Content="导入照片" Command="{Binding ChooseTargetCommand}"/><Button Content="保存项目" Command="{Binding SaveSessionCommand}"/><Button Content="打开项目" Command="{Binding OpenSessionCommand}"/>
+   <Button Content="撤销" x:Name="PhotoUndo" Command="{Binding PhotoGradeUndoCommand}"/><Button Content="重做" x:Name="PhotoRedo" Command="{Binding PhotoGradeRedoCommand}"/><Button Content="取消处理" Command="{Binding StopProcessingCommand}"/><views:StudioExportMenu x:Name="PhotoExport"/></WrapPanel>
   </DockPanel>
-  <Grid Grid.Row="1"><Grid.ColumnDefinitions><ColumnDefinition Width="220"/><ColumnDefinition/><ColumnDefinition Width="330"/></Grid.ColumnDefinitions>
-   <StackPanel Grid.Column="0" Margin="0,0,8,0">
-    <TextBlock Text="{views:StudioText PhotoGradeSteps}" Foreground="{DynamicResource TextPrimaryBrush}"/>
-    <WrapPanel IsEnabled="{Binding PhotoGradeRasterToolsEnabled}" ToolTip="{views:StudioText PhotoGradeRasterHelp}"><Button Content="{views:StudioText PhotoGradeBasic}" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="BasicTone"/><Button Content="{views:StudioText Curve}" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="Curve"/></WrapPanel>
-    <ListBox IsEnabled="{Binding PhotoGradeRasterToolsEnabled}" x:Name="OrderedSteps" ItemsSource="{Binding Editor.AdjustmentNodes}" SelectedItem="{Binding Editor.SelectedAdjustmentNode}" DisplayMemberPath="Name" MaxHeight="350"/>
-    <WrapPanel IsEnabled="{Binding PhotoGradeRasterToolsEnabled}" ToolTip="{views:StudioText PhotoGradeRasterHelp}"><Button Content="{views:StudioText PhotoGradeMoveUp}" Command="{Binding Editor.MoveAdjustmentNodeUpCommand}"/><Button Content="{views:StudioText PhotoGradeMoveDown}" Command="{Binding Editor.MoveAdjustmentNodeDownCommand}"/><Button Content="{views:StudioText PhotoGradeRemove}" Command="{Binding Editor.DeleteAdjustmentNodeCommand}"/></WrapPanel>
-    <Expander Header="{views:StudioText PhotoGradeHistory}"><StackPanel><ListBox ItemsSource="{Binding ActiveTarget.EditVersions}" SelectedItem="{Binding SelectedCatalogVersion}" DisplayMemberPath="Name" MaxHeight="170"/><Button Content="{views:StudioText SelectVersion}" Command="{Binding SelectEditVersionCommand}"/></StackPanel></Expander>
-
+  <Grid Grid.Row="1"><Grid.ColumnDefinitions><ColumnDefinition Width="172"/><ColumnDefinition Width="*"/><ColumnDefinition Width="350"/></Grid.ColumnDefinitions>
+   <StackPanel Margin="0,0,12,0">
+    <TextBlock Text="当前照片" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/><TextBlock Text="{Binding TargetName}" TextWrapping="Wrap" Margin="0,6,0,14" Foreground="{DynamicResource TextSecondaryBrush}"/>
+    <TextBlock Text="调整步骤" Foreground="{DynamicResource TextPrimaryBrush}"/>
+    <ListBox IsEnabled="{Binding PhotoGradeRasterToolsEnabled}" x:Name="OrderedSteps" ItemsSource="{Binding Editor.AdjustmentNodes}" SelectedItem="{Binding Editor.SelectedAdjustmentNode}" DisplayMemberPath="Name" MaxHeight="190"/>
+    <WrapPanel IsEnabled="{Binding PhotoGradeRasterToolsEnabled}"><Button Content="上移" Command="{Binding Editor.MoveAdjustmentNodeUpCommand}"/><Button Content="下移" Command="{Binding Editor.MoveAdjustmentNodeDownCommand}"/><Button Content="移除" Command="{Binding Editor.DeleteAdjustmentNodeCommand}"/></WrapPanel>
+    <Expander x:Name="HistorySection" Header="历史版本" IsExpanded="True" Margin="0,16,0,0"><StackPanel><ListBox x:Name="HistoryVersions" ItemsSource="{Binding ActiveTarget.EditVersions}" SelectedItem="{Binding SelectedCatalogVersion}" DisplayMemberPath="Name" MaxHeight="180"/><Button Content="恢复所选版本" Command="{Binding SelectEditVersionCommand}"/></StackPanel></Expander>
+    <Expander x:Name="BatchSection" Header="批量同步" Margin="0,12,0,0"><StackPanel><TextBlock Text="在底部勾选目标照片，将当前选中调整步骤复制到它们。" TextWrapping="Wrap"/><Button Content="同步选中步骤" Command="{Binding PhotoGradeSyncStepCommand}"/><TextBlock Text="宝丽来独立版本暂不支持此步骤同步。" TextWrapping="Wrap" FontSize="11"/></StackPanel></Expander>
    </StackPanel>
-   <Grid Grid.Column="1" Margin="0,0,8,0"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-    <StackPanel><ComboBox x:Name="ComparisonMode" ItemsSource="{Binding Editor.ViewModes}" SelectedItem="{Binding Editor.ViewMode}"/>
-    <TextBlock x:Name="ComparisonStatus" Text="{Binding ComparisonStatus}" TextWrapping="Wrap" Foreground="{DynamicResource TextPrimaryBrush}"/>
-    <Button x:Name="PrepareComparison" Content="准备当前配方基准对照（含第二曝光／几何）" Command="{Binding PrepareComparisonCommand}"/></StackPanel>
-    <views:ColorStudioImageViewport x:Name="PhotoViewport" Grid.Row="1" Original="{Binding Editor.SourceImage}" Matched="{Binding Editor.MatchedImage}" Mode="{Binding Editor.EffectiveViewMode}" Split="{Binding Editor.SplitPosition}"/>
-    <TextBlock Grid.Row="2" Text="{Binding StatusText}" Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap"/>
+   <Grid Grid.Column="1" Margin="0,0,14,0"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <StackPanel><DockPanel><ComboBox x:Name="ComparisonMode" Width="150" HorizontalAlignment="Left" ItemsSource="{Binding PhotographerComparisonModes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PhotographerComparisonValue,Mode=TwoWay}"/>
+     <WrapPanel HorizontalAlignment="Right"><Button Content="适合窗口" Click="FitPhoto"/><Button Content="100%" Click="ActualPhoto"/><Button Content="－" Click="ZoomOut"/><Button Content="＋" Click="ZoomIn"/></WrapPanel></DockPanel>
+     <DockPanel Margin="0,7,0,7"><Button DockPanel.Dock="Right" x:Name="PrepareComparison" Content="准备配方基准" Command="{Binding PrepareComparisonCommand}"/><TextBlock x:Name="ComparisonStatus" Text="{Binding ComparisonStatus}" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/></DockPanel>
+    </StackPanel>
+    <Border Grid.Row="1" Background="#111313" ClipToBounds="True"><views:ColorStudioImageViewport x:Name="PhotoViewport" Original="{Binding Editor.SourceImage}" Matched="{Binding Editor.MatchedImage}" Mode="{Binding Editor.EffectiveViewMode}" Split="{Binding Editor.SplitPosition}" MouseWheel="PhotoWheel" MouseLeftButtonDown="PhotoDown" MouseMove="PhotoMove" MouseLeftButtonUp="PhotoUp"/></Border>
+    <TextBlock Grid.Row="2" Text="{Binding PhotographerComparisonHelp}" TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11" Margin="0,8,0,10"/>
    </Grid>
-   <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto"><StackPanel>
-    <TextBlock Text="{views:StudioText PhotoGradeParameters}" Foreground="{DynamicResource TextPrimaryBrush}"/>
-    <Expander Header="{views:StudioText SrgbExposureTitle}"><StackPanel><TextBlock Text="{views:StudioText SrgbExposureHelp}" TextWrapping="Wrap"/><StackPanel IsEnabled="{Binding SrgbExposureAvailable}"><Slider Minimum="-5" Maximum="5" Value="{Binding SrgbExposureEv}"/><TextBox Text="{Binding SrgbExposureEv}"/><Button Content="{views:StudioText SrgbExposureApply}" Command="{Binding ApplySrgbExposureCommand}"/></StackPanel></StackPanel></Expander>
-    <Expander x:Name="V3Controls" Header="{views:StudioText PhotoGradePresets}" IsExpanded="True"><views:InstantV3Editor x:Name="V3Editor"/></Expander>
-    <TextBlock Text="{views:StudioText PhotoGradeRasterHelp}" TextWrapping="Wrap"/>
-    <views:StudioToolPanel x:Name="CurrentParameters" IsEnabled="{Binding PhotoGradeRasterToolsEnabled}" NodeTypes="BasicTone"/>
-    <Expander Header="{views:StudioText PhotoGradeAnalysis}"><StackPanel><TextBlock Text="{Binding PhotoGradeContract}" TextWrapping="Wrap"/><TextBlock Text="{Binding RawPipelineStatus}" TextWrapping="Wrap" Foreground="{DynamicResource TextPrimaryBrush}"/><TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" Foreground="{DynamicResource TextPrimaryBrush}"/></StackPanel></Expander>
-    <TextBlock Text="{views:StudioText PhotoGradeMask}"/><ComboBox ItemsSource="{Binding PhotoMaskColors}" SelectedItem="{Binding PhotoMaskColor}"/>
-    <TextBlock Text="{views:StudioText PhotoGradeSync}" TextWrapping="Wrap"/>
-    <Button IsEnabled="{Binding PhotoGradeCanSyncStep}" ToolTip="{views:StudioText PhotoGradeRasterHelp}" Content="{views:StudioText PhotoGradeApply}" Command="{Binding PhotoGradeSyncStepCommand}"/>
-   </StackPanel></ScrollViewer>
+   <Grid Grid.Column="2"><Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <TabControl x:Name="EditModes" SelectionChanged="EditingModeChanged">
+     <TabItem Header="基础调色" x:Name="BasicTab"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="10"><TextBlock Text="光线与色彩" FontSize="17" Foreground="{DynamicResource TextPrimaryBrush}"/><TextBlock Text="{Binding RasterAvailabilityReason}" TextWrapping="Wrap" Margin="0,8,0,12"/>
+      <StackPanel IsEnabled="{Binding PhotoGradeRasterToolsEnabled}"><WrapPanel><Button Content="添加基础调整" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="BasicTone"/><Button Content="白平衡" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="WhiteBalance"/></WrapPanel>
+      <views:StudioToolPanel x:Name="CurrentParameters" NodeTypes="BasicTone"/></StackPanel>
+      <Expander Header="从原文件创建曝光版本" Margin="0,12,0,0"><StackPanel><TextBlock Text="不叠加当前调整；将原始已渲染文件建立为新版本，可撤销返回。" TextWrapping="Wrap"/><Slider Minimum="-5" Maximum="5" Value="{Binding SrgbExposureEv}"/><Button Content="创建曝光版本" Command="{Binding ApplySrgbExposureCommand}"/></StackPanel></Expander>
+     </StackPanel></ScrollViewer></TabItem>
+     <TabItem Header="曲线" x:Name="CurveTab"><ScrollViewer><StackPanel Margin="10"><TextBlock Text="明暗与通道曲线" FontSize="17"/><TextBlock Text="{Binding RasterAvailabilityReason}" TextWrapping="Wrap" Margin="0,8,0,12"/><StackPanel IsEnabled="{Binding PhotoGradeRasterToolsEnabled}"><Button Content="添加曲线步骤" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="Curve"/><views:StudioCurveEditor x:Name="PhotographerCurve"/></StackPanel></StackPanel></ScrollViewer></TabItem>
+     <TabItem Header="宝丽来" x:Name="PolaroidTab"><ScrollViewer x:Name="PaperScroll" VerticalScrollBarVisibility="Auto"><StackPanel Margin="10"><views:InstantV3Editor x:Name="V3Editor"/></StackPanel></ScrollViewer></TabItem>
+    </TabControl>
+    <Expander Grid.Row="1" x:Name="DiagnosticsSection" Header="诊断信息" Margin="0,8,0,0"><StackPanel MaxHeight="130"><TextBlock Text="{Binding PhotoGradeContract}" TextWrapping="Wrap" FontSize="10"/><TextBlock Text="{Binding RawPipelineStatus}" TextWrapping="Wrap" FontSize="10"/><TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" FontSize="10"/></StackPanel></Expander>
+   </Grid>
   </Grid>
-  <ListBox Grid.Row="2" x:Name="PhotoStrip" ItemsSource="{Binding Targets}" SelectedItem="{Binding ActiveTarget,Mode=OneWay}" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+  <ListBox Grid.Row="2" x:Name="PhotoStrip" ItemsSource="{Binding Targets}" SelectedItem="{Binding ActiveTarget,Mode=OneWay}" ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,10,0,0">
    <ListBox.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal"/></ItemsPanelTemplate></ListBox.ItemsPanel>
-   <ListBox.ItemTemplate><DataTemplate><StackPanel Width="110"><Button Command="{Binding DataContext.ActivateTargetCommand,RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}"><Image Source="{Binding Thumbnail}" Height="65"/></Button><CheckBox IsChecked="{Binding IsSelected}" Content="{Binding FileName}"/><TextBlock Text="{Binding Status}"/></StackPanel></DataTemplate></ListBox.ItemTemplate>
+   <ListBox.ItemTemplate><DataTemplate><StackPanel Width="110"><Button Command="{Binding DataContext.ActivateTargetCommand,RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}"><Image Source="{Binding Thumbnail}" Height="50"/></Button><CheckBox IsChecked="{Binding IsSelected}" Content="{Binding FileName}"/></StackPanel></DataTemplate></ListBox.ItemTemplate>
   </ListBox>
  </Grid>
 </UserControl>

@@ -14,7 +14,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public IReadOnlyList<InstantFilmProfile> InstantProfiles=>InstantFilmProfiles.Available;
     public IReadOnlyList<string> InstantTiers {get;}=["稳定出片","轻微偶然","实验胶片"];
     private InstantFilmProfile _draftSelectedInstantProfile=InstantFilmProfiles.Available[0];
-    public InstantFilmProfile SelectedInstantProfile {get=>_draftSelectedInstantProfile;set=>SetProperty(ref _draftSelectedInstantProfile,value);}
+    public InstantFilmProfile SelectedInstantProfile {get=>_draftSelectedInstantProfile;set{if(SetProperty(ref _draftSelectedInstantProfile,value)){OnPropertyChanged(nameof(SelectedPhotographerPaperId));OnPropertyChanged(nameof(PhotographerPaperName));OnPropertyChanged(nameof(PhotographerPaperDetail));OnPropertyChanged(nameof(PaperTechnicalDetail));}}}
     public string InstantTier {get;set;}="稳定出片";
     public bool InstantDiceEnabled {get;private set;}
     private bool _draftInstantCameraAnimation=true;
@@ -71,7 +71,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public AsyncRelayCommand ToggleInstantDiceCommand {get;private set;}=null!;
     public AsyncRelayCommand DisableInstantFilmCommand {get;private set;}=null!;
     public RelayCommand SelectInstantCameraCommand {get;private set;}=null!;
-    public void ExitInstantPresentationForLifecycle(){CancelComparison();_secondSelectionCancellation?.Cancel();_instantCancellation?.Cancel();}
+    public void ExitInstantPresentationForLifecycle(){_paperPreviewCancellation?.Cancel();CancelComparison();_secondSelectionCancellation?.Cancel();_instantCancellation?.Cancel();}
     private void InitializeInstantFilmCommands()
     {
         InitializeInstantV3Commands();
@@ -129,7 +129,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public async Task GenerateInstantFilmAsync(bool roll)
     {
         if(_disposed||IsInstantGenerating||IsLoading||IsExporting||ActiveTarget is not {} target)return;
-        await StopComparisonAsync();
+        _paperPreviewCancellation?.Cancel();await StopComparisonAsync();
         if(_disposed||IsLoading||IsExporting||IsInstantGenerating||!ReferenceEquals(ActiveTarget,target))return;
         // Establish and freeze the source edit version before async reconstruction starts.
         if(InstantEngineVersion=="V3"&&(target.ActiveEditVersionId is null||target.RawDefinition is null)||target.RawDefinition is null&&RawMatchTiff16ProductPipeline.IsRaw(target.Path)){Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);}
