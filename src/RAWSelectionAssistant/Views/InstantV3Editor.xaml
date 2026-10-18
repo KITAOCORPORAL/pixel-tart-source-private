@@ -41,6 +41,7 @@
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3DevelopmentEdge,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3DevelopmentEdge}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3DevelopmentEdgeControl" Tag="InstantV3DevelopmentEdge" Minimum="0" Maximum="1" Value="{Binding InstantV3DevelopmentEdge,Mode=TwoWay}"/>
   </StackPanel></Expander>
+  <Expander IsEnabled="{Binding IsInstantV3Selected}" x:Name="GrainAdvanced" Header="柔光、颗粒与乳剂" IsExpanded="False"><StackPanel>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Softness,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Softness}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3SoftnessControl" Tag="InstantV3Softness" Minimum="0" Maximum="1" Value="{Binding InstantV3Softness,Mode=TwoWay}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Diffusion,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Diffusion}" TextWrapping="Wrap"/></DockPanel>
