@@ -24,13 +24,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private void CancelComparison()
     {
         Interlocked.Increment(ref _comparisonRevision);_comparisonCancellation?.Cancel();
-        IsComparisonPreparing=false;
-        if(Editor is not null&&Editor.ComparisonUnavailable)ComparisonStatus="配方基准对照未就绪；可继续编辑或按需准备（保留第二曝光及几何）。";
+        if(ComparisonWork.IsCompleted)IsComparisonPreparing=false;
+        if(Editor is not null&&Editor.ComparisonUnavailable)ComparisonStatus=ComparisonWork.IsCompleted?"配方基准对照未就绪；可继续编辑或按需准备（保留第二曝光及几何）。":"正在取消并释放过期对照；最新操作优先。";
         PrepareComparisonCommand?.RaiseCanExecuteChanged();
     }
     private async Task StopComparisonAsync()
     {
-        CancelComparison();await ComparisonWork;
+        CancelComparison();await ComparisonWork;PrepareComparisonCommand?.RaiseCanExecuteChanged();
     }
     private void UpdateComparisonAvailability()
     {
@@ -76,8 +76,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             {if(!_disposed&&revision==Volatile.Read(ref _comparisonRevision))ComparisonStatus="对照未完成，效果保留："+e.Message;}
             finally
             {
-                if(ReferenceEquals(_comparisonCancellation,cts))_comparisonCancellation=null;cts.Dispose();
-                if(revision==Volatile.Read(ref _comparisonRevision)){IsComparisonPreparing=false;PrepareComparisonCommand?.RaiseCanExecuteChanged();}
+                if(ReferenceEquals(_comparisonCancellation,cts)){_comparisonCancellation=null;IsComparisonPreparing=false;PrepareComparisonCommand?.RaiseCanExecuteChanged();}
+                cts.Dispose();
             }
         }
     }

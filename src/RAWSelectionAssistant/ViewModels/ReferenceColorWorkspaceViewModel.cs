@@ -241,7 +241,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         RetryFailedExportCommand = new AsyncRelayCommand(_ => RetryFailedExportsAsync(), _ => Targets.Any(item => item.ExportStatus is ReferenceExportStatus.Failed or ReferenceExportStatus.Partial) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory));
         Editor.PropertyChanged += (_, args) =>
         {
-            if(args.PropertyName==nameof(TetherReferenceModeViewModel.ViewMode)&&Editor.ComparisonUnavailable&&(Editor.ViewMode is "原片" or "左右对比" or "并排对比"))_ = RequestComparisonAsync();
+            if((args.PropertyName is nameof(TetherReferenceModeViewModel.ViewMode) or nameof(TetherReferenceModeViewModel.ShowOriginal))&&Editor.ComparisonUnavailable&&(Editor.ShowOriginal||Editor.ViewMode is "左右对比" or "并排对比"))_ = RequestComparisonAsync();
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.IsProMode) or nameof(TetherReferenceModeViewModel.AdjustmentStack) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode)) RefreshSyncAvailability();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.SourceImage) or nameof(TetherReferenceModeViewModel.MatchedImage) or nameof(TetherReferenceModeViewModel.EffectiveViewMode))
