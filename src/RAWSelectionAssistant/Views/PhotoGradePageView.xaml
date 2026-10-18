@@ -24,7 +24,9 @@
 
    </StackPanel>
    <Grid Grid.Column="1" Margin="0,0,8,0"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-    <ComboBox x:Name="ComparisonMode" ItemsSource="{Binding Editor.ViewModes}" SelectedItem="{Binding Editor.ViewMode}"/>
+    <StackPanel><ComboBox x:Name="ComparisonMode" ItemsSource="{Binding Editor.ViewModes}" SelectedItem="{Binding Editor.ViewMode}"/>
+    <TextBlock x:Name="ComparisonStatus" Text="{Binding ComparisonStatus}" TextWrapping="Wrap" Foreground="{DynamicResource TextPrimaryBrush}"/>
+    <Button x:Name="PrepareComparison" Content="准备当前配方基准对照（含第二曝光／几何）" Command="{Binding PrepareComparisonCommand}"/></StackPanel>
     <views:ColorStudioImageViewport x:Name="PhotoViewport" Grid.Row="1" Original="{Binding Editor.SourceImage}" Matched="{Binding Editor.MatchedImage}" Mode="{Binding Editor.EffectiveViewMode}" Split="{Binding Editor.SplitPosition}"/>
     <TextBlock Grid.Row="2" Text="{Binding StatusText}" Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap"/>
    </Grid>

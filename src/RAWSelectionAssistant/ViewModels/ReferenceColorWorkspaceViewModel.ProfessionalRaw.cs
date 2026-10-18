@@ -56,6 +56,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         {
             if(ActiveTarget is not {} target||IsLoading||IsExporting||IsInstantGenerating)return;
             if(!RawMatchTiff16ProductPipeline.IsRaw(target.Path)){StatusText="JPG 是已渲染图像，请使用原有调色；新 RAW 版本只接受 RAW。";return;}
+            await StopComparisonAsync();
             var sourceVersion=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);
             try
             {
@@ -135,8 +136,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         StatusText="原尺寸管线预览完成；即时胶片为创作近似，非相纸标定";
         Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("PreviewCommit",token);
         if(_disposed||revision!=Volatile.Read(ref _activationRevision))throw new OperationCanceledException(token);
-        var comparison=Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition)?Kitao.InstantFilm.Research.InstantV3ProductPipeline.Original(definition):definition with{ExposureEv=0,SrgbExposure=null};
-        _comparisonKey=System.Text.Json.JsonSerializer.Serialize(new{master.Contract.SourceSha256,DecodeKey=ComparisonIdentity(comparison).DecodeKey,master.Image.Width,master.Image.Height,master.Image.Orientation,Definition=ComparisonIdentity(comparison),Edge=1600,Quality="DisplayLinearBoxBandsV1"});_comparisonImage=before;
+        if(before is not null){_comparisonKey=ComparisonKey(master,ComparisonDefinition(definition));_comparisonImage=before;}
+        UpdateComparisonAvailability();
         CaptureEditVersion(target);await RefreshPreviewAnalysisAsync(token,image);
         token.ThrowIfCancellationRequested();if(_disposed||revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)throw new OperationCanceledException(token);
     }

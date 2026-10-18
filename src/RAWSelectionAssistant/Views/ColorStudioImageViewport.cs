@@ -10,7 +10,7 @@ public sealed partial class ColorStudioImageViewport : FrameworkElement
     public static readonly DependencyProperty SourcePixelSizeProperty = DependencyProperty.Register(nameof(SourcePixelSize), typeof(Size), typeof(ColorStudioImageViewport), new FrameworkPropertyMetadata(Size.Empty, FrameworkPropertyMetadataOptions.AffectsRender, Changed));
     public Size SourcePixelSize { get => (Size)GetValue(SourcePixelSizeProperty); set => SetValue(SourcePixelSizeProperty, value); }
     public static readonly DependencyProperty OriginalProperty = DependencyProperty.Register(nameof(Original), typeof(BitmapSource), typeof(ColorStudioImageViewport), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, Changed));
-    public static readonly DependencyProperty MatchedProperty = DependencyProperty.Register(nameof(Matched), typeof(BitmapSource), typeof(ColorStudioImageViewport), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
+    public static readonly DependencyProperty MatchedProperty = DependencyProperty.Register(nameof(Matched), typeof(BitmapSource), typeof(ColorStudioImageViewport), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, Changed));
     public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(string), typeof(ColorStudioImageViewport), new FrameworkPropertyMetadata("原片", FrameworkPropertyMetadataOptions.AffectsRender, Changed));
     public static readonly DependencyProperty SplitProperty = DependencyProperty.Register(nameof(Split), typeof(double), typeof(ColorStudioImageViewport), new FrameworkPropertyMetadata(.5, FrameworkPropertyMetadataOptions.AffectsRender));
     public BitmapSource? Original { get => (BitmapSource?)GetValue(OriginalProperty); set => SetValue(OriginalProperty, value); }
@@ -34,11 +34,11 @@ public sealed partial class ColorStudioImageViewport : FrameworkElement
     public ColorStudioZoomPanState State { get; } = new();
     public ColorStudioImageViewport() { AttachProfileDiagnostics(); ClipToBounds = true; SizeChanged += (_, _) => Configure(); State.Changed += (_, _) => InvalidateVisual(); }
     private static void Changed(DependencyObject sender, DependencyPropertyChangedEventArgs e) => ((ColorStudioImageViewport)sender).Configure();
-    public void Configure() { if (Original is { } image) State.Configure(ColorStudioSampleMapping.Viewport(RenderSize, Mode == "并排对比", false).Size, SourcePixelSize.IsEmpty ? new Size(image.PixelWidth, image.PixelHeight) : SourcePixelSize); }
+    public void Configure() { if ((Original??Matched) is { } image) State.Configure(ColorStudioSampleMapping.Viewport(RenderSize, Mode == "并排对比", false).Size, SourcePixelSize.IsEmpty ? new Size(image.PixelWidth, image.PixelHeight) : SourcePixelSize); }
     protected override void OnRender(DrawingContext dc)
     {
         base.OnRender(dc);
-        if (Original is null || ActualWidth <= 0 || ActualHeight <= 0) return;
+        if (Original is null && Matched is null || ActualWidth <= 0 || ActualHeight <= 0) return;
         var full = new Rect(RenderSize);
         var brush = TryFindResource("TextValueBrush") as Brush ?? Brushes.Gray;
         void Draw(BitmapSource? image, Rect viewport, Rect clip,BitmapSource? detail=null,bool original=false)

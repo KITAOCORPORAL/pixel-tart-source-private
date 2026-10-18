@@ -118,6 +118,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private async Task PreparePublishingAsync()
     {
+        await StopComparisonAsync();
         if (OpenPublishing is null || IsExporting || IsInstantGenerating) return;
         var items = SelectedTargets.ToArray(); if (items.Length == 0) return;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
@@ -194,7 +195,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         InitializeRangeSelection();
         BuildColorSpaceModelCommand = new AsyncRelayCommand(_ => BuildColorSpaceModelAsync(), _ => Editor.SourceImage is not null);
         ChooseTargetCommand = new AsyncRelayCommand(_ => ChooseTargetAsync());
-        StopProcessingCommand = new RelayCommand(_ => {ExitInstantPresentationForLifecycle();_sessionPreparationCancellation?.Cancel();Editor.StopProcessing();_activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);InvalidateProfessionalPreview();}, _ => Editor.IsBusy || IsLoading || IsInstantGenerating || SelectSecondExposureCommand?.CanExecute(null)==false || !ProfessionalDetailWork.IsCompleted);
+        StopProcessingCommand = new RelayCommand(_ => {CancelComparison();ExitInstantPresentationForLifecycle();_sessionPreparationCancellation?.Cancel();Editor.StopProcessing();_activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);InvalidateProfessionalPreview();}, _ => Editor.IsBusy || IsLoading || IsInstantGenerating || IsComparisonPreparing || SelectSecondExposureCommand?.CanExecute(null)==false || !ProfessionalDetailWork.IsCompleted);
         CopyAdjustmentsCommand = new RelayCommand(_ => CopyCurrentAdjustments(), _ => ActiveTarget is not null && !IsLoading && !IsProfessionalRaw);
         ApplyAdjustmentsCommand = new RelayCommand(_ => ApplyCopiedAdjustments(), _ => HasCopiedAdjustments && SelectedTargets.Any() && !IsLoading);
         PreparePublishingCommand = new AsyncRelayCommand(_ => PreparePublishingAsync(), _ => OpenPublishing is not null && SelectedTargets.Any() && !IsExporting && !IsInstantGenerating);
@@ -240,6 +241,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         RetryFailedExportCommand = new AsyncRelayCommand(_ => RetryFailedExportsAsync(), _ => Targets.Any(item => item.ExportStatus is ReferenceExportStatus.Failed or ReferenceExportStatus.Partial) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory));
         Editor.PropertyChanged += (_, args) =>
         {
+            if(args.PropertyName==nameof(TetherReferenceModeViewModel.ViewMode)&&Editor.ComparisonUnavailable&&(Editor.ViewMode is "原片" or "左右对比" or "并排对比"))_ = RequestComparisonAsync();
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.IsProMode) or nameof(TetherReferenceModeViewModel.AdjustmentStack) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode)) RefreshSyncAvailability();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.SourceImage) or nameof(TetherReferenceModeViewModel.MatchedImage) or nameof(TetherReferenceModeViewModel.EffectiveViewMode))
@@ -642,6 +644,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private async Task ActivateTargetAsync(ReferenceTargetItem target)
     {
+        await StopComparisonAsync();
         _secondSelectionCancellation?.Cancel();if(IsInstantGenerating)_instantCancellation?.Cancel();
         InvalidateProfessionalPreview();foreach(var other in Targets.Where(x=>!ReferenceEquals(x,target)))other.LinearRawMaster=null;if(target.RawDefinition is null)target.LinearRawMaster=null;
         var revision = Interlocked.Increment(ref _activationRevision);
@@ -715,7 +718,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public void Dispose()
     {
         if(_disposed)return;
-        _disposed = true;
+        CancelComparison();_disposed = true;
         PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, OnStudioLanguageChanged, nameof(StudioLocalizationService.Language));
         CancelRangeSelection();
         _analysisCancellation?.Cancel(); _analysisCache.Clear();
@@ -752,6 +755,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private async Task ExportAsync(IReadOnlyList<ReferenceTargetItem> items, string? retryDirectory = null)
     {
+        await StopComparisonAsync();
         if (items.Count == 0 || IsExporting || IsInstantGenerating) return;
         var format=retryDirectory is null ? QuickExportFormat : _lastExportFormat;
         var acceptanceDirectory = Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_DIRECTORY");

@@ -11,7 +11,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private string? _comparisonKey;
     private BitmapSource? _comparisonImage;
     private sealed record PreparedProfessionalPreview(ProfessionalRawMaster Master, ProfessionalRawDefinition Definition,
-        string SourceHash, Guid TargetId, Guid? SourceVersion, long Revision, BitmapSource Image, BitmapSource Before, double RenderMs, double CompareMs);
+        string SourceHash, Guid TargetId, Guid? SourceVersion, long Revision, BitmapSource Image, BitmapSource? Before, double RenderMs, double CompareMs);
     private async Task<PreparedProfessionalPreview> PrepareProfessionalPreviewAsync(ReferenceTargetItem target,
         ProfessionalRawMaster master, ProfessionalRawDefinition definition, CancellationToken token)
     {
@@ -24,22 +24,14 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         BitmapSource image;
         try { image=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(rendered.ToVisualRgb24(token)),rendered.Orientation); }
         finally { if(InstantV3ProductPipeline.IsV3(definition))rendered.Dispose(); }
-        var original=InstantV3ProductPipeline.IsV3(definition)?InstantV3ProductPipeline.Original(definition):definition with{ExposureEv=0,SrgbExposure=null};
-        var key=JsonSerializer.Serialize(new{master.Contract.SourceSha256,DecodeKey=ComparisonIdentity(original).DecodeKey,master.Image.Width,master.Image.Height,master.Image.Orientation,Definition=ComparisonIdentity(original),Edge=1600,Quality="DisplayLinearBoxBandsV1"});
-        var watch=Stopwatch.StartNew();BitmapSource before;
-        if(_comparisonKey==key&&_comparisonImage is {} cached)before=cached;
-        else if(original==definition)before=image;
-        else
-        {
-            var source=await RenderProfessionalPreviewAsync(master,original,1600,token,"ComparePreview");
-            try { before=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(source.ToVisualRgb24(token)),source.Orientation); }
-            finally { if(InstantV3ProductPipeline.IsV3(original))source.Dispose(); }
-        }
+        var original=ComparisonDefinition(definition);
+        var key=ComparisonKey(master,original);
+        BitmapSource? before=_comparisonKey==key?_comparisonImage:original==definition?image:null;
         token.ThrowIfCancellationRequested();
         CandidateProcessingEvidence.Enter("PreviewPrepared",token);
         if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
         definition.InstantFilm?.V3?.MultipleInput?.ValidateSource(token);
-        return new(master,definition,master.Contract.SourceSha256,target.Id,target.ActiveEditVersionId,Volatile.Read(ref _activationRevision),image,before,renderMs,watch.Elapsed.TotalMilliseconds);
+        return new(master,definition,master.Contract.SourceSha256,target.Id,target.ActiveEditVersionId,Volatile.Read(ref _activationRevision),image,before,renderMs,0);
     }
     // Original raster recipe lineage is history, not input pixels. Keep persisted DecodeKey
     // unchanged; explicitly rebind only after proving all pixel-affecting input fields match.

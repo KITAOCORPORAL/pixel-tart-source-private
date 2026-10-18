@@ -657,11 +657,19 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public double SplitPosition { get => _splitPosition; set { if (SetProperty(ref _splitPosition, Math.Clamp(value, 0, 1))) { OnPropertyChanged(nameof(SplitLeft)); OnPropertyChanged(nameof(SplitRight)); } } }
     public System.Windows.GridLength SplitLeft => new(SplitPosition, System.Windows.GridUnitType.Star);
     public System.Windows.GridLength SplitRight => new(1 - SplitPosition, System.Windows.GridUnitType.Star);
+    private bool _comparisonUnavailable;
+    public bool ComparisonUnavailable {get=>_comparisonUnavailable;internal set{if(SetProperty(ref _comparisonUnavailable,value))RaiseViewProperties();}}
+    internal void PresentComparisonSource(BitmapSource image)
+    {
+        // Comparison-only completion: preserve MatchedImage, recipe, mode and undo history.
+        _source=image;_interactiveSource=CreateInteractiveProxy(image,800);ComparisonUnavailable=false;
+        OnPropertyChanged(nameof(SourceImage));OnPropertyChanged(nameof(SourcePixelSize));RaiseViewProperties();
+    }
     public bool ShowOriginal => _originalHeld || !Enabled || MatchedImage is null || ViewMode == "原片";
     public bool ShowMatched => !_originalHeld && Enabled && MatchedImage is not null && (ViewMode == "仿色" || ViewMode == "仿色结果");
     public bool ShowSplit => !_originalHeld && Enabled && MatchedImage is not null && ViewMode == "左右对比";
     public bool ShowSideBySide => !_originalHeld && Enabled && MatchedImage is not null && ViewMode == "并排对比";
-    public string EffectiveViewMode => ShowOriginal ? "原片" : ViewMode;
+    public string EffectiveViewMode => IndependentRawMode&&ComparisonUnavailable&&MatchedImage is not null?"仿色结果":ShowOriginal ? "原片" : ViewMode;
     private (int Imported, int Requested)? _xmpImportCounts;
     public string StatusText { get => _statusText == "XmpImportSummary" && _xmpImportCounts is { } counts
         ? StudioLocalizationService.Current.Format("XmpImportSummary", counts.Imported, counts.Requested) : _statusText;
@@ -712,6 +720,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public async Task SetProjectAsync(Guid? projectId, CancellationToken token = default) { if (_projectId != projectId) { SelectedLook = null; _sessionLookId = null; } _projectId = projectId; await LoadAsync(token); }
     public async Task SetSourceAsync(Guid? assetId, BitmapSource? source, CancellationToken token = default, HighBitDepthImageBuffer? rawPreviewMaster = null, FrozenRawMaster? frozenRawMaster = null, bool render = true)
     {
+        ComparisonUnavailable=IndependentRawMode&&source is null;
         _rawPreviewMaster = rawPreviewMaster;
         _interactiveRawMaster = rawPreviewMaster is null ? null : new RawMatchTiff16ProductPipeline(new RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder()).PreviewMaster(rawPreviewMaster, 800, token);
         if (!ReferenceEquals(_frozenRawMaster, frozenRawMaster)) { _frozenRawMaster = frozenRawMaster; _matchV4Session = null; _matchV4SessionKey = null; }
@@ -725,9 +734,9 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
 
     internal sealed record PreparedSourceState(BitmapSource? Source,BitmapSource? InteractiveSource,
         HighBitDepthImageBuffer? Raw,HighBitDepthImageBuffer? InteractiveRaw,FrozenRawMaster? Frozen,
-        BitmapSource? Matched,bool Independent,System.Windows.Size IndependentSize,bool Enabled,string View);
+        BitmapSource? Matched,bool Independent,System.Windows.Size IndependentSize,bool Enabled,string View,bool ComparisonUnavailable);
     internal PreparedSourceState CapturePreparedSource() => new(_source,_interactiveSource,_rawPreviewMaster,_interactiveRawMaster,
-        _frozenRawMaster,MatchedImage,IndependentRawMode,IndependentRawSize,Enabled,ViewMode);
+        _frozenRawMaster,MatchedImage,IndependentRawMode,IndependentRawSize,Enabled,ViewMode,ComparisonUnavailable);
     /// <summary>Adopt exact prepared inputs, including the legacy high precision branch.
     /// No decode/proxy/render. A rollback uses the same immutable snapshot contract.</summary>
     internal void RestorePreparedSource(PreparedSourceState prepared,Guid? assetId,CancellationToken token=default)
@@ -738,7 +747,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         _assetId=assetId;_source=prepared.Source;_interactiveSource=prepared.InteractiveSource;
         _rawPreviewMaster=prepared.Raw;_interactiveRawMaster=prepared.InteractiveRaw;
         _frozenRawMaster=prepared.Frozen;_matchV4Session=null;_matchV4SessionKey=null;
-        IndependentRawMode=prepared.Independent;IndependentRawSize=prepared.IndependentSize;
+        IndependentRawMode=prepared.Independent;IndependentRawSize=prepared.IndependentSize;ComparisonUnavailable=prepared.ComparisonUnavailable;
         Enabled=prepared.Enabled;ViewMode=prepared.View;MatchedImage=prepared.Matched;
         OnPropertyChanged(nameof(SourceImage));OnPropertyChanged(nameof(SourcePixelSize));
         ApplyCommand.RaiseCanExecuteChanged();ExportCubeCommand.RaiseCanExecuteChanged();RaiseViewProperties();

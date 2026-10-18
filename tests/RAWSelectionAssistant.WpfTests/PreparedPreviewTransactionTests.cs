@@ -22,7 +22,7 @@ public sealed class PreparedPreviewTransactionTests
             using(var trace=StudioPreviewDiagnostics.Begin())
             {
                 await vm.GenerateInstantFilmCommand.ExecuteAsync(null);
-                Assert.AreEqual(1,trace.Observations.Count(x=>x.Stage=="EffectPreview"));Assert.AreEqual(1,trace.Observations.Count(x=>x.Stage=="ComparePreview"));
+                Assert.AreEqual(1,trace.Observations.Count(x=>x.Stage=="EffectPreview"));Assert.AreEqual(0,trace.Observations.Count(x=>x.Stage=="ComparePreview"));await vm.RequestComparisonAsync();Assert.AreEqual(1,trace.Observations.Count(x=>x.Stage=="ComparePreview"));
             }
             var before=Pixels(vm.Editor.MatchedImage!);var count=vm.ActiveTarget!.EditVersions.Count;
             var oldRecipe=JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition);

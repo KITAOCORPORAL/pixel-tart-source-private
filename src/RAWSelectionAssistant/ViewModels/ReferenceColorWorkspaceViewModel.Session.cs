@@ -62,6 +62,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     public async Task LoadSessionAsync(string path, CancellationToken token = default)
     {
+        await StopComparisonAsync();
         if(_skipSessionPreparation){await LoadSessionCoreAsync(path,token);return;}
         if(_disposed||IsLoading||IsInstantGenerating||IsExporting)throw new InvalidOperationException("工作区正在处理，未开始加载项目。");
         using var preparation=CancellationTokenSource.CreateLinkedTokenSource(token);
@@ -93,6 +94,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(fingerprint!=await ColorStudioSessionStore.FingerprintAsync(path,token))throw new IOException("项目在移交前改变，工作区未修改。");
         if(_disposed||!ReferenceEquals(ActiveTarget,expectedActive)||expectedRevision!=Volatile.Read(ref _activationRevision))throw new OperationCanceledException("项目准备期间工作区已改变。",token);
         await LoadSessionCoreAsync(path,token,document,staged);
+        UpdateComparisonAvailability();
         _sessionFingerprints[Path.GetFullPath(path)]=fingerprint;
         }
         finally{_sessionPreparationCancellation=null;_sessionLoading=false;OnPropertyChanged(nameof(IsLoading));RefreshSyncAvailability();}

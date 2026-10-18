@@ -71,7 +71,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public AsyncRelayCommand ToggleInstantDiceCommand {get;private set;}=null!;
     public AsyncRelayCommand DisableInstantFilmCommand {get;private set;}=null!;
     public RelayCommand SelectInstantCameraCommand {get;private set;}=null!;
-    public void ExitInstantPresentationForLifecycle(){_secondSelectionCancellation?.Cancel();_instantCancellation?.Cancel();}
+    public void ExitInstantPresentationForLifecycle(){CancelComparison();_secondSelectionCancellation?.Cancel();_instantCancellation?.Cancel();}
     private void InitializeInstantFilmCommands()
     {
         InitializeInstantV3Commands();
@@ -129,6 +129,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public async Task GenerateInstantFilmAsync(bool roll)
     {
         if(_disposed||IsInstantGenerating||IsLoading||IsExporting||ActiveTarget is not {} target)return;
+        await StopComparisonAsync();
+        if(_disposed||IsLoading||IsExporting||IsInstantGenerating||!ReferenceEquals(ActiveTarget,target))return;
         // Establish and freeze the source edit version before async reconstruction starts.
         if(InstantEngineVersion=="V3"&&(target.ActiveEditVersionId is null||target.RawDefinition is null)||target.RawDefinition is null&&RawMatchTiff16ProductPipeline.IsRaw(target.Path)){Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);}
         var version=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);var previous=target.RawDefinition;
@@ -218,6 +220,6 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         catch(OperationCanceledException error){LastProcessingFailure=StudioProcessingFailure.From(error,"InstantRebuild");OnPropertyChanged(nameof(LastProcessingFailure));Rollback();if(ReferenceEquals(ActiveTarget,target))RestoreInstantControls(previous?.InstantFilm);StatusText="本次显影已退出，保留上一有效结果";InstantDiceEnabled=previousDice;}
         catch(Exception error)when(error is IOException or InvalidDataException or NotSupportedException or ArgumentException or InvalidOperationException or System.Runtime.InteropServices.COMException)
         {LastProcessingFailure=StudioProcessingFailure.From(error,"InstantRebuild");OnPropertyChanged(nameof(LastProcessingFailure));Rollback();if(ReferenceEquals(ActiveTarget,target))RestoreInstantControls(previous?.InstantFilm);StatusText="即时胶片未完成，保留上一有效结果："+error.Message;InstantDiceEnabled=previousDice;}
-        finally{IsInstantGenerating=false;InstantDevelopment=null;InstantFinalPreview=null;OnPropertyChanged(nameof(InstantDiceEnabled));InstantChanged();}
+        finally{IsInstantGenerating=false;if(!_disposed)UpdateComparisonAvailability();InstantDevelopment=null;InstantFinalPreview=null;OnPropertyChanged(nameof(InstantDiceEnabled));InstantChanged();}
     }
 }

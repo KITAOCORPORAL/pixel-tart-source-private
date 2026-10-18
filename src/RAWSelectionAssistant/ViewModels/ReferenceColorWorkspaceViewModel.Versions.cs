@@ -92,6 +92,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public async Task SwitchEditVersionAsync(Guid id)
     {
         if(ActiveTarget is not {} target || IsLoading || IsExporting || IsInstantGenerating)return;
+        await StopComparisonAsync();if(_disposed||!ReferenceEquals(ActiveTarget,target))return;
         if(target.ActiveEditVersionId==id)return;
         var version=target.EditVersions.SingleOrDefault(v=>v.Id==id);if(version is null)return;
         Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);

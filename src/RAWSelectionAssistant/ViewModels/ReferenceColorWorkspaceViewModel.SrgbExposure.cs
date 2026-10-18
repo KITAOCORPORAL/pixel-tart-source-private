@@ -14,6 +14,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   ApplySrgbExposureCommand=new(async _=>
   {
    if(!SrgbExposureAvailable||ActiveTarget is not{} target||IsLoading||IsExporting||IsInstantGenerating)return;
+        await StopComparisonAsync();
+        if(_disposed||IsLoading||IsExporting||IsInstantGenerating||!ReferenceEquals(ActiveTarget,target))return;
    Editor.CopyCurrentLookTo([target]);
    var prior=target.RawDefinition;var active=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);
    var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldMode=Editor.IndependentRawMode;var oldHistory=Editor.CaptureSessionHistory();var oldEditorSource=Editor.CapturePreparedSource();var oldSize=Editor.SourcePixelSize;var oldStatus=target.Status;var oldError=target.Error;
@@ -45,7 +47,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     LastProcessingFailure=StudioProcessingFailure.From(e,"RenderedSrgbExposure");OnPropertyChanged(nameof(LastProcessingFailure));StatusText="sRGB 曝光未提交，保留此前版本："+e.Message;
    }
-   finally{IsInstantGenerating=false;InstantChanged();ApplySrgbExposureCommand.RaiseCanExecuteChanged();}
+   finally{IsInstantGenerating=false;if(!_disposed)UpdateComparisonAvailability();InstantChanged();ApplySrgbExposureCommand.RaiseCanExecuteChanged();}
   },_=>SrgbExposureAvailable&&!IsLoading&&!IsExporting&&!IsInstantGenerating);
  }
 }

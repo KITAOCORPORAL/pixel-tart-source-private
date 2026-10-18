@@ -12,7 +12,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public RelayCommand ResetPhotoV3DraftCommand {get;private set;}=null!;
  private void InitializePhotoGradeHistoryCommands()
  {
-  InitializeSrgbExposureCommands();
+  InitializeSrgbExposureCommands();InitializeComparison();
   ResetPhotoV3DraftCommand=new(_=>{var profile=SelectedInstantProfile;RestoreInstantControls(null);SelectedInstantProfile=profile;InstantEngineVersion="V3";},_=>!IsInstantGenerating&&!IsLoading&&!IsExporting&&ActiveTarget is not null);
   PhotoGradeUndoCommand=new(async _=>
   {
