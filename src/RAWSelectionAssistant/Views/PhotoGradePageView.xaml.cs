@@ -56,7 +56,13 @@ public partial class PhotoGradePageView:UserControl
   var type=editor?.SelectedAdjustmentNode?.Type;
   CurrentParameters.NodeTypes=type is RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.WhiteBalance?"WhiteBalance":"BasicTone";
  }
- private void Changed(object? sender,PropertyChangedEventArgs e){if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PhotoMaskColor))Refresh();}
+ private void Changed(object? sender,PropertyChangedEventArgs e)
+ {
+  if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PhotoMaskColor))Refresh();
+  // A newly imported ordinary photo restores the historical default engine. The
+  // photographer's selected Polaroid tab must still be ready without version knowledge.
+  if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.InstantEngineVersion)&&model?.ActiveTarget is{} target&&target.RawDefinition is null&&EditModes.SelectedItem==PolaroidTab&&model.InstantEngineVersion!="V3")model.InstantEngineVersion="V3";
+ }
  private void Refresh()
  {
   PhotoViewport.FocusVisualStyle=null;PhotoViewport.ToolTip="滚轮缩放 · 拖动平移 · 双击适合窗口";

@@ -17,7 +17,7 @@ namespace RAWSelectionAssistant.WpfTests;
    vm.SelectedPhotographerPaperId="itype-color";vm.InstantInputMode="Original";await vm.GenerateInstantFilmCommand.ExecuteAsync(null);var frozen=JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition);var pixels=Hash(vm.Editor.MatchedImage!);Assert.AreEqual("仿色结果",combo.SelectedValue);Assert.AreEqual("配方基准",vm.PhotographerComparisonModes.Single(x=>x.Value=="原片").Label);Assert.IsFalse(vm.PhotoGradeRasterToolsEnabled);StringAssert.Contains(vm.RasterAvailabilityReason,"撤销");
    vm.PhotographerComparisonValue="并排对比";await vm.ComparisonWork;Assert.AreEqual(pixels,Hash(vm.Editor.MatchedImage!));Assert.IsTrue(vm.IsComparisonReady);
    await vm.PhotoGradeUndoCommand.ExecuteAsync(null);Assert.IsNull(vm.ActiveTarget.RawDefinition);Assert.IsTrue(vm.PhotoGradeRasterToolsEnabled);await vm.PhotoGradeRedoCommand.ExecuteAsync(null);Assert.AreEqual(frozen,JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition));Assert.AreEqual(pixels,Hash(vm.Editor.MatchedImage!));
-   await vm.LoadTargetAsync(Image("b.png",90));Assert.IsTrue(vm.PhotographerPapers.All(x=>x.Preview is null),"No old-photo thumbnails");view.DataContext=null;
+   await vm.LoadTargetAsync(Image("b.png",90));Assert.IsTrue(vm.PhotographerPapers.All(x=>x.Preview is null),"No old-photo thumbnails");Assert.AreEqual("V3",vm.InstantEngineVersion,"Import while Polaroid tab selected must not require diagnostic version selection");view.DataContext=null;
   }finally{Directory.Delete(root,true);}
  });
  [TestMethod]public void SharedResponseNamesDoNotInventPixelDifferences()
