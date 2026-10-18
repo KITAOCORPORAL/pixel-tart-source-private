@@ -682,7 +682,7 @@
   "LabelInstantSecondCropX": "CropX",
   "LabelInstantSecondCropY": "CropY",
   "LabelInstantSecondZoom": "Zoom",
-  "V3OriginalHelp": "Original is available for RAW/JPEG. PNG/TIFF use current edits; unsupported Original is disabled.",
+  "V3OriginalHelp": "Original uses the source file. V3 supports RAW, JPEG, PNG and admitted TIFF inputs. TIFF3 is only product uncompressed RGB16 with exact sRGB; other inputs retain existing decoder/budget admission. Failures keep the prior result. CurrentEdits uses frozen current edits.",
   "InstantDemoMode": "Development demonstration (off: immediate result)",
   "InstantSkipDemo": "Skip demonstration",
   "SrgbExposureTitle": "Linear sRGB exposure",
