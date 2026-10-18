@@ -1,0 +1,56 @@
+[
+  {
+    "label": "08-prevalidation",
+    "exitCode": 0,
+    "status": "COMPLETED_SUPERSEDED_NOT_FINAL",
+    "seconds": 375.17171989998315
+  },
+  {
+    "label": "11-delivery/source-focused",
+    "status": "PASSED",
+    "classification": "SUPERSEDED_NOT_FINAL",
+    "selected": 68,
+    "recordedRuns": 11,
+    "assemblySha256": "7642c13eb693646cf3283bfb24915c0b173c3fed21355764fc2581ac49083f48"
+  },
+  {
+    "label": "11-delivery/published-focused",
+    "status": "PASSED",
+    "classification": "SUPERSEDED_NOT_FINAL",
+    "selected": 68,
+    "recordedRuns": 11,
+    "assemblySha256": "7642c13eb693646cf3283bfb24915c0b173c3fed21355764fc2581ac49083f48"
+  },
+  {
+    "label": "11-delivery/source-core",
+    "status": "FAILED",
+    "classification": "SUPERSEDED_NOT_FINAL",
+    "selected": 1713,
+    "recordedRuns": 1,
+    "assemblySha256": "9a5ac3d6b8c48742ef67e8b6fc35ce8787f746ce0b6874f3440734f1f8794765"
+  },
+  {
+    "label": "11-delivery/published-core",
+    "status": "FAILED",
+    "classification": "SUPERSEDED_NOT_FINAL",
+    "selected": 1713,
+    "recordedRuns": 1,
+    "assemblySha256": "9a5ac3d6b8c48742ef67e8b6fc35ce8787f746ce0b6874f3440734f1f8794765"
+  },
+  {
+    "label": "11-delivery/candidate",
+    "status": "PASSED",
+    "classification": "SUPERSEDED_NOT_FINAL",
+    "selected": 25,
+    "recordedRuns": 1,
+    "assemblySha256": "b5cb1eab9942fc605dd77ccffe7a48f8e5c75e3eab1ac808f45f04856bc92c28"
+  },
+  {
+    "label": "11-delivery/published-wpf",
+    "status": "RUNNING",
+    "classification": "SUPERSEDED_INCOMPLETE_NOT_A_PASS",
+    "selected": 1683,
+    "recordedRuns": 12,
+    "assemblySha256": "7642c13eb693646cf3283bfb24915c0b173c3fed21355764fc2581ac49083f48"
+  }
+]

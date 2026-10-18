@@ -1,0 +1,336 @@
+{
+  "elapsedMs": 12879.4229,
+  "source": "B9A86CC1AF49A6D887DDFAFFC400CFC8C4644449BD826A695FA820F12A153178",
+  "definition": {
+    "ProcessingVersion": 5,
+    "WhiteBalance": "Rendered",
+    "RedGain": 1,
+    "GreenGain": 1,
+    "BlueGain": 1,
+    "ExposureEv": 0,
+    "InputConfiguration": "RenderedSrgbFloatV1",
+    "DisplayTransform": "RenderedSrgbIdentityV1",
+    "InstantFilm": {
+      "Enabled": true,
+      "FilmId": "itype-color",
+      "ChemicalGeneration": "ModernIntegralCreative",
+      "ProfileVersion": 1,
+      "AlgorithmVersion": 3,
+      "Amount": 1,
+      "PaperFrame": true,
+      "Border": 0.075,
+      "BottomBorder": 0.25,
+      "Uneven": 0.15,
+      "Unspread": 0.12,
+      "Roller": 0.1,
+      "ArtLightLeak": 0,
+      "EnvironmentCelsius": 21,
+      "DiceEnabled": false,
+      "Tier": "\u7A33\u5B9A\u51FA\u7247",
+      "Snapshot": null,
+      "V3": {
+        "AlgorithmVersion": 3,
+        "ProfileId": "modern-itype-v3",
+        "Identity": {
+          "ChemicalFamily": "ModernIntegralColor",
+          "PaperEra": "Modern; batch unknown",
+          "ProfileVersion": 1
+        },
+        "Response": {
+          "ExposureEv": 0.23,
+          "Toe": 0.025,
+          "Shoulder": 0.3,
+          "Black": 0.012,
+          "Saturation": 0.9,
+          "ApparentDensity": 1
+        },
+        "Provenance": {
+          "EvidenceStatus": "CreativeSimulation",
+          "SourceIds": [
+            "GROK-POL-0001:source",
+            "GROK-POL-0002:source",
+            "GROK-POL-0003:source"
+          ],
+          "SampleIds": [
+            "GROK-POL-0001",
+            "GROK-POL-0002",
+            "GROK-POL-0003"
+          ],
+          "Observations": [
+            "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+          ],
+          "ContraryEvidence": [
+            "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+          ],
+          "CalibrationEligible": false
+        },
+        "Optics": {
+          "Version": 1,
+          "DetailMix": 0.35,
+          "HighlightDiffusion": 0.07,
+          "Radius": 2
+        },
+        "Emulsion": {
+          "Version": 1,
+          "Microstructure": 0.003,
+          "DevelopmentUnevenness": 0.0039,
+          "DevelopmentDefects": 0,
+          "ExpiredAging": 0
+        },
+        "Surface": {
+          "Version": 1,
+          "Frame": true,
+          "BaseColor": "Warm",
+          "PaperTexture": 0.002,
+          "PaperScratches": 0,
+          "ScanDust": 0
+        },
+        "Geometry": {
+          "Version": 1,
+          "Fit": "CropFill",
+          "CropX": 0.5,
+          "CropY": 0.5,
+          "WindowAspect": 1,
+          "Side": 0.075,
+          "Top": 0.075,
+          "Bottom": 0.25
+        },
+        "Random": {
+          "RootSeed": 20261017,
+          "PrngVersion": "SplitMix64SubstreamsV1",
+          "ProfileId": "itype-color",
+          "ProfileVersion": 1,
+          "Tier": "\u7A33\u5B9A\u51FA\u7247",
+          "ColorShift": 0.005365892730024123,
+          "SpreadScale": 0.689795833092194,
+          "TextureScale": 0.6367605297857575,
+          "Geometry": [
+            {
+              "Kind": "Spread",
+              "X": 0.6281967054663238,
+              "Y": 0.3773555563567548,
+              "Radius": 0.3551195361523293,
+              "Strength": 0.13867208895094624,
+              "Period": 0
+            },
+            {
+              "Kind": "Spread",
+              "X": 0.14800113297205741,
+              "Y": 0.03634583006186831,
+              "Radius": 0.3269907811387596,
+              "Strength": 0.18781727411541294,
+              "Period": 0
+            },
+            {
+              "Kind": "Spread",
+              "X": 0.4607686445686676,
+              "Y": 0.6577785865415269,
+              "Radius": 0.3093574396701533,
+              "Strength": 0.0758385558108653,
+              "Period": 0
+            },
+            {
+              "Kind": "Corner",
+              "X": 1,
+              "Y": 0,
+              "Radius": 0.10672301440338089,
+              "Strength": 0.25,
+              "Period": 0
+            },
+            {
+              "Kind": "Roller",
+              "X": 0.07111145078428316,
+              "Y": 0.43268922401502874,
+              "Radius": 0.005179344202560572,
+              "Strength": 0.175,
+              "Period": 0.1248172791106416
+            }
+          ]
+        },
+        "Amount": 1,
+        "Creative": {
+          "Version": 2,
+          "Stock": "Base",
+          "ShadowCast": 0,
+          "HighlightWarmth": 0,
+          "Fog": 0,
+          "TemperatureAppearance": 0,
+          "FrameDrift": 0,
+          "Fade": 0,
+          "LensVignette": 0,
+          "DevelopmentEdge": 0
+        },
+        "Paper": {
+          "Version": 3,
+          "Pattern": "Plain",
+          "Window": "Circle",
+          "Emboss": 0,
+          "EdgeLine": 0,
+          "Reflection": 0,
+          "ReflectionAngle": 0,
+          "ReflectionWidth": 0.15,
+          "Zoom": 1,
+          "WindowHighlight": 0,
+          "WindowPressed": 0.3
+        },
+        "Defects": {
+          "Version": 2,
+          "Kind": "None",
+          "Amount": 0,
+          "Crystal": 0,
+          "Leak": 0,
+          "Streams": "V3IndependentStreams1",
+          "Geometry": {
+            "CenterX": 0.5,
+            "CenterY": 0.5,
+            "AngleDegrees": 0,
+            "Scale": 1
+          }
+        },
+        "MultipleInput": {
+          "Version": 3,
+          "Path": "N:\\pixart\\kitao-instant-film-evidence-v3-20261016\\.validation\\instant-v3\\sony-product\\pv4.tif",
+          "Sha256": "5C06A14160C9B57015CFEBD9CD1E882620FFC817CFDCA061596746CDD82D1CA7",
+          "Width": 4688,
+          "Height": 7028,
+          "Orientation": 1,
+          "Weight": 0.37,
+          "Mode": "NormalizedMix",
+          "CropX": 0.2,
+          "CropY": 0.7,
+          "Zoom": 1.21,
+          "Domain": "OrientedDisplaySrgbD65V1"
+        },
+        "Profile": {
+          "Id": "modern-itype-v3",
+          "LegacyId": "itype-color",
+          "ChemicalFamily": "ModernIntegralColor",
+          "PaperEra": "Modern; batch unknown",
+          "Palette": "Color",
+          "Response": {
+            "ExposureEv": 0,
+            "Toe": 0.025,
+            "Shoulder": 0.3,
+            "Black": 0.012,
+            "Saturation": 0.9,
+            "ApparentDensity": 1
+          },
+          "Provenance": {
+            "EvidenceStatus": "CreativeSimulation",
+            "SourceIds": [
+              "GROK-POL-0001:source",
+              "GROK-POL-0002:source",
+              "GROK-POL-0003:source"
+            ],
+            "SampleIds": [
+              "GROK-POL-0001",
+              "GROK-POL-0002",
+              "GROK-POL-0003"
+            ],
+            "Observations": [
+              "Provider reports lifted shadows/warm highlights in these scans only; creative hypothesis."
+            ],
+            "ContraryEvidence": [
+              "Exposure, scan transfer, postprocessing and manufacturing batch uncontrolled; no measured paired scene; provider observations not physical truth."
+            ],
+            "CalibrationEligible": false
+          }
+        }
+      },
+      "PaperColor": "Warm",
+      "PaperGeometry": {
+        "Version": 1,
+        "Fit": "CropFill",
+        "CropX": 0.5,
+        "CropY": 0.5,
+        "WindowAspect": 1,
+        "Side": 0.075,
+        "Top": 0.075,
+        "Bottom": 0.25
+      }
+    },
+    "InstantInput": {
+      "Version": 1,
+      "Mode": "Original",
+      "OriginVersionId": "9489e4e2-aa4d-4c3f-9a4d-9bc12eafa161",
+      "Look": null,
+      "Stack": null,
+      "Film": null
+    },
+    "RenderedInputVersion": 2,
+    "DecodeKey": "RenderedSrgbFloatV1:Rendered:1:1:1:rasterInput2:recipe:E61ED5E4138A936EB2FC708409E0AE93003A4344C89E0F6545266E7B714AACCC"
+  },
+  "profile": [
+    {
+      "stage": "full.linear-area-downsample",
+      "elapsedMs": 2571.2922,
+      "samples": 152
+    },
+    {
+      "stage": "full.paper-geometry-and-scan",
+      "elapsedMs": 2688.5154,
+      "samples": 2584
+    },
+    {
+      "stage": "full.preview-total-including-downsample",
+      "elapsedMs": 12432.8922,
+      "samples": 1
+    },
+    {
+      "stage": "full.spatial-response-optics-texture",
+      "elapsedMs": 6962.0643,
+      "samples": 2584
+    },
+    {
+      "stage": "sampled.double-source-fetch-interpolate",
+      "elapsedMs": 20.2149,
+      "samples": 118972
+    },
+    {
+      "stage": "sampled.emulsion-noise",
+      "elapsedMs": 16.0025,
+      "samples": 105980
+    },
+    {
+      "stage": "sampled.optics-25tap",
+      "elapsedMs": 12.531,
+      "samples": 105980
+    },
+    {
+      "stage": "sampled.original-fetch-creative-defects",
+      "elapsedMs": 12.2167,
+      "samples": 105980
+    },
+    {
+      "stage": "sampled.texture-creative-and-original",
+      "elapsedMs": 41.91,
+      "samples": 105980
+    },
+    {
+      "stage": "sampled.tone-response",
+      "elapsedMs": 10.4052,
+      "samples": 118972
+    }
+  ],
+  "io": [
+    {
+      "Stage": "SecondDecode",
+      "ElapsedMs": 437.8792,
+      "PrivateBytes": 266854400,
+      "WorkingSet": 298299392,
+      "AccountedBytes": 242043840,
+      "SinceCaptureMs": 651.8115
+    },
+    {
+      "Stage": "SecondMappedOpen",
+      "ElapsedMs": 346.8064,
+      "PrivateBytes": 272941056,
+      "WorkingSet": 304680960,
+      "AccountedBytes": 440818168,
+      "SinceCaptureMs": 1007.5063
+    }
+  ],
+  "width": 1388,
+  "height": 1600,
+  "scope": "One sampled x=0 per tile row; sampled stage times not full totals. Downsample spans are full strips; no pixel math changes."
+}

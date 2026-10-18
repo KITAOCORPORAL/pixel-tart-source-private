@@ -1,0 +1,91 @@
+{
+  "status": "PASS",
+  "reference": "Pinned original scikit-image transfer functions, actual file pixels",
+  "floatBoundary": "Frozen float32 display samples before quantization",
+  "rows": [
+    {
+      "id": "sony-dsc08015",
+      "sourceHash": "5C06A14160C9B57015CFEBD9CD1E882620FFC817CFDCA061596746CDD82D1CA7",
+      "rows": 3072,
+      "formats": [
+        {
+          "format": "Tiff",
+          "maximum": 0.0,
+          "mae": 0.0,
+          "rmse": 0.0,
+          "valid": true
+        },
+        {
+          "format": "Png",
+          "maximum": 0.0,
+          "mae": 0.0,
+          "rmse": 0.0,
+          "valid": true
+        },
+        {
+          "format": "Jpeg",
+          "maximum": 6.0,
+          "mae": 0.8774956597222222,
+          "rmse": 1.205771350054027,
+          "valid": true
+        }
+      ]
+    },
+    {
+      "id": "canon-tnan8886",
+      "sourceHash": "B9A86CC1AF49A6D887DDFAFFC400CFC8C4644449BD826A695FA820F12A153178",
+      "rows": 3072,
+      "formats": [
+        {
+          "format": "Tiff",
+          "maximum": 0.0,
+          "mae": 0.0,
+          "rmse": 0.0,
+          "valid": true
+        },
+        {
+          "format": "Png",
+          "maximum": 0.0,
+          "mae": 0.0,
+          "rmse": 0.0,
+          "valid": true
+        },
+        {
+          "format": "Jpeg",
+          "maximum": 12.0,
+          "mae": 1.2835286458333333,
+          "rmse": 1.8194013724757565,
+          "valid": true
+        }
+      ]
+    },
+    {
+      "id": "fuji-dscf0347-frozen",
+      "sourceHash": "5668EBCEA230AC91920C094B6AAC9C5896DE2A647C0F6165DE9FFF4105F870D7",
+      "rows": 3072,
+      "formats": [
+        {
+          "format": "Tiff",
+          "maximum": 0.0,
+          "mae": 0.0,
+          "rmse": 0.0,
+          "valid": true
+        },
+        {
+          "format": "Png",
+          "maximum": 0.0,
+          "mae": 0.0,
+          "rmse": 0.0,
+          "valid": true
+        },
+        {
+          "format": "Jpeg",
+          "maximum": 16.0,
+          "mae": 2.215603298611111,
+          "rmse": 3.0768336617283105,
+          "valid": true
+        }
+      ]
+    }
+  ]
+}

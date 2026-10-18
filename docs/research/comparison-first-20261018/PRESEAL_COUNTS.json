@@ -1,0 +1,53 @@
+[
+  {
+    "suite": "source-focused",
+    "status": "PASSED",
+    "counts": {
+      "Passed": 68
+    },
+    "assemblySha256": "aad76ede02773c9e2da6981207ee5f3da4d7041f307c8269d36d5a17fa62fce1"
+  },
+  {
+    "suite": "published-focused",
+    "status": "PASSED",
+    "counts": {
+      "Passed": 68
+    },
+    "assemblySha256": "aad76ede02773c9e2da6981207ee5f3da4d7041f307c8269d36d5a17fa62fce1"
+  },
+  {
+    "suite": "source-core",
+    "status": "FAILED",
+    "counts": {
+      "Passed": 1706,
+      "NotExecuted": 7
+    },
+    "assemblySha256": "1954d9ea5a10f157c09d95fc8e0919ddb72eb19172e3a61893122d7efb4d21d4"
+  },
+  {
+    "suite": "published-core",
+    "status": "FAILED",
+    "counts": {
+      "Passed": 1707,
+      "NotExecuted": 6
+    },
+    "assemblySha256": "1954d9ea5a10f157c09d95fc8e0919ddb72eb19172e3a61893122d7efb4d21d4"
+  },
+  {
+    "suite": "candidate",
+    "status": "PASSED",
+    "counts": {
+      "Passed": 25
+    },
+    "assemblySha256": "5a7ff67ff0e49496b29aa12a2131d158742b82c266df63f01a90b97b91e97bf7"
+  },
+  {
+    "suite": "published-wpf",
+    "status": "FAILED",
+    "counts": {
+      "Passed": 1659,
+      "NotExecuted": 24
+    },
+    "assemblySha256": "aad76ede02773c9e2da6981207ee5f3da4d7041f307c8269d36d5a17fa62fce1"
+  }
+]

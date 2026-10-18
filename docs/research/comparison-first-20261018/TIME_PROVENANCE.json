@@ -1,0 +1,8 @@
+{
+  "recordedUtc": "2026-10-18T06:22:18.782973+00:00",
+  "recordedAsiaShanghai": "2026-10-18T14:22:18.782973+08:00",
+  "timezone": "Asia/Shanghai",
+  "utcOffset": "+08:00",
+  "method": "datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=8)))",
+  "priorDocuments": "Earlier preview-reuse documents had timezone relabeling. Do not derive absolute run times from those labels; this run uses actual captured UTC pairs in 13-run-times.json. Historical elapsed durations remain stopwatch measurements."
+}

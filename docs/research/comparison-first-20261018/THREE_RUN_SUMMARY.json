@@ -1,0 +1,853 @@
+{
+  "recordedUtc": "2026-10-18T06:42:00.067152+00:00",
+  "recordedAsiaShanghai": "2026-10-18T14:42:00.067152+08:00",
+  "scope": "Three new independent processes on same host and authorized inputs; managed source cache cold at each process; OS file cache not flushed; regression processes may share CPU. WPF offscreen frame, NOT physical mouse/display latency.",
+  "baseline": {
+    "path": "artifacts\\preview-reuse\\22-output\\FULL_PAGE_RESULT.json",
+    "sha256": "933446E21F98CACA0F72573FC1787C047264652E4E560E2FBAD8F2A2BE0836D2",
+    "applyMs": 28151.4958,
+    "outputSize": {
+      "Width": 4220,
+      "Height": 4863
+    }
+  },
+  "runs": [
+    {
+      "run": 1,
+      "first": {
+        "effectFirstVisibleMs": 14360.2478,
+        "wpfOffscreenRenderedMs": 14591.9,
+        "operationAvailableMs": 14565.4404,
+        "comparisonAfterDemandMs": 12480.8041,
+        "comparisonReadyFromApplyMs": 27141.937599999997,
+        "comparisonHash": "A7A86E36614CCCAF6E05F608F8F8DE2A27691B88612F79C3C2DD8CEC73DD5199",
+        "effectHash": "4613598D50B5E5498AD148BB10B63D0309EACDD995B93E5C57AB990657438626",
+        "sourceMasterCache": "cold",
+        "comparisonCache": "cold; demand immediately after apply",
+        "physicalForeground": "NOT_RUN"
+      },
+      "reopenMs": 25932.5291,
+      "timings": {
+        "DecodeMs": 656.9519,
+        "PixelMs": 12603.3585,
+        "DemoMs": 0.001,
+        "CommitMs": 493.9315,
+        "MasterCacheHit": false,
+        "CompareMs": 0
+      },
+      "continuous": [
+        {
+          "weight": 0.52,
+          "elapsedMs": 24937.5391,
+          "timings": {
+            "DecodeMs": 0.5259,
+            "PixelMs": 22997.281,
+            "DemoMs": 0.0016,
+            "CommitMs": 665.5642,
+            "MasterCacheHit": true,
+            "CompareMs": 0
+          }
+        },
+        {
+          "weight": 0.37,
+          "elapsedMs": 21704.4272,
+          "timings": {
+            "DecodeMs": 0.0949,
+            "PixelMs": 20054.7909,
+            "DemoMs": 0.0006,
+            "CommitMs": 677.9639,
+            "MasterCacheHit": true,
+            "CompareMs": 0
+          }
+        }
+      ],
+      "interactions": [
+        {
+          "label": "Exposure",
+          "ms": 29849.7297,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "Weight",
+          "ms": 22003.7512,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "Crop",
+          "ms": 21155.8914,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "Zoom",
+          "ms": 20866.9612,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "CompareThenSwitch",
+          "ms": null,
+          "activeMappings": 0,
+          "comparisonUnavailable": false
+        },
+        {
+          "label": "CompareThenUndo",
+          "ms": null,
+          "activeMappings": 0,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "ApplyDuringComparison",
+          "ms": 21613.2924,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "CompareThenApply",
+          "ms": null,
+          "activeMappings": 0,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "RestoreBase",
+          "ms": 22117.7625,
+          "activeMappings": null,
+          "comparisonUnavailable": false
+        }
+      ],
+      "formats": [
+        {
+          "format": 3,
+          "sha256": "910B55A2248136FDE5B86C59EC99F22A9E1DCA1FAE756CF18CB0B219E4DD2A22",
+          "exportMs": 51609.747,
+          "inspection": {
+            "Width": 4220,
+            "Height": 4863,
+            "BitDepth": 16,
+            "Orientation": 1,
+            "Srgb": true,
+            "JpegQuality": null,
+            "MeanAbsoluteError": 0,
+            "RootMeanSquareError": 0,
+            "MaximumError": 0,
+            "EncoderConfiguration": "V3DirectStripsTIFF16"
+          }
+        },
+        {
+          "format": 2,
+          "sha256": "F09CC9C401EE4D23EF4F3BC24B1859F29313F3EDEAD0DEC6B19D99E94D10CF26",
+          "exportMs": 54584.026,
+          "inspection": {
+            "Width": 4220,
+            "Height": 4863,
+            "BitDepth": 16,
+            "Orientation": 1,
+            "Srgb": true,
+            "JpegQuality": null,
+            "MeanAbsoluteError": 0,
+            "RootMeanSquareError": 0,
+            "MaximumError": 0,
+            "EncoderConfiguration": "V3DirectStripsPNG16"
+          }
+        },
+        {
+          "format": 1,
+          "sha256": "D7B5D7F96067A58A2B96041A7A49D1979870F5945E118B8C4E4DB72196F6C90B",
+          "exportMs": 51221.1474,
+          "inspection": {
+            "Width": 4220,
+            "Height": 4863,
+            "BitDepth": 8,
+            "Orientation": 1,
+            "Srgb": true,
+            "JpegQuality": 95,
+            "MeanAbsoluteError": 0.5186500801259405,
+            "RootMeanSquareError": 0.8984023364650413,
+            "MaximumError": 15,
+            "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+          }
+        }
+      ],
+      "memory": {
+        "durationSeconds": 600.1970026000054,
+        "samples": 2394,
+        "privatePeak": 3108929536,
+        "workingSetPeak": 2877718528,
+        "lifetimeWorkingSetPeak": 2882965504,
+        "ledgerSamples": [
+          {
+            "Stage": "ColdStart",
+            "ElapsedMs": 0,
+            "PrivateBytes": 18124800,
+            "WorkingSet": 60276736,
+            "AccountedBytes": 0,
+            "SinceCaptureMs": 8.449
+          },
+          {
+            "Stage": "SourceLoaded",
+            "ElapsedMs": 0,
+            "PrivateBytes": 389881856,
+            "WorkingSet": 442986496,
+            "AccountedBytes": 0,
+            "SinceCaptureMs": 881.3658
+          },
+          {
+            "Stage": "FirstApplied",
+            "ElapsedMs": 0,
+            "PrivateBytes": 902496256,
+            "WorkingSet": 945520640,
+            "AccountedBytes": 242043840,
+            "SinceCaptureMs": 16114.8298
+          },
+          {
+            "Stage": "ContinuousCompleted",
+            "ElapsedMs": 0,
+            "PrivateBytes": 769576960,
+            "WorkingSet": 837783552,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 121361.7666
+          },
+          {
+            "Stage": "FirstWorkspaceClosed",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1279578112,
+            "WorkingSet": 1350184960,
+            "AccountedBytes": 2762340,
+            "SinceCaptureMs": 412106.5862
+          },
+          {
+            "Stage": "Reopened",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1097912320,
+            "WorkingSet": 1172746240,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 438058.3979
+          },
+          {
+            "Stage": "BeforeExportTiff",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1097912320,
+            "WorkingSet": 1172746240,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 438066.9285
+          },
+          {
+            "Stage": "AfterExportTiff",
+            "ElapsedMs": 0,
+            "PrivateBytes": 606343168,
+            "WorkingSet": 686137344,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 489921.2265
+          },
+          {
+            "Stage": "BeforeExportPng",
+            "ElapsedMs": 0,
+            "PrivateBytes": 606343168,
+            "WorkingSet": 686137344,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 489928.2698
+          },
+          {
+            "Stage": "AfterExportPng",
+            "ElapsedMs": 0,
+            "PrivateBytes": 908627968,
+            "WorkingSet": 978276352,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 544678.4519
+          },
+          {
+            "Stage": "BeforeExportJpeg",
+            "ElapsedMs": 0,
+            "PrivateBytes": 908627968,
+            "WorkingSet": 978284544,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 544686.5601
+          },
+          {
+            "Stage": "AfterExportJpeg",
+            "ElapsedMs": 0,
+            "PrivateBytes": 766984192,
+            "WorkingSet": 849547264,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 595932.632
+          },
+          {
+            "Stage": "WorkspaceClosed",
+            "ElapsedMs": 0,
+            "PrivateBytes": 830205952,
+            "WorkingSet": 861736960,
+            "AccountedBytes": 0,
+            "SinceCaptureMs": 599613.7414
+          }
+        ]
+      },
+      "previewHash": "44F41908921EB387EDE946007AE648ADCA596FDF2CA539685A97185C60BC4963",
+      "previewFullMax": 2.165012152555157e-06,
+      "closedLedger": 0
+    },
+    {
+      "run": 2,
+      "first": {
+        "effectFirstVisibleMs": 23572.7873,
+        "wpfOffscreenRenderedMs": 23903.7643,
+        "operationAvailableMs": 23857.9253,
+        "comparisonAfterDemandMs": 16241.693,
+        "comparisonReadyFromApplyMs": 40250.3952,
+        "comparisonHash": "A7A86E36614CCCAF6E05F608F8F8DE2A27691B88612F79C3C2DD8CEC73DD5199",
+        "effectHash": "4613598D50B5E5498AD148BB10B63D0309EACDD995B93E5C57AB990657438626",
+        "sourceMasterCache": "cold",
+        "comparisonCache": "cold; demand immediately after apply",
+        "physicalForeground": "NOT_RUN"
+      },
+      "reopenMs": 26737.5634,
+      "timings": {
+        "DecodeMs": 660.708,
+        "PixelMs": 21313.0181,
+        "DemoMs": 0.0014,
+        "CommitMs": 738.9137,
+        "MasterCacheHit": false,
+        "CompareMs": 0
+      },
+      "continuous": [
+        {
+          "weight": 0.52,
+          "elapsedMs": 13125.1186,
+          "timings": {
+            "DecodeMs": 0.4299,
+            "PixelMs": 12045.1013,
+            "DemoMs": 0.0009,
+            "CommitMs": 472.1694,
+            "MasterCacheHit": true,
+            "CompareMs": 0
+          }
+        },
+        {
+          "weight": 0.37,
+          "elapsedMs": 13034.7711,
+          "timings": {
+            "DecodeMs": 0.0701,
+            "PixelMs": 11990.1504,
+            "DemoMs": 0.0008,
+            "CommitMs": 452.6074,
+            "MasterCacheHit": true,
+            "CompareMs": 0
+          }
+        }
+      ],
+      "interactions": [
+        {
+          "label": "Exposure",
+          "ms": 13061.5622,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "Weight",
+          "ms": 13121.5722,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "Crop",
+          "ms": 12838.3373,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "Zoom",
+          "ms": 12779.7501,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "CompareThenSwitch",
+          "ms": null,
+          "activeMappings": 0,
+          "comparisonUnavailable": false
+        },
+        {
+          "label": "CompareThenUndo",
+          "ms": null,
+          "activeMappings": 0,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "ApplyDuringComparison",
+          "ms": 21599.2666,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "CompareThenApply",
+          "ms": null,
+          "activeMappings": 0,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "RestoreBase",
+          "ms": 21837.8771,
+          "activeMappings": null,
+          "comparisonUnavailable": false
+        }
+      ],
+      "formats": [
+        {
+          "format": 3,
+          "sha256": "910B55A2248136FDE5B86C59EC99F22A9E1DCA1FAE756CF18CB0B219E4DD2A22",
+          "exportMs": 51299.7601,
+          "inspection": {
+            "Width": 4220,
+            "Height": 4863,
+            "BitDepth": 16,
+            "Orientation": 1,
+            "Srgb": true,
+            "JpegQuality": null,
+            "MeanAbsoluteError": 0,
+            "RootMeanSquareError": 0,
+            "MaximumError": 0,
+            "EncoderConfiguration": "V3DirectStripsTIFF16"
+          }
+        },
+        {
+          "format": 2,
+          "sha256": "F09CC9C401EE4D23EF4F3BC24B1859F29313F3EDEAD0DEC6B19D99E94D10CF26",
+          "exportMs": 54752.0928,
+          "inspection": {
+            "Width": 4220,
+            "Height": 4863,
+            "BitDepth": 16,
+            "Orientation": 1,
+            "Srgb": true,
+            "JpegQuality": null,
+            "MeanAbsoluteError": 0,
+            "RootMeanSquareError": 0,
+            "MaximumError": 0,
+            "EncoderConfiguration": "V3DirectStripsPNG16"
+          }
+        },
+        {
+          "format": 1,
+          "sha256": "D7B5D7F96067A58A2B96041A7A49D1979870F5945E118B8C4E4DB72196F6C90B",
+          "exportMs": 51126.9029,
+          "inspection": {
+            "Width": 4220,
+            "Height": 4863,
+            "BitDepth": 8,
+            "Orientation": 1,
+            "Srgb": true,
+            "JpegQuality": 95,
+            "MeanAbsoluteError": 0.5186500801259405,
+            "RootMeanSquareError": 0.8984023364650413,
+            "MaximumError": 15,
+            "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+          }
+        }
+      ],
+      "memory": {
+        "durationSeconds": 524.6450953999883,
+        "samples": 2095,
+        "privatePeak": 2604912640,
+        "workingSetPeak": 2404892672,
+        "lifetimeWorkingSetPeak": 2406899712,
+        "ledgerSamples": [
+          {
+            "Stage": "ColdStart",
+            "ElapsedMs": 0,
+            "PrivateBytes": 18350080,
+            "WorkingSet": 59936768,
+            "AccountedBytes": 0,
+            "SinceCaptureMs": 8.8429
+          },
+          {
+            "Stage": "SourceLoaded",
+            "ElapsedMs": 0,
+            "PrivateBytes": 390025216,
+            "WorkingSet": 442507264,
+            "AccountedBytes": 0,
+            "SinceCaptureMs": 892.6734
+          },
+          {
+            "Stage": "FirstApplied",
+            "ElapsedMs": 0,
+            "PrivateBytes": 902975488,
+            "WorkingSet": 945266688,
+            "AccountedBytes": 242043840,
+            "SinceCaptureMs": 25468.6318
+          },
+          {
+            "Stage": "ContinuousCompleted",
+            "ElapsedMs": 0,
+            "PrivateBytes": 809213952,
+            "WorkingSet": 872280064,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 103532.0186
+          },
+          {
+            "Stage": "FirstWorkspaceClosed",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1881473024,
+            "WorkingSet": 1729232896,
+            "AccountedBytes": 2762340,
+            "SinceCaptureMs": 336041.1831
+          },
+          {
+            "Stage": "Reopened",
+            "ElapsedMs": 0,
+            "PrivateBytes": 2004811776,
+            "WorkingSet": 2008686592,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 362800.1078
+          },
+          {
+            "Stage": "BeforeExportTiff",
+            "ElapsedMs": 0,
+            "PrivateBytes": 2004811776,
+            "WorkingSet": 2008686592,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 362809.3305
+          },
+          {
+            "Stage": "AfterExportTiff",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1119293440,
+            "WorkingSet": 1146503168,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 414370.3179
+          },
+          {
+            "Stage": "BeforeExportPng",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1119293440,
+            "WorkingSet": 1146503168,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 414379.4641
+          },
+          {
+            "Stage": "AfterExportPng",
+            "ElapsedMs": 0,
+            "PrivateBytes": 762179584,
+            "WorkingSet": 847265792,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 469298.3088
+          },
+          {
+            "Stage": "BeforeExportJpeg",
+            "ElapsedMs": 0,
+            "PrivateBytes": 762179584,
+            "WorkingSet": 847265792,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 469307.3676
+          },
+          {
+            "Stage": "AfterExportJpeg",
+            "ElapsedMs": 0,
+            "PrivateBytes": 698355712,
+            "WorkingSet": 781758464,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 520449.6983
+          },
+          {
+            "Stage": "WorkspaceClosed",
+            "ElapsedMs": 0,
+            "PrivateBytes": 703094784,
+            "WorkingSet": 737095680,
+            "AccountedBytes": 0,
+            "SinceCaptureMs": 524068.8794
+          }
+        ]
+      },
+      "previewHash": "44F41908921EB387EDE946007AE648ADCA596FDF2CA539685A97185C60BC4963",
+      "previewFullMax": 2.165012152555157e-06,
+      "closedLedger": 0
+    },
+    {
+      "run": 3,
+      "first": {
+        "effectFirstVisibleMs": 23188.4497,
+        "wpfOffscreenRenderedMs": 23500.7152,
+        "operationAvailableMs": 23453.1283,
+        "comparisonAfterDemandMs": 20932.6979,
+        "comparisonReadyFromApplyMs": 44536.7213,
+        "comparisonHash": "A7A86E36614CCCAF6E05F608F8F8DE2A27691B88612F79C3C2DD8CEC73DD5199",
+        "effectHash": "4613598D50B5E5498AD148BB10B63D0309EACDD995B93E5C57AB990657438626",
+        "sourceMasterCache": "cold",
+        "comparisonCache": "cold; demand immediately after apply",
+        "physicalForeground": "NOT_RUN"
+      },
+      "reopenMs": 26993.5784,
+      "timings": {
+        "DecodeMs": 663.2349,
+        "PixelMs": 20876.5222,
+        "DemoMs": 0.0013,
+        "CommitMs": 722.2887,
+        "MasterCacheHit": false,
+        "CompareMs": 0
+      },
+      "continuous": [
+        {
+          "weight": 0.52,
+          "elapsedMs": 22466.3136,
+          "timings": {
+            "DecodeMs": 0.5109,
+            "PixelMs": 20645.8778,
+            "DemoMs": 0.0007,
+            "CommitMs": 711.3409,
+            "MasterCacheHit": true,
+            "CompareMs": 0
+          }
+        },
+        {
+          "weight": 0.37,
+          "elapsedMs": 22292.1817,
+          "timings": {
+            "DecodeMs": 0.1104,
+            "PixelMs": 20491.3077,
+            "DemoMs": 0.0006,
+            "CommitMs": 695.6655,
+            "MasterCacheHit": true,
+            "CompareMs": 0
+          }
+        }
+      ],
+      "interactions": [
+        {
+          "label": "Exposure",
+          "ms": 22579.4165,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "Weight",
+          "ms": 22600.7106,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "Crop",
+          "ms": 21947.3659,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "Zoom",
+          "ms": 21776.23,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "CompareThenSwitch",
+          "ms": null,
+          "activeMappings": 0,
+          "comparisonUnavailable": false
+        },
+        {
+          "label": "CompareThenUndo",
+          "ms": null,
+          "activeMappings": 0,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "ApplyDuringComparison",
+          "ms": 22077.1057,
+          "activeMappings": null,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "CompareThenApply",
+          "ms": null,
+          "activeMappings": 0,
+          "comparisonUnavailable": true
+        },
+        {
+          "label": "RestoreBase",
+          "ms": 22546.0649,
+          "activeMappings": null,
+          "comparisonUnavailable": false
+        }
+      ],
+      "formats": [
+        {
+          "format": 3,
+          "sha256": "910B55A2248136FDE5B86C59EC99F22A9E1DCA1FAE756CF18CB0B219E4DD2A22",
+          "exportMs": 52343.8037,
+          "inspection": {
+            "Width": 4220,
+            "Height": 4863,
+            "BitDepth": 16,
+            "Orientation": 1,
+            "Srgb": true,
+            "JpegQuality": null,
+            "MeanAbsoluteError": 0,
+            "RootMeanSquareError": 0,
+            "MaximumError": 0,
+            "EncoderConfiguration": "V3DirectStripsTIFF16"
+          }
+        },
+        {
+          "format": 2,
+          "sha256": "F09CC9C401EE4D23EF4F3BC24B1859F29313F3EDEAD0DEC6B19D99E94D10CF26",
+          "exportMs": 55143.9432,
+          "inspection": {
+            "Width": 4220,
+            "Height": 4863,
+            "BitDepth": 16,
+            "Orientation": 1,
+            "Srgb": true,
+            "JpegQuality": null,
+            "MeanAbsoluteError": 0,
+            "RootMeanSquareError": 0,
+            "MaximumError": 0,
+            "EncoderConfiguration": "V3DirectStripsPNG16"
+          }
+        },
+        {
+          "format": 1,
+          "sha256": "D7B5D7F96067A58A2B96041A7A49D1979870F5945E118B8C4E4DB72196F6C90B",
+          "exportMs": 52098.7144,
+          "inspection": {
+            "Width": 4220,
+            "Height": 4863,
+            "BitDepth": 8,
+            "Orientation": 1,
+            "Srgb": true,
+            "JpegQuality": 95,
+            "MeanAbsoluteError": 0.5186500801259405,
+            "RootMeanSquareError": 0.8984023364650413,
+            "MaximumError": 15,
+            "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+          }
+        }
+      ],
+      "memory": {
+        "durationSeconds": 631.9300453999895,
+        "samples": 2523,
+        "privatePeak": 3014754304,
+        "workingSetPeak": 2817249280,
+        "lifetimeWorkingSetPeak": 2817327104,
+        "ledgerSamples": [
+          {
+            "Stage": "ColdStart",
+            "ElapsedMs": 0,
+            "PrivateBytes": 18599936,
+            "WorkingSet": 60112896,
+            "AccountedBytes": 0,
+            "SinceCaptureMs": 8.6502
+          },
+          {
+            "Stage": "SourceLoaded",
+            "ElapsedMs": 0,
+            "PrivateBytes": 388603904,
+            "WorkingSet": 439328768,
+            "AccountedBytes": 0,
+            "SinceCaptureMs": 874.5122
+          },
+          {
+            "Stage": "FirstApplied",
+            "ElapsedMs": 0,
+            "PrivateBytes": 935473152,
+            "WorkingSet": 980787200,
+            "AccountedBytes": 242043840,
+            "SinceCaptureMs": 25064.7821
+          },
+          {
+            "Stage": "ContinuousCompleted",
+            "ElapsedMs": 0,
+            "PrivateBytes": 937021440,
+            "WorkingSet": 970571776,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 151732.7424
+          },
+          {
+            "Stage": "FirstWorkspaceClosed",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1672192000,
+            "WorkingSet": 1699119104,
+            "AccountedBytes": 2762340,
+            "SinceCaptureMs": 440530.3433
+          },
+          {
+            "Stage": "Reopened",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1477554176,
+            "WorkingSet": 1457213440,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 467544.3494
+          },
+          {
+            "Stage": "BeforeExportTiff",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1477554176,
+            "WorkingSet": 1457213440,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 467553.4955
+          },
+          {
+            "Stage": "AfterExportTiff",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1287561216,
+            "WorkingSet": 1308274688,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 520149.2516
+          },
+          {
+            "Stage": "BeforeExportPng",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1287364608,
+            "WorkingSet": 1308086272,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 520156.8716
+          },
+          {
+            "Stage": "AfterExportPng",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1158705152,
+            "WorkingSet": 1234513920,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 575465.0536
+          },
+          {
+            "Stage": "BeforeExportJpeg",
+            "ElapsedMs": 0,
+            "PrivateBytes": 1158705152,
+            "WorkingSet": 1234513920,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 575473.1457
+          },
+          {
+            "Stage": "AfterExportJpeg",
+            "ElapsedMs": 0,
+            "PrivateBytes": 867725312,
+            "WorkingSet": 940335104,
+            "AccountedBytes": 244806180,
+            "SinceCaptureMs": 627587.7808
+          },
+          {
+            "Stage": "WorkspaceClosed",
+            "ElapsedMs": 0,
+            "PrivateBytes": 930447360,
+            "WorkingSet": 951857152,
+            "AccountedBytes": 0,
+            "SinceCaptureMs": 631239.3221
+          }
+        ]
+      },
+      "previewHash": "44F41908921EB387EDE946007AE648ADCA596FDF2CA539685A97185C60BC4963",
+      "previewFullMax": 2.165012152555157e-06,
+      "closedLedger": 0
+    }
+  ],
+  "medians": {
+    "effectFirstVisibleMs": 23188.4497,
+    "wpfOffscreenRenderedMs": 23500.7152,
+    "operationAvailableMs": 23453.1283,
+    "comparisonAfterDemandMs": 16241.693,
+    "comparisonReadyFromApplyMs": 40250.3952,
+    "reopenMs": 26737.5634,
+    "privatePeak": 3014754304,
+    "workingSetPeak": 2817249280
+  },
+  "allThreePreviewAndExportsMatchBaseline": true,
+  "allMappingsReleased": true
+}

@@ -23,6 +23,7 @@ def main():
     parser.add_argument("--linear-chain", action="store_true")
     parser.add_argument("--safety-review", action="store_true")
     parser.add_argument("--preview-reuse", action="store_true")
+    parser.add_argument("--comparison-first", action="store_true")
     args = parser.parse_args()
     delivery = args.delivery.resolve()
     evidence = args.evidence_dir.resolve() if args.evidence_dir else ROOT / "docs/research/v3-corrections-colorpage-20261017"
@@ -158,6 +159,28 @@ def main():
                     paths.add(file)
                     old=load(file)
                     for run in old["runs"]:
+                        folder=pathlib.Path(run["directory"])
+                        for name in ["results.trx","stdout.log","stderr.log","runsettings.xml"]:
+                            if (folder/name).exists():paths.add(folder/name)
+    if args.comparison_first:
+        base=ROOT/"artifacts/comparison-first"
+        for label in ["01-tests","06-tests","07-tests","09-tests","10-tests","12-tests"]:
+            paths.update((base/label).glob("*.trx"))
+        for name in ["03-hotspots.json","04-hotspots.json","05-hotspots.json","03-profile-build.log","04-profile-build.log","05-profile-build.log","08-memory.json","08-run.log","11-audit-build.log","11-audit-bindings.json","13-audit-build.log","13-audit-bindings.json","13-run-times.json","13-stages.log","13-linear-run.log","13-linear-reference.log"]:
+            file=base/name
+            if file.exists():paths.add(file)
+        for label in ["08-output","11-run1-output"]+[f"13-run{n}-output" for n in range(1,4)]:
+            for name in ["FULL_PAGE_RESULT.json","APPLY_WORK.json","REOPEN_WORK.json","CONTINUOUS_WORK.json","LIFECYCLE_WORK.json","FIRST_VISIBLE.json","INTERACTIONS.json"]:
+                file=base/label/name
+                if file.exists():paths.add(file)
+        for n in range(1,4):
+            for name in [f"13-run{n}-memory.json",f"13-run{n}.log"]:
+                if (base/name).exists():paths.add(base/name)
+        for label in ["11-delivery"]:
+            for suite in ["source-focused","published-focused","source-core","published-core","published-wpf","candidate"]:
+                for file in (base/label/suite).glob("run-*/summary.json"):
+                    paths.add(file)
+                    for run in load(file)["runs"]:
                         folder=pathlib.Path(run["directory"])
                         for name in ["results.trx","stdout.log","stderr.log","runsettings.xml"]:
                             if (folder/name).exists():paths.add(folder/name)
