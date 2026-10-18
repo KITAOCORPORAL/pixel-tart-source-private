@@ -1,0 +1,26 @@
+[
+  {
+    "suite": "final-published-ui",
+    "source": "c552f501642a67aec75f277dc15b2e98615b47a2",
+    "counts": {
+      "Passed": 23
+    },
+    "selected": 23,
+    "assemblySha256": "67a93a4947e57ff329842785fa193301e642e426a077d2c65c73aab8cf44ea3f",
+    "missing": [],
+    "timeouts": [],
+    "status": "PASSED"
+  },
+  {
+    "suite": "final-core-compatibility",
+    "source": "c552f501642a67aec75f277dc15b2e98615b47a2",
+    "counts": {
+      "Passed": 27
+    },
+    "selected": 27,
+    "assemblySha256": "ea57a41725306b1971e05392262b4aa5ec53a67c6bf84a4aa425577d6a0285a8",
+    "missing": [],
+    "timeouts": [],
+    "status": "PASSED"
+  }
+]

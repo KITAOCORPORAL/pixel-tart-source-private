@@ -1,0 +1,273 @@
+{
+  "inputIdentities": [
+    {
+      "id": "sony-dsc08015",
+      "originalHash": "1FE22BE78C66AB0DDCCF753D10187F142B980146FFF7F5D188533905B7F38B93",
+      "frozenHash": "5C06A14160C9B57015CFEBD9CD1E882620FFC817CFDCA061596746CDD82D1CA7",
+      "derivedHash": "483413894A477E85DC1B07EA01D9DCABC23B8C5233693D78FE4069C3DC9AD18C",
+      "width": 534,
+      "height": 800,
+      "resize": "WIC existing maximum-edge800, display sRGB, review derivative not original-resolution claim"
+    },
+    {
+      "id": "canon-tnan8886",
+      "originalHash": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+      "frozenHash": "B9A86CC1AF49A6D887DDFAFFC400CFC8C4644449BD826A695FA820F12A153178",
+      "derivedHash": "E235F630DDDA25E2520AEADE810C9E8E81B266FDB27F64C5483C501615160C16",
+      "width": 800,
+      "height": 534,
+      "resize": "WIC existing maximum-edge800, display sRGB, review derivative not original-resolution claim"
+    },
+    {
+      "id": "fuji-dscf0347-frozen",
+      "originalHash": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+      "frozenHash": "5668EBCEA230AC91920C094B6AAC9C5896DE2A647C0F6165DE9FFF4105F870D7",
+      "derivedHash": "CB96B6AA1DE0EA8772D72EFE77948FA111128F4111C041DA1146476D771203D1",
+      "width": 800,
+      "height": 535,
+      "resize": "WIC existing maximum-edge800, display sRGB, review derivative not original-resolution claim"
+    }
+  ],
+  "imageCount": 27,
+  "contactSheetCount": 6,
+  "sourceReadonly": true,
+  "sameDimensionsWithinEachGroup": true,
+  "seed": 20261018,
+  "groups": [
+    "ColorOnly",
+    "CompleteAppearance"
+  ],
+  "exportInspection": {
+    "Width": 614,
+    "Height": 708,
+    "BitDepth": 16,
+    "Orientation": 1,
+    "Srgb": true,
+    "JpegQuality": null,
+    "MeanAbsoluteError": 0,
+    "RootMeanSquareError": 0,
+    "MaximumError": 0,
+    "EncoderConfiguration": "V3DirectStripsPNG16"
+  },
+  "viewMethod": "Real WPF RenderTargetBitmap; no physical mouse/foreground claim",
+  "aestheticApproval": "PENDING_USER_FEEDBACK",
+  "calibrationEligible": false,
+  "finalPngImages": [
+    {
+      "photo": "sony-dsc08015",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/sony-dsc08015/itype-color.png",
+      "sha256": "F3D67037AFFA80659147555E60D55D420935685C02D9F0D3717B7C87A31D8B85",
+      "width": 534,
+      "height": 800
+    },
+    {
+      "photo": "sony-dsc08015",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/sony-dsc08015/itype-bw.png",
+      "sha256": "451A32551A6F34A8AEC87E4DA3B73EE65DB757E44EAC62C1CD5C950C6E022EA3",
+      "width": 534,
+      "height": 800
+    },
+    {
+      "photo": "sony-dsc08015",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/sony-dsc08015/sx70-color.png",
+      "sha256": "E5E288FE56F987BD3769F2F0A14A2145B18DB90C29D195B2F4C884093451F6C3",
+      "width": 534,
+      "height": 800
+    },
+    {
+      "photo": "sony-dsc08015",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/sony-dsc08015/reclaimed-blue600.png",
+      "sha256": "03544539F946C0A3E8750B63F918A440643AEAA6B6C0C7ECEE0EE90285D50D83",
+      "width": 534,
+      "height": 800
+    },
+    {
+      "photo": "sony-dsc08015",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/sony-dsc08015/blue-duochrome600.png",
+      "sha256": "C4642C54F60B05B5BC1C9C5ACE22C1764835E9C4573906A99326C718AA54C25E",
+      "width": 534,
+      "height": 800
+    },
+    {
+      "photo": "sony-dsc08015",
+      "group": "CompleteAppearance",
+      "relativeFile": "review/02-appearance/sony-dsc08015/00-base.png",
+      "sha256": "2D850152BAEDD232354E2DAB382306252346EF84719C66A2D8068C861C077F2F",
+      "width": 614,
+      "height": 708
+    },
+    {
+      "photo": "sony-dsc08015",
+      "group": "CompleteAppearance",
+      "relativeFile": "review/02-appearance/sony-dsc08015/01-paper-grain.png",
+      "sha256": "C8291B42AAD1268819978624CA09B3DB88E80C224DACE9160D89A6921CBF0A57",
+      "width": 614,
+      "height": 708
+    },
+    {
+      "photo": "sony-dsc08015",
+      "group": "CompleteAppearance",
+      "relativeFile": "review/02-appearance/sony-dsc08015/02-defects.png",
+      "sha256": "8A778B3A6EE580101D9F6DC96330E4FAEE8612F9018F002F244CB5C35BB7372A",
+      "width": 614,
+      "height": 708
+    },
+    {
+      "photo": "sony-dsc08015",
+      "group": "CompleteAppearance",
+      "relativeFile": "review/02-appearance/sony-dsc08015/03-double.png",
+      "sha256": "9E56B9B44B528A5FFDEA197E280015C506EA2CFD966C0C8DD76E715FCB561C8F",
+      "width": 614,
+      "height": 708
+    },
+    {
+      "photo": "canon-tnan8886",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/canon-tnan8886/itype-color.png",
+      "sha256": "8C25665F83B05ABD6FA53CA56C8504754AA27ACB6BA46A1E156E1857A89E0832",
+      "width": 800,
+      "height": 534
+    },
+    {
+      "photo": "canon-tnan8886",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/canon-tnan8886/itype-bw.png",
+      "sha256": "D8213336B449AC42079E87B557D6315B75EA111375624559397070932D16C7EA",
+      "width": 800,
+      "height": 534
+    },
+    {
+      "photo": "canon-tnan8886",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/canon-tnan8886/sx70-color.png",
+      "sha256": "0E67CFB608832DDC3ED89DB4627B08947A57095D9840A94816CA4548C419E885",
+      "width": 800,
+      "height": 534
+    },
+    {
+      "photo": "canon-tnan8886",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/canon-tnan8886/reclaimed-blue600.png",
+      "sha256": "4B69D5E4F8BB312FD5CD01135E5648147BB1A3A58C8D6306B4CF6E07E85E6FD9",
+      "width": 800,
+      "height": 534
+    },
+    {
+      "photo": "canon-tnan8886",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/canon-tnan8886/blue-duochrome600.png",
+      "sha256": "D49AADAC96E1944631B12F14B65745AE6EE6311CF0699846B02896CF167882D0",
+      "width": 800,
+      "height": 534
+    },
+    {
+      "photo": "canon-tnan8886",
+      "group": "CompleteAppearance",
+      "relativeFile": "review/02-appearance/canon-tnan8886/00-base.png",
+      "sha256": "88E2A7DEE63736005D814AD0E35CF14C04E99C8D22298EE0768728C639A75EA6",
+      "width": 614,
+      "height": 708
+    },
+    {
+      "photo": "canon-tnan8886",
+      "group": "CompleteAppearance",
+      "relativeFile": "review/02-appearance/canon-tnan8886/01-paper-grain.png",
+      "sha256": "32AB66EEEAFB68214A2DA2B524BB0AE7785E43AB6FC2DA225B7779E9553853E4",
+      "width": 614,
+      "height": 708
+    },
+    {
+      "photo": "canon-tnan8886",
+      "group": "CompleteAppearance",
+      "relativeFile": "review/02-appearance/canon-tnan8886/02-defects.png",
+      "sha256": "5EC60A7E985990BB57CD8ABDB06BA426E17CF0DD7DBAC4665388C5CBCB0B8820",
+      "width": 614,
+      "height": 708
+    },
+    {
+      "photo": "canon-tnan8886",
+      "group": "CompleteAppearance",
+      "relativeFile": "review/02-appearance/canon-tnan8886/03-double.png",
+      "sha256": "9BE8DD8DC3993CD6631CF5EDBF6099BF9CA497D9BB8AB34E2556F36AA99E09B9",
+      "width": 614,
+      "height": 708
+    },
+    {
+      "photo": "fuji-dscf0347-frozen",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/fuji-dscf0347-frozen/itype-color.png",
+      "sha256": "C6C12B73CE363B409252C620ACD731F336C6A2A7024EF605E610B545CA0CC6D4",
+      "width": 800,
+      "height": 535
+    },
+    {
+      "photo": "fuji-dscf0347-frozen",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/fuji-dscf0347-frozen/itype-bw.png",
+      "sha256": "48101E877D77ABAD3B751CE750204EFAE4AD8EDF983F765AD6B5B0187E23BF95",
+      "width": 800,
+      "height": 535
+    },
+    {
+      "photo": "fuji-dscf0347-frozen",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/fuji-dscf0347-frozen/sx70-color.png",
+      "sha256": "BDD5BF0C760D1DB095F563B07C17E8595CE1BDF9367C1E5F1559F349B97AF4EF",
+      "width": 800,
+      "height": 535
+    },
+    {
+      "photo": "fuji-dscf0347-frozen",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/fuji-dscf0347-frozen/reclaimed-blue600.png",
+      "sha256": "098FC1DBA3CA085DF7B6B52AAC96D25E09B54B0CD1A4FF9833BFD1134BDFADE6",
+      "width": 800,
+      "height": 535
+    },
+    {
+      "photo": "fuji-dscf0347-frozen",
+      "group": "ColorOnly",
+      "relativeFile": "review/01-color/fuji-dscf0347-frozen/blue-duochrome600.png",
+      "sha256": "BAA50CC134A42751DA09395FF3FB67BDDFF43D3AEA3CFFA78D4FB580F865F03D",
+      "width": 800,
+      "height": 535
+    },
+    {
+      "photo": "fuji-dscf0347-frozen",
+      "group": "CompleteAppearance",
+      "relativeFile": "review/02-appearance/fuji-dscf0347-frozen/00-base.png",
+      "sha256": "A41AEC0C0927157420C67035D48F26EDE765C4113B3B4F77FCB0BDB7D65BB040",
+      "width": 615,
+      "height": 709
+    },
+    {
+      "photo": "fuji-dscf0347-frozen",
+      "group": "CompleteAppearance",
+      "relativeFile": "review/02-appearance/fuji-dscf0347-frozen/01-paper-grain.png",
+      "sha256": "6D63F90913EC720EDFBCFE6B74A238136EDC6C146B86BA5E1E401DCC48A6B429",
+      "width": 615,
+      "height": 709
+    },
+    {
+      "photo": "fuji-dscf0347-frozen",
+      "group": "CompleteAppearance",
+      "relativeFile": "review/02-appearance/fuji-dscf0347-frozen/02-defects.png",
+      "sha256": "4F0ABA13D9EB7267301BFA807DE9E797B9E12E308F9C69EF18166E231F194C31",
+      "width": 615,
+      "height": 709
+    },
+    {
+      "photo": "fuji-dscf0347-frozen",
+      "group": "CompleteAppearance",
+      "relativeFile": "review/02-appearance/fuji-dscf0347-frozen/03-double.png",
+      "sha256": "DE33137B1978465886692EB0C052A6598828F94DC90A64739235342CE398193B",
+      "width": 615,
+      "height": 709
+    }
+  ]
+}
