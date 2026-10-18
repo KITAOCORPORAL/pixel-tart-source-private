@@ -2,6 +2,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using RAWSelectionAssistant.Services;
+if(args.Length==3&&args[0]=="hotspots"){await HotspotAudit.Run(args[1],args[2]);return;}
 if(args.Length==3&&args[0]=="linear-output"){await LinearOutputAudit.Run(args[1],args[2]);return;}
 if(args.Length==3&&args[0]=="full-page"){FullPhotoPageAudit.Run(args[1],args[2]);return;}
 if(args.Length==2&&args[0]=="extension-risk"){await ExtensionRiskAudit.Run(args[1]);return;}

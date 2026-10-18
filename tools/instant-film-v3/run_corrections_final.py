@@ -76,7 +76,7 @@ def main():
         # A nonzero result from the fail-closed runner is recorded, not silenced.
         run(label, command, timeout=3600, env=env)
 
-    focused = ["RAWSelectionAssistant.WpfTests." + name for name in ["PhotoGradePageV1Tests", "InstantV3CorrectionBindingTests", "InstantV3PhaseCancellationTests", "InstantV3MultipleInputTests", "InstantV3ProductTests", "SecondExposureV2Tests", "LinearSrgbAndImmediateTests", "ReviewSafetyTests", "ColorStudioFilmstripStateTests", "PreparedPreviewTransactionTests"]]
+    focused = ["RAWSelectionAssistant.WpfTests." + name for name in ["PhotoGradePageV1Tests", "InstantV3CorrectionBindingTests", "InstantV3PhaseCancellationTests", "InstantV3MultipleInputTests", "InstantV3ProductTests", "SecondExposureV2Tests", "LinearSrgbAndImmediateTests", "ReviewSafetyTests", "ColorStudioFilmstripStateTests", "PreparedPreviewTransactionTests", "ComparisonSchedulingTests"]]
     focused_env = os.environ.copy()
     if args.authorized_manifest: focused_env["KITAO_PHOTO_PAGE_AUTHORIZED_MANIFEST"] = str(args.authorized_manifest.resolve())
     suite("source-focused", output / "build-tests/bin/RAWSelectionAssistant.WpfTests/release/RAWSelectionAssistant.WpfTests.dll", classes=focused, env=focused_env)

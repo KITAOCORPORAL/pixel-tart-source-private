@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using RAWSelectionAssistant.Core.Services.Color;
 using RAWSelectionAssistant.Core.Services.Projects;
 namespace Kitao.InstantFilm.Research;
@@ -71,8 +72,11 @@ public sealed class CandidateRenderSession : IDisposable
                 int minX=int.MaxValue,minY=int.MaxValue,maxX=-1,maxY=-1;
                 for(int y=0;y<th;y++)for(int x=0;x<tw;x++)if(TrySource(left+tx+x,top+ty+y,out var sx,out var sy))
                 {if(Recipe.Paper is{Version:3}){var pos=SourcePosition(left+tx+x,top+ty+y);minX=Math.Min(minX,(int)Math.Floor(pos.X));minY=Math.Min(minY,(int)Math.Floor(pos.Y));maxX=Math.Max(maxX,Math.Min(image.Width-1,(int)Math.Floor(pos.X)+1));maxY=Math.Max(maxY,Math.Min(image.Height-1,(int)Math.Floor(pos.Y)+1));}else{minX=Math.Min(minX,sx);minY=Math.Min(minY,sy);maxX=Math.Max(maxX,sx);maxY=Math.Max(maxY,sy);}}
+                long spatialStart=CandidatePerformanceProfile.Enabled?Stopwatch.GetTimestamp():0;
                 using var region=maxX>=minX?CandidateSpatial.RenderRegion(image,Recipe,minX,minY,maxX-minX+1,maxY-minY+1,token):null;
+                if(spatialStart!=0)CandidatePerformanceProfile.Add("full.spatial-response-optics-texture",spatialStart);
                 using var borrow=region?.Borrow();
+                long paperStart=CandidatePerformanceProfile.Enabled?Stopwatch.GetTimestamp():0;
                 for(int y=0;y<th;y++)for(int x=0;x<tw;x++)
                 {
                     var gx=left+tx+x;var gy=top+ty+y;ColorVector3 value;
@@ -100,6 +104,7 @@ public sealed class CandidateRenderSession : IDisposable
                     value=CandidateMaterial.Scan(value,(gx+.5)/Layout.Width,(gy+.5)/Layout.Height,Recipe);
                     var o=((ty+y)*width+tx+x)*3;result[o]=(float)value.X;result[o+1]=(float)value.Y;result[o+2]=(float)value.Z;
                 }
+                if(paperStart!=0)CandidatePerformanceProfile.Add("full.paper-geometry-and-scan",paperStart);
             }
             return CandidateImageLease.Transfer(new(width,height,result,"16","sRGB",1),lease);
         }
@@ -123,8 +128,10 @@ public sealed class CandidateRenderSession : IDisposable
         {
             using var scratch=StudioGlobalResources.ReserveWork(checked((long)width*height*3*sizeof(double)));
             var sum=new double[checked(width*height*3)];double rx=Layout.Width/(double)width,ry=Layout.Height/(double)height;
+            long renderingStart=CandidatePerformanceProfile.Enabled?Stopwatch.GetTimestamp():0;
             StreamStrips((top,image)=>
             {
+                long resizeStart=CandidatePerformanceProfile.Enabled?Stopwatch.GetTimestamp():0;
                 for(int y=0;y<image.Height;y++)
                 {
                     token.ThrowIfCancellationRequested();int sy=top+y;
@@ -135,7 +142,9 @@ public sealed class CandidateRenderSession : IDisposable
                         {var wx=Math.Max(0,Math.Min(sx+1,(px+1)*rx)-Math.Max(sx,px*rx));var p=(y*image.Width+sx)*3;var o=(py*width+px)*3;for(int c=0;c<3;c++)sum[o+c]+=CandidateTone.Decode(image.Rgb32.Span[p+c])*wx*wy;}
                     }
                 }
+                if(resizeStart!=0)CandidatePerformanceProfile.Add("full.linear-area-downsample",resizeStart);
             },32,token);
+            if(renderingStart!=0)CandidatePerformanceProfile.Add("full.preview-total-including-downsample",renderingStart);
             var output=new float[sum.Length];for(int i=0;i<output.Length;i++)output[i]=(float)CandidateTone.Encode(sum[i]/(rx*ry));
             return CandidateImageLease.Transfer(new(width,height,output,"16","sRGB",1),lease);
         }

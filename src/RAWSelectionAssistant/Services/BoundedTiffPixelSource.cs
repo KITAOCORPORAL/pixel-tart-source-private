@@ -12,6 +12,9 @@ namespace RAWSelectionAssistant.Services;
 /// Product single-strip uncompressed RGB16 + exact sRGB only; NOT general TIFF.</summary>
 public sealed unsafe class BoundedTiffPixelSource : ISecondExposureSource
 {
+    private static int activeMappings;
+    public static int ActiveMappings=>Volatile.Read(ref activeMappings);
+    private bool counted;
     private FileStream? stream;
     private MemoryMappedFile? mapping;
     private MemoryMappedViewAccessor? view;
@@ -43,7 +46,7 @@ public sealed unsafe class BoundedTiffPixelSource : ISecondExposureSource
             reservation=StudioGlobalResources.ReserveWork(meta.PixelBytes+rawWidth*6L+1024*1024);
             mapping=MemoryMappedFile.CreateFromFile(stream,null,0,MemoryMappedFileAccess.Read,HandleInheritability.None,true);
             view=mapping.CreateViewAccessor(0,0,MemoryMappedFileAccess.Read);
-            view.SafeMemoryMappedViewHandle.AcquirePointer(ref pointer);acquired=true;pointer+=view.PointerOffset;
+            view.SafeMemoryMappedViewHandle.AcquirePointer(ref pointer);acquired=true;pointer+=view.PointerOffset;counted=true;Interlocked.Increment(ref activeMappings);
             CandidateProcessingEvidence.Enter("SecondHashAfter",token);stream.Position=0;
             if(CandidateMultipleInput.HashSource(stream,token)!=input.Sha256)throw new InvalidDataException("SECOND_SOURCE_CHANGED");
         }
@@ -60,6 +63,7 @@ public sealed unsafe class BoundedTiffPixelSource : ISecondExposureSource
     public void Dispose()
     {
         if(acquired){view!.SafeMemoryMappedViewHandle.ReleasePointer();acquired=false;pointer=null;}
+        if(counted){counted=false;Interlocked.Decrement(ref activeMappings);}
         view?.Dispose();view=null;mapping?.Dispose();mapping=null;stream?.Dispose();stream=null;reservation?.Dispose();reservation=null;
     }
 }
