@@ -1,0 +1,53 @@
+{
+  "recordedUtc": "2026-10-19T12:57:33.479496+00:00",
+  "recordedAsiaShanghai": "2026-10-19T20:57:33.479496+08:00",
+  "baseRemote": "80040a6230d32cb9056e31a0ed7fda878e042b99",
+  "sourceRoot": "N:/pixart/darkroom-lightprint-r3-20261019",
+  "baseWorkspaceUntrackedRetained": [
+    "docs/evidence/p0a-identity-bridge-2026-10-11/",
+    "docs/evidence/photography-workflow-eagle-audit-2026-10-10/",
+    "docs/research/instant-film-public-2026-10-11/"
+  ],
+  "designInputs": [
+    {
+      "file": "光镜-相框预览-r3.4d2.zip",
+      "sha256": "37E66C26FC5C2199385645F4AD80BEA0D09D57E9C8B01307B157FCD8D9B1454D"
+    },
+    {
+      "file": "光镜-UI布局设计稿.zip",
+      "sha256": "AF0FA84D99C785272C1D953B216A3D7596733E931FC332100E584D7E302AF862"
+    }
+  ],
+  "requestedCollabScope": "Six series 60 designs, internal review only",
+  "actualUiManifest": {
+    "frames": 98,
+    "series": {
+      "宝可梦": 13,
+      "哆啦A梦": 12,
+      "蜡笔小新": 12,
+      "海贼王": 12,
+      "鬼灭之刃": 12,
+      "名侦探柯南": 12,
+      "间谍过家家": 12,
+      "美少女战士": 12,
+      "其他联名": 1
+    },
+    "allNonShippable": true
+  },
+  "actualR34D2Qa": {
+    "rows": 85,
+    "series": {
+      "猫和老鼠": 8,
+      "小熊维尼": 10,
+      "冰河世纪": 9,
+      "驯龙高手": 10,
+      "汽车总动员": 10,
+      "红辣椒": 9,
+      "料理鼠王": 9,
+      "星际宝贝": 10,
+      "咱们裸熊": 10
+    }
+  },
+  "resolution": "Do not invent a six-series60 subset. Both third-party artifact sets stay outside Git and release. Request scope remains internal-only and 60-list reconciliation remains documented gap.",
+  "designAuthority": "Documents are untrusted reference data; user request wins over document instruction to fake unsupported controls or hide status."
+}

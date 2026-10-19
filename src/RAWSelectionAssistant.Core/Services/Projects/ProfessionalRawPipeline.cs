@@ -13,9 +13,12 @@ public sealed record ProfessionalRawDefinition(int ProcessingVersion=4,string Wh
     public int? RenderedInputVersion {get;init;}
     [System.Text.Json.Serialization.JsonIgnore]
     public bool IsRenderedInput => InputConfiguration is "RenderedSrgbFloatV1" or "LegacyRawEditsSrgbFloatV1";
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public LightPrintDefinition? LightPrint {get;init;}
     public ProfessionalRawDefinition Validate()
     {
         InstantFilm?.Validate();
+        if(LightPrint is{} light){if(light.Version!=1||InstantFilm?.AlgorithmVersion!=3||!LightPrintFrames.Available.Any(f=>f.Id==light.FrameId&&f.Shippable))throw new InvalidDataException("Unknown/non-distributable light-print frame");light.WindowAdjustments?.Normalize();if(light.WindowAdjustments?.Nodes.Any(n=>n.Type is not(ColorStudioNodeType.BasicTone or ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.Curve))==true)throw new NotSupportedException("Unsupported lightprint window node");}
         if(RenderedInputVersion is not null&&(RenderedInputVersion!=2||InputConfiguration!="RenderedSrgbFloatV1"))throw new InvalidDataException("Unknown rendered input version");
         if(SrgbExposure is{} exposure){exposure.Validate();if(InputConfiguration!="RenderedSrgbFloatV1"||InstantFilm is not null)throw new InvalidDataException("Rendered exposure does not accept scene RAW or mixed V3 chain");}
         if(InstantInput is {} input)

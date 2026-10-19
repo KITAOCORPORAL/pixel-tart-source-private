@@ -45,6 +45,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     public async Task SaveSessionAsync(string path, CancellationToken token = default)
     {
+        CancelLightPrintTask(true);await LightPrintPreviewWork;
         if (ActiveTarget is { } active) Editor.CopyCurrentLookTo([active]);
         await FlushMetadataAsync();
         foreach(var target in Targets) CaptureEditVersion(target);
@@ -62,7 +63,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     public async Task LoadSessionAsync(string path, CancellationToken token = default)
     {
-        ClearPhotographerPreviews();await StopComparisonAsync();
+        CancelLightPrintTask(true);await LightPrintPreviewWork;ClearPhotographerPreviews();await StopComparisonAsync();
         if(_skipSessionPreparation){await LoadSessionCoreAsync(path,token);return;}
         if(_disposed||IsLoading||IsInstantGenerating||IsExporting)throw new InvalidOperationException("工作区正在处理，未开始加载项目。");
         using var preparation=CancellationTokenSource.CreateLinkedTokenSource(token);

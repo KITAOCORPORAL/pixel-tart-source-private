@@ -16,16 +16,18 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public RelayCommand ResetPhotoV3DraftCommand {get;private set;}=null!;
  private void InitializePhotoGradeHistoryCommands()
  {
-  InitializeSrgbExposureCommands();InitializeComparison();InitializePhotographerCommands();
+  InitializeSrgbExposureCommands();InitializeComparison();InitializePhotographerCommands();InitializeLightPrintCommands();
   ResetPhotoV3DraftCommand=new(_=>{var profile=SelectedInstantProfile;RestoreInstantControls(null);SelectedInstantProfile=profile;InstantEngineVersion="V3";},_=>!IsInstantGenerating&&!IsLoading&&!IsExporting&&ActiveTarget is not null);
   PhotoGradeUndoCommand=new(async _=>
   {
+   if(await MoveWindowHistoryAsync(false))return;
    if(HasInstantHistory(_instantV3Undo))await UndoInstantV3Command.ExecuteAsync(null);
    else if(!IsProfessionalRaw)Editor.UndoAdjustmentCommand.Execute(null);
   },_=>!IsInstantGenerating&&!IsLoading&&!IsExporting);
   PhotoGradeRedoCommand=new(async _=>
   {
    // Undo can return to a raster version, so route by history, not only current engine.
+   if(await MoveWindowHistoryAsync(true))return;
    if(HasInstantHistory(_instantV3Redo))await RedoInstantV3Command.ExecuteAsync(null);
    else if(!IsProfessionalRaw)Editor.RedoAdjustmentCommand.Execute(null);
   },_=>!IsInstantGenerating&&!IsLoading&&!IsExporting);

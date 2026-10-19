@@ -19,6 +19,7 @@ public sealed class CandidateRenderSession : IDisposable
     {private CandidateRenderSession? held=owner;public void Dispose(){var value=Interlocked.Exchange(ref held,null);if(value is null)return;lock(value.gate){value.active--;if(value.retired&&value.active==0)value.ReleaseSource();}}}
     private void ReleaseSource(){source?.Dispose();source=null;externalPin?.Dispose();externalPin=null;provider=null;}
 
+    public ColorAdjustmentStack? WindowAdjustments {get;init;}
     public CandidateRecipe Recipe { get; }
     public InstantPaperLayout Layout { get; }
     public const string Coordinates="FullOrientedSourcePixelsRadius2_NormalizedFullCanvasNoise_AreaPreviewAfterFullEffectV1";
@@ -76,13 +77,24 @@ public sealed class CandidateRenderSession : IDisposable
                 using var region=maxX>=minX?CandidateSpatial.RenderRegion(image,Recipe,minX,minY,maxX-minX+1,maxY-minY+1,token):null;
                 if(spatialStart!=0)CandidatePerformanceProfile.Add("full.spatial-response-optics-texture",spatialStart);
                 using var borrow=region?.Borrow();
+                using var gradeBudget=borrow is not null&&WindowAdjustments?.Nodes.Any(n=>n.Enabled)==true?StudioGlobalResources.ReserveWork(checked((long)borrow.Image.Rgb32.Length*4*2)):null;
+                HighBitDepthImageBuffer? graded=null;
+                if(borrow is not null&&WindowAdjustments is{} adjustments)
+                {
+                    foreach(var node in adjustments.Nodes.Where(n=>n.Enabled))
+                    {
+                        if(node.Type is not(ColorStudioNodeType.BasicTone or ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.Curve))throw new NotSupportedException("First lightprint window grading supports tone, white balance and curve only");
+                        var next=ColorStudioToolProcessor.Apply(graded??borrow.Image,node,token);graded?.Dispose();graded=next;
+                    }
+                }
+                using var gradedOwner=graded;
                 long paperStart=CandidatePerformanceProfile.Enabled?Stopwatch.GetTimestamp():0;
                 for(int y=0;y<th;y++)for(int x=0;x<tw;x++)
                 {
                     var gx=left+tx+x;var gy=top+ty+y;ColorVector3 value;
                     if(TrySource(gx,gy,out var sx,out var sy))
                     {
-                     var rgb=borrow!.Image.Rgb32;var rw=borrow.Image.Width;
+                     var rgb=(graded??borrow!.Image).Rgb32;var rw=(graded??borrow!.Image).Width;
                      ColorVector3 Read(int xx,int yy){var k=((yy-minY)*rw+xx-minX)*3;return new(rgb.Span[k],rgb.Span[k+1],rgb.Span[k+2]);}
                      if(Recipe.Paper is{Version:3}){var pos=SourcePosition(gx,gy);int x0=(int)Math.Floor(pos.X),y0=(int)Math.Floor(pos.Y),x1=Math.Min(image.Width-1,x0+1),y1=Math.Min(image.Height-1,y0+1);value=CandidateTone.Mix(CandidateTone.Mix(Read(x0,y0),Read(x1,y0),pos.X-x0),CandidateTone.Mix(Read(x0,y1),Read(x1,y1),pos.X-x0),pos.Y-y0);}
                      else value=Read(sx,sy);

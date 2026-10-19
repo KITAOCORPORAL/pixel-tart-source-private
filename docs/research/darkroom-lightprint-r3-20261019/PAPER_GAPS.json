@@ -1,0 +1,103 @@
+{
+  "requestedCount": 16,
+  "implementedUniqueResponses": 5,
+  "papers": [
+    {
+      "name": "i-Type彩色",
+      "status": "implemented-shared",
+      "responseId": "itype-color",
+      "uiEnabled": true
+    },
+    {
+      "name": "600彩色",
+      "status": "implemented-shared",
+      "responseId": "itype-color",
+      "uiEnabled": true
+    },
+    {
+      "name": "SX-70彩色",
+      "status": "implemented",
+      "responseId": "sx70-color",
+      "uiEnabled": true
+    },
+    {
+      "name": "i-Type黑白",
+      "status": "implemented-shared",
+      "responseId": "itype-bw",
+      "uiEnabled": true
+    },
+    {
+      "name": "600黑白",
+      "status": "implemented-shared",
+      "responseId": "itype-bw",
+      "uiEnabled": true
+    },
+    {
+      "name": "SX-70黑白",
+      "status": "implemented-shared",
+      "responseId": "itype-bw",
+      "uiEnabled": true
+    },
+    {
+      "name": "黄色",
+      "status": "not-implemented",
+      "responseId": null,
+      "uiEnabled": false
+    },
+    {
+      "name": "Reclaimed Blue600",
+      "status": "implemented",
+      "responseId": "reclaimed-blue600",
+      "uiEnabled": true
+    },
+    {
+      "name": "Reclaimed Purple600",
+      "status": "not-implemented",
+      "responseId": null,
+      "uiEnabled": false
+    },
+    {
+      "name": "Reclaimed Green600",
+      "status": "not-implemented",
+      "responseId": null,
+      "uiEnabled": false
+    },
+    {
+      "name": "Black Blue Duochrome",
+      "status": "implemented",
+      "responseId": "blue-duochrome600",
+      "uiEnabled": true
+    },
+    {
+      "name": "Black Yellow Duochrome",
+      "status": "not-implemented",
+      "responseId": null,
+      "uiEnabled": false
+    },
+    {
+      "name": "Black Green Duochrome",
+      "status": "not-implemented",
+      "responseId": null,
+      "uiEnabled": false
+    },
+    {
+      "name": "Black Orange Duochrome",
+      "status": "not-implemented",
+      "responseId": null,
+      "uiEnabled": false
+    },
+    {
+      "name": "Black Red Duochrome",
+      "status": "not-implemented",
+      "responseId": null,
+      "uiEnabled": false
+    },
+    {
+      "name": "Black Pink Duochrome",
+      "status": "not-implemented",
+      "responseId": null,
+      "uiEnabled": false
+    }
+  ],
+  "note": "No unimplemented response cards exposed; shared labels do not invent different color math."
+}

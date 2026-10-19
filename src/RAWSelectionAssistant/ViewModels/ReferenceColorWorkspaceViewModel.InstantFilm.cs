@@ -14,7 +14,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public IReadOnlyList<InstantFilmProfile> InstantProfiles=>InstantFilmProfiles.Available;
     public IReadOnlyList<string> InstantTiers {get;}=["稳定出片","轻微偶然","实验胶片"];
     private InstantFilmProfile _draftSelectedInstantProfile=InstantFilmProfiles.Available[0];
-    public InstantFilmProfile SelectedInstantProfile {get=>_draftSelectedInstantProfile;set{if(SetProperty(ref _draftSelectedInstantProfile,value)){OnPropertyChanged(nameof(SelectedPhotographerPaperId));OnPropertyChanged(nameof(PhotographerPaperName));OnPropertyChanged(nameof(PhotographerPaperDetail));OnPropertyChanged(nameof(PaperTechnicalDetail));}}}
+    public InstantFilmProfile SelectedInstantProfile {get=>_draftSelectedInstantProfile;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(SetProperty(ref _draftSelectedInstantProfile,value)){OnPropertyChanged(nameof(SelectedPhotographerPaperId));OnPropertyChanged(nameof(PhotographerPaperName));OnPropertyChanged(nameof(PhotographerPaperDetail));OnPropertyChanged(nameof(PaperTechnicalDetail));}}}
     public string InstantTier {get;set;}="稳定出片";
     public bool InstantDiceEnabled {get;private set;}
     private bool _draftInstantCameraAnimation=true;
@@ -44,7 +44,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public bool InstantImageEffectsDisabled {get=>_draftInstantImageEffectsDisabled;set=>SetProperty(ref _draftInstantImageEffectsDisabled,value);}
     public string InstantDimensions {get;private set;}="";
     public bool IsInstantGenerating {get;private set;}
-    public bool InstantEditingAllowed=>ActiveTarget is not null&&!IsLoading&&!IsExporting&&!IsInstantGenerating;
+    public bool InstantEditingAllowed=>!IsLightPrintLocked&&ActiveTarget is not null&&!IsLoading&&!IsExporting&&!IsInstantGenerating;
     private double _draftInstantUneven=.15;
     public double InstantUneven {get=>_draftInstantUneven;set=>SetProperty(ref _draftInstantUneven,value);}
     public double InstantUnspread {get;set;}=.12;
@@ -71,7 +71,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public AsyncRelayCommand ToggleInstantDiceCommand {get;private set;}=null!;
     public AsyncRelayCommand DisableInstantFilmCommand {get;private set;}=null!;
     public RelayCommand SelectInstantCameraCommand {get;private set;}=null!;
-    public void ExitInstantPresentationForLifecycle(){_paperPreviewCancellation?.Cancel();CancelComparison();_secondSelectionCancellation?.Cancel();_instantCancellation?.Cancel();}
+    public void ExitInstantPresentationForLifecycle(){CancelLightPrintTask(false);_paperPreviewCancellation?.Cancel();CancelComparison();_secondSelectionCancellation?.Cancel();_instantCancellation?.Cancel();}
     private void InitializeInstantFilmCommands()
     {
         InitializeInstantV3Commands();
@@ -97,6 +97,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     private void RestoreInstantControls(InstantFilmDefinition? film)
     {
+        _restoringLightPrintControls=true;try
+        {
         RestoreV3(film);
         SrgbExposureEv=ActiveTarget?.RawDefinition?.SrgbExposure?.ExposureEv??0;
         InstantInputMode=ActiveTarget?.RawDefinition?.InstantInput?.Mode??"CurrentEdits";
@@ -114,6 +116,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(film.PaperGeometry is {} paper){InstantBorder=paper.Side;InstantBottomBorder=paper.Bottom;}
         foreach(var name in new[]{nameof(InstantImageEffectsDisabled),nameof(InstantLayout),nameof(InstantFit),nameof(InstantCropX),nameof(InstantCropY)})OnPropertyChanged(name);
         foreach(var name in new[]{nameof(SelectedInstantProfile),nameof(InstantTier),nameof(InstantDiceEnabled),nameof(InstantUneven),nameof(InstantUnspread),nameof(InstantRoller),nameof(InstantArtLeak),nameof(InstantEnvironmentCelsius),nameof(InstantPaperColor),nameof(InstantPaperFrame),nameof(InstantBorder),nameof(InstantBottomBorder),nameof(InstantAmount)})OnPropertyChanged(name);
+        }finally{if(ActiveTarget?.RawDefinition?.LightPrint is{} light){_selectedLightPrintFrameId=light.FrameId;OnPropertyChanged(nameof(SelectedLightPrintFrameId));}_restoringLightPrintControls=false;NotifyLightPrint();}
+
     }
     public System.Windows.Rect InstantImageRegion {get;private set;}=new(0,0,1,1);
     private void InstantChanged()
@@ -128,7 +132,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     public async Task GenerateInstantFilmAsync(bool roll)
     {
-        if(_disposed||IsInstantGenerating||IsLoading||IsExporting||ActiveTarget is not {} target)return;
+        if(_disposed||IsInstantGenerating||IsLoading||IsExporting||IsLightPrintLocked&&!_developingLightPrint||ActiveTarget is not {} target)return;
         _paperPreviewCancellation?.Cancel();await StopComparisonAsync();
         if(_disposed||IsLoading||IsExporting||IsInstantGenerating||!ReferenceEquals(ActiveTarget,target))return;
         // Establish and freeze the source edit version before async reconstruction starts.
@@ -151,32 +155,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         try
         {
             var profile=SelectedInstantProfile;
-            var film=new InstantFilmDefinition(true,profile.Id,profile.ChemicalGeneration,AlgorithmVersion:2,Amount:InstantAmount,PaperFrame:InstantPaperFrame,Border:InstantBorder,BottomBorder:InstantBottomBorder,Uneven:InstantUneven,Unspread:InstantUnspread,Roller:InstantRoller,ArtLightLeak:InstantArtLeak,EnvironmentCelsius:InstantEnvironmentCelsius,Tier:InstantTier){PaperColor=InstantPaperColor,ImageEffectsDisabled=InstantImageEffectsDisabled,PaperGeometry=InstantLayout=="LegacyFree"?null:new InstantPaperGeometry(Fit:InstantFit,CropX:InstantCropX,CropY:InstantCropY,Side:InstantBorder,Top:InstantBorder,Bottom:InstantBottomBorder)};
-            if(InstantDiceEnabled&&InstantEngineVersion!="V3")
-            {
-                var snapshot=previous?.InstantFilm?.Snapshot;
-                if(roll)snapshot=InstantFilmRandom.Roll(film,BitConverter.ToUInt64(RandomNumberGenerator.GetBytes(8)));
-                else if(snapshot is null||snapshot.ProfileId!=film.FilmId||snapshot.Tier!=film.Tier)throw new InvalidDataException("相纸或档位改变后请显式掷骰；不会在渲染中自动重新随机。");
-                film=film with{DiceEnabled=true,Snapshot=snapshot};
-            }
-            film=InstantFilmPipeline.Freeze(film);
-            if(InstantEngineVersion=="V3")
-            {
-                var v3=FreezeV3(film,roll);var identity=v3.Profile;
-                film=film with{AlgorithmVersion=3,FilmId=identity.LegacyId,ChemicalGeneration=InstantFilmProfiles.Available.Single(p=>p.Id==identity.LegacyId).ChemicalGeneration,V3=v3};
-            }
-            else if(InstantEngineVersion!="V2")throw new InvalidDataException("Unknown instant algorithm version");
             Editor.CopyCurrentLookTo([target]);
-            // Legacy RAW CurrentEdits is an explicit, persisted PV6 bridge; old definitions stay untouched.
-            if(InstantInputMode is not("Original" or "CurrentEdits"))throw new InvalidDataException("请选择明确的输入来源。");
-            var basis=InstantInputMode=="Original"?(RawMatchTiff16ProductPipeline.IsRaw(target.Path)?new ProfessionalRawDefinition():InstantFilmJpegInput.Definition):previous??InstantFilmJpegInput.Definition;
-            if(previous is null&&RawMatchTiff16ProductPipeline.IsRaw(target.Path)&&InstantInputMode=="CurrentEdits")
-                basis=LegacyRawInstantInput.Create(new InstantInputRecipe(2,"CurrentEdits",version,target.AppliedLookSnapshot,target.ColorAdjustmentStackSnapshot?.DeepClone(),target.FilmSettingsSnapshot)
-                {LegacyRaw=new(1,target.ColorAdjustmentStackSnapshot?.ProcessingVersion??1,target.SourceHash??throw new InvalidDataException("Missing source identity."),Engine:target.EngineSnapshot,ExecutionMode:target.ExecutionModeSnapshot)});
-            if(basis.InputConfiguration=="RenderedSrgbFloatV1"&&(previous is null||InstantInputMode=="Original"))
-                basis=basis with{InstantInput=new(1,InstantInputMode,version,InstantInputMode=="CurrentEdits"?target.AppliedLookSnapshot:null,InstantInputMode=="CurrentEdits"?target.ColorAdjustmentStackSnapshot?.DeepClone():null,InstantInputMode=="CurrentEdits"?target.FilmSettingsSnapshot:null)};
-            if(InstantEngineVersion=="V3"&&InstantInputMode=="Original"&&!RawMatchTiff16ProductPipeline.IsRaw(target.Path))basis=basis with{RenderedInputVersion=2};
-            var definition=basis with{InstantFilm=film,SrgbExposure=null};definition.Validate();
+            var definition=BuildInstantDefinition(target,previous,version,roll);var film=definition.InstantFilm!;
             var camera=InstantCameraAnimation;InstantDirection=profile.Direction;
             if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
             // Reuse the exact frozen full source used by legacy editing; never a proxy or a second native
@@ -212,7 +192,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);target.ActiveEditVersionId=Guid.NewGuid();committedId=target.ActiveEditVersionId;
             target.RawDefinition=definition;target.RawInput=master.Contract;target.LinearRawMaster=master;target.RawMaster=null;
             target.AppliedLookSnapshot=null;target.ColorAdjustmentStackSnapshot=null;target.FilmSettingsSnapshot=null;
-            CaptureEditVersion(target);target.EditVersions[^1]=target.EditVersions[^1] with{Name=profile.Name+(film.AlgorithmVersion==3?" · 创作 V3":" · 创作 v2"),OriginVersionId=version};
+            CaptureEditVersion(target);target.EditVersions[^1]=target.EditVersions[^1] with{Name=_developingLightPrint?$"光片 · {PhotographerPaperName} · {DateTimeOffset.Now:MMdd-HHmmss}":profile.Name+(film.AlgorithmVersion==3?" · 创作 V3":" · 创作 v2"),OriginVersionId=version};
             EnsurePreparedCurrent(target,definition,committedId,revision,token);await PresentProfessionalPreviewAsync(target,prepared,revision,token);if(target.Status==ReferenceTargetStatus.Failed)throw new IOException(target.Error);StatusText="即时胶片显影完成 · 创作近似，非实测相纸标定";
             LastInstantApplyTimings=new(decodeMs,pixelMs,demoMs,commitWatch.Elapsed.TotalMilliseconds,cacheHit,prepared.CompareMs);OnPropertyChanged(nameof(LastInstantApplyTimings));
             if(film.AlgorithmVersion==3){if(!_instantV3Undo.TryGetValue(target.Id,out var undo))_instantV3Undo[target.Id]=undo=new();if(version is Guid prior)undo.Push(prior);if(_instantV3Redo.TryGetValue(target.Id,out var redo))redo.Clear();}
@@ -222,4 +202,39 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         {LastProcessingFailure=StudioProcessingFailure.From(error,"InstantRebuild");OnPropertyChanged(nameof(LastProcessingFailure));Rollback();if(ReferenceEquals(ActiveTarget,target))RestoreInstantControls(previous?.InstantFilm);StatusText="即时胶片未完成，保留上一有效结果："+error.Message;InstantDiceEnabled=previousDice;}
         finally{IsInstantGenerating=false;if(!_disposed)UpdateComparisonAvailability();InstantDevelopment=null;InstantFinalPreview=null;OnPropertyChanged(nameof(InstantDiceEnabled));InstantChanged();}
     }
+    private ProfessionalRawDefinition BuildInstantDefinition(ReferenceTargetItem target,ProfessionalRawDefinition? previous,Guid? version,bool roll)
+    {
+        var profile=SelectedInstantProfile;
+            var film=new InstantFilmDefinition(true,profile.Id,profile.ChemicalGeneration,AlgorithmVersion:2,Amount:InstantAmount,PaperFrame:InstantPaperFrame,Border:InstantBorder,BottomBorder:InstantBottomBorder,Uneven:InstantUneven,Unspread:InstantUnspread,Roller:InstantRoller,ArtLightLeak:InstantArtLeak,EnvironmentCelsius:InstantEnvironmentCelsius,Tier:InstantTier){PaperColor=InstantPaperColor,ImageEffectsDisabled=InstantImageEffectsDisabled,PaperGeometry=InstantLayout=="LegacyFree"?null:new InstantPaperGeometry(Fit:InstantFit,CropX:InstantCropX,CropY:InstantCropY,Side:InstantBorder,Top:InstantBorder,Bottom:InstantBottomBorder)};
+            if(InstantDiceEnabled&&InstantEngineVersion!="V3")
+            {
+                var snapshot=previous?.InstantFilm?.Snapshot;
+                if(roll)snapshot=InstantFilmRandom.Roll(film,BitConverter.ToUInt64(RandomNumberGenerator.GetBytes(8)));
+                else if(snapshot is null||snapshot.ProfileId!=film.FilmId||snapshot.Tier!=film.Tier)throw new InvalidDataException("相纸或档位改变后请显式掷骰；不会在渲染中自动重新随机。");
+                film=film with{DiceEnabled=true,Snapshot=snapshot};
+            }
+            film=InstantFilmPipeline.Freeze(film);
+            if(InstantEngineVersion=="V3")
+            {
+                var v3=FreezeV3(film,roll);var identity=v3.Profile;
+                film=film with{AlgorithmVersion=3,FilmId=identity.LegacyId,ChemicalGeneration=InstantFilmProfiles.Available.Single(p=>p.Id==identity.LegacyId).ChemicalGeneration,V3=v3};
+            }
+            else if(InstantEngineVersion!="V2")throw new InvalidDataException("Unknown instant algorithm version");
+
+            // Legacy RAW CurrentEdits is an explicit, persisted PV6 bridge; old definitions stay untouched.
+            if(InstantInputMode is not("Original" or "CurrentEdits"))throw new InvalidDataException("请选择明确的输入来源。");
+            var basis=InstantInputMode=="Original"?(RawMatchTiff16ProductPipeline.IsRaw(target.Path)?new ProfessionalRawDefinition():InstantFilmJpegInput.Definition):previous??InstantFilmJpegInput.Definition;
+            if(previous is null&&RawMatchTiff16ProductPipeline.IsRaw(target.Path)&&InstantInputMode=="CurrentEdits")
+                basis=LegacyRawInstantInput.Create(new InstantInputRecipe(2,"CurrentEdits",version,target.AppliedLookSnapshot,target.ColorAdjustmentStackSnapshot?.DeepClone(),target.FilmSettingsSnapshot)
+                {LegacyRaw=new(1,target.ColorAdjustmentStackSnapshot?.ProcessingVersion??1,target.SourceHash??throw new InvalidDataException("Missing source identity."),Engine:target.EngineSnapshot,ExecutionMode:target.ExecutionModeSnapshot)});
+            if(basis.InputConfiguration=="RenderedSrgbFloatV1"&&(previous is null||InstantInputMode=="Original"))
+                basis=basis with{InstantInput=new(1,InstantInputMode,version,InstantInputMode=="CurrentEdits"?target.AppliedLookSnapshot:null,InstantInputMode=="CurrentEdits"?target.ColorAdjustmentStackSnapshot?.DeepClone():null,InstantInputMode=="CurrentEdits"?target.FilmSettingsSnapshot:null)};
+            if(InstantEngineVersion=="V3"&&InstantInputMode=="Original"&&!RawMatchTiff16ProductPipeline.IsRaw(target.Path))basis=basis with{RenderedInputVersion=2};
+            if(_developingLightPrint)film=ApplyLightPrintFrame(film);
+            var definition=basis with{InstantFilm=film,SrgbExposure=null,LightPrint=null};
+            if(_developingLightPrint)definition=definition with{LightPrint=new(1,SelectedLightPrintFrameId,InstantCamera,DateTimeOffset.UtcNow)};
+            definition.Validate();return definition;
+
+    }
+
 }

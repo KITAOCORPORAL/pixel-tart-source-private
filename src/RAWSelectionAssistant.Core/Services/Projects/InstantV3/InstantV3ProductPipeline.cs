@@ -6,7 +6,7 @@ public static class InstantV3ProductPipeline
  public static ProfessionalRawDefinition Original(ProfessionalRawDefinition definition)
  {
   if(definition.InstantFilm?.V3 is not{} recipe)return definition with{ExposureEv=0};
-  return definition with{InstantFilm=definition.InstantFilm with{V3=recipe with{Amount=0,Creative=null,Defects=null,Paper=recipe.Paper is{} paper?paper with{Pattern="Plain",Emboss=0,EdgeLine=0,Reflection=0}:null}}};
+  return definition with{LightPrint=definition.LightPrint is{} l?l with{WindowAdjustments=null}:null,InstantFilm=definition.InstantFilm with{V3=recipe with{Amount=0,Creative=null,Defects=null,Paper=recipe.Paper is{} paper?paper with{Pattern="Plain",Emboss=0,EdgeLine=0,Reflection=0}:null}}};
  }
  private sealed class PixelLease(IDisposable first,ISecondExposureSource second):IDisposable{public void Dispose(){second.Dispose();first.Dispose();}}
  private sealed class PairLease(IDisposable first,IDisposable second,HighBitDepthImageBuffer pixels):IDisposable{public void Dispose(){pixels.Dispose();second.Dispose();first.Dispose();}}
@@ -29,7 +29,7 @@ public static class InstantV3ProductPipeline
   var bytes=checked((long)master.Image.Rgb32.Length*4);
   // Borrow existing exact registered source when possible; otherwise explicitly reserve caller-retained master.
   var pin=StudioGlobalResources.RetainBuffer(master.Image,bytes);
-  if(recipe.MultipleInput is not{} second)return new(new Source(master,definition with{InstantFilm=null}),recipe,pin);
+  if(recipe.MultipleInput is not{} second)return new(new Source(master,definition with{InstantFilm=null}),recipe,pin){WindowAdjustments=definition.LightPrint?.WindowAdjustments};
   IDisposable? secondLease=null;HighBitDepthImageBuffer? pixels=null;
   try
   {
@@ -37,13 +37,13 @@ public static class InstantV3ProductPipeline
    if(second.Version==3&&decoder is ISecondExposurePixelDecoder bounded)
    {
     var source=bounded.OpenPixels(second,token);
-    try{return new(new MultiplePixelSource(new Source(master,definition with{InstantFilm=null}),source,second),recipe,new PixelLease(pin,source));}
+    try{return new(new MultiplePixelSource(new Source(master,definition with{InstantFilm=null}),source,second),recipe,new PixelLease(pin,source)){WindowAdjustments=definition.LightPrint?.WindowAdjustments};}
     catch{source.Dispose();throw;}
    }
    var verified=second.Version>=2&&decoder.ValidatesSourceIdentity;if(!verified)second.ValidateSource(token);secondLease=StudioGlobalResources.ReserveWork(checked((long)second.Width*second.Height*12));
    pixels=decoder.Read(second,token);
    if(pixels.Width!=second.Width||pixels.Height!=second.Height||pixels.Orientation!=1||pixels.WorkingColorSpace!="sRGB")throw new InvalidDataException("SECOND_SOURCE_DOMAIN_CHANGED");if(!verified)second.ValidateSource(token);
-   return new(new MultiplePixelSource(new Source(master,definition with{InstantFilm=null}),new BufferSecondSource(pixels),second),recipe,new PairLease(pin,secondLease,pixels));
+   return new(new MultiplePixelSource(new Source(master,definition with{InstantFilm=null}),new BufferSecondSource(pixels),second),recipe,new PairLease(pin,secondLease,pixels)){WindowAdjustments=definition.LightPrint?.WindowAdjustments};
   }
   catch{pixels?.Dispose();secondLease?.Dispose();pin.Dispose();throw;}
  }

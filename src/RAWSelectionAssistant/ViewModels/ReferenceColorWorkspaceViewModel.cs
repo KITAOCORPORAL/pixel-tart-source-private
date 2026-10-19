@@ -195,7 +195,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         InitializeRangeSelection();
         BuildColorSpaceModelCommand = new AsyncRelayCommand(_ => BuildColorSpaceModelAsync(), _ => Editor.SourceImage is not null);
         ChooseTargetCommand = new AsyncRelayCommand(_ => ChooseTargetAsync());
-        StopProcessingCommand = new RelayCommand(_ => {CancelComparison();ExitInstantPresentationForLifecycle();_sessionPreparationCancellation?.Cancel();Editor.StopProcessing();_activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);InvalidateProfessionalPreview();}, _ => Editor.IsBusy || IsLoading || IsInstantGenerating || IsComparisonPreparing || SelectSecondExposureCommand?.CanExecute(null)==false || !ProfessionalDetailWork.IsCompleted);
+        StopProcessingCommand = new RelayCommand(_ => {CancelLightPrintTask(true);CancelComparison();ExitInstantPresentationForLifecycle();_sessionPreparationCancellation?.Cancel();Editor.StopProcessing();_activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);InvalidateProfessionalPreview();}, _ => Editor.IsBusy || IsLoading || IsInstantGenerating || IsComparisonPreparing || !LightPrintPreviewWork.IsCompleted || SelectSecondExposureCommand?.CanExecute(null)==false || !ProfessionalDetailWork.IsCompleted);
         CopyAdjustmentsCommand = new RelayCommand(_ => CopyCurrentAdjustments(), _ => ActiveTarget is not null && !IsLoading && !IsProfessionalRaw);
         ApplyAdjustmentsCommand = new RelayCommand(_ => ApplyCopiedAdjustments(), _ => HasCopiedAdjustments && SelectedTargets.Any() && !IsLoading);
         PreparePublishingCommand = new AsyncRelayCommand(_ => PreparePublishingAsync(), _ => OpenPublishing is not null && SelectedTargets.Any() && !IsExporting && !IsInstantGenerating);
@@ -646,6 +646,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private async Task ActivateTargetAsync(ReferenceTargetItem target)
     {
+        CancelLightPrintTask(false);await LightPrintPreviewWork;_lightPrintBeforeDraft=null;_lightPrintReshoot=false;
         if(!ReferenceEquals(ActiveTarget,target))ClearPhotographerPreviews();
         _paperPreviewCancellation?.Cancel();await StopComparisonAsync();
         _secondSelectionCancellation?.Cancel();if(IsInstantGenerating)_instantCancellation?.Cancel();
@@ -721,7 +722,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public void Dispose()
     {
         if(_disposed)return;
-        _paperPreviewCancellation?.Cancel();CancelComparison();_disposed = true;
+        CancelLightPrintTask(false);_paperPreviewCancellation?.Cancel();CancelComparison();_disposed = true;
         PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, OnStudioLanguageChanged, nameof(StudioLocalizationService.Language));
         CancelRangeSelection();
         _analysisCancellation?.Cancel(); _analysisCache.Clear();
@@ -758,6 +759,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private async Task ExportAsync(IReadOnlyList<ReferenceTargetItem> items, string? retryDirectory = null)
     {
+        CancelLightPrintTask(true);await LightPrintPreviewWork;
         await StopComparisonAsync();
         if (items.Count == 0 || IsExporting || IsInstantGenerating) return;
         var format=retryDirectory is null ? QuickExportFormat : _lastExportFormat;
