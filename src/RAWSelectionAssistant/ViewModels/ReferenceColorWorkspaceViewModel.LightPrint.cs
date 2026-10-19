@@ -81,7 +81,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private void QueueLightPrintPreview()
  {
   if(!_lightPrintEnabled||_developingLightPrint||_disposed||IsLightPrintLocked||IsLoading||IsExporting||IsInstantGenerating||ActiveTarget is not{} target)return;
-  _lightPrintPreviewCancellation?.Cancel();var cts=new CancellationTokenSource();_lightPrintPreviewCancellation=cts;var revision=Interlocked.Increment(ref _lightPrintPreviewRevision);var activation=Volatile.Read(ref _activationRevision);var version=target.ActiveEditVersionId;
+  InstantEngineVersion="V3";_lightPrintPreviewCancellation?.Cancel();var cts=new CancellationTokenSource();_lightPrintPreviewCancellation=cts;var revision=Interlocked.Increment(ref _lightPrintPreviewRevision);var activation=Volatile.Read(ref _activationRevision);var version=target.ActiveEditVersionId;
   if(_lightPrintDraftTarget!=target.Id){_lightPrintBeforeDraft=null;_lightPrintDraftTarget=target.Id;}
   _lightPrintBeforeDraft??=Editor.CapturePreparedSource();LightPrintStatus="实时预览…（未显影，不改旧变体）";
   var priorWork=LightPrintPreviewWork;LightPrintPreviewWork=RenderAsync();
@@ -89,8 +89,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   {
    var token=cts.Token;try
    {
-    await Task.Yield();await priorWork;token.ThrowIfCancellationRequested();var draft=BuildInstantDefinition(target,target.RawDefinition,version,false);draft=draft with{InstantFilm=ApplyLightPrintFrame(draft.InstantFilm!)};await Task.Delay(90,token);if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
-    if(_lightPrintBeforeDraft is{} before&&target.RawDefinition is null){Editor.CopyCurrentLookTo([target]);}
+    await Task.Yield();await priorWork;token.ThrowIfCancellationRequested();Editor.CopyCurrentLookTo([target]);var draft=BuildInstantDefinition(target,target.RawDefinition,version,false);draft=draft with{InstantFilm=ApplyLightPrintFrame(draft.InstantFilm!)};await Task.Delay(90,token);if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
     var definition=draft;
     // Quick draft uses a labelled bounded input; developing/export always use the full frozen source.
     ProfessionalRawMaster master;
@@ -112,7 +111,17 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     try{image=RawDisplayBitmapAdapter.ToBitmap(pixels.ToVisualRgb24(token));}finally{pixels.Dispose();}
     if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);definition.InstantFilm?.V3?.MultipleInput?.ValidateSource(token);token.ThrowIfCancellationRequested();
     if(_disposed||revision!=Volatile.Read(ref _lightPrintPreviewRevision)||activation!=Volatile.Read(ref _activationRevision)||!ReferenceEquals(target,ActiveTarget)||version!=target.ActiveEditVersionId)return;
-    Editor.IndependentRawMode=true;await Editor.SetSourceAsync(target.AssetId,null,token,render:false);Editor.PresentIndependentRaw(image);Editor.SetIndependentRawSize(new(image.PixelWidth,image.PixelHeight));LightPrintStatus="预览就绪 · 点显影生成独立变体";
+    Editor.IndependentRawMode=true;await Editor.SetSourceAsync(target.AssetId,null,token,render:false);Editor.PresentIndependentRaw(image);Editor.SetIndependentRawSize(new(image.PixelWidth,image.PixelHeight));LightPrintStatus="快速预览 · 正在核对原尺寸效果";
+    CandidateProcessingEvidence.Enter("LightPrintQuickVisible",token);
+    var full=ReusableMaster(target,definition)??await DecodeProfessionalInputAsync(target.Path,definition,token);
+    using var fullOwner=ReferenceEquals(full.Image,target.LinearRawMaster?.Image)?null:full.Image;
+    using var fullLease=StudioGlobalResources.RetainBuffer(full.Image,(long)full.Image.Rgb32.Length*4);
+    var high=await RenderProfessionalPreviewAsync(full,definition,1600,token);BitmapSource complete;
+    try{complete=RawDisplayBitmapAdapter.ToBitmap(high.ToVisualRgb24(token));}finally{high.Dispose();}
+    CandidateProcessingEvidence.Enter("LightPrintHqPrepared",token);
+    if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);definition.InstantFilm?.V3?.MultipleInput?.ValidateSource(token);token.ThrowIfCancellationRequested();
+    if(_disposed||revision!=Volatile.Read(ref _lightPrintPreviewRevision)||activation!=Volatile.Read(ref _activationRevision)||!ReferenceEquals(target,ActiveTarget)||version!=target.ActiveEditVersionId)return;
+    Editor.PresentIndependentRaw(complete);var outputSize=ProfessionalRawPipeline.OutputSize(full,definition);Editor.SetIndependentRawSize(new(outputSize.Width,outputSize.Height));LightPrintStatus="预览就绪 · 点显影生成独立变体";
    }
    catch(OperationCanceledException){}
    catch(Exception e)when(e is IOException or InvalidOperationException or NotSupportedException or ArgumentException or System.Runtime.InteropServices.COMException){if(revision==Volatile.Read(ref _lightPrintPreviewRevision))LightPrintStatus="预览未完成，旧结果保留："+e.Message;}

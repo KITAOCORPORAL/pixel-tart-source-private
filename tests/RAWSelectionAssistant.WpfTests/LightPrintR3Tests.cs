@@ -37,7 +37,9 @@ namespace RAWSelectionAssistant.WpfTests;
   EnsureTestApplication();var root=Root();try
   {
    using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));await vm.LoadTargetAsync(Image(root,"a.png",20));vm.EnableLightPrintWorkspace();var before=Pixels(vm.Editor.MatchedImage??vm.Editor.SourceImage!);vm.SelectedPhotographerPaperId="blue-duochrome600";vm.CancelLightPrintPreviewCommand.Execute(null);await vm.LightPrintPreviewWork;Assert.AreEqual(before,Pixels(vm.Editor.MatchedImage??vm.Editor.SourceImage!));
-   vm.SelectedPhotographerPaperId="itype-bw";await vm.LoadTargetAsync(Image(root,"b.png",130));await vm.LightPrintPreviewWork;Assert.IsNull(vm.ActiveTarget!.RawDefinition);Assert.IsFalse(vm.LightPrintStatus.Contains("未完成"));Assert.AreEqual("b.png",vm.ActiveTarget.FileName);
+   var ready=new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);using var gate=new ManualResetEventSlim(false);
+   int held=0;using var captured=CandidateProcessingEvidence.Capture(p=>{if(p=="PixelRender"&&Interlocked.CompareExchange(ref held,1,0)==0){ready.TrySetResult();if(!gate.Wait(10000))throw new TimeoutException("preview gate");}});
+   vm.SelectedPhotographerPaperId="itype-bw";await ready.Task.WaitAsync(TimeSpan.FromSeconds(10));var switchTask=vm.LoadTargetAsync(Image(root,"b.png",130));gate.Set();await switchTask;await vm.LightPrintPreviewWork;Assert.IsNull(vm.ActiveTarget!.RawDefinition);Assert.IsFalse(vm.LightPrintStatus.Contains("未完成"));Assert.AreEqual("b.png",vm.ActiveTarget.FileName);
   }finally{Directory.Delete(root,true);}
  });
  private static string Root(){var p=Path.Combine(Path.GetTempPath(),"LightPrintR3-"+Guid.NewGuid());Directory.CreateDirectory(p);return p;}
