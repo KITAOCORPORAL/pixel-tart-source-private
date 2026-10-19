@@ -116,7 +116,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(film.PaperGeometry is {} paper){InstantBorder=paper.Side;InstantBottomBorder=paper.Bottom;}
         foreach(var name in new[]{nameof(InstantImageEffectsDisabled),nameof(InstantLayout),nameof(InstantFit),nameof(InstantCropX),nameof(InstantCropY)})OnPropertyChanged(name);
         foreach(var name in new[]{nameof(SelectedInstantProfile),nameof(InstantTier),nameof(InstantDiceEnabled),nameof(InstantUneven),nameof(InstantUnspread),nameof(InstantRoller),nameof(InstantArtLeak),nameof(InstantEnvironmentCelsius),nameof(InstantPaperColor),nameof(InstantPaperFrame),nameof(InstantBorder),nameof(InstantBottomBorder),nameof(InstantAmount)})OnPropertyChanged(name);
-        }finally{if(ActiveTarget?.RawDefinition?.LightPrint is{} light){_selectedLightPrintFrameId=light.FrameId;OnPropertyChanged(nameof(SelectedLightPrintFrameId));}_restoringLightPrintControls=false;NotifyLightPrint();}
+        }finally{if(ActiveTarget?.RawDefinition?.LightPrint is{} light){_selectedLightPrintFrameId=light.FrameId;InstantCamera=light.Camera;OnPropertyChanged(nameof(LightPrintCamera));OnPropertyChanged(nameof(SelectedLightPrintFrameId));}_restoringLightPrintControls=false;NotifyLightPrint();}
 
     }
     public System.Windows.Rect InstantImageRegion {get;private set;}=new(0,0,1,1);

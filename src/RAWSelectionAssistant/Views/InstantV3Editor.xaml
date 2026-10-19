@@ -16,8 +16,8 @@
 
   <Button x:Name="ApplyV3" Visibility="Collapsed" Command="{Binding GenerateInstantFilmCommand}"/>
   <TextBlock Text="色彩与外观分开控制" FontWeight="SemiBold" Margin="0,6,0,6"/>
-  <CheckBox Content="添加纸框（不改变色彩配方）" IsChecked="{Binding InstantPaperFrame}"/>
-  <TextBlock Text="效果强度只控制色彩／成像；纸框、纸面在下方单独调整。" TextWrapping="Wrap" FontSize="10" Margin="0,4,0,10"/>
+  <TextBlock Text="相框由上方选择器控制；进阶纸面不改变所选窗口形状。" TextWrapping="Wrap" FontSize="11"/>
+  <TextBlock Text="效果强度只控制色彩／成像；显影前可调整，显影后锁定。" TextWrapping="Wrap" FontSize="10" Margin="0,4,0,10"/>
   <Expander IsEnabled="{Binding IsInstantV3Selected}" x:Name="ToneAdvanced" Header="进阶色彩与层次" IsExpanded="False"><StackPanel>
 <ComboBox ItemsSource="{Binding InstantV3Stocks}" ItemTemplate="{StaticResource PhotoOptionTemplate}" SelectedItem="{Binding InstantV3Stock}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Toe,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Toe}" TextWrapping="Wrap"/></DockPanel>
@@ -75,7 +75,7 @@
    <Slider x:Name="InstantV3DefectScaleControl" Tag="InstantV3DefectScale" Minimum="0.25" Maximum="4" Value="{Binding InstantV3DefectScale,Mode=TwoWay}"/>
   </StackPanel></Expander>
   <Expander IsEnabled="{Binding IsInstantV3Selected}" x:Name="PaperAdvanced" Header="纸框、纸面与构图" IsExpanded="False"><StackPanel>
-<CheckBox Content="{views:StudioText InstantBatch08_6}" IsChecked="{Binding InstantPaperFrame}"/><ComboBox ItemsSource="{Binding InstantPaperColors}" ItemTemplate="{StaticResource PhotoOptionTemplate}" SelectedItem="{Binding InstantPaperColor}"/><ComboBox ItemsSource="{Binding InstantLayouts}" ItemTemplate="{StaticResource PhotoOptionTemplate}" SelectedItem="{Binding InstantLayout}"/><ComboBox ItemsSource="{Binding InstantFitModes}" ItemTemplate="{StaticResource PhotoOptionTemplate}" SelectedItem="{Binding InstantFit}"/><ComboBox ItemsSource="{Binding InstantV3Patterns}" ItemTemplate="{StaticResource PhotoOptionTemplate}" SelectedItem="{Binding InstantV3Pattern}"/><CheckBox Content="{views:StudioText InstantV3Live21}" IsChecked="{Binding InstantV3Circle}"/>
+<TextBlock Text="框色、图案与方形／圆形由相框选择器决定；此处只调整纸面强弱和画面构图。" TextWrapping="Wrap"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantBorder,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantBorder}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantBorderControl" Tag="InstantBorder" Minimum="0" Maximum="0.2" Value="{Binding InstantBorder,Mode=TwoWay}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantBottomBorder,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantBottomBorder}" TextWrapping="Wrap"/></DockPanel>

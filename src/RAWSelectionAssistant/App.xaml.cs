@@ -65,7 +65,7 @@ public partial class App : Application
         if(Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME")!="1")
         {
             Environment.SetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME","1");
-            Environment.SetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT",Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"PixelTart.PhotographerTrial"));
+            Environment.SetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT",Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"PixelTart.DarkroomR3.HomeTrial"));
         }
 #endif
         base.OnStartup(e);

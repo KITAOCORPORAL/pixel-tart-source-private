@@ -63,9 +63,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   {
    if(ActiveTarget is not{} target||target.RawDefinition is not{LightPrint:not null} prior||target.ActiveEditVersionId is not Guid version)return;
    var stack=Editor.AdjustmentStack.DeepClone();if(stack.Nodes.Any(n=>n.Type is not(ColorStudioNodeType.BasicTone or ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.Curve))){LightPrintStatus="首版窗口调色仅接通影调、白平衡和曲线。";return;}
-   var beforeImage=Editor.CapturePreparedSource();var beforeHistory=Editor.CaptureSessionHistory();var key=(target.Id,version);var next=prior with{LightPrint=prior.LightPrint! with{WindowAdjustments=stack}};
+   var beforeImage=Editor.CapturePreparedSource();var beforeHistory=Editor.CaptureSessionHistory();var oldStatus=target.Status;var oldError=target.Error;var key=(target.Id,version);var next=prior with{LightPrint=prior.LightPrint! with{WindowAdjustments=stack}};
    try{target.RawDefinition=next;await ActivateTargetAsync(target);if(target.Status==ReferenceTargetStatus.Failed)throw new IOException(target.Error);if(!_windowUndo.TryGetValue(key,out var undo))_windowUndo[key]=undo=new();undo.Push(prior);_windowRedo.Remove(key);CaptureEditVersion(target);LightPrintStatus="窗口调整已提交，相框不染色。";}
-   catch(Exception e)when(e is IOException or InvalidOperationException or ArgumentException or NotSupportedException){target.RawDefinition=prior;if(!_disposed&&ReferenceEquals(ActiveTarget,target)){Editor.RestorePreparedSource(beforeImage,target.AssetId);Editor.RestoreSessionHistory(beforeHistory);}LightPrintStatus="窗口调整未提交，旧结果保持："+e.Message;}
+   catch(Exception e)when(e is IOException or InvalidOperationException or ArgumentException or NotSupportedException){target.RawDefinition=prior;if(!_disposed&&ReferenceEquals(ActiveTarget,target)){Editor.RestorePreparedSource(beforeImage,target.AssetId);Editor.RestoreSessionHistory(beforeHistory);target.Status=oldStatus;target.Error=oldError;}LightPrintStatus="窗口调整未提交，旧结果保持："+e.Message;}
   },_=>ActiveTarget?.RawDefinition?.LightPrint is not null&&!IsLoading&&!IsInstantGenerating&&!IsExporting);
  }
  private InstantFilmDefinition ApplyLightPrintFrame(InstantFilmDefinition film)
@@ -132,8 +132,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  {
   if(ActiveTarget is not{} target||target.RawDefinition?.LightPrint is null||target.ActiveEditVersionId is not Guid id)return false;
   var from=redo?_windowRedo:_windowUndo;var to=redo?_windowUndo:_windowRedo;var key=(target.Id,id);if(!from.TryGetValue(key,out var values)||values.Count==0)return false;
-  var current=target.RawDefinition;var next=values.Peek();var source=Editor.CapturePreparedSource();var history=Editor.CaptureSessionHistory();target.RawDefinition=next;await ActivateTargetAsync(target);
-  if(target.Status==ReferenceTargetStatus.Failed){target.RawDefinition=current;Editor.RestorePreparedSource(source,target.AssetId);Editor.RestoreSessionHistory(history);LightPrintStatus="窗口历史恢复失败，旧结果保持。";return true;}
+  var current=target.RawDefinition;var oldStatus=target.Status;var oldError=target.Error;var next=values.Peek();var source=Editor.CapturePreparedSource();var history=Editor.CaptureSessionHistory();target.RawDefinition=next;await ActivateTargetAsync(target);
+  if(target.Status==ReferenceTargetStatus.Failed){target.RawDefinition=current;Editor.RestorePreparedSource(source,target.AssetId);Editor.RestoreSessionHistory(history);target.Status=oldStatus;target.Error=oldError;LightPrintStatus="窗口历史恢复失败，旧结果保持。";return true;}
   values.Pop();CaptureEditVersion(target);if(!to.TryGetValue(key,out var other))to[key]=other=new();other.Push(current);return true;
  }
 }
