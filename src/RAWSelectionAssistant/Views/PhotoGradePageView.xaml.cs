@@ -19,7 +19,7 @@ public partial class PhotoGradePageView:UserControl
  }
  private void Attach()
  {
-  Detach(cancel:false);model=DataContext as ReferenceColorWorkspaceViewModel;editor=model?.Editor;
+  Detach(cancel:false);model=DataContext as ReferenceColorWorkspaceViewModel;editor=model?.Editor;model?.EnableLightPrintWorkspace();
   // Weak subscription also covers controls constructed but never attached/unloaded.
   if(model is not null)PropertyChangedEventManager.AddHandler(model,Changed,string.Empty);
   if(editor is not null)PropertyChangedEventManager.AddHandler(editor,EditorChanged,string.Empty);
@@ -36,6 +36,7 @@ public partial class PhotoGradePageView:UserControl
   if(e.PropertyName is nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode) or nameof(TetherReferenceModeViewModel.AdjustmentStack))RefreshStep();
  }
  private Point? panStart;
+ private void FrameClicked(object sender,EventArgs e)=>model?.RequestLightPrintPreview();
  private void FitPhoto(object sender,RoutedEventArgs e)=>PhotoViewport.State.Fit();
  private void ActualPhoto(object sender,RoutedEventArgs e)=>PhotoViewport.State.SetZoom(1);
  private void ZoomOut(object sender,RoutedEventArgs e)=>PhotoViewport.State.SetZoom(PhotoViewport.State.Zoom/1.25);

@@ -6,21 +6,13 @@
  <Grid Background="{DynamicResource CanvasBackgroundBrush}" Margin="14">
   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="104"/></Grid.RowDefinitions>
   <DockPanel Margin="0,0,0,12">
-   <Button DockPanel.Dock="Right" Content="返回旧版调色" Command="{Binding TogglePhotoGradePageCommand}"/>
-   <StackPanel DockPanel.Dock="Left" Margin="0,0,22,0"><TextBlock Text="照片调色" FontSize="21" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/><TextBlock Text="调整光色 · 选择相纸 · 保留每次创作" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/></StackPanel>
+   <Button DockPanel.Dock="Right" Content="旧版工作区" Command="{Binding TogglePhotoGradePageCommand}"/>
+   <StackPanel DockPanel.Dock="Left" Margin="0,0,22,0"><TextBlock Text="暗室" FontSize="21" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/><TextBlock Text="调整 · 光片 · 变体" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/></StackPanel>
    <WrapPanel VerticalAlignment="Center"><Button Content="导入照片" Command="{Binding ChooseTargetCommand}"/><Button Content="保存项目" Command="{Binding SaveSessionCommand}"/><Button Content="打开项目" Command="{Binding OpenSessionCommand}"/>
    <Button Content="撤销" x:Name="PhotoUndo" Command="{Binding PhotoGradeUndoCommand}"/><Button Content="重做" x:Name="PhotoRedo" Command="{Binding PhotoGradeRedoCommand}"/><Button Content="取消处理" Command="{Binding StopProcessingCommand}"/><views:StudioExportMenu x:Name="PhotoExport"/></WrapPanel>
   </DockPanel>
-  <Grid Grid.Row="1"><Grid.ColumnDefinitions><ColumnDefinition Width="172"/><ColumnDefinition Width="*"/><ColumnDefinition Width="350"/></Grid.ColumnDefinitions>
-   <StackPanel Margin="0,0,12,0">
-    <TextBlock Text="当前照片" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/><TextBlock Text="{Binding TargetName}" TextWrapping="Wrap" Margin="0,6,0,14" Foreground="{DynamicResource TextSecondaryBrush}"/>
-    <TextBlock Text="调整步骤" Foreground="{DynamicResource TextPrimaryBrush}"/>
-    <ListBox IsEnabled="{Binding PhotoGradeRasterToolsEnabled}" x:Name="OrderedSteps" ItemsSource="{Binding Editor.AdjustmentNodes}" SelectedItem="{Binding Editor.SelectedAdjustmentNode}" DisplayMemberPath="Name" MaxHeight="190"/>
-    <WrapPanel IsEnabled="{Binding PhotoGradeRasterToolsEnabled}"><Button Content="上移" Command="{Binding Editor.MoveAdjustmentNodeUpCommand}"/><Button Content="下移" Command="{Binding Editor.MoveAdjustmentNodeDownCommand}"/><Button Content="移除" Command="{Binding Editor.DeleteAdjustmentNodeCommand}"/></WrapPanel>
-    <Expander x:Name="HistorySection" Header="历史版本" IsExpanded="True" Margin="0,16,0,0"><StackPanel><ListBox x:Name="HistoryVersions" ItemsSource="{Binding ActiveTarget.EditVersions}" SelectedItem="{Binding SelectedCatalogVersion}" MaxHeight="180"><ListBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Name,Converter={StaticResource PhotoOption}}" TextWrapping="Wrap"/></DataTemplate></ListBox.ItemTemplate></ListBox><Button Content="恢复所选版本" Command="{Binding SelectEditVersionCommand}"/></StackPanel></Expander>
-    <Expander x:Name="BatchSection" Header="批量同步" Margin="0,12,0,0"><StackPanel><TextBlock Text="在底部勾选目标照片，将当前选中调整步骤复制到它们。" TextWrapping="Wrap"/><Button Content="同步选中步骤" Command="{Binding PhotoGradeSyncStepCommand}"/><TextBlock Text="宝丽来独立版本暂不支持此步骤同步。" TextWrapping="Wrap" FontSize="11"/></StackPanel></Expander>
-   </StackPanel>
-   <Grid Grid.Column="1" Margin="0,0,14,0"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <Grid Grid.Row="1"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="6"/><ColumnDefinition Width="330" MinWidth="300" MaxWidth="420"/></Grid.ColumnDefinitions>
+   <Grid Grid.Column="0" Margin="0,0,10,0"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
     <StackPanel><DockPanel><ComboBox x:Name="ComparisonMode" Width="150" HorizontalAlignment="Left" ItemsSource="{Binding PhotographerComparisonModes}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding PhotographerComparisonValue,Mode=TwoWay}"/>
      <WrapPanel HorizontalAlignment="Right"><Slider Width="90" Minimum="0" Maximum="1" Value="{Binding Editor.SplitPosition}" ToolTip="左右对比分界"/><Button Content="适合窗口" Click="FitPhoto"/><Button Content="100%" Click="ActualPhoto"/><Button Content="－" Click="ZoomOut"/><Button Content="＋" Click="ZoomIn"/></WrapPanel></DockPanel>
      <DockPanel Margin="0,7,0,7"><Button DockPanel.Dock="Right" x:Name="PrepareComparison" Content="准备配方基准" Command="{Binding PrepareComparisonCommand}"/><TextBlock x:Name="ComparisonStatus" Text="{Binding ComparisonStatus}" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/></DockPanel>
@@ -28,17 +20,40 @@
     <Border Grid.Row="1" Background="#111313" ClipToBounds="True"><views:ColorStudioImageViewport x:Name="PhotoViewport" Original="{Binding Editor.SourceImage}" Matched="{Binding Editor.MatchedImage}" Mode="{Binding Editor.EffectiveViewMode}" Split="{Binding Editor.SplitPosition}" MouseWheel="PhotoWheel" MouseLeftButtonDown="PhotoDown" MouseMove="PhotoMove" MouseLeftButtonUp="PhotoUp"/></Border>
     <TextBlock Grid.Row="2" Text="{Binding PhotographerComparisonHelp}" TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11" Margin="0,8,0,10"/>
    </Grid>
+   <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Stretch"/>
    <Grid Grid.Column="2"><Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
     <TabControl x:Name="EditModes" SelectionChanged="EditingModeChanged">
-     <TabItem Header="基础调色" x:Name="BasicTab"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="10"><TextBlock Text="光线与色彩" FontSize="17" Foreground="{DynamicResource TextPrimaryBrush}"/><TextBlock Text="{Binding RasterAvailabilityReason}" TextWrapping="Wrap" Margin="0,8,0,12"/>
-      <StackPanel IsEnabled="{Binding PhotoGradeRasterToolsEnabled}"><WrapPanel><Button Content="添加基础调整" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="BasicTone"/><Button Content="白平衡" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="WhiteBalance"/></WrapPanel>
+     <TabItem Header="调整" x:Name="BasicTab"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="10"><TextBlock Text="光线与色彩" FontSize="17" Foreground="{DynamicResource TextPrimaryBrush}"/><TextBlock Text="{Binding RasterAvailabilityReason}" TextWrapping="Wrap" Margin="0,8,0,12"/>
+      <StackPanel IsEnabled="{Binding DarkroomAdjustmentEnabled}"><WrapPanel><Button Content="添加基础调整" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="BasicTone"/><Button Content="白平衡" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="WhiteBalance"/></WrapPanel>
       <views:StudioToolPanel x:Name="CurrentParameters" NodeTypes="BasicTone"/></StackPanel>
+      <Button Content="应用到光片窗口（相框不变）" Command="{Binding ApplyWindowGradeCommand}"/>
+      <Expander Header="曲线"><StackPanel IsEnabled="{Binding DarkroomAdjustmentEnabled}"><Button Content="添加曲线" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="Curve"/><views:StudioCurveEditor x:Name="PhotographerCurve"/></StackPanel></Expander>
       <Expander Header="从原文件创建曝光版本" Margin="0,12,0,0"><StackPanel><TextBlock Text="不叠加当前调整；将原始已渲染文件建立为新版本，可撤销返回。" TextWrapping="Wrap"/><Slider Minimum="-5" Maximum="5" Value="{Binding SrgbExposureEv}"/><Button Content="创建曝光版本" Command="{Binding ApplySrgbExposureCommand}"/></StackPanel></Expander>
      </StackPanel></ScrollViewer></TabItem>
-     <TabItem Header="曲线" x:Name="CurveTab"><ScrollViewer><StackPanel Margin="10"><TextBlock Text="明暗与通道曲线" FontSize="17"/><TextBlock Text="{Binding RasterAvailabilityReason}" TextWrapping="Wrap" Margin="0,8,0,12"/><StackPanel IsEnabled="{Binding PhotoGradeRasterToolsEnabled}"><Button Content="添加曲线步骤" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="Curve"/><views:StudioCurveEditor x:Name="PhotographerCurve"/></StackPanel></StackPanel></ScrollViewer></TabItem>
-     <TabItem Header="宝丽来" x:Name="PolaroidTab"><ScrollViewer x:Name="PaperScroll" VerticalScrollBarVisibility="Auto"><StackPanel Margin="10"><views:InstantV3Editor x:Name="V3Editor"/></StackPanel></ScrollViewer></TabItem>
+     <TabItem Header="光片" x:Name="PolaroidTab"><Grid><Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+      <ScrollViewer x:Name="PaperScroll" VerticalScrollBarVisibility="Auto"><StackPanel Margin="10">
+       <TextBlock Text="光片" FontSize="18" FontWeight="SemiBold"/><TextBlock Text="{Binding LightPrintStatus}" TextWrapping="Wrap" Margin="0,8"/>
+       <TextBlock Text="{Binding LightPrintRecipeSummary}" TextWrapping="Wrap"/>
+       <Button Content="从原图重新拍一张" Command="{Binding ReshootLightPrintCommand}"/>
+       <ComboBox x:Name="FrameChoice" DropDownClosed="FrameClicked" ItemsSource="{Binding LightPrintFrameChoices}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding SelectedLightPrintFrameId,Mode=TwoWay}" IsEnabled="{Binding LightPrintControlsEnabled}"/>
+       <CheckBox Content="相机动画" IsChecked="{Binding InstantCameraAnimation}"/><Button Content="跳过展示" Command="{Binding SkipInstantDemoCommand}"/>
+       <TextBlock Text="相框 · 通用素材 / 权利明确" FontSize="11" Margin="0,4,0,8"/>
+       <views:InstantV3Editor x:Name="V3Editor" Visibility="{Binding LightPrintRecipeVisible,Converter={StaticResource Bool}}"/>
+      </StackPanel></ScrollViewer>
+      <Border Grid.Row="1" Background="{DynamicResource SurfaceSecondaryBrush}" Padding="8"><StackPanel><Button x:Name="DevelopPrint" Content="显影 · 生成独立变体" Command="{Binding DevelopLightPrintCommand}"/><Button Content="取消待显影预览" Command="{Binding CancelLightPrintPreviewCommand}"/></StackPanel></Border>
+     </Grid></TabItem>
+     <TabItem Header="图层"><ScrollViewer><StackPanel Margin="10"><TextBlock Text="调整步骤"/>
+      <ListBox x:Name="OrderedSteps" ItemsSource="{Binding Editor.AdjustmentNodes}" SelectedItem="{Binding Editor.SelectedAdjustmentNode}" DisplayMemberPath="Name" MaxHeight="240"/>
+      <WrapPanel IsEnabled="{Binding DarkroomAdjustmentEnabled}"><Button Content="上移" Command="{Binding Editor.MoveAdjustmentNodeUpCommand}"/><Button Content="下移" Command="{Binding Editor.MoveAdjustmentNodeDownCommand}"/><Button Content="移除" Command="{Binding Editor.DeleteAdjustmentNodeCommand}"/></WrapPanel>
+      <Expander Header="批量同步"><StackPanel><TextBlock Text="普通编辑栈可将选中步骤同步到已勾选照片；光片独立配方不作普通步骤同步。" TextWrapping="Wrap"/><Button Content="同步选中步骤" Command="{Binding PhotoGradeSyncStepCommand}"/></StackPanel></Expander>
+     </StackPanel></ScrollViewer></TabItem>
+     <TabItem Header="风格"><ScrollViewer><StackPanel Margin="10"><TextBlock Text="普通胶片与预设" FontSize="16"/><TextBlock Text="一次成像请到光片。这里复用普通编辑栈的胶片节点。" TextWrapping="Wrap" Margin="0,8"/><Button Content="添加普通胶片" Command="{Binding Editor.AddAdjustmentNodeCommand}" CommandParameter="Film" IsEnabled="{Binding PhotoGradeRasterToolsEnabled}"/><StackPanel IsEnabled="{Binding PhotoGradeRasterToolsEnabled}"><CheckBox Content="启用普通胶片" IsChecked="{Binding Editor.FilmEnabled}"/><ComboBox ItemsSource="{Binding Editor.FilmProfiles}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding Editor.FilmProfileId,Mode=TwoWay}"/><TextBlock Text="风格强度"/><Slider Minimum="0" Maximum="100" Value="{Binding Editor.FilmProfileAmount}"/><TextBlock Text="颗粒"/><Slider Minimum="0" Maximum="100" Value="{Binding Editor.FilmGrainAmount}"/></StackPanel><TextBlock Text="外部LUT与风格导入尚未接入此页，可返回旧版工作区使用已支持入口。" TextWrapping="Wrap"/></StackPanel></ScrollViewer></TabItem>
+     <TabItem Header="变体" x:Name="VariantsTab"><ScrollViewer><StackPanel Margin="10"><TextBlock Text="同一照片 · 独立变体" FontSize="17"/><TextBlock Text="显影会保留普通编辑和旧光片；选中后切换，画面内调整属于当前光片。" TextWrapping="Wrap"/>
+      <ListBox x:Name="HistoryVersions" ItemsSource="{Binding ActiveTarget.EditVersions}" SelectedItem="{Binding SelectedCatalogVersion}" DisplayMemberPath="Name" MaxHeight="320"/><Button Content="切换所选变体" Command="{Binding SelectEditVersionCommand}"/>
+      <TextBlock Text="{Binding TargetName}" TextWrapping="Wrap"/><Button Content="新建普通编辑变体" Command="{Binding NewNormalLightPrintVariantCommand}"/>
+     </StackPanel></ScrollViewer></TabItem>
     </TabControl>
-    <Expander Grid.Row="1" x:Name="DiagnosticsSection" Header="诊断信息" Margin="0,8,0,0"><StackPanel MaxHeight="130"><TextBlock Text="{Binding PhotoGradeContract}" TextWrapping="Wrap" FontSize="10"/><TextBlock Text="{Binding RawPipelineStatus}" TextWrapping="Wrap" FontSize="10"/><TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" FontSize="10"/></StackPanel></Expander>
+    <Expander Grid.Row="1" x:Name="DiagnosticsSection" Header="帮助与诊断" Margin="0,8,0,0"><StackPanel MaxHeight="130"><TextBlock Text="{Binding PhotoGradeContract}" TextWrapping="Wrap" FontSize="10"/><TextBlock Text="{Binding RawPipelineStatus}" TextWrapping="Wrap" FontSize="10"/><TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" FontSize="10"/></StackPanel></Expander>
    </Grid>
   </Grid>
   <ListBox Grid.Row="2" x:Name="PhotoStrip" ItemsSource="{Binding Targets}" SelectedItem="{Binding ActiveTarget,Mode=OneWay}" ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,10,0,0">
