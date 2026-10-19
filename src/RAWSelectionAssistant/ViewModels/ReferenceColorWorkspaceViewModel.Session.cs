@@ -171,6 +171,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             // Ownership of these exact target instances is now held only by this workspace.
             staged.Targets.Clear();staged.ActiveTarget=null;
             _comparisonKey=staged._comparisonKey;_comparisonImage=staged._comparisonImage;
+            _windowUndo.Clear();_windowRedo.Clear();
             foreach(var old in oldTargets){old.LinearRawMaster=null;old.RawMaster=null;}
         }
         }

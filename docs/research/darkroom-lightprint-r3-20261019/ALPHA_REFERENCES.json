@@ -1,0 +1,429 @@
+{
+  "status": "PASS",
+  "limitCode": 1,
+  "scope": "Existing straight alpha Mix equation;8bit reference quantization. Not a new full-frame color calibration or proof of tool math.",
+  "pillow": "12.3.0",
+  "ffmpeg": "ffmpeg version 9.0.2-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+  "rows": [
+    {
+      "alpha": 0,
+      "product": [
+        0.95,
+        0.935,
+        0.9
+      ],
+      "pillow": [
+        242,
+        238,
+        230
+      ],
+      "ffmpeg": [
+        242,
+        238,
+        230
+      ],
+      "maxCodePillow": 0,
+      "maxCodeFfmpeg": 0
+    },
+    {
+      "alpha": 0,
+      "product": [
+        0.95,
+        0.935,
+        0.9
+      ],
+      "pillow": [
+        242,
+        238,
+        230
+      ],
+      "ffmpeg": [
+        242,
+        238,
+        230
+      ],
+      "maxCodePillow": 0,
+      "maxCodeFfmpeg": 0
+    },
+    {
+      "alpha": 0,
+      "product": [
+        0.95,
+        0.935,
+        0.9
+      ],
+      "pillow": [
+        242,
+        238,
+        230
+      ],
+      "ffmpeg": [
+        242,
+        238,
+        230
+      ],
+      "maxCodePillow": 0,
+      "maxCodeFfmpeg": 0
+    },
+    {
+      "alpha": 0.00392156862745098,
+      "product": [
+        0.9462745098039215,
+        0.9352549019607843,
+        0.8974509803921569
+      ],
+      "pillow": [
+        241,
+        238,
+        229
+      ],
+      "ffmpeg": [
+        241,
+        238,
+        229
+      ],
+      "maxCodePillow": 0,
+      "maxCodeFfmpeg": 0
+    },
+    {
+      "alpha": 0.00392156862745098,
+      "product": [
+        0.9466666666666667,
+        0.9329019607843138,
+        0.899607843137255
+      ],
+      "pillow": [
+        241,
+        237,
+        230
+      ],
+      "ffmpeg": [
+        241,
+        237,
+        230
+      ],
+      "maxCodePillow": 1,
+      "maxCodeFfmpeg": 1
+    },
+    {
+      "alpha": 0.00392156862745098,
+      "product": [
+        0.9501960784313725,
+        0.9313333333333333,
+        0.8992156862745099
+      ],
+      "pillow": [
+        242,
+        237,
+        230
+      ],
+      "ffmpeg": [
+        242,
+        237,
+        230
+      ],
+      "maxCodePillow": 1,
+      "maxCodeFfmpeg": 1
+    },
+    {
+      "alpha": 0.25,
+      "product": [
+        0.7124999999999999,
+        0.95125,
+        0.7375
+      ],
+      "pillow": [
+        181,
+        242,
+        188
+      ],
+      "ffmpeg": [
+        181,
+        242,
+        188
+      ],
+      "maxCodePillow": 1,
+      "maxCodeFfmpeg": 1
+    },
+    {
+      "alpha": 0.25,
+      "product": [
+        0.7374999999999999,
+        0.80125,
+        0.875
+      ],
+      "pillow": [
+        188,
+        204,
+        223
+      ],
+      "ffmpeg": [
+        188,
+        204,
+        223
+      ],
+      "maxCodePillow": 0,
+      "maxCodeFfmpeg": 0
+    },
+    {
+      "alpha": 0.25,
+      "product": [
+        0.9624999999999999,
+        0.70125,
+        0.85
+      ],
+      "pillow": [
+        245,
+        178,
+        217
+      ],
+      "ffmpeg": [
+        245,
+        178,
+        217
+      ],
+      "maxCodePillow": 1,
+      "maxCodeFfmpeg": 1
+    },
+    {
+      "alpha": 0.5,
+      "product": [
+        0.475,
+        0.9675,
+        0.575
+      ],
+      "pillow": [
+        121,
+        247,
+        147
+      ],
+      "ffmpeg": [
+        121,
+        247,
+        147
+      ],
+      "maxCodePillow": 0,
+      "maxCodeFfmpeg": 0
+    },
+    {
+      "alpha": 0.5,
+      "product": [
+        0.5249999999999999,
+        0.6675,
+        0.8500000000000001
+      ],
+      "pillow": [
+        134,
+        170,
+        217
+      ],
+      "ffmpeg": [
+        134,
+        170,
+        217
+      ],
+      "maxCodePillow": 0,
+      "maxCodeFfmpeg": 0
+    },
+    {
+      "alpha": 0.5,
+      "product": [
+        0.975,
+        0.4675,
+        0.8
+      ],
+      "pillow": [
+        249,
+        119,
+        204
+      ],
+      "ffmpeg": [
+        249,
+        119,
+        204
+      ],
+      "maxCodePillow": 0,
+      "maxCodeFfmpeg": 0
+    },
+    {
+      "alpha": 0.75,
+      "product": [
+        0.23750000000000004,
+        0.98375,
+        0.4125
+      ],
+      "pillow": [
+        61,
+        251,
+        106
+      ],
+      "ffmpeg": [
+        61,
+        251,
+        106
+      ],
+      "maxCodePillow": 1,
+      "maxCodeFfmpeg": 1
+    },
+    {
+      "alpha": 0.75,
+      "product": [
+        0.3125,
+        0.5337500000000001,
+        0.8250000000000001
+      ],
+      "pillow": [
+        80,
+        136,
+        211
+      ],
+      "ffmpeg": [
+        80,
+        136,
+        211
+      ],
+      "maxCodePillow": 1,
+      "maxCodeFfmpeg": 1
+    },
+    {
+      "alpha": 0.75,
+      "product": [
+        0.9875,
+        0.23375,
+        0.75
+      ],
+      "pillow": [
+        252,
+        60,
+        191
+      ],
+      "ffmpeg": [
+        252,
+        60,
+        191
+      ],
+      "maxCodePillow": 0,
+      "maxCodeFfmpeg": 0
+    },
+    {
+      "alpha": 0.996078431372549,
+      "product": [
+        0.0037254901960783737,
+        0.9997450980392157,
+        0.25254901960784315
+      ],
+      "pillow": [
+        1,
+        255,
+        65
+      ],
+      "ffmpeg": [
+        1,
+        255,
+        65
+      ],
+      "maxCodePillow": 1,
+      "maxCodeFfmpeg": 1
+    },
+    {
+      "alpha": 0.996078431372549,
+      "product": [
+        0.10333333333333328,
+        0.4020980392156863,
+        0.8003921568627451
+      ],
+      "pillow": [
+        27,
+        103,
+        204
+      ],
+      "ffmpeg": [
+        27,
+        103,
+        204
+      ],
+      "maxCodePillow": 1,
+      "maxCodeFfmpeg": 1
+    },
+    {
+      "alpha": 0.996078431372549,
+      "product": [
+        0.9998039215686274,
+        0.003666666666666707,
+        0.7007843137254901
+      ],
+      "pillow": [
+        255,
+        1,
+        178
+      ],
+      "ffmpeg": [
+        255,
+        1,
+        178
+      ],
+      "maxCodePillow": 1,
+      "maxCodeFfmpeg": 1
+    },
+    {
+      "alpha": 1,
+      "product": [
+        0,
+        1,
+        0.25
+      ],
+      "pillow": [
+        0,
+        255,
+        64
+      ],
+      "ffmpeg": [
+        0,
+        255,
+        64
+      ],
+      "maxCodePillow": 0,
+      "maxCodeFfmpeg": 0
+    },
+    {
+      "alpha": 1,
+      "product": [
+        0.09999999999999998,
+        0.4,
+        0.8
+      ],
+      "pillow": [
+        26,
+        102,
+        204
+      ],
+      "ffmpeg": [
+        26,
+        102,
+        204
+      ],
+      "maxCodePillow": 1,
+      "maxCodeFfmpeg": 1
+    },
+    {
+      "alpha": 1,
+      "product": [
+        1,
+        0,
+        0.7
+      ],
+      "pillow": [
+        255,
+        0,
+        178
+      ],
+      "ffmpeg": [
+        255,
+        0,
+        178
+      ],
+      "maxCodePillow": 0,
+      "maxCodeFfmpeg": 0
+    }
+  ]
+}

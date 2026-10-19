@@ -2,6 +2,12 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using RAWSelectionAssistant.Services;
+if(args.Length==2&&args[0]=="lightprint-alpha")
+{
+ var records=new List<object>();foreach(var a in new[]{0d,1d/255,.25,.5,.75,254d/255,1d})foreach(var foreground in new[]{new RAWSelectionAssistant.Core.Services.Color.ColorVector3(0,1,.25),new(.1,.4,.8),new(1,0,.7)})
+ {var paper=new RAWSelectionAssistant.Core.Services.Color.ColorVector3(.95,.935,.9);var value=Kitao.InstantFilm.Research.CandidateTone.Mix(paper,foreground,a);records.Add(new{alpha=a,foreground=new[]{foreground.X,foreground.Y,foreground.Z},paper=new[]{paper.X,paper.Y,paper.Z},output=new[]{value.X,value.Y,value.Z}});}
+ File.WriteAllText(args[1],JsonSerializer.Serialize(records));return;
+}
 if(args.Length==3&&args[0]=="lightprint-r3"){LightPrintAudit.Run(args[1],args[2]);return;}
 if(args.Length==3&&args[0]=="photographer-trial"){PhotographerTrialAudit.Run(args[1],args[2]);return;}
 if(args.Length==3&&args[0]=="hotspots"){await HotspotAudit.Run(args[1],args[2]);return;}

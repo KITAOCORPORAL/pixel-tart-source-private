@@ -76,7 +76,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private void CancelLightPrintTask(bool restore)
  {
   Interlocked.Increment(ref _lightPrintPreviewRevision);_lightPrintPreviewCancellation?.Cancel();
-  if(restore&&!_disposed&&_lightPrintBeforeDraft is{} prior&&ActiveTarget?.Id==_lightPrintDraftTarget){Editor.RestorePreparedSource(prior,ActiveTarget!.AssetId);_lightPrintBeforeDraft=null;LightPrintStatus="预览已取消，保留上一有效结果。";}
+  if(restore&&!_disposed&&_lightPrintBeforeDraft is{} prior&&ActiveTarget?.Id==_lightPrintDraftTarget){Editor.RestorePreparedSource(prior,ActiveTarget!.AssetId);_lightPrintBeforeDraft=null;_lightPrintReshoot=false;RestoreInstantControls(ActiveTarget.RawDefinition?.InstantFilm);NotifyLightPrint();LightPrintStatus="预览已取消，保留上一有效结果。";}
  }
  private void QueueLightPrintPreview()
  {
@@ -89,9 +89,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   {
    var token=cts.Token;try
    {
-    await Task.Yield();await priorWork;await Task.Delay(90,token);if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
+    await Task.Yield();await priorWork;token.ThrowIfCancellationRequested();var draft=BuildInstantDefinition(target,target.RawDefinition,version,false);draft=draft with{InstantFilm=ApplyLightPrintFrame(draft.InstantFilm!)};await Task.Delay(90,token);if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
     if(_lightPrintBeforeDraft is{} before&&target.RawDefinition is null){Editor.CopyCurrentLookTo([target]);}
-    var definition=BuildInstantDefinition(target,target.RawDefinition,version,false);definition=definition with{InstantFilm=ApplyLightPrintFrame(definition.InstantFilm!)};
+    var definition=draft;
     // Quick draft uses a labelled bounded input; developing/export always use the full frozen source.
     ProfessionalRawMaster master;
     if(RawMatchTiff16ProductPipeline.IsRaw(target.Path))master=ReusableMaster(target,definition)??await DecodeProfessionalInputAsync(target.Path,definition,token);
@@ -106,6 +106,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
      else source=await Task.Run(()=>StudioQuickExport.Load(target.Path,768),token);
      master=InstantFilmJpegInput.FromRendered(source,target.SourceHash??target.ObservedSourceHash!,definition);
     }
+    using var draftSource=RawMatchTiff16ProductPipeline.IsRaw(target.Path)?null:master.Image;
     using var pin=StudioGlobalResources.RetainBuffer(master.Image,(long)master.Image.Rgb32.Length*4);
     var pixels=await RenderProfessionalPreviewAsync(master,definition,900,token);BitmapSource image;
     try{image=RawDisplayBitmapAdapter.ToBitmap(pixels.ToVisualRgb24(token));}finally{pixels.Dispose();}
