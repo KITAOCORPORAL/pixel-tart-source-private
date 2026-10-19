@@ -16,7 +16,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public string SelectedLightPrintFrameId {get=>_selectedLightPrintFrameId;set{if(!LightPrintFrames.Available.Any(f=>f.Id==value&&f.Shippable))return;if(IsLightPrintLocked){LightPrintStatus="此光片已显影；点从原图重新拍一张。";return;}if(SetProperty(ref _selectedLightPrintFrameId,value))QueueLightPrintPreview();}}
  public bool LightPrintRecipeVisible=>!IsLightPrintLocked;
  public bool IsLightPrintLocked=>_lightPrintEnabled&&ActiveTarget?.RawDefinition?.LightPrint is not null&&!_lightPrintReshoot;
- public bool LightPrintControlsEnabled=>!IsLightPrintLocked&&!IsInstantGenerating&&!IsLoading&&!IsExporting;
+ public bool LightPrintControlsEnabled=>ActiveTarget is not null&&!IsLightPrintLocked&&!IsInstantGenerating&&!IsLoading&&!IsExporting;
  public string LightPrintStatus {get=>_lightPrintStatus;private set=>SetProperty(ref _lightPrintStatus,value);}
  public string LightPrintRecipeSummary=>ActiveTarget?.RawDefinition?.LightPrint is{} light?$"已显影 · {PhotographerPaperName} · {LightPrintFrames.Available.First(f=>f.Id==light.FrameId).Name} · 种子 {ActiveTarget.RawDefinition.InstantFilm!.V3!.Random.RootSeed}":"未显影预览 · 不写历史";
  public Task LightPrintPreviewWork {get;private set;}=Task.CompletedTask;
@@ -45,12 +45,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   };
   DevelopLightPrintCommand=new(async _=>
   {
-   if(IsLightPrintLocked||ActiveTarget is not{} target)return;
+   if(_disposed||IsLoading||IsExporting||IsInstantGenerating||IsLightPrintLocked||ActiveTarget is not{} target)return;
    CancelLightPrintTask(false);await LightPrintPreviewWork;if(_disposed||!ReferenceEquals(ActiveTarget,target))return;_developingLightPrint=true;var animation=InstantDevelopmentDemo;
    try{if(_lightPrintBeforeDraft is{} prior)Editor.RestorePreparedSource(prior,target.AssetId);InstantDevelopmentDemo=InstantCameraAnimation;InstantEngineVersion="V3";await GenerateInstantFilmAsync(false);if(target.RawDefinition?.LightPrint is not null){_lightPrintReshoot=false;_lightPrintBeforeDraft=null;LightPrintStatus="显影完成 · 已锁定；可在调整页编辑画面窗口。";}}
    finally{_developingLightPrint=false;InstantDevelopmentDemo=animation;NotifyLightPrint();}
   },_=>ActiveTarget is not null&&!IsLightPrintLocked&&!IsLoading&&!IsExporting&&!IsInstantGenerating);
-  ReshootLightPrintCommand=new(_=>{CancelLightPrintTask(false);_lightPrintReshoot=true;InstantInputMode="Original";InstantV3Seed=BitConverter.ToUInt64(RandomNumberGenerator.GetBytes(8));LightPrintStatus="从原图重新拍摄 · 旧变体保留；显影后生成新变体。";NotifyLightPrint();QueueLightPrintPreview();});
+  ReshootLightPrintCommand=new(_=>{if(_disposed||IsLoading||IsExporting||IsInstantGenerating||ActiveTarget is null)return;CancelLightPrintTask(false);_lightPrintReshoot=true;InstantInputMode="Original";InstantV3Seed=BitConverter.ToUInt64(RandomNumberGenerator.GetBytes(8));LightPrintStatus="从原图重新拍摄 · 旧变体保留；显影后生成新变体。";NotifyLightPrint();QueueLightPrintPreview();});
   CancelLightPrintPreviewCommand=new(_=>CancelLightPrintTask(true));
   NewNormalLightPrintVariantCommand=new(async _=>
   {

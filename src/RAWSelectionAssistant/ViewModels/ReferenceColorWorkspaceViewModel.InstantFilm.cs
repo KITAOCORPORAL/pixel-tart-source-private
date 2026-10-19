@@ -93,7 +93,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             CaptureEditVersion(target);target.ActiveEditVersionId=Guid.NewGuid();target.RawDefinition=d with{InstantFilm=(d.InstantFilm??new()) with{AlgorithmVersion=d.InstantFilm?.AlgorithmVersion??2,ImageEffectsDisabled=true,PaperFrame=InstantPaperFrame,V3=d.InstantFilm?.V3 is{} v3?v3 with{Amount=0}:null}};
             await ActivateTargetAsync(target);CaptureEditVersion(target);
         },Ready);
-        SelectInstantCameraCommand=new(p=>{if(p is "SX-70" or "i-2"){InstantCamera=(string)p;OnPropertyChanged(nameof(InstantCamera));}},_=>!IsInstantGenerating);
+        SelectInstantCameraCommand=new(p=>{if(IsLightPrintLocked)return;if(p is "SX-70" or "i-2"){InstantCamera=(string)p;OnPropertyChanged(nameof(InstantCamera));}},_=>!IsInstantGenerating);
     }
     private void RestoreInstantControls(InstantFilmDefinition? film)
     {

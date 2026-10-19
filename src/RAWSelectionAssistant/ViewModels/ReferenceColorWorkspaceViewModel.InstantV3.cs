@@ -122,7 +122,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
    catch(OperationCanceledException){}
    catch(Exception e)when(e is IOException or NotSupportedException or InvalidDataException or System.Runtime.InteropServices.COMException){StatusText="Second exposure: "+e.Message;}
   },_=>InstantEditingAllowed);
-  ClearSecondExposureCommand=new(_=>{InstantSecondInput=null;OnPropertyChanged(nameof(InstantSecondSourceName));});
+  ClearSecondExposureCommand=new(_=>{if(IsLightPrintLocked)return;InstantSecondInput=null;OnPropertyChanged(nameof(InstantSecondSourceName));});
   UndoInstantV3Command=new(async _=>await MoveInstantVersion(_instantV3Undo,_instantV3Redo));
   RedoInstantV3Command=new(async _=>await MoveInstantVersion(_instantV3Redo,_instantV3Undo));
   InitializePhotoGradeHistoryCommands();
