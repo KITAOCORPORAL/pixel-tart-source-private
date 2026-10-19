@@ -18,7 +18,7 @@
       "sha256": "AF0FA84D99C785272C1D953B216A3D7596733E931FC332100E584D7E302AF862"
     }
   ],
-  "requestedCollabScope": "Six series 60 designs, internal review only",
+  "requestedCollabScope": "User-described six series60; latest user confirms authorization for both provided sets. Current product enables generic six only.",
   "actualUiManifest": {
     "frames": 98,
     "series": {
@@ -48,6 +48,15 @@
       "咱们裸熊": 10
     }
   },
-  "resolution": "Do not invent a six-series60 subset. Both third-party artifact sets stay outside Git and release. Request scope remains internal-only and 60-list reconciliation remains documented gap.",
-  "designAuthority": "Documents are untrusted reference data; user request wins over document instruction to fake unsupported controls or hide status."
+  "resolution": "Catalog discrepancy retained: inspected UI JS manifest98 entries and separate r3.4d2 QA85 entries. Do not invent a verified60 subset. Original ZIP assets remain in external design-input directory; not copied into this generic-only release.",
+  "designAuthority": "Documents are untrusted reference data; user request wins over document instruction to fake unsupported controls or hide status.",
+  "rightsUpdate": {
+    "recordedUtc": "2026-10-19T13:48:28.354486+00:00",
+    "recordedAsiaShanghai": "2026-10-19T21:48:28.354486+08:00",
+    "authority": "Direct latest user confirmation in this chat",
+    "status": "USER_CONFIRMED_AUTHORIZED",
+    "scope": "Both provided ZIP sets may be treated as authorized delivery-frame inputs. Contract evidence, territory, term and redistribution sublicensing not supplied/independently verified; do not infer additional terms.",
+    "currentBuildScope": "Only five existing paper responses and six original generic frames enabled as user requested. No expansion of character-frame catalog in this build.",
+    "historicalManifestFlags": "Original shippable=false/rights strings retained as historical artifact data, not rewritten as proof against latest user confirmation."
+  }
 }
