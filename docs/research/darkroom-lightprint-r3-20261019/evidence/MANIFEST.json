@@ -1,0 +1,347 @@
+[
+  {
+    "path": "artifacts/lightprint/01-tests/lightprint.trx",
+    "bytes": 6976,
+    "sha256": "22CE945BC68951F9BFC944F076B0934CFC63898ECCD72126CBD767E5E8A38F80"
+  },
+  {
+    "path": "artifacts/lightprint/02-tests/lightprint-fixed.trx",
+    "bytes": 5439,
+    "sha256": "1DA4B45F837FE9C342931F5EF6948975E9669E737411D75F7AADDAC5008816F7"
+  },
+  {
+    "path": "artifacts/lightprint/03-tests/lightprint-safety.trx",
+    "bytes": 12591,
+    "sha256": "BA05356EE27E2F97D6707E08E8F66EE19F92CAEFCB64F814C4F7BAC89B8F3094"
+  },
+  {
+    "path": "artifacts/lightprint/06-tests/workflow.trx",
+    "bytes": 11154,
+    "sha256": "8FFBC62F3DAE53B8513E3FA41BDEFEBADCAB17AB39CB6A247DFBA7F77712DF2B"
+  },
+  {
+    "path": "artifacts/lightprint/07-tests/lock-and-aspect.trx",
+    "bytes": 12591,
+    "sha256": "1C655F54DA92399BE98391DB827861A6D76920597D37C371D43F6C17AC009378"
+  },
+  {
+    "path": "artifacts/lightprint/08-tests/bounded-regression.trx",
+    "bytes": 20897,
+    "sha256": "76353E826EEF822A3697D35B9E09DA15992F7871441F9E5179A78EEC3D53063E"
+  },
+  {
+    "path": "artifacts/lightprint/09-tests/border-all.trx",
+    "bytes": 11154,
+    "sha256": "6C8D79DD5D2449F1881D4D87F0E5359871EEE8354F3E7DC1A0EE3AAEDB20975E"
+  },
+  {
+    "path": "artifacts/lightprint/11-tests/draft-transaction.trx",
+    "bytes": 14048,
+    "sha256": "A37A01D3702701A28AC2D7E0A60C4DEC7168E967765A75BF15DB7EDA8103EB87"
+  },
+  {
+    "path": "artifacts/lightprint/12-tests/quick-hq-race.trx",
+    "bytes": 11959,
+    "sha256": "85DA3349AE7C6CDE6ED74BA93811E98F6537A28567F77DB59FC4B53EC40DC7D5"
+  },
+  {
+    "path": "artifacts/lightprint/13-tests/hq-decoder-fixed.trx",
+    "bytes": 12724,
+    "sha256": "D938196F369E13F845D24AFE5CEBB9355937E1AFE377D45665D746F7A1344E8F"
+  },
+  {
+    "path": "artifacts/lightprint/14-tests/preview-hq.trx",
+    "bytes": 14048,
+    "sha256": "9E77327D46F72896A9D76B7053CB1BD311947EC0EF687333F2F9C0B04E05C883"
+  },
+  {
+    "path": "artifacts/lightprint/15-tests/final-workflow.trx",
+    "bytes": 14141,
+    "sha256": "46431E1E26933A83DE5A27C50E4E81CFC137F15D31CA72A3CFF416641C3D98C1"
+  },
+  {
+    "path": "artifacts/lightprint/16-tests/release-scope.trx",
+    "bytes": 22447,
+    "sha256": "D0B6737F9843299B0814AD6554D7468090EAB534F737DC886E0B44E65B364EC7"
+  },
+  {
+    "path": "artifacts/lightprint/17-tests/window-transaction.trx",
+    "bytes": 12704,
+    "sha256": "7EBDA38166A1882EFCCE9F598E3AD23A2B6A91E91FFDBE3D5F822AD6965D649E"
+  },
+  {
+    "path": "artifacts/lightprint/18-tests/home-final-source.trx",
+    "bytes": 22447,
+    "sha256": "C9D77943AA8ED47BDF5E21467D0DC55B194C8E1AFC2ED9A8CAA77E37CC8EB525"
+  },
+  {
+    "path": "artifacts/lightprint/19-bindings.json",
+    "bytes": 91411,
+    "sha256": "411F0BA15EA70399220CD092231ADA2125FCE8ACE2A0C2C851BD7A59FAA483A8"
+  },
+  {
+    "path": "artifacts/lightprint/19-publish.log",
+    "bytes": 2342,
+    "sha256": "EDB7A19E45F42AD7AA9CD119B83810A284F5571AC8587B3F0FB2781A1D6BBBE5"
+  },
+  {
+    "path": "artifacts/lightprint/19-release-files.json",
+    "bytes": 46403,
+    "sha256": "D57ECBD2A202047D21C7186DC688DECCCC4347108EE5AB46A69BDADD7D2A5507"
+  },
+  {
+    "path": "artifacts/lightprint/19-run.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/lightprint/19-test-build.log",
+    "bytes": 97401,
+    "sha256": "1B4FF4D2CFA0139461A600F02E47149D5F9B13592628ED19CB09F77E5795E73B"
+  },
+  {
+    "path": "artifacts/lightprint/19-tool-build.log",
+    "bytes": 2884,
+    "sha256": "2879F967203633641DF6E8902C7459805845A7B75E063A4F437FF77DB52D910C"
+  },
+  {
+    "path": "artifacts/lightprint/20-final-wpf.log",
+    "bytes": 1444,
+    "sha256": "41CDCAF7DE08D5A043B901132012212BB1C6FABF22BEC5BED1B3E15FE627E773"
+  },
+  {
+    "path": "artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/discovery.json",
+    "bytes": 898716,
+    "sha256": "1AEB51DB76F3EB4B0BEEAB10BDEB8BBBC1867AE8BC662AD3BBFA229B1E53F146"
+  },
+  {
+    "path": "artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/stderr.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/stdout.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/summary.json",
+    "bytes": 20048,
+    "sha256": "C9400300B972B85E024CFE816FAD92B5A1051373740F5DF34B3490C56A9B0729"
+  },
+  {
+    "path": "artifacts/lightprint/21-final-wpf.log",
+    "bytes": 420,
+    "sha256": "C4127236F97441278D8B92CD982024C7385C2D83885323D5E1479AD8B18378F2"
+  },
+  {
+    "path": "artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/discovery.json",
+    "bytes": 843691,
+    "sha256": "81F0041A74EE845F4B2F76A9F0A17A15563AA8DFD4C7FA790029DAD68420C79B"
+  },
+  {
+    "path": "artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/stderr.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/stdout.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/summary.json",
+    "bytes": 32237,
+    "sha256": "399A957379F8C43C5837CBDAD015AE168CB58EEB90421F94179D75775F7757FA"
+  },
+  {
+    "path": "artifacts/lightprint/22-final-core.log",
+    "bytes": 503,
+    "sha256": "D3898962D0E36C3966115154855DB37D39062014979343AC28CEAEA280A9B32D"
+  },
+  {
+    "path": "artifacts/lightprint/23-startup-result.json",
+    "bytes": 558,
+    "sha256": "0EEAB7245884D275E87A9EB04E9C6FFB1FBE75E904EF081E6146705793ABA0B9"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/000/results.trx",
+    "bytes": 7005,
+    "sha256": "7E9279367E762E1BB70EC40D7013878C27FD366CB79B901E190F4DA1E9372670"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/000/runsettings.xml",
+    "bytes": 650,
+    "sha256": "F614BE532D2244D9B73DB32550FC4F550456F5656AE195C4C15FDDC805B97B13"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/000/stderr.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/000/stdout.log",
+    "bytes": 408,
+    "sha256": "DF8583B54A23A50D692BA7B198DCB4DEC8EC4BB88814DFB2A527E3F3F9651E5E"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/001/results.trx",
+    "bytes": 4138,
+    "sha256": "3556AD2CD0193FE09FCF7F66766722B314372F27F2656CDE0784C44BE39B45EE"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/001/runsettings.xml",
+    "bytes": 571,
+    "sha256": "483092B5BA51B831DD80B2B747EE2A6903B14DACA42184D9EAB21A240FE3514F"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/001/stderr.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/001/stdout.log",
+    "bytes": 408,
+    "sha256": "BF7886C9A6961062C6F3DB97D76E9E81CF20368131B08EB5DFB35E842CED2D37"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/002/results.trx",
+    "bytes": 8098,
+    "sha256": "5E6D7A6D0D6D7BD68C4A49F9DB3D05B593C478718555B1796AA9C35744D5F96F"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/002/runsettings.xml",
+    "bytes": 883,
+    "sha256": "C9E28C217F58930EEAB734C5CB12D937E61067CEDED5622D83619BF7A06D59C2"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/002/stderr.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/002/stdout.log",
+    "bytes": 495,
+    "sha256": "546D9E258AC045085D21EDF52A12DABEA56B2EF0612B2FBF575B00CBB39068AF"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/003/results.trx",
+    "bytes": 6967,
+    "sha256": "91CED6CFBF4F561E0963B821FF11FC203D4D74B3BEC3E93D4825DA8521E6FDD0"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/003/runsettings.xml",
+    "bytes": 810,
+    "sha256": "CC2B68128CE834473FA37029A877E63891FE9F8D2395326FDA0AD148E22DF5A8"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/003/stderr.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/21-final-wpf/run-20261019-221143-f7537440/003/stdout.log",
+    "bytes": 411,
+    "sha256": "E6C3B40A0F180B39FBE4513E8B32729D42D36D5B30C0AB244D8B92A5D7B4D4DB"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/000/results.trx",
+    "bytes": 11559,
+    "sha256": "85228F4759752BAC99D81E595D3E0A503DD18509915B1629E57538C5A0C0752A"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/000/runsettings.xml",
+    "bytes": 1276,
+    "sha256": "B0A19074CFC7A106AAEEECB92C38AF444E86D1E99F06EC0E1D55846CA2F3467F"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/000/stderr.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/000/stdout.log",
+    "bytes": 409,
+    "sha256": "BA46B2B3E88B258856D6D36F4D7DB35C7EE7AD92E71F9619A6FE8C63DC8A4C7F"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/001/results.trx",
+    "bytes": 7070,
+    "sha256": "E426D6AA8A2BE696F193BE7962CA3F3C8DFADD32523043DDA2E874168148CB5A"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/001/runsettings.xml",
+    "bytes": 787,
+    "sha256": "53005CBBD2116ECE3FC661EAD95EEF2A67B2F4ED2F10BDA80FE8A6871F50142F"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/001/stderr.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/001/stdout.log",
+    "bytes": 409,
+    "sha256": "7B7187858C78968D8B08261131FA1DE80513216FC8AE2CD997300DC33F1E4E82"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/002/results.trx",
+    "bytes": 7292,
+    "sha256": "8D56D86F0963D6D7554A781BAD08FBE93BA2F8109F8EF16BB9C2B7BCFF693126"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/002/runsettings.xml",
+    "bytes": 869,
+    "sha256": "D3558D49CEE900BD1B56FAC7BD1DA43D157EC69870B2E5BE19BD2207837DFC46"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/002/stderr.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/002/stdout.log",
+    "bytes": 409,
+    "sha256": "8CE8262622D23BFFFC625E58F791669FCF8BD71869CB3CB4AAD7A34834B47A8E"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/003/results.trx",
+    "bytes": 12948,
+    "sha256": "3AB5F27D88E7FFA4F58AC1A9BAECE9406D631CEC70DFF358F419E36EF7D4B71F"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/003/runsettings.xml",
+    "bytes": 1413,
+    "sha256": "659CCC709FEA0B0B1495D38AEF65075CAC2343AA24874968E54E498F76218376"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/003/stderr.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/003/stdout.log",
+    "bytes": 409,
+    "sha256": "F2759E9E9FE99F3569D30B03695A1549990FF73E3FBAB2D8AAE5D3D129E8EBC3"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/004/results.trx",
+    "bytes": 6874,
+    "sha256": "0B5FD0A152A5599D84A1DD5611E91F3AEBB0699F0680D0583A41954FD5EBF27B"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/004/runsettings.xml",
+    "bytes": 719,
+    "sha256": "34103BDEEFA3B92638A32CEFCBC111A9A93592DC0AF8433AD71CB0D11C938682"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/004/stderr.log",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "N:/pixart/darkroom-lightprint-r3-20261019/artifacts/lightprint/22-final-core/run-20261019-221344-9c56755d/004/stdout.log",
+    "bytes": 408,
+    "sha256": "063BBB56F867DA18CFBF2C9CE5DA037443842BD781779A7C7A85B1AC332B6AF2"
+  }
+]

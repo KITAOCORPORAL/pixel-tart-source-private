@@ -1,0 +1,25 @@
+[
+  {
+    "suite": "21-final-wpf",
+    "counts": {
+      "Passed": 13,
+      "NotExecuted": 1
+    },
+    "selected": 14,
+    "assemblySha256": "cc778fc544ed97286f16b222166eb3119daa14687bba32b3bd961078991ad294",
+    "runnerStatus": "FAILED",
+    "missing": [],
+    "timeouts": []
+  },
+  {
+    "suite": "22-final-core",
+    "counts": {
+      "Passed": 27
+    },
+    "selected": 27,
+    "assemblySha256": "085c8689eb6c757afc318fac74e49eb3f9eb64fbbc388f51faa90adb802731a8",
+    "runnerStatus": "PASSED",
+    "missing": [],
+    "timeouts": []
+  }
+]

@@ -1,0 +1,55 @@
+{
+  "currentScope": "Generic-only six frames",
+  "type": "Core procedural frame definitions and transparent window coverage, not copied raster character assets",
+  "rights": "Project authored procedural geometry; latest user separately confirms authorization of both ZIP sets, not expanded in this build",
+  "frames": [
+    {
+      "id": "generic.white.square",
+      "name": "经典暖白 · 方窗",
+      "color": "Warm",
+      "pattern": "Plain",
+      "window": "Rectangle",
+      "shippable": true
+    },
+    {
+      "id": "generic.neutral.square",
+      "name": "中性白 · 方窗",
+      "color": "Neutral",
+      "pattern": "Plain",
+      "window": "Rectangle",
+      "shippable": true
+    },
+    {
+      "id": "generic.cool.square",
+      "name": "冷白 · 方窗",
+      "color": "Cool",
+      "pattern": "Plain",
+      "window": "Rectangle",
+      "shippable": true
+    },
+    {
+      "id": "generic.white.circle",
+      "name": "暖白 · 圆窗",
+      "color": "Warm",
+      "pattern": "Plain",
+      "window": "Circle",
+      "shippable": true
+    },
+    {
+      "id": "generic.dots.square",
+      "name": "点纹 · 方窗",
+      "color": "Neutral",
+      "pattern": "Dots",
+      "window": "Rectangle",
+      "shippable": true
+    },
+    {
+      "id": "generic.foil.circle",
+      "name": "柔金属 · 圆窗",
+      "color": "Cool",
+      "pattern": "Foil",
+      "window": "Circle",
+      "shippable": true
+    }
+  ]
+}

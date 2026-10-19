@@ -1,0 +1,62 @@
+[
+  {
+    "repository": "python-pillow/Pillow",
+    "commit": "bb1d8e8ab8d29048624d96e3ee53cecf7c13d13d",
+    "files": [
+      {
+        "path": "src/libImaging/AlphaComposite.c",
+        "gitBlob": "d1a1e7ad34a511a792bb9b60f8883680b9f2012d",
+        "sha256": "0063c136b8bb2be51e2fb76fac222a7ae96b438f3c09706834862d9c1ac62c93",
+        "bytes": 2679
+      },
+      {
+        "path": "LICENSE",
+        "gitBlob": "c011511a4ab6bd2bc901608e6b4c0fad95fc410f",
+        "sha256": "15181e7363dca9aed78b79bebebc7fde7f1814b8bd311ea3b87ae8ccadfc185b",
+        "bytes": 1457
+      }
+    ]
+  },
+  {
+    "repository": "FFmpeg/FFmpeg",
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "files": [
+      {
+        "path": "libavfilter/vf_overlay.c",
+        "gitBlob": "43f6e736c33e9a881591ea8b189a3706d9e59d26",
+        "sha256": "3e3c15dc3e207a5e990033d233912345d6826c92d955ba5d1205994000c0124a",
+        "bytes": 52239
+      },
+      {
+        "path": "COPYING.LGPLv2.1",
+        "gitBlob": "40924c2a6da76a2b0c639f6fe7ef0b2d095a6adb",
+        "sha256": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30",
+        "bytes": 26517
+      }
+    ]
+  },
+  {
+    "repository": "AcademySoftwareFoundation/OpenColorIO",
+    "commit": "6918fad3f5d22ac3ef2397c754bf4268c2b58dd0",
+    "files": [
+      {
+        "path": "src/OpenColorIO/ops/gamma/GammaOpCPU.cpp",
+        "gitBlob": "ace0006ca85dce7d9ea309134058ebe884c27ff5",
+        "sha256": "aa603205abcfd168fa3bc6cd64e1404e55fe589299dbdc508564bb74910e199a",
+        "bytes": 26851
+      },
+      {
+        "path": "src/OpenColorIO/ops/gamma/GammaOpData.cpp",
+        "gitBlob": "482a5b79d7bb989a52d96ff2f74df3632a9468b9",
+        "sha256": "c60d3332a9be598304a8eb1dec30f236b1d573b488253003d0d5bd540489ac68",
+        "bytes": 24990
+      },
+      {
+        "path": "LICENSE",
+        "gitBlob": "a934d463c1526d2dfe3ba72fb18f1e455d416995",
+        "sha256": "82a40c52065ee968aa62015735e84378ac11425db7a233e6a2dcd2c83fc24276",
+        "bytes": 1485
+      }
+    ]
+  }
+]

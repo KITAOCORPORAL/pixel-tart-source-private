@@ -1,0 +1,35 @@
+[
+  {
+    "run": "01-tests",
+    "classification": "RETAINED_SUPERSEDED_FAILURE",
+    "failures": [
+      {
+        "name": "ClicksPreviewWithoutHistoryThenDevelopLocksAndReshootKeepsVariant",
+        "outcome": "Failed",
+        "message": "Assert.AreEqual 失败。应为: <1>，实际为: <2>。‘expected’表达式:‘count+1’,‘actual’表达式:‘target.EditVersions.Count’。"
+      }
+    ]
+  },
+  {
+    "run": "12-tests",
+    "classification": "RETAINED_SUPERSEDED_FAILURE",
+    "failures": [
+      {
+        "name": "CancelAndSwitchNeverPublishObsoleteDraft",
+        "outcome": "Failed",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.LightPrintR3Tests。CancelAndSwitchNeverPublishObsoleteDraft 引发了异常: \r\nSystem.TimeoutException: The operation has timed out."
+      }
+    ]
+  },
+  {
+    "run": "13-tests",
+    "classification": "RETAINED_SUPERSEDED_FAILURE",
+    "failures": [
+      {
+        "name": "CancelAndSwitchNeverPublishObsoleteDraft",
+        "outcome": "Failed",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.LightPrintR3Tests。CancelAndSwitchNeverPublishObsoleteDraft 引发了异常: \r\nSystem.TimeoutException: preview gate"
+      }
+    ]
+  }
+]

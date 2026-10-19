@@ -1,0 +1,71 @@
+{
+  "paperPreviewChanges": true,
+  "framePreviewChanges": true,
+  "latestClickWins": true,
+  "recipeLocked": true,
+  "borderUnaffected": true,
+  "saveReopen": true,
+  "source": "95a6320b6543da2a49ec40c9d05f870e9e181728",
+  "testInputScope": "Two different authorized Canon/Sony frozen photos converted to max-edge1000 review inputs; not a fresh full-size RAW repeat claim.",
+  "exports": [
+    {
+      "format": 2,
+      "sha256": "A9988FB6A990FB15853D86E46FA7B7CA96F182FB6FD76353131FB4BE9B877DEC",
+      "inspection": {
+        "Width": 767,
+        "Height": 884,
+        "BitDepth": 16,
+        "Orientation": 1,
+        "Srgb": true,
+        "JpegQuality": null,
+        "MeanAbsoluteError": 0,
+        "RootMeanSquareError": 0,
+        "MaximumError": 0,
+        "EncoderConfiguration": "V3DirectStripsPNG16"
+      }
+    },
+    {
+      "format": 3,
+      "sha256": "31D4AFB9382115C57C458B7F1295E6C55C0621C9844100250A5C63FC19CCCEF3",
+      "inspection": {
+        "Width": 767,
+        "Height": 884,
+        "BitDepth": 16,
+        "Orientation": 1,
+        "Srgb": true,
+        "JpegQuality": null,
+        "MeanAbsoluteError": 0,
+        "RootMeanSquareError": 0,
+        "MaximumError": 0,
+        "EncoderConfiguration": "V3DirectStripsTIFF16"
+      }
+    },
+    {
+      "format": 1,
+      "sha256": "CB91EB1169E3B1D3D115C0A98960DA66C500C2335F0CC2004DD660DE2722E3EA",
+      "inspection": {
+        "Width": 767,
+        "Height": 884,
+        "BitDepth": 8,
+        "Orientation": 1,
+        "Srgb": true,
+        "JpegQuality": 95,
+        "MeanAbsoluteError": 0.5554116742474745,
+        "RootMeanSquareError": 0.9916334863922845,
+        "MaximumError": 19,
+        "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+      }
+    }
+  ],
+  "frameIds": [
+    "generic.white.square",
+    "generic.neutral.square",
+    "generic.cool.square",
+    "generic.white.circle",
+    "generic.dots.square",
+    "generic.foil.circle"
+  ],
+  "screenMethod": "Real WPF offscreen RenderTargetBitmap, 1366x768 and1920x1080; no physical mouse claim",
+  "physicalMouse": "NOT_RUN",
+  "physicalRecording": "NOT_RUN"
+}
