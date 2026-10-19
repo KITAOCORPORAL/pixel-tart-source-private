@@ -11,100 +11,100 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public bool IsInstantV3Selected=>InstantEngineVersion=="V3";
  public bool IsInstantV2Selected=>!IsInstantV3Selected;
  private double _instantV3Exposure;
- public double InstantV3Exposure {get=>_instantV3Exposure;set{if(EqualityComparer<double>.Default.Equals(_instantV3Exposure,value))return;_instantV3Exposure=value;OnPropertyChanged(nameof(InstantV3Exposure));}}
+ public double InstantV3Exposure {get=>_instantV3Exposure;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Exposure,value))return;_instantV3Exposure=value;OnPropertyChanged(nameof(InstantV3Exposure));}}
  private double _instantV3Toe=.025;
- public double InstantV3Toe {get=>_instantV3Toe;set{if(EqualityComparer<double>.Default.Equals(_instantV3Toe,value))return;_instantV3Toe=value;OnPropertyChanged(nameof(InstantV3Toe));}}
+ public double InstantV3Toe {get=>_instantV3Toe;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Toe,value))return;_instantV3Toe=value;OnPropertyChanged(nameof(InstantV3Toe));}}
  private double _instantV3Shoulder=.3;
- public double InstantV3Shoulder {get=>_instantV3Shoulder;set{if(EqualityComparer<double>.Default.Equals(_instantV3Shoulder,value))return;_instantV3Shoulder=value;OnPropertyChanged(nameof(InstantV3Shoulder));}}
+ public double InstantV3Shoulder {get=>_instantV3Shoulder;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Shoulder,value))return;_instantV3Shoulder=value;OnPropertyChanged(nameof(InstantV3Shoulder));}}
  private double _instantV3Density=1;
- public double InstantV3Density {get=>_instantV3Density;set{if(EqualityComparer<double>.Default.Equals(_instantV3Density,value))return;_instantV3Density=value;OnPropertyChanged(nameof(InstantV3Density));}}
+ public double InstantV3Density {get=>_instantV3Density;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Density,value))return;_instantV3Density=value;OnPropertyChanged(nameof(InstantV3Density));}}
  private double _instantV3Softness=.1;
- public double InstantV3Softness {get=>_instantV3Softness;set{if(EqualityComparer<double>.Default.Equals(_instantV3Softness,value))return;_instantV3Softness=value;OnPropertyChanged(nameof(InstantV3Softness));}}
+ public double InstantV3Softness {get=>_instantV3Softness;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Softness,value))return;_instantV3Softness=value;OnPropertyChanged(nameof(InstantV3Softness));}}
  private double _instantV3Diffusion=.07;
- public double InstantV3Diffusion {get=>_instantV3Diffusion;set{if(EqualityComparer<double>.Default.Equals(_instantV3Diffusion,value))return;_instantV3Diffusion=value;OnPropertyChanged(nameof(InstantV3Diffusion));}}
+ public double InstantV3Diffusion {get=>_instantV3Diffusion;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Diffusion,value))return;_instantV3Diffusion=value;OnPropertyChanged(nameof(InstantV3Diffusion));}}
  private double _instantV3Texture=.0015;
- public double InstantV3Texture {get=>_instantV3Texture;set{if(EqualityComparer<double>.Default.Equals(_instantV3Texture,value))return;_instantV3Texture=value;OnPropertyChanged(nameof(InstantV3Texture));}}
+ public double InstantV3Texture {get=>_instantV3Texture;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Texture,value))return;_instantV3Texture=value;OnPropertyChanged(nameof(InstantV3Texture));}}
  private double _instantV3Aging;
- public double InstantV3Aging {get=>_instantV3Aging;set{if(EqualityComparer<double>.Default.Equals(_instantV3Aging,value))return;_instantV3Aging=value;OnPropertyChanged(nameof(InstantV3Aging));}}
+ public double InstantV3Aging {get=>_instantV3Aging;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Aging,value))return;_instantV3Aging=value;OnPropertyChanged(nameof(InstantV3Aging));}}
  public IReadOnlyList<string> InstantV3Stocks {get;}=["Base","Womb01351.Stock0","Womb01351.Stock1","Womb01351.Stock2","Womb01351.Stock3","Womb01351.Stock4","Womb01351.Stock5"];
  private string _instantV3Stock="Base";
- public string InstantV3Stock {get=>_instantV3Stock;set{if(EqualityComparer<string>.Default.Equals(_instantV3Stock,value))return;_instantV3Stock=value;OnPropertyChanged(nameof(InstantV3Stock));}}
+ public string InstantV3Stock {get=>_instantV3Stock;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<string>.Default.Equals(_instantV3Stock,value))return;_instantV3Stock=value;OnPropertyChanged(nameof(InstantV3Stock));}}
  private double _instantV3Fog;
- public double InstantV3Fog {get=>_instantV3Fog;set{if(EqualityComparer<double>.Default.Equals(_instantV3Fog,value))return;_instantV3Fog=value;OnPropertyChanged(nameof(InstantV3Fog));}}
+ public double InstantV3Fog {get=>_instantV3Fog;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Fog,value))return;_instantV3Fog=value;OnPropertyChanged(nameof(InstantV3Fog));}}
  private double _instantV3ShadowCast;
- public double InstantV3ShadowCast {get=>_instantV3ShadowCast;set{if(EqualityComparer<double>.Default.Equals(_instantV3ShadowCast,value))return;_instantV3ShadowCast=value;OnPropertyChanged(nameof(InstantV3ShadowCast));}}
+ public double InstantV3ShadowCast {get=>_instantV3ShadowCast;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3ShadowCast,value))return;_instantV3ShadowCast=value;OnPropertyChanged(nameof(InstantV3ShadowCast));}}
  private double _instantV3Warmth;
- public double InstantV3Warmth {get=>_instantV3Warmth;set{if(EqualityComparer<double>.Default.Equals(_instantV3Warmth,value))return;_instantV3Warmth=value;OnPropertyChanged(nameof(InstantV3Warmth));}}
+ public double InstantV3Warmth {get=>_instantV3Warmth;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Warmth,value))return;_instantV3Warmth=value;OnPropertyChanged(nameof(InstantV3Warmth));}}
  private double _instantV3FrameDrift;
- public double InstantV3FrameDrift {get=>_instantV3FrameDrift;set{if(EqualityComparer<double>.Default.Equals(_instantV3FrameDrift,value))return;_instantV3FrameDrift=value;OnPropertyChanged(nameof(InstantV3FrameDrift));}}
+ public double InstantV3FrameDrift {get=>_instantV3FrameDrift;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3FrameDrift,value))return;_instantV3FrameDrift=value;OnPropertyChanged(nameof(InstantV3FrameDrift));}}
  private double _instantV3Fade;
- public double InstantV3Fade {get=>_instantV3Fade;set{if(EqualityComparer<double>.Default.Equals(_instantV3Fade,value))return;_instantV3Fade=value;OnPropertyChanged(nameof(InstantV3Fade));}}
+ public double InstantV3Fade {get=>_instantV3Fade;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Fade,value))return;_instantV3Fade=value;OnPropertyChanged(nameof(InstantV3Fade));}}
  public IReadOnlyList<string> InstantV3Patterns {get;}=["Plain","Leather","Dots","Stripes","Foil"];
  private string _instantV3Pattern="Plain";
- public string InstantV3Pattern {get=>_instantV3Pattern;set{if(EqualityComparer<string>.Default.Equals(_instantV3Pattern,value))return;_instantV3Pattern=value;OnPropertyChanged(nameof(InstantV3Pattern));}}
+ public string InstantV3Pattern {get=>_instantV3Pattern;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<string>.Default.Equals(_instantV3Pattern,value))return;_instantV3Pattern=value;OnPropertyChanged(nameof(InstantV3Pattern));}}
  private bool _instantV3Circle;
- public bool InstantV3Circle {get=>_instantV3Circle;set{if(EqualityComparer<bool>.Default.Equals(_instantV3Circle,value))return;_instantV3Circle=value;OnPropertyChanged(nameof(InstantV3Circle));}}
+ public bool InstantV3Circle {get=>_instantV3Circle;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<bool>.Default.Equals(_instantV3Circle,value))return;_instantV3Circle=value;OnPropertyChanged(nameof(InstantV3Circle));}}
  private double _instantV3Reflection;
- public double InstantV3Reflection {get=>_instantV3Reflection;set{if(EqualityComparer<double>.Default.Equals(_instantV3Reflection,value))return;_instantV3Reflection=value;OnPropertyChanged(nameof(InstantV3Reflection));}}
+ public double InstantV3Reflection {get=>_instantV3Reflection;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Reflection,value))return;_instantV3Reflection=value;OnPropertyChanged(nameof(InstantV3Reflection));}}
  private double _instantV3ReflectionAngle;
- public double InstantV3ReflectionAngle {get=>_instantV3ReflectionAngle;set{if(EqualityComparer<double>.Default.Equals(_instantV3ReflectionAngle,value))return;_instantV3ReflectionAngle=value;OnPropertyChanged(nameof(InstantV3ReflectionAngle));}}
+ public double InstantV3ReflectionAngle {get=>_instantV3ReflectionAngle;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3ReflectionAngle,value))return;_instantV3ReflectionAngle=value;OnPropertyChanged(nameof(InstantV3ReflectionAngle));}}
  private double _instantV3ReflectionWidth=.15;
- public double InstantV3ReflectionWidth {get=>_instantV3ReflectionWidth;set{if(EqualityComparer<double>.Default.Equals(_instantV3ReflectionWidth,value))return;_instantV3ReflectionWidth=value;OnPropertyChanged(nameof(InstantV3ReflectionWidth));}}
+ public double InstantV3ReflectionWidth {get=>_instantV3ReflectionWidth;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3ReflectionWidth,value))return;_instantV3ReflectionWidth=value;OnPropertyChanged(nameof(InstantV3ReflectionWidth));}}
  private double _instantV3Zoom=1;
- public double InstantV3Zoom {get=>_instantV3Zoom;set{if(EqualityComparer<double>.Default.Equals(_instantV3Zoom,value))return;_instantV3Zoom=value;OnPropertyChanged(nameof(InstantV3Zoom));}}
+ public double InstantV3Zoom {get=>_instantV3Zoom;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Zoom,value))return;_instantV3Zoom=value;OnPropertyChanged(nameof(InstantV3Zoom));}}
  private double _instantV3Emboss;
- public double InstantV3Emboss {get=>_instantV3Emboss;set{if(EqualityComparer<double>.Default.Equals(_instantV3Emboss,value))return;_instantV3Emboss=value;OnPropertyChanged(nameof(InstantV3Emboss));}}
+ public double InstantV3Emboss {get=>_instantV3Emboss;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Emboss,value))return;_instantV3Emboss=value;OnPropertyChanged(nameof(InstantV3Emboss));}}
  private double _instantV3EdgeLine;
- public double InstantV3EdgeLine {get=>_instantV3EdgeLine;set{if(EqualityComparer<double>.Default.Equals(_instantV3EdgeLine,value))return;_instantV3EdgeLine=value;OnPropertyChanged(nameof(InstantV3EdgeLine));}}
+ public double InstantV3EdgeLine {get=>_instantV3EdgeLine;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3EdgeLine,value))return;_instantV3EdgeLine=value;OnPropertyChanged(nameof(InstantV3EdgeLine));}}
  public IReadOnlyList<string> InstantV3DefectKinds {get;}=["None","Unspread","Bands","Fog","Islands","Crescent","BlueFailure"];
  private string _instantV3DefectKind="None";
- public string InstantV3DefectKind {get=>_instantV3DefectKind;set{if(EqualityComparer<string>.Default.Equals(_instantV3DefectKind,value))return;_instantV3DefectKind=value;OnPropertyChanged(nameof(InstantV3DefectKind));}}
+ public string InstantV3DefectKind {get=>_instantV3DefectKind;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<string>.Default.Equals(_instantV3DefectKind,value))return;_instantV3DefectKind=value;OnPropertyChanged(nameof(InstantV3DefectKind));}}
  private double _instantV3EmulsionDefects;
  private double _instantV3WindowHighlight;
- public double InstantV3WindowHighlight {get=>_instantV3WindowHighlight;set{SetProperty(ref _instantV3WindowHighlight,value);}}
+ public double InstantV3WindowHighlight {get=>_instantV3WindowHighlight;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _instantV3WindowHighlight,value);}}
  private double _instantV3WindowPressed;
- public double InstantV3WindowPressed {get=>_instantV3WindowPressed;set{SetProperty(ref _instantV3WindowPressed,value);}}
- public double InstantV3EmulsionDefects {get=>_instantV3EmulsionDefects;set{if(EqualityComparer<double>.Default.Equals(_instantV3EmulsionDefects,value))return;_instantV3EmulsionDefects=value;OnPropertyChanged(nameof(InstantV3EmulsionDefects));}}
+ public double InstantV3WindowPressed {get=>_instantV3WindowPressed;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _instantV3WindowPressed,value);}}
+ public double InstantV3EmulsionDefects {get=>_instantV3EmulsionDefects;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3EmulsionDefects,value))return;_instantV3EmulsionDefects=value;OnPropertyChanged(nameof(InstantV3EmulsionDefects));}}
  private double _instantV3DefectAmount;
- public double InstantV3DefectAmount {get=>_instantV3DefectAmount;set{if(EqualityComparer<double>.Default.Equals(_instantV3DefectAmount,value))return;_instantV3DefectAmount=value;OnPropertyChanged(nameof(InstantV3DefectAmount));}}
+ public double InstantV3DefectAmount {get=>_instantV3DefectAmount;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3DefectAmount,value))return;_instantV3DefectAmount=value;OnPropertyChanged(nameof(InstantV3DefectAmount));}}
  private double _instantV3Crystal;
- public double InstantV3Crystal {get=>_instantV3Crystal;set{if(EqualityComparer<double>.Default.Equals(_instantV3Crystal,value))return;_instantV3Crystal=value;OnPropertyChanged(nameof(InstantV3Crystal));}}
+ public double InstantV3Crystal {get=>_instantV3Crystal;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Crystal,value))return;_instantV3Crystal=value;OnPropertyChanged(nameof(InstantV3Crystal));}}
  private double _instantV3Leak;
- public double InstantV3Leak {get=>_instantV3Leak;set{if(EqualityComparer<double>.Default.Equals(_instantV3Leak,value))return;_instantV3Leak=value;OnPropertyChanged(nameof(InstantV3Leak));}}
+ public double InstantV3Leak {get=>_instantV3Leak;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Leak,value))return;_instantV3Leak=value;OnPropertyChanged(nameof(InstantV3Leak));}}
  private double _instantV3Vignette;
- public double InstantV3Vignette {get=>_instantV3Vignette;set{if(EqualityComparer<double>.Default.Equals(_instantV3Vignette,value))return;_instantV3Vignette=value;OnPropertyChanged(nameof(InstantV3Vignette));}}
+ public double InstantV3Vignette {get=>_instantV3Vignette;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3Vignette,value))return;_instantV3Vignette=value;OnPropertyChanged(nameof(InstantV3Vignette));}}
  private double _instantV3DevelopmentEdge;
- public double InstantV3DevelopmentEdge {get=>_instantV3DevelopmentEdge;set{if(EqualityComparer<double>.Default.Equals(_instantV3DevelopmentEdge,value))return;_instantV3DevelopmentEdge=value;OnPropertyChanged(nameof(InstantV3DevelopmentEdge));}}
+ public double InstantV3DevelopmentEdge {get=>_instantV3DevelopmentEdge;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3DevelopmentEdge,value))return;_instantV3DevelopmentEdge=value;OnPropertyChanged(nameof(InstantV3DevelopmentEdge));}}
  private double _instantV3PaperTexture=.002;
- public double InstantV3PaperTexture {get=>_instantV3PaperTexture;set{if(EqualityComparer<double>.Default.Equals(_instantV3PaperTexture,value))return;_instantV3PaperTexture=value;OnPropertyChanged(nameof(InstantV3PaperTexture));}}
+ public double InstantV3PaperTexture {get=>_instantV3PaperTexture;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3PaperTexture,value))return;_instantV3PaperTexture=value;OnPropertyChanged(nameof(InstantV3PaperTexture));}}
  private double _instantV3PaperScratches;
- public double InstantV3PaperScratches {get=>_instantV3PaperScratches;set{if(EqualityComparer<double>.Default.Equals(_instantV3PaperScratches,value))return;_instantV3PaperScratches=value;OnPropertyChanged(nameof(InstantV3PaperScratches));}}
+ public double InstantV3PaperScratches {get=>_instantV3PaperScratches;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3PaperScratches,value))return;_instantV3PaperScratches=value;OnPropertyChanged(nameof(InstantV3PaperScratches));}}
  private double _instantV3ScanDust;
- public double InstantV3ScanDust {get=>_instantV3ScanDust;set{if(EqualityComparer<double>.Default.Equals(_instantV3ScanDust,value))return;_instantV3ScanDust=value;OnPropertyChanged(nameof(InstantV3ScanDust));}}
+ public double InstantV3ScanDust {get=>_instantV3ScanDust;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<double>.Default.Equals(_instantV3ScanDust,value))return;_instantV3ScanDust=value;OnPropertyChanged(nameof(InstantV3ScanDust));}}
  private ulong _instantV3Seed=20261017;
- public ulong InstantV3Seed {get=>_instantV3Seed;set{if(EqualityComparer<ulong>.Default.Equals(_instantV3Seed,value))return;_instantV3Seed=value;OnPropertyChanged(nameof(InstantV3Seed));}}
+ public ulong InstantV3Seed {get=>_instantV3Seed;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(EqualityComparer<ulong>.Default.Equals(_instantV3Seed,value))return;_instantV3Seed=value;OnPropertyChanged(nameof(InstantV3Seed));}}
  private double _instantV3DefectX=.5;
- public double InstantV3DefectX {get=>_instantV3DefectX;set{SetProperty(ref _instantV3DefectX,value);}}
+ public double InstantV3DefectX {get=>_instantV3DefectX;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _instantV3DefectX,value);}}
  private double _instantV3DefectY=.5;
- public double InstantV3DefectY {get=>_instantV3DefectY;set{SetProperty(ref _instantV3DefectY,value);}}
+ public double InstantV3DefectY {get=>_instantV3DefectY;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _instantV3DefectY,value);}}
  private double _instantV3DefectAngle=0;
- public double InstantV3DefectAngle {get=>_instantV3DefectAngle;set{SetProperty(ref _instantV3DefectAngle,value);}}
+ public double InstantV3DefectAngle {get=>_instantV3DefectAngle;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _instantV3DefectAngle,value);}}
  private double _instantV3DefectScale=1;
- public double InstantV3DefectScale {get=>_instantV3DefectScale;set{SetProperty(ref _instantV3DefectScale,value);}}
+ public double InstantV3DefectScale {get=>_instantV3DefectScale;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _instantV3DefectScale,value);}}
  private CancellationTokenSource? _secondSelectionCancellation;
  public CandidateMultipleInput? InstantSecondInput {get;private set;}
  public string InstantSecondSourceName=>InstantSecondInput is null?"—":System.IO.Path.GetFileName(InstantSecondInput.Path);
  private double _instantSecondWeight=.5;
- public double InstantSecondWeight {get=>_instantSecondWeight;set{SetProperty(ref _instantSecondWeight,value);}}
+ public double InstantSecondWeight {get=>_instantSecondWeight;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _instantSecondWeight,value);}}
  private double _instantSecondCropX=.5;
- public double InstantSecondCropX {get=>_instantSecondCropX;set{SetProperty(ref _instantSecondCropX,value);}}
+ public double InstantSecondCropX {get=>_instantSecondCropX;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _instantSecondCropX,value);}}
  private double _instantSecondCropY=.5;
- public double InstantSecondCropY {get=>_instantSecondCropY;set{SetProperty(ref _instantSecondCropY,value);}}
+ public double InstantSecondCropY {get=>_instantSecondCropY;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _instantSecondCropY,value);}}
  private double _instantSecondZoom=1;
- public double InstantSecondZoom {get=>_instantSecondZoom;set{SetProperty(ref _instantSecondZoom,value);}}
+ public double InstantSecondZoom {get=>_instantSecondZoom;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _instantSecondZoom,value);}}
  public IReadOnlyList<string> InstantSecondModes {get;}=["NormalizedMix","ExposureSum"];
  private string _instantSecondMode="NormalizedMix";
- public string InstantSecondMode {get=>_instantSecondMode;set{SetProperty(ref _instantSecondMode,value);}}
+ public string InstantSecondMode {get=>_instantSecondMode;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _instantSecondMode,value);}}
  public AsyncRelayCommand SelectSecondExposureCommand {get;private set;}=null!;
  public RelayCommand ClearSecondExposureCommand {get;private set;}=null!;
  public AsyncRelayCommand UndoInstantV3Command {get;private set;}=null!;

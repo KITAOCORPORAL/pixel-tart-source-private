@@ -29,40 +29,40 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public string InstantCamera {get;private set;}="SX-70";
     public IReadOnlyList<string> InstantInputModes {get;}=["CurrentEdits","Original"];
     private string _draftInstantInputMode="CurrentEdits";
-    public string InstantInputMode {get=>_draftInstantInputMode;set=>SetProperty(ref _draftInstantInputMode,value);}
+    public string InstantInputMode {get=>_draftInstantInputMode;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantInputMode,value);}}
     public IReadOnlyList<string> InstantLayouts {get;}=["SquareV1","LegacyFree"];
     private string _draftInstantLayout="SquareV1";
-    public string InstantLayout {get=>_draftInstantLayout;set=>SetProperty(ref _draftInstantLayout,value);}
+    public string InstantLayout {get=>_draftInstantLayout;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantLayout,value);}}
     public IReadOnlyList<string> InstantFitModes {get;}=["CropFill","FitEntire"];
     private string _draftInstantFit="CropFill";
-    public string InstantFit {get=>_draftInstantFit;set=>SetProperty(ref _draftInstantFit,value);}
+    public string InstantFit {get=>_draftInstantFit;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantFit,value);}}
     private double _draftInstantCropX=.5;
-    public double InstantCropX {get=>_draftInstantCropX;set=>SetProperty(ref _draftInstantCropX,value);}
+    public double InstantCropX {get=>_draftInstantCropX;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantCropX,value);}}
     private double _draftInstantCropY=.5;
-    public double InstantCropY {get=>_draftInstantCropY;set=>SetProperty(ref _draftInstantCropY,value);}
+    public double InstantCropY {get=>_draftInstantCropY;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantCropY,value);}}
     private bool _draftInstantImageEffectsDisabled=false;
-    public bool InstantImageEffectsDisabled {get=>_draftInstantImageEffectsDisabled;set=>SetProperty(ref _draftInstantImageEffectsDisabled,value);}
+    public bool InstantImageEffectsDisabled {get=>_draftInstantImageEffectsDisabled;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantImageEffectsDisabled,value);}}
     public string InstantDimensions {get;private set;}="";
     public bool IsInstantGenerating {get;private set;}
     public bool InstantEditingAllowed=>!IsLightPrintLocked&&ActiveTarget is not null&&!IsLoading&&!IsExporting&&!IsInstantGenerating;
     private double _draftInstantUneven=.15;
-    public double InstantUneven {get=>_draftInstantUneven;set=>SetProperty(ref _draftInstantUneven,value);}
+    public double InstantUneven {get=>_draftInstantUneven;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantUneven,value);}}
     public double InstantUnspread {get;set;}=.12;
     public double InstantRoller {get;set;}=.10;
     public double InstantArtLeak {get;set;}
     private double _draftInstantEnvironmentCelsius=21;
-    public double InstantEnvironmentCelsius {get=>_draftInstantEnvironmentCelsius;set=>SetProperty(ref _draftInstantEnvironmentCelsius,value);}
+    public double InstantEnvironmentCelsius {get=>_draftInstantEnvironmentCelsius;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantEnvironmentCelsius,value);}}
     public IReadOnlyList<string> InstantPaperColors {get;}=["Warm","Neutral","Cool"];
     private string _draftInstantPaperColor="Warm";
-    public string InstantPaperColor {get=>_draftInstantPaperColor;set=>SetProperty(ref _draftInstantPaperColor,value);}
+    public string InstantPaperColor {get=>_draftInstantPaperColor;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantPaperColor,value);}}
     private bool _draftInstantPaperFrame=true;
-    public bool InstantPaperFrame {get=>_draftInstantPaperFrame;set=>SetProperty(ref _draftInstantPaperFrame,value);}
+    public bool InstantPaperFrame {get=>_draftInstantPaperFrame;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantPaperFrame,value);}}
     private double _draftInstantBorder=.075;
-    public double InstantBorder {get=>_draftInstantBorder;set=>SetProperty(ref _draftInstantBorder,value);}
+    public double InstantBorder {get=>_draftInstantBorder;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantBorder,value);}}
     private double _draftInstantBottomBorder=.25;
-    public double InstantBottomBorder {get=>_draftInstantBottomBorder;set=>SetProperty(ref _draftInstantBottomBorder,value);}
+    public double InstantBottomBorder {get=>_draftInstantBottomBorder;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantBottomBorder,value);}}
     private double _draftInstantAmount=1;
-    public double InstantAmount {get=>_draftInstantAmount;set=>SetProperty(ref _draftInstantAmount,value);}
+    public double InstantAmount {get=>_draftInstantAmount;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;SetProperty(ref _draftInstantAmount,value);}}
     public InstantDevelopmentFrame? InstantDevelopment {get;private set;}
     public BitmapSource? InstantFinalPreview {get;private set;}
     public string InstantDirection {get;private set;}="Color";

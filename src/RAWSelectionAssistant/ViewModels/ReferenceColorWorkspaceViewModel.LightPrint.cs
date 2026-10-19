@@ -10,6 +10,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private Guid? _lightPrintDraftTarget;
  private string _lightPrintStatus="选择相纸和相框，画面实时预览；显影后生成独立变体。";
  private string _selectedLightPrintFrameId="generic.white.square";
+ public string LightPrintCamera {get=>InstantCamera;set{if(IsLightPrintLocked)return;if(value is "SX-70" or "i-2"){InstantCamera=value;OnPropertyChanged(nameof(LightPrintCamera));}}}
+ public IReadOnlyList<string> LightPrintCameras {get;}=["SX-70","i-2"];
  public IReadOnlyList<LightPrintFrame> LightPrintFrameChoices=>LightPrintFrames.Available;
  public string SelectedLightPrintFrameId {get=>_selectedLightPrintFrameId;set{if(!LightPrintFrames.Available.Any(f=>f.Id==value&&f.Shippable))return;if(IsLightPrintLocked){LightPrintStatus="此光片已显影；点从原图重新拍一张。";return;}if(SetProperty(ref _selectedLightPrintFrameId,value))QueueLightPrintPreview();}}
  public bool LightPrintRecipeVisible=>!IsLightPrintLocked;
@@ -39,7 +41,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     try{var path=System.IO.Path.Combine(RAWSelectionAssistant.Core.Utilities.AppDataPaths.Root,"lightprint-camera.json");Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);File.WriteAllText(path,System.Text.Json.JsonSerializer.Serialize(new{Enabled=InstantCameraAnimation}));}catch(IOException){}
    }
    if(e.PropertyName is nameof(ActiveTarget) or nameof(IsLoading) or nameof(IsInstantGenerating)){NotifyLightPrint();return;}
-   if(_lightPrintEnabled&&!_restoringLightPrintControls&&e.PropertyName is{} name&&(name==nameof(SelectedInstantProfile)||name.StartsWith("InstantV3",StringComparison.Ordinal)||name is nameof(InstantAmount) or nameof(InstantUneven) or nameof(InstantSecondSourceName) or nameof(InstantSecondWeight) or nameof(InstantSecondCropX) or nameof(InstantSecondCropY) or nameof(InstantSecondZoom) or nameof(InstantFit) or nameof(InstantCropX) or nameof(InstantCropY)))QueueLightPrintPreview();
+   if(_lightPrintEnabled&&!_restoringLightPrintControls&&e.PropertyName is{} name&&(name==nameof(SelectedInstantProfile)||name.StartsWith("InstantV3",StringComparison.Ordinal)&&name is not(nameof(InstantV3Stocks) or nameof(InstantV3Patterns) or nameof(InstantV3DefectKinds))||name is nameof(InstantAmount) or nameof(InstantUneven) or nameof(InstantSecondSourceName) or nameof(InstantSecondWeight) or nameof(InstantSecondCropX) or nameof(InstantSecondCropY) or nameof(InstantSecondZoom) or nameof(InstantFit) or nameof(InstantCropX) or nameof(InstantCropY)))QueueLightPrintPreview();
   };
   DevelopLightPrintCommand=new(async _=>
   {

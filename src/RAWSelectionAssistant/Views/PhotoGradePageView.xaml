@@ -17,7 +17,7 @@
      <WrapPanel HorizontalAlignment="Right"><Slider Width="90" Minimum="0" Maximum="1" Value="{Binding Editor.SplitPosition}" ToolTip="左右对比分界"/><Button Content="适合窗口" Click="FitPhoto"/><Button Content="100%" Click="ActualPhoto"/><Button Content="－" Click="ZoomOut"/><Button Content="＋" Click="ZoomIn"/></WrapPanel></DockPanel>
      <DockPanel Margin="0,7,0,7"><Button DockPanel.Dock="Right" x:Name="PrepareComparison" Content="准备配方基准" Command="{Binding PrepareComparisonCommand}"/><TextBlock x:Name="ComparisonStatus" Text="{Binding ComparisonStatus}" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/></DockPanel>
     </StackPanel>
-    <Border Grid.Row="1" Background="#111313" ClipToBounds="True"><views:ColorStudioImageViewport x:Name="PhotoViewport" Original="{Binding Editor.SourceImage}" Matched="{Binding Editor.MatchedImage}" Mode="{Binding Editor.EffectiveViewMode}" Split="{Binding Editor.SplitPosition}" MouseWheel="PhotoWheel" MouseLeftButtonDown="PhotoDown" MouseMove="PhotoMove" MouseLeftButtonUp="PhotoUp"/></Border>
+    <Border Grid.Row="1" Background="#111313" ClipToBounds="True"><views:ColorStudioImageViewport x:Name="PhotoViewport" SourcePixelSize="{Binding Editor.SourcePixelSize}" Original="{Binding Editor.SourceImage}" Matched="{Binding Editor.MatchedImage}" Mode="{Binding Editor.EffectiveViewMode}" Split="{Binding Editor.SplitPosition}" MouseWheel="PhotoWheel" MouseLeftButtonDown="PhotoDown" MouseMove="PhotoMove" MouseLeftButtonUp="PhotoUp"/></Border>
     <TextBlock Grid.Row="2" Text="{Binding PhotographerComparisonHelp}" TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11" Margin="0,8,0,10"/>
    </Grid>
    <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Stretch"/>
@@ -36,7 +36,7 @@
        <TextBlock Text="{Binding LightPrintRecipeSummary}" TextWrapping="Wrap"/>
        <Button Content="从原图重新拍一张" Command="{Binding ReshootLightPrintCommand}"/>
        <ComboBox x:Name="FrameChoice" DropDownClosed="FrameClicked" ItemsSource="{Binding LightPrintFrameChoices}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding SelectedLightPrintFrameId,Mode=TwoWay}" IsEnabled="{Binding LightPrintControlsEnabled}"/>
-       <CheckBox Content="相机动画" IsChecked="{Binding InstantCameraAnimation}"/><Button Content="跳过展示" Command="{Binding SkipInstantDemoCommand}"/>
+       <ComboBox ItemsSource="{Binding LightPrintCameras}" SelectedItem="{Binding LightPrintCamera}" IsEnabled="{Binding LightPrintControlsEnabled}"/><CheckBox Content="相机动画" IsChecked="{Binding InstantCameraAnimation}"/><Button Content="跳过展示" Command="{Binding SkipInstantDemoCommand}"/>
        <TextBlock Text="相框 · 通用素材 / 权利明确" FontSize="11" Margin="0,4,0,8"/>
        <views:InstantV3Editor x:Name="V3Editor" Visibility="{Binding LightPrintRecipeVisible,Converter={StaticResource Bool}}"/>
       </StackPanel></ScrollViewer>
