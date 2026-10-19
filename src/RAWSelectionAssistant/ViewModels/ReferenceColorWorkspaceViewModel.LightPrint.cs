@@ -122,6 +122,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  {
   if(ActiveTarget is not{} target||target.RawDefinition?.LightPrint is null||target.ActiveEditVersionId is not Guid id)return false;
   var from=redo?_windowRedo:_windowUndo;var to=redo?_windowUndo:_windowRedo;var key=(target.Id,id);if(!from.TryGetValue(key,out var values)||values.Count==0)return false;
-  var current=target.RawDefinition;var next=values.Pop();target.RawDefinition=next;await ActivateTargetAsync(target);CaptureEditVersion(target);if(!to.TryGetValue(key,out var other))to[key]=other=new();other.Push(current);return true;
+  var current=target.RawDefinition;var next=values.Peek();var source=Editor.CapturePreparedSource();var history=Editor.CaptureSessionHistory();target.RawDefinition=next;await ActivateTargetAsync(target);
+  if(target.Status==ReferenceTargetStatus.Failed){target.RawDefinition=current;Editor.RestorePreparedSource(source,target.AssetId);Editor.RestoreSessionHistory(history);LightPrintStatus="窗口历史恢复失败，旧结果保持。";return true;}
+  values.Pop();CaptureEditVersion(target);if(!to.TryGetValue(key,out var other))to[key]=other=new();other.Push(current);return true;
  }
 }
