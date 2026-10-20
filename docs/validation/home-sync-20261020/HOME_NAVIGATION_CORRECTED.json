@@ -1,0 +1,90 @@
+{
+  "routeCount": 10,
+  "routes": [
+    {
+      "name": "工作台",
+      "automationId": "PrimaryNavigationWorkbench",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "素材库",
+      "automationId": "AssetLibraryNavigationButton",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "归片工作区",
+      "automationId": "PrimaryNavigationWorkflow",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "工作日历",
+      "automationId": "PrimaryNavigationWorkCalendar",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "策划中心",
+      "automationId": "PrimaryNavigationPlanning",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "联机拍摄",
+      "automationId": "PrimaryNavigationTether",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "暗室",
+      "automationId": "PrimaryNavigationReferenceColor",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "在线选片",
+      "automationId": "PrimaryNavigationOnlineSelection",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "摄影收支",
+      "automationId": "PrimaryNavigationFinance",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "项目历史",
+      "automationId": "PrimaryNavigationHistory",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    }
+  ],
+  "allTenPresent": true,
+  "actualNavigationActions": "NOT_RUN",
+  "tutorialActive": true,
+  "correction": "HOME_STARTUP.json counts the PrimaryNavigation* prefix only (9). AssetLibrary uses AssetLibraryNavigationButton, making the full primary policy 10. Original observation retained.",
+  "desktopReadOnly": true
+}

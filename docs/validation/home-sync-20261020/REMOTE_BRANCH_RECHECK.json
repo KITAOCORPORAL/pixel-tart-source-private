@@ -1,0 +1,1715 @@
+[
+  {
+    "ref": "origin/docs/kitao-studio-product-master-spec-20261012",
+    "sha": "db1eff37393eae50816f932365e453937c05e8cb",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "6a27e166af5c77f8455f44089aa9de5d38e86495",
+    "includedByAncestry": false,
+    "commitCounts": "300\t1",
+    "branchOnlyFiles": [
+      {
+        "path": "docs/design/product-master/.gitattributes",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/ACTION_INVENTORY.csv",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/BATCH_SOURCE_DIFFERENCES.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/BRANCH_DIFFERENCES.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/CORE_USER_FLOWS.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/CROSS_BRANCH_SOURCE_INDEX.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/CROSS_PLATFORM_AND_SYNC.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/DELIVERY_MANIFEST.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/DESIGN_HANDOFF.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/DESIGN_SYSTEM_REQUIREMENTS.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/DIRTY_SOURCE_EVIDENCE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/ENTRY_COVERAGE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/FEATURE_INVENTORY.csv",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/GROK_FULL_PRODUCT_MASTER.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/IMPLEMENTATION_STATUS_AND_GAPS.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/INFORMATION_ARCHITECTURE.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/PAGE_AND_STATE_MATRIX.csv",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/PRODUCT_MASTER_SPEC.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/SOURCE_AUDIT.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/product-master/VALIDATION_REPORT.json",
+        "currentEquivalence": "missing-in-product"
+      }
+    ],
+    "equivalenceCounts": {
+      "missing-in-product": 20
+    },
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/asset-library-eagle-parity-p2",
+    "sha": "c5fde036e13abd2039d517f2a4022e9a32452c2f",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "c5fde036e13abd2039d517f2a4022e9a32452c2f",
+    "includedByAncestry": true,
+    "commitCounts": "777\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/asset-library-eagle-parity-p3-query-metadata",
+    "sha": "f59b422c7fcbe94d02a702cf02429d8225892d16",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "f59b422c7fcbe94d02a702cf02429d8225892d16",
+    "includedByAncestry": true,
+    "commitCounts": "715\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/asset-library-eagle-shell-context-p36",
+    "sha": "0566f8ef04664649053bc6cfa043dbdfc6c26802",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "0566f8ef04664649053bc6cfa043dbdfc6c26802",
+    "includedByAncestry": true,
+    "commitCounts": "690\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/asset-library-import-foundation-hardening",
+    "sha": "225c589495c3f73d706752aaf31e92c0cd5ef3c1",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "73530b9cbe2510e5e1266af8115a4e50eb4bc000",
+    "includedByAncestry": false,
+    "commitCounts": "694\t4",
+    "branchOnlyFiles": [
+      {
+        "path": "docs/implementation-reports/AL_F01_ASSET_IMPORT_FOUNDATION_2026-09-10.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.P2Browser.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/PixelTart.Modules.AssetLibrary/AsyncThumbnail.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Models/AssetLibraryModels.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetFormatCapabilityRegistry.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContainerService.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContracts.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibrarySchema.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetTechnicalMetadata.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/Tasks/TaskOperationBridge.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/AssetFormatCapabilityRegistryTests.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/AssetImportFoundationTests.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/AssetLibraryP2CoreTests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/AssetLibraryP3MigrationTests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/AssetLibraryV15Tests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/AssetLibraryV1Tests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/AssetTechnicalMetadataExtractorTests.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryImportTaskContractTests.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryLoadMoreHardeningTests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP1LoadStateAcceptanceTests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP36ContextMenuContractTests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3ScopeBehaviorTests.cs",
+        "currentEquivalence": "different"
+      }
+    ],
+    "equivalenceCounts": {
+      "missing-in-product": 7,
+      "different": 18
+    },
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/asset-library-portable-focus-p35",
+    "sha": "427c079b71dad83375e69692fc83b829db569666",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "427c079b71dad83375e69692fc83b829db569666",
+    "includedByAncestry": true,
+    "commitCounts": "703\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/asset-library-v1",
+    "sha": "189bf6e6b5b8a523d95bf28eab3cd8f10ece5c16",
+    "status": "BLOCKED",
+    "reason": "no common ancestor"
+  },
+  {
+    "ref": "origin/feature/color-studio-spatial-closure-20261013",
+    "sha": "eae12944c66e9e519fceb0842344f8b0c9038b7b",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "eae12944c66e9e519fceb0842344f8b0c9038b7b",
+    "includedByAncestry": true,
+    "commitCounts": "256\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/darkroom-lightprint-r3-20261019",
+    "sha": "a1e52238616b8d22f09b92595a85e76c7d9c1460",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "a1e52238616b8d22f09b92595a85e76c7d9c1460",
+    "includedByAncestry": true,
+    "commitCounts": "2\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-canvas-toolbar-20261013",
+    "sha": "9e95239c51d7ebc551a62804541726934b37437d",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "9e95239c51d7ebc551a62804541726934b37437d",
+    "includedByAncestry": true,
+    "commitCounts": "242\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-controlled-icc-20261015",
+    "sha": "b37d5e2d07df129605772516032653700df62bf6",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "b37d5e2d07df129605772516032653700df62bf6",
+    "includedByAncestry": true,
+    "commitCounts": "155\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-instant-film-evidence-v3-20261016",
+    "sha": "e70d111633b4e41479215f6edd17d70741b09044",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "e70d111633b4e41479215f6edd17d70741b09044",
+    "includedByAncestry": true,
+    "commitCounts": "103\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-instant-film-product-v3-20261017",
+    "sha": "a51bcf96efc0e3d03438138dfa525ab61c7449b7",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "a51bcf96efc0e3d03438138dfa525ab61c7449b7",
+    "includedByAncestry": true,
+    "commitCounts": "95\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-instant-film-v3-live-20261017",
+    "sha": "cd6d3ce072948d6739cd789d749c2bfaadffc59e",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "cd6d3ce072948d6739cd789d749c2bfaadffc59e",
+    "includedByAncestry": true,
+    "commitCounts": "82\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-night-A-portability-20261014",
+    "sha": "b1630f0e55780d746d4377d209899a09d2773b0e",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "b1630f0e55780d746d4377d209899a09d2773b0e",
+    "includedByAncestry": true,
+    "commitCounts": "191\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-night-B-color-science-20261014",
+    "sha": "419c9c165b119fc992ee34e9e947b05f93835e6d",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "419c9c165b119fc992ee34e9e947b05f93835e6d",
+    "includedByAncestry": true,
+    "commitCounts": "191\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-photo-engine-candidate-20261016",
+    "sha": "2ca931e0e1550942ed2c37ff58c51a0382a3d18d",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "2ca931e0e1550942ed2c37ff58c51a0382a3d18d",
+    "includedByAncestry": true,
+    "commitCounts": "123\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-photo-engine-followup-20261016",
+    "sha": "2e1d802fb9154362f0ffad49376cf29dbf313fd3",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "fe73d02cf85df518c4eaebf4a09f9a5157451eab",
+    "includedByAncestry": false,
+    "commitCounts": "110\t12",
+    "branchOnlyFiles": [
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/00_baseline/BASELINE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/06-published-core-SQL_TRACE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/06-published-core-performance.txt",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/06-source-core-SQL_TRACE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/06-source-core-performance.txt",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/DIAGNOSIS.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/FIRST_FULL.trx",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/FIRST_FULL_SQL_TRACE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/FIRST_FULL_SUMMARY.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/FIRST_ISOLATED.trx",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/FIRST_ISOLATED_SQL_TRACE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/INDEX_FIX.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/INDEX_FOCUSED.trx",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/INDEX_FOCUSED_SQL_TRACE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/INDEX_FULL.trx",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/INDEX_FULL_SQL_TRACE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/INDEX_FULL_SUMMARY.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/INSTRUMENTED_FULL.trx",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/INSTRUMENTED_FULL_SQL_TRACE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/INSTRUMENTED_FULL_SUMMARY.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/01_p3/SQL_PLAN_COMPARISON.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-canon-difference.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-canon-inherited-1.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-canon-inherited-2.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-fuji-1-1.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-fuji-1-2.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-fuji-1-difference.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-fuji-4-1.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-fuji-4-2.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-fuji-4-difference.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-fuji-cancel.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-fuji-default-1.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-fuji-default-difference.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-fuji-inherited-1.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/02-fuji-inherited-2.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/FINDINGS.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/02_fuji/REPEATS.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/03_sony/AUTHORIZED_SONY_IDENTITY.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/03_sony/CANDIDATE_CALLBACK_CANCEL.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/03_sony/CANDIDATE_GEOMETRY.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/03_sony/CANDIDATE_RESULTS.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/03_sony/DISTRIBUTION_DECISION.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/03_sony/MATRIX.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/03_sony/SONY_DSC08015_CHAIN.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/03_sony/SONY_DSC08015_OLD_PRODUCT.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/03_sony/SONY_PUBLISHED_CHAIN.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/03_sony/SONY_WORKSPACE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/04_display/CONTRACT_AND_BOUNDARIES.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/04_display/DISPLAY_CROSS_REFERENCE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/04_display/DISPLAY_MAPPING.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/04_display/DISPLAY_REFERENCE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/04_display/FIRST_REFERENCE_FAILURE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/04_display/INDEPENDENT_PROFILE_ORACLE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/04_display/MONITOR_EDID.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/04_display/WIC_FORMAT_MATRIX.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/05_science/BLIND_PACK_NUMERIC_ONLY.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/05_science/BOUNDARIES_AND_REVIEW.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/06-published-core-discovery.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/06-published-core-summary.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/06-published-identity-discovery.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/06-published-identity-summary.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/06-published-wpf-discovery.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/06-published-wpf-summary.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/06-source-core-discovery.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/06-source-core-summary.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/06-source-wpf-discovery.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/06-source-wpf-summary.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/CONDITIONAL_TESTS.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/CONDITIONAL_TESTS.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/IDENTITY.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/NATIVE_NOT_RUN.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/PUBLISHED_AUDIT_PROVENANCE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/PUBLISHED_PROVENANCE.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/RAW_TEST_RESULTS.zip",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/RAW_TEST_RESULTS_MANIFEST.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/RELEASE_FILES.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/SCOPED_PRIVACY_CHECK.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/STRICT_POSTPUBLISH.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/06_regression/review-classification-followup.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/DELIVERY.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/DELIVERY_FILES.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/NEXT_BLOCKERS.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/PUSH_STATUS.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/REPRODUCE.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/RESULTS.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/evidence/photo-engine-followup-20261016/STAGE_COMMITS.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContracts.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibrarySchema.cs",
+        "currentEquivalence": "same"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.P3.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/Color/DisplayPreview/DisplayPreviewContract.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/Color/PhotoBoundaryContract.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/AssetLibraryP3PerformanceTests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/AssetLibraryP3ScopeOrderingRegressionTests.cs",
+        "currentEquivalence": "same"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/DisplayPreviewBoundaryTests.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/PhotoBoundaryContractTests.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/PhotoEngineFollowupAudit/BlindReviewPack.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/PhotoEngineFollowupAudit/DisplayMappingAudit.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/PhotoEngineFollowupAudit/DisplayReferenceAudit.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/PhotoEngineFollowupAudit/NativeRawAudit.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/PhotoEngineFollowupAudit/PhotoEngineFollowupAudit.csproj",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/PhotoEngineFollowupAudit/Program.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/PhotoEngineFollowupAudit/ResearchDisplayLcms.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/PhotoEngineFollowupAudit/SonyProbe.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/PhotoEngineFollowupAudit/SonyProductChain.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/PhotoEngineFollowupAudit/SonyWorkspaceAudit.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/PhotoEngineFollowupAudit/WicMatrixAudit.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/photo-engine-followup/.gitignore",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/photo-engine-followup/candidate_cancel_probe.py",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/photo-engine-followup/compare_display_reference.py",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/photo-engine-followup/compare_native_stages.py",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/photo-engine-followup/independent_profile_oracle.py",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/photo-engine-followup/run_candidate_repeats.py",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/photo-engine-followup/run_final_core.py",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/photo-engine-followup/run_native_repeats.py",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/photo-engine-followup/seal_followup.py",
+        "currentEquivalence": "missing-in-product"
+      }
+    ],
+    "equivalenceCounts": {
+      "missing-in-product": 110,
+      "different": 4,
+      "same": 2
+    },
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-photo-engine-home-20261016",
+    "sha": "fe73d02cf85df518c4eaebf4a09f9a5157451eab",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "fe73d02cf85df518c4eaebf4a09f9a5157451eab",
+    "includedByAncestry": true,
+    "commitCounts": "110\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-planning-company-20261014",
+    "sha": "6ece64274853c48ce5e205ea5c13e480be446762",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "6ece64274853c48ce5e205ea5c13e480be446762",
+    "includedByAncestry": true,
+    "commitCounts": "226\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-planning-foundation-20261013",
+    "sha": "0766207a7e3bc4affc3c28374182ee7277bb54e9",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "0766207a7e3bc4affc3c28374182ee7277bb54e9",
+    "includedByAncestry": true,
+    "commitCounts": "239\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-planning-r5-ui-20261013",
+    "sha": "23473ac3b470b38b04781ee687b830bb831c7d86",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "23473ac3b470b38b04781ee687b830bb831c7d86",
+    "includedByAncestry": true,
+    "commitCounts": "232\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-planning-r7-20261014",
+    "sha": "8e3e203d71c10f8f89db650a8fabd516a597c957",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "8e3e203d71c10f8f89db650a8fabd516a597c957",
+    "includedByAncestry": true,
+    "commitCounts": "215\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-planning-table-content-20261014",
+    "sha": "270b8fcb438760cd1a216fb4b63fffa4e0fb7475",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "270b8fcb438760cd1a216fb4b63fffa4e0fb7475",
+    "includedByAncestry": true,
+    "commitCounts": "205\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-planning-tray-images-20261014",
+    "sha": "13b0efe689c0114f6f76b70c59a1059cabeddbef",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "13b0efe689c0114f6f76b70c59a1059cabeddbef",
+    "includedByAncestry": true,
+    "commitCounts": "200\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-planning-workflows-20261013",
+    "sha": "c224206b9a78ae56ae463e68b5718703077eea76",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "c224206b9a78ae56ae463e68b5718703077eea76",
+    "includedByAncestry": true,
+    "commitCounts": "235\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-studio-batch11-raw-memory-color-20261013",
+    "sha": "9e0fc52b0fd3598bae36ad1ccb5db2b1520ad0d8",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "9e0fc52b0fd3598bae36ad1ccb5db2b1520ad0d8",
+    "includedByAncestry": true,
+    "commitCounts": "259\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-studio-batch12-public-color-validation-20261013",
+    "sha": "716be5741c9fb19a3e3e4e81d0a7036f16cb0712",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "716be5741c9fb19a3e3e4e81d0a7036f16cb0712",
+    "includedByAncestry": true,
+    "commitCounts": "255\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/kitao-v3-corrections-colorpage-20261017",
+    "sha": "80040a6230d32cb9056e31a0ed7fda878e042b99",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "80040a6230d32cb9056e31a0ed7fda878e042b99",
+    "includedByAncestry": true,
+    "commitCounts": "27\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/modular-harness-v1",
+    "sha": "bd904cd21e2668f4aa381181f5dcfad7832fdb5b",
+    "status": "BLOCKED",
+    "reason": "no common ancestor"
+  },
+  {
+    "ref": "origin/feature/modular-harness-v1-p1",
+    "sha": "ba25aae315e566db76a5db98a1762d006b91263f",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "ba25aae315e566db76a5db98a1762d006b91263f",
+    "includedByAncestry": true,
+    "commitCounts": "800\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/online-selection-v1",
+    "sha": "349bf4006faf9b80a3691b7d9fd368271ca58ebd",
+    "status": "BLOCKED",
+    "reason": "no common ancestor"
+  },
+  {
+    "ref": "origin/feature/pixel-tart-batch09-instant-film-quality-20261012",
+    "sha": "51b3f4f891a36acb6bd4f8a3a2e0dd83340bd1c2",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "51b3f4f891a36acb6bd4f8a3a2e0dd83340bd1c2",
+    "includedByAncestry": true,
+    "commitCounts": "265\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/pixel-tart-batch10-raw-current-edits-20261012",
+    "sha": "7184966a4921215a1a306019578f23646bcf872a",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "7184966a4921215a1a306019578f23646bcf872a",
+    "includedByAncestry": true,
+    "commitCounts": "261\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/pixel-tart-integrated-workflow-color-docs",
+    "sha": "b07de7fe6f389367044986af20a12e311fccc02c",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "b07de7fe6f389367044986af20a12e311fccc02c",
+    "includedByAncestry": true,
+    "commitCounts": "267\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/feature/pixel-tart-product-redesign",
+    "sha": "1096ae3353d0b875e498d80c2f491c242240cc0b",
+    "status": "BLOCKED",
+    "reason": "no common ancestor"
+  },
+  {
+    "ref": "origin/fix/kitao-batch12-wpf-native-acceptance-20261013",
+    "sha": "5bde6bf8af824e3b2f325e1ff046228ccb0354e0",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "5bde6bf8af824e3b2f325e1ff046228ccb0354e0",
+    "includedByAncestry": true,
+    "commitCounts": "253\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/fix/kitao-icc-reliability-20261015",
+    "sha": "4e70d024fc10810df0ad5b76b77fdb4a2cd62ed9",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "4e70d024fc10810df0ad5b76b77fdb4a2cd62ed9",
+    "includedByAncestry": true,
+    "commitCounts": "150\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/fix/kitao-planning-r7-closure-20261014",
+    "sha": "1dcbaf03f49be5cf1528acf5688564fef6a450f1",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "1dcbaf03f49be5cf1528acf5688564fef6a450f1",
+    "includedByAncestry": true,
+    "commitCounts": "212\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/fix/kitao-planning-rich-flow-r6-20261014",
+    "sha": "62f06f3b5d9691e605b88c8944346bb96d59a3ac",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "62f06f3b5d9691e605b88c8944346bb96d59a3ac",
+    "includedByAncestry": true,
+    "commitCounts": "222\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/fix/kitao-startup-preferences-20261013",
+    "sha": "37ee0289dc47d6621d5e3d8f53aa604dfef5dfb4",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "37ee0289dc47d6621d5e3d8f53aa604dfef5dfb4",
+    "includedByAncestry": true,
+    "commitCounts": "253\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/fix/kitao-wpf-failures-20261016",
+    "sha": "2acf74fbcff559d89bf6cc5f41d9bdf971595ee3",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "2acf74fbcff559d89bf6cc5f41d9bdf971595ee3",
+    "includedByAncestry": true,
+    "commitCounts": "135\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/fix/kitao-wpf-result-completeness-20261016",
+    "sha": "3aa65a13dba96747e52be73960c34ab89226e08b",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "3aa65a13dba96747e52be73960c34ab89226e08b",
+    "includedByAncestry": true,
+    "commitCounts": "131\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/handoff/source-snapshot-20260818",
+    "sha": "fd4277020ea78e4b273208ca5a0f36e8383b090f",
+    "status": "BLOCKED",
+    "reason": "no common ancestor"
+  },
+  {
+    "ref": "origin/integration/kitao-color-startup-20261013",
+    "sha": "3c5a5ff178198fcedbdfd580a807c68bd5ee1b78",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "3c5a5ff178198fcedbdfd580a807c68bd5ee1b78",
+    "includedByAncestry": true,
+    "commitCounts": "245\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/integration/kitao-company-validation-20261015",
+    "sha": "af78bb56b1eeec4e7c1a0b2de6f320dbbe33d458",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "af78bb56b1eeec4e7c1a0b2de6f320dbbe33d458",
+    "includedByAncestry": true,
+    "commitCounts": "174\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/integration/kitao-night-ab-company-20261015",
+    "sha": "8c3986e52c501b86111aa7124af9f9f24379659a",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "8c3986e52c501b86111aa7124af9f9f24379659a",
+    "includedByAncestry": true,
+    "commitCounts": "180\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/integration/pixel-tart-developer-preview",
+    "sha": "6a27e166af5c77f8455f44089aa9de5d38e86495",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "6a27e166af5c77f8455f44089aa9de5d38e86495",
+    "includedByAncestry": true,
+    "commitCounts": "300\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/migration/asset-library-work-20260911",
+    "sha": "7fd63b5064db774aa3a8f3ce5a24f676f1592993",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "0566f8ef04664649053bc6cfa043dbdfc6c26802",
+    "includedByAncestry": false,
+    "commitCounts": "690\t2",
+    "branchOnlyFiles": [
+      {
+        "path": "docs/design/DESIGN_SYSTEM_IMPLEMENTATION_REPORT.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/UI_ASSET_LIBRARY_PHASE2_REVIEW.md",
+        "currentEquivalence": "same"
+      },
+      {
+        "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryP3Styles.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryThumbnail.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Models/CollageModels.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContainerService.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.P3.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.V15.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAnalysisPersistence.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAssetQueryService.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentService.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentWorkflowService.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/Business/BusinessServices.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/Database/CalendarWorkflowSchemaMigration.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/Database/SqliteBookingDocumentRepository.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/Database/SqliteBusinessRepositories.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/Database/SqliteShootBookingRepository.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/OrganizeService.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/RawToJpegSafeConversionService.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/Tethering/WatchFolderCameraAdapter.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/App.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Buttons.xaml",
+        "currentEquivalence": "same"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Cards.xaml",
+        "currentEquivalence": "same"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Colors.Dark.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Colors.HighContrast.xaml",
+        "currentEquivalence": "same"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Colors.Light.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Components.Foundation.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/ContextMenu.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Buttons.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Cards.xaml",
+        "currentEquivalence": "same"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/DesignTokens.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Elevation.xaml",
+        "currentEquivalence": "same"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/PixelTart.Components.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/PixelTart.Theme.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Spacing.xaml",
+        "currentEquivalence": "same"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Typography.xaml",
+        "currentEquivalence": "same"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.WpfTests/AssetLibraryVisualPhase2Tests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.WpfTests/DesignSystemAv2LockTests.cs",
+        "currentEquivalence": "different"
+      }
+    ],
+    "equivalenceCounts": {
+      "missing-in-product": 1,
+      "same": 8,
+      "different": 33
+    },
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/migration/pixel-tart-handoff-20260911",
+    "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "4dac5f8e4460b7a67309646b6133bd186c121fea",
+    "includedByAncestry": false,
+    "commitCounts": "855\t11",
+    "branchOnlyFiles": [
+      {
+        "path": ".gitignore",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "RAWSelectionAssistant.sln",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "README_LOCAL_DEV.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/README.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/README_LOCAL_DEV.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/app.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/app.ts",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/app.wxss",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/localdev.config.example.ts",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/confirm/index.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/confirm/index.ts",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/confirm/index.wxml",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/confirm/index.wxss",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/gallery/index.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/gallery/index.ts",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/gallery/index.wxml",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/gallery/index.wxss",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/photo/index.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/photo/index.ts",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/photo/index.wxml",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/photo/index.wxss",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/project/index.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/project/index.ts",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/project/index.wxml",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/project/index.wxss",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/selected/index.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/selected/index.ts",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/selected/index.wxml",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/pages/selected/index.wxss",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/project.config.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/services/api.ts",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/services/selection-store.ts",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/sitemap.json",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "clients/wechat-mini-program/tests/selection-store.spec.js",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/DEVELOPMENT_ENV_SETUP.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/architecture/OnlineSelectionSchemaProposal.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/DESIGN_SYSTEM_IMPLEMENTATION_REPORT.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "docs/design/UI_ASSET_LIBRARY_PHASE2_REVIEW.md",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "docs/implementation-reports/UI_PHASE21_THEME_RUNTIME_AND_PREVIEW.md",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.OnlineSelection.LocalDevPreview/App.xaml",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.OnlineSelection.LocalDevPreview/App.xaml.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.OnlineSelection.LocalDevPreview/LocalDevOnlineSelectionProvider.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.OnlineSelection.LocalDevPreview/LocalDevPreviewDialogService.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.OnlineSelection.LocalDevPreview/PixelTart.OnlineSelection.LocalDevPreview.csproj",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.OnlineSelection.LocalDevPreview/PreviewWindow.xaml",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.OnlineSelection.LocalDevPreview/PreviewWindow.xaml.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.SelectionApi.Contracts/SelectionApiContracts.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/PixelTart.SelectionApi.Server/LocalDevJpegVariantService.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.SelectionApi.Server/LocalDevSelectionRepository.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.SelectionApi.Server/PixelTart.SelectionApi.Server.csproj",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.SelectionApi.Server/Program.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.SelectionApi.Server/SelectionApiServerContract.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.SelectionApi.Server/SelectionObjectStorage.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/PixelTart.SelectionApi.Skeleton/Program.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Models/OnlineSelectionModels.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/AssetSelection/AssetSelectionContracts.cs",
+        "currentEquivalence": "same"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/OnlineSelectionContracts.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionClientChoiceMock.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionResultExportService.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/App.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Elevation.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/PixelTart.Components.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Resources/DesignSystem/PixelTart.Theme.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/ViewModels/OnlineSelectionViewModels.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Views/OnlineSelectionView.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/PixelTart.SelectionApi.Tests/AssemblyInfo.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tests/PixelTart.SelectionApi.Tests/LocalDevSelectionApiTests.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tests/PixelTart.SelectionApi.Tests/PixelTart.SelectionApi.Tests.csproj",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tests/PixelTart.SelectionApi.Tests/SelectionApiContractTests.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.DpiTests/Version230StageCLiveMonitorDpiTests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.DpiTests/Version230TetherDpiGateTests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/AssetSelectionContractTests.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/FakeAssetSelectionSource.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/OnlineSelectionV1Tests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.Tests/WorkbenchVisualCorrection201Tests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.WpfTests/DesignSystemAv2LockTests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.WpfTests/OnlineSelectionV1WpfTests.cs",
+        "currentEquivalence": "different"
+      },
+      {
+        "path": "tests/RAWSelectionAssistant.WpfTests/ThemeStartupSmokeTests.cs",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/PixelTart_OnlineSelection_LocalDev_Preview.ps1",
+        "currentEquivalence": "missing-in-product"
+      },
+      {
+        "path": "tools/open-wechat-dev-project.ps1",
+        "currentEquivalence": "missing-in-product"
+      }
+    ],
+    "equivalenceCounts": {
+      "different": 22,
+      "missing-in-product": 60,
+      "same": 1
+    },
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/research/kitao-validation-closure-20261015",
+    "sha": "63ca45ababbfc4780fe46febb767ef5ec76d8377",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "63ca45ababbfc4780fe46febb767ef5ec76d8377",
+    "includedByAncestry": true,
+    "commitCounts": "168\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  },
+  {
+    "ref": "origin/validation/kitao-wpf-icc-gates-20261015",
+    "sha": "444551295dcc6d92d612dccfaf5e520a811c3e75",
+    "sameAsCompanyAuditRef": true,
+    "mergeBase": "444551295dcc6d92d612dccfaf5e520a811c3e75",
+    "includedByAncestry": true,
+    "commitCounts": "141\t0",
+    "branchOnlyFiles": [],
+    "equivalenceCounts": {},
+    "meaning": "ancestry/equivalence is not feature acceptance"
+  }
+]

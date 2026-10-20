@@ -1,0 +1,95 @@
+{
+  "recordedAt": "2026-10-20T19:49:55.598322+08:00",
+  "timezone": "Asia/Shanghai",
+  "stage": 1,
+  "status": "PARTIAL",
+  "sourceFrozen": "96e84b14a0cbb040b97cc531efeb31b1f4144367",
+  "upstreamValidationReport": "46ba7e29d93660f47f836bd4f60169c894f371ca",
+  "independentlyQueriedValidationRemote": "46ba7e29d93660f47f836bd4f60169c894f371ca",
+  "newWorktree": "N:\\pixart\\guangjing-whole-app-home-20261020",
+  "newHomeBranch": "home/guangjing-whole-app-sync-20261020",
+  "oldHomeDevelopmentBranch": "feature/darkroom-lightprint-r3-20261019",
+  "oldHomeHead": "755b1d80ead4534665373cd54dcd8353a4f1288b",
+  "oldHomeLatestRemote": "a1e52238616b8d22f09b92595a85e76c7d9c1460",
+  "oldWorktrees": {
+    "count": 16,
+    "untrackedFiles": 211,
+    "allHeadsAndContentsPreserved": true,
+    "pathOfUntracked": "N:/pixart/pixel-tart-source-private",
+    "otherWorktreesClean": 15
+  },
+  "productSrcTreesEqual": true,
+  "newProductCommits": [
+    "96e84b14 fix(validation): close reproduced shell dialog and darkroom contracts; retain planning blocker",
+    "f6adf867 feat(validation): retain full application shell in isolated diagnostic package",
+    "07c11d75 fix(darkroom): persist panel layout and retain latest variant selection; R3 incomplete",
+    "4c506701 fix(darkroom): restore native import dialog and show retryable failures; desktop pending",
+    "d2e52278 fix(darkroom): R3 visual controls and CLI guards — 待桌面验收的开发版本"
+  ],
+  "build": {
+    "status": "PASS",
+    "configuration": "Release",
+    "rid": "win-x64",
+    "selfContained": true,
+    "WholeAppDiagnosticBuild": true,
+    "PhotographerTrialBuild": false,
+    "builtAtExactFrozenCommit": true,
+    "assemblyVersionContainsFrozenSha": true,
+    "sourceChangesByHomeSession": false,
+    "newDirectory": "N:\\pixart\\Guangjing-Home-Sync-20261020-193553\\Guangjing-FullScope-Diagnostic-home-win-x64",
+    "fileCountApp": 290,
+    "fileTypeCountApp": {
+      "dll": 275,
+      "json": 3,
+      "exe": 2,
+      "txt": 9,
+      "md": 1
+    },
+    "dependencyCount": 264,
+    "missingDependencies": 0,
+    "warningsFoundInPublishLog": 0,
+    "errorsFoundInPublishLog": 0,
+    "homeSdk": "10.0.401",
+    "homeSelfContainedRuntime": "10.0.12",
+    "companyRuntime": "10.0.10"
+  },
+  "startup": {
+    "status": "PASS: process/module/full-shell identity only",
+    "pid": 38708,
+    "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+    "allTenNavigationPresent": true,
+    "cleanShutdown": true,
+    "tutorialActive": true,
+    "navigationActions": "NOT_RUN",
+    "physicalClick": "NOT_RUN",
+    "reason": "Read-only cursor probe succeeds but foreground user activity (~5.4s idle) and exclusive desktop ownership not established. No input was sent.",
+    "desktopInputDeniedHere": false,
+    "desktopScreenshot": "NOT_RUN"
+  },
+  "companyZip": {
+    "namedCompanyPathExists": false,
+    "downloadedOrSynced": false,
+    "newHomeZipIsRebuiltNotCopy": true
+  },
+  "companyComparison": {
+    "sameFileHashes": 31,
+    "differentCommonFileHashes": 258,
+    "homeOnly": [
+      "app/mscordaccore_amd64_amd64_10.0.1226.42308.dll"
+    ],
+    "companyOnly": [
+      "app/mscordaccore_amd64_amd64_10.0.1026.32716.dll"
+    ],
+    "claim": "NOT byte-identical; matching frozen source is not matching build toolchain/runtime"
+  },
+  "homeTests": {
+    "fullCore": "NOT_RUN: stage 1 build baseline only",
+    "fullWpf": "NOT_RUN: stage 1 build baseline only",
+    "publishedComponentsSuite": "NOT_RUN: loaded module hash observation is not component test suite"
+  },
+  "releaseGate": "BLOCKED",
+  "diagnosticOnly": true,
+  "noMergeNoResetNoCleanNoForcePush": true,
+  "browserComputerUseCdp": "NOT_RUN",
+  "hostFolderTimestampNote": "Directory stamp uses original host clock; user-facing record uses Asia/Shanghai."
+}
