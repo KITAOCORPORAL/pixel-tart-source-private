@@ -3,12 +3,15 @@ using System.Windows.Input;
 
 namespace RAWSelectionAssistant.Views;
 
+public enum SaveDiscardCancelChoice { Cancel, Discard, Save }
+
 public enum ThemedMessageKind { Information, Success, Warning, Error, Question }
 
 public partial class ThemedMessageDialog : Window
 {
     private readonly bool _confirmation;
     private string? _logDirectory;
+    private SaveDiscardCancelChoice _saveChoice;
 
     private ThemedMessageDialog(string title, string message, ThemedMessageKind kind, bool confirmation)
     {
@@ -44,6 +47,23 @@ public partial class ThemedMessageDialog : Window
         return dialog.ShowDialog() == true;
     }
 
+    internal static ThemedMessageDialog CreateSaveDiscardCancel(string title, string message)
+    {
+        var dialog = new ThemedMessageDialog(title, message, ThemedMessageKind.Question, true);
+        dialog.YesButton.Content="保存并切换";
+        System.Windows.Automation.AutomationProperties.SetName(dialog.YesButton,"保存并切换");
+        dialog._saveChoice=SaveDiscardCancelChoice.Cancel;
+        dialog.DiscardButton.Visibility=Visibility.Visible;
+        return dialog;
+    }
+
+    public static SaveDiscardCancelChoice ShowSaveDiscardCancel(Window? owner, string title, string message)
+    {
+        var dialog=CreateSaveDiscardCancel(title,message);
+        if(owner is { IsLoaded:true })dialog.Owner=owner;
+        return dialog.ShowDialog()==true?SaveDiscardCancelChoice.Save:dialog._saveChoice;
+    }
+
     public static void ShowStartupFailure(string summary, string logDirectory)
     {
         var dialog = new ThemedMessageDialog("软件启动失败", summary, ThemedMessageKind.Error, false)
@@ -70,7 +90,8 @@ public partial class ThemedMessageDialog : Window
         { MessageTextBlock.Text += "\n日志位置：" + _logDirectory; }
     }
 
-    private void YesButton_Click(object sender, RoutedEventArgs e) { DialogResult = true; Close(); }
+    private void YesButton_Click(object sender, RoutedEventArgs e) { _saveChoice=SaveDiscardCancelChoice.Save; DialogResult = true; Close(); }
+    private void DiscardButton_Click(object sender, RoutedEventArgs e) { _saveChoice=SaveDiscardCancelChoice.Discard; DialogResult=false; Close(); }
     private void NoButton_Click(object sender, RoutedEventArgs e) { DialogResult = false; Close(); }
     private void CloseButton_Click(object sender, RoutedEventArgs e) { DialogResult = _confirmation ? false : true; Close(); }
     private void CloseSurfaceRequested(object sender, RoutedEventArgs e) { DialogResult = _confirmation ? false : true; Close(); }

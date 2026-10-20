@@ -73,7 +73,8 @@ public partial class PhotoGradePageView:UserControl
  private void ViewMenu(object sender,RoutedEventArgs e){var m=new ContextMenu();void Add(string text,Action action){var i=new MenuItem{Header=text};i.Click+=(_,_)=>action();m.Items.Add(i);}Add("适合窗口",()=>PhotoViewport.State.Fit());Add("100%",()=>PhotoViewport.State.SetZoom(1));Add("切换面板",()=>TogglePanel(sender,e));m.PlacementTarget=(UIElement)sender;m.IsOpen=true;}
  private void HelpMenu(object sender,RoutedEventArgs e){DiagnosticsSection.IsExpanded=true;EditModes.SelectedIndex=0;DiagnosticsSection.BringIntoView();}
  private void Menu(object sender,params (string,System.Windows.Input.ICommand?)[] items){var m=new ContextMenu();foreach(var (text,command)in items)m.Items.Add(new MenuItem{Header=text,Command=command});m.PlacementTarget=(UIElement)sender;m.IsOpen=true;}
- private void CompareMenu(object sender,RoutedEventArgs e){if(model is null)return;var m=new ContextMenu();foreach(var c in model.PhotographerComparisonModes){var i=new MenuItem{Header=c.Label};i.Click+=(_,_)=>model.PhotographerComparisonValue=c.Value;m.Items.Add(i);}m.PlacementTarget=(UIElement)sender;m.IsOpen=true;}
+ internal ContextMenu CreateComparisonMenu(){var m=new ContextMenu();if(model is not null)foreach(var c in model.PhotographerComparisonModes){var i=new MenuItem{Header=c.Label,Tag=c.Value};i.Click+=(_,_)=>{if(model is not null)model.PhotographerComparisonValue=c.Value;};m.Items.Add(i);}return m;}
+ private void CompareMenu(object sender,RoutedEventArgs e){if(model is null)return;var m=CreateComparisonMenu();m.PlacementTarget=(UIElement)sender;m.IsOpen=true;}
  private void ShowVariants(object sender,RoutedEventArgs e)=>EditModes.SelectedIndex=4;
  private void ShowAdjust(object sender,RoutedEventArgs e)=>EditModes.SelectedIndex=0;
  private void TogglePanel(object sender,RoutedEventArgs e){SetPanelOpen(RightPanel.Visibility!=Visibility.Visible);SavePanelLayout();}
@@ -117,7 +118,7 @@ public partial class PhotoGradePageView:UserControl
   }
   finally{switchingVariant=false;pendingVariant=null;}
  }
- private void ApplyScheme(object sender,RoutedEventArgs e){if(model is null)return;model.Editor.RequestApplySchemeCommand.Execute(null);if(model.Editor.SchemeSwitchOpen){var choice=MessageBox.Show(Window.GetWindow(this),"当前调整未保存。保存当前方案后切换？选择否将直接切换；取消保持当前照片。","切换色彩方案",MessageBoxButton.YesNoCancel);if(choice==MessageBoxResult.Yes)model.Editor.SaveAndApplySchemeCommand.Execute(null);else if(choice==MessageBoxResult.No)model.Editor.DiscardAndApplySchemeCommand.Execute(null);else model.Editor.CancelSchemeSwitchCommand.Execute(null);}}
+ private void ApplyScheme(object sender,RoutedEventArgs e){if(model is null)return;model.Editor.RequestApplySchemeCommand.Execute(null);if(model.Editor.SchemeSwitchOpen){var choice=ThemedMessageDialog.ShowSaveDiscardCancel(Window.GetWindow(this),"切换色彩方案","当前调整未保存。保存当前方案、放弃修改后切换，或取消并保持当前照片。");if(choice==SaveDiscardCancelChoice.Save)model.Editor.SaveAndApplySchemeCommand.Execute(null);else if(choice==SaveDiscardCancelChoice.Discard)model.Editor.DiscardAndApplySchemeCommand.Execute(null);else model.Editor.CancelSchemeSwitchCommand.Execute(null);}}
  private string activeTool="选择";private bool solo;
  private void GuidesChanged(object sender,SelectionChangedEventArgs e)=>DrawGuides();
  private void GuideSizeChanged(object sender,SizeChangedEventArgs e)=>DrawGuides();

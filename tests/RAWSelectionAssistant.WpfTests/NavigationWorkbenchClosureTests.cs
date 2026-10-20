@@ -26,7 +26,7 @@ public sealed class NavigationWorkbenchClosureTests
             new[] { "Workbench", "AssetLibrary", "Workflow", "WorkCalendar", "Planning", "Tether", "ReferenceColor", "OnlineSelection", "Finance", "History" },
             primaryButtons.Select(element => Attribute(element, "CommandParameter")).ToArray());
         CollectionAssert.AreEqual(
-            new[] { "工作台", "素材库", "归片工作区", "工作日历", "策划中心", "联机拍摄", "参考仿色", "在线选片", "摄影收支", "项目历史" },
+            new[] { "工作台", "素材库", "归片工作区", "工作日历", "策划中心", "联机拍摄", "暗室", "在线选片", "摄影收支", "项目历史" },
             primaryButtons.Select(element => Attribute(element, "Content")).ToArray());
         Assert.AreEqual("AssetLibraryNavigationButton", Attribute(primaryButtons[1], "AutomationProperties.AutomationId"));
         Assert.AreEqual(1, sidebar.Descendants().Count(element => Attribute(element, "CommandParameter") == "AssetLibrary"));

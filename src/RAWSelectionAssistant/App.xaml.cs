@@ -73,7 +73,7 @@ public partial class App : Application
         if(Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME")!="1" ||
            !Path.IsPathFullyQualified(Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT")??""))
         {
-            MessageBox.Show("完整范围诊断预览必须通过 Start-Guangjing-Diagnostic.cmd 启动；缺少隔离数据目录，程序未访问日常数据。","光镜 · 不能发行");
+            ThemedMessageDialog.Show(null,"光镜 · 不能发行","完整范围诊断预览必须通过 Start-Guangjing-Diagnostic.cmd 启动；缺少隔离数据目录，程序未访问日常数据。",ThemedMessageKind.Warning);
             Shutdown(2);return;
         }
 #endif

@@ -33,7 +33,7 @@ def execution_units(selected, single_process=False, p1_unit='method'):
     return units
 
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--assembly',required=True);ap.add_argument('--output',required=True);ap.add_argument('--dotnet',default='D:/AI AGENT/.dotnet/dotnet.exe');ap.add_argument('--sdk',default='D:/AI AGENT/.dotnet/sdk/10.0.302');ap.add_argument('--timeout',type=int,default=180);ap.add_argument('--classes',nargs='*');ap.add_argument('--single-process',action='store_true');ap.add_argument('--p1-unit',choices=['method','class'],default='method',help='P1 evidence methods are separate bounded units; class only for retained timeout diagnosis');ap.add_argument('--resource-root',help='Explicit source/resource root; may differ from testhost directory');a=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('--assembly',required=True);ap.add_argument('--output',required=True);ap.add_argument('--dotnet',default='D:/AI AGENT/.dotnet/dotnet.exe');ap.add_argument('--sdk',default='D:/AI AGENT/.dotnet/sdk/10.0.302');ap.add_argument('--timeout',type=int,default=180);ap.add_argument('--classes',nargs='*');ap.add_argument('--shard-index',type=int,default=0);ap.add_argument('--shard-count',type=int,default=1);ap.add_argument('--single-process',action='store_true');ap.add_argument('--p1-unit',choices=['method','class'],default='method',help='P1 evidence methods are separate bounded units; class only for retained timeout diagnosis');ap.add_argument('--resource-root',help='Explicit source/resource root; may differ from testhost directory');a=ap.parse_args()
     assembly=pathlib.Path(a.assembly).resolve();repo=pathlib.Path(__file__).resolve().parents[2];root=pathlib.Path(a.output).resolve()/('run-'+time.strftime('%Y%m%d-%H%M%S')+'-'+uuid.uuid4().hex[:8]);root.mkdir(parents=True,exist_ok=False)
     env=os.environ.copy();env['PATH']=str(pathlib.Path(a.dotnet).parent)+os.pathsep+env.get('PATH','');env['DOTNET_ROOT']=str(pathlib.Path(a.dotnet).parent);env['VSTEST_CONNECTION_TIMEOUT']='30'
     if a.resource_root:env['KITAO_TEST_RESOURCE_ROOT']=str(pathlib.Path(a.resource_root).resolve())
@@ -54,7 +54,11 @@ def main():
     selected=groups if not a.classes else {k:v for k,v in groups.items() if k in a.classes}
     if not selected or (a.classes and set(a.classes)!=set(selected)):raise RuntimeError('Requested exact classes not discovered')
     selected=execution_units(selected,a.single_process,a.p1_unit)
-    summary={'root':str(root),'assembly':str(assembly),'assemblySha256':hashlib.sha256(assembly.read_bytes()).hexdigest(),'discovered':len(tests),'selected':sum(map(len,selected.values())),'runs':[],'status':'RUNNING','scope':'Adapter-discovered command-line tests. Any RenderTargetBitmap images are OFFSCREEN, never desktop acceptance.','p1ExecutionUnit':a.p1_unit,'executionPlan':[{'unit':name,'cases':cases} for name,cases in sorted(selected.items())]}
+    all_units=selected
+    if a.shard_count<1 or not 0<=a.shard_index<a.shard_count:raise ValueError('Invalid shard')
+    selected={k:v for i,(k,v) in enumerate(sorted(all_units.items())) if i%a.shard_count==a.shard_index}
+    if not selected:raise ValueError('Empty shard')
+    summary={'root':str(root),'assembly':str(assembly),'assemblySha256':hashlib.sha256(assembly.read_bytes()).hexdigest(),'discovered':len(tests),'selected':sum(map(len,selected.values())),'runs':[],'status':'RUNNING','scope':'Adapter-discovered command-line tests. Any RenderTargetBitmap images are OFFSCREEN, never desktop acceptance.','p1ExecutionUnit':a.p1_unit,'shardIndex':a.shard_index,'shardCount':a.shard_count,'allExecutionUnits':len(all_units),'executionPlan':[{'unit':name,'cases':cases} for name,cases in sorted(selected.items())]}
     def write(): (root/'summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
     write();print(root,flush=True)
     for index,(name,cases) in enumerate(sorted(selected.items())):
