@@ -33,7 +33,7 @@ public sealed partial class PlanningCenterViewModel
     public async Task AddDocumentReferencesAsync(IEnumerable<ProjectShotReference> sources)
     {
         if (!HasProject) return;
-        var category = ContentPage == "灯光图" ? "灯光" : ContentPage == "服化道" ? "造型" : ReferenceCategory == "全部" ? "其他" : ReferenceCategory;
+        var category = ContentPage is "灯位图" or "灯光图" ? "灯光" : ContentPage is "服化道与道具" or "服化道" ? "造型" : ReferenceCategory == "全部" ? "其他" : ReferenceCategory;
         var additions = sources.Select(source => new PlanningDocumentReference(source.Normalize(), category)).ToArray();
         UpdateDocument(_document with { References = _document.References.Concat(additions).DistinctBy(item => item.Source.ReferenceId).ToArray() });
         await FlushAsync(); await RefreshDocumentReferencesAsync();

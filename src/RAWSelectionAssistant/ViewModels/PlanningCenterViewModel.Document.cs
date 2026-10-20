@@ -88,8 +88,8 @@ public sealed partial class PlanningCenterViewModel
     public string ReferenceCategory { get => _referenceCategory; set { if (SetProperty(ref _referenceCategory, value)) PresentationChanged(); } }
     public PlanningReferenceItem? SelectedDocumentReference { get => _selectedDocumentReference; set => SetProperty(ref _selectedDocumentReference, value); }
     public IEnumerable<PlanningReferenceItem> VisibleDocumentReferences => AllProjectReferences.Where(item =>
-        (ContentPage != "情绪板" || item.IsMoodboard) && (ContentPage != "灯光图" || item.Category == "灯光")
-        && (ContentPage != "服化道" || item.Category == "造型") && (ReferenceCategory == "全部" || item.Category == ReferenceCategory));
+        (ContentPage != "情绪板" || item.IsMoodboard) && (ContentPage is not ("灯位图" or "灯光图") || item.Category == "灯光")
+        && (ContentPage is not ("服化道与道具" or "服化道") || item.Category == "造型") && (ReferenceCategory == "全部" || item.Category == ReferenceCategory));
     public IEnumerable<PlanningReferenceItem> HeroReferences => AllProjectReferences.Where(item => item.IsHero);
     public AsyncRelayCommand FlushPlanningCommand { get; private set; } = null!;
     public AsyncRelayCommand PreviewDocumentCommand { get; private set; } = null!;
