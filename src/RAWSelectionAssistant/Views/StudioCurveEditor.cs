@@ -14,10 +14,27 @@ public sealed class StudioCurveEditor : StackPanel
 {
     private readonly CurveSurface _surface;
     internal bool CancelPointerGesture() => _surface.CancelPointerGesture();
+    public static readonly DependencyProperty CompactProperty=DependencyProperty.Register(nameof(Compact),typeof(bool),typeof(StudioCurveEditor),new PropertyMetadata(false,(d,e)=>((StudioCurveEditor)d).SetCompact((bool)e.NewValue)));
+    public bool Compact{get=>(bool)GetValue(CompactProperty);set=>SetValue(CompactProperty,value);}
+    private void SetCompact(bool value)
+    {
+        _surface.Height=value?265:235;
+        _surface.Compact=value;
+        Children[0].Visibility=value?Visibility.Collapsed:Visibility.Visible;
+        _compactChannels.Visibility=value?Visibility.Visible:Visibility.Collapsed;
+        foreach(var child in Children.OfType<FrameworkElement>().Skip(3))child.Visibility=value?Visibility.Collapsed:Visibility.Visible;
+    }
+    private readonly StackPanel _compactChannels=new(){Orientation=Orientation.Horizontal,Visibility=Visibility.Collapsed,Margin=new Thickness(0,1,0,1)};
     public StudioCurveEditor()
     {
         var channels = new ComboBox { ItemsSource = new[] { "RGB", "R", "G", "B" }, SelectedIndex = 0, Margin = new Thickness(0, 6, 0, 6) };
-        Children.Add(channels); _surface = new CurveSurface { Height = 235, Margin = new Thickness(3) }; Children.Add(_surface);
+        Children.Add(channels);
+        foreach(var (label,channel) in new[]{("RGB","rgb"),("红","r"),("绿","g"),("蓝","b")})
+        {
+            var button=new Button{Content=label,FontSize=10,Padding=new Thickness(5,0,5,0),Height=22};
+            button.Click+=(_,_)=>{if(_surface is{} surface)surface.Channel=channel;};_compactChannels.Children.Add(button);
+        }
+        Children.Add(_compactChannels); _surface = new CurveSurface { Height = 235, Margin = new Thickness(0) }; Children.Add(_surface);
         channels.SelectionChanged += (_, _) => _surface.Channel = channels.SelectedItem?.ToString()?.ToLowerInvariant() ?? "rgb";
         var actions = new WrapPanel();
         var reset = new Button { Margin = new Thickness(0, 5, 5, 5) }; StudioToolPanel.Text(reset, ContentControl.ContentProperty, "复位通道");
@@ -30,6 +47,7 @@ public sealed class StudioCurveEditor : StackPanel
     private sealed class CurveSurface : FrameworkElement
     {
         private TetherReferenceModeViewModel? _editor;
+        public bool Compact {get;set;}
         private string _channel = "rgb";
         private int _selected = -1;
         private IReadOnlyList<ColorStudioToolProcessor.CurvePoint>? _before;
@@ -60,22 +78,22 @@ public sealed class StudioCurveEditor : StackPanel
         }
         private void Changed(object? sender, PropertyChangedEventArgs e) { if (e.PropertyName is nameof(TetherReferenceModeViewModel.AdjustmentStack) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode)) InvalidateVisual(); }
         private IReadOnlyList<ColorStudioToolProcessor.CurvePoint> Points => ColorStudioToolProcessor.ReadCurve(_editor?.ToolNode(ColorStudioNodeType.Curve) ?? new(Guid.NewGuid(), ColorStudioNodeType.Curve, "曲线"), Channel);
-        private Rect Plot => new(20, 10, Math.Max(1, ActualWidth - 30), Math.Max(1, ActualHeight - 34));
+        private Rect Plot => Compact ? new(1,1,Math.Max(1,ActualWidth-2),Math.Max(1,ActualHeight-2)) : new(20, 10, Math.Max(1, ActualWidth - 30), Math.Max(1,ActualHeight-34));
         private Point Screen(ColorStudioToolProcessor.CurvePoint p) => new(Plot.Left + p.X * Plot.Width, Plot.Bottom - p.Y * Plot.Height);
         private ColorStudioToolProcessor.CurvePoint Curve(Point p) => new(Math.Clamp((p.X - Plot.Left) / Plot.Width, 0, 1), Math.Clamp((Plot.Bottom - p.Y) / Plot.Height, 0, 1));
         protected override void OnRender(DrawingContext dc)
         {
-            dc.DrawRectangle(new SolidColorBrush(Color.FromRgb(18, 22, 24)), null, new Rect(RenderSize));
+            dc.DrawRectangle(new SolidColorBrush(Compact?Color.FromRgb(17,17,19):Color.FromRgb(18,22,24)), null, new Rect(RenderSize));
             var pen = new Pen(new SolidColorBrush(Color.FromRgb(53, 59, 63)), 1);
             for (var i = 0; i <= 4; i++) { var t = i / 4d; dc.DrawLine(pen, Screen(new(t, 0)), Screen(new(t, 1))); dc.DrawLine(pen, Screen(new(0, t)), Screen(new(1, t))); }
             var points = Points; var geometry = new StreamGeometry();
             using (var g = geometry.Open()) { g.BeginFigure(Screen(new(0, ColorStudioToolProcessor.EvaluateCurve(points, 0))), false, false); for (var i = 1; i <= 256; i++) { var x = i / 256d; g.LineTo(Screen(new(x, ColorStudioToolProcessor.EvaluateCurve(points, x))), true, false); } }
-            var brush = Channel switch { "r" => Brushes.Coral, "g" => Brushes.LightGreen, "b" => Brushes.DodgerBlue, _ => Brushes.Turquoise };
-            dc.DrawGeometry(null, new Pen(brush, 2), geometry);
-            for (var i = 0; i < points.Count; i++) dc.DrawEllipse(i == _selected ? Brushes.White : brush, new Pen(Brushes.Black, 1), Screen(points[i]), 4, 4);
+            var brush = Channel switch { "r" => Brushes.Coral, "g" => Brushes.LightGreen, "b" => Brushes.DodgerBlue, _ => Compact?Brushes.LightGray:Brushes.Turquoise };
+            dc.DrawGeometry(null, new Pen(brush, Compact?1:2), geometry);
+            for (var i = 0; i < points.Count; i++) dc.DrawEllipse(i == _selected ? Brushes.White : brush, new Pen(Brushes.Black, 1), Screen(points[i]), Compact?2:4, Compact?2:4);
             var text = StudioLocalizationService.Current;
             var label = _selected >= 0 && _selected < points.Count ? $"{text["输入"]} {points[_selected].X:0.###} → {text["输出"]} {points[_selected].Y:0.###}" : $"0                                   {text["输入"]} 1";
-            dc.DrawText(new FormattedText(label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Segoe UI"), 11, Brushes.LightGray, VisualTreeHelper.GetDpi(this).PixelsPerDip), new Point(20, Plot.Bottom + 6));
+            if(!Compact)dc.DrawText(new FormattedText(label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Segoe UI"), 11, Brushes.LightGray, VisualTreeHelper.GetDpi(this).PixelsPerDip), new Point(20, Plot.Bottom + 6));
         }
         private void Down(object sender, MouseButtonEventArgs e)
         {

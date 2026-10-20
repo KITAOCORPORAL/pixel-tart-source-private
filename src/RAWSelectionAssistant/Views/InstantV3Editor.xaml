@@ -1,23 +1,20 @@
 <UserControl x:Class="RAWSelectionAssistant.Views.InstantV3Editor" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:views="clr-namespace:RAWSelectionAssistant.Views">
- <UserControl.Resources><views:PhotographerOptionLabelConverter x:Key="PhotoOption"/><DataTemplate x:Key="PhotoOptionTemplate"><TextBlock Text="{Binding Converter={StaticResource PhotoOption}}"/></DataTemplate></UserControl.Resources>
+ <UserControl.Resources><views:PhotographerOptionLabelConverter x:Key="PhotoOption"/><DataTemplate x:Key="PhotoOptionTemplate"><TextBlock Text="{Binding Converter={StaticResource PhotoOption}}"/></DataTemplate><CollectionViewSource x:Key="GroupedPapers" Source="{Binding PhotographerPapers}"><CollectionViewSource.GroupDescriptions><PropertyGroupDescription PropertyName="Group"/></CollectionViewSource.GroupDescriptions></CollectionViewSource></UserControl.Resources>
  <StackPanel IsEnabled="{Binding InstantEditingAllowed}">
-  <TextBlock Text="选择光片相纸" FontSize="18" FontWeight="SemiBold"/><TextBlock Text="创作模拟，不是胶片实测标定。先看色彩，再调整纸框与材质。" TextWrapping="Wrap" FontSize="11" Margin="0,6,0,10"/>
-  <ListBox x:Name="PaperChoices" PreviewMouseLeftButtonUp="PaperClicked" ItemsSource="{Binding PhotographerPapers}" SelectedValuePath="ProfileId" SelectedValue="{Binding SelectedPhotographerPaperId,Mode=TwoWay}" MaxHeight="220">
-   <ListBox.ItemTemplate><DataTemplate><Grid Margin="2,4"><Grid.ColumnDefinitions><ColumnDefinition Width="86"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><Border Background="#202323" Height="58"><Image Source="{Binding Preview}" Stretch="Uniform"/></Border><StackPanel Grid.Column="1" Margin="9,0,0,0"><TextBlock Text="{Binding Name}" FontWeight="SemiBold"/><TextBlock Text="{Binding Description}" TextWrapping="Wrap" FontSize="10"/></StackPanel></Grid></DataTemplate></ListBox.ItemTemplate>
+ <StackPanel x:Name="PickerArea">
+  <ListBox x:Name="PaperChoices" PreviewMouseLeftButtonUp="PaperClicked" ItemsSource="{Binding Source={StaticResource GroupedPapers}}" SelectedValuePath="ProfileId" SelectedValue="{Binding SelectedPhotographerPaperId,Mode=TwoWay}" BorderThickness="0" Background="Transparent" Padding="0" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch">
+   <ListBox.ItemsPanel><ItemsPanelTemplate><StackPanel/></ItemsPanelTemplate></ListBox.ItemsPanel>
+   <ListBox.GroupStyle><GroupStyle><GroupStyle.HeaderTemplate><DataTemplate><TextBlock Text="{Binding Name}" FontSize="10" Foreground="#8C8C94" Margin="2,5,0,2"/></DataTemplate></GroupStyle.HeaderTemplate><GroupStyle.Panel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></GroupStyle.Panel></GroupStyle></ListBox.GroupStyle>
+   <ListBox.ItemTemplate><DataTemplate><StackPanel Width="64" Margin="2,3"><Border Background="#E7E4DC" Height="64" Padding="3,3,3,9"><Image Source="{Binding Preview}" Stretch="UniformToFill"/></Border><TextBlock Text="{Binding Name}" FontSize="9" Foreground="#A9A9AE" Margin="0,3,0,0" ToolTip="{Binding Description}"/></StackPanel></DataTemplate></ListBox.ItemTemplate>
   </ListBox>
-  <Button x:Name="PreviewPaperChoices" Content="预览这些相纸 · 当前照片" Command="{Binding PreviewPhotographerPapersCommand}"/>
-  <TextBlock Text="{Binding PaperPreviewAvailabilityReason}" TextWrapping="Wrap" FontSize="10"/>
-  <TextBlock Text="{Binding PaperPreviewStatus}" TextWrapping="Wrap" FontSize="10" Margin="0,4,0,10"/>
-  <TextBlock Text="{Binding PhotographerPaperDetail}" TextWrapping="Wrap" FontSize="11"/>
-   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantAmount,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantAmount}" TextWrapping="Wrap"/></DockPanel>
-   <Slider x:Name="InstantAmountControl" Tag="InstantAmount" Minimum="0" Maximum="1" Value="{Binding InstantAmount,Mode=TwoWay}"/>
-   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Exposure,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Exposure}" TextWrapping="Wrap"/></DockPanel>
-   <Slider x:Name="InstantV3ExposureControl" Tag="InstantV3Exposure" Minimum="-2" Maximum="2" Value="{Binding InstantV3Exposure,Mode=TwoWay}"/>
-
-  <Button x:Name="ApplyV3" Visibility="Collapsed" Command="{Binding GenerateInstantFilmCommand}"/>
-  <TextBlock Text="色彩与外观分开控制" FontWeight="SemiBold" Margin="0,6,0,6"/>
-  <TextBlock Text="相框由上方选择器控制；进阶纸面不改变所选窗口形状。" TextWrapping="Wrap" FontSize="11"/>
-  <TextBlock Text="效果强度只控制色彩／成像；显影前可调整，显影后锁定。" TextWrapping="Wrap" FontSize="10" Margin="0,4,0,10"/>
+  <Button x:Name="PreviewPaperChoices" Content="刷新当前照片色彩预览" Command="{Binding PreviewPhotographerPapersCommand}" FontSize="10" Height="22" ToolTip="五组已实现响应；同一输入，关闭装饰的色彩缩略图"/>
+  <TextBlock Text="5组响应 · 共用型号见详情" FontSize="9" Foreground="#76767C" Margin="2,4"/>
+ </StackPanel>
+ <StackPanel x:Name="FullCommonArea">
+  <TextBlock Text="效果强度"/><Slider x:Name="InstantAmountControl" Minimum="0" Maximum="1" Value="{Binding InstantAmount,Mode=TwoWay}"/>
+  <TextBlock Text="曝光"/><Slider x:Name="InstantV3ExposureControl" Minimum="-2" Maximum="2" Value="{Binding InstantV3Exposure,Mode=TwoWay}"/>
+ </StackPanel>
+ <StackPanel x:Name="AdvancedArea">
   <Expander IsEnabled="{Binding IsInstantV3Selected}" x:Name="ToneAdvanced" Header="进阶色彩与层次" IsExpanded="False"><StackPanel>
 <ComboBox ItemsSource="{Binding InstantV3Stocks}" ItemTemplate="{StaticResource PhotoOptionTemplate}" SelectedItem="{Binding InstantV3Stock}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Toe,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Toe}" TextWrapping="Wrap"/></DockPanel>
@@ -123,5 +120,6 @@
    <TextBlock Text="{Binding PaperTechnicalDetail}" TextWrapping="Wrap"/><TextBlock Text="随机种子（同种子可重复）："/><TextBox Text="{Binding InstantV3Seed}"/><CheckBox Content="显影演示（只改变展示，不改变成片）" IsChecked="{Binding InstantDevelopmentDemo}"/><Button Content="跳过演示" Command="{Binding SkipInstantDemoCommand}"/>
    <Button Content="重新随机一张" Command="{Binding RollInstantFilmCommand}"/><Button Content="重置待应用参数" Command="{Binding ResetPhotoV3DraftCommand}"/><Button Content="关闭成像效果，保留外观" Command="{Binding DisableInstantFilmCommand}"/>
   </StackPanel></Expander>
+ </StackPanel>
  </StackPanel>
 </UserControl>

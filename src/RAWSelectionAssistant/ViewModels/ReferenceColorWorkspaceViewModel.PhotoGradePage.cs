@@ -17,7 +17,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private void InitializePhotoGradeHistoryCommands()
  {
   InitializeSrgbExposureCommands();InitializeComparison();InitializePhotographerCommands();InitializeLightPrintCommands();
-  ResetPhotoV3DraftCommand=new(_=>{var profile=SelectedInstantProfile;RestoreInstantControls(null);SelectedInstantProfile=profile;InstantEngineVersion="V3";},_=>!IsInstantGenerating&&!IsLoading&&!IsExporting&&ActiveTarget is not null);
+  ResetPhotoV3DraftCommand=new(_=>{if(IsLightPrintLocked)return;var profile=SelectedInstantProfile;RestoreInstantControls(null);SelectedInstantProfile=profile;InstantEngineVersion="V3";},_=>!IsLightPrintLocked&&!IsInstantGenerating&&!IsLoading&&!IsExporting&&ActiveTarget is not null);
   PhotoGradeUndoCommand=new(async _=>
   {
    if(await MoveWindowHistoryAsync(false))return;

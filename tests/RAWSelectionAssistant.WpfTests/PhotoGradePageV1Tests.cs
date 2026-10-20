@@ -30,13 +30,13 @@ namespace RAWSelectionAssistant.WpfTests;
    var input=Path.Combine(root,"a.jpg");StudioQuickExport.Encode(BitmapSource.Create(43,31,96,96,PixelFormats.Rgb24,null,Enumerable.Range(0,43*31*3).Select(x=>(byte)(x%240)).ToArray(),43*3),input,input,StudioExportFormat.Jpeg);
    using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));await vm.LoadTargetAsync(input);vm.InstantCameraAnimation=false;vm.InstantEngineVersion="V3";
    var view=new PhotoGradePageView{DataContext=vm};view.Measure(new Size(1400,850));view.Arrange(new Rect(0,0,1400,850));view.UpdateLayout();var panel=(InstantV3Editor)view.FindName("V3Editor");
-   var exposure=(Slider)panel.FindName("InstantV3ExposureControl");exposure.SetCurrentValue(Slider.ValueProperty,.6);await Dispatcher.Yield(DispatcherPriority.DataBind);Assert.AreEqual(.6,vm.InstantV3Exposure);
-   await ((RAWSelectionAssistant.Utilities.AsyncRelayCommand)((Button)panel.FindName("ApplyV3")).Command).ExecuteAsync(null);Assert.AreEqual(.6,vm.ActiveTarget!.RawDefinition!.InstantFilm!.V3!.Response.ExposureEv,vm.StatusText);
-   Assert.IsFalse(((StudioToolPanel)view.FindName("CurrentParameters")).IsEnabled);Assert.IsFalse(vm.PhotoGradeSyncStepCommand.CanExecute(null));
+   var exposure=(Slider)view.FindName("LightPrintExposure");exposure.SetCurrentValue(Slider.ValueProperty,.6);await Dispatcher.Yield(DispatcherPriority.DataBind);Assert.AreEqual(.6,vm.InstantV3Exposure);
+   await vm.LightPrintPreviewWork;await ((RAWSelectionAssistant.Utilities.AsyncRelayCommand)((Button)view.FindName("DevelopPrint")).Command).ExecuteAsync(null);Assert.AreEqual(.6,vm.ActiveTarget!.RawDefinition!.InstantFilm!.V3!.Response.ExposureEv,vm.StatusText);
+   Assert.IsTrue(((StudioToolPanel)view.FindName("CurrentParameters")).IsEnabled,"Developed window adjustment remains available");Assert.IsFalse(vm.PhotoGradeSyncStepCommand.CanExecute(null));
    var pixels=vm.Editor.MatchedImage;await vm.PhotoGradeUndoCommand.ExecuteAsync(null);Assert.IsNull(vm.ActiveTarget.RawDefinition);await vm.PhotoGradeRedoCommand.ExecuteAsync(null);Assert.AreEqual(.6,exposure.Value);Assert.IsNotNull(pixels);
    view.RaiseEvent(new RoutedEventArgs(FrameworkElement.UnloadedEvent));var list=(ListBox)view.FindName("OrderedSteps");var before=list.BorderBrush;vm.PhotoMaskColor="Yellow";Assert.AreSame(before,list.BorderBrush);
    view.RaiseEvent(new RoutedEventArgs(FrameworkElement.LoadedEvent));Assert.AreEqual(Brushes.Yellow,list.BorderBrush);
-   vm.InstantAmount=.2;vm.InstantBorder=.12;vm.InstantInputMode="Original";vm.ResetPhotoV3DraftCommand.Execute(null);Assert.AreEqual(1,vm.InstantAmount);Assert.AreEqual(.075,vm.InstantBorder);Assert.AreEqual("CurrentEdits",vm.InstantInputMode);Assert.AreEqual(0,exposure.Value);Assert.AreEqual(.6,vm.ActiveTarget.RawDefinition!.InstantFilm!.V3!.Response.ExposureEv,"Draft reset must not silently commit");
+   var locked=JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition);vm.InstantAmount=.2;vm.InstantBorder=.12;vm.InstantV3Exposure=1.2;vm.ResetPhotoV3DraftCommand.Execute(null);Assert.AreEqual(.6,exposure.Value);Assert.AreEqual(locked,JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition),"Locked recipe must not silently change");
   }
   finally{Directory.Delete(root,true);}
  });
@@ -60,7 +60,7 @@ namespace RAWSelectionAssistant.WpfTests;
     var view=new PhotoGradePageView{DataContext=vm};view.Measure(new Size(1400,850));view.Arrange(new Rect(0,0,1400,850));view.UpdateLayout();var panel=(InstantV3Editor)view.FindName("V3Editor");
     string Pixels(BitmapSource source){var rgb=new FormatConvertedBitmap(source,PixelFormats.Rgb48,null,0);var bytes=new byte[rgb.PixelWidth*rgb.PixelHeight*6];rgb.CopyPixels(bytes,rgb.PixelWidth*6,0);return Convert.ToHexString(SHA256.HashData(bytes));}
     await vm.GenerateInstantFilmCommand.ExecuteAsync(null);var baseline=Pixels(vm.Editor.MatchedImage!);var prior=JsonSerializer.Serialize(vm.ActiveTarget!.RawDefinition);
-    var slider=(Slider)panel.FindName("InstantV3ExposureControl");slider.SetCurrentValue(Slider.ValueProperty,.7);await Dispatcher.Yield(DispatcherPriority.DataBind);
+    var slider=(Slider)view.FindName("LightPrintExposure");slider.SetCurrentValue(Slider.ValueProperty,.7);await Dispatcher.Yield(DispatcherPriority.DataBind);
     vm.InstantV3Softness=.45;vm.InstantV3Texture=.02;vm.InstantV3DefectKind="Bands";vm.InstantV3DefectAmount=.15;vm.InstantV3DefectX=.25;vm.InstantV3Circle=true;vm.InstantV3WindowPressed=.4;
     await vm.SelectSecondExposureCommand.ExecuteAsync(null);vm.InstantSecondWeight=.3;vm.InstantSecondZoom=1.2;vm.InstantSecondCropX=.3;clock.Restart();
     await vm.GenerateInstantFilmCommand.ExecuteAsync(null);var renderMs=clock.Elapsed.TotalMilliseconds;var edited=Pixels(vm.Editor.MatchedImage!);Assert.AreNotEqual(baseline,edited,vm.StatusText);var definition=JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition);
@@ -94,7 +94,7 @@ namespace RAWSelectionAssistant.WpfTests;
    string Input(string name){var p=Path.Combine(root,name);StudioQuickExport.Encode(BitmapSource.Create(80,53,96,96,PixelFormats.Rgb24,null,Enumerable.Range(0,80*53*3).Select(x=>(byte)(20+x%200)).ToArray(),80*3),p,p,StudioExportFormat.Png);return p;}
    string Pixels(BitmapSource b){var converted=new FormatConvertedBitmap(b,PixelFormats.Rgb24,null,0);var bytes=new byte[b.PixelWidth*b.PixelHeight*3];converted.CopyPixels(bytes,b.PixelWidth*3,0);return Convert.ToHexString(SHA256.HashData(bytes));}
    using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));await vm.LoadTargetAsync(Input("a.png"));await vm.LoadTargetAsync(Input("b.png"));var target=vm.ActiveTarget!;
-   var view=new PhotoGradePageView{DataContext=vm};view.Measure(new Size(1400,850));view.Arrange(new Rect(0,0,1400,850));view.UpdateLayout();var panel=(StudioToolPanel)view.FindName("CurrentParameters");
+   var view=new PhotoGradePageView{DataContext=vm};view.Measure(new Size(1400,850));view.Arrange(new Rect(0,0,1400,850));view.UpdateLayout();var panel=(StudioToolPanel)view.FindName("BasicColorParameters");
    var saturation=Descendants<Slider>(panel).Single(x=>Equals(x.Tag,"saturation"));saturation.SetCurrentValue(Slider.ValueProperty,.35);await Dispatcher.Yield(DispatcherPriority.DataBind);
    vm.Editor.CopyCurrentLookTo([target]);var original=target.ColorAdjustmentStackSnapshot!.DeepClone();
    var before=Pixels(await vm.Editor.ProcessForExportAsync(target.Path,target.AppliedLookSnapshot,target.FilmSettingsSnapshot,CancellationToken.None,target.ColorAdjustmentStackSnapshot));
@@ -117,7 +117,7 @@ namespace RAWSelectionAssistant.WpfTests;
    var held=StudioGlobalResources.AccountedBytes;var process=Process.GetCurrentProcess();process.Refresh();long privateBefore=process.PrivateMemorySize64;var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));
    var clock=Stopwatch.StartNew();await vm.LoadTargetAsync(path);var firstLoadMs=clock.Elapsed.TotalMilliseconds;clock.Restart();await vm.ActivateTargetCommand.ExecuteAsync(vm.ActiveTarget);var cachedActivationMs=clock.Elapsed.TotalMilliseconds;
    vm.InstantCameraAnimation=false;vm.InstantEngineVersion="V3";await vm.GenerateInstantFilmCommand.ExecuteAsync(null);var recipe=JsonSerializer.Serialize(vm.ActiveTarget!.RawDefinition);var pixels=vm.Editor.MatchedImage;int renders=0;
-   var view=new PhotoGradePageView{DataContext=vm};view.Measure(new Size(1400,850));view.Arrange(new Rect(0,0,1400,850));view.UpdateLayout();var panel=(InstantV3Editor)view.FindName("V3Editor");var slider=(Slider)panel.FindName("InstantV3ExposureControl");
+   var view=new PhotoGradePageView{DataContext=vm};view.Measure(new Size(1400,850));view.Arrange(new Rect(0,0,1400,850));view.UpdateLayout();var panel=(InstantV3Editor)view.FindName("V3Editor");var slider=(Slider)view.FindName("LightPrintExposure");
    double? firstPixelMs=null,firstAnimationMs=null;using(var capture=Kitao.InstantFilm.Research.CandidateProcessingEvidence.Capture(p=>{if(p=="PixelRender"){renders++;firstPixelMs??=clock.Elapsed.TotalMilliseconds;}if(p=="DevelopmentAnimation")firstAnimationMs??=clock.Elapsed.TotalMilliseconds;}))
    {
     clock.Restart();for(int i=0;i<200;i++)slider.SetCurrentValue(Slider.ValueProperty,(i%40)/20d-1);await Dispatcher.Yield(DispatcherPriority.DataBind);var dragMs=clock.Elapsed.TotalMilliseconds;

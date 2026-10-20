@@ -2,6 +2,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using RAWSelectionAssistant.Services;
+if(args.Length==3&&args[0]=="r3-visual"){R3VisualAudit.Run(args[1],args[2]);return;}
 if(args.Length==2&&args[0]=="lightprint-alpha")
 {
  var records=new List<object>();foreach(var a in new[]{0d,1d/255,.25,.5,.75,254d/255,1d})foreach(var foreground in new[]{new RAWSelectionAssistant.Core.Services.Color.ColorVector3(0,1,.25),new(.1,.4,.8),new(1,0,.7)})

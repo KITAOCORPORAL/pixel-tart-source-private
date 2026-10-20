@@ -45,6 +45,25 @@ namespace RAWSelectionAssistant.WpfTests;
    vm.SelectedPhotographerPaperId="itype-bw";await ready.Task.WaitAsync(TimeSpan.FromSeconds(10));var switchTask=vm.LoadTargetAsync(Image(root,"b.png",130));gate.Set();await switchTask;await vm.LightPrintPreviewWork;Assert.IsNull(vm.ActiveTarget!.RawDefinition);Assert.IsFalse(vm.LightPrintStatus.Contains("未完成"));Assert.AreEqual("b.png",vm.ActiveTarget.FileName);
   }finally{Directory.Delete(root,true);}
  });
+ [TestMethod]public Task FiveTabsKeepDenseLayoutFiltersAndLockedDraftGuard()=>RunSta(async()=>
+ {
+  EnsureTestApplication();var root=Root();try
+  {
+   using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(root));await vm.LoadTargetAsync(Image(root,"one.png",40));await vm.LoadTargetAsync(Image(root,"two.png",120));vm.InstantCameraAnimation=false;
+   var page=new PhotoGradePageView{DataContext=vm};var tabs=(TabControl)page.FindName("EditModes");Assert.AreEqual(5,tabs.Items.Count);Assert.AreEqual(0,tabs.SelectedIndex);
+   foreach(var size in new[]{new Size(1366,768),new Size(1920,1080)})
+   {
+    page.Measure(size);page.Arrange(new Rect(size));page.UpdateLayout();
+    var rail=(FrameworkElement)page.FindName("AppRail");var panel=(FrameworkElement)page.FindName("RightPanel");var viewer=(FrameworkElement)page.FindName("ViewerArea");
+    Assert.AreEqual(40d,rail.ActualWidth);Assert.AreEqual(304d,panel.ActualWidth);Assert.IsTrue(viewer.ActualWidth>size.Width*.65);Assert.IsTrue(viewer.ActualHeight>size.Height*.65);
+    for(var i=0;i<5;i++){tabs.SelectedIndex=i;page.UpdateLayout();var pane=(FrameworkElement)page.FindName(new[]{"AdjustmentScroll","PaperScroll","LayersScroll","StylesScroll","VariantsScroll"}[i]);Assert.AreEqual(Visibility.Visible,pane.Visibility);}
+   }
+   vm.FilterScope="Jpeg";Assert.AreEqual(0,vm.VisibleTargets.Count);Assert.AreSame(vm.VisibleTargets,((ListBox)page.FindName("PhotoStrip")).ItemsSource);vm.ClearFilmstripFiltersCommand.Execute(null);Assert.AreEqual(2,vm.VisibleTargets.Count);
+   tabs.SelectedIndex=1;vm.SelectedPhotographerPaperId="itype-color";await vm.LightPrintPreviewWork;await vm.DevelopLightPrintCommand.ExecuteAsync(null);var frozen=JsonSerializer.Serialize(vm.ActiveTarget!.RawDefinition);var exposure=vm.InstantV3Exposure;
+   Assert.IsFalse(vm.ResetPhotoV3DraftCommand.CanExecute(null));vm.ResetPhotoV3DraftCommand.Execute(null);Assert.AreEqual(exposure,vm.InstantV3Exposure);Assert.AreEqual(frozen,JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition));
+   var icons=vm.LightPrintFrameChoices.Select(f=>f.Window).Distinct().ToArray();Assert.AreEqual(2,icons.Length);page.DataContext=null;
+  }finally{Directory.Delete(root,true);}
+ });
  private static string Root(){var p=Path.Combine(Path.GetTempPath(),"LightPrintR3-"+Guid.NewGuid());Directory.CreateDirectory(p);return p;}
  private static string Image(string r,string n,int shift){var p=Path.Combine(r,n);StudioQuickExport.Encode(BitmapSource.Create(160,120,96,96,PixelFormats.Rgb24,null,Enumerable.Range(0,160*120*3).Select(x=>(byte)((x+shift)%220+15)).ToArray(),480),p,p,StudioExportFormat.Png);return p;}
  private static string Hash(float[] values)=>Convert.ToHexString(SHA256.HashData(System.Runtime.InteropServices.MemoryMarshal.AsBytes(values.AsSpan())));

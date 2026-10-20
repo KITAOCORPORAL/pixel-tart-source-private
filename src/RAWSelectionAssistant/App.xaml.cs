@@ -373,6 +373,20 @@ public partial class App : Application
             window.Title += " · 开发预览版 " + StartupDiagnostics.BuildId;
 #endif
             window.ApplySavedBounds(_mainViewModel.Settings);
+#if PHOTOGRAPHER_TRIAL
+            // The focused trial is the R3 workspace itself, not a second editor nested in the legacy shell.
+            var trialWorkspace=_mainViewModel.ReferenceColorPage;
+            var trialHost=new System.Windows.Controls.ContentControl();
+            void ShowTrialWorkspace()=>trialHost.Content=trialWorkspace.UsePhotoGradePage
+                ?new PhotoGradePageView{DataContext=trialWorkspace}
+                :new ReferenceColorWorkspaceView{DataContext=trialWorkspace};
+            System.ComponentModel.PropertyChangedEventHandler trialPageChanged=(_,args)=>
+            {if(args.PropertyName==nameof(trialWorkspace.UsePhotoGradePage))ShowTrialWorkspace();};
+            trialWorkspace.PropertyChanged+=trialPageChanged;
+            window.Closed+=(_,_)=>trialWorkspace.PropertyChanged-=trialPageChanged;
+            ShowTrialWorkspace();window.Content=trialHost;
+            window.Title="光镜 · 暗室 R3 视觉试用";window.Width=1366;window.Height=768;window.MinWidth=1100;window.MinHeight=650;
+#endif
             MainWindow = window;
 #if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
             if (_assetLibraryP1AutomatedController is not null)

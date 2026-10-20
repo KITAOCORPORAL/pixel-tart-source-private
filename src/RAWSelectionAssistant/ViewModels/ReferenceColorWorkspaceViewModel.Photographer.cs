@@ -8,6 +8,7 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed record PhotographerPaper(string ProfileId,string Name,string Description,string SharedResponse)
 {
  public BitmapSource? Preview {get;internal set;}
+ public string Group=>ProfileId=="itype-bw"?"黑白":ProfileId is "reclaimed-blue600" or "blue-duochrome600"?"实验性":"彩色";
 }
 public sealed record PhotographerComparison(string Label,string Value);
 public sealed partial class ReferenceColorWorkspaceViewModel

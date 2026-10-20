@@ -28,6 +28,10 @@ public sealed class StudioToolPanel : StackPanel
         """;
     public static readonly DependencyProperty NodeTypesProperty = DependencyProperty.Register(nameof(NodeTypes), typeof(string), typeof(StudioToolPanel), new PropertyMetadata("", Rebuild));
     public string NodeTypes { get => (string)GetValue(NodeTypesProperty); set => SetValue(NodeTypesProperty, value); }
+    public static readonly DependencyProperty CompactRowsProperty=DependencyProperty.Register(nameof(CompactRows),typeof(bool),typeof(StudioToolPanel),new PropertyMetadata(false,Rebuild));
+    public bool CompactRows {get=>(bool)GetValue(CompactRowsProperty);set=>SetValue(CompactRowsProperty,value);}
+    public static readonly DependencyProperty ParameterKeysProperty=DependencyProperty.Register(nameof(ParameterKeys),typeof(string),typeof(StudioToolPanel),new PropertyMetadata("",Rebuild));
+    public string ParameterKeys {get=>(string)GetValue(ParameterKeysProperty);set=>SetValue(ParameterKeysProperty,value);}
     private TetherReferenceModeViewModel? _editor;
     private bool _refreshing;
     private readonly List<(ColorStudioToolParameter Parameter, Slider Slider, StudioNumericEditor Number)> _fields = [];
@@ -70,10 +74,12 @@ public sealed class StudioToolPanel : StackPanel
             _toggles.Add((type, enabled));
             var nodeBody = new StackPanel();
             var nodeSection = Section(type.ToString(), heading, nodeBody, true); Children.Add(nodeSection);
-            var groups = ColorStudioToolCatalog.GetParameters(type).GroupBy(p => p.Group).ToArray();
+            var parameters = ColorStudioToolCatalog.GetParameters(type).Where(p=>string.IsNullOrEmpty(ParameterKeys)||ParameterKeys.Split(',').Contains(p.Key));
+            if(CompactRows&&!string.IsNullOrEmpty(ParameterKeys)) parameters=parameters.OrderBy(p=>Array.IndexOf(ParameterKeys.Split(','),p.Key));
+            var groups = parameters.GroupBy(p => p.Group).ToArray();
             foreach (var group in groups)
             {
-                var body = new StackPanel { Margin = new Thickness(2, 1, 2, 3) };
+                var body = new StackPanel { Margin = new Thickness(2, 1, 2, CompactRows?0:3) };
                 if (type == ColorStudioNodeType.ColorBalance)
                 {
                     var wheel = new StudioColorBalanceWheel(() => _editor, group.Single(p => p.Key.EndsWith("_hue")), group.Single(p => p.Key.EndsWith("_amount")));
@@ -147,7 +153,34 @@ public sealed class StudioToolPanel : StackPanel
             }
             heading.Children.Add(enabled);
         }
+        if(CompactRows)MakeCompact();
         Refresh();
+    }
+    private void MakeCompact()
+    {
+        // Presentation-only dense rows; continue using the existing slider/number callbacks.
+        foreach(var field in _fields)
+        {
+            if(field.Slider.Parent is not Panel body||field.Number.Parent is not DockPanel row)continue;
+            var label=row.Children.OfType<TextBlock>().FirstOrDefault();if(label is null)continue;
+            int index=body.Children.IndexOf(row);body.Children.Remove(field.Slider);body.Children.Remove(row);
+            row.Children.Remove(field.Number);row.Children.Remove(label);
+            var line=new Grid{Height=22,Margin=new Thickness(0)};
+            line.ColumnDefinitions.Add(new(){Width=new GridLength(87)});line.ColumnDefinitions.Add(new());line.ColumnDefinitions.Add(new(){Width=new GridLength(44)});
+            label.FontSize=11;label.Text=label.Text.Split(" · ")[0];label.TextWrapping=TextWrapping.NoWrap;line.Children.Add(label);
+            if(TryFindResource(typeof(Slider))is Style compactSlider){field.Slider.ClearValue(StyleProperty);field.Slider.Style=compactSlider;}
+            field.Slider.Height=20;field.Slider.Margin=new Thickness(5,0,5,0);Grid.SetColumn(field.Slider,1);line.Children.Add(field.Slider);
+            field.Number.ClearValue(StyleProperty);field.Number.Style=new Style(typeof(TextBox));field.Number.Background=Brushes.Transparent;field.Number.BorderThickness=new Thickness(0);field.Number.Foreground=new SolidColorBrush(Color.FromRgb(215,215,220));field.Number.TextAlignment=TextAlignment.Right;
+            field.Number.Height=20;field.Number.MinHeight=20;field.Number.Width=42;field.Number.FontSize=10;field.Number.Padding=new Thickness(2,0,2,0);Grid.SetColumn(field.Number,2);line.Children.Add(field.Number);
+            body.Children.Insert(Math.Min(index,body.Children.Count),line);
+        }
+        if(Children.OfType<Expander>().FirstOrDefault() is{} outer&&outer.Content is Panel content)
+        {var elements=content.Children.Cast<UIElement>().ToArray();content.Children.Clear();Children.Remove(outer);foreach(var item in elements)
+          {
+            if(item is Expander group&&group.Content is Panel body)
+            {var rows=body.Children.Cast<UIElement>().ToArray();body.Children.Clear();foreach(var row in rows)Children.Add(row);}
+            else Children.Add(item);
+          }}
     }
     private Expander Section(string id, object header, object content, bool expanded)
     {
