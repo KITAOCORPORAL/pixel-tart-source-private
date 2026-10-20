@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-20T23:50:26.895466+08:00",
+  "timezone": "Asia/Shanghai",
+  "sourceSha": "99d7818e035310c9273565e73752ee0359ebb8f1",
+  "status": "BLOCKED",
+  "diagnosticOnly": true,
+  "planningDataScope": "PASS scoped automatic services/WPF; overallPARTIAL",
+  "coreSuite": "FAIL:Scenario11 32139ms >30000ms, retained",
+  "wpfSuite": "PARTIAL:1694 pass/21 skipped",
+  "physicalMouse": "NOT_RUN",
+  "reasons": [
+    "Full Core performance test failed",
+    "Core5/WPF21 skipped conditions remain",
+    "Physical desktop user business operations not performed",
+    "Project external absolute references/attachments and DB not fully portable",
+    "Full15-section consolidated export not implemented",
+    "Word/WPS/complex sections/device catalog dependencies open"
+  ]
+}

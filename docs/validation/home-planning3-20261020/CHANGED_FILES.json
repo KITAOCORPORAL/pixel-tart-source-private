@@ -1,0 +1,29 @@
+{
+  "stages": [
+    {
+      "sha": "e9b0886367efea5ef50e56f4ea82bf0995b7103a",
+      "type": "test",
+      "files": [
+        "tests/RAWSelectionAssistant.Tests/PlanningBatch3ServiceTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/PlanningBatch3BusinessTests.cs"
+      ]
+    },
+    {
+      "sha": "99d7818e035310c9273565e73752ee0359ebb8f1",
+      "type": "product ViewModel nonpixel",
+      "files": [
+        "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+        "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.References.cs"
+      ]
+    }
+  ],
+  "actualCommits": "Full exact test commit SHA in git log; short label not an artifact identity",
+  "evidenceTypes": [
+    ".md",
+    ".json",
+    ".csv",
+    ".zip",
+    ".png"
+  ],
+  "binaryProductInGit": false
+}
