@@ -24,10 +24,20 @@ public sealed class WpfDialogService : IDialogService, IReferenceAdjustmentDialo
         return dialog.ShowDialog(Application.Current.MainWindow) == true ? dialog.FolderName : null;
     }
 
+    // Keep image selection separate from the legacy process-wide Shell dialog state.
+    // The old state can restore an oversized window below the current desktop.
+    internal static readonly Guid ImageOpenDialogClient = new("593902b4-ec8d-4d8e-bf5d-7676469d2e43");
+    internal static OpenFileDialog CreateFileDialog(string title,string filter,bool multiselect) => new()
+    {
+        Title=title, Filter=filter, Multiselect=multiselect, CheckFileExists=true,
+        ClientGuid=ImageOpenDialogClient, RestoreDirectory=true
+    };
     public IReadOnlyList<string> ChooseFiles(string title, string filter, bool multiselect = true)
     {
-        var dialog = new OpenFileDialog { Title = title, Filter = filter, Multiselect = multiselect, CheckFileExists = true };
-        return dialog.ShowDialog(Application.Current.MainWindow) == true ? dialog.FileNames : [];
+        var dialog=CreateFileDialog(title,filter,multiselect);
+        var owner=Application.Current?.Windows.OfType<Window>().FirstOrDefault(w=>w.IsActive)
+            ?? Application.Current?.MainWindow;
+        return (owner is {IsVisible:true}?dialog.ShowDialog(owner):dialog.ShowDialog())==true ? dialog.FileNames : [];
     }
 
     public string? ChooseSaveFile(string title, string filter, string defaultExtension, string? suggestedFileName = null)

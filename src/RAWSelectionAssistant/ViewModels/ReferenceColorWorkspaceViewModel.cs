@@ -194,7 +194,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         Editor.Enabled = true;
         InitializeRangeSelection();
         BuildColorSpaceModelCommand = new AsyncRelayCommand(_ => BuildColorSpaceModelAsync(), _ => Editor.SourceImage is not null);
-        ChooseTargetCommand = new AsyncRelayCommand(_ => ChooseTargetAsync());
+        ChooseTargetCommand = new AsyncRelayCommand(_ => ChooseTargetAsync(), _ => !IsLoading && !IsExporting && !IsInstantGenerating);
         StopProcessingCommand = new RelayCommand(_ => {CancelLightPrintTask(true);CancelComparison();ExitInstantPresentationForLifecycle();_sessionPreparationCancellation?.Cancel();Editor.StopProcessing();_activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);InvalidateProfessionalPreview();}, _ => Editor.IsBusy || IsLoading || IsInstantGenerating || IsComparisonPreparing || !LightPrintPreviewWork.IsCompleted || SelectSecondExposureCommand?.CanExecute(null)==false || !ProfessionalDetailWork.IsCompleted);
         CopyAdjustmentsCommand = new RelayCommand(_ => CopyCurrentAdjustments(), _ => ActiveTarget is not null && !IsLoading && !IsProfessionalRaw);
         ApplyAdjustmentsCommand = new RelayCommand(_ => ApplyCopiedAdjustments(), _ => HasCopiedAdjustments && SelectedTargets.Any() && !IsLoading);
@@ -443,6 +443,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         OpenNodeSyncCommand?.RaiseCanExecuteChanged(); SyncSelectedCommand?.RaiseCanExecuteChanged(); SyncAllCommand?.RaiseCanExecuteChanged();
         CopyAdjustmentsCommand?.RaiseCanExecuteChanged(); ApplyAdjustmentsCommand?.RaiseCanExecuteChanged(); PreparePublishingCommand?.RaiseCanExecuteChanged();
         OpenAdjustmentCopyCommand?.RaiseCanExecuteChanged(); ConfirmAdjustmentCopyCommand?.RaiseCanExecuteChanged();
+        ChooseTargetCommand?.RaiseCanExecuteChanged();
         ExportSelectedCommand?.RaiseCanExecuteChanged(); ExportAllCommand?.RaiseCanExecuteChanged();
     }
     public bool NodeSyncOpen { get => _nodeSyncOpen; set { if (value) AdjustmentCopyOpen = false; SetProperty(ref _nodeSyncOpen, value); } }
@@ -744,17 +745,24 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private async Task ChooseTargetAsync()
     {
-        var paths = _dialogs.ChooseFiles(StudioLocalizationService.Current["导入待调色照片（源文件只读）"], StudioLocalizationService.Current["ImagesRaw"] + "|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp;*.cr2;*.cr3;*.nef;*.arw;*.raf;*.rw2;*.orf;*.dng;*.pef;*.nrw;*.ori;*.3fr;*.fff;*.iiq;*.srw;*.rwl;*.x3f", true);
-        if (paths.Count == 0) return;
-        IsLoading = true;
+        if(IsLoading || IsExporting || IsInstantGenerating)return;
         try
         {
-            var items = paths.Distinct(StringComparer.OrdinalIgnoreCase).Select(GetOrCreateTarget).ToArray();
-            using var gate = new SemaphoreSlim(3, 3);
-            await Task.WhenAll(items.Select(async item => { await gate.WaitAsync(); try { await LoadThumbnailAsync(item, CancellationToken.None); } finally { gate.Release(); } }));
-            if (items.Length > 0) { items[0].IsSelected = true; await ActivateTargetAsync(items[0]); }
+            StatusText="请选择要导入的照片；文件选择窗口已打开。";
+            var paths = _dialogs.ChooseFiles(StudioLocalizationService.Current["导入待调色照片（源文件只读）"], StudioLocalizationService.Current["ImagesRaw"] + "|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp;*.cr2;*.cr3;*.nef;*.arw;*.raf;*.rw2;*.orf;*.dng;*.pef;*.nrw;*.ori;*.3fr;*.fff;*.iiq;*.srw;*.rwl;*.x3f", true);
+            if(paths.Count==0){StatusText="已取消导入；现有照片和调整保持不变。";return;}
+            IsLoading=true;
+            var items=paths.Distinct(StringComparer.OrdinalIgnoreCase).Select(GetOrCreateTarget).ToArray();
+            using var gate=new SemaphoreSlim(3,3);
+            await Task.WhenAll(items.Select(async item=>{await gate.WaitAsync();try{await LoadThumbnailAsync(item,CancellationToken.None);}finally{gate.Release();}}));
+            if(items.Length>0){items[0].IsSelected=true;await ActivateTargetAsync(items[0]);}
         }
-        finally { IsLoading = false; }
+        catch(Exception error)when(error is IOException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException or System.Runtime.InteropServices.COMException or System.ComponentModel.Win32Exception)
+        {
+            StatusText="导入未完成："+error.Message+"。可再次点击导入，现有照片和调整未清空。";
+            _dialogs.ShowError(StatusText);
+        }
+        finally{IsLoading=false;ChooseTargetCommand.RaiseCanExecuteChanged();}
     }
 
     private async Task ExportAsync(IReadOnlyList<ReferenceTargetItem> items, string? retryDirectory = null)
