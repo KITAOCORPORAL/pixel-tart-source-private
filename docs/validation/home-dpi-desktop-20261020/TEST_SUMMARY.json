@@ -1,0 +1,62 @@
+{
+  "at": "2026-10-20T22:36:32.053742+08:00",
+  "timezone": "Asia/Shanghai",
+  "suites": [
+    {
+      "suite": "DPI_BEFORE",
+      "discovered": 91,
+      "selected": 91,
+      "obtained": 91,
+      "passed": 74,
+      "failed": 17,
+      "skipped": 0,
+      "missing": [],
+      "extra": [],
+      "timeouts": [],
+      "assembly": "N:\\pixart\\guangjing-whole-app-home-20261020\\artifacts\\dpi-home-20261020\\bin\\RAWSelectionAssistant.DpiTests\\release\\RAWSelectionAssistant.DpiTests.dll",
+      "assemblySha256": "387cb351f268563d963f520855f9c52845f1c102d9a75a2c7137275d01e70f78",
+      "runRoot": "N:\\pixart\\Guangjing-Home-Dpi-20261020-220746\\DPI_BEFORE\\run-20261020-220904-8258b1b1",
+      "runnerStatus": "FAILED"
+    },
+    {
+      "suite": "DPI_AFTER",
+      "discovered": 91,
+      "selected": 91,
+      "obtained": 91,
+      "passed": 91,
+      "failed": 0,
+      "skipped": 0,
+      "missing": [],
+      "extra": [],
+      "timeouts": [],
+      "assembly": "N:\\pixart\\guangjing-whole-app-home-20261020\\artifacts\\dpi-home-20261020\\bin\\RAWSelectionAssistant.DpiTests\\release\\RAWSelectionAssistant.DpiTests.dll",
+      "assemblySha256": "387cb351f268563d963f520855f9c52845f1c102d9a75a2c7137275d01e70f78",
+      "runRoot": "N:\\pixart\\Guangjing-Home-Dpi-20261020-220746\\DPI_AFTER\\run-20261020-222902-7a8cfbce",
+      "runnerStatus": "PASSED"
+    },
+    {
+      "suite": "RELATED_WPF",
+      "discovered": 1711,
+      "selected": 29,
+      "obtained": 29,
+      "passed": 29,
+      "failed": 0,
+      "skipped": 0,
+      "missing": [],
+      "extra": [],
+      "timeouts": [],
+      "assembly": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\final-build\\bin\\RAWSelectionAssistant.WpfTests\\release\\RAWSelectionAssistant.WpfTests.dll",
+      "assemblySha256": "511453eba60d4d3fbe9162ef4212e550341e2df674c6112fdf022899f97b54b8",
+      "runRoot": "N:\\pixart\\Guangjing-Home-Dpi-20261020-220746\\RELATED_WPF\\run-20261020-222950-c0614ac1",
+      "runnerStatus": "PASSED"
+    }
+  ],
+  "sameDpiTestAssemblyBeforeAfter": true,
+  "dpiTestAssertionsChanged": false,
+  "physicalAcceptance": "NOT_RUN",
+  "desktopClicks": "NOT_RUN",
+  "fullWpfThisBatch": "NOT_RUN: no product/source defect or product change; related producer/source contracts29/29 only",
+  "captureSource": "4f0850b27b41db0529f4936c5e8e4f6a14f7e629",
+  "producerFixCommit": "28c428c69f6639304c8fee4f5210ad6588a95533",
+  "srcAndTestsUnchanged": true
+}

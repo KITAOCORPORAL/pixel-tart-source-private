@@ -1,0 +1,205 @@
+﻿name,display,before,after,beforeReason,closure,physicalStatus,error
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""AssetContextMenu"")",Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""MainWindow"")",Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates,EachCurrentDpiHasEightPassingProductStates (200),Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EachCurrentDpiHasEightPassingProductStates 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Int32 dpiPercent)
+   at InvokeStub_AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.CurrentEvidenceCaptureSetMatchesTheCurrentProducerContract,CurrentEvidenceCaptureSetMatchesTheCurrentProducerContract,Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。CurrentEvidenceCaptureSetMatchesTheCurrentProducerContract 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.CurrentEvidenceCaptureSetMatchesTheCurrentProducerContract()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""AssetInspirationCollection"")",Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""AssetLibraryGrid"")",Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.CurrentProducerUsesRealApplicationDarkThemeAndProcessIsolation,CurrentProducerUsesRealApplicationDarkThemeAndProcessIsolation,Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。CurrentProducerUsesRealApplicationDarkThemeAndProcessIsolation 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.CurrentProducerUsesRealApplicationDarkThemeAndProcessIsolation()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates,EachCurrentDpiHasEightPassingProductStates (125),Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EachCurrentDpiHasEightPassingProductStates 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Int32 dpiPercent)
+   at InvokeStub_AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.IsolatedSyntheticSourceImagesRemainByteIdentical,IsolatedSyntheticSourceImagesRemainByteIdentical,Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。IsolatedSyntheticSourceImagesRemainByteIdentical 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.IsolatedSyntheticSourceImagesRemainByteIdentical()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""AssetViewer"")",Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates,EachCurrentDpiHasEightPassingProductStates (100),Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EachCurrentDpiHasEightPassingProductStates 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Int32 dpiPercent)
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""CalendarBookingAssets"")",Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""AssetRecentLibraries"")",Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.DpiScreenshotsAndMetadataAreCompleteAndByteValid,DpiScreenshotsAndMetadataAreCompleteAndByteValid,Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。DpiScreenshotsAndMetadataAreCompleteAndByteValid 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.DpiScreenshotsAndMetadataAreCompleteAndByteValid()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""AssetFilter"")",Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+RAWSelectionAssistant.DpiTests.Version220StageDDpiGateTests.PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation,PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation,Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.Version220StageDDpiGateTests。PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\dpi-current'.
+             at System.IO.Enumeration.FileSystemEnumerator`1.CreateDirectoryHandle(String path, Boolean ignoreNotFound)
+   at System.IO.Enumeration.FileSystemEnumerator`1.Init()
+   at System.IO.Enumeration.FileSystemEnumerator`1..ctor(String directory, Boolean isNormalized, EnumerationOptions options, String expression)
+   at System.IO.Enumeration.FileSystemEnumerable`1..ctor(String directory, FindTransform transform, EnumerationOptions options, Boolean isNormalized, String expression)
+   at System.IO.Enumeration.FileSystemEnumerableFactory.UserFiles(String directory, String expression, EnumerationOptions options)
+   at System.IO.Directory.InternalEnumeratePaths(String path, String searchPattern, SearchTarget searchTarget, EnumerationOptions enumerationOptions)
+   at System.IO.Directory.GetFiles(String path, String searchPattern, EnumerationOptions enumerationOptions)
+   at RAWSelectionAssistant.DpiTests.Version220StageDDpiGateTests.PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates,EachCurrentDpiHasEightPassingProductStates (150),Failed,Passed,Current-run manifest or dpi-current metadata missing,"Fresh 106-state producer manifest / 32 logical-DPI metadata, same unchanged test assembly",NOT_RUN,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EachCurrentDpiHasEightPassingProductStates 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'N:\pixart\guangjing-whole-app-home-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Int32 dpiPercent)
+   at InvokeStub_AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"

@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-20T22:38:05.613434+08:00",
+  "timezone": "Asia/Shanghai",
+  "status": "BLOCKED",
+  "diagnosticOnly": true,
+  "logicalDpi": "PASS 91/91 after fresh current-run evidence",
+  "physicalDpi": "NOT_RUN",
+  "physicalDesktopNavigation": "NOT_RUN",
+  "productChanged": false,
+  "testAssertionsChanged": false,
+  "fullWpfThisBatch": "NOT_RUN; no product defect/change, related29/29",
+  "blockingReasons": [
+    "Computer Use native pipe unavailable",
+    "Foreground desktop user input active",
+    "Manual physical DPI and actual enter/return results missing",
+    "Existing wider release gates remain open"
+  ]
+}

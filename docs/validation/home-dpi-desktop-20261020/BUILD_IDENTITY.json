@@ -1,0 +1,58 @@
+{
+  "capturedSource": "4f0850b27b41db0529f4936c5e8e4f6a14f7e629",
+  "srcTree": "b984f85007f214110d35d1d3773a02b83e593e5d",
+  "productSourceUnchangedFromBatch1": true,
+  "logicalProducerFlags": {
+    "UiReviewBuild": true,
+    "WholeAppDiagnosticBuild": true,
+    "PhotographerTrialBuild": false,
+    "selfContained": true,
+    "rid": "win-x64"
+  },
+  "logicalProducerExe": "N:\\pixart\\Guangjing-Home-Dpi-20261020-220746\\logical-producer-app\\KitaoPhotoSelector.UiReview.exe",
+  "logicalProducerExeSha256": "40D04906B752AD1FD744A01BBAF8187D4277CBFA9E1E8627257F9CFE39CF66A5",
+  "logicalProducerWpfSha256": "38A8FA811C8A11A3C5AFF126672B6765EFFAE5E85782477A1DBA5CDFC1AF53A3",
+  "batch1DesktopExe": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\Guangjing-FullScope-Diagnostic-batch1-win-x64\\app\\KitaoPhotoSelector.exe",
+  "batch1DesktopExeSha256": "EFFAD5147EBB291B3D92644A0ED539EFCFCDC65671447FA20ECE7B47B2947F33",
+  "batch1DesktopWpfSha256": "349BEAEB3BAD0A2C8CAB5AB3BAD05DA238424864B7073CACA2A7C9D54C7C1F63",
+  "sharedComponents": [
+    {
+      "file": "RAWSelectionAssistant.Core.dll",
+      "batch1Sha256": "BBA360286F039A02E295F31046767B7A4404DA93F5C0EE69A2609BD952F1343E",
+      "dpiProducerSha256": "DE41A05821945B5FC792A53FBE5E08D04EB40825FFB360D64491F70B0133135B",
+      "same": false
+    },
+    {
+      "file": "PixelTart.Modules.AssetLibrary.dll",
+      "batch1Sha256": "3164DFA21AA5C88F11BB6F3068C902F1C9C8BB1DC7688237B0BD7DEC8DDFE222",
+      "dpiProducerSha256": "638C0C180213FAE1C3A6485ABCB8F2C72935DD572B683F0FD4D22BA7881E42AF",
+      "same": false
+    },
+    {
+      "file": "PixelTart.Modules.RawTool.dll",
+      "batch1Sha256": "F5C6F37014DF8D9058ACE2E2A8852F1C2D7AED4E59F31D2E37F58BE6114E2E88",
+      "dpiProducerSha256": "C1BBB8ABF903FB8DD2FED11E80BB0D689F6C69607AF0990F8534C5114F7F55A3",
+      "same": false
+    },
+    {
+      "file": "PixelTart.Modules.OnlineSelection.dll",
+      "batch1Sha256": "D8AA78D6487CECF9349D30859646F0B93A073C4BBDC8BF2B85423C8AE79E51B5",
+      "dpiProducerSha256": "9B5A9B49E9B283991EDCB58BB02B5166F2DCD2114B0517464A8D964807800A2B",
+      "same": false
+    },
+    {
+      "file": "PixelTart.Kernel.dll",
+      "batch1Sha256": "2FCCC1BE02C52751D00508BE3C138EC3A49C43D7973A3692D0385D7A813B4C4C",
+      "dpiProducerSha256": "43B86276CCF0D5AAF874941D1C93EADB64799B8770BBF30016F8B3D63D60DA27",
+      "same": false
+    },
+    {
+      "file": "PixelTart.MatchV4.Dx12.dll",
+      "batch1Sha256": "E5EAEB0DB22E03E6A394835347B6F64DFDBCBB38A2F7D27F2AE22B7A8CF4B82A",
+      "dpiProducerSha256": "8F074554E758B3B9653E8D212C1CA60A36D94D27D4FEC5B5C070901F8AE104FB",
+      "same": false
+    }
+  ],
+  "separation": "UiReview is the existing compile-time logical evidence seam, not byte-identical desktop batch1 app. No physical display/click claim.",
+  "at": "2026-10-20T22:21:46.126474+08:00"
+}
