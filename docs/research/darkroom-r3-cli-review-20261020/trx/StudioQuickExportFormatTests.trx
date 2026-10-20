@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="4bc99627-4d13-490c-a9b3-eeb975009541" name="@PC-20250309WEIZ 2026-10-20 12:33:11" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-20T12:33:11.2581664+08:00" queuing="2026-10-20T12:33:11.2581667+08:00" start="2026-10-20T12:33:09.7587438+08:00" finish="2026-10-20T12:33:11.2628273+08:00" />
+  <TestSettings name="default" id="a18e88b9-89d3-4a96-96ee-862018401dc3">
+    <Deployment runDeploymentRoot="_PC-20250309WEIZ_2026-10-20_12_33_11" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="3e46daa7-f82f-4f8a-b0f4-2e7f5fbf5b09" testId="1b6ae82a-5710-87f0-8de5-947ef86f7f5a" testName="RawToPngAndJpegReuseOneFrozenMasterAndCleanupIntermediates" computerName="PC-20250309WEIZ" duration="00:00:00.3667823" startTime="2026-10-20T12:33:10.5154078+08:00" endTime="2026-10-20T12:33:10.8822563+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3e46daa7-f82f-4f8a-b0f4-2e7f5fbf5b09" />
+    <UnitTestResult executionId="3697ba19-153b-4cf4-8129-635f42ea48f9" testId="19871803-7a96-8de5-967c-6f6404b4c066" testName="ChosenEncodersPreservePrecisionAlphaAndEmbedSrgb" computerName="PC-20250309WEIZ" duration="00:00:00.0099586" startTime="2026-10-20T12:33:10.5048503+08:00" endTime="2026-10-20T12:33:10.5150926+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3697ba19-153b-4cf4-8129-635f42ea48f9" />
+    <UnitTestResult executionId="1a13142b-fb8c-41a0-b2cc-13117da67f75" testId="167abfde-6518-82cc-ab9a-9fa5cea960b6" testName="JpegAndTiffExifDirectionsAreNormalizedOnceWithoutLosingPrecisionOrAlpha" computerName="PC-20250309WEIZ" duration="00:00:00.2558531" startTime="2026-10-20T12:33:10.2298585+08:00" endTime="2026-10-20T12:33:10.5011858+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1a13142b-fb8c-41a0-b2cc-13117da67f75" />
+    <UnitTestResult executionId="b1206634-6448-421b-a315-fd06f362e4e9" testId="17d8f5b6-29c1-8bcb-ac69-10a7f90a24c3" testName="SubclassSelectorsUseTheActualDarkComboBoxTemplate" computerName="PC-20250309WEIZ" duration="00:00:00.2768176" startTime="2026-10-20T12:33:10.8822924+08:00" endTime="2026-10-20T12:33:11.1602929+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b1206634-6448-421b-a315-fd06f362e4e9" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="RawToPngAndJpegReuseOneFrozenMasterAndCleanupIntermediates" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1b6ae82a-5710-87f0-8de5-947ef86f7f5a">
+      <Execution id="3e46daa7-f82f-4f8a-b0f4-2e7f5fbf5b09" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests" name="RawToPngAndJpegReuseOneFrozenMasterAndCleanupIntermediates" />
+    </UnitTest>
+    <UnitTest name="JpegAndTiffExifDirectionsAreNormalizedOnceWithoutLosingPrecisionOrAlpha" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="167abfde-6518-82cc-ab9a-9fa5cea960b6">
+      <Execution id="1a13142b-fb8c-41a0-b2cc-13117da67f75" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests" name="JpegAndTiffExifDirectionsAreNormalizedOnceWithoutLosingPrecisionOrAlpha" />
+    </UnitTest>
+    <UnitTest name="ChosenEncodersPreservePrecisionAlphaAndEmbedSrgb" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19871803-7a96-8de5-967c-6f6404b4c066">
+      <Execution id="3697ba19-153b-4cf4-8129-635f42ea48f9" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests" name="ChosenEncodersPreservePrecisionAlphaAndEmbedSrgb" />
+    </UnitTest>
+    <UnitTest name="SubclassSelectorsUseTheActualDarkComboBoxTemplate" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="17d8f5b6-29c1-8bcb-ac69-10a7f90a24c3">
+      <Execution id="b1206634-6448-421b-a315-fd06f362e4e9" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.StudioQuickExportFormatTests" name="SubclassSelectorsUseTheActualDarkComboBoxTemplate" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1b6ae82a-5710-87f0-8de5-947ef86f7f5a" executionId="3e46daa7-f82f-4f8a-b0f4-2e7f5fbf5b09" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19871803-7a96-8de5-967c-6f6404b4c066" executionId="3697ba19-153b-4cf4-8129-635f42ea48f9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="167abfde-6518-82cc-ab9a-9fa5cea960b6" executionId="1a13142b-fb8c-41a0-b2cc-13117da67f75" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17d8f5b6-29c1-8bcb-ac69-10a7f90a24c3" executionId="b1206634-6448-421b-a315-fd06f362e4e9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

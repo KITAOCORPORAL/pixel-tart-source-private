@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="fde0f728-cd83-48af-a548-87fa72fcddf7" name="@PC-20250309WEIZ 2026-10-20 10:52:04" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-20T10:52:04.6493764+08:00" queuing="2026-10-20T10:52:04.6493767+08:00" start="2026-10-20T10:52:02.6793681+08:00" finish="2026-10-20T10:52:06.9103922+08:00" />
+  <TestSettings name="default" id="1e6c6148-233a-457b-bfa2-57dab8fc9a35">
+    <Deployment runDeploymentRoot="_PC-20250309WEIZ_2026-10-20_10_52_04" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="a8325c11-2bfa-40d7-8698-216979e5ca8a" testId="1ac8e8dd-8255-87a4-94f5-d318f71cdf7b" testName="AllDirectPageBindingPathsExistOnActualModels" computerName="PC-20250309WEIZ" duration="00:00:00.0062183" startTime="2026-10-20T10:52:03.5990578+08:00" endTime="2026-10-20T10:52:03.6053509+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a8325c11-2bfa-40d7-8698-216979e5ca8a" />
+    <UnitTestResult executionId="ea8854b5-97ba-446f-969d-cdf4c4625916" testId="16af5f73-3c27-8ba0-b774-a1866dc62ddd" testName="StopExportCancelsBeforeEncodingAndAllowsRetry (Tiff)" computerName="PC-20250309WEIZ" duration="00:00:00.2744411" startTime="2026-10-20T10:52:06.2394785+08:00" endTime="2026-10-20T10:52:06.5140617+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ea8854b5-97ba-446f-969d-cdf4c4625916" />
+    <UnitTestResult executionId="1c3d912a-e56b-4914-9a1f-f032169a0983" testId="19731996-e0e7-871b-81a4-bb806eb97275" testName="StopExportCancelsBeforeEncodingAndAllowsRetry (Jpeg)" computerName="PC-20250309WEIZ" duration="00:00:00.2649065" startTime="2026-10-20T10:52:06.5141100+08:00" endTime="2026-10-20T10:52:06.7791183+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1c3d912a-e56b-4914-9a1f-f032169a0983" />
+    <UnitTestResult executionId="3a8a23fa-fa5c-4e89-a65f-0d2d56908ab6" testId="10e4eaaf-60cd-82d5-abfd-fa8eda9da712" testName="TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline" computerName="PC-20250309WEIZ" duration="00:00:00.0565266" startTime="2026-10-20T10:52:06.7791639+08:00" endTime="2026-10-20T10:52:06.8368552+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3a8a23fa-fa5c-4e89-a65f-0d2d56908ab6">
+      <Output>
+        <ErrorInfo>
+          <Message>测试方法 RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests。TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline 引发了异常: &#xD;
+System.ArgumentNullException: Value cannot be null. (Parameter 'source')</Message>
+          <StackTrace>   at System.ArgumentNullException.Throw(String paramName)&#xD;
+   at System.ArgumentNullException.ThrowIfNull(Object argument, String paramName)&#xD;
+   at System.Windows.Media.Imaging.FormatConvertedBitmap..ctor(BitmapSource source, PixelFormat destinationFormat, BitmapPalette destinationPalette, Double alphaThreshold)&#xD;
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.Pixels(BitmapSource b)&#xD;
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.&lt;&gt;c.&lt;&lt;TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline&gt;b__7_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407&#xD;
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b6a4be5f-c4dd-4835-b6f6-8476df7f493b" testId="1c604b9c-857f-8eee-b156-8304fbdb1475" testName="StopExportCancelsBeforeEncodingAndAllowsRetry (Png)" computerName="PC-20250309WEIZ" duration="00:00:00.3408080" startTime="2026-10-20T10:52:05.8965788+08:00" endTime="2026-10-20T10:52:06.2394209+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b6a4be5f-c4dd-4835-b6f6-8476df7f493b" />
+    <UnitTestResult executionId="64909ac6-336c-4c63-86ed-293e24bf9443" testId="1c1e68c3-9186-82cb-892c-060424c4082b" testName="DisplayedFrameKeepsFullResolutionAtActualPixels" computerName="PC-20250309WEIZ" duration="00:00:00.2043229" startTime="2026-10-20T10:52:03.3636290+08:00" endTime="2026-10-20T10:52:03.5927847+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="64909ac6-336c-4c63-86ed-293e24bf9443" />
+    <UnitTestResult executionId="ab4176a4-aa55-416f-8aca-e764f1e38cac" testId="124a5063-40e2-8e76-95bc-b36c24ea8870" testName="ExportStopUsesProductionCommandAndFormatBinding" computerName="PC-20250309WEIZ" duration="00:00:00.1763647" startTime="2026-10-20T10:52:04.5188246+08:00" endTime="2026-10-20T10:52:04.6952460+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ab4176a4-aa55-416f-8aca-e764f1e38cac" />
+    <UnitTestResult executionId="55ff3b51-2cf4-4044-bf56-35c8e93447da" testId="10387c0c-05ba-81e2-b501-965b62312b2c" testName="ClonePreservesFrozenDefinitionAndPortableSession" computerName="PC-20250309WEIZ" duration="00:00:01.2011733" startTime="2026-10-20T10:52:04.6952782+08:00" endTime="2026-10-20T10:52:05.8965252+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="55ff3b51-2cf4-4044-bf56-35c8e93447da" />
+    <UnitTestResult executionId="ee69ce17-7597-434c-84ef-9af9f0240651" testId="11d9bbf1-8477-8cd0-b998-987f6d4fc9bf" testName="NewControlsResolveProductionCommandsWithoutOpeningWindows" computerName="PC-20250309WEIZ" duration="00:00:00.9133402" startTime="2026-10-20T10:52:03.6053894+08:00" endTime="2026-10-20T10:52:04.5187900+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ee69ce17-7597-434c-84ef-9af9f0240651" />
+    <UnitTestResult executionId="e996d05f-0e57-43c7-b819-fc6763295432" testId="1d287b47-cbff-8961-9728-ee9e87012dfd" testName="DisplayedDimensionsSetterReconfiguresAlreadyLoadedViewport" computerName="PC-20250309WEIZ" duration="00:00:00.0018828" startTime="2026-10-20T10:52:03.5964973+08:00" endTime="2026-10-20T10:52:03.5987171+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e996d05f-0e57-43c7-b819-fc6763295432" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="NewControlsResolveProductionCommandsWithoutOpeningWindows" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="11d9bbf1-8477-8cd0-b998-987f6d4fc9bf">
+      <Execution id="ee69ce17-7597-434c-84ef-9af9f0240651" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="NewControlsResolveProductionCommandsWithoutOpeningWindows" />
+    </UnitTest>
+    <UnitTest name="ExportStopUsesProductionCommandAndFormatBinding" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="124a5063-40e2-8e76-95bc-b36c24ea8870">
+      <Execution id="ab4176a4-aa55-416f-8aca-e764f1e38cac" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="ExportStopUsesProductionCommandAndFormatBinding" />
+    </UnitTest>
+    <UnitTest name="DisplayedFrameKeepsFullResolutionAtActualPixels" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1c1e68c3-9186-82cb-892c-060424c4082b">
+      <Execution id="64909ac6-336c-4c63-86ed-293e24bf9443" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="DisplayedFrameKeepsFullResolutionAtActualPixels" />
+    </UnitTest>
+    <UnitTest name="StopExportCancelsBeforeEncodingAndAllowsRetry (Jpeg)" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19731996-e0e7-871b-81a4-bb806eb97275">
+      <Execution id="1c3d912a-e56b-4914-9a1f-f032169a0983" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="StopExportCancelsBeforeEncodingAndAllowsRetry" />
+    </UnitTest>
+    <UnitTest name="AllDirectPageBindingPathsExistOnActualModels" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1ac8e8dd-8255-87a4-94f5-d318f71cdf7b">
+      <Execution id="a8325c11-2bfa-40d7-8698-216979e5ca8a" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="AllDirectPageBindingPathsExistOnActualModels" />
+    </UnitTest>
+    <UnitTest name="ClonePreservesFrozenDefinitionAndPortableSession" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10387c0c-05ba-81e2-b501-965b62312b2c">
+      <Execution id="55ff3b51-2cf4-4044-bf56-35c8e93447da" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="ClonePreservesFrozenDefinitionAndPortableSession" />
+    </UnitTest>
+    <UnitTest name="DisplayedDimensionsSetterReconfiguresAlreadyLoadedViewport" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d287b47-cbff-8961-9728-ee9e87012dfd">
+      <Execution id="e996d05f-0e57-43c7-b819-fc6763295432" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="DisplayedDimensionsSetterReconfiguresAlreadyLoadedViewport" />
+    </UnitTest>
+    <UnitTest name="TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10e4eaaf-60cd-82d5-abfd-fa8eda9da712">
+      <Execution id="3a8a23fa-fa5c-4e89-a65f-0d2d56908ab6" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline" />
+    </UnitTest>
+    <UnitTest name="StopExportCancelsBeforeEncodingAndAllowsRetry (Tiff)" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16af5f73-3c27-8ba0-b774-a1866dc62ddd">
+      <Execution id="ea8854b5-97ba-446f-969d-cdf4c4625916" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="StopExportCancelsBeforeEncodingAndAllowsRetry" />
+    </UnitTest>
+    <UnitTest name="StopExportCancelsBeforeEncodingAndAllowsRetry (Png)" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1c604b9c-857f-8eee-b156-8304fbdb1475">
+      <Execution id="b6a4be5f-c4dd-4835-b6f6-8476df7f493b" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="StopExportCancelsBeforeEncodingAndAllowsRetry" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1ac8e8dd-8255-87a4-94f5-d318f71cdf7b" executionId="a8325c11-2bfa-40d7-8698-216979e5ca8a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16af5f73-3c27-8ba0-b774-a1866dc62ddd" executionId="ea8854b5-97ba-446f-969d-cdf4c4625916" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19731996-e0e7-871b-81a4-bb806eb97275" executionId="1c3d912a-e56b-4914-9a1f-f032169a0983" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10e4eaaf-60cd-82d5-abfd-fa8eda9da712" executionId="3a8a23fa-fa5c-4e89-a65f-0d2d56908ab6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c604b9c-857f-8eee-b156-8304fbdb1475" executionId="b6a4be5f-c4dd-4835-b6f6-8476df7f493b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c1e68c3-9186-82cb-892c-060424c4082b" executionId="64909ac6-336c-4c63-86ed-293e24bf9443" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="124a5063-40e2-8e76-95bc-b36c24ea8870" executionId="ab4176a4-aa55-416f-8aca-e764f1e38cac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10387c0c-05ba-81e2-b501-965b62312b2c" executionId="55ff3b51-2cf4-4044-bf56-35c8e93447da" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11d9bbf1-8477-8cd0-b998-987f6d4fc9bf" executionId="ee69ce17-7597-434c-84ef-9af9f0240651" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d287b47-cbff-8961-9728-ee9e87012dfd" executionId="e996d05f-0e57-43c7-b819-fc6763295432" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="10" executed="10" passed="9" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

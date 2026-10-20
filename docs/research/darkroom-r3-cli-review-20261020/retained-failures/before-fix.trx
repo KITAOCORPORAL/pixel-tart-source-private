@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="bf532602-85fe-4abe-9d74-21ffbb87ada0" name="@PC-20250309WEIZ 2026-10-20 10:47:34" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-20T10:47:34.6707153+08:00" queuing="2026-10-20T10:47:34.6707157+08:00" start="2026-10-20T10:47:32.6923704+08:00" finish="2026-10-20T10:47:37.7847326+08:00" />
+  <TestSettings name="default" id="b1a88995-32bb-423d-ace8-02b184b11a29">
+    <Deployment runDeploymentRoot="_PC-20250309WEIZ_2026-10-20_10_47_34" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="934b64ff-cc5d-4f17-9225-c320c7854dd9" testId="19731996-e0e7-871b-81a4-bb806eb97275" testName="StopExportCancelsBeforeEncodingAndAllowsRetry (Jpeg)" computerName="PC-20250309WEIZ" duration="00:00:00.2925358" startTime="2026-10-20T10:47:37.4035322+08:00" endTime="2026-10-20T10:47:37.6974004+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="934b64ff-cc5d-4f17-9225-c320c7854dd9" />
+    <UnitTestResult executionId="73286be6-78ee-4540-9ba5-b3011f2e8855" testId="16af5f73-3c27-8ba0-b774-a1866dc62ddd" testName="StopExportCancelsBeforeEncodingAndAllowsRetry (Tiff)" computerName="PC-20250309WEIZ" duration="00:00:00.3053255" startTime="2026-10-20T10:47:37.0980041+08:00" endTime="2026-10-20T10:47:37.4034844+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="73286be6-78ee-4540-9ba5-b3011f2e8855" />
+    <UnitTestResult executionId="3bc80b25-61fc-46dc-b8dc-31fd84711e65" testId="124a5063-40e2-8e76-95bc-b36c24ea8870" testName="ExportStopUsesProductionCommandAndFormatBinding" computerName="PC-20250309WEIZ" duration="00:00:00.2472812" startTime="2026-10-20T10:47:34.8833515+08:00" endTime="2026-10-20T10:47:35.1307263+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3bc80b25-61fc-46dc-b8dc-31fd84711e65">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.IsTrue 失败。‘condition’表达式:‘Children&lt;TextBlock&gt;(root).Any(t=&gt;BindingOperations.GetBinding(t,TextBlock.TextProperty)?.Path.Path=="ExportStatus")’。 Queue progress belongs in export dialog</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153&#xD;
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.&lt;&gt;c.&lt;&lt;ExportStopUsesProductionCommandAndFormatBinding&gt;b__4_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="eb4ed436-3716-4778-b702-97913b155917" testId="10387c0c-05ba-81e2-b501-965b62312b2c" testName="ClonePreservesFrozenDefinitionAndPortableSession" computerName="PC-20250309WEIZ" duration="00:00:01.4969224" startTime="2026-10-20T10:47:35.1307664+08:00" endTime="2026-10-20T10:47:36.6278072+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eb4ed436-3716-4778-b702-97913b155917" />
+    <UnitTestResult executionId="2fb7376b-50c4-49c7-8c0d-8eae620a64ee" testId="11d9bbf1-8477-8cd0-b998-987f6d4fc9bf" testName="NewControlsResolveProductionCommandsWithoutOpeningWindows" computerName="PC-20250309WEIZ" duration="00:00:01.1569916" startTime="2026-10-20T10:47:33.7262015+08:00" endTime="2026-10-20T10:47:34.8832922+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2fb7376b-50c4-49c7-8c0d-8eae620a64ee">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.IsTrue 失败。‘condition’表达式:‘Children&lt;Button&gt;(page).Any(b=&gt;ReferenceEquals(b.Command,vm.CreateEditVersionCommand))’。 Clone must bind to the real command, not an unguarded click stub</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153&#xD;
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.&lt;&gt;c.&lt;&lt;NewControlsResolveProductionCommandsWithoutOpeningWindows&gt;b__3_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="cd69d7af-42e4-4a90-a822-069bdbdb6380" testId="1c1e68c3-9186-82cb-892c-060424c4082b" testName="DisplayedFrameKeepsFullResolutionAtActualPixels" computerName="PC-20250309WEIZ" duration="00:00:00.3232857" startTime="2026-10-20T10:47:33.3655291+08:00" endTime="2026-10-20T10:47:33.7059512+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cd69d7af-42e4-4a90-a822-069bdbdb6380">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual 失败。应为: &lt;4000,5000&gt;，实际为: &lt;800,1000&gt;。‘expected’表达式:‘new Size(4000,5000)’,‘actual’表达式:‘view.State.ImageSize’。 100% must remain output pixels, not the 1600px proxy</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405&#xD;
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.&lt;&gt;c.&lt;DisplayedFrameKeepsFullResolutionAtActualPixels&gt;b__0_0()&#xD;
+   at System.Windows.Threading.DispatcherOperation`1.InvokeDelegateCore()&#xD;
+   at System.Windows.Threading.DispatcherOperation.InvokeImpl()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7c5515e9-d4ed-4ced-9603-38e174c6ccad" testId="1c604b9c-857f-8eee-b156-8304fbdb1475" testName="StopExportCancelsBeforeEncodingAndAllowsRetry (Png)" computerName="PC-20250309WEIZ" duration="00:00:00.4674549" startTime="2026-10-20T10:47:36.6278774+08:00" endTime="2026-10-20T10:47:37.0979464+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7c5515e9-d4ed-4ced-9603-38e174c6ccad" />
+    <UnitTestResult executionId="9c40deeb-2762-483f-a4dd-8ef2c4750e04" testId="1ac8e8dd-8255-87a4-94f5-d318f71cdf7b" testName="AllDirectPageBindingPathsExistOnActualModels" computerName="PC-20250309WEIZ" duration="00:00:00.0050035" startTime="2026-10-20T10:47:33.7210527+08:00" endTime="2026-10-20T10:47:33.7261553+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9c40deeb-2762-483f-a4dd-8ef2c4750e04">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.IsNotNull 失败。‘value’表达式:‘property’。 Unresolvable binding {Binding DataContext.ActivateTargetCommand,RelativeSource={RelativeSource AncestorType=ListBox}} at ReferenceColorWorkspaceViewModel.DataContext</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsNotNullFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 202&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AssertIsNotNullInterpolatedStringHandler.ComputeAssertion(String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 94&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsNotNull(Object value, AssertIsNotNullInterpolatedStringHandler&amp; message, String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 169&#xD;
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.AllDirectPageBindingPathsExistOnActualModels()&#xD;
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="74821147-6661-4c57-aab9-c6b2404f5853" testId="1d287b47-cbff-8961-9728-ee9e87012dfd" testName="DisplayedDimensionsSetterReconfiguresAlreadyLoadedViewport" computerName="PC-20250309WEIZ" duration="00:00:00.0101010" startTime="2026-10-20T10:47:33.7103964+08:00" endTime="2026-10-20T10:47:33.7207032+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="74821147-6661-4c57-aab9-c6b2404f5853">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual 失败。预期值 &lt;0.8&gt; 和实际值 &lt;1.5&gt; 之间的差不应大于 &lt;1E-09&gt;。‘expected’表达式:‘.8’,‘actual’表达式:‘view.State.ImageSize.Width/view.State.ImageSize.Height’。 framed output aspect, without stretching into source ratio</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed[T](T expected, T actual, T delta, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 679&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(Double expected, Double actual, Double delta, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 1149&#xD;
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.&lt;&gt;c.&lt;DisplayedDimensionsSetterReconfiguresAlreadyLoadedViewport&gt;b__1_0()&#xD;
+   at System.Windows.Threading.DispatcherOperation`1.InvokeDelegateCore()&#xD;
+   at System.Windows.Threading.DispatcherOperation.InvokeImpl()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="DisplayedFrameKeepsFullResolutionAtActualPixels" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1c1e68c3-9186-82cb-892c-060424c4082b">
+      <Execution id="cd69d7af-42e4-4a90-a822-069bdbdb6380" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="DisplayedFrameKeepsFullResolutionAtActualPixels" />
+    </UnitTest>
+    <UnitTest name="StopExportCancelsBeforeEncodingAndAllowsRetry (Tiff)" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16af5f73-3c27-8ba0-b774-a1866dc62ddd">
+      <Execution id="73286be6-78ee-4540-9ba5-b3011f2e8855" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="StopExportCancelsBeforeEncodingAndAllowsRetry" />
+    </UnitTest>
+    <UnitTest name="DisplayedDimensionsSetterReconfiguresAlreadyLoadedViewport" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d287b47-cbff-8961-9728-ee9e87012dfd">
+      <Execution id="74821147-6661-4c57-aab9-c6b2404f5853" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="DisplayedDimensionsSetterReconfiguresAlreadyLoadedViewport" />
+    </UnitTest>
+    <UnitTest name="StopExportCancelsBeforeEncodingAndAllowsRetry (Png)" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1c604b9c-857f-8eee-b156-8304fbdb1475">
+      <Execution id="7c5515e9-d4ed-4ced-9603-38e174c6ccad" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="StopExportCancelsBeforeEncodingAndAllowsRetry" />
+    </UnitTest>
+    <UnitTest name="AllDirectPageBindingPathsExistOnActualModels" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1ac8e8dd-8255-87a4-94f5-d318f71cdf7b">
+      <Execution id="9c40deeb-2762-483f-a4dd-8ef2c4750e04" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="AllDirectPageBindingPathsExistOnActualModels" />
+    </UnitTest>
+    <UnitTest name="StopExportCancelsBeforeEncodingAndAllowsRetry (Jpeg)" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19731996-e0e7-871b-81a4-bb806eb97275">
+      <Execution id="934b64ff-cc5d-4f17-9225-c320c7854dd9" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="StopExportCancelsBeforeEncodingAndAllowsRetry" />
+    </UnitTest>
+    <UnitTest name="ClonePreservesFrozenDefinitionAndPortableSession" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10387c0c-05ba-81e2-b501-965b62312b2c">
+      <Execution id="eb4ed436-3716-4778-b702-97913b155917" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="ClonePreservesFrozenDefinitionAndPortableSession" />
+    </UnitTest>
+    <UnitTest name="ExportStopUsesProductionCommandAndFormatBinding" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="124a5063-40e2-8e76-95bc-b36c24ea8870">
+      <Execution id="3bc80b25-61fc-46dc-b8dc-31fd84711e65" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="ExportStopUsesProductionCommandAndFormatBinding" />
+    </UnitTest>
+    <UnitTest name="NewControlsResolveProductionCommandsWithoutOpeningWindows" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="11d9bbf1-8477-8cd0-b998-987f6d4fc9bf">
+      <Execution id="2fb7376b-50c4-49c7-8c0d-8eae620a64ee" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests" name="NewControlsResolveProductionCommandsWithoutOpeningWindows" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="19731996-e0e7-871b-81a4-bb806eb97275" executionId="934b64ff-cc5d-4f17-9225-c320c7854dd9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16af5f73-3c27-8ba0-b774-a1866dc62ddd" executionId="73286be6-78ee-4540-9ba5-b3011f2e8855" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="124a5063-40e2-8e76-95bc-b36c24ea8870" executionId="3bc80b25-61fc-46dc-b8dc-31fd84711e65" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10387c0c-05ba-81e2-b501-965b62312b2c" executionId="eb4ed436-3716-4778-b702-97913b155917" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11d9bbf1-8477-8cd0-b998-987f6d4fc9bf" executionId="2fb7376b-50c4-49c7-8c0d-8eae620a64ee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c1e68c3-9186-82cb-892c-060424c4082b" executionId="cd69d7af-42e4-4a90-a822-069bdbdb6380" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c604b9c-857f-8eee-b156-8304fbdb1475" executionId="7c5515e9-d4ed-4ced-9603-38e174c6ccad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ac8e8dd-8255-87a4-94f5-d318f71cdf7b" executionId="9c40deeb-2762-483f-a4dd-8ef2c4750e04" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d287b47-cbff-8961-9728-ee9e87012dfd" executionId="74821147-6661-4c57-aab9-c6b2404f5853" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="9" executed="9" passed="4" failed="5" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

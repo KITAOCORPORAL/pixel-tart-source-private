@@ -1,5 +1,5 @@
 {
-  "label": "FINAL_CORE",
+  "label": "STAMPED_CORE",
   "args": [
     "test",
     "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
@@ -12,10 +12,10 @@
     "--logger",
     "trx;LogFileName=core.trx",
     "--results-directory",
-    "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/final-core"
+    "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped-core"
   ],
-  "pid": 21292,
+  "pid": 9992,
   "exit": 0,
-  "start": "2026-10-20T04:28:14.771Z",
-  "end": "2026-10-20T04:28:16.176Z"
+  "start": "2026-10-20T04:31:57.471Z",
+  "end": "2026-10-20T04:31:58.832Z"
 }

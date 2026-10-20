@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="61bdd422-cacb-48b0-bcf5-7da7b73c3c35" name="@PC-20250309WEIZ 2026-10-20 12:33:03" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-20T12:33:03.4986901+08:00" queuing="2026-10-20T12:33:03.4986903+08:00" start="2026-10-20T12:33:01.6713340+08:00" finish="2026-10-20T12:33:03.5031435+08:00" />
+  <TestSettings name="default" id="d5873c66-8c55-41b6-bbba-19223fd48e89">
+    <Deployment runDeploymentRoot="_PC-20250309WEIZ_2026-10-20_12_33_03" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="f3e37334-05aa-4f36-b70f-8915e633a858" testId="1f84b8ba-e311-8030-93e6-7d8494bb5737" testName="GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport (&quot;Decode&quot;)" computerName="PC-20250309WEIZ" duration="00:00:00.4999668" startTime="2026-10-20T12:33:02.2255018+08:00" endTime="2026-10-20T12:33:02.7272196+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f3e37334-05aa-4f36-b70f-8915e633a858" />
+    <UnitTestResult executionId="f1121258-b2c1-4cae-beb3-75da8862ba1c" testId="10f9acce-961f-8694-97a8-2e5d04615701" testName="GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport (&quot;DevelopmentAnimation&quot;)" computerName="PC-20250309WEIZ" duration="00:00:00.2832733" startTime="2026-10-20T12:33:03.0173753+08:00" endTime="2026-10-20T12:33:03.3017895+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f1121258-b2c1-4cae-beb3-75da8862ba1c" />
+    <UnitTestResult executionId="0f2d3375-b20c-47a0-b800-1271471baeef" testId="128f53df-0861-88b7-862c-2caad09abbfe" testName="CancelAtActualPixelEncodeAndValidationKeepsNoPartialAndOldDefinitionExportable" computerName="PC-20250309WEIZ" duration="00:00:00.0831711" startTime="2026-10-20T12:33:02.1235224+08:00" endTime="2026-10-20T12:33:02.2220235+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0f2d3375-b20c-47a0-b800-1271471baeef" />
+    <UnitTestResult executionId="b9c1117b-68cb-4181-9b35-925480718343" testId="186a09d1-06c4-86bd-ba54-b765e214c372" testName="GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport (&quot;PixelRender&quot;)" computerName="PC-20250309WEIZ" duration="00:00:00.2897309" startTime="2026-10-20T12:33:02.7275003+08:00" endTime="2026-10-20T12:33:03.0173346+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b9c1117b-68cb-4181-9b35-925480718343" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="CancelAtActualPixelEncodeAndValidationKeepsNoPartialAndOldDefinitionExportable" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="128f53df-0861-88b7-862c-2caad09abbfe">
+      <Execution id="0f2d3375-b20c-47a0-b800-1271471baeef" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests" name="CancelAtActualPixelEncodeAndValidationKeepsNoPartialAndOldDefinitionExportable" />
+    </UnitTest>
+    <UnitTest name="GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport (&quot;PixelRender&quot;)" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="186a09d1-06c4-86bd-ba54-b765e214c372">
+      <Execution id="b9c1117b-68cb-4181-9b35-925480718343" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests" name="GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport" />
+    </UnitTest>
+    <UnitTest name="GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport (&quot;Decode&quot;)" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1f84b8ba-e311-8030-93e6-7d8494bb5737">
+      <Execution id="f3e37334-05aa-4f36-b70f-8915e633a858" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests" name="GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport" />
+    </UnitTest>
+    <UnitTest name="GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport (&quot;DevelopmentAnimation&quot;)" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10f9acce-961f-8694-97a8-2e5d04615701">
+      <Execution id="f1121258-b2c1-4cae-beb3-75da8862ba1c" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.InstantV3PhaseCancellationTests" name="GenerationStageHandshakeCancelAndSwitchPreservesVersionAndOldExport" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1f84b8ba-e311-8030-93e6-7d8494bb5737" executionId="f3e37334-05aa-4f36-b70f-8915e633a858" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10f9acce-961f-8694-97a8-2e5d04615701" executionId="f1121258-b2c1-4cae-beb3-75da8862ba1c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="128f53df-0861-88b7-862c-2caad09abbfe" executionId="0f2d3375-b20c-47a0-b800-1271471baeef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="186a09d1-06c4-86bd-ba54-b765e214c372" executionId="b9c1117b-68cb-4181-9b35-925480718343" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="794c2adf-5fcd-45f7-89d3-6977a4bb7597" name="@PC-20250309WEIZ 2026-10-20 12:33:05" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-20T12:33:05.3247251+08:00" queuing="2026-10-20T12:33:05.3247253+08:00" start="2026-10-20T12:33:04.7060993+08:00" finish="2026-10-20T12:33:05.3295216+08:00" />
+  <TestSettings name="default" id="6eec778a-134c-4d97-8b10-ea488afc83eb">
+    <Deployment runDeploymentRoot="_PC-20250309WEIZ_2026-10-20_12_33_05" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="91b2e1f8-46ae-43d9-9c0e-ad85f22c7049" testId="1feda04b-504a-8167-b6a6-50ca024b16d0" testName="EyedropperZoomPanLetterboxAndOutsideRejectTests" computerName="PC-20250309WEIZ" duration="00:00:00.0030793" startTime="2026-10-20T12:33:05.2287246+08:00" endTime="2026-10-20T12:33:05.2329276+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="91b2e1f8-46ae-43d9-9c0e-ad85f22c7049" />
+    <UnitTestResult executionId="3505f852-0521-456f-a1ab-0a351a8e1c41" testId="15f6f739-6d61-82d1-bb1a-4d22f312c0a1" testName="LargeSourceWheelZoomDoesNotJumpToTwentyFivePercentOrStickThere" computerName="PC-20250309WEIZ" duration="00:00:00.0003550" startTime="2026-10-20T12:33:05.1860815+08:00" endTime="2026-10-20T12:33:05.1864732+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3505f852-0521-456f-a1ab-0a351a8e1c41" />
+    <UnitTestResult executionId="bb76a9b6-2460-452c-9a5a-b14cc3f73ed4" testId="1d2fd289-c937-8fec-a921-81c063d10a84" testName="ZoomAboutCursorPreservesImageCoordinateTests" computerName="PC-20250309WEIZ" duration="00:00:00.0226844" startTime="2026-10-20T12:33:05.1864916+08:00" endTime="2026-10-20T12:33:05.2092193+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bb76a9b6-2460-452c-9a5a-b14cc3f73ed4" />
+    <UnitTestResult executionId="a9965497-5789-4f31-8b80-a9e218f2c287" testId="146f8cec-f8c1-8851-b6fa-ae0492f9c87c" testName="ReferenceFollowUsesExistingViewportAndClampsToOwnBounds" computerName="PC-20250309WEIZ" duration="00:00:00.0061403" startTime="2026-10-20T12:33:05.1608504+08:00" endTime="2026-10-20T12:33:05.1816523+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a9965497-5789-4f31-8b80-a9e218f2c287" />
+    <UnitTestResult executionId="2d778d5d-f422-4259-9b80-1261a24327bd" testId="193648b1-ea97-8df1-af8a-2851c6f5f8f6" testName="PanClampUsesImageBoundsTests" computerName="PC-20250309WEIZ" duration="00:00:00.0001156" startTime="2026-10-20T12:33:05.2092550+08:00" endTime="2026-10-20T12:33:05.2094065+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2d778d5d-f422-4259-9b80-1261a24327bd" />
+    <UnitTestResult executionId="f64c2f10-ab5b-4181-851a-eb1117f01817" testId="1850effa-5823-8d40-9f4d-bddd5e569d2f" testName="EyedropperLinkedSideBySideTests" computerName="PC-20250309WEIZ" duration="00:00:00.0119675" startTime="2026-10-20T12:33:05.2166687+08:00" endTime="2026-10-20T12:33:05.2286882+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f64c2f10-ab5b-4181-851a-eb1117f01817" />
+    <UnitTestResult executionId="de33213c-a492-4198-8e70-b58a77e648b2" testId="17ea9b1a-b9f7-8648-a979-6eb8e7a0a017" testName="EyedropperZoomPanSplitAndProxyAlignmentTests" computerName="PC-20250309WEIZ" duration="00:00:00.0071753" startTime="2026-10-20T12:33:05.2094209+08:00" endTime="2026-10-20T12:33:05.2166350+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="de33213c-a492-4198-8e70-b58a77e648b2" />
+    <UnitTestResult executionId="cc656d63-1b7b-462c-948a-9e7b558ecbbd" testId="11488f39-b552-8638-aeeb-73e1a5f96ea6" testName="FitAndActualPixelsTests" computerName="PC-20250309WEIZ" duration="00:00:00.0005093" startTime="2026-10-20T12:33:05.1850748+08:00" endTime="2026-10-20T12:33:05.1858354+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cc656d63-1b7b-462c-948a-9e7b558ecbbd" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="EyedropperZoomPanSplitAndProxyAlignmentTests" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="17ea9b1a-b9f7-8648-a979-6eb8e7a0a017">
+      <Execution id="de33213c-a492-4198-8e70-b58a77e648b2" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ColorStudioZoomPanTests" name="EyedropperZoomPanSplitAndProxyAlignmentTests" />
+    </UnitTest>
+    <UnitTest name="FitAndActualPixelsTests" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="11488f39-b552-8638-aeeb-73e1a5f96ea6">
+      <Execution id="cc656d63-1b7b-462c-948a-9e7b558ecbbd" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ColorStudioZoomPanTests" name="FitAndActualPixelsTests" />
+    </UnitTest>
+    <UnitTest name="EyedropperLinkedSideBySideTests" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1850effa-5823-8d40-9f4d-bddd5e569d2f">
+      <Execution id="f64c2f10-ab5b-4181-851a-eb1117f01817" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ColorStudioZoomPanTests" name="EyedropperLinkedSideBySideTests" />
+    </UnitTest>
+    <UnitTest name="LargeSourceWheelZoomDoesNotJumpToTwentyFivePercentOrStickThere" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="15f6f739-6d61-82d1-bb1a-4d22f312c0a1">
+      <Execution id="3505f852-0521-456f-a1ab-0a351a8e1c41" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ColorStudioZoomPanTests" name="LargeSourceWheelZoomDoesNotJumpToTwentyFivePercentOrStickThere" />
+    </UnitTest>
+    <UnitTest name="ZoomAboutCursorPreservesImageCoordinateTests" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d2fd289-c937-8fec-a921-81c063d10a84">
+      <Execution id="bb76a9b6-2460-452c-9a5a-b14cc3f73ed4" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ColorStudioZoomPanTests" name="ZoomAboutCursorPreservesImageCoordinateTests" />
+    </UnitTest>
+    <UnitTest name="PanClampUsesImageBoundsTests" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="193648b1-ea97-8df1-af8a-2851c6f5f8f6">
+      <Execution id="2d778d5d-f422-4259-9b80-1261a24327bd" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ColorStudioZoomPanTests" name="PanClampUsesImageBoundsTests" />
+    </UnitTest>
+    <UnitTest name="ReferenceFollowUsesExistingViewportAndClampsToOwnBounds" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="146f8cec-f8c1-8851-b6fa-ae0492f9c87c">
+      <Execution id="a9965497-5789-4f31-8b80-a9e218f2c287" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ColorStudioZoomPanTests" name="ReferenceFollowUsesExistingViewportAndClampsToOwnBounds" />
+    </UnitTest>
+    <UnitTest name="EyedropperZoomPanLetterboxAndOutsideRejectTests" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1feda04b-504a-8167-b6a6-50ca024b16d0">
+      <Execution id="91b2e1f8-46ae-43d9-9c0e-ad85f22c7049" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ColorStudioZoomPanTests" name="EyedropperZoomPanLetterboxAndOutsideRejectTests" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1feda04b-504a-8167-b6a6-50ca024b16d0" executionId="91b2e1f8-46ae-43d9-9c0e-ad85f22c7049" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15f6f739-6d61-82d1-bb1a-4d22f312c0a1" executionId="3505f852-0521-456f-a1ab-0a351a8e1c41" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d2fd289-c937-8fec-a921-81c063d10a84" executionId="bb76a9b6-2460-452c-9a5a-b14cc3f73ed4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="146f8cec-f8c1-8851-b6fa-ae0492f9c87c" executionId="a9965497-5789-4f31-8b80-a9e218f2c287" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="193648b1-ea97-8df1-af8a-2851c6f5f8f6" executionId="2d778d5d-f422-4259-9b80-1261a24327bd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1850effa-5823-8d40-9f4d-bddd5e569d2f" executionId="f64c2f10-ab5b-4181-851a-eb1117f01817" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17ea9b1a-b9f7-8648-a979-6eb8e7a0a017" executionId="de33213c-a492-4198-8e70-b58a77e648b2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11488f39-b552-8638-aeeb-73e1a5f96ea6" executionId="cc656d63-1b7b-462c-948a-9e7b558ecbbd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="8" executed="8" passed="8" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>
