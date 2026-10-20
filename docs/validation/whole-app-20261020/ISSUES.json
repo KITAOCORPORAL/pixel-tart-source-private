@@ -1,0 +1,42 @@
+[
+  {
+    "id": "VAL-DESKTOP-001",
+    "status": "BLOCKED",
+    "reason": "Desktop GetCursorPos access denied; all actual user operations remain unverified"
+  },
+  {
+    "id": "VAL-PLANNING-001",
+    "status": "FAIL",
+    "reason": "Production peer contract old text-editor ValuePattern query fails after create; retain raw evidence and rework complete current UI contract before release"
+  },
+  {
+    "id": "VAL-DPI-001",
+    "status": "FAIL",
+    "reason": "17 DPI evidence contract tests failed: current-run visual manifest absent; do not import historical evidence"
+  },
+  {
+    "id": "VAL-INSTALL-001",
+    "status": "NOT_RUN",
+    "reason": "No Setup; fresh/upgrade/uninstall/reinstall/data retention untested"
+  },
+  {
+    "id": "VAL-INPUT-001",
+    "status": "BLOCKED",
+    "reason": "Exact A-BC original old conversation attachment unavailable"
+  },
+  {
+    "id": "PL-GEAR-001",
+    "status": "BLOCKED",
+    "reason": "Equipment catalog source not integrated"
+  },
+  {
+    "id": "VAL-RELEASE-001",
+    "status": "BLOCKED",
+    "reason": "Release acceptance not closed; diagnostic only"
+  },
+  {
+    "id": "VAL-R3-OUTPUT-001",
+    "status": "PARTIAL",
+    "reason": "Final complete WPF retains old-output overwrite refusal; same final DLL fresh-output R3 14/14 passes, original failure not removed"
+  }
+]

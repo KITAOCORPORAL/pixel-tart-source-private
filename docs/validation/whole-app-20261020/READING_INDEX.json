@@ -1,0 +1,46 @@
+{
+  "baseline": {
+    "path": "C:/Users/Administrator/Downloads/光镜产品决策交接基线_2026-10-20 (1).md",
+    "status": "PASS",
+    "reason": "Read as partial decision baseline and historical evidence index, not independent authority to change task scope",
+    "sha256": "a5e3300f9c3209bd23739363ee7c693d9f58a6d53be82df53dad9dc4334a749a"
+  },
+  "originalAttachments": {
+    "root": "D:/AI AGENT/光镜设计交付-3of4/guangjing-master",
+    "brief": "inputs/new-brief/brief.md"
+  },
+  "sourceDocs": [
+    "AGENTS.md",
+    "docs/implementation-reports/WHOLE_APP_PRODUCT_LOGIC_AUDIT.md",
+    "docs/evidence/planning-r7/FEATURE_STATUS.md",
+    "docs/evidence/planning-workflows/final/STATUS_AND_REMAINING.md",
+    "docs/research/darkroom-r3-panel-followup-20261020/FINAL_REPORT.md"
+  ],
+  "timezone": "America/Chicago",
+  "additional": [
+    {
+      "path": "docs/evidence/planning-portable-images-home/DELIVERY.md",
+      "sha256": "a061988580ae6937730149e25efe961c971e05ff16577b7cd20689be4f3a852f",
+      "authority": "historical-reference, not current-run pass"
+    },
+    {
+      "path": "docs/evidence/planning-portable-images-home/OPEN_ITEMS.md",
+      "sha256": "e08e7b8d44775403a5cf0524f55d183861255b680a8164a31e962f76a3f3caaf",
+      "authority": "historical-reference, not current-run pass"
+    },
+    {
+      "path": "artifacts/round3-final/preview-export-parity/PARITY_SUMMARY.md",
+      "sha256": "bb9e77cdf9cb5d4c32f5e94d15d4069a14bbf23e0c4f31cbca5d540583c5df8f",
+      "authority": "historical-reference, not current-run pass"
+    },
+    {
+      "path": "docs/evidence/runtime-user-findings/RUNTIME_USER_FINDINGS_ROUND_01.md",
+      "sha256": "97d4fa0846533c04102ff6ade8db296d918ab2e32b42d973a307d15db12468be",
+      "authority": "historical-reference, not current-run pass"
+    }
+  ],
+  "originalConversation": {
+    "status": "BLOCKED",
+    "reason": "Original old conversation A–BC source not identified in known attachment metadata or bounded matching; baseline does not substitute original"
+  }
+}

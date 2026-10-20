@@ -1,0 +1,43 @@
+[
+  {
+    "label": "CORE_CLOSABLE_CONDITIONS",
+    "root": "E:/Kitao-Deliveries/guangjing-whole-app-validation-20261020/CORE_CLOSABLE_CONDITIONS/run-20261020-181911-d24f2a15",
+    "selected": 2,
+    "counts": {
+      "Passed": 2
+    },
+    "status": "PASSED",
+    "sourceSha": "Pre-final specialty; not replacement for complete final suite"
+  },
+  {
+    "label": "FIXED_SPECIALTIES",
+    "root": "E:/Kitao-Deliveries/guangjing-whole-app-validation-20261020/FIXED_SPECIALTIES/run-20261020-183831-885cb399",
+    "selected": 170,
+    "counts": {
+      "Passed": 169,
+      "Failed": 1
+    },
+    "status": "FAILED",
+    "sourceSha": "Pre-final specialty; not replacement for complete final suite"
+  },
+  {
+    "label": "RECOVERY_AND_DIALOG_SPECIALTIES",
+    "root": "E:/Kitao-Deliveries/guangjing-whole-app-validation-20261020/RECOVERY_AND_DIALOG_SPECIALTIES/run-20261020-184043-509f663b",
+    "selected": 5,
+    "counts": {
+      "Passed": 5
+    },
+    "status": "PASSED",
+    "sourceSha": "Pre-final specialty; not replacement for complete final suite"
+  },
+  {
+    "label": "FINAL_R3_FRESH_OUTPUT_RECHECK",
+    "root": "E:/Kitao-Deliveries/guangjing-whole-app-validation-20261020/FINAL_R3_FRESH_OUTPUT_RECHECK/run-20261020-185417-96bd5806",
+    "selected": 14,
+    "counts": {
+      "Passed": 14
+    },
+    "status": "PASSED",
+    "sourceSha": "96e84b14a0cbb040b97cc531efeb31b1f4144367"
+  }
+]

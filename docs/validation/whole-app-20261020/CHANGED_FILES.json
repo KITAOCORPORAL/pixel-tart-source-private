@@ -1,0 +1,90 @@
+{
+  "sourceSha": "96e84b14a0cbb040b97cc531efeb31b1f4144367",
+  "files": [
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/App.xaml.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+      "type": "csproj"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Photographer.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/DarkroomIcon.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/ThemedMessageDialog.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/ThemedMessageDialog.xaml.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "tests/RAWSelectionAssistant.WpfTests/ComparisonSchedulingTests.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "tests/RAWSelectionAssistant.WpfTests/NavigationWorkbenchClosureTests.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "tests/RAWSelectionAssistant.WpfTests/PhotographerTrialPageTests.cs",
+      "type": "cs"
+    },
+    {
+      "status": "A",
+      "path": "tests/RAWSelectionAssistant.WpfTests/WholeAppDiagnosticPackageTests.cs",
+      "type": "cs"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-validation/.gitignore",
+      "type": "gitignore"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-validation/README.md",
+      "type": "md"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-validation/build_inventory.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-validation/verified_full_runner.py",
+      "type": "py"
+    }
+  ]
+}

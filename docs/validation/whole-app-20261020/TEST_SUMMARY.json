@@ -1,0 +1,121 @@
+{
+  "sourceSha": "96e84b14a0cbb040b97cc531efeb31b1f4144367",
+  "timezone": "America/Chicago",
+  "suites": [
+    {
+      "Suite": "FULL_CORE",
+      "discovered": 1713,
+      "selected": 1713,
+      "obtained": 1713,
+      "passed": 1706,
+      "failed": 0,
+      "skipped": 7,
+      "notRun": 0,
+      "status": "PARTIAL",
+      "complete": true,
+      "evidence": "E:\\Kitao-Deliveries\\guangjing-whole-app-validation-20261020\\FULL_CORE\\run-20261020-181123-49e046b4"
+    },
+    {
+      "Suite": "FULL_WPF",
+      "discovered": 1709,
+      "selected": 1709,
+      "obtained": 1709,
+      "passed": 1682,
+      "failed": 7,
+      "skipped": 20,
+      "notRun": 0,
+      "status": "FAIL",
+      "complete": true,
+      "evidence": "E:\\Kitao-Deliveries\\guangjing-whole-app-validation-20261020\\FULL_WPF\\run-20261020-181123-b4e02338"
+    },
+    {
+      "Suite": "FINAL_CORE",
+      "discovered": 1713,
+      "selected": 1713,
+      "obtained": 1713,
+      "passed": 1708,
+      "failed": 0,
+      "skipped": 5,
+      "notRun": 0,
+      "status": "PARTIAL",
+      "complete": true,
+      "evidence": "E:\\Kitao-Deliveries\\guangjing-whole-app-validation-20261020\\FINAL_CORE\\run-20261020-184230-8ad15ea8"
+    },
+    {
+      "Suite": "FINAL_PUBLISHED_MODULES",
+      "discovered": 14,
+      "selected": 14,
+      "obtained": 14,
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "status": "PASS",
+      "complete": true,
+      "evidence": "E:\\Kitao-Deliveries\\guangjing-whole-app-validation-20261020\\FINAL_PUBLISHED_MODULES\\run-20261020-184230-9d8801dc"
+    },
+    {
+      "Suite": "FULL_DOCUMENTS",
+      "discovered": 1,
+      "selected": 1,
+      "obtained": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "status": "PASS",
+      "complete": true,
+      "evidence": "E:\\Kitao-Deliveries\\guangjing-whole-app-validation-20261020\\FULL_DOCUMENTS\\run-20261020-181548-3c3b6d0c"
+    },
+    {
+      "Suite": "RESEARCH_CANDIDATE_TESTS",
+      "discovered": 25,
+      "selected": 25,
+      "obtained": 25,
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "status": "PASS",
+      "complete": true,
+      "evidence": "E:\\Kitao-Deliveries\\guangjing-whole-app-validation-20261020\\RESEARCH_CANDIDATE_TESTS\\run-20261020-181832-60f9d402"
+    },
+    {
+      "Suite": "FULL_DPI_CONTRACTS",
+      "discovered": 91,
+      "selected": 91,
+      "obtained": 91,
+      "passed": 74,
+      "failed": 17,
+      "skipped": 0,
+      "notRun": 0,
+      "status": "FAIL",
+      "complete": true,
+      "evidence": "E:\\Kitao-Deliveries\\guangjing-whole-app-validation-20261020\\FULL_DPI_CONTRACTS\\run-20261020-181745-9607d86d"
+    },
+    {
+      "Suite": "FINAL_WPF",
+      "discovered": 1710,
+      "selected": 1710,
+      "obtained": 1710,
+      "passed": 1688,
+      "failed": 2,
+      "skipped": 20,
+      "notRun": 0,
+      "extra": 0,
+      "status": "FAIL",
+      "complete": true,
+      "evidence": [
+        "E:\\Kitao-Deliveries\\guangjing-whole-app-validation-20261020\\FINAL_WPF_SHARD_0\\run-20261020-184230-eaa148a1",
+        "E:\\Kitao-Deliveries\\guangjing-whole-app-validation-20261020\\FINAL_WPF_SHARD_1\\run-20261020-184230-cfcd0160",
+        "E:\\Kitao-Deliveries\\guangjing-whole-app-validation-20261020\\FINAL_WPF_SHARD_2\\run-20261020-184230-b620eb48",
+        "E:\\Kitao-Deliveries\\guangjing-whole-app-validation-20261020\\FINAL_WPF_SHARD_3\\run-20261020-184230-7da8b204"
+      ]
+    }
+  ],
+  "wpfExactCoverage": {
+    "missing": [],
+    "extra": [],
+    "plannedEqualsDiscovered": true
+  }
+}

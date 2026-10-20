@@ -1,0 +1,503 @@
+﻿Suite,Class,Name,Display,Outcome,Status,Evidence,Error
+FULL_CORE,RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests,RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests.ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence,ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_CORE\run-20261020-181123-49e046b4\030,"Assert.Inconclusive 失败。Set PIXEL_TART_BATCH12_RELEASE_CORE to test Release payload.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.Batch12ReleasedAssemblyTests.ReleasedCoreContainsStrictImporterAndKeepsCreativeFilmEvidence()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_CORE,RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests,RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16,AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_CORE\run-20261020-181123-49e046b4\052,"Assert.Inconclusive 失败。Explicitly authorized real corpus is opt-in; not a synthetic RAW replacement.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_CORE,RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests,RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError,AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_CORE\run-20261020-181123-49e046b4\054,"Assert.Inconclusive 失败。Real spatial evidence is explicitly opt-in.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_CORE,RAWSelectionAssistant.Tests.ReferenceFilmPerformanceTests,RAWSelectionAssistant.Tests.ReferenceFilmPerformanceTests.FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested,FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_CORE\run-20261020-181123-49e046b4\147,"Assert.Inconclusive 失败。Set PIXEL_TART_PERFORMANCE_EVIDENCE to collect local CPU evidence.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ReferenceFilmPerformanceTests.FilmCpuPerformance_WritesMeasuredEvidenceWhenRequested()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_CORE,RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests,RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled,ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_CORE\run-20261020-181123-49e046b4\151,"Assert.Inconclusive 失败。Set PIXEL_TART_RUN_V4_BENCHMARK=1 for the bounded production-size run.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_CORE,RAWSelectionAssistant.Tests.ReferenceMatchV4Tests,RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses,CpuGpuParityAcrossEightSceneClasses,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_CORE\run-20261020-181123-49e046b4\152,"Assert.Inconclusive 失败。No validated GPU compute device on this host.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_CORE,RAWSelectionAssistant.Tests.ReferenceMatchV4Tests,RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene,CpuGpuParityOnSyntheticScene,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_CORE\run-20261020-181123-49e046b4\152,"Assert.Inconclusive 失败。No validated GPU compute device on this host.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests,RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests.ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt,ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\026,"Assert.Inconclusive 失败。No captured non-reparse P2 run root is available for the read-only integration probe.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests.ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests,RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture,ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\037,"Assert.Inconclusive 失败。Opt-in diagnostic: provide a new synthetic fixture and new output directory.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests,RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately,BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\051,"Assert.Inconclusive 失败。Measurement opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests,RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition,AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\051,"Assert.Inconclusive 失败。Authorized local RAW corpus and evidence opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests,RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts,SeparatePureTiffEncodingValidationHashAndNodeCosts,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\053,"Assert.Inconclusive 失败。Performance output opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.BatchElevenRealTests,RAWSelectionAssistant.WpfTests.BatchElevenRealTests.BatchElevenAuthorizedRawMemoryAndColor,BatchElevenAuthorizedRawMemoryAndColor,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\054,"Assert.Inconclusive 失败。Explicit authorized company fixtures required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchElevenRealTests.BatchElevenAuthorizedRawMemoryAndColor()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests,RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults,AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\060,"Assert.Inconclusive 失败。Authorized local corpus opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests,RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop,OffscreenSyntheticKeyframesNeverLaunchDesktop,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\061,"Assert.Inconclusive 失败。Offscreen artifact output opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests,RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure,AuthorizedCompanyRawColdPathsAndWorkspacePressure,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\062,"Assert.Inconclusive 失败。Explicit authorized company fixtures required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests,RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels,AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\095,"Assert.Inconclusive 失败。Authorized real JPEG corpus requires explicit opt-in.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.<>c.<<AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels>b__8_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.ComparisonSchedulingTests,RAWSelectionAssistant.WpfTests.ComparisonSchedulingTests.EffectVisibleBeforeComparisonAndCompletionNeverChangesHistory,EffectVisibleBeforeComparisonAndCompletionNeverChangesHistory,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\099,"测试方法 RAWSelectionAssistant.WpfTests.ComparisonSchedulingTests。EffectVisibleBeforeComparisonAndCompletionNeverChangesHistory 引发了异常:
+System.NullReferenceException: Object reference not set to an instance of an object.
+             at RAWSelectionAssistant.WpfTests.ComparisonSchedulingTests.<>c.<<EffectVisibleBeforeComparisonAndCompletionNeverChangesHistory>b__0_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.NavigationWorkbenchClosureTests,RAWSelectionAssistant.WpfTests.NavigationWorkbenchClosureTests.Sidebar_HasTheExactTenPrimaryPagesInProductOrder,Sidebar_HasTheExactTenPrimaryPagesInProductOrder,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\126,"CollectionAssert.AreEqual 失败。索引 0 处的元素不匹配。
+预计值: 参
+实际值: 暗
+             at Microsoft.VisualStudio.TestTools.UnitTesting.CollectionAssert.AreEqual(ICollection expected, ICollection actual, String message) in /_/src/TestFramework/TestFramework/Assertions/CollectionAssert.cs:line 819
+   at Microsoft.VisualStudio.TestTools.UnitTesting.CollectionAssert.AreEqual(ICollection expected, ICollection actual) in /_/src/TestFramework/TestFramework/Assertions/CollectionAssert.cs:line 788
+   at RAWSelectionAssistant.WpfTests.NavigationWorkbenchClosureTests.Sidebar_HasTheExactTenPrimaryPagesInProductOrder()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.PhotographerTrialPageTests,RAWSelectionAssistant.WpfTests.PhotographerTrialPageTests.NamesModesPreviewsAndHistoryUseActualProductState,NamesModesPreviewsAndHistoryUseActualProductState,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\134,"测试方法 RAWSelectionAssistant.WpfTests.PhotographerTrialPageTests。NamesModesPreviewsAndHistoryUseActualProductState 引发了异常:
+System.NullReferenceException: Object reference not set to an instance of an object.
+             at RAWSelectionAssistant.WpfTests.PhotographerTrialPageTests.<>c.<<NamesModesPreviewsAndHistoryUseActualProductState>b__0_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests,RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts,ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\136,"System.InvalidOperationException: Sequence contains no matching element
+   at System.Linq.ThrowHelper.ThrowNoMatchException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source, Func`2 predicate)
+   at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.<>c__DisplayClass5_0.<Verify>b__7()
+   at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.<>c__DisplayClass5_0.<Verify>g__Check|1(String id, Action action)
+   at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.Verify(MainWindow window, MainViewModel main)
+   at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.<>c__DisplayClass0_1.<<ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts>b__1>d.MoveNext()
+             at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests,RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport,AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\156,"Assert.Inconclusive 失败。Set authorized batch06 corpus and evidence directory; not a synthetic test.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests,RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests.CompanyRealRawProductAcceptanceGate,CompanyRealRawProductAcceptanceGate,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\164,"Assert.Inconclusive 失败。NOT RUN — real camera fixture directory unavailable; set PIXEL_TART_COMPANY_RAW_ROOT.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests.CompanyRealRawProductAcceptanceGate()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests,RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.FilmEffects_WriteTruePerEffectComparisonWhenRequested,FilmEffects_WriteTruePerEffectComparisonWhenRequested,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\167,"Assert.Inconclusive 失败。Set PIXEL_TART_FILM_EVIDENCE to collect review evidence.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.FilmEffects_WriteTruePerEffectComparisonWhenRequested()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests,RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.ReviewSheets_ComposeHonestProductionEvidenceWhenRequested,ReviewSheets_ComposeHonestProductionEvidenceWhenRequested,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\167,"Assert.Inconclusive 失败。Set review evidence paths.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.ReviewSheets_ComposeHonestProductionEvidenceWhenRequested()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests,RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution,CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\169,"Assert.Inconclusive 失败。Set an isolated current-run output directory.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.SpatialClosureRealTests,RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback,OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\177,"Assert.Inconclusive 失败。Reviewed official candidate opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.SpatialClosureRealTests,RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference,RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\177,"Assert.Inconclusive 失败。Authorized real measurement opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.StudioDesignSystemContractTests,RAWSelectionAssistant.WpfTests.StudioDesignSystemContractTests.FormalButtons_HaveClassifiedStudioStyle,FormalButtons_HaveClassifiedStudioStyle,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\183,"Assert.Contains 失败。预期集合包含指定项。‘expected’表达式:‘key’,‘collection’表达式:‘known’。 PhotoGradePageView.xaml: unknown button style {StaticResource RailButton}
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertContainsItemFailed(String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.Contains.cs:line 713
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Contains[T](T expected, IEnumerable`1 collection, String message, String expectedExpression, String collectionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.Contains.cs:line 195
+   at RAWSelectionAssistant.WpfTests.StudioDesignSystemContractTests.FormalButtons_HaveClassifiedStudioStyle()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.StudioDesignSystemContractTests,RAWSelectionAssistant.WpfTests.StudioDesignSystemContractTests.FormalViews_NoUnclassifiedUnicodeActionIcons,FormalViews_NoUnclassifiedUnicodeActionIcons,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\183,"Assert.DoesNotContain 失败。预期集合不包含指定项。‘notExpected’表达式:‘attribute.Value’,‘collection’表达式:‘symbols’。 PhotoGradePageView.xaml: Content=""−""
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertDoesNotContainItemFailed(String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.Contains.cs:line 733
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.DoesNotContain[T](T notExpected, IEnumerable`1 collection, String message, String notExpectedExpression, String collectionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.Contains.cs:line 433
+   at RAWSelectionAssistant.WpfTests.StudioDesignSystemContractTests.FormalViews_NoUnclassifiedUnicodeActionIcons()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests,RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes,RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\196,"Assert.Inconclusive 失败。Opt-in automatic screenshot evidence; not native UI acceptance.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.<>c.<<RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes>b__0_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF,RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests,RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet,PremiumPrototype_ThreeRealPages_RenderReviewSet,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\203,"Assert.Inconclusive 失败。Opt-in visual evidence is not enabled in this bounded regression run.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.UiVisualRegressionTests,RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval,BaselineGuard_RequiresExplicitApproval,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\211,"Assert.Inconclusive 失败。BASELINE_MISSING: capture current UI before requesting approval.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF,RAWSelectionAssistant.WpfTests.Version230Rc3RuntimeUiTests,RAWSelectionAssistant.WpfTests.Version230Rc3RuntimeUiTests.RuntimeDialogs_AreThemedAndNoDirectMessageBoxRemains,RuntimeDialogs_AreThemedAndNoDirectMessageBoxRemains,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_WPF\run-20261020-181123-b4e02338\221,"Assert.IsFalse 失败。‘condition’表达式:‘source.Contains(""MessageBox.Show"", StringComparison.Ordinal)’。
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsFalseFailed(String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 200
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsFalse(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 191
+   at RAWSelectionAssistant.WpfTests.Version230Rc3RuntimeUiTests.RuntimeDialogs_AreThemedAndNoDirectMessageBoxRemains()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FINAL_CORE,RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests,RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16,AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_CORE\run-20261020-184230-8ad15ea8\052,"Assert.Inconclusive 失败。Explicitly authorized real corpus is opt-in; not a synthetic RAW replacement.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_CORE,RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests,RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError,AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_CORE\run-20261020-184230-8ad15ea8\054,"Assert.Inconclusive 失败。Real spatial evidence is explicitly opt-in.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_CORE,RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests,RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled,ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_CORE\run-20261020-184230-8ad15ea8\151,"Assert.Inconclusive 失败。Set PIXEL_TART_RUN_V4_BENCHMARK=1 for the bounded production-size run.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FINAL_CORE,RAWSelectionAssistant.Tests.ReferenceMatchV4Tests,RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses,CpuGpuParityAcrossEightSceneClasses,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_CORE\run-20261020-184230-8ad15ea8\152,"Assert.Inconclusive 失败。No validated GPU compute device on this host.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FINAL_CORE,RAWSelectionAssistant.Tests.ReferenceMatchV4Tests,RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene,CpuGpuParityOnSyntheticScene,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_CORE\run-20261020-184230-8ad15ea8\152,"Assert.Inconclusive 失败。No validated GPU compute device on this host.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates,EachCurrentDpiHasEightPassingProductStates (150),Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EachCurrentDpiHasEightPassingProductStates 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Int32 dpiPercent)
+   at InvokeStub_AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.IsolatedSyntheticSourceImagesRemainByteIdentical,IsolatedSyntheticSourceImagesRemainByteIdentical,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。IsolatedSyntheticSourceImagesRemainByteIdentical 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.IsolatedSyntheticSourceImagesRemainByteIdentical()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates,EachCurrentDpiHasEightPassingProductStates (125),Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EachCurrentDpiHasEightPassingProductStates 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Int32 dpiPercent)
+   at InvokeStub_AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.CurrentEvidenceCaptureSetMatchesTheCurrentProducerContract,CurrentEvidenceCaptureSetMatchesTheCurrentProducerContract,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。CurrentEvidenceCaptureSetMatchesTheCurrentProducerContract 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.CurrentEvidenceCaptureSetMatchesTheCurrentProducerContract()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates,EachCurrentDpiHasEightPassingProductStates (100),Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EachCurrentDpiHasEightPassingProductStates 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Int32 dpiPercent)
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""AssetFilter"")",Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates,EachCurrentDpiHasEightPassingProductStates (200),Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EachCurrentDpiHasEightPassingProductStates 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Int32 dpiPercent)
+   at InvokeStub_AutomatedDpiEvidenceTests.EachCurrentDpiHasEightPassingProductStates(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""CalendarBookingAssets"")",Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""AssetLibraryGrid"")",Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.CurrentProducerUsesRealApplicationDarkThemeAndProcessIsolation,CurrentProducerUsesRealApplicationDarkThemeAndProcessIsolation,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。CurrentProducerUsesRealApplicationDarkThemeAndProcessIsolation 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.CurrentProducerUsesRealApplicationDarkThemeAndProcessIsolation()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""AssetViewer"")",Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""AssetInspirationCollection"")",Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""MainWindow"")",Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""AssetRecentLibraries"")",Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis,"EveryRequiredProductStatePassesAtAllFourDpis (""AssetContextMenu"")",Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。EveryRequiredProductStatePassesAtAllFourDpis 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(String scenario)
+   at InvokeStub_AutomatedDpiEvidenceTests.EveryRequiredProductStatePassesAtAllFourDpis(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests,RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.DpiScreenshotsAndMetadataAreCompleteAndByteValid,DpiScreenshotsAndMetadataAreCompleteAndByteValid,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\000,"测试方法 RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests。DpiScreenshotsAndMetadataAreCompleteAndByteValid 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\current-run-visual-evidence.json'.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.LoadManifest()
+   at RAWSelectionAssistant.DpiTests.AutomatedDpiEvidenceTests.DpiScreenshotsAndMetadataAreCompleteAndByteValid()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_DPI_CONTRACTS,RAWSelectionAssistant.DpiTests.Version220StageDDpiGateTests,RAWSelectionAssistant.DpiTests.Version220StageDDpiGateTests.PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation,PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FULL_DPI_CONTRACTS\run-20261020-181745-9607d86d\001,"测试方法 RAWSelectionAssistant.DpiTests.Version220StageDDpiGateTests。PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation 引发了异常:
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'E:\Kitao-Worktrees\guangjing-whole-app-validation-20261020\artifacts\current-run-visual\dpi-current'.
+             at System.IO.Enumeration.FileSystemEnumerator`1.CreateDirectoryHandle(String path, Boolean ignoreNotFound)
+   at System.IO.Enumeration.FileSystemEnumerator`1.Init()
+   at System.IO.Enumeration.FileSystemEnumerator`1..ctor(String directory, Boolean isNormalized, EnumerationOptions options, String expression)
+   at System.IO.Enumeration.FileSystemEnumerable`1..ctor(String directory, FindTransform transform, EnumerationOptions options, Boolean isNormalized, String expression)
+   at System.IO.Enumeration.FileSystemEnumerableFactory.UserFiles(String directory, String expression, EnumerationOptions options)
+   at System.IO.Directory.InternalEnumeratePaths(String path, String searchPattern, SearchTarget searchTarget, EnumerationOptions enumerationOptions)
+   at System.IO.Directory.GetFiles(String path, String searchPattern, EnumerationOptions enumerationOptions)
+   at RAWSelectionAssistant.DpiTests.Version220StageDDpiGateTests.PhysicalDpiManualTesting_RemainsAnAllowedKnownLimitation()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests,RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults,AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_0\run-20261020-184230-eaa148a1\015,"Assert.Inconclusive 失败。Authorized local corpus opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests,RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts,ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_0\run-20261020-184230-eaa148a1\034,"System.InvalidOperationException: Sequence contains no matching element
+   at System.Linq.ThrowHelper.ThrowNoMatchException()
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source, Func`2 predicate)
+   at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.<>c__DisplayClass5_0.<Verify>b__7()
+   at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.<>c__DisplayClass5_0.<Verify>g__Check|1(String id, Action action)
+   at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.Verify(MainWindow window, MainViewModel main)
+   at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.<>c__DisplayClass0_1.<<ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts>b__1>d.MoveNext()
+             at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests,RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport,AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_0\run-20261020-184230-eaa148a1\039,"Assert.Inconclusive 失败。Set authorized batch06 corpus and evidence directory; not a synthetic test.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests,RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests.CompanyRealRawProductAcceptanceGate,CompanyRealRawProductAcceptanceGate,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_0\run-20261020-184230-eaa148a1\041,"Assert.Inconclusive 失败。NOT RUN — real camera fixture directory unavailable; set PIXEL_TART_COMPANY_RAW_ROOT.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests.CompanyRealRawProductAcceptanceGate()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests,RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes,RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_0\run-20261020-184230-eaa148a1\049,"Assert.Inconclusive 失败。Opt-in automatic screenshot evidence; not native UI acceptance.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.<>c.<<RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes>b__0_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests,RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture,ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_1\run-20261020-184230-cfcd0160\009,"Assert.Inconclusive 失败。Opt-in diagnostic: provide a new synthetic fixture and new output directory.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests,RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts,SeparatePureTiffEncodingValidationHashAndNodeCosts,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_1\run-20261020-184230-cfcd0160\013,"Assert.Inconclusive 失败。Performance output opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests,RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop,OffscreenSyntheticKeyframesNeverLaunchDesktop,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_1\run-20261020-184230-cfcd0160\015,"Assert.Inconclusive 失败。Offscreen artifact output opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests,RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution,CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_1\run-20261020-184230-cfcd0160\042,"Assert.Inconclusive 失败。Set an isolated current-run output directory.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.SpatialClosureRealTests,RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback,OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_1\run-20261020-184230-cfcd0160\044,"Assert.Inconclusive 失败。Reviewed official candidate opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.SpatialClosureRealTests,RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference,RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_1\run-20261020-184230-cfcd0160\044,"Assert.Inconclusive 失败。Authorized real measurement opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests,RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests.ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt,ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_2\run-20261020-184230-b620eb48\006,"Assert.Inconclusive 失败。No captured non-reparse P2 run root is available for the read-only integration probe.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests.ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.BatchElevenRealTests,RAWSelectionAssistant.WpfTests.BatchElevenRealTests.BatchElevenAuthorizedRawMemoryAndColor,BatchElevenAuthorizedRawMemoryAndColor,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_2\run-20261020-184230-b620eb48\013,"Assert.Inconclusive 失败。Explicit authorized company fixtures required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchElevenRealTests.BatchElevenAuthorizedRawMemoryAndColor()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests,RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure,AuthorizedCompanyRawColdPathsAndWorkspacePressure,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_2\run-20261020-184230-b620eb48\015,"Assert.Inconclusive 失败。Explicit authorized company fixtures required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests,RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately,BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_3\run-20261020-184230-7da8b204\012,"Assert.Inconclusive 失败。Measurement opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests,RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition,AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_3\run-20261020-184230-7da8b204\012,"Assert.Inconclusive 失败。Authorized local RAW corpus and evidence opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests,RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels,AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_3\run-20261020-184230-7da8b204\023,"Assert.Inconclusive 失败。Authorized real JPEG corpus requires explicit opt-in.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.<>c.<<AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels>b__8_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests,RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline,TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline,Failed,FAIL,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_3\run-20261020-184230-7da8b204\039,"测试方法 RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests。TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline 引发了异常:
+System.InvalidOperationException: 此工作区未读取该工作文件；请先打开或另存新文件，未覆盖。
+             at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.SaveSessionAsync(String path, CancellationToken token)
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.<>c.<<TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline>b__7_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests,RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.ReviewSheets_ComposeHonestProductionEvidenceWhenRequested,ReviewSheets_ComposeHonestProductionEvidenceWhenRequested,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_3\run-20261020-184230-7da8b204\041,"Assert.Inconclusive 失败。Set review evidence paths.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.ReviewSheets_ComposeHonestProductionEvidenceWhenRequested()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests,RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.FilmEffects_WriteTruePerEffectComparisonWhenRequested,FilmEffects_WriteTruePerEffectComparisonWhenRequested,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_3\run-20261020-184230-7da8b204\041,"Assert.Inconclusive 失败。Set PIXEL_TART_FILM_EVIDENCE to collect review evidence.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.FilmEffects_WriteTruePerEffectComparisonWhenRequested()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests,RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet,PremiumPrototype_ThreeRealPages_RenderReviewSet,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_3\run-20261020-184230-7da8b204\050,"Assert.Inconclusive 失败。Opt-in visual evidence is not enabled in this bounded regression run.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FINAL_WPF,RAWSelectionAssistant.WpfTests.UiVisualRegressionTests,RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval,BaselineGuard_RequiresExplicitApproval,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\guangjing-whole-app-validation-20261020\FINAL_WPF_SHARD_3\run-20261020-184230-7da8b204\052,"Assert.Inconclusive 失败。BASELINE_MISSING: capture current UI before requesting approval.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"

@@ -1,0 +1,3780 @@
+{
+  "sourceSha": "96e84b14a0cbb040b97cc531efeb31b1f4144367",
+  "files": [
+    {
+      "path": "src/PixelTart.Kernel/KernelContracts.cs",
+      "bytes": 6000,
+      "sha256": "33875f01440ca118e433787a2367853067fa4de62551c292311890b2118e5dec"
+    },
+    {
+      "path": "src/PixelTart.Kernel/PixelTart.Kernel.csproj",
+      "bytes": 265,
+      "sha256": "2bb45e51b02514a083f32f5df8857a4617e3f81b2afc1829ab68b7a6cf0577de"
+    },
+    {
+      "path": "src/PixelTart.Kernel/PixelTartModuleRegistry.cs",
+      "bytes": 7315,
+      "sha256": "27de9b3f4db436eef6a0a71a559afc0322eea06675f3996342c5c198694b0517"
+    },
+    {
+      "path": "src/PixelTart.Kernel/PixelTartRegistries.cs",
+      "bytes": 4801,
+      "sha256": "acb6353848ac3a2af0a9166f91646d04e1d05c7af41d3d7a395e757fd861ccf8"
+    },
+    {
+      "path": "src/PixelTart.MatchV4.Dx12/Dx12ColorMatchComputeBackend.cs",
+      "bytes": 15816,
+      "sha256": "1b65afea4293442f00eeacab3d6c19df358d094cb41e9a5618d48433c1d04291"
+    },
+    {
+      "path": "src/PixelTart.MatchV4.Dx12/PixelTart.MatchV4.Dx12.csproj",
+      "bytes": 633,
+      "sha256": "6889577c0947b68de109744f758dc8e62eb50d041b596b76a500c97f46f7a2eb"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetActionIcons.xaml",
+      "bytes": 4308,
+      "sha256": "d0b68b9213ba35811b3a6840766c0ad72ffdf112faad736d156bf48b889c1a24"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetColorFilterPicker.xaml",
+      "bytes": 7700,
+      "sha256": "3d717846eb0b53bbef361f20a342a81a446c72734bc9d2e80f04268e27ea1cdb"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetColorFilterPicker.xaml.cs",
+      "bytes": 2756,
+      "sha256": "bdeb03bdfc085db3662de03edf541fc3532ad5d05ba1a87352b4af29ae9b34ee"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetInspectorTagPicker.xaml",
+      "bytes": 2112,
+      "sha256": "56ee1b1ef1246d5989d7866cc64fefd9f074dd7beba1b73b3c0bdb0b63fbd096"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetInspectorTagPicker.xaml.cs",
+      "bytes": 209,
+      "sha256": "ec9a6d191ff05dcdd456d7e800b69a5ee981099642450bdf2998b58cf64769fd"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLayoutEngine.cs",
+      "bytes": 5339,
+      "sha256": "f587d1166b9c0a12630aa20e4b3704e34a3efeac10cd1fd1b3bfc017e8d2b9a0"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryBrowserCommandService.cs",
+      "bytes": 14636,
+      "sha256": "17e52464ec8ee14e8276b65b871393f1eddb82c134977b7f32947269d618e546"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryContextSelectionPolicy.cs",
+      "bytes": 824,
+      "sha256": "e40124421b7fd32290dc06bf1adf54656d3a093ceed1265e5735506457d2cdbe"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryDragDropBehavior.cs",
+      "bytes": 9140,
+      "sha256": "18c371d9361eafc9e3605db86d5027673813160180af65b487ace54153082651"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryModule.cs",
+      "bytes": 3504,
+      "sha256": "fc13f77669f0fec2c569ad2faafcd3ccee39298c86db81250d0ef18317e4be71"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryModuleDiagnostic.cs",
+      "bytes": 131,
+      "sha256": "34a2b3168f10fa52121c871af3f1d9405653c3627904604235515b45f0c56d9a"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryOrganizationNodes.cs",
+      "bytes": 11365,
+      "sha256": "eefa26742e4976365f7772a23337c5f69de20dd1fa2ae1a921898d6f060cef16"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryP1AutomatedAcceptanceDriver.cs",
+      "bytes": 42936,
+      "sha256": "420078249bf424c237da6a9647d5e8bb1e2b751add230c71921aca9bfcea8bc6"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryP2AutomatedAcceptanceDriver.cs",
+      "bytes": 55633,
+      "sha256": "c40b2470c7e4ba6f17505ec730ac3956df1c9462d92f33b0b6d4b396aaa9e30d"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryP3AutomatedAcceptanceDriver.cs",
+      "bytes": 142372,
+      "sha256": "bbe4e4c01addbbe0fc35c4dd8790f2f12d6278572e9803d45b9226fa5ab5e557"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryP3Styles.xaml",
+      "bytes": 53028,
+      "sha256": "4fd4001a6f10520575c3cea7ac7a43492e4cc65deae8c8edc76e1233b6b197ce"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.Canvas.cs",
+      "bytes": 8194,
+      "sha256": "e6b45d54e2423c9675d6defad05ccbd3890a3cb97d365dbd5a1fa6fd9be4b8d0"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.DuplicateImport.cs",
+      "bytes": 2164,
+      "sha256": "bfd3b12234f7d76bcc7adf1799af374acf392b5fd334474a6f78287e3e7798e9"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.OrganizationRename.cs",
+      "bytes": 3454,
+      "sha256": "52667fa2a5f9ed12b68ea063bb6031cc958e958568c02b4d9931cd026f1bd9a6"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.Popups.cs",
+      "bytes": 10189,
+      "sha256": "c083a33cd68eb68708b215cab25c56733d67c04f6c2220142884b182e7d7d9fd"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.VisualClosure.cs",
+      "bytes": 8483,
+      "sha256": "464fe84b578acda49101d4788503342f2bf9757b714de2241eca277d2ec37d57"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.cs",
+      "bytes": 59928,
+      "sha256": "9f3508e948a8cc810a8eabd0f1df07a3c36dfea4b6273e84388ce068eda25a5c"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml",
+      "bytes": 156674,
+      "sha256": "2d279bb62368ac578ba5042dfc712a781755c3e7d4cf59ec51140eb59d2dab56"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibrarySelectionListBox.cs",
+      "bytes": 351,
+      "sha256": "1c1a60715ba04e044b3b135a730676ccce9a43c970bd5464a8ff2b90619a0dd6"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibrarySelectionSourceAdapter.cs",
+      "bytes": 1419,
+      "sha256": "3e8d7a275bf8ab3166590a009322155e272ea9b24ab4f50684c1a6058a7be815"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryThumbnail.xaml",
+      "bytes": 2248,
+      "sha256": "d1495d96a4876411ac4dfb34301dcbd05fb1152114c10d107c2f934ed91f6d2d"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.AnnotationWrites.cs",
+      "bytes": 1270,
+      "sha256": "a23b2c39f98d68a374bb1d064eca65410a6767545863b5d4fd8ac1f2f7906261"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.Canvas.cs",
+      "bytes": 8652,
+      "sha256": "74cdd254c9a7cdf40255ab77f21beaa926901ccd03db1c548493d131a2d11f3f"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.ContextualInspector.cs",
+      "bytes": 7678,
+      "sha256": "8331f9f0d7cbfca063183542e625a013244beaee6f4c8751f14a15f876d0140d"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.DuplicateImport.cs",
+      "bytes": 2977,
+      "sha256": "7fdef7427284aa5c8a2485fe2a13231a0cfcd40e20e28f9644a73d2603a1eaf9"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.Duplicates.cs",
+      "bytes": 10370,
+      "sha256": "6f9e20c87a0dcd361d1eb2c3375e89215ce8b507b0ba7df1f261c9d4cedfb968"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.Identity.cs",
+      "bytes": 4433,
+      "sha256": "ffd808837706bcbe7695f3786954921d44292f7151ac24a93b3ac93cfa5fd82d"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.InspectorRelations.cs",
+      "bytes": 7091,
+      "sha256": "216b49b9990a7d1546587c4c310cf518a4925e9f075f52654fc18137977220bd"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.OrganizationRename.cs",
+      "bytes": 1769,
+      "sha256": "b42745cf8d78888a7848588c7f7ed506df2b7ab85c0cbf2d804b3c581496be4f"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.P2Browser.cs",
+      "bytes": 112551,
+      "sha256": "f6b6a6af290c56ede0917271d43821f400e0c1a3d3905c190566a2ed0b94da16"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.P3QueryComposer.cs",
+      "bytes": 36082,
+      "sha256": "bc8b659d63f1434118ce0121da0365c20ec2e303d0df0efee30156c956c1704e"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.P3SmartFolder.cs",
+      "bytes": 28593,
+      "sha256": "240f6bf594cbfdda4e14b99b974be905d9d2d53eea95818a3f58b1db5d21a119"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.P3TagManager.cs",
+      "bytes": 40580,
+      "sha256": "2e8ab30e792a8462857cf57eaa9d413ff8298f77d488c9e295cf422634948e94"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.ProjectVisuals.cs",
+      "bytes": 3148,
+      "sha256": "c08cc6be942025c93ba9718922f327aa300ec33f2cc251bb8605aa2e7127aee6"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.QuickTools.cs",
+      "bytes": 5128,
+      "sha256": "400879e8e6e68e4b18579b38f49b3fb42b5af513c0c7c9e2e457705688683443"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.SmartFolderEditor.cs",
+      "bytes": 22382,
+      "sha256": "0a0b22987383ab02571022f6a003094b01d6da4b6c3d2798d3435806aadfa584"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.cs",
+      "bytes": 130625,
+      "sha256": "048f4c94d78c798fd0225200ee94dd601315d7121748649f30067fae8e76b42f"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryWorkspaceHost.cs",
+      "bytes": 27062,
+      "sha256": "5886e0569ff266b2a7c1622edd232447bdcb7bb48a4fe1fc2613bd5d6f16013a"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetQueryComposerView.xaml",
+      "bytes": 13621,
+      "sha256": "0aa381842a7e2ac4e4de6378654e94ec420292a4185a26d350f8cba9102edf41"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetQueryComposerView.xaml.cs",
+      "bytes": 203,
+      "sha256": "a80643fd05fcea74143d0313aca69dcac03d5495f974aaaa5741b669d6c96936"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetSmartFolderEditorView.xaml",
+      "bytes": 10454,
+      "sha256": "a2d7c9e25fc901d9dc7a758cce9d1153165cd205e93c36341db2e6a69df8c66b"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetSmartFolderEditorView.xaml.cs",
+      "bytes": 830,
+      "sha256": "c08c254a0691e37ced4a0de31ea036bc8057e41d130802de93db07faad52a084"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetTagManagerView.xaml",
+      "bytes": 19368,
+      "sha256": "671e40dcadf356d7a850050b4346d762d511049cc402814500fec2f98de6d6e4"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetTagManagerView.xaml.cs",
+      "bytes": 1394,
+      "sha256": "bb9b0a88a08aeca75fa27e3ab48fc9fd8a3375d0a8b6f8a7d2147cf3ecbffd05"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetThumbnailProvider.cs",
+      "bytes": 12117,
+      "sha256": "6dd02940529fb06f62d9be4b9f7e50edf18b3904bba216c15d94c76cd3bd8e7f"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetViewerWindow.cs",
+      "bytes": 9337,
+      "sha256": "225069c79f929d8cb59c2304ba1f616c984a1a72e7e5df9200d2c02b98ea82e2"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AsyncCommand.cs",
+      "bytes": 2361,
+      "sha256": "b6d69a776ce5396bd5da9b67c302d82557135fe5ee4a92359b5b053767d29c71"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/AsyncThumbnail.cs",
+      "bytes": 11931,
+      "sha256": "6c4fa21bae550aa0219e326b15443b19e5d5fb45e24ad4da70053ca8c41181e7"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/BulkObservableCollection.cs",
+      "bytes": 753,
+      "sha256": "ed4cd533f0005d265e59840c593668447983a872d35c8a187c7640412add2ae5"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/ContextMenuMonitor.cs",
+      "bytes": 2052,
+      "sha256": "5e5bae7dd5a57ce7150dbc90ebb00084b4cd58f23f352b7f4548ab45719248fe"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/ContextMenuPlacement.cs",
+      "bytes": 1391,
+      "sha256": "25e38b73b8ce457e0ca1c85b040ad0e47740f5ad1b1e61ea7ca5f79be92c3526"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/EmbeddedAssetLibraryDiagnostics.cs",
+      "bytes": 5311,
+      "sha256": "3a895dd463069a75fb35cda7225f9267212c24b534d873ad3121c8a091601d17"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasSurface.cs",
+      "bytes": 20930,
+      "sha256": "412ca7de57af69bafa6e5d9167ffa319f738226fa38258479f4675d757adac76"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+      "bytes": 24938,
+      "sha256": "84f3e3ed17d6fecab49081be874a2264fca0e708bdd86144ef9ee9cffc2d8254"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/HexToBrushConverter.cs",
+      "bytes": 2737,
+      "sha256": "edbe9aacc240dd8a0dae0f1b45b4e85b532ac61e9ec5746e08ab98dff993e27f"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/HistogramDrawing.cs",
+      "bytes": 4607,
+      "sha256": "6cff4f87317e5907e751fa829905f91408940706eb2cc35c7250878529168cbe"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/InspectorSectionPanel.cs",
+      "bytes": 5645,
+      "sha256": "a84dafd9392eaad3df194d88a30ef3ea9da54bbfb4b5ff6b6a27d5ace8a1b616"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/InspirationDragDropBehavior.cs",
+      "bytes": 10752,
+      "sha256": "7af8bbfb3e02fab1ab17846efec4c9e3279ba4c448ba8a60f33cc918e6f006f3"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/NestedScrollBehavior.cs",
+      "bytes": 1944,
+      "sha256": "1bac34023ff25246d29c93310c70554329d302a864a38fac8193cf5903be76aa"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/NewAssetLibraryDialog.cs",
+      "bytes": 9188,
+      "sha256": "055f8332bba679aac78cf366952b43217f42eeb9209667b9963de8485a21fcef"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/P3QueryNodeView.cs",
+      "bytes": 27471,
+      "sha256": "d0d0dd75a1ad7f851333f697fa8fafbdd090d847cb8d2cf786b190f6ecd10358"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/P3QueryReferenceConverters.cs",
+      "bytes": 2063,
+      "sha256": "f3d980c21d024bf813c39cdb6175de777a14011e2c5e7b02d909d899fb497850"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/PixelTart.Modules.AssetLibrary.csproj",
+      "bytes": 1350,
+      "sha256": "5311d493095483d75d72341755f2ad031261ad1e67b93d72a8fa7e195c7b12ff"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/PixelTartRatingControl.cs",
+      "bytes": 7054,
+      "sha256": "a5fc145a78fef3230a9bf22226edf548581f796d193e3db532be434d05f5efa1"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/Properties/AssemblyInfo.cs",
+      "bytes": 108,
+      "sha256": "5e3ee0338218eb08a72bc122d0e97881f0242a6117cec1a4a68de2d75359e9e0"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/RatingAtLeastConverter.cs",
+      "bytes": 512,
+      "sha256": "3bff4d5dabcdbf9446dd2bb15e88054f75883ae24cdac9c2281cd7836b68ec50"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/RatingAutomationPeer.cs",
+      "bytes": 1370,
+      "sha256": "763951094c17fbd940cffa3a4c774346abc939c4ff806d9db7b15429b89b3bb6"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/StudioBusyFeedback.cs",
+      "bytes": 3659,
+      "sha256": "37ce2c881b3853315a47c8ab857f7d41682bd464855139dc7df874a57aa19e70"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/ThumbnailSize.cs",
+      "bytes": 115,
+      "sha256": "150cc18791661b4d2bf8d0850a27edb92c194cb7907fbedd444e0923ae3a3313"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/ToneZoneDrawing.cs",
+      "bytes": 2830,
+      "sha256": "3fc64642d5105a77154e7efac5f4cc4c60be095a30f686c2603326e43ed4cfaa"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/VirtualizingAssetPanel.cs",
+      "bytes": 9440,
+      "sha256": "ba801978423c878491990db35d2248bc9525ba828c836cfdb476bc3e17602c1f"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/VirtualizingWrapPanel.cs",
+      "bytes": 6749,
+      "sha256": "5224c763a14742da1330b6e0e8d6ba0ed6f2bd21a8543fa1241c6f052feaa959"
+    },
+    {
+      "path": "src/PixelTart.Modules.AssetLibrary/WpfVisualAnalysisDecoder.cs",
+      "bytes": 4297,
+      "sha256": "ddba97a4007ee1d37ac052457df1aad2ce5bedb1fb4aa1bc118646af3e1cbc9e"
+    },
+    {
+      "path": "src/PixelTart.Modules.OnlineSelection/OnlineSelectionModule.cs",
+      "bytes": 1086,
+      "sha256": "b4ae414b4468b4a2ef4071954ad9b5f3c4119701599b50d6698e314f0cd72c18"
+    },
+    {
+      "path": "src/PixelTart.Modules.OnlineSelection/PixelTart.Modules.OnlineSelection.csproj",
+      "bytes": 355,
+      "sha256": "ca0ccfe5a90d98bf39f62c72b2e3c1902542c2890cfd2cbf29e3239466f3461e"
+    },
+    {
+      "path": "src/PixelTart.Modules.RawTool/PixelTart.Modules.RawTool.csproj",
+      "bytes": 441,
+      "sha256": "11c2913293b44f3d4c75eb58c7b63ad2f3beeb6f783fd9eef1a5e12cbed40192"
+    },
+    {
+      "path": "src/PixelTart.Modules.RawTool/RawToolModule.cs",
+      "bytes": 774,
+      "sha256": "2e2033ca10617182a13a3b39d8e513f15ba0f8070d9903be679733c4e9f0722e"
+    },
+    {
+      "path": "src/PixelTart.SelectionApi.Contracts/PixelTart.SelectionApi.Contracts.csproj",
+      "bytes": 281,
+      "sha256": "6a0c00a746d7b1805e23b34457895d8f72d94ef9a15b7fa46c3ff7a67aed5c30"
+    },
+    {
+      "path": "src/PixelTart.SelectionApi.Contracts/SelectionApiContracts.cs",
+      "bytes": 1499,
+      "sha256": "e36e201a0b0e67a0b8f71cd2b24c557dea3ba104ef044503ab38d3396affc3f5"
+    },
+    {
+      "path": "src/PixelTart.SelectionApi.Skeleton/PixelTart.SelectionApi.Skeleton.csproj",
+      "bytes": 413,
+      "sha256": "2ca63752ce9c1f8663b265e37b66b0f9570ef32c16fbccfa9b694fc61549c230"
+    },
+    {
+      "path": "src/PixelTart.SelectionApi.Skeleton/Program.cs",
+      "bytes": 1385,
+      "sha256": "4970c533a76359d707426d8ea158b99a45c95f54776a51abbf2eaf12c845959e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/AppSettings.cs",
+      "bytes": 3885,
+      "sha256": "be20bb556d3a87b72509a5f19865252599da21e4f4547f67b1ec626d50bec0db"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/AppearanceSettings.cs",
+      "bytes": 1133,
+      "sha256": "afa8b5b695949dee99f276408f376e5f177880e2dc276dbb37119fdfaf468512"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/AssetLibraryModels.cs",
+      "bytes": 8672,
+      "sha256": "97ca8009e7d3d140b31ef1ae745c1dc0e4a7ebbf88530fe020d5eaa719dd9854"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/AssetLibraryPortableSettings.cs",
+      "bytes": 4125,
+      "sha256": "4724da948aea5524ec7de996b9122f082a1c51f951a75d2778aa227215715fad"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/AssetLibraryV15Models.cs",
+      "bytes": 3461,
+      "sha256": "f1d6c76caaaf692a781f1586f7c3f701a8dcf9ebddbde0218fc7cf31907a3b1f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/AssetLibraryWorkspaceSettings.cs",
+      "bytes": 6886,
+      "sha256": "3f8fd6c129432386eda4414d1215cfbddc56294ec20fa5d5ac5c7f9d21065a96"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/AssetQueryModels.cs",
+      "bytes": 30829,
+      "sha256": "a8ed3677761004734685a6870103e3eca43adfbb0860d95a8bc6033ae216a5fc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/BatchCompressionModels.cs",
+      "bytes": 3538,
+      "sha256": "27ff3167cd368422ed3e8523ad1b19ae036522ade0f8db1e8cb5c1b548ade9a5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/BookingDocumentWorkflowModels.cs",
+      "bytes": 2675,
+      "sha256": "f423d3fb37b7358365cd895fcbda846866a35e73506c6291e48d9893f0ecbab0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/Branding.cs",
+      "bytes": 396,
+      "sha256": "fa9d2e09fb0b1ec5d2f8d8d804cda8bc854d1520160f8d868cb24cade7383e33"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/BusinessRecordsModels.cs",
+      "bytes": 3706,
+      "sha256": "42e3b6105e074f4b58e7c6be351c1ffa20324999e59522f238f8e59f78d2f335"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/CollageModels.cs",
+      "bytes": 5415,
+      "sha256": "ec1577754643a4165a1e8393dd86cc89203eefdddda4eb588c61f2d51ff15bf4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/CopyModels.cs",
+      "bytes": 588,
+      "sha256": "ca2f4d4fe5716f137f182c90a9146f9f1750d9c150d5ffb854926bf27b2b22eb"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/FeedbackModels.cs",
+      "bytes": 296,
+      "sha256": "a8939618961012121dc99dfc098379fa334e95b7e3c6ea18e6afaad60d147763"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/FileOperationModels.cs",
+      "bytes": 2242,
+      "sha256": "86cd3f553c28de7bda5c650d95b45accf83b24058dee8596b1c8bc40b87673db"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/JpegQualityModels.cs",
+      "bytes": 4080,
+      "sha256": "1750f0df721669c68ca89678ebd1d19b6f02006076070cea6f1218dfa67cf818"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/LicenseModels.cs",
+      "bytes": 5073,
+      "sha256": "5c066c38bceaca67d0a2000d1b41a21520648c7f224b8284857f011f8b23dd28"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/MatchDecision.cs",
+      "bytes": 298,
+      "sha256": "016fa066a2cf1f29cc5f6a8abda90c704c1b5d995160a19ff57afd11fd548d8d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/MatchStatus.cs",
+      "bytes": 869,
+      "sha256": "3466f8bd70abce1e1a6b0996895df1f5c046d7a4aa73034b593349e7db329b48"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/MediaCopyModels.cs",
+      "bytes": 626,
+      "sha256": "35a86e1d1acdbfd20e8707da15b2af6b79b52d4db3fe9b342dd2588073d41f2e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/MediaEnums.cs",
+      "bytes": 1866,
+      "sha256": "e1769f89bb496ef5988bbf746dd965b68723b6806e79c6026734c14794e79c32"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/MediaFileRecord.cs",
+      "bytes": 2255,
+      "sha256": "c1725b2c9ffff11fa7ef2b76e3ec5df3411a8b452b78aec5c3d6b9e0ef407b71"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/MediaIndexSnapshot.cs",
+      "bytes": 3094,
+      "sha256": "be543088bc9726ebcf22cf926df53d81169d0dfce14c86586d931490e4454e14"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/MediaMatchModels.cs",
+      "bytes": 10064,
+      "sha256": "50fe0b4cf101e352156c579a8854177b41414b1a1a4afdf2ed67c8eebe056172"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/MediaTaskFailureModels.cs",
+      "bytes": 4867,
+      "sha256": "59acc7ffc243939f0efd6bb0e75ba3b6972e259b92916abc85c5493f54c4a4e6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/NormalizedFileName.cs",
+      "bytes": 194,
+      "sha256": "25a1e4387e723f765500a18c20878e0e168cfbf28cbfe85899e9054fdc92573a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/NotificationModels.cs",
+      "bytes": 792,
+      "sha256": "63135b862a67cf9f93db92aa29cdd70c3c0f146490e3ba7288236b2df651108a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/OnboardingModels.cs",
+      "bytes": 3204,
+      "sha256": "584845b9e1676ee122df775894535e8af81c9f9dc4f4ccb0b7407dcf161fb0f4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/OnlineSelectionModels.cs",
+      "bytes": 6994,
+      "sha256": "6ace7732abc3eb9f71d2b209fc14677410674c51dedd231d9c62937c2ecb6c47"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/OperationProgress.cs",
+      "bytes": 201,
+      "sha256": "4675e888a102ad8f48934ac959434f40e2f61fcdbcfa192beecdf1530ebade9f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/OrganizeModels.cs",
+      "bytes": 5125,
+      "sha256": "23733bbca0fb57c53bd2412b4121a660da321934291ac131f363203801d14479"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/OutputMode.cs",
+      "bytes": 141,
+      "sha256": "9b59f0b20b5a90d66c93bf6c6fdd4101bdd099f9a1f1f65b7eada573e41a2388"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/ParsedSelectionInput.cs",
+      "bytes": 149,
+      "sha256": "adbfeb9ef0862a04ce0d519b723461cc2540741b20e5676bd5dc41e5c8a9ab08"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/Photography/ActualPixelScaleCalculator.cs",
+      "bytes": 3166,
+      "sha256": "5bb28a7c46bf1b77ff3fd4002757512cfabcc2a701a1f4fb37585594582a4a76"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/Photography/PhotographyCompareModels.cs",
+      "bytes": 9022,
+      "sha256": "f9e1b57df7d630ce097f61927c2f1d1fe6b16f5880f6d64a22ea1205d4d55b71"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/PhotographyContext.cs",
+      "bytes": 2567,
+      "sha256": "715ef3b12a7c5fd2efd209d4f6f2111779c190776a6936df8c2b132e48051786"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/ProductQuickToolLayout.cs",
+      "bytes": 330,
+      "sha256": "84024ae5204b13baf8deb51023875c29d00ff654dfe097b64c7d558b5727291c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/ProductToolboxPolicy.cs",
+      "bytes": 5013,
+      "sha256": "746933e21e5d22f3a8a645c457a732fbd7cb8cafc03cfeed358490ebb009e98b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/ProjectModels.cs",
+      "bytes": 2938,
+      "sha256": "d55f2d9ddd2676d441d2ada060d00d5e675c0bcd35e82fbd45137a177287ed37"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/PublishingModels.cs",
+      "bytes": 6900,
+      "sha256": "b023065e1e089af600668a405468c2aed3bd4b439635033e28ec1c0a183dacb4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/QuickToolLayout.cs",
+      "bytes": 320,
+      "sha256": "d4fb4a7c155946dd0c9e5dd5b901fce9f9d8e578f91c7180e39860b26ce45f3f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/QuickToolsService.cs",
+      "bytes": 2337,
+      "sha256": "21c466073462cde0453e860184eaa00265d106d78f32cb2d7ad5d38faca547b7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/RawFileEntry.cs",
+      "bytes": 534,
+      "sha256": "c628818ac4d74dabebf20dcdca27fd8ef7c590a26823d8e9b117ad345ee8db5e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/RawIndexSnapshot.cs",
+      "bytes": 524,
+      "sha256": "409827875152eda8d60c0d0c2923995f4d55c4e82490cb94bab178a80dad3db9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/RawToJpegModels.cs",
+      "bytes": 4771,
+      "sha256": "ea192288f98aadb4ce53f7d64155c8a112bd9290908861537325de6b9bef3bf2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/ReminderModels.cs",
+      "bytes": 1838,
+      "sha256": "9d91c632846b74b38f5b6f678cbcf5d259d19fdc46a5e2c451797d241702ae68"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/ReportSettings.cs",
+      "bytes": 523,
+      "sha256": "23cd51f57da1a190ce1d1f6504c33db692702c5687a59c240247054bca6ad80f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/SelectionItem.cs",
+      "bytes": 2141,
+      "sha256": "7786ce8ff3b3743a58d4585b65c912d121e28248541a1e76bdaecce7b70cd2b1"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/ShootBookingModels.cs",
+      "bytes": 9988,
+      "sha256": "b00089c4c53066f85a9e56f3a1f87b667577f93261d396d603a56f4421f3d141"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/SidebarLayoutMetrics.cs",
+      "bytes": 434,
+      "sha256": "5f2f7a6215c2c7fcb4fd6630e5837942df76ce3b4d3d4f7437a00e4aa61203c6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/SourceDirectoryEntry.cs",
+      "bytes": 1041,
+      "sha256": "b654c070b2227c5fc6f99ca0e9cf2d330d62dd19264b2da1592b3f92a0440dc9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/TaskModels.cs",
+      "bytes": 3475,
+      "sha256": "b2d41449f591b07303dd097fd89f2dc7c228e5cb072d9bf85da097673085b6ad"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/TetherColorModels.cs",
+      "bytes": 3674,
+      "sha256": "140e8933a8d5f2a03f4ceaf577b08f876140ed191918fd2550fe06611fd76d08"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/TetherModels.cs",
+      "bytes": 3747,
+      "sha256": "8761cc7fbf096818468bfb541ea5dadfe713812bc25920c2ca302946961e1b18"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/TetherMonitoringModels.cs",
+      "bytes": 3050,
+      "sha256": "1485e5c7c0f3ebbc141286935f03b051a982df46a3d2a1b552fa3ec276a25fc0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/ToolDefinition.cs",
+      "bytes": 1000,
+      "sha256": "74e0e0082647b0cbbbf869e7e8c00202a48bb80ad5f5cc48e63b08f7eaae2c31"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/ToolRegistry.cs",
+      "bytes": 4811,
+      "sha256": "0ffcf0150481076dee8cb7a47c9f037cbd9aa09b6fec016d8ee9168f70838f30"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/ToolboxItemDefinition.cs",
+      "bytes": 464,
+      "sha256": "7efe25b3b580a73befdffac86fde4f046ad497d86686f7e877eb5ec2eac63291"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Models/WeatherModels.cs",
+      "bytes": 3204,
+      "sha256": "b35787574b945a02e0570b4d26f3880075aac5b23c8a210b6a6ba61bf0803cbe"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/RAWSelectionAssistant.Core.csproj",
+      "bytes": 1205,
+      "sha256": "e9561e49287c7db78127a350dc0570142ae80f04531818c88e121c53ced9426b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AppDataMigrationService.cs",
+      "bytes": 3120,
+      "sha256": "dfcc9de6a45959b40359f9acf5f4db12018320a9f3428bb880eb0c5e0b203c78"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AnnotationCasJournal.cs",
+      "bytes": 4037,
+      "sha256": "922a7ef0b15b712d9aca90bb10b4d36af68df9761c3ce5b640fe37111cdd1870"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContainerService.cs",
+      "bytes": 30904,
+      "sha256": "03a95ad1bd9bdd9ca0809ef04461a8cb2aacb8252a3b24e12fafc5d057bc0c9e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContracts.cs",
+      "bytes": 15567,
+      "sha256": "01c539f861178084d43eea4be0fa72e1f26eb997198e065e88a2a71aa592ca06"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryIdentityResolver.cs",
+      "bytes": 5137,
+      "sha256": "7b8d2772b47ce743b5131331d25f314b62a15d8668ab8083c5fba96370b7af8c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryMergeService.cs",
+      "bytes": 35586,
+      "sha256": "f79ac6b60dd082ddf1ff66f413fffe6392aaedfd457cce9f8e195a7337c1ac72"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryOperationTiming.cs",
+      "bytes": 1220,
+      "sha256": "5487ee2d7119c45ed3847b299899b03e941fbe404c1e3aead4eb752fb42f1bb8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryPackageService.cs",
+      "bytes": 28995,
+      "sha256": "e0ad26412ac8741123dc3cc8517983515edc1d8ac0fac8f8a610c52960cc1298"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryQueryDiagnostics.cs",
+      "bytes": 1145,
+      "sha256": "653bbaf9369e9d49ca25829d4fb46af01ae988f91d3575048ee36904b70a85af"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibrarySchema.cs",
+      "bytes": 38301,
+      "sha256": "fdb099713ee66c94264cbac27614fee74ce25dfd611c910a55d82c95678b8573"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetPresentationMetadataStore.cs",
+      "bytes": 3339,
+      "sha256": "02af37ae5fd5b9656248710d66a7a79868748ad4c0dd20315689ee3e091fe4af"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetQueryReferenceIntegrity.cs",
+      "bytes": 6026,
+      "sha256": "5db2bc1cf3c259776430f4a128a11089ea761cd5d54310690b61a70fa43fa041"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetRelocationService.cs",
+      "bytes": 3416,
+      "sha256": "89cf1d9659a4dda525fc9d0cdec7a28cc0c75710a0f4cbdca3010bc2a6826b2f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetSelectionExportService.cs",
+      "bytes": 3497,
+      "sha256": "e268e774215970a5f4bd1e937a18bf3fdcb7178a600855ed1c214f7e9584a32a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/CreativeAssetContracts.cs",
+      "bytes": 14812,
+      "sha256": "6be429052e13647a804db4482e5ab659e8b1bd5d27408a9ba07fb4c733185250"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/CrossLibraryRelocation.cs",
+      "bytes": 4686,
+      "sha256": "0aa1db4de50abca34db7b3d7dc46db73d7f3b8ddd395d86af4229640ef809cc2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/Duplicates/DuplicateFinder.cs",
+      "bytes": 7088,
+      "sha256": "22c20044513b7c54498f7fcb713a0b80d76dfe60e18e463821d2538aef91c65e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/Duplicates/DuplicateReferenceProtection.cs",
+      "bytes": 20395,
+      "sha256": "3ebf2055dd2b8d6fc087a7665f1315480af0d56553a22c21747b114e0a3f05a6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/InspirationTrayService.cs",
+      "bytes": 26357,
+      "sha256": "d577545ba9c9b33ee5a77260b5e98828c834644efeb87cd7fe1368c529f40d75"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/LegacySmartFolderAdapter.cs",
+      "bytes": 9892,
+      "sha256": "907d86c4788a8d3a1df57d488a670b774543e719a059ca751a253c44b1bc9e07"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/PhotographerAnnotationStore.cs",
+      "bytes": 6012,
+      "sha256": "7e487a0bf4e57a194bb7c992895a4285d08ed1ceede1c119cbc8bf4586647f95"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.AnnotationUndo.cs",
+      "bytes": 4789,
+      "sha256": "451b18cbd67ff7c81fb3de3a5b2a4366f14098dffe950f0f48542942216feb85"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.Deletion.cs",
+      "bytes": 3376,
+      "sha256": "dbc31857dbf195173a28cbefc80f3aa06a6b4f2d85cbdc0a4b040a9e124ac2f7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.P3.cs",
+      "bytes": 126535,
+      "sha256": "1a4f6883db270b753945300b8eb0c7ef2aed66abb042b251da10984d49a66a77"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.V15.cs",
+      "bytes": 120319,
+      "sha256": "2ac78221e22ec66a27a047ac9346392658cc823c5f2d52a05976f4112b4c2950"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.cs",
+      "bytes": 84787,
+      "sha256": "cf032c358cfff23700614407a065e922bf088bae2dd678ae09d0cded6724505d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAnalysisBatchProcessor.cs",
+      "bytes": 7422,
+      "sha256": "fb34d63d0c87149e18b814adf512d2fa083980061b8eb4a95db551a7e1f829e2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAnalysisEngine.cs",
+      "bytes": 25941,
+      "sha256": "ee7b9bd49b809cddd01ccb260c2d9f690255833593b3488d9a297dcb7a320c70"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAnalysisModels.cs",
+      "bytes": 9105,
+      "sha256": "2b8767bb9b1bf2b58047ebab4a9587f9f6d0b71a37daf11aaec8d1372f4a4cc7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAnalysisPersistence.cs",
+      "bytes": 33324,
+      "sha256": "181f911fc4e4f533742d0f88eb494acdbf019b9cee82b90f11b4c6cd02bbd2e4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAnalysisPresentation.cs",
+      "bytes": 2021,
+      "sha256": "4581f55066b4e085c13d48a6d5b912fdd5e07e61f2d0d5aee530f970b0da8505"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAssetFeatures.cs",
+      "bytes": 8491,
+      "sha256": "37b7cc77086324a733aa9cd50fa7d17751a3912d086b16936286f2bb29f62071"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAssetQueryService.cs",
+      "bytes": 43283,
+      "sha256": "d4af7d0a5682dad4b34f41a33c2f7c746f57591f12604d2bf21f8b2e747f66ea"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualHistogram.cs",
+      "bytes": 190,
+      "sha256": "d7efd23c35b1412996d938fc2d0536f9aa4b54e8cd20a81c4d7d5934073935e0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetSelection/AssetSelectionContracts.cs",
+      "bytes": 3411,
+      "sha256": "dd607872f075f954d06e287240b57e20a2da3e243ef79d4a0b338d52c9c10380"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/AuditAndNotificationServices.cs",
+      "bytes": 8503,
+      "sha256": "52998ce768f531b92b9eeaa9327aca3d54ec2e5bb54b520e387bcbdc2fb6bc55"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/BatchCompression/BatchCompressionContracts.cs",
+      "bytes": 1532,
+      "sha256": "41f44b840b878e2aede1fe8610cbc0b9bcbe82d4c1406dc9ccea5212b75da150"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/BatchCompression/BatchCompressionRequestStore.cs",
+      "bytes": 4214,
+      "sha256": "0260b6a96ed64c37833c5efc6d6597042b8c250f76dc94831bcd5ff204e5562b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/BatchCompression/BatchCompressionSafeService.cs",
+      "bytes": 17780,
+      "sha256": "43d816b32243b7de668c1d13f7c28eb9850e961bf6c3f3a960675cb3576a7d67"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/BatchCompression/BatchCompressionTaskHandler.cs",
+      "bytes": 9147,
+      "sha256": "debd8e992765e479d34dec09b7a5bf9271b2a82b540c31340f9da6e895b42f09"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/BatchProjectService.cs",
+      "bytes": 1398,
+      "sha256": "937127331da6f0bbfc28ee300bf48e2bcd338f3be344174f3ae2800841729ab3"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Bookings/BookingConflictRules.cs",
+      "bytes": 2738,
+      "sha256": "3dbf9928bd12a108dabdc29c8ec966008488fc0bfa9937f493e7c63cac291e68"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Bookings/BookingContracts.cs",
+      "bytes": 8326,
+      "sha256": "63f52151864cd7dbd22e3fcf171fb6bb856f6d9f3c40923e14d610721a6cf397"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentFileSafety.cs",
+      "bytes": 497,
+      "sha256": "f63ab072c74244eb9a1a8f1fb85b6582e6d486f9dff231790ec8333944415fcf"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentService.cs",
+      "bytes": 5187,
+      "sha256": "e802eb848b7ce73ae636520eed26f09a7af2b7892f7d3a3791b8ff6d49b15367"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentWorkflowService.cs",
+      "bytes": 37015,
+      "sha256": "836faf79383ae8ce685aecf788a2a6fa3ce601df5ddb6b45421f733c7818026d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Bookings/BookingPresentationServices.cs",
+      "bytes": 4155,
+      "sha256": "3b589b2022460dd5a8ccce42f50b971ddc91efff4cddb51cf6df6c4724a62af5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Bookings/BookingReminderServices.cs",
+      "bytes": 19101,
+      "sha256": "115ad6786f9878ae7e7862cc529837eb4389fdaf876d954595ebd896a1e8a88a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Bookings/BookingWorkflowService.cs",
+      "bytes": 18777,
+      "sha256": "d88d6fcd26be79a90ad43f45a995639824b1f4d0fd0c3927f1e327a5251afa3f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Bookings/ClientDisplayResolver.cs",
+      "bytes": 789,
+      "sha256": "6a490ad32f954f3f081bdd50dbb534f6d903a3005fe4bcc722e520a60decaa41"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Bookings/ShootBookingDomainServices.cs",
+      "bytes": 5390,
+      "sha256": "1e6db0a1eafa11b163c09edc9cb2014eaeb09c5fb009eb1d23e7d97d498d4034"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Bookings/ShootBookingService.cs",
+      "bytes": 10991,
+      "sha256": "77039a81fa32a6f040f6a15f98c9acf69bc2056c680ed29dacc264a4c6b008ac"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Business/BusinessContracts.cs",
+      "bytes": 2467,
+      "sha256": "9745392d5ad1cf820f2477c20850d9af31a23421cc438c761df0be50bd02b23e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Business/BusinessServices.cs",
+      "bytes": 9678,
+      "sha256": "efd725319d668565861821aad5028f274936dd1de6e2c10d7cc3778213219c47"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/CameraChartCaptureProtocol.cs",
+      "bytes": 1463,
+      "sha256": "23fc184b2e8a4e9b398051282e3b75d224e9610f8aae5fa8572dbe48df2e2a5e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/ColorProfileRegistry.cs",
+      "bytes": 3481,
+      "sha256": "2fe72fe5e8d7903b5f0dd635bd2ecb821ca0f78e4a13ae2e9f8b4053da8e0553"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/ControlledIcc/ControlledIccProfile.cs",
+      "bytes": 10539,
+      "sha256": "d280fc6d2fcb3ae64c4cb6c706bb8a9de051a4707ca16606b94a621ee88ab685"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/ControlledIcc/ControlledIccTransform.cs",
+      "bytes": 9085,
+      "sha256": "57f06749c514c51076f5b82316fdbfedd8b81b9c89e7e41fec5119a4028fad18"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+      "bytes": 4900,
+      "sha256": "8d701ffd7527d1c488ab6c1c988bde100fb8b8040059136f29b56935f0dd42ff"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/LinearInputProbe.cs",
+      "bytes": 1892,
+      "sha256": "d125e5e06dc511ab39bbdad2e136d2d1e46cb466405ff0b8d80f781d42b41f42"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/LinearRgbColorScience.cs",
+      "bytes": 6048,
+      "sha256": "bdb7c239a3ae4f585e1ee0a5820f7b931620983d14d809cbf611600e46b53e4c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/PhotoWideV1/PhotoColorMathV1.cs",
+      "bytes": 5022,
+      "sha256": "4869fbba82d6680ee56c00db785edc9557062ec36f94f13180c848a2a5edfe72"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/PhotoWideV1/RenderedSrgbExposure.cs",
+      "bytes": 835,
+      "sha256": "fd01ccd751692c519e2f87749e8d7858a493383b230bbb4d7ba0deb934a6c690"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/PixelPipelineDiagnostics.cs",
+      "bytes": 4068,
+      "sha256": "8c383d25f5143b550d47bc75d0912188382b7ce24f614fd89d6b3e23d8917d85"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/PrecisionAnalysis.cs",
+      "bytes": 1103,
+      "sha256": "857a9ad402f368f996b89a3eff44e28edac11b14f85a1a342c120c632197577d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/PrecisionTrace.cs",
+      "bytes": 521,
+      "sha256": "b986c76913e96411e48bc21bc003031602d75717fccdd3ba7973e9a341bae056"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/Pv7ColorPrototype.cs",
+      "bytes": 6063,
+      "sha256": "6106d55dc1be7a92224dd90d4731096dd8af90876ebb225c1238ea54c248dca3"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/SyntheticIccMatrixReader.cs",
+      "bytes": 4273,
+      "sha256": "f4cba507bb11ef65e851a49984f0b91eb5e4836433110c387b3e010d12921f13"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/WorkingColorSpace.cs",
+      "bytes": 326,
+      "sha256": "761aa9b596de1abbcb39b7652667a2d89762264085815eb44ed170cd749b31b6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ColorValidation/ChartReferenceData.cs",
+      "bytes": 10825,
+      "sha256": "f4cc4153bebf9e971aead0c011968fcc94b44f4fc86283e3434cf3aa14f2e992"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ColorValidation/PairedCaptureMetadata.cs",
+      "bytes": 8749,
+      "sha256": "4ab353f6da9aa9f419499d809b0411339d26582c062127ecd537314313bfa9ef"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ColorValidation/ReferenceColorValidation.cs",
+      "bytes": 6274,
+      "sha256": "6aae416033b0a8330eeea2c04577b6130c971f9d060db328add783e4fc25c28a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/CryptolensLicenseProvider.cs",
+      "bytes": 11675,
+      "sha256": "5c94222eca238958bd6ffd8e9404c57b7e898261f992a2174d6d8402e779339a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/BookingSyncLifecycleSchemaMigration.cs",
+      "bytes": 1658,
+      "sha256": "52f8943acbdb29c3775769f52aa1e4003566338f2f78e8c833343c6017a0c78b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/BusinessSchemaMigration.cs",
+      "bytes": 6103,
+      "sha256": "058cd70948d1eabb8deb2cb584896b47f13a6657f9318acbd39b4b6290ebba87"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/CalendarSchemaMigration.cs",
+      "bytes": 6642,
+      "sha256": "aa20e90210748b87404b25d5361e9d8bccbb4656f0b02896c1666675db1a5afc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/CalendarWorkflowSchemaMigration.cs",
+      "bytes": 1194,
+      "sha256": "1e93e5addc50c21c349730b765fcc33a2d56061e287018090e638aaa81ace082"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/DatabaseContracts.cs",
+      "bytes": 1379,
+      "sha256": "6056597cb4eade34aba974503f2fc239b55b2e347798bd00c976d3dcdb3fffb6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/DatabaseServices.cs",
+      "bytes": 11107,
+      "sha256": "f4d15b4481b0f6fd549e4cd7e08fe9f6a05e406f8462fe364ce91c44495e71cd"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/IdentityBridgeRepository.Recovery.cs",
+      "bytes": 5740,
+      "sha256": "fac9a910c4d4ce403b12e7809e3799dd599b500a27d79989fc31fbf9bf1ce943"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/IdentityBridgeRepository.cs",
+      "bytes": 17463,
+      "sha256": "6ce98db13cc28d61749a0e6c76f49ae43e4acdc97be5bfc818ab56064eeb684b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/IdentityBridgeSchemaMigration.cs",
+      "bytes": 2846,
+      "sha256": "4a8b377e08df94f8e4a344f11a03785b725a25df0284b564bfd39a9825822614"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/InitialSchemaMigration.cs",
+      "bytes": 8062,
+      "sha256": "ec64cdf25ab7fb568c26a09f2b28d0ab5fae1f8126c8420c510fdde9ab2f8f28"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/JsonDataMigrationService.cs",
+      "bytes": 14631,
+      "sha256": "3cb3ed85cd7760e9414a5968181c708290301a4a41e4a799d801a94f0e65b1d1"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/PixelTartDatabase.cs",
+      "bytes": 2628,
+      "sha256": "e9e2d7d4e2b047a8d2d2fc3b34a942e952d3da57b4809867d094f79cb9b2274d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/SqliteBookingDocumentRepository.cs",
+      "bytes": 13660,
+      "sha256": "e11dcd5605415c2798925d0d455450c57fd87217463f6e0ca008dc34359d8fca"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/SqliteBusinessRepositories.cs",
+      "bytes": 16787,
+      "sha256": "dfe6ae916ec0873439116c3f13bcbfb8eb72822f0248159ae78b2ac8dca66e42"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/SqliteDomainRepositories.cs",
+      "bytes": 19559,
+      "sha256": "1ce9bc9d44dff31fdbf2fc3c333a6325f90ff6c19f31139cb953c36cf40b7098"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/SqliteReminderRepository.cs",
+      "bytes": 16741,
+      "sha256": "cea952e70281aad6f9d966352f1b8996acfaf46fe6faba4341c3f523d50ed0d2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/SqliteShootBookingRepository.cs",
+      "bytes": 33254,
+      "sha256": "9c9252bde77a5b2d2562e0963b00459118394dd457d85cc1a8623eaa638f60fa"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/SqliteTetherRepositories.cs",
+      "bytes": 24909,
+      "sha256": "86fa02ba7746b3b6eb7d255ca70b0fbc43c0e203c81552a48e94074e37cb158d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Database/TetherSchemaMigration.cs",
+      "bytes": 5266,
+      "sha256": "52f20b82f739f69d2fe11035427922b56ab30f49dfa0a18371c3913496017e4b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/DeviceFingerprintService.cs",
+      "bytes": 1030,
+      "sha256": "db830415f6c52e70414a2251a1d51dfabc36fe81efc4b33dc7e917857c10671e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/DpapiLicenseStorageService.cs",
+      "bytes": 2515,
+      "sha256": "0e27fc457c192d3a449739c83204884f9b1c9548dfe4b248ff8893d203a557a2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ErrorCodeCatalog.cs",
+      "bytes": 4045,
+      "sha256": "e0e3b509907e2442f67654dff1b4fc4f934ce5a2c8e9426aa327ddcfd78ce385"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ExistingUserDetectionService.cs",
+      "bytes": 1365,
+      "sha256": "803783cfc004b794a19fce88afb7f332d94e15bb513cda260a6cb6699ea99889"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Export/AtomicTiffWriter.cs",
+      "bytes": 3339,
+      "sha256": "62fd3b08b1638e6d34a2babba1744f10c776828b694ae065a341b1af328c2d95"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Export/TiffExport.cs",
+      "bytes": 10304,
+      "sha256": "3dc5b3eabae9ee9fdb734b2fe2b0fe86b2ded44495c2b72c1093d4bb5ce61720"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Export/TiffReadBack.cs",
+      "bytes": 3535,
+      "sha256": "42b2d269fde307e660417354aee5c2ef2d2f9dd3a4f86f39ca899c02c91e51e9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Export/TiffStreamValidator.cs",
+      "bytes": 3322,
+      "sha256": "0558a3088d26255f8becd80f28b918db64d1020c875693f7f438619a3102a65d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FeatureGateService.cs",
+      "bytes": 1849,
+      "sha256": "0d209914f9552d6fe6bc5891a310e6c8aa6644bef52cc17c4a70434002f39421"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FeedbackRequestBuilder.cs",
+      "bytes": 1529,
+      "sha256": "ac848469054cf340e4474a130e4c48aff8afce43e279a7225f223ad573571906"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FeedbackService.cs",
+      "bytes": 2325,
+      "sha256": "c81eb41b26b8f607f827001297555d16a7b4747fb43bf621e243d8b6adac39f8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FileLogService.cs",
+      "bytes": 2272,
+      "sha256": "b3024fde094dc4c93ab0221bb5cfa0bb6a762ab95b3a90eb50222dac0c55a50b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FileNameNormalizer.cs",
+      "bytes": 2305,
+      "sha256": "bbb465c23e6cb5ca54993bf6774d725df0cb9d6d4b980544d5ab5451559cc016"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FileOperations/FileOperationContracts.cs",
+      "bytes": 2204,
+      "sha256": "c82388fd9d9032c49c9627b3ab5eb2523352ae450575f08f74006a2a0cc23f32"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FileOperations/FileOperationExecutor.cs",
+      "bytes": 20512,
+      "sha256": "843e9bd6f8db18e000a81498e46370b5642a0f6c32150f6e045fad5711dfa3b8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FileOperations/FileOperationPlanner.cs",
+      "bytes": 3529,
+      "sha256": "2296111dbc28a93f6d971b1c1498875df9aa60081f7e127582e24e8442f14a26"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FileOperations/FileOperationValidator.cs",
+      "bytes": 5619,
+      "sha256": "99f6122d71bc1f6204ebfd5f9b56d5335caebb1c45dfb064780b4962d3770968"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FileOperations/FileVerificationService.cs",
+      "bytes": 1260,
+      "sha256": "e2a674459963fd31bc4d84f7a2888c19a7a11ebdb2d05b180876fd296215a28a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FileOperations/UndoJournalRepository.cs",
+      "bytes": 4291,
+      "sha256": "d268c5555f95348a0acb33bfc86917ebd6c0dd1f649b64df98240bfcc4feb3ec"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FreeCanvas/CanvasDocument.cs",
+      "bytes": 6123,
+      "sha256": "17b236574f0bc7701bc9afc3edc903d3fbab06000d0cd51485721d78daafd317"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/FreeCanvas/CanvasEditor.cs",
+      "bytes": 12631,
+      "sha256": "f17ce88e678d6e81b4ff12346216dd135041244f332cb83e488771457a128c39"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ILogService.cs",
+      "bytes": 180,
+      "sha256": "50ecf5b608359495213762af3d767f5c1e73d98f57ad6dc41aba63d91ca38191"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/IRawFileSystem.cs",
+      "bytes": 684,
+      "sha256": "3719719938434eb8c94ea817f258d5ff059cfcf76c113f11b504071daa2ecc1b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/InputParserService.cs",
+      "bytes": 7024,
+      "sha256": "8013b77fb924075dbb3cfd9c8ae85519bdff4c8bb3c5d000b9342f346cdcd51d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/JpegMetadataService.cs",
+      "bytes": 5094,
+      "sha256": "b88824719edcb28a4877b710de9f5bffd8815417679e72a7b5b25a43259c55eb"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/JpegQualityAssessmentService.cs",
+      "bytes": 7821,
+      "sha256": "fb1f4c0a2f6a5c8041d25f1b490c7f5e0a68f88bcf3fa2e594ab661366c9519b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/LicenseConfigurationService.cs",
+      "bytes": 1096,
+      "sha256": "4b26a28813343662aba0454be237969877c8116675fa2dc4876a8e2b1405a7f6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/LicenseKeyFormatter.cs",
+      "bytes": 1805,
+      "sha256": "ff8b9c852810110ca8ced32cf25076051cf7dae5821cfbe8d3431dbfa6eafce6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/LicenseProviderFactory.cs",
+      "bytes": 1172,
+      "sha256": "77c408b14760f04343a84f327505259e5175b0852f3a0cdfc16c07c2adab7b45"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/LicenseService.cs",
+      "bytes": 10171,
+      "sha256": "56ecf31d4876c487738084581fb3b7206e4fb48a72078f6136c3bcb7c3227485"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/LicensingAbstractions.cs",
+      "bytes": 1855,
+      "sha256": "dfb81eab7b6e5cad99090d0137fe8b907365f6e0eb5e5bdeb690278f45043c1f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/LogMaintenanceService.cs",
+      "bytes": 4149,
+      "sha256": "c19926e0327efc1a0696fc09e819789fba98961473f264253f430ff2da9d3e70"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/MediaCopyService.cs",
+      "bytes": 11530,
+      "sha256": "3013105c5773302716dd8e687e7a6b85b6253203b48d26f1bc99e460634ec18b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/MediaExtensionPolicy.cs",
+      "bytes": 2432,
+      "sha256": "3a2e145a9e58716b01863ed87cf92866750db9e1a778775fae8bcfc65b1e9ee3"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/MediaIndexService.cs",
+      "bytes": 10393,
+      "sha256": "f618d1d89385a6eb43882220b1edc1144891fd64bb550cec11d3dc2db0583705"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/MediaMatchService.cs",
+      "bytes": 14406,
+      "sha256": "38d7e8e2269c5cd75ca5a9cd3f9db9be5ede87938672f946b90c58f78a152510"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/MediaReportService.cs",
+      "bytes": 11562,
+      "sha256": "c683b787332dfa7268cdd8be2e8b811402c77abbaa406955f4b1f736b310c83f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/MockLicenseProvider.cs",
+      "bytes": 9545,
+      "sha256": "6a6f06f0c0878c8d9059b2f4310899d024c070c26144b18b724f4440fcbd852d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ModalInteractionContracts.cs",
+      "bytes": 6543,
+      "sha256": "400261f6199da2823ce6a2aebc2199fca4b65e579b9c3ceaf5be2b3a1f98407f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnboardingService.cs",
+      "bytes": 19623,
+      "sha256": "365aaca1106a6c719786223895cc15e96617f03d24a20fb6222cdb2ddcfcfd6d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/NoneOnlineSelectionProvider.cs",
+      "bytes": 2935,
+      "sha256": "23e948e601311c3d3110b2127190ba4f07ea2f19a4ed2b5a169ecaddc4f3cb63"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/OnlineSelectionContracts.cs",
+      "bytes": 3978,
+      "sha256": "aafbb2e4da663ef5653e952b6072eee37b3a34eede3f9a953999e8c87a972e29"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionProxyJpegService.cs",
+      "bytes": 5986,
+      "sha256": "24fdfa4dac233a7e4c0703859c590761c89ce14e8763d8ad3dca14a44acea820"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionResultSyncService.cs",
+      "bytes": 7335,
+      "sha256": "7462f4b9f8a81c935305801c72dbcd1204d205cb04c8a8b7b4855d55d1ebaf76"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionUploadQueue.cs",
+      "bytes": 8663,
+      "sha256": "47ad76b43c5019a0479cea11399e56372f0cc3ce321b3abceacc060ca08737ce"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionValidationServices.cs",
+      "bytes": 4784,
+      "sha256": "1c68acdd108130399faae8ef4c22d7ffbc1ebfe6ee9473ebc1909863a81e4813"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionWorkspaceStores.cs",
+      "bytes": 4139,
+      "sha256": "a799d4314f0a72868481c7a75d060509271d3c33fdd30dec43b647205deaadb3"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OrganizeService.cs",
+      "bytes": 28843,
+      "sha256": "2fbfefcb99381241bc58700312408a0c7d841af4d41d9e403e1ed1b4d4ffc448"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/OutputPresetService.cs",
+      "bytes": 2825,
+      "sha256": "3b52b2c4b2f6c6378cffc077d0a36d2f9c4767081568bf2a0e6d844a48022429"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Photos/PhotoMetadataProvider.cs",
+      "bytes": 4077,
+      "sha256": "92560e0964a9152a58fdd7b4cbfdc6e0829551521aa997db99511c2ed92e94ab"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Presets/AdobeXmpPresets.cs",
+      "bytes": 7528,
+      "sha256": "cd8f8e5a146beb455c8d08cd15aa11bbaf34172e589599be4f74662939032699"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Presets/PresetBrowserCatalog.cs",
+      "bytes": 4086,
+      "sha256": "97b0668f24fb580391ba6a0593926d2ae336d2106942c5fa3b406ecf862513e6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ProjectEntitlementService.cs",
+      "bytes": 3099,
+      "sha256": "80a4fd1a6f3f556848f0b2947d17363e1dc087db1ec4a672f1c6197c37504d00"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ProjectHistoryService.cs",
+      "bytes": 3592,
+      "sha256": "f38ec8dd4ab98c5bf95d6f36de2eb7e6841ca0d757f791e0276744ee25c412d7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/BoundedLegacyRawRenderer.cs",
+      "bytes": 3361,
+      "sha256": "569a37e5fd7f5cbcf9936f4ab3ddc1fbfb35e3cdfd91eb77b5d6e2e9a2cf19f8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/CandidateColorBoundary.cs",
+      "bytes": 3024,
+      "sha256": "670d8962e2ee62eebb26238c46e7075e2a0e9942ea3c19ae13a8505824ee96e4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorSpaceCamera.cs",
+      "bytes": 1548,
+      "sha256": "73b07771ee145607599300cedc7bbefbaad90b1964456b8be9c8b6599a33686e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorSpaceRendererContract.cs",
+      "bytes": 9156,
+      "sha256": "afd92545df08bda6e333d86944ebba5889875bedd5bcf1dbc255b07eb4485600"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorSpaceSurface.cs",
+      "bytes": 9115,
+      "sha256": "fac87c602a4a01d4c902a3aff08c4838af5a69d04a0953fc52d9145f99b63fe0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioColorSpace.cs",
+      "bytes": 14639,
+      "sha256": "004c8e8ed01f8eb69b2be0aa961d25b1679e00976a3a2828b5359cba4e9d1e8e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioDevelop.cs",
+      "bytes": 4594,
+      "sha256": "9daf93a9efbd154b0fafb917c6970d3222df9140654ecd3131186f7868f7e7ed"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioEffectiveState.cs",
+      "bytes": 1043,
+      "sha256": "1e2d4b672e79cad9cbc84006c675e64fd28629d501658444159cf86fd7c805cf"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioLinearCandidate.cs",
+      "bytes": 1300,
+      "sha256": "0f9db75e345b31e564981722930d64a7be85a1e07a224c3618e371c4e553f48c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioModels.cs",
+      "bytes": 8884,
+      "sha256": "11e6e3153f785e9647da480dcb47a8e289533ac5a3336cb011adf85b5167cd09"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioProcessingAnalysis.cs",
+      "bytes": 1813,
+      "sha256": "648e6931f0c4c3dce0ae889ab752ee8cc9ff1023218cab9593e3925eac57c405"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioRenderPipeline.cs",
+      "bytes": 21645,
+      "sha256": "cf963ee3b2d7d97b7b94275c707c854cb90da547ae47e7d2b35bef3202f5167a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioSchemeStore.cs",
+      "bytes": 3216,
+      "sha256": "b6b6d6d9cae900932d3b417a48d0ec9c9e282abdfddc485a0d3a3aa9f617155f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioSessionStore.cs",
+      "bytes": 8941,
+      "sha256": "49f0a77f5e505c8fe045442a29ad0ef8b6a53652f6baac3305615dcc27c4ca11"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolCatalog.cs",
+      "bytes": 5038,
+      "sha256": "72e98bfb9158dbfa239ce9d54ef6d3eb83a809cdcf8cbe0f50a2091472cae2d7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioToolProcessor.cs",
+      "bytes": 21755,
+      "sha256": "f2b9ffb9107b4d4a91308d801d6655223547504fc9a7e9ab4d03f2e89cd2e3c9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ExportRecovery.cs",
+      "bytes": 11352,
+      "sha256": "8329d87677c2a04da1af6217dfa27631bd3dfd280e6fc1151d779054995efec0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/FrozenRawMaster.cs",
+      "bytes": 1953,
+      "sha256": "ac3d980cb28de3617be965f6d0022b64ef9cc1dc095e7fdf86253e0fb16d0583"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/GpuCapabilityService.cs",
+      "bytes": 1336,
+      "sha256": "e24b37efceb89dd034c220ee4652088f9df9ed1ca2d33e15bf4c567ec983d397"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantDevelopmentTimeline.cs",
+      "bytes": 1328,
+      "sha256": "3e9832b09da44920f3ddc2a4aefcc565c014d818843a6c2e3136ebc0f834c6d8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantFilm.cs",
+      "bytes": 9550,
+      "sha256": "c8687560f8d304a1062d9ecb4ed216a189a77e97a8c889fef8eed5ba38e81742"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantFilmEvidence.cs",
+      "bytes": 6015,
+      "sha256": "e494028f0add43f530f85102989cce5ace05b560620d39d8d15801bb2dd80be1"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantInputRecipe.cs",
+      "bytes": 981,
+      "sha256": "49c855d0add6e78bdccd3804e00a2a9bf6038810174ee71f89823de323df1a02"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantPaperLayout.cs",
+      "bytes": 3030,
+      "sha256": "6fee3ebbe21eae38b4b0048e7d5b522ecfc201254725796350b1f242cf00592c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateExtensions.cs",
+      "bytes": 8468,
+      "sha256": "88b57178f530675dbcca2718346444d93fa4a423f6cb4a2d8b34a48fa69a5411"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateImageLease.cs",
+      "bytes": 3675,
+      "sha256": "0b8e06f9055d19a850e8cb471ccf8508d6325fb8335772ceb8c7a2c83aa0f2f2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateMaterial.cs",
+      "bytes": 6914,
+      "sha256": "f2cc3b7208e1a4bacdffbbfa168c3edcf1f819e3ef1b8dc60f57e4293db6d9d8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateMultipleInput.cs",
+      "bytes": 3813,
+      "sha256": "0cd0220d6b47cdca48631b1f12ca60a1d5998585c564b4888e29b7ded29d918e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidatePerformanceProfile.cs",
+      "bytes": 1047,
+      "sha256": "a2e1d5b13797cd719e7c7a8e62dc1cae0ab4cbb15ffc59df065fa2ecdabac6e5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateProcessingEvidence.cs",
+      "bytes": 672,
+      "sha256": "f49dc6440076290d98c2dbf69f7226fc0eabdb7f3e3e9da89403a8cf89949f9a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateRecipe.cs",
+      "bytes": 10336,
+      "sha256": "499d52c1364728a4620ed79011153d9e1a6cd2351831e06d17b63b00eb080ad6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateRenderSession.cs",
+      "bytes": 12353,
+      "sha256": "271702b89f486e794ec4c1099069c1dc96c554ce7030a731ca01454fc767db13"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateSource.cs",
+      "bytes": 485,
+      "sha256": "7e703878c8e7460aaddf1bf981f875ea904c65d0407de165b0bf90e3eedadf0a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateSpatial.cs",
+      "bytes": 9146,
+      "sha256": "50343f1acfd22f79c321b68a6695861cd3630b0976c2fd3371283e86ef0d1fff"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateTone.cs",
+      "bytes": 2370,
+      "sha256": "0b860c86f6288cf12846bff82740d448cea0d39fd50b9b692001489809135710"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/InstantV3ProductPipeline.cs",
+      "bytes": 4834,
+      "sha256": "90f1c115a88c503fb596f488059d4e3dabf369347209dfe0a9c17c39ebf153fa"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/LegacyRawInstantInput.cs",
+      "bytes": 5294,
+      "sha256": "513b43310f4ed3a64032e6cc255a251604b6ef43ce2db24fd0ff680d9beb1070"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/LightPrintDefinition.cs",
+      "bytes": 1274,
+      "sha256": "3b8eaf871339f8927cb30aa8a3b08470a6d4d831bc2ec35e274084c0eefb2307"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ManagedExportFiles.cs",
+      "bytes": 1841,
+      "sha256": "9029ebbec3d995dfab41fd3561ec4ec7762642078a155b1dc16ded8372c7f6f2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/MatchTransformV4.cs",
+      "bytes": 2419,
+      "sha256": "fb38fc8f28710b3955d693273ba1c11ba674dce62117a33d36914d03f71100d2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/MatchV4ComputeContracts.cs",
+      "bytes": 2466,
+      "sha256": "de99678b09b9a03be3f926399d6587e40b6cb8fd286811a9f5435f7b8aabf582"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/MatchV4PixelApplication.cs",
+      "bytes": 6494,
+      "sha256": "566a11a6865d0919c18f0e496f9989801a941eb53977e8b2e8febd806d0e95af"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/MatchV4PixelExecutor.cs",
+      "bytes": 2175,
+      "sha256": "90f66d081b78ae157625555d4edcc3b5f45b79de8da66751e7adb31496f4b02f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/MatchV4ProductExecutor.cs",
+      "bytes": 4635,
+      "sha256": "fe190d7b086699ade829bbd31c5e6d6469f6f1c0425cdabc3fb6f9450d963163"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/MatchV4ProductSession.cs",
+      "bytes": 3351,
+      "sha256": "b83f459e09e5a44b483f62f6b28bfad109f370afc0622b494c602cccf249e010"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/MatchV4TileExecutor.cs",
+      "bytes": 2154,
+      "sha256": "508d6e7f7345f7fc6147c68d8ed6a5a42a4b60cf901a3b6f7557143f386d959a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PhotographyEvidenceConsistency.cs",
+      "bytes": 6990,
+      "sha256": "343995deaf58ad6769c328638a823510a17f8a1ef2f3c546533926ea14a33815"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PixelTartFilm.cs",
+      "bytes": 12974,
+      "sha256": "a3820a42f1bdd533ae10408b5e523fa7848f909b1c187d4527c0100b35619672"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningCenter.cs",
+      "bytes": 15044,
+      "sha256": "c76a7ed4c17b2c7a5f9fc75d7c3c06b0815e881fdeb3378bc897bcea34cc7cc1"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningDocument.cs",
+      "bytes": 3756,
+      "sha256": "25d34b128172df61b356114608d2dc0ea4c4fad30efea726d0a1c4ee61812048"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningDocumentImage.cs",
+      "bytes": 921,
+      "sha256": "19aa4deff4a12485021e164eab7495d73bc682ff21531afe46dab0120e62ee99"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningDocumentPackage.cs",
+      "bytes": 3447,
+      "sha256": "8ddbfc27bcc6d46fe0f54a7f202f9d796e53db253222fe2c3255f8231a10298d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningDocumentTextEditing.cs",
+      "bytes": 5143,
+      "sha256": "568c0e14515a308e698a0e18952175da74c17e06e9fd67c61da98d5d693fed64"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningHeaderFooter.cs",
+      "bytes": 711,
+      "sha256": "c3b56ec012a35ce65df17e83dda18ed7ba7637ca50c08ed5b302fd22a9040d43"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningImageInventory.cs",
+      "bytes": 3637,
+      "sha256": "35820ab2774e5bc4b9302a6afc8b2069bd8b67cfcdeeb273b9aa5605b635a10b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningImageStorage.cs",
+      "bytes": 6200,
+      "sha256": "d25a5c3f4dfdd708216696089d0afb2ed2f745784963dd711c716fad8ec9ee0a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningMigrationBackup.cs",
+      "bytes": 1003,
+      "sha256": "08dd82416dfd862e55adf0026cb2c40ecb12eefed2e179119186cead3e898be5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningPresentation.cs",
+      "bytes": 1367,
+      "sha256": "590ecbc397936c37b5cbb07aa847d7686360fbc4cc409ed77aa5f4527c0d892f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningResources.cs",
+      "bytes": 6646,
+      "sha256": "3885395823c673c70e64e762df0ed3502265423863863f321b77bf5912bfd033"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningRichLayout.cs",
+      "bytes": 1937,
+      "sha256": "e0f198cf68ca92887360308c6f5b7b66ab5ce8b7c1da15bfec83b364c5f50ad4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningUiLayout.cs",
+      "bytes": 751,
+      "sha256": "331cf389dd0d83d00c2b8a3a31f8dcfe0e2ba51f64ec2e1b242545fd9efb6a95"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawPipeline.cs",
+      "bytes": 21280,
+      "sha256": "ffe754d7bc7c3bd64f76a0c756f88c322168c1104d7e54af62e4a34011af09af"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawResourcePolicy.cs",
+      "bytes": 499,
+      "sha256": "afb89c2f8df4c1f7a6a686f6877ce75ebf05f8047018aa2e341280d67d9aa547"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProjectShotExecution.cs",
+      "bytes": 13367,
+      "sha256": "c78de6a122b2ed0c59c9b0da31a0fdf01405491e3ecabf93a54cb1e0f8a63e8a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProjectVisualReferenceStore.cs",
+      "bytes": 4593,
+      "sha256": "1587be5554fbd11a18705220525b3b95db6ab2f7f9184d57e21b35614c8380ee"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProtectionClassifierContract.cs",
+      "bytes": 1646,
+      "sha256": "445801851de2144e4115d84eb5f66b3e2842cea23be2faf1c8f73ac2522e90bf"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawImageOrientation.cs",
+      "bytes": 1551,
+      "sha256": "886ea2aeeabbf0af3e7a4a6d00eb8f53ef70b87c616815582315136bf8f25e16"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/RawMatchTiff16ProductPipeline.cs",
+      "bytes": 6416,
+      "sha256": "3095552b11b92c476d7b69085a4921388cc4cb8858ba76d7831fb73cee967ee2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ReferenceColorCoreV2.cs",
+      "bytes": 13065,
+      "sha256": "a1afc793d14f6d0a6c0a4fcbd08376207fdbf289aa3232d54921cd88920277dd"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ReferenceCubeLut.cs",
+      "bytes": 3607,
+      "sha256": "f442a0735c6442da335fa7624a19b57308418d5227627a4bc31d7f95e062c3d5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ReferenceLook.cs",
+      "bytes": 16358,
+      "sha256": "d37463c7589dcd7f03b01e17caf74a18975efaa65d94ec4d9f62e56157c7dbd4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ReferenceLookResolver.cs",
+      "bytes": 273,
+      "sha256": "f276c28c2995e8c9665e3d37eefe791335196bb0387384642902e464d38628bc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ReferenceLookStore.cs",
+      "bytes": 3582,
+      "sha256": "428fe5d59bbd757a40380d946269d691fb0019913fdc35f210bfbe1c554bb3dd"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ReferenceMatchV4.cs",
+      "bytes": 29101,
+      "sha256": "967ebeb75d1afc3efc563ba4a8d72185bc8bb6624c65c17697ad79ccdfd0e13a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ReferencePixelStatistics.cs",
+      "bytes": 6411,
+      "sha256": "316ee31e94fd42019c5b1c9b9a3b8de0ab482b9d7d273322f5b76b55ebfe2e3b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/SpatialLegacyRawRenderer.cs",
+      "bytes": 8478,
+      "sha256": "6b77325d316533af0304161315802d28a909b3307d3e1083fe96fe1bee2b44a9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/StudioEditVersion.cs",
+      "bytes": 4513,
+      "sha256": "743911d502d9f5dea0ad04b2478b0fed0101b66522d0a92c753e33df93594ed2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/StudioGlobalResources.cs",
+      "bytes": 5013,
+      "sha256": "493692e8ff0b3cf7a4ece2a16b60a7f033b812e8e2a6b700a0148e9d80fd5842"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/StudioProcessingFailure.cs",
+      "bytes": 2383,
+      "sha256": "1747692a51699caf8bc239886f7439b5ef8aa14b5dc23e98bc5c30698cb650b2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/StudioVersionConflict.cs",
+      "bytes": 1315,
+      "sha256": "55cdc7931c927f5177858f866ee9a43861e511d5d834aca0a324a4b5de352825"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/StudioVersionRepository.cs",
+      "bytes": 5445,
+      "sha256": "5de204f1061c45b05bc3d3b08ed97d1fcc1b314c572125f6e8aad122e7be681f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/TetherCaptureContextStore.cs",
+      "bytes": 1377,
+      "sha256": "d67df28542c58099a3f8bbc97fc92a3f54883dddd94b4533bc8bf4f115d20180"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/V4Telemetry.cs",
+      "bytes": 2552,
+      "sha256": "a26b006a5b3c5da68dcd18d3935e8318bef34d4c39be017b8832367da0602c64"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Publishing/ExportRecipes.cs",
+      "bytes": 8733,
+      "sha256": "12be039885bc2cc6b4fcb31de9ba4118d560f6666f1865c2064a3bd271ff180f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Publishing/PublishingExportService.cs",
+      "bytes": 19529,
+      "sha256": "4ed31152b9ca1538734fe66e17d464985363da9fed5b9b5a49f464aeb88e7505"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Publishing/PublishingIntermediateUse.cs",
+      "bytes": 1597,
+      "sha256": "db47870cdf9910b6cbcaf8d41692044ec6dda98a498f952a2f6e5ce5f1c4031b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Publishing/PublishingPresetStore.cs",
+      "bytes": 3931,
+      "sha256": "97fb4126184839f509fcc040ceda6a188334424999c45964b21767be2f6c06dc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Publishing/PublishingTask.cs",
+      "bytes": 4471,
+      "sha256": "ca0092c340b09171526cab2386ea01176ffeae8085385085c7fb896364f3736c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawCopyService.cs",
+      "bytes": 8872,
+      "sha256": "41acc5185d16d8bb4c92ac7c01e430af260ec411721b3a033c4eb600aab3a639"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawIndexService.cs",
+      "bytes": 8328,
+      "sha256": "c24d7f2360d8154a79887d840ec347e621445ebed6ff54c6602b632a3036d4fc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawMatchService.cs",
+      "bytes": 2394,
+      "sha256": "91416e54ffb222841fc93107321f89d067c099101ca177f6fd27240bac55055c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/CaptureOnePresetImporter.cs",
+      "bytes": 772,
+      "sha256": "2705f01a8728587b60fb3004c4ffa80021ff6b7753101e01f247d2df66c29997"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/LibRawDecoder.cs",
+      "bytes": 9701,
+      "sha256": "0345802e0cbacc9d06a7e19ada44794fcbb096e8b9b6c35acd55dba7d1820011"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/ProfessionalLibRawAdapter.cs",
+      "bytes": 3225,
+      "sha256": "5a607bb073f62b89b610931e9f0d66c213a7589dd5f4147d4acf4c7e03f4f20e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/ProfessionalRawDecoder.cs",
+      "bytes": 10297,
+      "sha256": "fa04cb2525d352848bc6b1e94c492feed4a161d860d977680b01ac86d1a0f131"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/RawLoadContracts.cs",
+      "bytes": 2463,
+      "sha256": "02206dcf5194443d971b11e7db4dcddb951d045c699915beb1ee3c6b5cc233f9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/RawToJpegContracts.cs",
+      "bytes": 1616,
+      "sha256": "0ffae2e50f30a1e7a5e664f800238f38ca8539845649c6537f734ae4fd8a195d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/RawToJpegRequestStore.cs",
+      "bytes": 3787,
+      "sha256": "ce0031541e98b0ddb38ec9ccb70c219a2d02c27c3772beb54b59050bebea1df9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/RawToJpegSafeConversionService.cs",
+      "bytes": 18919,
+      "sha256": "671324af491b226695ce6b208e7c5185cfb496548e94888ea9912949078f9175"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/RawToJpegTaskHandler.cs",
+      "bytes": 9268,
+      "sha256": "d27a2ff0a5cf846e06cd21a36ed33ad68f3fb4a69bba69b76bb7d68ccc4368f5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ReminderContracts.cs",
+      "bytes": 4359,
+      "sha256": "63bc2a232922be0a8cf0c17c8032a8c21bbc722994aafb9cb125ec2cf64b7dce"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/ReportService.cs",
+      "bytes": 4543,
+      "sha256": "141d954857f304f24104581615086643210f833935db049474f7c3e392f309a9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/SettingsService.cs",
+      "bytes": 8324,
+      "sha256": "3ea905636d37654ad7e20fd0ba9099d7ee3a4e0b3de35ddc9750d433b5a4cfdc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/SurfaceNavigationContracts.cs",
+      "bytes": 4214,
+      "sha256": "e5be33626580d297f538efd120f45e182ab51a3474a8ed1fdd08f65048812328"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Sync/SyncSemantics.cs",
+      "bytes": 3079,
+      "sha256": "8f356d52c66e209f417950ec9ba602b1684b8d90376748f57e224ac5bc92a103"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tasks/AwaitableProgress.cs",
+      "bytes": 1474,
+      "sha256": "2677fb985daf6986a007ed9ee8631a1e9503778d62a60ac8a10fa9664f8ee20b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tasks/RecoveryCoordinator.cs",
+      "bytes": 10416,
+      "sha256": "2bdf4cd93b32dc03b3f96d2cc80528e17474db36c153da25149d2157e26af1dc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tasks/SqliteTaskRepository.cs",
+      "bytes": 9149,
+      "sha256": "0d15504860ad4008917b300c4259011c2ac1290b6edc4f0bcc33f2835696176d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tasks/TaskContracts.cs",
+      "bytes": 4544,
+      "sha256": "ffa30e7ea129044d03783c28891b016a97567b2f6ef2d2f3bb01055e6c06ad1a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tasks/TaskEngine.cs",
+      "bytes": 18025,
+      "sha256": "18f5abcfc25a281c84221cd9d749dd9c8241c0335aedfc87c2313d3633986677"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tasks/TaskOperationBridge.cs",
+      "bytes": 5551,
+      "sha256": "9aa9e439fdb42fc53e99ac2a72642f4791396210a82b6ea70e7dd33bffadda73"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tasks/TaskRecoveryService.cs",
+      "bytes": 1382,
+      "sha256": "9ccd1c47a7c7db88e4b4b390d5630b2f1c768cc3a9d7f410db73c1e9721200b8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tasks/TaskScheduler.cs",
+      "bytes": 2690,
+      "sha256": "d748eccfd81ba49eba318b880701cad7b2e41c55efbdb8711f33e5d75d9aceab"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tasks/TaskStateMachine.cs",
+      "bytes": 4038,
+      "sha256": "56fd9f317f808c42e3f95d8086726ac493cbe9fde106e5ebaaaf4026f9404109"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tethering/CameraContracts.cs",
+      "bytes": 4178,
+      "sha256": "ba7492ad6336ff408f660bb20b63b5d88b287c569519eee17a424f802a70cf26"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tethering/DisplayMonitorServices.cs",
+      "bytes": 6610,
+      "sha256": "83ff1ce8361bc95f0a9e80d8ad8c39f0e0ddb9bcdb26f62c59f8f774bf109e6d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tethering/LinkedTetherAnnotationService.cs",
+      "bytes": 5129,
+      "sha256": "f4a8c215f7c657e6b9279c4416964a1f77cf3ad7667e35349d23d9748c322bed"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tethering/LutServices.cs",
+      "bytes": 19094,
+      "sha256": "d36033793d40ef61db57d0eabfb2679318aaea023e71969aefd186745eb33b7c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tethering/NextCaptureRules.cs",
+      "bytes": 1089,
+      "sha256": "fef09fecefa860185a47ab9bf3ae013c5cb0e42e263145aa03d7e1486817c6ce"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tethering/TetherAnnotationMerge.cs",
+      "bytes": 2032,
+      "sha256": "9204f66f04052d0acde1f8127a440695031e88c66560e553b9932652277bd9a2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tethering/TetherLibraryHandoffService.cs",
+      "bytes": 10637,
+      "sha256": "6321bf871c41e601f006ff27a8a744e8acdd1e54f16ec2dfe75518dc1415c3fc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tethering/TetherMonitoringServices.cs",
+      "bytes": 7068,
+      "sha256": "6afbb708111f93f45838c9fcb847e74de3e69a9166cb8d58e8e720ddb6ab6f9d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tethering/TetherSafeCopyService.cs",
+      "bytes": 7988,
+      "sha256": "9f5c7b32088ed9871044d3965740d89f4bd65aeb9f6c2a64744fccc0ccdabafe"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tethering/WatchFolderCameraAdapter.cs",
+      "bytes": 28600,
+      "sha256": "2b5e3b553c7856f18809df5fbb6da6f30257e180ff29d346af41eaabb7a8f6f5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Tethering/WatchFolderServices.cs",
+      "bytes": 10203,
+      "sha256": "d9536edbbad41a9c19e9e8717334911c7fd05fc1fc5c735585fa49f2b8a7799b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/TutorialDataService.cs",
+      "bytes": 4794,
+      "sha256": "d60fff7f40c62eb3e7d025c3c13261ed8e08902171de3ddfd5ceb79573a1e980"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/TutorialSpotlightLayoutService.cs",
+      "bytes": 1206,
+      "sha256": "dedce7af4a790da62ee8242fdd7efc8dcbd68fadd3b6f71282f8a1efa4e0cbd0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/UnavailableLicenseProvider.cs",
+      "bytes": 1133,
+      "sha256": "60463707abbcd6107f8b39148c6269b767b881fa40047133d4dd9cc1b5eb2b07"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/WeatherContracts.cs",
+      "bytes": 1837,
+      "sha256": "14911f2fc4e72eb84a3d92fdc8a700d17f956e7c9a63a2d7d27bc15d67047ee9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/WeatherServices.cs",
+      "bytes": 23973,
+      "sha256": "27a91553b79b35ebd1ab2f853e1007098063dadcd800dcfb14f2f1fa9edcb8e0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Utilities/AppDataPaths.cs",
+      "bytes": 6898,
+      "sha256": "22440c8b4ab3d318c916e128a1c4a8e68e1943e61d299d85b97fa161f90b7d28"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Utilities/ObservableObject.cs",
+      "bytes": 756,
+      "sha256": "00bac77c4b85bd681de5c6f5bd196716d865fe83f2d54ff306c9e73b7476ed60"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/App.xaml",
+      "bytes": 3787,
+      "sha256": "59e5e4a1ef6fdbcb6a43cd4047c8bc2eb4d4aa9525b2976f907ada6532ab2ad7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/App.xaml.cs",
+      "bytes": 47290,
+      "sha256": "b617753bf17670093fb5341de46f4df76c51a0bcd032306b7866ceca8580f50d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/AssemblyInfo.Tests.cs",
+      "bytes": 108,
+      "sha256": "5e3ee0338218eb08a72bc122d0e97881f0242a6117cec1a4a68de2d75359e9e0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/AssemblyInfo.cs",
+      "bytes": 643,
+      "sha256": "3fac2af92385f676e9a941befd23fe38f0a5fa6167d4a3a88f07e730c5595ca3"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Converters/FilmTexturePreviewConverter.cs",
+      "bytes": 1904,
+      "sha256": "b80b2d9f103d2806a13ad603567f26f46e621a46a6c9bbcd001b40c09496f805"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Converters/StatusConverters.cs",
+      "bytes": 5273,
+      "sha256": "dc3bdac9d17b90582a0a8c6089faff8157024139f949e488282464c1a3215f75"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/GlobalUsings.cs",
+      "bytes": 25,
+      "sha256": "9087a69bb7c9490f6c6505a3cdc3ced73cf0a64d4cd3706b9148292a87bd4000"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/MainWindow.AssetLibraryP1AutomatedAcceptance.cs",
+      "bytes": 37162,
+      "sha256": "b1f2e5f64fb0ac333ae18d1f8df8bfe0c6e3d67e1d53a37bb5375c47d7ef85f7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/MainWindow.AssetLibraryP2AutomatedAcceptance.cs",
+      "bytes": 22852,
+      "sha256": "ee538b88238081079c6c41e1e9f8b555c37332e7ddfae2b18ec73e97993c5a20"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/MainWindow.AssetLibraryP3AutomatedAcceptance.cs",
+      "bytes": 66722,
+      "sha256": "b9984d348596b275cf11db72991b863fccf4b2b529ca951fe80df2ac6fa12fbc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/MainWindow.AutomatedDpiAcceptance.cs",
+      "bytes": 95057,
+      "sha256": "b61d2e4291393261c825bbfde7c17bf241ce70b55c789f55a1313d2ce757a0b8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/MainWindow.PhysicalPointerDiagnostics.cs",
+      "bytes": 25184,
+      "sha256": "eed72916a5d3c6cae501139f953460f814f43da60320db16e7f81e6dc9fabdbf"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "bytes": 158994,
+      "sha256": "b8fd46ad6eb60931e5eafb4ff382befc0c1cc7cc80479ffccdb48c16230f8116"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/MainWindow.xaml.cs",
+      "bytes": 71256,
+      "sha256": "c4917d0c273d58b1c9544006658a5ee24e74288077cbef6e41aa3444461f91dc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+      "bytes": 11067,
+      "sha256": "d6999b17234fab3acbb0aa15af691741cb365a0a9e97d9dda899d55ae05974c7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/AccentColors.xaml",
+      "bytes": 657,
+      "sha256": "a6f7b344e58669aa03d5f1adc5747e1b985616b808c00a946c6644a06228fe24"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Buttons.xaml",
+      "bytes": 3802,
+      "sha256": "813ae71b96d1b84af430312f63c9727d2b65dec240f8dab103ca9beea886fe56"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Calendar.xaml",
+      "bytes": 1969,
+      "sha256": "b9b9bda2acac80de0bf6cce22d5709dd414c12c4508d8e1258a74380811e8f00"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Cards.xaml",
+      "bytes": 2275,
+      "sha256": "ff97ce86daae4d1bc23794079c06a2a863f0f1b2567edad687a5f55a8985de17"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Colors.Dark.xaml",
+      "bytes": 8082,
+      "sha256": "0742f497ddcb8c93df911c76a718c0a29b03d00712227dfaf8bb5ea6024d12b9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Colors.HighContrast.xaml",
+      "bytes": 6482,
+      "sha256": "04b56b056b6b11692eb624de3667043ebc5a599223c9aa2cc1c3b5c15a5123a8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Colors.Light.xaml",
+      "bytes": 6601,
+      "sha256": "508e74cece9a72f1ca2230d689f887d4e831b0c732032823eef1c24134021604"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Components.Foundation.xaml",
+      "bytes": 14950,
+      "sha256": "3506436ddf85cd93d4e5c775f6c86021ffdfd83a8bc4d9fc7fb5524894548c0f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/ContextMenu.xaml",
+      "bytes": 607,
+      "sha256": "4e7ce3cdc27dc6b80b56c3bfe98647dadf3b6db4e71eef8554788918aa1c4fd2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Buttons.xaml",
+      "bytes": 5048,
+      "sha256": "d07f1854e2fd60311cd29bb2498bf2f26193f2a40574fe2999f3b1c6a7f40232"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Cards.xaml",
+      "bytes": 3939,
+      "sha256": "ba3d6dc114162c8319c67712b38eeedf0233405b466fd3c1eeedb244cc6bcebd"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Dialogs.xaml",
+      "bytes": 629,
+      "sha256": "76355acd5a9a3cb21c10f474a5d4c3b8fcba2621a2d8a2f29c2424e1c715fb5f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Inputs.xaml",
+      "bytes": 27191,
+      "sha256": "f3f3e0b2df1b0c996a32d41a428053dd298b01c93fd1a55e4ba58ede0cfdf2e5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Menu.xaml",
+      "bytes": 14911,
+      "sha256": "0709a36f7210fa17f9da159fd0b99e1cadc3b1e3ec57acf3ca1f61415f842de2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Navigation.xaml",
+      "bytes": 10742,
+      "sha256": "a80dd92ed6612ff6338ac8a45d77c04d810794d3341a0407273b6820523fa9e9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Status.xaml",
+      "bytes": 2196,
+      "sha256": "9914b0c7a26b0824b15738d6cae3d8affb4fee98f40b3fc32db3b68e2f6d4198"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Tables.xaml",
+      "bytes": 14245,
+      "sha256": "d107d31c4345cc60dc5724910c6f4dce980109ba7525251305252b52fc8518d0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/DesignTokens.xaml",
+      "bytes": 4426,
+      "sha256": "4fe8ee8ae4cadde8200289e7cf032621139fb184c7f6d4a4df64be71af492908"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Drawer.xaml",
+      "bytes": 1102,
+      "sha256": "7cc7e92366143ffd91dbf861e7ea8c927bb14750fc8cf3baca7e1dd6705620bc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Elevation.xaml",
+      "bytes": 1303,
+      "sha256": "492e3eaae9085d4bac13f83d5d96fb49d58798a63e122c53ce74973a533bc79e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/EmptyState.xaml",
+      "bytes": 1366,
+      "sha256": "a29b4c7aa831b031b8f61fdd30f2ef17286ffd97b38e561be74aaa32830a127b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Icons.Navigation.xaml",
+      "bytes": 5968,
+      "sha256": "05a3984baa3b24f3eb9591644845e33c8c0fe6653a1a79103af7d5305ae1c34a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Icons.Tools.xaml",
+      "bytes": 2693,
+      "sha256": "b5a9b7a918e5212fc5799d1804d7e2a1d96d7e59f05d61dd7a18f21290fa8a0b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Icons.xaml",
+      "bytes": 1079,
+      "sha256": "879d40f75a6794c7c21ba7a8cecfbe16f96b3c1d5defa3a148026cb63ee7d714"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Inputs.xaml",
+      "bytes": 4341,
+      "sha256": "fa44b3d8643054624f8c4c07e3c38d7988ad7dd87c34d176b3960e4a44eb0090"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Modal.xaml",
+      "bytes": 1201,
+      "sha256": "99ce187e8482c76169ed8f62f343959ee780707b3b2fb29faaf64369991edb18"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Navigation.xaml",
+      "bytes": 1952,
+      "sha256": "ddd4f2eb8e2e21cf24680cba5dfffe095fc8c79851a6fa1b152f3b9f91cdb032"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/PixelTart.Components.xaml",
+      "bytes": 827,
+      "sha256": "1ae222ae7ef7181edd57ac537f7ba04e156d61b770be6942b3ca632475ec58f1"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/PixelTart.Theme.xaml",
+      "bytes": 1004,
+      "sha256": "81175458f2bfd109595acf437c891b2af45161098c4e3f3214322ecc9e651131"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Radius.xaml",
+      "bytes": 914,
+      "sha256": "2d997ff28b7e2bccbd352c737d7f16c0c0a10c758834f54f7dd4569a8e19a663"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/ScrollBars.xaml",
+      "bytes": 1076,
+      "sha256": "7dd92ffe735723990484230264eec95d28160d8c1cef0597a962f65a8bff57bb"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Spacing.xaml",
+      "bytes": 2674,
+      "sha256": "3624c42224ef21f3b2f53b4f3e4967685f6fb0f4a075e33dff0583a91b7ea027"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Studio.Controls.xaml",
+      "bytes": 12844,
+      "sha256": "20bb70e00eeb7a894f92f78f630d12f4d81323497214df457821dcab8e055acc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Studio.PremiumV2.xaml",
+      "bytes": 10703,
+      "sha256": "500ee7d61a790ebe3591a8e8414fee03d5032a26999189f051710d10743b3e3f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Studio.Rollout.xaml",
+      "bytes": 4458,
+      "sha256": "4101b1ecdef58d3d396657257ac57383e621ad4df74ca1b5b709470b99f5eb22"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Studio.Symbols.xaml",
+      "bytes": 7656,
+      "sha256": "2da01f31eddcf3f5683fdd7b70eed3e6b7742919cd43638bfb2ad4e05c4aa891"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Theme.Dark.xaml",
+      "bytes": 4744,
+      "sha256": "4be814e547fcf6a1aa30d33fdf4a50820c32836a09426baf698e5e9d47d847ed"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Theme.HighContrast.xaml",
+      "bytes": 5796,
+      "sha256": "581aebe60b84c7702d36510c5cc61baf46100f501a14c27f0d23716c402e61b4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Theme.Light.xaml",
+      "bytes": 4551,
+      "sha256": "4bc01ee4ebbe9d91553e630554c39190e7d32922a5ca3fe5ad38d93842ddce8d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Tooltip.xaml",
+      "bytes": 1123,
+      "sha256": "dc82161351bf1147bc16542090f2f8303f679d9569cdd1d71c6d58b16006b89b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Resources/DesignSystem/Typography.xaml",
+      "bytes": 6585,
+      "sha256": "3a52e6a9e76bf69ab49cd333af5a3ba12df258174a7b76c8f5df51c4a83c0a71"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/AppearanceService.cs",
+      "bytes": 9612,
+      "sha256": "b342826d03693dd346b100920a79e98eb50c1679214d43bac82b907bd2e8c5dd"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ApplicationCompositionRoot.cs",
+      "bytes": 11191,
+      "sha256": "85747d6f7432d3822e89d9f66fa0025b29acb88822b73d716525ad8ff8d1b320"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/AssetLibraryP1AcceptanceStateController.cs",
+      "bytes": 26743,
+      "sha256": "ecb296d48426cd8cf4becfbf2aab872c763e72ae483f0fda6acb8eaba2e3d57c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/AssetLibraryP1AutomatedAcceptanceController.cs",
+      "bytes": 74264,
+      "sha256": "5cad60fe2c82c013a2cefc807e05be9aa30daba9e10d4d338b61d3aded762194"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/AssetLibraryP2AutomatedAcceptanceController.cs",
+      "bytes": 77933,
+      "sha256": "fd710df6d557372ec15911a34e6202fe25163ba71990aaf3f04dbbfe5a4cd063"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/AssetLibraryP3AutomatedAcceptanceController.cs",
+      "bytes": 88939,
+      "sha256": "8a957622cfb041e14db7c5e711134b3e95b25961cf846c20d2d1606bf91cb099"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/BatchCompression/WpfBatchCompressionEncoder.cs",
+      "bytes": 2843,
+      "sha256": "8b86553762fd7934d067c6e86c6143b860b3cc75135bf622026c6f34ef339d50"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/BoundedSrgbTiffInput.cs",
+      "bytes": 2973,
+      "sha256": "4bae54ca820ba4a1db14dc1fa81b844c1b957ff3ce2239fce08f5434c6f25e2d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/BoundedTiffPixelSource.cs",
+      "bytes": 4533,
+      "sha256": "4d3d6809b7a9ef1f41b4a495776b22e01efad6e0bfb73776231baf5f6b99bb67"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/CalendarAvailabilityStore.cs",
+      "bytes": 2758,
+      "sha256": "8e8a33cd06b361706e4205508e996fb2cf676a3e60e131a94589843a2854fba7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/CollageExportService.cs",
+      "bytes": 9136,
+      "sha256": "3a670df91a0d630bb39dd97f55d3f9bf753cfff63887f3cbd0f74bb71f5133fd"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ColorStudioAcceptanceFixture.cs",
+      "bytes": 26454,
+      "sha256": "0d6a6bc9549c4893fcb9e7fd61b0eda2c77959896a7e1783c38b82294e5127a3"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ColorStudioBitmapRenderer.cs",
+      "bytes": 9116,
+      "sha256": "f069477b8556d02e8dbc4d6dc05ccba7eb64568e102cf7eb290de4a6649dc30a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/FeedbackPlatformServices.cs",
+      "bytes": 541,
+      "sha256": "415457e618ac92e33eef35fcc91bfeaf108525734c206e492029e94dc0232942"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/IDialogService.cs",
+      "bytes": 1305,
+      "sha256": "e450621559a716c5e98d88cb96fd061fc20cf2b64ef933d26f9e9cdf795e7b90"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/InputRoutingDiagnostics.cs",
+      "bytes": 7352,
+      "sha256": "ce7f249afcd7387899d525f9629a54c410a524de1f0ecb41d066e78de1ad7261"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/InstantFilmJpegInput.cs",
+      "bytes": 4455,
+      "sha256": "ba1ce05cf709c60b4201bbaad36050b7d7ca5cbd7e8551e0fd1d7b97e71cecf9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/InstantV3DirectExport.cs",
+      "bytes": 7223,
+      "sha256": "82034292cc5c02c8a16ade07290cbb0658fe71d0192f5eac4f693877a14b9e8c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/LutPreviewServices.cs",
+      "bytes": 9080,
+      "sha256": "8e90bf3ddb08c21d44c108d854c0d768e21b11b9104c6755a43874315437828b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/MatchV4BackendResolver.cs",
+      "bytes": 746,
+      "sha256": "3b9cbd16edf1be958e13cc8ceec31a9d6a49f181a0d3e2859db00b38d02cb299"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/NativeWindowTheme.cs",
+      "bytes": 1659,
+      "sha256": "c54b2647693d846c47ba74d0923b70974e7adf0b93f6d9b049c9434f1e7f9707"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/NextCaptureRuleStore.cs",
+      "bytes": 1276,
+      "sha256": "854edb3b2f752275528a74d49eec3412af0f835e1c8acd3dd2da63f2060e149f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/OnlineSelection/WpfSelectionProxyRenderer.cs",
+      "bytes": 6760,
+      "sha256": "aca906af95ce77ad0d4c0e83767c87e5c4977ebaa373f34ebd76cf023fc7fbab"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/PhysicalPointerDiagnosticSession.cs",
+      "bytes": 80109,
+      "sha256": "8a4b7e1b626fe01c40c39299974e28fb02ce63ba5e4e042ad37d9c03e42fa6ac"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/PlanningCanvasSnapshot.cs",
+      "bytes": 4403,
+      "sha256": "99e1c9eb863780ca68c59dfeb2833bf2f29b4043b50d7cd28ca3e870468fb367"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/PlanningDocumentImages.cs",
+      "bytes": 6156,
+      "sha256": "d3f09a4d30a72f12738a4f5bdcb36780f966f2c9ff649f45cc676b467ae7eb84"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/PlanningDocumentLayout.cs",
+      "bytes": 2129,
+      "sha256": "68f7085a5301e1c98d0f5bb9d323f833a981909189794929946bac34856581ed"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/PlanningDocxAdapter.Pages.cs",
+      "bytes": 4662,
+      "sha256": "ef7cf6379892dd9cc6d342dc60734e1066e9a3c58e1ea4c27efd6edc0fb60340"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/PlanningDocxAdapter.cs",
+      "bytes": 26331,
+      "sha256": "9253efcf14913543ba4971c0415ac96cd11987467d09c4c94500b1b2a232c689"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/PlanningHumanAcceptanceDemoSeeder.cs",
+      "bytes": 9171,
+      "sha256": "d620de278cd8b2e67d112dbf18d08cbb1a3f1fa24f767e0eb245bd4d6f1a564f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/PlanningPaginator.cs",
+      "bytes": 7083,
+      "sha256": "5489cee3e6d4dfd7d51c58505d536f56f2baddb80ccb500b9fbd5504254df723"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/PlanningProposalPdf.cs",
+      "bytes": 9892,
+      "sha256": "565e5dfe97735cd0c9d58ecadae585d23bc9ad4cb4d7abdb55bf6cb759639bf0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/PlanningTableEditing.cs",
+      "bytes": 3385,
+      "sha256": "793e2db9ece5fac05eb933e30bcb0c6a290ee0836b314d12def19b70a8a78fca"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/PlanningTextSearch.cs",
+      "bytes": 3707,
+      "sha256": "a6265711ee5047c901008db60680d6a1f67cf1e5c15a7a74cbc56fa8aea93f59"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ProfessionalRawExport.cs",
+      "bytes": 9461,
+      "sha256": "a02b3c750a4c119a0503a7995e1d1860b4407aa83710d80f6f568d991564c797"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ProfessionalWicRowEncoder.cs",
+      "bytes": 6636,
+      "sha256": "34c675f8001060441fcc6f7a91c96f8925184039fde4959e140a118a8eb6d86d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs",
+      "bytes": 31847,
+      "sha256": "2088cb2406f9b0a41b966d4418d096e4c4cfa600d054bb537efa14bdaa362c18"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/PublishingIntermediateLease.cs",
+      "bytes": 4859,
+      "sha256": "65849cb3272c3106bcb5cba4a8823d2f12bc139ee8b400bc6d69d5c6d051b749"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/RawDisplayBitmapAdapter.cs",
+      "bytes": 645,
+      "sha256": "a06c882ce3dd0e30b2054fea8b89a7d239c2956b7f09bc09edb94dc75f8603d6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/RawToJpeg/WpfJpegEncoder.cs",
+      "bytes": 2949,
+      "sha256": "cb4e10c69f4c0c7007935454c75402c9c13b47b9e6b4a3ce402369dd133fedb5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ReferenceLookPreviewService.cs",
+      "bytes": 9040,
+      "sha256": "eff21ab88eed401aa080abb0dd8eca2b7d456f11bb42c99aa4015c69bad371b5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/RenderedSrgbInput.cs",
+      "bytes": 1115,
+      "sha256": "468694885eecb7ccacc1df64a34a53e23fd81b29c390f14fb57acc8a926476ee"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ReviewedLibRawCandidate.cs",
+      "bytes": 4941,
+      "sha256": "ca15e5ce51de4d2009fd09de210ef06c5a42fb257690f9f3048a2002cdc6e9d7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/RichDocumentHistory.cs",
+      "bytes": 2519,
+      "sha256": "5e9ae350f7d79b3c71b6d8d177272cdba6f1884bb2268808754ef8b8d471b8d4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/SecondExposureDecoder.cs",
+      "bytes": 6733,
+      "sha256": "215baac0730e91f5ddf31b53c42dc25440e3a81b6b70b54fb9b932bb9588f068"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/ShellEscapePointer.cs",
+      "bytes": 2691,
+      "sha256": "6378a7a409dac9cbedd83c6dc8d0a3bcdddc24d103faed1bf69faedb1bdb948d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/StartupDiagnostics.cs",
+      "bytes": 889,
+      "sha256": "bb5226b0d8a3a3d6318636d02ed973eb93220415451da78eba6fcee481e36618"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/StudioLocalizationService.cs",
+      "bytes": 3499,
+      "sha256": "b2d6a4dc33f286fb41e5f0759c3d8cd23e167d7cf031df96b171e2e0110c93cd"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/StudioPreviewDiagnostics.cs",
+      "bytes": 2000,
+      "sha256": "69835101cddf02d33ed3c0164e01fed876f7563391268a2b0521313d36dd31fc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/StudioQuickExport.cs",
+      "bytes": 8591,
+      "sha256": "e56af5b799641e7210f86fed2d3600a7b669970e9902628ddda99e645b87e0e2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/TetherMonitoringImageServices.cs",
+      "bytes": 18914,
+      "sha256": "b96bfaf96744f5010f32ab3dbd21fd1fab417c8dd55deb5c22ed7d33411db8ad"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/TetherProxyCacheService.cs",
+      "bytes": 6738,
+      "sha256": "879fed57a38548dbf7f6fe5b4ae45593e41260b9d56d260953bb99f6d5c65dc8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/TetherWorkspacePreferenceStore.cs",
+      "bytes": 2196,
+      "sha256": "84e3ea378460be310f698ca0ebd4c8e0cfb879f571e71a26a1b0776567a39a86"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/TetherZonePreviewService.cs",
+      "bytes": 1604,
+      "sha256": "9a98cab3b2af1d5387205f2226a83afdcee1536a719782099a29090f017a2d3d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/WindowsCurrentLocationService.cs",
+      "bytes": 2217,
+      "sha256": "4158a75d09f0129a9ca6eabcae9b88efd8973c426e1e2631b25a64d2833ca0a6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/WindowsDisplayServices.cs",
+      "bytes": 7783,
+      "sha256": "b253b72c96dfbb9c6c7e0694fb9ecbd6ba563c6466c874ba13b436e09a83b396"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/WindowsMonitorProfileProbe.cs",
+      "bytes": 3984,
+      "sha256": "1c57883a79e6648deba8049a6532745b336f35327ae6404a567b3351b7fdb294"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Services/WpfDialogService.cs",
+      "bytes": 5132,
+      "sha256": "163d6a7ce9279689da2749bb867e718ddcc2d76c23fcafca4d57a1a399acd2d6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Utilities/RelayCommand.cs",
+      "bytes": 1452,
+      "sha256": "8bc5d1c4f14f1e3e685d4de98309c3eb6a47214de28d57dc2d31d3e540d31c5e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Utilities/SingleInstanceManager.cs",
+      "bytes": 4691,
+      "sha256": "749de4091fce3e9cfec526a14c089ed0e58807dbaa5c97c39e0b2b112a4382a4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/BatchCompressionViewModel.cs",
+      "bytes": 8156,
+      "sha256": "3ea0bbb141e93aa1663aa30b93bcb916ef773095a564c864224d63c154f394c8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/BookingDocumentsViewModel.cs",
+      "bytes": 45294,
+      "sha256": "d245a260852c104e3ea727b3f00e255901893295932793083a2e1995e7c87351"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/BookingEditorViewModels.cs",
+      "bytes": 73659,
+      "sha256": "b35c1ca4340b4d253d6e09ff458cbc5ca4c5fa1a33734ea7dc14785dab35de42"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/CalendarViewModels.cs",
+      "bytes": 70834,
+      "sha256": "b23c65ca7d15b178ae57fdf5945cf543407de23638ed045565078a03ce15d982"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/FinanceViewModel.cs",
+      "bytes": 32827,
+      "sha256": "98ac2f6760eec7dabebfaa81e099c8d22031b0efb8527f5c6fdf855d9e4e460d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/MainViewModel.SelectionTools.cs",
+      "bytes": 1199,
+      "sha256": "ab06577a61eeeca8aa93ce9ff75f313572b0b0bdf94dc387615173d117c99514"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/MainViewModel.cs",
+      "bytes": 151654,
+      "sha256": "d8cf0d168250fe06aa39417972a389b2256c1519b730c5bb62af0e7386374fb3"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/OnlineSelectionViewModels.cs",
+      "bytes": 36903,
+      "sha256": "713b3dc2d183b5560e71f71a68d626142183ea8a35452874e7c443709a70709c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PageChangedEventArgs.cs",
+      "bytes": 260,
+      "sha256": "ab95ee24c0e6caf12e561a7c1c68fb83db83123839c318dd8896fa25280eeabb"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+      "bytes": 22384,
+      "sha256": "f5d91bab316a9f68ef573ad34f2ce25f2245c1ebf0b6b251e3f7119e07d092ed"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Docx.cs",
+      "bytes": 9615,
+      "sha256": "0dbd0b675612cea393930d77004f2f5aa557670fb6adb1675d42e31d688d2c1c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Foundation.cs",
+      "bytes": 2427,
+      "sha256": "1241263cbe903be80c8e5b283ce0082126a798210015f5c4e9dd847f678157a5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Overview.cs",
+      "bytes": 9428,
+      "sha256": "62f4778fe93b2c99ac30a297941ebdb3b9bc64823d2bdb6092dd8d5b9c17226a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Presentation.cs",
+      "bytes": 3052,
+      "sha256": "5d4b50fb6ca3a16c0b07f1945bb0d92725fed3926a407913fc03236a92c2873b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.References.cs",
+      "bytes": 11351,
+      "sha256": "9b1685c1949f5048302a8040a73b487e4f846d3ae3d0da76ff5aca5a1c52a3b6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Resources.cs",
+      "bytes": 5039,
+      "sha256": "00860227765d90b50e3a670d24ed1a72887190bc5ebd1bf9f516b752830f16d7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.TrayImages.cs",
+      "bytes": 7160,
+      "sha256": "d2226f4a17c1104fa150541429542310ec8a8a1f72d416828aec59c59f8146e0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.cs",
+      "bytes": 23467,
+      "sha256": "115366ae5f3c9506f9ac05cbf1347634fc6968a2f8f2b1e9928f1f90b3ecf94c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningShotEditRow.cs",
+      "bytes": 4239,
+      "sha256": "5c553ab2df7d634903f87782b3b6d0c9613193bc0161b690cfbffee59a8a0920"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/PublishingExportViewModel.cs",
+      "bytes": 31504,
+      "sha256": "381c9f9f2fd2383724fc96b27ea2b074cf7fc60a0dd2ebba7932c2b28eb1fd83"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/RawToJpegViewModel.cs",
+      "bytes": 8157,
+      "sha256": "2cdd6ab92c41b8436f17101b5b34755447558f05c6742dc02e5670d0471f0f7d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Analysis.cs",
+      "bytes": 10988,
+      "sha256": "60a353dfe390a5fc9475d9b70a98ddfde628767d4a6a9b31c052c07f6d165a89"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.AnnotationUndo.cs",
+      "bytes": 1601,
+      "sha256": "f95f56b8f90d9d6a44594c36b643a7ca0522b5af8ed2f4fac42fb8eb1ace3622"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.BatchHistory.cs",
+      "bytes": 3990,
+      "sha256": "a0ef1a46680e065b8117bbea77ce5b8493ba4f6115c1c5ebd86b81d7165d4df4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Comparison.cs",
+      "bytes": 7240,
+      "sha256": "d6c1238b7408299e5cce313fe0ff3fdcbe4dfce9b964b2c22b7dbf0d5cd76cc7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ExportFormat.cs",
+      "bytes": 904,
+      "sha256": "dcb3cf20700ecf163aaca0eb95a3688c789d2e30c18203217e14ae89b893e8df"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Filmstrip.cs",
+      "bytes": 6874,
+      "sha256": "bd6942d3b186da0c0dcc3cda8a2f67326b0bdba7064f2b2d9a602b2930c43197"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.HqPreview.cs",
+      "bytes": 3081,
+      "sha256": "53f2b494345d20e9eb39c37cd7f6fd48ebe4719dac36027490d5a0e989e0c427"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Identity.cs",
+      "bytes": 2799,
+      "sha256": "ccbdb936918458050ee805a29dac177e63816e66810faeebf1a230ecd2b94cca"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.InstantFilm.cs",
+      "bytes": 26380,
+      "sha256": "08b2cc504f1c8fdf437457cfbcab6b47bf24ba756fe267bdd274155e5b907708"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.InstantV3.cs",
+      "bytes": 24714,
+      "sha256": "c1176add21cffcb9a6832e5c438f6c0a52dd925e00a108178261cd93e1ba3159"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.LightPrint.cs",
+      "bytes": 17554,
+      "sha256": "6c22c7dafe4727aa2f898876d2226f564c2d00c0e9881a2f705da63a7088b7a0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.PhotoGradePage.cs",
+      "bytes": 3666,
+      "sha256": "deda08cab32e48f2c9317d3a4bdce814e9bd0ca86bc4ff54fe2573e41d2b024d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Photographer.cs",
+      "bytes": 8224,
+      "sha256": "d33ac1a7daa90a8d58bd24312c98564fa769020afa1f750f84a4db376814ee75"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.PreparedPreview.cs",
+      "bytes": 4452,
+      "sha256": "7092f70eccb41abf8d7d39fd3a3763a9c8581c10daa3d88150822d14a82ef69e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
+      "bytes": 15808,
+      "sha256": "9d11a1c7e0f0495056aa171d532b81c41721872d2b18f06dc1b0ccfbcfc4f802"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RangeSelection.cs",
+      "bytes": 11265,
+      "sha256": "27ab8cf3bf2a1bd66178dd34e57f47d44480ba4bf752987a3b9db0dda7359742"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawExport.cs",
+      "bytes": 1329,
+      "sha256": "babfba1d120f0e6ec933bc34e46107b37b6db79b3c0f1fa78ea8e8eb9fe62f23"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawOrientation.cs",
+      "bytes": 620,
+      "sha256": "721233544d5fff11cd6ef4a171dbb31031a6c0add4d3bbb60cbe35c6f33cfbf2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawPreview.cs",
+      "bytes": 6387,
+      "sha256": "cb113c33ddae4d494e51697dede4203a35ecd9a8b5a4dcaf2de4129db85746ab"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs",
+      "bytes": 17808,
+      "sha256": "77f047ae2b07ee31e6108f2e8f77d7d3fb493ad797a2a9ad6e2a1aa2190636a9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.SrgbExposure.cs",
+      "bytes": 6041,
+      "sha256": "faebe0ae15759e70a0f56a32c2f0a393d465567b9d48223f2aa13422f66d0a7e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Thumbnails.cs",
+      "bytes": 4960,
+      "sha256": "9b7d43906fd2621d8c01fa1ef532b84fae1851b80ecce930c1769cb10595119e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Versions.cs",
+      "bytes": 16080,
+      "sha256": "322ef1a2c1328facb944412c49097a9dcfc664458b2e857cee5a972a7f37e9c3"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "bytes": 77358,
+      "sha256": "46c59bb2806e0d94fa7e5c567523aa7ac50312a7cf6e3a07904d0efa2cedfa60"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/StageDViewModels.cs",
+      "bytes": 27233,
+      "sha256": "1a679fabaa8524b406ffec600ec5317c1f16e67ae805a00a783929a18cd8013b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/StudioDetailTile.cs",
+      "bytes": 195,
+      "sha256": "e87ea085d2a4f2a90d902e17d6ccea8d940af64a9888ef9d8f315e64666f131f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TaskCenterViewModels.cs",
+      "bytes": 15932,
+      "sha256": "d758ff36f400e688a0c2e9496b21a24802de0170aa181758ce530a66ff580811"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherCaptureViewModel.cs",
+      "bytes": 102912,
+      "sha256": "709c45619eb86ab417b0b8d11ada9ef5201197ccb921bffa0141a154ad8be519"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherColorViewModel.cs",
+      "bytes": 41914,
+      "sha256": "bb98b8367e57a2fa9af9e28abd761ebbeaa898899687cfd65ff39c2e2deba90c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.DetailPreview.cs",
+      "bytes": 3393,
+      "sha256": "e0a516d2d899f435d2349c61028cbc4ec884e81bb5540ad386533d172e08b41d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.Develop.cs",
+      "bytes": 3228,
+      "sha256": "7517ba6cbf72da85bef65d502b45622dd56a3651f3b30caf2454b493d4045322"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.History.cs",
+      "bytes": 5466,
+      "sha256": "b2b84edbc06d9612c17d4cf7252986be04b777c12f769f04f70d9b354c11108f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.SchemeInteractions.cs",
+      "bytes": 4492,
+      "sha256": "9174c9966dcba3b2d17c13e371963d0df4b08b1ad03fe44a71ac906ac92c7533"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.Selection.cs",
+      "bytes": 415,
+      "sha256": "f536df6b9ba3739f4e2cea15aec9de7cc60d257b35f111eded7575e178be506b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.Tools.cs",
+      "bytes": 5842,
+      "sha256": "ac96a9cdf1e4dfb420f3dd736920cc1bec523b288fd3a3f65f85e285548dae96"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+      "bytes": 98871,
+      "sha256": "bb36b9c96101f20607c35576862d6308ab098fb9808006d85276549881d008f2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherShotExecutionViewModel.cs",
+      "bytes": 9424,
+      "sha256": "23d6345cb0b4375f3fce4f28166c5c5ed48743ef54c632c5eb76f9e093b59af9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ToolPageViewModels.cs",
+      "bytes": 40984,
+      "sha256": "3b0a0f49beee17223e94ad2c304db190b11fc6b4a7129ecb8ad0eccf30cf5a2f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/ToolboxItemViewModel.cs",
+      "bytes": 2258,
+      "sha256": "2e55bbaa93eee16485cac56bee9d7d9023b0cedd549d6cd99a4ebb7e68a40dc9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/ViewModels/WeatherViewModels.cs",
+      "bytes": 17236,
+      "sha256": "127a384a76fd1658ffb4b06bc90eb241057eab0315238490528f290912d0fff8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ArchivedBookingsView.xaml",
+      "bytes": 3235,
+      "sha256": "ee3fa8474c1bbacf0acd7285b6abfd5574809f90c51b3c3047e667e83dca61f9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ArchivedBookingsView.xaml.cs",
+      "bytes": 189,
+      "sha256": "f9f8e1555cf6408473575db2fa312ff1a68d000b0a4c8ad1c94a32961896e097"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/AutomationLandmark.cs",
+      "bytes": 849,
+      "sha256": "38b6f5d7f5ad9f099c82657fa34d7468066b6e171e379a250ee954840764b106"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/BatchCompressionModal.xaml",
+      "bytes": 6554,
+      "sha256": "20f108cea371f235dd78aac97e08be32800f9df83ab1f7488b02b8db8c5eb76e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/BatchCompressionModal.xaml.cs",
+      "bytes": 810,
+      "sha256": "88a7da0bd4e4b34c2b8f36bf3ccf243ba19646a5df19399cd8b16cf3751a1393"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/BookingDocumentsPanel.xaml",
+      "bytes": 15717,
+      "sha256": "f029c839d2e25dbe0bb566a94d00e788618ccd3dd6b00547f01c4036a24aedb2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/BookingDocumentsPanel.xaml.cs",
+      "bytes": 5207,
+      "sha256": "f90d7a40a94a5bed00a6e2235920ced779cfcab5974262e7025ffad28eb0372d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/BookingRemindersPanel.xaml",
+      "bytes": 5623,
+      "sha256": "361d48eac1a5a3d01cc6422e5f6687ec7527cdd97020905c2c6df1dfd3ae0f90"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/BookingRemindersPanel.xaml.cs",
+      "bytes": 202,
+      "sha256": "50e8eae42cbc3249e62f545feab3f7ec1d395615cac1aab94ebaace42f0e6c88"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/BookingWeatherPanel.xaml",
+      "bytes": 6584,
+      "sha256": "e7a22b4753e8633baef0a11c704ece830c53305281aef8532d4aab556028a100"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/BookingWeatherPanel.xaml.cs",
+      "bytes": 198,
+      "sha256": "a23785f3232ba711c29a6c6e0cad498d50a8b47b2cedde84a848035070d90162"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/CandidateSelectionWindow.xaml",
+      "bytes": 2863,
+      "sha256": "c5da13fd77eb6101bb182d56c4c7a719902bbb97c58966c1195259558b47c7e5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/CandidateSelectionWindow.xaml.cs",
+      "bytes": 1301,
+      "sha256": "8a46321ee61ca25e8cddc4ea334d75b78aaca57032a527a85588eb5a8053a35f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ClientMonitorWindow.xaml",
+      "bytes": 3260,
+      "sha256": "9557d228de41f668cbad7760b0a4224ba48c8f1c5a19c22305b1b7c67b85e01a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ClientMonitorWindow.xaml.cs",
+      "bytes": 387,
+      "sha256": "0c367193180f33a9ba8ff85cb32977e538ec77e1442daa907bbd96c01f1088b9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/CloudInspectionControls.cs",
+      "bytes": 3032,
+      "sha256": "7da83297bc94b5f07e457d206303992d51aee0935c01b41d7c3db4b2191d314d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/CollageView.xaml",
+      "bytes": 9077,
+      "sha256": "0aeca4a484234aa74a0460e446d91afcaed55e8b70f697e437c488b62aec4547"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/CollageView.xaml.cs",
+      "bytes": 2659,
+      "sha256": "b1cc28daf143b6cd19953190d8bcbd5d579363d23f92f3577056a154535e2116"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ColorSpace3DViewport.cs",
+      "bytes": 16756,
+      "sha256": "5556d6d5eaa2f0edd70f9568afedc17c859edcb954fba1f983400fda35572f9b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ColorStudioImageViewport.ProfileDiagnostics.cs",
+      "bytes": 1786,
+      "sha256": "28f8afbbc9ea575234003bcc6cc07e6362120ddfb9e5bb8f3180551fb6175935"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ColorStudioImageViewport.cs",
+      "bytes": 8955,
+      "sha256": "6bc129dec9f67c41de3c08cfb620f9b108453dbf45b558f0fb23001edf3ee9ad"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ColorStudioNodeConverters.cs",
+      "bytes": 2902,
+      "sha256": "1879360d786b1f4383be2c5433f68d6ce1b3dd20452be778d27f111103bc7743"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ColorStudioNodeTypeVisibilityConverter.cs",
+      "bytes": 692,
+      "sha256": "913ea11a4622f4d3c3d5e50e6517fd29f572e005d528e3a09b97b3c2fd1fde79"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ColorStudioSampleMapping.cs",
+      "bytes": 1891,
+      "sha256": "ecf175bf1907bade3d18d900827036c23dbb043623ba968c9920855bfd077c78"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ColorStudioZoomPanState.cs",
+      "bytes": 3629,
+      "sha256": "c654fb48f9d918938dd8383b126674f727b76c11a888730a40d55a564e60110a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/CompositionGuideOverlay.cs",
+      "bytes": 3485,
+      "sha256": "9b83e84161badad4768cb0b2a2d28291010918acd9abb902405162cee26b6d38"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/DarkroomExportDialog.cs",
+      "bytes": 5388,
+      "sha256": "f9457c55b5c10ecb354973709c19bcc4db77ae8495ef408efc1d6111e757ae59"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/DarkroomIcon.cs",
+      "bytes": 2900,
+      "sha256": "5ddac7d39f72bcd6d307ba18c144f01aff756338852bea14ee05d5c9eef4c014"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/DayCalendarView.xaml",
+      "bytes": 3281,
+      "sha256": "43aff80fbbe9becd77397438560042ca6b0e8a6a2910e2742bd0faa27dd819be"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/DayCalendarView.xaml.cs",
+      "bytes": 179,
+      "sha256": "5573fa4e6ae129e501a34fb5f6a29cbfafb2e0f3785bf33b6c4e32eb2b37da28"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/DaySchedulePanel.xaml",
+      "bytes": 6007,
+      "sha256": "af8c8aae3d0c9a062d275b7650345b199192208608fa58caf8a8c0ba8fcf2a11"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/DaySchedulePanel.xaml.cs",
+      "bytes": 181,
+      "sha256": "5560b4166023755c1131a58822f543f14cbaff7eb491f49a023aa1f8ab1539b9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/DocumentDropChoiceWindow.xaml",
+      "bytes": 1485,
+      "sha256": "793a9d693a51b61b211f303b87c93f0389547b01609219004c3fcf66fb7e035e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/DocumentDropChoiceWindow.xaml.cs",
+      "bytes": 686,
+      "sha256": "e66ddc74ee29fc7dd27bd5a1ce638a3fd4539b860214fce5ca0d30f14d160d3e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/FeedbackDialog.xaml",
+      "bytes": 3198,
+      "sha256": "94659c3efef025c4fe6d70b666183268c71568cfcb1b9cafeed90fd897680011"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/FeedbackDialog.xaml.cs",
+      "bytes": 3114,
+      "sha256": "eef1699f9f758d86cc170c3eead4fb9ed231375a21157ff08ae327507749b33a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/FinanceView.xaml",
+      "bytes": 18016,
+      "sha256": "342eb0e8e8355782c088c5b2f7947b9dafe611d3746a8f371668652cb4011473"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/FinanceView.xaml.cs",
+      "bytes": 425,
+      "sha256": "a8452da434c58be71b9614d9ecaf803a3053ee85d0d549f8f67e6dd269b104c0"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/HelpWindow.xaml",
+      "bytes": 1904,
+      "sha256": "b202e98c1e8ea9f4a6cd75c72e5ea2c52355c2dc7694b3e34ea390abbd4cf456"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/HelpWindow.xaml.cs",
+      "bytes": 752,
+      "sha256": "b211199ecea6221fd70f5077b737ce75f650cb62b369fc09985752afd5181ee9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ImageHighlightOverlay.cs",
+      "bytes": 3843,
+      "sha256": "4035aadb3e8732ce0edbbfa0ad0dc4be7ade000ef6fcb20a48f310301c5d82be"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/InstantCameraArtwork.cs",
+      "bytes": 3094,
+      "sha256": "7ecbd08da955639c523e194dffccf8f33e5bf5ba2e36c47460fd299fb333139b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/InstantDevelopmentView.cs",
+      "bytes": 5342,
+      "sha256": "dc83a8fe2b1dccb352a1a99f613fda27503ee505381f9dae323f5d522f26c5be"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/InstantV3Editor.xaml",
+      "bytes": 23715,
+      "sha256": "c2014f42ffe763835e2beb9d286eac7ee15c61c21a13352cb303e002faa6e76a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/InstantV3Editor.xaml.cs",
+      "bytes": 1108,
+      "sha256": "21f71c20d0b1b3301a76f46ef8761e545f3d61644521c5538f784b92ba568f26"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/LightPrintFrameThumbnail.cs",
+      "bytes": 2058,
+      "sha256": "6d8f6f02171e5926c5c11cd7bcec40f17574f92db0e3068c826ab2bb04c98dcb"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/MediaDetailsWindow.xaml",
+      "bytes": 4838,
+      "sha256": "15cabc758881608d2a7958edcc002681cee9d686549b814b325c5b6d5974e5a1"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/MediaDetailsWindow.xaml.cs",
+      "bytes": 4633,
+      "sha256": "40e4ce7728d1dc179dd8a35cdf992f1746148c50eda62ce15499539067614251"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ModuleWorkspaceHost.cs",
+      "bytes": 7581,
+      "sha256": "ec1fa3ffa2dc581c976b125816225189ba14749d341eca253f81fd78a9fe69e3"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/MonthCalendarView.xaml",
+      "bytes": 13938,
+      "sha256": "3b97eb423f595bb7c18a48d6ecb41edfbd934030173650219748185f73fee785"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/MonthCalendarView.xaml.cs",
+      "bytes": 880,
+      "sha256": "e3f6d0c9fd423c8ea8b0ae5ec5e26037d33585c16eeaf8614ecd5fc9e1102f0b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/OnlineSelectionConverters.cs",
+      "bytes": 986,
+      "sha256": "5f8333d9a906933df40c0f441a7391afba43b8bc0f6ccf6d3f0cfeb4582a8015"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/OnlineSelectionView.xaml",
+      "bytes": 19769,
+      "sha256": "3dfc6a22b521ad231da57cc81d6fabd2a0b3878874d2534612a7a46fed98da55"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/OnlineSelectionView.xaml.cs",
+      "bytes": 198,
+      "sha256": "5558f9d34264c996528af8dfb58570d15a29f395bd7858e96bf83e7eb7232481"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml",
+      "bytes": 10935,
+      "sha256": "c8c87de4d74195b2d4198188d0bdea48a15d6d2553d8e66e12c60f1930b86c10"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml.cs",
+      "bytes": 2765,
+      "sha256": "f2b6a4632ebd41922eab2e882204f32ae217aba07cbacec7fccbab592d572525"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.PanelLayout.cs",
+      "bytes": 4946,
+      "sha256": "dea73d119b8df7e7cd24f95be73f67f86e4f48114e98ed39dcd3dea618a91d90"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml",
+      "bytes": 31736,
+      "sha256": "87145bf392efa1dd69573bcd0cca3306f045317a0ef43c35bcb75da52912a3d1"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+      "bytes": 13407,
+      "sha256": "68e18d68b5601b1a535134bcdf279e9def7e12eb8bf748cff4c4a05634ee0b94"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PhotoMetadataInspector.xaml",
+      "bytes": 2354,
+      "sha256": "f8e24b9cff5e1d2bbab1e249ab3012e07a321551da3c2337a9c86942a9a3e26a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PhotoMetadataInspector.xaml.cs",
+      "bytes": 193,
+      "sha256": "fe15d26799a29df590b130bf7bb7b9ec17cc52fd00ff35031bc90b503599543b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PhotographerOptionLabelConverter.cs",
+      "bytes": 1374,
+      "sha256": "ed18bb93e3563f4d1e99a967df3c09916643896613a0457bcbf3b84801f6deed"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningAutomationScope.cs",
+      "bytes": 785,
+      "sha256": "43acff55db5e4e54ebbe6e98fce75a3f9d16c08f465444a2126b0dd609e899f4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.Docx.cs",
+      "bytes": 2124,
+      "sha256": "b5a9313bdc9ef7818b8375dd13df740bc17a674f202ae0df7e5d3be69d8be3a5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.Foundation.cs",
+      "bytes": 9937,
+      "sha256": "67c8965a19fbf0bf767a2e2d394595ae9f9a9ab656e7a3c015938fa1e6f972c4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.Presentation.cs",
+      "bytes": 5175,
+      "sha256": "b2c9d65e14f6eefeb990c758cdd299a5bf75e7ef17496c95632a35e10ec0179b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.R5Layout.cs",
+      "bytes": 16331,
+      "sha256": "857831129f2a53bdc324a8b31a47f83abc0a8a51c5095ef40eee8a33ac08db8f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.R5Tables.cs",
+      "bytes": 3955,
+      "sha256": "03219271382b75b55981fdf811fc3bab805f994302ccd6763344ca925fa9fa7f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.Resources.cs",
+      "bytes": 9218,
+      "sha256": "b3dcd18a269be3c6d0ee170aa5f0b30b1ac3f5656f42667b8d482724d022eb64"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.TrayImages.cs",
+      "bytes": 7557,
+      "sha256": "95b295c38ab24d45f9e9cd364f5e7a5e84ef96a9e7aa8a91ab83a52069a521d7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml",
+      "bytes": 12815,
+      "sha256": "b276b770bfe2878bbb294c7c37ea21a391773c82ecb76917dca852ec497adda7"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "bytes": 52993,
+      "sha256": "0940e335989f98bd8233df43a80afa98eac66b45f09f560e7a13650c6fb0478a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningLightDiagram.cs",
+      "bytes": 5698,
+      "sha256": "82c56941f4a4173fc89e51a3efa537ad72629f8593f616516d3f7d6e17362c39"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningReferenceTile.cs",
+      "bytes": 3880,
+      "sha256": "0128825e6c3baf041f7f5e0a2e7e4304be2a249e998f70e7fd695ad4d6d3e07d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningRichEditor.OwnedImages.cs",
+      "bytes": 868,
+      "sha256": "1d6d1c4e607d7d78696a6a7cdedb445ec0ffdd5f8ba53edb91546331787044a3"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningRichEditor.Pages.cs",
+      "bytes": 4381,
+      "sha256": "d996a86be6320889c7448113d200a6614bb664d3b9ea3a58e82c0bef5c22f011"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningRichEditor.Search.cs",
+      "bytes": 6065,
+      "sha256": "610c1bec238c8d19ac64882551638dbdea8a8eb547334c4103430778fdcddfbc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningRichEditor.TableContent.cs",
+      "bytes": 1143,
+      "sha256": "81e7eb082862cb8a114da7b773145c5f6c7fae526bba457642b54789a3396426"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningRichEditor.cs",
+      "bytes": 22596,
+      "sha256": "27329a7071d923455a64ccfee4a35c89f05e9c4f649a78f393d4ae0574e6497f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PlanningShotRow.cs",
+      "bytes": 1094,
+      "sha256": "e189d0eb63c83cc9fa7e8ccc0e5bcf61f3ad480cddedffee78e58423731713bf"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PublishingExportView.xaml",
+      "bytes": 13744,
+      "sha256": "2437b15e511ac4ba6d6cfb574614f752f3d588dba8ac54363e7e28e955fa6f04"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/PublishingExportView.xaml.cs",
+      "bytes": 1092,
+      "sha256": "dab3921be1e1cf99eb1b21f2f1074bc2dab51a9979a42b096aadfe6c5f0fbfdd"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/QuickBookingEditorView.xaml",
+      "bytes": 7009,
+      "sha256": "41988dce8a93e46cad58283e64fae084977a436c09b35ea65b87317f4ab3cdfa"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/QuickBookingEditorView.xaml.cs",
+      "bytes": 204,
+      "sha256": "3c9b87f9c0cb766cd66f6e582ae7a2208520c49d0c747dc8d28e2517260cab39"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/QuickToolsManagerWindow.xaml",
+      "bytes": 3671,
+      "sha256": "40415dc9f7099ebeb9f2bf69332b555e9feaf80826d0e8dca17a6a414e586d60"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/QuickToolsManagerWindow.xaml.cs",
+      "bytes": 3634,
+      "sha256": "060bb0801e19933497bafb12b118b6d88a9a94238d99d072e03ab70e235e303a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/RawToJpegModal.xaml",
+      "bytes": 8244,
+      "sha256": "b8de8ddd65d99ebc0e197ddee4d2f449bd8955ec845cf9acd965888459ca88c6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/RawToJpegModal.xaml.cs",
+      "bytes": 789,
+      "sha256": "4fe5c3ccfa646169eaabe86b92299d66f1db0bcc1b7d5a6f7b022994bb3ab00f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceAdjustmentSaveDialog.xaml",
+      "bytes": 1744,
+      "sha256": "8d2a69fccdd178bb65159cbf2ea38c9138da35e1c9cfec945533ce73db9bae04"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceAdjustmentSaveDialog.xaml.cs",
+      "bytes": 1177,
+      "sha256": "2d664306defb2419e3d65a2f10cecc59c922fe86ed458f924da772c60d8fd71b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.CanvasToolbar.cs",
+      "bytes": 8479,
+      "sha256": "0fce78170e2bd5717febb0e47b339291fbd2202d2cece78686d80b60939fca5e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.Filmstrip.cs",
+      "bytes": 5476,
+      "sha256": "3f041c727dfd42dff898e407d81036b870357ac93c053ac96162e0f7529364fb"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.Layout.cs",
+      "bytes": 6412,
+      "sha256": "14d77027991bc123a2218555e9aa304190103019a260e91bf1efa5afe2fbe53f"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.NativeEvidence.cs",
+      "bytes": 2689,
+      "sha256": "433fa6ecdcdbd95274851419eb556b88d3ccf421ff28bfa33f7d78b48b9b16f1"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml",
+      "bytes": 91315,
+      "sha256": "6935fa90dc7984a8d0f662befc615de39a0950647198628961824aa523a2272b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceColorWorkspaceView.xaml.cs",
+      "bytes": 41672,
+      "sha256": "f3fb2256e2e67308c7c55122f0841c5b6954fabf49c78f4c193dc7df13a756c5"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceNavigator.xaml",
+      "bytes": 1970,
+      "sha256": "94c1c5aa5aaa2ef3b0abef586b8f8633c410ce495544b4328f989b570b809d43"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReferenceNavigator.xaml.cs",
+      "bytes": 5109,
+      "sha256": "5e76bb638eb281a25262657e1c1b03d0ac1cb105b60f81cf932c54939513f9d1"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReminderNotificationHost.xaml",
+      "bytes": 2160,
+      "sha256": "1478f23da4d64deeb7e871b4c02d0ef873129a721ff563a974e7c07407eb743a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ReminderNotificationHost.xaml.cs",
+      "bytes": 208,
+      "sha256": "66d0b5e4e9026796a8eb44b62461276d5bedd27a9b654f93159b748744820770"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ShootBookingDetailsView.xaml",
+      "bytes": 18088,
+      "sha256": "c75046e6b21b85f2f50f52399882091f3bc6f0e846739d28d11d1dfd4733f757"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ShootBookingDetailsView.xaml.cs",
+      "bytes": 456,
+      "sha256": "6a271f0026934fdcc2af5cfb7c6dddc7f270cf593fa4aa34777f604231661ae8"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ShootBookingEditorView.xaml",
+      "bytes": 27875,
+      "sha256": "b97bc65e182b7ac7bc37c193d2928c4a91bd60642eaac0f727ce9c2214406437"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ShootBookingEditorView.xaml.cs",
+      "bytes": 1156,
+      "sha256": "bff4cbbfba84fa182e997c25494b68a80304d0dedf79ec158172b00fbe07ccd9"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ShootRequirementsPanel.xaml",
+      "bytes": 3212,
+      "sha256": "397cc30158b122025067da0aaff93a701bb1582909a3db150c4bc831e62997ef"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ShootRequirementsPanel.xaml.cs",
+      "bytes": 193,
+      "sha256": "4faced60b833800e72cdb6e12df2f9db64b6eb76e131479f90613ff85e1399f4"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ShotReferenceWindow.xaml",
+      "bytes": 1779,
+      "sha256": "51f8e326a1ea0e889a8027a8a41a2afccb2af1ed76f18557c9bb0e56b05bad75"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ShotReferenceWindow.xaml.cs",
+      "bytes": 283,
+      "sha256": "817f74f4c9238812a54678c61e5f735cbd7d377aaf0909ca1f463c9159a32564"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioColorBalanceWheel.cs",
+      "bytes": 4848,
+      "sha256": "75873bf6d6d60d0c02128714f3d04461ff47e879805b33e932ae87b713b52d79"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioColorLabelFilters.cs",
+      "bytes": 2942,
+      "sha256": "0eccfb115370d6784ba094254410b5b86664bf53a3fe474a702cddf2d4944560"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioCurveEditor.cs",
+      "bytes": 10104,
+      "sha256": "476cbe61b53b6932f9c92496205f763efc82a5b2418fda792b305b029a028cd1"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioExportFormatSelector.cs",
+      "bytes": 1452,
+      "sha256": "a53c1969066faf4066eca568933c71390fb7ddbf217b16c0edc7d82de9229b6e"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioExportMenu.cs",
+      "bytes": 2225,
+      "sha256": "6300a0a220b92b2ef8c619ffbccdf0dd31039cc8143dbcd31e90f8c5785fac26"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioHistogramView.cs",
+      "bytes": 3354,
+      "sha256": "8167b8e00c81402b7745efa048d07e1293287b728a9480be255f17a82c3ab9cd"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioLanguageMenu.cs",
+      "bytes": 1436,
+      "sha256": "01dc4d2fe14f07e562686a67c3741473ee16229a3f0c8f0988de3df5f3791369"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioLevelsGraph.cs",
+      "bytes": 5792,
+      "sha256": "3206d150f8986fdae633a165d5c53929a2bc75f4e48c31eb0dfdb551691cf105"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioLoadingRing.cs",
+      "bytes": 1803,
+      "sha256": "c75d28966f00afcca3f4b559e3b3c24928ca00ba6767589b8bb20dece5ad6004"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioNumericEditor.cs",
+      "bytes": 2999,
+      "sha256": "03190068b075483805a95aec53c3cb86bee68a26fbec967689e72c3492e60b0c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioPageHeader.cs",
+      "bytes": 2581,
+      "sha256": "d62a702d5c2cfafbd3ced7ffbefa68fcbd3523b8a0b28397b79c89b1129677dc"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioSpaceControls.cs",
+      "bytes": 3735,
+      "sha256": "9f4a9a17d690afa263a4c591f314599849ca2142f92671df6fbb5186855e211c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioStartupWindow.cs",
+      "bytes": 3558,
+      "sha256": "b0c7b84c97db79e1afb598458f97d93d49ca2d8d592606a75a3e8dc03ebdd9f6"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioTextExtension.cs",
+      "bytes": 3411,
+      "sha256": "71b99c908708cbfdfd42b5b80fcf332de217690a2cd49936239ec7a6715b7fe2"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioToolPanel.cs",
+      "bytes": 18142,
+      "sha256": "92cc0b432c55faca30bf552f09b4e227e22b850da2680855fd89635cdb1f742c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/StudioVersionConflictDialog.cs",
+      "bytes": 1942,
+      "sha256": "26ca80133f7a2afe5a4042e95bbe87dad31c2075ffb774b0d59d18cdd799ba2d"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/SurfaceCloseButton.xaml",
+      "bytes": 2319,
+      "sha256": "e3352c7d59c1c836c23e246f6e23ee133d30fb8585d9b4bd210e4545837f6221"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/SurfaceCloseButton.xaml.cs",
+      "bytes": 3028,
+      "sha256": "908f345caecd1cc106618e487e03edf65578ac7af042d1d7eb2bd306d0f8b118"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/SurfaceHeader.xaml",
+      "bytes": 1710,
+      "sha256": "2b427cf6f98ab97ef059130a33fd86b78b9dd0140687781cd6274556e2f4b30b"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/SurfaceHeader.xaml.cs",
+      "bytes": 2427,
+      "sha256": "1f982f4f36db67f976a95396da81d578a810600f79042489483547dc5526b358"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml",
+      "bytes": 83905,
+      "sha256": "a99121f5585a8a7a6636be9104d00ae23e54604e0f48ea4c4b4d403946856307"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml.cs",
+      "bytes": 20441,
+      "sha256": "3aa217f3bf3eb56aa0947699064327bb0c462fbfae5b00c578cabd419c35fb46"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/TetherHistogramView.cs",
+      "bytes": 2475,
+      "sha256": "b4a90ab21d30845c853a4a9808f75a57237c6dd530ec3d98ada56bb9dbfe8805"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/TetherInspectorPreferenceState.cs",
+      "bytes": 2501,
+      "sha256": "b1e661ba738e689cdc2d30dbd33575e07158e68d5e8f1cb475ce4d4256244b1a"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/TetherReferenceSplitView.cs",
+      "bytes": 4932,
+      "sha256": "b4257caa1a567af8ed38e2021390f84102f9d2889b790278e8f5decca59d2d5c"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ThemedMessageDialog.xaml",
+      "bytes": 3342,
+      "sha256": "20eea437c37096fc9c8dd10601e4a41b26b8bc2fac50ca6e2ca17fc355f5b9fd"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/ThemedMessageDialog.xaml.cs",
+      "bytes": 4980,
+      "sha256": "d3d7c391ce8bebf46dc94e1bd35dc8c429d19588a786df1fbf6c20b83d6b8b06"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/UpgradeTutorialWindow.xaml",
+      "bytes": 1558,
+      "sha256": "0893dd8f6887cde2436973690433f896348f0447c01ab5911714085374ba8d18"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/UpgradeTutorialWindow.xaml.cs",
+      "bytes": 487,
+      "sha256": "212792afe58edea657aca61887e99ebf3f0656a1b1c0580d97c351381e9d12f1"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/WatermarkPositionPicker.cs",
+      "bytes": 2593,
+      "sha256": "1b334e03f3a70dc4ce4f3ebfd39bb0ad4a66174acdeab08450894abb27897d88"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/WeekCalendarView.xaml",
+      "bytes": 4137,
+      "sha256": "eec30b2a88e1d2229da7da97cbcd2e4cdc9a879b02d011acb7efea3a6e6c36cb"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/WeekCalendarView.xaml.cs",
+      "bytes": 181,
+      "sha256": "a2cb76ea9e80df8a1b11ae43dbbc0c10cc43b29f37eb2b5d4c18fc3da90462ac"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/WorkCalendarView.xaml",
+      "bytes": 19848,
+      "sha256": "4aae4c56e2f447c89ad795ee764747d799bb1addf2115c491c2473695970e879"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/WorkCalendarView.xaml.cs",
+      "bytes": 3231,
+      "sha256": "1e61fc511418d79d5e7a86541d38cab2943b8b465b6750f962af6f662daef976"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/WorkbenchCalendarPanel.xaml",
+      "bytes": 15332,
+      "sha256": "2172fb2b4106fc634b24f531ffb793632f2f7fa6ca46286ce014922bc09e9741"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/WorkbenchCalendarPanel.xaml.cs",
+      "bytes": 2329,
+      "sha256": "0327ebaabfbf5b77aa8a198482defe68ebf7d2efda10b2c55af457b6f92ea196"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/WorkbenchCalendarSummaryView.xaml",
+      "bytes": 424,
+      "sha256": "5f89ab44890eb584f6cb4809c65dba57972459c0a6249dc60d562d81de2acf36"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/WorkbenchCalendarSummaryView.xaml.cs",
+      "bytes": 216,
+      "sha256": "fbcf0b3dbd321304ce6c3a66780378db35c6eac72561cbf42568a9ba92198e04"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/WorkbenchScheduleView.xaml",
+      "bytes": 7434,
+      "sha256": "b4215e5b044c11c47e083b498e408baa9c304e7e058d9257592ca2f20617b603"
+    },
+    {
+      "path": "src/RAWSelectionAssistant/Views/WorkbenchScheduleView.xaml.cs",
+      "bytes": 202,
+      "sha256": "b2c81a1bbc29e3fbe24d82ab7460b5c7b187abdcbf825247f8d57437ee230b1f"
+    }
+  ]
+}

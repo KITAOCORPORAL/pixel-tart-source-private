@@ -1,0 +1,18 @@
+[
+  {
+    "action": "退出首次教程",
+    "status": "BLOCKED",
+    "reason": "GetCursorPos failed: 拒绝访问。 (0x80070005)"
+  },
+  {
+    "action": "激活完整EXE窗口",
+    "status": "BLOCKED",
+    "reason": "GetCursorPos failed: Access denied (0x80070005)"
+  },
+  {
+    "action": "最终包退出首次教程",
+    "status": "BLOCKED",
+    "reason": "GetCursorPos failed: 拒绝访问。 (0x80070005)",
+    "sourceSha": "96e84b14a0cbb040b97cc531efeb31b1f4144367"
+  }
+]
