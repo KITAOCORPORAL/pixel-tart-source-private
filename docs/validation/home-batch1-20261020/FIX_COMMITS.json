@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-20T21:48:50.169014+08:00",
+  "timezone": "Asia/Shanghai",
+  "local": "2150e7ba5b3b612de0d128f6996a6c17f66ffdb8",
+  "remote": "2150e7ba5b3b612de0d128f6996a6c17f66ffdb8",
+  "commits": [
+    {
+      "sha": "715beed52d3befd35d40e648ee692e9a61af6c40",
+      "subject": "fix(planning): expose rich body identity and validate current fifteen-section peers",
+      "files": [
+        "src/RAWSelectionAssistant/Views/PlanningRichEditor.cs",
+        "tests/RAWSelectionAssistant.WpfTests/PlanningAutomationContractTests.cs"
+      ]
+    },
+    {
+      "sha": "2150e7ba5b3b612de0d128f6996a6c17f66ffdb8",
+      "subject": "test(darkroom): isolate each two-photo run and retain unread-project overwrite guard",
+      "files": [
+        "tests/RAWSelectionAssistant.WpfTests/R3CommandLineReviewTests.cs"
+      ]
+    }
+  ]
+}

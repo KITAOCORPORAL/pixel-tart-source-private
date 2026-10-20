@@ -1,0 +1,670 @@
+{
+  "at": "2026-10-20T21:51:45.658135+08:00",
+  "timezone": "Asia/Shanghai",
+  "hostLogs": "Original timestamps/timezones retained. No timestamp rewriting in TRX/logs.",
+  "startHead": "03b50d150812fe1b3abaf4e85013ce18537e5b4b",
+  "baselineProductSource": "96e84b14a0cbb040b97cc531efeb31b1f4144367",
+  "finalProductSource": "2150e7ba5b3b612de0d128f6996a6c17f66ffdb8",
+  "baselineWpf": {
+    "discovered": 1710,
+    "selected": 1710,
+    "executedResults": 1710,
+    "counts": {
+      "Passed": 1688,
+      "NotExecuted": 21,
+      "Failed": 1
+    },
+    "missing": [],
+    "extra": [],
+    "planningMatchesDiscovery": true,
+    "resultMatchesDiscovery": true,
+    "timeouts": [],
+    "nonPass": [
+      {
+        "id": "1f7a3875-86de-832b-8fb3-8902fe5c8025",
+        "name": "RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+        "display": "AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Authorized local corpus opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "180e1356-c0f8-8fd2-ba20-fbed3a09e968",
+        "name": "RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+        "display": "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+        "outcome": "Failed",
+        "error": "System.InvalidOperationException: Sequence contains no matching element\r\n   at System.Linq.ThrowHelper.ThrowNoMatchException()\r\n   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source, Func`2 predicate)\r\n   at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.<>c__DisplayClass5_0.<Verify>b__7()\r\n   at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.<>c__DisplayClass5_0.<Verify>g__Check|1(String id, Action action)\r\n   at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.Verify(MainWindow window, MainViewModel main)\r\n   at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.<>c__DisplayClass0_1.<<ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts>b__1>d.MoveNext()\n             at RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "166fd959-7415-8c57-bfae-590de7fd3a3f",
+        "name": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+        "display": "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Set authorized batch06 corpus and evidence directory; not a synthetic test.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1adfc4c5-3127-82ba-9f05-60ac21918686",
+        "name": "RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests.CompanyRealRawProductAcceptanceGate",
+        "display": "CompanyRealRawProductAcceptanceGate",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。NOT RUN — real camera fixture directory unavailable; set PIXEL_TART_COMPANY_RAW_ROOT.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests.CompanyRealRawProductAcceptanceGate()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1ee59ed7-0e11-84dd-b7b9-2c0f2f56db30",
+        "name": "RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+        "display": "RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Opt-in automatic screenshot evidence; not native UI acceptance.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.<>c.<<RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1ab4f1e2-3600-8373-8f83-bce4b8cc1378",
+        "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+        "display": "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Opt-in diagnostic: provide a new synthetic fixture and new output directory.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1193c5d9-b6ba-843e-b094-30dd8eebb51f",
+        "name": "RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts",
+        "display": "SeparatePureTiffEncodingValidationHashAndNodeCosts",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Performance output opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "1f208120-3063-8194-a3bb-0796b16d614f",
+        "name": "RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop",
+        "display": "OffscreenSyntheticKeyframesNeverLaunchDesktop",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Offscreen artifact output opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "12f603ee-dca1-8712-9ce9-e5e71dc52774",
+        "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+        "display": "AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Explicit authorized frozen-photo manifest is required; no directory scan.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.<>c.<<AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity>b__2_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "100f9d0f-6abb-8b71-bb7e-5274ecec1432",
+        "name": "RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+        "display": "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Set an isolated current-run output directory.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "169fc6fe-ddc9-8b56-99d4-4b60579260aa",
+        "name": "RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback",
+        "display": "OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Reviewed official candidate opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "17e19016-3ab7-8b34-b64a-9120db541ae4",
+        "name": "RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference",
+        "display": "RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Authorized real measurement opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "119edc86-9493-8114-b875-4a7c38036899",
+        "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests.ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+        "display": "ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。No captured non-reparse P2 run root is available for the read-only integration probe.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests.ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "176b280f-878a-8eee-b882-6fa124b113cc",
+        "name": "RAWSelectionAssistant.WpfTests.BatchElevenRealTests.BatchElevenAuthorizedRawMemoryAndColor",
+        "display": "BatchElevenAuthorizedRawMemoryAndColor",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Explicit authorized company fixtures required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchElevenRealTests.BatchElevenAuthorizedRawMemoryAndColor()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1e0ce539-8b69-8150-b809-088ddb400891",
+        "name": "RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+        "display": "AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Explicit authorized company fixtures required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1cf8d42e-2bbd-8772-b1bc-abe3e16daa70",
+        "name": "RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+        "display": "AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Authorized local RAW corpus and evidence opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "10cddb56-10f8-86dd-85cc-309bf4e2ad17",
+        "name": "RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately",
+        "display": "BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Measurement opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "145fab40-79d9-8ec3-8cce-f72ecd8d2420",
+        "name": "RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+        "display": "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Authorized real JPEG corpus requires explicit opt-in.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.<>c.<<AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels>b__8_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1a537048-eebf-8442-9744-d4798bcb5137",
+        "name": "RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+        "display": "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Set PIXEL_TART_FILM_EVIDENCE to collect review evidence.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.FilmEffects_WriteTruePerEffectComparisonWhenRequested()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "119430ae-ae6b-8fea-a012-dc8764e1140b",
+        "name": "RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+        "display": "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Set review evidence paths.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.ReviewSheets_ComposeHonestProductionEvidenceWhenRequested()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "14c5a5ea-787a-8d3f-a403-00c51b4a1904",
+        "name": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet",
+        "display": "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Opt-in visual evidence is not enabled in this bounded regression run.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "10a99e9e-d4ec-8114-aa3c-9a9cb407a2af",
+        "name": "RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval",
+        "display": "BaselineGuard_RequiresExplicitApproval",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。BASELINE_MISSING: capture current UI before requesting approval.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      }
+    ],
+    "shards": [
+      "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\BASELINE_WPF_0\\run-20261020-211348-31e961d4",
+      "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\BASELINE_WPF_1\\run-20261020-211348-d9ef16d1",
+      "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\BASELINE_WPF_2\\run-20261020-211348-49db5333",
+      "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\BASELINE_WPF_3\\run-20261020-211348-6e999029"
+    ]
+  },
+  "finalWpf": {
+    "discovered": 1711,
+    "selected": 1711,
+    "obtained": 1711,
+    "counts": {
+      "Passed": 1690,
+      "NotExecuted": 21
+    },
+    "missing": [],
+    "extra": [],
+    "plannedEqualsDiscovered": true,
+    "obtainedEqualsDiscovered": true,
+    "timeouts": [],
+    "nonPass": [
+      {
+        "id": "1f7a3875-86de-832b-8fb3-8902fe5c8025",
+        "name": "RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+        "display": "AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Authorized local corpus opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "166fd959-7415-8c57-bfae-590de7fd3a3f",
+        "name": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+        "display": "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Set authorized batch06 corpus and evidence directory; not a synthetic test.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1adfc4c5-3127-82ba-9f05-60ac21918686",
+        "name": "RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests.CompanyRealRawProductAcceptanceGate",
+        "display": "CompanyRealRawProductAcceptanceGate",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。NOT RUN — real camera fixture directory unavailable; set PIXEL_TART_COMPANY_RAW_ROOT.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests.CompanyRealRawProductAcceptanceGate()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1ee59ed7-0e11-84dd-b7b9-2c0f2f56db30",
+        "name": "RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+        "display": "RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Opt-in automatic screenshot evidence; not native UI acceptance.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.<>c.<<RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1ab4f1e2-3600-8373-8f83-bce4b8cc1378",
+        "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+        "display": "ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Opt-in diagnostic: provide a new synthetic fixture and new output directory.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1193c5d9-b6ba-843e-b094-30dd8eebb51f",
+        "name": "RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts",
+        "display": "SeparatePureTiffEncodingValidationHashAndNodeCosts",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Performance output opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "1f208120-3063-8194-a3bb-0796b16d614f",
+        "name": "RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop",
+        "display": "OffscreenSyntheticKeyframesNeverLaunchDesktop",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Offscreen artifact output opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "12f603ee-dca1-8712-9ce9-e5e71dc52774",
+        "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+        "display": "AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Explicit authorized frozen-photo manifest is required; no directory scan.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.<>c.<<AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity>b__2_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "100f9d0f-6abb-8b71-bb7e-5274ecec1432",
+        "name": "RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+        "display": "CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Set an isolated current-run output directory.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "169fc6fe-ddc9-8b56-99d4-4b60579260aa",
+        "name": "RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback",
+        "display": "OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Reviewed official candidate opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "17e19016-3ab7-8b34-b64a-9120db541ae4",
+        "name": "RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference",
+        "display": "RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Authorized real measurement opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "119edc86-9493-8114-b875-4a7c38036899",
+        "name": "RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests.ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+        "display": "ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。No captured non-reparse P2 run root is available for the read-only integration probe.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests.ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "176b280f-878a-8eee-b882-6fa124b113cc",
+        "name": "RAWSelectionAssistant.WpfTests.BatchElevenRealTests.BatchElevenAuthorizedRawMemoryAndColor",
+        "display": "BatchElevenAuthorizedRawMemoryAndColor",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Explicit authorized company fixtures required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchElevenRealTests.BatchElevenAuthorizedRawMemoryAndColor()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1e0ce539-8b69-8150-b809-088ddb400891",
+        "name": "RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+        "display": "AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Explicit authorized company fixtures required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "10cddb56-10f8-86dd-85cc-309bf4e2ad17",
+        "name": "RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately",
+        "display": "BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Measurement opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1cf8d42e-2bbd-8772-b1bc-abe3e16daa70",
+        "name": "RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+        "display": "AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Authorized local RAW corpus and evidence opt-in required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "145fab40-79d9-8ec3-8cce-f72ecd8d2420",
+        "name": "RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+        "display": "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Authorized real JPEG corpus requires explicit opt-in.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.<>c.<<AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels>b__8_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "id": "1a537048-eebf-8442-9744-d4798bcb5137",
+        "name": "RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+        "display": "FilmEffects_WriteTruePerEffectComparisonWhenRequested",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Set PIXEL_TART_FILM_EVIDENCE to collect review evidence.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.FilmEffects_WriteTruePerEffectComparisonWhenRequested()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "119430ae-ae6b-8fea-a012-dc8764e1140b",
+        "name": "RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+        "display": "ReviewSheets_ComposeHonestProductionEvidenceWhenRequested",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Set review evidence paths.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.ReviewSheets_ComposeHonestProductionEvidenceWhenRequested()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "14c5a5ea-787a-8d3f-a403-00c51b4a1904",
+        "name": "RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet",
+        "display": "PremiumPrototype_ThreeRealPages_RenderReviewSet",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。Opt-in visual evidence is not enabled in this bounded regression run.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "id": "10a99e9e-d4ec-8114-aa3c-9a9cb407a2af",
+        "name": "RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval",
+        "display": "BaselineGuard_RequiresExplicitApproval",
+        "outcome": "NotExecuted",
+        "error": "Assert.Inconclusive 失败。BASELINE_MISSING: capture current UI before requesting approval.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      }
+    ],
+    "shards": [
+      "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\FINAL_WPF_0\\run-20261020-213940-8117f2e4",
+      "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\FINAL_WPF_1\\run-20261020-213940-4beebcd6",
+      "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\FINAL_WPF_2\\run-20261020-213940-31fe130d",
+      "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\FINAL_WPF_3\\run-20261020-213940-b46013f3"
+    ],
+    "status": "PARTIAL"
+  },
+  "suites": [
+    {
+      "label": "BASELINE_CORE",
+      "discovered": 1713,
+      "selected": 1713,
+      "obtained": 1713,
+      "passed": 1708,
+      "failed": 0,
+      "skipped": 5,
+      "assemblySha256": "d9b390377b7c084d3cc303ac7526bb021d39a741ec4ffec0aa9b90d656bc240b",
+      "runnerStatus": "FAILED",
+      "interpretation": "PARTIAL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\BASELINE_CORE\\run-20261020-211348-f0476e95\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "BASELINE_MODULES",
+      "discovered": 14,
+      "selected": 14,
+      "obtained": 14,
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "assemblySha256": "68d14464b09e03a4c4b913b79d2919bd303924137c7591b9e3632f1b6cfb2aeb",
+      "runnerStatus": "PASSED",
+      "interpretation": "PASS",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\BASELINE_MODULES\\run-20261020-211348-9490310d\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "BASELINE_WPF_0",
+      "discovered": 1710,
+      "selected": 440,
+      "obtained": 440,
+      "passed": 435,
+      "failed": 1,
+      "skipped": 4,
+      "assemblySha256": "6db848c19d5d3212d366314cb1ff1f7752189b8c17740c32304da1b3203e2add",
+      "runnerStatus": "FAILED",
+      "interpretation": "FAIL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\BASELINE_WPF_0\\run-20261020-211348-31e961d4\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "BASELINE_WPF_1",
+      "discovered": 1710,
+      "selected": 509,
+      "obtained": 509,
+      "passed": 502,
+      "failed": 0,
+      "skipped": 7,
+      "assemblySha256": "6db848c19d5d3212d366314cb1ff1f7752189b8c17740c32304da1b3203e2add",
+      "runnerStatus": "FAILED",
+      "interpretation": "PARTIAL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\BASELINE_WPF_1\\run-20261020-211348-d9ef16d1\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "BASELINE_WPF_2",
+      "discovered": 1710,
+      "selected": 385,
+      "obtained": 385,
+      "passed": 382,
+      "failed": 0,
+      "skipped": 3,
+      "assemblySha256": "6db848c19d5d3212d366314cb1ff1f7752189b8c17740c32304da1b3203e2add",
+      "runnerStatus": "FAILED",
+      "interpretation": "PARTIAL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\BASELINE_WPF_2\\run-20261020-211348-49db5333\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "BASELINE_WPF_3",
+      "discovered": 1710,
+      "selected": 376,
+      "obtained": 376,
+      "passed": 369,
+      "failed": 0,
+      "skipped": 7,
+      "assemblySha256": "6db848c19d5d3212d366314cb1ff1f7752189b8c17740c32304da1b3203e2add",
+      "runnerStatus": "FAILED",
+      "interpretation": "PARTIAL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\BASELINE_WPF_3\\run-20261020-211348-6e999029\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "REPRO_R3_REUSED_OUTPUT",
+      "discovered": 1710,
+      "selected": 14,
+      "obtained": 14,
+      "passed": 13,
+      "failed": 1,
+      "skipped": 0,
+      "assemblySha256": "6db848c19d5d3212d366314cb1ff1f7752189b8c17740c32304da1b3203e2add",
+      "runnerStatus": "FAILED",
+      "interpretation": "FAIL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\REPRO_R3_REUSED_OUTPUT\\run-20261020-212530-30758217\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "PLANNING_AFTER_1",
+      "discovered": 1710,
+      "selected": 1,
+      "obtained": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "assemblySha256": "091e15848cc3d8be38f96e29869d6f3e6164f7d6e75f2d6ff20acddc6f8391fc",
+      "runnerStatus": "FAILED",
+      "interpretation": "FAIL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\PLANNING_AFTER_1\\run-20261020-212938-7f858d88\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "PLANNING_AFTER_2",
+      "discovered": 1710,
+      "selected": 1,
+      "obtained": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "assemblySha256": "cc92851b94a5827944416ca82d8531fb8f7aeb7cf4d44ec86d0872c837bff338",
+      "runnerStatus": "FAILED",
+      "interpretation": "FAIL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\PLANNING_AFTER_2\\run-20261020-213049-66722ff5\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "PLANNING_AFTER_3",
+      "discovered": 1710,
+      "selected": 1,
+      "obtained": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "assemblySha256": "f62c41b5687c43eff62a0c7c2ec2e6dc57558b143d70d3b1f72fc77c2954e931",
+      "runnerStatus": "FAILED",
+      "interpretation": "FAIL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\PLANNING_AFTER_3\\run-20261020-213214-14ddc694\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "PLANNING_AFTER_4",
+      "discovered": 1710,
+      "selected": 1,
+      "obtained": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "assemblySha256": "2dfc2a6ec3822bbfbf1343f4bd052bf53f57c7cdf2c675c4ce4d571f0b93cbe3",
+      "runnerStatus": "PASSED",
+      "interpretation": "PASS",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\PLANNING_AFTER_4\\run-20261020-213331-f2929e7f\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "PLANNING_SPECIALTIES",
+      "discovered": 1710,
+      "selected": 60,
+      "obtained": 60,
+      "passed": 60,
+      "failed": 0,
+      "skipped": 0,
+      "assemblySha256": "2dfc2a6ec3822bbfbf1343f4bd052bf53f57c7cdf2c675c4ce4d571f0b93cbe3",
+      "runnerStatus": "PASSED",
+      "interpretation": "PASS",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\PLANNING_SPECIALTIES\\run-20261020-213445-7c416de5\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "R3_FIXED_REPEAT_1",
+      "discovered": 1711,
+      "selected": 15,
+      "obtained": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "assemblySha256": "5a3ee1d9e705fedc477b0c70f6f6d6f37c781b8850a4b29a6b4a72e07366f098",
+      "runnerStatus": "PASSED",
+      "interpretation": "PASS",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\R3_FIXED_REPEAT_1\\run-20261020-213707-cd0afb1e\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "R3_FIXED_REPEAT_2",
+      "discovered": 1711,
+      "selected": 15,
+      "obtained": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "assemblySha256": "5a3ee1d9e705fedc477b0c70f6f6d6f37c781b8850a4b29a6b4a72e07366f098",
+      "runnerStatus": "PASSED",
+      "interpretation": "PASS",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\R3_FIXED_REPEAT_2\\run-20261020-213735-809b8537\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "FINAL_CORE",
+      "discovered": 1713,
+      "selected": 1713,
+      "obtained": 1713,
+      "passed": 1708,
+      "failed": 0,
+      "skipped": 5,
+      "assemblySha256": "a62187501d2efab2fb7e8b88c64c108c6c0d9530bcf6d0af7fc2e55f3b94e5b8",
+      "runnerStatus": "FAILED",
+      "interpretation": "PARTIAL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\FINAL_CORE\\run-20261020-213940-741cadbb\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "FINAL_MODULES",
+      "discovered": 14,
+      "selected": 14,
+      "obtained": 14,
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "assemblySha256": "8dd89e05514bb5c08e58e93eb4f1c34c63879f895c64481fcc1c553680dbe83b",
+      "runnerStatus": "PASSED",
+      "interpretation": "PASS",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\FINAL_MODULES\\run-20261020-213940-3eba0337\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "FINAL_WPF_0",
+      "discovered": 1711,
+      "selected": 440,
+      "obtained": 440,
+      "passed": 436,
+      "failed": 0,
+      "skipped": 4,
+      "assemblySha256": "511453eba60d4d3fbe9162ef4212e550341e2df674c6112fdf022899f97b54b8",
+      "runnerStatus": "FAILED",
+      "interpretation": "PARTIAL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\FINAL_WPF_0\\run-20261020-213940-8117f2e4\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "FINAL_WPF_1",
+      "discovered": 1711,
+      "selected": 509,
+      "obtained": 509,
+      "passed": 502,
+      "failed": 0,
+      "skipped": 7,
+      "assemblySha256": "511453eba60d4d3fbe9162ef4212e550341e2df674c6112fdf022899f97b54b8",
+      "runnerStatus": "FAILED",
+      "interpretation": "PARTIAL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\FINAL_WPF_1\\run-20261020-213940-4beebcd6\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "FINAL_WPF_2",
+      "discovered": 1711,
+      "selected": 385,
+      "obtained": 385,
+      "passed": 382,
+      "failed": 0,
+      "skipped": 3,
+      "assemblySha256": "511453eba60d4d3fbe9162ef4212e550341e2df674c6112fdf022899f97b54b8",
+      "runnerStatus": "FAILED",
+      "interpretation": "PARTIAL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\FINAL_WPF_2\\run-20261020-213940-31fe130d\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "FINAL_WPF_3",
+      "discovered": 1711,
+      "selected": 377,
+      "obtained": 377,
+      "passed": 370,
+      "failed": 0,
+      "skipped": 7,
+      "assemblySha256": "511453eba60d4d3fbe9162ef4212e550341e2df674c6112fdf022899f97b54b8",
+      "runnerStatus": "FAILED",
+      "interpretation": "PARTIAL",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\FINAL_WPF_3\\run-20261020-213940-b46013f3\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "FINAL_PLANNING_SPECIALTIES",
+      "discovered": 1711,
+      "selected": 60,
+      "obtained": 60,
+      "passed": 60,
+      "failed": 0,
+      "skipped": 0,
+      "assemblySha256": "511453eba60d4d3fbe9162ef4212e550341e2df674c6112fdf022899f97b54b8",
+      "runnerStatus": "PASSED",
+      "interpretation": "PASS",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\FINAL_PLANNING_SPECIALTIES\\run-20261020-214425-110a0cec\\summary.json",
+      "timeouts": []
+    },
+    {
+      "label": "FINAL_R3_REPEAT",
+      "discovered": 1711,
+      "selected": 15,
+      "obtained": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "assemblySha256": "511453eba60d4d3fbe9162ef4212e550341e2df674c6112fdf022899f97b54b8",
+      "runnerStatus": "PASSED",
+      "interpretation": "PASS",
+      "evidence": "N:\\pixart\\Guangjing-Home-Batch1-20261020-210958\\FINAL_R3_REPEAT\\run-20261020-215230-a6f2e0b2\\summary.json",
+      "timeouts": []
+    }
+  ],
+  "finalStatus": "PARTIAL",
+  "releaseGate": "BLOCKED",
+  "fullSuiteRunnerExitExplanation": "Fail-closed runner returns FAILED for NotExecuted as well as Failed. Counts distinguish 0 actual failures from skip conditions.",
+  "publishedBindings": "FINAL_BINDINGS.json",
+  "physicalDesktop": "NOT_RUN"
+}

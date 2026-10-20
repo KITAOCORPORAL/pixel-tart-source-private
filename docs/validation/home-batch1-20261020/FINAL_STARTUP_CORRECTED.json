@@ -1,0 +1,93 @@
+{
+  "source": "2150e7ba5b3b612de0d128f6996a6c17f66ffdb8",
+  "status": "PASS identity only",
+  "primaryNavigation": [
+    {
+      "name": "工作台",
+      "automationId": "PrimaryNavigationWorkbench",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "素材库",
+      "automationId": "AssetLibraryNavigationButton",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "归片工作区",
+      "automationId": "PrimaryNavigationWorkflow",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "工作日历",
+      "automationId": "PrimaryNavigationWorkCalendar",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "策划中心",
+      "automationId": "PrimaryNavigationPlanning",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "联机拍摄",
+      "automationId": "PrimaryNavigationTether",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "暗室",
+      "automationId": "PrimaryNavigationReferenceColor",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "在线选片",
+      "automationId": "PrimaryNavigationOnlineSelection",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "摄影收支",
+      "automationId": "PrimaryNavigationFinance",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    },
+    {
+      "name": "项目历史",
+      "automationId": "PrimaryNavigationHistory",
+      "class": "Button",
+      "controlType": "ControlType.Button",
+      "enabled": false,
+      "offscreen": false
+    }
+  ],
+  "tenRoutesPresent": true,
+  "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+  "closedCleanly": true,
+  "inputSent": false,
+  "physicalMouse": "NOT_RUN",
+  "reason": "Recent user input and active other foreground app; no exclusive idle desktop. UIA peer tests do not count as physical clicks.",
+  "rawObservation": "HOME_STARTUP.json retains initial prefix-only count9, AssetLibrary uses separate ID and is counted in this corrected readback."
+}

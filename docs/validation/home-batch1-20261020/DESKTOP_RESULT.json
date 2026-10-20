@@ -1,0 +1,46 @@
+{
+  "requested": [
+    "工作台",
+    "素材库",
+    "归片",
+    "策划中心",
+    "暗室"
+  ],
+  "results": [
+    {
+      "module": "工作台",
+      "enter": "NOT_RUN",
+      "return": "NOT_RUN",
+      "physicalMouse": "NOT_RUN"
+    },
+    {
+      "module": "素材库",
+      "enter": "NOT_RUN",
+      "return": "NOT_RUN",
+      "physicalMouse": "NOT_RUN"
+    },
+    {
+      "module": "归片",
+      "enter": "NOT_RUN",
+      "return": "NOT_RUN",
+      "physicalMouse": "NOT_RUN"
+    },
+    {
+      "module": "策划中心",
+      "enter": "NOT_RUN",
+      "return": "NOT_RUN",
+      "physicalMouse": "NOT_RUN"
+    },
+    {
+      "module": "暗室",
+      "enter": "NOT_RUN",
+      "return": "NOT_RUN",
+      "physicalMouse": "NOT_RUN"
+    }
+  ],
+  "reason": "Read-only idle observation found active foreground Comfy Desktop and idleMs=6766. Exclusive idle desktop ownership not established; no attempt to exit tutorial or send input. In-process production-peer tests are automated, not physical desktop evidence.",
+  "evidence": "DESKTOP_IDLE_OBSERVATION.json",
+  "inputSent": false,
+  "tutorialExit": "NOT_RUN",
+  "status": "NOT_RUN"
+}
