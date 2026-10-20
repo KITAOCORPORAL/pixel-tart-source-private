@@ -12,14 +12,31 @@ public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double Editi
     bool AuxiliaryOpen = true, bool EditingOpen = true, int AuxiliaryMode = 0, int ToolMode = 0,
     string FilmstripDock = "Bottom", string FilmstripView = "Grid", bool FilmstripOpen = true)
 {
+    public DarkroomPanelLayout? Darkroom { get; init; }
     public ColorStudioLayout Normalize() => this with
     {
+        Darkroom = Darkroom?.Normalize(),
         AuxiliaryWidth = double.IsFinite(AuxiliaryWidth) ? Math.Clamp(AuxiliaryWidth, 240, 440) : 290,
         EditingWidth = double.IsFinite(EditingWidth) ? Math.Clamp(EditingWidth, 312, 440) : 340,
         AuxiliaryMode = Math.Clamp(AuxiliaryMode, 0, 3), ToolMode = Math.Clamp(ToolMode, 0, 4),
         FilmstripDock = FilmstripDock == "Right" ? "Right" : "Bottom",
         FilmstripView = FilmstripView is "List" or "Slideshow" ? FilmstripView : "Grid"
     };
+}
+
+
+/// <summary>Presentation only; independent of the legacy editor and all image definitions.</summary>
+public sealed record DarkroomPanelLayout(double Width = 304, bool Open = true, int Tab = 0,
+    bool Solo = false, string[]? SectionOrder = null, string[]? CollapsedSections = null)
+{
+    public DarkroomPanelLayout Normalize() => this with
+    {
+        Width = double.IsFinite(Width) ? Math.Clamp(Width, 280, 460) : 304,
+        Tab = Math.Clamp(Tab, 0, 4),
+        SectionOrder = Clean(SectionOrder), CollapsedSections = Clean(CollapsedSections)
+    };
+    private static string[]? Clean(string[]? values) => values?.Where(value =>
+        !string.IsNullOrWhiteSpace(value) && value.Length <= 80).Distinct(StringComparer.Ordinal).Take(128).ToArray();
 }
 
 public sealed record ColorStudioSessionDocument(IReadOnlyList<ColorStudioSessionTarget> Targets, Guid? ActiveTargetId,

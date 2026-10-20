@@ -15,6 +15,8 @@ public partial class PhotoGradePageView:UserControl
   PhotoViewport.PreferDisplayedDimensions=true;
   PhotoViewport.State.Changed+=(_,_)=>DrawGuides();
   AddHandler(Expander.ExpandedEvent,new RoutedEventHandler(SectionExpanded));
+  AddHandler(Expander.CollapsedEvent,new RoutedEventHandler(SectionCollapsed));
+  InitializePanelLayout();
   PreviewKeyDown+=(_,e)=>
   {
    if(Keyboard.Modifiers!=ModifierKeys.Control)return;
@@ -33,7 +35,7 @@ public partial class PhotoGradePageView:UserControl
   // Weak subscription also covers controls constructed but never attached/unloaded.
   if(model is not null)PropertyChangedEventManager.AddHandler(model,Changed,string.Empty);
 
-  Refresh();UpdateZones();
+  RestorePanelLayout();Refresh();UpdateZones();
  }
  private void Detach(bool cancel)
  {
@@ -63,6 +65,7 @@ public partial class PhotoGradePageView:UserControl
   for(int n=0;n<panes.Length;n++)panes[n].Visibility=i==n?Visibility.Visible:Visibility.Collapsed;
   if(FilmAction is not null)FilmAction.Visibility=i==1?Visibility.Visible:Visibility.Collapsed;if(PanelTitle is not null)PanelTitle.Text=new[]{"调整","光片","图层","风格","变体"}[Math.Clamp(i,0,4)];
   if(i==1&&model is{} workspace&&workspace.ActiveTarget?.RawDefinition is null)workspace.InstantEngineVersion="V3";
+  SavePanelLayout();
  }
  private void FileMenu(object sender,RoutedEventArgs e)=>Menu(sender,("导入照片",model?.ChooseTargetCommand),("打开项目",model?.OpenSessionCommand),("保存项目",model?.SaveSessionCommand));
  private void EditMenu(object sender,RoutedEventArgs e)=>Menu(sender,("撤销",model?.PhotoGradeUndoCommand),("重做",model?.PhotoGradeRedoCommand));
@@ -73,7 +76,7 @@ public partial class PhotoGradePageView:UserControl
  private void CompareMenu(object sender,RoutedEventArgs e){if(model is null)return;var m=new ContextMenu();foreach(var c in model.PhotographerComparisonModes){var i=new MenuItem{Header=c.Label};i.Click+=(_,_)=>model.PhotographerComparisonValue=c.Value;m.Items.Add(i);}m.PlacementTarget=(UIElement)sender;m.IsOpen=true;}
  private void ShowVariants(object sender,RoutedEventArgs e)=>EditModes.SelectedIndex=4;
  private void ShowAdjust(object sender,RoutedEventArgs e)=>EditModes.SelectedIndex=0;
- private void TogglePanel(object sender,RoutedEventArgs e){bool on=RightPanel.Visibility==Visibility.Visible;RightPanel.Visibility=on?Visibility.Collapsed:Visibility.Visible;PanelColumn.MinWidth=on?0:280;PanelColumn.Width=new GridLength(on?0:304);SplitterColumn.Width=new GridLength(on?0:4);}
+ private void TogglePanel(object sender,RoutedEventArgs e){SetPanelOpen(RightPanel.Visibility!=Visibility.Visible);SavePanelLayout();}
  private void SelectTool(object sender,RoutedEventArgs e){activeTool="选择";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Arrow;}
  private void HandTool(object sender,RoutedEventArgs e){activeTool="抓手";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Hand;}
  private void ZoomTool(object sender,RoutedEventArgs e){activeTool="缩放";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Cross;}
@@ -82,6 +85,7 @@ public partial class PhotoGradePageView:UserControl
  private void OpenExport(object sender,RoutedEventArgs e){if(model is null)return;var window=new DarkroomExportDialog(model){Owner=Window.GetWindow(this)};window.ShowDialog();}
  private void Changed(object? sender,PropertyChangedEventArgs e)
  {
+  if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.Layout)&&!savingPanelLayout)RestorePanelLayout();
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PhotoMaskColor))Refresh();
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PreviewHistogram))UpdateZones();
   // A newly imported ordinary photo restores the historical default engine. The
@@ -89,16 +93,29 @@ public partial class PhotoGradePageView:UserControl
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.InstantEngineVersion)&&model?.ActiveTarget is{} target&&target.RawDefinition is null&&EditModes.SelectedItem==PolaroidTab&&model.InstantEngineVersion!="V3")model.InstantEngineVersion="V3";
  }
  private bool switchingVariant;
+ private (Guid Target,Guid Version)? pendingVariant;
  private async void VariantPicked(object sender,SelectionChangedEventArgs e)
  {
   var workspace=model;
-  if(switchingVariant||!ReferenceEquals(e.Source,sender)||workspace is null||e.AddedItems.Count==0||
-     workspace.IsLoading||workspace.IsExporting||workspace.IsInstantGenerating||
+  if(!ReferenceEquals(e.Source,sender)||workspace is null||e.AddedItems.Count==0||
      HistoryVersions.SelectedItem is not StudioEditVersion version||version.Archived||
-     workspace.ActiveTarget is not {} target||target.ActiveEditVersionId==version.Id||!target.EditVersions.Contains(version))return;
+     workspace.ActiveTarget is not {} target||target.ActiveEditVersionId==version.Id||!target.EditVersions.Contains(version)||
+     workspace.IsExporting||workspace.IsInstantGenerating)return;
+  if(workspace.IsLoading&&!switchingVariant)return;
+  pendingVariant=(target.Id,version.Id);
+  if(switchingVariant)return;
   switchingVariant=true;
-  try{await workspace.SwitchEditVersionAsync(version.Id);}
-  finally{switchingVariant=false;}
+  try
+  {
+   while(pendingVariant is {} next)
+   {
+    pendingVariant=null;
+    if(!ReferenceEquals(model,workspace)||workspace.ActiveTarget is not {} current||current.Id!=next.Target||
+       workspace.IsExporting||workspace.IsInstantGenerating||!current.EditVersions.Any(v=>v.Id==next.Version&&!v.Archived))break;
+    if(current.ActiveEditVersionId!=next.Version)await workspace.SwitchEditVersionAsync(next.Version);
+   }
+  }
+  finally{switchingVariant=false;pendingVariant=null;}
  }
  private void ApplyScheme(object sender,RoutedEventArgs e){if(model is null)return;model.Editor.RequestApplySchemeCommand.Execute(null);if(model.Editor.SchemeSwitchOpen){var choice=MessageBox.Show(Window.GetWindow(this),"当前调整未保存。保存当前方案后切换？选择否将直接切换；取消保持当前照片。","切换色彩方案",MessageBoxButton.YesNoCancel);if(choice==MessageBoxResult.Yes)model.Editor.SaveAndApplySchemeCommand.Execute(null);else if(choice==MessageBoxResult.No)model.Editor.DiscardAndApplySchemeCommand.Execute(null);else model.Editor.CancelSchemeSwitchCommand.Execute(null);}}
  private string activeTool="选择";private bool solo;
@@ -111,15 +128,30 @@ public partial class PhotoGradePageView:UserControl
   var fractions=GuideChoice.SelectedIndex==1?new[]{1d/3,2d/3}:new[]{.5};foreach(var f in fractions){Line(rect.Left+rect.Width*f,rect.Top,rect.Left+rect.Width*f,rect.Bottom);Line(rect.Left,rect.Top+rect.Height*f,rect.Right,rect.Top+rect.Height*f);}
   void Line(double x1,double y1,double x2,double y2){if(!double.IsFinite(x1+y1+x2+y2))return;GuideOverlay.Children.Add(new System.Windows.Shapes.Line{X1=x1,Y1=y1,X2=x2,Y2=y2,Stroke=new SolidColorBrush(Color.FromArgb(120,255,255,255)),StrokeThickness=1});}
  }
- private void SectionExpanded(object sender,RoutedEventArgs e){if(!solo||e.OriginalSource is not Expander chosen)return;if(VisualTreeHelper.GetParent(chosen) is not StackPanel group)return;foreach(var section in group.Children.OfType<Expander>())if(section!=chosen)section.IsExpanded=false;}
+ private void SectionExpanded(object sender,RoutedEventArgs e)
+ {
+  if(restoringPanelLayout||e.OriginalSource is not Expander chosen)return;
+  if(solo&&VisualTreeHelper.GetParent(chosen) is StackPanel group)
+   foreach(var section in group.Children.OfType<Expander>())if(section!=chosen)section.IsExpanded=false;
+  SavePanelLayout();
+ }
+ private void SectionCollapsed(object sender,RoutedEventArgs e){if(!restoringPanelLayout)SavePanelLayout();}
  private void PanelMenu(object sender,RoutedEventArgs e)
  {
-  var menu=new ContextMenu();var single=new MenuItem{Header="Solo 模式 · 每次只展开一个区块",IsCheckable=true,IsChecked=solo};single.Click+=(_,_)=>solo=single.IsChecked;menu.Items.Add(single);
+  var menu=new ContextMenu();var single=new MenuItem{Header="Solo 模式 · 每次只展开一个区块",IsCheckable=true,IsChecked=solo};
+  single.Click+=(_,_)=>SetSolo(single.IsChecked);menu.Items.Add(single);
   void Add(string label,Action action){var item=new MenuItem{Header=label};item.Click+=(_,_)=>action();menu.Items.Add(item);}
-  var pane=new[]{AdjustmentScroll,PaperScroll,LayersScroll,StylesScroll,VariantsScroll}[Math.Clamp(EditModes.SelectedIndex,0,4)];
-  Add("全部展开",()=>{foreach(var section in (pane.Content as StackPanel)?.Children.OfType<Expander>()??[])section.IsExpanded=true;});
-  Add("全部折叠",()=>{foreach(var section in (pane.Content as StackPanel)?.Children.OfType<Expander>()??[])section.IsExpanded=false;});
-  menu.Items.Add(new Separator());Add("面板宽度 · 304 px",()=>PanelColumn.Width=new GridLength(304));Add("隐藏工具面板",()=>TogglePanel(sender,e));menu.PlacementTarget=(UIElement)sender;menu.IsOpen=true;
+  Add("全部展开",()=>SetSectionsExpanded(true));Add("全部折叠",()=>SetSectionsExpanded(false));
+  var order=new MenuItem{Header="区块顺序"};
+  foreach(var section in CurrentPanelGroup()?.Children.OfType<Expander>()??[])
+  {
+   var row=new MenuItem{Header=section.Header};var up=new MenuItem{Header="上移"};var down=new MenuItem{Header="下移"};
+   var group=(StackPanel)section.Parent;up.IsEnabled=group.Children.IndexOf(section)>0;down.IsEnabled=group.Children.IndexOf(section)<group.Children.Count-1;
+   up.Click+=(_,_)=>MoveSection(section,-1);down.Click+=(_,_)=>MoveSection(section,1);row.Items.Add(up);row.Items.Add(down);order.Items.Add(row);
+  }
+  order.IsEnabled=order.Items.Count>0;menu.Items.Add(order);
+  menu.Items.Add(new Separator());Add("面板宽度 · 304 px",()=>{PanelColumn.Width=new GridLength(304);SavePanelLayout();});
+  Add("隐藏工具面板",()=>TogglePanel(sender,e));menu.PlacementTarget=(UIElement)sender;menu.IsOpen=true;
  }
  private void RatePhoto(object sender,RoutedEventArgs e){if(sender is Button{DataContext:ReferenceTargetItem target,Tag:string number}&&int.TryParse(number,out var rating))target.Rating=rating;}
 

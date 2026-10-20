@@ -151,6 +151,57 @@ public sealed class R3CommandLineReviewTests
    ((ComboBox)page.FindName("GuideChoice")).SelectedIndex=1;Layout(page);page.DataContext=null;
   }finally{Directory.Delete(folder,true);}
  });
+ [TestMethod] public Task PanelLayoutRoundTripsWithoutChangingImageDefinitions()=>RunSta(async()=>
+ {
+  EnsureTestApplication();var folder=Folder();try{
+   using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(folder));await vm.LoadTargetAsync(Input(folder));
+   var before=JsonSerializer.Serialize(vm.ActiveTarget!.RawDefinition);
+   var page=new PhotoGradePageView{DataContext=vm};Layout(page);
+   var group=(StackPanel)((ScrollViewer)page.FindName("AdjustmentScroll")).Content;
+   var first=group.Children.OfType<Expander>().First();
+   Invoke(page,"MoveSection",first,1);Invoke(page,"SetSolo",true);group.Children.OfType<Expander>().Last().IsExpanded=true;
+   var panelColumn=(ColumnDefinition)page.FindName("PanelColumn");panelColumn.Width=new GridLength(388);Layout(page);
+   ((TabControl)page.FindName("EditModes")).SelectedIndex=4;
+   Invoke(page,"SetPanelOpen",false);Invoke(page,"SavePanelLayout");
+   var expected=vm.Layout.Darkroom!;Assert.IsFalse(expected.Open);Assert.IsTrue(expected.Solo);Assert.AreEqual(4,expected.Tab);Assert.AreEqual(388d,expected.Width);
+   Assert.AreNotEqual((string)first.Tag,expected.SectionOrder![0]);
+   var path=Path.Combine(folder,"panel.ptstudio.json");await vm.SaveSessionAsync(path);
+   using var reopened=new ReferenceColorWorkspaceViewModel(new Dialogs(folder));await reopened.LoadSessionAsync(path);
+   Assert.AreEqual(JsonSerializer.Serialize(expected),JsonSerializer.Serialize(reopened.Layout.Darkroom));
+   Assert.AreEqual(before,JsonSerializer.Serialize(reopened.ActiveTarget!.RawDefinition));
+   var restored=new PhotoGradePageView{DataContext=reopened};Layout(restored);
+   Assert.AreEqual(4,((TabControl)restored.FindName("EditModes")).SelectedIndex);
+   Assert.AreEqual(Visibility.Collapsed,((Grid)restored.FindName("RightPanel")).Visibility);
+   Invoke(restored,"SetPanelOpen",true);Layout(restored);Assert.AreEqual(388d,((ColumnDefinition)restored.FindName("PanelColumn")).Width.Value);
+   var restoredGroup=(StackPanel)((ScrollViewer)restored.FindName("AdjustmentScroll")).Content;
+   Assert.AreEqual(expected.SectionOrder[0],(string)restoredGroup.Children.OfType<Expander>().First().Tag);
+   Assert.AreEqual(1,restoredGroup.Children.OfType<Expander>().Count(s=>s.IsExpanded));
+   page.DataContext=null;restored.DataContext=null;
+  }finally{Directory.Delete(folder,true);}
+ });
+ [TestMethod] public Task ExpandAllExitsSoloAndMenuSurvivesVariantsTab()=>RunSta(()=>
+ {
+  EnsureTestApplication();using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(Path.GetTempPath()));var page=new PhotoGradePageView{DataContext=vm};Layout(page);
+  Invoke(page,"SetSolo",true);Invoke(page,"SetSectionsExpanded",true);
+  var sections=((StackPanel)((ScrollViewer)page.FindName("AdjustmentScroll")).Content).Children.OfType<Expander>().ToArray();
+  Assert.IsTrue(sections.All(s=>s.IsExpanded));Assert.IsFalse(vm.Layout.Darkroom!.Solo);
+  Invoke(page,"SetSectionsExpanded",false);Assert.IsTrue(sections.All(s=>!s.IsExpanded));
+  ((TabControl)page.FindName("EditModes")).SelectedIndex=4;Layout(page);
+  var options=(Button)page.FindName("PanelOptions");Assert.AreEqual(0,Grid.GetRow(options));Assert.AreSame(page.FindName("RightPanel"),options.Parent);
+  Assert.AreEqual(Visibility.Visible,options.Visibility);
+  page.DataContext=null;return Task.CompletedTask;
+ });
+ [TestMethod] public Task OldAndMalformedPanelLayoutsRemainCompatible()=>RunSta(()=>
+ {
+  EnsureTestApplication();var old=JsonSerializer.Deserialize<ColorStudioLayout>("{}");Assert.IsNull(old!.Darkroom);
+  var malformed=(new ColorStudioLayout{Darkroom=new DarkroomPanelLayout(double.NaN,Tab:100,SectionOrder:["", "Exposure", "Exposure"],CollapsedSections:["old-unknown"])}).Normalize();
+  Assert.AreEqual(304d,malformed.Darkroom!.Width);Assert.AreEqual(4,malformed.Darkroom.Tab);Assert.AreEqual(1,malformed.Darkroom.SectionOrder!.Length);
+  using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(Path.GetTempPath()));var page=new PhotoGradePageView{DataContext=vm};Layout(page);
+  vm.Layout=malformed;Layout(page);Assert.AreEqual(4,((TabControl)page.FindName("EditModes")).SelectedIndex);
+  vm.Layout=new ColorStudioLayout();Layout(page);Assert.AreEqual(0,((TabControl)page.FindName("EditModes")).SelectedIndex);
+  page.DataContext=null;return Task.CompletedTask;
+ });
+ static void Invoke(PhotoGradePageView page,string name,params object[] args)=>typeof(PhotoGradePageView).GetMethod(name,System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic)!.Invoke(page,args);
  static string Folder(){var p=Path.Combine(Path.GetTempPath(),"R3Cli-"+Guid.NewGuid());Directory.CreateDirectory(p);return p;}
  static BitmapSource Bitmap(int w,int h){var b=BitmapSource.Create(w,h,96,96,PixelFormats.Rgb24,null,new byte[w*h*3],w*3);b.Freeze();return b;}
  static string Input(string folder){var p=Path.Combine(folder,"test.png");var bytes=Enumerable.Range(0,160*120*3).Select(x=>(byte)(20+x%210)).ToArray();var b=BitmapSource.Create(160,120,96,96,PixelFormats.Rgb24,null,bytes,480);StudioQuickExport.Encode(b,p,p,StudioExportFormat.Png);return p;}
