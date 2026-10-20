@@ -1,0 +1,131 @@
+{
+  "sourceSha": "07c11d750d927e8cdd1b5d6f42800fae0bbf0f44",
+  "timezone": "Europe/Berlin",
+  "exe": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/app-panel-review/KitaoPhotoSelector.exe",
+  "hashes": [
+    {
+      "file": "KitaoPhotoSelector.exe",
+      "sha256": "8b47181f48f4a17118030a317bf710cdd9c6f9580c465edf28d994ae1bc3414c"
+    },
+    {
+      "file": "KitaoPhotoSelector.dll",
+      "sha256": "18bc890d7c578a51d9f18d403f21c8e5354f8b0905a8f6bf21257cfde75fee31"
+    },
+    {
+      "file": "RAWSelectionAssistant.Core.dll",
+      "sha256": "f29b23a821f3d47b7599f7af9c12a20652c6e8c2e4dd94ea2afdc4b4c5ce489d"
+    }
+  ],
+  "wpfBindings": [
+    {
+      "name": "ComputeSharp.Core.dll",
+      "publish": "4678a441386fc3d58a32756ca456db9a526ad672967d885a209523132273fd25",
+      "test": "4678a441386fc3d58a32756ca456db9a526ad672967d885a209523132273fd25"
+    },
+    {
+      "name": "ComputeSharp.dll",
+      "publish": "c06fb300af75cb12e41875ca00ea176f1ca1be0b697b741f6c9606a3f2d65240",
+      "test": "c06fb300af75cb12e41875ca00ea176f1ca1be0b697b741f6c9606a3f2d65240"
+    },
+    {
+      "name": "DocumentFormat.OpenXml.dll",
+      "publish": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+      "test": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499"
+    },
+    {
+      "name": "DocumentFormat.OpenXml.Framework.dll",
+      "publish": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+      "test": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae"
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "publish": "18bc890d7c578a51d9f18d403f21c8e5354f8b0905a8f6bf21257cfde75fee31",
+      "test": "18bc890d7c578a51d9f18d403f21c8e5354f8b0905a8f6bf21257cfde75fee31"
+    },
+    {
+      "name": "MetadataExtractor.dll",
+      "publish": "2d4d43f4f10b0655fafc3a145dbd4dcc79d81459335bb4d8a324ce2aed2f9ec8",
+      "test": "2d4d43f4f10b0655fafc3a145dbd4dcc79d81459335bb4d8a324ce2aed2f9ec8"
+    },
+    {
+      "name": "Microsoft.Data.Sqlite.dll",
+      "publish": "1078d41c6c0f2cee48a8b706e3a54ce145705993f19f703d2b3bdf2abcc59088",
+      "test": "1078d41c6c0f2cee48a8b706e3a54ce145705993f19f703d2b3bdf2abcc59088"
+    },
+    {
+      "name": "Microsoft.Windows.SDK.NET.dll",
+      "publish": "0ec371d93798852e36461c8adddbeadce0f963a04752f0b64e54fe19c1c834a7",
+      "test": "0ec371d93798852e36461c8adddbeadce0f963a04752f0b64e54fe19c1c834a7"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "publish": "8eb30a12bc6de89c93947ce961464573d377dbd33dc210673a32a7ce79f257f3",
+      "test": "8eb30a12bc6de89c93947ce961464573d377dbd33dc210673a32a7ce79f257f3"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "publish": "2a9469549ed9fd5192095b643525091b0314915f1aa1cf5982a44123b08d17e7",
+      "test": "2a9469549ed9fd5192095b643525091b0314915f1aa1cf5982a44123b08d17e7"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "publish": "03399ed38fc4138e13184370ec5e239f81ae08268291dece5b671342c79c93af",
+      "test": "03399ed38fc4138e13184370ec5e239f81ae08268291dece5b671342c79c93af"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "publish": "32d24df3803f0557781f2ca61b251b73ff32f8f4453b7a70d580bf33af1eaab6",
+      "test": "32d24df3803f0557781f2ca61b251b73ff32f8f4453b7a70d580bf33af1eaab6"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "publish": "478536035429bde09c965c8e1b47f177f17db64aaf497ef6d1bdcecf5e9ddb4f",
+      "test": "478536035429bde09c965c8e1b47f177f17db64aaf497ef6d1bdcecf5e9ddb4f"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "publish": "f29b23a821f3d47b7599f7af9c12a20652c6e8c2e4dd94ea2afdc4b4c5ce489d",
+      "test": "f29b23a821f3d47b7599f7af9c12a20652c6e8c2e4dd94ea2afdc4b4c5ce489d"
+    },
+    {
+      "name": "Sdcb.LibRaw.dll",
+      "publish": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3",
+      "test": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3"
+    },
+    {
+      "name": "SQLitePCLRaw.batteries_v2.dll",
+      "publish": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b",
+      "test": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b"
+    },
+    {
+      "name": "SQLitePCLRaw.core.dll",
+      "publish": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84",
+      "test": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84"
+    },
+    {
+      "name": "SQLitePCLRaw.provider.e_sqlite3.dll",
+      "publish": "eb6696e55882c3000333146b1cd4970439601e11fdedae941105ca921f615bd6",
+      "test": "eb6696e55882c3000333146b1cd4970439601e11fdedae941105ca921f615bd6"
+    },
+    {
+      "name": "WinRT.Runtime.dll",
+      "publish": "bcf3a14e8712a90837fc5c0d8c8a24696af2bd7f74e9767597ec81ededfb23db",
+      "test": "bcf3a14e8712a90837fc5c0d8c8a24696af2bd7f74e9767597ec81ededfb23db"
+    },
+    {
+      "name": "XmpCore.dll",
+      "publish": "e88feb22528a78b294b6cfd9390b8ce8a5b27db025ff976799df2322bde51b58",
+      "test": "e88feb22528a78b294b6cfd9390b8ce8a5b27db025ff976799df2322bde51b58"
+    }
+  ],
+  "coreBinding": {
+    "publish": "f29b23a821f3d47b7599f7af9c12a20652c6e8c2e4dd94ea2afdc4b4c5ce489d",
+    "test": "f29b23a821f3d47b7599f7af9c12a20652c6e8c2e4dd94ea2afdc4b4c5ce489d"
+  },
+  "desktopStarted": true,
+  "desktopWindow": {
+    "app": "process:E:\\Kitao-Deliveries\\darkroom-r3-company-20261020\\app-panel-review\\KitaoPhotoSelector.exe",
+    "id": 18224490,
+    "title": "光镜 · 暗室 R3 未完成 · 视觉修复预览"
+  }
+}

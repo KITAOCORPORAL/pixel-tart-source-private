@@ -1,0 +1,19 @@
+{
+  "label": "FINAL_R3CommandLineReviewTests",
+  "args": [
+    "test",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "--no-build",
+    "--no-restore",
+    "--filter",
+    "FullyQualifiedName~R3CommandLineReviewTests",
+    "--logger",
+    "trx;LogFileName=R3CommandLineReviewTests.trx",
+    "--results-directory",
+    "E:/Kitao-Deliveries/darkroom-r3-company-20261020/resume-20261020/final/R3CommandLineReviewTests"
+  ],
+  "pid": 40124,
+  "exit": 0
+}

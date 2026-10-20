@@ -1,0 +1,19 @@
+{
+  "label": "FINAL_CORE",
+  "args": [
+    "test",
+    "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
+    "-c",
+    "Release",
+    "--no-build",
+    "--no-restore",
+    "--filter",
+    "FullyQualifiedName~ProfessionalRawPipelineTests|FullyQualifiedName~ProfessionalRawTiffTests|FullyQualifiedName~ColorStudioSessionStateTests|FullyQualifiedName~ColorStudioStackTests|FullyQualifiedName~BatchNineInstantFilmTests",
+    "--logger",
+    "trx;LogFileName=core.trx",
+    "--results-directory",
+    "E:/Kitao-Deliveries/darkroom-r3-company-20261020/resume-20261020/final-core"
+  ],
+  "pid": 14180,
+  "exit": 0
+}

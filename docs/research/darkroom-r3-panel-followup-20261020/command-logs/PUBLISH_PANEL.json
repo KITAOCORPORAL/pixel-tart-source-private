@@ -1,0 +1,24 @@
+{
+  "label": "PUBLISH_PANEL",
+  "args": [
+    "publish",
+    "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+    "-c",
+    "Release",
+    "-r",
+    "win-x64",
+    "--self-contained",
+    "true",
+    "--no-restore",
+    "-p:PhotographerTrialBuild=true",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "-p:SourceRevisionId=07c11d750d927e8cdd1b5d6f42800fae0bbf0f44",
+    "--disable-build-servers",
+    "-m:1",
+    "-nr:false",
+    "-o",
+    "E:/Kitao-Deliveries/darkroom-r3-company-20261020/app-panel-review"
+  ],
+  "pid": 42460,
+  "exit": 0
+}

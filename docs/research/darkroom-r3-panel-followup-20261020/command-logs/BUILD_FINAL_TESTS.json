@@ -1,0 +1,16 @@
+{
+  "label": "BUILD_FINAL_TESTS",
+  "args": [
+    "build",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "--no-restore",
+    "-p:PhotographerTrialBuild=true",
+    "--disable-build-servers",
+    "-m:1",
+    "-nr:false"
+  ],
+  "pid": 38136,
+  "exit": 0
+}

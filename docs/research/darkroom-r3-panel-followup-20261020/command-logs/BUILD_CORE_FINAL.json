@@ -1,0 +1,15 @@
+{
+  "label": "BUILD_CORE_FINAL",
+  "args": [
+    "build",
+    "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
+    "-c",
+    "Release",
+    "--no-restore",
+    "--disable-build-servers",
+    "-m:1",
+    "-nr:false"
+  ],
+  "pid": 41004,
+  "exit": 0
+}

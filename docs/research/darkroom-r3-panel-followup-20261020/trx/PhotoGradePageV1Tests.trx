@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="e5e28412-fd41-400e-9fe4-46452974308e" name="@PC-20250309WEIZ 2026-10-20 15:23:42" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-20T15:23:42.8941338+08:00" queuing="2026-10-20T15:23:42.8941342+08:00" start="2026-10-20T15:23:39.5568563+08:00" finish="2026-10-20T15:24:06.2071596+08:00" />
+  <TestSettings name="default" id="24cf0b22-3579-49d7-8e61-6650d6c1445e">
+    <Deployment runDeploymentRoot="_PC-20250309WEIZ_2026-10-20_15_23_42" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="f8d151b6-e4ec-4d72-8f74-1aa0c27db4c4" testId="1f5e92a1-4891-8512-abc8-13f05ace7b0a" testName="RealPageOpenAdjustHistorySaveSyncAndExportKeepsLegacyPage" computerName="PC-20250309WEIZ" duration="00:00:01.4703116" startTime="2026-10-20T15:23:40.0419522+08:00" endTime="2026-10-20T15:23:41.5280542+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f8d151b6-e4ec-4d72-8f74-1aa0c27db4c4" />
+    <UnitTestResult executionId="fce000b9-7ad4-413e-b0df-38e6642b0311" testId="12f603ee-dca1-8712-9ce9-e5e71dc52774" testName="AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity" computerName="PC-20250309WEIZ" duration="00:00:21.4169769" startTime="2026-10-20T15:23:42.6566702+08:00" endTime="2026-10-20T15:24:04.0737616+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fce000b9-7ad4-413e-b0df-38e6642b0311" />
+    <UnitTestResult executionId="50be3c36-858f-4a4d-af31-1dbad20b4413" testId="16627443-d328-8418-bfae-f2f06073dfa9" testName="SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters" computerName="PC-20250309WEIZ" duration="00:00:00.2030720" startTime="2026-10-20T15:24:04.0747271+08:00" endTime="2026-10-20T15:24:04.2779395+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="50be3c36-858f-4a4d-af31-1dbad20b4413" />
+    <UnitTestResult executionId="b6d1dd15-04b9-4366-98dd-a0eaaa437dd6" testId="1e0984bc-ff7d-8b71-81bc-85b9d4d0d09b" testName="RepeatedPageLifecycleAndDraftDragsDoNotStartObsoleteRenders" computerName="PC-20250309WEIZ" duration="00:00:01.8302823" startTime="2026-10-20T15:24:04.2779900+08:00" endTime="2026-10-20T15:24:06.1094238+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b6d1dd15-04b9-4366-98dd-a0eaaa437dd6" />
+    <UnitTestResult executionId="2ae57473-8630-46c0-86e7-351c634a7564" testId="13f91347-a5c4-8996-b2cf-8c221f2ec6e0" testName="FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents" computerName="PC-20250309WEIZ" duration="00:00:01.1244035" startTime="2026-10-20T15:23:41.5314929+08:00" endTime="2026-10-20T15:23:42.6562239+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2ae57473-8630-46c0-86e7-351c634a7564" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16627443-d328-8418-bfae-f2f06073dfa9">
+      <Execution id="50be3c36-858f-4a4d-af31-1dbad20b4413" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests" name="SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters" />
+    </UnitTest>
+    <UnitTest name="RealPageOpenAdjustHistorySaveSyncAndExportKeepsLegacyPage" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1f5e92a1-4891-8512-abc8-13f05ace7b0a">
+      <Execution id="f8d151b6-e4ec-4d72-8f74-1aa0c27db4c4" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests" name="RealPageOpenAdjustHistorySaveSyncAndExportKeepsLegacyPage" />
+    </UnitTest>
+    <UnitTest name="RepeatedPageLifecycleAndDraftDragsDoNotStartObsoleteRenders" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1e0984bc-ff7d-8b71-81bc-85b9d4d0d09b">
+      <Execution id="b6d1dd15-04b9-4366-98dd-a0eaaa437dd6" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests" name="RepeatedPageLifecycleAndDraftDragsDoNotStartObsoleteRenders" />
+    </UnitTest>
+    <UnitTest name="AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="12f603ee-dca1-8712-9ce9-e5e71dc52774">
+      <Execution id="fce000b9-7ad4-413e-b0df-38e6642b0311" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests" name="AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity" />
+    </UnitTest>
+    <UnitTest name="FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents" storage="e:\kitao-worktrees\darkroom-r3-company-20261020\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="13f91347-a5c4-8996-b2cf-8c221f2ec6e0">
+      <Execution id="2ae57473-8630-46c0-86e7-351c634a7564" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests" name="FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1f5e92a1-4891-8512-abc8-13f05ace7b0a" executionId="f8d151b6-e4ec-4d72-8f74-1aa0c27db4c4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12f603ee-dca1-8712-9ce9-e5e71dc52774" executionId="fce000b9-7ad4-413e-b0df-38e6642b0311" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16627443-d328-8418-bfae-f2f06073dfa9" executionId="50be3c36-858f-4a4d-af31-1dbad20b4413" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e0984bc-ff7d-8b71-81bc-85b9d4d0d09b" executionId="b6d1dd15-04b9-4366-98dd-a0eaaa437dd6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13f91347-a5c4-8996-b2cf-8c221f2ec6e0" executionId="2ae57473-8630-46c0-86e7-351c634a7564" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

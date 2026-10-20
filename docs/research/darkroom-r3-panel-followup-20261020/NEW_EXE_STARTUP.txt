@@ -1,0 +1,132 @@
+Window: "光镜 · 暗室 R3 未完成 · 视觉修复预览", App: KitaoPhotoSelector.exe.
+	0 窗口 光镜 · 暗室 R3 未完成 · 视觉修复预览 Secondary Actions: Raise
+		1 自定义
+			2 文本 暗室 · 本地项目 ●
+			3 文本 光镜
+			4 按钮 文件
+				5 文本 文件
+			6 按钮 编辑
+				7 文本 编辑
+			8 按钮 调整
+				9 文本 调整
+			10 按钮 视图
+				11 文本 视图
+			12 按钮 帮助
+				13 文本 帮助
+			14 按钮 导入照片 Description: 导入照片 ID: PhotoImport
+			15 按钮 Description: 撤销 ID: PhotoUndo
+			16 按钮 Description: 重做 ID: PhotoRedo
+			17 分隔符 (disabled)
+			18 按钮 Description: 选择
+			19 按钮 Description: 抓手
+			20 按钮 Description: 缩放
+			21 按钮 Description: 配方基准 / 对比
+			22 文本 尚未选择待调色照片
+			23 按钮 变体
+				24 文本 变体
+			25 按钮 (disabled) 复制调整
+				26 文本 (disabled) 复制调整
+			27 按钮 (disabled) 粘贴调整
+				28 文本 (disabled) 粘贴调整
+			29 按钮 (disabled) 批量同步
+				30 文本 (disabled) 批量同步
+			31 按钮 Description: 显示/隐藏面板
+			32 按钮 导出 ID: PhotoExport
+				33 文本 导出
+			34 按钮 Description: 工作台（旧版工作区）
+			35 按钮 Description: 导入照片
+			36 按钮 Description: 暗室
+			37 按钮 (disabled) Description: 保存项目
+			38 按钮 Description: 打开项目
+			39 按钮 适合
+				40 文本 适合
+			41 按钮 100%
+				42 文本 100%
+			43 按钮 −
+				44 文本 −
+			45 按钮 ＋
+				46 文本 ＋
+			47 文本 选择 ID: ToolLabel
+			48 文本 参考线
+			49 组合框 ID: GuideChoice
+			50 文本 拖动平移 · 滚轮缩放 ID: ToolHint
+			51 文本 选择待调色照片，再添加希望借用色彩与影调的参考图片。源照片始终只读。 ID: ImportStatus
+			52 文本 适合 · 视图
+			53 文本 ⌄ 照片
+			54 文本 0
+			55 组合框
+			56 组合框
+			57 按钮 清除筛选
+				58 文本 清除筛选
+			59 列表视图 ID: PhotoStrip
+			60 缩略 ID: PanelSplitter
+			61 选项卡 ID: EditModes
+				62 选项卡项 (selectable) System.Windows.Controls.TabItem 标头: 内容: Description: 调整 ID: BasicTab
+				63 选项卡项 (selectable) System.Windows.Controls.TabItem 标头: 内容: Description: 光片 ID: PolaroidTab
+					64 文本 光片
+				65 选项卡项 (selectable) System.Windows.Controls.TabItem 标头: 内容: Description: 图层
+				66 选项卡项 (selectable) System.Windows.Controls.TabItem 标头: 内容: Description: 风格
+				67 选项卡项 (selectable) System.Windows.Controls.TabItem 标头: 内容: Description: 变体 ID: VariantsTab
+			68 按钮 工具面板选项 Description: 工具面板选项 ID: PanelOptions
+			69 文本 调整 ID: PanelTitle
+			70 文本 RGB · 尚无目标图像
+			71 文本 暗部 — 阴影 — 中间调 — 亮部 — 高光 — ID: ToneRatios
+			72 窗格 ID: AdjustmentScroll
+				73 组 ⌄ 曝光
+					74 按钮 ⌄ 曝光
+						75 文本 ⌄ 曝光
+					76 文本 (disabled) 曝光
+					77 滑块 (disabled) 曝光 Value: 0
+						78 按钮 (disabled) ID: DecreaseLarge
+						79 缩略 (disabled)
+						80 按钮 (disabled) ID: IncreaseLarge
+					81 编辑 (disabled, settable, string) 曝光 Description: Enter 保存，Esc 取消 Value: 0
+					82 文本 (disabled) 对比度
+					83 滑块 (disabled) 对比度 Value: 0
+						84 按钮 (disabled) ID: DecreaseLarge
+						85 缩略 (disabled)
+						86 按钮 (disabled) ID: IncreaseLarge
+					87 编辑 (disabled, settable, string) 对比度 Description: Enter 保存，Esc 取消 Value: 0
+					88 文本 (disabled) 亮度
+					89 滑块 (disabled) 亮度 Value: 0
+						90 按钮 (disabled) ID: DecreaseLarge
+						91 缩略 (disabled)
+						92 按钮 (disabled) ID: IncreaseLarge
+					93 编辑 (disabled, settable, string) 亮度 Description: Enter 保存，Esc 取消 Value: 0
+				94 组 ⌄ 高动态范围
+					95 按钮 ⌄ 高动态范围
+						96 文本 ⌄ 高动态范围
+				97 组 ⌄ 色阶
+					98 按钮 ⌄ 色阶
+						99 文本 ⌄ 色阶
+				100 组 ⌄ 曲线
+					101 按钮 ⌄ 曲线
+						102 文本 ⌄ 曲线
+				103 组 ⌄ 白平衡
+					104 按钮 ⌄ 白平衡
+						105 文本 ⌄ 白平衡
+				106 组 ⌄ 基础色彩
+					107 按钮 ⌄ 基础色彩
+						108 文本 ⌄ 基础色彩
+				109 组 ⌄ 分级调色
+					110 按钮 ⌄ 分级调色
+						111 文本 ⌄ 分级调色
+				112 组 ⌄ 肤色
+					113 按钮 ⌄ 肤色
+						114 文本 ⌄ 肤色
+				115 组 ⌄ 清晰度与结构
+					116 按钮 ⌄ 清晰度与结构
+						117 文本 ⌄ 清晰度与结构
+				118 组 ⌄ 锐化
+					119 按钮 ⌄ 锐化
+						120 文本 ⌄ 锐化
+				121 组 ⌄ 降噪
+					122 按钮 ⌄ 降噪
+						123 文本 ⌄ 降噪
+				124 组 帮助与诊断 ID: DiagnosticsSection
+					125 按钮 帮助与诊断
+						126 文本 帮助与诊断
+
+Document text: ```
+0
+```

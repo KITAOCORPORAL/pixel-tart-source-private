@@ -1,0 +1,167 @@
+{
+  "running": false,
+  "results": [
+    {
+      "fixture": "PhotoGradePageV1Tests",
+      "args": [
+        "test",
+        "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+        "-c",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~PhotoGradePageV1Tests",
+        "--logger",
+        "trx;LogFileName=PhotoGradePageV1Tests.trx",
+        "--results-directory",
+        "E:/Kitao-Deliveries/darkroom-r3-company-20261020/resume-20261020/final/PhotoGradePageV1Tests"
+      ],
+      "exit": 0
+    },
+    {
+      "fixture": "LightPrintR3Tests",
+      "args": [
+        "test",
+        "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+        "-c",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~LightPrintR3Tests",
+        "--logger",
+        "trx;LogFileName=LightPrintR3Tests.trx",
+        "--results-directory",
+        "E:/Kitao-Deliveries/darkroom-r3-company-20261020/resume-20261020/final/LightPrintR3Tests"
+      ],
+      "exit": 0
+    },
+    {
+      "fixture": "DarkroomImportTests",
+      "args": [
+        "test",
+        "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+        "-c",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~DarkroomImportTests",
+        "--logger",
+        "trx;LogFileName=DarkroomImportTests.trx",
+        "--results-directory",
+        "E:/Kitao-Deliveries/darkroom-r3-company-20261020/resume-20261020/final/DarkroomImportTests"
+      ],
+      "exit": 0
+    },
+    {
+      "fixture": "InstantV3CorrectionBindingTests",
+      "args": [
+        "test",
+        "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+        "-c",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~InstantV3CorrectionBindingTests",
+        "--logger",
+        "trx;LogFileName=InstantV3CorrectionBindingTests.trx",
+        "--results-directory",
+        "E:/Kitao-Deliveries/darkroom-r3-company-20261020/resume-20261020/final/InstantV3CorrectionBindingTests"
+      ],
+      "exit": 0
+    },
+    {
+      "fixture": "InstantV3PhaseCancellationTests",
+      "args": [
+        "test",
+        "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+        "-c",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~InstantV3PhaseCancellationTests",
+        "--logger",
+        "trx;LogFileName=InstantV3PhaseCancellationTests.trx",
+        "--results-directory",
+        "E:/Kitao-Deliveries/darkroom-r3-company-20261020/resume-20261020/final/InstantV3PhaseCancellationTests"
+      ],
+      "exit": 0
+    },
+    {
+      "fixture": "BatchFourVersionTests",
+      "args": [
+        "test",
+        "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+        "-c",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~BatchFourVersionTests",
+        "--logger",
+        "trx;LogFileName=BatchFourVersionTests.trx",
+        "--results-directory",
+        "E:/Kitao-Deliveries/darkroom-r3-company-20261020/resume-20261020/final/BatchFourVersionTests"
+      ],
+      "exit": 0
+    },
+    {
+      "fixture": "ColorStudioFilmstripStateTests",
+      "args": [
+        "test",
+        "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+        "-c",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~ColorStudioFilmstripStateTests",
+        "--logger",
+        "trx;LogFileName=ColorStudioFilmstripStateTests.trx",
+        "--results-directory",
+        "E:/Kitao-Deliveries/darkroom-r3-company-20261020/resume-20261020/final/ColorStudioFilmstripStateTests"
+      ],
+      "exit": 0
+    },
+    {
+      "fixture": "ColorStudioZoomPanTests",
+      "args": [
+        "test",
+        "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+        "-c",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~ColorStudioZoomPanTests",
+        "--logger",
+        "trx;LogFileName=ColorStudioZoomPanTests.trx",
+        "--results-directory",
+        "E:/Kitao-Deliveries/darkroom-r3-company-20261020/resume-20261020/final/ColorStudioZoomPanTests"
+      ],
+      "exit": 0
+    },
+    {
+      "fixture": "StudioQuickExportFormatTests",
+      "args": [
+        "test",
+        "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+        "-c",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--filter",
+        "FullyQualifiedName~StudioQuickExportFormatTests",
+        "--logger",
+        "trx;LogFileName=StudioQuickExportFormatTests.trx",
+        "--results-directory",
+        "E:/Kitao-Deliveries/darkroom-r3-company-20261020/resume-20261020/final/StudioQuickExportFormatTests"
+      ],
+      "exit": 0
+    }
+  ]
+}
