@@ -68,6 +68,15 @@ public partial class App : Application
             Environment.SetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT",Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"PixelTart.DarkroomR3.HomeTrial"));
         }
 #endif
+#if WHOLE_APP_DIAGNOSTIC
+        // Diagnostic packages must fail closed before migration, logging, or database initialization.
+        if(Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME")!="1" ||
+           !Path.IsPathFullyQualified(Environment.GetEnvironmentVariable("PIXEL_TART_ISOLATED_RUNTIME_ROOT")??""))
+        {
+            MessageBox.Show("完整范围诊断预览必须通过 Start-Guangjing-Diagnostic.cmd 启动；缺少隔离数据目录，程序未访问日常数据。","光镜 · 不能发行");
+            Shutdown(2);return;
+        }
+#endif
         base.OnStartup(e);
         ColorStudioAcceptanceFixture.ValidateIsolation();
 #if ASSET_LIBRARY_P1_STATE_ACCEPTANCE
@@ -373,6 +382,9 @@ public partial class App : Application
             window.Title += " · 开发预览版 " + StartupDiagnostics.BuildId;
 #endif
             window.ApplySavedBounds(_mainViewModel.Settings);
+#if WHOLE_APP_DIAGNOSTIC
+            window.Title="光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行";
+#endif
 #if PHOTOGRAPHER_TRIAL
             // The focused trial is the R3 workspace itself, not a second editor nested in the legacy shell.
             var trialWorkspace=_mainViewModel.ReferenceColorPage;

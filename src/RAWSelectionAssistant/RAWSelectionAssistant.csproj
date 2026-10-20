@@ -136,6 +136,8 @@
            Text="AssetLibraryP3AutomatedAcceptance cannot be combined with a P2 acceptance seam." />
   </Target>
 
+  <PropertyGroup Condition="'$(WholeAppDiagnosticBuild)' == 'true'"><DefineConstants>$(DefineConstants);WHOLE_APP_DIAGNOSTIC</DefineConstants></PropertyGroup>
+  <Target Name="RejectMixedDiagnosticShell" BeforeTargets="BeforeBuild" Condition="'$(WholeAppDiagnosticBuild)' == 'true' and '$(PhotographerTrialBuild)' == 'true'"><Error Text="WholeAppDiagnosticBuild cannot use the focused PhotographerTrialBuild shell." /></Target>
   <PropertyGroup Condition="'$(PhotographerTrialBuild)' == 'true'"><DefineConstants>$(DefineConstants);PHOTOGRAPHER_TRIAL</DefineConstants></PropertyGroup>
   <ItemGroup><PackageReference Include="DocumentFormat.OpenXml" Version="3.5.1" /></ItemGroup>
   <ItemGroup><None Update="ThirdPartyNotices/OpenXML-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
