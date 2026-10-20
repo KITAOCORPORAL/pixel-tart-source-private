@@ -42,3 +42,7 @@
 NETSDK1060/NuGet.Configuration.ConfigurationDefaults path1错误由本进程补足已验证Windows目录及禁用MSBuild节点重用/单节点全新构建后解除；无持久系统配置变更，原失败日志保留。
 
 正常推送及远端读回见PUSH_READBACK.json。产品与文档提交分开，产品仍标R3未完成，不称READY。
+
+## 正常推送读回
+
+产品 07c11d750d927e8cdd1b5d6f42800fae0bbf0f44 及证据提交 ade9831118907070c3d57ff6d511fac1bafa4cc2 已正常推送；独立ls-remote确认远端相同，读回时工作树干净。PUSH_READBACK.json记录这一已验证提交；后续仅此读回封存文档提交，不改变发布DLL。
