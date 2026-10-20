@@ -1,0 +1,30 @@
+[
+  {
+    "step": "D01",
+    "result": "通过",
+    "detail": "Specified final EXE starts, actual process loaded WPF/Core hashes match FINAL_BINDINGS",
+    "pid": 22868
+  },
+  {
+    "step": "Import",
+    "result": "失败",
+    "detail": "Mouse import opens 2121x1640 native dialog in 2049x1152 window capture; filename and Open below desktop; native tool targets wrong parent for keyboard. No photo imported."
+  },
+  {
+    "step": "Import fix1",
+    "result": "失败",
+    "detail": "Native dialog size restored to visible 1200x900, but confirm action did not dismiss; native tool focus/input unreliable. No photo imported."
+  },
+  {
+    "step": "Import fix2",
+    "result": "未运行",
+    "detail": "Visible WPF complete-path dialog opens; type_text refused policy-protected UIA text fallback. Did not enable fallback flag or reroute same input; requested user manual entry.",
+    "evidence": "04-fix2-path-dialog.png",
+    "sha256": "25bc30f00108b985c5ef603d7eaf1ce6a9933e102a01981b9151546948e340ca"
+  },
+  {
+    "step": "Diagnostic fix2",
+    "result": "未运行",
+    "detail": "Rejected complete-path workaround and related trial-only wiring removed from product; diagnostic bytes preserved local. No tests counted as product acceptance."
+  }
+]
