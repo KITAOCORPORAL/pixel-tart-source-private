@@ -1,0 +1,21 @@
+{
+  "label": "STAMPED_R3CommandLineReviewTests",
+  "args": [
+    "test",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "--no-build",
+    "--no-restore",
+    "--filter",
+    "FullyQualifiedName~R3CommandLineReviewTests",
+    "--logger",
+    "trx;LogFileName=R3CommandLineReviewTests.trx",
+    "--results-directory",
+    "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/R3CommandLineReviewTests"
+  ],
+  "pid": 36316,
+  "exit": 0,
+  "start": "2026-10-20T04:31:57.473Z",
+  "end": "2026-10-20T04:32:22.845Z"
+}

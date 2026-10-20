@@ -1,0 +1,23 @@
+{
+  "label": "PUBLISH_FINAL",
+  "args": [
+    "publish",
+    "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+    "-c",
+    "Release",
+    "-r",
+    "win-x64",
+    "--self-contained",
+    "true",
+    "--no-restore",
+    "-p:PublishSingleFile=false",
+    "-p:PhotographerTrialBuild=true",
+    "-p:SourceRevisionId=d2e52278841b797744af1ce749e2a5e9b170fed1",
+    "-o",
+    "E:/Kitao-Deliveries/darkroom-r3-company-20261020/app-cli-verified"
+  ],
+  "pid": 36520,
+  "exit": 0,
+  "start": "2026-10-20T04:27:23.914Z",
+  "end": "2026-10-20T04:27:41.967Z"
+}

@@ -1,0 +1,21 @@
+{
+  "label": "STAMPED_BatchFourVersionTests",
+  "args": [
+    "test",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "--no-build",
+    "--no-restore",
+    "--filter",
+    "FullyQualifiedName~BatchFourVersionTests",
+    "--logger",
+    "trx;LogFileName=BatchFourVersionTests.trx",
+    "--results-directory",
+    "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/BatchFourVersionTests"
+  ],
+  "pid": 14292,
+  "exit": 0,
+  "start": "2026-10-20T04:33:12.183Z",
+  "end": "2026-10-20T04:33:13.565Z"
+}

@@ -1,0 +1,124 @@
+[
+  {
+    "id": "authorized-1",
+    "inputSha256": "4D6C243E3F25AF2C50830C4FA0E1B40574404699C79BA7D2AAE477B7EA1BE822",
+    "scope": "768px bounded authorized derivative, not native RAW or desktop input",
+    "paperChanges": true,
+    "frameChanges": true,
+    "latestWins": true,
+    "developExact": true,
+    "variants": true,
+    "reopenExact": true,
+    "exports": [
+      {
+        "format": "Png",
+        "sha256": "C54884C02946DC4192AB5F58B7E58D6CF680ABB6E052B0DEA3BEE08CDDF531A7",
+        "inspection": {
+          "Width": 663,
+          "Height": 764,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        }
+      },
+      {
+        "format": "Tiff",
+        "sha256": "13F47F117733A04911BCC9D778F1DC80D923CB89EC571DA66A0BE99DBE8C0148",
+        "inspection": {
+          "Width": 663,
+          "Height": 764,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        }
+      },
+      {
+        "format": "Jpeg",
+        "sha256": "453D13932D6C5E6B886B4A147E764C53643DFC502280D12B1C8554600B178E04",
+        "inspection": {
+          "Width": 663,
+          "Height": 764,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.746241764258395,
+          "RootMeanSquareError": 1.220266250090563,
+          "MaximumError": 16,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        }
+      }
+    ]
+  },
+  {
+    "id": "authorized-2",
+    "inputSha256": "B9EA43FD0A4DB8D8B7FB6ABE351C3D232697EAD8A6F1C1BF84E35C04F0B9C368",
+    "scope": "768px bounded authorized derivative, not native RAW or desktop input",
+    "paperChanges": true,
+    "frameChanges": true,
+    "latestWins": true,
+    "developExact": true,
+    "variants": true,
+    "reopenExact": true,
+    "exports": [
+      {
+        "format": "Png",
+        "sha256": "29F847F99F11A51FA6A042096B2679CB70B7DDB504275DD7186527389FC5EF29",
+        "inspection": {
+          "Width": 553,
+          "Height": 637,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16"
+        }
+      },
+      {
+        "format": "Tiff",
+        "sha256": "0F1FC5BAD17C1019221666EA9BFEFF7EA1305CC4DC529B1E86FFEE7491A5B8DD",
+        "inspection": {
+          "Width": 553,
+          "Height": 637,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16"
+        }
+      },
+      {
+        "format": "Jpeg",
+        "sha256": "72B7CC7BC7F861E56A464FE0C2C5B7C74E30829A7535CF9D19417CAAB47EE80D",
+        "inspection": {
+          "Width": 553,
+          "Height": 637,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.7103350451322552,
+          "RootMeanSquareError": 1.1528601312721645,
+          "MaximumError": 16,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,56 @@
+E:\Kitao-Worktrees\darkroom-r3-company-20261020\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll (.NETCoreApp,Version=v10.0)的测试运行
+总共 1 个测试文件与指定模式相匹配。
+  失败 DisplayedFrameKeepsFullResolutionAtActualPixels [323 ms]
+  错误消息:
+   Assert.AreEqual 失败。应为: <4000,5000>，实际为: <800,1000>。‘expected’表达式:‘new Size(4000,5000)’,‘actual’表达式:‘view.State.ImageSize’。 100% must remain output pixels, not the 1600px proxy
+  堆栈跟踪:
+     at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.<>c.<DisplayedFrameKeepsFullResolutionAtActualPixels>b__0_0()
+   at System.Windows.Threading.DispatcherOperation`1.InvokeDelegateCore()
+   at System.Windows.Threading.DispatcherOperation.InvokeImpl()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407
+  失败 DisplayedDimensionsSetterReconfiguresAlreadyLoadedViewport [10 ms]
+  错误消息:
+   Assert.AreEqual 失败。预期值 <0.8> 和实际值 <1.5> 之间的差不应大于 <1E-09>。‘expected’表达式:‘.8’,‘actual’表达式:‘view.State.ImageSize.Width/view.State.ImageSize.Height’。 framed output aspect, without stretching into source ratio
+  堆栈跟踪:
+     at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed[T](T expected, T actual, T delta, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 679
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(Double expected, Double actual, Double delta, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 1149
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.<>c.<DisplayedDimensionsSetterReconfiguresAlreadyLoadedViewport>b__1_0()
+   at System.Windows.Threading.DispatcherOperation`1.InvokeDelegateCore()
+   at System.Windows.Threading.DispatcherOperation.InvokeImpl()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407
+  失败 AllDirectPageBindingPathsExistOnActualModels [5 ms]
+  错误消息:
+   Assert.IsNotNull 失败。‘value’表达式:‘property’。 Unresolvable binding {Binding DataContext.ActivateTargetCommand,RelativeSource={RelativeSource AncestorType=ListBox}} at ReferenceColorWorkspaceViewModel.DataContext
+  堆栈跟踪:
+     at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsNotNullFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 202
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AssertIsNotNullInterpolatedStringHandler.ComputeAssertion(String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 94
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsNotNull(Object value, AssertIsNotNullInterpolatedStringHandler& message, String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 169
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.AllDirectPageBindingPathsExistOnActualModels()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  失败 NewControlsResolveProductionCommandsWithoutOpeningWindows [1 s]
+  错误消息:
+   Assert.IsTrue 失败。‘condition’表达式:‘Children<Button>(page).Any(b=>ReferenceEquals(b.Command,vm.CreateEditVersionCommand))’。 Clone must bind to the real command, not an unguarded click stub
+  堆栈跟踪:
+     at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.<>c.<<NewControlsResolveProductionCommandsWithoutOpeningWindows>b__3_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407
+  失败 ExportStopUsesProductionCommandAndFormatBinding [247 ms]
+  错误消息:
+   Assert.IsTrue 失败。‘condition’表达式:‘Children<TextBlock>(root).Any(t=>BindingOperations.GetBinding(t,TextBlock.TextProperty)?.Path.Path=="ExportStatus")’。 Queue progress belongs in export dialog
+  堆栈跟踪:
+     at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153
+   at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.<>c.<<ExportStopUsesProductionCommandAndFormatBinding>b__4_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407
+结果文件: E:\Kitao-Deliveries\darkroom-r3-company-20261020\cli-review-20261020\before-fix\before-fix.trx
+
+失败!  - 失败:     5，通过:     4，已跳过:     0，总计:     9，持续时间: 4 s - RAWSelectionAssistant.WpfTests.dll (net10.0)

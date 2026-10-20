@@ -1,0 +1,127 @@
+{
+  "sourceSha": "d2e52278841b797744af1ce749e2a5e9b170fed1",
+  "informationalVersion": "2.3.0+d2e52278841b797744af1ce749e2a5e9b170fed1",
+  "source": {
+    "manifest": "FINAL_STAMPED-source.json",
+    "digest": "8d9aa35dd943fb5bf2f2327923fb87d22ea6d860db03ac3b9169828ac637c047"
+  },
+  "desktopStarted": false,
+  "desktopControl": false,
+  "hashes": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "sha256": "b1598b44285f0483114ab64457d93a3087c45d56c0f2b191de96b196b617d044"
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "sha256": "17e19f698ef10eac48015f9c6e23fb047aadb4d9eaf2162e9d9ca9935a237442"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "sha256": "ed49543e89cfba2d607553d077d1130aed00871bf9acc3dce55d6140ae3b3736"
+    }
+  ],
+  "copiedToWpfTests": [
+    {
+      "name": "ComputeSharp.Core.dll",
+      "publish": "4678a441386fc3d58a32756ca456db9a526ad672967d885a209523132273fd25",
+      "test": "4678a441386fc3d58a32756ca456db9a526ad672967d885a209523132273fd25"
+    },
+    {
+      "name": "ComputeSharp.dll",
+      "publish": "c06fb300af75cb12e41875ca00ea176f1ca1be0b697b741f6c9606a3f2d65240",
+      "test": "c06fb300af75cb12e41875ca00ea176f1ca1be0b697b741f6c9606a3f2d65240"
+    },
+    {
+      "name": "DocumentFormat.OpenXml.dll",
+      "publish": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+      "test": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499"
+    },
+    {
+      "name": "DocumentFormat.OpenXml.Framework.dll",
+      "publish": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+      "test": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae"
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "publish": "17e19f698ef10eac48015f9c6e23fb047aadb4d9eaf2162e9d9ca9935a237442",
+      "test": "17e19f698ef10eac48015f9c6e23fb047aadb4d9eaf2162e9d9ca9935a237442"
+    },
+    {
+      "name": "MetadataExtractor.dll",
+      "publish": "2d4d43f4f10b0655fafc3a145dbd4dcc79d81459335bb4d8a324ce2aed2f9ec8",
+      "test": "2d4d43f4f10b0655fafc3a145dbd4dcc79d81459335bb4d8a324ce2aed2f9ec8"
+    },
+    {
+      "name": "Microsoft.Data.Sqlite.dll",
+      "publish": "1078d41c6c0f2cee48a8b706e3a54ce145705993f19f703d2b3bdf2abcc59088",
+      "test": "1078d41c6c0f2cee48a8b706e3a54ce145705993f19f703d2b3bdf2abcc59088"
+    },
+    {
+      "name": "Microsoft.Windows.SDK.NET.dll",
+      "publish": "0ec371d93798852e36461c8adddbeadce0f963a04752f0b64e54fe19c1c834a7",
+      "test": "0ec371d93798852e36461c8adddbeadce0f963a04752f0b64e54fe19c1c834a7"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "publish": "e765632b707cb9b4d4ab2373708a2cd86b90929134f68e563b8f59704ced5f89",
+      "test": "e765632b707cb9b4d4ab2373708a2cd86b90929134f68e563b8f59704ced5f89"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "publish": "fbce87d775cd5fe9ea1a795c56aed5dcf640e2c8287328d900dd52d70498a2fb",
+      "test": "fbce87d775cd5fe9ea1a795c56aed5dcf640e2c8287328d900dd52d70498a2fb"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "publish": "3ced849938f5f3bf21218fbed594d71f54cafdcc64b1f0efb19e89a22d0b25bf",
+      "test": "3ced849938f5f3bf21218fbed594d71f54cafdcc64b1f0efb19e89a22d0b25bf"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "publish": "2c1933e8482fcd9c251d7e70c04eb61cdd95c49da1eaddb3b393b722d21ef4b1",
+      "test": "2c1933e8482fcd9c251d7e70c04eb61cdd95c49da1eaddb3b393b722d21ef4b1"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "publish": "0cd28bfe48e7acd7f03bb6ea44a46183483414b53fb110975cbecab7fa44f33e",
+      "test": "0cd28bfe48e7acd7f03bb6ea44a46183483414b53fb110975cbecab7fa44f33e"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "publish": "ed49543e89cfba2d607553d077d1130aed00871bf9acc3dce55d6140ae3b3736",
+      "test": "ed49543e89cfba2d607553d077d1130aed00871bf9acc3dce55d6140ae3b3736"
+    },
+    {
+      "name": "Sdcb.LibRaw.dll",
+      "publish": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3",
+      "test": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3"
+    },
+    {
+      "name": "SQLitePCLRaw.batteries_v2.dll",
+      "publish": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b",
+      "test": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b"
+    },
+    {
+      "name": "SQLitePCLRaw.core.dll",
+      "publish": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84",
+      "test": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84"
+    },
+    {
+      "name": "SQLitePCLRaw.provider.e_sqlite3.dll",
+      "publish": "eb6696e55882c3000333146b1cd4970439601e11fdedae941105ca921f615bd6",
+      "test": "eb6696e55882c3000333146b1cd4970439601e11fdedae941105ca921f615bd6"
+    },
+    {
+      "name": "WinRT.Runtime.dll",
+      "publish": "bcf3a14e8712a90837fc5c0d8c8a24696af2bd7f74e9767597ec81ededfb23db",
+      "test": "bcf3a14e8712a90837fc5c0d8c8a24696af2bd7f74e9767597ec81ededfb23db"
+    },
+    {
+      "name": "XmpCore.dll",
+      "publish": "e88feb22528a78b294b6cfd9390b8ce8a5b27db025ff976799df2322bde51b58",
+      "test": "e88feb22528a78b294b6cfd9390b8ce8a5b27db025ff976799df2322bde51b58"
+    }
+  ],
+  "coreTestDll": "ed49543e89cfba2d607553d077d1130aed00871bf9acc3dce55d6140ae3b3736"
+}

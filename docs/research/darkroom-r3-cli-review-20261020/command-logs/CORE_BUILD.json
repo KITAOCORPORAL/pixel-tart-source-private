@@ -1,0 +1,14 @@
+{
+  "label": "CORE_BUILD",
+  "args": [
+    "build",
+    "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
+    "-c",
+    "Release",
+    "--no-restore"
+  ],
+  "pid": 17420,
+  "exit": 0,
+  "start": "2026-10-20T02:51:38.777Z",
+  "end": "2026-10-20T02:51:41.107Z"
+}

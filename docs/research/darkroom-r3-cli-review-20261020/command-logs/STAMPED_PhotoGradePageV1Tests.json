@@ -1,0 +1,21 @@
+{
+  "label": "STAMPED_PhotoGradePageV1Tests",
+  "args": [
+    "test",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "--no-build",
+    "--no-restore",
+    "--filter",
+    "FullyQualifiedName~PhotoGradePageV1Tests",
+    "--logger",
+    "trx;LogFileName=PhotoGradePageV1Tests.trx",
+    "--results-directory",
+    "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/PhotoGradePageV1Tests"
+  ],
+  "pid": 2744,
+  "exit": 0,
+  "start": "2026-10-20T04:32:31.769Z",
+  "end": "2026-10-20T04:32:57.008Z"
+}

@@ -1,0 +1,15 @@
+{
+  "label": "TEST_BUILD_BEFORE_FIX",
+  "args": [
+    "build",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "--no-restore",
+    "-p:PhotographerTrialBuild=true"
+  ],
+  "pid": 11436,
+  "exit": 0,
+  "start": "2026-10-20T02:46:19.722Z",
+  "end": "2026-10-20T02:46:53.798Z"
+}

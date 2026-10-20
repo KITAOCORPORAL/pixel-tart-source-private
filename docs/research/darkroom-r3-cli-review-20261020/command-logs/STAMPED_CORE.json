@@ -1,0 +1,21 @@
+{
+  "label": "STAMPED_CORE",
+  "args": [
+    "test",
+    "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
+    "-c",
+    "Release",
+    "--no-build",
+    "--no-restore",
+    "--filter",
+    "FullyQualifiedName~ProfessionalRawPipelineTests|FullyQualifiedName~ProfessionalRawTiffTests|FullyQualifiedName~ColorStudioSessionStateTests|FullyQualifiedName~ColorStudioStackTests|FullyQualifiedName~BatchNineInstantFilmTests",
+    "--logger",
+    "trx;LogFileName=core.trx",
+    "--results-directory",
+    "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped-core"
+  ],
+  "pid": 9992,
+  "exit": 0,
+  "start": "2026-10-20T04:31:57.471Z",
+  "end": "2026-10-20T04:31:58.832Z"
+}

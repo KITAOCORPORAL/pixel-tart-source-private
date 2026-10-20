@@ -1,0 +1,21 @@
+{
+  "label": "STAMPED_InstantV3PhaseCancellationTests",
+  "args": [
+    "test",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "--no-build",
+    "--no-restore",
+    "--filter",
+    "FullyQualifiedName~InstantV3PhaseCancellationTests",
+    "--logger",
+    "trx;LogFileName=InstantV3PhaseCancellationTests.trx",
+    "--results-directory",
+    "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/InstantV3PhaseCancellationTests"
+  ],
+  "pid": 34468,
+  "exit": 0,
+  "start": "2026-10-20T04:33:01.053Z",
+  "end": "2026-10-20T04:33:03.548Z"
+}

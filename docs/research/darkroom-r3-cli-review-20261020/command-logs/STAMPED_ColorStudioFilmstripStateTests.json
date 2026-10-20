@@ -1,0 +1,21 @@
+{
+  "label": "STAMPED_ColorStudioFilmstripStateTests",
+  "args": [
+    "test",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "--no-build",
+    "--no-restore",
+    "--filter",
+    "FullyQualifiedName~ColorStudioFilmstripStateTests",
+    "--logger",
+    "trx;LogFileName=ColorStudioFilmstripStateTests.trx",
+    "--results-directory",
+    "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/ColorStudioFilmstripStateTests"
+  ],
+  "pid": 1664,
+  "exit": 0,
+  "start": "2026-10-20T04:33:06.103Z",
+  "end": "2026-10-20T04:33:08.892Z"
+}

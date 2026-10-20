@@ -1,0 +1,251 @@
+[
+  {
+    "id": "app-group1",
+    "legacy": true,
+    "source": "755b1d80ead4534665373cd54dcd8353a4f1288b + prior-turn dirty changes; exact per-build source manifest was not captured",
+    "hashes": [
+      {
+        "file": "KitaoPhotoSelector.exe",
+        "sha256": "bb1162b354d7bdbb609042f38ca787879dbf79586f0a15957e50436adefc7bc5"
+      },
+      {
+        "file": "KitaoPhotoSelector.dll",
+        "sha256": "fbfda4dcc616c01c0f9719e8b8f268f463c257457d88ac42aa537edf70581b8e"
+      },
+      {
+        "file": "RAWSelectionAssistant.Core.dll",
+        "sha256": "ce15f128e86da8028757b18e55f6c9d34cd3414814098aeba3375bb90a8c880b"
+      }
+    ],
+    "desktopAcceptance": "未验收; group1 image not used for group2"
+  },
+  {
+    "id": "app-group2",
+    "legacy": true,
+    "source": "755b1d80ead4534665373cd54dcd8353a4f1288b + prior-turn dirty changes; exact per-build source manifest was not captured",
+    "hashes": [
+      {
+        "file": "KitaoPhotoSelector.exe",
+        "sha256": "bb1162b354d7bdbb609042f38ca787879dbf79586f0a15957e50436adefc7bc5"
+      },
+      {
+        "file": "KitaoPhotoSelector.dll",
+        "sha256": "38cf7b672d027e3a7529dfc5c3775356d6eea4c24fca52a4607f9e4c963c65e4"
+      },
+      {
+        "file": "RAWSelectionAssistant.Core.dll",
+        "sha256": "ce15f128e86da8028757b18e55f6c9d34cd3414814098aeba3375bb90a8c880b"
+      }
+    ],
+    "desktopAcceptance": "未验收; group1 image not used for group2"
+  },
+  {
+    "label": "TEST_BUILD_BEFORE_FIX",
+    "args": [
+      "build",
+      "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+      "-c",
+      "Release",
+      "--no-restore",
+      "-p:PhotographerTrialBuild=true"
+    ],
+    "pid": 11436,
+    "exit": 0,
+    "start": "2026-10-20T02:46:19.722Z",
+    "end": "2026-10-20T02:46:53.798Z",
+    "logSha256": "44fe23552c1d6f39c1afa02363800c626e26c32aba71dbe513011fe20ae51a98",
+    "source": {
+      "note": "Intermediate dirty state; exact per-attempt full source and overwritten binaries not captured. No final-delivery identity claimed."
+    },
+    "binaryIdentity": "Intermediate test build was overwritten; exact per-attempt DLL/EXE hash unavailable, not substituted by final hash."
+  },
+  {
+    "label": "TEST_BUILD_AFTER_FIX",
+    "args": [
+      "build",
+      "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+      "-c",
+      "Release",
+      "--no-restore",
+      "-p:PhotographerTrialBuild=true"
+    ],
+    "pid": 12604,
+    "exit": 0,
+    "start": "2026-10-20T02:48:56.163Z",
+    "end": "2026-10-20T02:49:07.653Z",
+    "logSha256": "02cc4eac62762f6225117309e3d365a3ccb28fcf76e8478089f9b5849fc7636e",
+    "source": {
+      "note": "Intermediate dirty state; exact per-attempt full source and overwritten binaries not captured. No final-delivery identity claimed."
+    },
+    "binaryIdentity": "Intermediate test build was overwritten; exact per-attempt DLL/EXE hash unavailable, not substituted by final hash."
+  },
+  {
+    "label": "TEST_BUILD_FIXED_V2",
+    "args": [
+      "build",
+      "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+      "-c",
+      "Release",
+      "--no-restore",
+      "-p:PhotographerTrialBuild=true"
+    ],
+    "pid": 7732,
+    "exit": 0,
+    "start": "2026-10-20T02:51:16.958Z",
+    "end": "2026-10-20T02:51:19.939Z",
+    "logSha256": "a16912771bd5cf4339b70d3ada3ad10698078b7318a8f1ee89237f0a0453553d",
+    "source": {
+      "manifest": "CLI_FIXED-source.json",
+      "digest": "d22d8bfc6039ff45ff2b06ff4ea9d95a13647fa3f37a454a78dc29407f43655c"
+    },
+    "binaryIdentity": "Intermediate test build was overwritten; exact per-attempt DLL/EXE hash unavailable, not substituted by final hash."
+  },
+  {
+    "label": "CORE_BUILD",
+    "args": [
+      "build",
+      "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
+      "-c",
+      "Release",
+      "--no-restore"
+    ],
+    "pid": 17420,
+    "exit": 0,
+    "start": "2026-10-20T02:51:38.777Z",
+    "end": "2026-10-20T02:51:41.107Z",
+    "logSha256": "e04cd71b774a8b0fb1393963b1b6c59cf40cca9ae1d5f0a660d33c3cb140dd0d",
+    "source": {
+      "note": "Intermediate dirty state; exact per-attempt full source and overwritten binaries not captured. No final-delivery identity claimed."
+    },
+    "binaryIdentity": "Intermediate test build was overwritten; exact per-attempt DLL/EXE hash unavailable, not substituted by final hash."
+  },
+  {
+    "label": "TEST_BUILD_FIXED_V3",
+    "args": [
+      "build",
+      "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+      "-c",
+      "Release",
+      "--no-restore",
+      "-p:PhotographerTrialBuild=true"
+    ],
+    "pid": 23944,
+    "exit": 0,
+    "start": "2026-10-20T04:22:15.015Z",
+    "end": "2026-10-20T04:22:22.926Z",
+    "logSha256": "ea333071377d0bda40be1d41b1e59ec288ff6877cc674aaf0c7e21924fb9c4a6",
+    "source": {
+      "note": "Intermediate dirty state; exact per-attempt full source and overwritten binaries not captured. No final-delivery identity claimed."
+    },
+    "binaryIdentity": "Intermediate test build was overwritten; exact per-attempt DLL/EXE hash unavailable, not substituted by final hash."
+  },
+  {
+    "label": "TEST_BUILD_V4",
+    "args": [
+      "build",
+      "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+      "-c",
+      "Release",
+      "--no-restore",
+      "-p:PhotographerTrialBuild=true"
+    ],
+    "pid": 24516,
+    "exit": 0,
+    "start": "2026-10-20T04:25:48.308Z",
+    "end": "2026-10-20T04:25:53.902Z",
+    "logSha256": "721d02cab5e8e77c968f09488fe7cc593c4a9538d19e2ffd84a59f7b133a7762",
+    "source": {
+      "manifest": "CLI_V4-source.json",
+      "digest": "b5166ec1d9659cf11691d9bf721e0655a18a8561007b462fcc3661e69ada05b8"
+    },
+    "binaryIdentity": "Intermediate test build was overwritten; exact per-attempt DLL/EXE hash unavailable, not substituted by final hash."
+  },
+  {
+    "label": "PUBLISH_FINAL",
+    "args": [
+      "publish",
+      "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+      "-c",
+      "Release",
+      "-r",
+      "win-x64",
+      "--self-contained",
+      "true",
+      "--no-restore",
+      "-p:PublishSingleFile=false",
+      "-p:PhotographerTrialBuild=true",
+      "-p:SourceRevisionId=d2e52278841b797744af1ce749e2a5e9b170fed1",
+      "-o",
+      "E:/Kitao-Deliveries/darkroom-r3-company-20261020/app-cli-verified"
+    ],
+    "pid": 36520,
+    "exit": 0,
+    "start": "2026-10-20T04:27:23.914Z",
+    "end": "2026-10-20T04:27:41.967Z",
+    "logSha256": "b692b269966667173254b4b296676350d47469b79693dacfbfbce73dda92b208",
+    "source": {
+      "commit": "d2e52278841b797744af1ce749e2a5e9b170fed1",
+      "manifest": "FINAL_PRODUCT-source.json",
+      "digest": "8d9aa35dd943fb5bf2f2327923fb87d22ea6d860db03ac3b9169828ac637c047"
+    },
+    "binaryIdentity": [
+      {
+        "name": "KitaoPhotoSelector.exe",
+        "sha256": "bb1162b354d7bdbb609042f38ca787879dbf79586f0a15957e50436adefc7bc5"
+      },
+      {
+        "name": "KitaoPhotoSelector.dll",
+        "sha256": "62f627caa1dca646b29fa03028e831ff60662899af2f7f1dbd06e094ecee126c"
+      },
+      {
+        "name": "RAWSelectionAssistant.Core.dll",
+        "sha256": "ed49543e89cfba2d607553d077d1130aed00871bf9acc3dce55d6140ae3b3736"
+      }
+    ]
+  },
+  {
+    "label": "PUBLISH_FINAL_STAMPED",
+    "args": [
+      "publish",
+      "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+      "-c",
+      "Release",
+      "-r",
+      "win-x64",
+      "--self-contained",
+      "true",
+      "--no-restore",
+      "-p:PublishSingleFile=false",
+      "-p:PhotographerTrialBuild=true",
+      "-p:SourceRevisionId=d2e52278841b797744af1ce749e2a5e9b170fed1",
+      "-o",
+      "E:/Kitao-Deliveries/darkroom-r3-company-20261020/app-cli-verified-stamped",
+      "-p:IncludeSourceRevisionInInformationalVersion=true"
+    ],
+    "pid": 19316,
+    "exit": 0,
+    "start": "2026-10-20T04:31:04.418Z",
+    "end": "2026-10-20T04:31:07.480Z",
+    "source": {
+      "commit": "d2e52278841b797744af1ce749e2a5e9b170fed1",
+      "manifest": "FINAL_STAMPED-source.json",
+      "digest": "8d9aa35dd943fb5bf2f2327923fb87d22ea6d860db03ac3b9169828ac637c047"
+    },
+    "logSha256": "7b6d0c64c5e0ebce5bb9221b89fda24e609eedc90edb2850003564d9fb0aef69",
+    "hashes": [
+      {
+        "name": "KitaoPhotoSelector.exe",
+        "sha256": "b1598b44285f0483114ab64457d93a3087c45d56c0f2b191de96b196b617d044"
+      },
+      {
+        "name": "KitaoPhotoSelector.dll",
+        "sha256": "17e19f698ef10eac48015f9c6e23fb047aadb4d9eaf2162e9d9ca9935a237442"
+      },
+      {
+        "name": "RAWSelectionAssistant.Core.dll",
+        "sha256": "ed49543e89cfba2d607553d077d1130aed00871bf9acc3dce55d6140ae3b3736"
+      }
+    ],
+    "information": "Explicit IncludeSourceRevisionInInformationalVersion=true; no product source changed; all final tests repeated with these exact DLLs"
+  }
+]

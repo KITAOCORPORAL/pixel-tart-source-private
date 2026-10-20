@@ -1,0 +1,267 @@
+{
+  "sourceSha": "d2e52278841b797744af1ce749e2a5e9b170fed1",
+  "informationalVersion": "2.3.0+d2e52278841b797744af1ce749e2a5e9b170fed1",
+  "productIdentity": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "sha256": "b1598b44285f0483114ab64457d93a3087c45d56c0f2b191de96b196b617d044"
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "sha256": "17e19f698ef10eac48015f9c6e23fb047aadb4d9eaf2162e9d9ca9935a237442"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "sha256": "ed49543e89cfba2d607553d077d1130aed00871bf9acc3dce55d6140ae3b3736"
+    }
+  ],
+  "wpf": {
+    "total": 54,
+    "passed": 54,
+    "failed": 0,
+    "skipped": 0,
+    "fixtures": [
+      {
+        "fixture": "R3CommandLineReviewTests",
+        "path": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/R3CommandLineReviewTests/R3CommandLineReviewTests.trx",
+        "sha256": "6251185295409a2c98ec11d669389ee9af7a81c177560abb4deb06fc875fe22e",
+        "counts": {
+          "total": "11",
+          "executed": "11",
+          "passed": "11",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        },
+        "nonPassed": []
+      },
+      {
+        "fixture": "LightPrintR3Tests",
+        "path": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/LightPrintR3Tests/LightPrintR3Tests.trx",
+        "sha256": "eacea9d18bd0a0c71c2915520d54340e068cffe3b5046b24fadf4e34bde14925",
+        "counts": {
+          "total": "5",
+          "executed": "5",
+          "passed": "5",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        },
+        "nonPassed": []
+      },
+      {
+        "fixture": "PhotoGradePageV1Tests",
+        "path": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/PhotoGradePageV1Tests/PhotoGradePageV1Tests.trx",
+        "sha256": "c065ea4a4586b9ec71135cfb1fdffebb098b3ac06793f42b7e50bfbc4ea65b83",
+        "counts": {
+          "total": "5",
+          "executed": "5",
+          "passed": "5",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        },
+        "nonPassed": []
+      },
+      {
+        "fixture": "InstantV3CorrectionBindingTests",
+        "path": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/InstantV3CorrectionBindingTests/InstantV3CorrectionBindingTests.trx",
+        "sha256": "0aa8951c6baeb0c5838afd9a4daa2ef31260d26e5f879e0aaa0152941e466d33",
+        "counts": {
+          "total": "2",
+          "executed": "2",
+          "passed": "2",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        },
+        "nonPassed": []
+      },
+      {
+        "fixture": "InstantV3PhaseCancellationTests",
+        "path": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/InstantV3PhaseCancellationTests/InstantV3PhaseCancellationTests.trx",
+        "sha256": "6b3476930299399f42531e16bf3f2703abbb7a7ecde534511305f3d17cd335ad",
+        "counts": {
+          "total": "4",
+          "executed": "4",
+          "passed": "4",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        },
+        "nonPassed": []
+      },
+      {
+        "fixture": "ColorStudioZoomPanTests",
+        "path": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/ColorStudioZoomPanTests/ColorStudioZoomPanTests.trx",
+        "sha256": "608b02acb9da1c196d3d248d3d27991f50ebab9fb8da718ad3060cff0167d84e",
+        "counts": {
+          "total": "8",
+          "executed": "8",
+          "passed": "8",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        },
+        "nonPassed": []
+      },
+      {
+        "fixture": "ColorStudioFilmstripStateTests",
+        "path": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/ColorStudioFilmstripStateTests/ColorStudioFilmstripStateTests.trx",
+        "sha256": "d3aa88930f96a2edc0408a24879068bae36967d96d85c29b01273c04c40a6791",
+        "counts": {
+          "total": "14",
+          "executed": "14",
+          "passed": "14",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        },
+        "nonPassed": []
+      },
+      {
+        "fixture": "StudioQuickExportFormatTests",
+        "path": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/StudioQuickExportFormatTests/StudioQuickExportFormatTests.trx",
+        "sha256": "a0a190d344f71fddf9c077b0189d6d5623eede5f0dd088b5285e047c596e43d6",
+        "counts": {
+          "total": "4",
+          "executed": "4",
+          "passed": "4",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        },
+        "nonPassed": []
+      },
+      {
+        "fixture": "BatchFourVersionTests",
+        "path": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped/BatchFourVersionTests/BatchFourVersionTests.trx",
+        "sha256": "c1559721831dea3a63fcc6ad0b9baf9e672f2a60921b8a2d82136b3ffc651fbc",
+        "counts": {
+          "total": "1",
+          "executed": "1",
+          "passed": "1",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        },
+        "nonPassed": []
+      }
+    ]
+  },
+  "core": {
+    "path": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/stamped-core/core.trx",
+    "sha256": "d837a4ba282ef24155866935a63aebe0fc700648824b0b98aa668677105ca0c4",
+    "counts": {
+      "total": "30",
+      "executed": "30",
+      "passed": "30",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "nonPassed": []
+  },
+  "scope": "CLI, unshown WPF controls, production pipeline; no desktop control or EXE startup",
+  "priorResultsNotReused": true
+}
