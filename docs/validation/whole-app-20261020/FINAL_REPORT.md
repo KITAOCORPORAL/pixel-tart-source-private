@@ -73,3 +73,7 @@ P3性能原673.8ms失败历史保留，本轮结果独立；Fuji重复性、显�
 52个相关远端ref作merge-base和branch-only差异核对；还对非祖先改动文件作当前blob等价比对。素材库导入加固6个文件缺失、摄影followup有24个当前缺失文件；另有等价/不同当前文件，不能机械按祖先与否判断功能存在。未擅自merge/cherry-pick，依赖及差异见BRANCH_INTEGRATION.json与BRANCH_CURRENT_EQUIVALENCE.json。
 
 其他工作树只读，旧Release与未提交内容不动。没有reset/stash/clean/合并main/强推。阶段提交、文件类型、Git本地远端一致读回见STAGE_COMMITS.json、CHANGED_FILES.json、PUSH_READBACK.json。最终结果封存后正常推送本验证分支。
+
+## 推送读回
+
+证据提交42bdef7c292abf5e05f590e39a7c3732ca639daf已正常推送，独立ls-remote确认LOCAL_HEAD=REMOTE_HEAD且工作树干净，详见PUSH_READBACK.json。后续仅封存读回、启动器源码和文件索引，不改变产品发布组件。
