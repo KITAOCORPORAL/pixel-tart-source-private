@@ -34,7 +34,34 @@ public sealed partial class ColorStudioImageViewport : FrameworkElement
     public ColorStudioZoomPanState State { get; } = new();
     public ColorStudioImageViewport() { AttachProfileDiagnostics(); ClipToBounds = true; SizeChanged += (_, _) => Configure(); State.Changed += (_, _) => InvalidateVisual(); }
     private static void Changed(DependencyObject sender, DependencyPropertyChangedEventArgs e) => ((ColorStudioImageViewport)sender).Configure();
-    public void Configure() { if ((Original??Matched) is { } image) State.Configure(ColorStudioSampleMapping.Viewport(RenderSize, Mode == "并排对比", false).Size, SourcePixelSize.IsEmpty ? new Size(image.PixelWidth, image.PixelHeight) : SourcePixelSize); }
+    // Layout only: use the displayed paper aspect, while keeping full-resolution
+    // output units for 100%, pan limits and source-coordinate mapping.
+    public static readonly DependencyProperty PreferDisplayedDimensionsProperty = DependencyProperty.Register(
+        nameof(PreferDisplayedDimensions), typeof(bool), typeof(ColorStudioImageViewport),
+        new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender, Changed));
+    public bool PreferDisplayedDimensions
+    { get => (bool)GetValue(PreferDisplayedDimensionsProperty); set => SetValue(PreferDisplayedDimensionsProperty, value); }
+    public void Configure()
+    {
+        var image = PreferDisplayedDimensions && (Mode is "仿色结果" or "仿色") ? Matched ?? Original : Original ?? Matched;
+        if (image is null) return;
+        var size = SourcePixelSize;
+        if (size.IsEmpty || !double.IsFinite(size.Width + size.Height) || size.Width <= 0 || size.Height <= 0)
+            size = new Size(image.PixelWidth, image.PixelHeight);
+        if (PreferDisplayedDimensions)
+        {
+            // The model publishes full output dimensions. Proxy raster rounding must
+            // not replace them; correct only a genuinely different source aspect.
+            var sourceRatio = size.Width / size.Height;
+            var displayRatio = (double)image.PixelWidth / image.PixelHeight;
+            if (Math.Abs(sourceRatio - displayRatio) > 2d / Math.Min(image.PixelWidth, image.PixelHeight))
+            {
+                var longest = Math.Max(size.Width, size.Height);
+                size = displayRatio >= 1 ? new Size(longest, longest / displayRatio) : new Size(longest * displayRatio, longest);
+            }
+        }
+        State.Configure(ColorStudioSampleMapping.Viewport(RenderSize, Mode == "并排对比", false).Size, size);
+    }
     protected override void OnRender(DrawingContext dc)
     {
         base.OnRender(dc);

@@ -385,7 +385,7 @@ public partial class App : Application
             trialWorkspace.PropertyChanged+=trialPageChanged;
             window.Closed+=(_,_)=>trialWorkspace.PropertyChanged-=trialPageChanged;
             ShowTrialWorkspace();window.Content=trialHost;
-            window.Title="光镜 · 暗室 R3 视觉试用";window.Width=1366;window.Height=768;window.MinWidth=1100;window.MinHeight=650;
+            window.Title="光镜 · 暗室 R3 未完成 · 视觉修复预览";window.Width=1366;window.Height=768;window.MinWidth=1100;window.MinHeight=650;
 #endif
             MainWindow = window;
 #if ASSET_LIBRARY_P1_AUTOMATED_ACCEPTANCE
