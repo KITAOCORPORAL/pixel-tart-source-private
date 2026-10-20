@@ -3,8 +3,8 @@
  <StackPanel IsEnabled="{Binding InstantEditingAllowed}">
  <StackPanel x:Name="PickerArea">
   <ListBox x:Name="PaperChoices" PreviewMouseLeftButtonUp="PaperClicked" ItemsSource="{Binding Source={StaticResource GroupedPapers}}" SelectedValuePath="ProfileId" SelectedValue="{Binding SelectedPhotographerPaperId,Mode=TwoWay}" BorderThickness="0" Background="Transparent" Padding="0" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch">
-   <ListBox.ItemsPanel><ItemsPanelTemplate><StackPanel/></ItemsPanelTemplate></ListBox.ItemsPanel>
-   <ListBox.GroupStyle><GroupStyle><GroupStyle.HeaderTemplate><DataTemplate><TextBlock Text="{Binding Name}" FontSize="10" Foreground="#8C8C94" Margin="2,5,0,2"/></DataTemplate></GroupStyle.HeaderTemplate><GroupStyle.Panel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></GroupStyle.Panel></GroupStyle></ListBox.GroupStyle>
+   <ListBox.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ListBox.ItemsPanel>
+   <ListBox.GroupStyle><GroupStyle><GroupStyle.HeaderTemplate><DataTemplate><TextBlock Text="{Binding Name}" FontSize="10" Foreground="#8C8C94" Margin="2,5,0,2"/></DataTemplate></GroupStyle.HeaderTemplate><GroupStyle.Panel><ItemsPanelTemplate><StackPanel/></ItemsPanelTemplate></GroupStyle.Panel></GroupStyle></ListBox.GroupStyle>
    <ListBox.ItemTemplate><DataTemplate><StackPanel Width="64" Margin="2,3"><Border Background="#E7E4DC" Height="64" Padding="3,3,3,9"><Image Source="{Binding Preview}" Stretch="UniformToFill"/></Border><TextBlock Text="{Binding Name}" FontSize="9" Foreground="#A9A9AE" Margin="0,3,0,0" ToolTip="{Binding Description}"/></StackPanel></DataTemplate></ListBox.ItemTemplate>
   </ListBox>
   <Button x:Name="PreviewPaperChoices" Content="刷新当前照片色彩预览" Command="{Binding PreviewPhotographerPapersCommand}" FontSize="10" Height="22" ToolTip="五组已实现响应；同一输入，关闭装饰的色彩缩略图"/>
