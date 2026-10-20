@@ -110,7 +110,10 @@ public sealed class R3CommandLineReviewTests
  [TestMethod] public Task TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline()=>RunSta(async()=>
  {
   EnsureTestApplication();var manifest=Environment.GetEnvironmentVariable("KITAO_R3_CLI_AUTHORIZED_MANIFEST")??throw new InvalidOperationException("Explicit authorized manifest required; never scan.");
-  var output=Environment.GetEnvironmentVariable("KITAO_R3_CLI_OUTPUT")??throw new InvalidOperationException("Fresh evidence output required");
+  var outputRoot=Environment.GetEnvironmentVariable("KITAO_R3_CLI_OUTPUT")??throw new InvalidOperationException("Fresh evidence output required");
+  // The configured path is an evidence parent, never a reusable project directory.
+  // Preserve prior runs and the product's refusal to overwrite a project this VM never read.
+  var output=Path.Combine(Path.GetFullPath(outputRoot),"run-"+DateTime.UtcNow.ToString("yyyyMMddTHHmmssfffZ")+"-"+Guid.NewGuid().ToString("N"));
   Directory.CreateDirectory(output);var rows=new List<object>();
   foreach(var input in JsonDocument.Parse(await File.ReadAllTextAsync(manifest)).RootElement.EnumerateArray())
   {
@@ -134,6 +137,18 @@ public sealed class R3CommandLineReviewTests
   await File.WriteAllTextAsync(Path.Combine(output,"TWO_PHOTO_RESULTS.json"),JsonSerializer.Serialize(rows,new JsonSerializerOptions{WriteIndented=true}));
  });
 
+ [TestMethod] public Task UnreadExistingProjectIsRejectedWithoutChangingItsBytes()=>RunSta(async()=>
+ {
+  EnsureTestApplication();var folder=Folder();try
+  {
+   using var writer=new ReferenceColorWorkspaceViewModel(new Dialogs(folder));await writer.LoadTargetAsync(Input(folder));
+   var project=Path.Combine(folder,"protected.ptstudio.json");await writer.SaveSessionAsync(project);var before=await File.ReadAllBytesAsync(project);
+   using var other=new ReferenceColorWorkspaceViewModel(new Dialogs(folder));await other.LoadTargetAsync(Path.Combine(folder,"test.png"));
+   var error=await Assert.ThrowsAsync<InvalidOperationException>(()=>other.SaveSessionAsync(project));StringAssert.Contains(error.Message,"未读取");
+   CollectionAssert.AreEqual(before,await File.ReadAllBytesAsync(project));
+   await other.LoadSessionAsync(project);await other.SaveSessionAsync(project);Assert.IsTrue(File.Exists(project));
+  }finally{Directory.Delete(folder,true);}
+ });
  [TestMethod] public Task BoundVariantSelectionAndSoloGroupsStayConsistent()=>RunSta(async()=>
  {
   EnsureTestApplication();var folder=Folder();try{
