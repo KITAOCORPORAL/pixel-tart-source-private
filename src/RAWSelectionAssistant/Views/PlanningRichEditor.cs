@@ -20,6 +20,10 @@ public sealed partial class PlanningRichEditor : DockPanel
     private readonly DispatcherTimer _saveTimer=new(){Interval=TimeSpan.FromMilliseconds(350)};
     public PlanningRichEditor(string? data,string text,Action<string,string,PlanningRichLayout> save,IEnumerable<PlanningCanvasRevision> canvasImages,PlanningRichLayout? layout=null)
     {
+        // Rich documents expose TextPattern, not the retired plain TextBox ValuePattern.
+        // Keep a stable accessible identity so tools can find the actual editable body.
+        System.Windows.Automation.AutomationProperties.SetName(_editor,"策划正文");
+        System.Windows.Automation.AutomationProperties.SetAutomationId(_editor,"PlanningRichDocumentBody");
         var tools=new WrapPanel();SetDock(tools,Dock.Top);Children.Add(tools);Children.Add(_editor);
         if(data is not null){using var input=new MemoryStream(Convert.FromBase64String(data));new TextRange(_editor.Document.ContentStart,_editor.Document.ContentEnd).Load(input,DataFormats.Rtf);}
         else _editor.Document=new FlowDocument(new Paragraph(new Run(text)));

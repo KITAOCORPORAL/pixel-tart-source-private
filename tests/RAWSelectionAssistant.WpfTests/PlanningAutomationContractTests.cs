@@ -7,6 +7,7 @@ using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -143,8 +144,31 @@ public sealed class PlanningAutomationContractTests
         Snapshot("CREATED_PROJECT", view);
         vm.ContentPage = "文字"; await Idle(); Snapshot("TEXT_READING", view);
         vm.IsDocumentEditing = true; await Idle(); Snapshot("TEXT_EDITOR", view);
-        Check("text-editor-value", () => Assert.IsNotNull(Walk(Peer(view)).Single(p => p.GetName() == "策划正文").GetPattern(PatternInterface.Value)));
-        vm.DocumentBody = "Installed Acceptance Persistence {shortsha}"; await vm.FlushAsync(); vm.IsDocumentEditing = false; await Idle(); Snapshot("TEXT_SAVED", view);
+        var body = Visuals<RichTextBox>(view).Single(x => AutomationProperties.GetAutomationId(x) == "PlanningRichDocumentBody");
+        Check("text-editor-text-pattern", () =>
+        {
+            var peer = Walk(Peer(view)).Single(p => p.GetAutomationId() == "PlanningRichDocumentBody");
+            Assert.AreEqual("策划正文", peer.GetName());
+            Assert.AreEqual(AutomationControlType.Document, peer.GetAutomationControlType());
+            Assert.IsNotNull(peer.GetPattern(PatternInterface.Text));
+            Assert.IsTrue(peer.IsEnabled()); Assert.IsTrue(peer.IsKeyboardFocusable());
+            Assert.IsFalse(body.IsReadOnly, "The real rich document must remain editable, not merely rendered");
+        });
+        const string persistedBody = "Home production peer persistence · 正文真实编辑与重开";
+        body.Document = new FlowDocument(new Paragraph(new Run(persistedBody)));
+        Visuals<PlanningRichEditor>(view).Single().FlushPending();
+        Check("text-editor-save", () => StringAssert.Contains(vm.DocumentBody, persistedBody));
+        Assert.IsTrue(await vm.FlushAsync(), vm.SaveStatus);
+        var createdProject = vm.ProjectId!.Value;
+        await vm.ShowOverviewAsync(); await vm.LoadAsync(createdProject); vm.ContentPage="文字"; vm.IsDocumentEditing=true; await Idle();
+        Check("text-editor-save-reopen", () =>
+        {
+            StringAssert.Contains(vm.DocumentBody, persistedBody); Assert.IsNotNull(vm.RichTextPackage);
+            var restored = Visuals<RichTextBox>(view).Single(x => AutomationProperties.GetAutomationId(x) == "PlanningRichDocumentBody");
+            var text = (ITextProvider)Peer(restored).GetPattern(PatternInterface.Text)!;
+            StringAssert.Contains(text.DocumentRange.GetText(-1), persistedBody);
+        });
+        vm.IsDocumentEditing = false; await Idle(); Snapshot("TEXT_SAVED", view);
         foreach(var page in PlanningCenterViewModel.ContentPages) { vm.ContentPage = page; await Idle(); Snapshot("EMPTY-" + page, view); }
         vm.ContentPage = "文字"; vm.IsPreviewMode = true; await Idle(); Snapshot("FRESH_PREVIEW", view); vm.IsPreviewMode = false;
         await vm.NewShotCommand.ExecuteAsync(null);
@@ -163,9 +187,9 @@ public sealed class PlanningAutomationContractTests
         Check("menu-add-moodboard", () => Assert.HasCount(1, Walk(Peer(importedTile.ContextMenu!)).Where(p => p.GetName() == "加入情绪板" && p.GetAutomationControlType() == AutomationControlType.MenuItem).ToArray()));
         importedTile.ContextMenu!.IsOpen = false;
         await vm.UpdateReferenceAsync(reference, "情绪板");
-        foreach (var page in new[] { "参考图", "情绪板", "灯光图", "服化道" })
+        foreach (var page in new[] { "参考图", "情绪板", "灯位图", "服化道与道具" })
         {
-            if (page is "灯光图" or "服化道") await vm.UpdateReferenceAsync(vm.AllProjectReferences.Single(x => x.Id == idRef), "分类", page == "灯光图" ? "灯光" : "造型");
+            if (page is "灯位图" or "服化道与道具") await vm.UpdateReferenceAsync(vm.AllProjectReferences.Single(x => x.Id == idRef), "分类", page == "灯位图" ? "灯光" : "造型");
             vm.ContentPage = page; view.Render(); await Idle();
             var tile = Visuals<PlanningReferenceTile>(view).Single(x => AutomationProperties.GetName(x) == "参考图：验收参考");
             var peer = Peer(tile);
@@ -190,11 +214,38 @@ public sealed class PlanningAutomationContractTests
             Snapshot("CONTEXT_MENU-" + page, tile.ContextMenu!); Capture(page + "-menu", tile.ContextMenu!);
             tile.ContextMenu!.IsOpen = false; await Idle(); Check(page + "-menu-return", () => Assert.IsTrue(tile.IsKeyboardFocused));
         }
-        foreach (var page in PlanningCenterViewModel.ContentPages) { vm.ContentPage = page; await Idle(); Snapshot("MODULE-" + page, view); }
-        vm.ContentPage = "镜头清单"; await Idle();
-        var shotRow = Visuals<PlanningShotRow>(view).Single(row => AutomationProperties.GetName(row).StartsWith("镜头 1：", StringComparison.Ordinal));
-        Check("shot-peer", () => { Assert.AreEqual(AutomationControlType.Button, Peer(shotRow).GetAutomationControlType()); Assert.IsNotNull(Peer(shotRow).GetPattern(PatternInterface.Invoke)); Assert.IsTrue(Peer(shotRow).IsKeyboardFocusable()); });
-        ((IInvokeProvider)Peer(shotRow).GetPattern(PatternInterface.Invoke)!).Invoke(); await Idle(); Check("shot-invoke", () => Assert.IsTrue(vm.IsShotDrawerOpen)); vm.IsShotDrawerOpen = false;
+        Assert.AreEqual(15, PlanningCenterViewModel.ContentPages.Count);
+        for (var index = 0; index < PlanningCenterViewModel.ContentPages.Count; index++)
+        {
+            var page = PlanningCenterViewModel.ContentPages[index];
+            var navigation = Visuals<Button>(view).Single(b => AutomationProperties.GetAutomationId(b) == "PlanningPage" + index);
+            var invoke = Peer(navigation).GetPattern(PatternInterface.Invoke);
+            Check("section-navigation-peer-" + page, () => Assert.IsNotNull(invoke));
+            ((IInvokeProvider)invoke!).Invoke(); await Idle();
+            Check("section-navigation-result-" + page, () => { Assert.AreEqual(page, vm.ContentPage); Assert.IsGreaterThan(0, ((StackPanel)view.FindName("DocumentContent")).Children.Count); });
+            Snapshot("MODULE-" + page, view);
+        }
+        Assert.IsTrue(await vm.SelectContentSafelyAsync("镜头清单")); await Idle();
+        var table = Visuals<DataGrid>(view).Single(x => AutomationProperties.GetAutomationId(x) == "PlanningEditableShotTable");
+        table.ScrollIntoView(table.Items[0]); table.UpdateLayout(); await Idle();
+        // DataGrid owns logical DataGridItemAutomationPeers; a visual DataGridRow peer
+        // is not the selectable provider exposed to UIA clients.
+        var shotItemPeer = Walk(Peer(table)).First(p => p.GetAutomationControlType() == AutomationControlType.DataItem && p.GetPattern(PatternInterface.SelectionItem) is not null);
+        Check("shot-peer", () =>
+        {
+            Assert.IsNotNull(Peer(table).GetPattern(PatternInterface.Grid));
+            Assert.AreEqual(AutomationControlType.DataItem, shotItemPeer.GetAutomationControlType());
+            Assert.IsNotNull(shotItemPeer.GetPattern(PatternInterface.SelectionItem)); Assert.IsTrue(Peer(table).IsKeyboardFocusable(), "Keyboard enters the current DataGrid, not the retired row button");
+        });
+        ((ISelectionItemProvider)shotItemPeer.GetPattern(PatternInterface.SelectionItem)!).Select(); await Idle();
+        Check("shot-select-inspector", () => Assert.AreEqual(((PlanningShotEditRow)table.Items[0]).ShotId, vm.SelectedShot!.ShotId));
+        table.CurrentCell = new DataGridCellInfo(table.Items[0], table.Columns.Single(c => Equals(c.Header, "名称")));
+        table.Focus(); Assert.IsTrue(table.BeginEdit()); await Idle();
+        var shotNameEditor = Visuals<TextBox>(table).Single(x => !x.IsReadOnly && x.IsVisible);
+        ((IValueProvider)Peer(shotNameEditor).GetPattern(PatternInterface.Value)!).SetValue("自动化合同真实单元格编辑");
+        Assert.IsTrue(table.CommitEdit(DataGridEditingUnit.Cell, true)); Assert.IsTrue(table.CommitEdit(DataGridEditingUnit.Row, true));
+        Assert.IsTrue(await vm.FlushAsync()); await vm.LoadAsync(createdProject); await Idle();
+        Check("shot-grid-save-reopen", () => Assert.IsTrue(vm.Shots.Any(x => x.Name == "自动化合同真实单元格编辑")));
         vm.ContentPage = "文字"; vm.IsPreviewMode = true; await Idle(); Snapshot("PREVIEW_MODE", view); vm.IsPreviewMode = false;
         var more = Visuals<Button>(view).Single(x => AutomationProperties.GetName(x) == "更多策划操作");
         more.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); await Idle();
