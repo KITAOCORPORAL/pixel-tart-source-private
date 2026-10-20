@@ -1,7 +1,8 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$OutputRoot = '',
     [string]$StatePattern = '*',
+    [string]$ExecutablePath = '',
     [switch]$SkipBuild
 )
 
@@ -15,9 +16,15 @@ if (-not (Test-Path -LiteralPath $dotnet -PathType Leaf)) {
 }
 $project = Join-Path $repoRoot 'src\RAWSelectionAssistant\RAWSelectionAssistant.csproj'
 $executable = Join-Path $repoRoot 'src\RAWSelectionAssistant\bin\x64\Release\net10.0-windows10.0.19041.0\win-x64\KitaoPhotoSelector.UiReview.exe'
+if (-not [string]::IsNullOrWhiteSpace($ExecutablePath)) {
+    if (-not $SkipBuild) { throw 'An explicitly published ExecutablePath requires SkipBuild.' }
+    $executable = [IO.Path]::GetFullPath($ExecutablePath)
+}
 $sourceCommit = (& git -C $repoRoot rev-parse HEAD).Trim()
 if ([string]::IsNullOrWhiteSpace($OutputRoot)) { $OutputRoot = Join-Path $repoRoot 'artifacts\current-run-visual' }
 $OutputRoot = [IO.Path]::GetFullPath($OutputRoot)
+# Evidence is immutable per run: no deletion, baseline reuse or splicing prior screenshots.
+if (Test-Path -LiteralPath $OutputRoot) { throw "Fresh output directory required; existing evidence is preserved: $OutputRoot" }
 $screenshotsRoot = Join-Path $OutputRoot 'screenshots'
 $dpiRoot = Join-Path $OutputRoot 'dpi-current'
 $resolutionRoot = Join-Path $OutputRoot 'asset-library-resolutions'
@@ -90,7 +97,6 @@ function New-SyntheticAssets {
     }
 }
 
-Get-ChildItem -LiteralPath $fixtureRoot -File -Filter '*.jpg' -ErrorAction SilentlyContinue | Remove-Item -Force
 New-SyntheticAssets $fixtureRoot
 $sourceBefore = @(Get-ChildItem -LiteralPath $fixtureRoot -File | Sort-Object Name | ForEach-Object {
     [ordered]@{ name=$_.Name; bytes=$_.Length; sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash }
@@ -106,7 +112,7 @@ function Invoke-ProductCapture {
     [IO.Directory]::CreateDirectory($profile) | Out-Null
     $metadataPath = $OutputPath + '.json'
     [IO.Directory]::CreateDirectory((Split-Path -Parent $OutputPath)) | Out-Null
-    Remove-Item -LiteralPath $OutputPath,$metadataPath -Force -ErrorAction SilentlyContinue
+    if ((Test-Path -LiteralPath $OutputPath) -or (Test-Path -LiteralPath $metadataPath)) { throw "Capture already exists: $OutputPath" }
     $logicalWidth = $PhysicalWidth / $Scale
     $logicalHeight = $PhysicalHeight / $Scale
     [ordered]@{
@@ -115,11 +121,17 @@ function Invoke-ProductCapture {
         DpiX=96*$Scale; DpiY=96*$Scale; PhysicalWidth=$PhysicalWidth; PhysicalHeight=$PhysicalHeight
     } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $profile 'ui-review-state.json') -Encoding UTF8
 
+    $previousIsolated = $env:PIXEL_TART_ISOLATED_RUNTIME
+    $previousIsolatedRoot = $env:PIXEL_TART_ISOLATED_RUNTIME_ROOT
+    $previousHuman = $env:PIXEL_TART_HUMAN_ACCEPTANCE
     $previousRoot = $env:PIXEL_TART_ACCEPTANCE_ROOT
     $previousHarness = $env:PIXEL_TART_RC12_PRODUCT_HARNESS
     $previousDemo = $env:PIXEL_TART_ASSET_LIBRARY_DEMO_DIR
     $previousCommit = $env:PIXEL_TART_SOURCE_COMMIT
     $previousDotnet = $env:DOTNET_ROOT
+    $env:PIXEL_TART_ISOLATED_RUNTIME = '1'
+    $env:PIXEL_TART_ISOLATED_RUNTIME_ROOT = $profile
+    $env:PIXEL_TART_HUMAN_ACCEPTANCE = '0'
     $env:PIXEL_TART_ACCEPTANCE_ROOT = $profile
     $env:PIXEL_TART_RC12_PRODUCT_HARNESS = '1'
     $env:PIXEL_TART_ASSET_LIBRARY_DEMO_DIR = $fixtureRoot
@@ -154,6 +166,9 @@ function Invoke-ProductCapture {
                 { $script:captures[$script:captures.Count-1].process_exited_before_next = $process.HasExited }
             $process.Dispose()
         }
+        $env:PIXEL_TART_ISOLATED_RUNTIME = $previousIsolated
+        $env:PIXEL_TART_ISOLATED_RUNTIME_ROOT = $previousIsolatedRoot
+        $env:PIXEL_TART_HUMAN_ACCEPTANCE = $previousHuman
         $env:PIXEL_TART_ACCEPTANCE_ROOT = $previousRoot
         $env:PIXEL_TART_RC12_PRODUCT_HARNESS = $previousHarness
         $env:PIXEL_TART_ASSET_LIBRARY_DEMO_DIR = $previousDemo
@@ -273,7 +288,10 @@ $manifest = [ordered]@{
     # Windows may reuse a PID after its owner exits. Lifecycle separation is proven
     # by the exit acknowledgement on every capture; PID uniqueness is diagnostic only.
     unique_process_id_per_capture=$uniquePids; lifecycle_isolated_per_capture=$allExited; all_processes_exited_before_next=$allExited
-    executable_sha256=(Get-FileHash -LiteralPath $executable -Algorithm SHA256).Hash
+    executable_path=$executable; executable_sha256=(Get-FileHash -LiteralPath $executable -Algorithm SHA256).Hash
+    capture_kind='offscreen-render-target-bitmap'; physical_display_acceptance='NOT_RUN'
+    producer_script_sha256=(Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash
+    published_components=@(Get-ChildItem -LiteralPath (Split-Path -Parent $executable) -File | Where-Object { $_.Name -match '^(KitaoPhotoSelector.*|RAWSelectionAssistant.Core|PixelTart.*)\.(dll|exe)$' } | ForEach-Object { [ordered]@{name=$_.Name;sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash} })
     generated_at=[DateTimeOffset]::Now.ToString('O'); captures=$script:captures; source_before=$sourceBefore; source_after=$sourceAfter
 }
 $manifest | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath (Join-Path $OutputRoot 'current-run-visual-evidence.json') -Encoding UTF8
