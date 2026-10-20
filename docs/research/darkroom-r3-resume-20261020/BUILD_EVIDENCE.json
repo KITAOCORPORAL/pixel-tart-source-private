@@ -1,0 +1,214 @@
+{
+  "source": "2c4ce66b73b91316e7fa8eaa997f92c41a824651",
+  "releaseExeSha256": "E9A219E85F26DC594C85531D0FF016D84B32E65D80097991D29D4AD9AE5068E7",
+  "releaseWpfSha256": "3AAB4063F321618B82DB606A03207C80D5E6774FDC8FF32E5D742F60495FC23E",
+  "releaseCoreSha256": "AF418F8371976A99BC408BA384E55DBF2F9B13B51EC04081889E858BF6A52385",
+  "localDelivery": "N:\\pixart\\Darkroom-R3-Resume-20261020",
+  "status": "R3_LAYOUT_INCOMPLETE_DEVELOPER_PREVIEW",
+  "browserThisSession": "NOT_RUN per current user constraints",
+  "desktopScreenshots": "NOT_RUN",
+  "physicalMouse": "NOT_RUN",
+  "physicalRecording": "NOT_RUN",
+  "references": [
+    {
+      "name": "color-workspace-r3-prototype.html",
+      "sha256": "6F19915C461C2770DA53E6A7F962C6B69A03053075167D10E44AD109C84D72CA"
+    },
+    {
+      "name": "color-workspace-r3-spec.md",
+      "sha256": "FFC2C3576EFB507543BBE3785E387D705241964C203F2D68B1DFB1A33F69DBA7"
+    },
+    {
+      "name": "decisions.md",
+      "sha256": "F21C0E518165DFE61F786BC403C38B6980B1838F5CB36B83CCD2D3E1DA6AD988"
+    },
+    {
+      "name": "coverage-color-r3.csv",
+      "sha256": "3A3417DA56FCE8AF3AD513344C8AED13CE89B942615F684871D73162AF50E1BF"
+    }
+  ],
+  "comparisons": [
+    {
+      "state": "adjust",
+      "size": [
+        1366,
+        768
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\01-adjust-1366.png",
+      "referenceSha256": "7B00D02AE193214516DD539DE642B3F4D17B74424883F0A8C662B8587BBB4EAC",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\01-adjust-1366.png",
+      "wpfSha256": "C1363E17E6240C028A3C76E8439D0FDCFF6D7E1C48E78ABFF0D5B84B16B75DE4",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\01-adjust-1366-pair.png",
+      "proof": "offscreen"
+    },
+    {
+      "state": "paper",
+      "size": [
+        1366,
+        768
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\02-paper-1366.png",
+      "referenceSha256": "3F87A4B3CA779CCD512A50BDA30C73A05E36119F3D9DDD5C6AF4B557B30D44EE",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\02-paper-1366.png",
+      "wpfSha256": "7D13C2DAE9D49CEC557E5238DBDDA6E7314416127A3EA35E20741CCA79A54776",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\02-paper-1366-pair.png",
+      "proof": "offscreen"
+    },
+    {
+      "state": "preview",
+      "size": [
+        1366,
+        768
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\03-preview-1366.png",
+      "referenceSha256": "7BBCF94858AF8D03DC083561D267107EF33D4AA2D551B5BB7AABED1BEA0FE519",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\03-preview-1366.png",
+      "wpfSha256": "52740F8E86EAD3911D9FE586BC095ACD6B2745ECF49F841E033307D29C6C4F09",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\03-preview-1366-pair.png",
+      "proof": "offscreen"
+    },
+    {
+      "state": "frame",
+      "size": [
+        1366,
+        768
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\04-frame-1366.png",
+      "referenceSha256": "1F45DBF971DA325E21F69FB7A303F6FAAAC5444E59C99B88EACB85119439C2E6",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\04-frame-1366.png",
+      "wpfSha256": "782F4498C0A8D108235B6DECB665FA45977986A672F4CAA85BDD86666F246D0D",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\04-frame-1366-pair.png",
+      "proof": "offscreen"
+    },
+    {
+      "state": "locked",
+      "size": [
+        1366,
+        768
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\05-locked-1366.png",
+      "referenceSha256": "699868E7966D1BEB2CEF74B6471C1D035162C7E298273918C955F621E5DA6E27",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\05-locked-1366.png",
+      "wpfSha256": "775E1ECB9A06E156710994E272B1440F2647F4579366F804F151281A93374614",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\05-locked-1366-pair.png",
+      "proof": "offscreen"
+    },
+    {
+      "state": "variants",
+      "size": [
+        1366,
+        768
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\06-variants-1366.png",
+      "referenceSha256": "22889AD0609BDB53B648B985BBAE4B2228E46AEC4242594A150DC5B0E0084F5B",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\06-variants-1366.png",
+      "wpfSha256": "B4F1EB0C3F936E61C35B92F6455FC6C5DA72607A2A44ED5F25B893A5F2D3D735",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\06-variants-1366-pair.png",
+      "proof": "offscreen"
+    },
+    {
+      "state": "export",
+      "size": [
+        1366,
+        768
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\07-export-1366.png",
+      "referenceSha256": "715E7A8526DA6D8C380F14BAA40E0073217D3A61EFF96D84616C09D38AFD8B5A",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\07-export-1366.png",
+      "wpfSha256": "EC52B78538779F0DDED8EE9EFD68D0D6B919B5AD0AB0F9B53339C1562CABD2E7",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\07-export-1366-pair.png",
+      "proof": "offscreen-content-overlay"
+    },
+    {
+      "state": "adjust",
+      "size": [
+        1920,
+        1080
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\01-adjust-1920.png",
+      "referenceSha256": "FA8C326A021748314EA5E5246AEC28035D3444B4B523A50C7B66E9A1D0754D70",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\01-adjust-1920.png",
+      "wpfSha256": "B1714B31BC4AD6F3695D15F9DA6A67A232CF919AE497D3731734CD467457A03F",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\01-adjust-1920-pair.png",
+      "proof": "offscreen"
+    },
+    {
+      "state": "paper",
+      "size": [
+        1920,
+        1080
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\02-paper-1920.png",
+      "referenceSha256": "CF8E07F0DD5B08FEF8DB5134F46E2F8B286C1E1ED34BD15A57B7F1018DC04D89",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\02-paper-1920.png",
+      "wpfSha256": "76B2147E4789B36C9D17035F2A8354FF20918C5FFDE8C951EF997AEFAF05F0DD",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\02-paper-1920-pair.png",
+      "proof": "offscreen"
+    },
+    {
+      "state": "preview",
+      "size": [
+        1920,
+        1080
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\03-preview-1920.png",
+      "referenceSha256": "3C4C6DE73AC947A5C72294F64D3A414642C2EA3B46CF5A358D47FB06388AD713",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\03-preview-1920.png",
+      "wpfSha256": "6ECAA081817882C59440BD815AB015A0F1ECFD91F1A06A6029E60889831D3D85",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\03-preview-1920-pair.png",
+      "proof": "offscreen"
+    },
+    {
+      "state": "frame",
+      "size": [
+        1920,
+        1080
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\04-frame-1920.png",
+      "referenceSha256": "EA7D94D6A2D4E5A14814022136D34B1B9A2DC93769961DFAC742588586D87051",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\04-frame-1920.png",
+      "wpfSha256": "E6528E6A835BACE51F529D8BB0468F2D4C09D98222FD9A896E0A28DE9A8065E9",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\04-frame-1920-pair.png",
+      "proof": "offscreen"
+    },
+    {
+      "state": "locked",
+      "size": [
+        1920,
+        1080
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\05-locked-1920.png",
+      "referenceSha256": "23F74B14FF8139DD7B06727BBF3FCD4E02B362EF4DD665D490D05998BD9A0064",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\05-locked-1920.png",
+      "wpfSha256": "9B97AB985ABED63428D36279B4DFD0ABCE4A2EA7D3565AAF2AA325A1C4A07882",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\05-locked-1920-pair.png",
+      "proof": "offscreen"
+    },
+    {
+      "state": "variants",
+      "size": [
+        1920,
+        1080
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\06-variants-1920.png",
+      "referenceSha256": "42762CB256E8AF6CE00F0D788658B002796868972FC8DE5407C8FC60B1C29D9C",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\06-variants-1920.png",
+      "wpfSha256": "C950037414695B9911886BA4FB3AEDE69A6624327E888EDE5F3147A347E6386E",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\06-variants-1920-pair.png",
+      "proof": "offscreen"
+    },
+    {
+      "state": "export",
+      "size": [
+        1920,
+        1080
+      ],
+      "reference": "N:\\pixart\\Darkroom-R3-Visual-20261019\\reference\\07-export-1920.png",
+      "referenceSha256": "DE7AE321D728AD3D6B97C4C76CB2604E8DEF243BF9D8B1B335BC2F83A0D82A85",
+      "wpf": "N:\\pixart\\Darkroom-R3-Resume-20261020\\wpf-shipped\\07-export-1920.png",
+      "wpfSha256": "2B6BC7F0A6E8280676DAA977A507FC4CA60A623575E80CA61F9D517CF2D0C426",
+      "pair": "N:\\pixart\\Darkroom-R3-Resume-20261020\\comparison\\07-export-1920-pair.png",
+      "proof": "offscreen-content-overlay"
+    }
+  ]
+}

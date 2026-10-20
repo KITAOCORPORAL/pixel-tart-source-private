@@ -59,7 +59,11 @@ namespace RAWSelectionAssistant.WpfTests;
     for(var i=0;i<5;i++){tabs.SelectedIndex=i;page.UpdateLayout();var pane=(FrameworkElement)page.FindName(new[]{"AdjustmentScroll","PaperScroll","LayersScroll","StylesScroll","VariantsScroll"}[i]);Assert.AreEqual(Visibility.Visible,pane.Visibility);}
    }
    vm.FilterScope="Jpeg";Assert.AreEqual(0,vm.VisibleTargets.Count);Assert.AreSame(vm.VisibleTargets,((ListBox)page.FindName("PhotoStrip")).ItemsSource);vm.ClearFilmstripFiltersCommand.Execute(null);Assert.AreEqual(2,vm.VisibleTargets.Count);
-   tabs.SelectedIndex=1;vm.SelectedPhotographerPaperId="itype-color";await vm.LightPrintPreviewWork;await vm.DevelopLightPrintCommand.ExecuteAsync(null);var frozen=JsonSerializer.Serialize(vm.ActiveTarget!.RawDefinition);var exposure=vm.InstantV3Exposure;
+   tabs.SelectedIndex=1;page.UpdateLayout();
+   var picker=(InstantV3Editor)page.FindName("V3Editor");var papers=(ListBox)picker.FindName("PaperChoices");Assert.AreEqual(5,papers.Items.Count);Assert.AreEqual(3,papers.Items.Groups!.Count);
+   papers.SelectedValue="blue-duochrome600";await System.Windows.Threading.Dispatcher.Yield(System.Windows.Threading.DispatcherPriority.DataBind);await vm.LightPrintPreviewWork;Assert.AreEqual("blue-duochrome600",vm.SelectedPhotographerPaperId);
+   var frame=(ListBox)page.FindName("FrameChoice");frame.SelectedValue="generic.white.circle";await System.Windows.Threading.Dispatcher.Yield(System.Windows.Threading.DispatcherPriority.DataBind);await vm.LightPrintPreviewWork;Assert.AreEqual("generic.white.circle",vm.SelectedLightPrintFrameId);
+   vm.SelectedPhotographerPaperId="itype-color";await vm.LightPrintPreviewWork;await vm.DevelopLightPrintCommand.ExecuteAsync(null);var frozen=JsonSerializer.Serialize(vm.ActiveTarget!.RawDefinition);var exposure=vm.InstantV3Exposure;
    Assert.IsFalse(vm.ResetPhotoV3DraftCommand.CanExecute(null));vm.ResetPhotoV3DraftCommand.Execute(null);Assert.AreEqual(exposure,vm.InstantV3Exposure);Assert.AreEqual(frozen,JsonSerializer.Serialize(vm.ActiveTarget.RawDefinition));
    var icons=vm.LightPrintFrameChoices.Select(f=>f.Window).Distinct().ToArray();Assert.AreEqual(2,icons.Length);page.DataContext=null;
   }finally{Directory.Delete(root,true);}

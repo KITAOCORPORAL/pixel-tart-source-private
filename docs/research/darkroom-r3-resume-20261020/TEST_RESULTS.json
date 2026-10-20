@@ -1,0 +1,64 @@
+{
+  "source": "2c4ce66b73b91316e7fa8eaa997f92c41a824651",
+  "tests": [
+    {
+      "file": "r3-wpf-bindings-shipped.trx",
+      "sha256": "3BDEF332EFE5DD992D671A6DA76F897C19F4C38AA8D02C96C07A0CF0CFA7A08F",
+      "counts": {
+        "total": "17",
+        "executed": "16",
+        "passed": "16",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "nonPassed": [
+        {
+          "name": "AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+          "outcome": "NotExecuted"
+        }
+      ]
+    },
+    {
+      "file": "r3-core-shipped.trx",
+      "sha256": "3FC9A8EBE9A5A5BD09900F148DCF195EE508A55415B132BB98101BA4D55E0F71",
+      "counts": {
+        "total": "27",
+        "executed": "27",
+        "passed": "27",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "nonPassed": []
+    }
+  ],
+  "productWpfSha256": "3AAB4063F321618B82DB606A03207C80D5E6774FDC8FF32E5D742F60495FC23E",
+  "productCoreSha256": "AF418F8371976A99BC408BA384E55DBF2F9B13B51EC04081889E858BF6A52385",
+  "actualDllsCopiedToTestRunner": true,
+  "limitations": [
+    "AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity skipped: no explicit manifest supplied to that test. Separate TWO_PHOTO_RESULT executes real two-photo R3 flows.",
+    "MSTest analyzer recommendations remain warnings, not build errors."
+  ],
+  "uiBindingsTest": "Grouped ListBox 5 paper items / 3 groups and FrameChoice SelectedValue change actual published view-model and complete preview; not physical click proof"
+}
