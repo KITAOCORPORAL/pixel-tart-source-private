@@ -129,7 +129,7 @@ BASELINE_WPF_3,RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGu
    at RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval()
    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)",N:\pixart\Guangjing-Home-Batch1-20261020-210958\BASELINE_WPF_3\run-20261020-211348-6e999029\052\results.trx
-REPRO_R3_REUSED_OUTPUT,RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline,TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline,10e4eaaf-60cd-82d5-abfd-fa8eda9da712,Failed,"测试方法 RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests。TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline 引发了异常: 
+REPRO_R3_REUSED_OUTPUT,RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline,TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline,10e4eaaf-60cd-82d5-abfd-fa8eda9da712,Failed,"测试方法 RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests。TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline 引发了异常:
 System.InvalidOperationException: 此工作区未读取该工作文件；请先打开或另存新文件，未覆盖。
              at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.SaveSessionAsync(String path, CancellationToken token)
    at RAWSelectionAssistant.WpfTests.R3CommandLineReviewTests.<>c.<<TwoExplicitAuthorizedPhotosExerciseCurrentProductPipeline>b__7_0>d.MoveNext()
