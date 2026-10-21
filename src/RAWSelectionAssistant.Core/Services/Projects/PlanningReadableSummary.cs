@@ -86,11 +86,12 @@ public static class PlanningReadableSummaryBuilder
         foreach(var image in owned)
         {
             var section=PlacementSection(image.Placement);
+            if(section==1&&d.Package?.RichTextPackageBase64 is null)section=14;
             if(section==2&&image.ShotId is Guid shot&&input.Shots.All(s=>s.ShotId!=shot))section=14;
             // Body keeps its original positions; other placements are materialized only once per section
             // unless distinct saved references deliberately refer to the same owned image identity.
             if(section==1||placed.Contains((section,image.DocumentImageId)))continue;
-            Add(section,image.Title,("文档自有图片ID",image.DocumentImageId),("原位置",image.Placement),("图注",image.Caption),("来源",image.OriginLabel),("副本Hash",image.CopyHash));Attach(section,[image]);
+            Add(section,image.Title,("文档自有图片ID",image.DocumentImageId),("原位置",image.Placement),("图注",image.Caption),("来源",image.OriginLabel),("副本Hash",image.CopyHash),("位置说明",image.Placement is "光标" or "文字"?"没有持久富文本插入位置；保留在文档内容区，不猜测正文坐标":"按已保存图片位置归属"));Attach(section,[image]);
         }
         return new(input.ProjectId,d.Package?.DocumentId,SectionOrder.Select((name,i)=>new PlanningSummarySection(name,sections[i].ToArray())).ToArray());
         void AddReference(int section,ProjectShotReference r,string role,params (string Key,object? Value)[] extra)

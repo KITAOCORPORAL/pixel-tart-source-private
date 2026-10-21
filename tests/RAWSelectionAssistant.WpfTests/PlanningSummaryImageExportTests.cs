@@ -35,6 +35,7 @@ public sealed class PlanningSummaryImageExportTests
   var reference=new ProjectShotReference(Guid.NewGuid(),ShotReferenceKind.Lighting,source.LibraryId,source.AssetId,Title:"同一库引用跨区",Note:"当前原件不读取");await vm.AddDocumentReferencesAsync([reference]);var item=vm.AllProjectReferences.Single(x=>x.Id==reference.ReferenceId);await vm.UpdateReferenceAsync(item,"分类","灯光");await vm.UpdateReferenceAsync(vm.AllProjectReferences.Single(x=>x.Id==reference.ReferenceId),"情绪板");
   var external=Path.Combine(f.Root,"external-readable.png");await File.WriteAllBytesAsync(external,bytes);await vm.AddDocumentReferencesAsync([new(Guid.NewGuid(),ShotReferenceKind.General,ExternalReference:external,Title:"外链只列状态")]);
   Assert.IsTrue(await vm.FlushAsync());var reopened=f.NewVm();await reopened.LoadAsync(f.Id);var plan=Path.Combine(f.Root,"planning",$"{f.Id:N}.planning.json");var before=await File.ReadAllBytesAsync(plan);var originals=new[]{a,b,c}.ToDictionary(i=>i.DocumentImageId,i=>File.ReadAllBytes(PlanningImageStorage.Resolve(i)));File.Delete(PlanningImageStorage.Resolve(missing));
+  var originalExport=Path.Combine(f.Root,"images-summary-before-reopen.docx");Assert.IsNotNull(await vm.ExportPlanningSummaryDocxAsync(originalExport));
   var path=Path.Combine(f.Root,"images-summary.docx");var result=await reopened.ExportPlanningSummaryDocxAsync(path);Assert.IsNotNull(result);Assert.AreEqual(15,result.Sections);Assert.AreEqual(2,result.Warnings.Count,"Missing body position and lighting position must both be declared");
   using(var package=WordprocessingDocument.Open(path,false))
   {
@@ -47,6 +48,7 @@ public sealed class PlanningSummaryImageExportTests
    StringAssert.Contains(body.InnerText,"缺失灯位图");StringAssert.Contains(body.InnerText,"文档图片不可用");StringAssert.Contains(body.InnerText,"外链只列状态");StringAssert.Contains(body.InnerText,"中文图注甲");StringAssert.Contains(body.InnerText,"项目自有历史副本");StringAssert.Contains(body.InnerText,"未读取库当前原件");
   }
   await Assert.ThrowsAsync<InvalidOperationException>(()=>reopened.ExportPlanningSummaryDocxAsync(path));
+  Assert.AreEqual(Text(originalExport),Text(path));CollectionAssert.AreEqual(Drawings(originalExport).Select(x=>x.ImageId).ToArray(),Drawings(path).Select(x=>x.ImageId).ToArray());
   CollectionAssert.AreEqual(before,await File.ReadAllBytesAsync(plan));foreach(var image in new[]{a,b,c})CollectionAssert.AreEqual(originals[image.DocumentImageId],File.ReadAllBytes(PlanningImageStorage.Resolve(image)));Assert.IsFalse(File.Exists(Path.Combine(f.Root,"planning",PlanningImageStorage.RelativePath(missing.DocumentId,missing.DocumentImageId))));
   var again=Path.Combine(f.Root,"images-summary-again.docx");Assert.IsNotNull(await reopened.ExportPlanningSummaryDocxAsync(again));Assert.AreEqual(Text(path),Text(again));CollectionAssert.AreEqual(Drawings(path).Select(x=>x.ImageId).ToArray(),Drawings(again).Select(x=>x.ImageId).ToArray());
   var read=PlanningDocxAdapter.Import(path);var paginator=new PlanningPaginator(read.Document);paginator.PageSize=new Size(read.Document.PageWidth,read.Document.PageHeight);paginator.ComputePageCount();Assert.IsTrue(paginator.PageCount>2&&paginator.PageCount<35,"Long body must paginate within a bounded page count");
@@ -82,6 +84,12 @@ public sealed class PlanningSummaryImageExportTests
    var source=new PlanningDocument{Package=new(){ProjectId=f.Id,DocumentId=meta.DocumentId,RichLayout=new(new(),[],[]){Images=[meta]}}};var projection=PlanningReadableSummaryBuilder.Build(new(f.Id,"不可读测试",source,new(),[]));var warnings=new List<string>();var doc=PlanningSummaryDocument.Create(projection,source,warnings);Assert.AreEqual(1,warnings.Count);StringAssert.Contains(warnings[0],"占用中的副本");Assert.IsEmpty(PlanningDocumentImages.Images(doc));
   }
   Assert.AreEqual(meta.CopyHash,Hash(File.ReadAllBytes(owned)));
+ });
+ [TestMethod]public Task OwnedImageWithoutRichInsertionIsExplicitlyRetainedInDocumentContent()=>RunSta(async()=>
+ {
+  EnsureTestApplication();using var f=await PlanningFoundationWpfTests.Fixture.Create();await f.Vm.LoadAsync(f.Id);var meta=PlanningDocumentImages.Copy(f.Vm.DocumentImageDirectory,f.Vm.PlanningDocumentId!.Value,PlanningRichFlowFixture.ReferencePng(0),null,"光标","无正文位置的自有图","原元数据保留",0);
+  var source=new PlanningDocument{Package=new(){ProjectId=f.Id,DocumentId=meta.DocumentId,RichLayout=new(new(),[],[]){Images=[meta]}}};var projection=PlanningReadableSummaryBuilder.Build(new(f.Id,"incomplete",source,new(),[]));
+  Assert.AreEqual(meta.DocumentImageId,projection.Sections[14].OwnedImages.Single().DocumentImageId);var warnings=new List<string>();var content=PlanningSummaryDocument.Create(projection,source,warnings);Assert.AreEqual(1,PlanningDocumentImages.Images(content).Count());StringAssert.Contains(new TextRange(content.ContentStart,content.ContentEnd).Text,"没有持久富文本插入位置");
  });
  public sealed record DrawingPosition(int Section,Guid ImageId,double Width,double Height);
  static List<DrawingPosition> Drawings(string path)
