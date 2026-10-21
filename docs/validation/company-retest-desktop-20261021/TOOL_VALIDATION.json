@@ -4,5 +4,7 @@
   "powershellParser": "PASS, PowerShell 7.6.5, zero errors",
   "homeExecution": "NOT_RUN: household machine not available in company task",
   "scriptOriginalThreshold": 30000,
-  "scriptOriginalIterations": 10000
+  "scriptOriginalIterations": 10000,
+  "homeScriptSHA256": "999fb9bde7871df9f0484f0e5d8eee416d877c35aca51b123bbb288f70e73aa6",
+  "validationAfterFinalEnvironmentGuard": true
 }

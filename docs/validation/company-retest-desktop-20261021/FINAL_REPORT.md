@@ -59,3 +59,7 @@ HOME_RETEST.md给出同修复源码0e5c3ea7、同物理盘TEMP、原10000/30000�
 - 策划外链/附件/SQLite完整便携、15区汇总导出、复杂Word/WPS、设备目录/相机/物理跨屏等原范围仍真实PARTIAL/NOT_RUN/BLOCKED；Setup/安装升级卸载未验。
 
 因此本轮只交独立复测/桌面阻断证据和家用说明，不修改无关产品、不开main、不标正式发行。正常推送本公司续接分支后独立ls-remote读回，见PUSH_READBACK.json；产品SHA与文档HEAD分开。
+
+## 本轮推送读回
+
+独立复测证据提交9a5921e03a1bab3e0883e518c48d0fbcddf0f810已正常推送；独立ls-remote读回LOCAL_HEAD=REMOTE_HEAD，工作树干净。后续只封存读回、复测工具哈希和独立证据包身份，不改变产品/测试源码或旧Release。
