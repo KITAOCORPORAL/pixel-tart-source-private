@@ -3,6 +3,16 @@ using System.Windows.Controls;
 namespace RAWSelectionAssistant.Views;
 public partial class PlanningCenterView
 {
+    private async Task ExportPlanningSummaryFromViewAsync()
+    {
+        if(_vm is null)return;
+        if(!await FlushDocumentAsync()){_vm.Dialogs.ShowError("当前策划保存未完成，未导出汇总："+_vm.SaveStatus);return;}
+        var path=_vm.Dialogs.ChooseSaveFile("导出15区汇总（阅读快照，非项目便携包）","DOCX|*.docx",".docx",_vm.DocumentTitle+"-15区汇总.docx");
+        if(path is null)return;
+        try{if(await _vm.ExportPlanningSummaryDocxAsync(path) is{} result)_vm.Dialogs.ShowInfo(_vm.SummaryExportStatus+"\n汇总用于阅读，不回写15区资源；原摄影DOCX导出/导回保持独立。");else _vm.Dialogs.ShowError("当前策划保存未完成，未导出汇总："+_vm.SaveStatus);}
+        catch(Exception error)when(error is System.IO.IOException or System.IO.InvalidDataException or UnauthorizedAccessException or InvalidOperationException or ArgumentException or NotSupportedException or System.Xml.XmlException)
+        {_vm.Dialogs.ShowError("15区汇总未完成，原资料与已有输出保留："+error.Message);}
+    }
     private async Task ExportPlanningDocxFromViewAsync()
     {
         if(_vm is null||!await FlushDocumentAsync())return;

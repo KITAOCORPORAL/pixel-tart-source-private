@@ -569,6 +569,7 @@ public partial class PlanningCenterView : UserControl
         var menu = new ContextMenu { PlacementTarget = button }; menu.SetResourceReference(StyleProperty, "PixelTart.Menu.Context");
         var start = MenuEntry("开始拍摄", "IconCameraTether"); start.Command = _vm.EnterTetherCommand; menu.Items.Add(start);
         var calendar = MenuEntry("查看关联档期", "IconCalendar"); calendar.Command = _vm.OpenCalendarCommand; menu.Items.Add(calendar);
+        var summary = MenuEntry("导出15区汇总 DOCX", "IconPlanning"); summary.Click += async (_,_) => await ExportPlanningSummaryFromViewAsync(); menu.Items.Add(summary);
         var overview = MenuEntry("返回策划列表", "IconPlanning"); overview.Click += async (_, _) => { if (await FlushDocumentAsync()) await _vm.ShowOverviewCommand.ExecuteAsync(null); }; menu.Items.Add(overview); menu.IsOpen = true;
     }
     private async void ShowImage(PlanningReferenceItem item)
