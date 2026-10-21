@@ -1,0 +1,32 @@
+[
+  {
+    "id": "SUMMARY-SCOPE-01",
+    "status": "PARTIAL",
+    "reason": "New summary is readable DOCX snapshot, not a bidirectional 15-section import model or portable project bundle"
+  },
+  {
+    "id": "REF-PORTABLE-01",
+    "status": "NOT_RUN",
+    "reason": "External refs, attachments, DB and library dependencies are not migrated; source states are explicit"
+  },
+  {
+    "id": "DESKTOP-01",
+    "status": "NOT_RUN",
+    "reason": "No physical input/capture executed this batch; prior tool blockage retained only as historical context"
+  },
+  {
+    "id": "WPS-01",
+    "status": "NOT_RUN",
+    "reason": "Word/WPS external fidelity not tested; current structural and product-render checks scoped"
+  },
+  {
+    "id": "FULL-GATE-01",
+    "status": "NOT_RUN",
+    "reason": "Only impacted25Core/69WPF rerun, no claim full-app final release gate"
+  },
+  {
+    "id": "RELEASE-01",
+    "status": "BLOCKED",
+    "reason": "Physical desktop/cross-machine and existing release gates not closed; diagnostic only"
+  }
+]

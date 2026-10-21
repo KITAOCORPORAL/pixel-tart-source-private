@@ -1,0 +1,140 @@
+{
+  "sourceSha": "d1a77be4450c5a2cbb3c09b47580b9841280a14f",
+  "rows": [
+    {
+      "order": 1,
+      "section": "项目概览",
+      "exportedContent": "标题/副标题/人员地点/目标/关键词/客户要求/必拍/备注/交付用途",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 2,
+      "section": "文字",
+      "exportedContent": "支持的RTF段落/自有图片/基础表格；缺图原位说明",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 3,
+      "section": "镜头清单与分镜",
+      "exportedContent": "按Order的镜头与原ID/字段/关联参考/自定义列",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 4,
+      "section": "参考图",
+      "exportedContent": "文档与镜头聚合去重参考；库/外链状态",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 5,
+      "section": "情绪板",
+      "exportedContent": "同ReferenceId的情绪板分组、项目视觉引用元数据",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 6,
+      "section": "灯位图",
+      "exportedContent": "PlanningLight字段与灯光Category参考",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 7,
+      "section": "服化道与道具",
+      "exportedContent": "PlanningProp字段与造型Category参考",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 8,
+      "section": "设备",
+      "exportedContent": "PlanningGearItem型号/数量/来源/关联镜头",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 9,
+      "section": "人员",
+      "exportedContent": "PlanningCrewMember角色/联系/到场/关联",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 10,
+      "section": "场地",
+      "exportedContent": "PlanningVenue地址/日期/时区/手动数据来源",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 11,
+      "section": "档期",
+      "exportedContent": "已载入关联Booking身份/UTC/时区/本地时间/状态",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 12,
+      "section": "当天时间表",
+      "exportedContent": "PlanningScheduleSlot日期/起止/地点/负责人",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 13,
+      "section": "预算",
+      "exportedContent": "PlanningBudgetLine及本次只读同项目支出；分币种不换算",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 14,
+      "section": "文件",
+      "exportedContent": "附件ID/名称/原位置/存在缺失；不复制",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    },
+    {
+      "order": 15,
+      "section": "文档内容",
+      "exportedContent": "CustomBody、自有图片记录、库素材/画布快照引用元数据",
+      "empty": "标题保留，未填写内容/字段明确标示",
+      "syntheticTest": "PASS scoped",
+      "physicalMouse": "NOT_RUN",
+      "crossMachine": "NOT_RUN/不保证外链便携"
+    }
+  ]
+}

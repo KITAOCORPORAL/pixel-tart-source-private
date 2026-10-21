@@ -1,0 +1,91 @@
+{
+  "sourceSha": "d1a77be4450c5a2cbb3c09b47580b9841280a14f",
+  "scope": "Affected planning/export fixtures only; not full Core/WPF gates or physical acceptance",
+  "timezone": "Asia/Tokyo",
+  "rows": [
+    {
+      "label": "NEW_CORE",
+      "discovered": 1721,
+      "selected": 4,
+      "obtained": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "missing": [],
+      "extra": [],
+      "assemblySha256": "4a66cc9128b5c8ea2fd1b84881f1e48bab5354df1b738371063f6e8c0f2a33ad",
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\planning-summary-docx-r2-20261021\\NEW_CORE\\run-20261021-152209-a9dfb132"
+    },
+    {
+      "label": "NEW_WPF",
+      "discovered": 1720,
+      "selected": 5,
+      "obtained": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "missing": [],
+      "extra": [],
+      "assemblySha256": "9457b1475afdd350ef73efb411fa4b8c08965aaf0b1cbb09c433e4ecf0df2244",
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\planning-summary-docx-r2-20261021\\NEW_WPF\\run-20261021-152209-480d9cc5"
+    },
+    {
+      "label": "REVIEW_CORE",
+      "discovered": 1721,
+      "selected": 4,
+      "obtained": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "missing": [],
+      "extra": [],
+      "assemblySha256": "14bb9ac2e2ae09ef374f8f0b8c3d5fc81bcca26f5cd70740ae408d2a102d122e",
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\planning-summary-docx-r2-20261021\\REVIEW_CORE\\run-20261021-152714-4e0b0ed2"
+    },
+    {
+      "label": "REVIEW_WPF",
+      "discovered": 1720,
+      "selected": 5,
+      "obtained": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "missing": [],
+      "extra": [],
+      "assemblySha256": "9457b1475afdd350ef73efb411fa4b8c08965aaf0b1cbb09c433e4ecf0df2244",
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\planning-summary-docx-r2-20261021\\REVIEW_WPF\\run-20261021-152714-9c3ea8ef"
+    },
+    {
+      "label": "FINAL_CORE",
+      "discovered": 1721,
+      "selected": 25,
+      "obtained": 25,
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0,
+      "missing": [],
+      "extra": [],
+      "assemblySha256": "14bb9ac2e2ae09ef374f8f0b8c3d5fc81bcca26f5cd70740ae408d2a102d122e",
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\planning-summary-docx-r2-20261021\\FINAL_CORE\\run-20261021-152906-848aadba"
+    },
+    {
+      "label": "FINAL_WPF",
+      "discovered": 1720,
+      "selected": 69,
+      "obtained": 69,
+      "passed": 69,
+      "failed": 0,
+      "skipped": 0,
+      "missing": [],
+      "extra": [],
+      "assemblySha256": "9457b1475afdd350ef73efb411fa4b8c08965aaf0b1cbb09c433e4ecf0df2244",
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\planning-summary-docx-r2-20261021\\FINAL_WPF\\run-20261021-152906-9ff91c3d"
+    }
+  ]
+}

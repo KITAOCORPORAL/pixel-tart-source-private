@@ -1,0 +1,31 @@
+{
+  "sourceSha": "d1a77be4450c5a2cbb3c09b47580b9841280a14f",
+  "scope": "Affected planning/export Core and WPF fixtures, not whole-application full gate",
+  "rows": [
+    {
+      "label": "FINAL_CORE",
+      "discovered": 1721,
+      "selected": 25,
+      "obtained": 25,
+      "counts": {
+        "Passed": 25
+      },
+      "status": "PASSED",
+      "root": "E:/Kitao-Deliveries/planning-summary-docx-r2-20261021/FINAL_CORE/run-20261021-152906-848aadba",
+      "executionErrors": []
+    },
+    {
+      "label": "FINAL_WPF",
+      "discovered": 1720,
+      "selected": 69,
+      "obtained": 69,
+      "counts": {
+        "Passed": 69
+      },
+      "status": "PASSED",
+      "root": "E:/Kitao-Deliveries/planning-summary-docx-r2-20261021/FINAL_WPF/run-20261021-152906-9ff91c3d",
+      "executionErrors": []
+    }
+  ],
+  "timezone": "Asia/Tokyo"
+}

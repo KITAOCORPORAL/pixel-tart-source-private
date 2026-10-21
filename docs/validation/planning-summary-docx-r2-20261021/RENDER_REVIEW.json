@@ -1,0 +1,17 @@
+{
+  "sourceSha": "d1a77be4450c5a2cbb3c09b47580b9841280a14f",
+  "docx": "samples-final/synthetic-15-section-summary.docx",
+  "directInspection": "SAMPLE_INSPECTION.json",
+  "OpenXmlValidation": "PASS in final PlanningSummaryExportTests",
+  "productionImportAndLayoutReview": "PASS,9 pages; sample-final-review/CONTACT.png and page-*.png manually inspected, no visible clipping or tofu",
+  "independentWordWps": "NOT_RUN",
+  "externalRenderer": "LibreOffice missing in prior attempt; current output reviewed by product DOCX importer and shared paginator, not independent fidelity proof",
+  "checklist": {
+    "font": "Embedded SimHei subset, FontFile2+ToUnicode",
+    "glyphCoverage": "all requested characters present",
+    "pageCount": 1,
+    "renderReview": "manual-final/review.png visually checked: clear Chinese, no square boxes",
+    "S07": "NOT_READY before delivery, NOT_RUN after delivery until user executes; use this batch new package"
+  },
+  "physicalDesktop": "NOT_RUN; document rendering is not native desktop evidence"
+}

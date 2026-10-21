@@ -1,0 +1,14 @@
+[
+  {
+    "step": "Initial embedded-font checklist builder",
+    "status": "FAIL",
+    "error": "ModuleNotFoundError: No module named fontTools",
+    "resolution": "Used ReportLab TTFont.face.charToGlyph coverage map; no package install or threshold relaxation; final missingGlyphs=[] and embedded FontFile2/ToUnicode checked"
+  },
+  {
+    "step": "Optional pdffonts inspection",
+    "status": "BLOCKED",
+    "error": "pdffonts.exe ENOENT in bundled Poppler",
+    "resolution": "Verified embedded font streams and ToUnicode with pypdf, rendered with available pdftoppm, visually inspected"
+  }
+]
