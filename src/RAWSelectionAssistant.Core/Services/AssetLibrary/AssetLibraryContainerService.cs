@@ -306,12 +306,25 @@ public sealed class AssetLibraryContainerService
 
     private static void EnsureDescriptorPathsArePhysical(AssetLibraryContainerDescriptor descriptor)
     {
+        // Check every distinct component on every open, never cache this across calls.
+        // The descriptor comes from the validated fixed layout, so shared ancestors need only one query.
         EnsureNotReparsePoint(descriptor.ContainerPath, "素材库根目录");
-        foreach (var path in new[]
-        {
-            descriptor.DatabasePath, descriptor.ManagedAssetsPath, descriptor.PreviewCachePath,
-            ResolveContainedPath(descriptor.ContainerPath, "backups"), ResolveContainedPath(descriptor.ContainerPath, "locks")
-        }) EnsureNoReparseComponents(descriptor.ContainerPath, path);
+        EnsureExistingPathIsPhysical(Path.GetDirectoryName(descriptor.DatabasePath)!);
+        EnsureExistingPathIsPhysical(descriptor.DatabasePath);
+        EnsureExistingPathIsPhysical(Path.GetDirectoryName(descriptor.ManagedAssetsPath)!);
+        EnsureExistingPathIsPhysical(descriptor.ManagedAssetsPath);
+        EnsureExistingPathIsPhysical(descriptor.PreviewCachePath);
+        EnsureExistingPathIsPhysical(ResolveContainedPath(descriptor.ContainerPath, "backups"));
+        EnsureExistingPathIsPhysical(ResolveContainedPath(descriptor.ContainerPath, "locks"));
+    }
+
+    private static void EnsureExistingPathIsPhysical(string path)
+    {
+        // A single query supplies both existence and reparse state. Missing optional
+        // paths are still permitted; access and other I/O errors are not swallowed.
+        try { EnsureNotReparsePoint(path, "素材库内部路径"); }
+        catch (FileNotFoundException) { }
+        catch (DirectoryNotFoundException) { }
     }
 
     private static void EnsureNoReparseComponents(string root, string candidate)
