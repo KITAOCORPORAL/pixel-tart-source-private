@@ -1,5 +1,5 @@
 import pathlib,json,zipfile,hashlib,collections,argparse,csv,shutil
-p=argparse.ArgumentParser();p.add_argument('--delivery',required=True);p.add_argument('--source',required=True);p.add_argument('--package',required=True);a=p.parse_args();d=pathlib.Path(a.delivery);pkg=pathlib.Path(a.package);reports=d/'reports';reports.mkdir(exist_ok=True);allruns=[];rows=[];tests=[]
+p=argparse.ArgumentParser();p.add_argument('--delivery',required=True);p.add_argument('--source',required=True);p.add_argument('--package',required=True);p.add_argument('--output',required=True);a=p.parse_args();d=pathlib.Path(a.delivery);pkg=pathlib.Path(a.package);reports=d/'reports';reports.mkdir(exist_ok=True);allruns=[];rows=[];tests=[]
 for label in ['NEW_CORE','NEW_WPF','REVIEW_CORE','REVIEW_WPF','FINAL_CORE','FINAL_WPF']:
  r=sorted((d/label).glob('run-*'))[-1];s=json.loads((r/'summary.json').read_text(encoding='utf-8-sig'));wanted=collections.Counter((v['id'],v['fullyQualifiedName'],v['displayName']) for u in s['executionPlan'] for v in u['cases']);observed=collections.Counter((v['id'],v['name'],v['display']) for u in s['runs'] for v in u['results']);c=collections.Counter(v['outcome'] for u in s['runs'] for v in u['results'])
  rows.append(dict(label=label,discovered=s['discovered'],selected=s['selected'],obtained=sum(observed.values()),passed=c['Passed'],failed=c['Failed'],skipped=c['NotExecuted'],missing=list((wanted-observed).elements()),extra=list((observed-wanted).elements()),assemblySha256=s['assemblySha256'],complete=s['status']!='RUNNING',root=str(r)));allruns.append((label,r,s))
@@ -23,7 +23,8 @@ with zipfile.ZipFile(reports/'RAW_TESTS.zip','w',zipfile.ZIP_DEFLATED) as z:
 (reports/'RAW_TEST_MANIFEST.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
 for f in reports.iterdir():
  if f.is_file():(pkg/'reports').mkdir(exist_ok=True);shutil.copy2(f,pkg/'reports'/f.name)
-archive=d/'Planning15Summary-Diagnostic-win-x64.zip';files=[]
+archive=pathlib.Path(a.output).resolve();files=[]
+if archive.exists():raise FileExistsError('Use a new package path, preserve old packages')
 with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
  for f in sorted(pkg.rglob('*')):
   if not f.is_file() or f.is_symlink():continue
@@ -34,4 +35,4 @@ with zipfile.ZipFile(archive) as z:
  for f in files:
   if hashlib.sha256(z.read(f['path'])).hexdigest()!=f['sha256']:raise RuntimeError('Zip readback mismatch')
 result=dict(sourceSha=a.source,path=str(archive),bytes=archive.stat().st_size,sha256=hashlib.sha256(archive.read_bytes()).hexdigest(),files=len(files),readbackVerified=True,UserDataIncluded=False,isSetup=False,diagnosticOnly=True)
-(d/'ZIP_IDENTITY.json').write_text(json.dumps(result,indent=2),encoding='utf-8');(d/'ZIP_FILES.json').write_text(json.dumps(files,indent=2),encoding='utf-8');print(json.dumps(result))
+(d/(archive.stem+'-identity.json')).write_text(json.dumps(result,indent=2),encoding='utf-8');(d/(archive.stem+'-files.json')).write_text(json.dumps(files,indent=2),encoding='utf-8');print(json.dumps(result))
