@@ -1,0 +1,13 @@
+{
+  "sourceSha": "439e9064a6296726a5b4b30bbb56a1c08630a34a",
+  "sample": "samples/synthetic-owned-images-summary.docx",
+  "pageCount": 14,
+  "structural": "SAMPLE_INSPECTION.json passed with15 ordered titles,9 drawings/9 image parts",
+  "nonBlank": "All14 pages passed pixel-count assertion in final product test",
+  "visual": "Final contact sheet inspected; critical title/image page08 opened at full resolution, no orphan title after KeepNext fix",
+  "reviewImage": "sample-keepnext-final-review/CONTACT.png",
+  "reviewScope": "Product re-import and paginator output only; not independent Word/WPS rendering",
+  "independentRenderer": "Attempted render_docx.py; LibreOffice soffice.exe unavailable, raw log archived",
+  "manualChecklist": "SimHei FontFile2 and ToUnicode embedded; all requested glyphs found; one A4 page",
+  "physicalDesktop": "NOT_RUN; no desktop tool input or screenshot used this completion"
+}

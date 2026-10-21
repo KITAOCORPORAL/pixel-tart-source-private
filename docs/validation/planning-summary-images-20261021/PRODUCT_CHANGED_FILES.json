@@ -1,0 +1,46 @@
+{
+  "sourceSha": "439e9064a6296726a5b4b30bbb56a1c08630a34a",
+  "baseProduct": "d1a77be4450c5a2cbb3c09b47580b9841280a14f",
+  "files": [
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PlanningReadableSummary.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Services/PlanningDocxAdapter.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Services/PlanningSummaryDocument.cs",
+      "type": "cs"
+    },
+    {
+      "status": "A",
+      "path": "src/RAWSelectionAssistant/Services/PlanningSummaryOwnedImage.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.SummaryExport.cs",
+      "type": "cs"
+    },
+    {
+      "status": "A",
+      "path": "tests/RAWSelectionAssistant.Tests/PlanningSummaryImageProjectionTests.cs",
+      "type": "cs"
+    },
+    {
+      "status": "A",
+      "path": "tests/RAWSelectionAssistant.WpfTests/PlanningDocxKeepNextTests.cs",
+      "type": "cs"
+    },
+    {
+      "status": "A",
+      "path": "tests/RAWSelectionAssistant.WpfTests/PlanningSummaryImageExportTests.cs",
+      "type": "cs"
+    }
+  ]
+}

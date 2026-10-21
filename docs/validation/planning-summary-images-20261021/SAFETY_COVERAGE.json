@@ -1,0 +1,18 @@
+{
+  "sourceSha": "439e9064a6296726a5b4b30bbb56a1c08630a34a",
+  "report": "RAW_TESTS.zip retains original failures",
+  "tests": {
+    "changedCopy": "Hash mismatch explained, no fallback",
+    "unsupportedFormat": "Non-PNG with valid declared file hash explained, no media",
+    "oversized": "64MiB+1 refused before reading allocation",
+    "foreignDocument": "Mismatching DocumentId refused",
+    "exclusiveLock": "FileShare.None causes explicit unreadable placeholder",
+    "tableLayout": "Aspect ratio preserved; width fits cell; persisted dimensions unchanged",
+    "noRichInsertion": "Owned image retained in document-content section with explicit reason",
+    "oldOutput": "Existing DOCX refused; new-file atomic File.Move never overwrites"
+  },
+  "limitations": [
+    "Local identity-derived path/hashes are admission evidence, not an OS-wide race-proof security primitive",
+    "No independent Word/WPS or cross-machine project portability acceptance"
+  ]
+}

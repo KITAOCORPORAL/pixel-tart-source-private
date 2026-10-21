@@ -1,0 +1,63 @@
+{
+  "sourceSha": "439e9064a6296726a5b4b30bbb56a1c08630a34a",
+  "baseProduct": "d1a77be4450c5a2cbb3c09b47580b9841280a14f",
+  "productCommits": [
+    "18f667ca286f234f10c38f16b1199eaf700c8629",
+    "25556ffcb7e53e81607461daaa32dd00b94688dc",
+    "439e9064a6296726a5b4b30bbb56a1c08630a34a"
+  ],
+  "build": {
+    "label": "PUBLISH_KEEP_NEXT_FINAL",
+    "exe": "D:/AI AGENT/.dotnet/dotnet.exe",
+    "args": [
+      "publish",
+      "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+      "-c",
+      "Release",
+      "-r",
+      "win-x64",
+      "--self-contained",
+      "true",
+      "--no-restore",
+      "-p:WholeAppDiagnosticBuild=true",
+      "-p:PhotographerTrialBuild=false",
+      "-p:IncludeSourceRevisionInInformationalVersion=true",
+      "-p:SourceRevisionId=439e9064a6296726a5b4b30bbb56a1c08630a34a",
+      "--disable-build-servers",
+      "-m:1",
+      "-nr:false",
+      "-o",
+      "E:/Kitao-Deliveries/planning-summary-images-20261021/Planning15Images-KeepNext-Diagnostic-win-x64/app"
+    ],
+    "pid": 20040,
+    "exit": 0,
+    "startUtc": "2026-10-21T09:20:10.086Z",
+    "endUtc": "2026-10-21T09:20:41.652Z"
+  },
+  "appRoot": "E:/Kitao-Deliveries/planning-summary-images-20261021/Planning15Images-KeepNext-Diagnostic-win-x64/app",
+  "files": [
+    {
+      "path": "KitaoPhotoSelector.dll",
+      "bytes": 3528704,
+      "type": "dll",
+      "sha256": "f25676b461c89c00eb28de99da64cb1ad6a64264ba1e29ec64314c378cda0cf6"
+    },
+    {
+      "path": "KitaoPhotoSelector.exe",
+      "bytes": 179200,
+      "type": "exe",
+      "sha256": "e1f4652456208f6d33b3e00723a79de3fd4341cea51359c5be0f817a98691780"
+    },
+    {
+      "path": "RAWSelectionAssistant.Core.dll",
+      "bytes": 4700160,
+      "type": "dll",
+      "sha256": "359f9e42f987a1c0d853c2450a0c7ad7cb979193aefd7113f1ad7c7bc72c5b68"
+    }
+  ],
+  "fileCount": 290,
+  "declaredRuntimeAssets": 264,
+  "bindingsVerified": 29,
+  "diagnosticOnly": true,
+  "timezone": "Europe/Berlin"
+}

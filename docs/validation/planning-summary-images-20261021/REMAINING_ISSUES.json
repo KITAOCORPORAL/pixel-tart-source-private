@@ -1,0 +1,27 @@
+[
+  {
+    "id": "IMG-PORTABLE-01",
+    "status": "PARTIAL",
+    "reason": "Owned copies embedded in DOCX do not make external refs, assets DB, files or complete project portable"
+  },
+  {
+    "id": "IMG-MODEL-01",
+    "status": "PARTIAL",
+    "reason": "Only verified current-project identity-derived PNG copies admitted; arbitrary library/external originals remain references"
+  },
+  {
+    "id": "DOCX-FIDELITY-01",
+    "status": "NOT_RUN",
+    "reason": "Independent Word/WPS application fidelity not tested; unavailable LibreOffice attempt retained"
+  },
+  {
+    "id": "DESKTOP-01",
+    "status": "NOT_RUN",
+    "reason": "Physical mouse, layout/DPI and desktop acceptance not performed this batch"
+  },
+  {
+    "id": "RELEASE-01",
+    "status": "BLOCKED",
+    "reason": "Affected scoped automated tests pass, not full release acceptance; diagnostic only"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "sourceSha": "439e9064a6296726a5b4b30bbb56a1c08630a34a",
+  "sample": "samples-keepnext-final/synthetic-owned-images-summary.docx",
+  "inspection": "SAMPLE_INSPECTION.json",
+  "drawings": 9,
+  "mediaParts": 9,
+  "pages": 14,
+  "nonBlankPages": "All14 pages passed pixel ink assertion",
+  "visualReview": "Final14-page contact reviewed; critical image-title continuation pages inspected full size after KeepNext fix; no visible blank pages or overlap",
+  "independentRenderer": {
+    "status": "BLOCKED",
+    "error": "FileNotFoundError: LibreOffice soffice.exe was not found on PATH",
+    "evidence": "commands/INDEPENDENT_DOCX_RENDER_ATTEMPT.log"
+  },
+  "scope": "Product DOCX re-import and shared paginator, not physical desktop/Word/WPS/cross-machine",
+  "layoutOnlyNoImageProcessingAlgorithmChange": true
+}

@@ -1,0 +1,8 @@
+# 本批原始失败保留
+
+METADATA_EDGE_WPF：8通过/2失败，失败均为旧PlanningSummaryExportTests向已存在的KITAO_SUMMARY_EVIDENCE样例目录File.Copy，拒绝覆盖已存在文件。新图像5项均通过。保留该原始TRX，不删除旧样例，不修改产品覆盖保护或断言；两个证据变量均改为新输出目录后独立重跑，结果另列。该失败属于本批测试调度目录复用，不冒称产品功能失败或删除后刷绿。
+
+
+KEEP_NEXT_REPRO：公共适配器未序列化KeepWithNext，新增1项合同测试真实Failed（图题缺少w:keepNext）。修复后KEEP_NEXT_FIXED_PRE的11项全通过。原失败保留；因公共组件改变最终扩展BatchThreeDocument及所有策划相关文档测试，不仅跑新增图像测试。
+
+最终评分只使用KEEP_NEXT_FINAL_CORE和KEEP_NEXT_FINAL_WPF的27/76结果；其他轮次为原始演进和失败保留，不相加为最终成绩。独立LibreOffice渲染尝试缺soffice.exe失败，命令日志保留，不以产品分页器审阅冒充独立应用验证。

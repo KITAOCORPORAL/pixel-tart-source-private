@@ -1,0 +1,19 @@
+{
+  "productSourceSha": "439e9064a6296726a5b4b30bbb56a1c08630a34a",
+  "base": "4de1c269ed41bdcb153cabdeb85c748ccc4a6a45",
+  "commits": [
+    {
+      "sha": "439e9064a6296726a5b4b30bbb56a1c08630a34a",
+      "subject": "fix(docx): preserve paragraph keep-next to prevent orphan image titles"
+    },
+    {
+      "sha": "25556ffcb7e53e81607461daaa32dd00b94688dc",
+      "subject": "fix(planning): retain owned images without rich insertion and verify reopen export"
+    },
+    {
+      "sha": "18f667ca286f234f10c38f16b1199eaf700c8629",
+      "subject": "feat(planning): embed verified owned images in fifteen-section DOCX summaries"
+    }
+  ],
+  "evidenceCommit": "pending"
+}
