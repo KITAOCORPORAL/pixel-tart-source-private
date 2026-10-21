@@ -1,0 +1,8 @@
+{
+  "reason": "Node session reset removed two authorized manifest variables before final WPF dispatch. Final full run retained unchanged; any resulting failure/NotExecuted will be explicit, supplemental two affected fixtures rerun with precise authorized manifests after complete run. No scan or product code change.",
+  "affected": [
+    "R3CommandLineReviewTests",
+    "PhotoGradePageV1Tests"
+  ],
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f"
+}

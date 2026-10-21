@@ -1,0 +1,52 @@
+[
+  {
+    "disk": "3",
+    "samples": 57,
+    "avgReadSeconds": null,
+    "avgWriteSeconds": null,
+    "readBytes": 0,
+    "writeBytes": 0,
+    "maxQueue": 0,
+    "scope": "whole physical disk; not attributable to target process or individual OpenAsync"
+  },
+  {
+    "disk": "0 E:",
+    "samples": 57,
+    "avgReadSeconds": 0.009207207692307692,
+    "avgWriteSeconds": 0.004496578206896551,
+    "readBytes": 3362816,
+    "writeBytes": 53166080,
+    "maxQueue": 2,
+    "scope": "whole physical disk; not attributable to target process or individual OpenAsync"
+  },
+  {
+    "disk": "1 C: D:",
+    "samples": 57,
+    "avgReadSeconds": 0.0028216476970181043,
+    "avgWriteSeconds": 0.000644632702078522,
+    "readBytes": 495432704,
+    "writeBytes": 70823936,
+    "maxQueue": 4,
+    "scope": "whole physical disk; not attributable to target process or individual OpenAsync"
+  },
+  {
+    "disk": "2 F:",
+    "samples": 57,
+    "avgReadSeconds": null,
+    "avgWriteSeconds": null,
+    "readBytes": 0,
+    "writeBytes": 0,
+    "maxQueue": 0,
+    "scope": "whole physical disk; not attributable to target process or individual OpenAsync"
+  },
+  {
+    "disk": "_Total",
+    "samples": 57,
+    "avgReadSeconds": 0.0028764268180018478,
+    "avgWriteSeconds": 0.0021896730843706776,
+    "readBytes": 498795520,
+    "writeBytes": 123990016,
+    "maxQueue": 4,
+    "scope": "whole physical disk; not attributable to target process or individual OpenAsync"
+  }
+]

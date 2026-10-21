@@ -1,0 +1,7 @@
+{
+  "retainedBefore": "concurrent-baseline-controlled",
+  "retainedAfter": "concurrent-fixed-matched",
+  "finding": "Baseline controlled launch overlapped own BUILD_SWITCH_FIX_FINAL_TESTS for about 6 seconds; therefore not a strict matched causal before/after comparison. Earlier report table will be superseded by a clean declared pair, both old raw sets retained.",
+  "next": "After all complete regression jobs finish, run baseline published Core warm3 then fixed published Core warm3 with identical fixed WPF load host and no own build/Core jobs. Retain both sets regardless of result.",
+  "doNotClaimOldPairCausal": true
+}

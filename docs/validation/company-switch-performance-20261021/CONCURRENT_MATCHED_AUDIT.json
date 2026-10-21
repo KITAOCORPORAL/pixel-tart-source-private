@@ -1,0 +1,188 @@
+{
+  "beforeLoad": {
+    "classes": [
+      "RuntimeCorrectionWpfTests",
+      "ReferenceWorkspaceWideRatioTests",
+      "PlanningBatch3BusinessTests",
+      "PhotoGradePageV1Tests"
+    ],
+    "measurementCommand": [
+      "D:/AI AGENT/.dotnet/dotnet.exe",
+      "E:/Kitao-Deliveries/company-home-sync-performance-20261021/probe-published/CompanySwitchProbe.dll",
+      "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\clean-pair-baseline\\measurement",
+      "warm3",
+      "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/shared-fixture"
+    ],
+    "measurementStartEpoch": 1792548368.9708521,
+    "measurementEndEpoch": 1792548381.5300243,
+    "measurementExit": 0,
+    "events": [
+      {
+        "worker": 1,
+        "round": 0,
+        "class": "ReferenceWorkspaceWideRatioTests",
+        "pid": 26156,
+        "startEpoch": 1792548367.9707625,
+        "endEpoch": 1792548372.6445158,
+        "exit": 0,
+        "timeout": false
+      },
+      {
+        "worker": 0,
+        "round": 0,
+        "class": "RuntimeCorrectionWpfTests",
+        "pid": 33992,
+        "startEpoch": 1792548367.970645,
+        "endEpoch": 1792548375.4571676,
+        "exit": 0,
+        "timeout": false
+      },
+      {
+        "worker": 1,
+        "round": 1,
+        "class": "ReferenceWorkspaceWideRatioTests",
+        "pid": 37884,
+        "startEpoch": 1792548372.649638,
+        "endEpoch": 1792548377.1856537,
+        "exit": 0,
+        "timeout": false
+      },
+      {
+        "worker": 3,
+        "round": 0,
+        "class": "PhotoGradePageV1Tests",
+        "pid": 40424,
+        "startEpoch": 1792548367.970816,
+        "endEpoch": 1792548378.5576465,
+        "exit": 0,
+        "timeout": false
+      },
+      {
+        "worker": 2,
+        "round": 0,
+        "class": "PlanningBatch3BusinessTests",
+        "pid": 23776,
+        "startEpoch": 1792548367.9707081,
+        "endEpoch": 1792548380.7701786,
+        "exit": 0,
+        "timeout": false
+      },
+      {
+        "worker": 1,
+        "round": 2,
+        "class": "ReferenceWorkspaceWideRatioTests",
+        "pid": 39260,
+        "startEpoch": 1792548377.1861503,
+        "endEpoch": 1792548381.8090355,
+        "exit": 0,
+        "timeout": false
+      },
+      {
+        "worker": 0,
+        "round": 1,
+        "class": "RuntimeCorrectionWpfTests",
+        "pid": 40840,
+        "startEpoch": 1792548375.457716,
+        "endEpoch": 1792548383.0632758,
+        "exit": 0,
+        "timeout": false
+      },
+      {
+        "worker": 3,
+        "round": 1,
+        "class": "PhotoGradePageV1Tests",
+        "pid": 30940,
+        "startEpoch": 1792548378.558092,
+        "endEpoch": 1792548388.5054286,
+        "exit": 0,
+        "timeout": false
+      },
+      {
+        "worker": 2,
+        "round": 1,
+        "class": "PlanningBatch3BusinessTests",
+        "pid": 29080,
+        "startEpoch": 1792548380.7707744,
+        "endEpoch": 1792548392.9935472,
+        "exit": 0,
+        "timeout": false
+      }
+    ],
+    "note": "Fixed four WPF workers, identical plan before and after. No unrelated data. Individual TRX retained; load is not acceptance result."
+  },
+  "afterLoad": {
+    "classes": [
+      "RuntimeCorrectionWpfTests",
+      "ReferenceWorkspaceWideRatioTests",
+      "PlanningBatch3BusinessTests",
+      "PhotoGradePageV1Tests"
+    ],
+    "measurementCommand": [
+      "D:/AI AGENT/.dotnet/dotnet.exe",
+      "E:/Kitao-Deliveries/company-home-sync-performance-20261021/probe-fixed-published/CompanySwitchProbe.dll",
+      "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\clean-pair-fixed\\measurement",
+      "warm3",
+      "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/shared-fixture"
+    ],
+    "measurementStartEpoch": 1792548413.5320385,
+    "measurementEndEpoch": 1792548419.4524922,
+    "measurementExit": 0,
+    "events": [
+      {
+        "worker": 1,
+        "round": 0,
+        "class": "ReferenceWorkspaceWideRatioTests",
+        "pid": 42496,
+        "startEpoch": 1792548412.5320914,
+        "endEpoch": 1792548417.0329254,
+        "exit": 0,
+        "timeout": false
+      },
+      {
+        "worker": 0,
+        "round": 0,
+        "class": "RuntimeCorrectionWpfTests",
+        "pid": 6104,
+        "startEpoch": 1792548412.5320385,
+        "endEpoch": 1792548420.0824811,
+        "exit": 0,
+        "timeout": false
+      },
+      {
+        "worker": 1,
+        "round": 1,
+        "class": "ReferenceWorkspaceWideRatioTests",
+        "pid": 15600,
+        "startEpoch": 1792548417.0434585,
+        "endEpoch": 1792548421.4570084,
+        "exit": 0,
+        "timeout": false
+      },
+      {
+        "worker": 3,
+        "round": 0,
+        "class": "PhotoGradePageV1Tests",
+        "pid": 32416,
+        "startEpoch": 1792548412.5319808,
+        "endEpoch": 1792548422.704819,
+        "exit": 0,
+        "timeout": false
+      },
+      {
+        "worker": 2,
+        "round": 0,
+        "class": "PlanningBatch3BusinessTests",
+        "pid": 32292,
+        "startEpoch": 1792548412.5321531,
+        "endEpoch": 1792548424.6568303,
+        "exit": 0,
+        "timeout": false
+      }
+    ],
+    "note": "Fixed four WPF workers, identical plan before and after. No unrelated data. Individual TRX retained; load is not acceptance result."
+  },
+  "noOwnBuildOrCoreDuringCleanPair": true,
+  "wpfHostBoth": "fc78395301f22752e6fd3562ac328b78e6632295638a9e892e802a9a62056d59",
+  "baselineCore": "25a2e6f30d4cb17df463ff3831f82c095ff0a427a8ca3d2e27fb6ce859e2e327",
+  "fixedCore": "65ededcb0695eb61162232b38049d716db4ab1c5c69fabe9af2ceeae7ec5fee8"
+}

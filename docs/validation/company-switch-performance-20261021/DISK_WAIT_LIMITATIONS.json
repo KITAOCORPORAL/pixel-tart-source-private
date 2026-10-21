@@ -1,0 +1,7 @@
+{
+  "globalSamples": 285,
+  "observedFields": "physical disk raw AvgDisksec bases, total bytes and queue",
+  "perOpenAttribution": "UNAVAILABLE",
+  "reason": "No process-correlated ETW trace captured; cannot distinguish scheduling, metadata-cache, filter driver, filesystem and physical disk queue waits per call",
+  "noFabricatedZero": true
+}

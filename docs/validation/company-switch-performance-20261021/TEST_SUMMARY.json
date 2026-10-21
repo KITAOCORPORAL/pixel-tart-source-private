@@ -1,0 +1,125 @@
+{
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "timezone": "Europe/Berlin",
+  "rows": [
+    {
+      "label": "FIXED_FULL_CORE",
+      "discovered": 1717,
+      "selected": 1717,
+      "obtained": 1717,
+      "passed": 1712,
+      "failed": 0,
+      "skipped": 5,
+      "missing": 0,
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\FIXED_FULL_CORE\\run-20261021-095328-b901e0f5"
+    },
+    {
+      "label": "FIXED_MODULES",
+      "discovered": 14,
+      "selected": 14,
+      "obtained": 14,
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "missing": 0,
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\FIXED_MODULES\\run-20261021-095328-96c60c8e"
+    },
+    {
+      "label": "FIX_CORRECTNESS_PRE",
+      "discovered": 1717,
+      "selected": 29,
+      "obtained": 29,
+      "passed": 29,
+      "failed": 0,
+      "skipped": 0,
+      "missing": 0,
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\FIX_CORRECTNESS_PRE\\run-20261021-094546-1b9dcb53"
+    },
+    {
+      "label": "FIX_SORT_FILTER_CORRECTNESS",
+      "discovered": 1717,
+      "selected": 29,
+      "obtained": 29,
+      "passed": 29,
+      "failed": 0,
+      "skipped": 0,
+      "missing": 0,
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\FIX_SORT_FILTER_CORRECTNESS\\run-20261021-094758-e0a5d9be"
+    },
+    {
+      "label": "FIXED_AUTHORIZED_SUPPLEMENT",
+      "discovered": 1715,
+      "selected": 20,
+      "obtained": 20,
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "missing": 0,
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\FIXED_AUTHORIZED_SUPPLEMENT\\run-20261021-100137-05b95640"
+    },
+    {
+      "label": "FIXED_WPF_0",
+      "discovered": 1715,
+      "selected": 376,
+      "obtained": 376,
+      "passed": 370,
+      "failed": 1,
+      "skipped": 5,
+      "missing": 0,
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\FIXED_WPF_0\\run-20261021-095328-f912cc17"
+    },
+    {
+      "label": "FIXED_WPF_1",
+      "discovered": 1715,
+      "selected": 456,
+      "obtained": 456,
+      "passed": 449,
+      "failed": 0,
+      "skipped": 7,
+      "missing": 0,
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\FIXED_WPF_1\\run-20261021-095328-b57af3fa"
+    },
+    {
+      "label": "FIXED_WPF_2",
+      "discovered": 1715,
+      "selected": 466,
+      "obtained": 466,
+      "passed": 460,
+      "failed": 0,
+      "skipped": 6,
+      "missing": 0,
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\FIXED_WPF_2\\run-20261021-095328-cd9675b2"
+    },
+    {
+      "label": "FIXED_WPF_3",
+      "discovered": 1715,
+      "selected": 417,
+      "obtained": 417,
+      "passed": 414,
+      "failed": 0,
+      "skipped": 3,
+      "missing": 0,
+      "complete": true,
+      "root": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\FIXED_WPF_3\\run-20261021-095328-b4349666"
+    }
+  ],
+  "wpf": {
+    "discovered": 1715,
+    "obtained": 1715,
+    "passed": 1693,
+    "failed": 1,
+    "skipped": 21,
+    "missing": [],
+    "extra": [],
+    "plansExactlyMatchDiscovery": true,
+    "complete": true
+  }
+}

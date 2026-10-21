@@ -1,0 +1,46 @@
+{
+  "cold": {
+    "before": 3418.1982,
+    "after": 1463.5954
+  },
+  "exact": {
+    "before": 3628.9637,
+    "after": 1703.5297
+  },
+  "warm": {
+    "beforeAll": [
+      3270.0605,
+      3298.6967,
+      3324.9674
+    ],
+    "afterAll": [
+      1497.415,
+      1537.2916,
+      1416.1346
+    ],
+    "beforeMedian": 3298.6967,
+    "afterMedian": 1497.415,
+    "beforeP99All": [
+      0.4876,
+      0.6046,
+      0.5083
+    ],
+    "afterP99All": [
+      0.2638,
+      0.3733,
+      0.223
+    ],
+    "beforeAllocAll": [
+      65954872,
+      65346704,
+      65335192
+    ],
+    "afterAllocAll": [
+      46016816,
+      44911488,
+      44919416
+    ]
+  },
+  "thresholdOriginal": 30000,
+  "iterationsUnchanged": 10000
+}

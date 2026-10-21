@@ -1,6 +1,6 @@
 # 性能定位（产品修复前）
 
-2026-10-21，Asia/Shanghai。家用原始32139.0909ms >30000ms真实失败保留。公司原Scenario11独立单跑3628.9637ms；同发布Core冷进程3418.1982ms；预热后三次3270.0605/3298.6967/3324.9674ms。固定四WPF并发同条件新三次见原始performance/concurrent-baseline-controlled，非同一次完整WPF负载、不证明家里因果。
+2026-10-21，Europe/Berlin。家用原始32139.0909ms >30000ms真实失败保留。公司原Scenario11独立单跑3628.9637ms；同发布Core冷进程3418.1982ms；预热后三次3270.0605/3298.6967/3324.9674ms。固定四WPF并发同条件新三次见原始performance/concurrent-baseline-controlled，非同一次完整WPF负载、不证明家里因果。
 
 诊断镜像10k中9998缓存命中、两次SQLite验证。阶段累计：路径normalize26.84ms/root文件检查215.29ms/指纹元数据437.14ms/缓存物理路径2772.75ms/SQLite验证3.61ms；缓存物理路径约80%。14万GetAttributes、7万File.Exists、6万Directory.Exists为诊断计数；进程逻辑I/O640000级，不等于物理磁盘等待。仅前2次有SQLite，热打开不获取writer lease，锁等待不是热路径已证瓶颈。
 

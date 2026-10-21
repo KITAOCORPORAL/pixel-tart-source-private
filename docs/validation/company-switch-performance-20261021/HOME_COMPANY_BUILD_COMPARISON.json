@@ -1,0 +1,29 @@
+{
+  "sourceSha": "99d7818e035310c9273565e73752ee0359ebb8f1",
+  "homeSource": "99d7818e035310c9273565e73752ee0359ebb8f1",
+  "flags": {
+    "WholeAppDiagnosticBuild": true,
+    "PhotographerTrialBuild": false,
+    "selfContained": true,
+    "rid": "win-x64",
+    "configuration": "Release"
+  },
+  "company": [
+    {
+      "file": "KitaoPhotoSelector.exe",
+      "sha256": "8fc0ceddf470dd530b4b1bb8d7f26f786d3075b4214d81c70a13e9852cdd38d2",
+      "home": "77392EC8DF811CB9AA2DCD47BC40FE6D35823FC23D2D726CF7F938796E233E16"
+    },
+    {
+      "file": "KitaoPhotoSelector.dll",
+      "sha256": "9faa331037243a5f1b26c637839cec48218dd6d19c5da043ed35b54a6d647113",
+      "home": "735FE50A3EF0BD76424ECD079A1ECF7BAFC65CB5C719A45297F3050A5E4788B2"
+    },
+    {
+      "file": "RAWSelectionAssistant.Core.dll",
+      "sha256": "25a2e6f30d4cb17df463ff3831f82c095ff0a427a8ca3d2e27fb6ce859e2e327",
+      "home": "BD89680916DAFF6F964DA129D136C613E18B5827868CF6F0022D9915E336491D"
+    }
+  ],
+  "conclusion": "Do not assert byte equality; SDK roots, project absolute source paths and build artifact layout differ, compare identities explicitly."
+}

@@ -1,6 +1,6 @@
 # 第一阶段：公司同步与完整构建验证
 
-2026-10-21，Asia/Shanghai。独立fetch/ls-remote家用d39d11d68eb44f5aa0ec8a2f1afc95c98630820d、公司R3 a1e52238616b8d22f09b92595a85e76c7d9c1460均未前进。新树E:/Kitao-Worktrees/company-home-sync-performance-20261021，分支company/guangjing-home-sync-performance-20261021。
+2026-10-21，Europe/Berlin。独立fetch/ls-remote家用d39d11d68eb44f5aa0ec8a2f1afc95c98630820d、公司R3 a1e52238616b8d22f09b92595a85e76c7d9c1460均未前进。新树E:/Kitao-Worktrees/company-home-sync-performance-20261021，分支company/guangjing-home-sync-performance-20261021。
 
 产品冻结99d7818e035310c9273565e73752ee0359ebb8f1，HEAD:src树与冻结src树完全相同，家用之后仅证据提交。两个分类/过滤条件接受当前灯位图/服化道与道具并保留旧别名；新增e9b08863测试已读。
 

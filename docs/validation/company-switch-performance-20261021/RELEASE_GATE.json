@@ -1,0 +1,18 @@
+{
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "status": "BLOCKED",
+  "diagnosticOnly": true,
+  "homeFailureCausalityClosed": false,
+  "performanceCompanyObserved": "PASS scoped measurements with all original thresholds and loops",
+  "regression": "Final complete Core1717=1712Pass/5NotExecuted; WPF1715=1693Pass/1Failure/21NotExecuted. Failure and one NotExecuted caused by missing authorized manifest vars after session reset; affected two classes supplemental20/20Pass retained separately. Do not rewrite full original run.",
+  "remaining": [
+    "Home32139ms root cause not reproduced or uniquely explained",
+    "Physical per-Open disk wait and Sqlite busy-wait attribution unavailable",
+    "Core/WPF external/opt-in gates remain",
+    "Planning external references/attachments and DB migration not complete portable project",
+    "All15 section consolidated export not implemented",
+    "Physical desktop, WPS, camera, installer gates not performed"
+  ],
+  "setup": false,
+  "timezone": "Europe/Berlin"
+}

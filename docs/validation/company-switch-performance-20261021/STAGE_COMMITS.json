@@ -1,0 +1,18 @@
+{
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "commits": [
+    {
+      "sha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+      "subject": "fix(asset-library): avoid duplicate cached path queries without skipping per-open checks"
+    },
+    {
+      "sha": "cebbeaced307edac835524e6d9b67241bf2d7265",
+      "subject": "perf(company): localize Scenario11 cached physical-path metadata overhead"
+    },
+    {
+      "sha": "3a55029e245accf72ca0d7904e81afad7a677d6c",
+      "subject": "docs(company): sync home99 full diagnostic build and company regressions"
+    }
+  ],
+  "finalEvidenceCommit": "pending"
+}

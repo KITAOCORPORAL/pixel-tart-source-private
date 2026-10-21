@@ -1,0 +1,47 @@
+{
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "baseline": "99d7818e035310c9273565e73752ee0359ebb8f1",
+  "SDK": ".NET SDK:\r\n Version:           10.0.302\r\n Commit:            35b593bebf\r\n Workload version:  10.0.300-manifests.1641d827\r\n MSBuild version:   18.6.11+35b593beb\r\n\r\n运行时环境:\r\n OS Name:     Windows\r\n OS Version:  10.0.19045\r\n OS Platform: Windows\r\n RID:         win-x64\r\n Base Path:   D:\\AI AGENT\\.dotnet\\sdk\\10.0.302\\\r\n\r\n已安装 .NET 工作负载:\r\n没有要显示的已安装工作负载。\r\n已配置为在安装新清单时使用 workload sets。\r\n未安装任何 workload sets。运行 “dotnet workload restore” 以安装工作负载集。\r\n\r\nHost:\r\n  Version:      10.0.10\r\n  Architecture: x64\r\n  Commit:       f7d90799ce\r\n\r\n.NET SDKs installed:\r\n  10.0.302 [D:\\AI AGENT\\.dotnet\\sdk]\r\n\r\n.NET runtimes installed:\r\n  Microsoft.AspNetCore.App 10.0.10 [D:\\AI AGENT\\.dotnet\\shared\\Microsoft.AspNetCore.App]\r\n  Microsoft.NETCore.App 10.0.10 [D:\\AI AGENT\\.dotnet\\shared\\Microsoft.NETCore.App]\r\n  Microsoft.WindowsDesktop.App 10.0.10 [D:\\AI AGENT\\.dotnet\\shared\\Microsoft.WindowsDesktop.App]\r\n\r\nOther architectures found:\r\n  None\r\n\r\nEnvironment variables:\r\n  DOTNET_CLI_TELEMETRY_OPTOUT              [1]\r\n  DOTNET_ROOT                              [D:/AI AGENT/.dotnet]\r\n\r\nglobal.json file:\r\n  E:\\Kitao-Worktrees\\company-home-sync-performance-20261021\\global.json\r\n\r\nLearn more:\r\n  https://aka.ms/dotnet/info\r\n\r\nDownload .NET:\r\n  https://aka.ms/dotnet/download\r\n",
+  "build": {
+    "label": "PUBLISH_SWITCH_FIX",
+    "exe": "D:/AI AGENT/.dotnet/dotnet.exe",
+    "args": [
+      "publish",
+      "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+      "-c",
+      "Release",
+      "-r",
+      "win-x64",
+      "--self-contained",
+      "true",
+      "--no-restore",
+      "-p:WholeAppDiagnosticBuild=true",
+      "-p:PhotographerTrialBuild=false",
+      "-p:IncludeSourceRevisionInInformationalVersion=true",
+      "-p:SourceRevisionId=0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+      "--disable-build-servers",
+      "-m:1",
+      "-nr:false",
+      "-o",
+      "E:/Kitao-Deliveries/company-home-sync-performance-20261021/Company-SwitchFix-Diagnostic-win-x64/app"
+    ],
+    "pid": 33032,
+    "exit": 0,
+    "start": "2026-10-21T01:49:47.140Z",
+    "end": "2026-10-21T01:50:21.683Z"
+  },
+  "files": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "sha256": "c606dc3be8bdeac9d0b1a56daabc26fe0dc4f127a2a4ec0ef19adea057af3340"
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "sha256": "fc78395301f22752e6fd3562ac328b78e6632295638a9e892e802a9a62056d59"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "sha256": "65ededcb0695eb61162232b38049d716db4ab1c5c69fabe9af2ceeae7ec5fee8"
+    }
+  ]
+}

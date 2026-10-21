@@ -1,0 +1,104 @@
+[
+  {
+    "path": "published-cold",
+    "identity": {
+      "mode": "cold",
+      "fixture": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture",
+      "temp": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\temp\\",
+      "source": "99d7818e035310c9273565e73752ee0359ebb8f1",
+      "assembly": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\probe-published\\RAWSelectionAssistant.Core.dll",
+      "sha256": "25A2E6F30D4CB17DF463FF3831F82C095FF0A427A8CA3D2E27FB6CE859E2E327",
+      "one": "7d0b4ea9-725a-4f70-8de5-267dcc5493c4",
+      "two": "d4a7ecd4-ff80-4536-9701-dd6d8ff862ea",
+      "onePath": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture\\A\\中文 库一.ptlibrary",
+      "twoPath": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture\\B\\库二.ptlibrary",
+      "metadataOutsideSwitchStopwatch": true,
+      "thresholdMs": 30000
+    }
+  },
+  {
+    "path": "published-warm3",
+    "identity": {
+      "mode": "warm3",
+      "fixture": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture",
+      "temp": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\temp\\",
+      "source": "99d7818e035310c9273565e73752ee0359ebb8f1",
+      "assembly": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\probe-published\\RAWSelectionAssistant.Core.dll",
+      "sha256": "25A2E6F30D4CB17DF463FF3831F82C095FF0A427A8CA3D2E27FB6CE859E2E327",
+      "one": "7d0b4ea9-725a-4f70-8de5-267dcc5493c4",
+      "two": "d4a7ecd4-ff80-4536-9701-dd6d8ff862ea",
+      "onePath": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture\\A\\中文 库一.ptlibrary",
+      "twoPath": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture\\B\\库二.ptlibrary",
+      "metadataOutsideSwitchStopwatch": true,
+      "thresholdMs": 30000
+    }
+  },
+  {
+    "path": "fixed-cold",
+    "identity": {
+      "mode": "cold",
+      "fixture": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture",
+      "temp": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\temp\\",
+      "source": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+      "assembly": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\probe-fixed-published\\RAWSelectionAssistant.Core.dll",
+      "sha256": "65EDEDCB0695EB61162232B38049D716DB4AB1C5C69FABE9AF2CEEAE7EC5FEE8",
+      "one": "7d0b4ea9-725a-4f70-8de5-267dcc5493c4",
+      "two": "d4a7ecd4-ff80-4536-9701-dd6d8ff862ea",
+      "onePath": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture\\A\\中文 库一.ptlibrary",
+      "twoPath": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture\\B\\库二.ptlibrary",
+      "metadataOutsideSwitchStopwatch": true,
+      "thresholdMs": 30000
+    }
+  },
+  {
+    "path": "fixed-warm3",
+    "identity": {
+      "mode": "warm3",
+      "fixture": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture",
+      "temp": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\temp\\",
+      "source": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+      "assembly": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\probe-fixed-published\\RAWSelectionAssistant.Core.dll",
+      "sha256": "65EDEDCB0695EB61162232B38049D716DB4AB1C5C69FABE9AF2CEEAE7EC5FEE8",
+      "one": "7d0b4ea9-725a-4f70-8de5-267dcc5493c4",
+      "two": "d4a7ecd4-ff80-4536-9701-dd6d8ff862ea",
+      "onePath": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture\\A\\中文 库一.ptlibrary",
+      "twoPath": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture\\B\\库二.ptlibrary",
+      "metadataOutsideSwitchStopwatch": true,
+      "thresholdMs": 30000
+    }
+  },
+  {
+    "path": "concurrent-baseline-controlled/measurement",
+    "identity": {
+      "mode": "warm3",
+      "fixture": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture",
+      "temp": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\temp\\",
+      "source": "99d7818e035310c9273565e73752ee0359ebb8f1",
+      "assembly": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\probe-published\\RAWSelectionAssistant.Core.dll",
+      "sha256": "25A2E6F30D4CB17DF463FF3831F82C095FF0A427A8CA3D2E27FB6CE859E2E327",
+      "one": "7d0b4ea9-725a-4f70-8de5-267dcc5493c4",
+      "two": "d4a7ecd4-ff80-4536-9701-dd6d8ff862ea",
+      "onePath": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture\\A\\中文 库一.ptlibrary",
+      "twoPath": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture\\B\\库二.ptlibrary",
+      "metadataOutsideSwitchStopwatch": true,
+      "thresholdMs": 30000
+    }
+  },
+  {
+    "path": "concurrent-fixed-matched/measurement",
+    "identity": {
+      "mode": "warm3",
+      "fixture": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture",
+      "temp": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\temp\\",
+      "source": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+      "assembly": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\probe-fixed-published\\RAWSelectionAssistant.Core.dll",
+      "sha256": "65EDEDCB0695EB61162232B38049D716DB4AB1C5C69FABE9AF2CEEAE7EC5FEE8",
+      "one": "7d0b4ea9-725a-4f70-8de5-267dcc5493c4",
+      "two": "d4a7ecd4-ff80-4536-9701-dd6d8ff862ea",
+      "onePath": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture\\A\\中文 库一.ptlibrary",
+      "twoPath": "E:\\Kitao-Deliveries\\company-home-sync-performance-20261021\\performance\\shared-fixture\\B\\库二.ptlibrary",
+      "metadataOutsideSwitchStopwatch": true,
+      "thresholdMs": 30000
+    }
+  }
+]

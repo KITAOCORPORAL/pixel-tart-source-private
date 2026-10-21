@@ -1,0 +1,1121 @@
+{
+  "sourceShaBaseline": "99d7818e035310c9273565e73752ee0359ebb8f1",
+  "fixSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "conditions": [
+    {
+      "name": "published-cold",
+      "path": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/published-cold/results.json",
+      "rows": [
+        {
+          "repeat": 1,
+          "mode": "cold",
+          "iterations": 10000,
+          "totalMs": 3418.1982,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 26.2443,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 3656.25,
+          "allocationBytes": 66038008,
+          "io": {
+            "readOps": 160,
+            "writeOps": 0,
+            "otherOps": 640154,
+            "readBytes": 640390,
+            "writeBytes": 0,
+            "otherBytes": 440
+          },
+          "p50Ms": 0.3147,
+          "p95Ms": 0.4704,
+          "p99Ms": 0.732,
+          "p999Ms": 1.3508,
+          "maxMs": 19.811,
+          "collections": [
+            8,
+            1,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        }
+      ]
+    },
+    {
+      "name": "published-warm3",
+      "path": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/published-warm3/results.json",
+      "rows": [
+        {
+          "repeat": 1,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 3270.0605,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 27.3728,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 3406.25,
+          "allocationBytes": 65954872,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 640005,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.3128,
+          "p95Ms": 0.439,
+          "p99Ms": 0.4876,
+          "p999Ms": 0.9277,
+          "maxMs": 1.6668,
+          "collections": [
+            8,
+            1,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 2,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 3298.6967,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 14.7184,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 3453.125,
+          "allocationBytes": 65346704,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 640000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.3092,
+          "p95Ms": 0.4582,
+          "p99Ms": 0.6046,
+          "p999Ms": 1.2639,
+          "maxMs": 3.3459,
+          "collections": [
+            8,
+            2,
+            1
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 3,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 3324.9674,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 14.1831,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 3484.375,
+          "allocationBytes": 65335192,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 640000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.309,
+          "p95Ms": 0.4535,
+          "p99Ms": 0.5083,
+          "p999Ms": 1.4745,
+          "maxMs": 15.1853,
+          "collections": [
+            8,
+            1,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        }
+      ]
+    },
+    {
+      "name": "instrumented-cold",
+      "path": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/instrumented-cold/results.json",
+      "rows": [
+        {
+          "repeat": 1,
+          "mode": "cold",
+          "iterations": 10000,
+          "totalMs": 3583.173,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 23.0367,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 3968.75,
+          "allocationBytes": 98201912,
+          "io": {
+            "readOps": 160,
+            "writeOps": 0,
+            "otherOps": 640108,
+            "readBytes": 640390,
+            "writeBytes": 0,
+            "otherBytes": 440
+          },
+          "p50Ms": 0.33,
+          "p95Ms": 0.4925,
+          "p99Ms": 0.788,
+          "p999Ms": 2.2051,
+          "maxMs": 19.0581,
+          "collections": [
+            11,
+            3,
+            1
+          ],
+          "instrumented": true,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        }
+      ]
+    },
+    {
+      "name": "concurrent-before-extra",
+      "path": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/concurrent-before/results.json",
+      "rows": [
+        {
+          "repeat": 1,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 4458.0271,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 28.1351,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 4515.625,
+          "allocationBytes": 65632472,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 640005,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.4029,
+          "p95Ms": 0.6695,
+          "p99Ms": 1.5055,
+          "p999Ms": 3.5658,
+          "maxMs": 15.9438,
+          "collections": [
+            8,
+            1,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 2,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 4091.9989,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 15.8795,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 4218.75,
+          "allocationBytes": 65356208,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 640000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.374,
+          "p95Ms": 0.5175,
+          "p99Ms": 0.8368,
+          "p999Ms": 3.8472,
+          "maxMs": 7.3825,
+          "collections": [
+            8,
+            2,
+            1
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 3,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 4082.2533,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 24.6581,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 4250,
+          "allocationBytes": 65352528,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 640000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.3702,
+          "p95Ms": 0.5196,
+          "p99Ms": 0.9185,
+          "p999Ms": 2.9065,
+          "maxMs": 6.2959,
+          "collections": [
+            8,
+            0,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        }
+      ]
+    },
+    {
+      "name": "concurrent-before-matched",
+      "path": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/concurrent-baseline-controlled/measurement/results.json",
+      "rows": [
+        {
+          "repeat": 1,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 5083.8415,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 66.136,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 4750,
+          "allocationBytes": 65808112,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 640005,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.4617,
+          "p95Ms": 0.6972,
+          "p99Ms": 1.3934,
+          "p999Ms": 12.5785,
+          "maxMs": 32.5894,
+          "collections": [
+            8,
+            1,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 2,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 4117.4497,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 19.5236,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 4359.375,
+          "allocationBytes": 65360136,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 640000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.3578,
+          "p95Ms": 0.5802,
+          "p99Ms": 0.8585,
+          "p999Ms": 1.8854,
+          "maxMs": 4.3044,
+          "collections": [
+            8,
+            2,
+            1
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 3,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 3929.7738,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 33.8677,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 4156.25,
+          "allocationBytes": 65342320,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 640000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.3373,
+          "p95Ms": 0.5434,
+          "p99Ms": 0.811,
+          "p999Ms": 2.0575,
+          "maxMs": 4.7966,
+          "collections": [
+            8,
+            0,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        }
+      ]
+    },
+    {
+      "name": "fixed-cold",
+      "path": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/fixed-cold/results.json",
+      "rows": [
+        {
+          "repeat": 1,
+          "mode": "cold",
+          "iterations": 10000,
+          "totalMs": 1463.5954,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 23.4478,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 1609.375,
+          "allocationBytes": 45737328,
+          "io": {
+            "readOps": 160,
+            "writeOps": 0,
+            "otherOps": 280180,
+            "readBytes": 640390,
+            "writeBytes": 0,
+            "otherBytes": 440
+          },
+          "p50Ms": 0.138,
+          "p95Ms": 0.1861,
+          "p99Ms": 0.257,
+          "p999Ms": 0.5744,
+          "maxMs": 3.1491,
+          "collections": [
+            6,
+            1,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        }
+      ]
+    },
+    {
+      "name": "fixed-warm3",
+      "path": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/fixed-warm3/results.json",
+      "rows": [
+        {
+          "repeat": 1,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 1497.415,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 25.8939,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 1625,
+          "allocationBytes": 46016816,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 280005,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.1391,
+          "p95Ms": 0.2071,
+          "p99Ms": 0.2638,
+          "p999Ms": 0.4153,
+          "maxMs": 1.0856,
+          "collections": [
+            6,
+            1,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 2,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 1537.2916,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 19.2789,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 1656.25,
+          "allocationBytes": 44911488,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 280000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.1367,
+          "p95Ms": 0.2138,
+          "p99Ms": 0.3733,
+          "p999Ms": 1.0982,
+          "maxMs": 9.4679,
+          "collections": [
+            6,
+            2,
+            1
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 3,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 1416.1346,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 12.9535,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 1640.625,
+          "allocationBytes": 44919416,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 280000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.1349,
+          "p95Ms": 0.1959,
+          "p99Ms": 0.223,
+          "p999Ms": 0.3211,
+          "maxMs": 2.6841,
+          "collections": [
+            6,
+            1,
+            1
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        }
+      ]
+    },
+    {
+      "name": "fixed-concurrent-extra",
+      "path": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/concurrent-fixed-controlled/measurement/results.json",
+      "rows": [
+        {
+          "repeat": 1,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 2125.4572,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 37.2732,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 2234.375,
+          "allocationBytes": 45638240,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 280005,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.2047,
+          "p95Ms": 0.2998,
+          "p99Ms": 0.4989,
+          "p999Ms": 1.2303,
+          "maxMs": 5.073,
+          "collections": [
+            6,
+            1,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 2,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 1887.1259,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 25.8448,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 2062.5,
+          "allocationBytes": 44906224,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 280000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.1681,
+          "p95Ms": 0.2665,
+          "p99Ms": 0.4159,
+          "p999Ms": 1.261,
+          "maxMs": 3.8844,
+          "collections": [
+            6,
+            2,
+            1
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 3,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 1689.1866,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 15.514,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 1906.25,
+          "allocationBytes": 44910128,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 280000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.1478,
+          "p95Ms": 0.2301,
+          "p99Ms": 0.3093,
+          "p999Ms": 0.4609,
+          "maxMs": 2.6759,
+          "collections": [
+            6,
+            1,
+            1
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        }
+      ]
+    },
+    {
+      "name": "fixed-concurrent-matched",
+      "path": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/concurrent-fixed-matched/measurement/results.json",
+      "rows": [
+        {
+          "repeat": 1,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 1940.4329,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 32.9191,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 2046.875,
+          "allocationBytes": 45607816,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 280005,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.1839,
+          "p95Ms": 0.2885,
+          "p99Ms": 0.5143,
+          "p999Ms": 1.2209,
+          "maxMs": 5.5473,
+          "collections": [
+            6,
+            1,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 2,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 1807.6589,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 22.4736,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 2015.625,
+          "allocationBytes": 44927576,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 280000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.1781,
+          "p95Ms": 0.2494,
+          "p99Ms": 0.4019,
+          "p999Ms": 0.6689,
+          "maxMs": 4.2305,
+          "collections": [
+            6,
+            2,
+            1
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 3,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 1834.9649,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 17.4482,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 2046.875,
+          "allocationBytes": 44924160,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 280000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.1611,
+          "p95Ms": 0.2607,
+          "p99Ms": 0.4915,
+          "p999Ms": 1.2612,
+          "maxMs": 3.4449,
+          "collections": [
+            6,
+            1,
+            1
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        }
+      ]
+    },
+    {
+      "name": "fixed-instrumented-cold",
+      "path": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/instrumented-fixed/results.json",
+      "rows": [
+        {
+          "repeat": 1,
+          "mode": "cold",
+          "iterations": 10000,
+          "totalMs": 1816.2394,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 30.0949,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 1968.75,
+          "allocationBytes": 76484632,
+          "io": {
+            "readOps": 160,
+            "writeOps": 0,
+            "otherOps": 280180,
+            "readBytes": 640390,
+            "writeBytes": 0,
+            "otherBytes": 440
+          },
+          "p50Ms": 0.1589,
+          "p95Ms": 0.2614,
+          "p99Ms": 0.3616,
+          "p999Ms": 1.8293,
+          "maxMs": 12.0173,
+          "collections": [
+            9,
+            3,
+            1
+          ],
+          "instrumented": true,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        }
+      ]
+    },
+    {
+      "name": "clean-pair-baseline-primary",
+      "rows": [
+        {
+          "repeat": 1,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 4075.6049,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 36.5684,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 4171.875,
+          "allocationBytes": 65793888,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 640005,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.3517,
+          "p95Ms": 0.5704,
+          "p99Ms": 0.8762,
+          "p999Ms": 2.2736,
+          "maxMs": 7.2886,
+          "collections": [
+            8,
+            1,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 2,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 4012.2595,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 18.9643,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 4187.5,
+          "allocationBytes": 65339568,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 640000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.358,
+          "p95Ms": 0.5347,
+          "p99Ms": 0.7383,
+          "p999Ms": 1.787,
+          "maxMs": 9.0055,
+          "collections": [
+            8,
+            2,
+            1
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 3,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 4013.8295,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 20.8135,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 4218.75,
+          "allocationBytes": 65344392,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 640000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.35,
+          "p95Ms": 0.5391,
+          "p99Ms": 0.8119,
+          "p999Ms": 2.3469,
+          "maxMs": 5.488,
+          "collections": [
+            8,
+            0,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        }
+      ],
+      "path": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/clean-pair-baseline/measurement/results.json"
+    },
+    {
+      "name": "clean-pair-fixed-primary",
+      "rows": [
+        {
+          "repeat": 1,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 1836.5044,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 31.0135,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 2062.5,
+          "allocationBytes": 45919624,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 280005,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.1603,
+          "p95Ms": 0.2513,
+          "p99Ms": 0.3945,
+          "p999Ms": 0.8512,
+          "maxMs": 4.432,
+          "collections": [
+            6,
+            1,
+            0
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 2,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 1738.3473,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 33.8864,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 1921.875,
+          "allocationBytes": 44918728,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 280000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.1456,
+          "p95Ms": 0.2408,
+          "p99Ms": 0.4287,
+          "p999Ms": 1.1884,
+          "maxMs": 10.329,
+          "collections": [
+            6,
+            2,
+            1
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        },
+        {
+          "repeat": 3,
+          "mode": "warm3",
+          "iterations": 10000,
+          "totalMs": 1686.1591,
+          "thresholdMs": 30000,
+          "thresholdPass": true,
+          "identityCorrect": true,
+          "metadataRows": 100000,
+          "unique": 90000,
+          "metadataMs": 14.5395,
+          "metadataInsideSwitchTimer": false,
+          "cpuMs": 1859.375,
+          "allocationBytes": 44909544,
+          "io": {
+            "readOps": 0,
+            "writeOps": 0,
+            "otherOps": 280000,
+            "readBytes": 0,
+            "writeBytes": 0,
+            "otherBytes": 0
+          },
+          "p50Ms": 0.1429,
+          "p95Ms": 0.2265,
+          "p99Ms": 0.37,
+          "p999Ms": 1.6551,
+          "maxMs": 3.4023,
+          "collections": [
+            6,
+            1,
+            1
+          ],
+          "instrumented": false,
+          "physicalDiskWait": "UNAVAILABLE: process I/O counters are logical transferred bytes, not physical disk latency",
+          "lockWait": "No writer lease acquired by OpenAsync; SQLite waits included in cold SqliteOpen/commands only if diagnostics present"
+        }
+      ],
+      "path": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/performance/clean-pair-fixed/measurement/results.json"
+    }
+  ],
+  "exact": {
+    "before": {
+      "open_switch_iterations": 10000,
+      "cold_total_ms": 3628.9637,
+      "worst_average_open_ms": 0.36289636999999997,
+      "metadata_rows": 100000,
+      "projected_unique": 90000
+    },
+    "after": {
+      "open_switch_iterations": 10000,
+      "cold_total_ms": 1703.5297,
+      "worst_average_open_ms": 0.17035297,
+      "metadata_rows": 100000,
+      "projected_unique": 90000
+    }
+  },
+  "limits": {
+    "metadataOutsideSwitchTimer": true,
+    "homeFailureNotReproducedOnCompany": true,
+    "physicalDiskWaitPerCall": "UNAVAILABLE",
+    "sqliteBusyWaitPerCall": "UNAVAILABLE; cache hits do not open sqlite",
+    "notP3Query400ms": true,
+    "allRepeatsRetained": true
+  },
+  "instrumentationLimits": {
+    "baselineBackground": "no own full suite",
+    "fixedBackground": "own full regression concurrent; use raw counts to show work reduction, do not make matched latency inference from diagnostic stages",
+    "baselinePatch": "tools/company-switch-performance/baseline-instrumentation.patch.b64",
+    "instrumentedProductReleased": false
+  },
+  "primaryConcurrentComparison": [
+    "clean-pair-baseline-primary",
+    "clean-pair-fixed-primary"
+  ],
+  "nonPrimaryConcurrentReason": "Earlier sets have own build or extra Core overlap; retained, never dropped or chosen as fastest"
+}

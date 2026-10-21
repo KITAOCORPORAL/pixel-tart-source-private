@@ -1,0 +1,166 @@
+{
+  "homeHead": "d39d11d68eb44f5aa0ec8a2f1afc95c98630820d",
+  "productSource": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "files": [
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/BUILD_IDENTITY.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/COMPANY_RELEASE_FILES.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/DEPENDENCIES.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/FINAL_REPORT.md",
+      "type": "md"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/HOME_COMPANY_BUILD_COMPARISON.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/HOME_ORIGINAL_SCENARIO11_FAILURE.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/OLD_RELEASE_DIRECTORIES.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/PLANNING_SOURCE_READBACK.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/RAW_COMPANY_TESTS.zip",
+      "type": "zip"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/RAW_MANIFEST.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/SDK_INFO.txt",
+      "type": "txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/TEST_SUMMARY.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-home-sync-20261021/WORKTREES_BEFORE.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/HOME_ORIGINAL_SCENARIO11_FAILURE.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/INSTRUMENTATION_BOUNDARY.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/LOCALIZATION.md",
+      "type": "md"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/PERFORMANCE_PLAN.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/PROBE_BINDINGS.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/SCENARIO11_CONTRACT.json",
+      "type": "json"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContainerService.cs",
+      "type": "cs"
+    },
+    {
+      "status": "A",
+      "path": "tests/RAWSelectionAssistant.Tests/AssetLibrarySwitchPathRegressionTests.cs",
+      "type": "cs"
+    },
+    {
+      "status": "A",
+      "path": "tools/CompanySwitchProbe/.gitignore",
+      "type": "gitignore"
+    },
+    {
+      "status": "A",
+      "path": "tools/CompanySwitchProbe/CompanySwitchProbe.csproj",
+      "type": "csproj"
+    },
+    {
+      "status": "A",
+      "path": "tools/CompanySwitchProbe/Program.cs",
+      "type": "cs"
+    },
+    {
+      "status": "A",
+      "path": "tools/company-switch-performance/.gitignore",
+      "type": "gitignore"
+    },
+    {
+      "status": "A",
+      "path": "tools/company-switch-performance/AssetLibraryOpenDiagnostics.cs.txt",
+      "type": "txt"
+    },
+    {
+      "status": "A",
+      "path": "tools/company-switch-performance/README.md",
+      "type": "md"
+    },
+    {
+      "status": "A",
+      "path": "tools/company-switch-performance/SCENARIO11_CONTRACT.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "tools/company-switch-performance/baseline-instrumentation.patch.b64",
+      "type": "b64"
+    },
+    {
+      "status": "A",
+      "path": "tools/company-switch-performance/run_concurrent.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/company-switch-performance/sample_disk.ps1",
+      "type": "ps1"
+    },
+    {
+      "status": "A",
+      "path": "tools/company-switch-performance/summarize_phase1.py",
+      "type": "py"
+    }
+  ]
+}

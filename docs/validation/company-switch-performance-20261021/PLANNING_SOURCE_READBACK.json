@@ -1,0 +1,10 @@
+{
+  "sourceSha": "99d7818e035310c9273565e73752ee0359ebb8f1",
+  "productTree": "83f8063effcd9110b487ca15c5743ea065abed69",
+  "headTree": "83f8063effcd9110b487ca15c5743ea065abed69",
+  "planningConditions": [
+    "        (ContentPage != \"情绪板\" || item.IsMoodboard) && (ContentPage is not (\"灯位图\" or \"灯光图\") || item.Category == \"灯光\")\r",
+    "        && (ContentPage is not (\"服化道与道具\" or \"服化道\") || item.Category == \"造型\") && (ReferenceCategory == \"全部\" || item.Category == ReferenceCategory));\r"
+  ],
+  "classification": "        var category = ContentPage is \"灯位图\" or \"灯光图\" ? \"灯光\" : ContentPage is \"服化道与道具\" or \"服化道\" ? \"造型\" : ReferenceCategory == \"全部\" ? \"其他\" : ReferenceCategory;\r"
+}

@@ -1,0 +1,33 @@
+{
+  "baseline": {
+    "calls": 10000,
+    "cacheHits": 9998,
+    "GetAttributes": 140000,
+    "FileExists": 70000,
+    "DirectoryExists": 60000,
+    "cachedPhysicalPathMs": 2772.7541
+  },
+  "fixed": {
+    "calls": 10000,
+    "cacheHits": 9998,
+    "phases": {
+      "PathNormalize": 38.31259999999972,
+      "RootFileChecks": 231.94610000000085,
+      "PathResolve": 16.12939999999885,
+      "MetadataFingerprint": 454.1718999999967,
+      "CacheLookup": 0.0069,
+      "ManifestReadParseValidate": 0.4557,
+      "ColdPhysicalPathChecks": 0.8140000000000001,
+      "SqliteValidation": 3.3735,
+      "DescriptorAndCachePublish": 0.1573,
+      "CachedPhysicalPathChecks": 909.9711000000024
+    },
+    "syscalls": {
+      "GetAttributes": 90010,
+      "FileExists": 14,
+      "DirectoryExists": 12
+    }
+  },
+  "authority": "Instrumented diagnostic copy, not production timing; includes observer overhead and concurrent full-regression load in fixed stage sample",
+  "scope": "Every measured OpenAsync has raw stage record; physical disk/busy wait unavailable fields remain null"
+}
