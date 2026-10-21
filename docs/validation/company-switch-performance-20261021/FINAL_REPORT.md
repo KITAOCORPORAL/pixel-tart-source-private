@@ -68,3 +68,7 @@ fetch并独立ls-remote：家用home/guangjing-whole-app-sync-20261020仍为d39d
 旧树状态/HEAD/所有未跟踪记录已审计，6个脏工作树共404文件内容SHA逐个复验不变；旧Release保留，未提交私人照片/RAW/数据库/凭据/发布二进制。诊断镜像DLL不进发布，原始性能归档只收JSON/CSV/TRX/log。
 
 阶段：3a55029e公司同步/构建；cebbeace性能定位；0e5c3ea7最小修复/安全回归；最终证据单独提交。改动类型/构建命令/EXE-WPF-Core hash/完整文件清单/ZIP hash/LOCAL_HEAD=REMOTE_HEAD见同目录记录。正常push本公司续接分支，不合main，不强推。发行门禁继续BLOCKED。
+
+## 推送读回
+
+最终证据提交de7ce22d7036f13d1a0633a800d82387a07ca7f3已正常推送，独立ls-remote本地远端一致。此后只封存读回和SDK派生文本行尾规范，不改变产品源码或发布DLL。工作树最终状态另见封存读回。

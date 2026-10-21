@@ -1,6 +1,5 @@
 {
-  "homeHead": "d39d11d68eb44f5aa0ec8a2f1afc95c98630820d",
-  "productSource": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
   "files": [
     {
       "status": "A",
@@ -69,6 +68,91 @@
     },
     {
       "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/ALL_RESULTS.csv",
+      "type": "csv"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/BEFORE_AFTER.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/BUILD_IDENTITY.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/CHANGED_FILES.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/CONCURRENT_MATCHED_AUDIT.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/CONTENT_PRESERVATION_AFTER.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/DISK_GLOBAL_SUMMARY.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/DISK_WAIT_LIMITATIONS.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/EARLY_COMPARISON_LIMITATIONS.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/FINAL_ENVIRONMENT_LIMITATION.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/FINAL_REPORT.md",
+      "type": "md"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/FINAL_SOURCE_READBACK.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/FIXED_DEPENDENCIES.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/FIXED_RELEASE_BINDINGS.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/FIXED_RELEASE_FILES.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/FIXTURE_AND_ASSEMBLY_IDENTITIES.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/HOME_COMPANY_BUILD_COMPARISON.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
       "path": "docs/validation/company-switch-performance-20261021/HOME_ORIGINAL_SCENARIO11_FAILURE.json",
       "type": "json"
     },
@@ -84,7 +168,42 @@
     },
     {
       "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/NONPASS.csv",
+      "type": "csv"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/OLD_WORKTREE_STATE_READBACK.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
       "path": "docs/validation/company-switch-performance-20261021/PERFORMANCE_PLAN.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/PERFORMANCE_REPORT.md",
+      "type": "md"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/PERFORMANCE_RESULTS.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/PHASE1_COMPARISON.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/PHASE1_READBACK.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/PLANNING_SOURCE_READBACK.json",
       "type": "json"
     },
     {
@@ -94,7 +213,67 @@
     },
     {
       "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/PRODUCT_FIX.patch.txt",
+      "type": "txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/RAW_FINAL_MANIFEST.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/RAW_FINAL_TESTS.zip",
+      "type": "zip"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/RAW_PERFORMANCE.zip",
+      "type": "zip"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/RAW_PERFORMANCE_MANIFEST.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/RAW_PHASE1_TESTS.zip",
+      "type": "zip"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/RELEASE_GATE.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
       "path": "docs/validation/company-switch-performance-20261021/SCENARIO11_CONTRACT.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/STAGE_COMMITS.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/STAGE_COMPARISON.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/TEST_SUMMARY.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/ZIP_FILES.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/company-switch-performance-20261021/ZIP_IDENTITY.json",
       "type": "json"
     },
     {
@@ -144,8 +323,23 @@
     },
     {
       "status": "A",
+      "path": "tools/company-switch-performance/assemble_delivery.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
       "path": "tools/company-switch-performance/baseline-instrumentation.patch.b64",
       "type": "b64"
+    },
+    {
+      "status": "A",
+      "path": "tools/company-switch-performance/fixed-instrumentation.patch.b64",
+      "type": "b64"
+    },
+    {
+      "status": "A",
+      "path": "tools/company-switch-performance/package_final.py",
+      "type": "py"
     },
     {
       "status": "A",
@@ -162,5 +356,6 @@
       "path": "tools/company-switch-performance/summarize_phase1.py",
       "type": "py"
     }
-  ]
+  ],
+  "scope": "Diff at evidence commit de7ce22d; later sealing docs do not change product"
 }
