@@ -1,0 +1,45 @@
+{
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "package": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/Company-SwitchFix-Diagnostic-win-x64/app",
+  "physicalOnly": true,
+  "testScope": [
+    {
+      "id": "D00",
+      "action": "启动当前隔离EXE并核对进程主WPF/Core模块hash",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "D01",
+      "action": "首次教程正常退出，进入素材库",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "D02",
+      "action": "新合成库A/B各含不同合成文件，实际打开A→查询→B→查询→A，核对身份/结果不串库",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "D03",
+      "action": "策划创建合成项目，逐一进入15分区，编辑可支持字段并保存，返回确认",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "D04",
+      "action": "实际窗口小/大布局和应用支持的缩放倍率下点击，截图记录，不当作物理DPI自动通过",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "D05",
+      "action": "保存后退出/重开确认身份、时间戳及内容；失败原样记录",
+      "result": "NOT_RUN"
+    }
+  ],
+  "forbidden": [
+    "offscreen screenshots as desktop proof",
+    "direct API/RaiseEvent pretending mouse",
+    "changing Windows security or display DPI automatically",
+    "scanning private photos/DB",
+    "overwriting older Release or fixtures"
+  ],
+  "physicalDpi": "Only observe current host DPI; OS DPI changes not automatic"
+}

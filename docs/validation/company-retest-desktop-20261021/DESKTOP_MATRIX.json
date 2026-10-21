@@ -1,0 +1,53 @@
+{
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "processId": 20900,
+  "status": "BLOCKED",
+  "items": [
+    {
+      "id": "D00",
+      "item": "真实EXE启动与加载DLL身份",
+      "status": "PARTIAL",
+      "evidence": "DESKTOP_START.json;DESKTOP_INITIAL.txt;DESKTOP_COMPONENT_READBACK.json",
+      "note": "Confirmed live process and accessibility tree only, not mouse business verification"
+    },
+    {
+      "id": "D01",
+      "item": "退出首次教程进入业务区",
+      "status": "BLOCKED",
+      "evidence": "DESKTOP_OPERATIONS.json",
+      "note": "coordinate input geometry is unavailable"
+    },
+    {
+      "id": "D02",
+      "item": "素材库双库切换与查询",
+      "status": "BLOCKED",
+      "evidence": "DESKTOP_OPERATIONS.json;DESKTOP_SYNTHETIC_INPUTS.json",
+      "note": "Synthetic inputs prepared only, not imported or operated in UI"
+    },
+    {
+      "id": "D03",
+      "item": "策划15区进入与保存",
+      "status": "BLOCKED",
+      "evidence": "DESKTOP_PLANNING_15.json",
+      "note": "All 15 remain unperformed in physical desktop"
+    },
+    {
+      "id": "D04",
+      "item": "不同缩放比例实际点击与窗口布局",
+      "status": "BLOCKED",
+      "evidence": "DESKTOP_OPERATIONS.json;MACHINE_ENVIRONMENT.json",
+      "note": "No mouse geometry or target screenshot; physical DPI unknown, OS DPI not changed"
+    },
+    {
+      "id": "D05",
+      "item": "保存重开与返回",
+      "status": "NOT_RUN",
+      "evidence": "DESKTOP_OPERATIONS.json",
+      "note": "Preceding desktop operations blocked"
+    }
+  ],
+  "physicalBusinessPasses": 0,
+  "screenshots": 0,
+  "offscreenCountsAsPhysical": false,
+  "existingPackageUnmodified": true
+}

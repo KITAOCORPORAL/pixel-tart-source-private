@@ -1,0 +1,24 @@
+{
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "diagnosticOnly": true,
+  "status": "BLOCKED",
+  "testScope": {
+    "core": "1712 passed/0 failed/5 skipped, 1717 obtained",
+    "wpf": "1695 passed/0 failed/20 skipped, 1715 obtained",
+    "modules": "14/14 passed",
+    "missing": 0,
+    "prior20SupplementUsed": false
+  },
+  "physicalDesktop": {
+    "businessPasses": 0,
+    "status": "BLOCKED",
+    "reason": "coordinate input geometry unavailable; target capture timeout; no screenshots"
+  },
+  "homeRepeat": {
+    "status": "NOT_RUN",
+    "reason": "Household machine not executing in this company task; home32139.0909ms cause remains unclosed"
+  },
+  "priorProductGatesRetained": true,
+  "formalRelease": false,
+  "timezone": "Europe/Berlin"
+}

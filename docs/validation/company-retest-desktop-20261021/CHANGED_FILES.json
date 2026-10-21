@@ -1,0 +1,197 @@
+{
+  "scope": "Evidence and retest tooling only; src/tests unchanged from 0e5c3ea7",
+  "files": [
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/ALL_RESULTS.csv",
+      "type": "csv",
+      "bytes": 1005563,
+      "sha256": "dd2ff62338db7f4599d26aec979a135408c232c5365116bb3a85d235e68d192f"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/AUTHORIZATION_PREFLIGHT.json",
+      "type": "json",
+      "bytes": 1789,
+      "sha256": "6717971516913a0a065971321d431613e3bc9a42dc5bf4ac323105139563e2d2"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/AUTHORIZED_FULL_RUN_READBACK.json",
+      "type": "json",
+      "bytes": 478,
+      "sha256": "045e4c30471ec29619fdecd1d423941054df8cb58a995b066dbb7046c357cc72"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/COMPONENT_BINDINGS.json",
+      "type": "json",
+      "bytes": 18036,
+      "sha256": "35087a995e8f384debd5f9bfd7f54db4c9c2fd9d4e76e5b6a33e64a71d8ee91c"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/DESKTOP_COMPONENT_READBACK.json",
+      "type": "json",
+      "bytes": 1938,
+      "sha256": "f13317137069efe2ab37e3402a8bd87ca43fe77add57f7c575fc8f3f6fc006c1"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/DESKTOP_INITIAL.txt",
+      "type": "txt",
+      "bytes": 5566,
+      "sha256": "8f416d76190b04042f13dbac475178800d5615195ebae4c29001ce24219cb1e2"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/DESKTOP_LOADED_MODULES.json",
+      "type": "json",
+      "bytes": 1232,
+      "sha256": "8003cd30676dbd9fa0c436c8ce48d3c6a81fe7090f8d447f2ff6ae024d6a5786"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/DESKTOP_MATRIX.json",
+      "type": "json",
+      "bytes": 1720,
+      "sha256": "915e74d50425c9f668e65381f75925b65a1b6976d52d98f829ae1ce3eac51148"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/DESKTOP_OPERATIONS.json",
+      "type": "json",
+      "bytes": 626,
+      "sha256": "7d0802363364ce86263fc7d2f1469fd1618e0c2e3a4a1b1e0d9ceae6e9c89ef8"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/DESKTOP_PLAN.json",
+      "type": "json",
+      "bytes": 1518,
+      "sha256": "525873789681ce41ef2577d1c1a7e75c07443e5a7d77cda008f52e440ba1a912"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/DESKTOP_PLANNING_15.json",
+      "type": "json",
+      "bytes": 5339,
+      "sha256": "a1644fb17a69746d0e0968e9bbede194725cf5a7f8521b076e74f4eae6252669"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/DESKTOP_START.json",
+      "type": "json",
+      "bytes": 387,
+      "sha256": "d86cb4d8bfeabbdd8ed139497bb36d94baa9cd6f0465f9b6b4d8ae23e6893a17"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/DESKTOP_SYNTHETIC_INPUTS.json",
+      "type": "json",
+      "bytes": 775,
+      "sha256": "8299596fa65e024fd853a1891f68ff1b4e7bebb87903c05d0147508356176bd2"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/EVIDENCE_ARCHIVE_IDENTITY.json",
+      "type": "json",
+      "bytes": 4963,
+      "sha256": "8d53ea1308c84d4d741bdc276dc0cbb21bc9b34f2f5ba4643c23c301afe7d80a"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/FINAL_REPORT.md",
+      "type": "md",
+      "bytes": 6461,
+      "sha256": "734c091ebd15c0b891faee0057b3343cef1a9e75d3f081c84ea4b2d92e5c749d"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/HOME_RETEST.md",
+      "type": "md",
+      "bytes": 7238,
+      "sha256": "abedf506e7ede10eaf9697cc0eef27ca01a45aa9d7626de714117b1dec6f8bfd"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/MACHINE_ENVIRONMENT.json",
+      "type": "json",
+      "bytes": 1291,
+      "sha256": "9bc0f529483da56e4bd13c7c09e97e1495abfc2d42119673bf283954a17198f6"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/NONPASS.csv",
+      "type": "csv",
+      "bytes": 22970,
+      "sha256": "d98e1cebd2016fe6e60baacb1a3f15abb902f8433566a83e3bd77869c0f9654c"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/PRESERVATION_AFTER.json",
+      "type": "json",
+      "bytes": 6247,
+      "sha256": "104bef2ca6b5de5c3b6b66ba31fbc9dab6f96797ff5b567bbdd6320645552048"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/RAW_RETEST_MANIFEST.json",
+      "type": "json",
+      "bytes": 283856,
+      "sha256": "525f8b8a35129de5e597099435127f2c7a1bb5e4f894da7a6be93bca0176fb42"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/RAW_RETEST_TRX.zip",
+      "type": "zip",
+      "bytes": 2561118,
+      "sha256": "f010bf657b9c0b7f952e71fd65791f38f1cf8d0dcfac85d7a4314193d84cc680"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/RELEASE_GATE.json",
+      "type": "json",
+      "bytes": 762,
+      "sha256": "b55898da5cfba1eb067af8279c06374af2ba20de75d5fc03120fc4091c466d96"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/RUN_CONFIGURATION.json",
+      "type": "json",
+      "bytes": 7387,
+      "sha256": "5781b1b32b6d733b3d834893b97b01d67a091a9bc5bb81f7fefc942dc9bff58c"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/SCENARIO11_CONTRACT_READBACK.json",
+      "type": "json",
+      "bytes": 672,
+      "sha256": "fc9f6670bfbfe9138087cc38efd10744381c298b410d65d31f144d599537ccf8"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/SCREENSHOTS.json",
+      "type": "json",
+      "bytes": 774,
+      "sha256": "3b14d59ef2003992071c3041140f94ae7ad5027a38b9c513a968af9ec9568430"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/SDK_INFO.txt",
+      "type": "txt",
+      "bytes": 1325,
+      "sha256": "72ef0b58b22006824767f0848f8e943c112a7e68fd034fca12704c38ea3bf240"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/START.json",
+      "type": "json",
+      "bytes": 48749,
+      "sha256": "ad4e3bb72964f676a868480e6725a5fce2b9e040c3778909c6d29566a7f028ae"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/TEST_SUMMARY.json",
+      "type": "json",
+      "bytes": 3005,
+      "sha256": "c70435ff1dccabe0552400ba282d33d5d9f98c23cac166a4418c3efa14da6733"
+    },
+    {
+      "path": "docs/validation/company-retest-desktop-20261021/TOOL_VALIDATION.json",
+      "type": "json",
+      "bytes": 314,
+      "sha256": "29a957c67e1ff3949250f574bc6995d992e4dbc210d67ccc39c0eae9b584ce6a"
+    },
+    {
+      "path": "tools/company-retest-desktop/archive_evidence.py",
+      "type": "py",
+      "bytes": 1418,
+      "sha256": "77111e30c07eb09608bf004ab73edcf66b1973446d713181919876ff09437eb0"
+    },
+    {
+      "path": "tools/company-retest-desktop/Invoke-HomeScenario11.ps1",
+      "type": "ps1",
+      "bytes": 4473,
+      "sha256": "d26399af00b0bb1175b64cb3762ec8d79a6ece9aa62448f8b6b8f1d127e73208"
+    },
+    {
+      "path": "tools/company-retest-desktop/summarize_retest.py",
+      "type": "py",
+      "bytes": 4077,
+      "sha256": "265e7d6239d680190b92e172b0260592b01061431028c88bf804aa2ce36e0aee"
+    }
+  ]
+}

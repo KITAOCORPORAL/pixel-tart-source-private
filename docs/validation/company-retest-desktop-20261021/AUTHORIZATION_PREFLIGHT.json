@@ -1,0 +1,35 @@
+{
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "manifests": [
+    {
+      "key": "KITAO_R3_CLI_AUTHORIZED_MANIFEST",
+      "manifest": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/AUTHORIZED_INPUTS.json",
+      "path": "E:/Kitao-Deliveries/darkroom-r3-20261019/authorized-inputs/photo-1.jpg",
+      "sha256": "4d6c243e3f25af2c50830c4fa0e1b40574404699c79ba7d2aae477b7ea1be822"
+    },
+    {
+      "key": "KITAO_R3_CLI_AUTHORIZED_MANIFEST",
+      "manifest": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/AUTHORIZED_INPUTS.json",
+      "path": "E:/Kitao-Deliveries/darkroom-r3-20261019/authorized-inputs/photo-2.jpg",
+      "sha256": "b9ea43fd0a4db8d8b7fb6abe351c3d232697ead8a6f1c1bf84e35c04f0b9c368"
+    },
+    {
+      "key": "KITAO_PHOTO_PAGE_AUTHORIZED_MANIFEST",
+      "manifest": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/PHOTO_PAGE_AUTHORIZED.json",
+      "path": "E:/Kitao-Deliveries/darkroom-r3-20261019/authorized-inputs/photo-1.jpg",
+      "sha256": "4d6c243e3f25af2c50830c4fa0e1b40574404699c79ba7d2aae477b7ea1be822"
+    },
+    {
+      "key": "KITAO_PHOTO_PAGE_AUTHORIZED_MANIFEST",
+      "manifest": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/PHOTO_PAGE_AUTHORIZED.json",
+      "path": "E:/Kitao-Deliveries/darkroom-r3-20261019/authorized-inputs/photo-2.jpg",
+      "sha256": "b9ea43fd0a4db8d8b7fb6abe351c3d232697ead8a6f1c1bf84e35c04f0b9c368"
+    }
+  ],
+  "freshOutputs": [
+    "E:/Kitao-Deliveries/company-retest-desktop-20261021/authorized-r3-fresh-output",
+    "E:/Kitao-Deliveries/company-retest-desktop-20261021/film-cpu-performance",
+    "E:/Kitao-Deliveries/company-retest-desktop-20261021/scenario11-measurements"
+  ],
+  "verifiedBeforeDispatch": true
+}

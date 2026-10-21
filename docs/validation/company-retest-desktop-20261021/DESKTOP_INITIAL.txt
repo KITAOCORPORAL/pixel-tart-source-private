@@ -1,0 +1,130 @@
+Window: "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行", App: KitaoPhotoSelector.exe.
+	0 窗口 光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行 Secondary Actions: Raise
+		1 文本 PT
+		2 文本 PIXEL TART
+		3 文本 当前工作区 · 归片工作区
+		4 菜单 ID: TopMenu
+			5 菜单项 文件(F)
+				6 文本 文件(_F)
+			7 菜单项 项目(P)
+				8 文本 项目(_P)
+			9 菜单项 编辑(E)
+				10 文本 编辑(_E)
+			11 菜单项 视图(V)
+				12 文本 视图(_V)
+			13 菜单项 工具(T)
+				14 文本 工具(_T)
+			15 菜单项 帮助(H)
+				16 文本 帮助(_H)
+		17 按钮 最小化窗口
+			18 文本 —
+		19 按钮 最大化或还原窗口
+			20 文本 □
+		21 按钮 关闭窗口
+			22 文本 ×
+		23 按钮
+		24 窗格 侧栏根区域 ID: SidebarRoot
+		25 窗格 ID: SidebarNavigationScroll
+			26 文本 工作
+			27 按钮 (disabled) 工作台 Description: 工作台 ID: PrimaryNavigationWorkbench
+			28 按钮 (disabled) 素材库 Description: 素材库 ID: AssetLibraryNavigationButton
+			29 按钮 (disabled) 归片工作区 Description: 归片工作区 ID: PrimaryNavigationWorkflow
+			30 按钮 (disabled) 工作日历 Description: 工作日历 ID: PrimaryNavigationWorkCalendar
+			31 按钮 (disabled) 策划中心 Description: 策划中心 ID: PrimaryNavigationPlanning
+			32 按钮 (disabled) 联机拍摄 Description: 联机拍摄 ID: PrimaryNavigationTether
+			33 按钮 (disabled) 暗室 Description: 暗室 ID: PrimaryNavigationReferenceColor
+			34 按钮 (disabled) 在线选片 Description: 在线选片 ID: PrimaryNavigationOnlineSelection
+			35 按钮 (disabled) 摄影收支 Description: 摄影收支 ID: PrimaryNavigationFinance
+			36 按钮 (disabled) 项目历史 Description: 项目历史 ID: PrimaryNavigationHistory
+			37 分隔符 (disabled)
+			38 文本 工具
+			39 按钮 (disabled) 工具箱 Description: 打开完整工具集合。 ID: PrimaryNavigationToolbox
+			40 分隔符 (disabled)
+			41 文本 系统
+			42 按钮 (disabled) 授权与版本 Description: 授权与版本
+			43 按钮 设置 Description: 设置 ID: SidebarSettingsButton
+			44 按钮 (disabled) 帮助 Description: 帮助
+		45 文本 免费版
+		46 按钮 (disabled) 查看授权与版本 Description: 查看授权与版本
+			47 文本 (disabled) 升级
+		48 文本 授权与版本
+		49 按钮 收起侧栏 Description: 收起侧栏 ID: SidebarCollapseButton
+		50 窗格
+			51 文本 归片
+			52 按钮 1 来源与索引
+				53 文本 1 来源与索引
+			54 按钮 2 导入选片
+				55 文本 2 导入选片
+			56 按钮 3 匹配检查
+				57 文本 3 匹配检查
+			58 按钮 4 输出交付
+				59 文本 4 输出交付
+			60 窗格
+				61 文本 照片来源目录
+				62 按钮 (disabled) 添加照片来源目录 ID: AddSourceButton
+					63 文本 (disabled) 添加
+				64 按钮 (disabled) 删除来源目录 ID: RemoveSourceButton
+					65 文本 (disabled) 删除
+				66 按钮 (disabled) 清空
+					67 文本 (disabled) 清空
+				68 列表视图
+				69 组合框 Description: 设置所选目录用途
+				70 按钮 (disabled) 上移
+					71 文本 (disabled) 上移
+				72 按钮 (disabled) 下移
+					73 文本 (disabled) 下移
+				74 按钮 (disabled) 扫描照片文件 ID: ScanButton
+					75 文本 (disabled) 扫描照片文件
+				76 文本 归片类别
+				77 组合框 ID: CategorySelector
+				78 文本 来源 JPG 未找到时
+				79 组合框
+			80 文本 选片记录
+			81 文本 0
+			82 文本 目标文件
+			83 文本 0
+			84 文本 JPG / RAW
+			85 文本 0 / 0
+			86 文本 冲突 / 未找到
+			87 文本 0 / 0
+			88 文本 已复制
+			89 文本 0
+			90 按钮 (disabled) 保存项目
+				91 文本 (disabled) 保存项目
+			92 按钮 (disabled) 取消当前任务 ID: CancelButton
+				93 文本 (disabled) 取消当前任务
+			94 按钮 (disabled) 清空任务 ID: ClearTaskButton
+				95 文本 (disabled) 清空任务
+			96 编辑 (settable, string) Description: 按客户输入、标准化名称、编号或备注搜索（Ctrl+F） ID: SearchBox
+			97 复选框 只看冲突与待处理
+				98 文本 只看冲突与待处理
+			99 文本 Alt+Enter 查看明细 Description: 查看明细位于总体状态右侧；Alt+Enter 快速打开
+			100 文本 尚未建立照片索引
+			101 文本 先选择照片来源并扫描，之后再导入客户选片。
+			102 按钮 选择照片来源
+				103 文本 选择照片来源
+			104 文本 所选记录快速摘要
+			105 文本 输入： · JPG： · RAW： · 备注：
+			106 按钮 (disabled) 查看完整明细
+				107 文本 (disabled) 查看完整明细
+		108 窗格 工作台根区域 ID: WorkbenchRoot
+		109 文本 请添加照片来源目录并建立索引
+		110 文本
+		111 文本 ·
+		112 文本 ·
+		113 文本 已处理 0
+		114 进度栏 Value: 0
+		115 自定义 拍摄提醒通知
+			116 窗格
+				117 列表视图
+		118 文本 第 1 步，共 22 步
+		119 文本 欢迎使用像素蛋挞
+		120 文本 接下来会用演示照片完成一次完整归片，不会读取、移动或修改你的真实照片。
+		121 按钮 开始教程 ID: TutorialPrimaryButton
+			122 文本 开始教程
+		123 按钮 退出教程 Description: 取消当前教程并返回正常工作区 ID: TutorialExitButton
+			124 文本 退出教程
+		125 自定义 ID: Root
+			126 按钮 退出教程并返回 Description: 退出教程并返回 ID: TutorialCalloutCloseButton
+
+The focused UI element is 96 编辑 (settable, string) Description: 按客户输入、标准化名称、编号或备注搜索（Ctrl+F） ID: SearchBox.

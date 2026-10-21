@@ -1,0 +1,18 @@
+{
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "currentTestSha256": "38fb785906855d4ab7a214bcecb18bd877e7e442252099282b9ed0405ec13874",
+  "baselineTestSha256": "38fb785906855d4ab7a214bcecb18bd877e7e442252099282b9ed0405ec13874",
+  "textUnchanged": true,
+  "iterations": 10000,
+  "thresholdMs": 30000,
+  "metadataOutsideTimer": true,
+  "currentMeasurement": {
+    "open_switch_iterations": 10000,
+    "cold_total_ms": 1769.5904,
+    "worst_average_open_ms": 0.17695904,
+    "metadata_rows": 100000,
+    "projected_unique": 90000
+  },
+  "scope": "Current complete Core run; not a new home result or causal explanation",
+  "homeFailureRetainedMs": 32139.0909
+}

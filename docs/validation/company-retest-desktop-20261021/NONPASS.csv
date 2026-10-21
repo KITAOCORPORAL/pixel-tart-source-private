@@ -1,0 +1,114 @@
+﻿suite,name,display,outcome,status,evidence,error
+FULL_CORE,RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16,AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_CORE\run-20261021-103856-31c8326e\053,"Assert.Inconclusive 失败。Explicitly authorized real corpus is opt-in; not a synthetic RAW replacement.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_CORE,RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError,AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_CORE\run-20261021-103856-31c8326e\055,"Assert.Inconclusive 失败。Real spatial evidence is explicitly opt-in.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_CORE,RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled,ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_CORE\run-20261021-103856-31c8326e\153,"Assert.Inconclusive 失败。Set PIXEL_TART_RUN_V4_BENCHMARK=1 for the bounded production-size run.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_CORE,RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene,CpuGpuParityOnSyntheticScene,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_CORE\run-20261021-103856-31c8326e\154,"Assert.Inconclusive 失败。No validated GPU compute device on this host.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_CORE,RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses,CpuGpuParityAcrossEightSceneClasses,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_CORE\run-20261021-103856-31c8326e\154,"Assert.Inconclusive 失败。No validated GPU compute device on this host.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF_0,RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults,AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_0\run-20261021-103920-982fa8b1\015,"Assert.Inconclusive 失败。Authorized local corpus opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchSevenRawProductTests.AuthorizedRawQuickExportAllFormatsNativeDetailAndPublishingRecordRealResults()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF_0,RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.FilmEffects_WriteTruePerEffectComparisonWhenRequested,FilmEffects_WriteTruePerEffectComparisonWhenRequested,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_0\run-20261021-103920-982fa8b1\042,"Assert.Inconclusive 失败。Set PIXEL_TART_FILM_EVIDENCE to collect review evidence.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.FilmEffects_WriteTruePerEffectComparisonWhenRequested()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF_0,RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.ReviewSheets_ComposeHonestProductionEvidenceWhenRequested,ReviewSheets_ComposeHonestProductionEvidenceWhenRequested,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_0\run-20261021-103920-982fa8b1\042,"Assert.Inconclusive 失败。Set review evidence paths.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ReferenceFilmVisualEvidenceTests.ReviewSheets_ComposeHonestProductionEvidenceWhenRequested()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF_0,RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet,PremiumPrototype_ThreeRealPages_RenderReviewSet,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_0\run-20261021-103920-982fa8b1\051,"Assert.Inconclusive 失败。Opt-in visual evidence is not enabled in this bounded regression run.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.StudioV2PremiumPrototypeEvidenceTests.PremiumPrototype_ThreeRealPages_RenderReviewSet()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF_0,RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval,BaselineGuard_RequiresExplicitApproval,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_0\run-20261021-103920-982fa8b1\053,"Assert.Inconclusive 失败。BASELINE_MISSING: capture current UI before requesting approval.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.UiVisualRegressionTests.BaselineGuard_RequiresExplicitApproval()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF_1,RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture,ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_1\run-20261021-103920-6e88abbc\009,"Assert.Inconclusive 失败。Opt-in diagnostic: provide a new synthetic fixture and new output directory.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.AssetLibraryP3PerformanceDiagnosticsTests.ThreeSamplesOfPublicBatchCommandsAgainstFresh10128Fixture()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF_1,RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts,SeparatePureTiffEncodingValidationHashAndNodeCosts,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_1\run-20261021-103920-6e88abbc\013,"Assert.Inconclusive 失败。Performance output opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchElevenColorContractTests.SeparatePureTiffEncodingValidationHashAndNodeCosts()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF_1,RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop,OffscreenSyntheticKeyframesNeverLaunchDesktop,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_1\run-20261021-103920-6e88abbc\015,"Assert.Inconclusive 失败。Offscreen artifact output opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchTenCameraKeyframesTests.OffscreenSyntheticKeyframesNeverLaunchDesktop()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF_1,RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport,AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_1\run-20261021-103920-6e88abbc\039,"Assert.Inconclusive 失败。Set authorized batch06 corpus and evidence directory; not a synthetic test.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF_1,RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests.CompanyRealRawProductAcceptanceGate,CompanyRealRawProductAcceptanceGate,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_1\run-20261021-103920-6e88abbc\041,"Assert.Inconclusive 失败。NOT RUN — real camera fixture directory unavailable; set PIXEL_TART_COMPANY_RAW_ROOT.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.RealCameraProductAcceptanceTests.CompanyRealRawProductAcceptanceGate()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF_1,RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes,RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_1\run-20261021-103920-6e88abbc\049,"Assert.Inconclusive 失败。Opt-in automatic screenshot evidence; not native UI acceptance.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.StudioRebuildVisualEvidenceTests.<>c.<<RenderCurrentStudioWithSyntheticPhotoAtDocumentedLayoutSizes>b__0_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF_2,RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests.ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt,ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_2\run-20261021-103920-c9580596\006,"Assert.Inconclusive 失败。No captured non-reparse P2 run root is available for the read-only integration probe.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.AssetLibraryP2AutomatedEvidenceContractTests.ValidateExistingRunAcceptsLatestCapturedP2RunWithoutChangingIt()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF_2,RAWSelectionAssistant.WpfTests.BatchElevenRealTests.BatchElevenAuthorizedRawMemoryAndColor,BatchElevenAuthorizedRawMemoryAndColor,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_2\run-20261021-103920-c9580596\013,"Assert.Inconclusive 失败。Explicit authorized company fixtures required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchElevenRealTests.BatchElevenAuthorizedRawMemoryAndColor()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF_2,RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure,AuthorizedCompanyRawColdPathsAndWorkspacePressure,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_2\run-20261021-103920-c9580596\015,"Assert.Inconclusive 失败。Explicit authorized company fixtures required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF_2,RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution,CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_2\run-20261021-103920-c9580596\042,"Assert.Inconclusive 失败。Set an isolated current-run output directory.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ReferenceWorkspaceDpiEvidenceTests.CurrentReferenceWorkspaceRendersAtFourScalesAndNarrowResolution()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+FULL_WPF_2,RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference,RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_2\run-20261021-103920-c9580596\044,"Assert.Inconclusive 失败。Authorized real measurement opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.RealCanonSpatialNodesRecordIsolatedOperationPeakAndPixelReference()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF_2,RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback,OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_2\run-20261021-103920-c9580596\044,"Assert.Inconclusive 失败。Reviewed official candidate opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.SpatialClosureRealTests.OfficialCandidateDecodesSonyAndOldCameraFilesWithoutPreviewFallback()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF_3,RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition,AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_3\run-20261021-103920-a6029850\012,"Assert.Inconclusive 失败。Authorized local RAW corpus and evidence opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF_3,RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately,BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_3\run-20261021-103920-a6029850\012,"Assert.Inconclusive 失败。Measurement opt-in required.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+FULL_WPF_3,RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels,AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels,NotExecuted,NOT_RUN,E:\Kitao-Deliveries\company-retest-desktop-20261021\FULL_WPF_3\run-20261021-103920-a6029850\023,"Assert.Inconclusive 失败。Authorized real JPEG corpus requires explicit opt-in.
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.<>c.<<AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels>b__8_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"

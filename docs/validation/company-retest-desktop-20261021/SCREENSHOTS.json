@@ -1,0 +1,24 @@
+{
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "desktopPid": 20900,
+  "physicalCaptureCount": 0,
+  "status": "BLOCKED",
+  "reason": "Target window capture failed on two refreshed bindings. No file produced; no offscreen or full-desktop unrelated content substituted.",
+  "attempts": [
+    {
+      "step": "D00",
+      "action": "目标窗口专用真实截图",
+      "status": "BLOCKED",
+      "error": "FrameArrived timed out: timed out waiting on channel",
+      "atUtc": "2026-10-21T02:53:39.583Z"
+    },
+    {
+      "step": "D00",
+      "action": "刷新后一次激活/截图复验",
+      "status": "BLOCKED",
+      "error": "window capture timed out: timed out waiting on channel",
+      "atUtc": "2026-10-21T02:54:24.964Z"
+    }
+  ],
+  "files": []
+}

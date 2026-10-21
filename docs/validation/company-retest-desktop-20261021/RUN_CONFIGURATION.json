@@ -1,0 +1,168 @@
+{
+  "sourceSha": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+  "startHead": "a79ffc7c05ea0559a142a7ecd06f41b6b0f506fe",
+  "tests": {
+    "core": "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tests/RAWSelectionAssistant.Tests/bin/Release/net10.0/RAWSelectionAssistant.Tests.dll",
+    "wpf": "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll",
+    "modules": "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tests/PixelTart.ModularHarness.Tests/bin/Release/net10.0-windows10.0.19041.0/PixelTart.ModularHarness.Tests.dll"
+  },
+  "commands": [
+    {
+      "label": "FULL_CORE",
+      "args": [
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tools/whole-app-validation/verified_full_runner.py",
+        "--assembly",
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tests/RAWSelectionAssistant.Tests/bin/Release/net10.0/RAWSelectionAssistant.Tests.dll",
+        "--output",
+        "E:/Kitao-Deliveries/company-retest-desktop-20261021/FULL_CORE",
+        "--dotnet",
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "--resource-root",
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021",
+        "--timeout",
+        "180"
+      ],
+      "pid": 22352,
+      "start": "2026-10-21T02:38:55.710Z",
+      "exit": 1,
+      "end": "2026-10-21T02:47:18.773Z"
+    },
+    {
+      "label": "FULL_WPF_0",
+      "args": [
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tools/whole-app-validation/verified_full_runner.py",
+        "--assembly",
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll",
+        "--output",
+        "E:/Kitao-Deliveries/company-retest-desktop-20261021/FULL_WPF_0",
+        "--dotnet",
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "--resource-root",
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021",
+        "--timeout",
+        "180",
+        "--shard-index",
+        "0",
+        "--shard-count",
+        "4"
+      ],
+      "pid": 21672,
+      "start": "2026-10-21T02:39:20.255Z",
+      "exit": 1,
+      "end": "2026-10-21T02:48:32.557Z"
+    },
+    {
+      "label": "FULL_WPF_1",
+      "args": [
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tools/whole-app-validation/verified_full_runner.py",
+        "--assembly",
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll",
+        "--output",
+        "E:/Kitao-Deliveries/company-retest-desktop-20261021/FULL_WPF_1",
+        "--dotnet",
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "--resource-root",
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021",
+        "--timeout",
+        "180",
+        "--shard-index",
+        "1",
+        "--shard-count",
+        "4"
+      ],
+      "pid": 42560,
+      "start": "2026-10-21T02:39:20.258Z",
+      "exit": 1,
+      "end": "2026-10-21T02:45:50.898Z"
+    },
+    {
+      "label": "FULL_WPF_2",
+      "args": [
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tools/whole-app-validation/verified_full_runner.py",
+        "--assembly",
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll",
+        "--output",
+        "E:/Kitao-Deliveries/company-retest-desktop-20261021/FULL_WPF_2",
+        "--dotnet",
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "--resource-root",
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021",
+        "--timeout",
+        "180",
+        "--shard-index",
+        "2",
+        "--shard-count",
+        "4"
+      ],
+      "pid": 5708,
+      "start": "2026-10-21T02:39:20.262Z",
+      "exit": 1,
+      "end": "2026-10-21T02:42:30.638Z"
+    },
+    {
+      "label": "FULL_WPF_3",
+      "args": [
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tools/whole-app-validation/verified_full_runner.py",
+        "--assembly",
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll",
+        "--output",
+        "E:/Kitao-Deliveries/company-retest-desktop-20261021/FULL_WPF_3",
+        "--dotnet",
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "--resource-root",
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021",
+        "--timeout",
+        "180",
+        "--shard-index",
+        "3",
+        "--shard-count",
+        "4"
+      ],
+      "pid": 21800,
+      "start": "2026-10-21T02:39:20.265Z",
+      "exit": null
+    },
+    {
+      "label": "PUBLISHED_MODULES",
+      "args": [
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tools/whole-app-validation/verified_full_runner.py",
+        "--assembly",
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tests/PixelTart.ModularHarness.Tests/bin/Release/net10.0-windows10.0.19041.0/PixelTart.ModularHarness.Tests.dll",
+        "--output",
+        "E:/Kitao-Deliveries/company-retest-desktop-20261021/PUBLISHED_MODULES",
+        "--dotnet",
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "--resource-root",
+        "E:/Kitao-Worktrees/company-home-sync-performance-20261021",
+        "--timeout",
+        "180"
+      ],
+      "pid": 41264,
+      "start": "2026-10-21T02:39:20.268Z",
+      "exit": 0,
+      "end": "2026-10-21T02:39:27.504Z"
+    }
+  ],
+  "environment": {
+    "DOTNET_ROOT": "D:/AI AGENT/.dotnet",
+    "MSBUILDDISABLENODEREUSE": "1",
+    "KITAO_TEST_RESOURCE_ROOT": "E:/Kitao-Worktrees/company-home-sync-performance-20261021",
+    "KITAO_WHOLE_APP_SOURCE_SHA": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+    "PIXEL_TART_PRODUCT_SOURCE_SHA": "0e5c3ea7e25c0c3d1773480cdc351ca9dc94b80f",
+    "PIXEL_TART_ISOLATED_RUNTIME": "1",
+    "PIXEL_TART_ISOLATED_RUNTIME_ROOT": "E:/Kitao-Deliveries/company-retest-desktop-20261021/runtime",
+    "KITAO_R3_CLI_AUTHORIZED_MANIFEST": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/AUTHORIZED_INPUTS.json",
+    "KITAO_PHOTO_PAGE_AUTHORIZED_MANIFEST": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/PHOTO_PAGE_AUTHORIZED.json",
+    "KITAO_R3_CLI_OUTPUT": "E:/Kitao-Deliveries/company-retest-desktop-20261021/authorized-r3-fresh-output",
+    "PIXEL_TART_BATCH12_RELEASE_CORE": "E:/Kitao-Worktrees/company-home-sync-performance-20261021/tests/RAWSelectionAssistant.Tests/bin/Release/net10.0/RAWSelectionAssistant.Core.dll",
+    "PIXEL_TART_PERFORMANCE_EVIDENCE": "E:/Kitao-Deliveries/company-retest-desktop-20261021/film-cpu-performance",
+    "PIXEL_TART_P35_ACCEPTANCE_ROOT": "E:/Kitao-Deliveries/company-retest-desktop-20261021/scenario11-measurements"
+  },
+  "freshDirectories": [
+    "E:/Kitao-Deliveries/company-retest-desktop-20261021/authorized-r3-fresh-output",
+    "E:/Kitao-Deliveries/company-retest-desktop-20261021/film-cpu-performance",
+    "E:/Kitao-Deliveries/company-retest-desktop-20261021/scenario11-measurements"
+  ],
+  "timezone": "Europe/Berlin",
+  "notUsingPreviousSupplement": true
+}
