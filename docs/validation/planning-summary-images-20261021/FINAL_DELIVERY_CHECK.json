@@ -1,0 +1,21 @@
+{
+  "sourceSha": "439e9064a6296726a5b4b30bbb56a1c08630a34a",
+  "archiveSha256": "edb792b1beb4c8d51a02b1f6a4d9a7103c4b0771d827a2a76418f6183c76a4dd",
+  "allFilesReadback": 328,
+  "sectionImageTitleKeepNext": 6,
+  "sectionImageTitleExplanation": "Five successful section pictures and one missing-picture title. Body inline picture-and-caption paragraphs do not need keepNext and are excluded from the heading check.",
+  "finalCore": 27,
+  "finalWpf": 76,
+  "UserDataIncluded": false,
+  "physicalDesktop": "NOT_RUN",
+  "WordWps": "NOT_RUN",
+  "crossMachine": "NOT_RUN",
+  "verifiedThisTurn": true,
+  "retainedCheckFailure": {
+    "kind": "verification-script assumption, not a product failure",
+    "firstError": "AssertionError: orphanable image title",
+    "reason": "The first check treated inline image+caption paragraphs as standalone image titles and expected five, omitting the missing-image title.",
+    "correction": "Inspect standalone title paragraphs only; all six carry w:keepNext. Inline image+caption contents remain in their original paragraph; product code and assertions were not weakened."
+  },
+  "timezone": "Europe/Berlin"
+}

@@ -70,3 +70,7 @@ Planning15Images-KeepNext-Diagnostic-win-x64是完整Windows x64自包含主程�
 实体桌面：NOT_RUN；Word/WPS实体与跨机项目便携：NOT_RUN。外链/库原件/附件不自动搬迁，图像快照不等于项目完整便携，完整情绪板/灯位可编辑画布版面仍原范围。安装升级卸载、真机/外部服务等既有门禁未闭合。
 
 发行门禁仍BLOCKED，整体PARTIAL；仅本批图像汇总合成验证范围PASS。产品源码与证据提交分开，正常推送独立分支后独立ls-remote读回；不合main、不强推。
+
+## 正常推送读回
+
+产品源码439e9064a6296726a5b4b30bbb56a1c08630a34a与独立验证证据提交62dc1b47d083778a8f7220edcef558945b11ce74已正常推送。独立ls-remote确认LOCAL_HEAD=REMOTE_HEAD，读回时工作树干净；后续仅封存此读回与最终ZIP身份，不改变产品或测试组件。
