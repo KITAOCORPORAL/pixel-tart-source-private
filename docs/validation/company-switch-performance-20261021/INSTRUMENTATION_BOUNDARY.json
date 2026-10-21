@@ -1,0 +1,10 @@
+{
+  "sourceSha": "99d7818e035310c9273565e73752ee0359ebb8f1",
+  "copy": "E:/Kitao-Deliveries/company-home-sync-performance-20261021/instrumented-core",
+  "productCheckoutModified": false,
+  "note": "Timing-only copied Core source diagnostic assembly, never substituted into phase1 test or release; same branches except timestamps/observer. Separate overhead from production timings.",
+  "unknowns": [
+    "Physical disk service/wait latency unavailable without ETW; logical I/O bytes not disk wait",
+    "SQLite busy wait not separately observed; wall time retained; hot cache path does not open SQLite or acquire writer lease"
+  ]
+}

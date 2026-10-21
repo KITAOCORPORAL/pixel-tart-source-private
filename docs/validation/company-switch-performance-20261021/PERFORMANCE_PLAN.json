@@ -1,0 +1,50 @@
+{
+  "test": "AssetLibraryP35AcceptanceTests.Scenario11_TenKSwitchAndHundredKMetadataPreview",
+  "thresholdMs": 30000,
+  "loops": 10000,
+  "conditions": [
+    {
+      "label": "exact-solo",
+      "component": "unmodified published Core copied to original MSTest host",
+      "repeats": 1,
+      "storage": "fresh fixture under explicit company performance TEMP on E:"
+    },
+    {
+      "label": "published-cold",
+      "component": "published Core exact SHA",
+      "repeats": 1,
+      "fixture": "shared synthetic two-container fixture, process cache empty"
+    },
+    {
+      "label": "published-warm3",
+      "component": "same published Core, same fixture",
+      "repeats": 3,
+      "warmup": "Open A and B outside measured loops"
+    },
+    {
+      "label": "instrumented-cold",
+      "component": "timing-only copied Core source",
+      "repeats": 1,
+      "overhead": "not performance gate; phases and syscall counts"
+    },
+    {
+      "label": "with-wpf",
+      "component": "same published Core, same fixture",
+      "repeats": 3,
+      "load": "exact same declared WPF fixtures/process count before and after if fix"
+    },
+    {
+      "label": "correctness",
+      "scope": "original container/package/merge/focus/lock tests plus new multi-library alternation/error/reparse checks"
+    }
+  ],
+  "forbidden": [
+    "no 30s threshold change",
+    "no fewer loops",
+    "no metadata moved inside original timer",
+    "no pick fastest repeat",
+    "not the P3 400ms query test"
+  ],
+  "physicalDiskWait": "Will report counter availability, do not equate wall minus CPU or logical IO with disk wait",
+  "timezone": "Europe/Berlin"
+}

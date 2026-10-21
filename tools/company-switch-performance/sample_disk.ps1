@@ -1,0 +1,4 @@
+param([string]$Output,[int]$Seconds=120)
+$rows=[Collections.Generic.List[object]]::new();$end=[DateTime]::UtcNow.AddSeconds($Seconds)
+while([DateTime]::UtcNow -lt $end){try{foreach($x in Get-CimInstance Win32_PerfRawData_PerfDisk_PhysicalDisk -ErrorAction Stop){$rows.Add([pscustomobject]@{utc=[DateTime]::UtcNow.ToString('O');disk=$x.Name;readTime=$x.AvgDisksecPerRead;readTimeBase=$x.AvgDisksecPerRead_Base;writeTime=$x.AvgDisksecPerWrite;writeTimeBase=$x.AvgDisksecPerWrite_Base;frequency=$x.Frequency_PerfTime;readBytes=$x.DiskReadBytesPersec;writeBytes=$x.DiskWriteBytesPersec;queue=$x.CurrentDiskQueueLength;timestamp=$x.Timestamp_PerfTime})}}catch{$rows.Add([pscustomobject]@{utc=[DateTime]::UtcNow.ToString('O');error=$_.Exception.Message})};Start-Sleep -Milliseconds 500}
+$rows|ConvertTo-Json -Depth 4|Set-Content -LiteralPath $Output -Encoding utf8

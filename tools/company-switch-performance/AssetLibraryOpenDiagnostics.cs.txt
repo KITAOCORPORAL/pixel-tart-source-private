@@ -1,0 +1,22 @@
+using System.Diagnostics;
+using System.Text.Json;
+namespace RAWSelectionAssistant.Core.Services.AssetLibrary;
+// Diagnostic-only copy. Not included in the product checkout or release payload.
+public static class AssetLibraryOpenDiagnostics
+{
+ private static readonly AsyncLocal<Action<string>?> Observer=new();private static readonly AsyncLocal<Scope?> Current=new();
+ public static IDisposable Observe(Action<string> observer){var prior=Observer.Value;Observer.Value=observer;return new Restore(()=>Observer.Value=prior);}
+ public static Scope Begin(){var scope=new Scope(Observer.Value,Current.Value);Current.Value=scope;return scope;}
+ public static void Count(string name){if(Current.Value is{} s)s.Counts[name]=s.Counts.GetValueOrDefault(name)+1;}
+ public static bool FileExists(string path){Count("FileExists");return File.Exists(path);}
+ public static bool DirectoryExists(string path){Count("DirectoryExists");return Directory.Exists(path);}
+ public static void Substage(string name,double ms){if(Current.Value is{} scope)scope.Substages[name]=ms;}
+ public sealed class Scope:IDisposable
+ {
+  private readonly Action<string>? callback;private readonly Scope? prior;private readonly long start=Stopwatch.GetTimestamp();private long last=Stopwatch.GetTimestamp();private readonly Dictionary<string,double> stages=new();internal Dictionary<string,double> Substages=new();internal Dictionary<string,int> Counts=new();public bool CacheHit;
+  internal Scope(Action<string>? callback,Scope? prior){this.callback=callback;this.prior=prior;}
+  public void Step(string name){var now=Stopwatch.GetTimestamp();stages[name]=(now-last)*1000d/Stopwatch.Frequency;last=now;}
+  public void Dispose(){var now=Stopwatch.GetTimestamp();Current.Value=prior;callback?.Invoke(JsonSerializer.Serialize(new{cacheHit=CacheHit,totalMs=(now-start)*1000d/Stopwatch.Frequency,stages,substage=Substages,counts=Counts,writerLeaseAcquired=false,diskWaitMs=(double?)null,sqliteBusyWaitMs=(double?)null}));}
+ }
+ private sealed class Restore(Action action):IDisposable{public void Dispose()=>action();}
+}

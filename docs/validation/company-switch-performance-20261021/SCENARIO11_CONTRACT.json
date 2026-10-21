@@ -1,0 +1,19 @@
+{
+  "sourceSha": "99d7818e035310c9273565e73752ee0359ebb8f1",
+  "test": "AssetLibraryP35AcceptanceTests.Scenario11_TenKSwitchAndHundredKMetadataPreview",
+  "iterations": 10000,
+  "alternate": [
+    "A/中文 库一.ptlibrary",
+    "B/库二.ptlibrary"
+  ],
+  "limitMs": 30000,
+  "metadataRows": 100000,
+  "uniqueExpected": 90000,
+  "metadataInsideStopwatch": false,
+  "contextCreationInsideStopwatch": false,
+  "switchImplementation": "AssetLibraryContainerService.OpenAsync, no write lease or repository.InitializeAsync in switch loop",
+  "homeFailedMs": 32139.0909,
+  "concurrencyCausality": "Unproven",
+  "separate400msQueryGate": "Not this test",
+  "timezone": "Europe/Berlin"
+}
