@@ -1,0 +1,22 @@
+{
+  "sourceSha": "99d7818e035310c9273565e73752ee0359ebb8f1",
+  "worktreeHead": "d39d11d68eb44f5aa0ec8a2f1afc95c98630820d",
+  "sourceDiffFromFreeze": "",
+  "files": [
+    {
+      "file": "KitaoPhotoSelector.exe",
+      "sha256": "8fc0ceddf470dd530b4b1bb8d7f26f786d3075b4214d81c70a13e9852cdd38d2"
+    },
+    {
+      "file": "KitaoPhotoSelector.dll",
+      "sha256": "9faa331037243a5f1b26c637839cec48218dd6d19c5da043ed35b54a6d647113"
+    },
+    {
+      "file": "RAWSelectionAssistant.Core.dll",
+      "sha256": "25a2e6f30d4cb17df463ff3831f82c095ff0a427a8ca3d2e27fb6ce859e2e327"
+    }
+  ],
+  "SDK": ".NET SDK:\r\n Version:           10.0.302\r\n Commit:            35b593bebf\r\n Workload version:  10.0.300-manifests.1641d827\r\n MSBuild version:   18.6.11+35b593beb\r\n\r\n运行时环境:\r\n OS Name:     Windows\r\n OS Version:  10.0.19045\r\n OS Platform: Windows\r\n RID:         win-x64\r\n Base Path:   D:\\AI AGENT\\.dotnet\\sdk\\10.0.302\\\r\n\r\n已安装 .NET 工作负载:\r\n没有要显示的已安装工作负载。\r\n已配置为在安装新清单时使用 workload sets。\r\n未安装任何 workload sets。运行 “dotnet workload restore” 以安装工作负载集。\r\n\r\nHost:\r\n  Version:      10.0.10\r\n  Architecture: x64\r\n  Commit:       f7d90799ce\r\n\r\n.NET SDKs installed:\r\n  10.0.302 [D:\\AI AGENT\\.dotnet\\sdk]\r\n\r\n.NET runtimes installed:\r\n  Microsoft.AspNetCore.App 10.0.10 [D:\\AI AGENT\\.dotnet\\shared\\Microsoft.AspNetCore.App]\r\n  Microsoft.NETCore.App 10.0.10 [D:\\AI AGENT\\.dotnet\\shared\\Microsoft.NETCore.App]\r\n  Microsoft.WindowsDesktop.App 10.0.10 [D:\\AI AGENT\\.dotnet\\shared\\Microsoft.WindowsDesktop.App]\r\n\r\nOther architectures found:\r\n  None\r\n\r\nEnvironment variables:\r\n  DOTNET_CLI_TELEMETRY_OPTOUT              [1]\r\n  DOTNET_ROOT                              [D:/AI AGENT/.dotnet]\r\n\r\nglobal.json file:\r\n  E:\\Kitao-Worktrees\\company-home-sync-performance-20261021\\global.json\r\n\r\nLearn more:\r\n  https://aka.ms/dotnet/info\r\n\r\nDownload .NET:\r\n  https://aka.ms/dotnet/download\r\n",
+  "homeRelease": "99d7818e035310c9273565e73752ee0359ebb8f1",
+  "timezone": "Europe/Berlin"
+}
