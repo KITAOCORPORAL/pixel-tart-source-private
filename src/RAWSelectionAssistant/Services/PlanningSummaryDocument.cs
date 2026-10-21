@@ -16,7 +16,9 @@ public static class PlanningSummaryDocument
         document.Tag=source.Package?.RichLayout?.HeaderFooter??new PlanningHeaderFooter();
         document.Blocks.Add(new Paragraph(new Run("摄影策划 · 15区汇总")){FontSize=22,FontWeight=FontWeights.Bold});
         Text($"项目 {summary.ProjectId:D} · 文档 {summary.DocumentId:D}");
-        Text("只读阅读快照：按现有15区顺序。引用仅列出状态，不是可搬迁项目包；外链和附件未自动嵌入。汇总不是摄影DOCX往返合同，导回只按普通正文处理，不回写15区资源。");
+        Text("只读阅读快照：按现有15区顺序。经身份/Hash校验的项目自有PNG副本可嵌入；外链和素材库原件仅列状态。不是可搬迁项目包，附件未自动打包。汇总不回写15区资源，原摄影DOCX往返合同不变。");
+        var contentWidth=document.PageWidth-document.PagePadding.Left-document.PagePadding.Right;
+        var contentHeight=document.PageHeight-document.PagePadding.Top-document.PagePadding.Bottom;
         for(int index=0;index<summary.Sections.Count;index++)
         {
             var section=summary.Sections[index];document.Blocks.Add(new Paragraph(new Run($"{index+1:00} {section.Name}")){FontSize=18,FontWeight=FontWeights.Bold,Tag=new PlanningBlockSemantic(document.Blocks.Count,"Heading1"),KeepWithNext=true});
@@ -32,10 +34,20 @@ public static class PlanningSummaryDocument
                     Text(field.Key+"："+field.Value);
                 }
             }
+            foreach(var image in section.OwnedImages)AppendOwned(image);
         }
         if(warnings.Count>0){Text("导出警告（保留原资料，不替换源文件）");foreach(var warning in warnings)Text(warning);}
         return document;
         void Text(string value)=>document.Blocks.Add(new Paragraph(new Run(value)){Margin=new Thickness(0,2,0,6)});
+        Image ReadImage(PlanningDocumentImage meta)=>PlanningSummaryOwnedImage.Read(meta,summary.DocumentId??Guid.Empty,contentWidth,contentHeight);
+        string Failure(PlanningDocumentImage meta,Exception e){var message=$"[文档图片不可用：{meta.Title} / {meta.DocumentImageId:D}；{e.GetType().Name}：{e.Message}；保留原引用，未替换其他文件]";warnings.Add(message);return message;}
+        void AppendOwned(PlanningDocumentImage meta)
+        {
+            var heading=new Paragraph(new Run("图片："+meta.Title)){FontWeight=FontWeights.Bold,KeepWithNext=true};document.Blocks.Add(heading);
+            try{var image=ReadImage(meta);document.Blocks.Add(new Paragraph(new InlineUIContainer(image)){KeepWithNext=true,Margin=new Thickness(0,2,0,4)});}
+            catch(Exception e)when(e is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException or System.Runtime.InteropServices.COMException){Text(Failure(meta,e));}
+            Text("图注："+(string.IsNullOrWhiteSpace(meta.Caption)?"未填写":meta.Caption));Text(PlanningSummaryOwnedImage.SourceLabel(meta));
+        }
         void AppendRich(string rich,PlanningRichLayout? layout)
         {
             // Work on a new RTF document. Never mutate source layout, image metadata or persisted RTF.
@@ -46,9 +58,11 @@ public static class PlanningSummaryDocument
                 foreach(var match in matches.Reverse())
                 {
                     var pointers=PlanningTextSearch.Range(match);var range=new TextRange(pointers.Start,pointers.End);
-                    try{var image=PlanningDocumentImages.Create(meta);range.Text="";new InlineUIContainer(image,pointers.Start);}
+                    try{var image=ReadImage(meta);
+                    for(DependencyObject? node=pointers.Start.Parent;node is FrameworkContentElement element;node=element.Parent)if(node is TableCell cell&&cell.Parent is TableRow row){var columns=row.Cells.Sum(c=>c.ColumnSpan);var allowed=Math.Max(1,contentWidth*cell.ColumnSpan/columns-24);if(image.Width>allowed){image.Height*=allowed/image.Width;image.Width=allowed;}break;}
+                    range.Text="";var inserted=new InlineUIContainer(image,pointers.Start);var caption=new Span(new LineBreak(),inserted.ElementEnd);caption.Inlines.Add(new Run("图片："+meta.Title+"；图注："+(string.IsNullOrWhiteSpace(meta.Caption)?"未填写":meta.Caption)+"\n"+PlanningSummaryOwnedImage.SourceLabel(meta)));}
                     catch(Exception e)when(e is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or InvalidOperationException or NotSupportedException or System.Runtime.InteropServices.COMException)
-                    {var message=$"[文档图片不可用：{meta.Title} / {meta.DocumentImageId:D}；{e.GetType().Name}；保留原引用]";range.Text=message;warnings.Add(message);}
+                    {range.Text=Failure(meta,e);}
                 }
                 if(matches.Count==0)warnings.Add($"文档图片 {meta.DocumentImageId:D}（{meta.Title}）没有匹配正文位置；未擅自追加图片。");
             }
@@ -58,6 +72,9 @@ public static class PlanningSummaryDocument
     public static PlanningSummaryExportResult Export(PlanningReadableSummary summary,PlanningDocument source,string path)
     {
         var warnings=new List<string>();var document=Create(summary,source,warnings);
-        PlanningDocxAdapter.Export(document,path);return new(Path.GetFullPath(path),summary.Sections.Count,warnings);
+        var full=Path.GetFullPath(path);var temporary=full+"."+Guid.NewGuid().ToString("N")+".summary-stage.docx";
+        try{PlanningDocxAdapter.Export(document,temporary);File.Move(temporary,full,overwrite:false);}
+        finally{if(File.Exists(temporary))File.Delete(temporary);}
+        return new(full,summary.Sections.Count,warnings);
     }
 }

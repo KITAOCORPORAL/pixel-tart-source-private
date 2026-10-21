@@ -22,6 +22,7 @@ public sealed partial class PlanningCenterViewModel
         if(Baseline()!=baseline)throw new InvalidOperationException("读取期间策划内容已变化，请保存后重新汇总。");
         var full=Path.GetFullPath(path);
         if(!string.Equals(Path.GetExtension(full),".docx",StringComparison.OrdinalIgnoreCase))throw new ArgumentException("15区汇总当前仅导出DOCX阅读快照。");
+        if(File.Exists(full))throw new InvalidOperationException("汇总导出须选择新文件；已有DOCX保持不变，请另存新名称。");
         var external=_document.Attachments.Select(a=>a.Path).Concat(_document.References.Select(r=>r.Source.ExternalReference)).Concat(Shots.SelectMany(s=>s.References).Select(r=>r.ExternalReference)).Concat(_document.Resources.Items.OfType<PlanningLight>().Select(l=>l.ReferencePath)).Concat(expenses.SelectMany(e=>e.AttachmentPaths));
         if(external.Where(p=>!string.IsNullOrWhiteSpace(p)&&Path.IsPathFullyQualified(p!)).Any(p=>string.Equals(Path.GetFullPath(p!),full,StringComparison.OrdinalIgnoreCase))||
            string.Equals(full,Path.Combine(_planning.StorageRoot,$"{project:N}.planning.json"),StringComparison.OrdinalIgnoreCase))

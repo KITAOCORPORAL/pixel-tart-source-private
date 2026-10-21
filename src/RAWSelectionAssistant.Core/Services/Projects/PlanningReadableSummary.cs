@@ -8,8 +8,14 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 public sealed record PlanningSummaryInput(Guid ProjectId,string ProjectName,PlanningDocument Document,
     PlanningSummary Summary,IReadOnlyList<ProjectShot> Shots,ShootBooking? Booking=null,
     IReadOnlyList<FinanceTransaction>? Expenses=null,string ExpenseState="未读取账本",IReadOnlyList<PlanningVisualLink>? VisualLinks=null);
-public sealed record PlanningSummaryEntry(string Title,IReadOnlyList<KeyValuePair<string,string>> Fields);
-public sealed record PlanningSummarySection(string Name,IReadOnlyList<PlanningSummaryEntry> Entries);
+public sealed record PlanningSummaryEntry(string Title,IReadOnlyList<KeyValuePair<string,string>> Fields)
+{
+    public IReadOnlyList<PlanningDocumentImage> OwnedImages {get;init;}=[];
+}
+public sealed record PlanningSummarySection(string Name,IReadOnlyList<PlanningSummaryEntry> Entries)
+{
+    public IReadOnlyList<PlanningDocumentImage> OwnedImages => Entries.SelectMany(e=>e.OwnedImages).OrderBy(i=>i.Order).DistinctBy(i=>i.DocumentImageId).ToArray();
+}
 public sealed record PlanningReadableSummary(Guid ProjectId,Guid? DocumentId,IReadOnlyList<PlanningSummarySection> Sections);
 
 public static class PlanningReadableSummaryBuilder
@@ -24,6 +30,13 @@ public static class PlanningReadableSummaryBuilder
         if(input.Shots.Any(s=>s.ProjectId!=input.ProjectId))throw new InvalidDataException("镜头不属于本项目，未汇总。");
         if(input.Booking?.ProjectId is Guid bookingProject&&bookingProject!=input.ProjectId)throw new InvalidDataException("档期不属于本项目，未汇总。");
         var sections=SectionOrder.Select(n=>new List<PlanningSummaryEntry>()).ToArray();
+        var owned=(d.Package?.RichLayout?.Images??[]).OrderBy(i=>i.Order).ToArray();
+        var placed=new HashSet<(int,Guid)>();
+        void Attach(int section,IEnumerable<PlanningDocumentImage> images)
+        {
+            var values=images.ToArray();if(values.Length==0)return;var entry=sections[section][^1];sections[section][^1]=entry with{OwnedImages=values};
+            foreach(var image in values)placed.Add((section,image.DocumentImageId));
+        }
         void Add(int section,string title,params (string Key,object? Value)[] fields)=>sections[section].Add(new(title,fields.Select(x=>new KeyValuePair<string,string>(x.Key,Format(x.Value))).ToArray()));
         Add(0,input.ProjectName,("项目ID",input.ProjectId),("文档ID",d.Package?.DocumentId),("标题",d.Title),("副标题",d.Subtitle),("状态",d.Status),("地点",d.Location),("人员",d.People),("拍摄日期",d.ShootDate),
             ("拍摄目标",input.Summary.ShootGoal),("关键词",input.Summary.Keywords),("客户要求",input.Summary.ClientRequirements),("必拍内容",input.Summary.MustCapture),("注意事项",input.Summary.Notes),("交付用途",input.Summary.OutputPurpose),("扩展字段",d.Extensions));
@@ -52,6 +65,7 @@ public static class PlanningReadableSummaryBuilder
             foreach(var property in JsonSerializer.SerializeToElement(resource,resource.GetType()).EnumerateObject())fields.Add((ResourceLabel(property.Name),property.Value));
             if(resource is PlanningLight light&&!string.IsNullOrWhiteSpace(light.ReferencePath))fields.Add(("灯位原图状态",ReferenceState(light.ReferencePath)));
             Add(section,resource.Name,fields.ToArray());
+            if(resource is PlanningLight imageLight)Attach(section,owned.Where(i=>OwnPathMatches(i,imageLight.ReferencePath)));
         }
         if(input.Booking is{} booking)
             Add(10,booking.Title,("档期ID",booking.Id),("项目ID",booking.ProjectId),("起始UTC",booking.StartAtUtc),("结束UTC",booking.EndAtUtc),("时区",booking.TimeZoneId),("本地时间",BookingTime(booking)),("状态",booking.Status),("地点",booking.Location),("拍摄类型",booking.ShootingType),("拍摄要求",booking.ShootingRequirements),("准备事项",booking.PreparationNotes),("备注",booking.Notes));
@@ -69,11 +83,29 @@ public static class PlanningReadableSummaryBuilder
             foreach(var revision in package.CanvasRevisions)Add(14,"已有画布快照引用",("修订ID",revision.RevisionId),("画布ID",revision.CanvasId),("快照时间",revision.CapturedAt),("范围","元数据引用；汇总DOCX不还原可编辑自由画布"));
             foreach(var asset in package.Assets)Add(14,"文档素材引用",("库ID",asset.LibraryId),("素材ID",asset.AssetId),("内容Hash",asset.ContentHash),("引用状态","库引用未解析；不伪称已嵌入原文件"));
         }
+        foreach(var image in owned)
+        {
+            var section=PlacementSection(image.Placement);
+            if(section==2&&image.ShotId is Guid shot&&input.Shots.All(s=>s.ShotId!=shot))section=14;
+            // Body keeps its original positions; other placements are materialized only once per section
+            // unless distinct saved references deliberately refer to the same owned image identity.
+            if(section==1||placed.Contains((section,image.DocumentImageId)))continue;
+            Add(section,image.Title,("文档自有图片ID",image.DocumentImageId),("原位置",image.Placement),("图注",image.Caption),("来源",image.OriginLabel),("副本Hash",image.CopyHash));Attach(section,[image]);
+        }
         return new(input.ProjectId,d.Package?.DocumentId,SectionOrder.Select((name,i)=>new PlanningSummarySection(name,sections[i].ToArray())).ToArray());
         void AddReference(int section,ProjectShotReference r,string role,params (string Key,object? Value)[] extra)
         {
             Add(section,r.Title??role,new[]{("引用ID",(object?)r.ReferenceId),("类型",r.Kind),("库ID",r.LibraryId),("素材ID",r.AssetId),("原位置",r.ExternalReference),("引用状态",r.LibraryId is not null?"库引用未解析；保留身份，未复制原文件":ReferenceState(r.ExternalReference)),("备注",r.Note),("固定",r.IsPinned),("执行状态",r.PoseStatus),("详情",r.Details),("扩展字段",r.Extensions)}.Concat(extra).ToArray());
+            Attach(section,owned.Where(i=>(r.LibraryId is Guid library&&r.AssetId is Guid asset&&i.Source is{} source&&source.LibraryId==library&&source.AssetId==asset)||OwnPathMatches(i,r.ExternalReference)));
         }
+    }
+    public static int PlacementSection(string placement)=>placement switch
+    {"封面"=>0,"光标"=>1,"文字"=>1,"指定镜头"=>2,"参考图"=>3,"情绪板"=>4,"灯位图" or "灯光图"=>5,"服化道与道具" or "服化道"=>6,_=>14};
+    private static bool OwnPathMatches(PlanningDocumentImage image,string? reference)
+    {
+        if(string.IsNullOrWhiteSpace(reference)||image.StorageRoot is null||!Path.IsPathFullyQualified(reference))return false;
+        try{return string.Equals(Path.GetFullPath(reference),Path.GetFullPath(Path.Combine(image.StorageRoot,PlanningImageStorage.RelativePath(image.DocumentId,image.DocumentImageId))),StringComparison.OrdinalIgnoreCase);}
+        catch(Exception e)when(e is ArgumentException or NotSupportedException or PathTooLongException){return false;}
     }
     public static string ReferenceState(string? path)
     {
