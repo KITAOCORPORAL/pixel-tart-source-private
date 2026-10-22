@@ -6,7 +6,7 @@
 
 先 fetch --all --prune，再独立 ls-remote。公司远端 `feature/planning-current-root-import-20261022` = `2d8db4d9931f58af43025004cb794dc35affb8b3`；旧家用 `home/guangjing-whole-app-sync-20261020` = `d39d11d68eb44f5aa0ec8a2f1afc95c98630820d`，公司超前30提交，家用为祖先，无分叉。从公司HEAD新建独立工作树 N:/pixart/guangjing-home-reconnect-20261022，分支 home/planning-external-reconnect-20261022。没有旧树pull/reset/stash/clean/rebase、合main或强推。
 
-17旧工作树HEAD/branch/status不变；211现存未提交文件hash不变；104旧ZIP hash不变。忽略产物枚举有Windows长路径警告，不能声称全部ignored文件逐hash覆盖。对应原始清单/读回在WORKTREE_PRESERVATION、DIRTY_FILE_PRESERVATION、OLD_PACKAGE_PRESERVATION。
+17旧工作树HEAD/branch/status不变；211项未提交条目保留（202个普通文件hash不变、9个非普通文件/目录条目未逐内容hash）；104旧ZIP hash不变。忽略产物枚举有Windows长路径警告，不能声称全部ignored文件逐hash覆盖。对应原始清单/读回在WORKTREE_PRESERVATION、DIRTY_FILE_PRESERVATION、OLD_PACKAGE_PRESERVATION。
 
 ## 产品提交
 
