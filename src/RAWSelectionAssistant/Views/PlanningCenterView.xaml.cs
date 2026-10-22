@@ -569,6 +569,8 @@ public partial class PlanningCenterView : UserControl
         var menu = new ContextMenu { PlacementTarget = button }; menu.SetResourceReference(StyleProperty, "PixelTart.Menu.Context");
         var start = MenuEntry("开始拍摄", "IconCameraTether"); start.Command = _vm.EnterTetherCommand; menu.Items.Add(start);
         var calendar = MenuEntry("查看关联档期", "IconCalendar"); calendar.Command = _vm.OpenCalendarCommand; menu.Items.Add(calendar);
+        var currentImport=MenuEntry("导入项目包到当前应用","IconPlanning");currentImport.Command=_vm.ImportCurrentProjectPackageCommand;menu.Items.Add(currentImport);
+        var recoverImport=MenuEntry("检查当前根项目导入恢复","IconPlanning");recoverImport.Command=_vm.RecoverCurrentProjectImportsCommand;menu.Items.Add(recoverImport);
         var cancelPackage=MenuEntry("取消正在进行的项目包任务","IconPlanning");cancelPackage.Command=_vm.CancelProjectPackageCommand;menu.Items.Add(cancelPackage);
         var recovery=MenuEntry("检查本项目中断暂存（保守恢复）","IconPlanning");recovery.Command=_vm.ShowCopyRecoveryCommand;menu.Items.Add(recovery);
         var exportPackage=MenuEntry("导出策划项目包（含已验证自有副本）","IconPlanning");exportPackage.Command=_vm.ExportProjectPackageCommand;menu.Items.Add(exportPackage);

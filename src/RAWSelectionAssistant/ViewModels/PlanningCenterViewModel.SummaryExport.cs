@@ -13,7 +13,7 @@ public sealed partial class PlanningCenterViewModel
         // Read through the existing read-only ledger delegate. A disconnected/failed source is declared,
         // never replaced with an invented zero or old values for a different project.
         IReadOnlyList<RAWSelectionAssistant.Core.Models.FinanceTransaction> expenses=[];var expenseState="收支只读来源未连接；未读取账本";
-        if(ReadPlanningExpenses is{} readExpenses)
+        if(!IsPackageImported && ReadPlanningExpenses is{} readExpenses)
         {
             try{expenses=(await readExpenses(project)).Where(x=>x.ProjectId==project&&x.Kind==RAWSelectionAssistant.Core.Models.FinanceTransactionKind.Expense).DistinctBy(x=>x.Id).ToArray();expenseState="本次按项目只读读取成功；未修改账本";}
             catch(Exception error)when(error is IOException or UnauthorizedAccessException or InvalidOperationException){expenseState="本次账本读取失败；未使用旧缓存："+error.GetType().Name;}

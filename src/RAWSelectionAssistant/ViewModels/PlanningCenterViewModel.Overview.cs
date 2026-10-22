@@ -53,6 +53,7 @@ public sealed partial class PlanningCenterViewModel
     {
         try
         {
+            await RecoverCurrentProjectImportsAsync(token);
             var projects = await _projects.ListAsync(token);
             PlanningProjects.Clear();
             foreach (var project in projects.OrderByDescending(item => item.UpdatedAt))

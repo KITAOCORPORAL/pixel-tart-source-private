@@ -12,6 +12,8 @@ public sealed partial class PlanningCenterViewModel
     private CancellationTokenSource? _packageCancellation;
     public RelayCommand CancelProjectPackageCommand {get;private set;}=null!;
     public AsyncRelayCommand ExportProjectPackageCommand {get;private set;}=null!;
+    public AsyncRelayCommand ImportCurrentProjectPackageCommand {get;private set;}=null!;
+    public AsyncRelayCommand RecoverCurrentProjectImportsCommand {get;private set;}=null!;
     public AsyncRelayCommand ImportProjectPackageCommand {get;private set;}=null!;
     public AsyncRelayCommand ShowCopyRecoveryCommand {get;private set;}=null!;
     public AsyncRelayCommand OpenImportedProjectCommand {get;private set;}=null!;
@@ -19,6 +21,7 @@ public sealed partial class PlanningCenterViewModel
     public string? ImportedPackageRoot {get;private set;}
     private void InitializeProjectPackages()
     {
+        InitializeCurrentProjectImports();
         CancelProjectPackageCommand=new RelayCommand(_=>{_packageCancellation?.Cancel();PackageStatus="已请求取消项目包任务；已完成提交的项目不撤回";OnPropertyChanged(nameof(PackageStatus));});
         ShowCopyRecoveryCommand=new AsyncRelayCommand(async _=>
         {

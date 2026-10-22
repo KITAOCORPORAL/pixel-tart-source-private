@@ -90,6 +90,7 @@ public sealed record ProjectShotCatalog(Guid ProjectId, IReadOnlyList<ProjectSho
 
 public sealed class ProjectShotStore(string directory)
 {
+    public string StorageRoot=>Path.GetFullPath(directory);
     private static readonly ConcurrentDictionary<string, SemaphoreSlim> Gates = new(StringComparer.OrdinalIgnoreCase);
     private string FilePath(Guid projectId) => Path.Combine(Path.GetFullPath(directory), $"{projectId:N}.shots.json");
 

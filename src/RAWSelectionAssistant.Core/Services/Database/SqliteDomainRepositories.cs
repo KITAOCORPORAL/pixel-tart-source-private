@@ -9,7 +9,7 @@ public interface IProjectRepository
     Task<IReadOnlyList<PhotoProjectRecord>> ListAsync(CancellationToken cancellationToken = default);
 }
 
-public sealed class SqliteProjectRepository(IPixelTartDatabase database) : IProjectRepository
+public sealed partial class SqliteProjectRepository(IPixelTartDatabase database) : IProjectRepository
 {
     public async Task UpsertAsync(PhotoProjectRecord project, CancellationToken cancellationToken = default)
     {

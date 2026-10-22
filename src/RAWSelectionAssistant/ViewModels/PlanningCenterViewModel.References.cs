@@ -46,7 +46,7 @@ public sealed partial class PlanningCenterViewModel
         AllProjectReferences.Clear();
         foreach (var reference in references)
         {
-            var path = ImportedPackageRoot is not null && reference.ProjectCopy is null ? null : reference.Source.ExternalReference;
+            var path = (ImportedPackageRoot is not null || IsPackageImported) && reference.ProjectCopy is null ? null : reference.Source.ExternalReference;
             var owned = reference.ProjectCopy;
             System.Windows.Media.Imaging.BitmapSource? ownedBitmap = null;
             if (owned is not null)
@@ -59,7 +59,7 @@ public sealed partial class PlanningCenterViewModel
                 }
                 catch(Exception error)when(error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException){path=null;}
             }
-            if (ImportedPackageRoot is null && owned is null && path is null && ReferencePathResolver is not null) path = await ReferencePathResolver(reference.Source);
+            if (ImportedPackageRoot is null && !IsPackageImported && owned is null && path is null && ReferencePathResolver is not null) path = await ReferencePathResolver(reference.Source);
             var available = !string.IsNullOrWhiteSpace(path) && File.Exists(path);
             var key = owned is not null ? owned.ReferenceId.ToString("N") + "/" + owned.Sha256 : reference.Source.LibraryId is Guid library ? $"{library:N}/{reference.Source.AssetId:N}" : reference.Source.ExternalReference ?? reference.Source.ReferenceId.ToString();
             var cache = Path.Combine(AppDataPaths.CacheDirectory, "PlanningPreviews", Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(key))) + ".jpg");
