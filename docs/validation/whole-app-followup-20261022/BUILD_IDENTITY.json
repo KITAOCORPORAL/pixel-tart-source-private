@@ -1,0 +1,37 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "branch": "validation/guangjing-whole-app-followup-20261022",
+  "build": "Release win-x64 self-contained, WholeAppDiagnosticBuild=true, PhotographerTrialBuild=false",
+  "exeMachine": "0x8664",
+  "x64": true,
+  "files": 290,
+  "runtimeAssets": 264,
+  "missing": 0,
+  "components": [
+    {
+      "path": "KitaoPhotoSelector.dll",
+      "bytes": 3528704,
+      "sha256": "f099f9b0683b9dce8edf2b61cc4625329bd0add7bb597a4ce28a7f95903a63d6",
+      "type": ".dll"
+    },
+    {
+      "path": "KitaoPhotoSelector.exe",
+      "bytes": 179200,
+      "sha256": "798f5aa5fb922541579cdfee325ffe0a3ee15935458521c1ba55fa5777b44b4b",
+      "type": ".exe"
+    },
+    {
+      "path": "PixelTart.Modules.AssetLibrary.dll",
+      "bytes": 1163264,
+      "sha256": "b8e2c85e419acb29aaacfea8c320c6bac03b093acbdb3b259e4a060479a159f5",
+      "type": ".dll"
+    },
+    {
+      "path": "RAWSelectionAssistant.Core.dll",
+      "bytes": 4700160,
+      "sha256": "628a1b88c95859e119f3adef72cb4cad85f49555aa290119396c733448105280",
+      "type": ".dll"
+    }
+  ],
+  "timezone": "Europe/Berlin"
+}

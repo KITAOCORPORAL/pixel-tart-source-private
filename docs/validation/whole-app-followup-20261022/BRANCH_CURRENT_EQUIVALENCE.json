@@ -1,0 +1,171 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "branches": [
+    {
+      "ref": "origin/docs/kitao-studio-product-master-spec-20261012",
+      "sha": "db1eff37393eae50816f932365e453937c05e8cb",
+      "sameCurrentBlobs": [],
+      "differentCurrentBlobs": [],
+      "absentCurrentFiles": [],
+      "claims": "Blob comparison only; different code may contain equivalent functionality, not inferred."
+    },
+    {
+      "ref": "origin/feature/asset-library-import-foundation-hardening",
+      "sha": "225c589495c3f73d706752aaf31e92c0cd5ef3c1",
+      "sameCurrentBlobs": [],
+      "differentCurrentBlobs": [
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml",
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.P2Browser.cs",
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.cs",
+        "src/PixelTart.Modules.AssetLibrary/AsyncThumbnail.cs",
+        "src/RAWSelectionAssistant.Core/Models/AssetLibraryModels.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContainerService.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContracts.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibrarySchema.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.cs",
+        "src/RAWSelectionAssistant.Core/Services/Tasks/TaskOperationBridge.cs",
+        "tests/RAWSelectionAssistant.Tests/AssetLibraryP2CoreTests.cs",
+        "tests/RAWSelectionAssistant.Tests/AssetLibraryP3MigrationTests.cs",
+        "tests/RAWSelectionAssistant.Tests/AssetLibraryV15Tests.cs",
+        "tests/RAWSelectionAssistant.Tests/AssetLibraryV1Tests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/AssetLibraryLoadMoreHardeningTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP1LoadStateAcceptanceTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP36ContextMenuContractTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/AssetLibraryP3ScopeBehaviorTests.cs"
+      ],
+      "absentCurrentFiles": [
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetFormatCapabilityRegistry.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetTechnicalMetadata.cs",
+        "tests/RAWSelectionAssistant.Tests/AssetFormatCapabilityRegistryTests.cs",
+        "tests/RAWSelectionAssistant.Tests/AssetImportFoundationTests.cs",
+        "tests/RAWSelectionAssistant.Tests/AssetTechnicalMetadataExtractorTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/AssetLibraryImportTaskContractTests.cs"
+      ],
+      "claims": "Blob comparison only; different code may contain equivalent functionality, not inferred."
+    },
+    {
+      "ref": "origin/feature/kitao-photo-engine-followup-20261016",
+      "sha": "2e1d802fb9154362f0ffad49376cf29dbf313fd3",
+      "sameCurrentBlobs": [
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibrarySchema.cs",
+        "tests/RAWSelectionAssistant.Tests/AssetLibraryP3ScopeOrderingRegressionTests.cs"
+      ],
+      "differentCurrentBlobs": [
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContracts.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.P3.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.cs",
+        "tests/RAWSelectionAssistant.Tests/AssetLibraryP3PerformanceTests.cs"
+      ],
+      "absentCurrentFiles": [
+        "src/RAWSelectionAssistant.Core/Services/Color/DisplayPreview/DisplayPreviewContract.cs",
+        "src/RAWSelectionAssistant.Core/Services/Color/PhotoBoundaryContract.cs",
+        "tests/RAWSelectionAssistant.Tests/DisplayPreviewBoundaryTests.cs",
+        "tests/RAWSelectionAssistant.Tests/PhotoBoundaryContractTests.cs"
+      ],
+      "claims": "Blob comparison only; different code may contain equivalent functionality, not inferred."
+    },
+    {
+      "ref": "origin/migration/asset-library-work-20260911",
+      "sha": "7fd63b5064db774aa3a8f3ce5a24f676f1592993",
+      "sameCurrentBlobs": [
+        "src/RAWSelectionAssistant/Resources/DesignSystem/Buttons.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/Cards.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/Colors.HighContrast.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Cards.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/Elevation.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/Spacing.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/Typography.xaml"
+      ],
+      "differentCurrentBlobs": [
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryP3Styles.xaml",
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.cs",
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml",
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryThumbnail.xaml",
+        "src/PixelTart.Modules.AssetLibrary/AssetLibraryViewModel.cs",
+        "src/RAWSelectionAssistant.Core/Models/CollageModels.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContainerService.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.P3.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.V15.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAnalysisPersistence.cs",
+        "src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAssetQueryService.cs",
+        "src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentService.cs",
+        "src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentWorkflowService.cs",
+        "src/RAWSelectionAssistant.Core/Services/Business/BusinessServices.cs",
+        "src/RAWSelectionAssistant.Core/Services/Database/CalendarWorkflowSchemaMigration.cs",
+        "src/RAWSelectionAssistant.Core/Services/Database/SqliteBookingDocumentRepository.cs",
+        "src/RAWSelectionAssistant.Core/Services/Database/SqliteBusinessRepositories.cs",
+        "src/RAWSelectionAssistant.Core/Services/Database/SqliteShootBookingRepository.cs",
+        "src/RAWSelectionAssistant.Core/Services/OrganizeService.cs",
+        "src/RAWSelectionAssistant.Core/Services/RawToJpeg/RawToJpegSafeConversionService.cs",
+        "src/RAWSelectionAssistant.Core/Services/Tethering/WatchFolderCameraAdapter.cs",
+        "src/RAWSelectionAssistant/App.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/Colors.Dark.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/Colors.Light.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/Components.Foundation.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/ContextMenu.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/Controls.Buttons.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/DesignTokens.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/PixelTart.Components.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/PixelTart.Theme.xaml",
+        "tests/RAWSelectionAssistant.WpfTests/AssetLibraryVisualPhase2Tests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/DesignSystemAv2LockTests.cs"
+      ],
+      "absentCurrentFiles": [],
+      "claims": "Blob comparison only; different code may contain equivalent functionality, not inferred."
+    },
+    {
+      "ref": "origin/migration/pixel-tart-handoff-20260911",
+      "sha": "f27a9bf72169ca4e51ff9953e38ae2209d8ba63b",
+      "sameCurrentBlobs": [
+        "src/RAWSelectionAssistant.Core/Services/AssetSelection/AssetSelectionContracts.cs"
+      ],
+      "differentCurrentBlobs": [
+        "src/PixelTart.SelectionApi.Contracts/SelectionApiContracts.cs",
+        "src/PixelTart.SelectionApi.Skeleton/Program.cs",
+        "src/RAWSelectionAssistant.Core/Models/OnlineSelectionModels.cs",
+        "src/RAWSelectionAssistant.Core/Services/OnlineSelection/OnlineSelectionContracts.cs",
+        "src/RAWSelectionAssistant/App.xaml",
+        "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/Elevation.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/PixelTart.Components.xaml",
+        "src/RAWSelectionAssistant/Resources/DesignSystem/PixelTart.Theme.xaml",
+        "src/RAWSelectionAssistant/ViewModels/OnlineSelectionViewModels.cs",
+        "src/RAWSelectionAssistant/Views/OnlineSelectionView.xaml",
+        "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml",
+        "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml.cs",
+        "tests/RAWSelectionAssistant.DpiTests/Version230StageCLiveMonitorDpiTests.cs",
+        "tests/RAWSelectionAssistant.DpiTests/Version230TetherDpiGateTests.cs",
+        "tests/RAWSelectionAssistant.Tests/OnlineSelectionV1Tests.cs",
+        "tests/RAWSelectionAssistant.Tests/WorkbenchVisualCorrection201Tests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/DesignSystemAv2LockTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/OnlineSelectionV1WpfTests.cs"
+      ],
+      "absentCurrentFiles": [
+        "src/PixelTart.OnlineSelection.LocalDevPreview/App.xaml",
+        "src/PixelTart.OnlineSelection.LocalDevPreview/App.xaml.cs",
+        "src/PixelTart.OnlineSelection.LocalDevPreview/LocalDevOnlineSelectionProvider.cs",
+        "src/PixelTart.OnlineSelection.LocalDevPreview/LocalDevPreviewDialogService.cs",
+        "src/PixelTart.OnlineSelection.LocalDevPreview/PixelTart.OnlineSelection.LocalDevPreview.csproj",
+        "src/PixelTart.OnlineSelection.LocalDevPreview/PreviewWindow.xaml",
+        "src/PixelTart.OnlineSelection.LocalDevPreview/PreviewWindow.xaml.cs",
+        "src/PixelTart.SelectionApi.Server/LocalDevJpegVariantService.cs",
+        "src/PixelTart.SelectionApi.Server/LocalDevSelectionRepository.cs",
+        "src/PixelTart.SelectionApi.Server/PixelTart.SelectionApi.Server.csproj",
+        "src/PixelTart.SelectionApi.Server/Program.cs",
+        "src/PixelTart.SelectionApi.Server/SelectionApiServerContract.cs",
+        "src/PixelTart.SelectionApi.Server/SelectionObjectStorage.cs",
+        "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionClientChoiceMock.cs",
+        "src/RAWSelectionAssistant.Core/Services/OnlineSelection/SelectionResultExportService.cs",
+        "tests/PixelTart.SelectionApi.Tests/AssemblyInfo.cs",
+        "tests/PixelTart.SelectionApi.Tests/LocalDevSelectionApiTests.cs",
+        "tests/PixelTart.SelectionApi.Tests/PixelTart.SelectionApi.Tests.csproj",
+        "tests/PixelTart.SelectionApi.Tests/SelectionApiContractTests.cs",
+        "tests/RAWSelectionAssistant.Tests/AssetSelectionContractTests.cs",
+        "tests/RAWSelectionAssistant.Tests/FakeAssetSelectionSource.cs",
+        "tests/RAWSelectionAssistant.WpfTests/ThemeStartupSmokeTests.cs"
+      ],
+      "claims": "Blob comparison only; different code may contain equivalent functionality, not inferred."
+    }
+  ]
+}

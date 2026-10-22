@@ -1,0 +1,75 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "issues": [
+    {
+      "id": "VAL-DESKTOP-001",
+      "status": "BLOCKED",
+      "reason": "Final newly published EXE native click: coordinate input geometry is unavailable; target screenshot: FrameArrived timed out. No business operation accepted.",
+      "evidence": "DESKTOP_FINAL_OPERATIONS.json"
+    },
+    {
+      "id": "VAL-CORE-CONFIG-001",
+      "status": "PASS",
+      "reason": "First full Core retains release-location literal failure. Corrected env points to same-hash loaded testhost Core; full suite rerun separately, no assertion/product changes.",
+      "evidence": "NONPASS.csv;FULL_CORE_CORRECTED.json"
+    },
+    {
+      "id": "VAL-LOGICAL-001",
+      "status": "PASS",
+      "reason": "First 106th-state capture timeout retained. Same EXE, producer and original 60s limit completed full new-root 106/106; independent validator and DPI91 passed. Only logical automated contract closed, physical DPI remains BLOCKED.",
+      "evidence": "LOGICAL_VISUAL_FIRST_FAILURE.json;TEST_SUMMARY.json"
+    },
+    {
+      "id": "VAL-SAMPLE-PATH-001",
+      "status": "PASS",
+      "reason": "Supplemental planning evidence path literal forward-slash mismatch retained; native absolute evidence root passes same fixture without changing product/test.",
+      "evidence": "PLANNING_SAMPLE_PATH_FAILURE.json;PLANNING_SAMPLE_NATIVE_RECHECK.json"
+    },
+    {
+      "id": "VAL-WPS-001",
+      "status": "BLOCKED",
+      "reason": "Independent DOCX renderer missing LibreOffice soffice.exe; real Word/WPS not executed.",
+      "evidence": "INDEPENDENT_DOCX_RENDER.log"
+    },
+    {
+      "id": "VAL-INSTALL-001",
+      "status": "NOT_RUN",
+      "reason": "No Setup generated; fresh/upgrade/uninstall/reinstall/data-retention not exercised."
+    },
+    {
+      "id": "VAL-RAW-GPU-001",
+      "status": "NOT_RUN",
+      "reason": "Explicit real RAW/spatial/physical color/GPU corpus conditions remain unavailable; not scanned from private media."
+    },
+    {
+      "id": "VAL-CAMERA-001",
+      "status": "BLOCKED",
+      "reason": "No actual camera/cable/SDK acceptance environment."
+    },
+    {
+      "id": "VAL-ONLINE-001",
+      "status": "BLOCKED",
+      "reason": "No real service/account/three-client acceptance environment; None provider is not service."
+    },
+    {
+      "id": "VAL-INPUT-001",
+      "status": "BLOCKED",
+      "reason": "Exact original A-BC attachment not located; partial product handoff baseline is not replacement."
+    },
+    {
+      "id": "PL-GEAR-001",
+      "status": "BLOCKED",
+      "reason": "Equipment catalog actual source dependency missing."
+    },
+    {
+      "id": "VAL-HOME-PERF-001",
+      "status": "NOT_RUN",
+      "reason": "No household-machine run; preserve household 32139.0909ms historical failure."
+    },
+    {
+      "id": "VAL-RELEASE-001",
+      "status": "BLOCKED",
+      "reason": "Real desktop actions, physical DPI, device/service/WPS/installer and conditionally not-run tests remain open."
+    }
+  ]
+}

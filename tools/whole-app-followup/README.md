@@ -19,3 +19,5 @@ All related-module test mappings are coverage indexes, never per-action acceptan
 - branch_blob_equivalence.py: compare current blobs for non-ancestor branches; absent files and differences remain separate.
 - run_planning_samples_native.py: supplementary current synthetic examples with canonical evidence paths; never counted again in full suite totals.
 - verify_ledger.py: unique IDs, status vocabulary, adapter coverage and archived raw hashes.
+
+- package_current.py: immutable final ZIP, exact selected synthetic samples, manifest-only 106-image logical archive, no UserData/databases/private photo inputs; byte readback for every entry.

@@ -1,0 +1,23 @@
+{
+  "label": "BUILD_WPF_X64",
+  "args": [
+    "build",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "-p:Platform=x64",
+    "--no-restore",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "-p:SourceRevisionId=13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+    "--disable-build-servers",
+    "-m:1",
+    "-nr:false"
+  ],
+  "pid": 12312,
+  "exitCode": 0,
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "startedUtc": "2026-10-22T02:25:28Z",
+  "seconds": 39.564659118652344
+}

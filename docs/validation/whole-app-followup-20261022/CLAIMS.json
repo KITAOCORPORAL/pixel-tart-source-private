@@ -1,0 +1,190 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "rows": [
+    {
+      "Feature": "完整主壳与十个一级工作域入口",
+      "Authority": "产品已实现",
+      "Status": "PARTIAL",
+      "Boundary": "完整MainWindow实际启动、264运行资产均存在；工具箱与系统入口存在；教程未退出，业务闭环未完成",
+      "Evidence": "src/RAWSelectionAssistant/MainWindow.xaml;FINAL_DESKTOP_INITIAL.txt",
+      "Issue": "VAL-DESKTOP-001"
+    },
+    {
+      "Feature": "素材库原图尺寸与安全缺项回填",
+      "Authority": "产品已实现",
+      "Status": "PARTIAL",
+      "Boundary": "现有实现及本轮相关自动测试；未用真实旧私人库证明大规模回填",
+      "Evidence": "src/PixelTart.Modules.AssetLibrary;src/RAWSelectionAssistant.Core/Services/AssetLibrary",
+      "Issue": "VAL-ASSET-001"
+    },
+    {
+      "Feature": "评分/色标/标签与筛选",
+      "Authority": "产品已实现",
+      "Status": "PARTIAL",
+      "Boundary": "绑定与存储/查询测试不等于Inspector实机无跳动",
+      "Evidence": "ALL_TEST_RESULTS.csv",
+      "Issue": "VAL-DESKTOP-001"
+    },
+    {
+      "Feature": "弹层互斥与右键级联",
+      "Authority": "产品已实现",
+      "Status": "PARTIAL",
+      "Boundary": "本轮相关WPF测试单列；边缘/物理DPI鼠标未验",
+      "Evidence": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.Popups.cs",
+      "Issue": "VAL-DESKTOP-001"
+    },
+    {
+      "Feature": "策划十五分区和持久化",
+      "Authority": "产品已实现",
+      "Status": "PARTIAL",
+      "Boundary": "沿用R5/R7/搬迁实现；已跑专项，自动化入口合同仍失败",
+      "Evidence": "TEST_SUMMARY.json;PLANNING_15.csv;CURRENT_SAMPLE_INSPECTION.json",
+      "Issue": "VAL-PLANNING-001"
+    },
+    {
+      "Feature": "设备目录真实导入",
+      "Authority": "未运行",
+      "Status": "BLOCKED",
+      "Boundary": "策划ImportPlanningGear接口存在，但真实工具箱设备目录缺来源，手工设备不等于目录集成",
+      "Evidence": "docs/evidence/planning-workflows/final/STATUS_AND_REMAINING.md",
+      "Issue": "PL-GEAR-001"
+    },
+    {
+      "Feature": "复杂DOCX与WPS往返",
+      "Authority": "未运行",
+      "Status": "PARTIAL",
+      "Boundary": "OpenXML/表内图片/表格及拒绝合同自动验证；真实WPS编辑往返未执行",
+      "Evidence": "ALL_TEST_RESULTS.csv",
+      "Issue": "PL-WPS-001"
+    },
+    {
+      "Feature": "策划PDF",
+      "Authority": "产品已实现",
+      "Status": "PARTIAL",
+      "Boundary": "分页/编码自动验证，不自动升级为可检索文本PDF",
+      "Evidence": "TEST_SUMMARY.json;PLANNING_15.csv;CURRENT_SAMPLE_INSPECTION.json",
+      "Issue": "PL-PDF-001"
+    },
+    {
+      "Feature": "真实相机联机",
+      "Authority": "未运行",
+      "Status": "BLOCKED",
+      "Boundary": "无设备/线材条件；看守目录及模拟适配器不是厂商控制/实时取景验收",
+      "Evidence": "src/RAWSelectionAssistant.Core/Services/Tethering",
+      "Issue": "VAL-CAMERA-001"
+    },
+    {
+      "Feature": "在线选片三客户端服务",
+      "Authority": "未运行",
+      "Status": "BLOCKED",
+      "Boundary": "默认NoneOnlineSelectionProvider；没有服务/账号/三客户端环境，不把本地模型算上线",
+      "Evidence": "src/RAWSelectionAssistant.Core/Services/OnlineSelection/NoneOnlineSelectionProvider.cs",
+      "Issue": "VAL-ONLINE-001"
+    },
+    {
+      "Feature": "自由画布单一缩放状态",
+      "Authority": "产品已实现",
+      "Status": "PARTIAL",
+      "Boundary": "Canvas引擎/持久化与相关自动测试；鼠标滚轮/窄屏实机未验",
+      "Evidence": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+      "Issue": "VAL-DESKTOP-001"
+    },
+    {
+      "Feature": "参考仿色真实处理链",
+      "Authority": "产品已实现",
+      "Status": "PARTIAL",
+      "Boundary": "批量/参数/只读/合成像素测试单列；不借历史高精度错误结论",
+      "Evidence": "artifacts/round3-final/preview-export-parity/PARITY_SUMMARY.md",
+      "Issue": "VAL-PARITY-001"
+    },
+    {
+      "Feature": "代理/原图/ICC/高精度全链一致",
+      "Authority": "推测",
+      "Status": "NOT_RUN",
+      "Boundary": "旧广泛TIFF16与零误差结论已撤回；本轮未取得相应真实RAW/ICC语料全链证据",
+      "Evidence": "artifacts/round3-final/preview-export-parity/PARITY_SUMMARY.md",
+      "Issue": "VAL-PARITY-001"
+    },
+    {
+      "Feature": "P3性能",
+      "Authority": "产品已实现",
+      "Status": "PARTIAL",
+      "Boundary": "Current company full Core rerun original 10000 switch/30000ms contract 1916.0877ms; not household result, old household32139.0909ms failure retained; 10128 diagnostic still opt-in.",
+      "Evidence": "TEST_SUMMARY.json;SCENARIO11_CURRENT.json",
+      "Issue": "VAL-P3-001"
+    },
+    {
+      "Feature": "Fuji RAW重复性",
+      "Authority": "未运行",
+      "Status": "NOT_RUN",
+      "Boundary": "不访问私人RAW；授权Fuji语料与重复性驱动尚未具备",
+      "Evidence": "BRANCH_AUDIT.json",
+      "Issue": "VAL-RAW-001"
+    },
+    {
+      "Feature": "显示器色彩管理/通用ICC",
+      "Authority": "研究证实",
+      "Status": "PARTIAL",
+      "Boundary": "控制ICC/合成测试有范围；物理显示配置与端到端输出未验，followup分支独有契约未并入",
+      "Evidence": "BRANCH_AUDIT.json;docs/color-science/open-source-first/POLICY.md",
+      "Issue": "VAL-ICC-001"
+    },
+    {
+      "Feature": "PV7/合成ICC parser",
+      "Authority": "研究证实",
+      "Status": "PARTIAL",
+      "Boundary": "默认关闭研究项；不能凭合成数学称通用照片生产实现",
+      "Evidence": "docs/color-science/open-source-first/POLICY.md",
+      "Issue": "VAL-RESEARCH-001"
+    },
+    {
+      "Feature": "宝丽来V3产品接线",
+      "Authority": "产品已实现",
+      "Status": "PARTIAL",
+      "Boundary": "V3相关分支祖先及产品调用存在；创作模拟不是物理相纸校准，实机输入/显影/导出长流程未验",
+      "Evidence": "src/RAWSelectionAssistant.Core/Services/Projects/InstantV3;ALL_TEST_RESULTS.csv",
+      "Issue": "VAL-R3-001"
+    },
+    {
+      "Feature": "暗室R3视觉",
+      "Authority": "未运行",
+      "Status": "BLOCKED",
+      "Boundary": "真实目标输入被拒绝；无最终同尺寸桌面图，离屏与HTML不计",
+      "Evidence": "DESKTOP_OPERATIONS.json",
+      "Issue": "VAL-R3-001"
+    },
+    {
+      "Feature": "Setup安装升级卸载重装",
+      "Authority": "发行阻断",
+      "Status": "NOT_RUN",
+      "Boundary": "本轮仅完整便携诊断包ZIP；未产生Setup或安装验收",
+      "Evidence": "README-启动说明.md",
+      "Issue": "VAL-INSTALL-001"
+    },
+    {
+      "Feature": "整体验证发行",
+      "Authority": "发行阻断",
+      "Status": "BLOCKED",
+      "Boundary": "原始失败/未执行、桌面阻断、外部环境与未集成成果都未全闭合",
+      "Evidence": "TEST_SUMMARY.json",
+      "Issue": "VAL-RELEASE-001"
+    },
+    {
+      "Feature": "15区汇总DOCX及项目自有图片",
+      "Authority": "产品已实现",
+      "Status": "PARTIAL",
+      "Boundary": "本轮真实组件自动测试与合成DOCX断言；非15区双向导回/完整跨机便携；外链原件不读取，不算Word/WPS桌面验收; current PlanningBatch3BusinessTests and summary fixtures rerun, manual remains BLOCKED",
+      "Evidence": "PLANNING_SAMPLE_NATIVE_RECHECK;CURRENT_SAMPLE_INSPECTION.json;SAMPLE_VISUAL_REVIEW.json",
+      "Issue": "VAL-WPS-001"
+    },
+    {
+      "Feature": "当前逻辑DPI取证",
+      "Authority": "产品已实现",
+      "Status": "PARTIAL",
+      "Boundary": "106张独立进程RenderTargetBitmap及91合同通过；UiReview不同编译，不是实际交付EXE字节或物理桌面；首轮超时保留",
+      "Evidence": "LOGICAL_VISUAL_IDENTITY.json;TEST_SUMMARY.json",
+      "Issue": "VAL-DESKTOP-001"
+    }
+  ],
+  "timezone": "Europe/Berlin"
+}

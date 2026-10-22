@@ -1,0 +1,11 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "status": "FAIL",
+  "case": "PlanningBatch3BusinessTests.FifteenSectionsCreateEditLinkRecoverMoveAndReopenOneSyntheticPlan",
+  "cause": "Optional evidence root used forward-slash absolute spelling. Product canonicalizes attachment to native full path; test compares unnormalized source path as literal.",
+  "productBytesChanged": false,
+  "testAssertionsChanged": false,
+  "recheck": "New supplemental evidence root passed through Path.resolve, same published DLL and test; original full-suite remains independently recorded.",
+  "evidence": "E:/Kitao-Deliveries/guangjing-whole-app-followup-20261022/PLANNING_SAMPLE_RECHECK",
+  "timezone": "Europe/Berlin"
+}

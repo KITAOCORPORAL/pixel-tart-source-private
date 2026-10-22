@@ -1,0 +1,13 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "scope": "Company machine, original test contract in corrected full Core run; not household acceptance",
+  "measurement": {
+    "open_switch_iterations": 10000,
+    "cold_total_ms": 1916.0877,
+    "worst_average_open_ms": 0.19160877,
+    "metadata_rows": 100000,
+    "projected_unique": 90000
+  },
+  "oldHouseholdFailureRetained": "32139.0909ms > 30000ms",
+  "evidence": "E:/Kitao-Deliveries/guangjing-whole-app-followup-20261022/scenario11-corrected/performance.json"
+}

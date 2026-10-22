@@ -1,0 +1,19 @@
+{
+  "frozenSourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "inheritedLastProductSha": "439e9064a6296726a5b4b30bbb56a1c08630a34a",
+  "sourceTestsDiffEmpty": true,
+  "stages": [
+    {
+      "sha": "c3c84a89af434fe9dd047564f6b5cf937636b538",
+      "type": "validation-tools",
+      "productChanges": false
+    },
+    {
+      "sha": "CURRENT_EVIDENCE_COMMIT",
+      "type": "documentation, raw-test-evidence, packaging-tool",
+      "productChanges": false
+    }
+  ],
+  "inheritedCommits": "INHERITED_COMMITS.json",
+  "note": "Evidence commit identity is verified by Git HEAD and separate push readback, never mixed with frozen product identity"
+}

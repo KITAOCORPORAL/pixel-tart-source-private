@@ -1,0 +1,22 @@
+{
+  "label": "BUILD_SOLUTION",
+  "args": [
+    "build",
+    "RAWSelectionAssistant.sln",
+    "-c",
+    "Release",
+    "--no-restore",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "-p:SourceRevisionId=13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+    "--disable-build-servers",
+    "-m:1",
+    "-nr:false"
+  ],
+  "pid": 732,
+  "exitCode": 0,
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "startedUtc": "2026-10-22T02:24:39Z",
+  "seconds": 49.62891483306885
+}

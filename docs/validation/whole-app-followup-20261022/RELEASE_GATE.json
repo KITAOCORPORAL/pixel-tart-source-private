@@ -1,0 +1,36 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "status": "BLOCKED",
+  "overall": "PARTIAL",
+  "diagnosticOnly": true,
+  "isSetup": false,
+  "core": "1723 discovered /1718 PASS /0 FAIL /5 NOT_RUN",
+  "wpf": "1726 discovered /1706 PASS /0 FAIL /20 NOT_RUN",
+  "modules": "14/14 PASS",
+  "logicalDpi": "91/91 PASS with 106 current offscreen captures; NOT physical DPI",
+  "physicalDesktop": "BLOCKED",
+  "businessOperations": {
+    "total": 122,
+    "pass": 0,
+    "fail": 0,
+    "blocked": 118,
+    "notRun": 4
+  },
+  "planningSections": {
+    "total": 15,
+    "manualPass": 0,
+    "manualBlocked": 15
+  },
+  "open": [
+    "Real physical desktop click/type/save/export/reopen across modules",
+    "Physical DPI and R3 visual comparison",
+    "Conditional RAW/GPU/benchmark and WPF not-run tests",
+    "Camera/real service/three-client acceptance",
+    "Word/WPS and independent DOCX renderer",
+    "Setup install/upgrade/uninstall/reinstall/data retention",
+    "Household Scenario11 repeatability",
+    "Exact original A-BC attachment",
+    "Equipment catalog and full project portability"
+  ],
+  "timezone": "Europe/Berlin"
+}

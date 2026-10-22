@@ -1,0 +1,25 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "timezone": "Europe/Berlin",
+  "operations": [
+    {
+      "action": "Exit tutorial by native click",
+      "status": "BLOCKED",
+      "error": "Error: coordinate input geometry is unavailable",
+      "utc": "2026-10-22T02:49:32.740Z"
+    },
+    {
+      "action": "Dedicated target capture after fresh window selection",
+      "status": "BLOCKED",
+      "error": "Error: FrameArrived timed out: timed out waiting on channel",
+      "utc": "2026-10-22T02:49:46.443Z"
+    }
+  ],
+  "businessMatrix": {
+    "total": 122,
+    "pass": 0,
+    "fail": 0,
+    "blocked": 118,
+    "notRun": 4
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "status": "PARTIAL",
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "scope": "Current synthetic DOCX -> product reimport/paginator PDF -> independent Poppler PNG; NOT independent Word/WPS",
+  "pages": 14,
+  "drawingCount": 9,
+  "mediaParts": 9,
+  "allFifteenHeadings": true,
+  "contactSheet": "E:/Kitao-Deliveries/guangjing-whole-app-followup-20261022/sample-review-pages/contact.png",
+  "visualObservation": "All 14 pages visible, no blank pages or obvious overlap; title/image pairs retained, narrow portrait intentionally preserved, dense ID/path disclosure remains readable at page scale. No general WPS compatibility claim.",
+  "independentDocxRenderer": "BLOCKED: LibreOffice soffice.exe not found",
+  "evidence": "CURRENT_SAMPLE_INSPECTION.json;INDEPENDENT_DOCX_RENDER.log",
+  "timezone": "Europe/Berlin"
+}

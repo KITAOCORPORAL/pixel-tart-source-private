@@ -1,0 +1,57 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "results": [
+    {
+      "path": "E:\\Kitao-Deliveries\\guangjing-whole-app-followup-20261022\\authorized-r3-fresh-output\\run-20261022T024126818Z-3b43017d19e44987a4e1fa335615a88e\\TWO_PHOTO_RESULTS.json",
+      "sha256": "b02b15ca36d77608e74b34914d0af34e1d3f326159d682836ff8c426b3d3d433",
+      "photos": 2,
+      "assertions": [
+        {
+          "scope": "768px bounded authorized derivative, not native RAW or desktop input",
+          "paperChanges": true,
+          "frameChanges": true,
+          "latestWins": true,
+          "developExact": true,
+          "variants": true,
+          "reopenExact": true
+        },
+        {
+          "scope": "768px bounded authorized derivative, not native RAW or desktop input",
+          "paperChanges": true,
+          "frameChanges": true,
+          "latestWins": true,
+          "developExact": true,
+          "variants": true,
+          "reopenExact": true
+        }
+      ],
+      "exports": [
+        {
+          "format": "Png",
+          "sha256": "C54884C02946DC4192AB5F58B7E58D6CF680ABB6E052B0DEA3BEE08CDDF531A7"
+        },
+        {
+          "format": "Tiff",
+          "sha256": "13F47F117733A04911BCC9D778F1DC80D923CB89EC571DA66A0BE99DBE8C0148"
+        },
+        {
+          "format": "Jpeg",
+          "sha256": "453D13932D6C5E6B886B4A147E764C53643DFC502280D12B1C8554600B178E04"
+        },
+        {
+          "format": "Png",
+          "sha256": "29F847F99F11A51FA6A042096B2679CB70B7DDB504275DD7186527389FC5EF29"
+        },
+        {
+          "format": "Tiff",
+          "sha256": "0F1FC5BAD17C1019221666EA9BFEFF7EA1305CC4DC529B1E86FFEE7491A5B8DD"
+        },
+        {
+          "format": "Jpeg",
+          "sha256": "72B7CC7BC7F861E56A464FE0C2C5B7C74E30829A7535CF9D19417CAAB47EE80D"
+        }
+      ]
+    }
+  ],
+  "scope": "Bounded 768px authorized derivatives, automatic view model flow, not RAW/native clicks"
+}

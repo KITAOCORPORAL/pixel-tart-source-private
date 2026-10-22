@@ -1,0 +1,18 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "exe": "pwsh",
+  "args": [
+    "-NoProfile",
+    "-File",
+    "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022\\tools\\RC12ProductVisualHarness\\Invoke-RC12ProductVisualHarness.ps1",
+    "-SkipBuild",
+    "-ExecutablePath",
+    "E:\\Kitao-Deliveries\\guangjing-whole-app-followup-20261022\\logical-visual-app\\KitaoPhotoSelector.UiReview.exe",
+    "-OutputRoot",
+    "E:\\Kitao-Deliveries\\guangjing-whole-app-followup-20261022\\current-run-visual"
+  ],
+  "pid": 27276,
+  "exitCode": 1,
+  "startedUtc": "2026-10-22T02:30:08Z",
+  "seconds": 960.3813562393188
+}

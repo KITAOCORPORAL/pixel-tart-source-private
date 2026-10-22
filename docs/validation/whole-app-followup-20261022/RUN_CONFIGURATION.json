@@ -1,0 +1,169 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "tests": {
+    "core": "E:/Kitao-Worktrees/guangjing-whole-app-followup-20261022/tests/RAWSelectionAssistant.Tests/bin/Release/net10.0/RAWSelectionAssistant.Tests.dll",
+    "wpf": "E:/Kitao-Worktrees/guangjing-whole-app-followup-20261022/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll",
+    "modules": "E:/Kitao-Worktrees/guangjing-whole-app-followup-20261022/tests/PixelTart.ModularHarness.Tests/bin/Release/net10.0-windows10.0.19041.0/PixelTart.ModularHarness.Tests.dll"
+  },
+  "commands": [
+    {
+      "label": "FULL_CORE",
+      "args": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022\\tools\\whole-app-validation\\verified_full_runner.py",
+        "--assembly",
+        "E:/Kitao-Worktrees/guangjing-whole-app-followup-20261022/tests/RAWSelectionAssistant.Tests/bin/Release/net10.0/RAWSelectionAssistant.Tests.dll",
+        "--output",
+        "E:\\Kitao-Deliveries\\guangjing-whole-app-followup-20261022\\FULL_CORE",
+        "--dotnet",
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "--resource-root",
+        "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022",
+        "--timeout",
+        "180"
+      ],
+      "pid": 16800,
+      "startUtc": "2026-10-22T02:28:38Z",
+      "exit": 1,
+      "endUtc": "2026-10-22T02:37:21Z"
+    },
+    {
+      "label": "PUBLISHED_MODULES",
+      "args": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022\\tools\\whole-app-validation\\verified_full_runner.py",
+        "--assembly",
+        "E:/Kitao-Worktrees/guangjing-whole-app-followup-20261022/tests/PixelTart.ModularHarness.Tests/bin/Release/net10.0-windows10.0.19041.0/PixelTart.ModularHarness.Tests.dll",
+        "--output",
+        "E:\\Kitao-Deliveries\\guangjing-whole-app-followup-20261022\\PUBLISHED_MODULES",
+        "--dotnet",
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "--resource-root",
+        "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022",
+        "--timeout",
+        "180"
+      ],
+      "pid": 26444,
+      "startUtc": "2026-10-22T02:28:38Z",
+      "exit": 0,
+      "endUtc": "2026-10-22T02:37:21Z"
+    },
+    {
+      "label": "FULL_WPF_0",
+      "args": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022\\tools\\whole-app-validation\\verified_full_runner.py",
+        "--assembly",
+        "E:/Kitao-Worktrees/guangjing-whole-app-followup-20261022/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll",
+        "--output",
+        "E:\\Kitao-Deliveries\\guangjing-whole-app-followup-20261022\\FULL_WPF_0",
+        "--dotnet",
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "--resource-root",
+        "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022",
+        "--timeout",
+        "180",
+        "--shard-index",
+        "0",
+        "--shard-count",
+        "4"
+      ],
+      "pid": 8480,
+      "startUtc": "2026-10-22T02:28:38Z",
+      "exit": 1,
+      "endUtc": "2026-10-22T02:37:21Z"
+    },
+    {
+      "label": "FULL_WPF_1",
+      "args": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022\\tools\\whole-app-validation\\verified_full_runner.py",
+        "--assembly",
+        "E:/Kitao-Worktrees/guangjing-whole-app-followup-20261022/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll",
+        "--output",
+        "E:\\Kitao-Deliveries\\guangjing-whole-app-followup-20261022\\FULL_WPF_1",
+        "--dotnet",
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "--resource-root",
+        "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022",
+        "--timeout",
+        "180",
+        "--shard-index",
+        "1",
+        "--shard-count",
+        "4"
+      ],
+      "pid": 5128,
+      "startUtc": "2026-10-22T02:28:38Z",
+      "exit": 1,
+      "endUtc": "2026-10-22T02:37:21Z"
+    },
+    {
+      "label": "FULL_WPF_2",
+      "args": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022\\tools\\whole-app-validation\\verified_full_runner.py",
+        "--assembly",
+        "E:/Kitao-Worktrees/guangjing-whole-app-followup-20261022/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll",
+        "--output",
+        "E:\\Kitao-Deliveries\\guangjing-whole-app-followup-20261022\\FULL_WPF_2",
+        "--dotnet",
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "--resource-root",
+        "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022",
+        "--timeout",
+        "180",
+        "--shard-index",
+        "2",
+        "--shard-count",
+        "4"
+      ],
+      "pid": 16288,
+      "startUtc": "2026-10-22T02:28:38Z",
+      "exit": 1,
+      "endUtc": "2026-10-22T02:37:21Z"
+    },
+    {
+      "label": "FULL_WPF_3",
+      "args": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022\\tools\\whole-app-validation\\verified_full_runner.py",
+        "--assembly",
+        "E:/Kitao-Worktrees/guangjing-whole-app-followup-20261022/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll",
+        "--output",
+        "E:\\Kitao-Deliveries\\guangjing-whole-app-followup-20261022\\FULL_WPF_3",
+        "--dotnet",
+        "D:/AI AGENT/.dotnet/dotnet.exe",
+        "--resource-root",
+        "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022",
+        "--timeout",
+        "180",
+        "--shard-index",
+        "3",
+        "--shard-count",
+        "4"
+      ],
+      "pid": 13720,
+      "startUtc": "2026-10-22T02:28:38Z",
+      "exit": 1,
+      "endUtc": "2026-10-22T02:43:56Z"
+    }
+  ],
+  "environment": {
+    "DOTNET_ROOT": "D:/AI AGENT/.dotnet",
+    "MSBUILDDISABLENODEREUSE": "1",
+    "KITAO_TEST_RESOURCE_ROOT": "E:/Kitao-Worktrees/guangjing-whole-app-followup-20261022",
+    "KITAO_WHOLE_APP_SOURCE_SHA": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+    "PIXEL_TART_PRODUCT_SOURCE_SHA": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+    "PIXEL_TART_ISOLATED_RUNTIME": "1",
+    "PIXEL_TART_ISOLATED_RUNTIME_ROOT": "E:/Kitao-Deliveries/guangjing-whole-app-followup-20261022/runtime",
+    "KITAO_R3_CLI_AUTHORIZED_MANIFEST": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/AUTHORIZED_INPUTS.json",
+    "KITAO_PHOTO_PAGE_AUTHORIZED_MANIFEST": "E:/Kitao-Deliveries/darkroom-r3-company-20261020/cli-review-20261020/PHOTO_PAGE_AUTHORIZED.json",
+    "KITAO_R3_CLI_OUTPUT": "E:/Kitao-Deliveries/guangjing-whole-app-followup-20261022/authorized-r3-fresh-output",
+    "PIXEL_TART_BATCH12_RELEASE_CORE": "E:/Kitao-Deliveries/guangjing-whole-app-followup-20261022/Guangjing-FullScope-Followup-Diagnostic-win-x64/app/RAWSelectionAssistant.Core.dll",
+    "PIXEL_TART_PERFORMANCE_EVIDENCE": "E:/Kitao-Deliveries/guangjing-whole-app-followup-20261022/film-cpu-performance",
+    "PIXEL_TART_P35_ACCEPTANCE_ROOT": "E:/Kitao-Deliveries/guangjing-whole-app-followup-20261022/scenario11-measurements"
+  },
+  "timezone": "Europe/Berlin",
+  "scope": "Current run only, published components bound"
+}

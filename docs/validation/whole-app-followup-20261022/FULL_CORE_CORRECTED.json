@@ -1,0 +1,24 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "exitCode": 1,
+  "args": [
+    "C:\\Program Files\\Python313\\python.exe",
+    "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022\\tools\\whole-app-validation\\verified_full_runner.py",
+    "--assembly",
+    "E:/Kitao-Worktrees/guangjing-whole-app-followup-20261022/tests/RAWSelectionAssistant.Tests/bin/Release/net10.0/RAWSelectionAssistant.Tests.dll",
+    "--output",
+    "E:\\Kitao-Deliveries\\guangjing-whole-app-followup-20261022\\FULL_CORE_CORRECTED",
+    "--dotnet",
+    "D:/AI AGENT/.dotnet/dotnet.exe",
+    "--resource-root",
+    "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022",
+    "--timeout",
+    "180"
+  ],
+  "pid": 28620,
+  "seconds": 425.38350534439087,
+  "preconditionFix": "ReleasedAssemblyTests requires loaded assembly LOCATION, not original publish location. Byte hash remains identical. Original full result retained.",
+  "environmentChange": {
+    "PIXEL_TART_BATCH12_RELEASE_CORE": "E:\\Kitao-Worktrees\\guangjing-whole-app-followup-20261022\\tests\\RAWSelectionAssistant.Tests\\bin\\Release\\net10.0\\RAWSelectionAssistant.Core.dll"
+  }
+}

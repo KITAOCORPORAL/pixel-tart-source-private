@@ -1,0 +1,357 @@
+{
+  "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
+  "productAndTestsDiff": "",
+  "toolsCommit": "c3c84a89af434fe9dd047564f6b5cf937636b538",
+  "files": [
+    {
+      "path": "tools/whole-app-followup/.gitignore",
+      "type": "gitignore"
+    },
+    {
+      "path": "tools/whole-app-followup/README.md",
+      "type": "md"
+    },
+    {
+      "path": "tools/whole-app-followup/aggregate_current.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/audit_current.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/branch_blob_equivalence.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/build_current.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/inspect_authorized.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/recheck_logical_dpi.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/rerun_core_corrected.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/run_current_extras.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/run_current_full.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/run_current_logical_dpi.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/run_planning_samples.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/run_planning_samples_native.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/verify_build_current.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/verify_ledger.py",
+      "type": "py"
+    },
+    {
+      "path": "tools/whole-app-followup/verify_preservation.py",
+      "type": "py"
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "docs/validation/whole-app-followup-20261022/.gitattributes",
+      "type": "gitattributes"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/ACTIONS.csv",
+      "type": "csv"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/ACTIONS.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/ALL_TEST_RESULTS.csv",
+      "type": "csv"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/APP_FILES.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/AUTHORIZATION_PREFLIGHT.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/AUTHORIZED_FULL_RUN_READBACK.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/BASELINE_RELATIONSHIPS.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/BRANCH_AUDIT_CURRENT.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/BRANCH_CURRENT_EQUIVALENCE.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/BUILD_IDENTITY.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/BUILD_SOLUTION.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/BUILD_WPF_X64.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/BUSINESS_SYNTHETIC_RESULT.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/CLAIMS.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/COMPONENT_BINDINGS.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/CURRENT_SAMPLE_INSPECTION.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/DELIVERY_IDENTITY.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/DEPENDENCIES.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/DESKTOP_COUNTS.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/DESKTOP_FINAL_COMPONENT_READBACK.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/DESKTOP_FINAL_INITIAL.txt",
+      "type": "txt"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/DESKTOP_FINAL_OPERATIONS.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/DESKTOP_FINAL_START.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/DESKTOP_ORIGINAL_CAPTURE.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/DESKTOP_ORIGINAL_CLICK.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/DRIVER_SYNTAX_FULL_CORE_CORRECTED.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/DRIVER_SYNTAX_FULL_CORE_CORRECTED.log",
+      "type": "log"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/FAILURE_REPRODUCTIONS.md",
+      "type": "md"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/FINAL_COMPONENT_READBACK.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/FINAL_REPORT.md",
+      "type": "md"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/FORMATS_SYNTHETIC_RESULT.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/FULL_CORE_CORRECTED.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/INDEPENDENT_DOCX_RENDER.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/INDEPENDENT_DOCX_RENDER.log",
+      "type": "log"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/INHERITED_COMMITS.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/INITIAL_STATE.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/ISSUES.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/LEDGER_VALIDATION.log",
+      "type": "log"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/LOGICAL_ARCHIVE_FILES.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/LOGICAL_ARCHIVE_IDENTITY.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/LOGICAL_VISUAL_FIRST_FAILURE.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/LOGICAL_VISUAL_IDENTITY.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/MODULES.csv",
+      "type": "csv"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/MODULES.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/MODULE_TOTAL.md",
+      "type": "md"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/NAVIGATION.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/NONPASS.csv",
+      "type": "csv"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/OLD_PACKAGE_READBACK.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/OPERATIONS.csv",
+      "type": "csv"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/OPERATIONS.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/PLANNING_15.csv",
+      "type": "csv"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/PLANNING_15.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/PLANNING_SAMPLE_PATH_FAILURE.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/PRESERVATION_AFTER.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/PRODUCE_LOGICAL_VISUAL.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/PUBLISH_FULL.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/R3_VISUAL_DIFFERENCES.md",
+      "type": "md"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/RAW_TEST_EVIDENCE.zip",
+      "type": "zip"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/RAW_TEST_EVIDENCE_MANIFEST.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/READING_INDEX.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/RECHECK_PRODUCE_LOGICAL_VISUAL.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/RECHECK_VALIDATE_LOGICAL_VISUAL.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/RELEASE_GATE.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/RUN_CONFIGURATION.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/SAMPLE_VISUAL_REVIEW.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/SCENARIO11_CURRENT.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/TEST_SUMMARY.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/ZIP_FILES.json",
+      "type": "json"
+    },
+    {
+      "path": "docs/validation/whole-app-followup-20261022/ZIP_IDENTITY.json",
+      "type": "json"
+    }
+  ]
+}
