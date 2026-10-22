@@ -1,0 +1,59 @@
+{
+  "sourceSha": "3710317f8c2681141cb7d0e959e78ab9f9bb6037",
+  "steps": [
+    {
+      "step": "选择导入参考PNG/附件TXT，另图选择外链",
+      "actual": "PASS",
+      "authority": "Production command + synthetic dialog choices; NOT native file picker",
+      "evidence": "FINAL_WPF PlanningProjectCopyWpfTests.UserChoiceSaveReopenMoveReopenAndSummaryUseOnlyOwnedCopies"
+    },
+    {
+      "step": "保存、关闭VM、新VM重开",
+      "actual": "PASS",
+      "authority": "Real JSON store/SQLite/new VM",
+      "evidence": "SYNTHETIC_RESULT.json"
+    },
+    {
+      "step": "完整合成目录搬迁，新数据库/当前根重开查看",
+      "actual": "PASS",
+      "authority": "Synthetic directory/DB only, WPF layout not mouse",
+      "evidence": "FINAL_READBACK.json"
+    },
+    {
+      "step": "原测试外部源删除后副本仍可访问",
+      "actual": "PASS",
+      "authority": "SHA256 readback; no source fallback",
+      "evidence": "FINAL_READBACK.json"
+    },
+    {
+      "step": "导出15区DOCX，04/06区自有图，TXT状态，外链缺失",
+      "actual": "PASS",
+      "authority": "Actual OOXML/OpenXML validator, product output",
+      "evidence": "FINAL_READBACK.json"
+    },
+    {
+      "step": "原生鼠标/系统选文件框/附件系统应用打开",
+      "actual": "NOT_RUN",
+      "authority": "Desktop capture unavailable",
+      "evidence": "DESKTOP_OBSERVATION.json"
+    },
+    {
+      "step": "普通I/O/取消/保存失败回滚",
+      "actual": "PASS",
+      "authority": "Core real lock/cancel/limited file tests",
+      "evidence": "TEST_SUMMARY.json"
+    },
+    {
+      "step": "强杀/断电恢复清理UI",
+      "actual": "NOT_RUN",
+      "authority": "Not implemented; unreferenced stages never treated valid",
+      "evidence": "FINAL_REPORT.md"
+    },
+    {
+      "step": "通用完整项目便携/跨机迁移/正式发行",
+      "actual": "PARTIAL",
+      "authority": "Only synthetic full-directory relocation, not release accepted",
+      "evidence": "RELEASE_GATE.json"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "core": "5/7 PASS, 2 assertion exception-subtype expectations, product rollback checks retained",
+  "wpf": "2/3 PASS, missing-import case assumed an existing empty planning document; actual failed import correctly created no document",
+  "fix": "New tests corrected to accept standard cancellation subtype/OS file lock denial and absent document; no old regression assertion changes",
+  "evidence": [
+    "NEW_CORE",
+    "NEW_WPF"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "sourceSha": "3710317f8c2681141cb7d0e959e78ab9f9bb6037",
+  "exe": "D:/AI AGENT/.dotnet/dotnet.exe",
+  "args": [
+    "build",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "-p:Platform=x64",
+    "--no-restore",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:SourceRevisionId=3710317f8c2681141cb7d0e959e78ab9f9bb6037",
+    "-p:IncludeSourceRevisionInInformationalVersion=true"
+  ],
+  "pid": 23368,
+  "exitCode": 0,
+  "seconds": 37.54446768760681
+}

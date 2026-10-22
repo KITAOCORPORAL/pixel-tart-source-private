@@ -1,0 +1,26 @@
+{
+  "sourceSha": "3710317f8c2681141cb7d0e959e78ab9f9bb6037",
+  "base": "6cdb3f7bab745dc28df9797f278c85967d130a29",
+  "files": [
+    "M\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningCenter.cs",
+    "M\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningDocument.cs",
+    "A\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningProjectCopy.cs",
+    "A\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningProjectStore.Copies.cs",
+    "M\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningReadableSummary.cs",
+    "M\tsrc/RAWSelectionAssistant/Services/PlanningSummaryDocument.cs",
+    "M\tsrc/RAWSelectionAssistant/Services/PlanningSummaryOwnedImage.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+    "A\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.ProjectCopies.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.References.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Resources.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.SummaryExport.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.cs",
+    "M\tsrc/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+    "A\ttests/RAWSelectionAssistant.Tests/PlanningProjectCopyTests.cs",
+    "A\ttests/RAWSelectionAssistant.WpfTests/PlanningProjectCopyWpfTests.cs"
+  ],
+  "types": [
+    "Product C#",
+    "Core/WPF test C#"
+  ]
+}
