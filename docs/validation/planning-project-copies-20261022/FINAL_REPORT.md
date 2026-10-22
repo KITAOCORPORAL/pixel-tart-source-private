@@ -56,3 +56,7 @@ Release win-x64 self-contained，WholeAppDiagnosticBuild=true/PhotographerTrialB
 ## ZIP封存读回
 
 完整诊断ZIP 76823749字节，323文件，SHA256 f384a99a7e5886cfc1c5a35cc5cd02721fd3624a3aff4a061cfd4f9d112bef60，逐文件读回全部一致，不含UserData/数据库。完整合成样例ZIP 1144011字节，11文件，SHA256 10a28e76dae5f53a7c531ec52f37684989dc0d4555b885c06eb5242db9dcfaad，包含明确合成SQLite/JSON/副本，另包本地交付、不入Git。ZIP内报告为打包时快照；外部最终报告后附ZIP自身身份，避免自引用。
+
+## 正常推送读回
+
+产品3710317f8c2681141cb7d0e959e78ab9f9bb6037与独立证据eb9a43170129d6c5665dadc9664a5ecc937a9fe9已正常推送本轮feature分支。独立ls-remote确认LOCAL_HEAD=REMOTE_HEAD且工作树干净；PUSH_READBACK.json保留该已验证读回。后续仅封存读回文档，不改变产品/测试/发布组件。
