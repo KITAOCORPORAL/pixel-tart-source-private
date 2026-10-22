@@ -1,0 +1,290 @@
+[
+  {
+    "trx": "regression-actual-wpf-affected/results.trx",
+    "test": "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0052713",
+    "testId": "180e1356-c0f8-8fd2-ba20-fbed3a09e968",
+    "fqcn": "RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+    "error": "Assert.Inconclusive 失败。Opt-in production peer evidence is not enabled in this bounded regression run."
+  },
+  {
+    "trx": "regression-actual-wpf-affected/results.trx",
+    "test": "OffscreenCompletedStatesSeparateFromPhysicalDpi",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0060093",
+    "testId": "1ac869c9-7600-8ff3-a472-69a4038bd4f5",
+    "fqcn": "RAWSelectionAssistant.WpfTests.PlanningCompanyFollowupTests.OffscreenCompletedStatesSeparateFromPhysicalDpi",
+    "error": "Assert.Inconclusive 失败。Offscreen evidence opt-in required."
+  },
+  {
+    "trx": "reports/original-home-planning3-20261020-results.trx",
+    "test": "Scenario11_TenKSwitchAndHundredKMetadataPreview",
+    "outcome": "Failed",
+    "duration": "00:00:32.7487577",
+    "testId": "12b44fb9-4d4b-8c93-a967-54c1345379bc",
+    "fqcn": "RAWSelectionAssistant.Tests.AssetLibraryP35AcceptanceTests.Scenario11_TenKSwitchAndHundredKMetadataPreview",
+    "error": "Assert.IsLessThan 失败。实际值 <32139.0909> 不小于预期值 <30000>。‘upperBound’表达式:‘30_000d’,‘value’表达式:‘stopwatch.Elapsed.TotalMilliseconds’。"
+  },
+  {
+    "trx": "reports/original-home-planning3-20261020-results.trx",
+    "test": "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0013477",
+    "testId": "17854b2f-a47a-8489-8aca-2aba2fed9d10",
+    "fqcn": "RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+    "error": "Assert.Inconclusive 失败。Set PIXEL_TART_RUN_V4_BENCHMARK=1 for the bounded production-size run."
+  },
+  {
+    "trx": "reports/original-home-planning3-20261020-results.trx",
+    "test": "CpuGpuParityOnSyntheticScene",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0004875",
+    "testId": "1d03f246-6ea4-8bde-9c8a-50b9e8590a6e",
+    "fqcn": "RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene",
+    "error": "Assert.Inconclusive 失败。No validated GPU compute device on this host."
+  },
+  {
+    "trx": "reports/original-home-planning3-20261020-results.trx",
+    "test": "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0133889",
+    "testId": "1182f715-ec3c-836b-9814-bc1869300528",
+    "fqcn": "RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+    "error": "Assert.Inconclusive 失败。Real spatial evidence is explicitly opt-in."
+  },
+  {
+    "trx": "reports/original-home-planning3-20261020-results.trx",
+    "test": "CpuGpuParityAcrossEightSceneClasses",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0005604",
+    "testId": "1baaeb0b-4956-84c1-be6e-4c9e00329ccf",
+    "fqcn": "RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses",
+    "error": "Assert.Inconclusive 失败。No validated GPU compute device on this host."
+  },
+  {
+    "trx": "reports/original-home-planning3-20261020-results.trx",
+    "test": "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0228083",
+    "testId": "113a3cd2-db36-82ba-82e3-61a9ec276a04",
+    "fqcn": "RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+    "error": "Assert.Inconclusive 失败。Explicitly authorized real corpus is opt-in; not a synthetic RAW replacement."
+  },
+  {
+    "trx": "baseline/sample-test/sample.trx",
+    "test": "CurrentApplicationUserImportOrdinaryListEditSaveRestartOpenAndSummary",
+    "outcome": "Failed",
+    "duration": "00:00:00.8495480",
+    "testId": "16c5210f-6120-8ca2-b984-af1ce4b77f25",
+    "fqcn": "RAWSelectionAssistant.WpfTests.PlanningCurrentRootImportWpfTests.CurrentApplicationUserImportOrdinaryListEditSaveRestartOpenAndSummary",
+    "error": "StringAssert.Contains 失败。字符串“项目：合成策划\nID：d41cec00-4f16-44b8-8436-f6c42d04d759\n将写入数据库：C:\\Users\\Admin\\AppData\\Local\\Temp\\kitao-planning-foundation-115f689c78c94eef92b9443210d11cc9\\synthetic.db\n策划：C:\\Users\\Admin\\AppData\\Local\\Temp\\kitao-planning-foundation-115f689c78c94eef92b9443210d11cc9\\planning\n镜头：C:\\Users\\Admin\\AppData\\Local\\Temp\\kitao-planning-foundation-115f689c78c94eef92b9443210d11cc9\\shots\n仅新增，同ID拒绝，同名不同ID分开保留。\n未包含：\n账本、付款、财务附件、在线服务、素材库原件、色彩方案/画布工作区未包含；不宣称完整跨机便携。”不包含字符串“current”。。"
+  },
+  {
+    "trx": "development-tests/core/results.trx",
+    "test": "SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem",
+    "outcome": "Failed",
+    "duration": "00:00:00.0181043",
+    "testId": "1337f53d-2813-87c7-a4f9-b7079bcb51e8",
+    "fqcn": "RAWSelectionAssistant.Tests.PlanningProjectCopyTests.SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem",
+    "error": "测试方法 RAWSelectionAssistant.Tests.PlanningProjectCopyTests。SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'C:\\Users\\Admin\\AppData\\Local\\Temp\\RAWSelectionAssistant.Tests\\2d04d72596364a8e8dcb69990efcc4d5\\alias'."
+  },
+  {
+    "trx": "development-tests/core/results.trx",
+    "test": "RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+    "outcome": "Failed",
+    "duration": "00:00:00.2687223",
+    "testId": "1c05f000-b69a-87d4-9997-f4cdd79f8c4d",
+    "fqcn": "RAWSelectionAssistant.Tests.PlanningProjectPackageTests.RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+    "error": "测试方法 RAWSelectionAssistant.Tests.PlanningProjectPackageTests。RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'C:\\Users\\Admin\\AppData\\Local\\Temp\\RAWSelectionAssistant.Tests\\695c72b259f64bfa85d7e10c50e1d902\\1701ee634aec4e818cc0bad1f1015732\\planning\\project-copies\\1701ee634aec4e818cc0bad1f1015732\\15f11d3bcfab07e4d73f99f0c5b20465\\.staging\\f36ab6c8add344a1943f2095488e2b91.part'."
+  },
+  {
+    "trx": "final/tests-core/results.trx",
+    "test": "RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+    "outcome": "Failed",
+    "duration": "00:00:00.2644511",
+    "testId": "1c05f000-b69a-87d4-9997-f4cdd79f8c4d",
+    "fqcn": "RAWSelectionAssistant.Tests.PlanningProjectPackageTests.RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+    "error": "测试方法 RAWSelectionAssistant.Tests.PlanningProjectPackageTests。RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'C:\\Users\\Admin\\AppData\\Local\\Temp\\RAWSelectionAssistant.Tests\\0c42e32ee62f4bf190f7a840b382f1fd\\25ef8a5a6e8f47b38be23664b7183953\\planning\\project-copies\\25ef8a5a6e8f47b38be23664b7183953\\0b5664ba2cba0b82046b0fa0810b3424\\.staging\\b1213e37c7ec46a893995ec76ad5462f.part'."
+  },
+  {
+    "trx": "final/tests-core/results.trx",
+    "test": "SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem",
+    "outcome": "Failed",
+    "duration": "00:00:00.0155279",
+    "testId": "1337f53d-2813-87c7-a4f9-b7079bcb51e8",
+    "fqcn": "RAWSelectionAssistant.Tests.PlanningProjectCopyTests.SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem",
+    "error": "测试方法 RAWSelectionAssistant.Tests.PlanningProjectCopyTests。SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'C:\\Users\\Admin\\AppData\\Local\\Temp\\RAWSelectionAssistant.Tests\\5d7a1566f856444a92866adb48e88141\\alias'."
+  },
+  {
+    "trx": "final/tests-wpf/results.trx",
+    "test": "OffscreenCompletedStatesSeparateFromPhysicalDpi",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0067869",
+    "testId": "1ac869c9-7600-8ff3-a472-69a4038bd4f5",
+    "fqcn": "RAWSelectionAssistant.WpfTests.PlanningCompanyFollowupTests.OffscreenCompletedStatesSeparateFromPhysicalDpi",
+    "error": "Assert.Inconclusive 失败。Offscreen evidence opt-in required."
+  },
+  {
+    "trx": "final/tests-wpf/results.trx",
+    "test": "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0051639",
+    "testId": "180e1356-c0f8-8fd2-ba20-fbed3a09e968",
+    "fqcn": "RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+    "error": "Assert.Inconclusive 失败。Opt-in production peer evidence is not enabled in this bounded regression run."
+  },
+  {
+    "trx": "final-r3/tests-core/results.trx",
+    "test": "SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem",
+    "outcome": "Failed",
+    "duration": "00:00:00.0185507",
+    "testId": "1337f53d-2813-87c7-a4f9-b7079bcb51e8",
+    "fqcn": "RAWSelectionAssistant.Tests.PlanningProjectCopyTests.SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem",
+    "error": "测试方法 RAWSelectionAssistant.Tests.PlanningProjectCopyTests。SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'C:\\Users\\Admin\\AppData\\Local\\Temp\\RAWSelectionAssistant.Tests\\7e29bcee51dd4fc19598b2b26fce7bf7\\alias'."
+  },
+  {
+    "trx": "final-r3/tests-core/results.trx",
+    "test": "RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+    "outcome": "Failed",
+    "duration": "00:00:00.2278637",
+    "testId": "1c05f000-b69a-87d4-9997-f4cdd79f8c4d",
+    "fqcn": "RAWSelectionAssistant.Tests.PlanningProjectPackageTests.RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+    "error": "测试方法 RAWSelectionAssistant.Tests.PlanningProjectPackageTests。RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'C:\\Users\\Admin\\AppData\\Local\\Temp\\RAWSelectionAssistant.Tests\\6778c8565a544c0a8e9a40308e2273ed\\b5a952dade0247e7bbce84063fa82706\\planning\\project-copies\\b5a952dade0247e7bbce84063fa82706\\8cff4b538dd3260c80b611a2aa5bad5c\\.staging\\8fb1d5adbf49435289eab5b0afb183c1.part'."
+  },
+  {
+    "trx": "final-r3/tests-wpf/results.trx",
+    "test": "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0052578",
+    "testId": "180e1356-c0f8-8fd2-ba20-fbed3a09e968",
+    "fqcn": "RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+    "error": "Assert.Inconclusive 失败。Opt-in production peer evidence is not enabled in this bounded regression run."
+  },
+  {
+    "trx": "final-r3/tests-wpf/results.trx",
+    "test": "OffscreenCompletedStatesSeparateFromPhysicalDpi",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0022445",
+    "testId": "1ac869c9-7600-8ff3-a472-69a4038bd4f5",
+    "fqcn": "RAWSelectionAssistant.WpfTests.PlanningCompanyFollowupTests.OffscreenCompletedStatesSeparateFromPhysicalDpi",
+    "error": "Assert.Inconclusive 失败。Offscreen evidence opt-in required."
+  },
+  {
+    "trx": "final-r4/tests-core/results.trx",
+    "test": "RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+    "outcome": "Failed",
+    "duration": "00:00:00.2500950",
+    "testId": "1c05f000-b69a-87d4-9997-f4cdd79f8c4d",
+    "fqcn": "RAWSelectionAssistant.Tests.PlanningProjectPackageTests.RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+    "error": "测试方法 RAWSelectionAssistant.Tests.PlanningProjectPackageTests。RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'C:\\Users\\Admin\\AppData\\Local\\Temp\\RAWSelectionAssistant.Tests\\47715e0825fe42b69d4b4457fc4e385d\\9cafc6f5da984dabb1f60036d98b628e\\planning\\project-copies\\9cafc6f5da984dabb1f60036d98b628e\\29f0871cac5a75872678eb60d5e2d242\\.staging\\5911dab766fe42c7b7b278572cebb1a1.part'."
+  },
+  {
+    "trx": "final-r4/tests-core/results.trx",
+    "test": "SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem",
+    "outcome": "Failed",
+    "duration": "00:00:00.0164393",
+    "testId": "1337f53d-2813-87c7-a4f9-b7079bcb51e8",
+    "fqcn": "RAWSelectionAssistant.Tests.PlanningProjectCopyTests.SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem",
+    "error": "测试方法 RAWSelectionAssistant.Tests.PlanningProjectCopyTests。SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'C:\\Users\\Admin\\AppData\\Local\\Temp\\RAWSelectionAssistant.Tests\\420559a081044d59a2897c9a45b3bd5e\\alias'."
+  },
+  {
+    "trx": "final-r4/tests-wpf/results.trx",
+    "test": "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0053471",
+    "testId": "180e1356-c0f8-8fd2-ba20-fbed3a09e968",
+    "fqcn": "RAWSelectionAssistant.WpfTests.PlanningAutomationContractTests.ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+    "error": "Assert.Inconclusive 失败。Opt-in production peer evidence is not enabled in this bounded regression run."
+  },
+  {
+    "trx": "final-r4/tests-wpf/results.trx",
+    "test": "OffscreenCompletedStatesSeparateFromPhysicalDpi",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0047685",
+    "testId": "1ac869c9-7600-8ff3-a472-69a4038bd4f5",
+    "fqcn": "RAWSelectionAssistant.WpfTests.PlanningCompanyFollowupTests.OffscreenCompletedStatesSeparateFromPhysicalDpi",
+    "error": "Assert.Inconclusive 失败。Offscreen evidence opt-in required."
+  },
+  {
+    "trx": "Guangjing-Home-ExternalReconnect-Diagnostic-win-x64/reports/original-home-planning3-20261020-results.trx",
+    "test": "Scenario11_TenKSwitchAndHundredKMetadataPreview",
+    "outcome": "Failed",
+    "duration": "00:00:32.7487577",
+    "testId": "12b44fb9-4d4b-8c93-a967-54c1345379bc",
+    "fqcn": "RAWSelectionAssistant.Tests.AssetLibraryP35AcceptanceTests.Scenario11_TenKSwitchAndHundredKMetadataPreview",
+    "error": "Assert.IsLessThan 失败。实际值 <32139.0909> 不小于预期值 <30000>。‘upperBound’表达式:‘30_000d’,‘value’表达式:‘stopwatch.Elapsed.TotalMilliseconds’。"
+  },
+  {
+    "trx": "Guangjing-Home-ExternalReconnect-Diagnostic-win-x64/reports/original-home-planning3-20261020-results.trx",
+    "test": "ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0013477",
+    "testId": "17854b2f-a47a-8489-8aca-2aba2fed9d10",
+    "fqcn": "RAWSelectionAssistant.Tests.ReferenceMatchV4BenchmarkTests.ProductionResolutionBenchmarkWritesThreeRepeatsWhenEnabled",
+    "error": "Assert.Inconclusive 失败。Set PIXEL_TART_RUN_V4_BENCHMARK=1 for the bounded production-size run."
+  },
+  {
+    "trx": "Guangjing-Home-ExternalReconnect-Diagnostic-win-x64/reports/original-home-planning3-20261020-results.trx",
+    "test": "CpuGpuParityOnSyntheticScene",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0004875",
+    "testId": "1d03f246-6ea4-8bde-9c8a-50b9e8590a6e",
+    "fqcn": "RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityOnSyntheticScene",
+    "error": "Assert.Inconclusive 失败。No validated GPU compute device on this host."
+  },
+  {
+    "trx": "Guangjing-Home-ExternalReconnect-Diagnostic-win-x64/reports/original-home-planning3-20261020-results.trx",
+    "test": "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0133889",
+    "testId": "1182f715-ec3c-836b-9814-bc1869300528",
+    "fqcn": "RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+    "error": "Assert.Inconclusive 失败。Real spatial evidence is explicitly opt-in."
+  },
+  {
+    "trx": "Guangjing-Home-ExternalReconnect-Diagnostic-win-x64/reports/original-home-planning3-20261020-results.trx",
+    "test": "CpuGpuParityAcrossEightSceneClasses",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0005604",
+    "testId": "1baaeb0b-4956-84c1-be6e-4c9e00329ccf",
+    "fqcn": "RAWSelectionAssistant.Tests.ReferenceMatchV4Tests.CpuGpuParityAcrossEightSceneClasses",
+    "error": "Assert.Inconclusive 失败。No validated GPU compute device on this host."
+  },
+  {
+    "trx": "Guangjing-Home-ExternalReconnect-Diagnostic-win-x64/reports/original-home-planning3-20261020-results.trx",
+    "test": "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0228083",
+    "testId": "113a3cd2-db36-82ba-82e3-61a9ec276a04",
+    "fqcn": "RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+    "error": "Assert.Inconclusive 失败。Explicitly authorized real corpus is opt-in; not a synthetic RAW replacement."
+  },
+  {
+    "trx": "performance/concurrent/load-3-0/load.trx",
+    "test": "AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0250997",
+    "testId": "12f603ee-dca1-8712-9ce9-e5e71dc52774",
+    "fqcn": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+    "error": "Assert.Inconclusive 失败。Explicit authorized frozen-photo manifest is required; no directory scan."
+  },
+  {
+    "trx": "performance-final-r3/concurrent/load-3-0/load.trx",
+    "test": "AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0191825",
+    "testId": "12f603ee-dca1-8712-9ce9-e5e71dc52774",
+    "fqcn": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+    "error": "Assert.Inconclusive 失败。Explicit authorized frozen-photo manifest is required; no directory scan."
+  },
+  {
+    "trx": "performance-final-r4/concurrent/load-3-0/load.trx",
+    "test": "AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0197848",
+    "testId": "12f603ee-dca1-8712-9ce9-e5e71dc52774",
+    "fqcn": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+    "error": "Assert.Inconclusive 失败。Explicit authorized frozen-photo manifest is required; no directory scan."
+  }
+]

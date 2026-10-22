@@ -1,0 +1,88 @@
+{
+  "pid": 37272,
+  "startUtc": "2026-10-22T14:16:58.6221421Z",
+  "endUtc": "2026-10-22T14:17:01.0361041Z",
+  "exitCode": 0,
+  "scope": "Identity-only observed test host; not performance score",
+  "children": [
+    {
+      "pid": 35300,
+      "parentPid": 37272,
+      "exe": "C:\\Program Files\\dotnet\\dotnet.exe",
+      "commandLine": "\"C:\\Program Files\\dotnet\\dotnet.exe\" exec \"C:\\Program Files\\dotnet\\sdk\\10.0.401\\vstest.console.dll\" N:\\pixart\\guangjing-home-reconnect-20261022\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll /TestCaseFilter:FullyQualifiedName~PlanningSummaryExportTests /Logger:trx;LogFileName=identity.trx /ResultsDirectory:N:\\pixart\\Guangjing-Home-Reconnect-Delivery-20261022\\host-identity-only --artifactsProcessingMode-collect --testSessionCorrelationId:37272_7b0b2600-ade2-460d-a0d8-e3a0b39e98f9",
+      "observedUtc": "2026-10-22T14:16:58.9976998Z",
+      "modules": [
+        {
+          "name": "coreclr.dll",
+          "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+          "sha256": "128AEE8C62A673D64739E585E3876B61133571CEC83A46240A62581D5465639B"
+        },
+        {
+          "name": "Microsoft.TestPlatform.TestHostRuntimeProvider.dll",
+          "path": "C:\\Program Files\\dotnet\\sdk\\10.0.401\\Extensions\\Microsoft.TestPlatform.TestHostRuntimeProvider.dll",
+          "sha256": "BBE7FEFB60455D5CF0DA14AFBE145B408C2C1FE3D2B171766C51B48786858BCE"
+        }
+      ]
+    },
+    {
+      "pid": 8012,
+      "parentPid": 37272,
+      "exe": "C:\\WINDOWS\\system32\\conhost.exe",
+      "commandLine": "\\??\\C:\\WINDOWS\\system32\\conhost.exe 0x4",
+      "observedUtc": "2026-10-22T14:16:58.9560452Z",
+      "modules": []
+    },
+    {
+      "pid": 18444,
+      "parentPid": 35300,
+      "exe": "N:\\pixart\\guangjing-home-reconnect-20261022\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\testhost.exe",
+      "commandLine": "\"N:\\pixart\\guangjing-home-reconnect-20261022\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\testhost.exe\"  --runtimeconfig \"N:\\pixart\\guangjing-home-reconnect-20261022\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.runtimeconfig.json\" --depsfile \"N:\\pixart\\guangjing-home-reconnect-20261022\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.deps.json\" --port 12897 --endpoint 127.0.0.1:012897 --role client --parentprocessid 35300 --telemetryoptedin false",
+      "observedUtc": "2026-10-22T14:16:59.5547704Z",
+      "modules": [
+        {
+          "name": "testhost.exe",
+          "path": "N:\\pixart\\guangjing-home-reconnect-20261022\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\testhost.exe",
+          "sha256": "6A3A6CFCA1F99E54BC7D6851009DF33C4184D2C65663165B5D5DE6C0FE6E5420"
+        },
+        {
+          "name": "coreclr.dll",
+          "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\coreclr.dll",
+          "sha256": "128AEE8C62A673D64739E585E3876B61133571CEC83A46240A62581D5465639B"
+        },
+        {
+          "name": "testhost.dll",
+          "path": "N:\\pixart\\guangjing-home-reconnect-20261022\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\testhost.dll",
+          "sha256": "F9F95F20F7A99215B50CFD511085B31549B26F87AFAEB02C0A3C21F6875817E8"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.dll",
+          "path": "N:\\pixart\\guangjing-home-reconnect-20261022\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "sha256": "EE226D8638DBC033F0D7AD40CF0714BE9FCE9CE51B75C8F13B222708AE5FD2D1"
+        },
+        {
+          "name": "PixelTart.Modules.AssetLibrary.dll",
+          "path": "N:\\pixart\\guangjing-home-reconnect-20261022\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\PixelTart.Modules.AssetLibrary.dll",
+          "sha256": "5CECB3B6DBF99DBC1D76615B734F6EFA3C79999B442DB4B60EA44E8A191578F0"
+        },
+        {
+          "name": "RAWSelectionAssistant.Core.dll",
+          "path": "N:\\pixart\\guangjing-home-reconnect-20261022\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.Core.dll",
+          "sha256": "9E04DA243D838DC4A99F4949F3520661C479BD309A8494D3E39BBCFB3AD82296"
+        },
+        {
+          "name": "KitaoPhotoSelector.dll",
+          "path": "N:\\pixart\\guangjing-home-reconnect-20261022\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\KitaoPhotoSelector.dll",
+          "sha256": "A008AAE0EF8DBA2DBD16F111568258CFB2D4C299209A59F68A5A4E56FC35BFAF"
+        }
+      ]
+    },
+    {
+      "pid": 41496,
+      "parentPid": 18444,
+      "exe": "C:\\WINDOWS\\system32\\conhost.exe",
+      "commandLine": "\\??\\C:\\WINDOWS\\system32\\conhost.exe 0x4",
+      "observedUtc": "2026-10-22T14:16:59.8030047Z",
+      "modules": []
+    }
+  ]
+}

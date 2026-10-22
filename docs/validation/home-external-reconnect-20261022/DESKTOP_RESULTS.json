@@ -1,0 +1,58 @@
+{
+  "baselineSource": "2d8db4d9931f58af43025004cb794dc35affb8b3",
+  "finalSource": "b91858eea2d17ca5c9a72a04132757a8e010ff8e",
+  "automation": "@oai/sky native Windows only; no browser/CDP/localhost used",
+  "accessibility": "null; screenshot-backed mouse/key actions",
+  "baseline": {
+    "startPid": 12644,
+    "restartPid": 42548,
+    "oldExited": true,
+    "importCurrentRoot": true,
+    "ordinaryList": true,
+    "titleEdited": "家用实机编辑保存 20261022",
+    "saved": true,
+    "restarted": true,
+    "summary": "samples/baseline-desktop-15-summary.docx"
+  },
+  "firstReconnectAttempt": {
+    "source": "9d50bb483abadd7b86e611735e02155ff9ccd453",
+    "pid": 14856,
+    "status": "FAIL retained: native confirmation obscured by owned modeless window; no receipt persisted",
+    "termination": "CloseMainWindow false; only this test process stopped after evidence retained"
+  },
+  "final": {
+    "startPid": 23740,
+    "restartPid": 8160,
+    "oldExitedNormally": true,
+    "project": "5da43bec-3666-4f2a-9920-ac9cdde5aca9",
+    "reference": "5ee0a981-299a-4ba1-ab4d-33d720db18f5",
+    "attachment": "b2a9e85f-5cfb-4406-a10d-59203f5c1fa6",
+    "imported": true,
+    "missingReasonsShown": true,
+    "explicitReferenceExternal": true,
+    "explicitAttachmentOwnedCopy": true,
+    "typeSizeShaConfirmation": true,
+    "save": true,
+    "normalExit": true,
+    "newProcessRestart": true,
+    "ordinaryListReopen": true,
+    "referencePreviewAfterRestart": true,
+    "summary": "samples/r3-desktop-reconnected-15-summary.docx",
+    "summaryFifteenHeadings": true,
+    "bothHashesInSummary": true
+  },
+  "notExecuted": [
+    "Native cancel/error/conflict matrix (Core guards tested instead)",
+    "Word/WPS document-open visual inspection",
+    "Full app acceptance/setup install/uninstall/real customer data"
+  ],
+  "deliveredSource": "4f57ca5646b1b6e5f831bdecc8c7847114dfa941",
+  "finalGuardBuild": {
+    "pid": 5364,
+    "started": true,
+    "reopenPersistedNativeReconnectedProject": true,
+    "referencePreview": true,
+    "normalExit": true,
+    "fullNativeReconnectLoopRepeated": false
+  }
+}
