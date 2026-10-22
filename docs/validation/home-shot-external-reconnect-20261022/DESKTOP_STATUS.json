@@ -1,23 +1,44 @@
 {
   "sourceSha": "c80b5e719dce8fab73f27c0c3e5b48c80c597c3a",
-  "status": "BLOCKED",
-  "tool": "native @oai/sky",
-  "pid": 33292,
-  "performed": [
-    "Start compiled Windows EXE in new isolated root",
-    "Observed diagnostic title and tutorial",
-    "Click Exit tutorial",
-    "One activate-window recovery attempt"
+  "status": "PASS_LIMITED_NATIVE_LOOP",
+  "tool": "native @oai/sky; screenshot-backed mouse/key input",
+  "previousAttempt": "DESKTOP_STATUS.initial-blocked.json retained; user clarified accidental foreground input",
+  "pid": 11440,
+  "restartPid": 36428,
+  "projectId": "37aa3ba6-e560-413f-8f02-169148667781",
+  "shotId": "4f718681-fa53-4a41-b811-d723c23d40cf",
+  "referenceId": "a1e81bda-2416-44dc-96b1-ed2048f59c90",
+  "dataRoot": "N:\\pixart\\Guangjing-ShotReconnect-20261022\\desktop-runtime",
+  "completed": [
+    "Actual current-root import of shot-only-v1.ptplan via native picker",
+    "Missing entry displays shot name/full ShotId/original path/reason",
+    "Explicitly chose continue-external-link",
+    "Native picker selected replacement-shot.png",
+    "Confirmed PNG/3821 bytes/SHA-256",
+    "Native reference preview visible",
+    "Clicked Save",
+    "Alt+F4 normal exit; old PID absent before restart",
+    "Started same EXE and data root with new PID",
+    "Clicked ordinary planning list project",
+    "Shot thumbnail and reference preview visible after new process reopen",
+    "Alt+F4 exit after verification"
   ],
-  "blocking": "Selected-target capture showed unrelated foreground app after tutorial exit, still wrong after activation; stopped input. No unrelated screenshot persisted.",
+  "readback": {
+    "utc": "2026-10-22T17:25:10.264794+00:00",
+    "shotBytesUnchanged": true,
+    "documentReferencesStillEmpty": true,
+    "planningContentOtherThanReceiptUnchanged": true,
+    "receiptUnchangedAfterRestart": true,
+    "planningSha256": "fa8dd884e25acf8af3be3f347d2028410c97dab78e23593666fbd25522f4cfdb",
+    "shotSha256": "961259916ca7fb82428ff44226667d87e1612a5d49eab4ab2ee16a0491f2ac97",
+    "selectedFileSha256": "7ded6d5724784a1d7da2e7dec1605bbb31fe71fbd96f7edef9cb8169a88fb26b"
+  },
   "notExecuted": [
-    "shot package native import",
-    "native locate/confirm",
-    "native save",
-    "normal UI exit",
-    "new process reopen",
-    "native preview"
+    "Native owned-copy mode (covered by Core/WPF regression only)",
+    "Native cancellation/failure/duplicate-operation matrix",
+    "Installer/full application acceptance/Word or WPS"
   ],
-  "shutdown": "CloseMainWindow on own process returned true; confirmed exited. Not a completed UI loop.",
+  "reportTimezone": "Europe/Berlin",
+  "rawHostTimestampsPreserved": true,
   "viewModelIsNotDesktopAcceptance": true
 }

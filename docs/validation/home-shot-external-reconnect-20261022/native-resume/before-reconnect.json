@@ -1,0 +1,99 @@
+{
+  "planningSha256": "b4bef837741b9354aa7f2c3de17cc5a178ed6752479bd457b94cb21035cb0660",
+  "shotSha256": "961259916ca7fb82428ff44226667d87e1612a5d49eab4ab2ee16a0491f2ac97",
+  "document": {
+    "UiLayout": {
+      "ListWidth": 248,
+      "InspectorWidth": 300,
+      "InspectorOpen": true,
+      "CollapsedGroups": null,
+      "InspectorGroupOrder": null,
+      "DocumentZoom": 100
+    },
+    "Presentation": {
+      "Version": 1,
+      "Mode": "Simple",
+      "ProposalInitialized": false,
+      "Blocks": []
+    },
+    "Resources": {
+      "Version": 1,
+      "Items": []
+    },
+    "FoundationVersion": 1,
+    "ShotColumns": [],
+    "Package": {
+      "Version": 1,
+      "DocumentId": "1e1e8ac6-18f5-c93e-b7ce-36f2fc500341",
+      "ProjectId": "37aa3ba6-e560-413f-8f02-169148667781",
+      "Body": "",
+      "RichLayout": null,
+      "RichTextPackageBase64": null,
+      "Assets": [],
+      "ShotIds": [
+        "4f718681-fa53-4a41-b811-d723c23d40cf"
+      ],
+      "CanvasRevisions": []
+    },
+    "Title": "镜头独有外链合成项目",
+    "Subtitle": "",
+    "Body": "",
+    "CustomBody": "策划正文不可被重连改写",
+    "Status": "草稿",
+    "Location": "",
+    "People": "",
+    "ShootDate": null,
+    "References": [],
+    "Attachments": [],
+    "ShotExternalLinks": [],
+    "PackageImportExcludedDependencies": [
+      "镜头外部/库引用 a1e81bda-2416-44dc-96b1-ed2048f59c90：N:\\pixart\\Guangjing-ShotReconnect-20261022\\final\\tests-wpf\\temp\\kitao-planning-foundation-a5e46cdf61444330b8e98285add4ac2b\\missing-shot.png；未包含",
+      "账本、付款、财务附件、在线服务、素材库原件、色彩方案/画布工作区未包含；不宣称完整跨机便携。"
+    ]
+  },
+  "shots": {
+    "ProjectId": "37aa3ba6-e560-413f-8f02-169148667781",
+    "Shots": [
+      {
+        "ShotId": "4f718681-fa53-4a41-b811-d723c23d40cf",
+        "ProjectId": "37aa3ba6-e560-413f-8f02-169148667781",
+        "Order": 0,
+        "Name": "合成特写镜头",
+        "Status": 0,
+        "Notes": null,
+        "ReferenceLookId": null,
+        "References": [
+          {
+            "ReferenceId": "a1e81bda-2416-44dc-96b1-ed2048f59c90",
+            "Kind": 1,
+            "LibraryId": null,
+            "AssetId": null,
+            "ExternalReference": "N:\\pixart\\Guangjing-ShotReconnect-20261022\\final\\tests-wpf\\temp\\kitao-planning-foundation-a5e46cdf61444330b8e98285add4ac2b\\missing-shot.png",
+            "Title": "镜头独有参考",
+            "Note": null,
+            "PoseStatus": 0,
+            "IsPinned": false,
+            "Details": null
+          }
+        ],
+        "CreatedAt": "2026-10-22T16:15:01.9092075+00:00",
+        "UpdatedAt": "2026-10-22T16:15:01.9092075+00:00",
+        "Version": 1,
+        "EstimatedMinutes": 10,
+        "Scene": null,
+        "CapturedAt": null,
+        "IsArchived": false,
+        "PlanningFieldsVersion": 1,
+        "ShotSize": "",
+        "CameraAndLens": "",
+        "Action": "",
+        "Remarks": "",
+        "Props": "",
+        "Lighting": "",
+        "CustomValues": {}
+      }
+    ],
+    "Version": 1,
+    "Revision": 2
+  }
+}

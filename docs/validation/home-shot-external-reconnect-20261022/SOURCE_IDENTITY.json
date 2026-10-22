@@ -6,5 +6,7 @@
   "reportTimezone": "Europe/Berlin",
   "hostTime": "raw logs retain execution host timezone",
   "installerBuilt": false,
-  "desktopComplete": false
+  "desktopComplete": true,
+  "desktopScope": "Native continue-external shot-only reconnect/save/normal exit/new PID ordinary-list reopen/preview",
+  "desktopPreviousBlockedRetained": "DESKTOP_STATUS.initial-blocked.json"
 }
