@@ -21,6 +21,11 @@ namespace RAWSelectionAssistant.Tests;
         await Assert.ThrowsExactlyAsync<InvalidDataException>(()=>PlanningExternalFile.InspectAsync(id,"reference",original,selected));
         await store.UpdateDocumentAsync(project,new(){Attachments=[new(id,original,"A"),new(id,original,"B")]},new());before=Hash(path);file=await PlanningExternalFile.InspectAsync(id,"attachment",original,selected);await Assert.ThrowsExactlyAsync<InvalidDataException>(()=>store.ReconnectExternalAsync(project,file,false));Assert.AreEqual(before,Hash(path));
     }
+    [TestMethod]public async Task ReferenceFormatChangeIsRejectedBeforeCopyPathCanMislabelBytes()
+    {
+        using var t=new TempDirectory();var selected=t.CreateFile("new.png",new byte[]{137,80,78,71,13,10,26,10,1});
+        await Assert.ThrowsExactlyAsync<InvalidDataException>(()=>PlanningExternalFile.InspectAsync(Guid.NewGuid(),"reference",t.Combine("old.jpg"),selected));
+    }
     [TestMethod]public async Task ExternalReceiptRejectsLaterChangesInsteadOfFallingBack()
     {
         using var t=new TempDirectory();var selected=t.CreateFile("file.txt","synthetic"u8.ToArray());var id=Guid.NewGuid();var original=t.Combine("old.txt");var file=await PlanningExternalFile.InspectAsync(id,"attachment",original,selected);Assert.AreEqual(selected,PlanningExternalFile.ResolveVerified(file,id,"attachment",original));await File.WriteAllTextAsync(selected,"changed");Assert.ThrowsExactly<InvalidDataException>(()=>PlanningExternalFile.ResolveVerified(file,id,"attachment",original));

@@ -33,6 +33,9 @@ public sealed record PlanningExternalFile(Guid ReferenceId, string Kind, string 
             ".tif" or ".tiff" => header.AsSpan().StartsWith(new byte[]{73,73,42,0}) || header.AsSpan().StartsWith(new byte[]{77,77,0,42}),
             _ => false
         };
+        var originalExtension=Path.GetExtension(original).ToLowerInvariant();
+        if(kind=="reference" && ext!=originalExtension && !((ext is ".jpg" or ".jpeg") && (originalExtension is ".jpg" or ".jpeg")) && !((ext is ".tif" or ".tiff") && (originalExtension is ".tif" or ".tiff")))
+            throw new InvalidDataException("替代参考图须与原文件格式相同；请先转换为原格式再定位。");
         var image = Image();
         if (kind == "reference" && !image) throw new InvalidDataException("参考图须为签名与扩展名匹配的PNG/JPEG/GIF/BMP/TIFF。");
         if (kind == "attachment")
