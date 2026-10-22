@@ -1,19 +1,23 @@
 {
   "frozenSourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
-  "inheritedLastProductSha": "439e9064a6296726a5b4b30bbb56a1c08630a34a",
-  "sourceTestsDiffEmpty": true,
   "stages": [
     {
-      "sha": "c3c84a89af434fe9dd047564f6b5cf937636b538",
-      "type": "validation-tools",
+      "sha": "69ae68244466b5ef40226236f3580ddb3267f510",
+      "subject": "docs(validation): retain original TRX archive and frozen source content manifest",
       "productChanges": false
     },
     {
       "sha": "864084292c438d2ed78521c0117aa533efdb9241",
-      "type": "documentation, raw-test-evidence, packaging-tool",
+      "subject": "docs(validation): seal full-scope followup suites diagnostic package and retained desktop blockers",
+      "productChanges": false
+    },
+    {
+      "sha": "c3c84a89af434fe9dd047564f6b5cf937636b538",
+      "subject": "chore(validation): add reproducible full-scope followup and retained-failure verification tools",
       "productChanges": false
     }
   ],
-  "inheritedCommits": "INHERITED_COMMITS.json",
-  "note": "Evidence commit identity is verified by Git HEAD and separate push readback, never mixed with frozen product identity"
+  "lastVerifiedRemoteHead": "69ae68244466b5ef40226236f3580ddb3267f510",
+  "lastVerifiedClean": true,
+  "finalSeal": "This commit only retains verified push/readback and file inventory; no published product changes"
 }

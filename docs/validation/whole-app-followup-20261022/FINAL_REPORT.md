@@ -65,3 +65,7 @@ MODULE_TOTAL.md、MODULES.csv、OPERATIONS.csv、PLANNING_15.csv逐项包含构�
 ## 最终ZIP独立逐文件读回
 
 包：E:\Kitao-Deliveries\guangjing-whole-app-followup-20261022\Guangjing-FullScope-Followup-Diagnostic-win-x64.zip；365文件，123037311字节（约117.3MiB）。SHA256 a235f4deed71d39ac5cf78605a0b85c6ef6ad08eb23fb3a4e9236eb24b2ef82b。全部文件解压式读取逐hash一致，包含完整app/原始TRX摘要/106张明确离屏图归档/合成文档，不含UserData、数据库或私人照片/RAW；不是Setup。ZIP内报告是打包时封存快照，外部最终报告后附ZIP自身身份，避免自引用hash。
+
+## 已验证正常推送
+
+本轮独立分支已正常push，69ae68244466b5ef40226236f3580ddb3267f510独立ls-remote读回与LOCAL_HEAD相同，工作树干净。PUSH_READBACK.json保留这次已确认读回；后续仅文档封存，不改变冻结源码与发布组件。最终HEAD在本轮交互读回再次给出，不尝试把提交自身SHA写入自身。

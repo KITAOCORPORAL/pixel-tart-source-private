@@ -1,357 +1,463 @@
 {
   "sourceSha": "13ec9ca1c678622e5c7b884d8f69882c409c33a4",
   "productAndTestsDiff": "",
-  "toolsCommit": "c3c84a89af434fe9dd047564f6b5cf937636b538",
   "files": [
     {
-      "path": "tools/whole-app-followup/.gitignore",
-      "type": "gitignore"
-    },
-    {
-      "path": "tools/whole-app-followup/README.md",
-      "type": "md"
-    },
-    {
-      "path": "tools/whole-app-followup/aggregate_current.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/audit_current.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/branch_blob_equivalence.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/build_current.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/inspect_authorized.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/recheck_logical_dpi.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/rerun_core_corrected.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/run_current_extras.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/run_current_full.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/run_current_logical_dpi.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/run_planning_samples.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/run_planning_samples_native.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/verify_build_current.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/verify_ledger.py",
-      "type": "py"
-    },
-    {
-      "path": "tools/whole-app-followup/verify_preservation.py",
-      "type": "py"
-    }
-  ],
-  "evidenceFiles": [
-    {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/.gitattributes",
       "type": "gitattributes"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/ACTIONS.csv",
       "type": "csv"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/ACTIONS.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/ALL_TEST_RESULTS.csv",
       "type": "csv"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/APP_FILES.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/AUTHORIZATION_PREFLIGHT.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/AUTHORIZED_FULL_RUN_READBACK.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/BASELINE_RELATIONSHIPS.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/BRANCH_AUDIT_CURRENT.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/BRANCH_CURRENT_EQUIVALENCE.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/BUILD_IDENTITY.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/BUILD_SOLUTION.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/BUILD_WPF_X64.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/BUSINESS_SYNTHETIC_RESULT.json",
       "type": "json"
     },
     {
+      "status": "A",
+      "path": "docs/validation/whole-app-followup-20261022/CHANGED_FILES.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/CLAIMS.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/COMPONENT_BINDINGS.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/CURRENT_SAMPLE_INSPECTION.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/DELIVERY_IDENTITY.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/DEPENDENCIES.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/DESKTOP_COUNTS.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/DESKTOP_FINAL_COMPONENT_READBACK.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/DESKTOP_FINAL_INITIAL.txt",
       "type": "txt"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/DESKTOP_FINAL_OPERATIONS.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/DESKTOP_FINAL_START.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/DESKTOP_ORIGINAL_CAPTURE.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/DESKTOP_ORIGINAL_CLICK.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/DRIVER_SYNTAX_FULL_CORE_CORRECTED.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/DRIVER_SYNTAX_FULL_CORE_CORRECTED.log",
       "type": "log"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/FAILURE_REPRODUCTIONS.md",
       "type": "md"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/FINAL_COMPONENT_READBACK.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/FINAL_REPORT.md",
       "type": "md"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/FORMATS_SYNTHETIC_RESULT.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/FULL_CORE_CORRECTED.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/INDEPENDENT_DOCX_RENDER.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/INDEPENDENT_DOCX_RENDER.log",
       "type": "log"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/INHERITED_COMMITS.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/INITIAL_STATE.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/ISSUES.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/LEDGER_VALIDATION.log",
       "type": "log"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/LOGICAL_ARCHIVE_FILES.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/LOGICAL_ARCHIVE_IDENTITY.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/LOGICAL_VISUAL_FIRST_FAILURE.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/LOGICAL_VISUAL_IDENTITY.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/MODULES.csv",
       "type": "csv"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/MODULES.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/MODULE_TOTAL.md",
       "type": "md"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/NAVIGATION.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/NONPASS.csv",
       "type": "csv"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/OLD_PACKAGE_READBACK.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/OPERATIONS.csv",
       "type": "csv"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/OPERATIONS.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/PLANNING_15.csv",
       "type": "csv"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/PLANNING_15.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/PLANNING_SAMPLE_PATH_FAILURE.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/PRESERVATION_AFTER.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/PRODUCE_LOGICAL_VISUAL.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/PUBLISH_FULL.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/R3_VISUAL_DIFFERENCES.md",
       "type": "md"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/RAW_TEST_EVIDENCE.zip",
       "type": "zip"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/RAW_TEST_EVIDENCE_MANIFEST.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/READING_INDEX.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/RECHECK_PRODUCE_LOGICAL_VISUAL.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/RECHECK_VALIDATE_LOGICAL_VISUAL.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/RELEASE_GATE.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/RUN_CONFIGURATION.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/SAMPLE_VISUAL_REVIEW.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/SCENARIO11_CURRENT.json",
       "type": "json"
     },
     {
+      "status": "A",
+      "path": "docs/validation/whole-app-followup-20261022/SOURCE_MANIFEST.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "docs/validation/whole-app-followup-20261022/STAGE_COMMITS.json",
+      "type": "json"
+    },
+    {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/TEST_SUMMARY.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/ZIP_FILES.json",
       "type": "json"
     },
     {
+      "status": "A",
       "path": "docs/validation/whole-app-followup-20261022/ZIP_IDENTITY.json",
       "type": "json"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/.gitignore",
+      "type": "gitignore"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/README.md",
+      "type": "md"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/aggregate_current.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/audit_current.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/branch_blob_equivalence.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/build_current.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/inspect_authorized.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/package_current.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/recheck_logical_dpi.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/rerun_core_corrected.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/run_current_extras.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/run_current_full.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/run_current_logical_dpi.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/run_planning_samples.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/run_planning_samples_native.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/verify_build_current.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/verify_ledger.py",
+      "type": "py"
+    },
+    {
+      "status": "A",
+      "path": "tools/whole-app-followup/verify_preservation.py",
+      "type": "py"
     }
-  ]
+  ],
+  "localOutputManifest": "ZIP_FILES.json;APP_FILES.json",
+  "types": "Only validation Python/Markdown/JSON/CSV/text/logs and raw test evidence ZIP; no published EXE/DLL, private photo/RAW/database"
 }
