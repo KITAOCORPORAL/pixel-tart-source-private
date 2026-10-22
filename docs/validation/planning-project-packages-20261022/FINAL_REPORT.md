@@ -54,3 +54,7 @@ fetch后feature/planning-project-copies-20261022远端最新3dec55b2da6e87579c48
 ## 最终包读回
 
 320文件，75948242字节，SHA256 20d184e4f901b35338cbff322abe26778d0cbfa7412ce1f93d614d6ff88c3c9c，每文件读回一致；不含UserData/数据库/私人输入。合成.ptplan SHA256 4b526f53c06da67a648bdbe6808c832856839bd8f8ea929ab3b99a2454e4b4ed。ZIP内报告是打包前快照；本外部报告后附ZIP自身身份，避免循环hash。
+
+## 推送读回
+
+产品9040e320d871f05c1013da9ed45bb04d48257616与独立证据81a5d1b9a6dae82879f50530950dc93cb4d7e044已正常推送本轮feature分支，独立ls-remote确认LOCAL_HEAD=REMOTE_HEAD，工作树干净。PUSH_READBACK.json保留这次核验；后续仅封存读回，不改变产品或发布组件。
