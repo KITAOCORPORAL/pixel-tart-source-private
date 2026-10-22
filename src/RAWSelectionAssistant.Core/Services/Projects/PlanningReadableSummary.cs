@@ -77,7 +77,7 @@ public static class PlanningReadableSummaryBuilder
             if(expense.ProjectId==input.ProjectId&&expense.Kind==FinanceTransactionKind.Expense)
                 Add(12,"实际支出",("交易ID",expense.Id),("日期",expense.OccurredOn),("金额最小单位",expense.AmountMinor),("币种",expense.CurrencyCode),("小数位",expense.CurrencyScale),("付款状态",expense.PaymentStatus),("类别ID",expense.CategoryId),("交易方",expense.Counterparty),("方式",expense.PaymentMethod),("备注",expense.Note),("附件路径",expense.AttachmentPaths));
         foreach(var expense in (input.Expenses??[]).Where(x=>x.ProjectId==input.ProjectId&&x.Kind==FinanceTransactionKind.Expense))foreach(var path in expense.AttachmentPaths)Add(12,"支出附件引用",("交易ID",expense.Id),("原位置",path),("引用状态",ReferenceState(path)),("范围","仅引用，不复制附件"));
-        foreach(var attachment in d.Attachments)Add(13,attachment.Name,("附件ID",attachment.Id),("原位置",attachment.Path),("引用状态",attachment.ProjectCopy is {} copy ? PlanningProjectCopyStorage.Status(copy) : ReferenceState(attachment.Path)),("项目内路径",attachment.ProjectCopy?.RelativePath),("SHA-256",attachment.ProjectCopy?.Sha256),("交付方式",attachment.ProjectCopy is null ? "仅列出外链，不保证跨机可用" : "项目自有附件，随项目管理目录搬迁；普通附件仅列名称与状态，不嵌入DOCX"),("扩展字段",attachment.Extensions));
+        foreach(var attachment in d.Attachments)Add(13,attachment.Name,("附件ID",attachment.Id),("原位置",attachment.Path),("手动重连文件",attachment.ReconnectedFile?.SelectedPath),("重连类型",attachment.ReconnectedFile?.FileType),("重连大小",attachment.ReconnectedFile?.Bytes),("重连SHA-256",attachment.ReconnectedFile?.Sha256),("引用状态",attachment.ProjectCopy is {} copy ? PlanningProjectCopyStorage.Status(copy) : ReconnectedState(attachment.ReconnectedFile,attachment.Id,"attachment",attachment.Path) ?? (d.Extensions?.ContainsKey("PackageImportExcludedDependencies")==true ? "项目包未包含；待手动重连" : ReferenceState(attachment.Path))),("项目内路径",attachment.ProjectCopy?.RelativePath),("SHA-256",attachment.ProjectCopy?.Sha256),("交付方式",attachment.ProjectCopy is null ? "仅列出外链，不保证跨机可用" : "项目自有附件，随项目管理目录搬迁；普通附件仅列名称与状态，不嵌入DOCX"),("扩展字段",attachment.Extensions));
         Add(14,"文档内容",("内容",d.CustomBody));
         if(d.Package is{} package)
         {
@@ -98,7 +98,7 @@ public static class PlanningReadableSummaryBuilder
         return new(input.ProjectId,d.Package?.DocumentId,SectionOrder.Select((name,i)=>new PlanningSummarySection(name,sections[i].ToArray())).ToArray());
         void AddReference(int section,ProjectShotReference r,string role,params (string Key,object? Value)[] extra)
         {
-            Add(section,r.Title??role,new[]{("引用ID",(object?)r.ReferenceId),("类型",r.Kind),("库ID",r.LibraryId),("素材ID",r.AssetId),("原位置",r.ExternalReference),("引用状态",d.References.FirstOrDefault(link=>link.Source.ReferenceId==r.ReferenceId)?.ProjectCopy is {} receipt ? PlanningProjectCopyStorage.Status(receipt) : r.LibraryId is not null?"库引用未解析；保留身份，未复制原文件":ReferenceState(r.ExternalReference)),("备注",r.Note),("固定",r.IsPinned),("执行状态",r.PoseStatus),("详情",r.Details),("扩展字段",r.Extensions)}.Concat(extra).ToArray());
+            Add(section,r.Title??role,new[]{("引用ID",(object?)r.ReferenceId),("类型",r.Kind),("库ID",r.LibraryId),("素材ID",r.AssetId),("原位置",r.ExternalReference),("引用状态",d.References.FirstOrDefault(link=>link.Source.ReferenceId==r.ReferenceId)?.ProjectCopy is {} receipt ? PlanningProjectCopyStorage.Status(receipt) : r.LibraryId is not null?"库引用未解析；保留身份，未复制原文件":ReconnectedState(d.References.FirstOrDefault(link=>link.Source.ReferenceId==r.ReferenceId)?.ReconnectedFile,r.ReferenceId,"reference",r.ExternalReference) ?? (d.Extensions?.ContainsKey("PackageImportExcludedDependencies")==true ? "项目包未包含；待手动重连" : ReferenceState(r.ExternalReference))),("手动重连文件",d.References.FirstOrDefault(link=>link.Source.ReferenceId==r.ReferenceId)?.ReconnectedFile?.SelectedPath),("重连SHA-256",d.References.FirstOrDefault(link=>link.Source.ReferenceId==r.ReferenceId)?.ReconnectedFile?.Sha256),("备注",r.Note),("固定",r.IsPinned),("执行状态",r.PoseStatus),("详情",r.Details),("扩展字段",r.Extensions)}.Concat(extra).ToArray());
             var projectCopy=d.References.FirstOrDefault(link=>link.Source.ReferenceId==r.ReferenceId)?.ProjectCopy;
             if(projectCopy is not null)
             {
@@ -107,6 +107,12 @@ public static class PlanningReadableSummaryBuilder
             }
             Attach(section,owned.Where(i=>(r.LibraryId is Guid library&&r.AssetId is Guid asset&&i.Source is{} source&&source.LibraryId==library&&source.AssetId==asset)||OwnPathMatches(i,r.ExternalReference)));
         }
+    }
+    private static string? ReconnectedState(PlanningExternalFile? file,Guid id,string kind,string? original)
+    {
+        if(file is null || original is null)return null;
+        try{PlanningExternalFile.ResolveVerified(file,id,kind,original);return "手动重连外链 · 类型/大小/SHA-256已核对；未嵌入";}
+        catch(Exception e)when(e is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException){return "重连外链不可用："+e.Message;}
     }
     public static int PlacementSection(string placement)=>placement switch
     {"封面"=>0,"光标"=>1,"文字"=>1,"指定镜头"=>2,"参考图"=>3,"情绪板"=>4,"灯位图" or "灯光图"=>5,"服化道与道具" or "服化道"=>6,_=>14};

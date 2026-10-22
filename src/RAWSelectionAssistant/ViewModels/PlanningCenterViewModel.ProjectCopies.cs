@@ -40,10 +40,15 @@ public sealed partial class PlanningCenterViewModel
     }
     public string? ResolveAttachmentPath(PlanningAttachment item)
     {
-        if (item.ProjectCopy is not {} copy) return File.Exists(item.Path) ? item.Path : null;
+        if (item.ProjectCopy is not {} copy)
+        {
+            if(item.ReconnectedFile is {} reconnected)
+            {try{return PlanningExternalFile.ResolveVerified(reconnected,item.Id,"attachment",item.Path);}catch(Exception e)when(PackageError(e)){return null;}}
+            return IsPackageImported || ImportedPackageRoot is not null ? null : File.Exists(item.Path) ? item.Path : null;
+        }
         try { PlanningProjectCopyStorage.ReadVerified(copy); return PlanningProjectCopyStorage.Resolve(copy); }
         catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException) { SaveStatus = "项目副本不可用：" + error.Message; return null; }
     }
-    public string AttachmentStatus(PlanningAttachment item) => item.ProjectCopy is {} copy ? PlanningProjectCopyStorage.Status(copy) : "外链 · " + PlanningReadableSummaryBuilder.ReferenceState(item.Path);
+    public string AttachmentStatus(PlanningAttachment item) => item.ProjectCopy is {} copy ? PlanningProjectCopyStorage.Status(copy) : "外链 · " + ExternalReason(item.ReconnectedFile,item.Id,"attachment",item.Path);
     public void RevealAttachment(PlanningAttachment item) { if (ResolveAttachmentPath(item) is string path) _dialogs.RevealFile(path); else _dialogs.ShowInfo("文件不可用，未回退原来源。"); }
 }

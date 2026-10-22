@@ -78,7 +78,7 @@ public static class PlanningCurrentRootImport
         if(await db.ContainsProjectIdentityAsync(m.ProjectId,token))throw new IOException("项目ID冲突：当前应用已有该项目（含归档），原项目保持不变");
         var payload=new Dictionary<(string Area,string Path),byte[]>();
         // Keep excluded relations as metadata only. Never attach them to unrelated current business IDs.
-        var state=validated.State with{BookingId=null,VisualLinks=[],CapturedAssets=[]};state=state with{Document=state.Document! with{Package=state.Document.Package! with{Assets=[]}}};
+        var state=validated.State with{BookingId=null,VisualLinks=[],CapturedAssets=[]};state=state with{Document=PlanningProjectPackage.RequireLocalReconnect(state.Document!) with{Package=state.Document.Package! with{Assets=[]}}};
         var extensions=state.Document!.Extensions is null?new Dictionary<string,JsonElement>():new(state.Document.Extensions);extensions["PackageImportExcludedDependencies"]=JsonSerializer.SerializeToElement(m.ExcludedDependencies);state=state with{Document=state.Document with{Extensions=extensions}};
         payload.Add(("planning",m.ProjectId.ToString("N")+".planning.json"),JsonSerializer.SerializeToUtf8Bytes(state,Json));payload.Add(("shots",m.ProjectId.ToString("N")+".shots.json"),JsonSerializer.SerializeToUtf8Bytes(validated.Shots with{Shots=validated.Shots.Shots.Select(s=>s with{ReferenceLookId=null}).ToArray()},Json));
         foreach(var item in validated.Data.Where(x=>x.Key.StartsWith("planning/",StringComparison.Ordinal)))payload.Add(("planning",item.Key[9..]),item.Value);

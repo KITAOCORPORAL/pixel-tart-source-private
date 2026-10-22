@@ -149,6 +149,8 @@ public partial class PlanningCenterView : UserControl
                 empty.Children.Add(Text(_vm.PlanningProjects.Count == 0 ? "还没有策划案" : "选择一个策划案开始", 32, true));
                 empty.Children.Add(Text("从一次拍摄开始，把灵感、镜头和执行资料整理到一起。", 17));
                 var create = AsyncAction("新建策划", () => _vm.ShowCreatePlanningCommand.ExecuteAsync(null), "PrimaryButton"); create.Margin = new Thickness(0, 26, 0, 0); empty.Children.Add(create);
+                empty.Children.Add(AsyncAction("导入项目包到当前应用",()=>_vm.ImportCurrentProjectPackageCommand.ExecuteAsync(null),"SecondaryButton"));
+                foreach(var card in _vm.PlanningProjects)empty.Children.Add(AsyncAction(card.Name+" · "+card.ProjectId,()=>_vm.OpenPlanningProjectCommand.ExecuteAsync(card),"SecondaryButton"));
                 DocumentContent.Children.Add(empty); return;
             }
             if (preview)
@@ -514,6 +516,11 @@ public partial class PlanningCenterView : UserControl
             metadata.Foreground = Brush("TextSecondaryBrush"); row.Children.Add(metadata);
             var actions = new WrapPanel(); actions.Children.Add(AsyncAction("打开文件", () => { _vm.OpenAttachment(file); return Task.CompletedTask; }));
             actions.Children.Add(Action("打开所在位置", () => _vm.RevealAttachment(file)));
+            if(file.ProjectCopy is null)
+            {
+                var dependency=_vm.ExternalDependencies.SingleOrDefault(x=>x.Id==file.Id&&x.Kind=="attachment");
+                if(dependency is not null){actions.Children.Add(AsyncAction("定位新文件（继续外链）",()=>_vm.LocateExternalAsync(dependency,false)));actions.Children.Add(AsyncAction("导入项目副本",()=>_vm.LocateExternalAsync(dependency,true)));}
+            }
             actions.Children.Add(AsyncAction("移除关联", async () => { await _vm.RemoveAttachmentAsync(file); Render(); })); row.Children.Add(actions); DocumentContent.Children.Add(row);
         }
     }
@@ -567,6 +574,7 @@ public partial class PlanningCenterView : UserControl
     {
         if (_vm is null || sender is not Button button) return;
         var menu = new ContextMenu { PlacementTarget = button }; menu.SetResourceReference(StyleProperty, "PixelTart.Menu.Context");
+        var reconnect=MenuEntry("缺失外链与手动重连","IconPlanning");reconnect.Click+=(_,_)=>ShowExternalReconnect();menu.Items.Add(reconnect);
         var start = MenuEntry("开始拍摄", "IconCameraTether"); start.Command = _vm.EnterTetherCommand; menu.Items.Add(start);
         var calendar = MenuEntry("查看关联档期", "IconCalendar"); calendar.Command = _vm.OpenCalendarCommand; menu.Items.Add(calendar);
         var currentImport=MenuEntry("导入项目包到当前应用","IconPlanning");currentImport.Command=_vm.ImportCurrentProjectPackageCommand;menu.Items.Add(currentImport);

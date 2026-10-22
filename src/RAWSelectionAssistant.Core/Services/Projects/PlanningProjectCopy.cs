@@ -24,9 +24,13 @@ public static class PlanningProjectCopyStorage
     public static string Relative(PlanningProjectCopy copy) => $"project-copies/{copy.ProjectId:N}/{copy.DocumentId:N}/{copy.Kind}/{copy.ReferenceId:N}/{copy.Sha256.ToLowerInvariant()}{Extension(copy.OriginalPath)}";
     public static PlanningDocument Bind(PlanningDocument document, string root) => document with
     {
-        References = document.References.Select(r => r with { ProjectCopy = BindCopy(r.ProjectCopy, document, r.Source.ReferenceId, "reference", r.Source.ExternalReference, root) }).ToArray(),
-        Attachments = document.Attachments.Select(a => a with { ProjectCopy = BindCopy(a.ProjectCopy, document, a.Id, "attachment", a.Path, root) }).ToArray()
+        References = document.References.Select(r => r with { ReconnectedFile = BindExternal(r.ReconnectedFile,r.Source.ReferenceId,"reference",r.Source.ExternalReference), ProjectCopy = BindCopy(r.ProjectCopy, document, r.Source.ReferenceId, "reference", r.Source.ExternalReference, root) }).ToArray(),
+        Attachments = document.Attachments.Select(a => a with { ReconnectedFile = BindExternal(a.ReconnectedFile,a.Id,"attachment",a.Path), ProjectCopy = BindCopy(a.ProjectCopy, document, a.Id, "attachment", a.Path, root) }).ToArray()
     };
+    private static PlanningExternalFile? BindExternal(PlanningExternalFile? file,Guid id,string kind,string? original)
+    {
+        if(file is not null){if(original is null)throw new InvalidDataException("重连无原路径");file.Validate(id,kind,original);}return file;
+    }
     private static PlanningProjectCopy? BindCopy(PlanningProjectCopy? copy, PlanningDocument document, Guid reference, string kind, string? original, string root)
     {
         if (copy is null) return null;
@@ -60,7 +64,7 @@ public static class PlanningProjectCopyStorage
         { return "项目自有副本不可用：" + error.Message + "（未回退外链）"; }
     }
     internal static async Task<PlanningProjectCopy> CopyAsync(string root, Guid project, Guid document, Guid reference, string kind, string source,
-        ICollection<string> created, CancellationToken token, IProgress<long>? progress = null)
+        ICollection<string> created, CancellationToken token, IProgress<long>? progress = null, string? recordedOriginal = null)
     {
         source = Path.GetFullPath(source);
         // Reject streams/devices and all existing reparse ancestors before opening the source.
@@ -95,7 +99,7 @@ public static class PlanningProjectCopyStorage
             }
             token.ThrowIfCancellationRequested(); PlanningImageStorage.RejectLinks(Path.GetPathRoot(source)!, source);
             if (input.Length != length || File.GetLastWriteTimeUtc(source) != modified) throw new InvalidDataException("复制期间来源已变化。");
-            var copy = new PlanningProjectCopy(project, document, reference, kind, source, "", digest, length, DateTimeOffset.UtcNow) { StorageRoot = Path.GetFullPath(root) };
+            var copy = new PlanningProjectCopy(project, document, reference, kind, recordedOriginal ?? source, "", digest, length, DateTimeOffset.UtcNow) { StorageRoot = Path.GetFullPath(root) };
             copy = copy with { RelativePath = Relative(copy) }; copy.Validate();
             PlanningCopyRecovery.Save(journal,ownership with{Copy=copy});
             var target = Resolve(copy); Directory.CreateDirectory(Path.GetDirectoryName(target)!); PlanningImageStorage.RejectLinks(root, target);

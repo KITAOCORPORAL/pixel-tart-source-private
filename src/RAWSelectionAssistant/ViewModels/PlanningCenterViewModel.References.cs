@@ -47,6 +47,11 @@ public sealed partial class PlanningCenterViewModel
         foreach (var reference in references)
         {
             var path = (ImportedPackageRoot is not null || IsPackageImported) && reference.ProjectCopy is null ? null : reference.Source.ExternalReference;
+            if (reference.ReconnectedFile is {} reconnected && reference.Source.ExternalReference is {} original)
+            {
+                try { path=PlanningExternalFile.ResolveVerified(reconnected,reference.Source.ReferenceId,"reference",original); }
+                catch(Exception error)when(PackageError(error)){path=null;}
+            }
             var owned = reference.ProjectCopy;
             System.Windows.Media.Imaging.BitmapSource? ownedBitmap = null;
             if (owned is not null)
@@ -79,7 +84,7 @@ public sealed partial class PlanningCenterViewModel
                 }
                 catch (Exception error) when (error is IOException or NotSupportedException or System.Runtime.InteropServices.COMException or UnauthorizedAccessException) { }
             }
-            AllProjectReferences.Add(new(reference, owned is not null ? available && ownedBitmap is not null && File.Exists(cache) ? cache : null : File.Exists(cache) ? cache : available ? path : null, available) { OriginalPath = available ? path : null });
+            AllProjectReferences.Add(new(reference, owned is not null ? available && ownedBitmap is not null && File.Exists(cache) ? cache : null : available ? File.Exists(cache) ? cache : path : null, available) { OriginalPath = available ? path : null });
         }
         OnPropertyChanged(nameof(HeroReferences)); PresentationChanged();
     }
@@ -135,6 +140,9 @@ public sealed partial class PlanningCenterViewModel
     public async Task<string?> ResolveOriginalAsync(PlanningReferenceItem item)
     {
         if (item.Link.ProjectCopy is {} copy) { try { PlanningProjectCopyStorage.ReadVerified(copy); return PlanningProjectCopyStorage.Resolve(copy); } catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException) { return null; } }
+        if(item.Link.ReconnectedFile is {} reconnected && item.Link.Source.ExternalReference is {} original)
+        { try { return PlanningExternalFile.ResolveVerified(reconnected,item.Id,"reference",original); } catch(Exception e)when(PackageError(e)){return null;} }
+        if(IsPackageImported || ImportedPackageRoot is not null)return null;
         return item.Link.Source.ExternalReference ?? (ReferencePathResolver is null ? null : await ReferencePathResolver(item.Link.Source));
     }
     public async Task UseReferenceForColorAsync(PlanningReferenceItem item)

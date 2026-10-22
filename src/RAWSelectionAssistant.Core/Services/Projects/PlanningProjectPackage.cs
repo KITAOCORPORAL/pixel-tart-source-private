@@ -27,6 +27,11 @@ public static class PlanningProjectPackage
         foreach(var id in shots.Shots.Where(s=>s.ReferenceLookId is not null).Select(s=>s.ReferenceLookId).Distinct())rows.Add($"镜头色彩方案 {id}：方案工作区未包含");
         rows.Add("账本、付款、财务附件、在线服务、素材库原件、色彩方案/画布工作区未包含；不宣称完整跨机便携。");return rows.Distinct().ToArray();
     }
+    internal static PlanningDocument RequireLocalReconnect(PlanningDocument document) => document with
+    {
+        References=document.References.Select(x=>x with{ReconnectedFile=null}).ToArray(),
+        Attachments=document.Attachments.Select(x=>x with{ReconnectedFile=null}).ToArray()
+    };
     private static string Hash(byte[] bytes)=>Convert.ToHexString(SHA256.HashData(bytes));
     private static string Safe(string path)
     {
@@ -78,7 +83,7 @@ public static class PlanningProjectPackage
         try
         {
             foreach(var item in checkedPackage.Data.Where(p=>p.Key.StartsWith("planning/",StringComparison.Ordinal))){token.ThrowIfCancellationRequested();var path=Path.Combine(stage,item.Key);PlanningImageStorage.RejectLinks(stage,path);Directory.CreateDirectory(Path.GetDirectoryName(path)!);await File.WriteAllBytesAsync(path,item.Value,token).ConfigureAwait(false);progress?.Report(item.Value.Length);}
-            var planning=new PlanningProjectStore(Path.Combine(stage,"planning"));await planning.SaveAsync(checkedPackage.State,token).ConfigureAwait(false);var shots=new ProjectShotStore(Path.Combine(stage,"shots"));await shots.SaveCatalogAsync(checkedPackage.Shots,token).ConfigureAwait(false);
+            var planning=new PlanningProjectStore(Path.Combine(stage,"planning"));await planning.SaveAsync(checkedPackage.State with{Document=RequireLocalReconnect(checkedPackage.State.Document!)},token).ConfigureAwait(false);var shots=new ProjectShotStore(Path.Combine(stage,"shots"));await shots.SaveCatalogAsync(checkedPackage.Shots,token).ConfigureAwait(false);
             var loaded=await planning.LoadAsync(m.ProjectId,token).ConfigureAwait(false);foreach(var copy in loaded.Document!.References.Select(r=>r.ProjectCopy).Concat(loaded.Document.Attachments.Select(a=>a.ProjectCopy)).OfType<PlanningProjectCopy>())PlanningProjectCopyStorage.ReadVerified(copy);
             foreach(var image in loaded.Document.Package?.RichLayout?.Images??[])PlanningImageStorage.Resolve(image);
             await File.WriteAllTextAsync(Path.Combine(stage,"imported-manifest.json"),JsonSerializer.Serialize(m,Json),token).ConfigureAwait(false);
