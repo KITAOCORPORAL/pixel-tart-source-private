@@ -50,3 +50,7 @@ Prepared从未安装，不检查/删除任何最终目标；Installing/FilesInst
 ## 最终包独立读回
 
 完整诊断ZIP 320文件、75549919字节，SHA256 d566827070699f4541a9cc6181de4eb8690680c7c30c158f8a9bdbad0c4554d8，逐文件读回一致；不含UserData/数据库。ZIP内报告是打包时快照，外部报告后附自身身份避免循环hash。
+
+## 推送读回
+
+产品591db7856921502eca252ae9877a73faa5e290c4与独立证据ae582cc79d22e7657207a4c136c08d693d7dec30已正常推送本轮feature分支，独立ls-remote确认LOCAL_HEAD=REMOTE_HEAD且干净。PUSH_READBACK.json保留该次读回；后续只封存文档，不改变产品或发布组件。
