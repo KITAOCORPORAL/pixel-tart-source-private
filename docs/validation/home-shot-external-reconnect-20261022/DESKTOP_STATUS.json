@@ -1,0 +1,23 @@
+{
+  "sourceSha": "c80b5e719dce8fab73f27c0c3e5b48c80c597c3a",
+  "status": "BLOCKED",
+  "tool": "native @oai/sky",
+  "pid": 33292,
+  "performed": [
+    "Start compiled Windows EXE in new isolated root",
+    "Observed diagnostic title and tutorial",
+    "Click Exit tutorial",
+    "One activate-window recovery attempt"
+  ],
+  "blocking": "Selected-target capture showed unrelated foreground app after tutorial exit, still wrong after activation; stopped input. No unrelated screenshot persisted.",
+  "notExecuted": [
+    "shot package native import",
+    "native locate/confirm",
+    "native save",
+    "normal UI exit",
+    "new process reopen",
+    "native preview"
+  ],
+  "shutdown": "CloseMainWindow on own process returned true; confirmed exited. Not a completed UI loop.",
+  "viewModelIsNotDesktopAcceptance": true
+}

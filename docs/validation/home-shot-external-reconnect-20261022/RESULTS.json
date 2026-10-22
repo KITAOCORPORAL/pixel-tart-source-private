@@ -1,0 +1,1210 @@
+[
+  {
+    "suite": "core",
+    "name": "RelativePathsRequireBoundRootIdentityHashAndRejectTraversal",
+    "outcome": "Passed",
+    "duration": "00:00:00.0668248",
+    "id": "10417b2b-6d1b-8fa9-950d-36e53da86650",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "BatchMissingLockedOversizedAndCancelledSourcesLeaveNoReferencesOrHalfFiles",
+    "outcome": "Passed",
+    "duration": "00:00:00.2905396",
+    "id": "10bd1eed-84e0-8cb3-91b9-2b5a534256f1",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "InvalidSelectionIsClampedInsteadOfThrowing",
+    "outcome": "Passed",
+    "duration": "00:00:00.0058477",
+    "id": "1a881a4a-35e3-823f-bc46-9ed21ab665ff",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ValidatedPackageImportsIntoFreshRootReopensCopiesAndNeverOverwritesIdOrSameName",
+    "outcome": "Passed",
+    "duration": "00:00:00.5143626",
+    "id": "1a9330f8-f287-89db-ab1f-39faedf1ef6c",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "SummaryLinksAndCurrentShotPersistAcrossStoreReopen",
+    "outcome": "Passed",
+    "duration": "00:00:00.0244186",
+    "id": "16ccbc7d-9f9f-824c-92d0-eac075277da6",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "RepeatedExternalApprovalChangedCandidateAndCancellationPreserveExistingState",
+    "outcome": "Passed",
+    "duration": "00:00:00.0789893",
+    "id": "186fc4d7-1d08-85f1-8428-f942a6b4a5b6",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ProductionStoresKeepCrossSectionIdsCancellationAndMovedRoot",
+    "outcome": "Passed",
+    "duration": "00:00:00.2444071",
+    "id": "1da01d6f-7601-8b53-a818-48955bca15f4",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+    "outcome": "Failed",
+    "duration": "00:00:00.2451305",
+    "id": "1c05f000-b69a-87d4-9997-f4cdd79f8c4d",
+    "message": "测试方法 RAWSelectionAssistant.Tests.PlanningProjectPackageTests。RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'N:\\pixart\\Guangjing-ShotReconnect-20261022\\final\\tests-core\\temp\\RAWSelectionAssistant.Tests\\e03fd05d8b1c4e0d96262b6be8e74846\\26f70753937f489fab4285bae20ed601\\planning\\project-copies\\26f70753937f489fab4285bae20ed601\\ae5fdda56eba185eebe78bf467f82bca\\.staging\\c3f162943d894d379da0629dd708603c.part'."
+  },
+  {
+    "suite": "core",
+    "name": "ExplicitReconnectKeepsReferencePartitionAndOriginalAndPersistsCopy",
+    "outcome": "Passed",
+    "duration": "00:00:00.2557481",
+    "id": "129c8a42-963d-8788-8be0-54abdefa595c",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ColumnsArchiveWithoutDroppingValuesAndInvalidSchemaFailsClosed",
+    "outcome": "Passed",
+    "duration": "00:00:00.1064515",
+    "id": "1d68f877-736a-8e2f-bcd3-876fba8dc1db",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "LegacyVersionOneJsonDoesNotRequireDocumentAndShotEnumsAreUnchanged",
+    "outcome": "Passed",
+    "duration": "00:00:00.0820626",
+    "id": "136c2ded-3eef-87c0-af99-e7c979af090a",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "TamperedV1AndArchivedDatabaseIdentityAreRejectedWithoutChangingCurrentFiles",
+    "outcome": "Passed",
+    "duration": "00:00:00.4753540",
+    "id": "1370e9dd-90e4-8f8e-a978-4b8a920334f0",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ForeignProjectDocumentOrShotFailsClosed",
+    "outcome": "Passed",
+    "duration": "00:00:00.0038678",
+    "id": "19930dc0-30ad-8a96-91e5-f8f557148864",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "TamperMissingDuplicateTraversalAndUnsupportedVersionAreRejectedBeforeAnyImportWrites",
+    "outcome": "Passed",
+    "duration": "00:00:00.2478884",
+    "id": "1184cf75-e986-8950-b00c-367dbd4bc993",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "OwnedCopiesKeepOrderAndIdentityAcrossReferenceMoodboardAndLighting",
+    "outcome": "Passed",
+    "duration": "00:00:00.0048216",
+    "id": "14112e28-f1e3-8fe1-bfe5-e83844055f40",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "HeadingsListsAndQuotesApplyToCompleteSelectedLines",
+    "outcome": "Passed",
+    "duration": "00:00:00.0020247",
+    "id": "1d57fdbc-bf58-869c-b048-e65e76fd306c",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "SharedDocumentAndTwoShotIdsUseOneApprovalWithoutRewritingEitherShot",
+    "outcome": "Passed",
+    "duration": "00:00:00.1697165",
+    "id": "1120c21c-8d2d-8188-94ac-8a1b26f48b1a",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ExistingFileWithoutDatabaseRecordIsConflictAndArchivedIdentityCannotBeOverwritten",
+    "outcome": "Passed",
+    "duration": "00:00:00.4554220",
+    "id": "1100550f-9bec-8ca0-b6fc-b92b25ff899a",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "Planning200ShotsAnd1000ReferencesSmokeTest",
+    "outcome": "Passed",
+    "duration": "00:00:00.0571821",
+    "id": "15a6ffac-0214-8e3b-ba87-2743f88195a2",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ContextUsesSharedColorResolverAndCarriesReferencesWithoutBitmaps",
+    "outcome": "Passed",
+    "duration": "00:00:00.0339250",
+    "id": "184204ad-7c7a-8b9d-9286-5cb10c946e9c",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "InventoryIsReadOnlyProtectsDraftRecoveryAndUnknownFiles",
+    "outcome": "Passed",
+    "duration": "00:00:00.0519608",
+    "id": "1a5f48df-f116-8c36-bb5f-368550b8ab65",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ReparseEscapeIsRefusedWithoutOpeningForeignCopy",
+    "outcome": "Passed",
+    "duration": "00:00:00.0643610",
+    "id": "1722cde4-36f3-8127-9900-3f11cfc205ee",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "PreparedNeverDeletesFinalTargetsAndActiveChangedOrWrongRootReceiptsArePreserved",
+    "outcome": "Passed",
+    "duration": "00:00:00.4974498",
+    "id": "1c3aca4a-3cc3-859a-9ba7-e5ebdaadc649",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ExternalReceiptRejectsLaterChangesInsteadOfFallingBack",
+    "outcome": "Passed",
+    "duration": "00:00:00.0331066",
+    "id": "1f78ee7d-d9c2-86f9-b657-7c0cc1bc91e8",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput",
+    "outcome": "Passed",
+    "duration": "00:00:00.1689812",
+    "id": "10a7a991-5c34-8b21-869c-712a3709a196",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "PackageRoundtripRetainsShotCopyButDropsMachineExternalApproval",
+    "outcome": "Passed",
+    "duration": "00:00:00.3546433",
+    "id": "14df7798-0aa7-87b2-87e3-07605206bbf2",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "BoldAndItalicWrapSelectionAndBoldCanToggleOff",
+    "outcome": "Passed",
+    "duration": "00:00:00.0008107",
+    "id": "1a38156a-1ede-8a03-9a05-986e1b0720c0",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "MissingOrTamperedOwnedCopyNeverFallsBackToExistingOriginalAndLegacyRemainsExternal",
+    "outcome": "Passed",
+    "duration": "00:00:00.2391218",
+    "id": "13c52319-c571-8839-af62-d81a79ebecd5",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "LegacyReadDoesNotWriteAndIdentityMigrationIsStableAndLossless",
+    "outcome": "Passed",
+    "duration": "00:00:00.1286901",
+    "id": "120d8982-33f0-85c2-af0f-9dbc5d60cba8",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "SaveFailureRollsBackCopiesAndPreservesOldPlanningBytes",
+    "outcome": "Passed",
+    "duration": "00:00:00.2041056",
+    "id": "15dab8df-443a-8332-8640-25a082f56ba7",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ChangedCandidateCancellationWrongTypeAndIdentityConflictAreNonDestructive",
+    "outcome": "Passed",
+    "duration": "00:00:00.1360052",
+    "id": "13f3020f-0781-8203-93fb-14fd38800fad",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem",
+    "outcome": "Failed",
+    "duration": "00:00:00.0176308",
+    "id": "1337f53d-2813-87c7-a4f9-b7079bcb51e8",
+    "message": "测试方法 RAWSelectionAssistant.Tests.PlanningProjectCopyTests。SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'N:\\pixart\\Guangjing-ShotReconnect-20261022\\final\\tests-core\\temp\\RAWSelectionAssistant.Tests\\4c3889c10b2b4fa7b2f53649a613a0e5\\alias'."
+  },
+  {
+    "suite": "core",
+    "name": "DuplicateCaptureRelationsRemainIdempotentAtScale",
+    "outcome": "Passed",
+    "duration": "00:00:00.3130867",
+    "id": "1712adcf-0d33-8209-8097-cec3f116a765",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "CopiesKeepIdentityNamesHashesAndRebindAfterEntireSyntheticDirectoryMoves",
+    "outcome": "Passed",
+    "duration": "00:00:00.3082090",
+    "id": "11f3ca29-6084-8e15-977a-ddbe728bca62",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles",
+    "outcome": "Passed",
+    "duration": "00:00:00.0006493",
+    "id": "1a2de947-5d68-8641-9e86-226f8ccf3844",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "PlanningOperationsNeverModifyOrDeleteReferencedSource",
+    "outcome": "Passed",
+    "duration": "00:00:00.0333419",
+    "id": "18116b70-d022-87cf-b8ed-8a4056a161e4",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "UnownedExternalAndUnmatchedLibraryReferencesNeverBecomeOwnedImages",
+    "outcome": "Passed",
+    "duration": "00:00:00.0012150",
+    "id": "1b344300-2249-810c-9614-f7faa7b1c5b3",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "SummaryUsesShotOrderAndCurrentSectionReferenceClassification",
+    "outcome": "Passed",
+    "duration": "00:00:00.0334816",
+    "id": "10ded0f0-3b4d-8495-aa48-4e22db73e757",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "MoodboardAndPlanningReferencesSupportLibraryAndExternalSources",
+    "outcome": "Passed",
+    "duration": "00:00:00.0096107",
+    "id": "146d0f91-021f-8a24-8730-1ff92b6c9306",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "SaveFailureRollsBackOnlyNewCopyAndRetainsPriorReceiptAndUnrelatedCopy",
+    "outcome": "Passed",
+    "duration": "00:00:00.1976203",
+    "id": "1278a71b-9ce9-8613-8b52-d1aed805745b",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "Settings_RoundTripPlanningAndOnlineSelectionNavigation",
+    "outcome": "Passed",
+    "duration": "00:00:00.2186212",
+    "id": "1c322073-4d33-8fff-bd30-720d2772e6cc",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ReferenceFormatChangeIsRejectedBeforeCopyPathCanMislabelBytes",
+    "outcome": "Passed",
+    "duration": "00:00:00.0233326",
+    "id": "14635407-13a9-8845-a4a2-fbdb332a305d",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "CancelAndDatabaseDiskFailureRollbackOnlyNewFilesAndPreserveOldProjects",
+    "outcome": "Passed",
+    "duration": "00:00:00.6315538",
+    "id": "17584ce3-3141-881d-8ee9-242a659d2e6d",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ShotOnlyExternalAndOwnedCopyPersistWithoutChangingShotBytesOrDocumentReferences",
+    "outcome": "Passed",
+    "duration": "00:00:00.2006295",
+    "id": "170b4ade-f97f-888f-b10a-039e8f2a7584",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "CancelExportAndMissingCopyCannotPublishPartialPackage",
+    "outcome": "Passed",
+    "duration": "00:00:00.2184970",
+    "id": "10c804f6-4bb1-8337-9af5-56bf64b5e153",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ReparseSelectedFileIsNeverFollowed",
+    "outcome": "Failed",
+    "duration": "00:00:00.0349617",
+    "id": "16b4c4d9-7aed-864e-83ca-f1d933272a4b",
+    "message": "测试方法 RAWSelectionAssistant.Tests.PlanningShotExternalReconnectTests。ReparseSelectedFileIsNeverFollowed 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'N:\\pixart\\Guangjing-ShotReconnect-20261022\\final\\tests-core\\temp\\RAWSelectionAssistant.Tests\\27847e72c4a543d8b0dc3d2c6efff5d5\\alias.png'."
+  },
+  {
+    "suite": "core",
+    "name": "DuplicateImportsAreIdempotentSameNamesDoNotCollideAndChangedSourceDoesNotReplaceSnapshot",
+    "outcome": "Passed",
+    "duration": "00:00:00.4555658",
+    "id": "1a3f4768-6af8-8cbd-9115-ce6268fec1f1",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "RecoveryOnlyCleansExpiredReceiptOwnedPartAndAuditsOrphanWithoutDeletingValidOrUnknown",
+    "outcome": "Passed",
+    "duration": "00:00:00.3309041",
+    "id": "19815622-e27c-88df-84cd-dbfcf99b46bc",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "EmptyStageIvProjectMigratesWithoutCentralDatabaseMutation",
+    "outcome": "Passed",
+    "duration": "00:00:00.0036325",
+    "id": "11151a27-7c95-8c72-b610-5170c6f7170d",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ParallelDuplicateImportsShareOneIdentityAndCannotOverwriteAnotherSource",
+    "outcome": "Passed",
+    "duration": "00:00:00.5994413",
+    "id": "1f286a93-6a45-888a-82b3-aff56a7f17f7",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "OwnedInterruptedStageRecoversAndUnknownStageChangedFilesAndActiveOwnerRemain",
+    "outcome": "Passed",
+    "duration": "00:00:00.6107764",
+    "id": "157f2c06-3736-8991-b133-e24a54a8b323",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "FrozenCaptureContextIsRaceSafeAndRelationsAreIdempotent",
+    "outcome": "Passed",
+    "duration": "00:00:00.0418227",
+    "id": "1449880d-d9a0-8a61-830f-8a411183e9f0",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "CancelValidationAndExtractionLeaveNoVisibleProjectAndPreserveSource",
+    "outcome": "Passed",
+    "duration": "00:00:00.2595076",
+    "id": "16c20f4a-bd50-8060-a4bb-59ad68dcdb4f",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "CrashDraftRoundTripsAndClearsOnlyAfterExplicitCommit",
+    "outcome": "Passed",
+    "duration": "00:00:00.0997720",
+    "id": "1386f1c0-ff44-8777-af53-17672063cae3",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ForgedRelativeIdentityAndCrossDocumentReceiptFailClosed",
+    "outcome": "Passed",
+    "duration": "00:00:00.1754830",
+    "id": "1236a989-c905-872e-92e0-98fe58a3deba",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "SameIdDifferentSourceOrChangedShotSetRejectsBeforeWrites",
+    "outcome": "Passed",
+    "duration": "00:00:00.0539166",
+    "id": "1b336af2-53b6-88de-8b75-377717d11402",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "ImportAddsOrdinaryRepositoryRecordAfterFilesAndKeepsSameNamesSeparate",
+    "outcome": "Passed",
+    "duration": "00:00:00.6064926",
+    "id": "1e78a76a-15ac-8800-8432-a9331ff35b3c",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "OldNotesBecomeActionOnceAndBatchRetainsUnknownCatalogAndShotFields",
+    "outcome": "Passed",
+    "duration": "00:00:00.1094819",
+    "id": "14fd5626-9a4e-838c-a000-1f1ae00dee2d",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "DocumentAutosaveMergesWithoutOverwritingExecutionAndLegacyLinks",
+    "outcome": "Passed",
+    "duration": "00:00:00.1046806",
+    "id": "1bef8f5a-ca92-8819-ba85-e8147b00bf62",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "LegacyExactIdentityFallbackMigratesOnlyAfterHashValidation",
+    "outcome": "Passed",
+    "duration": "00:00:00.0451521",
+    "id": "1ab6e379-a2b3-8144-9ada-4070f97f3a65",
+    "message": null
+  },
+  {
+    "suite": "core",
+    "name": "EmptySelectionProducesStableCaretAndDividerDoesNotDeleteAdjacentText",
+    "outcome": "Passed",
+    "duration": "00:00:00.0058669",
+    "id": "13c90a14-ebbe-8e18-9b42-a1c093e49489",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "SharedCrossCellNumberingIsRejectedInsteadOfRestarted",
+    "outcome": "Passed",
+    "duration": "00:00:00.0233949",
+    "id": "1c044297-d9d3-893a-8e35-8095001597dc",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "KeyboardGuardProtectsTextAndImeAndSupportsFlushPreviewSearch",
+    "outcome": "Passed",
+    "duration": "00:00:00.0002599",
+    "id": "1b14c720-625c-8172-93ac-e05583b30038",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "EmptySectionsAndUiSavePathSuccessCancelAndFailureAreExplicit",
+    "outcome": "Passed",
+    "duration": "00:00:00.1350004",
+    "id": "1108197b-06e4-8ece-869f-58bcbacaa899",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "DocumentPresentationUsesReadingWidthUniformImagesAndOptInEditing",
+    "outcome": "Passed",
+    "duration": "00:00:00.0002786",
+    "id": "1abffe50-adae-8587-b4f3-a43b9f35479b",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "InsertImageUsesCellCaretUndoAndReopen",
+    "outcome": "Passed",
+    "duration": "00:00:00.1955707",
+    "id": "1b655f0e-12e4-8f9a-8a76-11b29fbc7ab9",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ContinuePlanning_DoesNotCompleteUntilReplacementEditorIsReady",
+    "outcome": "Passed",
+    "duration": "00:00:00.0043202",
+    "id": "1238a9a1-8243-8b9f-a5bc-ca6b50e1879c",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ImportMissingReconnectSaveRecreateAndFifteenSectionSummary",
+    "outcome": "Passed",
+    "duration": "00:00:01.2599183",
+    "id": "1806bf52-ef55-8d2b-b39b-24dae4af9a64",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ShellFlushCapturesUncommittedRowAndInvalidTextRemainsRecoverable",
+    "outcome": "Passed",
+    "duration": "00:00:00.0384824",
+    "id": "125dfbfe-c57d-8b5c-beda-0b27f10cb9b6",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "Workbench_At1280KeepsAllFourQuickToolsVisible",
+    "outcome": "Passed",
+    "duration": "00:00:00.0019239",
+    "id": "121de261-e341-8891-a6f0-247cb929b461",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "CurrentApplicationUserImportOrdinaryListEditSaveRestartOpenAndSummary",
+    "outcome": "Passed",
+    "duration": "00:00:00.5142249",
+    "id": "16c5210f-6120-8ca2-b984-af1ce4b77f25",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "EditableRowsCancelAndRoundTripReorderCopyArchiveAndColumns",
+    "outcome": "Passed",
+    "duration": "00:00:00.1523102",
+    "id": "1515a484-9ef3-831e-bd39-51d1e324dd59",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "FailedSaveRetainsFileIdentityAndAllowsRetryWithoutFalseSuccess",
+    "outcome": "Passed",
+    "duration": "00:00:00.1431318",
+    "id": "1cd04abd-c6d0-819e-9b07-9ede3ef205d3",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "OptionalProjectAllowsMultipleCanvasesAndPlanningRemainsNullable",
+    "outcome": "Passed",
+    "duration": "00:00:00.0502889",
+    "id": "1b1ea8bc-73c1-8bf9-919b-b0a041bff634",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "LegacyAbsoluteRootMoveAndLockedMigrationReplayNeverReplaceWrongImage",
+    "outcome": "Passed",
+    "duration": "00:00:00.1587163",
+    "id": "186f73d9-e361-8ef2-a2f2-8589ef0b0451",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "CellListButtonsEditUndoAndVerticalMergeKeepsImagePixels",
+    "outcome": "Passed",
+    "duration": "00:00:00.1050079",
+    "id": "1790ab2a-8e5e-8e14-9e10-b905300d357b",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "AllSectionsOffscreenMatrixAndSyntheticSnapshots",
+    "outcome": "Passed",
+    "duration": "00:00:07.1531029",
+    "id": "1cee3bfc-c488-8605-99e7-b34afc58b18b",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "HashFailuresCreateNoCopyAndLockedSaveRetainsRecovery",
+    "outcome": "Passed",
+    "duration": "00:00:00.0744549",
+    "id": "18049df2-c1d9-8ab5-b64a-95c342a26bc2",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "TableImageKeepsAspectRatioAndFitsCellWithoutChangingSavedDimensions",
+    "outcome": "Passed",
+    "duration": "00:00:00.0829672",
+    "id": "17cbde23-20d6-878e-90ba-db8a20e83853",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "BookingContinuePlanning_HasNoAsyncVoidEventSubscription",
+    "outcome": "Passed",
+    "duration": "00:00:00.0006087",
+    "id": "198fef12-8892-8dc0-b24d-07f29bf715a0",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "RectangleRejectSplitAndNativeMergeDocxRoundtrip",
+    "outcome": "Passed",
+    "duration": "00:00:00.0379097",
+    "id": "161fbd74-2596-8a00-b16d-25a591dacb3a",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "RealRootMoveKeepsRepeatedPicturesCellCaptionsModesHistoryPaginationAndDocx",
+    "outcome": "Passed",
+    "duration": "00:00:00.6946055",
+    "id": "108b8223-6341-89fa-a0fb-6a3c770fe1ec",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "CellPlacementImageUndoRedoKeepsSidecarAndPosition",
+    "outcome": "Passed",
+    "duration": "00:00:00.0609640",
+    "id": "13aa5cc3-2c3b-82a1-af3c-2f5676bb0de8",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ExistingDestinationWithDeleteSharingReaderCanBeReplaced",
+    "outcome": "Passed",
+    "duration": "00:00:00.0290919",
+    "id": "1054862f-d922-8237-85eb-11be03d4630f",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "A4LetterAndA3LandscapeConvertActualSizeMarginsAndMessage",
+    "outcome": "Passed",
+    "duration": "00:00:00.0260943",
+    "id": "188d5765-c109-8603-b329-688ffb01c20d",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "NewBookingLateAtNightKeepsEndDateAfterStart",
+    "outcome": "Passed",
+    "duration": "00:00:00.0535388",
+    "id": "1d1c19f5-7a4b-89cc-b704-586a3c6c3889",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "RealResolverProjectCollectionPickerCancelAndImageEvidence",
+    "outcome": "Passed",
+    "duration": "00:00:00.2042156",
+    "id": "173cf378-69d3-8f84-b95d-89719207f492",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "TwoColumnDocumentWorkspaceReplacesPermanentShotInspector",
+    "outcome": "Passed",
+    "duration": "00:00:00.0003411",
+    "id": "1ee1d550-b47d-8c0d-bdd8-abdd82fc8d12",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ConcurrentRowAndInspectorChangesMergeOnlyEditedFields",
+    "outcome": "Passed",
+    "duration": "00:00:00.0370983",
+    "id": "1ec02309-e4d5-81ef-abf4-fa666e40b25a",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ParagraphKeepNextRoundTripsWithoutForcingUnrelatedParagraphs",
+    "outcome": "Passed",
+    "duration": "00:00:00.0123545",
+    "id": "196f4f4a-15be-8ac0-8717-02ec9ac30455",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "FifteenSectionsCreateEditLinkRecoverMoveAndReopenOneSyntheticPlan",
+    "outcome": "Passed",
+    "duration": "00:00:04.1940425",
+    "id": "1ec88101-d05f-81a4-964c-be4e8e5be352",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "RepeatHeaderAllocatesSeparateRowsAndRejectsVerticalMerge",
+    "outcome": "Passed",
+    "duration": "00:00:02.6403787",
+    "id": "13401a04-d83e-85dc-95b3-e1436b9ba96a",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ResourcesRoundTripUndoArchiveDuplicateAndReadOnlyLedger",
+    "outcome": "Passed",
+    "duration": "00:00:00.1023469",
+    "id": "158d3377-b311-8d0a-ae7c-8585f3d5701f",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "CurrentSectionReferenceClassificationAndFilterUseCurrentNames (\"服化道与道具\",\"造型\")",
+    "outcome": "Passed",
+    "duration": "00:00:00.0431430",
+    "id": "116860ed-f3ff-8319-a836-a49f5487052c",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "OwnedImageWithoutRichInsertionIsExplicitlyRetainedInDocumentContent",
+    "outcome": "Passed",
+    "duration": "00:00:00.0372785",
+    "id": "1251dd22-dcde-86bb-bd74-ea317c601b7a",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ExclusiveReadDeniedCopyIsExplainedWithoutReadingAnotherFile",
+    "outcome": "Passed",
+    "duration": "00:00:00.0344706",
+    "id": "1655f098-2259-8513-9043-957e6ba1e01e",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "XamlControlsHaveChineseAccessibleNamesAndThemeResources",
+    "outcome": "Passed",
+    "duration": "00:00:00.0007729",
+    "id": "17986b0b-2167-8b95-9bc9-b5062f238e18",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "CurrentSectionReferenceClassificationAndFilterUseCurrentNames (\"灯位图\",\"灯光\")",
+    "outcome": "Passed",
+    "duration": "00:00:00.0478439",
+    "id": "14e11255-bdb2-8792-99d3-4e26e661b7d3",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ModesKeepIdentityContentAndSourcesWithSingleUndoAndFailureGate",
+    "outcome": "Passed",
+    "duration": "00:00:00.1272242",
+    "id": "197cfdb9-e6a0-88c2-aec6-e427bb874a6f",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "NestedListDocxUsesRealLevelsAndPreservesHierarchy",
+    "outcome": "Passed",
+    "duration": "00:00:00.0184655",
+    "id": "15c24d21-f84f-8cf1-8579-ad02c9a1c744",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "MainWindowCanLoadPlanningResourcesTests",
+    "outcome": "Passed",
+    "duration": "00:00:00.0005222",
+    "id": "1838f1c0-89bb-892b-9bc0-e3d6e3719615",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ShotFrozenStatusReferenceAndInspectorOrderSurviveReopen",
+    "outcome": "Passed",
+    "duration": "00:00:00.2478277",
+    "id": "112c0f8a-511a-8a26-9c56-a2e40e453039",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "MissingOwnedImageIsDeclaredAtItsPositionAndFailedSaveCannotReplaceDestination",
+    "outcome": "Passed",
+    "duration": "00:00:00.0691599",
+    "id": "109c8085-f755-8eab-bcaf-35cebe665adc",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "CaseWholeWordAndAdjacentMatchesAreDeterministic",
+    "outcome": "Passed",
+    "duration": "00:00:00.0012810",
+    "id": "18737b9e-03fa-8bb3-9fb3-7de559a8ab95",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "HeaderFooterPersistenceUndoNativeFieldsAndPdfShareContract",
+    "outcome": "Passed",
+    "duration": "00:00:00.0887529",
+    "id": "1416a64d-3035-8feb-9ec8-aa62740d35ca",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "InvalidDraftAndIoFailureBlockSwitchAndRecoverAcrossNewWorkspace",
+    "outcome": "Passed",
+    "duration": "00:00:00.0866764",
+    "id": "193a23b7-7d74-83ba-b7e9-e9799a6732d6",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "UndoRedoAndDiskRecoveryCopiesAreListedButNeverDeleted",
+    "outcome": "Passed",
+    "duration": "00:00:00.1506047",
+    "id": "1652bf82-7694-8339-87c0-b2774f5e9069",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "OffscreenCompletedStatesSeparateFromPhysicalDpi",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0019124",
+    "id": "1ac869c9-7600-8ff3-a472-69a4038bd4f5",
+    "message": "Assert.Inconclusive 失败。Offscreen evidence opt-in required."
+  },
+  {
+    "suite": "wpf",
+    "name": "PlanningFilterToggleStyleTargetTypeTests",
+    "outcome": "Passed",
+    "duration": "00:00:00.0005177",
+    "id": "1c8a6bdd-75d3-843e-a8ad-1ed06cf039da",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "UserCommandsExportImportFreshRootReopenResolveCopiesAndSummary",
+    "outcome": "Passed",
+    "duration": "00:00:00.5178868",
+    "id": "1439155f-295c-84ba-afb7-503601595a3b",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "SharedIdDisplayedOnceConflictDisabledAndCancelOrChangedConfirmationDoesNotWrite",
+    "outcome": "Passed",
+    "duration": "00:00:00.1624519",
+    "id": "1c5d3c47-a754-8a05-8a26-ccdb6455fbc9",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "LoadingOverlayTracksActualLoadAndClearsAfterFailure",
+    "outcome": "Passed",
+    "duration": "00:00:00.0948632",
+    "id": "161218b2-ebc9-8b37-a5d7-5285c715f822",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "TooTallLaterRowAndNestedTableAreRejectedWithoutChangingDestination",
+    "outcome": "Passed",
+    "duration": "00:00:00.0686976",
+    "id": "151b532c-f2bf-8afe-916e-2eb04c1f64e6",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "PrimaryEntryAndSharedTetherBridgeRemain",
+    "outcome": "Passed",
+    "duration": "00:00:00.0007900",
+    "id": "17221a94-3c23-84e0-b5b5-a94fd5c4ae24",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "LightCoordinateCommitCancelAndUndoUseExistingResourceIdentity",
+    "outcome": "Passed",
+    "duration": "00:00:00.1088537",
+    "id": "13c4b7b3-c768-828b-9869-d3a2dfe2c581",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "DeclaredRtfDocxPdfScopeKeepsImageTableHeaderAndSourceUnchanged",
+    "outcome": "Passed",
+    "duration": "00:00:00.3550117",
+    "id": "1c561149-0634-8b0e-aa5e-8815f7228f1c",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0071937",
+    "id": "180e1356-c0f8-8fd2-ba20-fbed3a09e968",
+    "message": "Assert.Inconclusive 失败。Opt-in production peer evidence is not enabled in this bounded regression run."
+  },
+  {
+    "suite": "wpf",
+    "name": "RichSyntheticContinuousFlowAndOffscreenEvidence",
+    "outcome": "Passed",
+    "duration": "00:00:03.0223832",
+    "id": "16230649-f99b-8e00-a15b-68f4a440faa7",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "MultipleOwnedImagesLongBodyRepeatedReferencesMissingCopyAndReopenRemainConsistent",
+    "outcome": "Passed",
+    "duration": "00:00:01.1456152",
+    "id": "161c0c39-21ad-886d-98de-6a4964585f8f",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "RichPageViewerUsesRealPaginatorAndDoesNotMutateContent",
+    "outcome": "Passed",
+    "duration": "00:00:00.0439725",
+    "id": "108b43ec-2fd0-8a86-8146-d646254d4c8a",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "LedgerReadFailureIsExplicitAndUiSummaryActionDoesNotReplaceOldExport",
+    "outcome": "Passed",
+    "duration": "00:00:00.0408239",
+    "id": "142298b4-9847-87fa-bf93-5d0528f4f440",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "WidthMemoryDrawerRestoreAndInspectorWritesUseRealSaveGate",
+    "outcome": "Passed",
+    "duration": "00:00:00.2398676",
+    "id": "1e083019-be45-8213-8181-9d0b01e7441d",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "NativeImagesAndListsRoundTripMergedCellsAndRtf",
+    "outcome": "Passed",
+    "duration": "00:00:00.1392288",
+    "id": "115bfe37-7366-80ac-a7df-930f9beb955f",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "LockedReadOnlyAndAclDeniedPreserveOriginalAndCleanTemporary",
+    "outcome": "Passed",
+    "duration": "00:00:00.0087208",
+    "id": "1c7772f9-e67e-8502-ae4e-73a39894b7f1",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "QuickCreate_ContinuePlanningAwaitsReplacementAndKeepsOneBookingId",
+    "outcome": "Passed",
+    "duration": "00:00:00.1417201",
+    "id": "13f3f894-ce68-8c79-a2ff-6af08459e56c",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "FullPlanningReview_RejectsMissingDocumentsViewModel",
+    "outcome": "Passed",
+    "duration": "00:00:00.0005090",
+    "id": "185a4c7c-c4ca-80aa-b6be-52ef81c65b01",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "StoryboardImagesListsPaginatePrintPdfAndSaveReopen",
+    "outcome": "Passed",
+    "duration": "00:00:03.8632007",
+    "id": "15e3c5d7-a5f2-8fb1-ad78-3d7396c7f88c",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "RerenderCapturesRichDraftBeforeRetiringEditor",
+    "outcome": "Passed",
+    "duration": "00:00:00.0768027",
+    "id": "193042f1-d748-8f7b-8b98-2033ea453fba",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "PrintPipelineSerializesSharedPaginatorToXps",
+    "outcome": "Passed",
+    "duration": "00:00:02.5222876",
+    "id": "16b63992-d19b-8e10-826d-c0db5c44e255",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "CorruptCopyAndUnsupportedImageAreDisclosedWithoutSourceFallback",
+    "outcome": "Passed",
+    "duration": "00:00:00.1295777",
+    "id": "1042ec3f-c0bd-8dd7-879d-9c9e9fdcb653",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "RemovedStructureStaysRemovedAndStaleReviewCannotReplaceEdits",
+    "outcome": "Passed",
+    "duration": "00:00:00.0818742",
+    "id": "1a6af4fa-b0ea-8e39-a4fd-64d4068b7a95",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ResourceDialogCancelFailureAndRetryUseRealDataWithoutFakeEntries",
+    "outcome": "Passed",
+    "duration": "00:00:00.1546828",
+    "id": "1459e7dc-3b4f-83e7-8bb8-3aa4ce37eb1a",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "TwentyFourShotsSearchPagesCancelFailUndoReopenAndDocx",
+    "outcome": "Passed",
+    "duration": "00:00:01.4453224",
+    "id": "11d7f5c4-7ff2-82d1-b4d1-5dd539be5122",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "CancelExternalChoiceAndMissingImportDoNotAddReferences",
+    "outcome": "Passed",
+    "duration": "00:00:00.0304417",
+    "id": "15da66c1-1e0c-8e67-9e80-5c17f366c175",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "WorkCalendar_QuickCreateContinuesAsFullPlanningForSameBooking",
+    "outcome": "Passed",
+    "duration": "00:00:00.0454381",
+    "id": "11d1dd02-10d8-87e9-9725-2931eab15abf",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "TrayCopySurvivesClearOfflineReopenAndDocxWithoutJsonImagePayload",
+    "outcome": "Passed",
+    "duration": "00:00:00.3562014",
+    "id": "1b65ff4d-adae-8d26-a025-b1a950d30a33",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "RowCancelAndInvalidDraftRecoveryPreserveOtherFields",
+    "outcome": "Passed",
+    "duration": "00:00:00.0490035",
+    "id": "1f691a59-968d-81f2-8b79-9168aed452aa",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "CrossRunChineseNestedListCellAndSingleUndo",
+    "outcome": "Passed",
+    "duration": "00:00:00.0295443",
+    "id": "112fa2eb-82b8-866e-8cee-672015c24283",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "UserChoiceSaveReopenMoveReopenAndSummaryUseOnlyOwnedCopies",
+    "outcome": "Passed",
+    "duration": "00:00:00.8966547",
+    "id": "1a7cb1bd-3abf-8506-baa5-e261f18f49b5",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ContentModulesRetainChineseOrderAndAppendCustom",
+    "outcome": "Passed",
+    "duration": "00:00:00.0001687",
+    "id": "1ffc1da7-685b-8eb0-acac-69120136810b",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "FinalPresentationUsesSharedIconsSingleRowNavigationAndHighQualityPdf",
+    "outcome": "Passed",
+    "duration": "00:00:00.0011643",
+    "id": "16d345a7-5d22-8009-966e-221acd979164",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "AllFifteenSectionsExportOneDocxAndSurviveSaveReopenWithoutMutatingReferences",
+    "outcome": "Passed",
+    "duration": "00:00:00.3222533",
+    "id": "17836c9e-d489-8d60-ade6-83dcf46b06c8",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "UnsupportedCellBlocksRejectBeforeReplacingExistingFile",
+    "outcome": "Passed",
+    "duration": "00:00:00.0058814",
+    "id": "150db8e9-c270-85b3-b691-c5e9fdee327d",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "DocxConfirmDiffRecoveryUndoAndRepeatedImportAreReal",
+    "outcome": "Passed",
+    "duration": "00:00:00.0778278",
+    "id": "1cdedab0-0006-85c8-b8fd-5498f68ad208",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ShotOnlyEntryReconnectRestartPreviewAndPackagePermissionReset",
+    "outcome": "Passed",
+    "duration": "00:00:00.5501145",
+    "id": "1c38e4f6-fedf-862f-804f-1a3c42399568",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ChangedUnsupportedOversizedAndForeignImagesAreExplainedNotSubstituted",
+    "outcome": "Passed",
+    "duration": "00:00:00.0663133",
+    "id": "193717bb-1746-81c7-b0d7-7088a780cd94",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "FailedImportRetainsNewDraftAndRecoveryThenRetryUndo",
+    "outcome": "Passed",
+    "duration": "00:00:00.1995594",
+    "id": "1d0a4a73-02cb-87ec-ae58-3628c236279e",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop",
+    "outcome": "Passed",
+    "duration": "00:00:00.6447049",
+    "id": "13728109-4d15-85f1-aef2-dfbf6b079204",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "PickerMultiInsertAndExternalDocxCarryPicturesWithoutLibraryIdentity",
+    "outcome": "Passed",
+    "duration": "00:00:00.2006400",
+    "id": "1d571bd7-db9e-8b15-9606-e2bdfd96b61a",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "SourceSwitchDuringResolveAndCopyWriteFailureDoNotMutateDocument",
+    "outcome": "Passed",
+    "duration": "00:00:00.0307085",
+    "id": "140bbfe2-ae13-8f90-8e81-e08ea6ca9cad",
+    "message": null
+  },
+  {
+    "suite": "wpf",
+    "name": "ExportDeclinesAProjectChangeDuringLedgerReadAndKeepsExistingFile",
+    "outcome": "Passed",
+    "duration": "00:00:00.0259266",
+    "id": "1433d390-f26e-81b3-82ea-abce8356b83c",
+    "message": null
+  }
+]
