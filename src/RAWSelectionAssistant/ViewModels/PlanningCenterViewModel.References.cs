@@ -66,7 +66,7 @@ public sealed partial class PlanningCenterViewModel
             }
             if (ImportedPackageRoot is null && !IsPackageImported && owned is null && path is null && ReferencePathResolver is not null) path = await ReferencePathResolver(reference.Source);
             var available = !string.IsNullOrWhiteSpace(path) && File.Exists(path);
-            var key = owned is not null ? owned.ReferenceId.ToString("N") + "/" + owned.Sha256 : reference.Source.LibraryId is Guid library ? $"{library:N}/{reference.Source.AssetId:N}" : reference.Source.ExternalReference ?? reference.Source.ReferenceId.ToString();
+            var key = reference.ReconnectedFile is {} verified ? verified.ReferenceId.ToString("N")+"/"+verified.Sha256 : owned is not null ? owned.ReferenceId.ToString("N") + "/" + owned.Sha256 : reference.Source.LibraryId is Guid library ? $"{library:N}/{reference.Source.AssetId:N}" : reference.Source.ExternalReference ?? reference.Source.ReferenceId.ToString();
             var cache = Path.Combine(AppDataPaths.CacheDirectory, "PlanningPreviews", Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(key))) + ".jpg");
             if (available && (owned is null || ownedBitmap is not null) && (!File.Exists(cache) || File.GetLastWriteTimeUtc(path!) > File.GetLastWriteTimeUtc(cache)))
             {

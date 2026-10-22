@@ -17,8 +17,8 @@ public partial class PlanningCenterView
             if(item.CanReconnect)
             {
                 var actions=new WrapPanel();
-                actions.Children.Add(AsyncAction("定位新文件（继续外链）",async()=>{await _vm.LocateExternalAsync(item,false);ShowExternalReconnect();}));
-                actions.Children.Add(AsyncAction("导入项目副本",async()=>{await _vm.LocateExternalAsync(item,true);ShowExternalReconnect();}));row.Children.Add(actions);
+                actions.Children.Add(AsyncAction("定位新文件（继续外链）",async()=>{await LocateExternalFromWindowAsync(item,false);}));
+                actions.Children.Add(AsyncAction("导入项目副本",async()=>{await LocateExternalFromWindowAsync(item,true);}));row.Children.Add(actions);
             }
             panel.Children.Add(row);
         }
@@ -28,6 +28,14 @@ public partial class PlanningCenterView
         {previous.Content=new ScrollViewer{VerticalScrollBarVisibility=ScrollBarVisibility.Auto,Content=panel};return;}
         var window=new Window{Title="缺失外链与手动重连",Owner=Window.GetWindow(this),Width=880,Height=740,Background=Brush("SurfacePrimaryBrush"),Content=new ScrollViewer{VerticalScrollBarVisibility=ScrollBarVisibility.Auto,Content=panel},WindowStartupLocation=WindowStartupLocation.CenterOwner};
         _externalReconnectWindow=window;window.Show();
+    }
+    private async Task LocateExternalFromWindowAsync(PlanningExternalDependency item,bool importCopy)
+    {
+        // IDialogService owns native pickers/confirmation on MainWindow. A modeless owned
+        // window must not obscure that modal or remain interactive above its owner.
+        var window=_externalReconnectWindow;window?.Hide();
+        try{if(_vm is not null)await _vm.LocateExternalAsync(item,importCopy);}
+        finally{if(window is not null){window.Show();ShowExternalReconnect();window.Activate();}}
     }
     private Window? _externalReconnectWindow;
 }
