@@ -9,6 +9,7 @@ public sealed partial class PlanningProjectStore
         await UpdateAsync(projectId, async state =>
             {
                 var document = (state.Document ?? new PlanningDocument()).EnsureIdentity(projectId);
+                LastRecovery=PlanningCopyRecovery.Recover(StorageRoot,projectId,document);
                 var refs = document.References.ToList(); var files = document.Attachments.ToList();
                 foreach (var requested in references)
                 {

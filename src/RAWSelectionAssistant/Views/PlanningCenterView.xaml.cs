@@ -569,6 +569,10 @@ public partial class PlanningCenterView : UserControl
         var menu = new ContextMenu { PlacementTarget = button }; menu.SetResourceReference(StyleProperty, "PixelTart.Menu.Context");
         var start = MenuEntry("开始拍摄", "IconCameraTether"); start.Command = _vm.EnterTetherCommand; menu.Items.Add(start);
         var calendar = MenuEntry("查看关联档期", "IconCalendar"); calendar.Command = _vm.OpenCalendarCommand; menu.Items.Add(calendar);
+        var cancelPackage=MenuEntry("取消正在进行的项目包任务","IconPlanning");cancelPackage.Command=_vm.CancelProjectPackageCommand;menu.Items.Add(cancelPackage);
+        var recovery=MenuEntry("检查本项目中断暂存（保守恢复）","IconPlanning");recovery.Command=_vm.ShowCopyRecoveryCommand;menu.Items.Add(recovery);
+        var exportPackage=MenuEntry("导出策划项目包（含已验证自有副本）","IconPlanning");exportPackage.Command=_vm.ExportProjectPackageCommand;menu.Items.Add(exportPackage);
+        var importPackage=MenuEntry("导入策划项目包到独立数据根","IconPlanning");importPackage.Command=_vm.ImportProjectPackageCommand;menu.Items.Add(importPackage);
         var summary = MenuEntry("导出15区汇总 DOCX", "IconPlanning"); summary.Click += async (_,_) => await ExportPlanningSummaryFromViewAsync(); menu.Items.Add(summary);
         var overview = MenuEntry("返回策划列表", "IconPlanning"); overview.Click += async (_, _) => { if (await FlushDocumentAsync()) await _vm.ShowOverviewCommand.ExecuteAsync(null); }; menu.Items.Add(overview); menu.IsOpen = true;
     }

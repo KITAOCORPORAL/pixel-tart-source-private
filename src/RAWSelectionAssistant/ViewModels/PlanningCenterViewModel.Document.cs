@@ -106,6 +106,7 @@ public sealed partial class PlanningCenterViewModel
 
     private void InitializeDocument()
     {
+        InitializeProjectPackages();
         FlushPlanningCommand = new AsyncRelayCommand(_ => FlushAsync());
         PreviewDocumentCommand = new AsyncRelayCommand(async _ => { if (await FlushAsync()) IsPreviewMode = !IsPreviewMode; });
         EditDocumentCommand = new RelayCommand(_ => IsDocumentEditing = !IsDocumentEditing);

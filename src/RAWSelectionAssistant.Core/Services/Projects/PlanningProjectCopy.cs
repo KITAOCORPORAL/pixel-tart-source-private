@@ -73,6 +73,7 @@ public static class PlanningProjectCopyStorage
         var staging = Path.Combine(root, "project-copies", project.ToString("N"), document.ToString("N"), ".staging");
         PlanningImageStorage.RejectLinks(root, staging); Directory.CreateDirectory(staging); PlanningImageStorage.RejectLinks(root, staging);
         var temporary = Path.Combine(staging, Guid.NewGuid().ToString("N") + ".part");
+        var journal=temporary+".owner.json";var ownership=PlanningCopyRecovery.New(project,document,temporary);PlanningCopyRecovery.Save(journal,ownership);var completed=false;
         try
         {
             string digest;
@@ -96,12 +97,13 @@ public static class PlanningProjectCopyStorage
             if (input.Length != length || File.GetLastWriteTimeUtc(source) != modified) throw new InvalidDataException("复制期间来源已变化。");
             var copy = new PlanningProjectCopy(project, document, reference, kind, source, "", digest, length, DateTimeOffset.UtcNow) { StorageRoot = Path.GetFullPath(root) };
             copy = copy with { RelativePath = Relative(copy) }; copy.Validate();
+            PlanningCopyRecovery.Save(journal,ownership with{Copy=copy});
             var target = Resolve(copy); Directory.CreateDirectory(Path.GetDirectoryName(target)!); PlanningImageStorage.RejectLinks(root, target);
             PlanningImageStorage.RejectLinks(root, temporary);
             if (File.Exists(target)) ReadVerified(copy);
             else { File.Move(temporary, target, false); created.Add(target); }
-            ReadVerified(copy); return copy;
+            ReadVerified(copy); completed=true; return copy;
         }
-        finally { if (File.Exists(temporary)) File.Delete(temporary); }
+        finally { if (File.Exists(temporary)) File.Delete(temporary);if(!completed&&File.Exists(journal))File.Delete(journal); }
     }
 }

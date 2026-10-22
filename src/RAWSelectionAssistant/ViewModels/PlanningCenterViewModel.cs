@@ -15,15 +15,15 @@ namespace RAWSelectionAssistant.ViewModels;
 
 public sealed partial class PlanningCenterViewModel : ObservableObject
 {
-    private readonly IProjectRepository _projects;
-    private readonly IShootBookingService _bookings;
+    private IProjectRepository _projects;
+    private IShootBookingService _bookings;
     private readonly IDialogService _dialogs;
-    private readonly ProjectShotStore _shots;
-    private readonly PlanningProjectStore _planning;
-    private readonly ProjectVisualReferenceStore _visuals;
-    private readonly ReferenceLookStore _looks;
-    private readonly CanvasDocumentStore _canvases;
-    private readonly IInspirationTrayService? _inspiration;
+    private ProjectShotStore _shots;
+    private PlanningProjectStore _planning;
+    private ProjectVisualReferenceStore _visuals;
+    private ReferenceLookStore _looks;
+    private CanvasDocumentStore _canvases;
+    private IInspirationTrayService? _inspiration;
     private PhotoProjectRecord? _project;
     private ShootBooking? _booking;
     private PlanningProjectState? _state;

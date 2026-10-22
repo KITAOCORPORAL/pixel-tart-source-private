@@ -75,6 +75,7 @@ public sealed record PlanningProjectState(Guid ProjectId, Guid? BookingId = null
 
 public sealed partial class PlanningProjectStore(string directory)
 {
+    public IReadOnlyList<PlanningRecoveryItem> LastRecovery {get;private set;}=[];
     public string StorageRoot => Path.GetFullPath(directory);
     public bool Exists(Guid projectId) => File.Exists(FilePath(projectId));
     public Task UpdateDocumentAsync(Guid projectId, PlanningDocument document, PlanningSummary summary, CancellationToken token = default) =>
@@ -119,7 +120,7 @@ public sealed partial class PlanningProjectStore(string directory)
     {
         if (projectId == Guid.Empty) throw new ArgumentException("A project is required.", nameof(projectId));
         var path = FilePath(projectId); var gate = Gates.GetOrAdd(path, _ => new(1, 1)); await gate.WaitAsync(token).ConfigureAwait(false);
-        try { return await ReadAsync(projectId, path, token).ConfigureAwait(false); } finally { gate.Release(); }
+        try { var state=await ReadAsync(projectId,path,token).ConfigureAwait(false);if(state.Document is {} doc)LastRecovery=PlanningCopyRecovery.Recover(StorageRoot,projectId,doc);return state; } finally { gate.Release(); }
     }
 
     public Task SaveAsync(PlanningProjectState value, CancellationToken token = default) => UpdateAsync(value.ProjectId, _ => value, token);
