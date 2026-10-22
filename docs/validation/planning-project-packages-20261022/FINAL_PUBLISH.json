@@ -1,0 +1,24 @@
+{
+  "sourceSha": "9040e320d871f05c1013da9ed45bb04d48257616",
+  "exe": "D:/AI AGENT/.dotnet/dotnet.exe",
+  "args": [
+    "publish",
+    "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+    "-c",
+    "Release",
+    "-r",
+    "win-x64",
+    "--self-contained",
+    "true",
+    "--no-restore",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:SourceRevisionId=9040e320d871f05c1013da9ed45bb04d48257616",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "-o",
+    "E:/Kitao-Deliveries/planning-project-packages-20261022/Planning-ProjectPackages-Diagnostic-win-x64/app"
+  ],
+  "pid": 3544,
+  "exitCode": 0,
+  "seconds": 27.666534185409546
+}

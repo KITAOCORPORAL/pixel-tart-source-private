@@ -1,0 +1,1407 @@
+[
+  {
+    "path": "NEW_CORE/000/results.trx",
+    "bytes": 7339,
+    "sha256": "daeef9a741fbef63a87e27290735bf52a24d87ce81797d0b174a0088416aed46"
+  },
+  {
+    "path": "NEW_CORE/000/runsettings.xml",
+    "bytes": 888,
+    "sha256": "7b36ed38179f6ed9597e0b36639c022a629f000d53edb732e17268390cf7fe41"
+  },
+  {
+    "path": "NEW_CORE/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "NEW_CORE/000/stdout.log",
+    "bytes": 393,
+    "sha256": "8b61216aaf823e4cceb51e4fe6b4ab5c201a81c182f7be4250ca1b53777d151e"
+  },
+  {
+    "path": "NEW_CORE/discovery.json",
+    "bytes": 837998,
+    "sha256": "97a4e90720b769b22b1065d253cd0516244de8d852ecd649d288bc60ad0000cb"
+  },
+  {
+    "path": "NEW_CORE/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "NEW_CORE/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "NEW_CORE/summary.json",
+    "bytes": 6006,
+    "sha256": "0ea2ae493ee3955d68faa7af76263a31253d3c5bc4e7b2f0923843ab19bf96ae"
+  },
+  {
+    "path": "NEW_WPF/000/results.trx",
+    "bytes": 3908,
+    "sha256": "5b3c00b5eabb1c37525e6765e029ce4f351c4a29b96dd99a576c88964fdfe39f"
+  },
+  {
+    "path": "NEW_WPF/000/runsettings.xml",
+    "bytes": 412,
+    "sha256": "684e84ff96f532d7084f68a14bf4d1ab18bc4ac565f5dc7128393d74359d9de8"
+  },
+  {
+    "path": "NEW_WPF/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "NEW_WPF/000/stdout.log",
+    "bytes": 1481,
+    "sha256": "03b02dc7bdbe1f66fbb3bdccfe648c0464a21a37e267242e75c5407cbe998d9e"
+  },
+  {
+    "path": "NEW_WPF/discovery.json",
+    "bytes": 944360,
+    "sha256": "75a627d6ebcbe4efee0c508a7fe6d9ec6880fa2f31eb8cfba2ff4377abd628a7"
+  },
+  {
+    "path": "NEW_WPF/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "NEW_WPF/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "NEW_WPF/summary.json",
+    "bytes": 4182,
+    "sha256": "5a37ec4e240ac98ad49cef3715134dc1e8ddba33e7818d9b81ef642d9785d008"
+  },
+  {
+    "path": "FIXED_CORE/000/results.trx",
+    "bytes": 7339,
+    "sha256": "cfe17254188564c869447b5826a21485c134ab4f7fb4bb62946c2f9db58d6e79"
+  },
+  {
+    "path": "FIXED_CORE/000/runsettings.xml",
+    "bytes": 890,
+    "sha256": "9a8b380d46f3a80a41ca72d279f3ddd7caa85e02e5307321dedbc0f2fe2dc0ee"
+  },
+  {
+    "path": "FIXED_CORE/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FIXED_CORE/000/stdout.log",
+    "bytes": 395,
+    "sha256": "93151750e445227e65067767877bc333f3fb51c2fb6fe3510c70e8e0a00e9e1c"
+  },
+  {
+    "path": "FIXED_CORE/discovery.json",
+    "bytes": 837998,
+    "sha256": "97a4e90720b769b22b1065d253cd0516244de8d852ecd649d288bc60ad0000cb"
+  },
+  {
+    "path": "FIXED_CORE/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FIXED_CORE/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FIXED_CORE/summary.json",
+    "bytes": 6016,
+    "sha256": "06b58d175ea50f3ac9607bc5827079f11e6e66216f106b462a6849113f682641"
+  },
+  {
+    "path": "FIXED_WPF/000/results.trx",
+    "bytes": 2730,
+    "sha256": "ef03daac00b4e5c85483a047a1ee99ea0e5bf2078614d86f5403a50603ccd8c5"
+  },
+  {
+    "path": "FIXED_WPF/000/runsettings.xml",
+    "bytes": 414,
+    "sha256": "094bcb1ef56c58a87f53be3a7a83fc17badc5e65c5942fa6016e283ac17071d2"
+  },
+  {
+    "path": "FIXED_WPF/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FIXED_WPF/000/stdout.log",
+    "bytes": 397,
+    "sha256": "ecc741dd4891ee8d5fe86562c69c47cfb9da96d8b041d893466fe25dc90b06a9"
+  },
+  {
+    "path": "FIXED_WPF/discovery.json",
+    "bytes": 944360,
+    "sha256": "75a627d6ebcbe4efee0c508a7fe6d9ec6880fa2f31eb8cfba2ff4377abd628a7"
+  },
+  {
+    "path": "FIXED_WPF/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FIXED_WPF/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FIXED_WPF/summary.json",
+    "bytes": 3118,
+    "sha256": "2bd217fa232e11c94ff9f44059754f5049a7bac297f80c7a3df2fa2c1bd8a50d"
+  },
+  {
+    "path": "EDGE_CORE/000/results.trx",
+    "bytes": 8749,
+    "sha256": "cf8c00ce61f473870d9dc0f715c57fe689fac5f9a421b117369250e9ca0a9ba6"
+  },
+  {
+    "path": "EDGE_CORE/000/runsettings.xml",
+    "bytes": 1029,
+    "sha256": "37aef39dfb18adf9860e1d1a34840006f7ab3d63e8866d9777a89f81c2776c78"
+  },
+  {
+    "path": "EDGE_CORE/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "EDGE_CORE/000/stdout.log",
+    "bytes": 394,
+    "sha256": "5bbd0a1ec31025d697c652051e0a2aa504b2e24c79f1a375a9a11e19c8fcb239"
+  },
+  {
+    "path": "EDGE_CORE/discovery.json",
+    "bytes": 838512,
+    "sha256": "f7d0a0ae7ca34303796aec890ca1c48c69d0b36e4b67e5c32f74b307158e4abb"
+  },
+  {
+    "path": "EDGE_CORE/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "EDGE_CORE/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "EDGE_CORE/summary.json",
+    "bytes": 6936,
+    "sha256": "2aae41266fc26457461e529d2b8c03886bd24695fd9b2acfd5d1bd03a49bbc84"
+  },
+  {
+    "path": "EDGE_WPF/000/results.trx",
+    "bytes": 2730,
+    "sha256": "571ded522ccfe334f5396d722b853a1cc41b9d700375513f6fb8e73b0f9c9c32"
+  },
+  {
+    "path": "EDGE_WPF/000/runsettings.xml",
+    "bytes": 413,
+    "sha256": "0e0026c2848223e109977e6dca9b603fe83fe8cd3f4e794632e4c10846aa2721"
+  },
+  {
+    "path": "EDGE_WPF/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "EDGE_WPF/000/stdout.log",
+    "bytes": 396,
+    "sha256": "6bdf8918a5dac1f141d5b1779e4c7a57b778c47f550361a7a75e0f36c4de150c"
+  },
+  {
+    "path": "EDGE_WPF/discovery.json",
+    "bytes": 944360,
+    "sha256": "75a627d6ebcbe4efee0c508a7fe6d9ec6880fa2f31eb8cfba2ff4377abd628a7"
+  },
+  {
+    "path": "EDGE_WPF/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "EDGE_WPF/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "EDGE_WPF/summary.json",
+    "bytes": 3112,
+    "sha256": "b6be20d2cb2c1c49dfade04f66e1f33d354f1b22864334745aae1381b4822783"
+  },
+  {
+    "path": "READY_CORE/000/results.trx",
+    "bytes": 8749,
+    "sha256": "10f275f47def3601f1b483dcebcf4a57bdb77899d6c3f7b2024de03f028e4843"
+  },
+  {
+    "path": "READY_CORE/000/runsettings.xml",
+    "bytes": 1030,
+    "sha256": "1ab8273b84e385f68bfaab43ea6dba9439bd4186f5655bb1e6986bd5d3752bab"
+  },
+  {
+    "path": "READY_CORE/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "READY_CORE/000/stdout.log",
+    "bytes": 395,
+    "sha256": "714886eb4965c0e7cd2f69ad2315425be6befa3c04c869b7662fe69c6f1dbc33"
+  },
+  {
+    "path": "READY_CORE/discovery.json",
+    "bytes": 838512,
+    "sha256": "f7d0a0ae7ca34303796aec890ca1c48c69d0b36e4b67e5c32f74b307158e4abb"
+  },
+  {
+    "path": "READY_CORE/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "READY_CORE/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "READY_CORE/summary.json",
+    "bytes": 6940,
+    "sha256": "7d85fc5f1943b328d0ec478f11410831b44135ba7c9f489d7e813a9974e64479"
+  },
+  {
+    "path": "READY_WPF/000/results.trx",
+    "bytes": 2730,
+    "sha256": "dbe32e484d6d47313d21303210b4781d6cd9cb4c468afe02150f7d8620a1cf8b"
+  },
+  {
+    "path": "READY_WPF/000/runsettings.xml",
+    "bytes": 414,
+    "sha256": "86fcf0237a10af67bea717942923487640d6dcabc26ab8851037efa3b0f9f7be"
+  },
+  {
+    "path": "READY_WPF/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "READY_WPF/000/stdout.log",
+    "bytes": 397,
+    "sha256": "7e225124c8128e5870007af9a8e4955d87dcd6d099e6d8ca292b03d8f31fbf42"
+  },
+  {
+    "path": "READY_WPF/discovery.json",
+    "bytes": 944360,
+    "sha256": "75a627d6ebcbe4efee0c508a7fe6d9ec6880fa2f31eb8cfba2ff4377abd628a7"
+  },
+  {
+    "path": "READY_WPF/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "READY_WPF/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "READY_WPF/summary.json",
+    "bytes": 3117,
+    "sha256": "ed0d6f89c3e18f8af1ff4039dfcdea5656accd32e3bc2a9206d8db1aae74b02e"
+  },
+  {
+    "path": "SEAL_CORE/000/results.trx",
+    "bytes": 10126,
+    "sha256": "4e12471ba04e05f9bc8ff924f98fca1adea1f6a5b109d2d13bd3f49109b205ee"
+  },
+  {
+    "path": "SEAL_CORE/000/runsettings.xml",
+    "bytes": 1158,
+    "sha256": "c87d022c311e1a24390bc3861263f353ec896e33ae976c291236fadc67ccce52"
+  },
+  {
+    "path": "SEAL_CORE/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "SEAL_CORE/000/stdout.log",
+    "bytes": 394,
+    "sha256": "11e1e0d5d1b1dcb1b0037e072471b8a10eb22fd8eb2470391e1d3e90b8e1f511"
+  },
+  {
+    "path": "SEAL_CORE/discovery.json",
+    "bytes": 839004,
+    "sha256": "d8fc11ffe1518458d3a417f180d7c3e8fc19d1b1bd153e830762a4045228c952"
+  },
+  {
+    "path": "SEAL_CORE/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "SEAL_CORE/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "SEAL_CORE/summary.json",
+    "bytes": 7816,
+    "sha256": "39a917b061c3ab2ad6cace5bb86d2aa4a32ac7efaad53ae225ad4dd429792f42"
+  },
+  {
+    "path": "SEAL_WPF/000/results.trx",
+    "bytes": 2730,
+    "sha256": "257d64d2dfa0c86397fe94ff4ca0d557d66c39dc3aa44473a052a92013101813"
+  },
+  {
+    "path": "SEAL_WPF/000/runsettings.xml",
+    "bytes": 413,
+    "sha256": "e57c5cba43821b2ff254567d966847fb42fcd5f94503454eb565964e4bfbb68b"
+  },
+  {
+    "path": "SEAL_WPF/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "SEAL_WPF/000/stdout.log",
+    "bytes": 396,
+    "sha256": "0541c1e2f06ff7bdead81a523fd56a1e2f1de723e682836e1fa193b50a43c144"
+  },
+  {
+    "path": "SEAL_WPF/discovery.json",
+    "bytes": 944360,
+    "sha256": "75a627d6ebcbe4efee0c508a7fe6d9ec6880fa2f31eb8cfba2ff4377abd628a7"
+  },
+  {
+    "path": "SEAL_WPF/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "SEAL_WPF/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "SEAL_WPF/summary.json",
+    "bytes": 3113,
+    "sha256": "8466a71f9be07ef821ca65e84435cad420f0041ef21757a59a72c859d44acc18"
+  },
+  {
+    "path": "FINAL_NEW_CORE/000/results.trx",
+    "bytes": 10126,
+    "sha256": "77dfb692e8b76b04182d333027fa70ddb256ca1b1882d48e271e58e5f115391b"
+  },
+  {
+    "path": "FINAL_NEW_CORE/000/runsettings.xml",
+    "bytes": 1163,
+    "sha256": "8567fa6d75bf7be0b3a854ed17572627996819c94ffd256625f212b40f96bea1"
+  },
+  {
+    "path": "FINAL_NEW_CORE/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_NEW_CORE/000/stdout.log",
+    "bytes": 399,
+    "sha256": "6df73d08a8dd189e23e97e7ccc9158e2b62887b6b511f17ab50adbb42d7142b0"
+  },
+  {
+    "path": "FINAL_NEW_CORE/discovery.json",
+    "bytes": 839004,
+    "sha256": "d8fc11ffe1518458d3a417f180d7c3e8fc19d1b1bd153e830762a4045228c952"
+  },
+  {
+    "path": "FINAL_NEW_CORE/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_NEW_CORE/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_NEW_CORE/summary.json",
+    "bytes": 7836,
+    "sha256": "e0e7934e2b75d9b7020caa468c1cffe1fc30be34f09c0381cded391e46ce4507"
+  },
+  {
+    "path": "FINAL_NEW_WPF/000/results.trx",
+    "bytes": 2730,
+    "sha256": "9f46196f91929c56f83e6e3af466a0b5366513bc2e4024d4a60e22e412ebeabd"
+  },
+  {
+    "path": "FINAL_NEW_WPF/000/runsettings.xml",
+    "bytes": 418,
+    "sha256": "654ee9662b33a2d326461f6b90c2e54353ddb20cb4e66cf76439b8be64b22c2c"
+  },
+  {
+    "path": "FINAL_NEW_WPF/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_NEW_WPF/000/stdout.log",
+    "bytes": 401,
+    "sha256": "80e886c46c6a0dc616d1896265fa2cf54f83b067caed0e32759dcc9e2c2de69d"
+  },
+  {
+    "path": "FINAL_NEW_WPF/discovery.json",
+    "bytes": 944360,
+    "sha256": "75a627d6ebcbe4efee0c508a7fe6d9ec6880fa2f31eb8cfba2ff4377abd628a7"
+  },
+  {
+    "path": "FINAL_NEW_WPF/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_NEW_WPF/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_NEW_WPF/summary.json",
+    "bytes": 3132,
+    "sha256": "9d61f2758a199228c0d9b55e5b5abd2b3d232ff74f35125e38e48fe6b71af359"
+  },
+  {
+    "path": "FINAL_CORE/000/results.trx",
+    "bytes": 2916,
+    "sha256": "20b51bab61fb75ef3acbc6a1320e3f88a65decc863250f5d684b15a72cee778e"
+  },
+  {
+    "path": "FINAL_CORE/000/runsettings.xml",
+    "bytes": 405,
+    "sha256": "70a96374524dddb9094589b008715fe2bc9cf46dfcdbcadf60b1636c1f00f750"
+  },
+  {
+    "path": "FINAL_CORE/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/000/stdout.log",
+    "bytes": 398,
+    "sha256": "95e979625071fcfb14ddc4326c1f7b49be49eb120004848354404edfbe2d64d4"
+  },
+  {
+    "path": "FINAL_CORE/001/results.trx",
+    "bytes": 5734,
+    "sha256": "bdecb5f88bca151696419e90ae1a6065fc204dce5710398f7ee12e9aa5dbe342"
+  },
+  {
+    "path": "FINAL_CORE/001/runsettings.xml",
+    "bytes": 695,
+    "sha256": "53198d8a3f40bffa4658ca4c30aa844df9d4ab6d23076ceb7deade93841cae12"
+  },
+  {
+    "path": "FINAL_CORE/001/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/001/stdout.log",
+    "bytes": 398,
+    "sha256": "5ffa732b47c5441be7d58a0e59a804bcc03df2bf158b92a8476fbb64076c7aaf"
+  },
+  {
+    "path": "FINAL_CORE/002/results.trx",
+    "bytes": 7029,
+    "sha256": "b9c60561a71c3d15c497388f8a3b2c230fec68b76da344ef1a3e1aa6a1fe75e1"
+  },
+  {
+    "path": "FINAL_CORE/002/runsettings.xml",
+    "bytes": 800,
+    "sha256": "1fd3465e04db15cf2494186b0677105d16517ed0a2acff4d141f5e7f92d99ce7"
+  },
+  {
+    "path": "FINAL_CORE/002/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/002/stdout.log",
+    "bytes": 397,
+    "sha256": "e4e6ab6898a9406bd3f27dd4c81e2985a13014ac24a6e90f9143d2d8838a0301"
+  },
+  {
+    "path": "FINAL_CORE/003/results.trx",
+    "bytes": 4319,
+    "sha256": "94866ff915ccf1034ecf8b09a4d0b21769bf588033498eceb19bccacc856f14b"
+  },
+  {
+    "path": "FINAL_CORE/003/runsettings.xml",
+    "bytes": 546,
+    "sha256": "012d5ab618f2c7ab381f22fcc3cac950f0abd78465c2bcdea157429854d09f99"
+  },
+  {
+    "path": "FINAL_CORE/003/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/003/stdout.log",
+    "bytes": 398,
+    "sha256": "9cfa31a40feced892dcba4be2eccd0dd7d3566c244a27fea0580e543d128ae94"
+  },
+  {
+    "path": "FINAL_CORE/004/results.trx",
+    "bytes": 5731,
+    "sha256": "3e422d0e8e9f69875dc0664c9b18d99beaf4dff2b9ba48e84201ad768d04fa68"
+  },
+  {
+    "path": "FINAL_CORE/004/runsettings.xml",
+    "bytes": 676,
+    "sha256": "ea1435c2e60352191e233cb3e8b4726b150c357bac27eb5ecbc4472069b3b331"
+  },
+  {
+    "path": "FINAL_CORE/004/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/004/stdout.log",
+    "bytes": 398,
+    "sha256": "f65b1dadf71385b2c3d9bf95b77d01b6b07fbf3a1eb2e128674976a46f564715"
+  },
+  {
+    "path": "FINAL_CORE/005/results.trx",
+    "bytes": 7043,
+    "sha256": "9acbe0bd1063f830836fe3c6ebea77bf5b4b60420984f83b8e4d4d3743d2d602"
+  },
+  {
+    "path": "FINAL_CORE/005/runsettings.xml",
+    "bytes": 786,
+    "sha256": "1acccc13a36a76883c9e66dac5241fd350420c7eeb6f10cc9517f323af78cf6a"
+  },
+  {
+    "path": "FINAL_CORE/005/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/005/stdout.log",
+    "bytes": 397,
+    "sha256": "a7b6a06b4a85f266d46ab7799ca310130cdb30d5511dcef94867334181da06a6"
+  },
+  {
+    "path": "FINAL_CORE/006/results.trx",
+    "bytes": 4232,
+    "sha256": "9a7715f800957e12e9eed2537a659ed0264a18eb4ecc75804d56fdfdbaea8c92"
+  },
+  {
+    "path": "FINAL_CORE/006/runsettings.xml",
+    "bytes": 517,
+    "sha256": "fad44d574816b1fa99413841be5125cff903d230215beb3700de22af75e838b2"
+  },
+  {
+    "path": "FINAL_CORE/006/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/006/stdout.log",
+    "bytes": 395,
+    "sha256": "5982a0a73e25a1ddc79c014b8996e06972ecb538fe8e8babb8664611e06cfa9d"
+  },
+  {
+    "path": "FINAL_CORE/007/results.trx",
+    "bytes": 12922,
+    "sha256": "a584562ac86e057738f79163dc02451c683c37510d80828bb1da563795edfc26"
+  },
+  {
+    "path": "FINAL_CORE/007/runsettings.xml",
+    "bytes": 1415,
+    "sha256": "513256ca9f8f220c44f17da14c324b6143bf3b7d3474f0312645bb44ed33588d"
+  },
+  {
+    "path": "FINAL_CORE/007/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/007/stdout.log",
+    "bytes": 395,
+    "sha256": "b6b74bd9662ae8de497dc0776c622aab98c39a1ee3fd047fba1b78e3b0971819"
+  },
+  {
+    "path": "FINAL_CORE/008/results.trx",
+    "bytes": 10126,
+    "sha256": "d61b5192ced9cd82facab6c440ab82c4922e553309fe1e19d234523bc0e35b2b"
+  },
+  {
+    "path": "FINAL_CORE/008/runsettings.xml",
+    "bytes": 1159,
+    "sha256": "bfc9c6914b490625ddf0ec830e9b653c0971525b7c15d2c422d40c515397c867"
+  },
+  {
+    "path": "FINAL_CORE/008/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/008/stdout.log",
+    "bytes": 395,
+    "sha256": "0b74301ffa6f721f85767f645eb07aa595035238008761009c9a4945956fbfb9"
+  },
+  {
+    "path": "FINAL_CORE/009/results.trx",
+    "bytes": 4287,
+    "sha256": "2d94b315e41593e3a0021132e9b679c6b82a256b381467087db595e6d9f67c3f"
+  },
+  {
+    "path": "FINAL_CORE/009/runsettings.xml",
+    "bytes": 538,
+    "sha256": "4b3e70d0b37842a3d481d2d6e1a97f374f69110a1714c2908789de54744f3a5b"
+  },
+  {
+    "path": "FINAL_CORE/009/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/009/stdout.log",
+    "bytes": 398,
+    "sha256": "c1c6b5673fd5f02068fe498320cc0e38e7c247a1c2a93d1ac2dfa3f74281d40c"
+  },
+  {
+    "path": "FINAL_CORE/010/results.trx",
+    "bytes": 7049,
+    "sha256": "219e043b8b51a42ca0613df41e9b9c5657dfa4fb5392c52d018295a9cbabbaea"
+  },
+  {
+    "path": "FINAL_CORE/010/runsettings.xml",
+    "bytes": 796,
+    "sha256": "55f881b6e800eb0d64c16d00f247487157866c97267bba158a5ec67c1d62e310"
+  },
+  {
+    "path": "FINAL_CORE/010/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/010/stdout.log",
+    "bytes": 398,
+    "sha256": "e6be86180956707e8a88cd75839e0731968bf37b487377455fa19805fd4e8bad"
+  },
+  {
+    "path": "FINAL_CORE/011/results.trx",
+    "bytes": 2897,
+    "sha256": "1e4cc1a1f020f5b14becc4971a223b77220949f3d1e24907c6bb93d54430c382"
+  },
+  {
+    "path": "FINAL_CORE/011/runsettings.xml",
+    "bytes": 398,
+    "sha256": "b8855d83acc899319b74a3a11cee0f9f0bc0137a3b4a6d5878035d109073e156"
+  },
+  {
+    "path": "FINAL_CORE/011/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/011/stdout.log",
+    "bytes": 398,
+    "sha256": "b2107c27536165ebf5ff98e8ebb8440425e22805656bef36d42f8e839591c422"
+  },
+  {
+    "path": "FINAL_CORE/012/results.trx",
+    "bytes": 4370,
+    "sha256": "64b5f1bf0c64eb4f8281fb0be0ab42bb6feffd1dc10bc25a96ce248b60f4fb24"
+  },
+  {
+    "path": "FINAL_CORE/012/runsettings.xml",
+    "bytes": 571,
+    "sha256": "5957de0cd65a33fc6e62051e2871affb7b859a9d460617f4d477dcce33ed6b65"
+  },
+  {
+    "path": "FINAL_CORE/012/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/012/stdout.log",
+    "bytes": 397,
+    "sha256": "f6ef2782c9755c9e40cff4a6004cef68d75666fe6feff226a13e09f1dea1be4a"
+  },
+  {
+    "path": "FINAL_CORE/discovery.json",
+    "bytes": 839004,
+    "sha256": "d8fc11ffe1518458d3a417f180d7c3e8fc19d1b1bd153e830762a4045228c952"
+  },
+  {
+    "path": "FINAL_CORE/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_CORE/summary.json",
+    "bytes": 56581,
+    "sha256": "bb05cd29a21ed4c07bda49c813c701c75945c6b6d5a55ab4ada7d4ddfad4fc01"
+  },
+  {
+    "path": "FINAL_WPF/000/results.trx",
+    "bytes": 10050,
+    "sha256": "989a4297abb0faa10243e13ec5be9a8e550dc2124f8034d411a42bba2b0a6db6"
+  },
+  {
+    "path": "FINAL_WPF/000/runsettings.xml",
+    "bytes": 1188,
+    "sha256": "22aabb3c47bf7110277a4262ca3baea8d3ac73885ef7c70237e2c6ecaac75a9e"
+  },
+  {
+    "path": "FINAL_WPF/000/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/000/stdout.log",
+    "bytes": 400,
+    "sha256": "fca01ea19e191d87d96a1684aa46c4f9beca2d0167b328f432157a9bb36bd1e5"
+  },
+  {
+    "path": "FINAL_WPF/001/results.trx",
+    "bytes": 2734,
+    "sha256": "5828983c19760821a6659ecdebec4c30412f1a1b3952c377ecad46fd1a20bdfd"
+  },
+  {
+    "path": "FINAL_WPF/001/runsettings.xml",
+    "bytes": 416,
+    "sha256": "c78cacfe96ed51205b8f1af31f8783d5f6bb45cf5fe020391e0127a0202c084f"
+  },
+  {
+    "path": "FINAL_WPF/001/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/001/stdout.log",
+    "bytes": 398,
+    "sha256": "91f2bafd85fe24e527547bddd54296e32ab68606156b0763725b129af5931582"
+  },
+  {
+    "path": "FINAL_WPF/002/results.trx",
+    "bytes": 7321,
+    "sha256": "067d742141ea2f726e18bae9cadf6b6d224c182dfeb96ff527c1fabbaefc97a7"
+  },
+  {
+    "path": "FINAL_WPF/002/runsettings.xml",
+    "bytes": 695,
+    "sha256": "80c21409ee12ed1911d584541ad66cea87f62e4d61a9008e29c71dabf94bb3f8"
+  },
+  {
+    "path": "FINAL_WPF/002/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/002/stdout.log",
+    "bytes": 397,
+    "sha256": "405db0007bcd44333a62b2e161e0aa0721160ed1f064704ad337d83e226f8eb3"
+  },
+  {
+    "path": "FINAL_WPF/003/results.trx",
+    "bytes": 9942,
+    "sha256": "fb0f72772a02cdd4478af4fe82f0a4da3afb60a65d584a8b57fc9813a455298b"
+  },
+  {
+    "path": "FINAL_WPF/003/runsettings.xml",
+    "bytes": 1080,
+    "sha256": "c8bc18f1bf12d8eef7ee331580754880e9b7ea3ae03ab4a0c2ec7dc2bde919a1"
+  },
+  {
+    "path": "FINAL_WPF/003/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/003/stdout.log",
+    "bytes": 397,
+    "sha256": "c0cb7e54cacbecd02427ae75eedb9fd2aedaa944d5185fc0fcc6dcb631e88cec"
+  },
+  {
+    "path": "FINAL_WPF/004/results.trx",
+    "bytes": 6915,
+    "sha256": "d07ce0b9b92318f50b638c25cb4a513a43499c7f05ffc43a2bdbe554caf4c3df"
+  },
+  {
+    "path": "FINAL_WPF/004/runsettings.xml",
+    "bytes": 556,
+    "sha256": "9727d5313b1702e98a3aed507a891836e4b72516ee89e1205145b7b231f73663"
+  },
+  {
+    "path": "FINAL_WPF/004/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/004/stdout.log",
+    "bytes": 400,
+    "sha256": "5de20d5de1785cf4fb2dd560c1ac9612e9bdcc2c51aeb6b4ccb5f204f2eaeb5d"
+  },
+  {
+    "path": "FINAL_WPF/005/results.trx",
+    "bytes": 2719,
+    "sha256": "78af225d823fa67bde8424739151350ea49e4b05846ff9397dc1ca68364951d0"
+  },
+  {
+    "path": "FINAL_WPF/005/runsettings.xml",
+    "bytes": 407,
+    "sha256": "122a950e40409324af83c958637197ac32f21e75bbb703113217ce8b9015ff37"
+  },
+  {
+    "path": "FINAL_WPF/005/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/005/stdout.log",
+    "bytes": 400,
+    "sha256": "8a9b0c13687332b7f3f8b1821c2568954e5c9163de717ba6331dfc2407727986"
+  },
+  {
+    "path": "FINAL_WPF/006/results.trx",
+    "bytes": 12895,
+    "sha256": "bdedc9b58e107ab4a5510311bac248b54111700fb9c663c0b7c7565e9958fded"
+  },
+  {
+    "path": "FINAL_WPF/006/runsettings.xml",
+    "bytes": 1359,
+    "sha256": "1c88959774b81f1340502aab3e33f89eef509020ad359e3eaec66e7b46c3052f"
+  },
+  {
+    "path": "FINAL_WPF/006/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/006/stdout.log",
+    "bytes": 397,
+    "sha256": "0e839bc51c92a8079ee5aa0b5c2f7f8dc7a63a87d709b7050970615681ce9d6e"
+  },
+  {
+    "path": "FINAL_WPF/007/results.trx",
+    "bytes": 5685,
+    "sha256": "990daceb6846dd7be3a6ce8a7b9f50008fa3e9cabcce1f8930ecc33d30226350"
+  },
+  {
+    "path": "FINAL_WPF/007/runsettings.xml",
+    "bytes": 699,
+    "sha256": "ee1ce51386ece8e3d7a731f0d5e0800843ce0625914a9db1cb3635ef1b909eb0"
+  },
+  {
+    "path": "FINAL_WPF/007/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/007/stdout.log",
+    "bytes": 397,
+    "sha256": "26e686838e8d8aa47ba6979ca81cadccc0296c68871a43dc4d4f45ff226ed449"
+  },
+  {
+    "path": "FINAL_WPF/008/results.trx",
+    "bytes": 5628,
+    "sha256": "6207ed33dfe37ae7a23bbaabe651297e1c178e651b38b43b9affe5c9446d0a0f"
+  },
+  {
+    "path": "FINAL_WPF/008/runsettings.xml",
+    "bytes": 682,
+    "sha256": "95afebfa74cc94cd0290a16e38d6d1eceeded5ca2523beae852c5dd61a266f6f"
+  },
+  {
+    "path": "FINAL_WPF/008/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/008/stdout.log",
+    "bytes": 397,
+    "sha256": "6cc1d4248f8aec8c1f9a6810a969b0ce5246cd97521879c9ad21a239aa3e809b"
+  },
+  {
+    "path": "FINAL_WPF/009/results.trx",
+    "bytes": 2730,
+    "sha256": "c8d2be89dab5ccc64d68f95a499fc640f39af2e892f18fb131b885751bbd7efa"
+  },
+  {
+    "path": "FINAL_WPF/009/runsettings.xml",
+    "bytes": 414,
+    "sha256": "28afa079c01a3d76ea13547cb28db3104b00f0dd4091fb41f440cd7577fae949"
+  },
+  {
+    "path": "FINAL_WPF/009/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/009/stdout.log",
+    "bytes": 397,
+    "sha256": "f2eecdd5ed8a7f5300836f58fb3b33a3910b23a0ed97fa3fe7a0abfd0b29d474"
+  },
+  {
+    "path": "FINAL_WPF/010/results.trx",
+    "bytes": 5577,
+    "sha256": "de17c32ec33803e2ddd0b70d388f553cc32029f8742b8519c5c88e85aeacbcb8"
+  },
+  {
+    "path": "FINAL_WPF/010/runsettings.xml",
+    "bytes": 645,
+    "sha256": "79742d5fda365c32b8d215f934973b26b8cdcfbc08af82b6b9fa52deee29fe53"
+  },
+  {
+    "path": "FINAL_WPF/010/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/010/stdout.log",
+    "bytes": 398,
+    "sha256": "57009a0e8d3e6d57d2de829cdc5f4a3201657ef92459378ea3612e1ff5c13c89"
+  },
+  {
+    "path": "FINAL_WPF/011/results.trx",
+    "bytes": 2698,
+    "sha256": "4c675125f929d23dfe93ec250024a25836970a60316442a7a8b22c3c168675f8"
+  },
+  {
+    "path": "FINAL_WPF/011/runsettings.xml",
+    "bytes": 400,
+    "sha256": "7b20777fb4c73ede78dc762360fded82b729a3b2b4b31a3259a7d82fde265205"
+  },
+  {
+    "path": "FINAL_WPF/011/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/011/stdout.log",
+    "bytes": 397,
+    "sha256": "59af169c0926de6af81fa0020c9411e0c82411c0eb00ac331231d1901a8479ac"
+  },
+  {
+    "path": "FINAL_WPF/012/results.trx",
+    "bytes": 2709,
+    "sha256": "20d6fca835fe7bb55b65ee0a1f0b90acc238ddc10002006346632c57163b42b3"
+  },
+  {
+    "path": "FINAL_WPF/012/runsettings.xml",
+    "bytes": 405,
+    "sha256": "850f0bebc859f1bdc2d8f576da66eee0a0f4a0a075c0666f3f1918744a557d44"
+  },
+  {
+    "path": "FINAL_WPF/012/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/012/stdout.log",
+    "bytes": 400,
+    "sha256": "9046f5e401a851d10f0d1502b6e8335488851a15969e9e504fedd0f354314dda"
+  },
+  {
+    "path": "FINAL_WPF/013/results.trx",
+    "bytes": 5568,
+    "sha256": "a2fcf570d25956b3410ae7023da1e1ccb26916b09e7a3932eaf09474a2694228"
+  },
+  {
+    "path": "FINAL_WPF/013/runsettings.xml",
+    "bytes": 658,
+    "sha256": "453697c3c7a0a82dd1c802b235224ac0d65b140d7d0eac51783fcb4b35f25284"
+  },
+  {
+    "path": "FINAL_WPF/013/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/013/stdout.log",
+    "bytes": 397,
+    "sha256": "54ac528c0cc235f6b6db59a482744642c063a82dcdeb2568e4f5121dd0d20855"
+  },
+  {
+    "path": "FINAL_WPF/014/results.trx",
+    "bytes": 4077,
+    "sha256": "8961ca3011cc85357e5c83ddd50c000086ed3b6f8d645175996d801aa01e0367"
+  },
+  {
+    "path": "FINAL_WPF/014/runsettings.xml",
+    "bytes": 505,
+    "sha256": "77f3e14b1eadbde145bc6143302121b517d9c6c7d50466d286189d30b1adbbee"
+  },
+  {
+    "path": "FINAL_WPF/014/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/014/stdout.log",
+    "bytes": 400,
+    "sha256": "9c6dfc484fd643027a206fda0406cc1416a95b2348d614f5a27f6e96d9609506"
+  },
+  {
+    "path": "FINAL_WPF/015/results.trx",
+    "bytes": 4111,
+    "sha256": "f50b5182e77981a4e9d191d9efe59b97f7aa76b5c3152ec150f528cb07a2436f"
+  },
+  {
+    "path": "FINAL_WPF/015/runsettings.xml",
+    "bytes": 515,
+    "sha256": "78622c06ed876882d77595857c99a70056b46fab796b11912a497dee39090e05"
+  },
+  {
+    "path": "FINAL_WPF/015/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/015/stdout.log",
+    "bytes": 400,
+    "sha256": "f3b547278428be809532cf80733e9431d3a36e210019fda7fdfc617a359a5e12"
+  },
+  {
+    "path": "FINAL_WPF/016/results.trx",
+    "bytes": 9831,
+    "sha256": "ac1752168f9b0750b948f83e0ede4e78da9ec77d45ae8c476c77e4da52615f23"
+  },
+  {
+    "path": "FINAL_WPF/016/runsettings.xml",
+    "bytes": 1015,
+    "sha256": "03e63ba17c579015782eb5ef3fa1c06b46f8ae09d6708890f3918bbcd40f9595"
+  },
+  {
+    "path": "FINAL_WPF/016/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/016/stdout.log",
+    "bytes": 398,
+    "sha256": "d596270e936704daa457797769d9c33974d31b75cb55fb706eecf186116aba68"
+  },
+  {
+    "path": "FINAL_WPF/017/results.trx",
+    "bytes": 8695,
+    "sha256": "dd1bc2461ef8833e158f43e74908ae90be1b6a4b5bb9f11da173515a02eda8af"
+  },
+  {
+    "path": "FINAL_WPF/017/runsettings.xml",
+    "bytes": 1005,
+    "sha256": "6087748482bd3f1f25057cbc8d1ded845b0c5de2b294e0110160138de12d1c24"
+  },
+  {
+    "path": "FINAL_WPF/017/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/017/stdout.log",
+    "bytes": 397,
+    "sha256": "877cfd24fd1fd3b31a9f35b96382e03c6f8cb5a4fdf58f3b817a509483be7fc0"
+  },
+  {
+    "path": "FINAL_WPF/018/results.trx",
+    "bytes": 8714,
+    "sha256": "e1239e48a7bb04e8c4b0f3038ee7dabd51bd8e9b180e3315dcabb4d5574cea5d"
+  },
+  {
+    "path": "FINAL_WPF/018/runsettings.xml",
+    "bytes": 1028,
+    "sha256": "b6251e64b15bef972ecbf7019cba3b774e0757e6f6610046a695bd58481704ac"
+  },
+  {
+    "path": "FINAL_WPF/018/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/018/stdout.log",
+    "bytes": 397,
+    "sha256": "861e9dc17e6257b667a22beaaaf53523877c0606ba774930c5bc9b85f8fd07fb"
+  },
+  {
+    "path": "FINAL_WPF/019/results.trx",
+    "bytes": 9852,
+    "sha256": "4a780485fd30d7fc7132d7b06e66fff16de3468a92b6ae486953101d37bce1ea"
+  },
+  {
+    "path": "FINAL_WPF/019/runsettings.xml",
+    "bytes": 1038,
+    "sha256": "80347f770d4add3503798f679a9b55631a75ea8f82ca0a9a0e945d79c958c553"
+  },
+  {
+    "path": "FINAL_WPF/019/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/019/stdout.log",
+    "bytes": 398,
+    "sha256": "0c516fe0b8ccfd34d1e899bcacee9b1e56cf2335d63475e2464c7da831127c3b"
+  },
+  {
+    "path": "FINAL_WPF/020/results.trx",
+    "bytes": 9972,
+    "sha256": "3b628f87b4c1d8f0dea18995f0dede2dc66b51bb1f8218b7c92e918f09a98d0c"
+  },
+  {
+    "path": "FINAL_WPF/020/runsettings.xml",
+    "bytes": 1066,
+    "sha256": "2cb6d27dc8ae1903efdc6fb1babfcb064eb294852212615ecaf838d4b76ae150"
+  },
+  {
+    "path": "FINAL_WPF/020/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/020/stdout.log",
+    "bytes": 397,
+    "sha256": "2523083f4ccfeb5903e76875c2918e45b53365751f9e6195280aafa839c4b864"
+  },
+  {
+    "path": "FINAL_WPF/021/results.trx",
+    "bytes": 11401,
+    "sha256": "2234e58f05298be29d8d94b07465104c988e1463546bb8b49a95b51a0068dc8e"
+  },
+  {
+    "path": "FINAL_WPF/021/runsettings.xml",
+    "bytes": 1219,
+    "sha256": "31da304dcca198386c87b863053a7c67a8b521db23274c963b8b684d7ed9bb83"
+  },
+  {
+    "path": "FINAL_WPF/021/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/021/stdout.log",
+    "bytes": 399,
+    "sha256": "0a18365b0c188c678701c32229f018e0bb64969bac7ad87162a6fc03dd1751c4"
+  },
+  {
+    "path": "FINAL_WPF/022/results.trx",
+    "bytes": 5481,
+    "sha256": "43607407c129e4513c6016c544c91eb4d3437022cb82645ae726d29aa9225eb6"
+  },
+  {
+    "path": "FINAL_WPF/022/runsettings.xml",
+    "bytes": 643,
+    "sha256": "58cc4c3e6a606fe6c278b66de9d500b9fe808aafe23163be51dc393190d1517a"
+  },
+  {
+    "path": "FINAL_WPF/022/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/022/stdout.log",
+    "bytes": 399,
+    "sha256": "f8e7aaa9936e3df6bd3ca866055595c8fea5dadffa1b2e39a82d80bf8d646516"
+  },
+  {
+    "path": "FINAL_WPF/discovery.json",
+    "bytes": 944360,
+    "sha256": "75a627d6ebcbe4efee0c508a7fe6d9ec6880fa2f31eb8cfba2ff4377abd628a7"
+  },
+  {
+    "path": "FINAL_WPF/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "FINAL_WPF/summary.json",
+    "bytes": 111886,
+    "sha256": "9380b4f838ddcf67224987d058bc3b0b876a973f12ed8dbdfce85715b075e8bf"
+  },
+  {
+    "path": "commands/BUILD_CORE_EDGE.log",
+    "bytes": 28228,
+    "sha256": "558c872391390d1a7d49431e927f50a5005a287558d59e1bb5369b913b2f72bd"
+  },
+  {
+    "path": "commands/BUILD_CORE_FINAL_NEW.log",
+    "bytes": 427,
+    "sha256": "4327609e9bca0d2b830d7063eedf1b98de0fdcea5136530d8849acc0c748a33f"
+  },
+  {
+    "path": "commands/BUILD_CORE_FIXED.log",
+    "bytes": 28228,
+    "sha256": "ddc0aef63c35d931ec0469baa37df5b1fb156153c4439455a30b6d22c07578af"
+  },
+  {
+    "path": "commands/BUILD_CORE_NEW.log",
+    "bytes": 28228,
+    "sha256": "b49fb7b14b7d2ce81402d822653c6e3e1790b409af80ed476285d01bc1c07ebf"
+  },
+  {
+    "path": "commands/BUILD_CORE_READY.log",
+    "bytes": 427,
+    "sha256": "3649f61b3b925cc56be1d0dd1e91b77d3e14b1905d2ea1b9f452ee0eba65b233"
+  },
+  {
+    "path": "commands/BUILD_CORE_SEAL.log",
+    "bytes": 28228,
+    "sha256": "2d5fb217a448f99897bcce0a4c2e2d7311b4330aae61fba43cae0a56510de76f"
+  },
+  {
+    "path": "commands/BUILD_FIRST.log",
+    "bytes": 143400,
+    "sha256": "6f3e0e2c5d3273e980dea6374586b1d850fec13624170004b1594743baedc71e"
+  },
+  {
+    "path": "commands/BUILD_RUNNER.log",
+    "bytes": 231,
+    "sha256": "561cf96163f3a0fffc7c6378381d472d46c180eee4d143cc087021fe4873e0f0"
+  },
+  {
+    "path": "commands/BUILD_WPF_EDGE.log",
+    "bytes": 144032,
+    "sha256": "234be0a105654ad985442182c5b28bc7b58f4d535a57c27835595c945b99ba67"
+  },
+  {
+    "path": "commands/BUILD_WPF_FINAL_NEW.log",
+    "bytes": 144032,
+    "sha256": "e5b1a11420a136b67f187f1788b24c96d994eaadf274ea288a8dbeee93b36f07"
+  },
+  {
+    "path": "commands/BUILD_WPF_FIXED.log",
+    "bytes": 144032,
+    "sha256": "76dbe07461959996942762bef949a08eec690b9860690c995e0ebccb094dc51b"
+  },
+  {
+    "path": "commands/BUILD_WPF_NEW.log",
+    "bytes": 144032,
+    "sha256": "83e8cd5600db4a13fa4c39a3544b38b638dec20d85d3a5674ab15a2e73af8b13"
+  },
+  {
+    "path": "commands/BUILD_WPF_READY.log",
+    "bytes": 144032,
+    "sha256": "803500202b326dd88494d9b86a962970305fb41a873192e90a198a0e7951535c"
+  },
+  {
+    "path": "commands/BUILD_WPF_SEAL.log",
+    "bytes": 144032,
+    "sha256": "eac6a1dfbab7a446e17aa861ca1b07316eea399ed04165bd77f4e4fbd96645ca"
+  },
+  {
+    "path": "commands/EDGE_CORE.log",
+    "bytes": 175,
+    "sha256": "7901a2a1d545806a3e61fe92656d0bf341a70cc7c050e8d759a0d8d1cfa17969"
+  },
+  {
+    "path": "commands/EDGE_WPF.log",
+    "bytes": 180,
+    "sha256": "cf21a6ee59b4ca18a5dd6ee279f78084a9b49507cb291055df106a5556030f80"
+  },
+  {
+    "path": "commands/FINAL_BUILD_CORE.log",
+    "bytes": 28228,
+    "sha256": "c0e46df718aee84ab6db04d42ed9bd03c8d491f053a8ab9a18782235dbabfefd"
+  },
+  {
+    "path": "commands/FINAL_BUILD_WPF.log",
+    "bytes": 144032,
+    "sha256": "e0abfbe06a6555f9aaaa46fbe24f0a1328d9a37ee26692d373bcaa03a948c5c6"
+  },
+  {
+    "path": "commands/FINAL_CORE.log",
+    "bytes": 1168,
+    "sha256": "b9eaf7b8e05a15ddf1468eaf793fb60d390e9e9510dfbdb9b1c9b4f608db05a1"
+  },
+  {
+    "path": "commands/FINAL_NEW_CORE.log",
+    "bytes": 180,
+    "sha256": "c8829d75fb6cda8de28b2d987fee7936088ff61e404533009cbda574001437bd"
+  },
+  {
+    "path": "commands/FINAL_NEW_WPF.log",
+    "bytes": 185,
+    "sha256": "14eb4a893084a2c6d0eba11ec9479a207b8bfa10d137614584fba8b8c205614b"
+  },
+  {
+    "path": "commands/FINAL_PUBLISH.log",
+    "bytes": 1353,
+    "sha256": "06b4f43e9fb3239be3e5302aaff4f4eab0eb5aa727e52d7eca0587ebed91e82c"
+  },
+  {
+    "path": "commands/FINAL_WPF.log",
+    "bytes": 2040,
+    "sha256": "a4b144aa16d093586da2afdb27c52b98b85e94e77dce5d09b48a8e8d587bbccd"
+  },
+  {
+    "path": "commands/FIXED_CORE.log",
+    "bytes": 176,
+    "sha256": "d6114c2f5d791055ebff8876d3ca2864beb496f923ca51330be256059fed88da"
+  },
+  {
+    "path": "commands/FIXED_WPF.log",
+    "bytes": 181,
+    "sha256": "b3524b20277868049f97ec38142dabf4c6879f89d870a1d16b8e2626c6ac19fb"
+  },
+  {
+    "path": "commands/NEW_CORE.log",
+    "bytes": 174,
+    "sha256": "247e505f11571f3aecbe1fd3c5efe4964a3d8aa42ac4ec766e33f910de58fadc"
+  },
+  {
+    "path": "commands/NEW_WPF.log",
+    "bytes": 179,
+    "sha256": "6448fe7360c6a43a76f0a6911285e3fb2725c055ea2c15b65e358df629fbedba"
+  },
+  {
+    "path": "commands/READY_CORE.log",
+    "bytes": 176,
+    "sha256": "d04aab2c3e2356bdc10a9c35da446c5827d681e69b2174172da76077ab425e44"
+  },
+  {
+    "path": "commands/READY_WPF.log",
+    "bytes": 181,
+    "sha256": "7363d1719e0004fb81925779d66e4e6a99d98c5d19c092cd58117ba911fe5c31"
+  },
+  {
+    "path": "commands/RESTORE.log",
+    "bytes": 2076,
+    "sha256": "87d6b342d2f4b99b2d2d7066fbac1f9527fff5d44fe08ff6af8aeb19d5016339"
+  },
+  {
+    "path": "commands/RESTORE_RUNNER.log",
+    "bytes": 86,
+    "sha256": "0a5293e62d3bb4d8819d8d749f51206d3aa424744e622337bee96070823f245b"
+  },
+  {
+    "path": "commands/SEAL_CORE.log",
+    "bytes": 175,
+    "sha256": "5f0ac4af730d83daa4108eaa2adfae12d460309b1853346a0dffc02f11853bdd"
+  },
+  {
+    "path": "commands/SEAL_WPF.log",
+    "bytes": 180,
+    "sha256": "daad1658203f1f2a4d3f8b9b714071b4ae672675fb394f5524e629e58ab349a3"
+  }
+]

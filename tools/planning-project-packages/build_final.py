@@ -1,0 +1,8 @@
+import pathlib,subprocess,os,json,time,sys
+r=pathlib.Path("E:/Kitao-Worktrees/planning-project-packages-20261022");d=pathlib.Path("E:/Kitao-Deliveries/planning-project-packages-20261022");dotnet="D:/AI AGENT/.dotnet/dotnet.exe";sha="9040e320d871f05c1013da9ed45bb04d48257616";os.chdir(r);env=os.environ.copy();env['DOTNET_ROOT']=str(pathlib.Path(dotnet).parent);env['PATH']=str(pathlib.Path(dotnet).parent)+os.pathsep+env.get('PATH','')
+props=['-p:WholeAppDiagnosticBuild=true','-p:PhotographerTrialBuild=false','-p:SourceRevisionId='+sha,'-p:IncludeSourceRevisionInInformationalVersion=true']
+for label,args in [('FINAL_BUILD_CORE',['build','tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj','-c','Release','--no-restore']),('FINAL_BUILD_WPF',['build','tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj','-c','Release','-p:Platform=x64','--no-restore']+props),('FINAL_PUBLISH',['publish','src/RAWSelectionAssistant/RAWSelectionAssistant.csproj','-c','Release','-r','win-x64','--self-contained','true','--no-restore']+props+['-o',"E:/Kitao-Deliveries/planning-project-packages-20261022/Planning-ProjectPackages-Diagnostic-win-x64/app"])]:
+ with (d/(label+'.log')).open('wb') as log:
+  start=time.time();p=subprocess.Popen([dotnet]+args+['--disable-build-servers','-m:1','-nr:false'],stdout=log,stderr=subprocess.STDOUT,env=env,creationflags=subprocess.CREATE_NO_WINDOW);code=p.wait()
+ (d/(label+'.json')).write_text(json.dumps(dict(sourceSha=sha,exe=dotnet,args=args,pid=p.pid,exitCode=code,seconds=time.time()-start),indent=2));print(label,code,flush=True)
+ if code:sys.exit(code)

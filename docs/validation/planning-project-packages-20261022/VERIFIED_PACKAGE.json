@@ -1,0 +1,47 @@
+{
+  "sourceSha": "9040e320d871f05c1013da9ed45bb04d48257616",
+  "manifest": {
+    "Version": 1,
+    "ProjectId": "ce615a0d-d7b4-4360-8bca-1edccb18d81a",
+    "DocumentId": "d1f4541a-dff7-c083-f701-9540889d2189",
+    "Name": "项目包闭环合成项目",
+    "CreatedAt": "2026-10-22T05:48:08.5780477+00:00",
+    "Files": [
+      {
+        "Path": "planning.json",
+        "Bytes": 5086,
+        "Sha256": "E11E8215CD201D714C10CA915B707F29B3EDB1DF3D6B3D3A372C2257302F539C"
+      },
+      {
+        "Path": "shots.json",
+        "Bytes": 853,
+        "Sha256": "C4ED8D298C9F612E6C591856680CF9BAD12E62AF094806614437BB301E3E511C"
+      },
+      {
+        "Path": "planning/project-copies/ce615a0dd7b443608bca1edccb18d81a/d1f4541adff7c083f7019540889d2189/reference/78443ca2c1f24c2bb101ea23294520e4/663a7d1c0cb9333f210b635ba072777d11e3152f6bbac6f4bd8b81bb5e30e0b7.png",
+        "Bytes": 3663,
+        "Sha256": "663A7D1C0CB9333F210B635BA072777D11E3152F6BBAC6F4BD8B81BB5E30E0B7"
+      },
+      {
+        "Path": "planning/project-copies/ce615a0dd7b443608bca1edccb18d81a/d1f4541adff7c083f7019540889d2189/attachment/f048ec04728549cd807d80e7b74e5ebf/dfe4146b1e82e56619020090eed90c7c44572759740fb66ebe492236ea21b6f8.txt",
+        "Bytes": 36,
+        "Sha256": "DFE4146B1E82E56619020090EED90C7C44572759740FB66EBE492236EA21B6F8"
+      }
+    ],
+    "ExcludedDependencies": [
+      "外链/库引用 8bb1c3d0-3758-4a55-b27f-54bf256fcd5c：E:\\Kitao-Deliveries\\planning-project-packages-20261022\\FINAL_WPF\\run-20261022-134704-d5973849\\009\\temp\\kitao-planning-foundation-287b952fbb0a4256be18acba50f40d35\\external-only.png；原件未包含",
+      "账本、付款、财务附件、在线服务、素材库原件、色彩方案/画布工作区未包含；不宣称完整跨机便携。"
+    ]
+  },
+  "packageSha256": "4b526f53c06da67a648bdbe6808c832856839bd8f8ea929ab3b99a2454e4b4ed",
+  "importedRoot": "E:\\Kitao-Deliveries\\planning-project-packages-20261022\\synthetic-final\\fresh-data-root\\ce615a0dd7b443608bca1edccb18d81a",
+  "copyHashesMatch": true,
+  "summaryHeadings": 15,
+  "summaryImages": 1,
+  "sourceAndOldProjectUnchanged": true,
+  "applicationFiles": 290,
+  "runtimeAssets": 264,
+  "missingDependencies": 0,
+  "publishBindings": 29,
+  "scope": "Independent archive/XML/file readback of current synthetic production outputs, NOT native mouse/WPS"
+}

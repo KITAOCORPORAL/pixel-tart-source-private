@@ -1,0 +1,20 @@
+{
+  "baseSha": "3dec55b2da6e87579c48721624cd1e816c492d16",
+  "productSha": "9040e320d871f05c1013da9ed45bb04d48257616",
+  "branch": "feature/planning-project-packages-20261022",
+  "files": [
+    "M\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningCenter.cs",
+    "A\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningCopyRecovery.cs",
+    "M\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningProjectCopy.cs",
+    "A\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningProjectPackage.cs",
+    "M\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningProjectStore.Copies.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+    "A\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.ProjectPackage.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.References.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.cs",
+    "M\tsrc/RAWSelectionAssistant/Views/PlanningCenterView.xaml",
+    "M\tsrc/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+    "A\ttests/RAWSelectionAssistant.Tests/PlanningProjectPackageTests.cs",
+    "A\ttests/RAWSelectionAssistant.WpfTests/PlanningProjectPackageWpfTests.cs"
+  ]
+}

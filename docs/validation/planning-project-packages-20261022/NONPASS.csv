@@ -1,0 +1,9 @@
+﻿suite,name,display,outcome,status,error,evidence
+NEW_WPF,RAWSelectionAssistant.WpfTests.PlanningProjectPackageWpfTests.UserCommandsExportImportFreshRootReopenResolveCopiesAndSummary,UserCommandsExportImportFreshRootReopenResolveCopiesAndSummary,Failed,FAIL,"测试方法 RAWSelectionAssistant.WpfTests.PlanningProjectPackageWpfTests。UserCommandsExportImportFreshRootReopenResolveCopiesAndSummary 引发了异常:
+System.InvalidOperationException: Sequence contains more than one matching element
+             at System.Linq.ThrowHelper.ThrowMoreThanOneMatchException()
+   at System.Linq.Enumerable.TryGetSingle[TSource](IEnumerable`1 source, Func`2 predicate, Boolean& found)
+   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source, Func`2 predicate)
+   at RAWSelectionAssistant.WpfTests.PlanningProjectPackageWpfTests.<>c.<<UserCommandsExportImportFreshRootReopenResolveCopiesAndSummary>b__0_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407",E:\Kitao-Deliveries\planning-project-packages-20261022\NEW_WPF\run-20261022-133631-1be2a480\000
