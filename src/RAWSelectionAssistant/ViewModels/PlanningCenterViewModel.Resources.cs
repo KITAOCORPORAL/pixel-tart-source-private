@@ -14,7 +14,7 @@ public sealed partial class PlanningCenterViewModel
     private void CapturePlanningUndo()
     {
         _planningRedo.Clear();
-        if (ProjectId is Guid id) _planningUndo.Push((id, PlanningImageStorage.BindDocument(DetachPlanning(_document),_planning.StorageRoot), DetachPlanning(Shots.Select(s => ShotDraft(s.ShotId)).ToArray())));
+        if (ProjectId is Guid id) _planningUndo.Push((id, PlanningProjectCopyStorage.Bind(PlanningImageStorage.BindDocument(DetachPlanning(_document),_planning.StorageRoot),_planning.StorageRoot), DetachPlanning(Shots.Select(s => ShotDraft(s.ShotId)).ToArray())));
     }
     public async Task<bool> SaveResourceAsync(PlanningResource resource)
     {
@@ -38,7 +38,7 @@ public sealed partial class PlanningCenterViewModel
     public async Task<bool> UndoPlanningAsync()
     {
         if (_planningUndo.Count == 0 || _planningUndo.Peek().Project != ProjectId || !await FlushAsync()) return false;
-        _planningRedo.Push((ProjectId!.Value,PlanningImageStorage.BindDocument(DetachPlanning(_document),_planning.StorageRoot),DetachPlanning(Shots.Select(s=>ShotDraft(s.ShotId)).ToArray())));
+        _planningRedo.Push((ProjectId!.Value,PlanningProjectCopyStorage.Bind(PlanningImageStorage.BindDocument(DetachPlanning(_document),_planning.StorageRoot),_planning.StorageRoot),DetachPlanning(Shots.Select(s=>ShotDraft(s.ShotId)).ToArray())));
         var snapshot = _planningUndo.Pop(); EditorGeneration++; UpdateDocument(snapshot.Document);
         foreach (var shot in snapshot.Shots) StageShot(shot);
         var saved = await FlushProgrammaticPlanningAsync(); PresentationChanged(); return saved;
@@ -46,7 +46,7 @@ public sealed partial class PlanningCenterViewModel
     public async Task<bool> RedoPlanningAsync()
     {
         if(_planningRedo.Count==0||_planningRedo.Peek().Project!=ProjectId||!await FlushAsync())return false;
-        _planningUndo.Push((ProjectId!.Value,PlanningImageStorage.BindDocument(DetachPlanning(_document),_planning.StorageRoot),DetachPlanning(Shots.Select(s=>ShotDraft(s.ShotId)).ToArray())));
+        _planningUndo.Push((ProjectId!.Value,PlanningProjectCopyStorage.Bind(PlanningImageStorage.BindDocument(DetachPlanning(_document),_planning.StorageRoot),_planning.StorageRoot),DetachPlanning(Shots.Select(s=>ShotDraft(s.ShotId)).ToArray())));
         var snapshot=_planningRedo.Pop();EditorGeneration++;UpdateDocument(snapshot.Document);foreach(var shot in snapshot.Shots)StageShot(shot);
         var saved=await FlushProgrammaticPlanningAsync();PresentationChanged();return saved;
     }

@@ -192,11 +192,16 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
     private async Task AddLocalReferenceAsync()
     {
         if(!await FlushAsync() || SelectedShot is not{} shot)return;
-        var paths=_dialogs.ChooseFiles("选择拍摄参考（仅关联原位置）","图片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp;*.webp|所有文件|*.*",true);
-        if(paths.Count==0)return;
+        var paths=_dialogs.ChooseFiles("选择拍摄参考（随后选择副本或外链）","图片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp;*.webp|所有文件|*.*",true);
+        if(paths.Count==0 || ChooseProjectCopy() is not bool owned)return;
         var additions=paths.Select(path=>new ProjectShotReference(Guid.NewGuid(),SelectedReferenceKind.Kind,ExternalReference:Path.GetFullPath(path),Title:Path.GetFileNameWithoutExtension(path))).ToArray();
-        var updated=shot with{References=shot.References.Concat(additions).ToArray(),UpdatedAt=DateTimeOffset.UtcNow};
-        await _shots.SaveAsync(updated);ReplaceShot(updated);SelectedReference=References.FirstOrDefault(item=>item.ReferenceId==additions[0].ReferenceId);
+        if(owned)
+        {
+            if(!await ImportProjectCopiesAsync(additions.Select(r=>new PlanningDocumentReference(r)).ToArray(),[]))return;
+            additions=additions.Select(r=>AllProjectReferences.First(a=>a.Link.ProjectCopy is not null && string.Equals(a.Link.Source.ExternalReference,r.ExternalReference,StringComparison.OrdinalIgnoreCase)).Link.Source with{Kind=r.Kind}).ToArray();
+        }
+        var updated=shot with{References=shot.References.Concat(additions).DistinctBy(r=>r.ReferenceId).ToArray(),UpdatedAt=DateTimeOffset.UtcNow};
+        await _shots.SaveAsync(updated);ReplaceShot(updated);SelectedReference=References.FirstOrDefault(item=>item.ReferenceId==additions[0].ReferenceId);await RefreshDocumentReferencesAsync();
     }
     private bool CanMoveReference(int delta)=>SelectedReference is not null&&References.IndexOf(SelectedReference)+delta>=0&&References.IndexOf(SelectedReference)+delta<References.Count;
     private async Task MoveReferenceAsync(int delta)

@@ -11,9 +11,11 @@ public sealed record PlanningSummaryInput(Guid ProjectId,string ProjectName,Plan
 public sealed record PlanningSummaryEntry(string Title,IReadOnlyList<KeyValuePair<string,string>> Fields)
 {
     public IReadOnlyList<PlanningDocumentImage> OwnedImages {get;init;}=[];
+    public IReadOnlyList<PlanningProjectCopy> ProjectCopies {get;init;}=[];
 }
 public sealed record PlanningSummarySection(string Name,IReadOnlyList<PlanningSummaryEntry> Entries)
 {
+    public IReadOnlyList<PlanningProjectCopy> ProjectCopies => Entries.SelectMany(e=>e.ProjectCopies).DistinctBy(c=>c.ReferenceId).ToArray();
     public IReadOnlyList<PlanningDocumentImage> OwnedImages => Entries.SelectMany(e=>e.OwnedImages).OrderBy(i=>i.Order).DistinctBy(i=>i.DocumentImageId).ToArray();
 }
 public sealed record PlanningReadableSummary(Guid ProjectId,Guid? DocumentId,IReadOnlyList<PlanningSummarySection> Sections);
@@ -75,7 +77,7 @@ public static class PlanningReadableSummaryBuilder
             if(expense.ProjectId==input.ProjectId&&expense.Kind==FinanceTransactionKind.Expense)
                 Add(12,"实际支出",("交易ID",expense.Id),("日期",expense.OccurredOn),("金额最小单位",expense.AmountMinor),("币种",expense.CurrencyCode),("小数位",expense.CurrencyScale),("付款状态",expense.PaymentStatus),("类别ID",expense.CategoryId),("交易方",expense.Counterparty),("方式",expense.PaymentMethod),("备注",expense.Note),("附件路径",expense.AttachmentPaths));
         foreach(var expense in (input.Expenses??[]).Where(x=>x.ProjectId==input.ProjectId&&x.Kind==FinanceTransactionKind.Expense))foreach(var path in expense.AttachmentPaths)Add(12,"支出附件引用",("交易ID",expense.Id),("原位置",path),("引用状态",ReferenceState(path)),("范围","仅引用，不复制附件"));
-        foreach(var attachment in d.Attachments)Add(13,attachment.Name,("附件ID",attachment.Id),("原位置",attachment.Path),("引用状态",ReferenceState(attachment.Path)),("交付方式","仅列出引用，不复制或打包附件，不保证跨机可用"),("扩展字段",attachment.Extensions));
+        foreach(var attachment in d.Attachments)Add(13,attachment.Name,("附件ID",attachment.Id),("原位置",attachment.Path),("引用状态",attachment.ProjectCopy is {} copy ? PlanningProjectCopyStorage.Status(copy) : ReferenceState(attachment.Path)),("项目内路径",attachment.ProjectCopy?.RelativePath),("SHA-256",attachment.ProjectCopy?.Sha256),("交付方式",attachment.ProjectCopy is null ? "仅列出外链，不保证跨机可用" : "项目自有附件，随项目管理目录搬迁；普通附件仅列名称与状态，不嵌入DOCX"),("扩展字段",attachment.Extensions));
         Add(14,"文档内容",("内容",d.CustomBody));
         if(d.Package is{} package)
         {
@@ -96,7 +98,13 @@ public static class PlanningReadableSummaryBuilder
         return new(input.ProjectId,d.Package?.DocumentId,SectionOrder.Select((name,i)=>new PlanningSummarySection(name,sections[i].ToArray())).ToArray());
         void AddReference(int section,ProjectShotReference r,string role,params (string Key,object? Value)[] extra)
         {
-            Add(section,r.Title??role,new[]{("引用ID",(object?)r.ReferenceId),("类型",r.Kind),("库ID",r.LibraryId),("素材ID",r.AssetId),("原位置",r.ExternalReference),("引用状态",r.LibraryId is not null?"库引用未解析；保留身份，未复制原文件":ReferenceState(r.ExternalReference)),("备注",r.Note),("固定",r.IsPinned),("执行状态",r.PoseStatus),("详情",r.Details),("扩展字段",r.Extensions)}.Concat(extra).ToArray());
+            Add(section,r.Title??role,new[]{("引用ID",(object?)r.ReferenceId),("类型",r.Kind),("库ID",r.LibraryId),("素材ID",r.AssetId),("原位置",r.ExternalReference),("引用状态",d.References.FirstOrDefault(link=>link.Source.ReferenceId==r.ReferenceId)?.ProjectCopy is {} receipt ? PlanningProjectCopyStorage.Status(receipt) : r.LibraryId is not null?"库引用未解析；保留身份，未复制原文件":ReferenceState(r.ExternalReference)),("备注",r.Note),("固定",r.IsPinned),("执行状态",r.PoseStatus),("详情",r.Details),("扩展字段",r.Extensions)}.Concat(extra).ToArray());
+            var projectCopy=d.References.FirstOrDefault(link=>link.Source.ReferenceId==r.ReferenceId)?.ProjectCopy;
+            if(projectCopy is not null)
+            {
+                Add(section,"项目自有参考副本",("原引用ID",r.ReferenceId),("原来源",projectCopy.OriginalPath),("项目内路径",projectCopy.RelativePath),("SHA-256",projectCopy.Sha256),("副本状态",PlanningProjectCopyStorage.Status(projectCopy)));
+                var last=sections[section][^1];sections[section][^1]=last with{ProjectCopies=[projectCopy]};
+            }
             Attach(section,owned.Where(i=>(r.LibraryId is Guid library&&r.AssetId is Guid asset&&i.Source is{} source&&source.LibraryId==library&&source.AssetId==asset)||OwnPathMatches(i,r.ExternalReference)));
         }
     }

@@ -16,7 +16,7 @@ public sealed record PlanningReferenceItem(PlanningDocumentReference Link, strin
     public bool IsHero => Link.IsHero;
     public bool IsMoodboard => Link.IsMoodboard;
     public string Group => Link.Group;
-    public string Availability => SourceAvailable ? Category : "源文件暂不可用";
+    public string Availability => Link.ProjectCopy is not null ? (SourceAvailable ? "项目自有副本 · " + Category : "项目自有副本不可用（未回退外链）") : SourceAvailable ? "外链/库引用 · " + Category : "源文件暂不可用";
 }
 
 public sealed partial class PlanningCenterViewModel
@@ -30,11 +30,12 @@ public sealed partial class PlanningCenterViewModel
     public IReadOnlyList<string> SourceCategories { get; } = ["素材库", "灵感板", "自由画布"];
     private static string ReferenceCategoryFor(ShotReferenceKind kind) => kind switch
     { ShotReferenceKind.Lighting => "灯光", ShotReferenceKind.Styling => "造型", ShotReferenceKind.Pose => "姿势", ShotReferenceKind.Storyboard => "场景", _ => "其他" };
-    public async Task AddDocumentReferencesAsync(IEnumerable<ProjectShotReference> sources)
+    public async Task AddDocumentReferencesAsync(IEnumerable<ProjectShotReference> sources, bool importProjectCopy = false)
     {
         if (!HasProject) return;
         var category = ContentPage is "灯位图" or "灯光图" ? "灯光" : ContentPage is "服化道与道具" or "服化道" ? "造型" : ReferenceCategory == "全部" ? "其他" : ReferenceCategory;
         var additions = sources.Select(source => new PlanningDocumentReference(source.Normalize(), category)).ToArray();
+        if (importProjectCopy) { await ImportProjectCopiesAsync(additions, []); return; }
         UpdateDocument(_document with { References = _document.References.Concat(additions).DistinctBy(item => item.Source.ReferenceId).ToArray() });
         await FlushAsync(); await RefreshDocumentReferencesAsync();
     }
@@ -46,24 +47,39 @@ public sealed partial class PlanningCenterViewModel
         foreach (var reference in references)
         {
             var path = reference.Source.ExternalReference;
-            if (path is null && ReferencePathResolver is not null) path = await ReferencePathResolver(reference.Source);
+            var owned = reference.ProjectCopy;
+            System.Windows.Media.Imaging.BitmapSource? ownedBitmap = null;
+            if (owned is not null)
+            {
+                try
+                {
+                    PlanningProjectCopyStorage.ReadVerified(owned); path=PlanningProjectCopyStorage.Resolve(owned);
+                    try { ownedBitmap=(System.Windows.Media.Imaging.BitmapSource)RAWSelectionAssistant.Services.PlanningSummaryOwnedImage.ReadImported(owned,owned.ProjectId,owned.DocumentId,1400,1400).Source; }
+                    catch(Exception error)when(error is IOException or InvalidDataException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException) { /* File remains accessible; unsupported image gets no unsafe preview. */ }
+                }
+                catch(Exception error)when(error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException){path=null;}
+            }
+            if (owned is null && path is null && ReferencePathResolver is not null) path = await ReferencePathResolver(reference.Source);
             var available = !string.IsNullOrWhiteSpace(path) && File.Exists(path);
-            var key = reference.Source.LibraryId is Guid library ? $"{library:N}/{reference.Source.AssetId:N}" : reference.Source.ExternalReference ?? reference.Source.ReferenceId.ToString();
+            var key = owned is not null ? owned.ReferenceId.ToString("N") + "/" + owned.Sha256 : reference.Source.LibraryId is Guid library ? $"{library:N}/{reference.Source.AssetId:N}" : reference.Source.ExternalReference ?? reference.Source.ReferenceId.ToString();
             var cache = Path.Combine(AppDataPaths.CacheDirectory, "PlanningPreviews", Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(key))) + ".jpg");
-            if (available && (!File.Exists(cache) || File.GetLastWriteTimeUtc(path!) > File.GetLastWriteTimeUtc(cache)))
+            if (available && (owned is null || ownedBitmap is not null) && (!File.Exists(cache) || File.GetLastWriteTimeUtc(path!) > File.GetLastWriteTimeUtc(cache)))
             {
                 try
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(cache)!);
-                    using var input = File.OpenRead(path!);
-                    var bitmap = new BitmapImage(); bitmap.BeginInit(); bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmap.DecodePixelWidth = 1400; bitmap.StreamSource = input; bitmap.EndInit(); bitmap.Freeze();
+                    System.Windows.Media.Imaging.BitmapSource bitmap;
+                    if(ownedBitmap is not null)bitmap=ownedBitmap;
+                    else
+                    {
+                        using var input=File.OpenRead(path!);var decoded=new BitmapImage();decoded.BeginInit();decoded.CacheOption=BitmapCacheOption.OnLoad;decoded.DecodePixelWidth=1400;decoded.StreamSource=input;decoded.EndInit();decoded.Freeze();bitmap=decoded;
+                    }
                     var encoder = new JpegBitmapEncoder { QualityLevel = 88 }; encoder.Frames.Add(BitmapFrame.Create(bitmap));
                     using var output = File.Create(cache); encoder.Save(output);
                 }
                 catch (Exception error) when (error is IOException or NotSupportedException or System.Runtime.InteropServices.COMException or UnauthorizedAccessException) { }
             }
-            AllProjectReferences.Add(new(reference, File.Exists(cache) ? cache : available ? path : null, available) { OriginalPath = available ? path : null });
+            AllProjectReferences.Add(new(reference, owned is not null ? available && ownedBitmap is not null && File.Exists(cache) ? cache : null : File.Exists(cache) ? cache : available ? path : null, available) { OriginalPath = available ? path : null });
         }
         OnPropertyChanged(nameof(HeroReferences)); PresentationChanged();
     }
@@ -113,11 +129,14 @@ public sealed partial class PlanningCenterViewModel
     }
     public void OpenReferenceSource(PlanningReferenceItem item)
     {
-        if (item.Link.Source.ExternalReference is string path && File.Exists(path)) _dialogs.RevealFile(path);
+        if (item.OriginalPath is string path && File.Exists(path)) _dialogs.RevealFile(path);
         else ViewCapturedAssetsCommand.Execute(null);
     }
-    public async Task<string?> ResolveOriginalAsync(PlanningReferenceItem item) =>
-        item.Link.Source.ExternalReference ?? (ReferencePathResolver is null ? null : await ReferencePathResolver(item.Link.Source));
+    public async Task<string?> ResolveOriginalAsync(PlanningReferenceItem item)
+    {
+        if (item.Link.ProjectCopy is {} copy) { try { PlanningProjectCopyStorage.ReadVerified(copy); return PlanningProjectCopyStorage.Resolve(copy); } catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException) { return null; } }
+        return item.Link.Source.ExternalReference ?? (ReferencePathResolver is null ? null : await ReferencePathResolver(item.Link.Source));
+    }
     public async Task UseReferenceForColorAsync(PlanningReferenceItem item)
     {
         if (ProjectId is not Guid projectId || !await FlushAsync()) return;

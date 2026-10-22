@@ -41,11 +41,13 @@ public sealed record PlanningDocument
 public sealed record PlanningDocumentReference(ProjectShotReference Source, string Category = "其他",
     bool IsHero = false, bool IsMoodboard = false, string Group = "整体氛围")
 {
+    public PlanningProjectCopy? ProjectCopy { get; init; }
     [System.Text.Json.Serialization.JsonExtensionData]
     public Dictionary<string, System.Text.Json.JsonElement>? Extensions { get; init; }
 }
 public sealed record PlanningAttachment(Guid Id, string Path, string Name)
 {
+    public PlanningProjectCopy? ProjectCopy { get; init; }
     [System.Text.Json.Serialization.JsonExtensionData]
     public Dictionary<string, System.Text.Json.JsonElement>? Extensions { get; init; }
 }

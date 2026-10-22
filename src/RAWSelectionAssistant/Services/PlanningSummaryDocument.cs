@@ -16,7 +16,7 @@ public static class PlanningSummaryDocument
         document.Tag=source.Package?.RichLayout?.HeaderFooter??new PlanningHeaderFooter();
         document.Blocks.Add(new Paragraph(new Run("摄影策划 · 15区汇总")){FontSize=22,FontWeight=FontWeights.Bold});
         Text($"项目 {summary.ProjectId:D} · 文档 {summary.DocumentId:D}");
-        Text("只读阅读快照：按现有15区顺序。经身份/Hash校验的项目自有PNG副本可嵌入；外链和素材库原件仅列状态。不是可搬迁项目包，附件未自动打包。汇总不回写15区资源，原摄影DOCX往返合同不变。");
+        Text("只读阅读快照：按现有15区顺序。经身份/Hash校验的项目自有PNG副本可嵌入；外链和素材库原件仅列状态。不是可搬迁项目包，未选择导入的附件仍为外链；自有附件仅列名称与状态，不嵌入DOCX。汇总不回写15区资源，原摄影DOCX往返合同不变。");
         var contentWidth=document.PageWidth-document.PagePadding.Left-document.PagePadding.Right;
         var contentHeight=document.PageHeight-document.PagePadding.Top-document.PagePadding.Bottom;
         for(int index=0;index<summary.Sections.Count;index++)
@@ -35,6 +35,14 @@ public static class PlanningSummaryDocument
                 }
             }
             foreach(var image in section.OwnedImages)AppendOwned(image);
+            foreach(var copy in section.ProjectCopies)
+            {
+                Text("自有参考图："+Path.GetFileName(copy.OriginalPath)+" · 原引用ID "+copy.ReferenceId);
+                try { var image=PlanningSummaryOwnedImage.ReadImported(copy,summary.ProjectId,summary.DocumentId??Guid.Empty,contentWidth,contentHeight); document.Blocks.Add(new Paragraph(new InlineUIContainer(image)){KeepWithNext=true}); }
+                catch(Exception error)when(error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException)
+                { var message="项目自有参考未呈现："+Path.GetFileName(copy.OriginalPath)+"；"+error.Message+"；未读取外部原件。";warnings.Add(message);Text(message); }
+                Text("项目内："+copy.RelativePath+"；SHA-256："+copy.Sha256+"；原来源仅作记录："+copy.OriginalPath);
+            }
         }
         if(warnings.Count>0){Text("导出警告（保留原资料，不替换源文件）");foreach(var warning in warnings)Text(warning);}
         return document;

@@ -122,13 +122,15 @@ public sealed partial class PlanningCenterViewModel
         LinkBookingCommand = new AsyncRelayCommand(_ => LinkSelectedBookingAsync());
         AddDocumentImagesCommand = new AsyncRelayCommand(async _ =>
         {
-            var paths = _dialogs.ChooseFiles("关联参考图（不复制原图）", "图片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp;*.webp", true);
-            await AddDocumentReferencesAsync(paths.Select(path => new ProjectShotReference(Guid.NewGuid(), ShotReferenceKind.General, ExternalReference: Path.GetFullPath(path), Title: Path.GetFileNameWithoutExtension(path))));
+            var paths = _dialogs.ChooseFiles("添加参考图（随后选择副本或外链）", "图片|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp;*.webp", true);
+            if (paths.Count == 0 || ChooseProjectCopy() is not bool owned) return;
+            await AddDocumentReferencesAsync(paths.Select(path => new ProjectShotReference(Guid.NewGuid(), ShotReferenceKind.General, ExternalReference: Path.GetFullPath(path), Title: Path.GetFileNameWithoutExtension(path))), owned);
         });
         AddAttachmentCommand = new AsyncRelayCommand(async _ =>
         {
-            var files = _dialogs.ChooseFiles("关联项目文件", "资料|*.pdf;*.docx;*.txt;*.md;*.jpg;*.png", true);
-            await AddAttachmentsAsync(files);
+            var files = _dialogs.ChooseFiles("添加项目文件（随后选择副本或外链）", "资料|*.pdf;*.docx;*.txt;*.md;*.jpg;*.png", true);
+            if (files.Count == 0 || ChooseProjectCopy() is not bool owned) return;
+            await AddAttachmentsAsync(files, owned);
         });
         OpenColorSchemeCommand = new RelayCommand(_ => { if (ProjectId is Guid id) ColorSchemeRequested?.Invoke(this, id); });
         OpenCalendarCommand = new RelayCommand(_ => { if (_state?.BookingId is Guid id) CalendarRequested?.Invoke(this, id); });
@@ -249,18 +251,20 @@ public sealed partial class PlanningCenterViewModel
         OnPropertyChanged(string.Empty); PresentationChanged();
     }
     private void RefreshAttachments() { Attachments.Clear(); foreach (var item in _document.Attachments) Attachments.Add(item); }
-    public async Task AddAttachmentsAsync(IEnumerable<string> paths)
+    public async Task AddAttachmentsAsync(IEnumerable<string> paths, bool importProjectCopy = false)
     {
+        if (importProjectCopy) { await ImportProjectCopiesAsync([], paths.Select(path => new PlanningAttachment(Guid.NewGuid(), Path.GetFullPath(path), Path.GetFileName(path))).ToArray()); return; }
         UpdateDocument(_document with { Attachments = _document.Attachments.Concat(paths.Select(path => new PlanningAttachment(Guid.NewGuid(), Path.GetFullPath(path), Path.GetFileName(path)))).DistinctBy(item => item.Path, StringComparer.OrdinalIgnoreCase).ToArray() });
         await FlushAsync(); RefreshAttachments();
     }
     public void OpenAttachment(PlanningAttachment item)
     {
-        if (!File.Exists(item.Path)) { _dialogs.ShowInfo("源文件暂不可用。"); return; }
+        var resolved = ResolveAttachmentPath(item);
+        if (resolved is null) { _dialogs.ShowInfo("文件暂不可用，未回退外链。"); return; }
         // Only explicitly requested document/image types are opened; other attachments are revealed.
-        if (new[] { ".pdf", ".docx", ".txt", ".jpg", ".jpeg", ".png" }.Contains(Path.GetExtension(item.Path), StringComparer.OrdinalIgnoreCase))
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(item.Path) { UseShellExecute = true });
-        else _dialogs.RevealFile(item.Path);
+        if (new[] { ".pdf", ".docx", ".txt", ".jpg", ".jpeg", ".png" }.Contains(Path.GetExtension(resolved), StringComparer.OrdinalIgnoreCase))
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(resolved) { UseShellExecute = true });
+        else _dialogs.RevealFile(resolved);
     }
     public async Task RemoveAttachmentAsync(PlanningAttachment item)
     { UpdateDocument(_document with { Attachments = _document.Attachments.Where(file => file.Id != item.Id).ToArray() }); await FlushAsync(); RefreshAttachments(); }

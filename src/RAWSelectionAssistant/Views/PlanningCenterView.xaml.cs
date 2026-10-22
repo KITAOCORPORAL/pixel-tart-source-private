@@ -370,7 +370,7 @@ public partial class PlanningCenterView : UserControl
         if (interactive)
         {
             var toolbar = new WrapPanel();
-            toolbar.Children.Add(AsyncAction("关联本地图片", () => _vm.AddDocumentImagesCommand.ExecuteAsync(null), "SecondaryButton"));
+            toolbar.Children.Add(AsyncAction("添加本地图片（副本/外链）", () => _vm.AddDocumentImagesCommand.ExecuteAsync(null), "SecondaryButton"));
             toolbar.Children.Add(Action("从素材库 / 灵感板 / 自由画布选择", ShowSources));
             if (page == "情绪板") toolbar.Children.Add(AsyncAction("在自由画布中排布", () => _vm.SendToCanvasAsync()));
             DocumentContent.Children.Add(toolbar);
@@ -490,7 +490,7 @@ public partial class PlanningCenterView : UserControl
         var kind = new ComboBox { ItemsSource = _vm.ReferenceKinds, DisplayMemberPath = "Label", Margin = new Thickness(0, 12, 0, 8) };
         kind.SetBinding(Selector.SelectedItemProperty, new Binding(nameof(_vm.SelectedReferenceKind))); AutomationProperties.SetName(kind, "镜头参考类别"); DrawerContent.Children.Add(kind);
         DrawerContent.Children.Add(AsyncAction("关联本地参考", async () => { await _vm.AddLocalReferenceCommand.ExecuteAsync(null); await _vm.RefreshDocumentReferencesAsync(); RenderShotDrawer(); }));
-        foreach (var reference in _vm.References) { DrawerContent.Children.Add(new Image { Source = LoadImage(reference.ExternalReference), MaxHeight = 180, Stretch = Stretch.Uniform }); DrawerContent.Children.Add(Text(reference.Title ?? "参考", 12)); }
+        foreach (var reference in _vm.References) { DrawerContent.Children.Add(new Image { Source = LoadImage(_vm.AllProjectReferences.FirstOrDefault(r=>r.Id==reference.ReferenceId)?.PreviewPath), MaxHeight = 180, Stretch = Stretch.Uniform }); DrawerContent.Children.Add(Text(reference.Title ?? "参考", 12)); }
         var actions = new WrapPanel();
         actions.Children.Add(AsyncAction("当前", async () => { await _vm.SetCurrentShotCommand.ExecuteAsync(null); Render(); }));
         actions.Children.Add(AsyncAction("已拍", async () => { await _vm.MarkShotCompletedCommand.ExecuteAsync(null); Render(); }));
@@ -503,17 +503,17 @@ public partial class PlanningCenterView : UserControl
     private void RenderFiles()
     {
         if (_vm is null) return;
-        DocumentContent.Children.Add(AsyncAction("关联文件", async () => { await _vm.AddAttachmentCommand.ExecuteAsync(null); Render(); }, "SecondaryButton"));
+        DocumentContent.Children.Add(AsyncAction("添加文件（副本/外链）", async () => { await _vm.AddAttachmentCommand.ExecuteAsync(null); Render(); }, "SecondaryButton"));
         Heading(DocumentContent, "项目文件");
-        DocumentContent.Children.Add(Text("保留原位置，使用系统应用打开。PDF、通告单、合同和场地资料统一关联。", 14));
+        DocumentContent.Children.Add(Text("添加时选择“导入项目副本”或“仅关联原位置”。副本随项目管理目录搬迁；外链保持原位置。", 14));
         foreach (var file in _vm.Attachments)
         {
             var row = new StackPanel { Margin = new Thickness(0, 22, 0, 0) }; row.Children.Add(Text(file.Name, 19, true));
-            row.Children.Add(Text(File.Exists(file.Path) ? Path.GetExtension(file.Path).TrimStart('.').ToUpperInvariant() : "源文件暂不可用", 12));
-            var metadata = Text("来源：" + file.Path + (File.Exists(file.Path) ? "\n更新于 " + File.GetLastWriteTime(file.Path).ToString("yyyy-MM-dd HH:mm") : ""), 12);
+            row.Children.Add(Text(_vm.AttachmentStatus(file), 12));
+            var metadata = Text("原来源：" + file.Path + (file.ProjectCopy is {} copy ? "\n项目内：" + copy.RelativePath + "\nSHA-256：" + copy.Sha256 : "\n外链，未复制"), 12);
             metadata.Foreground = Brush("TextSecondaryBrush"); row.Children.Add(metadata);
             var actions = new WrapPanel(); actions.Children.Add(AsyncAction("打开文件", () => { _vm.OpenAttachment(file); return Task.CompletedTask; }));
-            actions.Children.Add(Action("打开所在位置", () => _vm.Dialogs.RevealFile(file.Path)));
+            actions.Children.Add(Action("打开所在位置", () => _vm.RevealAttachment(file)));
             actions.Children.Add(AsyncAction("移除关联", async () => { await _vm.RemoveAttachmentAsync(file); Render(); })); row.Children.Add(actions); DocumentContent.Children.Add(row);
         }
     }

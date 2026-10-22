@@ -28,15 +28,26 @@ public static class PlanningSummaryOwnedImage
         if(stream.Length<33||stream.Length>MaximumBytes)throw new InvalidDataException("自有图片大小不支持（允许33字节至64MB）。");
         var data=new byte[checked((int)stream.Length)];stream.ReadExactly(data);
         if(!Convert.ToHexString(SHA256.HashData(data)).Equals(meta.CopyHash,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("自有副本已变化（SHA-256不符）；未嵌入。");
+        var image=Decode(data,meta.Width,meta.Height,contentWidth,contentHeight,meta.Title+"\n"+meta.Caption); image.Tag=meta; return image;
+    }
+    public static Image ReadImported(PlanningProjectCopy copy, Guid projectId, Guid documentId, double contentWidth, double contentHeight)
+    {
+        if(copy.Kind!="reference" || copy.ProjectId!=projectId || copy.DocumentId!=documentId)throw new InvalidDataException("自有参考与汇总项目/文档身份不匹配。");
+        var data=PlanningProjectCopyStorage.ReadVerified(copy);
+        if(data.Length<33)throw new NotSupportedException("自有参考不在安全PNG呈现范围；保留文件名称与状态。");
+        return Decode(data,520,360,contentWidth,contentHeight,Path.GetFileName(copy.OriginalPath));
+    }
+    private static Image Decode(byte[] data,double savedWidth,double savedHeight,double contentWidth,double contentHeight,string title)
+    {
         if(!data.AsSpan(0,8).SequenceEqual(new byte[]{137,80,78,71,13,10,26,10})||!data.AsSpan(12,4).SequenceEqual("IHDR"u8))throw new NotSupportedException("自有副本不是已支持的PNG格式；未尝试其他文件。");
         var width=BinaryPrimitives.ReadUInt32BigEndian(data.AsSpan(16,4));var height=BinaryPrimitives.ReadUInt32BigEndian(data.AsSpan(20,4));
         if(width==0||height==0||width>16384||height>16384||(long)width*height>MaximumPixels)throw new InvalidDataException("图片像素尺寸超过汇总安全范围（最长边16384且总像素不超过4000万）。");
         using var bytes=new MemoryStream(data,false);var decoder=BitmapDecoder.Create(bytes,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad);
         if(decoder.Frames.Count!=1)throw new NotSupportedException("多帧图片不在当前汇总范围。");
         var bitmap=decoder.Frames[0];if(bitmap.PixelWidth!=width||bitmap.PixelHeight!=height)throw new InvalidDataException("图片头与解码尺寸不一致。");bitmap.Freeze();
-        var maxWidth=Math.Max(1,Math.Min(meta.Width,Math.Min(520,contentWidth)));var maxHeight=Math.Max(1,Math.Min(meta.Height,Math.Min(360,contentHeight*.42)));
+        var maxWidth=Math.Max(1,Math.Min(savedWidth,Math.Min(520,contentWidth)));var maxHeight=Math.Max(1,Math.Min(savedHeight,Math.Min(360,contentHeight*.42)));
         var scale=Math.Min(1,Math.Min(maxWidth/bitmap.PixelWidth,maxHeight/bitmap.PixelHeight));
-        return new Image{Source=bitmap,Width=bitmap.PixelWidth*scale,Height=bitmap.PixelHeight*scale,Stretch=Stretch.Uniform,Tag=meta,ToolTip=meta.Title+"\n"+meta.Caption};
+        return new Image{Source=bitmap,Width=bitmap.PixelWidth*scale,Height=bitmap.PixelHeight*scale,Stretch=Stretch.Uniform,ToolTip=title};
     }
     public static string SourceLabel(PlanningDocumentImage meta)=>meta.Source is{} source
         ?$"来源：项目自有历史副本；文档ID {meta.DocumentId:D}；图片ID {meta.DocumentImageId:D}；原库ID {source.LibraryId:D}；素材ID {source.AssetId:D}；原素材Hash {source.ContentHash}；副本Hash {meta.CopyHash}。未读取库当前原件，不代表项目完整跨机便携。"

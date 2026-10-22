@@ -32,9 +32,10 @@ public sealed partial class PlanningCenterViewModel
         var source=_document.Package?.RichLayout is{} layout
             ?_document with{Package=_document.Package with{RichLayout=layout with{Images=layout.Images.Select(i=>i with{StorageRoot=_planning.StorageRoot}).ToArray()}}}
             :_document;
+        source=PlanningProjectCopyStorage.Bind(source,_planning.StorageRoot);
         var input=new PlanningSummaryInput(project,ProjectName,source,_state?.Summary??new(),Shots.Select(s=>ShotDraft(s.ShotId)).ToArray(),_booking,expenses,expenseState,_state?.VisualLinks);
         var result=PlanningSummaryDocument.Export(PlanningReadableSummaryBuilder.Build(input),source,full);
-        SummaryExportStatus=$"15区汇总DOCX已导出；{result.Warnings.Count}项文档图片警告。外链/附件只列状态，未打包。";
+        SummaryExportStatus=$"15区汇总DOCX已导出；{result.Warnings.Count}项文档图片警告。项目自有参考按安全PNG规则呈现；普通附件列名称/状态；未导入外链不打包。";
         OnPropertyChanged(nameof(SummaryExportStatus));return result;
     }
 }
