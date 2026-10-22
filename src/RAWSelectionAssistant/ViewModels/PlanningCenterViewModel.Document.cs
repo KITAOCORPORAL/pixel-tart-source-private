@@ -141,6 +141,9 @@ public sealed partial class PlanningCenterViewModel
     private void UpdateDocument(PlanningDocument value)
     {
         if (_state is null) return;
+        // Explicitly promoting a shot reference into a document section carries its
+        // verified receipt with it; never leave two competing owners for the same ID.
+        value=value with{ShotExternalLinks=value.ShotExternalLinks.Where(link=>!value.References.Any(r=>r.Source.ReferenceId==link.ReferenceId)).ToArray()};
         var package = value.Package ?? _document.Package ?? value.EnsureIdentity(_state.ProjectId).Package!;
         _document = value with { Package = package with { Body = value.Body,
             Assets = value.References.Where(r => r.Source.LibraryId.HasValue && r.Source.AssetId.HasValue)

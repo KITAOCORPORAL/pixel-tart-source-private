@@ -25,8 +25,21 @@ public static class PlanningProjectCopyStorage
     public static PlanningDocument Bind(PlanningDocument document, string root) => document with
     {
         References = document.References.Select(r => r with { ReconnectedFile = BindExternal(r.ReconnectedFile,r.Source.ReferenceId,"reference",r.Source.ExternalReference), ProjectCopy = BindCopy(r.ProjectCopy, document, r.Source.ReferenceId, "reference", r.Source.ExternalReference, root) }).ToArray(),
+        ShotExternalLinks = BindShotLinks(document,root),
         Attachments = document.Attachments.Select(a => a with { ReconnectedFile = BindExternal(a.ReconnectedFile,a.Id,"attachment",a.Path), ProjectCopy = BindCopy(a.ProjectCopy, document, a.Id, "attachment", a.Path, root) }).ToArray()
     };
+    private static IReadOnlyList<PlanningShotExternalLink> BindShotLinks(PlanningDocument document,string root)
+    {
+        if(document.ShotExternalLinks.Select(s=>s.ReferenceId).Distinct().Count()!=document.ShotExternalLinks.Count)
+            throw new InvalidDataException("重复镜头外链收据ID。");
+        return document.ShotExternalLinks.Select(link=>
+        {
+            link.Validate();
+            if(document.References.Any(r=>r.Source.ReferenceId==link.ReferenceId) || document.Attachments.Any(a=>a.Id==link.ReferenceId))
+                throw new InvalidDataException("镜头独有收据与文档引用ID冲突。");
+            return link with{ProjectCopy=BindCopy(link.ProjectCopy,document,link.ReferenceId,"reference",link.OriginalPath,root)};
+        }).ToArray();
+    }
     private static PlanningExternalFile? BindExternal(PlanningExternalFile? file,Guid id,string kind,string? original)
     {
         if(file is not null){if(original is null)throw new InvalidDataException("重连无原路径");file.Validate(id,kind,original);}return file;

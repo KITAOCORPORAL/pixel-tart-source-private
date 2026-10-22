@@ -103,6 +103,21 @@ public sealed class ProjectShotStore(string directory)
         finally { gate.Release(); }
     }
 
+    // Reconnect writes only the planning receipt, but freezes the source catalog until that
+    // atomic write completes. No second file transaction or shot rewrite is necessary.
+    internal async Task WithCatalogLockAsync(Guid projectId, Func<ProjectShotCatalog, Task> action, CancellationToken token)
+    {
+        var path=FilePath(projectId);var gate=Gates.GetOrAdd(path,_=>new(1,1));await gate.WaitAsync(token).ConfigureAwait(false);
+        try
+        {
+            // Keep a read lease on existing bytes across the planning commit. It also blocks
+            // replace/delete by a different process on Windows while confirmation is applied.
+            using var lease=File.Exists(path)?new FileStream(path,FileMode.Open,FileAccess.Read,FileShare.Read):null;
+            await action(await ReadAsync(projectId,path,token).ConfigureAwait(false)).ConfigureAwait(false);
+        }
+        finally{gate.Release();}
+    }
+
     public Task SaveAsync(ProjectShot shot, CancellationToken token = default)
     {
         shot = shot.Normalize();

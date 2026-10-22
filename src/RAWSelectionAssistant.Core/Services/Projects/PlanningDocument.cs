@@ -10,7 +10,7 @@ public sealed record PlanningDocument
     public IReadOnlyList<PlanningShotColumn> ShotColumns { get; init; } = [];
     public PlanningDocument EnsureIdentity(Guid projectId)
     {
-        if (projectId == Guid.Empty || FoundationVersion is < 0 or > 1 || ShotColumns is null || References is null || Attachments is null)
+        if (projectId == Guid.Empty || FoundationVersion is < 0 or > 1 || ShotColumns is null || References is null || Attachments is null || ShotExternalLinks is null)
             throw new System.IO.InvalidDataException("Invalid planning foundation schema.");
         Resources.Validate(); Presentation.Validate();
         foreach (var column in ShotColumns) column.Validate();
@@ -36,6 +36,7 @@ public sealed record PlanningDocument
     public DateTimeOffset? ShootDate { get; init; }
     public IReadOnlyList<PlanningDocumentReference> References { get; init; } = [];
     public IReadOnlyList<PlanningAttachment> Attachments { get; init; } = [];
+    public IReadOnlyList<PlanningShotExternalLink> ShotExternalLinks { get; init; } = [];
 }
 
 public sealed record PlanningDocumentReference(ProjectShotReference Source, string Category = "其他",

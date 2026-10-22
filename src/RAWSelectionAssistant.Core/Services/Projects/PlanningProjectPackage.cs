@@ -17,7 +17,7 @@ public static class PlanningProjectPackage
         var d=state.Document??throw new InvalidDataException("项目无策划数据");var rows=new List<string>();
         foreach(var r in d.References.Where(r=>r.ProjectCopy is null))rows.Add($"外链/库引用 {r.Source.ReferenceId:D}：{r.Source.ExternalReference??$"Library {r.Source.LibraryId}/{r.Source.AssetId}"}；原件未包含");
         foreach(var a in d.Attachments.Where(a=>a.ProjectCopy is null))rows.Add($"外链附件 {a.Id:D}：{a.Name} / {a.Path}；未包含");
-        var owned=d.References.Where(r=>r.ProjectCopy is not null).Select(r=>r.Source.ReferenceId).ToHashSet();
+        var owned=PlanningReferenceLinks.Copies(d).Where(c=>c.Kind=="reference").Select(c=>c.ReferenceId).ToHashSet();
         foreach(var r in shots.Shots.SelectMany(s=>s.References).Where(r=>!owned.Contains(r.ReferenceId)))rows.Add($"镜头外部/库引用 {r.ReferenceId:D}：{r.ExternalReference??$"Library {r.LibraryId}/{r.AssetId}"}；未包含");
         if(state.BookingId is not null)rows.Add($"档期/客户数据库关系 {state.BookingId:D}：未包含关联业务记录");
         foreach(var link in state.VisualLinks??[])rows.Add($"灵感板/自由画布依赖 {link.TargetId:D}：{link.Title}；未包含");
@@ -30,7 +30,8 @@ public static class PlanningProjectPackage
     internal static PlanningDocument RequireLocalReconnect(PlanningDocument document) => document with
     {
         References=document.References.Select(x=>x with{ReconnectedFile=null}).ToArray(),
-        Attachments=document.Attachments.Select(x=>x with{ReconnectedFile=null}).ToArray()
+        Attachments=document.Attachments.Select(x=>x with{ReconnectedFile=null}).ToArray(),
+        ShotExternalLinks=document.ShotExternalLinks.Where(x=>x.ProjectCopy is not null).Select(x=>x with{ReconnectedFile=null}).ToArray()
     };
     private static string Hash(byte[] bytes)=>Convert.ToHexString(SHA256.HashData(bytes));
     private static string Safe(string path)
@@ -40,10 +41,11 @@ public static class PlanningProjectPackage
     public static async Task ExportAsync(string path,PhotoProjectRecord project,PlanningProjectState state,ProjectShotCatalog shots,string planningRoot,CancellationToken token=default,IProgress<long>? progress=null)
     {
         if(project.Id!=state.ProjectId||shots.ProjectId!=project.Id)throw new InvalidDataException("导出项目身份不一致");state=state.Normalize();var d=PlanningProjectCopyStorage.Bind(state.Document??throw new InvalidDataException("无策划文档"),planningRoot);state=state with{Document=d};
+        PlanningReferenceLinks.ValidateCatalog(d,shots);
         var data=new Dictionary<string,byte[]>(StringComparer.OrdinalIgnoreCase);
         void Add(string name,byte[] bytes){Safe(name);if(bytes.LongLength>64L*1024*1024||!data.TryAdd(name,bytes))throw new InvalidDataException("重复文件或单文件过大");if(data.Count>2000||data.Values.Sum(b=>(long)b.Length)>MaximumTotalBytes)throw new InvalidDataException("项目包超出256MiB/2000文件限制");}
         Add("planning.json",JsonSerializer.SerializeToUtf8Bytes(state,Json));Add("shots.json",JsonSerializer.SerializeToUtf8Bytes(shots,Json));
-        foreach(var c in d.References.Select(r=>r.ProjectCopy).Concat(d.Attachments.Select(a=>a.ProjectCopy)).OfType<PlanningProjectCopy>().DistinctBy(c=>c.RelativePath)){token.ThrowIfCancellationRequested();Add("planning/"+c.RelativePath,PlanningProjectCopyStorage.ReadVerified(c));progress?.Report(data.Values.Sum(b=>(long)b.Length));}
+        foreach(var c in PlanningReferenceLinks.Copies(d).DistinctBy(c=>c.RelativePath)){token.ThrowIfCancellationRequested();Add("planning/"+c.RelativePath,PlanningProjectCopyStorage.ReadVerified(c));progress?.Report(data.Values.Sum(b=>(long)b.Length));}
         foreach(var image in d.Package?.RichLayout?.Images??[])
         {
             var bound=PlanningImageStorage.Bind(image,planningRoot);var actual=PlanningImageStorage.Resolve(bound);var expected=Path.GetFullPath(Path.Combine(planningRoot,PlanningImageStorage.RelativePath(image.DocumentId,image.DocumentImageId)));
@@ -64,8 +66,8 @@ public static class PlanningProjectPackage
         foreach(var row in manifest.Files){token.ThrowIfCancellationRequested();Safe(row.Path);if(row.Path=="manifest.json"||!entries.TryGetValue(row.Path,out var entry)||row.Bytes!=entry.Length||row.Sha256 is null||row.Sha256.Length!=64||!row.Sha256.All(Uri.IsHexDigit))throw new InvalidDataException("文件清单不匹配/缺文件");var bytes=Read(entry,64*1024*1024);if(!Hash(bytes).Equals(row.Sha256,StringComparison.OrdinalIgnoreCase)||!data.TryAdd(row.Path,bytes))throw new InvalidDataException("项目包文件SHA-256不符/重复");progress?.Report(done+=bytes.Length);}
         if(!data.TryGetValue("planning.json",out var stateBytes)||!data.TryGetValue("shots.json",out var shotBytes)||stateBytes.Length>16*1024*1024||shotBytes.Length>16*1024*1024)throw new InvalidDataException("策划元数据缺失或超限");var state=(JsonSerializer.Deserialize<PlanningProjectState>(stateBytes,Json)??throw new InvalidDataException()).Normalize();var shots=JsonSerializer.Deserialize<ProjectShotCatalog>(shotBytes,Json)??throw new InvalidDataException();
         if(state.ProjectId!=manifest.ProjectId||state.Document?.Package?.DocumentId!=manifest.DocumentId||shots.ProjectId!=manifest.ProjectId||shots.Version!=1||shots.Revision<0||shots.Shots is null||shots.Shots.Any(s=>s.ProjectId!=manifest.ProjectId)||shots.Shots.Select(s=>s.ShotId).Distinct().Count()!=shots.Shots.Count)throw new InvalidDataException("包内项目/文档/镜头身份不匹配");foreach(var s in shots.Shots)s.Normalize();
-        var d=PlanningProjectCopyStorage.Bind(state.Document!,Path.GetTempPath());var wanted=new HashSet<string>(StringComparer.OrdinalIgnoreCase){"planning.json","shots.json"};
-        foreach(var c in d.References.Select(r=>r.ProjectCopy).Concat(d.Attachments.Select(a=>a.ProjectCopy)).OfType<PlanningProjectCopy>()){var name="planning/"+c.RelativePath;if(!data.TryGetValue(name,out var b)||b.Length!=c.Bytes||!Hash(b).Equals(c.Sha256,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("自有副本缺失或hash不符");wanted.Add(name);}
+        var d=PlanningProjectCopyStorage.Bind(state.Document!,Path.GetTempPath());PlanningReferenceLinks.ValidateCatalog(d,shots);var wanted=new HashSet<string>(StringComparer.OrdinalIgnoreCase){"planning.json","shots.json"};
+        foreach(var c in PlanningReferenceLinks.Copies(d)){var name="planning/"+c.RelativePath;if(!data.TryGetValue(name,out var b)||b.Length!=c.Bytes||!Hash(b).Equals(c.Sha256,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("自有副本缺失或hash不符");wanted.Add(name);}
         foreach(var image in d.Package?.RichLayout?.Images??[]){image.Validate();if(image.DocumentId!=manifest.DocumentId)throw new InvalidDataException("图片跨文档");var rel=PlanningImageStorage.RelativePath(image.DocumentId,image.DocumentImageId);if(image.CopyPath.Replace('\\','/')!=rel)throw new InvalidDataException("包内图片须规范相对路径");var name="planning/"+rel;if(!data.TryGetValue(name,out var b)||!Hash(b).Equals(image.CopyHash,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("文档图片缺失/变化");wanted.Add(name);}
         if(!Dependencies(state,shots).OrderBy(x=>x,StringComparer.Ordinal).SequenceEqual(manifest.ExcludedDependencies.OrderBy(x=>x,StringComparer.Ordinal)))throw new InvalidDataException("未包含依赖清单与项目内容不符");
         if(!wanted.SetEquals(data.Keys))throw new InvalidDataException("存在未声明归属的额外包文件");return(manifest,data,state,shots);
@@ -84,7 +86,7 @@ public static class PlanningProjectPackage
         {
             foreach(var item in checkedPackage.Data.Where(p=>p.Key.StartsWith("planning/",StringComparison.Ordinal))){token.ThrowIfCancellationRequested();var path=Path.Combine(stage,item.Key);PlanningImageStorage.RejectLinks(stage,path);Directory.CreateDirectory(Path.GetDirectoryName(path)!);await File.WriteAllBytesAsync(path,item.Value,token).ConfigureAwait(false);progress?.Report(item.Value.Length);}
             var planning=new PlanningProjectStore(Path.Combine(stage,"planning"));await planning.SaveAsync(checkedPackage.State with{Document=RequireLocalReconnect(checkedPackage.State.Document!)},token).ConfigureAwait(false);var shots=new ProjectShotStore(Path.Combine(stage,"shots"));await shots.SaveCatalogAsync(checkedPackage.Shots,token).ConfigureAwait(false);
-            var loaded=await planning.LoadAsync(m.ProjectId,token).ConfigureAwait(false);foreach(var copy in loaded.Document!.References.Select(r=>r.ProjectCopy).Concat(loaded.Document.Attachments.Select(a=>a.ProjectCopy)).OfType<PlanningProjectCopy>())PlanningProjectCopyStorage.ReadVerified(copy);
+            var loaded=await planning.LoadAsync(m.ProjectId,token).ConfigureAwait(false);foreach(var copy in PlanningReferenceLinks.Copies(loaded.Document!))PlanningProjectCopyStorage.ReadVerified(copy);
             foreach(var image in loaded.Document.Package?.RichLayout?.Images??[])PlanningImageStorage.Resolve(image);
             await File.WriteAllTextAsync(Path.Combine(stage,"imported-manifest.json"),JsonSerializer.Serialize(m,Json),token).ConfigureAwait(false);
             var db=new PixelTartDatabase(Path.Combine(stage,"project.db"));var migration=await new DatabaseMigrator(db,new DatabaseBackupService(db,Path.Combine(stage,"backup"))).MigrateAsync(token).ConfigureAwait(false);if(!migration.Success)throw new IOException("隔离项目数据库建立失败");

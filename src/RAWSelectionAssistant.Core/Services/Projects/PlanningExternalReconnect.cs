@@ -7,9 +7,9 @@ public sealed record PlanningExternalFile(Guid ReferenceId, string Kind, string 
 {
     public void Validate(Guid id, string kind, string original)
     {
-        if (ReferenceId != id || Kind != kind || !OriginalPath.Equals(original, StringComparison.Ordinal) ||
+        if (ReferenceId != id || Kind != kind || OriginalPath is null || !OriginalPath.Equals(original, StringComparison.Ordinal) ||
             !Path.IsPathFullyQualified(SelectedPath) || Bytes is < 1 or > PlanningProjectCopyStorage.MaximumBytes ||
-            Sha256.Length != 64 || !Sha256.All(Uri.IsHexDigit) || string.IsNullOrWhiteSpace(FileType))
+            Sha256 is null || Sha256.Length != 64 || !Sha256.All(Uri.IsHexDigit) || string.IsNullOrWhiteSpace(FileType))
             throw new InvalidDataException("重连文件身份与引用不符。");
     }
     public static async Task<PlanningExternalFile> InspectAsync(Guid id, string kind, string original, string selected, CancellationToken token = default)
@@ -75,7 +75,15 @@ public sealed record PlanningExternalFile(Guid ReferenceId, string Kind, string 
 
 public sealed partial class PlanningProjectStore
 {
-    public async Task ReconnectExternalAsync(Guid projectId, PlanningExternalFile selected, bool importCopy, CancellationToken token = default)
+    public Task ReconnectExternalAsync(Guid projectId, PlanningExternalFile selected, bool importCopy, CancellationToken token = default) =>
+        ReconnectExternalCoreAsync(projectId,selected,importCopy,null,null,token);
+
+    public Task ReconnectExternalAsync(Guid projectId,PlanningExternalFile selected,bool importCopy,ProjectShotStore shots,
+        IReadOnlyList<Guid>? expectedShotIds=null,CancellationToken token=default) =>
+        shots.WithCatalogLockAsync(projectId,catalog=>ReconnectExternalCoreAsync(projectId,selected,importCopy,catalog,expectedShotIds,token),token);
+
+    private async Task ReconnectExternalCoreAsync(Guid projectId,PlanningExternalFile selected,bool importCopy,
+        ProjectShotCatalog? catalog,IReadOnlyList<Guid>? expectedShotIds,CancellationToken token)
     {
         var created = new List<string>();
         await UpdateAsync(projectId, async state =>
@@ -83,28 +91,43 @@ public sealed partial class PlanningProjectStore
             var document = (state.Document ?? throw new InvalidDataException("无策划文档")).EnsureIdentity(projectId);
             var refs = document.References.Where(x => x.Source.ReferenceId == selected.ReferenceId).ToArray();
             var files = document.Attachments.Where(x => x.Id == selected.ReferenceId).ToArray();
-            if (refs.Length + files.Length != 1 || (selected.Kind == "reference") != (refs.Length == 1))
+            var occurrences=catalog?.Shots.Where(s=>s.References.Any(r=>r.ReferenceId==selected.ReferenceId)).ToArray()??[];
+            if(expectedShotIds is not null && !expectedShotIds.Order().SequenceEqual(occurrences.Select(s=>s.ShotId).Order()))
+                throw new InvalidDataException("确认期间镜头引用归属变化；请重新选择。");
+            var shotOnly=selected.Kind=="reference" && refs.Length==0 && occurrences.Length>0;
+            if(refs.Length+files.Length!=(shotOnly?0:1) || (selected.Kind=="reference" && files.Length>0) ||
+                (selected.Kind=="attachment" && refs.Length>0) || (selected.Kind=="attachment" && occurrences.Length>0))
                 throw new InvalidDataException("同ID冲突或引用已移除；未改写现有数据。");
-            var original = refs.Length == 1 ? refs[0].Source.ExternalReference : files[0].Path;
-            if (original is null || (refs.Length == 1 && (refs[0].Source.LibraryId is not null || refs[0].ProjectCopy is not null)) ||
-                (files.Length == 1 && files[0].ProjectCopy is not null)) throw new InvalidDataException("素材库或已有自有副本不可被重连覆盖。");
-            selected.Validate(selected.ReferenceId, selected.Kind, original);
-            var verified = await PlanningExternalFile.InspectAsync(selected.ReferenceId, selected.Kind, original, selected.SelectedPath, token);
-            if (!selected.SameContent(verified)) throw new InvalidDataException("确认后文件类型、大小或SHA-256变化；请重新选择。");
-            PlanningProjectCopy? copy = null;
-            if (importCopy)
+            if(selected.Kind=="reference" && catalog is not null && PlanningReferenceLinks.HasConflict(document,catalog.Shots,selected.ReferenceId))
+                throw new InvalidDataException("同ID文档/镜头来源冲突；未改写现有数据。");
+            var shotSource=occurrences.FirstOrDefault()?.References.Single(r=>r.ReferenceId==selected.ReferenceId);
+            var original=refs.Length==1?refs[0].Source.ExternalReference:files.Length==1?files[0].Path:shotSource?.ExternalReference;
+            var previousShot=document.ShotExternalLinks.SingleOrDefault(r=>r.ReferenceId==selected.ReferenceId);
+            if(original is null || refs.Any(r=>r.Source.LibraryId is not null || r.ProjectCopy is not null) ||
+                files.Any(f=>f.ProjectCopy is not null) || occurrences.Any(s=>s.References.Any(r=>r.ReferenceId==selected.ReferenceId && r.LibraryId is not null)) ||
+                previousShot?.ProjectCopy is not null || (previousShot is not null && previousShot.OriginalPath!=original))
+                throw new InvalidDataException("素材库、冲突来源或已有自有副本不可被重连覆盖。");
+            selected.Validate(selected.ReferenceId,selected.Kind,original);
+            var verified=await PlanningExternalFile.InspectAsync(selected.ReferenceId,selected.Kind,original,selected.SelectedPath,token).ConfigureAwait(false);
+            if(!selected.SameContent(verified))throw new InvalidDataException("确认后文件类型、大小或SHA-256变化；请重新选择。");
+            // A repeated approval is idempotent and never demotes/overwrites an owned copy.
+            PlanningProjectCopy? copy=null;
+            if(importCopy)
             {
-                copy = await PlanningProjectCopyStorage.CopyAsync(StorageRoot, projectId, document.Package!.DocumentId,
-                    selected.ReferenceId, selected.Kind, selected.SelectedPath, created, token, recordedOriginal: original);
-                if (copy.Bytes != selected.Bytes || !copy.Sha256.Equals(selected.Sha256, StringComparison.OrdinalIgnoreCase))
+                copy=await PlanningProjectCopyStorage.CopyAsync(StorageRoot,projectId,document.Package!.DocumentId,
+                    selected.ReferenceId,selected.Kind,selected.SelectedPath,created,token,recordedOriginal:original).ConfigureAwait(false);
+                if(copy.Bytes!=selected.Bytes || !copy.Sha256.Equals(selected.Sha256,StringComparison.OrdinalIgnoreCase))
                     throw new InvalidDataException("复制期间文件内容变化；策划未提交。");
             }
             token.ThrowIfCancellationRequested();
-            return state with { Document = document with
+            var shotLinks=document.ShotExternalLinks.Where(r=>r.ReferenceId!=selected.ReferenceId).ToList();
+            if(shotOnly)shotLinks.Add(new(selected.ReferenceId,original,occurrences.Select(s=>s.ShotId).ToArray(),verified,copy));
+            return state with{Document=document with
             {
-                References = document.References.Select(x => x.Source.ReferenceId == selected.ReferenceId ? x with { ReconnectedFile = verified, ProjectCopy = copy } : x).ToArray(),
-                Attachments = document.Attachments.Select(x => x.Id == selected.ReferenceId ? x with { ReconnectedFile = verified, ProjectCopy = copy } : x).ToArray()
+                References=document.References.Select(x=>x.Source.ReferenceId==selected.ReferenceId?x with{ReconnectedFile=verified,ProjectCopy=copy}:x).ToArray(),
+                Attachments=document.Attachments.Select(x=>x.Id==selected.ReferenceId?x with{ReconnectedFile=verified,ProjectCopy=copy}:x).ToArray(),
+                ShotExternalLinks=shotLinks
             }};
-        }, token, () => { foreach (var path in created) { PlanningImageStorage.RejectLinks(StorageRoot,path); if(File.Exists(path)) File.Delete(path); } });
+        },token,()=>{foreach(var path in created){PlanningImageStorage.RejectLinks(StorageRoot,path);if(File.Exists(path))File.Delete(path);}}).ConfigureAwait(false);
     }
 }

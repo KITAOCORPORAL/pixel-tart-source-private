@@ -17,11 +17,11 @@ public static class PlanningCopyRecovery
         var staging=Path.Combine(root,"project-copies",project.ToString("N"),doc.ToString("N"),".staging");
         PlanningImageStorage.RejectLinks(root,staging);if(!Directory.Exists(staging))return items;
         // Draft uncertainty means no deletion. A valid recovery draft can still own a completed copy.
-        var references=document.References.Select(r=>r.ProjectCopy).Concat(document.Attachments.Select(a=>a.ProjectCopy)).Where(c=>c is not null).Select(c=>c!.RelativePath).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var references=PlanningReferenceLinks.Copies(document).Where(c=>c is not null).Select(c=>c!.RelativePath).ToHashSet(StringComparer.OrdinalIgnoreCase);
         var draftPath=Path.Combine(root,project.ToString("N")+".planning.json.draft");
         if(File.Exists(draftPath))
         {
-            try{PlanningImageStorage.RejectLinks(root,draftPath);using var f=File.OpenRead(draftPath);var draft=JsonSerializer.Deserialize<PlanningDocumentDraft>(f);if(draft?.ProjectId!=project)throw new InvalidDataException();foreach(var c in draft.Document.References.Select(r=>r.ProjectCopy).Concat(draft.Document.Attachments.Select(a=>a.ProjectCopy)).OfType<PlanningProjectCopy>())references.Add(c.RelativePath);}
+            try{PlanningImageStorage.RejectLinks(root,draftPath);using var f=File.OpenRead(draftPath);var draft=JsonSerializer.Deserialize<PlanningDocumentDraft>(f);if(draft?.ProjectId!=project)throw new InvalidDataException();foreach(var c in PlanningReferenceLinks.Copies(draft.Document).OfType<PlanningProjectCopy>())references.Add(c.RelativePath);}
             catch(Exception e)when(e is IOException or UnauthorizedAccessException or JsonException or InvalidDataException){return [new(draftPath,"保留","草稿归属/引用无法核对，未清理任何文件")];}
         }
         foreach(var journal in Directory.EnumerateFiles(staging,"*.owner.json",SearchOption.TopDirectoryOnly).Take(1000))

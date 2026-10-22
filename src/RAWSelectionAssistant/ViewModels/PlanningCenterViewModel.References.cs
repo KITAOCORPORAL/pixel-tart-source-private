@@ -41,11 +41,13 @@ public sealed partial class PlanningCenterViewModel
     }
     public async Task RefreshDocumentReferencesAsync()
     {
-        var references = _document.References.Concat(Shots.SelectMany(shot => shot.References)
-            .Select(source => new PlanningDocumentReference(source, ReferenceCategoryFor(source.Kind)))).DistinctBy(item => item.Source.ReferenceId).ToArray();
+        var references = _document.References.Concat(Shots.SelectMany(shot => shot.References
+            .Select(source => PlanningReferenceLinks.ForShot(_document,shot,source,ReferenceCategoryFor(source.Kind))))).DistinctBy(item => item.Source.ReferenceId).ToArray();
         AllProjectReferences.Clear();
         foreach (var reference in references)
         {
+            var conflict=PlanningReferenceLinks.HasConflict(_document,Shots,reference.Source.ReferenceId);
+            if(conflict){AllProjectReferences.Add(new(reference with{ProjectCopy=null,ReconnectedFile=null},null,false));continue;}
             var path = (ImportedPackageRoot is not null || IsPackageImported) && reference.ProjectCopy is null ? null : reference.Source.ExternalReference;
             if (reference.ReconnectedFile is {} reconnected && reference.Source.ExternalReference is {} original)
             {
@@ -64,7 +66,8 @@ public sealed partial class PlanningCenterViewModel
                 }
                 catch(Exception error)when(error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException){path=null;}
             }
-            if (ImportedPackageRoot is null && !IsPackageImported && owned is null && path is null && ReferencePathResolver is not null) path = await ReferencePathResolver(reference.Source);
+            if (ImportedPackageRoot is null && !IsPackageImported && owned is null && reference.ReconnectedFile is null && path is null && ReferencePathResolver is not null) path = await ReferencePathResolver(reference.Source);
+            if(conflict)path=null;
             var available = !string.IsNullOrWhiteSpace(path) && File.Exists(path);
             var key = reference.ReconnectedFile is {} verified ? verified.ReferenceId.ToString("N")+"/"+verified.Sha256 : owned is not null ? owned.ReferenceId.ToString("N") + "/" + owned.Sha256 : reference.Source.LibraryId is Guid library ? $"{library:N}/{reference.Source.AssetId:N}" : reference.Source.ExternalReference ?? reference.Source.ReferenceId.ToString();
             var cache = Path.Combine(AppDataPaths.CacheDirectory, "PlanningPreviews", Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(key))) + ".jpg");
@@ -94,7 +97,7 @@ public sealed partial class PlanningCenterViewModel
         var link = item.Link;
         if (action == "移除")
         {
-            UpdateDocument(_document with { References = _document.References.Where(reference => reference.Source.ReferenceId != item.Id).ToArray() });
+            UpdateDocument(_document with { References = _document.References.Where(reference => reference.Source.ReferenceId != item.Id).ToArray(),ShotExternalLinks=_document.ShotExternalLinks.Where(link=>link.ReferenceId!=item.Id).ToArray() });
             foreach (var shot in Shots.Where(shot => shot.References.Any(reference => reference.ReferenceId == item.Id)).ToArray())
             {
                 var updated = shot with { References = shot.References.Where(reference => reference.ReferenceId != item.Id).ToArray() };
@@ -139,6 +142,7 @@ public sealed partial class PlanningCenterViewModel
     }
     public async Task<string?> ResolveOriginalAsync(PlanningReferenceItem item)
     {
+        if(PlanningReferenceLinks.HasConflict(_document,Shots,item.Id))return null;
         if (item.Link.ProjectCopy is {} copy) { try { PlanningProjectCopyStorage.ReadVerified(copy); return PlanningProjectCopyStorage.Resolve(copy); } catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException) { return null; } }
         if(item.Link.ReconnectedFile is {} reconnected && item.Link.Source.ExternalReference is {} original)
         { try { return PlanningExternalFile.ResolveVerified(reconnected,item.Id,"reference",original); } catch(Exception e)when(PackageError(e)){return null;} }

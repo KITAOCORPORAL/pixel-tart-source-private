@@ -1,13 +1,34 @@
 using System.IO;
 using RAWSelectionAssistant.Core.Services.Projects;
 namespace RAWSelectionAssistant.ViewModels;
-public sealed record PlanningExternalDependency(Guid Id, string Kind, string Name, string Section, string OriginalPath, string Reason, bool CanReconnect);
+public sealed record PlanningExternalDependency(Guid Id, string Kind, string Name, string Section, string OriginalPath, string Reason, bool CanReconnect)
+{
+    public IReadOnlyList<Guid>? ShotIds {get;init;}
+}
 public sealed partial class PlanningCenterViewModel
 {
-    public IReadOnlyList<PlanningExternalDependency> ExternalDependencies => _document.References.Where(x=>x.ProjectCopy is null).Select(x=>
-        new PlanningExternalDependency(x.Source.ReferenceId,"reference",x.Source.Title??"未命名参考",x.Category+" / "+x.Group+(x.IsMoodboard?" / 情绪板":""),x.Source.ExternalReference??$"素材库 {x.Source.LibraryId}/{x.Source.AssetId}",
-            x.Source.LibraryId is not null?"素材库原件未打包；本功能不定位或扫描素材库":ExternalReason(x.ReconnectedFile,x.Source.ReferenceId,"reference",x.Source.ExternalReference),x.Source.LibraryId is null && x.Source.ExternalReference is not null))
-        .Concat(_document.Attachments.Where(x=>x.ProjectCopy is null).Select(x=>new PlanningExternalDependency(x.Id,"attachment",x.Name,"文件",x.Path,ExternalReason(x.ReconnectedFile,x.Id,"attachment",x.Path),true))).ToArray();
+    public IReadOnlyList<PlanningExternalDependency> ExternalDependencies
+    {
+        get
+        {
+            var rows=new List<PlanningExternalDependency>();
+            var sources=_document.References.Select(r=>r.Source).Concat(Shots.SelectMany(s=>s.References));
+            foreach(var group in sources.GroupBy(r=>r.ReferenceId))
+            {
+                var source=group.First();var shots=Shots.Where(s=>s.References.Any(r=>r.ReferenceId==group.Key)).ToArray();
+                var conflict=PlanningReferenceLinks.HasConflict(_document,Shots,group.Key);
+                var documentLink=_document.References.FirstOrDefault(r=>r.Source.ReferenceId==group.Key);
+                var link=conflict?new PlanningDocumentReference(source):documentLink??PlanningReferenceLinks.ForShot(_document,shots[0],source);
+                if(link.ProjectCopy is not null)continue;
+                var section=(documentLink is null?"镜头独有参考":documentLink.Category+" / "+documentLink.Group)+(shots.Length==0?"":" · "+string.Join("、",shots.Select(shot=>$"镜头 {shot.Order+1:00} {shot.Name} [{shot.ShotId}]")));
+                rows.Add(new(group.Key,"reference",source.Title??"未命名参考",section,source.ExternalReference??$"素材库 {source.LibraryId}/{source.AssetId}",
+                    conflict?"同ID来源冲突；不能安全重连":source.LibraryId is not null?"素材库原件未打包；本功能不定位或扫描素材库":ExternalReason(link.ReconnectedFile,group.Key,"reference",source.ExternalReference),
+                    !conflict && source.LibraryId is null && source.ExternalReference is not null){ShotIds=shots.Select(shot=>shot.ShotId).ToArray()});
+            }
+            rows.AddRange(_document.Attachments.Where(x=>x.ProjectCopy is null).Select(x=>new PlanningExternalDependency(x.Id,"attachment",x.Name,"文件",x.Path,ExternalReason(x.ReconnectedFile,x.Id,"attachment",x.Path),true)));
+            return rows;
+        }
+    }
     public IReadOnlyList<string> UnsupportedPackageDependencies => _document.Extensions?.TryGetValue("PackageImportExcludedDependencies",out var value)==true && value.ValueKind==System.Text.Json.JsonValueKind.Array
         ? value.EnumerateArray().Select(x=>x.GetString()??"").Where(x=>!string.IsNullOrWhiteSpace(x)).ToArray() : ["素材库原件、档期、账本、画布及色彩方案不在本功能重连范围；不会自动扫描个人目录。"];
     private string ExternalReason(PlanningExternalFile? file, Guid id, string kind, string? original)
@@ -23,23 +44,26 @@ public sealed partial class PlanningCenterViewModel
     public async Task LocateExternalAsync(PlanningExternalDependency item,bool importCopy)
     {
         if(!item.CanReconnect)return;
+        var expectedProject=ProjectId;
         var path=_dialogs.ChooseFiles("定位新文件："+item.Name,item.Kind=="reference"?"参考图|*.png;*.jpg;*.jpeg;*.gif;*.bmp;*.tif;*.tiff":"普通附件|*.*",false).FirstOrDefault();
         if(path is null){SaveStatus="已取消定位，策划及已有副本不变";return;}
         try
         {
             var selected=await PlanningExternalFile.InspectAsync(item.Id,item.Kind,item.OriginalPath,path);
             if(!_dialogs.Confirm($"原引用ID：{item.Id}\n分区：{item.Section}\n原路径：{item.OriginalPath}\n新文件：{selected.SelectedPath}\n类型：{selected.FileType} · 大小：{selected.Bytes} bytes\nSHA-256：{selected.Sha256}\n原文件未打包，不能证明与原内容相同，请确认这就是要使用的替代文件。\n"+(importCopy?"导入项目自有副本，原文件不变。":"继续外链，不复制，重启后仍核对本次hash。"),"确认逐项重连")){SaveStatus="已取消确认，策划及已有副本不变";return;}
-            await ReconnectExternalAsync(selected,importCopy);
+            if(ProjectId!=expectedProject){SaveStatus="定位期间项目已切换；未提交重连，请重新选择。";return;}
+            if(!await ReconnectExternalAsync(selected,importCopy,expectedShotIds:item.ShotIds))
+                _dialogs.ShowInfo("当前策划尚未保存，未提交重连；请先完成保存后重试。");
         }
         catch(Exception e)when(PackageError(e)){SaveStatus="重连未完成，策划及已有副本不变："+e.Message;_dialogs.ShowError(SaveStatus);}
     }
-    public async Task<bool> ReconnectExternalAsync(PlanningExternalFile selected,bool importCopy,CancellationToken token=default)
+    public async Task<bool> ReconnectExternalAsync(PlanningExternalFile selected,bool importCopy,CancellationToken token=default,IReadOnlyList<Guid>? expectedShotIds=null)
     {
         if(ProjectId is not Guid project || !await FlushAsync(token))return false;
         await _saveGate.WaitAsync(token);
         try
         {
-            await _planning.ReconnectExternalAsync(project,selected,importCopy,token);
+            await _planning.ReconnectExternalAsync(project,selected,importCopy,_shots,expectedShotIds,token);
             if(ProjectId==project)
             {
                 var saved=(await _planning.LoadAsync(project,CancellationToken.None)).Document!;
@@ -47,6 +71,7 @@ public sealed partial class PlanningCenterViewModel
                 var attachment=saved.Attachments.SingleOrDefault(x=>x.Id==selected.ReferenceId);
                 _document=_document with
                 {
+                    ShotExternalLinks=saved.ShotExternalLinks,
                     References=_document.References.Select(x=>reference is not null && x.Source.ReferenceId==selected.ReferenceId?x with{ProjectCopy=reference.ProjectCopy,ReconnectedFile=reference.ReconnectedFile}:x).ToArray(),
                     Attachments=_document.Attachments.Select(x=>attachment is not null && x.Id==selected.ReferenceId?x with{ProjectCopy=attachment.ProjectCopy,ReconnectedFile=attachment.ReconnectedFile}:x).ToArray()
                 };
