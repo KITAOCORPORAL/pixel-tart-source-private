@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.ViewModels;
 namespace RAWSelectionAssistant.Views;
 public partial class PlanningCenterView
 {
@@ -39,3 +40,4 @@ public partial class PlanningCenterView
     }
     private Window? _externalReconnectWindow;
 }
+
