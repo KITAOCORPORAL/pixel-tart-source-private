@@ -1451,8 +1451,8 @@
   },
   {
     "path": "FINAL_REPORT.md",
-    "bytes": 7605,
-    "sha256": "a8658729eb02bea6cce200cf2304d98f5605cf854767cc6fa500136787d80f30"
+    "bytes": 7667,
+    "sha256": "8dda2951bbe88de1d46ecd43f82cd9cda4b3edf1463f9bdbf6053ebc2838feb6"
   },
   {
     "path": "Launch-Diagnostic.ps1",
@@ -1590,16 +1590,6 @@
     "sha256": "bb119ee1471f962e1e3a293c7a50f8d15644f2e962030759bff0b8e0cd145616"
   },
   {
-    "path": "reports/DIAGNOSTIC_FILES.json",
-    "bytes": 58020,
-    "sha256": "66ddc6df7e3227e58faba5c8e5a0d2edde9f6e64a15696a8081a76aacc0f6c98"
-  },
-  {
-    "path": "reports/DIAGNOSTIC_IDENTITY.json",
-    "bytes": 592,
-    "sha256": "2c0b78d4b5507ad91acbf4638162b680b5fa5c65b0b9712ec1b6ac500307c74c"
-  },
-  {
     "path": "reports/DIRTY_FILE_PRESERVATION.json",
     "bytes": 81614,
     "sha256": "1a8000a300b37a083cfbc20e7f09f049861e90a70f04806adc7b473b0f24c131"
@@ -1608,6 +1598,11 @@
     "path": "reports/DOTNET_INFO.txt",
     "bytes": 1604,
     "sha256": "8235227f4c636223201d23ac52caca1c881ebbb4c13cbff298a576f9e9799753"
+  },
+  {
+    "path": "reports/FINAL_ACTUAL_HOST_PROCESSES.json",
+    "bytes": 5437,
+    "sha256": "e36bcd0d9976d9060a260c52867d009550a58e235554425e6f08b3e2752160c6"
   },
   {
     "path": "reports/FINAL_bindings.json",
@@ -1641,8 +1636,8 @@
   },
   {
     "path": "reports/FINAL_REPORT.md",
-    "bytes": 7605,
-    "sha256": "a8658729eb02bea6cce200cf2304d98f5605cf854767cc6fa500136787d80f30"
+    "bytes": 7667,
+    "sha256": "8dda2951bbe88de1d46ecd43f82cd9cda4b3edf1463f9bdbf6053ebc2838feb6"
   },
   {
     "path": "reports/FINAL_TEST_SUMMARY.json",
@@ -1695,6 +1690,11 @@
     "sha256": "01f08fa0b9c9da00887b95174546eb32d8d1bd60febc1e5864aca2f45c4cd456"
   },
   {
+    "path": "reports/ORIGINAL_HOME_FAILURE.trx",
+    "bytes": 2331652,
+    "sha256": "a94a6c257340f792deb12de1ab85a691727e6629e105807d5f145d83942b716b"
+  },
+  {
     "path": "reports/performance-final-r3-original.json",
     "bytes": 168,
     "sha256": "f59533187855eea28e5ff7cbbbab3832518cbe577957f66329b34e184dda6b08"
@@ -1713,6 +1713,11 @@
     "path": "reports/PERFORMANCE_ROUNDS.json",
     "bytes": 18825,
     "sha256": "dc97eff240c838528f7e2d2ca10aaccc6d9db198d6bb2db86216f3a6f53de247"
+  },
+  {
+    "path": "reports/PUSH_READBACK.json",
+    "bytes": 560,
+    "sha256": "e64ee18e73640361840e0e4c60e5c85ce58d2b74844e0050a9b7bd12656cba2e"
   },
   {
     "path": "reports/RAW_EVIDENCE.zip",

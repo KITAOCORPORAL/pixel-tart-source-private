@@ -1,6 +1,6 @@
 # 家用续接、性能复测与外链重连交付
 
-2026-10-22 Asia/Shanghai。**产品功能限定验证完成；全软件/发布验收未完成，诊断版不能发行。** 原始执行主机 China Standard Time，日志原值保持，process epoch/UTC可独立转换。
+2026-10-22 Europe/Berlin。**产品功能限定验证完成；全软件/发布验收未完成，诊断版不能发行。** 原始执行主机 China Standard Time，日志原值保持，process epoch/UTC可独立转换。
 
 ## Git 与旧家用资料
 
@@ -30,7 +30,7 @@ b91858ee实机：PID23740，新隔离根，导入合成外链包→缺失清单/
 
 Windows x64 self-contained，WholeAppDiagnosticBuild=true，PhotographerTrialBuild=false；SDK10.0.401，runtime10.0.12，版本2.3.0+最终源码SHA。主程序KitaoPhotoSelector.exe / 主WPF KitaoPhotoSelector.dll / RAWSelectionAssistant.Core.dll / Kernel、3模块、DX12分别记录实际身份。发布264运行时依赖独立读回无缺失。
 
-Core/WPF/模块测试程序集及testhost、依赖逐hash保存；测试宿主拷贝发布DLL后全部同hash。实际WPF testhost进程PID18444的.exe、dll、runtime/Core/WPF/模块路径与hash由独立identity-only观测记录，**不冒充性能进程等待证据**。桌面加载组件另有实进程模块表。
+Core/WPF/模块测试程序集及testhost、依赖逐hash保存；测试宿主拷贝发布DLL后全部同hash。实际WPF testhost进程PID18444（前版）及最终R4进程（FINAL_ACTUAL_HOST_PROCESSES）的.exe、dll、runtime/Core/WPF/模块路径与hash由独立identity-only观测记录，**不冒充性能进程等待证据**。桌面加载组件另有实进程模块表。
 
 ## 受影响最终回归（发布组件绑定）
 
