@@ -1,0 +1,5 @@
+# Current-application planning import
+
+Base 2abcbf70a22c788c71b6421b24372835298478fc, product 591db7856921502eca252ae9877a73faa5e290c4. build_final.py publishes full diagnostic shell; run_final.py binds final DLLs and runs adapter-discovered affected planning/storage/DOCX fixtures only. aggregate.py retains first test failure and subsequent results; verify.py verifies v1 archive/OOXML/runtime hashes; preserve.py readbacks46 original worktrees/423dirty files/old package.
+
+File-first/DB-last strict insert with atomic SQLite project+transaction receipt; no Upsert overwrite. Recovery identity/stage/PID/process-start/exclusive-ID/active locks restrict compensations; Prepared never deletes final targets. Unknown/old stages or changed files are retained and reported. Audit stages intentionally retained. Current import stays in ordinary roots; isolated-root v1 remains available. Native process restart is NOT proved by VM recreation, mouse/WPS remain unrun. No pixel algorithms or legacy DOCX adapter changes.

@@ -1,0 +1,25 @@
+{
+  "productSha": "591db7856921502eca252ae9877a73faa5e290c4",
+  "steps": [
+    {
+      "action": "当前根导入/普通列表编辑/保存/VM重开/汇总",
+      "status": "PASS",
+      "scope": "Real SQLite/stores/production command; not native restart"
+    },
+    {
+      "action": "ID冲突/同名/篡改/取消/磁盘失败/模拟恢复",
+      "status": "PASS",
+      "scope": "Core actual filesystem+synthetic database failure"
+    },
+    {
+      "action": "原生鼠标/文件框/退出重启/WordWPS",
+      "status": "NOT_RUN",
+      "reason": "GetCursorPos Access denied; capture timeout"
+    },
+    {
+      "action": "发行/完整跨机便携",
+      "status": "BLOCKED",
+      "reason": "External dependencies/external acceptance unclosed"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "productSha": "591db7856921502eca252ae9877a73faa5e290c4",
+  "manifest": {
+    "Version": 1,
+    "ProjectId": "9573266c-0735-4212-ac1f-c9497a3b3063",
+    "DocumentId": "83a487ff-75f5-9f72-0d88-7c77f073c8f8",
+    "Name": "合成策划",
+    "CreatedAt": "2026-10-22T07:30:20.629948+00:00",
+    "Files": [
+      {
+        "Path": "planning.json",
+        "Bytes": 4356,
+        "Sha256": "7B64C52C2ABFFF6F78593CC994068BF7DC6EA9693AB8807DDD4AE0B1E7B32F9F"
+      },
+      {
+        "Path": "shots.json",
+        "Bytes": 853,
+        "Sha256": "2E17C45E30911280B3FA6CD74A999093BADC15C0451FB0AF89AD74B717ABB92D"
+      },
+      {
+        "Path": "planning/project-copies/9573266c07354212ac1fc9497a3b3063/83a487ff75f59f720d887c77f073c8f8/reference/7e8ea0032d6a43749c37b8c75297c6e3/663a7d1c0cb9333f210b635ba072777d11e3152f6bbac6f4bd8b81bb5e30e0b7.png",
+        "Bytes": 3663,
+        "Sha256": "663A7D1C0CB9333F210B635BA072777D11E3152F6BBAC6F4BD8B81BB5E30E0B7"
+      },
+      {
+        "Path": "planning/project-copies/9573266c07354212ac1fc9497a3b3063/83a487ff75f59f720d887c77f073c8f8/attachment/055c599b29f2414781fb37e4241fcdc9/9e699dfe18f19becd7cb2fa11ec897a20ebb613ad24f7abf30040fe90eccaa51.txt",
+        "Bytes": 15,
+        "Sha256": "9E699DFE18F19BECD7CB2FA11EC897A20EBB613AD24F7ABF30040FE90ECCAA51"
+      }
+    ],
+    "ExcludedDependencies": [
+      "账本、付款、财务附件、在线服务、素材库原件、色彩方案/画布工作区未包含；不宣称完整跨机便携。"
+    ]
+  },
+  "packageSha256": "f9747e164947d13822aacdef212f638188b64a620b0f5c9a18b595801955d0f0",
+  "ordinaryList": true,
+  "editedSavedRestarted": true,
+  "sourceImageHash": "663A7D1C0CB9333F210B635BA072777D11E3152F6BBAC6F4BD8B81BB5E30E0B7",
+  "sourceAttachmentHash": "9E699DFE18F19BECD7CB2FA11EC897A20EBB613AD24F7ABF30040FE90ECCAA51",
+  "oldCurrentProjectHash": "55D9DA27EEA57B5435E586EBE408CDB69224014817DF97F782BEADE6C55CE850",
+  "summaryHeadings": 15,
+  "summaryImages": 1,
+  "summarySha256": "a683c4aeb52b2bf19b1ba1c2e05b0683fba514331a6a21657910aac02b6eeaac",
+  "applicationFiles": 290,
+  "runtimeAssets": 264,
+  "missingDependencies": 0,
+  "publishBindings": 29,
+  "scope": "Independent archive/XML readback plus production test assertions, VM recreation not native program restart"
+}

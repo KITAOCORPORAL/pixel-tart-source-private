@@ -1,0 +1,22 @@
+{
+  "baseSha": "2abcbf70a22c788c71b6421b24372835298478fc",
+  "reviewedProduct": "9040e320d871f05c1013da9ed45bb04d48257616",
+  "productSha": "591db7856921502eca252ae9877a73faa5e290c4",
+  "branch": "feature/planning-current-root-import-20261022",
+  "files": [
+    "A\tsrc/RAWSelectionAssistant.Core/Services/Database/PlanningImportRepository.cs",
+    "M\tsrc/RAWSelectionAssistant.Core/Services/Database/SqliteDomainRepositories.cs",
+    "A\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningCurrentRootImport.cs",
+    "M\tsrc/RAWSelectionAssistant.Core/Services/Projects/ProjectShotExecution.cs",
+    "A\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.CurrentImport.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Overview.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.ProjectPackage.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.References.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.SummaryExport.cs",
+    "M\tsrc/RAWSelectionAssistant/Views/PlanningCenterView.xaml",
+    "M\tsrc/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+    "A\ttests/RAWSelectionAssistant.Tests/PlanningCurrentRootImportTests.cs",
+    "A\ttests/RAWSelectionAssistant.WpfTests/PlanningCurrentRootImportWpfTests.cs"
+  ],
+  "timezone": "Europe/Helsinki"
+}

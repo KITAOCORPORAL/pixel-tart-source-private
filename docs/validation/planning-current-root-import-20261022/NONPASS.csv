@@ -1,0 +1,10 @@
+﻿suite,name,display,outcome,status,error,evidence
+EDGE_CORE,RAWSelectionAssistant.Tests.PlanningCurrentRootImportTests.TamperedV1AndArchivedDatabaseIdentityAreRejectedWithoutChangingCurrentFiles,TamperedV1AndArchivedDatabaseIdentityAreRejectedWithoutChangingCurrentFiles,Failed,FAIL,"测试方法 RAWSelectionAssistant.Tests.PlanningCurrentRootImportTests。TamperedV1AndArchivedDatabaseIdentityAreRejectedWithoutChangingCurrentFiles 引发了异常:
+System.IO.IOException: The process cannot access the file 'E:\Kitao-Deliveries\planning-current-root-import-20261022\EDGE_CORE\run-20261022-152206-dffcbd86\000\temp\RAWSelectionAssistant.Tests\54d42779072449a1ab9497456d5e9935\current\current.db' because it is being used by another process.
+             at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.File.OpenHandle(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.File.ReadAllBytes(String path)
+   at RAWSelectionAssistant.Tests.PlanningCurrentRootImportTests.Hash(String p)
+   at RAWSelectionAssistant.Tests.PlanningCurrentRootImportTests.TamperedV1AndArchivedDatabaseIdentityAreRejectedWithoutChangingCurrentFiles()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407",E:\Kitao-Deliveries\planning-current-root-import-20261022\EDGE_CORE\run-20261022-152206-dffcbd86\000

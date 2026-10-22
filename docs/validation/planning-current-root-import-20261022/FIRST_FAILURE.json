@@ -1,0 +1,7 @@
+{
+  "suite": "EDGE_CORE",
+  "passed": 5,
+  "failed": 1,
+  "cause": "New test attempted File.ReadAllBytes current SQLite while pooled connection held OS sharing lock. Clear synthetic pools before and after byte hash; product conflict assertion unchanged.",
+  "raw": "EDGE_CORE"
+}
