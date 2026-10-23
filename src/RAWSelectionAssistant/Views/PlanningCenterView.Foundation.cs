@@ -46,7 +46,7 @@ public partial class PlanningCenterView
         Column("镜号", "Order", true, 64);
         _shotTable.Columns.Add(new DataGridComboBoxColumn { Header="状态",Width=90,ItemsSource=PlanningShotEditRow.StatusLabels,SelectedItemBinding=new Binding("[Status]"){Mode=BindingMode.TwoWay,UpdateSourceTrigger=UpdateSourceTrigger.PropertyChanged}});
         _shotTable.FrozenColumnCount=2;
-        var imageFactory=new FrameworkElementFactory(typeof(Image));imageFactory.SetValue(Image.HeightProperty,30d);imageFactory.SetValue(Image.WidthProperty,48d);imageFactory.SetValue(Image.StretchProperty,System.Windows.Media.Stretch.Uniform);imageFactory.SetBinding(Image.SourceProperty,new Binding(nameof(PlanningShotEditRow.ReferencePreviewPath)));imageFactory.SetBinding(FrameworkElement.ToolTipProperty,new Binding(nameof(PlanningShotEditRow.ReferenceLabel)));
+        var imageFactory=new FrameworkElementFactory(typeof(Image));imageFactory.SetValue(Image.HeightProperty,30d);imageFactory.SetValue(Image.WidthProperty,48d);imageFactory.SetValue(Image.StretchProperty,System.Windows.Media.Stretch.Uniform);imageFactory.SetBinding(Image.SourceProperty,new System.Windows.Data.PriorityBinding{Bindings={new Binding(nameof(PlanningShotEditRow.ReferencePreviewImage)){TargetNullValue=DependencyProperty.UnsetValue},new Binding(nameof(PlanningShotEditRow.ReferencePreviewPath))}});imageFactory.SetBinding(FrameworkElement.ToolTipProperty,new Binding(nameof(PlanningShotEditRow.ReferenceLabel)));
         _shotTable.Columns.Add(new DataGridTemplateColumn{Header="参考",Width=74,IsReadOnly=true,CellTemplate=new DataTemplate{VisualTree=imageFactory}});
         Column("名称", "Name", width:240); Column("场景", "Scene"); Column("景别", "ShotSize", width: 90);
         Column("机位 / 镜头", "CameraAndLens"); Column("人物动作", "Action", width:280); Column("道具", "Props"); Column("灯光", "Lighting");
@@ -75,7 +75,7 @@ public partial class PlanningCenterView
     {
         var ids=shot.References.Select(r=>r.ReferenceId).ToHashSet();var reference=_vm!.AllProjectReferences.FirstOrDefault(r=>ids.Contains(r.Id));
         var owner=_vm;var revision=_documentRenderRevision;var generation=owner.EditorGeneration;
-        return new(owner.ShotDraft(shot.ShotId),value=>{if(generation==owner.EditorGeneration&&revision==_documentRenderRevision)owner.StageShot(value);},()=>owner.ShotDraft(shot.ShotId)){ReferencePreviewPath=reference?.PreviewPath,ReferenceLabel=reference?.Title??"未关联参考"};
+        return new(owner.ShotDraft(shot.ShotId),value=>{if(generation==owner.EditorGeneration&&revision==_documentRenderRevision)owner.StageShot(value);},()=>owner.ShotDraft(shot.ShotId)){ReferencePreviewPath=reference?.PreviewPath,ReferencePreviewImage=reference?.PreviewImage,ReferenceLabel=reference?.Title??"未关联参考"};
     }
     private void FlushSimpleEditors()
     {

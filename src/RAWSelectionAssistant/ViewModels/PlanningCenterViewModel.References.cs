@@ -11,6 +11,8 @@ public sealed record PlanningReferenceItem(PlanningDocumentReference Link, strin
 {
     public string? OriginalPath { get; init; }
     public string? PreviewStatus {get;init;}
+    public System.Windows.Media.Imaging.BitmapSource? PreviewImage {get;init;}
+    public bool ThumbnailCacheHit {get;init;}
     public Guid Id => Link.Source.ReferenceId;
     public string Title => Link.Source.Title ?? "未命名参考";
     public string Category => Link.Category;
@@ -40,58 +42,59 @@ public sealed partial class PlanningCenterViewModel
         UpdateDocument(_document with { References = _document.References.Concat(additions).DistinctBy(item => item.Source.ReferenceId).ToArray() });
         await FlushAsync(); await RefreshDocumentReferencesAsync();
     }
-    public async Task RefreshDocumentReferencesAsync()
+    private CancellationTokenSource? _referenceRefreshCancellation;
+    private long _referenceRefreshGeneration;
+    public long ReferenceImageEpoch=>_referenceRefreshGeneration;
+    private void InvalidateReferenceRefresh()
     {
-        await RefreshShotLinkReceiptsAsync();
-        var references = _document.References.Concat(Shots.SelectMany(shot => shot.References
-            .Select(source => PlanningReferenceLinks.ForShot(_document,shot,source,ReferenceCategoryFor(source.Kind))))).DistinctBy(item => item.Source.ReferenceId).ToArray();
-        AllProjectReferences.Clear();
-        foreach (var reference in references)
+        _referenceRefreshGeneration++;_referenceRefreshCancellation?.Cancel();AllProjectReferences.Clear();OnPropertyChanged(nameof(ReferenceImageEpoch));OnPropertyChanged(nameof(HeroReferences));
+    }
+    public Task RefreshDocumentReferencesAsync()=>RefreshDocumentReferencesAsync(CancellationToken.None);
+    public async Task RefreshDocumentReferencesAsync(CancellationToken token)
+    {
+        var generation=++_referenceRefreshGeneration;_referenceRefreshCancellation?.Cancel();_referenceRefreshCancellation=new CancellationTokenSource();using var linked=CancellationTokenSource.CreateLinkedTokenSource(token,_referenceRefreshCancellation.Token);var cancel=linked.Token;
+        var project=ProjectId;var document=PlanningDocumentId;AllProjectReferences.Clear();OnPropertyChanged(nameof(ReferenceImageEpoch));OnPropertyChanged(nameof(HeroReferences));
+        try
         {
-            var conflict=PlanningReferenceLinks.HasConflict(_document,Shots,reference.Source.ReferenceId);
-            if(conflict){AllProjectReferences.Add(new(reference with{ProjectCopy=null,ReconnectedFile=null},null,false));continue;}
-            var path = (ImportedPackageRoot is not null || IsPackageImported) && reference.ProjectCopy is null ? null : reference.Source.ExternalReference;
-            if (reference.ReconnectedFile is {} reconnected && reference.Source.ExternalReference is {} original)
+            await RefreshShotLinkReceiptsAsync();if(cancel.IsCancellationRequested||generation!=_referenceRefreshGeneration||ProjectId!=project||PlanningDocumentId!=document)return;
+            var snapshot=_document;var shots=Shots.ToArray();var imported=ImportedPackageRoot is not null||IsPackageImported;var resolver=ReferencePathResolver;
+            var references=snapshot.References.Concat(shots.SelectMany(shot=>shot.References.Select(source=>PlanningReferenceLinks.ForShot(snapshot,shot,source,ReferenceCategoryFor(source.Kind))))).DistinctBy(item=>item.Source.ReferenceId).ToArray();var rows=new List<PlanningReferenceItem>();
+            foreach(var reference in references)
             {
-                try { path=PlanningExternalFile.ResolveVerified(reconnected,reference.Source.ReferenceId,"reference",original); }
-                catch(Exception error)when(PackageError(error)){path=null;}
-            }
-            var owned = reference.ProjectCopy;
-            System.Windows.Media.Imaging.BitmapSource? ownedBitmap = null;string? previewStatus=null;
-            if (owned is not null)
-            {
-                try
+                cancel.ThrowIfCancellationRequested();
+                if(PlanningReferenceLinks.HasConflict(snapshot,shots,reference.Source.ReferenceId)){rows.Add(new(reference with{ProjectCopy=null,ReconnectedFile=null},null,false));continue;}
+                if(reference.ProjectCopy is {} owned)
                 {
-                    PlanningProjectCopyStorage.ReadVerified(owned); path=PlanningProjectCopyStorage.Resolve(owned);
-                    try { ownedBitmap=(System.Windows.Media.Imaging.BitmapSource)RAWSelectionAssistant.Services.PlanningSummaryOwnedImage.ReadImported(owned,ProjectId??Guid.Empty,PlanningDocumentId??Guid.Empty,1400,1400).Source; }
-                    catch(Exception error)when(error is IOException or InvalidDataException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException) { previewStatus="项目自有副本已保存但无法预览："+error.Message; }
-                }
-                catch(Exception error)when(error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException){path=null;previewStatus="项目自有副本不可用："+error.Message+"（未回退外链）";}
-            }
-            if (ImportedPackageRoot is null && !IsPackageImported && owned is null && reference.ReconnectedFile is null && path is null && ReferencePathResolver is not null) path = await ReferencePathResolver(reference.Source);
-            if(conflict)path=null;
-            var available = !string.IsNullOrWhiteSpace(path) && File.Exists(path);
-            var key = reference.ReconnectedFile is {} verified ? verified.ReferenceId.ToString("N")+"/"+verified.Sha256 : owned is not null ? owned.ReferenceId.ToString("N") + "/" + owned.Sha256 : reference.Source.LibraryId is Guid library ? $"{library:N}/{reference.Source.AssetId:N}" : reference.Source.ExternalReference ?? reference.Source.ReferenceId.ToString();
-            var cache = Path.Combine(AppDataPaths.CacheDirectory, owned is null ? "PlanningPreviews" : "PlanningOwnedReferenceV1", Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(key))) + ".jpg");
-            if (available && (owned is null || ownedBitmap is not null) && (owned is not null || !File.Exists(cache) || File.GetLastWriteTimeUtc(path!) > File.GetLastWriteTimeUtc(cache)))
-            {
-                try
-                {
-                    Directory.CreateDirectory(Path.GetDirectoryName(cache)!);
-                    System.Windows.Media.Imaging.BitmapSource bitmap;
-                    if(ownedBitmap is not null)bitmap=ownedBitmap;
-                    else
+                    var item=await Task.Run(()=>
                     {
-                        using var input=File.OpenRead(path!);var decoded=new BitmapImage();decoded.BeginInit();decoded.CacheOption=BitmapCacheOption.OnLoad;decoded.DecodePixelWidth=1400;decoded.StreamSource=input;decoded.EndInit();decoded.Freeze();bitmap=decoded;
-                    }
-                    BitmapEncoder encoder=owned is null?new JpegBitmapEncoder{QualityLevel=88}:new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(bitmap));
-                    var stage=cache+"."+Guid.NewGuid().ToString("N")+".tmp";try{using(var output=new FileStream(stage,FileMode.CreateNew,FileAccess.Write,FileShare.None)){encoder.Save(output);output.Flush(true);}File.Move(stage,cache,true);}finally{if(File.Exists(stage))File.Delete(stage);}
+                        try
+                        {
+                            var thumbnail=RAWSelectionAssistant.Services.PlanningOwnedReferenceImage.ReadThumbnail(owned,project??Guid.Empty,document??Guid.Empty,reference.Source.ReferenceId,AppDataPaths.CacheDirectory,cancel);
+                            return new PlanningReferenceItem(reference,thumbnail.Path,true){OriginalPath=PlanningProjectCopyStorage.Resolve(owned),PreviewImage=thumbnail.Image,ThumbnailCacheHit=thumbnail.CacheHit};
+                        }
+                        catch(Exception error)when(error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException)
+                        {
+                            // Separate intact-but-unrenderable from changed/missing; never return a stale cache path.
+                            try{using var verified=PlanningProjectCopyStorage.OpenVerifiedRead(owned,cancel);return new PlanningReferenceItem(reference,null,true){OriginalPath=PlanningProjectCopyStorage.Resolve(owned),PreviewStatus="项目自有副本已保存但无法预览："+error.Message};}
+                            catch(Exception integrity)when(integrity is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException){return new PlanningReferenceItem(reference,null,false){PreviewStatus="项目自有副本不可用："+integrity.Message+"（未回退外链）"};}
+                        }
+                    },cancel);rows.Add(item);continue;
                 }
-                catch (Exception error) when (error is IOException or NotSupportedException or System.Runtime.InteropServices.COMException or UnauthorizedAccessException) { }
+                var path=imported?null:reference.Source.ExternalReference;
+                if(reference.ReconnectedFile is {} reconnected&&reference.Source.ExternalReference is {} original){try{path=PlanningExternalFile.ResolveVerified(reconnected,reference.Source.ReferenceId,"reference",original);}catch(Exception error)when(PackageError(error)){path=null;}}
+                if(!imported&&reference.ReconnectedFile is null&&path is null&&resolver is not null)path=await resolver(reference.Source);cancel.ThrowIfCancellationRequested();
+                var available=!string.IsNullOrWhiteSpace(path)&&File.Exists(path);var key=reference.ReconnectedFile is {} receipt?receipt.ReferenceId.ToString("N")+"/"+receipt.Sha256:reference.Source.LibraryId is Guid library?$"{library:N}/{reference.Source.AssetId:N}":reference.Source.ExternalReference??reference.Source.ReferenceId.ToString();var cache=Path.Combine(AppDataPaths.CacheDirectory,"PlanningPreviews",Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(key)))+".jpg");
+                if(available&&(!File.Exists(cache)||File.GetLastWriteTimeUtc(path!)>File.GetLastWriteTimeUtc(cache)))
+                {
+                    try{Directory.CreateDirectory(Path.GetDirectoryName(cache)!);using var input=File.OpenRead(path!);var bitmap=new BitmapImage();bitmap.BeginInit();bitmap.CacheOption=BitmapCacheOption.OnLoad;bitmap.DecodePixelWidth=1400;bitmap.StreamSource=input;bitmap.EndInit();bitmap.Freeze();var encoder=new JpegBitmapEncoder{QualityLevel=88};encoder.Frames.Add(BitmapFrame.Create(bitmap));using var output=File.Create(cache);encoder.Save(output);}
+                    catch(Exception error)when(error is IOException or NotSupportedException or System.Runtime.InteropServices.COMException or UnauthorizedAccessException){}
+                }
+                rows.Add(new(reference,available?File.Exists(cache)?cache:path:null,available){OriginalPath=available?path:null});
             }
-            AllProjectReferences.Add(new(reference, owned is not null ? available && ownedBitmap is not null && File.Exists(cache) ? cache : null : available ? File.Exists(cache) ? cache : path : null, available) { OriginalPath = available ? path : null, PreviewStatus=previewStatus });
+            cancel.ThrowIfCancellationRequested();if(generation!=_referenceRefreshGeneration||ProjectId!=project||PlanningDocumentId!=document)return;
+            foreach(var row in rows)AllProjectReferences.Add(row);OnPropertyChanged(nameof(HeroReferences));PresentationChanged();
         }
-        OnPropertyChanged(nameof(HeroReferences)); PresentationChanged();
+        catch(OperationCanceledException)when(cancel.IsCancellationRequested){/* Superseded refresh never publishes rows. */}
     }
     public async Task UpdateReferenceAsync(PlanningReferenceItem item, string action, string? value = null)
     {

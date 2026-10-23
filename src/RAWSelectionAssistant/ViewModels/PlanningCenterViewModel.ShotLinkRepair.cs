@@ -6,7 +6,7 @@ public sealed partial class PlanningCenterViewModel
     public IReadOnlyList<PlanningShotLinkIssue> ShotLinkIssues=>PlanningShotLinkLifecycle.Inspect(_document,new(ProjectId??Guid.Empty,Shots.ToArray()));
     public async Task RefreshShotLinkReceiptsAsync()
     {
-        if(ProjectId is not Guid id)return;var saved=(await _planning.LoadAsync(id)).Document;if(saved is null)return;
+        if(ProjectId is not Guid id)return;var saved=(await _planning.LoadAsync(id)).Document;if(saved is null||ProjectId!=id)return;
         _document=_document with{ShotExternalLinks=saved.ShotExternalLinks};if(_pendingDocuments.ContainsKey(id))QueueDocumentSave();
     }
     public async Task RepairShotLinkIssueAsync(PlanningShotLinkIssue issue,bool relocate,bool importCopy=false)

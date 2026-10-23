@@ -121,6 +121,7 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
     }
     private async Task LoadPlanningCoreAsync(Guid projectId,Guid? bookingId,CancellationToken token)
     {
+        InvalidateReferenceRefresh();
         if (!await FlushAsync()) throw new IOException("请先保存当前策划。");
         EditorGeneration++;
         _project=(await _projects.ListAsync(token)).FirstOrDefault(item=>item.Id==projectId);if(_project is null)throw new InvalidOperationException("项目不存在或已归档。");

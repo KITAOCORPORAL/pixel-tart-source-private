@@ -15,6 +15,7 @@ public sealed class PlanningShotEditRow : INotifyPropertyChanged, IEditableObjec
     private readonly Func<ProjectShot>? _latest;
     public Guid ShotId => _value.ShotId;
     public string? ReferencePreviewPath {get;init;}
+    public System.Windows.Media.Imaging.BitmapSource? ReferencePreviewImage {get;init;}
     public string ReferenceLabel {get;init;}="未关联参考";
     public event PropertyChangedEventHandler? PropertyChanged;
     public static IReadOnlyList<string> StatusLabels { get; } = ["待拍", "当前", "已拍", "跳过"];

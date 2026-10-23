@@ -59,6 +59,20 @@ public static class PlanningProjectCopyStorage
         PlanningImageStorage.RejectLinks(copy.StorageRoot, path);
         return path;
     }
+    /// <summary>Same seekable read lease is held through hash verification and decode; no full encoded-file allocation.</summary>
+    public static FileStream OpenVerifiedRead(PlanningProjectCopy copy,CancellationToken token=default)
+    {
+        var path=Resolve(copy);var stream=new FileStream(path,FileMode.Open,FileAccess.Read,FileShare.Read,81920,FileOptions.SequentialScan);
+        try
+        {
+            if(stream.Length!=copy.Bytes||stream.Length<1||stream.Length>MaximumBytes)throw new InvalidDataException("项目自有副本大小变化或超限；未读取原来源。");
+            using var hash=System.Security.Cryptography.IncrementalHash.CreateHash(System.Security.Cryptography.HashAlgorithmName.SHA256);var buffer=new byte[81920];int count;
+            while((count=stream.Read(buffer))>0){token.ThrowIfCancellationRequested();hash.AppendData(buffer,0,count);}token.ThrowIfCancellationRequested();PlanningImageStorage.RejectLinks(copy.StorageRoot!,path);
+            if(!Convert.ToHexString(hash.GetHashAndReset()).Equals(copy.Sha256,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("项目自有副本已变化（SHA-256不符）；未回退原来源。");
+            stream.Position=0;return stream;
+        }
+        catch{stream.Dispose();throw;}
+    }
     public static byte[] ReadVerified(PlanningProjectCopy copy)
     {
         var path = Resolve(copy);

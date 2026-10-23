@@ -33,7 +33,7 @@ public static class PlanningSummaryOwnedImage
     public static Image ReadImported(PlanningProjectCopy copy, Guid projectId, Guid documentId, double contentWidth, double contentHeight)
     {
         if(copy.Kind!="reference" || copy.ProjectId!=projectId || copy.DocumentId!=documentId)throw new InvalidDataException("自有参考与汇总项目/文档身份不匹配。");
-        var bitmap=PlanningOwnedReferenceImage.Read(copy,projectId,documentId,copy.ReferenceId);
+        var bitmap=PlanningOwnedReferenceImage.ReadBounded(copy,projectId,documentId,copy.ReferenceId,PlanningOwnedReferenceImage.SummaryEdge);
         var maxWidth=Math.Max(1,Math.Min(520,contentWidth));var maxHeight=Math.Max(1,Math.Min(360,contentHeight*.42));var scale=Math.Min(1,Math.Min(maxWidth/bitmap.PixelWidth,maxHeight/bitmap.PixelHeight));
         return new Image{Source=bitmap,Width=bitmap.PixelWidth*scale,Height=bitmap.PixelHeight*scale,Stretch=Stretch.Uniform,ToolTip=Path.GetFileName(copy.OriginalPath)};
     }

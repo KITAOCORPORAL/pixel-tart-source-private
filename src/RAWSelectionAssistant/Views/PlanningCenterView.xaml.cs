@@ -37,7 +37,7 @@ public partial class PlanningCenterView : UserControl
         PlanningDockOverlay.MouseDown+=(_,e)=>{if(e.OriginalSource==PlanningDockOverlay)ClosePlanningDock();};
         DataContextChanged += (_, e) =>
         {
-            _trayPickerVersion++;
+            _trayPickerVersion++;_ownedPreviewGeneration++;_ownedPreviewCancellation?.Cancel();PreviewImage.Source=null;
             if (_vm is not null) { ClosePlanningDock(); FlushSimpleEditors(); _vm.CapturePendingEditorDraft = null; _vm.ReadEditorHistoryImages=null; _vm.DocumentPresentationChanged -= PresentationChanged; _vm.PropertyChanged -= ViewModelChanged; }
             _vm = e.NewValue as PlanningCenterViewModel;
             if (_vm is not null) { _vm.CapturePendingEditorDraft = FlushSimpleEditors; _vm.ReadEditorHistoryImages=()=>DocumentContent.Children.OfType<PlanningRichEditor>().SelectMany(e=>e.RetainedHistoryImages).ToArray(); _vm.DocumentPresentationChanged += PresentationChanged; _vm.PropertyChanged += ViewModelChanged; }
@@ -109,6 +109,12 @@ public partial class PlanningCenterView : UserControl
     private void ViewModelChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_vm is null) return;
+        if(e.PropertyName==nameof(_vm.ReferenceImageEpoch))
+        {
+            _ownedPreviewGeneration++;_ownedPreviewCancellation?.Cancel();PreviewImage.Source=null;
+            void ClearImages(DependencyObject node){if(node is Image image)image.Source=null;for(int i=0;i<VisualTreeHelper.GetChildrenCount(node);i++)ClearImages(VisualTreeHelper.GetChild(node,i));}
+            ClearImages(DocumentContent);ClearImages(DrawerContent);
+        }
         if (e.PropertyName is nameof(_vm.IsCreateOpen) or nameof(_vm.IsBookingOpen)) RenderModal();
         if (e.PropertyName == nameof(_vm.IsShotDrawerOpen)) RenderShotDrawer();
         if (e.PropertyName == nameof(_vm.OverviewFilter)) RenderNavigation();
@@ -340,7 +346,7 @@ public partial class PlanningCenterView : UserControl
     {
         StackPanel stack = interactive ? new PlanningReferenceTile() : new StackPanel();
         stack.Margin = new Thickness(0, 0, 18, 22);
-        stack.Children.Add(new Image { Source = LoadImage(item.PreviewPath), Height = height, Stretch = Stretch.Uniform, HorizontalAlignment = HorizontalAlignment.Center });
+        stack.Children.Add(new Image { Source = item.PreviewImage ?? LoadImage(item.PreviewPath), Height = height, Stretch = Stretch.Uniform, HorizontalAlignment = HorizontalAlignment.Center });
         var caption = Text(item.Title, 13); caption.Margin = new Thickness(0, 8, 0, 0); stack.Children.Add(caption); _referenceCaptions.Add(caption);
         var status = Text(item.Availability, 11); status.Foreground = Brush("TextSecondaryBrush"); stack.Children.Add(status);
         if (item.Category is "灯光" or "造型" && _vm is not null)
@@ -492,7 +498,7 @@ public partial class PlanningCenterView : UserControl
         var kind = new ComboBox { ItemsSource = _vm.ReferenceKinds, DisplayMemberPath = "Label", Margin = new Thickness(0, 12, 0, 8) };
         kind.SetBinding(Selector.SelectedItemProperty, new Binding(nameof(_vm.SelectedReferenceKind))); AutomationProperties.SetName(kind, "镜头参考类别"); DrawerContent.Children.Add(kind);
         DrawerContent.Children.Add(AsyncAction("关联本地参考", async () => { await _vm.AddLocalReferenceCommand.ExecuteAsync(null); await _vm.RefreshDocumentReferencesAsync(); RenderShotDrawer(); }));
-        foreach (var reference in _vm.References) { DrawerContent.Children.Add(new Image { Source = LoadImage(_vm.AllProjectReferences.FirstOrDefault(r=>r.Id==reference.ReferenceId)?.PreviewPath), MaxHeight = 180, Stretch = Stretch.Uniform }); DrawerContent.Children.Add(Text(reference.Title ?? "参考", 12)); }
+        foreach (var reference in _vm.References) { DrawerContent.Children.Add(new Image { Source = _vm.AllProjectReferences.FirstOrDefault(r=>r.Id==reference.ReferenceId)?.PreviewImage ?? LoadImage(_vm.AllProjectReferences.FirstOrDefault(r=>r.Id==reference.ReferenceId)?.PreviewPath), MaxHeight = 180, Stretch = Stretch.Uniform }); DrawerContent.Children.Add(Text(reference.Title ?? "参考", 12)); }
         var actions = new WrapPanel();
         actions.Children.Add(AsyncAction("当前", async () => { await _vm.SetCurrentShotCommand.ExecuteAsync(null); Render(); }));
         actions.Children.Add(AsyncAction("已拍", async () => { await _vm.MarkShotCompletedCommand.ExecuteAsync(null); Render(); }));
@@ -586,13 +592,17 @@ public partial class PlanningCenterView : UserControl
         var summary = MenuEntry("导出15区汇总 DOCX", "IconPlanning"); summary.Click += async (_,_) => await ExportPlanningSummaryFromViewAsync(); menu.Items.Add(summary);
         var overview = MenuEntry("返回策划列表", "IconPlanning"); overview.Click += async (_, _) => { if (await FlushDocumentAsync()) await _vm.ShowOverviewCommand.ExecuteAsync(null); }; menu.Items.Add(overview); menu.IsOpen = true;
     }
+    private CancellationTokenSource? _ownedPreviewCancellation;
+    private long _ownedPreviewGeneration;
     private async void ShowImage(PlanningReferenceItem item)
     {
+        var generation=++_ownedPreviewGeneration;_ownedPreviewCancellation?.Cancel();_ownedPreviewCancellation=new();var token=_ownedPreviewCancellation.Token;PreviewImage.Source=null;
         try
         {
             if(item.Link.ProjectCopy is {} copy)
             {
-                PreviewImage.Source=PlanningOwnedReferenceImage.Read(copy,_vm!.ProjectId??Guid.Empty,_vm.PlanningDocumentId??Guid.Empty,item.Id);PreviewCaption.Text=item.Category+" · "+item.Title+" · 已验证项目自有副本";ImagePreview.Visibility=Visibility.Visible;CloseImageButton.Focus();return;
+                var owner=_vm!;var project=owner.ProjectId;var document=owner.PlanningDocumentId;var bitmap=await Task.Run(()=>PlanningOwnedReferenceImage.ReadBounded(copy,project??Guid.Empty,document??Guid.Empty,item.Id,PlanningOwnedReferenceImage.LargeViewEdge,token),token);if(token.IsCancellationRequested||generation!=_ownedPreviewGeneration||_vm!=owner||owner.ProjectId!=project||owner.PlanningDocumentId!=document)return;
+                PreviewImage.Source=bitmap;PreviewCaption.Text=item.Category+" · "+item.Title+" · 已验证项目自有副本";ImagePreview.Visibility=Visibility.Visible;CloseImageButton.Focus();return;
             }
             var path = await _vm!.ResolveOriginalAsync(item);
             var original = path is not null && File.Exists(path);
@@ -601,10 +611,12 @@ public partial class PlanningCenterView : UserControl
             ImagePreview.Visibility = Visibility.Visible;
             CloseImageButton.Focus();
         }
-        catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException) { PreviewImage.Source=null;_vm!.Dialogs.ShowInfo("已保存但无法预览："+error.Message+"；未读取外链原件。"); }
+        catch(OperationCanceledException)when(token.IsCancellationRequested){}
+        catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException) { if(generation!=_ownedPreviewGeneration)return;PreviewImage.Source=null;_vm!.Dialogs.ShowInfo("已保存但无法预览："+error.Message+"；未读取外链原件。"); }
     }
     private void CloseImagePreview()
     {
+        _ownedPreviewGeneration++;_ownedPreviewCancellation?.Cancel();PreviewImage.Source=null;
         ImagePreview.Visibility = Visibility.Collapsed;
         if (_previewReturnTarget is { IsVisible: true } target) target.Focus();
         _previewReturnTarget = null;
