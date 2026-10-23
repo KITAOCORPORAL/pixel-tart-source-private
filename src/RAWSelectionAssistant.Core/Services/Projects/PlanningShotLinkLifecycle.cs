@@ -28,6 +28,9 @@ public sealed partial class PlanningProjectStore
 {
     internal async Task CommitShotEditAsync(ProjectShotCatalog before,ProjectShotCatalog after,Func<Task> commit,CancellationToken token)
     {
+        // Name/timing/status edits do not touch source identity and must retain existing cross-file draft recovery order.
+        string Sources(ProjectShotCatalog c)=>JsonSerializer.Serialize(c.Shots.OrderBy(x=>x.ShotId).Select(x=>new{x.ShotId,Sources=x.References.Select(r=>new{r.ReferenceId,r.LibraryId,r.AssetId,r.ExternalReference}).OrderBy(r=>r.ReferenceId)}));
+        if(Sources(before)==Sources(after)){await commit();return;}
         var path=FilePath(before.ProjectId);var gate=Gates.GetOrAdd(path,_=>new(1,1));await gate.WaitAsync(token).ConfigureAwait(false);
         var temporary=path+"."+Guid.NewGuid().ToString("N")+".shot-link-stage";byte[]? original=null;var replaced=false;
         try
