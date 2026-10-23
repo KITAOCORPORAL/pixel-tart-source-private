@@ -1,0 +1,24 @@
+{
+  "sourceSha": "4997c3059c5737405921d88ba6fd74eb2be2496e",
+  "exe": "D:/AI AGENT/.dotnet/dotnet.exe",
+  "args": [
+    "publish",
+    "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+    "-c",
+    "Release",
+    "-r",
+    "win-x64",
+    "--self-contained",
+    "true",
+    "--no-restore",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:SourceRevisionId=4997c3059c5737405921d88ba6fd74eb2be2496e",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "-o",
+    "E:/Kitao-Deliveries/planning-owned-jpeg-company-20261023/Planning-OwnedJPEG-Diagnostic-win-x64/app"
+  ],
+  "pid": 20680,
+  "exitCode": 0,
+  "seconds": 25.865209102630615
+}

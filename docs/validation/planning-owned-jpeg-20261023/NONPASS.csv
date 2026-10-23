@@ -1,0 +1,8 @@
+﻿suite,name,display,outcome,status,error,evidence
+NEW_JPEG_WPF,RAWSelectionAssistant.WpfTests.PlanningOwnedJpegTests.HeaderBoundsMalformedExifAndAttachmentIdentityRejectBeforeUnsafeDecode,HeaderBoundsMalformedExifAndAttachmentIdentityRejectBeforeUnsafeDecode,Failed,FAIL,"Assert.Throws 失败。预期异常类型:<System.IO.InvalidDataException>，但未引发异常。‘action’表达式:‘()=>PlanningOwnedReferenceImage.Decode(invalid,"".jpg"")’。
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.<>c__DisplayClass226_0`1.<IsThrowsFailing>b__0(String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.ThrowsException.cs:line 593
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowsException[TException](Action action, Boolean isStrictType, String message, String actionExpression, String assertMethodName) in /_/src/TestFramework/TestFramework/Assertions/Assert.ThrowsException.cs:line 330
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Throws[TException](Func`1 action, String message, String actionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.ThrowsException.cs:line 192
+   at RAWSelectionAssistant.WpfTests.PlanningOwnedJpegTests.<>c.<<HeaderBoundsMalformedExifAndAttachmentIdentityRejectBeforeUnsafeDecode>b__6_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407",E:\Kitao-Deliveries\planning-owned-jpeg-company-20261023\NEW_JPEG_WPF\run-20261023-105042-728eb3bd\000

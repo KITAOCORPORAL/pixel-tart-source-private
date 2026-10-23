@@ -1,0 +1,66 @@
+{
+  "sourceSha": "4997c3059c5737405921d88ba6fd74eb2be2496e",
+  "scope": "Affected planning/storage/DOCX only, not full Core/WPF or application release gate",
+  "suites": [
+    {
+      "label": "NEW_JPEG_WPF",
+      "discovered": 1740,
+      "selected": 4,
+      "obtained": 4,
+      "passed": 3,
+      "failed": 1,
+      "notRun": 0,
+      "missing": 0,
+      "extra": 0,
+      "timeouts": 0,
+      "assemblySha256": "1eea7adc741c1086a8682de583114121a2cdac30e58e080c23eff36810d6fad8",
+      "authority": "retained-development-run",
+      "evidence": "E:\\Kitao-Deliveries\\planning-owned-jpeg-company-20261023\\NEW_JPEG_WPF\\run-20261023-105042-728eb3bd"
+    },
+    {
+      "label": "FIXED_JPEG_WPF",
+      "discovered": 1740,
+      "selected": 4,
+      "obtained": 4,
+      "passed": 4,
+      "failed": 0,
+      "notRun": 0,
+      "missing": 0,
+      "extra": 0,
+      "timeouts": 0,
+      "assemblySha256": "208a4477afa86a2e0ea857d35899b63ab6505df8a35484740ba82a820617c529",
+      "authority": "retained-development-run",
+      "evidence": "E:\\Kitao-Deliveries\\planning-owned-jpeg-company-20261023\\FIXED_JPEG_WPF\\run-20261023-105254-797af498"
+    },
+    {
+      "label": "FINAL_CORE",
+      "discovered": 1758,
+      "selected": 63,
+      "obtained": 63,
+      "passed": 63,
+      "failed": 0,
+      "notRun": 0,
+      "missing": 0,
+      "extra": 0,
+      "timeouts": 0,
+      "assemblySha256": "0d997840b831a29384da93ac2000280757b16f811551fc93880257024720b3b1",
+      "authority": "final-published-components",
+      "evidence": "E:\\Kitao-Deliveries\\planning-owned-jpeg-company-20261023\\FINAL_CORE\\run-20261023-105741-0694d9d0"
+    },
+    {
+      "label": "FINAL_WPF",
+      "discovered": 1740,
+      "selected": 95,
+      "obtained": 95,
+      "passed": 95,
+      "failed": 0,
+      "notRun": 0,
+      "missing": 0,
+      "extra": 0,
+      "timeouts": 0,
+      "assemblySha256": "81d202839ceacc9c32b9f4bb7dfb6616c223ef1799980e6c5e9226defee2a2fe",
+      "authority": "final-published-components",
+      "evidence": "E:\\Kitao-Deliveries\\planning-owned-jpeg-company-20261023\\FINAL_WPF\\run-20261023-105822-c48d3412"
+    }
+  ]
+}

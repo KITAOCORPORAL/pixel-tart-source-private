@@ -1,0 +1,4 @@
+# Scoped owned PNG/JPEG planning validation
+Base d44b48fe0d0825e067d9dc909cf48d3481226935; product 4997c3059c5737405921d88ba6fd74eb2be2496e. build_final.py/run_final.py publish full diagnostic shell and bind actual final DLLs to affected fixtures only. aggregate.py retains first EXIF test error and final raw identities. verify.py independently checks actual OOXML media pixels against pinned reference PNGs,15 headings,4media, foreign-copy hashes and runtime assets. preserve.py only rechecks48 original worktrees/423dirty files/previous ZIP.
+
+PlanningOwnedReferenceV1: integer EXIF orientation on verified snapshot bytes, not a ColorStudio/RAW/ICC engine change. Pinned Pillow11.3.0 and ImageMagick7.1.2-34 synthetic orientation reference outputs included; third-party research executables are NOT distributed. Native jpeg/save-exit-new-process remains blocked; no repeated screenshots. No installer.

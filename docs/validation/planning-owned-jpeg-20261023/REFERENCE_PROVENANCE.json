@@ -1,0 +1,18 @@
+{
+  "pillow": {
+    "version": "11.3.0",
+    "commit": "89f1f4626a2aaf5f3d5ca6437f41def2998fbe09",
+    "entry": "src/PIL/ImageOps.py::exif_transpose",
+    "license": "HPND, local independent reference only"
+  },
+  "imageMagick": {
+    "version": "7.1.2-34",
+    "commit": "a0c4bf729a26a5c2feb28b0365b47a8db736078a",
+    "entry": "MagickCore/transform.c::AutoOrientImage",
+    "license": "ImageMagick license/NOTICE, local independent reference only",
+    "executableSha256": "36522796508905f34abef4ca8cd840429a57224d01a61f96c5c321558273c4ea",
+    "archiveSha256": "957b3cee70cb16d624f49445fe534d8ea629e35b757a03486c5816f9738a18fb"
+  },
+  "fixture": "tests/fixtures/planning-owned-jpeg/FIXTURES.json",
+  "scope": "Only 8-bit planning display JPEG geometry; not universal ICC/RAW calibration; no research binaries shipped"
+}

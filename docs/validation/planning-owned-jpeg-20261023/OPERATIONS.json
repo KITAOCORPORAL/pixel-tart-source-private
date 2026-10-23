@@ -1,0 +1,35 @@
+{
+  "productSha": "4997c3059c5737405921d88ba6fd74eb2be2496e",
+  "steps": [
+    {
+      "action": "自有JPEG/PNG文档参考与镜头预览",
+      "status": "PASS",
+      "scope": "Final production methods+real stores/WPF grid, not native mouse"
+    },
+    {
+      "action": "EXIF1..8双独立实现数值对照",
+      "status": "PASS",
+      "scope": "16 comparisons, maxAbs8=0, not universal color calibration"
+    },
+    {
+      "action": "损坏/超限/丢失/替换/附件不嵌图",
+      "status": "PASS",
+      "scope": "Targeted final WPF"
+    },
+    {
+      "action": "15区DOCX图片实际内容与异地副本",
+      "status": "PASS",
+      "scope": "Actual OOXML/media pixel+SHA readback"
+    },
+    {
+      "action": "真实EXE JPEG预览/副本保存退出新进程",
+      "status": "NOT_RUN",
+      "reason": "geometry unavailable; one refreshed screenshot timeout"
+    },
+    {
+      "action": "WordWPS/安装/发行",
+      "status": "NOT_RUN",
+      "reason": "Not performed, diagnostic only"
+    }
+  ]
+}

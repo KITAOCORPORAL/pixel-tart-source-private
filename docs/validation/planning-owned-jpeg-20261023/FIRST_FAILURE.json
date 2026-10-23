@@ -1,0 +1,8 @@
+{
+  "suite": "NEW_JPEG_WPF",
+  "passed": 3,
+  "failed": 1,
+  "cause": "New corrupt-EXIF fixture mutation searched only little-endian tag; Pillow generated big-endian EXIF, so no mutation occurred. Add both endian mutation and assert tag changed.",
+  "productDecodeUnchanged": true,
+  "rawRetained": true
+}
