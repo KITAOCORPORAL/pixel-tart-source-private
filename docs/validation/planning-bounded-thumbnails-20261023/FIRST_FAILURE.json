@@ -1,0 +1,7 @@
+{
+  "case": "perf-before-0",
+  "status": "FAIL driver/precondition",
+  "cause": "New test statically bound changed optional CancellationToken method signature absent in baseline. Preserve no-arg overload and use reflection no-arg entry for identical binary before/after.",
+  "rawRetained": true,
+  "measurementCounted": false
+}

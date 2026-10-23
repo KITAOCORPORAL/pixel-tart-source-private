@@ -24,3 +24,7 @@
 异常输入：头尺寸先于WIC限制；EXIF endian/偏移/重复/类型/范围校验；CMYK/12bit/多帧/非PNG-JPEG明确不支持。真实授权RAW/高动态/负浮点/色差不适用本8位策划展示节点，NOT_RUN，CalibrationEligible=false。旧PV数学源码无改动。
 
 决策：限定PlanningOwnedReferenceV1呈现行为接线，仅几何/安全准入对照已验证。未宣称通用ICC/RAW科学节点或替换WIC算法。发布只用原有Windows WIC，研究工具/许可证/原始代码不进产品二进制。
+
+## 最终本批结果
+
+24MP合成PNG/JPEG的12组512px双参考比较，尺寸和方向一致，meanAbs8=1.1880..2.5361、maxAbs8最高37；不同缩采样核/codec边界差保留原数，不宣称位等价。原小图EXIF1..8双参考16组仍maxAbs8=0；实际汇总4张媒体仍匹配原固定参考，15区结构不变。新增采样无需/不触碰RAW、ICC或专业调色域；只限定策划缩小呈现。最终性能与全部原始日志独立封存。

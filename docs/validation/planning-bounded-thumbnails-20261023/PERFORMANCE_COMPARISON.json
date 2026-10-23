@@ -1,0 +1,144 @@
+{
+  "fixtureManifest": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\large-fixtures\\MANIFEST.json",
+  "scope": "Same test binary, separate processes, same machine/fixtures, real stores/36shots; not native desktop benchmark",
+  "rows": [
+    {
+      "mode": "before",
+      "runs": [
+        {
+          "coldOpenMs": 3220.8302,
+          "warmRefreshMs": 2851.3449,
+          "switchToEmptyProjectMs": 36.8598,
+          "cacheHitCount": 0,
+          "unchangedCacheFiles": 0,
+          "references": 6,
+          "shots": 36,
+          "width": 6000,
+          "height": 4000,
+          "startWorkingBytes": 114311168,
+          "peakWorkingBytes": 564785152,
+          "peakPrivateBytes": 550854656,
+          "allocatedBytes": 1175087032,
+          "productAssembly": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-before\\KitaoPhotoSelector.dll",
+          "coreAssembly": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-before\\RAWSelectionAssistant.Core.dll",
+          "scope": "Synthetic WPF/real stores in separate test process; same fixture, not native mouse/open benchmark"
+        },
+        {
+          "coldOpenMs": 3271.2909,
+          "warmRefreshMs": 3055.9793,
+          "switchToEmptyProjectMs": 36.2163,
+          "cacheHitCount": 0,
+          "unchangedCacheFiles": 0,
+          "references": 6,
+          "shots": 36,
+          "width": 6000,
+          "height": 4000,
+          "startWorkingBytes": 116736000,
+          "peakWorkingBytes": 565571584,
+          "peakPrivateBytes": 551608320,
+          "allocatedBytes": 1175241840,
+          "productAssembly": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-before\\KitaoPhotoSelector.dll",
+          "coreAssembly": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-before\\RAWSelectionAssistant.Core.dll",
+          "scope": "Synthetic WPF/real stores in separate test process; same fixture, not native mouse/open benchmark"
+        },
+        {
+          "coldOpenMs": 3138.9897,
+          "warmRefreshMs": 2878.1782,
+          "switchToEmptyProjectMs": 37.5913,
+          "cacheHitCount": 0,
+          "unchangedCacheFiles": 0,
+          "references": 6,
+          "shots": 36,
+          "width": 6000,
+          "height": 4000,
+          "startWorkingBytes": 117399552,
+          "peakWorkingBytes": 565411840,
+          "peakPrivateBytes": 552431616,
+          "allocatedBytes": 1175246472,
+          "productAssembly": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-before\\KitaoPhotoSelector.dll",
+          "coreAssembly": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-before\\RAWSelectionAssistant.Core.dll",
+          "scope": "Synthetic WPF/real stores in separate test process; same fixture, not native mouse/open benchmark"
+        }
+      ],
+      "median": {
+        "coldOpenMs": 3220.8302,
+        "warmRefreshMs": 2878.1782,
+        "switchToEmptyProjectMs": 36.8598,
+        "peakWorkingBytes": 565411840,
+        "peakPrivateBytes": 551608320,
+        "allocatedBytes": 1175241840,
+        "cacheHitCount": 0,
+        "unchangedCacheFiles": 0
+      }
+    },
+    {
+      "mode": "after",
+      "runs": [
+        {
+          "coldOpenMs": 794.9298,
+          "warmRefreshMs": 50.7975,
+          "switchToEmptyProjectMs": 42.0142,
+          "cacheHitCount": 6,
+          "unchangedCacheFiles": 6,
+          "references": 6,
+          "shots": 36,
+          "width": 6000,
+          "height": 4000,
+          "startWorkingBytes": 118509568,
+          "peakWorkingBytes": 132018176,
+          "peakPrivateBytes": 47923200,
+          "allocatedBytes": 8578112,
+          "productAssembly": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-after\\KitaoPhotoSelector.dll",
+          "coreAssembly": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-after\\RAWSelectionAssistant.Core.dll",
+          "scope": "Synthetic WPF/real stores in separate test process; same fixture, not native mouse/open benchmark"
+        },
+        {
+          "coldOpenMs": 734.9563,
+          "warmRefreshMs": 51.5776,
+          "switchToEmptyProjectMs": 33.6891,
+          "cacheHitCount": 6,
+          "unchangedCacheFiles": 6,
+          "references": 6,
+          "shots": 36,
+          "width": 6000,
+          "height": 4000,
+          "startWorkingBytes": 117878784,
+          "peakWorkingBytes": 131289088,
+          "peakPrivateBytes": 46440448,
+          "allocatedBytes": 8574240,
+          "productAssembly": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-after\\KitaoPhotoSelector.dll",
+          "coreAssembly": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-after\\RAWSelectionAssistant.Core.dll",
+          "scope": "Synthetic WPF/real stores in separate test process; same fixture, not native mouse/open benchmark"
+        },
+        {
+          "coldOpenMs": 800.1442,
+          "warmRefreshMs": 68.2397,
+          "switchToEmptyProjectMs": 38.6723,
+          "cacheHitCount": 6,
+          "unchangedCacheFiles": 6,
+          "references": 6,
+          "shots": 36,
+          "width": 6000,
+          "height": 4000,
+          "startWorkingBytes": 118304768,
+          "peakWorkingBytes": 130531328,
+          "peakPrivateBytes": 46088192,
+          "allocatedBytes": 8588960,
+          "productAssembly": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-after\\KitaoPhotoSelector.dll",
+          "coreAssembly": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-after\\RAWSelectionAssistant.Core.dll",
+          "scope": "Synthetic WPF/real stores in separate test process; same fixture, not native mouse/open benchmark"
+        }
+      ],
+      "median": {
+        "coldOpenMs": 794.9298,
+        "warmRefreshMs": 51.5776,
+        "switchToEmptyProjectMs": 38.6723,
+        "peakWorkingBytes": 131289088,
+        "peakPrivateBytes": 46440448,
+        "allocatedBytes": 8578112,
+        "cacheHitCount": 6,
+        "unchangedCacheFiles": 6
+      }
+    }
+  ]
+}

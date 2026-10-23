@@ -1,0 +1,6 @@
+﻿suite,name,display,outcome,status,error,evidence
+NEW_THUMB_WPF,RAWSelectionAssistant.WpfTests.PlanningBoundedThumbnailTests.SameFixtureLargeOpenWarmCacheAndMultiShotMeasurement,SameFixtureLargeOpenWarmCacheAndMultiShotMeasurement,NotExecuted,NOT_RUN,"Assert.Inconclusive 失败。Explicit fresh same-fixture performance output required
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27
+   at RAWSelectionAssistant.WpfTests.PlanningBoundedThumbnailTests.<>c.<<SameFixtureLargeOpenWarmCacheAndMultiShotMeasurement>b__4_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407",E:\Kitao-Deliveries\planning-bounded-thumbnails-20261023\NEW_THUMB_WPF\run-20261023-162148-82c8c14b\000

@@ -1,0 +1,33 @@
+{
+  "productSha": "e6ddb8d1018713fb48fbaa7e7cf3a3b23df0cc30",
+  "steps": [
+    {
+      "action": "512缩略图/源命中必校验/PNG扩展名",
+      "status": "PASS"
+    },
+    {
+      "action": "EXIF/替换/缺失/取消/快速切换",
+      "status": "PASS",
+      "scope": "Real stores/test VM, not native mouse"
+    },
+    {
+      "action": "放大4096/汇总2048",
+      "status": "PASS",
+      "scope": "Bounded decode dimension, WIC internals measured not absolute proof"
+    },
+    {
+      "action": "同机同夹具前后性能",
+      "status": "PASS",
+      "scope": "Final6runs all retained"
+    },
+    {
+      "action": "15区DOCX正确方向图片",
+      "status": "PASS"
+    },
+    {
+      "action": "原生JPEG/副本保存退出新进程",
+      "status": "NOT_RUN",
+      "reason": "One click geometry unavailable, no repeat capture"
+    }
+  ]
+}

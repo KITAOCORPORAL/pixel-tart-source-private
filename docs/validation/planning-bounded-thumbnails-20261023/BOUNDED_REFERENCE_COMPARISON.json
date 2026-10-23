@@ -1,0 +1,146 @@
+[
+  {
+    "input": "large-0.jpg",
+    "inputSha256": "7eb23625d968c48fc2a5b2c2454705e39824165e9713f9e8aaab1743ae92abee",
+    "reference": "Pillow11.3.0",
+    "size": [
+      341,
+      512
+    ],
+    "meanAbsolute8bit": 2.5360631262218964,
+    "maxAbsolute8bit": 35,
+    "scope": "Different resampling/codec kernels: report actual errors, no bit-equivalence or general color claim"
+  },
+  {
+    "input": "large-0.jpg",
+    "inputSha256": "7eb23625d968c48fc2a5b2c2454705e39824165e9713f9e8aaab1743ae92abee",
+    "reference": "ImageMagick7.1.2-34",
+    "size": [
+      341,
+      512
+    ],
+    "meanAbsolute8bit": 2.4216153470185726,
+    "maxAbsolute8bit": 37,
+    "scope": "Different resampling/codec kernels: report actual errors, no bit-equivalence or general color claim"
+  },
+  {
+    "input": "large-0.png",
+    "inputSha256": "388de309ea4af016753409756a4d4b0e443fe1c4542147171f2486f53b88c53b",
+    "reference": "Pillow11.3.0",
+    "size": [
+      512,
+      341
+    ],
+    "meanAbsolute8bit": 1.5993726325757578,
+    "maxAbsolute8bit": 22,
+    "scope": "Different resampling/codec kernels: report actual errors, no bit-equivalence or general color claim"
+  },
+  {
+    "input": "large-0.png",
+    "inputSha256": "388de309ea4af016753409756a4d4b0e443fe1c4542147171f2486f53b88c53b",
+    "reference": "ImageMagick7.1.2-34",
+    "size": [
+      512,
+      341
+    ],
+    "meanAbsolute8bit": 1.576628176930596,
+    "maxAbsolute8bit": 27,
+    "scope": "Different resampling/codec kernels: report actual errors, no bit-equivalence or general color claim"
+  },
+  {
+    "input": "large-1.jpg",
+    "inputSha256": "2a13bed1e190d6e9fa76c5c73a71d52da8bc80133417c6c87091c128ba31529f",
+    "reference": "Pillow11.3.0",
+    "size": [
+      341,
+      512
+    ],
+    "meanAbsolute8bit": 1.8865259194770285,
+    "maxAbsolute8bit": 30,
+    "scope": "Different resampling/codec kernels: report actual errors, no bit-equivalence or general color claim"
+  },
+  {
+    "input": "large-1.jpg",
+    "inputSha256": "2a13bed1e190d6e9fa76c5c73a71d52da8bc80133417c6c87091c128ba31529f",
+    "reference": "ImageMagick7.1.2-34",
+    "size": [
+      341,
+      512
+    ],
+    "meanAbsolute8bit": 1.790712060117302,
+    "maxAbsolute8bit": 32,
+    "scope": "Different resampling/codec kernels: report actual errors, no bit-equivalence or general color claim"
+  },
+  {
+    "input": "large-1.png",
+    "inputSha256": "31afe2e6260cf6f107cfd62f570c362e4421e704db1d17aef7047c7eaca4daae",
+    "reference": "Pillow11.3.0",
+    "size": [
+      512,
+      341
+    ],
+    "meanAbsolute8bit": 1.2090206500488758,
+    "maxAbsolute8bit": 21,
+    "scope": "Different resampling/codec kernels: report actual errors, no bit-equivalence or general color claim"
+  },
+  {
+    "input": "large-1.png",
+    "inputSha256": "31afe2e6260cf6f107cfd62f570c362e4421e704db1d17aef7047c7eaca4daae",
+    "reference": "ImageMagick7.1.2-34",
+    "size": [
+      512,
+      341
+    ],
+    "meanAbsolute8bit": 1.1880364888807429,
+    "maxAbsolute8bit": 25,
+    "scope": "Different resampling/codec kernels: report actual errors, no bit-equivalence or general color claim"
+  },
+  {
+    "input": "large-2.jpg",
+    "inputSha256": "b1ebb8d78fcc32741c158bff1cb8c549e55ce0373037b5580200138a38a2c8b0",
+    "reference": "Pillow11.3.0",
+    "size": [
+      341,
+      512
+    ],
+    "meanAbsolute8bit": 2.340725806451613,
+    "maxAbsolute8bit": 30,
+    "scope": "Different resampling/codec kernels: report actual errors, no bit-equivalence or general color claim"
+  },
+  {
+    "input": "large-2.jpg",
+    "inputSha256": "b1ebb8d78fcc32741c158bff1cb8c549e55ce0373037b5580200138a38a2c8b0",
+    "reference": "ImageMagick7.1.2-34",
+    "size": [
+      341,
+      512
+    ],
+    "meanAbsolute8bit": 2.2304229288856305,
+    "maxAbsolute8bit": 32,
+    "scope": "Different resampling/codec kernels: report actual errors, no bit-equivalence or general color claim"
+  },
+  {
+    "input": "large-2.png",
+    "inputSha256": "ec0668f015efeeb4ec11325396cc990e843f6e8fbf70ab0590933cb5ec8bbaf9",
+    "reference": "Pillow11.3.0",
+    "size": [
+      512,
+      341
+    ],
+    "meanAbsolute8bit": 1.5056970918866082,
+    "maxAbsolute8bit": 19,
+    "scope": "Different resampling/codec kernels: report actual errors, no bit-equivalence or general color claim"
+  },
+  {
+    "input": "large-2.png",
+    "inputSha256": "ec0668f015efeeb4ec11325396cc990e843f6e8fbf70ab0590933cb5ec8bbaf9",
+    "reference": "ImageMagick7.1.2-34",
+    "size": [
+      512,
+      341
+    ],
+    "meanAbsolute8bit": 1.4818796584799607,
+    "maxAbsolute8bit": 23,
+    "scope": "Different resampling/codec kernels: report actual errors, no bit-equivalence or general color claim"
+  }
+]

@@ -1,0 +1,81 @@
+{
+  "sourceSha": "e6ddb8d1018713fb48fbaa7e7cf3a3b23df0cc30",
+  "scope": "Affected planning/storage/DOCX only, not full Core/WPF or application release gate",
+  "suites": [
+    {
+      "label": "NEW_THUMB_WPF",
+      "discovered": 1744,
+      "selected": 4,
+      "obtained": 4,
+      "passed": 3,
+      "failed": 0,
+      "notRun": 1,
+      "missing": 0,
+      "extra": 0,
+      "timeouts": 0,
+      "assemblySha256": "f89d577d03c7316574a808f5b1f99b956ea1d02e02cc7731f8090bdfc94f09c7",
+      "authority": "retained-development-run",
+      "evidence": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\NEW_THUMB_WPF\\run-20261023-162148-82c8c14b"
+    },
+    {
+      "label": "READY_THUMB_WPF",
+      "discovered": 1744,
+      "selected": 4,
+      "obtained": 4,
+      "passed": 4,
+      "failed": 0,
+      "notRun": 0,
+      "missing": 0,
+      "extra": 0,
+      "timeouts": 0,
+      "assemblySha256": "640d06112ada222a9a4f7c422f0681d83e479d9307d8ebbf4427437367d6c98a",
+      "authority": "retained-development-run",
+      "evidence": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\READY_THUMB_WPF\\run-20261023-162748-203ad5c0"
+    },
+    {
+      "label": "SEAL_THUMB_WPF",
+      "discovered": 1744,
+      "selected": 4,
+      "obtained": 4,
+      "passed": 4,
+      "failed": 0,
+      "notRun": 0,
+      "missing": 0,
+      "extra": 0,
+      "timeouts": 0,
+      "assemblySha256": "2e1e7fd643bfaf8d285bf941c63881b84c10116130aa2adaf671214d54925a64",
+      "authority": "retained-development-run",
+      "evidence": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\SEAL_THUMB_WPF\\run-20261023-163016-93d1873c"
+    },
+    {
+      "label": "FINAL_CORE",
+      "discovered": 1758,
+      "selected": 63,
+      "obtained": 63,
+      "passed": 63,
+      "failed": 0,
+      "notRun": 0,
+      "missing": 0,
+      "extra": 0,
+      "timeouts": 0,
+      "assemblySha256": "005e31c29b0e7ce137b3ba13321497dfa0c60a61bc201dabd1564a8a8d4db823",
+      "authority": "final-published-components",
+      "evidence": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\FINAL_CORE\\run-20261023-163308-06a66c99"
+    },
+    {
+      "label": "FINAL_WPF",
+      "discovered": 1745,
+      "selected": 100,
+      "obtained": 100,
+      "passed": 100,
+      "failed": 0,
+      "notRun": 0,
+      "missing": 0,
+      "extra": 0,
+      "timeouts": 0,
+      "assemblySha256": "cb36329bad2dd769008ae82c87f2e15e15ea2155fa3206d04a071523c2dd7bf8",
+      "authority": "final-published-components",
+      "evidence": "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\FINAL_WPF\\run-20261023-163350-d416be03"
+    }
+  ]
+}

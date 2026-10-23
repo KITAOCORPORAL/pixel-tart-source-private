@@ -1,0 +1,104 @@
+[
+  {
+    "mode": "before",
+    "iteration": 0,
+    "args": [
+      "D:/AI AGENT/.dotnet/dotnet.exe",
+      "vstest",
+      "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-before\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.PlanningBoundedThumbnailTests.SameFixtureLargeOpenWarmCacheAndMultiShotMeasurement",
+      "/Logger:trx;LogFileName=result.trx",
+      "/ResultsDirectory:E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-before-0"
+    ],
+    "pid": 32272,
+    "exitCode": 0,
+    "seconds": 8.946302652359009,
+    "wpfSha256": "38db0b152782f7ba2366441f2db0dec365246d5903b8bff130aa70edeb70410e",
+    "testSha256": "cb36329bad2dd769008ae82c87f2e15e15ea2155fa3206d04a071523c2dd7bf8"
+  },
+  {
+    "mode": "before",
+    "iteration": 1,
+    "args": [
+      "D:/AI AGENT/.dotnet/dotnet.exe",
+      "vstest",
+      "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-before\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.PlanningBoundedThumbnailTests.SameFixtureLargeOpenWarmCacheAndMultiShotMeasurement",
+      "/Logger:trx;LogFileName=result.trx",
+      "/ResultsDirectory:E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-before-1"
+    ],
+    "pid": 5624,
+    "exitCode": 0,
+    "seconds": 8.87746286392212,
+    "wpfSha256": "38db0b152782f7ba2366441f2db0dec365246d5903b8bff130aa70edeb70410e",
+    "testSha256": "cb36329bad2dd769008ae82c87f2e15e15ea2155fa3206d04a071523c2dd7bf8"
+  },
+  {
+    "mode": "before",
+    "iteration": 2,
+    "args": [
+      "D:/AI AGENT/.dotnet/dotnet.exe",
+      "vstest",
+      "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-before\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.PlanningBoundedThumbnailTests.SameFixtureLargeOpenWarmCacheAndMultiShotMeasurement",
+      "/Logger:trx;LogFileName=result.trx",
+      "/ResultsDirectory:E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-before-2"
+    ],
+    "pid": 30504,
+    "exitCode": 0,
+    "seconds": 8.68959355354309,
+    "wpfSha256": "38db0b152782f7ba2366441f2db0dec365246d5903b8bff130aa70edeb70410e",
+    "testSha256": "cb36329bad2dd769008ae82c87f2e15e15ea2155fa3206d04a071523c2dd7bf8"
+  },
+  {
+    "mode": "after",
+    "iteration": 0,
+    "args": [
+      "D:/AI AGENT/.dotnet/dotnet.exe",
+      "vstest",
+      "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-after\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.PlanningBoundedThumbnailTests.SameFixtureLargeOpenWarmCacheAndMultiShotMeasurement",
+      "/Logger:trx;LogFileName=result.trx",
+      "/ResultsDirectory:E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-after-0"
+    ],
+    "pid": 33532,
+    "exitCode": 0,
+    "seconds": 3.649319648742676,
+    "wpfSha256": "45dfd7bb0bfdeda5df027f877139a8cda9e78fdbf3f7d28eaa1cfdf1e528eeb6",
+    "testSha256": "cb36329bad2dd769008ae82c87f2e15e15ea2155fa3206d04a071523c2dd7bf8"
+  },
+  {
+    "mode": "after",
+    "iteration": 1,
+    "args": [
+      "D:/AI AGENT/.dotnet/dotnet.exe",
+      "vstest",
+      "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-after\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.PlanningBoundedThumbnailTests.SameFixtureLargeOpenWarmCacheAndMultiShotMeasurement",
+      "/Logger:trx;LogFileName=result.trx",
+      "/ResultsDirectory:E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-after-1"
+    ],
+    "pid": 8736,
+    "exitCode": 0,
+    "seconds": 3.420322895050049,
+    "wpfSha256": "45dfd7bb0bfdeda5df027f877139a8cda9e78fdbf3f7d28eaa1cfdf1e528eeb6",
+    "testSha256": "cb36329bad2dd769008ae82c87f2e15e15ea2155fa3206d04a071523c2dd7bf8"
+  },
+  {
+    "mode": "after",
+    "iteration": 2,
+    "args": [
+      "D:/AI AGENT/.dotnet/dotnet.exe",
+      "vstest",
+      "E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-host-after\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.PlanningBoundedThumbnailTests.SameFixtureLargeOpenWarmCacheAndMultiShotMeasurement",
+      "/Logger:trx;LogFileName=result.trx",
+      "/ResultsDirectory:E:\\Kitao-Deliveries\\planning-bounded-thumbnails-20261023\\perf-final-after-2"
+    ],
+    "pid": 34172,
+    "exitCode": 0,
+    "seconds": 3.6665096282958984,
+    "wpfSha256": "45dfd7bb0bfdeda5df027f877139a8cda9e78fdbf3f7d28eaa1cfdf1e528eeb6",
+    "testSha256": "cb36329bad2dd769008ae82c87f2e15e15ea2155fa3206d04a071523c2dd7bf8"
+  }
+]
