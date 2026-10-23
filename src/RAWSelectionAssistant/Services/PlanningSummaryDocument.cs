@@ -16,7 +16,7 @@ public static class PlanningSummaryDocument
         document.Tag=source.Package?.RichLayout?.HeaderFooter??new PlanningHeaderFooter();
         document.Blocks.Add(new Paragraph(new Run("摄影策划 · 15区汇总")){FontSize=22,FontWeight=FontWeights.Bold});
         Text($"项目 {summary.ProjectId:D} · 文档 {summary.DocumentId:D}");
-        Text("只读阅读快照：按现有15区顺序。经身份/Hash校验的项目自有PNG副本可嵌入；外链和素材库原件仅列状态。不是可搬迁项目包，未选择导入的附件仍为外链；自有附件仅列名称与状态，不嵌入DOCX。汇总不回写15区资源，原摄影DOCX往返合同不变。");
+        Text("只读阅读快照：按现有15区顺序。经身份/Hash校验的项目自有PNG/JPEG参考副本可嵌入；外链和素材库原件仅列状态。不是可搬迁项目包，未选择导入的附件仍为外链；自有附件仅列名称与状态，不嵌入DOCX。汇总不回写15区资源，原摄影DOCX往返合同不变。");
         var contentWidth=document.PageWidth-document.PagePadding.Left-document.PagePadding.Right;
         var contentHeight=document.PageHeight-document.PagePadding.Top-document.PagePadding.Bottom;
         for(int index=0;index<summary.Sections.Count;index++)

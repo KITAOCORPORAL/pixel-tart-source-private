@@ -10,13 +10,14 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed record PlanningReferenceItem(PlanningDocumentReference Link, string? PreviewPath, bool SourceAvailable)
 {
     public string? OriginalPath { get; init; }
+    public string? PreviewStatus {get;init;}
     public Guid Id => Link.Source.ReferenceId;
     public string Title => Link.Source.Title ?? "未命名参考";
     public string Category => Link.Category;
     public bool IsHero => Link.IsHero;
     public bool IsMoodboard => Link.IsMoodboard;
     public string Group => Link.Group;
-    public string Availability => Link.ProjectCopy is not null ? (SourceAvailable ? "项目自有副本 · " + Category : "项目自有副本不可用（未回退外链）") : SourceAvailable ? "外链/库引用 · " + Category : "源文件暂不可用";
+    public string Availability => PreviewStatus ?? (Link.ProjectCopy is not null ? (SourceAvailable ? "项目自有副本 · " + Category : "项目自有副本不可用（未回退外链）") : SourceAvailable ? "外链/库引用 · " + Category : "源文件暂不可用");
 }
 
 public sealed partial class PlanningCenterViewModel
@@ -56,23 +57,23 @@ public sealed partial class PlanningCenterViewModel
                 catch(Exception error)when(PackageError(error)){path=null;}
             }
             var owned = reference.ProjectCopy;
-            System.Windows.Media.Imaging.BitmapSource? ownedBitmap = null;
+            System.Windows.Media.Imaging.BitmapSource? ownedBitmap = null;string? previewStatus=null;
             if (owned is not null)
             {
                 try
                 {
                     PlanningProjectCopyStorage.ReadVerified(owned); path=PlanningProjectCopyStorage.Resolve(owned);
-                    try { ownedBitmap=(System.Windows.Media.Imaging.BitmapSource)RAWSelectionAssistant.Services.PlanningSummaryOwnedImage.ReadImported(owned,owned.ProjectId,owned.DocumentId,1400,1400).Source; }
-                    catch(Exception error)when(error is IOException or InvalidDataException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException) { /* File remains accessible; unsupported image gets no unsafe preview. */ }
+                    try { ownedBitmap=(System.Windows.Media.Imaging.BitmapSource)RAWSelectionAssistant.Services.PlanningSummaryOwnedImage.ReadImported(owned,ProjectId??Guid.Empty,PlanningDocumentId??Guid.Empty,1400,1400).Source; }
+                    catch(Exception error)when(error is IOException or InvalidDataException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException) { previewStatus="项目自有副本已保存但无法预览："+error.Message; }
                 }
-                catch(Exception error)when(error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException){path=null;}
+                catch(Exception error)when(error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException){path=null;previewStatus="项目自有副本不可用："+error.Message+"（未回退外链）";}
             }
             if (ImportedPackageRoot is null && !IsPackageImported && owned is null && reference.ReconnectedFile is null && path is null && ReferencePathResolver is not null) path = await ReferencePathResolver(reference.Source);
             if(conflict)path=null;
             var available = !string.IsNullOrWhiteSpace(path) && File.Exists(path);
             var key = reference.ReconnectedFile is {} verified ? verified.ReferenceId.ToString("N")+"/"+verified.Sha256 : owned is not null ? owned.ReferenceId.ToString("N") + "/" + owned.Sha256 : reference.Source.LibraryId is Guid library ? $"{library:N}/{reference.Source.AssetId:N}" : reference.Source.ExternalReference ?? reference.Source.ReferenceId.ToString();
-            var cache = Path.Combine(AppDataPaths.CacheDirectory, "PlanningPreviews", Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(key))) + ".jpg");
-            if (available && (owned is null || ownedBitmap is not null) && (!File.Exists(cache) || File.GetLastWriteTimeUtc(path!) > File.GetLastWriteTimeUtc(cache)))
+            var cache = Path.Combine(AppDataPaths.CacheDirectory, owned is null ? "PlanningPreviews" : "PlanningOwnedReferenceV1", Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(key))) + ".jpg");
+            if (available && (owned is null || ownedBitmap is not null) && (owned is not null || !File.Exists(cache) || File.GetLastWriteTimeUtc(path!) > File.GetLastWriteTimeUtc(cache)))
             {
                 try
                 {
@@ -83,12 +84,12 @@ public sealed partial class PlanningCenterViewModel
                     {
                         using var input=File.OpenRead(path!);var decoded=new BitmapImage();decoded.BeginInit();decoded.CacheOption=BitmapCacheOption.OnLoad;decoded.DecodePixelWidth=1400;decoded.StreamSource=input;decoded.EndInit();decoded.Freeze();bitmap=decoded;
                     }
-                    var encoder = new JpegBitmapEncoder { QualityLevel = 88 }; encoder.Frames.Add(BitmapFrame.Create(bitmap));
-                    using var output = File.Create(cache); encoder.Save(output);
+                    BitmapEncoder encoder=owned is null?new JpegBitmapEncoder{QualityLevel=88}:new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                    var stage=cache+"."+Guid.NewGuid().ToString("N")+".tmp";try{using(var output=new FileStream(stage,FileMode.CreateNew,FileAccess.Write,FileShare.None)){encoder.Save(output);output.Flush(true);}File.Move(stage,cache,true);}finally{if(File.Exists(stage))File.Delete(stage);}
                 }
                 catch (Exception error) when (error is IOException or NotSupportedException or System.Runtime.InteropServices.COMException or UnauthorizedAccessException) { }
             }
-            AllProjectReferences.Add(new(reference, owned is not null ? available && ownedBitmap is not null && File.Exists(cache) ? cache : null : available ? File.Exists(cache) ? cache : path : null, available) { OriginalPath = available ? path : null });
+            AllProjectReferences.Add(new(reference, owned is not null ? available && ownedBitmap is not null && File.Exists(cache) ? cache : null : available ? File.Exists(cache) ? cache : path : null, available) { OriginalPath = available ? path : null, PreviewStatus=previewStatus });
         }
         OnPropertyChanged(nameof(HeroReferences)); PresentationChanged();
     }

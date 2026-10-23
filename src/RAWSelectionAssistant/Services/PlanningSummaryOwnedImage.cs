@@ -33,10 +33,11 @@ public static class PlanningSummaryOwnedImage
     public static Image ReadImported(PlanningProjectCopy copy, Guid projectId, Guid documentId, double contentWidth, double contentHeight)
     {
         if(copy.Kind!="reference" || copy.ProjectId!=projectId || copy.DocumentId!=documentId)throw new InvalidDataException("自有参考与汇总项目/文档身份不匹配。");
-        var data=PlanningProjectCopyStorage.ReadVerified(copy);
-        if(data.Length<33)throw new NotSupportedException("自有参考不在安全PNG呈现范围；保留文件名称与状态。");
-        return Decode(data,520,360,contentWidth,contentHeight,Path.GetFileName(copy.OriginalPath));
+        var bitmap=PlanningOwnedReferenceImage.Read(copy,projectId,documentId,copy.ReferenceId);
+        var maxWidth=Math.Max(1,Math.Min(520,contentWidth));var maxHeight=Math.Max(1,Math.Min(360,contentHeight*.42));var scale=Math.Min(1,Math.Min(maxWidth/bitmap.PixelWidth,maxHeight/bitmap.PixelHeight));
+        return new Image{Source=bitmap,Width=bitmap.PixelWidth*scale,Height=bitmap.PixelHeight*scale,Stretch=Stretch.Uniform,ToolTip=Path.GetFileName(copy.OriginalPath)};
     }
+
     private static Image Decode(byte[] data,double savedWidth,double savedHeight,double contentWidth,double contentHeight,string title)
     {
         if(!data.AsSpan(0,8).SequenceEqual(new byte[]{137,80,78,71,13,10,26,10})||!data.AsSpan(12,4).SequenceEqual("IHDR"u8))throw new NotSupportedException("自有副本不是已支持的PNG格式；未尝试其他文件。");

@@ -590,6 +590,10 @@ public partial class PlanningCenterView : UserControl
     {
         try
         {
+            if(item.Link.ProjectCopy is {} copy)
+            {
+                PreviewImage.Source=PlanningOwnedReferenceImage.Read(copy,_vm!.ProjectId??Guid.Empty,_vm.PlanningDocumentId??Guid.Empty,item.Id);PreviewCaption.Text=item.Category+" · "+item.Title+" · 已验证项目自有副本";ImagePreview.Visibility=Visibility.Visible;CloseImageButton.Focus();return;
+            }
             var path = await _vm!.ResolveOriginalAsync(item);
             var original = path is not null && File.Exists(path);
             PreviewImage.Source = LoadImage(original ? path : item.PreviewPath);
@@ -597,7 +601,7 @@ public partial class PlanningCenterView : UserControl
             ImagePreview.Visibility = Visibility.Visible;
             CloseImageButton.Focus();
         }
-        catch (Exception error) when (error is IOException or UnauthorizedAccessException) { _vm!.Dialogs.ShowInfo("源文件暂不可用。"); }
+        catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException) { PreviewImage.Source=null;_vm!.Dialogs.ShowInfo("已保存但无法预览："+error.Message+"；未读取外链原件。"); }
     }
     private void CloseImagePreview()
     {
