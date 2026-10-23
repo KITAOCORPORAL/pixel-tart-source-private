@@ -11,6 +11,13 @@ public partial class PlanningCenterView
         var panel=new StackPanel{Margin=new Thickness(18),MaxWidth=760};
         panel.Children.Add(Text("缺失外链与手动重连",24,true));
         panel.Children.Add(Text("仅处理逐项明确选择的外部参考图和普通附件。不扫描目录、不猜测同名文件；保留原引用ID、原路径及分区。",14));
+        panel.Children.Add(Text("镜头外链批准检查与修复",20,true));
+        foreach(var issue in _vm.ShotLinkIssues)
+        {
+            var row=new StackPanel{Margin=new Thickness(0,12,0,0)};row.Children.Add(Text($"镜头ID {issue.ShotId}\n引用ID {issue.ReferenceId}\n原路径 {issue.OriginalPath}\n原因 {issue.Reason}\n受影响副本 {issue.CopyPath??"无"}（不删除）",13));
+            row.Children.Add(AsyncAction("逐项移除失效批准",async()=>await RepairShotLinkFromWindowAsync(issue,false,false)));row.Children.Add(AsyncAction("重新定位（继续外链）",async()=>await RepairShotLinkFromWindowAsync(issue,true,false)));row.Children.Add(AsyncAction("重新定位并导入副本",async()=>await RepairShotLinkFromWindowAsync(issue,true,true)));panel.Children.Add(row);
+        }
+        if(_vm.ShotLinkIssues.Count==0)panel.Children.Add(Text("未发现镜头批准失配。有效共享引用和副本保持。",13));
         foreach(var item in _vm.ExternalDependencies)
         {
             var row=new StackPanel{Margin=new Thickness(0,18,0,0)};
@@ -37,6 +44,10 @@ public partial class PlanningCenterView
         var window=_externalReconnectWindow;window?.Hide();
         try{if(_vm is not null)await _vm.LocateExternalAsync(item,importCopy);}
         finally{if(window is not null){window.Show();ShowExternalReconnect();window.Activate();}}
+    }
+    private async Task RepairShotLinkFromWindowAsync(PlanningShotLinkIssue issue,bool locate,bool copy)
+    {
+        var window=_externalReconnectWindow;window?.Hide();try{if(_vm is not null)await _vm.RepairShotLinkIssueAsync(issue,locate,copy);}finally{if(window is not null){window.Show();ShowExternalReconnect();window.Activate();}}
     }
     private Window? _externalReconnectWindow;
 }

@@ -41,6 +41,7 @@ public sealed partial class PlanningCenterViewModel
     }
     public async Task RefreshDocumentReferencesAsync()
     {
+        await RefreshShotLinkReceiptsAsync();
         var references = _document.References.Concat(Shots.SelectMany(shot => shot.References
             .Select(source => PlanningReferenceLinks.ForShot(_document,shot,source,ReferenceCategoryFor(source.Kind))))).DistinctBy(item => item.Source.ReferenceId).ToArray();
         AllProjectReferences.Clear();

@@ -90,6 +90,8 @@ public sealed record ProjectShotCatalog(Guid ProjectId, IReadOnlyList<ProjectSho
 
 public sealed class ProjectShotStore(string directory)
 {
+    private static readonly ConcurrentDictionary<string,PlanningProjectStore> PlanningLinks=new(StringComparer.OrdinalIgnoreCase);
+    public void BindPlanningLifecycle(PlanningProjectStore planning)=>PlanningLinks[StorageRoot]=planning;
     public string StorageRoot=>Path.GetFullPath(directory);
     private static readonly ConcurrentDictionary<string, SemaphoreSlim> Gates = new(StringComparer.OrdinalIgnoreCase);
     private string FilePath(Guid projectId) => Path.Combine(Path.GetFullPath(directory), $"{projectId:N}.shots.json");
@@ -185,7 +187,9 @@ public sealed class ProjectShotStore(string directory)
             await using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
             { await JsonSerializer.SerializeAsync(stream, updated, cancellationToken: token).ConfigureAwait(false); await stream.FlushAsync(token).ConfigureAwait(false); stream.Flush(true); }
             token.ThrowIfCancellationRequested(); PlanningMigrationBackup.PreserveLegacy(path, shots: true);
-            token.ThrowIfCancellationRequested(); File.Move(temporary, path, true);
+            token.ThrowIfCancellationRequested();
+            if(PlanningLinks.TryGetValue(StorageRoot,out var planning))await planning.CommitShotEditAsync(current,updated,()=>{token.ThrowIfCancellationRequested();File.Move(temporary,path,true);return Task.CompletedTask;},token).ConfigureAwait(false);
+            else File.Move(temporary,path,true);
         }
         finally { if (File.Exists(temporary)) File.Delete(temporary); gate.Release(); }
     }

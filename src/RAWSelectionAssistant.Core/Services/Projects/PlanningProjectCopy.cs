@@ -35,8 +35,7 @@ public static class PlanningProjectCopyStorage
         return document.ShotExternalLinks.Select(link=>
         {
             link.Validate();
-            if(document.References.Any(r=>r.Source.ReferenceId==link.ReferenceId) || document.Attachments.Any(a=>a.Id==link.ReferenceId))
-                throw new InvalidDataException("镜头独有收据与文档引用ID冲突。");
+            // Legacy identity conflicts remain visible for explicit repair; package validation still rejects them.
             return link with{ProjectCopy=BindCopy(link.ProjectCopy,document,link.ReferenceId,"reference",link.OriginalPath,root)};
         }).ToArray();
     }

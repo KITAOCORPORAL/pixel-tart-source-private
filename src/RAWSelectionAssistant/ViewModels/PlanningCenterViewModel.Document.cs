@@ -204,7 +204,12 @@ public sealed partial class PlanningCenterViewModel
                 foreach (var group in shots.GroupBy(p => p.Value.ProjectId))
                     await _shots.SaveBatchAsync(group.Key, group.Select(p => p.Value).ToArray(), token);
                 foreach (var pair in documents)
-                    await _planning.UpdateDocumentAsync(pair.Key, pair.Value.Document, pair.Value.Summary, token);
+                {
+                    var saved=(await _planning.LoadAsync(pair.Key,token)).Document;
+                    var reconciled=pair.Value.Document with{ShotExternalLinks=saved?.ShotExternalLinks??pair.Value.Document.ShotExternalLinks};
+                    await _planning.UpdateDocumentAsync(pair.Key,reconciled,pair.Value.Summary,token);
+                    if(ProjectId==pair.Key)_document=_document with{ShotExternalLinks=reconciled.ShotExternalLinks};
+                }
                 foreach (var pair in shots)
                 {
                     if (!_pendingShots.TryGetValue(pair.Key, out var latest) || latest != pair.Value) continue;

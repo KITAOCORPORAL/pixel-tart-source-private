@@ -574,7 +574,7 @@ public partial class PlanningCenterView : UserControl
     {
         if (_vm is null || sender is not Button button) return;
         var menu = new ContextMenu { PlacementTarget = button }; menu.SetResourceReference(StyleProperty, "PixelTart.Menu.Context");
-        var reconnect=MenuEntry("缺失外链与手动重连","IconPlanning");reconnect.Click+=(_,_)=>ShowExternalReconnect();menu.Items.Add(reconnect);
+        var reconnect=MenuEntry("外链检查、失配修复与手动重连","IconPlanning");reconnect.Click+=(_,_)=>ShowExternalReconnect();menu.Items.Add(reconnect);
         var start = MenuEntry("开始拍摄", "IconCameraTether"); start.Command = _vm.EnterTetherCommand; menu.Items.Add(start);
         var calendar = MenuEntry("查看关联档期", "IconCalendar"); calendar.Command = _vm.OpenCalendarCommand; menu.Items.Add(calendar);
         var currentImport=MenuEntry("导入项目包到当前应用","IconPlanning");currentImport.Command=_vm.ImportCurrentProjectPackageCommand;menu.Items.Add(currentImport);

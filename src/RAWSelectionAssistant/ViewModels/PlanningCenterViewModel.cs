@@ -50,6 +50,7 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
         _projects=projects;_bookings=bookings;_dialogs=dialogs;
         _shots=shots??new(Path.Combine(AppDataPaths.DataDirectory,"ProjectShots"));
         _planning=planning??new(Path.Combine(AppDataPaths.DataDirectory,"ProjectPlanning"));
+        _shots.BindPlanningLifecycle(_planning);
         _visuals=visuals??new(Path.Combine(AppDataPaths.DataDirectory,"ProjectVisuals"));
         _looks=looks??new(Path.Combine(AppDataPaths.DataDirectory,"ProjectVisuals"));
         _canvases=canvases??new(Path.Combine(AppDataPaths.DataDirectory,"FreeCanvas"));_inspiration=inspiration;
@@ -187,7 +188,7 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
             SelectedShot = Shots.FirstOrDefault(s => s.ShotId == selected); NotifyAll();
         }
     }
-    private async Task RemoveReferenceAsync(){if(!await FlushAsync() || SelectedShot is not{} shot||SelectedReference is not{} reference)return;var updated=shot with{References=shot.References.Where(item=>item.ReferenceId!=reference.ReferenceId).ToArray(),UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated);ReplaceShot(updated);}
+    private async Task RemoveReferenceAsync(){if(!await FlushAsync() || SelectedShot is not{} shot||SelectedReference is not{} reference)return;var updated=shot with{References=shot.References.Where(item=>item.ReferenceId!=reference.ReferenceId).ToArray(),UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated);await RefreshShotLinkReceiptsAsync();ReplaceShot(updated);}
     private async Task TogglePinAsync(){if(!await FlushAsync() || SelectedShot is not{} shot||SelectedReference is not{} reference)return;var updated=shot with{References=shot.References.Select(item=>item.ReferenceId==reference.ReferenceId?item with{IsPinned=!item.IsPinned}:item).ToArray(),UpdatedAt=DateTimeOffset.UtcNow};await _shots.SaveAsync(updated);ReplaceShot(updated);}
     private async Task AddLocalReferenceAsync()
     {

@@ -34,8 +34,8 @@ public static class PlanningReferenceLinks
         foreach(var link in document.ShotExternalLinks)
         {
             var occurrences=catalog.Shots.Where(s=>link.ShotIds.Contains(s.ShotId)).ToArray();
-            if(occurrences.Length!=link.ShotIds.Count || occurrences.Any(s=>!s.References.Any(r=>r.ReferenceId==link.ReferenceId && r.LibraryId is null && r.ExternalReference==link.OriginalPath)) ||
-                HasConflict(document,catalog.Shots,link.ReferenceId))throw new InvalidDataException("镜头外链收据与镜头来源不符。");
+            if(occurrences.Length!=link.ShotIds.Count || occurrences.Any(s=>!s.References.Any(r=>r.ReferenceId==link.ReferenceId && r.LibraryId is null && r.AssetId is null && r.ExternalReference==link.OriginalPath)) ||
+                document.References.Any(r=>r.Source.ReferenceId==link.ReferenceId)||document.Attachments.Any(a=>a.Id==link.ReferenceId))throw new InvalidDataException("镜头外链收据与镜头来源不符。");
         }
     }
 
@@ -44,7 +44,7 @@ public static class PlanningReferenceLinks
         var documentLink=document.References.FirstOrDefault(r=>r.Source.ReferenceId==source.ReferenceId);
         if(documentLink is not null)return SameSource(documentLink.Source,source)?documentLink with{Source=source}:new(source,category);
         var receipt=document.ShotExternalLinks.SingleOrDefault(r=>r.ReferenceId==source.ReferenceId);
-        return new(source,category){ProjectCopy=receipt is not null && receipt.ShotIds.Contains(shot.ShotId) && receipt.OriginalPath==source.ExternalReference?receipt.ProjectCopy:null,
-            ReconnectedFile=receipt is not null && receipt.ShotIds.Contains(shot.ShotId) && receipt.OriginalPath==source.ExternalReference?receipt.ReconnectedFile:null};
+        return new(source,category){ProjectCopy=source.LibraryId is null && source.AssetId is null && receipt is not null && receipt.ShotIds.Contains(shot.ShotId) && receipt.OriginalPath==source.ExternalReference?receipt.ProjectCopy:null,
+            ReconnectedFile=source.LibraryId is null && source.AssetId is null && receipt is not null && receipt.ShotIds.Contains(shot.ShotId) && receipt.OriginalPath==source.ExternalReference?receipt.ReconnectedFile:null};
     }
 }

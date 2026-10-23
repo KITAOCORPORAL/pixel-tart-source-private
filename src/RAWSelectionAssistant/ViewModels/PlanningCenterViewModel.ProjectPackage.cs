@@ -81,7 +81,7 @@ public sealed partial class PlanningCenterViewModel
         var db=new PixelTartDatabase(databasePath);var projects=new SqliteProjectRepository(db);if(!(await projects.ListAsync(token)).Any(p=>p.Id==id))throw new InvalidDataException("导入根不含此项目");
         _planningUndo.Clear();_planningRedo.Clear();SelectedDocumentReference=null;SelectedSourceCandidate=null;SourceCandidates.Clear();
         _project=null;_state=null;_booking=null;_projects=projects;var bookings=new SqliteShootBookingRepository(db);_bookings=new ShootBookingService(bookings,new BookingConflictDetector(bookings));
-        _shots=new(Path.Combine(root,"shots"));_planning=new(Path.Combine(root,"planning"));_visuals=new(Path.Combine(root,"visuals"));_looks=new(Path.Combine(root,"looks"));_canvases=new(Path.Combine(root,"canvas"));_inspiration=null;ReadPlanningExpenses=null;ReferencePathResolver=null;ReferenceSourceLoader=null;ImportedPackageRoot=root;
+        _shots=new(Path.Combine(root,"shots"));_planning=new(Path.Combine(root,"planning"));_shots.BindPlanningLifecycle(_planning);_visuals=new(Path.Combine(root,"visuals"));_looks=new(Path.Combine(root,"looks"));_canvases=new(Path.Combine(root,"canvas"));_inspiration=null;ReadPlanningExpenses=null;ReferencePathResolver=null;ReferenceSourceLoader=null;ImportedPackageRoot=root;
         await LoadAsync(id,token:token);PackageStatus="当前为独立导入项目："+root+"；外部账本/库/服务未连接";OnPropertyChanged(nameof(PackageStatus));IsOverview=false;await RefreshPlanningListAsync(token);PresentationChanged();
     }
 }
