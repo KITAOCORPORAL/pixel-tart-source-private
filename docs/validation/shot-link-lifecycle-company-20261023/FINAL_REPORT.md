@@ -53,3 +53,7 @@ shots gate→planning gate，批准元数据可回滚写入；若镜头文件替
 ## 最终ZIP
 
 325文件、76208179字节，SHA256 a844a4de011276e07b07dc749c621e0d2eb7e8a0d8f5e7a8eff7db1e83c8e197，每条目读回hash一致。ZIP内报告是打包时快照，外部报告后附自身身份，避免循环hash。不含DB/UserData/私人照片。
+
+## 正常推送读回
+
+最终产品3cd7543050722b2449a75ec7115e70aa29dcff6b与独立证据f6a03f50cfc3b27469b96884d35e54a724e3179d已正常推送公司分支。独立ls-remote确认LOCAL_HEAD=REMOTE_HEAD，工作树干净；后续仅封存读回，不改变发布组件。
