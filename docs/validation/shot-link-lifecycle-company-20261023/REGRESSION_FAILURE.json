@@ -1,0 +1,8 @@
+{
+  "suite": "FINAL_WPF",
+  "case": "PlanningFoundationWpfTests.InvalidDraftAndIoFailureBlockSwitchAndRecoverAcrossNewWorkspace",
+  "cause": "New lifecycle hook reads planning on name-only shot edit. Locked planning therefore blocked shot-first draft persistence expected by legacy cross-file recovery.",
+  "fix": "Skip planning coordinator if full shot/source identity map unchanged; keep original name/status save order, retain coordination only for identity membership/source changes.",
+  "oldTestUnchanged": true,
+  "rawRetained": true
+}

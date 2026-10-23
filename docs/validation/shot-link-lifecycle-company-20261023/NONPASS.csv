@@ -1,0 +1,21 @@
+﻿suite,name,display,outcome,status,error,evidence
+NEW_CORE,RAWSelectionAssistant.Tests.PlanningShotLinkLifecycleTests.LibraryIdentityChangeRevokesOnlyEditedRecipientAndFailedShotReplacementRestoresReceiptBytes,LibraryIdentityChangeRevokesOnlyEditedRecipientAndFailedShotReplacementRestoresReceiptBytes,Failed,FAIL,"测试方法 RAWSelectionAssistant.Tests.PlanningShotLinkLifecycleTests。LibraryIdentityChangeRevokesOnlyEditedRecipientAndFailedShotReplacementRestoresReceiptBytes 引发了异常:
+System.ArgumentException: A shot reference requires one stable library source or one external managed reference.
+             at RAWSelectionAssistant.Core.Services.Projects.ProjectShotReference.Normalize()
+   at RAWSelectionAssistant.Core.Services.Projects.ProjectShot.<>c.<Normalize>b__99_0(ProjectShotReference reference)
+   at System.Linq.Enumerable.IListSelectIterator`2.Fill(IList`1 source, Span`1 results, Func`2 func)
+   at System.Linq.Enumerable.IListSelectIterator`2.ToArray()
+   at RAWSelectionAssistant.Core.Services.Projects.ProjectShot.Normalize()
+   at RAWSelectionAssistant.Core.Services.Projects.ProjectShotStore.SaveAsync(ProjectShot shot, CancellationToken token)
+   at RAWSelectionAssistant.Tests.PlanningShotLinkLifecycleTests.LibraryIdentityChangeRevokesOnlyEditedRecipientAndFailedShotReplacementRestoresReceiptBytes()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407",E:\Kitao-Deliveries\planning-shot-link-lifecycle-company-20261023\NEW_CORE\run-20261023-093854-f170d1c2\000
+FINAL_WPF,RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests.InvalidDraftAndIoFailureBlockSwitchAndRecoverAcrossNewWorkspace,InvalidDraftAndIoFailureBlockSwitchAndRecoverAcrossNewWorkspace,Failed,FAIL,"Assert.AreEqual 失败。字符串长度应为 5，但为 4。 ‘expected’表达式:‘""跨文件恢复""’,‘actual’表达式:‘(await f.Shots.LoadAsync(f.Id)).Shots.Single().Name’。
+应为:  ""跨文件恢复""
+但却是: ""IO恢复""
+------^
+             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405
+   at RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests.<>c.<<InvalidDraftAndIoFailureBlockSwitchAndRecoverAcrossNewWorkspace>b__1_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407",E:\Kitao-Deliveries\planning-shot-link-lifecycle-company-20261023\FINAL_WPF\run-20261023-094340-f4cdc654\008

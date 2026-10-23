@@ -1,0 +1,7 @@
+{
+  "suite": "NEW_CORE",
+  "passed": 3,
+  "failed": 1,
+  "cause": "New test supplied both library identity and external path; existing reference.Normalize correctly rejects dual-source. Fix test to express valid library-source change by clearing external path. Original error retained.",
+  "oldAssertionsChanged": false
+}

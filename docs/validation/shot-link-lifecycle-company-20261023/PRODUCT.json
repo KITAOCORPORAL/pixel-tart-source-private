@@ -1,0 +1,25 @@
+{
+  "baseSha": "b12f95a8b407af507edbe384d9ac6af6c52493b9",
+  "productSha": "3cd7543050722b2449a75ec7115e70aa29dcff6b",
+  "productCommits": [
+    null,
+    "3cd7543050722b2449a75ec7115e70aa29dcff6b"
+  ],
+  "branch": "company/planning-shot-link-lifecycle-20261023",
+  "files": [
+    "M\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningProjectCopy.cs",
+    "M\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningShotExternalLink.cs",
+    "A\tsrc/RAWSelectionAssistant.Core/Services/Projects/PlanningShotLinkLifecycle.cs",
+    "M\tsrc/RAWSelectionAssistant.Core/Services/Projects/ProjectShotExecution.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.ProjectPackage.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.References.cs",
+    "A\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.ShotLinkRepair.cs",
+    "M\tsrc/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.cs",
+    "M\tsrc/RAWSelectionAssistant/Views/PlanningCenterView.ExternalReconnect.cs",
+    "M\tsrc/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+    "A\ttests/RAWSelectionAssistant.Tests/PlanningShotLinkLifecycleTests.cs",
+    "A\ttests/RAWSelectionAssistant.WpfTests/PlanningShotLinkLifecycleWpfTests.cs"
+  ],
+  "timezone": "Europe/Berlin"
+}

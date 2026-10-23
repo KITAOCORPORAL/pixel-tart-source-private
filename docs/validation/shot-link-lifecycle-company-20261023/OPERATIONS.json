@@ -1,0 +1,35 @@
+{
+  "productSha": "3cd7543050722b2449a75ec7115e70aa29dcff6b",
+  "steps": [
+    {
+      "action": "镜头单项/批量/整目录/删除收据生命周期",
+      "status": "PASS",
+      "scope": "Common store gate targeted tests"
+    },
+    {
+      "action": "共享ID/改源改库/旧失配显式修复/取消回滚",
+      "status": "PASS",
+      "scope": "Core4/WPF2 included in63/91"
+    },
+    {
+      "action": "镜头独有外链导入自有副本/VM重开/异地包导入",
+      "status": "PASS",
+      "scope": "Production methods real stores; NOT native restart"
+    },
+    {
+      "action": "实际最终EXE启动/加载身份",
+      "status": "PARTIAL",
+      "scope": "Observed accessibility;7loaded DLLs match"
+    },
+    {
+      "action": "原生副本保存退出新进程预览",
+      "status": "NOT_RUN",
+      "scope": "Blocked on native tutorial exit geometry, capture timeout"
+    },
+    {
+      "action": "安装/WordWPS/发行",
+      "status": "NOT_RUN",
+      "scope": "Not performed; diagnostic only"
+    }
+  ]
+}

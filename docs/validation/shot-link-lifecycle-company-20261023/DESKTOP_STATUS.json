@@ -1,0 +1,21 @@
+{
+  "productSha": "3cd7543050722b2449a75ec7115e70aa29dcff6b",
+  "status": "BLOCKED",
+  "userResumed": true,
+  "pid": 20744,
+  "executed": [
+    "Launched actual final verified EXE with fresh isolated runtime",
+    "Observed tutorial accessibility tree",
+    "Native exit tutorial click failed",
+    "Fresh window selection/activation and dedicated capture failed"
+  ],
+  "input": "coordinate input geometry is unavailable",
+  "capture": "FrameArrived timed out: timed out waiting on channel",
+  "notRun": [
+    "Native owned-copy import",
+    "Native save/exit/new-process preview",
+    "Native package export and foreign-root import"
+  ],
+  "previousHomeNative": "Only continue-external mode was PASS_LIMITED_NATIVE_LOOP in home baseline; not reused as current owned-copy PASS",
+  "timezone": "Europe/Berlin"
+}
