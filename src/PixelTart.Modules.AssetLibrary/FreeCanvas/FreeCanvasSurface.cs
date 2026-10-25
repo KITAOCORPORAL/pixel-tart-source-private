@@ -14,7 +14,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
     private readonly IAssetPreviewProvider _provider;
     private readonly Dictionary<Guid, BitmapSource> _images = [];
     private readonly Dictionary<Guid, int> _widths = [];
-    private readonly HashSet<Guid> _loading = [];
+    private readonly HashSet<(Guid Id,long Generation)> _loading = [];
     private readonly Dictionary<Guid,string> _sourceErrors=[];
     private readonly Dictionary<Guid,string> _ownedKeys=[];
     private long _previewGeneration;
@@ -53,36 +53,40 @@ public sealed class FreeCanvasSurface : FrameworkElement
     public async Task LoadPreviewsAsync()
     {
         var generation=++_previewGeneration;
+        var document=Editor.Document;
         foreach(var id in _sourceErrors.Keys.Where(id=>!Editor.Document.Objects.Any(x=>x.ObjectId==id)).ToArray())_sourceErrors.Remove(id);
         var currentIds=Editor.Document.Objects.Select(item=>item.ObjectId).ToHashSet();
         foreach(var id in _images.Keys.Where(id=>!currentIds.Contains(id)).ToArray()){_images.Remove(id);_widths.Remove(id);}
+        foreach(var id in _ownedKeys.Keys.Where(id=>!currentIds.Contains(id)).ToArray())_ownedKeys.Remove(id);
         var viewport=new Rect(ScreenToWorld(new(-300,-300)),ScreenToWorld(new(Math.Max(1,ActualWidth)+300,Math.Max(1,ActualHeight)+300)));
         foreach (var item in Editor.Document.Objects.Where(item => item.IsImage && (ActualWidth==0 || viewport.IntersectsWith(new Rect(item.X,item.Y,item.Width,item.Height)))).Take(128).ToArray())
         {
+            if(generation!=_previewGeneration||!ReferenceEquals(document,Editor.Document))break;
+            var sourceKey=item.PlanningSource is {} identity?$"owned|{identity.PlanningRoot}|{identity.Copy.RelativePath}|{identity.Copy.Sha256}":$"external|{item.SourcePath}|{item.LibraryId}|{item.AssetId}|{item.ContentHash}";
+            if(_ownedKeys.GetValueOrDefault(item.ObjectId)!=sourceKey){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors.Remove(item.ObjectId);_ownedKeys[item.ObjectId]=sourceKey;}
             if(item.PlanningSource is {} owned)
             {
                 // Never use IAssetPreviewProvider/offline caches for a planning-owned source.
                 // Revalidate even if an in-memory preview already exists; errors erase it.
                 var snapshot=Editor.Document;
-                var key=$"{owned.PlanningRoot}|{owned.Copy.RelativePath}|{owned.Copy.Sha256}";
-                if(_ownedKeys.GetValueOrDefault(item.ObjectId)!=key){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors.Remove(item.ObjectId);_ownedKeys[item.ObjectId]=key;}
                 try
                 {
                     var copy=owned.Bind();
                     var bitmap=await Task.Run(()=>OwnedPlanningReferenceImage.ReadBounded(copy,copy.ProjectId,copy.DocumentId,copy.ReferenceId,1024));
                     if(generation!=_previewGeneration||!ReferenceEquals(snapshot,Editor.Document))continue;
-                    _images[item.ObjectId]=bitmap;_sourceErrors.Remove(item.ObjectId);
+                    _images[item.ObjectId]=bitmap;_sourceErrors.Remove(item.ObjectId);TrimPreviews(item.ObjectId);
                 }
                 catch(Exception e)when(e is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException)
                 {if(generation==_previewGeneration&&ReferenceEquals(snapshot,Editor.Document)){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors[item.ObjectId]="项目自有副本不可用："+e.Message+"（未回退原外链/缓存）";}}
                 continue;
             }
             var requested = (int)Math.Clamp(Math.Ceiling(item.Width * _zoom / item.CropRect.Width / 256) * 256, 256, 4096);
-            if (_loading.Contains(item.ObjectId) || _widths.GetValueOrDefault(item.ObjectId) >= requested) continue;
-            _loading.Add(item.ObjectId);
+            if (_loading.Contains((item.ObjectId,generation)) || _widths.GetValueOrDefault(item.ObjectId) >= requested) continue;
+            _loading.Add((item.ObjectId,generation));
             try
             {
                 var resolvedPath = ResolveSource is null ? item.SourcePath : await ResolveSource(item);
+                if(generation!=_previewGeneration||!ReferenceEquals(document,Editor.Document))continue;
                 if (resolvedPath is null) { _images.Remove(item.ObjectId); _widths.Remove(item.ObjectId); continue; }
                 var result = await _provider.GetAsync(new(resolvedPath, AssetPreviewPurpose.Canvas, AssetPreviewQuality.High, requested,
                     File.Exists(resolvedPath) ? AssetThumbnailState.Available : AssetThumbnailState.Offline, item.AssetId, item.ContentHash));
@@ -98,13 +102,19 @@ public sealed class FreeCanvasSurface : FrameworkElement
                         result=await _provider.GetAsync(new(item.SourcePath,purpose,AssetPreviewQuality.High,purpose==AssetPreviewPurpose.QuickLoupe?1600:2048,AssetThumbnailState.Offline,item.AssetId,item.ContentHash));
                         if(result.Bitmap is not null)break;
                     }
+                if(generation!=_previewGeneration||!ReferenceEquals(document,Editor.Document))continue;
                 if (result.Bitmap is { } bitmap) { _images[item.ObjectId] = bitmap; _widths[item.ObjectId] = requested; }
-                while(_images.Count>1&&(_images.Count>128||_images.Values.Sum(image=>(long)image.PixelWidth*image.PixelHeight*4)>192L*1024*1024)){var remove=_images.Keys.First(id=>id!=item.ObjectId);_images.Remove(remove);_widths.Remove(remove);}
+                TrimPreviews(item.ObjectId);
             }
             catch (Exception exception) when (exception is IOException or NotSupportedException or ArgumentException) { }
-            finally { _loading.Remove(item.ObjectId); }
+            finally { _loading.Remove((item.ObjectId,generation)); }
         }
         InvalidateVisual();
+    }
+    private void TrimPreviews(Guid keep)
+    {
+        while(_images.Count>1&&(_images.Count>128||_images.Values.Sum(image=>(long)image.PixelWidth*image.PixelHeight*4)>192L*1024*1024))
+        {var remove=_images.Keys.First(id=>id!=keep);_images.Remove(remove);_widths.Remove(remove);}
     }
     private Brush Brush(string resource, Color fallback) => TryFindResource(resource) as Brush ?? new SolidColorBrush(fallback);
     protected override void OnRender(DrawingContext dc)

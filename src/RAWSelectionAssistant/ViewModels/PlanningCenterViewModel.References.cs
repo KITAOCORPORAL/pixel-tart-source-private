@@ -182,6 +182,8 @@ public sealed partial class PlanningCenterViewModel
     public async Task AddSourceCandidateAsync()
     {
         if (SelectedSourceCandidate is not { } item) return;
+        if(item.PlanningSource is not null)
+        {SaveStatus="项目自有画布参考保留原策划身份；本入口不将其转为外链，请回原策划使用。";return;}
         var source = item.AssetId is Guid assetId && item.LibraryId != Guid.Empty
             ? new ProjectShotReference(Guid.NewGuid(), ShotReferenceKind.General, item.LibraryId, assetId, Title: item.Name)
             : new ProjectShotReference(Guid.NewGuid(), ShotReferenceKind.General, ExternalReference: item.SourcePath, Title: item.Name);
