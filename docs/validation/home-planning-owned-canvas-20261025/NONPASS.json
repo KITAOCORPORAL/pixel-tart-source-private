@@ -1,0 +1,58 @@
+[
+  {
+    "suite": "core",
+    "name": "ReparseSelectedFileIsNeverFollowed",
+    "outcome": "Failed",
+    "duration": "00:00:00.0178183",
+    "id": "16b4c4d9-7aed-864e-83ca-f1d933272a4b",
+    "message": "测试方法 RAWSelectionAssistant.Tests.PlanningShotExternalReconnectTests。ReparseSelectedFileIsNeverFollowed 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'N:\\pixart\\Guangjing-CanvasOwned-20261025\\final-r2\\tests-core\\temp\\RAWSelectionAssistant.Tests\\2d2bccd1e1694ae7b5ff9301384c587f\\alias.png'."
+  },
+  {
+    "suite": "core",
+    "name": "RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+    "outcome": "Failed",
+    "duration": "00:00:00.1662418",
+    "id": "1c05f000-b69a-87d4-9997-f4cdd79f8c4d",
+    "message": "测试方法 RAWSelectionAssistant.Tests.PlanningProjectPackageTests。RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'N:\\pixart\\Guangjing-CanvasOwned-20261025\\final-r2\\tests-core\\temp\\RAWSelectionAssistant.Tests\\0ed8df9bf3c44bf6adbf53c4401169bd\\84b27110d87346f68a4e029a4ceade4e\\planning\\project-copies\\84b27110d87346f68a4e029a4ceade4e\\0a68c2d556a830eb1dfb9c5df3aea922\\.staging\\021196474f99425d8ec7f4302fcb0e10.part'."
+  },
+  {
+    "suite": "core",
+    "name": "SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem",
+    "outcome": "Failed",
+    "duration": "00:00:00.0169447",
+    "id": "1337f53d-2813-87c7-a4f9-b7079bcb51e8",
+    "message": "测试方法 RAWSelectionAssistant.Tests.PlanningProjectCopyTests。SourceAndDestinationReparsePointsAreRejectedWithoutFollowingThem 引发了异常: \r\nSystem.IO.IOException: 客户端没有所需的特权。 : 'N:\\pixart\\Guangjing-CanvasOwned-20261025\\final-r2\\tests-core\\temp\\RAWSelectionAssistant.Tests\\3fd4cc4a45df491d99677a31f7eabf9e\\alias'."
+  },
+  {
+    "suite": "wpf",
+    "name": "OffscreenCompletedStatesSeparateFromPhysicalDpi",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0019531",
+    "id": "1ac869c9-7600-8ff3-a472-69a4038bd4f5",
+    "message": "Assert.Inconclusive 失败。Offscreen evidence opt-in required."
+  },
+  {
+    "suite": "wpf",
+    "name": "ProductionPeers_KeyStatesAndReferenceFamily_ExposeRealContracts",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0078797",
+    "id": "180e1356-c0f8-8fd2-ba20-fbed3a09e968",
+    "message": "Assert.Inconclusive 失败。Opt-in production peer evidence is not enabled in this bounded regression run."
+  },
+  {
+    "suite": "wpf",
+    "name": "LargeViewAndSummaryStayBoundedWithoutChangingOwnedSource",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0018068",
+    "id": "1c38c9a7-a728-8464-9561-1930aa1cf5a6",
+    "message": "Assert.Inconclusive 失败。Explicit synthetic large fixture required"
+  },
+  {
+    "suite": "wpf",
+    "name": "SameFixtureLargeOpenWarmCacheAndMultiShotMeasurement",
+    "outcome": "NotExecuted",
+    "duration": "00:00:00.0251032",
+    "id": "1573cc21-96f0-8434-95cf-5eaea195042f",
+    "message": "Assert.Inconclusive 失败。Explicit fresh same-fixture performance output required"
+  }
+]

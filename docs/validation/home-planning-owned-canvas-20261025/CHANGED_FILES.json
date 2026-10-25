@@ -1,0 +1,52 @@
+[
+  {
+    "status": "M",
+    "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.Canvas.cs",
+    "sha256": "0f7a3e054a9ce5385b2d80891abf1bba4a6f963eab623e4d51663804320545c6"
+  },
+  {
+    "status": "M",
+    "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasSurface.cs",
+    "sha256": "d0cf3013d4056872133d47e9c6113a7e33a1d77c44deac07f331aae9e2bf099a"
+  },
+  {
+    "status": "A",
+    "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/OwnedPlanningReferenceImage.cs",
+    "sha256": "a482f5e0ea0587db93875c1ea92da1c40d63515f1f51623a6c37ce0bd9f6e7d7"
+  },
+  {
+    "status": "M",
+    "path": "src/RAWSelectionAssistant.Core/Services/FreeCanvas/CanvasDocument.cs",
+    "sha256": "28cf823ce7d9018f3fc5e9f04d2d09e364ff18f9519148d67f7d6379d6466c03"
+  },
+  {
+    "status": "A",
+    "path": "src/RAWSelectionAssistant.Core/Services/FreeCanvas/CanvasPlanningSource.cs",
+    "sha256": "75d405789553a810dc22457721895d8bc4dabe9cfd5281df109fa699d51487ed"
+  },
+  {
+    "status": "M",
+    "path": "src/RAWSelectionAssistant/Services/PlanningCanvasSnapshot.cs",
+    "sha256": "89ff89770301c4f829f77ec6350641e5f431db61c7874108a32a311577c1a6e9"
+  },
+  {
+    "status": "M",
+    "path": "src/RAWSelectionAssistant/Services/PlanningOwnedReferenceImage.cs",
+    "sha256": "5d8e3a5f5328e2183da750779ed01cf7b1c3c715212318465e3024035aedd45b"
+  },
+  {
+    "status": "M",
+    "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.References.cs",
+    "sha256": "79ea7a7ca41d9b5c4dd5df770cd4b70e6fdbe9ba65ed584c352f413457e15298"
+  },
+  {
+    "status": "A",
+    "path": "tests/RAWSelectionAssistant.Tests/CanvasPlanningSourceTests.cs",
+    "sha256": "41beda6a4b2015ee8d93dff2941cbbf9b2a623b51dd02093655a8eeaea9c08bf"
+  },
+  {
+    "status": "A",
+    "path": "tests/RAWSelectionAssistant.WpfTests/PlanningOwnedCanvasTests.cs",
+    "sha256": "7ddf55889b0c46ccb2752101990c0d34ab387cc4e6c38ae5066890204be93cf3"
+  }
+]

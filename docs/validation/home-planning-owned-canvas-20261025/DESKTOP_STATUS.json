@@ -1,0 +1,28 @@
+{
+  "status": "BLOCKED_NATIVE_TOOL_UNAVAILABLE",
+  "sourceSha": "8886226d07185ed13db1c4cd5dfce3e9ccdd8417",
+  "exactError": "unsupported call: mcp__cua_repljs",
+  "errorRecoveryCalls": [
+    "unsupported custom tool call: exec",
+    "unsupported call: mcp__cua_repljs_reset"
+  ],
+  "completed": [
+    "Full final win-x64 diagnostic process launched PID29788",
+    "OS process identity/title/responding/modules readback",
+    "CloseMainWindow on own isolated process returned true, confirmed exited"
+  ],
+  "nativeUiCompleted": false,
+  "notExecuted": [
+    "current-root native import",
+    "ordinary-list open",
+    "JPEG references/shot thumbnails/large view",
+    "shot reconnect-to-owned",
+    "edit/save/normal UI exit/new-process ordinary reopen",
+    "15-section native export",
+    "package import into second isolated root and owned image view",
+    "rapid native A/B project switch",
+    "native send-owned-to-canvas/save/reopen"
+  ],
+  "manualSteps": "MANUAL_RETEST.md",
+  "automatedTestsDoNotSubstituteNative": true
+}

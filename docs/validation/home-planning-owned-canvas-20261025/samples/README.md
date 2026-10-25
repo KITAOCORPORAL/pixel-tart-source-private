@@ -1,0 +1,1 @@
+Synthetic inputs only. native-project-a is JPEG quadrant reference plus missing JPEG shot; native-project-b is visibly different blue/orange PNG plus missing shot. jpeg-owned-v1 is recreated at home by the company-committed WPF test. .ptplan does NOT contain free-canvas workspace JSON. Absolute original paths are historical metadata only.
