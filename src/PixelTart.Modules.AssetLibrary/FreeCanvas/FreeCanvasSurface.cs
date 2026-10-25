@@ -15,6 +15,10 @@ public sealed class FreeCanvasSurface : FrameworkElement
     private readonly Dictionary<Guid, BitmapSource> _images = [];
     private readonly Dictionary<Guid, int> _widths = [];
     private readonly HashSet<Guid> _loading = [];
+    private readonly Dictionary<Guid,string> _sourceErrors=[];
+    private readonly Dictionary<Guid,string> _ownedKeys=[];
+    private long _previewGeneration;
+    public IReadOnlyDictionary<Guid,string> SourceErrors=>_sourceErrors;
     private Point _last, _start;
     private string? _gesture;
     private CanvasBounds? _marquee;
@@ -48,11 +52,31 @@ public sealed class FreeCanvasSurface : FrameworkElement
     public Func<CanvasObject, Task<string?>>? ResolveSource { get; set; }
     public async Task LoadPreviewsAsync()
     {
+        var generation=++_previewGeneration;
+        foreach(var id in _sourceErrors.Keys.Where(id=>!Editor.Document.Objects.Any(x=>x.ObjectId==id)).ToArray())_sourceErrors.Remove(id);
         var currentIds=Editor.Document.Objects.Select(item=>item.ObjectId).ToHashSet();
         foreach(var id in _images.Keys.Where(id=>!currentIds.Contains(id)).ToArray()){_images.Remove(id);_widths.Remove(id);}
         var viewport=new Rect(ScreenToWorld(new(-300,-300)),ScreenToWorld(new(Math.Max(1,ActualWidth)+300,Math.Max(1,ActualHeight)+300)));
         foreach (var item in Editor.Document.Objects.Where(item => item.IsImage && (ActualWidth==0 || viewport.IntersectsWith(new Rect(item.X,item.Y,item.Width,item.Height)))).Take(128).ToArray())
         {
+            if(item.PlanningSource is {} owned)
+            {
+                // Never use IAssetPreviewProvider/offline caches for a planning-owned source.
+                // Revalidate even if an in-memory preview already exists; errors erase it.
+                var snapshot=Editor.Document;
+                var key=$"{owned.PlanningRoot}|{owned.Copy.RelativePath}|{owned.Copy.Sha256}";
+                if(_ownedKeys.GetValueOrDefault(item.ObjectId)!=key){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors.Remove(item.ObjectId);_ownedKeys[item.ObjectId]=key;}
+                try
+                {
+                    var copy=owned.Bind();
+                    var bitmap=await Task.Run(()=>OwnedPlanningReferenceImage.ReadBounded(copy,copy.ProjectId,copy.DocumentId,copy.ReferenceId,1024));
+                    if(generation!=_previewGeneration||!ReferenceEquals(snapshot,Editor.Document))continue;
+                    _images[item.ObjectId]=bitmap;_sourceErrors.Remove(item.ObjectId);
+                }
+                catch(Exception e)when(e is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException)
+                {if(generation==_previewGeneration&&ReferenceEquals(snapshot,Editor.Document)){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors[item.ObjectId]="项目自有副本不可用："+e.Message+"（未回退原外链/缓存）";}}
+                continue;
+            }
             var requested = (int)Math.Clamp(Math.Ceiling(item.Width * _zoom / item.CropRect.Width / 256) * 256, 256, 4096);
             if (_loading.Contains(item.ObjectId) || _widths.GetValueOrDefault(item.ObjectId) >= requested) continue;
             _loading.Add(item.ObjectId);
@@ -117,7 +141,8 @@ public sealed class FreeCanvasSurface : FrameworkElement
             else { dc.DrawRectangle(Brush("Brush.Panel",Colors.DimGray),null,rect); DrawLabel(dc,"预览暂不可用",new(item.X+12,item.Y+12)); }
             if (Editor.Selection.Contains(item.ObjectId)) dc.DrawRectangle(null,new Pen(accent,1.5/_zoom),rect);
             if (item.Locked) DrawLabel(dc,"已锁定",new(item.X+6,item.Y+6));
-            if (item.IsImage && !File.Exists(item.SourcePath)) DrawLabel(dc,"离线",new(item.X+6,item.Y+item.Height-24/_zoom));
+            if(_sourceErrors.TryGetValue(item.ObjectId,out var error))DrawLabel(dc,error,new(item.X+6,item.Y+item.Height-24/_zoom));
+            if (item.IsImage && item.PlanningSource is null && !File.Exists(item.SourcePath)) DrawLabel(dc,"离线",new(item.X+6,item.Y+item.Height-24/_zoom));
             if (CropMode && Editor.Selection.Contains(item.ObjectId))
             {
                 var crop = PendingCrop.Normalize();

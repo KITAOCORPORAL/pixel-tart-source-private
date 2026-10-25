@@ -14,6 +14,7 @@ public sealed record CanvasObject
     public Guid LibraryId { get; init; }
     public Guid? AssetId { get; init; }
     public string SourcePath { get; init; } = "";
+    public CanvasPlanningSource? PlanningSource { get; init; }
     public string ContentHash { get; init; } = "";
     public string Name { get; init; } = "";
     public double SourceWidth { get; init; } = 1;
@@ -48,6 +49,7 @@ public sealed record CanvasPaletteColor(string Hex, double Hue, double Saturatio
 
 public sealed record CanvasDocument
 {
+    [System.Text.Json.Serialization.JsonIgnore] public string? StorageRoot {get;init;}
     public int SchemaVersion { get; init; } = 1;
     public Guid CanvasId { get; init; } = Guid.NewGuid();
     public string Name { get; init; } = "自由画布";
@@ -85,7 +87,7 @@ public sealed class CanvasDocumentStore(string directory)
         var document = JsonSerializer.Deserialize<CanvasDocument>(await File.ReadAllTextAsync(path, token).ConfigureAwait(false)) ?? throw new InvalidDataException("画布文件为空。");
         Validate(document);
         if (document.CanvasId != id) throw new InvalidDataException("画布标识不匹配。");
-        return document;
+        return document with{StorageRoot=DirectoryPath};
     }
     public async Task<IReadOnlyList<CanvasDocument>> ListAsync(Guid? projectId = null, CancellationToken token = default)
     {
@@ -98,6 +100,12 @@ public sealed class CanvasDocumentStore(string directory)
     public static void Validate(CanvasDocument document)
     {
         if (document.SchemaVersion != 1 || document.CanvasId == Guid.Empty || document.Objects.Count > 10000 || document.Objects.Select(item => item.ObjectId).Distinct().Count() != document.Objects.Count) throw new InvalidDataException("画布数据无效。");
+        foreach(var item in document.Objects.Where(x=>x.PlanningSource is not null))
+        {
+            item.PlanningSource!.Validate();
+            if(!item.IsImage||item.SourcePath!=""||item.ContentHash!=item.PlanningSource.Copy.Sha256)
+                throw new InvalidDataException("画布自有参考不得混用外链或缩略缓存来源。");
+        }
         foreach (var item in document.Objects)
             if (item.CanvasId != document.CanvasId || item.ObjectId == Guid.Empty || !new[] { item.X, item.Y, item.Width, item.Height, item.Rotation, item.FontSize, item.SourceWidth, item.SourceHeight,item.CropRect.X, item.CropRect.Y, item.CropRect.Width, item.CropRect.Height }.All(double.IsFinite) || item.Width <= 0 || item.Height <= 0 || item.SourceWidth<=0||item.SourceHeight<=0||item.FontSize<=0||item.CropRect != item.CropRect.Normalize() || item.Palette is { Colors.Count: not (3 or 5 or 7) } || item.Palette?.Colors.Any(color => color.Weight < 0 || !double.IsFinite(color.Weight) || string.IsNullOrWhiteSpace(color.Hex)) == true) throw new InvalidDataException("画布对象数据无效。");
     }

@@ -11,7 +11,7 @@ public static class PlanningCanvasSnapshot
     {
         var items = document.Objects;
         if (items.Any(x => !double.IsFinite(x.X) || !double.IsFinite(x.Y) || !double.IsFinite(x.Width) || !double.IsFinite(x.Height) || x.Width <= 0 || x.Height <= 0)) throw new InvalidDataException("画布对象尺寸无效。");
-        if (items.Any(x => x.IsImage && !File.Exists(x.SourcePath))) throw new IOException("画布源图离线，本次不更新快照；已保存版本仍可查看。");
+        if (items.Any(x => x.IsImage && x.PlanningSource is null && !File.Exists(x.SourcePath))) throw new IOException("画布源图离线，本次不更新快照；已保存版本仍可查看。");
         var minX = items.Count == 0 ? 0 : items.Min(x => x.X - Math.Max(x.Width,x.Height));
         var minY = items.Count == 0 ? 0 : items.Min(x => x.Y - Math.Max(x.Width,x.Height));
         var maxX = items.Count == 0 ? 800 : items.Max(x => x.X + 2*Math.Max(x.Width,x.Height));
@@ -39,10 +39,12 @@ public static class PlanningCanvasSnapshot
                         dc.DrawRectangle(new SolidColorBrush((Color)ColorConverter.ConvertFromString(color.Hex)),null,new Rect(x,rect.Y,w,rect.Height)); x+=w;
                     }
                 }
-                else if (item.IsImage && File.Exists(item.SourcePath))
+                else if (item.IsImage && (item.PlanningSource is not null || File.Exists(item.SourcePath)))
                 {
-                    var bitmap = new BitmapImage(); bitmap.BeginInit(); bitmap.CacheOption=BitmapCacheOption.OnLoad;
-                    bitmap.DecodePixelWidth=1400; bitmap.UriSource=new Uri(Path.GetFullPath(item.SourcePath)); bitmap.EndInit(); bitmap.Freeze();
+                    BitmapSource bitmap;
+                    if(item.PlanningSource is {} owned)
+                    {var copy=owned.Bind();bitmap=PlanningOwnedReferenceImage.ReadBounded(copy,copy.ProjectId,copy.DocumentId,copy.ReferenceId,1400);}
+                    else{var external=new BitmapImage();external.BeginInit();external.CacheOption=BitmapCacheOption.OnLoad;external.DecodePixelWidth=1400;external.UriSource=new Uri(Path.GetFullPath(item.SourcePath));external.EndInit();external.Freeze();bitmap=external;}
                     BitmapSource source = item.Monochrome ? new FormatConvertedBitmap(bitmap,PixelFormats.Gray8,null,0) : bitmap;
                     var crop=item.CropRect.Normalize();
                     dc.PushClip(new RectangleGeometry(rect));

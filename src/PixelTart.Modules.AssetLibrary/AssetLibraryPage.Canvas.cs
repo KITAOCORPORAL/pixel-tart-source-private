@@ -36,7 +36,7 @@ public partial class AssetLibraryPage
     {
         var projects=await _viewModel.CanvasProjectsAsync();
         if(_canvas is not null&&!await _canvas.PrepareDocumentChangeAsync())return;
-        var store=new CanvasDocumentStore(_viewModel.CanvasDirectory);var editor=new CanvasEditor(document);
+        var store=new CanvasDocumentStore(document.StorageRoot??_viewModel.CanvasDirectory);var editor=new CanvasEditor(document);
         var canvas=new FreeCanvasView(editor,_previewProvider,store);
         canvas.Surface.ResolveSource = async item =>
         {
@@ -49,7 +49,18 @@ public partial class AssetLibraryPage
         canvas.SourceLoader=(source,search)=>_viewModel.LoadCanvasSourcesAsync(source,search,editor.Document.ProjectId);
         canvas.SaveBoard=(objects,target)=>_viewModel.SaveCanvasBoardAsync(objects,target,editor.Document.ProjectId);
         canvas.BoardLoader=_viewModel.CanvasBoardsAsync;
-        canvas.ViewAsset=item=>{var window=new AssetViewerWindow([item.SourcePath],0,_previewProvider){Owner=Window.GetWindow(this)};window.Show();return Task.CompletedTask;};
+        canvas.ViewAsset=async item=>
+        {
+            if(item.PlanningSource is {} owned)
+            {
+                try{var copy=owned.Bind();var bitmap=await Task.Run(()=>OwnedPlanningReferenceImage.Read(copy,copy.ProjectId,copy.DocumentId,copy.ReferenceId));
+                    new Window{Title=item.Name+" · 项目自有参考",Owner=Window.GetWindow(this),Width=1000,Height=760,Content=new Image{Source=bitmap,Stretch=System.Windows.Media.Stretch.Uniform}}.Show();}
+                catch(Exception error)when(error is System.IO.IOException or System.IO.InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException or InvalidOperationException)
+                {MessageBox.Show(Window.GetWindow(this),"项目自有副本不可用，未回退原外链或缓存："+error.Message,"画布参考");}
+                return;
+            }
+            new AssetViewerWindow([item.SourcePath],0,_previewProvider){Owner=Window.GetWindow(this)}.Show();
+        };
         canvas.RevealAsset=async item=>{if(await canvas.FlushAsync()){await _viewModel.RevealCanvasAssetAsync(item);HideCanvas();}};
         canvas.AnalyzePalette=_viewModel.AnalyzeCanvasPaletteAsync;
         canvas.CloseRequested=()=>{HideCanvas();return Task.CompletedTask;};canvas.OpenDocument=ShowCanvasAsync;

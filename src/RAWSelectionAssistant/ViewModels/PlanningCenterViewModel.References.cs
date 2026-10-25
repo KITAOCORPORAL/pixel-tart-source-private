@@ -190,16 +190,30 @@ public sealed partial class PlanningCenterViewModel
     public async Task SendToCanvasAsync(PlanningReferenceItem? item = null)
     {
         if (ProjectId is not Guid id || !await FlushAsync()) return;
-        var canvas = new CanvasDocument { Name = DocumentTitle + " · 视觉方向", ProjectId = id };
+        var canvas = new CanvasDocument { Name = DocumentTitle + " · 视觉方向", ProjectId = id,StorageRoot=_canvases.DirectoryPath };
         var references = item is null ? AllProjectReferences.Where(reference => reference.IsMoodboard).ToArray() : [item];
-        canvas = canvas with { Objects = references.Select((reference, index) => new CanvasObject
+        var objects=new List<CanvasObject>();
+        foreach(var reference in references)
         {
-            CanvasId = canvas.CanvasId, LibraryId = reference.Link.Source.LibraryId ?? Guid.Empty, AssetId = reference.Link.Source.AssetId,
-            SourcePath = reference.Link.Source.ExternalReference ?? reference.PreviewPath ?? "", Name = reference.Title,
-            X = index % 3 * 350, Y = index / 3 * 280
-        }).ToArray() };
-        await _canvases.SaveAsync(canvas);
-        await _planning.AddVisualLinkAsync(id, new(Guid.NewGuid(), PlanningVisualLinkKind.FreeCanvas, canvas.CanvasId, canvas.Name));
-        ProjectCanvases.Add(canvas); CanvasRequested?.Invoke(this, canvas);
+            // Re-resolve current identity after editor flush. A stale card from a different
+            // project/refresh must never transfer its bytes into this canvas.
+            var current=AllProjectReferences.SingleOrDefault(r=>r.Id==reference.Id);
+            if(current is null)throw new InvalidDataException("参考已不属于当前项目，请重新选择。");
+            CanvasPlanningSource? owned=null;string path;
+            if(current.Link.ProjectCopy is {} copy)
+            {
+                if(copy.ProjectId!=id||copy.DocumentId!=PlanningDocumentId||copy.ReferenceId!=current.Id)
+                    throw new InvalidDataException("自有参考与当前项目身份不符，未发送画布。");
+                owned=CanvasPlanningSource.From(copy);path="";
+            }
+            else path=await ResolveOriginalAsync(current)??throw new IOException("参考来源不可用，未使用缩略缓存发送画布。");
+            objects.Add(new(){CanvasId=canvas.CanvasId,LibraryId=current.Link.Source.LibraryId??Guid.Empty,AssetId=current.Link.Source.AssetId,
+                SourcePath=path,PlanningSource=owned,ContentHash=owned?.Copy.Sha256??"",Name=current.Title,
+                X=objects.Count%3*350,Y=objects.Count/3*280});
+        }
+        if(ProjectId!=id)throw new InvalidOperationException("项目已切换，未发送画布。");
+        canvas=canvas with{Objects=objects};await _canvases.SaveAsync(canvas);
+        await _planning.AddVisualLinkAsync(id,new(Guid.NewGuid(),PlanningVisualLinkKind.FreeCanvas,canvas.CanvasId,canvas.Name));
+        ProjectCanvases.Add(canvas);CanvasRequested?.Invoke(this,canvas);
     }
 }
