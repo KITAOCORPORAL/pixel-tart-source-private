@@ -1,6 +1,6 @@
 # 自有策划参考发送自由画布 · 家用交付
 
-2026-10-24 Asia/Shanghai（客户端日期；实验目录/原始主机时间为2026-10-25）。**限定产品/自动回归完成；原生桌面闭环受工具阻断，未执行；不能发行，无安装包。** 原始主机日志的本地时区与UTC/epoch原值保留。
+2026-10-24 America/Phoenix（客户端日期；实验目录沿用20261025，原始主机/UTC时间保留原值）。**限定产品/自动回归完成；原生桌面闭环受工具阻断，未执行；不能发行，无安装包。** 原始主机日志的本地时区与UTC/epoch原值保留。
 
 ## 起点与保全
 已fetch并独立ls-remote核对company/planning-bounded-thumbnails-20261023 = dad3dd4c76d99df8b93805843cbe6cd69d1abe36；公司产品e6ddb8d1018713fb48fbaa7e7cf3a3b23df0cc30，产品/HEAD的src/tests完全相同。已读FINAL_REPORT、TEST_SUMMARY、PERFORMANCE_COMPARISON和指定实现。从此HEAD建立独立N:/pixart/guangjing-home-owned-canvas-20261025、分支home/planning-owned-canvas-20261025。
