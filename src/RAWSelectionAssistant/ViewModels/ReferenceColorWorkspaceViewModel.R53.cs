@@ -83,7 +83,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             return false;
         }
     }
-    private void NotifyR53Variants(){OnPropertyChanged(nameof(R53Variants));OnPropertyChanged(nameof(R53VariantStatus));OnPropertyChanged(nameof(R53MainVariantId));OnPropertyChanged(nameof(R53VariantRating));OnPropertyChanged(nameof(R53VariantColorLabel));}
+    private void NotifyR53Variants(){Editor.ReadOnlyTarget=ActiveTarget?.EditVersions.FirstOrDefault(v=>v.Id==ActiveTarget.ActiveEditVersionId)?.IsOriginal==true;OnPropertyChanged(nameof(R53Variants));OnPropertyChanged(nameof(R53VariantStatus));OnPropertyChanged(nameof(R53MainVariantId));OnPropertyChanged(nameof(R53VariantRating));OnPropertyChanged(nameof(R53VariantColorLabel));}
     public async Task CreateR53VariantAsync(bool fromOriginal)
     {
         if(ActiveTarget is not {} target||IsLoading||IsExporting||IsInstantGenerating)return;

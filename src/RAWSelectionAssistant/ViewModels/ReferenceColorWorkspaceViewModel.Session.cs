@@ -175,7 +175,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             token.ThrowIfCancellationRequested();if(active.Status==ReferenceTargetStatus.Failed)throw new InvalidDataException(active.Error??"项目激活失败");
         }
         else { TargetImage = null; TargetName = "尚未选择待调色照片"; Editor.ApplyTargetSnapshot(null,null,null,false); await Editor.SetSourceAsync(null, null, token); }
-        RefreshFilmstrip(); SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath));
+        NotifyR53Variants(); RefreshFilmstrip(); SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath));
         _batchUndo.Clear();_batchRedo.Clear();RaiseBatchHistory();
         SetStatus("SessionRestored", restored.Length, missing);
         if(staged is not null)

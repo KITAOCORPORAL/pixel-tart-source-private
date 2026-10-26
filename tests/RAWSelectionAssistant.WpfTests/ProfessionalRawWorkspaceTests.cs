@@ -34,6 +34,27 @@ public sealed class ProfessionalRawWorkspaceTests
         }
         finally{Directory.Delete(root,true);}
     }
+    [TestMethod]
+    public async Task R53OriginalToExistingProfessionalVariantRefreshesReadOnlyState()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "R53-raw-identity-" + Guid.NewGuid());
+        Directory.CreateDirectory(root);
+        try
+        {
+            var input = Path.Combine(root, "synthetic.arw"); await File.WriteAllBytesAsync(input, [1,2,3]);
+            using var vm = new ReferenceColorWorkspaceViewModel(new Dialogs(root), rawDecoder: new FakeLegacy(), professionalRawDecoder: new FakeLinear());
+            await vm.LoadTargetAsync(input);
+            await vm.CreateProfessionalRawCommand.ExecuteAsync(null);
+            var professional = vm.ActiveTarget!.ActiveEditVersionId!.Value;
+            await vm.SwitchEditVersionAsync(vm.R53Variants.Single(v => v.IsOriginal).Id);
+            Assert.IsTrue(vm.Editor.ReadOnlyTarget);
+            await vm.SwitchEditVersionAsync(professional);
+            Assert.IsFalse(vm.Editor.ReadOnlyTarget);
+            Assert.IsTrue(vm.IsProfessionalRaw);
+            Assert.AreEqual(professional, vm.ActiveTarget.ActiveEditVersionId);
+        }
+        finally { Directory.Delete(root, true); }
+    }
     private static byte[] Pixels(System.Windows.Media.Imaging.BitmapSource image){var stride=(image.PixelWidth*image.Format.BitsPerPixel+7)/8;var result=new byte[stride*image.PixelHeight];image.CopyPixels(result,stride,0);return result;}
     [TestMethod]
     public async Task DecodeFailureKeepsOldVersionAndParametersAndLateCreationCannotReplaceAnotherTarget()

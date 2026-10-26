@@ -149,6 +149,34 @@ namespace RAWSelectionAssistant.WpfTests;
         }
         finally { Directory.Delete(root, true); }
     });
+    [TestMethod]
+    public Task ReopenedOriginalRemainsReadOnlyAndF2ChildBecomesEditable() => RunSta(async () =>
+    {
+        EnsureTestApplication();
+        var root = Path.Combine(Path.GetTempPath(), "r53-original-reopen-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var dialogs = new Dialogs(root);
+            using var vm = new ReferenceColorWorkspaceViewModel(dialogs);
+            await vm.LoadTargetAsync(Image(root));
+            var original = vm.R53Variants.Single(v => v.IsOriginal).Id;
+            await vm.SwitchEditVersionAsync(original);
+            var session = Path.Combine(root, "original.ptstudio.json");
+            await vm.SaveSessionAsync(session);
+            using var reopened = new ReferenceColorWorkspaceViewModel(dialogs);
+            await reopened.LoadSessionAsync(session);
+            Assert.AreEqual(original, reopened.ActiveTarget!.ActiveEditVersionId);
+            Assert.IsTrue(reopened.Editor.ReadOnlyTarget);
+            reopened.Editor.SetToolParameter(Exposure, 1);
+            Assert.AreEqual(0d, reopened.Editor.ToolValue(Exposure));
+            await reopened.CreateR53VariantAsync(true);
+            Assert.IsFalse(reopened.Editor.ReadOnlyTarget);
+            reopened.Editor.SetToolParameter(Exposure, .5);
+            Assert.AreEqual(.5, reopened.Editor.ToolValue(Exposure));
+        }
+        finally { Directory.Delete(root, true); }
+    });
     sealed class Dialogs(string root):IDialogService
     {public bool Accept=true;public IReadOnlyList<string> ChooseFiles(string t,string f,bool m)=>[];public string? ChooseFolder(string t,string? p=null)=>root;public string? ChooseSaveFile(string t,string f,string e,string? n=null)=>null;public bool Confirm(string m,string t)=>Accept;public void ShowInfo(string m){}public void ShowError(string m){}public IReadOnlyList<string>? ManageQuickTools(IReadOnlyList<string>x)=>x;public HelpAction ShowHelp()=>HelpAction.None;public void ShowFeedback(){}public RawFileEntry? ChooseRawCandidate(IReadOnlyList<RawFileEntry>x)=>null;public bool ShowMediaDetails(MediaSelectionItem i,bool b)=>false;public void RevealFile(string p){}}
 }
