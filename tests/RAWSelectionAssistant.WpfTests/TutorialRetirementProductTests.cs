@@ -38,7 +38,7 @@ public sealed class TutorialRetirementProductTests
             .Where(f=>!f.Contains(Path.DirectorySeparatorChar+"obj"+Path.DirectorySeparatorChar)&&!f.Contains(Path.DirectorySeparatorChar+"bin"+Path.DirectorySeparatorChar)))
         {
             var doc=System.Xml.Linq.XDocument.Load(file);
-            foreach(var attribute in doc.Descendants().Attributes().Where(a=>visible.Contains(a.Name.LocalName)&&!a.Value.StartsWith('{')))
+            foreach(var attribute in doc.Descendants().SelectMany(element=>element.Attributes()).Where(a=>visible.Contains(a.Name.LocalName)&&!a.Value.StartsWith('{')))
                 Assert.IsFalse(Old(attribute.Value),file+" "+attribute.Name+"="+attribute.Value);
         }
         foreach(var file in Directory.EnumerateFiles(Path.Combine(root,"src/RAWSelectionAssistant/Resources/Studio"),"*.json"))
