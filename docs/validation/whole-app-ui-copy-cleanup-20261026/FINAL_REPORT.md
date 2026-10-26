@@ -54,3 +54,7 @@ Guangjing-UI-Cleanup-Final-Diagnostic-win-x64，Release win-x64 self-contained�
 ## ZIP最终读回
 
 325文件、76353237字节，SHA256 fa2be614f7fd910eb597831d8851e39baf6cb0449a79d726c8367fd8b48a5552，全部条目读回一致。ZIP内报告为打包时快照，外部报告后附自身身份避免循环hash。产品/测试修订身份分开见FINAL_IDENTITY.json。
+
+## 推送读回
+
+产品b9cb1e25e811903b117aef3afeb203aadf7d0790、测试合同修订0505216f8aacbcc67ea10f7584a8469767afe923与独立证据ff03edc48f2172af068e5b344c33e99318747e0c已正常推送。独立ls-remote确认LOCAL_HEAD=REMOTE_HEAD且干净。后续仅封存读回，产品src与最终发布组件不变。
