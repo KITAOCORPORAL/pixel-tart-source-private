@@ -106,7 +106,7 @@ public sealed class UiDesignSystem140Tests
         Assert.IsLessThan(text.IndexOf("Header=\"标准化名称\"", StringComparison.Ordinal), text.IndexOf("x:Name=\"DetailsColumn\"", StringComparison.Ordinal));
     }
 
-    [TestMethod] public void MainWindow_AppearancePageExposesSingleDarkThemeAndRemainingOptions() => Contains("src/RAWSelectionAssistant/MainWindow.xaml", "PixelTart Dark Theme", "DensityOptions", "SidebarOptions", "MotionOptions", "FontScaleOptions");
+    [TestMethod] public void MainWindow_AppearancePageExposesSingleDarkThemeAndRemainingOptions() => Contains("src/RAWSelectionAssistant/MainWindow.xaml", "光镜深色主题", "DensityOptions", "SidebarOptions", "MotionOptions", "FontScaleOptions");
     [TestMethod] public void MainWindow_AppearanceHasReset() => Contains("src/RAWSelectionAssistant/MainWindow.xaml", "ResetAppearanceCommand");
     [TestMethod] public void MainWindow_ToastIsNonModalAndDismissible() => Contains("src/RAWSelectionAssistant/MainWindow.xaml", "IsToastVisible", "ToastMessage", "DismissToastCommand");
     [TestMethod] public void MainWindow_TutorialTargetsRemainAvailable() => Contains("src/RAWSelectionAssistant/MainWindow.xaml", "AddSourceButton", "CustomerDropArea", "MatchButton", "ResultsGrid", "BrowseOutputButton");
