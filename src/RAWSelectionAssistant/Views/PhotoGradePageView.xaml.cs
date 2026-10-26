@@ -39,6 +39,7 @@ public partial class PhotoGradePageView:UserControl
  }
  private void Detach(bool cancel)
  {
+  ReleaseR53Compare();closeR53Inspection?.Invoke();
   if(model is not null){PropertyChangedEventManager.RemoveHandler(model,Changed,string.Empty);if(cancel)model.ExitInstantPresentationForLifecycle();}
 
   model=null;

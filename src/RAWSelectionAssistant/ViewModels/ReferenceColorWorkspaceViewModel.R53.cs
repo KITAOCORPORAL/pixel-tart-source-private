@@ -37,7 +37,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             if(_r53Autosaving||IsLoading||IsExporting||IsInstantGenerating)return;_r53Autosave.Stop();
             if(SessionPath is null)return;_r53Autosaving=true;R53SaveStatus="正在保存…";OnPropertyChanged(nameof(R53SaveStatus));
             try{await SaveSessionAsync(SessionPath);R53SaveStatus="已保存";}
-            catch(Exception e)when(e is IOException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException){R53SaveStatus="保存失败 · 点击保存重试";}
+            catch(Exception e)when(e is IOException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException){System.Diagnostics.Trace.TraceError("R53 autosave: "+e);R53SaveStatus="保存失败 · 点击保存重试";}
             finally{_r53Autosaving=false;OnPropertyChanged(nameof(R53SaveStatus));}
         };
         Editor.PropertyChanged+=(_,e)=>{if(!_r53Autosaving&&!IsLoading&&e.PropertyName==nameof(Editor.AdjustmentStack))ScheduleR53Autosave();};

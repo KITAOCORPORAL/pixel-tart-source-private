@@ -51,6 +51,12 @@ namespace RAWSelectionAssistant.WpfTests;
     {
         EnsureTestApplication();using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(Path.GetTempPath()));var view=new PhotoGradePageView{DataContext=vm};vm.Editor.ViewMode="仿色结果";Assert.IsTrue(view.ExecuteR53PointerShortcut(System.Windows.Input.Key.B));Assert.AreEqual("仿色结果",vm.Editor.ViewMode);Assert.IsTrue(((TextBlock)view.FindName("ToolLabel")).Text.StartsWith("画笔"));Assert.IsTrue(view.ExecuteR53PointerShortcut(System.Windows.Input.Key.Oem5));Assert.AreEqual("原片",vm.Editor.ViewMode);Assert.IsTrue(view.ExecuteR53PointerShortcut(System.Windows.Input.Key.Oem5));Assert.AreEqual("仿色结果",vm.Editor.ViewMode);view.DataContext=null;await Task.CompletedTask;
     });
+    [TestMethod]public Task WideInspectorReserves420DipAndReleasesItsOwnerSubscription()=>RunSta(async()=>
+    {
+        EnsureTestApplication();using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(Path.GetTempPath()));var view=new PhotoGradePageView{DataContext=vm};view.Measure(new Size(1920,920));view.Arrange(new Rect(0,0,1920,920));view.UpdateLayout();
+        var method=typeof(PhotoGradePageView).GetMethod("R53Inspect3D",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic)!;method.Invoke(view,[view,new RoutedEventArgs()]);view.UpdateLayout();var dock=(Border)view.FindName("R53InspectDock");Assert.AreEqual(Visibility.Visible,dock.Visibility);Assert.IsTrue(dock.ActualWidth>=420);Assert.IsTrue(((FrameworkElement)view.FindName("ViewerArea")).ActualWidth>=560);
+        method.Invoke(view,[view,new RoutedEventArgs()]);Assert.AreEqual(Visibility.Collapsed,dock.Visibility);view.DataContext=null;await Task.CompletedTask;
+    });
     [TestMethod]public Task MainVariantOutputAndDebouncedExistingSessionSaveUseSharedPipeline()=>RunSta(async()=>
     {
         EnsureTestApplication();var root=Path.Combine(Path.GetTempPath(),"r53-main-auto-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);

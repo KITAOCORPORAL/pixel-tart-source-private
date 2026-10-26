@@ -10,6 +10,9 @@ public partial class PhotoGradePageView
     private bool r53ResourcesRequested=true,r53CompareHeld;
     private string r53ResourceTab="预设";
     private Window? r53Inspect;
+    private Window? r53Owner;
+    private void ReleaseR53Compare(){if(r53CompareHeld)model?.Editor.HoldOriginal(false);r53CompareHeld=false;}
+    private void R53WindowDeactivated(object? s,EventArgs e)=>ReleaseR53Compare();
     private void InitializeR53()
     {
         SizeChanged+=(_,_)=>{if(ActualWidth<1800&&R53InspectDock.Visibility==Visibility.Visible)closeR53Inspection?.Invoke();ApplyR53Layout();};
@@ -23,7 +26,8 @@ public partial class PhotoGradePageView
             else if(e.Key==Key.F3){await model.CreateR53VariantAsync(false);e.Handled=true;}
             else if(e.Key==Key.Escape){closeR53Inspection?.Invoke();}
         };
-        Unloaded+=(_,_)=>{model?.Editor.HoldOriginal(false);closeR53Inspection?.Invoke();};
+        Loaded+=(_,_)=>{var window=Window.GetWindow(this);if(ReferenceEquals(window,r53Owner))return;if(r53Owner is not null)r53Owner.Deactivated-=R53WindowDeactivated;r53Owner=window;if(r53Owner is not null)r53Owner.Deactivated+=R53WindowDeactivated;};
+        Unloaded+=(_,_)=>{ReleaseR53Compare();closeR53Inspection?.Invoke();if(r53Owner is not null)r53Owner.Deactivated-=R53WindowDeactivated;r53Owner=null;};
     }
     internal bool ExecuteR53PointerShortcut(Key key)
     {
@@ -41,7 +45,6 @@ public partial class PhotoGradePageView
         ResourceColumn.Width=new GridLength(resources?264:0);R53Resources.Visibility=resources?Visibility.Visible:Visibility.Collapsed;
         if(width<1440){SetPanelOpen(false);}else if(RightPanel.Visibility!=Visibility.Visible)SetPanelOpen(true);
         R53SerialNodes.Visibility=professional?Visibility.Visible:Visibility.Collapsed;R53NodeRow.Height=new GridLength(professional?132:0);
-        if(professional&&EditModes.SelectedIndex==4)EditModes.SelectedIndex=2;
     }
     private void R53ParameterCategory(object sender,RoutedEventArgs e)
     {
@@ -57,7 +60,7 @@ public partial class PhotoGradePageView
     private void R53Brush(object s,RoutedEventArgs e){activeTool="画笔";ToolLabel.Text="画笔 · 当前局部蒙版尚未批准接入";ToolHint.Text="不可用：未连接真实蒙版渲染，不生成假蒙版";}
     private void R53CompareDown(object s,MouseButtonEventArgs e){if(model is null)return;r53CompareHeld=true;model.Editor.HoldOriginal(true);R53HoldCompare.CaptureMouse();e.Handled=true;}
     private void R53CompareUp(object s,MouseButtonEventArgs e){R53CompareLost(s,e);R53HoldCompare.ReleaseMouseCapture();e.Handled=true;}
-    private void R53CompareLost(object s,MouseEventArgs e){if(r53CompareHeld)model?.Editor.HoldOriginal(false);r53CompareHeld=false;}
+    private void R53CompareLost(object s,MouseEventArgs e){ReleaseR53Compare();}
     private void R53ToggleVariants(object s,RoutedEventArgs e){if(model?.ActiveTarget is {} target){target.VariantsExpanded=!target.VariantsExpanded;model.NotifyR53Edit();}}
     private async void R53InlineVariantPicked(object s,SelectionChangedEventArgs e)
     {if(ReferenceEquals(e.Source,s)&&model is {} workspace&&e.AddedItems.OfType<StudioEditVersion>().FirstOrDefault() is {} version&&!workspace.IsLoading)await workspace.SwitchEditVersionAsync(version.Id);}
