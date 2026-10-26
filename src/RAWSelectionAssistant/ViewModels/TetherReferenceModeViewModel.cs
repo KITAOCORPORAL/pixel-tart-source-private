@@ -302,7 +302,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         get=>SelectedAdjustmentNode?.IsLocked==true;
         set{if(SelectedAdjustmentNode is {} node && !node.SystemLocked)ChangeStack(nodes=>nodes.Select(n=>n.Id==node.Id?n with{UserLocked=value}:n).ToArray(),render:false);OnPropertyChanged();}
     }
-    public bool SelectedNodeEditable=>SelectedAdjustmentNode?.IsLocked!=true;
+    public bool SelectedNodeEditable=>!ReadOnlyTarget && SelectedAdjustmentNode?.IsLocked!=true;
     public string SelectedNodeName { get => SelectedAdjustmentNode?.Name ?? string.Empty; set { if (!string.Equals(value, SelectedNodeName, StringComparison.Ordinal)) RenameSelectedAdjustmentNode(value); } }
     public bool IsRenamingNode { get; set; }
     public string PendingNodeName { get; set; } = "";
@@ -445,7 +445,23 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         _ = RenderAsync(); StatusText = "色彩方案已应用。";
     }
     private bool _readOnlyTarget;
-    public bool ReadOnlyTarget{get=>_readOnlyTarget;set=>SetProperty(ref _readOnlyTarget,value);}
+    public bool ReadOnlyTarget
+    {
+        get => _readOnlyTarget;
+        set { if (SetProperty(ref _readOnlyTarget, value)) OnPropertyChanged(nameof(SelectedNodeEditable)); }
+    }
+    private bool CanEditLegacyReference()
+    {
+        if (!ReadOnlyTarget && !AdjustmentStack.Nodes.Any(n => n.Type == ColorStudioNodeType.ReferenceMatch && n.IsLocked)) return true;
+        StatusText = "原始变体或参考图层已锁定，未修改参数。";
+        return false;
+    }
+    private bool CanReplaceLegacyScheme()
+    {
+        if (!ReadOnlyTarget && !AdjustmentStack.Nodes.Any(n => n.IsLocked)) return true;
+        StatusText = "原始变体或图层已锁定，未替换方案。";
+        return false;
+    }
     private void ChangeStack(Func<IReadOnlyList<ColorAdjustmentStackNode>, IReadOnlyList<ColorAdjustmentStackNode>> change, bool render = true, int? processingVersion = null)
     {
         if(ReadOnlyTarget){StatusText="原始变体只读，请按F2从原始新建或F3复制当前。";return;}
@@ -659,7 +675,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public AsyncRelayCommand MoveReferenceDownCommand { get; }
     public bool IsSourcePickerOpen { get => _sourcePickerOpen; set => SetProperty(ref _sourcePickerOpen, value); }
     public ReferenceSourceCategory SelectedSourceCategory { get => _selectedSourceCategory; set { if (SetProperty(ref _selectedSourceCategory, value)) RefreshSourceChoices(); } }
-    public ReferenceLook? SelectedLook { get => _selectedLook; set { if(ReadOnlyTarget&&!_refreshingLookChoices){StatusText="原始变体只读，请先新建变体。";return;} if (_refreshingLookChoices && value is null) return; if (SetProperty(ref _selectedLook, value)) { _persistedLook = value; _sessionLookId = value?.ReferenceLookId; OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(value?.Parameters ?? new()); CopyFilm(value?.Film ?? new()); if (AdjustmentStack.Nodes.Count > 0 && value is not null) SyncStackFromSimple(); RefreshReferenceSources(); ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged(); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); IsSourcePickerOpen = false; _ = RenderAsync(); } } }
+    public ReferenceLook? SelectedLook { get => _selectedLook; set { if(!_refreshingLookChoices&&!CanReplaceLegacyScheme())return; if (_refreshingLookChoices && value is null) return; if (SetProperty(ref _selectedLook, value)) { _persistedLook = value; _sessionLookId = value?.ReferenceLookId; OnPropertyChanged(nameof(CurrentLookText)); CopyParameters(value?.Parameters ?? new()); CopyFilm(value?.Film ?? new()); if (AdjustmentStack.Nodes.Count > 0 && value is not null) SyncStackFromSimple(); RefreshReferenceSources(); ApplyCommand.RaiseCanExecuteChanged(); ExportCubeCommand.RaiseCanExecuteChanged(); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); IsSourcePickerOpen = false; _ = RenderAsync(); } } }
     public string CurrentLookText => SelectedLook?.Name ?? "未选择色彩方案";
     public BitmapSource? MatchedImage { get => _matchedImage; private set { if (SetProperty(ref _matchedImage, value)) OnPropertyChanged(nameof(EffectiveViewMode)); } }
     public BitmapSource? SourceImage => _source;
@@ -702,7 +718,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public double SkinProtection { get => SelectedLook?.Parameters.SkinProtection ?? _skin; set => SetParameter(value, p => p with { SkinProtection = value }, ref _skin, "skin_protection"); }
     public double HighlightProtection { get => SelectedLook?.Parameters.HighlightProtection ?? _highlight; set => SetParameter(value, p => p with { HighlightProtection = value }, ref _highlight, "highlight_protection"); }
     public double NeutralProtection { get => SelectedLook?.Parameters.NeutralProtection ?? _neutral; set => SetParameter(value, p => p with { NeutralProtection = value }, ref _neutral, "neutral_protection"); }
-    public bool KeepOriginalTone { get => SelectedLook?.Parameters.KeepOriginalTone ?? _keepOriginalTone; set { _keepOriginalTone = value; if (SelectedLook is not null) { _selectedLook = SelectedLook with { Parameters = SelectedLook.Parameters with { KeepOriginalTone = value }, UpdatedAt = DateTimeOffset.UtcNow }; OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); } OnPropertyChanged(); SetNodeNumeric(ColorStudioNodeType.ReferenceMatch, "keep_original_tone", value ? 1 : 0); _ = DebouncedRenderAsync(); } }
+    public bool KeepOriginalTone { get => SelectedLook?.Parameters.KeepOriginalTone ?? _keepOriginalTone; set { if(!CanEditLegacyReference())return; _keepOriginalTone = value; if (SelectedLook is not null) { _selectedLook = SelectedLook with { Parameters = SelectedLook.Parameters with { KeepOriginalTone = value }, UpdatedAt = DateTimeOffset.UtcNow }; OnPropertyChanged(nameof(SelectedLook)); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); } OnPropertyChanged(); SetNodeNumeric(ColorStudioNodeType.ReferenceMatch, "keep_original_tone", value ? 1 : 0); _ = DebouncedRenderAsync(); } }
     private double _match=100,_tone=50,_color=70,_contrast=50,_saturation=50,_skin=60,_highlight=70,_neutral=65;
     private bool _keepOriginalTone;
 
@@ -849,6 +865,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     private void SetParameter(double value, Func<ReferenceLookParameters, ReferenceLookParameters> update, ref double fallback, string nodeKey)
     {
         if (!double.IsFinite(value)) throw new ArgumentException("参数必须为有限数值。");
+        if (!CanEditLegacyReference()) return;
         value = Math.Clamp(value, 0, 100); fallback = value;
         if (SelectedLook is not null)
         {
@@ -900,7 +917,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
 
     private async Task UpdateReferenceWeightAsync(ReferenceSourceWeightViewModel edited, double percent)
     {
-        if (!_allowReferenceManagement) return;
+        if (!_allowReferenceManagement || !CanEditLegacyReference()) return;
         var look = SelectedLook; if (look is null) return; var sources = look.ReferenceSources.ToArray(); var index = Array.FindIndex(sources, item => item.ContentHash == edited.Source.ContentHash && item.SourcePath == edited.Source.SourcePath); if (index < 0) return;
         // Slider values are percentages; the persisted model stores relative 0..1
         // weights. Normalize only after converting to the same unit as its peers.
@@ -909,7 +926,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
 
     private async Task UpdateReferencesAsync(ReferenceSourceWeightViewModel? edited, ReferenceEdit edit)
     {
-        if (!_allowReferenceManagement) return;
+        if (!_allowReferenceManagement || !CanEditLegacyReference()) return;
         var look = SelectedLook; if (look is null || edited is null) return; var sources = look.ReferenceSources.ToList(); var index = sources.FindIndex(item => item.ContentHash == edited.Source.ContentHash && item.SourcePath == edited.Source.SourcePath); if (index < 0) return;
         if (edit == ReferenceEdit.Remove && sources.Count > 1) sources.RemoveAt(index);
         else if (edit == ReferenceEdit.Up && index > 0) (sources[index - 1], sources[index]) = (sources[index], sources[index - 1]);
@@ -920,6 +937,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
 
     private async Task SaveReferencesAsync(ReferenceLook look, IReadOnlyList<ReferenceLookSource> sources)
     {
+        if (!CanEditLegacyReference()) return;
         var updated = (look with { ReferenceSources = sources, UpdatedAt = DateTimeOffset.UtcNow }).Normalize();
         try { await _store.SaveAsync(updated, token: _lifetime.Token); }
         catch (OperationCanceledException) { return; }
@@ -940,6 +958,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     }
     private void RestoreScheme()
     {
+        if (!CanReplaceLegacyScheme()) return;
         if (_persistedLook is not null) { _selectedLook = _persistedLook; CopyParameters(_persistedLook.Parameters); CopyFilm(_persistedLook.Film ?? new()); OnPropertyChanged(nameof(SelectedLook)); }
         if (_persistedStack is not null) AdjustmentStack = _persistedStack.DeepClone();
         OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); SaveCurrentAdjustmentCommand.RaiseCanExecuteChanged(); RestoreSchemeCommand.RaiseCanExecuteChanged(); _ = DebouncedRenderAsync();

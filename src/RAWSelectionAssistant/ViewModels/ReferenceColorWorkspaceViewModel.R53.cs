@@ -4,7 +4,7 @@ using RAWSelectionAssistant.Utilities;
 namespace RAWSelectionAssistant.ViewModels;
 public sealed partial class ReferenceColorWorkspaceViewModel
 {
-    public bool R53Professional{get=>Layout.R53Professional;set{if(Layout.R53Professional==value)return;Layout=Layout with{R53Professional=value};OnPropertyChanged();}}
+    public bool R53Professional{get=>Layout.R53Professional;set{if(Layout.R53Professional==value)return;Layout=Layout with{R53Professional=value};OnPropertyChanged();ScheduleR53Autosave();}}
     public IReadOnlyList<StudioEditVersion> R53Variants=>ActiveTarget?.EditVersions.Where(v=>!v.Archived).ToArray()??[];
     public Guid? R53MainVariantId=>ActiveTarget?.EditVersions.FirstOrDefault(v=>v.IsMain&&!v.Archived)?.Id;
     public int R53VariantRating
@@ -29,6 +29,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private readonly System.Windows.Threading.DispatcherTimer _r53Autosave=new(){Interval=TimeSpan.FromMilliseconds(900)};
     public string R53SaveStatus{get;private set;}="未保存项目";
     private bool _r53Autosaving;
+    private long _r53EditRevision;
+    private long _r53SavedRevision;
     internal void NotifyR53Edit()=>ScheduleR53Autosave();
     private void InitializeR53Autosave()
     {
@@ -36,16 +38,50 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         {
             if(_r53Autosaving||IsLoading||IsExporting||IsInstantGenerating)return;_r53Autosave.Stop();
             if(SessionPath is null)return;_r53Autosaving=true;R53SaveStatus="正在保存…";OnPropertyChanged(nameof(R53SaveStatus));
-            try{await SaveSessionAsync(SessionPath);R53SaveStatus="已保存";}
+            try{await SaveSessionAsync(SessionPath);}
             catch(Exception e)when(e is IOException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException){System.Diagnostics.Trace.TraceError("R53 autosave: "+e);R53SaveStatus="保存失败 · 点击保存重试";}
             finally{_r53Autosaving=false;OnPropertyChanged(nameof(R53SaveStatus));}
         };
-        Editor.PropertyChanged+=(_,e)=>{if(!_r53Autosaving&&!IsLoading&&e.PropertyName==nameof(Editor.AdjustmentStack))ScheduleR53Autosave();};
+        Editor.PropertyChanged+=(_,e)=>{if(!IsLoading&&!_applyingActiveSnapshot&&e.PropertyName is nameof(Editor.AdjustmentStack) or nameof(Editor.SelectedLook) or nameof(Editor.FilmSettings))ScheduleR53Autosave();};
     }
     private void ScheduleR53Autosave()
     {
-        if(_disposed)return;R53SaveStatus=SessionPath is null?"未保存 · 首次保存选择项目位置":"待保存";OnPropertyChanged(nameof(R53SaveStatus));
+        if(_disposed)return;_r53EditRevision++;R53SaveStatus=SessionPath is null?"未保存 · 首次保存选择项目位置":"待保存";OnPropertyChanged(nameof(R53SaveStatus));
         if(SessionPath is not null){_r53Autosave.Stop();_r53Autosave.Start();}
+    }
+    /// <summary>Called by the real shell close path. A failed save keeps the window open.</summary>
+    public async Task<bool> FlushR53BeforeCloseAsync()
+    {
+        _r53Autosave.Stop();
+        if (Targets.Count == 0) return true;
+        if (IsLoading || IsExporting || IsInstantGenerating)
+        {
+            R53SaveStatus = "请等待当前任务完成后退出";
+            OnPropertyChanged(nameof(R53SaveStatus));
+            return false;
+        }
+        var path = SessionPath;
+        if (path is null)
+        {
+            await SaveSessionCommand.ExecuteAsync(null);
+            if (SessionPath is null)
+                return _dialogs.Confirm("暗室工作尚未保存。放弃本次未保存修改并退出？源照片不会删除。", "退出光镜");
+            return true;
+        }
+        try
+        {
+            await SaveSessionAsync(path);
+            // If editing resumed while IO was pending, do not close over a newer edit.
+            if (_r53SavedRevision != _r53EditRevision) return false;
+            return true;
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or ArgumentException or System.Text.Json.JsonException or InvalidOperationException)
+        {
+            System.Diagnostics.Trace.TraceError("R53 close save: " + error);
+            R53SaveStatus = "保存失败 · 窗口保持打开，请重试保存";
+            OnPropertyChanged(nameof(R53SaveStatus));
+            return false;
+        }
     }
     private void NotifyR53Variants(){OnPropertyChanged(nameof(R53Variants));OnPropertyChanged(nameof(R53VariantStatus));OnPropertyChanged(nameof(R53MainVariantId));OnPropertyChanged(nameof(R53VariantRating));OnPropertyChanged(nameof(R53VariantColorLabel));}
     public async Task CreateR53VariantAsync(bool fromOriginal)

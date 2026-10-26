@@ -29,6 +29,7 @@ public sealed partial class TetherReferenceModeViewModel
         value = Math.Clamp(value, parameter.Minimum, parameter.Maximum);
         if (Math.Abs(ToolValue(parameter) - value) < 1e-10) return;
         var node = ToolNode(parameter.NodeType) ?? new ColorAdjustmentStackNode(Guid.NewGuid(), parameter.NodeType, ToolName(parameter.NodeType));
+        if (ReadOnlyTarget || node.IsLocked) { StatusText = "原始变体或图层已锁定，未修改参数。"; return; }
         var changed = node with { NumericParameters = new Dictionary<string, double>(node.NumericParameters) { [parameter.Key] = value } };
         ColorStudioToolProcessor.Validate(changed);
         Enabled = true;
@@ -64,6 +65,7 @@ public sealed partial class TetherReferenceModeViewModel
     {
         if (channel is not ("rgb" or "r" or "g" or "b")) throw new ArgumentException("未知曲线通道。");
         var node = ToolNode(ColorStudioNodeType.Curve) ?? new ColorAdjustmentStackNode(Guid.NewGuid(), ColorStudioNodeType.Curve, "曲线");
+        if (ReadOnlyTarget || node.IsLocked) { StatusText = "原始变体或曲线图层已锁定。"; return; }
         var values = node.NumericParameters.Where(p => !p.Key.StartsWith(channel + "_", StringComparison.Ordinal)).ToDictionary(p => p.Key, p => p.Value);
         values[channel + "_count"] = points.Count;
         for (var i = 0; i < points.Count; i++) { values[$"{channel}_x{i}"] = points[i].X; values[$"{channel}_y{i}"] = points[i].Y; }

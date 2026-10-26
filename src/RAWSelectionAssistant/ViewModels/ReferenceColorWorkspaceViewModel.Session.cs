@@ -55,6 +55,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if (ActiveTarget is { } active) Editor.CopyCurrentLookTo([active]);
         await FlushMetadataAsync();
         foreach(var target in Targets){CaptureEditVersion(target);EnsureR53Variants(target);}
+        var savingRevision = _r53EditRevision;
         var document = new ColorStudioSessionDocument(Targets.Select(item => new ColorStudioSessionTarget(item.Id, item.Path, item.AssetId, item.IsSelected,
             item.AppliedLookSnapshot, item.ColorAdjustmentStackSnapshot, item.FilmSettingsSnapshot, item.EngineSnapshot, item.ExecutionModeSnapshot,
             item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null, item.LibraryId, item.SourceHash, item.EditVersions.ToArray(), item.ActiveEditVersionId,item.VersionCatalog?.Revision,item.RawDefinition,item.RawInput){VariantsExpanded=item.VariantsExpanded}).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
@@ -65,7 +66,11 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         // explicit separate command, not a hidden second write between two project saves.
         if(!_sessionFingerprints.TryGetValue(path,out var expected)&&File.Exists(path))throw new InvalidOperationException("此工作区未读取该工作文件；请先打开或另存新文件，未覆盖。");
         _sessionFingerprints[path]=await ColorStudioSessionStore.SaveCheckedAsync(path,document,expected,token);
-        SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath));R53SaveStatus="已保存";OnPropertyChanged(nameof(R53SaveStatus)); StatusText = "SessionSaved";
+        SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath));
+        _r53SavedRevision = savingRevision;
+        if (_r53EditRevision == savingRevision) { _r53Autosave.Stop(); R53SaveStatus = "已保存"; }
+        else { R53SaveStatus = "待保存"; _r53Autosave.Stop(); _r53Autosave.Start(); }
+        OnPropertyChanged(nameof(R53SaveStatus)); StatusText = "SessionSaved";
     }
     public async Task LoadSessionAsync(string path, CancellationToken token = default)
     {
@@ -103,6 +108,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         await LoadSessionCoreAsync(path,token,document,staged);
         UpdateComparisonAvailability();
         _sessionFingerprints[Path.GetFullPath(path)]=fingerprint;
+        _r53SavedRevision = _r53EditRevision; _r53Autosave.Stop(); R53SaveStatus = "已保存"; OnPropertyChanged(nameof(R53SaveStatus));
         }
         finally{_sessionPreparationCancellation=null;_sessionLoading=false;OnPropertyChanged(nameof(IsLoading));RefreshSyncAvailability();}
     }

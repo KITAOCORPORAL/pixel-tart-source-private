@@ -187,6 +187,8 @@ public partial class MainWindow : Window
         e.Handled = true;
     }
 
+    private bool _darkroomCloseSaving;
+    private bool _darkroomCloseFlushed;
     private bool _planningCloseFlushed;
     private bool _planningCloseSaving;
     private bool _tetherCloseDisposed;
@@ -213,6 +215,25 @@ public partial class MainWindow : Window
         {
             e.Cancel = true;
             _planningCloseFlushed = false;
+            return;
+        }
+
+        if (!_darkroomCloseFlushed && _viewModel?.ReferenceColorPage is { } darkroom)
+        {
+            e.Cancel = true;
+            if (_darkroomCloseSaving) return;
+            _darkroomCloseSaving = true;
+            IsEnabled = false;
+            try
+            {
+                if (await darkroom.FlushR53BeforeCloseAsync())
+                {
+                    _darkroomCloseFlushed = true;
+                    _ = Dispatcher.BeginInvoke(new Action(Close));
+                }
+                else _planningCloseFlushed = false;
+            }
+            finally { _darkroomCloseSaving = false; if (!_darkroomCloseFlushed) IsEnabled = true; }
             return;
         }
 

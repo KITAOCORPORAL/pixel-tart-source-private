@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Services;
 using RAWSelectionAssistant.ViewModels;
@@ -77,6 +78,76 @@ namespace RAWSelectionAssistant.WpfTests;
         }
         var session=Path.Combine(output,"r53-stage-a.ptstudio.json");await vm.SaveSessionAsync(session);vm.ActiveTarget!.IsSelected=true;await vm.ExportSelectedCommand.ExecuteAsync(null);Assert.IsTrue(File.Exists(Path.Combine(output,"r53-synthetic_仿色.png")));view.DataContext=null;
         await File.WriteAllTextAsync(Path.Combine(output,"RESULT.json"),JsonSerializer.Serialize(new{photo=vm.ActiveTarget.Id,variants=vm.R53Variants.Select(v=>new{v.Id,v.Name,v.IsOriginal,v.IsMain}),session,scope="Offscreen WPF layout and real shared session/export; not native/DPI screenshot"},new JsonSerializerOptions{WriteIndented=true}));
+    });
+    [TestMethod]
+    public Task LegacySimpleControlsCannotBypassReferenceLocksOrOriginalReadOnly() => RunSta(async () =>
+    {
+        EnsureTestApplication();
+        using var editor = new TetherReferenceModeViewModel();
+        var now = DateTimeOffset.UtcNow;
+        var pixels = new VisualPixelBuffer(1, 1, new byte[] { 60, 80, 100 });
+        var analysis = VisualAnalysisEngine.Analyze(new(Guid.NewGuid(), "synthetic", pixels));
+        var source = new ReferenceLookSource(Guid.NewGuid(), analysis.AssetId, "合成参考", "", "test", 1, analysis);
+        var look = new ReferenceLook(Guid.NewGuid(), "锁定参考", null, [source], new(MatchStrength: 37), now, now);
+        var reference = ColorStudioLegacyMigration.Migrate(look).Stack;
+        var locked = reference with { Nodes = reference.Nodes.Select(n => n with { UserLocked = true }).ToArray() };
+        editor.ApplyTargetSnapshot(look, null, locked, false, Guid.NewGuid());
+        var before = JsonSerializer.Serialize(editor.AdjustmentStack);
+        var lookBefore = JsonSerializer.Serialize(editor.SelectedLook);
+        editor.MatchStrength = 80;
+        editor.KeepOriginalTone = !editor.KeepOriginalTone;
+        editor.SelectedLook = look with { Name = "不能替换", Parameters = new(MatchStrength: 80) };
+        editor.RestoreSchemeCommand.Execute(null);
+        Assert.AreEqual(before, JsonSerializer.Serialize(editor.AdjustmentStack));
+        Assert.AreEqual(lookBefore, JsonSerializer.Serialize(editor.SelectedLook), "Locked stack must also protect legacy look fields used by save/export");
+        editor.ApplyTargetSnapshot(null, null, null, false, Guid.NewGuid());
+        editor.Enabled = false;
+        editor.ReadOnlyTarget = true;
+        editor.SetToolParameter(Exposure, .8);
+        editor.MatchStrength = 80;
+        editor.KeepOriginalTone = true;
+        editor.FilmEnabled = true;
+        Assert.HasCount(0, editor.AdjustmentStack.Nodes);
+        Assert.IsFalse(editor.Enabled, "Rejected edit must not change render-enable state");
+        Assert.AreEqual(100, editor.MatchStrength);
+        Assert.IsFalse(editor.FilmEnabled);
+        await Task.CompletedTask;
+    });
+    [TestMethod]
+    public Task CloseFlushPersistsImmediateEditsAndRejectsConcurrentFileChanges() => RunSta(async () =>
+    {
+        EnsureTestApplication();
+        var root = Path.Combine(Path.GetTempPath(), "r53-close-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            using var vm = new ReferenceColorWorkspaceViewModel(new Dialogs(root));
+            await vm.LoadTargetAsync(Image(root));
+            var session = Path.Combine(root, "close.ptstudio.json");
+            await vm.SaveSessionAsync(session);
+            vm.Editor.SetToolParameter(Exposure, .7);
+            Assert.IsTrue(await vm.FlushR53BeforeCloseAsync(), "Normal close flushes without waiting for 900ms timer");
+            using var reopened = new ReferenceColorWorkspaceViewModel(new Dialogs(root));
+            await reopened.LoadSessionAsync(session);
+            Assert.AreEqual(.7, reopened.Editor.ToolValue(Exposure));
+            vm.Editor.SetToolParameter(Exposure, .9);
+            var external = await File.ReadAllTextAsync(session) + "\n";
+            await File.WriteAllTextAsync(session, external);
+            Assert.IsFalse(await vm.FlushR53BeforeCloseAsync(), "External edit must keep window open");
+            Assert.AreEqual(external, await File.ReadAllTextAsync(session));
+            Assert.AreEqual(.9, vm.Editor.ToolValue(Exposure), "Failed save retains the unsaved edit in memory");
+            StringAssert.Contains(vm.R53SaveStatus, "保存失败");
+            var dialogs = new Dialogs(root) { Accept = false };
+            using var unsaved = new ReferenceColorWorkspaceViewModel(dialogs);
+            await unsaved.LoadTargetAsync(Path.Combine(root, "synthetic.png"));
+            unsaved.Editor.SetToolParameter(Exposure, .4);
+            Assert.IsFalse(await unsaved.FlushR53BeforeCloseAsync(), "Cancel save and discard must leave application open");
+            Assert.AreEqual(.4, unsaved.Editor.ToolValue(Exposure));
+            dialogs.Accept = true;
+            Assert.IsTrue(await unsaved.FlushR53BeforeCloseAsync(), "Explicit discard permits close without deleting original");
+            Assert.IsTrue(File.Exists(Path.Combine(root, "synthetic.png")));
+        }
+        finally { Directory.Delete(root, true); }
     });
     sealed class Dialogs(string root):IDialogService
     {public bool Accept=true;public IReadOnlyList<string> ChooseFiles(string t,string f,bool m)=>[];public string? ChooseFolder(string t,string? p=null)=>root;public string? ChooseSaveFile(string t,string f,string e,string? n=null)=>null;public bool Confirm(string m,string t)=>Accept;public void ShowInfo(string m){}public void ShowError(string m){}public IReadOnlyList<string>? ManageQuickTools(IReadOnlyList<string>x)=>x;public HelpAction ShowHelp()=>HelpAction.None;public void ShowFeedback(){}public RawFileEntry? ChooseRawCandidate(IReadOnlyList<RawFileEntry>x)=>null;public bool ShowMediaDetails(MediaSelectionItem i,bool b)=>false;public void RevealFile(string p){}}
