@@ -1,0 +1,159 @@
+{
+  "baseSha": "a2c3fd00783b2091ecc7dc3a86e9df52bb7a71ac",
+  "productSha": "b9cb1e25e811903b117aef3afeb203aadf7d0790",
+  "testRevisionSha": "0505216f8aacbcc67ea10f7584a8469767afe923",
+  "files": [
+    {
+      "status": "A",
+      "path": "HANDOFF.MD",
+      "type": "MD"
+    },
+    {
+      "status": "M",
+      "path": "src/PixelTart.Modules.AssetLibrary/AssetLibraryPage.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasSurface.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/MainWindow.PhysicalPointerDiagnostics.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/MainWindow.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Resources/Studio/zh-CN.json",
+      "type": "json"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.CurrentImport.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Overview.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.ProjectPackage.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.References.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/BatchCompressionModal.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/BookingDocumentsPanel.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/CollageView.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/FinanceView.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/OnlineSelectionView.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/OrganizePhotosView.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.Foundation.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/PublishingExportView.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/TetherCaptureView.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "src/RAWSelectionAssistant/Views/WorkCalendarView.xaml",
+      "type": "xaml"
+    },
+    {
+      "status": "M",
+      "path": "tests/RAWSelectionAssistant.Tests/WorkbenchEnhancement203Tests.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "tests/RAWSelectionAssistant.Tests/WorkbenchVisualCorrection201Tests.cs",
+      "type": "cs"
+    },
+    {
+      "status": "A",
+      "path": "tests/RAWSelectionAssistant.WpfTests/CanvasPreviewQueueMeasurementTests.cs",
+      "type": "cs"
+    },
+    {
+      "status": "M",
+      "path": "tests/RAWSelectionAssistant.WpfTests/ProductToolboxWpfTests.cs",
+      "type": "cs"
+    },
+    {
+      "status": "A",
+      "path": "tests/RAWSelectionAssistant.WpfTests/UiCopyCleanupLayoutTests.cs",
+      "type": "cs"
+    },
+    {
+      "status": "A",
+      "path": "tests/RAWSelectionAssistant.WpfTests/UiCopyRouteEvidenceTests.cs",
+      "type": "cs"
+    }
+  ],
+  "srcChangedByTestRevision": "",
+  "categories": "Product XAML/C#/zh-CN resource, behavior tests, HANDOFF; validation artifacts separate"
+}

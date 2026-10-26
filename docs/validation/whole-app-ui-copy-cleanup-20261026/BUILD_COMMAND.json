@@ -1,0 +1,24 @@
+{
+  "sourceSha": "b9cb1e25e811903b117aef3afeb203aadf7d0790",
+  "exe": "D:/AI AGENT/.dotnet/dotnet.exe",
+  "args": [
+    "publish",
+    "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+    "-c",
+    "Release",
+    "-r",
+    "win-x64",
+    "--self-contained",
+    "true",
+    "--no-restore",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:SourceRevisionId=b9cb1e25e811903b117aef3afeb203aadf7d0790",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "-o",
+    "E:/Kitao-Deliveries/whole-app-ui-copy-cleanup-20261026/Guangjing-UI-Cleanup-Final-Diagnostic-win-x64/app"
+  ],
+  "pid": 16820,
+  "exitCode": 0,
+  "seconds": 27.824913501739502
+}

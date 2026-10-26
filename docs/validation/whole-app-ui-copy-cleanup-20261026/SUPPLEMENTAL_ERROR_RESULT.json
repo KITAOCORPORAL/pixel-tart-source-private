@@ -1,0 +1,28 @@
+{
+  "result": [
+    {
+      "executionId": "0df6117d-ea85-40a2-8a7a-92fbc979beae",
+      "testId": "1a96f586-5c9e-838d-b2d7-e8379d30e176",
+      "testName": "SyntheticOwnedMissingShowsShortStateAndRetainsDetails",
+      "computerName": "PC-20250309WEIZ",
+      "duration": "00:00:01.4173093",
+      "startTime": "2026-10-26T12:18:34.3431031+08:00",
+      "endTime": "2026-10-26T12:18:35.7770837+08:00",
+      "testType": "13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b",
+      "outcome": "Passed",
+      "testListId": "8c84fa94-04c1-424b-9868-57a2d4851a1d",
+      "relativeResultsDirectory": "0df6117d-ea85-40a2-8a7a-92fbc979beae"
+    }
+  ],
+  "scope": "Final app-bound representative error render, not added to main WPF200 counts",
+  "files": [
+    {
+      "path": "error.trx",
+      "sha256": "e9b4e9aacca99b81503e37e016a40b538534bed3ec053795d89ca0815b5c94b8"
+    },
+    {
+      "path": "ERROR_EVIDENCE.log",
+      "sha256": "1db54d0473f28232cec711571bd4eb50c7c4f2ab9c544b8b9589b234f853f98e"
+    }
+  ]
+}

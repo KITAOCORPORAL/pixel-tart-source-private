@@ -3,7 +3,7 @@
 ## 有效基线与本轮
 - 当前公司分支：company/whole-app-ui-copy-cleanup-20261026。源起点home/planning-owned-canvas-20261025@a2c3fd00783b2091ecc7dc3a86e9df52bb7a71ac，已包含自有画布修复8886226d；公司dad3dd4c到起点0落后/4前进。
 - 本轮目标：完整主程序可达页面文案/布局减负，保留操作、可访问名称、AutomationId、保存失败、外链/项目副本和包排除依赖。纯文案不引依赖，ColorStudio布局/RAW/ICC/PV4/5/6不改。
-- 本轮状态：PRODUCT_IMPLEMENTED，最终受影响回归及原生阻点封存中，产品/验证SHA和最终诊断入口以本轮简短FINAL_REPORT为准，未执行原生不升级PASS。
+- 本轮状态：PARTIAL，产品已交付；Core216/216、WPF197PASS/0FAIL/3NOT_RUN，原生工具阻断，产品/验证SHA和最终诊断入口以本轮简短FINAL_REPORT为准，未执行原生不升级PASS。
 
 ## 规则和踩坑
 - 旧工作树/未提交/未推送成果只读保留；独立分支开发，不reset/clean/stash/rebase旧树，不合main、不强推。不把所有分支当集成。
@@ -26,3 +26,9 @@
 - 200个布局/缩放事件、12自有图触发248次解码；80ms合并后36次（含初始和显式完整性复验），通用provider0调用。显式LoadPreviewsAsync仍逐次核对，布局不会按每事件重新解码。
 - 窄窗侧栏原设计会折入抽屉，布局测试须验证隐藏列而非要求隐藏搜索框有宽度。
 - 普通当前根导入失败需保留“项目ID冲突”可行动原因，技术详情进日志，不能统一抹成未知错误。
+
+## 本轮交付读法（2026-10-26 America/New_York）
+- 产品代码SHA b9cb1e25e811903b117aef3afeb203aadf7d0790；测试合同修订SHA0505216f8aacbcc67ea10f7584a8469767afe923（src零差异）。后续证据SHA/最终分支HEAD见最终报告与PUSH_READBACK，不把文档HEAD当产品源码。
+- 完整主程序：E:/Kitao-Deliveries/whole-app-ui-copy-cleanup-20261026/Guangjing-UI-Cleanup-Final-Diagnostic-win-x64；隔离Start-Guangjing-Diagnostic.bat。不是Setup。
+- 原生一次点击coordinate input geometry is unavailable，JPEG/画布保存退出新进程/A-B整链均NOT_RUN。内验图片是离屏合成，不是桌面实机证据。
+- 先前静态教程逐字断言4项已改成真实命令/状态绑定，安全导出/不覆盖原件回归保留；源副本错误短态+展开详情/日志，不放宽禁止回退。

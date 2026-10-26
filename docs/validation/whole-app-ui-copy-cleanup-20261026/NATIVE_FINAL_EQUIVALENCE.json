@@ -1,0 +1,31 @@
+{
+  "productSha": "b9cb1e25e811903b117aef3afeb203aadf7d0790",
+  "comparison": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "nativeAttemptHash": "d7805c591bb36f1169837b428bbe4c72352c8d3e3077e9d2ffa62eaa708820f3",
+      "finalHash": "d7805c591bb36f1169837b428bbe4c72352c8d3e3077e9d2ffa62eaa708820f3",
+      "match": true
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "nativeAttemptHash": "1fec6bdc414b95a70e2eaf1c1dbe5e7df8ef366528446e43462b3da23e1ade06",
+      "finalHash": "1fec6bdc414b95a70e2eaf1c1dbe5e7df8ef366528446e43462b3da23e1ade06",
+      "match": true
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "nativeAttemptHash": "f6c760ea92589ec88f10b78915b6be3737e688d81a820a9c9f0b1ad19f9260f7",
+      "finalHash": "f6c760ea92589ec88f10b78915b6be3737e688d81a820a9c9f0b1ad19f9260f7",
+      "match": true
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "nativeAttemptHash": "fd049757bdead15d7f9c0524a665cd12d4bf00c9db241460dae6b059e088c4ef",
+      "finalHash": "fd049757bdead15d7f9c0524a665cd12d4bf00c9db241460dae6b059e088c4ef",
+      "match": true
+    }
+  ],
+  "allMatch": true,
+  "scope": "Native attempt used first build. Later test-only revision app modules compared bytewise; only allMatch permits treating attempt as final app."
+}

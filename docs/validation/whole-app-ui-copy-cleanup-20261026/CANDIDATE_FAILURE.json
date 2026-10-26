@@ -1,0 +1,5 @@
+{
+  "case": "Sidebar narrow width",
+  "cause": "At860 responsive design intentionally collapses document list into drawer. New test incorrectly required hidden search width>100. Keep visible-sidebar geometry assertions and assert zero responsive column otherwise.",
+  "originalRetained": true
+}

@@ -1,0 +1,5 @@
+import pathlib,subprocess,os,sys,json
+r=pathlib.Path("E:/Kitao-Worktrees/whole-app-ui-copy-cleanup-20261026");d=pathlib.Path("E:/Kitao-Deliveries/whole-app-ui-copy-cleanup-20261026");dotnet='D:/AI AGENT/.dotnet/dotnet.exe';os.chdir(r);env=os.environ.copy();env['DOTNET_ROOT']=str(pathlib.Path(dotnet).parent);env['PATH']=str(pathlib.Path(dotnet).parent)+os.pathsep+env.get('PATH','');env['KITAO_TEST_RESOURCE_ROOT']=str(r);env['KITAO_CANVAS_QUEUE_EVIDENCE']=str(d/'canvas-after2')
+args=[dotnet,'vstest',str(r/'tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll'),'/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.CanvasPreviewQueueMeasurementTests.MeasureOwnedLayoutEventsAndExplicitReloadIntegrity','/Logger:trx;LogFileName=before.trx','/ResultsDirectory:'+str(d/'canvas-after2')]
+with (d/'CANVAS_AFTER2.log').open('wb') as log:p=subprocess.Popen(args,stdout=log,stderr=subprocess.STDOUT,env=env,creationflags=subprocess.CREATE_NO_WINDOW);code=p.wait(timeout=180)
+print(code)

@@ -1,0 +1,7 @@
+import pathlib,subprocess,os,shutil
+r=pathlib.Path("E:/Kitao-Worktrees/whole-app-ui-copy-cleanup-20261026");d=pathlib.Path("E:/Kitao-Deliveries/whole-app-ui-copy-cleanup-20261026");dotnet='D:/AI AGENT/.dotnet/dotnet.exe';env=os.environ.copy();env['DOTNET_ROOT']=str(pathlib.Path(dotnet).parent);env['PATH']=str(pathlib.Path(dotnet).parent)+os.pathsep+env.get('PATH','');env.update(KITAO_TEST_RESOURCE_ROOT=str(r),KITAO_COPY_ERROR_EVIDENCE=str(d/'error-evidence'),PIXEL_TART_ISOLATED_RUNTIME='1',PIXEL_TART_ISOLATED_RUNTIME_ROOT=str(d/'error-runtime'),PIXEL_TART_ACCEPTANCE_ROOT=str(d/'error-runtime'),PIXEL_TART_HUMAN_ACCEPTANCE='0')
+host=r/'tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0'
+for published in pathlib.Path("E:/Kitao-Deliveries/whole-app-ui-copy-cleanup-20261026/Guangjing-UI-Cleanup-Final-Diagnostic-win-x64/app").glob('*.dll'):
+ if (host/published.name).exists():shutil.copy2(published,host/published.name)
+with (d/'ERROR_EVIDENCE.log').open('wb') as log:p=subprocess.Popen([dotnet,'vstest',str(r/'tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll'),'/TestCaseFilter:FullyQualifiedName=RAWSelectionAssistant.WpfTests.UiCopyErrorEvidenceTests.SyntheticOwnedMissingShowsShortStateAndRetainsDetails','/Logger:trx;LogFileName=error.trx','/ResultsDirectory:'+str(d/'error-evidence')],stdout=log,stderr=subprocess.STDOUT,env=env,cwd=r,creationflags=subprocess.CREATE_NO_WINDOW);code=p.wait(timeout=180)
+print(code)

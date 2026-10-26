@@ -1,0 +1,24 @@
+{
+  "before": {
+    "events": 200,
+    "ownedObjects": 12,
+    "eventDispatchMs": 6.6745,
+    "maxThreadPoolThreads": 14,
+    "ownedDecodeCount": 248,
+    "genericProviderCalls": 0,
+    "integrityReloadCleared": true,
+    "scope": "Synthetic editor move/zoom events and real verified decode; not native dragging"
+  },
+  "after": {
+    "events": 200,
+    "ownedObjects": 12,
+    "eventDispatchMs": 14.3743,
+    "maxThreadPoolThreads": 4,
+    "ownedDecodeCount": 36,
+    "genericProviderCalls": 0,
+    "integrityReloadCleared": true,
+    "scope": "Synthetic editor move/zoom events and real verified decode; not native dragging"
+  },
+  "scope": "Same synthetic12owned objects,200editorMove/Zoom events with decode gate held, explicit reload/integrity checks. Counts include12initial+12explicitreload+12corruption recheck after; layout-only adds0newdecode after. Automatic, not native drag.",
+  "notClaim": "eventDispatchMs increased6.6745→14.3743ms; report not a speedup claim. Queue/decode pressure reduced248→36, worker threads14→4. Decoder/format/hash algorithm unchanged."
+}

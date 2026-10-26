@@ -1,0 +1,10 @@
+{
+  "scope": "FINAL_CORE retained initial213PASS3FAIL",
+  "cases": [
+    "CollagePage_IsUsable",
+    "ProcessingTasks_IsSingleLargePanel",
+    "RecentProjects_HasDesignedEmptyState"
+  ],
+  "cause": "Legacy static-text substring mirrors referenced removed tutorial sentences. Replace only those literals with actual Add/Export command, ActiveTasks and empty ProjectHistory/nav binding checks; existing real CollageExport source-preservation test included in next scope.",
+  "safetyAssertionsUnchanged": true
+}
