@@ -1,11 +1,10 @@
 {
   "userDate": "2026-10-26",
-  "userTimezone": "Asia/Shanghai",
+  "userTimezone": "America/Phoenix",
   "hostTimezone": "China Standard Time",
   "rawUtcUnchanged": true,
   "rawEpochUnchanged": true,
   "earlierDocumentTimezone": "Asia/Shanghai",
   "earlierDocumentTimezoneWasIncorrect": true,
-  "scope": "Correct report metadata only; not a rerun/rewrite of raw observations, tests or package bytes",
-  "sealedPackageTimeZoneNote": "Existing sealed package README/validation PRODUCT timezone text is corrected by this receipt; binary, TRX, component hash and ZIP hash remain unchanged"
+  "scope": "Report metadata correction only; not a rerun or rewrite of raw observations or tests; sealed ZIP bytes kept immutable"
 }

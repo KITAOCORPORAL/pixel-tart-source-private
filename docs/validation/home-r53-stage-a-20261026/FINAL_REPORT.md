@@ -8,7 +8,7 @@
 - fetch并独立ls-remote核对公司 `company/whole-app-ui-copy-cleanup-20261026` = `48527fa0b7d3d063d5af5f6b62fa1a18cb36ef66`，无后续提交。旧家用成果已为其祖先，没有旧代码覆盖公司成果。
 - 20旧工作树HEAD/分支/status末次读回不变，主树211项未提交保留；无独有未推送提交被覆盖。无reset/clean/stash/rebase、main合并或强推。旧ZIP、数据根、阶段内失败构建/测试均保留。
 - 当前可运行源码/测试 SHA `901061433ce56dbb85e49ff5cc8c95ecd82760fe`；教程退役主提交 `d6590c99b7ed5f85953f898f9037b6b6ec31267b`；最后实施提交 `955548a1d4b061b7bb0bbeb0d9dc967c839b385f`只改安装器展示/产物名，与源码/测试零差异。验证提交和最终远端HEAD见PUSH_READBACK.json，不把文档HEAD冒充二进制源码。
-- 用户环境2026-10-26 Asia/Shanghai；实测主机China Standard Time已跨入10月27日。UTC/epoch原值不重写；目录20261026是任务标识。
+- 用户环境2026-10-26 America/Phoenix；实测主机China Standard Time已跨入10月27日。UTC/epoch原值不重写；目录20261026是任务标识。
 
 ## 真实设计来源
 原ZIP `C:/Users/Admin/Downloads/Compressed/光镜-UI-R5.3-定稿.zip`，SHA256 `16f75c0f40b506e4db57f140f389967264040cd8c5930ad24946b11c171e2ca9`已重验。独立解压 `N:/pixart/Guangjing-R53-Home-20261026/design-reference`，实读R5.3文档、dev-spec、layout-directions、暗室/即时胶片HTML、frames-collab-pack.js、移植检查、画布/策划HTML及简易/专业/布局B图片；完整路径/hash见DESIGN_SOURCE.json / DESIGN_MANIFEST.json。原型未作为WebView嵌入，未把设计包或授权未知联名素材装入产品。
