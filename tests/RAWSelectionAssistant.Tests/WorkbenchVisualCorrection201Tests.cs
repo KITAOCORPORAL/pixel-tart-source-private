@@ -31,10 +31,10 @@ public sealed class WorkbenchVisualCorrection201Tests
     [TestMethod] public void ToolboxEscape_ClosesPopup() => Contains(CodeBehind(), "Key.Escape", "WorkbenchToolboxPopup.IsOpen", "RequestEscapeCloseAsync", "RequestCancelAsync");
     [TestMethod] public void ToolboxFullPage_UsesThreeColumns() => Contains(MainXaml(), "x:Name=\"ToolboxFullPage\"", "<UniformGrid Columns=\"3\"", "ToolCatalogCard", "查看全部工具");
     [TestMethod] public void ProjectOverview_IsSingleLargePanel() => Contains(MainXaml(), "x:Name=\"ProjectOverviewCard\"", "Columns=\"4\" Rows=\"1\"", "WorkbenchInProgressCount", "WorkbenchAttentionCount", "WorkbenchAwaitingReturnCount", "WorkbenchCompletedCount");
-    [TestMethod] public void ProcessingTasks_IsSingleLargePanel() { Contains(MainXaml(), "x:Name=\"ProcessingTasksCard\"", "处理任务", "扫描、复制、压缩和转档任务"); Contains(Text("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs"), "暂无待处理任务"); }
+    [TestMethod] public void ProcessingTasks_IsSingleLargePanel() { Contains(MainXaml(), "x:Name=\"ProcessingTasksCard\"", "处理任务", "ItemsSource=\"{Binding TaskCenter.VisibleTasks}\""); Contains(Text("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs"), "暂无待处理任务"); }
     [TestMethod] public void RecentProjects_HasTabs() { var source = MainXaml(); Contains(source, "x:Name=\"RecentProjectsArea\"", "最近项目", "本地分片", "归片项目", "已完成", "查看全部"); DoesNotContain(source, "↻  刷新"); }
     [TestMethod] public void RecentProjectCard_HasCoverAndMetadata() => Contains(MainXaml(), "RecentProjectTile", "WorkbenchProjectCover.png", "个文件", "更新于", "继续处理");
-    [TestMethod] public void RecentProjects_HasDesignedEmptyState() => Contains(MainXaml(), "x:Name=\"RecentProjectsEmptyState\"", "还没有本地项目", "创建第一个本地分片任务");
+    [TestMethod] public void RecentProjects_HasDesignedEmptyState() => Contains(MainXaml(), "x:Name=\"RecentProjectsEmptyState\"", "还没有本地项目", "CommandParameter=\"LocalSplit\"", "ProjectHistory.Count");
     [TestMethod] public void CompletedProjects_HasIndependentEmptyState() => Contains(MainXaml(), "x:Name=\"CompletedProjectsEmptyState\"", "暂无已完成项目");
     [TestMethod] public void TaskCenter_HasLocalTaskData() => Contains(MainXaml(), "任务中心", "当前任务", "等待确认", "冲突文件", "未找到文件", "打开任务历史");
     [TestMethod] public void TaskCenterReviewData_IsClearlyDemoOnly()

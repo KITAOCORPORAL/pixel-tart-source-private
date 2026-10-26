@@ -14,7 +14,8 @@ public sealed class ProductToolboxWpfTests
     {
         var source = Text("src/RAWSelectionAssistant/Views/BatchCompressionModal.xaml");
         StringAssert.Contains(source, "独立输出目录");
-        StringAssert.Contains(source, "不覆盖、移动或删除源文件");
+        StringAssert.Contains(source, "Command=\"{Binding ChooseDestinationCommand}\"");
+        StringAssert.Contains(source, "Command=\"{Binding StartCommand}\"");
         StringAssert.Contains(source, "开始压缩");
         StringAssert.Contains(source, "AllowDrop=\"True\"");
         StringAssert.Contains(source, "Width=\"320\"");
