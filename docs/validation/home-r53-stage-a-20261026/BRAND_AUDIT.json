@@ -1,0 +1,50 @@
+{
+  "sourceSha": "901061433ce56dbb85e49ff5cc8c95ecd82760fe",
+  "xamlFiles": 95,
+  "translationValues": 2067,
+  "visibleFindings": [],
+  "installerLegacyPaths": [
+    {
+      "file": "installer\\RAWSelectionAssistant.iss",
+      "line": "DefaultDirName={autopf}\\像素蛋挞_CoreReliability_DevValidation",
+      "boundary": "retained compatibility install path"
+    },
+    {
+      "file": "installer\\RAWSelectionAssistant.iss",
+      "line": "DefaultDirName={autopf}\\像素蛋挞_ProductRedesign_RC1",
+      "boundary": "retained compatibility install path"
+    },
+    {
+      "file": "installer\\RAWSelectionAssistant.iss",
+      "line": "DefaultDirName={autopf}\\像素蛋挞_验收测试",
+      "boundary": "retained compatibility install path"
+    },
+    {
+      "file": "installer\\RAWSelectionAssistant.iss",
+      "line": "DefaultDirName={autopf}\\像素蛋挞_RC5_隔离验收",
+      "boundary": "retained compatibility install path"
+    },
+    {
+      "file": "installer\\RAWSelectionAssistant.iss",
+      "line": "DefaultDirName={autopf}\\像素蛋挞",
+      "boundary": "retained compatibility install path"
+    }
+  ],
+  "internalNamesPreserved": [
+    "assembly names",
+    "namespaces",
+    "PixelTart resource keys",
+    "legacy translation keys",
+    "drag formats",
+    "DB and migration paths",
+    "proof salt",
+    "old file metadata"
+  ],
+  "notRewritten": [
+    "user-authored project/watermark titles",
+    "existing photo metadata",
+    "historical documentation"
+  ],
+  "installerBuilt": false,
+  "rootCause": "Hardcoded old tutorial welcome/upgrade/help and other visible literals bypassed Branding.ProductName; startup still active for new profiles"
+}

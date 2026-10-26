@@ -1,0 +1,38 @@
+[
+  {
+    "host": "core",
+    "name": "AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16",
+    "outcome": "NotExecuted",
+    "message": "Assert.Inconclusive 失败。Explicitly authorized real corpus is opt-in; not a synthetic RAW replacement. at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ColorStudioRealCorpusTests.AuthorizedRealRawCorpusRecordsNewToolPixelsAndDerivedTiff16()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+  },
+  {
+    "host": "core",
+    "name": "AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError",
+    "outcome": "NotExecuted",
+    "message": "Assert.Inconclusive 失败。Real spatial evidence is explicitly opt-in. at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.ColorStudioSpatialScaleTests.AuthorizedFullRawSpatialEffectsRecordSameCoordinateScaleError()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+  },
+  {
+    "host": "wpf",
+    "name": "AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+    "outcome": "NotExecuted",
+    "message": "Assert.Inconclusive 失败。Explicit authorized frozen-photo manifest is required; no directory scan. at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.<>c.<<AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity>b__2_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+  },
+  {
+    "host": "wpf",
+    "name": "AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition",
+    "outcome": "NotExecuted",
+    "message": "Assert.Inconclusive 失败。Authorized local RAW corpus and evidence opt-in required. at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.AuthorizedRawInstantFilmFullOutputsUseFrozenDefinition()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+  },
+  {
+    "host": "wpf",
+    "name": "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+    "outcome": "NotExecuted",
+    "message": "Assert.Inconclusive 失败。Set authorized batch06 corpus and evidence directory; not a synthetic test. at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+  },
+  {
+    "host": "wpf",
+    "name": "BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately",
+    "outcome": "NotExecuted",
+    "message": "Assert.Inconclusive 失败。Measurement opt-in required. at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.BatchNineColdStagesMeasureLayoutFilmHqAndEncodingSeparately()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+  }
+]

@@ -1,0 +1,1451 @@
+[
+  {
+    "path": "affected-development\\results.trx",
+    "sha256": "62c532573f0c73d7be9e9e2c8e1cd9353a95f25ea8e7c9ae6a368fdbe0d39ee8",
+    "counts": {
+      "total": "724",
+      "executed": "719",
+      "passed": "704",
+      "failed": "15",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [
+      {
+        "name": "WindowGradeChangesOnlyWindowAndThreeExportsKeepDefinition (\"generic.white.square\")",
+        "message": "Assert.IsNotNull 失败。‘value’表达式:‘target.LastProfessionalOutput’。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsNotNullFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 202\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsNotNull(Object value, String message, String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 194\r\n   at RAWSelectionAssistant.WpfTests.LightPrintR3Tests.<>c__DisplayClass1_0.<<WindowGradeChangesOnlyWindowAndThreeExportsKeepDefinition>b__0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "TetherRuntime_ContainsCompactSafeUserFacingStates (\"选择一张照片后才能进入全屏监看\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.TetherCaptureView\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n             xmlns:studio=\"clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary\"\r\n             xmlns:projects=\"clr-namespace:RAWSelectionAssistant.Core.Services.Projects;assembly=RAWSelectionAssistant.Core\"\r\n             Focusable=\"True\" PreviewKeyDown=\"View_PreviewKeyDown\" PreviewKeyUp=\"View_PreviewKeyUp\" SizeChanged=\"View_SizeChanged\"\r\n             AutomationProperties.Name=\"联机拍摄现场监看工作区\"\r\n             AutomationProperties.HelpText=\"使用顶层看守文件夹接收照片并进行本地现场监看、比较与标注；L切换LUT，K锁定照片，C开关客户窗口，F11全屏\">\r\n    <UserControl.Resources>\r\n        <BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" />\r\n        <Style x:Key=\"IconButton\" TargetType=\"Button\" BasedOn=\"{StaticResource Av2IconButton}\" />\r\n        <Style x:Key=\"ThumbnailItemStyle\" TargetType=\"ListBoxItem\">\r\n            <Setter Property=\"HorizontalContentAlignment\" Value=\"Stretch\" />\r\n            <Setter Property=\"Padding\" Value=\"0\" />\r\n            <Setter Property=\"Margin\" Value=\"0,0,0,6\" />\r\n            <Setter Property=\"Background\" Value=\"Transparent\" />\r\n            <Setter Property=\"BorderThickness\" Value=\"0\" />\r\n            <EventSetter Event=\"Loaded\" Handler=\"ThumbnailItem_Loaded\" />\r\n            <EventSetter Event=\"Unloaded\" Handler=\"ThumbnailItem_Unloaded\" />\r\n        </Style>\r\n        <DataTemplate x:Key=\"InspectorTemplate\">\r\n            <ScrollViewer VerticalScrollBarVisibility=\"Auto\" HorizontalScrollBarVisibility=\"Disabled\" AutomationProperties.Name=\"现场监看右侧检查器\">\r\n                <StackPanel Margin=\"10\">\r\n                    <Expander Style=\"{StaticResource PixelTart.Section}\" x:Name=\"HistogramGroup\" Header=\"曝光评估\" IsExpanded=\"{Binding WorkspacePreferenceState.ExposureExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}\" AutomationProperties.Name=\"曝光评估工具组\">\r\n                        <StackPanel Margin=\"0,8,0,10\">\r\n                            <Grid><TextBlock Text=\"RGB直方图\" Style=\"{StaticResource SectionTitleText}\" /><Button Content=\"刷新\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Comm"
+      },
+      {
+        "name": "ProductRepositorySharesVersionsAcrossWorkspacesWithoutPathIdentity",
+        "message": "Assert.HasCount 失败。大小 2 的预期集合。实际： 3。‘collection’表达式:‘second.ActiveTarget.EditVersions’。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertCountFailed(String assertionName, Int32 expectedCount, Int32 actualCount, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.Count.cs:line 345\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.HasCount[T](String assertionName, Int32 expected, IEnumerable`1 collection, String message, String collectionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.Count.cs:line 330\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.HasCount[T](Int32 expected, IEnumerable`1 collection, String message, String collectionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.Count.cs:line 260\r\n   at RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.<>c.<<ProductRepositorySharesVersionsAcrossWorkspacesWithoutPathIdentity>b__1_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "DocumentPanel_ContainsSafePreviewAndRecoverySurface (\"未知格式仅显示元数据\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.BookingDocumentsPanel\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             Loaded=\"BookingDocumentsPanel_Loaded\" Unloaded=\"BookingDocumentsPanel_Unloaded\"\r\n             AllowDrop=\"True\" PreviewDragOver=\"BookingDocumentsPanel_PreviewDragOver\" Drop=\"BookingDocumentsPanel_Drop\"\r\n             AutomationProperties.Name=\"本地摄影资料关联\" AutomationProperties.HelpText=\"可拖入单个或多个受支持文件；拖入后默认仅关联原位置，不会自动复制\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <Border Style=\"{StaticResource PanelBorder}\" Padding=\"12\">\r\n        <StackPanel>\r\n            <Grid><StackPanel><TextBlock Text=\"本地摄影资料\" FontWeight=\"SemiBold\" /><TextBlock Text=\"默认仅关联原位置；不读取正文，不把文件写入数据库\" Style=\"{StaticResource CaptionText}\" Margin=\"0,3,0,0\" /></StackPanel><Button Content=\"检查资料状态\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Command=\"{Binding CheckAllCommand}\" AutomationProperties.Name=\"检查资料状态\" /></Grid>\r\n            <Border Margin=\"0,10,0,0\" Padding=\"12\" BorderBrush=\"{DynamicResource BorderBrush}\" BorderThickness=\"1\" CornerRadius=\"7\" Background=\"{DynamicResource SurfaceSecondaryBrush}\" AutomationProperties.Name=\"拖入本地资料区域\" AutomationProperties.HelpText=\"拖入后选择仅关联原位置、复制到项目资料目录并关联或取消；文件夹不会被扫描\">\r\n                <StackPanel HorizontalAlignment=\"Center\"><TextBlock Text=\"拖入图片、PDF、Office、TXT、MD 或其他资料\" HorizontalAlignment=\"Center\" /><TextBlock Text=\"支持一次添加多个文件；不支持递归导入文件夹\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" HorizontalAlignment=\"Center\" /></StackPanel>\r\n            </Border>\r\n            <!-- 兼容操作名称：添加文件（仅关联）；复制到项目资料目录并关联。RC4界面合并为一个“添加资料”按钮。 -->\r\n            <WrapPanel Margin=\"0,10,0,0\"><TextBlock Text=\"分类\" VerticalAlignment=\"Center\" /><ComboBox Width=\"150\" ItemsSource=\"{Binding DocumentTypes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedDocumentType}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"文档分类\" /><TextBlock Text=\"添加方式\" VerticalAlignment=\"Center\" Margin=\"12,0,0,0\" /><ComboBox Width=\"190\" ItemsSource=\"{Binding LinkModes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedLinkMode}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"资料添加方式\" /><Button  Style=\"{StaticResource SecondaryButton}\" Margin=\"7"
+      },
+      {
+        "name": "DocumentPanel_ContainsSafePreviewAndRecoverySurface (\"安全文件卡片\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.BookingDocumentsPanel\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             Loaded=\"BookingDocumentsPanel_Loaded\" Unloaded=\"BookingDocumentsPanel_Unloaded\"\r\n             AllowDrop=\"True\" PreviewDragOver=\"BookingDocumentsPanel_PreviewDragOver\" Drop=\"BookingDocumentsPanel_Drop\"\r\n             AutomationProperties.Name=\"本地摄影资料关联\" AutomationProperties.HelpText=\"可拖入单个或多个受支持文件；拖入后默认仅关联原位置，不会自动复制\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <Border Style=\"{StaticResource PanelBorder}\" Padding=\"12\">\r\n        <StackPanel>\r\n            <Grid><StackPanel><TextBlock Text=\"本地摄影资料\" FontWeight=\"SemiBold\" /><TextBlock Text=\"默认仅关联原位置；不读取正文，不把文件写入数据库\" Style=\"{StaticResource CaptionText}\" Margin=\"0,3,0,0\" /></StackPanel><Button Content=\"检查资料状态\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Command=\"{Binding CheckAllCommand}\" AutomationProperties.Name=\"检查资料状态\" /></Grid>\r\n            <Border Margin=\"0,10,0,0\" Padding=\"12\" BorderBrush=\"{DynamicResource BorderBrush}\" BorderThickness=\"1\" CornerRadius=\"7\" Background=\"{DynamicResource SurfaceSecondaryBrush}\" AutomationProperties.Name=\"拖入本地资料区域\" AutomationProperties.HelpText=\"拖入后选择仅关联原位置、复制到项目资料目录并关联或取消；文件夹不会被扫描\">\r\n                <StackPanel HorizontalAlignment=\"Center\"><TextBlock Text=\"拖入图片、PDF、Office、TXT、MD 或其他资料\" HorizontalAlignment=\"Center\" /><TextBlock Text=\"支持一次添加多个文件；不支持递归导入文件夹\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" HorizontalAlignment=\"Center\" /></StackPanel>\r\n            </Border>\r\n            <!-- 兼容操作名称：添加文件（仅关联）；复制到项目资料目录并关联。RC4界面合并为一个“添加资料”按钮。 -->\r\n            <WrapPanel Margin=\"0,10,0,0\"><TextBlock Text=\"分类\" VerticalAlignment=\"Center\" /><ComboBox Width=\"150\" ItemsSource=\"{Binding DocumentTypes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedDocumentType}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"文档分类\" /><TextBlock Text=\"添加方式\" VerticalAlignment=\"Center\" Margin=\"12,0,0,0\" /><ComboBox Width=\"190\" ItemsSource=\"{Binding LinkModes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedLinkMode}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"资料添加方式\" /><Button  Style=\"{StaticResource SecondaryButton}\" Margin=\"7"
+      },
+      {
+        "name": "FiveTabsKeepDenseLayoutFiltersAndLockedDraftGuard",
+        "message": "Assert.AreEqual 失败。应为: <304>，实际为: <0>。‘expected’表达式:‘304d’,‘actual’表达式:‘panel.ActualWidth’。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405\r\n   at RAWSelectionAssistant.WpfTests.LightPrintR3Tests.<>c.<<FiveTabsKeepDenseLayoutFiltersAndLockedDraftGuard>b__3_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "ExplicitVersionPreviewSaveReloadAndFullExportUseSameDefinition",
+        "message": "Assert.AreEqual 失败。应为: <4>，实际为: <1>。‘expected’表达式:‘4’,‘actual’表达式:‘receipt.ProcessingVersion’。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405\r\n   at RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.ExplicitVersionPreviewSaveReloadAndFullExportUseSameDefinition()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "FinancePage_ContainsRequiredLocalAccountingSurface (\"不会删除电脑中的原文件\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.FinanceView\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n             Loaded=\"FinanceView_Loaded\"\r\n             AutomationProperties.Name=\"摄影收支\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <ScrollViewer VerticalScrollBarVisibility=\"Auto\" HorizontalScrollBarVisibility=\"Auto\"><Grid Background=\"{DynamicResource ContentBackgroundBrush}\" Margin=\"22,18\" MinWidth=\"860\" MinHeight=\"570\">\r\n        <Grid.RowDefinitions><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"*\" /><RowDefinition Height=\"Auto\" /></Grid.RowDefinitions>\r\n\r\n        <views:StudioPageHeader Style=\"{StaticResource PixelTart.PageHeader}\">\r\n            <StackPanel><TextBlock Text=\"摄影收支\" Style=\"{StaticResource PageTitleText}\" /><TextBlock Text=\"收支仅存本机，不替代会计或税务软件。\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" /></StackPanel>\r\n            <StackPanel Orientation=\"Horizontal\" HorizontalAlignment=\"Right\"><Button Content=\"新建收入\" Style=\"{StaticResource PrimaryButton}\" Command=\"{Binding NewIncomeCommand}\" AutomationProperties.Name=\"新建收入\" /><Button Content=\"新建支出\" Style=\"{StaticResource SecondaryButton}\" Command=\"{Binding NewExpenseCommand}\" Margin=\"7,0,0,0\" AutomationProperties.Name=\"新建支出\" /><Button Content=\"导出 CSV\" Style=\"{StaticResource SecondaryButton}\" Command=\"{Binding ExportCommand}\" Margin=\"7,0,0,0\" AutomationProperties.Name=\"主动导出筛选后的收支CSV\" /></StackPanel>\r\n        </views:StudioPageHeader>\r\n\r\n        <UniformGrid Grid.Row=\"1\" Columns=\"6\" Margin=\"0,14,0,12\">\r\n            <Border Style=\"{StaticResource PixelTart.StatusStrip.Item}\" Margin=\"0,0,7,0\"><StackPanel><TextBlock Text=\"本月收入\" Style=\"{StaticResource CaptionText}\" /><TextBlock Text=\"{Binding MonthIncomeText}\" FontSize=\"{DynamicResource Type.Metric.FontSize}\" FontWeight=\"SemiBold\" Margin=\"0,5,0,0\" /></StackPanel></Border>\r\n            <Border Style=\"{StaticResource PixelTart.StatusStrip.Item}\" Margin=\"0,0,7,0\"><StackPanel><TextBlock Text=\"本月支出\" Style=\"{StaticResource CaptionText}\" /><TextBlock Text=\"{Binding MonthExpenseText}\" FontSize=\"{DynamicRe"
+      },
+      {
+        "name": "WindowGradeChangesOnlyWindowAndThreeExportsKeepDefinition (\"generic.white.circle\")",
+        "message": "Assert.IsNotNull 失败。‘value’表达式:‘target.LastProfessionalOutput’。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsNotNullFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 202\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsNotNull(Object value, String message, String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 194\r\n   at RAWSelectionAssistant.WpfTests.LightPrintR3Tests.<>c__DisplayClass1_0.<<WindowGradeChangesOnlyWindowAndThreeExportsKeepDefinition>b__0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "FinancePage_ContainsRequiredLocalAccountingSurface (\"金额信息仅保存在本机\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.FinanceView\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n             Loaded=\"FinanceView_Loaded\"\r\n             AutomationProperties.Name=\"摄影收支\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <ScrollViewer VerticalScrollBarVisibility=\"Auto\" HorizontalScrollBarVisibility=\"Auto\"><Grid Background=\"{DynamicResource ContentBackgroundBrush}\" Margin=\"22,18\" MinWidth=\"860\" MinHeight=\"570\">\r\n        <Grid.RowDefinitions><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"*\" /><RowDefinition Height=\"Auto\" /></Grid.RowDefinitions>\r\n\r\n        <views:StudioPageHeader Style=\"{StaticResource PixelTart.PageHeader}\">\r\n            <StackPanel><TextBlock Text=\"摄影收支\" Style=\"{StaticResource PageTitleText}\" /><TextBlock Text=\"收支仅存本机，不替代会计或税务软件。\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" /></StackPanel>\r\n            <StackPanel Orientation=\"Horizontal\" HorizontalAlignment=\"Right\"><Button Content=\"新建收入\" Style=\"{StaticResource PrimaryButton}\" Command=\"{Binding NewIncomeCommand}\" AutomationProperties.Name=\"新建收入\" /><Button Content=\"新建支出\" Style=\"{StaticResource SecondaryButton}\" Command=\"{Binding NewExpenseCommand}\" Margin=\"7,0,0,0\" AutomationProperties.Name=\"新建支出\" /><Button Content=\"导出 CSV\" Style=\"{StaticResource SecondaryButton}\" Command=\"{Binding ExportCommand}\" Margin=\"7,0,0,0\" AutomationProperties.Name=\"主动导出筛选后的收支CSV\" /></StackPanel>\r\n        </views:StudioPageHeader>\r\n\r\n        <UniformGrid Grid.Row=\"1\" Columns=\"6\" Margin=\"0,14,0,12\">\r\n            <Border Style=\"{StaticResource PixelTart.StatusStrip.Item}\" Margin=\"0,0,7,0\"><StackPanel><TextBlock Text=\"本月收入\" Style=\"{StaticResource CaptionText}\" /><TextBlock Text=\"{Binding MonthIncomeText}\" FontSize=\"{DynamicResource Type.Metric.FontSize}\" FontWeight=\"SemiBold\" Margin=\"0,5,0,0\" /></StackPanel></Border>\r\n            <Border Style=\"{StaticResource PixelTart.StatusStrip.Item}\" Margin=\"0,0,7,0\"><StackPanel><TextBlock Text=\"本月支出\" Style=\"{StaticResource CaptionText}\" /><TextBlock Text=\"{Binding MonthExpenseText}\" FontSize=\"{DynamicRe"
+      },
+      {
+        "name": "LegacyRawCurrentEditsVersionSwitchReopenExportAndPublishingUseFullPixels",
+        "message": "Assert.AreEqual 失败。应为: <6>，实际为: <2>。‘expected’表达式:‘6’,‘actual’表达式:‘receipt.ProcessingVersion’。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405\r\n   at RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.LegacyRawCurrentEditsVersionSwitchReopenExportAndPublishingUseFullPixels()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "FullJpegAdapterRoundTripsWorkspaceVersionsAndNeverUsesProxyForExport",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests。FullJpegAdapterRoundTripsWorkspaceVersionsAndNeverUsesProxyForExport 引发了异常: \r\nSystem.IO.InvalidDataException: Unsupported TIFF sample layout. at RAWSelectionAssistant.Core.Services.Export.TiffReadBack.Read(Stream source)\r\n   at RAWSelectionAssistant.WpfTests.BatchEightInstantFilmProductTests.FullJpegAdapterRoundTripsWorkspaceVersionsAndNeverUsesProxyForExport()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "IndependentEditVersionsRestoreTheirOwnExposure",
+        "message": "Assert.AreEqual 失败。应为: <0.5>，实际为: <0>。‘expected’表达式:‘.5’,‘actual’表达式:‘workspace.Editor.Exposure’。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405\r\n   at RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.<>c.<<IndependentEditVersionsRestoreTheirOwnExposure>b__2_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "TetherRuntime_ContainsCompactSafeUserFacingStates (\"缩略图会按需加载\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.TetherCaptureView\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n             xmlns:studio=\"clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary\"\r\n             xmlns:projects=\"clr-namespace:RAWSelectionAssistant.Core.Services.Projects;assembly=RAWSelectionAssistant.Core\"\r\n             Focusable=\"True\" PreviewKeyDown=\"View_PreviewKeyDown\" PreviewKeyUp=\"View_PreviewKeyUp\" SizeChanged=\"View_SizeChanged\"\r\n             AutomationProperties.Name=\"联机拍摄现场监看工作区\"\r\n             AutomationProperties.HelpText=\"使用顶层看守文件夹接收照片并进行本地现场监看、比较与标注；L切换LUT，K锁定照片，C开关客户窗口，F11全屏\">\r\n    <UserControl.Resources>\r\n        <BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" />\r\n        <Style x:Key=\"IconButton\" TargetType=\"Button\" BasedOn=\"{StaticResource Av2IconButton}\" />\r\n        <Style x:Key=\"ThumbnailItemStyle\" TargetType=\"ListBoxItem\">\r\n            <Setter Property=\"HorizontalContentAlignment\" Value=\"Stretch\" />\r\n            <Setter Property=\"Padding\" Value=\"0\" />\r\n            <Setter Property=\"Margin\" Value=\"0,0,0,6\" />\r\n            <Setter Property=\"Background\" Value=\"Transparent\" />\r\n            <Setter Property=\"BorderThickness\" Value=\"0\" />\r\n            <EventSetter Event=\"Loaded\" Handler=\"ThumbnailItem_Loaded\" />\r\n            <EventSetter Event=\"Unloaded\" Handler=\"ThumbnailItem_Unloaded\" />\r\n        </Style>\r\n        <DataTemplate x:Key=\"InspectorTemplate\">\r\n            <ScrollViewer VerticalScrollBarVisibility=\"Auto\" HorizontalScrollBarVisibility=\"Disabled\" AutomationProperties.Name=\"现场监看右侧检查器\">\r\n                <StackPanel Margin=\"10\">\r\n                    <Expander Style=\"{StaticResource PixelTart.Section}\" x:Name=\"HistogramGroup\" Header=\"曝光评估\" IsExpanded=\"{Binding WorkspacePreferenceState.ExposureExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}\" AutomationProperties.Name=\"曝光评估工具组\">\r\n                        <StackPanel Margin=\"0,8,0,10\">\r\n                            <Grid><TextBlock Text=\"RGB直方图\" Style=\"{StaticResource SectionTitleText}\" /><Button Content=\"刷新\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Comm"
+      },
+      {
+        "name": "DocumentPanel_ContainsSafePreviewAndRecoverySurface (\"Office 文件不执行宏\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.BookingDocumentsPanel\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             Loaded=\"BookingDocumentsPanel_Loaded\" Unloaded=\"BookingDocumentsPanel_Unloaded\"\r\n             AllowDrop=\"True\" PreviewDragOver=\"BookingDocumentsPanel_PreviewDragOver\" Drop=\"BookingDocumentsPanel_Drop\"\r\n             AutomationProperties.Name=\"本地摄影资料关联\" AutomationProperties.HelpText=\"可拖入单个或多个受支持文件；拖入后默认仅关联原位置，不会自动复制\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <Border Style=\"{StaticResource PanelBorder}\" Padding=\"12\">\r\n        <StackPanel>\r\n            <Grid><StackPanel><TextBlock Text=\"本地摄影资料\" FontWeight=\"SemiBold\" /><TextBlock Text=\"默认仅关联原位置；不读取正文，不把文件写入数据库\" Style=\"{StaticResource CaptionText}\" Margin=\"0,3,0,0\" /></StackPanel><Button Content=\"检查资料状态\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Command=\"{Binding CheckAllCommand}\" AutomationProperties.Name=\"检查资料状态\" /></Grid>\r\n            <Border Margin=\"0,10,0,0\" Padding=\"12\" BorderBrush=\"{DynamicResource BorderBrush}\" BorderThickness=\"1\" CornerRadius=\"7\" Background=\"{DynamicResource SurfaceSecondaryBrush}\" AutomationProperties.Name=\"拖入本地资料区域\" AutomationProperties.HelpText=\"拖入后选择仅关联原位置、复制到项目资料目录并关联或取消；文件夹不会被扫描\">\r\n                <StackPanel HorizontalAlignment=\"Center\"><TextBlock Text=\"拖入图片、PDF、Office、TXT、MD 或其他资料\" HorizontalAlignment=\"Center\" /><TextBlock Text=\"支持一次添加多个文件；不支持递归导入文件夹\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" HorizontalAlignment=\"Center\" /></StackPanel>\r\n            </Border>\r\n            <!-- 兼容操作名称：添加文件（仅关联）；复制到项目资料目录并关联。RC4界面合并为一个“添加资料”按钮。 -->\r\n            <WrapPanel Margin=\"0,10,0,0\"><TextBlock Text=\"分类\" VerticalAlignment=\"Center\" /><ComboBox Width=\"150\" ItemsSource=\"{Binding DocumentTypes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedDocumentType}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"文档分类\" /><TextBlock Text=\"添加方式\" VerticalAlignment=\"Center\" Margin=\"12,0,0,0\" /><ComboBox Width=\"190\" ItemsSource=\"{Binding LinkModes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedLinkMode}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"资料添加方式\" /><Button  Style=\"{StaticResource SecondaryButton}\" Margin=\"7"
+      }
+    ],
+    "authoritative": false
+  },
+  {
+    "path": "core-new\\results.trx",
+    "sha256": "9b05b34cf7d6249dff4a291da1aa901c79dfab9fce2532058811c7323d7d342a",
+    "counts": {
+      "total": "3",
+      "executed": "3",
+      "passed": "3",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final\\tests-core\\results.trx",
+    "sha256": "e2024e052d737125a6cc85261952569c0f8f51f426c0d471ffb06c4897499b21",
+    "counts": {
+      "total": "64",
+      "executed": "62",
+      "passed": "62",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final\\tests-wpf\\results.trx",
+    "sha256": "96a724d88fcdbba4c7f468d4c2f79d79d606a493f89cbe50cdc8c3dcd2c1d822",
+    "counts": {
+      "total": "61",
+      "executed": "57",
+      "passed": "57",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r10\\tests-core\\results.trx",
+    "sha256": "37f2b1e78ab8053901f323d418fcf3ab1e7a524d21a1f130d57c0edd6d6c9fde",
+    "counts": {
+      "total": "213",
+      "executed": "211",
+      "passed": "211",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": true
+  },
+  {
+    "path": "final-r10\\tests-wpf\\results.trx",
+    "sha256": "568d764323eb0723884643cd7d1850f006782b94e43acc8a425c72285f21f3b6",
+    "counts": {
+      "total": "112",
+      "executed": "108",
+      "passed": "108",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": true
+  },
+  {
+    "path": "final-r2\\tests-core\\results.trx",
+    "sha256": "75ba622056c61632f5df1c267829c2f6de77ce86b691d944ad15a07b22974e25",
+    "counts": {
+      "total": "67",
+      "executed": "65",
+      "passed": "65",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r2\\tests-wpf\\results.trx",
+    "sha256": "bf87e3a457bd9b71bc92046ecc6fe3be36710fe4d7ecf6602e15522051a66135",
+    "counts": {
+      "total": "61",
+      "executed": "57",
+      "passed": "57",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r3\\tests-core\\results.trx",
+    "sha256": "0193bb435d3bf71bffd3fff1f3e43344ac4031cfa24609085442d9267109dae9",
+    "counts": {
+      "total": "67",
+      "executed": "65",
+      "passed": "65",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r3\\tests-wpf\\results.trx",
+    "sha256": "e2e2480981dcb57be7c37945d6f1c4a66a5415302cf59de0d20444dfb5495a2b",
+    "counts": {
+      "total": "62",
+      "executed": "58",
+      "passed": "58",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r4\\tests-core\\results.trx",
+    "sha256": "dd046e5742e3b4e786f4ae891171c18f7bc07389ac0d72e4f7234b628bcf2c39",
+    "counts": {
+      "total": "67",
+      "executed": "65",
+      "passed": "65",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r4\\tests-wpf\\results.trx",
+    "sha256": "e55de5723967581fc3fc5e9da66cafd2dd34aebbf1c6e1d181b9b66e629fb0cf",
+    "counts": {
+      "total": "64",
+      "executed": "60",
+      "passed": "60",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r5\\tests-core\\results.trx",
+    "sha256": "7daee6bab09435ee017991da483e9a054ac8664ffe6373112feb596eb8bb23d2",
+    "counts": {
+      "total": "67",
+      "executed": "65",
+      "passed": "65",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r5\\tests-wpf\\results.trx",
+    "sha256": "d7bc478386c801abba74d18ce7b3a120c6fddce4c2430c07c0d56cfffe2bb80c",
+    "counts": {
+      "total": "66",
+      "executed": "62",
+      "passed": "62",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r6\\tests-core\\results.trx",
+    "sha256": "084b7c5c44b9395a881c9acbf1925fe7ef39818132e61d0c20d81281c7d01476",
+    "counts": {
+      "total": "67",
+      "executed": "65",
+      "passed": "65",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r6\\tests-wpf\\results.trx",
+    "sha256": "3d792e411b6351200fe66ec4b0cb022327a1376b19cedb8a79f2411b13a24918",
+    "counts": {
+      "total": "66",
+      "executed": "62",
+      "passed": "62",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r7\\tests-core\\results.trx",
+    "sha256": "31ea3151b73fde439728b0b47c7ccd68c44238ecba3b630e9f23e8b785d0c3ef",
+    "counts": {
+      "total": "212",
+      "executed": "210",
+      "passed": "210",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r7\\tests-wpf\\results.trx",
+    "sha256": "5709fe057e01be205349411b047031e5611c9179056d3fd833fe43e94fd224de",
+    "counts": {
+      "total": "111",
+      "executed": "107",
+      "passed": "107",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "final-r9\\tests-core\\results.trx",
+    "sha256": "671a546628d69062d84d10896aba9e95739b4f710c8b5ca822684de4fb4848bd",
+    "counts": {
+      "total": "213",
+      "executed": "211",
+      "passed": "210",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [
+      {
+        "name": "MainWindow_AppearancePageExposesSingleDarkThemeAndRemainingOptions",
+        "message": "StringAssert.Contains 失败。字符串“<Window x:Class=\"RAWSelectionAssistant.MainWindow\"\r\n        xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n        xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n        xmlns:d=\"http://schemas.microsoft.com/expression/blend/2008\"\r\n        xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\"\r\n        xmlns:conv=\"clr-namespace:RAWSelectionAssistant.Converters\"\r\n        xmlns:services=\"clr-namespace:RAWSelectionAssistant.Services\"\r\n        xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n        xmlns:studio=\"clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary\"\r\n        xmlns:shell=\"clr-namespace:System.Windows.Shell;assembly=PresentationFramework\"\r\n        mc:Ignorable=\"d\" Title=\"Kitao Studio 光镜\" Icon=\"Assets/AppIcon.ico\"\r\n        Width=\"1600\" Height=\"920\" MinWidth=\"1180\" MinHeight=\"720\"\r\n        WindowStartupLocation=\"CenterScreen\" Background=\"{DynamicResource WindowBackgroundBrush}\" Foreground=\"{DynamicResource TextPrimaryBrush}\"\r\n        WindowStyle=\"None\" ResizeMode=\"CanResize\" SnapsToDevicePixels=\"True\" UseLayoutRounding=\"True\"\r\n        AllowDrop=\"True\" Closing=\"Window_Closing\" PreviewKeyDown=\"Window_PreviewKeyDown\"\r\n        DragOver=\"Window_DragOver\" Drop=\"Window_Drop\">\r\n    <shell:WindowChrome.WindowChrome>\r\n        <shell:WindowChrome CaptionHeight=\"52\" ResizeBorderThickness=\"6\" GlassFrameThickness=\"0\" CornerRadius=\"10\" UseAeroCaptionButtons=\"False\" />\r\n    </shell:WindowChrome.WindowChrome>\r\n    <Window.InputBindings>\r\n        <KeyBinding Key=\"N\" Modifiers=\"Control\" Command=\"{Binding NewProjectCommand}\" />\r\n        <KeyBinding Key=\"S\" Modifiers=\"Control\" Command=\"{Binding SaveProjectCommand}\" />\r\n        <KeyBinding Key=\"B\" Modifiers=\"Control\" Command=\"{Binding ToggleSidebarCommand}\" />\r\n        <KeyBinding Key=\"F\" Modifiers=\"Control+Shift\" Command=\"{Binding FeedbackCommand}\" />\r\n        <KeyBinding Key=\"F1\" Command=\"{Binding HelpCommand}\" />\r\n        <KeyBinding Key=\"Enter\" Modifiers=\"Alt\" Command=\"{Binding ShowDetailsCommand}\" CommandParameter=\"{Binding SelectedSelection}\" />\r\n    </Window.InputBindings>\r\n    <Window.Resources>\r\n        <!-- RC5 keeps the legacy vector resource aliases IconCollapse/IconExpand for older extensions; sidebar visuals use the unique IconPanel* keys below. -->\r\n        <conv:StatusToTextConverter x:Key=\"St"
+      }
+    ],
+    "authoritative": false
+  },
+  {
+    "path": "final-r9\\tests-wpf\\results.trx",
+    "sha256": "21479ded2381650b8c8cb31de961859f1b684b4e6b2bdbbe8b97c97db8be85c0",
+    "counts": {
+      "total": "112",
+      "executed": "108",
+      "passed": "108",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "freeze-tests\\results.trx",
+    "sha256": "9382344edd32ac3a877c071874f2b2bc38ea6c2054ecab231fa7a28423a83cda",
+    "counts": {
+      "total": "7",
+      "executed": "7",
+      "passed": "7",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "new-lifecycle\\results.trx",
+    "sha256": "15e3bacf2e9da790018dca05c4db2b4db3f6eb05e01cc8a1ba5376d4e6d97c10",
+    "counts": {
+      "total": "8",
+      "executed": "8",
+      "passed": "8",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "new-tests\\results.trx",
+    "sha256": "525e7977075bde5ed8e087979487209da8190a9de4b8a39a6a8f7902eeb032c5",
+    "counts": {
+      "total": "4",
+      "executed": "4",
+      "passed": "4",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "new-tests-r2\\results.trx",
+    "sha256": "e6bac98d7bb5e4ce7442a90073f800fb1260d01870aa5b771ccd903d12c1b689",
+    "counts": {
+      "total": "4",
+      "executed": "4",
+      "passed": "4",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "new-tests-r3\\results.trx",
+    "sha256": "6542210c0f5b42a9ec5264c7b94c3a0f982c69c9aa6124019cff3e13b88a863a",
+    "counts": {
+      "total": "5",
+      "executed": "5",
+      "passed": "5",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "new-tests-r4\\results.trx",
+    "sha256": "5d074ac1c61f6001a3183b16d63e9bcc7529087151f24fc57c6d55b194f3fedc",
+    "counts": {
+      "total": "6",
+      "executed": "6",
+      "passed": "0",
+      "failed": "6",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [
+      {
+        "name": "PersistentSyntheticDarkroomSampleAndOffscreenLayoutEvidence",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DarkroomStageATests。PersistentSyntheticDarkroomSampleAndOffscreenLayoutEvidence 引发了异常: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object. at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.InitializeR53Autosave()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.InitializeSessionCommands()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel..ctor(IDialogService dialogs, IReferenceRenderBackend renderBackend, IRawDecoder rawDecoder, MatchV4ProductExecutor matchV4Executor, Func`1 assetRepositoryFactory, StudioVersionRepository versionRepository, IProfessionalRawDecoder professionalRawDecoder)\r\n   at RAWSelectionAssistant.WpfTests.R53DarkroomStageATests.<>c.<<PersistentSyntheticDarkroomSampleAndOffscreenLayoutEvidence>b__10_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "DipBreakpointsAndProfessionalNodeFilmstripOrderAreRealLayout",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DarkroomStageATests。DipBreakpointsAndProfessionalNodeFilmstripOrderAreRealLayout 引发了异常: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object. at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.InitializeR53Autosave()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.InitializeSessionCommands()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel..ctor(IDialogService dialogs, IReferenceRenderBackend renderBackend, IRawDecoder rawDecoder, MatchV4ProductExecutor matchV4Executor, Func`1 assetRepositoryFactory, StudioVersionRepository versionRepository, IProfessionalRawDecoder professionalRawDecoder)\r\n   at RAWSelectionAssistant.WpfTests.R53DarkroomStageATests.<>c.<<DipBreakpointsAndProfessionalNodeFilmstripOrderAreRealLayout>b__8_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "MainVariantOutputAndDebouncedExistingSessionSaveUseSharedPipeline",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DarkroomStageATests。MainVariantOutputAndDebouncedExistingSessionSaveUseSharedPipeline 引发了异常: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object. at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.InitializeR53Autosave()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.InitializeSessionCommands()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel..ctor(IDialogService dialogs, IReferenceRenderBackend renderBackend, IRawDecoder rawDecoder, MatchV4ProductExecutor matchV4Executor, Func`1 assetRepositoryFactory, StudioVersionRepository versionRepository, IProfessionalRawDecoder professionalRawDecoder)\r\n   at RAWSelectionAssistant.WpfTests.R53DarkroomStageATests.<>c.<<MainVariantOutputAndDebouncedExistingSessionSaveUseSharedPipeline>b__9_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "OriginalAndMainVariantDeleteConfirmUndoAndIsolationPersist",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DarkroomStageATests。OriginalAndMainVariantDeleteConfirmUndoAndIsolationPersist 引发了异常: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object. at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.InitializeR53Autosave()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.InitializeSessionCommands()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel..ctor(IDialogService dialogs, IReferenceRenderBackend renderBackend, IRawDecoder rawDecoder, MatchV4ProductExecutor matchV4Executor, Func`1 assetRepositoryFactory, StudioVersionRepository versionRepository, IProfessionalRawDecoder professionalRawDecoder)\r\n   at RAWSelectionAssistant.WpfTests.R53DarkroomStageATests.<>c.<<OriginalAndMainVariantDeleteConfirmUndoAndIsolationPersist>b__6_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "SamePhotoSimpleProfessionalSaveReopenAndExportShareDefinition",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DarkroomStageATests。SamePhotoSimpleProfessionalSaveReopenAndExportShareDefinition 引发了异常: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object. at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.InitializeR53Autosave()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.InitializeSessionCommands()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel..ctor(IDialogService dialogs, IReferenceRenderBackend renderBackend, IRawDecoder rawDecoder, MatchV4ProductExecutor matchV4Executor, Func`1 assetRepositoryFactory, StudioVersionRepository versionRepository, IProfessionalRawDecoder professionalRawDecoder)\r\n   at RAWSelectionAssistant.WpfTests.R53DarkroomStageATests.<>c.<<SamePhotoSimpleProfessionalSaveReopenAndExportShareDefinition>b__5_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "LockedNodesBlockParametersNameOrderDeleteButKeepVisibilityUndo",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DarkroomStageATests。LockedNodesBlockParametersNameOrderDeleteButKeepVisibilityUndo 引发了异常: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object. at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.InitializeR53Autosave()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.InitializeSessionCommands()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel..ctor(IDialogService dialogs, IReferenceRenderBackend renderBackend, IRawDecoder rawDecoder, MatchV4ProductExecutor matchV4Executor, Func`1 assetRepositoryFactory, StudioVersionRepository versionRepository, IProfessionalRawDecoder professionalRawDecoder)\r\n   at RAWSelectionAssistant.WpfTests.R53DarkroomStageATests.<>c.<<LockedNodesBlockParametersNameOrderDeleteButKeepVisibilityUndo>b__7_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ],
+    "authoritative": false
+  },
+  {
+    "path": "new-tests-r5\\results.trx",
+    "sha256": "6e677408cdbbc3eeaa3da9fe0f51d1011e9db95cf1f4326f28d88683dcdeee42",
+    "counts": {
+      "total": "6",
+      "executed": "6",
+      "passed": "6",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "reopen-readonly\\results.trx",
+    "sha256": "d59cc6f770e1fb849526aa5581af553d4e1cafb0cb60895749bfffd658d63e0f",
+    "counts": {
+      "total": "2",
+      "executed": "2",
+      "passed": "2",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-development\\core\\results.trx",
+    "sha256": "4bdb12ef1ac05ceb18300347c2410ae67d74b2d98158fda831455afee9504b2b",
+    "counts": {
+      "total": "145",
+      "executed": "145",
+      "passed": "142",
+      "failed": "3",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [
+      {
+        "name": "MainWindow_TutorialTargetsRemainAvailable",
+        "message": "StringAssert.Contains 失败。字符串“<Window x:Class=\"RAWSelectionAssistant.MainWindow\"\r\n        xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n        xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n        xmlns:d=\"http://schemas.microsoft.com/expression/blend/2008\"\r\n        xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\"\r\n        xmlns:conv=\"clr-namespace:RAWSelectionAssistant.Converters\"\r\n        xmlns:services=\"clr-namespace:RAWSelectionAssistant.Services\"\r\n        xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n        xmlns:studio=\"clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary\"\r\n        xmlns:shell=\"clr-namespace:System.Windows.Shell;assembly=PresentationFramework\"\r\n        mc:Ignorable=\"d\" Title=\"Kitao Studio 光镜\" Icon=\"Assets/AppIcon.ico\"\r\n        Width=\"1600\" Height=\"920\" MinWidth=\"1180\" MinHeight=\"720\"\r\n        WindowStartupLocation=\"CenterScreen\" Background=\"{DynamicResource WindowBackgroundBrush}\" Foreground=\"{DynamicResource TextPrimaryBrush}\"\r\n        WindowStyle=\"None\" ResizeMode=\"CanResize\" SnapsToDevicePixels=\"True\" UseLayoutRounding=\"True\"\r\n        AllowDrop=\"True\" Closing=\"Window_Closing\" PreviewKeyDown=\"Window_PreviewKeyDown\"\r\n        DragOver=\"Window_DragOver\" Drop=\"Window_Drop\">\r\n    <shell:WindowChrome.WindowChrome>\r\n        <shell:WindowChrome CaptionHeight=\"52\" ResizeBorderThickness=\"6\" GlassFrameThickness=\"0\" CornerRadius=\"10\" UseAeroCaptionButtons=\"False\" />\r\n    </shell:WindowChrome.WindowChrome>\r\n    <Window.InputBindings>\r\n        <KeyBinding Key=\"N\" Modifiers=\"Control\" Command=\"{Binding NewProjectCommand}\" />\r\n        <KeyBinding Key=\"S\" Modifiers=\"Control\" Command=\"{Binding SaveProjectCommand}\" />\r\n        <KeyBinding Key=\"B\" Modifiers=\"Control\" Command=\"{Binding ToggleSidebarCommand}\" />\r\n        <KeyBinding Key=\"F\" Modifiers=\"Control+Shift\" Command=\"{Binding FeedbackCommand}\" />\r\n        <KeyBinding Key=\"F1\" Command=\"{Binding HelpCommand}\" />\r\n        <KeyBinding Key=\"Enter\" Modifiers=\"Alt\" Command=\"{Binding ShowDetailsCommand}\" CommandParameter=\"{Binding SelectedSelection}\" />\r\n    </Window.InputBindings>\r\n    <Window.Resources>\r\n        <!-- RC5 keeps the legacy vector resource aliases IconCollapse/IconExpand for older extensions; sidebar visuals use the unique IconPanel* keys below. -->\r\n        <conv:StatusToTextConverter x:Key=\"St"
+      },
+      {
+        "name": "TutorialOfferDialog_UsesDynamicTheme",
+        "message": "测试方法 RAWSelectionAssistant.Tests.UiDesignSystem140Tests。TutorialOfferDialog_UsesDynamicTheme 引发了异常: \r\nSystem.IO.FileNotFoundException: Could not find file 'N:\\pixart\\guangjing-r53-stage-a-20261026\\src\\RAWSelectionAssistant\\Views\\UpgradeTutorialWindow.xaml'. at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)\r\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\r\n   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\r\n   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\r\n   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)\r\n   at System.IO.File.ReadAllText(String path, Encoding encoding)\r\n   at RAWSelectionAssistant.Tests.UiDesignSystem140Tests.Text(String relativePath)\r\n   at RAWSelectionAssistant.Tests.UiDesignSystem140Tests.Contains(String relativePath, String[] values)\r\n   at RAWSelectionAssistant.Tests.UiDesignSystem140Tests.TutorialOfferDialog_UsesDynamicTheme()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "name": "Version_InstallerOutputs230Packages",
+        "message": "StringAssert.Contains 失败。字符串“#define MyAppName \"Kitao Studio 光镜\"\r\n#define MyAppVersion \"2.3.0\"\r\n#define MyAppPublisher \"光镜\"\r\n#define MyAppExeName \"KitaoPhotoSelector.exe\"\r\n#define MyPublishDir \"..\\artifacts\\releases\\2.3.0\\publish\\win-x64\"\r\n#ifdef CandidateBuild\r\n  #undef MyPublishDir\r\n  #define MyPublishDir \"..\\artifacts\\releases\\2.3.0\\publish\\win-x64\"\r\n#endif\r\n#ifdef CandidateRc8\r\n  #undef MyPublishDir\r\n  #define MyPublishDir \"..\\artifacts\\releases\\2.3.0\\publish\\rc8-win-x64\"\r\n#endif\r\n#ifdef CandidateRc10\r\n  #undef MyPublishDir\r\n  #define MyPublishDir \"..\\artifacts\\releases\\2.3.0\\publish\\rc10-win-x64\"\r\n#endif\r\n#ifdef CandidateRc11\r\n  #undef MyPublishDir\r\n  #define MyPublishDir \"..\\artifacts\\releases\\2.3.0\\publish\\rc11-win-x64\"\r\n#endif\r\n#ifdef CandidateRc12\r\n  #undef MyPublishDir\r\n  #define MyPublishDir \"..\\artifacts\\releases\\2.3.0\\publish\\rc12-win-x64\"\r\n#endif\r\n#ifdef CandidateRc7\r\n  #undef MyPublishDir\r\n  #define MyPublishDir \"..\\artifacts\\releases\\2.3.0\\publish\\rc7-win-x64\"\r\n#endif\r\n#ifdef CandidateCoreHotfix2\r\n  #undef MyPublishDir\r\n  #define MyPublishDir \"..\\artifacts\\releases\\2.3.0\\publish\\corehotfix2-win-x64\"\r\n#endif\r\n#ifdef ProductRedesignCandidate\r\n  #undef MyAppName\r\n  #define MyAppName \"光镜 产品重构候选\"\r\n  #undef MyPublishDir\r\n  #define MyPublishDir \"..\\artifacts\\releases\\2.3.0\\publish\\product-redesign-rc1-win-x64\"\r\n#endif\r\n#ifdef CoreReliabilityInteractionHotfix\r\n  #undef MyAppName\r\n  #define MyAppName \"光镜 CoreReliability Interaction Hotfix DevValidation\"\r\n  #undef MyAppExeName\r\n  #define MyAppExeName \"KitaoPhotoSelector.Acceptance.exe\"\r\n  #undef MyPublishDir\r\n  #define MyPublishDir \"..\\artifacts\\releases\\2.3.0\\publish\\core-reliability-interaction-hotfix-devvalidation-win-x64\"\r\n#endif\r\n#ifdef GlobalSurfaceCloseDevValidation\r\n  #undef MyAppName\r\n  #define MyAppName \"光镜 Global Surface Close DevValidation\"\r\n  #undef MyAppExeName\r\n  #define MyAppExeName \"KitaoPhotoSelector.Acceptance.exe\"\r\n  #undef MyPublishDir\r\n  #define MyPublishDir \"..\\artifacts\\releases\\2.3.0\\publish\\global-surface-close-devvalidation-win-x64\"\r\n#endif\r\n#ifdef CoreReliabilityDevValidation\r\n  #undef MyAppName\r\n  #define MyAppName \"光镜 核心可靠性验收\"\r\n  #undef MyAppExeName\r\n  #define MyAppExeName \"KitaoPhotoSelector.Acceptance.exe\"\r\n  #undef MyPublishDir\r\n  #define MyPublishDir \"..\\artifacts\\releases\\2.3.0\\publish\\core-reliability-devvalidation-win-x64-2\"\r\n#endif\r\n#ifdef TestBuild\r\n  #undef MyApp"
+      }
+    ],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-development\\wpf\\results.trx",
+    "sha256": "ab53871241933e77187d2213e649f1266c6e10afc4a0c8154b8e964f945d7606",
+    "counts": {
+      "total": "186",
+      "executed": "186",
+      "passed": "176",
+      "failed": "10",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [
+      {
+        "name": "TetherRuntime_ContainsCompactSafeUserFacingStates (\"选择一张照片后才能进入全屏监看\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.TetherCaptureView\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n             xmlns:studio=\"clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary\"\r\n             xmlns:projects=\"clr-namespace:RAWSelectionAssistant.Core.Services.Projects;assembly=RAWSelectionAssistant.Core\"\r\n             Focusable=\"True\" PreviewKeyDown=\"View_PreviewKeyDown\" PreviewKeyUp=\"View_PreviewKeyUp\" SizeChanged=\"View_SizeChanged\"\r\n             AutomationProperties.Name=\"联机拍摄现场监看工作区\"\r\n             AutomationProperties.HelpText=\"使用顶层看守文件夹接收照片并进行本地现场监看、比较与标注；L切换LUT，K锁定照片，C开关客户窗口，F11全屏\">\r\n    <UserControl.Resources>\r\n        <BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" />\r\n        <Style x:Key=\"IconButton\" TargetType=\"Button\" BasedOn=\"{StaticResource Av2IconButton}\" />\r\n        <Style x:Key=\"ThumbnailItemStyle\" TargetType=\"ListBoxItem\">\r\n            <Setter Property=\"HorizontalContentAlignment\" Value=\"Stretch\" />\r\n            <Setter Property=\"Padding\" Value=\"0\" />\r\n            <Setter Property=\"Margin\" Value=\"0,0,0,6\" />\r\n            <Setter Property=\"Background\" Value=\"Transparent\" />\r\n            <Setter Property=\"BorderThickness\" Value=\"0\" />\r\n            <EventSetter Event=\"Loaded\" Handler=\"ThumbnailItem_Loaded\" />\r\n            <EventSetter Event=\"Unloaded\" Handler=\"ThumbnailItem_Unloaded\" />\r\n        </Style>\r\n        <DataTemplate x:Key=\"InspectorTemplate\">\r\n            <ScrollViewer VerticalScrollBarVisibility=\"Auto\" HorizontalScrollBarVisibility=\"Disabled\" AutomationProperties.Name=\"现场监看右侧检查器\">\r\n                <StackPanel Margin=\"10\">\r\n                    <Expander Style=\"{StaticResource PixelTart.Section}\" x:Name=\"HistogramGroup\" Header=\"曝光评估\" IsExpanded=\"{Binding WorkspacePreferenceState.ExposureExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}\" AutomationProperties.Name=\"曝光评估工具组\">\r\n                        <StackPanel Margin=\"0,8,0,10\">\r\n                            <Grid><TextBlock Text=\"RGB直方图\" Style=\"{StaticResource SectionTitleText}\" /><Button Content=\"刷新\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Comm"
+      },
+      {
+        "name": "EscapeAndAutomationContracts_AreShellOwnedAndStable",
+        "message": "Assert.AreEqual 失败。应为: <1>，实际为: <0>。‘expected’表达式:‘1’,‘actual’表达式:‘CountAutomationIdDeclarations(automationId, mainXaml, raw, batch)’。 TutorialCalloutCloseButton must be declared exactly once in product markup. at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AssertAreEqualInterpolatedStringHandler`1.ComputeAssertion(String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 52\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, AssertAreEqualInterpolatedStringHandler`1& message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 441\r\n   at RAWSelectionAssistant.WpfTests.InputRoutingHitTestSmokeTests.EscapeAndAutomationContracts_AreShellOwnedAndStable()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      },
+      {
+        "name": "DocumentPanel_ContainsSafePreviewAndRecoverySurface (\"Office 文件不执行宏\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.BookingDocumentsPanel\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             Loaded=\"BookingDocumentsPanel_Loaded\" Unloaded=\"BookingDocumentsPanel_Unloaded\"\r\n             AllowDrop=\"True\" PreviewDragOver=\"BookingDocumentsPanel_PreviewDragOver\" Drop=\"BookingDocumentsPanel_Drop\"\r\n             AutomationProperties.Name=\"本地摄影资料关联\" AutomationProperties.HelpText=\"可拖入单个或多个受支持文件；拖入后默认仅关联原位置，不会自动复制\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <Border Style=\"{StaticResource PanelBorder}\" Padding=\"12\">\r\n        <StackPanel>\r\n            <Grid><StackPanel><TextBlock Text=\"本地摄影资料\" FontWeight=\"SemiBold\" /><TextBlock Text=\"默认仅关联原位置；不读取正文，不把文件写入数据库\" Style=\"{StaticResource CaptionText}\" Margin=\"0,3,0,0\" /></StackPanel><Button Content=\"检查资料状态\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Command=\"{Binding CheckAllCommand}\" AutomationProperties.Name=\"检查资料状态\" /></Grid>\r\n            <Border Margin=\"0,10,0,0\" Padding=\"12\" BorderBrush=\"{DynamicResource BorderBrush}\" BorderThickness=\"1\" CornerRadius=\"7\" Background=\"{DynamicResource SurfaceSecondaryBrush}\" AutomationProperties.Name=\"拖入本地资料区域\" AutomationProperties.HelpText=\"拖入后选择仅关联原位置、复制到项目资料目录并关联或取消；文件夹不会被扫描\">\r\n                <StackPanel HorizontalAlignment=\"Center\"><TextBlock Text=\"拖入图片、PDF、Office、TXT、MD 或其他资料\" HorizontalAlignment=\"Center\" /><TextBlock Text=\"支持一次添加多个文件；不支持递归导入文件夹\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" HorizontalAlignment=\"Center\" /></StackPanel>\r\n            </Border>\r\n            <!-- 兼容操作名称：添加文件（仅关联）；复制到项目资料目录并关联。RC4界面合并为一个“添加资料”按钮。 -->\r\n            <WrapPanel Margin=\"0,10,0,0\"><TextBlock Text=\"分类\" VerticalAlignment=\"Center\" /><ComboBox Width=\"150\" ItemsSource=\"{Binding DocumentTypes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedDocumentType}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"文档分类\" /><TextBlock Text=\"添加方式\" VerticalAlignment=\"Center\" Margin=\"12,0,0,0\" /><ComboBox Width=\"190\" ItemsSource=\"{Binding LinkModes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedLinkMode}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"资料添加方式\" /><Button  Style=\"{StaticResource SecondaryButton}\" Margin=\"7"
+      },
+      {
+        "name": "TetherRuntime_ContainsCompactSafeUserFacingStates (\"缩略图会按需加载\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.TetherCaptureView\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n             xmlns:studio=\"clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary\"\r\n             xmlns:projects=\"clr-namespace:RAWSelectionAssistant.Core.Services.Projects;assembly=RAWSelectionAssistant.Core\"\r\n             Focusable=\"True\" PreviewKeyDown=\"View_PreviewKeyDown\" PreviewKeyUp=\"View_PreviewKeyUp\" SizeChanged=\"View_SizeChanged\"\r\n             AutomationProperties.Name=\"联机拍摄现场监看工作区\"\r\n             AutomationProperties.HelpText=\"使用顶层看守文件夹接收照片并进行本地现场监看、比较与标注；L切换LUT，K锁定照片，C开关客户窗口，F11全屏\">\r\n    <UserControl.Resources>\r\n        <BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" />\r\n        <Style x:Key=\"IconButton\" TargetType=\"Button\" BasedOn=\"{StaticResource Av2IconButton}\" />\r\n        <Style x:Key=\"ThumbnailItemStyle\" TargetType=\"ListBoxItem\">\r\n            <Setter Property=\"HorizontalContentAlignment\" Value=\"Stretch\" />\r\n            <Setter Property=\"Padding\" Value=\"0\" />\r\n            <Setter Property=\"Margin\" Value=\"0,0,0,6\" />\r\n            <Setter Property=\"Background\" Value=\"Transparent\" />\r\n            <Setter Property=\"BorderThickness\" Value=\"0\" />\r\n            <EventSetter Event=\"Loaded\" Handler=\"ThumbnailItem_Loaded\" />\r\n            <EventSetter Event=\"Unloaded\" Handler=\"ThumbnailItem_Unloaded\" />\r\n        </Style>\r\n        <DataTemplate x:Key=\"InspectorTemplate\">\r\n            <ScrollViewer VerticalScrollBarVisibility=\"Auto\" HorizontalScrollBarVisibility=\"Disabled\" AutomationProperties.Name=\"现场监看右侧检查器\">\r\n                <StackPanel Margin=\"10\">\r\n                    <Expander Style=\"{StaticResource PixelTart.Section}\" x:Name=\"HistogramGroup\" Header=\"曝光评估\" IsExpanded=\"{Binding WorkspacePreferenceState.ExposureExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}\" AutomationProperties.Name=\"曝光评估工具组\">\r\n                        <StackPanel Margin=\"0,8,0,10\">\r\n                            <Grid><TextBlock Text=\"RGB直方图\" Style=\"{StaticResource SectionTitleText}\" /><Button Content=\"刷新\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Comm"
+      },
+      {
+        "name": "FinancePage_ContainsRequiredLocalAccountingSurface (\"不会删除电脑中的原文件\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.FinanceView\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n             Loaded=\"FinanceView_Loaded\"\r\n             AutomationProperties.Name=\"摄影收支\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <ScrollViewer VerticalScrollBarVisibility=\"Auto\" HorizontalScrollBarVisibility=\"Auto\"><Grid Background=\"{DynamicResource ContentBackgroundBrush}\" Margin=\"22,18\" MinWidth=\"860\" MinHeight=\"570\">\r\n        <Grid.RowDefinitions><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"*\" /><RowDefinition Height=\"Auto\" /></Grid.RowDefinitions>\r\n\r\n        <views:StudioPageHeader Style=\"{StaticResource PixelTart.PageHeader}\">\r\n            <StackPanel><TextBlock Text=\"摄影收支\" Style=\"{StaticResource PageTitleText}\" /><TextBlock Text=\"收支仅存本机，不替代会计或税务软件。\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" /></StackPanel>\r\n            <StackPanel Orientation=\"Horizontal\" HorizontalAlignment=\"Right\"><Button Content=\"新建收入\" Style=\"{StaticResource PrimaryButton}\" Command=\"{Binding NewIncomeCommand}\" AutomationProperties.Name=\"新建收入\" /><Button Content=\"新建支出\" Style=\"{StaticResource SecondaryButton}\" Command=\"{Binding NewExpenseCommand}\" Margin=\"7,0,0,0\" AutomationProperties.Name=\"新建支出\" /><Button Content=\"导出 CSV\" Style=\"{StaticResource SecondaryButton}\" Command=\"{Binding ExportCommand}\" Margin=\"7,0,0,0\" AutomationProperties.Name=\"主动导出筛选后的收支CSV\" /></StackPanel>\r\n        </views:StudioPageHeader>\r\n\r\n        <UniformGrid Grid.Row=\"1\" Columns=\"6\" Margin=\"0,14,0,12\">\r\n            <Border Style=\"{StaticResource PixelTart.StatusStrip.Item}\" Margin=\"0,0,7,0\"><StackPanel><TextBlock Text=\"本月收入\" Style=\"{StaticResource CaptionText}\" /><TextBlock Text=\"{Binding MonthIncomeText}\" FontSize=\"{DynamicResource Type.Metric.FontSize}\" FontWeight=\"SemiBold\" Margin=\"0,5,0,0\" /></StackPanel></Border>\r\n            <Border Style=\"{StaticResource PixelTart.StatusStrip.Item}\" Margin=\"0,0,7,0\"><StackPanel><TextBlock Text=\"本月支出\" Style=\"{StaticResource CaptionText}\" /><TextBlock Text=\"{Binding MonthExpenseText}\" FontSize=\"{DynamicRe"
+      },
+      {
+        "name": "FinancePage_ContainsRequiredLocalAccountingSurface (\"金额信息仅保存在本机\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.FinanceView\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n             Loaded=\"FinanceView_Loaded\"\r\n             AutomationProperties.Name=\"摄影收支\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <ScrollViewer VerticalScrollBarVisibility=\"Auto\" HorizontalScrollBarVisibility=\"Auto\"><Grid Background=\"{DynamicResource ContentBackgroundBrush}\" Margin=\"22,18\" MinWidth=\"860\" MinHeight=\"570\">\r\n        <Grid.RowDefinitions><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"*\" /><RowDefinition Height=\"Auto\" /></Grid.RowDefinitions>\r\n\r\n        <views:StudioPageHeader Style=\"{StaticResource PixelTart.PageHeader}\">\r\n            <StackPanel><TextBlock Text=\"摄影收支\" Style=\"{StaticResource PageTitleText}\" /><TextBlock Text=\"收支仅存本机，不替代会计或税务软件。\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" /></StackPanel>\r\n            <StackPanel Orientation=\"Horizontal\" HorizontalAlignment=\"Right\"><Button Content=\"新建收入\" Style=\"{StaticResource PrimaryButton}\" Command=\"{Binding NewIncomeCommand}\" AutomationProperties.Name=\"新建收入\" /><Button Content=\"新建支出\" Style=\"{StaticResource SecondaryButton}\" Command=\"{Binding NewExpenseCommand}\" Margin=\"7,0,0,0\" AutomationProperties.Name=\"新建支出\" /><Button Content=\"导出 CSV\" Style=\"{StaticResource SecondaryButton}\" Command=\"{Binding ExportCommand}\" Margin=\"7,0,0,0\" AutomationProperties.Name=\"主动导出筛选后的收支CSV\" /></StackPanel>\r\n        </views:StudioPageHeader>\r\n\r\n        <UniformGrid Grid.Row=\"1\" Columns=\"6\" Margin=\"0,14,0,12\">\r\n            <Border Style=\"{StaticResource PixelTart.StatusStrip.Item}\" Margin=\"0,0,7,0\"><StackPanel><TextBlock Text=\"本月收入\" Style=\"{StaticResource CaptionText}\" /><TextBlock Text=\"{Binding MonthIncomeText}\" FontSize=\"{DynamicResource Type.Metric.FontSize}\" FontWeight=\"SemiBold\" Margin=\"0,5,0,0\" /></StackPanel></Border>\r\n            <Border Style=\"{StaticResource PixelTart.StatusStrip.Item}\" Margin=\"0,0,7,0\"><StackPanel><TextBlock Text=\"本月支出\" Style=\"{StaticResource CaptionText}\" /><TextBlock Text=\"{Binding MonthExpenseText}\" FontSize=\"{DynamicRe"
+      },
+      {
+        "name": "DocumentPanel_ContainsSafePreviewAndRecoverySurface (\"安全文件卡片\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.BookingDocumentsPanel\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             Loaded=\"BookingDocumentsPanel_Loaded\" Unloaded=\"BookingDocumentsPanel_Unloaded\"\r\n             AllowDrop=\"True\" PreviewDragOver=\"BookingDocumentsPanel_PreviewDragOver\" Drop=\"BookingDocumentsPanel_Drop\"\r\n             AutomationProperties.Name=\"本地摄影资料关联\" AutomationProperties.HelpText=\"可拖入单个或多个受支持文件；拖入后默认仅关联原位置，不会自动复制\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <Border Style=\"{StaticResource PanelBorder}\" Padding=\"12\">\r\n        <StackPanel>\r\n            <Grid><StackPanel><TextBlock Text=\"本地摄影资料\" FontWeight=\"SemiBold\" /><TextBlock Text=\"默认仅关联原位置；不读取正文，不把文件写入数据库\" Style=\"{StaticResource CaptionText}\" Margin=\"0,3,0,0\" /></StackPanel><Button Content=\"检查资料状态\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Command=\"{Binding CheckAllCommand}\" AutomationProperties.Name=\"检查资料状态\" /></Grid>\r\n            <Border Margin=\"0,10,0,0\" Padding=\"12\" BorderBrush=\"{DynamicResource BorderBrush}\" BorderThickness=\"1\" CornerRadius=\"7\" Background=\"{DynamicResource SurfaceSecondaryBrush}\" AutomationProperties.Name=\"拖入本地资料区域\" AutomationProperties.HelpText=\"拖入后选择仅关联原位置、复制到项目资料目录并关联或取消；文件夹不会被扫描\">\r\n                <StackPanel HorizontalAlignment=\"Center\"><TextBlock Text=\"拖入图片、PDF、Office、TXT、MD 或其他资料\" HorizontalAlignment=\"Center\" /><TextBlock Text=\"支持一次添加多个文件；不支持递归导入文件夹\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" HorizontalAlignment=\"Center\" /></StackPanel>\r\n            </Border>\r\n            <!-- 兼容操作名称：添加文件（仅关联）；复制到项目资料目录并关联。RC4界面合并为一个“添加资料”按钮。 -->\r\n            <WrapPanel Margin=\"0,10,0,0\"><TextBlock Text=\"分类\" VerticalAlignment=\"Center\" /><ComboBox Width=\"150\" ItemsSource=\"{Binding DocumentTypes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedDocumentType}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"文档分类\" /><TextBlock Text=\"添加方式\" VerticalAlignment=\"Center\" Margin=\"12,0,0,0\" /><ComboBox Width=\"190\" ItemsSource=\"{Binding LinkModes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedLinkMode}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"资料添加方式\" /><Button  Style=\"{StaticResource SecondaryButton}\" Margin=\"7"
+      },
+      {
+        "name": "TutorialOverlay_LeavesCardInteractiveAndExitAccessible",
+        "message": "StringAssert.Contains 失败。字符串“using System.ComponentModel;\r\nusing System.Runtime.InteropServices;\r\n#if UI_REVIEW_BUILD\r\nusing System.Text.Json;\r\n#endif\r\nusing System.Windows;\r\nusing System.Windows.Automation;\r\nusing System.Windows.Controls;\r\nusing System.Windows.Interop;\r\nusing System.Windows.Input;\r\nusing System.Windows.Media;\r\nusing System.Windows.Media.Imaging;\r\nusing System.Windows.Shapes;\r\nusing System.Windows.Threading;\r\nusing RAWSelectionAssistant.Core.Models;\r\nusing RAWSelectionAssistant.Core.Services;\r\nusing RAWSelectionAssistant.Core.Utilities;\r\nusing RAWSelectionAssistant.Services;\r\nusing RAWSelectionAssistant.Utilities;\r\nusing RAWSelectionAssistant.ViewModels;\r\nusing RAWSelectionAssistant.Views;\r\n\r\nnamespace RAWSelectionAssistant;\r\n\r\npublic partial class MainWindow : Window\r\n{\r\n    private const double DefaultShellMinWidth = 1180d;\r\n    private const double DefaultShellMinHeight = 720d;\r\n    private const double AssetLibraryShellMinWidth = 720d;\r\n    private const double AssetLibraryShellMinHeight = 400d;\r\n    private bool _hasSavedPosition;\r\n    private MainViewModel? _viewModel;\r\n    private bool _taskCenterDrawerOpen;\r\n    private bool _tetherFullScreen;\r\n    private WindowStyle _tetherPreviousWindowStyle;\r\n    private WindowState _tetherPreviousWindowState;\r\n    private ResizeMode _tetherPreviousResizeMode;\r\n    private Point _quickDragStart;\r\n    private string? _quickDraggedId;\r\n    private Button? _quickInsertionTarget;\r\n    private ShootBookingEditorViewModel? _activeBookingEditor;\r\n    private readonly IModalHost _modalHost = new ModalHost();\r\n    private IShellEscapeService? _shellEscapeService;\r\n    private bool _assetLibraryFocusActive;\r\n#if UI_REVIEW_BUILD\r\n    private DispatcherTimer? _uiReviewTimer;\r\n    private string _uiReviewStateContent = string.Empty;\r\n#endif\r\n\r\n    public MainWindow()\r\n    {\r\n        InitializeComponent();\r\n#if MODULAR_HARNESS_DEV_PREVIEW\r\n        Title = \"光镜 [Modular Harness Dev]\";\r\n#endif\r\n#if UI_REVIEW_BUILD\r\n        if (string.Equals(Environment.GetEnvironmentVariable(\"PIXEL_TART_RC12_PRODUCT_HARNESS\"), \"1\", StringComparison.Ordinal))\r\n            Title = \"光镜 · RC12 Product Visual Harness\";\r\n#endif\r\n        if (Application.Current is App app && app.ModuleRegistry is not null)\r\n            AssetLibraryWorkspace.ModuleRegistry = app.ModuleRegistry;\r\n#if INPUT_ROUTING_DIAGNOSTICS\r\n        ConfigurePhysicalPoi"
+      },
+      {
+        "name": "FailureAndBusyStates_CannotDisableSurfaceClose",
+        "message": "StringAssert.Contains 失败。字符串“<Window x:Class=\"RAWSelectionAssistant.MainWindow\"\r\n        xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n        xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n        xmlns:d=\"http://schemas.microsoft.com/expression/blend/2008\"\r\n        xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\"\r\n        xmlns:conv=\"clr-namespace:RAWSelectionAssistant.Converters\"\r\n        xmlns:services=\"clr-namespace:RAWSelectionAssistant.Services\"\r\n        xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n        xmlns:studio=\"clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary\"\r\n        xmlns:shell=\"clr-namespace:System.Windows.Shell;assembly=PresentationFramework\"\r\n        mc:Ignorable=\"d\" Title=\"Kitao Studio 光镜\" Icon=\"Assets/AppIcon.ico\"\r\n        Width=\"1600\" Height=\"920\" MinWidth=\"1180\" MinHeight=\"720\"\r\n        WindowStartupLocation=\"CenterScreen\" Background=\"{DynamicResource WindowBackgroundBrush}\" Foreground=\"{DynamicResource TextPrimaryBrush}\"\r\n        WindowStyle=\"None\" ResizeMode=\"CanResize\" SnapsToDevicePixels=\"True\" UseLayoutRounding=\"True\"\r\n        AllowDrop=\"True\" Closing=\"Window_Closing\" PreviewKeyDown=\"Window_PreviewKeyDown\"\r\n        DragOver=\"Window_DragOver\" Drop=\"Window_Drop\">\r\n    <shell:WindowChrome.WindowChrome>\r\n        <shell:WindowChrome CaptionHeight=\"52\" ResizeBorderThickness=\"6\" GlassFrameThickness=\"0\" CornerRadius=\"10\" UseAeroCaptionButtons=\"False\" />\r\n    </shell:WindowChrome.WindowChrome>\r\n    <Window.InputBindings>\r\n        <KeyBinding Key=\"N\" Modifiers=\"Control\" Command=\"{Binding NewProjectCommand}\" />\r\n        <KeyBinding Key=\"S\" Modifiers=\"Control\" Command=\"{Binding SaveProjectCommand}\" />\r\n        <KeyBinding Key=\"B\" Modifiers=\"Control\" Command=\"{Binding ToggleSidebarCommand}\" />\r\n        <KeyBinding Key=\"F\" Modifiers=\"Control+Shift\" Command=\"{Binding FeedbackCommand}\" />\r\n        <KeyBinding Key=\"F1\" Command=\"{Binding HelpCommand}\" />\r\n        <KeyBinding Key=\"Enter\" Modifiers=\"Alt\" Command=\"{Binding ShowDetailsCommand}\" CommandParameter=\"{Binding SelectedSelection}\" />\r\n    </Window.InputBindings>\r\n    <Window.Resources>\r\n        <!-- RC5 keeps the legacy vector resource aliases IconCollapse/IconExpand for older extensions; sidebar visuals use the unique IconPanel* keys below. -->\r\n        <conv:StatusToTextConverter x:Key=\"St"
+      },
+      {
+        "name": "DocumentPanel_ContainsSafePreviewAndRecoverySurface (\"未知格式仅显示元数据\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.BookingDocumentsPanel\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             Loaded=\"BookingDocumentsPanel_Loaded\" Unloaded=\"BookingDocumentsPanel_Unloaded\"\r\n             AllowDrop=\"True\" PreviewDragOver=\"BookingDocumentsPanel_PreviewDragOver\" Drop=\"BookingDocumentsPanel_Drop\"\r\n             AutomationProperties.Name=\"本地摄影资料关联\" AutomationProperties.HelpText=\"可拖入单个或多个受支持文件；拖入后默认仅关联原位置，不会自动复制\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <Border Style=\"{StaticResource PanelBorder}\" Padding=\"12\">\r\n        <StackPanel>\r\n            <Grid><StackPanel><TextBlock Text=\"本地摄影资料\" FontWeight=\"SemiBold\" /><TextBlock Text=\"默认仅关联原位置；不读取正文，不把文件写入数据库\" Style=\"{StaticResource CaptionText}\" Margin=\"0,3,0,0\" /></StackPanel><Button Content=\"检查资料状态\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Command=\"{Binding CheckAllCommand}\" AutomationProperties.Name=\"检查资料状态\" /></Grid>\r\n            <Border Margin=\"0,10,0,0\" Padding=\"12\" BorderBrush=\"{DynamicResource BorderBrush}\" BorderThickness=\"1\" CornerRadius=\"7\" Background=\"{DynamicResource SurfaceSecondaryBrush}\" AutomationProperties.Name=\"拖入本地资料区域\" AutomationProperties.HelpText=\"拖入后选择仅关联原位置、复制到项目资料目录并关联或取消；文件夹不会被扫描\">\r\n                <StackPanel HorizontalAlignment=\"Center\"><TextBlock Text=\"拖入图片、PDF、Office、TXT、MD 或其他资料\" HorizontalAlignment=\"Center\" /><TextBlock Text=\"支持一次添加多个文件；不支持递归导入文件夹\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" HorizontalAlignment=\"Center\" /></StackPanel>\r\n            </Border>\r\n            <!-- 兼容操作名称：添加文件（仅关联）；复制到项目资料目录并关联。RC4界面合并为一个“添加资料”按钮。 -->\r\n            <WrapPanel Margin=\"0,10,0,0\"><TextBlock Text=\"分类\" VerticalAlignment=\"Center\" /><ComboBox Width=\"150\" ItemsSource=\"{Binding DocumentTypes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedDocumentType}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"文档分类\" /><TextBlock Text=\"添加方式\" VerticalAlignment=\"Center\" Margin=\"12,0,0,0\" /><ComboBox Width=\"190\" ItemsSource=\"{Binding LinkModes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedLinkMode}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"资料添加方式\" /><Button  Style=\"{StaticResource SecondaryButton}\" Margin=\"7"
+      }
+    ],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-development-r2\\core\\results.trx",
+    "sha256": "1b5718765fee27c43a84678c69a4d8077ff793433a108a0315c3c33591c17083",
+    "counts": {
+      "total": "145",
+      "executed": "145",
+      "passed": "145",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-development-r2\\wpf\\results.trx",
+    "sha256": "6ffd3800ce1d3e1a01e8d8cc10c7ab7be38c16ba6f7a0708089b69986e48971a",
+    "counts": {
+      "total": "186",
+      "executed": "186",
+      "passed": "179",
+      "failed": "7",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [
+      {
+        "name": "TetherRuntime_ContainsCompactSafeUserFacingStates (\"选择一张照片后才能进入全屏监看\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.TetherCaptureView\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n             xmlns:studio=\"clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary\"\r\n             xmlns:projects=\"clr-namespace:RAWSelectionAssistant.Core.Services.Projects;assembly=RAWSelectionAssistant.Core\"\r\n             Focusable=\"True\" PreviewKeyDown=\"View_PreviewKeyDown\" PreviewKeyUp=\"View_PreviewKeyUp\" SizeChanged=\"View_SizeChanged\"\r\n             AutomationProperties.Name=\"联机拍摄现场监看工作区\"\r\n             AutomationProperties.HelpText=\"使用顶层看守文件夹接收照片并进行本地现场监看、比较与标注；L切换LUT，K锁定照片，C开关客户窗口，F11全屏\">\r\n    <UserControl.Resources>\r\n        <BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" />\r\n        <Style x:Key=\"IconButton\" TargetType=\"Button\" BasedOn=\"{StaticResource Av2IconButton}\" />\r\n        <Style x:Key=\"ThumbnailItemStyle\" TargetType=\"ListBoxItem\">\r\n            <Setter Property=\"HorizontalContentAlignment\" Value=\"Stretch\" />\r\n            <Setter Property=\"Padding\" Value=\"0\" />\r\n            <Setter Property=\"Margin\" Value=\"0,0,0,6\" />\r\n            <Setter Property=\"Background\" Value=\"Transparent\" />\r\n            <Setter Property=\"BorderThickness\" Value=\"0\" />\r\n            <EventSetter Event=\"Loaded\" Handler=\"ThumbnailItem_Loaded\" />\r\n            <EventSetter Event=\"Unloaded\" Handler=\"ThumbnailItem_Unloaded\" />\r\n        </Style>\r\n        <DataTemplate x:Key=\"InspectorTemplate\">\r\n            <ScrollViewer VerticalScrollBarVisibility=\"Auto\" HorizontalScrollBarVisibility=\"Disabled\" AutomationProperties.Name=\"现场监看右侧检查器\">\r\n                <StackPanel Margin=\"10\">\r\n                    <Expander Style=\"{StaticResource PixelTart.Section}\" x:Name=\"HistogramGroup\" Header=\"曝光评估\" IsExpanded=\"{Binding WorkspacePreferenceState.ExposureExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}\" AutomationProperties.Name=\"曝光评估工具组\">\r\n                        <StackPanel Margin=\"0,8,0,10\">\r\n                            <Grid><TextBlock Text=\"RGB直方图\" Style=\"{StaticResource SectionTitleText}\" /><Button Content=\"刷新\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Comm"
+      },
+      {
+        "name": "TetherRuntime_ContainsCompactSafeUserFacingStates (\"缩略图会按需加载\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.TetherCaptureView\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n             xmlns:studio=\"clr-namespace:PixelTart.Modules.AssetLibrary;assembly=PixelTart.Modules.AssetLibrary\"\r\n             xmlns:projects=\"clr-namespace:RAWSelectionAssistant.Core.Services.Projects;assembly=RAWSelectionAssistant.Core\"\r\n             Focusable=\"True\" PreviewKeyDown=\"View_PreviewKeyDown\" PreviewKeyUp=\"View_PreviewKeyUp\" SizeChanged=\"View_SizeChanged\"\r\n             AutomationProperties.Name=\"联机拍摄现场监看工作区\"\r\n             AutomationProperties.HelpText=\"使用顶层看守文件夹接收照片并进行本地现场监看、比较与标注；L切换LUT，K锁定照片，C开关客户窗口，F11全屏\">\r\n    <UserControl.Resources>\r\n        <BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" />\r\n        <Style x:Key=\"IconButton\" TargetType=\"Button\" BasedOn=\"{StaticResource Av2IconButton}\" />\r\n        <Style x:Key=\"ThumbnailItemStyle\" TargetType=\"ListBoxItem\">\r\n            <Setter Property=\"HorizontalContentAlignment\" Value=\"Stretch\" />\r\n            <Setter Property=\"Padding\" Value=\"0\" />\r\n            <Setter Property=\"Margin\" Value=\"0,0,0,6\" />\r\n            <Setter Property=\"Background\" Value=\"Transparent\" />\r\n            <Setter Property=\"BorderThickness\" Value=\"0\" />\r\n            <EventSetter Event=\"Loaded\" Handler=\"ThumbnailItem_Loaded\" />\r\n            <EventSetter Event=\"Unloaded\" Handler=\"ThumbnailItem_Unloaded\" />\r\n        </Style>\r\n        <DataTemplate x:Key=\"InspectorTemplate\">\r\n            <ScrollViewer VerticalScrollBarVisibility=\"Auto\" HorizontalScrollBarVisibility=\"Disabled\" AutomationProperties.Name=\"现场监看右侧检查器\">\r\n                <StackPanel Margin=\"10\">\r\n                    <Expander Style=\"{StaticResource PixelTart.Section}\" x:Name=\"HistogramGroup\" Header=\"曝光评估\" IsExpanded=\"{Binding WorkspacePreferenceState.ExposureExpanded, RelativeSource={RelativeSource AncestorType={x:Type views:TetherCaptureView}}, Mode=TwoWay}\" AutomationProperties.Name=\"曝光评估工具组\">\r\n                        <StackPanel Margin=\"0,8,0,10\">\r\n                            <Grid><TextBlock Text=\"RGB直方图\" Style=\"{StaticResource SectionTitleText}\" /><Button Content=\"刷新\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Comm"
+      },
+      {
+        "name": "DocumentPanel_ContainsSafePreviewAndRecoverySurface (\"Office 文件不执行宏\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.BookingDocumentsPanel\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             Loaded=\"BookingDocumentsPanel_Loaded\" Unloaded=\"BookingDocumentsPanel_Unloaded\"\r\n             AllowDrop=\"True\" PreviewDragOver=\"BookingDocumentsPanel_PreviewDragOver\" Drop=\"BookingDocumentsPanel_Drop\"\r\n             AutomationProperties.Name=\"本地摄影资料关联\" AutomationProperties.HelpText=\"可拖入单个或多个受支持文件；拖入后默认仅关联原位置，不会自动复制\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <Border Style=\"{StaticResource PanelBorder}\" Padding=\"12\">\r\n        <StackPanel>\r\n            <Grid><StackPanel><TextBlock Text=\"本地摄影资料\" FontWeight=\"SemiBold\" /><TextBlock Text=\"默认仅关联原位置；不读取正文，不把文件写入数据库\" Style=\"{StaticResource CaptionText}\" Margin=\"0,3,0,0\" /></StackPanel><Button Content=\"检查资料状态\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Command=\"{Binding CheckAllCommand}\" AutomationProperties.Name=\"检查资料状态\" /></Grid>\r\n            <Border Margin=\"0,10,0,0\" Padding=\"12\" BorderBrush=\"{DynamicResource BorderBrush}\" BorderThickness=\"1\" CornerRadius=\"7\" Background=\"{DynamicResource SurfaceSecondaryBrush}\" AutomationProperties.Name=\"拖入本地资料区域\" AutomationProperties.HelpText=\"拖入后选择仅关联原位置、复制到项目资料目录并关联或取消；文件夹不会被扫描\">\r\n                <StackPanel HorizontalAlignment=\"Center\"><TextBlock Text=\"拖入图片、PDF、Office、TXT、MD 或其他资料\" HorizontalAlignment=\"Center\" /><TextBlock Text=\"支持一次添加多个文件；不支持递归导入文件夹\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" HorizontalAlignment=\"Center\" /></StackPanel>\r\n            </Border>\r\n            <!-- 兼容操作名称：添加文件（仅关联）；复制到项目资料目录并关联。RC4界面合并为一个“添加资料”按钮。 -->\r\n            <WrapPanel Margin=\"0,10,0,0\"><TextBlock Text=\"分类\" VerticalAlignment=\"Center\" /><ComboBox Width=\"150\" ItemsSource=\"{Binding DocumentTypes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedDocumentType}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"文档分类\" /><TextBlock Text=\"添加方式\" VerticalAlignment=\"Center\" Margin=\"12,0,0,0\" /><ComboBox Width=\"190\" ItemsSource=\"{Binding LinkModes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedLinkMode}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"资料添加方式\" /><Button  Style=\"{StaticResource SecondaryButton}\" Margin=\"7"
+      },
+      {
+        "name": "DocumentPanel_ContainsSafePreviewAndRecoverySurface (\"安全文件卡片\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.BookingDocumentsPanel\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             Loaded=\"BookingDocumentsPanel_Loaded\" Unloaded=\"BookingDocumentsPanel_Unloaded\"\r\n             AllowDrop=\"True\" PreviewDragOver=\"BookingDocumentsPanel_PreviewDragOver\" Drop=\"BookingDocumentsPanel_Drop\"\r\n             AutomationProperties.Name=\"本地摄影资料关联\" AutomationProperties.HelpText=\"可拖入单个或多个受支持文件；拖入后默认仅关联原位置，不会自动复制\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <Border Style=\"{StaticResource PanelBorder}\" Padding=\"12\">\r\n        <StackPanel>\r\n            <Grid><StackPanel><TextBlock Text=\"本地摄影资料\" FontWeight=\"SemiBold\" /><TextBlock Text=\"默认仅关联原位置；不读取正文，不把文件写入数据库\" Style=\"{StaticResource CaptionText}\" Margin=\"0,3,0,0\" /></StackPanel><Button Content=\"检查资料状态\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Command=\"{Binding CheckAllCommand}\" AutomationProperties.Name=\"检查资料状态\" /></Grid>\r\n            <Border Margin=\"0,10,0,0\" Padding=\"12\" BorderBrush=\"{DynamicResource BorderBrush}\" BorderThickness=\"1\" CornerRadius=\"7\" Background=\"{DynamicResource SurfaceSecondaryBrush}\" AutomationProperties.Name=\"拖入本地资料区域\" AutomationProperties.HelpText=\"拖入后选择仅关联原位置、复制到项目资料目录并关联或取消；文件夹不会被扫描\">\r\n                <StackPanel HorizontalAlignment=\"Center\"><TextBlock Text=\"拖入图片、PDF、Office、TXT、MD 或其他资料\" HorizontalAlignment=\"Center\" /><TextBlock Text=\"支持一次添加多个文件；不支持递归导入文件夹\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" HorizontalAlignment=\"Center\" /></StackPanel>\r\n            </Border>\r\n            <!-- 兼容操作名称：添加文件（仅关联）；复制到项目资料目录并关联。RC4界面合并为一个“添加资料”按钮。 -->\r\n            <WrapPanel Margin=\"0,10,0,0\"><TextBlock Text=\"分类\" VerticalAlignment=\"Center\" /><ComboBox Width=\"150\" ItemsSource=\"{Binding DocumentTypes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedDocumentType}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"文档分类\" /><TextBlock Text=\"添加方式\" VerticalAlignment=\"Center\" Margin=\"12,0,0,0\" /><ComboBox Width=\"190\" ItemsSource=\"{Binding LinkModes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedLinkMode}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"资料添加方式\" /><Button  Style=\"{StaticResource SecondaryButton}\" Margin=\"7"
+      },
+      {
+        "name": "FinancePage_ContainsRequiredLocalAccountingSurface (\"不会删除电脑中的原文件\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.FinanceView\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n             Loaded=\"FinanceView_Loaded\"\r\n             AutomationProperties.Name=\"摄影收支\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <ScrollViewer VerticalScrollBarVisibility=\"Auto\" HorizontalScrollBarVisibility=\"Auto\"><Grid Background=\"{DynamicResource ContentBackgroundBrush}\" Margin=\"22,18\" MinWidth=\"860\" MinHeight=\"570\">\r\n        <Grid.RowDefinitions><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"*\" /><RowDefinition Height=\"Auto\" /></Grid.RowDefinitions>\r\n\r\n        <views:StudioPageHeader Style=\"{StaticResource PixelTart.PageHeader}\">\r\n            <StackPanel><TextBlock Text=\"摄影收支\" Style=\"{StaticResource PageTitleText}\" /><TextBlock Text=\"收支仅存本机，不替代会计或税务软件。\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" /></StackPanel>\r\n            <StackPanel Orientation=\"Horizontal\" HorizontalAlignment=\"Right\"><Button Content=\"新建收入\" Style=\"{StaticResource PrimaryButton}\" Command=\"{Binding NewIncomeCommand}\" AutomationProperties.Name=\"新建收入\" /><Button Content=\"新建支出\" Style=\"{StaticResource SecondaryButton}\" Command=\"{Binding NewExpenseCommand}\" Margin=\"7,0,0,0\" AutomationProperties.Name=\"新建支出\" /><Button Content=\"导出 CSV\" Style=\"{StaticResource SecondaryButton}\" Command=\"{Binding ExportCommand}\" Margin=\"7,0,0,0\" AutomationProperties.Name=\"主动导出筛选后的收支CSV\" /></StackPanel>\r\n        </views:StudioPageHeader>\r\n\r\n        <UniformGrid Grid.Row=\"1\" Columns=\"6\" Margin=\"0,14,0,12\">\r\n            <Border Style=\"{StaticResource PixelTart.StatusStrip.Item}\" Margin=\"0,0,7,0\"><StackPanel><TextBlock Text=\"本月收入\" Style=\"{StaticResource CaptionText}\" /><TextBlock Text=\"{Binding MonthIncomeText}\" FontSize=\"{DynamicResource Type.Metric.FontSize}\" FontWeight=\"SemiBold\" Margin=\"0,5,0,0\" /></StackPanel></Border>\r\n            <Border Style=\"{StaticResource PixelTart.StatusStrip.Item}\" Margin=\"0,0,7,0\"><StackPanel><TextBlock Text=\"本月支出\" Style=\"{StaticResource CaptionText}\" /><TextBlock Text=\"{Binding MonthExpenseText}\" FontSize=\"{DynamicRe"
+      },
+      {
+        "name": "DocumentPanel_ContainsSafePreviewAndRecoverySurface (\"未知格式仅显示元数据\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.BookingDocumentsPanel\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             Loaded=\"BookingDocumentsPanel_Loaded\" Unloaded=\"BookingDocumentsPanel_Unloaded\"\r\n             AllowDrop=\"True\" PreviewDragOver=\"BookingDocumentsPanel_PreviewDragOver\" Drop=\"BookingDocumentsPanel_Drop\"\r\n             AutomationProperties.Name=\"本地摄影资料关联\" AutomationProperties.HelpText=\"可拖入单个或多个受支持文件；拖入后默认仅关联原位置，不会自动复制\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <Border Style=\"{StaticResource PanelBorder}\" Padding=\"12\">\r\n        <StackPanel>\r\n            <Grid><StackPanel><TextBlock Text=\"本地摄影资料\" FontWeight=\"SemiBold\" /><TextBlock Text=\"默认仅关联原位置；不读取正文，不把文件写入数据库\" Style=\"{StaticResource CaptionText}\" Margin=\"0,3,0,0\" /></StackPanel><Button Content=\"检查资料状态\" Style=\"{StaticResource GhostButton}\" HorizontalAlignment=\"Right\" Command=\"{Binding CheckAllCommand}\" AutomationProperties.Name=\"检查资料状态\" /></Grid>\r\n            <Border Margin=\"0,10,0,0\" Padding=\"12\" BorderBrush=\"{DynamicResource BorderBrush}\" BorderThickness=\"1\" CornerRadius=\"7\" Background=\"{DynamicResource SurfaceSecondaryBrush}\" AutomationProperties.Name=\"拖入本地资料区域\" AutomationProperties.HelpText=\"拖入后选择仅关联原位置、复制到项目资料目录并关联或取消；文件夹不会被扫描\">\r\n                <StackPanel HorizontalAlignment=\"Center\"><TextBlock Text=\"拖入图片、PDF、Office、TXT、MD 或其他资料\" HorizontalAlignment=\"Center\" /><TextBlock Text=\"支持一次添加多个文件；不支持递归导入文件夹\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" HorizontalAlignment=\"Center\" /></StackPanel>\r\n            </Border>\r\n            <!-- 兼容操作名称：添加文件（仅关联）；复制到项目资料目录并关联。RC4界面合并为一个“添加资料”按钮。 -->\r\n            <WrapPanel Margin=\"0,10,0,0\"><TextBlock Text=\"分类\" VerticalAlignment=\"Center\" /><ComboBox Width=\"150\" ItemsSource=\"{Binding DocumentTypes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedDocumentType}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"文档分类\" /><TextBlock Text=\"添加方式\" VerticalAlignment=\"Center\" Margin=\"12,0,0,0\" /><ComboBox Width=\"190\" ItemsSource=\"{Binding LinkModes}\" DisplayMemberPath=\"Label\" SelectedItem=\"{Binding SelectedLinkMode}\" Margin=\"6,0,0,0\" AutomationProperties.Name=\"资料添加方式\" /><Button  Style=\"{StaticResource SecondaryButton}\" Margin=\"7"
+      },
+      {
+        "name": "FinancePage_ContainsRequiredLocalAccountingSurface (\"金额信息仅保存在本机\")",
+        "message": "StringAssert.Contains 失败。字符串“<UserControl x:Class=\"RAWSelectionAssistant.Views.FinanceView\"\r\n             xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"\r\n             xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"\r\n             xmlns:views=\"clr-namespace:RAWSelectionAssistant.Views\"\r\n             Loaded=\"FinanceView_Loaded\"\r\n             AutomationProperties.Name=\"摄影收支\">\r\n    <UserControl.Resources><BooleanToVisibilityConverter x:Key=\"BooleanToVisibilityConverter\" /></UserControl.Resources>\r\n    <ScrollViewer VerticalScrollBarVisibility=\"Auto\" HorizontalScrollBarVisibility=\"Auto\"><Grid Background=\"{DynamicResource ContentBackgroundBrush}\" Margin=\"22,18\" MinWidth=\"860\" MinHeight=\"570\">\r\n        <Grid.RowDefinitions><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"Auto\" /><RowDefinition Height=\"*\" /><RowDefinition Height=\"Auto\" /></Grid.RowDefinitions>\r\n\r\n        <views:StudioPageHeader Style=\"{StaticResource PixelTart.PageHeader}\">\r\n            <StackPanel><TextBlock Text=\"摄影收支\" Style=\"{StaticResource PageTitleText}\" /><TextBlock Text=\"收支仅存本机，不替代会计或税务软件。\" Style=\"{StaticResource CaptionText}\" Margin=\"0,4,0,0\" /></StackPanel>\r\n            <StackPanel Orientation=\"Horizontal\" HorizontalAlignment=\"Right\"><Button Content=\"新建收入\" Style=\"{StaticResource PrimaryButton}\" Command=\"{Binding NewIncomeCommand}\" AutomationProperties.Name=\"新建收入\" /><Button Content=\"新建支出\" Style=\"{StaticResource SecondaryButton}\" Command=\"{Binding NewExpenseCommand}\" Margin=\"7,0,0,0\" AutomationProperties.Name=\"新建支出\" /><Button Content=\"导出 CSV\" Style=\"{StaticResource SecondaryButton}\" Command=\"{Binding ExportCommand}\" Margin=\"7,0,0,0\" AutomationProperties.Name=\"主动导出筛选后的收支CSV\" /></StackPanel>\r\n        </views:StudioPageHeader>\r\n\r\n        <UniformGrid Grid.Row=\"1\" Columns=\"6\" Margin=\"0,14,0,12\">\r\n            <Border Style=\"{StaticResource PixelTart.StatusStrip.Item}\" Margin=\"0,0,7,0\"><StackPanel><TextBlock Text=\"本月收入\" Style=\"{StaticResource CaptionText}\" /><TextBlock Text=\"{Binding MonthIncomeText}\" FontSize=\"{DynamicResource Type.Metric.FontSize}\" FontWeight=\"SemiBold\" Margin=\"0,5,0,0\" /></StackPanel></Border>\r\n            <Border Style=\"{StaticResource PixelTart.StatusStrip.Item}\" Margin=\"0,0,7,0\"><StackPanel><TextBlock Text=\"本月支出\" Style=\"{StaticResource CaptionText}\" /><TextBlock Text=\"{Binding MonthExpenseText}\" FontSize=\"{DynamicRe"
+      }
+    ],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-fullapp-development\\first\\results.trx",
+    "sha256": "8a0079c986f34c4414579516c9aaf5c1ae9f293561fa153d8d8aad1514157941",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-fullapp-development\\restart\\results.trx",
+    "sha256": "3d8d03371d3223aa45c1444f08dd77d2d834f0a41a951da6a0144ae37a0208c0",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-fullapp-development\\upgrade\\results.trx",
+    "sha256": "fcb1ea9f605394232f5ffc25dfb5fbbfdfba8b54f3d94afded0a264695031f9c",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-fullapp-development-r2\\first\\results.trx",
+    "sha256": "0fb52936d989b418b8a602a3517dc66e9ea2eadd890b624bf96a2c165f3d2d78",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-fullapp-development-r2\\restart\\results.trx",
+    "sha256": "77c72d25fa60ca7c0d30ba182e0ef68d51d3b5ee8c1362bc7a9d9faf15050dea",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-fullapp-development-r2\\upgrade\\results.trx",
+    "sha256": "46e244c0dd278925cabb3df308ad76b7a54eb79a9ee75c65a9262c6c6a929d5a",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-fullapp-final-r10\\first\\results.trx",
+    "sha256": "08c0fffa3834438181da7acfaf69d2ea64232631e8b3636986bd89a958602046",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-fullapp-final-r10\\restart\\results.trx",
+    "sha256": "685a7f799122c948c088ce901fe9c98bba07d19086e72a77595bcccf8a98004e",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-fullapp-final-r10\\upgrade\\results.trx",
+    "sha256": "e6e623d57d49155b60ae1970f61ddf6fe20895a8461f284bdd55e93184f0bc43",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-fullapp-final-r7\\first\\results.trx",
+    "sha256": "5da489aad95d5cfd23c83851b8563a001af8fd7cff31546400692af37d7400c1",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-fullapp-final-r7\\restart\\results.trx",
+    "sha256": "dcf360700f1f1437986cf4cdb3f20e8d7f63436aa908be2a18924e1971bfc0f6",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "retirement-fullapp-final-r7\\upgrade\\results.trx",
+    "sha256": "8c18df0fce57cda8d1a32cb2ff6a3d04ddf15ee8e9043257c7a98cacf2950f8a",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "safety-after\\results.trx",
+    "sha256": "56295e65a36f0b0090cf699f5cd66deed05d28835c0d433e35e9ad57b792cdb5",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "1",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "safety-before\\results.trx",
+    "sha256": "326811ab36d52aeeb8ed2ce9db9376e48552aa2171d65a37dc6a8704343d5e1e",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [
+      {
+        "name": "LegacySimpleControlsCannotBypassReferenceLocksOrOriginalReadOnly",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DarkroomStageATests。LegacySimpleControlsCannotBypassReferenceLocksOrOriginalReadOnly 引发了异常: \r\nSystem.ArgumentException: Look identity, references and weights must be valid. at RAWSelectionAssistant.Core.Services.Projects.ReferenceLook.Normalize()\r\n   at RAWSelectionAssistant.Core.Services.Projects.ColorStudioLegacyMigration.Migrate(ReferenceLook look, Nullable`1 id)\r\n   at RAWSelectionAssistant.WpfTests.R53DarkroomStageATests.<>c.<<LegacySimpleControlsCannotBypassReferenceLocksOrOriginalReadOnly>b__13_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ],
+    "authoritative": false
+  },
+  {
+    "path": "safety-before-r2\\results.trx",
+    "sha256": "315ceadaa6d0772980e5ee45777b2fc2fed3a40b2cf11032cb27d666525041bf",
+    "counts": {
+      "total": "1",
+      "executed": "1",
+      "passed": "0",
+      "failed": "1",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [
+      {
+        "name": "LegacySimpleControlsCannotBypassReferenceLocksOrOriginalReadOnly",
+        "message": "Assert.AreEqual 失败。字符串长度应为 4610，但为 4387。 ‘expected’表达式:‘lookBefore’,‘actual’表达式:‘JsonSerializer.Serialize(editor.SelectedLook)’。 Locked stack must also protect legacy look fields used by save/export\r\n应为:  \"...725669\",\"Name\":\"\\u9501\\u5B9A\\u53C2\\...\"\r\n但却是: \"...725669\",\"Name\":\"\\u4E0D\\u80FD\\u66FF\\...\"\r\n---------------------------^ at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405\r\n   at RAWSelectionAssistant.WpfTests.R53DarkroomStageATests.<>c.<<LegacySimpleControlsCannotBypassReferenceLocksOrOriginalReadOnly>b__13_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ],
+    "authoritative": false
+  },
+  {
+    "path": "safety-close\\results.trx",
+    "sha256": "48f009a580fc4804e1d310c14f287b58055baf5c3e21748d973bda2f09fb7a38",
+    "counts": {
+      "total": "2",
+      "executed": "2",
+      "passed": "2",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "scoped-r6\\results.trx",
+    "sha256": "33f54b52e9237c6357451c372b4c29ae9f30a5133a66dfe8b6012c61c4ed214e",
+    "counts": {
+      "total": "49",
+      "executed": "45",
+      "passed": "35",
+      "failed": "10",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [
+      {
+        "name": "DipBreakpointsAndProfessionalNodeFilmstripOrderAreRealLayout",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DarkroomStageATests。DipBreakpointsAndProfessionalNodeFilmstripOrderAreRealLayout 引发了异常: \r\nSystem.ArgumentNullException: Value cannot be null. (Parameter 'key') at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\r\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView.InitializePanelLayout()\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView..ctor()\r\n   at RAWSelectionAssistant.WpfTests.R53DarkroomStageATests.<>c.<<DipBreakpointsAndProfessionalNodeFilmstripOrderAreRealLayout>b__8_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests。SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters 引发了异常: \r\nSystem.ArgumentNullException: Value cannot be null. (Parameter 'key') at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\r\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView.InitializePanelLayout()\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView..ctor()\r\n   at RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.<>c.<<SelectedStepSyncChangesTargetPixelsAndKeepsOtherParameters>b__3_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "PersistentSyntheticDarkroomSampleAndOffscreenLayoutEvidence",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DarkroomStageATests。PersistentSyntheticDarkroomSampleAndOffscreenLayoutEvidence 引发了异常: \r\nSystem.ArgumentNullException: Value cannot be null. (Parameter 'key') at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\r\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView.InitializePanelLayout()\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView..ctor()\r\n   at RAWSelectionAssistant.WpfTests.R53DarkroomStageATests.<>c.<<PersistentSyntheticDarkroomSampleAndOffscreenLayoutEvidence>b__10_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "ProductRepositorySharesVersionsAcrossWorkspacesWithoutPathIdentity",
+        "message": "Assert.HasCount 失败。大小 1 的预期集合。实际： 3。‘collection’表达式:‘second.ActiveTarget.EditVersions.Where(v=>!v.Archived)’。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertCountFailed(String assertionName, Int32 expectedCount, Int32 actualCount, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.Count.cs:line 345\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.HasCount[T](String assertionName, Int32 expected, IEnumerable`1 collection, String message, String collectionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.Count.cs:line 330\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.HasCount[T](Int32 expected, IEnumerable`1 collection, String message, String collectionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.Count.cs:line 260\r\n   at RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.<>c.<<ProductRepositorySharesVersionsAcrossWorkspacesWithoutPathIdentity>b__1_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "ConflictHandlerPreservesLocalAndRejectsSecondConcurrentUpdate",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests。ConflictHandlerPreservesLocalAndRejectsSecondConcurrentUpdate 引发了异常: \r\nSystem.IO.InvalidDataException: 原始/主变体或评分身份无效。 at RAWSelectionAssistant.Core.Services.Projects.StudioVersionRepository.SaveAsync(StudioVersionCatalog expected, IReadOnlyList`1 versions, Nullable`1 selected, CancellationToken token)\r\n   at RAWSelectionAssistant.Core.Services.Projects.StudioVersionRepository.SaveAsync(StudioVersionCatalog expected, IReadOnlyList`1 versions, Nullable`1 selected, CancellationToken token)\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.ResolveConflictAsync(ReferenceTargetItem target, StudioVersionCatalog repository, String reason, CancellationToken token)\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.SaveEditVersionsAsync(CancellationToken token)\r\n   at RAWSelectionAssistant.WpfTests.ColorStudioFilmstripStateTests.<>c.<<ConflictHandlerPreservesLocalAndRejectsSecondConcurrentUpdate>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests。FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents 引发了异常: \r\nSystem.ArgumentNullException: Value cannot be null. (Parameter 'key') at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\r\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView.InitializePanelLayout()\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView..ctor()\r\n   at RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.<>c.<<FullV3PanelUsesSharedDraftAndUnloadedViewDoesNotReceiveModelEvents>b__1_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "FiveTabsKeepDenseLayoutFiltersAndLockedDraftGuard",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.LightPrintR3Tests。FiveTabsKeepDenseLayoutFiltersAndLockedDraftGuard 引发了异常: \r\nSystem.ArgumentNullException: Value cannot be null. (Parameter 'key') at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\r\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView.InitializePanelLayout()\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView..ctor()\r\n   at RAWSelectionAssistant.WpfTests.LightPrintR3Tests.<>c.<<FiveTabsKeepDenseLayoutFiltersAndLockedDraftGuard>b__3_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "RealPageOpenAdjustHistorySaveSyncAndExportKeepsLegacyPage",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests。RealPageOpenAdjustHistorySaveSyncAndExportKeepsLegacyPage 引发了异常: \r\nSystem.ArgumentNullException: Value cannot be null. (Parameter 'key') at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\r\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView.InitializePanelLayout()\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView..ctor()\r\n   at RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.<>c.<<RealPageOpenAdjustHistorySaveSyncAndExportKeepsLegacyPage>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "RepeatedPageLifecycleAndDraftDragsDoNotStartObsoleteRenders",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests。RepeatedPageLifecycleAndDraftDragsDoNotStartObsoleteRenders 引发了异常: \r\nSystem.ArgumentNullException: Value cannot be null. (Parameter 'key') at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\r\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView.InitializePanelLayout()\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView..ctor()\r\n   at RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.<>c.<<RepeatedPageLifecycleAndDraftDragsDoNotStartObsoleteRenders>b__4_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "ClicksPreviewWithoutHistoryThenDevelopLocksAndReshootKeepsVariant",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.LightPrintR3Tests。ClicksPreviewWithoutHistoryThenDevelopLocksAndReshootKeepsVariant 引发了异常: \r\nSystem.ArgumentNullException: Value cannot be null. (Parameter 'key') at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\r\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView.InitializePanelLayout()\r\n   at RAWSelectionAssistant.Views.PhotoGradePageView..ctor()\r\n   at RAWSelectionAssistant.WpfTests.LightPrintR3Tests.<>c.<<ClicksPreviewWithoutHistoryThenDevelopLocksAndReshootKeepsVariant>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ],
+    "authoritative": false
+  },
+  {
+    "path": "scoped-r7\\results.trx",
+    "sha256": "7ce56cef05e564fa05ea19dd63fd1e695538cccf3fd9e3744d33d16a3faf0e9b",
+    "counts": {
+      "total": "49",
+      "executed": "45",
+      "passed": "45",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  },
+  {
+    "path": "supplemental-shell-final\\results.trx",
+    "sha256": "e2bbc1059b151509d0491f2c36285909a9cf82dc3515d3ff57f8cd210f7aa3be",
+    "counts": {
+      "total": "6",
+      "executed": "6",
+      "passed": "6",
+      "failed": "0",
+      "error": "0",
+      "timeout": "0",
+      "aborted": "0",
+      "inconclusive": "0",
+      "passedButRunAborted": "0",
+      "notRunnable": "0",
+      "notExecuted": "0",
+      "disconnected": "0",
+      "warning": "0",
+      "completed": "0",
+      "inProgress": "0",
+      "pending": "0"
+    },
+    "failures": [],
+    "authoritative": false
+  }
+]

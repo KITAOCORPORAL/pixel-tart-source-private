@@ -1,0 +1,48 @@
+{
+  "A": {
+    "status": "PARTIAL",
+    "implemented": [
+      "shared editor and serial stack across modes",
+      "variant stable IDs original/main/rating/label",
+      "user/system lock mutation guards",
+      "confirm archive and session undo deletion",
+      "900ms existing-path autosave and close flush/concurrency protection",
+      "DIP responsive layout; wide dedicated 3D region; narrow explicit focus view",
+      "B brush-only and backslash compare with held compare release"
+    ],
+    "partial": [
+      "resource/filter/instant arrangement",
+      "serial node selection/right parameters",
+      "variant filmstrip expansion",
+      "3D existing real-image cloud reuse"
+    ],
+    "notImplemented": [
+      "real local brush/eraser mask and persisted mask undo",
+      "generic blend/opacity engine",
+      "2-4 variants synchronized pan/zoom comparison",
+      "physical DPI and pointer acceptance",
+      "full R5.3 polish/scopes/collage frozen update lifecycle"
+    ]
+  },
+  "B": {
+    "status": "NOT_STARTED_THIS_BATCH",
+    "scope": "existing math retained, no scientific improvement claim; no new pixel algorithms"
+  },
+  "C": {
+    "status": "NOT_STARTED_THIS_BATCH",
+    "scope": "existing R3/V3 retained, not R53 full port; prototype175 not product results"
+  },
+  "D": {
+    "status": "NOT_STARTED_THIS_BATCH",
+    "scope": "existing owned source validation/80ms merge kept; .ptplan v1 excludes canvas"
+  },
+  "E": {
+    "status": "NOT_STARTED_THIS_BATCH",
+    "scope": "all existing15 planning sections kept, no R53 full cross-module claim"
+  },
+  "addition": {
+    "status": "PRODUCT_COMPLETE_AUTOMATED_VERIFIED",
+    "nativeAcceptance": "NOT_RUN",
+    "scope": "retired old tutorial/no private data cleanup; visible branding updated; new guide deferred"
+  }
+}

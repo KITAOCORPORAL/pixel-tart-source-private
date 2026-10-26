@@ -1,0 +1,26 @@
+{
+  "archive": "N:\\pixart\\guangjing-r53-stage-a-20261026\\docs\\validation\\home-external-reconnect-20261022\\RAW_EVIDENCE.zip",
+  "archiveSha256": "e16a0ca1c5119c0adebf3095a4efffbad11ffccdcf6f6b0e7bab4eb8a9d19c2c",
+  "originalThresholdMs": 30000,
+  "originalSwitches": 10000,
+  "actualMs": 1292.9921,
+  "outcome": "Passed",
+  "sourceSha": "4f57ca5646b1b6e5f831bdecc8c7847114dfa941",
+  "rerun": false,
+  "currentProductPerformance": false,
+  "physicalVolumeCaveat": "Historical caveat retained unchanged; no new assertion about original volume serial",
+  "verified": [
+    {
+      "path": "performance-final-r4/identity.json",
+      "sha256": "031511f1eb986077ae08ceba2f479cbe5f0661000a868e1b27a1ad7a148f7523"
+    },
+    {
+      "path": "performance-final-r4/measurements/performance.json",
+      "sha256": "03b68c6327b54fb183cf4625ca91d2d746c10fd556dd61f4ea10ff2f02b9e846"
+    },
+    {
+      "path": "performance-final-r4/original-single/scenario11.trx",
+      "sha256": "0d5262955d779446a481db68702a53994de56bf7b1c42f66af92f564fa5f0864"
+    }
+  ]
+}

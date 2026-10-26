@@ -1,0 +1,35 @@
+{
+  "authority": "Existing committed household raw TRX and output; no rerun this batch",
+  "archive": "N:\\pixart\\guangjing-home-owned-canvas-20261025\\docs\\validation\\home-external-reconnect-20261022\\RAW_EVIDENCE.zip",
+  "archiveSha256": "e16a0ca1c5119c0adebf3095a4efffbad11ffccdcf6f6b0e7bab4eb8a9d19c2c",
+  "paths": [
+    "performance-final-r4/identity.json",
+    "performance-final-r4/measurements/performance.json",
+    "performance-final-r4/original-single/scenario11.trx"
+  ],
+  "identity": {
+    "sourceSha": "4f57ca5646b1b6e5f831bdecc8c7847114dfa941",
+    "coreSha256": "a5c5229c5b81d41fb06884a4a877a4a3f5fe18b52bce05ba773d8eb5f2e59c1d",
+    "testSha256": "72d85347e4c5408b35b10eeba38eaf9a02740cd87bf7563a325fb00b24d66798",
+    "probeSha256": "8159bf94d8d2f6c8cad1342e7fa54a2ff15bccc4495fd5bcda7127d11e710522",
+    "sharedFixture": "N:\\pixart\\Guangjing-Home-Reconnect-Delivery-20261022\\performance\\shared-fixture",
+    "temp": "N:\\pixart\\Guangjing-Home-Scenario11-Temp-FinalR4-20261022",
+    "originalScenario11Untouched": true,
+    "purpose": "Final product confirmation; earlier company-baseline household runs retained, no retries",
+    "psutilAvailable": false
+  },
+  "measurement": {
+    "open_switch_iterations": 10000,
+    "cold_total_ms": 1292.9921,
+    "worst_average_open_ms": 0.12929921,
+    "metadata_rows": 100000,
+    "projected_unique": 90000
+  },
+  "outcome": "Passed",
+  "rawSha256": {
+    "performance-final-r4/identity.json": "031511f1eb986077ae08ceba2f479cbe5f0661000a868e1b27a1ad7a148f7523",
+    "performance-final-r4/measurements/performance.json": "03b68c6327b54fb183cf4625ca91d2d746c10fd556dd61f4ea10ff2f02b9e846",
+    "performance-final-r4/original-single/scenario11.trx": "0d5262955d779446a481db68702a53994de56bf7b1c42f66af92f564fa5f0864"
+  },
+  "scope": "Historical source4f57ca56, not performance of current canvas commit; historical physical-volume caveat remains"
+}

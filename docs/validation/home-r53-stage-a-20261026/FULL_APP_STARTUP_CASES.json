@@ -1,0 +1,115 @@
+{
+  "sourceSha": "901061433ce56dbb85e49ff5cc8c95ecd82760fe",
+  "passed": 3,
+  "failed": 0,
+  "notRun": 0,
+  "separateProcesses": true,
+  "notPhysicalMouse": true,
+  "cases": [
+    {
+      "scenario": "first",
+      "process": {
+        "command": [
+          "dotnet",
+          "vstest",
+          "N:\\pixart\\guangjing-r53-stage-a-20261026\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "/TestCaseFilter:FullyQualifiedName~FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks",
+          "/Logger:trx;LogFileName=results.trx",
+          "/ResultsDirectory:N:\\pixart\\Guangjing-R53-Home-20261026\\retirement-fullapp-final-r10\\first"
+        ],
+        "pid": 40692,
+        "exitCode": 0,
+        "startEpoch": 1793032116.5593197,
+        "endEpoch": 1793032120.993854,
+        "scenario": "first",
+        "root": "N:\\pixart\\Guangjing-R53-Home-20261026\\retirement-fullapp-final-r10\\new-profile",
+        "sourceSha": "901061433ce56dbb85e49ff5cc8c95ecd82760fe"
+      },
+      "result": {
+        "scenario": "first",
+        "pid": 36748,
+        "dataRoot": "N:\\pixart\\Guangjing-R53-Home-20261026\\retirement-fullapp-final-r10\\new-profile",
+        "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "localSplit": true,
+        "tutorialActive": false,
+        "scanCount": 3,
+        "matched": 3,
+        "copied": 3,
+        "sourceBytesUnchanged": true,
+        "report": true,
+        "scope": "Actual App startup and commands in isolated testhost; NOT native mouse/DPI workflow"
+      },
+      "trxSha256": "08c0fffa3834438181da7acfaf69d2ea64232631e8b3636986bd89a958602046"
+    },
+    {
+      "scenario": "upgrade",
+      "process": {
+        "command": [
+          "dotnet",
+          "vstest",
+          "N:\\pixart\\guangjing-r53-stage-a-20261026\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "/TestCaseFilter:FullyQualifiedName~FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks",
+          "/Logger:trx;LogFileName=results.trx",
+          "/ResultsDirectory:N:\\pixart\\Guangjing-R53-Home-20261026\\retirement-fullapp-final-r10\\upgrade"
+        ],
+        "pid": 44148,
+        "exitCode": 0,
+        "startEpoch": 1793032120.9948533,
+        "endEpoch": 1793032125.1376054,
+        "scenario": "upgrade",
+        "root": "N:\\pixart\\Guangjing-R53-Home-20261026\\retirement-fullapp-final-r10\\upgrade-profile",
+        "sourceSha": "901061433ce56dbb85e49ff5cc8c95ecd82760fe"
+      },
+      "result": {
+        "scenario": "upgrade",
+        "pid": 42588,
+        "dataRoot": "N:\\pixart\\Guangjing-R53-Home-20261026\\retirement-fullapp-final-r10\\upgrade-profile",
+        "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "localSplit": true,
+        "tutorialActive": false,
+        "scanCount": 3,
+        "matched": 3,
+        "copied": 3,
+        "sourceBytesUnchanged": true,
+        "report": true,
+        "scope": "Actual App startup and commands in isolated testhost; NOT native mouse/DPI workflow"
+      },
+      "trxSha256": "e6e623d57d49155b60ae1970f61ddf6fe20895a8461f284bdd55e93184f0bc43"
+    },
+    {
+      "scenario": "restart",
+      "process": {
+        "command": [
+          "dotnet",
+          "vstest",
+          "N:\\pixart\\guangjing-r53-stage-a-20261026\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "/TestCaseFilter:FullyQualifiedName~FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks",
+          "/Logger:trx;LogFileName=results.trx",
+          "/ResultsDirectory:N:\\pixart\\Guangjing-R53-Home-20261026\\retirement-fullapp-final-r10\\restart"
+        ],
+        "pid": 34228,
+        "exitCode": 0,
+        "startEpoch": 1793032125.1396058,
+        "endEpoch": 1793032129.2340047,
+        "scenario": "restart",
+        "root": "N:\\pixart\\Guangjing-R53-Home-20261026\\retirement-fullapp-final-r10\\upgrade-profile",
+        "sourceSha": "901061433ce56dbb85e49ff5cc8c95ecd82760fe"
+      },
+      "result": {
+        "scenario": "restart",
+        "pid": 40024,
+        "dataRoot": "N:\\pixart\\Guangjing-R53-Home-20261026\\retirement-fullapp-final-r10\\upgrade-profile",
+        "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+        "localSplit": true,
+        "tutorialActive": false,
+        "scanCount": 3,
+        "matched": 3,
+        "copied": 3,
+        "sourceBytesUnchanged": true,
+        "report": true,
+        "scope": "Actual App startup and commands in isolated testhost; NOT native mouse/DPI workflow"
+      },
+      "trxSha256": "685a7f799122c948c088ce901fe9c98bba07d19086e72a77595bcccf8a98004e"
+    }
+  ]
+}
