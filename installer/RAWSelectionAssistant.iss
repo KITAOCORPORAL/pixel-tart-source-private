@@ -203,27 +203,27 @@ UninstallDisplayName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
 #ifdef ClickRoutingFixDevValidation
 OutputDir=..\artifacts\releases\2.3.0\installer
-OutputBaseFilename=PixelTart_2.3.0_ClickRoutingFix_DevValidation_x64
+OutputBaseFilename=Guangjing_2.3.0_ClickRoutingFix_DevValidation_x64
 #else
 #ifdef PhysicalPointerDiagnosticDevValidation2
 OutputDir=..\artifacts\releases\2.3.0\installer
-OutputBaseFilename=PixelTart_2.3.0_PhysicalPointerDiagnostic_DevValidation2_x64
+OutputBaseFilename=Guangjing_2.3.0_PhysicalPointerDiagnostic_DevValidation2_x64
 #else
 #ifdef PhysicalPointerDiagnosticDevValidation
 OutputDir=..\artifacts\releases\2.3.0\installer
-OutputBaseFilename=PixelTart_2.3.0_PhysicalPointerDiagnostic_DevValidation_x64
+OutputBaseFilename=Guangjing_2.3.0_PhysicalPointerDiagnostic_DevValidation_x64
 #else
 #ifdef InputRoutingHotfixDevValidation
 OutputDir=..\artifacts\releases\2.3.0\installer
-OutputBaseFilename=PixelTart_2.3.0_InputRoutingHotfix_DevValidation_x64
+OutputBaseFilename=Guangjing_2.3.0_InputRoutingHotfix_DevValidation_x64
 #else
 #ifdef GlobalSurfaceCloseDevValidation
 OutputDir=..\artifacts\releases\2.3.0\installer
-OutputBaseFilename=PixelTart_2.3.0_GlobalSurfaceClose_DevValidation_x64
+OutputBaseFilename=Guangjing_2.3.0_GlobalSurfaceClose_DevValidation_x64
 #else
 #ifdef CoreReliabilityInteractionHotfix
 OutputDir=..\artifacts\releases\2.3.0\installer
-OutputBaseFilename=PixelTart_2.3.0_CoreReliability_InteractionHotfix_DevValidation_x64
+OutputBaseFilename=Guangjing_2.3.0_CoreReliability_InteractionHotfix_DevValidation_x64
 #else
 #ifdef CoreReliabilityDevValidation
 OutputDir=..\artifacts\releases\2.3.0\installer
