@@ -11,7 +11,7 @@ public sealed class FeedbackSidebar143Tests
     [TestMethod] public void FeedbackDialog_ShowsSupportEmail() { Contains(Text("src/RAWSelectionAssistant/Views/FeedbackDialog.xaml"), "作者邮箱", "EmailTextBox"); Assert.AreEqual("3183483929@qq.com", new FeedbackRequestBuilder().Build("Windows test").EmailAddress); }
     [TestMethod] public void CopyEmail_WritesExactAddress() { var clipboard = new FakeClipboard(); new FeedbackService(Request(), clipboard, new FakeLauncher(), new TestLogService()).CopyEmail(); Assert.AreEqual("3183483929@qq.com", clipboard.Text); }
     [TestMethod] public void Mailto_UsesCorrectRecipient() => StringAssert.StartsWith(Request().MailtoUri, "mailto:3183483929@qq.com?");
-    [TestMethod] public void Mailto_UsesCorrectSubject() => Assert.AreEqual("像素蛋挞建议与问题反馈", Request().Subject);
+    [TestMethod] public void Mailto_UsesCorrectSubject() => Assert.AreEqual("光镜建议与问题反馈", Request().Subject);
     [TestMethod] public void MailBody_ContainsSoftwareVersion() => StringAssert.Contains(Request().Body, $"软件版本：{Branding.ProductVersion}");
     [TestMethod] public void MailBody_ContainsWindowsVersion() => StringAssert.Contains(Request().Body, "Windows版本：Windows 11 测试版");
     [TestMethod] public void MailBody_DoesNotContainPhotoPath() => DoesNotContain(Request().Body, "C:\\照片", "D:\\项目", "照片完整路径");

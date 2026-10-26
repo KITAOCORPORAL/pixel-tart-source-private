@@ -28,6 +28,31 @@ public sealed class TutorialRetirementProductTests
         Assert.AreEqual("光镜",new PublishingWatermarkLayerViewModel().Text);
         Assert.IsFalse(shell.Title.Contains("像素蛋挞")); return Task.CompletedTask;
     });
+    [TestMethod]
+    public void ProductXamlAndTranslationValuesHaveNoVisibleOldBrand()
+    {
+        var root=TestResources.Root;
+        var visible=new HashSet<string>{"Title","Text","Header","Content","ToolTip","AutomationProperties.Name","AutomationProperties.HelpText","AutomationName","ToolTipText"};
+        static bool Old(string value)=>System.Text.RegularExpressions.Regex.IsMatch(value,@"像素蛋挞|Pixel\s*Tart",System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        foreach(var file in Directory.EnumerateFiles(Path.Combine(root,"src"),"*.xaml",SearchOption.AllDirectories)
+            .Where(f=>!f.Contains(Path.DirectorySeparatorChar+"obj"+Path.DirectorySeparatorChar)&&!f.Contains(Path.DirectorySeparatorChar+"bin"+Path.DirectorySeparatorChar)))
+        {
+            var doc=System.Xml.Linq.XDocument.Load(file);
+            foreach(var attribute in doc.Descendants().Attributes().Where(a=>visible.Contains(a.Name.LocalName)&&!a.Value.StartsWith('{')))
+                Assert.IsFalse(Old(attribute.Value),file+" "+attribute.Name+"="+attribute.Value);
+        }
+        foreach(var file in Directory.EnumerateFiles(Path.Combine(root,"src/RAWSelectionAssistant/Resources/Studio"),"*.json"))
+        {
+            using var doc=JsonDocument.Parse(File.ReadAllText(file));
+            foreach(var entry in doc.RootElement.EnumerateObject())
+                if(entry.Value.ValueKind==JsonValueKind.String)Assert.IsFalse(Old(entry.Value.GetString()??""),file+" "+entry.Name);
+        }
+        Assert.AreEqual("光镜建议与问题反馈",new FeedbackRequestBuilder().Build().Subject);
+        Assert.AreEqual("光镜",new RAWSelectionAssistant.Core.Services.Export.TiffExportOptions().Software);
+        var shell=File.ReadAllText(Path.Combine(root,"src/RAWSelectionAssistant/MainWindow.xaml"));
+        Assert.IsFalse(shell.Contains("Header=\"新手教程\""));
+        Assert.IsFalse(shell.Contains("TutorialOverlay"));
+    }
     private static IEnumerable<DependencyObject> Descendants(DependencyObject parent)
     {
         for(int i=0;i<VisualTreeHelper.GetChildrenCount(parent);i++)
