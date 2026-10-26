@@ -21,7 +21,7 @@ public partial class PhotoGradePageView
             if(ExecuteR53PointerShortcut(e.Key)){e.Handled=true;}
             else if(e.Key==Key.F2){await model.CreateR53VariantAsync(true);e.Handled=true;}
             else if(e.Key==Key.F3){await model.CreateR53VariantAsync(false);e.Handled=true;}
-            else if(e.Key==Key.Escape){r53Inspect?.Close();}
+            else if(e.Key==Key.Escape){closeR53Inspection?.Invoke();}
         };
         Unloaded+=(_,_)=>{model?.Editor.HoldOriginal(false);closeR53Inspection?.Invoke();};
     }
@@ -41,7 +41,7 @@ public partial class PhotoGradePageView
         ResourceColumn.Width=new GridLength(resources?264:0);R53Resources.Visibility=resources?Visibility.Visible:Visibility.Collapsed;
         if(width<1440){SetPanelOpen(false);}else if(RightPanel.Visibility!=Visibility.Visible)SetPanelOpen(true);
         R53SerialNodes.Visibility=professional?Visibility.Visible:Visibility.Collapsed;R53NodeRow.Height=new GridLength(professional?132:0);
-        if(professional)EditModes.SelectedIndex=2;
+        if(professional&&EditModes.SelectedIndex==4)EditModes.SelectedIndex=2;
     }
     private void R53ParameterCategory(object sender,RoutedEventArgs e)
     {
@@ -52,7 +52,7 @@ public partial class PhotoGradePageView
         if(type=="Curve")PhotographerCurve.BringIntoView();else if(type=="ColorBalance")AdjustmentScroll.ScrollToVerticalOffset(380);else AdjustmentScroll.ScrollToTop();
     }
     private void R53Simple(object s,RoutedEventArgs e){if(model is not null)model.R53Professional=false;ApplyR53Layout();EditModes.SelectedIndex=0;}
-    private void R53Professional(object s,RoutedEventArgs e){if(model is not null)model.R53Professional=true;ApplyR53Layout();}
+    private void R53Professional(object s,RoutedEventArgs e){if(model is not null)model.R53Professional=true;ApplyR53Layout();EditModes.SelectedIndex=2;}
     private void R53ToggleResources(object s,RoutedEventArgs e){r53ResourcesRequested=!r53ResourcesRequested;ApplyR53Layout();if(ActualWidth<1200){var menu=new ContextMenu{PlacementTarget=(UIElement)s};foreach(var (name,type) in new[]{("基础调色","BasicTone"),("白平衡","WhiteBalance"),("曲线","Curve"),("色轮","ColorBalance"),("色域取样（已有能力）","ColorRange")})menu.Items.Add(new MenuItem{Header=name,Command=model?.Editor.AddAdjustmentNodeCommand,CommandParameter=type});menu.IsOpen=true;}}
     private void R53Brush(object s,RoutedEventArgs e){activeTool="画笔";ToolLabel.Text="画笔 · 当前局部蒙版尚未批准接入";ToolHint.Text="不可用：未连接真实蒙版渲染，不生成假蒙版";}
     private void R53CompareDown(object s,MouseButtonEventArgs e){if(model is null)return;r53CompareHeld=true;model.Editor.HoldOriginal(true);R53HoldCompare.CaptureMouse();e.Handled=true;}
