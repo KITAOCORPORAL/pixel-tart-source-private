@@ -10,6 +10,7 @@
 - 全部功能完成且交互稳定后，集中制作覆盖光镜所有功能的产品引导与说明教程。
 - 上述后置引导以届时实际交付功能为准，覆盖完整摄影师工作流、各模块操作及跨模块衔接。当前不开发替代教程。产品待办 docs/PRODUCT_BACKLOG.md。
 - 当前用户全局规则禁止Computer Use/Browser/WebView/CDP；不重新启用。真实EXE仅做OS进程/模块身份启动与空工作区关闭核对；自动完整App夹具不等于鼠标保存重开/DPI。离屏WPF图不作实机截图。
+- 最新可运行源码90106143（教程退役d6590c99，后续955548a1仅安装器，src/tests零差异）。本机最终Core211PASS/0FAIL/2NOT_RUN、WPF108PASS/0FAIL/4NOT_RUN；完整App3独立启动夹具PASS不等鼠标验收。
 - 完整发布/最终产品SHA、家用实测计数、ZIP/远端读回只以 docs/validation/home-r53-stage-a-20261026/FINAL_REPORT.md、TEST_SUMMARY.json、PUSH_READBACK.json 为准（生成后）；公司216/197仅历史。首版592ecccb已跑Core65PASS/2NOT_RUN、WPF62PASS/4NOT_RUN，后续教程退役须重新绑定最终发布DLL，不能沿用这些成绩。
 - 统一交付根 N:/pixart/Guangjing-R53-Home-20261026；最新完整诊断包名称见最终报告。WholeAppDiagnosticBuild=true / PhotographerTrialBuild=false / win-x64自包含；不发行、不生成安装包。默认CMD不依赖脚本执行策略，不修改系统策略。
 - 下一步先补阶段A批准渲染蒙版/混合与变体对比；像素行为改变遵守docs/color-science/open-source-first/POLICY.md，保留PV4/5/6及默认关闭研究。不得把R3原型175项算WPF完成、把.ptplan v1写成包含自由画布。
