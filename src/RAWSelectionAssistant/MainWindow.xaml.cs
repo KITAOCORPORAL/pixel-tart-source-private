@@ -29,10 +29,7 @@ public partial class MainWindow : Window
     private const double AssetLibraryShellMinWidth = 720d;
     private const double AssetLibraryShellMinHeight = 400d;
     private bool _hasSavedPosition;
-    private readonly TutorialSpotlightLayoutService _spotlightLayoutService = new();
-    private bool _tutorialLayoutPending;
     private MainViewModel? _viewModel;
-    private TutorialTarget? _lastTutorialTarget;
     private bool _taskCenterDrawerOpen;
     private bool _tetherFullScreen;
     private WindowStyle _tetherPreviousWindowStyle;
@@ -54,11 +51,11 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 #if MODULAR_HARNESS_DEV_PREVIEW
-        Title = "像素蛋挞 [Modular Harness Dev]";
+        Title = "光镜 [Modular Harness Dev]";
 #endif
 #if UI_REVIEW_BUILD
         if (string.Equals(Environment.GetEnvironmentVariable("PIXEL_TART_RC12_PRODUCT_HARNESS"), "1", StringComparison.Ordinal))
-            Title = "像素蛋挞 · RC12 Product Visual Harness";
+            Title = "光镜 · RC12 Product Visual Harness";
 #endif
         if (Application.Current is App app && app.ModuleRegistry is not null)
             AssetLibraryWorkspace.ModuleRegistry = app.ModuleRegistry;
@@ -568,7 +565,7 @@ public partial class MainWindow : Window
         (page ?? this).Focus();
     }
 
-    private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+    private void MainWindow_Loaded(object sender, RoutedEventArgs e)
     {
         var darkTheme = Application.Current.Resources.MergedDictionaries.Any(dictionary =>
             dictionary.Source?.OriginalString.Contains("Theme.Dark", StringComparison.OrdinalIgnoreCase) == true);
@@ -582,12 +579,7 @@ public partial class MainWindow : Window
         _viewModel?.SetQuickToolsCompact(ActualWidth < 1180);
         UpdateWorkbenchResponsiveLayout();
         ScheduleTutorialLayout();
-        if (_viewModel?.NeedsUpgradeTutorialOffer == true)
-        {
-            var offer = new UpgradeTutorialWindow { Owner = this };
-            offer.ShowDialog();
-            await _viewModel.RespondToUpgradeOfferAsync(offer.Accepted);
-        }
+
     }
 
     private async void Window_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -638,15 +630,6 @@ public partial class MainWindow : Window
 
             e.Handled = true;
             await RequestEscapeCloseAsync();
-            return;
-        }
-
-        if (_viewModel?.IsOnboardingActive == true && e.Key == Key.Tab)
-        {
-            var target = ResolveTutorialTarget(_viewModel.TutorialTarget);
-            if (target is not null) target.Focus();
-            else TutorialPrimaryButton.Focus();
-            e.Handled = true;
             return;
         }
 
@@ -862,14 +845,7 @@ public partial class MainWindow : Window
 
     private void DetachTutorialUiImmediately()
     {
-        TutorialOverlay.Visibility = Visibility.Collapsed;
-        TutorialHighlight.Visibility = Visibility.Collapsed;
-        TutorialPointer.Visibility = Visibility.Collapsed;
-        TutorialMaskTop.IsHitTestVisible = false;
-        TutorialMaskLeft.IsHitTestVisible = false;
-        TutorialMaskRight.IsHitTestVisible = false;
-        TutorialMaskBottom.IsHitTestVisible = false;
-        _lastTutorialTarget = null;
+        // Compatibility escape seam only; no retired overlay remains in the visual tree.
         InputRoutingDiagnostics.RecordShellEvent(
             "TutorialOverlayDetached",
             _viewModel?.CurrentPage ?? string.Empty,
@@ -879,7 +855,6 @@ public partial class MainWindow : Window
 
     private string CurrentOverlayName()
     {
-        if (TutorialOverlay.Visibility == Visibility.Visible) return nameof(TutorialOverlay);
         if (BookingEditorOverlay.Visibility == Visibility.Visible) return nameof(BookingEditorOverlay);
         if (_viewModel?.IsSettingsModalOpen == true) return nameof(SettingsModal);
         return string.Empty;
@@ -1376,126 +1351,8 @@ public partial class MainWindow : Window
     private void ViewModel_TutorialVisualStateChanged(object? sender, EventArgs e) => ScheduleTutorialLayout();
     private void ViewModel_CloseRequested(object? sender, EventArgs e) => Close();
 
-    private void ScheduleTutorialLayout()
-    {
-        if (_tutorialLayoutPending) return;
-        _tutorialLayoutPending = true;
-        Dispatcher.BeginInvoke(DispatcherPriority.Loaded, () =>
-        {
-            _tutorialLayoutPending = false;
-            UpdateTutorialLayout();
-        });
-    }
-
-    private void UpdateTutorialLayout()
-    {
-        if (_viewModel?.IsOnboardingActive != true || RootGrid.ActualWidth <= 0 || RootGrid.ActualHeight <= 0)
-        {
-            DetachTutorialUiImmediately();
-            return;
-        }
-
-        TutorialOverlay.Visibility = Visibility.Visible;
-        TutorialMaskTop.IsHitTestVisible = true;
-        TutorialMaskLeft.IsHitTestVisible = true;
-        TutorialMaskRight.IsHitTestVisible = true;
-        TutorialMaskBottom.IsHitTestVisible = true;
-        TutorialOverlay.Width = RootGrid.ActualWidth;
-        TutorialOverlay.Height = RootGrid.ActualHeight;
-        var tutorialTarget = _viewModel.TutorialTarget;
-        var targetChanged = _lastTutorialTarget != tutorialTarget;
-        if (targetChanged)
-        {
-            _lastTutorialTarget = tutorialTarget;
-            PrepareTutorialTarget(tutorialTarget);
-        }
-
-        var target = ResolveTutorialTarget(tutorialTarget);
-        if (target is null || !target.IsVisible || _viewModel.TutorialTarget is TutorialTarget.Welcome or TutorialTarget.Completed)
-        {
-            SetMask(TutorialMaskTop, 0, 0, RootGrid.ActualWidth, RootGrid.ActualHeight);
-            SetMask(TutorialMaskLeft, 0, 0, 0, 0);
-            SetMask(TutorialMaskRight, 0, 0, 0, 0);
-            SetMask(TutorialMaskBottom, 0, 0, 0, 0);
-            TutorialHighlight.Visibility = Visibility.Collapsed;
-            TutorialPointer.Visibility = Visibility.Collapsed;
-            Canvas.SetLeft(TutorialCard, Math.Max(16, (RootGrid.ActualWidth - TutorialCard.Width) / 2));
-            Canvas.SetTop(TutorialCard, Math.Max(16, (RootGrid.ActualHeight - 280) / 2));
-            if (targetChanged && Mouse.LeftButton == MouseButtonState.Released) TutorialPrimaryButton.Focus();
-            return;
-        }
-
-        if (targetChanged) target.BringIntoView();
-
-        var point = target.TransformToAncestor(RootGrid).Transform(new Point(0, 0));
-        var layout = _spotlightLayoutService.Calculate(
-            RootGrid.ActualWidth,
-            RootGrid.ActualHeight,
-            point.X,
-            point.Y,
-            target.ActualWidth,
-            target.ActualHeight,
-            TutorialCard.Width,
-            TutorialCard.ActualHeight > 0 ? TutorialCard.ActualHeight : 300);
-        SetMask(TutorialMaskTop, 0, 0, RootGrid.ActualWidth, layout.TargetTop);
-        SetMask(TutorialMaskLeft, 0, layout.TargetTop, layout.TargetLeft, layout.TargetHeight);
-        SetMask(TutorialMaskRight, layout.TargetLeft + layout.TargetWidth, layout.TargetTop, Math.Max(0, RootGrid.ActualWidth - layout.TargetLeft - layout.TargetWidth), layout.TargetHeight);
-        SetMask(TutorialMaskBottom, 0, layout.TargetTop + layout.TargetHeight, RootGrid.ActualWidth, Math.Max(0, RootGrid.ActualHeight - layout.TargetTop - layout.TargetHeight));
-        TutorialHighlight.Visibility = Visibility.Visible;
-        TutorialHighlight.Width = layout.TargetWidth;
-        TutorialHighlight.Height = layout.TargetHeight;
-        Canvas.SetLeft(TutorialHighlight, layout.TargetLeft);
-        Canvas.SetTop(TutorialHighlight, layout.TargetTop);
-        Canvas.SetLeft(TutorialCard, layout.CardLeft);
-        Canvas.SetTop(TutorialCard, layout.CardTop);
-        TutorialPointer.Visibility = Visibility.Visible;
-        var cardIsRight = layout.CardLeft > layout.TargetLeft;
-        TutorialPointer.X1 = cardIsRight ? layout.CardLeft : layout.CardLeft + TutorialCard.Width;
-        TutorialPointer.Y1 = layout.CardTop + 54;
-        TutorialPointer.X2 = cardIsRight ? layout.TargetLeft + layout.TargetWidth : layout.TargetLeft;
-        TutorialPointer.Y2 = layout.TargetTop + layout.TargetHeight / 2;
-        if (targetChanged && Mouse.LeftButton == MouseButtonState.Released) target.Focus();
-    }
-
-    private FrameworkElement? ResolveTutorialTarget(TutorialTarget target) => target switch
-    {
-        TutorialTarget.AddSourceButton => AddSourceButton,
-        TutorialTarget.RemoveSourceButton => RemoveSourceButton,
-        TutorialTarget.CollectionCategorySelector => CategorySelector,
-        TutorialTarget.ScanButton => ScanButton,
-        TutorialTarget.CancelButton => CancelButton,
-        TutorialTarget.CustomerDropArea => CustomerDropArea,
-        TutorialTarget.PasteButton => PasteButton,
-        TutorialTarget.ParseButton => ParseButton,
-        TutorialTarget.ClearSelectionsButton => ClearSelectionsButton,
-        TutorialTarget.MatchButton => MatchButton,
-        TutorialTarget.ResultsGrid => ResultsGrid,
-        TutorialTarget.FirstDetailsButton => ResolveFirstDetailsButton(),
-        TutorialTarget.JpegQualityArea => JpegQualityArea,
-        TutorialTarget.BrowseOutputButton => BrowseOutputButton,
-        TutorialTarget.ProjectNameInput => ProjectNameInput,
-        TutorialTarget.OutputModeSelector => OutputModeSelector,
-        TutorialTarget.CopyButton => CopyButton,
-        TutorialTarget.ExportButton => ExportButton,
-        TutorialTarget.OpenOutputButton => OpenOutputButton,
-        TutorialTarget.ClearTaskButton => ClearTaskButton,
-        TutorialTarget.EditionStatusArea => EditionStatusArea,
-        _ => null
-    };
-
-    private void PrepareTutorialTarget(TutorialTarget target)
-    {
-        if (target != TutorialTarget.FirstDetailsButton || ResultsGrid.Items.Count == 0) return;
-        ResultsGrid.ScrollIntoView(ResultsGrid.Items[0], DetailsColumn);
-        ResultsGrid.UpdateLayout();
-    }
-
-    private FrameworkElement ResolveFirstDetailsButton()
-    {
-        if (ResultsGrid.Items.Count == 0) return ResultsGrid;
-        var content = DetailsColumn.GetCellContent(ResultsGrid.Items[0]);
-        return FindVisualChild<Button>(content) ?? content ?? ResultsGrid;
-    }
+    // Kept for old diagnostic callbacks; no layout work, focus trap, masks or callouts.
+    private void ScheduleTutorialLayout() { }
 
     private static T? FindVisualChild<T>(DependencyObject? parent) where T : DependencyObject
     {
@@ -1509,11 +1366,4 @@ public partial class MainWindow : Window
         return null;
     }
 
-    private static void SetMask(Shape shape, double left, double top, double width, double height)
-    {
-        shape.Width = Math.Max(0, width);
-        shape.Height = Math.Max(0, height);
-        Canvas.SetLeft(shape, left);
-        Canvas.SetTop(shape, top);
-    }
 }

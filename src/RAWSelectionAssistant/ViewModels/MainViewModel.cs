@@ -790,7 +790,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
     public int WorkbenchAwaitingReturnCount => WorkCalendarPage.AwaitingReturnCount;
     public int WorkbenchCompletedCount => ProjectHistory.Count(project => project.Status == PhotoProjectStatus.Completed);
     public string TaskCenterSummary => IsBusy ? $"正在处理：{StatusMessage}" : "暂无待处理任务";
-    public string ThemeSummary => "PixelTart Dark Theme";
+    public string ThemeSummary => "光镜深色主题";
     public int CurrentWorkflowStep
     {
         get => _currentWorkflowStep;
@@ -1035,19 +1035,9 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         OnPropertyChanged(nameof(DisplayedPinnedToolboxItems));
         OnPropertyChanged(nameof(OverflowPinnedToolboxItems));
         _appearanceService.Initialize(Settings.Appearance);
-        var existingUserDetector = new ExistingUserDetectionService();
-        var currentTutorialInProgress = existingUserDetector.IsCurrentTutorialInProgress(
-            Settings, _settingsService.WasSettingsFilePresent, _settingsService.WasLegacySettings);
-        var existingUser = existingUserDetector.IsExistingUser(
-                Settings,
-                _settingsService.WasLegacySettings,
-                _settingsService.WasSettingsFilePresent,
-                File.Exists(AppDataPaths.IndexFile) || File.Exists(Path.Combine(AppDataPaths.IndexDirectory, "media-index.json")),
-                Directory.Exists(Settings.RecentOutputDirectory) && Directory.EnumerateFiles(Settings.RecentOutputDirectory, "匹配报告.*", SearchOption.AllDirectories).Any(),
-                Directory.Exists(Path.Combine(AppDataPaths.LegacyRoot, "Logs")) &&
-                Directory.EnumerateFiles(Path.Combine(AppDataPaths.LegacyRoot, "Logs"), "*.log", SearchOption.TopDirectoryOnly).Any(),
-                currentTutorialInProgress);
-        await _onboardingService.InitializeAsync(Settings, existingUser);
+        // Old tutorial retirement applies to new installs, upgrades and interrupted old steps.
+        // No recursive history scan and no demo setup is necessary for product startup.
+        await _onboardingService.InitializeAsync(Settings, existingUser: true);
         var savedSources = Settings.SourceDirectories.Count > 0
             ? Settings.SourceDirectories.OrderBy(x => x.Priority)
             : Settings.RecentRawDirectories.Distinct(StringComparer.OrdinalIgnoreCase)
@@ -1086,25 +1076,16 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         if (ProjectHistory.FirstOrDefault() is { } recent) _currentProject = recent;
         RegenerateOutputFolderName();
         _initialized = true;
-        if (IsOnboardingActive)
-        {
-            NavigateToSurface("Workflow", recordHistory: false);
-            await RestoreTutorialWorkspaceAsync();
-        }
-        else
-        {
 #if MODULAR_HARNESS_DEV_PREVIEW
-            NavigateToSurface(PrimaryNavigationPolicy.Workbench, recordHistory: false);
+        NavigateToSurface(PrimaryNavigationPolicy.Workbench, recordHistory: false);
 #else
-            NavigateToSurface(PrimaryNavigationPolicy.Normalize(Settings.LastPrimaryPage), recordHistory: false);
+        NavigateToSurface(PrimaryNavigationPolicy.Normalize(Settings.LastPrimaryPage), recordHistory: false);
 #endif
-        }
         StatusMessage = IndexedMediaCount > 0
             ? $"已载入综合索引，共 {IndexedMediaCount:N0} 个文件"
             : "请添加照片来源目录并建立索引";
         NotifyTutorialChanged();
         OnLicenseChanged();
-        if (_onboardingService.NeedsUpgradeOffer) UpgradeTutorialOfferRequested?.Invoke(this, EventArgs.Empty);
     }
 
     private void ChildPage_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -1613,13 +1594,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         if (IsOnboardingActive) _ = AdvanceTutorialAsync(TutorialAction.ClearCurrentTask, CreateTutorialContext() with { OutputPreserved = outputPreserved });
     }
 
-    public async Task RespondToUpgradeOfferAsync(bool startTutorial)
-    {
-        if (startTutorial) CaptureNormalWorkspace();
-        await _onboardingService.AcceptUpgradeOfferAsync(startTutorial);
-        if (startTutorial) await PrepareTutorialWorkspaceAsync(resetProgress: true);
-        NotifyTutorialChanged();
-    }
+    public Task RespondToUpgradeOfferAsync(bool startTutorial) => Task.CompletedTask;
 
     private bool CanTutorial(TutorialAction action) => _onboardingService.CanPerform(action);
 
@@ -1777,31 +1752,11 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         }
     }
 
-    private async Task ShowHelpAsync()
+    private Task ShowHelpAsync()
     {
-        switch (_dialogService.ShowHelp())
-        {
-            case HelpAction.ReplayTutorial:
-                CaptureNormalWorkspace();
-                await _onboardingService.StartReplayAsync();
-                await PrepareTutorialWorkspaceAsync(resetProgress: true);
-                break;
-            case HelpAction.ResetTutorialData:
-                if (_dialogService.Confirm("只会重新创建像素蛋挞的教程示例文件，不会删除你的照片。", "重置教程演示数据"))
-                {
-                    await _onboardingService.ResetTutorialDataAsync();
-                    _dialogService.ShowInfo("教程演示数据已重新创建。 ");
-                }
-                break;
-            case HelpAction.DeleteTutorialData:
-                if (_dialogService.Confirm("只会删除像素蛋挞创建的教程示例文件，不会删除你的照片。", "删除教程演示数据"))
-                {
-                    _onboardingService.DeleteTutorialData(_onboardingService.Sandbox.Root);
-                    _dialogService.ShowInfo("教程演示数据已删除。以后重新查看教程时会自动创建。 ");
-                }
-                break;
-        }
-        NotifyTutorialChanged();
+        // Legacy HelpAction values remain deserializable but cannot restart/delete demo data.
+        _dialogService.ShowHelp();
+        return Task.CompletedTask;
     }
 
     private async Task PrepareTutorialWorkspaceAsync(bool resetProgress)

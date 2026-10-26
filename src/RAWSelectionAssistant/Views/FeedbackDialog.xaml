@@ -14,7 +14,7 @@
             <TextBlock Text="建议与问题反馈" Style="{StaticResource DialogTitle}" />
             <TextBlock Margin="0,12,0,22" TextWrapping="Wrap" LineHeight="23"
                        Foreground="{DynamicResource TextSecondaryBrush}"
-                       Text="如在使用像素蛋挞时遇到问题，或有功能建议，可以通过以下邮箱联系作者。" />
+                       Text="如在使用光镜时遇到问题，或有功能建议，可以通过以下邮箱联系作者。" />
             <TextBlock Text="作者邮箱" FontWeight="SemiBold" Margin="0,0,0,7" />
             <Grid>
                 <Grid.ColumnDefinitions>

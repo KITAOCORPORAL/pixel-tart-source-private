@@ -50,7 +50,7 @@ public sealed class LogMaintenanceService(string logDirectory, LogRetentionOptio
         var diagnostics = archive.CreateEntry("diagnostics.txt", CompressionLevel.Fastest);
         await using (var writer = new StreamWriter(diagnostics.Open(), new UTF8Encoding(false)))
         {
-            await writer.WriteLineAsync($"Product=像素蛋挞").ConfigureAwait(false);
+            await writer.WriteLineAsync($"Product=光镜").ConfigureAwait(false);
             await writer.WriteLineAsync($"Version={RAWSelectionAssistant.Core.Models.Branding.ProductVersion}").ConfigureAwait(false);
             await writer.WriteLineAsync($"OS={Environment.OSVersion.VersionString}").ConfigureAwait(false);
             await writer.WriteLineAsync($"Runtime={Environment.Version}").ConfigureAwait(false);

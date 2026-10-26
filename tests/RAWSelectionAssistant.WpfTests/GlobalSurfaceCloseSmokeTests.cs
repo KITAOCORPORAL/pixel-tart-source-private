@@ -65,7 +65,7 @@ public sealed class GlobalSurfaceCloseSmokeTests
     public void Escape_ClosesInputPopupBeforeClosingSurface()
     {
         var window = Read("src/RAWSelectionAssistant/MainWindow.xaml.cs");
-        var escapeBranch = Slice(window, "if (e.Key == Key.Escape)", "if (_viewModel?.IsOnboardingActive == true && e.Key == Key.Tab)");
+        var escapeBranch = Slice(window, "if (e.Key == Key.Escape)", "if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.B)");
         ContainsAll(escapeBranch, "TryCloseActiveInputPopup()", "e.Handled = true", "await RequestEscapeCloseAsync()");
         ContainsAll(window, "FindVisualChildren<ComboBox>(RootGrid)", "combo.IsDropDownOpen",
             "FindVisualChildren<DatePicker>(RootGrid)", "picker.IsDropDownOpen");
@@ -77,17 +77,10 @@ public sealed class GlobalSurfaceCloseSmokeTests
     public void TutorialButtonTutorialXAndEscape_ConvergeOnSingleForceExitTutorial()
     {
         var mainView = Read("src/RAWSelectionAssistant/MainWindow.xaml");
-        var mainCode = Read("src/RAWSelectionAssistant/MainWindow.xaml.cs");
-        var viewModel = Read("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs");
-
-        ContainsAll(mainView, "Content=\"退出教程\"", "Click=\"TutorialExitButton_Click\"",
-            "AutomationProperties.AutomationId=\"TutorialExitButton\"", "AutomationId=\"TutorialCalloutCloseButton\"", "SurfaceCloseButton");
-        ContainsAll(viewModel, "public void ForceExitTutorial()", "_onboardingService.DetachForExit()",
-            "RestoreNormalWorkspace()", "ReturnToWorkbench()", "TutorialReportNames");
-        ContainsAll(mainCode, "if (_viewModel.IsOnboardingActive)", "TutorialExitButton_Click", "ForceExitTutorial()");
-        Assert.AreEqual(1, Count(viewModel, "void ForceExitTutorial("), "Only one tutorial-exit authority may exist.");
-        Assert.IsFalse(viewModel.Contains("ExitTutorialAsync", StringComparison.Ordinal));
-        Assert.IsFalse(viewModel.Contains("TutorialExitCommand", StringComparison.Ordinal));
+        Assert.IsFalse(mainView.Contains("TutorialOverlay", StringComparison.Ordinal));
+        Assert.IsFalse(mainView.Contains("TutorialExitButton", StringComparison.Ordinal));
+        Assert.IsFalse(mainView.Contains("新手教程", StringComparison.Ordinal));
+        ContainsAll(Read("src/RAWSelectionAssistant/MainWindow.xaml.cs"), "await RequestEscapeCloseAsync()", "ForceCloseCurrentSurface()");
     }
 
     [TestMethod]
@@ -152,7 +145,8 @@ public sealed class GlobalSurfaceCloseSmokeTests
             Assert.IsFalse(shared.Contains(forbidden, StringComparison.Ordinal));
 
         var main = Read("src/RAWSelectionAssistant/MainWindow.xaml");
-        ContainsAll(main, "HasTutorialError", "SurfaceCloseButton");
+        ContainsAll(main, "SurfaceCloseButton");
+        Assert.IsFalse(main.Contains("HasTutorialError", StringComparison.Ordinal));
     }
 
     [TestMethod]

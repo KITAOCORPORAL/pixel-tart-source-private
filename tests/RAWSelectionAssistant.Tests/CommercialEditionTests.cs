@@ -221,7 +221,7 @@ public sealed class CommercialEditionTests
     public async Task FreeEditionCompletesThirtySelectionJpegAndRawFlow()
     {
         using var temp = new TempDirectory();
-        var tutorial = await new TutorialDataService(temp.Combine("tutorial")).EnsureCreatedAsync();
+        var tutorial = await SyntheticSplitFixture.CreateAsync(temp.Combine("synthetic-split"));
         var sourceJpeg = Directory.GetFiles(tutorial.JpegSource, "*.JPG")[0];
         var sourceRaw = Directory.GetFiles(tutorial.RawSource, "*.ARW")[0];
         var inputs = new List<ParsedSelectionInput>();

@@ -89,14 +89,9 @@ public sealed class ModalCloseSmokeTests
     public void TutorialOverlay_LeavesCardInteractiveAndExitAccessible()
     {
         var xaml = Read("src/RAWSelectionAssistant/MainWindow.xaml");
-        var code = Read("src/RAWSelectionAssistant/MainWindow.xaml.cs") +
-                   Read("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs");
-        StringAssert.Contains(xaml, "x:Name=\"TutorialOverlay\"");
-        StringAssert.Contains(xaml, "IsHitTestVisible=\"True\"");
-        StringAssert.Contains(xaml, "Panel.ZIndex=\"2200\"");
-        StringAssert.Contains(xaml, "AutomationProperties.Name=");
-        StringAssert.Contains(code, "CloseCurrentSurfaceAsync");
-        StringAssert.Contains(code, "ForceExitTutorial");
+        Assert.IsFalse(xaml.Contains("TutorialOverlay", StringComparison.Ordinal));
+        Assert.IsFalse(xaml.Contains("TutorialMask", StringComparison.Ordinal));
+        StringAssert.Contains(Read("src/RAWSelectionAssistant/MainWindow.xaml.cs"), "await RequestEscapeCloseAsync()");
     }
 
     [TestMethod]
@@ -129,11 +124,9 @@ public sealed class ModalCloseSmokeTests
     public void TutorialStep18Failure_OffersRetryRecreateBackAndExitWithoutBusyDeadlock()
     {
         var xaml = Read("src/RAWSelectionAssistant/MainWindow.xaml");
-        var source = Read("src/RAWSelectionAssistant/ViewModels/MainViewModel.cs");
-        foreach (var token in new[] { "TutorialRetryCommand", "TutorialRecreateDataCommand", "TutorialBackCommand", "TutorialExitButton_Click", "ForceExitTutorial" })
-            StringAssert.Contains(xaml + source, token);
-        StringAssert.Contains(source, "IsBusy = false");
-        StringAssert.Contains(source, "_tutorialCancellationTask = null");
+        foreach (var token in new[] { "TutorialRetryCommand", "TutorialRecreateDataCommand", "TutorialBackCommand", "TutorialExitButton_Click" })
+            Assert.IsFalse(xaml.Contains(token, StringComparison.Ordinal));
+        StringAssert.Contains(xaml, "ExportReportCommand");
     }
 
     [TestMethod]

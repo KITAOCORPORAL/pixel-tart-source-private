@@ -36,9 +36,9 @@ public partial class MainWindow
     {
         if (!PhysicalPointerDiagnosticSession.IsEnabled) return;
 #if MODULAR_HARNESS_DEV_PREVIEW
-        Title = "像素蛋挞 [Modular Harness Dev]";
+        Title = "光镜 [Modular Harness Dev]";
 #else
-        Title = "像素蛋挞 [Physical Pointer Diagnostic]";
+        Title = "光镜 [Physical Pointer Diagnostic]";
 #endif
         AddHandler(Mouse.PreviewMouseDownEvent, new MouseButtonEventHandler(PhysicalPointer_PreviewMouseDown), true);
         AddHandler(Mouse.PreviewMouseUpEvent, new MouseButtonEventHandler(PhysicalPointer_PreviewMouseUp), true);

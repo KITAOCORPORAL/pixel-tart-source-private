@@ -12,7 +12,7 @@ namespace RAWSelectionAssistant.ViewModels;
 
 public sealed class PublishingWatermarkLayerViewModel : ObservableObject
 {
-    private bool _enabled = true; private string _name = "文字水印"; private string _text = "Pixel Tart"; private string _imagePath = ""; private double _opacity = .72; private double _size = 12; private double _hue; private double _saturation; private double _lightness; private bool _invert; private WatermarkPosition _position = WatermarkPosition.BottomRight;
+    private bool _enabled = true; private string _name = "文字水印"; private string _text = "光镜"; private string _imagePath = ""; private double _opacity = .72; private double _size = 12; private double _hue; private double _saturation; private double _lightness; private bool _invert; private WatermarkPosition _position = WatermarkPosition.BottomRight;
     private string _fontFamily = "Microsoft YaHei UI"; private string _fontWeight = "SemiBold"; private double _fontSize = 34; private string _color = "#FFFFFFFF"; private double _letterSpacing; private double _marginPercent = 3; private double _horizontalOffset; private double _verticalOffset;
     public Guid Id { get; init; } = Guid.NewGuid(); public WatermarkLayerType Type { get; init; }
     public bool Enabled { get => _enabled; set => SetProperty(ref _enabled, value); }

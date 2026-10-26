@@ -185,7 +185,7 @@ public sealed class OrganizePhotosViewModel : ObservableObject
         if (!_dialogs.Confirm(message, "开始整理？")) return;
         if (CurrentPlan.OperationType == OrganizeOperationType.SavePlan)
         {
-            var planPath = _dialogs.ChooseSaveFile("保存整理方案", "像素蛋挞整理方案|*.json", ".json", $"整理方案_{DateTime.Now:yyyyMMdd_HHmm}.json");
+            var planPath = _dialogs.ChooseSaveFile("保存整理方案", "光镜整理方案|*.json", ".json", $"整理方案_{DateTime.Now:yyyyMMdd_HHmm}.json");
             if (planPath is null) return;
             StatusMessage = $"整理方案已保存：{await _service.SavePlanAsync(CurrentPlan, planPath)}";
             return;
@@ -399,7 +399,7 @@ public sealed class CollageViewModel : ObservableObject
     private async Task ExportAsync()
     {
         Project.Export.Format = "JPG";
-        var path = _dialogs.ChooseSaveFile("导出拼图", "JPEG|*.jpg|PNG|*.png", ".jpg", $"像素蛋挞拼图_{DateTime.Now:yyyyMMdd_HHmm}.jpg");
+        var path = _dialogs.ChooseSaveFile("导出拼图", "JPEG|*.jpg|PNG|*.png", ".jpg", $"光镜拼图_{DateTime.Now:yyyyMMdd_HHmm}.jpg");
         if (path is null) return;
         Project.Export.Format = string.Equals(Path.GetExtension(path), ".png", StringComparison.OrdinalIgnoreCase) ? "PNG" : "JPG";
         if (Project.Export.Format == "JPG") Project.Export.TransparentBackground = false;

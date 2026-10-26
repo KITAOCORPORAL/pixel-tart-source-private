@@ -147,7 +147,7 @@ public sealed partial class AssetLibraryViewModel
         try
         {
             await new DuplicateTrashSafetyService(_repository, CreateReferenceProtection()).MoveToTrashAsync(candidate.Asset.AssetId, false, _lifetimeCancellation.Token);
-            Status = $"{candidate.Asset.DisplayName} 已移到 Pixel Tart 回收站；磁盘源文件未删除。";
+            Status = $"{candidate.Asset.DisplayName} 已移到 光镜 回收站；磁盘源文件未删除。";
             await OpenDuplicateWorkspaceAsync();
         }
         catch (InvalidOperationException error) { Status = error.Message; }

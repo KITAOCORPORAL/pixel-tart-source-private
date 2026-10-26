@@ -97,10 +97,10 @@ public sealed class Version230Rc3RuntimeUiTests
     [TestMethod]
     public void UpgradeTutorialButtons_CloseSafelyInModalAndRuntimeReviewWindows()
     {
-        Contains("src/RAWSelectionAssistant/Views/UpgradeTutorialWindow.xaml.cs", "public bool Accepted", "Accepted = true", "Accepted = false", "Close();");
-        var source = File.ReadAllText(Path.Combine(Root(), "src", "RAWSelectionAssistant", "Views", "UpgradeTutorialWindow.xaml.cs"));
-        Assert.IsFalse(source.Contains("DialogResult", StringComparison.Ordinal));
-        Contains("src/RAWSelectionAssistant/MainWindow.xaml.cs", "offer.ShowDialog();", "offer.Accepted");
+        Assert.IsFalse(File.Exists(Path.Combine(Root(), "src/RAWSelectionAssistant/Views/UpgradeTutorialWindow.xaml")));
+        var shell = File.ReadAllText(Path.Combine(Root(), "src/RAWSelectionAssistant/MainWindow.xaml.cs"));
+        Assert.IsFalse(shell.Contains("offer.ShowDialog()", StringComparison.Ordinal));
+        Contains("src/RAWSelectionAssistant/Views/HelpWindow.xaml", "DynamicResource WindowBackgroundBrush");
     }
 
     [TestMethod]

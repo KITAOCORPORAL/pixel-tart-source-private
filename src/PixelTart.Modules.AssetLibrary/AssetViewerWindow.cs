@@ -38,7 +38,7 @@ public sealed class AssetViewerWindow : Window
         _paths = paths.Where(path => !string.IsNullOrWhiteSpace(path)).ToArray();
         _index = Math.Clamp(startIndex, 0, Math.Max(0, _paths.Count - 1));
         _previews = previews ?? AsyncThumbnail.Provider as IAssetPreviewProvider ?? new WpfAssetThumbnailProvider();
-        Title = "像素蛋挞 · 查看大图";
+        Title = "光镜 · 查看大图";
         Background = new SolidColorBrush(Color.FromRgb(8, 10, 12));
         WindowState = WindowState.Maximized;
         WindowStyle = WindowStyle.None;
@@ -84,7 +84,7 @@ public sealed class AssetViewerWindow : Window
 
     private async Task LoadCurrentAsync()
     {
-        if (_paths.Count == 0) { Title = "像素蛋挞 · 没有可查看的照片"; return; }
+        if (_paths.Count == 0) { Title = "光镜 · 没有可查看的照片"; return; }
         CancelCurrentLoad();
         _loadCancellation = new CancellationTokenSource();
         var cancellationToken = _loadCancellation.Token;

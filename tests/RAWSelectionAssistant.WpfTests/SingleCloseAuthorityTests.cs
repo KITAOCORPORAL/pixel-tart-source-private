@@ -82,12 +82,9 @@ public sealed class SingleCloseAuthorityTests
             StringAssert.Contains(main, trigger, $"Shell close must collapse for local close authority {trigger}.");
 
         var document = XDocument.Parse(main);
-        var tutorial = Named(document, "TutorialOverlay").Single();
-        Assert.AreEqual(1, SurfaceCloseButtons(tutorial).Count(), "Tutorial must show exactly one X.");
-        Assert.AreEqual("TutorialCalloutCloseButton", Attribute(SurfaceCloseButtons(tutorial).Single(), "AutomationId"));
-        Assert.AreEqual(1, tutorial.Descendants(Presentation + "Button")
-            .Count(element => AutomationId(element) == "TutorialExitButton"),
-            "Tutorial must retain one text exit button beside its single X.");
+        Assert.HasCount(0, Named(document, "TutorialOverlay"));
+        Assert.IsFalse(main.Contains("TutorialCalloutCloseButton", StringComparison.Ordinal));
+
     }
 
     [TestMethod]
@@ -127,7 +124,6 @@ public sealed class SingleCloseAuthorityTests
             ("归片工作区", 1, SurfaceCloseButtons(Named(main, "WorkflowWorkspace").Single()).Count()),
             ("在线选片项目", 1, SurfaceCloseButtons(online)
                 .Count(button => !button.Ancestors().Any(element => HasName(element, "OnlineSelectionCreateSurface")))),
-            ("教程", 0, SurfaceCloseButtons(Named(main, "TutorialOverlay").Single()).Count()),
             ("设置", 0, SurfaceCloseButtons(Named(main, "SettingsModal").Single()).Count()),
             ("快速排期编辑器", 0, SurfaceCloseButtons(quickEditor).Count()),
             ("完整排期编辑器", 0, SurfaceCloseButtons(fullEditor).Count()),

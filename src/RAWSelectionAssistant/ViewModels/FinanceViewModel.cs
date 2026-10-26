@@ -471,7 +471,7 @@ public sealed class FinanceViewModel : ObservableObject
 
     private async Task ExportAsync()
     {
-        var path = _dialogs.ChooseSaveFile("导出本地收支 CSV", "CSV 文件 (*.csv)|*.csv", ".csv", $"像素蛋挞_收支_{SelectedMonth:yyyyMM}.csv");
+        var path = _dialogs.ChooseSaveFile("导出本地收支 CSV", "CSV 文件 (*.csv)|*.csv", ".csv", $"光镜_收支_{SelectedMonth:yyyyMM}.csv");
         if (string.IsNullOrWhiteSpace(path)) return;
         try
         {

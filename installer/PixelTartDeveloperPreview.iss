@@ -1,11 +1,11 @@
-#define AppName "像素蛋挞 Pixel Tart 开发预览版"
+#define AppName "光镜 光镜 开发预览版"
 #ifndef AppVersion
 #define AppVersion "2.3.0-dev"
 #endif
 #ifndef OutputBaseFilename
 #define OutputBaseFilename "PixelTart-DeveloperPreview-2.3.0-dev-x64-Setup"
 #endif
-#define AppPublisher "像素蛋挞"
+#define AppPublisher "光镜"
 #define AppExe "PixelTart.exe"
 #ifndef PublishDir
 #define PublishDir "..\artifacts\stage-v2-installable-acceptance\publish"
@@ -62,7 +62,7 @@ Name: "{group}\{#AppName}"; Filename: "{app}\{#AppExe}"; IconFilename: "{app}\{#
 Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; IconFilename: "{app}\{#AppExe}"; WorkingDir: "{app}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#AppExe}"; Description: "启动像素蛋挞 Pixel Tart 开发预览版"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\{#AppExe}"; Description: "启动光镜 光镜 开发预览版"; Flags: nowait postinstall skipifsilent
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\DemoWorkspace"

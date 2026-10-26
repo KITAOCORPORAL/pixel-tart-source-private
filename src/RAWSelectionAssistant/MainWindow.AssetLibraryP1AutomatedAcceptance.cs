@@ -365,7 +365,7 @@ public partial class MainWindow
         await Dispatcher.InvokeAsync(static () => { }, DispatcherPriority.Loaded);
         if (!string.Equals(_viewModel.CurrentPage, PrimaryNavigationPolicy.AssetLibrary, StringComparison.Ordinal))
             throw new InvalidOperationException("The Asset Library route alias did not resolve to the live Asset Library page.");
-        await driver.ComposeSearchTextAsync("像素蛋挞素材");
+        await driver.ComposeSearchTextAsync("光镜素材");
         var composed = driver.CaptureState();
         await driver.ClearSearchThroughEditingCommandAsync();
         var cleared = driver.CaptureState();
@@ -376,7 +376,7 @@ public partial class MainWindow
                 : route)
             .ToArray();
         var searchClearedAndReturned = string.Equals(_viewModel.CurrentPage, PrimaryNavigationPolicy.AssetLibrary, StringComparison.Ordinal) &&
-                                       composed.SearchText == "像素蛋挞素材" &&
+                                       composed.SearchText == "光镜素材" &&
                                        cleared.SearchText.Length == 0;
         if (!searchClearedAndReturned)
             throw new InvalidOperationException("The real navigation, Chinese text-composition, clear, and return route did not complete.");

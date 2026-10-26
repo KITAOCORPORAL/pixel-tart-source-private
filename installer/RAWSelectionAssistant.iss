@@ -1,6 +1,6 @@
 #define MyAppName "Kitao Studio 光镜"
 #define MyAppVersion "2.3.0"
-#define MyAppPublisher "像素蛋挞"
+#define MyAppPublisher "光镜"
 #define MyAppExeName "KitaoPhotoSelector.exe"
 #define MyPublishDir "..\artifacts\releases\2.3.0\publish\win-x64"
 #ifdef CandidateBuild
@@ -33,13 +33,13 @@
 #endif
 #ifdef ProductRedesignCandidate
   #undef MyAppName
-  #define MyAppName "像素蛋挞 产品重构候选"
+  #define MyAppName "光镜 产品重构候选"
   #undef MyPublishDir
   #define MyPublishDir "..\artifacts\releases\2.3.0\publish\product-redesign-rc1-win-x64"
 #endif
 #ifdef CoreReliabilityInteractionHotfix
   #undef MyAppName
-  #define MyAppName "Pixel Tart CoreReliability Interaction Hotfix DevValidation"
+  #define MyAppName "光镜 CoreReliability Interaction Hotfix DevValidation"
   #undef MyAppExeName
   #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
   #undef MyPublishDir
@@ -47,7 +47,7 @@
 #endif
 #ifdef GlobalSurfaceCloseDevValidation
   #undef MyAppName
-  #define MyAppName "Pixel Tart Global Surface Close DevValidation"
+  #define MyAppName "光镜 Global Surface Close DevValidation"
   #undef MyAppExeName
   #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
   #undef MyPublishDir
@@ -55,7 +55,7 @@
 #endif
 #ifdef CoreReliabilityDevValidation
   #undef MyAppName
-  #define MyAppName "像素蛋挞 核心可靠性验收"
+  #define MyAppName "光镜 核心可靠性验收"
   #undef MyAppExeName
   #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
   #undef MyPublishDir
@@ -63,7 +63,7 @@
 #endif
 #ifdef TestBuild
   #undef MyAppName
-  #define MyAppName "像素蛋挞 验收测试"
+  #define MyAppName "光镜 验收测试"
   #undef MyAppExeName
   #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
   #undef MyPublishDir
@@ -71,7 +71,7 @@
 #endif
 #ifdef InputRoutingHotfixDevValidation
   #undef MyAppName
-  #define MyAppName "Pixel Tart Input Routing Hotfix DevValidation"
+  #define MyAppName "光镜 Input Routing Hotfix DevValidation"
   #undef MyAppExeName
   #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
   #undef MyPublishDir
@@ -79,7 +79,7 @@
 #endif
 #ifdef PhysicalPointerDiagnosticDevValidation
   #undef MyAppName
-  #define MyAppName "Pixel Tart Physical Pointer Diagnostic DevValidation"
+  #define MyAppName "光镜 Physical Pointer Diagnostic DevValidation"
   #undef MyAppExeName
   #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
   #undef MyPublishDir
@@ -87,7 +87,7 @@
 #endif
 #ifdef PhysicalPointerDiagnosticDevValidation2
   #undef MyAppName
-  #define MyAppName "像素蛋挞 - 输入诊断版"
+  #define MyAppName "光镜 - 输入诊断版"
   #undef MyAppExeName
   #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
   #undef MyPublishDir
@@ -95,7 +95,7 @@
 #endif
 #ifdef ClickRoutingFixDevValidation
   #undef MyAppName
-  #define MyAppName "Pixel Tart Click Routing Fix DevValidation"
+  #define MyAppName "光镜 Click Routing Fix DevValidation"
   #undef MyAppExeName
   #define MyAppExeName "KitaoPhotoSelector.Acceptance.exe"
   #undef MyPublishDir
@@ -189,14 +189,14 @@ DefaultDirName={autopf}\像素蛋挞
 #endif
 #endif
 #ifdef PhysicalPointerDiagnosticDevValidation2
-DefaultGroupName=像素蛋挞
+DefaultGroupName=光镜
 #else
 DefaultGroupName={#MyAppName}
 #endif
 #endif
 DisableProgramGroupPage=yes
 #ifdef PhysicalPointerDiagnosticDevValidation2
-UninstallDisplayName=像素蛋挞 - Physical Pointer Diagnostic DevValidation
+UninstallDisplayName=光镜 - Physical Pointer Diagnostic DevValidation
 #else
 UninstallDisplayName={#MyAppName}
 #endif
@@ -227,57 +227,57 @@ OutputBaseFilename=PixelTart_2.3.0_CoreReliability_InteractionHotfix_DevValidati
 #else
 #ifdef CoreReliabilityDevValidation
 OutputDir=..\artifacts\releases\2.3.0\installer
-OutputBaseFilename=像素蛋挞_2.3.0_CoreReliability_DevValidation_x64
+OutputBaseFilename=光镜_2.3.0_CoreReliability_DevValidation_x64
 #else
 #ifdef ProductRedesignCandidate
 OutputDir=..\artifacts\releases\2.3.0\installer
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_ProductRedesign_RC1_x64
+OutputBaseFilename=光镜_Setup_2.3.0_ProductRedesign_RC1_x64
 #else
 #ifdef IsolatedRuntimeTest
 OutputDir=..\artifacts\ui-review\2.3.0-rc5\runtime-installer
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC5_IsolatedAcceptance_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC5_IsolatedAcceptance_x64
 #else
 #ifdef TestBuild
 OutputDir=..\artifacts\releases\2.3.0\installer
-OutputBaseFilename=像素蛋挞_Test_Setup_2.3.0_x64
+OutputBaseFilename=光镜_Test_Setup_2.3.0_x64
 #else
 #ifdef CandidateBuild
 OutputDir=..\artifacts\releases\2.3.0\installer
 #ifdef CandidateRc10
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC10_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC10_x64
 #else
 #ifdef CandidateRc11
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC11_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC11_x64
 #else
 #ifdef CandidateRc12
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC12_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC12_x64
 #else
 #ifdef CandidateRc6
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC6_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC6_x64
 #else
 #ifdef CandidateRc8
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC8_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC8_x64
 #else
 #ifdef CandidateRc7
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC7_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC7_x64
 #else
 #ifdef CandidateRc5
 #ifdef CandidateCoreHotfix2
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC5_CoreHotfix2_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC5_CoreHotfix2_x64
 #else
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC5_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC5_x64
 #endif
 #else
 #ifdef CandidateRc4
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC4_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC4_x64
 #else
 #ifdef CandidateRc3
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC3_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC3_x64
 #else
 #ifdef CandidateRc2
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC2_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC2_x64
 #else
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC1_x64
+OutputBaseFilename=光镜_Setup_2.3.0_RC1_x64
 #endif
 #endif
 #endif
@@ -290,7 +290,7 @@ OutputBaseFilename=像素蛋挞_Setup_2.3.0_RC1_x64
 #endif
 #else
 OutputDir=..\artifacts\releases\2.3.0\installer
-OutputBaseFilename=像素蛋挞_Setup_2.3.0_x64
+OutputBaseFilename=光镜_Setup_2.3.0_x64
 #endif
 #endif
 #endif
@@ -357,12 +357,12 @@ Source: "{#MyPublishDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdi
 
 [Icons]
 #ifdef ClickRoutingFixDevValidation
-Name: "{group}\Pixel Tart Click Routing Fix DevValidation"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"
-Name: "{autodesktop}\Pixel Tart Click Routing Fix DevValidation"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
+Name: "{group}\光镜 Click Routing Fix DevValidation"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"
+Name: "{autodesktop}\光镜 Click Routing Fix DevValidation"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
 #else
 #ifdef PhysicalPointerDiagnosticDevValidation2
-Name: "{group}\像素蛋挞 - 输入诊断版"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"
-Name: "{autodesktop}\像素蛋挞 - 输入诊断版"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
+Name: "{group}\光镜 - 输入诊断版"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"
+Name: "{autodesktop}\光镜 - 输入诊断版"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
 #else
 #ifndef PhysicalPointerDiagnosticDevValidation
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"
@@ -373,10 +373,10 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilen
 
 [Run]
 #ifdef ClickRoutingFixDevValidation
-Filename: "{app}\{#MyAppExeName}"; Description: "Launch Pixel Tart Click Routing Fix DevValidation"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\{#MyAppExeName}"; Description: "Launch 光镜 Click Routing Fix DevValidation"; Flags: nowait postinstall skipifsilent
 #else
 #ifdef PhysicalPointerDiagnosticDevValidation2
-Filename: "{app}\{#MyAppExeName}"; Description: "启动 像素蛋挞 - 输入诊断版"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\{#MyAppExeName}"; Description: "启动 光镜 - 输入诊断版"; Flags: nowait postinstall skipifsilent
 #else
 #ifndef InputRoutingHotfixDevValidation
 #ifndef PhysicalPointerDiagnosticDevValidation
@@ -492,14 +492,14 @@ begin
 #if !defined PhysicalPointerDiagnosticDevValidation2 && !defined ClickRoutingFixDevValidation
 #ifndef InputRoutingHotfixDevValidation
 #ifndef PhysicalPointerDiagnosticDevValidation
-  AppWindow := FindWindow('', '像素蛋挞');
+  AppWindow := FindWindow('', '光镜');
   if AppWindow <> 0 then
   begin
     PostMessage(AppWindow, $0010, 0, 0);
     for WaitCount := 1 to 50 do
     begin
       Sleep(100);
-      if FindWindow('', '像素蛋挞') = 0 then
+      if FindWindow('', '光镜') = 0 then
         Break;
     end;
   end;
@@ -513,7 +513,7 @@ function InitializeSetup(): Boolean;
 begin
   Result := IsWin64;
   if not Result then
-    MsgBox('像素蛋挞仅支持 Windows 10 或 Windows 11 的 64 位版本。', mbError, MB_OK);
+    MsgBox('光镜仅支持 Windows 10 或 Windows 11 的 64 位版本。', mbError, MB_OK);
 end;
 
 procedure InitializeUninstallProgressForm();

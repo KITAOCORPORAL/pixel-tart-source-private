@@ -1,4 +1,4 @@
-﻿using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Core.Models;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Color;
 using RAWSelectionAssistant.Core.Services.Export;
@@ -64,7 +64,7 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
         await master.ValidateSourceAsync(token).ConfigureAwait(false);
         var output = Render(master.Image, look, stack, token: token, film: film).ProcessingPixels!;
         return await AtomicTiffWriter.WriteRgb48Async(destinationPath, output,
-            new(TiffBitDepth.Sixteen, IccProfile: outputIcc, Software: "Pixel Tart", Orientation: output.Orientation), token, overwrite: false).ConfigureAwait(false);
+            new(TiffBitDepth.Sixteen, IccProfile: outputIcc, Software: "光镜", Orientation: output.Orientation), token, overwrite: false).ConfigureAwait(false);
     }
 
     private static HighBitDepthImageBuffer CreateProxy(HighBitDepthImageBuffer source, int maximumEdge, CancellationToken token)

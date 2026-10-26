@@ -5,7 +5,7 @@ namespace RAWSelectionAssistant.Core.Services;
 
 public sealed class FeedbackRequestBuilder
 {
-    private const string Subject = "像素蛋挞建议与问题反馈";
+    private const string Subject = "光镜建议与问题反馈";
 
     public FeedbackRequest Build(string? windowsVersion = null)
     {
@@ -18,7 +18,7 @@ public sealed class FeedbackRequestBuilder
     }
 
     private static string BuildBody(string productVersion, string windowsVersion) =>
-        $"你好，我在使用像素蛋挞时遇到了以下问题，或有以下建议：{Environment.NewLine}{Environment.NewLine}" +
+        $"你好，我在使用光镜时遇到了以下问题，或有以下建议：{Environment.NewLine}{Environment.NewLine}" +
         $"【问题或建议】{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}" +
         $"【操作步骤】{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}" +
         $"【期望结果】{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}" +

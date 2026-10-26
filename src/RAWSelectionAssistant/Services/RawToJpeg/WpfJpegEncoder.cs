@@ -25,7 +25,7 @@ public sealed class WpfJpegEncoder : IRawJpegEncoder
     {
         var metadata = new BitmapMetadata("jpg")
         {
-            ApplicationName = "像素蛋挞",
+            ApplicationName = "光镜",
             Comment = "sRGB; RAW conversion"
         };
         if (!options.PreserveExif) return metadata;

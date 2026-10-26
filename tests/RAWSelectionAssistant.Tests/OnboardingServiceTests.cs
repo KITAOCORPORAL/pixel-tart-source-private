@@ -9,142 +9,6 @@ namespace RAWSelectionAssistant.Tests;
 public sealed class OnboardingServiceTests
 {
     [TestMethod]
-    public async Task NewInstall_RequiresTutorialAndCannotSkip()
-    {
-        using var temp = new TempDirectory();
-        var fixture = CreateFixture(temp);
-        await fixture.Service.InitializeAsync(fixture.Settings, existingUser: false);
-
-        Assert.AreEqual(TutorialMode.Required, fixture.Service.State.Mode);
-        Assert.AreEqual(1, fixture.Service.State.CurrentStep);
-        Assert.IsFalse(fixture.Settings.OnboardingCompleted);
-        Assert.IsFalse(fixture.Service.CanPerform(TutorialAction.MatchFiles));
-        var skipped = await fixture.Service.PerformAsync(TutorialAction.MatchFiles, new());
-        Assert.IsFalse(skipped.Succeeded);
-        Assert.AreEqual(1, fixture.Service.State.CurrentStep);
-    }
-
-    [TestMethod]
-    public async Task Progress_IsSavedAndRestoredAfterExit()
-    {
-        using var temp = new TempDirectory();
-        var fixture = CreateFixture(temp);
-        await fixture.Service.InitializeAsync(fixture.Settings, false);
-        await fixture.Service.PerformAsync(TutorialAction.BeginTutorial, new());
-        await fixture.Service.PerformAsync(TutorialAction.AddSourceDirectory, new(SourceDirectoryCount: 1));
-        Assert.AreEqual(3, fixture.Settings.OnboardingCurrentStep);
-
-        var loaded = await fixture.SettingsService.LoadAsync();
-        var resumed = new OnboardingService(fixture.SettingsService, fixture.DataService, new TestLogService());
-        await resumed.InitializeAsync(loaded, false);
-        Assert.AreEqual(TutorialMode.Required, resumed.State.Mode);
-        Assert.AreEqual(3, resumed.State.CurrentStep);
-        Assert.IsFalse(loaded.OnboardingCompleted);
-    }
-
-    [TestMethod]
-    public async Task OnlyFinalAction_CreatesValidCompletionProof()
-    {
-        using var temp = new TempDirectory();
-        var fixture = CreateFixture(temp);
-        await fixture.Service.InitializeAsync(fixture.Settings, false);
-        fixture.Settings.OnboardingCompleted = true;
-        fixture.Settings.OnboardingCompletedAt = DateTimeOffset.Now;
-        Assert.IsFalse(OnboardingService.IsCompletionProofValid(fixture.Settings));
-
-        var restarted = new OnboardingService(fixture.SettingsService, fixture.DataService, new TestLogService());
-        await restarted.InitializeAsync(fixture.Settings, false);
-        Assert.AreEqual(TutorialMode.Required, restarted.State.Mode);
-        Assert.IsFalse(fixture.Settings.OnboardingCompleted);
-
-        await AdvanceToFinalStep(restarted, fixture.DataService.Paths);
-        Assert.IsFalse(fixture.Settings.OnboardingCompleted);
-        await restarted.PerformAsync(TutorialAction.FinishTutorial, new());
-        Assert.IsTrue(fixture.Settings.OnboardingCompleted);
-        Assert.AreEqual(Branding.ProductVersion, fixture.Settings.OnboardingVersion);
-        Assert.IsNotNull(fixture.Settings.OnboardingCompletedAt);
-        Assert.IsTrue(OnboardingService.IsCompletionProofValid(fixture.Settings));
-        Assert.AreEqual(TutorialMode.Inactive, restarted.State.Mode);
-    }
-
-    [TestMethod]
-    public async Task ExistingUser_IsNotLockedAndCanReplayTutorial()
-    {
-        using var temp = new TempDirectory();
-        var fixture = CreateFixture(temp);
-        fixture.Settings.SourceDirectories.Add(new SourceDirectorySetting("D:\\旧项目", SourceDirectoryType.Mixed, 0));
-        await fixture.Service.InitializeAsync(fixture.Settings, existingUser: true);
-        Assert.AreEqual(TutorialMode.Inactive, fixture.Service.State.Mode);
-        Assert.IsTrue(fixture.Service.NeedsUpgradeOffer);
-
-        await fixture.Service.AcceptUpgradeOfferAsync(startTutorial: true);
-        Assert.AreEqual(TutorialMode.Replay, fixture.Service.State.Mode);
-        fixture.Service.ExitReplay();
-        Assert.AreEqual(TutorialMode.Inactive, fixture.Service.State.Mode);
-    }
-
-    [TestMethod]
-    public async Task ExitAsync_LeavesRequiredTutorialInactiveWithoutCompletingIt()
-    {
-        using var temp = new TempDirectory();
-        var fixture = CreateFixture(temp);
-        await fixture.Service.InitializeAsync(fixture.Settings, existingUser: false);
-        await fixture.Service.PerformAsync(TutorialAction.BeginTutorial, new());
-        await fixture.Service.PerformAsync(TutorialAction.AddSourceDirectory, new(SourceDirectoryCount: 1));
-
-        await Task.WhenAll(fixture.Service.ExitAsync(), fixture.Service.ExitAsync());
-
-        Assert.AreEqual(TutorialMode.Inactive, fixture.Service.State.Mode);
-        Assert.IsFalse(fixture.Settings.OnboardingCompleted);
-        var persisted = await fixture.SettingsService.LoadAsync();
-        Assert.IsFalse(persisted.OnboardingCompleted);
-        Assert.AreEqual(3, persisted.OnboardingCurrentStep);
-    }
-
-    [TestMethod]
-    public async Task DetachedSession_CannotAdvanceTutorialAfterExit()
-    {
-        using var temp = new TempDirectory();
-        var fixture = CreateFixture(temp);
-        await fixture.Service.InitializeAsync(fixture.Settings, existingUser: false);
-        var session = fixture.Service.SessionVersion;
-
-        fixture.Service.DetachForExit();
-        var result = await fixture.Service.PerformForSessionAsync(
-            session,
-            TutorialAction.BeginTutorial,
-            new TutorialActionContext());
-
-        Assert.IsTrue(result.Succeeded);
-        Assert.AreEqual(TutorialMode.Inactive, fixture.Service.State.Mode);
-        Assert.AreEqual(1, fixture.Service.State.CurrentStep);
-        Assert.IsGreaterThan(session, fixture.Service.SessionVersion);
-    }
-
-    [TestMethod]
-    public async Task ExitAsync_SaveFailureKeepsPendingStateForRetry()
-    {
-        using var temp = new TempDirectory();
-        var blockedPath = temp.Combine("settings-target");
-        Directory.CreateDirectory(blockedPath);
-        var settingsService = new SettingsService(new TestLogService(), blockedPath);
-        var service = new OnboardingService(settingsService, new TutorialDataService(temp.Combine("Tutorial")), new TestLogService());
-        var settings = new AppSettings();
-        await service.InitializeAsync(settings, existingUser: false);
-
-        service.DetachForExit();
-        await service.ExitAsync();
-        Assert.IsTrue(Directory.Exists(blockedPath));
-
-        Directory.Delete(blockedPath);
-        await service.ExitAsync();
-        Assert.IsTrue(File.Exists(blockedPath));
-        var persisted = await new SettingsService(new TestLogService(), blockedPath).LoadAsync();
-        Assert.IsFalse(persisted.OnboardingCompleted);
-        Assert.AreEqual(1, persisted.OnboardingCurrentStep);
-    }
-
-    [TestMethod]
     public void ExistingUserDetection_RecognizesAllSupportedHistorySignals()
     {
         var detector = new ExistingUserDetectionService();
@@ -156,41 +20,10 @@ public sealed class OnboardingServiceTests
     }
 
     [TestMethod]
-    public async Task TutorialSandbox_CreatesValidJpegsAndRawPlaceholders()
+    public async Task OrdinarySplit_UsesRealIndexMatchCopyAndReportServicesWithoutTutorial()
     {
         using var temp = new TempDirectory();
-        var data = new TutorialDataService(temp.Path);
-        var paths = await data.EnsureCreatedAsync();
-        Assert.HasCount(3, Directory.GetFiles(paths.JpegSource, "*.JPG"));
-        Assert.HasCount(3, Directory.GetFiles(paths.RawSource, "*.ARW"));
-        Assert.IsGreaterThan(0L, new FileInfo(paths.CustomerJpeg).Length);
-        var metadata = new JpegMetadataService().Read(paths.CustomerJpeg);
-        Assert.IsGreaterThan(0, metadata.PixelWidth ?? 0);
-        Assert.IsGreaterThan(0, metadata.PixelHeight ?? 0);
-        Assert.IsTrue(data.IsWithinTutorial(paths.Output));
-    }
-
-    [TestMethod]
-    public async Task TutorialDelete_RejectsExternalPathAndPreservesUserFile()
-    {
-        using var temp = new TempDirectory();
-        var data = new TutorialDataService(temp.Combine("AppData"));
-        await data.EnsureCreatedAsync();
-        var userFile = temp.CreateFile("真实照片/客户原片.JPG", [1, 2, 3]);
-
-        Assert.Throws<InvalidOperationException>(() => data.Delete(Path.GetDirectoryName(userFile)!));
-        Assert.IsTrue(File.Exists(userFile));
-        data.Delete(data.Paths.Root);
-        Assert.IsFalse(Directory.Exists(data.Paths.Root));
-        Assert.IsTrue(File.Exists(userFile));
-    }
-
-    [TestMethod]
-    public async Task TutorialFlow_UsesRealIndexMatchCopyAndReportServices()
-    {
-        using var temp = new TempDirectory();
-        var data = new TutorialDataService(temp.Combine("AppData"));
-        var paths = await data.EnsureCreatedAsync();
+        var paths = await SyntheticSplitFixture.CreateAsync(temp.Combine("AppData"));
         var log = new TestLogService();
         var normalizer = new FileNameNormalizer();
         var metadata = new JpegMetadataService(log);
@@ -209,7 +42,7 @@ public sealed class OnboardingServiceTests
         foreach (var decision in decisions) inputs.First(x => x.Id == decision.ItemId).ApplyMatch(decision);
         Assert.IsTrue(inputs.All(x => x.OverallStatus == MediaOverallStatus.CompleteMatched));
 
-        var output = Path.Combine(paths.Output, "教程流程验收");
+        var output = Path.Combine(paths.Output, "正常分片验收");
         var copy = await new MediaCopyService(log).CopyAsync(inputs, output, OutputMode.ByFileCategory, null, CancellationToken.None);
         Assert.AreEqual(6, copy.CopiedCount);
         foreach (var outcome in copy.Outcomes)
@@ -298,58 +131,7 @@ public sealed class OnboardingServiceTests
         }
     }
 
-    private static async Task AdvanceToFinalStep(OnboardingService service, TutorialSandboxPaths paths)
-    {
-        await service.PerformAsync(TutorialAction.BeginTutorial, new());
-        await service.PerformAsync(TutorialAction.AddSourceDirectory, new(SourceDirectoryCount: 1));
-        await service.PerformAsync(TutorialAction.RemoveSourceDirectory, new());
-        foreach (var category in Enum.GetValues<CollectionCategory>())
-        {
-            await service.PerformAsync(TutorialAction.SelectCollectionCategories, new(CollectionCategory: category));
-        }
-        await service.PerformAsync(TutorialAction.SelectCollectionCategories, new(CollectionCategory: CollectionCategory.JpegAndRaw));
-        await service.PerformAsync(TutorialAction.ScanSourceFiles, new(IndexedJpegCount: 3, IndexedRawCount: 3));
-        await service.PerformAsync(TutorialAction.CancelSimulatedTask, new());
-        await service.PerformAsync(TutorialAction.LoadCustomerSelection, new(SelectionCount: 1));
-        await service.PerformAsync(TutorialAction.PasteNumbers, new());
-        await service.PerformAsync(TutorialAction.ParseNumbers, new(SelectionCount: 3));
-        await service.PerformAsync(TutorialAction.ClearSelections, new(SelectionCount: 3));
-        await service.PerformAsync(TutorialAction.MatchFiles, new(CompleteMatchCount: 3));
-        await service.PerformAsync(TutorialAction.ViewDetails, new(DetailsViewed: true));
-        await service.PerformAsync(TutorialAction.AcknowledgeJpegQuality, new());
-        await service.PerformAsync(TutorialAction.SelectOutputDirectory, new(OutputDirectory: paths.Output));
-        await service.PerformAsync(TutorialAction.EnterProjectName, new(ProjectName: Branding.TutorialProjectName));
-        foreach (var mode in Enum.GetValues<OutputMode>())
-        {
-            await service.PerformAsync(TutorialAction.SelectOutputModes, new(OutputMode: mode));
-        }
-        await service.PerformAsync(TutorialAction.SelectOutputModes, new(OutputMode: OutputMode.ByFileCategory));
-        await service.PerformAsync(TutorialAction.CopyMatchedFiles, new(CopiedJpegCount: 3, CopiedRawCount: 3));
-        await service.PerformAsync(TutorialAction.ExportReports, new(ReportsExist: true));
-        await service.PerformAsync(TutorialAction.OpenOutputDirectory, new(OutputOpened: true));
-        await service.PerformAsync(TutorialAction.ClearCurrentTask, new(OutputPreserved: true));
-        await service.PerformAsync(TutorialAction.AcknowledgeEditions, new());
-        Assert.AreEqual(22, service.State.CurrentStep);
-    }
-
-    private static OnboardingFixture CreateFixture(TempDirectory temp)
-    {
-        var settingsService = new SettingsService(new TestLogService(), temp.Combine("settings.json"));
-        var dataService = new TutorialDataService(temp.Combine("KitaoPhotoSelector"));
-        var settings = new AppSettings();
-        return new OnboardingFixture(
-            settings,
-            settingsService,
-            dataService,
-            new OnboardingService(settingsService, dataService, new TestLogService()));
-    }
-
     private static string FindRepositoryRoot()
     { return TestResources.Root; }
 
-    private sealed record OnboardingFixture(
-        AppSettings Settings,
-        SettingsService SettingsService,
-        TutorialDataService DataService,
-        OnboardingService Service);
 }

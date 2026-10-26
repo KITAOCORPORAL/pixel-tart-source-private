@@ -229,7 +229,7 @@ public sealed class TetherColorViewModel : ObservableObject, IDisposable
         if (!File.Exists(SelectedLut.SourcePath) && !SelectedLut.SourcePath.StartsWith("[合成", StringComparison.Ordinal)) return source;
         LutDefinition? definition;
         if (SelectedLut.SourcePath.StartsWith("[合成", StringComparison.Ordinal))
-            definition = new("Pixel Tart Warm", LutKind.ThreeDimensional, 2, new(0,0,0), new(1,1,1), [new(0,0,0),new(1,.05f,.02f),new(.03f,1,.02f),new(1,1,.08f),new(.02f,.04f,1),new(1,.08f,1),new(.06f,1,1),new(1,.94f,.82f)]);
+            definition = new("光镜 Warm", LutKind.ThreeDimensional, 2, new(0,0,0), new(1,1,1), [new(0,0,0),new(1,.05f,.02f),new(.03f,1,.02f),new(1,1,.08f),new(.02f,.04f,1),new(1,.08f,1),new(.06f,1,1),new(1,.94f,.82f)]);
         else
         {
             var parsed = await _parser.ParseAsync(SelectedLut.SourcePath, cancellationToken);
@@ -260,9 +260,9 @@ public sealed class TetherColorViewModel : ObservableObject, IDisposable
         {
             var oneDimensional = state == "Lut1D";
             var identity = oneDimensional
-                ? new LutDefinition("Pixel Tart 1D", LutKind.OneDimensional, 2, new(0, 0, 0), new(1, 1, 1), [new(0,0,0),new(1,.94f,.82f)])
-                : new LutDefinition("Pixel Tart Warm", LutKind.ThreeDimensional, 2, new(0, 0, 0), new(1, 1, 1), [new(0,0,0),new(1,.05f,.02f),new(.03f,1,.02f),new(1,1,.08f),new(.02f,.04f,1),new(1,.08f,1),new(.06f,1,1),new(1,.94f,.82f)]);
-            var synthetic = new LutPresetReference(Guid.Parse("23000000-0000-0000-0000-00000000000D"), oneDimensional ? "Pixel Tart 1D" : "Pixel Tart Warm 3D", "[合成测试LUT]", "[合成测试LUT]", "synthetic-lut-fingerprint", identity.Kind, identity.Size, identity.DomainMin, identity.DomainMax, true, DateTimeOffset.UtcNow, LutValidationStatus.Valid);
+                ? new LutDefinition("光镜 1D", LutKind.OneDimensional, 2, new(0, 0, 0), new(1, 1, 1), [new(0,0,0),new(1,.94f,.82f)])
+                : new LutDefinition("光镜 Warm", LutKind.ThreeDimensional, 2, new(0, 0, 0), new(1, 1, 1), [new(0,0,0),new(1,.05f,.02f),new(.03f,1,.02f),new(1,1,.08f),new(.02f,.04f,1),new(1,.08f,1),new(.06f,1,1),new(1,.94f,.82f)]);
+            var synthetic = new LutPresetReference(Guid.Parse("23000000-0000-0000-0000-00000000000D"), oneDimensional ? "光镜 1D" : "光镜 Warm 3D", "[合成测试LUT]", "[合成测试LUT]", "synthetic-lut-fingerprint", identity.Kind, identity.Size, identity.DomainMin, identity.DomainMax, true, DateTimeOffset.UtcNow, LutValidationStatus.Valid);
             LutPresets.Add(synthetic); SelectedLut = synthetic;
         }
         LutStrengthPercent = state == "LutStrength50" ? 50 : 100;
@@ -291,7 +291,7 @@ public sealed class TetherColorViewModel : ObservableObject, IDisposable
         try
         {
             LutDefinition? definition;
-            if (SelectedLut.SourcePath.StartsWith("[合成", StringComparison.Ordinal)) definition = new("Pixel Tart Warm", LutKind.ThreeDimensional, 2, new(0,0,0), new(1,1,1), [new(0,0,0),new(1,.05f,.02f),new(.03f,1,.02f),new(1,1,.08f),new(.02f,.04f,1),new(1,.08f,1),new(.06f,1,1),new(1,.94f,.82f)]);
+            if (SelectedLut.SourcePath.StartsWith("[合成", StringComparison.Ordinal)) definition = new("光镜 Warm", LutKind.ThreeDimensional, 2, new(0,0,0), new(1,1,1), [new(0,0,0),new(1,.05f,.02f),new(.03f,1,.02f),new(1,1,.08f),new(.02f,.04f,1),new(1,.08f,1),new(.06f,1,1),new(1,.94f,.82f)]);
             else { var parsed = await _parser.ParseAsync(SelectedLut.SourcePath, timeout.Token); if (!parsed.Success || parsed.Definition is null) { if (_renderRequests.IsCurrent(request.Version)) { DisplayImage = source; LutStatus = parsed.Message ?? "LUT验证失败，已回退原图。"; } return; } definition = parsed.Definition; }
             var display = Displays.FirstOrDefault(item => item.IsPrimary) ?? Displays.FirstOrDefault();
             var profile = display is null ? null : await _displayColors.ResolveAsync(display, request.Token);
@@ -321,7 +321,7 @@ public sealed class TetherColorViewModel : ObservableObject, IDisposable
     private async Task SetDefaultAsync(bool project) { if (SelectedLut is null) return; var settings = await _presetStore.LoadAsync(_lifetime.Token); await _presetStore.SaveAsync(project ? settings with { ProjectDefaultLutId = SelectedLut.Id } : settings with { SessionDefaultLutId = SelectedLut.Id }, _lifetime.Token); LutStatus = project ? "已设为当前项目默认LUT。" : "已设为当前会话默认LUT。"; }
     private async Task RevalidateAsync() { if (SelectedLut is null) return; if (!File.Exists(SelectedLut.SourcePath)) { ReplaceOrAdd(SelectedLut = SelectedLut with { ValidationStatus = LutValidationStatus.Missing, LastValidatedAtUtc = DateTimeOffset.UtcNow }); LutStatus = "LUT文件丢失，请重新定位。"; return; } var parsed = await _parser.ParseAsync(SelectedLut.SourcePath, _lifetime.Token); ReplaceOrAdd(SelectedLut = SelectedLut with { ValidationStatus = parsed.Success ? LutValidationStatus.Valid : LutValidationStatus.Invalid, LastValidatedAtUtc = DateTimeOffset.UtcNow }); await SavePresetListAsync(); await RenderAsync(); }
     private async Task RelocateAsync() { if (SelectedLut is null) return; var path = _dialogs.ChooseFiles("重新定位.cube LUT", "Cube LUT|*.cube", false).FirstOrDefault(); if (path is null) return; try { ReplaceOrAdd(SelectedLut = await _presetStore.RelocateAsync(SelectedLut.Id, path, _lifetime.Token)); LutStatus = "LUT已重新定位并通过验证。"; await RenderAsync(); } catch (Exception ex) when (ex is InvalidDataException or IOException or UnauthorizedAccessException) { LutStatus = "重新定位的文件未通过验证，原引用保持不变。"; } }
-    private async Task RemoveReferenceAsync() { if (SelectedLut is null || !_dialogs.Confirm("仅从像素蛋挞中移除LUT引用，不会删除电脑中的LUT文件。", "移除LUT引用")) return; var id = SelectedLut.Id; await _presetStore.RemoveReferenceAsync(id, _lifetime.Token); LutPresets.Remove(LutPresets.First(item => item.Id == id)); SelectedLut = null; LutStatus = "LUT引用已移除，电脑中的.cube文件未删除。"; }
+    private async Task RemoveReferenceAsync() { if (SelectedLut is null || !_dialogs.Confirm("仅从光镜中移除LUT引用，不会删除电脑中的LUT文件。", "移除LUT引用")) return; var id = SelectedLut.Id; await _presetStore.RemoveReferenceAsync(id, _lifetime.Token); LutPresets.Remove(LutPresets.First(item => item.Id == id)); SelectedLut = null; LutStatus = "LUT引用已移除，电脑中的.cube文件未删除。"; }
     private async Task SavePresetListAsync() { var settings = await _presetStore.LoadAsync(_lifetime.Token); await _presetStore.SaveAsync(settings with { LutPresets = LutPresets.ToArray() }, _lifetime.Token); }
     private void ReplacePresets(IEnumerable<LutPresetReference> presets) { LutPresets.Clear(); foreach (var preset in presets.OrderByDescending(item => item.IsFavorite).ThenByDescending(item => item.LastUsedAtUtc)) LutPresets.Add(preset); }
     private void ReplaceOrAdd(LutPresetReference preset) { var existing = LutPresets.FirstOrDefault(item => item.Id == preset.Id); if (existing is null) LutPresets.Add(preset); else LutPresets[LutPresets.IndexOf(existing)] = preset; LutView.Refresh(); }
@@ -367,7 +367,7 @@ public sealed class TetherColorViewModel : ObservableObject, IDisposable
         var profile = await _displayColors.ResolveAsync(display, cancellationToken);
         if (!LutEnabled || SelectedLut is null || ShowBefore) return new WpfColorConversionService().ConvertToDisplay(source, profile, out _);
         LutDefinition? definition;
-        if (SelectedLut.SourcePath.StartsWith("[合成", StringComparison.Ordinal)) definition = new("Pixel Tart Warm", LutKind.ThreeDimensional, 2, new(0,0,0), new(1,1,1), [new(0,0,0),new(1,.05f,.02f),new(.03f,1,.02f),new(1,1,.08f),new(.02f,.04f,1),new(1,.08f,1),new(.06f,1,1),new(1,.94f,.82f)]);
+        if (SelectedLut.SourcePath.StartsWith("[合成", StringComparison.Ordinal)) definition = new("光镜 Warm", LutKind.ThreeDimensional, 2, new(0,0,0), new(1,1,1), [new(0,0,0),new(1,.05f,.02f),new(.03f,1,.02f),new(1,1,.08f),new(.02f,.04f,1),new(1,.08f,1),new(.06f,1,1),new(1,.94f,.82f)]);
         else { var parsed = await _parser.ParseAsync(SelectedLut.SourcePath, cancellationToken); if (!parsed.Success || parsed.Definition is null) return new WpfColorConversionService().ConvertToDisplay(source, profile, out _); definition = parsed.Definition; }
         var cacheKey = new LutCacheKey(assetId, _sourceProxyVersion, SelectedLut.FileFingerprint, SelectedLut.InputInterpretation, LutStrengthPercent, display.StableKey, profile.ProfileFingerprint ?? "srgb-fallback", 1);
         var opaque = _cache.CreateOpaqueKey(cacheKey); var cached = _cache.Resolve(opaque); if (cached is not null) return LutBitmapEncoding.Load(cached);

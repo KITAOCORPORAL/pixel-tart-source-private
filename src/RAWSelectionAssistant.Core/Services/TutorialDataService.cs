@@ -5,7 +5,6 @@ namespace RAWSelectionAssistant.Core.Services;
 
 public sealed class TutorialDataService
 {
-    private const string DemoJpegBase64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////2wBDAf//////////////////////////////////////////////////////////////////////////////////////wAARCAAMABADASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAFQAP/EABQQAQAAAAAAAAAAAAAAAAAAABD/2gAIAQEAAQUCf//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8Bf//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8Bf//EABQQAQAAAAAAAAAAAAAAAAAAABD/2gAIAQEABj8Cf//EABQQAQAAAAAAAAAAAAAAAAAAABD/2gAIAQEAAT8hf//aAAwDAQACAAMAAAAQAP/EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8Qf//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8Qf//EABQQAQAAAAAAAAAAAAAAAAAAABD/2gAIAQEAAT8Qf//Z";
     private readonly string _applicationRoot;
     private readonly string _tutorialRoot;
 
@@ -25,46 +24,10 @@ public sealed class TutorialDataService
         Path.Combine(_tutorialRoot, "CustomerSelection", "DSC01234.JPG"),
         Path.Combine(_tutorialRoot, "CustomerSelection", "选片编号.txt"));
 
-    public async Task<TutorialSandboxPaths> EnsureCreatedAsync(CancellationToken cancellationToken = default)
-    {
-        var paths = Paths;
-        Directory.CreateDirectory(paths.JpegSource);
-        Directory.CreateDirectory(paths.RawSource);
-        Directory.CreateDirectory(paths.CustomerSelection);
-        Directory.CreateDirectory(paths.Output);
-        var jpeg = Convert.FromBase64String(DemoJpegBase64);
-        foreach (var number in new[] { "01234", "01235", "01236" })
-        {
-            var jpgPath = Path.Combine(paths.JpegSource, $"DSC{number}.JPG");
-            if (!File.Exists(jpgPath) || new FileInfo(jpgPath).Length == 0)
-            {
-                await File.WriteAllBytesAsync(jpgPath, jpeg, cancellationToken).ConfigureAwait(false);
-            }
-            var rawPath = Path.Combine(paths.RawSource, $"DSC{number}.ARW");
-            if (!File.Exists(rawPath) || new FileInfo(rawPath).Length == 0)
-            {
-                await File.WriteAllTextAsync(rawPath, $"KitaoPhotoSelector tutorial RAW placeholder DSC{number}", cancellationToken).ConfigureAwait(false);
-            }
-        }
-        File.Copy(Path.Combine(paths.JpegSource, "DSC01234.JPG"), paths.CustomerJpeg, true);
-        await File.WriteAllTextAsync(paths.SelectionText, "1235、DSC01236.JPG", cancellationToken).ConfigureAwait(false);
-        return paths;
-    }
-
-    public async Task<TutorialSandboxPaths> ResetAsync(CancellationToken cancellationToken = default)
-    {
-        Delete(_tutorialRoot);
-        return await EnsureCreatedAsync(cancellationToken).ConfigureAwait(false);
-    }
-
-    public void Delete(string path)
-    {
-        if (!IsTutorialRoot(path))
-        {
-            throw new InvalidOperationException("教程数据路径验证失败，已停止删除。");
-        }
-        if (Directory.Exists(_tutorialRoot)) Directory.Delete(_tutorialRoot, true);
-    }
+    // Retired compatibility methods must not generate, overwrite or delete any files.
+    public Task<TutorialSandboxPaths> EnsureCreatedAsync(CancellationToken cancellationToken = default) => Task.FromResult(Paths);
+    public Task<TutorialSandboxPaths> ResetAsync(CancellationToken cancellationToken = default) => Task.FromResult(Paths);
+    public void Delete(string path) { }
 
     public bool IsWithinTutorial(string path)
     {

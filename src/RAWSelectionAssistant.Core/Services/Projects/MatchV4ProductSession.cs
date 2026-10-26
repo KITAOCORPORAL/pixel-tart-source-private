@@ -41,7 +41,7 @@ public sealed class MatchV4ProductSession
         var matched = await ProcessFullResolutionAsync(strength, keepLuminance, mode, token).ConfigureAwait(false);
         token.ThrowIfCancellationRequested();
         var exported = await AtomicTiffWriter.WriteRgb48Async(destination, matched.Pixels,
-            new(TiffBitDepth.Sixteen, IccProfile: outputIcc, Software: "Pixel Tart", Orientation: matched.Pixels.Orientation),
+            new(TiffBitDepth.Sixteen, IccProfile: outputIcc, Software: "光镜", Orientation: matched.Pixels.Orientation),
             token, overwrite: false).ConfigureAwait(false);
         return (matched, exported);
     }

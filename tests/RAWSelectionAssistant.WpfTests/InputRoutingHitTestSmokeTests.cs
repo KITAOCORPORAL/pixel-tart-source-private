@@ -185,7 +185,7 @@ public sealed class InputRoutingHitTestSmokeTests
 
         foreach (var automationId in new[]
                  {
-                     "WorkbenchRoot", "SidebarRoot", "TutorialCalloutCloseButton", "TutorialExitButton",
+                     "WorkbenchRoot", "SidebarRoot",
                      "ShellEmergencyCloseButton", "RawToJpegCloseButton", "RawToJpegCancelTaskButton",
                      "BatchCompressCloseButton", "BatchCompressCancelTaskButton"
                  })
@@ -212,9 +212,7 @@ public sealed class InputRoutingHitTestSmokeTests
             "ShellEscapePointer.TryBeginDispatch",
             "ShellEscapePointerAction.ExitTutorial",
             "await RequestEscapeCloseAsync()");
-        ContainsAll(mainXaml,
-            "services:ShellEscapePointer.Action=\"ExitTutorial\"",
-            "AutomationProperties.AutomationId=\"TutorialExitButton\"");
+        Assert.IsFalse(mainXaml.Contains("TutorialExitButton", StringComparison.Ordinal));
         var surfaceCloseCode = Read("src/RAWSelectionAssistant/Views/SurfaceCloseButton.xaml.cs");
         ContainsAll(surfaceCloseCode,
             "ShellEscapePointer.TryBeginDispatch(e)",
@@ -235,27 +233,16 @@ public sealed class InputRoutingHitTestSmokeTests
             "IsHitTestVisible = false");
 
         var document = XDocument.Parse(mainXaml);
-        var tutorial = NamedElement(document, "TutorialOverlay");
         var emergency = NamedElement(document, "ShellSurfaceCloseButton");
-        Assert.AreSame(tutorial.Parent, emergency.Parent,
-            "ShellSurfaceCloseButton must be a RootGrid sibling of TutorialOverlay.");
+        Assert.IsFalse(mainXaml.Contains("TutorialOverlay", StringComparison.Ordinal));
         Assert.IsTrue(string.Equals(Attribute(emergency, "HorizontalAlignment"), "Right", StringComparison.Ordinal));
         Assert.IsTrue(string.Equals(Attribute(emergency, "VerticalAlignment"), "Top", StringComparison.Ordinal));
         Assert.IsTrue(double.TryParse(Attribute(emergency, "Width"), out var width) && width >= 36 && width <= 64,
             "ShellSurfaceCloseButton must only wrap its close button, not capture the full window.");
         Assert.IsTrue(double.TryParse(Attribute(emergency, "Height"), out var height) && height >= 36 && height <= 64,
             "ShellSurfaceCloseButton must only wrap its close button, not capture the full window.");
-        var tutorialClose = ElementWithAutomationId(document, "TutorialCalloutCloseButton");
-        var tutorialExit = ElementWithAutomationId(document, "TutorialExitButton");
-        Assert.IsTrue(tutorialClose.Ancestors().Contains(tutorial), "Tutorial local close must remain inside TutorialOverlay.");
-        Assert.IsTrue(tutorialExit.Ancestors().Contains(tutorial), "Tutorial text exit must remain inside TutorialOverlay.");
-        Assert.IsNull(tutorialClose.Attributes().SingleOrDefault(attribute => attribute.Name.LocalName == "Command"),
-            "Tutorial close cannot depend on a business command.");
-        Assert.IsNull(tutorialExit.Attributes().SingleOrDefault(attribute => attribute.Name.LocalName == "Command"),
-            "Tutorial exit cannot depend on a business command.");
-
         var escapeHandler = Slice(mainCode, "private async void Window_PreviewKeyDown", "private bool TryCloseActiveInputPopup");
-        var escapeBranch = Slice(escapeHandler, "if (e.Key == Key.Escape)", "if (_viewModel?.IsOnboardingActive");
+        var escapeBranch = Slice(escapeHandler, "if (e.Key == Key.Escape)", "if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.B)");
         Assert.IsFalse(escapeBranch.Contains("Command.Execute", StringComparison.Ordinal),
             "The Escape close route must not execute a business command.");
 

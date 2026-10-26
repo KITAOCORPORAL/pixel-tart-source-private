@@ -10,7 +10,7 @@ public enum TiffCompression { None = 1 }
 public sealed record TiffExportOptions(
     TiffBitDepth BitDepth = TiffBitDepth.Sixteen,
     ReadOnlyMemory<byte> IccProfile = default,
-    string Software = "Pixel Tart",
+    string Software = "光镜",
     int Dpi = 72,
     ushort Orientation = 1,
     IReadOnlyDictionary<ushort, string>? Metadata = null,

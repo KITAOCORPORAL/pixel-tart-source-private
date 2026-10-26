@@ -433,7 +433,7 @@ public sealed class AssetLibraryWriteLease : IAsyncDisposable
     {
         var lockPath = Path.Combine(lockDirectory, "writer.lock"); FileStream stream;
         try { stream = new FileStream(lockPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read, 4096, true); }
-        catch (IOException ex) { throw new InvalidOperationException("此素材库正在被另一个像素蛋挞实例使用。", ex); }
+        catch (IOException ex) { throw new InvalidOperationException("此素材库正在被另一个光镜实例使用。", ex); }
         try
         {
             var process = Process.GetCurrentProcess();

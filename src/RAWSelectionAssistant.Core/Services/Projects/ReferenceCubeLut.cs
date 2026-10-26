@@ -46,7 +46,7 @@ public static class ReferenceCubeLutBuilder
     public static async Task ExportAsync(ReferenceCubeLut lut, string path, string title, CancellationToken token = default)
     {
         var builder = new StringBuilder(); builder.AppendLine($"TITLE \"{title.Replace("\"", "'")}\"");
-        builder.AppendLine("# Pixel Tart 快速仿色；适用于已转换到 sRGB 的显示参照图像。");
+        builder.AppendLine("# 光镜 快速仿色；适用于已转换到 sRGB 的显示参照图像。");
         builder.AppendLine($"LUT_3D_SIZE {lut.Size}"); builder.AppendLine("DOMAIN_MIN 0.0 0.0 0.0"); builder.AppendLine("DOMAIN_MAX 1.0 1.0 1.0");
         foreach(var value in lut.Values) builder.AppendLine(string.Create(CultureInfo.InvariantCulture,$"{value.R:F7} {value.G:F7} {value.B:F7}"));
         var full = Path.GetFullPath(path); Directory.CreateDirectory(Path.GetDirectoryName(full)!); var temporary=full+"."+Guid.NewGuid().ToString("N")+".tmp";

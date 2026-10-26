@@ -47,8 +47,8 @@
     <IncludeSourceRevisionInInformationalVersion Condition="'$(ModularHarnessDevPreview)' == 'true' and ('$(AssetLibraryP1StateAcceptance)' == 'true' or ('$(AssetLibraryP1AutomatedAcceptance)' == 'true' and '$(Configuration)' == 'Debug')) and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' != 'Release'">true</IncludeSourceRevisionInInformationalVersion>
     <IncludeSourceRevisionInInformationalVersion Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP2AutomatedAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' == 'Debug'">true</IncludeSourceRevisionInInformationalVersion>
     <IncludeSourceRevisionInInformationalVersion Condition="'$(ModularHarnessDevPreview)' == 'true' and '$(AssetLibraryP3AutomatedAcceptance)' == 'true' and '$(AcceptanceBuild)' != 'true' and '$(Configuration)' == 'Debug'">true</IncludeSourceRevisionInInformationalVersion>
-    <Authors>像素蛋挞</Authors>
-    <Product>像素蛋挞</Product>
+    <Authors>光镜</Authors>
+    <Product>光镜</Product>
     <Description>面向摄影师的本地分片、归片与照片处理工具平台</Description>
     <SatelliteResourceLanguages>zh-Hans;en</SatelliteResourceLanguages>
     <DebugType Condition="'$(Configuration)' == 'Release'">None</DebugType>

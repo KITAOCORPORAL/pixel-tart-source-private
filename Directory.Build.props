@@ -4,10 +4,10 @@
     <Version>$(PixelTartVersion)</Version>
     <AssemblyVersion>$(PixelTartAssemblyVersion)</AssemblyVersion>
     <FileVersion>$(PixelTartAssemblyVersion)</FileVersion>
-    <Company>像素蛋挞</Company>
-    <Product>像素蛋挞</Product>
-    <AssemblyTitle>像素蛋挞</AssemblyTitle>
-    <Copyright>Copyright © 2026 像素蛋挞</Copyright>
+    <Company>光镜</Company>
+    <Product>光镜</Product>
+    <AssemblyTitle>光镜</AssemblyTitle>
+    <Copyright>Copyright © 2026 光镜</Copyright>
     <Deterministic>true</Deterministic>
     <DebugType Condition="'$(Configuration)' == 'Release'">None</DebugType>
     <DebugSymbols Condition="'$(Configuration)' == 'Release'">false</DebugSymbols>

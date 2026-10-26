@@ -688,7 +688,7 @@ public partial class MainWindow
 
     private Window ReviewWindow(FrameworkElement content, double width, double height) => new()
     {
-        Title = "像素蛋挞 RC3 隔离验收", Owner = this, Content = content, Width = width, Height = height,
+        Title = "光镜 RC3 隔离验收", Owner = this, Content = content, Width = width, Height = height,
         ShowInTaskbar = false, WindowStartupLocation = WindowStartupLocation.CenterOwner,
         Background = Application.Current.TryFindResource("WindowBackgroundBrush") as Brush
     };
@@ -793,7 +793,7 @@ public partial class MainWindow
         }
         else if (state == "ConfirmationDialog")
         {
-            _automatedAuxiliaryWindow = new UpgradeTutorialWindow
+            _automatedAuxiliaryWindow = new HelpWindow
             {
                 Owner = this,
                 ShowInTaskbar = false
