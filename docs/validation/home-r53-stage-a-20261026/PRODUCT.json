@@ -7,7 +7,7 @@
   "utc": "2026-10-26T16:30:22.8642644Z",
   "hostTimeZone": "China Standard Time",
   "chatTimezone": "Asia/Shanghai",
-  "clockNote": "User timezone Asia/Shanghai, date 2026-10-26. Measured host China Standard Time has passed midnight into 2026-10-27. Raw UTC/epoch unchanged; directory suffix is task ID.",
+  "clockNote": "User environment: 2026-10-26 Asia/Shanghai. Measured host: China Standard Time; host wall clock crossed into 2026-10-27. Raw UTC/epoch were never rewritten. Packaged README/PRODUCT used Asia/Shanghai by mistake; corrected by CLOCK_CORRECTION.json. Directory suffix remains task identifier.",
   "diagnosticOnly": true,
   "isInstaller": false,
   "oldPackagePreserved": "N:/pixart/Guangjing-R53-Home-20261026/Guangjing-R53-StageA-Diagnostic-win-x64",
