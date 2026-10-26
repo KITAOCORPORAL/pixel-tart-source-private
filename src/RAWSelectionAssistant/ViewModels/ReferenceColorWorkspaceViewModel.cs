@@ -123,7 +123,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         var items = SelectedTargets.ToArray(); if (items.Length == 0) return;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
         foreach(var target in items) CaptureEditVersion(target);
-        var frozen = items.Select(item => (Item: item, VersionId: item.ActiveEditVersionId!.Value, Look: item.AppliedLookSnapshot, Stack: item.ColorAdjustmentStackSnapshot?.DeepClone(), Film: item.FilmSettingsSnapshot, Engine: item.EngineSnapshot, Mode: item.ExecutionModeSnapshot, RawDefinition:item.RawDefinition, RawInput:item.RawInput)).ToArray();
+        var frozen = items.Select(item => {var main=MainOutputVersion(item);return (Item:item,VersionId:main.Id,Look:main.Look,Stack:main.Stack?.DeepClone(),Film:main.Film,Engine:main.Engine,Mode:main.Mode,RawDefinition:main.RawDefinition,RawInput:main.RawInput);}).ToArray();
         var publishingLease=new PublishingIntermediateLease();
         var directory=publishingLease.DirectoryPath;var handedOff=false;
         _exportCancellation = new CancellationTokenSource(); RaiseExportCommands();
@@ -191,7 +191,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         Editor = new TetherReferenceModeViewModel(
             new ReferenceLookStore(Path.Combine(AppDataPaths.DataDirectory, "ProjectVisuals")), dialogs, allowReferenceManagement: true,
             renderBackend: renderBackend, matchV4Executor: matchV4Executor);
-        Editor.Enabled = true;
+        Editor.Enabled = true;InitializeR53Autosave();
         InitializeRangeSelection();
         BuildColorSpaceModelCommand = new AsyncRelayCommand(_ => BuildColorSpaceModelAsync(), _ => Editor.SourceImage is not null);
         ChooseTargetCommand = new AsyncRelayCommand(_ => ChooseTargetAsync(), _ => !IsLoading && !IsExporting && !IsInstantGenerating);
@@ -693,6 +693,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             StatusText = "待调色照片已载入。中央显示目标照片；参考图片位于独立辅助栏。";
             Editor.CopyCurrentLookTo([target]);
             target.Status = target.AppliedLookSnapshot is null && target.ColorAdjustmentStackSnapshot is null ? ReferenceTargetStatus.Pending : ReferenceTargetStatus.Adjusted;
+            CaptureEditVersion(target);EnsureR53Variants(target);
             ScheduleTargetThumbnail(target);
             if (ReferenceEquals(FailedTarget, target)) FailedTarget = null;
         }
@@ -722,6 +723,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     public void Dispose()
     {
+        _r53Autosave.Stop();
         if(_disposed)return;
         CancelLightPrintTask(false);_paperPreviewCancellation?.Cancel();CancelComparison();_disposed = true;
         PropertyChangedEventManager.RemoveHandler(StudioLocalizationService.Current, OnStudioLanguageChanged, nameof(StudioLocalizationService.Language));
@@ -778,7 +780,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         _lastExportFormat = format;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
         foreach(var target in items) CaptureEditVersion(target);
-        var frozen = items.Select(item => (Item: item, VersionId: item.ActiveEditVersionId!.Value, LibraryId: item.LibraryId, AssetId: item.AssetId, SourceHash: item.SourceHash, Look: item.AppliedLookSnapshot is { } look ? look with { ReferenceSources = look.ReferenceSources.Select(source => source with { }).ToArray() } : null, Film: item.FilmSettingsSnapshot is { } film ? film with { } : null, Stack: item.ColorAdjustmentStackSnapshot?.Normalize(), Engine: item.EngineSnapshot, Mode: item.ExecutionModeSnapshot, RawDefinition:item.RawDefinition, RawInput:item.RawInput)).ToArray();
+        var frozen = items.Select(item => {var main=MainOutputVersion(item);return (Item:item,VersionId:main.Id,LibraryId:item.LibraryId,AssetId:item.AssetId,SourceHash:item.SourceHash,Look:main.Look is {} look?look with{ReferenceSources=look.ReferenceSources.Select(source=>source with{}).ToArray()}:null,Film:main.Film is {} film?film with{}:null,Stack:main.Stack?.Normalize(),Engine:main.Engine,Mode:main.Mode,RawDefinition:main.RawDefinition,RawInput:main.RawInput);}).ToArray();
         _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportFailureSummary = ""; ExportStatus = $"0 / {ExportTotal} · {directory} · {format} · sRGB"; RaiseExportCommands();
         var failed = new List<string>();
         try
@@ -875,6 +877,8 @@ public sealed class NodeSyncChoice(Guid id, string name, bool selected) : Observ
     public long? LoadedCatalogRevision {get;set;}
     public StudioVersionCatalog? VersionCatalog { get; set; }
     public Guid? ActiveEditVersionId { get; set; }
+    private bool _variantsExpanded;
+    public bool VariantsExpanded{get=>_variantsExpanded;set=>SetProperty(ref _variantsExpanded,value);}
     public Guid Id { get; } = id;
     public string Name { get; } = name;
     public bool Selected { get => _selected; set => SetProperty(ref _selected, value); }
@@ -899,6 +903,8 @@ public sealed class ReferenceTargetItem : ObservableObject
     public long? LoadedCatalogRevision {get;set;}
     public StudioVersionCatalog? VersionCatalog { get; set; }
     public Guid? ActiveEditVersionId { get; set; }
+    private bool _variantsExpanded;
+    public bool VariantsExpanded{get=>_variantsExpanded;set=>SetProperty(ref _variantsExpanded,value);}
     public Guid Id { get; }
     private Guid? _assetId;
     internal Dictionary<long,PhotographerAnnotation> OwnAnnotationWrites {get;}=[];

@@ -6,13 +6,16 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 public sealed record ColorStudioSessionTarget(Guid Id, string Path, Guid? AssetId, bool Selected,
     ReferenceLook? Look, ColorAdjustmentStack? Stack, PixelTartFilmSettings? Film,
     ColorStudioMatchEngine Engine = ColorStudioMatchEngine.Stable, MatchV4ExecutionMode ExecutionMode = MatchV4ExecutionMode.Auto,
-    int? SessionRating = null, string? SessionColorLabel = null, Guid? LibraryId = null, string? SourceHash = null, IReadOnlyList<StudioEditVersion>? EditVersions = null, Guid? ActiveEditVersionId = null,long? CatalogRevision=null,ProfessionalRawDefinition? RawDefinition=null,ProfessionalRawContract? RawInput=null);
+    int? SessionRating = null, string? SessionColorLabel = null, Guid? LibraryId = null, string? SourceHash = null, IReadOnlyList<StudioEditVersion>? EditVersions = null, Guid? ActiveEditVersionId = null,long? CatalogRevision=null,ProfessionalRawDefinition? RawDefinition=null,ProfessionalRawContract? RawInput=null)
+{public bool VariantsExpanded {get;init;}}
+
 
 public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double EditingWidth = 340,
     bool AuxiliaryOpen = true, bool EditingOpen = true, int AuxiliaryMode = 0, int ToolMode = 0,
     string FilmstripDock = "Bottom", string FilmstripView = "Grid", bool FilmstripOpen = true)
 {
     public DarkroomPanelLayout? Darkroom { get; init; }
+    public bool R53Professional {get;init;}
     public ColorStudioLayout Normalize() => this with
     {
         Darkroom = Darkroom?.Normalize(),
@@ -64,6 +67,11 @@ public sealed record ColorStudioSessionDocument(IReadOnlyList<ColorStudioSession
         }).ToArray();
         foreach (var target in targets)
         {
+            if(target.EditVersions is {} variants)
+            {
+                if(variants.Count(v=>v.IsOriginal)>1||variants.Count(v=>v.IsMain&&!v.Archived)>1||variants.Any(v=>v.Rating is <0 or >5 || v.IsOriginal&&v.Archived))
+                    throw new InvalidDataException("原始/主变体或评分身份无效。");
+            }
             target.Film?.Validate();target.RawDefinition?.Validate();
             if(target.RawDefinition is not null && (target.Look is not null || target.Stack is not null || target.Film is not null))throw new InvalidDataException("专业 RAW 定义不能混合旧调整栈。");
             if(target.EditVersions?.FirstOrDefault(v=>v.Id==target.ActiveEditVersionId) is {} selected && System.Text.Json.JsonSerializer.Serialize(selected.RawDefinition)!=System.Text.Json.JsonSerializer.Serialize(target.RawDefinition))throw new InvalidDataException("会话活动版本与 RAW 定义不一致。");

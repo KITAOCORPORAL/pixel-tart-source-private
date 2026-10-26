@@ -8,7 +8,7 @@ using RAWSelectionAssistant.ViewModels;
 namespace RAWSelectionAssistant.Views;
 
 // Pointer modes are transient view state, not a processing definition or an edit.
-internal enum ColorStudioCanvasTool { Select, Hand, Zoom, ColorSample }
+internal enum ColorStudioCanvasTool { Select, Hand, Zoom, ColorSample, Brush }
 
 public partial class ReferenceColorWorkspaceView
 {
@@ -157,7 +157,8 @@ public partial class ReferenceColorWorkspaceView
             return false;
         }
         if (modifiers != ModifierKeys.None) return false;
-        if (key == Key.B) { SetCanvasOriginalHeld(true); return true; }
+        if(key==Key.B){ActiveCanvasTool=ColorStudioCanvasTool.Brush;ToolTip="画笔：当前局部蒙版处理未批准接入，不生成假结果。";return true;}
+        if(key==Key.Oem5){ToggleCanvasOriginal();return true;}
         if (repeat) return false;
         return key switch
         {
@@ -174,7 +175,7 @@ public partial class ReferenceColorWorkspaceView
             e.Handled = ExecuteCanvasShortcut(e.Key, Keyboard.Modifiers, e.IsRepeat);
     }
     private void OnCanvasToolKeyUp(object sender, KeyEventArgs e)
-    { if (e.Key == Key.B && _canvasOriginalHeld) { ReleaseCanvasOriginal(); e.Handled = true; } }
+    { /* B is brush, never a comparison hold. Mouse comparison releases via capture. */ }
 
     internal void ZoomCanvasAt(Point point, bool zoomOut)
     {

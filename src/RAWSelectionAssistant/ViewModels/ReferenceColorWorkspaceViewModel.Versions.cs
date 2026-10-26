@@ -77,14 +77,15 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         for(var i=0;i<target.EditVersions.Count;i++) if(target.EditVersions[i].SourceHash is null && target.SourceHash is not null) target.EditVersions[i]=target.EditVersions[i] with{SourceHash=target.SourceHash};
         target.ActiveEditVersionId ??= target.Id; // deterministic default migration for old v1 sessions
         var existing=target.EditVersions.FirstOrDefault(v=>v.Id==target.ActiveEditVersionId);
+        if(existing?.IsOriginal==true)return;
         var snapshot=new StudioEditVersion(target.ActiveEditVersionId.Value,existing?.Name??"默认版本",existing?.CreatedAt??DateTimeOffset.UtcNow,
-            target.LibraryId,target.AssetId,target.SourceHash,target.AppliedLookSnapshot,target.ColorAdjustmentStackSnapshot?.DeepClone(),target.FilmSettingsSnapshot,target.EngineSnapshot,target.ExecutionModeSnapshot){Archived=existing?.Archived??false,OriginVersionId=existing?.OriginVersionId,OriginIdentity=existing?.OriginIdentity,RawDefinition=target.RawDefinition,RawInput=target.RawInput};
+            target.LibraryId,target.AssetId,target.SourceHash,target.AppliedLookSnapshot,target.ColorAdjustmentStackSnapshot?.DeepClone(),target.FilmSettingsSnapshot,target.EngineSnapshot,target.ExecutionModeSnapshot){IsOriginal=existing?.IsOriginal??false,IsMain=existing?.IsMain??false,MainExplicit=existing?.MainExplicit??false,Rating=existing?.Rating??0,ColorLabel=existing?.ColorLabel,Archived=existing?.Archived??false,OriginVersionId=existing?.OriginVersionId,OriginIdentity=existing?.OriginIdentity,RawDefinition=target.RawDefinition,RawInput=target.RawInput};
         if(existing is null)target.EditVersions.Add(snapshot);else target.EditVersions[target.EditVersions.IndexOf(existing)]=snapshot;
     }
     public void CreateEditVersion()
     {
         if(ActiveTarget is not {} target || IsLoading || IsExporting || IsInstantGenerating)return;
-        Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);
+        Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);EnsureR53Variants(target);
         target.ActiveEditVersionId=Guid.NewGuid();CaptureEditVersion(target);
         var version=target.EditVersions.Last();target.EditVersions[^1]=version with{Name="版本 "+target.EditVersions.Count};
         StatusText="已创建编辑版本；保存工作文件以持久化。";
@@ -94,12 +95,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(ActiveTarget is not {} target || IsLoading || IsExporting || IsInstantGenerating)return;
         await StopComparisonAsync();if(_disposed||!ReferenceEquals(ActiveTarget,target))return;
         if(target.ActiveEditVersionId==id)return;
-        var version=target.EditVersions.SingleOrDefault(v=>v.Id==id);if(version is null)return;
+        var version=target.EditVersions.SingleOrDefault(v=>v.Id==id&&!v.Archived);if(version is null){StatusText="引用变体已删除或不可用，未替换为其他变体。";return;}
         Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);
         Editor.StopProcessing();_activationCancellation?.Cancel();Interlocked.Increment(ref _activationRevision);
         target.ActiveEditVersionId=id;target.AppliedLookSnapshot=version.Look;target.ColorAdjustmentStackSnapshot=version.Stack?.DeepClone();
         target.RawDefinition=version.RawDefinition;target.RawInput=version.RawInput;target.FilmSettingsSnapshot=version.Film;target.EngineSnapshot=version.Engine;target.ExecutionModeSnapshot=version.Mode;
-        await ActivateTargetAsync(target);StatusText="当前编辑版本："+version.Name;
+        await ActivateTargetAsync(target);NotifyR53Variants();StatusText="当前编辑版本："+version.Name;
     }
     private void InitializeVersionCommands()
     {
@@ -127,8 +128,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         InitializeProfessionalRawCommands();
         SelectEditVersionCommand=new AsyncRelayCommand(async _=>{if(SelectedCatalogVersion is {} v && !v.Archived)await SwitchEditVersionAsync(v.Id);});
         SaveEditVersionsCommand=new AsyncRelayCommand(async _=>{try{await SaveEditVersionsAsync();}catch(Exception e)when(e is IOException or InvalidOperationException){StatusText="版本保存未完成："+e.Message;}});
-        RenameEditVersionCommand=new RelayCommand(_=>{if(ActiveTarget is not {} target||string.IsNullOrWhiteSpace(EditVersionName))return;CaptureEditVersion(target);var index=target.EditVersions.ToList().FindIndex(v=>v.Id==target.ActiveEditVersionId);target.EditVersions[index]=target.EditVersions[index] with{Name=EditVersionName.Trim()};});
-        ArchiveEditVersionCommand=new AsyncRelayCommand(async _=>{if(ActiveTarget is not {} target)return;CaptureEditVersion(target);var next=target.EditVersions.FirstOrDefault(v=>v.Id!=target.ActiveEditVersionId&&!v.Archived);if(next is null){StatusText="至少保留一个版本";return;}var index=target.EditVersions.ToList().FindIndex(v=>v.Id==target.ActiveEditVersionId);var old=target.EditVersions[index];await SwitchEditVersionAsync(next.Id);target.EditVersions[index]=old with{Archived=true};});
+        RenameEditVersionCommand=new RelayCommand(_=>{if(ActiveTarget is not {} target||string.IsNullOrWhiteSpace(EditVersionName))return;CaptureEditVersion(target);var index=target.EditVersions.ToList().FindIndex(v=>v.Id==target.ActiveEditVersionId);target.EditVersions[index]=target.EditVersions[index] with{Name=EditVersionName.Trim()};NotifyR53Variants();ScheduleR53Autosave();});
+        ArchiveEditVersionCommand=new AsyncRelayCommand(async _=>await DeleteR53VariantAsync());
         RelocateTargetCommand=new AsyncRelayCommand(async _=>
         {
             var target=FailedTarget??ActiveTarget;if(target is null)return;

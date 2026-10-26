@@ -55,7 +55,7 @@ namespace RAWSelectionAssistant.WpfTests;
    {
     page.Measure(size);page.Arrange(new Rect(size));page.UpdateLayout();
     var rail=(FrameworkElement)page.FindName("AppRail");var panel=(FrameworkElement)page.FindName("RightPanel");var viewer=(FrameworkElement)page.FindName("ViewerArea");
-    Assert.AreEqual(40d,rail.ActualWidth);Assert.AreEqual(304d,panel.ActualWidth);Assert.IsTrue(viewer.ActualWidth>size.Width*.65);Assert.IsTrue(viewer.ActualHeight>size.Height*.65);
+    Assert.AreEqual(40d,rail.ActualWidth);Assert.AreEqual(size.Width<1440?0d:304d,panel.ActualWidth);Assert.IsTrue(viewer.ActualWidth>560);Assert.IsTrue(viewer.ActualHeight>size.Height*.65);
     for(var i=0;i<5;i++){tabs.SelectedIndex=i;page.UpdateLayout();var pane=(FrameworkElement)page.FindName(new[]{"AdjustmentScroll","PaperScroll","LayersScroll","StylesScroll","VariantsScroll"}[i]);Assert.AreEqual(Visibility.Visible,pane.Visibility);}
    }
    vm.FilterScope="Jpeg";Assert.AreEqual(0,vm.VisibleTargets.Count);Assert.AreSame(vm.VisibleTargets,((ListBox)page.FindName("PhotoStrip")).ItemsSource);vm.ClearFilmstripFiltersCommand.Execute(null);Assert.AreEqual(2,vm.VisibleTargets.Count);

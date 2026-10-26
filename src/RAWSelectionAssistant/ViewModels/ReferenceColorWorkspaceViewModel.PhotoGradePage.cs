@@ -5,7 +5,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
 #if PHOTOGRAPHER_TRIAL
  private bool _usePhotoGradePage=true;
 #else
- private bool _usePhotoGradePage;
+ private bool _usePhotoGradePage=true;
 #endif
  public bool UsePhotoGradePage {get=>_usePhotoGradePage;set{if(SetProperty(ref _usePhotoGradePage,value))OnPropertyChanged(nameof(UseLegacyGradePage));}}
  public bool UseLegacyGradePage=>!UsePhotoGradePage;

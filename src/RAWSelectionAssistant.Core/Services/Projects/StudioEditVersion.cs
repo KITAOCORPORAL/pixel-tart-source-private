@@ -7,6 +7,12 @@ public sealed record StudioEditVersion(Guid Id,string Name,DateTimeOffset Create
     public Guid? OriginVersionId {get;init;}
     public string? OriginIdentity {get;init;}
     public bool Archived { get; init; }
+    public bool IsOriginal {get;init;}
+    public bool IsMain {get;init;}
+    public bool MainExplicit {get;init;}
+    public int Rating {get;init;}
+    public string? ColorLabel {get;init;}
+
     public int ProcessingVersion => RawDefinition?.ProcessingVersion ?? Stack?.ProcessingVersion ?? 1;
 }
 public sealed record StudioExportReceipt(Guid ExportId,Guid? LibraryId,Guid? AssetId,string? SourceHash,Guid EditVersionId,int ProcessingVersion,

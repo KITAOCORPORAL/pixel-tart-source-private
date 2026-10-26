@@ -16,13 +16,13 @@ public partial class PhotoGradePageView:UserControl
   PhotoViewport.State.Changed+=(_,_)=>DrawGuides();
   AddHandler(Expander.ExpandedEvent,new RoutedEventHandler(SectionExpanded));
   AddHandler(Expander.CollapsedEvent,new RoutedEventHandler(SectionCollapsed));
-  InitializePanelLayout();
+  InitializePanelLayout();InitializeR53();
   PreviewKeyDown+=(_,e)=>
   {
-   if(Keyboard.Modifiers!=ModifierKeys.Control)return;
+   if(e.Handled||Keyboard.Modifiers!=ModifierKeys.Control)return;
    if(e.Key==Key.E){OpenExport(this,new RoutedEventArgs());e.Handled=true;}
    else if(e.Key==Key.D0){PhotoViewport.State.Fit();e.Handled=true;}
-   else if(e.Key==Key.D1){PhotoViewport.State.SetZoom(1);e.Handled=true;}
+
   };
   DataContextChanged+=(_,_)=>Attach();
   Loaded+=(_,_)=>Attach();
@@ -35,7 +35,7 @@ public partial class PhotoGradePageView:UserControl
   // Weak subscription also covers controls constructed but never attached/unloaded.
   if(model is not null)PropertyChangedEventManager.AddHandler(model,Changed,string.Empty);
 
-  RestorePanelLayout();Refresh();UpdateZones();
+  RestorePanelLayout();Refresh();UpdateZones();ApplyR53Layout();RenderR53Resources();
  }
  private void Detach(bool cancel)
  {
@@ -83,10 +83,11 @@ public partial class PhotoGradePageView:UserControl
  private void ZoomTool(object sender,RoutedEventArgs e){activeTool="缩放";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Cross;}
  private void CameraI2(object sender,RoutedEventArgs e){if(model is not null)model.LightPrintCamera="i-2";}
  private void CameraSX70(object sender,RoutedEventArgs e){if(model is not null)model.LightPrintCamera="SX-70";}
- private void OpenExport(object sender,RoutedEventArgs e){if(model is null)return;var window=new DarkroomExportDialog(model){Owner=Window.GetWindow(this)};window.ShowDialog();}
+ private async void OpenExport(object sender,RoutedEventArgs e){if(model is null)return;await model.PrepareR53MainExportAsync();var window=new DarkroomExportDialog(model){Owner=Window.GetWindow(this)};window.ShowDialog();}
  private void Changed(object? sender,PropertyChangedEventArgs e)
  {
-  if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.Layout)&&!savingPanelLayout)RestorePanelLayout();
+  if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.Layout)&&!savingPanelLayout){RestorePanelLayout();ApplyR53Layout();}
+  if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.R53Professional))ApplyR53Layout();
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PhotoMaskColor))Refresh();
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PreviewHistogram))UpdateZones();
   // A newly imported ordinary photo restores the historical default engine. The

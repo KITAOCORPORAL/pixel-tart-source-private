@@ -297,6 +297,12 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         }
     }
     public bool SelectedNodeEnabled { get => SelectedAdjustmentNode?.Enabled == true; set { if (SelectedAdjustmentNode is { } selected && value != selected.Enabled) ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? node with { Enabled = value } : node).ToArray()); OnPropertyChanged(); } }
+    public bool SelectedNodeLocked
+    {
+        get=>SelectedAdjustmentNode?.IsLocked==true;
+        set{if(SelectedAdjustmentNode is {} node && !node.SystemLocked)ChangeStack(nodes=>nodes.Select(n=>n.Id==node.Id?n with{UserLocked=value}:n).ToArray(),render:false);OnPropertyChanged();}
+    }
+    public bool SelectedNodeEditable=>SelectedAdjustmentNode?.IsLocked!=true;
     public string SelectedNodeName { get => SelectedAdjustmentNode?.Name ?? string.Empty; set { if (!string.Equals(value, SelectedNodeName, StringComparison.Ordinal)) RenameSelectedAdjustmentNode(value); } }
     public bool IsRenamingNode { get; set; }
     public string PendingNodeName { get; set; } = "";
@@ -428,6 +434,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     }
     private void ApplyColorScheme()
     {
+        if(ReadOnlyTarget||AdjustmentStack.Nodes.Any(n=>n.IsLocked)){StatusText="当前变体或图层锁定，未替换方案。";return;}
         if (SelectedColorScheme is not { } scheme) return;
         CommitEditTransaction();
         _undoStacks.Push(CloneHistoryStack(EffectiveEditingStack())!); _undoSelections.Push(_selectedAdjustmentNodeId);
@@ -437,10 +444,22 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         _appliedColorScheme = scheme; NotifySchemeState();
         _ = RenderAsync(); StatusText = "色彩方案已应用。";
     }
+    private bool _readOnlyTarget;
+    public bool ReadOnlyTarget{get=>_readOnlyTarget;set=>SetProperty(ref _readOnlyTarget,value);}
     private void ChangeStack(Func<IReadOnlyList<ColorAdjustmentStackNode>, IReadOnlyList<ColorAdjustmentStackNode>> change, bool render = true, int? processingVersion = null)
     {
+        if(ReadOnlyTarget){StatusText="原始变体只读，请按F2从原始新建或F3复制当前。";return;}
         _presetPreviewNode = null; NotifyPresetPreview();
         var previous = EffectiveEditingStack(); var nodes = change(previous.Nodes).ToArray(); if (nodes.Length == 0) return;
+        // Enforce at the mutation boundary, including tool panels, curves and drag reorder.
+        // Visibility and user-lock toggles are allowed; system locks cannot be removed.
+        foreach(var locked in previous.Nodes.Where(n=>n.IsLocked))
+        {
+            var replacement=nodes.FirstOrDefault(n=>n.Id==locked.Id);
+            if(replacement is null || Array.FindIndex(nodes,n=>n.Id==locked.Id)!=previous.Nodes.ToList().FindIndex(n=>n.Id==locked.Id) ||
+                System.Text.Json.JsonSerializer.Serialize(locked with{Enabled=true,UserLocked=false})!=System.Text.Json.JsonSerializer.Serialize(replacement with{Enabled=true,UserLocked=false}))
+            {StatusText="图层已锁定；仅允许切换可见性或解除用户锁定。";return;}
+        }
         if (previous.Nodes.SequenceEqual(nodes)) return;
         if (_editTransactionBefore is null) { _undoStacks.Push(previous); _undoSelections.Push(_selectedAdjustmentNodeId); }
         _redoStacks.Clear(); _redoSelections.Clear(); AdjustmentStack = (previous with { Nodes = nodes, ProcessingVersion = processingVersion ?? previous.ProcessingVersion }).Normalize(); if (render) _ = DebouncedRenderAsync();
@@ -480,7 +499,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         ChangeStack(nodes => [.. nodes, node], processingVersion: nodeType == ColorStudioNodeType.ColorRange ? 2 : null); _selectedAdjustmentNodeId = node.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
     }
     private void DeleteSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { } selected && AdjustmentStack.Nodes.Count > 1) ChangeStack(nodes => nodes.Where(node => node.Id != selected.Id).ToArray()); }
-    private void DuplicateSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { Type: not ColorStudioNodeType.ReferenceMatch and not ColorStudioNodeType.Film and not ColorStudioNodeType.Develop } selected) { var copy = selected.Normalize() with { Id = Guid.NewGuid(), Name = selected.Name + " 副本" }; ChangeStack(nodes => nodes.SelectMany(node => node.Id == selected.Id ? new[] { node, copy } : new[] { node }).ToArray()); _selectedAdjustmentNodeId = copy.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode)); } }
+    private void DuplicateSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { IsLocked:false, Type: not ColorStudioNodeType.ReferenceMatch and not ColorStudioNodeType.Film and not ColorStudioNodeType.Develop } selected) { var copy = selected.Normalize() with { Id = Guid.NewGuid(), Name = selected.Name + " 副本" }; ChangeStack(nodes => nodes.SelectMany(node => node.Id == selected.Id ? new[] { node, copy } : new[] { node }).ToArray()); _selectedAdjustmentNodeId = copy.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode)); } }
     private void MoveSelectedAdjustmentNode(int delta) { if (SelectedAdjustmentNode is not { } selected) return; ChangeStack(nodes => { var list = nodes.ToList(); var index = list.FindIndex(node => node.Id == selected.Id); var next = Math.Clamp(index + delta, 0, list.Count - 1); (list[index], list[next]) = (list[next], list[index]); return list; }); }
     public void MoveAdjustmentNode(Guid sourceId, Guid destinationId)
     {
@@ -539,8 +558,8 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         IsSampling = SampleMode != "普通取样";
         StatusText = "取样已加入当前颜色范围节点。";
     }
-    private void UndoAdjustment() { if (_undoStacks.Count == 0) return; _redoStacks.Push(AdjustmentStack); _redoSelections.Push(_selectedAdjustmentNodeId); _selectedAdjustmentNodeId = _undoSelections.Pop(); AdjustmentStack = _undoStacks.Pop(); OnPropertyChanged(nameof(SelectedAdjustmentNode)); _ = RenderAsync(); }
-    private void RedoAdjustment() { if (_redoStacks.Count == 0) return; _undoStacks.Push(AdjustmentStack); _undoSelections.Push(_selectedAdjustmentNodeId); _selectedAdjustmentNodeId = _redoSelections.Pop(); AdjustmentStack = _redoStacks.Pop(); OnPropertyChanged(nameof(SelectedAdjustmentNode)); _ = RenderAsync(); }
+    private void UndoAdjustment() { if(ReadOnlyTarget)return; if (_undoStacks.Count == 0) return; _redoStacks.Push(AdjustmentStack); _redoSelections.Push(_selectedAdjustmentNodeId); _selectedAdjustmentNodeId = _undoSelections.Pop(); AdjustmentStack = _undoStacks.Pop(); OnPropertyChanged(nameof(SelectedAdjustmentNode)); _ = RenderAsync(); }
+    private void RedoAdjustment() { if(ReadOnlyTarget)return; if (_redoStacks.Count == 0) return; _undoStacks.Push(AdjustmentStack); _undoSelections.Push(_selectedAdjustmentNodeId); _selectedAdjustmentNodeId = _redoSelections.Pop(); AdjustmentStack = _redoStacks.Pop(); OnPropertyChanged(nameof(SelectedAdjustmentNode)); _ = RenderAsync(); }
     private void SetSelectedNumeric(string key, double value)
     {
         if (SelectedAdjustmentNode is not { } selected) return;
@@ -618,7 +637,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         if (SelectedAdjustmentNode is not { } selected || string.IsNullOrWhiteSpace(name)) return;
         ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? node with { Name = name.Trim() } : node).ToArray());
     }
-    private void RaiseAdjustmentCommands() { DeleteAdjustmentNodeCommand?.RaiseCanExecuteChanged(); DuplicateAdjustmentNodeCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeUpCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeDownCommand?.RaiseCanExecuteChanged(); ResetAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ToggleAdjustmentNodeCommand?.RaiseCanExecuteChanged(); RenameAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ClearSamplesCommand?.RaiseCanExecuteChanged(); UndoAdjustmentCommand?.RaiseCanExecuteChanged(); RedoAdjustmentCommand?.RaiseCanExecuteChanged(); OnPropertyChanged(nameof(SelectedNodeEnabled)); OnPropertyChanged(nameof(SelectedNodeName)); OnPropertyChanged(nameof(KeepOriginalLuminance)); foreach (var name in new[] { nameof(RangeStrength), nameof(RangeRadius), nameof(RangeSoftness), nameof(RangeHue), nameof(RangeSaturation), nameof(RangeChroma), nameof(RangeLightness), nameof(TransitionAmount), nameof(PositiveSamples), nameof(NegativeSamples) }) OnPropertyChanged(name); }
+    private void RaiseAdjustmentCommands() { DeleteAdjustmentNodeCommand?.RaiseCanExecuteChanged(); DuplicateAdjustmentNodeCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeUpCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeDownCommand?.RaiseCanExecuteChanged(); ResetAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ToggleAdjustmentNodeCommand?.RaiseCanExecuteChanged(); RenameAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ClearSamplesCommand?.RaiseCanExecuteChanged(); UndoAdjustmentCommand?.RaiseCanExecuteChanged(); RedoAdjustmentCommand?.RaiseCanExecuteChanged(); OnPropertyChanged(nameof(SelectedNodeEnabled)); OnPropertyChanged(nameof(SelectedNodeName)); OnPropertyChanged(nameof(SelectedNodeLocked));OnPropertyChanged(nameof(SelectedNodeEditable)); OnPropertyChanged(nameof(KeepOriginalLuminance)); foreach (var name in new[] { nameof(RangeStrength), nameof(RangeRadius), nameof(RangeSoftness), nameof(RangeHue), nameof(RangeSaturation), nameof(RangeChroma), nameof(RangeLightness), nameof(TransitionAmount), nameof(PositiveSamples), nameof(NegativeSamples) }) OnPropertyChanged(name); }
     public ObservableCollection<ReferenceLook> Looks { get; } = [];
     public ObservableCollection<ReferenceLook> SourceChoices { get; } = [];
     public ObservableCollection<ReferenceSourceWeightViewModel> ReferenceSources { get; } = [];
@@ -791,6 +810,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
 
     public void HoverPreset(AdobeXmpPreset preset)
     {
+        if(ReadOnlyTarget)return;
         _presetPreviewNode = CreatePresetNode(preset, PresetStrengthPercent / 100d);
         NotifyPresetPreview(); _ = DebouncedRenderAsync();
     }
@@ -1154,6 +1174,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     }
     private void SetFilm(PixelTartFilmSettings value)
     {
+        if(!_syncingStack&&(ReadOnlyTarget||AdjustmentStack.Nodes.Any(n=>n.Type==ColorStudioNodeType.Film&&n.IsLocked))){StatusText="当前原始变体或胶片节点已锁定。";return;}
         if (!_syncingStack) value = value with { SpatialVersion = 2 };
         value.Validate();
         if (!_syncingStack)

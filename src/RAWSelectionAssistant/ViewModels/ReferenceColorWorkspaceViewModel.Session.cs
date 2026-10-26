@@ -22,7 +22,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         RedoBatchAdjustmentCommand = new RelayCommand(_ => RestoreBatchAdjustment(true), _ => _batchRedo.Count > 0 && !IsLoading && !IsExporting);
         SaveSessionCommand = new AsyncRelayCommand(async _ =>
         {
-            var path = _dialogs.ChooseSaveFile(StudioLocalizationService.Current["SessionSaveTitle"], StudioLocalizationService.Current["SessionFilter"] + "|*.ptstudio.json", ".ptstudio.json", "ColorStudio.ptstudio.json");
+            var path = SessionPath ?? _dialogs.ChooseSaveFile(StudioLocalizationService.Current["SessionSaveTitle"], StudioLocalizationService.Current["SessionFilter"] + "|*.ptstudio.json", ".ptstudio.json", "ColorStudio.ptstudio.json");
             if (path is null) return;
             try
             {
@@ -43,15 +43,21 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             try { await LoadSessionAsync(path); } catch (Exception error) when (error is IOException or UnauthorizedAccessException or ArgumentException or System.Text.Json.JsonException or InvalidOperationException) { StatusText = StudioLocalizationService.Current.Format("SessionOpenFailed", error.Message); }
         }, _ => !IsLoading && !IsExporting);
     }
-    public async Task SaveSessionAsync(string path, CancellationToken token = default)
+    private readonly SemaphoreSlim _projectSaveGate=new(1,1);
+    public async Task SaveSessionAsync(string path,CancellationToken token=default)
+    {
+        await _projectSaveGate.WaitAsync(token);
+        try{await SaveSessionCoreAsync(path,token);}finally{_projectSaveGate.Release();}
+    }
+    private async Task SaveSessionCoreAsync(string path, CancellationToken token = default)
     {
         CancelLightPrintTask(true);await LightPrintPreviewWork;
         if (ActiveTarget is { } active) Editor.CopyCurrentLookTo([active]);
         await FlushMetadataAsync();
-        foreach(var target in Targets) CaptureEditVersion(target);
+        foreach(var target in Targets){CaptureEditVersion(target);EnsureR53Variants(target);}
         var document = new ColorStudioSessionDocument(Targets.Select(item => new ColorStudioSessionTarget(item.Id, item.Path, item.AssetId, item.IsSelected,
             item.AppliedLookSnapshot, item.ColorAdjustmentStackSnapshot, item.FilmSettingsSnapshot, item.EngineSnapshot, item.ExecutionModeSnapshot,
-            item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null, item.LibraryId, item.SourceHash, item.EditVersions.ToArray(), item.ActiveEditVersionId,item.VersionCatalog?.Revision,item.RawDefinition,item.RawInput)).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
+            item.AssetId is null ? item.Rating : null, item.AssetId is null ? item.ColorLabel : null, item.LibraryId, item.SourceHash, item.EditVersions.ToArray(), item.ActiveEditVersionId,item.VersionCatalog?.Revision,item.RawDefinition,item.RawInput){VariantsExpanded=item.VariantsExpanded}).ToArray(), ActiveTarget?.Id, FilterScope, MinimumRating, ColorLabelFilter,
             Layout: Layout with { AuxiliaryOpen = Editor.ContextRailOpen }){EmbeddedVersionsAuthoritative=true};
         path=Path.GetFullPath(path);
         if(Targets.Any(t=>string.Equals(Path.GetFullPath(t.Path),path,StringComparison.OrdinalIgnoreCase)))throw new IOException("不能将工作文件保存到源照片路径。");
@@ -59,7 +65,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         // explicit separate command, not a hidden second write between two project saves.
         if(!_sessionFingerprints.TryGetValue(path,out var expected)&&File.Exists(path))throw new InvalidOperationException("此工作区未读取该工作文件；请先打开或另存新文件，未覆盖。");
         _sessionFingerprints[path]=await ColorStudioSessionStore.SaveCheckedAsync(path,document,expected,token);
-        SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath)); StatusText = "SessionSaved";
+        SessionPath = Path.GetFullPath(path); OnPropertyChanged(nameof(SessionPath));R53SaveStatus="已保存";OnPropertyChanged(nameof(R53SaveStatus)); StatusText = "SessionSaved";
     }
     public async Task LoadSessionAsync(string path, CancellationToken token = default)
     {
@@ -112,7 +118,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             FilmSettingsSnapshot = item.Film, EngineSnapshot = item.Engine, ExecutionModeSnapshot = item.ExecutionMode,
             Rating = item.AssetId is null ? item.SessionRating ?? 0 : 0, ColorLabel = item.AssetId is null ? item.SessionColorLabel : null
         }).ToArray();
-        if(staged is null)for(var i=0;i<restored.Length;i++) { foreach(var version in document.Targets[i].EditVersions ?? []) restored[i].EditVersions.Add(version); restored[i].ActiveEditVersionId=document.Targets[i].ActiveEditVersionId;restored[i].LoadedCatalogRevision=document.Targets[i].CatalogRevision; }
+        if(staged is null)for(var i=0;i<restored.Length;i++) { foreach(var version in document.Targets[i].EditVersions ?? []) restored[i].EditVersions.Add(version); restored[i].ActiveEditVersionId=document.Targets[i].ActiveEditVersionId;restored[i].VariantsExpanded=document.Targets[i].VariantsExpanded;restored[i].LoadedCatalogRevision=document.Targets[i].CatalogRevision; }
         if(ActiveTarget is{} current)Editor.CopyCurrentLookTo([current]);
         var history=Editor.CaptureSessionHistory();var oldEditorSource=Editor.CapturePreparedSource();
         var oldTargets=Targets.ToArray();var oldActive=ActiveTarget;var oldImage=Editor.MatchedImage;var oldSource=Editor.SourceImage;var oldSize=Editor.SourcePixelSize;var oldIndependent=Editor.IndependentRawMode;var oldEnabled=Editor.Enabled;var oldView=Editor.ViewMode;

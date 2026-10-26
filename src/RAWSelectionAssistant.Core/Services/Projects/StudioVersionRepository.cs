@@ -39,6 +39,7 @@ public sealed class StudioVersionRepository(string directory)
         Directory.CreateDirectory(directory);var path=PathFor(expected.Identity);await using var gate=new FileStream(path+".lock",FileMode.OpenOrCreate,FileAccess.ReadWrite,FileShare.None);
         var current=await LoadAsync(expected.Identity,token);if(current.Revision!=expected.Revision && SameContent(current,versions,selected))return current;if(current.Revision!=expected.Revision)throw new InvalidOperationException("版本目录已由其他会话修改，请重新打开后合并。");
         if(versions.Select(x=>x.Id).Distinct().Count()!=versions.Count||selected is Guid id&&!versions.Any(v=>v.Id==id&&!v.Archived))throw new InvalidDataException("版本选择无效。");
+        if(versions.Count(v=>v.IsOriginal)>1||versions.Count(v=>v.IsMain&&!v.Archived)>1||versions.Any(v=>v.Rating is <0 or >5||v.IsOriginal&&v.Archived))throw new InvalidDataException("原始/主变体或评分身份无效。");
         foreach(var version in versions)
         {
             if(Identity(version.LibraryId,version.AssetId,version.SourceHash??"")!=expected.Identity)throw new InvalidDataException("编辑版本源身份与目录不一致。");

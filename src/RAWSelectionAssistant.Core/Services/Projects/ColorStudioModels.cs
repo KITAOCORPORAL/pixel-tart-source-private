@@ -18,6 +18,10 @@ public sealed record ColorAdjustmentStackNode(
     PixelTartFilmSettings? FilmSettings = null,
     IReadOnlyList<VisualRgb24>? NegativeSamples = null)
 {
+    // Editing permission only; never a processing switch. Locked nodes still render.
+    public bool UserLocked {get;init;}
+    public bool SystemLocked {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore] public bool IsLocked=>UserLocked||SystemLocked;
     public IReadOnlyDictionary<string, double> NumericParameters { get; init; } = NumericParameters ?? new Dictionary<string, double>();
     public IReadOnlyList<VisualRgb24> Samples { get; init; } = Samples ?? Array.Empty<VisualRgb24>();
     public IReadOnlyList<VisualRgb24> NegativeSamples { get; init; } = NegativeSamples ?? Array.Empty<VisualRgb24>();

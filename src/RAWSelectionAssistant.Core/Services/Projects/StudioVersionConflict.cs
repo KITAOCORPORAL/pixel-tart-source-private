@@ -11,7 +11,7 @@ public static class StudioVersionConflictResolution
             var already=result.FirstOrDefault(v=>v.OriginIdentity==conflict.Repository.Identity&&v.OriginVersionId==local.Id&&v.Name==local.Name+" · 本地保留"&&JsonSerializer.Serialize(new{v.Look,v.Stack,v.Film,v.Engine,v.Mode,v.Archived})==JsonSerializer.Serialize(new{local.Look,local.Stack,local.Film,local.Engine,local.Mode,local.Archived}));if(already is not null)continue;
             var remote=result.FirstOrDefault(v=>v.Id==local.Id);
             if(remote is not null&&JsonSerializer.Serialize(remote)==JsonSerializer.Serialize(local))continue;
-            result.Add(local with{Id=Guid.NewGuid(),Name=local.Name+" · 本地保留",CreatedAt=DateTimeOffset.UtcNow,OriginVersionId=local.Id,OriginIdentity=conflict.Repository.Identity});
+            result.Add(local with{IsOriginal=false,IsMain=false,MainExplicit=false,Id=Guid.NewGuid(),Name=local.Name+" · 本地保留",CreatedAt=DateTimeOffset.UtcNow,OriginVersionId=local.Id,OriginIdentity=conflict.Repository.Identity});
         }
         return result;
     }
