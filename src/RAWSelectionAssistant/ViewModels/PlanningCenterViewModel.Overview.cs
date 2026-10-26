@@ -75,7 +75,7 @@ public sealed partial class PlanningCenterViewModel
                     PlanningProjects.Add(new(project.Id, project.Name, null, null, 0, 0, project.UpdatedAt));
                 }
             }
-            OverviewStatus = PlanningProjects.Count == 0 ? "还没有策划案。从一次拍摄开始，把灵感、镜头和执行资料整理到一起。" : "选择一个策划案开始";
+            OverviewStatus = PlanningProjects.Count == 0 ? "还没有策划案" : "选择一个策划案开始";
         }
         catch (Exception error) when (IsRecoverableProjectError(error))
         {
@@ -127,6 +127,7 @@ public sealed partial class PlanningCenterViewModel
 public sealed record PlanningProjectCard(Guid ProjectId, string Name, string? Cover, DateTimeOffset? ShootAt, int Completed, int Total, DateTimeOffset UpdatedAt,
     string Location = "地点待定", string People = "", string Status = "草稿", int ReferenceCount = 0)
 {
+    public string ShortIdentity=>"#"+ProjectId.ToString("N")[..8];
     public string DateText => ShootAt?.ToLocalTime().ToString("MM月dd日") ?? "尚未安排拍摄";
     public string Progress => $"{Completed} / {Total} 已拍";
     public string Detail => $"{DateText} · {Location}";

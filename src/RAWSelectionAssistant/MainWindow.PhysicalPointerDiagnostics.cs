@@ -55,6 +55,7 @@ public partial class MainWindow
         AddHandler(Keyboard.PreviewKeyUpEvent, new KeyEventHandler(PhysicalPointer_PreviewKeyUp), true);
         AddHandler(Keyboard.KeyUpEvent, new KeyEventHandler(PhysicalPointer_KeyUp), true);
         LayoutUpdated += PhysicalPointer_LayoutUpdated;
+        PhysicalPointerDiagnosticSection.Visibility=Visibility.Visible;
         PhysicalPointerDiagnosticCopyButton.Visibility = Visibility.Visible;
         PhysicalPointerDiagnosticSession.Begin(CurrentPointerDiagnosticContext());
     }

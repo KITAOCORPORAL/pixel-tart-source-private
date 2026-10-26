@@ -55,7 +55,7 @@
         <local:StudioPageHeader Style="{StaticResource PixelTart.PageHeader}">
             <StackPanel>
                 <TextBlock Text="在线选片" Style="{StaticResource PageTitleText}" /><ProgressBar Style="{StaticResource PixelTart.ProgressBar.Delayed}" studio:StudioBusyFeedback.IsBusy="{Binding IsBusy}" IsIndeterminate="True"/>
-                <TextBlock Text="照片优先的本地工作区；未配置云服务时仍可评审完整流程。" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
+                <TextBlock Text="云服务未配置时，仅可本地选片。" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource Spacing4Thickness}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <TextBlock Text="{Binding ServiceStatusText}" ToolTip="在线选片服务尚未配置，本地原型仍可使用。" Style="{StaticResource SecondaryBodyText}" VerticalAlignment="Center" Margin="{DynamicResource SpacingHorizontal16}" />
@@ -163,7 +163,7 @@
                         <Border Style="{StaticResource EmptyStateContainer}" Visibility="{Binding IsProjectOpen, Converter={StaticResource InverseBoolToVisibility}}">
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <TextBlock Text="尚未选择项目" Style="{StaticResource Av2EmptyStateTitle}" />
-                                <TextBlock Text="创建一个选片项目后，从照片标签开始。" Style="{StaticResource EmptyStateDescription}" Margin="{DynamicResource SpacingVertical8}" />
+                                <TextBlock Text="新建项目后导入照片。" Style="{StaticResource EmptyStateDescription}" Margin="{DynamicResource SpacingVertical8}" />
                             </StackPanel>
                         </Border>
                     </Grid>
@@ -176,7 +176,7 @@
                 <Grid>
                 <StackPanel>
                     <TextBlock Text="创建选片项目" Style="{StaticResource ModalTitleText}" Margin="0,0,48,0" />
-                    <TextBlock Text="只填写开始选片所需信息，照片可随后导入。" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource SpacingVertical8}" />
+                    <TextBlock Text="照片可稍后导入。" Style="{StaticResource SecondaryBodyText}" Margin="{DynamicResource SpacingVertical8}" />
                     <TextBlock Text="项目名" Style="{StaticResource MinimumCaptionText}" /><TextBox Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}" Margin="{DynamicResource SpacingVertical8}" AutomationProperties.Name="选片项目名" />
                     <TextBlock Text="客户" Style="{StaticResource MinimumCaptionText}" /><TextBox Text="{Binding ClientName, UpdateSourceTrigger=PropertyChanged}" Margin="{DynamicResource SpacingVertical8}" AutomationProperties.Name="选片客户" />
                     <TextBlock Text="目标数量" Style="{StaticResource MinimumCaptionText}" /><TextBox Text="{Binding TargetCountText, UpdateSourceTrigger=PropertyChanged}" Margin="{DynamicResource SpacingVertical8}" AutomationProperties.Name="目标选片数量" />

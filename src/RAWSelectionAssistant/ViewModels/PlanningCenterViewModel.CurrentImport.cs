@@ -18,11 +18,12 @@ public sealed partial class PlanningCenterViewModel
             if(!await FlushAsync())return;
             try
             {
-                var file=_dialogs.ChooseFiles("导入策划项目包到当前应用","策划项目包|*.ptplan",false).FirstOrDefault();if(file is null)return;_packageCancellation?.Dispose();_packageCancellation=new();var v=await Task.Run(()=>PlanningProjectPackage.Validate(file,_packageCancellation.Token));
+                var file=_dialogs.ChooseFiles("导入策划项目包到当前应用","策划项目包|*.ptplan",false).FirstOrDefault();if(file is null)return;var taskToken=BeginPackageTask();var v=await Task.Run(()=>PlanningProjectPackage.Validate(file,taskToken));
                 if(!_dialogs.Confirm("项目："+v.Manifest.Name+"\nID："+v.Manifest.ProjectId+"\n将写入数据库："+(_projects is SqliteProjectRepository sql?sql.PlanningImportDatabaseLocation:"当前项目数据库")+"\n策划："+_planning.StorageRoot+"\n镜头："+_shots.StorageRoot+"\n仅新增，同ID拒绝，同名不同ID分开保留。\n未包含：\n"+string.Join("\n",v.Manifest.ExcludedDependencies),"导入到当前应用"))return;
-                var result=await ImportPackageToCurrentRootAsync(file,_packageCancellation.Token);_dialogs.ShowInfo("已加入普通策划项目列表："+result.Name+"\nID："+result.ProjectId+"\n未包含：\n"+string.Join("\n",result.ExcludedDependencies));
+                var result=await ImportPackageToCurrentRootAsync(file,taskToken);_dialogs.ShowInfo("已加入普通策划项目列表："+result.Name+"\nID："+result.ProjectId+"\n未包含：\n"+string.Join("\n",result.ExcludedDependencies));
             }
-            catch(Exception e)when(PackageError(e)||e is Microsoft.Data.Sqlite.SqliteException){_dialogs.ShowError("当前根导入未完成，原项目保持："+e.Message);}
+            catch(Exception e)when(PackageError(e)||e is Microsoft.Data.Sqlite.SqliteException){new RAWSelectionAssistant.Core.Services.FileLogService().Error("当前根导入失败",e);_dialogs.ShowError(e.Message.Contains("项目ID冲突",StringComparison.Ordinal)?"项目ID冲突，未导入；原项目未变。":"导入失败，原项目未变。请检查文件或重试。");}
+            finally{IsPackageTaskRunning=false;}
         });
     }
     public Task<IReadOnlyList<PlanningImportRecovery>> RecoverCurrentProjectImportsAsync(CancellationToken token=default)=>_projects is IPlanningImportRepository db?PlanningCurrentRootImport.RecoverAsync(_planning,_shots,db,token):Task.FromResult<IReadOnlyList<PlanningImportRecovery>>([]);

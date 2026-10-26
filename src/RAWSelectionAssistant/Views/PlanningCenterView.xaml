@@ -34,20 +34,23 @@
   <Grid x:Name="WorkspaceLayout">
    <Grid.ColumnDefinitions><ColumnDefinition x:Name="DocumentListColumn" Width="248"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
    <Border x:Name="DocumentListPane" Background="{DynamicResource SurfacePrimaryBrush}" BorderThickness="0">
-    <Grid Margin="12,24,12,12"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+    <Grid Margin="12,24,12,12"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
      <Grid Margin="6,0,6,18"><TextBlock Text="策划案" FontSize="{DynamicResource Type.Proposal.ListTitle.FontSize}" FontWeight="SemiBold"/><Button HorizontalAlignment="Right" Style="{StaticResource Av2IconButton}" Command="{Binding ShowCreatePlanningCommand}" ToolTip="新建策划" AutomationProperties.Name="新建策划"><Path Data="{StaticResource IconAdd}" Style="{StaticResource Icon20}"/></Button></Grid>
-     <StackPanel Grid.Row="1" VerticalAlignment="Top"><Button Content="导入项目包到当前应用" Command="{Binding ImportCurrentProjectPackageCommand}" Style="{StaticResource SecondaryButton}" AutomationProperties.Name="导入项目包到当前应用"/><Button Content="导入策划项目包" Command="{Binding ImportProjectPackageCommand}" Style="{StaticResource SecondaryButton}" VerticalAlignment="Top" AutomationProperties.AutomationId="ImportPlanningProjectPackage" AutomationProperties.Name="导入策划项目包到独立数据根"/><Button Content="打开已导入项目" Command="{Binding OpenImportedProjectCommand}" Style="{StaticResource SecondaryButton}" AutomationProperties.AutomationId="OpenImportedPlanningProject" AutomationProperties.Name="打开已导入项目数据根"/><Button Content="取消项目包任务" Command="{Binding CancelProjectPackageCommand}" Style="{StaticResource SecondaryButton}" AutomationProperties.Name="取消项目包任务"/></StackPanel>
-     <Grid Grid.Row="1" Margin="0,162,0,0">
+     <StackPanel Grid.Row="1" Margin="0,0,0,10">
+      <Button Content="导入项目包" Command="{Binding ImportCurrentProjectPackageCommand}" Style="{StaticResource SecondaryButton}" AutomationProperties.Name="导入项目包到当前应用"/>
+      <Button Content="取消导入或导出" Command="{Binding CancelProjectPackageCommand}" Style="{StaticResource GhostButton}" Visibility="{Binding IsPackageTaskRunning,Converter={StaticResource BooleanToVisibilityConverter}}" AutomationProperties.Name="取消项目包任务"/>
+     </StackPanel>
+     <Grid Grid.Row="2">
       <TextBox x:Name="ProjectSearchBox" Text="{Binding ProjectSearch,UpdateSourceTrigger=PropertyChanged}" ToolTip="搜索项目、模特或日期" AutomationProperties.Name="搜索项目、模特或日期"/>
       <TextBlock Text="搜索项目、模特或日期" Margin="10,0" VerticalAlignment="Center" IsHitTestVisible="False" Foreground="{DynamicResource TextSecondaryBrush}">
        <TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding Text,ElementName=ProjectSearchBox}" Value=""><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></TextBlock.Style>
       </TextBlock>
      </Grid>
-     <StackPanel x:Name="StatusChips" Grid.Row="2" Orientation="Horizontal" Margin="0,12,0,16"/>
-     <ListBox x:Name="DocumentList" Grid.Row="3" ItemsSource="{Binding PlanningProjectsView}" BorderThickness="0" Background="Transparent" ItemContainerStyle="{StaticResource DocumentListItem}" SelectionChanged="DocumentList_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AutomationProperties.Name="策划案列表">
+     <StackPanel x:Name="StatusChips" Grid.Row="3" Orientation="Horizontal" Margin="0,12,0,16"/>
+     <ListBox x:Name="DocumentList" Grid.Row="4" ItemsSource="{Binding PlanningProjectsView}" BorderThickness="0" Background="Transparent" ItemContainerStyle="{StaticResource DocumentListItem}" SelectionChanged="DocumentList_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" AutomationProperties.Name="策划案列表">
       <ListBox.ItemTemplate><DataTemplate><StackPanel>
        <TextBlock Text="{Binding Name}" ToolTip="{Binding Name}" FontSize="{DynamicResource Type.Proposal.Project.FontSize}" FontWeight="SemiBold" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxHeight="44" LineHeight="22"/>
-       <TextBlock Text="{Binding ProjectId}" FontSize="10" Foreground="{DynamicResource TextSecondaryBrush}" ToolTip="项目ID，同名项目以此区分"/>
+       <TextBlock Text="{Binding ShortIdentity}" FontSize="10" Foreground="{DynamicResource TextSecondaryBrush}" ToolTip="{Binding ProjectId}"/>
        <TextBlock Text="{Binding Detail}" Style="{StaticResource CaptionText}" Margin="0,9,0,0" TextWrapping="Wrap"/>
        <TextBlock Text="{Binding CountText}" Style="{StaticResource CaptionText}" Margin="0,8,0,0"/>
       </StackPanel></DataTemplate></ListBox.ItemTemplate>

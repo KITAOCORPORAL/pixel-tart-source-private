@@ -51,7 +51,7 @@ public partial class PlanningCenterView
         Column("名称", "Name", width:240); Column("场景", "Scene"); Column("景别", "ShotSize", width: 90);
         Column("机位 / 镜头", "CameraAndLens"); Column("人物动作", "Action", width:280); Column("道具", "Props"); Column("灯光", "Lighting");
         Column("预计分钟", "EstimatedMinutes", width: 85);
-        DocumentContent.Children.Add(Text("可横向滚动；镜号与状态保持可见。参考缩略图来自本镜头已关联资料。",11));
+
         Column("备注", "Remarks");
         foreach (var column in _vm.ShotColumns) Column(column.Name, "custom:" + column.Id.ToString("N"));
         DocumentContent.Children.Add(_shotTable);

@@ -151,12 +151,12 @@ public partial class PlanningCenterView : UserControl
             DocumentContent.MaxWidth = _vm.ContentPage == "文字" || preview ? 940 : 1320;
             if (!_vm.HasProject || _vm.IsOverview)
             {
-                var empty = new StackPanel { Margin = new Thickness(40, 110, 40, 0), MaxWidth = 580, HorizontalAlignment = HorizontalAlignment.Center };
+                var empty = new StackPanel { Margin = new Thickness(24, 48, 24, 0), MaxWidth = 580, HorizontalAlignment = HorizontalAlignment.Center };
                 empty.Children.Add(Text(_vm.PlanningProjects.Count == 0 ? "还没有策划案" : "选择一个策划案开始", 32, true));
-                empty.Children.Add(Text("从一次拍摄开始，把灵感、镜头和执行资料整理到一起。", 17));
+
                 var create = AsyncAction("新建策划", () => _vm.ShowCreatePlanningCommand.ExecuteAsync(null), "PrimaryButton"); create.Margin = new Thickness(0, 26, 0, 0); empty.Children.Add(create);
-                empty.Children.Add(AsyncAction("导入项目包到当前应用",()=>_vm.ImportCurrentProjectPackageCommand.ExecuteAsync(null),"SecondaryButton"));
-                foreach(var card in _vm.PlanningProjects)empty.Children.Add(AsyncAction(card.Name+" · "+card.ProjectId,()=>_vm.OpenPlanningProjectCommand.ExecuteAsync(card),"SecondaryButton"));
+                empty.Children.Add(AsyncAction("导入项目包",()=>_vm.ImportCurrentProjectPackageCommand.ExecuteAsync(null),"SecondaryButton"));
+                foreach(var card in _vm.PlanningProjects)empty.Children.Add(AsyncAction(card.Name+" · "+card.ShortIdentity,()=>_vm.OpenPlanningProjectCommand.ExecuteAsync(card),"SecondaryButton"));
                 DocumentContent.Children.Add(empty); return;
             }
             if (preview)
@@ -198,7 +198,7 @@ public partial class PlanningCenterView : UserControl
                         var paper=PlanningDocumentLayout.Load(preservedRtf,_vm.RichLayout);paper.Background=Brushes.WhiteSmoke;
                         DocumentContent.Children.Add(new Border{Background=Brushes.WhiteSmoke,Padding=new Thickness(12),Child=new FlowDocumentScrollViewer{Document=paper,Foreground=Brushes.Black,IsToolBarVisible=false,VerticalScrollBarVisibility=ScrollBarVisibility.Disabled}});
                     }
-                    DocumentContent.Children.Add(Text("补充本次拍摄需要的内容，随策划案自动保存。", 14));
+
                     DocumentContent.Children.Add(Editor(nameof(_vm.DocumentCustomBody), 12));
                     DocumentContent.Children.Add(AsyncAction("保存", FlushDocumentAsync));
                     break;
@@ -236,7 +236,7 @@ public partial class PlanningCenterView : UserControl
             var edit = Action(editing ? "完成编辑" : "编辑", () => { _vm.EditDocumentCommand.Execute(null); });
             edit.HorizontalAlignment = HorizontalAlignment.Right; DocumentContent.Children.Add(edit);
         }
-        var eyebrow = Text("创作策划 · " + _vm.ProposalStatus, 12); eyebrow.Foreground = Brush("AccentBrush"); eyebrow.Margin = new Thickness(0, 6, 0, 14); DocumentContent.Children.Add(eyebrow);
+        var eyebrow = Text(_vm.ProposalStatus, 12); eyebrow.Foreground = Brush("AccentBrush"); eyebrow.Margin = new Thickness(0, 6, 0, 14); DocumentContent.Children.Add(eyebrow);
         if (editing)
         {
             DocumentContent.Children.Add(Editor(nameof(_vm.DocumentTitle)));
@@ -248,7 +248,7 @@ public partial class PlanningCenterView : UserControl
             var status = new ComboBox { ItemsSource = _vm.ProposalStatuses, Width = 140, HorizontalAlignment = HorizontalAlignment.Left };
             status.SetBinding(Selector.SelectedItemProperty, new Binding(nameof(_vm.ProposalStatus))); AutomationProperties.SetName(status, "策划案状态"); DocumentContent.Children.Add(status);
             Heading(DocumentContent, "核心概念");
-            DocumentContent.Children.Add(Text("正文随项目自动保存；工具栏写入兼容的结构标记，预览和 PDF 使用同一内容。", 12));
+
             var owner = _vm; var projectId = owner.ProjectId; var documentId = owner.PlanningDocumentId; var renderRevision=_documentRenderRevision;var generation=owner.EditorGeneration;
             var editor=new PlanningRichEditor(_vm.RichTextPackage,_vm.DocumentBody,
                 (rtf, text, layout) => { if (generation==owner.EditorGeneration && renderRevision==_documentRenderRevision && owner.ProjectId == projectId && owner.PlanningDocumentId == documentId) owner.SaveRichText(rtf, text, layout); },
@@ -258,8 +258,8 @@ public partial class PlanningCenterView : UserControl
         }
         else
         {
-            DocumentContent.Children.Add(Text(_vm.DocumentTitle, 40, true));
-            var subtitle = Text(_vm.DocumentSubtitle, 21); subtitle.Margin = new Thickness(0, 14, 0, 16); DocumentContent.Children.Add(subtitle);
+            if(_vm.IsPreviewMode)DocumentContent.Children.Add(Text(_vm.DocumentTitle,40,true));
+            if(!string.IsNullOrWhiteSpace(_vm.DocumentSubtitle)){var subtitle=Text(_vm.DocumentSubtitle,21);subtitle.Margin=new Thickness(0,6,0,12);DocumentContent.Children.Add(subtitle);}
         }
         var info = Text(_vm.DocumentDate + "  ·  " + _vm.DocumentLocation + (string.IsNullOrWhiteSpace(_vm.DocumentPeople) ? "" : "  ·  " + _vm.DocumentPeople), 13);
         info.Foreground = Brush("TextSecondaryBrush"); info.Margin = new Thickness(0, 14, 0, 22); DocumentContent.Children.Add(info);
@@ -294,10 +294,10 @@ public partial class PlanningCenterView : UserControl
         var direction = new StackPanel();
         var swatches = new WrapPanel();
         foreach (var color in _vm.PaletteColors) swatches.Children.Add(new Border { Width = 64, Height = 28, Background = (Brush)new BrushConverter().ConvertFromString(color.Hex)!, Margin = new Thickness(0, 0, 8, 8), ToolTip = color.Hex });
-        direction.Children.Add(Text("项目配色", 12)); direction.Children.Add(swatches);
+        if(_vm.PaletteColors.Count>0){direction.Children.Add(Text("项目配色",12));direction.Children.Add(swatches);}
         var tones = new StackPanel { Orientation = Orientation.Horizontal, Height = 38, VerticalAlignment = VerticalAlignment.Bottom };
         foreach (var zone in _vm.ToneZones) tones.Children.Add(new Border { Width = 25, Height = Math.Max(3, zone.Ratio * 150), VerticalAlignment = VerticalAlignment.Bottom, Background = Brush("AccentBrush"), Opacity = .35 + zone.Zone * .05, Margin = new Thickness(0, 0, 3, 0) });
-        direction.Children.Add(Text("目标影调", 12)); direction.Children.Add(tones);
+        if(_vm.ToneZones.Count>0){direction.Children.Add(Text("目标影调",12));direction.Children.Add(tones);}
         foreach (var look in _vm.ColorSchemes)
         {
             var summary = new DockPanel { Margin = new Thickness(0, 12, 0, 0) };
@@ -349,6 +349,7 @@ public partial class PlanningCenterView : UserControl
         stack.Children.Add(new Image { Source = item.PreviewImage ?? LoadImage(item.PreviewPath), Height = height, Stretch = Stretch.Uniform, HorizontalAlignment = HorizontalAlignment.Center });
         var caption = Text(item.Title, 13); caption.Margin = new Thickness(0, 8, 0, 0); stack.Children.Add(caption); _referenceCaptions.Add(caption);
         var status = Text(item.Availability, 11); status.Foreground = Brush("TextSecondaryBrush"); stack.Children.Add(status);
+        if(!string.IsNullOrWhiteSpace(item.PreviewDetails)){var details=new Expander{Header="查看详情",Margin=new Thickness(0,4,0,0),Content=new TextBox{Text=item.PreviewDetails,IsReadOnly=true,TextWrapping=TextWrapping.Wrap,MaxHeight=120,VerticalScrollBarVisibility=ScrollBarVisibility.Auto}};stack.Children.Add(details);}
         if (item.Category is "灯光" or "造型" && _vm is not null)
         {
             var linked = _vm.Shots.Where(shot => shot.References.Any(reference => reference.ReferenceId == item.Id)).Select(shot => $"{shot.Order + 1:00} {shot.Name}").ToArray();
@@ -390,7 +391,7 @@ public partial class PlanningCenterView : UserControl
             }
         }
         var items = ReferencesFor(page).ToArray();
-        if (items.Length == 0 && interactive) { var empty = Text("还没有" + page + "。关联已有参考，或从本地添加；原图保持不变。", 18); empty.Margin = new Thickness(0, 70, 0, 40); DocumentContent.Children.Add(empty); }
+        if (items.Length == 0 && interactive) { var empty = Text("还没有" + page + "，可添加参考图。", 18); empty.Margin = new Thickness(0, 70, 0, 40); DocumentContent.Children.Add(empty); }
         foreach (var group in items.GroupBy(item => page == "服化道" ? (_vm.StylingGroups.Contains(item.Group) ? item.Group : "未分组造型参考") : page == "情绪板" ? item.Group : "")
             .OrderBy(group => page == "服化道" ? group.Key switch { "服装" => 0, "妆发" => 1, "道具" => 2, _ => 3 } : 0))
         {
@@ -518,8 +519,9 @@ public partial class PlanningCenterView : UserControl
         {
             var row = new StackPanel { Margin = new Thickness(0, 22, 0, 0) }; row.Children.Add(Text(file.Name, 19, true));
             row.Children.Add(Text(_vm.AttachmentStatus(file), 12));
-            var metadata = Text("原来源：" + file.Path + (file.ProjectCopy is {} copy ? "\n项目内：" + copy.RelativePath + "\nSHA-256：" + copy.Sha256 : "\n外链，未复制"), 12);
+            var metadata = Text(file.ProjectCopy is null ? "外链 · 原文件保留" : "项目副本", 12);
             metadata.Foreground = Brush("TextSecondaryBrush"); row.Children.Add(metadata);
+            var detailText="原来源："+file.Path+(file.ProjectCopy is {} copy?"\n项目内："+copy.RelativePath+"\nSHA-256："+copy.Sha256:"\n未复制原文件");row.Children.Add(new Expander{Header="文件详情",Content=new TextBox{Text=detailText,IsReadOnly=true,TextWrapping=TextWrapping.Wrap,MaxHeight=120,VerticalScrollBarVisibility=ScrollBarVisibility.Auto}});
             var actions = new WrapPanel(); actions.Children.Add(AsyncAction("打开文件", () => { _vm.OpenAttachment(file); return Task.CompletedTask; }));
             actions.Children.Add(Action("打开所在位置", () => _vm.RevealAttachment(file)));
             if(file.ProjectCopy is null)
@@ -585,10 +587,11 @@ public partial class PlanningCenterView : UserControl
         var calendar = MenuEntry("查看关联档期", "IconCalendar"); calendar.Command = _vm.OpenCalendarCommand; menu.Items.Add(calendar);
         var currentImport=MenuEntry("导入项目包到当前应用","IconPlanning");currentImport.Command=_vm.ImportCurrentProjectPackageCommand;menu.Items.Add(currentImport);
         var recoverImport=MenuEntry("检查当前根项目导入恢复","IconPlanning");recoverImport.Command=_vm.RecoverCurrentProjectImportsCommand;menu.Items.Add(recoverImport);
-        var cancelPackage=MenuEntry("取消正在进行的项目包任务","IconPlanning");cancelPackage.Command=_vm.CancelProjectPackageCommand;menu.Items.Add(cancelPackage);
+        if(_vm.IsPackageTaskRunning){var cancelPackage=MenuEntry("取消导入或导出","IconPlanning");cancelPackage.Command=_vm.CancelProjectPackageCommand;menu.Items.Add(cancelPackage);}
         var recovery=MenuEntry("检查本项目中断暂存（保守恢复）","IconPlanning");recovery.Command=_vm.ShowCopyRecoveryCommand;menu.Items.Add(recovery);
         var exportPackage=MenuEntry("导出策划项目包（含已验证自有副本）","IconPlanning");exportPackage.Command=_vm.ExportProjectPackageCommand;menu.Items.Add(exportPackage);
-        var importPackage=MenuEntry("导入策划项目包到独立数据根","IconPlanning");importPackage.Command=_vm.ImportProjectPackageCommand;menu.Items.Add(importPackage);
+        var openImported=MenuEntry("打开独立项目…","IconPlanning");System.Windows.Automation.AutomationProperties.SetAutomationId(openImported,"OpenImportedPlanningProject");openImported.Command=_vm.OpenImportedProjectCommand;menu.Items.Add(openImported);
+        var importPackage=MenuEntry("导入到独立目录…","IconPlanning");System.Windows.Automation.AutomationProperties.SetAutomationId(importPackage,"ImportPlanningProjectPackage");importPackage.Command=_vm.ImportProjectPackageCommand;menu.Items.Add(importPackage);
         var summary = MenuEntry("导出15区汇总 DOCX", "IconPlanning"); summary.Click += async (_,_) => await ExportPlanningSummaryFromViewAsync(); menu.Items.Add(summary);
         var overview = MenuEntry("返回策划列表", "IconPlanning"); overview.Click += async (_, _) => { if (await FlushDocumentAsync()) await _vm.ShowOverviewCommand.ExecuteAsync(null); }; menu.Items.Add(overview); menu.IsOpen = true;
     }

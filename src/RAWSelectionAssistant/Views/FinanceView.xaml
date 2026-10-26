@@ -9,7 +9,7 @@
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
 
         <views:StudioPageHeader Style="{StaticResource PixelTart.PageHeader}">
-            <StackPanel><TextBlock Text="摄影收支" Style="{StaticResource PageTitleText}" /><TextBlock Text="金额信息仅保存在本机；本模块不替代专业会计、税务或财务软件。" Style="{StaticResource CaptionText}" Margin="0,4,0,0" /></StackPanel>
+            <StackPanel><TextBlock Text="摄影收支" Style="{StaticResource PageTitleText}" /><TextBlock Text="收支仅存本机，不替代会计或税务软件。" Style="{StaticResource CaptionText}" Margin="0,4,0,0" /></StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><Button Content="新建收入" Style="{StaticResource PrimaryButton}" Command="{Binding NewIncomeCommand}" AutomationProperties.Name="新建收入" /><Button Content="新建支出" Style="{StaticResource SecondaryButton}" Command="{Binding NewExpenseCommand}" Margin="7,0,0,0" AutomationProperties.Name="新建支出" /><Button Content="导出 CSV" Style="{StaticResource SecondaryButton}" Command="{Binding ExportCommand}" Margin="7,0,0,0" AutomationProperties.Name="主动导出筛选后的收支CSV" /></StackPanel>
         </views:StudioPageHeader>
 
@@ -74,7 +74,7 @@
                     <TextBlock Text="备注" Style="{StaticResource CaptionText}" Margin="0,10,0,4" /><TextBox Text="{Binding Note}" Height="72" TextWrapping="Wrap" AcceptsReturn="True" AutomationProperties.Name="财务备注" />
                     <Grid Margin="0,12,0,5"><TextBlock Text="附件（仅关联原位置）" FontWeight="SemiBold" /><Button Content="添加附件" Style="{StaticResource SecondaryButton}" Command="{Binding AddAttachmentCommand}" HorizontalAlignment="Right" AutomationProperties.Name="添加收支附件引用" /></Grid>
                     <ItemsControl ItemsSource="{Binding Attachments}"><ItemsControl.ItemTemplate><DataTemplate><Border Style="{StaticResource InfoCard}" Margin="0,0,0,5"><Grid><StackPanel><TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding StateText}" Style="{StaticResource CaptionText}" /></StackPanel><Button Content="移除引用" Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Command="{Binding DataContext.RemoveAttachmentCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" AutomationProperties.Name="移除收支附件引用" /></Grid></Border></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
-                    <TextBlock Text="删除记录或移除附件引用都不会删除电脑中的原文件。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,4,0,0" />
+                    <TextBlock Text="删除记录不删除附件原文件。" Style="{StaticResource CaptionText}" TextWrapping="Wrap" Margin="0,4,0,0" />
                     <StackPanel Orientation="Horizontal" Margin="0,14,0,0"><Button Content="保存" Style="{StaticResource PrimaryButton}" Command="{Binding SaveCommand}" AutomationProperties.Name="保存收支记录" /><Button Content="取消" Style="{StaticResource GhostButton}" Command="{Binding CancelCommand}" Margin="7,0,0,0" AutomationProperties.Name="取消编辑收支记录" /></StackPanel>
                 </StackPanel></ScrollViewer>
             </Border>

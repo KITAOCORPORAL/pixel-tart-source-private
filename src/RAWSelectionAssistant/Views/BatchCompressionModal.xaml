@@ -8,7 +8,7 @@
     <Grid MinHeight="540">
         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
         <views:SurfaceHeader Title="批量压缩"
-                             Subtitle="输出始终写入独立目录，使用新文件名，不覆盖、移动或删除源文件。"
+                             Subtitle="另存到输出目录，不覆盖源文件。"
                              ShowCloseButton="False"
                              CloseAutomationName="关闭批量压缩并返回"
                              CloseAutomationId="BatchCompressCloseButton" />
@@ -56,7 +56,7 @@
                     <Border Style="{StaticResource SemanticInfoPanel}" Padding="12" Margin="0,16,0,0">
                         <StackPanel>
                             <TextBlock Text="同名文件：自动重命名" Style="{StaticResource CardTitleText}" />
-                            <TextBlock Text="始终新建输出并完成写入刷新；不覆盖、不移动、不删除源照片。" Style="{StaticResource CaptionText}" Margin="0,4,0,0" TextWrapping="Wrap" />
+                            <TextBlock Text="重名自动编号，源文件保留。" Style="{StaticResource CaptionText}" Margin="0,4,0,0" TextWrapping="Wrap" />
                         </StackPanel>
                     </Border>
                 </StackPanel>

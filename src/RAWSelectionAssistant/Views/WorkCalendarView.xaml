@@ -27,7 +27,7 @@
         <views:StudioPageHeader Style="{StaticResource PixelTart.PageHeader}">
             <StackPanel>
                 <TextBlock Text="工作日历" Style="{StaticResource PageTitleText}" />
-                <TextBlock Text="拍摄时间、地点、准备事项和本地金额记录集中管理" Style="{StaticResource CaptionText}" Margin="0,4,0,0" />
+
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Button Content="已归档" Style="{StaticResource SecondaryButton}" Command="{Binding ToggleArchivedCommand}" AutomationProperties.Name="查看已归档排期" />
@@ -97,7 +97,7 @@
                     </Grid>
                     <Grid Visibility="{Binding IsGlobalSearch, Converter={StaticResource BooleanToVisibilityConverter}}" Background="{DynamicResource SurfacePrimaryBrush}" Panel.ZIndex="10">
                         <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
-                        <TextBlock Text="全部未归档排期（每页50条）" FontSize="{DynamicResource Type.SectionTitle.FontSize}" FontWeight="SemiBold" Margin="16,14" />
+                        <TextBlock Text="全部排期 · 每页50条" FontSize="{DynamicResource Type.SectionTitle.FontSize}" FontWeight="SemiBold" Margin="16,14" />
                         <ListBox Grid.Row="1" ItemsSource="{Binding GlobalSearchDisplayItems}" BorderThickness="0" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <ListBox.ItemTemplate><DataTemplate><Button Style="{StaticResource GhostButton}" HorizontalContentAlignment="Stretch" Command="{Binding DataContext.OpenBookingCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" AutomationProperties.Name="{Binding Title}"><Grid Margin="6"><Grid.ColumnDefinitions><ColumnDefinition Width="170" /><ColumnDefinition Width="2*" /><ColumnDefinition Width="*" /><ColumnDefinition Width="120" /></Grid.ColumnDefinitions><TextBlock Text="{Binding StartText}" /><StackPanel Grid.Column="1"><TextBlock Text="{Binding Title}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" /><TextBlock Text="{Binding ClientDisplayName}" Style="{StaticResource CaptionText}" /></StackPanel><TextBlock Grid.Column="2" Text="{Binding Location}" TextTrimming="CharacterEllipsis" /><TextBlock Grid.Column="3" Text="{Binding StatusText}" /></Grid></Button></DataTemplate></ListBox.ItemTemplate>
                         </ListBox>

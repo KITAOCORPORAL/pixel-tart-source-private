@@ -11,6 +11,7 @@ public sealed record PlanningReferenceItem(PlanningDocumentReference Link, strin
 {
     public string? OriginalPath { get; init; }
     public string? PreviewStatus {get;init;}
+    public string? PreviewDetails {get;init;}
     public System.Windows.Media.Imaging.BitmapSource? PreviewImage {get;init;}
     public bool ThumbnailCacheHit {get;init;}
     public Guid Id => Link.Source.ReferenceId;
@@ -19,7 +20,7 @@ public sealed record PlanningReferenceItem(PlanningDocumentReference Link, strin
     public bool IsHero => Link.IsHero;
     public bool IsMoodboard => Link.IsMoodboard;
     public string Group => Link.Group;
-    public string Availability => PreviewStatus ?? (Link.ProjectCopy is not null ? (SourceAvailable ? "项目自有副本 · " + Category : "项目自有副本不可用（未回退外链）") : SourceAvailable ? "外链/库引用 · " + Category : "源文件暂不可用");
+    public string Availability => PreviewStatus ?? (Link.ProjectCopy is not null ? (SourceAvailable ? "项目自有副本 · " + Category : "项目副本不可用，请检查文件") : SourceAvailable ? "外链/库引用 · " + Category : "源文件暂不可用");
 }
 
 public sealed partial class PlanningCenterViewModel
@@ -74,9 +75,10 @@ public sealed partial class PlanningCenterViewModel
                         }
                         catch(Exception error)when(error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException)
                         {
+                            new RAWSelectionAssistant.Core.Services.FileLogService().Error("策划自有参考预览失败",error);
                             // Separate intact-but-unrenderable from changed/missing; never return a stale cache path.
-                            try{using var verified=PlanningProjectCopyStorage.OpenVerifiedRead(owned,cancel);return new PlanningReferenceItem(reference,null,true){OriginalPath=PlanningProjectCopyStorage.Resolve(owned),PreviewStatus="项目自有副本已保存但无法预览："+error.Message};}
-                            catch(Exception integrity)when(integrity is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException){return new PlanningReferenceItem(reference,null,false){PreviewStatus="项目自有副本不可用："+integrity.Message+"（未回退外链）"};}
+                            try{using var verified=PlanningProjectCopyStorage.OpenVerifiedRead(owned,cancel);return new PlanningReferenceItem(reference,null,true){OriginalPath=PlanningProjectCopyStorage.Resolve(owned),PreviewStatus="已保存但无法预览",PreviewDetails=error.ToString()};}
+                            catch(Exception integrity)when(integrity is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException){return new PlanningReferenceItem(reference,null,false){PreviewStatus="项目副本不可用，请检查文件",PreviewDetails=integrity.ToString()};}
                         }
                     },cancel);rows.Add(item);continue;
                 }

@@ -17,7 +17,12 @@ public sealed class FreeCanvasSurface : FrameworkElement
     private readonly HashSet<(Guid Id,long Generation)> _loading = [];
     private readonly Dictionary<Guid,string> _sourceErrors=[];
     private readonly Dictionary<Guid,string> _ownedKeys=[];
+    private readonly System.Windows.Threading.DispatcherTimer _previewDebounce=new(){Interval=TimeSpan.FromMilliseconds(80)};
+    private CancellationTokenSource? _previewCancellation;
+    private Guid? _previewCanvasId;
     private long _previewGeneration;
+    public long OwnedDecodeCount {get;private set;}
+    public long PreviewRequestCount {get;private set;}
     public IReadOnlyDictionary<Guid,string> SourceErrors=>_sourceErrors;
     private Point _last, _start;
     private string? _gesture;
@@ -35,7 +40,9 @@ public sealed class FreeCanvasSurface : FrameworkElement
     public FreeCanvasSurface(CanvasEditor editor, IAssetPreviewProvider provider)
     {
         Editor = editor; _provider = provider; Focusable = true; ClipToBounds = true; AllowDrop = true;
-        Editor.Changed += (_, _) => { InvalidateVisual(); _ = LoadPreviewsAsync(); };
+        _previewDebounce.Tick+=(_,_)=>{_previewDebounce.Stop();_=LoadPreviewsCoreAsync(false);};
+        Editor.Changed += (_, _) => { InvalidateVisual(); SchedulePreviews(); };
+        Unloaded+=(_,_)=>{_previewDebounce.Stop();_previewCancellation?.Cancel();};
         SizeChanged += (_, _) => { if (_isFit) Fit(_fitSelection); else InvalidateVisual(); };
     }
     public CanvasEditor Editor { get; }
@@ -50,10 +57,23 @@ public sealed class FreeCanvasSurface : FrameworkElement
     public Point ScreenToWorld(Point point) => new((point.X - _pan.X) / _zoom, (point.Y - _pan.Y) / _zoom);
     public Point WorldToScreen(Point point) => new(point.X * _zoom + _pan.X, point.Y * _zoom + _pan.Y);
     public Func<CanvasObject, Task<string?>>? ResolveSource { get; set; }
-    public async Task LoadPreviewsAsync()
+    private void SchedulePreviews()
     {
+        foreach(var item in Editor.Document.Objects.Where(x=>x.IsImage))
+        {
+            var key=item.PlanningSource is {} identity?$"owned|{identity.PlanningRoot}|{identity.Copy.RelativePath}|{identity.Copy.Sha256}":$"external|{item.SourcePath}|{item.LibraryId}|{item.AssetId}|{item.ContentHash}";
+            if(_previewCanvasId!=Editor.Document.CanvasId||_ownedKeys.GetValueOrDefault(item.ObjectId)!=key){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors.Remove(item.ObjectId);}
+        }
+        _previewDebounce.Stop();_previewDebounce.Start();
+    }
+    public Task LoadPreviewsAsync(){_previewDebounce.Stop();return LoadPreviewsCoreAsync(true);}
+    private async Task LoadPreviewsCoreAsync(bool revalidate)
+    {
+        _previewCancellation?.Cancel();_previewCancellation=new();var token=_previewCancellation.Token;
+        PreviewRequestCount++;
         var generation=++_previewGeneration;
         var document=Editor.Document;
+        if(_previewCanvasId!=document.CanvasId){_images.Clear();_widths.Clear();_ownedKeys.Clear();_sourceErrors.Clear();_previewCanvasId=document.CanvasId;}
         foreach(var id in _sourceErrors.Keys.Where(id=>!Editor.Document.Objects.Any(x=>x.ObjectId==id)).ToArray())_sourceErrors.Remove(id);
         var currentIds=Editor.Document.Objects.Select(item=>item.ObjectId).ToHashSet();
         foreach(var id in _images.Keys.Where(id=>!currentIds.Contains(id)).ToArray()){_images.Remove(id);_widths.Remove(id);}
@@ -66,18 +86,20 @@ public sealed class FreeCanvasSurface : FrameworkElement
             if(_ownedKeys.GetValueOrDefault(item.ObjectId)!=sourceKey){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors.Remove(item.ObjectId);_ownedKeys[item.ObjectId]=sourceKey;}
             if(item.PlanningSource is {} owned)
             {
+                if(!revalidate&&_images.ContainsKey(item.ObjectId))continue;
                 // Never use IAssetPreviewProvider/offline caches for a planning-owned source.
                 // Revalidate even if an in-memory preview already exists; errors erase it.
                 var snapshot=Editor.Document;
                 try
                 {
                     var copy=owned.Bind();
-                    var bitmap=await Task.Run(()=>OwnedPlanningReferenceImage.ReadBounded(copy,copy.ProjectId,copy.DocumentId,copy.ReferenceId,1024));
+                    OwnedDecodeCount++;var bitmap=await Task.Run(()=>OwnedPlanningReferenceImage.ReadBounded(copy,copy.ProjectId,copy.DocumentId,copy.ReferenceId,1024,token),token);
                     if(generation!=_previewGeneration||!ReferenceEquals(snapshot,Editor.Document))continue;
                     _images[item.ObjectId]=bitmap;_sourceErrors.Remove(item.ObjectId);TrimPreviews(item.ObjectId);
                 }
+                catch(OperationCanceledException)when(token.IsCancellationRequested){return;}
                 catch(Exception e)when(e is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException)
-                {if(generation==_previewGeneration&&ReferenceEquals(snapshot,Editor.Document)){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors[item.ObjectId]="项目自有副本不可用："+e.Message+"（未回退原外链/缓存）";}}
+                {if(generation==_previewGeneration&&ReferenceEquals(snapshot,Editor.Document)){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors[item.ObjectId]="项目自有副本不可用："+e.Message+"（未回退原外链/缓存）";new RAWSelectionAssistant.Core.Services.FileLogService().Error("画布自有副本预览失败 "+item.ObjectId,e);}}
                 continue;
             }
             var requested = (int)Math.Clamp(Math.Ceiling(item.Width * _zoom / item.CropRect.Width / 256) * 256, 256, 4096);
@@ -151,7 +173,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
             else { dc.DrawRectangle(Brush("Brush.Panel",Colors.DimGray),null,rect); DrawLabel(dc,"预览暂不可用",new(item.X+12,item.Y+12)); }
             if (Editor.Selection.Contains(item.ObjectId)) dc.DrawRectangle(null,new Pen(accent,1.5/_zoom),rect);
             if (item.Locked) DrawLabel(dc,"已锁定",new(item.X+6,item.Y+6));
-            if(_sourceErrors.TryGetValue(item.ObjectId,out var error))DrawLabel(dc,error,new(item.X+6,item.Y+item.Height-24/_zoom));
+            if(_sourceErrors.TryGetValue(item.ObjectId,out var error))DrawLabel(dc,item.PlanningSource is not null?"项目副本不可用 · 请检查来源":"预览不可用",new(item.X+6,item.Y+item.Height-24/_zoom));
             if (item.IsImage && item.PlanningSource is null && !File.Exists(item.SourcePath)) DrawLabel(dc,"离线",new(item.X+6,item.Y+item.Height-24/_zoom));
             if (CropMode && Editor.Selection.Contains(item.ObjectId))
             {
@@ -238,12 +260,12 @@ public sealed class FreeCanvasSurface : FrameworkElement
     {
         base.OnMouseUp(e); if(!IsMouseCaptured)return;
         if(_marquee is { } rect)Editor.Marquee(rect,(Keyboard.Modifiers&ModifierKeys.Shift)!=0);
-        _marquee=null;_gesture=null;ReleaseMouseCapture();Editor.EndGesture();InvalidateVisual();_=LoadPreviewsAsync();e.Handled=true;
+        _marquee=null;_gesture=null;ReleaseMouseCapture();Editor.EndGesture();InvalidateVisual();SchedulePreviews();e.Handled=true;
     }
     protected override void OnLostMouseCapture(MouseEventArgs e) { base.OnLostMouseCapture(e);_gesture=null;_marquee=null;Editor.EndGesture(); }
     protected override void OnMouseWheel(MouseWheelEventArgs e)
     {
-        _isFit=false; var p=e.GetPosition(this);var world=ScreenToWorld(p);_zoom=Math.Clamp(_zoom*Math.Pow(1.12,e.Delta/120d),.03,8);_pan=new(p.X-world.X*_zoom,p.Y-world.Y*_zoom);InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);_=LoadPreviewsAsync();e.Handled=true;
+        _isFit=false; var p=e.GetPosition(this);var world=ScreenToWorld(p);_zoom=Math.Clamp(_zoom*Math.Pow(1.12,e.Delta/120d),.03,8);_pan=new(p.X-world.X*_zoom,p.Y-world.Y*_zoom);InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);SchedulePreviews();e.Handled=true;
     }
     public void Fit(bool selection=false)
     {
@@ -265,7 +287,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
         // Opt-in readback of the actual button operation, with no input injection or periodic observer.
         if (Environment.GetEnvironmentVariable("PIXEL_TART_FIT_DIAGNOSTICS") is { Length: > 0 } diagnosticPath)
             try { System.IO.File.AppendAllText(diagnosticPath, diagnostic + Environment.NewLine); } catch (System.IO.IOException) { } catch (UnauthorizedAccessException) { }
-        InvalidateVisual(); ViewChanged?.Invoke(this, EventArgs.Empty); _ = LoadPreviewsAsync();
+        InvalidateVisual(); ViewChanged?.Invoke(this, EventArgs.Empty); SchedulePreviews();
     }
     public CanvasBounds GetFitBounds(bool selection = false)
     {
@@ -279,8 +301,8 @@ public sealed class FreeCanvasSurface : FrameworkElement
         }).ToArray();
         return new(points.Min(p=>p.X), points.Min(p=>p.Y), points.Max(p=>p.X)-points.Min(p=>p.X), points.Max(p=>p.Y)-points.Min(p=>p.Y));
     }
-    public void ActualSize() { _isFit=false; _zoom=1;InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);_=LoadPreviewsAsync(); }
-    public void SetZoom(double zoom) { if(!double.IsFinite(zoom)) return; _isFit=false; _zoom=Math.Clamp(zoom,.03,8); InvalidateVisual(); ViewChanged?.Invoke(this,EventArgs.Empty); _=LoadPreviewsAsync(); }
+    public void ActualSize() { _isFit=false; _zoom=1;InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);SchedulePreviews(); }
+    public void SetZoom(double zoom) { if(!double.IsFinite(zoom)) return; _isFit=false; _zoom=Math.Clamp(zoom,.03,8); InvalidateVisual(); ViewChanged?.Invoke(this,EventArgs.Empty); SchedulePreviews(); }
     public void BeginCrop() { if(Editor.Selected.Count!=1||Editor.Selected[0].Locked||!Editor.Selected[0].IsImage)return;CropMode=true;PendingCrop=Editor.Selected[0].CropRect;ViewChanged?.Invoke(this,EventArgs.Empty);InvalidateVisual(); }
     public void FinishCrop(bool apply) { if(!CropMode)return;if(apply)Editor.Crop(PendingCrop);CropMode=false;ViewChanged?.Invoke(this,EventArgs.Empty);InvalidateVisual(); }
     protected override void OnKeyUp(KeyEventArgs e) { base.OnKeyUp(e);if(e.Key==Key.Space)_space=false; }

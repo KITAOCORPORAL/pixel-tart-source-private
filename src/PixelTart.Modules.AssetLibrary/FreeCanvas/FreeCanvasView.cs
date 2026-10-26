@@ -111,8 +111,8 @@ public sealed class FreeCanvasView : UserControl
     {
         if(_discardPending)return true;
         _saveTimer.Stop();await _saveGate.WaitAsync();
-        try { while(!ReferenceEquals(_saved,Editor.Document)){var snapshot=Editor.Document;await _store.SaveAsync(snapshot);_saved=snapshot;}_status.Text="已保存 · 源照片不会被修改";return true; }
-        catch(Exception exception)when(exception is IOException or UnauthorizedAccessException or InvalidDataException){_status.Text=$"保存失败：{exception.Message}";return false;}
+        try { while(!ReferenceEquals(_saved,Editor.Document)){var snapshot=Editor.Document;await _store.SaveAsync(snapshot);_saved=snapshot;}_status.Text="已保存";return true; }
+        catch(Exception exception)when(exception is IOException or UnauthorizedAccessException or InvalidDataException){new RAWSelectionAssistant.Core.Services.FileLogService().Error("画布保存失败",exception);_status.Text="保存失败，请重试";return false;}
         finally{_saveGate.Release();}
     }
     public Task<bool> PrepareDocumentChangeAsync() => PrepareDocumentChangeAsync(() => MessageBox.Show(Window.GetWindow(this),
@@ -138,6 +138,7 @@ public sealed class FreeCanvasView : UserControl
     {
         var anchor=_moreButton; var menu=new ContextMenu{Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom, PlacementTarget=anchor};
         void Add(string header,Action action){var item=new MenuItem{Header=header};item.Click+=(_,_)=>action();menu.Items.Add(item);}
+        Add("查看预览问题详情",()=>MessageBox.Show(Window.GetWindow(this),Surface.SourceErrors.Count==0?"没有预览问题。":string.Join("\n\n",Surface.SourceErrors.Select(x=>x.Key+"\n"+x.Value)),"预览详情",MessageBoxButton.OK,MessageBoxImage.Information));
         Add("重新定位选中素材",async ()=>{if(Editor.Selected.FirstOrDefault(x=>x.IsImage) is {} item && RelocateAsset is not null){await RelocateAsset(item);await Surface.LoadPreviewsAsync();}});
         Add("新建画布",async ()=>{if(await PrepareDocumentChangeAsync() && OpenDocument is not null)await OpenDocument(new CanvasDocument());});
         Add("打开画布…",()=>_=OpenSavedAsync()); Add("关闭画布",()=>_=CloseAsync());
