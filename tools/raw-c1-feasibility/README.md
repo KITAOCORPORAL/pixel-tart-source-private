@@ -47,3 +47,7 @@ LCMS输出Lab D50，DeltaE76只是输出间差异，不是真实颜色误差；�
 ## 官方资料重读
 
 fetch_sources.py只读公开HTTP，缓存到用户Temp，不下载到原素材目录，不打开浏览器。固定commit/文章ID和内容hash为已提交证据。商业软件资源、第三方源码不随项目发布。部分旧链接失败已记录，不能把fetch退出0等同所有文档成功。
+
+## 2026-10-27盘点修正
+
+素材根已知N:/pixart/RAW，无需另给路径。MetadataProbe第三参数--recursive可递归明确根下机型子目录，不跟reparse/不展开压缩包；扩展名增加CRW/DCR/ERF/MEF等。Inventory-Raw.ps1可加-Recursive，完整输入metadata扫描用N:/pixart/RAW/Real（RAW源均在其中，避免把根内旧导出TIFF当源）。356候选/345可open/11失败是递归元数据结果；不代表全部可渲染。26压缩包未展开、场景覆盖未重审，暂不作整库数量不足结论。旧212清单保留为此前实验范围证据。
