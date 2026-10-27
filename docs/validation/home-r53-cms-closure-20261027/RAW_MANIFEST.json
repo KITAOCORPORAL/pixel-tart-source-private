@@ -1,0 +1,3013 @@
+{
+  "path": "RAW_EVIDENCE.zip",
+  "sha256": "6b3d783fc834bd784dda2eb917158cb2fa85e3b8dd17e1e3a38263be2cf00339",
+  "bytes": 1990301,
+  "readback": true,
+  "files": [
+    {
+      "path": "add_flow_tests.py",
+      "bytes": 9482,
+      "sha256": "2f467ef0c841440f05a6bde20d024101ab7e77e75f1b18a33f1be4d02c31174f"
+    },
+    {
+      "path": "add_more_tests.py",
+      "bytes": 8464,
+      "sha256": "b8bfa30ce68b6aa09c18f6c84eb98268c30753dcff5dc644a308af9da3d6ccb3"
+    },
+    {
+      "path": "add_probe.py",
+      "bytes": 3575,
+      "sha256": "a66b05b50445589dd31ce20738f9e6e208a924c44874dec5d25f0c6dff598067"
+    },
+    {
+      "path": "add_r3_tests.py",
+      "bytes": 4919,
+      "sha256": "4241116fc3caaea8b21e365ecf2a2167e2018894272dd17daa45b234bfba8e56"
+    },
+    {
+      "path": "add_recovery_service.py",
+      "bytes": 7117,
+      "sha256": "0c57f36e10f90167eb6502d1030d7aa0906ab887727aed3f0c87a2c6548e5911"
+    },
+    {
+      "path": "add_visual.py",
+      "bytes": 2091,
+      "sha256": "d9988178b371b30635822a5d0bdd52705b6a8717529acd5551419c7fc685db6c"
+    },
+    {
+      "path": "admission.py",
+      "bytes": 2632,
+      "sha256": "a443bd9e687e70511450a2cb1a0d666c4613d5dbeaa724f068b6910dcda95f0b"
+    },
+    {
+      "path": "atomic_publish.py",
+      "bytes": 2033,
+      "sha256": "7ef4a65ab07620b65e0f2a2ec98e3a1c9285ec4354dc672af709f490147248c8"
+    },
+    {
+      "path": "authorized-photo-page-manifest.json",
+      "bytes": 269,
+      "sha256": "969d24f3cce09a5ba816977df1a3f059d1bb81cd6d5f0578e031fb436fc7c613"
+    },
+    {
+      "path": "blend-reference-console.json",
+      "bytes": 1144,
+      "sha256": "6d0a6c53ad419056fdf5ceba84d65a509ab7015878e91fefbc047032a3d2ae4b"
+    },
+    {
+      "path": "BLEND_REFERENCE.json",
+      "bytes": 1865,
+      "sha256": "8db41d5c8a2f98a5ad2bca2d3f3e9d9b09fd740f6415bd3ef6c9f52e73816fc1"
+    },
+    {
+      "path": "blend_reference.py",
+      "bytes": 3574,
+      "sha256": "c2ad5f93b0f69142c6771b8f1047fd851ca559964c152fcdb215c04df790a508"
+    },
+    {
+      "path": "blend_reference_r2.py",
+      "bytes": 3579,
+      "sha256": "09110aa53fca83dbc28d98ff010858838ea165e4a5cef91670792da64a139c43"
+    },
+    {
+      "path": "blend_reference_r3.py",
+      "bytes": 3579,
+      "sha256": "33120e8865fb3b3aad2bc25d92be859531298a1530c3dc176e81a331b7896972"
+    },
+    {
+      "path": "blend_reference_sealed.py",
+      "bytes": 3583,
+      "sha256": "92431b56605c0d2b3c50d056cd73b17293729714779b322b3790ab813d23ae8c"
+    },
+    {
+      "path": "bound_alpha.py",
+      "bytes": 2098,
+      "sha256": "bf890e3ad3c1408d711f47ef3c1931a8be74fcad20ff7c7ae5d68f3082f6ecab"
+    },
+    {
+      "path": "bound_wide_preview.py",
+      "bytes": 4711,
+      "sha256": "8742f3ef3edb3bc1f19f07739c3e501b43352df08568c2b92bc63bd7676e9a29"
+    },
+    {
+      "path": "build-blend-r2.log",
+      "bytes": 173764,
+      "sha256": "a1dbfd418704b878bd49795fe74d993dcde376148df18165465ca181c87fc32f"
+    },
+    {
+      "path": "build-connect-r2.log",
+      "bytes": 174948,
+      "sha256": "e690974dfd307284e5a577679db8f03fe4262f32f545e7a23aa15fbeab2ab8c4"
+    },
+    {
+      "path": "build-connect.log",
+      "bytes": 4737,
+      "sha256": "fd262a98fcaf4b185833af1f0a65939b325fa315e07618b4bfc95845687bcf07"
+    },
+    {
+      "path": "build-core-dev.log",
+      "bytes": 38696,
+      "sha256": "39518871cd137d79a55dbca54c9038b18524ce5831085cbdf57a838f1b3c1880"
+    },
+    {
+      "path": "build-expanded.log",
+      "bytes": 177166,
+      "sha256": "3f7cb20589cc3f61d277774798d26dfd928ae3c4cc4fa1ea70f4afc51dfd8940"
+    },
+    {
+      "path": "build-film-jpeg.log",
+      "bytes": 175876,
+      "sha256": "c47dbb7f9ca681700b755c5107a9124f9cd2f47bee75c3fbfdfa5548cbcb2415"
+    },
+    {
+      "path": "build-final-dev.log",
+      "bytes": 178702,
+      "sha256": "e43619f15b636349c92dce801cea0c173411aceb5d2a5484678426f0ac892f01"
+    },
+    {
+      "path": "build-flow-r2.log",
+      "bytes": 173764,
+      "sha256": "4237873a49ac6cbd083b0e6cb2a245eab11aa564e82861186d79409aecd20f2a"
+    },
+    {
+      "path": "build-flow.log",
+      "bytes": 178601,
+      "sha256": "9bed46abedb84b524317c4a5657492d7d66b909158e1bea9296a6dff49ad12f9"
+    },
+    {
+      "path": "build-jpeg.log",
+      "bytes": 174154,
+      "sha256": "385a74be29be93be532accb172b541f338073acdcca8d2e3830018fbecfa80d6"
+    },
+    {
+      "path": "build-last-dev.log",
+      "bytes": 178702,
+      "sha256": "d115d0e67cc67ee550ad184fe2b3b44cdf00295993e5db16b4fe27f01be2c99f"
+    },
+    {
+      "path": "build-outlet-ui-r2.log",
+      "bytes": 175300,
+      "sha256": "52fe24da756b4ce2b6d37f19b0c53184bd8c29e2b5989ee67faae082df7ab720"
+    },
+    {
+      "path": "build-outlet-ui.log",
+      "bytes": 7065,
+      "sha256": "06102bc2be4a0081b8f873da529718153c596b547bcf2fd037e83bb18368aacb"
+    },
+    {
+      "path": "build-probe.log",
+      "bytes": 177343,
+      "sha256": "d559bee0c31420359aee9b37cf1ccb4d8b9ea0cec898217d966b3bd460eff04a"
+    },
+    {
+      "path": "build-publish-numeric.log",
+      "bytes": 175876,
+      "sha256": "256a28ba186bd75fd2b4d3304436fa6271e5fd25d7b1e6f2643b9d6242ae39ac"
+    },
+    {
+      "path": "build-r3.log",
+      "bytes": 178702,
+      "sha256": "006ffc8ce48967e83a25db2f953cb497854841dbf4696502d7e3a7d873be0375"
+    },
+    {
+      "path": "build-service.log",
+      "bytes": 174948,
+      "sha256": "16c81f88c1b0c52ce3addd6dd1e7747cb9cc1eaeca5392be36027056d3b2608a"
+    },
+    {
+      "path": "build-single-picker.log",
+      "bytes": 178702,
+      "sha256": "9d6fa3ed437ef1890c98b6b0ad8457c7f72a69aa623c4afc0f08c4dbebfb2a2d"
+    },
+    {
+      "path": "build-user-total-r2.log",
+      "bytes": 178702,
+      "sha256": "7ca8cbe6692528ee08ac7268c1874a7294d8b1c3231fddd461870d5bb86f16d1"
+    },
+    {
+      "path": "build-user-total.log",
+      "bytes": 178702,
+      "sha256": "7a82fa2d09a9cc9999c5d152db759467bbe05295c224de06bb493563cd5846a2"
+    },
+    {
+      "path": "build-working.log",
+      "bytes": 176372,
+      "sha256": "4af97e3ee222119cd3e0ec34b940b12df4965ca361d5686c3b61d50ba4f1dcda"
+    },
+    {
+      "path": "build_wic_reference.py",
+      "bytes": 1700,
+      "sha256": "aee3a51e6b4744cc00be03cc994180aa51ce29ca2c4bbc86aa3d11bad17e7cf8"
+    },
+    {
+      "path": "check_blend_refs.py",
+      "bytes": 313,
+      "sha256": "af38151ff3d5adadcca2b7e453a9a0407b81409ed6896edd4667e05e99c54fae"
+    },
+    {
+      "path": "check_preservation.py",
+      "bytes": 2167,
+      "sha256": "e3c1f7d6c513f0d04e3198b36e56df90457cc83463ccdf8c96387b02de063e2c"
+    },
+    {
+      "path": "check_quality.py",
+      "bytes": 199,
+      "sha256": "868fa2969721c8abd87f8c2cc65dcb52a446a76d9cfef877cbb06f46983fae9b"
+    },
+    {
+      "path": "cleanup_safety.py",
+      "bytes": 2187,
+      "sha256": "37213e27ebb08270a267a488c043b248a9606124aef2d70e69ae73c73cfe72c5"
+    },
+    {
+      "path": "compare_wic_linear.py",
+      "bytes": 855,
+      "sha256": "ce2bcaefb3e60c9a33dcf9fcd4b80d42bebb9a9e1bc49b865900605deb222054"
+    },
+    {
+      "path": "connect_instant.py",
+      "bytes": 6114,
+      "sha256": "6f090343d56f2610c1512e859e8ec01b72d5094c236f03237fcd61771f75d52d"
+    },
+    {
+      "path": "connect_publishing.py",
+      "bytes": 9054,
+      "sha256": "776f806d84f1df6612421269ce0b2f029a9d7062c1b700b88e961a214e6e975a"
+    },
+    {
+      "path": "dev-regression/core/process.json",
+      "bytes": 1015,
+      "sha256": "008c8a197e03ad25a6f71b7993a6e61e3a8509287828e13d80db00eab6054e76"
+    },
+    {
+      "path": "dev-regression/core/results.trx",
+      "bytes": 65682,
+      "sha256": "42713bc1a83353077066de9af71933416cefa5be0432da5b88e23fbab8f28373"
+    },
+    {
+      "path": "dev-regression/core/stdout.log",
+      "bytes": 368,
+      "sha256": "f5324e35f3f4086f20ce8bb129add76384818c6a884f2c5957270c9e91665030"
+    },
+    {
+      "path": "dev-regression/wpf/closure/blend/Color.ptstudio.json",
+      "bytes": 6296,
+      "sha256": "03acfb07ea0307f2aa9dde9bdb7ad16c0225b8e398f2186ed9a1b49a6dcf88b6"
+    },
+    {
+      "path": "dev-regression/wpf/closure/blend/Luminosity.ptstudio.json",
+      "bytes": 6296,
+      "sha256": "6e4c386aac4c0d4e9291af329d043117c833bc1dcf424fb222d99583f1f62930"
+    },
+    {
+      "path": "dev-regression/wpf/closure/blend/Overlay.ptstudio.json",
+      "bytes": 6296,
+      "sha256": "b79982b10672456366034bf86fe3c320b6a28e5174445d493d84e48a953db55f"
+    },
+    {
+      "path": "dev-regression/wpf/closure/blend/SAMPLES.json",
+      "bytes": 184300,
+      "sha256": "01000c43135029c30ff2167967d82ddc3d730b79f7b4a64533fccddcbbab7233"
+    },
+    {
+      "path": "dev-regression/wpf/closure/blend/SoftLight.ptstudio.json",
+      "bytes": 6296,
+      "sha256": "4305bed6c38a83dd8665d2513365a3455f45c7985c1e5368a627a55fee1b0216"
+    },
+    {
+      "path": "dev-regression/wpf/closure/flow/.kitao-export-tasks/d2a48702ecd74faaa1a749285f0d798e/owner.json",
+      "bytes": 421,
+      "sha256": "b2bc8e7140a2d902242014408f2e467ae0b2ee7dc6d1b8b6fdb0500c5b1f10f9"
+    },
+    {
+      "path": "dev-regression/wpf/closure/flow/.kitao-export-tasks/d2a48702ecd74faaa1a749285f0d798e/task.json",
+      "bytes": 16247,
+      "sha256": "c66da8b0e80018a7db3d5f5a60cf94dc1ad41682618f683edb9d28077c7a1419"
+    },
+    {
+      "path": "dev-regression/wpf/closure/flow/input_仿色.tif.kitao-export.json",
+      "bytes": 16247,
+      "sha256": "c66da8b0e80018a7db3d5f5a60cf94dc1ad41682618f683edb9d28077c7a1419"
+    },
+    {
+      "path": "dev-regression/wpf/closure/flow/RESULT.json",
+      "bytes": 391,
+      "sha256": "5df5b38f1b851ed0a1c4e839ac9c30f36aa78941777a4bc779f610ab1c84414e"
+    },
+    {
+      "path": "dev-regression/wpf/closure/flow/workflow.ptstudio.json",
+      "bytes": 41789,
+      "sha256": "f40ebbcb74fd1e6efd6e3b4a5156aa005b34a06bc6d43da164c52d0dd6c3700f"
+    },
+    {
+      "path": "dev-regression/wpf/closure/managed/RESULT.json",
+      "bytes": 4150,
+      "sha256": "853f2fa39c6926ceb925c5a82978d56ee199cccd70617e21bb39e9ae63bdb92c"
+    },
+    {
+      "path": "dev-regression/wpf/closure/natural/RESULT.json",
+      "bytes": 2080,
+      "sha256": "daca63ffdaaf06e11f9248322b6d4161fec445e25d4490f2bfaf6ef543bd581d"
+    },
+    {
+      "path": "dev-regression/wpf/closure/PROBE.json",
+      "bytes": 7175,
+      "sha256": "b9be7891481d7eed63fb1316c9c19fa1cd299c1e3c49c75ec7a38fad9cfe3221"
+    },
+    {
+      "path": "dev-regression/wpf/closure/r3/r3.ptstudio.json",
+      "bytes": 42319,
+      "sha256": "80a356074fd1f29cc6ac24466e2ac97fbd7007cf77af5b61206a2132cead1217"
+    },
+    {
+      "path": "dev-regression/wpf/closure/r3/RESULT.json",
+      "bytes": 307,
+      "sha256": "95a3daaaad51d2f5bd3312111f1c5e198000dba6411cc3814bd62e18a296d819"
+    },
+    {
+      "path": "dev-regression/wpf/closure/recovery/RESULT.json",
+      "bytes": 237,
+      "sha256": "e6c59edc6727400b1efde4c6a100bc7e070cb405aedb154f4fdf6bfd0f60e6a7"
+    },
+    {
+      "path": "dev-regression/wpf/closure/service-flow/.kitao-export-tasks/813bf695c52b40d1973cf6df2f1cf288/owner.json",
+      "bytes": 437,
+      "sha256": "0a7fdb78698a215352d39aa76a37249bd6b323ff2cbfe68aaac588d189e4d070"
+    },
+    {
+      "path": "dev-regression/wpf/closure/service-flow/.kitao-export-tasks/813bf695c52b40d1973cf6df2f1cf288/task.json",
+      "bytes": 7526,
+      "sha256": "4a10f9f920bcf42f7049edf70586648e708f07997fb05398b54e907cdeb2cb2d"
+    },
+    {
+      "path": "dev-regression/wpf/closure/service-flow/input_仿色.tif.kitao-export.json",
+      "bytes": 7526,
+      "sha256": "4a10f9f920bcf42f7049edf70586648e708f07997fb05398b54e907cdeb2cb2d"
+    },
+    {
+      "path": "dev-regression/wpf/closure/service-flow/published/.kitao-export-tasks/dd807eedc13f4664b0cfda4edc0d8bff/owner.json",
+      "bytes": 466,
+      "sha256": "35be53af6d11e8d932f0a1428c02f947f04d666bdc3aab4025e76971e2627eef"
+    },
+    {
+      "path": "dev-regression/wpf/closure/service-flow/published/.kitao-export-tasks/dd807eedc13f4664b0cfda4edc0d8bff/task.json",
+      "bytes": 7267,
+      "sha256": "820c32171e1e1f0f9bc31bb60ff14cb25bcecac58b30b27a4a2f400af45c6c6b"
+    },
+    {
+      "path": "dev-regression/wpf/closure/service-flow/published/input_仿色_social.png.kitao-export.json",
+      "bytes": 7267,
+      "sha256": "820c32171e1e1f0f9bc31bb60ff14cb25bcecac58b30b27a4a2f400af45c6c6b"
+    },
+    {
+      "path": "dev-regression/wpf/closure/service-flow/republished/.kitao-export-tasks/7f0717eaa93b44e59681c27306ce1001/owner.json",
+      "bytes": 477,
+      "sha256": "bea1fb0e1771009b958e27f15e19d17e8267d2a444ffb82887d2a7b5b248e7b8"
+    },
+    {
+      "path": "dev-regression/wpf/closure/service-flow/republished/.kitao-export-tasks/7f0717eaa93b44e59681c27306ce1001/task.json",
+      "bytes": 7251,
+      "sha256": "dacd3bdd134a7678741bd01f46e53bbd3d8aee26f95bc8c94b6489ee919fa39e"
+    },
+    {
+      "path": "dev-regression/wpf/closure/service-flow/republished/input_仿色_social_social.jpg.kitao-export.json",
+      "bytes": 7251,
+      "sha256": "dacd3bdd134a7678741bd01f46e53bbd3d8aee26f95bc8c94b6489ee919fa39e"
+    },
+    {
+      "path": "dev-regression/wpf/closure/service-flow/RESULT.json",
+      "bytes": 506,
+      "sha256": "a70fe2398851a05397bd727e5703db910d0f19b6853d9caa0acafa90fbf09076"
+    },
+    {
+      "path": "dev-regression/wpf/closure/wide-boundary/RESULT.json",
+      "bytes": 1207,
+      "sha256": "7310fb8e510991faca56f875093e9e734340e41d52811e258da14c75a1c9c5cb"
+    },
+    {
+      "path": "dev-regression/wpf/closure/wide-boundary/wide.ptstudio.json",
+      "bytes": 16227,
+      "sha256": "3dbf12a121352ec7998e05078372674ebdacf2fad682615eef3d25e590e2e10d"
+    },
+    {
+      "path": "dev-regression/wpf/cms/.kitao-export-tasks/a17c8f827299403383aeeea4775bdb7d/owner.json",
+      "bytes": 407,
+      "sha256": "1e9d4543429f082e52ed0d551bb6ff887269ca166b96743869d32bccbff65280"
+    },
+    {
+      "path": "dev-regression/wpf/cms/.kitao-export-tasks/a17c8f827299403383aeeea4775bdb7d/task.json",
+      "bytes": 8282,
+      "sha256": "5b3822f1a098bd633cfcb3f48ec97e8860d72c319302220207b7707c070c4964"
+    },
+    {
+      "path": "dev-regression/wpf/cms/CMS_CLOSURE.json",
+      "bytes": 2723,
+      "sha256": "7539836c669817ebca996d86db6af88e16ffcb595a0edfd83ed2157f52068d6f"
+    },
+    {
+      "path": "dev-regression/wpf/cms/color-8a27419db6834ee0a772fe78101eb37d.ptstudio.json",
+      "bytes": 16858,
+      "sha256": "7eea9a74237c2a2f5b7ccda67bc7348e24fd8355eb017bd1f07cf2b68fa8b556"
+    },
+    {
+      "path": "dev-regression/wpf/cms/DISPLAY_PATH.json",
+      "bytes": 191,
+      "sha256": "ffdf5baeea205b93127567e396e4b8d5b5cc0af5b278fd0669185c44ee622b86"
+    },
+    {
+      "path": "dev-regression/wpf/cms/embedded-p3_仿色.tif.kitao-export.json",
+      "bytes": 8282,
+      "sha256": "5b3822f1a098bd633cfcb3f48ec97e8860d72c319302220207b7707c070c4964"
+    },
+    {
+      "path": "dev-regression/wpf/cms/JPEG_AND_MONITOR_OBSERVATIONS.json",
+      "bytes": 1583,
+      "sha256": "7f6f554b8faa88083df795bf6ade0a706457f56070e4fec40c0d9716cc7c0bc3"
+    },
+    {
+      "path": "dev-regression/wpf/cms/LCMS_FLOAT_REFERENCE_INPUT.json",
+      "bytes": 256980,
+      "sha256": "7c686671ee5f7bd1276477ab313972187bfc581bb2c95b835b27066e6c446094"
+    },
+    {
+      "path": "dev-regression/wpf/cms/REAL_DERIVATIVE_CMS.json",
+      "bytes": 346,
+      "sha256": "4ec807c1193809815b3f797e3411ca4829afefd0a5f2d49cad437c3ecad7af3e"
+    },
+    {
+      "path": "dev-regression/wpf/cms/WIC_REFERENCE_DIAGNOSTIC.json",
+      "bytes": 802,
+      "sha256": "2e97dcbe55bfd7bbdc855be5d13ea979d0502b530dfba471d661702b9909b0f0"
+    },
+    {
+      "path": "dev-regression/wpf/process.json",
+      "bytes": 845,
+      "sha256": "6cd84634d7ef00f54c55dea775ae61a7e50ef36f1f824693bfa625c7e40e106e"
+    },
+    {
+      "path": "dev-regression/wpf/results.trx",
+      "bytes": 72964,
+      "sha256": "9e3d0159c800d2b304a91fc5d5406e1e13b7835188a100a150b5e8c4238352a5"
+    },
+    {
+      "path": "dev-regression/wpf/stdout.log",
+      "bytes": 449,
+      "sha256": "dc741543d74be0e83812cd3d9bebf297e2c859d0700fd6de0d667b3096d2eeae"
+    },
+    {
+      "path": "expanded/flow/.kitao-export-tasks/b23ec76c33ba441691d1a7211f694509/owner.json",
+      "bytes": 381,
+      "sha256": "a4cb956b9c029ed3e806e72ac8fed1caff420c33d8a879881c4f83959710b838"
+    },
+    {
+      "path": "expanded/flow/.kitao-export-tasks/b23ec76c33ba441691d1a7211f694509/task.json",
+      "bytes": 16165,
+      "sha256": "07479fa43333df2c3fab62c2096e2378009218cb6acef1a1ea88ebce54136aae"
+    },
+    {
+      "path": "expanded/flow/input_仿色.tif.kitao-export.json",
+      "bytes": 16165,
+      "sha256": "07479fa43333df2c3fab62c2096e2378009218cb6acef1a1ea88ebce54136aae"
+    },
+    {
+      "path": "expanded/flow/RESULT.json",
+      "bytes": 345,
+      "sha256": "ee8ddb6154ce675b448396339b2de7aaa8442e4cafc98b051e5060e35bef4db7"
+    },
+    {
+      "path": "expanded/flow/workflow.ptstudio.json",
+      "bytes": 41769,
+      "sha256": "529cd8f767998053f6d5a3ddc0b811beaaeb3cfcc0fbafc50da7d5e5f68a62be"
+    },
+    {
+      "path": "expanded/managed/RESULT.json",
+      "bytes": 4166,
+      "sha256": "7740831a82d274177810cede40280ff305200c9b1434de1b3aa3550a4e9108fa"
+    },
+    {
+      "path": "expanded/natural/RESULT.json",
+      "bytes": 2081,
+      "sha256": "dbfe6ac1ecc1a9d647615bec5f8bc3fa62c9f10b7cb453a83c447539ec670107"
+    },
+    {
+      "path": "expanded/PROBE.json",
+      "bytes": 7175,
+      "sha256": "b9be7891481d7eed63fb1316c9c19fa1cd299c1e3c49c75ec7a38fad9cfe3221"
+    },
+    {
+      "path": "expanded/wide-boundary/RESULT.json",
+      "bytes": 1207,
+      "sha256": "7310fb8e510991faca56f875093e9e734340e41d52811e258da14c75a1c9c5cb"
+    },
+    {
+      "path": "expanded/wide-boundary/wide.ptstudio.json",
+      "bytes": 16151,
+      "sha256": "146d7a1790a499f1b2382c7a85e48f56bdd3b11e6282144b5ca9fd377c4dbc12"
+    },
+    {
+      "path": "expanded-cms/.kitao-export-tasks/c4cd22f638d7412ebe59aa74fc10fef0/owner.json",
+      "bytes": 383,
+      "sha256": "4abb6df664288ec31a121c01e9d4630b4871c999bf448ad077b65cf1292457f8"
+    },
+    {
+      "path": "expanded-cms/.kitao-export-tasks/c4cd22f638d7412ebe59aa74fc10fef0/task.json",
+      "bytes": 8174,
+      "sha256": "28b10b17c287b532d93d88da5f6f559b4e3a064231013d4e7bcc53cabddac91d"
+    },
+    {
+      "path": "expanded-cms/CMS_CLOSURE.json",
+      "bytes": 2588,
+      "sha256": "fb77fb42cacf2ca65767cadc1a333f8cb0526a43559308e627858e9a9a2e6e33"
+    },
+    {
+      "path": "expanded-cms/color-d90158165ec74fd3a653365a48a93062.ptstudio.json",
+      "bytes": 16847,
+      "sha256": "64bc0780f0b5710da57dddbbdb5dfa6a5c2246cb2366936bc6bb3a15bfeadf4e"
+    },
+    {
+      "path": "expanded-cms/DISPLAY_PATH.json",
+      "bytes": 191,
+      "sha256": "ffdf5baeea205b93127567e396e4b8d5b5cc0af5b278fd0669185c44ee622b86"
+    },
+    {
+      "path": "expanded-cms/embedded-p3_仿色.tif.kitao-export.json",
+      "bytes": 8174,
+      "sha256": "28b10b17c287b532d93d88da5f6f559b4e3a064231013d4e7bcc53cabddac91d"
+    },
+    {
+      "path": "expanded-cms/JPEG_AND_MONITOR_OBSERVATIONS.json",
+      "bytes": 1544,
+      "sha256": "bf7ca01429632d660a8b791f8045050ae9bdeffad952d7fe5374ef9e9908858a"
+    },
+    {
+      "path": "expanded-cms/LCMS_FLOAT_REFERENCE_INPUT.json",
+      "bytes": 256980,
+      "sha256": "7c686671ee5f7bd1276477ab313972187bfc581bb2c95b835b27066e6c446094"
+    },
+    {
+      "path": "expanded-cms/REAL_DERIVATIVE_CMS.json",
+      "bytes": 346,
+      "sha256": "4ec807c1193809815b3f797e3411ca4829afefd0a5f2d49cad437c3ecad7af3e"
+    },
+    {
+      "path": "expanded-cms/WIC_REFERENCE_DIAGNOSTIC.json",
+      "bytes": 802,
+      "sha256": "2e97dcbe55bfd7bbdc855be5d13ea979d0502b530dfba471d661702b9909b0f0"
+    },
+    {
+      "path": "expanded-r2/blend/Color.ptstudio.json",
+      "bytes": 6279,
+      "sha256": "26d7fda8844940d0871038d78e4cec3399273de9a45bff4225b9a316becc5437"
+    },
+    {
+      "path": "expanded-r2/blend/Luminosity.ptstudio.json",
+      "bytes": 6279,
+      "sha256": "73907aa0bca1104f1549284c3d1d626c1dccf5c6d74ab945e484a8dd8905f6b7"
+    },
+    {
+      "path": "expanded-r2/blend/Overlay.ptstudio.json",
+      "bytes": 6278,
+      "sha256": "be242a647312aaf10dcf4b0b0852d266a8a6189b8da1d569c8b7a5590aac4add"
+    },
+    {
+      "path": "expanded-r2/blend/SAMPLES.json",
+      "bytes": 184300,
+      "sha256": "01000c43135029c30ff2167967d82ddc3d730b79f7b4a64533fccddcbbab7233"
+    },
+    {
+      "path": "expanded-r2/blend/SoftLight.ptstudio.json",
+      "bytes": 6279,
+      "sha256": "d9490262ca10727b6f1159618d8262c9d65d86a23560c570c32521775ab1f3f6"
+    },
+    {
+      "path": "expanded-r2/flow/.kitao-export-tasks/0f592585a49745c1914062f740d4d188/owner.json",
+      "bytes": 387,
+      "sha256": "07102f5b3d108bd5dde8e9b462fb82b26efa10391b148cae58ca9e64012807ad"
+    },
+    {
+      "path": "expanded-r2/flow/.kitao-export-tasks/0f592585a49745c1914062f740d4d188/task.json",
+      "bytes": 16171,
+      "sha256": "76f1821cc66f728e422542b65badf3b03ea044efe4ff07947e5c9aad0b445b5b"
+    },
+    {
+      "path": "expanded-r2/flow/input_仿色.tif.kitao-export.json",
+      "bytes": 16171,
+      "sha256": "76f1821cc66f728e422542b65badf3b03ea044efe4ff07947e5c9aad0b445b5b"
+    },
+    {
+      "path": "expanded-r2/flow/RESULT.json",
+      "bytes": 351,
+      "sha256": "4eba0761650a6f21c0735f0a06f7c3ada064cd1a43fcdd6b69b652da442fba28"
+    },
+    {
+      "path": "expanded-r2/flow/workflow.ptstudio.json",
+      "bytes": 41772,
+      "sha256": "5e776eb4d6732dcec2b949bebdcc52e8407c9a61d8aad026d75f40010e8e159a"
+    },
+    {
+      "path": "expanded-r2/managed/RESULT.json",
+      "bytes": 4185,
+      "sha256": "5ca7d417636d7263a0a4175f953997970fb6e53cfef696ef4aa0ef13304cbaae"
+    },
+    {
+      "path": "expanded-r2/natural/RESULT.json",
+      "bytes": 2078,
+      "sha256": "de89847e3370a54655729693d33f9c97b76b89991eed4e6a859f0f01246e0157"
+    },
+    {
+      "path": "expanded-r2/PROBE.json",
+      "bytes": 7175,
+      "sha256": "b9be7891481d7eed63fb1316c9c19fa1cd299c1e3c49c75ec7a38fad9cfe3221"
+    },
+    {
+      "path": "expanded-r2/wide-boundary/RESULT.json",
+      "bytes": 1207,
+      "sha256": "7310fb8e510991faca56f875093e9e734340e41d52811e258da14c75a1c9c5cb"
+    },
+    {
+      "path": "expanded-r2/wide-boundary/wide.ptstudio.json",
+      "bytes": 16154,
+      "sha256": "bf068780ab9944ec3fe7acd92b5bcebba24445dcc6e3b5fa2d85d10fc03a987f"
+    },
+    {
+      "path": "expanded-r2-cms/.kitao-export-tasks/59d7401971d54165978dbf15ebc380c7/owner.json",
+      "bytes": 389,
+      "sha256": "59a7d5190bd0679e7b264a351a29b4fe8f97fff90ad8bea2e3d050ba464791a5"
+    },
+    {
+      "path": "expanded-r2-cms/.kitao-export-tasks/59d7401971d54165978dbf15ebc380c7/task.json",
+      "bytes": 8180,
+      "sha256": "2a431f42b2307a23ea49633648c463a5a88c2d1458a203aad8a270bac6704d7f"
+    },
+    {
+      "path": "expanded-r2-cms/CMS_CLOSURE.json",
+      "bytes": 2615,
+      "sha256": "c8ebfe4b4fb1a9b1877a442094b8a3af4703ea3dd83aa2f6a7b9fa204724cfef"
+    },
+    {
+      "path": "expanded-r2-cms/color-7857f44f55764f61a5b2b6214237b602.ptstudio.json",
+      "bytes": 16849,
+      "sha256": "2f13c83acdee76d724faaa29a55edd3884eee577e64a0fef9547b7b3a1313204"
+    },
+    {
+      "path": "expanded-r2-cms/DISPLAY_PATH.json",
+      "bytes": 191,
+      "sha256": "ffdf5baeea205b93127567e396e4b8d5b5cc0af5b278fd0669185c44ee622b86"
+    },
+    {
+      "path": "expanded-r2-cms/embedded-p3_仿色.tif.kitao-export.json",
+      "bytes": 8180,
+      "sha256": "2a431f42b2307a23ea49633648c463a5a88c2d1458a203aad8a270bac6704d7f"
+    },
+    {
+      "path": "expanded-r2-cms/JPEG_AND_MONITOR_OBSERVATIONS.json",
+      "bytes": 1544,
+      "sha256": "bf7ca01429632d660a8b791f8045050ae9bdeffad952d7fe5374ef9e9908858a"
+    },
+    {
+      "path": "expanded-r2-cms/LCMS_FLOAT_REFERENCE_INPUT.json",
+      "bytes": 256980,
+      "sha256": "7c686671ee5f7bd1276477ab313972187bfc581bb2c95b835b27066e6c446094"
+    },
+    {
+      "path": "expanded-r2-cms/REAL_DERIVATIVE_CMS.json",
+      "bytes": 346,
+      "sha256": "4ec807c1193809815b3f797e3411ca4829afefd0a5f2d49cad437c3ecad7af3e"
+    },
+    {
+      "path": "expanded-r2-cms/WIC_REFERENCE_DIAGNOSTIC.json",
+      "bytes": 802,
+      "sha256": "2e97dcbe55bfd7bbdc855be5d13ea979d0502b530dfba471d661702b9909b0f0"
+    },
+    {
+      "path": "expanded-r2-tests/results.trx",
+      "bytes": 22503,
+      "sha256": "d06798d982939ee9cbdd39423b0b30b4111bf76d34c0911fb324c8d3e6bc9c97"
+    },
+    {
+      "path": "expanded-r2.log",
+      "bytes": 366,
+      "sha256": "273d4c95e7d59208cc3a5ab4c5169335cad489c1c98361f3fa62b105a681f2af"
+    },
+    {
+      "path": "expanded-tests/results.trx",
+      "bytes": 24937,
+      "sha256": "76c57083905025ade13056ce8898000e39aed7f71e3c4efafcca53a0993399c0"
+    },
+    {
+      "path": "expanded.log",
+      "bytes": 2602,
+      "sha256": "da7cd3772530d6596c21319d720c36d527c921ba1d254b8f6157d2257a7c3e7e"
+    },
+    {
+      "path": "film-jpeg/flow/.kitao-export-tasks/981518443afd428e99b6a06dad2ea70b/owner.json",
+      "bytes": 383,
+      "sha256": "96db940677f43446a1414fb753e04debed370701ac0e2a8ddcb15f44c4b794b6"
+    },
+    {
+      "path": "film-jpeg/flow/.kitao-export-tasks/981518443afd428e99b6a06dad2ea70b/task.json",
+      "bytes": 16209,
+      "sha256": "0730aa0853f3655c7d14aa1cba076b85bed98bd11c5ece8a5edc446d3a65a2ed"
+    },
+    {
+      "path": "film-jpeg/flow/.kitao-export-tasks/ea86e2a3d91d4ac2a593e6201936d49d/owner.json",
+      "bytes": 383,
+      "sha256": "66b6d568cca3ebce84eae56f247ed2db9ee71490be0c64dedbee988ec7a313ea"
+    },
+    {
+      "path": "film-jpeg/flow/.kitao-export-tasks/ea86e2a3d91d4ac2a593e6201936d49d/task.json",
+      "bytes": 16249,
+      "sha256": "16ab00e7d33e3882036a52f83e8f6f8433ea100f4fc44efca6200b0d84d7bb8b"
+    },
+    {
+      "path": "film-jpeg/flow/input_仿色.jpg.kitao-export.json",
+      "bytes": 16249,
+      "sha256": "16ab00e7d33e3882036a52f83e8f6f8433ea100f4fc44efca6200b0d84d7bb8b"
+    },
+    {
+      "path": "film-jpeg/flow/input_仿色.tif.kitao-export.json",
+      "bytes": 16209,
+      "sha256": "0730aa0853f3655c7d14aa1cba076b85bed98bd11c5ece8a5edc446d3a65a2ed"
+    },
+    {
+      "path": "film-jpeg/flow/RESULT.json",
+      "bytes": 528,
+      "sha256": "8b6894ccddd225fbda342491a19758c2060583a0546f771173fdf2d8ae8e0b1b"
+    },
+    {
+      "path": "film-jpeg/flow/workflow.ptstudio.json",
+      "bytes": 41770,
+      "sha256": "87ad54f68c5938cad8804f3e82495e3bbc65aa1094cb6ef61408e6b79d1df404"
+    },
+    {
+      "path": "film-jpeg-tests/results.trx",
+      "bytes": 2656,
+      "sha256": "fe74645a23a5130200f042c462a9116c2ab065029f2ee24e31c8c49007482dd0"
+    },
+    {
+      "path": "film-jpeg.log",
+      "bytes": 364,
+      "sha256": "4ccfe875b03b8d7d4a9875529aafcefd8ebab6a76d5e501600b89477c31a0d74"
+    },
+    {
+      "path": "final/bindings.json",
+      "bytes": 12282,
+      "sha256": "369eca5a7496347b93dd9b7f7428cd2100f0c687506697a25bf01a5f156d929f"
+    },
+    {
+      "path": "final/cms/.kitao-export-tasks/d8bf0059cf044c61897583673a28fc0c/owner.json",
+      "bytes": 379,
+      "sha256": "1e41cbc3e8dc7fb463eb4b14db0b93b1baadf8d176978af0ff2d1f01dc6b57fe"
+    },
+    {
+      "path": "final/cms/.kitao-export-tasks/d8bf0059cf044c61897583673a28fc0c/task.json",
+      "bytes": 8267,
+      "sha256": "b99096e00fd93930e8b3ecab01b589aff4235034aa89d1eab54e11153e2cabc9"
+    },
+    {
+      "path": "final/cms/CMS_CLOSURE.json",
+      "bytes": 2597,
+      "sha256": "61a01ce172719a4079954fb4d99df5042dd5041b056fc1b054da21acdc78cb3b"
+    },
+    {
+      "path": "final/cms/color-4f36fe9a6fc74310bb901038cc5abc8b.ptstudio.json",
+      "bytes": 16845,
+      "sha256": "abf3f1d20ba6d4707327654d04c218eecff9a12f89c1ec677a556d69ee98b586"
+    },
+    {
+      "path": "final/cms/DISPLAY_PATH.json",
+      "bytes": 191,
+      "sha256": "ffdf5baeea205b93127567e396e4b8d5b5cc0af5b278fd0669185c44ee622b86"
+    },
+    {
+      "path": "final/cms/embedded-p3_仿色.tif.kitao-export.json",
+      "bytes": 8267,
+      "sha256": "b99096e00fd93930e8b3ecab01b589aff4235034aa89d1eab54e11153e2cabc9"
+    },
+    {
+      "path": "final/cms/JPEG_AND_MONITOR_OBSERVATIONS.json",
+      "bytes": 1583,
+      "sha256": "7f6f554b8faa88083df795bf6ade0a706457f56070e4fec40c0d9716cc7c0bc3"
+    },
+    {
+      "path": "final/cms/LCMS_FLOAT_REFERENCE_INPUT.json",
+      "bytes": 256980,
+      "sha256": "7c686671ee5f7bd1276477ab313972187bfc581bb2c95b835b27066e6c446094"
+    },
+    {
+      "path": "final/cms/REAL_DERIVATIVE_CMS.json",
+      "bytes": 346,
+      "sha256": "4ec807c1193809815b3f797e3411ca4829afefd0a5f2d49cad437c3ecad7af3e"
+    },
+    {
+      "path": "final/cms/WIC_REFERENCE_DIAGNOSTIC.json",
+      "bytes": 802,
+      "sha256": "2e97dcbe55bfd7bbdc855be5d13ea979d0502b530dfba471d661702b9909b0f0"
+    },
+    {
+      "path": "final/core-build.json",
+      "bytes": 627,
+      "sha256": "b0060f9ef74bd1922d7cafc8779398265fda08799f125a0e5bef4a6c311cec58"
+    },
+    {
+      "path": "final/core-build.log",
+      "bytes": 36627,
+      "sha256": "68ab339ab4bfa232686a6295e469320b0f16bf475e66e76aa30a0a99bec13e1b"
+    },
+    {
+      "path": "final/process-reopen/process.json",
+      "bytes": 671,
+      "sha256": "6f22ee6cbd0eb426ffec204641ad3a97742ad96d8556354b6c55015f597d8ddc"
+    },
+    {
+      "path": "final/process-reopen/results.trx",
+      "bytes": 2656,
+      "sha256": "baffa5446643521f63e283fd999ee2b963b1cedf2f2affcb21afa7104a04b3b6"
+    },
+    {
+      "path": "final/process-reopen/stdout.log",
+      "bytes": 372,
+      "sha256": "145be7e3ec0e65d945b534d18c1d8c28c1f90caebd434a8c9f6c6df142dace7a"
+    },
+    {
+      "path": "final/publish-build.json",
+      "bytes": 761,
+      "sha256": "713e1053b3c6de603c9b9d33309b5923283f45a8f99c4e47bea107aa4b77625a"
+    },
+    {
+      "path": "final/publish-build.log",
+      "bytes": 3917,
+      "sha256": "e8b0e07fa08c58eae95997b0c7e238cae5562a91e1fe73f70281f4a47876f03e"
+    },
+    {
+      "path": "final/samples/blend/Color.ptstudio.json",
+      "bytes": 6282,
+      "sha256": "d80ff6e408d3931bf889c640a9800dd02c7d44dad183c2d972c4f221e9a231d6"
+    },
+    {
+      "path": "final/samples/blend/Luminosity.ptstudio.json",
+      "bytes": 6282,
+      "sha256": "c37f1b9a26ffcabb9ec2a99525d55a0b4e0e508fd285410122b8d20b7e4b8de4"
+    },
+    {
+      "path": "final/samples/blend/Overlay.ptstudio.json",
+      "bytes": 6282,
+      "sha256": "425c4f7139e92180a5b286bc25134a0887f912552d50638b3a532528fc0871c6"
+    },
+    {
+      "path": "final/samples/blend/SAMPLES.json",
+      "bytes": 184300,
+      "sha256": "01000c43135029c30ff2167967d82ddc3d730b79f7b4a64533fccddcbbab7233"
+    },
+    {
+      "path": "final/samples/blend/SoftLight.ptstudio.json",
+      "bytes": 6281,
+      "sha256": "d094b9eea37fc4b964ba90a69940b6f521dcb15d6c5ca62d57341e0613509afa"
+    },
+    {
+      "path": "final/samples/flow/.kitao-export-tasks/37c50983453c4317bff434fa15a2b3e4/owner.json",
+      "bytes": 393,
+      "sha256": "e120a0d11ddbc4d571ae91320c3e902f71b1a700ebe3d2bd3e8ee6e232421147"
+    },
+    {
+      "path": "final/samples/flow/.kitao-export-tasks/37c50983453c4317bff434fa15a2b3e4/task.json",
+      "bytes": 16219,
+      "sha256": "f9c66660d2b139341f9a4d97bdc7f50495dc2cdf4692688bc2a51532458c1d0d"
+    },
+    {
+      "path": "final/samples/flow/input_仿色.tif.kitao-export.json",
+      "bytes": 16219,
+      "sha256": "f9c66660d2b139341f9a4d97bdc7f50495dc2cdf4692688bc2a51532458c1d0d"
+    },
+    {
+      "path": "final/samples/flow/RESULT.json",
+      "bytes": 363,
+      "sha256": "0b08a2066ddbf193447b63f4ef70e03d0a08f6e263c47402a9c37f56ea3fdf23"
+    },
+    {
+      "path": "final/samples/flow/workflow.ptstudio.json",
+      "bytes": 41774,
+      "sha256": "3bff4a0da4fc288572af27fb82fd0c72ef02d107cc47659e5956b1455e8546a6"
+    },
+    {
+      "path": "final/samples/managed/RESULT.json",
+      "bytes": 4164,
+      "sha256": "a577227c8758dc3d9bbe88ad3d79718405ca4a938beb332f6ddc30ddd05f0b59"
+    },
+    {
+      "path": "final/samples/natural/RESULT.json",
+      "bytes": 2078,
+      "sha256": "0eb0dceab8f01feb4e04fa6dcc5946b3340a555335266df630784bee532af8ac"
+    },
+    {
+      "path": "final/samples/PROBE.json",
+      "bytes": 7175,
+      "sha256": "b9be7891481d7eed63fb1316c9c19fa1cd299c1e3c49c75ec7a38fad9cfe3221"
+    },
+    {
+      "path": "final/samples/process-reopen/RESULT.json",
+      "bytes": 299,
+      "sha256": "5ffaa9462935945088b38f3853f0bf0c148676bcc1be61ff4b7b3a13789ad332"
+    },
+    {
+      "path": "final/samples/r3/r3.ptstudio.json",
+      "bytes": 42305,
+      "sha256": "99bfb8ea94b4355543774bdfffe3a2a5f199cb8201340f2199f0a472cd3d395d"
+    },
+    {
+      "path": "final/samples/r3/RESULT.json",
+      "bytes": 307,
+      "sha256": "0d3616dd24bd02abc28a0914815e42dea930a0b65950f7b2278f7566916df698"
+    },
+    {
+      "path": "final/samples/recovery/RESULT.json",
+      "bytes": 237,
+      "sha256": "e6c59edc6727400b1efde4c6a100bc7e070cb405aedb154f4fdf6bfd0f60e6a7"
+    },
+    {
+      "path": "final/samples/service-flow/.kitao-export-tasks/d2a20564a13849d6bacf588d629da9f5/owner.json",
+      "bytes": 409,
+      "sha256": "9e22da544d86998361d9a0565443ed64dbc1aa6f80235f2aa9ea224c54fd924b"
+    },
+    {
+      "path": "final/samples/service-flow/.kitao-export-tasks/d2a20564a13849d6bacf588d629da9f5/task.json",
+      "bytes": 7499,
+      "sha256": "55ddffc2d430dfdfeda171ddcc6a4dac761c295dbdc839c2319edf9907d343b2"
+    },
+    {
+      "path": "final/samples/service-flow/input_仿色.tif.kitao-export.json",
+      "bytes": 7499,
+      "sha256": "55ddffc2d430dfdfeda171ddcc6a4dac761c295dbdc839c2319edf9907d343b2"
+    },
+    {
+      "path": "final/samples/service-flow/published/.kitao-export-tasks/cdc60dadb26d46c583b21f8b2f94a90d/owner.json",
+      "bytes": 438,
+      "sha256": "045d5a6cf3cd9fbc3eea4c7b862af178e5b8335a5c93fd8205db41359b8a1bbc"
+    },
+    {
+      "path": "final/samples/service-flow/published/.kitao-export-tasks/cdc60dadb26d46c583b21f8b2f94a90d/task.json",
+      "bytes": 7240,
+      "sha256": "4ab1f1eb2b3ef7ac522c192590ee2e8433df9c2c9d2f427618d5fd5c1feee400"
+    },
+    {
+      "path": "final/samples/service-flow/published/input_仿色_social.png.kitao-export.json",
+      "bytes": 7240,
+      "sha256": "4ab1f1eb2b3ef7ac522c192590ee2e8433df9c2c9d2f427618d5fd5c1feee400"
+    },
+    {
+      "path": "final/samples/service-flow/republished/.kitao-export-tasks/58ee6ca8ab4448e89ca56035cef70bf7/owner.json",
+      "bytes": 449,
+      "sha256": "7bd92d636580e29352c0e88b3461838443c564e31d57051b1d9de7c360aeaa29"
+    },
+    {
+      "path": "final/samples/service-flow/republished/.kitao-export-tasks/58ee6ca8ab4448e89ca56035cef70bf7/task.json",
+      "bytes": 7223,
+      "sha256": "66ad03c8215b478b00e0294fc9acf41d1a5a3885b43798d667efaaafe6d07118"
+    },
+    {
+      "path": "final/samples/service-flow/republished/input_仿色_social_social.jpg.kitao-export.json",
+      "bytes": 7223,
+      "sha256": "66ad03c8215b478b00e0294fc9acf41d1a5a3885b43798d667efaaafe6d07118"
+    },
+    {
+      "path": "final/samples/service-flow/RESULT.json",
+      "bytes": 464,
+      "sha256": "6f291be0837b48ddc79246a11e447da2b5ba144a49cb6f619115f28d1757417f"
+    },
+    {
+      "path": "final/samples/visual/PROVENANCE.json",
+      "bytes": 197,
+      "sha256": "1105f6e0a10068e862261e609de949522447a87c257bb2985a02da0dea82e6ba"
+    },
+    {
+      "path": "final/samples/wide-boundary/RESULT.json",
+      "bytes": 1207,
+      "sha256": "7310fb8e510991faca56f875093e9e734340e41d52811e258da14c75a1c9c5cb"
+    },
+    {
+      "path": "final/samples/wide-boundary/wide.ptstudio.json",
+      "bytes": 16212,
+      "sha256": "7969514974b8ce1bc629c733c5ae5c54316ae624742d08082700136c44473aca"
+    },
+    {
+      "path": "final/tests-core/process.json",
+      "bytes": 1267,
+      "sha256": "7871dd12bcdb3f6bfd2bb08503e92124ae9f106e5c1a2557ff3abbc190f5e3fc"
+    },
+    {
+      "path": "final/tests-core/results.trx",
+      "bytes": 94930,
+      "sha256": "292b307c0bcb4d849f96bed9cbcbad1eb8358bb7800691779e371fa3a1912182"
+    },
+    {
+      "path": "final/tests-core/stdout.log",
+      "bytes": 365,
+      "sha256": "e485032713a292af17db6878d75b90861cba52b72110b2270f573f1fccbdb51f"
+    },
+    {
+      "path": "final/tests-wpf/process.json",
+      "bytes": 1138,
+      "sha256": "57ab41b2c3b7132ff9f34f1c3319c818fb64b8a233093f0268d92314ec0854e6"
+    },
+    {
+      "path": "final/tests-wpf/results.trx",
+      "bytes": 76185,
+      "sha256": "7a4d34ec1c401c6dbd6ce0a36e296d55dd18820bcf15a1160efc69e990e96faa"
+    },
+    {
+      "path": "final/tests-wpf/stdout.log",
+      "bytes": 365,
+      "sha256": "8ecd7a290fc446b6e0636f89732db9d0ef366a2831edb672fddeb23431817321"
+    },
+    {
+      "path": "final/visual/AUTHORIZED_PAGE.json",
+      "bytes": 2159,
+      "sha256": "2066795ce5bce2b956c11d8f7ee33d2969321de7af9acd741338fe34e8ce2eb1"
+    },
+    {
+      "path": "final/visual/LIFECYCLE_PERFORMANCE.json",
+      "bytes": 578,
+      "sha256": "00ca8bc8345e7225aa36935de896315d00a2897d66b1c6029a1699bd150aefda"
+    },
+    {
+      "path": "final/wpf-build.json",
+      "bytes": 657,
+      "sha256": "87460d2091bbabe5b2cd84802ce7b4531062a1de21682a8564ea331ba990d493"
+    },
+    {
+      "path": "final/wpf-build.log",
+      "bytes": 179541,
+      "sha256": "2c53c16196b34e97d16104749cea1e79fcf05d7aaf64252ba75bfad52891a6e6"
+    },
+    {
+      "path": "final-r2/bindings.json",
+      "bytes": 12369,
+      "sha256": "81d902a820613021123d81af92d7439eebc75efcefa39b83286e1499b5ebb651"
+    },
+    {
+      "path": "final-r2/cms/.kitao-export-tasks/18fdaac803e945f0b8ce55f0abb2c3e9/owner.json",
+      "bytes": 385,
+      "sha256": "a29e93c3c778f7fc3e515a7d7e4921b236306dd32dbd94a62bf61a5e9dc96cce"
+    },
+    {
+      "path": "final-r2/cms/.kitao-export-tasks/18fdaac803e945f0b8ce55f0abb2c3e9/task.json",
+      "bytes": 8261,
+      "sha256": "c62be35e38ad647136e8a374db2df515abf7b8411a33c683b73ea59a3386aa5e"
+    },
+    {
+      "path": "final-r2/cms/CMS_CLOSURE.json",
+      "bytes": 2624,
+      "sha256": "43e7ec6ae18c5bd8919057db5f96fb1db3a7d83fe60732fda65485fb0c502f18"
+    },
+    {
+      "path": "final-r2/cms/color-653f54443745415bbaf1777839619118.ptstudio.json",
+      "bytes": 16848,
+      "sha256": "ee7f055abeb9bb7df9a69a9f0040b01bfcd68f53bd926d5fcfd7ebd418677b13"
+    },
+    {
+      "path": "final-r2/cms/DISPLAY_PATH.json",
+      "bytes": 191,
+      "sha256": "ffdf5baeea205b93127567e396e4b8d5b5cc0af5b278fd0669185c44ee622b86"
+    },
+    {
+      "path": "final-r2/cms/embedded-p3_仿色.tif.kitao-export.json",
+      "bytes": 8261,
+      "sha256": "c62be35e38ad647136e8a374db2df515abf7b8411a33c683b73ea59a3386aa5e"
+    },
+    {
+      "path": "final-r2/cms/JPEG_AND_MONITOR_OBSERVATIONS.json",
+      "bytes": 1583,
+      "sha256": "7f6f554b8faa88083df795bf6ade0a706457f56070e4fec40c0d9716cc7c0bc3"
+    },
+    {
+      "path": "final-r2/cms/LCMS_FLOAT_REFERENCE_INPUT.json",
+      "bytes": 256980,
+      "sha256": "7c686671ee5f7bd1276477ab313972187bfc581bb2c95b835b27066e6c446094"
+    },
+    {
+      "path": "final-r2/cms/REAL_DERIVATIVE_CMS.json",
+      "bytes": 346,
+      "sha256": "4ec807c1193809815b3f797e3411ca4829afefd0a5f2d49cad437c3ecad7af3e"
+    },
+    {
+      "path": "final-r2/cms/WIC_REFERENCE_DIAGNOSTIC.json",
+      "bytes": 802,
+      "sha256": "2e97dcbe55bfd7bbdc855be5d13ea979d0502b530dfba471d661702b9909b0f0"
+    },
+    {
+      "path": "final-r2/core-build.json",
+      "bytes": 627,
+      "sha256": "3bbb08ff0ae189c27eb37dee09ee9fb7e1706b5e74fdbc586a30b939c7be0eb1"
+    },
+    {
+      "path": "final-r2/core-build.log",
+      "bytes": 36627,
+      "sha256": "38951c1ce5b94a5689cbaf7ca385022e7f1f2a61902c2e67a0edc5642eefc48d"
+    },
+    {
+      "path": "final-r2/process-reopen/process.json",
+      "bytes": 673,
+      "sha256": "7b08ace307156790564f82fe526cb93b8802731116edc6584b72a548bad8e616"
+    },
+    {
+      "path": "final-r2/process-reopen/results.trx",
+      "bytes": 2656,
+      "sha256": "78d38935fe1244557dc395f4ff80bbe7d880f99473231e12b42840be3aa125c5"
+    },
+    {
+      "path": "final-r2/process-reopen/stdout.log",
+      "bytes": 375,
+      "sha256": "bcbc0c7d9724bab07910c7541bded67806365dc726f2a3e7ba8ebdca51b05058"
+    },
+    {
+      "path": "final-r2/publish-build.json",
+      "bytes": 765,
+      "sha256": "7e37bff7ac3fe1be7afa5579cbaa7926c452edc7f5d4c22d0aac7f4a62405977"
+    },
+    {
+      "path": "final-r2/publish-build.log",
+      "bytes": 3935,
+      "sha256": "47431e14935a206b009524bd988b7b2480255801c2abed66a58edc1af112f965"
+    },
+    {
+      "path": "final-r2/samples/blend/Color.ptstudio.json",
+      "bytes": 6285,
+      "sha256": "05e282e0afbfe631d8774b9718721a06148b72570f9f6af012ba402361fb1b6c"
+    },
+    {
+      "path": "final-r2/samples/blend/Luminosity.ptstudio.json",
+      "bytes": 6285,
+      "sha256": "32d0b4e1099207637ec1d08e7711cf7239842740b94491053fca76f8e6cf4df8"
+    },
+    {
+      "path": "final-r2/samples/blend/Overlay.ptstudio.json",
+      "bytes": 6285,
+      "sha256": "9474718017295e695a91b7b50b0c831a3edf7083c1d1f9f45d992bd001c1c13a"
+    },
+    {
+      "path": "final-r2/samples/blend/SAMPLES.json",
+      "bytes": 184300,
+      "sha256": "01000c43135029c30ff2167967d82ddc3d730b79f7b4a64533fccddcbbab7233"
+    },
+    {
+      "path": "final-r2/samples/blend/SoftLight.ptstudio.json",
+      "bytes": 6285,
+      "sha256": "9ce021b8728486acecd0253372f205b0072dd51a000fb40372856271b4e91b2b"
+    },
+    {
+      "path": "final-r2/samples/flow/.kitao-export-tasks/70e290886e094eb5897a2e83f180e5a4/owner.json",
+      "bytes": 399,
+      "sha256": "cac45ebf42081dc167ec83bbf9acc1c98f95890a6edbf0e6db33bb73c4206ff1"
+    },
+    {
+      "path": "final-r2/samples/flow/.kitao-export-tasks/70e290886e094eb5897a2e83f180e5a4/task.json",
+      "bytes": 16225,
+      "sha256": "047c05d6a323189baceeba331bc6f0336f75d8a08c4b535759426f71ca1554e8"
+    },
+    {
+      "path": "final-r2/samples/flow/input_仿色.tif.kitao-export.json",
+      "bytes": 16225,
+      "sha256": "047c05d6a323189baceeba331bc6f0336f75d8a08c4b535759426f71ca1554e8"
+    },
+    {
+      "path": "final-r2/samples/flow/RESULT.json",
+      "bytes": 448,
+      "sha256": "351b1f368f132bec55966db1ab3f9e34823036c616514e2f98b4b99563fc94f3"
+    },
+    {
+      "path": "final-r2/samples/flow/workflow.ptstudio.json",
+      "bytes": 41778,
+      "sha256": "57775896cd0867406afc91a7ae2e3a27cac1429be185657fb0e55709179188d5"
+    },
+    {
+      "path": "final-r2/samples/managed/RESULT.json",
+      "bytes": 4139,
+      "sha256": "a420b8bb6398cabbc39c6529e1d26c360361afa0fcef467b536ff73eccfbc674"
+    },
+    {
+      "path": "final-r2/samples/natural/RESULT.json",
+      "bytes": 2081,
+      "sha256": "29caa9684ec753ab92ba7d75ce9b2f0bc0d85a271e1faf57bab8cfaabecf8c11"
+    },
+    {
+      "path": "final-r2/samples/PROBE.json",
+      "bytes": 7175,
+      "sha256": "b9be7891481d7eed63fb1316c9c19fa1cd299c1e3c49c75ec7a38fad9cfe3221"
+    },
+    {
+      "path": "final-r2/samples/process-reopen/RESULT.json",
+      "bytes": 302,
+      "sha256": "a7c36cc543e1a3c63d445047bd606a08550752fe82353bf248e80fd51d9e26cb"
+    },
+    {
+      "path": "final-r2/samples/r3/r3.ptstudio.json",
+      "bytes": 42308,
+      "sha256": "fad28c3c1cb51d9dfcf60ee01a00d0db89d8f2654e503ac7e0e19be27e33118b"
+    },
+    {
+      "path": "final-r2/samples/r3/RESULT.json",
+      "bytes": 307,
+      "sha256": "41a8f7dbbcb5dd58ed924c84a30464df24e5025722a68f73ed59c7e4ac3e643f"
+    },
+    {
+      "path": "final-r2/samples/recovery/RESULT.json",
+      "bytes": 237,
+      "sha256": "e6c59edc6727400b1efde4c6a100bc7e070cb405aedb154f4fdf6bfd0f60e6a7"
+    },
+    {
+      "path": "final-r2/samples/service-flow/.kitao-export-tasks/cfc755ee39274ef3a2684c7580f0fb9b/owner.json",
+      "bytes": 415,
+      "sha256": "4a62a4085508817d33bf1d002a2a918f8e1060081c817f2ec344d9828680752b"
+    },
+    {
+      "path": "final-r2/samples/service-flow/.kitao-export-tasks/cfc755ee39274ef3a2684c7580f0fb9b/task.json",
+      "bytes": 7516,
+      "sha256": "48d5308346ce1d57655fbbe4a3e4cc7c8f5e15d5eb00b327700c73d579a08b77"
+    },
+    {
+      "path": "final-r2/samples/service-flow/input_仿色.tif.kitao-export.json",
+      "bytes": 7516,
+      "sha256": "48d5308346ce1d57655fbbe4a3e4cc7c8f5e15d5eb00b327700c73d579a08b77"
+    },
+    {
+      "path": "final-r2/samples/service-flow/published/.kitao-export-tasks/8bdf4276a33445ce98142900e35f69e5/owner.json",
+      "bytes": 444,
+      "sha256": "4489c5e05e2fa6e2bdc220f166756fbf03a87d799bf70c4b0c0c87429bd840f5"
+    },
+    {
+      "path": "final-r2/samples/service-flow/published/.kitao-export-tasks/8bdf4276a33445ce98142900e35f69e5/task.json",
+      "bytes": 7246,
+      "sha256": "fb459070893418cf038b5c3f0adaa7fcacdd3c495a379f62358a9b6ab6af71d4"
+    },
+    {
+      "path": "final-r2/samples/service-flow/published/input_仿色_social.png.kitao-export.json",
+      "bytes": 7246,
+      "sha256": "fb459070893418cf038b5c3f0adaa7fcacdd3c495a379f62358a9b6ab6af71d4"
+    },
+    {
+      "path": "final-r2/samples/service-flow/republished/.kitao-export-tasks/6a2068d08b2a4afdbf3819c1ef1f0b70/owner.json",
+      "bytes": 455,
+      "sha256": "00940bd269aba09b1ef2c33a23269571ec61460eee5ae7884f3794a4dc711b71"
+    },
+    {
+      "path": "final-r2/samples/service-flow/republished/.kitao-export-tasks/6a2068d08b2a4afdbf3819c1ef1f0b70/task.json",
+      "bytes": 7230,
+      "sha256": "5b1e42d7ae29fcd30635da7aa3b652210a2a9efe8ecfbffa65509fc1ce49fbc5"
+    },
+    {
+      "path": "final-r2/samples/service-flow/republished/input_仿色_social_social.jpg.kitao-export.json",
+      "bytes": 7230,
+      "sha256": "5b1e42d7ae29fcd30635da7aa3b652210a2a9efe8ecfbffa65509fc1ce49fbc5"
+    },
+    {
+      "path": "final-r2/samples/service-flow/RESULT.json",
+      "bytes": 473,
+      "sha256": "6cd4793718699cbc685fb1262ee8e6ee2e409b0d6b761a2e43fee726c954ea21"
+    },
+    {
+      "path": "final-r2/samples/visual/PROVENANCE.json",
+      "bytes": 197,
+      "sha256": "1105f6e0a10068e862261e609de949522447a87c257bb2985a02da0dea82e6ba"
+    },
+    {
+      "path": "final-r2/samples/wide-boundary/RESULT.json",
+      "bytes": 1207,
+      "sha256": "7310fb8e510991faca56f875093e9e734340e41d52811e258da14c75a1c9c5cb"
+    },
+    {
+      "path": "final-r2/samples/wide-boundary/wide.ptstudio.json",
+      "bytes": 16216,
+      "sha256": "7f928c83453a4a38f6092cc08326c67b83dabe4a3436b4f4df7eee99279de50d"
+    },
+    {
+      "path": "final-r2/tests-core/process.json",
+      "bytes": 1269,
+      "sha256": "cc5db7138b2c94ceffbbfe53403d889be402937e5f217d6585e68b769df807d3"
+    },
+    {
+      "path": "final-r2/tests-core/results.trx",
+      "bytes": 94930,
+      "sha256": "93df8ed159038464fae9a4713433b048220965d02ddd93b856b17daf30099297"
+    },
+    {
+      "path": "final-r2/tests-core/stdout.log",
+      "bytes": 368,
+      "sha256": "524261c6b42e1882d744768745234250f3366f85463a60fe8e223bb786f125a8"
+    },
+    {
+      "path": "final-r2/tests-wpf/process.json",
+      "bytes": 1140,
+      "sha256": "b49ca949c0c425a96da0cb6e43ce2cc3a62831407e2ce1864a7f064dceb731ec"
+    },
+    {
+      "path": "final-r2/tests-wpf/results.trx",
+      "bytes": 76185,
+      "sha256": "09ad27cdf95b27262bee76ad267980b0169b8c3c84063a4ca9254ca0041f0b40"
+    },
+    {
+      "path": "final-r2/tests-wpf/stdout.log",
+      "bytes": 368,
+      "sha256": "99a29730f1cc7cc185570112603096a5163493acdfe2398fdb8799c92fa3943d"
+    },
+    {
+      "path": "final-r2/visual/AUTHORIZED_PAGE.json",
+      "bytes": 2158,
+      "sha256": "16f03e7d8b7a8554427f0644f272075e1261dd44e95f4f83fb8c0de57afb0d6a"
+    },
+    {
+      "path": "final-r2/visual/LIFECYCLE_PERFORMANCE.json",
+      "bytes": 568,
+      "sha256": "e96ca3caf5325b4d5d7db44b9623f9c2524fadfd66c2a7c10e3c76c3a8f5e67c"
+    },
+    {
+      "path": "final-r2/wpf-build.json",
+      "bytes": 657,
+      "sha256": "0afc0cc12c154471fc372be1da3cfed5a70d74c7705e1b196a2a8d4831261cd6"
+    },
+    {
+      "path": "final-r2/wpf-build.log",
+      "bytes": 179541,
+      "sha256": "66d3f072b10c58661c803901142074751bec244d5a5faeb6bd400493092f8831"
+    },
+    {
+      "path": "final-r3/bindings.json",
+      "bytes": 12369,
+      "sha256": "538d52f28ad6a54d63478226084a0260f4077e12dcd2b5529a8447f07df2c982"
+    },
+    {
+      "path": "final-r3/cms/.kitao-export-tasks/f3d3e116d1634dc4a99df1a52088197c/owner.json",
+      "bytes": 385,
+      "sha256": "e2bccd7c58e87fcd4f8d8b5b4bd5cdffe62a1a7cb70a8a849bf94c2386e3ddfa"
+    },
+    {
+      "path": "final-r3/cms/.kitao-export-tasks/f3d3e116d1634dc4a99df1a52088197c/task.json",
+      "bytes": 8262,
+      "sha256": "fe1f18d7ae21bcdcd6e8602068b0c3140444659c93eb1b979ea96a1393a12bc7"
+    },
+    {
+      "path": "final-r3/cms/CMS_CLOSURE.json",
+      "bytes": 2624,
+      "sha256": "90db306112c6dd0d37c7a7111a76a4bb5d35f618e68fe3be15d50d5a35334d70"
+    },
+    {
+      "path": "final-r3/cms/color-21bac67d1f8040c486d5158a7d3a9777.ptstudio.json",
+      "bytes": 16848,
+      "sha256": "4c31e70f97f5057e20961e83d9fbd57f2345d7bba68a57fc6ce726d73007ecec"
+    },
+    {
+      "path": "final-r3/cms/DISPLAY_PATH.json",
+      "bytes": 191,
+      "sha256": "ffdf5baeea205b93127567e396e4b8d5b5cc0af5b278fd0669185c44ee622b86"
+    },
+    {
+      "path": "final-r3/cms/embedded-p3_仿色.tif.kitao-export.json",
+      "bytes": 8262,
+      "sha256": "fe1f18d7ae21bcdcd6e8602068b0c3140444659c93eb1b979ea96a1393a12bc7"
+    },
+    {
+      "path": "final-r3/cms/JPEG_AND_MONITOR_OBSERVATIONS.json",
+      "bytes": 1583,
+      "sha256": "7f6f554b8faa88083df795bf6ade0a706457f56070e4fec40c0d9716cc7c0bc3"
+    },
+    {
+      "path": "final-r3/cms/LCMS_FLOAT_REFERENCE_INPUT.json",
+      "bytes": 256980,
+      "sha256": "7c686671ee5f7bd1276477ab313972187bfc581bb2c95b835b27066e6c446094"
+    },
+    {
+      "path": "final-r3/cms/REAL_DERIVATIVE_CMS.json",
+      "bytes": 346,
+      "sha256": "4ec807c1193809815b3f797e3411ca4829afefd0a5f2d49cad437c3ecad7af3e"
+    },
+    {
+      "path": "final-r3/cms/WIC_REFERENCE_DIAGNOSTIC.json",
+      "bytes": 802,
+      "sha256": "2e97dcbe55bfd7bbdc855be5d13ea979d0502b530dfba471d661702b9909b0f0"
+    },
+    {
+      "path": "final-r3/core-build.json",
+      "bytes": 627,
+      "sha256": "cadbcafc9f26b888f2ab38e9fa7a33f5ab122db903ea547f2ace611003309e87"
+    },
+    {
+      "path": "final-r3/core-build.log",
+      "bytes": 36627,
+      "sha256": "a62ab1393d376a0466fc977d40a1d0e07d9332f263dc49b3db9ac77f5e4e56df"
+    },
+    {
+      "path": "final-r3/process-reopen/process.json",
+      "bytes": 674,
+      "sha256": "d85c985ec17cbde9e8812d47da74fa96282329c098dc5ed9ea761a48981e662c"
+    },
+    {
+      "path": "final-r3/process-reopen/results.trx",
+      "bytes": 2656,
+      "sha256": "59f7da97acb10faf89009e2e8a926a2383dc6f73c1987059e63ba960ef16bdd0"
+    },
+    {
+      "path": "final-r3/process-reopen/stdout.log",
+      "bytes": 375,
+      "sha256": "9fd4869b9549b59297133570841aa050c9d59327bfbe43b0bc0334c5708212d9"
+    },
+    {
+      "path": "final-r3/publish-build.json",
+      "bytes": 764,
+      "sha256": "3d44397d5f4bcbb3dfd6da54e2f2886348cb95f95daac6b823388d8191a7a815"
+    },
+    {
+      "path": "final-r3/publish-build.log",
+      "bytes": 3935,
+      "sha256": "92dd81c36f695ec533e58d5665d629b2dae087871fac7d1ba8891d211f05ca2d"
+    },
+    {
+      "path": "final-r3/samples/blend/Color.ptstudio.json",
+      "bytes": 6285,
+      "sha256": "82d11d9874d9e404d65316aacddbaeded02c89c02f690de5b842158d5a0a21d4"
+    },
+    {
+      "path": "final-r3/samples/blend/Luminosity.ptstudio.json",
+      "bytes": 6285,
+      "sha256": "e7790099265c3182c0ef415d1e06876492727617ac0291de28783c270b60967a"
+    },
+    {
+      "path": "final-r3/samples/blend/Overlay.ptstudio.json",
+      "bytes": 6285,
+      "sha256": "027cda170042d113f9e081c07e762ac7de9b80487eab175ad8167beb202b82f8"
+    },
+    {
+      "path": "final-r3/samples/blend/SAMPLES.json",
+      "bytes": 184300,
+      "sha256": "01000c43135029c30ff2167967d82ddc3d730b79f7b4a64533fccddcbbab7233"
+    },
+    {
+      "path": "final-r3/samples/blend/SoftLight.ptstudio.json",
+      "bytes": 6285,
+      "sha256": "372a527c2cbb5a8964971e3ea420f57ddc969e5bc613161f39b2e64651a72e7c"
+    },
+    {
+      "path": "final-r3/samples/flow/.kitao-export-tasks/57a55e03a1a54ed0897f6cdf7b083e0e/owner.json",
+      "bytes": 399,
+      "sha256": "cb6820859f079d67d8c79a073b15a83d21a64f87a8c5a4bccef284d8c058b3c6"
+    },
+    {
+      "path": "final-r3/samples/flow/.kitao-export-tasks/57a55e03a1a54ed0897f6cdf7b083e0e/task.json",
+      "bytes": 16265,
+      "sha256": "443e3de9e5345bb9b7b475610d2d6d8bcf3b6f4236be18f13df5967701e68956"
+    },
+    {
+      "path": "final-r3/samples/flow/.kitao-export-tasks/9aa7d04919ad4824bb35b44bdd63ff9a/owner.json",
+      "bytes": 399,
+      "sha256": "6d63e59c6add073b35aafa0569b9cb295fc658f35188dd438dbc07f5d2dabfa6"
+    },
+    {
+      "path": "final-r3/samples/flow/.kitao-export-tasks/9aa7d04919ad4824bb35b44bdd63ff9a/task.json",
+      "bytes": 16225,
+      "sha256": "da9c20c2c5037eceef22cfb68d516cb6783cde55ef5d17dbc57ffc9fc5b7673b"
+    },
+    {
+      "path": "final-r3/samples/flow/input_仿色.jpg.kitao-export.json",
+      "bytes": 16265,
+      "sha256": "443e3de9e5345bb9b7b475610d2d6d8bcf3b6f4236be18f13df5967701e68956"
+    },
+    {
+      "path": "final-r3/samples/flow/input_仿色.tif.kitao-export.json",
+      "bytes": 16225,
+      "sha256": "da9c20c2c5037eceef22cfb68d516cb6783cde55ef5d17dbc57ffc9fc5b7673b"
+    },
+    {
+      "path": "final-r3/samples/flow/RESULT.json",
+      "bytes": 561,
+      "sha256": "b9cd7ae7d8461bf2168e6be272e3fc45307b752ca8c2e3993883a4f326188283"
+    },
+    {
+      "path": "final-r3/samples/flow/workflow.ptstudio.json",
+      "bytes": 41778,
+      "sha256": "0094b56b80df8cff7f0a5f094865a76afcde0a2d6cd84112a201582481ac9fee"
+    },
+    {
+      "path": "final-r3/samples/managed/RESULT.json",
+      "bytes": 4176,
+      "sha256": "a8db600bcf805ada94d65323e2adcefa3686dc32fefccc4b7df72ec6f3367b5b"
+    },
+    {
+      "path": "final-r3/samples/natural/RESULT.json",
+      "bytes": 2067,
+      "sha256": "14c596227b9606f42c49e75054d25652698284bc9127e7553a6fbf8dd48755d4"
+    },
+    {
+      "path": "final-r3/samples/PROBE.json",
+      "bytes": 7175,
+      "sha256": "b9be7891481d7eed63fb1316c9c19fa1cd299c1e3c49c75ec7a38fad9cfe3221"
+    },
+    {
+      "path": "final-r3/samples/process-reopen/RESULT.json",
+      "bytes": 302,
+      "sha256": "3264600cf99a6e86497af551f188a439ffea23e14dcfca524fd2a898f4cd4560"
+    },
+    {
+      "path": "final-r3/samples/r3/r3.ptstudio.json",
+      "bytes": 42307,
+      "sha256": "b69853bdb2439742ef5abc94e7e81ab6c2df96acfe70f86850daa3980d6e64c5"
+    },
+    {
+      "path": "final-r3/samples/r3/RESULT.json",
+      "bytes": 307,
+      "sha256": "0f38e937371632f0728e02146003f1047f6784de07afdf164362178619aa4bc0"
+    },
+    {
+      "path": "final-r3/samples/recovery/RESULT.json",
+      "bytes": 237,
+      "sha256": "e6c59edc6727400b1efde4c6a100bc7e070cb405aedb154f4fdf6bfd0f60e6a7"
+    },
+    {
+      "path": "final-r3/samples/service-flow/.kitao-export-tasks/b432da69dfdf4b5caa6aad05ce7c2ca3/owner.json",
+      "bytes": 415,
+      "sha256": "d082ba123ccc61be3922262da1c7ea0a30aa5833766d9ad087ab9f408d6a8079"
+    },
+    {
+      "path": "final-r3/samples/service-flow/.kitao-export-tasks/b432da69dfdf4b5caa6aad05ce7c2ca3/task.json",
+      "bytes": 7504,
+      "sha256": "c48ff9f8946f7b6b2c4c621f1274314192c9d57f9bbf5c78358c5bcc7ca53a17"
+    },
+    {
+      "path": "final-r3/samples/service-flow/input_仿色.tif.kitao-export.json",
+      "bytes": 7504,
+      "sha256": "c48ff9f8946f7b6b2c4c621f1274314192c9d57f9bbf5c78358c5bcc7ca53a17"
+    },
+    {
+      "path": "final-r3/samples/service-flow/published/.kitao-export-tasks/3fa8abf878344ab68c968ee740b32814/owner.json",
+      "bytes": 444,
+      "sha256": "de55a9c21ec198fb5096a90dc5f727f51d4fb9a11686c1478c0f07870a0fe8a3"
+    },
+    {
+      "path": "final-r3/samples/service-flow/published/.kitao-export-tasks/3fa8abf878344ab68c968ee740b32814/task.json",
+      "bytes": 7246,
+      "sha256": "9d5d37ac48fadf5fd723b3c95dfde2f93a87fdc9f9c155ad1f194973f5644e16"
+    },
+    {
+      "path": "final-r3/samples/service-flow/published/input_仿色_social.png.kitao-export.json",
+      "bytes": 7246,
+      "sha256": "9d5d37ac48fadf5fd723b3c95dfde2f93a87fdc9f9c155ad1f194973f5644e16"
+    },
+    {
+      "path": "final-r3/samples/service-flow/republished/.kitao-export-tasks/f295258ac29d47ba9b60f9f3d238e77e/owner.json",
+      "bytes": 455,
+      "sha256": "9b9fd26ed22aaaa9645a483e30cabf8a3d7450d7d1e389c9d64884a69b12c6fa"
+    },
+    {
+      "path": "final-r3/samples/service-flow/republished/.kitao-export-tasks/f295258ac29d47ba9b60f9f3d238e77e/task.json",
+      "bytes": 7228,
+      "sha256": "6a9e6d40b96d74c9ebf22cc5651f0725bcd5d242b2206264393bca5486f2257c"
+    },
+    {
+      "path": "final-r3/samples/service-flow/republished/input_仿色_social_social.jpg.kitao-export.json",
+      "bytes": 7228,
+      "sha256": "6a9e6d40b96d74c9ebf22cc5651f0725bcd5d242b2206264393bca5486f2257c"
+    },
+    {
+      "path": "final-r3/samples/service-flow/RESULT.json",
+      "bytes": 473,
+      "sha256": "3b273d01366949fec6e057b364714a2fdde194a38c75a4e8b2e699f705193647"
+    },
+    {
+      "path": "final-r3/samples/visual/PROVENANCE.json",
+      "bytes": 197,
+      "sha256": "1105f6e0a10068e862261e609de949522447a87c257bb2985a02da0dea82e6ba"
+    },
+    {
+      "path": "final-r3/samples/wide-boundary/RESULT.json",
+      "bytes": 1207,
+      "sha256": "7310fb8e510991faca56f875093e9e734340e41d52811e258da14c75a1c9c5cb"
+    },
+    {
+      "path": "final-r3/samples/wide-boundary/wide.ptstudio.json",
+      "bytes": 16216,
+      "sha256": "458b7b5db72b3065f4c78ee61045886ad8cf07ed67463c7a7bd1e903853f5a70"
+    },
+    {
+      "path": "final-r3/tests-core/process.json",
+      "bytes": 1269,
+      "sha256": "2289a653346b85bf2ad8d1effa0024812caee6fe1efe6901c1e6bef79c687af1"
+    },
+    {
+      "path": "final-r3/tests-core/results.trx",
+      "bytes": 94930,
+      "sha256": "983e463a078a3e2da9dd850be4807e8abc2755e8e5118e7bd1978c8eb0a0da5b"
+    },
+    {
+      "path": "final-r3/tests-core/stdout.log",
+      "bytes": 368,
+      "sha256": "36ca2d72d2ec3c489ad71878363eb2ae2b09b2378428e6971a19426c8c732ba7"
+    },
+    {
+      "path": "final-r3/tests-wpf/process.json",
+      "bytes": 1140,
+      "sha256": "727712a0d8150bb8cdd7cc7ab1fb05af854e94f2efa0ab1db750c935c6ea5c86"
+    },
+    {
+      "path": "final-r3/tests-wpf/results.trx",
+      "bytes": 76185,
+      "sha256": "5b6543eedcaa6af092626d72bd57301b9e24fdf31eb5706746c45dfd208d17f5"
+    },
+    {
+      "path": "final-r3/tests-wpf/stdout.log",
+      "bytes": 368,
+      "sha256": "41031f7a4ede51cd6679e98b98eacbf2e70a85dfe3fc6038acf75cbabdb69fc1"
+    },
+    {
+      "path": "final-r3/visual/AUTHORIZED_PAGE.json",
+      "bytes": 2159,
+      "sha256": "bacda45d220fa8ce0635a9db1a23f98f27522ae1857333640e1ac6ddeecbd037"
+    },
+    {
+      "path": "final-r3/visual/LIFECYCLE_PERFORMANCE.json",
+      "bytes": 576,
+      "sha256": "5258c4b2bd88aa806946dc4a6cfa20284dbf74fd07720bb4adb3599acba0e4c7"
+    },
+    {
+      "path": "final-r3/wpf-build.json",
+      "bytes": 655,
+      "sha256": "86e1bddf2e973580106c8b80d6a1fb24afab50b5cf05238ea73e82955b846694"
+    },
+    {
+      "path": "final-r3/wpf-build.log",
+      "bytes": 179541,
+      "sha256": "5c588f7e89db6612e04bc1a101bc9d8ab64db8cbf3606b7125055f5ec452f21c"
+    },
+    {
+      "path": "final_run.py",
+      "bytes": 5066,
+      "sha256": "257712c74c6efc748c6a00033b12673a78f2746d72cb7b735097228d85e966a5"
+    },
+    {
+      "path": "final_run_r2.py",
+      "bytes": 5069,
+      "sha256": "eb952464c86b8d4c2e7d92775d1b69a5f8afea0411ff83720a14a9484e881d14"
+    },
+    {
+      "path": "final_run_r3.py",
+      "bytes": 5069,
+      "sha256": "12707e427fe09fac83ede9ade9212ca4098e0ca80d1b9322de8580ac0ee6bc14"
+    },
+    {
+      "path": "final_safety.py",
+      "bytes": 3102,
+      "sha256": "f5f8d0d8103bb90a926dced81bea5fcf6672d5f856c291c2d850602b581af4b0"
+    },
+    {
+      "path": "final_ui_outlets.py",
+      "bytes": 4100,
+      "sha256": "be4dc4613f220131480654056e6590ab971da3e3560208ce76fd4c183aba9af6"
+    },
+    {
+      "path": "first-flow/flow/.kitao-export-tasks/1499e6c8016c4d648742ea511114f07a/owner.json",
+      "bytes": 385,
+      "sha256": "ffb8285d4eeab7e04eaaf105b7f301e47442d2b38de9730ef95fc03bc54708fb"
+    },
+    {
+      "path": "first-flow/flow/.kitao-export-tasks/1499e6c8016c4d648742ea511114f07a/task.json",
+      "bytes": 16169,
+      "sha256": "7783fd39e32bf1f99de07063d0918063b20dcbebe278faa362edd819fcee909c"
+    },
+    {
+      "path": "first-flow/flow/input_仿色.tif.kitao-export.json",
+      "bytes": 16169,
+      "sha256": "7783fd39e32bf1f99de07063d0918063b20dcbebe278faa362edd819fcee909c"
+    },
+    {
+      "path": "first-flow/flow/RESULT.json",
+      "bytes": 349,
+      "sha256": "5a7eb7a3ca71bcfa6032cb94f17c8f6190e0cc6e9660799d692810817b04068d"
+    },
+    {
+      "path": "first-flow/flow/workflow.ptstudio.json",
+      "bytes": 41771,
+      "sha256": "bee92f251a7b75abd9daed3def31d49c13d66f2d846347e16524e810397ece1a"
+    },
+    {
+      "path": "first-flow/managed/RESULT.json",
+      "bytes": 4209,
+      "sha256": "9fb7b7a6f9b2f9f8b5c0bccb51c31d315209a03ee08ed68dea572b39cb94d8cd"
+    },
+    {
+      "path": "first-flow/PROBE.json",
+      "bytes": 7175,
+      "sha256": "b9be7891481d7eed63fb1316c9c19fa1cd299c1e3c49c75ec7a38fad9cfe3221"
+    },
+    {
+      "path": "first-flow-tests/results.trx",
+      "bytes": 5370,
+      "sha256": "619f0f7b16a886607afa497a984a40475fcc58284e2de9e826f9d45348c3970b"
+    },
+    {
+      "path": "first-flow.log",
+      "bytes": 365,
+      "sha256": "3bfd7354bb1b030633ba571a3268394799f946a091ed25b65271a87bb441cc50"
+    },
+    {
+      "path": "fix_all_outlets.py",
+      "bytes": 4931,
+      "sha256": "ce5d213b342cd2286d86074f932fcfbccf7b27c8a93cbb733e9c538472fc0b5a"
+    },
+    {
+      "path": "fix_blend_fixtures.py",
+      "bytes": 1251,
+      "sha256": "00dc963b0fa386a8e9a53286d021e2be1aadfb2406cc042d8b301c74c756d77f"
+    },
+    {
+      "path": "fix_command_measurement.py",
+      "bytes": 1994,
+      "sha256": "6a185b90d9b34f5fe46e75d7b64eafb7c4fc5289521df651b2e3fbc5cf570a41"
+    },
+    {
+      "path": "fix_jpeg.py",
+      "bytes": 4093,
+      "sha256": "1cbdd77b93196066088930a7036939388cc8fa5237e6f909494cff8b7fa74b53"
+    },
+    {
+      "path": "harden_contract.py",
+      "bytes": 3514,
+      "sha256": "97a5b6195d9d01ff81a6282b5d6997304d6dfbb0ccfa94c79200a795fc8d3ddf"
+    },
+    {
+      "path": "implement_working_v2.py",
+      "bytes": 12568,
+      "sha256": "140a10a8ca9879499d0289deb15d6de388d11443ca98c5c876520f84ee6af6e4"
+    },
+    {
+      "path": "jpeg-after/PROBE.json",
+      "bytes": 7175,
+      "sha256": "b9be7891481d7eed63fb1316c9c19fa1cd299c1e3c49c75ec7a38fad9cfe3221"
+    },
+    {
+      "path": "jpeg-after-tests/results.trx",
+      "bytes": 2551,
+      "sha256": "939402c39197f55585e6d9885477417caba55cc3250dbe1b47b91d650cd37d02"
+    },
+    {
+      "path": "jpeg-after.log",
+      "bytes": 368,
+      "sha256": "4b2c48299f8ca42f721f8e9c81c8371ae4234925bca5bdc929c63035f3fe22b5"
+    },
+    {
+      "path": "jpeg-before/INDEPENDENT_JPEG.json",
+      "bytes": 10751,
+      "sha256": "8123dc692ce2a24bcea97ec5eea52108a2dc1cd27e43a5bc189d30e3c269ba62"
+    },
+    {
+      "path": "jpeg-before/PROBE.json",
+      "bytes": 7245,
+      "sha256": "223ba6c6638c0b9874a96d8a26b1c073b67ffe45ae6eee5f1cafb53c8d8ac7d6"
+    },
+    {
+      "path": "jpeg-independent-console.json",
+      "bytes": 1664,
+      "sha256": "28b984dd63daf8e676cddac285fef82106c7d566c4eb07c030ce3ede36db43b8"
+    },
+    {
+      "path": "JPEG_INDEPENDENT_FINAL.json",
+      "bytes": 13166,
+      "sha256": "c6a638d4bf9bc206dedf0fc83307be1cac11548f730936c9ad94b3733c63bcf5"
+    },
+    {
+      "path": "jpeg_independent_final.py",
+      "bytes": 2492,
+      "sha256": "263b6986764b6d9d5fee2f8350b3cde1d88e0789e5ef97c37a08b7fa8d0d7ae0"
+    },
+    {
+      "path": "jpeg_independent_final_r2.py",
+      "bytes": 2495,
+      "sha256": "b6eaecf277fb0891d3cc840f4dba2825ea57cb07f6bcdda4c4b05baf79a8632a"
+    },
+    {
+      "path": "jpeg_independent_final_r3.py",
+      "bytes": 2550,
+      "sha256": "240a2159220c1e51958e5089d0bbc063a42f5eb37430847adbcf75c383304007"
+    },
+    {
+      "path": "jpeg_independent_sealed.py",
+      "bytes": 2554,
+      "sha256": "ee2b1c8163fcb6478f1c7725033690e03167ac068e1e18ae0e4166d8fc1fdb47"
+    },
+    {
+      "path": "jpeg_reference.py",
+      "bytes": 1110,
+      "sha256": "79d39476af1bc5c1ec9b5fcf335c4b79053724e044c906c89f57312e87054694"
+    },
+    {
+      "path": "last-dev/blend/Color.ptstudio.json",
+      "bytes": 6276,
+      "sha256": "a1e958c9f4a1c809f29c86820781af3b1fa60291ac8b81029515a2465a7f7117"
+    },
+    {
+      "path": "last-dev/blend/Luminosity.ptstudio.json",
+      "bytes": 6276,
+      "sha256": "1914bc2b4892b493eac5a37941d3e11b0c91971ffa5999226b4186b9bbc67f4f"
+    },
+    {
+      "path": "last-dev/blend/Overlay.ptstudio.json",
+      "bytes": 6276,
+      "sha256": "59303b90b24ddb6f79ec86f6b5ac4442c57e705c9a0965afdcd4cf958f1cc5cc"
+    },
+    {
+      "path": "last-dev/blend/SAMPLES.json",
+      "bytes": 184300,
+      "sha256": "01000c43135029c30ff2167967d82ddc3d730b79f7b4a64533fccddcbbab7233"
+    },
+    {
+      "path": "last-dev/blend/SoftLight.ptstudio.json",
+      "bytes": 6276,
+      "sha256": "85ad80078d6766d5f9db8bc5ff5d18ed9300df669de02f64a68b9bbabdcb9334"
+    },
+    {
+      "path": "last-dev/flow/.kitao-export-tasks/dc228912403d4660bd8a209e26f7c2ec/owner.json",
+      "bytes": 381,
+      "sha256": "20954a153cc1f4ad4f14a88aa7d7e49e6926e9ed999299f74d19f98d72d5fc8b"
+    },
+    {
+      "path": "last-dev/flow/.kitao-export-tasks/dc228912403d4660bd8a209e26f7c2ec/task.json",
+      "bytes": 16207,
+      "sha256": "b0259404af9e5430e4b64bd0a90067562365179c1a37adaca525e847259c8d2b"
+    },
+    {
+      "path": "last-dev/flow/input_仿色.tif.kitao-export.json",
+      "bytes": 16207,
+      "sha256": "b0259404af9e5430e4b64bd0a90067562365179c1a37adaca525e847259c8d2b"
+    },
+    {
+      "path": "last-dev/flow/RESULT.json",
+      "bytes": 345,
+      "sha256": "a9b63ae94e8ad36b26fb11e9ee9457a8663f8e4e332dcb72b928cb0a584ccdc2"
+    },
+    {
+      "path": "last-dev/flow/workflow.ptstudio.json",
+      "bytes": 41769,
+      "sha256": "156e5a1a165d0694ba5a79ec26f2fead3185ec099b92edcff7c3da4e13b31d3d"
+    },
+    {
+      "path": "last-dev/managed/RESULT.json",
+      "bytes": 4171,
+      "sha256": "d4c70c6d3a4191c5a6b67e00b33cec34b0d1fe797ac03879b760b0511188610d"
+    },
+    {
+      "path": "last-dev/natural/RESULT.json",
+      "bytes": 2076,
+      "sha256": "6005ea17cfca06291a019d262d708d958fbef682ac07a3a25adc32fdd7ed1f34"
+    },
+    {
+      "path": "last-dev/PROBE.json",
+      "bytes": 7175,
+      "sha256": "b9be7891481d7eed63fb1316c9c19fa1cd299c1e3c49c75ec7a38fad9cfe3221"
+    },
+    {
+      "path": "last-dev/r3/r3.ptstudio.json",
+      "bytes": 42299,
+      "sha256": "ef7d5d569722cb027e20e9e74c5be7a9de77d41209d51be4d3cc02d361232e4f"
+    },
+    {
+      "path": "last-dev/r3/RESULT.json",
+      "bytes": 307,
+      "sha256": "d737836e5b7de884d3061bcd9a5578d4d326f858bd7d69305a921ad0d92ededf"
+    },
+    {
+      "path": "last-dev/recovery/RESULT.json",
+      "bytes": 237,
+      "sha256": "e6c59edc6727400b1efde4c6a100bc7e070cb405aedb154f4fdf6bfd0f60e6a7"
+    },
+    {
+      "path": "last-dev/service-flow/.kitao-export-tasks/92ad2147520348fa9004b9e1f16c1437/owner.json",
+      "bytes": 397,
+      "sha256": "032b9f03e68f35ff800de6e4defa1f0854731a50db54f793518bfff2797e4436"
+    },
+    {
+      "path": "last-dev/service-flow/.kitao-export-tasks/92ad2147520348fa9004b9e1f16c1437/task.json",
+      "bytes": 7499,
+      "sha256": "63e9cfa8fb62aa7a1b7a1f0c6648ebae8d78d56ff5e72ceebb2a8fd86ddcd262"
+    },
+    {
+      "path": "last-dev/service-flow/input_仿色.tif.kitao-export.json",
+      "bytes": 7499,
+      "sha256": "63e9cfa8fb62aa7a1b7a1f0c6648ebae8d78d56ff5e72ceebb2a8fd86ddcd262"
+    },
+    {
+      "path": "last-dev/service-flow/published/.kitao-export-tasks/5a08a623cf714d2ab52366490d007925/owner.json",
+      "bytes": 426,
+      "sha256": "617610f17b865f70149c66576844e540c721634bf7974d9bdfc4faefd29f72d9"
+    },
+    {
+      "path": "last-dev/service-flow/published/.kitao-export-tasks/5a08a623cf714d2ab52366490d007925/task.json",
+      "bytes": 7228,
+      "sha256": "7ff9c1978acccec0cf7a259a9193e0d34d95ccd69ca82fd6e83664e31d5505ca"
+    },
+    {
+      "path": "last-dev/service-flow/published/input_仿色_social.png.kitao-export.json",
+      "bytes": 7228,
+      "sha256": "7ff9c1978acccec0cf7a259a9193e0d34d95ccd69ca82fd6e83664e31d5505ca"
+    },
+    {
+      "path": "last-dev/service-flow/republished/.kitao-export-tasks/2115a14f993847e7bd4001eb130faa21/owner.json",
+      "bytes": 437,
+      "sha256": "92555e34fb48fe115356c801c84c67f213544838fedb2709f8385e08c7d9daad"
+    },
+    {
+      "path": "last-dev/service-flow/republished/.kitao-export-tasks/2115a14f993847e7bd4001eb130faa21/task.json",
+      "bytes": 7212,
+      "sha256": "22990a644783bfeb46d8ee969bcba4cfdf03b93f98401e40333a47b5929ff61a"
+    },
+    {
+      "path": "last-dev/service-flow/republished/input_仿色_social_social.jpg.kitao-export.json",
+      "bytes": 7212,
+      "sha256": "22990a644783bfeb46d8ee969bcba4cfdf03b93f98401e40333a47b5929ff61a"
+    },
+    {
+      "path": "last-dev/service-flow/RESULT.json",
+      "bytes": 443,
+      "sha256": "17f5259bb462f7f1e566e11dcd940028c144f021651621335ae28335964163c8"
+    },
+    {
+      "path": "last-dev/visual/PROVENANCE.json",
+      "bytes": 197,
+      "sha256": "1105f6e0a10068e862261e609de949522447a87c257bb2985a02da0dea82e6ba"
+    },
+    {
+      "path": "last-dev/wide-boundary/RESULT.json",
+      "bytes": 1207,
+      "sha256": "7310fb8e510991faca56f875093e9e734340e41d52811e258da14c75a1c9c5cb"
+    },
+    {
+      "path": "last-dev/wide-boundary/wide.ptstudio.json",
+      "bytes": 16207,
+      "sha256": "c21eccaccffd6ea4575b5b8111b9618d8de9142eb752f27782047c109e36252f"
+    },
+    {
+      "path": "last-dev-tests/results.trx",
+      "bytes": 18201,
+      "sha256": "8c84b5467d743c08c3d1534d7209a4694427ecf616c3e026caa9d54f1bf039bb"
+    },
+    {
+      "path": "last-dev-visual/AUTHORIZED_PAGE.json",
+      "bytes": 2159,
+      "sha256": "067fd92061ace64d3b076f7a8f010736b0f1339943c4d46f0e7fb35a5caf6ced"
+    },
+    {
+      "path": "last-dev.log",
+      "bytes": 364,
+      "sha256": "75a5650ffe54d1d9290b553c6ca3361b37387fdf3cb04301bad6a27c006a4971"
+    },
+    {
+      "path": "linear_reference.py",
+      "bytes": 2257,
+      "sha256": "b98742e21e3a87bb96102b341b1ea22de119505238e4a457922aaf88d19ffd34"
+    },
+    {
+      "path": "LINEAR_WORKING_WIC.json",
+      "bytes": 1255,
+      "sha256": "d53701ce963b9546b12c168773db633a5259772392e97f6d23ed86781434100f"
+    },
+    {
+      "path": "numeric-final/bindings.json",
+      "bytes": 3102,
+      "sha256": "a0741fe168d8a84125babf89a4b3a2765213daee49a3298ba404a56ebdea1506"
+    },
+    {
+      "path": "numeric-final/process.json",
+      "bytes": 713,
+      "sha256": "cd84b7e22cbd94bbc1463af5106e245e7f39ddd63916d0304e66751d9f609ab0"
+    },
+    {
+      "path": "numeric-final/results.trx",
+      "bytes": 2704,
+      "sha256": "cab89c1d5d8aa2863b58f0b77aa00afaf8c656724c0a7cef307e49d785bcce5e"
+    },
+    {
+      "path": "numeric-final/samples/publish-numeric/RESULT.json",
+      "bytes": 310,
+      "sha256": "c795c553c82dcf278106239cdfbcf3c0df2d0f81f99c45457bf0a17de4ece5c5"
+    },
+    {
+      "path": "numeric-final/samples/publish-numeric/source.tif.kitao-export.json",
+      "bytes": 6549,
+      "sha256": "6c13124b3ccc4cc061339008a60542ba0d13d9f2914cd6917eabdabe39e96f5f"
+    },
+    {
+      "path": "numeric-final/stdout.log",
+      "bytes": 365,
+      "sha256": "9cf147452954faa0d3745b7bc4cd4424eb738f18d191369cc2f6ddcc8a38785a"
+    },
+    {
+      "path": "orient_alpha_tests.py",
+      "bytes": 5429,
+      "sha256": "fcdfdee339a10e97d14fe09a265b0f1327bccb16afc54066e970028c591130ba"
+    },
+    {
+      "path": "pdfium_nonsep.py",
+      "bytes": 2231,
+      "sha256": "6437706717f950aedb836ac57dcf2e052470ef652f78aa118b22cf76674d1cc3"
+    },
+    {
+      "path": "pdfium_nonsep_r2.py",
+      "bytes": 2234,
+      "sha256": "e1f28c720f7f55c8a933ffec78f00c3ed77a8e4feb1c077e3908e7f0e693d673"
+    },
+    {
+      "path": "pdfium_nonsep_r3.py",
+      "bytes": 2234,
+      "sha256": "37f061e23d962b79c7e2bbcad4083f3ccc5dc87db37102eff294ecf41028a66a"
+    },
+    {
+      "path": "pdfium_nonsep_sealed.py",
+      "bytes": 2238,
+      "sha256": "298ab05f8b0bbb3df47da6c8d72d84775f22d558b15b753308feefeeecb9dfda"
+    },
+    {
+      "path": "picker-verify/visual/PROVENANCE.json",
+      "bytes": 197,
+      "sha256": "1105f6e0a10068e862261e609de949522447a87c257bb2985a02da0dea82e6ba"
+    },
+    {
+      "path": "picker-verify-tests/results.trx",
+      "bytes": 9852,
+      "sha256": "76b5346ee3d908f4093a54044ca68d4b9d26ed68ec996813d0cb5b00dc552d54"
+    },
+    {
+      "path": "picker-verify.log",
+      "bytes": 368,
+      "sha256": "3c22e1804bb0c2cef431730070f540c86fdf00db98697f5d25b91ca2ce7c300d"
+    },
+    {
+      "path": "prepare_wide_once.py",
+      "bytes": 3374,
+      "sha256": "a24ae662f6416ce80eeb112183b2d1eca50cbfaacdcbd571d2b00f81e067d115"
+    },
+    {
+      "path": "prepared-sealed-synthetic/film-current-edits/workflow.ptstudio.json",
+      "bytes": 41619,
+      "sha256": "aac1a39109b4efd55540b707df6ace3e560a218684872f74e28732a9e4d951fa"
+    },
+    {
+      "path": "prepared-sealed-synthetic/wide-linear-v2/wide.ptstudio.json",
+      "bytes": 16146,
+      "sha256": "46f480ec0045c9db97f8d68d178f12f427dec2ebebe8ad155f5feb8280170152"
+    },
+    {
+      "path": "prepared-synthetic-samples/film-current-edits/workflow.ptstudio.json",
+      "bytes": 41620,
+      "sha256": "d3d68c7892608f29fe4b6d7d9571b6e9929d585af45eb0a61b9934cec18f5793"
+    },
+    {
+      "path": "prepared-synthetic-samples/wide-linear-v2/wide.ptstudio.json",
+      "bytes": 16148,
+      "sha256": "7a44be47747fe0853f182e3ba0c28f5cf021b786870c39ec3db613622a84eec1"
+    },
+    {
+      "path": "probe-tests/probe.trx",
+      "bytes": 2551,
+      "sha256": "f24a13a0fbc6572df27f7180afcc8ba43b603eab22e313a1a231cb86bdd52811"
+    },
+    {
+      "path": "probe.log",
+      "bytes": 361,
+      "sha256": "db4424ddc6882d168a3bcd90ba1af4527efada7c228ac5705a036951dab2cd38"
+    },
+    {
+      "path": "publish-numeric/publish-numeric/RESULT.json",
+      "bytes": 310,
+      "sha256": "c795c553c82dcf278106239cdfbcf3c0df2d0f81f99c45457bf0a17de4ece5c5"
+    },
+    {
+      "path": "publish-numeric/publish-numeric/source.tif.kitao-export.json",
+      "bytes": 6542,
+      "sha256": "d50b0ad829830672b4cd8d8eccb0008dff5579269bf001289e4c0b199493273f"
+    },
+    {
+      "path": "publish-numeric-tests/results.trx",
+      "bytes": 2704,
+      "sha256": "58b2baee7bfb6f811de067fa17fc5784eb08e11fa40386a9248bdcea2eb49eb4"
+    },
+    {
+      "path": "publish-numeric.log",
+      "bytes": 373,
+      "sha256": "9ab9ee8d11386f75340c9d946cd280855b0a49b558774f6355ee4f3211c43fa1"
+    },
+    {
+      "path": "publishing_ui.py",
+      "bytes": 3554,
+      "sha256": "4de0858cc09c0f8e4365422e0c4c58784278dc3ee07d6c4b251b3d09e992fdc0"
+    },
+    {
+      "path": "r3-verify/blend/Color.ptstudio.json",
+      "bytes": 6277,
+      "sha256": "6d40e23fe8c2f464cd568ac082f5fbdef09eb2a81115ba274e7fca67f27b3b78"
+    },
+    {
+      "path": "r3-verify/blend/Luminosity.ptstudio.json",
+      "bytes": 6276,
+      "sha256": "140a361fd8d238cf60dfe1b59f61cbb1a51df4bec5942c1f25bf6f8edc3038d0"
+    },
+    {
+      "path": "r3-verify/blend/Overlay.ptstudio.json",
+      "bytes": 6277,
+      "sha256": "b4fdfa9f731a38e57feb9ad53386b88302447005cb889c5bca8af27d8fdadb33"
+    },
+    {
+      "path": "r3-verify/blend/SAMPLES.json",
+      "bytes": 184300,
+      "sha256": "01000c43135029c30ff2167967d82ddc3d730b79f7b4a64533fccddcbbab7233"
+    },
+    {
+      "path": "r3-verify/blend/SoftLight.ptstudio.json",
+      "bytes": 6276,
+      "sha256": "42fde06068b11fb6820add908fd1d5859dc5ea1b2e370dd9ddc9f69a59b9fc89"
+    },
+    {
+      "path": "r3-verify/flow/.kitao-export-tasks/3209559e082c4226ab9999c49acda169/owner.json",
+      "bytes": 383,
+      "sha256": "9111b20af22f5201898490de6c52a6fa48ffd729f929a8496ff879c0f2ffe7d8"
+    },
+    {
+      "path": "r3-verify/flow/.kitao-export-tasks/3209559e082c4226ab9999c49acda169/task.json",
+      "bytes": 16209,
+      "sha256": "5a5a9f31788d30021a784e323c06f0ce601686b6be95975c27ef96beb6f4d526"
+    },
+    {
+      "path": "r3-verify/flow/input_仿色.tif.kitao-export.json",
+      "bytes": 16209,
+      "sha256": "5a5a9f31788d30021a784e323c06f0ce601686b6be95975c27ef96beb6f4d526"
+    },
+    {
+      "path": "r3-verify/flow/RESULT.json",
+      "bytes": 347,
+      "sha256": "eebf86e5c7f711578c46ba47d070b804b37da1d472b9ad42c063fe527f38a41f"
+    },
+    {
+      "path": "r3-verify/flow/workflow.ptstudio.json",
+      "bytes": 41770,
+      "sha256": "bdb8758ec91826a44f66eb12637701c187982194f4c4a0b665ebedc5d2a96c74"
+    },
+    {
+      "path": "r3-verify/managed/RESULT.json",
+      "bytes": 4209,
+      "sha256": "c489051dad3c3bee903bf122b92c4bc84b31ed6a985eba98975f1b9a2d4b55c6"
+    },
+    {
+      "path": "r3-verify/natural/RESULT.json",
+      "bytes": 2056,
+      "sha256": "8a6a3f6bb546d1dc460489c5a7965192926cb0d4af71d51295c3c7f5e49c1c98"
+    },
+    {
+      "path": "r3-verify/PROBE.json",
+      "bytes": 7175,
+      "sha256": "b9be7891481d7eed63fb1316c9c19fa1cd299c1e3c49c75ec7a38fad9cfe3221"
+    },
+    {
+      "path": "r3-verify/r3/r3.ptstudio.json",
+      "bytes": 42300,
+      "sha256": "6270b1c7e304d5cfec73dd569689101d501cc829f399bdc8955b18894dce8e2e"
+    },
+    {
+      "path": "r3-verify/r3/RESULT.json",
+      "bytes": 307,
+      "sha256": "55e5646dedf80d7d56706970b914466e7aa286a00bd62281c470e39b78dd37d8"
+    },
+    {
+      "path": "r3-verify/recovery/RESULT.json",
+      "bytes": 237,
+      "sha256": "e6c59edc6727400b1efde4c6a100bc7e070cb405aedb154f4fdf6bfd0f60e6a7"
+    },
+    {
+      "path": "r3-verify/service-flow/.kitao-export-tasks/a523932aeaeb4af0986b7df8795bcd0a/owner.json",
+      "bytes": 399,
+      "sha256": "d5d5703f4d06406a4509ea9cea431435346007138431392fd6c0793eb890d9c9"
+    },
+    {
+      "path": "r3-verify/service-flow/.kitao-export-tasks/a523932aeaeb4af0986b7df8795bcd0a/task.json",
+      "bytes": 7500,
+      "sha256": "62f78d5dc7972b06d1d192e3f36b89136f5759fe6ab0779b49cf656be231a81d"
+    },
+    {
+      "path": "r3-verify/service-flow/input_仿色.tif.kitao-export.json",
+      "bytes": 7500,
+      "sha256": "62f78d5dc7972b06d1d192e3f36b89136f5759fe6ab0779b49cf656be231a81d"
+    },
+    {
+      "path": "r3-verify/service-flow/published/.kitao-export-tasks/e4b68a281e184682a5355e392710e0a9/owner.json",
+      "bytes": 428,
+      "sha256": "85808d456c6616d257b67007f3f290d678bb47735705560f513eb27a0be35fa7"
+    },
+    {
+      "path": "r3-verify/service-flow/published/.kitao-export-tasks/e4b68a281e184682a5355e392710e0a9/task.json",
+      "bytes": 7229,
+      "sha256": "6489efc42b67b403a9b8e2007c83649685a5c9ffb80e4fccbc0fa525b047e4de"
+    },
+    {
+      "path": "r3-verify/service-flow/published/input_仿色_social.png.kitao-export.json",
+      "bytes": 7229,
+      "sha256": "6489efc42b67b403a9b8e2007c83649685a5c9ffb80e4fccbc0fa525b047e4de"
+    },
+    {
+      "path": "r3-verify/service-flow/republished/.kitao-export-tasks/2ef7e1c88e794224bec3fc3f54328495/owner.json",
+      "bytes": 439,
+      "sha256": "bf3c5d6070084d41dec7070664c3b0190d6f8f2950cb94642f0fee94fb9f34cf"
+    },
+    {
+      "path": "r3-verify/service-flow/republished/.kitao-export-tasks/2ef7e1c88e794224bec3fc3f54328495/task.json",
+      "bytes": 7213,
+      "sha256": "4c61ab574102e0a22ba295f416fc3c6a08e7ef141e9390c14b0935da10787e9e"
+    },
+    {
+      "path": "r3-verify/service-flow/republished/input_仿色_social_social.jpg.kitao-export.json",
+      "bytes": 7213,
+      "sha256": "4c61ab574102e0a22ba295f416fc3c6a08e7ef141e9390c14b0935da10787e9e"
+    },
+    {
+      "path": "r3-verify/service-flow/RESULT.json",
+      "bytes": 446,
+      "sha256": "dcae232b37e5ab306ffe38ff444237a9bcf736d7c24edc73ac44d8e5428b0d1f"
+    },
+    {
+      "path": "r3-verify/wide-boundary/RESULT.json",
+      "bytes": 1207,
+      "sha256": "7310fb8e510991faca56f875093e9e734340e41d52811e258da14c75a1c9c5cb"
+    },
+    {
+      "path": "r3-verify/wide-boundary/wide.ptstudio.json",
+      "bytes": 16208,
+      "sha256": "5e2d6ac75c5d5882bff4d81a5e5fb66d7250ade7f2a4cdf41289e5eb8a5be5ba"
+    },
+    {
+      "path": "r3-verify-tests/results.trx",
+      "bytes": 15328,
+      "sha256": "c5c093d18dca001e56bfad1f1dec5105c777e9b712f0db407050e5a6acf82e12"
+    },
+    {
+      "path": "r3-verify.log",
+      "bytes": 364,
+      "sha256": "8407146ecd4f1bf7aa9d6cf99229fa34468eead6b96a704f293fe2f7fcfdebff"
+    },
+    {
+      "path": "read_reference.py",
+      "bytes": 738,
+      "sha256": "4e11863fa1d6f03c0eddd6773bbb0b6386b929a5cfa0ac68073c98c41a1b46c4"
+    },
+    {
+      "path": "reference-manifest.json",
+      "bytes": 447,
+      "sha256": "91df88c8cd3a5ccbf5fe4376a5715e37afd1ed1a1c6f5552262a65ff6f83a245"
+    },
+    {
+      "path": "run_dev_regression.py",
+      "bytes": 1898,
+      "sha256": "465a4cc279aa9f5870b8ebb37546b99ab42d240367c964f20150c62e054d8471"
+    },
+    {
+      "path": "seal_evidence.py",
+      "bytes": 12356,
+      "sha256": "517f070b26e21002b51ba6a6839cfb884ead7aa93c7e6c6225c6c55dba5b11f6"
+    },
+    {
+      "path": "sealed-final/bindings.json",
+      "bytes": 12485,
+      "sha256": "c7ebd2607d3c2b906ce22662ee059c635ba02e5a844f3eaefc96cf78f323608f"
+    },
+    {
+      "path": "sealed-final/cms/.kitao-export-tasks/3d14a50f17ee4fc98f3b8c600babfc1e/owner.json",
+      "bytes": 393,
+      "sha256": "9d5fea41c99cd195004382944e000b76ed275420bce77acee2d1aecc7bbffeee"
+    },
+    {
+      "path": "sealed-final/cms/.kitao-export-tasks/3d14a50f17ee4fc98f3b8c600babfc1e/task.json",
+      "bytes": 8271,
+      "sha256": "67399c0a2b453d02c73365910bcd9e3383c0839d10b01be8639bf086449b8eae"
+    },
+    {
+      "path": "sealed-final/cms/CMS_CLOSURE.json",
+      "bytes": 2660,
+      "sha256": "6520f005fb8c0ecda52e6a4747ed8794c09682bd9717fce2e957389ee5d39e27"
+    },
+    {
+      "path": "sealed-final/cms/color-66085584cb1f4d77b3386d5b5b64ce18.ptstudio.json",
+      "bytes": 16852,
+      "sha256": "6b60a241fc9134a070e643bf43e7b70432ecbd861471b068fb148ed371b8ca1a"
+    },
+    {
+      "path": "sealed-final/cms/DISPLAY_PATH.json",
+      "bytes": 191,
+      "sha256": "ffdf5baeea205b93127567e396e4b8d5b5cc0af5b278fd0669185c44ee622b86"
+    },
+    {
+      "path": "sealed-final/cms/embedded-p3_仿色.tif.kitao-export.json",
+      "bytes": 8271,
+      "sha256": "67399c0a2b453d02c73365910bcd9e3383c0839d10b01be8639bf086449b8eae"
+    },
+    {
+      "path": "sealed-final/cms/JPEG_AND_MONITOR_OBSERVATIONS.json",
+      "bytes": 1583,
+      "sha256": "7f6f554b8faa88083df795bf6ade0a706457f56070e4fec40c0d9716cc7c0bc3"
+    },
+    {
+      "path": "sealed-final/cms/LCMS_FLOAT_REFERENCE_INPUT.json",
+      "bytes": 256980,
+      "sha256": "7c686671ee5f7bd1276477ab313972187bfc581bb2c95b835b27066e6c446094"
+    },
+    {
+      "path": "sealed-final/cms/REAL_DERIVATIVE_CMS.json",
+      "bytes": 346,
+      "sha256": "4ec807c1193809815b3f797e3411ca4829afefd0a5f2d49cad437c3ecad7af3e"
+    },
+    {
+      "path": "sealed-final/cms/WIC_REFERENCE_DIAGNOSTIC.json",
+      "bytes": 802,
+      "sha256": "2e97dcbe55bfd7bbdc855be5d13ea979d0502b530dfba471d661702b9909b0f0"
+    },
+    {
+      "path": "sealed-final/core-build.json",
+      "bytes": 625,
+      "sha256": "843115de00637358c74474e0bfe284de5e9a825ab5ec7794cedfeb598ec57612"
+    },
+    {
+      "path": "sealed-final/core-build.log",
+      "bytes": 36627,
+      "sha256": "00dee484557f86ec5ed7b9f9212a34469669cbe61787d081b5eab3560d2e392a"
+    },
+    {
+      "path": "sealed-final/process-reopen/process.json",
+      "bytes": 676,
+      "sha256": "e10bbc5b1dce57e4aba9529236db368fa3da09dbdc6af0a8b7c4d6e5181a0db3"
+    },
+    {
+      "path": "sealed-final/process-reopen/results.trx",
+      "bytes": 2656,
+      "sha256": "051d4422d218816bf0c68199e6acf7788f1a70e1f17df4d1e8ea49e6b56011ce"
+    },
+    {
+      "path": "sealed-final/process-reopen/stdout.log",
+      "bytes": 379,
+      "sha256": "c56c6f159ff140729e5013efe4b9a339bdcc3e6b908b766e3a0a179e3917f81c"
+    },
+    {
+      "path": "sealed-final/publish-build.json",
+      "bytes": 768,
+      "sha256": "5d338605e77b07a25b475dcdb6ddb4198e5d5b12ee50fbad09691ddcfd5b072d"
+    },
+    {
+      "path": "sealed-final/publish-build.log",
+      "bytes": 3925,
+      "sha256": "082a69118e8b079d7e339a2c595bc12258c046b2d819119217e91b29b8bb3cdf"
+    },
+    {
+      "path": "sealed-final/samples/blend/Color.ptstudio.json",
+      "bytes": 6289,
+      "sha256": "9b8c7cbf5e4ea1a44b1c475aa69e3271178d6a92553d449d0a98978f217a7acc"
+    },
+    {
+      "path": "sealed-final/samples/blend/Luminosity.ptstudio.json",
+      "bytes": 6289,
+      "sha256": "bd1fe731e3f3691a46a1bb0e7cabc474345ea52bbb6d681a33d1121f8f59b505"
+    },
+    {
+      "path": "sealed-final/samples/blend/Overlay.ptstudio.json",
+      "bytes": 6289,
+      "sha256": "100566c3b4aae2980fceee6bb6da45e8dc06d846b66c977afc23b0512aa43832"
+    },
+    {
+      "path": "sealed-final/samples/blend/SAMPLES.json",
+      "bytes": 184300,
+      "sha256": "01000c43135029c30ff2167967d82ddc3d730b79f7b4a64533fccddcbbab7233"
+    },
+    {
+      "path": "sealed-final/samples/blend/SoftLight.ptstudio.json",
+      "bytes": 6289,
+      "sha256": "74511112ca7ed993e278dd55d97851ac4800db851cbbd9ef8614cd2cea30e760"
+    },
+    {
+      "path": "sealed-final/samples/flow/.kitao-export-tasks/376d46b9eee44bb081ded637de735c59/owner.json",
+      "bytes": 407,
+      "sha256": "31191ae299355023cc9f1e63d6d190a40620d6b188883c2ecbd1f857bff8625a"
+    },
+    {
+      "path": "sealed-final/samples/flow/.kitao-export-tasks/376d46b9eee44bb081ded637de735c59/task.json",
+      "bytes": 16233,
+      "sha256": "369932b0ddaf71b74aa33f76a362837f3c8750baadf89e75766d06ef3fc03991"
+    },
+    {
+      "path": "sealed-final/samples/flow/.kitao-export-tasks/97a117861a384e10949af696b448264d/owner.json",
+      "bytes": 407,
+      "sha256": "3d210942ff74c66ea0c53091939638d8d2ac8b7d9c573039aac7ee8fe371e6e5"
+    },
+    {
+      "path": "sealed-final/samples/flow/.kitao-export-tasks/97a117861a384e10949af696b448264d/task.json",
+      "bytes": 16272,
+      "sha256": "a73ff20322fe014906fa5d6175382efd714b38971dce3e5970e42f68b7cb4089"
+    },
+    {
+      "path": "sealed-final/samples/flow/input_仿色.jpg.kitao-export.json",
+      "bytes": 16272,
+      "sha256": "a73ff20322fe014906fa5d6175382efd714b38971dce3e5970e42f68b7cb4089"
+    },
+    {
+      "path": "sealed-final/samples/flow/input_仿色.tif.kitao-export.json",
+      "bytes": 16233,
+      "sha256": "369932b0ddaf71b74aa33f76a362837f3c8750baadf89e75766d06ef3fc03991"
+    },
+    {
+      "path": "sealed-final/samples/flow/RESULT.json",
+      "bytes": 573,
+      "sha256": "707328b42f0ea48dd6767876b3ecd262a6d592e65169eac15fbd1fb7ba8ec9fe"
+    },
+    {
+      "path": "sealed-final/samples/flow/workflow.ptstudio.json",
+      "bytes": 41782,
+      "sha256": "134a87408237f18d279d2cc94b246b4f2c3c538fcdf49ebc4cd6129d8c46a7ee"
+    },
+    {
+      "path": "sealed-final/samples/managed/RESULT.json",
+      "bytes": 4194,
+      "sha256": "75cd2445b919d76a2f76cf08abd121248d301357c1bd6ba774e3b03106c4f8fa"
+    },
+    {
+      "path": "sealed-final/samples/natural/RESULT.json",
+      "bytes": 2081,
+      "sha256": "7c2f85a1814506562c5c8a696070a81800f0a3dd95802972730a91c95adfef49"
+    },
+    {
+      "path": "sealed-final/samples/PROBE.json",
+      "bytes": 7175,
+      "sha256": "b9be7891481d7eed63fb1316c9c19fa1cd299c1e3c49c75ec7a38fad9cfe3221"
+    },
+    {
+      "path": "sealed-final/samples/process-reopen/RESULT.json",
+      "bytes": 306,
+      "sha256": "1a39d080cc2e0d02764e89811bd8b94d4c9dfa233c42178a51bb99f42764afb6"
+    },
+    {
+      "path": "sealed-final/samples/publish-numeric/RESULT.json",
+      "bytes": 310,
+      "sha256": "c795c553c82dcf278106239cdfbcf3c0df2d0f81f99c45457bf0a17de4ece5c5"
+    },
+    {
+      "path": "sealed-final/samples/publish-numeric/source.tif.kitao-export.json",
+      "bytes": 6548,
+      "sha256": "be8be918ed22e7916ef0ce502972d43afa64dd31b30d3b9c67f0d98135de1784"
+    },
+    {
+      "path": "sealed-final/samples/r3/r3.ptstudio.json",
+      "bytes": 42311,
+      "sha256": "f1acec761644fbbc366e04a778f7bfe22ff4f63b3445a216eb91fbcd9f137ce9"
+    },
+    {
+      "path": "sealed-final/samples/r3/RESULT.json",
+      "bytes": 307,
+      "sha256": "f6dfd1c025787ae2c2ae3e64982a26dcde304447f14f86d34e45780e06e5c23c"
+    },
+    {
+      "path": "sealed-final/samples/recovery/RESULT.json",
+      "bytes": 237,
+      "sha256": "e6c59edc6727400b1efde4c6a100bc7e070cb405aedb154f4fdf6bfd0f60e6a7"
+    },
+    {
+      "path": "sealed-final/samples/service-flow/.kitao-export-tasks/8b9db1eb27834ed1802270f35da41728/owner.json",
+      "bytes": 423,
+      "sha256": "093ad88d890a30bbc2b30f2a99a6bf1d61ae14d6341242cc037ce2fe78b63585"
+    },
+    {
+      "path": "sealed-final/samples/service-flow/.kitao-export-tasks/8b9db1eb27834ed1802270f35da41728/task.json",
+      "bytes": 7525,
+      "sha256": "5113246ec154074ed82fb37ccc331b4027a58e6514fe0fc263ec4d8289bc2364"
+    },
+    {
+      "path": "sealed-final/samples/service-flow/input_仿色.tif.kitao-export.json",
+      "bytes": 7525,
+      "sha256": "5113246ec154074ed82fb37ccc331b4027a58e6514fe0fc263ec4d8289bc2364"
+    },
+    {
+      "path": "sealed-final/samples/service-flow/published/.kitao-export-tasks/a69e53b23f444348967ac2f891ada93b/owner.json",
+      "bytes": 452,
+      "sha256": "cb7122422db39f3ce6b9b305e4878f915286107071c56488f3df6530b128a9b5"
+    },
+    {
+      "path": "sealed-final/samples/service-flow/published/.kitao-export-tasks/a69e53b23f444348967ac2f891ada93b/task.json",
+      "bytes": 7254,
+      "sha256": "54567ae65d1ccd2120566252448fd7d56f988391f9c8c74a0c6fb77123a2164f"
+    },
+    {
+      "path": "sealed-final/samples/service-flow/published/input_仿色_social.png.kitao-export.json",
+      "bytes": 7254,
+      "sha256": "54567ae65d1ccd2120566252448fd7d56f988391f9c8c74a0c6fb77123a2164f"
+    },
+    {
+      "path": "sealed-final/samples/service-flow/republished/.kitao-export-tasks/9f662b91eae2484f9b91693045ceceb3/owner.json",
+      "bytes": 463,
+      "sha256": "f41d2a408f09800703f2f7623ee3f8996ed085a8b9f32f9cd696307da349f826"
+    },
+    {
+      "path": "sealed-final/samples/service-flow/republished/.kitao-export-tasks/9f662b91eae2484f9b91693045ceceb3/task.json",
+      "bytes": 7238,
+      "sha256": "dc882776ee5659fd8b25f817116aeb784a69c1efde6c31c4024968f5794253c0"
+    },
+    {
+      "path": "sealed-final/samples/service-flow/republished/input_仿色_social_social.jpg.kitao-export.json",
+      "bytes": 7238,
+      "sha256": "dc882776ee5659fd8b25f817116aeb784a69c1efde6c31c4024968f5794253c0"
+    },
+    {
+      "path": "sealed-final/samples/service-flow/RESULT.json",
+      "bytes": 485,
+      "sha256": "9ee8a621629f1f803ca21475439a5b4feb49052d9ecfb14d42ac62333fa03a9b"
+    },
+    {
+      "path": "sealed-final/samples/user-export/AdobeRGB/.kitao-export-tasks/55f14a281db144498f8996b273fbf597/owner.json",
+      "bytes": 457,
+      "sha256": "02ba756c50ef4172080bd9e716017f1dc430d1cf8fcab7dfa2157bbef6ae1959"
+    },
+    {
+      "path": "sealed-final/samples/user-export/AdobeRGB/.kitao-export-tasks/55f14a281db144498f8996b273fbf597/task.json",
+      "bytes": 11139,
+      "sha256": "0cd71fc33f28e281a826b0e11484a32532f7cf63e66b066a4428dfaa3e7c4e46"
+    },
+    {
+      "path": "sealed-final/samples/user-export/AdobeRGB/canon-authorized-srgb_仿色.jpg.kitao-export.json",
+      "bytes": 11139,
+      "sha256": "0cd71fc33f28e281a826b0e11484a32532f7cf63e66b066a4428dfaa3e7c4e46"
+    },
+    {
+      "path": "sealed-final/samples/user-export/DisplayP3/.kitao-export-tasks/4e8666717f7c47daaa1480a464b6bef9/owner.json",
+      "bytes": 459,
+      "sha256": "db5122b25121d4021002cc2d2545548f14881b2867ae365ea27d2342fa57d7f1"
+    },
+    {
+      "path": "sealed-final/samples/user-export/DisplayP3/.kitao-export-tasks/4e8666717f7c47daaa1480a464b6bef9/task.json",
+      "bytes": 11153,
+      "sha256": "0499eaa67600d414edc7f23d5425f0686d578d5d50e864509812c0da2e2a5908"
+    },
+    {
+      "path": "sealed-final/samples/user-export/DisplayP3/canon-authorized-srgb_仿色.jpg.kitao-export.json",
+      "bytes": 11153,
+      "sha256": "0499eaa67600d414edc7f23d5425f0686d578d5d50e864509812c0da2e2a5908"
+    },
+    {
+      "path": "sealed-final/samples/user-export/RESULT.json",
+      "bytes": 5397,
+      "sha256": "c87af15f9dd13d0a4669047e57be97f88408802a309832fbd2df1044887fd3ee"
+    },
+    {
+      "path": "sealed-final/samples/user-export/sRGB/.kitao-export-tasks/546a83a65934475fb67dec5a757c2ad3/owner.json",
+      "bytes": 449,
+      "sha256": "b54c64626525e11bf36c1ede3ccdb02355a53f09d00178502a7a292d7c5c2d52"
+    },
+    {
+      "path": "sealed-final/samples/user-export/sRGB/.kitao-export-tasks/546a83a65934475fb67dec5a757c2ad3/task.json",
+      "bytes": 11132,
+      "sha256": "434faf10a32dda9715805073365965d0ad6275183105e90e757c3552da809bc3"
+    },
+    {
+      "path": "sealed-final/samples/user-export/sRGB/canon-authorized-srgb_仿色.jpg.kitao-export.json",
+      "bytes": 11132,
+      "sha256": "434faf10a32dda9715805073365965d0ad6275183105e90e757c3552da809bc3"
+    },
+    {
+      "path": "sealed-final/samples/visual/PROVENANCE.json",
+      "bytes": 197,
+      "sha256": "1105f6e0a10068e862261e609de949522447a87c257bb2985a02da0dea82e6ba"
+    },
+    {
+      "path": "sealed-final/samples/wide-boundary/RESULT.json",
+      "bytes": 1207,
+      "sha256": "7310fb8e510991faca56f875093e9e734340e41d52811e258da14c75a1c9c5cb"
+    },
+    {
+      "path": "sealed-final/samples/wide-boundary/wide.ptstudio.json",
+      "bytes": 16219,
+      "sha256": "d5d055d46abfb2c0fc9135d84dbec50e61bc46cea23ab080e3a3e3a566b8353d"
+    },
+    {
+      "path": "sealed-final/tests-core/process.json",
+      "bytes": 1274,
+      "sha256": "5a859147a633b4923cfbbd2ece230d7076b057e29e526e6858d2a6a47bd434c4"
+    },
+    {
+      "path": "sealed-final/tests-core/results.trx",
+      "bytes": 94930,
+      "sha256": "36f8d325dafba095f313ed99a3588456f4ae810cd21948e5694fc968252b71f2"
+    },
+    {
+      "path": "sealed-final/tests-core/stdout.log",
+      "bytes": 372,
+      "sha256": "094f1f1c3336b191fce216cc0bb2aa8d7f32eeeb1d0ea97b43a2969aff0743e9"
+    },
+    {
+      "path": "sealed-final/tests-wpf/process.json",
+      "bytes": 1145,
+      "sha256": "de0bb5de1f31b070361ade4dfd04da696364890b7afaa0082025f257421d2691"
+    },
+    {
+      "path": "sealed-final/tests-wpf/results.trx",
+      "bytes": 79094,
+      "sha256": "076b8e5d5e0c69c4ae6d696313d1e8ecc1c41d300e97d9c360846884ea10f8ad"
+    },
+    {
+      "path": "sealed-final/tests-wpf/stdout.log",
+      "bytes": 372,
+      "sha256": "9c8a1f72eec6187b4f43f32d1899394c99e667972da502e4676a8c6db441d405"
+    },
+    {
+      "path": "sealed-final/visual/AUTHORIZED_PAGE.json",
+      "bytes": 2159,
+      "sha256": "92f83658181ffd8563e214c52ef9e383ea4fe42defce63b54905b29c3e316dce"
+    },
+    {
+      "path": "sealed-final/visual/LIFECYCLE_PERFORMANCE.json",
+      "bytes": 575,
+      "sha256": "7bd57370d43d480253e051809690ed5a4f865e0ca6a45f6f78fe803240708151"
+    },
+    {
+      "path": "sealed-final/wpf-build.json",
+      "bytes": 657,
+      "sha256": "d3ca118fb74318fb8afccfd98f995787c7affbe5f485b3908c4425ff05a28f12"
+    },
+    {
+      "path": "sealed-final/wpf-build.log",
+      "bytes": 179541,
+      "sha256": "ae555f516ad76383f20c79474fec5fd3d4da1ada0a8ee17ecb71f5a0cdaa00c8"
+    },
+    {
+      "path": "sealed_final_run.py",
+      "bytes": 5073,
+      "sha256": "9d54390db1d047148c5587d009dde59b2e398b43766d09f09be6dfed8d59e14f"
+    },
+    {
+      "path": "service-r3/blend/Color.ptstudio.json",
+      "bytes": 6278,
+      "sha256": "8efa84b100c885ce451ff7e33fbbf6319b39520081073d832b4cd8056109394c"
+    },
+    {
+      "path": "service-r3/blend/Luminosity.ptstudio.json",
+      "bytes": 6278,
+      "sha256": "44ced9f9df7574032f437ebe96bdac3cf483de8f70a69999c53fe5d6e3741644"
+    },
+    {
+      "path": "service-r3/blend/Overlay.ptstudio.json",
+      "bytes": 6278,
+      "sha256": "8411907c9ae6e51a06fd2acbf31259a3e251ee007cfca01ccd4df5c65aa6bc76"
+    },
+    {
+      "path": "service-r3/blend/SAMPLES.json",
+      "bytes": 184300,
+      "sha256": "01000c43135029c30ff2167967d82ddc3d730b79f7b4a64533fccddcbbab7233"
+    },
+    {
+      "path": "service-r3/blend/SoftLight.ptstudio.json",
+      "bytes": 6278,
+      "sha256": "d1f89b5f8077e58a89ac18a284eec035882e8f5eb5e42be9203db26f889861f1"
+    },
+    {
+      "path": "service-r3/flow/.kitao-export-tasks/292db8a1509d48e697322c65e7c9ce00/owner.json",
+      "bytes": 385,
+      "sha256": "ed3a3a86edba761437c087132da6bb747d240a9248104b1e2c14b8fbc7f7150d"
+    },
+    {
+      "path": "service-r3/flow/.kitao-export-tasks/292db8a1509d48e697322c65e7c9ce00/task.json",
+      "bytes": 16211,
+      "sha256": "a16e9e31b25dd327ea831ac35186f4e16dc58e04b46b96aa42578123f935154c"
+    },
+    {
+      "path": "service-r3/flow/input_仿色.tif.kitao-export.json",
+      "bytes": 16211,
+      "sha256": "a16e9e31b25dd327ea831ac35186f4e16dc58e04b46b96aa42578123f935154c"
+    },
+    {
+      "path": "service-r3/flow/RESULT.json",
+      "bytes": 349,
+      "sha256": "add0fa7440d1d9d4004637c3c2351c096897c7003a5e967a0827c3681e49404d"
+    },
+    {
+      "path": "service-r3/flow/workflow.ptstudio.json",
+      "bytes": 41771,
+      "sha256": "d8f79185cfc1bbb0f20d65a37c0f6a5eacce7172c66c93b08d4bb91bf512a941"
+    },
+    {
+      "path": "service-r3/managed/RESULT.json",
+      "bytes": 4126,
+      "sha256": "25bc26f3d840b9038e6734ac2ef43c0298ef63128fc2faf60bd46e71685a720f"
+    },
+    {
+      "path": "service-r3/natural/RESULT.json",
+      "bytes": 2082,
+      "sha256": "0230b9346c66c5a5438fffac58f07529e7fae46879e0a0aac22b9c8c47ba5d8a"
+    },
+    {
+      "path": "service-r3/PROBE.json",
+      "bytes": 7175,
+      "sha256": "b9be7891481d7eed63fb1316c9c19fa1cd299c1e3c49c75ec7a38fad9cfe3221"
+    },
+    {
+      "path": "service-r3/recovery/RESULT.json",
+      "bytes": 237,
+      "sha256": "e6c59edc6727400b1efde4c6a100bc7e070cb405aedb154f4fdf6bfd0f60e6a7"
+    },
+    {
+      "path": "service-r3/service-flow/.kitao-export-tasks/65a389ffe88940abab82dc437327bd4e/owner.json",
+      "bytes": 401,
+      "sha256": "cc6cb4dc41fdb08e036f1cb4c26d6cbfabb2dba2afd38a15a761614b650e8a68"
+    },
+    {
+      "path": "service-r3/service-flow/.kitao-export-tasks/65a389ffe88940abab82dc437327bd4e/task.json",
+      "bytes": 7500,
+      "sha256": "035323c410ae28dade7b9881721f1a9cfbec45817aff8dde4389a9a891aa0e84"
+    },
+    {
+      "path": "service-r3/service-flow/input_仿色.tif.kitao-export.json",
+      "bytes": 7500,
+      "sha256": "035323c410ae28dade7b9881721f1a9cfbec45817aff8dde4389a9a891aa0e84"
+    },
+    {
+      "path": "service-r3/service-flow/published/.kitao-export-tasks/278547108bb04ed0851ff705af351e94/owner.json",
+      "bytes": 430,
+      "sha256": "4e4494cd2f860f81085ce377ab93b83dabdca4422bb4d88b62ea4c0b3410b1ad"
+    },
+    {
+      "path": "service-r3/service-flow/published/.kitao-export-tasks/278547108bb04ed0851ff705af351e94/task.json",
+      "bytes": 7232,
+      "sha256": "941fa20ccbfb9055b12e36282f96999786036d23af334eb30b5050aa5f46b94f"
+    },
+    {
+      "path": "service-r3/service-flow/published/input_仿色_social.png.kitao-export.json",
+      "bytes": 7232,
+      "sha256": "941fa20ccbfb9055b12e36282f96999786036d23af334eb30b5050aa5f46b94f"
+    },
+    {
+      "path": "service-r3/service-flow/republished/.kitao-export-tasks/1ebac9201535405eab300d617f752f56/owner.json",
+      "bytes": 441,
+      "sha256": "f66ad6814970ec98b2b0982d5ef857583dc7b27d20eb0b696df811f978b9fd7a"
+    },
+    {
+      "path": "service-r3/service-flow/republished/.kitao-export-tasks/1ebac9201535405eab300d617f752f56/task.json",
+      "bytes": 7216,
+      "sha256": "86d31bdf647faf618a3a695a2a46d25bb33aeb93636b38a840afb9d36a8e6e13"
+    },
+    {
+      "path": "service-r3/service-flow/republished/input_仿色_social_social.jpg.kitao-export.json",
+      "bytes": 7216,
+      "sha256": "86d31bdf647faf618a3a695a2a46d25bb33aeb93636b38a840afb9d36a8e6e13"
+    },
+    {
+      "path": "service-r3/service-flow/RESULT.json",
+      "bytes": 449,
+      "sha256": "213523a67e0ff20814fc0df33a37077e9aad89eef4101ca9cdac1bc9482a60f0"
+    },
+    {
+      "path": "service-r3/wide-boundary/RESULT.json",
+      "bytes": 1207,
+      "sha256": "7310fb8e510991faca56f875093e9e734340e41d52811e258da14c75a1c9c5cb"
+    },
+    {
+      "path": "service-r3/wide-boundary/wide.ptstudio.json",
+      "bytes": 16153,
+      "sha256": "d1d07cf75cc8e09e496b4b4415d441dfb49a0ad2e45acf749ea38168852a71f9"
+    },
+    {
+      "path": "service-r3-cms/.kitao-export-tasks/f8b515435c0c4d5586d00abe8c8c35d8/owner.json",
+      "bytes": 387,
+      "sha256": "b8761eba7cf38e8069216e42b49f14523aa84e02342354406d544bc12c5eb0b3"
+    },
+    {
+      "path": "service-r3-cms/.kitao-export-tasks/f8b515435c0c4d5586d00abe8c8c35d8/task.json",
+      "bytes": 8264,
+      "sha256": "d3c1735263d3735e02a8cf96d14661042cada488f0d667a1033e9633b13ee6a6"
+    },
+    {
+      "path": "service-r3-cms/CMS_CLOSURE.json",
+      "bytes": 2606,
+      "sha256": "fa1d1a658386ac546f16b1669a952145a5dd5913d65fd683663e5b1910bda485"
+    },
+    {
+      "path": "service-r3-cms/color-08be51bdb4ab4b40a23415d472fd4e71.ptstudio.json",
+      "bytes": 16849,
+      "sha256": "936816c4689d3c577d6d9a68383728607039d433bffef11d2bae444e57bad5cc"
+    },
+    {
+      "path": "service-r3-cms/DISPLAY_PATH.json",
+      "bytes": 191,
+      "sha256": "ffdf5baeea205b93127567e396e4b8d5b5cc0af5b278fd0669185c44ee622b86"
+    },
+    {
+      "path": "service-r3-cms/embedded-p3_仿色.tif.kitao-export.json",
+      "bytes": 8264,
+      "sha256": "d3c1735263d3735e02a8cf96d14661042cada488f0d667a1033e9633b13ee6a6"
+    },
+    {
+      "path": "service-r3-cms/JPEG_AND_MONITOR_OBSERVATIONS.json",
+      "bytes": 1583,
+      "sha256": "7f6f554b8faa88083df795bf6ade0a706457f56070e4fec40c0d9716cc7c0bc3"
+    },
+    {
+      "path": "service-r3-cms/LCMS_FLOAT_REFERENCE_INPUT.json",
+      "bytes": 256980,
+      "sha256": "7c686671ee5f7bd1276477ab313972187bfc581bb2c95b835b27066e6c446094"
+    },
+    {
+      "path": "service-r3-cms/REAL_DERIVATIVE_CMS.json",
+      "bytes": 346,
+      "sha256": "4ec807c1193809815b3f797e3411ca4829afefd0a5f2d49cad437c3ecad7af3e"
+    },
+    {
+      "path": "service-r3-cms/WIC_REFERENCE_DIAGNOSTIC.json",
+      "bytes": 802,
+      "sha256": "2e97dcbe55bfd7bbdc855be5d13ea979d0502b530dfba471d661702b9909b0f0"
+    },
+    {
+      "path": "service-r3-tests/results.trx",
+      "bytes": 25403,
+      "sha256": "5505501b6cae42d8c78be484d5a0e43b1d003eab3be68b7e6e21654d125e80f3"
+    },
+    {
+      "path": "service-r3.log",
+      "bytes": 365,
+      "sha256": "bf3e096db1d4e6823df32cb95e685dea70b6ebddc5f5478d5d6cf41eae9db3f4"
+    },
+    {
+      "path": "single_paper_picker.py",
+      "bytes": 2869,
+      "sha256": "42a56b70f9674f02e467df3a82a551d915c80984cdfebbe0336aa1759448ff74"
+    },
+    {
+      "path": "supplemental-final/bindings.json",
+      "bytes": 3102,
+      "sha256": "b36f597eb88f5b9d9de548ac38a9b485d757937086efcee014028885888e4121"
+    },
+    {
+      "path": "supplemental-final/process.json",
+      "bytes": 803,
+      "sha256": "d64aaf0db3f87fcd6f2eda88ae756c0aa69cb8825a2f8ad10fd4fee7c951c018"
+    },
+    {
+      "path": "supplemental-final/results.trx",
+      "bytes": 5798,
+      "sha256": "1082caf7184f09250784f9d08631279fddb58de3c7b6966c7c9fd911b4663562"
+    },
+    {
+      "path": "supplemental-final/samples/publish-numeric/RESULT.json",
+      "bytes": 310,
+      "sha256": "c795c553c82dcf278106239cdfbcf3c0df2d0f81f99c45457bf0a17de4ece5c5"
+    },
+    {
+      "path": "supplemental-final/samples/publish-numeric/source.tif.kitao-export.json",
+      "bytes": 6554,
+      "sha256": "596c070ee5f1d4610e04e2ea8bd724b596a3bade17a742dd32fe74fa0cfe6d85"
+    },
+    {
+      "path": "supplemental-final/samples/user-export/.kitao-export-tasks/8792fc1546114ad1823c952bb6e14158/owner.json",
+      "bytes": 449,
+      "sha256": "560bb074140acda79cba9f0337964b85d6ea6cc0182785251bd82c024b54a15e"
+    },
+    {
+      "path": "supplemental-final/samples/user-export/.kitao-export-tasks/8792fc1546114ad1823c952bb6e14158/task.json",
+      "bytes": 11140,
+      "sha256": "ed3d6de47558285867f03266dd093e792c31e8d3058b0c78caed392f8a89aa09"
+    },
+    {
+      "path": "supplemental-final/samples/user-export/canon-authorized-srgb_仿色.jpg.kitao-export.json",
+      "bytes": 11140,
+      "sha256": "ed3d6de47558285867f03266dd093e792c31e8d3058b0c78caed392f8a89aa09"
+    },
+    {
+      "path": "supplemental-final/stdout.log",
+      "bytes": 1934,
+      "sha256": "eaec2758ceefc29ff2b53b9c8791cf5cd3e663c9b8e8ce9fda0399ce9c22a322"
+    },
+    {
+      "path": "supplemental_final.py",
+      "bytes": 1823,
+      "sha256": "99b5e01ecf2580873fe64350df213af3d36320f52fb67bfc259f9cfecb463866"
+    },
+    {
+      "path": "supplemental_numeric.py",
+      "bytes": 1733,
+      "sha256": "9def41a08348199853d00fdf316d2bd6adcb3b86716c018227d05f0d8b9b5b80"
+    },
+    {
+      "path": "ui-outlet/service-flow/.kitao-export-tasks/0ed0b6f5bec748a88cff24b8aa78d9d0/owner.json",
+      "bytes": 399,
+      "sha256": "cc2ac7dfc25449ef2c3e5e0f8f74d763cdaa1bcbcf5318a619f53b14c871831a"
+    },
+    {
+      "path": "ui-outlet/service-flow/.kitao-export-tasks/0ed0b6f5bec748a88cff24b8aa78d9d0/task.json",
+      "bytes": 7488,
+      "sha256": "323bab3ae95610f10d568e5c05ed0f2f32846d37f0a206a8194386b7e974b23b"
+    },
+    {
+      "path": "ui-outlet/service-flow/input_仿色.tif.kitao-export.json",
+      "bytes": 7488,
+      "sha256": "323bab3ae95610f10d568e5c05ed0f2f32846d37f0a206a8194386b7e974b23b"
+    },
+    {
+      "path": "ui-outlet/service-flow/published/.kitao-export-tasks/2c65e08c6b7542a38f6d950c45b3bf74/owner.json",
+      "bytes": 428,
+      "sha256": "4fd0641b0edb9e1a7e93fdcd00b20f4541ba90cb78be7036c0d1926e97d98fcd"
+    },
+    {
+      "path": "ui-outlet/service-flow/published/.kitao-export-tasks/2c65e08c6b7542a38f6d950c45b3bf74/task.json",
+      "bytes": 7230,
+      "sha256": "ad86fb022a9d4669154b1c2ccae4802c68eb8969db90e44cf9cf53d686db109b"
+    },
+    {
+      "path": "ui-outlet/service-flow/published/input_仿色_social.png.kitao-export.json",
+      "bytes": 7230,
+      "sha256": "ad86fb022a9d4669154b1c2ccae4802c68eb8969db90e44cf9cf53d686db109b"
+    },
+    {
+      "path": "ui-outlet/service-flow/republished/.kitao-export-tasks/6160de16729b430990a7c3fcf488b286/owner.json",
+      "bytes": 439,
+      "sha256": "edcd1d0ef5ff267981e30280fd47a2cb7e4e8eccd4ca28d9b5a56cd3255fa0dc"
+    },
+    {
+      "path": "ui-outlet/service-flow/republished/.kitao-export-tasks/6160de16729b430990a7c3fcf488b286/task.json",
+      "bytes": 7214,
+      "sha256": "6a06d708b896a52619aebf150943f25be9f8bca857012adc7737e5a1d186af5c"
+    },
+    {
+      "path": "ui-outlet/service-flow/republished/input_仿色_social_social.jpg.kitao-export.json",
+      "bytes": 7214,
+      "sha256": "6a06d708b896a52619aebf150943f25be9f8bca857012adc7737e5a1d186af5c"
+    },
+    {
+      "path": "ui-outlet/service-flow/RESULT.json",
+      "bytes": 446,
+      "sha256": "15f6be2e82220e11cac8bd3e4a81c3cfa0e09f623fa61166008d5e2fdfe60734"
+    },
+    {
+      "path": "ui-outlet-tests/results.trx",
+      "bytes": 2683,
+      "sha256": "fd1626dcbcf3217f52d6c90880fd4ad7bd8a56dea65f1ebf06e2437de5425715"
+    },
+    {
+      "path": "ui-outlet.log",
+      "bytes": 367,
+      "sha256": "defeea857281c742d029e1d0f4b8fd7c8b8d09de33b1305d405923f4d978b58d"
+    },
+    {
+      "path": "user-total-r2/user-export/AdobeRGB/.kitao-export-tasks/409601e624504706bd3a80f1b6a59aeb/owner.json",
+      "bytes": 441,
+      "sha256": "83ce37340348a4ef6e93208055e5b5668c4391471122f26a15b8b9384fc84f7d"
+    },
+    {
+      "path": "user-total-r2/user-export/AdobeRGB/.kitao-export-tasks/409601e624504706bd3a80f1b6a59aeb/task.json",
+      "bytes": 11113,
+      "sha256": "56e4059e9fce84ccaec5dd04ccd5538b91bbf8556b9facad02d11272e09bd872"
+    },
+    {
+      "path": "user-total-r2/user-export/AdobeRGB/canon-authorized-srgb_仿色.jpg.kitao-export.json",
+      "bytes": 11113,
+      "sha256": "56e4059e9fce84ccaec5dd04ccd5538b91bbf8556b9facad02d11272e09bd872"
+    },
+    {
+      "path": "user-total-r2/user-export/DisplayP3/.kitao-export-tasks/1b3bc2e774584a17bfdd1982aa2c5c2d/owner.json",
+      "bytes": 443,
+      "sha256": "aa6ab69607187d0a3deb5f3248dd29bf81c4399dfd4555b353e57f54c9a51f56"
+    },
+    {
+      "path": "user-total-r2/user-export/DisplayP3/.kitao-export-tasks/1b3bc2e774584a17bfdd1982aa2c5c2d/task.json",
+      "bytes": 11137,
+      "sha256": "ba5442c7f77c024c7e36313082c1cf5aade3248c9d6da691726d192d6ee3d41b"
+    },
+    {
+      "path": "user-total-r2/user-export/DisplayP3/canon-authorized-srgb_仿色.jpg.kitao-export.json",
+      "bytes": 11137,
+      "sha256": "ba5442c7f77c024c7e36313082c1cf5aade3248c9d6da691726d192d6ee3d41b"
+    },
+    {
+      "path": "user-total-r2/user-export/RESULT.json",
+      "bytes": 5364,
+      "sha256": "440e7e753d2cdb72080184a99d2f231f02508866dc3d2c95bced652dfb4cef92"
+    },
+    {
+      "path": "user-total-r2/user-export/sRGB/.kitao-export-tasks/6c5119908fef4988a7789668ee6f2bf2/owner.json",
+      "bytes": 433,
+      "sha256": "8ef1a7bb3e55cd3582f4c0d356f79f1619716f41688540c7f3cfa4116312aacc"
+    },
+    {
+      "path": "user-total-r2/user-export/sRGB/.kitao-export-tasks/6c5119908fef4988a7789668ee6f2bf2/task.json",
+      "bytes": 11126,
+      "sha256": "6a7849228c791127b8e7fd7a55de1b0207c13ce482af6b619ef60320b1d1d54a"
+    },
+    {
+      "path": "user-total-r2/user-export/sRGB/canon-authorized-srgb_仿色.jpg.kitao-export.json",
+      "bytes": 11126,
+      "sha256": "6a7849228c791127b8e7fd7a55de1b0207c13ce482af6b619ef60320b1d1d54a"
+    },
+    {
+      "path": "user-total-r2-tests/results.trx",
+      "bytes": 2677,
+      "sha256": "e23308ea4aed474ab093d2dbbe2dffad41ea11046c9d8280a3ad3b6ebf015ec5"
+    },
+    {
+      "path": "user-total-r2.log",
+      "bytes": 368,
+      "sha256": "c30eb8e07a71635db7b3b4e37fb11ada3ae00e84ba55a64fb068074e0217ee14"
+    },
+    {
+      "path": "wic-linear-reference.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

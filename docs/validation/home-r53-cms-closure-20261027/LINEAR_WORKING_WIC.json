@@ -1,0 +1,43 @@
+{
+  "productReference": [
+    0.6316989,
+    0.08320567,
+    -0.0012778988,
+    0.2139252,
+    0.88586515,
+    0.050760526,
+    0.15437199,
+    0.0309522,
+    0.95051736,
+    0.21404436,
+    0.21405013,
+    0.2140452
+  ],
+  "wic": {
+    "rgb": [
+      0.6313725490196078,
+      0.08235294117647059,
+      0,
+      0.21176470588235294,
+      0.8862745098039215,
+      0.047058823529411764,
+      0.15294117647058825,
+      0.027450980392156862,
+      0.9529411764705882,
+      0.21568627450980393,
+      0.21568627450980393,
+      0.21568627450980393
+    ],
+    "outputDomain": "linear ROMM primaries D50 gamma1, raw8bit codes; original gray input128/255",
+    "engine": "WindowsWIC",
+    "pixelFormat": "BGRA32",
+    "scope": "Independent system engine/quantized comparison, not physical display"
+  },
+  "primaryOnlyMax8": 0.9439341300000003,
+  "primaryOnlyMean8": 0.41951709777777485,
+  "grayExcluded": "WIC gray input128/255 vs product0.5; not paired",
+  "negativeClippedByWic": true,
+  "notExactFloatEquivalence": true,
+  "firstFailedReference": "Pillow _imagingcms export cmsCreateTransform unavailable; no silent fallback declared success",
+  "space": "D50 public ROMM primaries/gamma1 linear work profile"
+}

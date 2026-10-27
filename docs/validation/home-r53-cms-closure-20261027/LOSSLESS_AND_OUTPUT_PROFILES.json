@@ -1,0 +1,170 @@
+[
+  {
+    "space": "sRGB",
+    "format": 2,
+    "StageMilliseconds": {
+      "render": 1.6172000000000017,
+      "encode": 1.502199999999998,
+      "readback": 1.5297999999999998,
+      "secondRender": 0,
+      "total": 5.8839
+    },
+    "validationSecondRenderMs": 3.3369,
+    "MeanAbsoluteError": 0,
+    "MaximumError": 0
+  },
+  {
+    "space": "sRGB",
+    "format": 3,
+    "StageMilliseconds": {
+      "render": 2.436600000000041,
+      "encode": 70.60769999999997,
+      "readback": 1.897199999999998,
+      "secondRender": 0,
+      "total": 75.866
+    },
+    "validationSecondRenderMs": 17.2354,
+    "MeanAbsoluteError": 0,
+    "MaximumError": 0
+  },
+  {
+    "space": "sRGB",
+    "format": 1,
+    "StageMilliseconds": {
+      "render": 2.2043000000000004,
+      "encode": 1.7354999999999996,
+      "readback": 1.9981999999999998,
+      "secondRender": 0,
+      "total": 7.4449
+    },
+    "validationSecondRenderMs": 4.1732,
+    "MeanAbsoluteError": 0.5965711805555556,
+    "MaximumError": 6
+  },
+  {
+    "space": "DisplayP3",
+    "format": 2,
+    "StageMilliseconds": {
+      "render": 1.1407999999999998,
+      "encode": 1.0130000000000001,
+      "readback": 0.9165999999999999,
+      "secondRender": 0,
+      "total": 4.0506
+    },
+    "validationSecondRenderMs": 2.3232,
+    "MeanAbsoluteError": 0,
+    "MaximumError": 0
+  },
+  {
+    "space": "DisplayP3",
+    "format": 3,
+    "StageMilliseconds": {
+      "render": 1.750599999999956,
+      "encode": 58.369100000000046,
+      "readback": 1.2188999999999979,
+      "secondRender": 0,
+      "total": 62.2487
+    },
+    "validationSecondRenderMs": 2.5079,
+    "MeanAbsoluteError": 0,
+    "MaximumError": 0
+  },
+  {
+    "space": "DisplayP3",
+    "format": 1,
+    "StageMilliseconds": {
+      "render": 1.127000000000001,
+      "encode": 0.8808999999999989,
+      "readback": 0.8172000000000001,
+      "secondRender": 0,
+      "total": 3.7231
+    },
+    "validationSecondRenderMs": 2.3039,
+    "MeanAbsoluteError": 0.5640190972222222,
+    "MaximumError": 3
+  },
+  {
+    "space": "AdobeRGB",
+    "format": 2,
+    "StageMilliseconds": {
+      "render": 1.2616000000000012,
+      "encode": 1.000899999999999,
+      "readback": 1.3195000000000001,
+      "secondRender": 0,
+      "total": 4.357
+    },
+    "validationSecondRenderMs": 2.2544,
+    "MeanAbsoluteError": 0,
+    "MaximumError": 0
+  },
+  {
+    "space": "AdobeRGB",
+    "format": 3,
+    "StageMilliseconds": {
+      "render": 1.2089000000000105,
+      "encode": 10.20619999999999,
+      "readback": 1.3541999999999987,
+      "secondRender": 0,
+      "total": 13.5935
+    },
+    "validationSecondRenderMs": 2.402,
+    "MeanAbsoluteError": 0,
+    "MaximumError": 0
+  },
+  {
+    "space": "AdobeRGB",
+    "format": 1,
+    "StageMilliseconds": {
+      "render": 2.022100000000001,
+      "encode": 1.4336999999999995,
+      "readback": 1.5686,
+      "secondRender": 0,
+      "total": 5.8501
+    },
+    "validationSecondRenderMs": 3.3357,
+    "MeanAbsoluteError": 0.6357421875,
+    "MaximumError": 4
+  },
+  {
+    "space": "ProPhotoRGB",
+    "format": 2,
+    "StageMilliseconds": {
+      "render": 2.1540999999999983,
+      "encode": 1.7854000000000014,
+      "readback": 2.0138999999999996,
+      "secondRender": 0,
+      "total": 7.0601
+    },
+    "validationSecondRenderMs": 4.5736,
+    "MeanAbsoluteError": 0,
+    "MaximumError": 0
+  },
+  {
+    "space": "ProPhotoRGB",
+    "format": 3,
+    "StageMilliseconds": {
+      "render": 2.245200000000004,
+      "encode": 4.177199999999996,
+      "readback": 1.221400000000001,
+      "secondRender": 0,
+      "total": 9.3779
+    },
+    "validationSecondRenderMs": 2.4787,
+    "MeanAbsoluteError": 0,
+    "MaximumError": 0
+  },
+  {
+    "space": "ProPhotoRGB",
+    "format": 1,
+    "StageMilliseconds": {
+      "render": 2.3271999999999995,
+      "encode": 1.3471000000000002,
+      "readback": 2.4845999999999995,
+      "secondRender": 0,
+      "total": 7.0796
+    },
+    "validationSecondRenderMs": 3.9778,
+    "MeanAbsoluteError": 0.5277777777777778,
+    "MaximumError": 3
+  }
+]

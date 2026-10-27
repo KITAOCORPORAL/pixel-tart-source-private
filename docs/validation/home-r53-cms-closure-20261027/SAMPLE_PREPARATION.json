@@ -1,0 +1,16 @@
+{
+  "requires": "PowerShell7.5+ -DateKind String",
+  "executed": true,
+  "checks": [
+    {
+      "project": "film-current-edits",
+      "onlyPathChanged": true
+    },
+    {
+      "project": "wide-linear-v2",
+      "onlyPathChanged": true
+    }
+  ],
+  "privateDirectoriesScanned": false,
+  "receiptRewritten": false
+}

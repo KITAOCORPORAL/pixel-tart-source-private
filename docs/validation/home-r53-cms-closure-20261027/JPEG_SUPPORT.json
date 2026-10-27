@@ -1,0 +1,36 @@
+{
+  "sourceSha": "b843670653dcb1899f77b873e31a11455d754f36",
+  "quality": 95,
+  "sampling": "4:4:4",
+  "depth": 8,
+  "spaces": {
+    "sRGB": {
+      "status": "ADMITTED_DIAGNOSTIC",
+      "default": true,
+      "recommendation": "Actual pixel transform and embedded ICC"
+    },
+    "DisplayP3": {
+      "status": "ADMITTED_DIAGNOSTIC",
+      "default": false,
+      "recommendation": "Actual pixel transform and embedded ICC"
+    },
+    "AdobeRGB-compatible": {
+      "status": "ADMITTED_DIAGNOSTIC",
+      "default": false,
+      "recommendation": "Actual pixel transform and embedded ICC"
+    },
+    "ProPhotoRGB-compatible": {
+      "status": "ADMITTED_DIAGNOSTIC",
+      "default": false,
+      "recommendation": "Actual pixel transform and embedded ICC"
+    }
+  },
+  "lossless": "PNG16/TIFF16 actual transforms, all four profiles0codes mismatch",
+  "errorBudget": {
+    "MAE8": 5,
+    "RMSE8": 15,
+    "changed": false
+  },
+  "rootCause": "WPF auto ICC interpretation during FormatConvertedBitmap readback; compared interpreted values against output encoding; fixed IgnoreColorProfile in explicit input/raw readback",
+  "regressionGuarantee": "Not claiming JPEG lossless or all arbitrary high-frequency inputs below budget"
+}

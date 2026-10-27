@@ -1,0 +1,716 @@
+{
+  "pillow": "12.3.0",
+  "libjpeg": "8.0",
+  "libjpegTurbo": "3.1.4.1",
+  "quality": 95,
+  "chroma": "4:4:4",
+  "sameInputPixels": true,
+  "pixelDomain": "encoding values before common-space comparison; independent decoder ignores ICC for raw samples",
+  "synthetic": [
+    {
+      "kind": "gradient",
+      "space": "sRGB",
+      "wicRaw": {
+        "mean": 0.4748942057291667,
+        "rmse": 0.7267164935373124,
+        "max": 3
+      },
+      "independentInput": {
+        "mean": 0.4748942057291667,
+        "rmse": 0.7267164935373124,
+        "max": 3.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "gradient",
+      "space": "DisplayP3",
+      "wicRaw": {
+        "mean": 0.4729817708333333,
+        "rmse": 0.7240520023336261,
+        "max": 3
+      },
+      "independentInput": {
+        "mean": 0.4729817708333333,
+        "rmse": 0.7240520023336261,
+        "max": 3.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "gradient",
+      "space": "AdobeRGB",
+      "wicRaw": {
+        "mean": 0.4649251302083333,
+        "rmse": 0.719542135956378,
+        "max": 3
+      },
+      "independentInput": {
+        "mean": 0.4649251302083333,
+        "rmse": 0.719542135956378,
+        "max": 3.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "gradient",
+      "space": "ProPhotoRGB",
+      "wicRaw": {
+        "mean": 0.4635416666666667,
+        "rmse": 0.7128950841755515,
+        "max": 3
+      },
+      "independentInput": {
+        "mean": 0.4635416666666667,
+        "rmse": 0.7128950841755515,
+        "max": 3.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "gray",
+      "space": "sRGB",
+      "wicRaw": {
+        "mean": 0,
+        "rmse": 0,
+        "max": 0
+      },
+      "independentInput": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "gray",
+      "space": "DisplayP3",
+      "wicRaw": {
+        "mean": 0,
+        "rmse": 0,
+        "max": 0
+      },
+      "independentInput": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "gray",
+      "space": "AdobeRGB",
+      "wicRaw": {
+        "mean": 0.015625,
+        "rmse": 0.125,
+        "max": 1
+      },
+      "independentInput": {
+        "mean": 0.015625,
+        "rmse": 0.125,
+        "max": 1.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "gray",
+      "space": "ProPhotoRGB",
+      "wicRaw": {
+        "mean": 0.0859375,
+        "rmse": 0.29315098498896436,
+        "max": 1
+      },
+      "independentInput": {
+        "mean": 0.0859375,
+        "rmse": 0.29315098498896436,
+        "max": 1.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "blocks",
+      "space": "sRGB",
+      "wicRaw": {
+        "mean": 0.18489583333333334,
+        "rmse": 0.4477955262542641,
+        "max": 3
+      },
+      "independentInput": {
+        "mean": 0.18489583333333334,
+        "rmse": 0.4477955262542641,
+        "max": 3.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "blocks",
+      "space": "DisplayP3",
+      "wicRaw": {
+        "mean": 0.16015625,
+        "rmse": 0.449247055267663,
+        "max": 4
+      },
+      "independentInput": {
+        "mean": 0.16015625,
+        "rmse": 0.449247055267663,
+        "max": 4.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "blocks",
+      "space": "AdobeRGB",
+      "wicRaw": {
+        "mean": 0.19270833333333334,
+        "rmse": 0.4704829079431756,
+        "max": 2
+      },
+      "independentInput": {
+        "mean": 0.19270833333333334,
+        "rmse": 0.4704829079431756,
+        "max": 2.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "blocks",
+      "space": "ProPhotoRGB",
+      "wicRaw": {
+        "mean": 0.3606770833333333,
+        "rmse": 0.6239574638279974,
+        "max": 3
+      },
+      "independentInput": {
+        "mean": 0.3606770833333333,
+        "rmse": 0.6239574638279974,
+        "max": 3.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "highfreq",
+      "space": "sRGB",
+      "wicRaw": {
+        "mean": 1.046875,
+        "rmse": 1.9351464199555202,
+        "max": 8
+      },
+      "independentInput": {
+        "mean": 1.046875,
+        "rmse": 1.9351464199555202,
+        "max": 8.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "highfreq",
+      "space": "DisplayP3",
+      "wicRaw": {
+        "mean": 1.3020833333333333,
+        "rmse": 1.9445436482630056,
+        "max": 6
+      },
+      "independentInput": {
+        "mean": 1.3020833333333333,
+        "rmse": 1.9445436482630056,
+        "max": 6.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "highfreq",
+      "space": "AdobeRGB",
+      "wicRaw": {
+        "mean": 1.1666666666666667,
+        "rmse": 1.7380544678845176,
+        "max": 5
+      },
+      "independentInput": {
+        "mean": 1.1666666666666667,
+        "rmse": 1.7380544678845176,
+        "max": 5.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "kind": "highfreq",
+      "space": "ProPhotoRGB",
+      "wicRaw": {
+        "mean": 1.5416666666666667,
+        "rmse": 2.033572390318738,
+        "max": 6
+      },
+      "independentInput": {
+        "mean": 1.5416666666666667,
+        "rmse": 2.033572390318738,
+        "max": 6.0
+      },
+      "wicVsIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "sampling": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "natural": [
+    {
+      "space": "sRGB",
+      "encodedError": {
+        "mean": 0.7449991624025342,
+        "rmse": 1.0880210585977836,
+        "max": 16.0
+      },
+      "sameQualityIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "commonSrgbError": {
+        "mean": 0.7449991624025342,
+        "rmse": 1.0880210585977836,
+        "max": 16.0
+      },
+      "embeddedIccEqualsInput": true
+    },
+    {
+      "space": "DisplayP3",
+      "encodedError": {
+        "mean": 0.6912273087231969,
+        "rmse": 1.0256127673197515,
+        "max": 15.0
+      },
+      "sameQualityIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "commonSrgbError": {
+        "mean": 0.7687469541910331,
+        "rmse": 1.147374030636626,
+        "max": 18.0
+      },
+      "embeddedIccEqualsInput": true
+    },
+    {
+      "space": "AdobeRGB",
+      "encodedError": {
+        "mean": 0.7358141447368421,
+        "rmse": 1.0645512535078006,
+        "max": 13.0
+      },
+      "sameQualityIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "commonSrgbError": {
+        "mean": 0.7751869365253411,
+        "rmse": 1.1993158622325204,
+        "max": 16.0
+      },
+      "embeddedIccEqualsInput": true
+    },
+    {
+      "space": "ProPhotoRGB",
+      "encodedError": {
+        "mean": 0.6113186068469786,
+        "rmse": 0.9070940312370311,
+        "max": 10.0
+      },
+      "sameQualityIndependent": {
+        "mean": 0.0,
+        "rmse": 0.0,
+        "max": 0.0
+      },
+      "commonSrgbError": {
+        "mean": 1.0585290265594542,
+        "rmse": 1.5363231244403173,
+        "max": 20.0
+      },
+      "embeddedIccEqualsInput": true
+    }
+  ],
+  "naturalSourceSha256": "EEBCE771A08163FB7947B2BE5744410C88B9AD59EA51466A9658477164BDED4B",
+  "lossless": "final/samples/managed RESULT maximum0 PNG16/TIFF16 all4spaces",
+  "priorFailure": "jpeg-before retains WPF auto-interpreted values, not overwritten"
+}

@@ -1,0 +1,248 @@
+[
+  {
+    "path": "expanded-r2-tests\\results.trx",
+    "sha256": "d06798d982939ee9cbdd39423b0b30b4111bf76d34c0911fb324c8d3e6bc9c97",
+    "passed": 15,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "expanded-tests\\results.trx",
+    "sha256": "76c57083905025ade13056ce8898000e39aed7f71e3c4efafcca53a0993399c0",
+    "passed": 13,
+    "failed": 2,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "AdmittedBlendsMaskOpacityReopenAndLosslessParity",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53CmsClosureTests。AdmittedBlendsMaskOpacityReopenAndLosslessParity 引发了异常: \r\nSystem.ArgumentNullException: Value cannot be null. (Parameter 'source') at System.ArgumentNullException.Throw(String paramName)\r\n   at System.ArgumentNullException.ThrowIfNull(Object argument, String paramName)\r\n   at System.Windows.Media.Imaging.FormatConvertedBitmap..ctor(BitmapSource source, PixelFormat destinationFormat, BitmapPalette destinationPalette, Double alphaThreshold)\r\n   at RAWSelectionAssistant.WpfTests.R53CmsClosureTests.DecodeBitmap(BitmapSource image)\r\n   at RAWSelectionAssistant.WpfTests.R53CmsClosureTests.<>c.<<AdmittedBlendsMaskOpacityReopenAndLosslessParity>b__11_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "NewBlendModePreviewMaskSaveReopenLosslessOutputAgrees",
+        "message": "CollectionAssert.AreEqual 失败。索引 2932 处的元素不匹配。\r\n预计值: 131\r\n实际值: 132 at Microsoft.VisualStudio.TestTools.UnitTesting.CollectionAssert.AreEqual(ICollection expected, ICollection actual, String message) in /_/src/TestFramework/TestFramework/Assertions/CollectionAssert.cs:line 819\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.CollectionAssert.AreEqual(ICollection expected, ICollection actual) in /_/src/TestFramework/TestFramework/Assertions/CollectionAssert.cs:line 788\r\n   at RAWSelectionAssistant.WpfTests.R53DocumentColorTests.<>c.<<NewBlendModePreviewMaskSaveReopenLosslessOutputAgrees>b__3_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "path": "film-jpeg-tests\\results.trx",
+    "sha256": "fe74645a23a5130200f042c462a9116c2ab065029f2ee24e31c8c49007482dd0",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "first-flow-tests\\results.trx",
+    "sha256": "619f0f7b16a886607afa497a984a40475fcc58284e2de9e826f9d45348c3970b",
+    "passed": 3,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "jpeg-after-tests\\results.trx",
+    "sha256": "939402c39197f55585e6d9885477417caba55cc3250dbe1b47b91d650cd37d02",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "last-dev-tests\\results.trx",
+    "sha256": "8c84b5467d743c08c3d1534d7209a4694427ecf616c3e026caa9d54f1bf039bb",
+    "passed": 12,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "numeric-final\\results.trx",
+    "sha256": "cab89c1d5d8aa2863b58f0b77aa00afaf8c656724c0a7cef307e49d785bcce5e",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "picker-verify-tests\\results.trx",
+    "sha256": "76b5346ee3d908f4093a54044ca68d4b9d26ed68ec996813d0cb5b00dc552d54",
+    "passed": 6,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "probe-tests\\probe.trx",
+    "sha256": "f24a13a0fbc6572df27f7180afcc8ba43b603eab22e313a1a231cb86bdd52811",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "publish-numeric-tests\\results.trx",
+    "sha256": "58b2baee7bfb6f811de067fa17fc5784eb08e11fa40386a9248bdcea2eb49eb4",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "r3-verify-tests\\results.trx",
+    "sha256": "c5c093d18dca001e56bfad1f1dec5105c777e9b712f0db407050e5a6acf82e12",
+    "passed": 10,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "service-r3-tests\\results.trx",
+    "sha256": "5505501b6cae42d8c78be484d5a0e43b1d003eab3be68b7e6e21654d125e80f3",
+    "passed": 17,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "supplemental-final\\results.trx",
+    "sha256": "1082caf7184f09250784f9d08631279fddb58de3c7b6966c7c9fd911b4663562",
+    "passed": 1,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "ActualManagedUserExportCommandTotalsAndEncodedToolGamutBoundaries",
+        "message": "Assert.AreEqual 失败。应为: <Succeeded>，实际为: <Failed>。‘expected’表达式:‘ReferenceExportStatus.Succeeded’,‘actual’表达式:‘vm.ActiveTarget.ExportStatus’。 PV4 导出失败：调整参数已变化，不能恢复旧成片清单。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertAreEqualFailed(Object expected, Object actual, String userMessage) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 665\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, IEqualityComparer`1 comparer, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 492\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual[T](T expected, T actual, String message, String expectedExpression, String actualExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.AreEqual.cs:line 405\r\n   at RAWSelectionAssistant.WpfTests.R53CmsClosureTests.<>c.<<ActualManagedUserExportCommandTotalsAndEncodedToolGamutBoundaries>b__21_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "path": "ui-outlet-tests\\results.trx",
+    "sha256": "fd1626dcbcf3217f52d6c90880fd4ad7bd8a56dea65f1ebf06e2437de5425715",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "user-total-r2-tests\\results.trx",
+    "sha256": "e23308ea4aed474ab093d2dbbe2dffad41ea11046c9d8280a3ad3b6ebf015ec5",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "dev-regression\\core\\results.trx",
+    "sha256": "42713bc1a83353077066de9af71933416cefa5be0432da5b88e23fbab8f28373",
+    "passed": 47,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "dev-regression\\wpf\\results.trx",
+    "sha256": "9e3d0159c800d2b304a91fc5d5406e1e13b7835188a100a150b5e8c4238352a5",
+    "passed": 49,
+    "failed": 0,
+    "notRun": 1,
+    "failures": []
+  },
+  {
+    "path": "final\\process-reopen\\results.trx",
+    "sha256": "baffa5446643521f63e283fd999ee2b963b1cedf2f2affcb21afa7104a04b3b6",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "final\\tests-core\\results.trx",
+    "sha256": "292b307c0bcb4d849f96bed9cbcbad1eb8358bb7800691779e371fa3a1912182",
+    "passed": 68,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "final\\tests-wpf\\results.trx",
+    "sha256": "7a4d34ec1c401c6dbd6ce0a36e296d55dd18820bcf15a1160efc69e990e96faa",
+    "passed": 53,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "final-r2\\process-reopen\\results.trx",
+    "sha256": "78d38935fe1244557dc395f4ff80bbe7d880f99473231e12b42840be3aa125c5",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "final-r2\\tests-core\\results.trx",
+    "sha256": "93df8ed159038464fae9a4713433b048220965d02ddd93b856b17daf30099297",
+    "passed": 68,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "final-r2\\tests-wpf\\results.trx",
+    "sha256": "09ad27cdf95b27262bee76ad267980b0169b8c3c84063a4ca9254ca0041f0b40",
+    "passed": 53,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "final-r3\\process-reopen\\results.trx",
+    "sha256": "59f7da97acb10faf89009e2e8a926a2383dc6f73c1987059e63ba960ef16bdd0",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "final-r3\\tests-core\\results.trx",
+    "sha256": "983e463a078a3e2da9dd850be4807e8abc2755e8e5118e7bd1978c8eb0a0da5b",
+    "passed": 68,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "final-r3\\tests-wpf\\results.trx",
+    "sha256": "5b6543eedcaa6af092626d72bd57301b9e24fdf31eb5706746c45dfd208d17f5",
+    "passed": 53,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "sealed-final\\process-reopen\\results.trx",
+    "sha256": "051d4422d218816bf0c68199e6acf7788f1a70e1f17df4d1e8ea49e6b56011ce",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "sealed-final\\tests-core\\results.trx",
+    "sha256": "36f8d325dafba095f313ed99a3588456f4ae810cd21948e5694fc968252b71f2",
+    "passed": 68,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "path": "sealed-final\\tests-wpf\\results.trx",
+    "sha256": "076b8e5d5e0c69c4ae6d696313d1e8ecc1c41d300e97d9c360846884ea10f8ad",
+    "passed": 55,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  }
+]

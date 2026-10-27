@@ -1,0 +1,72 @@
+{
+  "publish": {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "publish",
+      "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+      "-c",
+      "Release",
+      "-r",
+      "win-x64",
+      "--self-contained",
+      "true",
+      "-o",
+      "N:\\pixart\\Guangjing-R53-Home-20261027-CmsClosure\\sealed-final\\app",
+      "-p:WholeAppDiagnosticBuild=true",
+      "-p:PhotographerTrialBuild=false",
+      "-p:SourceRevisionId=b843670653dcb1899f77b873e31a11455d754f36",
+      "-p:IncludeSourceRevisionInInformationalVersion=true",
+      "--disable-build-servers",
+      "-m:1",
+      "-nr:false"
+    ],
+    "pid": 29608,
+    "exitCode": 0,
+    "sourceSha": "b843670653dcb1899f77b873e31a11455d754f36",
+    "startEpoch": 1793122040.355553,
+    "endEpoch": 1793122069.4038396
+  },
+  "core": {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "build",
+      "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
+      "-c",
+      "Release",
+      "-p:WholeAppDiagnosticBuild=true",
+      "-p:PhotographerTrialBuild=false",
+      "-p:SourceRevisionId=b843670653dcb1899f77b873e31a11455d754f36",
+      "-p:IncludeSourceRevisionInInformationalVersion=true",
+      "--disable-build-servers",
+      "-m:1",
+      "-nr:false"
+    ],
+    "pid": 37212,
+    "exitCode": 0,
+    "sourceSha": "b843670653dcb1899f77b873e31a11455d754f36",
+    "startEpoch": 1793122069.404841,
+    "endEpoch": 1793122073.086288
+  },
+  "wpf": {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "build",
+      "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+      "-c",
+      "Release",
+      "-p:Platform=x64",
+      "-p:WholeAppDiagnosticBuild=true",
+      "-p:PhotographerTrialBuild=false",
+      "-p:SourceRevisionId=b843670653dcb1899f77b873e31a11455d754f36",
+      "-p:IncludeSourceRevisionInInformationalVersion=true",
+      "--disable-build-servers",
+      "-m:1",
+      "-nr:false"
+    ],
+    "pid": 29156,
+    "exitCode": 0,
+    "sourceSha": "b843670653dcb1899f77b873e31a11455d754f36",
+    "startEpoch": 1793122073.0872886,
+    "endEpoch": 1793122103.0768883
+  }
+}

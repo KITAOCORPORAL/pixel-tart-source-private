@@ -1,0 +1,92 @@
+{
+  "sourceSha": "b843670653dcb1899f77b873e31a11455d754f36",
+  "authoritative": {
+    "core": {
+      "passed": 68,
+      "failed": 0,
+      "notRun": 0,
+      "total": 68,
+      "process": {
+        "command": [
+          "C:\\Program Files\\dotnet\\dotnet.exe",
+          "vstest",
+          "N:\\pixart\\guangjing-r53-stage-b-20261027\\tests\\RAWSelectionAssistant.Tests\\bin\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+          "/TestCaseFilter:(FullyQualifiedName~R53CmsClosureCoreTests|FullyQualifiedName~ControlledIccTests|FullyQualifiedName~ProfessionalRawPipelineTests|FullyQualifiedName~ProfessionalRawTiffTests|FullyQualifiedName~ProfessionalPipelineNoOpPrecisionTests|FullyQualifiedName~R53LocalCompositeTests|FullyQualifiedName~R53ProfessionalLocalTests|FullyQualifiedName~ColorStudioSessionStateTests|FullyQualifiedName~ColorStudioToolProcessorTests|FullyQualifiedName~StudioVersion|FullyQualifiedName~PublishingCoreTests|FullyQualifiedName~PublishingTiffAndXmpBatchTests|FullyQualifiedName~BatchEightInstantFilmTests|FullyQualifiedName~BatchNineInstantFilmTests)&FullyQualifiedName!~ManagedFilmPersistentSampleReopensInIndependentTestProcess",
+          "/Logger:trx;LogFileName=results.trx",
+          "/ResultsDirectory:N:\\pixart\\Guangjing-R53-Home-20261027-CmsClosure\\sealed-final\\tests-core"
+        ],
+        "pid": 41436,
+        "exitCode": 0,
+        "sourceSha": "b843670653dcb1899f77b873e31a11455d754f36",
+        "startEpoch": 1793122103.2250319,
+        "endEpoch": 1793122104.3125167
+      }
+    },
+    "wpf": {
+      "passed": 55,
+      "failed": 0,
+      "notRun": 0,
+      "total": 55,
+      "process": {
+        "command": [
+          "C:\\Program Files\\dotnet\\dotnet.exe",
+          "vstest",
+          "N:\\pixart\\guangjing-r53-stage-b-20261027\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "/TestCaseFilter:(FullyQualifiedName~R53CmsClosureTests|FullyQualifiedName~R53DocumentColorTests|FullyQualifiedName~LightPrintR3Tests|FullyQualifiedName~PhotoGradePageV1Tests|FullyQualifiedName~BatchNinePublishingTests|FullyQualifiedName~BatchEightPublishingOracleTests|FullyQualifiedName~PublishingRenderingTests|FullyQualifiedName~WholeAppDiagnosticPackageTests|FullyQualifiedName~TutorialRetirementProductTests.RealShell|FullyQualifiedName~TutorialRetirementProductTests.ProductXaml)&FullyQualifiedName!~ManagedFilmPersistentSampleReopensInIndependentTestProcess",
+          "/Logger:trx;LogFileName=results.trx",
+          "/ResultsDirectory:N:\\pixart\\Guangjing-R53-Home-20261027-CmsClosure\\sealed-final\\tests-wpf"
+        ],
+        "pid": 38376,
+        "exitCode": 0,
+        "sourceSha": "b843670653dcb1899f77b873e31a11455d754f36",
+        "startEpoch": 1793122104.3135169,
+        "endEpoch": 1793122135.2327862
+      }
+    },
+    "processReopen": {
+      "passed": 1,
+      "failed": 0,
+      "notRun": 0,
+      "total": 1,
+      "process": {
+        "command": [
+          "C:\\Program Files\\dotnet\\dotnet.exe",
+          "vstest",
+          "N:\\pixart\\guangjing-r53-stage-b-20261027\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "/TestCaseFilter:FullyQualifiedName~ManagedFilmPersistentSampleReopensInIndependentTestProcess",
+          "/Logger:trx;LogFileName=results.trx",
+          "/ResultsDirectory:N:\\pixart\\Guangjing-R53-Home-20261027-CmsClosure\\sealed-final\\process-reopen"
+        ],
+        "pid": 7792,
+        "exitCode": 0,
+        "sourceSha": "b843670653dcb1899f77b873e31a11455d754f36",
+        "startEpoch": 1793122135.233777,
+        "endEpoch": 1793122136.910285
+      }
+    },
+    "alphaSupplement": {
+      "passed": 1,
+      "failed": 0,
+      "notRun": 0,
+      "total": 1,
+      "process": {
+        "command": [
+          "dotnet",
+          "vstest",
+          "N:\\pixart\\guangjing-r53-stage-b-20261027\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+          "/TestCaseFilter:FullyQualifiedName~NewBlendsPreserveTransparentEdgesAndDoNotMultiplySourceAlphaTwice",
+          "/Logger:trx;LogFileName=results.trx",
+          "/ResultsDirectory:N:\\pixart\\Guangjing-R53-Home-20261027-CmsClosure\\alpha-final"
+        ],
+        "pid": 6480,
+        "exitCode": 0,
+        "startEpoch": 1793122841.6118512,
+        "endEpoch": 1793122842.6825104,
+        "testSha": "303b562e1d4aeadf66a2b609ac8e3bdc8e7afd3b",
+        "binarySourceSha": "b843670653dcb1899f77b873e31a11455d754f36"
+      }
+    }
+  },
+  "unique": "Core68; WPF57 unique (55main +1 fresh-process-reopen test +1 independent alpha supplement), repeats not accumulated",
+  "scope": "Bounded affected regression, not whole product release/native mouse"
+}

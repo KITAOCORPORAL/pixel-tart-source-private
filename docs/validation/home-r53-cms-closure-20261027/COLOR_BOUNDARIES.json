@@ -1,0 +1,29 @@
+{
+  "V1": "encoded sRGB float; LCMS input alone retains negative/>1, but legacy tool EncodeGamut/levels/curves clip/compress",
+  "V2": {
+    "space": "linear public ROMM/ProPhoto primaries D50",
+    "white": "xy .3457,.3585",
+    "transfer": "gamma1",
+    "precision": "float32",
+    "tools": [
+      "BasicTone exposure only",
+      "Normal opacity and source-coordinate mask",
+      "linear-space GeometryV1/V2"
+    ],
+    "notSupported": [
+      "legacy encoded-sRGB WB/curves/levels/colorbalance",
+      "HDR photographic blending",
+      "LUT/CMYK ICC",
+      "full wide-gamut all-tool pipeline"
+    ],
+    "unknownTools": "refuse before save/render",
+    "output": "direct working→target transform then quantize",
+    "preview": "linear working result area-average→sRGB display pixels, monitor only afterward",
+    "oldDefaultUnchanged": true
+  },
+  "alpha": "Independent straight alpha result available; new opaque photo action rejects transparent input, no implicit white; legacy stored V1 white policy retained",
+  "film": "frozen document definition/variant/profile→full result→encoded-sRGB film + paper, not display ICC preview",
+  "publishing": "already rendered file pixels honor actual embedded ICC→encoded-sRGB float bilinear→WPF8 watermark coverage→targetICC; photo retained float/16, not linear-light watermark claim",
+  "monitor": "defaultoff SDR explicit path unchanged; WPF/device/systemACM/HDR physical multi-screen NOT_RUN; no calibration claim",
+  "CalibrationEligible": false
+}

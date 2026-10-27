@@ -1,0 +1,211 @@
+{
+  "export": [
+    {
+      "space": "sRGB",
+      "totalCommandMs": 150.6471,
+      "StageMilliseconds": {
+        "render": 51.2975,
+        "encode": 13.400199999999998,
+        "readback": 2.2438000000000073,
+        "secondRender": 0,
+        "total": 69.2815
+      },
+      "OutputPath": "N:\\pixart\\Guangjing-R53-Home-20261027-CmsClosure\\sealed-final\\samples\\user-export\\sRGB\\canon-authorized-srgb_\u4EFF\u8272.jpg",
+      "ColorProfile": "sRGB public-primary compatible / LCMS2.12",
+      "includes": "freeze identity, source validation, pixel render, encode, readback, hash/receipt commit",
+      "scope": "Actual product command, not physical mouse latency;512x342 authorized derivative"
+    },
+    {
+      "space": "DisplayP3",
+      "totalCommandMs": 168.7338,
+      "StageMilliseconds": {
+        "render": 34.94580000000004,
+        "encode": 13.141199999999955,
+        "readback": 1.6754999999999995,
+        "secondRender": 0,
+        "total": 51.6272
+      },
+      "OutputPath": "N:\\pixart\\Guangjing-R53-Home-20261027-CmsClosure\\sealed-final\\samples\\user-export\\DisplayP3\\canon-authorized-srgb_\u4EFF\u8272.jpg",
+      "ColorProfile": "DisplayP3 public-primary compatible / LCMS2.12",
+      "includes": "freeze identity, source validation, pixel render, encode, readback, hash/receipt commit",
+      "scope": "Actual product command, not physical mouse latency;512x342 authorized derivative"
+    },
+    {
+      "space": "AdobeRGB",
+      "totalCommandMs": 136.6534,
+      "StageMilliseconds": {
+        "render": 32.37519999999999,
+        "encode": 12.522800000000004,
+        "readback": 1.6936999999999998,
+        "secondRender": 0,
+        "total": 48.7251
+      },
+      "OutputPath": "N:\\pixart\\Guangjing-R53-Home-20261027-CmsClosure\\sealed-final\\samples\\user-export\\AdobeRGB\\canon-authorized-srgb_\u4EFF\u8272.jpg",
+      "ColorProfile": "AdobeRGB public-primary compatible / LCMS2.12",
+      "includes": "freeze identity, source validation, pixel render, encode, readback, hash/receipt commit",
+      "scope": "Actual product command, not physical mouse latency;512x342 authorized derivative"
+    }
+  ],
+  "gamut": [
+    {
+      "tool": 7,
+      "encodedBefore": [
+        1.0930786,
+        -0.5435137,
+        -0.25369006,
+        -2.9068608,
+        1.0182713,
+        -1.0158706,
+        -0.00041130293,
+        0.00030957873,
+        1.0420216
+      ],
+      "encodedAfter": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0.00028187758,
+        1
+      ],
+      "returnToP3": [
+        0.9174782,
+        0.20029315,
+        0.13853803,
+        0.45841938,
+        0.9852593,
+        0.29825953,
+        0.00030800534,
+        1.243245E-05,
+        0.9595883
+      ],
+      "maxDifferenceFromOriginal": 0.45841938
+    },
+    {
+      "tool": 6,
+      "encodedBefore": [
+        1.0930786,
+        -0.5435137,
+        -0.25369006,
+        -2.9068608,
+        1.0182713,
+        -1.0158706,
+        -0.00041130293,
+        0.00030957873,
+        1.0420216
+      ],
+      "encodedAfter": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0.0002828659,
+        1
+      ],
+      "returnToP3": [
+        0.9174782,
+        0.20029315,
+        0.13853803,
+        0.45841938,
+        0.9852593,
+        0.29825953,
+        0.0003081808,
+        1.3387951E-05,
+        0.9595883
+      ],
+      "maxDifferenceFromOriginal": 0.45841938
+    },
+    {
+      "tool": 9,
+      "encodedBefore": [
+        1.0930786,
+        -0.5435137,
+        -0.25369006,
+        -2.9068608,
+        1.0182713,
+        -1.0158706,
+        -0.00041130293,
+        0.00030957873,
+        1.0420216
+      ],
+      "encodedAfter": [
+        1.0930786,
+        -0.5435137,
+        -0.25369006,
+        -2.9068608,
+        1.0182713,
+        -1.0158706,
+        -0.00041130293,
+        0.00030957873,
+        1.0420216
+      ],
+      "returnToP3": [
+        1,
+        8.144455E-08,
+        7.685032E-09,
+        3.038988E-07,
+        1,
+        5.4290435E-08,
+        5.4548338E-11,
+        -3.0136987E-11,
+        1
+      ],
+      "maxDifferenceFromOriginal": 3.038988E-07
+    },
+    {
+      "tool": 10,
+      "encodedBefore": [
+        1.0930786,
+        -0.5435137,
+        -0.25369006,
+        -2.9068608,
+        1.0182713,
+        -1.0158706,
+        -0.00041130293,
+        0.00030957873,
+        1.0420216
+      ],
+      "encodedAfter": [
+        1.0930786,
+        -0.5435137,
+        -0.25369006,
+        -2.9068608,
+        1.0182713,
+        -1.0158706,
+        -0.00041130293,
+        0.00030957873,
+        1.0420216
+      ],
+      "returnToP3": [
+        1,
+        8.144455E-08,
+        7.685032E-09,
+        3.038988E-07,
+        1,
+        5.4290435E-08,
+        5.4548338E-11,
+        -3.0136987E-11,
+        1
+      ],
+      "maxDifferenceFromOriginal": 3.038988E-07
+    }
+  ],
+  "noEditRoundtrip": [
+    1,
+    8.144455E-08,
+    7.685032E-09,
+    3.038988E-07,
+    1,
+    5.4290435E-08,
+    5.4548338E-11,
+    -3.0136987E-11,
+    1
+  ],
+  "note": "Legacy V1 tools individually compress/clip; V2 limited linear exposure keeps range; no output-profile-only wide-edit claim"
+}

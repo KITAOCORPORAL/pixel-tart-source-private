@@ -1,0 +1,68 @@
+{
+  "source": "N:/pixart/Guangjing-R53-Home-20261027/cms-authoritative/canon-authorized-srgb.tif",
+  "sourceSha": "EEBCE771A08163FB7947B2BE5744410C88B9AD59EA51466A9658477164BDED4B",
+  "width": 512,
+  "height": 342,
+  "rows": [
+    {
+      "space": "sRGB",
+      "totalMs": 53.621,
+      "StageMilliseconds": {
+        "render": 36.27280000000001,
+        "encode": 13.816099999999992,
+        "readback": 1.7796999999999983,
+        "secondRender": 0,
+        "total": 53.0365
+      },
+      "validationSecondRenderAndReadbackMs": 36.5252,
+      "MeanAbsoluteError": 0.7449991624025342,
+      "RootMeanSquareError": 1.0880210585977836,
+      "MaximumError": 16
+    },
+    {
+      "space": "DisplayP3",
+      "totalMs": 50.7549,
+      "StageMilliseconds": {
+        "render": 34.70160000000005,
+        "encode": 12.825599999999952,
+        "readback": 1.6269999999999953,
+        "secondRender": 0,
+        "total": 50.1573
+      },
+      "validationSecondRenderAndReadbackMs": 38.0089,
+      "MeanAbsoluteError": 0.6912273087231969,
+      "RootMeanSquareError": 1.0256127673197515,
+      "MaximumError": 15
+    },
+    {
+      "space": "AdobeRGB",
+      "totalMs": 53.4093,
+      "StageMilliseconds": {
+        "render": 33.470999999999975,
+        "encode": 16.679300000000026,
+        "readback": 1.6758999999999986,
+        "secondRender": 0,
+        "total": 52.7752
+      },
+      "validationSecondRenderAndReadbackMs": 37.7391,
+      "MeanAbsoluteError": 0.7358141447368421,
+      "RootMeanSquareError": 1.0645512535078006,
+      "MaximumError": 13
+    },
+    {
+      "space": "ProPhotoRGB",
+      "totalMs": 55.267,
+      "StageMilliseconds": {
+        "render": 38.97080000000003,
+        "encode": 13.104499999999966,
+        "readback": 1.5825000000000031,
+        "secondRender": 0,
+        "total": 54.6638
+      },
+      "validationSecondRenderAndReadbackMs": 38.1179,
+      "MeanAbsoluteError": 0.6113186068469786,
+      "RootMeanSquareError": 0.9070940312370311,
+      "MaximumError": 10
+    }
+  ]
+}

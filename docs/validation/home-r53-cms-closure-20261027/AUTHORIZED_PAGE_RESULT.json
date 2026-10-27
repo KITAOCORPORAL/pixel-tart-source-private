@@ -1,0 +1,69 @@
+[
+  {
+    "id": "previous-authorized-canon-derivative",
+    "sourceFrozenHash": "EEBCE771A08163FB7947B2BE5744410C88B9AD59EA51466A9658477164BDED4B",
+    "derivativeWidth": 512,
+    "derivativeHeight": 342,
+    "loadMs": 22.4662,
+    "renderMs": 412.0361,
+    "baseline": "39063C086A5C49BF5FECF04A9E6B306CFF17E92DA5521FFDADCCFFD7B343807E",
+    "edited": "4AB71FDD948315BDBA7F9C7B436750260FEDCE3E9D532991E50C666CF497B355",
+    "results": [
+      {
+        "format": 3,
+        "receipt": {
+          "Width": 394,
+          "Height": 454,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsTIFF16",
+          "StageMilliseconds": null,
+          "PixelComparisonPerformed": true
+        },
+        "exportMs": 459.7454
+      },
+      {
+        "format": 2,
+        "receipt": {
+          "Width": 394,
+          "Height": 454,
+          "BitDepth": 16,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": null,
+          "MeanAbsoluteError": 0,
+          "RootMeanSquareError": 0,
+          "MaximumError": 0,
+          "EncoderConfiguration": "V3DirectStripsPNG16",
+          "StageMilliseconds": null,
+          "PixelComparisonPerformed": true
+        },
+        "exportMs": 445.4891
+      },
+      {
+        "format": 1,
+        "receipt": {
+          "Width": 394,
+          "Height": 454,
+          "BitDepth": 8,
+          "Orientation": 1,
+          "Srgb": true,
+          "JpegQuality": 95,
+          "MeanAbsoluteError": 0.7066869414193818,
+          "RootMeanSquareError": 1.111787041186338,
+          "MaximumError": 11,
+          "EncoderConfiguration": "V3DirectStripsJPEG95-444",
+          "StageMilliseconds": null,
+          "PixelComparisonPerformed": true
+        },
+        "exportMs": 441.6104
+      }
+    ],
+    "scope": "Authorized resized photograph through actual shared page bindings; not native RAW or full-resolution acceptance"
+  }
+]

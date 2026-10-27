@@ -1,0 +1,60 @@
+{
+  "Pillow": "12.3.0",
+  "libjpegRuntime": "3.1.4.1",
+  "libjpegRuntimeCommit": "9217719d3a58633923b096af4c1d50d304768a64",
+  "jpegSourceInitialPinned": "af9c1c268520a29adf98cad5138dafe612b3d318",
+  "pdfium": "a84323421e94f484faca52dd9d027934eba42ab8",
+  "photocraft": "7ac7b8b106acccf6826d45ed5c9e481dfe341035",
+  "lcmsProduct": "2.12@924a020d09bfe468c665467caf24aadeb41ff77c",
+  "lcmsRefWic": "WindowsWIC actual run, 8bit quantization/clipping recorded",
+  "licenses": {
+    "pdfium": "BSD-style research-only not distributed",
+    "photocraft": "MIT OR Apache2; independent implementation no copied source",
+    "libjpeg": "IJG BSD/zlib; only Python reference runtime, no new product codec",
+    "lcms": "existing MIT component licenses retained",
+    "rawtherapee": "GPL3 research only no code distribution"
+  },
+  "researchSourceAndBinariesNotIncludedInProduct": true,
+  "files": [
+    {
+      "path": "jcapimin.c",
+      "sha256": "083f4be634c2647026288db35eb824a0cd2f2ddf8d4931ac693fbad0698ec206",
+      "bytes": 10882
+    },
+    {
+      "path": "libjpeg-turbo-3.1.4.1-LICENSE.md",
+      "sha256": "e10114e6e40f3d0311c401ca25245ac5ef459a43c20f976fd63f03e816f5741f",
+      "bytes": 5622
+    },
+    {
+      "path": "LICENSE.md",
+      "sha256": "2189dc45a8fe96204069f8124caa53a148dfdc193f50f584c6ca7849a6072872",
+      "bytes": 5620
+    },
+    {
+      "path": "pdfium-adapter.c",
+      "sha256": "f0123a1321f479334d81b4b7216f0759856d0ed7ea2c150575c980e967f22a7c",
+      "bytes": 3700
+    },
+    {
+      "path": "pdfium-blend.cpp",
+      "sha256": "5637284721b7cb94a65446ff27103922bb30f58e240d8d123cbc8dc8017ebf87",
+      "bytes": 4117
+    },
+    {
+      "path": "pdfium-LICENSE",
+      "sha256": "1fe9dea718fbd75cf149adaf4d8a22a4335604d964ddb76d1b45383dec8668c9",
+      "bytes": 12896
+    },
+    {
+      "path": "pdfium-nonseparable-adapter.c",
+      "sha256": "e0248d4f522980e00c0e9bac10b7a6fc12f802c4cd498d5aa0d4c987a908df2b",
+      "bytes": 1199
+    },
+    {
+      "path": "pdfium-scanline.cpp",
+      "sha256": "8e02d19322f8ef2ec20e9f163cba247ec34953435443e12416d6a9175077be3e",
+      "bytes": 94328
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "photocraftCommit": "7ac7b8b106acccf6826d45ed5c9e481dfe341035",
+  "photocraftEvaluation": "independent numpy float32 scalar port of pinned formula, not full Rust binary",
+  "photocraft": {
+    "3": {
+      "maxFloat": 9.731529593270949e-08,
+      "meanFloat": 1.739687357042201e-08
+    },
+    "4": {
+      "maxFloat": 9.20973086682153e-08,
+      "meanFloat": 1.794490219904615e-08
+    },
+    "7": {
+      "maxFloat": 1.2922276249049958e-07,
+      "meanFloat": 3.261085878503012e-08
+    },
+    "8": {
+      "maxFloat": 1.618789901569606e-07,
+      "meanFloat": 2.8956707927414222e-08
+    }
+  },
+  "pdfiumCommit": "a84323421e94f484faca52dd9d027934eba42ab8",
+  "pdfiumEvaluation": "actual fixed Blend integer branch compiled with TCC external isolated research adapter; 8bit quantization",
+  "pdfium": {
+    "3": {
+      "max8": 1.4000000000000057,
+      "mean8": 0.4939969102078485
+    },
+    "4": {
+      "max8": 1.48788927335643,
+      "mean8": 0.4891538300721498
+    }
+  },
+  "scope": "Adjust-result encoded sRGB, not pixel-layer alpha/HDR; PDF integer quantization measured, not exact float equality",
+  "pdfiumNonseparable": {
+    "7": {
+      "max8": 1.9308469308469114,
+      "mean8": 0.40160305636436583
+    },
+    "8": {
+      "max8": 3.433900219266775,
+      "mean8": 0.36957098429013907
+    }
+  },
+  "nonseparableAuthority": "actual fixed PDFium Lum/ClipColor/SetLum C++ body with type-only C adaptation compiled in isolated research; original30/59/11 integer division, not exact float oracle",
+  "sourcesSha256": {
+    "pdfium-blend.cpp": "5637284721b7cb94a65446ff27103922bb30f58e240d8d123cbc8dc8017ebf87",
+    "pdfium-scanline.cpp": "8e02d19322f8ef2ec20e9f163cba247ec34953435443e12416d6a9175077be3e",
+    "photocraft-blend.rs": "b0bce89e45c3cf9af99e1ffea9584fcf58ea41840a44b2ed5072e78b4f89194f"
+  }
+}
