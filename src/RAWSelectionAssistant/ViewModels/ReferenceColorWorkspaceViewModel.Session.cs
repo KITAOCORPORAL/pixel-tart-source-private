@@ -163,7 +163,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 RawExposureEv=staged.RawExposureEv;RawRedGain=staged.RawRedGain;RawGreenGain=staged.RawGreenGain;RawBlueGain=staged.RawBlueGain;RawUseCameraWhiteBalance=staged.RawUseCameraWhiteBalance;
                 RawPipelineStatus=staged.RawPipelineStatus;InstantDimensions=staged.InstantDimensions;FailedTarget=staged.FailedTarget;
                 foreach(var name in new[]{nameof(RawExposureEv),nameof(RawRedGain),nameof(RawGreenGain),nameof(RawBlueGain),nameof(RawUseCameraWhiteBalance),nameof(RawPipelineStatus),nameof(InstantDimensions)})OnPropertyChanged(name);
-                RestoreInstantControls(active.RawDefinition?.InstantFilm);
+                RestoreInstantControls(active.RawDefinition?.InstantFilm);NotifySceneExposure();QueueLayerThumbnails();
                 Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("SessionTransfer",token);
                 foreach(var item in restored)
                 {
@@ -204,7 +204,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             {
                 ActiveTarget=oldActive;TargetImage=oldSource;TargetName=oldActive.FileName;
                 Editor.RestoreTargetEngine(oldActive.EngineSnapshot,oldActive.ExecutionModeSnapshot);
-                Editor.RawLocalEditing=oldActive.RawDefinition is {ProcessingVersion:4,IsRenderedInput:false,InstantFilm:null};
+                Editor.RawLocalEditing=oldActive.RawDefinition is {InstantFilm:null} od&&(od.ProcessingVersion==4&&!od.IsRenderedInput||od.ProcessingVersion==5&&od.RenderedInputVersion==2);
                 Editor.ApplyTargetSnapshot(oldActive.AppliedLookSnapshot,oldActive.FilmSettingsSnapshot,oldActive.RawDefinition?.LocalEdits?.Stack??oldActive.ColorAdjustmentStackSnapshot,render:false,targetIdentity:oldActive.ActiveEditVersionId??oldActive.Id);
                 Editor.RestorePreparedSource(oldEditorSource,oldActive.AssetId);Editor.StopProcessing();
                 if(oldImage is not null){Editor.PresentIndependentRaw(oldImage);Editor.SetIndependentRawSize(oldSize);Editor.IndependentRawMode=oldIndependent;Editor.Enabled=oldEnabled;Editor.ViewMode=oldView;}

@@ -137,7 +137,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         var snapshot = SelectedLook?.Normalize();
         foreach (var target in targets)
         {
-            if(target.RawDefinition is{} raw){if(RawLocalEditing&&raw.ProcessingVersion==4&&!raw.IsRenderedInput&&raw.InstantFilm is null){var local=AdjustmentStack.Nodes.Count>0?new ProfessionalRawLocalEdits(AdjustmentStack.DeepClone()).Freeze():null;if(System.Text.Json.JsonSerializer.Serialize(raw.LocalEdits)!=System.Text.Json.JsonSerializer.Serialize(local))target.RawDefinition=raw with{LocalEdits=local};target.ColorAdjustmentStackSnapshot=null;}continue;}
+            if(target.RawDefinition is{} raw){if(RawLocalEditing&&raw.InstantFilm is null&&(raw.ProcessingVersion==4&&!raw.IsRenderedInput||raw.ProcessingVersion==5&&raw.RenderedInputVersion==2)){var local=AdjustmentStack.Nodes.Count>0?new ProfessionalRawLocalEdits(AdjustmentStack.DeepClone(),raw.IsRenderedInput?2:1).Freeze():null;if(System.Text.Json.JsonSerializer.Serialize(raw.LocalEdits)!=System.Text.Json.JsonSerializer.Serialize(local))target.RawDefinition=raw with{LocalEdits=local};target.ColorAdjustmentStackSnapshot=null;}continue;}
             target.AppliedLookSnapshot = snapshot is null ? null : snapshot with { ReferenceSources = snapshot.ReferenceSources.ToArray() };
             target.FilmSettingsSnapshot = FilmSettings with { };
             target.ColorAdjustmentStackSnapshot = AdjustmentStack.Nodes.Count > 0 ? AdjustmentStack.DeepClone() : null;

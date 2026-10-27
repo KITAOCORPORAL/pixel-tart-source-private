@@ -1,0 +1,13 @@
+{
+  "inputRaw": "Existing LibRaw021 linear ProPhoto D65, black/WB/camera matrix once",
+  "inputRaster": "Existing WIC interpreted rendered sRGB D65 float, no scene RAW claim",
+  "scene": "baseEV then optional SceneExposureV1, negative/>1 preserved until old Display",
+  "display": "PV4 luminance shoulder/gamut/OETF then existing encoded-sRGB local stack",
+  "geometryV2": "Explicit new version; encoded-sRGB double bilinear, constant black border",
+  "export": "Same full region/row definitions to sRGB TIFF16/PNG16 or JPEG95; no display preview baked into RAW",
+  "cameraWB": "Decoder CameraGains, changes DecodeKey; no Kelvin equation",
+  "localWB": "Existing relative display-referred adaptation, not camera WB",
+  "oldVersions": "PV4/PV5/PV6 defaults null scene/geometry; legacy geometry v1 unchanged",
+  "generalIcc": "NOT newly implemented; synthetic ICC research remains off",
+  "CalibrationEligible": false
+}

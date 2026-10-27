@@ -31,7 +31,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                     if(version.RawDefinition is{} raw)
                     {
                         if(target.LinearRawMaster is not{} master)throw new InvalidOperationException("当前RAW缓存不可用，请先激活照片。");if(raw.DecodeKey!=master.Contract.DecodeKey)throw new NotSupportedException("当前对比不并发重解码不同RAW输入定义；请先统一输入设置。");
-                        var pixels=await RenderProfessionalPreviewAsync(master,raw,1200,cts.Token,"R53VariantCompare");try{result=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(pixels.ToVisualRgb24(cts.Token)),pixels.Orientation);}finally{if(InstantV3ProductPipeline.IsV3(raw))pixels.Dispose();}
+                        var pixels=await RenderProfessionalPreviewAsync(master,raw,1200,cts.Token,"R53VariantCompare");try{result=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(pixels.ToVisualRgb24(cts.Token)),pixels.Orientation);}finally{pixels.Dispose();}
                     }
                     else if(version.Stack is{} stack){source??=await Task.Run(()=>StudioQuickExport.LoadCompareProxy(target.Path,1200,cts.Token),cts.Token);result=await Task.Run(()=>ColorStudioBitmapRenderer.Render(source,stack,version.Look,cts.Token),cts.Token);}
                     else if(version.Look is{} look){source??=await Task.Run(()=>StudioQuickExport.LoadCompareProxy(target.Path,1200,cts.Token),cts.Token);result=await Task.Run(()=>ColorStudioBitmapRenderer.Render(source,ColorStudioLegacyMigration.Migrate(look with{Film=version.Film??look.Film}).Stack,look,cts.Token),cts.Token);}

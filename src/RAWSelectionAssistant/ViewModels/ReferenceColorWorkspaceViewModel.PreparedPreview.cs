@@ -23,7 +23,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var renderMs=renderWatch.Elapsed.TotalMilliseconds;
         BitmapSource image;
         try { image=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(rendered.ToVisualRgb24(token)),rendered.Orientation); }
-        finally { if(InstantV3ProductPipeline.IsV3(definition))rendered.Dispose(); }
+        finally { rendered.Dispose(); }
         var original=ComparisonDefinition(definition);
         var key=ComparisonKey(master,original);
         BitmapSource? before=_comparisonKey==key?_comparisonImage:original==definition?image:null;

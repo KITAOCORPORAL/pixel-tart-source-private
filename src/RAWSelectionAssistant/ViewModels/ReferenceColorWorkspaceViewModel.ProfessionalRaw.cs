@@ -75,7 +75,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         });
         ApplyProfessionalRawCommand=new AsyncRelayCommand(async _=>
         {
-            if(ActiveTarget is not {} target||target.RawDefinition is null||target.RawDefinition.IsRenderedInput||IsLoading||IsExporting||IsInstantGenerating)return;
+            if(ActiveTarget is not {} target||target.RawDefinition is null||target.RawDefinition.IsRenderedInput||IsLoading||IsExporting||IsInstantGenerating||Editor.ReadOnlyTarget||target.RawDefinition.SceneExposure?.Locked==true)return;
             try
             {
                 var previous=target.RawDefinition;var version=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);
@@ -83,7 +83,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 var master=target.LinearRawMaster?.Contract.DecodeKey==next.DecodeKey?target.LinearRawMaster:await _professionalDecoder.DecodeAsync(target.Path,next);
                 if(_disposed||!ReferenceEquals(ActiveTarget,target)||target.ActiveEditVersionId!=version||target.RawDefinition!=previous||revision!=Volatile.Read(ref _activationRevision))return;
                 if(!string.Equals(master.Contract.SourceSha256,target.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("RAW 源身份改变。");
-                target.RawDefinition=next;target.LinearRawMaster=master;target.RawInput=master.Contract;await ActivateTargetAsync(target);CaptureEditVersion(target);
+                RememberRawLocal(target,previous);target.RawDefinition=next;target.LinearRawMaster=master;target.RawInput=master.Contract;await ActivateTargetAsync(target);CaptureEditVersion(target);
             }
             catch(Exception e)when(e is InvalidDataException or IOException or ArgumentException or NotSupportedException or InvalidOperationException){LastProcessingFailure=StudioProcessingFailure.From(e,"ProfessionalRaw");OnPropertyChanged(nameof(LastProcessingFailure));StatusText="未应用 RAW 参数，保留上一版本："+e.Message;}
         });
@@ -125,7 +125,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         TrimProfessionalMasters(target);
         ActiveTarget=target;TargetImage=image;TargetName=target.FileName;target.IsActive=true;foreach(var other in Targets.Where(x=>!ReferenceEquals(x,target)))other.IsActive=false;
         Editor.RestoreTargetEngine(target.EngineSnapshot,target.ExecutionModeSnapshot);
-        Editor.RawLocalEditing=definition.ProcessingVersion==4&&!definition.IsRenderedInput&&definition.InstantFilm is null;OnPropertyChanged(nameof(RawLocalEditing));OnPropertyChanged(nameof(DarkroomAdjustmentEnabled));OnPropertyChanged(nameof(RasterAvailabilityReason));
+        Editor.RawLocalEditing=definition.InstantFilm is null&&(definition.ProcessingVersion==4&&!definition.IsRenderedInput||definition.ProcessingVersion==5&&definition.RenderedInputVersion==2);OnPropertyChanged(nameof(RawLocalEditing));OnPropertyChanged(nameof(DarkroomAdjustmentEnabled));OnPropertyChanged(nameof(RasterAvailabilityReason));
         Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot,target.FilmSettingsSnapshot,definition.LocalEdits?.Stack??definition.LightPrint?.WindowAdjustments??target.ColorAdjustmentStackSnapshot,render:false,targetIdentity:target.ActiveEditVersionId??target.Id);
         using var presentationMeasurement=StudioPreviewDiagnostics.Measure("Present");
         Editor.IndependentRawMode=true;await Editor.SetSourceAsync(target.AssetId,before,token,render:false);Editor.StopProcessing();if(_disposed||revision!=Volatile.Read(ref _activationRevision)||token.IsCancellationRequested)throw new OperationCanceledException(token);Editor.PresentIndependentRaw(image);var oriented=ProfessionalRawPipeline.OutputSize(master,definition);Editor.SetIndependentRawSize(new(oriented.Width,oriented.Height));
@@ -139,7 +139,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(_disposed||revision!=Volatile.Read(ref _activationRevision))throw new OperationCanceledException(token);
         if(before is not null){_comparisonKey=ComparisonKey(master,ComparisonDefinition(definition));_comparisonImage=before;}
         UpdateComparisonAvailability();
-        CaptureEditVersion(target);EnsureR53Variants(target);if(Editor.RawLocalEditing)WarmRawFastBase(master,definition);await RefreshPreviewAnalysisAsync(token,image);
+        CaptureEditVersion(target);EnsureR53Variants(target);if(Editor.RawLocalEditing)WarmRawFastBase(master,definition);NotifySceneExposure();QueueLayerThumbnails();await RefreshPreviewAnalysisAsync(token,image);
         token.ThrowIfCancellationRequested();if(_disposed||revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)throw new OperationCanceledException(token);
     }
     private async Task ExportProfessionalRawAsync(ReferenceTargetItem target,ProfessionalRawDefinition definition,string temporary,StudioExportFormat format,CancellationToken token)

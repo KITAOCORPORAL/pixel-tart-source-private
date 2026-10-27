@@ -242,6 +242,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         Editor.PropertyChanged += (_, args) =>
         {
             ObserveRawLocalChange(args.PropertyName);
+            if(args.PropertyName is nameof(Editor.AdjustmentStack) or nameof(Editor.SourceImage))QueueLayerThumbnails();
             if(args.PropertyName==nameof(TetherReferenceModeViewModel.ViewMode))OnPropertyChanged(nameof(PhotographerComparisonValue));
             if((args.PropertyName is nameof(TetherReferenceModeViewModel.ViewMode) or nameof(TetherReferenceModeViewModel.ShowOriginal))&&Editor.ComparisonUnavailable&&(Editor.ShowOriginal||Editor.ViewMode is "左右对比" or "并排对比"))_ = RequestComparisonAsync();
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
@@ -536,7 +537,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public bool HasTarget => TargetImage is not null;
     public string TargetName { get => _targetName; private set => SetProperty(ref _targetName, value); }
     public string StatusText { get => _statusArguments.Length == 0 ? StudioLocalizationService.Current[_statusText] : StudioLocalizationService.Current.Format(_statusText, _statusArguments); private set { _statusArguments = []; SetProperty(ref _statusText, value); } }
-    public bool IsLoading { get => _isLoading || _sessionLoading; private set { if (SetProperty(ref _isLoading, value)) RefreshSyncAvailability(); } }
+    public bool IsLoading { get => _isLoading || _sessionLoading; private set { if (SetProperty(ref _isLoading, value)){RefreshSyncAvailability();NotifySceneExposure();OnPropertyChanged(nameof(RawLocalEditing));OnPropertyChanged(nameof(RasterGeometryEditing));OnPropertyChanged(nameof(LocalOutputEditing));OnPropertyChanged(nameof(DarkroomAdjustmentEnabled));} } }
     public bool IsExporting => _exportCancellation is not null;
     public int ExportCompleted { get => _exportCompleted; private set => SetProperty(ref _exportCompleted, value); }
     public int ExportTotal { get => _exportTotal; private set => SetProperty(ref _exportTotal, value); }
@@ -727,7 +728,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     public void Dispose()
     {
-        CancelRawLocalPreview();ClearR53CompareCache();
+        CancelRawLocalPreview();rawFastBases.Dispose();ClearR53CompareCache();
         _r53Autosave.Stop();
         if(_disposed)return;
         CancelLightPrintTask(false);_paperPreviewCancellation?.Cancel();CancelComparison();_disposed = true;

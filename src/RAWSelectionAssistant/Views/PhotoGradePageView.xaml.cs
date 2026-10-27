@@ -85,6 +85,7 @@ public partial class PhotoGradePageView:UserControl
  private void SelectTool(object sender,RoutedEventArgs e){if(cropPanel is not null)cropPanel.Visibility=Visibility.Collapsed;CropOverlay.Children.Clear();CancelMaskStroke();activeTool="选择";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Arrow;DrawMaskOverlay();}
  private void HandTool(object sender,RoutedEventArgs e){CancelMaskStroke();activeTool="抓手";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Hand;DrawMaskOverlay();}
  private void ZoomTool(object sender,RoutedEventArgs e){CancelMaskStroke();activeTool="缩放";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Cross;DrawMaskOverlay();}
+ private void ClearSceneMask(object sender,RoutedEventArgs e)=>model?.ClearSceneExposureMask();
  private void BindSceneMask(object sender,RoutedEventArgs e)=>model?.BindSceneExposureMask();
  private void CameraI2(object sender,RoutedEventArgs e){if(model is not null)model.LightPrintCamera="i-2";}
  private void CameraSX70(object sender,RoutedEventArgs e){if(model is not null)model.LightPrintCamera="SX-70";}

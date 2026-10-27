@@ -5,6 +5,7 @@ namespace RAWSelectionAssistant.WpfTests;
 [TestClass]
 public sealed class CanvasObjectTransformTests
 {
+    [TestMethod]public async Task R53VisibilityOpacityAreVersionedUndoableAndPersisted(){var editor=CanvasFixtures.Create(2);editor.Select(editor.Document.Objects[0].ObjectId);editor.SetOpacity(.35);editor.SetVisible(false);Assert.IsTrue(editor.Selected.Single().Hidden);Assert.AreEqual(.35,editor.Selected.Single().Opacity);editor.Undo();Assert.IsFalse(editor.Selected.Single().Hidden);editor.Redo();editor.SetLocked(true);var before=editor.Document;editor.SetOpacity(.9);editor.SetVisible(true);Assert.AreSame(before,editor.Document);var root=System.IO.Path.Combine(System.IO.Path.GetTempPath(),"canvas-opacity-"+Guid.NewGuid().ToString("N"));try{var store=new CanvasDocumentStore(root);await store.SaveAsync(editor.Document);var restored=await store.LoadAsync(editor.Document.CanvasId);Assert.IsTrue(restored!.Objects[0].Hidden);Assert.AreEqual(.35,restored.Objects[0].Opacity);}finally{if(System.IO.Directory.Exists(root))System.IO.Directory.Delete(root,true);}}
     [TestMethod]
     public void StepLayerMovesSelectionOneLevelAndUndoRestoresOrder()
     {

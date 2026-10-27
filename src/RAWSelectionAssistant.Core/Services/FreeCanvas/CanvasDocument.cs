@@ -23,6 +23,8 @@ public sealed record CanvasObject
     public double Y { get; init; }
     public double Width { get; init; } = 320;
     public double Height { get; init; } = 240;
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] public bool Hidden {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] public double? Opacity {get;init;}
     public double Rotation { get; init; }
     public bool FlipX { get; init; }
     public bool FlipY { get; init; }
@@ -107,6 +109,7 @@ public sealed class CanvasDocumentStore(string directory)
                 throw new InvalidDataException("画布自有参考不得混用外链或缩略缓存来源。");
         }
         foreach (var item in document.Objects)
-            if (item.CanvasId != document.CanvasId || item.ObjectId == Guid.Empty || !new[] { item.X, item.Y, item.Width, item.Height, item.Rotation, item.FontSize, item.SourceWidth, item.SourceHeight,item.CropRect.X, item.CropRect.Y, item.CropRect.Width, item.CropRect.Height }.All(double.IsFinite) || item.Width <= 0 || item.Height <= 0 || item.SourceWidth<=0||item.SourceHeight<=0||item.FontSize<=0||item.CropRect != item.CropRect.Normalize() || item.Palette is { Colors.Count: not (3 or 5 or 7) } || item.Palette?.Colors.Any(color => color.Weight < 0 || !double.IsFinite(color.Weight) || string.IsNullOrWhiteSpace(color.Hex)) == true) throw new InvalidDataException("画布对象数据无效。");
+            if (item.Opacity is{} opacity&&(!double.IsFinite(opacity)||opacity<0||opacity>1))throw new InvalidDataException("Invalid canvas opacity");
+            else if (item.CanvasId != document.CanvasId || item.ObjectId == Guid.Empty || !new[] { item.X, item.Y, item.Width, item.Height, item.Rotation, item.FontSize, item.SourceWidth, item.SourceHeight,item.CropRect.X, item.CropRect.Y, item.CropRect.Width, item.CropRect.Height }.All(double.IsFinite) || item.Width <= 0 || item.Height <= 0 || item.SourceWidth<=0||item.SourceHeight<=0||item.FontSize<=0||item.CropRect != item.CropRect.Normalize() || item.Palette is { Colors.Count: not (3 or 5 or 7) } || item.Palette?.Colors.Any(color => color.Weight < 0 || !double.IsFinite(color.Weight) || string.IsNullOrWhiteSpace(color.Hex)) == true) throw new InvalidDataException("画布对象数据无效。");
     }
 }

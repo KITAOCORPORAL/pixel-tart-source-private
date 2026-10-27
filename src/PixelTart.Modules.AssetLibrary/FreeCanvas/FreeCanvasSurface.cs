@@ -144,10 +144,10 @@ public sealed class FreeCanvasSurface : FrameworkElement
         var accent = Brush("Brush.Accent", Colors.Turquoise);
         dc.DrawRectangle(Brush("Brush.Background", Color.FromRgb(20,23,27)), null, new Rect(RenderSize));
         dc.PushTransform(new TranslateTransform(_pan.X, _pan.Y)); dc.PushTransform(new ScaleTransform(_zoom,_zoom));
-        foreach (var item in Editor.Document.Objects.OrderBy(item => item.ZIndex))
+        foreach (var item in Editor.Document.Objects.Where(item=>!item.Hidden).OrderBy(item => item.ZIndex))
         {
             dc.PushTransform(new RotateTransform(item.Rotation, item.X+item.Width/2,item.Y+item.Height/2));
-            var rect = DisplayRect(item);
+            var rect = DisplayRect(item);dc.PushOpacity(item.Opacity??1);
             if (item.IsText)
             {
                 Brush textBrush; try { textBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(item.TextColor)); } catch { textBrush = Brushes.White; }
@@ -171,6 +171,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
                 dc.Pop(); dc.Pop();
             }
             else { dc.DrawRectangle(Brush("Brush.Panel",Colors.DimGray),null,rect); DrawLabel(dc,"预览暂不可用",new(item.X+12,item.Y+12)); }
+            dc.Pop();
             if (Editor.Selection.Contains(item.ObjectId)) dc.DrawRectangle(null,new Pen(accent,1.5/_zoom),rect);
             if (item.Locked) DrawLabel(dc,"已锁定",new(item.X+6,item.Y+6));
             if(_sourceErrors.TryGetValue(item.ObjectId,out var error))DrawLabel(dc,item.PlanningSource is not null?"项目副本不可用 · 请检查来源":"预览不可用",new(item.X+6,item.Y+item.Height-24/_zoom));
@@ -203,7 +204,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
         var text=new FormattedText(label,CultureInfo.CurrentUICulture,FlowDirection.LeftToRight,new Typeface("Microsoft YaHei UI"),11/_zoom,Brush("Brush.Text.Secondary",Colors.LightGray),VisualTreeHelper.GetDpi(this).PixelsPerDip);
         dc.DrawRectangle(Brush("Brush.Surface.Elevated",Colors.DarkSlateGray),null,new(point,new Size(text.Width+8/_zoom,text.Height+4/_zoom))); dc.DrawText(text,new(point.X+4/_zoom,point.Y+2/_zoom));
     }
-    public CanvasObject? Hit(Point world) => Editor.Document.Objects.OrderByDescending(item=>item.ZIndex).FirstOrDefault(item=>
+    public CanvasObject? Hit(Point world) => Editor.Document.Objects.Where(item=>!item.Hidden).OrderByDescending(item=>item.ZIndex).FirstOrDefault(item=>
     {
         var inverse=new RotateTransform(-item.Rotation,item.X+item.Width/2,item.Y+item.Height/2).Transform(world);
         return new Rect(item.X,item.Y,item.Width,item.Height).Contains(inverse);

@@ -209,6 +209,8 @@ public sealed class FreeCanvasView : UserControl
         }
 
 
+        var opacity=new Slider{Minimum=0,Maximum=1,Value=Editor.Selected.FirstOrDefault()?.Opacity??1,Width=75,IsEnabled=Editor.Selected.All(x=>!x.Locked),ToolTip="对象透明度"};opacity.ValueChanged+=(_,_)=>Editor.SetOpacity(opacity.Value);_floating.Children.Add(opacity);
+        _floating.Children.Add(Button(Editor.Selected.All(x=>x.Hidden)?"显示":"隐藏",()=>Editor.SetVisible(Editor.Selected.All(x=>x.Hidden))));
         _floating.Children.Add(Button(Editor.Selected.All(item=>item.Locked)?"解锁":"锁定",()=>Editor.SetLocked(!Editor.Selected.All(item=>item.Locked))));
         if(Editor.Selected.Count>1)_floating.Children.Add(Button("移出画布",Editor.Remove));
         _floating.Children.Add(Button("更多",OpenContextMenu));

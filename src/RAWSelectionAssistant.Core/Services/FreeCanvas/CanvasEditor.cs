@@ -105,6 +105,8 @@ public sealed class CanvasEditor
         });
     }
     private static double NormalizeAngle(double angle) => ((angle % 360) + 360) % 360;
+    public void SetOpacity(double value){if(double.IsFinite(value))Transform(item=>item with{Opacity=Math.Clamp(value,0,1)});}
+    public void SetVisible(bool visible)=>Transform(item=>item with{Hidden=!visible});
     public void Flip(bool horizontal) => Transform(item => horizontal ? item with { FlipX = !item.FlipX } : item with { FlipY = !item.FlipY });
     public void Crop(CanvasCrop crop)
     {

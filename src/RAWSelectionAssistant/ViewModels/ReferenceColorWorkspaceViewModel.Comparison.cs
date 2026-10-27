@@ -62,7 +62,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 var pixels=await RenderProfessionalPreviewAsync(master,original,1600,token,"ComparePreview");
                 BitmapSource before;
                 try{before=StudioQuickExport.ApplyOrientation(RawDisplayBitmapAdapter.ToBitmap(pixels.ToVisualRgb24(token)),pixels.Orientation);}
-                finally{if(InstantV3ProductPipeline.IsV3(original))pixels.Dispose();}
+                finally{pixels.Dispose();}
                 CandidateProcessingEvidence.Enter("ComparisonPrepared",token);
                 if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
                 definition.InstantFilm?.V3?.MultipleInput?.ValidateSource(token);token.ThrowIfCancellationRequested();

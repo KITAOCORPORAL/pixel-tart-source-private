@@ -20,7 +20,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   ResetPhotoV3DraftCommand=new(_=>{if(IsLightPrintLocked)return;var profile=SelectedInstantProfile;RestoreInstantControls(null);SelectedInstantProfile=profile;InstantEngineVersion="V3";},_=>!IsLightPrintLocked&&!IsInstantGenerating&&!IsLoading&&!IsExporting&&ActiveTarget is not null);
   PhotoGradeUndoCommand=new(async _=>
   {
-   if(RawLocalEditing){MoveRawLocal(false);return;}
+   if(LocalOutputEditing&&MoveRawLocal(false))return;
    if(await MoveWindowHistoryAsync(false))return;
    if(HasInstantHistory(_instantV3Undo))await UndoInstantV3Command.ExecuteAsync(null);
    else if(!IsProfessionalRaw||RawLocalEditing)Editor.UndoAdjustmentCommand.Execute(null);
@@ -28,7 +28,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   PhotoGradeRedoCommand=new(async _=>
   {
    // Undo can return to a raster version, so route by history, not only current engine.
-   if(RawLocalEditing){MoveRawLocal(true);return;}
+   if(LocalOutputEditing&&MoveRawLocal(true))return;
    if(await MoveWindowHistoryAsync(true))return;
    if(HasInstantHistory(_instantV3Redo))await RedoInstantV3Command.ExecuteAsync(null);
    else if(!IsProfessionalRaw||RawLocalEditing)Editor.RedoAdjustmentCommand.Execute(null);

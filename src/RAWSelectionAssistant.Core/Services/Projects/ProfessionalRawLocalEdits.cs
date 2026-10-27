@@ -4,15 +4,17 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 /// <summary>Explicit post-PV4-display editing extension. Never a linear-RAW blend or PV7 profile engine.</summary>
 public sealed record ProfessionalRawLocalEdits(ColorAdjustmentStack Stack,int Version=1)
 {
- public ProfessionalRawLocalEdits Freeze(){if(Version!=1||Stack is null)throw new InvalidDataException("Unknown professional local edit version");var stack=Stack.Normalize();if(stack.Nodes.Any(n=>!ProfessionalRawLocalRenderer.Supports(n.Type)))throw new NotSupportedException("专业RAW局部层当前支持白平衡、影调、色阶、曲线、色彩平衡、肤色和基础预设；不支持参考匹配或空间细节层。");return this with{Stack=stack.DeepClone()};}
+ public ProfessionalRawLocalEdits Freeze(){if(Version is not(1 or 2)||Stack is null)throw new InvalidDataException("Unknown professional local edit version");var stack=Stack.Normalize();if(stack.Nodes.Any(n=>!ProfessionalRawLocalRenderer.Supports(n.Type)))throw new NotSupportedException("专业RAW局部层当前支持白平衡、影调、色阶、曲线、色彩平衡、肤色和基础预设；不支持参考匹配或空间细节层。");return this with{Stack=stack.DeepClone()};}
 }
 /// <summary>Output-only source-normalized crop/quarter-turn. Mask coordinates remain upright uncropped source.</summary>
 public sealed record ProfessionalRawGeometry(double X=0,double Y=0,double Width=1,double Height=1,int QuarterTurns=0,bool FlipHorizontal=false,int Version=1)
 {
- public ProfessionalRawGeometry Validate(){if(Version!=1||!double.IsFinite(X+Y+Width+Height)||X<0||Y<0||Width<=0||Height<=0||X+Width>1.000000001||Y+Height>1.000000001||QuarterTurns is <0 or >3)throw new InvalidDataException("Invalid RAW output geometry");return this;}
+ [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
+ public double StraightenDegrees{get;init;}
+ public ProfessionalRawGeometry Validate(){if(Version is not(1 or 2)||Version==1&&StraightenDegrees!=0||!double.IsFinite(StraightenDegrees)||Math.Abs(StraightenDegrees)>15||!double.IsFinite(X+Y+Width+Height)||X<0||Y<0||Width<=0||Height<=0||X+Width>1.000000001||Y+Height>1.000000001||QuarterTurns is <0 or >3)throw new InvalidDataException("Invalid RAW output geometry");return this;}
  public (int Width,int Height) Size(int w,int h){Validate();var cw=Math.Max(1,(int)Math.Round(w*Width));var ch=Math.Max(1,(int)Math.Round(h*Height));return QuarterTurns%2==0?(cw,ch):(ch,cw);}
  public StudioMaskPoint Source(double u,double v){var p=SourceTuple(u,v);return new(p.X,p.Y);}
- public (double X,double Y) SourceTuple(double u,double v){if(FlipHorizontal)u=1-u;(u,v)=QuarterTurns switch{1=>(v,1-u),2=>(1-u,1-v),3=>(1-v,u),_=>(u,v)};return (X+u*Width,Y+v*Height);}
+ public (double X,double Y) SourceTuple(double u,double v,double sourceAspect=1){if(FlipHorizontal)u=1-u;(u,v)=QuarterTurns switch{1=>(v,1-u),2=>(1-u,1-v),3=>(1-v,u),_=>(u,v)};var x=X+u*Width;var y=Y+v*Height;if(StraightenDegrees!=0){double a=StraightenDegrees*Math.PI/180,dx=(x-.5)*sourceAspect,dy=y-.5;return (.5+(dx*Math.Cos(a)-dy*Math.Sin(a))/sourceAspect,.5+dx*Math.Sin(a)+dy*Math.Cos(a));}return (x,y);}
 }
 public static class ProfessionalRawLocalRenderer
 {
@@ -29,12 +31,16 @@ public static class ProfessionalRawLocalRenderer
   prepared??=new Prepared(m,d,token);d=prepared.Definition;
   var size=Size(m,d);if(left<0||top<0||width<=0||height<=0||left+width>size.Width||top+height>size.Height)throw new ArgumentOutOfRangeException(nameof(left));
   var oriented=ProfessionalRawPipeline.OrientedSize(m);var geometry=d.Geometry??new();var values=new float[checked(width*height*3)];
-  (double X,double Y) Coordinate(int x,int y){var u=(left+x+.5)/size.Width;var v=(top+y+.5)/size.Height;var p=geometry.SourceTuple(u,v);return ((Math.Clamp((int)(p.X*oriented.Width),0,oriented.Width-1)+.5)/oriented.Width,(Math.Clamp((int)(p.Y*oriented.Height),0,oriented.Height-1)+.5)/oriented.Height);}
+  (double X,double Y) Coordinate(int x,int y){var u=(left+x+.5)/size.Width;var v=(top+y+.5)/size.Height;var p=geometry.SourceTuple(u,v,(double)oriented.Width/oriented.Height);if(geometry.Version==2)return p;return ((Math.Clamp((int)(p.X*oriented.Width),0,oriented.Width-1)+.5)/oriented.Width,(Math.Clamp((int)(p.Y*oriented.Height),0,oriented.Height-1)+.5)/oriented.Height);}
   var baseClock=RawLocalProfile.Begin();
   for(int y=0;y<height;y++){token.ThrowIfCancellationRequested();for(int x=0;x<width;x++){
    var p=Coordinate(x,y);int sx=Math.Clamp((int)(p.X*oriented.Width),0,oriented.Width-1),sy=Math.Clamp((int)(p.Y*oriented.Height),0,oriented.Height-1);var w=m.Image.Width;var h=m.Image.Height;
    var(px,py)=m.Image.Orientation switch{2=>(w-1-sx,sy),3=>(w-1-sx,h-1-sy),4=>(sx,h-1-sy),5=>(sy,sx),6=>(sy,h-1-sx),7=>(w-1-sy,h-1-sx),8=>(w-1-sy,sx),_=>(sx,sy)};
-   var v=ProfessionalRawPipeline.RenderPixel(m,d,px,py,prepared.SceneMask);var i=(y*width+x)*3;values[i]=(float)v.X;values[i+1]=(float)v.Y;values[i+2]=(float)v.Z;
+   var v=ProfessionalRawPipeline.RenderPixel(m,d,px,py,prepared.SceneMask);
+   if(geometry.Version==2){double fx=p.X*oriented.Width-.5,fy=p.Y*oriented.Height-.5;int x0=(int)Math.Floor(fx),y0=(int)Math.Floor(fy);double dx=fx-x0,dy=fy-y0;
+    RAWSelectionAssistant.Core.Services.Color.ColorVector3 Read(int ox,int oy){if(ox<0||oy<0||ox>=oriented.Width||oy>=oriented.Height)return new(0,0,0);var(ax,ay)=m.Image.Orientation switch{2=>(w-1-ox,oy),3=>(w-1-ox,h-1-oy),4=>(ox,h-1-oy),5=>(oy,ox),6=>(oy,h-1-ox),7=>(w-1-oy,h-1-ox),8=>(w-1-oy,ox),_=>(ox,oy)};return ProfessionalRawPipeline.RenderPixel(m,d,ax,ay,prepared.SceneMask);}
+    var a=Read(x0,y0);var b=Read(x0+1,y0);var c=Read(x0,y0+1);var e=Read(x0+1,y0+1);double Mix(double aa,double bb,double cc,double ee)=>(aa*(1-dx)+bb*dx)*(1-dy)+(cc*(1-dx)+ee*dx)*dy;v=new(Mix(a.X,b.X,c.X,e.X),Mix(a.Y,b.Y,c.Y,e.Y),Mix(a.Z,b.Z,c.Z,e.Z));
+   }var i=(y*width+x)*3;values[i]=(float)v.X;values[i+1]=(float)v.Y;values[i+2]=(float)v.Z;
   }}
   RawLocalProfile.End("base-raw-coordinate-display",baseClock);
   var current=new HighBitDepthImageBuffer(width,height,values,"16","sRGB",1);
@@ -54,7 +60,7 @@ public static class ProfessionalRawLocalRenderer
  public static HighBitDepthImageBuffer Fast(ProfessionalRawMaster m,ProfessionalRawDefinition d,HighBitDepthImageBuffer? basis=null,CancellationToken token=default)
  {
   var prepared=new Prepared(m,d,token);d=prepared.Definition;var current=basis?.Clone()??FastBase(m,d,800,token);var oriented=ProfessionalRawPipeline.OrientedSize(m);var geometry=d.Geometry??new();var w=current.Width;var h=current.Height;
-  (double X,double Y) Coordinate(int x,int y){var p=geometry.SourceTuple((x+.5)/w,(y+.5)/h);return ((Math.Clamp((int)(p.X*oriented.Width),0,oriented.Width-1)+.5)/oriented.Width,(Math.Clamp((int)(p.Y*oriented.Height),0,oriented.Height-1)+.5)/oriented.Height);}
+  (double X,double Y) Coordinate(int x,int y){var p=geometry.SourceTuple((x+.5)/w,(y+.5)/h,(double)oriented.Width/oriented.Height);if(geometry.Version==2)return p;return ((Math.Clamp((int)(p.X*oriented.Width),0,oriented.Width-1)+.5)/oriented.Width,(Math.Clamp((int)(p.Y*oriented.Height),0,oriented.Height-1)+.5)/oriented.Height);}
   foreach(var node in d.LocalEdits?.Stack.Nodes.Where(n=>n.Enabled)??[]){if(node.CompositeVersion==1&&node.Opacity==0)continue;var effect=ColorStudioRenderPipeline.ApplyPointEffect(current,node,token);var next=StudioLayerComposite.Apply(current,effect,node,token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks.GetValueOrDefault(node.Id));if(!ReferenceEquals(effect,next))effect.Dispose();current.Dispose();current=next;}return current;
  }
  public static HighBitDepthImageBuffer Preview(ProfessionalRawMaster m,ProfessionalRawDefinition d,int edge,CancellationToken token=default)

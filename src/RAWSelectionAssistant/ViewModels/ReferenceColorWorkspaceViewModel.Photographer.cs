@@ -24,10 +24,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public string PaperTechnicalDetail=>$"ID {SelectedInstantProfile.Id} · {SelectedInstantProfile.ChemicalGeneration} · {SelectedInstantProfile.Evidence}";
  public string SelectedPhotographerPaperId {get=>SelectedInstantProfile.Id;set{if(InstantFilmProfiles.Available.FirstOrDefault(x=>x.Id==value) is{} p)SelectedInstantProfile=p;}}
  public string PhotographerPaperName=>PhotographerPapers.FirstOrDefault(x=>x.ProfileId==SelectedInstantProfile.Id)?.Name??SelectedInstantProfile.Name;
- public string PaperPreviewAvailabilityReason=>ActiveTarget is null?"先导入照片。":RawMatchTiff16ProductPipeline.IsRaw(ActiveTarget.Path)?"RAW 相纸缩略图暂不可用；可从已解码照片或 JPEG／TIFF 试用，完整应用仍按原输入准入。":"缩略图只比较同一输入的色彩，不含纸框、装饰或当前编辑。";
+ public string PaperPreviewAvailabilityReason=>ActiveTarget is null?"先导入照片。":RawMatchTiff16ProductPipeline.IsRaw(ActiveTarget.Path)?"使用已解码 RAW 基础显示生成相纸色彩缩略；不改变原 RAW，不叠加当前显示后局部层。":"缩略图只比较同一输入的色彩，不含纸框、装饰或当前编辑。";
  public string PhotographerPaperDetail=>PhotographerPapers.FirstOrDefault(x=>x.ProfileId==SelectedInstantProfile.Id)?.Description??"历史型号 · 保留原配方";
- public bool DarkroomAdjustmentEnabled=>RawLocalEditing||PhotoGradeRasterToolsEnabled||ActiveTarget?.RawDefinition?.LightPrint is not null;
- public string RasterAvailabilityReason=>ActiveTarget is null?"先导入照片，开始基础调整或选择相纸。":ActiveTarget?.RawDefinition?.LightPrint is not null?"仅调画面窗口，相框保持不变；调好后点应用到光片窗口。":RawLocalEditing?"RAW线性基础 → 显示sRGB局部层；源RAW不转换，裁剪后蒙版仍绑定源图。":IsProfessionalRaw?"当前历史效果版本；此配方不支持通用局部层。":IsLoading||IsExporting||IsInstantGenerating?"当前任务进行中，完成或取消后可编辑。":"基础调色与曲线修改当前编辑；光片先实时预览再显影。";
+ public bool DarkroomAdjustmentEnabled=>LocalOutputEditing||PhotoGradeRasterToolsEnabled||ActiveTarget?.RawDefinition?.LightPrint is not null;
+ public string RasterAvailabilityReason=>ActiveTarget is null?"先导入照片，开始基础调整或选择相纸。":ActiveTarget?.RawDefinition?.LightPrint is not null?"仅调画面窗口，相框保持不变；调好后点应用到光片窗口。":RawLocalEditing?"RAW线性基础 → 显示sRGB局部层；源RAW不转换，裁剪后蒙版仍绑定源图。":IsProfessionalRaw?"当前历史效果版本；此配方不支持通用局部层，可撤销或切回可编辑变体。":IsLoading||IsExporting||IsInstantGenerating?"当前任务进行中，完成或取消后可编辑。":"基础调色与曲线修改当前编辑；光片先实时预览再显影。";
  public string PhotographerComparisonHelp=>IsProfessionalRaw?"配方基准保留第二张照片、构图与部分纸面；不是第一张未处理照片。":"配方基准为当前源照片；效果图显示当前调整。";
  private string _paperPreviewStatus="缩略图为软件真实渲染；点“预览这些相纸”使用当前照片比较色彩。";
  public string PaperPreviewStatus {get=>_paperPreviewStatus;private set=>SetProperty(ref _paperPreviewStatus,value);}
@@ -42,7 +42,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  {
   PreviewPhotographerPapersCommand=new(async _=>
   {
-   if(ActiveTarget is not{} target||RawMatchTiff16ProductPipeline.IsRaw(target.Path)||IsLoading||IsExporting||IsInstantGenerating)return;
+   if(ActiveTarget is not{} target||IsLoading||IsExporting||IsInstantGenerating||RawMatchTiff16ProductPipeline.IsRaw(target.Path)&&target.LinearRawMaster is null)return;
    await StopComparisonAsync();var revision=Volatile.Read(ref _activationRevision);var version=target.ActiveEditVersionId;
    _paperPreviewCancellation?.Cancel();using var cancellation=new CancellationTokenSource();_paperPreviewCancellation=cancellation;var token=cancellation.Token;
    try
@@ -51,7 +51,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
     var basis=InstantFilmJpegInput.Definition with{RenderedInputVersion=2};
     // A reduced gallery input is labelled preview only; full apply/export still use the original.
-    var source=await Task.Run(()=>StudioQuickExport.Load(target.Path,384),token);
+    BitmapSource source;
+    if(RawMatchTiff16ProductPipeline.IsRaw(target.Path)&&target.LinearRawMaster is{} raw){using var pin=StudioGlobalResources.RetainBuffer(raw.Image,(long)raw.Image.Rgb32.Length*4);var original=target.RawDefinition! with{LocalEdits=null,SceneExposure=null,InstantFilm=null,LightPrint=null};using var rendered=await RenderProfessionalPreviewAsync(raw,original,384,token,"PaperGalleryRawBase");source=RawDisplayBitmapAdapter.ToBitmap(rendered.ToVisualRgb24(token));}
+    else source=await Task.Run(()=>StudioQuickExport.Load(target.Path,384),token);
     var master=InstantFilmJpegInput.FromRendered(source,target.SourceHash??target.ObservedSourceHash!,basis);
     using var owner=master.Image;
     var recipes=PhotographerPapers.Select(choice=>
@@ -77,7 +79,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
    catch(OperationCanceledException){PaperPreviewStatus="相纸预览已取消，当前编辑保持。";}
    catch(Exception e)when(e is IOException or NotSupportedException or InvalidOperationException or ArgumentException or System.Runtime.InteropServices.COMException){PaperPreviewStatus="此输入暂不能生成相纸缩略图："+e.Message+"。仍可使用已支持的完整应用入口。";}
    finally{if(ReferenceEquals(_paperPreviewCancellation,cancellation))_paperPreviewCancellation=null;}
-  },_=>ActiveTarget is not null&&!RawMatchTiff16ProductPipeline.IsRaw(ActiveTarget.Path)&&!IsLoading&&!IsExporting&&!IsInstantGenerating);
+  },_=>ActiveTarget is not null&&(!RawMatchTiff16ProductPipeline.IsRaw(ActiveTarget.Path)||ActiveTarget.LinearRawMaster is not null)&&!IsLoading&&!IsExporting&&!IsInstantGenerating);
  }
  public static CandidateRecipe CleanColorPreview(CandidateRecipe recipe,double aspect)=>recipe with
  {
