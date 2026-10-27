@@ -43,6 +43,7 @@ public sealed partial class ColorStudioImageViewport : FrameworkElement
     { get => (bool)GetValue(PreferDisplayedDimensionsProperty); set => SetValue(PreferDisplayedDimensionsProperty, value); }
     public void Configure()
     {
+        QueueDisplayImages();
         var image = PreferDisplayedDimensions && (Mode is "仿色结果" or "仿色") ? Matched ?? Original : Original ?? Matched;
         if (image is null) return;
         var size = SourcePixelSize;
@@ -71,9 +72,9 @@ public sealed partial class ColorStudioImageViewport : FrameworkElement
         void Draw(BitmapSource? image, Rect viewport, Rect clip,BitmapSource? detail=null,bool original=false)
         {
             if (image is null) return;
-            dc.PushClip(new RectangleGeometry(clip));var imageRect=State.ImageRect(viewport);dc.DrawImage(image,imageRect);
-            if(Tiles is {Count:>0})foreach(var tile in Tiles){var r=tile.Region;dc.DrawImage(original?tile.Before:tile.After,new Rect(imageRect.Left+r.Left*State.Zoom,imageRect.Top+r.Top*State.Zoom,r.Width*State.Zoom,r.Height*State.Zoom));}
-            if(Tiles is not {Count:>0}&&detail is not null&&!DetailRegion.IsEmpty){var region=DetailRegion;var target=new Rect(imageRect.Left+region.Left*State.Zoom,imageRect.Top+region.Top*State.Zoom,region.Width*State.Zoom,region.Height*State.Zoom);dc.DrawImage(detail,target);}dc.Pop();
+            dc.PushClip(new RectangleGeometry(clip));var imageRect=State.ImageRect(viewport);dc.DrawImage(DisplayPixels(image),imageRect);
+            if(!DisplayColorEnabled&&Tiles is {Count:>0})foreach(var tile in Tiles){var r=tile.Region;dc.DrawImage(DisplayPixels(original?tile.Before:tile.After),new Rect(imageRect.Left+r.Left*State.Zoom,imageRect.Top+r.Top*State.Zoom,r.Width*State.Zoom,r.Height*State.Zoom));}
+            if((DisplayColorEnabled||Tiles is not {Count:>0})&&detail is not null&&CanPresentDetail(detail)&&!DetailRegion.IsEmpty){var region=DetailRegion;var target=new Rect(imageRect.Left+region.Left*State.Zoom,imageRect.Top+region.Top*State.Zoom,region.Width*State.Zoom,region.Height*State.Zoom);dc.DrawImage(DisplayPixels(detail),target);}dc.Pop();
         }
         if (Mode == "并排对比" && Matched is not null)
         {

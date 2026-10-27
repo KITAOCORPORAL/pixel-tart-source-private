@@ -222,6 +222,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             else if(InstantEngineVersion!="V2")throw new InvalidDataException("Unknown instant algorithm version");
 
             // Legacy RAW CurrentEdits is an explicit, persisted PV6 bridge; old definitions stay untouched.
+            if(target.RawDefinition?.ColorState is not null&&InstantInputMode=="CurrentEdits")throw new NotSupportedException("颜色管理变体的即时胶片当前编辑入口未完成；请选择原图或切回兼容变体，不静默丢弃ICC状态。");
             if(InstantInputMode is not("Original" or "CurrentEdits"))throw new InvalidDataException("请选择明确的输入来源。");
             var basis=InstantInputMode=="Original"?(RawMatchTiff16ProductPipeline.IsRaw(target.Path)?new ProfessionalRawDefinition():InstantFilmJpegInput.Definition):previous??InstantFilmJpegInput.Definition;
             if(previous is null&&RawMatchTiff16ProductPipeline.IsRaw(target.Path)&&InstantInputMode=="CurrentEdits")

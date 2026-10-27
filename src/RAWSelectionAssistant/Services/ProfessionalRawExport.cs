@@ -13,6 +13,7 @@ public static class ProfessionalRawExport
 {
     public static async Task<ProfessionalOutputInspection> WriteAsync(ProfessionalRawMaster master,ProfessionalRawDefinition definition,string destination,StudioExportFormat format,CancellationToken token=default,Action<string>? stage=null)
     {
+        if(definition.ColorState is not null)return await DocumentColorWorkflowV1.WriteAsync(master,definition,destination,format,token);
         SecondExposureDecoder.EnsureRegistered();
         if(Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition))return await InstantV3DirectExport.Write(master,definition,destination,format,token,stage);
         definition=definition with{LocalEdits=definition.LocalEdits?.Freeze(),InstantFilm=definition.InstantFilm is {} film?InstantFilmPipeline.Freeze(film):null};
@@ -48,6 +49,7 @@ public static class ProfessionalRawExport
     }
     public static ProfessionalOutputInspection Inspect(string path,ProfessionalRawMaster master,ProfessionalRawDefinition definition,StudioExportFormat format,CancellationToken token=default,Action<string>? stage=null)
     {
+        if(definition.ColorState is not null)return DocumentColorWorkflowV1.Inspect(path,master,definition,format,token);
         if(Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition))return InstantV3DirectExport.Inspect(path,master,definition,format,token);
         if(format is StudioExportFormat.Source or StudioExportFormat.Tiff)
         {

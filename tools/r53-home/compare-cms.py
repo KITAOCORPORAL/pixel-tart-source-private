@@ -1,0 +1,7 @@
+"""Independent installed Pillow/LCMS2.19 8-bit comparison; not a replacement CPU float reference."""
+import argparse,json,pathlib,numpy as np
+from PIL import ImageCms,Image
+p=argparse.ArgumentParser();p.add_argument('--root',required=True);args=p.parse_args();root=pathlib.Path(args.root);rows=json.loads((root/'LCMS_FLOAT_REFERENCE_INPUT.json').read_text());result=[]
+for r in rows:
+ a=np.array(r['input'],np.float32).reshape(1,-1,3);q=np.rint(np.clip(a,0,1)*255).astype('uint8');src=ImageCms.getOpenProfile(str(root/(r['from']+'.icc')));dst=ImageCms.getOpenProfile(str(root/(r['to']+'.icc')));t=ImageCms.buildTransform(src,dst,'RGB','RGB',renderingIntent=1,flags=ImageCms.Flags.NOOPTIMIZE|ImageCms.Flags.NOCACHE);ref=np.asarray(ImageCms.applyTransform(Image.fromarray(q),t)).reshape(-1,3);expected=np.clip(np.array(r['output']).reshape(-1,3),0,1)*255;mask=np.all((a.reshape(-1,3)>=0)&(a.reshape(-1,3)<=1),axis=1);e=np.abs(ref[mask]-expected[mask]);result.append({'from':r['from'],'to':r['to'],'mean8':float(e.mean()),'max8':float(e.max())})
+report={'reference':'Pillow12.3/LCMS'+ImageCms.core.littlecms_version,'rows':result,'max8':max(r['max8'] for r in result),'notes':['Input quantizedRGB8 vs float is different; extended input separately retained in raw cases.','Same underlying LCMS family, not an independent algorithm. WIC separate-engine report retains gamut discrepancies.','No physical accuracy assertion.']};(root/'PILLOW_LCMS219_REFERENCE.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))

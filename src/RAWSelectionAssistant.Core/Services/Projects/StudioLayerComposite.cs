@@ -1,6 +1,6 @@
 using RAWSelectionAssistant.Core.Services.Color;
 namespace RAWSelectionAssistant.Core.Services.Projects;
-public enum StudioLayerBlend { Normal, Multiply, Screen }
+public enum StudioLayerBlend { Normal, Multiply, Screen, Overlay, SoftLight, Darken, Lighten, Color, Luminosity }
 public sealed record StudioMaskPoint(double X,double Y);
 /// <summary>Normalized upright pre-output-crop coordinates; radius is fraction of the smaller source dimension.</summary>
 public sealed record StudioMaskStroke(IReadOnlyList<StudioMaskPoint> Points,double Radius,double Feather,double Flow,double Density,bool Erase=false)
@@ -37,7 +37,7 @@ public sealed record StudioLocalMask(IReadOnlyList<StudioMaskStroke> Strokes,boo
 /// <summary>LayerCompositeV1: straight RGB in existing display-referred nonlinear sRGB float domain. Alpha untouched.</summary>
 public static class StudioLayerComposite
 {
-    public static bool Active(ColorAdjustmentStackNode node)=>node.CompositeVersion==1;
+    public static bool Active(ColorAdjustmentStackNode node)=>node.CompositeVersion is 1 or 2;
     public static bool Identity(ColorAdjustmentStackNode node)=>!Active(node)||node.Opacity==1&&node.Blend==StudioLayerBlend.Normal&&node.LocalMask is null;
     public static HighBitDepthImageBuffer Apply(HighBitDepthImageBuffer before,HighBitDepthImageBuffer effect,ColorAdjustmentStackNode node,CancellationToken token=default,FilmTileCoordinates? tile=null,Func<int,int,(double X,double Y)>? sourceCoordinate=null,Func<double,double,double>? compiledMask=null)
     {
@@ -47,6 +47,7 @@ public static class StudioLayerComposite
             token.ThrowIfCancellationRequested();for(int x=0;x<before.Width;x++)
             {
                 var coordinate=sourceCoordinate?.Invoke(x,y);var weight=node.Opacity*(sample?.Invoke(coordinate?.X??(x+(tile?.Left??0)+.5)/fullW,coordinate?.Y??(y+(tile?.Top??0)+.5)/fullH)??1);
+                if(node.CompositeVersion==2&&(int)node.Blend>=3){int p=(y*before.Width+x)*3;var mixed=PhotographicBlendV2.Blend(new(a[p],a[p+1],a[p+2]),new(b[p],b[p+1],b[p+2]),node.Blend);double[] channels=[mixed.X,mixed.Y,mixed.Z];for(int c=0;c<3;c++)result[p+c]=weight==0?a[p+c]:(float)(a[p+c]+(channels[c]-a[p+c])*weight);continue;}
                 for(int c=0;c<3;c++){int i=(y*before.Width+x)*3+c;var mixed=node.Blend switch{StudioLayerBlend.Multiply=>a[i]*b[i],StudioLayerBlend.Screen=>1-(1-a[i])*(1-b[i]),_=>b[i]};result[i]=weight==0?a[i]:(float)(a[i]+(mixed-a[i])*weight);}
             }
         }

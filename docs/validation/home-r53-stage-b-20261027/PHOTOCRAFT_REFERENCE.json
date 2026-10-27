@@ -1,0 +1,139 @@
+{
+  "commit": "7ac7b8b106acccf6826d45ed5c9e481dfe341035",
+  "files": [
+    {
+      "file": "crates/cms/README.md",
+      "bytes": 5515,
+      "sha256": "3e35e709ded9cb43aa332c029bcd9dcdac3863f7f61260a943c837488607de31"
+    },
+    {
+      "file": "crates/cms/src/profile.rs",
+      "bytes": 41807,
+      "sha256": "f1720237175a945bd1c95e7c9e844276939cccd30c96201aba0321385e6165fd"
+    },
+    {
+      "file": "crates/cms/src/transform.rs",
+      "bytes": 33270,
+      "sha256": "f454b48e0ce12cdf885f4c1a3c45443e4fa1458dd3daf158990aa15a15bd0d28"
+    },
+    {
+      "file": "crates/cms/src/pipeline.rs",
+      "bytes": 8339,
+      "sha256": "cacd5c03a9d24d2f889813a33bc654eb0bb6fda72708ab7ce02bf895705c10bf"
+    },
+    {
+      "file": "crates/cms/src/gpu_matrix_shaper.rs",
+      "bytes": 5966,
+      "sha256": "e84f942ad5d932b1dce08d55e947220e5645b8ff5f6c47c3d853cc946dc810e2"
+    },
+    {
+      "file": "crates/color/src/lib.rs",
+      "bytes": 11426,
+      "sha256": "a772687497fbb971e8028266c9ecd073c1cac35239718bb83b85bfd57efbfaec"
+    },
+    {
+      "file": "crates/compose/src/psblend.rs",
+      "bytes": 23382,
+      "sha256": "abacc632a63243577194325283310d442198ccbcbc61d7ed756ad3e3badf6603"
+    },
+    {
+      "file": "crates/raw/src/develop.rs",
+      "bytes": 31158,
+      "sha256": "29ba201b167291b22fd30711b7aae4dc73e05310be5d67b2efb7df8ba25da1c0"
+    },
+    {
+      "file": "crates/raw/src/color.rs",
+      "bytes": 13038,
+      "sha256": "08182a9e9f6ffa5cd8659e410d3b4df2f21399a4374da1935cb20a324947efcc"
+    },
+    {
+      "file": "crates/engine/src/display_color.rs",
+      "bytes": 20919,
+      "sha256": "f0fcc304a96bf1f907b8fce9f611cc9ab6c996ebfa579e1c2a7ed3f714194cdc"
+    },
+    {
+      "file": "LICENSE-MIT",
+      "bytes": 1102,
+      "sha256": "1a8f66d8a86b146f5336fa0d4b1186576c8aa98e60823080c85c7811cfd810af"
+    },
+    {
+      "file": "LICENSE-APACHE",
+      "bytes": 10174,
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+    },
+    {
+      "file": "NOTICE",
+      "bytes": 3247,
+      "sha256": "bfb4e2d258b2db6aa3e9d2a33914212817745926ac836aa268e4208f13ed3fdf"
+    },
+    {
+      "file": "ATTRIBUTION.md",
+      "bytes": 27380,
+      "sha256": "f5beb5e4a5882a365f5d4c40cbfba3d44226c62f68c11de36ee1a34b213bfdfe"
+    },
+    {
+      "file": "Cargo.toml",
+      "bytes": 9543,
+      "sha256": "c08d1d3ab092caf27f2e2d1332634c87f1b9f2be639ab2920311f390557c36ce"
+    }
+  ],
+  "additionalReadFiles": [
+    {
+      "name": "ATTRIBUTION.md",
+      "bytes": 27380,
+      "sha256": "f5beb5e4a5882a365f5d4c40cbfba3d44226c62f68c11de36ee1a34b213bfdfe"
+    },
+    {
+      "name": "Cargo.toml",
+      "bytes": 9543,
+      "sha256": "c08d1d3ab092caf27f2e2d1332634c87f1b9f2be639ab2920311f390557c36ce"
+    },
+    {
+      "name": "darktable-blend.c",
+      "bytes": 48921,
+      "sha256": "2598fdfa93d5dc630df9a88de4b2d18f0b213b48ba02d5fe7cae86236fb9837e"
+    },
+    {
+      "name": "imagemagick-composite.c",
+      "bytes": 119546,
+      "sha256": "fa63b235f142afc6f6c681b84528aed8d868500243fdd647841fa78e0a2c7539"
+    },
+    {
+      "name": "lcms212-cmsvirt.c",
+      "bytes": 37918,
+      "sha256": "1b31cc8e50f158f8b709fc16a5db461f2fc520c80da334df45790a3875917c8d"
+    },
+    {
+      "name": "lcms212.h",
+      "bytes": 102268,
+      "sha256": "bc9c523be6fa2e9d3578db9a506a4a87038c09a39b311b2a2603787b77fa1a25"
+    },
+    {
+      "name": "LICENSE-APACHE",
+      "bytes": 10174,
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+    },
+    {
+      "name": "LICENSE-MIT",
+      "bytes": 1102,
+      "sha256": "1a8f66d8a86b146f5336fa0d4b1186576c8aa98e60823080c85c7811cfd810af"
+    },
+    {
+      "name": "NOTICE",
+      "bytes": 3247,
+      "sha256": "bfb4e2d258b2db6aa3e9d2a33914212817745926ac836aa268e4208f13ed3fdf"
+    },
+    {
+      "name": "photocraft-blend.rs",
+      "bytes": 17323,
+      "sha256": "b0bce89e45c3cf9af99e1ffea9584fcf58ea41840a44b2ed5072e78b4f89194f"
+    },
+    {
+      "name": "rt-iccstore.cc",
+      "bytes": 37611,
+      "sha256": "1968f6132cb2f45eb1b73beca03fa2e9616177be76c429981585afb2a0fcba2f"
+    }
+  ],
+  "retrievalMethod": "agent-reach GitHub CLI fixed commit source; public read-only issues",
+  "reviewDate": "2026-10-27 Asia/Shanghai"
+}

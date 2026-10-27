@@ -45,7 +45,7 @@ public static class ProfessionalRawLocalRenderer
   RawLocalProfile.End("base-raw-coordinate-display",baseClock);
   var current=new HighBitDepthImageBuffer(width,height,values,"16","sRGB",1);
   if(d.LocalEdits is{} edits){foreach(var node in edits.Stack.Nodes.Where(n=>n.Enabled)){
-   token.ThrowIfCancellationRequested();if(node.CompositeVersion==1&&node.Opacity==0)continue;
+   token.ThrowIfCancellationRequested();if(node.CompositeVersion is 1 or 2&&node.Opacity==0)continue;
    var toolClock=RawLocalProfile.Begin();var effect=ColorStudioRenderPipeline.ApplyPointEffect(current,node,token);RawLocalProfile.End("point-effect",toolClock);var maskClock=RawLocalProfile.Begin();
    var next=StudioLayerComposite.Apply(current,effect,node,token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks.GetValueOrDefault(node.Id));RawLocalProfile.End("mask-composite",maskClock);if(!ReferenceEquals(next,effect))effect.Dispose();current.Dispose();current=next;
   }}return current;
@@ -61,7 +61,7 @@ public static class ProfessionalRawLocalRenderer
  {
   var prepared=new Prepared(m,d,token);d=prepared.Definition;var current=basis?.Clone()??FastBase(m,d,800,token);var oriented=ProfessionalRawPipeline.OrientedSize(m);var geometry=d.Geometry??new();var w=current.Width;var h=current.Height;
   (double X,double Y) Coordinate(int x,int y){var p=geometry.SourceTuple((x+.5)/w,(y+.5)/h,(double)oriented.Width/oriented.Height);if(geometry.Version==2)return p;return ((Math.Clamp((int)(p.X*oriented.Width),0,oriented.Width-1)+.5)/oriented.Width,(Math.Clamp((int)(p.Y*oriented.Height),0,oriented.Height-1)+.5)/oriented.Height);}
-  foreach(var node in d.LocalEdits?.Stack.Nodes.Where(n=>n.Enabled)??[]){if(node.CompositeVersion==1&&node.Opacity==0)continue;var effect=ColorStudioRenderPipeline.ApplyPointEffect(current,node,token);var next=StudioLayerComposite.Apply(current,effect,node,token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks.GetValueOrDefault(node.Id));if(!ReferenceEquals(effect,next))effect.Dispose();current.Dispose();current=next;}return current;
+  foreach(var node in d.LocalEdits?.Stack.Nodes.Where(n=>n.Enabled)??[]){if(node.CompositeVersion is 1 or 2&&node.Opacity==0)continue;var effect=ColorStudioRenderPipeline.ApplyPointEffect(current,node,token);var next=StudioLayerComposite.Apply(current,effect,node,token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks.GetValueOrDefault(node.Id));if(!ReferenceEquals(effect,next))effect.Dispose();current.Dispose();current=next;}return current;
  }
  public static HighBitDepthImageBuffer Preview(ProfessionalRawMaster m,ProfessionalRawDefinition d,int edge,CancellationToken token=default)
  {

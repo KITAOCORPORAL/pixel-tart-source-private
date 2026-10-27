@@ -15,3 +15,7 @@
 已实施：SceneExposureV1 蒙版独立快照/全图/锁定/撤销状态闭环，曝光前有界交互预览与高频精细回退，租约缓存生命周期，统一低分辨率图层前缀输入/输出。GeometryV2 拉直与普通 PNG/JPEG/TIFF 非破坏裁剪入口（不暗迁旧项目）；基础 RAW CameraGains 在新页可操作、可撤销，与显示后相对冷暖分开。即时胶片相纸缩略可复用解码RAW基础显示；自由画布新增透明度/显隐与历史持久化，既有自有副本/策划15板块衔接回归。
 
 本轮仍是完整诊断版，非全部R5.3完成：任意参考匹配/空间detail栈裁剪尚拒绝，完整ICC/profile/场景色彩工具/色准门禁仍OPEN；C即时胶片完整R3资源移植、D画笔与导出/显隐管理UI完善、E策划拼贴预览/关联卡继续按原设计，不等待无关鼠标验收，但不得将存在的旧模块报为新实现全完成。无替代教程开发。权威报告见 docs/validation/home-r53-stage-b-20261027/FINAL_REPORT.md。
+
+### PhotoCraft 首批产品接入（同家庭分支）
+固定7ac7b8b1仅架构/算法/测试参考，不替换WPF/LibRaw。已实现显式ICC颜色变体：输入/工作/输出profile字节SHA、Assign/Convert分开、RGB matrix/shaper2/4、sRGB编辑域、sRGB/P3/Adobe兼容/ProPhoto兼容TIFF16与PNG16实际转换/嵌入读回；显示器ICC为独立session设置，CPU精确SDR默认关闭、Windows关联+手动fallback，不污染导出。CompositeV2先放行独立对照过的Darken/Lighten，其他原型不在菜单放行。
+未完成：ProPhoto编辑域，完整ICC LUT/绝对意图/BPC，物理多屏/系统ACM/HDR，ColorV1 JPEG（误差门槛未过，已拒绝），颜色管理成片出版水印/重采样、即时胶片CurrentEdits（明确拒绝不误标），SoftLight/Overlay/Color/Luminosity的双成熟实现同域完整验证。软打样/超色域警告后置，不阻塞其他模块。

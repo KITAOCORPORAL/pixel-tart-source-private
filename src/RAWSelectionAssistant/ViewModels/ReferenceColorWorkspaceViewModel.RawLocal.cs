@@ -37,7 +37,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private void QueueRawLocalPreview()
  {
   rawLocalCancellation?.Cancel();var revision=++rawLocalRevision;if(ActiveTarget is not{} target||target.RawDefinition is not{} definition||target.LinearRawMaster is not{} master)return;
-  NotifySceneExposure();QueueLayerThumbnails();var version=target.ActiveEditVersionId;definition=definition with{LocalEdits=definition.LocalEdits?.Freeze(),SceneExposure=definition.SceneExposure?.Validate()};var snapshot=new RawPreviewSnapshot(target,version,master,definition,revision);
+  NotifySceneExposure();NotifyColorState();QueueLayerThumbnails();var version=target.ActiveEditVersionId;definition=definition with{LocalEdits=definition.LocalEdits?.Freeze(),SceneExposure=definition.SceneExposure?.Validate()};var snapshot=new RawPreviewSnapshot(target,version,master,definition,revision);
   rawFastQueue??=new LatestPreviewQueue<RawPreviewSnapshot,BitmapSource>(async(frame,token)=>{
    using var pin=StudioGlobalResources.RetainBuffer(frame.Master.Image,(long)frame.Master.Image.Rgb32.Length*4);
    var key=FastBaseKey(frame.Master,frame.Definition);if(rawWarmKey==key&&!RawBaseWarmWork.IsCompleted)await RawBaseWarmWork.WaitAsync(token);

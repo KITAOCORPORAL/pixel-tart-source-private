@@ -6,7 +6,7 @@ public static class RenderedSrgbInput
 {
  public static async Task<ProfessionalRawMaster> ReadAsync(string path,ProfessionalRawDefinition definition,CancellationToken token)
  {
-  definition.Validate();token.ThrowIfCancellationRequested();
+  definition.Validate();token.ThrowIfCancellationRequested();if(definition.ColorState is not null)return await DocumentColorWorkflowV1.ReadAsync(path,definition,token);
   var input=await Task.Run(()=>SecondExposureDecoder.Describe(path,token),token);
   var lease=StudioGlobalResources.ReserveWork(checked((long)input.Width*input.Height*12));
   try

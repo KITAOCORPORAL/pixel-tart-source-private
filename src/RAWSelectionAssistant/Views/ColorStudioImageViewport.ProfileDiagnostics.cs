@@ -8,6 +8,7 @@ public sealed partial class ColorStudioImageViewport
     public MonitorProfileObservation DisplayProfileObservation {get;private set;}=new("unknown","NotObserved",null,null,0);
     private void AttachProfileDiagnostics()
     {
+        monitorRefresh.Tick+=(_,_)=>{if(DisplayColorEnabled)RefreshProfileAssociation(this,EventArgs.Empty);};
         Loaded+=(_,_)=>
         {
             var next=Window.GetWindow(this);if(!ReferenceEquals(_profileWindow,next))
@@ -15,9 +16,9 @@ public sealed partial class ColorStudioImageViewport
                 DetachProfileDiagnostics();_profileWindow=next;
                 if(next is not null){next.LocationChanged+=RefreshProfileAssociation;next.Activated+=RefreshProfileAssociation;}
             }
-            RefreshProfileAssociation(this,EventArgs.Empty);
+            monitorRefresh.Start();RefreshProfileAssociation(this,EventArgs.Empty);
         };
-        Unloaded+=(_,_)=>DetachProfileDiagnostics();
+        Unloaded+=(_,_)=>{DetachProfileDiagnostics();DetachDisplayColor();};
     }
     private void DetachProfileDiagnostics()
     {
@@ -26,7 +27,7 @@ public sealed partial class ColorStudioImageViewport
     private void RefreshProfileAssociation(object? sender,EventArgs e)
     {
         DisplayProfileObservation=WindowsMonitorProfileProbe.ObserveWindow(_profileWindow is null?IntPtr.Zero:new WindowInteropHelper(_profileWindow).Handle);
-        ToolTip=DescribeProfileAssociation(DisplayProfileObservation);
+        RefreshDisplayColorContext();ToolTip=DescribeProfileAssociation(DisplayProfileObservation)+"\nExplicit display path: "+DisplayConversionStatus;
     }
     internal static string DescribeProfileAssociation(MonitorProfileObservation value)
         => $"Color Studio: {value.Device} · {value.State}\nICC SHA-256: {value.ProfileSha256??"unavailable"}\nPreview: sRGB bitmap; monitor-profile conversion not applied by Color Studio. OS/compositor behavior unverified. Export ICC remains independent.";

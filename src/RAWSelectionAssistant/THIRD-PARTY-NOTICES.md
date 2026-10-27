@@ -30,3 +30,6 @@
 上述许可文件直接取自对应的 Sdcb.LibRaw 固定提交、LibRaw 0.21.1、libjpeg-turbo 2.1.3、Little CMS 2.12 与 zlib 1.2.11 上游标签，随应用输出目录及 Publish 目录一同分发。NuGet 原生运行包本身不包含独立 LICENSE 文件，只声明聚合 SPDX 许可表达式；因此本项目显式附带上游许可与版权文本。
 
 光镜没有将这些开源 RAW 解码库描述为相机厂商 SDK。相关 DLL 保持独立动态链接文件随安装包分发。若需获得本候选版本所使用组件的精确包内容、校验值或对应源码位置，请通过“帮助 → 建议与问题反馈”联系产品维护者。
+
+### R5.3 DocumentColorV1
+复用上述已随包分发的固定 Little CMS 2.12 运行库，通过公共 API 执行 RGB ICC 转换与生成公开原色兼容配置，MIT 版权和许可证仍随 Licenses/Little-CMS-2.12-COPYING.txt。未引入 PhotoCraft 源码/依赖/商标/字体/图标/合成CMYK；其固定提交仅架构与行为研究。生成的Adobe RGB兼容配置不是Adobe专有配置文件副本，ProPhoto兼容公开ROMM原色配置不代表相机标定。

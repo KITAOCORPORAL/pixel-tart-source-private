@@ -96,6 +96,7 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer, IPublishingOutp
             if(upstream?.RecipeSnapshot?.RawDefinition is not null)
             {
                 isProfessional=true;
+                if(upstream.RecipeSnapshot.RawDefinition.ColorState is not null)throw new NotSupportedException("颜色管理成片保留其实际输出ICC；出版重采样/水印尚未接入该色彩状态，禁止误标sRGB。可直接使用暗室输出成片。");
                 if(!string.Equals(options.ColorSpaceProfile,"sRGB",StringComparison.OrdinalIgnoreCase))throw new NotSupportedException("PV4 Publishing仅支持sRGB。");
                 if(options.OutputFormat==PublishingOutputFormat.Jpeg&&options.OutputBitDepth!=PublishingOutputBitDepth.Eight)throw new NotSupportedException("JPEG仅支持8位。");
                 if(options.OutputFormat==PublishingOutputFormat.Png&&options.OutputBitDepth!=PublishingOutputBitDepth.Eight)throw new NotSupportedException("Publishing PNG16未接线，未伪装8位输出。");

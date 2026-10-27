@@ -27,8 +27,8 @@ public sealed class DarkroomExportDialog : Window
         settings.Children.Add(new TextBlock {Text="格式",Foreground=Brushes.Gray});
         settings.Children.Add(new StudioExportFormatSelector {DataContext=vm,HorizontalAlignment=HorizontalAlignment.Left,Margin=new Thickness(0,5,0,12)});
         settings.Children.Add(new TextBlock {Text="输出色彩",Foreground=Brushes.Gray});
-        settings.Children.Add(new TextBlock {Text="sRGB · 嵌入输出配置",Margin=new Thickness(0,6,0,6)});
-        settings.Children.Add(new TextBlock {Text="PNG16 / TIFF16 / JPEG8",Foreground=Brushes.Gray}); grid.Children.Add(settings);
+        var colorLabel=new TextBlock{Text=vm.ActiveTarget?.RawDefinition?.ColorState is{} color?color.Output.Label+" · 实际ICC转换/嵌入":"sRGB · 兼容路径嵌入配置",TextWrapping=TextWrapping.Wrap,Margin=new Thickness(0,6,0,6)};settings.Children.Add(colorLabel);
+        settings.Children.Add(new TextBlock {Text=vm.ActiveTarget?.RawDefinition?.ColorState is not null?"ICC V1：PNG16 / TIFF16；JPEG尚未放行":"PNG16 / TIFF16 / JPEG8",Foreground=Brushes.Gray}); grid.Children.Add(settings);
         var details=new StackPanel {Margin=new Thickness(14,0,0,0)}; Grid.SetColumn(details,1); Grid.SetRow(details,1);
         details.Children.Add(new TextBlock {Text="照片与位置",Foreground=Brushes.Gray});
         var count=new TextBlock {Margin=new Thickness(0,6,0,12)};

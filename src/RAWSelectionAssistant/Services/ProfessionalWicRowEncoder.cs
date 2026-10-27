@@ -32,7 +32,7 @@ internal static unsafe class ProfessionalWicRowEncoder
         WriteRows(path,bitmap.PixelWidth,bitmap.PixelHeight,quality,(y,row)=>converted.CopyPixels(new System.Windows.Int32Rect(0,y,bitmap.PixelWidth,1),row,row.Length,0),token,png:png,highDepth:false,dpi:dpi);
     }
     private static byte Q(float v)=>(byte)Math.Clamp(Math.Round(v*255),0,255);
-    internal static void WriteRows(string path,int width,int height,int quality,Action<int,byte[]> fillRow,CancellationToken token,bool png=false,bool highDepth=true,int dpi=96)
+    internal static void WriteRows(string path,int width,int height,int quality,Action<int,byte[]> fillRow,CancellationToken token,bool png=false,bool highDepth=true,int dpi=96,byte[]? outputProfile=null)
     {
         if(File.Exists(path))throw new IOException("编码目的文件已存在，未覆盖。");
         var init=CoInitializeEx(IntPtr.Zero,0);if(init<0&&init!=unchecked((int)0x80010106))Check(init);
@@ -52,7 +52,7 @@ internal static unsafe class ProfessionalWicRowEncoder
             Check(((delegate* unmanaged[Stdcall]<IntPtr,double,double,int>)Method(frame,5))(frame,dpi,dpi));
             var pixels=new Guid(png&&highDepth?"6fddc324-4e03-4bfe-b185-3d77768dc915":"6fddc324-4e03-4bfe-b185-3d77768dc90c");var wanted=pixels;
             Check(((delegate* unmanaged[Stdcall]<IntPtr,Guid*,int>)Method(frame,6))(frame,&pixels));if(pixels!=wanted)throw new NotSupportedException("WIC拒绝请求的RGB8/RGB16行格式，未降位深回退。");
-            Check(((delegate* unmanaged[Stdcall]<IntPtr,IntPtr*,int>)Method(factory,15))(factory,&color));var profile=StudioQuickExport.SrgbProfileBytes();
+            Check(((delegate* unmanaged[Stdcall]<IntPtr,IntPtr*,int>)Method(factory,15))(factory,&color));var profile=outputProfile??StudioQuickExport.SrgbProfileBytes();
             fixed(byte* p=profile)Check(((delegate* unmanaged[Stdcall]<IntPtr,byte*,uint,int>)Method(color,4))(color,p,(uint)profile.Length));
             Check(((delegate* unmanaged[Stdcall]<IntPtr,uint,IntPtr*,int>)Method(frame,7))(frame,1,&color));
             var row=new byte[width*3*(png&&highDepth?2:1)];

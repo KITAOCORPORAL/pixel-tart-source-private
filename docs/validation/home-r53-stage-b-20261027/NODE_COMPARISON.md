@@ -29,3 +29,25 @@
 
 ## 准入
 DIAGNOSTIC_ONLY / CalibrationEligible=false。复杂mask、跨相机、ICC、原生鼠标/DPI、所有历史配方/全模块视觉没有变成PASS；无新增代码许可证传播义务（独立实现，不分发研究源/二进制），现有依赖保留 notices。
+
+## PhotoCraft 追加批：实际采用与严格边界
+固定参考 `storytold/photocraft@7ac7b8b106acccf6826d45ed5c9e481dfe341035`（0.16.0，MIT OR Apache2）。全部指定10个文件已实际读取，含profile原字节与content_hash/same_bytes、transform精确float、stage pipeline、GPU matrix-shaper近黑曲线、color模型、psblend、RAW D50矩阵/Bradford、display文档到monitor架构。LICENSE-MIT/APACHE、NOTICE/ATTRIBUTION已读；品牌/字体/图标/合成CMYK不引入。仅独立实现公共API封装/架构，未复制Rust源码、未增加Rust/CMS替代引擎。CMS内置CMYK明确synthetic，不是印刷标定；README列的mpet/BPC/v2absolute限制不当成已支持。
+已看真实公开问题#9831（低缩放Threshold灰阶，open：说明预览插值会改变表观，不能将低缩放当原像素）、#1112（Lab thread-local恢复，closed：context状态不能泄露），未追main无限升级。
+
+产品采用：新`DocumentColorStateV1`包含输入/工作/输出完整ICC字节、SHA256、输入策略、引擎版本；显示ICC属于session Layout不属于照片配方。独立颜色变体旧默认null不暗迁；AssignExplicitProfile只重解释原码值再转换，Embedded按内容解释并转换，无标记需确认UntaggedExplicitSrgb，损坏/CMYK/LUT拒绝。
+
+转换引擎复用随包`lcms2.dll`2.12，commit`924a020d09bfe468c665467caf24aadeb41ff77c`对应API，实际SHA87bf94f27f345384420383f247178f825c0101928fedd3a4887ff60e9d4a76eb（2120），MIT版权文本已有随包。旧ControlledIccLinearV1研究哈希/门禁完全不动；新封装只明确RGB matrix/shaper/XYZ v2/v4子集，非通用ICC专业引擎批准。cmsOpenProfileFromMem/cmsCreateTransform RGB_FLOAT intent1 flags0x140、NoOptimize/NoCache BPCoff；按行CPU float，profile上下文和transform生命周期借用已测试。
+
+公开原色兼容profile由LCMS生成（日期固定，内容可重复SHA），不复制Adobe专有profile：sRGB/P3使用D65+sRGB TRC，AdobeRGB-compatible gamma563/256，ROMM/ProPhoto-compatible D50 toe1/16/gamma1.8。**工作编辑仍为encoded sRGB**以适配既有tools，非ProPhoto编辑；P3/Adobe/ProPhoto是实际输入/输出转换能力，不是扩大工作色域的宣称。RAW的现有ProPhoto D65不改名、不套D50矩阵；RAW不接受此rendered ICC指派。
+
+已跑：带P3 TIFF16→RGB_FLOAT input→既有edit→四space TIFF16/PNG16，8份产物ICC byte identity与独立encoded readback全部0码差；新变体VM导出、session重开、输出profile撤销、workspace显示ICC重开均有测试。灰阶/近黑/饱和/肤色色块/负值/>1输入保留矩阵样本；授权Canon同hash派生512px真实RGB图同闭环0码差，不冒充sensor色准。透明输入V1延用white flatten，半透明测试明确，alpha独立保存未完成。
+
+第二成熟独立引擎Windows WIC：RGB48 ColorConvertedBitmap拒绝的失败保留，改8bit独立对照；in-gamut max2.5487/255（含输入8bit量化），out-of-gamut max6/255不同，不报完全一致。Pillow12.3/LCMS2.19是不同release同算法，16对profile/固定样本比较另记，不冒充独立算法。已有RawTherapee5.12 iccstore.cc同样明确intent/profile，不将完整RAW管线当小矩阵等价。一般LUT、ICC多意图/全部输入、广色域编辑准入仍OPEN。
+
+JPEG实际宽色域读回mean5.4156/RMSE7.8625/max49，超出既有MAE5预算：**阻断ColorV1 JPEG输出**，不放宽；默认兼容JPEG不变。ColorV1现只放行TIFF16/PNG16，出版水印/重采样对该新成片主动拒绝，防止宽色域像素被误贴sRGB；即时胶片CurrentEdits尚拒绝ColorState，原图/兼容变体继续可用，不能静默丢ICC状态。
+
+显示产品：复用WindowsMonitorProfileProbe GetICMProfileW，窗口LocationChanged/Activated及3s查询刷新，手动ICC/回退状态可选，CPU精确sRGB→设备RGB，只进入untagged WPF位图，不改原bitmap/edit/export。4张/96MiB缓存上限，账本记录并在关闭/换profile失效；细节尚未转换不混入未转换tile。WPF离屏未发现第二次应用我们的ICC，但系统ACM/HDR/物理多屏未验证；因此用户**显式SDR开关默认off**、注明系统再转换风险。不能据此声称正确覆盖所有Windows显示器。没有统一33³低精度LUT/GPU替代。
+
+混合V2：既有V1三模式逐位保留。V2调节层作用是`before + opacity*mask*(blend(before,effect)-before)`；encoded sRGB，alpha属于caller不再乘一次，不是PhotoCraft Photoshop pixel-layer sourceAlpha或scene RAW。变暗/变亮独立Pillow+OpenCV对照最大0.25/255（输入量化），已进入诊断菜单。Overlay原型Pillow max1/255；SoftLight Pillow max22.96/255，darktable实际为另一公式且opacity²；颜色/明度darktable HSL与W3C .3/.59/.11定义不同，均记录不等价。**Overlay/SoftLight/Color/Luminosity暂不在菜单放行**，原型仅数值/回归，不能宣称全部已批准模式。未添加Fill。
+
+准入复核：菜单及setter现在都只放行Darken/Lighten；Overlay/SoftLight/Color/Luminosity不能从普通控件启用，数值函数/冻结测试保留为研究原型。ColorV1工作域sRGB并非完整宽色域编辑。首个闭环实际用户操作入口为“颜色管理·ICC变体”，支持旧WIC无法预览的带profile输入恢复到显式新变体；不偷偷替换兼容导入逻辑。

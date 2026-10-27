@@ -21,9 +21,11 @@ public sealed record ProfessionalRawDefinition(int ProcessingVersion=4,string Wh
     public ProfessionalRawGeometry? Geometry {get;init;}
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
     public SceneExposureV1? SceneExposure {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public RAWSelectionAssistant.Core.Services.Color.ControlledIcc.DocumentColorStateV1? ColorState{get;init;}
     public ProfessionalRawDefinition Validate()
     {
-        InstantFilm?.Validate();
+        InstantFilm?.Validate();ColorState?.Validate();if(ColorState is not null&&(!IsRenderedInput||RenderedInputVersion!=2||InstantFilm is not null))throw new NotSupportedException("ColorStateV1 is an explicit rendered RGB variant, not a RAW-space relabel");
         if(SceneExposure is not null){SceneExposure.Validate();if(ProcessingVersion!=4||IsRenderedInput||InstantFilm is not null)throw new NotSupportedException("SceneExposureV1 requires existing linear RAW master");}
         if(LocalEdits is not null||Geometry is not null){if(!((ProcessingVersion==4&&!IsRenderedInput)||(ProcessingVersion==5&&IsRenderedInput&&RenderedInputVersion==2&&(LocalEdits is null||LocalEdits.Version==2)))||InstantFilm?.Enabled==true)throw new NotSupportedException("RAW local extension v1 requires linear PV4 base without an instant-paper recipe");LocalEdits?.Freeze();Geometry?.Validate();}
         if(LightPrint is{} light){if(light.Version!=1||InstantFilm?.AlgorithmVersion!=3||!LightPrintFrames.Available.Any(f=>f.Id==light.FrameId&&f.Shippable))throw new InvalidDataException("Unknown/non-distributable light-print frame");light.WindowAdjustments?.Normalize();if(light.WindowAdjustments?.Nodes.Any(n=>n.Type is not(ColorStudioNodeType.BasicTone or ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.Curve))==true)throw new NotSupportedException("Unsupported lightprint window node");}
@@ -45,7 +47,7 @@ public sealed record ProfessionalRawDefinition(int ProcessingVersion=4,string Wh
         if(ProcessingVersion!=4||InputConfiguration!="LibRaw021LinearProPhotoD65V1"||DisplayTransform!="LuminanceShoulderNeutralGamutV1"||WhiteBalance is not("Camera" or "CameraGains"))throw new InvalidDataException("不支持的 RAW 处理定义。");
         if(new[]{RedGain,GreenGain,BlueGain}.Any(x=>!double.IsFinite(x)||x<.125||x>8)||!double.IsFinite(ExposureEv)||ExposureEv is < -10 or > 10)throw new InvalidDataException("RAW 增益或曝光越界。");return this;
     }
-    public string DecodeKey=>FormattableString.Invariant($"{InputConfiguration}:{WhiteBalance}:{(WhiteBalance=="Camera"?1:RedGain):R}:{(WhiteBalance=="Camera"?1:GreenGain):R}:{(WhiteBalance=="Camera"?1:BlueGain):R}") + (RenderedInputVersion is null?"":":rasterInput2") + (InstantInput is null ? "" : ":recipe:"+Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(InstantInput)))));
+    public string DecodeKey=>FormattableString.Invariant($"{InputConfiguration}:{WhiteBalance}:{(WhiteBalance=="Camera"?1:RedGain):R}:{(WhiteBalance=="Camera"?1:GreenGain):R}:{(WhiteBalance=="Camera"?1:BlueGain):R}") + (RenderedInputVersion is null?"":":rasterInput2") + (ColorState is null?"":":cms-input:"+ColorState.Input.Sha256+":"+ColorState.InputPolicy) + (InstantInput is null ? "" : ":recipe:"+Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(InstantInput)))));
 }
 public sealed record ProfessionalRawContract(string DecoderVersion,string Make,string Model,string SourceSha256,string DecodeKey,
     double[] CameraWhiteBalance,double[] AppliedWhiteBalance,double[] CameraToRgbMatrix,int WhiteLevel,

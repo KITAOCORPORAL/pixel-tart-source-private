@@ -14,11 +14,13 @@ public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double Editi
     bool AuxiliaryOpen = true, bool EditingOpen = true, int AuxiliaryMode = 0, int ToolMode = 0,
     string FilmstripDock = "Bottom", string FilmstripView = "Grid", bool FilmstripOpen = true)
 {
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]public bool ExplicitSdrDisplayColor{get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]public RAWSelectionAssistant.Core.Services.Color.ControlledIcc.RgbIccIdentityV1? ManualMonitorProfile{get;init;}
     public DarkroomPanelLayout? Darkroom { get; init; }
     public bool R53Professional {get;init;}
     public IReadOnlyList<string> R53Favorites {get;init;}=[];
     public IReadOnlyList<string> R53Recents {get;init;}=[];
-    public ColorStudioLayout Normalize() => this with
+    public ColorStudioLayout Normalize() {ManualMonitorProfile?.Bytes();return this with
     {
         R53Favorites=(R53Favorites??[]).Where(x=>!string.IsNullOrWhiteSpace(x)).Distinct().Take(100).ToArray(),R53Recents=(R53Recents??[]).Where(x=>!string.IsNullOrWhiteSpace(x)).Distinct().Take(20).ToArray(),
         Darkroom = Darkroom?.Normalize(),
@@ -27,7 +29,7 @@ public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double Editi
         AuxiliaryMode = Math.Clamp(AuxiliaryMode, 0, 3), ToolMode = Math.Clamp(ToolMode, 0, 4),
         FilmstripDock = FilmstripDock == "Right" ? "Right" : "Bottom",
         FilmstripView = FilmstripView is "List" or "Slideshow" ? FilmstripView : "Grid"
-    };
+    };}
 }
 
 
