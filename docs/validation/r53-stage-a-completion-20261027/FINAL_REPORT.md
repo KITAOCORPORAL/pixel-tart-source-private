@@ -38,3 +38,7 @@
 - 指定R5.3定稿ZIP公司未找到；家用历史manifest不算本机读取，未用旧R5/R5.1包冒充。
 - Computer Use/Browser/WebView/CDP禁止未调用；真实鼠标编辑→保存→关窗→新完整EXE重开/DPI仍NOT_RUN；离屏不是桌面截图。
 - 7项旧授权照片/大型性能/路由输出夹具NOT_RUN完整列于NONPASS.json。阶段A保持PARTIAL；不提前推进B-E或宣称完成。
+
+## 正常推送读回
+
+产品f2fbefed与独立证据3fd1701e已正常推送；ls-remote读回LOCAL_HEAD=REMOTE_HEAD=3fd1701ec896b01a4edb392ff86aa438a86cdc9d，工作树干净。后续仅提交本读回记录，不改变已冻结产品。
