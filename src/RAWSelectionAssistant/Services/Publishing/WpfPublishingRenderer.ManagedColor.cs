@@ -11,6 +11,7 @@ using RAWSelectionAssistant.Core.Services.Projects;
 namespace RAWSelectionAssistant.Services.Publishing;
 public sealed partial class WpfPublishingRenderer
 {
+ public static bool UsesDocumentColor(string path) {try{return IsManagedDocumentSource(path);}catch(Exception e)when(e is IOException or JsonException or InvalidDataException){return false;}}
  private static bool IsManagedDocumentSource(string path)
  {
   if(!File.Exists(path+".kitao-export.json"))return false;

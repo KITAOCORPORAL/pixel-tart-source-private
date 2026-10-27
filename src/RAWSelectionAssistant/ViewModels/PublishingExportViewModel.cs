@@ -51,6 +51,7 @@ public sealed class PublishingExportViewModel : ObservableObject
     public PublishingExportViewModel(IPublishingTaskCoordinator coordinator, IPublishingRenderer renderer, IDialogService dialogs)
     {
         _coordinator=coordinator;_renderer=renderer;_dialogs=dialogs;
+        SourceFiles.CollectionChanged+=(_,_)=>{OnPropertyChanged(nameof(AvailableColorProfiles));if(!AvailableColorProfiles.Contains(_colorSpaceProfile)){_colorSpaceProfile="sRGB";OnPropertyChanged(nameof(ColorSpaceProfile));OnPropertyChanged(nameof(OutputIccLabel));}};
         AddFilesCommand=new RelayCommand(_=>AddFiles());AddFolderCommand=new RelayCommand(_=>AddFolder());ChooseDestinationCommand=new RelayCommand(_=>ChooseDestination());AddTextWatermarkCommand=new RelayCommand(_=>AddTextLayer());AddImageWatermarkCommand=new RelayCommand(_=>AddImageLayer());PreviousCommand=new AsyncRelayCommand(_=>MovePreviewAsync(-1));NextCommand=new AsyncRelayCommand(_=>MovePreviewAsync(1));RefreshPreviewCommand=new AsyncRelayCommand(_=>RefreshPreviewAsync());StartCommand=new AsyncRelayCommand(_=>StartAsync(),_=>CanStart);SavePresetCommand=new AsyncRelayCommand(_=>SavePresetAsync()); SaveRecipeCommand=new AsyncRelayCommand(_=>SaveRecipeAsync()); DeleteRecipeCommand=new AsyncRelayCommand(_=>DeleteRecipeAsync(), _=>SelectedRecipe is not null && !ExportRecipeStore.BuiltIns.Any(item => item.Id == SelectedRecipe.Id));
         WatermarkLayers.CollectionChanged += (_, change) => { if (change.NewItems is not null) foreach (PublishingWatermarkLayerViewModel layer in change.NewItems) Wire(layer); _=RefreshPreviewAsync(); };
         _=LoadPresetsAsync(); _=LoadRecipesAsync();
@@ -59,7 +60,8 @@ public sealed class PublishingExportViewModel : ObservableObject
     private string _colorSpaceProfile = "sRGB";
     public bool UseRecipes { get => _useRecipes; set { if (SetProperty(ref _useRecipes, value)) { RaiseCommands(); OnPropertyChanged(nameof(CanEditOutputSettings)); OnPropertyChanged(nameof(OutputBitDepthLabel)); OnPropertyChanged(nameof(OutputIccLabel)); _ = RefreshPreviewAsync(); } } }
     public bool CanEditOutputSettings => !UseRecipes;
-    public IReadOnlyList<string> AvailableColorProfiles { get; } = RAWSelectionAssistant.Services.Publishing.WpfPublishingRenderer.AvailableOutputProfiles;
+    public IReadOnlyList<string> AvailableColorProfiles => SourceFiles.Count>0&&SourceFiles.All(RAWSelectionAssistant.Services.Publishing.WpfPublishingRenderer.UsesDocumentColor)
+        ? ["sRGB","DisplayP3","Adobe RGB (1998)","ProPhotoRGB"] : RAWSelectionAssistant.Services.Publishing.WpfPublishingRenderer.AvailableOutputProfiles;
     public string ColorSpaceProfile { get => _colorSpaceProfile; set { if (AvailableColorProfiles.Contains(value) && SetProperty(ref _colorSpaceProfile, value)) { OnPropertyChanged(nameof(OutputIccLabel)); _ = RefreshPreviewAsync(); } } }
     public string OutputBitDepthLabel => UseRecipes && SelectedRecipe is { } recipe ? $"{(int)recipe.BitDepth} 位（当前配方）" : OutputFormat == PublishingOutputFormat.Tiff ? "16 位" : "8 位";
     public string OutputIccLabel => UseRecipes && SelectedRecipe is { } recipe ? recipe.ColorSpaceProfile : ColorSpaceProfile;
