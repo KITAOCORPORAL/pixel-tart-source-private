@@ -1,0 +1,150 @@
+{
+  "productSha": "091163b12aa29e5c8561b8fa3b3675580d70e885",
+  "bindings": [
+    {
+      "file": "MetadataExtractor.dll",
+      "test": "tests/RAWSelectionAssistant.Tests/bin/Release/net10.0",
+      "sha256": "2d4d43f4f10b0655fafc3a145dbd4dcc79d81459335bb4d8a324ce2aed2f9ec8"
+    },
+    {
+      "file": "Microsoft.Data.Sqlite.dll",
+      "test": "tests/RAWSelectionAssistant.Tests/bin/Release/net10.0",
+      "sha256": "1078d41c6c0f2cee48a8b706e3a54ce145705993f19f703d2b3bdf2abcc59088"
+    },
+    {
+      "file": "RAWSelectionAssistant.Core.dll",
+      "test": "tests/RAWSelectionAssistant.Tests/bin/Release/net10.0",
+      "sha256": "ff02bf6ceade996cf979f80e17e82b019b6e3b57af3c521c182c94911a9c9e55"
+    },
+    {
+      "file": "Sdcb.LibRaw.dll",
+      "test": "tests/RAWSelectionAssistant.Tests/bin/Release/net10.0",
+      "sha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3"
+    },
+    {
+      "file": "SQLitePCLRaw.batteries_v2.dll",
+      "test": "tests/RAWSelectionAssistant.Tests/bin/Release/net10.0",
+      "sha256": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b"
+    },
+    {
+      "file": "SQLitePCLRaw.core.dll",
+      "test": "tests/RAWSelectionAssistant.Tests/bin/Release/net10.0",
+      "sha256": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84"
+    },
+    {
+      "file": "SQLitePCLRaw.provider.e_sqlite3.dll",
+      "test": "tests/RAWSelectionAssistant.Tests/bin/Release/net10.0",
+      "sha256": "eb6696e55882c3000333146b1cd4970439601e11fdedae941105ca921f615bd6"
+    },
+    {
+      "file": "System.Security.Cryptography.ProtectedData.dll",
+      "test": "tests/RAWSelectionAssistant.Tests/bin/Release/net10.0",
+      "sha256": "eb535b4eaaed42bd93e1cea9e03e25480d7371f6b1f2452216e9a8aff262ae5f"
+    },
+    {
+      "file": "XmpCore.dll",
+      "test": "tests/RAWSelectionAssistant.Tests/bin/Release/net10.0",
+      "sha256": "e88feb22528a78b294b6cfd9390b8ce8a5b27db025ff976799df2322bde51b58"
+    },
+    {
+      "file": "ComputeSharp.Core.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "4678a441386fc3d58a32756ca456db9a526ad672967d885a209523132273fd25"
+    },
+    {
+      "file": "ComputeSharp.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "c06fb300af75cb12e41875ca00ea176f1ca1be0b697b741f6c9606a3f2d65240"
+    },
+    {
+      "file": "DocumentFormat.OpenXml.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499"
+    },
+    {
+      "file": "DocumentFormat.OpenXml.Framework.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae"
+    },
+    {
+      "file": "KitaoPhotoSelector.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "f39a0b2bc918c653fbeb5ba01c3e6fee198959815e11c6b204a335717156b5d9"
+    },
+    {
+      "file": "MetadataExtractor.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "2d4d43f4f10b0655fafc3a145dbd4dcc79d81459335bb4d8a324ce2aed2f9ec8"
+    },
+    {
+      "file": "Microsoft.Data.Sqlite.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "1078d41c6c0f2cee48a8b706e3a54ce145705993f19f703d2b3bdf2abcc59088"
+    },
+    {
+      "file": "Microsoft.Windows.SDK.NET.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "0ec371d93798852e36461c8adddbeadce0f963a04752f0b64e54fe19c1c834a7"
+    },
+    {
+      "file": "PixelTart.Kernel.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "cf0cea0c26f3575659f0e7220872b16c436cc0ca6e07488624a63351b6bb560a"
+    },
+    {
+      "file": "PixelTart.MatchV4.Dx12.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "b951dd8cd8c9b7bbbaa1dece34f4811336ae713d0ec60d37876a40fff3354a5c"
+    },
+    {
+      "file": "PixelTart.Modules.AssetLibrary.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "1890d477e747e75542bc7e3115960079f7077a021c16e908c14610b0a9474e65"
+    },
+    {
+      "file": "PixelTart.Modules.OnlineSelection.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "828070456ed52afd0de9402d14f5eabe63631cce1dbef141e99cdf2b015211eb"
+    },
+    {
+      "file": "PixelTart.Modules.RawTool.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "d57e302220ee14c8c7c3fd225570cc7fd11684130f8916683168d17ca3b99e37"
+    },
+    {
+      "file": "RAWSelectionAssistant.Core.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "ff02bf6ceade996cf979f80e17e82b019b6e3b57af3c521c182c94911a9c9e55"
+    },
+    {
+      "file": "Sdcb.LibRaw.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3"
+    },
+    {
+      "file": "SQLitePCLRaw.batteries_v2.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b"
+    },
+    {
+      "file": "SQLitePCLRaw.core.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84"
+    },
+    {
+      "file": "SQLitePCLRaw.provider.e_sqlite3.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "eb6696e55882c3000333146b1cd4970439601e11fdedae941105ca921f615bd6"
+    },
+    {
+      "file": "WinRT.Runtime.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "bcf3a14e8712a90837fc5c0d8c8a24696af2bd7f74e9767597ec81ededfb23db"
+    },
+    {
+      "file": "XmpCore.dll",
+      "test": "tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0",
+      "sha256": "e88feb22528a78b294b6cfd9390b8ce8a5b27db025ff976799df2322bde51b58"
+    }
+  ]
+}

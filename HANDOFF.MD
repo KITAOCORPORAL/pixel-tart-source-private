@@ -1,7 +1,7 @@
 # 光镜开发交接入口
 
 ## 专业RAW局部收尾（2026-10-27 America/New_York）
-- 接续company/r53-stage-a-completion-20261027@41265eb4，无远端后续；仍在原独立实施树接续，不重建家庭基础。当前权威证据docs/validation/r53-raw-local-closure-20261027/FINAL_REPORT.md。
+- 接续company/r53-stage-a-completion-20261027@41265eb4，无远端后续；仍在原独立实施树接续，不重建家庭基础。当前权威证据docs/validation/r53-raw-local-closure-20261027/FINAL_REPORT.md。最终产品091163b12aa29e5c8561b8fa3b3675580d70e885，完整包E:/Kitao-Deliveries/r53-raw-local-closure-20261027/Guangjing-R53-RawLocal-Final-Diagnostic-win-x64.zip；Core376PASS、WPF464PASS/4NOT_RUN、0FAIL。阶段A仍PARTIAL，性能/视觉/科学门禁未全完。
 - 新ProfessionalRawLocalEdits V1/Geometry V1：源RAW与线性ProPhoto master不变，原PV4曝光/显示映射后进入sRGB共享局部层，保存/重开/复制/撤销/预览/逐行导出/变体对比同定义。旧PV4/5/6未暗迁。不是把非线性混合套在线性域。
 - RAW支持点工具（影调/WB/曲线/色阶/色彩平衡/肤色/基础预设），参考匹配/空间细节仍拒绝；几何为裁剪/quarter-turn/水平翻转，蒙版源坐标不变。局部/几何统一变体内历史，诊断准入保留。
 - 画笔覆盖33ms合并、后台冻结/取消/代次、最大768像素、V1每笔一次flow/density语义不变；BVH精确索引替代逐样本全段扫描。达到20k点/2k笔/100k总点限制明确反馈，移出图像结束当前笔迹。

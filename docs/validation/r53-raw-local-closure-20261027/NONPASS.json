@@ -1,0 +1,44 @@
+{
+  "current": [
+    {
+      "id": "1e0ce539-8b69-8150-b809-088ddb400891",
+      "name": "RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+      "display": "AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。Explicit authorized company fixtures required.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407",
+      "label": "FINAL_WPF"
+    },
+    {
+      "id": "145fab40-79d9-8ec3-8cce-f72ecd8d2420",
+      "name": "RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "display": "AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。Authorized real JPEG corpus requires explicit opt-in.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.<>c.<<AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels>b__8_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407",
+      "label": "FINAL_WPF"
+    },
+    {
+      "id": "12f603ee-dca1-8712-9ce9-e5e71dc52774",
+      "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+      "display": "AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。Explicit authorized frozen-photo manifest is required; no directory scan.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.<>c.<<AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity>b__2_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407",
+      "label": "FINAL_WPF"
+    },
+    {
+      "id": "166fd959-7415-8c57-bfae-590de7fd3a3f",
+      "name": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+      "display": "AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+      "outcome": "NotExecuted",
+      "error": "Assert.Inconclusive 失败。Set authorized batch06 corpus and evidence directory; not a synthetic test.\n             at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407",
+      "label": "FINAL_WPF"
+    }
+  ],
+  "additional": {
+    "pointerDpi": "NOT_RUN per tool policy",
+    "pixelAdmission": "OPEN_DIAGNOSTIC_ONLY",
+    "sony": "Unsupported15bit3-channelYCbCr in current LibRaw, no blind update",
+    "performance": "24MP20kpoints2layers42s, RAW4-view cold11.84s still slow",
+    "BtoE": "NOT_STARTED; A has non-external functional/visual/admission/performance work, not solely pointer gate"
+  },
+  "historical": "All first failures and reruns retained in RAW_TESTS.zip; no assertions skipped or removed"
+}

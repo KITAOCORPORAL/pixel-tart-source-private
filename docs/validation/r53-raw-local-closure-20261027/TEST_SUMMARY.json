@@ -1,0 +1,147 @@
+{
+  "productSha": "091163b12aa29e5c8561b8fa3b3675580d70e885",
+  "counts": {
+    "Core": {
+      "Passed": 376,
+      "Failed": 0,
+      "NotExecuted": 0
+    },
+    "Wpf": {
+      "Passed": 464,
+      "Failed": 0,
+      "NotExecuted": 4
+    }
+  },
+  "runs": [
+    {
+      "label": "FINAL_CORE",
+      "path": "FINAL_CORE/run-20261027-160014-288d2615/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 369
+      },
+      "assemblySha256": "d64427a76cd683cf6b30de0f1bd0ce42d9cf4f0239aa616fdcaa64bf7c8343f4"
+    },
+    {
+      "label": "FINAL_WPF",
+      "path": "FINAL_WPF/run-20261027-160139-03422252/summary.json",
+      "status": "FAILED",
+      "counts": {
+        "Passed": 460,
+        "NotExecuted": 7
+      },
+      "assemblySha256": "616cc2d6cdc93171c7effa71505b14053b734fb6f6888fa8c7168e8223e42b3e"
+    },
+    {
+      "label": "FINAL_COLOR_MATRIX",
+      "path": "FINAL_COLOR_MATRIX/run-20261027-160658-be9a06df/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 29
+      },
+      "assemblySha256": "d64427a76cd683cf6b30de0f1bd0ce42d9cf4f0239aa616fdcaa64bf7c8343f4"
+    },
+    {
+      "label": "FINAL_PERF_CORE",
+      "path": "FINAL_PERF_CORE/run-20261027-160049-be015c88/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "assemblySha256": "d64427a76cd683cf6b30de0f1bd0ce42d9cf4f0239aa616fdcaa64bf7c8343f4"
+    },
+    {
+      "label": "FINAL_PERF_WPF",
+      "path": "FINAL_PERF_WPF/run-20261027-160051-d99f9cd8/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 3
+      },
+      "assemblySha256": "616cc2d6cdc93171c7effa71505b14053b734fb6f6888fa8c7168e8223e42b3e"
+    },
+    {
+      "label": "FINAL_LARGE_BRUSH_short",
+      "path": "FINAL_LARGE_BRUSH_short/run-20261027-160240-f3cd6145/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "assemblySha256": "d64427a76cd683cf6b30de0f1bd0ce42d9cf4f0239aa616fdcaa64bf7c8343f4"
+    },
+    {
+      "label": "FINAL_LARGE_BRUSH_long",
+      "path": "FINAL_LARGE_BRUSH_long/run-20261027-160251-5c05d90a/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "assemblySha256": "d64427a76cd683cf6b30de0f1bd0ce42d9cf4f0239aa616fdcaa64bf7c8343f4"
+    },
+    {
+      "label": "FINAL_LARGE_BRUSH_multi",
+      "path": "FINAL_LARGE_BRUSH_multi/run-20261027-160302-cc19c079/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "assemblySha256": "d64427a76cd683cf6b30de0f1bd0ce42d9cf4f0239aa616fdcaa64bf7c8343f4"
+    },
+    {
+      "label": "FINAL_PROCESS_create",
+      "path": "FINAL_PROCESS_create/run-20261027-160114-98ab85aa/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "assemblySha256": "616cc2d6cdc93171c7effa71505b14053b734fb6f6888fa8c7168e8223e42b3e"
+    },
+    {
+      "label": "FINAL_PROCESS_reopen",
+      "path": "FINAL_PROCESS_reopen/run-20261027-160117-86c86aee/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "assemblySha256": "616cc2d6cdc93171c7effa71505b14053b734fb6f6888fa8c7168e8223e42b3e"
+    },
+    {
+      "label": "FINAL_COMPARE",
+      "path": "FINAL_COMPARE/run-20261027-160121-072a3a98/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 3
+      },
+      "assemblySha256": "616cc2d6cdc93171c7effa71505b14053b734fb6f6888fa8c7168e8223e42b3e"
+    },
+    {
+      "label": "FINAL_APP_first",
+      "path": "FINAL_APP_first/run-20261027-160128-9efdec58/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 3
+      },
+      "assemblySha256": "616cc2d6cdc93171c7effa71505b14053b734fb6f6888fa8c7168e8223e42b3e"
+    },
+    {
+      "label": "FINAL_APP_upgrade",
+      "path": "FINAL_APP_upgrade/run-20261027-160138-f7cb6b96/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 3
+      },
+      "assemblySha256": "616cc2d6cdc93171c7effa71505b14053b734fb6f6888fa8c7168e8223e42b3e"
+    },
+    {
+      "label": "FINAL_APP_restart_retained",
+      "path": "FINAL_APP_restart_retained/run-20261027-160342-db69319b/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 3
+      },
+      "assemblySha256": "616cc2d6cdc93171c7effa71505b14053b734fb6f6888fa8c7168e8223e42b3e"
+    }
+  ],
+  "scope": "Selected affected and inherited classes, not all discovered tests. Latest explicit environment execution wins per case; WPF base runner remains FAILED for NOT_RUN.",
+  "binding": "29 published DLLs; COMPONENT_BINDINGS.json and COMPONENT_READBACK.json",
+  "historicalFailuresRetained": true
+}

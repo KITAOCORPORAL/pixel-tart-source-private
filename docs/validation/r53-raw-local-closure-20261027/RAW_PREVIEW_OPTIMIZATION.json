@@ -1,0 +1,71 @@
+{
+  "beforeProduct": "5fbecc7ecce014bdaa489f5551d985b694488af4",
+  "afterProduct": "091163b12aa29e5c8561b8fa3b3675580d70e885",
+  "before": {
+    "source": "TNAN8886.CR3",
+    "hash": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "decodeMs": 3802.2647,
+    "inputMs": 0.5311,
+    "previewMs": 8027.7216,
+    "exportMs": 8307.1376,
+    "readbackMs": 6154.2477,
+    "compare": [
+      {
+        "count": 2,
+        "coldMs": 14730.8972,
+        "warmMs": 13.8814
+      },
+      {
+        "count": 3,
+        "coldMs": 22345.6121,
+        "warmMs": 13.9658
+      },
+      {
+        "count": 4,
+        "coldMs": 29787.9081,
+        "warmMs": 11.5634
+      }
+    ],
+    "width": 5496,
+    "height": 3670,
+    "peakWorkingSetBytes": 2668249088,
+    "ledger": 504593280,
+    "CalibrationEligible": false,
+    "scope": "Actual linear professional RAW master; local editing and TIFF16 exported from same definition. Testhost not pointer/DPI. Peak includes fixture/readback/second workspace; ledger separately recorded."
+  },
+  "after": {
+    "source": "TNAN8886.CR3",
+    "hash": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "decodeMs": 3834.8465,
+    "inputMs": 0.5242,
+    "previewMs": 3973.8545,
+    "exportMs": 7888.9551,
+    "readbackMs": 6387.5341,
+    "compare": [
+      {
+        "count": 2,
+        "coldMs": 6089.4312,
+        "warmMs": 14.6084
+      },
+      {
+        "count": 3,
+        "coldMs": 8965.2367,
+        "warmMs": 12.4915
+      },
+      {
+        "count": 4,
+        "coldMs": 11839.6805,
+        "warmMs": 12.7653
+      }
+    ],
+    "width": 5496,
+    "height": 3670,
+    "peakWorkingSetBytes": 2618515456,
+    "ledger": 504593280,
+    "CalibrationEligible": false,
+    "scope": "Actual linear professional RAW master; local editing and TIFF16 exported from same definition. Testhost not pointer/DPI. Peak includes fixture/readback/second workspace; ledger separately recorded."
+  },
+  "sameInputHash": true,
+  "previewReopenPixelsEqual": true,
+  "note": "Same effect definition, exact area average, max4 workers. Not physical calibration."
+}

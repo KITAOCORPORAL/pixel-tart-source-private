@@ -1,0 +1,224 @@
+{
+  "productSha": "091163b12aa29e5c8561b8fa3b3675580d70e885",
+  "brushBefore": [
+    {
+      "sourceWidth": 6000,
+      "sourceHeight": 4000,
+      "overlayWidth": 512,
+      "overlayHeight": 342,
+      "strokes": 1,
+      "points": 1000,
+      "compileMs": 1.7296,
+      "sampleMs": 908.3333,
+      "sum": 8972.261013478592,
+      "peakWorkingSetBytes": 72744960
+    },
+    {
+      "sourceWidth": 6000,
+      "sourceHeight": 4000,
+      "overlayWidth": 512,
+      "overlayHeight": 342,
+      "strokes": 20,
+      "points": 20000,
+      "compileMs": 5.1531,
+      "sampleMs": 11933.5501,
+      "sum": 100595.87129507102,
+      "peakWorkingSetBytes": 76521472
+    }
+  ],
+  "brushAfter": [
+    {
+      "sourceWidth": 6000,
+      "sourceHeight": 4000,
+      "overlayWidth": 512,
+      "overlayHeight": 342,
+      "strokes": 1,
+      "points": 1000,
+      "compileMs": 5.4239,
+      "sampleMs": 102.617,
+      "sum": 8972.261013478592,
+      "peakWorkingSetBytes": 72232960
+    },
+    {
+      "sourceWidth": 6000,
+      "sourceHeight": 4000,
+      "overlayWidth": 512,
+      "overlayHeight": 342,
+      "strokes": 20,
+      "points": 20000,
+      "compileMs": 58.3066,
+      "sampleMs": 391.6133,
+      "sum": 100595.87129507099,
+      "peakWorkingSetBytes": 75116544
+    }
+  ],
+  "largeBrush": [
+    {
+      "name": "short",
+      "width": 6000,
+      "height": 4000,
+      "strokes": 1,
+      "points": 20,
+      "layers": 1,
+      "renderMs": 7150.4255,
+      "encodeMs": 1307.7038,
+      "productInputBytes": 288000000,
+      "productOutputBytes": 288000000,
+      "baselineWorkingSetBytes": 363388928,
+      "sampledPeakWorkingSetBytes": 1690943488,
+      "allocatedDuringRenderAndEncode": 1515983896,
+      "scope": "Actual 24MP render and TIFF encode; source/output retained plus row-band scratch. Sampling5ms, managed runtime/codec overhead included. No full-output extra assertion copy."
+    },
+    {
+      "name": "long",
+      "width": 6000,
+      "height": 4000,
+      "strokes": 1,
+      "points": 2000,
+      "layers": 1,
+      "renderMs": 6920.9784,
+      "encodeMs": 1286.4255,
+      "productInputBytes": 288000000,
+      "productOutputBytes": 288000000,
+      "baselineWorkingSetBytes": 364003328,
+      "sampledPeakWorkingSetBytes": 1394728960,
+      "allocatedDuringRenderAndEncode": 1526209088,
+      "scope": "Actual 24MP render and TIFF encode; source/output retained plus row-band scratch. Sampling5ms, managed runtime/codec overhead included. No full-output extra assertion copy."
+    },
+    {
+      "name": "multi",
+      "width": 6000,
+      "height": 4000,
+      "strokes": 20,
+      "points": 20000,
+      "layers": 2,
+      "renderMs": 42041.2169,
+      "encodeMs": 1398.5969,
+      "productInputBytes": 288000000,
+      "productOutputBytes": 288000000,
+      "baselineWorkingSetBytes": 363491328,
+      "sampledPeakWorkingSetBytes": 1629982720,
+      "allocatedDuringRenderAndEncode": 2311183088,
+      "scope": "Actual 24MP render and TIFF encode; source/output retained plus row-band scratch. Sampling5ms, managed runtime/codec overhead included. No full-output extra assertion copy."
+    }
+  ],
+  "largeCompare": [
+    {
+      "width": 6000,
+      "height": 4000,
+      "count": 2,
+      "coldMs": 326.3737,
+      "warmMs": 5.359,
+      "compareStartWorkingBytes": 3202486272,
+      "compareSampledPeakWorkingBytes": 3207626752,
+      "compareAllocatedBytes": 66577648,
+      "peakWorkingSetBytes": 3296645120,
+      "managedBytes": 77382400,
+      "decodedProxyEdge": 1200,
+      "scope": "Full workspace includes original loading; peak includes fixture generation and managed test setup, not product-only ceiling"
+    },
+    {
+      "width": 6000,
+      "height": 4000,
+      "count": 3,
+      "coldMs": 535.2126,
+      "warmMs": 4.8589,
+      "compareStartWorkingBytes": 2920431616,
+      "compareSampledPeakWorkingBytes": 2920431616,
+      "compareAllocatedBytes": 97523176,
+      "peakWorkingSetBytes": 3296645120,
+      "managedBytes": 126618200,
+      "decodedProxyEdge": 1200,
+      "scope": "Full workspace includes original loading; peak includes fixture generation and managed test setup, not product-only ceiling"
+    },
+    {
+      "width": 6000,
+      "height": 4000,
+      "count": 4,
+      "coldMs": 766.5753,
+      "warmMs": 5.5134,
+      "compareStartWorkingBytes": 2656129024,
+      "compareSampledPeakWorkingBytes": 2656129024,
+      "compareAllocatedBytes": 142733520,
+      "peakWorkingSetBytes": 3296645120,
+      "managedBytes": 167862888,
+      "decodedProxyEdge": 1200,
+      "scope": "Full workspace includes original loading; peak includes fixture generation and managed test setup, not product-only ceiling"
+    },
+    {
+      "width": 8000,
+      "height": 6000,
+      "count": 2,
+      "coldMs": 405.1934,
+      "warmMs": 8.6999,
+      "compareStartWorkingBytes": 6134276096,
+      "compareSampledPeakWorkingBytes": 6138310656,
+      "compareAllocatedBytes": 73231840,
+      "peakWorkingSetBytes": 6570356736,
+      "managedBytes": 92338608,
+      "decodedProxyEdge": 1200,
+      "scope": "Full workspace includes original loading; peak includes fixture generation and managed test setup, not product-only ceiling"
+    },
+    {
+      "width": 8000,
+      "height": 6000,
+      "count": 3,
+      "coldMs": 685.357,
+      "warmMs": 10.2366,
+      "compareStartWorkingBytes": 5645471744,
+      "compareSampledPeakWorkingBytes": 5645471744,
+      "compareAllocatedBytes": 109756208,
+      "peakWorkingSetBytes": 6570356736,
+      "managedBytes": 133738040,
+      "decodedProxyEdge": 1200,
+      "scope": "Full workspace includes original loading; peak includes fixture generation and managed test setup, not product-only ceiling"
+    },
+    {
+      "width": 8000,
+      "height": 6000,
+      "count": 4,
+      "coldMs": 934.2292,
+      "warmMs": 9.6474,
+      "compareStartWorkingBytes": 4536008704,
+      "compareSampledPeakWorkingBytes": 4536008704,
+      "compareAllocatedBytes": 160588408,
+      "peakWorkingSetBytes": 6570356736,
+      "managedBytes": 184594712,
+      "decodedProxyEdge": 1200,
+      "scope": "Full workspace includes original loading; peak includes fixture generation and managed test setup, not product-only ceiling"
+    }
+  ],
+  "raw": {
+    "source": "TNAN8886.CR3",
+    "hash": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "decodeMs": 3834.8465,
+    "inputMs": 0.5242,
+    "previewMs": 3973.8545,
+    "exportMs": 7888.9551,
+    "readbackMs": 6387.5341,
+    "compare": [
+      {
+        "count": 2,
+        "coldMs": 6089.4312,
+        "warmMs": 14.6084
+      },
+      {
+        "count": 3,
+        "coldMs": 8965.2367,
+        "warmMs": 12.4915
+      },
+      {
+        "count": 4,
+        "coldMs": 11839.6805,
+        "warmMs": 12.7653
+      }
+    ],
+    "width": 5496,
+    "height": 3670,
+    "peakWorkingSetBytes": 2618515456,
+    "ledger": 504593280,
+    "CalibrationEligible": false,
+    "scope": "Actual linear professional RAW master; local editing and TIFF16 exported from same definition. Testhost not pointer/DPI. Peak includes fixture/readback/second workspace; ledger separately recorded."
+  },
+  "limits": "Same final published DLLs, memory5ms sampling. Large compare process peak includes fixture creation and original workspace load; compare interval start/peak/allocation separate. RAW ledger vs process peak separate. Still not native pointer latency or hard codec bound."
+}
