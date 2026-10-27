@@ -1,0 +1,32 @@
+{
+  "setBeforeImplementation": true,
+  "overlay": {
+    "workload": "24MP source coordinates / 20 strokes 20k points, sustained submissions every20ms for2s",
+    "maxInFlight": 1,
+    "maxPending": 1,
+    "firstFrameMs": 1000,
+    "minimumFramesDuringInput": 2,
+    "finalLatest": true,
+    "monotonicPublished": true,
+    "contextCancellation": true
+  },
+  "preview": {
+    "fastEdge": 800,
+    "sourceReuse": true,
+    "targetFirstFastMs": 800,
+    "settledExact": true,
+    "tolerances": {
+      "meanAbsoluteSrgb8": 1.5,
+      "p95AbsoluteSrgb8": 4,
+      "maxAbsoluteSrgb8": 32
+    },
+    "scope": "Nearest display-domain point-tool approximation; high-frequency/small-mask tails can exceed budget and must be recorded, never retroactively loosened"
+  },
+  "comparison": {
+    "progressiveFirstFrame": true,
+    "oneVariantAtATime": true,
+    "contextIsolation": true
+  },
+  "pixelHistory": "PV4/PV5/PV6 and exact export unchanged",
+  "release": "Not approved by targets"
+}

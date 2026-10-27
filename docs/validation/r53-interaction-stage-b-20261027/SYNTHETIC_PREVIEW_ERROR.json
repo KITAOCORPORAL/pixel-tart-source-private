@@ -1,0 +1,15 @@
+{
+  "width": 1200,
+  "height": 800,
+  "fastMs": 405.1885,
+  "fineMs": 423.3054,
+  "mean": 0.069495946,
+  "p95": 0.1753074,
+  "maximum": 6.963035,
+  "targetMean": 1.5,
+  "targetP95": 4,
+  "targetMax": 32,
+  "withinTarget": true,
+  "input": "Synthetic high-frequency RGB; intentionally stresses nearest vs area",
+  "notPixelEqual": true
+}

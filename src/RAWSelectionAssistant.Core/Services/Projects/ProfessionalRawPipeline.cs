@@ -19,9 +19,12 @@ public sealed record ProfessionalRawDefinition(int ProcessingVersion=4,string Wh
     public ProfessionalRawLocalEdits? LocalEdits {get;init;}
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
     public ProfessionalRawGeometry? Geometry {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public SceneExposureV1? SceneExposure {get;init;}
     public ProfessionalRawDefinition Validate()
     {
         InstantFilm?.Validate();
+        if(SceneExposure is not null){SceneExposure.Validate();if(ProcessingVersion!=4||IsRenderedInput||InstantFilm is not null)throw new NotSupportedException("SceneExposureV1 requires existing linear RAW master");}
         if(LocalEdits is not null||Geometry is not null){if(ProcessingVersion!=4||IsRenderedInput||InstantFilm?.Enabled==true)throw new NotSupportedException("RAW local extension v1 requires linear PV4 base without an instant-paper recipe");LocalEdits?.Freeze();Geometry?.Validate();}
         if(LightPrint is{} light){if(light.Version!=1||InstantFilm?.AlgorithmVersion!=3||!LightPrintFrames.Available.Any(f=>f.Id==light.FrameId&&f.Shippable))throw new InvalidDataException("Unknown/non-distributable light-print frame");light.WindowAdjustments?.Normalize();if(light.WindowAdjustments?.Nodes.Any(n=>n.Type is not(ColorStudioNodeType.BasicTone or ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.Curve))==true)throw new NotSupportedException("Unsupported lightprint window node");}
         if(RenderedInputVersion is not null&&(RenderedInputVersion!=2||InputConfiguration!="RenderedSrgbFloatV1"))throw new InvalidDataException("Unknown rendered input version");
@@ -108,11 +111,11 @@ public static class ProfessionalRawPipeline
         if(definition.IsRenderedInput){if(master.Image.WorkingColorSpace!="sRGB"||master.Contract.DecodeKey!=definition.DecodeKey)throw new InvalidDataException("已渲染输入域失配。");return;}
         if(master.Contract.DecodeKey!=definition.DecodeKey||master.Image.WorkingColorSpace!=WorkingSpace||!master.Contract.WhiteBalanceApplied||!master.Contract.CameraMatrixApplied||master.Contract.Gamma!="1,1"||master.Contract.AutoBright||master.Contract.OutputBits!=16||master.Contract.OutputSpace!=WorkingSpace)throw new InvalidDataException("RAW master/definition domain mismatch.");
     }
-    public static ColorVector3 RenderPixel(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int x,int y)
+    public static ColorVector3 RenderPixel(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int x,int y,Func<double,double,double>? sceneMask=null)
     {
         var input=master.Image.Rgb32.Span;var i=(y*master.Image.Width+x)*3;
         if(!float.IsFinite(input[i])||!float.IsFinite(input[i+1])||!float.IsFinite(input[i+2]))throw new InvalidDataException("Non-finite RAW pixel.");
-        var encoded=new ColorVector3(input[i],input[i+1],input[i+2]);return definition.IsRenderedInput?(definition.SrgbExposure is{} exposure?exposure.Apply(encoded):encoded):Display(ApplyExposure(encoded,definition.ExposureEv));
+        var encoded=new ColorVector3(input[i],input[i+1],input[i+2]);if(definition.IsRenderedInput)return definition.SrgbExposure is{} exposure?exposure.Apply(encoded):encoded;var scene=ApplyExposure(encoded,definition.ExposureEv);if(definition.SceneExposure is{} local){var oriented=OrientedSize(master);var(w,h)=(master.Image.Width,master.Image.Height);var(sx,sy)=master.Image.Orientation switch{2=>(w-1-x,y),3=>(w-1-x,h-1-y),4=>(x,h-1-y),5=>(y,x),6=>(h-1-y,x),7=>(h-1-y,w-1-x),8=>(y,w-1-x),_=>(x,y)};scene=local.Apply(scene,sceneMask?.Invoke((sx+.5)/oriented.Width,(sy+.5)/oriented.Height)??local.Mask?.Weight((sx+.5)/oriented.Width,(sy+.5)/oriented.Height,(double)oriented.Width/oriented.Height)??1);}return Display(scene);
     }
     public static (int Width,int Height) OutputSize(ProfessionalRawMaster master,ProfessionalRawDefinition definition){if(ProfessionalRawLocalRenderer.Active(definition))return ProfessionalRawLocalRenderer.Size(master,definition);if(Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition))return Kitao.InstantFilm.Research.InstantV3ProductPipeline.Size(master,definition);var size=OrientedSize(master);var layout=InstantFilmPipeline.Layout(size.Width,size.Height,definition.InstantFilm);return(layout.Width,layout.Height);}
     public static int OutputOrientation(ProfessionalRawMaster master,ProfessionalRawDefinition definition)=>ProfessionalRawLocalRenderer.Active(definition)||definition.InstantFilm?.Enabled==true||definition.IsRenderedInput?1:master.Image.Orientation;

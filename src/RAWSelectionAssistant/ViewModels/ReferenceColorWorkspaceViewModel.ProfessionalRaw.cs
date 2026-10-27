@@ -139,7 +139,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(_disposed||revision!=Volatile.Read(ref _activationRevision))throw new OperationCanceledException(token);
         if(before is not null){_comparisonKey=ComparisonKey(master,ComparisonDefinition(definition));_comparisonImage=before;}
         UpdateComparisonAvailability();
-        CaptureEditVersion(target);EnsureR53Variants(target);await RefreshPreviewAnalysisAsync(token,image);
+        CaptureEditVersion(target);EnsureR53Variants(target);if(Editor.RawLocalEditing)WarmRawFastBase(master,definition);await RefreshPreviewAnalysisAsync(token,image);
         token.ThrowIfCancellationRequested();if(_disposed||revision!=Volatile.Read(ref _activationRevision)||target.RawDefinition!=definition)throw new OperationCanceledException(token);
     }
     private async Task ExportProfessionalRawAsync(ReferenceTargetItem target,ProfessionalRawDefinition definition,string temporary,StudioExportFormat format,CancellationToken token)

@@ -1,0 +1,12 @@
+{
+  "rawInput": "LibRaw existing linear ProPhoto D65, black/WB/camera matrix once",
+  "rawBase": "Linear ExposureEv; no repeated WB",
+  "stageB": "Optional SceneExposureV1 masked gain before original display shoulder/gamut/OETF; no clip in scene stage",
+  "displayLocal": "Encoded sRGB D65 float ColorAdjustmentStack + LayerCompositeV1",
+  "fast": "800px cached area base then same frozen local point tools; bounded approximate display only",
+  "fine": "Full effects then area integration in display-linear sRGB",
+  "export": "Full-resolution original row/region pipeline to sRGB TIFF16/PNG16/JPEG8",
+  "versions": "Old PV4/PV5/PV6 default new SceneExposure=null; no silent migration",
+  "ICC": "General input/work/display/output ICC and wide gamut are B followups, not claimed complete",
+  "scientific": "CalibrationEligible=false; same persisted output is consistency, not accuracy"
+}

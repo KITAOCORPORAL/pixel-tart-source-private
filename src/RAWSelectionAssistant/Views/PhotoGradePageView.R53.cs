@@ -34,6 +34,7 @@ public partial class PhotoGradePageView
     internal bool ExecuteR53PointerShortcut(Key key)
     {
         if(model is null)return false;
+        if(key==Key.C){CropTool(this,new());return true;}
         if(key==Key.B){R53Brush(this,new());return true;}
         if(key==Key.Oem5){model.Editor.ViewMode=model.Editor.ViewMode=="原片"?"仿色结果":"原片";return true;}
         return false;
@@ -46,7 +47,7 @@ public partial class PhotoGradePageView
         var resources=r53ResourcesRequested&&width>=1200;
         ResourceColumn.Width=new GridLength(resources?264:0);R53Resources.Visibility=resources?Visibility.Visible:Visibility.Collapsed;
         if(width<1440){SetPanelOpen(false);}else if(RightPanel.Visibility!=Visibility.Visible)SetPanelOpen(true);
-        R53SerialNodes.Visibility=professional?Visibility.Visible:Visibility.Collapsed;R53NodeRow.Height=new GridLength(professional?132:0);
+        R53SerialNodes.Visibility=professional?Visibility.Visible:Visibility.Collapsed;R53NodeRow.Height=new GridLength(professional?156:0);
     }
     private void R53ParameterCategory(object sender,RoutedEventArgs e)
     {
@@ -98,7 +99,7 @@ public partial class PhotoGradePageView
     private void R53ResourceAll(object sender,RoutedEventArgs e){r53FavoritesOnly=r53RecentOnly=false;RenderR53Resources();}
     private void R53ResourceFavorites(object sender,RoutedEventArgs e){r53FavoritesOnly=true;r53RecentOnly=false;RenderR53Resources();}
     private void R53ResourceRecent(object sender,RoutedEventArgs e){r53RecentOnly=true;r53FavoritesOnly=false;RenderR53Resources();}
-    private bool scopesOpen=true;private void R53ToggleScopes(object sender,RoutedEventArgs e){scopesOpen=!scopesOpen;HistogramPanel.Visibility=scopesOpen?Visibility.Visible:Visibility.Collapsed;HistogramRow.Height=new GridLength(scopesOpen?108:0);}
+    private bool scopesOpen=true;private void R53ToggleScopes(object sender,RoutedEventArgs e){scopesOpen=!scopesOpen;HistogramPanel.Visibility=scopesOpen?Visibility.Visible:Visibility.Collapsed;HistogramRow.Height=new GridLength(scopesOpen?152:0);}
     private Action? closeR53Inspection;
     private void R53Inspect3D(object s,RoutedEventArgs e)
     {

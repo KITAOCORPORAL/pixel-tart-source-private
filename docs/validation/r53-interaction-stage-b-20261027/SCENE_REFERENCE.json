@@ -1,0 +1,463 @@
+{
+  "darktableCommit": "be9171cf8bb2feab8bd115efd9b96a4ce7103039",
+  "darktableEntry": "src/iop/exposure.c exposure2white/process black0 scale",
+  "rawtherapeeCommit": "a8a3d1bc7b419ed1c974c39276c97e618a4f9a1b",
+  "rawtherapeeEntry": "rtengine/curves.cc powf2 ecomp; rtengine/dcp.cc step2ApplyTile RGB*=exp_scale no tone/look",
+  "licenses": "GPL3 isolated scalar-stage research only, no copied product implementation or binary",
+  "sourceHashes": {
+    "E:\\Kitao-Deliveries\\r53-stage-a-completion-20261027\\references\\darktable-local\\src\\iop\\exposure.c": "41ddfa98d819f337a47ff397e7d3589747353ef107afed7ae43c07226ccd7296",
+    "E:\\Kitao-Deliveries\\r53-interaction-stage-b-20261027\\rawtherapee-reference\\rtengine\\curves.cc": "eafb314d06ee8b05be22186b72abe0f7a339e86706d2547ae0fc0ecf7dc8c9d4"
+  },
+  "cases": [
+    {
+      "input": -0.25,
+      "ev": -5,
+      "expected": -0.0078125,
+      "darktable": -0.0078125,
+      "rawtherapee": -0.0078125,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": -0.25,
+      "ev": -2,
+      "expected": -0.0625,
+      "darktable": -0.0625,
+      "rawtherapee": -0.0625,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": -0.25,
+      "ev": -0.5,
+      "expected": -0.1767766952966369,
+      "darktable": -0.176776692,
+      "rawtherapee": -0.176776692,
+      "maxAbsolute": 3.296636880145698e-09
+    },
+    {
+      "input": -0.25,
+      "ev": 0,
+      "expected": -0.25,
+      "darktable": -0.25,
+      "rawtherapee": -0.25,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": -0.25,
+      "ev": 0.5,
+      "expected": -0.3535533905932738,
+      "darktable": -0.353553385,
+      "rawtherapee": -0.353553385,
+      "maxAbsolute": 5.5932737885733275e-09
+    },
+    {
+      "input": -0.25,
+      "ev": 2,
+      "expected": -1.0,
+      "darktable": -1.0,
+      "rawtherapee": -1.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": -0.25,
+      "ev": 5,
+      "expected": -8.0,
+      "darktable": -8.0,
+      "rawtherapee": -8.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 0,
+      "ev": -5,
+      "expected": 0.0,
+      "darktable": 0.0,
+      "rawtherapee": 0.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 0,
+      "ev": -2,
+      "expected": 0.0,
+      "darktable": 0.0,
+      "rawtherapee": 0.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 0,
+      "ev": -0.5,
+      "expected": 0.0,
+      "darktable": 0.0,
+      "rawtherapee": 0.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 0,
+      "ev": 0,
+      "expected": 0,
+      "darktable": 0.0,
+      "rawtherapee": 0.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 0,
+      "ev": 0.5,
+      "expected": 0.0,
+      "darktable": 0.0,
+      "rawtherapee": 0.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 0,
+      "ev": 2,
+      "expected": 0,
+      "darktable": 0.0,
+      "rawtherapee": 0.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 0,
+      "ev": 5,
+      "expected": 0,
+      "darktable": 0.0,
+      "rawtherapee": 0.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 0.001,
+      "ev": -5,
+      "expected": 3.125e-05,
+      "darktable": 3.12500015e-05,
+      "rawtherapee": 3.12500015e-05,
+      "maxAbsolute": 1.5000000007825594e-12
+    },
+    {
+      "input": 0.001,
+      "ev": -2,
+      "expected": 0.00025,
+      "darktable": 0.000250000012,
+      "rawtherapee": 0.000250000012,
+      "maxAbsolute": 1.2000000006260475e-11
+    },
+    {
+      "input": 0.001,
+      "ev": -0.5,
+      "expected": 0.0007071067811865476,
+      "darktable": 0.000707106781,
+      "rawtherapee": 0.000707106781,
+      "maxAbsolute": 1.865476089574214e-13
+    },
+    {
+      "input": 0.001,
+      "ev": 0,
+      "expected": 0.001,
+      "darktable": 0.00100000005,
+      "rawtherapee": 0.00100000005,
+      "maxAbsolute": 5.0000000017050295e-11
+    },
+    {
+      "input": 0.001,
+      "ev": 0.5,
+      "expected": 0.0014142135623730952,
+      "darktable": 0.00141421356,
+      "rawtherapee": 0.00141421356,
+      "maxAbsolute": 2.373095209923237e-12
+    },
+    {
+      "input": 0.001,
+      "ev": 2,
+      "expected": 0.004,
+      "darktable": 0.00400000019,
+      "rawtherapee": 0.00400000019,
+      "maxAbsolute": 1.900000001081592e-10
+    },
+    {
+      "input": 0.001,
+      "ev": 5,
+      "expected": 0.032,
+      "darktable": 0.0320000015,
+      "rawtherapee": 0.0320000015,
+      "maxAbsolute": 1.4999999992104662e-09
+    },
+    {
+      "input": 0.18,
+      "ev": -5,
+      "expected": 0.005625,
+      "darktable": 0.00562500022,
+      "rawtherapee": 0.00562500022,
+      "maxAbsolute": 2.1999999998828512e-10
+    },
+    {
+      "input": 0.18,
+      "ev": -2,
+      "expected": 0.045,
+      "darktable": 0.0450000018,
+      "rawtherapee": 0.0450000018,
+      "maxAbsolute": 1.8000000032158958e-09
+    },
+    {
+      "input": 0.18,
+      "ev": -0.5,
+      "expected": 0.12727922061357855,
+      "darktable": 0.127279222,
+      "rawtherapee": 0.127279222,
+      "maxAbsolute": 1.3864214498671146e-09
+    },
+    {
+      "input": 0.18,
+      "ev": 0,
+      "expected": 0.18,
+      "darktable": 0.180000007,
+      "rawtherapee": 0.180000007,
+      "maxAbsolute": 6.999999996315509e-09
+    },
+    {
+      "input": 0.18,
+      "ev": 0.5,
+      "expected": 0.2545584412271571,
+      "darktable": 0.254558444,
+      "rawtherapee": 0.254558444,
+      "maxAbsolute": 2.772842899734229e-09
+    },
+    {
+      "input": 0.18,
+      "ev": 2,
+      "expected": 0.72,
+      "darktable": 0.720000029,
+      "rawtherapee": 0.720000029,
+      "maxAbsolute": 2.9000000068002407e-08
+    },
+    {
+      "input": 0.18,
+      "ev": 5,
+      "expected": 5.76,
+      "darktable": 5.76000023,
+      "rawtherapee": 5.76000023,
+      "maxAbsolute": 2.3000000037853852e-07
+    },
+    {
+      "input": 0.5,
+      "ev": -5,
+      "expected": 0.015625,
+      "darktable": 0.015625,
+      "rawtherapee": 0.015625,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 0.5,
+      "ev": -2,
+      "expected": 0.125,
+      "darktable": 0.125,
+      "rawtherapee": 0.125,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 0.5,
+      "ev": -0.5,
+      "expected": 0.3535533905932738,
+      "darktable": 0.353553385,
+      "rawtherapee": 0.353553385,
+      "maxAbsolute": 5.5932737885733275e-09
+    },
+    {
+      "input": 0.5,
+      "ev": 0,
+      "expected": 0.5,
+      "darktable": 0.5,
+      "rawtherapee": 0.5,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 0.5,
+      "ev": 0.5,
+      "expected": 0.7071067811865476,
+      "darktable": 0.707106769,
+      "rawtherapee": 0.707106769,
+      "maxAbsolute": 1.2186547548864723e-08
+    },
+    {
+      "input": 0.5,
+      "ev": 2,
+      "expected": 2.0,
+      "darktable": 2.0,
+      "rawtherapee": 2.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 0.5,
+      "ev": 5,
+      "expected": 16.0,
+      "darktable": 16.0,
+      "rawtherapee": 16.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 1,
+      "ev": -5,
+      "expected": 0.03125,
+      "darktable": 0.03125,
+      "rawtherapee": 0.03125,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 1,
+      "ev": -2,
+      "expected": 0.25,
+      "darktable": 0.25,
+      "rawtherapee": 0.25,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 1,
+      "ev": -0.5,
+      "expected": 0.7071067811865476,
+      "darktable": 0.707106769,
+      "rawtherapee": 0.707106769,
+      "maxAbsolute": 1.2186547548864723e-08
+    },
+    {
+      "input": 1,
+      "ev": 0,
+      "expected": 1,
+      "darktable": 1.0,
+      "rawtherapee": 1.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 1,
+      "ev": 0.5,
+      "expected": 1.4142135623730951,
+      "darktable": 1.41421354,
+      "rawtherapee": 1.41421354,
+      "maxAbsolute": 2.237309515429331e-08
+    },
+    {
+      "input": 1,
+      "ev": 2,
+      "expected": 4,
+      "darktable": 4.0,
+      "rawtherapee": 4.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 1,
+      "ev": 5,
+      "expected": 32,
+      "darktable": 32.0,
+      "rawtherapee": 32.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 4,
+      "ev": -5,
+      "expected": 0.125,
+      "darktable": 0.125,
+      "rawtherapee": 0.125,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 4,
+      "ev": -2,
+      "expected": 1.0,
+      "darktable": 1.0,
+      "rawtherapee": 1.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 4,
+      "ev": -0.5,
+      "expected": 2.8284271247461903,
+      "darktable": 2.82842708,
+      "rawtherapee": 2.82842708,
+      "maxAbsolute": 4.474619030858662e-08
+    },
+    {
+      "input": 4,
+      "ev": 0,
+      "expected": 4,
+      "darktable": 4.0,
+      "rawtherapee": 4.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 4,
+      "ev": 0.5,
+      "expected": 5.656854249492381,
+      "darktable": 5.65685415,
+      "rawtherapee": 5.65685415,
+      "maxAbsolute": 9.949238055639853e-08
+    },
+    {
+      "input": 4,
+      "ev": 2,
+      "expected": 16,
+      "darktable": 16.0,
+      "rawtherapee": 16.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 4,
+      "ev": 5,
+      "expected": 128,
+      "darktable": 128.0,
+      "rawtherapee": 128.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 16,
+      "ev": -5,
+      "expected": 0.5,
+      "darktable": 0.5,
+      "rawtherapee": 0.5,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 16,
+      "ev": -2,
+      "expected": 4.0,
+      "darktable": 4.0,
+      "rawtherapee": 4.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 16,
+      "ev": -0.5,
+      "expected": 11.313708498984761,
+      "darktable": 11.3137083,
+      "rawtherapee": 11.3137083,
+      "maxAbsolute": 1.9898476111279706e-07
+    },
+    {
+      "input": 16,
+      "ev": 0,
+      "expected": 16,
+      "darktable": 16.0,
+      "rawtherapee": 16.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 16,
+      "ev": 0.5,
+      "expected": 22.627416997969522,
+      "darktable": 22.6274166,
+      "rawtherapee": 22.6274166,
+      "maxAbsolute": 3.979695222255941e-07
+    },
+    {
+      "input": 16,
+      "ev": 2,
+      "expected": 64,
+      "darktable": 64.0,
+      "rawtherapee": 64.0,
+      "maxAbsolute": 0.0
+    },
+    {
+      "input": 16,
+      "ev": 5,
+      "expected": 512,
+      "darktable": 512.0,
+      "rawtherapee": 512.0,
+      "maxAbsolute": 0.0
+    }
+  ],
+  "maxAbsolute": 3.979695222255941e-07,
+  "scope": "Linear exposure stage only, not full RAW/profile pipeline, mask is independently versioned normal gain interpolation"
+}

@@ -81,6 +81,6 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             }
         }
     }
-    private static ProfessionalRawDefinition ComparisonDefinition(ProfessionalRawDefinition definition)=>InstantV3ProductPipeline.IsV3(definition)?InstantV3ProductPipeline.Original(definition):definition with{ExposureEv=0,SrgbExposure=null,LocalEdits=null};
+    private static ProfessionalRawDefinition ComparisonDefinition(ProfessionalRawDefinition definition)=>InstantV3ProductPipeline.IsV3(definition)?InstantV3ProductPipeline.Original(definition):definition with{ExposureEv=0,SrgbExposure=null,LocalEdits=null,SceneExposure=null};
     private static string ComparisonKey(ProfessionalRawMaster master,ProfessionalRawDefinition original)=>System.Text.Json.JsonSerializer.Serialize(new{master.Contract.SourceSha256,DecodeKey=ComparisonIdentity(original).DecodeKey,master.Image.Width,master.Image.Height,master.Image.Orientation,Definition=ComparisonIdentity(original),Edge=1600,Quality="DisplayLinearBoxBandsV1"});
 }

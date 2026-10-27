@@ -1,0 +1,27 @@
+{
+  "inheritedUnchanged": [
+    {
+      "name": "RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+      "outcome": "NOT_RUN_THIS_BATCH",
+      "reason": "Assert.Inconclusive 失败。Explicit authorized company fixtures required."
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+      "outcome": "NOT_RUN_THIS_BATCH",
+      "reason": "Assert.Inconclusive 失败。Authorized real JPEG corpus requires explicit opt-in."
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+      "outcome": "NOT_RUN_THIS_BATCH",
+      "reason": "Assert.Inconclusive 失败。Explicit authorized frozen-photo manifest is required; no directory scan."
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+      "outcome": "NOT_RUN_THIS_BATCH",
+      "reason": "Assert.Inconclusive 失败。Set authorized batch06 corpus and evidence directory; not a synthetic test."
+    }
+  ],
+  "scope": "Four unrelated historical authorized-photo/whole-corpus tasks retained, not rerun or silently converted to passes.",
+  "physicalPointerDpi": "NOT_RUN under inherited tool policy",
+  "pixelAdmission": "Diagnostic only; sceneExposure scalar-stage references not full camera/profile validation"
+}

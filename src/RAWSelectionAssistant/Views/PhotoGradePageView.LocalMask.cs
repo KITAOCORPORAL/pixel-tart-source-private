@@ -28,7 +28,9 @@ public partial class PhotoGradePageView
     }
     private void CancelMaskStroke(){StopMaskOverlay();maskPoints.Clear();if(PhotoViewport.IsMouseCaptured)PhotoViewport.ReleaseMouseCapture();}
     private void MaskCaptureLost(object sender,MouseEventArgs e){maskPoints.Clear();DrawMaskOverlay();}
-    private void MaskEditorChanged(object? sender,System.ComponentModel.PropertyChangedEventArgs e){if(e.PropertyName is nameof(RAWSelectionAssistant.ViewModels.TetherReferenceModeViewModel.SelectedAdjustmentNode) or nameof(RAWSelectionAssistant.ViewModels.TetherReferenceModeViewModel.AdjustmentStack) or nameof(RAWSelectionAssistant.ViewModels.TetherReferenceModeViewModel.SelectedNodeEditable)){if(maskPoints.Count>0&&(model?.Editor.SelectedNodeEditable!=true||model?.Editor.SelectedAdjustmentNode?.Id!=maskNode||model?.ActiveTarget?.Id!=maskTarget||model?.ActiveTarget?.ActiveEditVersionId!=maskVariant))CancelMaskStroke();DrawMaskOverlay();}}
+    private Guid? overlayNodeContext;
+    private void MaskEditorChanged(object? sender,System.ComponentModel.PropertyChangedEventArgs e){var selectedId=model?.Editor.SelectedAdjustmentNode?.Id;if(selectedId!=overlayNodeContext){overlayNodeContext=selectedId;StopMaskOverlay();MaskOverlayCanvas.Children.Clear();}if(e.PropertyName is nameof(RAWSelectionAssistant.ViewModels.TetherReferenceModeViewModel.SelectedAdjustmentNode) or nameof(RAWSelectionAssistant.ViewModels.TetherReferenceModeViewModel.AdjustmentStack) or nameof(RAWSelectionAssistant.ViewModels.TetherReferenceModeViewModel.SelectedNodeEditable)){if(maskPoints.Count>0&&(model?.Editor.SelectedNodeEditable!=true||model?.Editor.SelectedAdjustmentNode?.Id!=maskNode||model?.ActiveTarget?.Id!=maskTarget||model?.ActiveTarget?.ActiveEditVersionId!=maskVariant))CancelMaskStroke();DrawMaskOverlay();}}
+    private Guid? maskTargetContext,maskVariantContext;
     private bool? maskPanelRaw;private bool? maskPanelAvailable;
     private void ConfigureMaskPanel()
     {
@@ -36,22 +38,23 @@ public partial class PhotoGradePageView
         void Button(string label,Action action){var b=new Button{Content=label};b.Click+=(_,_)=>{action();DrawMaskOverlay();};System.Windows.Automation.AutomationProperties.SetName(b,label);row.Children.Add(b);}
         Button("画笔",()=>maskErasing=false);Button("擦除",()=>maskErasing=true);Button("红色覆盖",()=>maskOverlay=!maskOverlay);Button("反相",()=>model?.Editor.InvertLocalMask());Button("清空",()=>model?.Editor.ClearLocalMask());Button("移除蒙版",()=>model?.Editor.RemoveLocalMask());MaskTools.Children.Add(row);
         void Slider(string name,double min,double max,double value,Action<double> set){var panel=new DockPanel();panel.Children.Add(new TextBlock{Text=name,Width=48});var control=new Slider{Minimum=min,Maximum=max,Value=value,Width=130};System.Windows.Automation.AutomationProperties.SetName(control,"蒙版"+name);control.ValueChanged+=(_,_)=>set(control.Value);panel.Children.Add(control);MaskTools.Children.Add(panel);}
-        Slider("大小",.002,.5,maskRadius,x=>maskRadius=x);Slider("羽化",0,1,maskFeather,x=>maskFeather=x);Slider("流量",0,1,maskFlow,x=>maskFlow=x);Slider("密度",0,1,maskDensity,x=>maskDensity=x);MaskTools.Children.Add(new TextBlock{Text="每笔流量 × 覆盖；密度为累计上限（非连续喷涂）",TextWrapping=TextWrapping.Wrap,Foreground=Brushes.Gray});MaskTools.Children.Add(new TextBlock{Text="主体识别未实现",Foreground=Brushes.Gray});
-        if(model?.RawLocalEditing==true){var geometryBar=new WrapPanel();void GeometryButton(string name,Action action){var button=new Button{Content=name};button.Click+=(_,_)=>action();geometryBar.Children.Add(button);}GeometryButton("旋转90°",()=>{var g=model.ActiveTarget!.RawDefinition!.Geometry??new();model.SetRawOutputGeometry(g with{QuarterTurns=(g.QuarterTurns+1)%4});});GeometryButton("水平翻转",()=>{var g=model.ActiveTarget!.RawDefinition!.Geometry??new();model.SetRawOutputGeometry(g with{FlipHorizontal=!g.FlipHorizontal});});GeometryButton("居中方裁",()=>{var size=ProfessionalRawPipeline.OrientedSize(model.ActiveTarget!.LinearRawMaster!);double w=Math.Min(1,(double)size.Height/size.Width),h=Math.Min(1,(double)size.Width/size.Height);var g=model.ActiveTarget.RawDefinition!.Geometry??new();model.SetRawOutputGeometry(g with{X=(1-w)/2,Y=(1-h)/2,Width=w,Height=h});});GeometryButton("重置裁剪",()=>model.SetRawOutputGeometry(null));MaskTools.Children.Add(geometryBar);}
+        Slider("大小",.002,.5,maskRadius,x=>maskRadius=x);Slider("羽化",0,1,maskFeather,x=>maskFeather=x);Slider("流量",0,1,maskFlow,x=>maskFlow=x);Slider("密度",0,1,maskDensity,x=>maskDensity=x);MaskTools.ToolTip="V1：流量为每笔覆盖权重，密度为累计上限；不是连续喷涂。X切换擦除，[ ]改变大小。";MaskTools.Children.Add(new TextBlock{Text="主体识别未实现",Foreground=Brushes.Gray});
+
     }
     private readonly System.Windows.Threading.DispatcherTimer overlayTimer=new(){Interval=TimeSpan.FromMilliseconds(33)};
-    private CancellationTokenSource? overlayCancellation;private long overlayRevision;private bool overlayTimerAttached;
+    private long overlayRevision;private bool overlayDirty;private LatestPreviewQueue<OverlaySnapshot,byte[]>? overlayQueue;private bool overlayTimerAttached;
     internal Task MaskOverlayWork{get;private set;}=Task.CompletedTask;
-    private void StopMaskOverlay(){overlayTimer.Stop();overlayCancellation?.Cancel();overlayRevision++;}
+    private void StopMaskOverlay(){overlayTimer.Stop();overlayQueue?.Invalidate();overlayRevision++;}
     private void DrawMaskOverlay()
     {
-        if(!overlayTimerAttached){overlayTimerAttached=true;overlayTimer.Tick+=(_,_)=>{overlayTimer.Stop();RefreshMaskOverlay();};}
+        if(!overlayTimerAttached){overlayTimerAttached=true;overlayTimer.Tick+=(_,_)=>{overlayTimer.Stop();if(overlayDirty){overlayDirty=false;RefreshMaskOverlay();}};}
         // Coalesce notifications. In-flight work is cancelled and cannot publish over a newer stroke.
-        overlayRevision++;overlayCancellation?.Cancel();if(!overlayTimer.IsEnabled)overlayTimer.Start();
+        var targetContext=model?.ActiveTarget?.Id;var variantContext=model?.ActiveTarget?.ActiveEditVersionId;if(targetContext!=maskTargetContext||variantContext!=maskVariantContext){maskTargetContext=targetContext;maskVariantContext=variantContext;overlayQueue?.Invalidate();MaskOverlayCanvas.Children.Clear();}
+        overlayRevision++;overlayDirty=true;if(!overlayTimer.IsEnabled)overlayTimer.Start();
     }
     private void RefreshMaskOverlay()
     {
-        MaskOverlayCanvas.Children.Clear();if(!maskOverlay||activeTool!="画笔"||model?.Editor.SelectedAdjustmentNode is not{} node)return;
+        if(!maskOverlay||activeTool!="画笔"||model?.Editor.SelectedAdjustmentNode is not{} node){StopMaskOverlay();MaskOverlayCanvas.Children.Clear();return;}
         var rect=PhotoViewport.State.ImageRect(new Rect(PhotoViewport.RenderSize));if(rect.IsEmpty||rect.Width<=0||rect.Height<=0)return;
         var revision=overlayRevision;var target=model.ActiveTarget?.Id;var variant=model.ActiveTarget?.ActiveEditVersionId;var selected=node.Id;var offset=PhotoViewport.TranslatePoint(new Point(),MaskOverlayCanvas);
         var mask=node.LocalMask??new StudioLocalMask([]);if(maskPoints.Count>0)mask=mask with{Strokes=mask.Strokes.Append(new StudioMaskStroke(maskPoints.ToArray(),maskRadius,maskFeather,maskFlow,maskDensity,maskErasing)).ToArray()};try{mask=mask.Freeze();}catch(InvalidDataException error){ToolHint.Text=error.Message;return;}
@@ -61,10 +64,15 @@ public partial class PhotoGradePageView
         InstantPaperLayout? crop=null;double zoom=1,cx=.5,cy=.5;var geometry=model.ActiveTarget?.RawDefinition?.Geometry;
         double aspect=PhotoViewport.State.ImageSize.Width/PhotoViewport.State.ImageSize.Height;
         if(model.ActiveTarget?.LinearRawMaster is{} master){var size=ProfessionalRawPipeline.OrientedSize(master);aspect=(double)size.Width/size.Height;if(model.ActiveTarget.RawDefinition?.InstantFilm is{Enabled:true} film){crop=InstantPaperLayout.Create(size.Width,size.Height,film);zoom=film.V3?.Paper?.Zoom??1;cx=film.V3?.Geometry.CropX??.5;cy=film.V3?.Geometry.CropY??.5;}}
-        var cancellation=new CancellationTokenSource();overlayCancellation=cancellation;MaskOverlayWork=Run();
-        async Task Run(){try{var pixels=await Task.Run(()=>{var sample=mask.Compile(aspect,cancellation.Token);var bytes=new byte[w*h*4];for(int y=0;y<h;y++){cancellation.Token.ThrowIfCancellationRequested();for(int x=0;x<w;x++){double u=(x+.5)/w,v=(y+.5)/h;bool valid=true;if(crop is not null){var p=StudioMaskCoordinates.FromViewport(u,v,0,0,1,1,crop,zoom,cx,cy);valid=p is not null;if(p is not null){u=p.X;v=p.Y;}}if(geometry is not null)(u,v)=geometry.SourceTuple(u,v);byte alpha=!valid?(byte)0:(byte)Math.Clamp(Math.Round(sample(u,v)*128),0,128);int i=(y*w+x)*4;bytes[i+2]=bytes[i+3]=alpha;}}return bytes;},cancellation.Token);
-            if(revision!=overlayRevision||model?.ActiveTarget?.Id!=target||model?.ActiveTarget?.ActiveEditVersionId!=variant||model?.Editor.SelectedAdjustmentNode?.Id!=selected)return;
-            var bitmap=System.Windows.Media.Imaging.BitmapSource.Create(w,h,96,96,PixelFormats.Pbgra32,null,pixels,w*4);bitmap.Freeze();var image=new Image{Source=bitmap,Width=rect.Width,Height=rect.Height,IsHitTestVisible=false};Canvas.SetLeft(image,rect.Left+offset.X);Canvas.SetTop(image,rect.Top+offset.Y);MaskOverlayCanvas.Children.Clear();MaskOverlayCanvas.Children.Add(image);
-        }catch(OperationCanceledException){}catch(Exception error)when(error is InvalidDataException or ArgumentException){if(revision==overlayRevision)ToolHint.Text="覆盖预览未更新："+error.Message;}finally{if(ReferenceEquals(overlayCancellation,cancellation))overlayCancellation=null;cancellation.Dispose();}}
+        overlayQueue??=new LatestPreviewQueue<OverlaySnapshot,byte[]>(async(snapshot,token)=>await Task.Run(()=>{
+            return StudioMaskRaster.Alpha(snapshot.Mask,snapshot.Aspect,snapshot.Width,snapshot.Height,token,(u,v)=>{bool valid=true;if(snapshot.Crop is not null){var p=StudioMaskCoordinates.FromViewport(u,v,0,0,1,1,snapshot.Crop,snapshot.Zoom,snapshot.CenterX,snapshot.CenterY);valid=p is not null;if(p is not null){u=p.X;v=p.Y;}}if(snapshot.Geometry is not null)(u,v)=snapshot.Geometry.SourceTuple(u,v);return(u,v,valid);});
+        },token),(serial,snapshot,pixels)=>{
+            if(model?.ActiveTarget?.Id!=snapshot.Target||model?.ActiveTarget?.ActiveEditVersionId!=snapshot.Variant||model?.Editor.SelectedAdjustmentNode?.Id!=snapshot.Node||model?.ActiveTarget?.RawDefinition?.Geometry!=snapshot.Geometry||PhotoViewport.State.ImageRect(new Rect(PhotoViewport.RenderSize))!=snapshot.Rect)return;
+            var bitmap=System.Windows.Media.Imaging.BitmapSource.Create(snapshot.Width,snapshot.Height,96,96,PixelFormats.Pbgra32,null,pixels,snapshot.Width*4);bitmap.Freeze();var image=new Image{Source=bitmap,Width=snapshot.Rect.Width,Height=snapshot.Rect.Height,IsHitTestVisible=false};Canvas.SetLeft(image,snapshot.Rect.Left+snapshot.Offset.X);Canvas.SetTop(image,snapshot.Rect.Top+snapshot.Offset.Y);MaskOverlayCanvas.Children.Clear();MaskOverlayCanvas.Children.Add(image);MaskOverlayPublishedFrames++;MaskOverlayPublishedRevision=snapshot.Revision;
+        },error=>ToolHint.Text="覆盖预览未更新："+error.Message);
+        overlayQueue.Submit(new(mask,aspect,w,h,crop,zoom,cx,cy,geometry,rect,offset,target,variant,selected,revision));MaskOverlayWork=overlayQueue.Work;
     }
+    internal int MaskOverlayPublishedFrames{get;private set;}
+    internal long MaskOverlayPublishedRevision{get;private set;}
+    private sealed record OverlaySnapshot(StudioLocalMask Mask,double Aspect,int Width,int Height,InstantPaperLayout? Crop,double Zoom,double CenterX,double CenterY,ProfessionalRawGeometry? Geometry,Rect Rect,Point Offset,Guid? Target,Guid? Variant,Guid Node,long Revision);
 }

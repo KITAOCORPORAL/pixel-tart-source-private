@@ -1,5 +1,15 @@
 # 光镜开发交接入口
 
+## 暗室交互与阶段B启动（2026-10-27 America/New_York）
+- 同分支接续bc80e556；当前权威docs/validation/r53-interaction-stage-b-20261027/FINAL_REPORT.md、TEST_SUMMARY.json、PERFORMANCE.json。不重做RAW接入/教程退役/设计包研究。
+- 覆盖1在途+1最新待处理、同目标允许单调中间帧，换图/变体/节点/关闭严格取消；不先清空闪烁；max768，行采样最多4worker。持续20k点合成输入已测首帧/中间数/最终正确，非鼠标验收。
+- RAW800px面积基础图最多2缓存，键含源身份/完整基础定义/版本/几何。快速局部工具同冻结定义、停止400ms后精细；快速为近似需看误差，导出始终原全分辨率。原nearest候选超误差已拒绝。
+- 四变体逐帧发布/所选ID加载槽；不是4张全做完才显示。普通精细行带4worker，点工具绕开重复包装；性能/资源数据见报告，不把快预览算精细。
+- 图层/蒙版缩略图、选择态、专业节点绑定、4类示波页、工具栏Auto换行、独立C裁剪上下文（自由/比例拖框、旋转/翻转/重置/完成）已接入；画笔公式移Tooltip。裁剪目前线性RAW，任意角拉直/全栅格仍余项，无教程。
+- A负责交互/界面/状态一致性；通用ICC/宽色域/scene-linear扩展归B，不无限扩大A。B首项SceneExposureV1已实际实现：基础RAW曝光后/显示映射前按独立蒙版线性EV；不重复相机WB、不使用sRGB混合，不改PV4/5/6缺省输出。独立Version1、诊断限制保留；参考/数值边界见STAGE_B_CONTRACT.md。
+- 四项旧授权专项未运行原因原样保留，本轮不重复无关历史测试。Computer Use/Browser/WebView/CDP仍禁止，离屏/testhost不当真实鼠标DPI。完整应用/全部模块/策划15板块保留。
+
+
 ## 专业RAW局部收尾（2026-10-27 America/New_York）
 - 接续company/r53-stage-a-completion-20261027@41265eb4，无远端后续；仍在原独立实施树接续，不重建家庭基础。当前权威证据docs/validation/r53-raw-local-closure-20261027/FINAL_REPORT.md。最终产品091163b12aa29e5c8561b8fa3b3675580d70e885，完整包E:/Kitao-Deliveries/r53-raw-local-closure-20261027/Guangjing-R53-RawLocal-Final-Diagnostic-win-x64.zip；Core376PASS、WPF464PASS/4NOT_RUN、0FAIL。阶段A仍PARTIAL，性能/视觉/科学门禁未全完。
 - 新ProfessionalRawLocalEdits V1/Geometry V1：源RAW与线性ProPhoto master不变，原PV4曝光/显示映射后进入sRGB共享局部层，保存/重开/复制/撤销/预览/逐行导出/变体对比同定义。旧PV4/5/6未暗迁。不是把非线性混合套在线性域。

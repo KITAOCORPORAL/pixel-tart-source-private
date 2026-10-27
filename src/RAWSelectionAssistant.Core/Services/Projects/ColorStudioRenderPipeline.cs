@@ -28,6 +28,12 @@ public sealed class ColorStudioRenderPipeline
         return new(current.ToVisualRgb24(token), outputs, descriptor, inputs, current, new PrecisionTrace(precisionStages));
     }
 
+    public static HighBitDepthImageBuffer ApplyPointEffect(HighBitDepthImageBuffer source,ColorAdjustmentStackNode node,CancellationToken token=default)
+    {
+        if(ColorStudioToolCatalog.IsTool(node.Type))return ColorStudioToolProcessor.Apply(source,node,token);
+        if(node.Type==ColorStudioNodeType.Preset)return new ColorStudioRenderPipeline().ApplyHighPrecision(source,node,null,null!,token,default,null);
+        var stack=new ColorAdjustmentStack([node with{CompositeVersion=0,Opacity=1,Blend=StudioLayerBlend.Normal,LocalMask=null}],ProcessingVersion:2);return new ColorStudioRenderPipeline().Render(source,ColorStudioProcessingAnalysis.Create(new VisualPixelBuffer(1,1,new byte[3]),stack,null,token),null,stack,token,captureNodeDiagnostics:false).ProcessingPixels!;
+    }
     private HighBitDepthImageBuffer ApplyHighPrecision(HighBitDepthImageBuffer source, ColorAdjustmentStackNode node, ReferenceLook? reference, AssetVisualAnalysisResult analysis, CancellationToken token, ReadOnlyMemory<byte> alpha,FilmTileCoordinates? tile)
     {
         if (ColorStudioToolCatalog.IsTool(node.Type)) return ColorStudioToolProcessor.Apply(source, node, token);

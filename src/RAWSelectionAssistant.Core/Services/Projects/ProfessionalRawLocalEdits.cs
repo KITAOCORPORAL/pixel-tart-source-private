@@ -18,10 +18,10 @@ public static class ProfessionalRawLocalRenderer
 {
  public sealed class Prepared
  {
-  public ProfessionalRawDefinition Definition{get;}public IReadOnlyDictionary<Guid,Func<double,double,double>> Masks{get;}
-  public Prepared(ProfessionalRawMaster master,ProfessionalRawDefinition definition,CancellationToken token=default){ProfessionalRawPipeline.ValidateMaster(master,definition);Definition=definition with{LocalEdits=definition.LocalEdits?.Freeze()};var size=ProfessionalRawPipeline.OrientedSize(master);Masks=Definition.LocalEdits?.Stack.Nodes.Where(n=>n.LocalMask is not null).ToDictionary(n=>n.Id,n=>n.LocalMask!.Compile((double)size.Width/size.Height,token))??[];}
+  public ProfessionalRawDefinition Definition{get;}public IReadOnlyDictionary<Guid,Func<double,double,double>> Masks{get;}public Func<double,double,double>? SceneMask{get;}
+  public Prepared(ProfessionalRawMaster master,ProfessionalRawDefinition definition,CancellationToken token=default){var clock=RawLocalProfile.Begin();ProfessionalRawPipeline.ValidateMaster(master,definition);Definition=definition with{LocalEdits=definition.LocalEdits?.Freeze(),SceneExposure=definition.SceneExposure?.Validate()};var size=ProfessionalRawPipeline.OrientedSize(master);SceneMask=definition.SceneExposure?.Mask?.Compile((double)size.Width/size.Height,token);Masks=Definition.LocalEdits?.Stack.Nodes.Where(n=>n.LocalMask is not null).ToDictionary(n=>n.Id,n=>n.LocalMask!.Compile((double)size.Width/size.Height,token))??[];RawLocalProfile.End("freeze-and-index",clock);}
  }
- public static bool Active(ProfessionalRawDefinition d)=>d.LocalEdits is not null||d.Geometry is not null;
+ public static bool Active(ProfessionalRawDefinition d)=>d.LocalEdits is not null||d.Geometry is not null||d.SceneExposure is not null;
  public static bool Supports(ColorStudioNodeType t)=>t is ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.BasicTone or ColorStudioNodeType.Levels or ColorStudioNodeType.Curve or ColorStudioNodeType.ColorBalance or ColorStudioNodeType.SkinTone or ColorStudioNodeType.Preset;
  public static (int Width,int Height) Size(ProfessionalRawMaster m,ProfessionalRawDefinition d){var s=ProfessionalRawPipeline.OrientedSize(m);return (d.Geometry??new()).Size(s.Width,s.Height);}
  public static HighBitDepthImageBuffer Region(ProfessionalRawMaster m,ProfessionalRawDefinition d,int left,int top,int width,int height,CancellationToken token=default,Prepared? prepared=null)
@@ -30,18 +30,32 @@ public static class ProfessionalRawLocalRenderer
   var size=Size(m,d);if(left<0||top<0||width<=0||height<=0||left+width>size.Width||top+height>size.Height)throw new ArgumentOutOfRangeException(nameof(left));
   var oriented=ProfessionalRawPipeline.OrientedSize(m);var geometry=d.Geometry??new();var values=new float[checked(width*height*3)];
   (double X,double Y) Coordinate(int x,int y){var u=(left+x+.5)/size.Width;var v=(top+y+.5)/size.Height;var p=geometry.SourceTuple(u,v);return ((Math.Clamp((int)(p.X*oriented.Width),0,oriented.Width-1)+.5)/oriented.Width,(Math.Clamp((int)(p.Y*oriented.Height),0,oriented.Height-1)+.5)/oriented.Height);}
+  var baseClock=RawLocalProfile.Begin();
   for(int y=0;y<height;y++){token.ThrowIfCancellationRequested();for(int x=0;x<width;x++){
    var p=Coordinate(x,y);int sx=Math.Clamp((int)(p.X*oriented.Width),0,oriented.Width-1),sy=Math.Clamp((int)(p.Y*oriented.Height),0,oriented.Height-1);var w=m.Image.Width;var h=m.Image.Height;
    var(px,py)=m.Image.Orientation switch{2=>(w-1-sx,sy),3=>(w-1-sx,h-1-sy),4=>(sx,h-1-sy),5=>(sy,sx),6=>(sy,h-1-sx),7=>(w-1-sy,h-1-sx),8=>(w-1-sy,sx),_=>(sx,sy)};
-   var v=ProfessionalRawPipeline.RenderPixel(m,d,px,py);var i=(y*width+x)*3;values[i]=(float)v.X;values[i+1]=(float)v.Y;values[i+2]=(float)v.Z;
+   var v=ProfessionalRawPipeline.RenderPixel(m,d,px,py,prepared.SceneMask);var i=(y*width+x)*3;values[i]=(float)v.X;values[i+1]=(float)v.Y;values[i+2]=(float)v.Z;
   }}
+  RawLocalProfile.End("base-raw-coordinate-display",baseClock);
   var current=new HighBitDepthImageBuffer(width,height,values,"16","sRGB",1);
   if(d.LocalEdits is{} edits){foreach(var node in edits.Stack.Nodes.Where(n=>n.Enabled)){
    token.ThrowIfCancellationRequested();if(node.CompositeVersion==1&&node.Opacity==0)continue;
-   var stack=new ColorAdjustmentStack([node with{CompositeVersion=0,Opacity=1,Blend=StudioLayerBlend.Normal,LocalMask=null}],ProcessingVersion:2);var analysis=ColorStudioProcessingAnalysis.Create(new VisualPixelBuffer(1,1,new byte[3]),stack,null,token);
-   var effect=new ColorStudioRenderPipeline().Render(current,analysis,null,stack,token,captureNodeDiagnostics:false).ProcessingPixels!;
-   var next=StudioLayerComposite.Apply(current,effect,node,token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks.GetValueOrDefault(node.Id));if(!ReferenceEquals(next,effect))effect.Dispose();current.Dispose();current=next;
+   var toolClock=RawLocalProfile.Begin();var effect=ColorStudioRenderPipeline.ApplyPointEffect(current,node,token);RawLocalProfile.End("point-effect",toolClock);var maskClock=RawLocalProfile.Begin();
+   var next=StudioLayerComposite.Apply(current,effect,node,token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks.GetValueOrDefault(node.Id));RawLocalProfile.End("mask-composite",maskClock);if(!ReferenceEquals(next,effect))effect.Dispose();current.Dispose();current=next;
   }}return current;
+ }
+ /// <summary>Interactive approximation: cached area-averaged display base then same frozen point-node definitions. Never used for export.</summary>
+ public static HighBitDepthImageBuffer FastBase(ProfessionalRawMaster m,ProfessionalRawDefinition d,int edge=800,CancellationToken token=default)
+ {
+  // Cache the unchanged full-display area base, not an aliased nearest RGB source.
+  // This one-time cold cost is measured separately; interactive parameter changes reuse it.
+  return Preview(m,d with{LocalEdits=null},edge,token);
+ }
+ public static HighBitDepthImageBuffer Fast(ProfessionalRawMaster m,ProfessionalRawDefinition d,HighBitDepthImageBuffer? basis=null,CancellationToken token=default)
+ {
+  var prepared=new Prepared(m,d,token);d=prepared.Definition;var current=basis?.Clone()??FastBase(m,d,800,token);var oriented=ProfessionalRawPipeline.OrientedSize(m);var geometry=d.Geometry??new();var w=current.Width;var h=current.Height;
+  (double X,double Y) Coordinate(int x,int y){var p=geometry.SourceTuple((x+.5)/w,(y+.5)/h);return ((Math.Clamp((int)(p.X*oriented.Width),0,oriented.Width-1)+.5)/oriented.Width,(Math.Clamp((int)(p.Y*oriented.Height),0,oriented.Height-1)+.5)/oriented.Height);}
+  foreach(var node in d.LocalEdits?.Stack.Nodes.Where(n=>n.Enabled)??[]){if(node.CompositeVersion==1&&node.Opacity==0)continue;var effect=ColorStudioRenderPipeline.ApplyPointEffect(current,node,token);var next=StudioLayerComposite.Apply(current,effect,node,token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks.GetValueOrDefault(node.Id));if(!ReferenceEquals(effect,next))effect.Dispose();current.Dispose();current=next;}return current;
  }
  public static HighBitDepthImageBuffer Preview(ProfessionalRawMaster m,ProfessionalRawDefinition d,int edge,CancellationToken token=default)
  {

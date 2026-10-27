@@ -18,17 +18,19 @@ public static class BoundedLegacyRawRenderer
     {
         var plan=Plan(upright.Width,upright.Height,look,stack,film);if(!plan.Bounded)throw new NotSupportedException("Full image nodes: "+string.Join(",",plan.FullImageNodes));
         var state=ColorStudioEffectiveState.Resolve(look,stack,film)??(look is not null?ColorStudioLegacyMigration.Migrate(look with{Film=film??look.Film}).Stack:new ColorAdjustmentStack([new(Guid.NewGuid(),ColorStudioNodeType.Preset,"Original")]));
+        if(state.Nodes.Any(n=>n.Type==ColorStudioNodeType.ReferenceMatch))throw new NotSupportedException("Reference match requires its existing full-image analysis path");
         var masks=state.Nodes.Where(n=>n.LocalMask is not null).ToDictionary(n=>n.Id,n=>n.LocalMask!.Compile((double)upright.Width/upright.Height,token));
         var output=new float[upright.Rgb32.Length];
-        for(var top=0;top<upright.Height;top+=plan.RowBand)
+        Parallel.For(0,(upright.Height+plan.RowBand-1)/plan.RowBand,new ParallelOptions{CancellationToken=token,MaxDegreeOfParallelism=4},bandIndex=>
         {
+            var top=bandIndex*plan.RowBand;
             token.ThrowIfCancellationRequested();var height=Math.Min(plan.RowBand,upright.Height-top);var count=upright.Width*height*3;
             var band=new HighBitDepthImageBuffer(upright.Width,height,upright.Rgb32.Slice(top*upright.Width*3,count).ToArray(),"16","sRGB",1);
             var analysis=ColorStudioProcessingAnalysis.Create(new VisualPixelBuffer(1,1,new byte[3]),state,look,token);
             var result=new ColorStudioRenderPipeline().Render(band,analysis,look,state,token,captureNodeDiagnostics:false,tile:new(0,top,upright.Width,upright.Height),compiledMasks:masks).ProcessingPixels!;
             result.Rgb32.Span.CopyTo(output.AsSpan(top*upright.Width*3,count));
             if(top==0||top+height==upright.Height)stage?.Invoke("RowBand:"+top+":"+height);
-        }
+        });
         return new(upright.Width,upright.Height,output,"16","sRGB",1,upright.Metadata);
     }
 }

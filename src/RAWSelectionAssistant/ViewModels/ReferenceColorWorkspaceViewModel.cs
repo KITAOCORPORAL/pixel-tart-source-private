@@ -247,7 +247,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.IsProMode) or nameof(TetherReferenceModeViewModel.AdjustmentStack) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode)) RefreshSyncAvailability();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.SourceImage) or nameof(TetherReferenceModeViewModel.MatchedImage) or nameof(TetherReferenceModeViewModel.EffectiveViewMode))
-                SchedulePreviewAnalysis();
+                {OnPropertyChanged(nameof(LayerThumbnailSource));SchedulePreviewAnalysis();}
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.MatchedImage) or nameof(TetherReferenceModeViewModel.AdjustmentStack)
                 or nameof(TetherReferenceModeViewModel.SelectedLook) or nameof(TetherReferenceModeViewModel.FilmSettings)
                 or nameof(TetherReferenceModeViewModel.MatchEngine) or nameof(TetherReferenceModeViewModel.MatchV4ExecutionMode)

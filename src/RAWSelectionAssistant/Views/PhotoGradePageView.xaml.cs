@@ -58,14 +58,14 @@ public partial class PhotoGradePageView:UserControl
  private void ZoomOut(object sender,RoutedEventArgs e)=>PhotoViewport.State.SetZoom(PhotoViewport.State.Zoom/1.25);
  private void ZoomIn(object sender,RoutedEventArgs e)=>PhotoViewport.State.SetZoom(PhotoViewport.State.Zoom*1.25);
  private void PhotoWheel(object sender,MouseWheelEventArgs e){PhotoViewport.State.ZoomAbout(e.GetPosition(PhotoViewport),e.Delta>0?1.15:1/1.15);e.Handled=true;}
- private void PhotoDown(object sender,MouseButtonEventArgs e){if(BeginMask(e.GetPosition(PhotoViewport))){e.Handled=true;return;}if(activeTool=="缩放"){PhotoViewport.State.ZoomAbout(e.GetPosition(PhotoViewport),Keyboard.Modifiers==ModifierKeys.Alt?.8:1.25);return;}if(e.ClickCount==2){PhotoViewport.State.Fit();return;}panStart=e.GetPosition(PhotoViewport);PhotoViewport.CaptureMouse();}
- private void PhotoMove(object sender,MouseEventArgs e){if(MoveMask(e.GetPosition(PhotoViewport))){e.Handled=true;return;}if(panStart is{} start&&e.LeftButton==MouseButtonState.Pressed){var next=e.GetPosition(PhotoViewport);PhotoViewport.State.PanBy(next-start);panStart=next;}}
- private void PhotoUp(object sender,MouseButtonEventArgs e){if(EndMask()){e.Handled=true;return;}panStart=null;PhotoViewport.ReleaseMouseCapture();}
+ private void PhotoDown(object sender,MouseButtonEventArgs e){if(CropDown(e.GetPosition(PhotoViewport))){e.Handled=true;return;}if(BeginMask(e.GetPosition(PhotoViewport))){e.Handled=true;return;}if(activeTool=="缩放"){PhotoViewport.State.ZoomAbout(e.GetPosition(PhotoViewport),Keyboard.Modifiers==ModifierKeys.Alt?.8:1.25);return;}if(e.ClickCount==2){PhotoViewport.State.Fit();return;}panStart=e.GetPosition(PhotoViewport);PhotoViewport.CaptureMouse();}
+ private void PhotoMove(object sender,MouseEventArgs e){if(CropMove(e.GetPosition(PhotoViewport))){e.Handled=true;return;}if(MoveMask(e.GetPosition(PhotoViewport))){e.Handled=true;return;}if(panStart is{} start&&e.LeftButton==MouseButtonState.Pressed){var next=e.GetPosition(PhotoViewport);PhotoViewport.State.PanBy(next-start);panStart=next;}}
+ private void PhotoUp(object sender,MouseButtonEventArgs e){if(CropUp()){e.Handled=true;return;}if(EndMask()){e.Handled=true;return;}panStart=null;PhotoViewport.ReleaseMouseCapture();}
  private void EditingModeChanged(object sender,SelectionChangedEventArgs e)
  {
   if(EditModes is null||!ReferenceEquals(e.Source,EditModes)||AdjustmentScroll is null)return;
   var i=EditModes.SelectedIndex;if(i<0)return;
-  if(HistogramPanel is not null){HistogramPanel.Visibility=i==4||!scopesOpen?Visibility.Collapsed:Visibility.Visible;HistogramRow.Height=new GridLength(i==4||!scopesOpen?0:108);DrawGuides();}var panes=new[]{AdjustmentScroll,PaperScroll,LayersScroll,StylesScroll,VariantsScroll};
+  if(HistogramPanel is not null){HistogramPanel.Visibility=i==4||!scopesOpen?Visibility.Collapsed:Visibility.Visible;HistogramRow.Height=new GridLength(i==4||!scopesOpen?0:152);DrawGuides();}var panes=new[]{AdjustmentScroll,PaperScroll,LayersScroll,StylesScroll,VariantsScroll};
   for(int n=0;n<panes.Length;n++)panes[n].Visibility=i==n?Visibility.Visible:Visibility.Collapsed;
   if(FilmAction is not null)FilmAction.Visibility=i==1?Visibility.Visible:Visibility.Collapsed;if(PanelTitle is not null)PanelTitle.Text=new[]{"调整","光片","图层","风格","变体"}[Math.Clamp(i,0,4)];
   if(i==1&&model is{} workspace&&workspace.ActiveTarget?.RawDefinition is null)workspace.InstantEngineVersion="V3";
@@ -82,9 +82,10 @@ public partial class PhotoGradePageView:UserControl
  private void ShowVariants(object sender,RoutedEventArgs e)=>EditModes.SelectedIndex=4;
  private void ShowAdjust(object sender,RoutedEventArgs e)=>EditModes.SelectedIndex=0;
  private void TogglePanel(object sender,RoutedEventArgs e){SetPanelOpen(RightPanel.Visibility!=Visibility.Visible);SavePanelLayout();}
- private void SelectTool(object sender,RoutedEventArgs e){CancelMaskStroke();activeTool="选择";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Arrow;DrawMaskOverlay();}
+ private void SelectTool(object sender,RoutedEventArgs e){if(cropPanel is not null)cropPanel.Visibility=Visibility.Collapsed;CropOverlay.Children.Clear();CancelMaskStroke();activeTool="选择";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Arrow;DrawMaskOverlay();}
  private void HandTool(object sender,RoutedEventArgs e){CancelMaskStroke();activeTool="抓手";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Hand;DrawMaskOverlay();}
  private void ZoomTool(object sender,RoutedEventArgs e){CancelMaskStroke();activeTool="缩放";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Cross;DrawMaskOverlay();}
+ private void BindSceneMask(object sender,RoutedEventArgs e)=>model?.BindSceneExposureMask();
  private void CameraI2(object sender,RoutedEventArgs e){if(model is not null)model.LightPrintCamera="i-2";}
  private void CameraSX70(object sender,RoutedEventArgs e){if(model is not null)model.LightPrintCamera="SX-70";}
  private async void OpenExport(object sender,RoutedEventArgs e){if(model is null)return;await model.PrepareR53MainExportAsync();var window=new DarkroomExportDialog(model){Owner=Window.GetWindow(this)};window.ShowDialog();}
@@ -93,7 +94,7 @@ public partial class PhotoGradePageView:UserControl
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.Layout)&&!savingPanelLayout){RestorePanelLayout();ApplyR53Layout();}
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.R53Professional))ApplyR53Layout();
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PhotoMaskColor))Refresh();
-   if(e.PropertyName is nameof(ReferenceColorWorkspaceViewModel.RawLocalEditing) or nameof(ReferenceColorWorkspaceViewModel.ActiveTarget))ConfigureMaskPanel();
+   if(e.PropertyName is nameof(ReferenceColorWorkspaceViewModel.RawLocalEditing) or nameof(ReferenceColorWorkspaceViewModel.ActiveTarget)){if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.ActiveTarget)){StopMaskOverlay();cropStart=cropEnd=null;CropOverlay.Children.Clear();if(cropPanel is not null)cropPanel.Visibility=Visibility.Collapsed;}ConfigureMaskPanel();}
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PreviewHistogram))UpdateZones();
   DrawMaskOverlay();
   // A newly imported ordinary photo restores the historical default engine. The

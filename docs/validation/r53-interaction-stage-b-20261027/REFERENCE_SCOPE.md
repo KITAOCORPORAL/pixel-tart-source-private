@@ -1,0 +1,1 @@
+本轮在线固定RawTherapee5.12实际commit a8a3d1bc7b419ed1c974c39276c97e618a4f9a1b；dcrop.cc的skip/scale预览与improccoordinator中已有分级路径作为交互参考，独立实现不复制GPL。复用darktable be9171cf已固定实现，不重跑上轮混合/蒙版kernel。新SceneExposure标量阶段实际执行见SCENE_REFERENCE.json；shim/许可证边界见STAGE_B_CONTRACT.md。Preview近似实验失败保留，最终误差预算不改。

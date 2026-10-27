@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-27",
+  "timezone": "America/New_York",
+  "A": {
+    "status": "FUNCTIONAL_INTERACTION_DELIVERED_WITH_REMAINING_VISUAL_NATIVE_LIMITS",
+    "implemented": [
+      "Bounded sustained overlay intermediate/latest scheduling",
+      "800px area-base fast preview and exact settled update same definition",
+      "Progressive variant rendering with loading slots",
+      "Layer/mask thumbnails selection and scopes pages",
+      "Dedicated ratio/drag RAW crop context, no tutorial"
+    ],
+    "remaining": [
+      "Physical pointer/DPI NOT_RUN",
+      "Fine multistroke performance and cold base latency remain measured, not hidden",
+      "Arbitrary-angle straighten and all-raster crop not implemented",
+      "Full design visual signoff not claimed"
+    ],
+    "notARequirements": [
+      "General ICC/profile engine",
+      "Wide-gamut working space",
+      "General scene-linear local pipeline"
+    ]
+  },
+  "B": {
+    "status": "STARTED_DIAGNOSTIC_IMPLEMENTED",
+    "item": "SceneExposureV1 masked linear EV before original PV4 display mapping",
+    "reference": "STAGE_B_CONTRACT.md",
+    "release": "DIAGNOSTIC_ONLY",
+    "remaining": [
+      "Full ICC/profile support",
+      "Wide gamut architecture",
+      "More scene-linear tools",
+      "Independent complete camera/profile cross-validation"
+    ]
+  },
+  "C": {
+    "status": "NOT_STARTED_THIS_BATCH"
+  },
+  "D": {
+    "status": "NOT_STARTED_THIS_BATCH"
+  },
+  "E": {
+    "status": "NOT_STARTED_THIS_BATCH"
+  },
+  "release": "NOT_READY"
+}
