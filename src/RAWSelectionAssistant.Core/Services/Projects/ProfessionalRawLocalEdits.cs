@@ -47,8 +47,15 @@ public static class ProfessionalRawLocalRenderer
  {
   var prepared=new Prepared(m,d,token);d=prepared.Definition;var size=Size(m,d);var scale=edge>0?Math.Min(1,edge/(double)Math.Max(size.Width,size.Height)):1;var w=Math.Max(1,(int)Math.Round(size.Width*scale));var h=Math.Max(1,(int)Math.Round(size.Height*scale));if(w==size.Width&&h==size.Height)return Region(m,d,0,0,w,h,token,prepared);
   // Same full-resolution display + local effects first, then exact area average in display-linear sRGB.
-  var sums=new double[w*h*3];double rx=size.Width/(double)w,ry=size.Height/(double)h;
-  for(int top=0;top<size.Height;top+=32){using var band=Region(m,d,0,top,size.Width,Math.Min(32,size.Height-top),token,prepared);var rgb=band.Rgb32.Span;for(int y=0;y<band.Height;y++){token.ThrowIfCancellationRequested();var sy=top+y;for(int py=(int)(sy/ry);py<=Math.Min(h-1,(int)((sy+1)/ry));py++){var wy=Math.Max(0,Math.Min(sy+1,(py+1)*ry)-Math.Max(sy,py*ry));if(wy==0)continue;for(int sx=0;sx<size.Width;sx++)for(int px=(int)(sx/rx);px<=Math.Min(w-1,(int)((sx+1)/rx));px++){var wx=Math.Max(0,Math.Min(sx+1,(px+1)*rx)-Math.Max(sx,px*rx));if(wx==0)continue;var i=(y*size.Width+sx)*3;var o=(py*w+px)*3;for(int c=0;c<3;c++){var v=rgb[i+c];sums[o+c]+=(v<=.04045?v/12.92:Math.Pow((v+.055)/1.055,2.4))*wx*wy;}}}}}
-  var data=new float[sums.Length];for(int i=0;i<data.Length;i++){var v=sums[i]/(rx*ry);data[i]=(float)(v<=.0031308?v*12.92:1.055*Math.Pow(v,1/2.4)-.055);}return new(w,h,data,"16","sRGB",1);
+  var data=new float[w*h*3];double rx=size.Width/(double)w,ry=size.Height/(double)h;
+  // Up to four independent destination-row bands; immutable prepared mask indexes are shared.
+  // Each destination pixel sees exactly the same source-y/source-x summation order as V1 serial area integration.
+  Parallel.For(0,Math.Min(4,h),new ParallelOptions{CancellationToken=token,MaxDegreeOfParallelism=4},worker=>{
+   for(int py=worker*h/Math.Min(4,h);py<(worker+1)*h/Math.Min(4,h);py++){
+    token.ThrowIfCancellationRequested();double ya=py*ry,yb=(py+1)*ry;int top=(int)ya,bottom=Math.Min(size.Height,(int)Math.Ceiling(yb));using var band=Region(m,d,0,top,size.Width,bottom-top,token,prepared);var rgb=band.Rgb32.Span;var sums=new double[w*3];
+    for(int y=0;y<band.Height;y++){int sy=top+y;double wy=Math.Max(0,Math.Min(sy+1,yb)-Math.Max(sy,ya));if(wy==0)continue;for(int sx=0;sx<size.Width;sx++)for(int px=(int)(sx/rx);px<=Math.Min(w-1,(int)((sx+1)/rx));px++){double wx=Math.Max(0,Math.Min(sx+1,(px+1)*rx)-Math.Max(sx,px*rx));if(wx==0)continue;int i=(y*size.Width+sx)*3,o=px*3;for(int c=0;c<3;c++){double v=rgb[i+c];sums[o+c]+=(v<=.04045?v/12.92:Math.Pow((v+.055)/1.055,2.4))*wx*wy;}}}
+    for(int i=0;i<sums.Length;i++){double v=sums[i]/(rx*ry);data[py*w*3+i]=(float)(v<=.0031308?v*12.92:1.055*Math.Pow(v,1/2.4)-.055);}
+   }
+  });return new(w,h,data,"16","sRGB",1);
  }
 }
