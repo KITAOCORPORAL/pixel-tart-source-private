@@ -1,0 +1,19 @@
+{
+  "newProductDependencies": [],
+  "referenceOnly": [
+    {
+      "repo": "darktable-org/darktable",
+      "commit": "be9171cf8bb2feab8bd115efd9b96a4ce7103039",
+      "entry": "src/iop/exposure.c exposure2white/process black0 scale",
+      "license": "GPL3 local research, not distributed"
+    },
+    {
+      "repo": "RawTherapee/RawTherapee",
+      "commit": "a8a3d1bc7b419ed1c974c39276c97e618a4f9a1b",
+      "entry": "rtengine/curves.cc powf2 ecomp; rtengine/dcp.cc step2ApplyTile RGB*=exp_scale no tone/look",
+      "license": "GPL3 local research, not distributed"
+    }
+  ],
+  "secondEngine": false,
+  "build": "Existing WPF/shared pipeline retained"
+}

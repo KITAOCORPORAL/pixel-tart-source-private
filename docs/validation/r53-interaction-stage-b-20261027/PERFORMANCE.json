@@ -1,0 +1,418 @@
+{
+  "productSha": "4b5f73b726c29b2117e0119333b44f0ef20c0beb",
+  "previousProduct": "091163b12aa29e5c8561b8fa3b3675580d70e885",
+  "before": {
+    "productSha": "091163b12aa29e5c8561b8fa3b3675580d70e885",
+    "brushBefore": [
+      {
+        "sourceWidth": 6000,
+        "sourceHeight": 4000,
+        "overlayWidth": 512,
+        "overlayHeight": 342,
+        "strokes": 1,
+        "points": 1000,
+        "compileMs": 1.7296,
+        "sampleMs": 908.3333,
+        "sum": 8972.261013478592,
+        "peakWorkingSetBytes": 72744960
+      },
+      {
+        "sourceWidth": 6000,
+        "sourceHeight": 4000,
+        "overlayWidth": 512,
+        "overlayHeight": 342,
+        "strokes": 20,
+        "points": 20000,
+        "compileMs": 5.1531,
+        "sampleMs": 11933.5501,
+        "sum": 100595.87129507102,
+        "peakWorkingSetBytes": 76521472
+      }
+    ],
+    "brushAfter": [
+      {
+        "sourceWidth": 6000,
+        "sourceHeight": 4000,
+        "overlayWidth": 512,
+        "overlayHeight": 342,
+        "strokes": 1,
+        "points": 1000,
+        "compileMs": 5.4239,
+        "sampleMs": 102.617,
+        "sum": 8972.261013478592,
+        "peakWorkingSetBytes": 72232960
+      },
+      {
+        "sourceWidth": 6000,
+        "sourceHeight": 4000,
+        "overlayWidth": 512,
+        "overlayHeight": 342,
+        "strokes": 20,
+        "points": 20000,
+        "compileMs": 58.3066,
+        "sampleMs": 391.6133,
+        "sum": 100595.87129507099,
+        "peakWorkingSetBytes": 75116544
+      }
+    ],
+    "largeBrush": [
+      {
+        "name": "short",
+        "width": 6000,
+        "height": 4000,
+        "strokes": 1,
+        "points": 20,
+        "layers": 1,
+        "renderMs": 7150.4255,
+        "encodeMs": 1307.7038,
+        "productInputBytes": 288000000,
+        "productOutputBytes": 288000000,
+        "baselineWorkingSetBytes": 363388928,
+        "sampledPeakWorkingSetBytes": 1690943488,
+        "allocatedDuringRenderAndEncode": 1515983896,
+        "scope": "Actual 24MP render and TIFF encode; source/output retained plus row-band scratch. Sampling5ms, managed runtime/codec overhead included. No full-output extra assertion copy."
+      },
+      {
+        "name": "long",
+        "width": 6000,
+        "height": 4000,
+        "strokes": 1,
+        "points": 2000,
+        "layers": 1,
+        "renderMs": 6920.9784,
+        "encodeMs": 1286.4255,
+        "productInputBytes": 288000000,
+        "productOutputBytes": 288000000,
+        "baselineWorkingSetBytes": 364003328,
+        "sampledPeakWorkingSetBytes": 1394728960,
+        "allocatedDuringRenderAndEncode": 1526209088,
+        "scope": "Actual 24MP render and TIFF encode; source/output retained plus row-band scratch. Sampling5ms, managed runtime/codec overhead included. No full-output extra assertion copy."
+      },
+      {
+        "name": "multi",
+        "width": 6000,
+        "height": 4000,
+        "strokes": 20,
+        "points": 20000,
+        "layers": 2,
+        "renderMs": 42041.2169,
+        "encodeMs": 1398.5969,
+        "productInputBytes": 288000000,
+        "productOutputBytes": 288000000,
+        "baselineWorkingSetBytes": 363491328,
+        "sampledPeakWorkingSetBytes": 1629982720,
+        "allocatedDuringRenderAndEncode": 2311183088,
+        "scope": "Actual 24MP render and TIFF encode; source/output retained plus row-band scratch. Sampling5ms, managed runtime/codec overhead included. No full-output extra assertion copy."
+      }
+    ],
+    "largeCompare": [
+      {
+        "width": 6000,
+        "height": 4000,
+        "count": 2,
+        "coldMs": 326.3737,
+        "warmMs": 5.359,
+        "compareStartWorkingBytes": 3202486272,
+        "compareSampledPeakWorkingBytes": 3207626752,
+        "compareAllocatedBytes": 66577648,
+        "peakWorkingSetBytes": 3296645120,
+        "managedBytes": 77382400,
+        "decodedProxyEdge": 1200,
+        "scope": "Full workspace includes original loading; peak includes fixture generation and managed test setup, not product-only ceiling"
+      },
+      {
+        "width": 6000,
+        "height": 4000,
+        "count": 3,
+        "coldMs": 535.2126,
+        "warmMs": 4.8589,
+        "compareStartWorkingBytes": 2920431616,
+        "compareSampledPeakWorkingBytes": 2920431616,
+        "compareAllocatedBytes": 97523176,
+        "peakWorkingSetBytes": 3296645120,
+        "managedBytes": 126618200,
+        "decodedProxyEdge": 1200,
+        "scope": "Full workspace includes original loading; peak includes fixture generation and managed test setup, not product-only ceiling"
+      },
+      {
+        "width": 6000,
+        "height": 4000,
+        "count": 4,
+        "coldMs": 766.5753,
+        "warmMs": 5.5134,
+        "compareStartWorkingBytes": 2656129024,
+        "compareSampledPeakWorkingBytes": 2656129024,
+        "compareAllocatedBytes": 142733520,
+        "peakWorkingSetBytes": 3296645120,
+        "managedBytes": 167862888,
+        "decodedProxyEdge": 1200,
+        "scope": "Full workspace includes original loading; peak includes fixture generation and managed test setup, not product-only ceiling"
+      },
+      {
+        "width": 8000,
+        "height": 6000,
+        "count": 2,
+        "coldMs": 405.1934,
+        "warmMs": 8.6999,
+        "compareStartWorkingBytes": 6134276096,
+        "compareSampledPeakWorkingBytes": 6138310656,
+        "compareAllocatedBytes": 73231840,
+        "peakWorkingSetBytes": 6570356736,
+        "managedBytes": 92338608,
+        "decodedProxyEdge": 1200,
+        "scope": "Full workspace includes original loading; peak includes fixture generation and managed test setup, not product-only ceiling"
+      },
+      {
+        "width": 8000,
+        "height": 6000,
+        "count": 3,
+        "coldMs": 685.357,
+        "warmMs": 10.2366,
+        "compareStartWorkingBytes": 5645471744,
+        "compareSampledPeakWorkingBytes": 5645471744,
+        "compareAllocatedBytes": 109756208,
+        "peakWorkingSetBytes": 6570356736,
+        "managedBytes": 133738040,
+        "decodedProxyEdge": 1200,
+        "scope": "Full workspace includes original loading; peak includes fixture generation and managed test setup, not product-only ceiling"
+      },
+      {
+        "width": 8000,
+        "height": 6000,
+        "count": 4,
+        "coldMs": 934.2292,
+        "warmMs": 9.6474,
+        "compareStartWorkingBytes": 4536008704,
+        "compareSampledPeakWorkingBytes": 4536008704,
+        "compareAllocatedBytes": 160588408,
+        "peakWorkingSetBytes": 6570356736,
+        "managedBytes": 184594712,
+        "decodedProxyEdge": 1200,
+        "scope": "Full workspace includes original loading; peak includes fixture generation and managed test setup, not product-only ceiling"
+      }
+    ],
+    "raw": {
+      "source": "TNAN8886.CR3",
+      "hash": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+      "decodeMs": 3834.8465,
+      "inputMs": 0.5242,
+      "previewMs": 3973.8545,
+      "exportMs": 7888.9551,
+      "readbackMs": 6387.5341,
+      "compare": [
+        {
+          "count": 2,
+          "coldMs": 6089.4312,
+          "warmMs": 14.6084
+        },
+        {
+          "count": 3,
+          "coldMs": 8965.2367,
+          "warmMs": 12.4915
+        },
+        {
+          "count": 4,
+          "coldMs": 11839.6805,
+          "warmMs": 12.7653
+        }
+      ],
+      "width": 5496,
+      "height": 3670,
+      "peakWorkingSetBytes": 2618515456,
+      "ledger": 504593280,
+      "CalibrationEligible": false,
+      "scope": "Actual linear professional RAW master; local editing and TIFF16 exported from same definition. Testhost not pointer/DPI. Peak includes fixture/readback/second workspace; ledger separately recorded."
+    },
+    "limits": "Same final published DLLs, memory5ms sampling. Large compare process peak includes fixture creation and original workspace load; compare interval start/peak/allocation separate. RAW ledger vs process peak separate. Still not native pointer latency or hard codec bound."
+  },
+  "continuousOverlay": {
+    "sourceWidth": 6000,
+    "sourceHeight": 4000,
+    "strokes": 20,
+    "points": 20000,
+    "firstFrameMs": 445.641,
+    "duringFrames": 36,
+    "total": 37,
+    "last": 99,
+    "maxConcurrency": 1,
+    "scope": "Actual compiled mask sampler under continuous inputs; not physical pointer"
+  },
+  "syntheticPreviewError": {
+    "width": 1200,
+    "height": 800,
+    "fastMs": 447.3153,
+    "fineMs": 476.3492,
+    "mean": 0.069495946,
+    "p95": 0.1753074,
+    "maximum": 6.963035,
+    "targetMean": 1.5,
+    "targetP95": 4,
+    "targetMax": 32,
+    "withinTarget": true,
+    "input": "Synthetic high-frequency RGB; intentionally stresses nearest vs area",
+    "notPixelEqual": true
+  },
+  "real": {
+    "baseMs": 1561.7674,
+    "fastMs": 81.5333,
+    "fineMs": 2976.8128,
+    "sceneExportMs": 24930.6852,
+    "mean": 0.000539017841219902,
+    "p95": 0.00234067440032959,
+    "maximum": 0.1297212392091751,
+    "quality": [
+      {
+        "ms": 85.0254,
+        "value": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 170.0791,
+        "value": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 254.7801,
+        "value": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 335.9746,
+        "value": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 417.084,
+        "value": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 498.2435,
+        "value": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 579.8621,
+        "value": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 661.0446,
+        "value": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 3993.2177,
+        "value": "精细"
+      },
+      {
+        "ms": 9014.9691,
+        "value": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 12373.0575,
+        "value": "精细"
+      },
+      {
+        "ms": 17970.2348,
+        "value": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 21772.6481,
+        "value": "精细"
+      },
+      {
+        "ms": 24275.9994,
+        "value": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 28088.0055,
+        "value": "精细"
+      },
+      {
+        "ms": 30223.4713,
+        "value": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 34004.6197,
+        "value": "精细"
+      }
+    ],
+    "compareCount": 4,
+    "compareFirstMs": 3502.6691,
+    "compareAllMs": 13037.0114,
+    "compareHotAllMs": 11.6927,
+    "notifications": 10,
+    "sceneDefinition": "{\"ProcessingVersion\":4,\"WhiteBalance\":\"Camera\",\"RedGain\":1,\"GreenGain\":1,\"BlueGain\":1,\"ExposureEv\":0,\"InputConfiguration\":\"LibRaw021LinearProPhotoD65V1\",\"DisplayTransform\":\"LuminanceShoulderNeutralGamutV1\",\"LocalEdits\":{\"Stack\":{\"Nodes\":[{\"Id\":\"688ec249-35df-485f-af62-7d6df5f7008a\",\"Type\":7,\"Name\":\"\\u57FA\\u7840\\u4E0E HDR \\u5F71\\u8C03\",\"Enabled\":true,\"FilmSettings\":null,\"CompositeVersion\":1,\"Opacity\":0.6799999999999999,\"Blend\":0,\"LocalMask\":{\"Strokes\":[{\"Points\":[{\"X\":0.2,\"Y\":0.3},{\"X\":0.7,\"Y\":0.6}],\"Radius\":0.08,\"Feather\":0.6,\"Flow\":0.7,\"Density\":1,\"Erase\":false}],\"Inverted\":false,\"Version\":1},\"UserLocked\":false,\"SystemLocked\":false,\"NumericParameters\":{\"exposure\":0.4},\"Samples\":[],\"NegativeSamples\":[]}],\"Version\":2,\"WorkingSpace\":\"OKLabD65\",\"ProcessingVersion\":2},\"Version\":1},\"SceneExposure\":{\"ExposureEv\":-1.5,\"Mask\":{\"Strokes\":[{\"Points\":[{\"X\":0.2,\"Y\":0.3},{\"X\":0.7,\"Y\":0.6}],\"Radius\":0.08,\"Feather\":0.6,\"Flow\":0.7,\"Density\":1,\"Erase\":false}],\"Inverted\":false,\"Version\":1},\"Version\":1},\"DecodeKey\":\"LibRaw021LinearProPhotoD65V1:Camera:1:1:1\"}",
+    "profile": [
+      {
+        "phase": "base-raw-coordinate-display",
+        "milliseconds": 84152.2431,
+        "calls": 24627
+      },
+      {
+        "phase": "freeze-and-index",
+        "milliseconds": 7.7835,
+        "calls": 39
+      },
+      {
+        "phase": "mask-composite",
+        "milliseconds": 9243.1369,
+        "calls": 20690
+      },
+      {
+        "phase": "point-effect",
+        "milliseconds": 76034.9858,
+        "calls": 20690
+      }
+    ],
+    "sceneMeanAbsolute": 0.0034822444,
+    "sceneMaximum": 0.08784273,
+    "peakWorkingSetBytes": 2008195072,
+    "ledger": 559702080,
+    "CalibrationEligible": false,
+    "scope": "Real20MP Canon, same frozen state fast approximation/fine; not physical pointer or color calibration"
+  },
+  "largeBrush": [
+    {
+      "name": "short",
+      "width": 6000,
+      "height": 4000,
+      "strokes": 1,
+      "points": 20,
+      "layers": 1,
+      "renderMs": 2764.8787,
+      "encodeMs": 1319.8333,
+      "productInputBytes": 288000000,
+      "productOutputBytes": 288000000,
+      "baselineWorkingSetBytes": 364093440,
+      "sampledPeakWorkingSetBytes": 1695244288,
+      "allocatedDuringRenderAndEncode": 1514689928,
+      "scope": "Actual 24MP render and TIFF encode; source/output retained plus row-band scratch. Sampling5ms, managed runtime/codec overhead included. No full-output extra assertion copy."
+    },
+    {
+      "name": "long",
+      "width": 6000,
+      "height": 4000,
+      "strokes": 1,
+      "points": 2000,
+      "layers": 1,
+      "renderMs": 2767.2267,
+      "encodeMs": 1203.6584,
+      "productInputBytes": 288000000,
+      "productOutputBytes": 288000000,
+      "baselineWorkingSetBytes": 364158976,
+      "sampledPeakWorkingSetBytes": 1415970816,
+      "allocatedDuringRenderAndEncode": 1525145312,
+      "scope": "Actual 24MP render and TIFF encode; source/output retained plus row-band scratch. Sampling5ms, managed runtime/codec overhead included. No full-output extra assertion copy."
+    },
+    {
+      "name": "multi",
+      "width": 6000,
+      "height": 4000,
+      "strokes": 20,
+      "points": 20000,
+      "layers": 2,
+      "renderMs": 16849.0386,
+      "encodeMs": 1147.9482,
+      "productInputBytes": 288000000,
+      "productOutputBytes": 288000000,
+      "baselineWorkingSetBytes": 363704320,
+      "sampledPeakWorkingSetBytes": 1405902848,
+      "allocatedDuringRenderAndEncode": 2304879000,
+      "scope": "Actual 24MP render and TIFF encode; source/output retained plus row-band scratch. Sampling5ms, managed runtime/codec overhead included. No full-output extra assertion copy."
+    }
+  ]
+}

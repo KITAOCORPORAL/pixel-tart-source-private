@@ -11,3 +11,5 @@
 两者GPL3仅隔离研究，产品独立实现，未复制代码/引入第二引擎。实际编译固定scalar-stage执行56组（负值、黑、灰、饱和通道和16高光×EV），max绝对3.98e-7。tcc旧CRT缺exp2f/powf，以double pow后float cast shim明确记录；这是标量阶段对照，不是两个完整RAW/profile引擎等价。
 
 科学边界：ICC/profile/宽色域/场景线性通用局部工具属于B后续，不再算A必须无限完成。当前B首项已启动，诊断限制保留，CalibrationEligible=false；保存重开/编码相同不证明色彩准确。
+
+剖析计时为各并行阶段累计CPU区段，不能相加当wall时间；完整误差/真实样片数值以最终PERFORMANCE.json为准。

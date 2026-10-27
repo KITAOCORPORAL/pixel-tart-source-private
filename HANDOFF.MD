@@ -1,7 +1,7 @@
 # 光镜开发交接入口
 
 ## 暗室交互与阶段B启动（2026-10-27 America/New_York）
-- 同分支接续bc80e556；当前权威docs/validation/r53-interaction-stage-b-20261027/FINAL_REPORT.md、TEST_SUMMARY.json、PERFORMANCE.json。不重做RAW接入/教程退役/设计包研究。
+- 同分支接续bc80e556；当前权威docs/validation/r53-interaction-stage-b-20261027/FINAL_REPORT.md、TEST_SUMMARY.json、PERFORMANCE.json。产品4b5f73b726c29b2117e0119333b44f0ef20c0beb，测试追加12eee94e；完整包E:/Kitao-Deliveries/r53-interaction-stage-b-20261027/Guangjing-R53-Interaction-StageB-Diagnostic-win-x64.zip。本轮定向Core17PASS、WPF56PASS/1NOT_RUN、0FAIL，原4历史授权缺口保留。不重做RAW接入/教程退役/设计包研究。
 - 覆盖1在途+1最新待处理、同目标允许单调中间帧，换图/变体/节点/关闭严格取消；不先清空闪烁；max768，行采样最多4worker。持续20k点合成输入已测首帧/中间数/最终正确，非鼠标验收。
 - RAW800px面积基础图最多2缓存，键含源身份/完整基础定义/版本/几何。快速局部工具同冻结定义、停止400ms后精细；快速为近似需看误差，导出始终原全分辨率。原nearest候选超误差已拒绝。
 - 四变体逐帧发布/所选ID加载槽；不是4张全做完才显示。普通精细行带4worker，点工具绕开重复包装；性能/资源数据见报告，不把快预览算精细。

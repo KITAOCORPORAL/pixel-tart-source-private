@@ -1,0 +1,66 @@
+{
+  "productSha": "4b5f73b726c29b2117e0119333b44f0ef20c0beb",
+  "testSha": "12eee94e46974baea262c9e157f4a141d1b5dc42",
+  "counts": {
+    "Core": {
+      "Passed": 17,
+      "Failed": 0,
+      "NotExecuted": 0
+    },
+    "Wpf": {
+      "Passed": 56,
+      "Failed": 0,
+      "NotExecuted": 1
+    }
+  },
+  "runs": [
+    {
+      "label": "SEALED_CORE",
+      "path": "SEALED_CORE/run-20261027-181525-e3e1fb85/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 16
+      },
+      "assemblySha256": "8c4e9ce3d95ba67e8295344229c6d3bddeb6d661a04b0180e0fc6ee237ff6ffa"
+    },
+    {
+      "label": "SEALED_WPF",
+      "path": "SEALED_WPF/run-20261027-181533-1398578a/summary.json",
+      "status": "FAILED",
+      "counts": {
+        "Passed": 56,
+        "NotExecuted": 1
+      },
+      "assemblySha256": "e914e741410b1f8a12ac32aaad2493a340d06a16fc819fc09420d3dff74a5712"
+    },
+    {
+      "label": "FINAL_LARGE_BRUSH_short",
+      "path": "FINAL_LARGE_BRUSH_short/run-20261027-181008-a47e62fc/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "assemblySha256": "ed88f0859ce15b412ea766ad8c6299a72ad648b615a28d497c7aaecc29ca2c76"
+    },
+    {
+      "label": "FINAL_LARGE_BRUSH_long",
+      "path": "FINAL_LARGE_BRUSH_long/run-20261027-181015-106a9f1d/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "assemblySha256": "ed88f0859ce15b412ea766ad8c6299a72ad648b615a28d497c7aaecc29ca2c76"
+    },
+    {
+      "label": "FINAL_LARGE_BRUSH_multi",
+      "path": "FINAL_LARGE_BRUSH_multi/run-20261027-181021-b14bf8f9/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "assemblySha256": "ed88f0859ce15b412ea766ad8c6299a72ad648b615a28d497c7aaecc29ca2c76"
+    }
+  ],
+  "scope": "Changed/affected only; old unrelated reference corpus not rerun. NotExecuted is not PASS; strict WPF runner remains FAILED.",
+  "inheritedFour": "NONPASS.json original reasons retained"
+}
