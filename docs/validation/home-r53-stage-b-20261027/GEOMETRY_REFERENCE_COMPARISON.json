@@ -1,0 +1,26 @@
+{
+  "opencvVersion": "4.10.0",
+  "pillowVersion": "12.3.0",
+  "opencvCommit": "67f3511f2354ebfb5f98045ee6153345f632aadd",
+  "pillowCommit": "bb1d8e8ab8d29048624d96e3ee53cecf7c13d13d",
+  "opencv": {
+    "mean8": 0.03228209207613298,
+    "p95_8": 0.11129941310979041,
+    "max8": 0.23598984583511423
+  },
+  "pillowInterior": {
+    "mean8": 2.886694421154382e-05,
+    "p95_8": 6.868680111807302e-05,
+    "max8": 0.00015636395644946788
+  },
+  "pillowAllIncludingDifferentBorderRule": {
+    "mean8": 2.886694421154382e-05,
+    "p95_8": 6.868680111807302e-05,
+    "max8": 0.00015636395644946788
+  },
+  "notes": [
+    "OpenCV INTER_LINEAR 1/32 coefficient table; product double bilinear.",
+    "Pillow border behavior differs; interior separately measured.",
+    "No color accuracy claim."
+  ]
+}

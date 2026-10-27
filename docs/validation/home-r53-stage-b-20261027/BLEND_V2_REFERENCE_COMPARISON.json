@@ -1,0 +1,30 @@
+{
+  "stats": {
+    "Overlay": {
+      "pillowMax8": 0.9999999999999964,
+      "pillowMean8": 0.25177696078431205,
+      "differentSoftlightDefinition": false
+    },
+    "SoftLight": {
+      "pillowMax8": 22.960799692425987,
+      "pillowMean8": 2.0849183858360343,
+      "differentSoftlightDefinition": true
+    },
+    "Darken": {
+      "pillowMax8": 0.25,
+      "pillowMean8": 0.10416666666666667,
+      "differentSoftlightDefinition": false,
+      "opencvMax8": 0.25
+    },
+    "Lighten": {
+      "pillowMax8": 0.25,
+      "pillowMean8": 0.0625,
+      "differentSoftlightDefinition": false,
+      "opencvMax8": 0.25
+    }
+  },
+  "Pillow": "12.3.0",
+  "OpenCV": "4.10.0",
+  "nonseparable": "W3C/PDF luminance .3/.59/.11; not darktable HSL or Photoshop HDR proof",
+  "scope": "8bit quantized independent reference; SoftLight Pillow formula differs and recorded, not used as exact oracle"
+}

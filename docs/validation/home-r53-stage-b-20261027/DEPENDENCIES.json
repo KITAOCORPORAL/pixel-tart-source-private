@@ -1,0 +1,1593 @@
+{
+  "runtimeAssets": 264,
+  "missing": 0,
+  "assets": [
+    {
+      "library": "KitaoPhotoSelector/2.3.0",
+      "type": "runtime",
+      "file": "KitaoPhotoSelector.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "Microsoft.CSharp.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "Microsoft.VisualBasic.Core.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "Microsoft.VisualBasic.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "Microsoft.Win32.Primitives.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "Microsoft.Win32.Registry.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.AppContext.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Buffers.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Collections.Concurrent.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Collections.Immutable.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Collections.NonGeneric.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Collections.Specialized.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Collections.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.ComponentModel.Annotations.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.ComponentModel.DataAnnotations.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.ComponentModel.EventBasedAsync.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.ComponentModel.Primitives.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.ComponentModel.TypeConverter.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.ComponentModel.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Configuration.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Console.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Core.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Data.Common.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Data.DataSetExtensions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Data.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.Contracts.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.Debug.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.DiagnosticSource.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.FileVersionInfo.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.Process.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.StackTrace.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.TextWriterTraceListener.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.Tools.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.TraceSource.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.Tracing.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Drawing.Primitives.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Drawing.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Dynamic.Runtime.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Formats.Asn1.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Formats.Tar.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Globalization.Calendars.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Globalization.Extensions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Globalization.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.Compression.Brotli.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.Compression.FileSystem.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.Compression.ZipFile.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.Compression.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.FileSystem.AccessControl.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.FileSystem.DriveInfo.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.FileSystem.Primitives.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.FileSystem.Watcher.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.FileSystem.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.IsolatedStorage.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.MemoryMappedFiles.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.Pipelines.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.Pipes.AccessControl.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.Pipes.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.UnmanagedMemoryStream.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Linq.AsyncEnumerable.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Linq.Expressions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Linq.Parallel.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Linq.Queryable.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Linq.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Memory.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.Http.Json.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.Http.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.HttpListener.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.Mail.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.NameResolution.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.NetworkInformation.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.Ping.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.Primitives.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.Quic.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.Requests.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.Security.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.ServerSentEvents.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.ServicePoint.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.Sockets.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.WebClient.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.WebHeaderCollection.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.WebProxy.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.WebSockets.Client.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.WebSockets.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Net.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Numerics.Vectors.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Numerics.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.ObjectModel.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Private.CoreLib.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Private.DataContractSerialization.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Private.Uri.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Private.Xml.Linq.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Private.Xml.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Reflection.DispatchProxy.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Reflection.Emit.ILGeneration.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Reflection.Emit.Lightweight.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Reflection.Emit.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Reflection.Extensions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Reflection.Metadata.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Reflection.Primitives.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Reflection.TypeExtensions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Reflection.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Resources.Reader.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Resources.ResourceManager.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Resources.Writer.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.CompilerServices.Unsafe.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.CompilerServices.VisualC.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.Extensions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.Handles.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.InteropServices.JavaScript.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.InteropServices.RuntimeInformation.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.InteropServices.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.Intrinsics.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.Loader.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.Numerics.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.Serialization.Formatters.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.Serialization.Json.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.Serialization.Primitives.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.Serialization.Xml.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.Serialization.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Runtime.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.AccessControl.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Claims.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Cryptography.Algorithms.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Cryptography.Cng.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Cryptography.Csp.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Cryptography.Encoding.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Cryptography.OpenSsl.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Cryptography.Primitives.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Cryptography.X509Certificates.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Cryptography.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Principal.Windows.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Principal.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.SecureString.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.ServiceModel.Web.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.ServiceProcess.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Text.Encoding.CodePages.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Text.Encoding.Extensions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Text.Encoding.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Text.Encodings.Web.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Text.Json.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Text.RegularExpressions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Threading.AccessControl.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Threading.Channels.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Threading.Overlapped.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Threading.Tasks.Dataflow.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Threading.Tasks.Extensions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Threading.Tasks.Parallel.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Threading.Tasks.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Threading.Thread.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Threading.ThreadPool.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Threading.Timer.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Threading.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Transactions.Local.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Transactions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.ValueTuple.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Web.HttpUtility.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Web.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Windows.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Xml.Linq.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Xml.ReaderWriter.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Xml.Serialization.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Xml.XDocument.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Xml.XPath.XDocument.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Xml.XPath.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Xml.XmlDocument.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Xml.XmlSerializer.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Xml.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "mscorlib.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "netstandard.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "Microsoft.DiaSymReader.Native.amd64.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "System.IO.Compression.Native.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "clretwrc.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "clrgc.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "clrgcexp.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "clrjit.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "coreclr.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "createdump.exe",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "hostfxr.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "hostpolicy.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "mscordaccore.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "mscordaccore_amd64_amd64_10.0.1226.42308.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "mscordbi.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "mscorrc.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.NETCore.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "msquic.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "Accessibility.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "DirectWriteForwarder.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "Microsoft.Win32.Registry.AccessControl.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "Microsoft.Win32.SystemEvents.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationCore.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework-SystemCore.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework-SystemData.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework-SystemDrawing.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework-SystemXml.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework-SystemXmlLinq.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework.Aero.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework.Aero2.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework.AeroLite.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework.Classic.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework.Fluent.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework.Luna.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework.Royale.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationFramework.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "PresentationUI.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "ReachFramework.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.CodeDom.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Configuration.ConfigurationManager.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.EventLog.Messages.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.EventLog.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Diagnostics.PerformanceCounter.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.DirectoryServices.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Drawing.Common.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Formats.Nrbf.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.IO.Packaging.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Printing.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Private.Windows.Core.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Private.Windows.GdiPlus.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Resources.Extensions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Cryptography.Pkcs.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Cryptography.ProtectedData.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Cryptography.Xml.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Security.Permissions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Windows.Controls.Ribbon.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Windows.Extensions.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Windows.Input.Manipulations.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Windows.Presentation.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Windows.Primitives.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "System.Xaml.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "UIAutomationClient.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "UIAutomationClientSideProviders.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "UIAutomationProvider.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "UIAutomationTypes.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "runtime",
+      "file": "WindowsBase.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "D3DCompiler_47_cor3.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "PenImc_cor3.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "PresentationNative_cor3.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "vcruntime140_cor3.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.WindowsDesktop.App.Runtime.win-x64/10.0.12",
+      "type": "native",
+      "file": "wpfgfx_cor3.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.19041.57",
+      "type": "runtime",
+      "file": "Microsoft.Windows.SDK.NET.dll",
+      "found": true
+    },
+    {
+      "library": "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.19041.57",
+      "type": "runtime",
+      "file": "WinRT.Runtime.dll",
+      "found": true
+    },
+    {
+      "library": "ComputeSharp/3.2.0",
+      "type": "runtime",
+      "file": "lib/net8.0/ComputeSharp.dll",
+      "found": true
+    },
+    {
+      "library": "ComputeSharp.Core/3.2.0",
+      "type": "runtime",
+      "file": "lib/net8.0/ComputeSharp.Core.dll",
+      "found": true
+    },
+    {
+      "library": "DocumentFormat.OpenXml/3.5.1",
+      "type": "runtime",
+      "file": "lib/net10.0/DocumentFormat.OpenXml.dll",
+      "found": true
+    },
+    {
+      "library": "DocumentFormat.OpenXml.Framework/3.5.1",
+      "type": "runtime",
+      "file": "lib/net10.0/DocumentFormat.OpenXml.Framework.dll",
+      "found": true
+    },
+    {
+      "library": "MetadataExtractor/2.9.0",
+      "type": "runtime",
+      "file": "lib/net8.0/MetadataExtractor.dll",
+      "found": true
+    },
+    {
+      "library": "Microsoft.Data.Sqlite.Core/10.0.10",
+      "type": "runtime",
+      "file": "lib/net8.0/Microsoft.Data.Sqlite.dll",
+      "found": true
+    },
+    {
+      "library": "Sdcb.LibRaw/0.21.1.7",
+      "type": "runtime",
+      "file": "lib/net6.0/Sdcb.LibRaw.dll",
+      "found": true
+    },
+    {
+      "library": "Sdcb.LibRaw.runtime.win64/0.21.1",
+      "type": "native",
+      "file": "runtimes/win-x64/native/jpeg8.dll",
+      "found": true
+    },
+    {
+      "library": "Sdcb.LibRaw.runtime.win64/0.21.1",
+      "type": "native",
+      "file": "runtimes/win-x64/native/lcms2.dll",
+      "found": true
+    },
+    {
+      "library": "Sdcb.LibRaw.runtime.win64/0.21.1",
+      "type": "native",
+      "file": "runtimes/win-x64/native/raw_r.dll",
+      "found": true
+    },
+    {
+      "library": "Sdcb.LibRaw.runtime.win64/0.21.1",
+      "type": "native",
+      "file": "runtimes/win-x64/native/zlib1.dll",
+      "found": true
+    },
+    {
+      "library": "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+      "type": "runtime",
+      "file": "lib/netstandard2.0/SQLitePCLRaw.batteries_v2.dll",
+      "found": true
+    },
+    {
+      "library": "SQLitePCLRaw.core/2.1.12",
+      "type": "runtime",
+      "file": "lib/netstandard2.0/SQLitePCLRaw.core.dll",
+      "found": true
+    },
+    {
+      "library": "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+      "type": "native",
+      "file": "runtimes/win-x64/native/e_sqlite3.dll",
+      "found": true
+    },
+    {
+      "library": "SQLitePCLRaw.provider.e_sqlite3/2.1.12",
+      "type": "runtime",
+      "file": "lib/net6.0-windows7.0/SQLitePCLRaw.provider.e_sqlite3.dll",
+      "found": true
+    },
+    {
+      "library": "XmpCore/6.1.10.1",
+      "type": "runtime",
+      "file": "lib/netstandard2.0/XmpCore.dll",
+      "found": true
+    },
+    {
+      "library": "PixelTart.Kernel/2.3.0",
+      "type": "runtime",
+      "file": "PixelTart.Kernel.dll",
+      "found": true
+    },
+    {
+      "library": "PixelTart.MatchV4.Dx12/2.3.0",
+      "type": "runtime",
+      "file": "PixelTart.MatchV4.Dx12.dll",
+      "found": true
+    },
+    {
+      "library": "PixelTart.Modules.AssetLibrary/2.3.0",
+      "type": "runtime",
+      "file": "PixelTart.Modules.AssetLibrary.dll",
+      "found": true
+    },
+    {
+      "library": "PixelTart.Modules.OnlineSelection/2.3.0",
+      "type": "runtime",
+      "file": "PixelTart.Modules.OnlineSelection.dll",
+      "found": true
+    },
+    {
+      "library": "PixelTart.Modules.RawTool/2.3.0",
+      "type": "runtime",
+      "file": "PixelTart.Modules.RawTool.dll",
+      "found": true
+    },
+    {
+      "library": "RAWSelectionAssistant.Core/2.3.0",
+      "type": "runtime",
+      "file": "RAWSelectionAssistant.Core.dll",
+      "found": true
+    }
+  ],
+  "newExternalCmsLibrary": false,
+  "existingLcms212Reused": true,
+  "photocraftRustSourceOrRuntimeShipped": false
+}

@@ -1,0 +1,107 @@
+{
+  "reference": "Pillow12.3/LCMS2.19",
+  "rows": [
+    {
+      "from": "sRGB",
+      "to": "sRGB",
+      "mean8": 0.08224162098191172,
+      "max8": 0.5
+    },
+    {
+      "from": "sRGB",
+      "to": "DisplayP3",
+      "mean8": 0.26685013626963866,
+      "max8": 0.8480573999999876
+    },
+    {
+      "from": "sRGB",
+      "to": "AdobeRGB",
+      "mean8": 0.284831035332041,
+      "max8": 1.208916648
+    },
+    {
+      "from": "sRGB",
+      "to": "ProPhotoRGB",
+      "mean8": 0.2644679434085914,
+      "max8": 0.9544136499999922
+    },
+    {
+      "from": "DisplayP3",
+      "to": "sRGB",
+      "mean8": 0.22000025962564587,
+      "max8": 1.7722012750000005
+    },
+    {
+      "from": "DisplayP3",
+      "to": "DisplayP3",
+      "mean8": 0.08224162098191172,
+      "max8": 0.5
+    },
+    {
+      "from": "DisplayP3",
+      "to": "AdobeRGB",
+      "mean8": 0.2525497094056845,
+      "max8": 1.9752655350000001
+    },
+    {
+      "from": "DisplayP3",
+      "to": "ProPhotoRGB",
+      "mean8": 0.28451905762312646,
+      "max8": 0.9502815999999967
+    },
+    {
+      "from": "AdobeRGB",
+      "to": "sRGB",
+      "mean8": 0.22358800282161215,
+      "max8": 1.0032937000000004
+    },
+    {
+      "from": "AdobeRGB",
+      "to": "DisplayP3",
+      "mean8": 0.24292845375858893,
+      "max8": 0.9298854999999975
+    },
+    {
+      "from": "AdobeRGB",
+      "to": "AdobeRGB",
+      "mean8": 0.08224162015503834,
+      "max8": 0.5
+    },
+    {
+      "from": "AdobeRGB",
+      "to": "ProPhotoRGB",
+      "mean8": 0.2858354310517645,
+      "max8": 0.9180787500000065
+    },
+    {
+      "from": "ProPhotoRGB",
+      "to": "sRGB",
+      "mean8": 0.17967333688861803,
+      "max8": 5.1911169799999985
+    },
+    {
+      "from": "ProPhotoRGB",
+      "to": "DisplayP3",
+      "mean8": 0.19440033744388918,
+      "max8": 1.82778683
+    },
+    {
+      "from": "ProPhotoRGB",
+      "to": "AdobeRGB",
+      "mean8": 0.22515941751291962,
+      "max8": 5.0
+    },
+    {
+      "from": "ProPhotoRGB",
+      "to": "ProPhotoRGB",
+      "mean8": 0.08224162015503834,
+      "max8": 0.5
+    }
+  ],
+  "max8": 5.1911169799999985,
+  "notes": [
+    "Input quantizedRGB8 vs float is different; extended input separately retained in raw cases.",
+    "Same underlying LCMS family, not an independent algorithm. WIC separate-engine report retains gamut discrepancies.",
+    "No physical accuracy assertion."
+  ]
+}

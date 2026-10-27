@@ -1,0 +1,813 @@
+{
+  "productSha": "b6eaa32e08bb37d79dcdfde7db17613a1558f5c6",
+  "authoritative": {
+    "core": {
+      "Passed": 55,
+      "Failed": 0,
+      "NotRun": 4
+    },
+    "wpf": {
+      "Passed": 52,
+      "Failed": 0,
+      "NotRun": 1
+    }
+  },
+  "uniqueTestsAfterSupplements": {
+    "core": {
+      "Passed": 62,
+      "Failed": 0,
+      "NotRun": 3
+    },
+    "wpf": {
+      "Passed": 53,
+      "Failed": 0,
+      "NotRun": 1
+    }
+  },
+  "supplementNote": "Create/reopen same test invoked in distinct processes: both raw runs retained; unique test counts once. Explicit named RAW task passed in supplement, not counted as skipped in merged unique list.",
+  "runs": [
+    {
+      "suite": "core",
+      "file": "authoritative-core\\authoritative-core.trx",
+      "counts": {
+        "Passed": 55,
+        "NotExecuted": 4
+      },
+      "sha256": "1fa384590628e71abb74b8c947bb733fafa8bf683f78e27e38c6d1e3b6b61aaf"
+    },
+    {
+      "suite": "wpf",
+      "file": "authoritative-wpf\\authoritative-wpf.trx",
+      "counts": {
+        "Passed": 52,
+        "NotExecuted": 1
+      },
+      "sha256": "cd29b42ed285df5790e9ad4a4605d9bc621c06f99908bdcb1e4f915010ce44ac"
+    },
+    {
+      "suite": "core",
+      "file": "planning15\\planning15-preservation.trx",
+      "counts": {
+        "Passed": 6
+      },
+      "sha256": "e8cf1384722a2ac8309dee459f7e9e315f47351f3bd391d682bf387ccde4158a"
+    },
+    {
+      "suite": "core",
+      "file": "raw-export\\home-raw-export.trx",
+      "counts": {
+        "Passed": 1
+      },
+      "sha256": "25502bfe2a77e12d55ffb373562dad87f4b8734aacab2ca837a55d68ec328167"
+    },
+    {
+      "suite": "wpf",
+      "file": "process-persistence-final\\process-create.trx",
+      "counts": {
+        "Passed": 1
+      },
+      "sha256": "07de53d35fc1d06949a6f321c4a72afac6bb2ec1e67e35e4582b3fb30ad7e830"
+    },
+    {
+      "suite": "wpf",
+      "file": "process-persistence-final\\process-reopen.trx",
+      "counts": {
+        "Passed": 1
+      },
+      "sha256": "a44153fe8e5c97ab841f4b5f6a0618c62d58a83a05e9a6a2d257169d031f6780"
+    },
+    {
+      "suite": "wpf",
+      "file": "visual\\scene-visual-expanded.trx",
+      "counts": {
+        "Passed": 1
+      },
+      "sha256": "a4a62a70228a7e38de2cd6bf02c95c0ec301baa39703252440d23ece1a351001"
+    },
+    {
+      "suite": "wpf",
+      "file": "sealed-scene-timing-tests\\sealed-scene-timing.trx",
+      "counts": {
+        "Passed": 1
+      },
+      "sha256": "48c1d1ddf8108281e0b918b8faeaa59f95792d6e2feaae587bcc552c0cd55fb5",
+      "measurementScopeCorrection": true
+    }
+  ],
+  "tests": [
+    {
+      "suite": "core",
+      "name": "GeometryV2ExportsPixelCentersForIndependentReferenceComparison",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "TwentyFourMpMultilayerLongStrokeActualRenderAndExportMeasurement",
+      "outcome": "NotExecuted",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "InputRecipeSeparatesCacheKeysAndKeepsLegacyFingerprint",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ColorDirectionsAreNotConflatedAndItype600SharedBaseIsExplicit",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "TwoPinnedNativeReferenceKernelsRecordNumericalMatrix",
+      "outcome": "NotExecuted",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "PreviewSamplesExactlySameRenderedPixelsAndDefinitionMustMatchDecode",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "DefinitionAndInputPersistInVersionAndV1SessionWithoutOldStackMigration",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "TiffIccRejectsInvalidProfile",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "RetiredCacheGenerationCannotReinsertLateTaskAndOldRenderedDefaultsStay",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "RawCapabilityListsFormatsWithoutClaimingVerification",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "AllExifOrientationsMatchFullRowsTilesAndSavedDice",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ExplicitV2ModesRespectOpacityMaskLegacyAndHdrBoundary",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ProduceFixedRgbBlendReferenceCases",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "InvalidVersionsMalformedGeometryAndDuplicateWhiteBalanceAreRejected",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "WhiteBalanceSelectsCameraOnceAndRejectsRenderedInputsAndMissingConfiguration",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "EmbeddedInspectorDistinguishesMissingAndCorruptProfileWithoutFallback",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "StrictProfileRejectsLengthsBoundsUnknownVersionIntentAndLut",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "BlendOpacityMaskBoundariesAndLegacyIdentity",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ConflictRecoveryClonesNeverCreateSecondOriginalOrMain",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "BvhPreservesV1ExactOverlapEraseInverseSemantics",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "LegacyDefinitionUnchangedExplicitExtensionMatchesSharedSrgbStack",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "TiffCancellationStopsBeforeCompletion",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "PointwiseFullFrameAndRowBandsUseIdenticalCompositeCoordinates",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ScenePreparedCancellationAndHistoricalDefinitionRemainStable",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "V1RemainsReadableAndV2BypassIsExactWithoutImplicitMigration",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "DefaultOffAndRecipeCannotMigrateLegacyVersions",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "SceneHighFrequencyApproximationRecordsItsActualGate",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "LargeSourceLongStrokeOverlaySamplingMeasurement",
+      "outcome": "NotExecuted",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "EmptyMaskHiddenNodeVersionGuardsAndInvalidCoordinatesAreExplicit",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "SceneExposurePreservesLinearRatiosAndNegativeHighRangeWithoutChangingOldDefinitions",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "SustainedInputPublishesIntermediateAndLatestWithBoundedConcurrency",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "CatalogPersistsOriginalMainRatingAndNodeLockWithoutChangingPixelParameters",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "PreviewIsAreaAverageOfFullEffectsAndExtendedCompositeDomainIsExplicit",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "CacheClearDoesNotDisposeInFlightBorrowAndAccountingReturns",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ContinuousComplexMaskWorkerPublishesBeforePenStops",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "CropPositionFitAndLegacyHaveOneIsotropicMapping",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "SignedExtendedIntermediatesRemainAndWrongDomainsAreRejected",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "DisabledEffectPreservesPv4ExactlyAndNoLegacyFilmIsMigrated",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ExposureIsLinearAndDisplayIsBoundedMonotonicWithSoftShoulder",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "SessionRejectsMixedLegacyStackAndMismatchedSelectedDefinition",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "UnsupportedFileAndRenderedJpegFailRatherThanLegacyFallback",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "MaskViewportCropCoordinatesAndZoomPanAreSourceNormalized",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ScenePreparedPreviewHasBoundedErrorAndHotCost",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ContextInvalidationRetiresOldJobBeforeStartingLatestContext",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "PinnedSceneExposureScalarReferencesMatchVersionedStage",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "AllEightProfilesRoundTripFrozenSnapshotsAndTileWithoutSeamsForExif1To8",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "RandomSubstreamsAndNormalizedGeometryAreDeterministicAndIndependentOfOutputSize",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "InvalidOriginalDeleteAndTwoMainsRejectWithoutChangingCatalog",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "AllExifOrientationsGeometryCropTurnAndRowsKeepSameSourcePosition",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "GlobalBudgetCombinesOwnersAndWorkAndReleasesReservations",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "BrushEraseFeatherDensityInverseAndFrozenVariantIsolation",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "TimelineBothPathsRequireFullDevelopmentAfterCompleteEjectionAndNeverExposeSkip",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "SyntheticNeutralExposureStaircaseAndBlackBoundaryAreMathematical",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "Tiff16BitPreservesDimensions",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ExplicitNamedRawMaskBlendTiffReadbackAndSourceIntegrity",
+      "outcome": "Passed",
+      "run": "raw-export\\home-raw-export.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ParallelRowBandsKeepSameExactPixelsAsSharedFullFrame",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "FastPreviewUsesSameDefinitionAndRecordsApproximationDifference",
+      "outcome": "Passed",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "ButtonsAndShortcutScopeAreRealAndNoImageIsDisabled",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "VariantComparisonDoesNotMutateMainAndLatestRequestWins",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "ExplicitMissingProfileAlphaPolicyAndMonitorExportSeparationAreTraced",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "CloseFlushPersistsImmediateEditsAndRejectsConcurrentFileChanges",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "NamesModesPreviewsAndHistoryUseActualProductState",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "ResourceFavoritesRecentsScopeToggleAndSharedLayerControlsPersist",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "OriginalAndMainVariantDeleteConfirmUndoAndIsolationPersist",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "LateExternalCompletionCannotOverwriteOwnedSourceAfterSwitch",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "MaskOpacityUndoLockVariantIsolationSaveReopenAndRealExport",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "JpegIccActualCodesProfileAndMonitorAssociationEvidence",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "StepLayerMovesSelectionOneLevelAndUndoRestoresOrder",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "BrushAndCompareShortcutHaveSingleNonConflictingMeaning",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "DecoderMovePreservesAllEightCompanyOrientations",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "ProfileContentIdentityAssignConvertAndCorruptionPolicies",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "DifferentProjectsAndStaleOwnedCardDoNotCrossSourcesOrExpandPackageBoundary",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "RawSharedStackMaskUndoCopySaveReopenAndTiffExportStayRaw",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "SceneMaskSnapshotLockUndoVariantReopenAndThumbnails",
+      "outcome": "Passed",
+      "run": "visual\\scene-visual-expanded.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "LegacySimpleControlsCannotBypassReferenceLocksOrOriginalReadOnly",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "RepeatedSceneGeometryUndoSwitchAndCloseMemoryTrendIsBounded",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "R53VisibilityOpacityAreVersionedUndoableAndPersisted",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "DipBreakpointsAndProfessionalNodeFilmstripOrderAreRealLayout",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "OwnedReferenceSendSaveReopenCacheDeletionMissingChangedAndRepeatedSend",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "ColorStateAndProfilesRoundtripWithoutMigratingLegacyOrChangingAssignedCodes",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "AssociatedProfileCorruptionAndMissingAreExplicitAndDoNotTouchPixels",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "AddMoveScaleDuplicateAndRemoveOnlyChangeObjects",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "ThumbnailOutputsAreStackPrefixesNotSingleNodeAndRemovedNodeCannotPublish",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "RasterGeometryV2LosslessEncodingAgreesForAllCropTransformStates",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "NoWindowDoesNotPretendMonitorCalibrationOrConversion",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "ReopenedOriginalRemainsReadOnlyAndF2ChildBecomesEditable",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "CreateDistinctNativeSyntheticPackages",
+      "outcome": "NotExecuted",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "LockedNodesBlockParametersNameOrderDeleteButKeepVisibilityUndo",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "VisualScopesCropContextAndNodeThumbnailsInstantiate",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "RasterCropStraightenUndoReopenExportAndPrefixPixels",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "ExplicitMonitorTransformChangesOnlyPresentationAndNeverExportRecipe",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "MainVariantOutputAndDebouncedExistingSessionSaveUseSharedPipeline",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "HomeRealRawSceneEvDragWhiteBalanceAndReleaseLifecycle",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "SharedResponseNamesDoNotInventPixelDifferences",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "NavigationComparisonAndResetNeverMutateProcessingOrExport",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "CmsEngineRetiresOnlyAfterInFlightTransformLease",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "InstantPaperGalleryCanUseDecodedRawWithoutChangingSceneOrVariants",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "NewBlendModePreviewMaskSaveReopenLosslessOutputAgrees",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "SampleCancelHistorySessionReopenAndExportUseExistingPixelContract",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "EscapeSourceChangeAndUnloadReleaseTransientState",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "SamePhotoSimpleProfessionalSaveReopenAndExportShareDefinition",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "IndependentReferenceSamplesAndActualCameraDerivativeCmsClosure",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "FullShellKeepsPrimaryNavigationAndContentTemplates",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "AtomicDocumentRoundTripPreservesReferences",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "WideInspectorReserves420DipAndReleasesItsOwnerSubscription",
+      "outcome": "Passed",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    },
+    {
+      "suite": "core",
+      "name": "OwnedCopiesKeepOrderAndIdentityAcrossReferenceMoodboardAndLighting",
+      "outcome": "Passed",
+      "run": "planning15\\planning15-preservation.trx"
+    },
+    {
+      "suite": "core",
+      "name": "SummaryUsesShotOrderAndCurrentSectionReferenceClassification",
+      "outcome": "Passed",
+      "run": "planning15\\planning15-preservation.trx"
+    },
+    {
+      "suite": "core",
+      "name": "UnownedExternalAndUnmatchedLibraryReferencesNeverBecomeOwnedImages",
+      "outcome": "Passed",
+      "run": "planning15\\planning15-preservation.trx"
+    },
+    {
+      "suite": "core",
+      "name": "FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput",
+      "outcome": "Passed",
+      "run": "planning15\\planning15-preservation.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ForeignProjectDocumentOrShotFailsClosed",
+      "outcome": "Passed",
+      "run": "planning15\\planning15-preservation.trx"
+    },
+    {
+      "suite": "core",
+      "name": "ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles",
+      "outcome": "Passed",
+      "run": "planning15\\planning15-preservation.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "IndependentProcessCreatesOrReopensFrozenMaskAndExports",
+      "outcome": "Passed",
+      "run": "process-persistence-final\\process-reopen.trx"
+    }
+  ]
+}

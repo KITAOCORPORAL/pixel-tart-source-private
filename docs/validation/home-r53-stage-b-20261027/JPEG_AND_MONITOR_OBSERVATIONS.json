@@ -1,0 +1,29 @@
+{
+  "check": {
+    "state": "JPEG_BLOCKED",
+    "reason": "wide-gamut JPEG readback mean5.4156 max49 beyond prior budget; no silent output"
+  },
+  "observations": [
+    {
+      "Device": "\\\\.\\DISPLAY1",
+      "State": "AssociatedRgbProfileHeaderVerified",
+      "ProfilePath": "C:\\WINDOWS\\system32\\spool\\drivers\\color\\ASUS PA279CV-12026625.icm",
+      "ProfileSha256": "D1CA53DF625D4BB2EA73A6B1D541819DFBE1F9474DB621BF8C8FE331EC96A0D0",
+      "NativeError": 0,
+      "PreviewConversion": "NotAppliedByColorStudio",
+      "Authority": "GetICMProfileW display DC association; not calibration or WPF compositor verification"
+    },
+    {
+      "Device": "\\\\.\\DISPLAY2",
+      "State": "AssociatedRgbProfileHeaderVerified",
+      "ProfilePath": "C:\\WINDOWS\\system32\\spool\\drivers\\color\\Generic PnP Monitor-22026625.icm",
+      "ProfileSha256": "691FDDD2773EEF6F13032B0D34CA89B76E472676E494D06DA95D3B75BE806E57",
+      "NativeError": 0,
+      "PreviewConversion": "NotAppliedByColorStudio",
+      "Authority": "GetICMProfileW display DC association; not calibration or WPF compositor verification"
+    }
+  ],
+  "physicalScreenAccuracy": false,
+  "actualWindowMovementTest": "NOT_RUN",
+  "systemAcmHdr": "UNVERIFIED_EXPLICIT_PATH_DEFAULT_OFF"
+}

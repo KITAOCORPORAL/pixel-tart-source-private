@@ -1,5 +1,15 @@
 # 光镜开发交接入口
 
+## 家庭 R5.3 阶段B＋PhotoCraft 首个CMS闭环（2026-10-27 北京时间 UTC+08:00）
+- 家庭独立分支 home/r53-stage-b-20261027，树 N:/pixart/guangjing-r53-stage-b-20261027；从公司190d1304接续，未从home stage-a重做，旧树未提交资料保持。
+- 产品场景交互9afc5899＋CMS最终b6eaa32e08bb37d79dcdfde7db17613a1558f5c6。权威docs/validation/home-r53-stage-b-20261027/FINAL_REPORT.md、TEST_SUMMARY.json、NONPASS.json；完整家庭包 N:/pixart/Guangjing-R53-Home-20261027/Guangjing-R53-Home-CMS-StageB-Diagnostic-win-x64.zip，CMD/BAT/PS1启动。非公司E盘ZIP、完整所有模块/策划15板块，教程不恢复。
+- SceneExposureV1已有独立mask快照UI/清除/锁定/undo/reopen；场景EV曝光前采样复用，Canon同机旧1.59–1.68s→热82–88ms，首114ms/13有效中间帧/含drag精细3.36s，mean.641/P951.730/max12.656，非鼠标/色准。高频反例失败保留并精细回退，GeometryV2也回退；不能宣传所有图90ms。
+- cache lease/epoch和HQ owned-result修复，8循环账本0。统一低分辨率stack prefix输入/输出，非RAW final重复效果。普通栅格新显式GeometryV2 crop/straighten/rotate/flip，旧V1不变；reference/spatial未适配栈拒绝不丢层。
+- PhotoCraft固定7ac7b8只架构参考；复用已随包LCMS2.12做显式RGB matrix/shaperICC变体，输入/工作sRGB/显示/输出分离，TIFF16/PNG16实际P3/AdobeCompat/ProPhotoCompat转换与嵌入读回；ProPhoto编辑域没做。显示CPU SDR默认off，Windows关联/手动fallback，物理ACM/HDR/多屏未验，不能双转。JPEG门槛失败已阻断，出版resize/水印/即时CurrentEdits对新状态拒绝避免误标。
+- V2仅Darken/Lighten菜单放行；柔光/Overlay/Color/Luminosity原型未完整准入。既有PV4/5/6默认不暗迁，researchICC/PV7保持off。继续B/C/D/E，不因物理鼠标/授权资源让无依赖开发停住。
+- 家庭权威整合Core55PASS/4NOT_RUN、WPF52PASS/1NOT_RUN、0FAIL；去重补充Core62PASS/3NOT_RUN、WPF53PASS/1NOT_RUN。独立create/reopen均PASS，现场启动只是进程验证。全部未验真实原因保留，不发行、CalibrationEligible=false。推送读回见PUSH_READBACK.json，普通push，不动main。
+
+
 ## 暗室交互与阶段B启动（2026-10-27 America/New_York）
 - 同分支接续bc80e556；当前权威docs/validation/r53-interaction-stage-b-20261027/FINAL_REPORT.md、TEST_SUMMARY.json、PERFORMANCE.json。产品4b5f73b726c29b2117e0119333b44f0ef20c0beb，测试追加12eee94e；完整包E:/Kitao-Deliveries/r53-interaction-stage-b-20261027/Guangjing-R53-Interaction-StageB-Diagnostic-win-x64.zip。本轮定向Core17PASS、WPF56PASS/1NOT_RUN、0FAIL，原4历史授权缺口保留。不重做RAW接入/教程退役/设计包研究。
 - 覆盖1在途+1最新待处理、同目标允许单调中间帧，换图/变体/节点/关闭严格取消；不先清空闪烁；max768，行采样最多4worker。持续20k点合成输入已测首帧/中间数/最终正确，非鼠标验收。

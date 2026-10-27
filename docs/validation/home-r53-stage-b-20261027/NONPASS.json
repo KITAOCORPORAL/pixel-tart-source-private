@@ -1,0 +1,103 @@
+{
+  "latestSelectedNotRun": [
+    {
+      "suite": "core",
+      "name": "TwentyFourMpMultilayerLongStrokeActualRenderAndExportMeasurement",
+      "outcome": "NotExecuted",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "TwoPinnedNativeReferenceKernelsRecordNumericalMatrix",
+      "outcome": "NotExecuted",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "core",
+      "name": "LargeSourceLongStrokeOverlaySamplingMeasurement",
+      "outcome": "NotExecuted",
+      "run": "authoritative-core\\authoritative-core.trx"
+    },
+    {
+      "suite": "wpf",
+      "name": "CreateDistinctNativeSyntheticPackages",
+      "outcome": "NotExecuted",
+      "run": "authoritative-wpf\\authoritative-wpf.trx"
+    }
+  ],
+  "rawNonpassMessages": [
+    {
+      "suite": "core",
+      "name": "TwentyFourMpMultilayerLongStrokeActualRenderAndExportMeasurement",
+      "outcome": "NotExecuted",
+      "run": "authoritative-core\\authoritative-core.trx",
+      "message": "Assert.Inconclusive 失败。Explicit large performance output required at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.R53LargeBrushRenderTests.TwentyFourMpMultilayerLongStrokeActualRenderAndExportMeasurement()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+    },
+    {
+      "suite": "core",
+      "name": "TwoPinnedNativeReferenceKernelsRecordNumericalMatrix",
+      "outcome": "NotExecuted",
+      "run": "authoritative-core\\authoritative-core.trx",
+      "message": "Assert.Inconclusive 失败。Pinned reference execution matrix is explicitly supplied, never synthesized as a pass. at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.R53ReferenceComparisonTests.TwoPinnedNativeReferenceKernelsRecordNumericalMatrix()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+    },
+    {
+      "suite": "core",
+      "name": "LargeSourceLongStrokeOverlaySamplingMeasurement",
+      "outcome": "NotExecuted",
+      "run": "authoritative-core\\authoritative-core.trx",
+      "message": "Assert.Inconclusive 失败。Explicit performance output required at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.R53BrushPerformanceTests.LargeSourceLongStrokeOverlaySamplingMeasurement()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+    },
+    {
+      "suite": "core",
+      "name": "ExplicitNamedRawMaskBlendTiffReadbackAndSourceIntegrity",
+      "outcome": "NotExecuted",
+      "run": "authoritative-core\\authoritative-core.trx",
+      "message": "Assert.Inconclusive 失败。Existing authorized named RAW is opt-in; no private directory traversal. at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.Tests.R53RealRawCompositeTests.ExplicitNamedRawMaskBlendTiffReadbackAndSourceIntegrity()\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+    },
+    {
+      "suite": "wpf",
+      "name": "CreateDistinctNativeSyntheticPackages",
+      "outcome": "NotExecuted",
+      "run": "authoritative-wpf\\authoritative-wpf.trx",
+      "message": "Assert.Inconclusive 失败。Explicit isolated synthetic output required at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27\r\n   at RAWSelectionAssistant.WpfTests.PlanningOwnedCanvasTests.<>c.<<CreateDistinctNativeSyntheticPackages>b__7_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+    }
+  ],
+  "inheritedCompanyNotReexecutedHere": {
+    "inheritedUnchanged": [
+      {
+        "name": "RAWSelectionAssistant.WpfTests.BatchTenLegacyRawProductTests.AuthorizedCompanyRawColdPathsAndWorkspacePressure",
+        "outcome": "NOT_RUN_THIS_BATCH",
+        "reason": "Assert.Inconclusive 失败。Explicit authorized company fixtures required."
+      },
+      {
+        "name": "RAWSelectionAssistant.WpfTests.ColorStudioToolExportParityTests.AuthorizedRealJpegSamplesRecordActualEncodedFullStackPixels",
+        "outcome": "NOT_RUN_THIS_BATCH",
+        "reason": "Assert.Inconclusive 失败。Authorized real JPEG corpus requires explicit opt-in."
+      },
+      {
+        "name": "RAWSelectionAssistant.WpfTests.PhotoGradePageV1Tests.AuthorizedPhotoV3PagePixelHistoryReopenAndThreeFormatParity",
+        "outcome": "NOT_RUN_THIS_BATCH",
+        "reason": "Assert.Inconclusive 失败。Explicit authorized frozen-photo manifest is required; no directory scan."
+      },
+      {
+        "name": "RAWSelectionAssistant.WpfTests.ProfessionalRawWorkspaceTests.AuthorizedRealFilesUseProductVersionSaveReopenPreviewAndTiffExport",
+        "outcome": "NOT_RUN_THIS_BATCH",
+        "reason": "Assert.Inconclusive 失败。Set authorized batch06 corpus and evidence directory; not a synthetic test."
+      }
+    ],
+    "scope": "Four unrelated historical authorized-photo/whole-corpus tasks retained, not rerun or silently converted to passes.",
+    "physicalPointerDpi": "NOT_RUN under inherited tool policy",
+    "pixelAdmission": "Diagnostic only; sceneExposure scalar-stage references not full camera/profile validation"
+  },
+  "physicalMouseDpi": "NOT_RUN: active tool policy prohibits ComputerUse/CDP; offscreen/testhost/launch not acceptance",
+  "displayMonitor": "Windows associations read on multiple monitors; actual moving physical window/ACM/HDR/double-transform/calibration NOT_VERIFIED; explicit SDR default-off",
+  "scientific": "CalibrationEligible=false",
+  "unreleased": [
+    "ColorV1 JPEG blocked after MAE5.4156/RMSE7.8625/max49",
+    "LUT ICC, general intents/BPC, CMYK",
+    "ProPhoto editing work space (output only)",
+    "SoftLight/Overlay/Color/Luminosity double-mature implementation same-domain admission",
+    "ColorState publishing watermark/resize and instant CurrentEdits",
+    "all historical raster reference/spatial stacks crop"
+  ]
+}

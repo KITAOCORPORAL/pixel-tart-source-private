@@ -1,0 +1,40 @@
+{
+  "baselineEvTimes": [
+    1684.2197,
+    1601.1453,
+    1590.9673
+  ],
+  "hotEvTimes": [
+    87.6098,
+    87.9234,
+    81.7447
+  ],
+  "coldPrepareMs": 26.5362,
+  "mean": 0.6409163475036621,
+  "p95": 1.73019540309906,
+  "max": 12.656391143798828,
+  "firstFeedbackMs": 114.3601,
+  "continuousEffectiveUpdates": 13,
+  "settledIncludingDragMs": 3357.8112,
+  "frameTimes": [
+    114.3601,
+    208.4555,
+    296.5744,
+    384.6762,
+    474.6139,
+    557.0333,
+    646.5247,
+    735.3046,
+    826.6056,
+    914.2243,
+    1001.3001,
+    1089.2025,
+    1177.235
+  ],
+  "ledgerBefore": 0,
+  "ledgerAfter": 0,
+  "peakWorkingSet": 2493296640,
+  "notMouseOrDpi": true,
+  "CalibrationEligible": false,
+  "sceneVsDisplayWhiteBalance": "LibRaw decode CameraGains applied once versus encoded sRGB local relative adaptation"
+}

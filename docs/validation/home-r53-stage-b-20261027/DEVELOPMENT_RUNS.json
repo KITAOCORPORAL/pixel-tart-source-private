@@ -1,0 +1,629 @@
+[
+  {
+    "file": "authoritative-core\\authoritative-core.trx",
+    "sha256": "1fa384590628e71abb74b8c947bb733fafa8bf683f78e27e38c6d1e3b6b61aaf",
+    "passed": 55,
+    "failed": 0,
+    "notRun": 4,
+    "failures": []
+  },
+  {
+    "file": "authoritative-wpf\\authoritative-wpf.trx",
+    "sha256": "cd29b42ed285df5790e9ad4a4605d9bc621c06f99908bdcb1e4f915010ce44ac",
+    "passed": 52,
+    "failed": 0,
+    "notRun": 1,
+    "failures": []
+  },
+  {
+    "file": "baseline\\home-baseline-core.trx",
+    "sha256": "51f28dfb16d499697d9f3b487ee9d4f7dadcdb2995ac88104bb084d5677b304d",
+    "passed": 14,
+    "failed": 0,
+    "notRun": 1,
+    "failures": []
+  },
+  {
+    "file": "baseline\\scene-baseline.trx",
+    "sha256": "7c40861f1d627600283609547f5ec921368a2b17951481dc0f4148426e4efbed",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "blend-tests\\blend-v2.trx",
+    "sha256": "c44313ca52ef18f02b069b4a6131a64861f70248aebf063b2c5b7bb46f85651a",
+    "passed": 2,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "cms-admission-tests\\cms-admission.trx",
+    "sha256": "e9dd79ff1715462a26705575f5f1a0ff5ee4e9c197dbd598d3e087c1a0a897fe",
+    "passed": 8,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "cms-precommit-tests\\cms-precommit.trx",
+    "sha256": "fada603bb50dd9df007e775c8990261d031488da4af30c406a35bf94cb90f4cb",
+    "passed": 11,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "cms-product-tests\\cms-product.trx",
+    "sha256": "bcd25db2e0cd2f25ddcdae902b4fd81033d9e64b84b010ff7b1525c0428abc4f",
+    "passed": 9,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "cms-release-final-tests\\cms-release-final.trx",
+    "sha256": "e0d911e4f0d10a3ef35d7fb742a8d99fee4a9cf5a03d3b8610015a14dcf2f9a2",
+    "passed": 7,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "cms-release-tests\\cms-jpeg-r2.trx",
+    "sha256": "37bb4ac06682c2e306669b05c88767975f301a2f0e5cd1f578f95261017a27be",
+    "passed": 0,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "JpegIccActualCodesProfileAndMonitorAssociationEvidence",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DocumentColorTests。JpegIccActualCodesProfileAndMonitorAssociationEvidence 引发了异常: \r\nSystem.IO.InvalidDataException: CMS encoded pixels violate frozen transform: mean=5.415608723958333, rmse=7.8625325002640425, max=49 at RAWSelectionAssistant.Services.DocumentColorWorkflowV1.Inspect(String file, ProfessionalRawMaster master, ProfessionalRawDefinition definition, StudioExportFormat format, CancellationToken token)\r\n   at RAWSelectionAssistant.Services.DocumentColorWorkflowV1.WriteAsync(ProfessionalRawMaster master, ProfessionalRawDefinition definition, String destination, StudioExportFormat format, CancellationToken token)\r\n   at RAWSelectionAssistant.WpfTests.R53DocumentColorTests.<>c.<<JpegIccActualCodesProfileAndMonitorAssociationEvidence>b__6_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "cms-release-tests\\cms-release.trx",
+    "sha256": "c437be8af6262ce75d2c379477e5a31bfdd31bad4b6b37d9ce6a8345faac463e",
+    "passed": 6,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "JpegIccActualCodesProfileAndMonitorAssociationEvidence",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DocumentColorTests。JpegIccActualCodesProfileAndMonitorAssociationEvidence 引发了异常: \r\nSystem.IO.InvalidDataException: CMS encoded pixels violate frozen transform at RAWSelectionAssistant.Services.DocumentColorWorkflowV1.Inspect(String file, ProfessionalRawMaster master, ProfessionalRawDefinition definition, StudioExportFormat format, CancellationToken token)\r\n   at RAWSelectionAssistant.Services.DocumentColorWorkflowV1.WriteAsync(ProfessionalRawMaster master, ProfessionalRawDefinition definition, String destination, StudioExportFormat format, CancellationToken token)\r\n   at RAWSelectionAssistant.WpfTests.R53DocumentColorTests.<>c.<<JpegIccActualCodesProfileAndMonitorAssociationEvidence>b__6_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "cms-sealed-tests\\cms-sealed.trx",
+    "sha256": "097bbd96f73b567f7c71e9351ac1b0c07d2b962d8da8b2d3b888db042f5c1257",
+    "passed": 8,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "cms-tests\\cms-blend-display.trx",
+    "sha256": "0223010363204547ee023fc2caad4840297e629e8af3cdcd50666fb67c754228",
+    "passed": 4,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "cms-tests\\cms-closure-r2.trx",
+    "sha256": "45c0d998ee5357ef78136bd952d00bbf5328dfbd96c342a2198f83bb6717167e",
+    "passed": 0,
+    "failed": 2,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DocumentColorTests。RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback 引发了异常: \r\nSystem.IO.FileNotFoundException: Could not find file 'N:\\pixart\\guangjing-r53-stage-b-20261027\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\lcms2.dll'. at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)\r\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\r\n   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\r\n   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\r\n   at System.IO.File.OpenRead(String path)\r\n   at RAWSelectionAssistant.Core.Services.Color.ControlledIcc.LcmsRgbEngine..ctor(String file)\r\n   at RAWSelectionAssistant.WpfTests.R53DocumentColorTests.<>c.<<RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      },
+      {
+        "name": "ProfileContentIdentityAssignConvertAndCorruptionPolicies",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DocumentColorTests。ProfileContentIdentityAssignConvertAndCorruptionPolicies 引发了异常: \r\nSystem.IO.FileNotFoundException: Could not find file 'N:\\pixart\\guangjing-r53-stage-b-20261027\\tests\\RAWSelectionAssistant.WpfTests\\bin\\Release\\net10.0-windows10.0.19041.0\\lcms2.dll'. at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)\r\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\r\n   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\r\n   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\r\n   at System.IO.File.OpenRead(String path)\r\n   at RAWSelectionAssistant.Core.Services.Color.ControlledIcc.LcmsRgbEngine..ctor(String file)\r\n   at RAWSelectionAssistant.WpfTests.R53DocumentColorTests.ProfileContentIdentityAssignConvertAndCorruptionPolicies()\r\n   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)\r\n   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)"
+      }
+    ]
+  },
+  {
+    "file": "cms-tests\\cms-closure-r3.trx",
+    "sha256": "bb61ee35e14c85a0a6a3cd76f84ae7aeb61865a9490e0d4e3c4838881e3b3574",
+    "passed": 1,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DocumentColorTests。RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback 引发了异常: \r\nSystem.NotSupportedException: 不支持像素格式。 ---> System.Runtime.InteropServices.COMException: 位图像素格式不受支持。 (0x88982F80) at System.Windows.Media.Imaging.ColorConvertedBitmap.FinalizeCreation()\r\n   at RAWSelectionAssistant.WpfTests.R53DocumentColorTests.<>c.<<RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "cms-tests\\cms-closure-r4.trx",
+    "sha256": "f0a46c03ef08993f94f9f98fdbbe2f100f5b2e3210f6652f331fec57215c63d5",
+    "passed": 1,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback",
+        "message": "Assert.IsTrue 失败。‘condition’表达式:‘differences.Max()<3’。 Windows WIC independent RGB matrix-shaper reference at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153\r\n   at RAWSelectionAssistant.WpfTests.R53DocumentColorTests.<>c.<<RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "cms-tests\\cms-closure-r5.trx",
+    "sha256": "9390ac629686e6b5e8bcc239432b805f400e4f1c3288841f730c0bf49becfeca",
+    "passed": 1,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback",
+        "message": "Assert.IsTrue 失败。‘condition’表达式:‘differences.Max()<3’。 Windows WIC independent RGB matrix-shaper reference at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153\r\n   at RAWSelectionAssistant.WpfTests.R53DocumentColorTests.<>c.<<RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "cms-tests\\cms-closure-r6.trx",
+    "sha256": "974b1ba772f771322a92312a564daff685542fdf25aea3557cf6cf4e6b4b6549",
+    "passed": 1,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DocumentColorTests。RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback 引发了异常: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object. at RAWSelectionAssistant.WpfTests.R53DocumentColorTests.<>c.<<RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "cms-tests\\cms-closure-r7.trx",
+    "sha256": "a572e37edf2a79f3262e70d906bc8e7e188bf168380fffae46e63546674ad524",
+    "passed": 0,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback",
+        "message": "Assert.IsNotNull 失败。‘value’表达式:‘vm.ActiveTarget’。 loaded CMS fixture: 照片无法读取；现有色彩方案保持不变。请重试。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsNotNullFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 202\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsNotNull(Object value, String message, String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 194\r\n   at RAWSelectionAssistant.WpfTests.R53DocumentColorTests.<>c.<<RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "cms-tests\\cms-closure-r8.trx",
+    "sha256": "a9fc3a43532d8faebb76aecdc28a1a8f295b783945f8e560292be296090e82a6",
+    "passed": 2,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "cms-tests\\cms-display-policy-r2.trx",
+    "sha256": "fe39917945b72df84d5bb0bc0837e3d10b41517ddf9aa1778e9c469e92294342",
+    "passed": 6,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "cms-tests\\cms-display.trx",
+    "sha256": "2b0526c4f10f50187b7af7a89acee611724a71e2c9eeb64b66bdd13da48b93b2",
+    "passed": 2,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DocumentColorTests。RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback 引发了异常: \r\nSystem.InvalidOperationException: 此工作区未读取该工作文件；请先打开或另存新文件，未覆盖。 at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.SaveSessionCoreAsync(String path, CancellationToken token)\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.SaveSessionAsync(String path, CancellationToken token)\r\n   at RAWSelectionAssistant.WpfTests.R53DocumentColorTests.<>c.<<RgbCmsEmbeddedImportEditDisplayOutputProfileAndIndependentWicReadback>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "cms-tests\\cms-first-complete.trx",
+    "sha256": "bfc1c30e45090b53fdc0f15aeb65fd1bb3d71a59d3b6894043cc4ab58a1c198b",
+    "passed": 3,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "cms-tests\\cms-verified-r2.trx",
+    "sha256": "3482bd5f6eaef6819c913f6843b8f22cdf96bb6525afc8d0212aa339f5121081",
+    "passed": 5,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "cms-ui-export-tests\\cms-ui-export.trx",
+    "sha256": "86a48c98ce03a823bbb5c617546cd1d2430323c09075f7a588c4d107770f9807",
+    "passed": 7,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "encoding\\geometry-encoding.trx",
+    "sha256": "bc079b1e4667250552c3a35ac9f0408d24a713857713a13d2bd4ee44888be703",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "final-wpf\\home-final-wpf.trx",
+    "sha256": "ed7b7e40ec215a4567b75de72d74b6cd84d2f39c7d4adab497ec5f17740d92a9",
+    "passed": 41,
+    "failed": 0,
+    "notRun": 1,
+    "failures": []
+  },
+  {
+    "file": "home-cms-final-core\\home-cms-final-core.trx",
+    "sha256": "ae1297edfd54b60dd900c9f47fe63511d4c39e961a23985d74322c5f503cd26f",
+    "passed": 55,
+    "failed": 0,
+    "notRun": 4,
+    "failures": []
+  },
+  {
+    "file": "home-cms-final-wpf\\home-cms-final-wpf.trx",
+    "sha256": "a39820c48796f09a41895852e7945484df2a73be9165d2d95d0d9002cd119807",
+    "passed": 49,
+    "failed": 1,
+    "notRun": 1,
+    "failures": [
+      {
+        "name": "IndependentReferenceSamplesAndActualCameraDerivativeCmsClosure",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53DocumentColorTests。IndependentReferenceSamplesAndActualCameraDerivativeCmsClosure 引发了异常: \r\nSystem.IO.IOException: The process cannot access the file 'N:\\pixart\\Guangjing-R53-Home-20261027\\home-cms-final\\sRGB.icc' because it is being used by another process. at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)\r\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\r\n   at System.IO.File.OpenHandle(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)\r\n   at System.IO.File.WriteAllBytes(String path, ReadOnlySpan`1 bytes)\r\n   at System.IO.File.WriteAllBytes(String path, Byte[] bytes)\r\n   at RAWSelectionAssistant.WpfTests.R53DocumentColorTests.<>c.<<IndependentReferenceSamplesAndActualCameraDerivativeCmsClosure>b__4_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "home-cms-sealed-wpf\\home-cms-sealed-wpf.trx",
+    "sha256": "a02483c789340749d2918fc8b8dbea989441c730f18638ae308fb7cf177f38b9",
+    "passed": 52,
+    "failed": 0,
+    "notRun": 1,
+    "failures": []
+  },
+  {
+    "file": "instant\\instant-gallery-r2.trx",
+    "sha256": "64fa690c55dfaeff8256ca453c4cdef40884a65a30e07380878a33f125fd967f",
+    "passed": 3,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "instant\\instant-gallery.trx",
+    "sha256": "8790c498efcd146e80e28db20b9dff83e459fa0ef27930b2ec3130dbad2b064f",
+    "passed": 2,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "NamesModesPreviewsAndHistoryUseActualProductState",
+        "message": "StringAssert.Contains 失败。字符串“当前历史效果版本；此配方不支持通用局部层。”不包含字符串“撤销”。。 at Microsoft.VisualStudio.TestTools.UnitTesting.StringAssert.Contains(String value, String substring, StringComparison comparisonType, String message) in /_/src/TestFramework/TestFramework/Assertions/StringAssert.cs:line 125\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.StringAssert.Contains(String value, String substring) in /_/src/TestFramework/TestFramework/Assertions/StringAssert.cs:line 48\r\n   at RAWSelectionAssistant.WpfTests.PhotographerTrialPageTests.<>c.<<NamesModesPreviewsAndHistoryUseActualProductState>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "lifecycle\\cache-lifecycle.trx",
+    "sha256": "4275c15e59c66aea1692c137b8fe2a5d63a637617e83ece069ebf8a23f113bbb",
+    "passed": 2,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "mask-cache\\mask-cache-final.trx",
+    "sha256": "cc3204308de026eaa2368cdec4fc60c3286f3810d8bf9f1b3a5b921afc9708b3",
+    "passed": 3,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "planning15\\planning15-preservation.trx",
+    "sha256": "e8cf1384722a2ac8309dee459f7e9e315f47351f3bd391d682bf387ccde4158a",
+    "passed": 6,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "process-persistence\\process-create.trx",
+    "sha256": "d47ca2c54ed155a5ea0d1e9ec5d29ae00d70402590bc9bef6b590e322cfa541d",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "process-persistence\\process-reopen.trx",
+    "sha256": "53cb4829a2923bca4a454656688cc69c78aa97b94a26ae36ca59dc1fbcce8fed",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "process-persistence-final\\process-create.trx",
+    "sha256": "07de53d35fc1d06949a6f321c4a72afac6bb2ec1e67e35e4582b3fb30ad7e830",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "process-persistence-final\\process-reopen.trx",
+    "sha256": "a44153fe8e5c97ab841f4b5f6a0618c62d58a83a05e9a6a2d257169d031f6780",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "raw-export\\home-raw-export.trx",
+    "sha256": "25502bfe2a77e12d55ffb373562dad87f4b8734aacab2ca837a55d68ec328167",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "real-scene\\home-real-scene.trx",
+    "sha256": "8e48892faadde6a6e03f2bfcca576529437dfc7535b08c90aeb12d6be33fe8d1",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "regression-core\\home-core-final.trx",
+    "sha256": "69a84ce20e573921cfe7c0b6600bd7d2b5e3e589666918645c1b8ba5f519bfef",
+    "passed": 48,
+    "failed": 0,
+    "notRun": 4,
+    "failures": []
+  },
+  {
+    "file": "regression-wpf\\home-wpf-final.trx",
+    "sha256": "ead332fe02c1d07febc014639c2a2acedf6a8a3a2297d4b99fe78bfdd55e2b8a",
+    "passed": 35,
+    "failed": 1,
+    "notRun": 4,
+    "failures": [
+      {
+        "name": "RawSharedStackMaskUndoCopySaveReopenAndTiffExportStayRaw",
+        "message": "CollectionAssert.AreEqual 失败。RAW variant switch pixels。索引 0 处的元素不匹配。\r\n预计值: 58\r\n实际值: 66 at Microsoft.VisualStudio.TestTools.UnitTesting.CollectionAssert.AreEqual(ICollection expected, ICollection actual, String message) in /_/src/TestFramework/TestFramework/Assertions/CollectionAssert.cs:line 819\r\n   at RAWSelectionAssistant.WpfTests.R53RawLocalWorkspaceTests.<>c.<<RawSharedStackMaskUndoCopySaveReopenAndTiffExportStayRaw>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "regression-wpf\\raw-parity-fixed.trx",
+    "sha256": "b68a239f5700769868f272de1ed2c2259fbbbfa0103b0eb475487e866609bfd8",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "regression-wpf\\raw-parity-rerun.trx",
+    "sha256": "a8b9452735447e03833ba6662e2945216a679eef049a393c4e9a0be9accade0c",
+    "passed": 0,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RawSharedStackMaskUndoCopySaveReopenAndTiffExportStayRaw",
+        "message": "CollectionAssert.AreEqual 失败。RAW variant switch pixels。索引 0 处的元素不匹配。\r\n预计值: 58\r\n实际值: 66 at Microsoft.VisualStudio.TestTools.UnitTesting.CollectionAssert.AreEqual(ICollection expected, ICollection actual, String message) in /_/src/TestFramework/TestFramework/Assertions/CollectionAssert.cs:line 819\r\n   at RAWSelectionAssistant.WpfTests.R53RawLocalWorkspaceTests.<>c.<<RawSharedStackMaskUndoCopySaveReopenAndTiffExportStayRaw>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "scene\\geometry-reference.trx",
+    "sha256": "6b70667c619abee569f32303af8225eda7d29861bbfdd597eaf4fc2023d679aa",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "scene\\home-new-r9.trx",
+    "sha256": "0eeea30d19542b9d9adecc366f105cb370f0428830176bcc7bb82d4428ac567b",
+    "passed": 3,
+    "failed": 0,
+    "notRun": 1,
+    "failures": []
+  },
+  {
+    "file": "scene\\home-raster-r5.trx",
+    "sha256": "56560d0376302bb8b4019f550aec7af07f594ae6de362741338681b4c9e7e4e3",
+    "passed": 0,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RasterCropStraightenUndoReopenExportAndPrefixPixels",
+        "message": "Assert.IsNotNull 失败。‘value’表达式:‘vm.LayerThumbnailContext’。 thumbnail context missing at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsNotNullFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 202\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsNotNull(Object value, String message, String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 194\r\n   at RAWSelectionAssistant.WpfTests.R53HomeSceneWorkspaceTests.<>c.<<RasterCropStraightenUndoReopenExportAndPrefixPixels>b__1_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "scene\\home-raster-r6.trx",
+    "sha256": "8dca2a0054d903023224216e4699d5a96e3fdf05758b84aecc5b40d2630de633",
+    "passed": 0,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RasterCropStraightenUndoReopenExportAndPrefixPixels",
+        "message": "Assert.IsNotNull 失败。‘value’表达式:‘vm.LayerThumbnailContext’。 thumbnail context missing: System.NotSupportedException: RAW local extension v1 requires linear PV4 base without an instant-paper recipe\r\n   at RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawDefinition.Validate()\r\n   at RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawPipeline.ValidateMaster(ProfessionalRawMaster master, ProfessionalRawDefinition definition)\r\n   at RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawLocalRenderer.Prepared..ctor(ProfessionalRawMaster master, ProfessionalRawDefinition definition, CancellationToken token)\r\n   at RAWSelectionAssistant.Core.Services.Projects.ProfessionalRawLocalRenderer.Fast(ProfessionalRawMaster m, ProfessionalRawDefinition d, HighBitDepthImageBuffer basis, CancellationToken token)\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.BuildLayerThumbnails(ThumbnailSnapshot s, CancellationToken token)\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.<>c__DisplayClass900_0.<QueueLayerThumbnails>b__3()\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n--- End of stack trace from previous location ---\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)\r\n--- End of stack trace from previous location ---\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.<>c.<<QueueLayerThumbnails>b__900_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at RAWSelectionAssistant.Core.Services.Projects.LatestPreviewQueue`2.Run() at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsNotNullFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 202\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsNotNull(Object value, String message, String valueExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsNull.cs:line 194\r\n   at RAWSelectionAssistant.WpfTests.R53HomeSceneWorkspaceTests.<>c.<<RasterCropS"
+      }
+    ]
+  },
+  {
+    "file": "scene\\home-workspace-r3.trx",
+    "sha256": "5c65f132f69bb092bb70d2f10efdd5fcfbc2abcf666759a42df37babe514cd84",
+    "passed": 1,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RasterCropStraightenUndoReopenExportAndPrefixPixels",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53HomeSceneWorkspaceTests。RasterCropStraightenUndoReopenExportAndPrefixPixels 引发了异常: \r\nSystem.Collections.Generic.KeyNotFoundException: The given key 'cdcdc7c7-712d-4a07-91d7-40d3ebeb0823' was not present in the dictionary. at System.Collections.Generic.Dictionary`2.get_Item(TKey key)\r\n   at RAWSelectionAssistant.WpfTests.R53HomeSceneWorkspaceTests.<>c.<<RasterCropStraightenUndoReopenExportAndPrefixPixels>b__1_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "scene\\home-workspace-r4.trx",
+    "sha256": "055e2a64bca9cf3e86890a172689b93963439a60ee33cf8242783f3035c99590",
+    "passed": 1,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RasterCropStraightenUndoReopenExportAndPrefixPixels",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53HomeSceneWorkspaceTests。RasterCropStraightenUndoReopenExportAndPrefixPixels 引发了异常: \r\nSystem.NullReferenceException: Object reference not set to an instance of an object. at RAWSelectionAssistant.WpfTests.R53HomeSceneWorkspaceTests.<>c.<<RasterCropStraightenUndoReopenExportAndPrefixPixels>b__1_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "scene\\home-workspace-r7.trx",
+    "sha256": "0143bce431d2739e86a0eaceb4f0e5c6a807254e15d249ceadcc49c58f8c1bf6",
+    "passed": 1,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "RasterCropStraightenUndoReopenExportAndPrefixPixels",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53HomeSceneWorkspaceTests。RasterCropStraightenUndoReopenExportAndPrefixPixels 引发了异常: \r\nSystem.IO.InvalidDataException: 专业 RAW 定义不能混合旧调整栈。 at RAWSelectionAssistant.Core.Services.Projects.ColorStudioSessionDocument.Normalize()\r\n   at RAWSelectionAssistant.Core.Services.Projects.ColorStudioSessionStore.SaveAsync(String path, ColorStudioSessionDocument document, CancellationToken token)\r\n   at RAWSelectionAssistant.Core.Services.Projects.ColorStudioSessionStore.SaveCheckedAsync(String path, ColorStudioSessionDocument document, String expectedFingerprint, CancellationToken token)\r\n   at RAWSelectionAssistant.Core.Services.Projects.ColorStudioSessionStore.SaveCheckedAsync(String path, ColorStudioSessionDocument document, String expectedFingerprint, CancellationToken token)\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.SaveSessionCoreAsync(String path, CancellationToken token)\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.SaveSessionAsync(String path, CancellationToken token)\r\n   at RAWSelectionAssistant.WpfTests.R53HomeSceneWorkspaceTests.<>c.<<RasterCropStraightenUndoReopenExportAndPrefixPixels>b__1_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "scene\\home-workspace-r8.trx",
+    "sha256": "e3d18c8856cbc2602966c68e7fd815d29ed20b837c8ad2dd157abde9c0319af4",
+    "passed": 2,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "scene\\scene-adaptive-final.trx",
+    "sha256": "6790bc5cdb0e9ed7c0404f58d1cdb3779c0312d965c498c24c99d951d95c65ad",
+    "passed": 6,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "scene\\scene-core.trx",
+    "sha256": "f53897df509c63dd0e4f657fc969fb20c7e113314fc05d58ab5818353ed302ce",
+    "passed": 3,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "scene\\scene-highfreq.trx",
+    "sha256": "e981e3d01d6e68afc80332e8a9dfe66dd0c88868fda41b03e3906a378edc2612",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "scene\\scene-wpf-r2.trx",
+    "sha256": "9142ac2f1da6031167858c12ca85977b0ed38fa2c45477ae60dfbd5e22870bdd",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "scene\\scene-wpf.trx",
+    "sha256": "1d84e280f6141611c2050eda6bc7f4a66388b4e5c1c23e13ea5bb3bee5d8ca00",
+    "passed": 0,
+    "failed": 1,
+    "notRun": 0,
+    "failures": [
+      {
+        "name": "SceneMaskSnapshotLockUndoVariantReopenAndThumbnails",
+        "message": "测试方法 RAWSelectionAssistant.WpfTests.R53HomeSceneWorkspaceTests。SceneMaskSnapshotLockUndoVariantReopenAndThumbnails 引发了异常: \r\nSystem.ArgumentException: Color Studio stack must contain unique nodes. at RAWSelectionAssistant.Core.Services.Projects.ColorAdjustmentStack.Normalize()\r\n   at RAWSelectionAssistant.Core.Services.Projects.ColorAdjustmentStack.DeepClone()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.QueueLayerThumbnails()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.QueueRawLocalPreview()\r\n   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.set_SceneLocalExposureEv(Double value)\r\n   at RAWSelectionAssistant.WpfTests.R53HomeSceneWorkspaceTests.<>c.<<SceneMaskSnapshotLockUndoVariantReopenAndThumbnails>b__0_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+      }
+    ]
+  },
+  {
+    "file": "scene\\thumbnail-pixels.trx",
+    "sha256": "0306a86f89a79b78a6514f9ab803ceaa20c15bce19f2c9fdcda24de4c29c81c9",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "sealed-core\\home-core-sealed.trx",
+    "sha256": "0a08c15cbd424d7e6bd8ea3c47616b90aff59c9914f984f870cbe6dee4fd2d26",
+    "passed": 49,
+    "failed": 0,
+    "notRun": 4,
+    "failures": []
+  },
+  {
+    "file": "sealed-product-core\\sealed-product-core.trx",
+    "sha256": "bacc284796a706084697007465c4a1a2db0b325ece11f45dcfabffee950911fd",
+    "passed": 50,
+    "failed": 0,
+    "notRun": 4,
+    "failures": []
+  },
+  {
+    "file": "sealed-product-wpf\\sealed-product-wpf.trx",
+    "sha256": "1db7cd2d3af5cd352e55c59c856c80620e2781e82a45f5d3661e3014343c22a9",
+    "passed": 41,
+    "failed": 0,
+    "notRun": 1,
+    "failures": []
+  },
+  {
+    "file": "sealed-scene-timing-tests\\sealed-scene-timing.trx",
+    "sha256": "48c1d1ddf8108281e0b918b8faeaa59f95792d6e2feaae587bcc552c0cd55fb5",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "sealed-wpf\\home-wpf-sealed.trx",
+    "sha256": "44725ca6da191fa21d0cf643f8b315b9c9050926e30f4ed275db5c801e362664",
+    "passed": 36,
+    "failed": 0,
+    "notRun": 1,
+    "failures": []
+  },
+  {
+    "file": "visual\\scene-visual-expanded.trx",
+    "sha256": "a4a62a70228a7e38de2cd6bf02c95c0ec301baa39703252440d23ece1a351001",
+    "passed": 1,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  },
+  {
+    "file": "visual\\visual-prefix.trx",
+    "sha256": "65bb910ea923ce2b518eb50b53b92196de98e347d5f8a1dc02a462bbf66a0ccc",
+    "passed": 2,
+    "failed": 0,
+    "notRun": 0,
+    "failures": []
+  }
+]

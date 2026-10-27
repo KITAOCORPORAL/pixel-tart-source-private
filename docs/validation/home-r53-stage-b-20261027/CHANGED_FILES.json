@@ -1,0 +1,350 @@
+{
+  "baseSha": "190d1304bd24480c5203467276b0acd48f719c8c",
+  "productSha": "b6eaa32e08bb37d79dcdfde7db17613a1558f5c6",
+  "files": [
+    {
+      "change": "M",
+      "path": "docs/PRODUCT_BACKLOG.md",
+      "type": "reference/reproducibility/docs"
+    },
+    {
+      "change": "A",
+      "path": "docs/validation/home-r53-stage-b-20261027/COLOR_BOUNDARIES.json",
+      "type": "reference/reproducibility/docs"
+    },
+    {
+      "change": "A",
+      "path": "docs/validation/home-r53-stage-b-20261027/NODE_COMPARISON.md",
+      "type": "reference/reproducibility/docs"
+    },
+    {
+      "change": "A",
+      "path": "docs/validation/home-r53-stage-b-20261027/PHOTOCRAFT_REFERENCE.json",
+      "type": "reference/reproducibility/docs"
+    },
+    {
+      "change": "A",
+      "path": "docs/validation/home-r53-stage-b-20261027/PRESERVATION.json",
+      "type": "reference/reproducibility/docs"
+    },
+    {
+      "change": "A",
+      "path": "docs/validation/home-r53-stage-b-20261027/REFERENCE_FILES.json",
+      "type": "reference/reproducibility/docs"
+    },
+    {
+      "change": "M",
+      "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasSurface.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/PixelTart.Modules.AssetLibrary/FreeCanvas/FreeCanvasView.cs",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/ControlledIcc/DocumentColorStateV1.cs",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/ControlledIcc/LcmsRgbEngine.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant.Core/Services/FreeCanvas/CanvasDocument.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant.Core/Services/FreeCanvas/CanvasEditor.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioModels.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioSessionStore.cs",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/LeasedPreviewBufferCache.cs",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/PhotographicBlendV2.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawLocalEdits.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawPipeline.cs",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/SceneExposureInteractiveV1.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/SceneExposureV1.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/StudioLayerComposite.cs",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "src/RAWSelectionAssistant/Services/DocumentColorWorkflowV1.cs",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "src/RAWSelectionAssistant/Services/MonitorRgbDisplayV1.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/Services/ProfessionalRawExport.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/Services/ProfessionalWicRowEncoder.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/Services/RenderedSrgbInput.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/THIRD-PARTY-NOTICES.md",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ColorManagement.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Comparison.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.HqPreview.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.InstantFilm.cs",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.LayerThumbnails.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.PhotoGradePage.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Photographer.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.PreparedPreview.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ProfessionalRaw.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.R53Compare.cs",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RasterGeometry.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.RawLocal.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.LocalMask.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/ViewModels/TetherReferenceModeViewModel.cs",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "src/RAWSelectionAssistant/Views/ColorStudioImageViewport.DisplayColor.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/Views/ColorStudioImageViewport.ProfileDiagnostics.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/Views/ColorStudioImageViewport.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/Views/DarkroomExportDialog.cs",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.ColorManagement.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.Crop.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.LocalMask.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+      "type": "product"
+    },
+    {
+      "change": "M",
+      "path": "src/RAWSelectionAssistant/Views/StudioLayerThumbnail.cs",
+      "type": "product"
+    },
+    {
+      "change": "A",
+      "path": "tests/RAWSelectionAssistant.Tests/R53HomeSceneExposureTests.cs",
+      "type": "tests"
+    },
+    {
+      "change": "A",
+      "path": "tests/RAWSelectionAssistant.Tests/R53PhotographicBlendTests.cs",
+      "type": "tests"
+    },
+    {
+      "change": "M",
+      "path": "tests/RAWSelectionAssistant.WpfTests/CanvasObjectTransformTests.cs",
+      "type": "tests"
+    },
+    {
+      "change": "A",
+      "path": "tests/RAWSelectionAssistant.WpfTests/R53DocumentColorTests.cs",
+      "type": "tests"
+    },
+    {
+      "change": "A",
+      "path": "tests/RAWSelectionAssistant.WpfTests/R53HomeSceneWorkspaceTests.cs",
+      "type": "tests"
+    },
+    {
+      "change": "A",
+      "path": "tools/r53-home/compare-cms.py",
+      "type": "reference/reproducibility/docs"
+    },
+    {
+      "change": "A",
+      "path": "tools/r53-home/compare-geometry.py",
+      "type": "reference/reproducibility/docs"
+    }
+  ],
+  "evidenceOnlyOrMeasurementScopeFiles": [
+    "M\tHANDOFF.MD",
+    "M\tdocs/validation/home-r53-stage-b-20261027/PRESERVATION.json",
+    "M\ttests/RAWSelectionAssistant.WpfTests/R53HomeSceneWorkspaceTests.cs"
+  ],
+  "productSourceUnchangedSincePublishedSha": true,
+  "newReportFiles": [
+    "docs/validation/home-r53-stage-b-20261027/BLEND_V2_REFERENCE_COMPARISON.json",
+    "docs/validation/home-r53-stage-b-20261027/CACHE_LIFECYCLE_CYCLES.json",
+    "docs/validation/home-r53-stage-b-20261027/CHANGED_FILES.json",
+    "docs/validation/home-r53-stage-b-20261027/CMS_CLOSURE.json",
+    "docs/validation/home-r53-stage-b-20261027/COMPONENT_BINDINGS.json",
+    "docs/validation/home-r53-stage-b-20261027/DEPENDENCIES.json",
+    "docs/validation/home-r53-stage-b-20261027/DEVELOPMENT_RUNS.json",
+    "docs/validation/home-r53-stage-b-20261027/DISPLAY_PATH.json",
+    "docs/validation/home-r53-stage-b-20261027/FINAL_REPORT.md",
+    "docs/validation/home-r53-stage-b-20261027/GEOMETRY_REFERENCE_COMPARISON.json",
+    "docs/validation/home-r53-stage-b-20261027/HOME_TEST_EVIDENCE.json",
+    "docs/validation/home-r53-stage-b-20261027/JPEG_AND_MONITOR_OBSERVATIONS.json",
+    "docs/validation/home-r53-stage-b-20261027/MEASUREMENT_CORRECTION.json",
+    "docs/validation/home-r53-stage-b-20261027/NATIVE_STARTUP.json",
+    "docs/validation/home-r53-stage-b-20261027/NONPASS.json",
+    "docs/validation/home-r53-stage-b-20261027/PERFORMANCE.json",
+    "docs/validation/home-r53-stage-b-20261027/PILLOW_LCMS219_REFERENCE.json",
+    "docs/validation/home-r53-stage-b-20261027/PREVIEW_CONTRACT.md",
+    "docs/validation/home-r53-stage-b-20261027/PRODUCT.json",
+    "docs/validation/home-r53-stage-b-20261027/RAW_STRAIGHTEN_EXPORT.json",
+    "docs/validation/home-r53-stage-b-20261027/REAL_DERIVATIVE_CMS.json",
+    "docs/validation/home-r53-stage-b-20261027/REJECTED_SCENE_2X_HIGH_FREQUENCY.json",
+    "docs/validation/home-r53-stage-b-20261027/RELEASE_GATE.json",
+    "docs/validation/home-r53-stage-b-20261027/scene-workspace-offscreen.png",
+    "docs/validation/home-r53-stage-b-20261027/SCENE_HIGH_FREQUENCY_FINAL.json",
+    "docs/validation/home-r53-stage-b-20261027/SYNTHETIC_BASELINE.json",
+    "docs/validation/home-r53-stage-b-20261027/SYNTHETIC_SCENE_HOT.json",
+    "docs/validation/home-r53-stage-b-20261027/TEST_SUMMARY.json",
+    "docs/validation/home-r53-stage-b-20261027/VISUAL_STATUS.md",
+    "docs/validation/home-r53-stage-b-20261027/ZIP_FILES.json",
+    "docs/validation/home-r53-stage-b-20261027/ZIP_IDENTITY.json"
+  ]
+}

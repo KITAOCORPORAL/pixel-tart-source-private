@@ -1,0 +1,7 @@
+{
+  "issue": "Initial performance handler stayed subscribed after EV drag and recorded a later geometry frame in frameTimes, although first/settled wall had been captured correctly.",
+  "fix": "Added measurement-only drag scope fence and coldPrepareMs; reran same home RAW/EV/800px. Product source unchanged.",
+  "oldRaw": "N:/pixart/Guangjing-R53-Home-20261027/SCENE_TIMING_PRIOR_RUN_CONTAINS_LATER_GEOMETRY_FRAME.json",
+  "newTrx": "sealed-scene-timing-tests/sealed-scene-timing.trx",
+  "report": "PERFORMANCE.json"
+}
