@@ -23,3 +23,6 @@
 ## 边界
 A交互/界面已实际交付但仍有拉直、全栅格裁剪、设计精修及真实鼠标/DPI未验；不宣称全部R5.3视觉完成。通用ICC/profile/宽色域不再无限扩大A，归B后续，B本轮仅首项实际实现，C-E未开始。发行/科学准入仍OPEN，CalibrationEligible=false。
 四项历史授权专项真实原因NONPASS.json保留，本轮不重复无关参考/整批。最终定向Core17PASS/0FAIL/0NOT_RUN、WPF56PASS/0FAIL/1NOT_RUN；原4项历史未运行不冒充补跑。完整范围以TEST_SUMMARY.json为准，不把严格runnerNOT_RUN写全绿。离屏截图/testhost/OS启动均不作真实鼠标DPI。
+
+## 推送读回
+产品4b5f73b7、独立测试12eee94e及证据9e7053b3已正常push；ls-remote读回LOCAL_HEAD=REMOTE_HEAD=9e7053b35578bbf6706839e2ce39d1bf1b92054a，工作树干净。后续仅封存读回，不变更产品src。
