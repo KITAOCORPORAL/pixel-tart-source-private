@@ -13,7 +13,7 @@
 ## 已执行和差异
 - 实际编译并执行两套固定源码的标量函数分支，非Python自写公式替身；是kernel对照，不是完整darktable/ImageMagick图像pipeline。
 - 1200组灰阶/饱和通道/黑白/高光/负值/>1 × 0/.25/.5/1强度 × 三模式；正常域最大差异darktable 1.16294e-7、ImageMagick 8.93307e-8。277组超范围差异保留，V1不裁切与参考bounded公式不等价。完整结果REFERENCE_RESULT.json。
-- 真实TNAN8886.CR3 SHA256 b7d358517db0cd5b5c54215aa089a5a30c79234aef50e9381931128493e33401，5496×3670，现有公司命名测试资产；16位解码、全分辨率行带渲染、TIFF16独立读回与源hash复验。decode1051.2241ms，render4923.9866ms，encode1002.3409ms，TIFF逐样本差异0；采样全图/单点差异0。测试进程峰值2729193472bytes，包括解码、读回和断言副本，非硬性内存上限。
+- 真实TNAN8886.CR3 SHA256 b7d358517db0cd5b5c54215aa089a5a30c79234aef50e9381931128493e33401，5496×3670，现有公司命名测试资产；16位解码、全分辨率行带渲染、TIFF16独立读回与源hash复验。冻结发布DLL复跑decode1064.3649ms，render4998.5441ms，encode1044.3029ms，TIFF逐样本差异0；采样全图/单点差异0。测试进程峰值2726428672bytes，包括解码、读回和断言副本，非硬性内存上限。
 - DSC09916.ARW SHA256 6f596bb234ee5de206c66594bc84205349c363fd6a89ae188ff76dab7c5e53b9，原路径及独立同hash副本均失败；原生open_buffer=-2 Unsupported，不改解码器、不将其算PASS。
 
 ## 未通过门禁

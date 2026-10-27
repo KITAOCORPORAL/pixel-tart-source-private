@@ -1,0 +1,31 @@
+{
+  "inheritedSevenCopyFailures": {
+    "fixture": "Version230Rc3RuntimeUiTests",
+    "finance": 2,
+    "document": 3,
+    "tether": 2,
+    "action": "Retained DataRows; now verify current binding/file-safety/virtualization/selection guard",
+    "final": "PASS"
+  },
+  "additionalLegacyCopyFailures": {
+    "count": 4,
+    "scope": "Installer branding and help command wording",
+    "action": "Updated to actual current brand and Help/Feedback command contracts, no safety checks removed"
+  },
+  "productFixes": [
+    "New tool selects canonical created node",
+    "Explicit Apply cancels older debounce work and admits latest target while old task retires",
+    "Mask pointer lifecycle/capture and alpha overlay",
+    "Scopes collapse retained across tabs",
+    "Compare view request revision and workspace disposal cancellation"
+  ],
+  "rawPreserved": [
+    "A5 WPF2 failures",
+    "A8/A9/A10 Sony RAW refused",
+    "BROAD Core3/WPF2 failures",
+    "Process reopen bad same-output assumption",
+    "App singleton/restart empty-data fixture errors",
+    "Build copy lock failure; no final binding claims reused from mixed run"
+  ],
+  "finalEvidence": "SEALED runs after all builds and 29-DLL rebind; earlier FINAL/BROAD are development only"
+}

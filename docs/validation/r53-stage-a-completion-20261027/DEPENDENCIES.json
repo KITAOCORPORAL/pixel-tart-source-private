@@ -1,0 +1,14 @@
+{
+  "newThirdPartyProductDependencies": [],
+  "researchArtifactsNotDistributed": [
+    "darktable source GPL-3",
+    "ImageMagick source",
+    "tcc compiler",
+    "reference executables"
+  ],
+  "existingAppDependencyManifests": [
+    "KitaoPhotoSelector.deps.json"
+  ],
+  "licenseReview": "No external implementation code or second rendering engine included; existing native dependencies retained",
+  "newEditingAdmission": "DIAGNOSTIC_ONLY"
+}

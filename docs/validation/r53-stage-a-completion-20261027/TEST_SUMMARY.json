@@ -1,0 +1,115 @@
+{
+  "productSha": "f2fbefed4093a487460863cd3e735755528aa358",
+  "testSha": "de47497d51f63eb26ecb917f78d50852d815e034",
+  "binding": "COMPONENT_BINDINGS.json 29 file hashes",
+  "scope": "Selected affected and inherited modules; not all discovered tests. Latest explicit environment run wins for each discovered test case.",
+  "counts": {
+    "Passed": 824,
+    "Failed": 0,
+    "NotExecuted": 7
+  },
+  "runs": [
+    {
+      "label": "SEALED_CORE",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 365
+      },
+      "path": "SEALED_CORE/run-20261027-132931-20ad537d/summary.json",
+      "assemblySha256": "dca0fa9b3b6153b21c17aced8a21a61c4e81db577966de89eec23aaf73c8fe28"
+    },
+    {
+      "label": "SEALED_WPF",
+      "status": "FAILED",
+      "counts": {
+        "Passed": 456,
+        "NotExecuted": 9
+      },
+      "path": "SEALED_WPF/run-20261027-133053-aac8d77b/summary.json",
+      "assemblySha256": "0004edbef56c073837843aa6b2be2ca18f953a4ec02816b8c4e4abcf64a0f63c"
+    },
+    {
+      "label": "SEALED_NUMERIC_CORE",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 72
+      },
+      "path": "SEALED_NUMERIC_CORE/run-20261027-133012-a6a751be/summary.json",
+      "assemblySha256": "dca0fa9b3b6153b21c17aced8a21a61c4e81db577966de89eec23aaf73c8fe28"
+    },
+    {
+      "label": "SEALED_PROCESS_create",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "path": "SEALED_PROCESS_create/run-20261027-132910-337ec161/summary.json",
+      "assemblySha256": "0004edbef56c073837843aa6b2be2ca18f953a4ec02816b8c4e4abcf64a0f63c"
+    },
+    {
+      "label": "SEALED_PROCESS_reopen",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "path": "SEALED_PROCESS_reopen/run-20261027-132913-0da36b75/summary.json",
+      "assemblySha256": "0004edbef56c073837843aa6b2be2ca18f953a4ec02816b8c4e4abcf64a0f63c"
+    },
+    {
+      "label": "SEALED_COMPARE",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 3
+      },
+      "path": "SEALED_COMPARE/run-20261027-132916-510f82e4/summary.json",
+      "assemblySha256": "0004edbef56c073837843aa6b2be2ca18f953a4ec02816b8c4e4abcf64a0f63c"
+    },
+    {
+      "label": "SEALED_APP_first",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 3
+      },
+      "path": "SEALED_APP_first/run-20261027-132922-e9ec7c87/summary.json",
+      "assemblySha256": "0004edbef56c073837843aa6b2be2ca18f953a4ec02816b8c4e4abcf64a0f63c"
+    },
+    {
+      "label": "SEALED_APP_upgrade",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 3
+      },
+      "path": "SEALED_APP_upgrade/run-20261027-132930-c46854ea/summary.json",
+      "assemblySha256": "0004edbef56c073837843aa6b2be2ca18f953a4ec02816b8c4e4abcf64a0f63c"
+    },
+    {
+      "label": "SEALED_APP_restart_retained",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 3
+      },
+      "path": "SEALED_APP_restart_retained/run-20261027-133131-2a58742a/summary.json",
+      "assemblySha256": "0004edbef56c073837843aa6b2be2ca18f953a4ec02816b8c4e4abcf64a0f63c"
+    }
+  ],
+  "historicalFailuresRetained": true,
+  "rawRunnerNonpassIsNotGreen": true,
+  "grouped": {
+    "Core": {
+      "Passed": 366,
+      "Failed": 0,
+      "NotExecuted": 0
+    },
+    "Wpf": {
+      "Passed": 458,
+      "Failed": 0,
+      "NotExecuted": 7
+    }
+  },
+  "fullAppScenarios": 3,
+  "processChain": {
+    "createPid": 20216,
+    "reopenPid": 33056,
+    "pixelParity": true
+  }
+}

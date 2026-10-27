@@ -1,0 +1,17 @@
+{
+  "status": "PARTIAL",
+  "toolPolicy": "Computer Use/Browser/WebView/CDP prohibited and not invoked",
+  "offscreen": "Not desktop screenshots",
+  "native": "Full final EXE OS startup, verified title and normal WM_CLOSE only",
+  "pointerEditSaveReopen": "NOT_RUN",
+  "Dpi": "NOT_RUN",
+  "independentProcess": "PASS: distinct create/reopen PIDs, persisted mask definition and lossless PNG pixels equal",
+  "release": "NOT_READY",
+  "completeAppAutomated": {
+    "first": "PASS",
+    "upgrade": "PASS",
+    "restartCopiedPriorDataNewProcess": "PASS",
+    "normalSplit": "3 scan/3 match/3 copy/report; source bytes unchanged",
+    "scope": "Actual App in independent testhost, not native pointer acceptance"
+  }
+}
