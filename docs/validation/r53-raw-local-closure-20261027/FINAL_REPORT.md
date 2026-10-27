@@ -30,3 +30,6 @@
 最终去重 **Core376PASS/0FAIL/0NOT_RUN；WPF464PASS/0FAIL/4NOT_RUN**。完整范围以TEST_SUMMARY.json/NONPASS.json为准；严格runner对NOT_RUN仍返回FAILED，不写全绿。已自行生成6张24MP夹具补跑策划两项和相关隔离路由；旧授权真实照片/整批样本不改名伪造替代。离屏/testhost与OS进程启动都不作鼠标/DPI验收。
 
 **阶段A仍PARTIAL**：多笔双层42s、RAW冷四图11.84s仍慢；完整R5.3视觉余项、通用ICC/完整独立brush/profile准入、真实指针/DPI未完成。诊断限制未删除。A尚有非外部真实性能/视觉/准入余项，因此B–E未虚称推进，不是把所有后续阶段绑在鼠标门禁上。教程退役/品牌/全部模块和策划15板块保留；51旧树HEAD/dirty/hash未变。
+
+## 推送读回
+产品091163b1与独立证据ca2377bb已普通推送；ls-remote确认LOCAL_HEAD=REMOTE_HEAD=ca2377bb5fc34b387e81c73e5fa1ddf9fa0a6621，工作树干净。后续仅提交本读回记录，src/tests不变。
