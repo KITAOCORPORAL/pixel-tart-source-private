@@ -148,3 +148,7 @@ RawWideOutputV1仅master→显式输出，default-off，不换解码/WB/相机�
 最终脚本复跑：两D800各五档RGB16输出hash全部与首轮相同，X-T5仍同门槛拒绝，见repeat-readback.json。它只证明同参数重复性，不是跨机一致性。全尺寸pilot接口现额外冻结已测sRGB profile hash，拒绝任意profile贴标签。
 
 日期说明：文件夹/分支中的20261027是已经建立的批次标签；用户日期按客户端上下文记录，主机UTC和上游文章更新时间分别留存，不将其混同为用户本地日期或据此宣称最新版本。
+
+## 提交与推送收据
+
+研究提交11105c966224c4bcdc25209029ef2dc3e8c94977，分支codex/raw-c1-feasibility-20261027。首次push退出0，ls-remote读回同SHA；原工作区仍clean，src/tests与基准无diff。见evidence/delivery-receipt.json。后续收据自身的commit不作自引用承诺，由最终终端读回确认。
