@@ -87,9 +87,15 @@ public partial class PhotoGradePageView
     private void R53InstantTab(object s,RoutedEventArgs e){r53ResourceTab="即时胶片";RenderR53Resources();EditModes.SelectedIndex=1;}
     private void RenderR53Resources()
     {
-        var target=r53NarrowResourceContent??R53ResourceContent;if(target is null)return;target.Children.Clear();
+        var target=r53NarrowResourceContent??R53ResourceContent;if(target is null)return;
+        // One real paper selector moves between the resource rail and legacy parameter host.
+        // Never show duplicate active paper selectors in the R3 workspace.
+        if(V3Editor.Parent is Panel priorPanel)priorPanel.Children.Remove(V3Editor);
+        else if(V3Editor.Parent is ContentControl priorHost)priorHost.Content=null;
+        target.Children.Clear();
+        if(r53ResourceTab!="即时胶片") {PaperPickerSection.Content=V3Editor;PaperPickerSection.SetCurrentValue(VisibilityProperty,model?.LightPrintRecipeVisible==true?Visibility.Visible:Visibility.Collapsed);}
         void Add(string name,Action action){if(!string.IsNullOrWhiteSpace(r53Search)&&!name.Contains(r53Search,StringComparison.CurrentCultureIgnoreCase))return;if(r53FavoritesOnly&&model?.R53FavoriteResources.Contains(name)!=true)return;if(r53RecentOnly&&model?.R53RecentResources.Contains(name)!=true)return;var row=new DockPanel();var star=new Button{Content=model?.R53FavoriteResources.Contains(name)==true?"★":"☆",ToolTip="收藏资源"};System.Windows.Automation.AutomationProperties.SetName(star,"收藏 "+name);DockPanel.SetDock(star,Dock.Right);star.Click+=(_,_)=>{model?.ToggleR53Favorite(name);RenderR53Resources();};row.Children.Add(star);var b=new Button{Content=name,Height=30,HorizontalContentAlignment=HorizontalAlignment.Left,Margin=new Thickness(0,3,0,3)};b.Click+=(_,_)=>{action();model?.RecordR53Resource(name);RenderR53Resources();};row.Children.Add(b);target.Children.Add(row);}
-        if(r53ResourceTab=="即时胶片"){foreach(var paper in model?.PhotographerPapers??[])Add(paper.Name,()=>{if(model is not null){model.SelectedPhotographerPaperId=paper.ProfileId;EditModes.SelectedIndex=1;}});return;}
+        if(r53ResourceTab=="即时胶片"){PaperPickerSection.SetCurrentValue(VisibilityProperty,Visibility.Collapsed);target.Children.Add(V3Editor);return;}
         if(r53ResourceTab=="滤镜"){Add("胶片风格（现有处理链）",()=>EditModes.SelectedIndex=3);return;}
         Add("提亮 +0.3 EV",()=>{if(model is null)return;model.Editor.AddAdjustmentNodeCommand.Execute("BasicTone");var parameter=ColorStudioToolCatalog.GetParameters(ColorStudioNodeType.BasicTone).Single(p=>p.Key=="exposure");model.Editor.SetToolParameter(parameter,.3);});
         foreach(var (name,type) in new[]{("基础调色","BasicTone"),("白平衡","WhiteBalance"),("曲线","Curve"),("色轮","ColorBalance"),("色域取样（已有能力）","ColorRange")})Add(name,()=>model?.Editor.AddAdjustmentNodeCommand.Execute(type));

@@ -11,10 +11,11 @@ using RAWSelectionAssistant.Core.Services.Projects;
 
 namespace RAWSelectionAssistant.Services.Publishing;
 
-public sealed class WpfPublishingRenderer : IPublishingRenderer, IPublishingOutputInspector, IPublishingPixelVerifier
+public sealed partial class WpfPublishingRenderer : IPublishingRenderer, IPublishingOutputInspector, IPublishingPixelVerifier
 {
     public Task<string> VerifyPixelsAsync(string source,string output,PublishingOptions options,CancellationToken token)=>Task.Run(()=>
     {
+        if(IsManagedDocumentSource(source))return VerifyManagedDocument(source,output,options,token);
         if(options.OutputFormat==PublishingOutputFormat.Tiff && (!options.EffectiveDimensions.Enabled||options.EffectiveDimensions.Mode==PublishingSizeMode.Original) && (!options.WatermarksEnabled||!options.EffectiveWatermarkLayers.Any(x=>x.Enabled)))
         {using var a=File.OpenRead(source);using var b=File.OpenRead(output);var original=TiffStreamValidator.Validate(a,token);var actual=TiffStreamValidator.Validate(b,token);if(original.Width!=actual.Width||original.Height!=actual.Height||original.Orientation!=actual.Orientation||original.PixelSha256!=actual.PixelSha256||!original.IccProfile.AsSpan().SequenceEqual(actual.IccProfile))throw new InvalidDataException("Publishing TIFF16 contract mismatch.");return System.Text.Json.JsonSerializer.Serialize(new{mode="StreamingPixelsExact",actual.Width,actual.Height,actual.BitsPerSample,actual.Orientation,actual.PixelSha256});}
         using var input=File.OpenRead(source);using var result=File.OpenRead(output);
@@ -74,7 +75,10 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer, IPublishingOutp
             var header=BitmapDecoder.Create(input,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnDemand).Frames[0];
             var size=OutputSize(header.PixelWidth,header.PixelHeight,options.EffectiveDimensions);
             using var reservation=StudioGlobalResources.ReserveWork(checked((long)header.PixelWidth*header.PixelHeight*24+(long)size.Width*size.Height*16+32L*1024*1024));
-            await Task.Run(() => Render(sourcePath, destinationPath, options, cancellationToken), cancellationToken);
+            if(File.Exists(destinationPath))throw new IOException("出版目的已存在，未覆盖。");
+            var ownStage=destinationPath+".render-"+Guid.NewGuid().ToString("N");
+            try { await Task.Run(() => Render(sourcePath, ownStage, options, cancellationToken), cancellationToken); cancellationToken.ThrowIfCancellationRequested(); File.Move(ownStage,destinationPath,false); }
+            finally { if(File.Exists(ownStage))File.Delete(ownStage); }
         }
         finally{ProfessionalRawResourcePolicy.HeavyWork.Release();}
     }
@@ -89,6 +93,7 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer, IPublishingOutp
 
     private static void Render(string sourcePath, string destinationPath, PublishingOptions options, CancellationToken cancellationToken)
     {
+        if(IsManagedDocumentSource(sourcePath)){RenderManagedDocument(sourcePath,destinationPath,options,cancellationToken);return;}
         var isProfessional=false;
         if(File.Exists(sourcePath+".kitao-export.json"))
         {
@@ -96,7 +101,7 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer, IPublishingOutp
             if(upstream?.RecipeSnapshot?.RawDefinition is not null)
             {
                 isProfessional=true;
-                if(upstream.RecipeSnapshot.RawDefinition.ColorState is not null)throw new NotSupportedException("颜色管理成片保留其实际输出ICC；出版重采样/水印尚未接入该色彩状态，禁止误标sRGB。可直接使用暗室输出成片。");
+
                 if(!string.Equals(options.ColorSpaceProfile,"sRGB",StringComparison.OrdinalIgnoreCase))throw new NotSupportedException("PV4 Publishing仅支持sRGB。");
                 if(options.OutputFormat==PublishingOutputFormat.Jpeg&&options.OutputBitDepth!=PublishingOutputBitDepth.Eight)throw new NotSupportedException("JPEG仅支持8位。");
                 if(options.OutputFormat==PublishingOutputFormat.Png&&options.OutputBitDepth!=PublishingOutputBitDepth.Eight)throw new NotSupportedException("Publishing PNG16未接线，未伪装8位输出。");
@@ -310,13 +315,22 @@ public sealed class WpfPublishingRenderer : IPublishingRenderer, IPublishingOutp
         return (Math.Max(1, (int)Math.Round(sourceWidth * scale)), Math.Max(1, (int)Math.Round(sourceHeight * scale)));
     }
 
-    private static void DrawLayer(DrawingContext context, WatermarkLayer layer, int outputWidth, int outputHeight, CancellationToken cancellationToken)
+    private static void DrawLayer(DrawingContext context, WatermarkLayer layer, int outputWidth, int outputHeight, CancellationToken cancellationToken,bool managed=false)
     {
         layer.Validate(); cancellationToken.ThrowIfCancellationRequested();
         if (layer.Type == WatermarkLayerType.Image)
         {
             var source = new BitmapImage(); source.BeginInit(); source.CacheOption = BitmapCacheOption.OnLoad; source.UriSource = new Uri(Path.GetFullPath(layer.ImagePath!)); source.EndInit(); source.Freeze();
-            var adjusted = Adjust(source, layer.EffectiveColorAdjustments, cancellationToken);
+            BitmapSource interpreted=source;
+            if(managed)
+            {
+                using var cms=new RAWSelectionAssistant.Core.Services.Color.ControlledIcc.LcmsRgbEngine();
+                var inputProfile=DocumentColorWorkflowV1.InspectInput(layer.ImagePath!,cms).Profile;
+                using var document=DocumentColorWorkflowV1.ReadIndependentAlphaAsync(layer.ImagePath!,inputProfile,cms.StandardProfile("sRGB"),null,cancellationToken).GetAwaiter().GetResult();
+                using var upright=document.NormalizeOrientation(cancellationToken);var values=upright.Pixels.Rgb32.Span;var alpha=upright.Alpha.Span;var b=new byte[upright.Pixels.PixelCount*4];for(int i=0;i<upright.Pixels.PixelCount;i++){float a=alpha.IsEmpty?1:alpha[i];for(int c=0;c<3;c++)b[i*4+c]=(byte)Math.Clamp(Math.Round(values[i*3+2-c]*a*255),0,255);b[i*4+3]=(byte)Math.Round(a*255);}
+                interpreted=BitmapSource.Create(upright.Pixels.Width,upright.Pixels.Height,96,96,PixelFormats.Pbgra32,null,b,upright.Pixels.Width*4);interpreted.Freeze();
+            }
+            var adjusted = Adjust(interpreted, layer.EffectiveColorAdjustments, cancellationToken);
             var width = outputWidth * layer.WidthPercent / 100d; var height = width * adjusted.PixelHeight / adjusted.PixelWidth;
             var rect = Position(layer, outputWidth, outputHeight, width, height);
             context.PushOpacity(layer.Opacity); context.DrawImage(adjusted, rect); context.Pop();

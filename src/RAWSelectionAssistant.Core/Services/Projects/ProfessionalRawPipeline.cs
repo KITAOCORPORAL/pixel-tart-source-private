@@ -25,7 +25,7 @@ public sealed record ProfessionalRawDefinition(int ProcessingVersion=4,string Wh
     public RAWSelectionAssistant.Core.Services.Color.ControlledIcc.DocumentColorStateV1? ColorState{get;init;}
     public ProfessionalRawDefinition Validate()
     {
-        InstantFilm?.Validate();ColorState?.Validate();if(ColorState is not null&&(!IsRenderedInput||RenderedInputVersion!=2||InstantFilm is not null))throw new NotSupportedException("ColorStateV1 is an explicit rendered RGB variant, not a RAW-space relabel");
+        InstantFilm?.Validate();ColorState?.Validate();DocumentWorkingRendererV2.Validate(this);if(ColorState is not null&&(!IsRenderedInput||RenderedInputVersion!=2||InstantFilm is not null))throw new NotSupportedException("ColorStateV1 is an explicit rendered RGB variant, not a RAW-space relabel");
         if(SceneExposure is not null){SceneExposure.Validate();if(ProcessingVersion!=4||IsRenderedInput||InstantFilm is not null)throw new NotSupportedException("SceneExposureV1 requires existing linear RAW master");}
         if(LocalEdits is not null||Geometry is not null){if(!((ProcessingVersion==4&&!IsRenderedInput)||(ProcessingVersion==5&&IsRenderedInput&&RenderedInputVersion==2&&(LocalEdits is null||LocalEdits.Version==2)))||InstantFilm?.Enabled==true)throw new NotSupportedException("RAW local extension v1 requires linear PV4 base without an instant-paper recipe");LocalEdits?.Freeze();Geometry?.Validate();}
         if(LightPrint is{} light){if(light.Version!=1||InstantFilm?.AlgorithmVersion!=3||!LightPrintFrames.Available.Any(f=>f.Id==light.FrameId&&f.Shippable))throw new InvalidDataException("Unknown/non-distributable light-print frame");light.WindowAdjustments?.Normalize();if(light.WindowAdjustments?.Nodes.Any(n=>n.Type is not(ColorStudioNodeType.BasicTone or ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.Curve))==true)throw new NotSupportedException("Unsupported lightprint window node");}
@@ -34,6 +34,7 @@ public sealed record ProfessionalRawDefinition(int ProcessingVersion=4,string Wh
         if(InstantInput is {} input)
         {
             if(InputConfiguration=="LegacyRawEditsSrgbFloatV1")LegacyRawInstantInput.ValidateRecipe(input);
+            else if(input.ColorDocument is{} document){if(input.Version!=3||input.OriginVersionId is null||document.ColorState is null||document.InstantInput is not null||document.InstantFilm is not null||input.Look is not null||input.Stack is not null||input.Film is not null||input.LegacyRaw is not null||input.Mode is not("Original" or "CurrentEdits")||RenderedInputVersion!=2)throw new InvalidDataException("Invalid frozen document input");document.Validate();}
             else if(input.Version!=1||input.LegacyRaw is not null||input.Mode is not("Original" or "CurrentEdits")||InputConfiguration!="RenderedSrgbFloatV1")throw new InvalidDataException("Unknown instant input recipe.");
             input.Stack?.Normalize();input.Film?.Validate();
         }
@@ -47,7 +48,7 @@ public sealed record ProfessionalRawDefinition(int ProcessingVersion=4,string Wh
         if(ProcessingVersion!=4||InputConfiguration!="LibRaw021LinearProPhotoD65V1"||DisplayTransform!="LuminanceShoulderNeutralGamutV1"||WhiteBalance is not("Camera" or "CameraGains"))throw new InvalidDataException("不支持的 RAW 处理定义。");
         if(new[]{RedGain,GreenGain,BlueGain}.Any(x=>!double.IsFinite(x)||x<.125||x>8)||!double.IsFinite(ExposureEv)||ExposureEv is < -10 or > 10)throw new InvalidDataException("RAW 增益或曝光越界。");return this;
     }
-    public string DecodeKey=>FormattableString.Invariant($"{InputConfiguration}:{WhiteBalance}:{(WhiteBalance=="Camera"?1:RedGain):R}:{(WhiteBalance=="Camera"?1:GreenGain):R}:{(WhiteBalance=="Camera"?1:BlueGain):R}") + (RenderedInputVersion is null?"":":rasterInput2") + (ColorState is null?"":":cms-input:"+ColorState.Input.Sha256+":"+ColorState.InputPolicy) + (InstantInput is null ? "" : ":recipe:"+Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(InstantInput)))));
+    public string DecodeKey=>FormattableString.Invariant($"{InputConfiguration}:{WhiteBalance}:{(WhiteBalance=="Camera"?1:RedGain):R}:{(WhiteBalance=="Camera"?1:GreenGain):R}:{(WhiteBalance=="Camera"?1:BlueGain):R}") + (RenderedInputVersion is null?"":":rasterInput2") + (ColorState is null?"":":cms-input:"+ColorState.Input.Sha256+":"+ColorState.InputPolicy+(ColorState.Version==2?":working:2:"+ColorState.Working.Sha256:"")) + (InstantInput is null ? "" : ":recipe:"+Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(InstantInput)))));
 }
 public sealed record ProfessionalRawContract(string DecoderVersion,string Make,string Model,string SourceSha256,string DecodeKey,
     double[] CameraWhiteBalance,double[] AppliedWhiteBalance,double[] CameraToRgbMatrix,int WhiteLevel,
@@ -110,7 +111,7 @@ public static class ProfessionalRawPipeline
     public static void ValidateMaster(ProfessionalRawMaster master,ProfessionalRawDefinition definition)
     {
         definition.Validate();
-        if(definition.IsRenderedInput){if(master.Image.WorkingColorSpace!="sRGB"||master.Contract.DecodeKey!=definition.DecodeKey)throw new InvalidDataException("已渲染输入域失配。");return;}
+        if(definition.IsRenderedInput){if(master.Image.WorkingColorSpace!=(definition.ColorState?.Version==2?DocumentWorkingRendererV2.Space:"sRGB")||master.Contract.DecodeKey!=definition.DecodeKey)throw new InvalidDataException("已渲染输入域失配。");return;}
         if(master.Contract.DecodeKey!=definition.DecodeKey||master.Image.WorkingColorSpace!=WorkingSpace||!master.Contract.WhiteBalanceApplied||!master.Contract.CameraMatrixApplied||master.Contract.Gamma!="1,1"||master.Contract.AutoBright||master.Contract.OutputBits!=16||master.Contract.OutputSpace!=WorkingSpace)throw new InvalidDataException("RAW master/definition domain mismatch.");
     }
     public static ColorVector3 RenderPixel(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int x,int y,Func<double,double,double>? sceneMask=null)

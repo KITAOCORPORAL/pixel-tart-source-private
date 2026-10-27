@@ -3,7 +3,7 @@ namespace RAWSelectionAssistant.Views;
 /// <summary>Presentation-only labels. Values and persisted recipes stay unchanged.</summary>
 public sealed class PhotographerOptionLabelConverter:IValueConverter
 {
- public object Convert(object value,Type targetType,object parameter,CultureInfo culture)=>value is string s?s switch
+ public object Convert(object value,Type targetType,object parameter,CultureInfo culture)=>value is RAWSelectionAssistant.Core.Services.Projects.StudioLayerBlend blend?blend switch{RAWSelectionAssistant.Core.Services.Projects.StudioLayerBlend.Normal=>"正常",RAWSelectionAssistant.Core.Services.Projects.StudioLayerBlend.Multiply=>"正片叠底",RAWSelectionAssistant.Core.Services.Projects.StudioLayerBlend.Screen=>"滤色",RAWSelectionAssistant.Core.Services.Projects.StudioLayerBlend.Darken=>"变暗",RAWSelectionAssistant.Core.Services.Projects.StudioLayerBlend.Lighten=>"变亮",RAWSelectionAssistant.Core.Services.Projects.StudioLayerBlend.Overlay=>"叠加",RAWSelectionAssistant.Core.Services.Projects.StudioLayerBlend.SoftLight=>"柔光",RAWSelectionAssistant.Core.Services.Projects.StudioLayerBlend.Color=>"颜色",_=>"明度"}:value is string s?s switch
  {
   "NormalizedMix"=>"自然混合","ExposureSum"=>"曝光叠加","Warm"=>"暖白","Neutral"=>"中性白","Cool"=>"冷白",
   "SquareV1"=>"方形成像","LegacyFree"=>"保留原比例","CropFill"=>"裁切填满","FitEntire"=>"完整放入",

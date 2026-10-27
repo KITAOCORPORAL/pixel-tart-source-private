@@ -158,7 +158,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                 Editor.RestoreTargetEngine(active.EngineSnapshot,active.ExecutionModeSnapshot);
                 Editor.RawLocalEditing=staged.Editor.RawLocalEditing;
                 Editor.ApplyTargetSnapshot(active.AppliedLookSnapshot,active.FilmSettingsSnapshot,active.RawDefinition?.LocalEdits?.Stack??active.ColorAdjustmentStackSnapshot,render:false,targetIdentity:active.ActiveEditVersionId??active.Id);
-                Editor.AdoptPreparedSource(staged.Editor,active.AssetId,token);
+                Editor.AdoptPreparedSource(staged.Editor,active.AssetId,token);Editor.LinearDocumentEditing=active.RawDefinition?.ColorState?.Version==2;
                 Editor.RestoreSessionHistory(staged.Editor.CaptureSessionHistory());
                 RawExposureEv=staged.RawExposureEv;RawRedGain=staged.RawRedGain;RawGreenGain=staged.RawGreenGain;RawBlueGain=staged.RawBlueGain;RawUseCameraWhiteBalance=staged.RawUseCameraWhiteBalance;
                 RawPipelineStatus=staged.RawPipelineStatus;InstantDimensions=staged.InstantDimensions;FailedTarget=staged.FailedTarget;

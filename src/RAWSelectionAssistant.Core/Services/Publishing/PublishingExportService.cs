@@ -56,10 +56,11 @@ public sealed class PublishingExportService(IPublishingRenderer renderer,Action<
                 if(File.Exists(source+".kitao-export.json")){upstream=await ExportRecovery.ReadAsync(source+".kitao-export.json",cancellationToken);if(!string.Equals(upstream.OutputHash,Convert.ToHexString(before),StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("上游输出 hash 不一致。");}
                 if(upstream?.RecipeSnapshot?.RawDefinition is {} rawDefinition)
                 {
-                    if(!string.Equals(recipeOptions.ColorSpaceProfile,"sRGB",StringComparison.OrdinalIgnoreCase))throw new NotSupportedException("PV4 Publishing 当前仅支持 sRGB；未执行其他ICC转换。");
+                    var managedDocument=rawDefinition.ColorState is not null||rawDefinition.InstantInput?.ColorDocument is not null;
+                    if(!managedDocument&&!string.Equals(recipeOptions.ColorSpaceProfile,"sRGB",StringComparison.OrdinalIgnoreCase))throw new NotSupportedException("PV4 Publishing 当前仅支持 sRGB；未执行其他ICC转换。");
                     if(recipeOptions.OutputFormat==PublishingOutputFormat.Jpeg && recipeOptions.OutputBitDepth!=PublishingOutputBitDepth.Eight)throw new NotSupportedException("JPEG仅支持8位，未忽略请求位深。");
-                    if(recipeOptions.OutputFormat==PublishingOutputFormat.Png && recipeOptions.OutputBitDepth!=PublishingOutputBitDepth.Eight)throw new NotSupportedException("PV4 Publishing PNG 当前仅支持8位；快速导出可输出PNG16。");
-                    structured=structured with{RawDefinition=rawDefinition,RawInput=upstream.RecipeSnapshot.RawInput,AdjustmentFingerprint=upstream.RecipeSnapshot.AdjustmentFingerprint,ColorProfile="sRGB",BitDepth=recipeOptions.OutputFormat==PublishingOutputFormat.Tiff?16:8};
+                    if(!managedDocument&&recipeOptions.OutputFormat==PublishingOutputFormat.Png && recipeOptions.OutputBitDepth!=PublishingOutputBitDepth.Eight)throw new NotSupportedException("PV4 Publishing PNG 当前仅支持8位；快速导出可输出PNG16。");
+                    structured=structured with{RawDefinition=rawDefinition,RawInput=upstream.RecipeSnapshot.RawInput,AdjustmentFingerprint=upstream.RecipeSnapshot.AdjustmentFingerprint,ColorProfile=managedDocument?recipeOptions.ColorSpaceProfile:"sRGB",BitDepth=(int)recipeOptions.OutputBitDepth};
                 }
                 var versionId=upstream?.EditVersionId??new Guid(before.AsSpan(0,16));
                 var sourceHash=upstream?.SourceHash??Convert.ToHexString(before);

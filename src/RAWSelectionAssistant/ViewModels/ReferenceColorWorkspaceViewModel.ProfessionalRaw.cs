@@ -123,7 +123,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         definition.InstantFilm?.V3?.MultipleInput?.ValidateSource(token);
         if(_disposed||revision!=Volatile.Read(ref _activationRevision))throw new OperationCanceledException(token);
         TrimProfessionalMasters(target);
-        ActiveTarget=target;TargetImage=image;TargetName=target.FileName;target.IsActive=true;foreach(var other in Targets.Where(x=>!ReferenceEquals(x,target)))other.IsActive=false;
+        Editor.LinearDocumentEditing=definition.ColorState?.Version==2;ActiveTarget=target;TargetImage=image;TargetName=target.FileName;target.IsActive=true;foreach(var other in Targets.Where(x=>!ReferenceEquals(x,target)))other.IsActive=false;
         Editor.RestoreTargetEngine(target.EngineSnapshot,target.ExecutionModeSnapshot);
         Editor.RawLocalEditing=definition.InstantFilm is null&&(definition.ProcessingVersion==4&&!definition.IsRenderedInput||definition.ProcessingVersion==5&&definition.RenderedInputVersion==2);OnPropertyChanged(nameof(RawLocalEditing));OnPropertyChanged(nameof(DarkroomAdjustmentEnabled));OnPropertyChanged(nameof(RasterAvailabilityReason));
         Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot,target.FilmSettingsSnapshot,definition.LocalEdits?.Stack??definition.LightPrint?.WindowAdjustments??target.ColorAdjustmentStackSnapshot,render:false,targetIdentity:target.ActiveEditVersionId??target.Id);

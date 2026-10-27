@@ -18,10 +18,11 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public bool IsLightPrintLocked=>_lightPrintEnabled&&ActiveTarget?.RawDefinition?.LightPrint is not null&&!_lightPrintReshoot;
  public bool LightPrintControlsEnabled=>ActiveTarget is not null&&!IsLightPrintLocked&&!IsInstantGenerating&&!IsLoading&&!IsExporting;
  public string LightPrintStatus {get=>_lightPrintStatus;private set=>SetProperty(ref _lightPrintStatus,value);}
- public string LightPrintRecipeSummary=>ActiveTarget?.RawDefinition?.LightPrint is{} light?$"已显影 · {PhotographerPaperName} · {LightPrintFrames.Available.First(f=>f.Id==light.FrameId).Name} · 种子 {ActiveTarget.RawDefinition.InstantFilm!.V3!.Random.RootSeed}":"未显影预览 · 不写历史";
+ public string LightPrintRecipeSummary=>ActiveTarget?.RawDefinition?.LightPrint is{} light?$"已显影 · {PhotographerPaperName} · {LightPrintFrames.Available.First(f=>f.Id==light.FrameId).Name} · 种子 {ActiveTarget.RawDefinition.InstantFilm!.V3!.Random.RootSeed} · 输入 {ActiveTarget.RawDefinition.InstantInput?.Mode??"RAW"} / 变体 {ActiveTarget.RawDefinition.InstantInput?.OriginVersionId} · {(ActiveTarget.RawDefinition.InstantInput?.ColorDocument is{} frozen?"冻结ICC→sRGB显影":"兼容sRGB显影")}":"未显影预览 · 不写历史";
  public Task LightPrintPreviewWork {get;private set;}=Task.CompletedTask;
  public AsyncRelayCommand DevelopLightPrintCommand {get;private set;}=null!;
  public RelayCommand ReshootLightPrintCommand {get;private set;}=null!;
+ public RelayCommand RerollLightPrintPreviewCommand=>new(_=>{if(!LightPrintControlsEnabled)return;InstantV3Seed=BitConverter.ToUInt64(RandomNumberGenerator.GetBytes(8));QueueLightPrintPreview();},_=>LightPrintControlsEnabled);
  public RelayCommand CancelLightPrintPreviewCommand {get;private set;}=null!;
  public void RequestLightPrintPreview()=>QueueLightPrintPreview();
  public AsyncRelayCommand NewNormalLightPrintVariantCommand {get;private set;}=null!;
@@ -41,7 +42,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     try{var path=System.IO.Path.Combine(RAWSelectionAssistant.Core.Utilities.AppDataPaths.Root,"lightprint-camera.json");Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);File.WriteAllText(path,System.Text.Json.JsonSerializer.Serialize(new{Enabled=InstantCameraAnimation}));}catch(IOException){}
    }
    if(e.PropertyName is nameof(ActiveTarget) or nameof(IsLoading) or nameof(IsInstantGenerating)){NotifyLightPrint();return;}
-   if(_lightPrintEnabled&&!_restoringLightPrintControls&&e.PropertyName is{} name&&(name==nameof(SelectedInstantProfile)||name.StartsWith("InstantV3",StringComparison.Ordinal)&&name is not(nameof(InstantV3Stocks) or nameof(InstantV3Patterns) or nameof(InstantV3DefectKinds))||name is nameof(InstantAmount) or nameof(InstantUneven) or nameof(InstantSecondSourceName) or nameof(InstantSecondWeight) or nameof(InstantSecondCropX) or nameof(InstantSecondCropY) or nameof(InstantSecondZoom) or nameof(InstantFit) or nameof(InstantCropX) or nameof(InstantCropY)))QueueLightPrintPreview();
+   if(_lightPrintEnabled&&!_restoringLightPrintControls&&e.PropertyName is{} name&&(name==nameof(SelectedInstantProfile)||name==nameof(InstantInputMode)||name.StartsWith("InstantV3",StringComparison.Ordinal)&&name is not(nameof(InstantV3Stocks) or nameof(InstantV3Patterns) or nameof(InstantV3DefectKinds))||name is nameof(InstantAmount) or nameof(InstantUneven) or nameof(InstantSecondSourceName) or nameof(InstantSecondWeight) or nameof(InstantSecondCropX) or nameof(InstantSecondCropY) or nameof(InstantSecondZoom) or nameof(InstantFit) or nameof(InstantCropX) or nameof(InstantCropY)))QueueLightPrintPreview();
   };
   DevelopLightPrintCommand=new(async _=>
   {
@@ -115,7 +116,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     var definition=draft;
     // Quick draft uses a labelled bounded input; developing/export always use the full frozen source.
     ProfessionalRawMaster master;
-    if(RawMatchTiff16ProductPipeline.IsRaw(target.Path))master=ReusableMaster(target,definition)??await DecodeProfessionalInputAsync(target.Path,definition,token);
+    if(RawMatchTiff16ProductPipeline.IsRaw(target.Path)||definition.InstantInput?.ColorDocument is not null)master=ReusableMaster(target,definition)??await DecodeProfessionalInputAsync(target.Path,definition,token);
     else
     {
      BitmapSource source;

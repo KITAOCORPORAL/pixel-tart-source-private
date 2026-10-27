@@ -6,6 +6,8 @@ public sealed record InstantInputRecipe(int Version,string Mode,Guid? OriginVers
 {
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
     public LegacyRawEditInputContract? LegacyRaw {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public ProfessionalRawDefinition? ColorDocument {get;init;}
 }
 
 public sealed record LegacyRawEditInputContract(int Version,int ProcessingVersion,string SourceSha256,

@@ -7,13 +7,13 @@ using RAWSelectionAssistant.Core.Services.Projects;
 namespace RAWSelectionAssistant.Services;
 
 public sealed record ProfessionalOutputInspection(int Width,int Height,int BitDepth,int Orientation,bool Srgb,int? JpegQuality,double MeanAbsoluteError,double RootMeanSquareError,int MaximumError)
-{ public string EncoderConfiguration {get;init;}="PV4RowsV1"; }
+{ public string EncoderConfiguration {get;init;}="PV4RowsV1"; public IReadOnlyDictionary<string,double>? StageMilliseconds{get;init;} public bool PixelComparisonPerformed{get;init;}=true; }
 
 public static class ProfessionalRawExport
 {
     public static async Task<ProfessionalOutputInspection> WriteAsync(ProfessionalRawMaster master,ProfessionalRawDefinition definition,string destination,StudioExportFormat format,CancellationToken token=default,Action<string>? stage=null)
     {
-        if(definition.ColorState is not null)return await DocumentColorWorkflowV1.WriteAsync(master,definition,destination,format,token);
+        if(definition.ColorState is not null)return await DocumentColorWorkflowV1.WriteAsync(master,definition,destination,format,token,stage);
         SecondExposureDecoder.EnsureRegistered();
         if(Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition))return await InstantV3DirectExport.Write(master,definition,destination,format,token,stage);
         definition=definition with{LocalEdits=definition.LocalEdits?.Freeze(),InstantFilm=definition.InstantFilm is {} film?InstantFilmPipeline.Freeze(film):null};

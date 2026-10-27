@@ -132,6 +132,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         _render?.Cancel();
     }
     public bool RawLocalEditing {get;internal set;}
+    public bool LinearDocumentEditing {get;internal set;}
     public void CopyCurrentLookTo(IEnumerable<ReferenceTargetItem> targets)
     {
         var snapshot = SelectedLook?.Normalize();
@@ -469,6 +470,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         _presetPreviewNode = null; NotifyPresetPreview();
         var previous = EffectiveEditingStack(); var nodes = change(previous.Nodes).ToArray();
         if(RawLocalEditing&&nodes.Any(n=>!ProfessionalRawLocalRenderer.Supports(n.Type))){StatusText="当前RAW局部层不支持此工具；原定义保持。";return;} if (nodes.Length == 0) return;
+        if(LinearDocumentEditing&&nodes.Any(n=>n.Type!=ColorStudioNodeType.BasicTone||n.Blend!=StudioLayerBlend.Normal||n.NumericParameters.Any(p=>p.Key!="exposure"&&p.Value!=0))){StatusText="线性宽色域V2当前仅支持曝光/Normal强度与蒙版；其他工具未改写。";return;}
         // Enforce at the mutation boundary, including tool panels, curves and drag reorder.
         // Visibility and user-lock toggles are allowed; system locks cannot be removed.
         foreach(var locked in previous.Nodes.Where(n=>n.IsLocked))
