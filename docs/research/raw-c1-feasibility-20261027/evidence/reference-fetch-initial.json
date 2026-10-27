@@ -1,0 +1,62 @@
+[
+  {
+    "id": "c1-search",
+    "url": "https://support.captureone.com/api/v2/help_center/en-us/articles/search.json?query=ProStandard&per_page=20",
+    "status": "failed",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "id": "c1-auto-search",
+    "url": "https://support.captureone.com/api/v2/help_center/en-us/articles/search.json?query=AppleScript&per_page=15",
+    "status": "failed",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "id": "c1-base-search",
+    "url": "https://support.captureone.com/api/v2/help_center/en-us/articles/search.json?query=Base%20Characteristics&per_page=15",
+    "status": "failed",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "id": "libraw-api",
+    "url": "https://www.libraw.org/docs/API-datastruct-eng.html",
+    "resolved": "https://www.libraw.org/docs/API-datastruct-eng.html",
+    "status": "retrieved",
+    "bytes": 107753,
+    "sha256": "a5311c66781fa64022792ebf18338cdea394d0e55a22f25bf6e2d6a41b560130",
+    "local_cache": "C:\\Users\\Admin\\AppData\\Local\\Temp\\guangjing-raw-c1-reference-20261027\\libraw-api.txt"
+  },
+  {
+    "id": "rawtherapee-color",
+    "url": "https://rawpedia.rawtherapee.com/Color_Management",
+    "status": "failed",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "id": "darktable-color",
+    "url": "https://docs.darktable.org/usermanual/development/en/module-reference/processing-modules/input-color-profile/",
+    "resolved": "https://docs.darktable.org/usermanual/development/en/module-reference/processing-modules/input-color-profile/",
+    "status": "retrieved",
+    "bytes": 75692,
+    "sha256": "bf00efcdc509bc5a0bafdf8e56b1c71e73e073ee76fcf70734d2f5ab6c4c6fb4",
+    "local_cache": "C:\\Users\\Admin\\AppData\\Local\\Temp\\guangjing-raw-c1-reference-20261027\\darktable-color.txt"
+  },
+  {
+    "id": "dcamprof-manual",
+    "url": "https://raw.githubusercontent.com/Beep6581/dcamprof/master/www/dcamprof.html",
+    "resolved": "https://raw.githubusercontent.com/Beep6581/dcamprof/master/www/dcamprof.html",
+    "status": "retrieved",
+    "bytes": 314506,
+    "sha256": "2e182bd32d06338577242eb69663446beb837f277ade3fb52e131d69eb0b5c57",
+    "local_cache": "C:\\Users\\Admin\\AppData\\Local\\Temp\\guangjing-raw-c1-reference-20261027\\dcamprof-manual.txt"
+  },
+  {
+    "id": "rea-readme",
+    "url": "https://raw.githubusercontent.com/morluto/rea/a95b83c2b06ef713664d6abb3d29c7c149a2ce01/README.md",
+    "resolved": "https://raw.githubusercontent.com/morluto/rea/a95b83c2b06ef713664d6abb3d29c7c149a2ce01/README.md",
+    "status": "retrieved",
+    "bytes": 29405,
+    "sha256": "ff4c7366008e14251faee8aa9f516f4d4686e92e40c1800ae5ea7e4230d6d2ab",
+    "local_cache": "C:\\Users\\Admin\\AppData\\Local\\Temp\\guangjing-raw-c1-reference-20261027\\rea-readme.txt"
+  }
+]

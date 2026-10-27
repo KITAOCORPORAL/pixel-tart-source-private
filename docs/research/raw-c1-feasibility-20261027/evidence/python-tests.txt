@@ -1,0 +1,14 @@
+test_8bit_refused (test_probes.Gates.test_8bit_refused) ... ok
+test_fake_identity_refused (test_probes.Gates.test_fake_identity_refused) ... ok
+test_lcms_wrong_binary_refused_before_load (test_probes.Gates.test_lcms_wrong_binary_refused_before_load) ... ok
+test_missing_icc_refused (test_probes.Gates.test_missing_icc_refused) ... ok
+test_output_region_bounds_refused (test_probes.Gates.test_output_region_bounds_refused) ... ok
+test_uint16_not_silently_downconverted (test_probes.Gates.test_uint16_not_silently_downconverted) ... ok
+test_unknown_geometry_refused (test_probes.Gates.test_unknown_geometry_refused) ... ok
+test_unresolved_orientation_refused (test_probes.Gates.test_unresolved_orientation_refused) ... ok
+test_wrong_profile_refused (test_probes.Gates.test_wrong_profile_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.107s
+
+OK

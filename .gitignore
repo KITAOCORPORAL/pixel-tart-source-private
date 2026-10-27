@@ -103,3 +103,9 @@ tests/fixtures-local/raw/*.IIQ
 tests/fixtures-local/raw/*.SRW
 tests/fixtures-local/raw/*.RWL
 tests/fixtures-local/raw/*.X3F
+# Raw/C1 feasibility: originals, large measurements, and commercial assets stay local.
+/artifacts/raw-c1-feasibility-20261027/
+
+# Private/unknown-provenance photo derivatives are delivered locally, not published.
+/docs/research/raw-c1-feasibility-20261027/evidence/*.png
+/tools/raw-c1-feasibility/__pycache__/

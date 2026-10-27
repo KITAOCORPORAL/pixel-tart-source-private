@@ -1,0 +1,68 @@
+{
+  "left": {
+    "path": "C:\\Users\\Admin\\Documents\\ChatGPT\\\u7834\u7532\\GUANGJING_RAW_C1_FEASIBILITY\\artifacts\\raw-c1-feasibility-20261027\\pilot-full-01\\D800-12L-PV4-EV0-full-srgb.tif",
+    "width": 7378,
+    "height": 4924,
+    "bits": [
+      16,
+      16,
+      16
+    ],
+    "compression": 1,
+    "samples": 3,
+    "planar": 1,
+    "photometric": 2,
+    "orientation": 1,
+    "sample_format": [
+      1,
+      1,
+      1
+    ],
+    "icc_bytes": 588,
+    "icc_sha256": "a92fbb73439e5f5d390f7ed96336cc399ee3285838f9d441645185230d1e7479",
+    "file_bytes": 217976466
+  },
+  "right": {
+    "path": "C:\\Users\\Admin\\Documents\\ChatGPT\\\u7834\u7532\\GUANGJING_RAW_C1_FEASIBILITY\\artifacts\\raw-c1-feasibility-20261027\\pilot-full-01\\D800-12L-PV4-EV0-full-srgb.tif",
+    "width": 7378,
+    "height": 4924,
+    "bits": [
+      16,
+      16,
+      16
+    ],
+    "compression": 1,
+    "samples": 3,
+    "planar": 1,
+    "photometric": 2,
+    "orientation": 1,
+    "sample_format": [
+      1,
+      1,
+      1
+    ],
+    "icc_bytes": 588,
+    "icc_sha256": "a92fbb73439e5f5d390f7ed96336cc399ee3285838f9d441645185230d1e7479",
+    "file_bytes": 217976466
+  },
+  "source_sha256_asserted_by_operator": "3A0C1672ABDA62CC26349C088CB87A268EF0E5B46B1F4CCC18C99EE936E447B5",
+  "roi": [
+    0.2,
+    0.2,
+    0.3,
+    0.3
+  ],
+  "pixels": 363834,
+  "pcs": "CIELAB D50 via LCMS relative colorimetric intent1 BPCoff",
+  "metric": "DeltaE76 difference between outputs, NOT real-color error",
+  "median_deltaE76": 0.0,
+  "p95_deltaE76": 0.0,
+  "mean_deltaLab": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "lcms_version": 2120,
+  "fitPerformed": false,
+  "scope": "same-file identity smoke test only, not C1 comparison or color accuracy"
+}

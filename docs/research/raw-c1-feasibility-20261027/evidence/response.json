@@ -1,0 +1,298 @@
+{
+  "sourceManifest": "C:\\Users\\Admin\\Documents\\ChatGPT\\破甲\\GUANGJING_RAW_C1_FEASIBILITY\\docs\\research\\raw-c1-feasibility-20261027\\evidence\\probe-samples.json",
+  "libraw": "0.21.1-Release",
+  "results": [
+    {
+      "id": "D800-12L",
+      "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON_D800_12bit_FX_LOSSLESS.NEF",
+      "bytes": 34439988,
+      "sourceSha256": "3A0C1672ABDA62CC26349C088CB87A268EF0E5B46B1F4CCC18C99EE936E447B5",
+      "sourceLastWriteUtc": "2019-10-20T15:41:41.8193603Z",
+      "sourceSizeAndMtimeUnchanged": true,
+      "status": "decoded",
+      "thumbnailStatus": "Bitmap",
+      "contract": {
+        "DecoderVersion": "0.21.1-Release",
+        "Make": "Nikon",
+        "Model": "D800",
+        "SourceSha256": "3A0C1672ABDA62CC26349C088CB87A268EF0E5B46B1F4CCC18C99EE936E447B5",
+        "DecodeKey": "LibRaw021LinearProPhotoD65V1:Camera:1:1:1",
+        "CameraWhiteBalance": [
+          505,
+          256,
+          352,
+          256
+        ],
+        "AppliedWhiteBalance": [
+          505,
+          256,
+          352,
+          256
+        ],
+        "CameraToRgbMatrix": [
+          1.781579852104187,
+          -0.6133930683135986,
+          -0.16818679869174957,
+          0,
+          -0.173564612865448,
+          1.6453251838684082,
+          -0.4717606008052826,
+          0,
+          0.02276698313653469,
+          -0.44616398215293884,
+          1.4233970642089844,
+          0
+        ],
+        "WhiteLevel": 4095,
+        "BlackLevelPolicy": "LibRaw metadata: user_black=-1, user_cblack=-1000001 (all channels)",
+        "OutputSpace": "LibRaw Linear ProPhoto D65",
+        "OutputBits": 16,
+        "WhiteBalanceApplied": true,
+        "CameraMatrixApplied": true,
+        "AutoBright": false,
+        "Gamma": "1,1",
+        "HighlightMode": 0,
+        "DecoderClipped": true,
+        "SaturatedChannelSamples": 6627,
+        "Characterization": "LibRaw embedded/builtin camera matrix; no proprietary profile",
+        "UnpackParametersJson": "{\"UseRawSpeed\":0,\"UseDngSdk\":0,\"Options\":2,\"ShotSelect\":0,\"Specials\":0,\"MaxRawMemoryMb\":2048,\"SonyArw2PosterizationThr\":0,\"CoolscanNefGamma\":1}",
+        "OutputParametersJson": "{\"Greybox\":{\"Location\":{\"IsEmpty\":true,\"X\":0,\"Y\":0},\"Size\":{\"IsEmpty\":false,\"Width\":-1,\"Height\":-1},\"X\":0,\"Y\":0,\"Width\":-1,\"Height\":-1,\"Left\":0,\"Top\":0,\"Right\":-1,\"Bottom\":-1,\"IsEmpty\":false},\"Cropbox\":{\"Location\":{\"IsEmpty\":true,\"X\":0,\"Y\":0},\"Size\":{\"IsEmpty\":false,\"Width\":-1,\"Height\":-1},\"X\":0,\"Y\":0,\"Width\":-1,\"Height\":-1,\"Left\":0,\"Top\":0,\"Right\":-1,\"Bottom\":-1,\"IsEmpty\":false},\"Aber\":[1,1,1,1],\"Gamma\":[1,1,0.9999999999999964,0.9999999999999964,0,1],\"UserMultipliers\":[505,256,352,256],\"Brightness\":1,\"Threshold\":0,\"HalfSize\":false,\"FourColorRgb\":false,\"HighlightMode\":0,\"UseAutoWb\":false,\"UseCameraWb\":false,\"UseCameraMatrix\":true,\"OutputColor\":4,\"OutputProfile\":null,\"CameraProfile\":null,\"BadPixels\":null,\"DarkFrame\":null,\"OutputBps\":16,\"OutputTiff\":false,\"OutputFlags\":0,\"UserFlip\":0,\"UserQual\":3,\"UserBlack\":-1,\"UserCBlack\":[-1000001,-1000001,-1000001,-1000001],\"UserSaturation\":-1,\"MedianPasses\":0,\"AutoBrightThr\":0.01,\"AdjustMaximumThr\":0,\"NoAutoBright\":true,\"UseFujiRotate\":true,\"GreenMatching\":0,\"DcbIterations\":0,\"DcbEnhanceFl\":0,\"FbddNoiserd\":0,\"ExpCorrec\":false,\"ExpShift\":1,\"ExpPreser\":0,\"AutoScale\":true,\"Interpolation\":true}",
+        "BlackLevel": 0,
+        "ChannelBlackLevels": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "BlackPatternRows": 0,
+        "BlackPatternColumns": 0,
+        "BlackPatternSha256": "8F8D55AFC740451AD55820EAFC6F84A5974010D51663588C328821353DA2828C",
+        "NormalizedWhiteBalance": [
+          1.97265625,
+          1,
+          1.375,
+          1
+        ],
+        "ZeroChannelSamples": 22,
+        "DecoderWarnings": "None",
+        "WhiteBalanceSource": "Metadata cam_mul; explicit user_mul, auto/camera flags off",
+        "Demosaic": "AHD (user_qual=3), three-color Bayer only",
+        "ClippingPolicy": "LibRaw black subtraction, scale_colors and convert_to_rgb clip to uint16; no lost signal recovery"
+      },
+      "cases": [
+        {
+          "ev": -2,
+          "width": 720,
+          "height": 481,
+          "orientation": 1,
+          "space": "encoded sRGB after production PV4 display transform",
+          "file": "D800-12L-EV-2.rgb16le",
+          "sha256": "055343F87CD30F7C1C7AEB488D851B755FFE45D0A096D86A27BC80AC74E1F6B7",
+          "meanEncodedChannel": 0.14744897943666865,
+          "zeroChannelFraction": 0,
+          "maximumChannelFraction": 0
+        },
+        {
+          "ev": -1,
+          "width": 720,
+          "height": 481,
+          "orientation": 1,
+          "space": "encoded sRGB after production PV4 display transform",
+          "file": "D800-12L-EV-1.rgb16le",
+          "sha256": "056F7A6FFA5D1A2A3000C6BAE42671C3EF7C9F22937DB0CF602D2187C2B53E52",
+          "meanEncodedChannel": 0.21481656251205553,
+          "zeroChannelFraction": 0,
+          "maximumChannelFraction": 0
+        },
+        {
+          "ev": 0,
+          "width": 720,
+          "height": 481,
+          "orientation": 1,
+          "space": "encoded sRGB after production PV4 display transform",
+          "file": "D800-12L-EV0.rgb16le",
+          "sha256": "1B42FD1F487DF871624958FCCF297BD3C76BE4DB99F8995219FD3A00AD620FE6",
+          "meanEncodedChannel": 0.3050618592263096,
+          "zeroChannelFraction": 0,
+          "maximumChannelFraction": 0
+        },
+        {
+          "ev": 1,
+          "width": 720,
+          "height": 481,
+          "orientation": 1,
+          "space": "encoded sRGB after production PV4 display transform",
+          "file": "D800-12L-EV+1.rgb16le",
+          "sha256": "0DD8391D535B539946BB5B0A16CADB29FEEF5FBBF3634C59E9189A9FBF4C3AC2",
+          "meanEncodedChannel": 0.42536560252625993,
+          "zeroChannelFraction": 0,
+          "maximumChannelFraction": 4.0425040425040424e-05
+        },
+        {
+          "ev": 2,
+          "width": 720,
+          "height": 481,
+          "orientation": 1,
+          "space": "encoded sRGB after production PV4 display transform",
+          "file": "D800-12L-EV+2.rgb16le",
+          "sha256": "F1925B1BBD92D7E849B5496339D4AB7BD3303337F81926F00F849D990007DFA5",
+          "meanEncodedChannel": 0.5810192995317146,
+          "zeroChannelFraction": 0,
+          "maximumChannelFraction": 0.02118849618849619
+        }
+      ],
+      "warning": "720px production preview, not full-size export/Capture One; aggregate encoded stats not color accuracy"
+    },
+    {
+      "id": "D800-14L",
+      "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON_D800_14bit_FX_LOSSLESS.NEF",
+      "bytes": 43256123,
+      "sourceSha256": "593E1B0EE73EF7E699D73465E3BD8222AD0ED79BEB69E9265E440756D4B50A1A",
+      "sourceLastWriteUtc": "2019-10-20T15:41:36.9891786Z",
+      "sourceSizeAndMtimeUnchanged": true,
+      "status": "decoded",
+      "thumbnailStatus": "Bitmap",
+      "contract": {
+        "DecoderVersion": "0.21.1-Release",
+        "Make": "Nikon",
+        "Model": "D800",
+        "SourceSha256": "593E1B0EE73EF7E699D73465E3BD8222AD0ED79BEB69E9265E440756D4B50A1A",
+        "DecodeKey": "LibRaw021LinearProPhotoD65V1:Camera:1:1:1",
+        "CameraWhiteBalance": [
+          505,
+          256,
+          352,
+          256
+        ],
+        "AppliedWhiteBalance": [
+          505,
+          256,
+          352,
+          256
+        ],
+        "CameraToRgbMatrix": [
+          1.781579852104187,
+          -0.6133930683135986,
+          -0.16818679869174957,
+          0,
+          -0.173564612865448,
+          1.6453251838684082,
+          -0.4717606008052826,
+          0,
+          0.02276698313653469,
+          -0.44616398215293884,
+          1.4233970642089844,
+          0
+        ],
+        "WhiteLevel": 16383,
+        "BlackLevelPolicy": "LibRaw metadata: user_black=-1, user_cblack=-1000001 (all channels)",
+        "OutputSpace": "LibRaw Linear ProPhoto D65",
+        "OutputBits": 16,
+        "WhiteBalanceApplied": true,
+        "CameraMatrixApplied": true,
+        "AutoBright": false,
+        "Gamma": "1,1",
+        "HighlightMode": 0,
+        "DecoderClipped": true,
+        "SaturatedChannelSamples": 2628,
+        "Characterization": "LibRaw embedded/builtin camera matrix; no proprietary profile",
+        "UnpackParametersJson": "{\"UseRawSpeed\":0,\"UseDngSdk\":0,\"Options\":2,\"ShotSelect\":0,\"Specials\":0,\"MaxRawMemoryMb\":2048,\"SonyArw2PosterizationThr\":0,\"CoolscanNefGamma\":1}",
+        "OutputParametersJson": "{\"Greybox\":{\"Location\":{\"IsEmpty\":true,\"X\":0,\"Y\":0},\"Size\":{\"IsEmpty\":false,\"Width\":-1,\"Height\":-1},\"X\":0,\"Y\":0,\"Width\":-1,\"Height\":-1,\"Left\":0,\"Top\":0,\"Right\":-1,\"Bottom\":-1,\"IsEmpty\":false},\"Cropbox\":{\"Location\":{\"IsEmpty\":true,\"X\":0,\"Y\":0},\"Size\":{\"IsEmpty\":false,\"Width\":-1,\"Height\":-1},\"X\":0,\"Y\":0,\"Width\":-1,\"Height\":-1,\"Left\":0,\"Top\":0,\"Right\":-1,\"Bottom\":-1,\"IsEmpty\":false},\"Aber\":[1,1,1,1],\"Gamma\":[1,1,0.9999999999999964,0.9999999999999964,0,1],\"UserMultipliers\":[505,256,352,256],\"Brightness\":1,\"Threshold\":0,\"HalfSize\":false,\"FourColorRgb\":false,\"HighlightMode\":0,\"UseAutoWb\":false,\"UseCameraWb\":false,\"UseCameraMatrix\":true,\"OutputColor\":4,\"OutputProfile\":null,\"CameraProfile\":null,\"BadPixels\":null,\"DarkFrame\":null,\"OutputBps\":16,\"OutputTiff\":false,\"OutputFlags\":0,\"UserFlip\":0,\"UserQual\":3,\"UserBlack\":-1,\"UserCBlack\":[-1000001,-1000001,-1000001,-1000001],\"UserSaturation\":-1,\"MedianPasses\":0,\"AutoBrightThr\":0.01,\"AdjustMaximumThr\":0,\"NoAutoBright\":true,\"UseFujiRotate\":true,\"GreenMatching\":0,\"DcbIterations\":0,\"DcbEnhanceFl\":0,\"FbddNoiserd\":0,\"ExpCorrec\":false,\"ExpShift\":1,\"ExpPreser\":0,\"AutoScale\":true,\"Interpolation\":true}",
+        "BlackLevel": 0,
+        "ChannelBlackLevels": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "BlackPatternRows": 0,
+        "BlackPatternColumns": 0,
+        "BlackPatternSha256": "8F8D55AFC740451AD55820EAFC6F84A5974010D51663588C328821353DA2828C",
+        "NormalizedWhiteBalance": [
+          1.97265625,
+          1,
+          1.375,
+          1
+        ],
+        "ZeroChannelSamples": 8,
+        "DecoderWarnings": "None",
+        "WhiteBalanceSource": "Metadata cam_mul; explicit user_mul, auto/camera flags off",
+        "Demosaic": "AHD (user_qual=3), three-color Bayer only",
+        "ClippingPolicy": "LibRaw black subtraction, scale_colors and convert_to_rgb clip to uint16; no lost signal recovery"
+      },
+      "cases": [
+        {
+          "ev": -2,
+          "width": 720,
+          "height": 481,
+          "orientation": 1,
+          "space": "encoded sRGB after production PV4 display transform",
+          "file": "D800-14L-EV-2.rgb16le",
+          "sha256": "E478F56D2F2E28F2686FB370AC6065B83547FB65D8E6DBE8843FF2C96A536013",
+          "meanEncodedChannel": 0.13546171650574562,
+          "zeroChannelFraction": 9.625009625009626e-07,
+          "maximumChannelFraction": 0
+        },
+        {
+          "ev": -1,
+          "width": 720,
+          "height": 481,
+          "orientation": 1,
+          "space": "encoded sRGB after production PV4 display transform",
+          "file": "D800-14L-EV-1.rgb16le",
+          "sha256": "CF39F44813D31737D92461398446C138D37E849DFE8CB1B742C923986039DD33",
+          "meanEncodedChannel": 0.19874334526367077,
+          "zeroChannelFraction": 9.625009625009626e-07,
+          "maximumChannelFraction": 0
+        },
+        {
+          "ev": 0,
+          "width": 720,
+          "height": 481,
+          "orientation": 1,
+          "space": "encoded sRGB after production PV4 display transform",
+          "file": "D800-14L-EV0.rgb16le",
+          "sha256": "1F0538388DCED0E46E795671FE7204B5CE39F9DE003F9D89A70887A3A7C813BE",
+          "meanEncodedChannel": 0.28360143073059213,
+          "zeroChannelFraction": 9.625009625009626e-07,
+          "maximumChannelFraction": 0
+        },
+        {
+          "ev": 1,
+          "width": 720,
+          "height": 481,
+          "orientation": 1,
+          "space": "encoded sRGB after production PV4 display transform",
+          "file": "D800-14L-EV+1.rgb16le",
+          "sha256": "173F3E6E3C5EF0C7E3B3C59C43FCC47B006D52B9013F2694165ADC0656B501B0",
+          "meanEncodedChannel": 0.39682842460773915,
+          "zeroChannelFraction": 9.625009625009626e-07,
+          "maximumChannelFraction": 2.8875028875028876e-06
+        },
+        {
+          "ev": 2,
+          "width": 720,
+          "height": 481,
+          "orientation": 1,
+          "space": "encoded sRGB after production PV4 display transform",
+          "file": "D800-14L-EV+2.rgb16le",
+          "sha256": "3466BE6B1845A3AFCC5E71474D37C5F8BE1EB004CB033D870902673188861160",
+          "meanEncodedChannel": 0.5451017858868566,
+          "zeroChannelFraction": 9.625009625009626e-07,
+          "maximumChannelFraction": 0.014357626857626858
+        }
+      ],
+      "warning": "720px production preview, not full-size export/Capture One; aggregate encoded stats not color accuracy"
+    },
+    {
+      "id": "XT5-negative",
+      "path": "N:\\pixart\\RAW\\Real\\fuji\\DSCF0347.RAF",
+      "bytes": 87330816,
+      "sourceSha256": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+      "status": "failed",
+      "thumbnailStatus": "Jpeg",
+      "error": "System.NotSupportedException: RAW解码工作集估计超过1GiB准入预算，未降低尺寸或位深。\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.ProfessionalRawDecoder.Decode(String path, ProfessionalRawDefinition definition, CancellationToken token) in C:\\Users\\Admin\\Documents\\ChatGPT\\破甲\\GUANGJING_RAW_C1_FEASIBILITY\\src\\RAWSelectionAssistant.Core\\Services\\RawToJpeg\\ProfessionalRawDecoder.cs:line 68\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.ProfessionalRawDecoder.<>c__DisplayClass2_0.<DecodeAsync>b__0() in C:\\Users\\Admin\\Documents\\ChatGPT\\破甲\\GUANGJING_RAW_C1_FEASIBILITY\\src\\RAWSelectionAssistant.Core\\Services\\RawToJpeg\\ProfessionalRawDecoder.cs:line 20\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n--- End of stack trace from previous location ---\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)\r\n--- End of stack trace from previous location ---\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.ProfessionalRawDecoder.DecodeAsync(String path, ProfessionalRawDefinition definition, CancellationToken token) in C:\\Users\\Admin\\Documents\\ChatGPT\\破甲\\GUANGJING_RAW_C1_FEASIBILITY\\src\\RAWSelectionAssistant.Core\\Services\\RawToJpeg\\ProfessionalRawDecoder.cs:line 20\r\n   at Program.<Main>$(String[] args) in C:\\Users\\Admin\\Documents\\ChatGPT\\破甲\\GUANGJING_RAW_C1_FEASIBILITY\\tools\\raw-c1-feasibility\\ResponseProbe\\Program.cs:line 17"
+    }
+  ],
+  "thumbnailCaveat": "Initial JPEG thumbnail byte extraction was invalid; discarded from analysis. Script no longer extracts thumbnails. All visual/ROI evidence uses decoded PV4 buffers."
+}

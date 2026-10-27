@@ -1,0 +1,660 @@
+{
+  "domain": "720px production preview uint16 output samples",
+  "c1Comparisons": 0,
+  "independentHoldoutSamples": 0,
+  "fitPerformed": false,
+  "pcs": "LCMS relative intent1 BPCoff CIELAB D50",
+  "lcmsVersion": 2120,
+  "regions": {
+    "sky_blue": [
+      0.56,
+      0.06,
+      0.78,
+      0.17
+    ],
+    "light_building": [
+      0.62,
+      0.47,
+      0.71,
+      0.61
+    ],
+    "building_shadow": [
+      0.08,
+      0.72,
+      0.17,
+      0.86
+    ]
+  },
+  "rows": [
+    {
+      "sourceId": "D800-12L",
+      "ev": -2,
+      "region": "sky_blue",
+      "roi": [
+        0.56,
+        0.06,
+        0.78,
+        0.17
+      ],
+      "pixels": 8374,
+      "meanLabD50": [
+        16.38589859008789,
+        -1.0496184825897217,
+        -10.811147689819336
+      ],
+      "medianChroma": 10.8116455078125,
+      "medianHueChangeDegreesWhenChromaOver5": -0.0002288818359375,
+      "p95DeltaE76VsSameSourceEV0": 23.798490524291992,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": -2,
+      "region": "light_building",
+      "roi": [
+        0.62,
+        0.47,
+        0.71,
+        0.61
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        24.878253936767578,
+        -1.4104920625686646,
+        -4.138828754425049
+      ],
+      "medianChroma": 6.128252029418945,
+      "medianHueChangeDegreesWhenChromaOver5": -3.0517578125e-05,
+      "p95DeltaE76VsSameSourceEV0": 28.935924530029297,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": -2,
+      "region": "building_shadow",
+      "roi": [
+        0.08,
+        0.72,
+        0.17,
+        0.86
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        7.02177095413208,
+        3.943009614944458,
+        1.2610234022140503
+      ],
+      "medianChroma": 4.614415168762207,
+      "medianHueChangeDegreesWhenChromaOver5": -1.7227783203125,
+      "p95DeltaE76VsSameSourceEV0": 20.242076873779297,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": -1,
+      "region": "sky_blue",
+      "roi": [
+        0.56,
+        0.06,
+        0.78,
+        0.17
+      ],
+      "pixels": 8374,
+      "meanLabD50": [
+        24.80341911315918,
+        -1.3224148750305176,
+        -13.621241569519043
+      ],
+      "medianChroma": 13.62161636352539,
+      "medianHueChangeDegreesWhenChromaOver5": -1.52587890625e-05,
+      "p95DeltaE76VsSameSourceEV0": 13.26784896850586,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": -1,
+      "region": "light_building",
+      "roi": [
+        0.62,
+        0.47,
+        0.71,
+        0.61
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        35.488040924072266,
+        -1.782669186592102,
+        -5.2201104164123535
+      ],
+      "medianChroma": 7.720943450927734,
+      "medianHueChangeDegreesWhenChromaOver5": 9.1552734375e-05,
+      "p95DeltaE76VsSameSourceEV0": 16.13232421875,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": -1,
+      "region": "building_shadow",
+      "roi": [
+        0.08,
+        0.72,
+        0.17,
+        0.86
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        12.2913818359375,
+        6.184895992279053,
+        2.064324378967285
+      ],
+      "medianChroma": 7.417028903961182,
+      "medianHueChangeDegreesWhenChromaOver5": -0.008514404296875,
+      "p95DeltaE76VsSameSourceEV0": 11.285173416137695,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": 0,
+      "region": "sky_blue",
+      "roi": [
+        0.56,
+        0.06,
+        0.78,
+        0.17
+      ],
+      "pixels": 8374,
+      "meanLabD50": [
+        35.40871810913086,
+        -1.6661291122436523,
+        -17.161623001098633
+      ],
+      "medianChroma": 17.162092208862305,
+      "medianHueChangeDegreesWhenChromaOver5": 0.0,
+      "p95DeltaE76VsSameSourceEV0": 0.0,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": 0,
+      "region": "light_building",
+      "roi": [
+        0.62,
+        0.47,
+        0.71,
+        0.61
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        48.87008285522461,
+        -2.246180772781372,
+        -6.577275276184082
+      ],
+      "medianChroma": 9.726752281188965,
+      "medianHueChangeDegreesWhenChromaOver5": 0.0,
+      "p95DeltaE76VsSameSourceEV0": 0.0,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": 0,
+      "region": "building_shadow",
+      "roi": [
+        0.08,
+        0.72,
+        0.17,
+        0.86
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        19.576093673706055,
+        7.939023017883301,
+        2.6757118701934814
+      ],
+      "medianChroma": 9.404680252075195,
+      "medianHueChangeDegreesWhenChromaOver5": 0.0,
+      "p95DeltaE76VsSameSourceEV0": 0.0,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": 1,
+      "region": "sky_blue",
+      "roi": [
+        0.56,
+        0.06,
+        0.78,
+        0.17
+      ],
+      "pixels": 8374,
+      "meanLabD50": [
+        48.77054214477539,
+        -2.099170446395874,
+        -21.62234878540039
+      ],
+      "medianChroma": 21.622779846191406,
+      "medianHueChangeDegreesWhenChromaOver5": 4.57763671875e-05,
+      "p95DeltaE76VsSameSourceEV0": 16.715686798095703,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": 1,
+      "region": "light_building",
+      "roi": [
+        0.62,
+        0.47,
+        0.71,
+        0.61
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        65.73080444335938,
+        -2.82995343208313,
+        -8.286850929260254
+      ],
+      "medianChroma": 12.254034996032715,
+      "medianHueChangeDegreesWhenChromaOver5": 4.57763671875e-05,
+      "p95DeltaE76VsSameSourceEV0": 20.32493019104004,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": 1,
+      "region": "building_shadow",
+      "roi": [
+        0.08,
+        0.72,
+        0.17,
+        0.86
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        28.820858001708984,
+        10.008607864379883,
+        3.373110294342041
+      ],
+      "medianChroma": 11.848721504211426,
+      "medianHueChangeDegreesWhenChromaOver5": 9.1552734375e-05,
+      "p95DeltaE76VsSameSourceEV0": 14.218400955200195,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": 2,
+      "region": "sky_blue",
+      "roi": [
+        0.56,
+        0.06,
+        0.78,
+        0.17
+      ],
+      "pixels": 8374,
+      "meanLabD50": [
+        65.59443664550781,
+        -2.632038116455078,
+        -27.151514053344727
+      ],
+      "medianChroma": 27.243297576904297,
+      "medianHueChangeDegreesWhenChromaOver5": 9.1552734375e-05,
+      "p95DeltaE76VsSameSourceEV0": 37.77665710449219,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": 2,
+      "region": "light_building",
+      "roi": [
+        0.62,
+        0.47,
+        0.71,
+        0.61
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        84.7335433959961,
+        -1.9807732105255127,
+        -5.073163986206055
+      ],
+      "medianChroma": 9.814255714416504,
+      "medianHueChangeDegreesWhenChromaOver5": 0.4335174560546875,
+      "p95DeltaE76VsSameSourceEV0": 39.9795036315918,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-12L",
+      "ev": 2,
+      "region": "building_shadow",
+      "roi": [
+        0.08,
+        0.72,
+        0.17,
+        0.86
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        40.4704475402832,
+        12.610060691833496,
+        4.249902725219727
+      ],
+      "medianChroma": 14.928407669067383,
+      "medianHueChangeDegreesWhenChromaOver5": 9.1552734375e-05,
+      "p95DeltaE76VsSameSourceEV0": 32.13186264038086,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": -2,
+      "region": "sky_blue",
+      "roi": [
+        0.56,
+        0.06,
+        0.78,
+        0.17
+      ],
+      "pixels": 8374,
+      "meanLabD50": [
+        10.727911949157715,
+        -1.1445587873458862,
+        -13.9820556640625
+      ],
+      "medianChroma": 14.103677749633789,
+      "medianHueChangeDegreesWhenChromaOver5": -0.000213623046875,
+      "p95DeltaE76VsSameSourceEV0": 18.45735740661621,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": -2,
+      "region": "light_building",
+      "roi": [
+        0.62,
+        0.47,
+        0.71,
+        0.61
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        23.787368774414062,
+        -1.4883687496185303,
+        -4.9789719581604
+      ],
+      "medianChroma": 6.702391147613525,
+      "medianHueChangeDegreesWhenChromaOver5": -0.0001220703125,
+      "p95DeltaE76VsSameSourceEV0": 28.542560577392578,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": -2,
+      "region": "building_shadow",
+      "roi": [
+        0.08,
+        0.72,
+        0.17,
+        0.86
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        6.573943138122559,
+        3.7307114601135254,
+        1.0472745895385742
+      ],
+      "medianChroma": 4.277307510375977,
+      "medianHueChangeDegreesWhenChromaOver5": -1.2417144775390625,
+      "p95DeltaE76VsSameSourceEV0": 19.27280616760254,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": -1,
+      "region": "sky_blue",
+      "roi": [
+        0.56,
+        0.06,
+        0.78,
+        0.17
+      ],
+      "pixels": 8374,
+      "meanLabD50": [
+        17.67467498779297,
+        -1.4419982433319092,
+        -17.61630630493164
+      ],
+      "medianChroma": 17.769744873046875,
+      "medianHueChangeDegreesWhenChromaOver5": -3.0517578125e-05,
+      "p95DeltaE76VsSameSourceEV0": 10.29047966003418,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": -1,
+      "region": "light_building",
+      "roi": [
+        0.62,
+        0.47,
+        0.71,
+        0.61
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        34.11362838745117,
+        -1.880064606666565,
+        -6.27951192855835
+      ],
+      "medianChroma": 8.44572639465332,
+      "medianHueChangeDegreesWhenChromaOver5": -5.340576171875e-05,
+      "p95DeltaE76VsSameSourceEV0": 15.912541389465332,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": -1,
+      "region": "building_shadow",
+      "roi": [
+        0.08,
+        0.72,
+        0.17,
+        0.86
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        11.59015941619873,
+        6.072412490844727,
+        1.7516251802444458
+      ],
+      "medianChroma": 7.2070841789245605,
+      "medianHueChangeDegreesWhenChromaOver5": -0.0129547119140625,
+      "p95DeltaE76VsSameSourceEV0": 10.744686126708984,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": 0,
+      "region": "sky_blue",
+      "roi": [
+        0.56,
+        0.06,
+        0.78,
+        0.17
+      ],
+      "pixels": 8374,
+      "meanLabD50": [
+        26.42719268798828,
+        -1.8167784214019775,
+        -22.19516372680664
+      ],
+      "medianChroma": 22.388713836669922,
+      "medianHueChangeDegreesWhenChromaOver5": 0.0,
+      "p95DeltaE76VsSameSourceEV0": 0.0,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": 0,
+      "region": "light_building",
+      "roi": [
+        0.62,
+        0.47,
+        0.71,
+        0.61
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        47.13818359375,
+        -2.369006872177124,
+        -7.912311553955078
+      ],
+      "medianChroma": 10.640318870544434,
+      "medianHueChangeDegreesWhenChromaOver5": 0.0,
+      "p95DeltaE76VsSameSourceEV0": 0.0,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": 0,
+      "region": "building_shadow",
+      "roi": [
+        0.08,
+        0.72,
+        0.17,
+        0.86
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        18.678009033203125,
+        7.829824924468994,
+        2.296834707260132
+      ],
+      "medianChroma": 9.159826278686523,
+      "medianHueChangeDegreesWhenChromaOver5": 0.0,
+      "p95DeltaE76VsSameSourceEV0": 0.0,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": 1,
+      "region": "sky_blue",
+      "roi": [
+        0.56,
+        0.06,
+        0.78,
+        0.17
+      ],
+      "pixels": 8374,
+      "meanLabD50": [
+        37.45461654663086,
+        -2.288991689682007,
+        -27.964242935180664
+      ],
+      "medianChroma": 28.20756721496582,
+      "medianHueChangeDegreesWhenChromaOver5": 0.0,
+      "p95DeltaE76VsSameSourceEV0": 12.964131355285645,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": 1,
+      "region": "light_building",
+      "roi": [
+        0.62,
+        0.47,
+        0.71,
+        0.61
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        63.54872131347656,
+        -2.984736680984497,
+        -9.968825340270996
+      ],
+      "medianChroma": 13.408353805541992,
+      "medianHueChangeDegreesWhenChromaOver5": 4.57763671875e-05,
+      "p95DeltaE76VsSameSourceEV0": 20.04912757873535,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": 1,
+      "region": "building_shadow",
+      "roi": [
+        0.08,
+        0.72,
+        0.17,
+        0.86
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        27.688692092895508,
+        9.872113227844238,
+        2.8948464393615723
+      ],
+      "medianChroma": 11.541126251220703,
+      "medianHueChangeDegreesWhenChromaOver5": 0.000335693359375,
+      "p95DeltaE76VsSameSourceEV0": 13.53746509552002,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": 2,
+      "region": "sky_blue",
+      "roi": [
+        0.56,
+        0.06,
+        0.78,
+        0.17
+      ],
+      "pixels": 8374,
+      "meanLabD50": [
+        51.3484001159668,
+        -2.8838977813720703,
+        -35.232627868652344
+      ],
+      "medianChroma": 35.53880310058594,
+      "medianHueChangeDegreesWhenChromaOver5": 6.103515625e-05,
+      "p95DeltaE76VsSameSourceEV0": 29.298608779907227,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": 2,
+      "region": "light_building",
+      "roi": [
+        0.62,
+        0.47,
+        0.71,
+        0.61
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        82.61318969726562,
+        -2.3878464698791504,
+        -7.762351036071777
+      ],
+      "medianChroma": 10.153609275817871,
+      "medianHueChangeDegreesWhenChromaOver5": 0.1293792724609375,
+      "p95DeltaE76VsSameSourceEV0": 40.077911376953125,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    },
+    {
+      "sourceId": "D800-14L",
+      "ev": 2,
+      "region": "building_shadow",
+      "roi": [
+        0.08,
+        0.72,
+        0.17,
+        0.86
+      ],
+      "pixels": 4355,
+      "meanLabD50": [
+        39.04402542114258,
+        12.4381103515625,
+        3.647275447845459
+      ],
+      "medianChroma": 14.540904998779297,
+      "medianHueChangeDegreesWhenChromaOver5": 0.000396728515625,
+      "p95DeltaE76VsSameSourceEV0": 30.59401512145996,
+      "warning": "relative response only; regions are not reference gray/color/skin; exposure intentionally changes Lab"
+    }
+  ]
+}

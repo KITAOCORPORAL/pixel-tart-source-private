@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-26",
+  "timezone": "America/New_York",
+  "metadataProbeBuild": "pass",
+  "responseProbeBuild": "pass",
+  "pythonUnitTests": {
+    "passed": 9,
+    "failed": 0
+  },
+  "projectFilteredTests": {
+    "passed": 17,
+    "failed": 1,
+    "skipped": 3,
+    "failure": "R53HomeSceneExposureTests.CacheClearDoesNotDisposeInFlightBorrowAndAccountingReturns",
+    "message": "expected resource bytes 0 actual 1073741824"
+  },
+  "isolatedRerunOfFailedTest": {
+    "passed": 1,
+    "failed": 0,
+    "rootCause": "unknown; shared-state concurrency is hypothesis, not proven"
+  },
+  "captureOneExports": 0,
+  "productionSourceFilesModified": 0,
+  "batchIdentifier": "20261027 (existing experiment label, not client calendar date)",
+  "StageC1InputsSyntheticCopyTest": "pass; fake bytes only, copied hash matched; no actual RAW copied, no C1 launched",
+  "PowerShellParseErrors": 0,
+  "metadataFinalRun": {
+    "candidates": 212,
+    "status": "pass; compression/bitdepth remain unknown"
+  },
+  "productionRepeat": "all 10 preview hashes match first run; same X-T5 failure"
+}

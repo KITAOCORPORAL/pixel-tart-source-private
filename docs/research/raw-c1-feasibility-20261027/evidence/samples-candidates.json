@@ -1,0 +1,1081 @@
+{
+  "selection": "Only D800 has 6-10 files; 9 encoding/crop variants, independent capture count unknown; no valid holdout claimed",
+  "fittingAllowed": false,
+  "samples": [
+    {
+      "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON_D800_12bit_FX_LOSSLESS.NEF",
+      "bytes": 34439988,
+      "modifiedUtc": "2019-10-20T15:41:41.8193603Z",
+      "make": "Nikon",
+      "model": "D800",
+      "rawType": ".NEF",
+      "rawBitDepth": "unknown",
+      "bitDepthTagsNotSensorAuthority": [
+        "Exif IFD0/Bits Per Sample: 8 8 8 bits/component/pixel",
+        "Exif SubIFD/Bits Per Sample: 12 bits/component/pixel"
+      ],
+      "iso": 100,
+      "rawWidth": 7424,
+      "rawHeight": 4924,
+      "filters": 3031741620,
+      "colors": 3,
+      "status": "opened_no_unpack",
+      "error": "",
+      "tags": [
+        {
+          "directory": "Exif IFD0",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "160 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "120 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "8 8 8 bits/component/pixel"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 271,
+          "Name": "Make",
+          "Description": "NIKON CORPORATION"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 272,
+          "Name": "Model",
+          "Description": "NIKON D800"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 274,
+          "Name": "Orientation",
+          "Description": "Top, left side (Horizontal / normal)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "7424 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "4924 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "12 bits/component/pixel"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Nikon NEF Compressed"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 34855,
+          "Name": "ISO Speed Ratings",
+          "Description": "100"
+        }
+      ],
+      "compressionTagObservations": [
+        "Exif IFD0/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Exif SubIFD/Compression: Nikon NEF Compressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Nikon Makernote/NEF Compression: Uncompressed"
+      ],
+      "rawCompression": "unknown",
+      "metadataMake": "NIKON CORPORATION",
+      "metadataFullModel": "NIKON D800",
+      "sampleId": "D800-01",
+      "split": "provisional_capture_family_review_required",
+      "sceneCoverage": "unreviewed",
+      "pairedAcrossCameras": false
+    },
+    {
+      "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON_D800_12bit_FX_LOSSY.NEF",
+      "bytes": 29716632,
+      "modifiedUtc": "2019-10-20T15:41:40.3498793Z",
+      "make": "Nikon",
+      "model": "D800",
+      "rawType": ".NEF",
+      "rawBitDepth": "unknown",
+      "bitDepthTagsNotSensorAuthority": [
+        "Exif IFD0/Bits Per Sample: 8 8 8 bits/component/pixel",
+        "Exif SubIFD/Bits Per Sample: 12 bits/component/pixel"
+      ],
+      "iso": 100,
+      "rawWidth": 7424,
+      "rawHeight": 4924,
+      "filters": 3031741620,
+      "colors": 3,
+      "status": "opened_no_unpack",
+      "error": "",
+      "tags": [
+        {
+          "directory": "Exif IFD0",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "160 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "120 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "8 8 8 bits/component/pixel"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 271,
+          "Name": "Make",
+          "Description": "NIKON CORPORATION"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 272,
+          "Name": "Model",
+          "Description": "NIKON D800"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 274,
+          "Name": "Orientation",
+          "Description": "Top, left side (Horizontal / normal)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "7424 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "4924 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "12 bits/component/pixel"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Nikon NEF Compressed"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 34855,
+          "Name": "ISO Speed Ratings",
+          "Description": "100"
+        }
+      ],
+      "compressionTagObservations": [
+        "Exif IFD0/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Exif SubIFD/Compression: Nikon NEF Compressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Nikon Makernote/NEF Compression: Unknown (4)"
+      ],
+      "rawCompression": "unknown",
+      "metadataMake": "NIKON CORPORATION",
+      "metadataFullModel": "NIKON D800",
+      "sampleId": "D800-02",
+      "split": "provisional_capture_family_review_required",
+      "sceneCoverage": "unreviewed",
+      "pairedAcrossCameras": false
+    },
+    {
+      "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON_D800_12bit_FX_UNCOMPRESSED.NEF",
+      "bytes": 58893312,
+      "modifiedUtc": "2019-10-20T15:41:41.8447798Z",
+      "make": "Nikon",
+      "model": "D800",
+      "rawType": ".NEF",
+      "rawBitDepth": "unknown",
+      "bitDepthTagsNotSensorAuthority": [
+        "Exif IFD0/Bits Per Sample: 8 8 8 bits/component/pixel",
+        "Exif SubIFD/Bits Per Sample: 12 bits/component/pixel"
+      ],
+      "iso": 100,
+      "rawWidth": 7424,
+      "rawHeight": 4924,
+      "filters": 3031741620,
+      "colors": 3,
+      "status": "opened_no_unpack",
+      "error": "",
+      "tags": [
+        {
+          "directory": "Exif IFD0",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "160 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "120 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "8 8 8 bits/component/pixel"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 271,
+          "Name": "Make",
+          "Description": "NIKON CORPORATION"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 272,
+          "Name": "Model",
+          "Description": "NIKON D800"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 274,
+          "Name": "Orientation",
+          "Description": "Top, left side (Horizontal / normal)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "7424 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "4924 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "12 bits/component/pixel"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 34855,
+          "Name": "ISO Speed Ratings",
+          "Description": "100"
+        }
+      ],
+      "compressionTagObservations": [
+        "Exif IFD0/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Exif SubIFD/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)"
+      ],
+      "rawCompression": "unknown",
+      "metadataMake": "NIKON CORPORATION",
+      "metadataFullModel": "NIKON D800",
+      "sampleId": "D800-03",
+      "split": "provisional_capture_family_review_required",
+      "sceneCoverage": "unreviewed",
+      "pairedAcrossCameras": false
+    },
+    {
+      "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON_D800_14bit_1.2x-30x20_UNCOMPRESSED.NEF",
+      "bytes": 53837312,
+      "modifiedUtc": "2019-10-20T15:41:39.2821351Z",
+      "make": "Nikon",
+      "model": "D800",
+      "rawType": ".NEF",
+      "rawBitDepth": "unknown",
+      "bitDepthTagsNotSensorAuthority": [
+        "Exif IFD0/Bits Per Sample: 8 8 8 bits/component/pixel",
+        "Exif SubIFD/Bits Per Sample: 14 bits/component/pixel"
+      ],
+      "iso": 100,
+      "rawWidth": 6208,
+      "rawHeight": 4092,
+      "filters": 3031741620,
+      "colors": 3,
+      "status": "opened_no_unpack",
+      "error": "",
+      "tags": [
+        {
+          "directory": "Exif IFD0",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "160 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "120 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "8 8 8 bits/component/pixel"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 271,
+          "Name": "Make",
+          "Description": "NIKON CORPORATION"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 272,
+          "Name": "Model",
+          "Description": "NIKON D800"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 274,
+          "Name": "Orientation",
+          "Description": "Top, left side (Horizontal / normal)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "6208 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "4092 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "14 bits/component/pixel"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 34855,
+          "Name": "ISO Speed Ratings",
+          "Description": "100"
+        }
+      ],
+      "compressionTagObservations": [
+        "Exif IFD0/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Exif SubIFD/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)"
+      ],
+      "rawCompression": "unknown",
+      "metadataMake": "NIKON CORPORATION",
+      "metadataFullModel": "NIKON D800",
+      "sampleId": "D800-04",
+      "split": "provisional_capture_family_review_required",
+      "sceneCoverage": "unreviewed",
+      "pairedAcrossCameras": false
+    },
+    {
+      "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON_D800_14bit_5x4-30x24_UNCOMPRESSED.NEF",
+      "bytes": 64531456,
+      "modifiedUtc": "2019-10-20T15:41:39.1562328Z",
+      "make": "Nikon",
+      "model": "D800",
+      "rawType": ".NEF",
+      "rawBitDepth": "unknown",
+      "bitDepthTagsNotSensorAuthority": [
+        "Exif IFD0/Bits Per Sample: 8 8 8 bits/component/pixel",
+        "Exif SubIFD/Bits Per Sample: 14 bits/component/pixel"
+      ],
+      "iso": 100,
+      "rawWidth": 6208,
+      "rawHeight": 4924,
+      "filters": 3031741620,
+      "colors": 3,
+      "status": "opened_no_unpack",
+      "error": "",
+      "tags": [
+        {
+          "directory": "Exif IFD0",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "160 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "120 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "8 8 8 bits/component/pixel"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 271,
+          "Name": "Make",
+          "Description": "NIKON CORPORATION"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 272,
+          "Name": "Model",
+          "Description": "NIKON D800"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 274,
+          "Name": "Orientation",
+          "Description": "Top, left side (Horizontal / normal)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "6208 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "4924 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "14 bits/component/pixel"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 34855,
+          "Name": "ISO Speed Ratings",
+          "Description": "100"
+        }
+      ],
+      "compressionTagObservations": [
+        "Exif IFD0/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Exif SubIFD/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)"
+      ],
+      "rawCompression": "unknown",
+      "metadataMake": "NIKON CORPORATION",
+      "metadataFullModel": "NIKON D800",
+      "sampleId": "D800-05",
+      "split": "provisional_capture_family_review_required",
+      "sceneCoverage": "unreviewed",
+      "pairedAcrossCameras": false
+    },
+    {
+      "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON_D800_14bit_DX-24x16_UNCOMPRESSED.NEF",
+      "bytes": 33648128,
+      "modifiedUtc": "2019-10-20T15:41:37.2730041Z",
+      "make": "Nikon",
+      "model": "D800",
+      "rawType": ".NEF",
+      "rawBitDepth": "unknown",
+      "bitDepthTagsNotSensorAuthority": [
+        "Exif IFD0/Bits Per Sample: 8 8 8 bits/component/pixel",
+        "Exif SubIFD/Bits Per Sample: 14 bits/component/pixel"
+      ],
+      "iso": 100,
+      "rawWidth": 4864,
+      "rawHeight": 3212,
+      "filters": 3031741620,
+      "colors": 3,
+      "status": "opened_no_unpack",
+      "error": "",
+      "tags": [
+        {
+          "directory": "Exif IFD0",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "160 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "120 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "8 8 8 bits/component/pixel"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 271,
+          "Name": "Make",
+          "Description": "NIKON CORPORATION"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 272,
+          "Name": "Model",
+          "Description": "NIKON D800"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 274,
+          "Name": "Orientation",
+          "Description": "Top, left side (Horizontal / normal)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "4864 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "3212 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "14 bits/component/pixel"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 34855,
+          "Name": "ISO Speed Ratings",
+          "Description": "100"
+        }
+      ],
+      "compressionTagObservations": [
+        "Exif IFD0/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Exif SubIFD/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)"
+      ],
+      "rawCompression": "unknown",
+      "metadataMake": "NIKON CORPORATION",
+      "metadataFullModel": "NIKON D800",
+      "sampleId": "D800-06",
+      "split": "provisional_capture_family_review_required",
+      "sceneCoverage": "unreviewed",
+      "pairedAcrossCameras": false
+    },
+    {
+      "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON_D800_14bit_FX_LOSSLESS.NEF",
+      "bytes": 43256123,
+      "modifiedUtc": "2019-10-20T15:41:36.9891786Z",
+      "make": "Nikon",
+      "model": "D800",
+      "rawType": ".NEF",
+      "rawBitDepth": "unknown",
+      "bitDepthTagsNotSensorAuthority": [
+        "Exif IFD0/Bits Per Sample: 8 8 8 bits/component/pixel",
+        "Exif SubIFD/Bits Per Sample: 14 bits/component/pixel"
+      ],
+      "iso": 100,
+      "rawWidth": 7424,
+      "rawHeight": 4924,
+      "filters": 3031741620,
+      "colors": 3,
+      "status": "opened_no_unpack",
+      "error": "",
+      "tags": [
+        {
+          "directory": "Exif IFD0",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "160 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "120 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "8 8 8 bits/component/pixel"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 271,
+          "Name": "Make",
+          "Description": "NIKON CORPORATION"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 272,
+          "Name": "Model",
+          "Description": "NIKON D800"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 274,
+          "Name": "Orientation",
+          "Description": "Top, left side (Horizontal / normal)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "7424 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "4924 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "14 bits/component/pixel"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Nikon NEF Compressed"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 34855,
+          "Name": "ISO Speed Ratings",
+          "Description": "100"
+        }
+      ],
+      "compressionTagObservations": [
+        "Exif IFD0/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Exif SubIFD/Compression: Nikon NEF Compressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Nikon Makernote/NEF Compression: Uncompressed"
+      ],
+      "rawCompression": "unknown",
+      "metadataMake": "NIKON CORPORATION",
+      "metadataFullModel": "NIKON D800",
+      "sampleId": "D800-07",
+      "split": "provisional_capture_family_review_required",
+      "sceneCoverage": "unreviewed",
+      "pairedAcrossCameras": false
+    },
+    {
+      "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON_D800_14bit_FX_LOSSY.NEF",
+      "bytes": 37429223,
+      "modifiedUtc": "2019-10-20T15:41:35.9526701Z",
+      "make": "Nikon",
+      "model": "D800",
+      "rawType": ".NEF",
+      "rawBitDepth": "unknown",
+      "bitDepthTagsNotSensorAuthority": [
+        "Exif IFD0/Bits Per Sample: 8 8 8 bits/component/pixel",
+        "Exif SubIFD/Bits Per Sample: 14 bits/component/pixel"
+      ],
+      "iso": 100,
+      "rawWidth": 7424,
+      "rawHeight": 4924,
+      "filters": 3031741620,
+      "colors": 3,
+      "status": "opened_no_unpack",
+      "error": "",
+      "tags": [
+        {
+          "directory": "Exif IFD0",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "160 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "120 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "8 8 8 bits/component/pixel"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 271,
+          "Name": "Make",
+          "Description": "NIKON CORPORATION"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 272,
+          "Name": "Model",
+          "Description": "NIKON D800"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 274,
+          "Name": "Orientation",
+          "Description": "Top, left side (Horizontal / normal)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "7424 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "4924 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "14 bits/component/pixel"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Nikon NEF Compressed"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 34855,
+          "Name": "ISO Speed Ratings",
+          "Description": "100"
+        }
+      ],
+      "compressionTagObservations": [
+        "Exif IFD0/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Exif SubIFD/Compression: Nikon NEF Compressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Nikon Makernote/NEF Compression: Unknown (4)"
+      ],
+      "rawCompression": "unknown",
+      "metadataMake": "NIKON CORPORATION",
+      "metadataFullModel": "NIKON D800",
+      "sampleId": "D800-08",
+      "split": "provisional_capture_family_review_required",
+      "sceneCoverage": "unreviewed",
+      "pairedAcrossCameras": false
+    },
+    {
+      "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON_D800_14bit_FX_UNCOMPRESSED.NEF",
+      "bytes": 77312000,
+      "modifiedUtc": "2019-10-20T15:41:34.7726991Z",
+      "make": "Nikon",
+      "model": "D800",
+      "rawType": ".NEF",
+      "rawBitDepth": "unknown",
+      "bitDepthTagsNotSensorAuthority": [
+        "Exif IFD0/Bits Per Sample: 8 8 8 bits/component/pixel",
+        "Exif SubIFD/Bits Per Sample: 14 bits/component/pixel"
+      ],
+      "iso": 100,
+      "rawWidth": 7424,
+      "rawHeight": 4924,
+      "filters": 3031741620,
+      "colors": 3,
+      "status": "opened_no_unpack",
+      "error": "",
+      "tags": [
+        {
+          "directory": "Exif IFD0",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "160 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "120 pixels"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "8 8 8 bits/component/pixel"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 271,
+          "Name": "Make",
+          "Description": "NIKON CORPORATION"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 272,
+          "Name": "Model",
+          "Description": "NIKON D800"
+        },
+        {
+          "directory": "Exif IFD0",
+          "Type": 274,
+          "Name": "Orientation",
+          "Description": "Top, left side (Horizontal / normal)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 256,
+          "Name": "Image Width",
+          "Description": "7424 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 257,
+          "Name": "Image Height",
+          "Description": "4924 pixels"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 258,
+          "Name": "Bits Per Sample",
+          "Description": "14 bits/component/pixel"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "Uncompressed"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 259,
+          "Name": "Compression",
+          "Description": "JPEG (old-style)"
+        },
+        {
+          "directory": "Exif SubIFD",
+          "Type": 34855,
+          "Name": "ISO Speed Ratings",
+          "Description": "100"
+        }
+      ],
+      "compressionTagObservations": [
+        "Exif IFD0/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)",
+        "Exif SubIFD/Compression: Uncompressed",
+        "Exif SubIFD/Compression: JPEG (old-style)"
+      ],
+      "rawCompression": "unknown",
+      "metadataMake": "NIKON CORPORATION",
+      "metadataFullModel": "NIKON D800",
+      "sampleId": "D800-09",
+      "split": "provisional_capture_family_review_required",
+      "sceneCoverage": "unreviewed",
+      "pairedAcrossCameras": false
+    }
+  ]
+}

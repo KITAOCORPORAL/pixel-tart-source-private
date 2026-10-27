@@ -1,0 +1,85 @@
+{
+  "clientDate": "2026-10-26",
+  "clientTimezone": "America/New_York",
+  "hostPlatform": "Windows-11-10.0.26200-SP0",
+  "capturedUtc": "2026-10-27T15:30:14.285587+00:00",
+  "baseRepository": "N:/pixart/guangjing-r53-stage-b-20261027",
+  "baseHead": "047e51bf7ad156aaf94427cad93dd45380b6fbd1",
+  "branch": "codex/raw-c1-feasibility-20261027",
+  "originalBaseStatus": "clean; tracking origin/home/r53-stage-b-20261027",
+  "worktree": "C:\\Users\\Admin\\Documents\\ChatGPT\\\u7834\u7532\\GUANGJING_RAW_C1_FEASIBILITY",
+  "git": {
+    "head": {
+      "command": [
+        "git",
+        "-C",
+        "C:\\Users\\Admin\\Documents\\ChatGPT\\\u7834\u7532\\GUANGJING_RAW_C1_FEASIBILITY",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "stdout": "047e51bf7ad156aaf94427cad93dd45380b6fbd1",
+      "stderr": ""
+    },
+    "branch": {
+      "command": [
+        "git",
+        "-C",
+        "C:\\Users\\Admin\\Documents\\ChatGPT\\\u7834\u7532\\GUANGJING_RAW_C1_FEASIBILITY",
+        "branch",
+        "--show-current"
+      ],
+      "exitCode": 0,
+      "stdout": "codex/raw-c1-feasibility-20261027",
+      "stderr": ""
+    },
+    "remotes": {
+      "command": [
+        "git",
+        "-C",
+        "C:\\Users\\Admin\\Documents\\ChatGPT\\\u7834\u7532\\GUANGJING_RAW_C1_FEASIBILITY",
+        "remote",
+        "-v"
+      ],
+      "exitCode": 0,
+      "stdout": "origin\thttps://github.com/KITAOCORPORAL/pixel-tart-source-private.git (fetch)\norigin\thttps://github.com/KITAOCORPORAL/pixel-tart-source-private.git (push)",
+      "stderr": ""
+    }
+  },
+  "captureOne": {
+    "path": "C:/Program Files/Capture One/Capture One/CaptureOne.exe",
+    "version": "16.6.1.2962",
+    "processRunningAtFirstProbe": false,
+    "launched": false,
+    "engine": "unknown",
+    "automation": "official inspected workflow is macOS AppleScript/JXA; Windows control not confirmed",
+    "exportsCreated": 0,
+    "sessionCreated": false
+  },
+  "rea": {
+    "registration": "npx -y rea-agents@6.0.0 mcp",
+    "serviceResponded": true,
+    "binarySessionOpen": false,
+    "ghidra": "doctor failed: GHIDRA_INSTALL_DIR is not set",
+    "hopper": "doctor missing",
+    "ida": "registration not configured",
+    "analysisOfCaptureOne": "not_run_no_experiment_question_requiring_reverse_engineering_yet"
+  },
+  "dependencies": {
+    "dotnet": "10.0.401",
+    "python": "3.12.10",
+    "numpy": "2.5.0",
+    "Pillow": "12.3.0",
+    "rawpy": false,
+    "exiftoolOnPath": false,
+    "newToolInstalls": 0
+  },
+  "constraints": {
+    "sourceWrites": false,
+    "browserAutomation": false,
+    "captureOneBinaryOrResourcesCopied": false,
+    "productionEngineModified": false
+  },
+  "referenceReaVersion": "6.8.0 at pinned commit (not installed version)",
+  "batchIdentifier": "20261027 (existing experiment label, not client calendar date)"
+}
