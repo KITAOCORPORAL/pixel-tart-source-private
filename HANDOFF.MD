@@ -1,5 +1,19 @@
 # 光镜开发交接入口
 
+## 家庭阶段B CMS收尾＋R3/出版续接（2026-10-27 America/Phoenix）
+- 起点home/r53-stage-b-20261027@047e51bf，当前发布源码b843670653dcb1899f77b873e31a11455d754f36；原b6eaa32e成果继承，不重做scene性能/cache lease/thumbnail prefix/crop首ICC。现有独立树N:/pixart/guangjing-r53-stage-b-20261027继续。
+- 权威docs/validation/home-r53-cms-closure-20261027/FINAL_REPORT.md、TEST_SUMMARY、COLOR_BOUNDARIES、JPEG_SUPPORT、WORKFLOW、USER_EXPORT_AND_GAMUT、PUSH_READBACK。旧home-r53-stage-b报告的JPEG_BLOCKED/CurrentEdits拒绝是历史，不当当前状态。
+- JPEG根因WPF autoICC解释后的码值误对raw目标；IgnoreColorProfile取编码值，保留MAE5/RMSE15。sRGB/P3/AdobeCompat JPEG8实放行；ProPhotoCompat8仅显式警告非默认。四空间PNG/TIFF16 lossless0码差；same pixels/quality95/444独立Pillow/libjpeg3.1.4.1一致，失败样本保留。
+- 新DocumentRenderResult float32+ICC+alpha+geometry/version。film Original/CurrentEdits用InstantInput3冻结整文档/版本，full结果转sRGB显影，不用monitor预览；出版actual embeddedICC→encodedsRGB float bilinear/WPF8watermark coverage→targetICC，service/receipt/二次出版/UI列表均接通。照片未降为8bit合成缓冲，水印覆盖8bit明确。
+- 新ColorState2真正linearROMM/ProPhoto D50 gamma1 float32最小工作域，仅线性曝光/Normal强度mask/geometry；旧encoded工具拒绝。V1输入本身保留负/>1但BasicTone/WB/Levels/Curve会压缩裁切，输出ProPhoto不等宽域编辑。V1/PV4/5/6默认数学及DecodeKey保持，researchICC/PV7off。
+- 四模式Overlay/SoftLight/Color/Luminosity已诊断菜单+setter准入，encodedsRGB调整结果语义，不是PS HDR/pixel-layer alpha/Fill；旧三模式保持。PhotoCraftfloat参考+PDFium固定源码实际TCC研究编译，整数误差保留，研究二进制不随包。
+- 用户完整导出命令同机512x342约137–169ms，直接Write~50–54ms、默认secondRender0；显式Inspect全像素还在。取消/故障/spacefull注入不留假成功，不是真填磁盘。相同目录变ICC同名输出仍保护拒绝，不放宽覆盖。
+- 本机最终Core68PASS/WPF主55PASS＋透明边缘补充1PASS/0FAIL/0NOT_RUN，另独立新进程重开1PASS像素hash相同；相关授权PhotoGrade用旧固定hashCanon派生manifest已跑，无关24MP/长笔画专项保留不刷总数。完整真实EXE启动只进程验证，鼠标/物理多屏ACM/HDR未验；用户禁ComputerUse/Browser/WebView/CDP不重启用，OFFSCREEN不是桌面。
+- R3继续：唯一分组paper selector放左资源（不再重复），右侧Original/Current、seed/随机预览、只读冻结来源/配方、取消/无动画显影/重拍验证；完整原型175清单/真实扫描联名资源授权仍PARTIAL。接下来逐项补V2工具与C授权资源交互，继续D/E，不停在研究报告。
+- 完整目录N:/pixart/Guangjing-R53-Home-20261027-CmsClosure/Guangjing-R53-CMS-Closure-Final-Diagnostic-win-x64；CMD启动，PS7.5 Prepare-CMS-Synthetic-Samples只重绑合成图。所有模块/策划15保留，.ptplan不含canvas，无Setup/不能发行。旧教程退役与后置全功能引导待办保持。
+- 保全原主211项未提交；只读旧22树核对。并行GUANGJING_RAW_C1_FEASIBILITY外部进到dbd19d66已记，不回退/不整合它。其余树不动，不reset/clean/stash/rebase、不合main、不强推。产品证据分提交/普通push读回。
+
+
 ## 家庭 R5.3 阶段B＋PhotoCraft 首个CMS闭环（2026-10-27 北京时间 UTC+08:00）
 - 家庭独立分支 home/r53-stage-b-20261027，树 N:/pixart/guangjing-r53-stage-b-20261027；从公司190d1304接续，未从home stage-a重做，旧树未提交资料保持。
 - 产品场景交互9afc5899＋CMS最终b6eaa32e08bb37d79dcdfde7db17613a1558f5c6。权威docs/validation/home-r53-stage-b-20261027/FINAL_REPORT.md、TEST_SUMMARY.json、NONPASS.json；完整家庭包 N:/pixart/Guangjing-R53-Home-20261027/Guangjing-R53-Home-CMS-StageB-Diagnostic-win-x64.zip，CMD/BAT/PS1启动。非公司E盘ZIP、完整所有模块/策划15板块，教程不恢复。
