@@ -780,14 +780,14 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         if (items.Count == 0 || IsExporting || IsInstantGenerating) return;
         var format=retryDirectory is null ? QuickExportFormat : _lastExportFormat;
         var acceptanceDirectory = Environment.GetEnvironmentVariable("PIXEL_TART_ACCEPTANCE_EXPORT_DIRECTORY");
-        var directory = retryDirectory ?? (string.IsNullOrWhiteSpace(acceptanceDirectory) ? _dialogs.ChooseFolder(StudioLocalizationService.Current.Format("QuickExportTitle", items.Count, string.Join(" / ", items.Select(x => StudioQuickExport.Extension(x.Path,format).TrimStart('.').ToUpperInvariant()).Distinct())), null) : acceptanceDirectory);
+        var directory = retryDirectory ?? (string.IsNullOrWhiteSpace(acceptanceDirectory) ? _dialogs.ChooseFolder(items.Any(x=>x.RawDefinition?.ColorState is not null)?$"导出 {items.Count} 张 · 实际ICC：{string.Join(" / ",items.Select(x=>x.RawDefinition?.ColorState?.Output.Label??"sRGB").Distinct())}":StudioLocalizationService.Current.Format("QuickExportTitle", items.Count, string.Join(" / ", items.Select(x => StudioQuickExport.Extension(x.Path,format).TrimStart('.').ToUpperInvariant()).Distinct())), null) : acceptanceDirectory);
         if (directory is null) return;
         _lastExportDirectory = directory;
         _lastExportFormat = format;
         if (ActiveTarget is { } active && items.Contains(active)) Editor.CopyCurrentLookTo([active]);
         foreach(var target in items) CaptureEditVersion(target);
         var frozen = items.Select(item => {var main=MainOutputVersion(item);return (Item:item,VersionId:main.Id,LibraryId:item.LibraryId,AssetId:item.AssetId,SourceHash:item.SourceHash,Look:main.Look is {} look?look with{ReferenceSources=look.ReferenceSources.Select(source=>source with{}).ToArray()}:null,Film:main.Film is {} film?film with{}:null,Stack:main.Stack?.Normalize(),Engine:main.Engine,Mode:main.Mode,RawDefinition:main.RawDefinition,RawInput:main.RawInput);}).ToArray();
-        _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportFailureSummary = ""; ExportStatus = $"0 / {ExportTotal} · {directory} · {format} · sRGB"; RaiseExportCommands();
+        _exportCancellation = new CancellationTokenSource(); ExportCompleted = 0; ExportTotal = frozen.Length; ExportFailureSummary = ""; ExportStatus = $"0 / {ExportTotal} · {directory} · {format} · {string.Join(" / ",frozen.Select(x=>x.RawDefinition?.ColorState?.Output.Label??"sRGB").Distinct())}"; RaiseExportCommands();
         var failed = new List<string>();
         try
         {
