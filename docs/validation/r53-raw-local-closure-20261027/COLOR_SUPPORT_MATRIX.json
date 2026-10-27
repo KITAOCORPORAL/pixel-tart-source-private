@@ -1,0 +1,33 @@
+{
+  "rawInput": {
+    "supported": "Existing three-color Bayer linear ProPhoto D65 LibRaw contract",
+    "unsupported": [
+      "X-Trans",
+      "Foveon",
+      "already-WB-applied nonmosaic/sRAW",
+      "arbitrary RAW ICC override",
+      "Sony firmware6 15bit YCbCr sample"
+    ],
+    "whiteBalance": "Applied once in LibRaw; local WB is explicit display-referred creative tool"
+  },
+  "localExtension": {
+    "version": 1,
+    "processingBase": 4,
+    "space": "Encoded display-sRGB D65 float, after unchanged PV4 shoulder/gamut/OETF",
+    "alpha": "No RAW alpha; raster alpha unchanged",
+    "negativeAndOver1": "Composite retains; existing tool clamps remain; final encoding clips/quantizes",
+    "preview": "Full effect then display-linear area average",
+    "coordinates": "upright uncropped source pixel centres; output geometry mapped once"
+  },
+  "rasterInput": {
+    "supported": "Existing WIC color conversion to sRGB; compare BitmapImage decoder proxy",
+    "unsupported": "General ICC validation not claimed; invalid profile rejects/fails rather than silent new engine"
+  },
+  "outputs": {
+    "Tiff": "sRGB16 rows, orientation normalized for local extension",
+    "Png": "sRGB16 WIC rows",
+    "Jpeg": "sRGB8 JPEG95 444; lossy tolerance separately validated"
+  },
+  "scientific": "No TIFF roundtrip color accuracy inference, CalibrationEligible=false",
+  "admission": "DIAGNOSTIC_ONLY pending full reference/profile admission"
+}

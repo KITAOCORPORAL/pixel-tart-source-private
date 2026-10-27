@@ -93,7 +93,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         if(ActiveTarget is not {} target||IsLoading||IsExporting||IsInstantGenerating)return;
         Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);EnsureR53Variants(target);
         var source=fromOriginal?target.EditVersions.First(v=>v.IsOriginal):target.EditVersions.Single(v=>v.Id==target.ActiveEditVersionId);
-        var next=source with{Id=Guid.NewGuid(),Name=fromOriginal?"原始新建 "+R53Variants.Count:"副本 "+R53Variants.Count,IsOriginal=false,IsMain=false,MainExplicit=false,Archived=false,CreatedAt=DateTimeOffset.UtcNow,OriginVersionId=source.Id,Stack=source.Stack?.DeepClone()};
+        var next=source with{Id=Guid.NewGuid(),Name=fromOriginal?"原始新建 "+R53Variants.Count:"副本 "+R53Variants.Count,IsOriginal=false,IsMain=false,MainExplicit=false,Archived=false,CreatedAt=DateTimeOffset.UtcNow,OriginVersionId=source.Id,Stack=source.Stack?.DeepClone(),RawDefinition=source.RawDefinition is{} raw?raw with{LocalEdits=raw.LocalEdits?.Freeze()}:null};
         target.EditVersions.Add(next);await SwitchEditVersionAsync(next.Id);NotifyR53Variants();ScheduleR53Autosave();
     }
     public void SetR53MainVariant()

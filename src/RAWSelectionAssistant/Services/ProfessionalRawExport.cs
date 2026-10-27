@@ -15,11 +15,12 @@ public static class ProfessionalRawExport
     {
         SecondExposureDecoder.EnsureRegistered();
         if(Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition))return await InstantV3DirectExport.Write(master,definition,destination,format,token,stage);
-        definition=definition with{InstantFilm=definition.InstantFilm is {} film?InstantFilmPipeline.Freeze(film):null};
+        definition=definition with{LocalEdits=definition.LocalEdits?.Freeze(),InstantFilm=definition.InstantFilm is {} film?InstantFilmPipeline.Freeze(film):null};
         ProfessionalRawPipeline.ValidateMaster(master,definition);
-        var transformed=definition.InstantFilm?.Enabled==true||definition.IsRenderedInput;
+        var transformed=ProfessionalRawLocalRenderer.Active(definition)||definition.InstantFilm?.Enabled==true||definition.IsRenderedInput;
         var size=transformed?ProfessionalRawPipeline.OutputSize(master,definition):(master.Image.Width,master.Image.Height);
         var orientation=ProfessionalRawPipeline.OutputOrientation(master,definition);
+        var localPrepared=ProfessionalRawLocalRenderer.Active(definition)?new ProfessionalRawLocalRenderer.Prepared(master,definition,token):null;
         if(File.Exists(destination))throw new IOException("输出已存在，未覆盖。");
         var staged=Path.Combine(Path.GetDirectoryName(Path.GetFullPath(destination))!,".pv4-"+Guid.NewGuid().ToString("N")+".tmp");
         await ProfessionalRawResourcePolicy.HeavyWork.WaitAsync(token);
@@ -29,7 +30,7 @@ public static class ProfessionalRawExport
             if(!Enum.IsDefined(format))throw new NotSupportedException("Unknown RAW output format.");
             if(format is StudioExportFormat.Source or StudioExportFormat.Tiff)
             {
-                await Task.Run(async()=>await AtomicTiffWriter.WriteRowsAsync(staged,size.Item1,size.Item2,(y,row)=>{if(transformed)ProfessionalRawPipeline.FillOutputRgb16Row(master,definition,y,row);else ProfessionalRawPipeline.FillRgb16Row(master,definition,y,row);},new(IccProfile:StudioQuickExport.SrgbProfileBytes(),Software:"Kitao Studio PV4",Orientation:(ushort)orientation),token,stage:stage),token);
+                await Task.Run(async()=>await AtomicTiffWriter.WriteRowsAsync(staged,size.Item1,size.Item2,(y,row)=>{if(localPrepared is not null){using var band=ProfessionalRawLocalRenderer.Region(master,definition,0,y,size.Item1,1,token,localPrepared);for(int i=0;i<band.Rgb32.Length;i++)System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(row.Span[(i*2)..],(ushort)Math.Clamp(Math.Round(band.Rgb32.Span[i]*65535),0,65535));}else if(transformed)ProfessionalRawPipeline.FillOutputRgb16Row(master,definition,y,row);else ProfessionalRawPipeline.FillRgb16Row(master,definition,y,row);},new(IccProfile:StudioQuickExport.SrgbProfileBytes(),Software:"Kitao Studio PV4",Orientation:(ushort)orientation),token,stage:stage),token);
                 token.ThrowIfCancellationRequested();File.Move(staged,destination,false);
                 return new(size.Item1,size.Item2,16,orientation,true,null,0,0,0);
             }
@@ -50,10 +51,10 @@ public static class ProfessionalRawExport
         if(Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition))return InstantV3DirectExport.Inspect(path,master,definition,format,token);
         if(format is StudioExportFormat.Source or StudioExportFormat.Tiff)
         {
-            var transformed=definition.InstantFilm?.Enabled==true||definition.IsRenderedInput;
+            var transformed=ProfessionalRawLocalRenderer.Active(definition)||definition.InstantFilm?.Enabled==true||definition.IsRenderedInput;
             var output=transformed?ProfessionalRawPipeline.OutputSize(master,definition):(master.Image.Width,master.Image.Height);
-            using var stream=File.OpenRead(path);var expected=new byte[output.Item1*6];
-            var result=TiffStreamValidator.Validate(stream,token,(y,row)=>{if(transformed)ProfessionalRawPipeline.FillOutputRgb16Row(master,definition,y,expected);else ProfessionalRawPipeline.FillRgb16Row(master,definition,y,expected);if(!row.Span.SequenceEqual(expected))throw new InvalidDataException("TIFF16 pixels differ from PV4 definition.");});
+            using var stream=File.OpenRead(path);var expected=new byte[output.Item1*6];var localPrepared=ProfessionalRawLocalRenderer.Active(definition)?new ProfessionalRawLocalRenderer.Prepared(master,definition,token):null;
+            var result=TiffStreamValidator.Validate(stream,token,(y,row)=>{if(localPrepared is not null){using var band=ProfessionalRawLocalRenderer.Region(master,definition,0,y,output.Item1,1,token,localPrepared);for(int i=0;i<band.Rgb32.Length;i++)System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(expected.AsSpan(i*2),(ushort)Math.Clamp(Math.Round(band.Rgb32.Span[i]*65535),0,65535));}else if(transformed)ProfessionalRawPipeline.FillOutputRgb16Row(master,definition,y,expected);else ProfessionalRawPipeline.FillRgb16Row(master,definition,y,expected);if(!row.Span.SequenceEqual(expected))throw new InvalidDataException("TIFF16 pixels differ from PV4 definition.");});
             if(result.Width!=output.Item1||result.Height!=output.Item2||result.Orientation!=ProfessionalRawPipeline.OutputOrientation(master,definition)||!result.IccProfile.AsSpan().SequenceEqual(StudioQuickExport.SrgbProfileBytes()))throw new InvalidDataException("TIFF output contract mismatch.");
             return new(result.Width,result.Height,16,result.Orientation,true,null,0,0,0);
         }
@@ -62,11 +63,11 @@ public static class ProfessionalRawExport
         var size=ProfessionalRawPipeline.OutputSize(master,definition);var bits=frame.Format.BitsPerPixel>32?16:8;
         if(frame.PixelWidth!=size.Width||frame.PixelHeight!=size.Height||bits!=(format==StudioExportFormat.Png?16:8)||frame.ColorContexts is not {Count:>0})throw new InvalidDataException("Encoded size/depth/profile mismatch.");
         using(var profile=frame.ColorContexts[0].OpenProfileStream()){using var memory=new MemoryStream();profile.CopyTo(memory);if(!memory.ToArray().AsSpan().SequenceEqual(StudioQuickExport.SrgbProfileBytes()))throw new InvalidDataException("Only sRGB output is supported.");}
-        var raster=new FormatConvertedBitmap(frame,bits==16?PixelFormats.Rgb48:PixelFormats.Rgb24,null,0);var stride=size.Width*3*(bits/8);var row=new byte[stride];double total=0,squares=0;var max=0;double signedR=0,signedG=0,signedB=0;
+        var raster=new FormatConvertedBitmap(frame,bits==16?PixelFormats.Rgb48:PixelFormats.Rgb24,null,0);var stride=size.Width*3*(bits/8);var row=new byte[stride];var rasterPrepared=ProfessionalRawLocalRenderer.Active(definition)?new ProfessionalRawLocalRenderer.Prepared(master,definition,token):null;double total=0,squares=0;var max=0;double signedR=0,signedG=0,signedB=0;
         for(var y=0;y<size.Height;y++)
         {
             token.ThrowIfCancellationRequested();raster.CopyPixels(new System.Windows.Int32Rect(0,y,size.Width,1),row,stride,0);
-            var oracle=ProfessionalRawPipeline.RenderRegion(master,definition,0,y,size.Width,1,token).Rgb32.Span;
+            using var oraclePixels=rasterPrepared is not null?ProfessionalRawLocalRenderer.Region(master,definition,0,y,size.Width,1,token,rasterPrepared):ProfessionalRawPipeline.RenderRegion(master,definition,0,y,size.Width,1,token);var oracle=oraclePixels.Rgb32.Span;
             for(var i=0;i<oracle.Length;i++){var wanted=bits==16?(int)Math.Round(oracle[i]*65535):Q8(oracle[i]);var actual=bits==16?System.Buffers.Binary.BinaryPrimitives.ReadUInt16LittleEndian(row.AsSpan(i*2)):row[i];var error=Math.Abs(actual-wanted);total+=error;squares+=(double)error*error;max=Math.Max(max,error);if(i%3==0)signedR+=actual-wanted;else if(i%3==1)signedG+=actual-wanted;else signedB+=actual-wanted;}
         }
         var n=(double)size.Width*size.Height*3;var mae=total/n;var rmse=Math.Sqrt(squares/n);

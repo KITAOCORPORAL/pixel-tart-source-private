@@ -1,0 +1,417 @@
+{
+  "file": "DSC09916.ARW",
+  "bytes": 24563712,
+  "header": "49492a00080000001300fe0004000100",
+  "ifds": [
+    {
+      "offset": 8,
+      "n": 19,
+      "entries": [
+        {
+          "tag": "0xfe",
+          "type": 4,
+          "count": 1,
+          "value": 1,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x103",
+          "type": 3,
+          "count": 1,
+          "value": 6,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x10e",
+          "type": 2,
+          "count": 32,
+          "value": 242,
+          "ascii": "                               ",
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x10f",
+          "type": 2,
+          "count": 5,
+          "value": 274,
+          "ascii": "SONY",
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x110",
+          "type": 2,
+          "count": 9,
+          "value": 280,
+          "ascii": "ILCE-7M4",
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x112",
+          "type": 3,
+          "count": 1,
+          "value": 8,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x11a",
+          "type": 5,
+          "count": 1,
+          "value": 290,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x11b",
+          "type": 5,
+          "count": 1,
+          "value": 298,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x128",
+          "type": 3,
+          "count": 1,
+          "value": 2,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x131",
+          "type": 2,
+          "count": 15,
+          "value": 306,
+          "ascii": "ILCE-7M4 v6.00",
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x132",
+          "type": 2,
+          "count": 20,
+          "value": 322,
+          "ascii": "2026:06:29 06:10:41",
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x14a",
+          "type": 4,
+          "count": 1,
+          "value": 138498,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x201",
+          "type": 4,
+          "count": 1,
+          "value": 196770,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x202",
+          "type": 4,
+          "count": 1,
+          "value": 212880,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x213",
+          "type": 3,
+          "count": 1,
+          "value": 2,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x2bc",
+          "type": 1,
+          "count": 4096,
+          "value": 342,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x8769",
+          "type": 4,
+          "count": 1,
+          "value": 4544,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0xc4a5",
+          "type": 7,
+          "count": 106,
+          "value": 4438,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0xc634",
+          "type": 1,
+          "count": 4,
+          "value": 65808,
+          "ascii": null,
+          "offsetInBounds": true
+        }
+      ]
+    },
+    {
+      "offset": 43784,
+      "n": 14,
+      "entries": [
+        {
+          "tag": "0xfe",
+          "type": 4,
+          "count": 1,
+          "value": 1,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x103",
+          "type": 3,
+          "count": 1,
+          "value": 6,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x10e",
+          "type": 2,
+          "count": 32,
+          "value": 43958,
+          "ascii": "                               ",
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x10f",
+          "type": 2,
+          "count": 5,
+          "value": 43990,
+          "ascii": "SONY",
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x110",
+          "type": 2,
+          "count": 9,
+          "value": 43996,
+          "ascii": "ILCE-7M4",
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x112",
+          "type": 3,
+          "count": 1,
+          "value": 8,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x11a",
+          "type": 5,
+          "count": 1,
+          "value": 44006,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x11b",
+          "type": 5,
+          "count": 1,
+          "value": 44014,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x128",
+          "type": 3,
+          "count": 1,
+          "value": 2,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x131",
+          "type": 2,
+          "count": 15,
+          "value": 44022,
+          "ascii": "ILCE-7M4 v6.00",
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x132",
+          "type": 2,
+          "count": 20,
+          "value": 44038,
+          "ascii": "2026:06:29 06:10:41",
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x201",
+          "type": 4,
+          "count": 1,
+          "value": 44058,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x202",
+          "type": 4,
+          "count": 1,
+          "value": 6569,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x213",
+          "type": 3,
+          "count": 1,
+          "value": 2,
+          "ascii": null,
+          "offsetInBounds": true
+        }
+      ]
+    },
+    {
+      "offset": 138190,
+      "n": 16,
+      "entries": [
+        {
+          "tag": "0xfe",
+          "type": 4,
+          "count": 1,
+          "value": 1,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x100",
+          "type": 3,
+          "count": 1,
+          "value": 4096,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x101",
+          "type": 3,
+          "count": 1,
+          "value": 3072,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x102",
+          "type": 3,
+          "count": 3,
+          "value": 138388,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x103",
+          "type": 3,
+          "count": 1,
+          "value": 7,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x106",
+          "type": 3,
+          "count": 1,
+          "value": 6,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x10e",
+          "type": 2,
+          "count": 32,
+          "value": 138394,
+          "ascii": "                               ",
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x112",
+          "type": 3,
+          "count": 1,
+          "value": 8,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x115",
+          "type": 3,
+          "count": 1,
+          "value": 3,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x11c",
+          "type": 3,
+          "count": 1,
+          "value": 1,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x201",
+          "type": 4,
+          "count": 1,
+          "value": 413696,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x202",
+          "type": 4,
+          "count": 1,
+          "value": 1226545,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x211",
+          "type": 5,
+          "count": 3,
+          "value": 138426,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x212",
+          "type": 3,
+          "count": 2,
+          "value": 65538,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x213",
+          "type": 3,
+          "count": 1,
+          "value": 2,
+          "ascii": null,
+          "offsetInBounds": true
+        },
+        {
+          "tag": "0x214",
+          "type": 5,
+          "count": 6,
+          "value": 138450,
+          "ascii": null,
+          "offsetInBounds": true
+        }
+      ]
+    }
+  ]
+}

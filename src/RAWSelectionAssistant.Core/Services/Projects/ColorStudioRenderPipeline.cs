@@ -12,7 +12,7 @@ public sealed class ColorStudioRenderPipeline
 {
     private readonly ReferenceLookMatcher _matcher = new();
 
-    public ColorStudioRenderResult Render(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default, bool captureNodeDiagnostics = true, ReadOnlyMemory<byte> alpha = default,FilmTileCoordinates? tile = null)
+    public ColorStudioRenderResult Render(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default, bool captureNodeDiagnostics = true, ReadOnlyMemory<byte> alpha = default,FilmTileCoordinates? tile = null,IReadOnlyDictionary<Guid,Func<double,double,double>>? compiledMasks=null)
     {
         ArgumentNullException.ThrowIfNull(source); var normalized = stack.Normalize(); var current = source.Clone(); var precisionStages = new List<string>(PrecisionTrace.ProfessionalDefault.Stages);
         var outputs = new List<VisualPixelBuffer>(normalized.Nodes.Count); var inputs = new Dictionary<Guid, VisualPixelBuffer>();
@@ -21,7 +21,7 @@ public sealed class ColorStudioRenderPipeline
             token.ThrowIfCancellationRequested(); if (captureNodeDiagnostics) inputs[node.Id] = current.ToVisualRgb24();
             if(StudioLayerComposite.Active(node)&&node.Opacity==0){if(captureNodeDiagnostics)outputs.Add(current.ToVisualRgb24());continue;}
             var input=current;var effect=ApplyHighPrecision(input,node,reference,analysis,token,alpha,tile);
-            current=StudioLayerComposite.Apply(input,effect,node,token,tile);
+            current=StudioLayerComposite.Apply(input,effect,node,token,tile,compiledMask:compiledMasks?.GetValueOrDefault(node.Id));
             if (captureNodeDiagnostics) outputs.Add(current.ToVisualRgb24());
         }
         var descriptor = new ColorPipelineDescriptor(InputInterpretation: "HighPrecision sRGB", WorkingRepresentation: normalized.WorkingSpace, OutputEncoding: "sRGB display adapter");

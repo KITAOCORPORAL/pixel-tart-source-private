@@ -20,16 +20,18 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   ResetPhotoV3DraftCommand=new(_=>{if(IsLightPrintLocked)return;var profile=SelectedInstantProfile;RestoreInstantControls(null);SelectedInstantProfile=profile;InstantEngineVersion="V3";},_=>!IsLightPrintLocked&&!IsInstantGenerating&&!IsLoading&&!IsExporting&&ActiveTarget is not null);
   PhotoGradeUndoCommand=new(async _=>
   {
+   if(RawLocalEditing){MoveRawLocal(false);return;}
    if(await MoveWindowHistoryAsync(false))return;
    if(HasInstantHistory(_instantV3Undo))await UndoInstantV3Command.ExecuteAsync(null);
-   else if(!IsProfessionalRaw)Editor.UndoAdjustmentCommand.Execute(null);
+   else if(!IsProfessionalRaw||RawLocalEditing)Editor.UndoAdjustmentCommand.Execute(null);
   },_=>!IsInstantGenerating&&!IsLoading&&!IsExporting);
   PhotoGradeRedoCommand=new(async _=>
   {
    // Undo can return to a raster version, so route by history, not only current engine.
+   if(RawLocalEditing){MoveRawLocal(true);return;}
    if(await MoveWindowHistoryAsync(true))return;
    if(HasInstantHistory(_instantV3Redo))await RedoInstantV3Command.ExecuteAsync(null);
-   else if(!IsProfessionalRaw)Editor.RedoAdjustmentCommand.Execute(null);
+   else if(!IsProfessionalRaw||RawLocalEditing)Editor.RedoAdjustmentCommand.Execute(null);
   },_=>!IsInstantGenerating&&!IsLoading&&!IsExporting);
  }
  private string _photoMaskColor="Cyan";

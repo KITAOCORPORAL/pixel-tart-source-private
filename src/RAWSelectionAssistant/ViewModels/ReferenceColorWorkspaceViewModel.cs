@@ -241,6 +241,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         RetryFailedExportCommand = new AsyncRelayCommand(_ => RetryFailedExportsAsync(), _ => Targets.Any(item => item.ExportStatus is ReferenceExportStatus.Failed or ReferenceExportStatus.Partial) && !IsExporting && !string.IsNullOrWhiteSpace(_lastExportDirectory));
         Editor.PropertyChanged += (_, args) =>
         {
+            ObserveRawLocalChange(args.PropertyName);
             if(args.PropertyName==nameof(TetherReferenceModeViewModel.ViewMode))OnPropertyChanged(nameof(PhotographerComparisonValue));
             if((args.PropertyName is nameof(TetherReferenceModeViewModel.ViewMode) or nameof(TetherReferenceModeViewModel.ShowOriginal))&&Editor.ComparisonUnavailable&&(Editor.ShowOriginal||Editor.ViewMode is "左右对比" or "并排对比"))_ = RequestComparisonAsync();
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
@@ -434,6 +435,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     }
     private void RefreshSyncAvailability()
     {
+        OnPropertyChanged(nameof(RawLocalEditing));OnPropertyChanged(nameof(DarkroomAdjustmentEnabled));
         OnPropertyChanged(nameof(PaperPreviewAvailabilityReason));OnPropertyChanged(nameof(RasterAvailabilityReason));OnPropertyChanged(nameof(PhotographerComparisonHelp));PreviewPhotographerPapersCommand?.RaiseCanExecuteChanged();
         OnPropertyChanged(nameof(PhotoGradeRasterToolsEnabled));OnPropertyChanged(nameof(PhotoGradeCanSyncStep));OnPropertyChanged(nameof(PhotoGradeOriginalInputAllowed));OnPropertyChanged(nameof(SrgbExposureAvailable));ApplySrgbExposureCommand?.RaiseCanExecuteChanged();OnPropertyChanged(nameof(InstantEditingAllowed));
         OnPropertyChanged(nameof(SelectedTargetCount)); OnPropertyChanged(nameof(CanSyncSelectedNodes));
@@ -642,12 +644,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             ScheduleTargetThumbnail(item);
         }
         catch (OperationCanceledException) { }
-        catch (Exception ex) when (ex is System.Runtime.InteropServices.COMException or InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException or InvalidOperationException) { item.Status = ReferenceTargetStatus.Failed; item.Error = ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "缩略图无法读取"; }
+        catch (Exception ex) when (ex is System.Runtime.InteropServices.COMException or InvalidDataException or IOException or UnauthorizedAccessException or NotSupportedException or ArgumentException or InvalidOperationException) { item.Status = ReferenceTargetStatus.Failed; item.Error = ex is RawDecodeException {NativeCode:-2} ? "当前LibRaw不支持此RAW编码；源文件未修改" : ex is RawDecodeException ? "RAW 相机文件无法进行 16 位解码" : "缩略图无法读取"; }
     }
 
     private async Task ActivateTargetAsync(ReferenceTargetItem target)
     {
-        CloseR53VariantComparison();
+        CancelRawLocalPreview();
+        ClearR53CompareCache();
         CancelLightPrintTask(false);await LightPrintPreviewWork;_lightPrintBeforeDraft=null;_lightPrintReshoot=false;
         if(!ReferenceEquals(ActiveTarget,target))ClearPhotographerPreviews();
         _paperPreviewCancellation?.Cancel();await StopComparisonAsync();
@@ -670,7 +673,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
                 if(revision!=Volatile.Read(ref _activationRevision))return;
                 if(target.RawDefinition is not null){await ActivateProfessionalRawAsync(target,revision,token);return;}
             }
-            Editor.IndependentRawMode=false;
+            Editor.RawLocalEditing=false;Editor.IndependentRawMode=false;
             var isRaw = RawMatchTiff16ProductPipeline.IsRaw(target.Path);
             var rawMaster = isRaw ? target.RawMaster ??= await DecodeStudioRawAsync(target.Path, token) : null;
             var rawProxy = rawMaster is null ? null : _rawPipeline.PreviewMaster(rawMaster.Image);
@@ -724,7 +727,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     public void Dispose()
     {
-        CloseR53VariantComparison();
+        CancelRawLocalPreview();ClearR53CompareCache();
         _r53Autosave.Stop();
         if(_disposed)return;
         CancelLightPrintTask(false);_paperPreviewCancellation?.Cancel();CancelComparison();_disposed = true;

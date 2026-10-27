@@ -79,7 +79,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             try
             {
                 var previous=target.RawDefinition;var version=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);
-                var next=new ProfessionalRawDefinition(WhiteBalance:RawUseCameraWhiteBalance?"Camera":"CameraGains",RedGain:RawRedGain,GreenGain:RawGreenGain,BlueGain:RawBlueGain,ExposureEv:RawExposureEv){InstantFilm=previous.InstantFilm}.Validate();
+                var next=previous with{WhiteBalance=RawUseCameraWhiteBalance?"Camera":"CameraGains",RedGain=RawRedGain,GreenGain=RawGreenGain,BlueGain=RawBlueGain,ExposureEv=RawExposureEv};next=next.Validate();
                 var master=target.LinearRawMaster?.Contract.DecodeKey==next.DecodeKey?target.LinearRawMaster:await _professionalDecoder.DecodeAsync(target.Path,next);
                 if(_disposed||!ReferenceEquals(ActiveTarget,target)||target.ActiveEditVersionId!=version||target.RawDefinition!=previous||revision!=Volatile.Read(ref _activationRevision))return;
                 if(!string.Equals(master.Contract.SourceSha256,target.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("RAW 源身份改变。");
@@ -125,7 +125,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         TrimProfessionalMasters(target);
         ActiveTarget=target;TargetImage=image;TargetName=target.FileName;target.IsActive=true;foreach(var other in Targets.Where(x=>!ReferenceEquals(x,target)))other.IsActive=false;
         Editor.RestoreTargetEngine(target.EngineSnapshot,target.ExecutionModeSnapshot);
-        Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot,target.FilmSettingsSnapshot,definition.LightPrint?.WindowAdjustments??target.ColorAdjustmentStackSnapshot,render:false,targetIdentity:target.ActiveEditVersionId??target.Id);
+        Editor.RawLocalEditing=definition.ProcessingVersion==4&&!definition.IsRenderedInput&&definition.InstantFilm is null;OnPropertyChanged(nameof(RawLocalEditing));OnPropertyChanged(nameof(DarkroomAdjustmentEnabled));OnPropertyChanged(nameof(RasterAvailabilityReason));
+        Editor.ApplyTargetSnapshot(target.AppliedLookSnapshot,target.FilmSettingsSnapshot,definition.LocalEdits?.Stack??definition.LightPrint?.WindowAdjustments??target.ColorAdjustmentStackSnapshot,render:false,targetIdentity:target.ActiveEditVersionId??target.Id);
         using var presentationMeasurement=StudioPreviewDiagnostics.Measure("Present");
         Editor.IndependentRawMode=true;await Editor.SetSourceAsync(target.AssetId,before,token,render:false);Editor.StopProcessing();if(_disposed||revision!=Volatile.Read(ref _activationRevision)||token.IsCancellationRequested)throw new OperationCanceledException(token);Editor.PresentIndependentRaw(image);var oriented=ProfessionalRawPipeline.OutputSize(master,definition);Editor.SetIndependentRawSize(new(oriented.Width,oriented.Height));
         var thumb=new TransformedBitmap(image,new System.Windows.Media.ScaleTransform(Math.Min(1,320d/image.PixelWidth),Math.Min(1,320d/image.PixelWidth)));thumb.Freeze();target.Thumbnail=thumb;target.SourceThumbnail=before;target.Status=ReferenceTargetStatus.Adjusted;target.Error=null;if(ReferenceEquals(FailedTarget,target))FailedTarget=null;

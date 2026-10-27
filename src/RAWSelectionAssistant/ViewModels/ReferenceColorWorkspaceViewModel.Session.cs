@@ -156,7 +156,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             {
                 ActiveTarget=active;TargetName=active.FileName;TargetImage=staged.TargetImage;
                 Editor.RestoreTargetEngine(active.EngineSnapshot,active.ExecutionModeSnapshot);
-                Editor.ApplyTargetSnapshot(active.AppliedLookSnapshot,active.FilmSettingsSnapshot,active.ColorAdjustmentStackSnapshot,render:false,targetIdentity:active.ActiveEditVersionId??active.Id);
+                Editor.RawLocalEditing=staged.Editor.RawLocalEditing;
+                Editor.ApplyTargetSnapshot(active.AppliedLookSnapshot,active.FilmSettingsSnapshot,active.RawDefinition?.LocalEdits?.Stack??active.ColorAdjustmentStackSnapshot,render:false,targetIdentity:active.ActiveEditVersionId??active.Id);
                 Editor.AdoptPreparedSource(staged.Editor,active.AssetId,token);
                 Editor.RestoreSessionHistory(staged.Editor.CaptureSessionHistory());
                 RawExposureEv=staged.RawExposureEv;RawRedGain=staged.RawRedGain;RawGreenGain=staged.RawGreenGain;RawBlueGain=staged.RawBlueGain;RawUseCameraWhiteBalance=staged.RawUseCameraWhiteBalance;
@@ -203,7 +204,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             {
                 ActiveTarget=oldActive;TargetImage=oldSource;TargetName=oldActive.FileName;
                 Editor.RestoreTargetEngine(oldActive.EngineSnapshot,oldActive.ExecutionModeSnapshot);
-                Editor.ApplyTargetSnapshot(oldActive.AppliedLookSnapshot,oldActive.FilmSettingsSnapshot,oldActive.ColorAdjustmentStackSnapshot,render:false,targetIdentity:oldActive.ActiveEditVersionId??oldActive.Id);
+                Editor.RawLocalEditing=oldActive.RawDefinition is {ProcessingVersion:4,IsRenderedInput:false,InstantFilm:null};
+                Editor.ApplyTargetSnapshot(oldActive.AppliedLookSnapshot,oldActive.FilmSettingsSnapshot,oldActive.RawDefinition?.LocalEdits?.Stack??oldActive.ColorAdjustmentStackSnapshot,render:false,targetIdentity:oldActive.ActiveEditVersionId??oldActive.Id);
                 Editor.RestorePreparedSource(oldEditorSource,oldActive.AssetId);Editor.StopProcessing();
                 if(oldImage is not null){Editor.PresentIndependentRaw(oldImage);Editor.SetIndependentRawSize(oldSize);Editor.IndependentRawMode=oldIndependent;Editor.Enabled=oldEnabled;Editor.ViewMode=oldView;}
                 RestoreInstantControls(oldActive.RawDefinition?.InstantFilm);

@@ -131,12 +131,13 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         State = ProcessingState.Cancelling; StatusText = "正在停止…";
         _render?.Cancel();
     }
+    public bool RawLocalEditing {get;internal set;}
     public void CopyCurrentLookTo(IEnumerable<ReferenceTargetItem> targets)
     {
         var snapshot = SelectedLook?.Normalize();
         foreach (var target in targets)
         {
-            if(target.RawDefinition is not null)continue;
+            if(target.RawDefinition is{} raw){if(RawLocalEditing&&raw.ProcessingVersion==4&&!raw.IsRenderedInput&&raw.InstantFilm is null){var local=AdjustmentStack.Nodes.Count>0?new ProfessionalRawLocalEdits(AdjustmentStack.DeepClone()).Freeze():null;if(System.Text.Json.JsonSerializer.Serialize(raw.LocalEdits)!=System.Text.Json.JsonSerializer.Serialize(local))target.RawDefinition=raw with{LocalEdits=local};target.ColorAdjustmentStackSnapshot=null;}continue;}
             target.AppliedLookSnapshot = snapshot is null ? null : snapshot with { ReferenceSources = snapshot.ReferenceSources.ToArray() };
             target.FilmSettingsSnapshot = FilmSettings with { };
             target.ColorAdjustmentStackSnapshot = AdjustmentStack.Nodes.Count > 0 ? AdjustmentStack.DeepClone() : null;
@@ -466,7 +467,8 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     {
         if(ReadOnlyTarget){StatusText="原始变体只读，请按F2从原始新建或F3复制当前。";return;}
         _presetPreviewNode = null; NotifyPresetPreview();
-        var previous = EffectiveEditingStack(); var nodes = change(previous.Nodes).ToArray(); if (nodes.Length == 0) return;
+        var previous = EffectiveEditingStack(); var nodes = change(previous.Nodes).ToArray();
+        if(RawLocalEditing&&nodes.Any(n=>!ProfessionalRawLocalRenderer.Supports(n.Type))){StatusText="当前RAW局部层不支持此工具；原定义保持。";return;} if (nodes.Length == 0) return;
         // Enforce at the mutation boundary, including tool panels, curves and drag reorder.
         // Visibility and user-lock toggles are allowed; system locks cannot be removed.
         foreach(var locked in previous.Nodes.Where(n=>n.IsLocked))

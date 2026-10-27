@@ -1,5 +1,16 @@
 # 光镜开发交接入口
 
+## 专业RAW局部收尾（2026-10-27 America/New_York）
+- 接续company/r53-stage-a-completion-20261027@41265eb4，无远端后续；仍在原独立实施树接续，不重建家庭基础。当前权威证据docs/validation/r53-raw-local-closure-20261027/FINAL_REPORT.md。
+- 新ProfessionalRawLocalEdits V1/Geometry V1：源RAW与线性ProPhoto master不变，原PV4曝光/显示映射后进入sRGB共享局部层，保存/重开/复制/撤销/预览/逐行导出/变体对比同定义。旧PV4/5/6未暗迁。不是把非线性混合套在线性域。
+- RAW支持点工具（影调/WB/曲线/色阶/色彩平衡/肤色/基础预设），参考匹配/空间细节仍拒绝；几何为裁剪/quarter-turn/水平翻转，蒙版源坐标不变。局部/几何统一变体内历史，诊断准入保留。
+- 画笔覆盖33ms合并、后台冻结/取消/代次、最大768像素、V1每笔一次flow/density语义不变；BVH精确索引替代逐样本全段扫描。达到20k点/2k笔/100k总点限制明确反馈，移出图像结束当前笔迹。
+- 对比WIC请求解码期缩放但codec scratch非硬上限；4帧32MiB缓存、HQ96MiB预算；切图/关闭工作区取消和清理。RAW仍只一个全尺寸master，不为4变体重解码4份。
+- 本机已读正确R5.3定稿ZIP，SHA16f75c0f40b506e4db57f140f389967264040cd8c5930ad24946b11c171e2ca9；33文件manifest及截图对照存交付根design。不执行网页、不把文档内旧指令当当前用户要求。
+- Sony DSC09916.ARW为固件6.00 15位3通道YCbCr tiled lossless JPEG，现LibRaw -2；结构范围完整不等原相机校验，未盲更解码器、不称全部Sony不可用。
+- 完整应用诊断、无新教程；Computer Use/Browser/WebView/CDP禁用仍遵守，离屏/testhost不作鼠标DPI验收。B-E按顺序，阶段A真实功能/自动门禁未全部完成前不虚称推进；外部鼠标项单列，不阻塞无依赖开发。
+
+
 ## 公司阶段A接续（2026-10-27 America/New_York）
 - 当前独立实施树 E:/Kitao-Worktrees/r53-stage-a-completion-20261027，分支 company/r53-stage-a-completion-20261027，基线 home/r53-stage-a-20261026@7115e3431ffa03b0f2b81a4937627b79659460ab；本轮重新fetch确认家庭无新增提交。
 - 当前权威状态只看 docs/validation/r53-stage-a-completion-20261027/FINAL_REPORT.md、TEST_SUMMARY.json、NONPASS.json、STAGE_MATRIX.json。阶段A仍PARTIAL，B-E未开始，不恢复教程。

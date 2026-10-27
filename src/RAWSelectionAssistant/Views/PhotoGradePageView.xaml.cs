@@ -40,7 +40,7 @@ public partial class PhotoGradePageView:UserControl
  }
  private void Detach(bool cancel)
  {
-  CancelMaskStroke();r53MultiWindow?.Close();r53ResourceWindow?.Close();
+  StopMaskOverlay();CancelMaskStroke();r53MultiWindow?.Close();r53ResourceWindow?.Close();
   if(model is not null)PropertyChangedEventManager.RemoveHandler(model.Editor,MaskEditorChanged,string.Empty);
   ReleaseR53Compare();closeR53Inspection?.Invoke();
   if(model is not null){PropertyChangedEventManager.RemoveHandler(model,Changed,string.Empty);if(cancel)model.ExitInstantPresentationForLifecycle();}
@@ -93,6 +93,7 @@ public partial class PhotoGradePageView:UserControl
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.Layout)&&!savingPanelLayout){RestorePanelLayout();ApplyR53Layout();}
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.R53Professional))ApplyR53Layout();
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PhotoMaskColor))Refresh();
+   if(e.PropertyName is nameof(ReferenceColorWorkspaceViewModel.RawLocalEditing) or nameof(ReferenceColorWorkspaceViewModel.ActiveTarget))ConfigureMaskPanel();
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PreviewHistogram))UpdateZones();
   DrawMaskOverlay();
   // A newly imported ordinary photo restores the historical default engine. The

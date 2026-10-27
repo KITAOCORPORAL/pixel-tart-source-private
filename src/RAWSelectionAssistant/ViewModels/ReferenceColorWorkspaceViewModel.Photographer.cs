@@ -26,8 +26,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public string PhotographerPaperName=>PhotographerPapers.FirstOrDefault(x=>x.ProfileId==SelectedInstantProfile.Id)?.Name??SelectedInstantProfile.Name;
  public string PaperPreviewAvailabilityReason=>ActiveTarget is null?"先导入照片。":RawMatchTiff16ProductPipeline.IsRaw(ActiveTarget.Path)?"RAW 相纸缩略图暂不可用；可从已解码照片或 JPEG／TIFF 试用，完整应用仍按原输入准入。":"缩略图只比较同一输入的色彩，不含纸框、装饰或当前编辑。";
  public string PhotographerPaperDetail=>PhotographerPapers.FirstOrDefault(x=>x.ProfileId==SelectedInstantProfile.Id)?.Description??"历史型号 · 保留原配方";
- public bool DarkroomAdjustmentEnabled=>PhotoGradeRasterToolsEnabled||ActiveTarget?.RawDefinition?.LightPrint is not null;
- public string RasterAvailabilityReason=>ActiveTarget is null?"先导入照片，开始基础调整或选择相纸。":ActiveTarget?.RawDefinition?.LightPrint is not null?"仅调画面窗口，相框保持不变；调好后点应用到光片窗口。":IsProfessionalRaw?"当前历史效果版本；可撤销返回普通编辑，或新建光片。":IsLoading||IsExporting||IsInstantGenerating?"当前任务进行中，完成或取消后可编辑。":"基础调色与曲线修改当前编辑；光片先实时预览再显影。";
+ public bool DarkroomAdjustmentEnabled=>RawLocalEditing||PhotoGradeRasterToolsEnabled||ActiveTarget?.RawDefinition?.LightPrint is not null;
+ public string RasterAvailabilityReason=>ActiveTarget is null?"先导入照片，开始基础调整或选择相纸。":ActiveTarget?.RawDefinition?.LightPrint is not null?"仅调画面窗口，相框保持不变；调好后点应用到光片窗口。":RawLocalEditing?"RAW线性基础 → 显示sRGB局部层；源RAW不转换，裁剪后蒙版仍绑定源图。":IsProfessionalRaw?"当前历史效果版本；此配方不支持通用局部层。":IsLoading||IsExporting||IsInstantGenerating?"当前任务进行中，完成或取消后可编辑。":"基础调色与曲线修改当前编辑；光片先实时预览再显影。";
  public string PhotographerComparisonHelp=>IsProfessionalRaw?"配方基准保留第二张照片、构图与部分纸面；不是第一张未处理照片。":"配方基准为当前源照片；效果图显示当前调整。";
  private string _paperPreviewStatus="缩略图为软件真实渲染；点“预览这些相纸”使用当前照片比较色彩。";
  public string PaperPreviewStatus {get=>_paperPreviewStatus;private set=>SetProperty(ref _paperPreviewStatus,value);}

@@ -83,6 +83,15 @@ public static class StudioQuickExport
             result.DpiX, result.DpiY, result.Format, result.Palette, pixels, stride);
         detached.Freeze(); return detached;
     }
+    /// <summary>Compare-only proxy asks WIC for decoder scaling before materializing pixels. Codec scratch is not a hard memory bound.</summary>
+    public static BitmapSource LoadCompareProxy(string path,int maximumEdge,CancellationToken token=default)
+    {
+        if(maximumEdge<=0)throw new ArgumentOutOfRangeException(nameof(maximumEdge));token.ThrowIfCancellationRequested();using var file=File.OpenRead(path);
+        var decoder=BitmapDecoder.Create(file,BitmapCreateOptions.DelayCreation|BitmapCreateOptions.IgnoreColorProfile,BitmapCacheOption.OnDemand);var frame=decoder.Frames[0];int width=frame.PixelWidth,height=frame.PixelHeight,orientation=ReadOrientation(frame);var profile=frame.ColorContexts is {Count:>0}?frame.ColorContexts[0]:null;
+        file.Position=0;var bitmap=new BitmapImage();bitmap.BeginInit();bitmap.CacheOption=BitmapCacheOption.OnLoad;bitmap.CreateOptions=BitmapCreateOptions.IgnoreColorProfile;bitmap.StreamSource=file;if(Math.Max(width,height)>maximumEdge){if(width>=height)bitmap.DecodePixelWidth=maximumEdge;else bitmap.DecodePixelHeight=maximumEdge;}bitmap.EndInit();token.ThrowIfCancellationRequested();BitmapSource output=bitmap;
+        if(profile is not null)output=new ColorConvertedBitmap(output,profile,new ColorContext(PixelFormats.Bgra32),PixelFormats.Bgra32);output=ApplyOrientation(output,orientation);
+        var stride=checked((output.PixelWidth*output.Format.BitsPerPixel+7)/8);var pixels=new byte[checked(stride*output.PixelHeight)];output.CopyPixels(pixels,stride,0);var result=BitmapSource.Create(output.PixelWidth,output.PixelHeight,96,96,output.Format,output.Palette,pixels,stride);result.Freeze();return result;
+    }
     private static int ReadOrientation(BitmapFrame frame)
     {
         if(frame.Metadata is not BitmapMetadata metadata)return 1;

@@ -22,7 +22,8 @@ public partial class PhotoGradePageView
             if(Keyboard.FocusedElement is TextBox or ComboBox || model is null)return;
             if(Keyboard.Modifiers==ModifierKeys.Control&&(e.Key is Key.D1 or Key.D2)){model.R53Professional=e.Key==Key.D2;ApplyR53Layout();EditModes.SelectedIndex=model.R53Professional?2:0;e.Handled=true;return;}
             if(Keyboard.Modifiers!=ModifierKeys.None)return;
-            if(ExecuteR53PointerShortcut(e.Key)){e.Handled=true;}
+            if(activeTool=="画笔"&&(e.Key is Key.X or Key.OemOpenBrackets or Key.OemCloseBrackets)){if(e.Key==Key.X)maskErasing=!maskErasing;else maskRadius=Math.Clamp(maskRadius*(e.Key==Key.OemOpenBrackets?.8:1.25),.002,.5);maskPanelRaw=null;ConfigureMaskPanel();e.Handled=true;}
+            else if(ExecuteR53PointerShortcut(e.Key)){e.Handled=true;}
             else if(e.Key==Key.F2){await model.CreateR53VariantAsync(true);e.Handled=true;}
             else if(e.Key==Key.F3){await model.CreateR53VariantAsync(false);e.Handled=true;}
             else if(e.Key==Key.Escape){CancelMaskStroke();r53MultiWindow?.Close();closeR53Inspection?.Invoke();e.Handled=true;}

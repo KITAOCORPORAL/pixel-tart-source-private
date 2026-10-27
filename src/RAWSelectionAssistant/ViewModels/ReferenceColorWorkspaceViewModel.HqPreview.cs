@@ -32,7 +32,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             long retained;
             lock(_hqGate)
             {
-                if(_hqPreview.Count>=2){foreach(var image in _hqPreview.Values)if(image.OwnsReservation)image.Dispose();_hqPreview.Clear();}
+                if(_hqPreview.Count>=4||_hqPreview.Values.Sum(x=>(long)x.Rgb32.Length*4)+(long)rendered.Rgb32.Length*4>96L*1024*1024){foreach(var image in _hqPreview.Values)if(image.OwnsReservation)image.Dispose();_hqPreview.Clear();}
                 _hqPreview[key]=rendered;
                 retained=_hqPreview.Values.Where(x=>!Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition)).Sum(x=>(long)x.Rgb32.Length*4);
             }

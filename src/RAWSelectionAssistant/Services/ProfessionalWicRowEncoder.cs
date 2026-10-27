@@ -18,7 +18,8 @@ internal static unsafe class ProfessionalWicRowEncoder
     public static void Write(string path,ProfessionalRawMaster master,ProfessionalRawDefinition definition,CancellationToken token)
     {
         var size=ProfessionalRawPipeline.OutputSize(master,definition);
-        WriteRows(path,size.Width,size.Height,95,(y,row)=>{var rgb=ProfessionalRawPipeline.RenderRegion(master,definition,0,y,size.Width,1,token).Rgb32.Span;for(var i=0;i<size.Width;i++){row[i*3]=Q(rgb[i*3+2]);row[i*3+1]=Q(rgb[i*3+1]);row[i*3+2]=Q(rgb[i*3]);}},token);
+        var prepared=ProfessionalRawLocalRenderer.Active(definition)?new ProfessionalRawLocalRenderer.Prepared(master,definition,token):null;
+        WriteRows(path,size.Width,size.Height,95,(y,row)=>{using var pixels=prepared is not null?ProfessionalRawLocalRenderer.Region(master,definition,0,y,size.Width,1,token,prepared):ProfessionalRawPipeline.RenderRegion(master,definition,0,y,size.Width,1,token);var rgb=pixels.Rgb32.Span;for(var i=0;i<size.Width;i++){row[i*3]=Q(rgb[i*3+2]);row[i*3+1]=Q(rgb[i*3+1]);row[i*3+2]=Q(rgb[i*3]);}},token);
     }
     public static void WritePng(string path,ProfessionalRawMaster master,ProfessionalRawDefinition definition,CancellationToken token)
     {
