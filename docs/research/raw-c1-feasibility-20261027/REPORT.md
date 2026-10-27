@@ -12,7 +12,7 @@
 
 ## 仓库与约定
 
-原工作区 N:/pixart/guangjing-r53-stage-b-20261027，分支 home/r53-stage-b-20261027，HEAD 047e51bf7ad156aaf94427cad93dd45380b6fbd1，调查前后clean。
+原工作区 N:/pixart/guangjing-r53-stage-b-20261027，分支 home/r53-stage-b-20261027，HEAD 047e51bf7ad156aaf94427cad93dd45380b6fbd1，调查起始和中途clean；最终出现其他并行未提交CMS变更（见收尾说明）。
 
 调查worktree为本报告所在仓库，分支 codex/raw-c1-feasibility-20261027，从上述HEAD分叉。起始聊天父Git无HEAD；设计交付目录并非生产源码。未切换原工作区、未清理旧checkout的未跟踪资料。
 
@@ -151,4 +151,8 @@ RawWideOutputV1仅master→显式输出，default-off，不换解码/WB/相机�
 
 ## 提交与推送收据
 
-研究提交11105c966224c4bcdc25209029ef2dc3e8c94977，分支codex/raw-c1-feasibility-20261027。首次push退出0，ls-remote读回同SHA；原工作区仍clean，src/tests与基准无diff。见evidence/delivery-receipt.json。后续收据自身的commit不作自引用承诺，由最终终端读回确认。
+研究提交11105c966224c4bcdc25209029ef2dc3e8c94977，分支codex/raw-c1-feasibility-20261027。首次push退出0，ls-remote读回同SHA；原工作区最终有并行未提交变更；本调查分支src/tests与基准无diff。见evidence/delivery-receipt.json。后续收据自身的commit不作自引用承诺，由最终终端读回确认。
+
+## 重要：最终并行工作区变化
+
+最终git status发现原R53 Stage B checkout出现多项未提交CMS修改及新DocumentWorkingRendererV2等文件。此次调查未写入该checkout；这些变化未合并到调查分支，也未覆盖/回滚。完整状态保留在delivery-receipt.json。此前中途clean只代表当时快照，不代表收尾clean。**所有实现限制结论仅适用于冻结HEAD 047e51bf7ad156aaf94427cad93dd45380b6fbd1，不外推到正在并行修改中的新代码。** 后续提案执行前应先评审并行CMS工作，避免重复实现；该新工作是否改变RAW输出边界尚未核验。
