@@ -18,6 +18,10 @@ public sealed record ColorAdjustmentStackNode(
     PixelTartFilmSettings? FilmSettings = null,
     IReadOnlyList<VisualRgb24>? NegativeSamples = null)
 {
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] public int CompositeVersion {get;init;}
+    public double Opacity {get;init;}=1;
+    public StudioLayerBlend Blend {get;init;}=StudioLayerBlend.Normal;
+    public StudioLocalMask? LocalMask {get;init;}
     // Editing permission only; never a processing switch. Locked nodes still render.
     public bool UserLocked {get;init;}
     public bool SystemLocked {get;init;}
@@ -31,8 +35,9 @@ public sealed record ColorAdjustmentStackNode(
         if (Id == Guid.Empty || string.IsNullOrWhiteSpace(Name)) throw new ArgumentException("Color Studio nodes require an id and name.");
         if (!Enum.IsDefined(Type)) throw new ArgumentException("不支持此调整节点类型；请保留方案文件并使用支持该版本的软件打开。");
         if (NumericParameters.Any(item => string.IsNullOrWhiteSpace(item.Key) || !double.IsFinite(item.Value))) throw new ArgumentException("Color Studio node parameters must be finite.");
+        if(CompositeVersion is not(0 or 1)||!double.IsFinite(Opacity)||Opacity<0||Opacity>1||!Enum.IsDefined(Blend)||CompositeVersion==0&&(Opacity!=1||Blend!=StudioLayerBlend.Normal||LocalMask is not null))throw new InvalidDataException("未知图层合成版本/参数，未降级渲染。");
         FilmSettings?.Validate();
-        return this with { Name = Name.Trim(), NumericParameters = new Dictionary<string, double>(NumericParameters), Samples = Samples.ToArray(), NegativeSamples = NegativeSamples.ToArray() };
+        return this with { Name = Name.Trim(), LocalMask=LocalMask?.Freeze(), NumericParameters = new Dictionary<string, double>(NumericParameters), Samples = Samples.ToArray(), NegativeSamples = NegativeSamples.ToArray() };
     }
 
     public ColorAdjustmentStackNode AddSample(VisualRgb24 sample) => this with { Samples = [.. Samples, sample] };

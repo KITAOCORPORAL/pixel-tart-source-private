@@ -8,11 +8,12 @@ namespace RAWSelectionAssistant.Views;
 public partial class PhotoGradePageView
 {
     private bool r53ResourcesRequested=true,r53CompareHeld;
-    private string r53ResourceTab="预设";
+    private string r53ResourceTab="预设";private string r53Search="";private bool r53FavoritesOnly,r53RecentOnly;
     private Window? r53Inspect;
     private Window? r53Owner;
+    private Window? r53ResourceWindow;private StackPanel? r53NarrowResourceContent;
     private void ReleaseR53Compare(){if(r53CompareHeld)model?.Editor.HoldOriginal(false);r53CompareHeld=false;}
-    private void R53WindowDeactivated(object? s,EventArgs e)=>ReleaseR53Compare();
+    private void R53WindowDeactivated(object? s,EventArgs e){ReleaseR53Compare();CancelMaskStroke();}
     private void InitializeR53()
     {
         SizeChanged+=(_,_)=>{if(ActualWidth<1800&&R53InspectDock.Visibility==Visibility.Visible)closeR53Inspection?.Invoke();ApplyR53Layout();};
@@ -24,7 +25,7 @@ public partial class PhotoGradePageView
             if(ExecuteR53PointerShortcut(e.Key)){e.Handled=true;}
             else if(e.Key==Key.F2){await model.CreateR53VariantAsync(true);e.Handled=true;}
             else if(e.Key==Key.F3){await model.CreateR53VariantAsync(false);e.Handled=true;}
-            else if(e.Key==Key.Escape){closeR53Inspection?.Invoke();}
+            else if(e.Key==Key.Escape){CancelMaskStroke();r53MultiWindow?.Close();closeR53Inspection?.Invoke();e.Handled=true;}
         };
         Loaded+=(_,_)=>{var window=Window.GetWindow(this);if(ReferenceEquals(window,r53Owner))return;if(r53Owner is not null)r53Owner.Deactivated-=R53WindowDeactivated;r53Owner=window;if(r53Owner is not null)r53Owner.Deactivated+=R53WindowDeactivated;};
         Unloaded+=(_,_)=>{ReleaseR53Compare();closeR53Inspection?.Invoke();if(r53Owner is not null)r53Owner.Deactivated-=R53WindowDeactivated;r53Owner=null;};
@@ -56,8 +57,19 @@ public partial class PhotoGradePageView
     }
     private void R53Simple(object s,RoutedEventArgs e){if(model is not null)model.R53Professional=false;ApplyR53Layout();EditModes.SelectedIndex=0;}
     private void R53Professional(object s,RoutedEventArgs e){if(model is not null)model.R53Professional=true;ApplyR53Layout();EditModes.SelectedIndex=2;}
-    private void R53ToggleResources(object s,RoutedEventArgs e){r53ResourcesRequested=!r53ResourcesRequested;ApplyR53Layout();if(ActualWidth<1200){var menu=new ContextMenu{PlacementTarget=(UIElement)s};foreach(var (name,type) in new[]{("基础调色","BasicTone"),("白平衡","WhiteBalance"),("曲线","Curve"),("色轮","ColorBalance"),("色域取样（已有能力）","ColorRange")})menu.Items.Add(new MenuItem{Header=name,Command=model?.Editor.AddAdjustmentNodeCommand,CommandParameter=type});menu.IsOpen=true;}}
-    private void R53Brush(object s,RoutedEventArgs e){activeTool="画笔";ToolLabel.Text="画笔 · 当前局部蒙版尚未批准接入";ToolHint.Text="不可用：未连接真实蒙版渲染，不生成假蒙版";}
+    private void R53ToggleResources(object s,RoutedEventArgs e)
+    {
+        if(ActualWidth>=1200){r53ResourcesRequested=!r53ResourcesRequested;ApplyR53Layout();return;}
+        if(r53ResourceWindow is not null){r53ResourceWindow.Activate();return;}
+        var panel=new DockPanel{Margin=new Thickness(12)};var header=new StackPanel();var tabs=new WrapPanel();
+        foreach(var name in new[]{"预设","滤镜","即时胶片"}){var tab=new Button{Content=name};tab.Click+=(_,_)=>{r53ResourceTab=name;RenderR53Resources();};tabs.Children.Add(tab);}header.Children.Add(tabs);
+        var search=new TextBox{Text=r53Search,Margin=new Thickness(0,8,0,8)};System.Windows.Automation.AutomationProperties.SetName(search,"搜索资源");search.TextChanged+=(_,_)=>{r53Search=search.Text;RenderR53Resources();};header.Children.Add(search);
+        var filters=new WrapPanel();foreach(var name in new[]{"全部","收藏","最近"}){var filter=new Button{Content=name};filter.Click+=(_,_)=>{r53FavoritesOnly=name=="收藏";r53RecentOnly=name=="最近";RenderR53Resources();};filters.Children.Add(filter);}header.Children.Add(filters);DockPanel.SetDock(header,Dock.Top);panel.Children.Add(header);
+        r53NarrowResourceContent=new StackPanel();panel.Children.Add(new ScrollViewer{Content=r53NarrowResourceContent,VerticalScrollBarVisibility=ScrollBarVisibility.Auto});
+        var window=new Window{Title="光镜 · 资源",Owner=Window.GetWindow(this),Width=340,Height=550,Content=panel,Background=Background};r53ResourceWindow=window;
+        window.Closed+=(_,_)=>{r53ResourceWindow=null;r53NarrowResourceContent=null;RenderR53Resources();};RenderR53Resources();window.Show();search.Focus();
+    }
+    private void R53Brush(object s,RoutedEventArgs e){CancelMaskStroke();if(model is not null)model.Editor.ViewMode="仿色结果";activeTool="画笔";PhotoViewport.Cursor=Cursors.Cross;ToolLabel.Text="画笔 · 局部蒙版";ToolHint.Text="在当前图层绘制 · 锁定图层不可改";EditModes.SelectedIndex=2;DrawMaskOverlay();}
     private void R53CompareDown(object s,MouseButtonEventArgs e){if(model is null)return;r53CompareHeld=true;model.Editor.HoldOriginal(true);R53HoldCompare.CaptureMouse();e.Handled=true;}
     private void R53CompareUp(object s,MouseButtonEventArgs e){R53CompareLost(s,e);R53HoldCompare.ReleaseMouseCapture();e.Handled=true;}
     private void R53CompareLost(object s,MouseEventArgs e){ReleaseR53Compare();}
@@ -73,14 +85,19 @@ public partial class PhotoGradePageView
     private void R53InstantTab(object s,RoutedEventArgs e){r53ResourceTab="即时胶片";RenderR53Resources();EditModes.SelectedIndex=1;}
     private void RenderR53Resources()
     {
-        if(R53ResourceContent is null)return;R53ResourceContent.Children.Clear();
-        void Add(string name,Action action){var b=new Button{Content=name,Height=30,HorizontalContentAlignment=HorizontalAlignment.Left,Margin=new Thickness(0,3,0,3)};b.Click+=(_,_)=>action();R53ResourceContent.Children.Add(b);}
+        var target=r53NarrowResourceContent??R53ResourceContent;if(target is null)return;target.Children.Clear();
+        void Add(string name,Action action){if(!string.IsNullOrWhiteSpace(r53Search)&&!name.Contains(r53Search,StringComparison.CurrentCultureIgnoreCase))return;if(r53FavoritesOnly&&model?.R53FavoriteResources.Contains(name)!=true)return;if(r53RecentOnly&&model?.R53RecentResources.Contains(name)!=true)return;var row=new DockPanel();var star=new Button{Content=model?.R53FavoriteResources.Contains(name)==true?"★":"☆",ToolTip="收藏资源"};System.Windows.Automation.AutomationProperties.SetName(star,"收藏 "+name);DockPanel.SetDock(star,Dock.Right);star.Click+=(_,_)=>{model?.ToggleR53Favorite(name);RenderR53Resources();};row.Children.Add(star);var b=new Button{Content=name,Height=30,HorizontalContentAlignment=HorizontalAlignment.Left,Margin=new Thickness(0,3,0,3)};b.Click+=(_,_)=>{action();model?.RecordR53Resource(name);RenderR53Resources();};row.Children.Add(b);target.Children.Add(row);}
         if(r53ResourceTab=="即时胶片"){foreach(var paper in model?.PhotographerPapers??[])Add(paper.Name,()=>{if(model is not null){model.SelectedPhotographerPaperId=paper.ProfileId;EditModes.SelectedIndex=1;}});return;}
         if(r53ResourceTab=="滤镜"){Add("胶片风格（现有处理链）",()=>EditModes.SelectedIndex=3);return;}
         Add("提亮 +0.3 EV",()=>{if(model is null)return;model.Editor.AddAdjustmentNodeCommand.Execute("BasicTone");var parameter=ColorStudioToolCatalog.GetParameters(ColorStudioNodeType.BasicTone).Single(p=>p.Key=="exposure");model.Editor.SetToolParameter(parameter,.3);});
         foreach(var (name,type) in new[]{("基础调色","BasicTone"),("白平衡","WhiteBalance"),("曲线","Curve"),("色轮","ColorBalance"),("色域取样（已有能力）","ColorRange")})Add(name,()=>model?.Editor.AddAdjustmentNodeCommand.Execute(type));
         foreach(var scheme in model?.Editor.ColorSchemes??[])Add(scheme.Name,()=>{if(model is not null){model.Editor.SelectedColorScheme=scheme;model.Editor.RequestApplySchemeCommand.Execute(null);}});
     }
+    private void R53SearchChanged(object sender,TextChangedEventArgs e){r53Search=(sender as TextBox)?.Text??"";RenderR53Resources();}
+    private void R53ResourceAll(object sender,RoutedEventArgs e){r53FavoritesOnly=r53RecentOnly=false;RenderR53Resources();}
+    private void R53ResourceFavorites(object sender,RoutedEventArgs e){r53FavoritesOnly=true;r53RecentOnly=false;RenderR53Resources();}
+    private void R53ResourceRecent(object sender,RoutedEventArgs e){r53RecentOnly=true;r53FavoritesOnly=false;RenderR53Resources();}
+    private bool scopesOpen=true;private void R53ToggleScopes(object sender,RoutedEventArgs e){scopesOpen=!scopesOpen;HistogramPanel.Visibility=scopesOpen?Visibility.Visible:Visibility.Collapsed;HistogramRow.Height=new GridLength(scopesOpen?108:0);}
     private Action? closeR53Inspection;
     private void R53Inspect3D(object s,RoutedEventArgs e)
     {

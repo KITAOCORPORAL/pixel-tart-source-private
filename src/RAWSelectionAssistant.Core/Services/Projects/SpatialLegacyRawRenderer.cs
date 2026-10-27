@@ -35,7 +35,7 @@ public static class SpatialLegacyRawRenderer
         if(tileWidth<=0||tileHeight<=0)throw new ArgumentOutOfRangeException(nameof(tileWidth));
         if(source.Orientation!=1||source.WorkingColorSpace!="sRGB")throw new InvalidDataException("Spatial contract requires upright rendered sRGB.");
         node.Normalize();var plan=Plan(source,node,tileWidth,tileHeight);using var admission=StudioGlobalResources.ReserveWork(plan.RequiredBytes);token.ThrowIfCancellationRequested();
-        if(node.Type==ColorStudioNodeType.ReferenceMatch)return Reference(source,node,look??throw new InvalidDataException("Reference Match requires frozen look."),token,stage);
+        if(node.Type==ColorStudioNodeType.ReferenceMatch){var effect=Reference(source,node,look??throw new InvalidDataException("Reference Match requires frozen look."),token,stage);return StudioLayerComposite.Apply(source,effect,node,token);}
         var output=new float[source.Rgb32.Length];var halo=plan.Halo;
         var detailsWorkspaces=new Dictionary<(int,int),ColorStudioToolProcessor.DetailsTileWorkspace>();
         for(var y=0;y<source.Height;y+=tileHeight)for(var x=0;x<source.Width;x+=tileWidth)
@@ -45,13 +45,15 @@ public static class SpatialLegacyRawRenderer
             var w=right-left;var h=bottom-top;var rgb=new float[w*h*3];for(var row=0;row<h;row++)source.Rgb32.Span.Slice(((top+row)*source.Width+left)*3,w*3).CopyTo(rgb.AsSpan(row*w*3));
             var input=new HighBitDepthImageBuffer(w,h,rgb,source.SourceBitDepth,source.WorkingColorSpace,1);
             ColorStudioToolProcessor.DetailsTileWorkspace? scratch=null;if(node.Type==ColorStudioNodeType.Details&&!detailsWorkspaces.TryGetValue((w,h),out scratch)){scratch=new(w,h);detailsWorkspaces[(w,h)]=scratch;}
+            var uncomposited=node with{CompositeVersion=0,Opacity=1,Blend=StudioLayerBlend.Normal,LocalMask=null};
             var rendered=node.Type switch
             {
                 ColorStudioNodeType.Details=>ColorStudioToolProcessor.ApplyDetails(input,node,token,source.Width,source.Height,scratch),
                 ColorStudioNodeType.Develop=>ColorStudioDevelop.ApplyRegion(input,node,source.Width,source.Height,token),
                 ColorStudioNodeType.Film=>PixelTartFilmPipeline.ApplyCore(input,Film(node),token,left,top,source.Width,source.Height),
-                _=>new ColorStudioRenderPipeline().Render(input,ColorStudioProcessingAnalysis.Create(new VisualPixelBuffer(1,1,new byte[3]),new([node]),look,token),look,new([node]),token,captureNodeDiagnostics:false,tile:new(left,top,source.Width,source.Height)).ProcessingPixels!
+                _=>new ColorStudioRenderPipeline().Render(input,ColorStudioProcessingAnalysis.Create(new VisualPixelBuffer(1,1,new byte[3]),new([node]),look,token),look,new([uncomposited]),token,captureNodeDiagnostics:false,tile:new(left,top,source.Width,source.Height)).ProcessingPixels!
             };
+            rendered=StudioLayerComposite.Apply(input,rendered,node,token,new(left,top,source.Width,source.Height));
             for(var row=0;row<ch;row++)rendered.Rgb32.Span.Slice(((y-top+row)*w+x-left)*3,cw*3).CopyTo(output.AsSpan(((y+row)*source.Width+x)*3));
             stage?.Invoke("Tile:"+node.Type+":"+x+":"+y);
         }

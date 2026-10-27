@@ -23,7 +23,15 @@ public sealed class Version230Rc3RuntimeUiTests
     [DataRow("按收入支出筛选")][DataRow("按支付状态筛选")][DataRow("按分类筛选")][DataRow("按项目筛选")][DataRow("按拍摄任务筛选")]
     [DataRow("本月收支记录")][DataRow("付款方或收款方")][DataRow("支付方式")][DataRow("附件（仅关联原位置）")]
     [DataRow("移除引用")][DataRow("不会删除电脑中的原文件")][DataRow("保存收支记录")][DataRow("搜索词不会写入日志")]
-    public void FinancePage_ContainsRequiredLocalAccountingSurface(string token) => Contains("src/RAWSelectionAssistant/Views/FinanceView.xaml", token);
+    public void FinancePage_ContainsRequiredLocalAccountingSurface(string token)
+    {
+        if(token=="金额信息仅保存在本机"){Contains("src/RAWSelectionAssistant/Views/FinanceView.xaml","收支仅存本机");return;}
+        if(token=="不会删除电脑中的原文件"){
+            Contains("src/RAWSelectionAssistant/Views/FinanceView.xaml","DataContext.RemoveAttachmentCommand");
+            var vm=File.ReadAllText(Path.Combine(Root(),"src/RAWSelectionAssistant/ViewModels/FinanceViewModel.cs"));var start=vm.IndexOf("private void RemoveAttachment(");var end=vm.IndexOf("private async Task SaveAsync",start);var method=vm[start..end];StringAssert.Contains(method,"Attachments.Remove(item)");Assert.IsFalse(method.Contains("File.Delete"));Assert.IsFalse(method.Contains("Directory.Delete"));return;
+        }
+        Contains("src/RAWSelectionAssistant/Views/FinanceView.xaml",token);
+    }
 
     [TestMethod]
     [DataRow("本地摄影资料关联")][DataRow("默认仅关联原位置")][DataRow("不把文件写入数据库")][DataRow("不会自动复制")]
@@ -32,7 +40,15 @@ public sealed class Version230Rc3RuntimeUiTests
     [DataRow("PreviewDisplayWidth")][DataRow("PreviewDisplayHeight")][DataRow("搜索文本预览")][DataRow("只读文本预览")]
     [DataRow("安全文件卡片")][DataRow("Office 文件不执行宏")][DataRow("未知格式仅显示元数据")][DataRow("重试保存关联")]
     [DataRow("安全撤销本次复制")][DataRow("保留文件但放弃关联")][DataRow("VerticalScrollBarVisibility=\"Auto\"")]
-    public void DocumentPanel_ContainsSafePreviewAndRecoverySurface(string token) => Contains("src/RAWSelectionAssistant/Views/BookingDocumentsPanel.xaml", token);
+    public void DocumentPanel_ContainsSafePreviewAndRecoverySurface(string token)
+    {
+        if(token is "安全文件卡片" or "Office 文件不执行宏" or "未知格式仅显示元数据")
+        {
+            Contains("src/RAWSelectionAssistant/Views/BookingDocumentsPanel.xaml","IsCardPreview","SelectedItem.FileMetadataText","PreviewMessage","不执行宏或脚本");
+            Contains("src/RAWSelectionAssistant/ViewModels/BookingDocumentsViewModel.cs","DocumentPreviewKind.OfficeCard or DocumentPreviewKind.Unsupported","PreviewKind = DocumentPreviewKind.OfficeCard");return;
+        }
+        Contains("src/RAWSelectionAssistant/Views/BookingDocumentsPanel.xaml", token);
+    }
 
     [TestMethod]
     [DataRow("1 基础信息")][DataRow("2 时间与准备")][DataRow("3 策划资料")][DataRow("4 联系人、工作人员与收支")]
@@ -47,7 +63,12 @@ public sealed class Version230Rc3RuntimeUiTests
     [DataRow("照片浏览器")][DataRow("自动最新")][DataRow("客户监看")][DataRow("检查器")][DataRow("任务中心")][DataRow("全屏监看")]
     [DataRow("缩略图会按需加载")][DataRow("选择一张照片后才能进入全屏监看")][DataRow("ShowTetherEmptyState")]
     [DataRow("选择看守文件夹")][DataRow("开始联机会话")][DataRow("HasSelection")][DataRow("IsInspectorCollapsed")]
-    public void TetherRuntime_ContainsCompactSafeUserFacingStates(string token) => Contains("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml", token);
+    public void TetherRuntime_ContainsCompactSafeUserFacingStates(string token)
+    {
+        if(token=="缩略图会按需加载"){Contains("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml","VirtualizingPanel.IsVirtualizing=\"True\"","VirtualizingPanel.VirtualizationMode=\"Recycling\"","Source=\"{Binding Thumbnail}\"");return;}
+        if(token=="选择一张照片后才能进入全屏监看"){Contains("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml","Command=\"{Binding ToggleFullScreenCommand}\"");Contains("src/RAWSelectionAssistant/ViewModels/TetherCaptureViewModel.cs","ToggleFullScreenCommand = new RelayCommand(_ => IsFullScreen = !IsFullScreen, _ => SelectedAsset is not null)");return;}
+        Contains("src/RAWSelectionAssistant/Views/TetherCaptureView.xaml", token);
+    }
 
     [TestMethod]
     [DataRow("PixelTartCalendarNativeStyle")][DataRow("CalendarItem")][DataRow("CalendarDayButton")][DataRow("DatePickerTextBox")][DataRow("PART_Popup")]

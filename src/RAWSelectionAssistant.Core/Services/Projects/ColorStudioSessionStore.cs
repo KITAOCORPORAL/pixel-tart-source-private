@@ -16,8 +16,11 @@ public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double Editi
 {
     public DarkroomPanelLayout? Darkroom { get; init; }
     public bool R53Professional {get;init;}
+    public IReadOnlyList<string> R53Favorites {get;init;}=[];
+    public IReadOnlyList<string> R53Recents {get;init;}=[];
     public ColorStudioLayout Normalize() => this with
     {
+        R53Favorites=(R53Favorites??[]).Where(x=>!string.IsNullOrWhiteSpace(x)).Distinct().Take(100).ToArray(),R53Recents=(R53Recents??[]).Where(x=>!string.IsNullOrWhiteSpace(x)).Distinct().Take(20).ToArray(),
         Darkroom = Darkroom?.Normalize(),
         AuxiliaryWidth = double.IsFinite(AuxiliaryWidth) ? Math.Clamp(AuxiliaryWidth, 240, 440) : 290,
         EditingWidth = double.IsFinite(EditingWidth) ? Math.Clamp(EditingWidth, 312, 440) : 340,

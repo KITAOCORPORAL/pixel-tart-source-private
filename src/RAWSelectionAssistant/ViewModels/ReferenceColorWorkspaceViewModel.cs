@@ -647,6 +647,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     private async Task ActivateTargetAsync(ReferenceTargetItem target)
     {
+        CloseR53VariantComparison();
         CancelLightPrintTask(false);await LightPrintPreviewWork;_lightPrintBeforeDraft=null;_lightPrintReshoot=false;
         if(!ReferenceEquals(ActiveTarget,target))ClearPhotographerPreviews();
         _paperPreviewCancellation?.Cancel();await StopComparisonAsync();
@@ -723,6 +724,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     public void Dispose()
     {
+        CloseR53VariantComparison();
         _r53Autosave.Stop();
         if(_disposed)return;
         CancelLightPrintTask(false);_paperPreviewCancellation?.Cancel();CancelComparison();_disposed = true;

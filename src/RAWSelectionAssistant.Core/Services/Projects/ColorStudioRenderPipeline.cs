@@ -19,7 +19,9 @@ public sealed class ColorStudioRenderPipeline
         foreach (var node in normalized.Nodes.Where(item => item.Enabled))
         {
             token.ThrowIfCancellationRequested(); if (captureNodeDiagnostics) inputs[node.Id] = current.ToVisualRgb24();
-            current = ApplyHighPrecision(current, node, reference, analysis, token, alpha,tile);
+            if(StudioLayerComposite.Active(node)&&node.Opacity==0){if(captureNodeDiagnostics)outputs.Add(current.ToVisualRgb24());continue;}
+            var input=current;var effect=ApplyHighPrecision(input,node,reference,analysis,token,alpha,tile);
+            current=StudioLayerComposite.Apply(input,effect,node,token,tile);
             if (captureNodeDiagnostics) outputs.Add(current.ToVisualRgb24());
         }
         var descriptor = new ColorPipelineDescriptor(InputInterpretation: "HighPrecision sRGB", WorkingRepresentation: normalized.WorkingSpace, OutputEncoding: "sRGB display adapter");
@@ -100,7 +102,7 @@ public sealed class ColorStudioRenderPipeline
     public ColorStudioRenderResult Render(VisualPixelBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default, bool captureNodeDiagnostics = true)
     {
         var normalized = stack.Normalize();
-        if (normalized.ProcessingVersion == 2 || normalized.Nodes.Any(node => ColorStudioToolCatalog.IsTool(node.Type) || Parameter(node, "range_version", 1) >= 2))
+        if (normalized.Nodes.Any(n=>StudioLayerComposite.Active(n)) || normalized.ProcessingVersion == 2 || normalized.Nodes.Any(node => ColorStudioToolCatalog.IsTool(node.Type) || Parameter(node, "range_version", 1) >= 2))
             return Render(HighBitDepthImageBuffer.FromVisualRgb24(source), analysis, reference, normalized, token, captureNodeDiagnostics, source.Alpha);
         // Version 1 keeps the historical per-node RGB24 quantization of saved JPEG/PNG schemes.
         // New precision is explicit state, so merely opening an old project cannot alter its pixels.

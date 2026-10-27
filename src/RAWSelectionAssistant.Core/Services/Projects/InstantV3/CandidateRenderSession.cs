@@ -84,7 +84,7 @@ public sealed class CandidateRenderSession : IDisposable
                     foreach(var node in adjustments.Nodes.Where(n=>n.Enabled))
                     {
                         if(node.Type is not(ColorStudioNodeType.BasicTone or ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.Curve))throw new NotSupportedException("First lightprint window grading supports tone, white balance and curve only");
-                        var next=ColorStudioToolProcessor.Apply(graded??borrow.Image,node,token);graded?.Dispose();graded=next;
+                        var input=graded??borrow.Image;var effect=ColorStudioToolProcessor.Apply(input,node,token);var next=StudioLayerComposite.Apply(input,effect,node,token,new(minX,minY,image.Width,image.Height));graded?.Dispose();graded=next;
                     }
                 }
                 using var gradedOwner=graded;

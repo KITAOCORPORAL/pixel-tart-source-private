@@ -1,5 +1,15 @@
 # 光镜开发交接入口
 
+## 公司阶段A接续（2026-10-27 America/New_York）
+- 当前独立实施树 E:/Kitao-Worktrees/r53-stage-a-completion-20261027，分支 company/r53-stage-a-completion-20261027，基线 home/r53-stage-a-20261026@7115e3431ffa03b0f2b81a4937627b79659460ab；本轮重新fetch确认家庭无新增提交。
+- 当前权威状态只看 docs/validation/r53-stage-a-completion-20261027/FINAL_REPORT.md、TEST_SUMMARY.json、NONPASS.json、STAGE_MATRIX.json。阶段A仍PARTIAL，B-E未开始，不恢复教程。
+- 新LocalMaskV1/LayerCompositeV1接统一预览/持久化/导出，Normal/Multiply/Screen为非线性sRGB直RGB混合，alpha不变；旧PV4/5/6不迁移。详细像素门禁和不足见NODE_COMPARISON.md。新编辑只在WHOLE_APP_DIAGNOSTIC下开放，未批准正式版。
+- 2-4变体按1200px顺序渲染（同一源/RAW主缓存），窗口同步缩放平移，取消代次隔离；资源收藏/最近随项目保存，窄窗主动浮窗，示波器状态修复。
+- 已知缺口：专业PV4 RAW未接通通用局部编辑；智能主体未实现；完整蒙版参考/ICC矩阵、真实鼠标/DPI不计PASS。当前禁止Computer Use/Browser/WebView/CDP继续生效。
+- 本机未找到指定SHA的R5.3定稿ZIP；家用DESIGN_SOURCE.json仅历史，不伪称公司读取。保留既有源码布局，未用旧R5/R5.1包冒充定稿。
+- 旧工作树和未提交内容保留，禁止reset/clean/stash/rebase旧树/强推/合main。统一交付 E:/Kitao-Deliveries/r53-stage-a-completion-20261027；完整应用而非暗室宿主，WholeAppDiagnosticBuild=true / PhotographerTrialBuild=false。
+
+
 ## 家用 R5.3 阶段 A 与旧教程退役（2026-10-26 America/Phoenix）
 - 实际仓库 N:/pixart/pixel-tart-source-private；独立工作树 N:/pixart/guangjing-r53-stage-a-20261026；分支 home/r53-stage-a-20261026。20旧树与211项未提交文件保全，不reset/clean/stash/rebase、不合main、不强推。
 - 再fetch/ls-remote公司 company/whole-app-ui-copy-cleanup-20261026 = 48527fa0b7d3d063d5af5f6b62fa1a18cb36ef66，无后续提交；家庭旧产品均已继承。

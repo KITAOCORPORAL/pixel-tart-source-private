@@ -36,6 +36,7 @@ public sealed partial class TetherReferenceModeViewModel
         ChangeStack(nodes => nodes.Any(n => n.Id == node.Id)
             ? nodes.Select(n => n.Id == node.Id ? changed : n).ToArray()
             : InsertToolInDefaultOrder(nodes, changed), processingVersion: 2);
+        SelectedAdjustmentNode = AdjustmentStack.Nodes.FirstOrDefault(n => n.Id == node.Id);
     }
 
     public void ResetToolGroup(ColorStudioNodeType type, string group)

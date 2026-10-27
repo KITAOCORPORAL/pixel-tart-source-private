@@ -284,7 +284,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public bool ContextRailOpen { get => _contextRailOpen; set { if (SetProperty(ref _contextRailOpen, value)) OnPropertyChanged(nameof(IsContextVisible)); } }
     public bool IsContextVisible => !FocusView && ContextRailOpen;
     public bool IsLeftRailVisible => !FocusView;
-    public ColorAdjustmentStack AdjustmentStack { get => _adjustmentStack; private set { if (SetProperty(ref _adjustmentStack, value)) { OnPropertyChanged(nameof(AdjustmentNodes)); OnPropertyChanged(nameof(SelectedAdjustmentNode)); RaiseAdjustmentCommands(); SyncSimpleFromStack(); NotifyDevelop(); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); RestoreSchemeCommand?.RaiseCanExecuteChanged(); } } }
+    public ColorAdjustmentStack AdjustmentStack { get => _adjustmentStack; private set { if (SetProperty(ref _adjustmentStack, value)) { OnPropertyChanged(nameof(AdjustmentNodes)); OnPropertyChanged(nameof(SelectedAdjustmentNode)); OnPropertyChanged(nameof(SelectedLayerOpacity));OnPropertyChanged(nameof(SelectedLayerBlend));OnPropertyChanged(nameof(SelectedNodeEditable));OnPropertyChanged(nameof(SelectedNodeLocked)); RaiseAdjustmentCommands(); SyncSimpleFromStack(); NotifyDevelop(); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); RestoreSchemeCommand?.RaiseCanExecuteChanged(); } } }
     public IReadOnlyList<ColorAdjustmentStackNode> AdjustmentNodes => AdjustmentStack.Nodes;
     public ColorAdjustmentStackNode? SelectedAdjustmentNode
     {
@@ -293,7 +293,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         {
             // ItemsSource replacement transiently clears WPF selection. Keep the canonical ID when it still exists.
             if (value is null && AdjustmentStack.Nodes.Any(node => node.Id == _selectedAdjustmentNodeId)) return;
-            _selectedAdjustmentNodeId = value?.Id; OnPropertyChanged(); RaiseAdjustmentCommands();
+            _selectedAdjustmentNodeId = value?.Id; OnPropertyChanged();OnPropertyChanged(nameof(SelectedLayerOpacity));OnPropertyChanged(nameof(SelectedLayerBlend)); RaiseAdjustmentCommands();
         }
     }
     public bool SelectedNodeEnabled { get => SelectedAdjustmentNode?.Enabled == true; set { if (SelectedAdjustmentNode is { } selected && value != selected.Enabled) ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? node with { Enabled = value } : node).ToArray()); OnPropertyChanged(); } }
@@ -343,7 +343,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         _preview = renderBackend ?? new ReferenceLookPreviewService();
         _matchV4Executor = matchV4Executor;
         _allowReferenceManagement = allowReferenceManagement;
-        ApplyCommand = new AsyncRelayCommand(_ => EnableAndRenderAsync(), _ => (SelectedLook is not null || AdjustmentStack.Nodes.Count > 0) && _source is not null);
+        ApplyCommand = new AsyncRelayCommand(_ => EnableAndRenderAsync(), _ => (SelectedLook is not null || AdjustmentStack.Nodes.Count > 0) && _source is not null, allowConcurrent: true);
         ReloadCommand = new AsyncRelayCommand(_ => LoadAsync());
         ExportCubeCommand = new AsyncRelayCommand(_ => ExportCubeAsync(), _ => SelectedLook is not null && _source is not null && _dialogs is not null && _allowReferenceManagement);
         SaveCurrentAdjustmentCommand = new AsyncRelayCommand(_ => SaveCurrentAdjustmentAsync(), _ => HasSessionAdjustment && SelectedLook is not null && _dialogs is IReferenceAdjustmentDialogService);
@@ -653,7 +653,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         if (SelectedAdjustmentNode is not { } selected || string.IsNullOrWhiteSpace(name)) return;
         ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? node with { Name = name.Trim() } : node).ToArray());
     }
-    private void RaiseAdjustmentCommands() { DeleteAdjustmentNodeCommand?.RaiseCanExecuteChanged(); DuplicateAdjustmentNodeCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeUpCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeDownCommand?.RaiseCanExecuteChanged(); ResetAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ToggleAdjustmentNodeCommand?.RaiseCanExecuteChanged(); RenameAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ClearSamplesCommand?.RaiseCanExecuteChanged(); UndoAdjustmentCommand?.RaiseCanExecuteChanged(); RedoAdjustmentCommand?.RaiseCanExecuteChanged(); OnPropertyChanged(nameof(SelectedNodeEnabled)); OnPropertyChanged(nameof(SelectedNodeName)); OnPropertyChanged(nameof(SelectedNodeLocked));OnPropertyChanged(nameof(SelectedNodeEditable)); OnPropertyChanged(nameof(KeepOriginalLuminance)); foreach (var name in new[] { nameof(RangeStrength), nameof(RangeRadius), nameof(RangeSoftness), nameof(RangeHue), nameof(RangeSaturation), nameof(RangeChroma), nameof(RangeLightness), nameof(TransitionAmount), nameof(PositiveSamples), nameof(NegativeSamples) }) OnPropertyChanged(name); }
+    private void RaiseAdjustmentCommands() { DeleteAdjustmentNodeCommand?.RaiseCanExecuteChanged(); DuplicateAdjustmentNodeCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeUpCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeDownCommand?.RaiseCanExecuteChanged(); ResetAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ToggleAdjustmentNodeCommand?.RaiseCanExecuteChanged(); RenameAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ClearSamplesCommand?.RaiseCanExecuteChanged(); UndoAdjustmentCommand?.RaiseCanExecuteChanged(); RedoAdjustmentCommand?.RaiseCanExecuteChanged(); OnPropertyChanged(nameof(SelectedNodeEnabled)); OnPropertyChanged(nameof(SelectedLayerOpacity));OnPropertyChanged(nameof(SelectedLayerBlend));OnPropertyChanged(nameof(SelectedNodeName)); OnPropertyChanged(nameof(SelectedNodeLocked));OnPropertyChanged(nameof(SelectedNodeEditable)); OnPropertyChanged(nameof(KeepOriginalLuminance)); foreach (var name in new[] { nameof(RangeStrength), nameof(RangeRadius), nameof(RangeSoftness), nameof(RangeHue), nameof(RangeSaturation), nameof(RangeChroma), nameof(RangeLightness), nameof(TransitionAmount), nameof(PositiveSamples), nameof(NegativeSamples) }) OnPropertyChanged(name); }
     public ObservableCollection<ReferenceLook> Looks { get; } = [];
     public ObservableCollection<ReferenceLook> SourceChoices { get; } = [];
     public ObservableCollection<ReferenceSourceWeightViewModel> ReferenceSources { get; } = [];
@@ -876,7 +876,13 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         SetNodeNumeric(ColorStudioNodeType.ReferenceMatch, nodeKey, value);
         _ = DebouncedRenderAsync();
     }
-    private async Task EnableAndRenderAsync() { if (!Enabled) { Enabled = true; return; } await RenderAsync(); }
+    private async Task EnableAndRenderAsync()
+    {
+        // An explicit Apply owns the final render; older debounce work must not cancel it.
+        _stoppedEditRevision = Volatile.Read(ref _scheduledEditRevision);
+        Enabled = true;
+        await RenderAsync();
+    }
     private async Task ImportExternalReferenceAsync()
     {
         if (_dialogs is null) return; var path = _dialogs.ChooseFiles(StudioLocalizationService.Current["导入参考图（仅关联原位置）"], StudioLocalizationService.Current["图片"] + "|*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.bmp", false).FirstOrDefault(); if (path is null) return;

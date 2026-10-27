@@ -40,8 +40,8 @@ public sealed class NavigationWorkbenchClosureTests
         ContainsAll(sidebarSource, "Text=\"工作\"", "Text=\"工具\"", "Text=\"系统\"");
         Assert.IsFalse(sidebarSource.Contains("Content=\"使用教程\"", StringComparison.Ordinal));
         Assert.IsFalse(sidebarSource.Contains("Content=\"问题反馈\"", StringComparison.Ordinal));
-        StringAssert.Contains(source, "Content=\"打开帮助与教程\"");
-        StringAssert.Contains(source, "Content=\"建议与问题反馈\"");
+        StringAssert.Contains(source, "Command=\"{Binding HelpCommand}\"");
+        StringAssert.Contains(source, "Command=\"{Binding FeedbackCommand}\"");
     }
 
     [TestMethod]

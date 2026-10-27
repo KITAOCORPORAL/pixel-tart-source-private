@@ -4,6 +4,10 @@ using RAWSelectionAssistant.Utilities;
 namespace RAWSelectionAssistant.ViewModels;
 public sealed partial class ReferenceColorWorkspaceViewModel
 {
+    public IReadOnlyList<string> R53FavoriteResources=>Layout.R53Favorites;
+    public IReadOnlyList<string> R53RecentResources=>Layout.R53Recents;
+    public void RecordR53Resource(string key){Layout=Layout with{R53Recents=new[]{key}.Concat(Layout.R53Recents.Where(x=>x!=key)).Take(20).ToArray()};ScheduleR53Autosave();}
+    public void ToggleR53Favorite(string key){Layout=Layout with{R53Favorites=Layout.R53Favorites.Contains(key)?Layout.R53Favorites.Where(x=>x!=key).ToArray():Layout.R53Favorites.Append(key).Take(100).ToArray()};OnPropertyChanged(nameof(R53FavoriteResources));ScheduleR53Autosave();}
     public bool R53Professional{get=>Layout.R53Professional;set{if(Layout.R53Professional==value)return;Layout=Layout with{R53Professional=value};OnPropertyChanged();ScheduleR53Autosave();}}
     public IReadOnlyList<StudioEditVersion> R53Variants=>ActiveTarget?.EditVersions.Where(v=>!v.Archived).ToArray()??[];
     public Guid? R53MainVariantId=>ActiveTarget?.EditVersions.FirstOrDefault(v=>v.IsMain&&!v.Archived)?.Id;
