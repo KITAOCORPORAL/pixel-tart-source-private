@@ -1,5 +1,5 @@
 # R5.3 UI correction — PARTIAL, not visually complete
-Date: 2026-10-28 Asia/Shanghai. Baseline: 4e9dfc4a9b65ab78379c1fa2bf1ff514742a0bec.
+Date: 2026-10-28 Europe/Berlin. Baseline: 4e9dfc4a9b65ab78379c1fa2bf1ff514742a0bec.
 
 ## Design authority
 Verified original archive SHA256: 16f75c0f40b506e4db57f140f389967264040cd8c5930ad24946b11c171e2ca9.
