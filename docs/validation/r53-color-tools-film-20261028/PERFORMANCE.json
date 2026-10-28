@@ -1,0 +1,74 @@
+{
+  "productSha": "2814d49b559d3067da2fb1d7ca8a489fccf3b940",
+  "input": "Named authorized20MP TNAN8886.CR3, not small synthetic timing",
+  "before": {
+    "width": 5496,
+    "height": 3670,
+    "createMs": 8237.2743,
+    "inputMs": 26.5435,
+    "settledMs": 7487.2215,
+    "previewQuality": "精细",
+    "peakWorkingSetBytes": 1848397824,
+    "ledger": 308687040,
+    "oldDefinition": "{\"ProcessingVersion\":4,\"WhiteBalance\":\"Camera\",\"RedGain\":1,\"GreenGain\":1,\"BlueGain\":1,\"ExposureEv\":0,\"InputConfiguration\":\"LibRaw021LinearProPhotoD65V1\",\"DisplayTransform\":\"LuminanceShoulderNeutralGamutV1\",\"DecodeKey\":\"LibRaw021LinearProPhotoD65V1:Camera:1:1:1\"}",
+    "oldVariantUnchanged": true,
+    "scope": "Actual20MP authorized Canon, product setter/preview/task, not physical mouse latency. Fixture retains full result for hash."
+  },
+  "after": {
+    "width": 5496,
+    "height": 3670,
+    "createMs": 7967.6733,
+    "inputMs": 29.6628,
+    "settledMs": 3036.2071,
+    "updates": [
+      {
+        "ms": 365.243,
+        "quality": "快速 · 正在精细更新"
+      },
+      {
+        "ms": 2817.1806,
+        "quality": "精细"
+      }
+    ],
+    "proxyMs": 137.9148,
+    "fastMs": 119.6699,
+    "mean": 0.0010156964417546988,
+    "p95": 0.0028840452432632446,
+    "maximum": 0.3553265333175659,
+    "previewQuality": "精细",
+    "peakWorkingSetBytes": 1969590272,
+    "ledger": 313813440,
+    "oldDefinition": "{\"ProcessingVersion\":4,\"WhiteBalance\":\"Camera\",\"RedGain\":1,\"GreenGain\":1,\"BlueGain\":1,\"ExposureEv\":0,\"InputConfiguration\":\"LibRaw021LinearProPhotoD65V1\",\"DisplayTransform\":\"LuminanceShoulderNeutralGamutV1\",\"DecodeKey\":\"LibRaw021LinearProPhotoD65V1:Camera:1:1:1\"}",
+    "oldVariantUnchanged": true,
+    "scope": "Actual20MP authorized Canon, product setter/preview/task, not physical mouse latency. Fixture retains full result for hash."
+  },
+  "rawWide": {
+    "source": "TNAN8886.CR3",
+    "sourceHash": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "Width": 5496,
+    "Height": 3670,
+    "inputDomain": "LibRaw Linear ProPhoto D65",
+    "workingDomain": "LinearProPhotoD50V2",
+    "outputProfile": "F8B29C8344C53B22F123D5F36335BCAFA38FA5941D2A731A02C5BADD1506C4B2",
+    "BitDepth": 16,
+    "MaximumError": 0,
+    "sourceUnchanged": true,
+    "frontendClipped": true,
+    "saturated": 0,
+    "C1": "NOT_RUN",
+    "CalibrationEligible": false
+  },
+  "budget": {
+    "setBeforeImplementation": true,
+    "input": "Authorized20MP Canon RawWide and linear V2 document",
+    "firstWarmUpdateMs": 800,
+    "meanAbsSrgb8": 1.5,
+    "p95AbsSrgb8": 4,
+    "maxAbsSrgb8": 32,
+    "fast": "Area-average linear source proxy then same versioned tools; approximate only",
+    "fine": "Full-resolution node/mask then linear area average unchanged",
+    "export": "Full-resolution always",
+    "coldBase": "Measure separately; do not count as warm"
+  },
+  "scope": "Product setters + asynchronous preview, not physical mouse. Peak includes full result hash fixture, ledger separate. Full export uses original path."
+}

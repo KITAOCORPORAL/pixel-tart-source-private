@@ -9,7 +9,7 @@
 - R3家庭唯一paper selector继承，本轮补stable paper:/frame:ID收藏/最近/搜索/选择反馈、6程序边框唯一左区、右侧重置/项目冻结草稿保存恢复；seed/来源/取消/显影锁/重拍保留。film读整文档+ICC→sRGB，不是显示器preview，也不是完整宽域胶片。
 - 自由画布首闭环本轮未开始，不用设计文档冒充。联名/真实扫描授权缺失单列不阻通用资源。旧教程停用、后置完整引导不做。
 - 完整应用WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false，所有模块及策划15板块保留；无Setup，CMD隔离启动。ComputerUse/Browser/WebView/CDP禁止，testhost/OFFSCREEN/OS启动分开，物理鼠标/多屏ACM/HDR未验。
-- 当前权威docs/validation/r53-color-tools-film-20261028/FINAL_REPORT.md、TEST_SUMMARY.json、COLOR_BOUNDARIES.json、FILM_STATUS.md，产品/最终远端SHA交付封存时写入。
+- 当前权威docs/validation/r53-color-tools-film-20261028/FINAL_REPORT.md、TEST_SUMMARY.json、COLOR_BOUNDARIES.json、FILM_STATUS.md；产品2814d49b559d3067da2fb1d7ca8a489fccf3b940，Core20/WPF22PASS，0FAIL/0NOT_RUN（选定范围）。完整包E:/Kitao-Deliveries/r53-color-tools-film-20261028/Guangjing-R53-ColorTools-Film-Diagnostic-win-x64.zip；常规CMD默认off，另RawWide研究CMD显式开启。最终远端见PUSH_READBACK.json。
 
 
 ## 家庭阶段B CMS收尾＋R3/出版续接（2026-10-27 America/Phoenix）

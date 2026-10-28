@@ -1,0 +1,48 @@
+{
+  "productSha": "2814d49b559d3067da2fb1d7ca8a489fccf3b940",
+  "testSha": "5e2001d6e54932f008e247c28503cad9ed614ac7",
+  "counts": {
+    "Core": {
+      "Passed": 20,
+      "Failed": 0,
+      "NotExecuted": 0
+    },
+    "Wpf": {
+      "Passed": 22,
+      "Failed": 0,
+      "NotExecuted": 0
+    }
+  },
+  "runs": [
+    {
+      "label": "SEALED_CORE",
+      "path": "SEALED_CORE/run-20261028-112809-6b4265ec/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 20
+      },
+      "assemblySha256": "880abe10a5b86e01ea474a52c1056b42f700dd9783c4fa592e18d4e6d132463f"
+    },
+    {
+      "label": "SEALED_WPF",
+      "path": "SEALED_WPF/run-20261028-112816-def7f9ce/summary.json",
+      "status": "FAILED",
+      "counts": {
+        "Passed": 20,
+        "NotExecuted": 2
+      },
+      "assemblySha256": "b6dbe41b236b192a5b6646a9c4dead00302b665273f3f0bee82574d0fd20a4b7"
+    },
+    {
+      "label": "SEALED_INDEPENDENT",
+      "path": "SEALED_INDEPENDENT/run-20261028-113038-ef937ec5/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 2
+      },
+      "assemblySha256": "b6dbe41b236b192a5b6646a9c4dead00302b665273f3f0bee82574d0fd20a4b7"
+    }
+  ],
+  "scope": "Affected selected numerical/state/RAW/CMS/film/full-shell tests only, not all discovered suites. Strict first stage NOT_RUN independent methods later executed in distinct processes.",
+  "offscreenNotNative": true
+}
