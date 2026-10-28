@@ -1,0 +1,68 @@
+[
+  {
+    "kind": "serial",
+    "decodeMs": 675.7339,
+    "Width": 5496,
+    "Height": 3670,
+    "nodeCount": 10,
+    "firstMs": 848.9975,
+    "fineMs": 11324.2345,
+    "fullEncodeValidateMs": 490.6229,
+    "peakWorkingSet": 1861980160,
+    "peakAccounted": 309578688,
+    "afterAccounted": 0,
+    "error": null,
+    "effectCallsAtProxy": 10,
+    "metrics": {
+      "RoutedNodes": 10,
+      "EffectCalls": 580,
+      "PeakRetainedNodeBuffers": 2,
+      "ReleasedBeforeReturn": 522
+    },
+    "sampledFullGraphPixelsExact": true
+  },
+  {
+    "kind": "shared",
+    "decodeMs": 675.7339,
+    "Width": 5496,
+    "Height": 3670,
+    "nodeCount": 4,
+    "firstMs": 310.1402,
+    "fineMs": 3716.3819,
+    "fullEncodeValidateMs": 380.4242,
+    "peakWorkingSet": 1838612480,
+    "peakAccounted": 326462400,
+    "afterAccounted": 0,
+    "error": null,
+    "effectCallsAtProxy": 3,
+    "metrics": {
+      "RoutedNodes": 4,
+      "EffectCalls": 174,
+      "PeakRetainedNodeBuffers": 3,
+      "ReleasedBeforeReturn": 174
+    },
+    "sampledFullGraphPixelsExact": true
+  },
+  {
+    "kind": "mix-chain",
+    "decodeMs": 675.7339,
+    "Width": 5496,
+    "Height": 3670,
+    "nodeCount": 16,
+    "firstMs": 1122.2249,
+    "fineMs": 13533.0852,
+    "fullEncodeValidateMs": 400.7104,
+    "peakWorkingSet": 2432950272,
+    "peakAccounted": 343346112,
+    "afterAccounted": 0,
+    "error": null,
+    "effectCallsAtProxy": 11,
+    "metrics": {
+      "RoutedNodes": 16,
+      "EffectCalls": 638,
+      "PeakRetainedNodeBuffers": 4,
+      "ReleasedBeforeReturn": 870
+    },
+    "sampledFullGraphPixelsExact": true
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "kind": "serial",
+    "decodeMs": 649.2323,
+    "Width": 5496,
+    "Height": 3670,
+    "nodeCount": 10,
+    "firstMs": 781.1554,
+    "fineMs": null,
+    "fullEncodeValidateMs": null,
+    "peakWorkingSet": 523943936,
+    "peakAccounted": 66643200,
+    "afterAccounted": 0,
+    "error": "RAWSelectionAssistant.Core.Services.Projects.StudioBudgetException: \u5904\u7406\u8BF7\u6C42\u8D85\u8FC7\u5168\u5E94\u7528\u8D44\u6E90\u9884\u7B97\uFF1B\u672A\u964D\u4F4E\u5C3A\u5BF8\u6216\u4F4D\u6DF1\u3002\r\n   at RAWSelectionAssistant.Core.Services.Projects.StudioGlobalResources.ReserveWork(Int64 bytes)\r\n   at RAWSelectionAssistant.Core.Services.Projects.StudioGraphRenderer.Render(HighBitDepthImageBuffer source, ColorAdjustmentStack stack, Func\u00603 effect, CancellationToken token, FilmTileCoordinates tile, Func\u00603 sourceCoordinate, IReadOnlyDictionary\u00602 masks, Action\u00603 diagnostics)\r\n   at RAWSelectionAssistant.Tests.R54HomeStabilityTests.AuthorizedTwentyMpGraphMemoryAndFullExport()",
+    "effectCallsAtProxy": 10
+  },
+  {
+    "kind": "shared",
+    "decodeMs": 649.2323,
+    "Width": 5496,
+    "Height": 3670,
+    "nodeCount": 4,
+    "firstMs": 165.4993,
+    "fineMs": 7622.3006,
+    "fullEncodeValidateMs": 351.9481,
+    "peakWorkingSet": 1712889856,
+    "peakAccounted": 1694306880,
+    "afterAccounted": 0,
+    "error": null,
+    "effectCallsAtProxy": 3
+  },
+  {
+    "kind": "mix-chain",
+    "decodeMs": 649.2323,
+    "Width": 5496,
+    "Height": 3670,
+    "nodeCount": 16,
+    "firstMs": 627.3426,
+    "fineMs": null,
+    "fullEncodeValidateMs": null,
+    "peakWorkingSet": 1756864512,
+    "peakAccounted": 97401600,
+    "afterAccounted": 0,
+    "error": "RAWSelectionAssistant.Core.Services.Projects.StudioBudgetException: \u5904\u7406\u8BF7\u6C42\u8D85\u8FC7\u5168\u5E94\u7528\u8D44\u6E90\u9884\u7B97\uFF1B\u672A\u964D\u4F4E\u5C3A\u5BF8\u6216\u4F4D\u6DF1\u3002\r\n   at RAWSelectionAssistant.Core.Services.Projects.StudioGlobalResources.ReserveWork(Int64 bytes)\r\n   at RAWSelectionAssistant.Core.Services.Projects.StudioGraphRenderer.Render(HighBitDepthImageBuffer source, ColorAdjustmentStack stack, Func\u00603 effect, CancellationToken token, FilmTileCoordinates tile, Func\u00603 sourceCoordinate, IReadOnlyDictionary\u00602 masks, Action\u00603 diagnostics)\r\n   at RAWSelectionAssistant.Tests.R54HomeStabilityTests.AuthorizedTwentyMpGraphMemoryAndFullExport()",
+    "effectCallsAtProxy": 11
+  }
+]

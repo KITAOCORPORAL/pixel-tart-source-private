@@ -1,0 +1,162 @@
+[
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "publish",
+      "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+      "-c",
+      "Release",
+      "-r",
+      "win-x64",
+      "--self-contained",
+      "true",
+      "-o",
+      "N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\app",
+      "-p:WholeAppDiagnosticBuild=true",
+      "-p:PhotographerTrialBuild=false",
+      "-p:SourceRevisionId=14bbb60debdd0b176490adb24747023de59b1dbf",
+      "-p:IncludeSourceRevisionInInformationalVersion=true",
+      "--disable-build-servers",
+      "-m:1",
+      "-nr:false"
+    ],
+    "pid": 46140,
+    "exitCode": 0,
+    "sourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+    "startEpoch": 1793199633.8002045,
+    "endEpoch": 1793199673.2154157
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "build",
+      "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
+      "-c",
+      "Release",
+      "-p:WholeAppDiagnosticBuild=true",
+      "-p:PhotographerTrialBuild=false",
+      "-p:SourceRevisionId=14bbb60debdd0b176490adb24747023de59b1dbf",
+      "-p:IncludeSourceRevisionInInformationalVersion=true",
+      "--disable-build-servers",
+      "-m:1",
+      "-nr:false"
+    ],
+    "pid": 39752,
+    "exitCode": 0,
+    "sourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+    "startEpoch": 1793199673.2164223,
+    "endEpoch": 1793199677.099274
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "build",
+      "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+      "-c",
+      "Release",
+      "-p:Platform=x64",
+      "-p:WholeAppDiagnosticBuild=true",
+      "-p:PhotographerTrialBuild=false",
+      "-p:SourceRevisionId=14bbb60debdd0b176490adb24747023de59b1dbf",
+      "-p:IncludeSourceRevisionInInformationalVersion=true",
+      "--disable-build-servers",
+      "-m:1",
+      "-nr:false"
+    ],
+    "pid": 23624,
+    "exitCode": 0,
+    "sourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+    "startEpoch": 1793199677.1002738,
+    "endEpoch": 1793199720.951469
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-darkroom-20261028\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName~R53UiCorrectionTests.FullApplicationHostedRailAndMenuOffscreenEvidence",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\full-app-offscreen"
+    ],
+    "pid": 51920,
+    "exitCode": 0,
+    "sourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+    "startEpoch": 1793199777.4877057,
+    "endEpoch": 1793199789.033454
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-darkroom-20261028\\tests\\RAWSelectionAssistant.Tests\\bin\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+      "/TestCaseFilter:FullyQualifiedName~AuthorizedTwentyMpGraphMemoryAndFullExport",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\large-final"
+    ],
+    "pid": 46680,
+    "exitCode": 0,
+    "sourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+    "startEpoch": 1793199789.0354528,
+    "endEpoch": 1793199823.4009619
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-darkroom-20261028\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName~R54WorkflowWpfTests.IndependentGraphCreate",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\process-create"
+    ],
+    "pid": 31996,
+    "exitCode": 0,
+    "sourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+    "startEpoch": 1793199774.4697862,
+    "endEpoch": 1793199776.091696
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-darkroom-20261028\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName~R54WorkflowWpfTests.IndependentGraphReopenAndExport",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\process-reopen"
+    ],
+    "pid": 47524,
+    "exitCode": 0,
+    "sourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+    "startEpoch": 1793199776.0936904,
+    "endEpoch": 1793199777.484704
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-darkroom-20261028\\tests\\RAWSelectionAssistant.Tests\\bin\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+      "/TestCaseFilter:FullyQualifiedName~R54GraphTests|FullyQualifiedName~R54ParallelTests|FullyQualifiedName~R54FrameAndNearBlackTests|FullyQualifiedName~R54HomeStabilityTests.Frontier|FullyQualifiedName~R54HomeStabilityTests.LargeHalo|FullyQualifiedName~R54HomeStabilityTests.OriginalFrame|FullyQualifiedName~R53LocalCompositeTests|FullyQualifiedName~R53ProfessionalLocalTests|FullyQualifiedName~ProfessionalPipelineNoOpPrecisionTests|FullyQualifiedName~ColorStudioSessionStateTests",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\tests-core"
+    ],
+    "pid": 22632,
+    "exitCode": 0,
+    "sourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+    "startEpoch": 1793199721.8573678,
+    "endEpoch": 1793199724.327668
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-darkroom-20261028\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName~R54HomeUiTests|FullyQualifiedName~R54GraphWpfTests|FullyQualifiedName~R54WorkflowWpfTests.GraphPreview|FullyQualifiedName~R54WorkflowWpfTests.OriginalFrame|FullyQualifiedName~R54WorkflowWpfTests.EveryOriginal|FullyQualifiedName~R54WorkflowWpfTests.ActualProduction|FullyQualifiedName~R53UiCorrectionTests.Darkroom|FullyQualifiedName~R53UiCorrectionTests.FourScreens|FullyQualifiedName~LightPrintR3Tests|FullyQualifiedName~WholeAppDiagnosticPackageTests|FullyQualifiedName~TutorialRetirementProductTests.RealShell|FullyQualifiedName~TutorialRetirementProductTests.ProductXaml",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\tests-wpf"
+    ],
+    "pid": 17484,
+    "exitCode": 0,
+    "sourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+    "startEpoch": 1793199724.3296628,
+    "endEpoch": 1793199774.467786
+  }
+]

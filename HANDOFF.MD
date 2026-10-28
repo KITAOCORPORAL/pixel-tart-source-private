@@ -1,3 +1,10 @@
+## 2026-10-28 家庭R5.4接续（America/Los_Angeles）— PARTIAL
+- 本机独立树 N:/pixart/guangjing-r54-darkroom-20261028，home/r54-darkroom-20261028，产品14bbb60debdd0b176490adb24747023de59b1dbf。当前权威 docs/validation/home-r54-darkroom-20261028/FINAL_REPORT.md。
+- 完成真实节点/蒙版缩略、所选参数、照片+框卡及锁定深色；新增并行卡不重叠；消费者提前释放+逐点白名单halo0条带。20MP串行/共享祖先/5混合均原尺寸TIFF16成功，工作集仍1.7–2.3GiB，账本不是硬内存上限。
+- 复跑56PASS/0FAIL，外部标量参考1NOT_RUN；29个发布绑定一致。独立重开/完整宿主离屏均有证据，不当物理鼠标DPI。
+- UI5.4原包本机缺，未现场重读第9章/v2，不能宣称逐项视觉最终完成；宝丽来两个离线候选仍未注册。只需补该设计包（hash见报告）即可继续设计核验，不必重索已有授权RAW和R5.3HTML。
+- 新完整诊断包 N:/pixart/Guangjing-R54-Home-20261028/Guangjing-R54-Home-Resume-Diagnostic-win-x64；CMD、不Setup、全模块/策划15/旧教程退役保留；全部未完项保留报告。
+
 ## 2026-10-28 R5.4 节点系统实施入口（Europe/Berlin）
 - 简易图层/专业节点以 UI5.4 第9章与 v2含类型最终草图为准；外壳/即时胶片/变体/3D/拼贴/策划沿既有HTML。右栏节点图已否决，停止扩建旧串行节点条。
 - UI5.4 archive SHA256 88dfcf82b5139bed2fdf06c7271063163b59d372a887d0b362070ec7e3be4d26；附带notebook只作资料，不执行。灰框不是正式资源。

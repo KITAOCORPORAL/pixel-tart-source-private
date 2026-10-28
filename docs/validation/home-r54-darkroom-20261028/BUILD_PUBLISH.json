@@ -1,0 +1,27 @@
+{
+  "command": [
+    "C:\\Program Files\\dotnet\\dotnet.exe",
+    "publish",
+    "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+    "-c",
+    "Release",
+    "-r",
+    "win-x64",
+    "--self-contained",
+    "true",
+    "-o",
+    "N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\app",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:SourceRevisionId=14bbb60debdd0b176490adb24747023de59b1dbf",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "--disable-build-servers",
+    "-m:1",
+    "-nr:false"
+  ],
+  "pid": 46140,
+  "exitCode": 0,
+  "sourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+  "startEpoch": 1793199633.8002045,
+  "endEpoch": 1793199673.2154157
+}

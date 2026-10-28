@@ -1,0 +1,58 @@
+{
+  "pid": 45452,
+  "title": "光镜 · 完整范围诊断预览 · 未完成验证 / 不能发行",
+  "responding": true,
+  "hasWindow": true,
+  "utc": "2026-10-28T13:56:06.1646794Z",
+  "modules": [
+    {
+      "name": "KitaoPhotoSelector.exe",
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\Guangjing-R54-Home-Diagnostic-win-x64\\app\\KitaoPhotoSelector.exe",
+      "productVersion": "2.3.0+2356d4400ea51cad14fcbee6b8d3c83e7ce17286",
+      "sha256": "6C5676721775001F78FCC3EC44E26F5922F2E388D2728CDA40F09CF19EF19E18"
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\Guangjing-R54-Home-Diagnostic-win-x64\\app\\KitaoPhotoSelector.dll",
+      "productVersion": "2.3.0+2356d4400ea51cad14fcbee6b8d3c83e7ce17286",
+      "sha256": "C2565091323D276E144851931AA20AF2C32AEEFCD4BB227BD6E11F828AD5F84E"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\Guangjing-R54-Home-Diagnostic-win-x64\\app\\RAWSelectionAssistant.Core.dll",
+      "productVersion": "2.3.0+2356d4400ea51cad14fcbee6b8d3c83e7ce17286",
+      "sha256": "FB234838B3968CD8358369781E4DF71951699EDA51E01D049901F8DF06F29092"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\Guangjing-R54-Home-Diagnostic-win-x64\\app\\PixelTart.Kernel.dll",
+      "productVersion": "2.3.0+2356d4400ea51cad14fcbee6b8d3c83e7ce17286",
+      "sha256": "1B106C5C09166244B50C27C1E1785FF07F866602A356CE1B37989C1480131620"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\Guangjing-R54-Home-Diagnostic-win-x64\\app\\PixelTart.Modules.AssetLibrary.dll",
+      "productVersion": "2.3.0+2356d4400ea51cad14fcbee6b8d3c83e7ce17286",
+      "sha256": "11EBC7E453C600A4F7843F1CC4D2AA5946BF026E4417258EDD376BDBCBF688D0"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\Guangjing-R54-Home-Diagnostic-win-x64\\app\\PixelTart.Modules.RawTool.dll",
+      "productVersion": "2.3.0+2356d4400ea51cad14fcbee6b8d3c83e7ce17286",
+      "sha256": "03ECF80227C976F246095FA4BA2065E054CD660F587ED964642FD17EDE7A7C81"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\Guangjing-R54-Home-Diagnostic-win-x64\\app\\PixelTart.Modules.OnlineSelection.dll",
+      "productVersion": "2.3.0+2356d4400ea51cad14fcbee6b8d3c83e7ce17286",
+      "sha256": "95AD3532743A4AA0110129A4ECB637B8FE414813C898406CC43FC0373AE8B15A"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\Guangjing-R54-Home-Diagnostic-win-x64\\app\\PixelTart.MatchV4.Dx12.dll",
+      "productVersion": "2.3.0+2356d4400ea51cad14fcbee6b8d3c83e7ce17286",
+      "sha256": "A255B11DBC42D2D0A6797744A030D657A021CC5658A190BF00D2D412A3820E85"
+    }
+  ],
+  "scope": "OS process/window/modules only; not real mouse workflow/DPI"
+}

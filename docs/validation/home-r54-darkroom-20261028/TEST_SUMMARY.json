@@ -1,0 +1,405 @@
+{
+  "sourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+  "scope": "affected tests only; OFFSCREEN is not physical desktop",
+  "runs": [
+    {
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\external-scalar\\external-scalar.trx",
+      "sha256": "19845fc13651b04ab7b60618b0f7be4af389f30dba3c0eb7aa5cdec84c976462",
+      "counts": {
+        "total": "1",
+        "executed": "0",
+        "passed": "0",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "PinnedSceneExposureScalarReferencesMatchVersionedStage",
+          "outcome": "NotExecuted"
+        }
+      ]
+    },
+    {
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\full-app-offscreen\\results.trx",
+      "sha256": "1e6b73ccdc4afba497f1dd0aa64f6c1a872fc361fc0b4da2f2e767788761e396",
+      "counts": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "FullApplicationHostedRailAndMenuOffscreenEvidence",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\large-final\\results.trx",
+      "sha256": "154fb09ef350358d81573eff2a9a224ec181b85c3c73d6ef652fabf4d949e2e3",
+      "counts": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "AuthorizedTwentyMpGraphMemoryAndFullExport",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\process-create\\results.trx",
+      "sha256": "1fe7719a1b0a47656946bfbbb42e56642f4f58d6492f74f03521fd4fc5c8fae1",
+      "counts": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "IndependentGraphCreate",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\process-reopen\\results.trx",
+      "sha256": "40913bea60b9c0fd14214b365a63b6ed2622f84ade62cb8c1bc0d21cb6269e35",
+      "counts": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "IndependentGraphReopenAndExport",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\tests-core\\results.trx",
+      "sha256": "28aa3d760727c8d4fb9deceb61670d222a7702707866f9714e7d1d563c0d6210",
+      "counts": {
+        "total": "34",
+        "executed": "34",
+        "passed": "34",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "SessionRoundTripPreservesTargetsSelectionFiltersEngineAndProtectsAssetMetadata",
+          "outcome": "Passed"
+        },
+        {
+          "name": "InvalidPortsCycleAndBranchesRejected",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LargeHaloZeroBandsMatchPointSamplesMasksAndGroupExactly",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SessionRejectsDuplicateTargetIdentityBeforeReplacingCurrentDocument",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrameIndependentOfPhotoAmountAndRegionMatchesFullOutput",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BvhPreservesV1ExactOverlapEraseInverseSemantics",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutPersistenceClampsInvalidViewport",
+          "outcome": "Passed"
+        },
+        {
+          "name": "PreviewIsAreaAverageOfFullEffectsAndExtendedCompositeDomainIsExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "PointwiseFullFrameAndRowBandsUseIdenticalCompositeCoordinates",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProfessionalV4UsesFloatOutputAndPreservesFineTonalSteps",
+          "outcome": "Passed"
+        },
+        {
+          "name": "QuantizationDetectorRejectsRgb8PromotedToRgb48",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutDoesNotChangeHistoricalSerialPixelsOrOrder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LegacyDefinitionUnchangedExplicitExtensionMatchesSharedSrgbStack",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BlendOpacityMaskBoundariesAndLegacyIdentity",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProfessionalReferenceMatchUsesFloatBufferWithoutPrecisionBreak",
+          "outcome": "Passed"
+        },
+        {
+          "name": "OriginalFrameNearestQualityAuditDoesNotChangeFrozenV1",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutRoundTripPreservesWidthsModesAndOldFilesRemainCompatible",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DisconnectMeansIdentityAndDetachedNodesPersist",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Rgb48NoOpColorStudioToTiff16PreservesPrecision",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ConnectionsDriveActualPixelsNotListOrder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProfessionalGroupZeroIdentityAndOneFullRoute",
+          "outcome": "Passed"
+        },
+        {
+          "name": "MissingMixInputIdentityAndCycleRejected",
+          "outcome": "Passed"
+        },
+        {
+          "name": "MaskViewportCropCoordinatesAndZoomPanAreSourceNormalized",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ParallelMixMatchesExistingOrderedCompositeWithMaskAndBypass",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BrushEraseFeatherDensityInverseAndFrozenVariantIsolation",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CategorySyncPreservesMultipleRangesAndUnselectedNodesWithoutDuplicateIds",
+          "outcome": "Passed"
+        },
+        {
+          "name": "EmitFixedBlendCorpusForTwoIndependentImplementations",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BoundedAndSpatialRoutesPreserveSameGraphBlendOnce",
+          "outcome": "Passed"
+        },
+        {
+          "name": "InsertDeleteAndSerializationAreExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AllExifOrientationsGeometryCropTurnAndRowsKeepSameSourcePosition",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AllTwelveOriginalResourcesHaveFrozenHashAndGeometry",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrontierExactnessSharedAncestorCancellationExceptionAndSourceOwnership",
+          "outcome": "Passed"
+        },
+        {
+          "name": "EmptyMaskHiddenNodeVersionGuardsAndInvalidCoordinatesAreExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NearBlackProductionAnalyticDiscontinuityIsSeparateFromCubeApproximation",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "path": "N:\\pixart\\Guangjing-R54-Home-20261028\\resume-sealed\\tests-wpf\\results.trx",
+      "sha256": "572e01cdeb7651e4a7569cfda46fe4df9909ee361b0250f17418922ff5683e00",
+      "counts": {
+        "total": "18",
+        "executed": "18",
+        "passed": "18",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "results": [
+        {
+          "name": "EveryOriginalFramePreviewDevelopAndPngExportUsesFrozenArtwork",
+          "outcome": "Passed"
+        },
+        {
+          "name": "WindowGradeChangesOnlyWindowAndThreeExportsKeepDefinition (\"generic.white.circle\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "GraphRouteUsesSharedUndoLockAndOffscreenLayout",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FourProductionStatesSelectedNodeThumbnailsRestoreAndFrameGallery",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ActualProductionControlFourStatesOffscreen",
+          "outcome": "Passed"
+        },
+        {
+          "name": "OriginalFrameRealPreviewDevelopReopenAndHistogram",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+          "outcome": "Passed"
+        },
+        {
+          "name": "GraphPreviewSaveReopenExportAndStillsUseActualRoute",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DarkroomDipRailRecoveryFilmFullHeightAndIndependentCollapse",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CancelAndSwitchNeverPublishObsoleteDraft",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FiveTabsKeepDenseLayoutFiltersAndLockedDraftGuard",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ClicksPreviewWithoutHistoryThenDevelopLocksAndReshootKeepsVariant",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FourScreensOffscreenEffectiveDipEvidence",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FullShellKeepsPrimaryNavigationAndContentTemplates",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+          "outcome": "Passed"
+        },
+        {
+          "name": "WindowGradeChangesOnlyWindowAndThreeExportsKeepDefinition (\"generic.white.square\")",
+          "outcome": "Passed"
+        }
+      ]
+    }
+  ],
+  "passed": 56,
+  "notRun": 1,
+  "summaryMethod": "Per UnitTestResult.outcome; raw VSTest counters retained because NotExecuted counter may be zero on skipped test"
+}
