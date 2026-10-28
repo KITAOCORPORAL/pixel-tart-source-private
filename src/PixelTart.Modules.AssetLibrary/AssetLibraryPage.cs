@@ -281,6 +281,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
             menu.Items.Add(CreateMoreItem(_viewModel.InspectorPaneToggleLabel, _viewModel.ToggleInspectorPaneCommand));
             menu.Items.Add(CreateMoreItem("打开灵感板", _viewModel.OpenCollectionsCommand));
             menu.Items.Add(PopupAction("高级筛选", "AssetAdvancedFilter", () => { OpenAdvancedFilter(); return Task.CompletedTask; }));
+            var newCanvas=new MenuItem{Header="新建自由画布"};System.Windows.Automation.AutomationProperties.SetAutomationId(newCanvas,"AssetNewFreeCanvas");newCanvas.Click+=async(_,_)=>await NewCanvasAsync();menu.Items.Add(newCanvas);
             var savedCanvases=new MenuItem { Header="打开已保存画布" };
             savedCanvases.Click+=async(_,_)=>await OpenSavedCanvasMenuAsync(button);
             menu.Items.Add(savedCanvases);

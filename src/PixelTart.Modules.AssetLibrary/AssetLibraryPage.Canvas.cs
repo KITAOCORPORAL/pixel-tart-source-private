@@ -26,6 +26,7 @@ public partial class AssetLibraryPage
         if(menu.Items.Count==0)menu.Items.Add(new MenuItem { Header="暂无已保存画布",IsEnabled=false });
         menu.IsOpen=true;
     }
+    public Task NewCanvasAsync()=>ShowCanvasAsync(new CanvasDocument{StorageRoot=_viewModel.CanvasDirectory});
     public Task OpenCanvasAsync(IReadOnlyList<AssetItem> assets)=>OpenCanvasReferencesAsync(assets.Select(_viewModel.CanvasReference).ToArray());
     public async Task OpenCanvasReferencesAsync(IReadOnlyList<CanvasObject> references)
     {
