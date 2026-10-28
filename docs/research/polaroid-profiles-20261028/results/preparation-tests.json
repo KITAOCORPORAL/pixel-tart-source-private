@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "checks": [
+    "ICC tagged image conversion",
+    "identity homography + independent check points",
+    "nonzero translation homography",
+    "valid ROI patch extraction",
+    "binary exclusion mask rejection",
+    "manifest generation",
+    "three low-complexity fits with heldout reporting"
+  ],
+  "data": "SYNTHETIC ONLY; does not count as actual film pairing",
+  "real_pairs_test": "NOT_RUN"
+}

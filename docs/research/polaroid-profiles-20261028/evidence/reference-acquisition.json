@@ -1,0 +1,55 @@
+[
+  {
+    "repository": "cedeber/hald-clut",
+    "retrieved_date": "2026-10-28",
+    "files_read": [],
+    "error": "HTTP Error 403: rate limit exceeded"
+  },
+  {
+    "repository": "Kunkles/polaroid-lab-print-corrector",
+    "retrieved_date": "2026-10-28",
+    "files_read": [],
+    "error": "HTTP Error 403: rate limit exceeded"
+  },
+  {
+    "repository": "JanLohse/spectral_film_lut",
+    "retrieved_date": "2026-10-28",
+    "files_read": [],
+    "error": "HTTP Error 403: rate limit exceeded"
+  },
+  {
+    "repository": "andreavolpato/spektrafilm",
+    "retrieved_date": "2026-10-28",
+    "files_read": [],
+    "error": "HTTP Error 403: rate limit exceeded"
+  },
+  {
+    "source_id": "gmic-color-presets",
+    "url": "https://www.gmic.eu/color_presets/",
+    "final_url": "https://www.gmic.eu/color_presets/",
+    "sha256": "7363a770e6ad523a3b148c48ae850e72c2ee91a5442631187a108565ccdfefc3",
+    "bytes": 50003
+  },
+  {
+    "source_id": "polaroid-film-compatibility",
+    "url": "https://support.polaroid.com/hc/en-us/articles/115011388968-What-film-do-I-use-with-Polaroid-cameras",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "source_id": "polaroid-temperature",
+    "url": "https://support.polaroid.com/hc/en-us/articles/115011373748-How-temperature-affects-Polaroid-film",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "source_id": "polaroid-i2",
+    "url": "https://www.polaroid.com/products/i-2-polaroid-camera",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "source_id": "skimage-data-readme",
+    "url": "https://raw.githubusercontent.com/scikit-image/scikit-image/v0.25.2/skimage/data/README.txt",
+    "final_url": "https://raw.githubusercontent.com/scikit-image/scikit-image/v0.25.2/skimage/data/README.txt",
+    "sha256": "5ab6b958dd0aca217e3e9dc535608c2432a474829109d1064f03d24946000b27",
+    "bytes": 280
+  }
+]

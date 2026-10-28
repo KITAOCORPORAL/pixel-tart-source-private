@@ -1,0 +1,64 @@
+{
+  "scope": "offline tool only; no desktop/device acceptance",
+  "checks": {
+    "linked_Csharp_baseline_parity": {
+      "status": "PASS"
+    },
+    "strength_0_exact": {
+      "status": "PASS"
+    },
+    "all_neutrals_achromatic": {
+      "status": "PASS"
+    },
+    "nan_rejected": {
+      "status": "PASS"
+    },
+    "wide_unconverted_rejected": {
+      "status": "PASS"
+    },
+    "no_implicit_missing_icc": {
+      "status": "PASS"
+    },
+    "strength_range_rejected": {
+      "status": "PASS"
+    },
+    "manifest_valid_synthetic": {
+      "status": "PASS"
+    },
+    "reject_leakage_scene_id": {
+      "status": "PASS"
+    },
+    "reject_leakage_batch_id": {
+      "status": "PASS"
+    },
+    "reject_leakage_parent_capture_id": {
+      "status": "PASS"
+    },
+    "reject_leakage_reference_sha256": {
+      "status": "PASS"
+    },
+    "reject_leakage_scan_sha256": {
+      "status": "PASS"
+    },
+    "reject_uncleared_rights": {
+      "status": "PASS"
+    },
+    "reject_auto_scan_enhancement": {
+      "status": "PASS"
+    },
+    "fit_three_models_and_holdout": {
+      "status": "PASS"
+    },
+    "cube_roundtrip_exact_nodes": {
+      "status": "PASS"
+    },
+    "deterministic_repeat": {
+      "status": "PASS"
+    },
+    "frozen_profile_hashes": {
+      "status": "PASS"
+    }
+  },
+  "pass": 19,
+  "fail": 0
+}

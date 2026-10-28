@@ -1,0 +1,110 @@
+[
+  {
+    "id": "gmic",
+    "kind": "third-party preset approximation",
+    "source": "https://www.gmic.eu/color_presets/",
+    "code_license": "site footer CeCILL variants refers to engine, NOT all presets",
+    "lut_license": "site declares at least CC BY-SA 2.0; individual preset author/upstream rights and conditions unresolved",
+    "photo_rights": "reference example images not cleared for redistribution/training",
+    "derivative_fit_rights": "not cleared; resampling/fitting does not erase share-alike or provenance",
+    "decision": "READ_ONLY_NO_LUT_OR_PHOTO_USE",
+    "evidence": [
+      "references/gmic-color-presets.html",
+      "references/gmic-instant-consumer.html",
+      "references/gmic-instant-pro.html"
+    ]
+  },
+  {
+    "id": "hald-clut",
+    "kind": "preset collection; historical formats",
+    "commit": "3b3180f82d4dcea1e6e8c5648473539a910d7f49",
+    "code_license": "root GPL-3.0; collection not proven to originate all assets",
+    "lut_license": "individual PNG ancestry unresolved, includes Apple/Pixelmator/Fuji/PatDavid categories; root license not sufficient",
+    "photo_rights": "not acquired",
+    "derivative_fit_rights": "HOLD_NO_FIT",
+    "decision": "METADATA_ONLY_NO_LUT_DERIVATIVE",
+    "evidence": [
+      "references/hald-clut/README.md",
+      "references/hald-clut/LICENSE",
+      "evidence/hald-index-tree.txt"
+    ]
+  },
+  {
+    "id": "lab",
+    "kind": "Lab precompensation + measured chart-derived forward transfer",
+    "commit": "25ffdfa4c27dbbccb70d7a0037613f17d7d8bea2",
+    "code_license": "MIT (Ryan Kunkleman 2026), retained locally",
+    "lut_license": "js-generated heuristic LUT used ONLY in isolated numerical reference execution; no weights in candidates",
+    "calibration_json": "repo-controlled sample calibration under declared MIT scope, no separate notice found; metadata incomplete, no raw controlled camera pairs, not admitted as camera training data",
+    "photo_rights": "personal scans expressly gitignored by HANDOFF; do not seek or distribute them; test charts program-generated, not camera photo pairs",
+    "derivative_fit_rights": "no candidate trained from calibration grids or reference LUT",
+    "decision": "PURE_JS_REFERENCE_ONLY; MIT attribution retained in delivery",
+    "evidence": [
+      "references/polaroid-lab-print-corrector/LICENSE",
+      "references/polaroid-lab-print-corrector/HANDOFF.md",
+      "references/polaroid-lab-print-corrector/js/lut.js",
+      "references/polaroid-lab-print-corrector/charts/calibration-color.json"
+    ]
+  },
+  {
+    "id": "spectral",
+    "kind": "spectral method; includes Instax / FP100C, not modern Polaroid pairs",
+    "commit": "bcbcfc6861f49cc706dc5d00ea048e4853060aab",
+    "code_license": "MIT (Jan Lohse 2026)",
+    "data_license": "digitized manufacturer datasheet curves; per-datasheet/source rights not established by code MIT. Instax source file lacks exact source datasheet citation at inspected entry. No modern Polaroid response found",
+    "lut_license": "generated LUT depends on underlying data conditions; not imported or fitted",
+    "photo_rights": "README linked demonstration images not cleared",
+    "decision": "METHOD_REVIEW_ONLY_NO_DATA_COPY",
+    "evidence": [
+      "references/spectral_film_lut/LICENSE",
+      "references/spectral_film_lut/src/spectral_film_lut/film_spectral.py",
+      "references/spectral_film_lut/src/spectral_film_lut/reversal_film/fuji_instax_color.py"
+    ]
+  },
+  {
+    "id": "spektrafilm",
+    "kind": "spectral measurement-informed film/print model; Polaroid animation is separate UI",
+    "commit": "3bb2c2d2801ff68b92019cf1dbcbb133d60832bc",
+    "code_license": "GPL-3.0 code; no product copying",
+    "data_license": "profiles and direct LUT encodings explicitly CC BY-SA 4.0 under SPEKTRAFILM_LICENSE.txt, attribution/change notice/share-alike required",
+    "conflict": "README still calls LUT terms custom no-resale; current detailed license explicitly distinguishes nonbinding requests from CC BY-SA legal floor. Upstream clarification advisable; not silently resolving in favor of reuse",
+    "additional_assets": "Hanatos spectral upsampling .lut and manufacturer charts have separate provenance; not audited for import",
+    "photo_rights": "README says signatureedits.com/free-raw-photos; each original asset/terms/model rights not admitted",
+    "decision": "REVIEW_ONLY_NO_CODE_PROFILE_LUT_DERIVATIVES",
+    "evidence": [
+      "references/spektrafilm/LICENSE",
+      "references/spektrafilm/SPEKTRAFILM_LICENSE.txt",
+      "references/spektrafilm/src/spektrafilm/profiles/io.py",
+      "references/spektrafilm/src/spektrafilm/utils/spectral_upsampling.py",
+      "references/spektrafilm/src/spektrafilm_gui/polaroid_animation.py"
+    ]
+  },
+  {
+    "id": "filmr",
+    "kind": "direct Polaroid presets but unsupported measurement provenance",
+    "commit": "fee388e213dd77bfe6977b63071b1c136213373a",
+    "code_license": "MIT (Benign X 2026)",
+    "data_license": "src/presets/polaroid.rs says Polaroid Technical Data without exact document/page/batch; generic Gaussian layers and standard negative spectral params, no admitted measured samples",
+    "photo_rights": "snapshot_001.jpeg unspecified, not used",
+    "decision": "NOT_MEASURED_MODEL; NO_WEIGHTS_USE",
+    "evidence": [
+      "references/filmr/src/presets/polaroid.rs",
+      "references/filmr/LICENSE",
+      "references/filmr/src/spectral_engine.rs"
+    ]
+  },
+  {
+    "id": "NASA-astronaut",
+    "kind": "public-domain photo visual example",
+    "code_license": "scikit-image BSD-3-Clause documentation retained",
+    "image_license": "astronaut() specifically states NASA Great Images/public domain; upstream _fetchers.py and image hash retained",
+    "decision": "VISUAL_COMPARISON_ONLY_NOT_TRAINING",
+    "endorsement": "No endorsement by NASA or Eileen Collins implied"
+  },
+  {
+    "id": "official-manuals",
+    "kind": "official factual reference",
+    "license": "copyright retained by Polaroid; read locally, no manual/photo bundling in delivery",
+    "decision": "FACTUAL_RESEARCH_ONLY"
+  }
+]

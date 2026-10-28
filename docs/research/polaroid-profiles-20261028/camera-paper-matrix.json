@@ -1,0 +1,141 @@
+{
+  "phase1_native_count": 8,
+  "profile_count": 2,
+  "entries": [
+    {
+      "id": "polaroid-i2__modern-itype-color",
+      "camera": "polaroid-i2",
+      "paper": "itype-color",
+      "chemical_generation": "Modern Polaroid; batch/version must be captured; not historical SX70/Time-Zero or Impossible",
+      "compatibility": "native; correct I-2 film menu selection required",
+      "camera_correction": "UNMEASURED_SHARED_IDENTITY_NO_COLOR_BIAS",
+      "profile_id": "polaroid-modern-color-style-smooth-1",
+      "model_status": "OFFLINE_STYLE_CANDIDATE",
+      "source_id": "official-i2-compatibility"
+    },
+    {
+      "id": "polaroid-i2__modern-itype-bw",
+      "camera": "polaroid-i2",
+      "paper": "itype-bw",
+      "chemical_generation": "Modern Polaroid; batch/version must be captured; not historical SX70/Time-Zero or Impossible",
+      "compatibility": "native; correct I-2 film menu selection required",
+      "camera_correction": "UNMEASURED_SHARED_IDENTITY_NO_COLOR_BIAS",
+      "profile_id": "polaroid-modern-bw-style-smooth-1",
+      "model_status": "OFFLINE_STYLE_CANDIDATE",
+      "source_id": "official-i2-compatibility"
+    },
+    {
+      "id": "polaroid-i2__modern-600-color",
+      "camera": "polaroid-i2",
+      "paper": "600-color",
+      "chemical_generation": "Modern Polaroid; batch/version must be captured; not historical SX70/Time-Zero or Impossible",
+      "compatibility": "native; correct I-2 film menu selection required",
+      "camera_correction": "UNMEASURED_SHARED_IDENTITY_NO_COLOR_BIAS",
+      "profile_id": "polaroid-modern-color-style-smooth-1",
+      "model_status": "OFFLINE_STYLE_CANDIDATE",
+      "source_id": "official-i2-compatibility"
+    },
+    {
+      "id": "polaroid-i2__modern-600-bw",
+      "camera": "polaroid-i2",
+      "paper": "600-bw",
+      "chemical_generation": "Modern Polaroid; batch/version must be captured; not historical SX70/Time-Zero or Impossible",
+      "compatibility": "native; correct I-2 film menu selection required",
+      "camera_correction": "UNMEASURED_SHARED_IDENTITY_NO_COLOR_BIAS",
+      "profile_id": "polaroid-modern-bw-style-smooth-1",
+      "model_status": "OFFLINE_STYLE_CANDIDATE",
+      "source_id": "official-i2-compatibility"
+    },
+    {
+      "id": "polaroid-i2__modern-sx70-color",
+      "camera": "polaroid-i2",
+      "paper": "sx70-color",
+      "chemical_generation": "Modern Polaroid; batch/version must be captured; not historical SX70/Time-Zero or Impossible",
+      "compatibility": "native; correct I-2 film menu selection required",
+      "camera_correction": "UNMEASURED_SHARED_IDENTITY_NO_COLOR_BIAS",
+      "profile_id": null,
+      "model_status": "NO_STOCK_SPECIFIC_CANDIDATE; generic creative preview only by explicit selection",
+      "source_id": "official-i2-compatibility"
+    },
+    {
+      "id": "polaroid-i2__modern-sx70-bw",
+      "camera": "polaroid-i2",
+      "paper": "sx70-bw",
+      "chemical_generation": "Modern Polaroid; batch/version must be captured; not historical SX70/Time-Zero or Impossible",
+      "compatibility": "native; correct I-2 film menu selection required",
+      "camera_correction": "UNMEASURED_SHARED_IDENTITY_NO_COLOR_BIAS",
+      "profile_id": null,
+      "model_status": "NO_STOCK_SPECIFIC_CANDIDATE; generic creative preview only by explicit selection",
+      "source_id": "official-i2-compatibility"
+    },
+    {
+      "id": "original-folding-sx70__modern-sx70-color",
+      "camera": "original-folding-sx70",
+      "paper": "sx70-color",
+      "chemical_generation": "Modern Polaroid; batch/version must be captured; not historical SX70/Time-Zero or Impossible",
+      "compatibility": "native SX-70 film with battery",
+      "camera_correction": "UNMEASURED_SHARED_IDENTITY_NO_COLOR_BIAS",
+      "profile_id": null,
+      "model_status": "NO_STOCK_SPECIFIC_CANDIDATE; generic creative preview only by explicit selection",
+      "source_id": "official-general-compatibility"
+    },
+    {
+      "id": "original-folding-sx70__modern-sx70-bw",
+      "camera": "original-folding-sx70",
+      "paper": "sx70-bw",
+      "chemical_generation": "Modern Polaroid; batch/version must be captured; not historical SX70/Time-Zero or Impossible",
+      "compatibility": "native SX-70 film with battery",
+      "camera_correction": "UNMEASURED_SHARED_IDENTITY_NO_COLOR_BIAS",
+      "profile_id": null,
+      "model_status": "NO_STOCK_SPECIFIC_CANDIDATE; generic creative preview only by explicit selection",
+      "source_id": "official-general-compatibility"
+    },
+    {
+      "id": "sx70__600-color__pack-nd",
+      "camera": "original-folding-sx70",
+      "paper": "600-color",
+      "compatibility": "NON_NATIVE_ADAPTER",
+      "conditions": "Unmodified SX-70; battery-equipped 600 cartridge + appropriate film-pack ND installed as manufacturer instructs; nominal ~2-stop attenuation follows roughly 4x sensitivity; record actual ND model/transmission, placement, meter/exposure compensation and flash. Not exact spectral-neutrality claim.",
+      "camera_correction": "UNMEASURED",
+      "source_id": "official-nd"
+    },
+    {
+      "id": "sx70__600-color__modified",
+      "camera": "modified-sx70",
+      "paper": "600-color",
+      "compatibility": "NON_NATIVE_MODIFIED",
+      "conditions": "Record exact model, technician/conversion/meter target, serial, exposure tests; omit ND only if conversion specifically calibrated for 600; no arbitrary DIY instructions or assumed compatibility",
+      "camera_correction": "UNMEASURED"
+    },
+    {
+      "id": "sx70__600-bw__pack-nd",
+      "camera": "original-folding-sx70",
+      "paper": "600-bw",
+      "compatibility": "NON_NATIVE_ADAPTER",
+      "conditions": "Unmodified SX-70; battery-equipped 600 cartridge + appropriate film-pack ND installed as manufacturer instructs; nominal ~2-stop attenuation follows roughly 4x sensitivity; record actual ND model/transmission, placement, meter/exposure compensation and flash. Not exact spectral-neutrality claim.",
+      "camera_correction": "UNMEASURED",
+      "source_id": "official-nd"
+    },
+    {
+      "id": "sx70__600-bw__modified",
+      "camera": "modified-sx70",
+      "paper": "600-bw",
+      "compatibility": "NON_NATIVE_MODIFIED",
+      "conditions": "Record exact model, technician/conversion/meter target, serial, exposure tests; omit ND only if conversion specifically calibrated for 600; no arbitrary DIY instructions or assumed compatibility",
+      "camera_correction": "UNMEASURED"
+    }
+  ],
+  "not_native": [
+    "i-Type in original SX70 without separately documented power/conversion"
+  ],
+  "phase2": [
+    "Reclaimed",
+    "Duochrome"
+  ],
+  "separate_generations": [
+    "modern Polaroid version/batch",
+    "Polaroid Originals",
+    "Impossible PX era",
+    "historical Polaroid SX70/Time-Zero incl expired stock"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "meaning": "LUT approximation of FIRST-PARTY creative transform; not third-party or film-photo fit",
+  "thresholds_fixed_before_run": {
+    "max_rgb_abs": 0.02,
+    "p95_de00": 1.0,
+    "neutral_monotonic_epsilon": 1e-10
+  },
+  "profiles": {
+    "color": {
+      "distribution": {
+        "n": 14105,
+        "mean": 0.07741220440118833,
+        "median": 0.008891747023853008,
+        "p90": 0.021213266358877426,
+        "p95": 0.05269976575955153,
+        "p99": 0.6701972968200319,
+        "max": 9.683168572324485,
+        "rgb_rmse": 0.00162503067013743
+      },
+      "max_rgb_abs": 0.03165570624503737,
+      "gray_min_luminance_step": -0.00015736586454334622,
+      "max_gray_second_difference": 0.0006350537322822036,
+      "strength_zero_exact": true,
+      "strength_one_exact": true,
+      "in_range_and_finite": true,
+      "status": "FAIL"
+    },
+    "bw": {
+      "distribution": {
+        "n": 14105,
+        "mean": 0.007737310286386288,
+        "median": 0.004585855548616651,
+        "p90": 0.01890841372680469,
+        "p95": 0.025342637446182946,
+        "p99": 0.040233854682368966,
+        "max": 0.04803165944173113,
+        "rgb_rmse": 0.00013689849953078424
+      },
+      "max_rgb_abs": 0.0005988476615861604,
+      "gray_min_luminance_step": 9.565907746738461e-07,
+      "max_gray_second_difference": 3.721843844226025e-05,
+      "strength_zero_exact": true,
+      "strength_one_exact": true,
+      "in_range_and_finite": true,
+      "status": "PASS"
+    }
+  }
+}

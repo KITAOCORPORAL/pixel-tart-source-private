@@ -1,0 +1,3 @@
+# Frozen artifact bytes intentionally preserve original CRLF and terminal blank lines.
+# Do not normalize these files: DELIVERY_MANIFEST and profile hashes are byte contracts.
+* -text whitespace=cr-at-eol,-blank-at-eof

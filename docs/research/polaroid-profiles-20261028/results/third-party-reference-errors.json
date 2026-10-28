@@ -1,0 +1,21 @@
+{
+  "source": "Kunkles/polaroid-lab-print-corrector@25ffdfa4c27dbbccb70d7a0037613f17d7d8bea2",
+  "method": "executes pure JS lut.js + heuristic pipeline.js in local VM; no browser/photos uploaded",
+  "third_party_reference_reproduction": {
+    "python_vs_JS_same_LUT_max_abs": 4.440892098500626e-16,
+    "JS_33cube_vs_JS_analytic_transform": {
+      "n": 4361,
+      "mean": 0.019307810045286724,
+      "median": 0.017650094061248855,
+      "p90": 0.031472774928685034,
+      "p95": 0.03715768663382126,
+      "p99": 0.05439745956083901,
+      "max": 0.14112207628655934,
+      "rgb_rmse": 0.00022650000153360886
+    }
+  },
+  "real_paired_photograph_fit": "NOT_RUN_NO_ADMITTED_CAMERA_PAIRS",
+  "human_blind_review": "NOT_RUN",
+  "weights_used_in_candidate_profiles": false,
+  "meaning": "Lab forward heuristic LUT interpolation fidelity only; NOT camera calibration or measured film accuracy"
+}

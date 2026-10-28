@@ -1,0 +1,48 @@
+{
+  "meaning": "LUT approximation of FIRST-PARTY creative transform; not third-party or film-photo fit",
+  "thresholds_fixed_before_run": {
+    "max_rgb_abs": 0.02,
+    "p95_de00": 1.0,
+    "neutral_monotonic_epsilon": 1e-10
+  },
+  "profiles": {
+    "color": {
+      "distribution": {
+        "n": 14105,
+        "mean": 0.012472829515925462,
+        "median": 0.008699912721650715,
+        "p90": 0.02400480493436856,
+        "p95": 0.040100960008771065,
+        "p99": 0.08086173111819982,
+        "max": 0.15262051743859395,
+        "rgb_rmse": 0.00013021237833262997
+      },
+      "max_rgb_abs": 0.0015573072549535105,
+      "gray_min_luminance_step": 9.557948884020284e-07,
+      "max_gray_second_difference": 3.9551843845658796e-05,
+      "strength_zero_exact": true,
+      "strength_one_exact": true,
+      "in_range_and_finite": true,
+      "status": "PASS"
+    },
+    "bw": {
+      "distribution": {
+        "n": 14105,
+        "mean": 0.007737310286386288,
+        "median": 0.004585855548616651,
+        "p90": 0.01890841372680469,
+        "p95": 0.025342637446182946,
+        "p99": 0.040233854682368966,
+        "max": 0.04803165944173113,
+        "rgb_rmse": 0.00013689849953078424
+      },
+      "max_rgb_abs": 0.0005988476615861604,
+      "gray_min_luminance_step": 9.565907746738461e-07,
+      "max_gray_second_difference": 3.721843844226025e-05,
+      "strength_zero_exact": true,
+      "strength_one_exact": true,
+      "in_range_and_finite": true,
+      "status": "PASS"
+    }
+  }
+}

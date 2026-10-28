@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "source": "curated ZIP extracted into new independent directory",
+  "results": [
+    {
+      "command": [
+        "D:\\AI AGENT\\.dotnet\\dotnet.exe",
+        "build",
+        "D:\\AI AGENT\\output\\polaroid-standalone-replay-20261028\\v3-reference\\Reference.csproj",
+        "-c",
+        "Release",
+        "--nologo"
+      ],
+      "returncode": 0,
+      "stdout": "  正在确定要还原的项目…\n  已还原 D:\\AI AGENT\\output\\polaroid-standalone-replay-20261028\\v3-reference\\Reference.csproj (用时 64 毫秒)。\n  Reference -> D:\\AI AGENT\\output\\polaroid-standalone-replay-20261028\\v3-reference\\bin\\Release\\net10.0\\Reference.dll\n\n已成功生成。\n    0 个警告\n    0 个错误\n\n已用时间 00:00:01.04\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "D:\\AI AGENT\\output\\polaroid-standalone-replay-20261028\\offline.py",
+        "generate"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "D:\\AI AGENT\\output\\polaroid-standalone-replay-20261028\\test_offline.py"
+      ],
+      "returncode": 0,
+      "stdout": "{\n  \"linked_Csharp_baseline_parity\": {\n    \"status\": \"PASS\"\n  },\n  \"strength_0_exact\": {\n    \"status\": \"PASS\"\n  },\n  \"all_neutrals_achromatic\": {\n    \"status\": \"PASS\"\n  },\n  \"nan_rejected\": {\n    \"status\": \"PASS\"\n  },\n  \"wide_unconverted_rejected\": {\n    \"status\": \"PASS\"\n  },\n  \"no_implicit_missing_icc\": {\n    \"status\": \"PASS\"\n  },\n  \"strength_range_rejected\": {\n    \"status\": \"PASS\"\n  },\n  \"manifest_valid_synthetic\": {\n    \"status\": \"PASS\"\n  },\n  \"reject_leakage_scene_id\": {\n    \"status\": \"PASS\"\n  },\n  \"reject_leakage_batch_id\": {\n    \"status\": \"PASS\"\n  },\n  \"reject_leakage_parent_capture_id\": {\n    \"status\": \"PASS\"\n  },\n  \"reject_leakage_reference_sha256\": {\n    \"status\": \"PASS\"\n  },\n  \"reject_leakage_scan_sha256\": {\n    \"status\": \"PASS\"\n  },\n  \"reject_uncleared_rights\": {\n    \"status\": \"PASS\"\n  },\n  \"reject_auto_scan_enhancement\": {\n    \"status\": \"PASS\"\n  },\n  \"fit_three_models_and_holdout\": {\n    \"status\": \"PASS\"\n  },\n  \"cube_roundtrip_exact_nodes\": {\n    \"status\": \"PASS\"\n  },\n  \"deterministic_repeat\": {\n    \"status\": \"PASS\"\n  },\n  \"frozen_profile_hashes\": {\n    \"status\": \"PASS\"\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "D:\\AI AGENT\\output\\polaroid-standalone-replay-20261028\\test_prepare.py"
+      ],
+      "returncode": 0,
+      "stdout": "PREPARATION TOOL SELFTEST PASS\n",
+      "stderr": ""
+    }
+  ]
+}

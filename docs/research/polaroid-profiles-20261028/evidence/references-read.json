@@ -1,0 +1,188 @@
+[
+  {
+    "repository": "polaroid-lab-print-corrector",
+    "commit": "25ffdfa4c27dbbccb70d7a0037613f17d7d8bea2",
+    "read_files": [
+      {
+        "path": "README.md",
+        "sha256": "2a1f4eccbe52e8509b20f69a4329096a2580f9f4f0a4611e6b9b5f289e375254",
+        "bytes": 7948
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "a2a8f8dfce64f0b419a7bdce2ef79323f5b82a43f35b63e0f6f340f2b4d0632f",
+        "bytes": 1092
+      },
+      {
+        "path": "HANDOFF.md",
+        "sha256": "9a959d63060d2278e8809eeabd66a2e9a7893b30fc6e7eb95a00fc04de7ee937",
+        "bytes": 6164
+      },
+      {
+        "path": "js/pipeline.js",
+        "sha256": "2d09711d103a90848e66bbb9bd8c0b6b6ab56b3fbcb1a3235f84444a4e759e8d",
+        "bytes": 5502
+      },
+      {
+        "path": "js/lut.js",
+        "sha256": "d2c9d2859b882b87675deb1a9edf51b6f1ffabeefd9bfd2eb0037cb73d8c5192",
+        "bytes": 4403
+      },
+      {
+        "path": "js/solve.js",
+        "sha256": "afe5a0f09fc453c8d0213c190dca884cb08fdf18835c01b8f1c0b7ad4dda88a0",
+        "bytes": 17521
+      },
+      {
+        "path": "js/calibrate.js",
+        "sha256": "33561e895c5a14be8c82f62879e6df964a4a4460acc56cb87eee835fa5157599",
+        "bytes": 13343
+      },
+      {
+        "path": "test-charts/README.md",
+        "sha256": "59cd6492015a3516513fdb0f1463fb8cb01c35aa335d595139a6a3e7e37bd89a",
+        "bytes": 1865
+      },
+      {
+        "path": "charts/calibration-color.json",
+        "sha256": "bfab1075c2f127c7aced1e6ab79109bfb1eae6f5752f51aea50f7cf5f297fb29",
+        "bytes": 2148
+      },
+      {
+        "path": "charts/calibration-bw.json",
+        "sha256": "9c6025a554ab93b92dd00899a121a8040a0793ce5031f6bf35117fd597d341ee",
+        "bytes": 957
+      }
+    ]
+  },
+  {
+    "repository": "spectral_film_lut",
+    "commit": "bcbcfc6861f49cc706dc5d00ea048e4853060aab",
+    "read_files": [
+      {
+        "path": "README.md",
+        "sha256": "0a2d77ce503b2914727513cd1e9e0627aa37a4bc330b18363c4c55725235cd0b",
+        "bytes": 4602
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "4538cb41aec3e340a493b4349c863cf9e531d3aa2146eb2a6c02f587cf9e2d20",
+        "bytes": 1087
+      },
+      {
+        "path": "pyproject.toml",
+        "sha256": "354eb3f6b63841f2260a709503d51805ef8066dcb5f039a3401941df555030a4",
+        "bytes": 1519
+      },
+      {
+        "path": "src/spectral_film_lut/film_spectral.py",
+        "sha256": "c49790e3e4fcdbd32068aa6dc657bad8df95b5805a846f93b47917722edae013",
+        "bytes": 54697
+      },
+      {
+        "path": "src/spectral_film_lut/reversal_film/fuji_instax_color.py",
+        "sha256": "4d54250362f0a671acb37fc724117df4b3e10b7f98cf447ca811621afb3977f5",
+        "bytes": 13374
+      },
+      {
+        "path": "src/spectral_film_lut/reversal_film/fuji_fp100c.py",
+        "sha256": "dbb6fc10c5f65060bac55e58c63a376e1d1dd5ec803866f3e222ba5f8a19b41e",
+        "bytes": 14356
+      }
+    ]
+  },
+  {
+    "repository": "spektrafilm",
+    "commit": "3bb2c2d2801ff68b92019cf1dbcbb133d60832bc",
+    "read_files": [
+      {
+        "path": "README.md",
+        "sha256": "779fcb399dc353aa3989b58f72044faa422f1e5503087b6c64ac2626ab8e2a28",
+        "bytes": 20079
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+        "bytes": 35823
+      },
+      {
+        "path": "SPEKTRAFILM_LICENSE.txt",
+        "sha256": "7a492239d6c6dd419f5ab730e43501bf7c2bcf6465003ca1f89ee62854f6b7e3",
+        "bytes": 24197
+      },
+      {
+        "path": "pyproject.toml",
+        "sha256": "db9ef9f25e34479f37deabde04643d83dbeb9056e52ea3ef52ac21834c06f4eb",
+        "bytes": 2136
+      },
+      {
+        "path": "src/spektrafilm/runtime/stages/filming.py",
+        "sha256": "da2c5d65d446c0415375823baa2f8c04614bc65e919c47cca8186b9128742e93",
+        "bytes": 7389
+      },
+      {
+        "path": "src/spektrafilm/model/density_curves.py",
+        "sha256": "79c8b420d33843a96d417be3ba3aa47f6a0cdc71646013dc5c8c6fed810c9c45",
+        "bytes": 5386
+      },
+      {
+        "path": "src/spektrafilm/utils/spectral_upsampling.py",
+        "sha256": "6767814f3bafc1e3b7c2ba6c229a26bd634782f6f6af7663321481f7b9eabde9",
+        "bytes": 19306
+      },
+      {
+        "path": "src/spektrafilm/profiles/io.py",
+        "sha256": "39a37db439fb25f40c5bbd997c6ba6c4cdcdc1585da11b2052455a995c45443b",
+        "bytes": 15334
+      }
+    ]
+  },
+  {
+    "repository": "filmr",
+    "commit": "fee388e213dd77bfe6977b63071b1c136213373a",
+    "read_files": [
+      {
+        "path": "README.md",
+        "sha256": "49570331f0ee51642ff151dd64be32d9139a411e5e7d2c36eb600d2f2d3a7687",
+        "bytes": 4427
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "9fba8b3838ed628ee823578e313c08ac599d53441031b8a55121fb90c55bf842",
+        "bytes": 1086
+      },
+      {
+        "path": "src/presets/polaroid.rs",
+        "sha256": "b118a2f7e29a20e008736753dd2d375f6413b5bac60515278a2ead9e0600b864",
+        "bytes": 27615
+      },
+      {
+        "path": "src/pipeline.rs",
+        "sha256": "b74e031e62abd33c3425340763ee55eb7250f4ac3ccd8ff0b2064c1c7196e017",
+        "bytes": 54348
+      },
+      {
+        "path": "src/spectral_engine.rs",
+        "sha256": "bd1b04d040fa6ce15fa4cb9a50e0b8136de6f7284840eb0a67ca7e9f76d945e3",
+        "bytes": 15330
+      }
+    ]
+  },
+  {
+    "repository": "cedeber/hald-clut",
+    "commit": "3b3180f82d4dcea1e6e8c5648473539a910d7f49",
+    "read_files": [
+      {
+        "path": "README.md",
+        "sha256": "a795b7188ff6462501405a76afe87e1d5c266bf8d614877c898c6f26068e5cff"
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+      }
+    ],
+    "tree_inventory": "evidence/hald-index-tree.txt",
+    "individual_LUT_bytes_read": false,
+    "asset_rights": "UNVERIFIED_NO_ASSET_USE"
+  }
+]

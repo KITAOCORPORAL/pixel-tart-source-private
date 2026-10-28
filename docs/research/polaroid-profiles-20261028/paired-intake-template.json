@@ -1,0 +1,74 @@
+{
+  "data_type": "REAL_PAIRED_FILM_PLUS_FIXED_SCAN",
+  "thresholds": {
+    "all": 5,
+    "gray": 3,
+    "skin": 4,
+    "skin_highlight": 4,
+    "highlight": 4,
+    "red_orange": 6,
+    "purple": 6,
+    "blue_green": 6,
+    "shadow": 6,
+    "backlight": 6
+  },
+  "threshold_note": "PROVISIONAL budget, freeze BEFORE new real-data development; repeatability may make it unattainable, report failure without relaxing after results",
+  "records": [
+    {
+      "scene_id": null,
+      "batch_id": null,
+      "parent_capture_id": null,
+      "split": "development",
+      "camera": "polaroid-i2",
+      "paper": "itype-color",
+      "generation": "modern-specific-version",
+      "film_date": null,
+      "exposure": null,
+      "illuminant": null,
+      "flash": null,
+      "development_celsius": null,
+      "development_seconds": null,
+      "scanner": null,
+      "scanner_icc_sha256": null,
+      "auto_enhancement": false,
+      "reference_sha256": null,
+      "scan_sha256": null,
+      "registration": null,
+      "rights": {
+        "fit_allowed": false,
+        "rights_holder": null,
+        "license": null,
+        "evidence": null
+      },
+      "normalization": {
+        "method": "exposure-wb-only-predeclared",
+        "exposure_ev": 0,
+        "wb_rgb": [
+          1,
+          1,
+          1
+        ]
+      },
+      "id": "REPLACE",
+      "reference_path": "reference.png",
+      "scan_path": "scan.png",
+      "scan_valid_mask": "valid-mask.png",
+      "alignment": {
+        "reference_points": [],
+        "scan_points": [],
+        "check_points": [],
+        "max_reprojection_pixels": 1
+      },
+      "sample_patches": [
+        {
+          "center_reference_xy": [
+            100,
+            100
+          ],
+          "radius_pixels": 3,
+          "region": "gray"
+        }
+      ]
+    }
+  ]
+}

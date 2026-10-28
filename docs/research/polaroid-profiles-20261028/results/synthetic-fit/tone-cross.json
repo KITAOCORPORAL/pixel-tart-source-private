@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "kind": "MonotonicTonePlusNeutralPreservingCrossTerms",
+  "order": 2,
+  "knots": [
+    0.0,
+    0.125,
+    0.25,
+    0.375,
+    0.5,
+    0.625,
+    0.75,
+    0.875,
+    1.0
+  ],
+  "values": [
+    0.0072419108813560045,
+    0.11013468973324357,
+    0.22334087131754946,
+    0.3259391015501603,
+    0.42385220079566027,
+    0.5147492181586218,
+    0.6022973013180739,
+    0.6775487728379255,
+    0.8001822102388801
+  ],
+  "coefficients": [
+    [
+      -0.14673368389830804,
+      0.037548054469065346,
+      0.05738468545185859
+    ],
+    [
+      0.018492748863147997,
+      0.016704782076832143,
+      -0.21366827594375226
+    ],
+    [
+      -0.04641615753807739,
+      0.019636397543392522,
+      -0.021162336508684466
+    ],
+    [
+      -0.007974648750572763,
+      -0.004215953253414035,
+      0.026564829222202886
+    ],
+    [
+      -0.020122222472438413,
+      0.006689194482503788,
+      -0.006192774911047406
+    ]
+  ],
+  "input_domain": {
+    "icc": "sRGB IEC61966-2.1",
+    "primaries": "sRGB/Rec709",
+    "white_point": "D65",
+    "transfer": "sRGB piecewise encoded",
+    "range": [
+      0,
+      1
+    ],
+    "precision": "float64 offline",
+    "alpha": "RGB only; masks separate",
+    "orientation": "upright",
+    "wb": "already applied; no automatic WB",
+    "input_kind": "rendered RGB, not spectral scene radiance"
+  },
+  "output_domain": {
+    "icc": "sRGB IEC61966-2.1",
+    "primaries": "sRGB/Rec709",
+    "white_point": "D65",
+    "transfer": "sRGB piecewise encoded",
+    "range": [
+      0,
+      1
+    ],
+    "precision": "float64 offline",
+    "alpha": "RGB only; masks separate",
+    "orientation": "upright",
+    "wb": "already applied; no automatic WB",
+    "input_kind": "rendered RGB, not spectral scene radiance"
+  },
+  "target_semantics": "film + fixed scan appearance, not film reflectance alone",
+  "smooth_residual_lut": "DISABLED; insufficient controlled data",
+  "regularization": {
+    "tone_second_diff": 0.15,
+    "coeff_l2": 0.25,
+    "coeff_bounds": [
+      -0.3,
+      0.3
+    ]
+  },
+  "production_approved": false
+}

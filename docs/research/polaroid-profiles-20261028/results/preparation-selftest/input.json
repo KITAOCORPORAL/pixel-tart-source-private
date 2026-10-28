@@ -1,0 +1,1847 @@
+{
+  "data_type": "SYNTHETIC_PREPARATION_TEST_NOT_REAL_FILM",
+  "thresholds": {
+    "all": 5
+  },
+  "records": [
+    {
+      "scene_id": "synthetic-only-0",
+      "batch_id": "synthetic-only-0",
+      "parent_capture_id": "synthetic-only-0",
+      "split": "development",
+      "camera": "synthetic-only-0",
+      "paper": "synthetic-common-paper",
+      "generation": "SYNTHETIC_NOT_FILM",
+      "film_date": "synthetic-only-0",
+      "exposure": "synthetic-only-0",
+      "illuminant": "synthetic-only-0",
+      "flash": "synthetic-only-0",
+      "development_celsius": "synthetic-only-0",
+      "development_seconds": "synthetic-only-0",
+      "scanner": "synthetic-only-0",
+      "scanner_icc_sha256": "synthetic-fixed-scanner",
+      "auto_enhancement": false,
+      "reference_sha256": "synthetic-only-0",
+      "scan_sha256": "synthetic-only-0",
+      "registration": "synthetic-only-0",
+      "rights": {
+        "fit_allowed": true,
+        "source": "first-party-generated-math-fixture"
+      },
+      "normalization": {
+        "method": "exposure-wb-only-predeclared",
+        "exposure_ev": 0,
+        "wb_rgb": [
+          1,
+          1,
+          1
+        ]
+      },
+      "id": "development",
+      "reference_path": "reference-0.png",
+      "scan_path": "scan-0.png",
+      "scan_valid_mask": "mask-0.png",
+      "sample_patches": [
+        {
+          "center_reference_xy": [
+            8,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        }
+      ],
+      "alignment": {
+        "reference_points": [
+          [
+            0,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            0,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "scan_points": [
+          [
+            0,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            0,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "check_points": [
+          {
+            "reference": [
+              32,
+              32
+            ],
+            "scan": [
+              32,
+              32
+            ]
+          },
+          {
+            "reference": [
+              96,
+              96
+            ],
+            "scan": [
+              96,
+              96
+            ]
+          }
+        ],
+        "max_reprojection_pixels": 0.01
+      }
+    },
+    {
+      "scene_id": "synthetic-only-1",
+      "batch_id": "synthetic-only-1",
+      "parent_capture_id": "synthetic-only-1",
+      "split": "validation",
+      "camera": "synthetic-only-1",
+      "paper": "synthetic-common-paper",
+      "generation": "SYNTHETIC_NOT_FILM",
+      "film_date": "synthetic-only-1",
+      "exposure": "synthetic-only-1",
+      "illuminant": "synthetic-only-1",
+      "flash": "synthetic-only-1",
+      "development_celsius": "synthetic-only-1",
+      "development_seconds": "synthetic-only-1",
+      "scanner": "synthetic-only-1",
+      "scanner_icc_sha256": "synthetic-fixed-scanner",
+      "auto_enhancement": false,
+      "reference_sha256": "synthetic-only-1",
+      "scan_sha256": "synthetic-only-1",
+      "registration": "synthetic-only-1",
+      "rights": {
+        "fit_allowed": true,
+        "source": "first-party-generated-math-fixture"
+      },
+      "normalization": {
+        "method": "exposure-wb-only-predeclared",
+        "exposure_ev": 0,
+        "wb_rgb": [
+          1,
+          1,
+          1
+        ]
+      },
+      "id": "validation",
+      "reference_path": "reference-1.png",
+      "scan_path": "scan-1.png",
+      "scan_valid_mask": "mask-1.png",
+      "sample_patches": [
+        {
+          "center_reference_xy": [
+            8,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        }
+      ],
+      "alignment": {
+        "reference_points": [
+          [
+            0,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            0,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "scan_points": [
+          [
+            0,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            0,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "check_points": [
+          {
+            "reference": [
+              32,
+              32
+            ],
+            "scan": [
+              32,
+              32
+            ]
+          },
+          {
+            "reference": [
+              96,
+              96
+            ],
+            "scan": [
+              96,
+              96
+            ]
+          }
+        ],
+        "max_reprojection_pixels": 0.01
+      }
+    },
+    {
+      "scene_id": "synthetic-only-2",
+      "batch_id": "synthetic-only-2",
+      "parent_capture_id": "synthetic-only-2",
+      "split": "heldout",
+      "camera": "synthetic-only-2",
+      "paper": "synthetic-common-paper",
+      "generation": "SYNTHETIC_NOT_FILM",
+      "film_date": "synthetic-only-2",
+      "exposure": "synthetic-only-2",
+      "illuminant": "synthetic-only-2",
+      "flash": "synthetic-only-2",
+      "development_celsius": "synthetic-only-2",
+      "development_seconds": "synthetic-only-2",
+      "scanner": "synthetic-only-2",
+      "scanner_icc_sha256": "synthetic-fixed-scanner",
+      "auto_enhancement": false,
+      "reference_sha256": "synthetic-only-2",
+      "scan_sha256": "synthetic-only-2",
+      "registration": "synthetic-only-2",
+      "rights": {
+        "fit_allowed": true,
+        "source": "first-party-generated-math-fixture"
+      },
+      "normalization": {
+        "method": "exposure-wb-only-predeclared",
+        "exposure_ev": 0,
+        "wb_rgb": [
+          1,
+          1,
+          1
+        ]
+      },
+      "id": "heldout",
+      "reference_path": "reference-2.png",
+      "scan_path": "scan-2.png",
+      "scan_valid_mask": "mask-2.png",
+      "sample_patches": [
+        {
+          "center_reference_xy": [
+            8,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        }
+      ],
+      "alignment": {
+        "reference_points": [
+          [
+            0,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            0,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "scan_points": [
+          [
+            0,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            0,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "check_points": [
+          {
+            "reference": [
+              32,
+              32
+            ],
+            "scan": [
+              32,
+              32
+            ]
+          },
+          {
+            "reference": [
+              96,
+              96
+            ],
+            "scan": [
+              96,
+              96
+            ]
+          }
+        ],
+        "max_reprojection_pixels": 0.01
+      }
+    }
+  ]
+}

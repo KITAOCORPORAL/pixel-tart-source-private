@@ -1,0 +1,99 @@
+{
+  "stable_id": "polaroid-modern-color-style-smooth-1",
+  "model_version": 1,
+  "implementation": "NeutralContinuousStyle1",
+  "evidence_grade": "STYLE_APPROXIMATION",
+  "ui_label": "风格近似 · 相机修正未标定",
+  "chemical_generation": "Modern Polaroid; batch unknown; NOT Impossible or Time-Zero",
+  "paper_families": [
+    "i-Type",
+    "600"
+  ],
+  "camera_correction": {
+    "id": "none-unmeasured",
+    "matrix": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "calibrated": false
+  },
+  "input_domain": {
+    "icc": "sRGB IEC61966-2.1",
+    "primaries": "sRGB/Rec709",
+    "white_point": "D65",
+    "transfer": "sRGB piecewise encoded",
+    "range": [
+      0,
+      1
+    ],
+    "precision": "float64 offline",
+    "alpha": "RGB only; masks separate",
+    "orientation": "upright",
+    "wb": "already applied; no automatic WB",
+    "input_kind": "rendered RGB, not spectral scene radiance"
+  },
+  "output_domain": {
+    "icc": "sRGB IEC61966-2.1",
+    "primaries": "sRGB/Rec709",
+    "white_point": "D65",
+    "transfer": "sRGB piecewise encoded",
+    "range": [
+      0,
+      1
+    ],
+    "precision": "float64 offline",
+    "alpha": "RGB only; masks separate",
+    "orientation": "upright",
+    "wb": "already applied; no automatic WB",
+    "input_kind": "rendered RGB, not spectral scene radiance"
+  },
+  "parameters": {
+    "exposure_ev": 0.0,
+    "toe": 0.025,
+    "shoulder": 0.3,
+    "black": 0.012,
+    "saturation": 0.9,
+    "apparent_density": 1.0,
+    "creative_hue_bias": false,
+    "chroma_scale": "signal_above_black_over_luminance"
+  },
+  "palette": "Color",
+  "sources": [
+    "first-party-independent-neutral-model",
+    "existing-CandidateResponse-defaults"
+  ],
+  "change_from_v3": "remove creative hue bias; continuous chroma above black; legacy algorithm untouched",
+  "data_manifest": "data_manifest.json",
+  "data_manifest_sha256": "9217033eb8ec98d2f33243f6b377daceb6ec46ece39ad3c18148bf551a655334",
+  "model_code_sha256": "b61afbcc508a30f66f363934ce2a63a9534c68740130d887eb55bb161f4b16eb",
+  "calibration_eligible": false,
+  "physical_or_spectral_model": false,
+  "random_effects": {
+    "enabled": false,
+    "frozen_seed": 20261017,
+    "prng": "existing SplitMix64SubstreamsV1; unused in colour-only prototype"
+  },
+  "spatial_emulsion_defects_paper": "excluded; reuse existing product components later",
+  "strength_scope": "photo colour only; linear blend in encoded sRGB matching existing CandidateSpatial; no frame pixels",
+  "license": {
+    "weights": "first-party independent neutral model using documented low-dimensional defaults; existing repository terms unchanged",
+    "third_party_lut_or_fit_used": false,
+    "distribution": "internal offline only, product approval not granted"
+  },
+  "cube_sha256": "89252ecd93dd8ac4fe6d8820ac233f26d7abb25e0cfb58c3789d6582982b17db",
+  "model_hash_definition": "SHA256 of UTF-8 profile file; see profile-index.json",
+  "integration_status": "OFFLINE_CANDIDATE_ONLY"
+}

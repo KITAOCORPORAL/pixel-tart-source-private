@@ -1,0 +1,5583 @@
+{
+  "data_type": "SYNTHETIC_PREPARATION_TEST_NOT_REAL_FILM",
+  "domain": {
+    "icc": "sRGB IEC61966-2.1",
+    "primaries": "sRGB/Rec709",
+    "white_point": "D65",
+    "transfer": "sRGB piecewise encoded",
+    "range": [
+      0,
+      1
+    ],
+    "precision": "float64 offline",
+    "alpha": "RGB only; masks separate",
+    "orientation": "upright",
+    "wb": "already applied; no automatic WB",
+    "input_kind": "rendered RGB, not spectral scene radiance"
+  },
+  "thresholds": {
+    "all": 5
+  },
+  "records": [
+    {
+      "scene_id": "synthetic-only-0",
+      "batch_id": "synthetic-only-0",
+      "parent_capture_id": "synthetic-only-0",
+      "split": "development",
+      "camera": "synthetic-only-0",
+      "paper": "synthetic-common-paper",
+      "generation": "SYNTHETIC_NOT_FILM",
+      "film_date": "synthetic-only-0",
+      "exposure": "synthetic-only-0",
+      "illuminant": "synthetic-only-0",
+      "flash": "synthetic-only-0",
+      "development_celsius": "synthetic-only-0",
+      "development_seconds": "synthetic-only-0",
+      "scanner": "synthetic-only-0",
+      "scanner_icc_sha256": "synthetic-fixed-scanner",
+      "auto_enhancement": false,
+      "reference_sha256": "aa6ab96f3634ebb6274e8890e8b1cca08ce2cee5a8c1fd1fa354dc624265cb7e",
+      "scan_sha256": "edfa911f89fee96b9d92ad2789d393ede04519e6bc84ed34891d8507ab5c78ba",
+      "registration": {
+        "method": "manual homography + >=2 independent check points",
+        "matrix": [
+          [
+            1.0000000000000009,
+            -3.966419223839013e-16,
+            1.7588339166947842e-14
+          ],
+          [
+            -1.4137996329210978e-16,
+            1.0000000000000007,
+            1.1249440972594337e-14
+          ],
+          [
+            4.3375902483510416e-18,
+            3.9077920451192363e-22,
+            1.0
+          ]
+        ],
+        "fit_max_reprojection_pixels": 1.0473938871785673e-13,
+        "max_allowed_pixels": 0.01
+      },
+      "rights": {
+        "fit_allowed": true,
+        "source": "first-party-generated-math-fixture"
+      },
+      "normalization": {
+        "method": "exposure-wb-only-predeclared",
+        "exposure_ev": 0,
+        "wb_rgb": [
+          1,
+          1,
+          1
+        ]
+      },
+      "id": "development",
+      "reference_path": "D:\\AI AGENT\\output\\polaroid-profile-research-20261028\\results\\preparation-selftest\\reference-0.png",
+      "scan_path": "D:\\AI AGENT\\output\\polaroid-profile-research-20261028\\results\\preparation-selftest\\scan-0.png",
+      "scan_valid_mask": "mask-0.png",
+      "sample_patches": [
+        {
+          "center_reference_xy": [
+            8,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        }
+      ],
+      "alignment": {
+        "reference_points": [
+          [
+            0,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            0,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "scan_points": [
+          [
+            0,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            0,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "check_points": [
+          {
+            "reference": [
+              32,
+              32
+            ],
+            "scan": [
+              32,
+              32
+            ]
+          },
+          {
+            "reference": [
+              96,
+              96
+            ],
+            "scan": [
+              96,
+              96
+            ]
+          }
+        ],
+        "max_reprojection_pixels": 0.01
+      },
+      "valid_mask_sha256": "f0aa957523055fe28a67c6c4a3953fb8d9efb2fee7d215a9ffd569ad01aed808",
+      "patches": [
+        {
+          "input": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "target": [
+            0.11372549019607843,
+            0.11372549019607843,
+            0.11372549019607843
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.03137254901960784,
+            0.03137254901960784,
+            0.03137254901960784
+          ],
+          "target": [
+            0.11372549019607843,
+            0.11372549019607843,
+            0.11372549019607843
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.06274509803921569,
+            0.06274509803921569,
+            0.06274509803921569
+          ],
+          "target": [
+            0.1176470588235294,
+            0.1176470588235294,
+            0.1176470588235294
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.09803921568627455,
+            0.09803921568627455,
+            0.09803921568627455
+          ],
+          "target": [
+            0.12549019607843137,
+            0.12549019607843137,
+            0.12549019607843137
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.12941176470588237,
+            0.12941176470588237,
+            0.12941176470588237
+          ],
+          "target": [
+            0.1411764705882353,
+            0.1411764705882353,
+            0.1411764705882353
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.16078431372549015,
+            0.16078431372549015,
+            0.16078431372549015
+          ],
+          "target": [
+            0.16078431372549024,
+            0.16078431372549024,
+            0.16078431372549024
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.19215686274509813,
+            0.19215686274509813,
+            0.19215686274509813
+          ],
+          "target": [
+            0.1843137254901961,
+            0.1843137254901961,
+            0.1843137254901961
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.22745098039215692,
+            0.22745098039215692,
+            0.22745098039215692
+          ],
+          "target": [
+            0.21568627450980393,
+            0.21568627450980393,
+            0.21568627450980393
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.25882352941176473,
+            0.25882352941176473,
+            0.25882352941176473
+          ],
+          "target": [
+            0.24313725490196078,
+            0.24313725490196078,
+            0.24313725490196078
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.29019607843137246,
+            0.29019607843137246,
+            0.29019607843137246
+          ],
+          "target": [
+            0.27450980392156865,
+            0.27450980392156865,
+            0.27450980392156865
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.3215686274509803,
+            0.3215686274509803,
+            0.3215686274509803
+          ],
+          "target": [
+            0.3058823529411765,
+            0.3058823529411765,
+            0.3058823529411765
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.3529411764705881,
+            0.3529411764705881,
+            0.3529411764705881
+          ],
+          "target": [
+            0.33725490196078434,
+            0.33725490196078434,
+            0.33725490196078434
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.38823529411764723,
+            0.38823529411764723,
+            0.38823529411764723
+          ],
+          "target": [
+            0.3686274509803922,
+            0.3686274509803922,
+            0.3686274509803922
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.419607843137255,
+            0.419607843137255,
+            0.419607843137255
+          ],
+          "target": [
+            0.39607843137254906,
+            0.39607843137254906,
+            0.39607843137254906
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.45098039215686286,
+            0.45098039215686286,
+            0.45098039215686286
+          ],
+          "target": [
+            0.42745098039215684,
+            0.42745098039215684,
+            0.42745098039215684
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.4823529411764706,
+            0.4823529411764706,
+            0.4823529411764706
+          ],
+          "target": [
+            0.4588235294117647,
+            0.4588235294117647,
+            0.4588235294117647
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.5176470588235295,
+            0.5176470588235295,
+            0.5176470588235295
+          ],
+          "target": [
+            0.49019607843137253,
+            0.49019607843137253,
+            0.49019607843137253
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.5490196078431372,
+            0.5490196078431372,
+            0.5490196078431372
+          ],
+          "target": [
+            0.5176470588235295,
+            0.5176470588235295,
+            0.5176470588235295
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.5803921568627449,
+            0.5803921568627449,
+            0.5803921568627449
+          ],
+          "target": [
+            0.5490196078431373,
+            0.5490196078431373,
+            0.5490196078431373
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.6117647058823527,
+            0.6117647058823527,
+            0.6117647058823527
+          ],
+          "target": [
+            0.5764705882352941,
+            0.5764705882352941,
+            0.5764705882352941
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.6470588235294117,
+            0.6470588235294117,
+            0.6470588235294117
+          ],
+          "target": [
+            0.6039215686274509,
+            0.6039215686274509,
+            0.6039215686274509
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.6784313725490194,
+            0.6784313725490194,
+            0.6784313725490194
+          ],
+          "target": [
+            0.6352941176470588,
+            0.6352941176470588,
+            0.6352941176470588
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.7098039215686271,
+            0.7098039215686271,
+            0.7098039215686271
+          ],
+          "target": [
+            0.6627450980392158,
+            0.6627450980392158,
+            0.6627450980392158
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.7411764705882358,
+            0.7411764705882358,
+            0.7411764705882358
+          ],
+          "target": [
+            0.6862745098039216,
+            0.6862745098039216,
+            0.6862745098039216
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.7725490196078435,
+            0.7725490196078435,
+            0.7725490196078435
+          ],
+          "target": [
+            0.7137254901960784,
+            0.7137254901960784,
+            0.7137254901960784
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.8078431372549023,
+            0.8078431372549023,
+            0.8078431372549023
+          ],
+          "target": [
+            0.7411764705882353,
+            0.7411764705882353,
+            0.7411764705882353
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.83921568627451,
+            0.83921568627451,
+            0.83921568627451
+          ],
+          "target": [
+            0.7647058823529411,
+            0.7647058823529411,
+            0.7647058823529411
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.870588235294118,
+            0.870588235294118,
+            0.870588235294118
+          ],
+          "target": [
+            0.7921568627450981,
+            0.7921568627450981,
+            0.7921568627450981
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.9019607843137257,
+            0.9019607843137257,
+            0.9019607843137257
+          ],
+          "target": [
+            0.815686274509804,
+            0.815686274509804,
+            0.815686274509804
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.9372549019607844,
+            0.9372549019607844,
+            0.9372549019607844
+          ],
+          "target": [
+            0.8392156862745098,
+            0.8392156862745098,
+            0.8392156862745098
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.9686274509803922,
+            0.9686274509803922,
+            0.9686274509803922
+          ],
+          "target": [
+            0.8627450980392157,
+            0.8627450980392157,
+            0.8627450980392157
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.9999999999999999,
+            0.9999999999999999,
+            0.9999999999999999
+          ],
+          "target": [
+            0.8862745098039215,
+            0.8862745098039215,
+            0.8862745098039215
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.5137254901960784,
+            0.9490196078431373,
+            0.14509803921568623
+          ],
+          "target": [
+            0.5725490196078431,
+            0.8431372549019608,
+            0.4470588235294118
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.9490196078431373,
+            0.31372549019607826,
+            0.423529411764706
+          ],
+          "target": [
+            0.8078431372549021,
+            0.3764705882352941,
+            0.4392156862745098
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.8274509803921571,
+            0.4078431372549021,
+            0.5490196078431372
+          ],
+          "target": [
+            0.7254901960784313,
+            0.42745098039215684,
+            0.5176470588235295
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.027450980392156873,
+            0.7529411764705887,
+            0.5372549019607843
+          ],
+          "target": [
+            0.3176470588235294,
+            0.6862745098039216,
+            0.5333333333333333
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.32941176470588224,
+            0.7882352941176474,
+            0.30196078431372536
+          ],
+          "target": [
+            0.4235294117647059,
+            0.7176470588235294,
+            0.407843137254902
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.45490196078431383,
+            0.13333333333333333,
+            0.40392156862745116
+          ],
+          "target": [
+            0.3803921568627451,
+            0.1803921568627451,
+            0.34509803921568627
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.20392156862745106,
+            0.2627450980392157,
+            0.7490196078431377
+          ],
+          "target": [
+            0.2352941176470588,
+            0.26666666666666666,
+            0.615686274509804
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.28235294117647053,
+            0.48627450980392156,
+            0.9803921568627451
+          ],
+          "target": [
+            0.35294117647058826,
+            0.4666666666666666,
+            0.823529411764706
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.9607843137254902,
+            0.725490196078431,
+            0.5411764705882353
+          ],
+          "target": [
+            0.8431372549019608,
+            0.6823529411764706,
+            0.5725490196078431
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.27843137254901956,
+            0.16078431372549015,
+            0.9686274509803922
+          ],
+          "target": [
+            0.28627450980392155,
+            0.23137254901960783,
+            0.7686274509803923
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.5176470588235295,
+            0.11764705882352942,
+            0.6235294117647056
+          ],
+          "target": [
+            0.44313725490196076,
+            0.19215686274509808,
+            0.5215686274509804
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.7764705882352945,
+            0.6117647058823527,
+            0.9176470588235296
+          ],
+          "target": [
+            0.7019607843137254,
+            0.592156862745098,
+            0.8039215686274511
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.03921568627450978,
+            0.5294117647058824,
+            0.4588235294117648
+          ],
+          "target": [
+            0.21176470588235294,
+            0.49019607843137253,
+            0.4392156862745098
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.06274509803921569,
+            0.6431372549019606,
+            0.8509803921568629
+          ],
+          "target": [
+            0.30980392156862746,
+            0.596078431372549,
+            0.7490196078431373
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.5921568627450978,
+            0.25882352941176473,
+            0.83921568627451
+          ],
+          "target": [
+            0.5215686274509804,
+            0.3058823529411765,
+            0.7137254901960784
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.5098039215686274,
+            0.5098039215686274,
+            0.7529411764705887
+          ],
+          "target": [
+            0.49019607843137253,
+            0.49019607843137253,
+            0.6705882352941177
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.1490196078431372,
+            0.8196078431372552,
+            0.6823529411764704
+          ],
+          "target": [
+            0.37254901960784315,
+            0.7411764705882353,
+            0.6470588235294119
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.7882352941176474,
+            0.19215686274509813,
+            0.8039215686274513
+          ],
+          "target": [
+            0.6823529411764706,
+            0.28627450980392155,
+            0.6941176470588235
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.19215686274509813,
+            0.08235294117647068,
+            0.8549019607843139
+          ],
+          "target": [
+            0.21568627450980393,
+            0.17647058823529413,
+            0.6627450980392158
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.8627450980392161,
+            0.8784313725490199,
+            0.4705882352941177
+          ],
+          "target": [
+            0.7843137254901962,
+            0.7921568627450981,
+            0.5450980392156862
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.2745098039215686,
+            0.00784313725490196,
+            0.6470588235294117
+          ],
+          "target": [
+            0.23921568627450981,
+            0.13725490196078433,
+            0.48627450980392156
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.72156862745098,
+            0.8352941176470591,
+            0.28235294117647053
+          ],
+          "target": [
+            0.6784313725490196,
+            0.7607843137254902,
+            0.43529411764705883
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.21568627450980402,
+            0.6392156862745094,
+            0.8039215686274513
+          ],
+          "target": [
+            0.3411764705882353,
+            0.592156862745098,
+            0.7176470588235294
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.9647058823529412,
+            0.1490196078431372,
+            0.4823529411764706
+          ],
+          "target": [
+            0.811764705882353,
+            0.30196078431372547,
+            0.4666666666666666
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.8941176470588238,
+            0.423529411764706,
+            0.5882352941176469
+          ],
+          "target": [
+            0.7764705882352942,
+            0.4470588235294118,
+            0.5529411764705883
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.023529411764705896,
+            0.6745098039215685,
+            0.9176470588235296
+          ],
+          "target": [
+            0.3294117647058824,
+            0.6235294117647059,
+            0.8000000000000002
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.8274509803921571,
+            0.8862745098039219,
+            0.6588235294117645
+          ],
+          "target": [
+            0.7607843137254902,
+            0.8000000000000002,
+            0.6549019607843138
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.24705882352941178,
+            0.7686274509803925,
+            0.21176470588235305
+          ],
+          "target": [
+            0.37254901960784315,
+            0.6980392156862745,
+            0.3607843137254902
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.8313725490196081,
+            0.06274509803921569,
+            0.8235294117647062
+          ],
+          "target": [
+            0.7176470588235294,
+            0.25098039215686274,
+            0.7098039215686275
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.16470588235294112,
+            0.37647058823529433,
+            0.3176470588235292
+          ],
+          "target": [
+            0.21176470588235294,
+            0.34509803921568627,
+            0.3058823529411765
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.6901960784313723,
+            0.180392156862745,
+            0.39607843137254917
+          ],
+          "target": [
+            0.592156862745098,
+            0.24313725490196078,
+            0.37254901960784315
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.00392156862745098,
+            0.2627450980392157,
+            0.419607843137255
+          ],
+          "target": [
+            0.13725490196078433,
+            0.24313725490196078,
+            0.34901960784313724
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            120
+          ]
+        }
+      ]
+    },
+    {
+      "scene_id": "synthetic-only-1",
+      "batch_id": "synthetic-only-1",
+      "parent_capture_id": "synthetic-only-1",
+      "split": "validation",
+      "camera": "synthetic-only-1",
+      "paper": "synthetic-common-paper",
+      "generation": "SYNTHETIC_NOT_FILM",
+      "film_date": "synthetic-only-1",
+      "exposure": "synthetic-only-1",
+      "illuminant": "synthetic-only-1",
+      "flash": "synthetic-only-1",
+      "development_celsius": "synthetic-only-1",
+      "development_seconds": "synthetic-only-1",
+      "scanner": "synthetic-only-1",
+      "scanner_icc_sha256": "synthetic-fixed-scanner",
+      "auto_enhancement": false,
+      "reference_sha256": "836c21f55c114edfc0c2129f06b378954c1c7de87cbe1fd0cb7cbadd174cdb86",
+      "scan_sha256": "01ce4bc750ca2b73566124a57bed4437737f04dce8b82e1b2d144084af416ac4",
+      "registration": {
+        "method": "manual homography + >=2 independent check points",
+        "matrix": [
+          [
+            1.0000000000000009,
+            -3.966419223839013e-16,
+            1.7588339166947842e-14
+          ],
+          [
+            -1.4137996329210978e-16,
+            1.0000000000000007,
+            1.1249440972594337e-14
+          ],
+          [
+            4.3375902483510416e-18,
+            3.9077920451192363e-22,
+            1.0
+          ]
+        ],
+        "fit_max_reprojection_pixels": 1.0473938871785673e-13,
+        "max_allowed_pixels": 0.01
+      },
+      "rights": {
+        "fit_allowed": true,
+        "source": "first-party-generated-math-fixture"
+      },
+      "normalization": {
+        "method": "exposure-wb-only-predeclared",
+        "exposure_ev": 0,
+        "wb_rgb": [
+          1,
+          1,
+          1
+        ]
+      },
+      "id": "validation",
+      "reference_path": "D:\\AI AGENT\\output\\polaroid-profile-research-20261028\\results\\preparation-selftest\\reference-1.png",
+      "scan_path": "D:\\AI AGENT\\output\\polaroid-profile-research-20261028\\results\\preparation-selftest\\scan-1.png",
+      "scan_valid_mask": "mask-1.png",
+      "sample_patches": [
+        {
+          "center_reference_xy": [
+            8,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        }
+      ],
+      "alignment": {
+        "reference_points": [
+          [
+            0,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            0,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "scan_points": [
+          [
+            0,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            0,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "check_points": [
+          {
+            "reference": [
+              32,
+              32
+            ],
+            "scan": [
+              32,
+              32
+            ]
+          },
+          {
+            "reference": [
+              96,
+              96
+            ],
+            "scan": [
+              96,
+              96
+            ]
+          }
+        ],
+        "max_reprojection_pixels": 0.01
+      },
+      "valid_mask_sha256": "f0aa957523055fe28a67c6c4a3953fb8d9efb2fee7d215a9ffd569ad01aed808",
+      "patches": [
+        {
+          "input": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "target": [
+            0.11372549019607843,
+            0.11372549019607843,
+            0.11372549019607843
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.03137254901960784,
+            0.03137254901960784,
+            0.03137254901960784
+          ],
+          "target": [
+            0.11372549019607843,
+            0.11372549019607843,
+            0.11372549019607843
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.06274509803921569,
+            0.06274509803921569,
+            0.06274509803921569
+          ],
+          "target": [
+            0.1176470588235294,
+            0.1176470588235294,
+            0.1176470588235294
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.09803921568627455,
+            0.09803921568627455,
+            0.09803921568627455
+          ],
+          "target": [
+            0.12549019607843137,
+            0.12549019607843137,
+            0.12549019607843137
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.12941176470588237,
+            0.12941176470588237,
+            0.12941176470588237
+          ],
+          "target": [
+            0.1411764705882353,
+            0.1411764705882353,
+            0.1411764705882353
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.16078431372549015,
+            0.16078431372549015,
+            0.16078431372549015
+          ],
+          "target": [
+            0.16078431372549024,
+            0.16078431372549024,
+            0.16078431372549024
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.19215686274509813,
+            0.19215686274509813,
+            0.19215686274509813
+          ],
+          "target": [
+            0.1843137254901961,
+            0.1843137254901961,
+            0.1843137254901961
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.22745098039215692,
+            0.22745098039215692,
+            0.22745098039215692
+          ],
+          "target": [
+            0.21568627450980393,
+            0.21568627450980393,
+            0.21568627450980393
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.25882352941176473,
+            0.25882352941176473,
+            0.25882352941176473
+          ],
+          "target": [
+            0.24313725490196078,
+            0.24313725490196078,
+            0.24313725490196078
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.29019607843137246,
+            0.29019607843137246,
+            0.29019607843137246
+          ],
+          "target": [
+            0.27450980392156865,
+            0.27450980392156865,
+            0.27450980392156865
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.3215686274509803,
+            0.3215686274509803,
+            0.3215686274509803
+          ],
+          "target": [
+            0.3058823529411765,
+            0.3058823529411765,
+            0.3058823529411765
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.3529411764705881,
+            0.3529411764705881,
+            0.3529411764705881
+          ],
+          "target": [
+            0.33725490196078434,
+            0.33725490196078434,
+            0.33725490196078434
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.38823529411764723,
+            0.38823529411764723,
+            0.38823529411764723
+          ],
+          "target": [
+            0.3686274509803922,
+            0.3686274509803922,
+            0.3686274509803922
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.419607843137255,
+            0.419607843137255,
+            0.419607843137255
+          ],
+          "target": [
+            0.39607843137254906,
+            0.39607843137254906,
+            0.39607843137254906
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.45098039215686286,
+            0.45098039215686286,
+            0.45098039215686286
+          ],
+          "target": [
+            0.42745098039215684,
+            0.42745098039215684,
+            0.42745098039215684
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.4823529411764706,
+            0.4823529411764706,
+            0.4823529411764706
+          ],
+          "target": [
+            0.4588235294117647,
+            0.4588235294117647,
+            0.4588235294117647
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.5176470588235295,
+            0.5176470588235295,
+            0.5176470588235295
+          ],
+          "target": [
+            0.49019607843137253,
+            0.49019607843137253,
+            0.49019607843137253
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.5490196078431372,
+            0.5490196078431372,
+            0.5490196078431372
+          ],
+          "target": [
+            0.5176470588235295,
+            0.5176470588235295,
+            0.5176470588235295
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.5803921568627449,
+            0.5803921568627449,
+            0.5803921568627449
+          ],
+          "target": [
+            0.5490196078431373,
+            0.5490196078431373,
+            0.5490196078431373
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.6117647058823527,
+            0.6117647058823527,
+            0.6117647058823527
+          ],
+          "target": [
+            0.5764705882352941,
+            0.5764705882352941,
+            0.5764705882352941
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.6470588235294117,
+            0.6470588235294117,
+            0.6470588235294117
+          ],
+          "target": [
+            0.6039215686274509,
+            0.6039215686274509,
+            0.6039215686274509
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.6784313725490194,
+            0.6784313725490194,
+            0.6784313725490194
+          ],
+          "target": [
+            0.6352941176470588,
+            0.6352941176470588,
+            0.6352941176470588
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.7098039215686271,
+            0.7098039215686271,
+            0.7098039215686271
+          ],
+          "target": [
+            0.6627450980392158,
+            0.6627450980392158,
+            0.6627450980392158
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.7411764705882358,
+            0.7411764705882358,
+            0.7411764705882358
+          ],
+          "target": [
+            0.6862745098039216,
+            0.6862745098039216,
+            0.6862745098039216
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.7725490196078435,
+            0.7725490196078435,
+            0.7725490196078435
+          ],
+          "target": [
+            0.7137254901960784,
+            0.7137254901960784,
+            0.7137254901960784
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.8078431372549023,
+            0.8078431372549023,
+            0.8078431372549023
+          ],
+          "target": [
+            0.7411764705882353,
+            0.7411764705882353,
+            0.7411764705882353
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.83921568627451,
+            0.83921568627451,
+            0.83921568627451
+          ],
+          "target": [
+            0.7647058823529411,
+            0.7647058823529411,
+            0.7647058823529411
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.870588235294118,
+            0.870588235294118,
+            0.870588235294118
+          ],
+          "target": [
+            0.7921568627450981,
+            0.7921568627450981,
+            0.7921568627450981
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.9019607843137257,
+            0.9019607843137257,
+            0.9019607843137257
+          ],
+          "target": [
+            0.815686274509804,
+            0.815686274509804,
+            0.815686274509804
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.9372549019607844,
+            0.9372549019607844,
+            0.9372549019607844
+          ],
+          "target": [
+            0.8392156862745098,
+            0.8392156862745098,
+            0.8392156862745098
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.9686274509803922,
+            0.9686274509803922,
+            0.9686274509803922
+          ],
+          "target": [
+            0.8627450980392157,
+            0.8627450980392157,
+            0.8627450980392157
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.9999999999999999,
+            0.9999999999999999,
+            0.9999999999999999
+          ],
+          "target": [
+            0.8862745098039215,
+            0.8862745098039215,
+            0.8862745098039215
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.10588235294117652,
+            0.6313725490196075,
+            0.3803921568627453
+          ],
+          "target": [
+            0.27058823529411763,
+            0.5843137254901961,
+            0.40392156862745104
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.725490196078431,
+            0.6549019607843135,
+            0.43137254901960803
+          ],
+          "target": [
+            0.6666666666666667,
+            0.615686274509804,
+            0.46274509803921565
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.866666666666667,
+            0.6313725490196075,
+            0.8117647058823533
+          ],
+          "target": [
+            0.7725490196078433,
+            0.6078431372549019,
+            0.7333333333333333
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.3411764705882352,
+            0.5450980392156862,
+            0.1960784313725491
+          ],
+          "target": [
+            0.3607843137254902,
+            0.5058823529411764,
+            0.27450980392156865
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.9960784313725489,
+            0.2431372549019608,
+            0.25882352941176473
+          ],
+          "target": [
+            0.8392156862745098,
+            0.34901960784313724,
+            0.35294117647058826
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.0745098039215686,
+            0.25882352941176473,
+            0.7647058823529416
+          ],
+          "target": [
+            0.1803921568627451,
+            0.2627450980392157,
+            0.6196078431372549
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.6980392156862743,
+            0.12941176470588237,
+            0.37647058823529433
+          ],
+          "target": [
+            0.596078431372549,
+            0.21568627450980393,
+            0.3568627450980392
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.419607843137255,
+            0.6666666666666664,
+            0.45490196078431383
+          ],
+          "target": [
+            0.44313725490196076,
+            0.615686274509804,
+            0.4666666666666666
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.5882352941176469,
+            0.83921568627451,
+            0.725490196078431
+          ],
+          "target": [
+            0.592156862745098,
+            0.7607843137254902,
+            0.6823529411764706
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.3647058823529411,
+            0.4470588235294119,
+            0.3686274509803924
+          ],
+          "target": [
+            0.3607843137254902,
+            0.4196078431372549,
+            0.3607843137254902
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.10980392156862749,
+            0.20392156862745106,
+            0.28235294117647053
+          ],
+          "target": [
+            0.14901960784313725,
+            0.19215686274509808,
+            0.2352941176470588
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.31372549019607826,
+            0.31372549019607826,
+            0.576470588235294
+          ],
+          "target": [
+            0.3058823529411765,
+            0.30196078431372547,
+            0.4980392156862745
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.9725490196078431,
+            0.7764705882352945,
+            0.7921568627450983
+          ],
+          "target": [
+            0.8549019607843137,
+            0.7215686274509804,
+            0.7333333333333333
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.7607843137254906,
+            0.5960784313725488,
+            0.9176470588235296
+          ],
+          "target": [
+            0.6901960784313725,
+            0.5764705882352941,
+            0.8039215686274511
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.6901960784313723,
+            0.5019607843137255,
+            0.07843137254901957
+          ],
+          "target": [
+            0.6235294117647059,
+            0.4823529411764706,
+            0.2627450980392157
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.49019607843137253,
+            0.21176470588235305,
+            0.13333333333333333
+          ],
+          "target": [
+            0.41568627450980394,
+            0.22745098039215686,
+            0.18823529411764706
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.5058823529411764,
+            0.7843137254901964,
+            0.29411764705882343
+          ],
+          "target": [
+            0.5254901960784314,
+            0.7176470588235294,
+            0.411764705882353
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.7686274509803925,
+            0.5254901960784314,
+            0.1490196078431372
+          ],
+          "target": [
+            0.6862745098039216,
+            0.5098039215686274,
+            0.3058823529411765
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.9647058823529412,
+            0.4000000000000002,
+            0.29411764705882343
+          ],
+          "target": [
+            0.823529411764706,
+            0.4392156862745098,
+            0.38431372549019616
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.847058823529412,
+            0.12549019607843137,
+            0.7333333333333332
+          ],
+          "target": [
+            0.7254901960784313,
+            0.26666666666666666,
+            0.6392156862745098
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.18823529411764717,
+            0.3921568627450982,
+            0.23137254901960788
+          ],
+          "target": [
+            0.22745098039215686,
+            0.3607843137254902,
+            0.25098039215686274
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.843137254901961,
+            0.38823529411764723,
+            0.9764705882352941
+          ],
+          "target": [
+            0.7333333333333333,
+            0.43529411764705883,
+            0.8313725490196079
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.6235294117647056,
+            0.6941176470588233,
+            0.5215686274509804
+          ],
+          "target": [
+            0.596078431372549,
+            0.6431372549019609,
+            0.5215686274509804
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.3098039215686273,
+            0.39607843137254917,
+            0.9411764705882354
+          ],
+          "target": [
+            0.34509803921568627,
+            0.3921568627450981,
+            0.7843137254901962
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.20000000000000007,
+            0.988235294117647,
+            0.7568627450980396
+          ],
+          "target": [
+            0.47450980392156855,
+            0.8705882352941177,
+            0.7215686274509804
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.36078431372549,
+            0.6431372549019606,
+            0.3803921568627453
+          ],
+          "target": [
+            0.39607843137254906,
+            0.596078431372549,
+            0.407843137254902
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.3803921568627453,
+            0.5019607843137255,
+            0.01568627450980392
+          ],
+          "target": [
+            0.3803921568627451,
+            0.4705882352941176,
+            0.203921568627451
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.4941176470588236,
+            0.9725490196078431,
+            0.2862745098039215
+          ],
+          "target": [
+            0.5725490196078431,
+            0.8588235294117647,
+            0.49019607843137253
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.7490196078431377,
+            0.44313725490196093,
+            0.20784313725490208
+          ],
+          "target": [
+            0.6627450980392158,
+            0.4392156862745098,
+            0.3058823529411765
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.9058823529411767,
+            0.01568627450980392,
+            0.30196078431372536
+          ],
+          "target": [
+            0.7647058823529411,
+            0.24705882352941178,
+            0.3411764705882353
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.9999999999999999,
+            0.2627450980392157,
+            0.8509803921568629
+          ],
+          "target": [
+            0.8470588235294118,
+            0.3764705882352941,
+            0.7372549019607844
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.6039215686274507,
+            0.8078431372549023,
+            0.6313725490196075
+          ],
+          "target": [
+            0.596078431372549,
+            0.7372549019607844,
+            0.615686274509804
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            120
+          ]
+        }
+      ]
+    },
+    {
+      "scene_id": "synthetic-only-2",
+      "batch_id": "synthetic-only-2",
+      "parent_capture_id": "synthetic-only-2",
+      "split": "heldout",
+      "camera": "synthetic-only-2",
+      "paper": "synthetic-common-paper",
+      "generation": "SYNTHETIC_NOT_FILM",
+      "film_date": "synthetic-only-2",
+      "exposure": "synthetic-only-2",
+      "illuminant": "synthetic-only-2",
+      "flash": "synthetic-only-2",
+      "development_celsius": "synthetic-only-2",
+      "development_seconds": "synthetic-only-2",
+      "scanner": "synthetic-only-2",
+      "scanner_icc_sha256": "synthetic-fixed-scanner",
+      "auto_enhancement": false,
+      "reference_sha256": "d05ba7d6403b232986fdc46b7d76fd7814885f13344f808d46758e0ff26a1869",
+      "scan_sha256": "69b098034adbe280a20b4e1d8c6b0683e4cc72eacb0a56c2ee21f54107fa7866",
+      "registration": {
+        "method": "manual homography + >=2 independent check points",
+        "matrix": [
+          [
+            1.0000000000000009,
+            -3.966419223839013e-16,
+            1.7588339166947842e-14
+          ],
+          [
+            -1.4137996329210978e-16,
+            1.0000000000000007,
+            1.1249440972594337e-14
+          ],
+          [
+            4.3375902483510416e-18,
+            3.9077920451192363e-22,
+            1.0
+          ]
+        ],
+        "fit_max_reprojection_pixels": 1.0473938871785673e-13,
+        "max_allowed_pixels": 0.01
+      },
+      "rights": {
+        "fit_allowed": true,
+        "source": "first-party-generated-math-fixture"
+      },
+      "normalization": {
+        "method": "exposure-wb-only-predeclared",
+        "exposure_ev": 0,
+        "wb_rgb": [
+          1,
+          1,
+          1
+        ]
+      },
+      "id": "heldout",
+      "reference_path": "D:\\AI AGENT\\output\\polaroid-profile-research-20261028\\results\\preparation-selftest\\reference-2.png",
+      "scan_path": "D:\\AI AGENT\\output\\polaroid-profile-research-20261028\\results\\preparation-selftest\\scan-2.png",
+      "scan_valid_mask": "mask-2.png",
+      "sample_patches": [
+        {
+          "center_reference_xy": [
+            8,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            8
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            24
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            40
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            56
+          ],
+          "radius_pixels": 2,
+          "region": "gray"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            72
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            88
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            104
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            8,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            24,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            40,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            56,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            72,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            88,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            104,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        },
+        {
+          "center_reference_xy": [
+            120,
+            120
+          ],
+          "radius_pixels": 2,
+          "region": "skin"
+        }
+      ],
+      "alignment": {
+        "reference_points": [
+          [
+            0,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            0,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "scan_points": [
+          [
+            0,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            0,
+            127
+          ],
+          [
+            127,
+            127
+          ]
+        ],
+        "check_points": [
+          {
+            "reference": [
+              32,
+              32
+            ],
+            "scan": [
+              32,
+              32
+            ]
+          },
+          {
+            "reference": [
+              96,
+              96
+            ],
+            "scan": [
+              96,
+              96
+            ]
+          }
+        ],
+        "max_reprojection_pixels": 0.01
+      },
+      "valid_mask_sha256": "f0aa957523055fe28a67c6c4a3953fb8d9efb2fee7d215a9ffd569ad01aed808",
+      "patches": [
+        {
+          "input": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "target": [
+            0.11372549019607843,
+            0.11372549019607843,
+            0.11372549019607843
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.03137254901960784,
+            0.03137254901960784,
+            0.03137254901960784
+          ],
+          "target": [
+            0.11372549019607843,
+            0.11372549019607843,
+            0.11372549019607843
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.06274509803921569,
+            0.06274509803921569,
+            0.06274509803921569
+          ],
+          "target": [
+            0.1176470588235294,
+            0.1176470588235294,
+            0.1176470588235294
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.09803921568627455,
+            0.09803921568627455,
+            0.09803921568627455
+          ],
+          "target": [
+            0.12549019607843137,
+            0.12549019607843137,
+            0.12549019607843137
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.12941176470588237,
+            0.12941176470588237,
+            0.12941176470588237
+          ],
+          "target": [
+            0.1411764705882353,
+            0.1411764705882353,
+            0.1411764705882353
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.16078431372549015,
+            0.16078431372549015,
+            0.16078431372549015
+          ],
+          "target": [
+            0.16078431372549024,
+            0.16078431372549024,
+            0.16078431372549024
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.19215686274509813,
+            0.19215686274509813,
+            0.19215686274509813
+          ],
+          "target": [
+            0.1843137254901961,
+            0.1843137254901961,
+            0.1843137254901961
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.22745098039215692,
+            0.22745098039215692,
+            0.22745098039215692
+          ],
+          "target": [
+            0.21568627450980393,
+            0.21568627450980393,
+            0.21568627450980393
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            8
+          ]
+        },
+        {
+          "input": [
+            0.25882352941176473,
+            0.25882352941176473,
+            0.25882352941176473
+          ],
+          "target": [
+            0.24313725490196078,
+            0.24313725490196078,
+            0.24313725490196078
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.29019607843137246,
+            0.29019607843137246,
+            0.29019607843137246
+          ],
+          "target": [
+            0.27450980392156865,
+            0.27450980392156865,
+            0.27450980392156865
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.3215686274509803,
+            0.3215686274509803,
+            0.3215686274509803
+          ],
+          "target": [
+            0.3058823529411765,
+            0.3058823529411765,
+            0.3058823529411765
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.3529411764705881,
+            0.3529411764705881,
+            0.3529411764705881
+          ],
+          "target": [
+            0.33725490196078434,
+            0.33725490196078434,
+            0.33725490196078434
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.38823529411764723,
+            0.38823529411764723,
+            0.38823529411764723
+          ],
+          "target": [
+            0.3686274509803922,
+            0.3686274509803922,
+            0.3686274509803922
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.419607843137255,
+            0.419607843137255,
+            0.419607843137255
+          ],
+          "target": [
+            0.39607843137254906,
+            0.39607843137254906,
+            0.39607843137254906
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.45098039215686286,
+            0.45098039215686286,
+            0.45098039215686286
+          ],
+          "target": [
+            0.42745098039215684,
+            0.42745098039215684,
+            0.42745098039215684
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.4823529411764706,
+            0.4823529411764706,
+            0.4823529411764706
+          ],
+          "target": [
+            0.4588235294117647,
+            0.4588235294117647,
+            0.4588235294117647
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            24
+          ]
+        },
+        {
+          "input": [
+            0.5176470588235295,
+            0.5176470588235295,
+            0.5176470588235295
+          ],
+          "target": [
+            0.49019607843137253,
+            0.49019607843137253,
+            0.49019607843137253
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.5490196078431372,
+            0.5490196078431372,
+            0.5490196078431372
+          ],
+          "target": [
+            0.5176470588235295,
+            0.5176470588235295,
+            0.5176470588235295
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.5803921568627449,
+            0.5803921568627449,
+            0.5803921568627449
+          ],
+          "target": [
+            0.5490196078431373,
+            0.5490196078431373,
+            0.5490196078431373
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.6117647058823527,
+            0.6117647058823527,
+            0.6117647058823527
+          ],
+          "target": [
+            0.5764705882352941,
+            0.5764705882352941,
+            0.5764705882352941
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.6470588235294117,
+            0.6470588235294117,
+            0.6470588235294117
+          ],
+          "target": [
+            0.6039215686274509,
+            0.6039215686274509,
+            0.6039215686274509
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.6784313725490194,
+            0.6784313725490194,
+            0.6784313725490194
+          ],
+          "target": [
+            0.6352941176470588,
+            0.6352941176470588,
+            0.6352941176470588
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.7098039215686271,
+            0.7098039215686271,
+            0.7098039215686271
+          ],
+          "target": [
+            0.6627450980392158,
+            0.6627450980392158,
+            0.6627450980392158
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.7411764705882358,
+            0.7411764705882358,
+            0.7411764705882358
+          ],
+          "target": [
+            0.6862745098039216,
+            0.6862745098039216,
+            0.6862745098039216
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            40
+          ]
+        },
+        {
+          "input": [
+            0.7725490196078435,
+            0.7725490196078435,
+            0.7725490196078435
+          ],
+          "target": [
+            0.7137254901960784,
+            0.7137254901960784,
+            0.7137254901960784
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.8078431372549023,
+            0.8078431372549023,
+            0.8078431372549023
+          ],
+          "target": [
+            0.7411764705882353,
+            0.7411764705882353,
+            0.7411764705882353
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.83921568627451,
+            0.83921568627451,
+            0.83921568627451
+          ],
+          "target": [
+            0.7647058823529411,
+            0.7647058823529411,
+            0.7647058823529411
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.870588235294118,
+            0.870588235294118,
+            0.870588235294118
+          ],
+          "target": [
+            0.7921568627450981,
+            0.7921568627450981,
+            0.7921568627450981
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.9019607843137257,
+            0.9019607843137257,
+            0.9019607843137257
+          ],
+          "target": [
+            0.815686274509804,
+            0.815686274509804,
+            0.815686274509804
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.9372549019607844,
+            0.9372549019607844,
+            0.9372549019607844
+          ],
+          "target": [
+            0.8392156862745098,
+            0.8392156862745098,
+            0.8392156862745098
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.9686274509803922,
+            0.9686274509803922,
+            0.9686274509803922
+          ],
+          "target": [
+            0.8627450980392157,
+            0.8627450980392157,
+            0.8627450980392157
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.9999999999999999,
+            0.9999999999999999,
+            0.9999999999999999
+          ],
+          "target": [
+            0.8862745098039215,
+            0.8862745098039215,
+            0.8862745098039215
+          ],
+          "region": "gray",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            56
+          ]
+        },
+        {
+          "input": [
+            0.36078431372549,
+            0.7607843137254906,
+            0.027450980392156873
+          ],
+          "target": [
+            0.42745098039215684,
+            0.6941176470588235,
+            0.32156862745098047
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.4470588235294119,
+            0.37254901960784337,
+            0.47843137254901963
+          ],
+          "target": [
+            0.41568627450980394,
+            0.3568627450980392,
+            0.43529411764705883
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.12941176470588237,
+            0.22352941176470595,
+            0.5607843137254901
+          ],
+          "target": [
+            0.17254901960784313,
+            0.2196078431372549,
+            0.45098039215686275
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.38823529411764723,
+            0.7921568627450983,
+            0.6039215686274507
+          ],
+          "target": [
+            0.4588235294117647,
+            0.7215686274509804,
+            0.5882352941176471
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.8627450980392161,
+            0.7333333333333332,
+            0.5999999999999998
+          ],
+          "target": [
+            0.7725490196078433,
+            0.6823529411764706,
+            0.596078431372549
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.2862745098039215,
+            0.7843137254901964,
+            0.25098039215686274
+          ],
+          "target": [
+            0.4000000000000001,
+            0.7098039215686275,
+            0.38431372549019616
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.0745098039215686,
+            0.9647058823529412,
+            0.5411764705882353
+          ],
+          "target": [
+            0.43529411764705883,
+            0.8509803921568627,
+            0.5882352941176471
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.7725490196078435,
+            0.5294117647058824,
+            0.6117647058823527
+          ],
+          "target": [
+            0.6941176470588235,
+            0.5176470588235295,
+            0.5725490196078431
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            72
+          ]
+        },
+        {
+          "input": [
+            0.035294117647058816,
+            0.18823529411764717,
+            0.6745098039215685
+          ],
+          "target": [
+            0.14901960784313725,
+            0.203921568627451,
+            0.5254901960784314
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.568627450980392,
+            0.15686274509803913,
+            0.9529411764705883
+          ],
+          "target": [
+            0.4980392156862745,
+            0.25882352941176473,
+            0.7843137254901962
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.15294117647058816,
+            0.5098039215686274,
+            0.14509803921568623
+          ],
+          "target": [
+            0.23921568627450981,
+            0.4705882352941176,
+            0.2352941176470588
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.7176470588235291,
+            0.2745098039215686,
+            0.13333333333333333
+          ],
+          "target": [
+            0.6235294117647059,
+            0.3058823529411765,
+            0.2352941176470588
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.04705882352941175,
+            0.17647058823529405,
+            0.19215686274509813
+          ],
+          "target": [
+            0.12549019607843137,
+            0.1647058823529412,
+            0.17254901960784313
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.5372549019607843,
+            0.45098039215686286,
+            0.9568627450980393
+          ],
+          "target": [
+            0.5058823529411764,
+            0.45098039215686275,
+            0.811764705882353
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.9529411764705883,
+            0.7960784313725493,
+            0.6705882352941175
+          ],
+          "target": [
+            0.8431372549019608,
+            0.7372549019607844,
+            0.6588235294117648
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.843137254901961,
+            0.9372549019607844,
+            0.023529411764705896
+          ],
+          "target": [
+            0.7764705882352942,
+            0.8392156862745098,
+            0.4470588235294118
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            88
+          ]
+        },
+        {
+          "input": [
+            0.11764705882352942,
+            0.36078431372549,
+            0.09411764705882358
+          ],
+          "target": [
+            0.1803921568627451,
+            0.3294117647058824,
+            0.17254901960784313
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.5999999999999998,
+            0.25882352941176473,
+            0.2627450980392157
+          ],
+          "target": [
+            0.5215686274509804,
+            0.2784313725490196,
+            0.2784313725490196
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.29019607843137246,
+            0.09803921568627455,
+            0.7411764705882358
+          ],
+          "target": [
+            0.2627450980392157,
+            0.17254901960784313,
+            0.5803921568627451
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.6509803921568625,
+            0.6078431372549017,
+            0.035294117647058816
+          ],
+          "target": [
+            0.6039215686274509,
+            0.5686274509803921,
+            0.27450980392156865
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.43137254901960803,
+            0.6862745098039214,
+            0.15686274509803913
+          ],
+          "target": [
+            0.45098039215686275,
+            0.6313725490196078,
+            0.3137254901960784
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.38431372549019627,
+            0.01960784313725489,
+            0.08235294117647068
+          ],
+          "target": [
+            0.29411764705882354,
+            0.12549019607843137,
+            0.13725490196078433
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.21568627450980402,
+            0.41568627450980405,
+            0.46274509803921576
+          ],
+          "target": [
+            0.2549019607843137,
+            0.3882352941176471,
+            0.4235294117647059
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.8862745098039219,
+            0.3176470588235292,
+            0.01960784313725489
+          ],
+          "target": [
+            0.7607843137254902,
+            0.36470588235294116,
+            0.26666666666666666
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            104
+          ]
+        },
+        {
+          "input": [
+            0.8274509803921571,
+            0.06274509803921569,
+            0.09411764705882358
+          ],
+          "target": [
+            0.6980392156862745,
+            0.2235294117647059,
+            0.23137254901960783
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            8,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.9647058823529412,
+            0.7529411764705887,
+            0.3372549019607842
+          ],
+          "target": [
+            0.8470588235294118,
+            0.7019607843137254,
+            0.47843137254901963
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            24,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.13333333333333333,
+            0.38823529411764723,
+            0.3372549019607842
+          ],
+          "target": [
+            0.19607843137254904,
+            0.3568627450980392,
+            0.32156862745098047
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            40,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.874509803921569,
+            0.419607843137255,
+            0.08235294117647068
+          ],
+          "target": [
+            0.7607843137254902,
+            0.43529411764705883,
+            0.29411764705882354
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            56,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.9254901960784315,
+            0.6235294117647056,
+            0.11764705882352942
+          ],
+          "target": [
+            0.811764705882353,
+            0.6,
+            0.3686274509803922
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            72,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.11372549019607846,
+            0.46666666666666673,
+            0.09019607843137262
+          ],
+          "target": [
+            0.20784313725490197,
+            0.43137254901960786,
+            0.20000000000000004
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            88,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.6313725490196075,
+            0.6156862745098036,
+            0.03137254901960784
+          ],
+          "target": [
+            0.5882352941176471,
+            0.5764705882352941,
+            0.27058823529411763
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            104,
+            120
+          ]
+        },
+        {
+          "input": [
+            0.8078431372549023,
+            0.7882352941176474,
+            0.9137254901960786
+          ],
+          "target": [
+            0.7411764705882353,
+            0.7254901960784313,
+            0.815686274509804
+          ],
+          "region": "skin",
+          "valid": true,
+          "sample_count": 25,
+          "reference_center": [
+            120,
+            120
+          ]
+        }
+      ]
+    }
+  ],
+  "preparation_config_sha256": "19513a1ab67db2bcf6e28ecdd9d2b8038217a7eb616fb5141756ecb12739a718"
+}

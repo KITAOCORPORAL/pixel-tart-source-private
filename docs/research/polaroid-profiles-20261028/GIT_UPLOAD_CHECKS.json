@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-28",
+  "timezone": "Europe/Berlin",
+  "scope": "77 byte-verified original curated deliverables plus upload metadata",
+  "source_baseline": "92c6da2e7311c55a788898db07160047cc3d7051",
+  "original_zip_sha256": "c0ef56ed0b97ceb0bc4b49b869f4844904e23fa414c64aab5dd204461a11bcd5",
+  "archive_members": 77,
+  "secret_scan": {
+    "status": "PASS",
+    "text_files_scanned": 66,
+    "pattern_names": [
+      "private_key",
+      "github_token",
+      "openai_key",
+      "aws_access_key",
+      "auth_bearer",
+      "credential_url"
+    ],
+    "findings": []
+  },
+  "excluded": [
+    "third-party repository clones",
+    "dependencies",
+    "manual PDFs",
+    "personal/paired photographs",
+    "bin/obj",
+    "product source or XAML changes"
+  ],
+  "third_party_transform_note": "results/lab-reference-execution.json contains isolated MIT Lab heuristic reference output, not candidate model weights; licenses/Lab-MIT.txt retained",
+  "validation": "GIT_REPLAY_VALIDATION.json: independent copy build/generate/test_offline/test_prepare PASS; 76 original file hashes unchanged",
+  "product_status": "OFFLINE_ONLY; 2 STYLE_APPROXIMATION candidates; 0 measured camera profiles"
+}
+

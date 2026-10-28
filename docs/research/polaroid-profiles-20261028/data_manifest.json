@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "admitted_real_camera_pairs": [],
+  "count": 0,
+  "calibration_eligible": false,
+  "visual_examples": [
+    {
+      "id": "NASA-astronaut-public-domain",
+      "path": "references/skimage/astronaut.png",
+      "sha256": "88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5",
+      "source": "scikit-image v0.25.2 skimage/data/_fetchers.py astronaut() citing NASA Great Images",
+      "rights": "public domain per upstream image-specific documentation; NASA/Eileen Collins attribution retained; no endorsement",
+      "purpose": "visual comparison only, NOT paired film target",
+      "input_assumption": "embedded ICC converted by Pillow/LCMS to sRGB"
+    }
+  ],
+  "synthetic_fixture": {
+    "path": "results/synthetic-fixture.json",
+    "purpose": "tool mechanics only; region labels are synthetic, NOT real skin measurements"
+  },
+  "excluded_sources": [
+    {
+      "source": "Kunkles committed calibration JSON",
+      "reason": "Lab+phone+film+scanner; absent camera pair/complete batch/ICC/raw scans; no camera fit"
+    },
+    {
+      "source": "GROK-POL existing V3 observation IDs",
+      "reason": "not independently admitted controlled capture pairs in this batch"
+    },
+    {
+      "source": "Gmic/hald-clut assets",
+      "reason": "era/source rights not fully cleared; no LUT fitting or derivative weights used"
+    },
+    {
+      "source": "spectral repositories",
+      "reason": "no admitted i-2 or original SX70 camera paired dataset"
+    }
+  ]
+}
