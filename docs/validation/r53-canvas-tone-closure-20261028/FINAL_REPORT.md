@@ -27,3 +27,6 @@ E:/Kitao-Deliveries/r53-canvas-tone-closure-20261028/Guangjing-R53-Canvas-Tone-F
 
 ## 限制与下一步
 首闭环可用但非R5.3全部完成：大画布性能/纹理笔刷/跨机根重定位/完整视觉精修和实机验收仍缺。继续纹理素材笔刷/更复杂mask须接同对象/历史模型；影调完整相机/profile科学准入与RAW浮点前端是明确后续，不扩大成无尽泛调查。旧教程保持退役，稳定后统一产品引导。
+
+## 普通推送读回
+产品eeb5edae与独立证据20d745ac已正常push；ls-remote读回LOCAL_HEAD=REMOTE_HEAD=20d745ace4e0bb7c6306d88cb5a938aaceca6d12，工作树干净。后续仅封存本记录，不改变产品src/tests。
