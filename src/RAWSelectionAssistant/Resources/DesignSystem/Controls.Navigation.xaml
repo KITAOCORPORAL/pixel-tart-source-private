@@ -72,6 +72,7 @@
                             <Setter TargetName="ExpandedContent" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="CollapsedContent" Property="Visibility" Value="Visible" />
                         </DataTrigger>
+                        <MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding IsReferenceColorPage}" Value="True"/><Condition Binding="{Binding ReferenceColorPage.UsePhotoGradePage}" Value="True"/></MultiDataTrigger.Conditions><Setter TargetName="ExpandedContent" Property="Visibility" Value="Collapsed"/><Setter TargetName="CollapsedContent" Property="Visibility" Value="Visible"/><Setter Property="Height" Value="34"/><Setter Property="MinHeight" Value="34"/><Setter Property="Margin" Value="0,1"/><Setter Property="ToolTipService.IsEnabled" Value="True"/></MultiDataTrigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter TargetName="KeyboardFocusRing" Property="Visibility" Value="Visible" />
                         </Trigger>

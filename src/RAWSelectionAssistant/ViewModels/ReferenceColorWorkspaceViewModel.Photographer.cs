@@ -33,6 +33,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public string PaperPreviewStatus {get=>_paperPreviewStatus;private set=>SetProperty(ref _paperPreviewStatus,value);}
  public AsyncRelayCommand PreviewPhotographerPapersCommand {get;private set;}=null!;
  private CancellationTokenSource? _paperPreviewCancellation;
+ internal void InvalidatePaperGallery(){_paperPreviewCancellation?.Cancel();}
  private void ClearPhotographerPreviews()
  {
   _paperPreviewCancellation?.Cancel();foreach(var choice in PhotographerPapers)choice.Preview=null;
@@ -43,41 +44,41 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   PreviewPhotographerPapersCommand=new(async _=>
   {
    if(ActiveTarget is not{} target||IsLoading||IsExporting||IsInstantGenerating||RawMatchTiff16ProductPipeline.IsRaw(target.Path)&&target.LinearRawMaster is null)return;
-   await StopComparisonAsync();var revision=Volatile.Read(ref _activationRevision);var version=target.ActiveEditVersionId;
+   var revision=Volatile.Read(ref _activationRevision);var version=target.ActiveEditVersionId;
    _paperPreviewCancellation?.Cancel();using var cancellation=new CancellationTokenSource();_paperPreviewCancellation=cancellation;var token=cancellation.Token;
    try
    {
     PaperPreviewStatus="正在用同一张照片渲染相纸色彩；不改变当前效果与历史…";
     if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
-    var basis=InstantFilmJpegInput.Definition with{RenderedInputVersion=2};
-    // A reduced gallery input is labelled preview only; full apply/export still use the original.
-    BitmapSource source;
-    if(RawMatchTiff16ProductPipeline.IsRaw(target.Path)&&target.LinearRawMaster is{} raw){using var pin=StudioGlobalResources.RetainBuffer(raw.Image,(long)raw.Image.Rgb32.Length*4);var original=target.RawDefinition! with{LocalEdits=null,SceneExposure=null,InstantFilm=null,LightPrint=null};using var rendered=await RenderProfessionalPreviewAsync(raw,original,384,token,"PaperGalleryRawBase");source=RawDisplayBitmapAdapter.ToBitmap(rendered.ToVisualRgb24(token));}
-    else source=await Task.Run(()=>StudioQuickExport.Load(target.Path,384),token);
-    var master=InstantFilmJpegInput.FromRendered(source,target.SourceHash??target.ObservedSourceHash!,basis);
-    using var owner=master.Image;
+    // Gallery is a reduced render of the same frozen input/recipe as the large preview.
+    // No CSS filtering, monitor transform or separate color-only approximation.
+    Editor.CopyCurrentLookTo([target]);var basis=BuildInstantDefinition(target,target.RawDefinition,version,false);
     var recipes=PhotographerPapers.Select(choice=>
     {
-     var p=InstantFilmProfiles.Available.Single(x=>x.Id==choice.ProfileId);
-     return(choice,profile:p,recipe:CleanColorPreview(FreezeV3(new InstantFilmDefinition(true,p.Id,p.ChemicalGeneration),false),master.Image.Width/(double)master.Image.Height));
+     var profile=InstantFilmProfiles.Available.Single(x=>x.Id==choice.ProfileId);
+     var recipe=FreezeV3(new InstantFilmDefinition(true,profile.Id,profile.ChemicalGeneration),false);
+     var film=ApplyLightPrintFrame(new InstantFilmDefinition(true,recipe.Profile.LegacyId,profile.ChemicalGeneration,AlgorithmVersion:3){V3=recipe});
+     return(choice,profile,film);
     }).ToArray();
+    var master=ReusableMaster(target,basis)??await DecodeProfessionalInputAsync(target.Path,basis,token);
+    using var owner=ReferenceEquals(master.Image,target.LinearRawMaster?.Image)?null:master.Image;
+    using var pin=StudioGlobalResources.RetainBuffer(master.Image,(long)master.Image.Rgb32.Length*4);
     var images=new List<(PhotographerPaper,BitmapSource)>();
-    foreach(var (choice,profile,recipe) in recipes)
+    foreach(var (choice,profile,film) in recipes)
     {
      token.ThrowIfCancellationRequested();
-     var film=new InstantFilmDefinition(true,recipe.Profile.LegacyId,profile.ChemicalGeneration,AlgorithmVersion:3,PaperFrame:false){V3=recipe};
      var definition=basis with{InstantFilm=film};
      using var pixels=await Task.Run(()=>ProfessionalRawPipeline.RenderPreview(master,definition,240,token),token);
      images.Add((choice,RawDisplayBitmapAdapter.ToBitmap(pixels.ToVisualRgb24(token))));
     }
     if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
-    if(_disposed||revision!=Volatile.Read(ref _activationRevision)||!ReferenceEquals(ActiveTarget,target)||version!=target.ActiveEditVersionId)return;
+    if(token.IsCancellationRequested||_disposed||revision!=Volatile.Read(ref _activationRevision)||!ReferenceEquals(ActiveTarget,target)||version!=target.ActiveEditVersionId)return;
     foreach(var (choice,image) in images)choice.Preview=image;
     PhotographerPapers=PhotographerPapers.ToArray();
-    OnPropertyChanged(nameof(PhotographerPapers));PaperPreviewStatus=$"同源色彩预览 · 不含纸框／装饰／颗粒，强度 100%，曝光 {recipes[0].recipe.Response.ExposureEv:0.##} EV。点击相纸选择，再点应用。";
+    OnPropertyChanged(nameof(PhotographerPapers));PaperPreviewStatus="同源相纸成品缩略图 · 当前配方 · 低分辨率预览";
    }
-   catch(OperationCanceledException){PaperPreviewStatus="相纸预览已取消，当前编辑保持。";}
-   catch(Exception e)when(e is IOException or NotSupportedException or InvalidOperationException or ArgumentException or System.Runtime.InteropServices.COMException){PaperPreviewStatus="此输入暂不能生成相纸缩略图："+e.Message+"。仍可使用已支持的完整应用入口。";}
+   catch(OperationCanceledException){if(ReferenceEquals(_paperPreviewCancellation,cancellation))PaperPreviewStatus="相纸预览已取消，当前编辑保持。";}
+   catch(Exception e)when(e is IOException or NotSupportedException or InvalidOperationException or ArgumentException or System.Runtime.InteropServices.COMException){if(ReferenceEquals(_paperPreviewCancellation,cancellation))PaperPreviewStatus="此输入暂不能生成相纸缩略图："+e.Message+"。仍可使用已支持的完整应用入口。";}
    finally{if(ReferenceEquals(_paperPreviewCancellation,cancellation))_paperPreviewCancellation=null;}
   },_=>ActiveTarget is not null&&(!RawMatchTiff16ProductPipeline.IsRaw(ActiveTarget.Path)||ActiveTarget.LinearRawMaster is not null)&&!IsLoading&&!IsExporting&&!IsInstantGenerating);
  }

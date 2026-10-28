@@ -30,6 +30,10 @@ public sealed class DarkroomIcon:FrameworkElement
  "panel"=>"M2,3 L18,3 18,17 2,17 Z M12,3 L12,17 M15,7 L15,13",
  "save"=>"M3,2 L14,2 18,6 18,18 3,18 Z M6,2 L6,7 13,7 13,2 M6,18 L6,11 15,11 15,18",
  "folder"=>"M2,5 L8,5 10,7 18,7 18,17 2,17 Z M2,5 L2,3 8,3 10,5",
+ "eye"=>"M1,10 Q10,-1 19,10 Q10,21 1,10 Z M10,7 A3,3 0 1 1 10,13 A3,3 0 1 1 10,7",
+ "lock"=>"M5,9 L15,9 15,18 5,18 Z M7,9 L7,5 A3,3 0 0 1 13,5 L13,9",
+ "unlock"=>"M5,9 L15,9 15,18 5,18 Z M7,9 L7,5 A3,3 0 0 1 13,5",
+ "brush"=>"M4,15 L13,3 17,6 8,17 Z M4,15 Q1,19 6,19 L8,17",
  "more"=>"M4,9 L4,11 M10,9 L10,11 M16,9 L16,11",
  _=>"M4,4 L16,4 16,16 4,16 Z"};dc.DrawGeometry(null,pen,Geometry.Parse(path));dc.Pop();}
 }

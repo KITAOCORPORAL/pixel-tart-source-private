@@ -452,6 +452,7 @@ public partial class MainWindow : Window
     private void ViewModel_PageChanged(object? sender, PageChangedEventArgs e)
     {
         WorkbenchToolboxPopup.IsOpen = false;
+        if(System.Windows.Shell.WindowChrome.GetWindowChrome(this) is {} chrome)chrome.CaptionHeight=e.CurrentPage=="ReferenceColor"&&_viewModel?.ReferenceColorPage.UsePhotoGradePage==true?24:52;
         QuickToolsOverflowPopup.IsOpen = false;
         ApplySurfaceMinimumSize(e.CurrentPage);
         ApplyAssetLibraryFocusTransition(e.PreviousPage, e.CurrentPage);

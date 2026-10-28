@@ -1,3 +1,13 @@
+## 2026-10-28 公司 R5.3 UI纠偏接续 — PARTIAL，不能发行
+- 最高优先继续按定稿恢复简易/专业/即时胶片/自由画布；暂停新增算法、纹理笔刷和跨模块。撤销旧“相框放左”要求：左唯一相纸，右相机/相框/参数/显影。
+- 当前独立树 E:/Kitao-Worktrees/r53-color-tools-film-20261028，分支 company/r53-color-tools-film-20261028，起点4e9dfc4a9b65ab78379c1fa2bf1ff514742a0bec。其他52树保全，未合main/强推。
+- 已修：40DIP真实宿主轨/隐藏页面重复轨、24+34紧凑标题工具栏、去重复菜单/底状态/关闭叠层；有效客户端DIP参数轨和可恢复展开；22DIP独立节点/胶片条；右相框归位/贴底显影；真实同链240px相纸缩略和取消；38DIP层行；专业分类；画布右上属性/右下图层及内联画笔。
+- 完整宿主取证抓到并修复XAML资源缺失、保存后胶片预览退回原片、右相纸标题复现；不以build通过代替运行。
+- UI尚未完成：只5现有相纸响应、相机照片版权未确认、12可分发原创框尚未接统一渲染导出（不得误记成无授权）、6程序框仍替代纹理、3D原有停靠行为、画布材质分类和视觉精修。详见 docs/validation/r53-ui-correction-20261028/VISUAL_STATUS.md 与 FINAL_REPORT.md。
+- 已重新核验定稿ZIP hash 16f75c0f40b506e4db57f140f389967264040cd8c5930ad24946b11c171e2ca9。设计源 E:/Kitao-Deliveries/r53-raw-local-closure-20261027/design。
+- 保持ComputerUse/Browser/WebView/CDP禁用。截图为真实生产控件OFFSCREEN/合成样本，不是实机。125/150%只验证有效DIP，真实鼠标/屏幕DPI未验。
+- 交付与最终产品SHA以 docs/validation/r53-ui-correction-20261028/FINAL_REPORT.md 为准。完整诊断包/CMD、不Setup、旧教程继续退役。后续优先按剩余视觉差异继续，不新增算法刷数量。
+
 # 光镜开发交接入口
 
 ## 画布首闭环＋影调收尾（2026-10-28 America/New_York）

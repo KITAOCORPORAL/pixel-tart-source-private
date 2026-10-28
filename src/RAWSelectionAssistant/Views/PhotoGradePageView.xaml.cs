@@ -20,7 +20,8 @@ public partial class PhotoGradePageView:UserControl
   PreviewKeyDown+=(_,e)=>
   {
    if(e.Handled||Keyboard.FocusedElement is TextBox or ComboBox||Keyboard.Modifiers!=ModifierKeys.Control)return;
-   if(e.Key==Key.E){OpenExport(this,new RoutedEventArgs());e.Handled=true;}
+   if(e.Key==Key.S){model?.SaveSessionCommand.Execute(null);e.Handled=true;}
+   else if(e.Key==Key.E){OpenExport(this,new RoutedEventArgs());e.Handled=true;}
    else if(e.Key==Key.D0){PhotoViewport.State.Fit();e.Handled=true;}
 
   };
@@ -40,7 +41,7 @@ public partial class PhotoGradePageView:UserControl
  }
  private void Detach(bool cancel)
  {
-  StopMaskOverlay();CancelMaskStroke();r53MultiWindow?.Close();r53ResourceWindow?.Close();
+  r53PresetCancellation?.Cancel();StopMaskOverlay();CancelMaskStroke();r53MultiWindow?.Close();r53ResourceWindow?.Close();
   if(model is not null)PropertyChangedEventManager.RemoveHandler(model.Editor,MaskEditorChanged,string.Empty);
   ReleaseR53Compare();closeR53Inspection?.Invoke();
   if(model is not null){PropertyChangedEventManager.RemoveHandler(model,Changed,string.Empty);if(cancel)model.ExitInstantPresentationForLifecycle();}
@@ -65,12 +66,12 @@ public partial class PhotoGradePageView:UserControl
  {
   if(EditModes is null||!ReferenceEquals(e.Source,EditModes)||AdjustmentScroll is null)return;
   var i=EditModes.SelectedIndex;if(i<0)return;
-  if(HistogramPanel is not null){HistogramPanel.Visibility=i==4||!scopesOpen?Visibility.Collapsed:Visibility.Visible;HistogramRow.Height=new GridLength(i==4||!scopesOpen?0:152);DrawGuides();}var panes=new[]{AdjustmentScroll,PaperScroll,LayersScroll,StylesScroll,VariantsScroll};
+  if(HistogramPanel is not null){HistogramPanel.Visibility=i==4||!scopesOpen?Visibility.Collapsed:Visibility.Visible;HistogramRow.Height=new GridLength(i==4||!scopesOpen?0:98);DrawGuides();}var panes=new[]{AdjustmentScroll,PaperScroll,LayersScroll,StylesScroll,VariantsScroll};
   for(int n=0;n<panes.Length;n++)panes[n].Visibility=i==n?Visibility.Visible:Visibility.Collapsed;
   if(FilmAction is not null)FilmAction.Visibility=i==1?Visibility.Visible:Visibility.Collapsed;if(PanelTitle is not null)PanelTitle.Text=new[]{"调整","光片","图层","风格","变体"}[Math.Clamp(i,0,4)];
   if(i==1&&r53ResourceTab!="即时胶片"){r53ResourceTab="即时胶片";RenderR53Resources();}
-  if(i==1&&model is{} workspace&&workspace.ActiveTarget?.RawDefinition is null)workspace.InstantEngineVersion="V3";
-  SavePanelLayout();
+  if(i==1&&model is{} workspace){if(workspace.ActiveTarget?.RawDefinition is null)workspace.InstantEngineVersion="V3";workspace.RequestLightPrintPreview();}
+  ApplyR53Layout();SavePanelLayout();
  }
  private void FileMenu(object sender,RoutedEventArgs e)=>Menu(sender,("导入照片",model?.ChooseTargetCommand),("打开项目",model?.OpenSessionCommand),("保存项目",model?.SaveSessionCommand));
  private void EditMenu(object sender,RoutedEventArgs e)=>Menu(sender,("撤销",model?.PhotoGradeUndoCommand),("重做",model?.PhotoGradeRedoCommand));
@@ -82,7 +83,7 @@ public partial class PhotoGradePageView:UserControl
  private void CompareMenu(object sender,RoutedEventArgs e){if(model is null)return;var m=CreateComparisonMenu();m.PlacementTarget=(UIElement)sender;m.IsOpen=true;}
  private void ShowVariants(object sender,RoutedEventArgs e)=>EditModes.SelectedIndex=4;
  private void ShowAdjust(object sender,RoutedEventArgs e)=>EditModes.SelectedIndex=0;
- private void TogglePanel(object sender,RoutedEventArgs e){SetPanelOpen(RightPanel.Visibility!=Visibility.Visible);SavePanelLayout();}
+ private void TogglePanel(object sender,RoutedEventArgs e){if(EditModes.SelectedIndex==1){EditModes.SelectedIndex=0;}var open=RightPanel.Visibility!=Visibility.Visible;if(ActualWidth<1440)r53CompactPanelOpen=open;else r53WidePanelOpen=open;ApplyR53Layout();SavePanelLayout();}
  private void SelectTool(object sender,RoutedEventArgs e){if(cropPanel is not null)cropPanel.Visibility=Visibility.Collapsed;CropOverlay.Children.Clear();CancelMaskStroke();activeTool="选择";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Arrow;DrawMaskOverlay();}
  private void HandTool(object sender,RoutedEventArgs e){CancelMaskStroke();activeTool="抓手";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Hand;DrawMaskOverlay();}
  private void ZoomTool(object sender,RoutedEventArgs e){CancelMaskStroke();activeTool="缩放";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Cross;DrawMaskOverlay();}
@@ -95,9 +96,11 @@ public partial class PhotoGradePageView:UserControl
  {
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.Layout)&&!savingPanelLayout){RestorePanelLayout();ApplyR53Layout();}
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.R53Professional))ApplyR53Layout();
+  if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.R53SaveStatus)&&model?.R53SaveStatus=="已保存"&&EditModes.SelectedIndex==1)Dispatcher.BeginInvoke(new Action(()=>{if(IsVisible&&EditModes.SelectedIndex==1)model?.RequestLightPrintPreview();}));
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PhotoMaskColor))Refresh();
    if(e.PropertyName is nameof(ReferenceColorWorkspaceViewModel.RawLocalEditing) or nameof(ReferenceColorWorkspaceViewModel.ActiveTarget)){if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.ActiveTarget)){StopMaskOverlay();cropStart=cropEnd=null;CropOverlay.Children.Clear();if(cropPanel is not null)cropPanel.Visibility=Visibility.Collapsed;}ConfigureMaskPanel();}
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PreviewHistogram))UpdateZones();
+  if(e.PropertyName is nameof(ReferenceColorWorkspaceViewModel.ActiveTarget) or nameof(ReferenceColorWorkspaceViewModel.LayerThumbnailContext) or nameof(ReferenceColorWorkspaceViewModel.IsLightPrintLocked))RenderR53Resources();
   DrawMaskOverlay();
   // A newly imported ordinary photo restores the historical default engine. The
   // photographer's selected Polaroid tab must still be ready without version knowledge.

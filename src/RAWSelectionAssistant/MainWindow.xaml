@@ -36,7 +36,7 @@
         <Style x:Key="ShellSurfaceCloseStyle" TargetType="{x:Type views:SurfaceCloseButton}">
             <Setter Property="Visibility" Value="{Binding IsCurrentSurfaceClosable, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding IsOnboardingActive}" Value="True"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger>
+                <MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding IsReferenceColorPage}" Value="True"/><Condition Binding="{Binding ReferenceColorPage.UsePhotoGradePage}" Value="True"/></MultiDataTrigger.Conditions><Setter Property="Visibility" Value="Collapsed"/></MultiDataTrigger><DataTrigger Binding="{Binding IsOnboardingActive}" Value="True"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger>
                 <DataTrigger Binding="{Binding IsSettingsModalOpen}" Value="True"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger>
                 <DataTrigger Binding="{Binding TaskCenter.IsTaskDetailsOpen}" Value="True"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger>
                 <DataTrigger Binding="{Binding WorkCalendarPage.IsDetailsOpen}" Value="True"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger>
@@ -101,9 +101,9 @@
 
     <Grid x:Name="RootGrid" Background="{DynamicResource ContentBackgroundBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="{DynamicResource StudioV2.CommandBarHeight}" />
+            <RowDefinition><RowDefinition.Style><Style TargetType="RowDefinition"><Setter Property="Height" Value="{DynamicResource StudioV2.CommandBarHeight}"/><Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding IsReferenceColorPage}" Value="True"/><Condition Binding="{Binding ReferenceColorPage.UsePhotoGradePage}" Value="True"/></MultiDataTrigger.Conditions><Setter Property="Height" Value="24"/></MultiDataTrigger></Style.Triggers></Style></RowDefinition.Style></RowDefinition>
             <RowDefinition Height="*" />
-            <RowDefinition Height="{DynamicResource StudioV2.StatusBarHeight}" />
+            <RowDefinition><RowDefinition.Style><Style TargetType="RowDefinition"><Setter Property="Height" Value="{DynamicResource StudioV2.StatusBarHeight}"/><Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding IsReferenceColorPage}" Value="True"/><Condition Binding="{Binding ReferenceColorPage.UsePhotoGradePage}" Value="True"/></MultiDataTrigger.Conditions><Setter Property="Height" Value="0"/></MultiDataTrigger></Style.Triggers></Style></RowDefinition.Style></RowDefinition>
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Background="{DynamicResource ShellTopBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1">
@@ -111,14 +111,14 @@
             <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Margin="16,0,10,0" VerticalAlignment="Center">
                 <Border Width="24" Height="24" CornerRadius="7" Background="{DynamicResource AccentSoftBrush}" BorderBrush="{DynamicResource AccentBrush}" BorderThickness="1">
-                    <TextBlock Text="PT" FontFamily="Segoe UI Variable, Segoe UI" FontSize="9" FontWeight="Bold" Foreground="{DynamicResource AccentValueBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBlock Text="光" FontFamily="Segoe UI Variable, Segoe UI" FontSize="9" FontWeight="Bold" Foreground="{DynamicResource AccentValueBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Border>
                 <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
                     <TextBlock Text="光镜" FontFamily="Segoe UI Variable, Segoe UI" FontSize="11" FontWeight="SemiBold" />
-                    <TextBlock Text="{Binding CurrentWorkspaceLabel, StringFormat=当前工作区 · {0}}" FontSize="10" Foreground="{DynamicResource TextTertiaryBrush}" />
+                    <TextBlock Text="{Binding CurrentWorkspaceLabel, StringFormat=当前工作区 · {0}}" FontSize="10" Foreground="{DynamicResource TextTertiaryBrush}"><TextBlock.Style><Style TargetType="TextBlock"><Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding IsReferenceColorPage}" Value="True"/><Condition Binding="{Binding ReferenceColorPage.UsePhotoGradePage}" Value="True"/></MultiDataTrigger.Conditions><Setter Property="Visibility" Value="Collapsed"/></MultiDataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock>
                 </StackPanel>
             </StackPanel>
-        <Menu x:Name="TopMenu" Grid.Column="1" Style="{StaticResource WorkbenchMenuStyle}" Background="Transparent" VerticalAlignment="Center" BorderThickness="0" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+        <Menu x:Name="TopMenu" Grid.Column="1" Background="Transparent" VerticalAlignment="Center" BorderThickness="0" shell:WindowChrome.IsHitTestVisibleInChrome="True"><Menu.Style><Style TargetType="Menu" BasedOn="{StaticResource WorkbenchMenuStyle}"><Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding IsReferenceColorPage}" Value="True"/><Condition Binding="{Binding ReferenceColorPage.UsePhotoGradePage}" Value="True"/></MultiDataTrigger.Conditions><Setter Property="Visibility" Value="Collapsed"/></MultiDataTrigger></Style.Triggers></Style></Menu.Style>
             <MenuItem Header="文件(_F)">
                 <MenuItem Header="新建本地分片任务" Command="{Binding NavigateCommand}" CommandParameter="LocalSplit" />
                 <MenuItem Header="新建归片项目" InputGestureText="Ctrl+N" Command="{Binding NewProjectCommand}" />
@@ -175,6 +175,7 @@
                 <MenuItem Header="关于光镜" Command="{Binding NavigateCommand}" CommandParameter="Help" />
             </MenuItem>
         </Menu>
+            <TextBlock Grid.Column="2" Text="{Binding ReferenceColorPage.R53SaveStatus}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="8,0" Foreground="#6E9B91" Visibility="{Binding IsReferenceColorPage,Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="0,0,8,0" VerticalAlignment="Center" shell:WindowChrome.IsHitTestVisibleInChrome="True">
                 <Button Content="新建策划" Style="{StaticResource PixelTart.Button.Ghost}" Command="{Binding PlanningPage.ShowCreatePlanningCommand}"
                         AutomationProperties.AutomationId="ContextNewPlanning" Visibility="{Binding IsPlanningPage, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -197,7 +198,7 @@
                         <Style TargetType="ColumnDefinition">
                             <Setter Property="Width" Value="{DynamicResource ShellSurfaceCloseReservedWidth}" />
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsCurrentSurfaceClosable}" Value="False"><Setter Property="Width" Value="0" /></DataTrigger>
+                                <DataTrigger Binding="{Binding IsCurrentSurfaceClosable}" Value="False"><Setter Property="Width" Value="0" /></DataTrigger><DataTrigger Binding="{Binding IsReferenceColorPage}" Value="True"><Setter Property="Width" Value="0"/></DataTrigger>
                                 <DataTrigger Binding="{Binding IsOnboardingActive}" Value="True"><Setter Property="Width" Value="0" /></DataTrigger>
                                 <DataTrigger Binding="{Binding IsSettingsModalOpen}" Value="True"><Setter Property="Width" Value="0" /></DataTrigger>
                                 <DataTrigger Binding="{Binding TaskCenter.IsTaskDetailsOpen}" Value="True"><Setter Property="Width" Value="0" /></DataTrigger>
@@ -210,10 +211,10 @@
                     </ColumnDefinition.Style>
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Border x:Name="SidebarContainer" Width="{Binding SidebarWidth}"
-                    MinWidth="{DynamicResource SidebarCollapsedWidth}"
+            <Border x:Name="SidebarContainer"
+                    MinWidth="0"
                     Background="{DynamicResource SidebarBackgroundBrush}" BorderBrush="{DynamicResource DividerBrush}"
-                    BorderThickness="0" Padding="0,7,0,8" UseLayoutRounding="True" SnapsToDevicePixels="True">
+                    BorderThickness="0" Padding="0,7,0,8" UseLayoutRounding="True" SnapsToDevicePixels="True"><Border.Style><Style TargetType="Border"><Setter Property="Width" Value="{Binding SidebarWidth}"/><Style.Triggers><MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding IsReferenceColorPage}" Value="True"/><Condition Binding="{Binding ReferenceColorPage.UsePhotoGradePage}" Value="True"/></MultiDataTrigger.Conditions><Setter Property="Width" Value="40"/></MultiDataTrigger></Style.Triggers></Style></Border.Style>
                 <Grid x:Name="SidebarLayout">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10" />
@@ -227,7 +228,7 @@
                                               AutomationProperties.Name="侧栏根区域" />
                     <ScrollViewer x:Name="SidebarNavigationScroll" Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" Focusable="False">
                         <StackPanel KeyboardNavigation.DirectionalNavigation="Continue" KeyboardNavigation.TabNavigation="Continue">
-                            <TextBlock Text="工作" Style="{StaticResource SidebarSectionLabel}" Margin="16,4,0,4" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="工作"  Margin="16,4,0,4"><TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource SidebarSectionLabel}"><Setter Property="Visibility" Value="{Binding IsSidebarExpanded,Converter={StaticResource BooleanToVisibilityConverter}}"/><Style.Triggers><DataTrigger Binding="{Binding IsReferenceColorPage}" Value="True"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock>
                             <StackPanel x:Name="PrimaryNavigationGroup"
                                         KeyboardNavigation.DirectionalNavigation="Contained"
                                         KeyboardNavigation.TabNavigation="Continue"
@@ -265,7 +266,7 @@
                             </Button>
                             </StackPanel>
                             <Separator />
-                            <TextBlock Text="工具" Style="{StaticResource SidebarSectionLabel}" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="工具" ><TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource SidebarSectionLabel}"><Setter Property="Visibility" Value="{Binding IsSidebarExpanded,Converter={StaticResource BooleanToVisibilityConverter}}"/><Style.Triggers><DataTrigger Binding="{Binding IsReferenceColorPage}" Value="True"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock>
                             <Button Content="{Binding ToolboxEntry.DisplayName}"
                                     Tag="{Binding ToolboxEntry.IconResourceKey, Converter={StaticResource ResourceKeyToGeometryConverter}}"
                                     Command="{Binding NavigateCommand}" CommandParameter="Toolbox"
@@ -285,7 +286,7 @@
                             </Button>
 
                             <Separator />
-                            <TextBlock Text="系统" Style="{StaticResource SidebarSectionLabel}" Visibility="{Binding IsSidebarExpanded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="系统" ><TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource SidebarSectionLabel}"><Setter Property="Visibility" Value="{Binding IsSidebarExpanded,Converter={StaticResource BooleanToVisibilityConverter}}"/><Style.Triggers><DataTrigger Binding="{Binding IsReferenceColorPage}" Value="True"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock>
                             <Button Content="授权与版本" Tag="{StaticResource IconShieldKey}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="Activation" ToolTip="授权与版本" AutomationProperties.Name="授权与版本" />
                             <Button x:Name="SidebarSettingsButton" Content="设置" Tag="{StaticResource IconGear}" Style="{StaticResource SidebarNavButton}" Command="{Binding OpenSettingsCommand}" ToolTip="设置" AutomationProperties.Name="设置" />
                             <Button Content="帮助" Tag="{StaticResource IconQuestionCircle}" Style="{StaticResource SidebarNavButton}" Command="{Binding NavigateCommand}" CommandParameter="Help" ToolTip="帮助" AutomationProperties.Name="帮助" />
@@ -803,7 +804,7 @@
             </Border>
         </Grid>
 
-        <Border x:Name="BottomStatusBar" Grid.Row="2" Height="34" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0" UseLayoutRounding="True" SnapsToDevicePixels="True">
+        <Border x:Name="BottomStatusBar" Grid.Row="2" Height="34" ClipToBounds="True" Background="{DynamicResource SurfacePrimaryBrush}" BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0" UseLayoutRounding="True" SnapsToDevicePixels="True">
             <Grid Margin="18,0"><TextBlock Text="{Binding CurrentPageStatus}" FontWeight="SemiBold" FontSize="{DynamicResource Type.Caption.FontSize}" VerticalAlignment="Center" /><StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"><TextBlock Text="{Binding CurrentPageDetail}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="{DynamicResource Type.Caption.FontSize}" TextTrimming="CharacterEllipsis" MaxWidth="520" /><TextBlock Text="{Binding BackgroundTaskStatus, StringFormat= · {0}}" Foreground="{DynamicResource AccentBrush}" FontSize="{DynamicResource Type.Caption.FontSize}" Margin="8,0,0,0" /><TextBlock Text="{Binding NotificationStatus, StringFormat= · {0}}" Foreground="{DynamicResource WarningBrush}" FontSize="{DynamicResource Type.Caption.FontSize}" Margin="8,0,0,0" /></StackPanel><TextBlock Text="{Binding CurrentPageProcessedText}" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="{DynamicResource Type.Caption.FontSize}" HorizontalAlignment="Right" VerticalAlignment="Center" /><ProgressBar Value="{Binding ProgressPercent, Mode=OneWay}" Maximum="100" VerticalAlignment="Bottom" Height="3" /></Grid>
         </Border>
 
