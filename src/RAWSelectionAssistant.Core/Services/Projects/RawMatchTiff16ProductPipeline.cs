@@ -40,6 +40,7 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
         var state = ColorStudioEffectiveState.Resolve(look, stack, film) ?? (look is not null
             ? ColorStudioLegacyMigration.Migrate(look with { Film = film ?? look.Film }).Stack
             : new ColorAdjustmentStack([new(Guid.NewGuid(), ColorStudioNodeType.Preset, "原图", true)]));
+        using var proxyOwner=ReferenceEquals(working,master)?null:working;
         token.ThrowIfCancellationRequested();
         var display = ColorStudioProcessingAnalysis.RequiresSourceAnalysis(state,look) ? working.ToVisualRgb24(token) : new VisualPixelBuffer(1,1,new byte[3]);
         var analysis = ColorStudioProcessingAnalysis.Create(display, state, look, token);
@@ -62,7 +63,7 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
     {
         ArgumentNullException.ThrowIfNull(master);
         await master.ValidateSourceAsync(token).ConfigureAwait(false);
-        var output = Render(master.Image, look, stack, token: token, film: film).ProcessingPixels!;
+        using var output = Render(master.Image, look, stack, token: token, film: film).ProcessingPixels!;
         return await AtomicTiffWriter.WriteRgb48Async(destinationPath, output,
             new(TiffBitDepth.Sixteen, IccProfile: outputIcc, Software: "光镜", Orientation: output.Orientation), token, overwrite: false).ConfigureAwait(false);
     }

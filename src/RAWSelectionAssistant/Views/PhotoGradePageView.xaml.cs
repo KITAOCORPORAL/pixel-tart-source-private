@@ -101,6 +101,7 @@ public partial class PhotoGradePageView:UserControl
    if(e.PropertyName is nameof(ReferenceColorWorkspaceViewModel.RawLocalEditing) or nameof(ReferenceColorWorkspaceViewModel.ActiveTarget)){if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.ActiveTarget)){StopMaskOverlay();cropStart=cropEnd=null;CropOverlay.Children.Clear();if(cropPanel is not null)cropPanel.Visibility=Visibility.Collapsed;}ConfigureMaskPanel();}
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PreviewHistogram))UpdateZones();
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.LayerThumbnailContext))r54Graph?.InvalidateVisual();
+  if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.LightPrintStatus)&&model?.LightPrintStatus.StartsWith("预览就绪")==true)model.RequestFramePreviews();
   if(e.PropertyName is nameof(ReferenceColorWorkspaceViewModel.ActiveTarget) or nameof(ReferenceColorWorkspaceViewModel.LayerThumbnailContext) or nameof(ReferenceColorWorkspaceViewModel.IsLightPrintLocked))RenderR53Resources();
   DrawMaskOverlay();
   // A newly imported ordinary photo restores the historical default engine. The

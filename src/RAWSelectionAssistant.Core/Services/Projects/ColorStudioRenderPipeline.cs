@@ -14,11 +14,11 @@ public sealed class ColorStudioRenderPipeline
 
     public ColorStudioRenderResult Render(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default, bool captureNodeDiagnostics = true, ReadOnlyMemory<byte> alpha = default,FilmTileCoordinates? tile = null,IReadOnlyDictionary<Guid,Func<double,double,double>>? compiledMasks=null)
     {
-        ArgumentNullException.ThrowIfNull(source); var normalized = stack.Normalize(); var current = source.Clone(); var precisionStages = new List<string>(PrecisionTrace.ProfessionalDefault.Stages);
+        ArgumentNullException.ThrowIfNull(source); var normalized = stack.Normalize(); var current = normalized.Graph?.Version==2?source:source.Clone(); var precisionStages = new List<string>(PrecisionTrace.ProfessionalDefault.Stages);
         var outputs = new List<VisualPixelBuffer>(normalized.Nodes.Count); var inputs = new Dictionary<Guid, VisualPixelBuffer>();
         if(normalized.Graph?.Version==2)
         {
-            current.Dispose();current=StudioGraphRenderer.Render(source,normalized,(input,node)=>ApplyHighPrecision(input,node,reference,analysis,token,alpha,tile),token,tile,masks:compiledMasks,diagnostics:captureNodeDiagnostics?(id,input,output)=>{inputs[id]=input.ToVisualRgb24(token);outputs.Add(output.ToVisualRgb24(token));}:null);
+            current=StudioGraphRenderer.Render(source,normalized,(input,node)=>ApplyHighPrecision(input,node,reference,analysis,token,alpha,tile),token,tile,masks:compiledMasks,diagnostics:captureNodeDiagnostics?(id,input,output)=>{inputs[id]=input.ToVisualRgb24(token);outputs.Add(output.ToVisualRgb24(token));}:null);
             return new(current.ToVisualRgb24(token),outputs,new ColorPipelineDescriptor(InputInterpretation:"HighPrecision sRGB",WorkingRepresentation:normalized.WorkingSpace,OutputEncoding:"sRGB display adapter"),inputs,current,new PrecisionTrace(precisionStages));
         }
         foreach (var node in StudioGraphRouting.Nodes(normalized).Where(item => item.Enabled))

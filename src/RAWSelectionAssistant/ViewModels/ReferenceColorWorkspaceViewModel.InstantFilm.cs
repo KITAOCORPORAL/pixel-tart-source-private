@@ -71,7 +71,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public AsyncRelayCommand ToggleInstantDiceCommand {get;private set;}=null!;
     public AsyncRelayCommand DisableInstantFilmCommand {get;private set;}=null!;
     public RelayCommand SelectInstantCameraCommand {get;private set;}=null!;
-    public void ExitInstantPresentationForLifecycle(){CancelLightPrintTask(false);_paperPreviewCancellation?.Cancel();CancelComparison();_secondSelectionCancellation?.Cancel();_instantCancellation?.Cancel();}
+    public void ExitInstantPresentationForLifecycle(){ClearFrameGallery();CancelLightPrintTask(false);_paperPreviewCancellation?.Cancel();CancelComparison();_secondSelectionCancellation?.Cancel();_instantCancellation?.Cancel();}
     private void InitializeInstantFilmCommands()
     {
         InitializeInstantV3Commands();

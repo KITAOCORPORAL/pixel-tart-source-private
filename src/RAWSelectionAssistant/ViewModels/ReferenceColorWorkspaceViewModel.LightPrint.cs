@@ -100,11 +100,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  }
  private void CancelLightPrintTask(bool restore)
  {
+  ClearFrameGallery();
   Interlocked.Increment(ref _lightPrintPreviewRevision);_lightPrintPreviewCancellation?.Cancel();
   if(restore&&!_disposed&&_lightPrintBeforeDraft is{} prior&&ActiveTarget?.Id==_lightPrintDraftTarget){Editor.RestorePreparedSource(prior,ActiveTarget!.AssetId);_lightPrintBeforeDraft=null;_lightPrintReshoot=false;RestoreInstantControls(ActiveTarget.RawDefinition?.InstantFilm??Layout.FilmDraft);if(ActiveTarget.RawDefinition?.InstantFilm is null){if(Layout.FilmDraftFrameId is{} savedFrame)_selectedLightPrintFrameId=savedFrame;if(Layout.FilmDraftInputMode is{} mode)InstantInputMode=mode;}NotifyLightPrint();LightPrintStatus="预览已取消，保留上一有效结果。";}
  }
  private void QueueLightPrintPreview()
  {
+  if(!_disposed)ClearFrameGallery();
   if(!_lightPrintEnabled||_developingLightPrint||_disposed||IsLightPrintLocked||IsLoading||IsExporting||IsInstantGenerating||ActiveTarget is not{} target)return;
   InstantEngineVersion="V3";_lightPrintPreviewCancellation?.Cancel();var cts=new CancellationTokenSource();_lightPrintPreviewCancellation=cts;var revision=Interlocked.Increment(ref _lightPrintPreviewRevision);var activation=Volatile.Read(ref _activationRevision);var version=target.ActiveEditVersionId;
   if(_lightPrintDraftTarget!=target.Id){_lightPrintBeforeDraft=null;_lightPrintDraftTarget=target.Id;}

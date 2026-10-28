@@ -36,6 +36,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  internal void InvalidatePaperGallery(){_paperPreviewCancellation?.Cancel();}
  private void ClearPhotographerPreviews()
  {
+  ClearFrameGallery();
   _paperPreviewCancellation?.Cancel();foreach(var choice in PhotographerPapers)choice.Preview=null;
   PhotographerPapers=PhotographerPapers.ToArray();OnPropertyChanged(nameof(PhotographerPapers));PaperPreviewStatus="点“预览这些相纸”，使用当前照片比较色彩。";
  }

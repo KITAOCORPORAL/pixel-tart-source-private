@@ -111,7 +111,7 @@ public partial class PhotoGradePageView
     private async void R53UndoDelete(object s,RoutedEventArgs e){if(model is not null)await model.UndoR53VariantDeleteAsync();}
     private void R53PresetTab(object s,RoutedEventArgs e){model?.CancelLightPrintPreviewCommand.Execute(null);r53ResourceTab="预设";EditModes.SelectedIndex=0;RenderR53Resources();}
     private void R53FilterTab(object s,RoutedEventArgs e){model?.CancelLightPrintPreviewCommand.Execute(null);r53ResourceTab="滤镜";EditModes.SelectedIndex=3;RenderR53Resources();}
-    private void R53InstantTab(object s,RoutedEventArgs e){r53ResourceTab="即时胶片";RenderR53Resources();EditModes.SelectedIndex=1;}
+    private void R53InstantTab(object s,RoutedEventArgs e){r53ResourceTab="即时胶片";RenderR53Resources();EditModes.SelectedIndex=1;model?.RequestFramePreviews();}
     private void RenderR53Resources()
     {
         r53PresetCancellation?.Cancel();

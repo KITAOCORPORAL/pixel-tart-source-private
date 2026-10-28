@@ -730,6 +730,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     public void Dispose()
     {
+        ClearFrameGallery();
         CancelRawLocalPreview();rawFastBases.Dispose();ClearR53CompareCache();
         _r53Autosave.Stop();
         if(_disposed)return;

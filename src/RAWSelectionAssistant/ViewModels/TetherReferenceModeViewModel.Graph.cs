@@ -3,6 +3,7 @@ namespace RAWSelectionAssistant.ViewModels;
 public sealed partial class TetherReferenceModeViewModel
 {
     public StudioNodeGraph GraphView=>AdjustmentStack.Graph??StudioNodeGraph.FromSerial(AdjustmentStack.Nodes);
+    public string GraphRouteStatus=>AdjustmentStack.Graph is not{} graph?"串行处理":!graph.GroupEnabled?"专业组已隐藏":graph.GroupAmount==0?"专业组强度为0":graph.RoutedIds(AdjustmentStack.Nodes).Count==0?"输出缺少完整连接 · 当前显示原图（节点草稿保留）":"路由已连接 · "+graph.RoutedIds(AdjustmentStack.Nodes).Count+"个节点参与输出";
     public bool CommitGraph(StudioNodeGraph graph,bool render=true)
     {
         if(ReadOnlyTarget||AdjustmentNodes.Count==0){StatusText="请先选择可编辑变体并添加调色节点。";return false;}

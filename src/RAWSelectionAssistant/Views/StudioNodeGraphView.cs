@@ -16,6 +16,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
     private StudioNodeGraph before=null!;
     public event Action? LayoutChanged;
     public Func<Guid,ImageSource?>? Thumbnail{get;set;}
+    public Func<Guid,ImageSource?>? MaskThumbnail{get;set;}
     public double Zoom=>zoom;public Point Pan=>pan;
     public StudioNodeGraphView(TetherReferenceModeViewModel value)
     {
@@ -52,14 +53,21 @@ public sealed class StudioNodeGraphView:FrameworkElement
             var n=editor.AdjustmentNodes.FirstOrDefault(n=>n.Id==p.NodeId);bool selected=editor.SelectedAdjustmentNode?.Id==p.NodeId;
             d.PushOpacity(n?.Enabled==false?.45:1);d.DrawRoundedRectangle(Color("#25272A"),new Pen(selected?Brushes.White:Color("#6E9B91"),selected?2:1),new Rect(p.X,p.Y,132,72),3,3);
             var type=p.NodeId==StudioNodeGraph.Source?"输入":p.NodeId==StudioNodeGraph.Output?"输出":n?.Type==ColorStudioNodeType.GraphMix?"⊕ 混合":"◐ 调色";
-            Text(d,type+(n is null?"":" · "+(++index).ToString("00")),new(p.X+6,p.Y+4),10,Color("#9CC4BA"));
-            if(n is not null){var thumb=Thumbnail?.Invoke(n.Id);if(thumb is not null)d.DrawImage(thumb,new Rect(p.X+6,p.Y+25,42,29));else Text(d,"◐",new(p.X+15,p.Y+25),20,Color("#6E9B91"));Text(d,n.IsLocked?"锁定":"",new(p.X+54,p.Y+27),10);Text(d,n.Name,new(p.X+6,p.Y+55));}
+            d.DrawRectangle(n?.Type==ColorStudioNodeType.GraphMix?Color("#BD9C67"):Color("#6E9B91"),null,new Rect(p.X+1,p.Y+1,130,3));
+            if(n is not null)
+            {
+                var pen=new Pen(Color("#9CC4BA"),1.2);if(n.Type==ColorStudioNodeType.GraphMix){d.DrawEllipse(null,pen,new(p.X+10,p.Y+14),4,4);d.DrawEllipse(null,pen,new(p.X+15,p.Y+14),4,4);}
+                else {for(int k=0;k<3;k++){double xx=p.X+7+k*4;d.DrawLine(pen,new(xx,p.Y+8),new(xx,p.Y+19));d.DrawLine(pen,new(xx-2,p.Y+11+k*2),new(xx+2,p.Y+11+k*2));}}
+            }
+            Text(d,(n is null?type:n.Type==ColorStudioNodeType.GraphMix?"混合":"调色")+(n is null?"":" · "+(++index).ToString("00")),new(p.X+(n is null?6:23),p.Y+6),11,Color("#9CC4BA"));
+            if(n is not null){var thumb=Thumbnail?.Invoke(n.Id);if(thumb is not null)d.DrawImage(thumb,new Rect(p.X+6,p.Y+25,46,28));else Text(d,"待渲染",new(p.X+6,p.Y+31),11,Color("#86868C"));if(n.LocalMask is not null&&MaskThumbnail?.Invoke(n.Id) is{} mask)d.DrawImage(mask,new Rect(p.X+57,p.Y+27,24,24));Text(d,n.IsLocked?"锁":!n.Enabled?"旁路":"",new(p.X+91,p.Y+28),11);Text(d,n.Name,new(p.X+6,p.Y+55));}
             else Text(d,type,new(p.X+12,p.Y+32),12);
             if(p.NodeId!=StudioNodeGraph.Source)foreach(var port in InputPorts(p.NodeId)){d.DrawEllipse(Color("#9CC4BA"),new Pen(Color("#17171A"),1),Port(p,false,port),4,4);if(port!="rgb")Text(d,port=="base"?"底":"层",new(p.X+5,p.Y+(port=="base"?13:39)),8);}
             if(p.NodeId!=StudioNodeGraph.Output)d.DrawEllipse(Color("#9CC4BA"),new Pen(Color("#17171A"),1),Port(p,true),4,4);
+            if(selected)d.DrawRoundedRectangle(null,new Pen(Brushes.White,2),new Rect(p.X,p.Y,132,72),3,3);
             d.Pop();
         }
-        d.Pop();
+        d.Pop();if(editor.AdjustmentStack.Graph is not null&&editor.GraphView.RoutedIds(editor.AdjustmentNodes.ToArray()).Count==0)Text(d,"输出未连通 · 显示原图，节点草稿保留",new(8,3),11,Brushes.Orange);
     }
     private static void DrawEdge(DrawingContext d,Point a,Point b,Brush brush)
     {

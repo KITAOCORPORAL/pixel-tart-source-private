@@ -13,11 +13,17 @@ public sealed class LightPrintFrameThumbnail : FrameworkElement
         nameof(Frame), typeof(LightPrintFrame), typeof(LightPrintFrameThumbnail),
         new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
     public LightPrintFrame? Frame { get => (LightPrintFrame?)GetValue(FrameProperty); set => SetValue(FrameProperty, value); }
+    public static readonly DependencyProperty PreviewsProperty=DependencyProperty.Register(nameof(Previews),typeof(IReadOnlyDictionary<string,BitmapSource>),typeof(LightPrintFrameThumbnail),new FrameworkPropertyMetadata(null,FrameworkPropertyMetadataOptions.AffectsRender));
+    public IReadOnlyDictionary<string,BitmapSource>? Previews{get=>(IReadOnlyDictionary<string,BitmapSource>?)GetValue(PreviewsProperty);set=>SetValue(PreviewsProperty,value);}
     private string? loadedFrame;private BitmapSource? loadedArtwork;
     protected override void OnRender(DrawingContext dc)
     {
         base.OnRender(dc);
         if (Frame is not { } frame || ActualWidth <= 0 || ActualHeight <= 0) return;
+        if(Previews?.GetValueOrDefault(frame.Id) is{} actual)
+        {var scale=Math.Min(ActualWidth/actual.PixelWidth,ActualHeight/actual.PixelHeight);dc.DrawImage(actual,new Rect((ActualWidth-actual.PixelWidth*scale)/2,(ActualHeight-actual.PixelHeight*scale)/2,actual.PixelWidth*scale,actual.PixelHeight*scale));return;}
+        if(Previews is not null)
+        {dc.DrawRectangle(new SolidColorBrush(Color.FromRgb(30,31,33)),new Pen(Brushes.DimGray,1),new Rect(1,1,Math.Max(1,ActualWidth-2),Math.Max(1,ActualHeight-2)));var text=new FormattedText("待渲染",System.Globalization.CultureInfo.CurrentUICulture,FlowDirection.LeftToRight,new Typeface("Microsoft YaHei UI"),11,Brushes.Gray,1);dc.DrawText(text,new Point(6,Math.Max(2,(ActualHeight-14)/2)));return;}
         if(frame.Id.StartsWith("orig.",StringComparison.Ordinal))
         {
             try
