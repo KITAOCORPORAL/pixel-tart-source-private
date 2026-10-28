@@ -1,0 +1,22 @@
+{
+  "status": "FAILED_NETWORK_REMOTE_NOT_VERIFIED",
+  "branch": "home/r54-darkroom-20261028",
+  "localCommittedHead": "464052bd0347f01504dcfc5cb66a8ccbb9102e99",
+  "binarySourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+  "attempts": [
+    {
+      "command": "git push -u origin home/r54-darkroom-20261028",
+      "error": "fatal: unable to access origin: Recv failure: Connection was reset"
+    },
+    {
+      "command": "git -c http.version=HTTP/1.1 push -u origin home/r54-darkroom-20261028",
+      "error": "Failed to connect to github.com port 443 after 21110 ms: Could not connect to server"
+    }
+  ],
+  "remoteHead": null,
+  "forcePush": false,
+  "remoteConfigChanged": false,
+  "clientDate": "2026-10-28",
+  "clientZone": "Asia/Shanghai",
+  "note": "Earlier fetch/ls-remote succeeded; final push and final parity did not. Do not call this delivered to remote."
+}
