@@ -1,0 +1,236 @@
+{
+  "productSha": "ae6e83b2b7368d25f64c064b120b2e8a3d9aa965",
+  "assemblyBinding": "PUBLISHED_TEST_BINDING.json",
+  "rawRuns": [
+    {
+      "file": "FINAL-CanvasProductClosureWpfTests.trx",
+      "sha256": "ff4258f600f9c9a924ad03b6ebca8327a373091bf9402974d01796ed2db0f3af",
+      "outcomes": [
+        {
+          "name": "IndependentProcessReopenAndExportPixelsMatch",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "TransparentImportTransformGestureSaveExportAndMissingSource",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BrushCoverageDoesNotAccumulateInsideOneStrokeButSeparateStrokesDo",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "FINAL-ColorToolsFilmWorkflowTests.trx",
+      "sha256": "d4e4816e6347078e1a6b9b42d9ad03d5951a213835be1478585bbdc522fe2dc9",
+      "outcomes": [
+        {
+          "name": "WideToolsMaskUndoVariantResourceDraftFilmAndPublishing",
+          "outcome": "Passed"
+        },
+        {
+          "name": "IndependentProcessWideToolsAndFilmReopen",
+          "outcome": "NotExecuted"
+        }
+      ]
+    },
+    {
+      "file": "FINAL-FullApplicationHostedRailAndMenuOffscreenEvidence.trx",
+      "sha256": "8262b8f225837f2da942b5603f1fa06432bcc2913e2d4de8ac19fb06ffab581c",
+      "outcomes": [
+        {
+          "name": "FullApplicationHostedRailAndMenuOffscreenEvidence",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "FINAL-IndependentProcessReopenAndExportPixelsMatch.trx",
+      "sha256": "81763fcd94c948e0b40c721dd15b27c692cc6f2f3eb3e16da690b788769fc261",
+      "outcomes": [
+        {
+          "name": "IndependentProcessReopenAndExportPixelsMatch",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "FINAL-IndependentProcessWideToolsAndFilmReopen.trx",
+      "sha256": "6ffed1ff97456607aeeb723d839413e50dbcb53868c32716755745690113d128",
+      "outcomes": [
+        {
+          "name": "IndependentProcessWideToolsAndFilmReopen",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "FINAL-InstantPaperGalleryCanUseDecodedRawWithoutChangingSceneOrVariants.trx",
+      "sha256": "fff2f94a14b2b29f8b63fed2b57dbf47b8b5b60a768c999d058b1b7f0e8bda83",
+      "outcomes": [
+        {
+          "name": "InstantPaperGalleryCanUseDecodedRawWithoutChangingSceneOrVariants",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "FINAL-LightPrintR3Tests.trx",
+      "sha256": "4cd3a665848cab32cb340b4767acad5579670557e653d28507bb80c437b31d91",
+      "outcomes": [
+        {
+          "name": "FiveTabsKeepDenseLayoutFiltersAndLockedDraftGuard",
+          "outcome": "Passed"
+        },
+        {
+          "name": "WindowGradeChangesOnlyWindowAndThreeExportsKeepDefinition (&quot;generic.white.circle&quot;)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "WindowGradeChangesOnlyWindowAndThreeExportsKeepDefinition (&quot;generic.white.square&quot;)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ClicksPreviewWithoutHistoryThenDevelopLocksAndReshootKeepsVariant",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CancelAndSwitchNeverPublishObsoleteDraft",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "FINAL-PhotographerTrialPageTests.trx",
+      "sha256": "ee4ece7ff352772a95371705a7ca0ec6ab204fc85e1656118025ca9e7825e4a0",
+      "outcomes": [
+        {
+          "name": "SharedResponseNamesDoNotInventPixelDifferences",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NamesModesPreviewsAndHistoryUseActualProductState",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "FINAL-PlanningOwnedCanvasTests.trx",
+      "sha256": "ce6c6d3d0e41678653516f02e70223100c01ce1a817ccdf635de906d566ab95c",
+      "outcomes": [
+        {
+          "name": "DecoderMovePreservesAllEightCompanyOrientations",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LateExternalCompletionCannotOverwriteOwnedSourceAfterSwitch",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CreateDistinctNativeSyntheticPackages",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DifferentProjectsAndStaleOwnedCardDoNotCrossSourcesOrExpandPackageBoundary",
+          "outcome": "Passed"
+        },
+        {
+          "name": "OwnedReferenceSendSaveReopenCacheDeletionMissingChangedAndRepeatedSend",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "FINAL-R53DarkroomStageATests.trx",
+      "sha256": "b1b970794e111095f1c6175aa2cef8fb3fbb3d7800b1e9c3ff5ab29b93985909",
+      "outcomes": [
+        {
+          "name": "DipBreakpointsAndProfessionalNodeFilmstripOrderAreRealLayout",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ReopenedOriginalRemainsReadOnlyAndF2ChildBecomesEditable",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SamePhotoSimpleProfessionalSaveReopenAndExportShareDefinition",
+          "outcome": "Passed"
+        },
+        {
+          "name": "MainVariantOutputAndDebouncedExistingSessionSaveUseSharedPipeline",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BrushAndCompareShortcutHaveSingleNonConflictingMeaning",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CloseFlushPersistsImmediateEditsAndRejectsConcurrentFileChanges",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LockedNodesBlockParametersNameOrderDeleteButKeepVisibilityUndo",
+          "outcome": "Passed"
+        },
+        {
+          "name": "PersistentSyntheticDarkroomSampleAndOffscreenLayoutEvidence",
+          "outcome": "Passed"
+        },
+        {
+          "name": "WideInspectorReserves420DipAndReleasesItsOwnerSubscription",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LegacySimpleControlsCannotBypassReferenceLocksOrOriginalReadOnly",
+          "outcome": "Passed"
+        },
+        {
+          "name": "OriginalAndMainVariantDeleteConfirmUndoAndIsolationPersist",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "FINAL-R53UiCorrectionTests.trx",
+      "sha256": "c93ec9156a8ae84ac53cb3d7a9398dfbbbcd2bebeabb78eafcf0df06de4fb406",
+      "outcomes": [
+        {
+          "name": "CanvasPropertiesLayersAndBrushUseSingleHost",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FourScreensOffscreenEffectiveDipEvidence",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DarkroomDipRailRecoveryFilmFullHeightAndIndependentCollapse",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "file": "FINAL-WholeAppDiagnosticPackageTests.trx",
+      "sha256": "170459c70b8673261f039ee9215c9fb4f22d27bfeb823515280f6eaddd51174a",
+      "outcomes": [
+        {
+          "name": "SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FullShellKeepsPrimaryNavigationAndContentTemplates",
+          "outcome": "Passed"
+        }
+      ]
+    }
+  ],
+  "unique": {
+    "passed": 36,
+    "failed": 0,
+    "notRun": 0
+  },
+  "notes": "Two independent reopen tests are intentionally NOT_RUN in creation process, then PASS in dedicated processes. Earlier failed/aborted exploratory runs retained outside FINAL scope. No native DPI/mouse claim."
+}
