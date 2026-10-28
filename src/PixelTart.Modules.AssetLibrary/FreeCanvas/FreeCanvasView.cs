@@ -44,6 +44,7 @@ public sealed class FreeCanvasView : UserControl
         SetResourceReference(BackgroundProperty,"Brush.Background");
         var root=new DockPanel();Content=root;
         var bar=new WrapPanel { Margin=new(8,6,8,6) };DockPanel.SetDock(bar,Dock.Top);root.Children.Add(bar);
+        bar.Children.Add(Button("导入图片",()=>_=ImportFilesAsync()));bar.Children.Add(Button("导出透明PNG",ExportTransparent));bar.Children.Add(Button("画布尺寸",CanvasSizeDialog));bar.Children.Add(Button("图层",ShowLayers));bar.Children.Add(Button("画笔",BrushOptions));
         _name.Text=editor.Document.Name;_name.LostKeyboardFocus+=(_,_)=>editor.Rename(_name.Text);bar.Children.Add(_name);
         // Primary actions stay in one compact row; secondary actions live in contextual menus.
         bar.Children.Add(Button("选择",()=>{Surface.Tool="选择";Surface.Focus();}));
@@ -77,7 +78,7 @@ public sealed class FreeCanvasView : UserControl
         Surface.Drop+=(_,e)=>{if(e.Data.GetData("PixelTart.CanvasSources") is CanvasObject[] objects){var point=Surface.ScreenToWorld(e.GetPosition(Surface));editor.Add(objects.Select((item,index)=>item with{X=point.X+index*24,Y=point.Y+index*24}));e.Handled=true;}};
         var stage=new Grid();root.Children.Add(stage);stage.Children.Add(Surface);
         _floatingBorder.SetResourceReference(BackgroundProperty,"Brush.Surface.Elevated");_floatingBorder.SetResourceReference(BorderBrushProperty,"Brush.Border");_floatingBorder.BorderThickness=new(1);_floatingBorder.Child=_floating;stage.Children.Add(_floatingBorder);
-        editor.Changed+=EditorChanged;Surface.ViewChanged+=(_,_)=>UpdateTools();Surface.ContextRequested+=(_,_)=>OpenContextMenu();Surface.TextEditRequested+=(_,_)=>EditText();
+        editor.Changed+=EditorChanged;Surface.ViewChanged+=(_,_)=>{if(Surface.Tool=="画笔")_status.Text=Surface.BrushStatus;UpdateTools();};Surface.ContextRequested+=(_,_)=>OpenContextMenu();Surface.TextEditRequested+=(_,_)=>EditText();
         _saveTimer.Tick+=async(_,_)=>{_saveTimer.Stop();await FlushAsync();};
         Loaded+=async(_,_)=>{Surface.Fit();await Surface.LoadPreviewsAsync();await RefreshSourcesAsync();await FlushAsync();UpdateTools();};
         Unloaded+=async(_,_)=>{_saveTimer.Stop();if(!_discardPending)await FlushAsync();};
@@ -134,12 +135,22 @@ public sealed class FreeCanvasView : UserControl
         void Add(string header, Action action){var item=new MenuItem{Header=header};item.Click+=(_,_)=>action();menu.Items.Add(item);}
         foreach(var zoom in new[]{.5,.75,1d,1.25,1.5,2d}){var value=zoom;Add($"{value:P0}",()=>Surface.SetZoom(value));} menu.IsOpen=true;
     }
+    public async Task ImportFilesAsync(IReadOnlyList<string>? paths=null)
+    {
+        if(paths is null){var dialog=new Microsoft.Win32.OpenFileDialog{Filter="图片|*.png;*.jpg;*.jpeg;*.tif;*.tiff",Multiselect=true};if(dialog.ShowDialog(Window.GetWindow(this))!=true)return;paths=dialog.FileNames;}
+        try{var objects=new List<CanvasObject>();foreach(var path in paths){var item=await CanvasPixelRenderer.ImportAsync(path,Editor.Document,_store.DirectoryPath);objects.Add(item with{X=32+objects.Count*24,Y=32+objects.Count*24});}Editor.Add(objects);await Surface.LoadPreviewsAsync();_status.Text="已导入画布自有副本，原图未修改";}catch(Exception error)when(error is IOException or InvalidDataException or NotSupportedException or ArgumentException or UnauthorizedAccessException){_status.Text="导入未完成："+error.Message;}
+    }
+    public void ExportTransparentTo(string path){CanvasPixelRenderer.ExportPng(Editor.Document,path);_status.Text="透明PNG已导出 · sRGB";}
+    private async void ExportTransparent(){var dialog=new Microsoft.Win32.SaveFileDialog{Filter="透明PNG|*.png",FileName=Editor.Document.Name+".png"};if(dialog.ShowDialog(Window.GetWindow(this))!=true)return;try{if(!await FlushAsync())return;ExportTransparentTo(dialog.FileName);}catch(Exception error)when(error is IOException or InvalidDataException or NotSupportedException or ArgumentException){_status.Text="导出未完成："+error.Message;}}
+    private void CanvasSizeDialog(){var panel=new StackPanel{Margin=new Thickness(16)};var width=new TextBox{Text=Editor.Document.PixelWidth.ToString()};var height=new TextBox{Text=Editor.Document.PixelHeight.ToString()};panel.Children.Add(new TextBlock{Text="导出宽度 px"});panel.Children.Add(width);panel.Children.Add(new TextBlock{Text="导出高度 px"});panel.Children.Add(height);var window=new Window{Title="画布尺寸",Width=280,Height=220,Content=panel,Owner=Window.GetWindow(this)};panel.Children.Add(Button("应用",()=>{if(int.TryParse(width.Text,out var w)&&int.TryParse(height.Text,out var h)){try{Editor.SetCanvasSize(w,h);window.Close();}catch(InvalidDataException error){_status.Text=error.Message;}}}));window.ShowDialog();}
+    private void ShowLayers(){var list=new StackPanel();var window=new Window{Title="图层 · 上方在前",Width=600,Height=480,Content=new ScrollViewer{Content=list},Owner=Window.GetWindow(this)};void Build(){list.Children.Clear();foreach(var item in Editor.Document.Objects.OrderByDescending(o=>o.ZIndex)){var id=item.ObjectId;var row=new WrapPanel();row.Children.Add(Button(item.Name,()=>{Editor.Select(id);Surface.Focus();}));var visibility=Button(item.Hidden?"显示":"隐藏",()=>{Editor.Select(id);Editor.SetVisible(Editor.Document.Objects.Single(o=>o.ObjectId==id).Hidden);Build();});visibility.IsEnabled=!item.Locked;row.Children.Add(visibility);row.Children.Add(Button(item.Locked?"解锁":"锁定",()=>{Editor.Select(id);Editor.SetLocked(!Editor.Document.Objects.Single(o=>o.ObjectId==id).Locked);Build();}));row.Children.Add(Button("↑",()=>{Editor.Select(id);Editor.StepLayer(true);Build();}));row.Children.Add(Button("↓",()=>{Editor.Select(id);Editor.StepLayer(false);Build();}));var opacity=new Slider{Width=80,Minimum=0,Maximum=1,Value=item.Opacity??1,IsEnabled=!item.Locked,ToolTip="图层不透明度"};opacity.PreviewMouseLeftButtonDown+=(_,_)=>{Editor.Select(id);Editor.BeginGesture();};opacity.PreviewMouseLeftButtonUp+=(_,_)=>Editor.EndGesture();opacity.LostMouseCapture+=(_,_)=>Editor.EndGesture();opacity.ValueChanged+=(_,_)=>{Editor.Select(id);Editor.SetOpacity(opacity.Value);};row.Children.Add(opacity);list.Children.Add(row);}}Build();window.Show();}
+    private void BrushOptions(){var panel=new StackPanel{Margin=new Thickness(14)};var color=new TextBox{Text=Surface.BrushColor};panel.Children.Add(new TextBlock{Text="颜色 #RRGGBB"});panel.Children.Add(color);void Slider(string label,double min,double max,double value,Action<double> set){panel.Children.Add(new TextBlock{Text=label});var control=new Slider{Minimum=min,Maximum=max,Value=value};control.ValueChanged+=(_,_)=>set(control.Value);panel.Children.Add(control);}Slider("大小（文档像素）",1,300,Surface.BrushSize,v=>Surface.BrushSize=v);Slider("不透明度",0,1,Surface.BrushOpacity,v=>Surface.BrushOpacity=v);Slider("硬度",0,1,Surface.BrushHardness,v=>Surface.BrushHardness=v);var window=new Window{Title="普通画笔",Width=300,Height=340,Content=panel,Owner=Window.GetWindow(this)};panel.Children.Add(Button("新建画笔层并绘制",()=>{try{_=ColorConverter.ConvertFromString(color.Text);Surface.BrushColor=color.Text;Editor.AddBrushLayer();Surface.Tool="画笔";Surface.Focus();window.Close();}catch(FormatException){_status.Text="请输入#RRGGBB颜色";}}));panel.Children.Add(Button("绘制当前画笔层",()=>{if(Editor.Selected.Count==1&&Editor.Selected[0] is{IsBrush:true,Locked:false}){try{_=ColorConverter.ConvertFromString(color.Text);}catch(FormatException){_status.Text="请输入#RRGGBB颜色";return;}Surface.BrushColor=color.Text;Surface.Tool="画笔";Surface.Focus();window.Close();}else _status.Text="请选择未锁定画笔层";}));window.ShowDialog();}
     private void OpenMoreMenu()
     {
         var anchor=_moreButton; var menu=new ContextMenu{Placement=System.Windows.Controls.Primitives.PlacementMode.Bottom, PlacementTarget=anchor};
         void Add(string header,Action action){var item=new MenuItem{Header=header};item.Click+=(_,_)=>action();menu.Items.Add(item);}
         Add("查看预览问题详情",()=>MessageBox.Show(Window.GetWindow(this),Surface.SourceErrors.Count==0?"没有预览问题。":string.Join("\n\n",Surface.SourceErrors.Select(x=>x.Key+"\n"+x.Value)),"预览详情",MessageBoxButton.OK,MessageBoxImage.Information));
-        Add("重新定位选中素材",async ()=>{if(Editor.Selected.FirstOrDefault(x=>x.IsImage) is {} item && RelocateAsset is not null){await RelocateAsset(item);await Surface.LoadPreviewsAsync();}});
+        Add("重新定位选中素材",async ()=>{if(Editor.Selected.FirstOrDefault(x=>x.IsImage) is not{} item)return;if(item.AssetId is not null&&RelocateAsset is not null)await RelocateAsset(item);else{var picker=new Microsoft.Win32.OpenFileDialog{Filter="原素材副本|*.png;*.jpg;*.jpeg;*.tif;*.tiff"};if(picker.ShowDialog(Window.GetWindow(this))!=true)return;try{var hash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(picker.FileName)));if(!hash.Equals(item.ContentHash,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("文件哈希与原素材不一致，未替换。");var copy=await RAWSelectionAssistant.Core.Services.Projects.PlanningProjectCopyStorage.ImportCanvasAsync(_store.DirectoryPath,Editor.Document.CanvasId,Guid.NewGuid(),picker.FileName);Editor.ReplaceSource(item with{PlanningSource=CanvasPlanningSource.From(copy),SourcePath=""});}catch(Exception error)when(error is IOException or InvalidDataException){_status.Text="恢复未完成："+error.Message;}}await Surface.LoadPreviewsAsync();});
         Add("新建画布",async ()=>{if(await PrepareDocumentChangeAsync() && OpenDocument is not null)await OpenDocument(new CanvasDocument());});
         Add("打开画布…",()=>_=OpenSavedAsync()); Add("关闭画布",()=>_=CloseAsync());
         AddMenuAction(menu,"保存到灵感板",()=>_=SaveBoardAsync(false),SaveBoard is not null && Editor.Document.Objects.Any(item=>item.IsImage)); menu.IsOpen=true;
@@ -191,8 +202,10 @@ public sealed class FreeCanvasView : UserControl
         if(objects.Length==0||SaveBoard is null)return;
         try{await SaveBoard(objects,board);_status.Text="已加入灵感板 · 保留素材引用";}catch(Exception exception)when(exception is IOException or InvalidOperationException or ArgumentException){_status.Text=$"未能加入灵感板：{exception.Message}";}
     }
+    private bool opacityDragging;
     private void UpdateTools()
     {
+        if(opacityDragging)return;
         _undoButton.IsEnabled=Editor.CanUndo; _redoButton.IsEnabled=Editor.CanRedo;
         _zoomButton.Content=$"视图 · {Surface.Zoom:P0} ▾";_floating.Children.Clear();_floatingBorder.Visibility=Editor.Selected.Count==0?Visibility.Collapsed:Visibility.Visible;
         if(Editor.Selected.Count==0)return;
@@ -209,7 +222,7 @@ public sealed class FreeCanvasView : UserControl
         }
 
 
-        var opacity=new Slider{Minimum=0,Maximum=1,Value=Editor.Selected.FirstOrDefault()?.Opacity??1,Width=75,IsEnabled=Editor.Selected.All(x=>!x.Locked),ToolTip="对象透明度"};opacity.ValueChanged+=(_,_)=>Editor.SetOpacity(opacity.Value);_floating.Children.Add(opacity);
+        var opacity=new Slider{Minimum=0,Maximum=1,Value=Editor.Selected.FirstOrDefault()?.Opacity??1,Width=75,IsEnabled=Editor.Selected.All(x=>!x.Locked),ToolTip="对象透明度"};opacity.PreviewMouseLeftButtonDown+=(_,_)=>{opacityDragging=true;Editor.BeginGesture();};opacity.PreviewMouseLeftButtonUp+=(_,_)=>{Editor.EndGesture();opacityDragging=false;UpdateTools();};opacity.LostMouseCapture+=(_,_)=>{Editor.EndGesture();opacityDragging=false;UpdateTools();};opacity.ValueChanged+=(_,_)=>Editor.SetOpacity(opacity.Value);_floating.Children.Add(opacity);
         _floating.Children.Add(Button(Editor.Selected.All(x=>x.Hidden)?"显示":"隐藏",()=>Editor.SetVisible(Editor.Selected.All(x=>x.Hidden))));
         _floating.Children.Add(Button(Editor.Selected.All(item=>item.Locked)?"解锁":"锁定",()=>Editor.SetLocked(!Editor.Selected.All(item=>item.Locked))));
         if(Editor.Selected.Count>1)_floating.Children.Add(Button("移出画布",Editor.Remove));

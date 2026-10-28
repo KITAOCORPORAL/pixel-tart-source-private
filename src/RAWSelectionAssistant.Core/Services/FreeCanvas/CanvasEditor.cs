@@ -39,7 +39,7 @@ public sealed class CanvasEditor
         var start = Document.Objects.Select(item => item.ZIndex).DefaultIfEmpty(-1).Max() + 1;
         var added = objects.Select((item, index) => item with { CanvasId = Document.CanvasId, ObjectId = Guid.NewGuid(), ZIndex = start + index }).ToArray();
         if (added.Length == 0) return;
-        Commit(Document with { Objects = Document.Objects.Concat(added).ToArray() });
+        Commit(Document with { Objects = Document.Objects.Concat(added).ToArray(),SchemaVersion=added.Any(o=>o.IsBrush)?2:Document.SchemaVersion });
         Selection.Clear(); Selection.UnionWith(added.Select(item => item.ObjectId)); Changed?.Invoke(this, EventArgs.Empty);
     }
     public void AddText(double x, double y, string text = "输入文字") => Add([new() { X = x, Y = y, Width = 300, Height = 80, Text = text, Name = "文字" }]);
@@ -191,6 +191,11 @@ public sealed class CanvasEditor
         }
         Commit(Document with { Objects = Document.Objects.Select(item => updates.GetValueOrDefault(item.ObjectId, item)).ToArray() });
     }
+    public void Resize(double width,double height){if(!double.IsFinite(width+height)||width<=0||height<=0)return;var bounds=Bounds();if(Selected.Any(item=>!Editable(item)))return;double sx=width/bounds.Width,sy=height/bounds.Height;Transform(item=>item with{X=bounds.X+(item.X-bounds.X)*sx,Y=bounds.Y+(item.Y-bounds.Y)*sy,Width=Math.Max(1,item.Width*sx),Height=Math.Max(1,item.Height*sy)});}
+    public void SetCanvasSize(int width,int height)=>Commit(Document with{PixelWidth=width,PixelHeight=height});
+    public void AddBrushLayer()=>Add([new(){Name="画笔层",Width=Document.PixelWidth,Height=Document.PixelHeight,SourceWidth=Document.PixelWidth,SourceHeight=Document.PixelHeight,BrushStrokes=[]}]);
+    public void AddBrushStroke(CanvasBrushStroke stroke){var frozen=stroke.Freeze();if(Selected.Count!=1||Selected[0] is not{IsBrush:true,Locked:false,Hidden:false} layer)throw new InvalidOperationException("请选择未锁定的画笔层。");if(layer.BrushStrokes!.Count>=2000||layer.BrushStrokes.Sum(s=>s.Points.Count)+frozen.Points.Count>100000)throw new InvalidDataException("画笔层达到笔迹/点数限制，本笔未提交。");Transform(item=>item with{BrushStrokes=item.BrushStrokes!.Append(frozen).ToArray()});}
+    public void ReplaceSource(CanvasObject replacement){var old=Document.Objects.SingleOrDefault(o=>o.ObjectId==replacement.ObjectId);if(old is null)return;if(!old.IsImage||old.ContentHash!=replacement.ContentHash)throw new InvalidDataException("恢复素材必须与原哈希一致。");Commit(Document with{Objects=Document.Objects.Select(o=>o.ObjectId==replacement.ObjectId?replacement:o).ToArray()});}
     public void SetProject(Guid? id) => Commit(Document with { ProjectId = id });
     public void Rename(string name) { if (!string.IsNullOrWhiteSpace(name)) Commit(Document with { Name = name.Trim() }); }
     public void Undo() { if (_undo.TryPop(out var before)) { _redo.Push(Document); Document = before; Selection.IntersectWith(Document.Objects.Select(item => item.ObjectId)); Changed?.Invoke(this, EventArgs.Empty); } }

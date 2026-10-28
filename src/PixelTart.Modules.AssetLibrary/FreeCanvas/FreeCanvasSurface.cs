@@ -46,6 +46,8 @@ public sealed class FreeCanvasSurface : FrameworkElement
         SizeChanged += (_, _) => { if (_isFit) Fit(_fitSelection); else InvalidateVisual(); };
     }
     public CanvasEditor Editor { get; }
+    public string BrushStatus{get;private set;}="每笔一次最大覆盖；不同笔迹按source-over叠加";
+    public string BrushColor{get;set;}="#E94656";public double BrushSize{get;set;}=24;public double BrushOpacity{get;set;}=.8;public double BrushHardness{get;set;}=.8;private readonly List<CanvasBrushPoint> brushPoints=[];private Guid? brushLayer;
     public string Tool { get; set; } = "选择";
     public bool CropMode { get; private set; }
     public CanvasCrop PendingCrop { get; set; } = new();
@@ -93,7 +95,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
                 try
                 {
                     var copy=owned.Bind();
-                    OwnedDecodeCount++;var bitmap=await Task.Run(()=>OwnedPlanningReferenceImage.ReadBounded(copy,copy.ProjectId,copy.DocumentId,copy.ReferenceId,1024,token),token);
+                    OwnedDecodeCount++;var bitmap=await Task.Run(()=>CanvasPixelRenderer.ReadSource(item,token,1024),token);
                     if(generation!=_previewGeneration||!ReferenceEquals(snapshot,Editor.Document))continue;
                     _images[item.ObjectId]=bitmap;_sourceErrors.Remove(item.ObjectId);TrimPreviews(item.ObjectId);
                 }
@@ -102,6 +104,8 @@ public sealed class FreeCanvasSurface : FrameworkElement
                 {if(generation==_previewGeneration&&ReferenceEquals(snapshot,Editor.Document)){_images.Remove(item.ObjectId);_widths.Remove(item.ObjectId);_sourceErrors[item.ObjectId]="项目自有副本不可用："+e.Message+"（未回退原外链/缓存）";new RAWSelectionAssistant.Core.Services.FileLogService().Error("画布自有副本预览失败 "+item.ObjectId,e);}}
                 continue;
             }
+            if(item.LibraryId==Guid.Empty&&item.AssetId is null&&!string.IsNullOrEmpty(item.ContentHash))
+            {if(!revalidate&&_images.ContainsKey(item.ObjectId))continue;try{var bitmap=await Task.Run(()=>CanvasPixelRenderer.ReadSource(item,token),token);if(generation==_previewGeneration&&ReferenceEquals(document,Editor.Document)){_images[item.ObjectId]=bitmap;_sourceErrors.Remove(item.ObjectId);}}catch(Exception error)when(error is IOException or InvalidDataException or NotSupportedException){_images.Remove(item.ObjectId);_sourceErrors[item.ObjectId]=error.Message;}continue;}
             var requested = (int)Math.Clamp(Math.Ceiling(item.Width * _zoom / item.CropRect.Width / 256) * 256, 256, 4096);
             if (_loading.Contains((item.ObjectId,generation)) || _widths.GetValueOrDefault(item.ObjectId) >= requested) continue;
             _loading.Add((item.ObjectId,generation));
@@ -144,11 +148,13 @@ public sealed class FreeCanvasSurface : FrameworkElement
         var accent = Brush("Brush.Accent", Colors.Turquoise);
         dc.DrawRectangle(Brush("Brush.Background", Color.FromRgb(20,23,27)), null, new Rect(RenderSize));
         dc.PushTransform(new TranslateTransform(_pan.X, _pan.Y)); dc.PushTransform(new ScaleTransform(_zoom,_zoom));
+        dc.DrawRectangle(new SolidColorBrush(Color.FromRgb(34,37,41)),new Pen(Brushes.Gray,1/_zoom),new Rect(0,0,Editor.Document.PixelWidth,Editor.Document.PixelHeight));
         foreach (var item in Editor.Document.Objects.Where(item=>!item.Hidden).OrderBy(item => item.ZIndex))
         {
             dc.PushTransform(new RotateTransform(item.Rotation, item.X+item.Width/2,item.Y+item.Height/2));
             var rect = DisplayRect(item);dc.PushOpacity(item.Opacity??1);
-            if (item.IsText)
+            if(item.IsBrush){var brushItem=item;if(_gesture=="brush"&&brushLayer==item.ObjectId&&brushPoints.Count>0)brushItem=item with{BrushStrokes=item.BrushStrokes!.Append(new CanvasBrushStroke(brushPoints.ToArray(),BrushColor,BrushSize,BrushOpacity,BrushHardness)).ToArray()};CanvasPixelRenderer.DrawBrush(dc,brushItem);}
+            else if (item.IsText)
             {
                 Brush textBrush; try { textBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(item.TextColor)); } catch { textBrush = Brushes.White; }
                 var text = new FormattedText(item.Text ?? "",CultureInfo.CurrentUICulture,FlowDirection.LeftToRight,new Typeface("Microsoft YaHei UI"),item.FontSize,textBrush,VisualTreeHelper.GetDpi(this).PixelsPerDip) { MaxTextWidth=item.Width,MaxTextHeight=item.Height };
@@ -224,14 +230,15 @@ public sealed class FreeCanvasSurface : FrameworkElement
         if (e.ChangedButton==MouseButton.Right) { var hit=Hit(world); if(hit is not null&&!Editor.Selection.Contains(hit.ObjectId)) Editor.Select(hit.ObjectId); ContextRequested?.Invoke(this,EventArgs.Empty); e.Handled=true; return; }
         if(e.ChangedButton!=MouseButton.Left)return;
         if(_space||Tool=="移动画布") _gesture="pan";
+        else if(Tool=="画笔") {if(Editor.Selected.Count!=1||Editor.Selected[0] is not{IsBrush:true,Locked:false,Hidden:false} layer){BrushStatus="请选择可见且未锁定的画笔层";ViewChanged?.Invoke(this,EventArgs.Empty);return;}if(layer.BrushStrokes!.Count>=2000||layer.BrushStrokes.Sum(s=>s.Points.Count)>=100000){BrushStatus="画笔层达到2,000笔/100,000点限制";ViewChanged?.Invoke(this,EventArgs.Empty);return;}brushLayer=layer.ObjectId;brushPoints.Clear();brushPoints.Add(BrushPoint(layer,world));_gesture="brush";}
         else if(Tool=="文本") { Editor.AddText(world.X,world.Y); Tool="选择"; TextEditRequested?.Invoke(this,EventArgs.Empty); e.Handled=true; return; }
         else if(CropMode) _gesture="crop";
         else
         {
             var b=Editor.Bounds();
             var corners=Corners(b);var cornerIndex=Array.FindIndex(corners,corner=>(world-corner).Length<12/_zoom);
-            if(Editor.Selected.Count>0&&cornerIndex>=0){_gesture="resize";_resizeAnchor=corners[3-cornerIndex];_resizeVector=corners[cornerIndex]-_resizeAnchor;}
-            else if(Editor.Selected.Count>0&&(world-new Point(b.X+b.Width/2,b.Y-24/_zoom)).Length<12/_zoom) _gesture="rotate";
+            if(Editor.Selected.Count>0&&Editor.Selected.All(o=>!o.Locked)&&cornerIndex>=0){_gesture="resize";_resizeAnchor=corners[3-cornerIndex];_resizeVector=corners[cornerIndex]-_resizeAnchor;}
+            else if(Editor.Selected.Count>0&&Editor.Selected.All(o=>!o.Locked)&&(world-new Point(b.X+b.Width/2,b.Y-24/_zoom)).Length<12/_zoom) _gesture="rotate";
             else if(Hit(world) is { } hit)
             {
                 if(e.ClickCount==2) { Editor.Select(hit.ObjectId);if(hit.IsText)TextEditRequested?.Invoke(this,EventArgs.Empty);else BeginCrop();e.Handled=true;return; }
@@ -240,7 +247,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
             }
             else { if((Keyboard.Modifiers&ModifierKeys.Shift)==0)Editor.Select(null);_gesture="marquee"; }
         }
-        _rotationTotal=0;_rotationApplied=0;Editor.BeginGesture(); CaptureMouse(); e.Handled=true;
+        _rotationTotal=0;_rotationApplied=0;if(_gesture!="brush")Editor.BeginGesture(); CaptureMouse(); e.Handled=true;
     }
     protected override void OnMouseMove(MouseEventArgs e)
     {
@@ -248,9 +255,10 @@ public sealed class FreeCanvasSurface : FrameworkElement
         var screen=e.GetPosition(this); var world=ScreenToWorld(screen); var delta=(screen-_last)/_zoom;
         switch(_gesture)
         {
+            case "brush":if(Editor.Selected.FirstOrDefault(o=>o.ObjectId==brushLayer) is not{Locked:false,Hidden:false} layer){brushPoints.Clear();_gesture=null;ReleaseMouseCapture();break;}if(brushPoints.Count>=20000||layer.BrushStrokes!.Sum(s=>s.Points.Count)+brushPoints.Count>=100000){BrushStatus="本笔达到20,000点，请松开后继续。";ViewChanged?.Invoke(this,EventArgs.Empty);break;}brushPoints.Add(BrushPoint(layer,world));break;
             case "pan": _isFit=false; _pan+=screen-_last; ViewChanged?.Invoke(this,EventArgs.Empty);break;
             case "move":Editor.Move(delta.X,delta.Y);break;
-            case "resize":var vector=world-_resizeAnchor;var factor=Math.Max(.02,Vector.Multiply(vector,_resizeVector)/Math.Max(1,_resizeVector.LengthSquared));Editor.Scale(factor,_resizeAnchor.X,_resizeAnchor.Y);_resizeVector*=factor;break;
+            case "resize":if((Keyboard.Modifiers&ModifierKeys.Alt)!=0){var resizeBounds=Editor.Bounds();var vectorFree=world-_resizeAnchor;double sx=Math.Max(.02,Math.Abs(vectorFree.X)/Math.Max(1,Math.Abs(_resizeVector.X))),sy=Math.Max(.02,Math.Abs(vectorFree.Y)/Math.Max(1,Math.Abs(_resizeVector.Y)));Editor.Resize(resizeBounds.Width*sx,resizeBounds.Height*sy);_resizeVector=vectorFree;break;}var vector=world-_resizeAnchor;var factor=Math.Max(.02,Vector.Multiply(vector,_resizeVector)/Math.Max(1,_resizeVector.LengthSquared));Editor.Scale(factor,_resizeAnchor.X,_resizeAnchor.Y);_resizeVector*=factor;break;
             case "rotate":var bounds=Editor.Bounds();var center=WorldToScreen(new(bounds.X+bounds.Width/2,bounds.Y+bounds.Height/2));var from=_last-center;var to=screen-center;_rotationTotal+=Vector.AngleBetween(from,to);var target=(Keyboard.Modifiers&ModifierKeys.Shift)!=0?Math.Round(_rotationTotal/15)*15:_rotationTotal;Editor.Rotate(target-_rotationApplied);_rotationApplied=target;break;
             case "marquee":_marquee=new(Math.Min(_start.X,world.X),Math.Min(_start.Y,world.Y),Math.Abs(_start.X-world.X),Math.Abs(_start.Y-world.Y));break;
             case "crop": if(Editor.Selected.FirstOrDefault() is { } item){var start=CropPoint(item,_start);var end=CropPoint(item,world);PendingCrop=new CanvasCrop(Math.Min(start.X,end.X),Math.Min(start.Y,end.Y),Math.Abs(start.X-end.X),Math.Abs(start.Y-end.Y)).Normalize();}break;
@@ -260,10 +268,11 @@ public sealed class FreeCanvasSurface : FrameworkElement
     protected override void OnMouseUp(MouseButtonEventArgs e)
     {
         base.OnMouseUp(e); if(!IsMouseCaptured)return;
+        if(_gesture=="brush"&&brushPoints.Count>0&&Editor.Selected.FirstOrDefault(o=>o.ObjectId==brushLayer) is{Locked:false,Hidden:false}){try{Editor.AddBrushStroke(new(brushPoints.ToArray(),BrushColor,BrushSize,BrushOpacity,BrushHardness));}catch(Exception error)when(error is InvalidDataException or InvalidOperationException){BrushStatus=error.Message;ViewChanged?.Invoke(this,EventArgs.Empty);}finally{brushPoints.Clear();}}
         if(_marquee is { } rect)Editor.Marquee(rect,(Keyboard.Modifiers&ModifierKeys.Shift)!=0);
         _marquee=null;_gesture=null;ReleaseMouseCapture();Editor.EndGesture();InvalidateVisual();SchedulePreviews();e.Handled=true;
     }
-    protected override void OnLostMouseCapture(MouseEventArgs e) { base.OnLostMouseCapture(e);_gesture=null;_marquee=null;Editor.EndGesture(); }
+    protected override void OnLostMouseCapture(MouseEventArgs e) { base.OnLostMouseCapture(e);bool wasBrush=_gesture=="brush";brushPoints.Clear();_gesture=null;_marquee=null;if(!wasBrush)Editor.EndGesture(); }
     protected override void OnMouseWheel(MouseWheelEventArgs e)
     {
         _isFit=false; var p=e.GetPosition(this);var world=ScreenToWorld(p);_zoom=Math.Clamp(_zoom*Math.Pow(1.12,e.Delta/120d),.03,8);_pan=new(p.X-world.X*_zoom,p.Y-world.Y*_zoom);InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);SchedulePreviews();e.Handled=true;
@@ -304,6 +313,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
     }
     public void ActualSize() { _isFit=false; _zoom=1;InvalidateVisual();ViewChanged?.Invoke(this,EventArgs.Empty);SchedulePreviews(); }
     public void SetZoom(double zoom) { if(!double.IsFinite(zoom)) return; _isFit=false; _zoom=Math.Clamp(zoom,.03,8); InvalidateVisual(); ViewChanged?.Invoke(this,EventArgs.Empty); SchedulePreviews(); }
+    private static CanvasBrushPoint BrushPoint(CanvasObject layer,Point world){var center=new Point(layer.X+layer.Width/2,layer.Y+layer.Height/2);var angle=-layer.Rotation*Math.PI/180;double dx=world.X-center.X,dy=world.Y-center.Y;return new(Math.Clamp((dx*Math.Cos(angle)-dy*Math.Sin(angle)+layer.Width/2)/layer.Width,0,1),Math.Clamp((dx*Math.Sin(angle)+dy*Math.Cos(angle)+layer.Height/2)/layer.Height,0,1));}
     public void BeginCrop() { if(Editor.Selected.Count!=1||Editor.Selected[0].Locked||!Editor.Selected[0].IsImage)return;CropMode=true;PendingCrop=Editor.Selected[0].CropRect;ViewChanged?.Invoke(this,EventArgs.Empty);InvalidateVisual(); }
     public void FinishCrop(bool apply) { if(!CropMode)return;if(apply)Editor.Crop(PendingCrop);CropMode=false;ViewChanged?.Invoke(this,EventArgs.Empty);InvalidateVisual(); }
     protected override void OnKeyUp(KeyEventArgs e) { base.OnKeyUp(e);if(e.Key==Key.Space)_space=false; }
@@ -318,7 +328,7 @@ public sealed class FreeCanvasSurface : FrameworkElement
         if(CropMode&&(e.Key is Key.Enter or Key.Escape)){FinishCrop(e.Key==Key.Enter);e.Handled=true;return;}
         if(e.Key==Key.Space){_space=true;e.Handled=true;return;}
         if(ctrl)switch(e.Key){case Key.A:Editor.SelectAll();break;case Key.C:Editor.Copy();break;case Key.V:Editor.Paste();break;case Key.D:Editor.Duplicate();break;case Key.G:if(shift)Editor.Ungroup();else Editor.Group();break;case Key.Z:if(shift)Editor.Redo();else Editor.Undo();break;case Key.Y:Editor.Redo();break;default:return;}
-        else switch(e.Key){case Key.Delete:case Key.Back:Editor.Remove();break;case Key.Left:Editor.Move(shift?-10:-1,0);break;case Key.Right:Editor.Move(shift?10:1,0);break;case Key.Up:Editor.Move(0,shift?-10:-1);break;case Key.Down:Editor.Move(0,shift?10:1);break;case Key.Escape:Editor.EndGesture(true);Editor.Select(null);break;default:return;}
+        else switch(e.Key){case Key.Delete:case Key.Back:Editor.Remove();break;case Key.Left:Editor.Move(shift?-10:-1,0);break;case Key.Right:Editor.Move(shift?10:1,0);break;case Key.Up:Editor.Move(0,shift?-10:-1);break;case Key.Down:Editor.Move(0,shift?10:1);break;case Key.Escape:brushPoints.Clear();_gesture=null;Editor.EndGesture(true);if(IsMouseCaptured)ReleaseMouseCapture();Editor.Select(null);break;default:return;}
         e.Handled=true;
     }
 }

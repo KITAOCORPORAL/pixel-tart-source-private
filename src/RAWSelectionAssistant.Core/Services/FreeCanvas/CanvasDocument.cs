@@ -7,6 +7,10 @@ public sealed record CanvasCrop(double X = 0, double Y = 0, double Width = 1, do
     public CanvasCrop Normalize() => new(Math.Clamp(X, 0, .99), Math.Clamp(Y, 0, .99), Math.Clamp(Width, .01, 1 - Math.Clamp(X, 0, .99)), Math.Clamp(Height, .01, 1 - Math.Clamp(Y, 0, .99)));
 }
 
+public sealed record CanvasBrushPoint(double X,double Y);
+public sealed record CanvasBrushStroke(IReadOnlyList<CanvasBrushPoint> Points,string Color,double Size,double Opacity,double Hardness,int Version=1)
+{public CanvasBrushStroke Freeze(){if(Version!=1||Points is null||Points.Count is <1 or >20000||Points.Any(p=>!double.IsFinite(p.X+p.Y)||p.X<0||p.X>1||p.Y<0||p.Y>1)||!double.IsFinite(Size+Opacity+Hardness)||Size<=0||Size>4096||Opacity<0||Opacity>1||Hardness<0||Hardness>1||Color is null||Color.Length!=7||Color[0]!='#'||!uint.TryParse(Color[1..],System.Globalization.NumberStyles.HexNumber,null,out _))throw new InvalidDataException("画笔笔迹数据无效或超限。");return this with{Points=Points.Select(p=>p with{}).ToArray()};}}
+
 public sealed record CanvasObject
 {
     public Guid ObjectId { get; init; } = Guid.NewGuid();
@@ -37,9 +41,11 @@ public sealed record CanvasObject
     public string TextColor { get; init; } = "#E6E9ED";
     public CanvasPalette? Palette { get; init; }
     public bool Monochrome { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]public IReadOnlyList<CanvasBrushStroke>? BrushStrokes{get;init;}
+    public bool IsBrush=>BrushStrokes is not null;
     public bool IsText => Text is not null;
     public bool IsPalette => Palette is not null;
-    public bool IsImage => !IsText && !IsPalette;
+    public bool IsImage => !IsText && !IsPalette && !IsBrush;
 }
 
 public sealed record CanvasPalette(
@@ -52,6 +58,8 @@ public sealed record CanvasPaletteColor(string Hex, double Hue, double Saturatio
 public sealed record CanvasDocument
 {
     [System.Text.Json.Serialization.JsonIgnore] public string? StorageRoot {get;init;}
+    public int PixelWidth{get;init;}=1920;
+    public int PixelHeight{get;init;}=1080;
     public int SchemaVersion { get; init; } = 1;
     public Guid CanvasId { get; init; } = Guid.NewGuid();
     public string Name { get; init; } = "自由画布";
@@ -101,7 +109,10 @@ public sealed class CanvasDocumentStore(string directory)
     }
     public static void Validate(CanvasDocument document)
     {
-        if (document.SchemaVersion != 1 || document.CanvasId == Guid.Empty || document.Objects.Count > 10000 || document.Objects.Select(item => item.ObjectId).Distinct().Count() != document.Objects.Count) throw new InvalidDataException("画布数据无效。");
+        if(document.PixelWidth<1||document.PixelHeight<1||document.PixelWidth>16384||document.PixelHeight>16384||(long)document.PixelWidth*document.PixelHeight>64000000)throw new InvalidDataException("画布尺寸超出范围（最长边16384/6400万像素）。");
+        if(document.SchemaVersion==1&&document.Objects.Any(o=>o.IsBrush))throw new InvalidDataException("画笔层需要画布文档版本2。");
+        foreach(var brush in document.Objects.Where(o=>o.IsBrush)){if(brush.BrushStrokes!.Count>2000||brush.BrushStrokes.Sum(s=>s.Points.Count)>100000)throw new InvalidDataException("画笔层超出笔迹限制。");foreach(var stroke in brush.BrushStrokes)stroke.Freeze();}
+        if (document.SchemaVersion is not(1 or 2) || document.CanvasId == Guid.Empty || document.Objects.Count > 10000 || document.Objects.Select(item => item.ObjectId).Distinct().Count() != document.Objects.Count) throw new InvalidDataException("画布数据无效。");
         foreach(var item in document.Objects.Where(x=>x.PlanningSource is not null))
         {
             item.PlanningSource!.Validate();

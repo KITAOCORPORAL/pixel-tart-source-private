@@ -515,7 +515,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         if (nodeType is ColorStudioNodeType.ReferenceMatch or ColorStudioNodeType.Film && AdjustmentStack.Nodes.Any(node => node.Type == nodeType)) return;
         if (nodeType == ColorStudioNodeType.ReferenceMatch && SelectedLook is null) return;
         var node = new ColorAdjustmentStackNode(Guid.NewGuid(), nodeType, nodeType switch { ColorStudioNodeType.BasicTone => "基础调色", ColorStudioNodeType.WhiteBalance => "白平衡", ColorStudioNodeType.Curve => "曲线", ColorStudioNodeType.ReferenceMatch => "参考仿色", ColorStudioNodeType.Film => "胶片", ColorStudioNodeType.TransitionBlend => "色彩过渡", _ => "颜色范围" }, true, FilmSettings: nodeType == ColorStudioNodeType.Film ? FilmSettings : null);
-        if(LinearDocumentEditing&&(nodeType is ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.BasicTone))node=node with{WideToolVersion=1};
+        if(LinearDocumentEditing&&(nodeType is ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.BasicTone))node=node with{WideToolVersion=2};
         if (nodeType == ColorStudioNodeType.ColorRange) node = node with { NumericParameters = new Dictionary<string, double> { ["range_version"] = 2 } };
         ChangeStack(nodes => [.. nodes, node], processingVersion: nodeType == ColorStudioNodeType.ColorRange ? 2 : null); if(AdjustmentStack.Nodes.All(n=>n.Id!=node.Id))return;_selectedAdjustmentNodeId = node.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
     }

@@ -1,0 +1,4 @@
+# RAW前端下一项（未实施）
+当前实际截断：LibRaw dcraw_process的scale_colors/白平衡缩放可clip；convert_to_rgb_loop将浮点矩阵结果(int)后CLIP至ushort；MakeDcrawMemoryImage OutputBps16输出再归一float。RawWideOutputV1只转换已存在master，不恢复此处丢失。
+可行接口：沿ProfessionalLibRawAdapter在unpack后只读观测rawdata/黑白位；若要浮点前端，需显式新decoder contract，在demosaic后/convert_to_rgb前获取未截断buffer或受控构建LibRaw自有float输出，分别冻结WB/相机矩阵/色空间/裁切域。不能从最终RGB16倒推负值或饱和信号。
+兼容代价：新原生artifact与许可证/ABI/hash门禁，camera+demosaic路径验证、内存预算、取消、相机WB只应用一次、版本/DecodeKey/导出golden新旧并存。X-Trans和X-T5内存准入独立任务，不为此删guard。C1Session/TIFF/实验继续NOT_RUN，不拟合LUT。

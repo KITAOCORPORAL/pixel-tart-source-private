@@ -30,7 +30,7 @@ public sealed partial class TetherReferenceModeViewModel
         if (Math.Abs(ToolValue(parameter) - value) < 1e-10) return;
         var node = ToolNode(parameter.NodeType) ?? new ColorAdjustmentStackNode(Guid.NewGuid(), parameter.NodeType, ToolName(parameter.NodeType));
         if (ReadOnlyTarget || node.IsLocked) { StatusText = "原始变体或图层已锁定，未修改参数。"; return; }
-        var changed = node with { WideToolVersion=LinearDocumentEditing?1:node.WideToolVersion, NumericParameters = new Dictionary<string, double>(node.NumericParameters) { [parameter.Key] = value } };
+        var changed = node with { WideToolVersion=LinearDocumentEditing?(node.WideToolVersion>0?node.WideToolVersion:parameter.Key=="exposure"?0:2):node.WideToolVersion, NumericParameters = new Dictionary<string, double>(node.NumericParameters) { [parameter.Key] = value } };
         if(LinearDocumentEditing){if(!LinearWideToolsV1.Supported(changed)){StatusText="此线性工作域暂不支持此项，原调整保留。";return;}new LinearWideToolsV1.Prepared(changed);}else ColorStudioToolProcessor.Validate(changed);
         Enabled = true;
         ChangeStack(nodes => nodes.Any(n => n.Id == node.Id)

@@ -89,6 +89,7 @@ public static class PlanningProjectCopyStorage
         catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
         { return "项目自有副本不可用：" + error.Message + "（未回退外链）"; }
     }
+    public static Task<PlanningProjectCopy> ImportCanvasAsync(string root,Guid canvas,Guid reference,string source,CancellationToken token=default)=>CopyAsync(root,canvas,canvas,reference,"reference",source,new List<string>(),token);
     internal static async Task<PlanningProjectCopy> CopyAsync(string root, Guid project, Guid document, Guid reference, string kind, string source,
         ICollection<string> created, CancellationToken token, IProgress<long>? progress = null, string? recordedOriginal = null)
     {

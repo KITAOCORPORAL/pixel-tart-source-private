@@ -1,5 +1,16 @@
 # 光镜开发交接入口
 
+## 画布首闭环＋影调收尾（2026-10-28 America/New_York）
+- 同树E:/Kitao-Worktrees/r53-color-tools-film-20261028/同分支company/r53-color-tools-film-20261028接续8816b5f2；fetch无新增。当前权威docs/validation/r53-canvas-tone-closure-20261028/FINAL_REPORT.md、TEST_SUMMARY、TONE_FINDINGS、CANVAS_CONTRACT。
+- 调色只修具体缺口：实际native执行darktable/RawTherapee固定tone-stage函数，保留域/曲线差异/NaN；不是完整双相机引擎科学批准。V1极端组合灰反转、warm方向问题新增WideToolVersion2，旧V1原结果/继续编辑不变，新工具或颜色管理“另建新版线性工具变体”显式使用V2。高光阴影不叫前端恢复。
+- 强WB/影调、细硬mask、多节点、旋转拉直、源高频边界快速预览保守回退精细，原预算不改。RawWide仍defaultoff，XTrans/内存guard未动；RAW_FRONTEND_NEXT.md明确scale_colors/convert_to_rgb uint16clip与可行接口/版本代价。C1仍NOT_RUN，无LUT。
+- CanvasDocument/CanvasObject/CanvasEditor/Store/FreeCanvasView原模型复用，新增文档PixelWidth/Height、PNG/photo自有副本导入、图层面板、Alt自由缩放、透明sRGB ICC PNG导出；屏幕Zoom/Pan不写对象坐标。规划自有source/hash/path合同复用，.ptplan v1不改/不含canvas。
+- 画布图像合成float premultiplied bilinear + source-over后一次unpremultiply，修低alpha边缘；原PNG不走照片白底路径。逐层解码，画布/图像64MP/16384准入，缺源清旧预览/阻止导出/同hash恢复。
+- 最小普通画笔：独立对象BrushStrokes Version1、文档schema2；颜色/大小/不透明度/硬度/undo/保存/导出，单笔最短距离max覆盖、回折不重复alpha，不同笔source-over；1笔1历史。纹理笔刷后续，不起第二引擎。
+- 胶片只修最近资源按真正MRU排序；搜索不改选中/seed，草稿/显影冻结沿旧成果，不重造。授权扫描/联名仍缺，通用程序资源不阻。
+- 完整应用WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false、全部模块/策划15保留、无Setup；原教程停用。ComputerUse/Browser/WebView/CDP禁止，OFFSCREEN/testhost/OS进程和物理鼠标DPI分开。旧53树和未提交只读保全。
+
+
 ## 公司宽域工具＋R3接续（2026-10-27 America/New_York，批次20261028）
 - 从home/r53-stage-b-20261027@068f08734c4d1f3e2d18079a63a215858316d313（产品b8436706）新建E:/Kitao-Worktrees/r53-color-tools-film-20261028，分支company/r53-color-tools-film-20261028。fetch无新提交，旧52树/dirty保全，不合main/强推/研究整分支。
 - 补充前置RAW/C1调查dbd19d66按需读取REPORT/CAPTURE_ONE_MANUAL/code证据/递归更正；不重复索要N根，不假定公司有家庭素材。旧uint16clip、PV4sRGB输出、V2原仅栅格、X-T5内存/X-Trans边界都核对，见docs/validation/r53-color-tools-film-20261028/RAW_RECHECK.md。
