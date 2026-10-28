@@ -17,10 +17,13 @@ public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double Editi
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]public bool ExplicitSdrDisplayColor{get;init;}
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]public RAWSelectionAssistant.Core.Services.Color.ControlledIcc.RgbIccIdentityV1? ManualMonitorProfile{get;init;}
     public DarkroomPanelLayout? Darkroom { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]public InstantFilmDefinition? FilmDraft{get;init;}
+    public string? FilmDraftFrameId{get;init;}
+    public string? FilmDraftInputMode{get;init;}
     public bool R53Professional {get;init;}
     public IReadOnlyList<string> R53Favorites {get;init;}=[];
     public IReadOnlyList<string> R53Recents {get;init;}=[];
-    public ColorStudioLayout Normalize() {ManualMonitorProfile?.Bytes();return this with
+    public ColorStudioLayout Normalize() {ManualMonitorProfile?.Bytes();FilmDraft?.Validate();return this with
     {
         R53Favorites=(R53Favorites??[]).Where(x=>!string.IsNullOrWhiteSpace(x)).Distinct().Take(100).ToArray(),R53Recents=(R53Recents??[]).Where(x=>!string.IsNullOrWhiteSpace(x)).Distinct().Take(20).ToArray(),
         Darkroom = Darkroom?.Normalize(),

@@ -99,7 +99,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private void CancelLightPrintTask(bool restore)
  {
   Interlocked.Increment(ref _lightPrintPreviewRevision);_lightPrintPreviewCancellation?.Cancel();
-  if(restore&&!_disposed&&_lightPrintBeforeDraft is{} prior&&ActiveTarget?.Id==_lightPrintDraftTarget){Editor.RestorePreparedSource(prior,ActiveTarget!.AssetId);_lightPrintBeforeDraft=null;_lightPrintReshoot=false;RestoreInstantControls(ActiveTarget.RawDefinition?.InstantFilm);NotifyLightPrint();LightPrintStatus="预览已取消，保留上一有效结果。";}
+  if(restore&&!_disposed&&_lightPrintBeforeDraft is{} prior&&ActiveTarget?.Id==_lightPrintDraftTarget){Editor.RestorePreparedSource(prior,ActiveTarget!.AssetId);_lightPrintBeforeDraft=null;_lightPrintReshoot=false;RestoreInstantControls(ActiveTarget.RawDefinition?.InstantFilm??Layout.FilmDraft);if(ActiveTarget.RawDefinition?.InstantFilm is null){if(Layout.FilmDraftFrameId is{} savedFrame)_selectedLightPrintFrameId=savedFrame;if(Layout.FilmDraftInputMode is{} mode)InstantInputMode=mode;}NotifyLightPrint();LightPrintStatus="预览已取消，保留上一有效结果。";}
  }
  private void QueueLightPrintPreview()
  {

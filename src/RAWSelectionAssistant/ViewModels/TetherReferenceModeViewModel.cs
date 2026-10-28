@@ -132,7 +132,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         _render?.Cancel();
     }
     public bool RawLocalEditing {get;internal set;}
-    public bool LinearDocumentEditing {get;internal set;}
+    private bool linearDocumentEditing;public bool LinearDocumentEditing {get=>linearDocumentEditing;internal set=>SetProperty(ref linearDocumentEditing,value);}
     public void CopyCurrentLookTo(IEnumerable<ReferenceTargetItem> targets)
     {
         var snapshot = SelectedLook?.Normalize();
@@ -470,7 +470,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         _presetPreviewNode = null; NotifyPresetPreview();
         var previous = EffectiveEditingStack(); var nodes = change(previous.Nodes).ToArray();
         if(RawLocalEditing&&nodes.Any(n=>!ProfessionalRawLocalRenderer.Supports(n.Type))){StatusText="当前RAW局部层不支持此工具；原定义保持。";return;} if (nodes.Length == 0) return;
-        if(LinearDocumentEditing&&nodes.Any(n=>n.Type!=ColorStudioNodeType.BasicTone||n.Blend!=StudioLayerBlend.Normal||n.NumericParameters.Any(p=>p.Key!="exposure"&&p.Value!=0))){StatusText="线性宽色域V2当前仅支持曝光/Normal强度与蒙版；其他工具未改写。";return;}
+        if(LinearDocumentEditing&&nodes.Any(n=>!LinearWideToolsV1.Supported(n))){StatusText="此线性工作域尚未支持该工具或混合模式，原调整保留。";return;}
         // Enforce at the mutation boundary, including tool panels, curves and drag reorder.
         // Visibility and user-lock toggles are allowed; system locks cannot be removed.
         foreach(var locked in previous.Nodes.Where(n=>n.IsLocked))
@@ -515,8 +515,9 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         if (nodeType is ColorStudioNodeType.ReferenceMatch or ColorStudioNodeType.Film && AdjustmentStack.Nodes.Any(node => node.Type == nodeType)) return;
         if (nodeType == ColorStudioNodeType.ReferenceMatch && SelectedLook is null) return;
         var node = new ColorAdjustmentStackNode(Guid.NewGuid(), nodeType, nodeType switch { ColorStudioNodeType.BasicTone => "基础调色", ColorStudioNodeType.WhiteBalance => "白平衡", ColorStudioNodeType.Curve => "曲线", ColorStudioNodeType.ReferenceMatch => "参考仿色", ColorStudioNodeType.Film => "胶片", ColorStudioNodeType.TransitionBlend => "色彩过渡", _ => "颜色范围" }, true, FilmSettings: nodeType == ColorStudioNodeType.Film ? FilmSettings : null);
+        if(LinearDocumentEditing&&(nodeType is ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.BasicTone))node=node with{WideToolVersion=1};
         if (nodeType == ColorStudioNodeType.ColorRange) node = node with { NumericParameters = new Dictionary<string, double> { ["range_version"] = 2 } };
-        ChangeStack(nodes => [.. nodes, node], processingVersion: nodeType == ColorStudioNodeType.ColorRange ? 2 : null); _selectedAdjustmentNodeId = node.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
+        ChangeStack(nodes => [.. nodes, node], processingVersion: nodeType == ColorStudioNodeType.ColorRange ? 2 : null); if(AdjustmentStack.Nodes.All(n=>n.Id!=node.Id))return;_selectedAdjustmentNodeId = node.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));
     }
     private void DeleteSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { } selected && AdjustmentStack.Nodes.Count > 1) ChangeStack(nodes => nodes.Where(node => node.Id != selected.Id).ToArray()); }
     private void DuplicateSelectedAdjustmentNode() { if (SelectedAdjustmentNode is { IsLocked:false, Type: not ColorStudioNodeType.ReferenceMatch and not ColorStudioNodeType.Film and not ColorStudioNodeType.Develop } selected) { var copy = selected.Normalize() with { Id = Guid.NewGuid(), Name = selected.Name + " 副本" }; ChangeStack(nodes => nodes.SelectMany(node => node.Id == selected.Id ? new[] { node, copy } : new[] { node }).ToArray()); _selectedAdjustmentNodeId = copy.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode)); } }

@@ -11,7 +11,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public AsyncRelayCommand CreateProfessionalRawCommand {get;private set;}=null!;
     public AsyncRelayCommand ApplyProfessionalRawCommand {get;private set;}=null!;
     public bool IsProfessionalRaw=>ActiveTarget?.RawDefinition is not null;
-    public bool IsLinearProfessionalRaw=>ActiveTarget?.RawDefinition?.InputConfiguration=="LibRaw021LinearProPhotoD65V1";
+    public bool IsLinearProfessionalRaw=>ActiveTarget?.RawDefinition is {InputConfiguration:"LibRaw021LinearProPhotoD65V1",RawWideOutput:null};
     public bool IsLegacyRaw=>!IsProfessionalRaw;
     public double RawExposureEv {get;set;}
     public double RawRedGain {get;set;}=1;
@@ -22,6 +22,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private async Task<ProfessionalRawMaster> DecodeProfessionalInputAsync(string path,ProfessionalRawDefinition definition,CancellationToken token=default)
     {
         using var decodeMeasurement=StudioPreviewDiagnostics.Measure("DecodeMaster");
+        if(definition.RawWideOutput is not null){var original=RawWideOutputV1.BaseDefinition(definition);var decoded=await _professionalDecoder.DecodeAsync(path,original,token);try{return RawWideOutputV1.ConvertMaster(decoded,definition,token);}finally{decoded.Image.Dispose();}}
         if(definition.SrgbExposure is not null||definition.RenderedInputVersion==2)return await RenderedSrgbInput.ReadAsync(path,definition,token);
         if(definition.InputConfiguration=="LegacyRawEditsSrgbFloatV1")return await RebuildLegacyRawInputAsync(path,definition,null,token);
         if(definition.InputConfiguration!="RenderedSrgbFloatV1")return await _professionalDecoder.DecodeAsync(path,definition,token);
@@ -75,7 +76,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         });
         ApplyProfessionalRawCommand=new AsyncRelayCommand(async _=>
         {
-            if(ActiveTarget is not {} target||target.RawDefinition is null||target.RawDefinition.IsRenderedInput||IsLoading||IsExporting||IsInstantGenerating||Editor.ReadOnlyTarget||target.RawDefinition.SceneExposure?.Locked==true)return;
+            if(ActiveTarget is not {} target||target.RawDefinition is null||target.RawDefinition.IsRenderedInput||target.RawDefinition.RawWideOutput is not null||IsLoading||IsExporting||IsInstantGenerating||Editor.ReadOnlyTarget||target.RawDefinition.SceneExposure?.Locked==true)return;
             try
             {
                 var previous=target.RawDefinition;var version=target.ActiveEditVersionId;var revision=Volatile.Read(ref _activationRevision);

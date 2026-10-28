@@ -9,7 +9,7 @@ public static class RenderedSrgbInput
   definition.Validate();token.ThrowIfCancellationRequested();if(definition.ColorState is not null)return await DocumentColorWorkflowV1.ReadAsync(path,definition,token);
   if(definition.InstantInput?.ColorDocument is{} frozen)
   {
-   var documentInput=await DocumentColorWorkflowV1.ReadAsync(path,frozen,token);using var owner=documentInput.Image;
+   ProfessionalRawMaster documentInput;if(frozen.RawWideOutput is not null){var decoded=await new RAWSelectionAssistant.Core.Services.RawToJpeg.ProfessionalRawDecoder().DecodeAsync(path,RawWideOutputV1.BaseDefinition(frozen),token);try{documentInput=RawWideOutputV1.ConvertMaster(decoded,frozen,token);}finally{decoded.Image.Dispose();}}else documentInput=await DocumentColorWorkflowV1.ReadAsync(path,frozen,token);using var owner=documentInput.Image;
    using var document=DocumentColorWorkflowV1.RenderResult(documentInput,frozen,definition.InstantInput.OriginVersionId,token);document.RequireOpaque();
    using var cms=new RAWSelectionAssistant.Core.Services.Color.ControlledIcc.LcmsRgbEngine();
    using var srgb=document.ConvertTo(cms.StandardProfile("sRGB"),token);

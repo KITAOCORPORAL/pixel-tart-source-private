@@ -1,5 +1,17 @@
 # 光镜开发交接入口
 
+## 公司宽域工具＋R3接续（2026-10-27 America/New_York，批次20261028）
+- 从home/r53-stage-b-20261027@068f08734c4d1f3e2d18079a63a215858316d313（产品b8436706）新建E:/Kitao-Worktrees/r53-color-tools-film-20261028，分支company/r53-color-tools-film-20261028。fetch无新提交，旧52树/dirty保全，不合main/强推/研究整分支。
+- 补充前置RAW/C1调查dbd19d66按需读取REPORT/CAPTURE_ONE_MANUAL/code证据/递归更正；不重复索要N根，不假定公司有家庭素材。旧uint16clip、PV4sRGB输出、V2原仅栅格、X-T5内存/X-Trans边界都核对，见docs/validation/r53-color-tools-film-20261028/RAW_RECHECK.md。
+- RawWideOutputV1默认off研究变体（KITAO_RAW_WIDE_OUTPUT_RESEARCH=1+WHOLE_APP_DIAGNOSTIC）：既有LibRaw线性ProPhotoD65已截断master→精确推导源ICC→现有LCMS线性ROMMD50→目标ICC，不走sRGB显示映射再贴标签；不恢复前端截断、不拟合C1LUT。C1继续NOT_RUN，X-Trans门禁未改。
+- V2新WideToolVersion1白平衡（D50参考相对xy/Bradford，不是相机Kelvin）和对比/高光/阴影小集合；Normal强度/源mask/undo/变体/保存/preview/export/filmCurrentEdits同定义。旧V1/PV4/5/6/旧V2曝光逐通道math不变；其他旧encoded工具编辑时拒绝、UI禁用。影调双完整参考执行尚缺，诊断准入OPEN，不作科学色准批准。
+- 20MP真实Canon先测V2约7.5s后加面积linear proxy800；快速误差预算实现前固定mean1.5/P954/max32；导出full、停笔精细。最终实数/内存/独立进程见同目录PERFORMANCE/TEST_SUMMARY，不沿用小图宣传全图。
+- R3家庭唯一paper selector继承，本轮补stable paper:/frame:ID收藏/最近/搜索/选择反馈、6程序边框唯一左区、右侧重置/项目冻结草稿保存恢复；seed/来源/取消/显影锁/重拍保留。film读整文档+ICC→sRGB，不是显示器preview，也不是完整宽域胶片。
+- 自由画布首闭环本轮未开始，不用设计文档冒充。联名/真实扫描授权缺失单列不阻通用资源。旧教程停用、后置完整引导不做。
+- 完整应用WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false，所有模块及策划15板块保留；无Setup，CMD隔离启动。ComputerUse/Browser/WebView/CDP禁止，testhost/OFFSCREEN/OS启动分开，物理鼠标/多屏ACM/HDR未验。
+- 当前权威docs/validation/r53-color-tools-film-20261028/FINAL_REPORT.md、TEST_SUMMARY.json、COLOR_BOUNDARIES.json、FILM_STATUS.md，产品/最终远端SHA交付封存时写入。
+
+
 ## 家庭阶段B CMS收尾＋R3/出版续接（2026-10-27 America/Phoenix）
 - 起点home/r53-stage-b-20261027@047e51bf，当前发布源码b843670653dcb1899f77b873e31a11455d754f36；原b6eaa32e成果继承，不重做scene性能/cache lease/thumbnail prefix/crop首ICC。现有独立树N:/pixart/guangjing-r53-stage-b-20261027继续。
 - 权威docs/validation/home-r53-cms-closure-20261027/FINAL_REPORT.md、TEST_SUMMARY、COLOR_BOUNDARIES、JPEG_SUPPORT、WORKFLOW、USER_EXPORT_AND_GAMUT、PUSH_READBACK。旧home-r53-stage-b报告的JPEG_BLOCKED/CurrentEdits拒绝是历史，不当当前状态。

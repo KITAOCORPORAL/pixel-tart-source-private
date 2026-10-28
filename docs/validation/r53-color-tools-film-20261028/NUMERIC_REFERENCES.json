@@ -1,0 +1,1438 @@
+{
+  "whiteBalance": {
+    "reference1": "Little-CMS2.12@924a020d09bfe468c665467caf24aadeb41ff77c src/cmswtpnt.c cmsAdaptToIlluminant, MIT",
+    "reference2": "RawTherapee5.12@a8a3d1bc7b419ed1c974c39276c97e618a4f9a1b rtengine/color.cc Bradford D50/D65 and adaptation model, GPL3 reference-only",
+    "native": "E:\\Kitao-Worktrees\\r53-color-tools-film-20261028\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\runtimes\\win-x64\\native\\lcms2.dll",
+    "cases": [
+      {
+        "temperature": -100,
+        "tint": -50,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.18837728766286663,
+          0.1804389497153876,
+          0.1563807569981966
+        ],
+        "independentBradford": [
+          0.18837728766286665,
+          0.18043894971538754,
+          0.15638075699819654
+        ],
+        "maxAbs": 5.551115123125783e-17
+      },
+      {
+        "temperature": -100,
+        "tint": -50,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.9482697867807439,
+          0.13170085633592143,
+          0.013966041092825413
+        ],
+        "independentBradford": [
+          0.9482697867807439,
+          0.13170085633592138,
+          0.013966041092825407
+        ],
+        "maxAbs": 5.551115123125783e-17
+      },
+      {
+        "temperature": -100,
+        "tint": -50,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.13528049596497085,
+          0.2747874286829843,
+          1.04267307706026
+        ],
+        "independentBradford": [
+          -0.13528049596497085,
+          0.2747874286829842,
+          1.04267307706026
+        ],
+        "maxAbs": 5.551115123125783e-17
+      },
+      {
+        "temperature": -100,
+        "tint": -50,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          2.002167373110753,
+          1.004935975732957,
+          3.465206264302873
+        ],
+        "independentBradford": [
+          2.002167373110753,
+          1.0049359757329568,
+          3.4652062643028723
+        ],
+        "maxAbs": 8.881784197001252e-16
+      },
+      {
+        "temperature": -100,
+        "tint": 0,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.19329687297001444,
+          0.18076162877781918,
+          0.16594113896145074
+        ],
+        "independentBradford": [
+          0.1932968729700143,
+          0.18076162877781915,
+          0.1659411389614507
+        ],
+        "maxAbs": 1.3877787807814457e-16
+      },
+      {
+        "temperature": -100,
+        "tint": 0,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.9609502983522386,
+          0.14173799898948677,
+          0.01678863204640206
+        ],
+        "independentBradford": [
+          0.960950298352238,
+          0.1417379989894866,
+          0.01678863204640206
+        ],
+        "maxAbs": 5.551115123125783e-16
+      },
+      {
+        "temperature": -100,
+        "tint": 0,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.1263465218269723,
+          0.2715886410838042,
+          1.107553227028347
+        ],
+        "independentBradford": [
+          -0.1263465218269722,
+          0.2715886410838042,
+          1.1075532270283468
+        ],
+        "maxAbs": 2.220446049250313e-16
+      },
+      {
+        "temperature": -100,
+        "tint": 0,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          2.0625093445055063,
+          1.0233489966322373,
+          3.687156980743283
+        ],
+        "independentBradford": [
+          2.0625093445055054,
+          1.023348996632237,
+          3.6871569807432825
+        ],
+        "maxAbs": 8.881784197001252e-16
+      },
+      {
+        "temperature": -100,
+        "tint": 50,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.19822252122658293,
+          0.18120750290926085,
+          0.17620464762330443
+        ],
+        "independentBradford": [
+          0.1982225212265829,
+          0.18120750290926083,
+          0.17620464762330434
+        ],
+        "maxAbs": 8.326672684688674e-17
+      },
+      {
+        "temperature": -100,
+        "tint": 50,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.9734153438619474,
+          0.15129827964563058,
+          0.019775917799921626
+        ],
+        "independentBradford": [
+          0.9734153438619473,
+          0.1512982796456306,
+          0.019775917799921616
+        ],
+        "maxAbs": 1.1102230246251565e-16
+      },
+      {
+        "temperature": -100,
+        "tint": 50,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.11667855378411618,
+          0.2690875756031416,
+          1.1771292531098518
+        ],
+        "independentBradford": [
+          -0.1166785537841162,
+          0.26908757560314156,
+          1.1771292531098514
+        ],
+        "maxAbs": 4.440892098500626e-16
+      },
+      {
+        "temperature": -100,
+        "tint": 50,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          2.1248264125025482,
+          1.0425569095722496,
+          3.9250271257171296
+        ],
+        "independentBradford": [
+          2.124826412502548,
+          1.0425569095722496,
+          3.925027125717128
+        ],
+        "maxAbs": 1.7763568394002505e-15
+      },
+      {
+        "temperature": -30,
+        "tint": -50,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.1786475845498185,
+          0.17992234857907843,
+          0.16513603321420586
+        ],
+        "independentBradford": [
+          0.17864758454981844,
+          0.17992234857907843,
+          0.16513603321420584
+        ],
+        "maxAbs": 5.551115123125783e-17
+      },
+      {
+        "temperature": -30,
+        "tint": -50,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.9047809583286621,
+          0.10163312274140374,
+          0.015889757436594428
+        ],
+        "independentBradford": [
+          0.9047809583286619,
+          0.10163312274140358,
+          0.015889757436594414
+        ],
+        "maxAbs": 2.220446049250313e-16
+      },
+      {
+        "temperature": -30,
+        "tint": -50,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.11799727871367793,
+          0.294951457609431,
+          1.1000269831834393
+        ],
+        "independentBradford": [
+          -0.11799727871367788,
+          0.2949514576094311,
+          1.1000269831834388
+        ],
+        "maxAbs": 4.440892098500626e-16
+      },
+      {
+        "temperature": -30,
+        "tint": -50,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          1.95262402729487,
+          0.9869533781578306,
+          3.6590131522055973
+        ],
+        "independentBradford": [
+          1.9526240272948698,
+          0.9869533781578305,
+          3.6590131522055964
+        ],
+        "maxAbs": 8.881784197001252e-16
+      },
+      {
+        "temperature": -30,
+        "tint": 0,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.18374003873635963,
+          0.18006494676914256,
+          0.17554564617415852
+        ],
+        "independentBradford": [
+          0.18374003873635963,
+          0.18006494676914256,
+          0.17554564617415844
+        ],
+        "maxAbs": 8.326672684688674e-17
+      },
+      {
+        "temperature": -30,
+        "tint": 0,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.9171951188551655,
+          0.11221165370638561,
+          0.018993453932534595
+        ],
+        "independentBradford": [
+          0.9171951188551655,
+          0.11221165370638557,
+          0.01899345393253458
+        ],
+        "maxAbs": 4.163336342344337e-17
+      },
+      {
+        "temperature": -30,
+        "tint": 0,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.10785740744541748,
+          0.2913215517942962,
+          1.1706712586755035
+        ],
+        "independentBradford": [
+          -0.10785740744541752,
+          0.29132155179429614,
+          1.1706712586755028
+        ],
+        "maxAbs": 6.661338147750939e-16
+      },
+      {
+        "temperature": -30,
+        "tint": 0,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          2.016128536335162,
+          1.0058516632864636,
+          3.9007754649298825
+        ],
+        "independentBradford": [
+          2.016128536335162,
+          1.0058516632864634,
+          3.9007754649298807
+        ],
+        "maxAbs": 1.7763568394002505e-15
+      },
+      {
+        "temperature": -30,
+        "tint": 50,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.18885445808008372,
+          0.18036069044569733,
+          0.1867670905868413
+        ],
+        "independentBradford": [
+          0.18885445808008366,
+          0.18036069044569727,
+          0.1867670905868412
+        ],
+        "maxAbs": 8.326672684688674e-17
+      },
+      {
+        "temperature": -30,
+        "tint": 50,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.929437646515109,
+          0.12226124196573072,
+          0.022285789286582123
+        ],
+        "independentBradford": [
+          0.9294376465151089,
+          0.12226124196573059,
+          0.022285789286582116
+        ],
+        "maxAbs": 1.3877787807814457e-16
+      },
+      {
+        "temperature": -30,
+        "tint": 50,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.09689226604811432,
+          0.28850282300291874,
+          1.2467375352812868
+        ],
+        "independentBradford": [
+          -0.0968922660481143,
+          0.2885028230029187,
+          1.2467375352812864
+        ],
+        "maxAbs": 4.440892098500626e-16
+      },
+      {
+        "temperature": -30,
+        "tint": 50,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          2.0820367972345823,
+          1.0257305070493674,
+          4.160914228066818
+        ],
+        "independentBradford": [
+          2.082036797234582,
+          1.0257305070493667,
+          4.160914228066816
+        ],
+        "maxAbs": 1.7763568394002505e-15
+      },
+      {
+        "temperature": 0,
+        "tint": -50,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.17482694531857076,
+          0.17994244672615764,
+          0.1691848232339982
+        ],
+        "independentBradford": [
+          0.17482694531857076,
+          0.17994244672615758,
+          0.16918482323399817
+        ],
+        "maxAbs": 5.551115123125783e-17
+      },
+      {
+        "temperature": 0,
+        "tint": -50,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.8877185696894988,
+          0.08917039867687981,
+          0.016762382902236125
+        ],
+        "independentBradford": [
+          0.8877185696894987,
+          0.08917039867687972,
+          0.016762382902236125
+        ],
+        "maxAbs": 1.1102230246251565e-16
+      },
+      {
+        "temperature": 0,
+        "tint": -50,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.11071567587259087,
+          0.30382944944648926,
+          1.1266034738704558
+        ],
+        "independentBradford": [
+          -0.11071567587259083,
+          0.3038294494464892,
+          1.1266034738704556
+        ],
+        "maxAbs": 2.220446049250313e-16
+      },
+      {
+        "temperature": 0,
+        "tint": -50,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          1.934998176504895,
+          0.9808719808108484,
+          3.7487791383444216
+        ],
+        "independentBradford": [
+          1.9349981765048947,
+          0.9808719808108479,
+          3.748779138344421
+        ],
+        "maxAbs": 4.440892098500626e-16
+      },
+      {
+        "temperature": 0,
+        "tint": 0,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.18,
+          0.18000000000000002,
+          0.18000000000000002
+        ],
+        "independentBradford": [
+          0.18,
+          0.17999999999999997,
+          0.18
+        ],
+        "maxAbs": 5.551115123125783e-17
+      },
+      {
+        "temperature": 0,
+        "tint": 0,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.9,
+          0.10000000000000003,
+          0.02000000000000001
+        ],
+        "independentBradford": [
+          0.9,
+          0.10000000000000003,
+          0.02
+        ],
+        "maxAbs": 1.0408340855860843e-17
+      },
+      {
+        "temperature": 0,
+        "tint": 0,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.09999999999999999,
+          0.30000000000000004,
+          1.2000000000000002
+        ],
+        "independentBradford": [
+          -0.10000000000000002,
+          0.29999999999999993,
+          1.2
+        ],
+        "maxAbs": 2.220446049250313e-16
+      },
+      {
+        "temperature": 0,
+        "tint": 0,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          2.0,
+          1.0000000000000002,
+          4.000000000000001
+        ],
+        "independentBradford": [
+          2.0,
+          1.0,
+          4.0
+        ],
+        "maxAbs": 8.881784197001252e-16
+      },
+      {
+        "temperature": 0,
+        "tint": 50,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.18520260959152546,
+          0.18022513461107134,
+          0.19168100070009858
+        ],
+        "independentBradford": [
+          0.1852026095915254,
+          0.18022513461107129,
+          0.19168100070009858
+        ],
+        "maxAbs": 5.551115123125783e-17
+      },
+      {
+        "temperature": 0,
+        "tint": 50,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.9121295659304155,
+          0.1102747646516881,
+          0.02343822742898592
+        ],
+        "independentBradford": [
+          0.9121295659304152,
+          0.11027476465168803,
+          0.02343822742898592
+        ],
+        "maxAbs": 3.3306690738754696e-16
+      },
+      {
+        "temperature": 0,
+        "tint": 50,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.08841298955269807,
+          0.29703732457075444,
+          1.2791792265452948
+        ],
+        "independentBradford": [
+          -0.08841298955269794,
+          0.2970373245707543,
+          1.2791792265452948
+        ],
+        "maxAbs": 1.249000902703301e-16
+      },
+      {
+        "temperature": 0,
+        "tint": 50,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          2.067615659189493,
+          1.020198941538904,
+          4.270818075837775
+        ],
+        "independentBradford": [
+          2.0676156591894927,
+          1.020198941538904,
+          4.270818075837775
+        ],
+        "maxAbs": 4.440892098500626e-16
+      },
+      {
+        "temperature": 30,
+        "tint": -50,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.17119937870386456,
+          0.1801040627193469,
+          0.17343102908846242
+        ],
+        "independentBradford": [
+          0.1711993787038645,
+          0.18010406271934684,
+          0.1734310290884623
+        ],
+        "maxAbs": 1.1102230246251565e-16
+      },
+      {
+        "temperature": 30,
+        "tint": -50,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.8715200369262905,
+          0.07691406151926847,
+          0.01766899612896151
+        ],
+        "independentBradford": [
+          0.8715200369262904,
+          0.07691406151926834,
+          0.01766899612896149
+        ],
+        "maxAbs": 1.249000902703301e-16
+      },
+      {
+        "temperature": 30,
+        "tint": -50,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.10347102501286702,
+          0.3128781589131319,
+          1.1545067078553786
+        ],
+        "independentBradford": [
+          -0.10347102501286705,
+          0.31287815891313187,
+          1.154506707855378
+        ],
+        "maxAbs": 6.661338147750939e-16
+      },
+      {
+        "temperature": 30,
+        "tint": -50,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          1.919461189092103,
+          0.9757319501757051,
+          3.843007277017583
+        ],
+        "independentBradford": [
+          1.9194611890921023,
+          0.9757319501757046,
+          3.843007277017581
+        ],
+        "maxAbs": 2.220446049250313e-15
+      },
+      {
+        "temperature": 30,
+        "tint": 0,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.17645807308359604,
+          0.18007165309633483,
+          0.184680274070863
+        ],
+        "independentBradford": [
+          0.176458073083596,
+          0.18007165309633477,
+          0.18468027407086293
+        ],
+        "maxAbs": 5.551115123125783e-17
+      },
+      {
+        "temperature": 30,
+        "tint": 0,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.8836590801238335,
+          0.08800851513542067,
+          0.021049676050347438
+        ],
+        "independentBradford": [
+          0.8836590801238334,
+          0.0880085151354207,
+          0.021049676050347427
+        ],
+        "maxAbs": 1.1102230246251565e-16
+      },
+      {
+        "temperature": 30,
+        "tint": 0,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.09214005122778676,
+          0.30883940974396085,
+          1.2308486098617406
+        ],
+        "independentBradford": [
+          -0.09214005122778676,
+          0.3088394097439608,
+          1.2308486098617404
+        ],
+        "maxAbs": 2.220446049250313e-16
+      },
+      {
+        "temperature": 30,
+        "tint": 0,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          1.986062386777201,
+          0.9951071665638574,
+          4.104349516202057
+        ],
+        "independentBradford": [
+          1.9860623867772005,
+          0.9951071665638572,
+          4.104349516202056
+        ],
+        "maxAbs": 8.881784197001252e-16
+      },
+      {
+        "temperature": 30,
+        "tint": 50,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.18175447577154158,
+          0.18022235940498693,
+          0.19685458561437863
+        ],
+        "independentBradford": [
+          0.18175447577154158,
+          0.1802223594049869,
+          0.1968545856143786
+        ],
+        "maxAbs": 2.7755575615628914e-17
+      },
+      {
+        "temperature": 30,
+        "tint": 50,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.8956667105854347,
+          0.09851981553384243,
+          0.024644158731041577
+        ],
+        "independentBradford": [
+          0.8956667105854345,
+          0.09851981553384236,
+          0.02464415873104157
+        ],
+        "maxAbs": 2.220446049250313e-16
+      },
+      {
+        "temperature": 30,
+        "tint": 50,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.0798867168773782,
+          0.3057278440084496,
+          1.3133690198972332
+        ],
+        "independentBradford": [
+          -0.07988671687737815,
+          0.30572784400844955,
+          1.313369019897233
+        ],
+        "maxAbs": 2.220446049250313e-16
+      },
+      {
+        "temperature": 30,
+        "tint": 50,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          2.055506263178315,
+          1.0156512615910676,
+          4.386628736345559
+        ],
+        "independentBradford": [
+          2.055506263178315,
+          1.0156512615910673,
+          4.386628736345558
+        ],
+        "maxAbs": 8.881784197001252e-16
+      },
+      {
+        "temperature": 100,
+        "tint": -50,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.16343356662682584,
+          0.18102518262449843,
+          0.184195567323981
+        ],
+        "independentBradford": [
+          0.16343356662682584,
+          0.1810251826244984,
+          0.18419556732398096
+        ],
+        "maxAbs": 5.551115123125783e-17
+      },
+      {
+        "temperature": 100,
+        "tint": -50,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.836813973639929,
+          0.048948668806127076,
+          0.019939142086054466
+        ],
+        "independentBradford": [
+          0.8368139736399288,
+          0.04894866880612707,
+          0.019939142086054462
+        ],
+        "maxAbs": 2.220446049250313e-16
+      },
+      {
+        "temperature": 100,
+        "tint": -50,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.0865599410211906,
+          0.3347740211621475,
+          1.2253643112728543
+        ],
+        "independentBradford": [
+          -0.08655994102119054,
+          0.33477402116214744,
+          1.225364311272854
+        ],
+        "maxAbs": 2.220446049250313e-16
+      },
+      {
+        "temperature": 100,
+        "tint": -50,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          1.8911659854755973,
+          0.9673209082475944,
+          4.082231939216342
+        ],
+        "independentBradford": [
+          1.8911659854755973,
+          0.9673209082475943,
+          4.082231939216341
+        ],
+        "maxAbs": 8.881784197001252e-16
+      },
+      {
+        "temperature": 100,
+        "tint": 0,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.1689163705392409,
+          0.18076265797727784,
+          0.19658533893774818
+        ],
+        "independentBradford": [
+          0.16891637053924086,
+          0.1807626579772778,
+          0.1965853389377481
+        ],
+        "maxAbs": 8.326672684688674e-17
+      },
+      {
+        "temperature": 100,
+        "tint": 0,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.8485874425517181,
+          0.06072417852034503,
+          0.02369429029962566
+        ],
+        "independentBradford": [
+          0.8485874425517178,
+          0.0607241785203449,
+          0.023694290299625644
+        ],
+        "maxAbs": 3.3306690738754696e-16
+      },
+      {
+        "temperature": 100,
+        "tint": 0,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.07361961164841038,
+          0.330205579239066,
+          1.309443861502872
+        ],
+        "independentBradford": [
+          -0.07361961164841031,
+          0.330205579239066,
+          1.3094438615028714
+        ],
+        "maxAbs": 6.661338147750939e-16
+      },
+      {
+        "temperature": 100,
+        "tint": 0,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          1.9619711246871847,
+          0.9873598435970089,
+          4.370158925635494
+        ],
+        "independentBradford": [
+          1.9619711246871843,
+          0.9873598435970086,
+          4.370158925635492
+        ],
+        "maxAbs": 1.7763568394002505e-15
+      },
+      {
+        "temperature": 100,
+        "tint": 50,
+        "input": [
+          0.18,
+          0.18,
+          0.18
+        ],
+        "lcms": [
+          0.1744586154379093,
+          0.18072442970084662,
+          0.2100628346411394
+        ],
+        "independentBradford": [
+          0.1744586154379093,
+          0.18072442970084657,
+          0.2100628346411393
+        ],
+        "maxAbs": 8.326672684688674e-17
+      },
+      {
+        "temperature": 100,
+        "tint": 50,
+        "input": [
+          0.9,
+          0.1,
+          0.02
+        ],
+        "lcms": [
+          0.8602803791565352,
+          0.07183978787513266,
+          0.027699748112699325
+        ],
+        "independentBradford": [
+          0.8602803791565351,
+          0.07183978787513258,
+          0.02769974811269931
+        ],
+        "maxAbs": 1.1102230246251565e-16
+      },
+      {
+        "temperature": 100,
+        "tint": 50,
+        "input": [
+          -0.1,
+          0.3,
+          1.2
+        ],
+        "lcms": [
+          -0.0596146033341081,
+          0.3267269800573863,
+          1.4007888513575053
+        ],
+        "independentBradford": [
+          -0.059614603334108104,
+          0.32672698005738626,
+          1.4007888513575046
+        ],
+        "maxAbs": 6.661338147750939e-16
+      },
+      {
+        "temperature": 100,
+        "tint": 50,
+        "input": [
+          2,
+          1,
+          4
+        ],
+        "lcms": [
+          2.036240574017608,
+          1.0088312775677666,
+          4.68270295557209
+        ],
+        "independentBradford": [
+          2.0362405740176075,
+          1.0088312775677661,
+          4.682702955572088
+        ],
+        "maxAbs": 1.7763568394002505e-15
+      }
+    ],
+    "maxAbs": 2.220446049250313e-15
+  },
+  "tone": {
+    "reference1": "darktable5.2.1@be9171cf8bb2feab8bd115efd9b96a4ce7103039 src/iop/basicadj.c get_contrast, GPL3 reference-only",
+    "reference2": "RawTherapee5.12 rtengine/curves.cc contrast histogram/NURBS toe shoulder, GPL3 reference-only",
+    "cases": [
+      {
+        "y": -0.2,
+        "contrast": -0.5,
+        "product": -0.2,
+        "darktablePowerContrast": -0.2,
+        "difference": 0.0,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": -0.2,
+        "contrast": 0,
+        "product": -0.2,
+        "darktablePowerContrast": -0.2,
+        "difference": 0.0,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": -0.2,
+        "contrast": 0.5,
+        "product": -0.2,
+        "darktablePowerContrast": -0.2,
+        "difference": 0.0,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0,
+        "contrast": -0.5,
+        "product": 0,
+        "darktablePowerContrast": 0,
+        "difference": 0,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0,
+        "contrast": 0,
+        "product": 0,
+        "darktablePowerContrast": 0,
+        "difference": 0,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0,
+        "contrast": 0.5,
+        "product": 0,
+        "darktablePowerContrast": 0,
+        "difference": 0,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0.001,
+        "contrast": -0.5,
+        "product": 0.0014099114256352749,
+        "darktablePowerContrast": 0.013416407864998738,
+        "difference": -0.012006496439363462,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0.001,
+        "contrast": 0,
+        "product": 0.001,
+        "darktablePowerContrast": 0.001,
+        "difference": 0.0,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0.001,
+        "contrast": 0.5,
+        "product": 0.000709264413223279,
+        "darktablePowerContrast": 7.453559924999299e-05,
+        "difference": 0.000634728813973286,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0.018,
+        "contrast": -0.5,
+        "product": 0.02508411622469554,
+        "darktablePowerContrast": 0.05692099788303083,
+        "difference": -0.031836881658335286,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0.018,
+        "contrast": 0,
+        "product": 0.018,
+        "darktablePowerContrast": 0.018,
+        "difference": 0.0,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0.018,
+        "contrast": 0.5,
+        "product": 0.012916540375499417,
+        "darktablePowerContrast": 0.0056920997883030825,
+        "difference": 0.0072244405871963345,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0.18,
+        "contrast": -0.5,
+        "product": 0.18,
+        "darktablePowerContrast": 0.18,
+        "difference": 0.0,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0.18,
+        "contrast": 0,
+        "product": 0.18,
+        "darktablePowerContrast": 0.18,
+        "difference": 0.0,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0.18,
+        "contrast": 0.5,
+        "product": 0.18,
+        "darktablePowerContrast": 0.18,
+        "difference": 0.0,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0.75,
+        "contrast": -0.5,
+        "product": 0.5491246180514857,
+        "darktablePowerContrast": 0.3674234614174767,
+        "difference": 0.181701156634009,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0.75,
+        "contrast": 0,
+        "product": 0.75,
+        "darktablePowerContrast": 0.75,
+        "difference": 0.0,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 0.75,
+        "contrast": 0.5,
+        "product": 1.0243576439824815,
+        "darktablePowerContrast": 1.5309310892394865,
+        "difference": -0.506573445257005,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 1,
+        "contrast": -0.5,
+        "product": 0.7251937853408535,
+        "darktablePowerContrast": 0.4242640687119285,
+        "difference": 0.30092971662892504,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 1,
+        "contrast": 0,
+        "product": 1.0,
+        "darktablePowerContrast": 0.9999999999999999,
+        "difference": 1.1102230246251565e-16,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 1,
+        "contrast": 0.5,
+        "product": 1.3789417673097994,
+        "darktablePowerContrast": 2.357022603955158,
+        "difference": -0.9780808366453586,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 4,
+        "contrast": -0.5,
+        "product": 2.8521317795789765,
+        "darktablePowerContrast": 0.848528137423857,
+        "difference": 2.0036036421551193,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 4,
+        "contrast": 0,
+        "product": 4.0,
+        "darktablePowerContrast": 3.9999999999999996,
+        "difference": 4.440892098500626e-16,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 4,
+        "contrast": 0.5,
+        "product": 5.6098389683669785,
+        "darktablePowerContrast": 18.856180831641264,
+        "difference": -13.246341863274285,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 16,
+        "contrast": -0.5,
+        "product": 11.359758409195061,
+        "darktablePowerContrast": 1.697056274847714,
+        "difference": 9.662702134347347,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 16,
+        "contrast": 0,
+        "product": 16.0,
+        "darktablePowerContrast": 15.999999999999998,
+        "difference": 1.7763568394002505e-15,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      },
+      {
+        "y": 16,
+        "contrast": 0.5,
+        "product": 22.535690529543565,
+        "darktablePowerContrast": 150.84944665313012,
+        "difference": -128.31375612358656,
+        "rawtherapee": "Histogram-adaptive NURBS not comparable with absent histogram; no equality claim"
+      }
+    ],
+    "decision": "Independent bounded log-luma EV, no copied code. Negative luminance only exposure; >1 retained; gain preserves RGB ratios, no claimed matching appearance. Full dual tone engine execution remains OPEN"
+  },
+  "RawWide": {
+    "source": "LibRaw0.21.1@cccb97647fcee56801fa68231fa8a38aa8b52ef7 colorconst/prophoto_rgb and convert_to_rgb_loop",
+    "conversion": "Existing LCMS2.12 float transform through profile PCS D50; exact source primaries derived from LibRaw matrix, not conventional D50 primaries relabeled D65"
+  },
+  "CalibrationEligible": false
+}

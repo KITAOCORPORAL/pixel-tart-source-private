@@ -12,7 +12,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public bool ExplicitSdrDisplayColor{get=>Layout.ExplicitSdrDisplayColor;set{Layout=Layout with{ExplicitSdrDisplayColor=value};OnPropertyChanged();ScheduleR53Autosave();}}
  public RgbIccIdentityV1? ManualMonitorProfile=>Layout.ManualMonitorProfile;
  public void SetManualMonitorProfile(string? file){if(file is null){Layout=Layout with{ManualMonitorProfile=null};}else{var profile=RgbIccIdentityV1.FromBytes(File.ReadAllBytes(file),"Manual monitor ICC");using var cms=new LcmsRgbEngine();cms.Validate(profile);Layout=Layout with{ManualMonitorProfile=profile};}OnPropertyChanged(nameof(ManualMonitorProfile));ScheduleR53Autosave();}
- public string ColorManagementStatus=>ActiveTarget?.RawDefinition?.ColorState is{} s?$"颜色变体 V{s.Version} · {s.InputPolicy} · 输入 {s.Input.Sha256[..8]} → 编辑 {(s.Version==2?"线性ProPhoto D50·V2仅曝光":"encoded sRGB·V1")} → 输出 {s.Output.Label}":"兼容颜色路径 · 未迁移；创建颜色变体后才执行显式 ICC 转换";
+ public string ColorManagementStatus=>ActiveTarget?.RawDefinition?.ColorState is{} s?$"颜色变体 V{s.Version} · {s.InputPolicy} · 输入 {s.Input.Sha256[..8]} → 编辑 {(s.Version==2?"线性ProPhoto D50":"encoded sRGB·V1")} → 输出 {s.Output.Label}":"兼容颜色路径 · 未迁移；创建颜色变体后才执行显式 ICC 转换";
  public async Task CreateManagedColorVariantAsync(bool assign=false,bool linearWide=false)
  {
 #if WHOLE_APP_DIAGNOSTIC
@@ -30,6 +30,14 @@ public sealed partial class ReferenceColorWorkspaceViewModel
    if(_disposed||!ReferenceEquals(ActiveTarget,previousActive)||target.ActiveEditVersionId!=id||ReferenceEquals(target,ActiveTarget)&&Editor.ReadOnlyTarget){master.Image.Dispose();return;}
    if(ReferenceEquals(ActiveTarget,target)){Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);await CreateR53VariantAsync(false);}else{if(ActiveTarget is{} previous){Editor.CopyCurrentLookTo([previous]);CaptureEditVersion(previous);}ActiveTarget=target;target.ActiveEditVersionId=Guid.NewGuid();}target.RawDefinition=definition;target.AppliedLookSnapshot=null;target.ColorAdjustmentStackSnapshot=null;target.FilmSettingsSnapshot=null;target.LinearRawMaster=master;target.RawInput=master.Contract;CaptureEditVersion(target);await ActivateTargetAsync(target);OnPropertyChanged(nameof(ColorManagementStatus));ScheduleR53Autosave();StatusText="已创建显式颜色管理变体；输入解释与输出转换已绑定ICC内容，旧变体未修改。";
   }catch(Exception e)when(e is IOException or InvalidDataException or InvalidOperationException or NotSupportedException or ArgumentException){StatusText="未创建颜色管理变体："+e.Message;}
+#endif
+ }
+ public async Task CreateRawWideOutputResearchAsync()
+ {
+#if WHOLE_APP_DIAGNOSTIC
+  if(Environment.GetEnvironmentVariable("KITAO_RAW_WIDE_OUTPUT_RESEARCH")!="1"){StatusText="RAW宽色域研究变体默认关闭。";return;}
+  if(ActiveTarget is not{} target||!IsLinearProfessionalRaw||target.RawDefinition is not{} old||old.RawWideOutput is not null||IsLoading||IsExporting||Editor.ReadOnlyTarget)return;
+  try{if(old.LocalEdits?.Stack.Nodes.Count>0){StatusText="请从未加显示后局部层的RAW基础变体建立宽色域研究版本。";return;}using var cms=new LcmsRgbEngine();var state=new DocumentColorStateV1(cms.StandardProfile("LibRawProPhotoD65LinearV1"),cms.StandardProfile("LinearProPhotoD50V2"),cms.StandardProfile(ManagedOutputSpace),"Embedded",Version:2).Validate();var definition=old with{RawWideOutput=new(),ColorState=state,LocalEdits=null};definition.Validate();var master=target.LinearRawMaster??await _professionalDecoder.DecodeAsync(target.Path,old);var converted=await Task.Run(()=>RawWideOutputV1.ConvertMaster(master,definition));Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);await CreateR53VariantAsync(false);target.RawDefinition=definition;target.LinearRawMaster=converted;target.RawInput=converted.Contract;CaptureEditVersion(target);await ActivateTargetAsync(target);ScheduleR53Autosave();StatusText="已创建RAW宽色域研究变体；前端已截断信息不会恢复。";}catch(Exception error)when(error is IOException or InvalidOperationException or ArgumentException or NotSupportedException){StatusText="未创建RAW宽域变体："+error.Message;}
 #endif
  }
  public void SetManagedOutputProfile(){if(ActiveTarget?.RawDefinition is not{ColorState:not null} definition||!LocalOutputEditing||Editor.ReadOnlyTarget)return;using var cms=new LcmsRgbEngine();RememberRawLocal(ActiveTarget,definition);ActiveTarget.RawDefinition=definition with{ColorState=definition.ColorState with{Output=cms.StandardProfile(ManagedOutputSpace)}};CaptureEditVersion(ActiveTarget);ScheduleR53Autosave();OnPropertyChanged(nameof(ColorManagementStatus));}

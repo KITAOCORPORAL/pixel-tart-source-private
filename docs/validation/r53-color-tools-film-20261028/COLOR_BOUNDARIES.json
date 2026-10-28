@@ -1,0 +1,15 @@
+{
+  "old": "ColorStateV1/PV4/PV5/PV6/oldV2 exposure unchanged",
+  "newNodeVersion": "WideToolVersion1",
+  "working": "Linear public ROMM/ProPhoto D50 float32 gamma1",
+  "whiteBalance": "Relative source white xy offset -> LCMS Bradford -> D50; not absolute Kelvin/camera WB",
+  "tone": "Linear Y luminance, bounded log-relative EV, common RGB gain; negatives and >1 retained, no hue channel clipping",
+  "blend": "Normal only, node opacity×source-coordinate mask",
+  "rawWide": "Default-off explicit research after current LibRaw16 clipped master, exact derived D65 ICC -> existing LCMS D50, no sRGB output detour",
+  "film": "Frozen full document+ICC -> encoded sRGB effect/paper, not full wide-gamut film engine",
+  "display": "Default-off display ICC unchanged, no monitor pixels fed film/export",
+  "XTrans": "Existing memory/Bayer gate unchanged",
+  "C1": "NOT_RUN, no LUT fit",
+  "CalibrationEligible": false,
+  "admission": "DIAGNOSTIC_ONLY tone dual-full-engine reference execution remains OPEN"
+}

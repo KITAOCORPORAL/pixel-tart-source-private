@@ -58,7 +58,7 @@ public sealed class StudioToolPanel : StackPanel
     {
         if (e.PropertyName == nameof(TetherReferenceModeViewModel.EditTargetIdentity))
             foreach (var field in _fields) field.Number.RestoreCommitted();
-        if (e.PropertyName is nameof(TetherReferenceModeViewModel.AdjustmentStack) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode)) Refresh();
+        if (e.PropertyName is nameof(TetherReferenceModeViewModel.AdjustmentStack) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode) or nameof(TetherReferenceModeViewModel.LinearDocumentEditing)) Refresh();
     }
     private void Build()
     {
@@ -209,6 +209,7 @@ public sealed class StudioToolPanel : StackPanel
                 var value = _editor?.ToolValue(field.Parameter) ?? field.Parameter.DefaultValue;
                 field.Slider.Value = value;
                 field.Number.RefreshCommitted();
+                bool supported=_editor?.LinearDocumentEditing!=true||(field.Parameter.NodeType==ColorStudioNodeType.WhiteBalance&&(field.Parameter.Key is "temperature" or "tint"))||(field.Parameter.NodeType==ColorStudioNodeType.BasicTone&&(field.Parameter.Key is "exposure" or "contrast" or "highlights" or "shadows"));field.Slider.IsEnabled=supported&&_editor?.ReadOnlyTarget!=true&&_editor?.ToolNode(field.Parameter.NodeType)?.IsLocked!=true;field.Number.IsEnabled=field.Slider.IsEnabled;if(!supported){field.Slider.ToolTip="此工作域暂不支持此项";field.Number.ToolTip="此工作域暂不支持此项";}else if(_editor?.LinearDocumentEditing==true&&field.Parameter.NodeType==ColorStudioNodeType.WhiteBalance){field.Slider.ToolTip="D50参考的相对白点调整，不是相机原生白平衡或绝对色温";}
             }
             foreach (var (type, toggle) in _toggles) toggle.IsChecked = _editor?.ToolNode(type)?.Enabled != false;
             foreach (var graphic in _graphics) graphic.InvalidateVisual();
