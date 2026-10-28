@@ -38,7 +38,19 @@ public sealed partial class TetherReferenceModeViewModel
         var mix=new ColorAdjustmentStackNode(Guid.NewGuid(),ColorStudioNodeType.GraphMix,"图层混合"){CompositeVersion=1,Opacity=.5};
         var p=graph.Positions.Single(p=>p.NodeId==selected.Id);var edges=graph.Edges.Where(e=>e!=outgoing[0]).ToList();
         edges.Add(new(incoming.From,"rgb",branch.Id,"rgb"));edges.Add(new(selected.Id,"rgb",mix.Id,"base"));edges.Add(new(branch.Id,"rgb",mix.Id,"layer"));edges.Add(new(mix.Id,"rgb",outgoing[0].To,outgoing[0].Input));
-        var next=AdjustmentStack with{Nodes=AdjustmentNodes.Concat(new[]{branch,mix}).ToArray(),ProcessingVersion=2,Graph=graph with{Version=2,Edges=edges,Positions=graph.Positions.Concat(new[]{new StudioGraphPosition(branch.Id,p.X,p.Y+110),new StudioGraphPosition(mix.Id,p.X+160,p.Y+52)}).ToArray()}};
+        // Make room only in the existing downstream layout; node positions never define routing.
+        var downstream=new HashSet<Guid>();var pending=new Queue<Guid>();pending.Enqueue(outgoing[0].To);
+        while(pending.TryDequeue(out var id))if(downstream.Add(id))foreach(var edge in graph.Edges.Where(e=>e.From==id))pending.Enqueue(edge.To);
+        var locked=AdjustmentNodes.Where(n=>n.IsLocked).Select(n=>n.Id).ToHashSet();
+        var positions=graph.Positions.Select(pos=>downstream.Contains(pos.NodeId)&&!locked.Contains(pos.NodeId)&&pos.X>=p.X+140?pos with{X=pos.X+300}:pos).ToList();
+        StudioGraphPosition FreePosition(Guid id,double x,double y)
+        {
+            // Preserve custom/locked cards too. Keep a small gap around each 132x72 DIP card.
+            while(positions.Any(pos=>Math.Abs(pos.X-x)<148&&Math.Abs(pos.Y-y)<88))y+=110;
+            var position=new StudioGraphPosition(id,x,y);positions.Add(position);return position;
+        }
+        FreePosition(branch.Id,p.X,p.Y+110);FreePosition(mix.Id,p.X+160,p.Y+52);
+        var next=AdjustmentStack with{Nodes=AdjustmentNodes.Concat(new[]{branch,mix}).ToArray(),ProcessingVersion=2,Graph=graph with{Version=2,Edges=edges,Positions=positions.ToArray()}};
         if(!CommitGraphStack(next))return false;SelectedAdjustmentNode=branch;return true;
     }
     public bool DeleteGraphNode()
