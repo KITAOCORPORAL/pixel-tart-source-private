@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
@@ -6,7 +6,7 @@ using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 namespace RAWSelectionAssistant.Core.Services.Projects;
 
 // Append only: persisted Version 2 schemes serialize these enum values as integers.
-public enum ColorStudioNodeType { ReferenceMatch, ColorRange, Film, TransitionBlend, Preset, Develop, WhiteBalance, BasicTone, ColorBalance, Levels, Curve, Details, SkinTone }
+public enum ColorStudioNodeType { ReferenceMatch, ColorRange, Film, TransitionBlend, Preset, Develop, WhiteBalance, BasicTone, ColorBalance, Levels, Curve, Details, SkinTone, GraphMix }
 
 public sealed record ColorAdjustmentStackNode(
     Guid Id,
@@ -38,6 +38,7 @@ public sealed record ColorAdjustmentStackNode(
         if (NumericParameters.Any(item => string.IsNullOrWhiteSpace(item.Key) || !double.IsFinite(item.Value))) throw new ArgumentException("Color Studio node parameters must be finite.");
         if(WideToolVersion is not(0 or 1 or 2))throw new InvalidDataException("Unknown linear tool version");
         if(CompositeVersion is not(0 or 1 or 2)||!double.IsFinite(Opacity)||Opacity<0||Opacity>1||!Enum.IsDefined(Blend)||CompositeVersion<2&&(int)Blend>=3||CompositeVersion==0&&(Opacity!=1||Blend!=StudioLayerBlend.Normal||LocalMask is not null))throw new InvalidDataException("未知图层合成版本/参数，未降级渲染。");
+        if(Type==ColorStudioNodeType.GraphMix&&(CompositeVersion==0||WideToolVersion!=0||Blend is not(StudioLayerBlend.Normal or StudioLayerBlend.Multiply or StudioLayerBlend.Screen or StudioLayerBlend.Darken or StudioLayerBlend.Lighten)))throw new InvalidDataException("混合节点需显式sRGB合成版本，不能作为宽域节点。");
         FilmSettings?.Validate();
         return this with { Name = Name.Trim(), LocalMask=LocalMask?.Freeze(), NumericParameters = new Dictionary<string, double>(NumericParameters), Samples = Samples.ToArray(), NegativeSamples = NegativeSamples.ToArray() };
     }
@@ -61,13 +62,15 @@ public sealed record ColorAdjustmentStackNode(
 
 public sealed record ColorAdjustmentStack(IReadOnlyList<ColorAdjustmentStackNode> Nodes, int Version = 2, string WorkingSpace = "OKLabD65", int ProcessingVersion = 1)
 {
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)] public StudioNodeGraph? Graph {get;init;}
     public ColorAdjustmentStack Normalize()
     {
-        if (Version != 2 || !string.Equals(WorkingSpace, "OKLabD65", StringComparison.Ordinal)) throw new ArgumentException("Unsupported Color Studio stack version.");
+        if (Version is not(2 or 3) || Version==3&&Graph is null || !string.Equals(WorkingSpace, "OKLabD65", StringComparison.Ordinal)) throw new ArgumentException("Unsupported Color Studio stack version.");
         if (ProcessingVersion is not (1 or 2)) throw new ArgumentException("Unsupported Color Studio processing version.");
         var nodes = (Nodes ?? Array.Empty<ColorAdjustmentStackNode>()).Select(node => node.Normalize()).ToArray();
         if (nodes.Length == 0 || nodes.Select(node => node.Id).Distinct().Count() != nodes.Length) throw new ArgumentException("Color Studio stack must contain unique nodes.");
-        return this with { Nodes = nodes };
+        if(nodes.Any(n=>n.Type==ColorStudioNodeType.GraphMix)&&Graph?.Version!=2)throw new InvalidDataException("混合节点必须由版本2节点图解释。");
+        return this with { Version=Graph is null?2:3, Nodes = nodes, Graph=Graph?.Freeze(nodes) };
     }
 
     public ColorAdjustmentStack DeepClone() => Normalize();
@@ -76,18 +79,20 @@ public sealed record ColorAdjustmentStack(IReadOnlyList<ColorAdjustmentStackNode
     public ColorAdjustmentStack SyncSelectedFrom(ColorAdjustmentStack source, IReadOnlySet<Guid> selectedIds)
     {
         var target = Normalize(); var incoming = source.Normalize();
+        if(target.Graph?.Version==2||incoming.Graph?.Version==2)throw new NotSupportedException("复杂专业路由请整体应用方案，未按类别压平同步。");
         var selected = incoming.Nodes.Where(node => selectedIds.Contains(node.Id)).Select(node => node.Normalize()).ToArray();
         var replacements = selected.ToDictionary(node => node.Id);
         var existing = target.Nodes.Select(node => replacements.GetValueOrDefault(node.Id, node)).ToList();
         var known = existing.Select(node => node.Id).ToHashSet();
         foreach (var node in selected) if (known.Add(node.Id)) existing.Add(node);
-        return (target with { Nodes = existing, ProcessingVersion = Math.Max(target.ProcessingVersion, incoming.ProcessingVersion) }).Normalize();
+        return (target with { Nodes = existing, Graph=target.Graph?.Reconcile(target.Nodes,existing), ProcessingVersion = Math.Max(target.ProcessingVersion, incoming.ProcessingVersion) }).Normalize();
     }
 
     /// <summary>Copy selected adjustment categories while preserving the target's other nodes and order.</summary>
     public ColorAdjustmentStack SyncSelectedByTypeFrom(ColorAdjustmentStack source, IReadOnlySet<ColorStudioNodeType> selectedTypes)
     {
         var target = Normalize(); var incoming = source.Normalize();
+        if(target.Graph?.Version==2||incoming.Graph?.Version==2)throw new NotSupportedException("复杂专业路由请整体应用方案，未按类别压平同步。");
         var selected = incoming.Nodes.Where(node => selectedTypes.Contains(node.Type)).Select(node => node.Normalize()).ToArray();
         if (selected.Length == 0) return target;
         // A category can legitimately contain several color ranges/curves. Replace
@@ -105,7 +110,7 @@ public sealed record ColorAdjustmentStack(IReadOnlyList<ColorAdjustmentStackNode
         }
         foreach (var group in selected.GroupBy(node => node.Type))
             if (seen.Add(group.Key)) replaced.AddRange(group);
-        return (target with { Nodes = replaced, ProcessingVersion = Math.Max(target.ProcessingVersion, incoming.ProcessingVersion) }).Normalize();
+        return (target with { Nodes = replaced, Graph=target.Graph?.Reconcile(target.Nodes,replaced), ProcessingVersion = Math.Max(target.ProcessingVersion, incoming.ProcessingVersion) }).Normalize();
     }
 }
 

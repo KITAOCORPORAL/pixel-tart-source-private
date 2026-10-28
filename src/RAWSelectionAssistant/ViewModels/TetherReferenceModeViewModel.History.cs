@@ -57,7 +57,7 @@ public sealed partial class TetherReferenceModeViewModel
         OnPropertyChanged(nameof(MatchEngine)); OnPropertyChanged(nameof(MatchV4ExecutionMode)); OnPropertyChanged(nameof(IsMatchV4Beta)); OnPropertyChanged(nameof(MatchV4Status));
     }
     public static bool SupportsExperimentalV4Stack(ColorAdjustmentStack? stack, PixelTartFilmSettings? film) =>
-        film?.Enabled != true && (stack is null || (stack.Nodes.All(node => !node.Enabled || node.Type == ColorStudioNodeType.ReferenceMatch)
+        film?.Enabled != true && stack?.Graph is null && (stack is null || (stack.Nodes.All(node => !node.Enabled || node.Type == ColorStudioNodeType.ReferenceMatch)
             && stack.Nodes.Count(node => node.Enabled && node.Type == ColorStudioNodeType.ReferenceMatch) <= 1));
     public static ReferenceLook? ResolveExperimentalV4Look(ReferenceLook? look, ColorAdjustmentStack? stack)
     {

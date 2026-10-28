@@ -12,7 +12,7 @@ public partial class PhotoGradePageView
     private async void RenderR53PresetCards(Panel target)
     {
         r53PresetCancellation?.Cancel();var cancellation=new CancellationTokenSource();r53PresetCancellation=cancellation;var token=cancellation.Token;var revision=++r53PresetRevision;
-        if(model is not{} workspace){cancellation.Dispose();return;}
+        if(model is not{} workspace){if(ReferenceEquals(r53PresetCancellation,cancellation))r53PresetCancellation=null;cancellation.Dispose();return;}
         try
         {
         var asset=workspace.ActiveTarget?.Id;var variant=workspace.ActiveTarget?.ActiveEditVersionId;var source=workspace.LayerThumbnailSource??workspace.Editor.SourceImage;
@@ -32,11 +32,11 @@ public partial class PhotoGradePageView
             var favorite=new Button{Content=new DarkroomIcon{Kind="star"},Height=20,Width=24,HorizontalAlignment=HorizontalAlignment.Right,ToolTip="收藏 "+card.Name};favorite.Click+=(_,_)=>{workspace.ToggleR53Favorite(card.Name);RenderR53Resources();};cell.Children.Add(favorite);grid.Children.Add(cell);
             // Raster gallery uses the unchanged production bitmap renderer at <=192 px.
             // RAW/document-working-domain cards are explicitly unavailable until their matching adapter exists.
-            if(source is null||workspace.IsProfessionalRaw){choose.IsEnabled=false;choose.ToolTip="当前输入尚无该预设的同域缩略适配；请使用右侧已支持工具";continue;}
+            if(source is null||workspace.IsProfessionalRaw||workspace.Editor.AdjustmentStack.Graph is not null||card.Stack.Graph is not null){choose.IsEnabled=false;choose.ToolTip="当前输入尚无该预设的同域缩略适配；请使用右侧已支持工具";continue;}
             try
             {
                 var scale=Math.Min(1,192d/Math.Max(source.PixelWidth,source.PixelHeight));var small=new TransformedBitmap(source,new ScaleTransform(scale,scale));small.Freeze();var look=workspace.Editor.SelectedLook;
-                var previewStack=workspace.Editor.AdjustmentStack with{Nodes=workspace.Editor.AdjustmentStack.Nodes.Concat(card.Stack.Nodes).Take(64).ToArray()};
+                var previewStack=workspace.Editor.AdjustmentStack with{Nodes=workspace.Editor.AdjustmentStack.Nodes.Concat(card.Stack.Nodes).Take(64).ToArray(),Graph=null};
                 var bitmap=await Task.Run(()=>ColorStudioBitmapRenderer.Render(small,previewStack,look,token),token);
                 if(token.IsCancellationRequested||revision!=r53PresetRevision||workspace.ActiveTarget?.Id!=asset||workspace.ActiveTarget?.ActiveEditVersionId!=variant)return;image.Source=bitmap;
             }

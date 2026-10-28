@@ -70,7 +70,8 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     {
         var index = stack.Nodes.ToList().FindIndex(n => n.Id == selectedId);
         if (index < 0) throw new ArgumentException("颜色范围节点已移除。");
-        var prior = stack.Nodes.Take(index).ToArray(); var before = stack with { Nodes = prior };
+        var prior = stack.Nodes.Take(index).ToArray(); var before = stack with { Version=2,Nodes = prior,Graph=null };
+        if(stack.Graph is{} graph){var incoming=graph.Edges.SingleOrDefault(e=>e.To==selectedId);before=incoming is null?stack with{Graph=graph with{Edges=graph.Edges.Where(e=>e.To!=StudioNodeGraph.Output).ToArray()}}:stack with{Graph=graph with{Edges=graph.Edges.Where(e=>e.To!=StudioNodeGraph.Output).Append(new(incoming.From,"rgb",StudioNodeGraph.Output,"rgb")).ToArray()}};}
         if (rawInput is not null)
         {
             // Preserve RAW float values. Center-sampling is a declared bounded inspection

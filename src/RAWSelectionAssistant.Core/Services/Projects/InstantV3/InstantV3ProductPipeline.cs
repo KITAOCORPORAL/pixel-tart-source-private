@@ -48,7 +48,7 @@ public static class InstantV3ProductPipeline
   catch{pixels?.Dispose();secondLease?.Dispose();pin.Dispose();throw;}
  }
  public static (int Width,int Height) Size(ProfessionalRawMaster master,ProfessionalRawDefinition definition)
- {var size=ProfessionalRawPipeline.OrientedSize(master);var r=definition.InstantFilm!.V3!;var l=InstantPaperLayout.Create(size.Width,size.Height,new InstantFilmDefinition(true,AlgorithmVersion:2,PaperFrame:r.Surface.Frame){PaperGeometry=r.Geometry});return(l.Width,l.Height);}
+ {var size=ProfessionalRawPipeline.OrientedSize(master);var r=definition.InstantFilm!.V3!;var l=OriginalFrameLibrary.Layout(size.Width,size.Height,r);return(l.Width,l.Height);}
  public static HighBitDepthImageBuffer Preview(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int edge,CancellationToken token)
  {using var session=Open(master,definition,token);using var owner=session.RenderPreview(edge,token);return owner.TransferToBuffer();}
  public static HighBitDepthImageBuffer Region(ProfessionalRawMaster master,ProfessionalRawDefinition definition,int x,int y,int w,int h,CancellationToken token)

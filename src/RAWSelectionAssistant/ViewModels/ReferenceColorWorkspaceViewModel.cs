@@ -339,7 +339,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     public RelayCommand OpenAdjustmentCopyCommand { get; }
     public RelayCommand ConfirmAdjustmentCopyCommand { get; }
     public RelayCommand CancelAdjustmentCopyCommand { get; }
-    public bool CanSyncSelectedNodes => !IsProfessionalRaw && Editor.IsProMode && ActiveTarget is not null && SyncDestinationTargets.Count > 0 && Editor.AdjustmentNodes.Count > 0 && !IsLoading;
+    public bool CanSyncSelectedNodes => Editor.AdjustmentStack.Graph is null && !IsProfessionalRaw && Editor.IsProMode && ActiveTarget is not null && SyncDestinationTargets.Count > 0 && Editor.AdjustmentNodes.Count > 0 && !IsLoading;
     public string SyncFeedback { get => _syncFeedback; private set { if (SetProperty(ref _syncFeedback, value)) OnPropertyChanged(nameof(HasSyncFeedback)); } }
     public bool HasSyncFeedback => !string.IsNullOrEmpty(SyncFeedback);
     private async Task ShowSyncFeedbackAsync(string message)
@@ -459,6 +459,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
         => SyncSelectedColorNodes(source, selectedNodeIds, targets, null);
     private void SyncSelectedColorNodes(ColorAdjustmentStack source, IReadOnlySet<Guid> selectedNodeIds, IEnumerable<ReferenceTargetItem> targets, TargetAdjustment? frozen)
     {
+        if(source.Graph is not null||targets.Any(t=>t.ColorAdjustmentStackSnapshot?.Graph is not null)){StatusText="节点图需整体应用，未按节点压平同步。";return;}
         var destinations = targets.Where(t=>t.RawDefinition is null).ToArray();
         var selected = source.Normalize().Nodes.Where(node => selectedNodeIds.Contains(node.Id)).ToArray();
         if (selected.Length == 0) return;
@@ -482,6 +483,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
     private void ApplySelectedAdjustments(IReadOnlySet<ColorStudioNodeType> selectedTypes, IEnumerable<ReferenceTargetItem> targets, TargetAdjustment frozen)
     {
         var sourceStack = frozen.Stack!;
+        if(sourceStack.Graph is not null||targets.Any(t=>t.ColorAdjustmentStackSnapshot?.Graph is not null)){StatusText="节点图需整体应用，未按类别压平同步。";return;}
         var destinations = targets.Where(t=>t.RawDefinition is null).ToArray();
         RememberBatchAdjustment(destinations);
         var look = frozen.Look;

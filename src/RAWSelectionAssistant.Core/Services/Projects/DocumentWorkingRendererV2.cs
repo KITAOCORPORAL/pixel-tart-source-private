@@ -6,10 +6,11 @@ public static class DocumentWorkingRendererV2
 {
  public const string Space="LinearProPhotoD50V2";
  public sealed record Prepared(ProfessionalRawDefinition Definition,(ColorAdjustmentStackNode Node,Func<double,double,double>? Mask,LinearWideToolsV1.Prepared Tool)[] Nodes);
- public static Prepared Prepare(ProfessionalRawMaster m,ProfessionalRawDefinition d,CancellationToken token){ProfessionalRawPipeline.ValidateMaster(m,d);Validate(d);var size=ProfessionalRawPipeline.OrientedSize(m);return new(d with{LocalEdits=d.LocalEdits?.Freeze()},(d.LocalEdits?.Stack.Nodes.Where(n=>n.Enabled)??[]).Select(n=>(n,n.LocalMask?.Compile((double)size.Width/size.Height,token),new LinearWideToolsV1.Prepared(n))).ToArray());}
+ public static Prepared Prepare(ProfessionalRawMaster m,ProfessionalRawDefinition d,CancellationToken token){ProfessionalRawPipeline.ValidateMaster(m,d);Validate(d);var size=ProfessionalRawPipeline.OrientedSize(m);return new(d with{LocalEdits=d.LocalEdits?.Freeze()},((d.LocalEdits is{} local?StudioGraphRouting.Nodes(local.Stack).Where(n=>n.Enabled):[])).Select(n=>(n,n.LocalMask?.Compile((double)size.Width/size.Height,token),new LinearWideToolsV1.Prepared(n))).ToArray());}
  public static void Validate(ProfessionalRawDefinition d)
  {
   if(d.ColorState?.Version!=2)return;
+  if(d.LocalEdits?.Stack.Graph?.Version==2)throw new NotSupportedException("线性宽域并行合流尚未准入；保留定义，未转sRGB或压平。");
   foreach(var n in d.LocalEdits?.Stack.Nodes??[])
    if(!LinearWideToolsV1.Supported(n)||Math.Abs(n.NumericParameters.GetValueOrDefault("exposure"))>10)
     throw new NotSupportedException("线性工作域支持曝光、相对白平衡、对比度/高光/阴影；其他工具尚未适配。");

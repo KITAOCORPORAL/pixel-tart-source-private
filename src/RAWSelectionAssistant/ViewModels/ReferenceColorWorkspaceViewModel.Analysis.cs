@@ -1,4 +1,4 @@
-﻿using System.Windows.Media.Imaging;
+using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.AssetLibrary.VisualAnalysis;
 using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Services;
@@ -41,7 +41,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         Interlocked.Increment(ref _colorSpaceRevision);
         PreviewHistogram = null; ColorSpaceModel = null; _colorSpaceSourceBuffer = null; _analysisColors = [];
         ClearColorSpaceHighlight(); BuildColorSpaceModelCommand.RaiseCanExecuteChanged();
-        AnalysisLabel = Editor.SourceImage is null ? "尚无目标图像" : "正在分析当前图像…";
+        AnalysisLabel = Editor.SourceImage is null&&Editor.MatchedImage is null ? "尚无目标图像" : "正在分析当前图像…";
         AnalysisWork = RefreshPreviewAnalysisAsync();
     }
 

@@ -24,7 +24,7 @@ public static class ProfessionalRawLocalRenderer
   public Prepared(ProfessionalRawMaster master,ProfessionalRawDefinition definition,CancellationToken token=default){var clock=RawLocalProfile.Begin();ProfessionalRawPipeline.ValidateMaster(master,definition);Definition=definition with{LocalEdits=definition.LocalEdits?.Freeze(),SceneExposure=definition.SceneExposure?.Validate()};var size=ProfessionalRawPipeline.OrientedSize(master);SceneMask=definition.SceneExposure?.Mask?.Compile((double)size.Width/size.Height,token);Masks=Definition.LocalEdits?.Stack.Nodes.Where(n=>n.LocalMask is not null).ToDictionary(n=>n.Id,n=>n.LocalMask!.Compile((double)size.Width/size.Height,token))??[];RawLocalProfile.End("freeze-and-index",clock);}
  }
  public static bool Active(ProfessionalRawDefinition d)=>d.ColorState?.Version==2||d.LocalEdits is not null||d.Geometry is not null||d.SceneExposure is not null;
- public static bool Supports(ColorStudioNodeType t)=>t is ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.BasicTone or ColorStudioNodeType.Levels or ColorStudioNodeType.Curve or ColorStudioNodeType.ColorBalance or ColorStudioNodeType.SkinTone or ColorStudioNodeType.Preset;
+ public static bool Supports(ColorStudioNodeType t)=>t is ColorStudioNodeType.GraphMix or ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.BasicTone or ColorStudioNodeType.Levels or ColorStudioNodeType.Curve or ColorStudioNodeType.ColorBalance or ColorStudioNodeType.SkinTone or ColorStudioNodeType.Preset;
  public static (int Width,int Height) Size(ProfessionalRawMaster m,ProfessionalRawDefinition d){var s=ProfessionalRawPipeline.OrientedSize(m);return (d.Geometry??new()).Size(s.Width,s.Height);}
  public static HighBitDepthImageBuffer Region(ProfessionalRawMaster m,ProfessionalRawDefinition d,int left,int top,int width,int height,CancellationToken token=default,Prepared? prepared=null)
  {
@@ -45,7 +45,8 @@ public static class ProfessionalRawLocalRenderer
   }}
   RawLocalProfile.End("base-raw-coordinate-display",baseClock);
   var current=new HighBitDepthImageBuffer(width,height,values,"16","sRGB",1);
-  if(d.LocalEdits is{} edits){foreach(var node in edits.Stack.Nodes.Where(n=>n.Enabled)){
+  if(d.LocalEdits?.Stack.Graph?.Version==2){using var original=current;return StudioGraphRenderer.Render(original,d.LocalEdits.Stack,(input,node)=>ColorStudioRenderPipeline.ApplyPointEffect(input,node,token),token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks);}
+  if(d.LocalEdits is{} edits){foreach(var node in StudioGraphRouting.Nodes(edits.Stack).Where(n=>n.Enabled)){
    token.ThrowIfCancellationRequested();if(node.CompositeVersion is 1 or 2&&node.Opacity==0)continue;
    var toolClock=RawLocalProfile.Begin();var effect=ColorStudioRenderPipeline.ApplyPointEffect(current,node,token);RawLocalProfile.End("point-effect",toolClock);var maskClock=RawLocalProfile.Begin();
    var next=StudioLayerComposite.Apply(current,effect,node,token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks.GetValueOrDefault(node.Id));RawLocalProfile.End("mask-composite",maskClock);if(!ReferenceEquals(next,effect))effect.Dispose();current.Dispose();current=next;
@@ -63,7 +64,8 @@ public static class ProfessionalRawLocalRenderer
   if(d.ColorState?.Version==2)return DocumentWorkingRendererV2.Preview(m,d,800,token);
   var prepared=new Prepared(m,d,token);d=prepared.Definition;var current=basis?.Clone()??FastBase(m,d,800,token);var oriented=ProfessionalRawPipeline.OrientedSize(m);var geometry=d.Geometry??new();var w=current.Width;var h=current.Height;
   (double X,double Y) Coordinate(int x,int y){var p=geometry.SourceTuple((x+.5)/w,(y+.5)/h,(double)oriented.Width/oriented.Height);if(geometry.Version==2)return p;return ((Math.Clamp((int)(p.X*oriented.Width),0,oriented.Width-1)+.5)/oriented.Width,(Math.Clamp((int)(p.Y*oriented.Height),0,oriented.Height-1)+.5)/oriented.Height);}
-  foreach(var node in d.LocalEdits?.Stack.Nodes.Where(n=>n.Enabled)??[]){if(node.CompositeVersion is 1 or 2&&node.Opacity==0)continue;var effect=ColorStudioRenderPipeline.ApplyPointEffect(current,node,token);var next=StudioLayerComposite.Apply(current,effect,node,token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks.GetValueOrDefault(node.Id));if(!ReferenceEquals(effect,next))effect.Dispose();current.Dispose();current=next;}return current;
+  if(d.LocalEdits?.Stack.Graph?.Version==2){using var original=current;return StudioGraphRenderer.Render(original,d.LocalEdits.Stack,(input,node)=>ColorStudioRenderPipeline.ApplyPointEffect(input,node,token),token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks);}
+  foreach(var node in (d.LocalEdits is{} local?StudioGraphRouting.Nodes(local.Stack).Where(n=>n.Enabled):[])){if(node.CompositeVersion is 1 or 2&&node.Opacity==0)continue;var effect=ColorStudioRenderPipeline.ApplyPointEffect(current,node,token);var next=StudioLayerComposite.Apply(current,effect,node,token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks.GetValueOrDefault(node.Id));if(!ReferenceEquals(effect,next))effect.Dispose();current.Dispose();current=next;}return current;
  }
  public static HighBitDepthImageBuffer Preview(ProfessionalRawMaster m,ProfessionalRawDefinition d,int edge,CancellationToken token=default)
  {

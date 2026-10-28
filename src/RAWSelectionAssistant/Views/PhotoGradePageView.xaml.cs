@@ -34,15 +34,15 @@ public partial class PhotoGradePageView:UserControl
  {
   Detach(cancel:false);model=DataContext as ReferenceColorWorkspaceViewModel;model?.EnableLightPrintWorkspace();
   // Weak subscription also covers controls constructed but never attached/unloaded.
-  if(model is not null){PropertyChangedEventManager.AddHandler(model,Changed,string.Empty);PropertyChangedEventManager.AddHandler(model.Editor,MaskEditorChanged,string.Empty);}
+  if(model is not null){PropertyChangedEventManager.AddHandler(model,Changed,string.Empty);PropertyChangedEventManager.AddHandler(model.Editor,MaskEditorChanged,string.Empty);PropertyChangedEventManager.AddHandler(model.Editor,R54EditorChanged,string.Empty);}
   PhotoViewport.LostMouseCapture-=MaskCaptureLost;PhotoViewport.LostMouseCapture+=MaskCaptureLost;
 
-  RestorePanelLayout();Refresh();UpdateZones();ApplyR53Layout();RenderR53Resources();ConfigureMaskPanel();
+  RestorePanelLayout();AttachR54Graph();Refresh();UpdateZones();ApplyR53Layout();RenderR53Resources();ConfigureMaskPanel();
  }
  private void Detach(bool cancel)
  {
-  r53PresetCancellation?.Cancel();StopMaskOverlay();CancelMaskStroke();r53MultiWindow?.Close();r53ResourceWindow?.Close();
-  if(model is not null)PropertyChangedEventManager.RemoveHandler(model.Editor,MaskEditorChanged,string.Empty);
+  var presets=r53PresetCancellation;r53PresetCancellation=null;presets?.Cancel();StopMaskOverlay();CancelMaskStroke();r53MultiWindow?.Close();r53ResourceWindow?.Close();
+  if(model is not null){PropertyChangedEventManager.RemoveHandler(model.Editor,MaskEditorChanged,string.Empty);PropertyChangedEventManager.RemoveHandler(model.Editor,R54EditorChanged,string.Empty);}
   ReleaseR53Compare();closeR53Inspection?.Invoke();
   if(model is not null){PropertyChangedEventManager.RemoveHandler(model,Changed,string.Empty);if(cancel)model.ExitInstantPresentationForLifecycle();}
 
@@ -66,7 +66,7 @@ public partial class PhotoGradePageView:UserControl
  {
   if(EditModes is null||!ReferenceEquals(e.Source,EditModes)||AdjustmentScroll is null)return;
   var i=EditModes.SelectedIndex;if(i<0)return;
-  if(HistogramPanel is not null){HistogramPanel.Visibility=i==4||!scopesOpen?Visibility.Collapsed:Visibility.Visible;HistogramRow.Height=new GridLength(i==4||!scopesOpen?0:98);DrawGuides();}var panes=new[]{AdjustmentScroll,PaperScroll,LayersScroll,StylesScroll,VariantsScroll};
+  if(HistogramPanel is not null){HistogramPanel.Visibility=i==4?Visibility.Collapsed:Visibility.Visible;HistogramRow.Height=new GridLength(i==4?0:98);DrawGuides();}var panes=new[]{AdjustmentScroll,PaperScroll,LayersScroll,StylesScroll,VariantsScroll};
   for(int n=0;n<panes.Length;n++)panes[n].Visibility=i==n?Visibility.Visible:Visibility.Collapsed;
   if(FilmAction is not null)FilmAction.Visibility=i==1?Visibility.Visible:Visibility.Collapsed;if(PanelTitle is not null)PanelTitle.Text=new[]{"调整","光片","图层","风格","变体"}[Math.Clamp(i,0,4)];
   if(i==1&&r53ResourceTab!="即时胶片"){r53ResourceTab="即时胶片";RenderR53Resources();}
@@ -100,6 +100,7 @@ public partial class PhotoGradePageView:UserControl
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PhotoMaskColor))Refresh();
    if(e.PropertyName is nameof(ReferenceColorWorkspaceViewModel.RawLocalEditing) or nameof(ReferenceColorWorkspaceViewModel.ActiveTarget)){if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.ActiveTarget)){StopMaskOverlay();cropStart=cropEnd=null;CropOverlay.Children.Clear();if(cropPanel is not null)cropPanel.Visibility=Visibility.Collapsed;}ConfigureMaskPanel();}
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.PreviewHistogram))UpdateZones();
+  if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.LayerThumbnailContext))r54Graph?.InvalidateVisual();
   if(e.PropertyName is nameof(ReferenceColorWorkspaceViewModel.ActiveTarget) or nameof(ReferenceColorWorkspaceViewModel.LayerThumbnailContext) or nameof(ReferenceColorWorkspaceViewModel.IsLightPrintLocked))RenderR53Resources();
   DrawMaskOverlay();
   // A newly imported ordinary photo restores the historical default engine. The

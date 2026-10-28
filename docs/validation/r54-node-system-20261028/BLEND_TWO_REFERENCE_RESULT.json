@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "fixed_before_execution_max8": 2.1,
+  "meaning": "existing encoded sRGB adjustment-result blend, same opaque branch inputs; PIL/OpenCV quantization differs from product float; no physical colour accuracy claim",
+  "corpus_sha256": "a0c4f6cbf388328b69eb14de6a5b391df52debd8bca4117e0366e0c2d731a979",
+  "samples": 4000,
+  "versions": {
+    "Pillow": "12.3.0",
+    "OpenCV": "4.10.0"
+  },
+  "stats": {
+    "Normal": {
+      "pillow_max8": 0.7500164999999887,
+      "opencv_max8": 0.5000210000000155,
+      "n": 800
+    },
+    "Multiply": {
+      "pillow_max8": 0.9980463000000056,
+      "opencv_max8": 0.7470662499999986,
+      "n": 800
+    },
+    "Screen": {
+      "pillow_max8": 0.9960772999999945,
+      "opencv_max8": 0.7411768999999985,
+      "n": 800
+    },
+    "Darken": {
+      "pillow_max8": 0.7500159999999889,
+      "opencv_max8": 0.5000164999999895,
+      "n": 800
+    },
+    "Lighten": {
+      "pillow_max8": 0.7500149999999894,
+      "opencv_max8": 0.5000184999999885,
+      "n": 800
+    }
+  },
+  "references": [
+    {
+      "project": "python-pillow/Pillow",
+      "commit": "bb1d8e8ab8d29048624d96e3ee53cecf7c13d13d",
+      "files": [
+        "src/PIL/ImageChops.py",
+        "src/libImaging/Chops.c",
+        "LICENSE"
+      ],
+      "license": "MIT-CMU (Pillow license); reference runtime only"
+    },
+    {
+      "project": "opencv/opencv",
+      "commit": "71d3237a093b60a27601c20e9ee6c3e52154e8b1",
+      "files": [
+        "modules/core/src/arithm.cpp",
+        "LICENSE"
+      ],
+      "license": "Apache-2.0; reference runtime only"
+    }
+  ]
+}

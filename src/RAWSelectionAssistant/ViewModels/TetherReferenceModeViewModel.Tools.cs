@@ -25,6 +25,7 @@ public sealed partial class TetherReferenceModeViewModel
 
     public void SetToolParameter(ColorStudioToolParameter parameter, double value)
     {
+        if(AdjustmentStack.Graph is not null&&SelectedAdjustmentNode?.Type!=parameter.NodeType){StatusText="请选择对应类型的节点；未修改其他节点。";return;}
         if (!double.IsFinite(value)) throw new ArgumentException("请输入有限数值。");
         value = Math.Clamp(value, parameter.Minimum, parameter.Maximum);
         if (Math.Abs(ToolValue(parameter) - value) < 1e-10) return;

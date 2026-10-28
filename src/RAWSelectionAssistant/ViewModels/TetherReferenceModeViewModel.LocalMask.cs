@@ -17,7 +17,7 @@ public sealed partial class TetherReferenceModeViewModel
 
     public double SelectedLayerOpacity{get=>SelectedAdjustmentNode?.Opacity??1;set{if(!LocalCompositeEditingAvailable||!double.IsFinite(value))return;if(SelectedAdjustmentNode is {} node)ChangeStack(nodes=>nodes.Select(n=>n.Id==node.Id?n with{CompositeVersion=Math.Max(1,n.CompositeVersion),Opacity=Math.Clamp(value,0,1)}:n).ToArray());OnPropertyChanged();}}
     public StudioLayerBlend SelectedLayerBlend{get=>SelectedAdjustmentNode?.Blend??StudioLayerBlend.Normal;set{if(!LocalCompositeEditingAvailable||!LayerBlendModes.Contains(value))return;if(SelectedAdjustmentNode is {} node)ChangeStack(nodes=>nodes.Select(n=>n.Id==node.Id?n with{CompositeVersion=(int)value>=3?2:Math.Max(1,n.CompositeVersion),Blend=value}:n).ToArray());OnPropertyChanged();}}
-    public IReadOnlyList<StudioLayerBlend> LayerBlendModes{get;}=[StudioLayerBlend.Normal,StudioLayerBlend.Multiply,StudioLayerBlend.Screen,StudioLayerBlend.Darken,StudioLayerBlend.Lighten,StudioLayerBlend.Overlay,StudioLayerBlend.SoftLight,StudioLayerBlend.Color,StudioLayerBlend.Luminosity];
+    public IReadOnlyList<StudioLayerBlend> LayerBlendModes=>SelectedAdjustmentNode?.Type==ColorStudioNodeType.GraphMix?[StudioLayerBlend.Normal,StudioLayerBlend.Multiply,StudioLayerBlend.Screen,StudioLayerBlend.Darken,StudioLayerBlend.Lighten]:[StudioLayerBlend.Normal,StudioLayerBlend.Multiply,StudioLayerBlend.Screen,StudioLayerBlend.Darken,StudioLayerBlend.Lighten,StudioLayerBlend.Overlay,StudioLayerBlend.SoftLight,StudioLayerBlend.Color,StudioLayerBlend.Luminosity];
     public void AddMaskStroke(StudioMaskStroke stroke)
     {
         if(!LocalCompositeEditingAvailable)return;

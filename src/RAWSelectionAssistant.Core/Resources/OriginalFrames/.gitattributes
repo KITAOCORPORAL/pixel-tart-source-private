@@ -1,0 +1,4 @@
+# Lossless artwork resource bytes must never undergo newline conversion.
+*.zlib binary
+manifest.json -text
+RIGHTS.md text eol=lf

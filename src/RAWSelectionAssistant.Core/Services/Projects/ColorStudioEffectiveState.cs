@@ -9,6 +9,7 @@ public static class ColorStudioEffectiveState
         if (stack is { Nodes.Count: > 0 })
         {
             var saved = stack.DeepClone();
+            if(saved.Graph is not null&&settings?.Enabled==true&&saved.Nodes.All(n=>n.Type!=ColorStudioNodeType.Film))throw new NotSupportedException("节点图不隐式追加旧胶片效果；请显式添加独立胶片节点。");
             return settings?.Enabled == true && saved.Nodes.All(n => n.Type != ColorStudioNodeType.Film)
                 ? saved with { Nodes = [.. saved.Nodes, new(Guid.NewGuid(), ColorStudioNodeType.Film, "胶片", FilmSettings: settings)] }
                 : saved;

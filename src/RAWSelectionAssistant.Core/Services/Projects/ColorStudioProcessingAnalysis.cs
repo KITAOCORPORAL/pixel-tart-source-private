@@ -10,7 +10,7 @@ public static class ColorStudioProcessingAnalysis
         VisualAnalysisEngine.Analyze(new(Guid.Empty, "not-used-by-non-reference-nodes", new VisualPixelBuffer(1, 1, new byte[] { 0, 0, 0 }))));
 
     public static bool RequiresSourceAnalysis(ColorAdjustmentStack stack, ReferenceLook? reference) =>
-        reference is not null && stack.Nodes.Any(node => node.Enabled && node.Type == ColorStudioNodeType.ReferenceMatch &&
+        reference is not null && StudioGraphRouting.Nodes(stack).Any(node => node.Enabled && node.Type == ColorStudioNodeType.ReferenceMatch &&
             node.NumericParameters.GetValueOrDefault("match_strength", reference.Parameters.MatchStrength) != 0);
 
     public static AssetVisualAnalysisResult Create(VisualPixelBuffer pixels, ColorAdjustmentStack stack, ReferenceLook? reference, CancellationToken token = default)

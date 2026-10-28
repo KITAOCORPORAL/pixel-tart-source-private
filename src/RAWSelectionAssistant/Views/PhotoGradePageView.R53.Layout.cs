@@ -15,8 +15,8 @@ public partial class PhotoGradePageView
     }
     private bool r53CompactPanelOpen,r53WidePanelOpen=true,r53NodesCollapsed,r53FilmCollapsed;
     private string r53ParameterTab="基础";
-    private WrapPanel? r53ParameterTabs;
-    private void R53ToggleNodes(object s,RoutedEventArgs e){r53NodesCollapsed=!r53NodesCollapsed;ApplyR53Layout();}
+    private System.Windows.Controls.Primitives.UniformGrid? r53ParameterTabs;
+    private void R53ToggleNodes(object s,RoutedEventArgs e){r53NodesCollapsed=!r53NodesCollapsed;ApplyR53Layout();SaveR54GraphLayout();}
     private void R53ToggleFilmstrip(object s,RoutedEventArgs e){r53FilmCollapsed=!r53FilmCollapsed;ApplyR53Layout();}
     private void R53OpenFilmPanel(object s,RoutedEventArgs e){EditModes.SelectedIndex=1;OpenR53Panel();}
     private void R53OpenLayerPanel(object s,RoutedEventArgs e){EditModes.SelectedIndex=0;OpenR53Panel();}
@@ -41,21 +41,25 @@ public partial class PhotoGradePageView
     private void ApplyR53ParameterHierarchy(bool professional,bool film)
     {
         if(AdjustmentScroll.Content is not StackPanel group||R53SimpleLayers is null)return;
-        if(r53ParameterTabs is null){r53ParameterTabs=new WrapPanel{Margin=new Thickness(4)};foreach(var name in new[]{"曲线","色轮","HSL","基础"}){var button=new Button{Content=name,Width=64,ToolTip=name+"参数"};button.Click+=(_,_)=>{r53ParameterTab=name;ApplyR53Layout();};r53ParameterTabs.Children.Add(button);}group.Children.Insert(Math.Min(1,group.Children.Count),r53ParameterTabs);}
+        if(r53ParameterTabs is null){r53ParameterTabs=new System.Windows.Controls.Primitives.UniformGrid{Columns=6,Margin=new Thickness(2)};foreach(var name in new[]{"色轮","曲线","范围","扭曲","HSL","基础"}){var button=new Button{Content=name,MinWidth=24,ToolTip=name=="扭曲"?"色彩扭曲器尚未实现":name+"参数",IsEnabled=name!="扭曲"};button.Click+=(_,_)=>{r53ParameterTab=name;ApplyR53Layout();};r53ParameterTabs.Children.Add(button);}group.Children.Insert(Math.Min(1,group.Children.Count),r53ParameterTabs);}
         if(group.Children.IndexOf(R53SimpleLayers)!=0){group.Children.Remove(R53SimpleLayers);group.Children.Insert(0,R53SimpleLayers);}
         if(group.Children.IndexOf(r53ParameterTabs)!=1){group.Children.Remove(r53ParameterTabs);group.Children.Insert(1,r53ParameterTabs);}
-        R53SimpleLayerList.Visibility=professional?Visibility.Collapsed:Visibility.Visible;
-        r53ParameterTabs.Visibility=professional?Visibility.Visible:Visibility.Collapsed;
+        R53SimpleLayerList.Visibility=professional||model?.Editor.HasProfessionalRouting==true?Visibility.Collapsed:Visibility.Visible;
+        UpdateR54ProfessionalGroup(professional);
+        r53ParameterTabs.Visibility=!professional&&model?.Editor.HasProfessionalRouting==true?Visibility.Collapsed:Visibility.Visible;
+        r53ParameterTabs.Columns=professional?6:3;foreach(var tab in r53ParameterTabs.Children.OfType<Button>())tab.Visibility=professional||tab.Content is "基础" or "曲线" or "HSL"?Visibility.Visible:Visibility.Collapsed;
         R53SimpleLayers.Header=professional?"所选节点":"图层";
         foreach(var button in r53ParameterTabs.Children.OfType<Button>())button.Background=new SolidColorBrush(Equals(button.Content,r53ParameterTab)?Color.FromRgb(48,68,62):Color.FromRgb(29,29,32));
         foreach(var section in group.Children.OfType<Expander>())
         {
             if(ReferenceEquals(section,R53SimpleLayers))continue;
+            if(!professional&&model?.Editor.HasProfessionalRouting==true){section.Visibility=Visibility.Collapsed;continue;}
             var tag=section.Tag as string??"";
             var basic=tag is "AdjustmentScroll.1" or "AdjustmentScroll.2" or "AdjustmentScroll.5" or "AdjustmentScroll.6";
-            var show=r53ParameterTab=="全部"||(!professional?basic:r53ParameterTab switch{"曲线"=>tag=="AdjustmentScroll.4","色轮"=>tag=="AdjustmentScroll.7","HSL"=>tag=="AdjustmentScroll.ColorRange",_=>basic});
+            var show=r53ParameterTab=="全部"||(!professional?(r53ParameterTab=="曲线"?tag=="AdjustmentScroll.4":r53ParameterTab=="HSL"?tag=="AdjustmentScroll.ColorRange":basic):r53ParameterTab switch{"曲线"=>tag=="AdjustmentScroll.4","色轮"=>tag=="AdjustmentScroll.7","HSL" or "范围"=>tag=="AdjustmentScroll.ColorRange",_=>basic});
             section.Visibility=show?Visibility.Visible:Visibility.Collapsed;
-            if(professional&&show)section.IsExpanded=true;
+            if(show)section.IsExpanded=true;
+            section.IsEnabled=model?.Editor.SelectedAdjustmentNode?.Type!=RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.GraphMix;
         }
         foreach(var button in group.Children.OfType<Button>())button.Visibility=r53ParameterTab=="全部"?Visibility.Visible:Visibility.Collapsed;
         if(PhotographerCurve is not null)PhotographerCurve.Compact=true;

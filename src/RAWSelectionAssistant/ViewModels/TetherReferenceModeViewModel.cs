@@ -171,6 +171,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         var loadedStack = CloneHistoryStack(stack) ?? new ColorAdjustmentStack(Array.Empty<ColorAdjustmentStackNode>());
         // Legacy sessions may carry film next to a stack. Bring that effective operation
         // into the stack once so new controls, history, thumbnails and output agree.
+        if(loadedStack.Graph is not null&&loadedFilm.Enabled&&loadedStack.Nodes.All(n=>n.Type!=ColorStudioNodeType.Film))throw new NotSupportedException("图路由不能隐式追加旧胶片，原定义保留。");
         if (loadedFilm.Enabled && loadedStack.Nodes.All(n => n.Type != ColorStudioNodeType.Film))
             loadedStack = loadedStack.Nodes.Count == 0 && look is not null
                 ? ColorStudioLegacyMigration.Migrate(look with { Film = loadedFilm }).Stack
@@ -286,7 +287,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     public bool ContextRailOpen { get => _contextRailOpen; set { if (SetProperty(ref _contextRailOpen, value)) OnPropertyChanged(nameof(IsContextVisible)); } }
     public bool IsContextVisible => !FocusView && ContextRailOpen;
     public bool IsLeftRailVisible => !FocusView;
-    public ColorAdjustmentStack AdjustmentStack { get => _adjustmentStack; private set { if (SetProperty(ref _adjustmentStack, value)) { OnPropertyChanged(nameof(AdjustmentNodes)); OnPropertyChanged(nameof(SelectedAdjustmentNode)); OnPropertyChanged(nameof(SelectedLayerOpacity));OnPropertyChanged(nameof(SelectedLayerBlend));OnPropertyChanged(nameof(SelectedNodeEditable));OnPropertyChanged(nameof(SelectedNodeLocked)); RaiseAdjustmentCommands(); SyncSimpleFromStack(); NotifyDevelop(); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); RestoreSchemeCommand?.RaiseCanExecuteChanged(); } } }
+    public ColorAdjustmentStack AdjustmentStack { get => _adjustmentStack; private set { if (SetProperty(ref _adjustmentStack, value)) { OnPropertyChanged(nameof(HasProfessionalRouting));OnPropertyChanged(nameof(ProfessionalGroupEnabled));OnPropertyChanged(nameof(ProfessionalGroupAmount));OnPropertyChanged(nameof(AdjustmentNodes)); OnPropertyChanged(nameof(SelectedAdjustmentNode)); OnPropertyChanged(nameof(SelectedLayerOpacity));OnPropertyChanged(nameof(SelectedLayerBlend));OnPropertyChanged(nameof(SelectedNodeEditable));OnPropertyChanged(nameof(SelectedNodeLocked)); RaiseAdjustmentCommands(); SyncSimpleFromStack(); NotifyDevelop(); OnPropertyChanged(nameof(HasSessionAdjustment)); OnPropertyChanged(nameof(SessionAdjustmentText)); RestoreSchemeCommand?.RaiseCanExecuteChanged(); } } }
     public IReadOnlyList<ColorAdjustmentStackNode> AdjustmentNodes => AdjustmentStack.Nodes;
     public ColorAdjustmentStackNode? SelectedAdjustmentNode
     {
@@ -480,9 +481,11 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
                 System.Text.Json.JsonSerializer.Serialize(locked with{Enabled=true,UserLocked=false})!=System.Text.Json.JsonSerializer.Serialize(replacement with{Enabled=true,UserLocked=false}))
             {StatusText="图层已锁定；仅允许切换可见性或解除用户锁定。";return;}
         }
+        StudioNodeGraph? reconciled;try{reconciled=previous.Graph?.Reconcile(previous.Nodes,nodes);}catch(InvalidDataException error){StatusText=error.Message;return;}
+        if(reconciled is not null&&previous.Nodes.Any(n=>n.IsLocked&& !previous.Graph!.Edges.Where(e=>e.From==n.Id||e.To==n.Id).SequenceEqual(reconciled.Edges.Where(e=>e.From==n.Id||e.To==n.Id)))){StatusText="锁定节点连线保持，未重排。";return;}
         if (previous.Nodes.SequenceEqual(nodes)) return;
         if (_editTransactionBefore is null) { _undoStacks.Push(previous); _undoSelections.Push(_selectedAdjustmentNodeId); }
-        _redoStacks.Clear(); _redoSelections.Clear(); AdjustmentStack = (previous with { Nodes = nodes, ProcessingVersion = processingVersion ?? previous.ProcessingVersion }).Normalize(); if (render) _ = DebouncedRenderAsync();
+        _redoStacks.Clear(); _redoSelections.Clear(); AdjustmentStack = (previous with { Nodes = nodes, Graph=reconciled, ProcessingVersion = processingVersion ?? previous.ProcessingVersion }).Normalize(); if (render) _ = DebouncedRenderAsync();
     }
     public void BeginEditTransaction()
     {
@@ -503,7 +506,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     {
         if (_editTransactionBefore is not { } before) return;
         _editTransactionBefore = null;
-        if (!before.Nodes.SequenceEqual(AdjustmentStack.Nodes)) { _undoStacks.Push(before); _undoSelections.Push(_editTransactionSelection); }
+        if (System.Text.Json.JsonSerializer.Serialize(before)!=System.Text.Json.JsonSerializer.Serialize(AdjustmentStack)) { _undoStacks.Push(before); _undoSelections.Push(_editTransactionSelection); }
         _editTransactionSelection = null;
         _transactionRedo = []; _transactionRedoSelections = [];
         RaiseAdjustmentCommands();
@@ -512,6 +515,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
     {
         var nodeType = Enum.TryParse<ColorStudioNodeType>(type, true, out var parsed) ? parsed : ColorStudioNodeType.ColorRange;
         AddAdjustmentOpen = false; OnPropertyChanged(nameof(AddAdjustmentOpen));
+        if(nodeType==ColorStudioNodeType.GraphMix){StatusText="请通过节点图添加并行/混合节点。";return;}
         if (nodeType is ColorStudioNodeType.ReferenceMatch or ColorStudioNodeType.Film && AdjustmentStack.Nodes.Any(node => node.Type == nodeType)) return;
         if (nodeType == ColorStudioNodeType.ReferenceMatch && SelectedLook is null) return;
         var node = new ColorAdjustmentStackNode(Guid.NewGuid(), nodeType, nodeType switch { ColorStudioNodeType.BasicTone => "基础调色", ColorStudioNodeType.WhiteBalance => "白平衡", ColorStudioNodeType.Curve => "曲线", ColorStudioNodeType.ReferenceMatch => "参考仿色", ColorStudioNodeType.Film => "胶片", ColorStudioNodeType.TransitionBlend => "色彩过渡", _ => "颜色范围" }, true, FilmSettings: nodeType == ColorStudioNodeType.Film ? FilmSettings : null);
@@ -658,7 +662,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         if (SelectedAdjustmentNode is not { } selected || string.IsNullOrWhiteSpace(name)) return;
         ChangeStack(nodes => nodes.Select(node => node.Id == selected.Id ? node with { Name = name.Trim() } : node).ToArray());
     }
-    private void RaiseAdjustmentCommands() { DeleteAdjustmentNodeCommand?.RaiseCanExecuteChanged(); DuplicateAdjustmentNodeCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeUpCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeDownCommand?.RaiseCanExecuteChanged(); ResetAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ToggleAdjustmentNodeCommand?.RaiseCanExecuteChanged(); RenameAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ClearSamplesCommand?.RaiseCanExecuteChanged(); UndoAdjustmentCommand?.RaiseCanExecuteChanged(); RedoAdjustmentCommand?.RaiseCanExecuteChanged(); OnPropertyChanged(nameof(SelectedNodeEnabled)); OnPropertyChanged(nameof(SelectedLayerOpacity));OnPropertyChanged(nameof(SelectedLayerBlend));OnPropertyChanged(nameof(SelectedNodeName)); OnPropertyChanged(nameof(SelectedNodeLocked));OnPropertyChanged(nameof(SelectedNodeEditable)); OnPropertyChanged(nameof(KeepOriginalLuminance)); foreach (var name in new[] { nameof(RangeStrength), nameof(RangeRadius), nameof(RangeSoftness), nameof(RangeHue), nameof(RangeSaturation), nameof(RangeChroma), nameof(RangeLightness), nameof(TransitionAmount), nameof(PositiveSamples), nameof(NegativeSamples) }) OnPropertyChanged(name); }
+    private void RaiseAdjustmentCommands() { DeleteAdjustmentNodeCommand?.RaiseCanExecuteChanged(); DuplicateAdjustmentNodeCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeUpCommand?.RaiseCanExecuteChanged(); MoveAdjustmentNodeDownCommand?.RaiseCanExecuteChanged(); ResetAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ToggleAdjustmentNodeCommand?.RaiseCanExecuteChanged(); RenameAdjustmentNodeCommand?.RaiseCanExecuteChanged(); ClearSamplesCommand?.RaiseCanExecuteChanged(); UndoAdjustmentCommand?.RaiseCanExecuteChanged(); RedoAdjustmentCommand?.RaiseCanExecuteChanged(); OnPropertyChanged(nameof(SelectedNodeEnabled)); OnPropertyChanged(nameof(SelectedLayerOpacity));OnPropertyChanged(nameof(SelectedLayerBlend));OnPropertyChanged(nameof(SelectedNodeName)); OnPropertyChanged(nameof(SelectedNodeLocked));OnPropertyChanged(nameof(LayerBlendModes));OnPropertyChanged(nameof(SelectedNodeEditable)); OnPropertyChanged(nameof(KeepOriginalLuminance)); foreach (var name in new[] { nameof(RangeStrength), nameof(RangeRadius), nameof(RangeSoftness), nameof(RangeHue), nameof(RangeSaturation), nameof(RangeChroma), nameof(RangeLightness), nameof(TransitionAmount), nameof(PositiveSamples), nameof(NegativeSamples) }) OnPropertyChanged(name); }
     public ObservableCollection<ReferenceLook> Looks { get; } = [];
     public ObservableCollection<ReferenceLook> SourceChoices { get; } = [];
     public ObservableCollection<ReferenceSourceWeightViewModel> ReferenceSources { get; } = [];
@@ -1036,7 +1040,7 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         if(IndependentRawMode)return;
         var source = interactive ? _interactiveSource ?? _source : _source; var look = SelectedLook; var asset = _assetId;
         var stack = AdjustmentStack.Nodes.Count > 0 ? AdjustmentStack.DeepClone() : AdjustmentStack;
-        if (_presetPreviewNode is { } presetPreview) stack = stack with { Nodes = [.. stack.Nodes, presetPreview] };
+        if (_presetPreviewNode is { } presetPreview){if(stack.Graph is not null){_presetPreviewNode=null;NotifyPresetPreview();StatusText="图路由不使用旧预设临时追加路径；原图路由保留。";}else stack = stack with { Nodes = [.. stack.Nodes, presetPreview] };}
         var film = FilmSettings with { };
         _render?.Cancel();
         var revision = Interlocked.Increment(ref _revision);

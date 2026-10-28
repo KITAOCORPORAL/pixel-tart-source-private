@@ -21,6 +21,7 @@ public sealed record CandidateRecipe(int AlgorithmVersion, string ProfileId, Can
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)] public CandidatePaperControls? Paper {get;init;}
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)] public CandidateDefectControls? Defects {get;init;}
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)] public CandidateMultipleInput? MultipleInput {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)] public InstantFrameArtwork? FrameArtwork {get;init;}
     public const string Domain="OrientedDisplaySrgbD65Float-EotfOnce-LinearResponseOpticsEmulsion-OetfOnce-PaperScanV3";
     public const string Admission="ExplicitCreativeV3_BaseNodesScopedAdmission20261017";
     public CandidateProfile Profile=>CandidateProfiles.Available.Single(p=>p.Id==ProfileId);
@@ -40,7 +41,7 @@ public sealed record CandidateRecipe(int AlgorithmVersion, string ProfileId, Can
         if(Paper is{} paper){if(paper.Version is not(1 or 2 or 3)||paper.Pattern is not("Plain" or "Leather" or "Dots" or "Stripes" or "Foil")||paper.Window is not("Rectangle" or "Circle"))throw new InvalidDataException("Unknown paper version");foreach(var v in new[]{paper.Emboss,paper.EdgeLine,paper.Reflection,paper.WindowHighlight,paper.WindowPressed})Range(v,0,1);Range(paper.ReflectionAngle,-180,180);Range(paper.ReflectionWidth,.01,1);Range(paper.Zoom,1,4);if(paper.Version==1&&paper.Zoom!=1)throw new NotSupportedException("Zoom requires explicit paper component2");}
         if(Defects is{} defect){if(defect.Version is not(1 or 2)||defect.Streams!="V3IndependentStreams1"||defect.Kind is not("None" or "Unspread" or "Bands" or "Fog" or "Islands" or "Crescent" or "BlueFailure"))throw new InvalidDataException("Unknown defect version");foreach(var v in new[]{defect.Amount,defect.Crystal,defect.Leak})Range(v,0,1);if(defect.Version==2){if(defect.Geometry is not{} g)throw new InvalidDataException("Version2 defect geometry missing");Range(g.CenterX,0,1);Range(g.CenterY,0,1);Range(g.AngleDegrees,-180,180);Range(g.Scale,.25,4);}}
         MultipleInput?.Validate();
-        Geometry.Validate();
+        Geometry.Validate();FrameArtwork?.Validate();
         new InstantFilmDefinition(true,Profile.LegacyId,InstantFilmProfiles.Available.Single(p=>p.Id==Profile.LegacyId).ChemicalGeneration,DiceEnabled:true,Tier:Random.Tier,Snapshot:Random).Validate();
         return this;
     }

@@ -16,12 +16,18 @@ public sealed class ColorStudioRenderPipeline
     {
         ArgumentNullException.ThrowIfNull(source); var normalized = stack.Normalize(); var current = source.Clone(); var precisionStages = new List<string>(PrecisionTrace.ProfessionalDefault.Stages);
         var outputs = new List<VisualPixelBuffer>(normalized.Nodes.Count); var inputs = new Dictionary<Guid, VisualPixelBuffer>();
-        foreach (var node in normalized.Nodes.Where(item => item.Enabled))
+        if(normalized.Graph?.Version==2)
+        {
+            current.Dispose();current=StudioGraphRenderer.Render(source,normalized,(input,node)=>ApplyHighPrecision(input,node,reference,analysis,token,alpha,tile),token,tile,masks:compiledMasks,diagnostics:captureNodeDiagnostics?(id,input,output)=>{inputs[id]=input.ToVisualRgb24(token);outputs.Add(output.ToVisualRgb24(token));}:null);
+            return new(current.ToVisualRgb24(token),outputs,new ColorPipelineDescriptor(InputInterpretation:"HighPrecision sRGB",WorkingRepresentation:normalized.WorkingSpace,OutputEncoding:"sRGB display adapter"),inputs,current,new PrecisionTrace(precisionStages));
+        }
+        foreach (var node in StudioGraphRouting.Nodes(normalized).Where(item => item.Enabled))
         {
             token.ThrowIfCancellationRequested(); if (captureNodeDiagnostics) inputs[node.Id] = current.ToVisualRgb24();
             if(StudioLayerComposite.Active(node)&&node.Opacity==0){if(captureNodeDiagnostics)outputs.Add(current.ToVisualRgb24());continue;}
             var input=current;var effect=ApplyHighPrecision(input,node,reference,analysis,token,alpha,tile);
             current=StudioLayerComposite.Apply(input,effect,node,token,tile,compiledMask:compiledMasks?.GetValueOrDefault(node.Id));
+            if(!ReferenceEquals(current,effect))effect.Dispose();input.Dispose();
             if (captureNodeDiagnostics) outputs.Add(current.ToVisualRgb24());
         }
         var descriptor = new ColorPipelineDescriptor(InputInterpretation: "HighPrecision sRGB", WorkingRepresentation: normalized.WorkingSpace, OutputEncoding: "sRGB display adapter");
@@ -108,14 +114,14 @@ public sealed class ColorStudioRenderPipeline
     public ColorStudioRenderResult Render(VisualPixelBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default, bool captureNodeDiagnostics = true)
     {
         var normalized = stack.Normalize();
-        if (normalized.Nodes.Any(n=>StudioLayerComposite.Active(n)) || normalized.ProcessingVersion == 2 || normalized.Nodes.Any(node => ColorStudioToolCatalog.IsTool(node.Type) || Parameter(node, "range_version", 1) >= 2))
+        if (normalized.Graph?.Version==2 || normalized.Nodes.Any(n=>StudioLayerComposite.Active(n)) || normalized.ProcessingVersion == 2 || normalized.Nodes.Any(node => ColorStudioToolCatalog.IsTool(node.Type) || Parameter(node, "range_version", 1) >= 2))
             return Render(HighBitDepthImageBuffer.FromVisualRgb24(source), analysis, reference, normalized, token, captureNodeDiagnostics, source.Alpha);
         // Version 1 keeps the historical per-node RGB24 quantization of saved JPEG/PNG schemes.
         // New precision is explicit state, so merely opening an old project cannot alter its pixels.
         var current = new VisualPixelBuffer(source.Width, source.Height, source.Rgb24.ToArray());
         var outputs = new List<VisualPixelBuffer>(normalized.Nodes.Count);
         var inputs = new Dictionary<Guid, VisualPixelBuffer>();
-        foreach (var node in normalized.Nodes.Where(item => item.Enabled))
+        foreach (var node in StudioGraphRouting.Nodes(normalized).Where(item => item.Enabled))
         {
             token.ThrowIfCancellationRequested(); if (captureNodeDiagnostics) inputs[node.Id] = current;
             current = node.Type switch

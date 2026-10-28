@@ -94,7 +94,9 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private InstantFilmDefinition ApplyLightPrintFrame(InstantFilmDefinition film)
  {
   var frame=LightPrintFrames.Available.Single(f=>f.Id==SelectedLightPrintFrameId&&f.Shippable);var r=film.V3!;
-  return film with{PaperFrame=true,V3=r with{Surface=r.Surface with{Frame=true,BaseColor=frame.Color},Geometry=new InstantPaperGeometry(Fit:InstantFit,CropX:InstantCropX,CropY:InstantCropY),Paper=(r.Paper??new()) with{Version=3,Window=frame.Window,Pattern=frame.Pattern}}};
+  var artwork=frame.Id.StartsWith("orig.",StringComparison.Ordinal)?OriginalFrameLibrary.Find(frame.Id):null;
+  var aspect=artwork is null?1:(artwork.X1-artwork.X0)*artwork.Width/((artwork.Y1-artwork.Y0)*artwork.Height);
+  return film with{PaperFrame=true,V3=r with{FrameArtwork=artwork,Surface=r.Surface with{Frame=true,BaseColor=frame.Color},Geometry=new InstantPaperGeometry(Fit:InstantFit,CropX:InstantCropX,CropY:InstantCropY,WindowAspect:aspect),Paper=(r.Paper??new()) with{Version=3,Window=frame.Window,Pattern=frame.Pattern}}};
  }
  private void CancelLightPrintTask(bool restore)
  {
@@ -135,6 +137,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);definition.InstantFilm?.V3?.MultipleInput?.ValidateSource(token);token.ThrowIfCancellationRequested();
     if(_disposed||revision!=Volatile.Read(ref _lightPrintPreviewRevision)||activation!=Volatile.Read(ref _activationRevision)||!ReferenceEquals(target,ActiveTarget)||version!=target.ActiveEditVersionId)return;
     Editor.IndependentRawMode=true;await Editor.SetSourceAsync(target.AssetId,null,token,render:false);Editor.PresentIndependentRaw(image);Editor.SetIndependentRawSize(new(image.PixelWidth,image.PixelHeight));LightPrintStatus="快速预览 · 正在核对原尺寸效果";
+    await RefreshPreviewAnalysisAsync(token,image);
     CandidateProcessingEvidence.Enter("LightPrintQuickVisible",token);
     var full=ReusableMaster(target,definition)??await DecodeProfessionalInputAsync(target.Path,definition,token);
     using var fullOwner=ReferenceEquals(full.Image,target.LinearRawMaster?.Image)?null:full.Image;
@@ -144,7 +147,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     CandidateProcessingEvidence.Enter("LightPrintHqPrepared",token);
     if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);definition.InstantFilm?.V3?.MultipleInput?.ValidateSource(token);token.ThrowIfCancellationRequested();
     if(_disposed||revision!=Volatile.Read(ref _lightPrintPreviewRevision)||activation!=Volatile.Read(ref _activationRevision)||!ReferenceEquals(target,ActiveTarget)||version!=target.ActiveEditVersionId)return;
-    Editor.PresentIndependentRaw(complete);var outputSize=ProfessionalRawPipeline.OutputSize(full,definition);Editor.SetIndependentRawSize(new(outputSize.Width,outputSize.Height));LightPrintStatus="预览就绪 · 点显影生成独立变体";
+    Editor.PresentIndependentRaw(complete);await RefreshPreviewAnalysisAsync(token,complete);var outputSize=ProfessionalRawPipeline.OutputSize(full,definition);Editor.SetIndependentRawSize(new(outputSize.Width,outputSize.Height));LightPrintStatus="预览就绪 · 点显影生成独立变体";
    }
    catch(OperationCanceledException){}
    catch(Exception e)when(e is IOException or InvalidOperationException or NotSupportedException or ArgumentException or System.Runtime.InteropServices.COMException){if(revision==Volatile.Read(ref _lightPrintPreviewRevision))LightPrintStatus="预览未完成，旧结果保留："+e.Message;}

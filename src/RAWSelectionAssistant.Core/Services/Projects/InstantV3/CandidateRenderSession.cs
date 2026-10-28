@@ -9,6 +9,8 @@ public sealed class CandidateRenderSession : IDisposable
     private CandidateImageLease.BorrowedImage? source;
     private ICandidatePixelSource? provider;
     private IDisposable? externalPin;
+    private byte[]? framePixels;private IDisposable? frameBudget;
+    private void PrepareFrame(){if(Recipe.Surface.Frame&&Recipe.FrameArtwork is{} art){frameBudget=StudioGlobalResources.ReserveWork(checked((long)art.Width*art.Height*4));try{framePixels=OriginalFrameLibrary.Load(art);}catch{frameBudget.Dispose();frameBudget=null;throw;}}}
     private readonly object gate=new();
     private bool retired;private int active;
     private IDisposable RetainSource()
@@ -17,7 +19,7 @@ public sealed class CandidateRenderSession : IDisposable
     }
     private sealed class Active(CandidateRenderSession owner):IDisposable
     {private CandidateRenderSession? held=owner;public void Dispose(){var value=Interlocked.Exchange(ref held,null);if(value is null)return;lock(value.gate){value.active--;if(value.retired&&value.active==0)value.ReleaseSource();}}}
-    private void ReleaseSource(){source?.Dispose();source=null;externalPin?.Dispose();externalPin=null;provider=null;}
+    private void ReleaseSource(){source?.Dispose();source=null;framePixels=null;frameBudget?.Dispose();frameBudget=null;externalPin?.Dispose();externalPin=null;provider=null;}
 
     public ColorAdjustmentStack? WindowAdjustments {get;init;}
     public CandidateRecipe Recipe { get; }
@@ -31,15 +33,15 @@ public sealed class CandidateRenderSession : IDisposable
             var image=source.Image;
             if(image.Orientation!=1||image.WorkingColorSpace!="sRGB")throw new InvalidDataException("Already oriented sRGB source required");
             provider=new BufferCandidateSource(image);
-            Layout=InstantPaperLayout.Create(image.Width,image.Height,new InstantFilmDefinition(true,AlgorithmVersion:2,PaperFrame:Recipe.Surface.Frame){PaperGeometry=Recipe.Geometry});
+            Layout=OriginalFrameLibrary.Layout(image.Width,image.Height,Recipe);PrepareFrame();
         }
-        catch{source.Dispose();source=null;throw;}
+        catch{source.Dispose();source=null;framePixels=null;frameBudget?.Dispose();frameBudget=null;throw;}
     }
     public CandidateRenderSession(ICandidatePixelSource pixels,CandidateRecipe recipe,IDisposable retainedMaster)
     {
         Recipe=recipe.Freeze();provider=pixels;externalPin=retainedMaster;
-        try{Layout=InstantPaperLayout.Create(pixels.Width,pixels.Height,new InstantFilmDefinition(true,AlgorithmVersion:2,PaperFrame:Recipe.Surface.Frame){PaperGeometry=Recipe.Geometry});}
-        catch{retainedMaster.Dispose();provider=null;externalPin=null;throw;}
+        try{Layout=OriginalFrameLibrary.Layout(pixels.Width,pixels.Height,Recipe);PrepareFrame();}
+        catch{retainedMaster.Dispose();provider=null;externalPin=null;framePixels=null;frameBudget?.Dispose();frameBudget=null;throw;}
     }
     private bool TrySource(int x,int y,out int sx,out int sy)
     {
@@ -81,7 +83,8 @@ public sealed class CandidateRenderSession : IDisposable
                 HighBitDepthImageBuffer? graded=null;
                 if(borrow is not null&&WindowAdjustments is{} adjustments)
                 {
-                    foreach(var node in adjustments.Nodes.Where(n=>n.Enabled))
+                    if(adjustments.Graph?.Version==2)throw new NotSupportedException("即时胶片窗口并行合流尚未准入；未压平。");
+                    foreach(var node in StudioGraphRouting.Nodes(adjustments).Where(n=>n.Enabled))
                     {
                         if(node.Type is not(ColorStudioNodeType.BasicTone or ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.Curve))throw new NotSupportedException("First lightprint window grading supports tone, white balance and curve only");
                         var input=graded??borrow.Image;var effect=ColorStudioToolProcessor.Apply(input,node,token);var next=StudioLayerComposite.Apply(input,effect,node,token,new(minX,minY,image.Width,image.Height));graded?.Dispose();graded=next;
@@ -114,6 +117,7 @@ public sealed class CandidateRenderSession : IDisposable
                         value=CandidateExtensions.Surface(value,nx,ny,Recipe,photo,Layout.Width,Layout.Height);
                     }
                     value=CandidateMaterial.Scan(value,(gx+.5)/Layout.Width,(gy+.5)/Layout.Height,Recipe);
+                    if(framePixels is not null&&Recipe.FrameArtwork is{} art)value=OriginalFrameLibrary.Composite(value,gx,gy,Layout,art,framePixels);
                     var o=((ty+y)*width+tx+x)*3;result[o]=(float)value.X;result[o+1]=(float)value.Y;result[o+2]=(float)value.Z;
                 }
                 if(paperStart!=0)CandidatePerformanceProfile.Add("full.paper-geometry-and-scan",paperStart);

@@ -71,6 +71,7 @@ public static class SpatialLegacyRawRenderer
     public static HighBitDepthImageBuffer Render(HighBitDepthImageBuffer source,ReferenceLook? look,ColorAdjustmentStack? stack,PixelTartFilmSettings? film,CancellationToken token=default,Action<string>? stage=null)
     {
         var state=ColorStudioEffectiveState.Resolve(look,stack,film)??(look is null?new([new(Guid.NewGuid(),ColorStudioNodeType.Preset,"Original")]):ColorStudioLegacyMigration.Migrate(look with{Film=film??look.Film}).Stack);
-        var current=source;foreach(var node in state.Nodes.Where(n=>n.Enabled)){token.ThrowIfCancellationRequested();current=RenderNode(current,node,look,token,stage);}return current;
+        if(state.Graph?.Version==2)return StudioGraphRenderer.Render(source,state,(input,node)=>RenderNode(input,node with{CompositeVersion=0,Opacity=1,Blend=StudioLayerBlend.Normal,LocalMask=null},look,token,stage),token);
+        var current=source;foreach(var node in StudioGraphRouting.Nodes(state).Where(n=>n.Enabled)){token.ThrowIfCancellationRequested();current=RenderNode(current,node,look,token,stage);}return current;
     }
 }

@@ -17,6 +17,12 @@ public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double Editi
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]public bool ExplicitSdrDisplayColor{get;init;}
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]public RAWSelectionAssistant.Core.Services.Color.ControlledIcc.RgbIccIdentityV1? ManualMonitorProfile{get;init;}
     public DarkroomPanelLayout? Darkroom { get; init; }
+    public IReadOnlyList<StudioStillSnapshot> R54Stills {get;init;}=[];
+    public double R54GraphHeight {get;init;}=216;
+    public bool? R54GraphCollapsed {get;init;}
+    public double R54GraphZoom {get;init;}=1;
+    public double R54GraphPanX {get;init;}=8;
+    public double R54GraphPanY {get;init;}=12;
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]public InstantFilmDefinition? FilmDraft{get;init;}
     public string? FilmDraftFrameId{get;init;}
     public string? FilmDraftInputMode{get;init;}
@@ -25,8 +31,13 @@ public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double Editi
     public IReadOnlyList<string> R53Recents {get;init;}=[];
     public ColorStudioLayout Normalize() {ManualMonitorProfile?.Bytes();FilmDraft?.Validate();return this with
     {
+        R54Stills=(R54Stills??[]).Select(s=>s.Freeze()).TakeLast(8).ToArray(),
         R53Favorites=(R53Favorites??[]).Where(x=>!string.IsNullOrWhiteSpace(x)).Distinct().Take(100).ToArray(),R53Recents=(R53Recents??[]).Where(x=>!string.IsNullOrWhiteSpace(x)).Distinct().Take(20).ToArray(),
         Darkroom = Darkroom?.Normalize(),
+        R54GraphHeight=double.IsFinite(R54GraphHeight)?Math.Clamp(R54GraphHeight,100,500):216,
+        R54GraphZoom=double.IsFinite(R54GraphZoom)?Math.Clamp(R54GraphZoom,.25,2):1,
+        R54GraphPanX=double.IsFinite(R54GraphPanX)?Math.Clamp(R54GraphPanX,-100000,100000):8,
+        R54GraphPanY=double.IsFinite(R54GraphPanY)?Math.Clamp(R54GraphPanY,-100000,100000):12,
         AuxiliaryWidth = double.IsFinite(AuxiliaryWidth) ? Math.Clamp(AuxiliaryWidth, 240, 440) : 290,
         EditingWidth = double.IsFinite(EditingWidth) ? Math.Clamp(EditingWidth, 312, 440) : 340,
         AuxiliaryMode = Math.Clamp(AuxiliaryMode, 0, 3), ToolMode = Math.Clamp(ToolMode, 0, 4),
@@ -126,4 +137,9 @@ public static class ColorStudioSessionStore
         await using var stream = File.OpenRead(path);
         return (await JsonSerializer.DeserializeAsync<ColorStudioSessionDocument>(stream, Options, token) ?? throw new InvalidDataException("工作文件为空。")).Normalize();
     }
+}
+
+public sealed record StudioStillSnapshot(Guid Id,string Name,string PngBase64,ColorAdjustmentStack? Stack,int Version=1)
+{
+    public StudioStillSnapshot Freeze(){if(Version!=1||Id==Guid.Empty||string.IsNullOrWhiteSpace(Name)||Name.Length>120||PngBase64 is null||PngBase64.Length>12*1024*1024)throw new InvalidDataException("剧照数据无效或超限。");var bytes=Convert.FromBase64String(PngBase64);if(bytes.Length<24||!bytes.AsSpan(0,8).SequenceEqual(new byte[]{137,80,78,71,13,10,26,10})||System.Buffers.Binary.BinaryPrimitives.ReadUInt32BigEndian(bytes.AsSpan(16,4))>1200||System.Buffers.Binary.BinaryPrimitives.ReadUInt32BigEndian(bytes.AsSpan(20,4))>1200)throw new InvalidDataException("剧照PNG尺寸无效。");return this with{Stack=Stack?.DeepClone()};}
 }

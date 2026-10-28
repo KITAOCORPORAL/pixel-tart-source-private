@@ -1,0 +1,6 @@
+# 独立宝丽来阶段，不打断UI
+读取研究分支0146c8d3430df3c3481ceb874d13fa00186a18c7的SOURCE_AUDIT/FINAL_REPORT/CALIBRATION_AND_INTEGRATION与两个profile，未整分支合并。两候选仍STYLE_APPROXIMATION，实测0。
+本批R54FrameAndNearBlackTests直接执行生产CandidateTone.ApplyLinear/Encode，无LUT：exact-black到极微红输入的解析响应出现可测跳变，黑白无该跳变。因此“旧解析数学的黑位+chroma scale t/l在0分支的不连续”确实存在，但该测试不等于真实照片暗部视觉故障的全面验收。
+33³ LUT误差是另项：研究中的maxRGB/DeltaE比较测的是稀疏LUT插值对解析函数的复现误差，尤其受上述局部不连续影响。不能把9.68的LUT最大色差直接写成全生产照片故障严重程度。
+旧色彩数学本批未动，新平滑颜色仍离线，未重命名升级实测。UI集合仍PARTIAL，所以暂不接可选新色彩组件；后续显式版本替换tone而非叠tone，冻结模型内容/版本/hash，同缩略/预览/显影/保存/导出链。
+16bit/float配对输入仍缺；先清点已有授权样本再定最小必要补充。既有36张试点为研究建议，不是立即购买或补拍要求。
