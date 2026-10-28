@@ -1,0 +1,231 @@
+{
+  "productSha": "06e33c9d9c9a080ea4ff830266ec8060ec954a48",
+  "scope": "published-DLL-bound affected regression; not full suite/native acceptance",
+  "runs": [
+    {
+      "path": "tests-core\\R54PublishedCore.trx",
+      "sha256": "6058bef92b1852666786406e1807608e3de276e4b31b9a8643de1088cccb6e64",
+      "results": [
+        {
+          "name": "SustainedInputPublishesIntermediateAndLatestWithBoundedConcurrency",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ContextInvalidationRetiresOldJobBeforeStartingLatestContext",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DisconnectMeansIdentityAndDetachedNodesPersist",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FastPreviewUsesSameDefinitionAndRecordsApproximationDifference",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ContinuousComplexMaskWorkerPublishesBeforePenStops",
+          "outcome": "Passed"
+        },
+        {
+          "name": "MaskViewportCropCoordinatesAndZoomPanAreSourceNormalized",
+          "outcome": "Passed"
+        },
+        {
+          "name": "EmptyMaskHiddenNodeVersionGuardsAndInvalidCoordinatesAreExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "PreviewIsAreaAverageOfFullEffectsAndExtendedCompositeDomainIsExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "InvalidPortsCycleAndBranchesRejected",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BrushEraseFeatherDensityInverseAndFrozenVariantIsolation",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ParallelMixMatchesExistingOrderedCompositeWithMaskAndBypass",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProfessionalGroupZeroIdentityAndOneFullRoute",
+          "outcome": "Passed"
+        },
+        {
+          "name": "PointwiseFullFrameAndRowBandsUseIdenticalCompositeCoordinates",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ParallelRowBandsKeepSameExactPixelsAsSharedFullFrame",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NearBlackProductionAnalyticDiscontinuityIsSeparateFromCubeApproximation",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BvhPreservesV1ExactOverlapEraseInverseSemantics",
+          "outcome": "Passed"
+        },
+        {
+          "name": "PinnedSceneExposureScalarReferencesMatchVersionedStage",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "MissingMixInputIdentityAndCycleRejected",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BoundedAndSpatialRoutesPreserveSameGraphBlendOnce",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutDoesNotChangeHistoricalSerialPixelsOrOrder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AllExifOrientationsGeometryCropTurnAndRowsKeepSameSourcePosition",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BlendOpacityMaskBoundariesAndLegacyIdentity",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LegacyDefinitionUnchangedExplicitExtensionMatchesSharedSrgbStack",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SceneExposurePreservesLinearRatiosAndNegativeHighRangeWithoutChangingOldDefinitions",
+          "outcome": "Passed"
+        },
+        {
+          "name": "InsertDeleteAndSerializationAreExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AllTwelveOriginalResourcesHaveFrozenHashAndGeometry",
+          "outcome": "Passed"
+        },
+        {
+          "name": "EmitFixedBlendCorpusForTwoIndependentImplementations",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrameIndependentOfPhotoAmountAndRegionMatchesFullOutput",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutPersistenceClampsInvalidViewport",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ConnectionsDriveActualPixelsNotListOrder",
+          "outcome": "Passed"
+        }
+      ],
+      "pass": 29,
+      "fail": 0,
+      "notRun": 1
+    },
+    {
+      "path": "tests-wpf\\R54PublishedWorkflow.trx",
+      "sha256": "b5609a733ea9634d06eb3f48597bb6a7e1f269fb4a7ac686dafbb8d9ecc12e18",
+      "results": [
+        {
+          "name": "ClicksPreviewWithoutHistoryThenDevelopLocksAndReshootKeepsVariant",
+          "outcome": "Passed"
+        },
+        {
+          "name": "WindowGradeChangesOnlyWindowAndThreeExportsKeepDefinition (\"generic.white.square\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "IndependentGraphCreate",
+          "outcome": "Passed"
+        },
+        {
+          "name": "OriginalFrameRealPreviewDevelopReopenAndHistogram",
+          "outcome": "Passed"
+        },
+        {
+          "name": "WindowGradeChangesOnlyWindowAndThreeExportsKeepDefinition (\"generic.white.circle\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DarkroomDipRailRecoveryFilmFullHeightAndIndependentCollapse",
+          "outcome": "Passed"
+        },
+        {
+          "name": "EveryOriginalFramePreviewDevelopAndPngExportUsesFrozenArtwork",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CancelAndSwitchNeverPublishObsoleteDraft",
+          "outcome": "Passed"
+        },
+        {
+          "name": "GraphPreviewSaveReopenExportAndStillsUseActualRoute",
+          "outcome": "Passed"
+        },
+        {
+          "name": "GraphRouteUsesSharedUndoLockAndOffscreenLayout",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FiveTabsKeepDenseLayoutFiltersAndLockedDraftGuard",
+          "outcome": "Passed"
+        }
+      ],
+      "pass": 11,
+      "fail": 0,
+      "notRun": 0
+    },
+    {
+      "path": "tests-wpf\\R54PublishedReopen.trx",
+      "sha256": "175c4c4e78e1e32f38d9d20d7f00b650371a54347b55b08191144b535ebb1aed",
+      "results": [
+        {
+          "name": "IndependentGraphReopenAndExport",
+          "outcome": "Passed"
+        }
+      ],
+      "pass": 1,
+      "fail": 0,
+      "notRun": 0
+    },
+    {
+      "path": "tests-wpf\\R54PublishedHost.trx",
+      "sha256": "a264778c38f93fa2748bc67133183aab1054998b40c0c39158d0d7dc68d9d07c",
+      "results": [
+        {
+          "name": "FullApplicationHostedRailAndMenuOffscreenEvidence",
+          "outcome": "Passed"
+        }
+      ],
+      "pass": 1,
+      "fail": 0,
+      "notRun": 0
+    },
+    {
+      "path": "tests-wpf\\R54PublishedVisual.trx",
+      "sha256": "572340520ce393914b42ab6bef9f5b46310bc14d4567609fd904976ed15253a1",
+      "results": [
+        {
+          "name": "ActualProductionControlFourStatesOffscreen",
+          "outcome": "Passed"
+        }
+      ],
+      "pass": 1,
+      "fail": 0,
+      "notRun": 0
+    }
+  ],
+  "uniquePassed": 43,
+  "uniqueNotRun": [
+    "PinnedSceneExposureScalarReferencesMatchVersionedStage"
+  ]
+}

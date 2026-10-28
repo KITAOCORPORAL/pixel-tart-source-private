@@ -2,6 +2,7 @@
 - 简易图层/专业节点以 UI5.4 第9章与 v2含类型最终草图为准；外壳/即时胶片/变体/3D/拼贴/策划沿既有HTML。右栏节点图已否决，停止扩建旧串行节点条。
 - UI5.4 archive SHA256 88dfcf82b5139bed2fdf06c7271063163b59d372a887d0b362070ec7e3be4d26；附带notebook只作资料，不执行。灰框不是正式资源。
 - 当前同树同分支92c6da2e继续；研究0146c8d3只读，不整分支合并/不合main/不强推。
+- 产品SHA 06e33c9d9c9a080ea4ff830266ec8060ec954a48；完整包E:/Kitao-Deliveries/r54-nodes-20261028/Guangjing-R54-Nodes-Diagnostic-win-x64.zip，CMD在同名目录。发布7项目DLL绑定后Core29PASS/0FAIL/1NOT_RUN，WPF受影响11PASS+独立重开1+完整宿主1+四状态1，非全量/实机。ZIP hash见本轮ZIP_IDENTITY/FINAL_REPORT。
 - 本轮实际状态：PARTIAL、不能发行。Stack schema3 + Graph1串行/Graph2显式base-layer合流已接生产预览/导出/历史/保存；旧Stack2仍原结果。专业二维图位于画面与胶片条之间，22DIP折叠/平移/缩放/适应/高度保存；简易复杂图保守整栈专业组，只显隐/强度。
 - 原创orig.01–12使用已授权真实素材、实际窗口、配方资源hash，同链预览/显影/导出；12框逐一PNG检验，TIFF/JPEG另有代表样本。当前成品直方图保留取消/迟到保护。3D改可拖缩放非模态专注浮窗，264DIP左栏不硬塞420DIP。
 - 节点库六类列示：调色/混合实际可用；透明/填充/外部、AI/扭曲仍禁用。剧照最多8张随项目保存，可抓取/当前栅格参数应用/复用viewport划像；多选批量和共享2–4对比尚未完成。精确视觉/串行与复杂图分段组、真实原生指针/DPI仍欠验；详见docs/validation/r54-node-system-20261028/FINAL_REPORT.md。

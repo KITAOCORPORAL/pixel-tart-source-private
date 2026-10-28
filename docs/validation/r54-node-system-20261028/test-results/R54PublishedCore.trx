@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="8c30e28f-a8ac-498e-91b6-6470ee552ff8" name="Administrator@PC-20250309WEIZ 2026-10-28 19:07:22" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-28T19:07:22.7449392+08:00" queuing="2026-10-28T19:07:22.7449395+08:00" start="2026-10-28T19:07:22.1924224+08:00" finish="2026-10-28T19:07:26.1336482+08:00" />
+  <TestSettings name="default" id="5eccccaf-740c-4fa7-aacd-1600142b4081">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-10-28_19_07_22" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="63368aee-27ce-4170-b4a3-2c406dcb3ec4" testId="1740c2b5-6ccf-8219-8a19-eec107b7511a" testName="SustainedInputPublishesIntermediateAndLatestWithBoundedConcurrency" computerName="PC-20250309WEIZ" duration="00:00:03.3823840" startTime="2026-10-28T19:07:22.6872603+08:00" endTime="2026-10-28T19:07:26.0870290+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="63368aee-27ce-4170-b4a3-2c406dcb3ec4" />
+    <UnitTestResult executionId="cd0c1ca0-9fe1-4f3b-8d94-b594a9797cf9" testId="14474e74-c23a-8e5d-99b3-0edb574789c3" testName="ContextInvalidationRetiresOldJobBeforeStartingLatestContext" computerName="PC-20250309WEIZ" duration="00:00:00.1489194" startTime="2026-10-28T19:07:22.6872433+08:00" endTime="2026-10-28T19:07:22.8543688+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cd0c1ca0-9fe1-4f3b-8d94-b594a9797cf9" />
+    <UnitTestResult executionId="8704749a-57f5-432f-a0fa-6b6a4ce94d6e" testId="1d79bab9-494b-8fd4-8e58-e15a44bffeb8" testName="DisconnectMeansIdentityAndDetachedNodesPersist" computerName="PC-20250309WEIZ" duration="00:00:00.0010229" startTime="2026-10-28T19:07:22.8292416+08:00" endTime="2026-10-28T19:07:22.8303211+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8704749a-57f5-432f-a0fa-6b6a4ce94d6e" />
+    <UnitTestResult executionId="19cdc9df-f986-4fbe-8c18-d7c8f89cc4ce" testId="166526a6-fe2f-8bd0-8d43-9b56eb6a676d" testName="FastPreviewUsesSameDefinitionAndRecordsApproximationDifference" computerName="PC-20250309WEIZ" duration="00:00:01.3213851" startTime="2026-10-28T19:07:22.6872679+08:00" endTime="2026-10-28T19:07:24.0254433+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="19cdc9df-f986-4fbe-8c18-d7c8f89cc4ce" />
+    <UnitTestResult executionId="10985897-a672-460d-a0cc-12b0a54e664d" testId="1ba9c86b-882a-8775-8857-9911ca033c99" testName="ContinuousComplexMaskWorkerPublishesBeforePenStops" computerName="PC-20250309WEIZ" duration="00:00:03.1968371" startTime="2026-10-28T19:07:22.7075213+08:00" endTime="2026-10-28T19:07:25.9049118+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="10985897-a672-460d-a0cc-12b0a54e664d" />
+    <UnitTestResult executionId="a181391e-2fb9-4dc4-be5b-9f7a919b35c3" testId="142fd3fc-fcae-8e18-867a-f58b39c7b4db" testName="MaskViewportCropCoordinatesAndZoomPanAreSourceNormalized" computerName="PC-20250309WEIZ" duration="00:00:00.0120420" startTime="2026-10-28T19:07:22.6872272+08:00" endTime="2026-10-28T19:07:22.7194742+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a181391e-2fb9-4dc4-be5b-9f7a919b35c3" />
+    <UnitTestResult executionId="41c1d066-03fb-421b-acee-2bfbdad0662a" testId="1549395e-6537-8a43-9ebf-3785c6af3a99" testName="EmptyMaskHiddenNodeVersionGuardsAndInvalidCoordinatesAreExplicit" computerName="PC-20250309WEIZ" duration="00:00:00.0123580" startTime="2026-10-28T19:07:22.7075114+08:00" endTime="2026-10-28T19:07:22.7204021+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="41c1d066-03fb-421b-acee-2bfbdad0662a" />
+    <UnitTestResult executionId="2a226a3f-3ae0-4f5e-aea4-742caedccf96" testId="120daaec-5cec-8110-bb48-2710eece60d5" testName="PreviewIsAreaAverageOfFullEffectsAndExtendedCompositeDomainIsExplicit" computerName="PC-20250309WEIZ" duration="00:00:00.0533420" startTime="2026-10-28T19:07:22.7255023+08:00" endTime="2026-10-28T19:07:22.7789279+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2a226a3f-3ae0-4f5e-aea4-742caedccf96" />
+    <UnitTestResult executionId="4a09f1b3-8c4b-490b-9f9b-314602f208c7" testId="14b7655c-bbec-867a-809f-0034c61e0b89" testName="InvalidPortsCycleAndBranchesRejected" computerName="PC-20250309WEIZ" duration="00:00:00.0010923" startTime="2026-10-28T19:07:22.8292721+08:00" endTime="2026-10-28T19:07:22.8304017+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4a09f1b3-8c4b-490b-9f9b-314602f208c7" />
+    <UnitTestResult executionId="c4220318-170c-44fe-ab7c-f3b9c48134c4" testId="100cd931-156f-83bd-8541-c8079c9a82ea" testName="BrushEraseFeatherDensityInverseAndFrozenVariantIsolation" computerName="PC-20250309WEIZ" duration="00:00:00.0973812" startTime="2026-10-28T19:07:22.6872848+08:00" endTime="2026-10-28T19:07:22.8021988+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c4220318-170c-44fe-ab7c-f3b9c48134c4" />
+    <UnitTestResult executionId="9157489f-4609-4f03-9b74-7c8858d5b609" testId="149c2e5a-76e4-8465-95f5-fe445a4335db" testName="ParallelMixMatchesExistingOrderedCompositeWithMaskAndBypass" computerName="PC-20250309WEIZ" duration="00:00:00.0087662" startTime="2026-10-28T19:07:22.8330175+08:00" endTime="2026-10-28T19:07:22.8418758+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9157489f-4609-4f03-9b74-7c8858d5b609" />
+    <UnitTestResult executionId="49494ebd-4ffd-4eb4-a98c-e316c1eb65ad" testId="1d5cabd0-3f98-8bed-96f5-1d56c3324405" testName="ProfessionalGroupZeroIdentityAndOneFullRoute" computerName="PC-20250309WEIZ" duration="00:00:00.0150322" startTime="2026-10-28T19:07:22.8342646+08:00" endTime="2026-10-28T19:07:22.8493483+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="49494ebd-4ffd-4eb4-a98c-e316c1eb65ad" />
+    <UnitTestResult executionId="2d84c5f4-b6b6-456d-8ded-9650726ee375" testId="159d4030-9776-8e20-b6ef-e27a9d632898" testName="PointwiseFullFrameAndRowBandsUseIdenticalCompositeCoordinates" computerName="PC-20250309WEIZ" duration="00:00:00.0532999" startTime="2026-10-28T19:07:22.7200848+08:00" endTime="2026-10-28T19:07:22.7734569+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2d84c5f4-b6b6-456d-8ded-9650726ee375" />
+    <UnitTestResult executionId="e7cbba40-a84e-472c-a209-58b5c3a09d8f" testId="1d5cc3be-774e-867b-9f0c-5d171ee535d1" testName="ParallelRowBandsKeepSameExactPixelsAsSharedFullFrame" computerName="PC-20250309WEIZ" duration="00:00:00.0845776" startTime="2026-10-28T19:07:22.6872353+08:00" endTime="2026-10-28T19:07:22.7886094+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e7cbba40-a84e-472c-a209-58b5c3a09d8f" />
+    <UnitTestResult executionId="1ea296c4-97fc-460a-a1d8-66097b7f699d" testId="11936f07-00bb-872d-9b89-a672950c16fb" testName="NearBlackProductionAnalyticDiscontinuityIsSeparateFromCubeApproximation" computerName="PC-20250309WEIZ" duration="00:00:00.0010604" startTime="2026-10-28T19:07:22.7886568+08:00" endTime="2026-10-28T19:07:22.7897718+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1ea296c4-97fc-460a-a1d8-66097b7f699d" />
+    <UnitTestResult executionId="b4c0c5ab-a34d-44c4-afa6-c76370184c0c" testId="1137b6d2-1a93-88ac-8da7-70a26b545fe5" testName="BvhPreservesV1ExactOverlapEraseInverseSemantics" computerName="PC-20250309WEIZ" duration="00:00:00.1684022" startTime="2026-10-28T19:07:22.7255054+08:00" endTime="2026-10-28T19:07:22.8939741+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b4c0c5ab-a34d-44c4-afa6-c76370184c0c" />
+    <UnitTestResult executionId="ce29dcb9-9a7b-4355-ba35-de66f45f06c2" testId="178cc751-ef41-89be-84f9-3978ffc9b26a" testName="PinnedSceneExposureScalarReferencesMatchVersionedStage" computerName="PC-20250309WEIZ" duration="00:00:00.0163678" startTime="2026-10-28T19:07:22.6872758+08:00" endTime="2026-10-28T19:07:22.7204018+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ce29dcb9-9a7b-4355-ba35-de66f45f06c2">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.Inconclusive 失败。Pinned independently executed scalar reference required</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Inconclusive(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.Inconclusive.cs:line 27&#xD;
+   at RAWSelectionAssistant.Tests.R53InteractionTests.PinnedSceneExposureScalarReferencesMatchVersionedStage()&#xD;
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f5b6dda2-ed1d-4b21-8b01-7f09ff931f87" testId="1f96c085-20b6-8c02-af66-2903b0846a31" testName="MissingMixInputIdentityAndCycleRejected" computerName="PC-20250309WEIZ" duration="00:00:00.0009081" startTime="2026-10-28T19:07:22.8419141+08:00" endTime="2026-10-28T19:07:22.8428673+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f5b6dda2-ed1d-4b21-8b01-7f09ff931f87" />
+    <UnitTestResult executionId="b96c0be3-6e57-41fe-8523-2607d5757b48" testId="1e81b1b1-1ef4-86d4-b41d-c7db5fcfa73a" testName="BoundedAndSpatialRoutesPreserveSameGraphBlendOnce" computerName="PC-20250309WEIZ" duration="00:00:00.0026163" startTime="2026-10-28T19:07:22.8493984+08:00" endTime="2026-10-28T19:07:22.8520713+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b96c0be3-6e57-41fe-8523-2607d5757b48" />
+    <UnitTestResult executionId="bc7fa5a4-d494-4392-a06c-3cc34d38fedf" testId="1dc05fe9-b7e4-83be-9bf8-75a6965afbf5" testName="LayoutDoesNotChangeHistoricalSerialPixelsOrOrder" computerName="PC-20250309WEIZ" duration="00:00:00.0443264" startTime="2026-10-28T19:07:22.7898335+08:00" endTime="2026-10-28T19:07:22.8342370+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bc7fa5a4-d494-4392-a06c-3cc34d38fedf" />
+    <UnitTestResult executionId="db772b45-a108-4a3c-833d-151d5cb6895b" testId="1ba20c86-7f80-8c72-ba8e-cca18c2ee178" testName="AllExifOrientationsGeometryCropTurnAndRowsKeepSameSourcePosition" computerName="PC-20250309WEIZ" duration="00:00:00.1650724" startTime="2026-10-28T19:07:22.7254834+08:00" endTime="2026-10-28T19:07:22.8906520+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db772b45-a108-4a3c-833d-151d5cb6895b" />
+    <UnitTestResult executionId="7fba4bb0-e5ae-4de8-8dd5-821dbb01bdb9" testId="1157c2ee-f885-88a9-b535-e2c23180282d" testName="BlendOpacityMaskBoundariesAndLegacyIdentity" computerName="PC-20250309WEIZ" duration="00:00:00.0120497" startTime="2026-10-28T19:07:22.6872194+08:00" endTime="2026-10-28T19:07:22.7194741+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7fba4bb0-e5ae-4de8-8dd5-821dbb01bdb9" />
+    <UnitTestResult executionId="eeebcb19-d45e-4182-83ee-b9c90056b6b7" testId="1e6b10fe-3b79-8078-99db-cb635ddc5ffe" testName="LegacyDefinitionUnchangedExplicitExtensionMatchesSharedSrgbStack" computerName="PC-20250309WEIZ" duration="00:00:00.1563382" startTime="2026-10-28T19:07:22.7322481+08:00" endTime="2026-10-28T19:07:22.8886612+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eeebcb19-d45e-4182-83ee-b9c90056b6b7" />
+    <UnitTestResult executionId="902d1d82-d46d-4ea4-b98a-a65d65e57e70" testId="15c20146-4037-88a2-b9f0-32f5f2531cd9" testName="SceneExposurePreservesLinearRatiosAndNegativeHighRangeWithoutChangingOldDefinitions" computerName="PC-20250309WEIZ" duration="00:00:00.1887817" startTime="2026-10-28T19:07:22.6872524+08:00" endTime="2026-10-28T19:07:22.8928051+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="902d1d82-d46d-4ea4-b98a-a65d65e57e70" />
+    <UnitTestResult executionId="53f9417a-267a-4228-96f2-736732803ddd" testId="1d6396fb-d919-84d6-84ea-87766e704198" testName="InsertDeleteAndSerializationAreExplicit" computerName="PC-20250309WEIZ" duration="00:00:00.0221092" startTime="2026-10-28T19:07:22.8303528+08:00" endTime="2026-10-28T19:07:22.8525076+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="53f9417a-267a-4228-96f2-736732803ddd" />
+    <UnitTestResult executionId="4e06274c-999a-459b-a109-c6b383945af2" testId="15f41e5f-f4ca-8230-83c7-055a674206e8" testName="AllTwelveOriginalResourcesHaveFrozenHashAndGeometry" computerName="PC-20250309WEIZ" duration="00:00:00.0940781" startTime="2026-10-28T19:07:22.7735912+08:00" endTime="2026-10-28T19:07:22.8677784+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4e06274c-999a-459b-a109-c6b383945af2" />
+    <UnitTestResult executionId="35f93239-ac36-4da0-a55c-b37c6725eda1" testId="1ba343ae-7ed6-83d0-8d6c-d3f6f44dc507" testName="EmitFixedBlendCorpusForTwoIndependentImplementations" computerName="PC-20250309WEIZ" duration="00:00:00.0477167" startTime="2026-10-28T19:07:22.8435095+08:00" endTime="2026-10-28T19:07:22.8912787+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="35f93239-ac36-4da0-a55c-b37c6725eda1" />
+    <UnitTestResult executionId="2e3fa9ed-8d8e-4a9c-aa16-299da940058e" testId="1af1b1d9-18c1-8e2c-81ce-d419c3750c7e" testName="FrameIndependentOfPhotoAmountAndRegionMatchesFullOutput" computerName="PC-20250309WEIZ" duration="00:00:00.0494424" startTime="2026-10-28T19:07:22.7789715+08:00" endTime="2026-10-28T19:07:22.8284689+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2e3fa9ed-8d8e-4a9c-aa16-299da940058e" />
+    <UnitTestResult executionId="c34b9a07-7bc5-48a2-bb3d-6c13c10cfd58" testId="1c7c0c70-b8fd-8967-a942-ef8bfb79408c" testName="LayoutPersistenceClampsInvalidViewport" computerName="PC-20250309WEIZ" duration="00:00:00.0025136" startTime="2026-10-28T19:07:22.8304270+08:00" endTime="2026-10-28T19:07:22.8329828+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c34b9a07-7bc5-48a2-bb3d-6c13c10cfd58" />
+    <UnitTestResult executionId="6b1178f4-21a7-4507-941a-958a36e81681" testId="18d4a9b1-c78a-803d-acd4-48523751ad39" testName="ConnectionsDriveActualPixelsNotListOrder" computerName="PC-20250309WEIZ" duration="00:00:00.0260443" startTime="2026-10-28T19:07:22.8022522+08:00" endTime="2026-10-28T19:07:22.8283610+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6b1178f4-21a7-4507-941a-958a36e81681" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="BoundedAndSpatialRoutesPreserveSameGraphBlendOnce" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1e81b1b1-1ef4-86d4-b41d-c7db5fcfa73a">
+      <Execution id="b96c0be3-6e57-41fe-8523-2607d5757b48" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54ParallelTests" name="BoundedAndSpatialRoutesPreserveSameGraphBlendOnce" />
+    </UnitTest>
+    <UnitTest name="BlendOpacityMaskBoundariesAndLegacyIdentity" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1157c2ee-f885-88a9-b535-e2c23180282d">
+      <Execution id="7fba4bb0-e5ae-4de8-8dd5-821dbb01bdb9" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53LocalCompositeTests" name="BlendOpacityMaskBoundariesAndLegacyIdentity" />
+    </UnitTest>
+    <UnitTest name="PinnedSceneExposureScalarReferencesMatchVersionedStage" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="178cc751-ef41-89be-84f9-3978ffc9b26a">
+      <Execution id="ce29dcb9-9a7b-4355-ba35-de66f45f06c2" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53InteractionTests" name="PinnedSceneExposureScalarReferencesMatchVersionedStage" />
+    </UnitTest>
+    <UnitTest name="LayoutPersistenceClampsInvalidViewport" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1c7c0c70-b8fd-8967-a942-ef8bfb79408c">
+      <Execution id="c34b9a07-7bc5-48a2-bb3d-6c13c10cfd58" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54GraphTests" name="LayoutPersistenceClampsInvalidViewport" />
+    </UnitTest>
+    <UnitTest name="MaskViewportCropCoordinatesAndZoomPanAreSourceNormalized" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="142fd3fc-fcae-8e18-867a-f58b39c7b4db">
+      <Execution id="a181391e-2fb9-4dc4-be5b-9f7a919b35c3" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53LocalCompositeTests" name="MaskViewportCropCoordinatesAndZoomPanAreSourceNormalized" />
+    </UnitTest>
+    <UnitTest name="DisconnectMeansIdentityAndDetachedNodesPersist" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1d79bab9-494b-8fd4-8e58-e15a44bffeb8">
+      <Execution id="8704749a-57f5-432f-a0fa-6b6a4ce94d6e" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54GraphTests" name="DisconnectMeansIdentityAndDetachedNodesPersist" />
+    </UnitTest>
+    <UnitTest name="PointwiseFullFrameAndRowBandsUseIdenticalCompositeCoordinates" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="159d4030-9776-8e20-b6ef-e27a9d632898">
+      <Execution id="2d84c5f4-b6b6-456d-8ded-9650726ee375" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53LocalCompositeTests" name="PointwiseFullFrameAndRowBandsUseIdenticalCompositeCoordinates" />
+    </UnitTest>
+    <UnitTest name="InvalidPortsCycleAndBranchesRejected" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="14b7655c-bbec-867a-809f-0034c61e0b89">
+      <Execution id="4a09f1b3-8c4b-490b-9f9b-314602f208c7" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54GraphTests" name="InvalidPortsCycleAndBranchesRejected" />
+    </UnitTest>
+    <UnitTest name="ProfessionalGroupZeroIdentityAndOneFullRoute" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1d5cabd0-3f98-8bed-96f5-1d56c3324405">
+      <Execution id="49494ebd-4ffd-4eb4-a98c-e316c1eb65ad" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54ParallelTests" name="ProfessionalGroupZeroIdentityAndOneFullRoute" />
+    </UnitTest>
+    <UnitTest name="PreviewIsAreaAverageOfFullEffectsAndExtendedCompositeDomainIsExplicit" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="120daaec-5cec-8110-bb48-2710eece60d5">
+      <Execution id="2a226a3f-3ae0-4f5e-aea4-742caedccf96" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53ProfessionalLocalTests" name="PreviewIsAreaAverageOfFullEffectsAndExtendedCompositeDomainIsExplicit" />
+    </UnitTest>
+    <UnitTest name="LayoutDoesNotChangeHistoricalSerialPixelsOrOrder" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1dc05fe9-b7e4-83be-9bf8-75a6965afbf5">
+      <Execution id="bc7fa5a4-d494-4392-a06c-3cc34d38fedf" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54GraphTests" name="LayoutDoesNotChangeHistoricalSerialPixelsOrOrder" />
+    </UnitTest>
+    <UnitTest name="ParallelRowBandsKeepSameExactPixelsAsSharedFullFrame" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1d5cc3be-774e-867b-9f0c-5d171ee535d1">
+      <Execution id="e7cbba40-a84e-472c-a209-58b5c3a09d8f" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53InteractionTests" name="ParallelRowBandsKeepSameExactPixelsAsSharedFullFrame" />
+    </UnitTest>
+    <UnitTest name="InsertDeleteAndSerializationAreExplicit" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1d6396fb-d919-84d6-84ea-87766e704198">
+      <Execution id="53f9417a-267a-4228-96f2-736732803ddd" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54GraphTests" name="InsertDeleteAndSerializationAreExplicit" />
+    </UnitTest>
+    <UnitTest name="ParallelMixMatchesExistingOrderedCompositeWithMaskAndBypass" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="149c2e5a-76e4-8465-95f5-fe445a4335db">
+      <Execution id="9157489f-4609-4f03-9b74-7c8858d5b609" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54ParallelTests" name="ParallelMixMatchesExistingOrderedCompositeWithMaskAndBypass" />
+    </UnitTest>
+    <UnitTest name="FrameIndependentOfPhotoAmountAndRegionMatchesFullOutput" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1af1b1d9-18c1-8e2c-81ce-d419c3750c7e">
+      <Execution id="2e3fa9ed-8d8e-4a9c-aa16-299da940058e" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54FrameAndNearBlackTests" name="FrameIndependentOfPhotoAmountAndRegionMatchesFullOutput" />
+    </UnitTest>
+    <UnitTest name="NearBlackProductionAnalyticDiscontinuityIsSeparateFromCubeApproximation" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="11936f07-00bb-872d-9b89-a672950c16fb">
+      <Execution id="1ea296c4-97fc-460a-a1d8-66097b7f699d" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54FrameAndNearBlackTests" name="NearBlackProductionAnalyticDiscontinuityIsSeparateFromCubeApproximation" />
+    </UnitTest>
+    <UnitTest name="EmptyMaskHiddenNodeVersionGuardsAndInvalidCoordinatesAreExplicit" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1549395e-6537-8a43-9ebf-3785c6af3a99">
+      <Execution id="41c1d066-03fb-421b-acee-2bfbdad0662a" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53LocalCompositeTests" name="EmptyMaskHiddenNodeVersionGuardsAndInvalidCoordinatesAreExplicit" />
+    </UnitTest>
+    <UnitTest name="EmitFixedBlendCorpusForTwoIndependentImplementations" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1ba343ae-7ed6-83d0-8d6c-d3f6f44dc507">
+      <Execution id="35f93239-ac36-4da0-a55c-b37c6725eda1" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54ParallelTests" name="EmitFixedBlendCorpusForTwoIndependentImplementations" />
+    </UnitTest>
+    <UnitTest name="FastPreviewUsesSameDefinitionAndRecordsApproximationDifference" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="166526a6-fe2f-8bd0-8d43-9b56eb6a676d">
+      <Execution id="19cdc9df-f986-4fbe-8c18-d7c8f89cc4ce" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53InteractionTests" name="FastPreviewUsesSameDefinitionAndRecordsApproximationDifference" />
+    </UnitTest>
+    <UnitTest name="SceneExposurePreservesLinearRatiosAndNegativeHighRangeWithoutChangingOldDefinitions" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="15c20146-4037-88a2-b9f0-32f5f2531cd9">
+      <Execution id="902d1d82-d46d-4ea4-b98a-a65d65e57e70" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53InteractionTests" name="SceneExposurePreservesLinearRatiosAndNegativeHighRangeWithoutChangingOldDefinitions" />
+    </UnitTest>
+    <UnitTest name="AllTwelveOriginalResourcesHaveFrozenHashAndGeometry" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="15f41e5f-f4ca-8230-83c7-055a674206e8">
+      <Execution id="4e06274c-999a-459b-a109-c6b383945af2" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54FrameAndNearBlackTests" name="AllTwelveOriginalResourcesHaveFrozenHashAndGeometry" />
+    </UnitTest>
+    <UnitTest name="MissingMixInputIdentityAndCycleRejected" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1f96c085-20b6-8c02-af66-2903b0846a31">
+      <Execution id="f5b6dda2-ed1d-4b21-8b01-7f09ff931f87" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54ParallelTests" name="MissingMixInputIdentityAndCycleRejected" />
+    </UnitTest>
+    <UnitTest name="BvhPreservesV1ExactOverlapEraseInverseSemantics" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1137b6d2-1a93-88ac-8da7-70a26b545fe5">
+      <Execution id="b4c0c5ab-a34d-44c4-afa6-c76370184c0c" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53ProfessionalLocalTests" name="BvhPreservesV1ExactOverlapEraseInverseSemantics" />
+    </UnitTest>
+    <UnitTest name="BrushEraseFeatherDensityInverseAndFrozenVariantIsolation" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="100cd931-156f-83bd-8541-c8079c9a82ea">
+      <Execution id="c4220318-170c-44fe-ab7c-f3b9c48134c4" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53LocalCompositeTests" name="BrushEraseFeatherDensityInverseAndFrozenVariantIsolation" />
+    </UnitTest>
+    <UnitTest name="ContextInvalidationRetiresOldJobBeforeStartingLatestContext" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="14474e74-c23a-8e5d-99b3-0edb574789c3">
+      <Execution id="cd0c1ca0-9fe1-4f3b-8d94-b594a9797cf9" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53InteractionTests" name="ContextInvalidationRetiresOldJobBeforeStartingLatestContext" />
+    </UnitTest>
+    <UnitTest name="AllExifOrientationsGeometryCropTurnAndRowsKeepSameSourcePosition" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1ba20c86-7f80-8c72-ba8e-cca18c2ee178">
+      <Execution id="db772b45-a108-4a3c-833d-151d5cb6895b" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53ProfessionalLocalTests" name="AllExifOrientationsGeometryCropTurnAndRowsKeepSameSourcePosition" />
+    </UnitTest>
+    <UnitTest name="ContinuousComplexMaskWorkerPublishesBeforePenStops" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1ba9c86b-882a-8775-8857-9911ca033c99">
+      <Execution id="10985897-a672-460d-a0cc-12b0a54e664d" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53InteractionTests" name="ContinuousComplexMaskWorkerPublishesBeforePenStops" />
+    </UnitTest>
+    <UnitTest name="SustainedInputPublishesIntermediateAndLatestWithBoundedConcurrency" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1740c2b5-6ccf-8219-8a19-eec107b7511a">
+      <Execution id="63368aee-27ce-4170-b4a3-2c406dcb3ec4" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53InteractionTests" name="SustainedInputPublishesIntermediateAndLatestWithBoundedConcurrency" />
+    </UnitTest>
+    <UnitTest name="LegacyDefinitionUnchangedExplicitExtensionMatchesSharedSrgbStack" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="1e6b10fe-3b79-8078-99db-cb635ddc5ffe">
+      <Execution id="eeebcb19-d45e-4182-83ee-b9c90056b6b7" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R53ProfessionalLocalTests" name="LegacyDefinitionUnchangedExplicitExtensionMatchesSharedSrgbStack" />
+    </UnitTest>
+    <UnitTest name="ConnectionsDriveActualPixelsNotListOrder" storage="e:\kitao-worktrees\r53-color-tools-film-20261028\tests\rawselectionassistant.tests\bin\release\net10.0\rawselectionassistant.tests.dll" id="18d4a9b1-c78a-803d-acd4-48523751ad39">
+      <Execution id="6b1178f4-21a7-4507-941a-958a36e81681" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54GraphTests" name="ConnectionsDriveActualPixelsNotListOrder" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1740c2b5-6ccf-8219-8a19-eec107b7511a" executionId="63368aee-27ce-4170-b4a3-2c406dcb3ec4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14474e74-c23a-8e5d-99b3-0edb574789c3" executionId="cd0c1ca0-9fe1-4f3b-8d94-b594a9797cf9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d79bab9-494b-8fd4-8e58-e15a44bffeb8" executionId="8704749a-57f5-432f-a0fa-6b6a4ce94d6e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="166526a6-fe2f-8bd0-8d43-9b56eb6a676d" executionId="19cdc9df-f986-4fbe-8c18-d7c8f89cc4ce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ba9c86b-882a-8775-8857-9911ca033c99" executionId="10985897-a672-460d-a0cc-12b0a54e664d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="142fd3fc-fcae-8e18-867a-f58b39c7b4db" executionId="a181391e-2fb9-4dc4-be5b-9f7a919b35c3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1549395e-6537-8a43-9ebf-3785c6af3a99" executionId="41c1d066-03fb-421b-acee-2bfbdad0662a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="120daaec-5cec-8110-bb48-2710eece60d5" executionId="2a226a3f-3ae0-4f5e-aea4-742caedccf96" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14b7655c-bbec-867a-809f-0034c61e0b89" executionId="4a09f1b3-8c4b-490b-9f9b-314602f208c7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="100cd931-156f-83bd-8541-c8079c9a82ea" executionId="c4220318-170c-44fe-ab7c-f3b9c48134c4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="149c2e5a-76e4-8465-95f5-fe445a4335db" executionId="9157489f-4609-4f03-9b74-7c8858d5b609" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d5cabd0-3f98-8bed-96f5-1d56c3324405" executionId="49494ebd-4ffd-4eb4-a98c-e316c1eb65ad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="159d4030-9776-8e20-b6ef-e27a9d632898" executionId="2d84c5f4-b6b6-456d-8ded-9650726ee375" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d5cc3be-774e-867b-9f0c-5d171ee535d1" executionId="e7cbba40-a84e-472c-a209-58b5c3a09d8f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11936f07-00bb-872d-9b89-a672950c16fb" executionId="1ea296c4-97fc-460a-a1d8-66097b7f699d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1137b6d2-1a93-88ac-8da7-70a26b545fe5" executionId="b4c0c5ab-a34d-44c4-afa6-c76370184c0c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="178cc751-ef41-89be-84f9-3978ffc9b26a" executionId="ce29dcb9-9a7b-4355-ba35-de66f45f06c2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f96c085-20b6-8c02-af66-2903b0846a31" executionId="f5b6dda2-ed1d-4b21-8b01-7f09ff931f87" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e81b1b1-1ef4-86d4-b41d-c7db5fcfa73a" executionId="b96c0be3-6e57-41fe-8523-2607d5757b48" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1dc05fe9-b7e4-83be-9bf8-75a6965afbf5" executionId="bc7fa5a4-d494-4392-a06c-3cc34d38fedf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ba20c86-7f80-8c72-ba8e-cca18c2ee178" executionId="db772b45-a108-4a3c-833d-151d5cb6895b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1157c2ee-f885-88a9-b535-e2c23180282d" executionId="7fba4bb0-e5ae-4de8-8dd5-821dbb01bdb9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e6b10fe-3b79-8078-99db-cb635ddc5ffe" executionId="eeebcb19-d45e-4182-83ee-b9c90056b6b7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15c20146-4037-88a2-b9f0-32f5f2531cd9" executionId="902d1d82-d46d-4ea4-b98a-a65d65e57e70" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d6396fb-d919-84d6-84ea-87766e704198" executionId="53f9417a-267a-4228-96f2-736732803ddd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15f41e5f-f4ca-8230-83c7-055a674206e8" executionId="4e06274c-999a-459b-a109-c6b383945af2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ba343ae-7ed6-83d0-8d6c-d3f6f44dc507" executionId="35f93239-ac36-4da0-a55c-b37c6725eda1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1af1b1d9-18c1-8e2c-81ce-d419c3750c7e" executionId="2e3fa9ed-8d8e-4a9c-aa16-299da940058e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c7c0c70-b8fd-8967-a942-ef8bfb79408c" executionId="c34b9a07-7bc5-48a2-bb3d-6c13c10cfd58" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18d4a9b1-c78a-803d-acd4-48523751ad39" executionId="6b1178f4-21a7-4507-941a-958a36e81681" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="30" executed="29" passed="29" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 E:\Kitao-Worktrees\r53-color-tools-film-20261028\tests\RAWSelectionAssistant.Tests\bin\Release\net10.0\RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 12，Scope: MethodLevel)&#xD;
+在测试运行中跳过测试“PinnedSceneExposureScalarReferencesMatchVersionedStage”。&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
