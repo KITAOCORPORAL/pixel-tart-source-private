@@ -28,3 +28,6 @@ WholeAppDiagnosticBuild=true / PhotographerTrialBuild=false，全部模块/策�
 
 ## 下一步/边界
 影调完整双参考执行与科学准入、X-T5内存/X-Trans、C1对照、授权扫描/联名资源和物理鼠标/多屏ACM/HDR仍未完成。RawWide为default-off研究，不宣称前端浮点恢复或通用RAW色准。自由画布透明素材首闭环本轮 **未开始**。旧教程继续退役，功能稳定后再集中全产品引导。
+
+## 普通推送读回
+产品2814d49b、独立测试5e2001d6和证据d54ac419已普通push；ls-remote确认LOCAL_HEAD=REMOTE_HEAD=d54ac419fe7efbcdffb2f3fcef796a5a9e3e3837，工作树干净。后续仅提交本读回记录，不改变发布src。
