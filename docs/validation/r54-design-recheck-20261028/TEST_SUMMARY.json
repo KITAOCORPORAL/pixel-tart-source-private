@@ -1,0 +1,56 @@
+{
+  "binarySourceSha": "14bbb60debdd0b176490adb24747023de59b1dbf",
+  "observerSource": "tests/RAWSelectionAssistant.WpfTests/R54DesignRecheckTests.cs",
+  "uniquePassed": 5,
+  "failed": 0,
+  "notRun": 0,
+  "runs": [
+    {
+      "label": "affected",
+      "sha256": "57aa62fb91d7d237b42917e188d29d5c2a4308d58e83b8fc6d7bd3e53db9fb58",
+      "results": [
+        {
+          "name": "GraphRouteUsesSharedUndoLockAndOffscreenLayout",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RecordActualSelectedToolsAndLayoutAgainstSuppliedDesign",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DarkroomDipRailRecoveryFilmFullHeightAndIndependentCollapse",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FourProductionStatesSelectedNodeThumbnailsRestoreAndFrameGallery",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "label": "layout",
+      "sha256": "f7c095b7ca74e870f73e68f4a70d8fcb32df812ed54cb3914c1c0a890a7d16a1",
+      "results": [
+        {
+          "name": "FourScreensOffscreenEffectiveDipEvidence",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "label": "observer-final",
+      "sha256": "be04dd45effb21c100dcaaa6b6c9d38af686d7a32720bade1b140ac3156de6c3",
+      "results": [
+        {
+          "name": "RecordActualSelectedToolsAndLayoutAgainstSuppliedDesign",
+          "outcome": "Passed"
+        }
+      ]
+    }
+  ],
+  "acceptance": "Observation assertions passing is NOT design acceptance",
+  "buildErrors": 0,
+  "latestBuildWarnings": 254,
+  "publishedDllBindings": 20,
+  "productChanged": false
+}

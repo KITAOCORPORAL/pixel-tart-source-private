@@ -1,3 +1,9 @@
+## 2026-10-28 UI5.4用户补包逐项核验（America/Los_Angeles）
+- N:/UI5.4.zip 已实际读；hash 5d365c0f354f8b8e1a146eec8279c9cf7b1f9897dbba448d41ce52917caa6f1b，与旧归档hash不同但当前用户输入可用。第9章/v2/右栏/菜单/剧照图核验完成，“缺资料”已解除，不再索取。
+- 权威 docs/validation/r54-design-recheck-20261028/FINAL_REPORT.md + CHECKLIST.md：76条=24符合/29部分/16缺口/7未验证，不能叫界面完成。
+- 新确认范围/HSL空面板、SkinTone面板遗漏、串行多类型名错标颜色范围、显影后无锁定即时胶片节点；另有专业组非层行、菜单/蒙版点击/剧照共用视图/示波布局差距。详见NEXT_FIXES。
+- 本轮只新增观察测试，20个DLL绑定原发布，去重5PASS/0FAIL；产品14bbb60d及ZIP不变。没有浏览器/ComputerUse/像素修改/宝丽来注册/远端重试。下一步先实际修上述本批界面缺口，不扩未来AI全套。
+
 ## 2026-10-28 家庭R5.4接续（America/Los_Angeles）— PARTIAL
 - 本机独立树 N:/pixart/guangjing-r54-darkroom-20261028，home/r54-darkroom-20261028，产品14bbb60debdd0b176490adb24747023de59b1dbf。当前权威 docs/validation/home-r54-darkroom-20261028/FINAL_REPORT.md。
 - 完成真实节点/蒙版缩略、所选参数、照片+框卡及锁定深色；新增并行卡不重叠；消费者提前释放+逐点白名单halo0条带。20MP串行/共享祖先/5混合均原尺寸TIFF16成功，工作集仍1.7–2.3GiB，账本不是硬内存上限。

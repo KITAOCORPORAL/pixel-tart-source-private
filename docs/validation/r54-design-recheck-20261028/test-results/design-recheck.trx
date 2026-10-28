@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="e9becd1f-e31f-421a-a67c-4a05668a10ab" name="Admin@DESKTOP-HO0JJEQ 2026-10-28 23:48:11" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-28T23:48:11.5566371+08:00" queuing="2026-10-28T23:48:11.5566379+08:00" start="2026-10-28T23:48:07.4801484+08:00" finish="2026-10-28T23:48:31.4965699+08:00" />
+  <TestSettings name="default" id="3e68471a-c16a-4f3b-a658-a1a8e283109b">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-28_23_48_11" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="c1ceef77-7b62-48b6-917d-3e040fe26688" testId="194e80bf-5137-8cd5-81dc-6e66133ef121" testName="GraphRouteUsesSharedUndoLockAndOffscreenLayout" computerName="DESKTOP-HO0JJEQ" duration="00:00:01.6355132" startTime="2026-10-28T23:48:20.5254599+08:00" endTime="2026-10-28T23:48:22.1611908+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c1ceef77-7b62-48b6-917d-3e040fe26688" />
+    <UnitTestResult executionId="1c0d42c0-3abb-4a86-9a16-755c7a979c80" testId="1ffdf448-2577-8339-997f-92d7d2bc59ac" testName="RecordActualSelectedToolsAndLayoutAgainstSuppliedDesign" computerName="DESKTOP-HO0JJEQ" duration="00:00:08.9843693" startTime="2026-10-28T23:48:11.5391422+08:00" endTime="2026-10-28T23:48:20.5238224+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1c0d42c0-3abb-4a86-9a16-755c7a979c80" />
+    <UnitTestResult executionId="944b0e43-b35c-4335-9a75-fe2b2a598416" testId="1c62419c-2b73-811b-9694-e28170cdd19d" testName="DarkroomDipRailRecoveryFilmFullHeightAndIndependentCollapse" computerName="DESKTOP-HO0JJEQ" duration="00:00:03.5783706" startTime="2026-10-28T23:48:07.9341085+08:00" endTime="2026-10-28T23:48:11.5270243+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="944b0e43-b35c-4335-9a75-fe2b2a598416" />
+    <UnitTestResult executionId="fa01e4f8-91c4-4231-a89d-90ab94435113" testId="19b9002b-e62e-898f-b5e7-f0ca897db7c7" testName="FourProductionStatesSelectedNodeThumbnailsRestoreAndFrameGallery" computerName="DESKTOP-HO0JJEQ" duration="00:00:09.1840308" startTime="2026-10-28T23:48:22.1624091+08:00" endTime="2026-10-28T23:48:31.3475500+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fa01e4f8-91c4-4231-a89d-90ab94435113" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="GraphRouteUsesSharedUndoLockAndOffscreenLayout" storage="n:/pixart/guangjing-r54-darkroom-20261028/tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="194e80bf-5137-8cd5-81dc-6e66133ef121">
+      <Execution id="c1ceef77-7b62-48b6-917d-3e040fe26688" />
+      <TestMethod codeBase="N:/pixart/guangjing-r54-darkroom-20261028/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R54GraphWpfTests" name="GraphRouteUsesSharedUndoLockAndOffscreenLayout" />
+    </UnitTest>
+    <UnitTest name="FourProductionStatesSelectedNodeThumbnailsRestoreAndFrameGallery" storage="n:/pixart/guangjing-r54-darkroom-20261028/tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="19b9002b-e62e-898f-b5e7-f0ca897db7c7">
+      <Execution id="fa01e4f8-91c4-4231-a89d-90ab94435113" />
+      <TestMethod codeBase="N:/pixart/guangjing-r54-darkroom-20261028/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R54HomeUiTests" name="FourProductionStatesSelectedNodeThumbnailsRestoreAndFrameGallery" />
+    </UnitTest>
+    <UnitTest name="RecordActualSelectedToolsAndLayoutAgainstSuppliedDesign" storage="n:/pixart/guangjing-r54-darkroom-20261028/tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1ffdf448-2577-8339-997f-92d7d2bc59ac">
+      <Execution id="1c0d42c0-3abb-4a86-9a16-755c7a979c80" />
+      <TestMethod codeBase="N:/pixart/guangjing-r54-darkroom-20261028/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R54DesignRecheckTests" name="RecordActualSelectedToolsAndLayoutAgainstSuppliedDesign" />
+    </UnitTest>
+    <UnitTest name="DarkroomDipRailRecoveryFilmFullHeightAndIndependentCollapse" storage="n:/pixart/guangjing-r54-darkroom-20261028/tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1c62419c-2b73-811b-9694-e28170cdd19d">
+      <Execution id="944b0e43-b35c-4335-9a75-fe2b2a598416" />
+      <TestMethod codeBase="N:/pixart/guangjing-r54-darkroom-20261028/tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R53UiCorrectionTests" name="DarkroomDipRailRecoveryFilmFullHeightAndIndependentCollapse" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="194e80bf-5137-8cd5-81dc-6e66133ef121" executionId="c1ceef77-7b62-48b6-917d-3e040fe26688" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ffdf448-2577-8339-997f-92d7d2bc59ac" executionId="1c0d42c0-3abb-4a86-9a16-755c7a979c80" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c62419c-2b73-811b-9694-e28170cdd19d" executionId="944b0e43-b35c-4335-9a75-fe2b2a598416" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19b9002b-e62e-898f-b5e7-f0ca897db7c7" executionId="fa01e4f8-91c4-4231-a89d-90ab94435113" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>
