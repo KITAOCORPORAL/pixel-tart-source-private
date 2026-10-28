@@ -1,7 +1,7 @@
 # 光镜开发交接入口
 
 ## 画布首闭环＋影调收尾（2026-10-28 America/New_York）
-- 同树E:/Kitao-Worktrees/r53-color-tools-film-20261028/同分支company/r53-color-tools-film-20261028接续8816b5f2；fetch无新增。当前权威docs/validation/r53-canvas-tone-closure-20261028/FINAL_REPORT.md、TEST_SUMMARY、TONE_FINDINGS、CANVAS_CONTRACT。
+- 同树E:/Kitao-Worktrees/r53-color-tools-film-20261028/同分支company/r53-color-tools-film-20261028接续8816b5f2；fetch无新增。当前权威docs/validation/r53-canvas-tone-closure-20261028/FINAL_REPORT.md、TEST_SUMMARY、TONE_FINDINGS、CANVAS_CONTRACT。产品eeb5edae19870bb9da151c6c15164f381faf4136，Core13/WPF23PASS、0FAIL/0NOT_RUN（受影响范围），完整包E:/Kitao-Deliveries/r53-canvas-tone-closure-20261028/Guangjing-R53-Canvas-Tone-Final-Diagnostic-win-x64.zip；最终远端见PUSH_READBACK.json。
 - 调色只修具体缺口：实际native执行darktable/RawTherapee固定tone-stage函数，保留域/曲线差异/NaN；不是完整双相机引擎科学批准。V1极端组合灰反转、warm方向问题新增WideToolVersion2，旧V1原结果/继续编辑不变，新工具或颜色管理“另建新版线性工具变体”显式使用V2。高光阴影不叫前端恢复。
 - 强WB/影调、细硬mask、多节点、旋转拉直、源高频边界快速预览保守回退精细，原预算不改。RawWide仍defaultoff，XTrans/内存guard未动；RAW_FRONTEND_NEXT.md明确scale_colors/convert_to_rgb uint16clip与可行接口/版本代价。C1仍NOT_RUN，无LUT。
 - CanvasDocument/CanvasObject/CanvasEditor/Store/FreeCanvasView原模型复用，新增文档PixelWidth/Height、PNG/photo自有副本导入、图层面板、Alt自由缩放、透明sRGB ICC PNG导出；屏幕Zoom/Pan不写对象坐标。规划自有source/hash/path合同复用，.ptplan v1不改/不含canvas。

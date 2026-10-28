@@ -1,0 +1,4778 @@
+{
+  "path": "RAW_TESTS.zip",
+  "sha256": "69a27e5fb98e5e27e41c6b71317d98766f345f5c8aba80af071c3fc6edd85e77",
+  "bytes": 5050638,
+  "readback": true,
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 932,
+      "sha256": "31b9481f7942e5d34d553fc9768aafa93f6cb42d888b924f3385beec97c0d321"
+    },
+    {
+      "path": "archive_evidence.py",
+      "bytes": 2061,
+      "sha256": "e998d36f7735a99345552db83e333be1ff6e0d2224152c5a4831d9310f43a958"
+    },
+    {
+      "path": "build_a1.py",
+      "bytes": 1379,
+      "sha256": "1cbdc28dc6f4fb3d1a06e8cb6a4353b56d6a9bfcf7754b9c740751f1399ef590"
+    },
+    {
+      "path": "build_a10.py",
+      "bytes": 1381,
+      "sha256": "6faff1b8c287fbe33e281eb1f5034f71a74ad43fb5f6ccb5ae2a53ce4a9a52f3"
+    },
+    {
+      "path": "build_a11.py",
+      "bytes": 1381,
+      "sha256": "84a19f778ab9323b89ee4ba204dcffa7bec73dc6499c1dad91962786f3bbf659"
+    },
+    {
+      "path": "build_a12.py",
+      "bytes": 1381,
+      "sha256": "52f66ef8795c9d3b756def84621d76849c8271556f896a3f127e36af36d1b44c"
+    },
+    {
+      "path": "build_a13.py",
+      "bytes": 1381,
+      "sha256": "5eca0d8ce65323ab445a1816afee307d5a3498550e92684ad9031306fd0f6efb"
+    },
+    {
+      "path": "build_a14.py",
+      "bytes": 1381,
+      "sha256": "2972790294eb9265e0efdb2e8d161fe05b60f85550ac7b1d8f2b5fd39ff49343"
+    },
+    {
+      "path": "build_a15.py",
+      "bytes": 1381,
+      "sha256": "680121b305649ecbdf797d27128b53463bb403219241cf24c4b5dc54752220dc"
+    },
+    {
+      "path": "build_a16.py",
+      "bytes": 1381,
+      "sha256": "0ee8fcedce1db3c777d97d12c10d05c4406ccb7166cb0e8b447813abc3757c6d"
+    },
+    {
+      "path": "build_a17.py",
+      "bytes": 1381,
+      "sha256": "709ecea4d6b81586b1a995173cae7d77399ef4477c8468f0941def7ae4d0f306"
+    },
+    {
+      "path": "build_a2.py",
+      "bytes": 1379,
+      "sha256": "84787fa325a850d1baffa2d4e1eeb291e2e326346db6c589b816ea609ee3d59f"
+    },
+    {
+      "path": "build_a3.py",
+      "bytes": 1379,
+      "sha256": "658db3440677d1b3515845fb78ae4cf6ec37bd76ab81efe94f26b7b8716f24aa"
+    },
+    {
+      "path": "build_a4.py",
+      "bytes": 1379,
+      "sha256": "c46336f5527a291a97f22f0badafb9136ec907784bcf53fbba98481781b98f5d"
+    },
+    {
+      "path": "build_a5.py",
+      "bytes": 1379,
+      "sha256": "a619d7519f39ce02dfffef546e5d268f78a9de37afe66c480747a81c9c9fc70e"
+    },
+    {
+      "path": "build_a6.py",
+      "bytes": 1379,
+      "sha256": "e8c17dd074c4968cb0e228659f963f594d3167c9fab4cca67eb85606a187ebf9"
+    },
+    {
+      "path": "build_a7.py",
+      "bytes": 1379,
+      "sha256": "89f3a8390973cca5725a4b5a077bd6a2ba8dc22da3ed18fbeb8200b4e8ef9b3c"
+    },
+    {
+      "path": "build_a8.py",
+      "bytes": 1379,
+      "sha256": "db3a46b8474c0c0710f1179f04229a7229120268facf1216d006956479d0a4cd"
+    },
+    {
+      "path": "build_a9.py",
+      "bytes": 1379,
+      "sha256": "76c2704db5c095013b96ddf83e71766e9fdadd6dd1fa195eab3f91b53ba39d3e"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A1.log",
+      "bytes": 43414,
+      "sha256": "4b0e38e6e9b4e5955f06183f5fd3c55041c0d2f8eb4defa6ab8939124ea0a912"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A10.log",
+      "bytes": 47400,
+      "sha256": "3390cffbe0b663c807d7c82ea9c2706f83ec4ff9af9ebbcf1c11da655d2a7b48"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A11.log",
+      "bytes": 417,
+      "sha256": "4589b526079c87719d517658901b0a91b33f22553954e3ae14bcc9d785f7969a"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A12.log",
+      "bytes": 417,
+      "sha256": "6d2e3e082321efe86873bc51ca975da769ca3eba5faff2dc80efe68da03018ac"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A13.log",
+      "bytes": 49746,
+      "sha256": "5c158ba40dbdbdb9a1749e1d84eabe55cd5b1558476c4bd4c3d6f546db36e014"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A14.log",
+      "bytes": 417,
+      "sha256": "d9c5ac87243004ca49e4ba2b2cbe32019ae9c23815401b1a47ba5c6995adfe5b"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A15.log",
+      "bytes": 417,
+      "sha256": "635d62048d979a139a167d960bf126897c024ec4ec64bf2cea35bf0722834d54"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A16.log",
+      "bytes": 47400,
+      "sha256": "9a5f945364fd3d0b5f8a91f3864a466404fe613763bdd0124702ace5993179f1"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A17.log",
+      "bytes": 47400,
+      "sha256": "2a110a1e4b0800ec86c8cbe6811ec781d2e651afb5b7f65f971b50585366c0f1"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A2.log",
+      "bytes": 417,
+      "sha256": "cfaf0bcf51c464f254fe0a8f728a0fe13d9fca15c89c7697edd2bbb998bed62c"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A3.log",
+      "bytes": 49746,
+      "sha256": "4428dea5b61c327fc40d803e55302239264c9e9b01edca8b44a1a17e674a5b5d"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A4.log",
+      "bytes": 2765,
+      "sha256": "a8bd6dacf2068b72cc360a2836d1592460bfd4c0c54d3e4418df9e6e8ac47024"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A5.log",
+      "bytes": 49746,
+      "sha256": "82507d12be2b6cfcc2a679cab26565ae44c39e7d51998229e0f425f7e8fa7e44"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A6.log",
+      "bytes": 2765,
+      "sha256": "b6195b3b68d439bdaf46c8da6137e618698f5a3d4e1022e5d1f099665898630f"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A7.log",
+      "bytes": 49746,
+      "sha256": "d6cc7f9903d9a863a58a216ade828db909de053ac8204bcf6ed89c2402c8c998"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A8.log",
+      "bytes": 49746,
+      "sha256": "952114feeb02aa0669c1106e8ea483c56c8b7caee491047ae5c4ab753083cf81"
+    },
+    {
+      "path": "BUILD_CORE_CANVAS_A9.log",
+      "bytes": 49746,
+      "sha256": "e7678d6d4d486293ec9ced0a171b9886f6709da67ca5bd188e178d0bec66de18"
+    },
+    {
+      "path": "build_final.py",
+      "bytes": 1618,
+      "sha256": "50ce644013b03322d56e677d538d43e07a890eb6c3a6afd1ce8e449e943b279e"
+    },
+    {
+      "path": "BUILD_RUNNER.log",
+      "bytes": 226,
+      "sha256": "a3af933df90c46fad1cbcc138654a9fd412fd7eeb5e4a8db4d90d17f04330b9b"
+    },
+    {
+      "path": "build_sealed.py",
+      "bytes": 1627,
+      "sha256": "532032678da361c04fbec8f491e5f5981155cf8a97a158ba4b4d0347aa638c4d"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A1.log",
+      "bytes": 4767,
+      "sha256": "917d9b33cf29598ebf7991a25826f34081c325d42adb4664f3a39bbfcd2070a3"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A10.log",
+      "bytes": 2750,
+      "sha256": "19098d28f92d8fdf7712c8a5977ba48b354f065bfcf0263d47f68b1222c43acc"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A11.log",
+      "bytes": 188768,
+      "sha256": "36aa52326f724b2b02c9de00164c400c8ac43a86baa906f0e20b92a13c27f38c"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A12.log",
+      "bytes": 188768,
+      "sha256": "0c90ffb3866476e07c28c4822e5d0459775a51bcb1781e746b0b1164d4838988"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A13.log",
+      "bytes": 191114,
+      "sha256": "f18ac192cdca0a5e1af334568d485f8bdeb7acb164a5cbbac212b6d92c843dbf"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A14.log",
+      "bytes": 188768,
+      "sha256": "223d63e9e0ad3a468354911ad4b344728928945a1b4c7669a2e0f7b29d4396e4"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A15.log",
+      "bytes": 188338,
+      "sha256": "a21f1afb16f601028d96656ce0401e2c91c51255bb325e8c89fa82135ecf45a7"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A16.log",
+      "bytes": 2750,
+      "sha256": "5cee013781b36a4f83ea3b56f65726b26154fe24358a7373650da38dd3f6d14a"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A17.log",
+      "bytes": 189586,
+      "sha256": "742db86b5c49170c5e573f2a29cf4208fe202d73d56a8645069d5a03086bbae9"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A2.log",
+      "bytes": 187130,
+      "sha256": "397a94528de2f7a74f86b0bb5e983a5ab8b9fb26e26340e00f78a26d064b4d44"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A3.log",
+      "bytes": 191110,
+      "sha256": "aef3d5d3114c420c61a191c25a66b14e2d0cf3ea6f26f5ee4caf80acc9b4fe43"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A4.log",
+      "bytes": 191110,
+      "sha256": "c91139cbd97bc0ae7947c502876249974487db9d0450620cb59cd4aeaf759dc2"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A5.log",
+      "bytes": 191110,
+      "sha256": "83df69ade1bb0fa73e1812e4415faae5774aa9c3a9feb4f8cd72cbfa01804e32"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A6.log",
+      "bytes": 191112,
+      "sha256": "883ae5472f8a6a1d8711eb6b3a17cb75fa33cecdf9745e316e8944419c3a6c92"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A7.log",
+      "bytes": 191112,
+      "sha256": "cd4857db11b9c19ce6f314f3c6be7e0fe8aa72c509ee611500287d99da5b1789"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A8.log",
+      "bytes": 191112,
+      "sha256": "2425bea5a242b56dfd558f9ed282067b3511b7bc26fdc4516532cf058ec9f34b"
+    },
+    {
+      "path": "BUILD_WPF_CANVAS_A9.log",
+      "bytes": 191112,
+      "sha256": "9c2a7f59435c8c3c7c5dabe0becb047d09186ba3fdcb264a8e59e836be8d1999"
+    },
+    {
+      "path": "canvas-sealed/CANVAS_ID.txt",
+      "bytes": 36,
+      "sha256": "abfaa2c43d104792534808c2403398b649a096221ca4233cc7e370c6008d8c0c"
+    },
+    {
+      "path": "canvas-sealed/PIXEL_HASH.txt",
+      "bytes": 64,
+      "sha256": "a57435af6f226e965d2d1360524d1b1c4c208e00052c6be3b197d9132625e989"
+    },
+    {
+      "path": "canvas-sealed/REOPEN.json",
+      "bytes": 26,
+      "sha256": "ab1c27e455744ea093d36aa0f255e4a4eb942ea39339c09722a2e6ab93316ef9"
+    },
+    {
+      "path": "canvas-sealed/RESULT.json",
+      "bytes": 207,
+      "sha256": "59ad7d89d9038c0bdc9525025ddd67cbd44f23d5c2649c35714f464689e7df48"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/000/results.trx",
+      "bytes": 4244,
+      "sha256": "0e82beefbda652e6b39b96a5420c8ac62e3bd6fa1a71f73a965fbc6bbbda9434"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/000/runsettings.xml",
+      "bytes": 527,
+      "sha256": "742b325472fa5f62ba109e580b45dbbf20016fa251a294e374726ff95a6fb8cc"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/000/stdout.log",
+      "bytes": 400,
+      "sha256": "018221e0e542a3bc9bc449d39a7e2306b5a1b7cf669608a3168646ccbe58da2b"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/001/results.trx",
+      "bytes": 7014,
+      "sha256": "7e86e3bc3e0eb6e425cb083f2219d4a7da46fb050490c28b66e9370f143fbb28"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/001/runsettings.xml",
+      "bytes": 781,
+      "sha256": "8738002a5226ff08fb66ad262081eecc91bb4717d10fb82a384747d6d27057c7"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/001/stdout.log",
+      "bytes": 401,
+      "sha256": "1155deafabaf1f3fd305200d11912a836757f79cb819d7f09d5fb965a52eac07"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/002/results.trx",
+      "bytes": 8281,
+      "sha256": "b228d2cb7bb6292a39693c6f15cd868790bee1374656b1080351c5e2eaa2a23a"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/002/runsettings.xml",
+      "bytes": 872,
+      "sha256": "cd45fa863afa67ac29fec695567a52aff11a11f6fb8ed65baca5727e77eff0eb"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/002/stdout.log",
+      "bytes": 401,
+      "sha256": "660008c81685b150bcb926fc79eb6f9415ab4d4ce3e4e39f856ac40d6d52cc43"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/discovery.json",
+      "bytes": 855422,
+      "sha256": "5cd66c84aad21742bf45776f6d9337ffb3c704fa537bf39e993c350d838d5fed"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A10_CORE/run-20261028-124734-4790ee7a/summary.json",
+      "bytes": 14116,
+      "sha256": "24fe1c9d4b32a9a2cf0d3d7b09d5b2846c0b07fdc2cafacd8c7c4c8d2f584f39"
+    },
+    {
+      "path": "CANVAS_A10_CORE.log",
+      "bytes": 323,
+      "sha256": "aee6939f8e69d948250e61ad36ab03500602a52c5e3916fed6baa5ad496c7145"
+    },
+    {
+      "path": "CANVAS_A10_WPF/run-20261028-124738-3548de48/000/results.trx",
+      "bytes": 6587,
+      "sha256": "75e16c366cec5ce8ddb6f87ec8b8cc3e3063504b9ade0de2215c150040675829"
+    },
+    {
+      "path": "CANVAS_A10_WPF/run-20261028-124738-3548de48/000/runsettings.xml",
+      "bytes": 681,
+      "sha256": "f4855b32c6270f6b014c6ba224205b2d8fecb4d20e0d1f3ea411cd03f40850ec"
+    },
+    {
+      "path": "CANVAS_A10_WPF/run-20261028-124738-3548de48/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A10_WPF/run-20261028-124738-3548de48/000/stdout.log",
+      "bytes": 465,
+      "sha256": "39af5718de7bb31994d9af9909c9234915f34f46ef1fc18d69f5dfc2e33e87ac"
+    },
+    {
+      "path": "CANVAS_A10_WPF/run-20261028-124738-3548de48/001/results.trx",
+      "bytes": 2666,
+      "sha256": "6a2af13bed31a35d389b350d975e9e85786be4f1c153cfce7f500e6f2899c3dd"
+    },
+    {
+      "path": "CANVAS_A10_WPF/run-20261028-124738-3548de48/001/runsettings.xml",
+      "bytes": 395,
+      "sha256": "672181bc26a6afd8c70922986e91b493ee42f2cb00c1123de9fd26902e58cd5a"
+    },
+    {
+      "path": "CANVAS_A10_WPF/run-20261028-124738-3548de48/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A10_WPF/run-20261028-124738-3548de48/001/stdout.log",
+      "bytes": 403,
+      "sha256": "2b88546d6cd381824262fab969b59b2c9867d14384f53e61a0a49d46539a6d57"
+    },
+    {
+      "path": "CANVAS_A10_WPF/run-20261028-124738-3548de48/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "CANVAS_A10_WPF/run-20261028-124738-3548de48/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A10_WPF/run-20261028-124738-3548de48/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A10_WPF/run-20261028-124738-3548de48/summary.json",
+      "bytes": 7861,
+      "sha256": "4d445a83085b956efdee38de413dcac05d0cf8ae798ba547e1764db114af1ef6"
+    },
+    {
+      "path": "CANVAS_A10_WPF.log",
+      "bytes": 262,
+      "sha256": "cf5294ff7b12812e586426329f75bfdd99edbd51faaa37d9e6db2f1186ac305e"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/000/results.trx",
+      "bytes": 4244,
+      "sha256": "0e07c4960d8684355527394cf3cd08d5f48c5a78229234ffca466e8fef9434e9"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/000/runsettings.xml",
+      "bytes": 527,
+      "sha256": "6348494327bd88b56ad3df34ae1725d9fc86130d7b12377930fb6aae18e5501a"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/000/stdout.log",
+      "bytes": 400,
+      "sha256": "a6c4bc42fab86b9165924e80aa4a425d4a9fe579deb5cbb05709140112421597"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/001/results.trx",
+      "bytes": 7014,
+      "sha256": "c1c7e6a8cba35ce0db433bfd529e1d5231eb732e9eeecb9713d520bcc4ccf986"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/001/runsettings.xml",
+      "bytes": 781,
+      "sha256": "422e7cd778bbfabab841893ddb912e9dcafb9b205dc9dcba73f837712bafbbc6"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/001/stdout.log",
+      "bytes": 401,
+      "sha256": "e7804d2d14d81a5c4a3d4b22b35e006b7c5ad84a4b7316eb3b594d86e4a0ae64"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/002/results.trx",
+      "bytes": 8281,
+      "sha256": "96963a9edb24c64d340e11f691153c8e0ab278604168df11451d4cbb0b5ba674"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/002/runsettings.xml",
+      "bytes": 872,
+      "sha256": "d0339f972143dc8521617b782879eac67b90bc9e8d13861ecd90c81123df96aa"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/002/stdout.log",
+      "bytes": 401,
+      "sha256": "76cf5be5caed7daebbe30b8b995cffe9d3de6e3ba7eee805ae71401af4ec49b4"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/discovery.json",
+      "bytes": 855422,
+      "sha256": "5cd66c84aad21742bf45776f6d9337ffb3c704fa537bf39e993c350d838d5fed"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A11_CORE/run-20261028-125105-9710e815/summary.json",
+      "bytes": 14117,
+      "sha256": "81044be507f1f57871f5e64c3a9c21f184662503f7cb660ac77747bd11e00a4b"
+    },
+    {
+      "path": "CANVAS_A11_CORE.log",
+      "bytes": 323,
+      "sha256": "96206972a147ae278b010631d992c2a4dd0b04fc4f65ebf180e179f4e0f0a6b7"
+    },
+    {
+      "path": "CANVAS_A11_WPF/run-20261028-125109-121bc582/000/results.trx",
+      "bytes": 6587,
+      "sha256": "3c3d51eccbdff2f727a139bba7fb5b96980c34ef9e331db4baabdd70b2ecaaac"
+    },
+    {
+      "path": "CANVAS_A11_WPF/run-20261028-125109-121bc582/000/runsettings.xml",
+      "bytes": 681,
+      "sha256": "a2022fa169d57a663341e5918939fb461ef9068860382dff601880db73e8418d"
+    },
+    {
+      "path": "CANVAS_A11_WPF/run-20261028-125109-121bc582/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A11_WPF/run-20261028-125109-121bc582/000/stdout.log",
+      "bytes": 465,
+      "sha256": "a0fbd561b4db141e54d241addb10c46ae08b1f3c3c72241df00d7e20df7e619f"
+    },
+    {
+      "path": "CANVAS_A11_WPF/run-20261028-125109-121bc582/001/results.trx",
+      "bytes": 2666,
+      "sha256": "9824e8d93d3dd75505e022c8db46fa2e4dd238f2720d21ac5d760b499dbdccfd"
+    },
+    {
+      "path": "CANVAS_A11_WPF/run-20261028-125109-121bc582/001/runsettings.xml",
+      "bytes": 395,
+      "sha256": "9dae63933c1beda17b7ea7746bd31e48967f57a28a6d46716b3c1c9907425f92"
+    },
+    {
+      "path": "CANVAS_A11_WPF/run-20261028-125109-121bc582/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A11_WPF/run-20261028-125109-121bc582/001/stdout.log",
+      "bytes": 403,
+      "sha256": "ddadccde8569560d4ca66a492dbcae5f8bbccedecbb73226432a2dc2e8d2aec0"
+    },
+    {
+      "path": "CANVAS_A11_WPF/run-20261028-125109-121bc582/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "CANVAS_A11_WPF/run-20261028-125109-121bc582/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A11_WPF/run-20261028-125109-121bc582/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A11_WPF/run-20261028-125109-121bc582/summary.json",
+      "bytes": 7862,
+      "sha256": "1e8a7216509e9392433784908dec1cc9a7ef1b7a28543046e18ef1f6b91dee41"
+    },
+    {
+      "path": "CANVAS_A11_WPF.log",
+      "bytes": 262,
+      "sha256": "43e97e00d7f1f36f2acc6d81d7dfecf6a58e031d48956fa3e1f4729aeca7cbbc"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/000/results.trx",
+      "bytes": 4340,
+      "sha256": "183d1ef51d38d47906449913a7998c3931b0e5f74202a3412f9dbbde8f692358"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/000/runsettings.xml",
+      "bytes": 559,
+      "sha256": "e6f8af3844f4a340a95db09a709a8950716b331a88ace530ea0113725f8765ed"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/000/stdout.log",
+      "bytes": 401,
+      "sha256": "cba16446dc7523c1f6130c9de395835b15a011f076da1663a15602ff7b9dd0b5"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/001/results.trx",
+      "bytes": 4244,
+      "sha256": "e31a5a1866bf3afa73ae84bd1f2a4fd09bb0120b181c0a2e4c4c879f06a16a67"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/001/runsettings.xml",
+      "bytes": 527,
+      "sha256": "5c70b63eb107df272efb70b4345875fa81dceda5b3d3b6655e4c17cb41ba9518"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/001/stdout.log",
+      "bytes": 400,
+      "sha256": "63818bdc8cfcff5b9bf67edfe5ef52387d74ba7df2e630c93d872ceffb7ea448"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/002/results.trx",
+      "bytes": 7014,
+      "sha256": "7fbfb6cf44f255486e013bf831038e26c76618bbfa59ae2a2437c7425ddc4b78"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/002/runsettings.xml",
+      "bytes": 781,
+      "sha256": "4d2fba1c181688e1c32226f66d8caff4a6ac93093d0c4610f23465ca52888efa"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/002/stdout.log",
+      "bytes": 401,
+      "sha256": "164d79fbb1226910fb1321e39a328c524b3ddf0e7873c015a850dcaaec703c35"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/003/results.trx",
+      "bytes": 8281,
+      "sha256": "d73e6d3d06d9a4568fdf075695967fb60024e7131216cf5088c858aa3cfcaf7e"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/003/runsettings.xml",
+      "bytes": 872,
+      "sha256": "fe1530b9b7e2da7dcbcbb72786ea66f6738dc0b89d57eec8c90149e221ba1dad"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/003/stdout.log",
+      "bytes": 401,
+      "sha256": "8f39e8b3ee55668000ce24207e855e1275b283a2864f2c54af19d5c27cb56621"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/discovery.json",
+      "bytes": 855422,
+      "sha256": "5cd66c84aad21742bf45776f6d9337ffb3c704fa537bf39e993c350d838d5fed"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_CORE/run-20261028-125407-173325bb/summary.json",
+      "bytes": 17280,
+      "sha256": "7b33e5a791c518c0bb73202fc57675c59c10929a44874060bc2d8ac6e34e203f"
+    },
+    {
+      "path": "CANVAS_A12_CORE.log",
+      "bytes": 401,
+      "sha256": "d708d29955651325b0b4f80ab625df1b23f5810073b5e757ce162503c89eef74"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/000/results.trx",
+      "bytes": 2645,
+      "sha256": "7f962ad72742e5ca32e404249cee7037ad08a8a33abf1aaa94e34f3db5859580"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/000/runsettings.xml",
+      "bytes": 382,
+      "sha256": "c1c08372f458fc71c8df839fe9d267c5dcd1a6e1406229bf27e32c62643663c9"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/000/stdout.log",
+      "bytes": 402,
+      "sha256": "84c12d7df6f09b617b47291f1ec8c7c7782b6fefc1b129533d2599e90ec2410f"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/001/results.trx",
+      "bytes": 2637,
+      "sha256": "f73078908e46778cb101000940de0f52c417e99f45fcd6dc552f43a71ddc4e7a"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/001/runsettings.xml",
+      "bytes": 380,
+      "sha256": "502772c6309624bef41af4301dea472614ae9d8bf3c0270f302ef7df8393ec32"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/001/stdout.log",
+      "bytes": 402,
+      "sha256": "6c4ef87a6188a53417c9a06539dbc0a09b0b58c9fa81d1f006e9b99fb60dd6ce"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/002/results.trx",
+      "bytes": 2663,
+      "sha256": "5268cc3a5a2f6f8e323c3c06383ecca31f0b648c77ee71ce6ceaf55647a7cb4a"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/002/runsettings.xml",
+      "bytes": 388,
+      "sha256": "fe2deb368f22f66007627af6b43b529b7a5a8f0cb787f43ee489960d5d195366"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/002/stdout.log",
+      "bytes": 402,
+      "sha256": "aea25f442df16db7dbea2eda8798bc73eec763f4f92b0d57f760fbe8c52529df"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/003/results.trx",
+      "bytes": 2670,
+      "sha256": "30ba4faa07061a0c5166c2af4fe6798fcf0085bf9626e8a3c98266e1eee256a4"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/003/runsettings.xml",
+      "bytes": 397,
+      "sha256": "92af5c4868edf7cfd9177b0dbe8e58c9f3d449aac33cc145c4a140d6176fc22f"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/003/stdout.log",
+      "bytes": 402,
+      "sha256": "b7cf09dd8337f863ed2271469b25566e3a7a15274049eaa4d59744d69c1cba51"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/004/results.trx",
+      "bytes": 8014,
+      "sha256": "39e88d6b5586d4b1b860e46d91f83464473fd4c38b2c47e35bd69a18da77ba6e"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/004/runsettings.xml",
+      "bytes": 777,
+      "sha256": "fa86d90bac826949dbe5ab503b928ebaa0c3435f252163fc0a2020f93d08b323"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/004/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/004/stdout.log",
+      "bytes": 1439,
+      "sha256": "050195756b103137d89fb71c9c647123498717c18ac2494d6bb389b6cde6e6f3"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/005/results.trx",
+      "bytes": 2688,
+      "sha256": "722cc8bf18e429902e31615b514d21cb7f3ab1e0049eb0d348c5624e77ec933d"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/005/runsettings.xml",
+      "bytes": 409,
+      "sha256": "ac63b600232c80826bda16e3bfea7a7aab04a0de8d83ae2533dacdb556310387"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/005/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/005/stdout.log",
+      "bytes": 400,
+      "sha256": "c37c3188ba458c3fc90cc4227a363c7cd29d14b48352d105ecaee2b83a1cf3d6"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/006/results.trx",
+      "bytes": 6587,
+      "sha256": "1cf6a97bf55ca850d22594d7f58295b4db4a0b697e9fd46855a4682a96f82fdb"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/006/runsettings.xml",
+      "bytes": 681,
+      "sha256": "db82cfa1e08f920449c905a374b6598f61e72f5f507fa5ff2cb6f49636d2d5ee"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/006/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/006/stdout.log",
+      "bytes": 465,
+      "sha256": "3b0d6c347e4f73de4b141b456f08884012c22f4f6a17f21bb5a707675f87461a"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/007/results.trx",
+      "bytes": 4056,
+      "sha256": "32b567aac947cdb9ca863664639c7b71aba32b9eb99f0a7840b5b5ce09b15ce1"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/007/runsettings.xml",
+      "bytes": 505,
+      "sha256": "c7d2ac86a71266585f5be8e7c2abb78363c6c8738e3e5f6455dfc0c01e4a5f8b"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/007/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/007/stdout.log",
+      "bytes": 402,
+      "sha256": "b15fdcaff32a3f2b27267af7fe5bc59008cc2ba869567f7dfe861cd538f796e5"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/008/results.trx",
+      "bytes": 2666,
+      "sha256": "e115ff6b1f6aa4538b7eee6ff0fd0caab067be7a233713bfc5abc91e63621384"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/008/runsettings.xml",
+      "bytes": 395,
+      "sha256": "6ec18554db01f4bde587702c5b76e8d833ecd09e6e7d15755971ba51deb2d649"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/008/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/008/stdout.log",
+      "bytes": 403,
+      "sha256": "5d989d61510eb22f8a34cac24646cecc1ac48684c5e9e650d196abdec8c710a5"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A12_WPF/run-20261028-125412-46b26b54/summary.json",
+      "bytes": 27801,
+      "sha256": "87dd145f95e8b4aa5b3b861c05cb149344b7d64d0eb440488d3f54a0673cbf70"
+    },
+    {
+      "path": "CANVAS_A12_WPF.log",
+      "bytes": 804,
+      "sha256": "e65859f8036e1a39eae28b031774b1b45cf9f878d28301b3e492abbab5f1456d"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/000/results.trx",
+      "bytes": 4340,
+      "sha256": "b0791f1e08cd8a63e21e93e27d123ba2be667c6e480da017cb8b12d3930cb14d"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/000/runsettings.xml",
+      "bytes": 559,
+      "sha256": "0c772a9c36f4a22a3393e433599dd66a8277c71d59bdcc941437cce19d14a48b"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/000/stdout.log",
+      "bytes": 401,
+      "sha256": "a67fa07cbc765c8543d2dbe8cc2857914af6373965fb965fe58f59d2ca0576a4"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/001/results.trx",
+      "bytes": 4244,
+      "sha256": "f0ab4b72e33f54707b32ff0b00a5269ffd9683de82a36c36e6e7d9f151eff552"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/001/runsettings.xml",
+      "bytes": 527,
+      "sha256": "bd2d8b8e3b4c121319a44bb9161d6e091b21c031878c36fbddf8a8cab76ba958"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/001/stdout.log",
+      "bytes": 400,
+      "sha256": "869a931ef1fc68e991323a885d7c286f9f9ca4963eedec81017fabc21f78385a"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/002/results.trx",
+      "bytes": 7014,
+      "sha256": "ec31e0031011ad1bd863e2cfe714213364dfd2adda8ff2294260d03eb65e08a7"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/002/runsettings.xml",
+      "bytes": 781,
+      "sha256": "79511b9c58948f9fecc1bcfe2d51e911608b36646510dfa155559f7ea1f84838"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/002/stdout.log",
+      "bytes": 401,
+      "sha256": "fae5f1d2c5d2f03c9fbf57cda0853e1f4e9a39b3cd592f5884821fc10218cde3"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/003/results.trx",
+      "bytes": 8281,
+      "sha256": "efb87423b40424c5eea294f86f14c740f3f486cdf945bd9ef03d26ae32786568"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/003/runsettings.xml",
+      "bytes": 872,
+      "sha256": "8a02d5c34f40c6bb0fd0adee8b6e37c3af67cede3290e79079eec88ea4ab5a23"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/003/stdout.log",
+      "bytes": 401,
+      "sha256": "8c7dd352727a8f792f19a0ca85986d285c205cb54088b44286bb259c414ef736"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/discovery.json",
+      "bytes": 855422,
+      "sha256": "5cd66c84aad21742bf45776f6d9337ffb3c704fa537bf39e993c350d838d5fed"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_CORE/run-20261028-125750-42281b77/summary.json",
+      "bytes": 17279,
+      "sha256": "1b1ec13c7c15212d7bcd7af291f32f5a2bd46b119f38e76bf277ec38b6ef2231"
+    },
+    {
+      "path": "CANVAS_A13_CORE.log",
+      "bytes": 401,
+      "sha256": "d0ce27e0645528c8ab9c22504231b953c2e42c9e536aa4ca9c23faba812ff8a4"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/000/results.trx",
+      "bytes": 2645,
+      "sha256": "6e3f9148e6350fd75e60f4385239be82e2fa66da9e462c397e4eb2d4b4e2f2bf"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/000/runsettings.xml",
+      "bytes": 382,
+      "sha256": "2c4e529991b992f5cd9f35e669c1b226825c8157fd6adb60406fd2b899633219"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/000/stdout.log",
+      "bytes": 402,
+      "sha256": "4877734bb84f0dfa56b2d0ce2de565e6f35292806ebd1d529c4e0f88a8b374fd"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/001/results.trx",
+      "bytes": 2637,
+      "sha256": "70bb2f14e96f772d189e33867eb9a688efb3015d54a116295ead60762a6b398f"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/001/runsettings.xml",
+      "bytes": 380,
+      "sha256": "0d65ae856f6748b083119829126fa42d2760ae310460c5b12e26160349194af9"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/001/stdout.log",
+      "bytes": 402,
+      "sha256": "b369b24111ad5c184510e1a891fd0d22ca58f3413c1c6428b3809ced9aa8de10"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/002/results.trx",
+      "bytes": 2663,
+      "sha256": "9a2abdf130dc35bf406c51fb25a36991f39a4054bf178649ed1d59e9d86fc20b"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/002/runsettings.xml",
+      "bytes": 388,
+      "sha256": "59ad72f671a0a6850d94e85eb654f90aba090f2f741e6a08d17f28caa8485985"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/002/stdout.log",
+      "bytes": 402,
+      "sha256": "2c87a22bf1377382089b54e2723eabfa9bfbc4ddd4535f78052f107f2fd21b61"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/003/results.trx",
+      "bytes": 2670,
+      "sha256": "ee7e301a1f92318a8ddd842c31005a67e99d125992164f638d106c52254e4117"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/003/runsettings.xml",
+      "bytes": 397,
+      "sha256": "4eb6ccf921094b6d623650b57f9851a1f43030f53bf02bca0ce7fa352544c402"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/003/stdout.log",
+      "bytes": 402,
+      "sha256": "09fc203f28c2849532f4ab5bd824a1913538418390b6d153761c041c0d297aee"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/004/results.trx",
+      "bytes": 6916,
+      "sha256": "f0de2e7628fa338d4309ebcb1d6b0f59ff5da969800d965ec4689cb5971ca00e"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/004/runsettings.xml",
+      "bytes": 777,
+      "sha256": "72197de4300777998d4bc22b4083279e5c01e540cc54c111ec34aa15173180d8"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/004/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/004/stdout.log",
+      "bytes": 403,
+      "sha256": "b66bbd5902c09722ee25641ce6a7b77b9eb8d447e6f99026015df812d350df16"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/005/results.trx",
+      "bytes": 2688,
+      "sha256": "337a632690f9f23a74ccf5e34aeb1cfbb2b6006f93ef3c9c23aef355c265a4bd"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/005/runsettings.xml",
+      "bytes": 409,
+      "sha256": "d3dff3768a2e2ad760e829046badc91b1f2d4aa5393a02860bcc389d55cc3061"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/005/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/005/stdout.log",
+      "bytes": 400,
+      "sha256": "2ab75c5ec5d86f494832d65d034da5a8bf4d2d8983a92ec92ba84dc0cf242008"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/006/results.trx",
+      "bytes": 6587,
+      "sha256": "81579f6bd31a5800e01361cf2c785afbcc63e078717d733ba159ff6b3079a43d"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/006/runsettings.xml",
+      "bytes": 681,
+      "sha256": "cc455c6c3f9e0c752bbef4d406d868cb953382f00a5fe29bde61eb5215606eb7"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/006/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/006/stdout.log",
+      "bytes": 465,
+      "sha256": "e63fef58ecc65e96bae56b2a5bf91edf0f97e263a878d92956212dd4eda50be5"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/007/results.trx",
+      "bytes": 4056,
+      "sha256": "f726ca705a484a415c0624b4af18000f93afb5d7a20bf1349f6733acda21c0ef"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/007/runsettings.xml",
+      "bytes": 505,
+      "sha256": "7cb0a211f27b4dcb06fa5750ba07eae424a9ed7655e1c9e37d90fff92873370d"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/007/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/007/stdout.log",
+      "bytes": 402,
+      "sha256": "a723555731f39fe4504cb3da0fd278728b8b1809b9252aafa186ddbe6ab90756"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/008/results.trx",
+      "bytes": 2666,
+      "sha256": "e7a8a334c677ee8c543c132ab1adf9c322562339f0e23ede578733ea7ec5420a"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/008/runsettings.xml",
+      "bytes": 395,
+      "sha256": "d3088411e9abb4a79cfbf4e9ce44d32c1fe4739821e608de47b13a289a9a1244"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/008/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/008/stdout.log",
+      "bytes": 403,
+      "sha256": "ad7140d926be0d0e128e06727f2ade289678e98fe7451c225f2bc31cec5e909d"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A13_WPF/run-20261028-125756-8ab77b00/summary.json",
+      "bytes": 26757,
+      "sha256": "56e4279018ecd61f115dca2d3cea88d3f67c056621d9e0734efad1df4950ce9c"
+    },
+    {
+      "path": "CANVAS_A13_WPF.log",
+      "bytes": 804,
+      "sha256": "ae424e8337e4f877c92486269f5842f1b1b02ef079913f6633589b5711023477"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/000/results.trx",
+      "bytes": 4340,
+      "sha256": "e2e9b53d6a472445dc9addedca35c5abf28e8b3b329d6eb2b88cdd3cd9ae9787"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/000/runsettings.xml",
+      "bytes": 559,
+      "sha256": "7f1ac407fd98eb5c05c879007cc7969ddc8107938bad9ec36295bc10981556ba"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/000/stdout.log",
+      "bytes": 401,
+      "sha256": "fb14b82f996c555707d211f8540778fd92951d82ca3631446fb9479e6d7ea9a0"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/001/results.trx",
+      "bytes": 4244,
+      "sha256": "8e5e743b37d27ab0b7e02764042dc43d0dd036a60bcc09a3dea16c3bc314c6cd"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/001/runsettings.xml",
+      "bytes": 527,
+      "sha256": "a96e827d180f67550f1ac12a60c91728dbf886b5b7cdb9942af287c80fda7bb0"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/001/stdout.log",
+      "bytes": 400,
+      "sha256": "e14ce491d66ff4e2d2cbe4d4f8f6a7fa9a3e1593e3f5f4e1bfc4f5a702e0bfe6"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/002/results.trx",
+      "bytes": 7014,
+      "sha256": "3927058ff5f3c714d47c0aeb7e1e29e96919a1e1c5c5959de0b631deff51cb95"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/002/runsettings.xml",
+      "bytes": 781,
+      "sha256": "00b3ac8f05dae0fbb14cff19af27a100448a049659f8f814626831dcf9468297"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/002/stdout.log",
+      "bytes": 401,
+      "sha256": "b2d9e053c7a1366e660c37e4194e5e334b27df729c647145b67070d7f7df2252"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/003/results.trx",
+      "bytes": 8281,
+      "sha256": "aaa42036292ff499540f7a3ddcd387a4a68f6e6ee8ae4b7293b836dbe3c2caeb"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/003/runsettings.xml",
+      "bytes": 872,
+      "sha256": "06cbfe5edf9fab0955fead35c20daf6cc1f71df44f263338fad45f4987f9e9b9"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/003/stdout.log",
+      "bytes": 401,
+      "sha256": "0f741fcd335a02d3249835b10b12e57fb36cdc30e4a554c8e00b58942ff32c27"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/discovery.json",
+      "bytes": 855422,
+      "sha256": "5cd66c84aad21742bf45776f6d9337ffb3c704fa537bf39e993c350d838d5fed"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_CORE/run-20261028-130208-90c74b88/summary.json",
+      "bytes": 17278,
+      "sha256": "b17d23f4bb98765b3c6a113313af73e3c0e7b3a15630b06ead093649984ed83e"
+    },
+    {
+      "path": "CANVAS_A14_CORE.log",
+      "bytes": 401,
+      "sha256": "5205ef2aff075dda18f3821eae2718f02eff665fac121c539c91f6b35792ab83"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/000/results.trx",
+      "bytes": 2645,
+      "sha256": "807dcaeac10961683c060c2cbf45dd1f1362f6a82acd946972d09036dacac094"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/000/runsettings.xml",
+      "bytes": 382,
+      "sha256": "de45c9489f18be5b87974e839e69b7b14d5a3bfe02653d2c9e5472c2a6037420"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/000/stdout.log",
+      "bytes": 402,
+      "sha256": "844bba3b107ed5dd53d61c501f1f3a102ebf1a7892cc825f94833be60e9fc9f3"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/001/results.trx",
+      "bytes": 2637,
+      "sha256": "b0b889e64b098ca331e36f550bbfc67d780a9c4f4e70e24d5207f50da56db0d6"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/001/runsettings.xml",
+      "bytes": 380,
+      "sha256": "ebdfe87f02e47746f652430cd7ca9cc646805edfea336d224f097ff42364e84d"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/001/stdout.log",
+      "bytes": 402,
+      "sha256": "77d193894f08ab657c2a6424f57a8f5d91b5dcd79f9915ccf39976c622401089"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/002/results.trx",
+      "bytes": 2663,
+      "sha256": "ae641f47a4cb1a2368e81c9d953991f6bf78200aaaf3859fd11cd6a0d75b6b60"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/002/runsettings.xml",
+      "bytes": 388,
+      "sha256": "4654cb52901f1580c62eef4a2a05697333914bacd2ba422bd4873cf6482ffc94"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/002/stdout.log",
+      "bytes": 402,
+      "sha256": "4b7bf41db3282e718625763e0ab73f1b1549769326ac39832fee12ccbe6d75e1"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/003/results.trx",
+      "bytes": 2670,
+      "sha256": "21ecd957dce7b46ba7e7e51fb9a2ffde485361a75e83057f40595eae0924ced6"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/003/runsettings.xml",
+      "bytes": 397,
+      "sha256": "3477eaa4d2c3d07182a5c1e1011c2843a5e1ecadd56e9900ce09fb800a91c951"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/003/stdout.log",
+      "bytes": 402,
+      "sha256": "a82027a268d4732abaddf2ab21fa068617a1cf22345e71eed7cc84aabd591501"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/004/results.trx",
+      "bytes": 6916,
+      "sha256": "55116d990af59c1e834b9707e9a1305b50a7f988276a2bc34d651ad0d0aae2e8"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/004/runsettings.xml",
+      "bytes": 777,
+      "sha256": "5c92e591ed6938a011cea47dee1965c1c96d5d22732f7d6853a14d8b05d8d3d1"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/004/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/004/stdout.log",
+      "bytes": 403,
+      "sha256": "fa68e87b7a095ea8825f5db19fdee2eff38465742d4b0ac10d0fa60bfca1a262"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/005/results.trx",
+      "bytes": 2688,
+      "sha256": "df8f3d3bafeb405fc921b2a55149b33cee8967440cd49b5661b24312d75a765e"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/005/runsettings.xml",
+      "bytes": 409,
+      "sha256": "1bbec48abb83b1bef668ccbe854b1b2992d6e6bd6f405f4028054b48ccd7f5e5"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/005/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/005/stdout.log",
+      "bytes": 400,
+      "sha256": "a4b92334256a38062a8b57e40193ab7ac1e90fbf09990728b0de392892317162"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/006/results.trx",
+      "bytes": 6587,
+      "sha256": "650e72178d2b3f837014584378532194bec719f5d08b70c78567ff03be09543a"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/006/runsettings.xml",
+      "bytes": 681,
+      "sha256": "b85ef1cd675cc230023addf74d2ff789621a5f3f6e6d727b439d9a1382828515"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/006/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/006/stdout.log",
+      "bytes": 465,
+      "sha256": "27ee666ce902223f7db88efda6771441d3f6c033dacdd2548a921b92c569831b"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/007/results.trx",
+      "bytes": 4056,
+      "sha256": "ed81ffe3c92600a08894ae505cd00c6e39becfb92fe617719dca0510a7aadcae"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/007/runsettings.xml",
+      "bytes": 505,
+      "sha256": "2852d5909a60187e89b851c5a94410075831826c895d58e4b9b7fa0a9dd07f1f"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/007/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/007/stdout.log",
+      "bytes": 402,
+      "sha256": "02d280ea57f2671d0a0d038d5970d0e297513010d8fec3e00d82da23fa182a42"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/008/results.trx",
+      "bytes": 2666,
+      "sha256": "a65a41778b770f51c93253210c956df9586e3a3bf828530ea797db5cd60408fc"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/008/runsettings.xml",
+      "bytes": 395,
+      "sha256": "28c57b9fbda53bf607d1f72c90097fe5d3a04db39fc1b7a2a2139a1ecf0fd362"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/008/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/008/stdout.log",
+      "bytes": 403,
+      "sha256": "df1273028e3bfee99e95a66f5101acff8d6e5f9e266efa6f20fb4020db23e642"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A14_WPF/run-20261028-130214-dac82866/summary.json",
+      "bytes": 26757,
+      "sha256": "b33987090998a821aa3e72fd0bc97706f8874fbfd7d7b5711c71ec48c559b2ac"
+    },
+    {
+      "path": "CANVAS_A14_WPF.log",
+      "bytes": 804,
+      "sha256": "1cb276fd285545657d6981dba131159e0144247115c320ead5c81d1b9e4dafd2"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/000/results.trx",
+      "bytes": 4340,
+      "sha256": "e76ce3b98c45012a2e7a35b371f97121f7864adb1a6bde3af9fdd30ce77db0ba"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/000/runsettings.xml",
+      "bytes": 559,
+      "sha256": "816d476fd0417fafb6ecda9b2c960dbe775990ed49c53c8aa382420296a5d983"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/000/stdout.log",
+      "bytes": 401,
+      "sha256": "e73116bdf7c18eb985e82e711e61e4f47b01f79294c1ba16e9c98752af9a8be6"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/001/results.trx",
+      "bytes": 4244,
+      "sha256": "6bdf8dfc082f9e14ff385edae4ada820313c5269a85d86f8c3df75d33e54dd52"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/001/runsettings.xml",
+      "bytes": 527,
+      "sha256": "686c771a052e1338d7e82a8d4d20ba3cc81f6f43ae301aa5c256662b64bc4516"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/001/stdout.log",
+      "bytes": 400,
+      "sha256": "6a4d63c93c041da4756af1ac8a887288e0b3fc941210cb8f063973845bf4b08c"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/002/results.trx",
+      "bytes": 7014,
+      "sha256": "4836a47b32b4561bf5686b33989709d7bb5a3b442834e724cc2151b8703e1afe"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/002/runsettings.xml",
+      "bytes": 781,
+      "sha256": "a459ac151f84d8264bb87c7e8e7c54e1030452e8bddc754ec179b6d7edeafe7a"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/002/stdout.log",
+      "bytes": 401,
+      "sha256": "91556be09d1b5bfc3a4d79a1fe20c9708ebf786eb3881ae20631e18f45c1ec1d"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/003/results.trx",
+      "bytes": 8281,
+      "sha256": "a0b0cd5f7f1ce1ca4a8c0a78cb7fcb905eb4e96795249967a560de67e00510b5"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/003/runsettings.xml",
+      "bytes": 872,
+      "sha256": "9552c83f18ba05acea3f44b53c3ce6a418891d062b4e9f69157c6f5574fa113e"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/003/stdout.log",
+      "bytes": 401,
+      "sha256": "3d039e0791bdedd1a6b8feee07237cb1b77e447f0535ea72803e010c0fd4b351"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/discovery.json",
+      "bytes": 855422,
+      "sha256": "5cd66c84aad21742bf45776f6d9337ffb3c704fa537bf39e993c350d838d5fed"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_CORE/run-20261028-130449-b158eaf0/summary.json",
+      "bytes": 17279,
+      "sha256": "1e1b57f6a6d2e25b86afdec18c33be0d5ec359bf664175d61a5423b163d52dee"
+    },
+    {
+      "path": "CANVAS_A15_CORE.log",
+      "bytes": 401,
+      "sha256": "b10d5f52baf8eee20d5a457764f05e360009747d6e66391c154c98d23a4e8ed3"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/000/results.trx",
+      "bytes": 2645,
+      "sha256": "0098346242ac8059d474b570e2d488e51f44854561a8d3f5de2b230fdfbfd0c6"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/000/runsettings.xml",
+      "bytes": 382,
+      "sha256": "23c598fad32f3c4862dc8dd6790f08c98eb4eb18a20641a636dfcd7582e40a08"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/000/stdout.log",
+      "bytes": 402,
+      "sha256": "26dcade268b73659954db01239f2b73b77fea7df258bdcc29c48eda51caec51a"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/001/results.trx",
+      "bytes": 2637,
+      "sha256": "d561134f2ee7381e183c574815096a3b3e68db257ac134fbd61b531f087632ae"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/001/runsettings.xml",
+      "bytes": 380,
+      "sha256": "4860cb2484ece9a24d5f28c1fff76af60d06a31ccdbc1f0ec645d421f1fb0642"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/001/stdout.log",
+      "bytes": 402,
+      "sha256": "e1f544a53b753a6dc4ce461ac37431bd97b1cf14a5f44a5ef20cf92a0cc99f36"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/002/results.trx",
+      "bytes": 2663,
+      "sha256": "5b3acceb4cdbe33b46d07fc851d95b2c061a7f6ca4f6b039101777f5c2a9e74d"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/002/runsettings.xml",
+      "bytes": 388,
+      "sha256": "56c658cd7cf7d1b99dc1d305f911f6c57991391975d7caa1da94d07a3c4f9dde"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/002/stdout.log",
+      "bytes": 402,
+      "sha256": "40e34fe44e84d8da420f96dcbde140ebf0d2e5e9bc651d480940342253738cf7"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/003/results.trx",
+      "bytes": 2670,
+      "sha256": "cf7d84980bfe2e094aca7b6e5695fefcc450eba407540804e403bc98fcd8319b"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/003/runsettings.xml",
+      "bytes": 397,
+      "sha256": "fa5a086f0379b741e1566222a94bf247b02e08c3a149028b43a0744ad9cf5a35"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/003/stdout.log",
+      "bytes": 402,
+      "sha256": "58c331f402289f76fea44123863db985e528a9cb6a520432c13ab2bb70cfacd5"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/004/results.trx",
+      "bytes": 6916,
+      "sha256": "e167d168722c9b7d0ca5046200dda7c56a6b30b3dc7cdba924a8b19d70e9c33c"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/004/runsettings.xml",
+      "bytes": 777,
+      "sha256": "8c4e009ff636f9a5eadd712d05d58907dc53c6063e411ec0ac6a50373ac5b47c"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/004/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/004/stdout.log",
+      "bytes": 403,
+      "sha256": "6ed0f449ee09467257589b33f80b0ddbd3cdf32fb593efa1d19d54d410e7c36a"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/005/results.trx",
+      "bytes": 2688,
+      "sha256": "7ca9f64cb683e8ffab0b22501e1f91a64098e5d9471a757622eab68a1b19ce41"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/005/runsettings.xml",
+      "bytes": 409,
+      "sha256": "3d3158cc6d29ff2b5936d902849012aa3737653090933996a1eed308d35a733c"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/005/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/005/stdout.log",
+      "bytes": 400,
+      "sha256": "98ca01d67086c5b500dbfca188bd0bba099aee02ba8fd2d9b576a74bff41215a"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/006/results.trx",
+      "bytes": 6587,
+      "sha256": "f49136321f326e90b8c486a0d171031b50810bfcdfba1bd2156c7632aeb0cffd"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/006/runsettings.xml",
+      "bytes": 681,
+      "sha256": "827765f93f00dfaae75e82fe7ca43c5fc38d4736ab0024fe01b9d1df81b19f0d"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/006/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/006/stdout.log",
+      "bytes": 465,
+      "sha256": "9184a3f4beb6cad884c4593a51f9e9e069f2078f1b80c2c2a5513ca1718750f1"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/007/results.trx",
+      "bytes": 4056,
+      "sha256": "a6a7119b9ea634d426f13de3387081f80b8ca7392b46c7f0cf1ccf94a09fa7b1"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/007/runsettings.xml",
+      "bytes": 505,
+      "sha256": "154aed5e7a11f35f4f17656dff8d984e00de62a7cf5d0fad5823ea8c5e231372"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/007/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/007/stdout.log",
+      "bytes": 402,
+      "sha256": "b4638288c610b457fa508f0e9cde149f06e8196c0ba6727ad668b69658c6d302"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/008/results.trx",
+      "bytes": 2666,
+      "sha256": "2d4e8b9353c680d4a1d67d1d7688db775603b4954533efa7ef9acebf8322499e"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/008/runsettings.xml",
+      "bytes": 395,
+      "sha256": "f4036a59650855a7f4ae630600dea09aba0e45c047f2c1f64267593cdbd8cfc0"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/008/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/008/stdout.log",
+      "bytes": 403,
+      "sha256": "293aa0d5f9802fa00ef493badebccddf823811e7e638f8300a4149b5a570f65f"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A15_WPF/run-20261028-130455-4669f5f1/summary.json",
+      "bytes": 26755,
+      "sha256": "3d846a25f683c7adc8788b1fd0dca1444d3aabe035eb6b916a3c287a25e754b4"
+    },
+    {
+      "path": "CANVAS_A15_WPF.log",
+      "bytes": 804,
+      "sha256": "e5780a6724585edbf568fbc42fa3772484272c13830b22a1006cad75fd1f9572"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/000/results.trx",
+      "bytes": 4340,
+      "sha256": "b425d956dbeef3ff257232b4b72aae60917fc6a6171c6f8036043fde828176f5"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/000/runsettings.xml",
+      "bytes": 559,
+      "sha256": "fc06f5690d8eb1aea9b015a5b4ac059a52822999b5d8727bf613cc230297b305"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/000/stdout.log",
+      "bytes": 401,
+      "sha256": "562ba32bfcb5fa3248cbb05cee12839b5a468e696569d7c459996391fc8c94e6"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/001/results.trx",
+      "bytes": 4244,
+      "sha256": "e11d74f7017074d345e608ac81ef4ca3c69a1d10b33ed2a57482f8cc90c7e95b"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/001/runsettings.xml",
+      "bytes": 527,
+      "sha256": "bba0992816291bf06770304598fde4b977f2a38a643ee1c7eead182e68988b4e"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/001/stdout.log",
+      "bytes": 400,
+      "sha256": "79f02b5ce1cce2187ddb76f99bc6a249d1347614ee66e334c4e88fd3bf2fdfcc"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/002/results.trx",
+      "bytes": 7014,
+      "sha256": "af7c92501156eb2dfdca96f8df05dc224abd07cdfdd74256e714cbd0df77091d"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/002/runsettings.xml",
+      "bytes": 781,
+      "sha256": "d65f5aba2474f150e3b824803e98d2193ae38350e6f277c4f34318e74c27151f"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/002/stdout.log",
+      "bytes": 401,
+      "sha256": "346e2593bc97b02445e3453a6b077a57dba467f290c29653fe2c6d3997aad6c8"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/003/results.trx",
+      "bytes": 8281,
+      "sha256": "255101a942aa75b47b1ef0356b40172e99c7154997ef1b75e62a3a916c3a13be"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/003/runsettings.xml",
+      "bytes": 872,
+      "sha256": "332a84d377d031815e2cf9ac93b305dca3b5a4c6d875973b14c91a81a3905c42"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/003/stdout.log",
+      "bytes": 401,
+      "sha256": "585d9e8ec94aab196eaef7e271e2052d0552e0138083bbb4fc6ab82d97a6049b"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/discovery.json",
+      "bytes": 855422,
+      "sha256": "5cd66c84aad21742bf45776f6d9337ffb3c704fa537bf39e993c350d838d5fed"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_CORE/run-20261028-130810-6b254f15/summary.json",
+      "bytes": 17278,
+      "sha256": "78dd8c1eedc5a065cd1d0e932376e0884b85b067082e469f2b3a43c7cb0e038a"
+    },
+    {
+      "path": "CANVAS_A16_CORE.log",
+      "bytes": 401,
+      "sha256": "2ee39c7bbfd43453227147a967f80929c162271e0ff94d558e13155995c5a741"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/000/results.trx",
+      "bytes": 2645,
+      "sha256": "c2f4c21ba6b2a6691878d06f04fca8ba9c33ab07d5fe9b38cacbfd88a0a248a9"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/000/runsettings.xml",
+      "bytes": 382,
+      "sha256": "a29cf6afda8b2e8bd24532018981ed96b6100c46755f957c6e9a4c7b84eba54f"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/000/stdout.log",
+      "bytes": 402,
+      "sha256": "81c22eb973079c76fd56d8a9818cfc61d7fe97ac5676e14356d504dcd3776b66"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/001/results.trx",
+      "bytes": 2637,
+      "sha256": "eff2448186f0e48ef65a29d1db144732959b1bbe2fc51c166cfb521df80532a0"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/001/runsettings.xml",
+      "bytes": 380,
+      "sha256": "4a360eaf6202663a6564cc1bf7fbfaa6c868e8fed53aa12e393fbedbc6ad50fd"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/001/stdout.log",
+      "bytes": 402,
+      "sha256": "de6b53fb2505c76809c7027d5be39c87d7cbcb865afd5c0ec7487bd694f32265"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/002/results.trx",
+      "bytes": 2663,
+      "sha256": "14d704b295c9715869c229c7a3fef1e762979aeda4e584079ed069180a1dff83"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/002/runsettings.xml",
+      "bytes": 388,
+      "sha256": "c9e8843fc9944962f95aa3c8de62c1c0058bdf68d8b479a924c9093f1299945e"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/002/stdout.log",
+      "bytes": 402,
+      "sha256": "e717d6cb9d8daa0d3ee5bf79a2c33be81c75feb48b735b6ed82b663da7466570"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/003/results.trx",
+      "bytes": 2670,
+      "sha256": "61d1ce4ef85e6c9729ddf7d739a819fffdf65544077f87d943146ff0cf46d0dd"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/003/runsettings.xml",
+      "bytes": 397,
+      "sha256": "b22e8bca2943eb6ab4b3da1ba154589df6a29dc70b4b9d19b6b0131b4da06dde"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/003/stdout.log",
+      "bytes": 402,
+      "sha256": "c716a8ee17119e8ce2de762a1c3c19adb032dd1a5214030abf3a1393e272bc0d"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/004/results.trx",
+      "bytes": 6916,
+      "sha256": "fb2eb38752d99d76e38d10e728f51187486603ecbf781cadc06b28b3782f79d5"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/004/runsettings.xml",
+      "bytes": 777,
+      "sha256": "b1f173726cb37c98ec54e62e1d7e66ae5417091abed480c4dfaefb9a42d9d371"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/004/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/004/stdout.log",
+      "bytes": 403,
+      "sha256": "dd865c3794d8baa62053075ca5d73de110343ccdc03fc36d2aad34c5b1030509"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/005/results.trx",
+      "bytes": 2688,
+      "sha256": "5b36361e41154ce963fd2aaecf41dbbf3f22b626127e18be423166f3ab78fe58"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/005/runsettings.xml",
+      "bytes": 409,
+      "sha256": "9a4d2de5d6955a2e767606e23eb71887eab6f0665635fddc31bad94a6a8d0346"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/005/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/005/stdout.log",
+      "bytes": 400,
+      "sha256": "387230806046f001a6c8779e8428665558a8dee1eb4b312c63c2624bd424b31b"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/006/results.trx",
+      "bytes": 6587,
+      "sha256": "209aabc87d3cf81dc4e5575250067e42b344410fb80760795c861c303607128f"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/006/runsettings.xml",
+      "bytes": 681,
+      "sha256": "b277b735cd4d96dc72968801078111d7e8a22cd2f3d1ae5b8edf73690679800f"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/006/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/006/stdout.log",
+      "bytes": 465,
+      "sha256": "8418beb747242aff64b56fa13bb3e25399ba2e4acb72a5b5ad02ad39d67416fd"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/007/results.trx",
+      "bytes": 4056,
+      "sha256": "8f58c347fec2e1c0c5abc53f7197e46c7b2848b69ed785e1053f8eba21322ee3"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/007/runsettings.xml",
+      "bytes": 505,
+      "sha256": "f40216306d97eb3d29e8b05f1923747dfdc14fcc8fa560bc3dcb669abac2348f"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/007/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/007/stdout.log",
+      "bytes": 402,
+      "sha256": "56c5e766c6e6b0ca362f0bf2c0687d3685310e67f67097eed8334448d22676ed"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/008/results.trx",
+      "bytes": 2666,
+      "sha256": "650e9254289e4dc3cc0d45e6735cf201d29dde77c72e4c2ece9901833fd29f2f"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/008/runsettings.xml",
+      "bytes": 395,
+      "sha256": "3b5d4a0cc2a4979c637f27e7e2f490ff09254255dfc0cd33c8d2ba999481dbee"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/008/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/008/stdout.log",
+      "bytes": 403,
+      "sha256": "abae57e920b198dfc9348dd76b5d8232b4d98405da2c25b55c1a6659c313a9df"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/009/results.trx",
+      "bytes": 8509,
+      "sha256": "b1541c2ec05298cd558e5d446b86d4d87ab091e34a485d5d8660b7fa02cdaa10"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/009/runsettings.xml",
+      "bytes": 760,
+      "sha256": "4248e7658086321419d1b5e74f45d9740a1a65c7802deb8105cdced2630ac436"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/009/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/009/stdout.log",
+      "bytes": 401,
+      "sha256": "6f669c4bc8182f5197e09f5062832268b6dbdcf4e48504423aad052179eb8ec4"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A16_WPF/run-20261028-130815-d4d609f9/summary.json",
+      "bytes": 32646,
+      "sha256": "44d79cd280684e1bb611c9f1e7fc093750c90efd6f6b354d8654779fa9a92a06"
+    },
+    {
+      "path": "CANVAS_A16_WPF.log",
+      "bytes": 888,
+      "sha256": "442eb0747d6df28cd0bb876956e6eaaa52dfc548328a4a9db3c8161432cf6abd"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/000/results.trx",
+      "bytes": 4340,
+      "sha256": "80ac8fe1fe184ed1ec347f84b1127100d3d0b1f5622fb1a6773e214fbf1d55b1"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/000/runsettings.xml",
+      "bytes": 559,
+      "sha256": "36e4197871893056178bc3d7c23dd311426ef5be5485ca9dda203158ac8c8292"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/000/stdout.log",
+      "bytes": 401,
+      "sha256": "70feb6721878b38da6a33d541ca4d06d75313013aa6a37bfbbb7ea3525310de0"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/001/results.trx",
+      "bytes": 4244,
+      "sha256": "eabc66c5ed359178b34adf5f29e4a8c1d522fef8af6d3e4766a2bc5984026c40"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/001/runsettings.xml",
+      "bytes": 527,
+      "sha256": "9946f4ea26360d4432ef54ce0823debf65bdd4ce8edf9eb5f1fca4cb85a5ef97"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/001/stdout.log",
+      "bytes": 400,
+      "sha256": "a20df7ab892a88259acca3ea8f1b493e5c772548b433a9cd54a57825b7e3f0b9"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/002/results.trx",
+      "bytes": 7014,
+      "sha256": "b07a3d34f2e7e77e2768fee9f4566431e1173773d887367e9275845e00a530a3"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/002/runsettings.xml",
+      "bytes": 781,
+      "sha256": "0c65c70b8fea6242beaab8d76580f80a4bd152c3474c259d299197b74c9d7fc2"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/002/stdout.log",
+      "bytes": 401,
+      "sha256": "7425626a307369e16fb7969ce62511efe5693ad11cbc86287f44d82afbcdeabc"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/003/results.trx",
+      "bytes": 8281,
+      "sha256": "a1ca610c78368dbe2cc8e1a91d2c396d61d39975b3b39d31d292ce1d2711e50f"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/003/runsettings.xml",
+      "bytes": 872,
+      "sha256": "9bbe93fb1b51d0f2c249a321a5cf0cdcdfd2bf7bf4efead7e7780ebd43cc8e43"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/003/stdout.log",
+      "bytes": 401,
+      "sha256": "c4a4c583ba9975797e1c91a60ae65c8dd2d0b6adf43e4f43ead10ee52e11b287"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/discovery.json",
+      "bytes": 855422,
+      "sha256": "5cd66c84aad21742bf45776f6d9337ffb3c704fa537bf39e993c350d838d5fed"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_CORE/run-20261028-131214-e007ceed/summary.json",
+      "bytes": 17279,
+      "sha256": "6f576cf5447242d2be88a379d700d1890898bdab0f9400392858eae2637d9f88"
+    },
+    {
+      "path": "CANVAS_A17_CORE.log",
+      "bytes": 401,
+      "sha256": "718ffc0335e27fc35aa265a02ccc4a0b6e1658a75fc0fd5a9cbf785d5b04aaa7"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/000/results.trx",
+      "bytes": 2645,
+      "sha256": "23aefcab4f6897436889fecfe0bb72dd03beffd6a7cd085338d42fe1c332c3e3"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/000/runsettings.xml",
+      "bytes": 382,
+      "sha256": "78f6143084e94d187018cbcf38f8aa5b88796c9f379fc3e017f44ebfe5b89be6"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/000/stdout.log",
+      "bytes": 402,
+      "sha256": "189f1bb9d07c77d4c5ad1581cdedcf8038493bb9a91cbd73273a6ebee565d2b6"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/001/results.trx",
+      "bytes": 2637,
+      "sha256": "47c2db1b333e464e93faeb23f4af356461559eb8fc25e6c984a20f2ea7b3aaf1"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/001/runsettings.xml",
+      "bytes": 380,
+      "sha256": "def54b108e9ecdfdb3d58be378bf22a5596ca16b6f5c559519e27109faa4a330"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/001/stdout.log",
+      "bytes": 402,
+      "sha256": "b0eb097b456a79e0782c0f04a36233ce7ca3a946c97728996546685daa8fa9a8"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/002/results.trx",
+      "bytes": 2663,
+      "sha256": "4c1a57d9e9485d26119f16b3f76c56c559a19fabf8675afe63693e16f2b50331"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/002/runsettings.xml",
+      "bytes": 388,
+      "sha256": "eb82b12df943a30ef60f94f68840cbbdc49ddb3591f486c635e6f8aeff101721"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/002/stdout.log",
+      "bytes": 402,
+      "sha256": "1c9c5e062e8ecbbccf3b0ceff8f414a0ebe6afbcbf53595ae3b6c4ddd6ffeaf0"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/003/results.trx",
+      "bytes": 2670,
+      "sha256": "76fc853ed0cecf75a77ee6461faad5b188b1bf3ae2482dfc7ea59f71358e8c50"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/003/runsettings.xml",
+      "bytes": 397,
+      "sha256": "5b4e7985c574941840e549714dd40c490f85270d7d54f52058a861438bf6773f"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/003/stdout.log",
+      "bytes": 402,
+      "sha256": "b874922f8384f2f66a8ea83d2954ded937c6415d1fe1c0df76efd9a5666f796d"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/004/results.trx",
+      "bytes": 6916,
+      "sha256": "55c27482a4f516d68f69ea7808b6fd1e57174d4a17e5fb72fe0f4742d45f3bbb"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/004/runsettings.xml",
+      "bytes": 777,
+      "sha256": "8becaa81d7e3b511dab975b4c67b90e90f6a88c06a7ac8a36d0cf45a91138e42"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/004/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/004/stdout.log",
+      "bytes": 403,
+      "sha256": "ea59e56885efd8a611415e666dcdbb3e01bfd622cecfda9a9c128b47764a4b1f"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/005/results.trx",
+      "bytes": 2688,
+      "sha256": "c8a9ea11492f9439df523f7f510b9e61882272b3409e61c2f29edd9f0991122d"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/005/runsettings.xml",
+      "bytes": 409,
+      "sha256": "e33988bfdef825cb12a1b4554586c6714380005ca7214bdb2ad5537c9e58a879"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/005/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/005/stdout.log",
+      "bytes": 400,
+      "sha256": "d9873c9586fff9281a1d11aed5380f20d6966c4208f23138b4fccf46e8ee0679"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/006/results.trx",
+      "bytes": 6587,
+      "sha256": "244229f355af89d5954dbcdba8bbccaa98d5fac6d82aae651a28dad55eb081f8"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/006/runsettings.xml",
+      "bytes": 681,
+      "sha256": "b7e13b9aa99ffdd4d88a8130b7feef33f357d9a39ec9cae4954aa2dfbaa51c14"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/006/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/006/stdout.log",
+      "bytes": 465,
+      "sha256": "182f0ae92c8e48b141d128d600f2e2a9b7334667a64c0445d6cebfcfa2404ae4"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/007/results.trx",
+      "bytes": 4056,
+      "sha256": "b2a0150aeaa215b7d2f36eb60658eaaa8de975c2f46b3bafdc2d5c725c41d7f0"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/007/runsettings.xml",
+      "bytes": 505,
+      "sha256": "34202bfb8a046700c97a1d3dfc9b1671462e0de79dc63a54ac5ce79ac054413f"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/007/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/007/stdout.log",
+      "bytes": 402,
+      "sha256": "de43a1c100fec254e01c63202e153910d21604175c45136e3981d2ca9ea00971"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/008/results.trx",
+      "bytes": 2666,
+      "sha256": "8185aa3f777f25a9fe493085a2a84b0ef6fb8d5602902b17c62857b2d3429f74"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/008/runsettings.xml",
+      "bytes": 395,
+      "sha256": "a1b4cddd77e6acbe7aa67ffc37b9784979baf2af7cd9188a74175f029f18d3a4"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/008/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/008/stdout.log",
+      "bytes": 403,
+      "sha256": "f6964b8b321db485318483b2ac9e3633fea6e3fcc722a68da1d8137e47b73814"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/009/results.trx",
+      "bytes": 8509,
+      "sha256": "3ea05283dae3d9e5c8a31e427475d3c2b79fe95ea68c1afbecbfbadae74de506"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/009/runsettings.xml",
+      "bytes": 760,
+      "sha256": "9c6fcb86b84244ffa71ae82e830132ce54fb321c57f9d2585a9a689f1b5b0522"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/009/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/009/stdout.log",
+      "bytes": 401,
+      "sha256": "94eb4e2f8c654916caef222daba3b0d53c597987bc0e0444af16c916f34338be"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A17_WPF/run-20261028-131219-c508d9b5/summary.json",
+      "bytes": 32647,
+      "sha256": "9012594e9c85898ab243d466d30ce494f5bbfd32d3e68ce5575452f5decce24e"
+    },
+    {
+      "path": "CANVAS_A17_WPF.log",
+      "bytes": 888,
+      "sha256": "44845a6fb1b9fa752d221ad1ab8c157249cf45299ae697040708d6cf68ff2c29"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/000/results.trx",
+      "bytes": 4244,
+      "sha256": "25a34bdf392c4ecf555ba700a1da16b346a0f4a4a12003304c5cde03eee7a5ad"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/000/runsettings.xml",
+      "bytes": 526,
+      "sha256": "5f1ed007dbebde3807e78ddc41d81c9cc1423e5b623c235b36c6faae79c54402"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/000/stdout.log",
+      "bytes": 399,
+      "sha256": "da46e79167f7e347b1f9848cb3f0ca1d9c05fa0c9b2dbfce0057b9c28fdca3e6"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/001/results.trx",
+      "bytes": 7840,
+      "sha256": "1b3a9b38c6e0c6bf40dc3837a9c3962b8d481a5193c2ff50cee60d335e244389"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/001/runsettings.xml",
+      "bytes": 780,
+      "sha256": "97b152e496d233e7feedf99a082dc3a64825f168685b28191efc691acddc3c8f"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/001/stdout.log",
+      "bytes": 478,
+      "sha256": "01c5e6b17f6f687af4cf7f8dd0c0a82c6f17d7c75788e69f1bafd1ae510e45cc"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/002/results.trx",
+      "bytes": 6870,
+      "sha256": "f3c5e01f52969345ef85c371cdb1958e78a8c2f013c295aa2f7984254ce46510"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/002/runsettings.xml",
+      "bytes": 732,
+      "sha256": "3e90df89ec75a8ae975d513fa6b07e7a3baa86c71717740f957ceef09ce0c5f5"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/002/stdout.log",
+      "bytes": 399,
+      "sha256": "b0db1570058e9426cfca6f3d55a6d6e92afc943113c9ced5222e80aa6c9eba34"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/discovery.json",
+      "bytes": 854908,
+      "sha256": "a62de71fd813468d9704962d059ae964c9e700e90230c78a34659a81f96b4848"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A3_CORE/run-20261028-121537-3181868e/summary.json",
+      "bytes": 13818,
+      "sha256": "2d8ddaf158a8907b54640224b3df638bc3d11c2946301cee2421ba4064e7acac"
+    },
+    {
+      "path": "CANVAS_A3_CORE.log",
+      "bytes": 322,
+      "sha256": "96e0f260d85e3da731cb9cbce49f29cfe9393b5670734c36681d12689ee1b5ea"
+    },
+    {
+      "path": "CANVAS_A3_WPF/run-20261028-121541-2af3887c/000/results.trx",
+      "bytes": 5120,
+      "sha256": "0f347399b04120e860bcd239094f54df9330d71b9e22591355bbf601d6b1e74a"
+    },
+    {
+      "path": "CANVAS_A3_WPF/run-20261028-121541-2af3887c/000/runsettings.xml",
+      "bytes": 535,
+      "sha256": "a8c55bc86ec3763a0cfc4d231f47ed041260f41cf59d3360f71b5851151c7434"
+    },
+    {
+      "path": "CANVAS_A3_WPF/run-20261028-121541-2af3887c/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A3_WPF/run-20261028-121541-2af3887c/000/stdout.log",
+      "bytes": 467,
+      "sha256": "5f0600b6aa6e57056fdf5f844df334778573ab8420b6840f35feaae7ce71fa6b"
+    },
+    {
+      "path": "CANVAS_A3_WPF/run-20261028-121541-2af3887c/discovery.json",
+      "bytes": 981914,
+      "sha256": "0e561f55cce108eb720bc36314ec8936321e8654bd4f56560dae42be5f1031f7"
+    },
+    {
+      "path": "CANVAS_A3_WPF/run-20261028-121541-2af3887c/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A3_WPF/run-20261028-121541-2af3887c/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A3_WPF/run-20261028-121541-2af3887c/summary.json",
+      "bytes": 4688,
+      "sha256": "52d6d50113dd11b8bb43a2c1e5dec33ab826a3cfa6365521990f49aac2173212"
+    },
+    {
+      "path": "CANVAS_A3_WPF.log",
+      "bytes": 181,
+      "sha256": "7fb55105830cafe4b6d80d2e5aa9299dc9691c43465e45bd4a9b726d38d2b4a0"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/000/results.trx",
+      "bytes": 4244,
+      "sha256": "07eb13f939e73cb003bd6a48734e002dc3ddeb687f4fe79a75eb6c24e5721acf"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/000/runsettings.xml",
+      "bytes": 526,
+      "sha256": "8c751714f59ca6f04409656d25f26753d3c1d318f0bcdf310d0e13b70a16070e"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/000/stdout.log",
+      "bytes": 399,
+      "sha256": "b30bc7412156969a2edc0ed06c66bf2880daf5ad5d49438f3d92471dc1f0f48c"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/001/results.trx",
+      "bytes": 7014,
+      "sha256": "5249cf88cbd8a12172bc94c43318beb66c5723692cd734fccb8c91b2195fd1ea"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/001/runsettings.xml",
+      "bytes": 780,
+      "sha256": "09c35b854f3d88437747c213f608f30c91f8c2245ee8e0a0e55f7e1425d3ce8f"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/001/stdout.log",
+      "bytes": 400,
+      "sha256": "0c46116f1344f1bfb0809c84aff335d95b281bfa51dd585b604b5d59c9d0a8f1"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/002/results.trx",
+      "bytes": 6870,
+      "sha256": "47435c8387aec1fba9c56462e6d24adad93bdde60acbe7ac34d979507ff22722"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/002/runsettings.xml",
+      "bytes": 732,
+      "sha256": "e89404d775ea7989f5b454fbcb1c247a0e6f05aafcaf161fb5281985d59560a5"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/002/stdout.log",
+      "bytes": 399,
+      "sha256": "82083d7edd116e59b20336322e86ec7b7592be59855684df1aa091474556882d"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/discovery.json",
+      "bytes": 854908,
+      "sha256": "a62de71fd813468d9704962d059ae964c9e700e90230c78a34659a81f96b4848"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A4_CORE/run-20261028-122247-d98a74bb/summary.json",
+      "bytes": 13179,
+      "sha256": "a51634712ac4e9e95a21bfb5ff537f0a8f6393bd28fb3baceef801a0d3015117"
+    },
+    {
+      "path": "CANVAS_A4_CORE.log",
+      "bytes": 322,
+      "sha256": "651d9e761e4b267551efcdc110056bcd83fe328a092baa9c63816b513ed21032"
+    },
+    {
+      "path": "CANVAS_A4_WPF/run-20261028-122251-532a1050/000/results.trx",
+      "bytes": 6482,
+      "sha256": "eeea2eefe7ce6bf999ea236c963a2eebb599bf618fda8097320bbe0bd5d4e758"
+    },
+    {
+      "path": "CANVAS_A4_WPF/run-20261028-122251-532a1050/000/runsettings.xml",
+      "bytes": 535,
+      "sha256": "021612ae578d1675238d7e2a0d356231c9c13fb2b5d9ab3d3bc228988df3fed9"
+    },
+    {
+      "path": "CANVAS_A4_WPF/run-20261028-122251-532a1050/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A4_WPF/run-20261028-122251-532a1050/000/stdout.log",
+      "bytes": 1735,
+      "sha256": "447078b4a215e2791ff8889962eeca6ceb86d5a1559010f3abae9f62926bcb18"
+    },
+    {
+      "path": "CANVAS_A4_WPF/run-20261028-122251-532a1050/discovery.json",
+      "bytes": 981914,
+      "sha256": "0e561f55cce108eb720bc36314ec8936321e8654bd4f56560dae42be5f1031f7"
+    },
+    {
+      "path": "CANVAS_A4_WPF/run-20261028-122251-532a1050/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A4_WPF/run-20261028-122251-532a1050/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A4_WPF/run-20261028-122251-532a1050/summary.json",
+      "bytes": 5884,
+      "sha256": "09e1ed01b2fc3e24e038b8e8ffbfa88eb7b3b6304f491e5f4020836f512715df"
+    },
+    {
+      "path": "CANVAS_A4_WPF.log",
+      "bytes": 181,
+      "sha256": "56a3301fc399fd19bb70c0c139cbc4f839ff3bdf2244c603a70be4dc83362764"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/000/results.trx",
+      "bytes": 4244,
+      "sha256": "1db2c95896df7d4876ff16db537bab54538573aa90ce4832dd115568bcf2d179"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/000/runsettings.xml",
+      "bytes": 526,
+      "sha256": "24feafd6ebbee8962aa78eceb3900f4dc332a5003b08d16cea8e2aba682bcb2c"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/000/stdout.log",
+      "bytes": 399,
+      "sha256": "8461c851078684ccfbcaac8acd6a6f02e162bf1d99a589527ee56f015ce9b5f0"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/001/results.trx",
+      "bytes": 7014,
+      "sha256": "fd37033c715c9d39f31e75dcdd1f656bef0180f02956cecf8d5f854303d0e3a9"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/001/runsettings.xml",
+      "bytes": 780,
+      "sha256": "b62ce22a8fead89dea036b8f7bf0fa30dcb44b17305398ca3b381469fae3c844"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/001/stdout.log",
+      "bytes": 400,
+      "sha256": "2a3cc466d729fdf0bb6421896ebc1d938e646fbae9724648c7862629ce6cd111"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/002/results.trx",
+      "bytes": 6870,
+      "sha256": "b63caa5ee66345552cfa5601fdf7ae9f97c3377e98cd65c342e1bdb41886db6e"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/002/runsettings.xml",
+      "bytes": 732,
+      "sha256": "d50fe01a04a807a949b13a4979339e153c10dc8ef1322a037d218c4d6225c2fc"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/002/stdout.log",
+      "bytes": 399,
+      "sha256": "2caf5a9ff3eddb6fbf505491d764a75d4cdd309a65086bad6596885bbf088571"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/discovery.json",
+      "bytes": 854908,
+      "sha256": "a62de71fd813468d9704962d059ae964c9e700e90230c78a34659a81f96b4848"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A5_CORE/run-20261028-122827-ec22a273/summary.json",
+      "bytes": 13179,
+      "sha256": "b99eb838ae1c16986f4ace4f882c78720030eabadefe1ca01bef2dc262f69f04"
+    },
+    {
+      "path": "CANVAS_A5_CORE.log",
+      "bytes": 322,
+      "sha256": "5fb17e8a44e050755e10d1d11495a897cc9cd6d166440be212ac041bb479b51b"
+    },
+    {
+      "path": "CANVAS_A5_WPF/run-20261028-122831-e56359fe/000/results.trx",
+      "bytes": 5120,
+      "sha256": "7778e27e309d85ff39c95b4b376c49210702c5dd8072c981d305ee3bb7b1351d"
+    },
+    {
+      "path": "CANVAS_A5_WPF/run-20261028-122831-e56359fe/000/runsettings.xml",
+      "bytes": 535,
+      "sha256": "289e02bc13c9a857d139f02813df393a1da1d62cea7cbc04287bb2d99fd082ce"
+    },
+    {
+      "path": "CANVAS_A5_WPF/run-20261028-122831-e56359fe/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A5_WPF/run-20261028-122831-e56359fe/000/stdout.log",
+      "bytes": 467,
+      "sha256": "a021802f6511005c7f5925c62d228ddbf057e53b47fdbf3f3164ec041197699d"
+    },
+    {
+      "path": "CANVAS_A5_WPF/run-20261028-122831-e56359fe/discovery.json",
+      "bytes": 981914,
+      "sha256": "0e561f55cce108eb720bc36314ec8936321e8654bd4f56560dae42be5f1031f7"
+    },
+    {
+      "path": "CANVAS_A5_WPF/run-20261028-122831-e56359fe/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A5_WPF/run-20261028-122831-e56359fe/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A5_WPF/run-20261028-122831-e56359fe/summary.json",
+      "bytes": 4687,
+      "sha256": "efd5384a35072ef7e0c40b202da09784cb2530c6505878289f5082f789f7abbd"
+    },
+    {
+      "path": "CANVAS_A5_WPF.log",
+      "bytes": 181,
+      "sha256": "d29cabd97f446d2d711aa4e4aa831da65aa48264a46d875759bc043d1fccbe4d"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/000/results.trx",
+      "bytes": 4244,
+      "sha256": "edb0af5ee64e64e3aed95930006ebe70915e307606009b4c4d7c65581e25cebc"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/000/runsettings.xml",
+      "bytes": 526,
+      "sha256": "f9f49dc5d29a51ce89f85f5c8dedc4c2568d2bdbfcb44e85c152f873c3d7f696"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/000/stdout.log",
+      "bytes": 399,
+      "sha256": "8b76663bb00070352a0d8fecb3d966469ca248aa9e64877b5443be0bc22639b7"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/001/results.trx",
+      "bytes": 7014,
+      "sha256": "6e54c304807afca437056b803a0fd981497eda6258cd162a5125774c1fa109ce"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/001/runsettings.xml",
+      "bytes": 780,
+      "sha256": "1d12f7a0637ba2feb40193b047300cf79d56248172ad0e87846f0a4ec46ca6ad"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/001/stdout.log",
+      "bytes": 400,
+      "sha256": "eaee0f2af24674e52ebb2ff02012b76664d27156c55824a1d3463ad8e6c2552f"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/002/results.trx",
+      "bytes": 6870,
+      "sha256": "cd25912eefbc01d6899434ecb632b24e101cf899907ac2ecd5fe895593828a3d"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/002/runsettings.xml",
+      "bytes": 732,
+      "sha256": "66828349d915b5a048697ad9b8f4036ef5ae2983d678712524b303ef6c9d0033"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/002/stdout.log",
+      "bytes": 399,
+      "sha256": "1c11b373f4a46424e1fd405b3e2559fea9ed636f13df0d94a97357b62da6d8dd"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/discovery.json",
+      "bytes": 854908,
+      "sha256": "a62de71fd813468d9704962d059ae964c9e700e90230c78a34659a81f96b4848"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A6_CORE/run-20261028-123340-6947c9ab/summary.json",
+      "bytes": 13177,
+      "sha256": "3310580dcad9e33054e890dfbd16179cf02d55e96727b62e90154a478ef29967"
+    },
+    {
+      "path": "CANVAS_A6_CORE.log",
+      "bytes": 322,
+      "sha256": "35b653ec80f176ca2f7125511f21771fd74355ca0846a3e8ced0cb29dafddd39"
+    },
+    {
+      "path": "CANVAS_A6_WPF/run-20261028-123344-37227299/000/results.trx",
+      "bytes": 5120,
+      "sha256": "e64839241ca74cc5845661eae52d5ce76f4d3c864052fde8f2a8ec824f711065"
+    },
+    {
+      "path": "CANVAS_A6_WPF/run-20261028-123344-37227299/000/runsettings.xml",
+      "bytes": 535,
+      "sha256": "be6567cc0bf960eaa8f4d88681717a21ada81218d8dc0b71179c0ae4b805e22b"
+    },
+    {
+      "path": "CANVAS_A6_WPF/run-20261028-123344-37227299/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A6_WPF/run-20261028-123344-37227299/000/stdout.log",
+      "bytes": 464,
+      "sha256": "81bac573730e63f3f4e8b3667df2fe1efc6695b03cde0f4519d6b3cf78650362"
+    },
+    {
+      "path": "CANVAS_A6_WPF/run-20261028-123344-37227299/discovery.json",
+      "bytes": 981914,
+      "sha256": "0e561f55cce108eb720bc36314ec8936321e8654bd4f56560dae42be5f1031f7"
+    },
+    {
+      "path": "CANVAS_A6_WPF/run-20261028-123344-37227299/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A6_WPF/run-20261028-123344-37227299/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A6_WPF/run-20261028-123344-37227299/summary.json",
+      "bytes": 4687,
+      "sha256": "ee9e43a6e23ca3a399ef5dc7464c7a46cecb204902cdada9c90e0b322c92da0b"
+    },
+    {
+      "path": "CANVAS_A6_WPF.log",
+      "bytes": 181,
+      "sha256": "5c4694e454727d3ff399121f578502af7ff56bc4fbf12a05b28a1dabbe71321f"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/000/results.trx",
+      "bytes": 4244,
+      "sha256": "33c2327d130cea47d5b379417f451dcc31591672cfef2412b7abf80951165e96"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/000/runsettings.xml",
+      "bytes": 526,
+      "sha256": "41be80ad361c0a6dd4e7ff1174acfbd356d78958a72b701dcd91c77f160c95f5"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/000/stdout.log",
+      "bytes": 399,
+      "sha256": "06e51e8c9caed363b348db130eaf368ccc5ae74bbd4dc197ee64048263ad214a"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/001/results.trx",
+      "bytes": 7014,
+      "sha256": "ba8441bdd704123238e9580f320f0a07295afb16ee8372ef2b97760a9212bea9"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/001/runsettings.xml",
+      "bytes": 780,
+      "sha256": "c04b7a4c100ea6c12c600daddd00399b1c3484ddc10c229d94da6af05448b6c8"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/001/stdout.log",
+      "bytes": 400,
+      "sha256": "a768bfccc53b0131552b4cf583e74bb9fd980c1aae838d4fb7a068101e17629e"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/002/results.trx",
+      "bytes": 6870,
+      "sha256": "8f0e0c974e63f30d1e25957be2f539e939551bad0245c1af25116440a9eb256f"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/002/runsettings.xml",
+      "bytes": 732,
+      "sha256": "16074b17c510fd4e62532dec34a7913e69a3e8a770878c01537fe8e98f0f47eb"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/002/stdout.log",
+      "bytes": 399,
+      "sha256": "e04de215ae092d49458c026623fbee82cf19019d944f0c2d4721700ff4a36c8e"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/discovery.json",
+      "bytes": 854908,
+      "sha256": "a62de71fd813468d9704962d059ae964c9e700e90230c78a34659a81f96b4848"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A7_CORE/run-20261028-123904-e725ca23/summary.json",
+      "bytes": 13179,
+      "sha256": "84aa2dab95bb70c1895f5f63292057a80d794b154cb8b17638edf1b6449c6bb2"
+    },
+    {
+      "path": "CANVAS_A7_CORE.log",
+      "bytes": 322,
+      "sha256": "5527880d45f73cb59275139182819fd23c5b7f50714dcd9828612bb442926dac"
+    },
+    {
+      "path": "CANVAS_A7_WPF/run-20261028-123908-65a2bc3e/000/results.trx",
+      "bytes": 6587,
+      "sha256": "140a007a529cff3de724be8e616c50ba4421f309f92423107819cf9d87192bcc"
+    },
+    {
+      "path": "CANVAS_A7_WPF/run-20261028-123908-65a2bc3e/000/runsettings.xml",
+      "bytes": 680,
+      "sha256": "7f6e398e8109d8d0e5cf67563522df854d8204445817ab6b2d90d53e3d046450"
+    },
+    {
+      "path": "CANVAS_A7_WPF/run-20261028-123908-65a2bc3e/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A7_WPF/run-20261028-123908-65a2bc3e/000/stdout.log",
+      "bytes": 464,
+      "sha256": "437bd55e157ea5a54f01f475f7ee005fafaf8243db621b1087f8cf0dc9fe7d4b"
+    },
+    {
+      "path": "CANVAS_A7_WPF/run-20261028-123908-65a2bc3e/001/results.trx",
+      "bytes": 2666,
+      "sha256": "51d3acc4f8cd4dad00d61c7faa944ce62034abae13d5155fff84a34305f5b5c0"
+    },
+    {
+      "path": "CANVAS_A7_WPF/run-20261028-123908-65a2bc3e/001/runsettings.xml",
+      "bytes": 394,
+      "sha256": "e99161ab00f4dcc705ac6edb7724e5697bcdbf9a2e39edc415a81716b902551a"
+    },
+    {
+      "path": "CANVAS_A7_WPF/run-20261028-123908-65a2bc3e/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A7_WPF/run-20261028-123908-65a2bc3e/001/stdout.log",
+      "bytes": 402,
+      "sha256": "df7140209e1a6c20723148fcd25aaf3c2806157c8e5a4736648fbf635d553588"
+    },
+    {
+      "path": "CANVAS_A7_WPF/run-20261028-123908-65a2bc3e/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "CANVAS_A7_WPF/run-20261028-123908-65a2bc3e/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A7_WPF/run-20261028-123908-65a2bc3e/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A7_WPF/run-20261028-123908-65a2bc3e/summary.json",
+      "bytes": 7854,
+      "sha256": "68a54b21835ff201ba10a5eeebc758e1a0b04e10f5a403e88f0121540186a8fb"
+    },
+    {
+      "path": "CANVAS_A7_WPF.log",
+      "bytes": 261,
+      "sha256": "47b9fd9e29674a79144ec12448820b5dde8382a259315d524cb113e6fcd4fe14"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/000/results.trx",
+      "bytes": 4244,
+      "sha256": "506c0b567a157311480cadc611cb6a510e4d30dc74e6b14bbb056886a841e6c2"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/000/runsettings.xml",
+      "bytes": 526,
+      "sha256": "3abf81c9f3930153c1931f6d340572f45b5dd2ec9ac184daeafa9100c126cd3c"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/000/stdout.log",
+      "bytes": 399,
+      "sha256": "9665ec456fd5084abb7a72d0c2e148e56f019cd4584bcb282a23f873bbf49897"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/001/results.trx",
+      "bytes": 7014,
+      "sha256": "f20e07df92afbd08697d10c7a84152dcc89a1fa4385f82345fd191fa8fb675ec"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/001/runsettings.xml",
+      "bytes": 780,
+      "sha256": "9260f9d785e3cebcb841be8450daa94122523699c1b1def06959ae6645b6f660"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/001/stdout.log",
+      "bytes": 400,
+      "sha256": "d52df845df1f3a1f5a28dacb9d02ae15288a0fa12eb9e360695641d6696edc6e"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/002/results.trx",
+      "bytes": 6870,
+      "sha256": "60360d8b2cb658bafc94073a2a87e730ec8a1db5dba291829c6783bdc4a8ff32"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/002/runsettings.xml",
+      "bytes": 732,
+      "sha256": "899433b2bdbe34c5a65c1d49f44bbcd8bc5b30164388fb5b5c375378f1d3c61b"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/002/stdout.log",
+      "bytes": 399,
+      "sha256": "f5c84a7081e3b3c64f3edcdef9b592882f3ca6011a38716deb4738f168f7403c"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/discovery.json",
+      "bytes": 854908,
+      "sha256": "a62de71fd813468d9704962d059ae964c9e700e90230c78a34659a81f96b4848"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A8_CORE/run-20261028-124255-2cc32afd/summary.json",
+      "bytes": 13178,
+      "sha256": "8548bb79e8b1f6e2f19f7fea0bb74f962a1cce3596b009db63439573034a528a"
+    },
+    {
+      "path": "CANVAS_A8_CORE.log",
+      "bytes": 322,
+      "sha256": "443d4667c02b13a708a8ce51b52a4fd176751b596168bb508b2df64c00624a61"
+    },
+    {
+      "path": "CANVAS_A8_WPF/run-20261028-124259-d0251b14/000/results.trx",
+      "bytes": 6587,
+      "sha256": "7a181aa7c86c1b0d2bb5f5a9db64d72e0640a7ab9c45142b685f06b9007ff0ae"
+    },
+    {
+      "path": "CANVAS_A8_WPF/run-20261028-124259-d0251b14/000/runsettings.xml",
+      "bytes": 680,
+      "sha256": "fc38d2a047a8d7fcaa116d0563e1c4cc8166b976a1f7b31aa8f7e9e55331313a"
+    },
+    {
+      "path": "CANVAS_A8_WPF/run-20261028-124259-d0251b14/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A8_WPF/run-20261028-124259-d0251b14/000/stdout.log",
+      "bytes": 464,
+      "sha256": "0059c195ef8cc198f542439620c305c9b2cb9bd300c5553d783604d445ddbf2e"
+    },
+    {
+      "path": "CANVAS_A8_WPF/run-20261028-124259-d0251b14/001/results.trx",
+      "bytes": 2666,
+      "sha256": "23646221669cc5e6fd47fa6eba8ea8e5622edb42e28f6dc2c817fd5b6dffa72f"
+    },
+    {
+      "path": "CANVAS_A8_WPF/run-20261028-124259-d0251b14/001/runsettings.xml",
+      "bytes": 394,
+      "sha256": "fa575c65e59f1da10f89a23a94f3eb55f0873e9ec91431519259a3f5f385b485"
+    },
+    {
+      "path": "CANVAS_A8_WPF/run-20261028-124259-d0251b14/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A8_WPF/run-20261028-124259-d0251b14/001/stdout.log",
+      "bytes": 402,
+      "sha256": "f2ce5482f59379f21b01c1e0c9117396a98be7a4392b739a1edb515a6d595e4a"
+    },
+    {
+      "path": "CANVAS_A8_WPF/run-20261028-124259-d0251b14/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "CANVAS_A8_WPF/run-20261028-124259-d0251b14/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A8_WPF/run-20261028-124259-d0251b14/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A8_WPF/run-20261028-124259-d0251b14/summary.json",
+      "bytes": 7854,
+      "sha256": "5a47d927c156a002346fe03b82d6443785fae410e390758445d42976f78cb458"
+    },
+    {
+      "path": "CANVAS_A8_WPF.log",
+      "bytes": 261,
+      "sha256": "882282b84a6cb2598021a174201d9da76ebc16692261f3c82d17866aa3cfeecc"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/000/results.trx",
+      "bytes": 4244,
+      "sha256": "7d5359c048ccc60ac15098b4acb0638159ea643df7d86f13296ec3fc5f5cd985"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/000/runsettings.xml",
+      "bytes": 526,
+      "sha256": "bf2cbc3b6db3ffe68824cf140c4a24c2590d28218b324aed17c33dd4dee8acc8"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/000/stdout.log",
+      "bytes": 399,
+      "sha256": "3986ca0ded1feea468f13b79d44a30a50937ba1b35234bc0b741764e48d56879"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/001/results.trx",
+      "bytes": 7014,
+      "sha256": "02383758b287c16a92e0ce5f03a3e1d4659a996ea11d226a8006eb5be6314e69"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/001/runsettings.xml",
+      "bytes": 780,
+      "sha256": "0687bc19eeb75c2fe3405185e877aad217948675a2488757a5bf861354338a77"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/001/stdout.log",
+      "bytes": 400,
+      "sha256": "fd4d50455c6d71443e3990e143625c4eccc33af909bb4652c15f45158c2004c1"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/002/results.trx",
+      "bytes": 10445,
+      "sha256": "a6241eca6c0975c7a959d05c54ac386f4049e44c803da32f10e9d5267e2b4d6d"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/002/runsettings.xml",
+      "bytes": 871,
+      "sha256": "88ecff84e9f4cb0c4a213aa7d24cbfbcc22ed491b752001391483cdabc7e2d42"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/002/stdout.log",
+      "bytes": 2459,
+      "sha256": "c949312b36cf6a8c257f5f488b0ffbad546bfb9efa21ca6df8e0e4588dcdee42"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/discovery.json",
+      "bytes": 855422,
+      "sha256": "5cd66c84aad21742bf45776f6d9337ffb3c704fa537bf39e993c350d838d5fed"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A9_CORE/run-20261028-124543-aef905fa/summary.json",
+      "bytes": 16177,
+      "sha256": "d896ebfb796ea697ebbb54ff5831a3918ddf1ad66a193c912c49fe7537ea5ab4"
+    },
+    {
+      "path": "CANVAS_A9_CORE.log",
+      "bytes": 322,
+      "sha256": "d398845e4a294cd7832222f4d4382cc439c17cf3982b0af2f73937a97c9f0811"
+    },
+    {
+      "path": "CANVAS_A9_WPF/run-20261028-124546-79ead09e/000/results.trx",
+      "bytes": 6587,
+      "sha256": "160beb6be255ca969f4dadb4aa119994da5f19d8add882b7c30fa4e77b0905e3"
+    },
+    {
+      "path": "CANVAS_A9_WPF/run-20261028-124546-79ead09e/000/runsettings.xml",
+      "bytes": 680,
+      "sha256": "74b658c4e64dead582c846628a7859007edea71ac55e71da804ffc9ce9bac76e"
+    },
+    {
+      "path": "CANVAS_A9_WPF/run-20261028-124546-79ead09e/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A9_WPF/run-20261028-124546-79ead09e/000/stdout.log",
+      "bytes": 464,
+      "sha256": "da17c0b78ac59a72d51d497eb179bd504001e5e78592410a0559963a0c710786"
+    },
+    {
+      "path": "CANVAS_A9_WPF/run-20261028-124546-79ead09e/001/results.trx",
+      "bytes": 2666,
+      "sha256": "f4f34d20ffd6d5a8cc921179b95f46f6ac0940473115b6211d507dbb727ea07d"
+    },
+    {
+      "path": "CANVAS_A9_WPF/run-20261028-124546-79ead09e/001/runsettings.xml",
+      "bytes": 394,
+      "sha256": "97f0bda4e288bb947b0a6c908ba6473c367dd7157e7aa5f212eb0954c289b4d1"
+    },
+    {
+      "path": "CANVAS_A9_WPF/run-20261028-124546-79ead09e/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A9_WPF/run-20261028-124546-79ead09e/001/stdout.log",
+      "bytes": 402,
+      "sha256": "37f1e2994c9f867b9c2fa6adf93f8eef3b76e6aab68043aadb1fcb19f7085e8a"
+    },
+    {
+      "path": "CANVAS_A9_WPF/run-20261028-124546-79ead09e/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "CANVAS_A9_WPF/run-20261028-124546-79ead09e/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A9_WPF/run-20261028-124546-79ead09e/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CANVAS_A9_WPF/run-20261028-124546-79ead09e/summary.json",
+      "bytes": 7854,
+      "sha256": "1f2f20996a68b1b7e55b6de76fba70a5e57d706573b491c6a52cf7c1a3ce72ca"
+    },
+    {
+      "path": "CANVAS_A9_WPF.log",
+      "bytes": 261,
+      "sha256": "35572f488fbb112a9defb172ad8cdbd3db62a956d9ee40cae3ad6b124dd27d9f"
+    },
+    {
+      "path": "COMPONENT_BINDINGS.json",
+      "bytes": 6720,
+      "sha256": "7f7765fd582bcac04b9583b1cbe6def41121f32908430b2faa3bab74b908a44c"
+    },
+    {
+      "path": "exact_runner.py",
+      "bytes": 883,
+      "sha256": "ee589115d98ff0d30bd6167d57a1ec45f398f9b17e48284af37561aedb76f407"
+    },
+    {
+      "path": "FILM_STATUS.md",
+      "bytes": 1309,
+      "sha256": "856b3c2faa24136b4c18fc3b21dc4addce962ee6732233123d95bd55fe25e019"
+    },
+    {
+      "path": "FINAL_APP_FILES.json",
+      "bytes": 58284,
+      "sha256": "62b25d6a915f88b204f0c0a5437287175b3c703ce4fec1adeeb0789796201069"
+    },
+    {
+      "path": "FINAL_BUILD_CORE.json",
+      "bytes": 333,
+      "sha256": "2f9f403ed787aed3c7a84b41d775ec817cfff55e30bdd8042c2a62b2805fd697"
+    },
+    {
+      "path": "FINAL_BUILD_CORE.log",
+      "bytes": 49746,
+      "sha256": "1aaa36cea63156300d96515524fc25963a1df663a2328b651f9fb73972f393d5"
+    },
+    {
+      "path": "FINAL_BUILD_WPF.json",
+      "bytes": 571,
+      "sha256": "ad855853389ab8b309659121f6dfa6400df8cd0a7062c73583f8db6306b42ab7"
+    },
+    {
+      "path": "FINAL_BUILD_WPF.log",
+      "bytes": 191932,
+      "sha256": "65b3ab35f0d31c4a7fa0d0e475539bc72fa6db07b7ed92d13e5123f265ffdb33"
+    },
+    {
+      "path": "FINAL_COMPONENT_BINDINGS.json",
+      "bytes": 6720,
+      "sha256": "0a3db139ba3dcc8b354d8d309d5f1ac55b579c47e9c86b8090d9f7cd1fe105ff"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/000/results.trx",
+      "bytes": 4340,
+      "sha256": "2191f6b313e9d8a648b6a8be920d3622dbdbe1d56b70dc28788003fc77b23451"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/000/runsettings.xml",
+      "bytes": 554,
+      "sha256": "edc00c3fcd8bdf073c4a8c3ea94ec5a48b81235f6b03a0ac8716fd557d7586c3"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/000/stdout.log",
+      "bytes": 396,
+      "sha256": "c1733a49e613ed00c5cf0b95cd22b21b83c6d4e141506fc5e546ca93710d36f8"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/001/results.trx",
+      "bytes": 4244,
+      "sha256": "c04575b5ba9f61d530030336f7a5f0921b9a11d9d47cc9d1595cf83477e44de9"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/001/runsettings.xml",
+      "bytes": 522,
+      "sha256": "ebe43887f65e4a72e96606f54f609ee67f0534a24a10572ae23d832a6851d4ff"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/001/stdout.log",
+      "bytes": 395,
+      "sha256": "a5e739afbc050b330af4d69d820ca3a48285c2826ba16f7e672d2eedfb54c558"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/002/results.trx",
+      "bytes": 7014,
+      "sha256": "56fcf993b111ef96e563eeb24b7cf25e2dad13fb4138413460b6b1ef3d37da61"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/002/runsettings.xml",
+      "bytes": 776,
+      "sha256": "03f0426a6f7cd74f410f48ae3ed4557c154a1511bffbc4ca0c347d04ba7d94a9"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/002/stdout.log",
+      "bytes": 396,
+      "sha256": "601103805c9a5adc0101adcc8472e1e7a182a831e8bb7f7f9598513d9413dca1"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/003/results.trx",
+      "bytes": 8281,
+      "sha256": "03e974226c4258dd7ff70857647b4fdc4836a0bf822d8bbc0c4a61396574b1f2"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/003/runsettings.xml",
+      "bytes": 867,
+      "sha256": "954520ca3548a703db769b44e585ebbe375ebd550f84bef68a09fc9f4dfca083"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/003/stdout.log",
+      "bytes": 396,
+      "sha256": "facae14a0f69afd5f56c313a478ff94a575eb5c6552d595bf5289be6195f48f3"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/discovery.json",
+      "bytes": 855422,
+      "sha256": "5cd66c84aad21742bf45776f6d9337ffb3c704fa537bf39e993c350d838d5fed"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_CORE/run-20261028-131659-abc05df5/summary.json",
+      "bytes": 17215,
+      "sha256": "64dffade703322a88d8dd73d427ec822c7da5b877c9a41cda9fa95ba8c176617"
+    },
+    {
+      "path": "FINAL_CORE.log",
+      "bytes": 396,
+      "sha256": "3bf6846e3108db8379cde7027f162312dd2808f63fe4c812966b34be935a9512"
+    },
+    {
+      "path": "FINAL_INDEPENDENT/run-20261028-131900-b2866522/000/results.trx",
+      "bytes": 2664,
+      "sha256": "ba8eb28ee16bb2fe8abb25f2464097705d300583c401d4a45a0dcd5e0eca684a"
+    },
+    {
+      "path": "FINAL_INDEPENDENT/run-20261028-131900-b2866522/000/runsettings.xml",
+      "bytes": 400,
+      "sha256": "46f51457107619bac9d601bd4f40affa7d8e22deaa67df64d0901462bd329155"
+    },
+    {
+      "path": "FINAL_INDEPENDENT/run-20261028-131900-b2866522/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_INDEPENDENT/run-20261028-131900-b2866522/000/stdout.log",
+      "bytes": 406,
+      "sha256": "1ff73320620bbc04cfcd98c8a548849e2338e115d839ff23121a71ef4e22cdbc"
+    },
+    {
+      "path": "FINAL_INDEPENDENT/run-20261028-131900-b2866522/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "FINAL_INDEPENDENT/run-20261028-131900-b2866522/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_INDEPENDENT/run-20261028-131900-b2866522/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_INDEPENDENT/run-20261028-131900-b2866522/summary.json",
+      "bytes": 3137,
+      "sha256": "a5c0f7da1abd67507146279fe1a83fe2cd4fd66f1cd15933984734d343a62537"
+    },
+    {
+      "path": "FINAL_INDEPENDENT.log",
+      "bytes": 230,
+      "sha256": "542628d408c4a8302642608b00cd5abd305997ff6eb30f6d60a0f67afbbd82dc"
+    },
+    {
+      "path": "FINAL_PLAN.json",
+      "bytes": 743,
+      "sha256": "014d1996bf39bd1736a8cb649170375fcf9f52f4ab3606f60098e28050b704af"
+    },
+    {
+      "path": "FINAL_PUBLISH.json",
+      "bytes": 715,
+      "sha256": "8c569f17fa431a8a252d4276d981df422bd958022c0e1d9a44c62f5e964f58cf"
+    },
+    {
+      "path": "FINAL_PUBLISH.log",
+      "bytes": 1941,
+      "sha256": "6b3cced7300f17a13b0d31e4271b76861d168cfc8a1fb10fc09a9b833ad09af3"
+    },
+    {
+      "path": "FINAL_REPORT.md",
+      "bytes": 4998,
+      "sha256": "43781eb0c5b8a2d44b61086cb8a6cf1c02d181eff8cc7a6cba722ae3839a00b7"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/000/results.trx",
+      "bytes": 2645,
+      "sha256": "d16d12303755bc712f633e31907ee4fe527f04aeb30165a543e75b0a59c7c4f0"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/000/runsettings.xml",
+      "bytes": 377,
+      "sha256": "df78849919f5e0e1555d68702443d78eba487b86f9e84486a5b3e00f2e33d6fb"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/000/stdout.log",
+      "bytes": 397,
+      "sha256": "6517f9889f4055104803a5edee50838b53f95d85fab4083eb190e78cb869e0fb"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/001/results.trx",
+      "bytes": 2637,
+      "sha256": "88095278be0231501ebf25cc965d915bba9fd6a13f52ab8b6d02ec5b0452cee0"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/001/runsettings.xml",
+      "bytes": 375,
+      "sha256": "60541e5ef4fb86ee848eb614a5ca792f3bb83776c5d65398181ba6405e1f3805"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/001/stdout.log",
+      "bytes": 397,
+      "sha256": "52639aec710533fd4734d78c8ecb1a18d9a5025c63c3425a8bc709c607e22a1d"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/002/results.trx",
+      "bytes": 2663,
+      "sha256": "85c274eb752fcb1422215035e64256ad40b4f053f6957689bc45669a8bebd685"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/002/runsettings.xml",
+      "bytes": 383,
+      "sha256": "0a64c4cd93b8852282491f516c91751a41b8878d18edad1e17117df56a2ac7a1"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/002/stdout.log",
+      "bytes": 397,
+      "sha256": "4940530bf1084d7d99935f26202a44200f237da39a94270fbdb398be68b3790a"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/003/results.trx",
+      "bytes": 2670,
+      "sha256": "f205536ad3ace17d1f2e59e073a58e9b48b48c67c96de04b79b426cf6608f816"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/003/runsettings.xml",
+      "bytes": 392,
+      "sha256": "7835d58fda7a062176c90ff96705e5208d6b1ae5d07cd14107c302505e25335e"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/003/stdout.log",
+      "bytes": 397,
+      "sha256": "8eda7567fd9e0dd4f0c07fb70afdc81115e04acc0f96f928439fda6c898df317"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/004/results.trx",
+      "bytes": 6916,
+      "sha256": "45aa6aecc5b666c8f6e4387f671672e339acc808de2f8070f6153f502a5e3806"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/004/runsettings.xml",
+      "bytes": 772,
+      "sha256": "724336d2f04fb3ac63957bd0442992d415b490816eb3b96516e19d167d353c2d"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/004/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/004/stdout.log",
+      "bytes": 398,
+      "sha256": "c7c822455342e8250fdcf37346a2303551d409cd63ce5b7f49af12af30eacce2"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/005/results.trx",
+      "bytes": 2688,
+      "sha256": "eb4b98c613c9d3df0fa91e6bfdfc413042a4957b7927e7c82c153e976561ad57"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/005/runsettings.xml",
+      "bytes": 404,
+      "sha256": "571399ecbbf51c9d0f515f0f57ebffee94adf297bb9a6ca51a9110a47f0878cc"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/005/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/005/stdout.log",
+      "bytes": 395,
+      "sha256": "854e4d88e95733d9b27a3d518ab2b32c44592608bf33f7e85262543feb97ffd3"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/006/results.trx",
+      "bytes": 6587,
+      "sha256": "823a8c9cefd115a4b00c58851a558aaa3363d38a6ab606199c4f24a52608ffb6"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/006/runsettings.xml",
+      "bytes": 676,
+      "sha256": "510cdf6b8acfcecfdbddf8a25853d0c32e9a3753b70d2ad0c565a6fcb5d3b3d6"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/006/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/006/stdout.log",
+      "bytes": 460,
+      "sha256": "90595cd28687135b5fa5483e9b2faf501f5037221328d2c7cc13b7ee2df0815a"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/007/results.trx",
+      "bytes": 4056,
+      "sha256": "915736855282e4bda61c963fa9c5a8fbeb422d9b1fd3c750dee43d02f4085803"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/007/runsettings.xml",
+      "bytes": 500,
+      "sha256": "721b31f0dacd011a9eee1137f9d9163cc97b9db6dff0040e2f97a07141ba2c92"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/007/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/007/stdout.log",
+      "bytes": 397,
+      "sha256": "24a50a44d3ab4242cdc8e035637c7b7fe621b48e7a0e369d7aaee29079a8c6a8"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/008/results.trx",
+      "bytes": 2666,
+      "sha256": "c786cba48260cde4ea3a513fd17455a24ad15773b1c2516be8f3c7e55c0533af"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/008/runsettings.xml",
+      "bytes": 390,
+      "sha256": "c8c4bc4ea4bf1e8aae11d4125648c76fa618d8176910ffc7448f6076f38edfe5"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/008/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/008/stdout.log",
+      "bytes": 398,
+      "sha256": "5cfb524c9ea253359d7092bf4145fa8579f64091d3fe6a9cfe6f01dc79c11b8f"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/009/results.trx",
+      "bytes": 8509,
+      "sha256": "06eb5d40df59b483d3e4abfb43b720ab24750e4c992f3dd4074a1cc4e588e2b6"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/009/runsettings.xml",
+      "bytes": 755,
+      "sha256": "e6c37dc2bbbf0b3ba06bd00ea7df840ab7385820abe9855a724e935d2f55ce89"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/009/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/009/stdout.log",
+      "bytes": 395,
+      "sha256": "8f651792567a8d624ce08d1224fa7abf175bfbb5d998cdb0a2988e130c14fe8e"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/010/results.trx",
+      "bytes": 5580,
+      "sha256": "c1ffd99cbc2cc89fa990cfb220c54d83a6c4f7ddb549a749de07cc8c25f5f088"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/010/runsettings.xml",
+      "bytes": 680,
+      "sha256": "cd2f866c7131a515b33697410e91aa7166d0c4228f3447263aeee9a7df8f21ac"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/010/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/010/stdout.log",
+      "bytes": 395,
+      "sha256": "0b2baa6cab93c3c9ba0e17b899be43092078feaeacc457e4e6b9f520d26ce814"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "FINAL_WPF/run-20261028-131705-df27451f/summary.json",
+      "bytes": 36607,
+      "sha256": "251324972f32bba77e7f7837f8a58c52d49f716cdfacae27a10453fee31d1a41"
+    },
+    {
+      "path": "FINAL_WPF.log",
+      "bytes": 971,
+      "sha256": "ce91af9e747b2106608e1f87e144a5705ee75ca1d06e275217648986a4319077"
+    },
+    {
+      "path": "FINAL_ZIP_IDENTITY.json",
+      "bytes": 311,
+      "sha256": "2143bc4c300589714fb5ae7b69b63632027c1e08fa9667533aa94e8f21e091ca"
+    },
+    {
+      "path": "HANDOFF.MD",
+      "bytes": 22160,
+      "sha256": "c667d3706af7f1439bc8d88d2a9163c4d940d0586213b32dc6dc6a2623b3f288"
+    },
+    {
+      "path": "INDEPENDENT_A11/run-20261028-125228-2b053351/000/results.trx",
+      "bytes": 2664,
+      "sha256": "98309878eb1a223298896483e080a0bfb22b8b8e51a47f665a6bcef4b5d59738"
+    },
+    {
+      "path": "INDEPENDENT_A11/run-20261028-125228-2b053351/000/runsettings.xml",
+      "bytes": 398,
+      "sha256": "f3299ad8779356232a98ad05df6c3b6526b927f11228056b7a6f1e517d5ec600"
+    },
+    {
+      "path": "INDEPENDENT_A11/run-20261028-125228-2b053351/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "INDEPENDENT_A11/run-20261028-125228-2b053351/000/stdout.log",
+      "bytes": 404,
+      "sha256": "58da0012f402300b9d77210103a06d6d9bf4b9c074e96f46e9ff722a2b4f473b"
+    },
+    {
+      "path": "INDEPENDENT_A11/run-20261028-125228-2b053351/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "INDEPENDENT_A11/run-20261028-125228-2b053351/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "INDEPENDENT_A11/run-20261028-125228-2b053351/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "INDEPENDENT_A11/run-20261028-125228-2b053351/summary.json",
+      "bytes": 3129,
+      "sha256": "6fb3d97323fcaf6d3300e2d39125b753498c59fbf4696252f88b81f331db1d2a"
+    },
+    {
+      "path": "INDEPENDENT_A11.log",
+      "bytes": 228,
+      "sha256": "5295475da6d794d4354538ca83cd615a5e5a6119195253fad3f623f78fadd0c8"
+    },
+    {
+      "path": "INDEPENDENT_A13/run-20261028-125910-96e2fc9d/000/results.trx",
+      "bytes": 2664,
+      "sha256": "6ab7156c23de2d5d24ce9a2a493e492683121b090379a95cf2847e723af9ced8"
+    },
+    {
+      "path": "INDEPENDENT_A13/run-20261028-125910-96e2fc9d/000/runsettings.xml",
+      "bytes": 398,
+      "sha256": "c0b96d9b27789aa2883f8a1f98556ef86d3c39c92c5db259b8560a4361334118"
+    },
+    {
+      "path": "INDEPENDENT_A13/run-20261028-125910-96e2fc9d/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "INDEPENDENT_A13/run-20261028-125910-96e2fc9d/000/stdout.log",
+      "bytes": 404,
+      "sha256": "4b88b35896866999958f9fa2c6f81641e99d0147c2f8dcaf58b57a76f50b36db"
+    },
+    {
+      "path": "INDEPENDENT_A13/run-20261028-125910-96e2fc9d/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "INDEPENDENT_A13/run-20261028-125910-96e2fc9d/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "INDEPENDENT_A13/run-20261028-125910-96e2fc9d/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "INDEPENDENT_A13/run-20261028-125910-96e2fc9d/summary.json",
+      "bytes": 3127,
+      "sha256": "2f3e7f582d808839ae77b5ac1f14a57974b5460b5b364aaca53601132f1225b8"
+    },
+    {
+      "path": "INDEPENDENT_A13.log",
+      "bytes": 228,
+      "sha256": "f6bcb24a725b957f422dfdbfcff94ca9165b0bacf6b67acb4dc6dfadfab6a7d0"
+    },
+    {
+      "path": "INDEPENDENT_A16/run-20261028-131002-33fd6ead/000/results.trx",
+      "bytes": 2664,
+      "sha256": "4672b436a032d485a2a9ddb3c1a0083b12e96d7633ecd54570caf3fb428a9150"
+    },
+    {
+      "path": "INDEPENDENT_A16/run-20261028-131002-33fd6ead/000/runsettings.xml",
+      "bytes": 398,
+      "sha256": "a916ec144847278243486fe670a786eda44a292ef5cee3ff19f601fc1e00d067"
+    },
+    {
+      "path": "INDEPENDENT_A16/run-20261028-131002-33fd6ead/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "INDEPENDENT_A16/run-20261028-131002-33fd6ead/000/stdout.log",
+      "bytes": 404,
+      "sha256": "de835a174d3b07b50ea50fb4c987a3c70b2ae33e4a00a70c4e55cc33ac81df92"
+    },
+    {
+      "path": "INDEPENDENT_A16/run-20261028-131002-33fd6ead/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "INDEPENDENT_A16/run-20261028-131002-33fd6ead/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "INDEPENDENT_A16/run-20261028-131002-33fd6ead/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "INDEPENDENT_A16/run-20261028-131002-33fd6ead/summary.json",
+      "bytes": 3130,
+      "sha256": "1a29f3c83e14bbbf52c62cde1e6fd3ff3dd78bddbaf2ad2d902bd36221a49a2a"
+    },
+    {
+      "path": "INDEPENDENT_A16.log",
+      "bytes": 228,
+      "sha256": "32ab44b523caeb1791b9490eaea5f2884e13056a0be690d1b4d7fc9c720b2cc8"
+    },
+    {
+      "path": "INDEPENDENT_A6/run-20261028-123445-0a871df6/000/results.trx",
+      "bytes": 2664,
+      "sha256": "7ca33b05f4690a92ade1d0784ed864393b87959aa9c6051e333986fffadaa633"
+    },
+    {
+      "path": "INDEPENDENT_A6/run-20261028-123445-0a871df6/000/runsettings.xml",
+      "bytes": 397,
+      "sha256": "9a7a2082a00f8bef1a5e2b43e4e878c89d1e74b130aec8b144bbfab9f65c20a5"
+    },
+    {
+      "path": "INDEPENDENT_A6/run-20261028-123445-0a871df6/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "INDEPENDENT_A6/run-20261028-123445-0a871df6/000/stdout.log",
+      "bytes": 403,
+      "sha256": "c51616137200675c99aad4e00d46e23af0c1e6a34471329d40271114e3a9d09c"
+    },
+    {
+      "path": "INDEPENDENT_A6/run-20261028-123445-0a871df6/discovery.json",
+      "bytes": 981914,
+      "sha256": "0e561f55cce108eb720bc36314ec8936321e8654bd4f56560dae42be5f1031f7"
+    },
+    {
+      "path": "INDEPENDENT_A6/run-20261028-123445-0a871df6/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "INDEPENDENT_A6/run-20261028-123445-0a871df6/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "INDEPENDENT_A6/run-20261028-123445-0a871df6/summary.json",
+      "bytes": 3126,
+      "sha256": "42ccbfac81e7a4aad8df050c41d194c70588a7a15f4ea7e8d102bd71b3fd7b59"
+    },
+    {
+      "path": "INDEPENDENT_A6.log",
+      "bytes": 227,
+      "sha256": "7e574ff182ff0542ad799e79cb5640d1b73f41de57bb1bb1b5f1d2d791a9dce6"
+    },
+    {
+      "path": "native-sealed-startup/RESULT.json",
+      "bytes": 1737,
+      "sha256": "0f7ca79d849e8c5be866ddc3135779bd31578bedfba04cc0d5ef687ebb061e05"
+    },
+    {
+      "path": "native_final.py",
+      "bytes": 1712,
+      "sha256": "c7781e5fd21a5276c402746d4677e45dfefc36da5028cf3719df56f79f2e7e04"
+    },
+    {
+      "path": "native_sealed.py",
+      "bytes": 1721,
+      "sha256": "fcfd9de16fe9231a17115aa51e0f003d9adb59d176c248ab36182614e00ff876"
+    },
+    {
+      "path": "NODE_COMPARISON.md",
+      "bytes": 2980,
+      "sha256": "1efe5b596199806f5109bfc1d315039e92e28d8c53056179a3865ec27c7a23ed"
+    },
+    {
+      "path": "NONPASS.json",
+      "bytes": 697,
+      "sha256": "5a651e42fc6487bb2d080aa2384c8e6830855fb9211489c788f9a135f4a62b94"
+    },
+    {
+      "path": "package_final.py",
+      "bytes": 1415,
+      "sha256": "3dd6064f93c737b3bd0d35b99e712e79dd5d0232134c70ed3f8c92734f2b2277"
+    },
+    {
+      "path": "package_sealed.py",
+      "bytes": 1423,
+      "sha256": "106e9f2c136dea2e1b52b5153379753a913bdfe8fd98c675ed78061eeb796f09"
+    },
+    {
+      "path": "PERFORMANCE.json",
+      "bytes": 3095,
+      "sha256": "4841e863cc3142d1f64245d3c5b2b6c3764d757adf529971c836429b06c292b4"
+    },
+    {
+      "path": "PRESERVE_BEFORE.json",
+      "bytes": 144081,
+      "sha256": "8a0ff6d67027e9cf1e8ad7329facbdf9ef3dea944ff64dc7e34c729cceca5716"
+    },
+    {
+      "path": "PRODUCT.json",
+      "bytes": 366,
+      "sha256": "59a1cc9707aa18cb667f90fc003c097b2ec72f9c6d877e99b87d345d91ac1b3d"
+    },
+    {
+      "path": "PRODUCT_FINAL.json",
+      "bytes": 311,
+      "sha256": "c1a19787e8aae4db92fa7e9ebc3022733b842ebc461a145a25ed0c773503303e"
+    },
+    {
+      "path": "RAW_RECHECK.md",
+      "bytes": 1588,
+      "sha256": "14c0e2ef89a9452ef77cc70012a6663ed786b571c11b5dd48deb621e6b90d50b"
+    },
+    {
+      "path": "REFS_BEFORE.txt",
+      "bytes": 20706,
+      "sha256": "d5d58513d6799a5ee2a6e561882ee29716e9297fd87a4a65d77696e49f014bb7"
+    },
+    {
+      "path": "RESTORE_NEW.log",
+      "bytes": 86,
+      "sha256": "0a5293e62d3bb4d8819d8d749f51206d3aa424744e622337bee96070823f245b"
+    },
+    {
+      "path": "RESTORE_RUNNER.log",
+      "bytes": 86,
+      "sha256": "0a5293e62d3bb4d8819d8d749f51206d3aa424744e622337bee96070823f245b"
+    },
+    {
+      "path": "run_a10.py",
+      "bytes": 1525,
+      "sha256": "53d935ac6a9cc0b4bde0903dad13d8a440f25fdc355b12299489602dd47162e8"
+    },
+    {
+      "path": "run_a11.py",
+      "bytes": 1525,
+      "sha256": "b1cd226d15a6b93b7a0e36991e4b6a52f66b15e8aa8c3edb8013662a7a5b16fe"
+    },
+    {
+      "path": "run_a12.py",
+      "bytes": 1776,
+      "sha256": "73b33012b07d974b0f74aaa9fa072e443707b8e8746fe42f5c114691513d99e9"
+    },
+    {
+      "path": "run_a13.py",
+      "bytes": 1776,
+      "sha256": "25b4c9bb6f00797fae68924af6b6b3dd7c43e56be3d56814e5f038ca16847e0e"
+    },
+    {
+      "path": "run_a14.py",
+      "bytes": 1829,
+      "sha256": "1098f4c4e05b709a95d7e82821c686b5abef72f29bbaef68b71ab964400b56a3"
+    },
+    {
+      "path": "run_a15.py",
+      "bytes": 1829,
+      "sha256": "5d3a4343e8a4a1fc240b23f1dff9e68cfb071c70f2773bc6926ab3b4cd320d81"
+    },
+    {
+      "path": "run_a16.py",
+      "bytes": 1849,
+      "sha256": "d30909fee8a757501fb67625da8f14f14b0622853fcf5ebafdb8e6c5511c6aae"
+    },
+    {
+      "path": "run_a17.py",
+      "bytes": 1849,
+      "sha256": "d1f77db723a3d4fe9fff75fcd1b1ab2461c2adb7f9af25e8751c35822838a8aa"
+    },
+    {
+      "path": "run_a3.py",
+      "bytes": 1383,
+      "sha256": "6cc8a9772866914ee1e2fff518f61c4d863c0a8b3d30043a9e1c295d90db2461"
+    },
+    {
+      "path": "run_a4.py",
+      "bytes": 1494,
+      "sha256": "d8447de491693502c0d3ab648fe99ef5381a03f705816507dc0de8cc6fb19cfa"
+    },
+    {
+      "path": "run_a5.py",
+      "bytes": 1494,
+      "sha256": "b3b0d097c83fc3dbe9c3e39b13d6968b40a67215d2f161dda1f423580f0c867a"
+    },
+    {
+      "path": "run_a6.py",
+      "bytes": 1494,
+      "sha256": "64517579b6106da0151b995a25e17d936033f97ad76a5ab8baf1437518b598b4"
+    },
+    {
+      "path": "run_a7.py",
+      "bytes": 1521,
+      "sha256": "6d522922d3a1dedfccac0df3f9b87ce39042f459b76f84e82778f06e79437860"
+    },
+    {
+      "path": "run_a8.py",
+      "bytes": 1521,
+      "sha256": "2d48b7428985f58a7fc5eb23b6332ce8c3c16c708c118ceef09b5d51edfbadfb"
+    },
+    {
+      "path": "run_a9.py",
+      "bytes": 1521,
+      "sha256": "c83ebb2361e8ea07f5d998756f71e35d43ddc9f199afbb1dbbde4c41f1b76eed"
+    },
+    {
+      "path": "run_final.py",
+      "bytes": 2083,
+      "sha256": "a59d0db0861a09d4b64ed3b71875f79ccd38dd9cdde693caa59ad7b529b24fe2"
+    },
+    {
+      "path": "run_reopen_a11.py",
+      "bytes": 1468,
+      "sha256": "6c7c9a5b382ee2f530851e1785b42921fd33e2fd134b5d487790e75273f16960"
+    },
+    {
+      "path": "run_reopen_a13.py",
+      "bytes": 1468,
+      "sha256": "8f9ccf46852d8c9f500e065fa876458070ed35d698aaa63d3ace64c598ed2c02"
+    },
+    {
+      "path": "run_reopen_a16.py",
+      "bytes": 1468,
+      "sha256": "2811098fad987b190eed171498eafd5e1be0a8b04de013b4e21f123144146c5f"
+    },
+    {
+      "path": "run_reopen_a6.py",
+      "bytes": 1465,
+      "sha256": "e411303891c3fb18adf936b1e3eade071de7a0bfdca71c874d0a9a4eac18cd1a"
+    },
+    {
+      "path": "run_reopen_final.py",
+      "bytes": 1474,
+      "sha256": "eae3900d6e6214e37da7a81d397e9a7a7ce6223a0ad7dd7a4b7fd9ddb97784d3"
+    },
+    {
+      "path": "run_reopen_sealed.py",
+      "bytes": 1477,
+      "sha256": "aa000dea5c60c826d27ce298ff3183ac6792f0bd50b83608ac9b09e9ba47e576"
+    },
+    {
+      "path": "run_sealed.py",
+      "bytes": 2091,
+      "sha256": "11a63e65ea5394bf6e8c3735d208957c902c469c83dbbdafb6a8d46c0c2397d8"
+    },
+    {
+      "path": "run_tone_refs.py",
+      "bytes": 3302,
+      "sha256": "4e599bb92bdab8a2b4109ac55e8aa3906a3b2da6055fb851634c39f0a9007178"
+    },
+    {
+      "path": "SEALED_APP_FILES.json",
+      "bytes": 58284,
+      "sha256": "57c32baf719bb68234ea49adde65577a5880f3c6a166fe3a02794a329a87ac39"
+    },
+    {
+      "path": "SEALED_BUILD_CORE.json",
+      "bytes": 332,
+      "sha256": "b1b6e3e68913577d19a1b29435a6516ce00fae9c4288f098b6633dbcd925d22e"
+    },
+    {
+      "path": "SEALED_BUILD_CORE.log",
+      "bytes": 49746,
+      "sha256": "583a22ce00cdb0eeb1e3abb02e7dd8c99d6783b3a118eeb67fcf8edf9b1b5e37"
+    },
+    {
+      "path": "SEALED_BUILD_WPF.json",
+      "bytes": 569,
+      "sha256": "d827a79700c790882f6f951223cbe3a0741f3201149dbac618fb1438c0f1aed4"
+    },
+    {
+      "path": "SEALED_BUILD_WPF.log",
+      "bytes": 191932,
+      "sha256": "970f8e82e5a014576e4b821b6732854e86c3a4c73d4e558169f69230b22afd4c"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/000/results.trx",
+      "bytes": 4340,
+      "sha256": "5ec30fc1a5737e915b41e656aab38bd2e89d49932797970bf73fff13fb58865a"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/000/runsettings.xml",
+      "bytes": 555,
+      "sha256": "c06367d03bbba59685af049892f38e9a4305321ec32f2f25148f0e9845a8eb6f"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/000/stdout.log",
+      "bytes": 397,
+      "sha256": "e7336727e75e024d359514c647e37b5f5067354a4dec171f015261852c8b476b"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/001/results.trx",
+      "bytes": 4244,
+      "sha256": "3d61ad3ff028f7b69ee41b38dc96820fa93cc58e847ecc4cd04fabfa54c18d59"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/001/runsettings.xml",
+      "bytes": 523,
+      "sha256": "57d0f18af50c3b8dd919e6db69aa14923012d18c85cc29bf704066f1ecf32e6f"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/001/stdout.log",
+      "bytes": 396,
+      "sha256": "08fed42f2ad3be27ec09bbc1997e41bd7f60db7072f2ce4ea7bee7c943667df1"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/002/results.trx",
+      "bytes": 7014,
+      "sha256": "bf1d542270c7b4ed630df31f78cf4b21f8bf840946e4cd0092b7c66dce287ef2"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/002/runsettings.xml",
+      "bytes": 777,
+      "sha256": "73f3bebc5d965e02f530635be0684c845fb6e9a18c193dcfe011a92210cb3898"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/002/stdout.log",
+      "bytes": 397,
+      "sha256": "ba8e3636a608fa422efbe9378970f56fcae8c9d1763cce8c70fc49aaf34b3cfd"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/003/results.trx",
+      "bytes": 8281,
+      "sha256": "c8d3412e98cea4431160c55d362b2ff17ea34b96048cc36e551f532c2b8f1ff8"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/003/runsettings.xml",
+      "bytes": 868,
+      "sha256": "a86e4258f26ce229b9f153137388ce2bdbe13d03674a90db1f86f375b182773a"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/003/stdout.log",
+      "bytes": 397,
+      "sha256": "fef81242f26476614d8a56373b5c51ab84951680c120f0c785e0b5f0c634077d"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/discovery.json",
+      "bytes": 855422,
+      "sha256": "5cd66c84aad21742bf45776f6d9337ffb3c704fa537bf39e993c350d838d5fed"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/summary.json",
+      "bytes": 17229,
+      "sha256": "18aaf84ac5efd2de6bc932a95d37f0a3b8cf070ebe981217bb5bd58d00e4b464"
+    },
+    {
+      "path": "SEALED_CORE.log",
+      "bytes": 397,
+      "sha256": "095c73bb623d6b30aeb656bf09ae553fe832e6e23daa881660d7237fead67cc9"
+    },
+    {
+      "path": "SEALED_INDEPENDENT/run-20261028-132914-8ef589ac/000/results.trx",
+      "bytes": 2664,
+      "sha256": "4d1ab87fbc280dda38d3ca9dd11f582abb298bb40f529f16f4f835de52f759b5"
+    },
+    {
+      "path": "SEALED_INDEPENDENT/run-20261028-132914-8ef589ac/000/runsettings.xml",
+      "bytes": 401,
+      "sha256": "28c6ca4f56fa268c6ba34caf943d6ce9782ba8276f1f0a99b63b53c9afc285c1"
+    },
+    {
+      "path": "SEALED_INDEPENDENT/run-20261028-132914-8ef589ac/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_INDEPENDENT/run-20261028-132914-8ef589ac/000/stdout.log",
+      "bytes": 407,
+      "sha256": "21bbec5826bdfb657c7ec61a33729f499779699b305be82956914f191cee2541"
+    },
+    {
+      "path": "SEALED_INDEPENDENT/run-20261028-132914-8ef589ac/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "SEALED_INDEPENDENT/run-20261028-132914-8ef589ac/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_INDEPENDENT/run-20261028-132914-8ef589ac/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_INDEPENDENT/run-20261028-132914-8ef589ac/summary.json",
+      "bytes": 3141,
+      "sha256": "0f08681270aee925b5def8ed1a00fad20665b6a9e4eb16017f72392100a4faa2"
+    },
+    {
+      "path": "SEALED_INDEPENDENT.log",
+      "bytes": 231,
+      "sha256": "9fdff7aaa37192710dc473252e2e9082c475f22ebdbb136f6282375bee0b8cc6"
+    },
+    {
+      "path": "SEALED_PLAN.json",
+      "bytes": 744,
+      "sha256": "3e33f9db14d016f9fc276c66b60e618eb562623761751a6a8fb12a0a56ef83e5"
+    },
+    {
+      "path": "SEALED_PUBLISH.json",
+      "bytes": 722,
+      "sha256": "830532a4470f4858dce255164bfc623483f2aad52e5b7191da7371988174d630"
+    },
+    {
+      "path": "SEALED_PUBLISH.log",
+      "bytes": 1947,
+      "sha256": "7d5eceb280770a4179694f3a773fa0cbeb25b21c7da9d234ee093cc40d661ed7"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/000/results.trx",
+      "bytes": 2645,
+      "sha256": "1a26f2aa3cd8fc4ad9db9bf3a2251b07f294779bb63e304974d4cfea8773c2b6"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/000/runsettings.xml",
+      "bytes": 378,
+      "sha256": "128145fa50984d9b9d549ae4eec4e9120848aed35ec89bac1d8b0899b4e482f0"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/000/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/000/stdout.log",
+      "bytes": 398,
+      "sha256": "68c6c7484dbfa620fc46097e9b137ddfd176f8d8fcaddf09ac448ea73be3efd4"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/001/results.trx",
+      "bytes": 2637,
+      "sha256": "06cd5e14cca4581da5f3403e89c43d7a95f4feb9568d2125585a617f47b585f8"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/001/runsettings.xml",
+      "bytes": 376,
+      "sha256": "6bb5241bacffb59a53ddd3029cbf7ff6cebd0742ca1f10bf775f98f33a83546b"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/001/stdout.log",
+      "bytes": 398,
+      "sha256": "2c3591910b87a587a895a0918a46d5fe05543d636086b43df239a41952ab782b"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/002/results.trx",
+      "bytes": 2663,
+      "sha256": "bbc33cf3dd1758684bcf261da183276d238b26bc0176630e22310048b0f46a97"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/002/runsettings.xml",
+      "bytes": 384,
+      "sha256": "e315e74ff4f5a7cfd42ac493da2d0b376ffe4619d549541f16a8d0ed0c860b35"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/002/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/002/stdout.log",
+      "bytes": 398,
+      "sha256": "5dc116c2024a548e5d1ba236cff1ffda467aef30cd57375937015c687c4f298d"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/003/results.trx",
+      "bytes": 2670,
+      "sha256": "07c6ba819bf6d10378aac15d0f81ad60836fcb4c442c8e3348388f978ca2d699"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/003/runsettings.xml",
+      "bytes": 393,
+      "sha256": "64d5e880d61b35eda84e33524e3f181563a176eecb42da9fb6d86fb13ba3e133"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/003/stdout.log",
+      "bytes": 398,
+      "sha256": "8701dce3257739f1eba761ab97fd707b9ea43378c3eab2541451839415375bd5"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/004/results.trx",
+      "bytes": 6916,
+      "sha256": "e16bf226282152fb1dc0694b147fcd3399c32cfeda55c921ea85f8b0fb30677c"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/004/runsettings.xml",
+      "bytes": 773,
+      "sha256": "8dbe4c60a43ff787e602883e93ac385d0e4582c65ce9cc22460ecdc8a92cce00"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/004/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/004/stdout.log",
+      "bytes": 399,
+      "sha256": "1155e9d310d4c962a9e64fdfb2efa6cfe60b916697c9638a0ce402211811dd46"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/005/results.trx",
+      "bytes": 2688,
+      "sha256": "0e3a131e0a65c42fe776fb704b3bd62823e6e91875934a28b0bdb9ba18bf5345"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/005/runsettings.xml",
+      "bytes": 405,
+      "sha256": "dacff8e5bf37425b269e7243b727ac500e63c5b25dd0f6defa124dea462a0dc5"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/005/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/005/stdout.log",
+      "bytes": 396,
+      "sha256": "dda903b46ba35732640f9a80bafb3b034442a730128c38efcc89470b1409c7de"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/006/results.trx",
+      "bytes": 6587,
+      "sha256": "76ff92e06a899f3f93f98d1facc7a0628d11b0bead4ee280b5bb520ee4cd9cd7"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/006/runsettings.xml",
+      "bytes": 677,
+      "sha256": "aed3384918d51e9c03f9bbf280bc4dea74dee887eb9b86aaa944371b0842a9fd"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/006/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/006/stdout.log",
+      "bytes": 461,
+      "sha256": "44922699db0c64cdbd50473d9cce2a0b94bdbd505b44b9001a5d852ed0a32237"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/007/results.trx",
+      "bytes": 4056,
+      "sha256": "9fb45eac853616da64655db5633724828dfcb2ef73c0e2798d0d482a0de95f93"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/007/runsettings.xml",
+      "bytes": 501,
+      "sha256": "fba1a471865f9a1bd160cd25d869e0fe556e686c838bbfd31e7d9b09f412ae6a"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/007/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/007/stdout.log",
+      "bytes": 398,
+      "sha256": "90417b6d71feda3a29da3fb8b4d1ab2b59e01d141ad87c5e5f438589355f68ba"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/008/results.trx",
+      "bytes": 2666,
+      "sha256": "ecba6e06c5056789de94df4dcb794afc35db04f3ca6d5ca4b6db838fa40d4f2f"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/008/runsettings.xml",
+      "bytes": 391,
+      "sha256": "0c41582c90ee7cf62ec454f6a39f96fe8b124a08a1f74e122e637862f0333f59"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/008/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/008/stdout.log",
+      "bytes": 399,
+      "sha256": "13ed23a49b65c927bd6510f6a76a0772715a95f0e2dc4d9a6e8cb66e048b41f1"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/009/results.trx",
+      "bytes": 8509,
+      "sha256": "c65c711f61654be93574a1cbf32a69e5adb12d3c4cebc9da5792ef546a62e709"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/009/runsettings.xml",
+      "bytes": 756,
+      "sha256": "bc7c7b6397c69a9b2e6d6cbd415c4c4a0adbb87b3fecc03486df1a0012059358"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/009/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/009/stdout.log",
+      "bytes": 396,
+      "sha256": "cd04de4779ee803d8ef58c7d43eecb9770570758287781aeed99f622f2508a57"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/010/results.trx",
+      "bytes": 5580,
+      "sha256": "fa0943892d153a4804b92555266225c5ce49d47ddb37d3ec5eca2aa02540c6b2"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/010/runsettings.xml",
+      "bytes": 681,
+      "sha256": "6533cf56249c66b606c316e349666401cfc1ace4b4009fa675e8c8b66add621a"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/010/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/010/stdout.log",
+      "bytes": 396,
+      "sha256": "2cac0c3fdfb70485e217369f270777ba4d8414820c273b5aeb9fe75a3363bdd7"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/discovery.json",
+      "bytes": 982964,
+      "sha256": "cd632af112ec67e80a0808e3d3d7dfe21803ca5b6f0e066475bbec7da3932c7f"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/summary.json",
+      "bytes": 36639,
+      "sha256": "04e33ebfc087c02b828e6e9a360921e0f365ee2a140ea0ae5b40fdcf1ccc9cec"
+    },
+    {
+      "path": "SEALED_WPF.log",
+      "bytes": 972,
+      "sha256": "c11b8e1cf1996847c60b5fbec14ba3bfa1df52ff54abac4c95a7b71703373319"
+    },
+    {
+      "path": "SEALED_ZIP_IDENTITY.json",
+      "bytes": 317,
+      "sha256": "5700e207f69a79f96c7606d2e4c9c66596b3aa8e5365528a53a71e984b8c31c2"
+    },
+    {
+      "path": "tone-sealed/REFERENCE_CURVE_DIFFERENCES.json",
+      "bytes": 15134,
+      "sha256": "45fe1e310b624d16336c25748f76ac22498ff2e586a60b80da7e79b8046e2464"
+    },
+    {
+      "path": "TONE_NATIVE_REFERENCES.json",
+      "bytes": 12219,
+      "sha256": "d4d11e4b09103e4f8dad608ce44b65cd516a8c173bb2133bb579ca242fd0ea5a"
+    },
+    {
+      "path": "WORKTREES_BEFORE.txt",
+      "bytes": 8659,
+      "sha256": "2c99a1224103964669752ce8a89a5d2f2ec0214d782e115552c0f1f61ce776d4"
+    }
+  ]
+}

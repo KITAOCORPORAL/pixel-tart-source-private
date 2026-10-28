@@ -1,0 +1,48 @@
+{
+  "productSha": "eeb5edae19870bb9da151c6c15164f381faf4136",
+  "counts": {
+    "Core": {
+      "Passed": 13,
+      "Failed": 0,
+      "NotExecuted": 0
+    },
+    "Wpf": {
+      "Passed": 23,
+      "Failed": 0,
+      "NotExecuted": 0
+    }
+  },
+  "runs": [
+    {
+      "label": "SEALED_CORE",
+      "path": "SEALED_CORE/run-20261028-132717-e518517e/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 13
+      },
+      "assemblySha256": "3517acc30bd5ef49ca28f78f6336346988d76045e4a3464fbaa86eddb3955ca3"
+    },
+    {
+      "label": "SEALED_WPF",
+      "path": "SEALED_WPF/run-20261028-132722-a6e00c0c/summary.json",
+      "status": "FAILED",
+      "counts": {
+        "Passed": 22,
+        "NotExecuted": 1
+      },
+      "assemblySha256": "130cefc9b916b74c3485ad14829692ff323b3afff1cd161309d5c28a44884cc9"
+    },
+    {
+      "label": "SEALED_INDEPENDENT",
+      "path": "SEALED_INDEPENDENT/run-20261028-132914-8ef589ac/summary.json",
+      "status": "PASSED",
+      "counts": {
+        "Passed": 1
+      },
+      "assemblySha256": "130cefc9b916b74c3485ad14829692ff323b3afff1cd161309d5c28a44884cc9"
+    }
+  ],
+  "scope": "Affected numerical/tone/canvas/film/full-shell only. First WPF stage strict NOT_RUN for independent method remains FAILED; separate new process executes method PASS, latest case dedupe only.",
+  "binding": "29 final published DLLs, no mock substituted for PNG/full document",
+  "nativePointerDpi": "NOT_RUN"
+}
