@@ -52,7 +52,18 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     if(!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
     // Gallery is a reduced render of the same frozen input/recipe as the large preview.
     // No CSS filtering, monitor transform or separate color-only approximation.
-    Editor.CopyCurrentLookTo([target]);var basis=BuildInstantDefinition(target,target.RawDefinition,version,false);
+    Editor.CopyCurrentLookTo([target]);ProfessionalRawDefinition basis;ProfessionalRawMaster? galleryMaster=null;
+    if(target.LinearRawMaster is{} raw&&target.RawDefinition is {SceneExposure:not null} currentRaw)
+    {
+     // Existing SceneExposure recipes cannot contain InstantFilm. Render their current
+     // production output first into a bounded gallery-only input; never rewrite the RAW recipe.
+     using var lease=StudioGlobalResources.RetainBuffer(raw.Image,(long)raw.Image.Rgb32.Length*4);
+     var input=InstantInputMode=="Original"?currentRaw with{LocalEdits=null,SceneExposure=null,InstantFilm=null,LightPrint=null}:currentRaw with{InstantFilm=null,LightPrint=null};
+     using var reduced=await RenderProfessionalPreviewAsync(raw,input,384,token,"PaperGallerySceneInput");
+     basis=InstantFilmJpegInput.Definition with{RenderedInputVersion=2};
+     galleryMaster=InstantFilmJpegInput.FromRendered(RawDisplayBitmapAdapter.ToBitmap(reduced.ToVisualRgb24(token)),target.SourceHash??target.ObservedSourceHash!,basis);
+    }
+    else basis=BuildInstantDefinition(target,target.RawDefinition,version,false);
     var recipes=PhotographerPapers.Select(choice=>
     {
      var profile=InstantFilmProfiles.Available.Single(x=>x.Id==choice.ProfileId);
@@ -60,7 +71,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
      var film=ApplyLightPrintFrame(new InstantFilmDefinition(true,recipe.Profile.LegacyId,profile.ChemicalGeneration,AlgorithmVersion:3){V3=recipe});
      return(choice,profile,film);
     }).ToArray();
-    var master=ReusableMaster(target,basis)??await DecodeProfessionalInputAsync(target.Path,basis,token);
+    var master=galleryMaster??ReusableMaster(target,basis)??await DecodeProfessionalInputAsync(target.Path,basis,token);
     using var owner=ReferenceEquals(master.Image,target.LinearRawMaster?.Image)?null:master.Image;
     using var pin=StudioGlobalResources.RetainBuffer(master.Image,(long)master.Image.Rgb32.Length*4);
     var images=new List<(PhotographerPaper,BitmapSource)>();
