@@ -1,0 +1,465 @@
+{
+  "synthetic": {
+    "status": "PASS",
+    "input": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        3.0,
+        0.0
+      ],
+      [
+        65535.0,
+        0.0,
+        40000.0
+      ],
+      [
+        11.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "matrix": [
+      [
+        1.0,
+        -0.5,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        2.0
+      ]
+    ],
+    "float": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        -0.5,
+        3.0,
+        0.0
+      ],
+      [
+        65535.0,
+        0.0,
+        80000.0
+      ],
+      [
+        10.5,
+        1.0,
+        0.0
+      ]
+    ],
+    "uint16": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        3,
+        0
+      ],
+      [
+        65535,
+        0,
+        65535
+      ],
+      [
+        10,
+        1,
+        0
+      ]
+    ]
+  },
+  "natural": {
+    "candidate": {
+      "version": "MatrixFloatOutputResearchV1",
+      "file": null,
+      "sha256": "dd923c658d376d62a9e3812bb6d069d29095bd0dfc848aa64eaf7294592d228d",
+      "domain": "linear LibRaw ProPhoto D65 matrix float output divided by 65535; can be negative or >1; no tone map; no product integration"
+    },
+    "probe": "MatrixComparisonV1",
+    "sourceSha256": "3A0C1672ABDA62CC26349C088CB87A268EF0E5B46B1F4CCC18C99EE936E447B5",
+    "dimensions": [
+      7378,
+      4924
+    ],
+    "coordinate": "x right, y down; unrotated raw processing; zero margins for this sample",
+    "matrix": [
+      [
+        0.888929009437561,
+        0.15570400655269623,
+        -0.04463598504662514
+      ],
+      [
+        0.024289149791002274,
+        1.3642277717590332,
+        -0.388514906167984
+      ],
+      [
+        0.029352998360991478,
+        -0.20289531350135803,
+        1.1735413074493408
+      ]
+    ],
+    "statistics": {
+      "negative": [
+        0,
+        0,
+        22
+      ],
+      "overflow": [
+        641,
+        940,
+        5046
+      ],
+      "fractional_in_range": [
+        36309218,
+        36303225,
+        36296716
+      ],
+      "predicted_vs_native_mismatch": [
+        0,
+        0,
+        0
+      ],
+      "float_vs_double_max_abs": [
+        0.007937498390674591,
+        0.010579511523246765,
+        0.006543196737766266
+      ],
+      "matrix_after_vs_output_mismatch": [
+        0,
+        0,
+        0
+      ],
+      "scale_predicted_vs_native_mismatch": 0,
+      "scale_above_65535": 4405,
+      "matrix_out_of_range_pixels": 6018,
+      "matrix_out_of_range_with_same_site_scale_clip": 2547,
+      "matrix_max_excess_codes": [
+        870.8125,
+        7556.796875,
+        2393.0859375
+      ],
+      "max_inrange_quantization_codes": [
+        0.9999847412109375,
+        0.999969482421875,
+        0.9999847412109375
+      ],
+      "cfa_at_or_above_metadata_white": 1085,
+      "cfa_matches_before_scale": 36329272
+    },
+    "examples": {
+      "fractional": {
+        "x": 0,
+        "y": 0,
+        "channel": 0,
+        "cfa_channel": 0,
+        "cfa_value": 78,
+        "cfa_at_metadata_white": false,
+        "scale_before": 78,
+        "scale_preclip_float": 2462.4384765625,
+        "scale_after": 2462,
+        "demosaic_rgb": [
+          2462,
+          3584,
+          5457
+        ],
+        "matrix_float": [
+          2503.0078125,
+          2829.066650390625,
+          5749.10546875
+        ],
+        "matrix_uint16": [
+          2503,
+          2829,
+          5749
+        ],
+        "output_uint16": [
+          2503,
+          2829,
+          5749
+        ],
+        "neighborhood_saturation": "unknown; demosaic depends on neighborhood"
+      },
+      "overflow": {
+        "x": 6637,
+        "y": 83,
+        "channel": 2,
+        "cfa_channel": 2,
+        "cfa_value": 3175,
+        "cfa_at_metadata_white": false,
+        "scale_before": 3175,
+        "scale_preclip_float": 69865.9921875,
+        "scale_after": 65535,
+        "demosaic_rgb": [
+          65535,
+          63118,
+          65535
+        ],
+        "matrix_float": [
+          65158.46875,
+          62237.79296875,
+          66025.3359375
+        ],
+        "matrix_uint16": [
+          65158,
+          62237,
+          65535
+        ],
+        "output_uint16": [
+          65158,
+          62237,
+          65535
+        ],
+        "neighborhood_saturation": "unknown; demosaic depends on neighborhood"
+      },
+      "negative": {
+        "x": 1600,
+        "y": 2328,
+        "channel": 2,
+        "cfa_channel": 0,
+        "cfa_value": 128,
+        "cfa_at_metadata_white": false,
+        "scale_before": 128,
+        "scale_preclip_float": 4040.9248046875,
+        "scale_after": 4040,
+        "demosaic_rgb": [
+          4040,
+          928,
+          27
+        ],
+        "matrix_float": [
+          3734.5615234375,
+          1353.6417236328125,
+          -38.01512145996094
+        ],
+        "matrix_uint16": [
+          3734,
+          1353,
+          0
+        ],
+        "output_uint16": [
+          3734,
+          1353,
+          0
+        ],
+        "neighborhood_saturation": "unknown; demosaic depends on neighborhood"
+      }
+    },
+    "localBufferSha256": {
+      "cfa.u16": "84c874e0ddb3fbc7f0a7c3d34b0168e01ac5727b947c05ff67dd0e8bf776789b",
+      "matrix_after.u16": "5c6046710e6e3b4550fc746725394e41f378bf0abcfa5ff58e6d7e0d3c2685b3",
+      "matrix_before.u16": "844c7721982cb397da92d567cedc389b9380a4d6193bd2a02a897445e308f3e0",
+      "output.u16": "c4e7d3bb17195d0557b4616a2a00a5bf69f9daaa17cfab4d73da0972a167040c",
+      "scale_after.u16": "950a8ac8509204d2e47b3b23e22a647e4f3c0745a773901e312899bce2ec8d84",
+      "scale_before.u16": "363a6a85a811c6c672dde5621524f4522c0f7ca0c22feffdefb8f123af055ac8"
+    },
+    "productBaselineSampleMismatches": 0,
+    "reference": {
+      "name": "NumPy",
+      "version": "2.5.0",
+      "method": "float64 matrix calculation on the same float32 coefficients and demosaic buffer; independent arithmetic check, not independent RAW processing",
+      "matureRawEngine": "NOT_RUN"
+    },
+    "stageObservations": [
+      {
+        "name": "scale_before",
+        "width": 7378,
+        "height": 4924,
+        "layout": "uint16 RG B G2, interleaved",
+        "Black": 0,
+        "Maximum": 4095,
+        "cblack": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "PreMul": [
+          2.099034,
+          0.9281332,
+          1.0966642,
+          0
+        ],
+        "RgbCam": [
+          1.7815799,
+          -0.61339307,
+          -0.1681868,
+          0,
+          -0.17356461,
+          1.6453252,
+          -0.4717606,
+          0,
+          0.022766983,
+          -0.44616398,
+          1.4233971,
+          0
+        ]
+      },
+      {
+        "name": "scale_after",
+        "width": 7378,
+        "height": 4924,
+        "layout": "uint16 RG B G2, interleaved",
+        "Black": 0,
+        "Maximum": 4095,
+        "cblack": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "PreMul": [
+          1.9726562,
+          1,
+          1.375,
+          1
+        ],
+        "RgbCam": [
+          1.7815799,
+          -0.61339307,
+          -0.1681868,
+          0,
+          -0.17356461,
+          1.6453252,
+          -0.4717606,
+          0,
+          0.022766983,
+          -0.44616398,
+          1.4233971,
+          0
+        ]
+      },
+      {
+        "name": "matrix_before",
+        "width": 7378,
+        "height": 4924,
+        "layout": "uint16 RG B G2, interleaved",
+        "Black": 0,
+        "Maximum": 4095,
+        "cblack": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "PreMul": [
+          1.9726562,
+          1,
+          1.375,
+          1
+        ],
+        "RgbCam": [
+          1.7815799,
+          -0.61339307,
+          -0.1681868,
+          0,
+          -0.17356461,
+          1.6453252,
+          -0.4717606,
+          0,
+          0.022766983,
+          -0.44616398,
+          1.4233971,
+          0
+        ]
+      },
+      {
+        "name": "matrix_after",
+        "width": 7378,
+        "height": 4924,
+        "layout": "uint16 RG B G2, interleaved",
+        "Black": 0,
+        "Maximum": 4095,
+        "cblack": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "PreMul": [
+          1.9726562,
+          1,
+          1.375,
+          1
+        ],
+        "RgbCam": [
+          1.7815799,
+          -0.61339307,
+          -0.1681868,
+          0,
+          -0.17356461,
+          1.6453252,
+          -0.4717606,
+          0,
+          0.022766983,
+          -0.44616398,
+          1.4233971,
+          0
+        ]
+      }
+    ],
+    "rawMetadata": {
+      "size": {
+        "RawHeight": 4924,
+        "RawWidth": 7424,
+        "Height": 4924,
+        "Width": 7378,
+        "TopMargin": 0,
+        "LeftMargin": 0,
+        "IHeight": 4924,
+        "IWidth": 7378,
+        "RawPitch": 14848,
+        "Flip": 0
+      },
+      "filters": 2492765332,
+      "black": 0,
+      "white": 4095,
+      "cblack": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "cameraWb": [
+        505,
+        256,
+        352,
+        256
+      ],
+      "scaleMultipliers": [
+        31.569725036621094,
+        16.003662109375,
+        22.005037307739258,
+        16.003662109375
+      ]
+    },
+    "scientificLimits": "Metadata white is an operational threshold, not independently verified sensor saturation; no inference from a single CFA pixel about demosaic neighborhood. Double reference uses same coefficients and buffer, not an independent RAW engine."
+  }
+}
