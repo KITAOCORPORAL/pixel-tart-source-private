@@ -17,6 +17,13 @@ public sealed class StudioNodeGraphView:FrameworkElement
     public event Action? LayoutChanged;
     public Func<Guid,ImageSource?>? Thumbnail{get;set;}
     public Func<Guid,ImageSource?>? MaskThumbnail{get;set;}
+    public Func<DevelopedStageProjection?>? DevelopedStage{get;set;}
+    public Func<ImageSource?>? DevelopedThumbnail{get;set;}
+    public event Action<DevelopedStageProjection>? StageSelected;
+    private bool stageSelected;
+    private Rect StageRect(){var positions=editor.GraphView.Positions;var x=positions.Max(p=>p.X)+160;var y=positions.Min(p=>p.Y);return new Rect(x,y,164,88);}
+    internal DevelopedStageProjection? Stage=>DevelopedStage?.Invoke();
+    internal bool SelectStageAt(Point world){if(Stage is not{} stage||!StageRect().Contains(world))return false;stageSelected=true;StageSelected?.Invoke(stage);InvalidateVisual();return true;}
     public double Zoom=>zoom;public Point Pan=>pan;
     public StudioNodeGraphView(TetherReferenceModeViewModel value)
     {
@@ -30,7 +37,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
     public void Fit()
     {
         var ps=editor.GraphView.Positions;if(ps.Count==0)return;
-        var l=ps.Min(p=>p.X)-20;var t=ps.Min(p=>p.Y)-20;var w=ps.Max(p=>p.X)+140-l;var h=ps.Max(p=>p.Y)+108-t;
+        var l=ps.Min(p=>p.X)-20;var t=ps.Min(p=>p.Y)-20;var w=ps.Max(p=>p.X)+(Stage is null?140:344)-l;var h=ps.Max(p=>p.Y)+108-t;
         zoom=Math.Clamp(Math.Min(Math.Max(1,ActualWidth)/w,Math.Max(1,ActualHeight)/h),.25,1.4);pan=new(-l*zoom,-t*zoom);LayoutChanged?.Invoke();InvalidateVisual();
     }
     private Point World(Point p)=>new((p.X-pan.X)/zoom,(p.Y-pan.Y)/zoom);
@@ -68,6 +75,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
             if(p.NodeId!=StudioNodeGraph.Output)d.DrawEllipse(Color("#9CC4BA"),new Pen(Color("#17171A"),1),Port(p,true),4,4);
             d.Pop();
         }
+        if(Stage is{} stage){var rect=StageRect();d.DrawRoundedRectangle(Color("#25272A"),new Pen(stageSelected?Brushes.White:Color("#7FA89F"),stageSelected?2:1),rect,3,3);d.DrawRectangle(Color("#7FA89F"),null,new Rect(rect.X+1,rect.Y+1,rect.Width-2,3));Text(d,"▣ 即时胶片 · 系统锁定",new(rect.X+6,rect.Y+6),10,Color("#9CC4BA"));var image=DevelopedThumbnail?.Invoke();if(image is not null)DrawImageFit(d,image,new Rect(rect.X+6,rect.Y+25,65,40));Text(d,"已显影 · "+stage.FrameId,new(rect.X+75,rect.Y+33),9);Text(d,"冻结阶段 · 只读",new(rect.X+6,rect.Y+69),10);}
         d.Pop();
     }
     private static void DrawImageFit(DrawingContext d,ImageSource image,Rect box)
@@ -87,7 +95,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
     }
     private void Down(object sender,MouseButtonEventArgs e)
     {
-        Focus();var w=World(e.GetPosition(this));var graph=editor.GraphView;var hit=Hit(w);
+        Focus();var w=World(e.GetPosition(this));if(Stage is not null&&StageRect().Contains(w)){if(e.ChangedButton==MouseButton.Left)SelectStageAt(w);else ToolTip="显影阶段由冻结配方执行，不可删除、复制或接线。";e.Handled=true;return;}stageSelected=false;var graph=editor.GraphView;var hit=Hit(w);
         if(e.ChangedButton==MouseButton.Right){if(hit is not null)editor.SelectedAdjustmentNode=editor.AdjustmentNodes.FirstOrDefault(n=>n.Id==hit.NodeId);OpenMenu(e.GetPosition(this),EdgeAt(w));e.Handled=true;return;}
         if(e.ChangedButton!=MouseButton.Left&&e.ChangedButton!=MouseButton.Middle)return;
         before=graph;start=e.GetPosition(this);moved=false;
@@ -130,6 +138,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
     private void Keys(object sender,KeyEventArgs e)
     {
         if(Keyboard.FocusedElement is System.Windows.Controls.Primitives.TextBoxBase or PasswordBox)return;
+        if(stageSelected){e.Handled=true;return;}
         if(Keyboard.Modifiers==ModifierKeys.Control&&e.Key==Key.C){editor.CopyGraphSettings();e.Handled=true;return;}
         if(Keyboard.Modifiers==ModifierKeys.Control&&e.Key==Key.V){editor.PasteGraphSettings();e.Handled=true;return;}
         if(Keyboard.Modifiers==ModifierKeys.Alt&&e.SystemKey==Key.O){ToolTip="外部反向蒙版节点尚未实现";e.Handled=true;return;}
@@ -140,7 +149,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
         else if(Keyboard.Modifiers==ModifierKeys.Control&&e.Key==Key.D){editor.ToggleAdjustmentNodeCommand.Execute(null);e.Handled=true;}
     }
     public void ExecuteGraphKey(Key key,ModifierKeys modifiers)
-    {if(key==Key.F2)Rename();else if(key==Key.Delete)editor.DeleteGraphNode();else if(key==Key.D&&modifiers==ModifierKeys.Control)editor.ToggleAdjustmentNodeCommand.Execute(null);}
+    {if(stageSelected)return;if(key==Key.F2)Rename();else if(key==Key.Delete)editor.DeleteGraphNode();else if(key==Key.D&&modifiers==ModifierKeys.Control)editor.ToggleAdjustmentNodeCommand.Execute(null);}
     public void Rename()
     {
         if(editor.SelectedAdjustmentNode is not{IsLocked:false} node||Parent is not Panel host)return;

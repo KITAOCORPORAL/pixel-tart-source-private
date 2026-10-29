@@ -11,12 +11,20 @@ public partial class PhotoGradePageView
     private void AttachR54Graph()
     {
         if(model is null)return;
-        var owner=model;r54Graph=new(owner.Editor){Thumbnail=id=>owner.LayerThumbnailContext?.Outputs.GetValueOrDefault(id),MaskThumbnail=id=>owner.LayerThumbnailContext?.Masks.GetValueOrDefault(id)};
+        var owner=model;r54Graph=new(owner.Editor){Thumbnail=id=>owner.LayerThumbnailContext?.Outputs.GetValueOrDefault(id),MaskThumbnail=id=>owner.LayerThumbnailContext?.Masks.GetValueOrDefault(id),DevelopedStage=()=>owner.IsLightPrintLocked?RAWSelectionAssistant.Core.Services.Projects.DevelopedStageProjection.FromCommitted(owner.ActiveTarget?.ActiveEditVersionId,owner.ActiveTarget?.RawDefinition):null,DevelopedThumbnail=()=>owner.Editor.MatchedImage};
+        r54Graph.StageSelected+=stage=>ShowDevelopedStage(stage);
         R53NodeContent.Children.Clear();R53NodeContent.Children.Add(r54Graph);
         r54DefaultSized=false;var layout=owner.Layout.Normalize();r54GraphHeight=layout.R54GraphHeight;r53NodesCollapsed=layout.R54GraphCollapsed??(ActualWidth<=1366);
         r54Graph.Restore(new(layout.R54GraphPanX,layout.R54GraphPanY),layout.R54GraphZoom);
         r54Graph.LayoutChanged+=()=>{R54GraphZoomLabel.Text=$"{r54Graph.Zoom:P0}";SaveR54GraphLayout();};
         r54Graph.RequestMask+=()=>{R53Brush(this,new());OpenR53Panel();};
+    }
+    private void ShowDevelopedStage(RAWSelectionAssistant.Core.Services.Projects.DevelopedStageProjection stage)
+    {
+        EditModes.SelectedIndex=0;OpenR53Panel();
+        var box=new TextBox{Text=stage.FrozenRecipeJson,IsReadOnly=true,TextWrapping=TextWrapping.Wrap,VerticalScrollBarVisibility=ScrollBarVisibility.Auto,Height=240,ToolTip="冻结配方只读；执行由现有显影管线负责。"};
+        var panel=new StackPanel{Margin=new Thickness(4)};panel.Children.Add(new TextBlock{Text="即时胶片 · 已显影 · 系统锁定",TextWrapping=TextWrapping.Wrap});panel.Children.Add(new TextBlock{Text=$"变体 {stage.VariantId}\n来源 {stage.SourceVariantId?.ToString()??"原图"}\n配方版本 {stage.RecipeVersion} / {stage.RecipeSha256}",TextWrapping=TextWrapping.Wrap});panel.Children.Add(box);
+        var dialog=new Window{Title="光镜 · 冻结显影配方",Owner=Window.GetWindow(this),Width=560,Height=420,Content=panel,Background=new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(29,29,32)),ShowInTaskbar=false};dialog.Show();
     }
     private void SaveR54GraphLayout()
     {
