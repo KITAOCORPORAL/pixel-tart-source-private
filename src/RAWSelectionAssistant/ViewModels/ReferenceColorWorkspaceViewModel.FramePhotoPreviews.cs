@@ -6,12 +6,17 @@ public sealed partial class ReferenceColorWorkspaceViewModel
 {
     public IReadOnlyDictionary<string,BitmapSource> FramePhotoPreviews {get;private set;}=new Dictionary<string,BitmapSource>();
     private CancellationTokenSource? framePhotoCancellation;private long framePhotoRevision;
+    private BitmapSource? framePhotoSource;private Guid? framePhotoTarget,framePhotoVersion;
     internal Task FramePhotoPreviewWork{get;private set;}=Task.CompletedTask;
     internal void QueueFramePhotoPreviews()
     {
-        framePhotoCancellation?.Cancel();var revision=++framePhotoRevision;var target=ActiveTarget;var version=target?.ActiveEditVersionId;var source=Editor.MatchedImage??Editor.SourceImage;
-        FramePhotoPreviews=new Dictionary<string,BitmapSource>();OnPropertyChanged(nameof(FramePhotoPreviews));
-        if(_disposed||target is null||source is null||IsLoading||IsExporting||IsInstantGenerating)return;
+        var target=ActiveTarget;var version=target?.ActiveEditVersionId;var source=Editor.MatchedImage??Editor.SourceImage;
+        if(_disposed)return;
+        if(target is null||source is null){CancelFramePhotoPreviews();FramePhotoPreviews=new Dictionary<string,BitmapSource>();OnPropertyChanged(nameof(FramePhotoPreviews));return;}
+        if(IsLoading||IsExporting||IsInstantGenerating)return;
+        if(framePhotoTarget==target.Id&&framePhotoVersion==version&&ReferenceEquals(framePhotoSource,source)&&(framePhotoCancellation is not null||FramePhotoPreviews.Count==LightPrintFrames.Available.Count))return;
+        framePhotoCancellation?.Cancel();var revision=++framePhotoRevision;framePhotoTarget=target.Id;framePhotoVersion=version;framePhotoSource=source;
+        if(FramePhotoPreviews.Count>0){FramePhotoPreviews=new Dictionary<string,BitmapSource>();OnPropertyChanged(nameof(FramePhotoPreviews));}
         var cts=new CancellationTokenSource();framePhotoCancellation=cts;FramePhotoPreviewWork=Build();
         async Task Build()
         {
@@ -45,5 +50,5 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             finally{if(ReferenceEquals(framePhotoCancellation,cts))framePhotoCancellation=null;cts.Dispose();}
         }
     }
-    internal void CancelFramePhotoPreviews(){framePhotoRevision++;var c=framePhotoCancellation;framePhotoCancellation=null;c?.Cancel();}
+    internal void CancelFramePhotoPreviews(){framePhotoRevision++;framePhotoSource=null;framePhotoTarget=framePhotoVersion=null;var c=framePhotoCancellation;framePhotoCancellation=null;c?.Cancel();}
 }

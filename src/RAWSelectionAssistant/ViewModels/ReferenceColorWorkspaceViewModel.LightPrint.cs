@@ -37,6 +37,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
 
   PropertyChanged+=(_,e)=>
   {
+   if(e.PropertyName is nameof(IsLoading) or nameof(IsInstantGenerating) or nameof(IsExporting) && !IsLoading&&!IsInstantGenerating&&!IsExporting)QueueFramePhotoPreviews();
    if(_lightPrintEnabled&&e.PropertyName==nameof(InstantCameraAnimation))
    {
     try{var path=System.IO.Path.Combine(RAWSelectionAssistant.Core.Utilities.AppDataPaths.Root,"lightprint-camera.json");Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);File.WriteAllText(path,System.Text.Json.JsonSerializer.Serialize(new{Enabled=InstantCameraAnimation}));}catch(IOException){}
