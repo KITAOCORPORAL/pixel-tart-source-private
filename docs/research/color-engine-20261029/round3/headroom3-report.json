@@ -1,0 +1,159 @@
+{
+  "recipe": {
+    "version": "WbHeadroomResearchV1",
+    "mode": "headroom",
+    "defaultEnabled": false,
+    "sourceSha256": "3A0C1672ABDA62CC26349C088CB87A268EF0E5B46B1F4CCC18C99EE936E447B5",
+    "backendHash": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+    "width": 7378,
+    "height": 4924,
+    "domain": "LibRaw ProPhoto D65 linear float32, nominal 0..1, negatives and >1 retained",
+    "exposure": -2,
+    "rawRecovery": false,
+    "pixelHash": "482DC75F505EF9C3CEBC9460A9A6A821F1748E8AB17461D4C745ADA6E9F1F45A"
+  },
+  "observation": {
+    "nativePath": "N:\\pixart\\guangjing-color-engine-20261029\\tools\\color-research-decoder\\bin\\Debug\\net10.0\\runtimes\\win-x64\\native\\raw_r.dll",
+    "HighlightMode": 1,
+    "scaledWb": [
+      1,
+      0.5069307,
+      0.6970297,
+      0.5069307
+    ],
+    "restore": 1.97265625,
+    "matrix": [
+      0.888929,
+      0.155704,
+      -0.044635985,
+      0.02428915,
+      1.3642278,
+      -0.3885149,
+      0.029352998,
+      -0.20289531,
+      1.1735413
+    ],
+    "cfaAtUint16Maximum": 0,
+    "conversionMs": 447.8534,
+    "sampledCamera": [],
+    "actualOptions": {
+      "Greybox": {
+        "Location": {
+          "IsEmpty": true,
+          "X": 0,
+          "Y": 0
+        },
+        "Size": {
+          "IsEmpty": false,
+          "Width": -1,
+          "Height": -1
+        },
+        "X": 0,
+        "Y": 0,
+        "Width": -1,
+        "Height": -1,
+        "Left": 0,
+        "Top": 0,
+        "Right": -1,
+        "Bottom": -1,
+        "IsEmpty": false
+      },
+      "Cropbox": {
+        "Location": {
+          "IsEmpty": true,
+          "X": 0,
+          "Y": 0
+        },
+        "Size": {
+          "IsEmpty": false,
+          "Width": -1,
+          "Height": -1
+        },
+        "X": 0,
+        "Y": 0,
+        "Width": -1,
+        "Height": -1,
+        "Left": 0,
+        "Top": 0,
+        "Right": -1,
+        "Bottom": -1,
+        "IsEmpty": false
+      },
+      "Aber": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "Gamma": [
+        1,
+        1,
+        0.9999999999999964,
+        0.9999999999999964,
+        0,
+        1
+      ],
+      "UserMultipliers": [
+        505,
+        256,
+        352,
+        256
+      ],
+      "Brightness": 1,
+      "Threshold": 0,
+      "HalfSize": false,
+      "FourColorRgb": false,
+      "HighlightMode": 1,
+      "UseAutoWb": false,
+      "UseCameraWb": false,
+      "UseCameraMatrix": true,
+      "OutputColor": 4,
+      "OutputProfile": null,
+      "CameraProfile": null,
+      "BadPixels": null,
+      "DarkFrame": null,
+      "OutputBps": 16,
+      "OutputTiff": false,
+      "OutputFlags": 0,
+      "UserFlip": 0,
+      "UserQual": 3,
+      "UserBlack": -1,
+      "UserCBlack": [
+        -1000001,
+        -1000001,
+        -1000001,
+        -1000001
+      ],
+      "UserSaturation": -1,
+      "MedianPasses": 0,
+      "AutoBrightThr": 0.01,
+      "AdjustMaximumThr": 0,
+      "NoAutoBright": true,
+      "UseFujiRotate": true,
+      "GreenMatching": 0,
+      "DcbIterations": 0,
+      "DcbEnhanceFl": 0,
+      "FbddNoiserd": 0,
+      "ExpCorrec": false,
+      "ExpShift": 1,
+      "ExpPreser": 0,
+      "AutoScale": true,
+      "Interpolation": true
+    },
+    "notes": "uint16 demosaic retained; float matrix computed inside progress callback; native matrix still runs afterward; no stage disk or second decode",
+    "sampledCameraOmittedFromGit": "8870 observed values retained only locally; comparison summary included"
+  },
+  "min": -0.022893542,
+  "max": 1.8697345,
+  "negativeSamples": 23,
+  "aboveOneSamples": 19187,
+  "decodeMs": 1636.0781,
+  "peakAtDecode": 835399680,
+  "exportMs": 7014.4306,
+  "previewExactAfterReopen": true,
+  "exportPixelHash": "D94FA927BAA0059657647FE79D447C7C6E2938FAA0E47934E0578C63A4FAEE45",
+  "exportReadbackExact": true,
+  "outputIccSha256": "FBFC111BD3180C49C12952B64A8B8CBBFD3233AE216042A269868FCBC504F88C",
+  "peakWholeProcess": 1372454912,
+  "limits": "Research variant path only; actual product area preview and actual FillRgb16Row invoked via explicit research adapter. Export explicitly display-mapped sRGB16, not float master. No product recipe registration."
+}

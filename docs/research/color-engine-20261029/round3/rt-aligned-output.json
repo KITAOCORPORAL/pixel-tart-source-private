@@ -1,0 +1,24 @@
+{
+  "producer": "RawTherapee5.11",
+  "sourceCommit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+  "dimensions": [
+    7378,
+    4924
+  ],
+  "bitsPerSample": [
+    16,
+    16,
+    16
+  ],
+  "iccSha256": "17aebbdf8a88c39b07eb881dcd824eb1cf9828914d5e74a7324d7a31045e8871",
+  "iccDescription": "RTv4_sRGB",
+  "parametersReadback": "rt-resolved.pp3",
+  "differencesUnresolved": [
+    "raw decoding implementation",
+    "camera WB gains and normalization",
+    "camera matrix and chromatic adaptation",
+    "AHD implementation",
+    "output sRGB rendering versus product fixed shoulder/gamut"
+  ],
+  "finalPixelDifferenceIsMatrixProof": false
+}

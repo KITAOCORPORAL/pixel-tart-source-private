@@ -20,31 +20,16 @@ def selftest():
     m=np.array([[1,-.5,0],[0,1,0],[0,0,2]],np.float32)
     x=np.array([[0,0,0],[1,3,0],[65535,0,40000],[11,1,0]],np.float32)
     y=calc(x,m); q=np.clip(np.trunc(y),0,65535).astype(np.uint16)
-    assert np.array_equal(q,np.array([[0,0,0],[0,3,0],[65535,0,65535],[10,1,0]],np.uint16))
-    assert y[1,0]==-.5 and y[2,2]==80000 and y[3,0]==10.5
+    if not np.array_equal(q,np.array([[0,0,0],[0,3,0],[65535,0,65535],[10,1,0]],np.uint16)): raise ValueError('synthetic matrix failed')
+    if not (y[1,0]==-.5 and y[2,2]==80000 and y[3,0]==10.5): raise ValueError('synthetic limits failed')
     # Original LibRaw scale loop converts the float product to int before CLIP.
-    assert np.array_equal(np.clip(np.trunc(np.array([0,10,4000],np.float32)*np.float32(20)),0,65535),[0,200,65535])
+    if not np.array_equal(np.clip(np.trunc(np.array([0,10,4000],np.float32)*np.float32(20)),0,65535),[0,200,65535]): raise ValueError('synthetic scale failed')
     return {"status":"PASS","input":x.tolist(),"matrix":m.tolist(),"float":y.tolist(),"uint16":q.tolist()}
 
-def sha(p):
-    h=hashlib.sha256()
-    with p.open('rb') as f:
-        while a:=f.read(4194304):h.update(a)
-    return h.hexdigest()
+from stage_validation import sha, validate_stage
 
 def analyze(root, candidate_path=None):
-    meta=json.loads((root/'metadata.json').read_text(encoding='utf-8-sig')); sz=meta['sizes'];h,w=sz['IHeight'],sz['IWidth'];n=h*w
-    if meta.get('manifestVersion')!='StageManifestV2' or meta.get('productBaselineSampleMismatches')!=0 or not meta.get('sourceUnchanged'):raise ValueError('Unverified stage manifest')
-    if meta.get('nativeHash')!='F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9' or meta.get('managedHash')!='6DF698647C79DF05E754072ED393A02315D780AF7287C455D765A767DF93D4A3' or meta.get('architecture')!='X64' or meta.get('sourceSha256') not in ('3A0C1672ABDA62CC26349C088CB87A268EF0E5B46B1F4CCC18C99EE936E447B5','593E1B0EE73EF7E699D73465E3BD8222AD0ED79BEB69E9265E440756D4B50A1A'):raise ValueError('Untrusted decoder or source')
-    expected={'cfa.u16':sz['RawHeight']*sz['RawPitch'],**{x+'.u16':h*w*8 for x in ['scale_before','scale_after','matrix_before','matrix_after']},'output.u16':h*w*6}
-    files=meta['files']
-    if len(files)!=len(expected) or {x['name'] for x in files}!=set(expected):raise ValueError('Missing or duplicate manifest entries')
-    if len(meta['stages'])!=4 or {s['name'] for s in meta['stages']}!={'scale_before','scale_after','matrix_before','matrix_after'}:raise ValueError('Stage names invalid')
-    for f in files:
-        path=root/f['name']
-        if f['length']!=expected[f['name']] or path.stat().st_size!=f['length'] or sha(path).lower()!=f['sha256'].lower():raise ValueError('Stage length/hash mismatch: '+f['name'])
-    if any(s['width']!=w or s['height']!=h for s in meta['stages']):raise ValueError('Stage dimensions mismatch')
-    if (sz['Flip'],sz['TopMargin'],sz['LeftMargin'],sz['RawPitch'],meta['cblack']) != (0,0,0,sz['RawWidth']*2,[0,0,0,0,0,0]):raise ValueError('Only observed simple D800 layout supported')
+    meta=validate_stage(root); sz=meta['sizes'];h,w=sz['IHeight'],sz['IWidth'];n=h*w
     stages={x['name']:x for x in meta['stages']}; rgb=np.array(stages['matrix_before']['RgbCam'],np.float32).reshape(3,4)[:,:3];m=matrix(rgb)
     a=np.memmap(root/'matrix_before.u16',dtype='<u2',mode='r',shape=(n,4));b=np.memmap(root/'matrix_after.u16',dtype='<u2',mode='r',shape=(n,4));o=np.memmap(root/'output.u16',dtype='<u2',mode='r',shape=(n,3));s0=np.memmap(root/'scale_before.u16',dtype='<u2',mode='r',shape=(h,w,4));s1=np.memmap(root/'scale_after.u16',dtype='<u2',mode='r',shape=(h,w,4));raw=np.memmap(root/'cfa.u16',dtype='<u2',mode='r',shape=(sz['RawHeight'],sz['RawWidth']))
     gain=np.array(stages['scale_after']['PreMul'],np.float32);scale=np.array([np.float32(float(g)*65535/meta['Maximum']) for g in gain]); filters=meta['filters']; candidate_hash=hashlib.sha256();
@@ -69,4 +54,3 @@ if __name__=='__main__':
         if len(sys.argv) not in (2,3):raise SystemExit('Usage: analyze.py [stage_directory] [new_float_output_path]')
         result['natural']=analyze(Path(sys.argv[1]),Path(sys.argv[2]) if len(sys.argv)==3 else None)
     print(json.dumps(result,indent=2,allow_nan=False))
-

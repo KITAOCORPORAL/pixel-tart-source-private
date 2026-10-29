@@ -1,0 +1,21 @@
+{
+  "sameSessionGrainHashes": [
+    "47af822fdc1f56d3de652c18c1f81723838a2f79083a1e1453ae58ca52d5d4af",
+    "29f1a5e3b4f5269b75ee4b4ed73133865546fd4144b61dcbd83ef9f1b7c69025",
+    "9307dcf2f5ac4d862b9b57fd19813190930ac927e2a95194f17b6e67b781dd44"
+  ],
+  "sameSessionExact": false,
+  "freshSessionSeedNote": "Each Pipeline starts from same rng_state constant; repeated new sessions may repeat initial realization. C ABI has no arbitrary grain seed setter.",
+  "firstSeedStripe1": {
+    "changedChannels": 0,
+    "maxU16": 0
+  },
+  "firstSeedStripe7": {
+    "changedChannels": 0,
+    "maxU16": 0
+  },
+  "firstSeedStripe17": {
+    "changedChannels": 0,
+    "maxU16": 0
+  }
+}

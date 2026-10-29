@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "sampledNaturalCoordinates": 10004,
+  "cases": 40021,
+  "channelsCompared": 120063,
+  "maxAbsoluteError": 1.2906342661267445e-15,
+  "meanAbsoluteError": 2.64395258618618e-17,
+  "tolerance": 1e-12,
+  "limitation": "sampled coordinate-by-coordinate comparison, not all 36M pixels; no export/reopen validation",
+  "ev": [
+    0,
+    -2
+  ],
+  "product": "ProfessionalRawPipeline.ApplyExposure and Display"
+}

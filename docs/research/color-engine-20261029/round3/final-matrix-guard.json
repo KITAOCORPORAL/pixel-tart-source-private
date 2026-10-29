@@ -1,0 +1,25 @@
+{
+  "recipe": {
+    "version": "MatrixDecodeResearchV1",
+    "mode": "matrix",
+    "defaultEnabled": false,
+    "sourceSha256": "3A0C1672ABDA62CC26349C088CB87A268EF0E5B46B1F4CCC18C99EE936E447B5",
+    "backendHash": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+    "width": 7378,
+    "height": 4924,
+    "domain": "LibRaw ProPhoto D65 linear float32, nominal 0..1, negatives and \u003E1 retained",
+    "exposure": -2,
+    "rawRecovery": false,
+    "pixelHash": "DD923C658D376D62A9E3812BB6D069D29095BD0DFC848AA64EAF7294592D228D"
+  },
+  "researchAssemblyHash": "578E71B8DFBDF4EBDB1A552A43B99FD253AC16B6593CB4E3ED358F4879028DED",
+  "decodeMs": 1734.7519,
+  "peakAtDecode": 836939776,
+  "min": -0.0037687772,
+  "max": 1.1153094,
+  "negativeSamples": 22,
+  "aboveOneSamples": 6627,
+  "hashWork": "source hash once before timer and once inside each measured decode",
+  "stageDiskWrites": false,
+  "secondDecode": false
+}

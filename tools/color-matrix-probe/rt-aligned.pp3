@@ -1,0 +1,60 @@
+[Version]
+AppVersion=5.11
+Version=352
+[Exposure]
+Auto=false
+Compensation=0
+Brightness=0
+Contrast=0
+Saturation=0
+Black=0
+HighlightCompr=0
+ShadowCompr=0
+HistogramMatching=false
+Curve=0;
+Curve2=0;
+ClampOOG=false
+[HLRecovery]
+Enabled=false
+[White Balance]
+Enabled=true
+Setting=Camera
+Equal=1
+[RAW]
+CA=false
+HotPixelFilter=false
+DeadPixelFilter=false
+[RAW Bayer]
+Method=ahd
+Border=0
+CcSteps=0
+GreenEqThreshold=0
+[Color Management]
+InputProfile=(camera)
+WorkingProfile=ProPhoto
+OutputProfile=RTv4_sRGB
+ToneCurve=false
+ApplyLookTable=false
+ApplyBaselineExposureOffset=false
+ApplyHueSatMap=false
+[LensProfile]
+LcMode=none
+UseDistortion=false
+UseVignette=false
+UseCA=false
+[Sharpening]
+Enabled=false
+[PostDemosaicSharpening]
+Enabled=false
+[Defringing]
+Enabled=false
+[Directional Pyramid Denoising]
+Enabled=false
+[Impulse Denoising]
+Enabled=false
+[Vibrance]
+Enabled=false
+[Film Simulation]
+Enabled=false
+[RGB Curves]
+Enabled=false

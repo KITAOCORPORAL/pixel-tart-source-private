@@ -1,0 +1,25 @@
+{
+  "recipe": {
+    "version": "WbHeadroomResearchV1",
+    "mode": "headroom",
+    "defaultEnabled": false,
+    "sourceSha256": "3A0C1672ABDA62CC26349C088CB87A268EF0E5B46B1F4CCC18C99EE936E447B5",
+    "backendHash": "F500C0732FEB21B188D5B52CEA05FD824D5B3C8016EB2CA68D8312ACC9F914B9",
+    "width": 7378,
+    "height": 4924,
+    "domain": "LibRaw ProPhoto D65 linear float32, nominal 0..1, negatives and \u003E1 retained",
+    "exposure": -2,
+    "rawRecovery": false,
+    "pixelHash": "482DC75F505EF9C3CEBC9460A9A6A821F1748E8AB17461D4C745ADA6E9F1F45A"
+  },
+  "researchAssemblyHash": "578E71B8DFBDF4EBDB1A552A43B99FD253AC16B6593CB4E3ED358F4879028DED",
+  "decodeMs": 1706.9468,
+  "peakAtDecode": 837197824,
+  "min": -0.022893542,
+  "max": 1.8697345,
+  "negativeSamples": 23,
+  "aboveOneSamples": 19187,
+  "hashWork": "source hash once before timer and once inside each measured decode",
+  "stageDiskWrites": false,
+  "secondDecode": false
+}

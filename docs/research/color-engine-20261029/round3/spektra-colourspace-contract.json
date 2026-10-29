@@ -1,0 +1,70 @@
+{
+  "colour/cs/sRGB/primaries": [
+    0.64,
+    0.33,
+    0.3,
+    0.6,
+    0.15,
+    0.06
+  ],
+  "colour/cs/sRGB/whitepoint": [
+    0.3127,
+    0.329
+  ],
+  "colour/cs/sRGB/matrix_RGB_to_XYZ": [
+    0.4124,
+    0.3576,
+    0.1805,
+    0.2126,
+    0.7152,
+    0.0722,
+    0.0193,
+    0.1192,
+    0.9505
+  ],
+  "colour/cs/sRGB/matrix_XYZ_to_RGB": [
+    3.2406,
+    -1.5372,
+    -0.4986,
+    -0.9689,
+    1.8758,
+    0.0415,
+    0.0557,
+    -0.204,
+    1.057
+  ],
+  "colour/cs/ProPhoto RGB/primaries": [
+    0.7347,
+    0.2653,
+    0.1596,
+    0.8404,
+    0.0366,
+    0.0001
+  ],
+  "colour/cs/ProPhoto RGB/whitepoint": [
+    0.3457,
+    0.3585
+  ],
+  "colour/cs/ProPhoto RGB/matrix_RGB_to_XYZ": [
+    0.7977,
+    0.1352,
+    0.0313,
+    0.288,
+    0.7119,
+    0.0001,
+    0.0,
+    0.0,
+    0.8249
+  ],
+  "colour/cs/ProPhoto RGB/matrix_XYZ_to_RGB": [
+    1.346,
+    -0.2556,
+    -0.0511,
+    -0.5446,
+    1.5082,
+    0.0205,
+    0.0,
+    0.0,
+    1.2123
+  ]
+}

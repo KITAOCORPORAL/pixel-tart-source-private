@@ -1,0 +1,545 @@
+{
+  "version": "SpektraSpatialV1",
+  "cases": [
+    {
+      "size": [
+        193,
+        129
+      ],
+      "quiet": {
+        "width": 193,
+        "height": 129,
+        "row_stride_px": 193,
+        "elapsed_ms": 12.6787,
+        "reprint": false,
+        "negative_was_cached": false,
+        "sha256": "d66fb6436258af289141b0aa62bb3d82268dd3d3efc9a318796690bbd58fa736"
+      },
+      "tests": {
+        "halation_zero": {
+          "resolvedDelta": {
+            "halation_active": true,
+            "halation_amount": 0,
+            "halation_scatter_amount": 0
+          },
+          "result": {
+            "width": 193,
+            "height": 129,
+            "row_stride_px": 193,
+            "elapsed_ms": 7.4787,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "d66fb6436258af289141b0aa62bb3d82268dd3d3efc9a318796690bbd58fa736"
+          },
+          "vsQuiet": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 0
+        },
+        "halation_one": {
+          "resolvedDelta": {
+            "halation_active": true,
+            "halation_amount": 1
+          },
+          "result": {
+            "width": 193,
+            "height": 129,
+            "row_stride_px": 193,
+            "elapsed_ms": 10.9074,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "4fd9002d68dc2aeda80442aae43cf1dd6f4568565e8203bf6c92f289a240a26c"
+          },
+          "vsQuiet": {
+            "changedPixels": 24613,
+            "maxU16": 1915,
+            "meanAbsU16": 1.6793087520584808
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 959
+        },
+        "halation_stripe_1": {
+          "changedPixels": 0,
+          "maxU16": 0,
+          "meanAbsU16": 0.0
+        },
+        "halation_stripe_7": {
+          "changedPixels": 0,
+          "maxU16": 0,
+          "meanAbsU16": 0.0
+        },
+        "halation_stripe_17": {
+          "changedPixels": 0,
+          "maxU16": 0,
+          "meanAbsU16": 0.0
+        },
+        "halation_two": {
+          "resolvedDelta": {
+            "halation_active": true,
+            "halation_amount": 2
+          },
+          "result": {
+            "width": 193,
+            "height": 129,
+            "row_stride_px": 193,
+            "elapsed_ms": 11.0153,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "efcf2e4ecdacd03a39a76fed022d5abfb9c3ee2479e01ec8eccd536109bc2e7e"
+          },
+          "vsQuiet": {
+            "changedPixels": 24602,
+            "maxU16": 6896,
+            "meanAbsU16": 4.4612905169297505
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 3905
+        },
+        "grain_zero": {
+          "resolvedDelta": {
+            "grain_active": true,
+            "grain_amount": 0
+          },
+          "result": {
+            "width": 193,
+            "height": 129,
+            "row_stride_px": 193,
+            "elapsed_ms": 9.1713,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "d66fb6436258af289141b0aa62bb3d82268dd3d3efc9a318796690bbd58fa736"
+          },
+          "vsQuiet": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 0
+        },
+        "grain_one": {
+          "resolvedDelta": {
+            "grain_active": true,
+            "grain_amount": 1
+          },
+          "result": {
+            "width": 193,
+            "height": 129,
+            "row_stride_px": 193,
+            "elapsed_ms": 63.4554,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "66cc878258ca98bce35377d0b3f5f9ee0030a685374d05446563bdfbe7e7bfa1"
+          },
+          "vsQuiet": {
+            "changedPixels": 24894,
+            "maxU16": 22808,
+            "meanAbsU16": 174.32602321564846
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 19394
+        }
+      }
+    },
+    {
+      "size": [
+        17,
+        31
+      ],
+      "quiet": {
+        "width": 17,
+        "height": 31,
+        "row_stride_px": 17,
+        "elapsed_ms": 7.0243,
+        "reprint": false,
+        "negative_was_cached": false,
+        "sha256": "91c58246f305e2026f132f381a475157f6758abcd56b4620f148308f8fcce364"
+      },
+      "tests": {
+        "halation_zero": {
+          "resolvedDelta": {
+            "halation_active": true,
+            "halation_amount": 0,
+            "halation_scatter_amount": 0
+          },
+          "result": {
+            "width": 17,
+            "height": 31,
+            "row_stride_px": 17,
+            "elapsed_ms": 6.594,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "91c58246f305e2026f132f381a475157f6758abcd56b4620f148308f8fcce364"
+          },
+          "vsQuiet": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 0
+        },
+        "halation_one": {
+          "resolvedDelta": {
+            "halation_active": true,
+            "halation_amount": 1
+          },
+          "result": {
+            "width": 17,
+            "height": 31,
+            "row_stride_px": 17,
+            "elapsed_ms": 9.9693,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "2d6394b958fbddfdefd095c9cfa767284d9bd8755fe7cc583d52bdba063699af"
+          },
+          "vsQuiet": {
+            "changedPixels": 513,
+            "maxU16": 3,
+            "meanAbsU16": 0.7874762808349146
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 3
+        },
+        "halation_stripe_1": {
+          "changedPixels": 0,
+          "maxU16": 0,
+          "meanAbsU16": 0.0
+        },
+        "halation_stripe_7": {
+          "changedPixels": 0,
+          "maxU16": 0,
+          "meanAbsU16": 0.0
+        },
+        "halation_stripe_17": {
+          "changedPixels": 0,
+          "maxU16": 0,
+          "meanAbsU16": 0.0
+        },
+        "halation_two": {
+          "resolvedDelta": {
+            "halation_active": true,
+            "halation_amount": 2
+          },
+          "result": {
+            "width": 17,
+            "height": 31,
+            "row_stride_px": 17,
+            "elapsed_ms": 9.4534,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "2d6394b958fbddfdefd095c9cfa767284d9bd8755fe7cc583d52bdba063699af"
+          },
+          "vsQuiet": {
+            "changedPixels": 513,
+            "maxU16": 3,
+            "meanAbsU16": 0.7874762808349146
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 3
+        },
+        "grain_zero": {
+          "resolvedDelta": {
+            "grain_active": true,
+            "grain_amount": 0
+          },
+          "result": {
+            "width": 17,
+            "height": 31,
+            "row_stride_px": 17,
+            "elapsed_ms": 6.567,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "91c58246f305e2026f132f381a475157f6758abcd56b4620f148308f8fcce364"
+          },
+          "vsQuiet": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 0
+        },
+        "grain_one": {
+          "resolvedDelta": {
+            "grain_active": true,
+            "grain_amount": 1
+          },
+          "result": {
+            "width": 17,
+            "height": 31,
+            "row_stride_px": 17,
+            "elapsed_ms": 6.7403,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "11ad521ec634ff0880f09a8d4ae33ada2c57a21b80d17a511338ec5fdc445b7c"
+          },
+          "vsQuiet": {
+            "changedPixels": 527,
+            "maxU16": 21375,
+            "meanAbsU16": 647.900853889943
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 18021
+        }
+      }
+    },
+    {
+      "size": [
+        385,
+        257
+      ],
+      "quiet": {
+        "width": 385,
+        "height": 257,
+        "row_stride_px": 385,
+        "elapsed_ms": 10.4816,
+        "reprint": false,
+        "negative_was_cached": false,
+        "sha256": "83a71986ce82b6d91888d0dc6de35994bd8b0e3a2108d8be41c6ae22a18a6425"
+      },
+      "tests": {
+        "halation_zero": {
+          "resolvedDelta": {
+            "halation_active": true,
+            "halation_amount": 0,
+            "halation_scatter_amount": 0
+          },
+          "result": {
+            "width": 385,
+            "height": 257,
+            "row_stride_px": 385,
+            "elapsed_ms": 10.4808,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "83a71986ce82b6d91888d0dc6de35994bd8b0e3a2108d8be41c6ae22a18a6425"
+          },
+          "vsQuiet": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 0
+        },
+        "halation_one": {
+          "resolvedDelta": {
+            "halation_active": true,
+            "halation_amount": 1
+          },
+          "result": {
+            "width": 385,
+            "height": 257,
+            "row_stride_px": 385,
+            "elapsed_ms": 14.8927,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "5ff0f59c19de394764d78a49c27bdd4c551a9825df3155dcbc8ea9742e333c23"
+          },
+          "vsQuiet": {
+            "changedPixels": 97647,
+            "maxU16": 5632,
+            "meanAbsU16": 2.0948456213047653
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 3416
+        },
+        "halation_stripe_1": {
+          "changedPixels": 0,
+          "maxU16": 0,
+          "meanAbsU16": 0.0
+        },
+        "halation_stripe_7": {
+          "changedPixels": 0,
+          "maxU16": 0,
+          "meanAbsU16": 0.0
+        },
+        "halation_stripe_17": {
+          "changedPixels": 0,
+          "maxU16": 0,
+          "meanAbsU16": 0.0
+        },
+        "halation_two": {
+          "resolvedDelta": {
+            "halation_active": true,
+            "halation_amount": 2
+          },
+          "result": {
+            "width": 385,
+            "height": 257,
+            "row_stride_px": 385,
+            "elapsed_ms": 13.7592,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "a07a7463ab3ae90f905155ad2fa0e8258afb2e9d5fd2fe145cf7df010f711fa4"
+          },
+          "vsQuiet": {
+            "changedPixels": 97679,
+            "maxU16": 10196,
+            "meanAbsU16": 3.9333417555207437
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 6884
+        },
+        "grain_zero": {
+          "resolvedDelta": {
+            "grain_active": true,
+            "grain_amount": 0
+          },
+          "result": {
+            "width": 385,
+            "height": 257,
+            "row_stride_px": 385,
+            "elapsed_ms": 10.3949,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "83a71986ce82b6d91888d0dc6de35994bd8b0e3a2108d8be41c6ae22a18a6425"
+          },
+          "vsQuiet": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 0
+        },
+        "grain_one": {
+          "resolvedDelta": {
+            "grain_active": true,
+            "grain_amount": 1
+          },
+          "result": {
+            "width": 385,
+            "height": 257,
+            "row_stride_px": 385,
+            "elapsed_ms": 11.4235,
+            "reprint": false,
+            "negative_was_cached": false,
+            "sha256": "65773a5e57530fe6289af2ec19d986dbe37bea6df21f86aeabe5a260082ac1a1"
+          },
+          "vsQuiet": {
+            "changedPixels": 98940,
+            "maxU16": 22710,
+            "meanAbsU16": 183.5709510334024
+          },
+          "repeat": {
+            "changedPixels": 0,
+            "maxU16": 0,
+            "meanAbsU16": 0.0
+          },
+          "edgeMaxU16": 19840
+        }
+      }
+    }
+  ],
+  "seed": "No fixed grain seed parameter in C ABI. Halation deterministic; stochastic grain cannot be exact across renders.",
+  "errors": {
+    "invalid_channels": "expected (H, W, 3 or 4), got (3, 3, 2)",
+    "bad_film": "no profile 'nonexistent' (cannot open C:\\Users\\Admin\\AppData\\Local\\Temp\\guangjing-spektra-research-20261029\\resources-research/profiles/nonexistent.json)",
+    "unknown_seed": "unknown parameter 'grain_seed'"
+  },
+  "memoryFinal": {
+    "persistent": {
+      "buffers": 0,
+      "bytes": 0,
+      "cached_negative_bytes": 0,
+      "file_backed_buffers": 0,
+      "file_backed_bytes": 0,
+      "negatives": 0,
+      "sessions": [],
+      "source_bytes": 0
+    },
+    "pool": {
+      "audit": {
+        "allocations": 530,
+        "live_underflows": 0,
+        "over_releases": 0,
+        "pending_held": 0,
+        "persistent_allocations": 1308,
+        "reclaim_while_encoding": 0,
+        "reuse_bytes_requested": 1029534092,
+        "reuse_bytes_taken": 2434410120,
+        "reuse_max_taken": 1187340,
+        "reuse_max_taken_for_request": 791560,
+        "reuses": 53204
+      },
+      "buffers": 0,
+      "frame_high_water_bytes": 7519860,
+      "free_buffers": 0,
+      "free_bytes": 0,
+      "live_buffers": 0,
+      "live_bytes": 0,
+      "pending_buffers": 0,
+      "pending_bytes": 0,
+      "total_bytes": 0
+    },
+    "pressure": {
+      "critical_events": 0,
+      "critical_pending": false,
+      "idle_trim_seconds": 0,
+      "idle_trims": 0,
+      "monitor": false,
+      "warn_events": 0
+    },
+    "total_bytes": 0
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "version": "HeadroomActualComparisonV1",
+  "whiteBalanceNormalizationActual": [
+    1,
+    0.5069307,
+    0.6970297,
+    0.5069307
+  ],
+  "scaleRestore": 1.97265625,
+  "highlightReadback": 1,
+  "uint16MaxSamples": {
+    "matrixBaseline": 4405,
+    "headroom": 0
+  },
+  "postDemosaicSample": {
+    "pixels": 8870,
+    "differentChannelsAfterRestore": 26428,
+    "maxAbsoluteCodes": 63741.0546875,
+    "meanAbsoluteCodes": 13.395959871758738
+  },
+  "floatDelta": {
+    "channels": 108987816,
+    "meanAbsLinearDelta": 0.00010445455834421587,
+    "maxAbsLinearDelta": 0.8866966962814331,
+    "darkCount": 16334061,
+    "maxLocalGradientDelta": 0.5577038526535034,
+    "darkMeanAbsDelta": 3.232598338016024e-05,
+    "darkRmsDelta": 0.00011565332759386733
+  },
+  "metricsAreNoise": "No: dark residual is algorithm difference, not independent sensor noise estimate",
+  "acceptance": "REJECT_PRODUCT; continue only as isolated candidate because AHD and quantization change",
+  "sourceGroups": "development only, no independent validation/holdout",
+  "timings": {
+    "baseline": {
+      "decodeMs": 1710.6529,
+      "peakAtDecode": 1061650432,
+      "exportMs": 7056.2751
+    },
+    "matrix": {
+      "decodeMs": 1649.2078,
+      "peakAtDecode": 835379200,
+      "exportMs": 7443.4834
+    },
+    "headroom": {
+      "decodeMs": 1636.0781,
+      "peakAtDecode": 835399680,
+      "exportMs": 7014.4306
+    }
+  }
+}

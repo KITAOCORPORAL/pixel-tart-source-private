@@ -1,0 +1,10 @@
+{
+  "version": "Round3FailureLedgerV1",
+  "failures": [
+    {"case":"Spektra Vulkan pointwise original and repeat", "status":"OPEN_FAILURE", "message":"cctf_decode case=114 index=13 got=0.0180000048 expected=0.0180551012357076 delta=5.50964226e-05 tolerance=1.12638571e-07", "changedThreshold":false, "evidence":"spektra-ctest.log and spektra-pointwise-repeat.log"},
+    {"case":"Research fresh-process reopen prototype", "status":"REPAIRED_AND_RETESTED", "message":"Initial compile CS0136 local name shadowing; first repaired run FileNotFoundException reopenpreview-display.f32 due to over-broad identifier rename", "repair":"Correct local identifiers and actual preview file name; final reopen reports preview/export exact", "evidence":"reopen-matrix-final.json, reopen-baseline2.json, reopen-headroom3.json"},
+    {"case":"render_compare shared-validator refactor", "status":"REPAIRED_AND_RETESTED", "message":"FileNotFoundError final-render-shared-validation/integer_ev0_full.png because output mkdir was omitted after validation refactor", "repair":"Create new output directory only after explicit input validation; rerun with a fresh directory", "thresholdChanged":false},
+    {"case":"Spektra arbitrary fixed grain seed", "status":"UNSUPPORTED", "message":"unknown parameter 'grain_seed'", "workaroundNotClaimedEquivalent":"Fresh session first draw uses the observed fixed initial RNG state, not a public user seed API"}
+  ],
+  "originalRawAndOldStageData": "Retained locally; no deletion, no holdout relabeling"
+}

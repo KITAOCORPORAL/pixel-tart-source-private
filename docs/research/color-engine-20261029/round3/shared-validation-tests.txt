@@ -1,0 +1,23 @@
+test_binary_identity (__main__.Validation.test_binary_identity) ... ok
+test_candidate_domain (__main__.Validation.test_candidate_domain) ... ok
+test_candidate_missing_sidecar (__main__.Validation.test_candidate_missing_sidecar) ... ok
+test_domain (__main__.Validation.test_domain) ... ok
+test_duplicate (__main__.Validation.test_duplicate) ... ok
+test_duplicate_file (__main__.Validation.test_duplicate_file) ... ok
+test_duplicate_json_keys (__main__.Validation.test_duplicate_json_keys) ... ok
+test_hash_reads_bytes (__main__.Validation.test_hash_reads_bytes) ... ok
+test_layout (__main__.Validation.test_layout) ... ok
+test_length (__main__.Validation.test_length) ... ok
+test_missing (__main__.Validation.test_missing) ... ok
+test_missing_physical_file (__main__.Validation.test_missing_physical_file) ... ok
+test_nonfinite_matrix (__main__.Validation.test_nonfinite_matrix) ... ok
+test_physical_length (__main__.Validation.test_physical_length) ... ok
+test_stage_levels (__main__.Validation.test_stage_levels) ... ok
+test_stage_matrix_drift (__main__.Validation.test_stage_matrix_drift) ... ok
+test_tamper (__main__.Validation.test_tamper) ... ok
+test_valid (__main__.Validation.test_valid) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 39.164s
+
+OK
