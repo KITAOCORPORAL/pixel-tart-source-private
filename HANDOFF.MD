@@ -1,3 +1,8 @@
+## 家庭显影阶段接续 — 产品 cedd5ce5，诊断版
+- 从dbe4dce6接续；类型化只读显影阶段由当前变体冻结配方投影，普通栈不新增滤镜，CandidateRenderSession仍唯一执行。阶段卡当前独立于普通图连线，不冒充可编辑路由；旧/新版本兼容通过重开测试。
+- 四色轮2×2、右侧22DIP可展开示波；44项发布绑定测试通过。详见docs/validation/home-r54-developed-stage-20261029/FINAL_REPORT.md。
+- 仍欠旧产品二进制全像素A/B、完整轮盘格测量、物理鼠标/DPI/ACM/HDR；不发行。家庭包 N:/pixart/Guangjing-R54-Stage-20261029/Guangjing-R54-Stage-Diagnostic-win-x64，ZIP身份见本批ZIP_IDENTITY。
+
 ## 2026-10-29 家庭显影节点/四色轮/示波接续 — PARTIAL
 - 当前权威docs/validation/home-r54-stage-followup-20261029/FINAL_REPORT.md。四色轮2×2及右侧22 DIP/展开示波已在工作树实现并进行工作树WPF自动测试，非发布包/非实机。
 - 真实显影阶段节点仍未实现；InstantV3ProductPipeline.Open→CandidateRenderSession持有冻结配方、窗口内部调色和纸框，不可插普通栈二次执行。先补真实身份、不可绕过、配方查看和重开/输出对照，不用假卡。

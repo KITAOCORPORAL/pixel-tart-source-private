@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="95019457-4ff3-4e91-8398-94f9b60b9f9a" name="Admin@DESKTOP-HO0JJEQ 2026-10-29 22:01:31" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-29T22:01:31.7842148+08:00" queuing="2026-10-29T22:01:31.7842151+08:00" start="2026-10-29T22:01:30.2116798+08:00" finish="2026-10-29T22:01:31.7881565+08:00" />
+  <TestSettings name="default" id="6e568565-f0e8-417a-a87d-f7bd84c0785b">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-29_22_01_31" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="f4132395-377b-410d-b9b4-e4afae2df758" testId="119f5ca2-a961-8d17-aeb4-c5a264ae11b9" testName="IndependentOptionalModelReopen" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.9852418" startTime="2026-10-29T22:01:30.6153388+08:00" endTime="2026-10-29T22:01:31.6138654+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f4132395-377b-410d-b9b4-e4afae2df758" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="IndependentOptionalModelReopen" storage="n:\pixart\guangjing-r54-design-fixes-20261029\tests\rawselectionassistant.wpftests\bin\x64\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="119f5ca2-a961-8d17-aeb4-c5a264ae11b9">
+      <Execution id="f4132395-377b-410d-b9b4-e4afae2df758" />
+      <TestMethod codeBase="N:\pixart\guangjing-r54-design-fixes-20261029\tests\RAWSelectionAssistant.WpfTests\bin\x64\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.InstantColorComponentWpfTests" name="IndependentOptionalModelReopen" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="119f5ca2-a961-8d17-aeb4-c5a264ae11b9" executionId="f4132395-377b-410d-b9b4-e4afae2df758" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>
