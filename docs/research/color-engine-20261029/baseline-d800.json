@@ -1,0 +1,95 @@
+{
+  "version": "ColorBaselineProbeV1",
+  "sourceSha256": "3A0C1672ABDA62CC26349C088CB87A268EF0E5B46B1F4CCC18C99EE936E447B5",
+  "sourceUnchanged": true,
+  "Width": 7378,
+  "Height": 4924,
+  "contract": {
+    "DecoderVersion": "0.21.1-Release",
+    "Make": "Nikon",
+    "Model": "D800",
+    "SourceSha256": "3A0C1672ABDA62CC26349C088CB87A268EF0E5B46B1F4CCC18C99EE936E447B5",
+    "DecodeKey": "LibRaw021LinearProPhotoD65V1:Camera:1:1:1",
+    "CameraWhiteBalance": [
+      505,
+      256,
+      352,
+      256
+    ],
+    "AppliedWhiteBalance": [
+      505,
+      256,
+      352,
+      256
+    ],
+    "CameraToRgbMatrix": [
+      1.781579852104187,
+      -0.6133930683135986,
+      -0.16818679869174957,
+      0,
+      -0.173564612865448,
+      1.6453251838684082,
+      -0.4717606008052826,
+      0,
+      0.02276698313653469,
+      -0.44616398215293884,
+      1.4233970642089844,
+      0
+    ],
+    "WhiteLevel": 4095,
+    "BlackLevelPolicy": "LibRaw metadata: user_black=-1, user_cblack=-1000001 (all channels)",
+    "OutputSpace": "LibRaw Linear ProPhoto D65",
+    "OutputBits": 16,
+    "WhiteBalanceApplied": true,
+    "CameraMatrixApplied": true,
+    "AutoBright": false,
+    "Gamma": "1,1",
+    "HighlightMode": 0,
+    "DecoderClipped": true,
+    "SaturatedChannelSamples": 6627,
+    "Characterization": "LibRaw embedded/builtin camera matrix; no proprietary profile",
+    "UnpackParametersJson": "{\u0022UseRawSpeed\u0022:0,\u0022UseDngSdk\u0022:0,\u0022Options\u0022:2,\u0022ShotSelect\u0022:0,\u0022Specials\u0022:0,\u0022MaxRawMemoryMb\u0022:2048,\u0022SonyArw2PosterizationThr\u0022:0,\u0022CoolscanNefGamma\u0022:1}",
+    "OutputParametersJson": "{\u0022Greybox\u0022:{\u0022Location\u0022:{\u0022IsEmpty\u0022:true,\u0022X\u0022:0,\u0022Y\u0022:0},\u0022Size\u0022:{\u0022IsEmpty\u0022:false,\u0022Width\u0022:-1,\u0022Height\u0022:-1},\u0022X\u0022:0,\u0022Y\u0022:0,\u0022Width\u0022:-1,\u0022Height\u0022:-1,\u0022Left\u0022:0,\u0022Top\u0022:0,\u0022Right\u0022:-1,\u0022Bottom\u0022:-1,\u0022IsEmpty\u0022:false},\u0022Cropbox\u0022:{\u0022Location\u0022:{\u0022IsEmpty\u0022:true,\u0022X\u0022:0,\u0022Y\u0022:0},\u0022Size\u0022:{\u0022IsEmpty\u0022:false,\u0022Width\u0022:-1,\u0022Height\u0022:-1},\u0022X\u0022:0,\u0022Y\u0022:0,\u0022Width\u0022:-1,\u0022Height\u0022:-1,\u0022Left\u0022:0,\u0022Top\u0022:0,\u0022Right\u0022:-1,\u0022Bottom\u0022:-1,\u0022IsEmpty\u0022:false},\u0022Aber\u0022:[1,1,1,1],\u0022Gamma\u0022:[1,1,0.9999999999999964,0.9999999999999964,0,1],\u0022UserMultipliers\u0022:[505,256,352,256],\u0022Brightness\u0022:1,\u0022Threshold\u0022:0,\u0022HalfSize\u0022:false,\u0022FourColorRgb\u0022:false,\u0022HighlightMode\u0022:0,\u0022UseAutoWb\u0022:false,\u0022UseCameraWb\u0022:false,\u0022UseCameraMatrix\u0022:true,\u0022OutputColor\u0022:4,\u0022OutputProfile\u0022:null,\u0022CameraProfile\u0022:null,\u0022BadPixels\u0022:null,\u0022DarkFrame\u0022:null,\u0022OutputBps\u0022:16,\u0022OutputTiff\u0022:false,\u0022OutputFlags\u0022:0,\u0022UserFlip\u0022:0,\u0022UserQual\u0022:3,\u0022UserBlack\u0022:-1,\u0022UserCBlack\u0022:[-1000001,-1000001,-1000001,-1000001],\u0022UserSaturation\u0022:-1,\u0022MedianPasses\u0022:0,\u0022AutoBrightThr\u0022:0.01,\u0022AdjustMaximumThr\u0022:0,\u0022NoAutoBright\u0022:true,\u0022UseFujiRotate\u0022:true,\u0022GreenMatching\u0022:0,\u0022DcbIterations\u0022:0,\u0022DcbEnhanceFl\u0022:0,\u0022FbddNoiserd\u0022:0,\u0022ExpCorrec\u0022:false,\u0022ExpShift\u0022:1,\u0022ExpPreser\u0022:0,\u0022AutoScale\u0022:true,\u0022Interpolation\u0022:true}",
+    "BlackLevel": 0,
+    "ChannelBlackLevels": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "BlackPatternRows": 0,
+    "BlackPatternColumns": 0,
+    "BlackPatternSha256": "8F8D55AFC740451AD55820EAFC6F84A5974010D51663588C328821353DA2828C",
+    "NormalizedWhiteBalance": [
+      1.97265625,
+      1,
+      1.375,
+      1
+    ],
+    "ZeroChannelSamples": 22,
+    "DecoderWarnings": "None",
+    "WhiteBalanceSource": "Metadata cam_mul; explicit user_mul, auto/camera flags off",
+    "Demosaic": "AHD (user_qual=3), three-color Bayer only",
+    "ClippingPolicy": "LibRaw black subtraction, scale_colors and convert_to_rgb clip to uint16; no lost signal recovery"
+  },
+  "stages": [
+    "Unpacked",
+    "DemosaicWBMatrix",
+    "NativeRGB16",
+    "FloatMaster"
+  ],
+  "outputZeroByChannel": [
+    0,
+    0,
+    22
+  ],
+  "outputMaxByChannel": [
+    641,
+    940,
+    5046
+  ],
+  "channelSamples": 36329272,
+  "decodeMilliseconds": 1739.2465,
+  "processPeakWorkingSetBytes": 1062768640,
+  "limitations": "Final RGB16 converted to float only; no sensor saturation attribution; timings include hash inside decoder and process peak is not incremental."
+}
