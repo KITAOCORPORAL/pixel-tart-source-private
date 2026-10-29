@@ -1,0 +1,21 @@
+{
+  "command": [
+    "C:\\Program Files\\dotnet\\dotnet.exe",
+    "build",
+    "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+    "-c",
+    "Release",
+    "-p:Platform=x64",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:SourceRevisionId=95ff56f18ba64868c9725f4112dedb544424c3fb",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "--disable-build-servers",
+    "-m:1",
+    "-nr:false"
+  ],
+  "sourceSha": "95ff56f18ba64868c9725f4112dedb544424c3fb",
+  "exitCode": 0,
+  "startEpoch": 1793276501.9476476,
+  "endEpoch": 1793276536.3650198
+}

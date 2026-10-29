@@ -1,3 +1,10 @@
+## 2026-10-29 家庭公司基线设计修复（Asia/Shanghai）— PARTIAL
+- 新树 N:/pixart/guangjing-r54-design-fixes-20261029，home/r54-design-fixes-20261029，产品95ff56f18ba64868c9725f4112dedb544424c3fb；基于公司f8beaa37，与旧家庭不直线合并。详见docs/validation/home-r54-design-fixes-20261029/FINAL_REPORT.md。
+- 已接旧ColorRange取样面板、修新节点默认名、38DIP保守专业组、蒙版点击/锁、统一库/菜单、新并行卡不遮输出、显示混合/强度、已显影深色相纸；肤色分区公司已修并复测。未改像素数学，未回退两款宝丽来候选、共享比较和公司快速缓存。
+- 不完整：显影真实系统锁定节点未实现（不可做假卡或重复tone），四轮紧凑/完整右侧示波、精确子图组等仍欠；AI/透明/修复/扭曲不扩。OFFSCREEN非真实鼠标/DPI/ACM/HDR。
+- 发布绑定29项；Core20/WPF11/页签1/独立重开3/完整宿主1=36通过。家庭同授权20MP深图3次快速164.8–188.3ms，未重复解码；精细、导出未声称优化。
+- 家庭完整诊断包：N:/pixart/Guangjing-R54-Home-DesignFixes-20261029/Guangjing-R54-Home-DesignFixes-Diagnostic-win-x64；CMD，不能发行，不Setup。源/ZIP/远端以本批证据为准。
+
 ## 当前交接 2026-10-29 Asia/Shanghai：节点响应/页签/共享剧照
 - 同公司树company/r54-closure-20261029，从6ad9ce72恢复未提交内容，已先备份，不reset/stash/clean/覆盖其他树；未合main/研究整分支/强推。
 - 产品源码4795d75721a00b3db68602e7294ffee8e82684ea；测试支持ab4285f108f59c30f271b5ffb0509d067ea2bff8，仅tests。文档/远端HEAD另记，不冒充产品身份。

@@ -1,0 +1,26 @@
+{
+  "command": [
+    "C:\\Program Files\\dotnet\\dotnet.exe",
+    "publish",
+    "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+    "-c",
+    "Release",
+    "-r",
+    "win-x64",
+    "--self-contained",
+    "true",
+    "-o",
+    "N:\\pixart\\Guangjing-R54-Home-DesignFixes-20261029\\final-build\\app",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:SourceRevisionId=95ff56f18ba64868c9725f4112dedb544424c3fb",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "--disable-build-servers",
+    "-m:1",
+    "-nr:false"
+  ],
+  "sourceSha": "95ff56f18ba64868c9725f4112dedb544424c3fb",
+  "exitCode": 0,
+  "startEpoch": 1793276469.4161258,
+  "endEpoch": 1793276497.819263
+}

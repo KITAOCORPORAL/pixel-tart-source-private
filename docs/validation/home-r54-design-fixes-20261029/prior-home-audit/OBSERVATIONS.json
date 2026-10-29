@@ -1,0 +1,254 @@
+{
+  "kind": "observation not design acceptance",
+  "initial1366NodeHeight": 22,
+  "measurements": [
+    {
+      "type": "BasicTone",
+      "expectedNodeName": "\u57FA\u7840\u8C03\u8272",
+      "actualSelectedType": "BasicTone",
+      "actualSelectedName": "\u57FA\u7840\u8C03\u8272",
+      "headerText": "\u57FA\u7840\u8C03\u8272",
+      "selectedId": "270ecfd0-cea6-4709-b069-35785dd30a50",
+      "visibleSections": [
+        {
+          "tag": "AdjustmentScroll.1",
+          "header": "\u2304 \u66DD\u5149",
+          "enabled": true,
+          "sliders": 3,
+          "textInputs": 3,
+          "graphics": []
+        },
+        {
+          "tag": "AdjustmentScroll.2",
+          "header": "\u2304 \u5F71\u8C03",
+          "enabled": true,
+          "sliders": 4,
+          "textInputs": 4,
+          "graphics": []
+        },
+        {
+          "tag": "AdjustmentScroll.6",
+          "header": "\u2304 \u57FA\u7840\u8272\u5F69",
+          "enabled": true,
+          "sliders": 2,
+          "textInputs": 2,
+          "graphics": []
+        }
+      ],
+      "catalogParameterCount": 9
+    },
+    {
+      "type": "WhiteBalance",
+      "expectedNodeName": "\u767D\u5E73\u8861",
+      "actualSelectedType": "WhiteBalance",
+      "actualSelectedName": "\u767D\u5E73\u8861",
+      "headerText": "\u767D\u5E73\u8861",
+      "selectedId": "8f87f4d2-8367-4a48-abb3-27a21899562e",
+      "visibleSections": [
+        {
+          "tag": "AdjustmentScroll.5",
+          "header": "\u2304 \u767D\u5E73\u8861",
+          "enabled": true,
+          "sliders": 2,
+          "textInputs": 2,
+          "graphics": []
+        }
+      ],
+      "catalogParameterCount": 2
+    },
+    {
+      "type": "Levels",
+      "expectedNodeName": "\u989C\u8272\u8303\u56F4",
+      "actualSelectedType": "Levels",
+      "actualSelectedName": "\u989C\u8272\u8303\u56F4",
+      "headerText": "\u989C\u8272\u8303\u56F4",
+      "selectedId": "d4b53bd4-cbfe-43c2-8cbd-d6892da10df9",
+      "visibleSections": [
+        {
+          "tag": "AdjustmentScroll.3",
+          "header": "\u2304 \u8272\u9636",
+          "enabled": true,
+          "sliders": 20,
+          "textInputs": 20,
+          "graphics": []
+        }
+      ],
+      "catalogParameterCount": 20
+    },
+    {
+      "type": "Curve",
+      "expectedNodeName": "\u66F2\u7EBF",
+      "actualSelectedType": "Curve",
+      "actualSelectedName": "\u66F2\u7EBF",
+      "headerText": "\u66F2\u7EBF",
+      "selectedId": "1ad9c373-c87c-48f6-8d91-b89da32d9284",
+      "visibleSections": [
+        {
+          "tag": "AdjustmentScroll.4",
+          "header": "\u2304 \u66F2\u7EBF",
+          "enabled": true,
+          "sliders": 0,
+          "textInputs": 0,
+          "graphics": [
+            "StudioCurveEditor",
+            "CurveSurface"
+          ]
+        }
+      ],
+      "catalogParameterCount": 20
+    },
+    {
+      "type": "ColorBalance",
+      "expectedNodeName": "\u989C\u8272\u8303\u56F4",
+      "actualSelectedType": "ColorBalance",
+      "actualSelectedName": "\u989C\u8272\u8303\u56F4",
+      "headerText": "\u989C\u8272\u8303\u56F4",
+      "selectedId": "f894fb7f-b43e-47d4-a787-2ca20dd17117",
+      "visibleSections": [
+        {
+          "tag": "AdjustmentScroll.7",
+          "header": "\u2304 \u5206\u7EA7\u8C03\u8272",
+          "enabled": true,
+          "sliders": 8,
+          "textInputs": 8,
+          "graphics": [
+            "StudioColorBalanceWheel",
+            "StudioColorBalanceWheel",
+            "StudioColorBalanceWheel",
+            "StudioColorBalanceWheel"
+          ]
+        }
+      ],
+      "catalogParameterCount": 8
+    },
+    {
+      "type": "ColorRange",
+      "expectedNodeName": "\u989C\u8272\u8303\u56F4",
+      "actualSelectedType": "ColorRange",
+      "actualSelectedName": "\u989C\u8272\u8303\u56F4",
+      "headerText": "\u989C\u8272\u8303\u56F4",
+      "selectedId": "1158ef0a-b4cc-4ef5-b105-12c12691bf6b",
+      "visibleSections": [
+        {
+          "tag": "AdjustmentScroll.ColorRange",
+          "header": "\u989C\u8272\u7F16\u8F91",
+          "enabled": true,
+          "sliders": 0,
+          "textInputs": 0,
+          "graphics": []
+        }
+      ],
+      "catalogParameterCount": 0
+    },
+    {
+      "type": "SkinTone",
+      "expectedNodeName": "\u989C\u8272\u8303\u56F4",
+      "actualSelectedType": "SkinTone",
+      "actualSelectedName": "\u989C\u8272\u8303\u56F4",
+      "headerText": "\u989C\u8272\u8303\u56F4",
+      "selectedId": "63eb281e-1bdc-4522-9843-7707b35975f0",
+      "visibleSections": [],
+      "catalogParameterCount": 9
+    },
+    {
+      "type": "Details",
+      "expectedNodeName": "\u989C\u8272\u8303\u56F4",
+      "actualSelectedType": "Details",
+      "actualSelectedName": "\u989C\u8272\u8303\u56F4",
+      "headerText": "\u989C\u8272\u8303\u56F4",
+      "selectedId": "b7656825-2b59-43fa-92c8-203a959175b8",
+      "visibleSections": [
+        {
+          "tag": "AdjustmentScroll.9",
+          "header": "\u2304 \u6E05\u6670\u5EA6\u4E0E\u7ED3\u6784",
+          "enabled": true,
+          "sliders": 2,
+          "textInputs": 2,
+          "graphics": []
+        },
+        {
+          "tag": "AdjustmentScroll.10",
+          "header": "\u2304 \u9510\u5316",
+          "enabled": true,
+          "sliders": 3,
+          "textInputs": 3,
+          "graphics": []
+        },
+        {
+          "tag": "AdjustmentScroll.11",
+          "header": "\u2304 \u964D\u566A",
+          "enabled": true,
+          "sliders": 2,
+          "textInputs": 2,
+          "graphics": []
+        }
+      ],
+      "catalogParameterCount": 7
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1366,
+      "height": 768,
+      "photoWidth": 730,
+      "photoHeight": 354,
+      "nodeHeight": 216,
+      "right": "Visible",
+      "scope": "effective DIP; user-expanded state; not physical DPI"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "photoWidth": 1284,
+      "photoHeight": 666,
+      "nodeHeight": 216,
+      "right": "Visible",
+      "scope": "effective DIP; user-expanded state; not physical DPI"
+    },
+    {
+      "width": 1093,
+      "height": 614,
+      "photoWidth": 721,
+      "photoHeight": 200,
+      "nodeHeight": 216,
+      "right": "Visible",
+      "scope": "effective DIP; user-expanded state; not physical DPI"
+    },
+    {
+      "width": 911,
+      "height": 512,
+      "photoWidth": 539,
+      "photoHeight": 98,
+      "nodeHeight": 216,
+      "right": "Visible",
+      "scope": "effective DIP; user-expanded state; not physical DPI"
+    }
+  ],
+  "heightStates": [
+    {
+      "state": "simple",
+      "viewerHeight": 594,
+      "photoViewportHeight": 570,
+      "nodeHeight": 0
+    },
+    {
+      "state": "pro-expanded",
+      "viewerHeight": 378,
+      "photoViewportHeight": 354,
+      "nodeHeight": 216
+    },
+    {
+      "state": "pro-collapsed",
+      "viewerHeight": 572,
+      "photoViewportHeight": 548,
+      "nodeHeight": 22
+    }
+  ],
+  "complexGroup": {
+    "ordinaryLayerListVisible": false,
+    "groupActualHeight": 101.94,
+    "groupExists": true
+  },
+  "developedNodes": [],
+  "scope": "OFFSCREEN; product unchanged; no browser or native input"
+}
