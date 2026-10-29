@@ -1,3 +1,8 @@
+## 2026-10-29 家庭显影节点/四色轮/示波接续 — PARTIAL
+- 当前权威docs/validation/home-r54-stage-followup-20261029/FINAL_REPORT.md。四色轮2×2及右侧22 DIP/展开示波已在工作树实现并进行工作树WPF自动测试，非发布包/非实机。
+- 真实显影阶段节点仍未实现；InstantV3ProductPipeline.Open→CandidateRenderSession持有冻结配方、窗口内部调色和纸框，不可插普通栈二次执行。先补真实身份、不可绕过、配方查看和重开/输出对照，不用假卡。
+- 本轮未生成新完整诊断包；上一个包的产品是95ff56f1，不得当新改动包。用户要求的完整验收/交付仍未完成。
+
 ## 2026-10-29 家庭公司基线设计修复（Asia/Shanghai）— PARTIAL
 - 新树 N:/pixart/guangjing-r54-design-fixes-20261029，home/r54-design-fixes-20261029，产品95ff56f18ba64868c9725f4112dedb544424c3fb；基于公司f8beaa37，与旧家庭不直线合并。详见docs/validation/home-r54-design-fixes-20261029/FINAL_REPORT.md。
 - 已接旧ColorRange取样面板、修新节点默认名、38DIP保守专业组、蒙版点击/锁、统一库/菜单、新并行卡不遮输出、显示混合/强度、已显影深色相纸；肤色分区公司已修并复测。未改像素数学，未回退两款宝丽来候选、共享比较和公司快速缓存。

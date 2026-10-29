@@ -20,6 +20,8 @@ public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double Editi
     public IReadOnlyList<StudioStillSnapshot> R54Stills {get;init;}=[];
     public double R54GraphHeight {get;init;}=216;
     public bool? R54GraphCollapsed {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public bool? R54ScopesOpen {get;init;}
     public double R54GraphZoom {get;init;}=1;
     public double R54GraphPanX {get;init;}=8;
     public double R54GraphPanY {get;init;}=12;

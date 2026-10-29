@@ -67,7 +67,12 @@ public partial class PhotoGradePageView
         ToolTip=client<1160?"资源已收起：点击工具栏资源打开；参数可从右侧图标恢复":null;
         R53ParameterRail.Visibility=open?Visibility.Collapsed:Visibility.Visible;
         if(!open){PanelColumn.MinWidth=0;PanelColumn.Width=new GridLength(40);SplitterColumn.Width=new GridLength(0);}
-        R54ScopesRail.Visibility=professional&&width<=1366?Visibility.Visible:Visibility.Collapsed;
+        R54ScopesArea.Visibility=professional?Visibility.Visible:Visibility.Collapsed;
+        var scopeOpen=model?.Layout.R54ScopesOpen??false;
+        R54ScopesColumn.Width=new GridLength(professional?(scopeOpen?Math.Min(232,Math.Max(120,width-650)):22):0);
+        R54ScopesRail.Visibility=professional&&!scopeOpen?Visibility.Visible:Visibility.Collapsed;
+        R54ScopesPanel.Visibility=professional&&scopeOpen?Visibility.Visible:Visibility.Collapsed;
+        R54ScopesRow.Height=new GridLength(0);
         R53SerialNodes.Visibility=professional?Visibility.Visible:Visibility.Collapsed;R53NodeRow.Height=new GridLength(professional?(r53NodesCollapsed?22:r54GraphHeight):0);
         R53NodeContent.Visibility=r53NodesCollapsed?Visibility.Collapsed:Visibility.Visible;
         PhotoStrip.Visibility=r53FilmCollapsed?Visibility.Collapsed:Visibility.Visible;R53FilmContentRow.Height=new GridLength(r53FilmCollapsed?0:92);R53FilmRow.Height=new GridLength(r53FilmCollapsed?22:114);
@@ -130,7 +135,7 @@ public partial class PhotoGradePageView
     private void R53ResourceAll(object sender,RoutedEventArgs e){r53FavoritesOnly=r53RecentOnly=false;RenderR53Resources();}
     private void R53ResourceFavorites(object sender,RoutedEventArgs e){r53FavoritesOnly=true;r53RecentOnly=false;RenderR53Resources();}
     private void R53ResourceRecent(object sender,RoutedEventArgs e){r53RecentOnly=true;r53FavoritesOnly=false;RenderR53Resources();}
-    private bool scopesOpen=false;private void R53ToggleScopes(object sender,RoutedEventArgs e){scopesOpen=!scopesOpen;R54ScopesPanel.Visibility=scopesOpen?Visibility.Visible:Visibility.Collapsed;R54ScopesRow.Height=new GridLength(scopesOpen?104:0);}
+    private void R53ToggleScopes(object sender,RoutedEventArgs e){if(model is null)return;model.Layout=model.Layout with{R54ScopesOpen=!(model.Layout.R54ScopesOpen??false)};model.NotifyR53Edit();ApplyR53Layout();}
 
     private Action? closeR53Inspection;
     private void R53Inspect3D(object s,RoutedEventArgs e)

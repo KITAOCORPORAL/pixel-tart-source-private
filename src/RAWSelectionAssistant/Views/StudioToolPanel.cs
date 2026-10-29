@@ -63,6 +63,7 @@ public sealed class StudioToolPanel : StackPanel
     private void Build()
     {
         Children.Clear(); _fields.Clear(); _toggles.Clear(); _graphics.Clear();
+        if(CompactRows&&NodeTypes=="ColorBalance"&&string.IsNullOrEmpty(ParameterKeys)){BuildCompactColorWheels();Refresh();return;}
         foreach (var id in NodeTypes.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))
         {
             if (!Enum.TryParse<ColorStudioNodeType>(id, out var type)) continue;
@@ -155,6 +156,26 @@ public sealed class StudioToolPanel : StackPanel
         }
         if(CompactRows)MakeCompact();
         Refresh();
+    }
+    private void BuildCompactColorWheels()
+    {
+        var parameters=ColorStudioToolCatalog.GetParameters(ColorStudioNodeType.ColorBalance).ToArray();
+        var grid=new UniformGrid{Columns=2,Margin=new Thickness(0,2,0,0)};
+        foreach(var (key,label) in new[]{("shadows","暗部"),("midtones","中间调"),("highlights","高光"),("master","偏移")})
+        {
+            var hue=parameters.Single(p=>p.Key==key+"_hue");var amount=parameters.Single(p=>p.Key==key+"_amount");
+            var cell=new StackPanel{Margin=new Thickness(3,2,3,3),MinWidth=112};
+            var title=new DockPanel();var reset=new Button{Content="复位",Height=22,MinHeight=0,Padding=new Thickness(3,0,3,0),ToolTip="复位"+label};System.Windows.Automation.AutomationProperties.SetName(reset,"复位"+label+"色轮");reset.Click+=(_,_)=>_editor?.ResetToolGroup(ColorStudioNodeType.ColorBalance,hue.Group);DockPanel.SetDock(reset,Dock.Right);title.Children.Add(reset);title.Children.Add(new TextBlock{Text=label,VerticalAlignment=VerticalAlignment.Center});cell.Children.Add(title);
+            var wheel=new StudioColorBalanceWheel(()=>_editor,hue,amount){Height=112,Margin=new Thickness(0,2,0,2)};wheel.SetBinding(IsEnabledProperty,new Binding("Editor.SelectedNodeEditable"));reset.SetBinding(IsEnabledProperty,new Binding("Editor.SelectedNodeEditable"));System.Windows.Automation.AutomationProperties.SetName(wheel,label+"色轮");cell.Children.Add(wheel);_graphics.Add(wheel);
+            foreach(var parameter in new[]{hue,amount})
+            {
+                var line=new DockPanel{Height=24};var labelText=new TextBlock{Text=parameter.Label,Width=38,VerticalAlignment=VerticalAlignment.Center};line.Children.Add(labelText);
+                var number=new StudioNumericEditor(()=>_editor?.ToolValue(parameter)??parameter.DefaultValue,value=>_editor?.SetToolParameter(parameter,value),parameter.Minimum,parameter.Maximum,()=>_editor?.EditTargetIdentity){Width=58,Height=23,MinHeight=0,TextAlignment=TextAlignment.Right,Padding=new Thickness(3,0,3,0),Foreground=Brushes.Gainsboro,Background=new SolidColorBrush(Color.FromRgb(38,40,41)),BorderThickness=new Thickness(1),BorderBrush=Brushes.DimGray};number.Style=new Style(typeof(TextBox));System.Windows.Automation.AutomationProperties.SetName(number,label+parameter.Label);line.Children.Add(number);cell.Children.Add(line);
+                var proxy=new Slider{Minimum=parameter.Minimum,Maximum=parameter.Maximum};_fields.Add((parameter,proxy,number));
+            }
+            grid.Children.Add(cell);
+        }
+        Children.Add(grid);
     }
     private void MakeCompact()
     {
