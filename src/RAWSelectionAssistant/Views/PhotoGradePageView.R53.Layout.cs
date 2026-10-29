@@ -41,7 +41,7 @@ public partial class PhotoGradePageView
     private void ApplyR53ParameterHierarchy(bool professional,bool film)
     {
         if(AdjustmentScroll.Content is not StackPanel group||R53SimpleLayers is null)return;
-        if(r53ParameterTabs is null){r53ParameterTabs=new System.Windows.Controls.Primitives.UniformGrid{Columns=6,Margin=new Thickness(2)};foreach(var name in new[]{"色轮","曲线","范围","扭曲","HSL","基础"}){var button=new Button{Content=name,MinWidth=24,ToolTip=name=="扭曲"?"色彩扭曲器尚未实现":name+"参数",IsEnabled=name!="扭曲"};button.Click+=(_,_)=>{SelectClosureNodeTool(name);ApplyR53Layout();};r53ParameterTabs.Children.Add(button);}group.Children.Insert(Math.Min(1,group.Children.Count),r53ParameterTabs);}
+        if(r53ParameterTabs is null){r53ParameterTabs=new System.Windows.Controls.Primitives.UniformGrid{Columns=6,Margin=new Thickness(2)};foreach(var name in new[]{"色轮","曲线","范围","扭曲","HSL","基础"}){var button=new Button{Content=name,MinWidth=24,ToolTip=name=="扭曲"?"色彩扭曲器尚未实现":name=="范围"?"HSL范围限定器尚未实现；旧取样颜色编辑在HSL页。":name=="HSL"?"已有取样颜色编辑；不是独立HSL限定器。":name+"参数",IsEnabled=name is not ("扭曲" or "范围")};button.Click+=(_,_)=>{SelectClosureNodeTool(name);ApplyR53Layout();};r53ParameterTabs.Children.Add(button);}group.Children.Insert(Math.Min(1,group.Children.Count),r53ParameterTabs);}
         if(group.Children.IndexOf(R53SimpleLayers)!=0){group.Children.Remove(R53SimpleLayers);group.Children.Insert(0,R53SimpleLayers);}
         if(group.Children.IndexOf(r53ParameterTabs)!=1){group.Children.Remove(r53ParameterTabs);group.Children.Insert(1,r53ParameterTabs);}
         R53SimpleLayerList.Visibility=professional||model?.Editor.HasProfessionalRouting==true?Visibility.Collapsed:Visibility.Visible;

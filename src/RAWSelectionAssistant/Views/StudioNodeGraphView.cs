@@ -61,7 +61,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
                 var area=new Rect(p.X+7,p.Y+25,n.LocalMask is null?116:82,40);var thumb=Thumbnail?.Invoke(n.Id);
                 d.DrawRectangle(Color("#111214"),null,area);if(thumb is not null)DrawImageFit(d,thumb,area);else Text(d,"等待实际输出",new(area.X+4,area.Y+12),9,Color("#777D7B"));
                 if(n.LocalMask is not null){var maskArea=new Rect(p.X+94,p.Y+25,30,40);d.DrawRectangle(Brushes.Black,new Pen(Color("#7FA89F"),.7),maskArea);var mask=MaskThumbnail?.Invoke(n.Id);if(mask is not null)DrawImageFit(d,mask,maskArea);}
-                Text(d,n.Name,new(p.X+6,p.Y+69),10);if(n.IsLocked)Text(d,"▣",new(p.X+116,p.Y+7),9,Brushes.White);
+                var blend=n.Blend switch{StudioLayerBlend.Normal=>"正常",StudioLayerBlend.Multiply=>"正片叠底",StudioLayerBlend.Screen=>"滤色",StudioLayerBlend.Darken=>"变暗",StudioLayerBlend.Lighten=>"变亮",_=>n.Blend.ToString()};Text(d,n.Name+" · "+blend+" "+n.Opacity.ToString("P0"),new(p.X+6,p.Y+69),10);if(n.IsLocked)Text(d,"▣",new(p.X+116,p.Y+7),9,Brushes.White);
             }
             else Text(d,type,new(p.X+12,p.Y+37),12);
             if(p.NodeId!=StudioNodeGraph.Source)foreach(var port in InputPorts(p.NodeId)){d.DrawEllipse(Color("#9CC4BA"),new Pen(Color("#17171A"),1),Port(p,false,port),4,4);if(port!="rgb")Text(d,port=="base"?"底":"层",new(p.X+5,p.Y+(port=="base"?13:39)),8);}
@@ -96,7 +96,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
             if(p.NodeId!=StudioNodeGraph.Output&&(Port(p,true)-w).Length<9/zoom){wire=p.NodeId;wireFromOutput=true;screen=start;CaptureMouse();e.Handled=true;return;}
             if(p.NodeId!=StudioNodeGraph.Source)foreach(var port in InputPorts(p.NodeId))if((Port(p,false,port)-w).Length<9/zoom){wire=p.NodeId;wireInput=port;wireFromOutput=false;screen=start;CaptureMouse();e.Handled=true;return;}
         }
-        if(hit is not null&&e.ChangedButton==MouseButton.Left){editor.SelectedAdjustmentNode=editor.AdjustmentNodes.FirstOrDefault(n=>n.Id==hit.NodeId);if(editor.SelectedAdjustmentNode?.IsLocked!=true){moving=hit.NodeId;initial=new(hit.X,hit.Y);}}
+        if(hit is not null&&e.ChangedButton==MouseButton.Left){if(TryOpenMaskAt(w)){e.Handled=true;return;}editor.SelectedAdjustmentNode=editor.AdjustmentNodes.FirstOrDefault(n=>n.Id==hit.NodeId);if(editor.SelectedAdjustmentNode?.IsLocked!=true){moving=hit.NodeId;initial=new(hit.X,hit.Y);}}
         else{panning=true;initial=pan;}
         CaptureMouse();InvalidateVisual();e.Handled=true;
     }
@@ -151,6 +151,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
     private void OpenMenu(Point p,StudioGraphEdge? edge)
     {
         var menu=new ContextMenu();void Add(string title,Action run,bool enabled=true,string? why=null){var i=new MenuItem{Header=title,IsEnabled=enabled,ToolTip=why};i.Click+=(_,_)=>run();menu.Items.Add(i);}
+        var addNode=new MenuItem{Header="添加节点"};foreach(var (group,items) in NodeLibrary){var category=new MenuItem{Header=group};foreach(var (name,id) in items){var item=new MenuItem{Header=name,IsEnabled=!id.StartsWith("disabled:")};item.ToolTip=id.StartsWith("disabled:")?id[9..]:name;item.Click+=(_,_)=>ExecuteLibraryItem(id);category.Items.Add(item);}addNode.Items.Add(category);}menu.Items.Add(addNode);
         Add("添加串行节点 · 基础",()=>editor.AddGraphSerialNode("BasicTone"));
         Add("添加并行节点",()=>editor.AddParallelGraphBranch(),editor.SelectedNodeEditable);
         Add("添加图层混合节点",()=>editor.AddParallelGraphBranch(),editor.SelectedNodeEditable);Add("添加外部节点",()=>{},false,"外部反向蒙版节点尚未实现");menu.Items.Add(new Separator());
@@ -163,11 +164,23 @@ public sealed class StudioNodeGraphView:FrameworkElement
         var labels=new MenuItem{Header="节点颜色标签"};foreach(int label in Enumerable.Range(0,6)){var item=new MenuItem{Header="● 标签 "+(label+1),Foreground=Color(new[]{"#6E9B91","#9CC4BA","#4A766C","#B5D3CC","#3E5F58","#7FA89F"}[label])};item.Click+=(_,_)=>editor.SetGraphLabel(label);labels.Items.Add(item);}menu.Items.Add(labels);
         Add("删除节点  Del",()=>editor.DeleteGraphNode(),editor.SelectedNodeEditable);menu.PlacementTarget=this;menu.IsOpen=true;
     }
+    internal bool TryOpenMaskAt(Point world)
+    {
+        var hit=Hit(world);if(hit is null)return false;
+        var node=editor.AdjustmentNodes.FirstOrDefault(n=>n.Id==hit.NodeId);
+        if(node?.LocalMask is null||!new Rect(hit.X+94,hit.Y+25,30,40).Contains(world))return false;
+        editor.SelectedAdjustmentNode=node;
+        if(!node.IsLocked&&editor.SelectedNodeEditable)RequestMask?.Invoke();
+        else ToolTip="节点已锁定，不能编辑蒙版";
+        return true;
+    }
+    private static readonly (string Group,(string Name,string Id)[] Items)[] NodeLibrary = new[]{("◐ 调色",new[]{("基础 / 曝光","BasicTone"),("白平衡","WhiteBalance"),("RGB 曲线","Curve"),("色轮","ColorBalance"),("取样颜色编辑（旧版）","ColorRange"),("色阶","Levels"),("肤色","SkinTone"),("细节","Details")}), ("▦ 透明图层",new[]{("画笔 / 修复 / 仿制","disabled:尚未接透明图层引擎")}), ("■ 填充",new[]{("纯色 / 渐变","disabled:填充节点尚未准入")}), ("⊕ 混合",new[]{("并行 / 图层混合","parallel")}), ("◌ 外部",new[]{("反向蒙版","disabled:尚未实现")}), ("▣ 即时胶片",new[]{("显影结果","disabled:请在即时胶片页显影，保留系统锁定配方")})};
+    private void ExecuteLibraryItem(string id){if(id.StartsWith("disabled:"))return;if(id=="parallel")editor.AddParallelGraphBranch();else editor.AddGraphSerialNode(id);}
     public event Action? RequestMask;
     public void OpenLibrary(FrameworkElement anchor)
     {
         var menu=new ContextMenu{PlacementTarget=anchor,StaysOpen=true};var panel=new StackPanel{Width=242};var search=new TextBox{Margin=new Thickness(4),ToolTip="搜索节点"};panel.Children.Add(search);var list=new StackPanel();panel.Children.Add(list);
-        void Populate(){list.Children.Clear();foreach(var (group,items) in new[]{("◐ 调色",new[]{("基础 / 曝光","BasicTone"),("白平衡","WhiteBalance"),("RGB 曲线","Curve"),("色轮","ColorBalance"),("HSL 范围","ColorRange"),("色阶","Levels"),("肤色","SkinTone"),("细节","Details")}), ("▦ 透明图层",new[]{("画笔 / 修复 / 仿制","disabled:尚未接透明图层引擎")}), ("■ 填充",new[]{("纯色 / 渐变","disabled:填充节点尚未准入")}), ("⊕ 混合",new[]{("并行 / 图层混合","parallel")}), ("◌ 外部",new[]{("反向蒙版","disabled:尚未实现")}), ("▣ 即时胶片",new[]{("显影结果","disabled:请在即时胶片页显影，保留系统锁定配方")})}){var matched=items.Where(x=>(group+x.Item1).Contains(search.Text,StringComparison.CurrentCultureIgnoreCase)).ToArray();if(matched.Length==0)continue;list.Children.Add(new TextBlock{Text=group,Foreground=Color("#9CC4BA"),Margin=new Thickness(6)});foreach(var (name,id) in matched){var b=new Button{Content=name,IsEnabled=!id.StartsWith("disabled:"),ToolTip=id.StartsWith("disabled:")?id[9..]:name,HorizontalContentAlignment=HorizontalAlignment.Left};b.Click+=(_,_)=>{if(id=="parallel")editor.AddParallelGraphBranch();else editor.AddGraphSerialNode(id);menu.IsOpen=false;};list.Children.Add(b);}}}
+        void Populate(){list.Children.Clear();foreach(var (group,items) in NodeLibrary){var matched=items.Where(x=>(group+x.Item1).Contains(search.Text,StringComparison.CurrentCultureIgnoreCase)).ToArray();if(matched.Length==0)continue;list.Children.Add(new TextBlock{Text=group,Foreground=Color("#9CC4BA"),Margin=new Thickness(6)});foreach(var (name,id) in matched){var b=new Button{Content=name,IsEnabled=!id.StartsWith("disabled:"),ToolTip=id.StartsWith("disabled:")?id[9..]:name,HorizontalContentAlignment=HorizontalAlignment.Left};b.Click+=(_,_)=>{ExecuteLibraryItem(id);menu.IsOpen=false;};list.Children.Add(b);}}}
         search.TextChanged+=(_,_)=>Populate();Populate();menu.Items.Add(new MenuItem{Header=panel,StaysOpenOnClick=true});menu.IsOpen=true;search.Focus();
     }
 }

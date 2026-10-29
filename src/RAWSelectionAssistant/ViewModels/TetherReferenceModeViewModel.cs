@@ -518,7 +518,8 @@ public sealed partial class TetherReferenceModeViewModel : ObservableObject, IDi
         if(nodeType==ColorStudioNodeType.GraphMix){StatusText="请通过节点图添加并行/混合节点。";return;}
         if (nodeType is ColorStudioNodeType.ReferenceMatch or ColorStudioNodeType.Film && AdjustmentStack.Nodes.Any(node => node.Type == nodeType)) return;
         if (nodeType == ColorStudioNodeType.ReferenceMatch && SelectedLook is null) return;
-        var node = new ColorAdjustmentStackNode(Guid.NewGuid(), nodeType, nodeType switch { ColorStudioNodeType.BasicTone => "基础调色", ColorStudioNodeType.WhiteBalance => "白平衡", ColorStudioNodeType.Curve => "曲线", ColorStudioNodeType.ReferenceMatch => "参考仿色", ColorStudioNodeType.Film => "胶片", ColorStudioNodeType.TransitionBlend => "色彩过渡", _ => "颜色范围" }, true, FilmSettings: nodeType == ColorStudioNodeType.Film ? FilmSettings : null);
+        var name = nodeType switch { ColorStudioNodeType.BasicTone => "基础调色", ColorStudioNodeType.ReferenceMatch => "参考仿色", ColorStudioNodeType.Film => "胶片", ColorStudioNodeType.TransitionBlend => "色彩过渡", ColorStudioNodeType.ColorRange => "颜色范围", ColorStudioNodeType.Preset => "预设", ColorStudioNodeType.Develop => "基础显影", _ => ToolName(nodeType) };
+        var node = new ColorAdjustmentStackNode(Guid.NewGuid(), nodeType, name, true, FilmSettings: nodeType == ColorStudioNodeType.Film ? FilmSettings : null);
         if(LinearDocumentEditing&&(nodeType is ColorStudioNodeType.WhiteBalance or ColorStudioNodeType.BasicTone))node=node with{WideToolVersion=2};
         if (nodeType == ColorStudioNodeType.ColorRange) node = node with { NumericParameters = new Dictionary<string, double> { ["range_version"] = 2 } };
         ChangeStack(nodes => [.. nodes, node], processingVersion: nodeType == ColorStudioNodeType.ColorRange ? 2 : null); if(AdjustmentStack.Nodes.All(n=>n.Id!=node.Id))return;_selectedAdjustmentNodeId = node.Id; OnPropertyChanged(nameof(SelectedAdjustmentNode));

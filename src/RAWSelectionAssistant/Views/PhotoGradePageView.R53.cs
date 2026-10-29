@@ -31,7 +31,7 @@ public partial class PhotoGradePageView
             else if(ExecuteR53PointerShortcut(e.Key)){e.Handled=true;}
             else if(e.Key==Key.F2&&FilmstripArea.IsKeyboardFocusWithin){await model.CreateR53VariantAsync(true);e.Handled=true;}
             else if(e.Key==Key.F3&&FilmstripArea.IsKeyboardFocusWithin){await model.CreateR53VariantAsync(false);e.Handled=true;}
-            else if(e.Key==Key.Escape){CancelMaskStroke();r53MultiWindow?.Close();closeR53Inspection?.Invoke();e.Handled=true;}
+            else if(e.Key==Key.Escape){CancelMaskStroke();if(model.Editor.IsSampling)model.Editor.CancelSamplingCommand.Execute(null);r53MultiWindow?.Close();closeR53Inspection?.Invoke();e.Handled=true;}
         };
         Loaded+=(_,_)=>{var window=Window.GetWindow(this);ApplyR53Layout();if(ReferenceEquals(window,r53Owner))return;if(r53Owner is not null)r53Owner.Deactivated-=R53WindowDeactivated;r53Owner=window;if(r53Owner is not null)r53Owner.Deactivated+=R53WindowDeactivated;};
         Unloaded+=(_,_)=>{ReleaseR53Compare();closeR53Inspection?.Invoke();if(r53Owner is not null)r53Owner.Deactivated-=R53WindowDeactivated;r53Owner=null;};
@@ -67,6 +67,7 @@ public partial class PhotoGradePageView
         ToolTip=client<1160?"资源已收起：点击工具栏资源打开；参数可从右侧图标恢复":null;
         R53ParameterRail.Visibility=open?Visibility.Collapsed:Visibility.Visible;
         if(!open){PanelColumn.MinWidth=0;PanelColumn.Width=new GridLength(40);SplitterColumn.Width=new GridLength(0);}
+        R54ScopesRail.Visibility=professional&&width<=1366?Visibility.Visible:Visibility.Collapsed;
         R53SerialNodes.Visibility=professional?Visibility.Visible:Visibility.Collapsed;R53NodeRow.Height=new GridLength(professional?(r53NodesCollapsed?22:r54GraphHeight):0);
         R53NodeContent.Visibility=r53NodesCollapsed?Visibility.Collapsed:Visibility.Visible;
         PhotoStrip.Visibility=r53FilmCollapsed?Visibility.Collapsed:Visibility.Visible;R53FilmContentRow.Height=new GridLength(r53FilmCollapsed?0:92);R53FilmRow.Height=new GridLength(r53FilmCollapsed?22:114);

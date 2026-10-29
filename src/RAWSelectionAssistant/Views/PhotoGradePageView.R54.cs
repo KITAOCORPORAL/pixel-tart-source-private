@@ -27,7 +27,7 @@ public partial class PhotoGradePageView
     private void R54FitGraph(object sender,RoutedEventArgs e){r53NodesCollapsed=false;ApplyR53Layout();r54Graph?.Fit();SaveR54GraphLayout();}
     private void R54GraphHeightDrag(object sender,DragDeltaEventArgs e){r53NodesCollapsed=false;r54GraphHeight=Math.Clamp(r54GraphHeight-e.VerticalChange,100,Math.Max(120,ActualHeight-320));ApplyR53Layout();}
     private void R54GraphHeightDone(object sender,DragCompletedEventArgs e)=>SaveR54GraphLayout();
-    private StackPanel? r54ProfessionalGroup;
+    private Border? r54ProfessionalGroup;
     private void UpdateR54ProfessionalGroup(bool professional)
     {
         if(R53SimpleLayers.Content is not StackPanel group||model is null)return;
@@ -35,17 +35,19 @@ public partial class PhotoGradePageView
         foreach(var child in group.Children.OfType<UIElement>())if(child!=R53SimpleLayerList&&child!=r54ProfessionalGroup)child.Visibility=complex?Visibility.Collapsed:Visibility.Visible;
         if(r54ProfessionalGroup is null)
         {
-            r54ProfessionalGroup=new StackPanel();var title=new TextBlock{Text="专业组 · 锁定路由",Margin=new Thickness(6),Foreground=new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(156,196,186))};r54ProfessionalGroup.Children.Add(title);
-            var enabled=new CheckBox{Content="可见"};enabled.SetBinding(CheckBox.IsCheckedProperty,new System.Windows.Data.Binding("Editor.ProfessionalGroupEnabled"){Mode=System.Windows.Data.BindingMode.TwoWay});r54ProfessionalGroup.Children.Add(enabled);
-            var amount=new Slider{Minimum=0,Maximum=1,ToolTip="仅专业组合成强度"};amount.PreviewMouseLeftButtonDown+=(_,_)=>model?.Editor.BeginEditTransaction();amount.PreviewMouseLeftButtonUp+=(_,_)=>model?.Editor.CommitEditTransaction();amount.SetBinding(Slider.ValueProperty,new System.Windows.Data.Binding("Editor.ProfessionalGroupAmount"){Mode=System.Windows.Data.BindingMode.TwoWay});r54ProfessionalGroup.Children.Add(amount);
-            var edit=new Button{Content="切到专业编辑路由"};edit.Click+=(_,_)=>{if(model is not null)model.R53Professional=true;OpenR53Panel();ApplyR53Layout();};r54ProfessionalGroup.Children.Add(edit);group.Children.Insert(0,r54ProfessionalGroup);
+            var row=new Grid();row.ColumnDefinitions.Add(new(){Width=new GridLength(26)});row.ColumnDefinitions.Add(new(){Width=new GridLength(100)});row.ColumnDefinitions.Add(new(){Width=new GridLength(1,GridUnitType.Star)});row.ColumnDefinitions.Add(new(){Width=new GridLength(54)});
+            var enabled=new CheckBox{ToolTip="专业组显隐",VerticalAlignment=VerticalAlignment.Center};enabled.SetBinding(CheckBox.IsCheckedProperty,new System.Windows.Data.Binding("Editor.ProfessionalGroupEnabled"){Mode=System.Windows.Data.BindingMode.TwoWay});row.Children.Add(enabled);
+            var title=new TextBlock{Text="▣ 专业组 🔒",ToolTip="复杂路由整体保留，不压平；显隐和强度只作用整个组。",VerticalAlignment=VerticalAlignment.Center,TextTrimming=System.Windows.TextTrimming.CharacterEllipsis};Grid.SetColumn(title,1);row.Children.Add(title);
+            var amount=new Slider{Minimum=0,Maximum=1,ToolTip="专业组强度",VerticalAlignment=VerticalAlignment.Center};amount.PreviewMouseLeftButtonDown+=(_,_)=>model?.Editor.BeginEditTransaction();amount.PreviewMouseLeftButtonUp+=(_,_)=>model?.Editor.CommitEditTransaction();amount.SetBinding(Slider.ValueProperty,new System.Windows.Data.Binding("Editor.ProfessionalGroupAmount"){Mode=System.Windows.Data.BindingMode.TwoWay});Grid.SetColumn(amount,2);row.Children.Add(amount);
+            var edit=new Button{Content="专业",ToolTip="切到专业模式编辑路由"};edit.Click+=(_,_)=>{if(model is not null)model.R53Professional=true;OpenR53Panel();ApplyR53Layout();};Grid.SetColumn(edit,3);row.Children.Add(edit);
+            r54ProfessionalGroup=new Border{Height=38,BorderBrush=System.Windows.Media.Brushes.DimGray,BorderThickness=new Thickness(0,0,0,1),Child=row};group.Children.Insert(0,r54ProfessionalGroup);
         }
         r54ProfessionalGroup.Visibility=complex?Visibility.Visible:Visibility.Collapsed;
     }
 
     private StackPanel? nodeToolNotice;
     private static RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType? ToolType(string name)=>name switch
-    {"色轮"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorBalance,"曲线"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Curve,"范围" or "HSL"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorRange,"基础"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.BasicTone,_=>null};
+    {"色轮"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorBalance,"曲线"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Curve,"HSL"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorRange,"基础"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.BasicTone,_=>null};
     internal void SelectClosureNodeTool(string name){r53ParameterTab=name;} // presentation only; never select/add/edit a node
     private bool ToolMatchesSelection()=>ToolType(r53ParameterTab) is{} type&&(model?.Editor.SelectedAdjustmentNode?.Type==type||r53ParameterTab=="基础"&&model?.Editor.SelectedAdjustmentNode?.Type is RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.WhiteBalance or RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Levels or RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.SkinTone or RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Details);
     private void UpdateNodeToolNotice(StackPanel group,bool professional)
@@ -56,4 +58,16 @@ public partial class PhotoGradePageView
         var add=new Button{Content="新增“"+r53ParameterTab+"”节点",IsEnabled=model?.Editor.SelectedNodeEditable==true&&ToolType(r53ParameterTab) is not null};add.Click+=(_,_)=>AddRequestedToolNode();nodeToolNotice.Children.Add(add);
     }
     internal void AddRequestedToolNode(){if(model is null||ToolType(r53ParameterTab) is not{} type)return;model.Editor.AddGraphSerialNode(type.ToString());ApplyR53Layout();}
+    private async Task SampleR54ColorAsync(Point point)
+    {
+        if(model is not{} workspace)return;
+        var editor=workspace.Editor;
+        if(editor.SelectedAdjustmentNode is not{Type:RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorRange,IsLocked:false}){editor.CancelSamplingCommand.Execute(null);return;}
+        var mapped=ColorStudioSampleMapping.Map(point,PhotoViewport.RenderSize,editor.EffectiveViewMode,editor.SplitPosition,editor.SourceImage,editor.MatchedImage,PhotoViewport.State);
+        if(mapped is not{} sample)return;
+        var (image,x,y)=sample;
+        if(System.Windows.Input.Keyboard.Modifiers.HasFlag(System.Windows.Input.ModifierKeys.Alt))editor.SampleMode="减少取样";
+        else if(System.Windows.Input.Keyboard.Modifiers.HasFlag(System.Windows.Input.ModifierKeys.Shift))editor.SampleMode="增加取样";
+        await workspace.CompleteRangeSampleAsync((x+.5)/image.PixelWidth,(y+.5)/image.PixelHeight);
+    }
 }

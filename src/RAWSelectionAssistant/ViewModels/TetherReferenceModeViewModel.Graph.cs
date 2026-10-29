@@ -37,7 +37,13 @@ public sealed partial class TetherReferenceModeViewModel
         var mix=new ColorAdjustmentStackNode(Guid.NewGuid(),ColorStudioNodeType.GraphMix,"图层混合"){CompositeVersion=1,Opacity=.5};
         var p=graph.Positions.Single(p=>p.NodeId==selected.Id);var edges=graph.Edges.Where(e=>e!=outgoing[0]).ToList();
         edges.Add(new(incoming.From,"rgb",branch.Id,"rgb"));edges.Add(new(selected.Id,"rgb",mix.Id,"base"));edges.Add(new(branch.Id,"rgb",mix.Id,"layer"));edges.Add(new(mix.Id,"rgb",outgoing[0].To,outgoing[0].Input));
-        var next=AdjustmentStack with{Nodes=AdjustmentNodes.Concat(new[]{branch,mix}).ToArray(),ProcessingVersion=2,Graph=graph with{Version=2,Edges=edges,Positions=graph.Positions.Concat(new[]{new StudioGraphPosition(branch.Id,p.X,p.Y+110),new StudioGraphPosition(mix.Id,p.X+160,p.Y+52)}).ToArray()}};
+        var downstream=new HashSet<Guid>();var pending=new Queue<Guid>();pending.Enqueue(outgoing[0].To);
+        while(pending.TryDequeue(out var id))if(downstream.Add(id))foreach(var edge in graph.Edges.Where(e=>e.From==id))pending.Enqueue(edge.To);
+        var locked=AdjustmentNodes.Where(n=>n.IsLocked).Select(n=>n.Id).ToHashSet();
+        var positions=graph.Positions.Select(pos=>downstream.Contains(pos.NodeId)&&!locked.Contains(pos.NodeId)&&pos.X>=p.X+140?pos with{X=pos.X+300}:pos).ToList();
+        void Place(Guid id,double x,double y){while(positions.Any(pos=>Math.Abs(pos.X-x)<148&&Math.Abs(pos.Y-y)<104))y+=110;positions.Add(new(id,x,y));}
+        Place(branch.Id,p.X,p.Y+110);Place(mix.Id,p.X+160,p.Y+52);
+        var next=AdjustmentStack with{Nodes=AdjustmentNodes.Concat(new[]{branch,mix}).ToArray(),ProcessingVersion=2,Graph=graph with{Version=2,Edges=edges,Positions=positions.ToArray()}};
         if(!CommitGraphStack(next))return false;SelectedAdjustmentNode=branch;return true;
     }
     public bool DeleteGraphNode()
@@ -57,9 +63,9 @@ public sealed partial class TetherReferenceModeViewModel
     public bool AddGraphSerialNode(string type)
     {
         if(AdjustmentStack.Graph?.Version!=2){AddAdjustmentNodeCommand.Execute(type);return true;}
-        if(!Enum.TryParse<ColorStudioNodeType>(type,out var t)||!ColorStudioToolCatalog.IsTool(t))return false;
+        if(!Enum.TryParse<ColorStudioNodeType>(type,out var t)||!(ColorStudioToolCatalog.IsTool(t)||t==ColorStudioNodeType.ColorRange))return false;
         var graph=GraphView;var source=SelectedAdjustmentNode?.Id??StudioNodeGraph.Source;var outgoing=graph.Edges.Where(e=>e.From==source).ToArray();if(outgoing.Length!=1){StatusText="请选择具有单一下游的节点作为串行插入点。";return false;}
-        var node=new ColorAdjustmentStackNode(Guid.NewGuid(),t,ToolName(t));var p=graph.Positions.Single(p=>p.NodeId==source);var edge=outgoing[0];
+        var node=new ColorAdjustmentStackNode(Guid.NewGuid(),t,t==ColorStudioNodeType.ColorRange?"颜色范围":ToolName(t),NumericParameters:t==ColorStudioNodeType.ColorRange?new Dictionary<string,double>{{"range_version",2}}:null);var p=graph.Positions.Single(p=>p.NodeId==source);var edge=outgoing[0];
         var next=AdjustmentStack with{Nodes=AdjustmentNodes.Append(node).ToArray(),Graph=graph with{Positions=graph.Positions.Append(new(node.Id,p.X+150,p.Y+92)).ToArray(),Edges=graph.Edges.Where(e=>e!=edge).Concat(new[]{new StudioGraphEdge(source,"rgb",node.Id,"rgb"),new StudioGraphEdge(node.Id,"rgb",edge.To,edge.Input)}).ToArray()}};
         if(!CommitGraphStack(next))return false;SelectedAdjustmentNode=node;return true;
     }
