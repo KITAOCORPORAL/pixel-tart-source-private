@@ -2,6 +2,8 @@ namespace RAWSelectionAssistant.Core.Services.Projects;
 public sealed record StudioEditVersion(Guid Id,string Name,DateTimeOffset CreatedAt,Guid? LibraryId,Guid? AssetId,string? SourceHash,
     ReferenceLook? Look,ColorAdjustmentStack? Stack,PixelTartFilmSettings? Film,ColorStudioMatchEngine Engine,MatchV4ExecutionMode Mode)
 {
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public FilmBackendBindingV1? FilmBackend {get;init;}
     public ProfessionalRawDefinition? RawDefinition {get;init;}
     public ProfessionalRawContract? RawInput {get;init;}
     public Guid? OriginVersionId {get;init;}

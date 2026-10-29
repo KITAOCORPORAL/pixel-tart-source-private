@@ -190,7 +190,7 @@ public sealed partial class MainViewModel : ObservableObject, IShellEscapeServic
         BatchCompressionPage = batchCompressionPage;
         PublishingPage = publishingPage;
         ReferenceColorPage = new ReferenceColorWorkspaceViewModel(dialogService, matchV4Executor: matchV4Executor,
-            assetRepositoryFactory: assetRepositoryFactory, versionRepository:new Core.Services.Projects.StudioVersionRepository(Path.Combine(AppDataPaths.DataDirectory,"StudioVersions")));
+            assetRepositoryFactory: assetRepositoryFactory, versionRepository:new Core.Services.Projects.StudioVersionRepository(Path.Combine(AppDataPaths.DataDirectory,"StudioVersions")),filmTaskBridge:taskOperationBridge);
         if (PublishingPage is not null) ReferenceColorPage.OpenPublishing = paths => { PublishingPage.AddFiles(paths); Navigate("Publishing"); };
         if (TetherPage is not null) TetherPage.ReferenceMode.FullEditorRequested += async (_, _) =>
         {

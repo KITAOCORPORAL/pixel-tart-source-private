@@ -17,6 +17,8 @@ public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double Editi
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]public bool ExplicitSdrDisplayColor{get;init;}
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]public RAWSelectionAssistant.Core.Services.Color.ControlledIcc.RgbIccIdentityV1? ManualMonitorProfile{get;init;}
     public DarkroomPanelLayout? Darkroom { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public ViewingTableState? ViewingTable {get;init;}
     public IReadOnlyList<StudioStillSnapshot> R54Stills {get;init;}=[];
     public double R54GraphHeight {get;init;}=216;
     public bool? R54GraphCollapsed {get;init;}
@@ -31,7 +33,7 @@ public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double Editi
     public bool R53Professional {get;init;}
     public IReadOnlyList<string> R53Favorites {get;init;}=[];
     public IReadOnlyList<string> R53Recents {get;init;}=[];
-    public ColorStudioLayout Normalize() {ManualMonitorProfile?.Bytes();FilmDraft?.Validate();return this with
+    public ColorStudioLayout Normalize() {ViewingTable?.Validate();ManualMonitorProfile?.Bytes();FilmDraft?.Validate();return this with
     {
         R54Stills=(R54Stills??[]).Select(s=>s.Freeze()).TakeLast(8).ToArray(),
         R53Favorites=(R53Favorites??[]).Where(x=>!string.IsNullOrWhiteSpace(x)).Distinct().Take(100).ToArray(),R53Recents=(R53Recents??[]).Where(x=>!string.IsNullOrWhiteSpace(x)).Distinct().Take(20).ToArray(),
@@ -97,7 +99,7 @@ public sealed record ColorStudioSessionDocument(IReadOnlyList<ColorStudioSession
             if(target.RawDefinition is not null && (target.Look is not null || target.Stack is not null || target.Film is not null))throw new InvalidDataException("专业 RAW 定义不能混合旧调整栈。");
             if(target.EditVersions?.FirstOrDefault(v=>v.Id==target.ActiveEditVersionId) is {} selected && System.Text.Json.JsonSerializer.Serialize(selected.RawDefinition)!=System.Text.Json.JsonSerializer.Serialize(target.RawDefinition))throw new InvalidDataException("会话活动版本与 RAW 定义不一致。");
             if (target.EditVersions is { } versions && (versions.Select(v=>v.Id).Distinct().Count()!=versions.Count || versions.Any(v=>v.Id==Guid.Empty || v.LibraryId!=target.LibraryId || v.AssetId!=target.AssetId || v.SourceHash!=target.SourceHash) || (target.ActiveEditVersionId is Guid activeVersion && !versions.Any(v=>v.Id==activeVersion)))) throw new InvalidDataException("编辑版本身份无效。");
-            foreach(var version in target.EditVersions ?? []) { if(string.IsNullOrWhiteSpace(version.Name) || !Enum.IsDefined(version.Engine) || !Enum.IsDefined(version.Mode))throw new InvalidDataException("编辑版本参数无效。");version.Stack?.Normalize(); version.Film?.Validate();version.RawDefinition?.Validate();if(version.RawDefinition is not null && (version.Look is not null || version.Stack is not null || version.Film is not null))throw new InvalidDataException("专业 RAW 版本包含旧调整。"); }
+            foreach(var version in target.EditVersions ?? []) { if(string.IsNullOrWhiteSpace(version.Name) || !Enum.IsDefined(version.Engine) || !Enum.IsDefined(version.Mode))throw new InvalidDataException("编辑版本参数无效。");version.FilmBackend?.Validate();if(version.FilmBackend is{} backend&&(backend.SourceSha256!=version.SourceHash||backend.SourceVariantId!=version.OriginVersionId||version.Stack?.Nodes.Any(n=>n.Id==backend.RequestId&&n.Type==ColorStudioNodeType.Film&&n.SystemLocked&&n.FilmSettings is{} settings&&System.Text.Json.JsonSerializer.Serialize(settings)==backend.ParametersJson)!=true))throw new InvalidDataException("胶片结果变体与冻结后端契约不一致。");version.Stack?.Normalize(); version.Film?.Validate();version.RawDefinition?.Validate();if(version.RawDefinition is not null && (version.Look is not null || version.Stack is not null || version.Film is not null))throw new InvalidDataException("专业 RAW 版本包含旧调整。"); }
         }
         return this with { Targets = targets, MinimumRating = Math.Clamp(MinimumRating, 0, 5), Layout = Layout?.Normalize() };
     }

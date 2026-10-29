@@ -41,7 +41,7 @@ public partial class PhotoGradePageView:UserControl
  }
  private void Detach(bool cancel)
  {
-  var presets=r53PresetCancellation;r53PresetCancellation=null;presets?.Cancel();StopMaskOverlay();CancelMaskStroke();r53MultiWindow?.Close();r53ResourceWindow?.Close();
+  viewingWindow?.Close();developedRecipeWindow?.Close();var presets=r53PresetCancellation;r53PresetCancellation=null;presets?.Cancel();StopMaskOverlay();CancelMaskStroke();r53MultiWindow?.Close();r53ResourceWindow?.Close();
   if(model is not null){PropertyChangedEventManager.RemoveHandler(model.Editor,MaskEditorChanged,string.Empty);PropertyChangedEventManager.RemoveHandler(model.Editor,R54EditorChanged,string.Empty);}
   ReleaseR53Compare();closeR53Inspection?.Invoke();
   if(model is not null){PropertyChangedEventManager.RemoveHandler(model,Changed,string.Empty);if(cancel){model.CancelFramePhotoPreviews();model.ExitInstantPresentationForLifecycle();}}
@@ -94,6 +94,7 @@ public partial class PhotoGradePageView:UserControl
  private async void OpenExport(object sender,RoutedEventArgs e){if(model is null)return;await model.PrepareR53MainExportAsync();var window=new DarkroomExportDialog(model){Owner=Window.GetWindow(this)};window.ShowDialog();}
  private void Changed(object? sender,PropertyChangedEventArgs e)
  {
+  if(e.PropertyName is nameof(ReferenceColorWorkspaceViewModel.ActiveTarget) or nameof(ReferenceColorWorkspaceViewModel.IsLoading) or nameof(ReferenceColorWorkspaceViewModel.IsLightPrintLocked)){developedRecipeWindow?.Close();r54Graph?.RefreshDevelopedStage();}
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.Layout)&&!savingPanelLayout){RestorePanelLayout();ApplyR53Layout();}
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.R53Professional))ApplyR53Layout();
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.R53SaveStatus)&&model?.R53SaveStatus=="已保存"&&EditModes.SelectedIndex==1)Dispatcher.BeginInvoke(new Action(()=>{if(IsVisible&&EditModes.SelectedIndex==1)model?.RequestLightPrintPreview();}));

@@ -46,6 +46,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     private readonly SemaphoreSlim _projectSaveGate=new(1,1);
     public async Task SaveSessionAsync(string path,CancellationToken token=default)
     {
+        if(IsFilmTaskRunning||filmRequestPending)throw new InvalidOperationException("胶片任务正在计算；完成或取消后再保存项目。");
         await _projectSaveGate.WaitAsync(token);
         try{await SaveSessionCoreAsync(path,token);}finally{_projectSaveGate.Release();}
     }
@@ -76,7 +77,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     {
         CancelLightPrintTask(true);await LightPrintPreviewWork;ClearPhotographerPreviews();await StopComparisonAsync();
         if(_skipSessionPreparation){await LoadSessionCoreAsync(path,token);return;}
-        if(_disposed||IsLoading||IsInstantGenerating||IsExporting)throw new InvalidOperationException("工作区正在处理，未开始加载项目。");
+        if(_disposed||IsLoading||IsInstantGenerating||IsExporting||IsFilmTaskRunning||filmRequestPending)throw new InvalidOperationException("工作区正在处理，未开始加载项目。");ReleaseViewing();
         using var preparation=CancellationTokenSource.CreateLinkedTokenSource(token);
         _sessionPreparationCancellation=preparation;token=preparation.Token;
         _sessionLoading=true;OnPropertyChanged(nameof(IsLoading));RefreshSyncAvailability();

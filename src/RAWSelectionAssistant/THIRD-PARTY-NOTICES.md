@@ -33,3 +33,6 @@
 
 ### R5.3 DocumentColorV1
 复用上述已随包分发的固定 Little CMS 2.12 运行库，通过公共 API 执行 RGB ICC 转换与生成公开原色兼容配置，MIT 版权和许可证仍随 Licenses/Little-CMS-2.12-COPYING.txt。未引入 PhotoCraft 源码/依赖/商标/字体/图标/合成CMYK；其固定提交仅架构与行为研究。生成的Adobe RGB兼容配置不是Adobe专有配置文件副本，ProPhoto兼容公开ROMM原色配置不代表相机标定。
+
+### 灯箱观片交互参考（未捆绑第三方实现）
+本轮灯箱为光镜现有WPF/项目模型的独立适配，交互研究参考LightTable-Windows@cb8f4c89d845634688627f1c01225cb5d851248f和LightTable@8e1868df40e69e6b1a08e207d7ab05cf463532ab。没有复制或打包其源码、WinUI/Win2D、音频、SHARP模型、EDR组件或资源。MIT只覆盖其声明代码，不扩展到列出的模型/二进制/音频。SpektraLab@c1447c6ab618fa4b1cb11fd2fe12826855007059仅作为研究候选；本产品不包含其GPL代码、CC BY-SA胶片数据或引擎二进制，入口未准入。固定来源/文件hash及评估见本轮开发证据。

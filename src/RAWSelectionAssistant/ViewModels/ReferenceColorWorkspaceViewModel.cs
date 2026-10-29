@@ -175,11 +175,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     public ReferenceColorWorkspaceViewModel(IDialogService dialogs, IReferenceRenderBackend? renderBackend = null, IRawDecoder? rawDecoder = null,
         MatchV4ProductExecutor? matchV4Executor = null,
-        Func<IAssetLibraryRepository?>? assetRepositoryFactory = null, StudioVersionRepository? versionRepository = null, IProfessionalRawDecoder? professionalRawDecoder=null)
+        Func<IAssetLibraryRepository?>? assetRepositoryFactory = null, StudioVersionRepository? versionRepository = null, IProfessionalRawDecoder? professionalRawDecoder=null,RAWSelectionAssistant.Core.Services.Tasks.TaskOperationBridge? filmTaskBridge=null)
     {
         SecondExposureDecoder.EnsureRegistered();
         _professionalDecoder=professionalRawDecoder??new ProfessionalRawDecoder();
         _versionRepository=versionRepository;
+        _filmTaskBridge=filmTaskBridge;
         _dialogs = dialogs;
         _sessionStagingFactory=()=>new ReferenceColorWorkspaceViewModel(dialogs,renderBackend:renderBackend,rawDecoder:rawDecoder,matchV4Executor:matchV4Executor,assetRepositoryFactory:assetRepositoryFactory,versionRepository:versionRepository,professionalRawDecoder:professionalRawDecoder);
         PropertyChangedEventManager.AddHandler(StudioLocalizationService.Current, OnStudioLanguageChanged, nameof(StudioLocalizationService.Language));
@@ -730,7 +731,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     public void Dispose()
     {
-        CancelFramePhotoPreviews();CancelRawLocalPreview();interactiveNodeCache.Dispose();rawFastBases.Dispose();ClearR53CompareCache();
+        CancelFilmBackendTask();ReleaseViewing();CancelFramePhotoPreviews();CancelRawLocalPreview();interactiveNodeCache.Dispose();rawFastBases.Dispose();ClearR53CompareCache();
         _r53Autosave.Stop();
         if(_disposed)return;
         CancelLightPrintTask(false);_paperPreviewCancellation?.Cancel();CancelComparison();_disposed = true;

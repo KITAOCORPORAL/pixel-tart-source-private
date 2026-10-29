@@ -7,6 +7,11 @@ public partial class PhotoGradePageView
 {
  private Window? r53MultiWindow;
  private void R53MultiCompare(object sender,RoutedEventArgs e)=>OpenR53SharedComparison(null);
+ private Window? viewingWindow;
+ private async void OpenViewingTable(object sender,RoutedEventArgs e)
+ {
+  if(model is null)return;if(viewingWindow is not null){viewingWindow.Activate();return;}var table=new StudioViewingTableView(model);var window=new Window{Title="光镜 · 灯箱观片",Owner=Window.GetWindow(this),Width=1150,Height=780,Content=table,Background=Background};viewingWindow=window;table.ReturnRequested+=()=>window.Close();window.Closed+=(_,_)=>{table.Close();if(ReferenceEquals(viewingWindow,window))viewingWindow=null;};window.Show();try{if(model.ViewingTable.Items.Count==0)model.PinSelectedViewingVariants();await table.RefreshAsync();}catch(Exception error)when(error is IOException or InvalidOperationException or ArgumentException or NotSupportedException){window.ToolTip=error.Message;}
+ }
  private async void OpenR53SharedComparison(StudioStillSnapshot? still)
  {
   if(model is null)return;var workspace=model;var select=new ListBox{ItemsSource=workspace.R53Variants,DisplayMemberPath="Name",SelectionMode=SelectionMode.Multiple,Height=100};foreach(var v in (still is null?workspace.R53Variants.Take(2):workspace.R53Variants.Where(v=>v.Id==workspace.ActiveTarget?.ActiveEditVersionId)))select.SelectedItems.Add(v);

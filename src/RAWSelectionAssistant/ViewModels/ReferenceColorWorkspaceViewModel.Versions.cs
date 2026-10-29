@@ -79,7 +79,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var existing=target.EditVersions.FirstOrDefault(v=>v.Id==target.ActiveEditVersionId);
         if(existing?.IsOriginal==true)return;
         var snapshot=new StudioEditVersion(target.ActiveEditVersionId.Value,existing?.Name??"默认版本",existing?.CreatedAt??DateTimeOffset.UtcNow,
-            target.LibraryId,target.AssetId,target.SourceHash,target.AppliedLookSnapshot,target.ColorAdjustmentStackSnapshot?.DeepClone(),target.FilmSettingsSnapshot,target.EngineSnapshot,target.ExecutionModeSnapshot){IsOriginal=existing?.IsOriginal??false,IsMain=existing?.IsMain??false,MainExplicit=existing?.MainExplicit??false,Rating=existing?.Rating??0,ColorLabel=existing?.ColorLabel,Archived=existing?.Archived??false,OriginVersionId=existing?.OriginVersionId,OriginIdentity=existing?.OriginIdentity,RawDefinition=target.RawDefinition,RawInput=target.RawInput};
+            target.LibraryId,target.AssetId,target.SourceHash,target.AppliedLookSnapshot,target.ColorAdjustmentStackSnapshot?.DeepClone(),target.FilmSettingsSnapshot,target.EngineSnapshot,target.ExecutionModeSnapshot){IsOriginal=existing?.IsOriginal??false,IsMain=existing?.IsMain??false,MainExplicit=existing?.MainExplicit??false,Rating=existing?.Rating??0,ColorLabel=existing?.ColorLabel,Archived=existing?.Archived??false,OriginVersionId=existing?.OriginVersionId,OriginIdentity=existing?.OriginIdentity,FilmBackend=existing?.FilmBackend,RawDefinition=target.RawDefinition,RawInput=target.RawInput};
         if(existing is null)target.EditVersions.Add(snapshot);else target.EditVersions[target.EditVersions.IndexOf(existing)]=snapshot;
     }
     public void CreateEditVersion()
