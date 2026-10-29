@@ -1,0 +1,592 @@
+[
+  {
+    "requested": 10,
+    "loaded": 10,
+    "preparationMs": 308.98,
+    "loadMs": 5439.6122,
+    "controlLayoutMs": 181.5226,
+    "tenPlacementUpdatesMs": 1.3372,
+    "cacheBytes": 10915840,
+    "frameBytes": 10915840,
+    "peakSampledWorkingSet": 1458552832,
+    "scope": "authorized RAW/Real photos; decode and actual WPF layout; not native mouse latency",
+    "status": "\u706F\u7BB1 10/10 \u00B7 \u5931\u8D250 \u00B7 \u4E2D\u6027sRGB\u89C2\u7247\u4EE3\u7406\uFF1B\u6446\u653E\u4E0D\u6539\u53D8\u5BFC\u51FA",
+    "failures": [],
+    "sources": [
+      {
+        "targetId": "1e53287c-e469-4671-b307-4bb6fd18e902",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\1dm2\\RAW_CANON_1DM2.CR2",
+        "hash": "AA27B723CBF885ACAE845331A9B5816ABE87D6C1158CF57442CBC0B1DEFB40B5"
+      },
+      {
+        "targetId": "4aee2c98-3dc0-4d83-806a-8aa4cf73ff34",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\1dm2n\\RAW_CANON_1DM2N.CR2",
+        "hash": "AD2FEE73DD121BD2D74D71A5570E6FC5FDD2BBC67212A0DDB6447486E547A52E"
+      },
+      {
+        "targetId": "d8b87825-39f8-4480-b368-693afad75dcc",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\1dm3\\RAW_CANON_1DMARK3.CR2",
+        "hash": "864E1E36A2C8BC6F815BE6D13AFC9F7B2DE94E008109D2CAD96A5B8BA22AACE7"
+      },
+      {
+        "targetId": "b730859c-21b6-43d0-894b-3adf967e7bc9",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\1dsm2\\RAW_CANON_1DSM2.CR2",
+        "hash": "2B0CAF37F2D9C6613F9B0279F11BEEB150645239F3AF38F19D80D92BBF753C60"
+      },
+      {
+        "targetId": "22eadae1-2438-494d-aaaf-7fcbd5c70d27",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\1dsm3\\RAW_CANON_1DSM3.CR2",
+        "hash": "834A4761F4471DE64B2541302D291A3AFFE8A75B7820ECD0D25DCB11DEF6A96A"
+      },
+      {
+        "targetId": "57d0bf8a-c394-4cad-ad4d-7ddaa013529a",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\20d\\RAW_CANON_20D.CR2",
+        "hash": "DC3DCC6E640B630C388251911682C45BE3874CA4B434ED7920B26F902B833B9F"
+      },
+      {
+        "targetId": "27103ede-41de-48b5-8834-eb2201f7d11d",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\30d\\RAW_CANON_30D.CR2",
+        "hash": "034585802284654CD0C230D3B64041AC209830839B2C2564831A38AAC7DBEAF6"
+      },
+      {
+        "targetId": "c9d5b74a-ad26-4ebc-bac6-93e9ea35c994",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\350d\\RAW_CANON_350D.CR2",
+        "hash": "E496788ECE326162723B1ADE9BB55B61C56D59738400892166E044D1E5DDC175"
+      },
+      {
+        "targetId": "2999de73-bf57-4a67-bfc1-8f622f9c2d05",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\400d\\RAW_CANON_400D_ARGB.CR2",
+        "hash": "7A0E62AAD23900CF22EDBA14F3AAE12C17F30D05FF636738127630D253E7478B"
+      },
+      {
+        "targetId": "20d7d2a8-0dd8-44d5-95c8-3a16f906861b",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\40d\\RAW_CANON_40D_RAW_V103.CR2",
+        "hash": "B2079D0B03140872D747742E123F6476FFE39BD113B1F9AF706D472DC632BC24"
+      }
+    ]
+  },
+  {
+    "requested": 100,
+    "loaded": 93,
+    "preparationMs": 1924.3587,
+    "loadMs": 49330.0344,
+    "controlLayoutMs": 1916.457,
+    "tenPlacementUpdatesMs": 1.4615,
+    "cacheBytes": 21724708,
+    "frameBytes": 21724708,
+    "peakSampledWorkingSet": 3925913600,
+    "scope": "authorized RAW/Real photos; decode and actual WPF layout; not native mouse latency",
+    "status": "\u706F\u7BB1 93/100 \u00B7 \u5931\u8D257 \u00B7 \u4E2D\u6027sRGB\u89C2\u7247\u4EE3\u7406\uFF1B\u6446\u653E\u4E0D\u6539\u53D8\u5BFC\u51FA",
+    "failures": [
+      "c1cdbb31-fd3f-4383-9d90-7aed8ee9cf03 / RAW_SIGMA_DP1.X3F\uFF1AThe RAW file could not be decoded safely.",
+      "a0a3eb62-8320-4072-bb94-03f2fc1e3850 / RAW_LEICA_M240.DNG\uFF1ARAW\u5143\u6570\u636E\u89E3\u6790\u5931\u8D25\uFF1B\u672A\u731C\u6D4B\u65B9\u5411\u6216\u56DE\u9000\u50CF\u7D20\uFF1ARAW_LEICA_M240.DNG",
+      "0ffaf67c-c21c-468c-881c-3ff99e85bdda / RAW_SIGMA_SD10.X3F\uFF1AThe RAW file could not be decoded safely.",
+      "a25cda63-f5ce-4b27-9381-c58c160962b6 / RAW_SIGMA_SD14.X3F\uFF1AThe RAW file could not be decoded safely.",
+      "0a601946-ac9b-41d1-8168-66ffd8eb0128 / RAW_SIGMA_SD9_SRGB.X3F\uFF1AThe RAW file could not be decoded safely.",
+      "03ae1df7-5988-4798-a707-bfa3e6dc9b6f / RAW_SIGMA_DP1S.X3F\uFF1AThe RAW file could not be decoded safely.",
+      "cdd8c2e5-622b-4e25-8c72-ff0fc881c326 / RAW_POLAROID_X530.X3F\uFF1AThe RAW file could not be decoded safely."
+    ],
+    "sources": [
+      {
+        "targetId": "437bc21c-4443-4c11-bd39-1e0271eb5ad2",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\1dm2\\RAW_CANON_1DM2.CR2",
+        "hash": "AA27B723CBF885ACAE845331A9B5816ABE87D6C1158CF57442CBC0B1DEFB40B5"
+      },
+      {
+        "targetId": "8eed74c7-a56f-466e-b6df-411a5c0c7c46",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\1dm2n\\RAW_CANON_1DM2N.CR2",
+        "hash": "AD2FEE73DD121BD2D74D71A5570E6FC5FDD2BBC67212A0DDB6447486E547A52E"
+      },
+      {
+        "targetId": "676b2222-86c2-410d-80d7-dca9c636feb2",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\1dm3\\RAW_CANON_1DMARK3.CR2",
+        "hash": "864E1E36A2C8BC6F815BE6D13AFC9F7B2DE94E008109D2CAD96A5B8BA22AACE7"
+      },
+      {
+        "targetId": "bdd89e69-ec47-46e6-ac8a-9eb90e62feae",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\1dsm2\\RAW_CANON_1DSM2.CR2",
+        "hash": "2B0CAF37F2D9C6613F9B0279F11BEEB150645239F3AF38F19D80D92BBF753C60"
+      },
+      {
+        "targetId": "0ca8d4d3-2497-45f6-a3cb-3b38564f91d5",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\1dsm3\\RAW_CANON_1DSM3.CR2",
+        "hash": "834A4761F4471DE64B2541302D291A3AFFE8A75B7820ECD0D25DCB11DEF6A96A"
+      },
+      {
+        "targetId": "997d57b4-efa8-4134-b6fe-a45d7e57fa78",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\20d\\RAW_CANON_20D.CR2",
+        "hash": "DC3DCC6E640B630C388251911682C45BE3874CA4B434ED7920B26F902B833B9F"
+      },
+      {
+        "targetId": "ec548288-2dec-498c-a1ae-1887c09ee074",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\30d\\RAW_CANON_30D.CR2",
+        "hash": "034585802284654CD0C230D3B64041AC209830839B2C2564831A38AAC7DBEAF6"
+      },
+      {
+        "targetId": "5d18c4c4-cd3c-45ac-9b14-4d134a4fde75",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\350d\\RAW_CANON_350D.CR2",
+        "hash": "E496788ECE326162723B1ADE9BB55B61C56D59738400892166E044D1E5DDC175"
+      },
+      {
+        "targetId": "0cc96ce1-d5cc-4e0c-ad5a-a4a6f504016d",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\400d\\RAW_CANON_400D_ARGB.CR2",
+        "hash": "7A0E62AAD23900CF22EDBA14F3AAE12C17F30D05FF636738127630D253E7478B"
+      },
+      {
+        "targetId": "a4c6bbf3-0ce2-4bc0-b416-be4cb69094e2",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\40d\\RAW_CANON_40D_RAW_V103.CR2",
+        "hash": "B2079D0B03140872D747742E123F6476FFE39BD113B1F9AF706D472DC632BC24"
+      },
+      {
+        "targetId": "b3e12753-f726-46cd-80a9-59e91ee12a3b",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\450d\\RAW_CANON_450D.CR2",
+        "hash": "E7954E768D85BDB030418883AD546B47DF1A3C4412B53E0CB1C3484D4385A125"
+      },
+      {
+        "targetId": "bb21edc9-91b1-4081-9db9-44b32f89ff09",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\50d\\RAW_CANON_50D.CR2",
+        "hash": "990D870C38E548B31CAEFEC894541C1AEF03C9185FF2B5BCEEF4B2B3EFC53D83"
+      },
+      {
+        "targetId": "38bfabe9-4e59-414a-b918-b49c45ddc180",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\5d\\RAW_CANON_5D_ARGB.CR2",
+        "hash": "34F4AC1AE1AE72467F38F471E9FA1F3874A3CEC8B556FBDD4B5954063D304D1D"
+      },
+      {
+        "targetId": "6b7d5bdb-91b1-4bca-a015-10536b04f286",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\5dm2\\RAW_CANON_5DMARK2_PREPROD.CR2",
+        "hash": "0DA28F6F2718EA82FDF95C35A1790597A3A7ECBE328A3F5B60A05F4E95E380E6"
+      },
+      {
+        "targetId": "18d48809-861f-456e-96c4-5daf0451d97a",
+        "path": "N:\\pixart\\RAW\\Real\\sony\\a100\\RAW_SONY_A100.ARW",
+        "hash": "40AC6D96421F62B37E19B7F3EE3CA2B42AF189F1546985AF31E49639C2F8D879"
+      },
+      {
+        "targetId": "fefcfa1a-0ede-449a-859f-d31bddffddcc",
+        "path": "N:\\pixart\\RAW\\Real\\sony\\a200\\RAW_SONY_A200.ARW",
+        "hash": "8C70C020D0FDEC94DD335399B78E066E146D8D6ACD0CE2CFEE55190E325B9437"
+      },
+      {
+        "targetId": "a4018e1b-7256-4e9a-a92e-835ee8d0a266",
+        "path": "N:\\pixart\\RAW\\Real\\sony\\a300\\RAW_SONY_A300.ARW",
+        "hash": "DAAA25127006B1178C298BCE14DE41C80EF0FD95101F0B3513E5126DFB8CCED2"
+      },
+      {
+        "targetId": "f7e8c6d8-ec09-4a08-b9d7-e5634dc03597",
+        "path": "N:\\pixart\\RAW\\Real\\sony\\a350\\RAW_SONY_A350.ARW",
+        "hash": "30F443F9F127877F5140814529B4A3C3C9DC19235534478BAC159880792C1BC4"
+      },
+      {
+        "targetId": "1264041f-82a7-41a1-9559-39dd66498af9",
+        "path": "N:\\pixart\\RAW\\Real\\sony\\a700\\RAW_SONY_A700.ARW",
+        "hash": "AF64D1D52B3CC4F55B2050E45E6022EBF7D7553F14E2810A0558B6A5589BD978"
+      },
+      {
+        "targetId": "15c8ebfd-351a-4ada-a12f-64a25510151e",
+        "path": "N:\\pixart\\RAW\\Real\\sony\\a900\\RAW_SONY_A900.ARW",
+        "hash": "0908BCF3532709B6BC03D79D0712EC58F549507B2CABB65CBA917CAA8918F767"
+      },
+      {
+        "targetId": "c6349d95-c9d8-4a60-a433-7bd5c7c38e57",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\c5050z\\RAW_OLYMPUS_C5050Z.ORF",
+        "hash": "F4B013E78204EBAADD740D93416080856B3C51EC154760E2E2DE0E552873044A"
+      },
+      {
+        "targetId": "c02d2876-a351-4a51-a987-ee4f8a484d8d",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\c8080\\RAW_OLYMPUS_C8080.ORF",
+        "hash": "D7BBB0740FD55A6CDDAE193BB03C873C1B774C10C6F4D2160D843460D5436FA4"
+      },
+      {
+        "targetId": "f8bf355c-4c4d-4ad1-b189-3b657123827a",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\RAW_CANON_1000D.CR2",
+        "hash": "0FEB8741AE98E85D2E2FBB3F9017B24881F5F46A69F6D78ADB703720451E654D"
+      },
+      {
+        "targetId": "65990d08-a984-4314-92a0-72c846b13107",
+        "path": "N:\\pixart\\RAW\\Real\\hasselblad\\cfv\\RAW_HASSELBLAD_CFV.3FR",
+        "hash": "F7C0F941BD542EC638073BFA9FEBDC4EFA01F4A4855D73C5D9218B975D1DE91A"
+      },
+      {
+        "targetId": "e0d31a7f-d444-44d1-af13-9009a0b457a8",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d1\\RAW_NIKON_D1.NEF",
+        "hash": "7886D8B0E1257897FAA7404B98FE1086EE2D95606531B6285AED83A0939B768F"
+      },
+      {
+        "targetId": "d20bc4e8-8a7a-429f-bb14-9f768c14d84e",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d100\\RAW_NIKON_D100.NEF",
+        "hash": "013B73E9DFCD6C076CC3EAC2978CFB0232FEDB1F2E9A485CE87110FB5B0E1276"
+      },
+      {
+        "targetId": "01f2b7df-e0b6-48c7-b286-4887dcce4e61",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d1x\\RAW_NIKON_D1X.NEF",
+        "hash": "9C60CFEB40AA6132BD31707A2F24DE78DD845E9365D20DCFD70C40F3A2FDC171"
+      },
+      {
+        "targetId": "803c5059-8612-49ed-ae19-ad3f612a6ce1",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d200\\RAW_NIKON_D200_SRGB.NEF",
+        "hash": "EC815A846017413BF82E34C33CBA4414C523627DABC7C8D27346B90AF4AFCB0E"
+      },
+      {
+        "targetId": "0c8ccf9e-b6e7-4d5a-9830-1bfad655477a",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d2x\\RAW_NIKON_D2X_SRGB.NEF",
+        "hash": "0B56421E3815091424F7BFC76E41C1E7A9A3ABF795CD9EF1111E469331ECE7BD"
+      },
+      {
+        "targetId": "9a22e18c-5436-49c5-997f-aba5f7654ee1",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d3\\RAW_NIKON_D3.NEF",
+        "hash": "3CF36D631D55540CFA61DAEF30FF50D075C6A916A69962115088B5F7EE77A94D"
+      },
+      {
+        "targetId": "90502c46-edf4-4d5d-a000-a567bbc31cfc",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d300\\RAW_NIKON_D300.NEF",
+        "hash": "119728B0D1AA1D1556D9DA2EB2212CD2F4B713EB5AC494CB51A988B6A65765D2"
+      },
+      {
+        "targetId": "a94a79d6-24e5-4e50-b011-00e595f6d5b9",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d3x\\RAW_NIKON_D3X.NEF",
+        "hash": "F52CF0AA29E65218BF80937764AB1946D850D505621E387A74F742D817AA6610"
+      },
+      {
+        "targetId": "31d9e72e-0f96-415a-ba61-3c49b0793a04",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d40\\RAW_NIKON_D40_SRGB.NEF",
+        "hash": "7AD000210F00246AA46DC8F70EB39A4C97C5267120C8B12612EAB502A93BF061"
+      },
+      {
+        "targetId": "33746f7b-5940-40a5-861e-7f1fa349388e",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d50\\RAW_NIKON_D50.NEF",
+        "hash": "5F46DEAC60A47DC45A033E4B11EB162C08CAED265899E5B7BF99DF6E65C34047"
+      },
+      {
+        "targetId": "619dfeee-cf63-40b9-babc-96d85b535a64",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d60\\RAW_NIKON_D60.NEF",
+        "hash": "E475C416621F774D67B61531D3B41E0F04D8DF353B7103627E98BEA10FC7D15E"
+      },
+      {
+        "targetId": "70e99c18-c455-4740-b75d-c7b2dd6598e7",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d70\\RAW_NIKON_D70.NEF",
+        "hash": "18E287009B15B20FC73FD2223ED1551231F3853398A38A7B0A4308B630E1F805"
+      },
+      {
+        "targetId": "33673663-ceff-46d8-b136-7ac89997049a",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d700\\RAW_NIKON_D700.NEF",
+        "hash": "B5820CBC60863F4988E9B5628916079019E1BB6B1C95978CF6E13033A938F122"
+      },
+      {
+        "targetId": "08d5763f-6410-412e-9250-1185c8dca246",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d80\\RAW_NIKON_D80_SRGB.NEF",
+        "hash": "276223FB4AF702FF6F748FD980767FD5714760CA36A7012CBE7208B2C0F25BEA"
+      },
+      {
+        "targetId": "5cdbfde6-1b71-4b05-b033-2719b800c9ec",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\d90\\RAW_NIKON_D90.NEF",
+        "hash": "56FAB62C37D10905654583307E551E0DE3CCF66AA3D663197BE05B4C5193B733"
+      },
+      {
+        "targetId": "c1cdbb31-fd3f-4383-9d90-7aed8ee9cf03",
+        "path": "N:\\pixart\\RAW\\Real\\sigma\\dp1\\RAW_SIGMA_DP1.X3F",
+        "hash": "B7B326DE857806C67DEA0F346605D3A4725053F633429110A22415CEB70EDF18"
+      },
+      {
+        "targetId": "692df423-9de3-442b-a88a-155e855d1020",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\e1\\RAW_OLYMPUS_E1.ORF",
+        "hash": "E07D4A7F2CEFE6BEA7E129A9856D5205F73239501AC833997ECA1B2CB0A8278B"
+      },
+      {
+        "targetId": "b54c1013-770a-4965-b1f1-4e00fa0cb417",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\e20\\RAW_OLYMPUS_E20.ORF",
+        "hash": "888E84A03F4174BE2CC6D577587EBEE80813A410CD6587B485A7D1FFEEC6DAC8"
+      },
+      {
+        "targetId": "8d32f1d2-05e5-4250-9f4b-39fa6a869dda",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\e3\\RAW_OLYMPUS_E3.ORF",
+        "hash": "1B6B7BC8ED608359CCA1F00B09A12183CE6BFC1D682D67137DE0983984876268"
+      },
+      {
+        "targetId": "2593506b-2fa9-4064-82fe-2e51119130e5",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\e300\\RAW_OLYMPUS_E300.ORF",
+        "hash": "38CE618311387CD081BE3EA74E338043F86A3327082B7B802E239AEC8E40C6BF"
+      },
+      {
+        "targetId": "c078b760-f229-4e7f-a1a3-8af21ed3d6f8",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\e410\\RAW_OLYMPUS_E410.ORF",
+        "hash": "EDDEC17828E47938A9639CD63528D5F7D2E6A4C3416A08E7ACB9BF9736D0E0B7"
+      },
+      {
+        "targetId": "56973875-4822-4662-8a26-e9aafafa1fd3",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\e500\\RAW_OLYMPUS_E500.ORF",
+        "hash": "87CFEDD49E0115CFE0B67CEF98306687BCC61392E81C0557F75D4CCECCEF88E4"
+      },
+      {
+        "targetId": "c50e6027-b447-4e7f-908e-970db4acd26d",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\e510\\RAW_OLYMPUS_E510.ORF",
+        "hash": "93BA141F0AD3C18F5886D3D363486D1A526520C00B9B77F8155DE3B76F9038FF"
+      },
+      {
+        "targetId": "ffe3dcb4-fbf0-4b3c-a239-134145089ae0",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\e5400\\RAW_NIKON_E5400.NEF",
+        "hash": "0BC1B12855D1F15AAC9D615A3613EC04B7C5354627DFDD50C4251BC27CF44D3A"
+      },
+      {
+        "targetId": "8bf0cf6f-da23-4048-8130-53f9c6f7542e",
+        "path": "N:\\pixart\\RAW\\Real\\fuji\\e550\\RAW_FUJI_E550.RAF",
+        "hash": "82D1010A1EB8CDF4B2DE7CA30A3A4DB4E96F290536F06ED2798A67C1FE81E6AE"
+      },
+      {
+        "targetId": "d146c7bb-7850-43a0-87fe-fae5cab665cf",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\e5700\\RAW_NIKON_E5700_SRGB.NEF",
+        "hash": "232A78DF1610CA3992B4EAAC0F23046EEE1D30FC517300862718ECCB474A1239"
+      },
+      {
+        "targetId": "4d05b02e-022b-4ef4-b1f5-fca46fa1dc3b",
+        "path": "N:\\pixart\\RAW\\Real\\fuji\\e900\\RAW_FUJI_E900.RAF",
+        "hash": "07ADEE4A49AE922C89786C96C2F86CE3C130FA128E18B25D0E498FA881D51B94"
+      },
+      {
+        "targetId": "6635d710-365b-4bd1-b3fa-307ece36d1ad",
+        "path": "N:\\pixart\\RAW\\Real\\fuji\\f700\\RAW_FUJI_F700.RAF",
+        "hash": "C3686A66F9159043BD27AFB0D749D566C2912A0374319E38F68FA6255EA565B4"
+      },
+      {
+        "targetId": "77f242b6-b6e4-41fe-938f-56fee58088cf",
+        "path": "N:\\pixart\\RAW\\Real\\fuji\\DSCF0347.RAF",
+        "hash": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865"
+      },
+      {
+        "targetId": "b2d5f1bc-346b-46b3-b429-d1b1cdae9fc5",
+        "path": "N:\\pixart\\RAW\\Real\\panasonic\\fz28\\RAW_PANASONIC_FZ28.RW2",
+        "hash": "9ECD3C98C5AAA12F9971A4C25F62F2CD9E3F99847620B9CB4C9E819D27FBF1BD"
+      },
+      {
+        "targetId": "934e3484-baf6-4ecf-acf3-ba03f1b3599e",
+        "path": "N:\\pixart\\RAW\\Real\\panasonic\\g1\\RAW_PANASONIC_G1.RW2",
+        "hash": "AA3B92D6592744A889D7EA50AAF3EA55E0EC961D04C740D437D3396CA79757BE"
+      },
+      {
+        "targetId": "b8f70f6c-6add-415e-946d-7792e40d3244",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\g10\\RAW_CANON_G10.CR2",
+        "hash": "207717B321988279062A6623C8F6DE53645130755EB3EE77CCB241F06F82138C"
+      },
+      {
+        "targetId": "42f2fee3-631c-4714-a3c1-186555c0f867",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\g9\\RAW_CANON_G9.CR2",
+        "hash": "1992337CB61576647BE26ED2DD868DB21A694D0396A06858A97DF9213F47EB11"
+      },
+      {
+        "targetId": "80d324b0-2312-4f19-80f1-9129ee719f26",
+        "path": "N:\\pixart\\RAW\\Real\\ricoh\\gr2\\RAW_RICOH_GR2.DNG",
+        "hash": "43D6B45C9E05C0D5906C08300A7A51ABA5968E38D46EC27034AE3BAB0FE605F5"
+      },
+      {
+        "targetId": "c4feaa6e-ba47-48ac-89ae-cf336f5ecbf9",
+        "path": "N:\\pixart\\RAW\\Real\\hasselblad\\h3d-39ii\\RAW_HASSELBLAD_H3D39II.3FR",
+        "hash": "C3E148896399A4CBEA615C5A730E0297F0DC7C5C4D1AC753C3A07299DD68B49A"
+      },
+      {
+        "targetId": "d7391237-8aaa-4c7a-99fc-a273f82403e7",
+        "path": "N:\\pixart\\RAW\\Real\\hasselblad\\RAW_HASSELBLAD_IXPRESS_CF132.3FR",
+        "hash": "F859BC7F68692A9326E053156BA6374D3677331396D840184822C8667462A799"
+      },
+      {
+        "targetId": "c2df2cf9-187c-4a1f-ad0c-c4a55e0c24d1",
+        "path": "N:\\pixart\\RAW\\Real\\pentax\\k100dsuper\\RAW_PENTAX_K100DSUPER.PEF",
+        "hash": "4ACA9B86E2C14C9473B22A5C67B95144F6A4140DFFD69444DEC6FF6BA8A6BC5C"
+      },
+      {
+        "targetId": "6c6403c2-d816-40a6-9ac4-dd9540ce8b24",
+        "path": "N:\\pixart\\RAW\\Real\\pentax\\k10d\\RAW_PENTAX_K10D_SRGB.DNG",
+        "hash": "FE4416A68F702B0C0B57B336EA4F9E73E63BD8570795FC782C711B8981F11B95"
+      },
+      {
+        "targetId": "c13a4175-9c19-4a38-ab06-678f1c2710fd",
+        "path": "N:\\pixart\\RAW\\Real\\pentax\\k200d\\RAW_PENTAX_K200D.PEF",
+        "hash": "956C43997B2A33DF376E5D1370ED191B7784C1CD60A0370A01F430210C548DDF"
+      },
+      {
+        "targetId": "257d56e9-1246-4e6a-a930-0aaf4f722a62",
+        "path": "N:\\pixart\\RAW\\Real\\pentax\\k20d\\RAW_PENTAX_K20D.PEF",
+        "hash": "76C12ADA9AB29F82BEAB2BC9A9721A39D060C0047A409E2F5C31AABD65CF2E95"
+      },
+      {
+        "targetId": "a0a3eb62-8320-4072-bb94-03f2fc1e3850",
+        "path": "N:\\pixart\\RAW\\Real\\leica\\RAW_LEICA_M240.DNG",
+        "hash": "C4C4617DC7035B9D8C53C766A1B674F0135C23CEC4D3F1C49C6744870CF0AA6D"
+      },
+      {
+        "targetId": "19f6dde8-3463-4eda-8e1f-e15084d94466",
+        "path": "N:\\pixart\\RAW\\Real\\panasonic\\lx3\\RAW_PANASONIC_LX3.RW2",
+        "hash": "53FEAE9E055D8387700C53E167259FBA3021471444A622F14A3FB575F5D19C65"
+      },
+      {
+        "targetId": "7aab1904-fc8a-47c3-a2be-b43cf4f5e85f",
+        "path": "N:\\pixart\\RAW\\Real\\leica\\m8\\RAW_LEICA_M8.DNG",
+        "hash": "081BC2378AD24E36670AD39028FD167953DFB4972699B00404A303744C5BE4B6"
+      },
+      {
+        "targetId": "bb998c90-c721-401d-b217-53b37bba0ce4",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON1_V1.NEF",
+        "hash": "1258C3A789D55FFDE1EACF512EC3BC29CD5B7EE32EB38CAD05B946FF71DDAA03"
+      },
+      {
+        "targetId": "d6e792b8-d83b-48f1-92b5-171a1c3af971",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\RAW_OLYMPUS_C5060WZ.ORF",
+        "hash": "1C657D52775C2B5E57E50BDD4D4813A8265C0C17409E7E1D08D9A02DF48AFF3C"
+      },
+      {
+        "targetId": "efd46bf3-257f-4207-8016-f629112b5fbe",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\p6000\\RAW_NIKON_P6000_GPS.NRW",
+        "hash": "652D96BF6FC6979A7791DA1781192E7EFE5863D83A32196D6EC7E258D4063FF9"
+      },
+      {
+        "targetId": "c04d5395-ca90-442f-ab3a-00997506265a",
+        "path": "N:\\pixart\\RAW\\Real\\panasonic\\RAW_PANASONIC_DMC-G3.RW2",
+        "hash": "DC6DC92EE0E2146586C7987D05F35CEFDDABB00384631BEFBD52B4DF551AD617"
+      },
+      {
+        "targetId": "f33a7ce6-4403-4f4f-90a4-56bc8301d7f7",
+        "path": "N:\\pixart\\RAW\\Real\\pentax\\RAW_PENTAX_K-3-II.PEF",
+        "hash": "249BC4261214A0F46A4064583783F57818D84D01531C1E7FEF9031C901632240"
+      },
+      {
+        "targetId": "2be7c541-e259-475f-8254-84db77f8874b",
+        "path": "N:\\pixart\\RAW\\Real\\phones\\RAW_NOKIA_LUMIA_1020.DNG",
+        "hash": "0A5BC55096C0D4B43EFFC4D49947F3B9337C5CFA1E76DAC026F6286190F4DAF0"
+      },
+      {
+        "targetId": "eb873a2a-179c-41ae-8f37-2ca8dbd0bc2a",
+        "path": "N:\\pixart\\RAW\\Real\\ricoh\\RAW_RICOH_GR.DNG",
+        "hash": "378498B4363CBDEC6789A5534617B96D2D4B1AFE0AC4DDE04EF7C954E8639804"
+      },
+      {
+        "targetId": "c656b097-76f2-4a69-8d43-ea0f906c6585",
+        "path": "N:\\pixart\\RAW\\Real\\fuji\\s2pro\\RAW_FUJI_S2PRO.RAF",
+        "hash": "3803F0FA98FDC452DD623B0D66BC9B6912014B4463C0B683BE92B6986811B4F2"
+      },
+      {
+        "targetId": "c3c90fff-f73f-4cb4-a561-46db65f56eb9",
+        "path": "N:\\pixart\\RAW\\Real\\fuji\\s3pro\\RAW_FUJI_S3PRO.RAF",
+        "hash": "E19C88A74226F22A0858642FD6F9067BD63C07F4A4608B0C374C59850DA453B8"
+      },
+      {
+        "targetId": "b612789f-aa90-49cb-b180-0a1151c57be3",
+        "path": "N:\\pixart\\RAW\\Real\\fuji\\s5000\\RAW_FUJI_S5000.RAF",
+        "hash": "A069DD0244039F1F00AEA4FC7882EEC5EA4B2E21609B87C626C92168A932C0A6"
+      },
+      {
+        "targetId": "1ab8c225-179f-41ac-ad2f-74833e932e24",
+        "path": "N:\\pixart\\RAW\\Real\\fuji\\s5600\\RAW_FUJI_S5600S5200.RAF",
+        "hash": "8D24AC05AF61C8AF0A2E7E97166E0DB142B5CFB126655462704BF3DE03D30D23"
+      },
+      {
+        "targetId": "86e6d415-8a8d-4723-942f-12282cbd22f8",
+        "path": "N:\\pixart\\RAW\\Real\\fuji\\s5pro\\RAW_FUJI_S5PRO_V106.RAF",
+        "hash": "E75DABEE0093A99B43C25994D8B0ABC0792257DBCB52F6B7902F6E460DC97CA2"
+      },
+      {
+        "targetId": "4efea174-109b-43be-87c6-2057476d4b2d",
+        "path": "N:\\pixart\\RAW\\Real\\fuji\\s6500fd\\RAW_FUJI_S6500FD.RAF",
+        "hash": "B3612251B71676CC07812A9299B1F96545ED7D31ACDD1C92803C23E612EE3F9D"
+      },
+      {
+        "targetId": "d87de49d-053a-4299-9e1f-9db8ee31a127",
+        "path": "N:\\pixart\\RAW\\Real\\fuji\\s9500\\RAW_FUJI_S9500_SRGB.RAF",
+        "hash": "6DEB020E391EDF730B518023A0F3DFA7E521F4B34BEFE082C39BF11D18E7F6CE"
+      },
+      {
+        "targetId": "a11420c0-c0e0-4c68-92d0-b66441a5bd4e",
+        "path": "N:\\pixart\\RAW\\Real\\samsung\\RAW_SAMSUNG_ WB2000 .SRW",
+        "hash": "B26C7D5C88E59B6FF076DCC224785C9A2D81E0660D0230080497BC7D3E309819"
+      },
+      {
+        "targetId": "0ffaf67c-c21c-468c-881c-3ff99e85bdda",
+        "path": "N:\\pixart\\RAW\\Real\\sigma\\sd10\\RAW_SIGMA_SD10.X3F",
+        "hash": "EA436BA459A7478D7B338428656FAE905469DE269F928749F3388DB2B7B0D53F"
+      },
+      {
+        "targetId": "a25cda63-f5ce-4b27-9381-c58c160962b6",
+        "path": "N:\\pixart\\RAW\\Real\\sigma\\sd14\\RAW_SIGMA_SD14.X3F",
+        "hash": "5B9512853384CEEA810720DD6F786B7ED23FB5A64D141FF0BF993B499D4DF16A"
+      },
+      {
+        "targetId": "0a601946-ac9b-41d1-8168-66ffd8eb0128",
+        "path": "N:\\pixart\\RAW\\Real\\sigma\\sd9\\RAW_SIGMA_SD9_SRGB.X3F",
+        "hash": "9FAED9EFE3BB53F34534B487DA3045F01D58935F7377450097B6063947964109"
+      },
+      {
+        "targetId": "03ae1df7-5988-4798-a707-bfa3e6dc9b6f",
+        "path": "N:\\pixart\\RAW\\Real\\sigma\\RAW_SIGMA_DP1S.X3F",
+        "hash": "DC667EFC0C9314124C95C2B9D67A5BA9E6C372F77A9BBEA81CAE559E3A99436F"
+      },
+      {
+        "targetId": "1e14d7b7-ed18-4d0f-b05b-c5e03d10c356",
+        "path": "N:\\pixart\\RAW\\Real\\sony\\RAW_SONY_A330.ARW",
+        "hash": "E5737FC8DEBB5DDEA8D557DE050565F3516635E093D246450EA2B3D1A27947A3"
+      },
+      {
+        "targetId": "e14f8bb6-366f-4917-9211-fdd14839faf5",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\sp350\\RAW_OLYMPUS_SP350.ORF",
+        "hash": "37DCA153CBB42E52A13FECDB3929AE2F7B4D73D7C1AB083B0B06E85887D5EBD1"
+      },
+      {
+        "targetId": "9d923bd9-59f1-4552-a2bb-ecd8dc816a2d",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\sp500uz\\RAW_OLYMPUS_SP500UZ.ORF",
+        "hash": "076D1A979BBA1CFB48C3E90410305DE60E8AE4F988EABD246D684117F80A9F96"
+      },
+      {
+        "targetId": "1ff90d5e-98da-4ace-9990-035fd8155600",
+        "path": "N:\\pixart\\RAW\\Real\\pentax\\star_d\\RAW_PENTAX_STARISTD_SRGB.PEF",
+        "hash": "2593204DAFD9193703655BE9189C6D1734CDF376F80071922577779D98EE9189"
+      },
+      {
+        "targetId": "d71044d5-a4ab-43dd-b603-c1d44faaaaef",
+        "path": "N:\\pixart\\RAW\\Real\\pentax\\star_dl\\RAW_PENTAX_STAR_DL.PEF",
+        "hash": "7A1FB767D46BD7B6852B8ECCF7D55265ED0B79AE7F2DA8D8CC6176E01B1F3E4E"
+      },
+      {
+        "targetId": "cdd8c2e5-622b-4e25-8c72-ff0fc881c326",
+        "path": "N:\\pixart\\RAW\\Real\\polaroid\\x530\\RAW_POLAROID_X530.X3F",
+        "hash": "151B4411058B768ADC69183EDD11656A4224CA03D3A118442CFA692986FB4754"
+      },
+      {
+        "targetId": "1e05e522-72c4-4532-a5b4-e351672cacbc",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\40d\\RAW_CANON_40D_RAW_V104.CR2",
+        "hash": "4805563F6C9A5399B4C282129D8569F9257C51371FBD2E56903BF3DA0CF2858E"
+      },
+      {
+        "targetId": "4179f177-a33b-450e-bcc0-ec7da0c866b7",
+        "path": "N:\\pixart\\RAW\\Real\\canon\\RAW_CANON_6D.CR2",
+        "hash": "FEC7395A77D608A2700A4342FB933E6D600D2C22E2F6F88FBD06918CBABA00DC"
+      },
+      {
+        "targetId": "33c8a528-2306-4549-8fcf-4763d51b5b34",
+        "path": "N:\\pixart\\RAW\\Real\\fuji\\DSCF0370.RAF",
+        "hash": "7D82D011ED47CC8859988A562EA693BE8A28A1770C652A8CAE520D086ABB65A2"
+      },
+      {
+        "targetId": "7c81ddd1-c4e6-44bd-8bc7-9412a8965761",
+        "path": "N:\\pixart\\RAW\\Real\\pentax\\k10d\\RAW_PENTAX_K10D_SRGB.PEF",
+        "hash": "54977E4079C349E3778821AF785D53340DC34E33C621711B4706731084FF1E14"
+      },
+      {
+        "targetId": "65a4a0da-cacb-40b5-8b2b-0064c0c6338c",
+        "path": "N:\\pixart\\RAW\\Real\\nikon\\RAW_NIKON_1S2.NEF",
+        "hash": "C9A3EAC53AFB6FF393458F6A389466AF05DCCE8A32E97725F7AAEF543E2894CB"
+      },
+      {
+        "targetId": "e74bd3e5-d26a-4003-a06b-f6f18ad48f67",
+        "path": "N:\\pixart\\RAW\\Real\\olympus\\RAW_OLYMPUS_E-330.ORF",
+        "hash": "0C7F93F69453269942218D09A4E5BC7F929A41C4BFB9CE6CE7A7E677D4BB39AF"
+      },
+      {
+        "targetId": "40269758-bf3b-43b9-a9bc-1a06484ad465",
+        "path": "N:\\pixart\\RAW\\Real\\panasonic\\RAW_PANASONIC_DMC-GF1.RW2",
+        "hash": "CEDD2564DD059479964A83F555BD5A8CD6C7506698A65586D8083FAF42676521"
+      },
+      {
+        "targetId": "944fdc98-7a41-4530-9d38-a41a67335261",
+        "path": "N:\\pixart\\RAW\\Real\\pentax\\RAW_PENTAX_K-7.PEF",
+        "hash": "E5A0458ECB10ABEF492B22587032328896BE8EC5B3FA0A1FCCFDD9D0A0482B07"
+      }
+    ]
+  }
+]

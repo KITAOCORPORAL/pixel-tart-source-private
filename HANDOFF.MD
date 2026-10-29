@@ -1,3 +1,11 @@
+## 2026-10-29 America/Los_Angeles 灯箱/胶片后端当前交接
+- 当前家庭产品f70ecf7d1179b6f42c721a787a4a2d7a7acc8109，分支home/r54-design-fixes-20261029，起点29e09c08/旧cedd5ce5。权威docs/validation/home-lighttable-film-20261029/FINAL_REPORT.md，联动总纲docs/roadmap/LIGHTTABLE_SPEKTRALAB_INTEGRATION.md。
+- 暗室冻结阶段系统执行视图、选中/配方切换保护、完整四色轮量测、旧包像素A/B已做，旧处理数学/两款宝丽来/共享比较保留。
+- 已新增现有比较入口内灯箱（中性/摆放/缩放旋转/1600px代理放大/比较返回/保存重开），独立ViewingTableState v1不是拼贴/新图库；胶片任务桥只接原生8位不透明JPEG/PNG/BMP已有后端，完整计算后新结果变体，source/recipe/domain/profile/engine/resource/seed全绑定，取消失败无半成品。
+- Spektra研究最新ce292f2a已只读，构建/渲染成功但BT失败、无任意grain_seed、GPL/数据许可未批准，产品仍禁用且未打包；不回退原有宝丽来近似，后端分类独立。
+- 最终29项发布DLL绑定，69项唯一受影响PASS/0FAIL；不是全量/真实鼠标。自然10张10载入，100张93载入7失败，首次49.33s、采样工作集3,925,913,600 bytes，缓存21,724,708 bytes；不是流畅100张验收。
+- 家庭完整包N:/pixart/Guangjing-LightTable-20261029/Guangjing-LightTable-Film-Diagnostic-win-x64，隔离CMD，不Setup，不发行。源/文档/ZIP/远端身份分开。剩余RAW解码内存、全原图局部细节、外部引擎门禁/崩溃恢复与物理DPI见报告，勿再次重做已实现主干。
+
 ## 家庭显影阶段接续 — 产品 cedd5ce5，诊断版
 - 从dbe4dce6接续；类型化只读显影阶段由当前变体冻结配方投影，普通栈不新增滤镜，CandidateRenderSession仍唯一执行。阶段卡当前独立于普通图连线，不冒充可编辑路由；旧/新版本兼容通过重开测试。
 - 四色轮2×2、右侧22DIP可展开示波；44项发布绑定测试通过。详见docs/validation/home-r54-developed-stage-20261029/FINAL_REPORT.md。

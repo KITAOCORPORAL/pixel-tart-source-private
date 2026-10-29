@@ -1,0 +1,24 @@
+{
+  "baselineSourceSha": "cedd5ce52792574e851a55b413471ee70efbe691",
+  "currentSourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+  "sourceSha256": "007F405488C1BE6286EB6B75B9531484BF607CCECEA3DF7813F7C90797085C27",
+  "previewPixelsEqual": true,
+  "outputs": [
+    {
+      "format": "Png",
+      "decodedPixelsEqual": true,
+      "fileHashEqual": true
+    },
+    {
+      "format": "Tiff",
+      "decodedPixelsEqual": true,
+      "fileHashEqual": true
+    },
+    {
+      "format": "Jpeg",
+      "decodedPixelsEqual": true,
+      "fileHashEqual": true
+    }
+  ],
+  "scope": "single fixed synthetic input; actual frozen old/current production DLLs; not all natural photos"
+}

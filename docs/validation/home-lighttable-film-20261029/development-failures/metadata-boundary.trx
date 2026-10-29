@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="598b298a-2e17-46e8-98db-75b04b0da457" name="Admin@DESKTOP-HO0JJEQ 2026-10-29 23:50:46" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-29T23:50:46.4273817+08:00" queuing="2026-10-29T23:50:46.4273821+08:00" start="2026-10-29T23:49:58.5515558+08:00" finish="2026-10-29T23:50:46.4322526+08:00" />
+  <TestSettings name="default" id="22e695a3-ac79-4077-93b5-c90ddec28792">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-29_23_50_46" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="70c50626-fd7c-4c4c-84fb-cc1f27da4e67" testId="1e383988-0537-8e83-9216-2d19d02c1348" testName="AuthorizedTenAndHundredNaturalPhotoViewingMeasurements" computerName="DESKTOP-HO0JJEQ" duration="00:00:47.2499959" startTime="2026-10-29T23:49:59.0171929+08:00" endTime="2026-10-29T23:50:46.2807827+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="70c50626-fd7c-4c4c-84fb-cc1f27da4e67">
+      <Output>
+        <ErrorInfo>
+          <Message>测试方法 RAWSelectionAssistant.WpfTests.LightTableWorkflowTests。AuthorizedTenAndHundredNaturalPhotoViewingMeasurements 引发了异常: &#xD;
+System.IndexOutOfRangeException: Index was outside the bounds of the array.</Message>
+          <StackTrace>   at MetadataExtractor.Formats.Xmp.XmpReader.Extract(Byte[] xmpBytes, Int32 offset, Int32 length)&#xD;
+   at MetadataExtractor.Formats.Exif.ExifTiffHandler.CustomProcessTag(TiffReaderContext&amp; context, Int32 tagId, Int32 valueOffset, Int32 byteCount)&#xD;
+   at MetadataExtractor.Formats.Tiff.TiffReader.ProcessIfd(ITiffHandler handler, TiffReaderContext context, Int32 ifdOffset)&#xD;
+   at MetadataExtractor.Formats.Tiff.TiffReader.ProcessTiff(IndexedReader reader, ITiffHandler handler)&#xD;
+   at MetadataExtractor.Formats.Tiff.TiffMetadataReader.ReadMetadata(Stream stream)&#xD;
+   at MetadataExtractor.ImageMetadataReader.ReadMetadata(Stream stream, String fileName)&#xD;
+   at MetadataExtractor.ImageMetadataReader.ReadMetadata(String filePath)&#xD;
+   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.ReadOrientation(String sourcePath)&#xD;
+   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.DecodeCore(String sourcePath, String extension, RawToJpegOptions options, CancellationToken cancellationToken)&#xD;
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)&#xD;
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task&amp; currentTaskSlot, Thread threadPoolThread)&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline.DecodeMasterAsync(String path, CancellationToken token)&#xD;
+   at RAWSelectionAssistant.Core.Services.Projects.RawMatchTiff16ProductPipeline.DecodeFrozenMasterAsync(String path, CancellationToken token)&#xD;
+   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.RenderFrozenVersionAsync(ReferenceTargetItem target, StudioEditVersion version, Int32 edge, CancellationToken token)&#xD;
+   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.RenderViewingItemAsync(ViewingTableItem item, Int32 edge, CancellationToken token)&#xD;
+   at RAWSelectionAssistant.ViewModels.ReferenceColorWorkspaceViewModel.PrepareViewingTableAsync(CancellationToken token)&#xD;
+   at RAWSelectionAssistant.WpfTests.LightTableWorkflowTests.&lt;&gt;c.&lt;&lt;AuthorizedTenAndHundredNaturalPhotoViewingMeasurements&gt;b__7_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407&#xD;
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="AuthorizedTenAndHundredNaturalPhotoViewingMeasurements" storage="n:\pixart\guangjing-r54-design-fixes-20261029\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1e383988-0537-8e83-9216-2d19d02c1348">
+      <Execution id="70c50626-fd7c-4c4c-84fb-cc1f27da4e67" />
+      <TestMethod codeBase="N:\pixart\guangjing-r54-design-fixes-20261029\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LightTableWorkflowTests" name="AuthorizedTenAndHundredNaturalPhotoViewingMeasurements" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1e383988-0537-8e83-9216-2d19d02c1348" executionId="70c50626-fd7c-4c4c-84fb-cc1f27da4e67" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

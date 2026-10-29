@@ -1,0 +1,26 @@
+{
+  "command": [
+    "C:\\Program Files\\dotnet\\dotnet.exe",
+    "publish",
+    "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+    "-c",
+    "Release",
+    "-r",
+    "win-x64",
+    "--self-contained",
+    "true",
+    "-o",
+    "N:\\pixart\\Guangjing-LightTable-20261029\\final-lighttable\\app",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:SourceRevisionId=f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "--disable-build-servers",
+    "-m:1",
+    "-nr:false"
+  ],
+  "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+  "exitCode": 0,
+  "startEpoch": 1793293759.0822098,
+  "endEpoch": 1793293788.1617057
+}

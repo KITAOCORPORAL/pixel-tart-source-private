@@ -1,6 +1,7 @@
 # R5.4 暗室当前开发大纲
-## 当前状态 2026-10-29 Asia/Shanghai
-当前家庭产品源码cedd5ce52792574e851a55b413471ee70efbe691，分支home/r54-design-fixes-20261029；显影阶段为冻结文档的只读类型投影，四色轮及右侧示波已接，测试和剩余见docs/validation/home-r54-developed-stage-20261029/FINAL_REPORT.md。诊断版、不能发行；不得将下文公司历史SHA当当前家庭产品。
+## 当前状态 2026-10-29 America/Los_Angeles
+当前家庭产品源码f70ecf7d1179b6f42c721a787a4a2d7a7acc8109，home/r54-design-fixes-20261029。暗室只读系统执行视图/四色轮完整量测与旧包像素A/B已补；中性灯箱固定变体最小闭环、8位已有创意胶片任务/后端契约和项目独立重开已接入。全部模块/策划15和旧教程退役保留，整体仍PARTIAL_DIAGNOSTIC。
+新总联动大纲：LIGHTTABLE_SPEKTRALAB_INTEGRATION.md。Spektra研究ce292f2a只读，默认未加载；不引入未经许可/色彩/seed门禁的研究资源。当前唯一证据/包身份见../validation/home-lighttable-film-20261029/FINAL_REPORT.md。历史状态仅为历史，不再当当前未注册/未交付结论。
 
 ### 公司基线历史（2026-10-29）
 公司产品源码4795d75721a00b3db68602e7294ffee8e82684ea，测试支持ab4285f108f59c30f271b5ffb0509d067ea2bff8；分支company/r54-closure-20261029，从6ad9ce72接续。页签无副作用、显式单历史新增、快速/精细最新请求、800有身份代理/有界节点缓存、风险回退与后台延后、2–4共享剧照/变体比较和单目标可撤销应用已交付；58唯一受影响自动测试PASS。

@@ -1,0 +1,32 @@
+[
+  {
+    "run": "high-depth-source.trx",
+    "test": "MissingAndChangedSourcesNeverCommitOrReuseStalePixels",
+    "outcome": "Failed",
+    "message": "Assert.IsTrue 失败。‘condition’表达式:‘rejected’。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153\r\n   at RAWSelectionAssistant.WpfTests.LightTableWorkflowTests.<>c.<<MissingAndChangedSourcesNeverCommitOrReuseStalePixels>b__6_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+  },
+  {
+    "run": "layout-fixture.trx",
+    "test": "WheelsAndScopesUseSelectedNodeAndRememberPresentation",
+    "outcome": "Failed",
+    "message": "测试方法 RAWSelectionAssistant.WpfTests.R54StageLayoutTests。WheelsAndScopesUseSelectedNodeAndRememberPresentation 引发了异常: \r\nSystem.InvalidOperationException: Sequence contains no matching element at System.Linq.ThrowHelper.ThrowNoMatchException()\r\n   at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source, Func`2 predicate)\r\n   at RAWSelectionAssistant.WpfTests.R54StageLayoutTests.<>c.<<WheelsAndScopesUseSelectedNodeAndRememberPresentation>b__5_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+  },
+  {
+    "run": "metadata-boundary.trx",
+    "test": "AuthorizedTenAndHundredNaturalPhotoViewingMeasurements",
+    "outcome": "Failed",
+    "message": "测试方法 RAWSelectionAssistant.WpfTests.LightTableWorkflowTests。AuthorizedTenAndHundredNaturalPhotoViewingMeasurements 引发了异常: \r\nSystem.IndexOutOfRangeException: Index was outside the bounds of the array. at MetadataExtractor.Formats.Xmp.XmpReader.Extract(Byte[] xmpBytes, Int32 offset, Int32 length)\r\n   at MetadataExtractor.Formats.Exif.ExifTiffHandler.CustomProcessTag(TiffReaderContext& context, Int32 tagId, Int32 valueOffset, Int32 byteCount)\r\n   at MetadataExtractor.Formats.Tiff.TiffReader.ProcessIfd(ITiffHandler handler, TiffReaderContext context, Int32 ifdOffset)\r\n   at MetadataExtractor.Formats.Tiff.TiffReader.ProcessTiff(IndexedReader reader, ITiffHandler handler)\r\n   at MetadataExtractor.Formats.Tiff.TiffMetadataReader.ReadMetadata(Stream stream)\r\n   at MetadataExtractor.ImageMetadataReader.ReadMetadata(Stream stream, String fileName)\r\n   at MetadataExtractor.ImageMetadataReader.ReadMetadata(String filePath)\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.ReadOrientation(String sourcePath)\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.LibRawDecoder.DecodeCore(String sourcePath, String extension, RawToJpegOptions options, CancellationToken cancellationToken)\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n--- End of stack trace from previous location ---\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n "
+  },
+  {
+    "run": "output-depth-contract.trx",
+    "test": "PinArrangeFilmCancelAndSaveActualProject",
+    "outcome": "Failed",
+    "message": "Assert.IsTrue 失败。‘condition’表达式:‘full.Format.BitsPerPixel>=48’。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153\r\n   at RAWSelectionAssistant.WpfTests.LightTableWorkflowTests.<>c.<<PinArrangeFilmCancelAndSaveActualProject>b__4_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+  },
+  {
+    "run": "stale-current-version.trx",
+    "test": "ReplacementAndCanceledViewingKeepPinnedIdentity",
+    "outcome": "Failed",
+    "message": "Assert.IsTrue 失败。‘condition’表达式:‘rejected’。 at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161\r\n   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153\r\n   at RAWSelectionAssistant.WpfTests.LightTableWorkflowTests.<>c.<<ReplacementAndCanceledViewingKeepPinnedIdentity>b__8_0>d.MoveNext()\r\n--- End of stack trace from previous location ---\r\n   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407"
+  }
+]

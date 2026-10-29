@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="352b572a-0936-4e4e-87e4-eff082b069c3" name="Admin@DESKTOP-HO0JJEQ 2026-10-30 00:14:53" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-30T00:14:53.1853788+08:00" queuing="2026-10-30T00:14:53.1853789+08:00" start="2026-10-30T00:14:51.7109596+08:00" finish="2026-10-30T00:14:53.1897846+08:00" />
+  <TestSettings name="default" id="3a883b41-f40b-4069-899d-7cfc158f11bb">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-30_00_14_53" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="91f73b59-8667-4314-8c6f-e669cb44c80d" testId="16a971f6-6060-80c9-bc65-05a5286d3695" testName="ExistingTaskCenterTracksFilmBackendCompletion" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.2142869" startTime="2026-10-30T00:14:52.8580982+08:00" endTime="2026-10-30T00:14:53.0733199+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="91f73b59-8667-4314-8c6f-e669cb44c80d" />
+    <UnitTestResult executionId="c886a78c-f497-4dbf-85d1-54a307475fe9" testId="1aec47d4-5125-897f-b0c7-f97648a01b55" testName="MissingAndChangedSourcesNeverCommitOrReuseStalePixels" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0092899" startTime="2026-10-30T00:14:52.8484133+08:00" endTime="2026-10-30T00:14:52.8578372+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c886a78c-f497-4dbf-85d1-54a307475fe9" />
+    <UnitTestResult executionId="3fc425ac-f798-4681-a055-458c569ed9ab" testId="13eafbe0-ada0-82ca-b95e-4399f729d591" testName="PinArrangeFilmCancelAndSaveActualProject" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.6631845" startTime="2026-10-30T00:14:52.1680676+08:00" endTime="2026-10-30T00:14:52.8454136+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3fc425ac-f798-4681-a055-458c569ed9ab">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.IsTrue 失败。‘condition’表达式:‘full.Format.BitsPerPixel&gt;=48’。</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153&#xD;
+   at RAWSelectionAssistant.WpfTests.LightTableWorkflowTests.&lt;&gt;c.&lt;&lt;PinArrangeFilmCancelAndSaveActualProject&gt;b__4_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ExistingTaskCenterTracksFilmBackendCompletion" storage="n:\pixart\guangjing-r54-design-fixes-20261029\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="16a971f6-6060-80c9-bc65-05a5286d3695">
+      <Execution id="91f73b59-8667-4314-8c6f-e669cb44c80d" />
+      <TestMethod codeBase="N:\pixart\guangjing-r54-design-fixes-20261029\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LightTableWorkflowTests" name="ExistingTaskCenterTracksFilmBackendCompletion" />
+    </UnitTest>
+    <UnitTest name="MissingAndChangedSourcesNeverCommitOrReuseStalePixels" storage="n:\pixart\guangjing-r54-design-fixes-20261029\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1aec47d4-5125-897f-b0c7-f97648a01b55">
+      <Execution id="c886a78c-f497-4dbf-85d1-54a307475fe9" />
+      <TestMethod codeBase="N:\pixart\guangjing-r54-design-fixes-20261029\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LightTableWorkflowTests" name="MissingAndChangedSourcesNeverCommitOrReuseStalePixels" />
+    </UnitTest>
+    <UnitTest name="PinArrangeFilmCancelAndSaveActualProject" storage="n:\pixart\guangjing-r54-design-fixes-20261029\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="13eafbe0-ada0-82ca-b95e-4399f729d591">
+      <Execution id="3fc425ac-f798-4681-a055-458c569ed9ab" />
+      <TestMethod codeBase="N:\pixart\guangjing-r54-design-fixes-20261029\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LightTableWorkflowTests" name="PinArrangeFilmCancelAndSaveActualProject" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="16a971f6-6060-80c9-bc65-05a5286d3695" executionId="91f73b59-8667-4314-8c6f-e669cb44c80d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1aec47d4-5125-897f-b0c7-f97648a01b55" executionId="c886a78c-f497-4dbf-85d1-54a307475fe9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13eafbe0-ada0-82ca-b95e-4399f729d591" executionId="3fc425ac-f798-4681-a055-458c569ed9ab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="2" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

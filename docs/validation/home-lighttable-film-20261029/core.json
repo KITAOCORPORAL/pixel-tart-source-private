@@ -1,0 +1,20 @@
+{
+  "command": [
+    "C:\\Program Files\\dotnet\\dotnet.exe",
+    "build",
+    "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
+    "-c",
+    "Release",
+    "-p:WholeAppDiagnosticBuild=true",
+    "-p:PhotographerTrialBuild=false",
+    "-p:SourceRevisionId=f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "-p:IncludeSourceRevisionInInformationalVersion=true",
+    "--disable-build-servers",
+    "-m:1",
+    "-nr:false"
+  ],
+  "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+  "exitCode": 0,
+  "startEpoch": 1793293788.1617057,
+  "endEpoch": 1793293791.9465334
+}

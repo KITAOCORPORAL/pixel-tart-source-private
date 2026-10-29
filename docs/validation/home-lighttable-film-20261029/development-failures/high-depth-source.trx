@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="634fd7eb-4ae8-4def-bbe3-f8d0ba8c8444" name="Admin@DESKTOP-HO0JJEQ 2026-10-30 00:34:12" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-30T00:34:12.1377700+08:00" queuing="2026-10-30T00:34:12.1377701+08:00" start="2026-10-30T00:34:10.3085935+08:00" finish="2026-10-30T00:34:19.6512089+08:00" />
+  <TestSettings name="default" id="f55b8e01-eaa6-422f-a8e1-95ab3068a245">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-30_00_34_12" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="6c8f5528-08ba-48de-bc77-a6cd46b9b62b" testId="16a971f6-6060-80c9-bc65-05a5286d3695" testName="ExistingTaskCenterTracksFilmBackendCompletion" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.1965227" startTime="2026-10-30T00:34:11.4675809+08:00" endTime="2026-10-30T00:34:11.6645459+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6c8f5528-08ba-48de-bc77-a6cd46b9b62b" />
+    <UnitTestResult executionId="b97a92e8-ba4d-41e5-acff-d6a0aa9cc4af" testId="155e1dde-ace4-8052-9abb-323e0d1afb4e" testName="ScopeLatestSourceAndCancellationAreBounded" computerName="DESKTOP-HO0JJEQ" duration="00:00:03.5918647" startTime="2026-10-30T00:34:15.9677333+08:00" endTime="2026-10-30T00:34:19.5604303+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b97a92e8-ba4d-41e5-acff-d6a0aa9cc4af" />
+    <UnitTestResult executionId="96a29f44-c918-4948-b543-6005f83f7420" testId="16e4e2f5-8e4c-8643-8892-e6381353987d" testName="WheelsAndScopesUseSelectedNodeAndRememberPresentation" computerName="DESKTOP-HO0JJEQ" duration="00:00:01.5839589" startTime="2026-10-30T00:34:14.3832827+08:00" endTime="2026-10-30T00:34:15.9673771+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="96a29f44-c918-4948-b543-6005f83f7420" />
+    <UnitTestResult executionId="de28e523-979e-4b77-9754-1c4dcf6bb714" testId="1aec47d4-5125-897f-b0c7-f97648a01b55" testName="MissingAndChangedSourcesNeverCommitOrReuseStalePixels" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0215541" startTime="2026-10-30T00:34:11.4456122+08:00" endTime="2026-10-30T00:34:11.4673799+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="de28e523-979e-4b77-9754-1c4dcf6bb714">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.IsTrue 失败。‘condition’表达式:‘rejected’。</Message>
+          <StackTrace>   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.ThrowAssertIsTrueFailed(String message) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 161&#xD;
+   at Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(Nullable`1 condition, String message, String conditionExpression) in /_/src/TestFramework/TestFramework/Assertions/Assert.IsTrue.cs:line 153&#xD;
+   at RAWSelectionAssistant.WpfTests.LightTableWorkflowTests.&lt;&gt;c.&lt;&lt;MissingAndChangedSourcesNeverCommitOrReuseStalePixels&gt;b__6_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="aa7c4201-c9d5-47a4-946b-2453794a0448" testId="13eafbe0-ada0-82ca-b95e-4399f729d591" testName="PinArrangeFilmCancelAndSaveActualProject" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.6956975" startTime="2026-10-30T00:34:10.7351812+08:00" endTime="2026-10-30T00:34:11.4430249+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aa7c4201-c9d5-47a4-946b-2453794a0448" />
+    <UnitTestResult executionId="6941857e-0c3d-44d5-a41f-9e64b41f5a10" testId="1432886d-388a-8a0e-b0e5-726b150a3535" testName="FrozenStageIdentitySurvivesSelectionWindowAndReshoot" computerName="DESKTOP-HO0JJEQ" duration="00:00:02.7181577" startTime="2026-10-30T00:34:11.6646214+08:00" endTime="2026-10-30T00:34:14.3828814+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6941857e-0c3d-44d5-a41f-9e64b41f5a10" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ExistingTaskCenterTracksFilmBackendCompletion" storage="n:\pixart\guangjing-r54-design-fixes-20261029\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="16a971f6-6060-80c9-bc65-05a5286d3695">
+      <Execution id="6c8f5528-08ba-48de-bc77-a6cd46b9b62b" />
+      <TestMethod codeBase="N:\pixart\guangjing-r54-design-fixes-20261029\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LightTableWorkflowTests" name="ExistingTaskCenterTracksFilmBackendCompletion" />
+    </UnitTest>
+    <UnitTest name="MissingAndChangedSourcesNeverCommitOrReuseStalePixels" storage="n:\pixart\guangjing-r54-design-fixes-20261029\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1aec47d4-5125-897f-b0c7-f97648a01b55">
+      <Execution id="de28e523-979e-4b77-9754-1c4dcf6bb714" />
+      <TestMethod codeBase="N:\pixart\guangjing-r54-design-fixes-20261029\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LightTableWorkflowTests" name="MissingAndChangedSourcesNeverCommitOrReuseStalePixels" />
+    </UnitTest>
+    <UnitTest name="ScopeLatestSourceAndCancellationAreBounded" storage="n:\pixart\guangjing-r54-design-fixes-20261029\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="155e1dde-ace4-8052-9abb-323e0d1afb4e">
+      <Execution id="b97a92e8-ba4d-41e5-acff-d6a0aa9cc4af" />
+      <TestMethod codeBase="N:\pixart\guangjing-r54-design-fixes-20261029\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R54StageLayoutTests" name="ScopeLatestSourceAndCancellationAreBounded" />
+    </UnitTest>
+    <UnitTest name="WheelsAndScopesUseSelectedNodeAndRememberPresentation" storage="n:\pixart\guangjing-r54-design-fixes-20261029\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="16e4e2f5-8e4c-8643-8892-e6381353987d">
+      <Execution id="96a29f44-c918-4948-b543-6005f83f7420" />
+      <TestMethod codeBase="N:\pixart\guangjing-r54-design-fixes-20261029\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R54StageLayoutTests" name="WheelsAndScopesUseSelectedNodeAndRememberPresentation" />
+    </UnitTest>
+    <UnitTest name="PinArrangeFilmCancelAndSaveActualProject" storage="n:\pixart\guangjing-r54-design-fixes-20261029\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="13eafbe0-ada0-82ca-b95e-4399f729d591">
+      <Execution id="aa7c4201-c9d5-47a4-946b-2453794a0448" />
+      <TestMethod codeBase="N:\pixart\guangjing-r54-design-fixes-20261029\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LightTableWorkflowTests" name="PinArrangeFilmCancelAndSaveActualProject" />
+    </UnitTest>
+    <UnitTest name="FrozenStageIdentitySurvivesSelectionWindowAndReshoot" storage="n:\pixart\guangjing-r54-design-fixes-20261029\tests/rawselectionassistant.wpftests/bin/x64/release/net10.0-windows10.0.19041.0/rawselectionassistant.wpftests.dll" id="1432886d-388a-8a0e-b0e5-726b150a3535">
+      <Execution id="6941857e-0c3d-44d5-a41f-9e64b41f5a10" />
+      <TestMethod codeBase="N:\pixart\guangjing-r54-design-fixes-20261029\tests/RAWSelectionAssistant.WpfTests/bin/x64/Release/net10.0-windows10.0.19041.0/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R54DevelopedStageTests" name="FrozenStageIdentitySurvivesSelectionWindowAndReshoot" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="16a971f6-6060-80c9-bc65-05a5286d3695" executionId="6c8f5528-08ba-48de-bc77-a6cd46b9b62b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="155e1dde-ace4-8052-9abb-323e0d1afb4e" executionId="b97a92e8-ba4d-41e5-acff-d6a0aa9cc4af" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16e4e2f5-8e4c-8643-8892-e6381353987d" executionId="96a29f44-c918-4948-b543-6005f83f7420" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1aec47d4-5125-897f-b0c7-f97648a01b55" executionId="de28e523-979e-4b77-9754-1c4dcf6bb714" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13eafbe0-ada0-82ca-b95e-4399f729d591" executionId="aa7c4201-c9d5-47a4-946b-2453794a0448" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1432886d-388a-8a0e-b0e5-726b150a3535" executionId="6941857e-0c3d-44d5-a41f-9e64b41f5a10" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="6" executed="6" passed="5" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,64 @@
+{
+  "archive": "N:\\UI5.4.zip",
+  "sha256": "5d365c0f354f8b8e1a146eec8279c9cf7b1f9897dbba448d41ce52917caa6f1b",
+  "relevant": [
+    {
+      "name": "UI5.4/R5.4-草图2-1-简易模式-v2含类型.png",
+      "bytes": 60698,
+      "sha256": "c75e77a910c8d04fdfa2c83151362d9b7488bb6b61ba4e5d89a8232220809d2e"
+    },
+    {
+      "name": "UI5.4/R5.4-草图2-2-专业模式-v2含类型.png",
+      "bytes": 60435,
+      "sha256": "543c30505c03382633b9f59c6cceb5fb4d5e9873e03b5dea7781daffa942b47f"
+    },
+    {
+      "name": "UI5.4/R5.4-草图2-4-专业右栏工具页.png",
+      "bytes": 41937,
+      "sha256": "06073e15b28d665ae818bf459575acb9d710c71951c3a7bf1bb5e9ad5f83c73f"
+    },
+    {
+      "name": "UI5.4/UI设计规划文档-R5.4.md.docx",
+      "bytes": 236661,
+      "sha256": "1756f4580d3c2ec07b6d0693b20b631a32d5fd37579ad0b8e4e5dbe7a7e25454",
+      "readParagraphs": 346
+    }
+  ],
+  "r53": [
+    {
+      "path": "N:\\pixart\\Guangjing-R53-Home-20261026\\design-reference\\01-暗室\\darkroom-r5.html",
+      "bytes": 594560,
+      "sha256": "333d56e58e34503cfdf4193a37253324e419946001073ccfa31e9c8d530896d7",
+      "readMethod": "local source; no Browser/WebView"
+    },
+    {
+      "path": "N:\\pixart\\Guangjing-R53-Home-20261026\\design-reference\\01-暗室\\instant-r3.html",
+      "bytes": 2077989,
+      "sha256": "352b22dc0ff718c2748a14d04004de7179f1716d3ae4d437f72173728b90f360",
+      "readMethod": "local source; no Browser/WebView"
+    },
+    {
+      "path": "N:\\pixart\\Guangjing-R53-Home-20261026\\design-reference\\02-自由画布拼贴\\collage-r5.html",
+      "bytes": 392125,
+      "sha256": "0c5f433586989619ec936e6f011d15e74110d2c68702d13aa0a5154de2f23d7f",
+      "readMethod": "local source; no Browser/WebView"
+    },
+    {
+      "path": "N:\\pixart\\Guangjing-R53-Home-20261026\\design-reference\\03-策划中心\\planning-r5.html",
+      "bytes": 362997,
+      "sha256": "a81a57d6d86ccfd84c62541253b47762303087e4cf2584820fa45d7927234b9b",
+      "readMethod": "local source; no Browser/WebView"
+    }
+  ],
+  "paragraphRules": [
+    "9. 暗室节点系统（R5.4，用户已确认，草图为准）",
+    "9.3 节点图画布",
+    "位置：画面与胶片条之间（不放右栏；右栏方案见草图 6，已否决：宽度仅 304，并行图拥挤）。胶片条始终在节点图下方可见。",
+    "9.5 右栏（专业，所选节点）",
+    "顶部：直方图 + ◎ 3D 色彩 → 节点头（名称、显隐、锁定、旁路、不透明度、混合）→ 页签 色轮 | 曲线 | 范围 | 扭曲 | HSL | 基础 → 工具区 → 参数。图下无页签行。",
+    "9.7 「专业组」共享数据规则",
+    "9.9 1366×768 画面高度"
+  ],
+  "browser": false,
+  "greyBoxesAsProductResources": false
+}

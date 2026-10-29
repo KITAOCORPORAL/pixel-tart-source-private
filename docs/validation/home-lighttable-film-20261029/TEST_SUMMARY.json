@@ -1,0 +1,340 @@
+{
+  "productSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+  "uniquePassed": 69,
+  "failed": 0,
+  "notRun": 0,
+  "publishedDllBindingCount": 29,
+  "runs": [
+    {
+      "label": "color-reopen",
+      "sha256": "41a7eee4f9749b6880f9c8291f8c315e7996970ca375d33ebb2fee141e994f9f",
+      "results": [
+        {
+          "name": "IndependentOptionalModelReopen",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "label": "core-tests",
+      "sha256": "5b349936b43fcc48cb197821a86480fce074a4cee7b5aaf372fd12db49624ed5",
+      "results": [
+        {
+          "name": "ConnectionsDriveActualPixelsNotListOrder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "InvalidPortsCycleAndBranchesRejected",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutPersistenceClampsInvalidViewport",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProfessionalReferenceMatchUsesFloatBufferWithoutPrecisionBreak",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrozenContentAndVersionRejectTamperAndLegacyDoesNotChange",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Rgb48NoOpColorStudioToTiff16PreservesPrecision",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AllTwelveOriginalResourcesHaveFrozenHashAndGeometry",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProfessionalV4UsesFloatOutputAndPreservesFineTonalSteps",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AnalyticModelIsContinuousNeutralAndStrengthZeroExact",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NearBlackProductionAnalyticDiscontinuityIsSeparateFromCubeApproximation",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ParallelMixMatchesExistingOrderedCompositeWithMaskAndBypass",
+          "outcome": "Passed"
+        },
+        {
+          "name": "InsertDeleteAndSerializationAreExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SessionRoundTripPreservesTargetsSelectionFiltersEngineAndProtectsAssetMetadata",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DisconnectMeansIdentityAndDetachedNodesPersist",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LastConsumerDisposalSharedAncestorAndEscapedOutputLease",
+          "outcome": "Passed"
+        },
+        {
+          "name": "QuantizationDetectorRejectsRgb8PromotedToRgb48",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutRoundTripPreservesWidthsModesAndOldFilesRemainCompatible",
+          "outcome": "Passed"
+        },
+        {
+          "name": "MissingMixInputIdentityAndCycleRejected",
+          "outcome": "Passed"
+        },
+        {
+          "name": "EmitFixedBlendCorpusForTwoIndependentImplementations",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CancellationExceptionAndUnusedTemporaryReleaseEveryReservation",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SpatialToneReplacementDoesNotDoubleOldBiasAndAmountZero",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProfessionalGroupZeroIdentityAndOneFullRoute",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SessionRejectsDuplicateTargetIdentityBeforeReplacingCurrentDocument",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BoundedAndSpatialRoutesPreserveSameGraphBlendOnce",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CategorySyncPreservesMultipleRangesAndUnselectedNodesWithoutDuplicateIds",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrameIndependentOfPhotoAmountAndRegionMatchesFullOutput",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutDoesNotChangeHistoricalSerialPixelsOrOrder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "MasksBypassGroupAndReferenceAllRetainedOracleAreBitExact",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "label": "home-reopen",
+      "sha256": "257ec95b483a2d369e5740b57d0a6d2a09267c78c625cbe99dcec0987d59828a",
+      "results": [
+        {
+          "name": "IndependentReopenRetainsSelectedToolsGraphAndPixels",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "label": "hosted",
+      "sha256": "efa50eb74a354d22cea1ad140929272a29224571085eb74217d268e5fb293b21",
+      "results": [
+        {
+          "name": "FullApplicationHostedRailAndMenuOffscreenEvidence",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "label": "lighttable-reopen",
+      "sha256": "d5da756328c55836c7a364e26d126703eacc378d42962a6f5f2eecd420f64a37",
+      "results": [
+        {
+          "name": "IndependentViewingTableAndFilmReopen",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "label": "natural-photos",
+      "sha256": "05c0eb0d9a357b092074cd6e14e22ad299822e41035f3de4e0322e9c3efca7ea",
+      "results": [
+        {
+          "name": "AuthorizedTenAndHundredNaturalPhotoViewingMeasurements",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "label": "stage-reopen",
+      "sha256": "b598c945bd22dcdafb1dd635ee6d20cde8ff20f3d890ecc558e1de45978747a4",
+      "results": [
+        {
+          "name": "IndependentStageReopen",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "label": "still-reopen",
+      "sha256": "0e7c338214544aefab2b515ee786f1f68a0f57da09103ba5bbbc2ce465057c42",
+      "results": [
+        {
+          "name": "IndependentStillMetadataAndSharedComparisonReopen",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "label": "wpf-tests",
+      "sha256": "050ab36d3f43102d08cb943d5db91351a3f9d0e153c716dcd290ef93d5261699",
+      "results": [
+        {
+          "name": "WindowGradeChangesOnlyWindowAndThreeExportsKeepDefinition (\"generic.white.square\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NodeFastFineRejectStaleAndRiskFallbackWithoutExtraDecode",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FixedInputPreviewAndEncodedPixels",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ExistingColorToolsGroupAndMaskUseSelectedNode",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CancelAndSwitchNeverPublishObsoleteDraft",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ActualProductionControlFourStatesOffscreen",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ReplacementAndCanceledViewingKeepPinnedIdentity",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ClicksPreviewWithoutHistoryThenDevelopLocksAndReshootKeepsVariant",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ExistingTaskCenterTracksFilmBackendCompletion",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FirstToolDragIsOneUndoAndDisabledNeutralToolStaysDisabled",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+          "outcome": "Passed"
+        },
+        {
+          "name": "TabsNeverMutateSelectionHistoryRecipeOrDirtyAndExplicitAddOnce",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FiveTabsKeepDenseLayoutFiltersAndLockedDraftGuard",
+          "outcome": "Passed"
+        },
+        {
+          "name": "StageSelectionAndRecipeWindowRetireOnVariantSwitch",
+          "outcome": "Passed"
+        },
+        {
+          "name": "GraphPreviewSaveReopenExportAndStillsUseActualRoute",
+          "outcome": "Passed"
+        },
+        {
+          "name": "StillUsesSharedComparisonFramesViewportSourceAndUndoableApply",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FourFramesShareNormalizedViewportWithoutMutatingActiveVersion",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FirstToolPreservesLegacyLookAndFilmAndUndoRestoresEffectiveStack",
+          "outcome": "Passed"
+        },
+        {
+          "name": "OptionalModelsGalleryPreviewDevelopFreezeReopenAndAllExports",
+          "outcome": "Passed"
+        },
+        {
+          "name": "PinArrangeFilmCancelAndSaveActualProject",
+          "outcome": "Passed"
+        },
+        {
+          "name": "WindowGradeChangesOnlyWindowAndThreeExportsKeepDefinition (\"generic.white.circle\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "GraphRouteUsesSharedUndoLockAndOffscreenLayout",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FilmWithoutReferenceHasRealNodeAndUndoClearsFilmUi",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ScopeLatestSourceAndCancellationAreBounded",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FullShellKeepsPrimaryNavigationAndContentTemplates",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrozenStageIdentitySurvivesSelectionWindowAndReshoot",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurvePointEditUndoRestoresAllPointsAndRejectsDuplicateInputs",
+          "outcome": "Passed"
+        },
+        {
+          "name": "InvalidLevelsDoNotMutateStackAndGroupResetKeepsOtherGroup",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SelectedNodeThumbnailsMasksLabelsToolsAndActualPhotoFrameCards",
+          "outcome": "Passed"
+        },
+        {
+          "name": "WheelsAndScopesUseSelectedNodeAndRememberPresentation",
+          "outcome": "Passed"
+        },
+        {
+          "name": "MissingAndChangedSourcesNeverCommitOrReuseStalePixels",
+          "outcome": "Passed"
+        }
+      ]
+    }
+  ],
+  "scope": "affected bounded collection; not full product/native acceptance"
+}

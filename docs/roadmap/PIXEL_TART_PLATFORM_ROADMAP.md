@@ -1,3 +1,9 @@
+# 光镜当前产品路线图
+
+## 2026-10-29 当前家庭增量
+产品f70ecf7d1179b6f42c721a787a4a2d7a7acc8109，home/r54-design-fixes-20261029。先完成R5.4暗室收尾，再接入基于现有target/variant的WPF灯箱查看状态和胶片任务边界；最小闭环已自动验证。详见LIGHTTABLE_SPEKTRALAB_INTEGRATION.md和../validation/home-lighttable-film-20261029/FINAL_REPORT.md。研究Spektra未通过产品门禁，不纳默认产品。不是R5.4全量/真实DPI/发行验收。
+
+## 历史平台规划
 # Pixel Tart platform roadmap
 
 1. Windows Match V4 + GPU: complete high-precision GPU stages, tile/memory acceptance and product wiring.

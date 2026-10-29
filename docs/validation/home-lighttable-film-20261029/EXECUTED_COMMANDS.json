@@ -1,0 +1,204 @@
+[
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "publish",
+      "src/RAWSelectionAssistant/RAWSelectionAssistant.csproj",
+      "-c",
+      "Release",
+      "-r",
+      "win-x64",
+      "--self-contained",
+      "true",
+      "-o",
+      "N:\\pixart\\Guangjing-LightTable-20261029\\final-lighttable\\app",
+      "-p:WholeAppDiagnosticBuild=true",
+      "-p:PhotographerTrialBuild=false",
+      "-p:SourceRevisionId=f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+      "-p:IncludeSourceRevisionInInformationalVersion=true",
+      "--disable-build-servers",
+      "-m:1",
+      "-nr:false"
+    ],
+    "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "exitCode": 0,
+    "startEpoch": 1793293759.0822098,
+    "endEpoch": 1793293788.1617057
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "build",
+      "tests/RAWSelectionAssistant.Tests/RAWSelectionAssistant.Tests.csproj",
+      "-c",
+      "Release",
+      "-p:WholeAppDiagnosticBuild=true",
+      "-p:PhotographerTrialBuild=false",
+      "-p:SourceRevisionId=f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+      "-p:IncludeSourceRevisionInInformationalVersion=true",
+      "--disable-build-servers",
+      "-m:1",
+      "-nr:false"
+    ],
+    "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "exitCode": 0,
+    "startEpoch": 1793293788.1617057,
+    "endEpoch": 1793293791.9465334
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "build",
+      "tests/RAWSelectionAssistant.WpfTests/RAWSelectionAssistant.WpfTests.csproj",
+      "-c",
+      "Release",
+      "-p:Platform=x64",
+      "-p:WholeAppDiagnosticBuild=true",
+      "-p:PhotographerTrialBuild=false",
+      "-p:SourceRevisionId=f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+      "-p:IncludeSourceRevisionInInformationalVersion=true",
+      "--disable-build-servers",
+      "-m:1",
+      "-nr:false"
+    ],
+    "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "exitCode": 0,
+    "startEpoch": 1793293791.9465334,
+    "endEpoch": 1793293821.09437
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-design-fixes-20261029\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName~IndependentOptionalModelReopen",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-LightTable-20261029\\final-lighttable\\color-reopen"
+    ],
+    "pid": 39312,
+    "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "exitCode": 0,
+    "startEpoch": 1793293867.1696532,
+    "endEpoch": 1793293869.0449708
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-design-fixes-20261029\\tests\\RAWSelectionAssistant.Tests\\bin\\Release\\net10.0\\RAWSelectionAssistant.Tests.dll",
+      "/TestCaseFilter:FullyQualifiedName~R54ClosureResourceTests|FullyQualifiedName~R54GraphTests|FullyQualifiedName~R54ParallelTests|FullyQualifiedName~R54FrameAndNearBlackTests|FullyQualifiedName~InstantColorComponentTests.FrozenContent|FullyQualifiedName~InstantColorComponentTests.AnalyticModel|FullyQualifiedName~InstantColorComponentTests.SpatialTone|FullyQualifiedName~ColorStudioSessionStateTests|FullyQualifiedName~ProfessionalPipelineNoOpPrecisionTests",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-LightTable-20261029\\final-lighttable\\core-tests"
+    ],
+    "pid": 16496,
+    "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "exitCode": 0,
+    "startEpoch": 1793293821.2456694,
+    "endEpoch": 1793293822.213985
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-design-fixes-20261029\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName~IndependentReopenRetainsSelectedToolsGraphAndPixels",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-LightTable-20261029\\final-lighttable\\home-reopen"
+    ],
+    "pid": 41260,
+    "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "exitCode": 0,
+    "startEpoch": 1793293865.730449,
+    "endEpoch": 1793293867.1686528
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-design-fixes-20261029\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName~FullApplicationHostedRailAndMenuOffscreenEvidence",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-LightTable-20261029\\final-lighttable\\hosted"
+    ],
+    "pid": 16944,
+    "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "exitCode": 0,
+    "startEpoch": 1793293870.456102,
+    "endEpoch": 1793293880.438704
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-design-fixes-20261029\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName~IndependentViewingTableAndFilmReopen",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-LightTable-20261029\\final-lighttable\\lighttable-reopen"
+    ],
+    "pid": 34660,
+    "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "exitCode": 0,
+    "startEpoch": 1793293862.7146163,
+    "endEpoch": 1793293864.1677382
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-design-fixes-20261029\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName~AuthorizedTenAndHundredNaturalPhotoViewingMeasurements",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-LightTable-20261029\\final-lighttable\\natural-photos"
+    ],
+    "pid": 43168,
+    "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "exitCode": 0,
+    "startEpoch": 1793293880.4397056,
+    "endEpoch": 1793293940.718879
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-design-fixes-20261029\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName~IndependentStageReopen",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-LightTable-20261029\\final-lighttable\\stage-reopen"
+    ],
+    "pid": 10692,
+    "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "exitCode": 0,
+    "startEpoch": 1793293864.1687388,
+    "endEpoch": 1793293865.7294486
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-design-fixes-20261029\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName~IndependentStillMetadataAndSharedComparisonReopen",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-LightTable-20261029\\final-lighttable\\still-reopen"
+    ],
+    "pid": 7468,
+    "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "exitCode": 0,
+    "startEpoch": 1793293869.0459707,
+    "endEpoch": 1793293870.4551015
+  },
+  {
+    "command": [
+      "C:\\Program Files\\dotnet\\dotnet.exe",
+      "vstest",
+      "N:\\pixart\\guangjing-r54-design-fixes-20261029\\tests\\RAWSelectionAssistant.WpfTests\\bin\\x64\\Release\\net10.0-windows10.0.19041.0\\RAWSelectionAssistant.WpfTests.dll",
+      "/TestCaseFilter:FullyQualifiedName~LightTableWorkflowTests.PinArrange|FullyQualifiedName~LightTableWorkflowTests.MissingAndChanged|FullyQualifiedName~LightTableWorkflowTests.ExistingTaskCenter|FullyQualifiedName~LightTableWorkflowTests.ReplacementAndCanceled|FullyQualifiedName~R54DevelopedStageTests.FrozenStage|FullyQualifiedName~R54DevelopedStageTests.StageSelection|FullyQualifiedName~R54StageLayoutTests|FullyQualifiedName~R54HomeDesignFixTests.ExistingColor|FullyQualifiedName~R54ClosureUiTests|FullyQualifiedName~R54GraphWpfTests|FullyQualifiedName~StudioToolEditingTests|FullyQualifiedName~TabsNeverMutateSelectionHistoryRecipeOrDirtyAndExplicitAddOnce|FullyQualifiedName~NodeFastFineRejectStaleAndRiskFallbackWithoutExtraDecode|FullyQualifiedName~LightPrintR3Tests|FullyQualifiedName~InstantColorComponentWpfTests.OptionalModels|FullyQualifiedName~R54WorkflowWpfTests.ActualProduction|FullyQualifiedName~R54WorkflowWpfTests.GraphPreview|FullyQualifiedName~StillUsesSharedComparisonFramesViewportSourceAndUndoableApply|FullyQualifiedName~FourFramesShareNormalizedViewportWithoutMutatingActiveVersion|FullyQualifiedName~WholeAppDiagnosticPackageTests|FullyQualifiedName~TutorialRetirementProductTests.RealShell|FullyQualifiedName~TutorialRetirementProductTests.ProductXaml|FullyQualifiedName~DarkroomPixelABTests",
+      "/Logger:trx;LogFileName=results.trx",
+      "/ResultsDirectory:N:\\pixart\\Guangjing-LightTable-20261029\\final-lighttable\\wpf-tests"
+    ],
+    "pid": 28780,
+    "sourceSha": "f70ecf7d1179b6f42c721a787a4a2d7a7acc8109",
+    "exitCode": 0,
+    "startEpoch": 1793293822.2149918,
+    "endEpoch": 1793293862.7136164
+  }
+]
