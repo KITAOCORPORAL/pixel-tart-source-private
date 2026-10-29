@@ -1,0 +1,13 @@
+{
+  "version": "ScaleHalfTheoreticalOnlyV1",
+  "status": "REJECTED_NOT_EXECUTED_END_TO_END",
+  "stats": {
+    "baseline_clipped": 4405,
+    "half_scaled_clipped": 0,
+    "baseline_prediction_mismatch": 0,
+    "new_zero_after_half": 0,
+    "half_quantization_error_gt_baseline": 15745314,
+    "same_pixel_count": 36329272
+  },
+  "limitations": "Uses observed scale-before CFA buffer and theoretical 0.5 multiplier only; no measured LibRaw setting, no rerun demosaic or noise; not accepted."
+}
