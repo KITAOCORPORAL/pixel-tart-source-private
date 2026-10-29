@@ -12,7 +12,7 @@ public partial class PhotoGradePageView
     {
         if(model is null)return;
         var owner=model;r54Graph=new(owner.Editor){Thumbnail=id=>owner.LayerThumbnailContext?.Outputs.GetValueOrDefault(id),MaskThumbnail=id=>owner.LayerThumbnailContext?.Masks.GetValueOrDefault(id),DevelopedStage=()=>owner.IsLightPrintLocked?RAWSelectionAssistant.Core.Services.Projects.DevelopedStageProjection.FromCommitted(owner.ActiveTarget?.ActiveEditVersionId,owner.ActiveTarget?.RawDefinition):null,DevelopedThumbnail=()=>owner.Editor.MatchedImage};
-        r54Graph.StageSelected+=stage=>ShowDevelopedStage(stage);
+        r54Graph.StageSelected+=stage=>ShowDevelopedStage(stage);r54Graph.RefreshDevelopedStage();
         R53NodeContent.Children.Clear();R53NodeContent.Children.Add(r54Graph);
         r54DefaultSized=false;var layout=owner.Layout.Normalize();r54GraphHeight=layout.R54GraphHeight;r53NodesCollapsed=layout.R54GraphCollapsed??(ActualWidth<=1366);
         r54Graph.Restore(new(layout.R54GraphPanX,layout.R54GraphPanY),layout.R54GraphZoom);

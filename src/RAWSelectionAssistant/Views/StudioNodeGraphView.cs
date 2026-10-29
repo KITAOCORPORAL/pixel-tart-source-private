@@ -20,9 +20,10 @@ public sealed class StudioNodeGraphView:FrameworkElement
     public Func<DevelopedStageProjection?>? DevelopedStage{get;set;}
     public Func<ImageSource?>? DevelopedThumbnail{get;set;}
     public event Action<DevelopedStageProjection>? StageSelected;
-    private bool stageSelected;
+    private bool stageSelected;private DevelopedStageProjection? stageCache;private string? stageError;
+    internal void RefreshDevelopedStage(){stageSelected=false;try{stageCache=DevelopedStage?.Invoke();stageError=null;}catch(Exception e)when(e is InvalidDataException or ArgumentException or NotSupportedException){stageCache=null;stageError="显影配方不可用："+e.Message;}InvalidateVisual();}
     private Rect StageRect(){var positions=editor.GraphView.Positions;var x=positions.Max(p=>p.X)+160;var y=positions.Min(p=>p.Y);return new Rect(x,y,164,88);}
-    internal DevelopedStageProjection? Stage=>DevelopedStage?.Invoke();
+    internal DevelopedStageProjection? Stage=>stageCache;
     internal bool SelectStageAt(Point world){if(Stage is not{} stage||!StageRect().Contains(world))return false;stageSelected=true;StageSelected?.Invoke(stage);InvalidateVisual();return true;}
     public double Zoom=>zoom;public Point Pan=>pan;
     public StudioNodeGraphView(TetherReferenceModeViewModel value)
@@ -75,6 +76,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
             if(p.NodeId!=StudioNodeGraph.Output)d.DrawEllipse(Color("#9CC4BA"),new Pen(Color("#17171A"),1),Port(p,true),4,4);
             d.Pop();
         }
+        if(stageError is not null)Text(d,stageError,new(8,8),11,Brushes.OrangeRed);
         if(Stage is{} stage){var rect=StageRect();d.DrawRoundedRectangle(Color("#25272A"),new Pen(stageSelected?Brushes.White:Color("#7FA89F"),stageSelected?2:1),rect,3,3);d.DrawRectangle(Color("#7FA89F"),null,new Rect(rect.X+1,rect.Y+1,rect.Width-2,3));Text(d,"▣ 即时胶片 · 系统锁定",new(rect.X+6,rect.Y+6),10,Color("#9CC4BA"));var image=DevelopedThumbnail?.Invoke();if(image is not null)DrawImageFit(d,image,new Rect(rect.X+6,rect.Y+25,65,40));Text(d,"已显影 · "+stage.FrameId,new(rect.X+75,rect.Y+33),9);Text(d,"冻结阶段 · 只读",new(rect.X+6,rect.Y+69),10);}
         d.Pop();
     }
