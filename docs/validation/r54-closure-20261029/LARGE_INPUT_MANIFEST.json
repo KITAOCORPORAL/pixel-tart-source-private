@@ -1,0 +1,20 @@
+{
+  "admitted": [
+    {
+      "path": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/TNAN8886.CR3",
+      "sha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+      "Width": 5496,
+      "Height": 3670,
+      "domain": "sRGB encoded D65 float32 from existing PV4 full source; user-provided CompanyRAW, no upload"
+    }
+  ],
+  "rejected": [
+    {
+      "path": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/DSC09916.ARW",
+      "status": "LibRaw OpenFile InvalidDataException; no fallback, no graph benchmark on this file",
+      "sha256": "6f596bb234ee5de206c66594bc84205349c363fd6a89ae188ff76dab7c5e53b9"
+    }
+  ],
+  "network_or_photo_upload": false,
+  "numerical_snapshot": "existing PV4 display conversion full source kept local only; no monitor ICC"
+}

@@ -154,19 +154,31 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   }
   if(target.ActiveEditVersionId==next){stack.Pop();if(!to.TryGetValue(target.Id,out var other))to[target.Id]=other=new();other.Push(active);}
  }
- private CandidateRecipe FreezeV3(InstantFilmDefinition film,bool roll)
+ public IReadOnlyList<string> InstantV3ColorChoices=>SelectedInstantProfile.Id is "itype-color" or "600-color"?["旧版创意V3（兼容）","风格近似 · 彩色V1"]:SelectedInstantProfile.Id is "itype-bw" or "600-bw"?["旧版创意V3（兼容）","风格近似 · 黑白V1"]:["旧版创意V3（兼容）"];
+ private string instantV3ColorChoice="旧版创意V3（兼容）";
+ public string InstantV3ColorChoice{get=>instantV3ColorChoice;set{if(IsLightPrintLocked&&!_restoringLightPrintControls)return;if(!InstantV3ColorChoices.Contains(value)||instantV3ColorChoice==value)return;instantV3ColorChoice=value;OnPropertyChanged();OnPropertyChanged(nameof(InstantV3ColorEvidence));OnPropertyChanged(nameof(InstantV3LegacyToneEditable));}}
+ private void ReconcileInstantColorChoice(){if(!InstantV3ColorChoices.Contains(instantV3ColorChoice)){instantV3ColorChoice="旧版创意V3（兼容）";LightPrintStatus="当前相纸没有对应新候选；已明确选择兼容色彩，未制造相纸/相机差异。";OnPropertyChanged(nameof(InstantV3ColorChoice));}OnPropertyChanged(nameof(InstantV3ColorChoices));OnPropertyChanged(nameof(InstantV3ColorEvidence));OnPropertyChanged(nameof(InstantV3LegacyToneEditable));}
+ public bool InstantV3LegacyToneEditable=>!IsLightPrintLocked&&InstantV3ColorChoice=="旧版创意V3（兼容）";
+ public string InstantV3ColorEvidence=>InstantV3ColorChoice.StartsWith("风格近似")?"风格近似 · 非相机实测 · 相机修正未标定":"兼容旧版创意色彩";
+ private CandidateRecipe FreezeV3(InstantFilmDefinition film,bool roll,bool permitComponent=true)
  {
   var profile=film.FilmId switch{"itype-bw" or "600-bw" or "sx70-bw"=>"modern-bw-v3","sx70-color"=>"sx70-v3","reclaimed-blue600"=>"reclaimed-blue-v3","blue-duochrome600"=>"blue-duochrome-v3",_=>"modern-itype-v3"};
   if(roll)InstantV3Seed=BitConverter.ToUInt64(System.Security.Cryptography.RandomNumberGenerator.GetBytes(8));
   var recipe=CandidateRecipe.Create(profile,InstantV3Seed);
-  return (recipe with{MultipleInput=InstantSecondInput is{} second?second with{Weight=InstantSecondWeight,Mode=InstantSecondMode,CropX=InstantSecondCropX,CropY=InstantSecondCropY,Zoom=InstantSecondZoom}:null,Amount=InstantImageEffectsDisabled?0:InstantAmount,
+  var frozen=(recipe with{MultipleInput=InstantSecondInput is{} second?second with{Weight=InstantSecondWeight,Mode=InstantSecondMode,CropX=InstantSecondCropX,CropY=InstantSecondCropY,Zoom=InstantSecondZoom}:null,Amount=InstantImageEffectsDisabled?0:InstantAmount,
    Response=recipe.Response with{ExposureEv=InstantV3Exposure,Toe=InstantV3Toe,Shoulder=InstantV3Shoulder,ApparentDensity=InstantV3Density},
    Optics=recipe.Optics with{DetailMix=InstantV3Softness,HighlightDiffusion=InstantV3Diffusion},
    Emulsion=recipe.Emulsion with{Microstructure=InstantV3Texture,DevelopmentUnevenness=InstantUneven*.026,DevelopmentDefects=InstantV3EmulsionDefects,ExpiredAging=InstantV3Aging},
    Surface=recipe.Surface with{Frame=InstantPaperFrame,BaseColor=InstantPaperColor,PaperTexture=InstantV3PaperTexture,PaperScratches=InstantV3PaperScratches,ScanDust=InstantV3ScanDust},Geometry=film.PaperGeometry??new(),
    Creative=new(Version:2,Stock:InstantV3Stock,ShadowCast:InstantV3ShadowCast,HighlightWarmth:InstantV3Warmth,Fog:InstantV3Fog,TemperatureAppearance:(InstantEnvironmentCelsius-21)/21,FrameDrift:InstantV3FrameDrift,Fade:InstantV3Fade,LensVignette:InstantV3Vignette,DevelopmentEdge:InstantV3DevelopmentEdge),
    Paper=new(Version:3,Pattern:InstantV3Pattern,Window:InstantV3Circle?"Circle":"Rectangle",Emboss:InstantV3Emboss,EdgeLine:InstantV3EdgeLine,Reflection:InstantV3Reflection,ReflectionAngle:InstantV3ReflectionAngle,ReflectionWidth:InstantV3ReflectionWidth,Zoom:InstantV3Zoom,WindowHighlight:InstantV3WindowHighlight,WindowPressed:InstantV3WindowPressed),
-   Defects=new(Version:2,Kind:InstantV3DefectKind,Amount:InstantV3DefectAmount,Crystal:InstantV3Crystal,Leak:InstantV3Leak,Geometry:new(InstantV3DefectX,InstantV3DefectY,InstantV3DefectAngle,InstantV3DefectScale))}).Freeze();
+   Defects=new(Version:2,Kind:InstantV3DefectKind,Amount:InstantV3DefectAmount,Crystal:InstantV3Crystal,Leak:InstantV3Leak,Geometry:new(InstantV3DefectX,InstantV3DefectY,InstantV3DefectAngle,InstantV3DefectScale))});
+  if(permitComponent&&InstantV3ColorChoice.StartsWith("风格近似",StringComparison.Ordinal))
+  {
+   bool bw=InstantV3ColorChoice.Contains("黑白");if(film.FilmId is not("itype-color" or "600-color" or "itype-bw" or "600-bw")||bw!=(recipe.Profile.Palette=="NeutralBW"))throw new InvalidDataException("此相纸不支持所选新色彩候选；未回退其他模型。");
+   frozen=frozen with{AlgorithmVersion=4,Response=new(ExposureEv:InstantV3Exposure,Saturation:bw?0:.9),ColorComponent=InstantColorComponents.Freeze(bw?"polaroid-modern-bw-style-smooth-1":"polaroid-modern-color-style-smooth-1"),Creative=frozen.Creative! with{Stock="Base",ShadowCast=0,HighlightWarmth=0,TemperatureAppearance=0,Fog=0,Fade=0,FrameDrift=0}};
+  }
+  return frozen.Freeze();
  }
  private void ResetV3PhotoControls()
  {
@@ -175,6 +187,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   InstantSecondInput=null;InstantSecondWeight=.5;InstantSecondCropX=.5;InstantSecondCropY=.5;InstantSecondZoom=1;InstantSecondMode="NormalizedMix";OnPropertyChanged(nameof(InstantSecondSourceName));
   InstantV3Exposure=0;InstantV3Toe=.025;InstantV3Shoulder=.3;InstantV3Density=1;InstantV3Softness=.1;InstantV3Diffusion=.07;
   InstantV3Texture=.0015;InstantV3Aging=0;InstantV3Stock="Base";InstantV3Fog=0;InstantV3ShadowCast=0;InstantV3Warmth=0;InstantV3FrameDrift=0;InstantV3Fade=0;
+  instantV3ColorChoice="旧版创意V3（兼容）";
   InstantV3Pattern="Plain";InstantV3Circle=false;InstantV3Reflection=0;InstantV3ReflectionAngle=0;InstantV3ReflectionWidth=.15;InstantV3Zoom=1;
   InstantV3WindowHighlight=0;InstantV3WindowPressed=0;InstantV3Emboss=0;InstantV3EdgeLine=0;InstantV3DefectKind="None";InstantV3DefectAmount=0;InstantV3EmulsionDefects=0;InstantV3Crystal=0;InstantV3Leak=0;
   InstantV3Vignette=0;InstantV3DevelopmentEdge=0;InstantV3PaperTexture=.002;InstantV3PaperScratches=0;InstantV3ScanDust=0;InstantV3Seed=20261017;
@@ -182,7 +195,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private void RestoreV3(InstantFilmDefinition? film)
  {
   ResetV3PhotoControls();InstantEngineVersion=film?.AlgorithmVersion==3?"V3":"V2";
-  if(film?.V3 is{} r){InstantSecondInput=r.MultipleInput;if(r.MultipleInput is{} second){InstantSecondWeight=second.Weight;InstantSecondMode=second.Mode;InstantSecondCropX=second.CropX;InstantSecondCropY=second.CropY;InstantSecondZoom=second.Zoom;}OnPropertyChanged(nameof(InstantSecondSourceName));InstantV3Exposure=r.Response.ExposureEv;InstantV3Toe=r.Response.Toe;InstantV3Shoulder=r.Response.Shoulder;InstantV3Density=r.Response.ApparentDensity;InstantV3Softness=r.Optics.DetailMix;InstantV3Diffusion=r.Optics.HighlightDiffusion;InstantV3EmulsionDefects=r.Emulsion.DevelopmentDefects;InstantV3Texture=r.Emulsion.Microstructure;InstantV3Aging=r.Emulsion.ExpiredAging;InstantV3Seed=r.Random.RootSeed;
+  if(film?.V3 is{} r){instantV3ColorChoice=r.ColorComponent is{} color?(color.BlackAndWhite?"风格近似 · 黑白V1":"风格近似 · 彩色V1"):"旧版创意V3（兼容）";InstantSecondInput=r.MultipleInput;if(r.MultipleInput is{} second){InstantSecondWeight=second.Weight;InstantSecondMode=second.Mode;InstantSecondCropX=second.CropX;InstantSecondCropY=second.CropY;InstantSecondZoom=second.Zoom;}OnPropertyChanged(nameof(InstantSecondSourceName));InstantV3Exposure=r.Response.ExposureEv;InstantV3Toe=r.Response.Toe;InstantV3Shoulder=r.Response.Shoulder;InstantV3Density=r.Response.ApparentDensity;InstantV3Softness=r.Optics.DetailMix;InstantV3Diffusion=r.Optics.HighlightDiffusion;InstantV3EmulsionDefects=r.Emulsion.DevelopmentDefects;InstantV3Texture=r.Emulsion.Microstructure;InstantV3Aging=r.Emulsion.ExpiredAging;InstantV3Seed=r.Random.RootSeed;
    InstantV3Stock=r.Creative?.Stock??"Base";InstantV3Fog=r.Creative?.Fog??0;InstantV3ShadowCast=r.Creative?.ShadowCast??0;InstantV3Warmth=r.Creative?.HighlightWarmth??0;InstantV3FrameDrift=r.Creative?.FrameDrift??0;InstantV3Fade=r.Creative?.Fade??0;InstantV3Vignette=r.Creative?.LensVignette??0;InstantV3DevelopmentEdge=r.Creative?.DevelopmentEdge??0;
    InstantV3WindowHighlight=r.Paper?.WindowHighlight??0;InstantV3WindowPressed=r.Paper?.WindowPressed??0;InstantV3Pattern=r.Paper?.Pattern??"Plain";InstantV3Circle=r.Paper?.Window=="Circle";InstantV3Reflection=r.Paper?.Reflection??0;InstantV3ReflectionAngle=r.Paper?.ReflectionAngle??0;InstantV3ReflectionWidth=r.Paper?.ReflectionWidth??.15;InstantV3Zoom=r.Paper?.Zoom??1;InstantV3Emboss=r.Paper?.Emboss??0;InstantV3EdgeLine=r.Paper?.EdgeLine??0;
    InstantV3DefectX=r.Defects?.Geometry?.CenterX??.5;InstantV3DefectY=r.Defects?.Geometry?.CenterY??.5;InstantV3DefectAngle=r.Defects?.Geometry?.AngleDegrees??0;InstantV3DefectScale=r.Defects?.Geometry?.Scale??1;InstantV3DefectKind=r.Defects?.Kind??"None";InstantV3DefectAmount=r.Defects?.Amount??0;InstantV3Crystal=r.Defects?.Crystal??0;InstantV3Leak=r.Defects?.Leak??0;InstantV3PaperTexture=r.Surface.PaperTexture;InstantV3PaperScratches=r.Surface.PaperScratches;InstantV3ScanDust=r.Surface.ScanDust;}

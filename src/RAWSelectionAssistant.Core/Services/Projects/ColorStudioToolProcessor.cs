@@ -18,7 +18,7 @@ public static class ColorStudioToolProcessor
         { if ((i & 8191) == 0) token.ThrowIfCancellationRequested(); if (!float.IsFinite(source.Rgb32.Span[i])) throw new ArgumentException("图像含无效浮点像素。"); }
         if (IsIdentity(node)) return source.Clone();
         if (node.Type == ColorStudioNodeType.Details) return ApplyDetails(source, node, token);
-        var input = source.Rgb32.Span; var output = new float[input.Length];
+        var input = source.Rgb32.Span; var output = GraphPixelAllocation.Allocate(input.Length);
         var curves = node.Type == ColorStudioNodeType.Curve ? new[] { "rgb", "r", "g", "b" }.Select(c => ReadCurve(node, c)).ToArray() : [];
         const int tableSize = 4096;
         double[][]? channelTables = null;

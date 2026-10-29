@@ -37,14 +37,14 @@ public partial class PhotoGradePageView:UserControl
   if(model is not null){PropertyChangedEventManager.AddHandler(model,Changed,string.Empty);PropertyChangedEventManager.AddHandler(model.Editor,MaskEditorChanged,string.Empty);PropertyChangedEventManager.AddHandler(model.Editor,R54EditorChanged,string.Empty);}
   PhotoViewport.LostMouseCapture-=MaskCaptureLost;PhotoViewport.LostMouseCapture+=MaskCaptureLost;
 
-  RestorePanelLayout();AttachR54Graph();Refresh();UpdateZones();ApplyR53Layout();RenderR53Resources();ConfigureMaskPanel();
+  RestorePanelLayout();model?.QueueFramePhotoPreviews();AttachR54Graph();Refresh();UpdateZones();ApplyR53Layout();RenderR53Resources();ConfigureMaskPanel();
  }
  private void Detach(bool cancel)
  {
   var presets=r53PresetCancellation;r53PresetCancellation=null;presets?.Cancel();StopMaskOverlay();CancelMaskStroke();r53MultiWindow?.Close();r53ResourceWindow?.Close();
   if(model is not null){PropertyChangedEventManager.RemoveHandler(model.Editor,MaskEditorChanged,string.Empty);PropertyChangedEventManager.RemoveHandler(model.Editor,R54EditorChanged,string.Empty);}
   ReleaseR53Compare();closeR53Inspection?.Invoke();
-  if(model is not null){PropertyChangedEventManager.RemoveHandler(model,Changed,string.Empty);if(cancel)model.ExitInstantPresentationForLifecycle();}
+  if(model is not null){PropertyChangedEventManager.RemoveHandler(model,Changed,string.Empty);if(cancel){model.CancelFramePhotoPreviews();model.ExitInstantPresentationForLifecycle();}}
 
   model=null;
  }

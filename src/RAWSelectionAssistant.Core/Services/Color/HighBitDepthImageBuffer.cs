@@ -10,7 +10,7 @@ public sealed class HighBitDepthImageBuffer : IDisposable
     {
         if (width <= 0 || height <= 0) throw new ArgumentOutOfRangeException(nameof(width));
         if (rgb32.Length != checked(width * height * 3)) throw new ArgumentException("RGB float buffer length does not match dimensions.", nameof(rgb32));
-        Width = width; Height = height; Rgb32 = rgb32; SourceBitDepth = sourceBitDepth; WorkingColorSpace = workingColorSpace; Orientation = orientation; Metadata = metadata;
+        Width = width; Height = height; Rgb32 = rgb32;pixelReturn=GraphPixelAllocation.Claim(rgb32); SourceBitDepth = sourceBitDepth; WorkingColorSpace = workingColorSpace; Orientation = orientation; Metadata = metadata;
     }
 
     public HighBitDepthImageBuffer(int width, int height, ReadOnlyMemory<ushort> rgb48, string sourceBitDepth = "16", string workingColorSpace = "sRGB", ushort orientation = 1, RawImageMetadata? metadata = null)
@@ -24,15 +24,17 @@ public sealed class HighBitDepthImageBuffer : IDisposable
     public int Height { get; }
     private ReadOnlyMemory<float> pixels;
     private IDisposable? ownedReservation;
+    private IDisposable? pixelReturn;
     private bool disposed;
     public ReadOnlyMemory<float> Rgb32 { get=>!disposed?pixels:throw new ObjectDisposedException(nameof(HighBitDepthImageBuffer)); private set=>pixels=value; }
     public bool OwnsReservation=>ownedReservation is not null;
+    internal bool HasGraphBacking=>pixelReturn is not null;
     public void TakeReservation(IDisposable reservation)
     {
         if(disposed||ownedReservation is not null)throw new InvalidOperationException("Buffer already owned/disposed");
         ownedReservation=reservation;
     }
-    public void Dispose(){if(disposed)return;disposed=true;pixels=default;Interlocked.Exchange(ref ownedReservation,null)?.Dispose();}
+    public void Dispose(){if(disposed)return;disposed=true;pixels=default;Interlocked.Exchange(ref pixelReturn,null)?.Dispose();Interlocked.Exchange(ref ownedReservation,null)?.Dispose();}
     public string SourceBitDepth { get; } = "32f";
     public string WorkingColorSpace { get; } = "sRGB";
     public ushort Orientation { get; } = 1;
@@ -70,7 +72,7 @@ public sealed class HighBitDepthImageBuffer : IDisposable
         return new(Width, Height, output);
     }
 
-    public HighBitDepthImageBuffer Clone() => new(Width, Height, Rgb32.ToArray(), SourceBitDepth, WorkingColorSpace, Orientation, Metadata);
+    public HighBitDepthImageBuffer Clone() => new(Width, Height, GraphPixelAllocation.Copy(Rgb32), SourceBitDepth, WorkingColorSpace, Orientation, Metadata);
 
     public ushort[] ToRgb48()
     {

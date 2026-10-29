@@ -1,3 +1,12 @@
+## 2026-10-29 公司R5.4收尾接续（Europe/Berlin）
+- 公司独立分支company/r54-closure-20261029、工作树E:/Kitao-Worktrees/r54-closure-20261029，起点73ac0b2483d5c09cd4860bd8cf47c955e18d128d；旧公司树/其他未提交保全，未合main/研究整分支/强推。
+- 家庭核查：origin/source-private同源码仓库，均未见home/r54-darkroom-20261028或其他R54家庭分支；相关pixel-tart-handoff仅旧main收据。结论“家庭成果未在可访问远端发现”，不是家庭任务完成。未访问N盘/无关私人目录。工作中复查仍一致，见本轮HOME_DELIVERY_AUDIT。
+- 简易/专业按UI5.4第9章+v2草图，其余既有HTML不变，右栏节点图仍否决。实际输出缩略/蒙版/同系图标/3px标签/白选框；所选节点对应右栏工具；当前照片与原创框材质同链卡，保护迟到/取消。
+- 大图先测旧版再优化：CompanyRAW TNAN8886.CR3全尺寸5496×3670；8串行/分支/双混合。旧全结果缓存预算拒绝full，旧rowband作全尺寸像素oracle。现在最后消费者释放+精确长度graph局部buffer复用/账本/返回结果Dispose，生产预览每worker复用行带。最终与旧rowband/原预览hash一致；20MP取消2次/重复full2次账本0；不降最终尺寸/位深。Sony ARW当前LibRaw拒绝，明确未覆盖。
+- A/B自动/离屏集合通过后才进入独立色彩阶段：可选“风格近似·彩色V1/黑白V1”，非相机实测。替换V3 tone，不叠旧tone/Womb/旧色偏；冻结完整模型JSON、版本/hash/data hash，Candidate内版本4使旧读取器拒绝误解释，外层仍用现有V3链。旧无组件保持原值；SX70/实验相纸不强配专用模型。
+- AI/修复仿制/扭曲/纹理笔刷继续留后续；16bit/float真实配对工具仍未改。本轮完整应用/策划15/教程退役保留，WholeAppDiagnosticBuild=true、PhotographerTrialBuild=false，CMD隔离根，不Setup。ComputerUse/Browser/WebView/CDP继续禁止；离屏、独立testhost、OS启动、实机验收分开。
+- 源SHA/包/测试/对照/性能与剩余见docs/validation/r54-closure-20261029/FINAL_REPORT.md，未用旧报告数量冒充新验收。
+
 ## 2026-10-28 R5.4 节点系统实施入口（Europe/Berlin）
 - 简易图层/专业节点以 UI5.4 第9章与 v2含类型最终草图为准；外壳/即时胶片/变体/3D/拼贴/策划沿既有HTML。右栏节点图已否决，停止扩建旧串行节点条。
 - UI5.4 archive SHA256 88dfcf82b5139bed2fdf06c7271063163b59d372a887d0b362070ec7e3be4d26；附带notebook只作资料，不执行。灰框不是正式资源。

@@ -12,7 +12,7 @@ public static class BoundedLegacyRawRenderer
         var state=ColorStudioEffectiveState.Resolve(look,stack,film)??(look is not null?ColorStudioLegacyMigration.Migrate(look with{Film=film??look.Film}).Stack:new ColorAdjustmentStack([new(Guid.NewGuid(),ColorStudioNodeType.Preset,"Original")]));
         var full=state.Nodes.Where(n=>n.Enabled&&(n.Type is ColorStudioNodeType.ReferenceMatch or ColorStudioNodeType.Details||n.Type==ColorStudioNodeType.Develop&&(n.NumericParameters.GetValueOrDefault("structure")!=0||n.NumericParameters.GetValueOrDefault("detail")!=0)||n.Type==ColorStudioNodeType.Film&&((n.FilmSettings?.HalationAmount??n.NumericParameters.GetValueOrDefault("halation_amount"))>0||(n.FilmSettings?.BloomAmount??n.NumericParameters.GetValueOrDefault("bloom_amount"))>0))).Select(n=>n.Name+":"+n.Type).ToArray();
         const int rows=64;var pixels=(long)width*height;
-        return new(full.Length==0,rows,full.Length==0?checked(pixels*36+(long)width*Math.Min(rows,height)*(state.Graph?.Version==2?Math.Max(96,(state.Nodes.Count+3)*48):96)+32L*1024*1024):checked(pixels*72+64L*1024*1024),full);
+        return new(full.Length==0,rows,full.Length==0?checked(pixels*36+(long)width*Math.Min(rows,height)*(state.Graph?.Version==2?Math.Max(96,(StudioGraphRenderer.PeakBackingBuffers(state)+2)*12*4):96)+32L*1024*1024):checked(pixels*72+64L*1024*1024),full);
     }
     public static HighBitDepthImageBuffer Render(HighBitDepthImageBuffer upright,ReferenceLook? look,ColorAdjustmentStack? stack,PixelTartFilmSettings? film,CancellationToken token=default,Action<string>? stage=null)
     {
@@ -23,6 +23,7 @@ public static class BoundedLegacyRawRenderer
         var output=new float[upright.Rgb32.Length];
         Parallel.For(0,(upright.Height+plan.RowBand-1)/plan.RowBand,new ParallelOptions{CancellationToken=token,MaxDegreeOfParallelism=4},bandIndex=>
         {
+            using var graphAllocation=state.Graph?.Version==2?GraphPixelAllocation.Enter():null;
             var top=bandIndex*plan.RowBand;
             token.ThrowIfCancellationRequested();var height=Math.Min(plan.RowBand,upright.Height-top);var count=upright.Width*height*3;
             using var band=new HighBitDepthImageBuffer(upright.Width,height,upright.Rgb32.Slice(top*upright.Width*3,count).ToArray(),"16","sRGB",1);

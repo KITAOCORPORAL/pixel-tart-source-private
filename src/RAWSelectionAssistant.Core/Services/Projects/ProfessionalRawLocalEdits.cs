@@ -31,7 +31,7 @@ public static class ProfessionalRawLocalRenderer
   if(d.ColorState?.Version==2)return DocumentWorkingRendererV2.Region(m,d,left,top,width,height,token);
   prepared??=new Prepared(m,d,token);d=prepared.Definition;
   var size=Size(m,d);if(left<0||top<0||width<=0||height<=0||left+width>size.Width||top+height>size.Height)throw new ArgumentOutOfRangeException(nameof(left));
-  var oriented=ProfessionalRawPipeline.OrientedSize(m);var geometry=d.Geometry??new();var values=new float[checked(width*height*3)];
+  var oriented=ProfessionalRawPipeline.OrientedSize(m);var geometry=d.Geometry??new();var values=GraphPixelAllocation.Allocate(checked(width*height*3));
   (double X,double Y) Coordinate(int x,int y){var u=(left+x+.5)/size.Width;var v=(top+y+.5)/size.Height;var p=geometry.SourceTuple(u,v,(double)oriented.Width/oriented.Height);if(geometry.Version==2)return p;return ((Math.Clamp((int)(p.X*oriented.Width),0,oriented.Width-1)+.5)/oriented.Width,(Math.Clamp((int)(p.Y*oriented.Height),0,oriented.Height-1)+.5)/oriented.Height);}
   var baseClock=RawLocalProfile.Begin();
   for(int y=0;y<height;y++){token.ThrowIfCancellationRequested();for(int x=0;x<width;x++){
@@ -76,8 +76,9 @@ public static class ProfessionalRawLocalRenderer
   // Up to four independent destination-row bands; immutable prepared mask indexes are shared.
   // Each destination pixel sees exactly the same source-y/source-x summation order as V1 serial area integration.
   Parallel.For(0,Math.Min(4,h),new ParallelOptions{CancellationToken=token,MaxDegreeOfParallelism=4},worker=>{
+   using var graphAllocation=d.LocalEdits?.Stack.Graph?.Version==2?GraphPixelAllocation.Enter():null;var sums=new double[w*3];
    for(int py=worker*h/Math.Min(4,h);py<(worker+1)*h/Math.Min(4,h);py++){
-    token.ThrowIfCancellationRequested();double ya=py*ry,yb=(py+1)*ry;int top=(int)ya,bottom=Math.Min(size.Height,(int)Math.Ceiling(yb));using var band=Region(m,d,0,top,size.Width,bottom-top,token,prepared);var rgb=band.Rgb32.Span;var sums=new double[w*3];
+    token.ThrowIfCancellationRequested();double ya=py*ry,yb=(py+1)*ry;int top=(int)ya,bottom=Math.Min(size.Height,(int)Math.Ceiling(yb));using var band=Region(m,d,0,top,size.Width,bottom-top,token,prepared);var rgb=band.Rgb32.Span;Array.Clear(sums);
     for(int y=0;y<band.Height;y++){int sy=top+y;double wy=Math.Max(0,Math.Min(sy+1,yb)-Math.Max(sy,ya));if(wy==0)continue;for(int sx=0;sx<size.Width;sx++)for(int px=(int)(sx/rx);px<=Math.Min(w-1,(int)((sx+1)/rx));px++){double wx=Math.Max(0,Math.Min(sx+1,(px+1)*rx)-Math.Max(sx,px*rx));if(wx==0)continue;int i=(y*size.Width+sx)*3,o=px*3;for(int c=0;c<3;c++){double v=rgb[i+c];sums[o+c]+=(v<=.04045?v/12.92:Math.Pow((v+.055)/1.055,2.4))*wx*wy;}}}
     for(int i=0;i<sums.Length;i++){double v=sums[i]/(rx*ry);data[py*w*3+i]=(float)(v<=.0031308?v*12.92:1.055*Math.Pow(v,1/2.4)-.055);}
    }

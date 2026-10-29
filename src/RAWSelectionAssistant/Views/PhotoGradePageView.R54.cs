@@ -7,11 +7,11 @@ public partial class PhotoGradePageView
     private StudioNodeGraphView? r54Graph;
     private double r54GraphHeight=216;private bool r54DefaultSized;
     private bool r54SavingLayout;
-    private void R54EditorChanged(object? sender,System.ComponentModel.PropertyChangedEventArgs e){if(e.PropertyName is "AdjustmentStack" or "SelectedAdjustmentNode")ApplyR53Layout();r54Graph?.InvalidateVisual();}
+    private void R54EditorChanged(object? sender,System.ComponentModel.PropertyChangedEventArgs e){if(e.PropertyName=="SelectedAdjustmentNode")r53ParameterTab=model?.Editor.SelectedAdjustmentNode?.Type switch{RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Curve=>"曲线",RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorBalance=>"色轮",RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorRange=>"HSL",_=>"基础"};if(e.PropertyName is "AdjustmentStack" or "SelectedAdjustmentNode")ApplyR53Layout();r54Graph?.InvalidateVisual();}
     private void AttachR54Graph()
     {
         if(model is null)return;
-        var owner=model;r54Graph=new(owner.Editor){Thumbnail=id=>owner.LayerThumbnailContext?.Outputs.GetValueOrDefault(id)};
+        var owner=model;r54Graph=new(owner.Editor){Thumbnail=id=>owner.LayerThumbnailContext?.Outputs.GetValueOrDefault(id),MaskThumbnail=id=>owner.LayerThumbnailContext?.Masks.GetValueOrDefault(id)};
         R53NodeContent.Children.Clear();R53NodeContent.Children.Add(r54Graph);
         r54DefaultSized=false;var layout=owner.Layout.Normalize();r54GraphHeight=layout.R54GraphHeight;r53NodesCollapsed=layout.R54GraphCollapsed??(ActualWidth<=1366);
         r54Graph.Restore(new(layout.R54GraphPanX,layout.R54GraphPanY),layout.R54GraphZoom);
@@ -41,6 +41,18 @@ public partial class PhotoGradePageView
             var edit=new Button{Content="切到专业编辑路由"};edit.Click+=(_,_)=>{if(model is not null)model.R53Professional=true;OpenR53Panel();ApplyR53Layout();};r54ProfessionalGroup.Children.Add(edit);group.Children.Insert(0,r54ProfessionalGroup);
         }
         r54ProfessionalGroup.Visibility=complex?Visibility.Visible:Visibility.Collapsed;
+    }
+
+    private void SelectClosureNodeTool(string name)
+    {
+        if(model is null)return;r53ParameterTab=name;
+        var type=name switch{"色轮"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorBalance,"曲线"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Curve,"范围" or "HSL"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorRange,_=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.BasicTone};
+        if(model.R53Professional&&model.Editor.SelectedAdjustmentNode?.Type!=type)
+        {
+            var node=model.Editor.AdjustmentNodes.FirstOrDefault(n=>n.Type==type);
+            if(node is not null)model.Editor.SelectedAdjustmentNode=node;
+            else model.Editor.AddGraphSerialNode(type.ToString());
+        }
     }
 
 }

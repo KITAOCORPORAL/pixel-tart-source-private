@@ -42,6 +42,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     try{var path=System.IO.Path.Combine(RAWSelectionAssistant.Core.Utilities.AppDataPaths.Root,"lightprint-camera.json");Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);File.WriteAllText(path,System.Text.Json.JsonSerializer.Serialize(new{Enabled=InstantCameraAnimation}));}catch(IOException){}
    }
    if(e.PropertyName is nameof(ActiveTarget) or nameof(IsLoading) or nameof(IsInstantGenerating)){NotifyLightPrint();return;}
+   if(e.PropertyName==nameof(SelectedInstantProfile)&&!_restoringLightPrintControls)ReconcileInstantColorChoice();
    if(_lightPrintEnabled&&!_restoringLightPrintControls&&e.PropertyName is{} name&&(name==nameof(SelectedInstantProfile)||name==nameof(InstantInputMode)||name.StartsWith("InstantV3",StringComparison.Ordinal)&&name is not(nameof(InstantV3Stocks) or nameof(InstantV3Patterns) or nameof(InstantV3DefectKinds))||name is nameof(InstantAmount) or nameof(InstantUneven) or nameof(InstantSecondSourceName) or nameof(InstantSecondWeight) or nameof(InstantSecondCropX) or nameof(InstantSecondCropY) or nameof(InstantSecondZoom) or nameof(InstantFit) or nameof(InstantCropX) or nameof(InstantCropY)))QueueLightPrintPreview();
   };
   DevelopLightPrintCommand=new(async _=>

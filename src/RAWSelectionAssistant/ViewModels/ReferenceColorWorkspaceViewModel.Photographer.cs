@@ -67,7 +67,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     var recipes=PhotographerPapers.Select(choice=>
     {
      var profile=InstantFilmProfiles.Available.Single(x=>x.Id==choice.ProfileId);
-     var recipe=FreezeV3(new InstantFilmDefinition(true,profile.Id,profile.ChemicalGeneration),false);
+     var recipe=FreezeV3(new InstantFilmDefinition(true,profile.Id,profile.ChemicalGeneration),false,permitComponent:InstantV3ColorChoice.Contains("黑白")?profile.Id=="itype-bw":profile.Id=="itype-color");
      var film=ApplyLightPrintFrame(new InstantFilmDefinition(true,recipe.Profile.LegacyId,profile.ChemicalGeneration,AlgorithmVersion:3){V3=recipe});
      return(choice,profile,film);
     }).ToArray();

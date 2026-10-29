@@ -41,7 +41,7 @@ public static class StudioLayerComposite
     public static bool Identity(ColorAdjustmentStackNode node)=>!Active(node)||node.Opacity==1&&node.Blend==StudioLayerBlend.Normal&&node.LocalMask is null;
     public static HighBitDepthImageBuffer Apply(HighBitDepthImageBuffer before,HighBitDepthImageBuffer effect,ColorAdjustmentStackNode node,CancellationToken token=default,FilmTileCoordinates? tile=null,Func<int,int,(double X,double Y)>? sourceCoordinate=null,Func<double,double,double>? compiledMask=null)
     {
-        if(Identity(node))return effect;if(before.Width!=effect.Width||before.Height!=effect.Height)throw new InvalidDataException("混合输入尺寸不一致。");if(node.Opacity==0)return before.Clone();var a=before.Rgb32.Span;var b=effect.Rgb32.Span;var result=new float[a.Length];var fullW=tile?.FullWidth??before.Width;var fullH=tile?.FullHeight??before.Height;var sample=compiledMask??node.LocalMask?.Compile((double)fullW/fullH,token);
+        if(Identity(node))return effect;if(before.Width!=effect.Width||before.Height!=effect.Height)throw new InvalidDataException("混合输入尺寸不一致。");if(node.Opacity==0)return before.Clone();var a=before.Rgb32.Span;var b=effect.Rgb32.Span;var result=GraphPixelAllocation.Allocate(a.Length);var fullW=tile?.FullWidth??before.Width;var fullH=tile?.FullHeight??before.Height;var sample=compiledMask??node.LocalMask?.Compile((double)fullW/fullH,token);
         for(int y=0;y<before.Height;y++)
         {
             token.ThrowIfCancellationRequested();for(int x=0;x<before.Width;x++)

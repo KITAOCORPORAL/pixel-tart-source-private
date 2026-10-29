@@ -1,0 +1,20 @@
+{
+  "researchHead": "0146c8d3430df3c3481ceb874d13fa00186a18c7",
+  "status": "PASS",
+  "meaning": "analytic product versus frozen independent offline candidate, no real film fitting error",
+  "fixedBeforeRunMaxAbs": 1e-12,
+  "results": [
+    {
+      "kind": "color",
+      "samples": 4096,
+      "maxAbs": 2.7755575615628914e-16,
+      "modelHash": "87677b36a62c78f1001ad206c16e8f4c5f69b0095e6fd14ef5a02be9c0dddeaf"
+    },
+    {
+      "kind": "bw",
+      "samples": 4096,
+      "maxAbs": 2.220446049250313e-16,
+      "modelHash": "e931eb989fad6d5f83d87dc4dc5fdd140750183cb2cd10b029ebf71579068e2d"
+    }
+  ]
+}

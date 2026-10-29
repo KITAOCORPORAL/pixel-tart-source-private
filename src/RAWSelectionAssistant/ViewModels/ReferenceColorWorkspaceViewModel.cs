@@ -248,7 +248,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
             if (args.PropertyName == nameof(TetherReferenceModeViewModel.IsBusy)) StopProcessingCommand!.RaiseCanExecuteChanged();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.IsProMode) or nameof(TetherReferenceModeViewModel.AdjustmentStack) or nameof(TetherReferenceModeViewModel.SelectedAdjustmentNode)) RefreshSyncAvailability();
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.SourceImage) or nameof(TetherReferenceModeViewModel.MatchedImage) or nameof(TetherReferenceModeViewModel.EffectiveViewMode))
-                {OnPropertyChanged(nameof(LayerThumbnailSource));SchedulePreviewAnalysis();}
+                {OnPropertyChanged(nameof(LayerThumbnailSource));SchedulePreviewAnalysis();QueueFramePhotoPreviews();}
             if (args.PropertyName is nameof(TetherReferenceModeViewModel.MatchedImage) or nameof(TetherReferenceModeViewModel.AdjustmentStack)
                 or nameof(TetherReferenceModeViewModel.SelectedLook) or nameof(TetherReferenceModeViewModel.FilmSettings)
                 or nameof(TetherReferenceModeViewModel.MatchEngine) or nameof(TetherReferenceModeViewModel.MatchV4ExecutionMode)
@@ -730,7 +730,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel : ObservableObject,
 
     public void Dispose()
     {
-        CancelRawLocalPreview();rawFastBases.Dispose();ClearR53CompareCache();
+        CancelFramePhotoPreviews();CancelRawLocalPreview();rawFastBases.Dispose();ClearR53CompareCache();
         _r53Autosave.Stop();
         if(_disposed)return;
         CancelLightPrintTask(false);_paperPreviewCancellation?.Cancel();CancelComparison();_disposed = true;

@@ -13,11 +13,15 @@ public sealed class LightPrintFrameThumbnail : FrameworkElement
         nameof(Frame), typeof(LightPrintFrame), typeof(LightPrintFrameThumbnail),
         new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
     public LightPrintFrame? Frame { get => (LightPrintFrame?)GetValue(FrameProperty); set => SetValue(FrameProperty, value); }
+    public static readonly DependencyProperty PhotoPreviewsProperty=DependencyProperty.Register(nameof(PhotoPreviews),typeof(IReadOnlyDictionary<string,BitmapSource>),typeof(LightPrintFrameThumbnail),new FrameworkPropertyMetadata(null,FrameworkPropertyMetadataOptions.AffectsRender));
+    public IReadOnlyDictionary<string,BitmapSource>? PhotoPreviews{get=>(IReadOnlyDictionary<string,BitmapSource>?)GetValue(PhotoPreviewsProperty);set=>SetValue(PhotoPreviewsProperty,value);}
+    internal BitmapSource? ActualPhotoPreview=>Frame is{} f?PhotoPreviews?.GetValueOrDefault(f.Id):null;
     private string? loadedFrame;private BitmapSource? loadedArtwork;
     protected override void OnRender(DrawingContext dc)
     {
         base.OnRender(dc);
         if (Frame is not { } frame || ActualWidth <= 0 || ActualHeight <= 0) return;
+        if(ActualPhotoPreview is{} actual){double ratio=actual.PixelWidth/(double)actual.PixelHeight;double w=Math.Min(ActualWidth,ActualHeight*ratio),h=w/ratio;dc.DrawImage(actual,new Rect((ActualWidth-w)/2,(ActualHeight-h)/2,w,h));return;}
         if(frame.Id.StartsWith("orig.",StringComparison.Ordinal))
         {
             try

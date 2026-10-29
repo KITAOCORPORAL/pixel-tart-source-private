@@ -26,5 +26,5 @@
           CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
-  <ItemGroup><EmbeddedResource Include="Resources/OriginalFrames/*" /></ItemGroup>
+  <ItemGroup><EmbeddedResource Include="Resources/OriginalFrames/*" /><EmbeddedResource Include="Resources/InstantColor/*" /></ItemGroup>
 </Project>

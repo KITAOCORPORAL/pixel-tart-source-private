@@ -30,7 +30,7 @@ public static class CandidateSpatial
     {
         bool profile=CandidatePerformanceProfile.Enabled;
         recipe=recipe.Freeze();var palette=recipe.Profile.Palette;var plan=Plan(tileWidth,tileHeight);
-        var womb=recipe.Creative is{Version:2,Stock:not "Base"};
+        var womb=recipe.ColorComponent is null&&recipe.Creative is{Version:2,Stock:not "Base"};
         var toneRecipe=womb?recipe with{Response=recipe.Response with{ExposureEv=0}}:recipe;
         var exposureGain=Math.Pow(2,recipe.Response.ExposureEv);
         if(left<0||top<0||width<=0||height<=0||left+width>orientedDisplay.Width||top+height>orientedDisplay.Height)throw new ArgumentOutOfRangeException(nameof(left));
@@ -67,7 +67,7 @@ public static class CandidateSpatial
                         sourcePixel=CandidateTone.Encode(new ColorVector3(exposed.X*gain,exposed.Y*gain,exposed.Z*gain));
                         sourcePixel=Womb01351Reference.Apply(sourcePixel,creative.Stock);
                     }
-                    var value=CandidateTone.ApplyLinear(sourcePixel,toneRecipe,palette);
+                    var value=recipe.ColorComponent is{} component?InstantColorComponents.ApplyLinear(sourcePixel,component,recipe.Response.ExposureEv):CandidateTone.ApplyLinear(sourcePixel,toneRecipe,palette);
                     if(sampled!=0)CandidatePerformanceProfile.Add("sampled.tone-response",sampled);
                     var i=(y+2)*stride+(x+2)*3;scratch[i]=value.X;scratch[i+1]=value.Y;scratch[i+2]=value.Z;
                 }

@@ -77,4 +77,8 @@ public sealed partial class TetherReferenceModeViewModel
     public void CopyGraphSettings(){if(SelectedAdjustmentNode is{} n)graphSettingsClipboard=n.Normalize();}
     public void PasteGraphSettings(){if(graphSettingsClipboard is not{} copied||SelectedAdjustmentNode is not{IsLocked:false} selected||copied.Type!=selected.Type){StatusText="请选择相同类型的可编辑节点。";return;}ChangeStack(nodes=>nodes.Select(n=>n.Id==selected.Id?copied with{Id=selected.Id,Name=selected.Name,UserLocked=selected.UserLocked,SystemLocked=selected.SystemLocked}:n).ToArray());}
 
+    public void SetGraphLabel(int label){if(label is <0 or >5||SelectedAdjustmentNode is not{IsLocked:false} selected)return;ChangeStack(nodes=>nodes.Select(n=>n.Id==selected.Id?n with{GraphLabel=label}:n).ToArray(),render:false);}
+
+    public string SelectedNodeTypeLabel=>SelectedAdjustmentNode?.Type switch{ColorStudioNodeType.GraphMix=>"⊕ 混合",ColorStudioNodeType.Film=>"▣ 胶片",null=>"未选择节点",_=>"◐ 调色"};
+
 }

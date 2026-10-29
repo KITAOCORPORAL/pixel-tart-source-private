@@ -62,7 +62,7 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
     {
         ArgumentNullException.ThrowIfNull(master);
         await master.ValidateSourceAsync(token).ConfigureAwait(false);
-        var output = Render(master.Image, look, stack, token: token, film: film).ProcessingPixels!;
+        using var output = Render(master.Image, look, stack, token: token, film: film).ProcessingPixels!;
         return await AtomicTiffWriter.WriteRgb48Async(destinationPath, output,
             new(TiffBitDepth.Sixteen, IccProfile: outputIcc, Software: "光镜", Orientation: output.Orientation), token, overwrite: false).ConfigureAwait(false);
     }

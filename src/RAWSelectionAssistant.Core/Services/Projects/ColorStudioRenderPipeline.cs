@@ -14,11 +14,11 @@ public sealed class ColorStudioRenderPipeline
 
     public ColorStudioRenderResult Render(HighBitDepthImageBuffer source, AssetVisualAnalysisResult analysis, ReferenceLook? reference, ColorAdjustmentStack stack, CancellationToken token = default, bool captureNodeDiagnostics = true, ReadOnlyMemory<byte> alpha = default,FilmTileCoordinates? tile = null,IReadOnlyDictionary<Guid,Func<double,double,double>>? compiledMasks=null)
     {
-        ArgumentNullException.ThrowIfNull(source); var normalized = stack.Normalize(); var current = source.Clone(); var precisionStages = new List<string>(PrecisionTrace.ProfessionalDefault.Stages);
+        ArgumentNullException.ThrowIfNull(source); var normalized = stack.Normalize(); var current = normalized.Graph?.Version==2?source:source.Clone(); var precisionStages = new List<string>(PrecisionTrace.ProfessionalDefault.Stages);
         var outputs = new List<VisualPixelBuffer>(normalized.Nodes.Count); var inputs = new Dictionary<Guid, VisualPixelBuffer>();
         if(normalized.Graph?.Version==2)
         {
-            current.Dispose();current=StudioGraphRenderer.Render(source,normalized,(input,node)=>ApplyHighPrecision(input,node,reference,analysis,token,alpha,tile),token,tile,masks:compiledMasks,diagnostics:captureNodeDiagnostics?(id,input,output)=>{inputs[id]=input.ToVisualRgb24(token);outputs.Add(output.ToVisualRgb24(token));}:null);
+            current=StudioGraphRenderer.Render(source,normalized,(input,node)=>ApplyHighPrecision(input,node,reference,analysis,token,alpha,tile),token,tile,masks:compiledMasks,diagnostics:captureNodeDiagnostics?(id,input,output)=>{inputs[id]=input.ToVisualRgb24(token);outputs.Add(output.ToVisualRgb24(token));}:null);
             return new(current.ToVisualRgb24(token),outputs,new ColorPipelineDescriptor(InputInterpretation:"HighPrecision sRGB",WorkingRepresentation:normalized.WorkingSpace,OutputEncoding:"sRGB display adapter"),inputs,current,new PrecisionTrace(precisionStages));
         }
         foreach (var node in StudioGraphRouting.Nodes(normalized).Where(item => item.Enabled))
@@ -44,7 +44,7 @@ public sealed class ColorStudioRenderPipeline
     {
         if (ColorStudioToolCatalog.IsTool(node.Type)) return ColorStudioToolProcessor.Apply(source, node, token);
         if (node.Type == ColorStudioNodeType.Develop) return ColorStudioDevelop.Apply(source, node, token);
-        var values = source.Rgb32.ToArray();
+        var values = GraphPixelAllocation.Copy(source.Rgb32);
         if (node.Type == ColorStudioNodeType.ReferenceMatch && reference is not null)
         {
             var p = reference.Parameters with
@@ -60,7 +60,7 @@ public sealed class ColorStudioRenderPipeline
                 NeutralProtection = Parameter(node, "neutral_protection", reference.Parameters.NeutralProtection)
             };
             if (p.MatchStrength == 0)
-                return source.Clone();
+                return new(source.Width,source.Height,values,source.SourceBitDepth,source.WorkingColorSpace,source.Orientation,source.Metadata);
             var transform = _matcher.BuildTransform(source, analysis, reference with { Parameters = p }, token, alpha);
             for (var i = 0; i < values.Length; i += 3)
             {
@@ -72,18 +72,18 @@ public sealed class ColorStudioRenderPipeline
         else if (node.Type == ColorStudioNodeType.Preset)
         {
             var strength = Math.Clamp(Parameter(node, "preset_strength", 1), 0, 1); var exposure = Parameter(node, "exposure", 0) * strength; var contrast = Parameter(node, "contrast", 0) * strength; var saturation = Parameter(node, "saturation", 0) * strength; var scale = Math.Pow(2, exposure);
-            if (exposure == 0 && contrast == 0 && saturation == 0) return source.Clone();
+            if (exposure == 0 && contrast == 0 && saturation == 0) return new(source.Width,source.Height,values,source.SourceBitDepth,source.WorkingColorSpace,source.Orientation,source.Metadata);
             for (var i = 0; i < values.Length; i += 3) { if ((i & 2047) == 0) token.ThrowIfCancellationRequested(); var lab = OklabColorSpace.FromSrgb(values[i], values[i + 1], values[i + 2]); var l = Math.Clamp(Math.Clamp((lab.L - .5) * (1 + contrast / 100) + .5, 0, 1) * scale, 0, 1); var rgb = OklabColorSpace.ToSrgbGamutMappedFloat(new(l, lab.A * (1 + saturation / 100), lab.B * (1 + saturation / 100))); values[i] = (float)rgb.R; values[i + 1] = (float)rgb.G; values[i + 2] = (float)rgb.B; }
         }
         else if (node.Type == ColorStudioNodeType.TransitionBlend)
         {
-            if (Parameter(node, "amount", .25) == 0) return source.Clone();
+            if (Parameter(node, "amount", .25) == 0) return new(source.Width,source.Height,values,source.SourceBitDepth,source.WorkingColorSpace,source.Orientation,source.Metadata);
             var amount = Math.Clamp(Parameter(node, "amount", .25), 0, 1); for (var i = 0; i < values.Length; i += 3) { if ((i & 2047) == 0) token.ThrowIfCancellationRequested(); var lab = OklabColorSpace.FromSrgb(values[i], values[i + 1], values[i + 2]); var rgb = OklabColorSpace.ToSrgbGamutMappedFloat(new(lab.L, lab.A * (1 - amount * .12), lab.B * (1 - amount * .12))); values[i] = (float)rgb.R; values[i + 1] = (float)rgb.G; values[i + 2] = (float)rgb.B; }
         }
         else if (node.Type == ColorStudioNodeType.ColorRange)
         {
             var amount = Math.Clamp(Parameter(node, "strength", 100) / 100, 0, 1); var keepL = Parameter(node, "keep_original_luminance", 0) >= .5; var hue = Parameter(node, "hue", 0) * Math.PI / 180; var saturation = Math.Max(0, 1 + Parameter(node, "saturation", 0) / 100); var chroma = Math.Max(0, 1 + Parameter(node, "chroma", 0) / 100); var lightness = Parameter(node, "lightness", 0) / 100;
-            if (amount == 0 || node.Samples.Count == 0 || hue == 0 && saturation == 1 && chroma == 1 && (lightness == 0 || keepL)) return source.Clone();
+            if (amount == 0 || node.Samples.Count == 0 || hue == 0 && saturation == 1 && chroma == 1 && (lightness == 0 || keepL)) return new(source.Width,source.Height,values,source.SourceBitDepth,source.WorkingColorSpace,source.Orientation,source.Metadata);
             for (var i = 0; i < values.Length; i += 3)
             {
                 if ((i & 2047) == 0) token.ThrowIfCancellationRequested();

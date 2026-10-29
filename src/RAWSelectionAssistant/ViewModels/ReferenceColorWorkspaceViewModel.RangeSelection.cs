@@ -46,7 +46,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             if (width < 1 || height < 1) return;
             var result = await Task.Run(() =>
             {
-                var input = RangeNodeInput(frozen, rawInput, stack, look, node.Id, width, height, cancellation.Token);
+                var input = RangeNodeInput(frozen, rawInput, stack, look, node.Id, width, height, cancellation.Token);using var processingOwner=input.Processing;
                 var weights = input.Processing is null
                     ? ColorStudioRenderPipeline.SelectionWeights(input.Pixels, node, cancellation.Token)
                     : ColorStudioRenderPipeline.SelectionWeights(input.Processing, node, cancellation.Token);
@@ -91,7 +91,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             if (prior.Length > 0)
             {
                 var analysis = ColorStudioProcessingAnalysis.Create(input.ToVisualRgb24(), before, look, token);
-                input = new ColorStudioRenderPipeline().Render(input, analysis, look, before, token, captureNodeDiagnostics: false).ProcessingPixels!;
+                using var beforeOwner=input;input = new ColorStudioRenderPipeline().Render(input, analysis, look, before, token, captureNodeDiagnostics: false).ProcessingPixels!;
             }
             return new(input.ToVisualRgb24(), input);
         }

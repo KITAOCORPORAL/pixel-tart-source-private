@@ -26,7 +26,7 @@ public static class ColorStudioBitmapRenderer
         }
         var buffer = new VisualPixelBuffer(input.PixelWidth, input.PixelHeight, rgb, alpha);
         var analysis = ColorStudioProcessingAnalysis.Create(buffer, stack, reference, token);
-        var result = new ColorStudioRenderPipeline().Render(buffer, analysis, reference, stack, token, captureNodeDiagnostics: false).Pixels;
+        var rendered = new ColorStudioRenderPipeline().Render(buffer, analysis, reference, stack, token, captureNodeDiagnostics: false);using var renderedOwner=rendered.ProcessingPixels;var result=rendered.Pixels;
         for (var pixel = 0; pixel < result.PixelCount; pixel++)
         {
             bgra[pixel * 4] = result.Rgb24.Span[pixel * 3 + 2];
@@ -48,10 +48,10 @@ public static class ColorStudioBitmapRenderer
         static float EncodeScRgb(float value) => (float)(value <= .0031308f ? value * 12.92 : 1.055 * Math.Pow(value, 1 / 2.4) - .055);
         static float DecodeSrgb(float value) => (float)(value <= .04045f ? value / 12.92 : Math.Pow((value + .055) / 1.055, 2.4));
         for (var p = 0; p < rgb.Length / 3; p++) for (var c = 0; c < 3; c++) rgb[p * 3 + c] = EncodeScRgb(samples[p * 4 + c]);
-        var master = new RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer(source.PixelWidth, source.PixelHeight, rgb);
+        using var master = new RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer(source.PixelWidth, source.PixelHeight, rgb);
         var displayRgb = master.ToVisualRgb24(); var alpha = Enumerable.Range(0, source.PixelWidth * source.PixelHeight).Select(p => (byte)Math.Clamp(Math.Round(samples[p * 4 + 3] * 255), 0, 255)).ToArray();
         var display = new VisualPixelBuffer(source.PixelWidth, source.PixelHeight, displayRgb.Rgb24, alpha); var analysis = ColorStudioProcessingAnalysis.Create(display, stack, reference, token);
-        var result = new ColorStudioRenderPipeline().Render(master, analysis, reference, stack, token, captureNodeDiagnostics: false, alpha: alpha).ProcessingPixels!.Rgb32;
+        using var processed = new ColorStudioRenderPipeline().Render(master, analysis, reference, stack, token, captureNodeDiagnostics: false, alpha: alpha).ProcessingPixels!;var result=processed.Rgb32;
         for (var p = 0; p < rgb.Length / 3; p++) for (var c = 0; c < 3; c++)
         {
             var index = p * 3 + c;
@@ -66,10 +66,10 @@ public static class ColorStudioBitmapRenderer
         var rgba=new FormatConvertedBitmap(source,PixelFormats.Rgba64,null,0);var bytes=new byte[rgba.PixelWidth*rgba.PixelHeight*8];rgba.CopyPixels(bytes,rgba.PixelWidth*8,0);
         var samples=new ushort[bytes.Length/2];Buffer.BlockCopy(bytes,0,samples,0,bytes.Length);var rgb=new ushort[samples.Length/4*3];
         for(var p=0;p<rgb.Length/3;p++)for(var c=0;c<3;c++)rgb[p*3+c]=samples[p*4+c];
-        var master=new RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer(source.PixelWidth,source.PixelHeight,rgb,"16","sRGB");
+        using var master=new RAWSelectionAssistant.Core.Services.Color.HighBitDepthImageBuffer(source.PixelWidth,source.PixelHeight,rgb,"16","sRGB");
         var displayRgb=master.ToVisualRgb24();var alpha=Enumerable.Range(0,source.PixelWidth*source.PixelHeight).Select(p=>(byte)(samples[p*4+3]/257)).ToArray();
         var display=new VisualPixelBuffer(source.PixelWidth,source.PixelHeight,displayRgb.Rgb24,alpha);var analysis=ColorStudioProcessingAnalysis.Create(display,stack,reference,token);
-        var result=new ColorStudioRenderPipeline().Render(master,analysis,reference,stack,token,captureNodeDiagnostics:false,alpha:alpha).ProcessingPixels!.ToRgb48();
+        using var processed=new ColorStudioRenderPipeline().Render(master,analysis,reference,stack,token,captureNodeDiagnostics:false,alpha:alpha).ProcessingPixels!;var result=processed.ToRgb48();
         for(var p=0;p<result.Length/3;p++)for(var c=0;c<3;c++)samples[p*4+c]=result[p*3+c];
         Buffer.BlockCopy(samples,0,bytes,0,bytes.Length);var output=BitmapSource.Create(source.PixelWidth,source.PixelHeight,source.DpiX,source.DpiY,PixelFormats.Rgba64,null,bytes,source.PixelWidth*8);output.Freeze();return output;
     }

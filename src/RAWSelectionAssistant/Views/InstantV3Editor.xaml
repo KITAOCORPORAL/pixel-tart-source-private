@@ -1,4 +1,4 @@
-<UserControl x:Class="RAWSelectionAssistant.Views.InstantV3Editor" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:views="clr-namespace:RAWSelectionAssistant.Views">
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:views="clr-namespace:RAWSelectionAssistant.Views" x:Class="RAWSelectionAssistant.Views.InstantV3Editor">
  <UserControl.Resources><views:PhotographerOptionLabelConverter x:Key="PhotoOption"/><DataTemplate x:Key="PhotoOptionTemplate"><TextBlock Text="{Binding Converter={StaticResource PhotoOption}}"/></DataTemplate><CollectionViewSource x:Key="GroupedPapers" Source="{Binding PhotographerPapers}"><CollectionViewSource.GroupDescriptions><PropertyGroupDescription PropertyName="Group"/></CollectionViewSource.GroupDescriptions></CollectionViewSource></UserControl.Resources>
  <StackPanel IsEnabled="{Binding InstantEditingAllowed}">
  <StackPanel x:Name="PickerArea" Width="244">
@@ -16,23 +16,23 @@
  </StackPanel>
  <StackPanel x:Name="AdvancedArea">
   <Expander IsEnabled="{Binding IsInstantV3Selected}" x:Name="ToneAdvanced" Header="进阶色彩与层次" IsExpanded="False"><StackPanel>
-<ComboBox ItemsSource="{Binding InstantV3Stocks}" ItemTemplate="{StaticResource PhotoOptionTemplate}" SelectedItem="{Binding InstantV3Stock}"/>
-   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Toe,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Toe}" TextWrapping="Wrap"/></DockPanel>
-   <Slider x:Name="InstantV3ToeControl" Tag="InstantV3Toe" Minimum="0" Maximum="0.3" Value="{Binding InstantV3Toe,Mode=TwoWay}"/>
-   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Shoulder,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Shoulder}" TextWrapping="Wrap"/></DockPanel>
-   <Slider x:Name="InstantV3ShoulderControl" Tag="InstantV3Shoulder" Minimum="0" Maximum="2" Value="{Binding InstantV3Shoulder,Mode=TwoWay}"/>
-   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Density,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Density}" TextWrapping="Wrap"/></DockPanel>
-   <Slider x:Name="InstantV3DensityControl" Tag="InstantV3Density" Minimum="0.5" Maximum="2" Value="{Binding InstantV3Density,Mode=TwoWay}"/>
-   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Fog,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Fog}" TextWrapping="Wrap"/></DockPanel>
-   <Slider x:Name="InstantV3FogControl" Tag="InstantV3Fog" Minimum="0" Maximum="1" Value="{Binding InstantV3Fog,Mode=TwoWay}"/>
-   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3ShadowCast,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3ShadowCast}" TextWrapping="Wrap"/></DockPanel>
-   <Slider x:Name="InstantV3ShadowCastControl" Tag="InstantV3ShadowCast" Minimum="-1" Maximum="1" Value="{Binding InstantV3ShadowCast,Mode=TwoWay}"/>
-   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Warmth,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Warmth}" TextWrapping="Wrap"/></DockPanel>
-   <Slider x:Name="InstantV3WarmthControl" Tag="InstantV3Warmth" Minimum="-1" Maximum="1" Value="{Binding InstantV3Warmth,Mode=TwoWay}"/>
-   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3FrameDrift,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3FrameDrift}" TextWrapping="Wrap"/></DockPanel>
-   <Slider x:Name="InstantV3FrameDriftControl" Tag="InstantV3FrameDrift" Minimum="0" Maximum="1" Value="{Binding InstantV3FrameDrift,Mode=TwoWay}"/>
-   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Fade,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Fade}" TextWrapping="Wrap"/></DockPanel>
-   <Slider x:Name="InstantV3FadeControl" Tag="InstantV3Fade" Minimum="0" Maximum="1" Value="{Binding InstantV3Fade,Mode=TwoWay}"/>
+<ComboBox ItemsSource="{Binding InstantV3Stocks}" ItemTemplate="{StaticResource PhotoOptionTemplate}" SelectedItem="{Binding InstantV3Stock}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/>
+   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Toe,UpdateSourceTrigger=LostFocus,StringFormat=0.###}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/><TextBlock Text="{views:StudioText LabelInstantV3Toe}" TextWrapping="Wrap"/></DockPanel>
+   <Slider x:Name="InstantV3ToeControl" Tag="InstantV3Toe" Minimum="0" Maximum="0.3" Value="{Binding InstantV3Toe,Mode=TwoWay}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/>
+   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Shoulder,UpdateSourceTrigger=LostFocus,StringFormat=0.###}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/><TextBlock Text="{views:StudioText LabelInstantV3Shoulder}" TextWrapping="Wrap"/></DockPanel>
+   <Slider x:Name="InstantV3ShoulderControl" Tag="InstantV3Shoulder" Minimum="0" Maximum="2" Value="{Binding InstantV3Shoulder,Mode=TwoWay}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/>
+   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Density,UpdateSourceTrigger=LostFocus,StringFormat=0.###}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/><TextBlock Text="{views:StudioText LabelInstantV3Density}" TextWrapping="Wrap"/></DockPanel>
+   <Slider x:Name="InstantV3DensityControl" Tag="InstantV3Density" Minimum="0.5" Maximum="2" Value="{Binding InstantV3Density,Mode=TwoWay}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/>
+   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Fog,UpdateSourceTrigger=LostFocus,StringFormat=0.###}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/><TextBlock Text="{views:StudioText LabelInstantV3Fog}" TextWrapping="Wrap"/></DockPanel>
+   <Slider x:Name="InstantV3FogControl" Tag="InstantV3Fog" Minimum="0" Maximum="1" Value="{Binding InstantV3Fog,Mode=TwoWay}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/>
+   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3ShadowCast,UpdateSourceTrigger=LostFocus,StringFormat=0.###}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/><TextBlock Text="{views:StudioText LabelInstantV3ShadowCast}" TextWrapping="Wrap"/></DockPanel>
+   <Slider x:Name="InstantV3ShadowCastControl" Tag="InstantV3ShadowCast" Minimum="-1" Maximum="1" Value="{Binding InstantV3ShadowCast,Mode=TwoWay}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/>
+   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Warmth,UpdateSourceTrigger=LostFocus,StringFormat=0.###}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/><TextBlock Text="{views:StudioText LabelInstantV3Warmth}" TextWrapping="Wrap"/></DockPanel>
+   <Slider x:Name="InstantV3WarmthControl" Tag="InstantV3Warmth" Minimum="-1" Maximum="1" Value="{Binding InstantV3Warmth,Mode=TwoWay}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/>
+   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3FrameDrift,UpdateSourceTrigger=LostFocus,StringFormat=0.###}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/><TextBlock Text="{views:StudioText LabelInstantV3FrameDrift}" TextWrapping="Wrap"/></DockPanel>
+   <Slider x:Name="InstantV3FrameDriftControl" Tag="InstantV3FrameDrift" Minimum="0" Maximum="1" Value="{Binding InstantV3FrameDrift,Mode=TwoWay}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/>
+   <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Fade,UpdateSourceTrigger=LostFocus,StringFormat=0.###}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/><TextBlock Text="{views:StudioText LabelInstantV3Fade}" TextWrapping="Wrap"/></DockPanel>
+   <Slider x:Name="InstantV3FadeControl" Tag="InstantV3Fade" Minimum="0" Maximum="1" Value="{Binding InstantV3Fade,Mode=TwoWay}" IsEnabled="{Binding InstantV3LegacyToneEditable}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3Vignette,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3Vignette}" TextWrapping="Wrap"/></DockPanel>
    <Slider x:Name="InstantV3VignetteControl" Tag="InstantV3Vignette" Minimum="0" Maximum="1" Value="{Binding InstantV3Vignette,Mode=TwoWay}"/>
    <DockPanel Margin="0,6,0,0"><TextBox DockPanel.Dock="Right" Width="64" Text="{Binding InstantV3DevelopmentEdge,UpdateSourceTrigger=LostFocus,StringFormat=0.###}"/><TextBlock Text="{views:StudioText LabelInstantV3DevelopmentEdge}" TextWrapping="Wrap"/></DockPanel>

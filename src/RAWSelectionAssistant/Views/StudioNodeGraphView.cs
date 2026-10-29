@@ -16,6 +16,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
     private StudioNodeGraph before=null!;
     public event Action? LayoutChanged;
     public Func<Guid,ImageSource?>? Thumbnail{get;set;}
+    public Func<Guid,ImageSource?>? MaskThumbnail{get;set;}
     public double Zoom=>zoom;public Point Pan=>pan;
     public StudioNodeGraphView(TetherReferenceModeViewModel value)
     {
@@ -29,11 +30,11 @@ public sealed class StudioNodeGraphView:FrameworkElement
     public void Fit()
     {
         var ps=editor.GraphView.Positions;if(ps.Count==0)return;
-        var l=ps.Min(p=>p.X)-20;var t=ps.Min(p=>p.Y)-20;var w=ps.Max(p=>p.X)+140-l;var h=ps.Max(p=>p.Y)+84-t;
+        var l=ps.Min(p=>p.X)-20;var t=ps.Min(p=>p.Y)-20;var w=ps.Max(p=>p.X)+140-l;var h=ps.Max(p=>p.Y)+108-t;
         zoom=Math.Clamp(Math.Min(Math.Max(1,ActualWidth)/w,Math.Max(1,ActualHeight)/h),.25,1.4);pan=new(-l*zoom,-t*zoom);LayoutChanged?.Invoke();InvalidateVisual();
     }
     private Point World(Point p)=>new((p.X-pan.X)/zoom,(p.Y-pan.Y)/zoom);
-    private StudioGraphPosition? Hit(Point w)=>editor.GraphView.Positions.LastOrDefault(p=>new Rect(p.X,p.Y,132,72).Contains(w));
+    private StudioGraphPosition? Hit(Point w)=>editor.GraphView.Positions.LastOrDefault(p=>new Rect(p.X,p.Y,132,88).Contains(w));
     private Point Port(StudioGraphPosition p,bool output,string input="rgb")=>new(p.X+(output?132:0),p.Y+(input=="base"?23:input=="layer"?49:36));
     private bool IsMix(Guid id)=>editor.AdjustmentNodes.Any(n=>n.Id==id&&n.Type==ColorStudioNodeType.GraphMix);
     private IEnumerable<string> InputPorts(Guid id)=>IsMix(id)?new[]{"base","layer"}:new[]{"rgb"};
@@ -50,17 +51,27 @@ public sealed class StudioNodeGraphView:FrameworkElement
         foreach(var p in graph.Positions)
         {
             var n=editor.AdjustmentNodes.FirstOrDefault(n=>n.Id==p.NodeId);bool selected=editor.SelectedAdjustmentNode?.Id==p.NodeId;
-            d.PushOpacity(n?.Enabled==false?.45:1);d.DrawRoundedRectangle(Color("#25272A"),new Pen(selected?Brushes.White:Color("#6E9B91"),selected?2:1),new Rect(p.X,p.Y,132,72),3,3);
+            d.PushOpacity(n?.Enabled==false?.45:1);d.DrawRoundedRectangle(Color("#25272A"),new Pen(selected?Brushes.White:Color("#6E9B91"),selected?2:1),new Rect(p.X,p.Y,132,88),3,3);
+            string[] labelColors=["#6E9B91","#9CC4BA","#4A766C","#B5D3CC","#3E5F58","#7FA89F"];
+            d.DrawRectangle(Color(labelColors[n?.GraphLabel??0]),null,new Rect(p.X+1,p.Y+1,130,3));
             var type=p.NodeId==StudioNodeGraph.Source?"输入":p.NodeId==StudioNodeGraph.Output?"输出":n?.Type==ColorStudioNodeType.GraphMix?"⊕ 混合":"◐ 调色";
-            Text(d,type+(n is null?"":" · "+(++index).ToString("00")),new(p.X+6,p.Y+4),10,Color("#9CC4BA"));
-            if(n is not null){var thumb=Thumbnail?.Invoke(n.Id);if(thumb is not null)d.DrawImage(thumb,new Rect(p.X+6,p.Y+25,42,29));else Text(d,"◐",new(p.X+15,p.Y+25),20,Color("#6E9B91"));Text(d,n.IsLocked?"锁定":"",new(p.X+54,p.Y+27),10);Text(d,n.Name,new(p.X+6,p.Y+55));}
-            else Text(d,type,new(p.X+12,p.Y+32),12);
+            Text(d,type+(n is null?"":" · "+(++index).ToString("00")),new(p.X+6,p.Y+6),10,Color("#9CC4BA"));
+            if(n is not null)
+            {
+                var area=new Rect(p.X+7,p.Y+25,n.LocalMask is null?116:82,40);var thumb=Thumbnail?.Invoke(n.Id);
+                d.DrawRectangle(Color("#111214"),null,area);if(thumb is not null)DrawImageFit(d,thumb,area);else Text(d,"等待实际输出",new(area.X+4,area.Y+12),9,Color("#777D7B"));
+                if(n.LocalMask is not null){var maskArea=new Rect(p.X+94,p.Y+25,30,40);d.DrawRectangle(Brushes.Black,new Pen(Color("#7FA89F"),.7),maskArea);var mask=MaskThumbnail?.Invoke(n.Id);if(mask is not null)DrawImageFit(d,mask,maskArea);}
+                Text(d,n.Name,new(p.X+6,p.Y+69),10);if(n.IsLocked)Text(d,"▣",new(p.X+116,p.Y+7),9,Brushes.White);
+            }
+            else Text(d,type,new(p.X+12,p.Y+37),12);
             if(p.NodeId!=StudioNodeGraph.Source)foreach(var port in InputPorts(p.NodeId)){d.DrawEllipse(Color("#9CC4BA"),new Pen(Color("#17171A"),1),Port(p,false,port),4,4);if(port!="rgb")Text(d,port=="base"?"底":"层",new(p.X+5,p.Y+(port=="base"?13:39)),8);}
             if(p.NodeId!=StudioNodeGraph.Output)d.DrawEllipse(Color("#9CC4BA"),new Pen(Color("#17171A"),1),Port(p,true),4,4);
             d.Pop();
         }
         d.Pop();
     }
+    private static void DrawImageFit(DrawingContext d,ImageSource image,Rect box)
+    {double ratio=image.Width/Math.Max(1,image.Height);double w=Math.Min(box.Width,box.Height*ratio),h=w/ratio;d.DrawImage(image,new Rect(box.X+(box.Width-w)/2,box.Y+(box.Height-h)/2,w,h));}
     private static void DrawEdge(DrawingContext d,Point a,Point b,Brush brush)
     {
         var g=new StreamGeometry();using(var c=g.Open()){c.BeginFigure(a,false,false);double bend=Math.Max(30,Math.Abs(b.X-a.X)*.45);c.BezierTo(new(a.X+bend,a.Y),new(b.X-bend,b.Y),b,true,false);}g.Freeze();d.DrawGeometry(null,new Pen(brush,1.5),g);
@@ -149,6 +160,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
         Add("锁定 / 解除锁定",()=>editor.SelectedNodeLocked=!editor.SelectedNodeLocked,editor.SelectedAdjustmentNode is{SystemLocked:false});
         Add("编辑画笔蒙版",()=>RequestMask?.Invoke(),editor.SelectedNodeEditable);Add("反相蒙版",editor.InvertLocalMask,editor.SelectedNodeEditable);Add("AI 主体 / 天空 / 皮肤",()=>{},false,"未接生产分割模型");
         if(edge is not null)Add("断开此连线 · 输出失连时保留原图",()=>editor.CommitGraph(editor.GraphView.Disconnect(edge)));
+        var labels=new MenuItem{Header="节点颜色标签"};foreach(int label in Enumerable.Range(0,6)){var item=new MenuItem{Header="● 标签 "+(label+1),Foreground=Color(new[]{"#6E9B91","#9CC4BA","#4A766C","#B5D3CC","#3E5F58","#7FA89F"}[label])};item.Click+=(_,_)=>editor.SetGraphLabel(label);labels.Items.Add(item);}menu.Items.Add(labels);
         Add("删除节点  Del",()=>editor.DeleteGraphNode(),editor.SelectedNodeEditable);menu.PlacementTarget=this;menu.IsOpen=true;
     }
     public event Action? RequestMask;

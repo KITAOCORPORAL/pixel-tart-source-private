@@ -19,6 +19,7 @@ public sealed record ColorAdjustmentStackNode(
     IReadOnlyList<VisualRgb24>? NegativeSamples = null)
 {
     [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] public int CompositeVersion {get;init;}
+    [System.Text.Json.Serialization.JsonIgnore(Condition=System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] public int GraphLabel {get;init;}
     public double Opacity {get;init;}=1;
     public StudioLayerBlend Blend {get;init;}=StudioLayerBlend.Normal;
     public StudioLocalMask? LocalMask {get;init;}
@@ -39,6 +40,7 @@ public sealed record ColorAdjustmentStackNode(
         if(WideToolVersion is not(0 or 1 or 2))throw new InvalidDataException("Unknown linear tool version");
         if(CompositeVersion is not(0 or 1 or 2)||!double.IsFinite(Opacity)||Opacity<0||Opacity>1||!Enum.IsDefined(Blend)||CompositeVersion<2&&(int)Blend>=3||CompositeVersion==0&&(Opacity!=1||Blend!=StudioLayerBlend.Normal||LocalMask is not null))throw new InvalidDataException("未知图层合成版本/参数，未降级渲染。");
         if(Type==ColorStudioNodeType.GraphMix&&(CompositeVersion==0||WideToolVersion!=0||Blend is not(StudioLayerBlend.Normal or StudioLayerBlend.Multiply or StudioLayerBlend.Screen or StudioLayerBlend.Darken or StudioLayerBlend.Lighten)))throw new InvalidDataException("混合节点需显式sRGB合成版本，不能作为宽域节点。");
+        if(GraphLabel is <0 or >5)throw new InvalidDataException("节点标签超出范围。");
         FilmSettings?.Validate();
         return this with { Name = Name.Trim(), LocalMask=LocalMask?.Freeze(), NumericParameters = new Dictionary<string, double>(NumericParameters), Samples = Samples.ToArray(), NegativeSamples = NegativeSamples.ToArray() };
     }

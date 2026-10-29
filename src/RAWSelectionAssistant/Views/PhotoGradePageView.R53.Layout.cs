@@ -41,7 +41,7 @@ public partial class PhotoGradePageView
     private void ApplyR53ParameterHierarchy(bool professional,bool film)
     {
         if(AdjustmentScroll.Content is not StackPanel group||R53SimpleLayers is null)return;
-        if(r53ParameterTabs is null){r53ParameterTabs=new System.Windows.Controls.Primitives.UniformGrid{Columns=6,Margin=new Thickness(2)};foreach(var name in new[]{"色轮","曲线","范围","扭曲","HSL","基础"}){var button=new Button{Content=name,MinWidth=24,ToolTip=name=="扭曲"?"色彩扭曲器尚未实现":name+"参数",IsEnabled=name!="扭曲"};button.Click+=(_,_)=>{r53ParameterTab=name;ApplyR53Layout();};r53ParameterTabs.Children.Add(button);}group.Children.Insert(Math.Min(1,group.Children.Count),r53ParameterTabs);}
+        if(r53ParameterTabs is null){r53ParameterTabs=new System.Windows.Controls.Primitives.UniformGrid{Columns=6,Margin=new Thickness(2)};foreach(var name in new[]{"色轮","曲线","范围","扭曲","HSL","基础"}){var button=new Button{Content=name,MinWidth=24,ToolTip=name=="扭曲"?"色彩扭曲器尚未实现":name+"参数",IsEnabled=name!="扭曲"};button.Click+=(_,_)=>{SelectClosureNodeTool(name);ApplyR53Layout();};r53ParameterTabs.Children.Add(button);}group.Children.Insert(Math.Min(1,group.Children.Count),r53ParameterTabs);}
         if(group.Children.IndexOf(R53SimpleLayers)!=0){group.Children.Remove(R53SimpleLayers);group.Children.Insert(0,R53SimpleLayers);}
         if(group.Children.IndexOf(r53ParameterTabs)!=1){group.Children.Remove(r53ParameterTabs);group.Children.Insert(1,r53ParameterTabs);}
         R53SimpleLayerList.Visibility=professional||model?.Editor.HasProfessionalRouting==true?Visibility.Collapsed:Visibility.Visible;
@@ -49,6 +49,7 @@ public partial class PhotoGradePageView
         r53ParameterTabs.Visibility=!professional&&model?.Editor.HasProfessionalRouting==true?Visibility.Collapsed:Visibility.Visible;
         r53ParameterTabs.Columns=professional?6:3;foreach(var tab in r53ParameterTabs.Children.OfType<Button>())tab.Visibility=professional||tab.Content is "基础" or "曲线" or "HSL"?Visibility.Visible:Visibility.Collapsed;
         R53SimpleLayers.Header=professional?"所选节点":"图层";
+        if(R53SimpleLayers.Content is StackPanel header)foreach(var commands in header.Children.OfType<WrapPanel>())commands.Visibility=professional?Visibility.Collapsed:(!professional&&model?.Editor.HasProfessionalRouting==true?Visibility.Collapsed:Visibility.Visible);
         foreach(var button in r53ParameterTabs.Children.OfType<Button>())button.Background=new SolidColorBrush(Equals(button.Content,r53ParameterTab)?Color.FromRgb(48,68,62):Color.FromRgb(29,29,32));
         foreach(var section in group.Children.OfType<Expander>())
         {
@@ -57,6 +58,22 @@ public partial class PhotoGradePageView
             var tag=section.Tag as string??"";
             var basic=tag is "AdjustmentScroll.1" or "AdjustmentScroll.2" or "AdjustmentScroll.5" or "AdjustmentScroll.6";
             var show=r53ParameterTab=="全部"||(!professional?(r53ParameterTab=="曲线"?tag=="AdjustmentScroll.4":r53ParameterTab=="HSL"?tag=="AdjustmentScroll.ColorRange":basic):r53ParameterTab switch{"曲线"=>tag=="AdjustmentScroll.4","色轮"=>tag=="AdjustmentScroll.7","HSL" or "范围"=>tag=="AdjustmentScroll.ColorRange",_=>basic});
+            if(professional&&r53ParameterTab!="全部")
+            {
+                var type=model?.Editor.SelectedAdjustmentNode?.Type;
+                show=type switch
+                {
+                    RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.BasicTone=>tag is "AdjustmentScroll.1" or "AdjustmentScroll.2" or "AdjustmentScroll.6",
+                    RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.WhiteBalance=>tag=="AdjustmentScroll.5",
+                    RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Curve=>tag=="AdjustmentScroll.4",
+                    RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorBalance=>tag=="AdjustmentScroll.7",
+                    RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Levels=>tag=="AdjustmentScroll.3",
+                    RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorRange=>tag=="AdjustmentScroll.ColorRange",
+                    RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Details=>tag is "AdjustmentScroll.9" or "AdjustmentScroll.10" or "AdjustmentScroll.11",
+                    RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.SkinTone=>tag=="AdjustmentScroll.8",
+                    _=>false
+                };
+            }
             section.Visibility=show?Visibility.Visible:Visibility.Collapsed;
             if(show)section.IsExpanded=true;
             section.IsEnabled=model?.Editor.SelectedAdjustmentNode?.Type!=RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.GraphMix;
