@@ -1,3 +1,16 @@
+## 当前交接 2026-10-29 Asia/Shanghai：节点响应/页签/共享剧照
+- 同公司树company/r54-closure-20261029，从6ad9ce72恢复未提交内容，已先备份，不reset/stash/clean/覆盖其他树；未合main/研究整分支/强推。
+- 产品源码4795d75721a00b3db68602e7294ffee8e82684ea；测试支持ab4285f108f59c30f271b5ffb0509d067ea2bff8，仅tests。文档/远端HEAD另记，不冒充产品身份。
+- 工具页签仅查看，不跳同类首节点、不自动新增；不兼容提示+显式新增，一次撤销。快速latest-only/800代理/Graph2有界上游内容缓存，1600精细与完整导出数学不变，换目标/版本拒绝迟到，后台缩略分析延后。
+- 同20MP CR3同深分支图10次SetToolParameter：快速P95旧594.3ms→新386.0ms；冷创建约4.1s。精细未命中13.10–14.88s仍未解决，重复定义精细命中约0.65–0.67s不可混报。完整TIFF16旧32.51s/新30.84s，精细hash及最终TIFF文件hash一致；单样本不泛化。
+- 剧照与1–3变体共用2–4帧基础设施/viewport，来源版本、同步缩放平移/划像/退出、单目标可撤销应用和跨域拒绝、独立进程保存重开。批量应用未做。预览pending不能抓取过期剧照。
+- Core36/WPF流程17/独立3/完整宿主1及命令/视觉附加，发布7程序集绑定后58项唯一PASS；非全量、非实机。完整宿主夹具自建合成输入，保留缺输入失败记录，不改产品绕过。
+- 完整自包含包E:/Kitao-Deliveries/r54-response-compare-20261029/Guangjing-R54-Response-Compare-Diagnostic-win-x64.zip；同目录CMD。297文件、WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false，完整模块/策划15/旧教程退役保留，无Setup/私照。
+- 本次修复集合完成，但整体PARTIAL_NOT_FOR_RELEASE；真实鼠标/设备DPI/ACM/HDR NOT_RUN，复杂子图分段组/批量应用/最终美术和深图精细耗时仍后续。两款宝丽来近似已注册、旧默认、实测0。不得重新并列过时未注册为当前。
+- 报告、预算、同条件性能、原始TRX/hash/逐屏差异见docs/validation/r54-response-compare-20261029/FINAL_REPORT.md。ComputerUse/Browser/WebView/CDP继承禁用，离屏/自动/OS启动分别标注。
+
+## 历史交接（以下各节仅为当时记录，不代表当前状态）
+
 ## 2026-10-29 公司R5.4收尾接续（Europe/Berlin）
 - 公司独立分支company/r54-closure-20261029、工作树E:/Kitao-Worktrees/r54-closure-20261029，起点73ac0b2483d5c09cd4860bd8cf47c955e18d128d；旧公司树/其他未提交保全，未合main/研究整分支/强推。
 - 家庭核查：origin/source-private同源码仓库，均未见home/r54-darkroom-20261028或其他R54家庭分支；相关pixel-tart-handoff仅旧main收据。结论“家庭成果未在可访问远端发现”，不是家庭任务完成。未访问N盘/无关私人目录。工作中复查仍一致，见本轮HOME_DELIVERY_AUDIT。

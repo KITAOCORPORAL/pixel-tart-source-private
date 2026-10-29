@@ -1,0 +1,40 @@
+{
+  "sourceSha": "4795d75721a00b3db68602e7294ffee8e82684ea",
+  "baselineProductSha": "674aaa1887a03173e439d593e505a95d26a22139",
+  "sameSourceGraphAndCommand": true,
+  "finePixelHashesMatchAll10": true,
+  "budgetP95Ms": 750,
+  "singleMs": 1000,
+  "runs": [
+    {
+      "name": "baseline",
+      "n": 10,
+      "fastP95NearestRankMs": 594.2973,
+      "fastMinMs": 576.4108,
+      "fastMaxMs": 594.2973,
+      "fineMinMs": 811.3599,
+      "fineMaxMs": 13341.046,
+      "coldMs": 4105.4126,
+      "exportMs": 32508.9433,
+      "maxError": 2,
+      "maxMeanError": 0.005703807740324594,
+      "maxP95Error": 0
+    },
+    {
+      "name": "final",
+      "n": 10,
+      "fastP95NearestRankMs": 386.0475,
+      "fastMinMs": 295.6464,
+      "fastMaxMs": 386.0475,
+      "fineMinMs": 654.4291,
+      "fineMaxMs": 14878.7405,
+      "coldMs": 4092.1845,
+      "exportMs": 30836.4003,
+      "maxError": 2,
+      "maxMeanError": 0.005703807740324594,
+      "maxP95Error": 0
+    }
+  ],
+  "baselineEncodedFileSha256": "26d1fbd7198af88b2b72e43df2dd84e87431dc57f70e317d82bfc08894d3f5b2",
+  "finalEncodedFileSha256": "26d1fbd7198af88b2b72e43df2dd84e87431dc57f70e317d82bfc08894d3f5b2"
+}

@@ -1,0 +1,34 @@
+{
+  "productSourceSha": "4795d75721a00b3db68602e7294ffee8e82684ea",
+  "files": [
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "sha256": "394073423f814f7d9449be021defff9977e03a4716fc52d6345992a4c5170c39"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "sha256": "6874f1b46f24447eef2ac59e17402f917e46b44d9c56658dc4d2103ca84445f1"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "sha256": "51a19bc6b510a452b9dd28f7bc61f9dba598ae1143fe17974eb97b7ed6658f43"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "sha256": "3ffad555419a6f5bf2e7de54b5bc32e51d6c83c2b031caffe51f8e6cb1d99a66"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "sha256": "b43d3f892fe77c80281093c7eed6b2e69f653525aa95027ec6cbc37f8151c988"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "sha256": "9662da67566a814778572a84b1730d537be1cee26ff00e25dd04fdead5274734"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "sha256": "9e9ef63381c6589920df0a0d5d75930490dbf2d56b189a688d0e200c23a43333"
+    }
+  ],
+  "scope": "Seven final published assemblies copied to test output; subsequent tests no-build"
+}

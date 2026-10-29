@@ -1,0 +1,590 @@
+{
+  "source": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/TNAN8886.CR3",
+  "coldLoadCreateMs": 4275.6757,
+  "Width": 5496,
+  "Height": 3670,
+  "Count": 1,
+  "times": [
+    {
+      "ev": 0.15,
+      "firstVisibleMs": 135.8838,
+      "fineCompleteMs": 3828.9349,
+      "decodeDelta": 0,
+      "finePixelHash": "D1936EF052A3030F1EBA39A84732854ECDCD312D5E3988C2AD6975C12EE0AA7B",
+      "RawPreviewQuality": "\u7CBE\u7EC6",
+      "response": {
+        "Revision": 6,
+        "FastVisibleMs": 131.3199,
+        "FineCompleteMs": 3597.1721,
+        "FastAdmitted": true,
+        "Reason": "\u6709\u754C\u70B9\u5DE5\u5177\u56FE"
+      },
+      "errors": {
+        "mean": 0.0003027465667915106,
+        "p95": 0,
+        "max": 1,
+        "pass": true
+      }
+    },
+    {
+      "ev": 0.25,
+      "firstVisibleMs": 102.7131,
+      "fineCompleteMs": 3838.0652,
+      "decodeDelta": 0,
+      "finePixelHash": "AC4D4D64A9C0F7417734B892B744C6320D71001B299CAB32BDD36F697F5DB031",
+      "RawPreviewQuality": "\u7CBE\u7EC6",
+      "response": {
+        "Revision": 7,
+        "FastVisibleMs": 102.3662,
+        "FineCompleteMs": 3617.1605,
+        "FastAdmitted": true,
+        "Reason": "\u6709\u754C\u70B9\u5DE5\u5177\u56FE"
+      },
+      "errors": {
+        "mean": 0.0008091448189762796,
+        "p95": 0,
+        "max": 1,
+        "pass": true
+      }
+    },
+    {
+      "ev": 0.35,
+      "firstVisibleMs": 100.1607,
+      "fineCompleteMs": 3773.2631,
+      "decodeDelta": 0,
+      "finePixelHash": "222EBD98EC2225F1F907A2E1F82E561B1C590ACBAE1E9DB3D4FECD15173B0EA9",
+      "RawPreviewQuality": "\u7CBE\u7EC6",
+      "response": {
+        "Revision": 8,
+        "FastVisibleMs": 99.8726,
+        "FineCompleteMs": 3551.3483,
+        "FastAdmitted": true,
+        "Reason": "\u6709\u754C\u70B9\u5DE5\u5177\u56FE"
+      },
+      "errors": {
+        "mean": 0.001503589263420724,
+        "p95": 0,
+        "max": 1,
+        "pass": true
+      }
+    }
+  ],
+  "export": {
+    "elapsedMs": 7516.3895,
+    "inspected": {
+      "Width": 5496,
+      "Height": 3670,
+      "BitDepth": 16,
+      "Orientation": 1,
+      "Srgb": true,
+      "JpegQuality": null,
+      "MeanAbsoluteError": 0,
+      "RootMeanSquareError": 0,
+      "MaximumError": 0,
+      "EncoderConfiguration": "PV4RowsV1",
+      "StageMilliseconds": null,
+      "PixelComparisonPerformed": true
+    },
+    "stages": [
+      "Encoded",
+      "ValidationMs=93.264",
+      "Validated"
+    ]
+  },
+  "cacheStats": {
+    "Hits": 6,
+    "Misses": 10
+  },
+  "phases": [],
+  "observations": [
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 6.9648,
+      "PrivateBytes": 447602688,
+      "WorkingSet": 512548864,
+      "AccountedBytes": 0,
+      "SinceCaptureMs": 1174.6992
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 11.5008,
+      "PrivateBytes": 447365120,
+      "WorkingSet": 512290816,
+      "AccountedBytes": 0,
+      "SinceCaptureMs": 1178.413
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 272.345,
+      "PrivateBytes": 715362304,
+      "WorkingSet": 779722752,
+      "AccountedBytes": 1074261832,
+      "SinceCaptureMs": 1440.4404
+    },
+    {
+      "Stage": "EffectPreview",
+      "ElapsedMs": 1620.3945,
+      "PrivateBytes": 889831424,
+      "WorkingSet": 911736832,
+      "AccountedBytes": 283055040,
+      "SinceCaptureMs": 3970.2424
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 6.4863,
+      "PrivateBytes": 912494592,
+      "WorkingSet": 927539200,
+      "AccountedBytes": 262549440,
+      "SinceCaptureMs": 4038.0378
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 9.8878,
+      "PrivateBytes": 912523264,
+      "WorkingSet": 927866880,
+      "AccountedBytes": 262549440,
+      "SinceCaptureMs": 4041.4499
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 13.1862,
+      "PrivateBytes": 912523264,
+      "WorkingSet": 928182272,
+      "AccountedBytes": 262549440,
+      "SinceCaptureMs": 4044.5838
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 16.3069,
+      "PrivateBytes": 912523264,
+      "WorkingSet": 928788480,
+      "AccountedBytes": 262549440,
+      "SinceCaptureMs": 4047.5702
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 19.2819,
+      "PrivateBytes": 912523264,
+      "WorkingSet": 929308672,
+      "AccountedBytes": 262549440,
+      "SinceCaptureMs": 4050.5167
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 22.2253,
+      "PrivateBytes": 912539648,
+      "WorkingSet": 929447936,
+      "AccountedBytes": 262549440,
+      "SinceCaptureMs": 4053.8677
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 25.9796,
+      "PrivateBytes": 914124800,
+      "WorkingSet": 929832960,
+      "AccountedBytes": 262549440,
+      "SinceCaptureMs": 4057.3777
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 233.6035,
+      "PrivateBytes": 963379200,
+      "WorkingSet": 980107264,
+      "AccountedBytes": 262549440,
+      "SinceCaptureMs": 4271.2029
+    },
+    {
+      "Stage": "Present",
+      "ElapsedMs": 243.1771,
+      "PrivateBytes": 964632576,
+      "WorkingSet": 981336064,
+      "AccountedBytes": 262549440,
+      "SinceCaptureMs": 4274.5479
+    },
+    {
+      "Stage": "NodeFreezePrepare",
+      "ElapsedMs": 128.7457,
+      "PrivateBytes": 989949952,
+      "WorkingSet": 1006796800,
+      "AccountedBytes": 262549440,
+      "SinceCaptureMs": 4423.1137
+    },
+    {
+      "Stage": "NodeFreezePrepare",
+      "ElapsedMs": 0.052,
+      "PrivateBytes": 991010816,
+      "WorkingSet": 1007992832,
+      "AccountedBytes": 262549440,
+      "SinceCaptureMs": 4429.4099
+    },
+    {
+      "Stage": "NodeFreezePrepare",
+      "ElapsedMs": 1.931,
+      "PrivateBytes": 994578432,
+      "WorkingSet": 1012236288,
+      "AccountedBytes": 262549440,
+      "SinceCaptureMs": 4452.1213
+    },
+    {
+      "Stage": "NodeFastNodesAndMasks",
+      "ElapsedMs": 57.0747,
+      "PrivateBytes": 1379971072,
+      "WorkingSet": 1347854336,
+      "AccountedBytes": 283055040,
+      "SinceCaptureMs": 5620.5648
+    },
+    {
+      "Stage": "NodeFastTotal",
+      "ElapsedMs": 1166.2062,
+      "PrivateBytes": 1379971072,
+      "WorkingSet": 1347854336,
+      "AccountedBytes": 283055040,
+      "SinceCaptureMs": 5623.8857
+    },
+    {
+      "Stage": "RawLocalFinePreview",
+      "ElapsedMs": 1654.5166,
+      "PrivateBytes": 1436377088,
+      "WorkingSet": 1404243968,
+      "AccountedBytes": 324066240,
+      "SinceCaptureMs": 7282.7158
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 0.5066,
+      "PrivateBytes": 1451819008,
+      "WorkingSet": 1419657216,
+      "AccountedBytes": 324066240,
+      "SinceCaptureMs": 7301.3644
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 3.6759,
+      "PrivateBytes": 1451819008,
+      "WorkingSet": 1419657216,
+      "AccountedBytes": 324066240,
+      "SinceCaptureMs": 7304.6674
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 6.9728,
+      "PrivateBytes": 1451819008,
+      "WorkingSet": 1419657216,
+      "AccountedBytes": 324066240,
+      "SinceCaptureMs": 7307.98
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 11.6514,
+      "PrivateBytes": 1453006848,
+      "WorkingSet": 1419898880,
+      "AccountedBytes": 324066240,
+      "SinceCaptureMs": 7312.6595
+    },
+    {
+      "Stage": "NodeThumbnails",
+      "ElapsedMs": 33.4407,
+      "PrivateBytes": 1458778112,
+      "WorkingSet": 1426706432,
+      "AccountedBytes": 324066240,
+      "SinceCaptureMs": 7345.5357
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 233.0388,
+      "PrivateBytes": 1479786496,
+      "WorkingSet": 1441710080,
+      "AccountedBytes": 324545328,
+      "SinceCaptureMs": 7534.392
+    },
+    {
+      "Stage": "NodeFineTotal",
+      "ElapsedMs": 1909.5733,
+      "PrivateBytes": 1479786496,
+      "WorkingSet": 1441808384,
+      "AccountedBytes": 303830928,
+      "SinceCaptureMs": 7537.5776
+    },
+    {
+      "Stage": "NodeFreezePrepare",
+      "ElapsedMs": 0.5118,
+      "PrivateBytes": 1483395072,
+      "WorkingSet": 1442627584,
+      "AccountedBytes": 304080648,
+      "SinceCaptureMs": 7545.9394
+    },
+    {
+      "Stage": "NodeFastNodesAndMasks",
+      "ElapsedMs": 115.5404,
+      "PrivateBytes": 1579728896,
+      "WorkingSet": 1512865792,
+      "AccountedBytes": 314620812,
+      "SinceCaptureMs": 7665.1437
+    },
+    {
+      "Stage": "NodeFastTotal",
+      "ElapsedMs": 118.9343,
+      "PrivateBytes": 1579827200,
+      "WorkingSet": 1513017344,
+      "AccountedBytes": 314374944,
+      "SinceCaptureMs": 7668.1638
+    },
+    {
+      "Stage": "RawLocalFinePreview",
+      "ElapsedMs": 3177.286,
+      "PrivateBytes": 1686077440,
+      "WorkingSet": 1601712128,
+      "AccountedBytes": 349698240,
+      "SinceCaptureMs": 11125.5046
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 0.3154,
+      "PrivateBytes": 1701507072,
+      "WorkingSet": 1617199104,
+      "AccountedBytes": 349698240,
+      "SinceCaptureMs": 11142.9933
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 3.3935,
+      "PrivateBytes": 1701507072,
+      "WorkingSet": 1617207296,
+      "AccountedBytes": 349698240,
+      "SinceCaptureMs": 11146.1449
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 6.5396,
+      "PrivateBytes": 1701507072,
+      "WorkingSet": 1617223680,
+      "AccountedBytes": 349698240,
+      "SinceCaptureMs": 11149.2633
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 9.6911,
+      "PrivateBytes": 1702985728,
+      "WorkingSet": 1618497536,
+      "AccountedBytes": 349698240,
+      "SinceCaptureMs": 11152.8663
+    },
+    {
+      "Stage": "NodeThumbnails",
+      "ElapsedMs": 21.7534,
+      "PrivateBytes": 1708191744,
+      "WorkingSet": 1623687168,
+      "AccountedBytes": 349698240,
+      "SinceCaptureMs": 11174.2298
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 219.7908,
+      "PrivateBytes": 1730895872,
+      "WorkingSet": 1639034880,
+      "AccountedBytes": 351106620,
+      "SinceCaptureMs": 11362.8903
+    },
+    {
+      "Stage": "NodeFineTotal",
+      "ElapsedMs": 3417.9503,
+      "PrivateBytes": 1731743744,
+      "WorkingSet": 1639604224,
+      "AccountedBytes": 330601020,
+      "SinceCaptureMs": 11366.0129
+    },
+    {
+      "Stage": "NodeFreezePrepare",
+      "ElapsedMs": 0.0647,
+      "PrivateBytes": 1563414528,
+      "WorkingSet": 1510166528,
+      "AccountedBytes": 329462928,
+      "SinceCaptureMs": 14136.4128
+    },
+    {
+      "Stage": "NodeFastNodesAndMasks",
+      "ElapsedMs": 86.6089,
+      "PrivateBytes": 1562828800,
+      "WorkingSet": 1510965248,
+      "AccountedBytes": 340203744,
+      "SinceCaptureMs": 14227.1521
+    },
+    {
+      "Stage": "NodeFastTotal",
+      "ElapsedMs": 90.409,
+      "PrivateBytes": 1562697728,
+      "WorkingSet": 1510961152,
+      "AccountedBytes": 340006944,
+      "SinceCaptureMs": 14230.5562
+    },
+    {
+      "Stage": "RawLocalFinePreview",
+      "ElapsedMs": 3193.0768,
+      "PrivateBytes": 1543835648,
+      "WorkingSet": 1500061696,
+      "AccountedBytes": 375330240,
+      "SinceCaptureMs": 17737.679
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 0.5159,
+      "PrivateBytes": 1548484608,
+      "WorkingSet": 1505062912,
+      "AccountedBytes": 375330240,
+      "SinceCaptureMs": 17754.0822
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 4.1243,
+      "PrivateBytes": 1548484608,
+      "WorkingSet": 1505062912,
+      "AccountedBytes": 375330240,
+      "SinceCaptureMs": 17757.3826
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 7.4053,
+      "PrivateBytes": 1548484608,
+      "WorkingSet": 1505062912,
+      "AccountedBytes": 375330240,
+      "SinceCaptureMs": 17760.3573
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 10.4116,
+      "PrivateBytes": 1548488704,
+      "WorkingSet": 1505083392,
+      "AccountedBytes": 375330240,
+      "SinceCaptureMs": 17763.863
+    },
+    {
+      "Stage": "NodeThumbnails",
+      "ElapsedMs": 24.0009,
+      "PrivateBytes": 1548357632,
+      "WorkingSet": 1505038336,
+      "AccountedBytes": 375330240,
+      "SinceCaptureMs": 17787.8089
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 213.4199,
+      "PrivateBytes": 1548750848,
+      "WorkingSet": 1505198080,
+      "AccountedBytes": 375850248,
+      "SinceCaptureMs": 17967.0014
+    },
+    {
+      "Stage": "NodeFineTotal",
+      "ElapsedMs": 3425.9107,
+      "PrivateBytes": 1548750848,
+      "WorkingSet": 1505198080,
+      "AccountedBytes": 355094928,
+      "SinceCaptureMs": 17970.3847
+    },
+    {
+      "Stage": "NodeFreezePrepare",
+      "ElapsedMs": 0.0569,
+      "PrivateBytes": 1549348864,
+      "WorkingSet": 1506054144,
+      "AccountedBytes": 355094928,
+      "SinceCaptureMs": 20661.1007
+    },
+    {
+      "Stage": "NodeFastNodesAndMasks",
+      "ElapsedMs": 89.6165,
+      "PrivateBytes": 1556688896,
+      "WorkingSet": 1512361984,
+      "AccountedBytes": 366763092,
+      "SinceCaptureMs": 20754.2988
+    },
+    {
+      "Stage": "NodeFastTotal",
+      "ElapsedMs": 92.9291,
+      "PrivateBytes": 1556688896,
+      "WorkingSet": 1512452096,
+      "AccountedBytes": 365835744,
+      "SinceCaptureMs": 20757.385
+    },
+    {
+      "Stage": "RawLocalFinePreview",
+      "ElapsedMs": 3123.9441,
+      "PrivateBytes": 1558786048,
+      "WorkingSet": 1515552768,
+      "AccountedBytes": 318939840,
+      "SinceCaptureMs": 24196.5383
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 0.2643,
+      "PrivateBytes": 1563975680,
+      "WorkingSet": 1521778688,
+      "AccountedBytes": 318939840,
+      "SinceCaptureMs": 24212.4557
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 3.9289,
+      "PrivateBytes": 1563975680,
+      "WorkingSet": 1521778688,
+      "AccountedBytes": 318939840,
+      "SinceCaptureMs": 24215.9621
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 6.984,
+      "PrivateBytes": 1563975680,
+      "WorkingSet": 1521778688,
+      "AccountedBytes": 318939840,
+      "SinceCaptureMs": 24218.9113
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 9.9416,
+      "PrivateBytes": 1563975680,
+      "WorkingSet": 1522753536,
+      "AccountedBytes": 318939840,
+      "SinceCaptureMs": 24222.2045
+    },
+    {
+      "Stage": "NodeThumbnails",
+      "ElapsedMs": 19.1048,
+      "PrivateBytes": 1555210240,
+      "WorkingSet": 1513664512,
+      "AccountedBytes": 318939840,
+      "SinceCaptureMs": 24241.7705
+    },
+    {
+      "Stage": "VisibleAnalysis",
+      "ElapsedMs": 214.1191,
+      "PrivateBytes": 1554366464,
+      "WorkingSet": 1513893888,
+      "AccountedBytes": 319499580,
+      "SinceCaptureMs": 24426.6992
+    },
+    {
+      "Stage": "NodeFineTotal",
+      "ElapsedMs": 3357.614,
+      "PrivateBytes": 1553969152,
+      "WorkingSet": 1513889792,
+      "AccountedBytes": 298704528,
+      "SinceCaptureMs": 24430.3268
+    },
+    {
+      "Stage": "OutputEncodeAndRowCompute",
+      "ElapsedMs": 7507.6528,
+      "PrivateBytes": 1638510592,
+      "WorkingSet": 1577046016,
+      "AccountedBytes": 799299136,
+      "SinceCaptureMs": 34696.8468
+    },
+    {
+      "Stage": "OutputFullTotal",
+      "ElapsedMs": 7511.3886,
+      "PrivateBytes": 1639227392,
+      "WorkingSet": 1577762816,
+      "AccountedBytes": 298434240,
+      "SinceCaptureMs": 34700.1334
+    }
+  ],
+  "scope": "actual LoadTarget/CreateProfessionalRaw/AddGraph/SetToolParameter commands; no pointer acceptance"
+}
