@@ -3,7 +3,7 @@ using System.Windows.Media.Imaging;
 using RAWSelectionAssistant.Core.Services.Projects;
 using RAWSelectionAssistant.Services;
 namespace RAWSelectionAssistant.ViewModels;
-public sealed record R53VariantFrame(Guid Id,string Name,BitmapSource Image);
+public sealed record R53VariantFrame(Guid Id,string Name,BitmapSource Image){public Guid? SourceTargetId{get;init;} public Guid? SourceVersionId{get;init;} public string? SourceHash{get;init;} public string Kind{get;init;}="Variant";}
 public sealed partial class ReferenceColorWorkspaceViewModel
 {
     private readonly Dictionary<string,BitmapSource> r53CompareCache=[];
@@ -11,12 +11,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     public IReadOnlyList<R53VariantFrame> R53CompareFrames{get;private set;}=[];
     public string R53MultiCompareStatus{get;private set;}="";
     public IReadOnlyList<Guid> R53CompareRequested{get;private set;}=[];
-    public async Task PrepareR53VariantComparisonAsync(IReadOnlyList<Guid> ids,CancellationToken token=default)
+    public Task PrepareR53VariantComparisonAsync(IReadOnlyList<Guid> ids,CancellationToken token=default)=>PrepareR53SharedComparisonAsync(ids,null,token);
+    public async Task PrepareR53SharedComparisonAsync(IReadOnlyList<Guid> ids,StudioStillSnapshot? still,CancellationToken token=default)
     {
         if(_disposed)throw new ObjectDisposedException(nameof(ReferenceColorWorkspaceViewModel));
         _r53CompareCancellation?.Cancel();var revision=++_r53CompareRevision;R53CompareFrames=[];OnPropertyChanged(nameof(R53CompareFrames));
         if(IsLoading||IsExporting||IsInstantGenerating)throw new InvalidOperationException("当前正在切换照片或处理任务，请稍后对比。");
-        if(ids.Count is <2 or >4||ids.Distinct().Count()!=ids.Count||ActiveTarget is not{} target)throw new ArgumentException("请选择2到4个不同变体。");
+        if(ids.Count+(still is null?0:1) is <2 or >4||ids.Distinct().Count()!=ids.Count||ActiveTarget is not{} target)throw new ArgumentException("请选择2到4个不同变体。");
         R53CompareRequested=ids.ToArray();OnPropertyChanged(nameof(R53CompareRequested));Editor.CopyCurrentLookTo([target]);CaptureEditVersion(target);var versions=ids.Select(id=>target.EditVersions.Single(v=>v.Id==id&&!v.Archived)).ToArray();var cts=CancellationTokenSource.CreateLinkedTokenSource(token);_r53CompareCancellation=cts;
         R53MultiCompareStatus="正在准备变体对比…";OnPropertyChanged(nameof(R53MultiCompareStatus));
         try
@@ -25,9 +26,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel
             {
                 if(!await ValidateTargetIdentityAsync(target,cts.Token))throw new IOException(target.Error);
                 BitmapSource? source=null;var frames=new List<R53VariantFrame>();
+                if(still is not null){frames.Add(new(still.Id,"剧照 · "+still.Name+" · 来源版本 "+(still.SourceVersionId?.ToString("N")[..8]??"未知旧记录"),R54StillImage(still)){Kind="Still",SourceTargetId=still.SourceTargetId,SourceVersionId=still.SourceVersionId,SourceHash=still.SourceHash});R53CompareFrames=frames.ToArray();OnPropertyChanged(nameof(R53CompareFrames));}
                 foreach(var version in versions)
                 {
-                    cts.Token.ThrowIfCancellationRequested();BitmapSource result;var cacheKey=System.Text.Json.JsonSerializer.Serialize(new{TargetId=target.Id,target.SourceHash,VersionId=version.Id,version.Stack,version.Look,version.Film,version.RawDefinition,edge=1200});if(r53CompareCache.TryGetValue(cacheKey,out var cached)){frames.Add(new(version.Id,version.Name,cached));R53CompareFrames=frames.ToArray();OnPropertyChanged(nameof(R53CompareFrames));continue;}
+                    cts.Token.ThrowIfCancellationRequested();BitmapSource result;var cacheKey=System.Text.Json.JsonSerializer.Serialize(new{TargetId=target.Id,target.SourceHash,VersionId=version.Id,version.Stack,version.Look,version.Film,version.RawDefinition,edge=1200});if(r53CompareCache.TryGetValue(cacheKey,out var cached)){frames.Add(new(version.Id,version.Name+" · 版本 "+version.Id.ToString("N")[..8],cached){SourceTargetId=target.Id,SourceVersionId=version.Id,SourceHash=target.SourceHash});R53CompareFrames=frames.ToArray();OnPropertyChanged(nameof(R53CompareFrames));continue;}
                     if(version.RawDefinition is{} raw)
                     {
                         if(target.LinearRawMaster is not{} master)throw new InvalidOperationException("当前RAW缓存不可用，请先激活照片。");if(raw.DecodeKey!=master.Contract.DecodeKey)throw new NotSupportedException("当前对比不并发重解码不同RAW输入定义；请先统一输入设置。");
@@ -36,7 +38,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
                     else if(version.Stack is{} stack){source??=await Task.Run(()=>StudioQuickExport.LoadCompareProxy(target.Path,1200,cts.Token),cts.Token);result=await Task.Run(()=>ColorStudioBitmapRenderer.Render(source,stack,version.Look,cts.Token),cts.Token);}
                     else if(version.Look is{} look){source??=await Task.Run(()=>StudioQuickExport.LoadCompareProxy(target.Path,1200,cts.Token),cts.Token);result=await Task.Run(()=>ColorStudioBitmapRenderer.Render(source,ColorStudioLegacyMigration.Migrate(look with{Film=version.Film??look.Film}).Stack,look,cts.Token),cts.Token);}
                     else result=source??=await Task.Run(()=>StudioQuickExport.LoadCompareProxy(target.Path,1200,cts.Token),cts.Token);
-                    cts.Token.ThrowIfCancellationRequested();if(_disposed||revision!=_r53CompareRevision)return;while(r53CompareCache.Count>=4||r53CompareCache.Values.Sum(x=>(long)x.PixelWidth*x.PixelHeight*4)+(long)result.PixelWidth*result.PixelHeight*4>32L*1024*1024){if(r53CompareCache.Count==0)break;r53CompareCache.Remove(r53CompareCache.Keys.First());}r53CompareCache[cacheKey]=result;frames.Add(new(version.Id,version.Name,result));R53CompareFrames=frames.ToArray();R53MultiCompareStatus=$"已完成 {frames.Count}/{versions.Length}";OnPropertyChanged(nameof(R53CompareFrames));OnPropertyChanged(nameof(R53MultiCompareStatus));
+                    cts.Token.ThrowIfCancellationRequested();if(_disposed||revision!=_r53CompareRevision||!ReferenceEquals(target,ActiveTarget))return;while(r53CompareCache.Count>=4||r53CompareCache.Values.Sum(x=>(long)x.PixelWidth*x.PixelHeight*4)+(long)result.PixelWidth*result.PixelHeight*4>32L*1024*1024){if(r53CompareCache.Count==0)break;r53CompareCache.Remove(r53CompareCache.Keys.First());}r53CompareCache[cacheKey]=result;frames.Add(new(version.Id,version.Name+" · 版本 "+version.Id.ToString("N")[..8],result){SourceTargetId=target.Id,SourceVersionId=version.Id,SourceHash=target.SourceHash});R53CompareFrames=frames.ToArray();R53MultiCompareStatus=$"已完成 {frames.Count}/{versions.Length+(still is null?0:1)}";OnPropertyChanged(nameof(R53CompareFrames));OnPropertyChanged(nameof(R53MultiCompareStatus));
                 }
                 if(_disposed||revision!=_r53CompareRevision||!ReferenceEquals(ActiveTarget,target)||IsLoading)return;R53CompareFrames=frames;OnPropertyChanged(nameof(R53CompareFrames));R53MultiCompareStatus="对比就绪（1200px视图；不改变主变体）";
             }finally{_r53CompareGate.Release();}

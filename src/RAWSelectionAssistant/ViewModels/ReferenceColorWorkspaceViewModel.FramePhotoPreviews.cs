@@ -13,7 +13,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         var target=ActiveTarget;var version=target?.ActiveEditVersionId;var source=Editor.MatchedImage??Editor.SourceImage;
         if(_disposed)return;
         if(target is null||source is null){CancelFramePhotoPreviews();FramePhotoPreviews=new Dictionary<string,BitmapSource>();OnPropertyChanged(nameof(FramePhotoPreviews));return;}
-        if(IsLoading||IsExporting||IsInstantGenerating)return;
+        if(nodePreviewPending||IsLoading||IsExporting||IsInstantGenerating)return;
         if(framePhotoTarget==target.Id&&framePhotoVersion==version&&ReferenceEquals(framePhotoSource,source)&&(framePhotoCancellation is not null||FramePhotoPreviews.Count==LightPrintFrames.Available.Count))return;
         framePhotoCancellation?.Cancel();var revision=++framePhotoRevision;framePhotoTarget=target.Id;framePhotoVersion=version;framePhotoSource=source;
         if(FramePhotoPreviews.Count>0){FramePhotoPreviews=new Dictionary<string,BitmapSource>();OnPropertyChanged(nameof(FramePhotoPreviews));}

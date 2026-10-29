@@ -43,16 +43,17 @@ public partial class PhotoGradePageView
         r54ProfessionalGroup.Visibility=complex?Visibility.Visible:Visibility.Collapsed;
     }
 
-    private void SelectClosureNodeTool(string name)
+    private StackPanel? nodeToolNotice;
+    private static RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType? ToolType(string name)=>name switch
+    {"色轮"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorBalance,"曲线"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Curve,"范围" or "HSL"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorRange,"基础"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.BasicTone,_=>null};
+    internal void SelectClosureNodeTool(string name){r53ParameterTab=name;} // presentation only; never select/add/edit a node
+    private bool ToolMatchesSelection()=>ToolType(r53ParameterTab) is{} type&&(model?.Editor.SelectedAdjustmentNode?.Type==type||r53ParameterTab=="基础"&&model?.Editor.SelectedAdjustmentNode?.Type is RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.WhiteBalance or RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Levels or RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.SkinTone or RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Details);
+    private void UpdateNodeToolNotice(StackPanel group,bool professional)
     {
-        if(model is null)return;r53ParameterTab=name;
-        var type=name switch{"色轮"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorBalance,"曲线"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Curve,"范围" or "HSL"=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.ColorRange,_=>RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.BasicTone};
-        if(model.R53Professional&&model.Editor.SelectedAdjustmentNode?.Type!=type)
-        {
-            var node=model.Editor.AdjustmentNodes.FirstOrDefault(n=>n.Type==type);
-            if(node is not null)model.Editor.SelectedAdjustmentNode=node;
-            else model.Editor.AddGraphSerialNode(type.ToString());
-        }
+        if(nodeToolNotice is null){nodeToolNotice=new StackPanel{Margin=new Thickness(6)};group.Children.Insert(Math.Min(2,group.Children.Count),nodeToolNotice);}
+        nodeToolNotice.Children.Clear();bool mismatch=professional&&r53ParameterTab!="全部"&&!ToolMatchesSelection();nodeToolNotice.Visibility=mismatch?Visibility.Visible:Visibility.Collapsed;
+        if(!mismatch)return;nodeToolNotice.Children.Add(new TextBlock{Text="当前节点不支持此工具；未改变编辑目标。",TextWrapping=TextWrapping.Wrap,Foreground=new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(156,196,186))});
+        var add=new Button{Content="新增“"+r53ParameterTab+"”节点",IsEnabled=model?.Editor.SelectedNodeEditable==true&&ToolType(r53ParameterTab) is not null};add.Click+=(_,_)=>AddRequestedToolNode();nodeToolNotice.Children.Add(add);
     }
-
+    internal void AddRequestedToolNode(){if(model is null||ToolType(r53ParameterTab) is not{} type)return;model.Editor.AddGraphSerialNode(type.ToString());ApplyR53Layout();}
 }

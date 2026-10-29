@@ -48,6 +48,7 @@ public partial class PhotoGradePageView
         UpdateR54ProfessionalGroup(professional);
         r53ParameterTabs.Visibility=!professional&&model?.Editor.HasProfessionalRouting==true?Visibility.Collapsed:Visibility.Visible;
         r53ParameterTabs.Columns=professional?6:3;foreach(var tab in r53ParameterTabs.Children.OfType<Button>())tab.Visibility=professional||tab.Content is "基础" or "曲线" or "HSL"?Visibility.Visible:Visibility.Collapsed;
+        UpdateNodeToolNotice(group,professional);
         R53SimpleLayers.Header=professional?"所选节点":"图层";
         if(R53SimpleLayers.Content is StackPanel header)foreach(var commands in header.Children.OfType<WrapPanel>())commands.Visibility=professional?Visibility.Collapsed:(!professional&&model?.Editor.HasProfessionalRouting==true?Visibility.Collapsed:Visibility.Visible);
         foreach(var button in r53ParameterTabs.Children.OfType<Button>())button.Background=new SolidColorBrush(Equals(button.Content,r53ParameterTab)?Color.FromRgb(48,68,62):Color.FromRgb(29,29,32));
@@ -61,7 +62,7 @@ public partial class PhotoGradePageView
             if(professional&&r53ParameterTab!="全部")
             {
                 var type=model?.Editor.SelectedAdjustmentNode?.Type;
-                show=type switch
+                show=ToolMatchesSelection()&&(type switch
                 {
                     RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.BasicTone=>tag is "AdjustmentScroll.1" or "AdjustmentScroll.2" or "AdjustmentScroll.6",
                     RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.WhiteBalance=>tag=="AdjustmentScroll.5",
@@ -72,7 +73,7 @@ public partial class PhotoGradePageView
                     RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.Details=>tag is "AdjustmentScroll.9" or "AdjustmentScroll.10" or "AdjustmentScroll.11",
                     RAWSelectionAssistant.Core.Services.Projects.ColorStudioNodeType.SkinTone=>tag=="AdjustmentScroll.8",
                     _=>false
-                };
+                });
             }
             section.Visibility=show?Visibility.Visible:Visibility.Collapsed;
             if(show)section.IsExpanded=true;

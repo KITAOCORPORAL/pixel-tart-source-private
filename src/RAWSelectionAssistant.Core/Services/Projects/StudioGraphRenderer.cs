@@ -14,7 +14,7 @@ public static class StudioGraphRenderer
     public static HighBitDepthImageBuffer Render(HighBitDepthImageBuffer source,ColorAdjustmentStack stack,
         Func<HighBitDepthImageBuffer,ColorAdjustmentStackNode,HighBitDepthImageBuffer> effect,CancellationToken token=default,
         FilmTileCoordinates? tile=null,Func<int,int,(double X,double Y)>? sourceCoordinate=null,
-        IReadOnlyDictionary<Guid,Func<double,double,double>>? masks=null,Action<Guid,HighBitDepthImageBuffer,HighBitDepthImageBuffer>? diagnostics=null)
+        IReadOnlyDictionary<Guid,Func<double,double,double>>? masks=null,Action<Guid,HighBitDepthImageBuffer,HighBitDepthImageBuffer>? diagnostics=null,GraphInteractiveCache? interactiveCache=null,string? interactiveContext=null)
     {
         using var allocation=GraphPixelAllocation.EnterIfNeeded();
         stack=stack.Normalize();var graph=stack.Graph??throw new ArgumentException("Graph missing");
@@ -27,15 +27,21 @@ public static class StudioGraphRenderer
         var incoming=route.ToDictionary(id=>id,id=>graph.Edges.Where(e=>e.To==id).OrderBy(e=>e.Input=="base"?0:1).ToArray());
         var remaining=graph.Edges.Where(e=>active.Contains(e.To)||e.To==StudioNodeGraph.Output).GroupBy(e=>e.From).ToDictionary(g=>g.Key,g=>g.Count());
         var cache=new Dictionary<Guid,HighBitDepthImageBuffer>{{StudioNodeGraph.Source,source}};
+        var useInteractiveCache=interactiveCache is not null&&interactiveContext is not null&&Math.Max(source.Width,source.Height)<=800&&diagnostics is null;
+        var cacheContext=useInteractiveCache?System.Text.Json.JsonSerializer.Serialize(new{interactiveContext,source.Width,source.Height,source.Orientation,source.WorkingColorSpace,tile}):"";
+        var signatures=new Dictionary<Guid,string>{{StudioNodeGraph.Source,cacheContext}};var cacheGeneration=useInteractiveCache?interactiveCache!.Generation:0;
         try
         {
             foreach(var id in route)
             {
                 token.ThrowIfCancellationRequested();var node=byId[id];var edges=incoming[id];var input=cache[edges.Single(e=>e.Input==(node.Type==ColorStudioNodeType.GraphMix?"base":"rgb")).From];
+                var signature=useInteractiveCache?GraphInteractiveCache.Key(cacheContext,node,edges.Select(e=>e.Input+":"+signatures[e.From])):null;if(signature is not null)signatures[id]=signature;
+                using var cached=signature is null?null:interactiveCache!.Acquire(signature);
                 HighBitDepthImageBuffer? next=null,rendered=null;
                 try
                 {
-                    if(!node.Enabled||node.Opacity==0&&StudioLayerComposite.Active(node))next=input.Clone();
+                    if(cached is not null)next=cached.Buffer.Clone();
+                    else if(!node.Enabled||node.Opacity==0&&StudioLayerComposite.Active(node))next=input.Clone();
                     else if(node.Type==ColorStudioNodeType.GraphMix)
                     {
                         var layer=cache[edges.Single(e=>e.Input=="layer").From];
@@ -46,11 +52,12 @@ public static class StudioGraphRenderer
                     {
                         // Only a composited effect needs a second transient RGB buffer. Tools' internal
                         // scratch remains their existing responsibility, not N retained graph outputs.
-                        rendered=effect(input,node);if(ReferenceEquals(rendered,input))rendered=input.Clone();Account(rendered);token.ThrowIfCancellationRequested();
-                        next=StudioLayerComposite.Apply(input,rendered,node,token,tile,sourceCoordinate,masks?.GetValueOrDefault(id));
-                        if(ReferenceEquals(next,input))next=next.Clone();
+                        var nodeClock=RawLocalProfile.Begin();rendered=effect(input,node);RawLocalProfile.End("graph-node-process",nodeClock);if(ReferenceEquals(rendered,input))rendered=input.Clone();Account(rendered);token.ThrowIfCancellationRequested();
+                        var maskClock=RawLocalProfile.Begin();next=StudioLayerComposite.Apply(input,rendered,node,token,tile,sourceCoordinate,masks?.GetValueOrDefault(id));
+                        RawLocalProfile.End("graph-mask-composite",maskClock);if(ReferenceEquals(next,input))next=next.Clone();
                         if(!ReferenceEquals(next,rendered))rendered.Dispose();rendered=null;
                     }
+                    if(cached is null&&signature is not null&&!graph.Edges.Any(e=>e.From==id&&e.To==StudioNodeGraph.Output)){token.ThrowIfCancellationRequested();interactiveCache!.Store(signature,next,cacheGeneration);}
                     Account(next);cache.Add(id,next);next=null;
                     diagnostics?.Invoke(id,input,cache[id]); // callback borrows only for this invocation
                 }

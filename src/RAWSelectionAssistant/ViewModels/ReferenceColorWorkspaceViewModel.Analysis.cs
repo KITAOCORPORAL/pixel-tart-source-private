@@ -42,11 +42,12 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         PreviewHistogram = null; ColorSpaceModel = null; _colorSpaceSourceBuffer = null; _analysisColors = [];
         ClearColorSpaceHighlight(); BuildColorSpaceModelCommand.RaiseCanExecuteChanged();
         AnalysisLabel = Editor.SourceImage is null&&Editor.MatchedImage is null ? "尚无目标图像" : "正在分析当前图像…";
-        AnalysisWork = RefreshPreviewAnalysisAsync();
+        if(!nodePreviewPending)AnalysisWork = RefreshPreviewAnalysisAsync();
     }
 
     public async Task RefreshPreviewAnalysisAsync(CancellationToken token = default, BitmapSource? inspectedImage = null)
     {
+        using var measurement=StudioPreviewDiagnostics.Measure("VisibleAnalysis");
         _analysisCancellation?.Cancel();
         using var cancellation = CancellationTokenSource.CreateLinkedTokenSource(token);
         _analysisCancellation = cancellation;

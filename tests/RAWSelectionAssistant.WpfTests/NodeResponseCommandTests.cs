@@ -1,0 +1,37 @@
+using System.IO;
+using System.Diagnostics;
+using System.Text.Json;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using RAWSelectionAssistant.Core.Services.Export;
+using RAWSelectionAssistant.Core.Services.Projects;
+using RAWSelectionAssistant.Core.Services.RawToJpeg;
+using RAWSelectionAssistant.Core.Models;
+using RAWSelectionAssistant.Services;
+using RAWSelectionAssistant.ViewModels;
+using static RAWSelectionAssistant.WpfTests.RuntimeCorrectionWpfTests;
+namespace RAWSelectionAssistant.WpfTests;
+[TestClass][DoNotParallelize]
+public class NodeResponseCommandTests
+{
+    sealed class CountDecoder:IProfessionalRawDecoder{public int Count;readonly ProfessionalRawDecoder inner=new();public async Task<ProfessionalRawMaster> DecodeAsync(string p,ProfessionalRawDefinition d,CancellationToken t=default){Count++;return await inner.DecodeAsync(p,d,t);}}
+    [TestMethod]public Task ActualAuthorizedLargeSourceCommandLatency()=>RunSta(async()=>
+    {
+        var root=Environment.GetEnvironmentVariable("KITAO_NODE_RESPONSE_ROOT");var source=Environment.GetEnvironmentVariable("KITAO_NODE_RESPONSE_SOURCE");if(root is null||source is null){Assert.Inconclusive("Explicit authorized source and isolated root required");return;}EnsureTestApplication();Directory.CreateDirectory(root);var decoder=new CountDecoder();using var vm=new ReferenceColorWorkspaceViewModel(new Dialogs(),professionalRawDecoder:decoder);var cold=Stopwatch.StartNew();using var capture=StudioPreviewDiagnostics.Begin();RawLocalProfile.Reset();await vm.LoadTargetAsync(source);await vm.CreateProfessionalRawCommand.ExecuteAsync(null);cold.Stop();var t=vm.ActiveTarget!;Assert.IsNotNull(t.LinearRawMaster,vm.StatusText);vm.Editor.AddAdjustmentNodeCommand.Execute("BasicTone");vm.Editor.AddAdjustmentNodeCommand.Execute("Curve");Assert.IsTrue(vm.Editor.AddParallelGraphBranch(),vm.Editor.StatusText);await vm.RawLocalPreviewWork;
+        if(Environment.GetEnvironmentVariable("KITAO_NODE_RESPONSE_DEEP")=="1"){
+          var nodes=Enumerable.Range(0,8).Select(i=>new ColorAdjustmentStackNode(Guid.NewGuid(),i==7?ColorStudioNodeType.BasicTone:ColorStudioNodeType.Preset,"Point"+i,NumericParameters:new Dictionary<string,double>{{"exposure",i==7?0:.05*(i%3-1)}})).ToArray();var mix=new ColorAdjustmentStackNode(Guid.NewGuid(),ColorStudioNodeType.GraphMix,"Mix"){CompositeVersion=1,Opacity=.4};var all=nodes.Append(mix).ToArray();var graph=StudioNodeGraph.FromSerial(all) with{Version=2,Edges=[new(StudioNodeGraph.Source,"rgb",nodes[0].Id,"rgb"),new(nodes[0].Id,"rgb",nodes[1].Id,"rgb"),new(nodes[1].Id,"rgb",nodes[2].Id,"rgb"),new(nodes[2].Id,"rgb",nodes[3].Id,"rgb"),new(nodes[0].Id,"rgb",nodes[4].Id,"rgb"),new(nodes[4].Id,"rgb",nodes[5].Id,"rgb"),new(nodes[5].Id,"rgb",nodes[6].Id,"rgb"),new(nodes[3].Id,"rgb",mix.Id,"base"),new(nodes[6].Id,"rgb",mix.Id,"layer"),new(mix.Id,"rgb",nodes[7].Id,"rgb"),new(nodes[7].Id,"rgb",StudioNodeGraph.Output,"rgb")]};vm.Editor.SelectedColorScheme=new(Guid.NewGuid(),"deep graph",new ColorAdjustmentStack(all,ProcessingVersion:2){Graph=graph},DateTimeOffset.UnixEpoch);vm.Editor.ApplyColorSchemeCommand.Execute(null);vm.Editor.SelectedAdjustmentNode=nodes[7];await vm.RawLocalPreviewWork;
+        }
+        await vm.RawBaseWarmWork;var parameter=ColorStudioToolCatalog.GetParameters(ColorStudioNodeType.BasicTone).Single(p=>p.Key=="exposure");var times=new List<object>();
+        foreach(var ev in Environment.GetEnvironmentVariable("KITAO_NODE_RESPONSE_SAMPLES")=="10"?new[]{.15,.25,.35,.15,.25,.35,.15,.25,.35,.15}:new[]{.15,.25,.35}){var watch=Stopwatch.StartNew();double? first=null;BitmapSource? fastImage=null;System.ComponentModel.PropertyChangedEventHandler changed=(_,e)=>{if(e.PropertyName==nameof(vm.RawPreviewQuality)&&vm.RawPreviewQuality.Contains("快速")&&first is null){first=watch.Elapsed.TotalMilliseconds;fastImage=vm.Editor.MatchedImage;}};vm.PropertyChanged+=changed;var before=decoder.Count;vm.Editor.SetToolParameter(parameter,ev);await vm.RawLocalPreviewWork;watch.Stop();vm.PropertyChanged-=changed;object? errors=null;if(fastImage is not null){using var oracle=ProfessionalRawPipeline.RenderPreview(t.LinearRawMaster!,t.RawDefinition!,800);var expected=RawDisplayBitmapAdapter.ToBitmap(oracle.ToVisualRgb24());errors=Errors(fastImage,expected);}
+ times.Add(new{ev,firstVisibleMs=first,fineCompleteMs=watch.Elapsed.TotalMilliseconds,decodeDelta=decoder.Count-before,finePixelHash=PixelHash(vm.Editor.MatchedImage!),vm.RawPreviewQuality,response=vm.GetType().GetProperty("LastNodeResponse")?.GetValue(vm),errors});}
+        object? export=null;if(Environment.GetEnvironmentVariable("KITAO_NODE_RESPONSE_EXPORT")=="1"){var output=Path.Combine(root,"full-command.tif");var stages=new List<string>();var outputClock=Stopwatch.StartNew();var inspected=await ProfessionalRawExport.WriteAsync(t.LinearRawMaster!,t.RawDefinition!,output,StudioExportFormat.Tiff,stage:stages.Add);outputClock.Stop();export=new{elapsedMs=outputClock.Elapsed.TotalMilliseconds,inspected,stages};}
+        await File.WriteAllTextAsync(Path.Combine(root,"ACTUAL_COMMAND.json"),JsonSerializer.Serialize(new{source,coldLoadCreateMs=cold.Elapsed.TotalMilliseconds,t.LinearRawMaster.Image.Width,t.LinearRawMaster.Image.Height,decoder.Count,times,export,cacheStats=CacheStats(vm),phases=RawLocalProfile.Snapshot(),observations=capture.Observations,scope="actual LoadTarget/CreateProfessionalRaw/AddGraph/SetToolParameter commands; no pointer acceptance"},new JsonSerializerOptions{WriteIndented=true}));
+    });
+    static object? CacheStats(ReferenceColorWorkspaceViewModel vm){var p=vm.GetType().GetProperty("InteractiveNodeCacheStats",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance);var value=p?.GetValue(vm);return value is null?null:new{Hits=value.GetType().GetField("Item1")?.GetValue(value),Misses=value.GetType().GetField("Item2")?.GetValue(value)};}
+    static string PixelHash(BitmapSource source){var f=new FormatConvertedBitmap(source,PixelFormats.Rgb24,null,0);var bytes=new byte[f.PixelWidth*f.PixelHeight*3];f.CopyPixels(bytes,f.PixelWidth*3,0);return Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(bytes));}
+    static object Errors(BitmapSource a,BitmapSource b)
+    {
+      byte[] Pixels(BitmapSource source){var f=new FormatConvertedBitmap(source,PixelFormats.Rgb24,null,0);var p=new byte[f.PixelWidth*f.PixelHeight*3];f.CopyPixels(p,f.PixelWidth*3,0);return p;}var aa=Pixels(a);var bb=Pixels(b);Assert.AreEqual(aa.Length,bb.Length);var differences=aa.Zip(bb,(x,y)=>Math.Abs(x-y)).Order().ToArray();var mean=differences.Average();var p95=differences[(int)(differences.Length*.95)];var max=differences[^1];Assert.IsTrue(mean<=1.5&&p95<=4&&max<=32,$"proxy error {mean}/{p95}/{max}");return new{mean,p95,max,pass=mean<=1.5&&p95<=4&&max<=32};
+    }
+    sealed class Dialogs:IDialogService{public IReadOnlyList<string> ChooseFiles(string a,string b,bool c)=>[];public string? ChooseFolder(string a,string? b=null)=>null;public string? ChooseSaveFile(string a,string b,string c,string? d=null)=>null;public IReadOnlyList<string>? ManageQuickTools(IReadOnlyList<string> i)=>i;public void ShowInfo(string a){}public void ShowError(string a){}public bool Confirm(string a,string b)=>false;public HelpAction ShowHelp()=>HelpAction.None;public void ShowFeedback(){}public RawFileEntry? ChooseRawCandidate(IReadOnlyList<RawFileEntry> x)=>null;public bool ShowMediaDetails(MediaSelectionItem x,bool a)=>false;public void RevealFile(string a){}}
+}

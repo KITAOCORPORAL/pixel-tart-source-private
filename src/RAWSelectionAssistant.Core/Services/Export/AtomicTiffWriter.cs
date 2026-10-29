@@ -29,7 +29,7 @@ public static class AtomicTiffWriter
         {
             using var expected=System.Security.Cryptography.IncrementalHash.CreateHash(System.Security.Cryptography.HashAlgorithmName.SHA256);
             TiffExportResult result;await using(var stream=new FileStream(temporary,FileMode.CreateNew,FileAccess.ReadWrite,FileShare.None,65536,FileOptions.SequentialScan))
-            {result=TiffExport.WriteRgb48Rows(stream,width,height,(y,row)=>{fillRow(y,row);expected.AppendData(row.Span);},options,token);await stream.FlushAsync(token);stream.Flush(true);stage?.Invoke("Encoded");stream.Position=0;var verified=TiffStreamValidator.Validate(stream,token);if(verified.PixelSha256!=Convert.ToHexString(expected.GetHashAndReset()))throw new InvalidDataException("TIFF streamed pixel hash mismatch.");stage?.Invoke("Validated");}
+            {result=TiffExport.WriteRgb48Rows(stream,width,height,(y,row)=>{fillRow(y,row);expected.AppendData(row.Span);},options,token);await stream.FlushAsync(token);stream.Flush(true);stage?.Invoke("Encoded");stream.Position=0;var verifyClock=System.Diagnostics.Stopwatch.StartNew();var verified=TiffStreamValidator.Validate(stream,token);stage?.Invoke("ValidationMs="+verifyClock.Elapsed.TotalMilliseconds.ToString("F3",System.Globalization.CultureInfo.InvariantCulture));if(verified.PixelSha256!=Convert.ToHexString(expected.GetHashAndReset()))throw new InvalidDataException("TIFF streamed pixel hash mismatch.");stage?.Invoke("Validated");}
             return await CommitAsync(result,temporary,full,token,overwrite);
         }
         catch{TryDelete(temporary);throw;}

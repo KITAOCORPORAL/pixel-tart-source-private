@@ -16,13 +16,13 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private sealed record ThumbnailSnapshot(Guid Target,Guid? Variant,BitmapSource? Raster,ProfessionalRawMaster? Master,ProfessionalRawDefinition? Definition,ColorAdjustmentStack Stack,ReferenceLook? Reference,long Revision);
  private void QueueLayerThumbnails()
  {
-  if(_disposed||ActiveTarget is not{} target)return;
+  if(_disposed||nodePreviewPending||ActiveTarget is not{} target)return;
   if(Editor.AdjustmentStack.Nodes.Count==0&&target.RawDefinition?.SceneExposure?.Mask is null){layerThumbnailQueue?.Invalidate();LayerThumbnailContext=null;OnPropertyChanged(nameof(LayerThumbnailContext));OnPropertyChanged(nameof(SceneExposureMaskPreview));return;}
   if(thumbnailTarget!=target.Id||thumbnailVariant!=target.ActiveEditVersionId){layerThumbnailQueue?.Invalidate();LayerThumbnailContext=null;OnPropertyChanged(nameof(LayerThumbnailContext));OnPropertyChanged(nameof(SceneExposureMaskPreview));thumbnailTarget=target.Id;thumbnailVariant=target.ActiveEditVersionId;}
   LayerThumbnailFailure=null;var snapshot=new ThumbnailSnapshot(target.Id,target.ActiveEditVersionId,Editor.SourceImage,target.LinearRawMaster,target.RawDefinition,Editor.AdjustmentStack.Nodes.Count==0?Editor.AdjustmentStack:Editor.AdjustmentStack.DeepClone(),Editor.SelectedLook,++thumbnailRevision);
   layerThumbnailQueue??=new(async(s,token)=>{
    using var pin=s.Master is{} master?StudioGlobalResources.RetainBuffer(master.Image,(long)master.Image.Rgb32.Length*4):null;
-   return await Task.Run(()=>BuildLayerThumbnails(s,token),token);
+   using var timing=StudioPreviewDiagnostics.Measure("NodeThumbnails");return await Task.Run(()=>BuildLayerThumbnails(s,token),token);
   },(_,s,result)=>{if(_disposed||ActiveTarget?.Id!=s.Target||ActiveTarget.ActiveEditVersionId!=s.Variant||s.Revision!=thumbnailRevision)return;LayerThumbnailContext=result;OnPropertyChanged(nameof(LayerThumbnailContext));OnPropertyChanged(nameof(SceneExposureMaskPreview));},error=>{LayerThumbnailFailure=error.ToString();});
   layerThumbnailQueue.Submit(snapshot);
  }

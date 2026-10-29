@@ -59,12 +59,12 @@ public static class ProfessionalRawLocalRenderer
   // This one-time cold cost is measured separately; interactive parameter changes reuse it.
   return Preview(m,d with{LocalEdits=null},edge,token);
  }
- public static HighBitDepthImageBuffer Fast(ProfessionalRawMaster m,ProfessionalRawDefinition d,HighBitDepthImageBuffer? basis=null,CancellationToken token=default)
+ public static HighBitDepthImageBuffer Fast(ProfessionalRawMaster m,ProfessionalRawDefinition d,HighBitDepthImageBuffer? basis=null,CancellationToken token=default,GraphInteractiveCache? interactiveCache=null,string? interactiveContext=null)
  {
   if(d.ColorState?.Version==2)return DocumentWorkingRendererV2.Preview(m,d,800,token);
   var prepared=new Prepared(m,d,token);d=prepared.Definition;var current=basis?.Clone()??FastBase(m,d,800,token);var oriented=ProfessionalRawPipeline.OrientedSize(m);var geometry=d.Geometry??new();var w=current.Width;var h=current.Height;
   (double X,double Y) Coordinate(int x,int y){var p=geometry.SourceTuple((x+.5)/w,(y+.5)/h,(double)oriented.Width/oriented.Height);if(geometry.Version==2)return p;return ((Math.Clamp((int)(p.X*oriented.Width),0,oriented.Width-1)+.5)/oriented.Width,(Math.Clamp((int)(p.Y*oriented.Height),0,oriented.Height-1)+.5)/oriented.Height);}
-  if(d.LocalEdits?.Stack.Graph?.Version==2){using var original=current;return StudioGraphRenderer.Render(original,d.LocalEdits.Stack,(input,node)=>ColorStudioRenderPipeline.ApplyPointEffect(input,node,token),token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks);}
+  if(d.LocalEdits?.Stack.Graph?.Version==2){using var original=current;return StudioGraphRenderer.Render(original,d.LocalEdits.Stack,(input,node)=>ColorStudioRenderPipeline.ApplyPointEffect(input,node,token),token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks,interactiveCache:interactiveCache,interactiveContext:interactiveContext);}
   foreach(var node in (d.LocalEdits is{} local?StudioGraphRouting.Nodes(local.Stack).Where(n=>n.Enabled):[])){if(node.CompositeVersion is 1 or 2&&node.Opacity==0)continue;var effect=ColorStudioRenderPipeline.ApplyPointEffect(current,node,token);var next=StudioLayerComposite.Apply(current,effect,node,token,new(0,0,oriented.Width,oriented.Height),Coordinate,prepared.Masks.GetValueOrDefault(node.Id));if(!ReferenceEquals(effect,next))effect.Dispose();current.Dispose();current=next;}return current;
  }
  public static HighBitDepthImageBuffer Preview(ProfessionalRawMaster m,ProfessionalRawDefinition d,int edge,CancellationToken token=default)
@@ -79,8 +79,8 @@ public static class ProfessionalRawLocalRenderer
    using var graphAllocation=d.LocalEdits?.Stack.Graph?.Version==2?GraphPixelAllocation.Enter():null;var sums=new double[w*3];
    for(int py=worker*h/Math.Min(4,h);py<(worker+1)*h/Math.Min(4,h);py++){
     token.ThrowIfCancellationRequested();double ya=py*ry,yb=(py+1)*ry;int top=(int)ya,bottom=Math.Min(size.Height,(int)Math.Ceiling(yb));using var band=Region(m,d,0,top,size.Width,bottom-top,token,prepared);var rgb=band.Rgb32.Span;Array.Clear(sums);
-    for(int y=0;y<band.Height;y++){int sy=top+y;double wy=Math.Max(0,Math.Min(sy+1,yb)-Math.Max(sy,ya));if(wy==0)continue;for(int sx=0;sx<size.Width;sx++)for(int px=(int)(sx/rx);px<=Math.Min(w-1,(int)((sx+1)/rx));px++){double wx=Math.Max(0,Math.Min(sx+1,(px+1)*rx)-Math.Max(sx,px*rx));if(wx==0)continue;int i=(y*size.Width+sx)*3,o=px*3;for(int c=0;c<3;c++){double v=rgb[i+c];sums[o+c]+=(v<=.04045?v/12.92:Math.Pow((v+.055)/1.055,2.4))*wx*wy;}}}
-    for(int i=0;i<sums.Length;i++){double v=sums[i]/(rx*ry);data[py*w*3+i]=(float)(v<=.0031308?v*12.92:1.055*Math.Pow(v,1/2.4)-.055);}
+    var scaleClock=RawLocalProfile.Begin();for(int y=0;y<band.Height;y++){int sy=top+y;double wy=Math.Max(0,Math.Min(sy+1,yb)-Math.Max(sy,ya));if(wy==0)continue;for(int sx=0;sx<size.Width;sx++)for(int px=(int)(sx/rx);px<=Math.Min(w-1,(int)((sx+1)/rx));px++){double wx=Math.Max(0,Math.Min(sx+1,(px+1)*rx)-Math.Max(sx,px*rx));if(wx==0)continue;int i=(y*size.Width+sx)*3,o=px*3;for(int c=0;c<3;c++){double v=rgb[i+c];sums[o+c]+=(v<=.04045?v/12.92:Math.Pow((v+.055)/1.055,2.4))*wx*wy;}}}
+    for(int i=0;i<sums.Length;i++){double v=sums[i]/(rx*ry);data[py*w*3+i]=(float)(v<=.0031308?v*12.92:1.055*Math.Pow(v,1/2.4)-.055);}RawLocalProfile.End("preview-area-scaling",scaleClock);
    }
   });return new(w,h,data,"16","sRGB",1);
  }

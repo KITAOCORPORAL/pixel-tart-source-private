@@ -16,6 +16,7 @@ public static class ProfessionalRawExport
         if(definition.ColorState is not null)return await DocumentColorWorkflowV1.WriteAsync(master,definition,destination,format,token,stage);
         SecondExposureDecoder.EnsureRegistered();
         if(Kitao.InstantFilm.Research.InstantV3ProductPipeline.IsV3(definition))return await InstantV3DirectExport.Write(master,definition,destination,format,token,stage);
+        using var total=StudioPreviewDiagnostics.Measure("OutputFullTotal");
         definition=definition with{LocalEdits=definition.LocalEdits?.Freeze(),InstantFilm=definition.InstantFilm is {} film?InstantFilmPipeline.Freeze(film):null};
         ProfessionalRawPipeline.ValidateMaster(master,definition);
         var transformed=ProfessionalRawLocalRenderer.Active(definition)||definition.InstantFilm?.Enabled==true||definition.IsRenderedInput;
@@ -31,7 +32,7 @@ public static class ProfessionalRawExport
             if(!Enum.IsDefined(format))throw new NotSupportedException("Unknown RAW output format.");
             if(format is StudioExportFormat.Source or StudioExportFormat.Tiff)
             {
-                await Task.Run(async()=>await AtomicTiffWriter.WriteRowsAsync(staged,size.Item1,size.Item2,(y,row)=>{if(localPrepared is not null){using var band=ProfessionalRawLocalRenderer.Region(master,definition,0,y,size.Item1,1,token,localPrepared);for(int i=0;i<band.Rgb32.Length;i++)System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(row.Span[(i*2)..],(ushort)Math.Clamp(Math.Round(band.Rgb32.Span[i]*65535),0,65535));}else if(transformed)ProfessionalRawPipeline.FillOutputRgb16Row(master,definition,y,row);else ProfessionalRawPipeline.FillRgb16Row(master,definition,y,row);},new(IccProfile:StudioQuickExport.SrgbProfileBytes(),Software:"Kitao Studio PV4",Orientation:(ushort)orientation),token,stage:stage),token);
+                using var encoding=StudioPreviewDiagnostics.Measure("OutputEncodeAndRowCompute");await Task.Run(async()=>await AtomicTiffWriter.WriteRowsAsync(staged,size.Item1,size.Item2,(y,row)=>{if(localPrepared is not null){var rowClock=RawLocalProfile.Begin();using var band=ProfessionalRawLocalRenderer.Region(master,definition,0,y,size.Item1,1,token,localPrepared);for(int i=0;i<band.Rgb32.Length;i++)System.Buffers.Binary.BinaryPrimitives.WriteUInt16LittleEndian(row.Span[(i*2)..],(ushort)Math.Clamp(Math.Round(band.Rgb32.Span[i]*65535),0,65535));RawLocalProfile.End("output-rows-nodes-mask-and-quantize",rowClock);}else if(transformed)ProfessionalRawPipeline.FillOutputRgb16Row(master,definition,y,row);else ProfessionalRawPipeline.FillRgb16Row(master,definition,y,row);},new(IccProfile:StudioQuickExport.SrgbProfileBytes(),Software:"Kitao Studio PV4",Orientation:(ushort)orientation),token,stage:stage),token);
                 token.ThrowIfCancellationRequested();File.Move(staged,destination,false);
                 return new(size.Item1,size.Item2,16,orientation,true,null,0,0,0);
             }
