@@ -1,0 +1,144 @@
+[1/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/cam16.cpp.obj
+[2/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/curves.cpp.obj
+[3/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/colour.cpp.obj
+[4/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/blob.cpp.obj
+[5/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/digital_intermediate.cpp.obj
+[6/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/hanatos.cpp.obj
+[7/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/json.cpp.obj
+[8/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/latitude_fit.cpp.obj
+[9/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/numeric.cpp.obj
+[10/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/printing.cpp.obj
+[11/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/params.cpp.obj
+[12/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/print_lut.cpp.obj
+[13/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/profile.cpp.obj
+[14/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/setup_cache.cpp.obj
+[15/84] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/spectral.cpp.obj
+[16/84] Linking CXX static library engine\libspektralab_core.a
+[17/84] Building CXX object engine/CMakeFiles/spektralab_pipeline.dir/src/pipeline/blur.cpp.obj
+[18/84] Building CXX object engine/CMakeFiles/spektralab_pipeline.dir/src/pipeline/windows_unported.cpp.obj
+[19/84] Building CXX object engine/CMakeFiles/spektralab_pipeline.dir/src/pipeline/scene_latitude.cpp.obj
+[20/84] Building CXX object engine/CMakeFiles/spektralab_pipeline.dir/src/pipeline/pipeline.cpp.obj
+[21/84] Building CXX object engine/CMakeFiles/spk_dump_json.dir/tests/dump_json.cpp.obj
+[22/84] Building C object engine/CMakeFiles/spk_volk.dir/third_party/volk/volk.c.obj
+[23/84] Linking C static library engine\libspk_volk.a
+[24/84] Linking CXX executable engine\spk_dump_json.exe
+[25/84] Generating resources/vulkan/spk_affine3.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_affine3.comp
+[26/84] Generating resources/vulkan/spk_boost.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_boost.comp
+[27/84] Generating resources/vulkan/spk_bw_correct.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_bw_correct.comp
+
+[28/84] Generating resources/vulkan/spk_cam16ucs_compress.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_cam16ucs_compress.comp
+
+[29/84] Generating resources/vulkan/spk_cctf_decode.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_cctf_decode.comp
+
+[30/84] Generating resources/vulkan/spk_cctf_encode_matrix.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_cctf_encode_matrix.comp
+
+[31/84] Building CXX object engine/CMakeFiles/spk_dump_setup.dir/tests/dump_setup.cpp.obj
+[32/84] Linking CXX executable engine\spk_dump_setup.exe
+[33/84] Generating resources/vulkan/spk_couplers_correction.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_couplers_correction.comp
+
+[34/84] Generating resources/vulkan/spk_curves.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_curves.comp
+
+[35/84] Generating resources/vulkan/spk_di_normalise.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_di_normalise.comp
+
+[36/84] Generating resources/vulkan/spk_edr.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_edr.comp
+
+[37/84] Generating resources/vulkan/spk_geometry_resample_df.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_geometry_resample_df.comp
+[38/84] Generating resources/vulkan/spk_glare_add.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_glare_add.comp
+[39/84] Generating resources/vulkan/spk_grain_layer_one.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_grain_layer_one.comp
+[40/84] Generating resources/vulkan/spk_grain_layers.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_grain_layers.comp
+[41/84] Building CXX object engine/CMakeFiles/spektralab_pipeline.dir/src/pipeline/engine.cpp.obj
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/pipeline/engine.cpp:1828:8: warning: 'medium_probe_params' has C-linkage specified, but returns user-defined type 'Params' which is incompatible with C [-Wreturn-type-c-linkage]
+
+ 1828 | Params medium_probe_params(const Params& session) {
+
+      |        ^
+
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/pipeline/engine.cpp:1899:6: warning: 'side_json' has C-linkage specified, but returns user-defined type 'Json' which is incompatible with C [-Wreturn-type-c-linkage]
+
+ 1899 | Json side_json(const slm::Side& s) {
+
+      |      ^
+
+2 warnings generated.
+
+[42/84] Generating resources/vulkan/spk_grain_simple.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_grain_simple.comp
+[43/84] Generating resources/vulkan/spk_iir_df_acc.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_iir_df_acc.comp
+[44/84] Generating resources/vulkan/spk_lincomb3.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_lincomb3.comp
+[45/84] Generating resources/vulkan/spk_log10_guarded.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_log10_guarded.comp
+[46/84] Generating resources/vulkan/spk_lognormal_field.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_lognormal_field.comp
+[47/84] Generating resources/vulkan/spk_lut3d_trilinear.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_lut3d_trilinear.comp
+[48/84] Generating resources/vulkan/spk_lut2d_cubic.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_lut2d_cubic.comp
+[49/84] Generating resources/vulkan/spk_math_probe.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_math_probe.comp
+[50/84] Generating resources/vulkan/spk_matmul3.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_matmul3.comp
+[51/84] Generating resources/vulkan/spk_mul.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_mul.comp
+[52/84] Generating resources/vulkan/spk_print_exposure.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_print_exposure.comp
+[53/84] Generating resources/vulkan/spk_reduce_max.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_reduce_max.comp
+
+[54/84] Generating resources/vulkan/spk_rng_probe.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_rng_probe.comp
+
+[55/84] Generating resources/vulkan/spk_sep_fir_acc.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_sep_fir_acc.comp
+
+[56/84] Generating resources/vulkan/spk_spectral_epilogue.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_spectral_epilogue.comp
+[57/84] Generating resources/vulkan/spk_stride_sample.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_stride_sample.comp
+[58/84] Generating resources/vulkan/spk_take_rgb.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_take_rgb.comp
+[59/84] Generating resources/vulkan/spk_tc_b.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_tc_b.comp
+[60/84] Generating resources/vulkan/spk_to_rgba16.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_to_rgba16.comp
+[61/84] Generating resources/vulkan/spk_zoom_bilinear_mirror.spv
+C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/src/shaders/vulkan/spk_zoom_bilinear_mirror.comp
+
+[62/84] C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\Admin\AppData\Local\Temp\guangjing-spektra-research-20261029\build-vulkan\engine && C:\Users\Admin\AppData\Local\Temp\guangjing-spektra-research-20261029\pytools\cmake\data\bin\cmake.exe -E copy_directory C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/source2/engine/resources C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/build-vulkan/engine/resources"
+[63/84] Building CXX object engine/CMakeFiles/spk_vulkan_grain.dir/tests/gpu_vulkan_grain.cpp.obj
+[64/84] Building CXX object engine/CMakeFiles/spk_vulkan_smoke.dir/tests/gpu_vulkan_smoke.cpp.obj
+[65/84] Building CXX object engine/CMakeFiles/spektralab_engine.dir/src/gpu/vulkan_gpu.cpp.obj
+[66/84] Building CXX object engine/CMakeFiles/spektralab_engine_shared.dir/src/gpu/vulkan_gpu.cpp.obj
+[67/84] Linking CXX static library engine\libspektralab_engine.a
+[68/84] Linking CXX shared library engine\spektrafilm_engine.dll
+[69/84] Building CXX object engine/CMakeFiles/spk_vulkan_pointwise.dir/tests/gpu_vulkan_pointwise.cpp.obj
+[70/84] Linking CXX executable engine\spk_vulkan_smoke.exe
+[71/84] Linking CXX executable engine\spk_vulkan_grain.exe
+[72/84] Linking CXX executable engine\spk_vulkan_pointwise.exe
+[73/84] Building CXX object engine/CMakeFiles/spk_vulkan_resample.dir/tests/gpu_vulkan_resample.cpp.obj
+[74/84] Linking CXX executable engine\spk_vulkan_resample.exe
+[75/84] Building CXX object engine/CMakeFiles/spk_vulkan_geometry.dir/tests/gpu_vulkan_geometry.cpp.obj
+[76/84] Building CXX object engine/CMakeFiles/spk_vulkan_transfer.dir/tests/gpu_vulkan_transfer.cpp.obj
+[77/84] Building CXX object engine/CMakeFiles/spk_vulkan_lut_di.dir/tests/gpu_vulkan_lut_di.cpp.obj
+[78/84] Linking CXX executable engine\spk_vulkan_geometry.exe
+[79/84] Linking CXX executable engine\spk_vulkan_transfer.exe
+[80/84] Linking CXX executable engine\spk_vulkan_lut_di.exe
+[81/84] Building CXX object engine/CMakeFiles/spk_windows_feature_boundaries.dir/tests/windows_feature_boundaries.cpp.obj
+[82/84] Linking CXX executable engine\spk_windows_feature_boundaries.exe
+[83/84] Building CXX object engine/CMakeFiles/spk_render_fixture.dir/tests/render_fixture.cpp.obj
+[84/84] Linking CXX executable engine\spk_render_fixture.exe

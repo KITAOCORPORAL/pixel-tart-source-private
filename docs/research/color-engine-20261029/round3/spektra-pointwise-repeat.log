@@ -1,0 +1,15 @@
+Internal ctest changing into directory: C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/build-vulkan
+Test project C:/Users/Admin/AppData/Local/Temp/guangjing-spektra-research-20261029/build-vulkan
+    Start 5: spk_vulkan_pointwise
+1/1 Test #5: spk_vulkan_pointwise .............***Failed    0.28 sec
+pointwise: cctf_decode case=114 index=13 got=0.0180000048 expected=0.0180551012357076 delta=5.50964226e-05 tolerance=1.12638571e-07
+Vulkan device: NVIDIA GeForce RTX 5060 Ti
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.29 sec
+
+The following tests FAILED:
+	  5 - spk_vulkan_pointwise (Failed)
+Errors while running CTest
