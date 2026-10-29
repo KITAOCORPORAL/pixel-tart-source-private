@@ -1,0 +1,4 @@
+*.json -text whitespace=cr-at-eol
+*.trx -text whitespace=cr-at-eol
+screenshots/*.png binary
+*.txt -text whitespace=cr-at-eol

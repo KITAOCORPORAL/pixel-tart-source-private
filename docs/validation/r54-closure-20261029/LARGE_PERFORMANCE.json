@@ -431,5 +431,42 @@
     ],
     "status": "PASS"
   },
-  "pixelEquivalence": "PASS full output/production preview hashes, no resolution/depth reduction"
+  "pixelEquivalence": "PASS full output/production preview hashes, no resolution/depth reduction",
+  "finalPublishedVerification": [
+    {
+      "phase": "final-published",
+      "kind": "mixes",
+      "operation": "production-preview",
+      "Width": 5496,
+      "Height": 3670,
+      "pixels": 20170320,
+      "elapsedMs": 10508.0287,
+      "baseWorkingSet": 508637184,
+      "peakWorkingSet": 563040256,
+      "ledgerBefore": 0,
+      "ledgerPeak": 11871360,
+      "ledgerAfter": 0,
+      "hash": "16BE7D97E1C3FC6FB95C9572B44B972A0C7857B9F56910D5BD5F6A13B41E53B9",
+      "error": null,
+      "sourceHash": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401"
+    },
+    {
+      "phase": "final-published",
+      "kind": "mixes",
+      "operation": "tiff16",
+      "Width": 5496,
+      "Height": 3670,
+      "pixels": 20170320,
+      "elapsedMs": 25801.2373,
+      "baseWorkingSet": 508588032,
+      "peakWorkingSet": 1489608704,
+      "ledgerBefore": 0,
+      "ledgerPeak": 968175360,
+      "ledgerAfter": 0,
+      "hash": "67416B2CC3ABCE99F4BDAD1C3882B4F1661C5748DC6BAD59065233206E66886A",
+      "error": null,
+      "sourceHash": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401"
+    }
+  ],
+  "performanceCoreMatchesFinalPublishedCore": true
 }

@@ -1,0 +1,236 @@
+{
+  "productSourceSha": "674aaa1887a03173e439d593e505a95d26a22139",
+  "scope": "company delivery evidence only; no source pixels/RAW/master/TIFF/test sessions/dependency wheels",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 125,
+      "sha256": "15c9abf589acfe5714eb52e3c46ac7f6431281e7f3c380a226483324a460160c"
+    },
+    {
+      "path": "CANDIDATE_OFFLINE_PARITY.json",
+      "bytes": 608,
+      "sha256": "b1c74739055ca8a2efc021c80068b25fdbc8d07dc603a6aeeb2f23e6af63eef0"
+    },
+    {
+      "path": "FINAL_REPORT.md",
+      "bytes": 9584,
+      "sha256": "e811d4bc080561b14b8ee2691cef89d3fb3c33bf99f6dd7454f9e970a429f5b0"
+    },
+    {
+      "path": "GRAPH_PROCESS_READBACK.json",
+      "bytes": 128,
+      "sha256": "a9ea12dfaf68a08efddff7cae129eb809bf9db26d9522f6cc5765b3bc83ed387"
+    },
+    {
+      "path": "HANDOFF_REPOSITORY_HEADS.txt",
+      "bytes": 58,
+      "sha256": "abcd4a9b0aaed96e5f132bd249c603a11a1debd10126d813553b10b20aad7df6"
+    },
+    {
+      "path": "HOME_DELIVERY_AUDIT.json",
+      "bytes": 1407,
+      "sha256": "2d6eb75ece2c002908c3f197b66ca6681b6d254df7acd44b94576de3f4150dd5"
+    },
+    {
+      "path": "IMPLEMENTATION_STATUS.md",
+      "bytes": 1852,
+      "sha256": "e6deddcab9918b48504a7aed86b8c7b79c81d458632f20c49794936122ace367"
+    },
+    {
+      "path": "LARGE_INPUT_MANIFEST.json",
+      "bytes": 778,
+      "sha256": "761bf3885adecabbeec58cc46bcd38376b031d9becdd91f4b8e71906371c5078"
+    },
+    {
+      "path": "LARGE_PERFORMANCE.json",
+      "bytes": 15590,
+      "sha256": "5cd795ec122812a16c73fbda2184399ca91499314e6c143105d6a77dfe1a5ce9"
+    },
+    {
+      "path": "MODEL_PROCESS_READBACK.json",
+      "bytes": 26,
+      "sha256": "407b604133473676977c9d3b5f661f2d7468445ec2a843ec444d1657b596af12"
+    },
+    {
+      "path": "NODE_COMPARISON.md",
+      "bytes": 3036,
+      "sha256": "b1bc5a9bee303f25e260180ab2e7bf251f860f995ccdf42ae4d32d70170fc304"
+    },
+    {
+      "path": "ORIGIN_HEADS.txt",
+      "bytes": 7063,
+      "sha256": "4ba7dff1921aa1df661d9a6b40483f8dca47acfb0400a09dc15fd4e1ebc7aff1"
+    },
+    {
+      "path": "OS_SMOKE.json",
+      "bytes": 440,
+      "sha256": "78080f38ca36790e7e7b7d381d744f73e842de5ce347b61f97515aae2920afe1"
+    },
+    {
+      "path": "PUBLISHED_BINDING_FINAL.json",
+      "bytes": 1315,
+      "sha256": "6984a682731cde4badcea4645ea8302f06bdc39de13204eb3f4d8448ff023660"
+    },
+    {
+      "path": "REMOTE_FINAL_AUDIT.txt",
+      "bytes": 91,
+      "sha256": "1d3a2fec7e032e903d62629f82b1fef7588c1a7edec68eab6af09237864ecb07"
+    },
+    {
+      "path": "REMOTE_PRECOMMIT.txt",
+      "bytes": 91,
+      "sha256": "1d3a2fec7e032e903d62629f82b1fef7588c1a7edec68eab6af09237864ecb07"
+    },
+    {
+      "path": "REMOTE_RECHECK_AFTER_AB.txt",
+      "bytes": 179,
+      "sha256": "1c46a7a5de82e318b2f35ea2d2a358c7b00d5161f7437f004c2989c65e06e27f"
+    },
+    {
+      "path": "screenshots/CANDIDATE_ACTUAL_COMPARISON.png",
+      "bytes": 190617,
+      "sha256": "025ba92511ab2fe156557c0e77ae2dabaf5c2dd6e72642068b13484bb23f01df"
+    },
+    {
+      "path": "screenshots/COMPARE-developed-1366.png",
+      "bytes": 789187,
+      "sha256": "ef21b69d7574c1b316c22adde2aa8909b65ead6d02822c4e349929dac021a9ae"
+    },
+    {
+      "path": "screenshots/COMPARE-developed-1920.png",
+      "bytes": 810848,
+      "sha256": "272f49d1319c6450e7c4b36ce51ec0a806eb26b4f52c0e4d05b3c7aa405542d6"
+    },
+    {
+      "path": "screenshots/COMPARE-instant-1366.png",
+      "bytes": 820561,
+      "sha256": "364f13717fe23dfec546795f1f080620c88bb6aed36673bdfc9d151c7fd969c5"
+    },
+    {
+      "path": "screenshots/COMPARE-instant-1920.png",
+      "bytes": 873156,
+      "sha256": "4ac47423763fac7aec83adbbcba2809c2783e7e3b70fc36530e180cceace65b2"
+    },
+    {
+      "path": "screenshots/COMPARE-pro-1366.png",
+      "bytes": 172457,
+      "sha256": "8b84b4b2649e1542897b91090fa02a5db194956e7dc99df416ade99bc2571e11"
+    },
+    {
+      "path": "screenshots/COMPARE-pro-1920.png",
+      "bytes": 206156,
+      "sha256": "49c3c6286683f572769d5f2fed2fe2651276470e1e2c10489c0c47b86377f836"
+    },
+    {
+      "path": "screenshots/COMPARE-simple-1366.png",
+      "bytes": 145351,
+      "sha256": "94a52db8063ac44c45ccda3b3498d4890056dba620e47a29539c66a6c2e2c13c"
+    },
+    {
+      "path": "screenshots/COMPARE-simple-1920.png",
+      "bytes": 174434,
+      "sha256": "732a619bc74f4eb6c5f6c76704cd758134bd46674dc15c70423f97df4f329daf"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-closure-developed-1366.png",
+      "bytes": 238740,
+      "sha256": "c69d410dde3541ba3688fe259d09e59b9f1ddaf995fae66bc9f6e7e5b4029a6e"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-closure-developed-1920.png",
+      "bytes": 360723,
+      "sha256": "9c0037fc6087e51a27b6c9ff098d3e6b708b2618d8a1321ecb348d10482f2a27"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-closure-instant-1366.png",
+      "bytes": 281817,
+      "sha256": "e5dd45f11729347c172db3eb95d40886d575aecbebc20cd919c04dfae22af70a"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-closure-instant-1920.png",
+      "bytes": 451127,
+      "sha256": "a9c8c1226afdfbc3144887bed2515ebd14458538ba425c938fdd1851a5356223"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-closure-pro-1366.png",
+      "bytes": 135283,
+      "sha256": "2b20c1c56793b2819d09f8e57fd5a108495fb7f45e16eddee3490fd5244c94e0"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-closure-pro-1920.png",
+      "bytes": 240811,
+      "sha256": "2c9a0ef0fcaacb28dad440e4068cb713553c6ae46a1d0fee6160536d723d8223"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-closure-simple-1366.png",
+      "bytes": 136810,
+      "sha256": "eb9041ab8b38e8821d4a29c0cb2ceb38ea9c81a9212f733c422d4aaa819e287b"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-closure-simple-1920.png",
+      "bytes": 167155,
+      "sha256": "a836cccebbcc942bc834d12b063dcae20a771dada9f7b8c043b13cbcb699eec0"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-hosted-instant-1366.png",
+      "bytes": 274615,
+      "sha256": "a745120d75394ba73ff673c7cc3192a0d48b263ec19a5c7e862a22b62a46842e"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-hosted-instant-1920.png",
+      "bytes": 435296,
+      "sha256": "bcc41246297a839033c70034c445dcbd747cd102ed24b5257b33606a020563d2"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-hosted-pro-1366.png",
+      "bytes": 168121,
+      "sha256": "5953dd8630f91bf702db75978859de80f5f2471be9663ab6badb13048bb82829"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-hosted-pro-1920.png",
+      "bytes": 247862,
+      "sha256": "8f39cba6dae2a5d8858ddd4ca9ae1aed25406129c5b11d4dac9bd9ecb56a409d"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-hosted-simple-1366.png",
+      "bytes": 198363,
+      "sha256": "cf1eecfd6d0230460b8c2b990335c216cb51ba102f27f945df8934bd957f2989"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-hosted-simple-1920.png",
+      "bytes": 253666,
+      "sha256": "e075020cbaf45b77739f4d6ff207d1926b21b5c5ab0a8fe16b9665a96a644bef"
+    },
+    {
+      "path": "test-results/FinalPublishedCore.trx",
+      "bytes": 41748,
+      "sha256": "18d395c8daa4057e2e2101f6f9f68594ed514323147df4a1d2bff8b3d149d66a"
+    },
+    {
+      "path": "test-results/FinalPublishedHost.trx",
+      "bytes": 2645,
+      "sha256": "02b61cfae824e41a8bab4d8061b5df41b2354aa9dada5dc096622da14624a9de"
+    },
+    {
+      "path": "test-results/FinalPublishedIndependent.trx",
+      "bytes": 3927,
+      "sha256": "1255666cf863a4b1235e5cd666047d742871e54ecece4c9d1f475b105b95775b"
+    },
+    {
+      "path": "test-results/FinalPublishedWorkflow.trx",
+      "bytes": 19514,
+      "sha256": "0400f261ebe880cc2c8477752f4bb6b97a2462ffa123ee6c7da27e4a6cbae226"
+    },
+    {
+      "path": "TEST_SUMMARY.json",
+      "bytes": 7089,
+      "sha256": "82e5069ad253b08f6b011ed9e5b212df28ca5a34bd7c1c07b6a0c52e0fd92329"
+    },
+    {
+      "path": "ZIP_IDENTITY.json",
+      "bytes": 507,
+      "sha256": "9849e6ecbdeeb59f5c2edc409591c6b81cf6d9be6412c31f35b2d59db977ade1"
+    }
+  ]
+}

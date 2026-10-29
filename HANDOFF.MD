@@ -5,6 +5,7 @@
 - 大图先测旧版再优化：CompanyRAW TNAN8886.CR3全尺寸5496×3670；8串行/分支/双混合。旧全结果缓存预算拒绝full，旧rowband作全尺寸像素oracle。现在最后消费者释放+精确长度graph局部buffer复用/账本/返回结果Dispose，生产预览每worker复用行带。最终与旧rowband/原预览hash一致；20MP取消2次/重复full2次账本0；不降最终尺寸/位深。Sony ARW当前LibRaw拒绝，明确未覆盖。
 - A/B自动/离屏集合通过后才进入独立色彩阶段：可选“风格近似·彩色V1/黑白V1”，非相机实测。替换V3 tone，不叠旧tone/Womb/旧色偏；冻结完整模型JSON、版本/hash/data hash，Candidate内版本4使旧读取器拒绝误解释，外层仍用现有V3链。旧无组件保持原值；SX70/实验相纸不强配专用模型。
 - AI/修复仿制/扭曲/纹理笔刷继续留后续；16bit/float真实配对工具仍未改。本轮完整应用/策划15/教程退役保留，WholeAppDiagnosticBuild=true、PhotographerTrialBuild=false，CMD隔离根，不Setup。ComputerUse/Browser/WebView/CDP继续禁止；离屏、独立testhost、OS启动、实机验收分开。
+- 产品源码674aaa1887a03173e439d593e505a95d26a22139；完整包E:/Kitao-Deliveries/r54-closure-20261029/Guangjing-R54-Closure-Diagnostic-win-x64.zip，CMD在同名目录。最终发布DLL绑定Core30/WPF13/独立2/完整宿主1全部PASS，非全量/非原生。包hash见ZIP_IDENTITY，诊断PARTIAL不发行。
 - 源SHA/包/测试/对照/性能与剩余见docs/validation/r54-closure-20261029/FINAL_REPORT.md，未用旧报告数量冒充新验收。
 
 ## 2026-10-28 R5.4 节点系统实施入口（Europe/Berlin）
