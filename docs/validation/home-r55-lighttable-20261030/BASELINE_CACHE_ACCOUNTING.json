@@ -1,0 +1,22 @@
+{
+  "cold": {
+    "loaded": 94,
+    "failed": 6,
+    "bytes": 21947816,
+    "hashReads": 100,
+    "decodeCount": 100,
+    "active": 0,
+    "peakActive": 1
+  },
+  "warm": {
+    "loaded": 94,
+    "failed": 6,
+    "bytes": 21947816,
+    "hashReads": 100,
+    "decodeCount": 106,
+    "active": 0,
+    "peakActive": 1
+  },
+  "releasedBytes": 0,
+  "scope": "separate sequential cache accounting; not additional timed P95 sample"
+}

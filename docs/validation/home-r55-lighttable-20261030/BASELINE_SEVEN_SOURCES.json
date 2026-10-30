@@ -1,0 +1,90 @@
+[
+  {
+    "sourceSha256": "B7B326DE857806C67DEA0F346605D3A4725053F633429110A22415CEB70EDF18",
+    "status": "FAILED",
+    "type": "RAWSelectionAssistant.Core.Services.RawToJpeg.RawDecodeException",
+    "message": "The RAW file could not be decoded safely.",
+    "stage": "OpenFile",
+    "nativeCode": -2,
+    "nativeName": "FileUnsupported",
+    "required": null,
+    "available": null,
+    "elapsedMs": 1.0617,
+    "sourceName": "RAW_SIGMA_DP1.X3F"
+  },
+  {
+    "sourceSha256": "C4C4617DC7035B9D8C53C766A1B674F0135C23CEC4D3F1C49C6744870CF0AA6D",
+    "status": "DECODED",
+    "width": 640,
+    "height": 428,
+    "orientation": 1,
+    "elapsedMs": 1327.5205,
+    "pixelHash": "9F5F4672E28097711861480FDD0767BC4321953B2787A81CED8E619EFC661235",
+    "sourceName": "RAW_LEICA_M240.DNG"
+  },
+  {
+    "sourceSha256": "EA436BA459A7478D7B338428656FAE905469DE269F928749F3388DB2B7B0D53F",
+    "status": "FAILED",
+    "type": "RAWSelectionAssistant.Core.Services.RawToJpeg.RawDecodeException",
+    "message": "The RAW file could not be decoded safely.",
+    "stage": "OpenFile",
+    "nativeCode": -2,
+    "nativeName": "FileUnsupported",
+    "required": null,
+    "available": null,
+    "elapsedMs": 1.0666,
+    "sourceName": "RAW_SIGMA_SD10.X3F"
+  },
+  {
+    "sourceSha256": "5B9512853384CEEA810720DD6F786B7ED23FB5A64D141FF0BF993B499D4DF16A",
+    "status": "FAILED",
+    "type": "RAWSelectionAssistant.Core.Services.RawToJpeg.RawDecodeException",
+    "message": "The RAW file could not be decoded safely.",
+    "stage": "OpenFile",
+    "nativeCode": -2,
+    "nativeName": "FileUnsupported",
+    "required": null,
+    "available": null,
+    "elapsedMs": 0.7019,
+    "sourceName": "RAW_SIGMA_SD14.X3F"
+  },
+  {
+    "sourceSha256": "9FAED9EFE3BB53F34534B487DA3045F01D58935F7377450097B6063947964109",
+    "status": "FAILED",
+    "type": "RAWSelectionAssistant.Core.Services.RawToJpeg.RawDecodeException",
+    "message": "The RAW file could not be decoded safely.",
+    "stage": "OpenFile",
+    "nativeCode": -2,
+    "nativeName": "FileUnsupported",
+    "required": null,
+    "available": null,
+    "elapsedMs": 0.5131,
+    "sourceName": "RAW_SIGMA_SD9_SRGB.X3F"
+  },
+  {
+    "sourceSha256": "DC667EFC0C9314124C95C2B9D67A5BA9E6C372F77A9BBEA81CAE559E3A99436F",
+    "status": "FAILED",
+    "type": "RAWSelectionAssistant.Core.Services.RawToJpeg.RawDecodeException",
+    "message": "The RAW file could not be decoded safely.",
+    "stage": "OpenFile",
+    "nativeCode": -2,
+    "nativeName": "FileUnsupported",
+    "required": null,
+    "available": null,
+    "elapsedMs": 0.7448,
+    "sourceName": "RAW_SIGMA_DP1S.X3F"
+  },
+  {
+    "sourceSha256": "151B4411058B768ADC69183EDD11656A4224CA03D3A118442CFA692986FB4754",
+    "status": "FAILED",
+    "type": "RAWSelectionAssistant.Core.Services.RawToJpeg.RawDecodeException",
+    "message": "The RAW file could not be decoded safely.",
+    "stage": "OpenFile",
+    "nativeCode": -2,
+    "nativeName": "FileUnsupported",
+    "required": null,
+    "available": null,
+    "elapsedMs": 1.0266,
+    "sourceName": "RAW_POLAROID_X530.X3F"
+  }
+]

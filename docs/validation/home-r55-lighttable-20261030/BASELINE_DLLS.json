@@ -1,0 +1,222 @@
+{
+  "ref": "b1443ed4263dee08e31f3602425833522c481d00",
+  "product": "e0ff14ab57316fe47d112743f56add7d6ba26e0e",
+  "dlls": [
+    {
+      "name": "ComputeSharp.Core.dll",
+      "sha256": "4678a441386fc3d58a32756ca456db9a526ad672967d885a209523132273fd25"
+    },
+    {
+      "name": "ComputeSharp.dll",
+      "sha256": "c06fb300af75cb12e41875ca00ea176f1ca1be0b697b741f6c9606a3f2d65240"
+    },
+    {
+      "name": "DocumentFormat.OpenXml.dll",
+      "sha256": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499"
+    },
+    {
+      "name": "DocumentFormat.OpenXml.Framework.dll",
+      "sha256": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae"
+    },
+    {
+      "name": "KitaoPhotoSelector.dll",
+      "sha256": "f365ff19ce227c59a79520923ea5208ccbeb22c4953b809bfdbe21cd07c2c753"
+    },
+    {
+      "name": "MetadataExtractor.dll",
+      "sha256": "2d4d43f4f10b0655fafc3a145dbd4dcc79d81459335bb4d8a324ce2aed2f9ec8"
+    },
+    {
+      "name": "Microsoft.ApplicationInsights.dll",
+      "sha256": "bf9a4b88c7f94267e1cc7ed0700c575d3eb3266ff25bcb76e4f40f1b0fba022d"
+    },
+    {
+      "name": "Microsoft.CodeCoverage.Core.dll",
+      "sha256": "8b6d59f6b45b5e6a57cf8e1a17c0dea5862b5b9acd96a302d270b0752174be5f"
+    },
+    {
+      "name": "Microsoft.CodeCoverage.Instrumentation.Core.dll",
+      "sha256": "844965bac853b428893fa57d514173d8689b35f56c235bb64e4ce433c2b26b5a"
+    },
+    {
+      "name": "Microsoft.CodeCoverage.Instrumentation.dll",
+      "sha256": "3f8af376782800c41334097c0100de2e004ba6a123c32ecb81c6aa9df103c098"
+    },
+    {
+      "name": "Microsoft.CodeCoverage.Interprocess.dll",
+      "sha256": "982de5348fd17ff67d482d0ddef6db8895e3c598ddb283763f66ddd95025a2a7"
+    },
+    {
+      "name": "Microsoft.Data.Sqlite.dll",
+      "sha256": "1078d41c6c0f2cee48a8b706e3a54ce145705993f19f703d2b3bdf2abcc59088"
+    },
+    {
+      "name": "Microsoft.DiaSymReader.dll",
+      "sha256": "7f3e7543321ff4c2675b94e56a4a32c935c11c82fcc60d4f6cb611cb0a8daadc"
+    },
+    {
+      "name": "Microsoft.Extensions.DependencyModel.dll",
+      "sha256": "d27fa791e0802610e490a8c8463d1ff67b1c22dc1e8881caf796e33a5445c296"
+    },
+    {
+      "name": "Microsoft.Testing.Extensions.CodeCoverage.dll",
+      "sha256": "a8d0b645aad42226792f35663c5a31e891c1f5e682b32561bfd9f395cf16c13d"
+    },
+    {
+      "name": "Microsoft.Testing.Extensions.MSBuild.dll",
+      "sha256": "fd00f5c1d9a69a829bf0d1113e57c45ed22dccebc38d141401460de1a6520951"
+    },
+    {
+      "name": "Microsoft.Testing.Extensions.Telemetry.dll",
+      "sha256": "26bdc093a035a6a2c12e09f7a94b1254890d952a1d74acfe7e79b0dfe0dcd629"
+    },
+    {
+      "name": "Microsoft.Testing.Extensions.TrxReport.Abstractions.dll",
+      "sha256": "c494aef3f8dd15a5b1f06e2a48c5b4dcec46dfe875592afd4c4c21a2e8c35fda"
+    },
+    {
+      "name": "Microsoft.Testing.Extensions.TrxReport.dll",
+      "sha256": "f91f087b4d33b867e8523d2bc7f6e976a63f03bf00f71d020495e56151ab4925"
+    },
+    {
+      "name": "Microsoft.Testing.Extensions.VSTestBridge.dll",
+      "sha256": "98face2d814a8572f799ece9178d4cd7670fa460b2358733448a3d8d59514a15"
+    },
+    {
+      "name": "Microsoft.Testing.Platform.dll",
+      "sha256": "5abfa3a247a47742896b6658af023fb552df5f8bd744c2e4c07c9b3b2ec50f55"
+    },
+    {
+      "name": "Microsoft.TestPlatform.AdapterUtilities.dll",
+      "sha256": "aed117f52f34ed2f0e71e05774f6b60b93c5391c4a0390682ab088f7486b744f"
+    },
+    {
+      "name": "Microsoft.TestPlatform.CommunicationUtilities.dll",
+      "sha256": "2eba928c1770209f1fd9f515603a0b4ffbfcadf816681ab36d02b9b36417ab33"
+    },
+    {
+      "name": "Microsoft.TestPlatform.CoreUtilities.dll",
+      "sha256": "7837f9df4b11a9844143fc9419e5752bdd50305436adcbf84f82b8a52d5909d7"
+    },
+    {
+      "name": "Microsoft.TestPlatform.CrossPlatEngine.dll",
+      "sha256": "2f3b463a227b8f30171f8720164b3c0b90451248e0b2f3e8c3da82c23a3fdfcd"
+    },
+    {
+      "name": "Microsoft.TestPlatform.PlatformAbstractions.dll",
+      "sha256": "668c7f0df2c30feac9cea9dce808ccabb72ff575c1e820404124212b4eae1773"
+    },
+    {
+      "name": "Microsoft.TestPlatform.Utilities.dll",
+      "sha256": "886ef3ab15251e57ca9c124e41de3c43ba0520a036b876bb709ed325438501fe"
+    },
+    {
+      "name": "Microsoft.VisualStudio.CodeCoverage.Shim.dll",
+      "sha256": "b8fee6551122d33c2e9a680c407c36cebb8dc0b7703b9c86649f3cb488027a42"
+    },
+    {
+      "name": "Microsoft.VisualStudio.TestPlatform.Common.dll",
+      "sha256": "96d7b2a7e3f79133e17196fdad189486b59852379385198b5cd857e9947164fb"
+    },
+    {
+      "name": "Microsoft.VisualStudio.TestPlatform.ObjectModel.dll",
+      "sha256": "f6d6bc01a85fd68a0599533fcc0de7357922051bad90012b8ad15de31a4ef5e9"
+    },
+    {
+      "name": "Microsoft.Windows.SDK.NET.dll",
+      "sha256": "0ec371d93798852e36461c8adddbeadce0f963a04752f0b64e54fe19c1c834a7"
+    },
+    {
+      "name": "Mono.Cecil.dll",
+      "sha256": "2f78ca2b29dda82c51a6967d0d3d624173e6e044a93de2c0605e3895dc7b1cb8"
+    },
+    {
+      "name": "Mono.Cecil.Mdb.dll",
+      "sha256": "82b7ec80d250e667af9adc1a5fcb5f1d5c018a09af92024dcea1817ff651e7d3"
+    },
+    {
+      "name": "Mono.Cecil.Pdb.dll",
+      "sha256": "a89aabd0f0c558a060bfb5ab1e1531bb338b047c3421cadfe6d1ad8dbf6bfe00"
+    },
+    {
+      "name": "Mono.Cecil.Rocks.dll",
+      "sha256": "426511638ba8c92b204cd60a4d420ca0208c3d120df0d8791c87bfff6a3d4226"
+    },
+    {
+      "name": "MSTest.TestAdapter.dll",
+      "sha256": "2fd45dfccddd574ae6575cf4c7cb417016969102edcce1f748ff6215c06524b5"
+    },
+    {
+      "name": "MSTest.TestFramework.dll",
+      "sha256": "fe69471d7c7025c6851317a38498c42880c93cd0b6e0340a4deee3afc41d133b"
+    },
+    {
+      "name": "MSTest.TestFramework.Extensions.dll",
+      "sha256": "901b7f0571cb0cc37171b41ccfad9e005296d7c1f9cc0fbcce99684af0b1dc51"
+    },
+    {
+      "name": "MSTestAdapter.PlatformServices.dll",
+      "sha256": "d9188b0b49a9ff4a494b2c211dfeda2de3182e0ed2e9408a423b401c0bce5fd2"
+    },
+    {
+      "name": "Newtonsoft.Json.dll",
+      "sha256": "22c649f75fce5be7c7ccda8880473b634ef69ecf33f5d1ab8ad892caf47d5a07"
+    },
+    {
+      "name": "PixelTart.Kernel.dll",
+      "sha256": "e565dc120c1dfeb19660b7f3fcdfdfe616a7bec4a4cece7c2e8cf1824bf9ae83"
+    },
+    {
+      "name": "PixelTart.MatchV4.Dx12.dll",
+      "sha256": "133e2438e6502e90c5338774f28d77c808cbec1c0b901a3c8dc19da569175267"
+    },
+    {
+      "name": "PixelTart.Modules.AssetLibrary.dll",
+      "sha256": "9ecc1006b1006cc97ed6debc6a1fd8fdb8f904dfcf1d37052c183740122dfe65"
+    },
+    {
+      "name": "PixelTart.Modules.OnlineSelection.dll",
+      "sha256": "cd5dbc0ad5f2140d5e3e06809bd3124c95e6d3fdcc74a32d033fa588d71b03bb"
+    },
+    {
+      "name": "PixelTart.Modules.RawTool.dll",
+      "sha256": "5482613f05d72ec70bf99afd99fdc8ad1a60c46508a4998a27a864981f78a7c1"
+    },
+    {
+      "name": "RAWSelectionAssistant.Core.dll",
+      "sha256": "bfff494a37a9e9fece8506b0d0cfbafc82f8e7e394ffef678de71806739bc630"
+    },
+    {
+      "name": "RAWSelectionAssistant.WpfTests.dll",
+      "sha256": "ae787f0fb0a30e5257e50feaa7c9c2a71116a74d4cae832b097bdc30897ea025"
+    },
+    {
+      "name": "Sdcb.LibRaw.dll",
+      "sha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3"
+    },
+    {
+      "name": "SQLitePCLRaw.batteries_v2.dll",
+      "sha256": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b"
+    },
+    {
+      "name": "SQLitePCLRaw.core.dll",
+      "sha256": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84"
+    },
+    {
+      "name": "SQLitePCLRaw.provider.e_sqlite3.dll",
+      "sha256": "eb6696e55882c3000333146b1cd4970439601e11fdedae941105ca921f615bd6"
+    },
+    {
+      "name": "testhost.dll",
+      "sha256": "f9f95f20f7a99215b50cfd511085b31549b26f87afaeb02c0a3c21f6875817e8"
+    },
+    {
+      "name": "WinRT.Runtime.dll",
+      "sha256": "bcf3a14e8712a90837fc5c0d8c8a24696af2bd7f74e9767597ec81ededfb23db"
+    },
+    {
+      "name": "XmpCore.dll",
+      "sha256": "e88feb22528a78b294b6cfd9390b8ce8a5b27db025ff976799df2322bde51b58"
+    }
+  ]
+}

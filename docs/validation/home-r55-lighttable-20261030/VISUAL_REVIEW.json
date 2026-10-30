@@ -1,0 +1,193 @@
+{
+  "scope": "22 full host + 8 production control synthetic screenshots; 1366/1920 DIP",
+  "reference": "docs/design/r55/R55-final.zip (global/ch10/01/15/16; ch9 nodes; other R5.3)",
+  "notClaimed": [
+    "physical mouse",
+    "physical DPI",
+    "ACM",
+    "HDR",
+    "pixel-perfect full design signoff"
+  ],
+  "screenshots": [
+    {
+      "file": "screenshots/OFFSCREEN-hosted-instant-1366.png",
+      "sha256": "d20330a84c2db23d77f63950cfaa85f2a348469f43e60e37680c349033da9460",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-hosted-instant-1920.png",
+      "sha256": "1c451f2f56efe134e3731c8f425e345978193838db7d8a7078b14a7af164b402",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-hosted-pro-1366.png",
+      "sha256": "5fc7f7040ee401e26140dff8d155c3bbf74e6156fe7fe47b77d27ee2dc3ff7bf",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-hosted-pro-1920.png",
+      "sha256": "531d57fe5db51d8f9a27f11a2371d559fd4f0d76cc866faaf88438964307f5b3",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-hosted-simple-1366.png",
+      "sha256": "b1fa52df6f122327dbe6b07c2b041f0b64c2b34bdd8b723135da264d28355465",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-hosted-simple-1920.png",
+      "sha256": "c7b806243ff29c030a6a68d39094b0dc4f743a2b7211187a893f003865391ea9",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-owned-portrait-loupe-1366.png",
+      "sha256": "0784fc7c84a8bb87973957b474976411d2060ce89a122fad7171359b67499cbe",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收；圆镜为代理有效细节，非物理光学/原图ROI"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-owned-portrait-loupe-1920.png",
+      "sha256": "99b72e29be0ad33c1a5bf314949c1e518c2c45494d83438a78726ebf647dc149",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收；圆镜为代理有效细节，非物理光学/原图ROI"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-owned-slide-paused-1366.png",
+      "sha256": "d64504652cd14c4a816ffce81486cd4eb57fb1882c58fc2f4fb82355134c14b0",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-owned-slide-paused-1920.png",
+      "sha256": "facd3ca21d325211009476624c66f56364e07179dc5c4aa19c9ec0d104156a7c",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-compare-1366.png",
+      "sha256": "4cee8e8120d768c65f99e49ca562defb887d88f92229e7bf21a18a78ad62feb3",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收；旧返回图标与头部文字贴近，保留美术余项"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-compare-1920.png",
+      "sha256": "f70168f556fe2da48234490f5aad6d37854020a2bb41e7858721485432ae9b70",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收；旧返回图标与头部文字贴近，保留美术余项"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-detail-1366.png",
+      "sha256": "0c379e1a98a3c09745f202a6b76eede12df66a216bc4b2f8ea869f4cfe89edb1",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收；旧返回图标与头部文字贴近，保留美术余项"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-detail-1920.png",
+      "sha256": "7d50ecb289157091686d399ed3e22b770cd28857d5d2497301f3843b176e996c",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收；旧返回图标与头部文字贴近，保留美术余项"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-film-1366.png",
+      "sha256": "2419e9b3eda54ee7cf42e5b87b461d89bdf715332fad3ff558fba4a0cb0fcabc",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-film-1920.png",
+      "sha256": "68524850b998f824f9c1223da2341f7143953bc81e3d4d756b864727ba12fc5b",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-info-1366.png",
+      "sha256": "69e8a9617eaae2a7a83806788eadd4a901e64f8e23310f556cd8bebe20fade07",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-info-1920.png",
+      "sha256": "8bea7a504c01cfc6eed5cf02fdc2cf96e77789def6285085277b3fb4c6823a43",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-lit-1366.png",
+      "sha256": "931f7c5b79a7138484dab0559d9f090e0bd3839d48c0e9197e0e818f63447368",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-lit-1920.png",
+      "sha256": "e3705beaa68b79af4d0cd29bb13c7c08d5bbd2e66a96cf7abdc853a737c3c55f",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-loupe-1366.png",
+      "sha256": "d5e73e2c02f27a88047bbf777a51771ee239e23a1e2ac722c64c70c21dd2b932",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收；圆镜为代理有效细节，非物理光学/原图ROI"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-loupe-1920.png",
+      "sha256": "dbb927b30af65fce242fed711626c9c531e987ba2fda411a4bc0d241126d0b21",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收；圆镜为代理有效细节，非物理光学/原图ROI"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-stage-summary-1366.png",
+      "sha256": "74cbe7442b6a4a70addb78a9dc91443c20c930069d713400ac5efa6fc5dfcf95",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收；显影只读流程投影，不再执行一次滤镜"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-stage-summary-1920.png",
+      "sha256": "bbee9729717ce8373d6ac82ce8a89bfafc02e14efbe0022866cd9c6675ff0c71",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收；显影只读流程投影，不再执行一次滤镜"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-unlit-1366.png",
+      "sha256": "92932b7bfe6090f52fb29245d14ff92077e1aa7928830bf516f306459c39a0b8",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-r55-host-unlit-1920.png",
+      "sha256": "0314e219c71f0f70283b644c04aeb7144caf0ec0453dd682502362bc1dfc1cce",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-task-running-1366.png",
+      "sha256": "392810c1876d908628f799587a4c8fc3a031c660aa930516973bef9957ce5d82",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-task-running-1920.png",
+      "sha256": "aec029ac0a7bdc1920bc02af119119dc05a99f48140c2aae2d88f601b61bf178",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-task-success-1366.png",
+      "sha256": "356b34c5f471bbf96c8ab50a8e378ff225efe8793b4d3a231e7d5bf52d7dd277",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    },
+    {
+      "file": "screenshots/OFFSCREEN-task-success-1920.png",
+      "sha256": "e15a326e927a590660f4d6c90148721257fe5392d182e888a72bc12641ef9f87",
+      "openedIndividually": true,
+      "review": "生产控件逐张打开；照片/文字/选框分层、内容未裁切；OFFSCREEN，不是实机验收"
+    }
+  ]
+}

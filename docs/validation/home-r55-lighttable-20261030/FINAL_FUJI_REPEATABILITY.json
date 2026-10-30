@@ -1,0 +1,42 @@
+[
+  {
+    "name": "DSCF0347.RAF",
+    "sourceHash": "52D054ED9A90306DB0B7EB5D6C408A2E006532B976AC88ED792692F9F744E865",
+    "hashes": [
+      "3A643DF0BAAC382E0DDE928CA20913772EDCACD08D77A938050D18BEF1DB9E5B",
+      "C96E6D243229D0647273184B587FAFE76F3659E65B9FEFFD819203EE8B674234",
+      "1362949198746879780E94397BD7791173DD0C7004B10EA3A4DDA09516DA3F78"
+    ],
+    "firstPair": {
+      "different": 231,
+      "max16": 4794,
+      "mean16": 0.6365228200393233
+    },
+    "secondPair": {
+      "different": 132,
+      "max16": 2672,
+      "mean16": 0.3434808851916262
+    },
+    "scope": "same native product decoder repeated 3 times; unchanged mathematical settings; no UI or cache transform"
+  },
+  {
+    "name": "DSCF0370.RAF",
+    "sourceHash": "7D82D011ED47CC8859988A562EA693BE8A28A1770C652A8CAE520D086ABB65A2",
+    "hashes": [
+      "B99C86D759A16443842194C6922595BB10B06B6DD5841A3501937BF416DFB32D",
+      "90B73BAC1726EA4D41CB386EABF827CA58AA5ED144C465C457A163AE7115AC9C",
+      "F70A760FA511CB72106C655820103685BEC4CA9AB9543C9577ABD904D8E20F08"
+    ],
+    "firstPair": {
+      "different": 69,
+      "max16": 1600,
+      "mean16": 0.18937913476881152
+    },
+    "secondPair": {
+      "different": 49,
+      "max16": 1607,
+      "mean16": 0.10350144324721659
+    },
+    "scope": "same native product decoder repeated 3 times; unchanged mathematical settings; no UI or cache transform"
+  }
+]

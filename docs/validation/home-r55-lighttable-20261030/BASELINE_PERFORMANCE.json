@@ -1,0 +1,96 @@
+[
+  {
+    "count": 10,
+    "loaded": 10,
+    "initialLayoutMs": 237.4321,
+    "firstVmMs": 741.2188,
+    "firstActualControlRenderMs": 769.1997,
+    "allCompleteWithControlMs": 6817.4035,
+    "warmRefreshAndLayoutMs": 46.123,
+    "actualFinalRenderMs": 38.2275,
+    "realized": 10,
+    "controls": 158,
+    "peakSampledWorkingSet": 523812864,
+    "peakSampledPrivate": 437035008,
+    "peakSampledManaged": 36706128,
+    "notificationsCold": {
+      "ViewingFrames": 11,
+      "ViewingFailures": 10,
+      "ViewingStatus": 10
+    },
+    "notificationsTotal": {
+      "ViewingFrames": 35,
+      "ViewingFailures": 32,
+      "ViewingStatus": 33,
+      "Layout": 8,
+      "R53SaveStatus": 8,
+      "ViewingTable": 8,
+      "LayerThumbnailContext": 1,
+      "SceneExposureMaskPreview": 1,
+      "R53CompareFrames": 1,
+      "ComparisonStatus": 1
+    },
+    "interactions": [
+      {
+        "VariantId": "abbfd48a-9423-aff5-052b-988e1cae4420",
+        "fourPlacementAndLayoutMs": 9.6558
+      },
+      {
+        "VariantId": "c0f35184-a034-29dc-b9c0-a2e5307cdabd",
+        "fourPlacementAndLayoutMs": 9.3556
+      }
+    ],
+    "cancelCommandMs": 59.7099,
+    "cancelRetirementMs": 59.7107,
+    "scope": "same household 100 natural source list; actual WPF RenderTargetBitmap; no native mouse/DPI",
+    "failureCount": 0,
+    "manifestSha256": "06532622f84b163951407056b5c4033e6b45ff0c2c28307a21c74551c78e6903",
+    "localRawEvidenceSha256": "e9820b281f0039bf6916fbc5f31c90b2cc0d44fcd54e13024e235b5fa4fb9f55",
+    "privacy": "Raw file paths, snapshot and natural photo images retained locally, not in Git"
+  },
+  {
+    "count": 100,
+    "loaded": 94,
+    "initialLayoutMs": 22.9734,
+    "firstVmMs": 566.4583,
+    "firstActualControlRenderMs": 609.9487,
+    "allCompleteWithControlMs": 64804.7575,
+    "warmRefreshAndLayoutMs": 366.3358,
+    "actualFinalRenderMs": 56.9097,
+    "realized": 30,
+    "controls": 258,
+    "peakSampledWorkingSet": 869371904,
+    "peakSampledPrivate": 852213760,
+    "peakSampledManaged": 43854872,
+    "notificationsCold": {
+      "ViewingFrames": 101,
+      "ViewingFailures": 100,
+      "ViewingStatus": 100
+    },
+    "notificationsTotal": {
+      "ViewingFrames": 304,
+      "ViewingFailures": 301,
+      "ViewingStatus": 302,
+      "Layout": 8,
+      "R53SaveStatus": 8,
+      "ViewingTable": 8
+    },
+    "interactions": [
+      {
+        "VariantId": "abbfd48a-9423-aff5-052b-988e1cae4420",
+        "fourPlacementAndLayoutMs": 19.1489
+      },
+      {
+        "VariantId": "c0f35184-a034-29dc-b9c0-a2e5307cdabd",
+        "fourPlacementAndLayoutMs": 10.6509
+      }
+    ],
+    "cancelCommandMs": 1.8541,
+    "cancelRetirementMs": 400.2415,
+    "scope": "same household 100 natural source list; actual WPF RenderTargetBitmap; no native mouse/DPI",
+    "failureCount": 6,
+    "manifestSha256": "06532622f84b163951407056b5c4033e6b45ff0c2c28307a21c74551c78e6903",
+    "localRawEvidenceSha256": "e9820b281f0039bf6916fbc5f31c90b2cc0d44fcd54e13024e235b5fa4fb9f55",
+    "privacy": "Raw file paths, snapshot and natural photo images retained locally, not in Git"
+  }
+]

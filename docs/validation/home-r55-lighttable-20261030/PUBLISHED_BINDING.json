@@ -1,0 +1,117 @@
+{
+  "productSource": "1ec06eb5edcb0343d8587304e0536b554c3002d1",
+  "testAssemblySha256": "ce0a2da08857a86490b8e45e90f7f717aabf2179a8a93e30dd7bc0d466a63d9e",
+  "sharedDlls": [
+    {
+      "file": "ComputeSharp.Core.dll",
+      "releaseSha256": "4678a441386fc3d58a32756ca456db9a526ad672967d885a209523132273fd25",
+      "boundSha256": "4678a441386fc3d58a32756ca456db9a526ad672967d885a209523132273fd25"
+    },
+    {
+      "file": "ComputeSharp.dll",
+      "releaseSha256": "c06fb300af75cb12e41875ca00ea176f1ca1be0b697b741f6c9606a3f2d65240",
+      "boundSha256": "c06fb300af75cb12e41875ca00ea176f1ca1be0b697b741f6c9606a3f2d65240"
+    },
+    {
+      "file": "DocumentFormat.OpenXml.dll",
+      "releaseSha256": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499",
+      "boundSha256": "ee2a31ff79db570e2eb98ec7513b222f2b8c6bfcb638d66c2cec8255b0bbe499"
+    },
+    {
+      "file": "DocumentFormat.OpenXml.Framework.dll",
+      "releaseSha256": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae",
+      "boundSha256": "ff3ed8318388d84fa5bbc5736df6144ecfa3165c0b95f6b45b5330f463edf7ae"
+    },
+    {
+      "file": "KitaoPhotoSelector.dll",
+      "releaseSha256": "0ed41e35da01d8f25584bd84e51d8f50de2f48e8b326c31c72fed9204a07ced5",
+      "boundSha256": "0ed41e35da01d8f25584bd84e51d8f50de2f48e8b326c31c72fed9204a07ced5"
+    },
+    {
+      "file": "MetadataExtractor.dll",
+      "releaseSha256": "2d4d43f4f10b0655fafc3a145dbd4dcc79d81459335bb4d8a324ce2aed2f9ec8",
+      "boundSha256": "2d4d43f4f10b0655fafc3a145dbd4dcc79d81459335bb4d8a324ce2aed2f9ec8"
+    },
+    {
+      "file": "Microsoft.Data.Sqlite.dll",
+      "releaseSha256": "1078d41c6c0f2cee48a8b706e3a54ce145705993f19f703d2b3bdf2abcc59088",
+      "boundSha256": "1078d41c6c0f2cee48a8b706e3a54ce145705993f19f703d2b3bdf2abcc59088"
+    },
+    {
+      "file": "Microsoft.Windows.SDK.NET.dll",
+      "releaseSha256": "0ec371d93798852e36461c8adddbeadce0f963a04752f0b64e54fe19c1c834a7",
+      "boundSha256": "0ec371d93798852e36461c8adddbeadce0f963a04752f0b64e54fe19c1c834a7"
+    },
+    {
+      "file": "PixelTart.Kernel.dll",
+      "releaseSha256": "1414dd5bce86bb36af27bf414a7ccf97a0e1674605a929423139f3ade827ec37",
+      "boundSha256": "1414dd5bce86bb36af27bf414a7ccf97a0e1674605a929423139f3ade827ec37"
+    },
+    {
+      "file": "PixelTart.MatchV4.Dx12.dll",
+      "releaseSha256": "6d96654da2f235fc6009652563a8093c2c7b3aa60a9a040aba3fa74bbb717820",
+      "boundSha256": "6d96654da2f235fc6009652563a8093c2c7b3aa60a9a040aba3fa74bbb717820"
+    },
+    {
+      "file": "PixelTart.Modules.AssetLibrary.dll",
+      "releaseSha256": "bab8609e48cf751a9a044b9e3ea16dc177966c58f41d493c2e3f108d6013d2c5",
+      "boundSha256": "bab8609e48cf751a9a044b9e3ea16dc177966c58f41d493c2e3f108d6013d2c5"
+    },
+    {
+      "file": "PixelTart.Modules.OnlineSelection.dll",
+      "releaseSha256": "a267336a51967e870252f38e94deb977da220050d627cf5984427e580893e7f1",
+      "boundSha256": "a267336a51967e870252f38e94deb977da220050d627cf5984427e580893e7f1"
+    },
+    {
+      "file": "PixelTart.Modules.RawTool.dll",
+      "releaseSha256": "e4b66bfe94850e86c74ee96b1373f82212ba678bf2a5bcd38b7dd92129369860",
+      "boundSha256": "e4b66bfe94850e86c74ee96b1373f82212ba678bf2a5bcd38b7dd92129369860"
+    },
+    {
+      "file": "RAWSelectionAssistant.Core.dll",
+      "releaseSha256": "ea39dd2fdb8c9592b2a8f0fd285b7c0f3b3e46d4bcc5611aa140073203ff1eb8",
+      "boundSha256": "ea39dd2fdb8c9592b2a8f0fd285b7c0f3b3e46d4bcc5611aa140073203ff1eb8"
+    },
+    {
+      "file": "Sdcb.LibRaw.dll",
+      "releaseSha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3",
+      "boundSha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3"
+    },
+    {
+      "file": "SQLitePCLRaw.batteries_v2.dll",
+      "releaseSha256": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b",
+      "boundSha256": "815ce410c9eab531dd219318e3ba16c5e38e83d361cfbbdbb4bbca222c497b0b"
+    },
+    {
+      "file": "SQLitePCLRaw.core.dll",
+      "releaseSha256": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84",
+      "boundSha256": "af340ac9eb9195795660d7fc1114f486b6ab63998f33176e2f24c8e0acb9aa84"
+    },
+    {
+      "file": "SQLitePCLRaw.provider.e_sqlite3.dll",
+      "releaseSha256": "eb6696e55882c3000333146b1cd4970439601e11fdedae941105ca921f615bd6",
+      "boundSha256": "eb6696e55882c3000333146b1cd4970439601e11fdedae941105ca921f615bd6"
+    },
+    {
+      "file": "WinRT.Runtime.dll",
+      "releaseSha256": "bcf3a14e8712a90837fc5c0d8c8a24696af2bd7f74e9767597ec81ededfb23db",
+      "boundSha256": "bcf3a14e8712a90837fc5c0d8c8a24696af2bd7f74e9767597ec81ededfb23db"
+    },
+    {
+      "file": "XmpCore.dll",
+      "releaseSha256": "e88feb22528a78b294b6cfd9390b8ce8a5b27db025ff976799df2322bde51b58",
+      "boundSha256": "e88feb22528a78b294b6cfd9390b8ce8a5b27db025ff976799df2322bde51b58"
+    }
+  ],
+  "testSupportCommit": "5ceb1c55b19f8bc2f5c40239596e1d3bec25eff5",
+  "currentTestAssemblySha256": "e5d1f6faf896b12082ca84766c49c54112d33c413dbbf7b166e1bc5d230ebf32",
+  "note": "Earlier final-workflow/host used ce0a2da test DLL; current test-support DLL differs only in test evidence/cache accounting. All runs bind identical final published product DLLs.",
+  "coreTestAssemblySha256": "8542b2c070d3f4e58d63f53a4b7d6eafda68ccd9b0e2ef14da7d51bea8d1ddb2",
+  "publishedBuildOptions": {
+    "WholeAppDiagnosticBuild": true,
+    "PhotographerTrialBuild": false,
+    "selfContained": true,
+    "runtime": "win-x64",
+    "IncludeSourceRevisionInInformationalVersion": true
+  }
+}

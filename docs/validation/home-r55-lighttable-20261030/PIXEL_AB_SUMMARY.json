@@ -1,0 +1,30 @@
+{
+  "scope": "Decoded BGRA32 proxy hashes, not image-file container hashes; source identities verified; no private pixels committed",
+  "natural": [
+    {
+      "count": 10,
+      "sameManifest": true,
+      "baselineSuccess": 10,
+      "finalSuccess": 10,
+      "matchingProxyPixelHashes": 10,
+      "differentProxyVariantIds": []
+    },
+    {
+      "count": 100,
+      "sameManifest": true,
+      "baselineSuccess": 94,
+      "finalSuccess": 94,
+      "matchingProxyPixelHashes": 92,
+      "differentProxyVariantIds": [
+        "728402f9-ff99-12f7-01ed-60c3eb9aa398",
+        "a21b36fb-1133-698e-c21a-57606b61842c"
+      ]
+    }
+  ],
+  "ownedProxyAndExportExact": true,
+  "knownDifferentSources": [
+    "DSCF0347.RAF",
+    "DSCF0370.RAF"
+  ],
+  "nativeRepeatability": "Both unchanged company baseline and final decoder repeated 3 times produce variation; not fixed here"
+}
