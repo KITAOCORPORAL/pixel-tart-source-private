@@ -1,0 +1,52 @@
+{
+  "version": "Round5DriverBuildProvenanceV1",
+  "curveProbe": {
+    "sourcePath": "tools/spektralab-research/curve_neighbour_probe.cpp",
+    "sourceSha256": "1965f0c81317680802a07e5c680964a3192d1346c1f5ead136f160dabce4d740",
+    "binarySha256": "5ea7014f4f5a80580c28e95b10efc4b46e24dbe346e20a86a2c2a694b94a4a5b",
+    "compiler": "clang20.1.2 -O3 -DNDEBUG -std=c++20",
+    "link": "original libspektralab_engine.a / libspektralab_core.a / libspk_volk.a",
+    "nativeOrProductSourceModified": false
+  },
+  "decodeTap": {
+    "generator": "tools/spektralab-research/apply_decode_tap.py",
+    "actualSourceSha256": "ae545ca76c6ab3c9a8a547b1136111268ac50627b66e235697a6a3bae4af9712",
+    "reproducedSourceSha256": "ae545ca76c6ab3c9a8a547b1136111268ac50627b66e235697a6a3bae4af9712",
+    "dllSha256": "bc9a9073d7e471024257b6f95260b365eb2a94b58625f301e03d63d925fc06b8",
+    "outputComparedAgainstUntappedLibrary": true
+  },
+  "measuredToolSourceHashes": [
+    {
+      "path": "tools/spektralab-research/apply_decode_tap.py",
+      "sha256": "b375d3f7c29e6a1e864a215631730847d30345e7441035dcf52bf49440916fde"
+    },
+    {
+      "path": "tools/spektralab-research/bt_complete_path.py",
+      "sha256": "938f22824da4acb34fd4b87e78e8b10e1bac4c6187f46bc1f961251203864e7c"
+    },
+    {
+      "path": "tools/spektralab-research/bt_decode_tap.py",
+      "sha256": "8821ee33c0d0a857153a0866455dd5fb35e6646f97f62be5bc4f0a432509d641"
+    },
+    {
+      "path": "tools/spektralab-research/bt_spatial_trace.py",
+      "sha256": "34c739bd49aad12292f0e9409f1453bf389e861841a1fb1e41d8fcb47154ffc4"
+    },
+    {
+      "path": "tools/spektralab-research/curve_minimal_repro.py",
+      "sha256": "53b71e8749e8274eded30735132ab8f440db53358e29f6379dc4ce66e5098efa"
+    },
+    {
+      "path": "tools/spektralab-research/curve_neighbour_probe.cpp",
+      "sha256": "1965f0c81317680802a07e5c680964a3192d1346c1f5ead136f160dabce4d740"
+    },
+    {
+      "path": "tools/spektralab-research/curve_root_cause.py",
+      "sha256": "0141b3075b66179ec577a88c693ba4c092dc946e2f1c7cd734e66cc00a3a9076"
+    },
+    {
+      "path": "tools/spektralab-research/verify_round5.py",
+      "sha256": "4743cb7beea01fdaa9ca9b2b0033da83b54481b62de4e2d18480739a4d20c2fd"
+    }
+  ]
+}

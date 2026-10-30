@@ -1,0 +1,314 @@
+{
+  "version": "BtSpatialPropagationV1",
+  "traceLibrarySha256": "51c7fdd1e0225b632d1329b673cca74349f94f38a74d85ac664440886c94cd17",
+  "cases": [
+    {
+      "film": "kodak_portra_400",
+      "fullOutputTraceExact": true,
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "leftHash": "7900ccc0822353ba606647e6c98a66214b192592be2ff82134501f39defd693c",
+          "rightHash": "892ea374871b9a1a2341a506acdd37f128b8608071adf6cc59b7be04a6324990",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.00030329078435897827,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_boost",
+          "leftHash": "7900ccc0822353ba606647e6c98a66214b192592be2ff82134501f39defd693c",
+          "rightHash": "892ea374871b9a1a2341a506acdd37f128b8608071adf6cc59b7be04a6324990",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.00030329078435897827,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_overscan",
+          "leftHash": "7900ccc0822353ba606647e6c98a66214b192592be2ff82134501f39defd693c",
+          "rightHash": "892ea374871b9a1a2341a506acdd37f128b8608071adf6cc59b7be04a6324990",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.00030329078435897827,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_blurs",
+          "leftHash": "7900ccc0822353ba606647e6c98a66214b192592be2ff82134501f39defd693c",
+          "rightHash": "892ea374871b9a1a2341a506acdd37f128b8608071adf6cc59b7be04a6324990",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.00030329078435897827,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "log_exposure",
+          "leftHash": "1dfa3b4b718690612c825a9e33f88b309ae1baed3782c6ffecc0ef077b724890",
+          "rightHash": "76937ea9a5a1f14de46521642e8100b12f95c09ce6bbed3aac5538bdda861d03",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.0013275146484375,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_curves_exact",
+          "leftHash": "b9fab2842a6dba3ce0a79138402eb81f0e97c5e87db27bfb4432b2621fad186c",
+          "rightHash": "3b04368fb142aa00520aac71dc3520fd26158af166635a917c43843ba1ba264c",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.000842362642288208,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_log_and_curves",
+          "leftHash": "b9fab2842a6dba3ce0a79138402eb81f0e97c5e87db27bfb4432b2621fad186c",
+          "rightHash": "3b04368fb142aa00520aac71dc3520fd26158af166635a917c43843ba1ba264c",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.000842362642288208,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_couplers",
+          "leftHash": "b9fab2842a6dba3ce0a79138402eb81f0e97c5e87db27bfb4432b2621fad186c",
+          "rightHash": "3b04368fb142aa00520aac71dc3520fd26158af166635a917c43843ba1ba264c",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.000842362642288208,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_grain",
+          "leftHash": "b9fab2842a6dba3ce0a79138402eb81f0e97c5e87db27bfb4432b2621fad186c",
+          "rightHash": "3b04368fb142aa00520aac71dc3520fd26158af166635a917c43843ba1ba264c",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.000842362642288208,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "print_spectral",
+          "leftHash": "0cacdeb9b8f2d0ad8def6d582c012a913a4178be08263631888bba6cf7b10a90",
+          "rightHash": "b3baf6f5dadb17ac6b5730c239c61f622ad490a3e6bcd0f6ddce94454803d16d",
+          "changedPixels": 7,
+          "maxAbsFloat": 1.2785196304321289e-05,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "print_glare",
+          "leftHash": "0cacdeb9b8f2d0ad8def6d582c012a913a4178be08263631888bba6cf7b10a90",
+          "rightHash": "b3baf6f5dadb17ac6b5730c239c61f622ad490a3e6bcd0f6ddce94454803d16d",
+          "changedPixels": 7,
+          "maxAbsFloat": 1.2785196304321289e-05,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "print_linear",
+          "leftHash": "1e5ef8ea571bd852804633ec618d2be9a43f7fba61ed7e9ee14f9bf6686620b6",
+          "rightHash": "1562da65672e4a120b27ec0dda3670bb1df63bd39f69514b2d64dd0cb3723654",
+          "changedPixels": 7,
+          "maxAbsFloat": 1.346459612250328e-05,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "print_scan_finish",
+          "leftHash": "b6d0b21fcec997ed4791017eaba409daf4cab80ee70a79adf3470e7729447856",
+          "rightHash": "e8316b7ff11aea1c96a6f209ff9b83255ce0d56cd847c56efe72b3008174f197",
+          "changedPixels": 35,
+          "maxAbsFloat": 1.751817762851715e-05,
+          "changedXColumns": [
+            7,
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "stage": "print_output",
+          "leftHash": "d4fa9d36d481cbf8f67264f847ad23e94307bd04bfe49eb63d9ee2fbe0909828",
+          "rightHash": "870339fadba7cdac8130b9d02f1822c02c0e2e728256d699e26f8342160f53de",
+          "changedPixels": 35,
+          "maxAbsFloat": 0.00014372915029525757,
+          "changedXColumns": [
+            7,
+            8,
+            9,
+            10,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "film": "kodak_ektar_100",
+      "fullOutputTraceExact": true,
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "leftHash": "e71b3ac958d3b47953414d61374484d6102983063457eb2441e03799f5e4af70",
+          "rightHash": "d0128c7ed7ddaf5de866c44bdfd8b3733c084311e85a2b201dd7b8b64e4f4300",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.0003076791763305664,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_boost",
+          "leftHash": "e71b3ac958d3b47953414d61374484d6102983063457eb2441e03799f5e4af70",
+          "rightHash": "d0128c7ed7ddaf5de866c44bdfd8b3733c084311e85a2b201dd7b8b64e4f4300",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.0003076791763305664,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_overscan",
+          "leftHash": "e71b3ac958d3b47953414d61374484d6102983063457eb2441e03799f5e4af70",
+          "rightHash": "d0128c7ed7ddaf5de866c44bdfd8b3733c084311e85a2b201dd7b8b64e4f4300",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.0003076791763305664,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_blurs",
+          "leftHash": "e71b3ac958d3b47953414d61374484d6102983063457eb2441e03799f5e4af70",
+          "rightHash": "d0128c7ed7ddaf5de866c44bdfd8b3733c084311e85a2b201dd7b8b64e4f4300",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.0003076791763305664,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "log_exposure",
+          "leftHash": "82ac195e89347244e652234ab4b0d3a7c579933c53385f33c8ae1836f01f90b4",
+          "rightHash": "81d40a9bd4d3dd1176568f8dd3405ea20f9e4630db753b38cbc33f92bbb03af8",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.0013275742530822754,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_curves_exact",
+          "leftHash": "4bf65cb3ba30470364605aefefaaaf5a02c7b25bf17b756689503b3d8cc4a605",
+          "rightHash": "9be15ce9e5d6eaeb7b1e3abf01b732c508ae84c76b6c705520f95169abaadc80",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.0009110867977142334,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_log_and_curves",
+          "leftHash": "4bf65cb3ba30470364605aefefaaaf5a02c7b25bf17b756689503b3d8cc4a605",
+          "rightHash": "9be15ce9e5d6eaeb7b1e3abf01b732c508ae84c76b6c705520f95169abaadc80",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.0009110867977142334,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_couplers",
+          "leftHash": "4bf65cb3ba30470364605aefefaaaf5a02c7b25bf17b756689503b3d8cc4a605",
+          "rightHash": "9be15ce9e5d6eaeb7b1e3abf01b732c508ae84c76b6c705520f95169abaadc80",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.0009110867977142334,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "film_grain",
+          "leftHash": "4bf65cb3ba30470364605aefefaaaf5a02c7b25bf17b756689503b3d8cc4a605",
+          "rightHash": "9be15ce9e5d6eaeb7b1e3abf01b732c508ae84c76b6c705520f95169abaadc80",
+          "changedPixels": 7,
+          "maxAbsFloat": 0.0009110867977142334,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "print_spectral",
+          "leftHash": "bbef9ecb3b8b8a430b841557fe94b036fd18b6a43830b6c04424cb1762eabdf0",
+          "rightHash": "bb50a9639132d39aa567a56cad345cf50129da413b42a1c107dac0853dbaf6b2",
+          "changedPixels": 7,
+          "maxAbsFloat": 2.9301736503839493e-06,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "print_glare",
+          "leftHash": "bbef9ecb3b8b8a430b841557fe94b036fd18b6a43830b6c04424cb1762eabdf0",
+          "rightHash": "bb50a9639132d39aa567a56cad345cf50129da413b42a1c107dac0853dbaf6b2",
+          "changedPixels": 7,
+          "maxAbsFloat": 2.9301736503839493e-06,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "print_linear",
+          "leftHash": "a25d0f6fb53ae0e81a5fba6ece46ee44ea44ef713335c2e04d7db29752dbe03d",
+          "rightHash": "29355a85c41f826d6e8b63e2448da96db21da203e76bbdba693fc1138cdd625c",
+          "changedPixels": 7,
+          "maxAbsFloat": 3.37185338139534e-06,
+          "changedXColumns": [
+            9
+          ]
+        },
+        {
+          "stage": "print_scan_finish",
+          "leftHash": "25e3b588f5ab23cb7351b3e6be8cb315224ccc1bb0b19bb5f913e99a45b08826",
+          "rightHash": "cffa636cf5ca4c05e633fe545aea07cb9c6af2c12248e7eb8a58359887cad182",
+          "changedPixels": 35,
+          "maxAbsFloat": 4.387460649013519e-06,
+          "changedXColumns": [
+            7,
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "stage": "print_output",
+          "leftHash": "f479f3c4c6b5ea9d20ea806b146b7ef6400d58e31ac7b1973d14f3994a999911",
+          "rightHash": "0aa2793ed7ffde063fa6837d13d5a02d71b175a96033f28fe07364118af9f161",
+          "changedPixels": 35,
+          "maxAbsFloat": 5.533173680305481e-05,
+          "changedXColumns": [
+            7,
+            8,
+            9,
+            10,
+            11
+          ]
+        }
+      ]
+    }
+  ]
+}

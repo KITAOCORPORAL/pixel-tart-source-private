@@ -1,0 +1,328 @@
+{
+  "version": "Round5SealedRerunV1",
+  "main64SourceIdentitiesAndOutputsMatchInitial": true,
+  "caseCount": 64,
+  "newFullRendersAndNewProcessReopens": true,
+  "cases": [
+    {
+      "variant": "original",
+      "case": "709-join-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "709-join-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "709-gradient-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "709-gradient-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "020-join-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "020-join-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "020-gradient-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "020-gradient-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "709-join-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "709-join-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "709-gradient-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "709-gradient-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "020-join-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "020-join-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "020-gradient-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "020-gradient-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "709-join-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "709-join-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "709-gradient-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "709-gradient-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "020-join-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "020-join-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "020-gradient-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "020-gradient-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "709-join-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "709-join-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "709-gradient-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "709-gradient-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "020-join-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "020-join-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "020-gradient-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "020-gradient-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "709-joinheight1-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "709-joinheight1-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "709-saturated-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "709-saturated-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "020-joinheight1-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "020-joinheight1-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "020-saturated-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original",
+      "case": "020-saturated-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "709-joinheight1-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "709-joinheight1-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "709-saturated-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "709-saturated-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "020-joinheight1-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "020-joinheight1-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "020-saturated-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched",
+      "case": "020-saturated-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "709-joinheight1-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "709-joinheight1-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "709-saturated-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "709-saturated-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "020-joinheight1-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "020-joinheight1-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "020-saturated-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "020-saturated-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "709-joinheight1-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "709-joinheight1-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "709-saturated-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "709-saturated-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "020-joinheight1-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "020-joinheight1-kodak_ektar_100",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "020-saturated-kodak_portra_400",
+      "exact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "020-saturated-kodak_ektar_100",
+      "exact": true
+    }
+  ]
+}

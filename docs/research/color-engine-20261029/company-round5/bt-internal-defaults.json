@@ -1,0 +1,41 @@
+{
+  "version": "BtInternalEffectiveDefaultsV1",
+  "sourceCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "sourceFiles": [
+    {
+      "path": "engine/src/core/params.hpp",
+      "sha256": "49b802a8a923c5e2be3087e6ba152220a636d846d550003cfdaa8b7dd9f9e018"
+    },
+    {
+      "path": "engine/src/core/params.cpp",
+      "sha256": "ae083bdbfc1f6d23a4ceffd1ffb79f658e7fcc85476aedac3f18a6434bebe834"
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "sha256": "013104bca52118c78318bcbfd9fd9e104898e6d27606b7c0332cdc86fa8eec62"
+    }
+  ],
+  "publicResolvedFieldCount": 99,
+  "notPublicResolvedFields": {
+    "scanner.unsharp_mask": [
+      0.7,
+      0.7
+    ],
+    "scanner.unsharp_maskUnits": "[full-tier pixels,unitless amount]; scaled by tier_ratio",
+    "print_render.density_curves_morph.active": false
+  },
+  "verification": "Pinned source defaults and selected call branch plus stage-boundary actual propagation; no wire field invented",
+  "settings": {
+    "grain": false,
+    "glare": false,
+    "halation": false,
+    "dir_couplers": false,
+    "auto_exposure": false,
+    "input_cctf_decoding": true,
+    "output_cctf_encoding": true,
+    "scanner_lens_blur": 0,
+    "geometry": "identity",
+    "striped": false
+  },
+  "spatialResidual": "Scanner unsharp is still active at these defaults; grain/glare OFF does not mean all spatial effects OFF"
+}

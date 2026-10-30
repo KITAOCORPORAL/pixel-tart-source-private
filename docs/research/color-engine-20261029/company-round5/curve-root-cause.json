@@ -1,0 +1,3521 @@
+{
+  "version": "CurveRootCauseV1",
+  "resourceModified": false,
+  "candidateFix": "NONE; preserve shipped data",
+  "sourceCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "references": {
+    "numpy": {
+      "version": "2.4.6",
+      "commit": "b832a09cf2a169c833dd2371e7c07aa00b293242",
+      "entry": "numpy.interp; numpy/_core/src/multiarray/compiled_base.c:arr_interp",
+      "license": "BSD-3-Clause"
+    },
+    "scipy": {
+      "version": "1.18.1",
+      "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+      "entry": "scipy.interpolate.make_interp_spline(k=1) BSpline.__call__; scipy.special.ndtr for diagnostic CDF",
+      "license": "BSD-3-Clause"
+    }
+  },
+  "probeSha256": "5ea7014f4f5a80580c28e95b10efc4b46e24dbe346e20a86a2c2a694b94a4a5b",
+  "cases": [
+    {
+      "film": "kodak_portra_400",
+      "profilePath": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\resources-original\\profiles\\kodak_portra_400.json",
+      "profileSha256": "140c49bbff6d7b6589058ce0836e3286fa995e9433bb8a62a0189d6e1a04da9f",
+      "existingTrace": [
+        {
+          "name": "0004-log_exposure-17-1025-3.f32",
+          "sha256": "d86530e11b7a23d46222cacbfa9b96222f5c90ee67765d307bd3cbf05ec245ac"
+        },
+        {
+          "name": "0005-film_curves_exact-17-1025-3.f32",
+          "sha256": "18c0aa2e5cd7064a1b3b9566629faac0c318ea4c3fbf156409e8eb9e6a906935"
+        }
+      ],
+      "queryCount": 534,
+      "querySha256": "64d224f28c1e18b0ce006372c0b0be9c2dce1edbbdcac30f64648664e36ca013",
+      "nativeLocalReportSha256": "d165e4756e0b0ddd400c0119b9abb70fbe6e0cbf755dca6c5fd96cacc906a1be",
+      "rawTable": {
+        "shape": [
+          256,
+          3
+        ],
+        "xStrictlyIncreasing": true,
+        "rangePerChannel": [
+          [
+            -0.000731113838226926,
+            -0.0006521335905529248,
+            -0.0006930420347450416
+          ],
+          [
+            1.9910652656999932,
+            1.7981849371117424,
+            2.1632179044480675
+          ]
+        ],
+        "negativeAdjacentCountPerChannel": [
+          25,
+          21,
+          27
+        ],
+        "maxDownwardStepPerChannel": [
+          -0.00027996010056341447,
+          -0.00023889707429458618,
+          -0.0002774926327946403
+        ],
+        "normalisationPreservesDifferences": true
+      },
+      "referenceErrors": {
+        "rawDoubleNumpyVsScipyMaxAbs": 4.440892098500626e-16,
+        "tableRoundingVsRawDoubleMaxAbs": 1.2121303116785498e-07,
+        "numpyVsScipyMaxAbs": 4.440892098500626e-16,
+        "gpuVsNumpyMaxAbs": 1.2274761740371787e-07,
+        "cpu32VsGpuMaxAbs": 1.1920928955078125e-07,
+        "affectedGpuVsRawDoubleMaxAbs": 7.770906307758702e-10,
+        "affectedGpuVsRoundedTableFloat64MaxAbs": 5.85848527459229e-10,
+        "observedGpuVsOriginalTraceMaxAbs": 0.0,
+        "linearInterpolationOutsideBracketCount": 0
+      },
+      "sublayerDiagnosticOnly": {
+        "summedLayerNegativeStepsPerChannel": [
+          0,
+          0,
+          0
+        ],
+        "layersSumVsCdfMaxAbs": 2.220446049250313e-16,
+        "runtimeWithGrainOffUsesLayers": false
+      },
+      "modelDiagnosticOnly": {
+        "runtimeFilmUsesModel": false,
+        "allAmplitudesPositive": true,
+        "allSigmasPositive": true,
+        "cdfNegativeStepsPerChannel": [
+          0,
+          0,
+          0
+        ],
+        "cppEvaluatorVsScipyNdtrMaxAbs": 4.440892098500626e-16,
+        "sampledTableMinusFittedMaxAbsPerChannel": [
+          0.003981462141037895,
+          0.0035957361195825266,
+          0.004324907114106047
+        ],
+        "notProposedAsFix": true
+      },
+      "affectedOutputNeighbourhoods": [
+        {
+          "outputIndex": 289,
+          "outputChannel": 2,
+          "outputU16": [
+            4306,
+            4305
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.6783347129821777,
+                -2.6728639602661133
+              ],
+              "resourceIndices": [
+                11,
+                12
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 0.0004731854749374507,
+                  "normalisedF32": 0.0012042992748320103
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": 0.0004203584298883801,
+                  "normalisedF32": 0.001151472213678062
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.0002957962657230822,
+                  "normalisedF32": 0.0010269101476296782
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 0.00014168822973908973,
+                  "normalisedF32": 0.0008728020475246012
+                }
+              ],
+              "actualFloat": [
+                0.0010620603570714593,
+                0.0010372361866757274
+              ],
+              "numpyFloat64": [
+                0.0010620605418347022,
+                0.00103723640759973
+              ],
+              "scipyLinearFloat64": [
+                0.001062060541834702,
+                0.00103723640759973
+              ],
+              "deltaActual": -2.4824170395731926e-05,
+              "deltaReference": -2.482413423497221e-05,
+              "deltaRawDoubleTable": -2.4824206210167545e-05,
+              "rawDoubleReference": [
+                0.0010620606891640306,
+                0.001037236482953863
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.6883668899536133,
+                -2.682896137237549
+              ],
+              "resourceIndices": [
+                11,
+                12
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 0.00035736742258051364,
+                  "normalisedF32": 0.001009501051157713
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": 0.0002949252766248387,
+                  "normalisedF32": 0.0009470588411204517
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.00013055465851075933,
+                  "normalisedF32": 0.000782688264735043
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": -4.3263472042436615e-05,
+                  "normalisedF32": 0.0006088701193220913
+                }
+              ],
+              "actualFloat": [
+                0.0008891425677575171,
+                0.0008563848678022623
+              ],
+              "numpyFloat64": [
+                0.000889142689082205,
+                0.0008563850656586647
+              ],
+              "scipyLinearFloat64": [
+                0.0008891426890822048,
+                0.0008563850656586646
+              ],
+              "deltaActual": -3.275769995525479e-05,
+              "deltaReference": -3.275762342354034e-05,
+              "deltaRawDoubleTable": -3.275770091423422e-05,
+              "rawDoubleReference": [
+                0.0008891430428040557,
+                0.0008563853418898214
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.721066951751709,
+                -2.7155959606170654
+              ],
+              "resourceIndices": [
+                10,
+                11
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 9,
+                  "logExposure": -2.7529411764705882,
+                  "rawDensity": 0.00019265507452727372,
+                  "normalisedF32": 0.0008856970816850662
+                },
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 5.860784870626558e-05,
+                  "normalisedF32": 0.0007516499026678503
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": -2.3098961244935986e-05,
+                  "normalisedF32": 0.0006699430523440242
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": -3.533869259165572e-05,
+                  "normalisedF32": 0.000657703320030123
+                }
+              ],
+              "actualFloat": [
+                0.000738484610337764,
+                0.0007222003769129515
+              ],
+              "numpyFloat64": [
+                0.0007384844954815624,
+                0.000722200181191796
+              ],
+              "scipyLinearFloat64": [
+                0.0007384844954815624,
+                0.000722200181191796
+              ],
+              "deltaActual": -1.6284233424812555e-05,
+              "deltaReference": -1.6284314289766394e-05,
+              "deltaRawDoubleTable": -1.6284199197881804e-05,
+              "rawDoubleReference": [
+                0.0007384842631926404,
+                0.0007222000639947586
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 290,
+          "outputChannel": 0,
+          "outputU16": [
+            3260,
+            3259
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.6728639602661133,
+                -2.6673929691314697
+              ],
+              "resourceIndices": [
+                11,
+                13
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 0.0004731854749374507,
+                  "normalisedF32": 0.0012042992748320103
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": 0.0004203584298883801,
+                  "normalisedF32": 0.001151472213678062
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.0002957962657230822,
+                  "normalisedF32": 0.0010269101476296782
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 0.00014168822973908973,
+                  "normalisedF32": 0.0008728020475246012
+                },
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": 3.543238228899582e-06,
+                  "normalisedF32": 0.0007346570491790771
+                }
+              ],
+              "actualFloat": [
+                0.0010372361866757274,
+                0.0010089720599353313
+              ],
+              "numpyFloat64": [
+                0.00103723640759973,
+                0.0010089720493683897
+              ],
+              "scipyLinearFloat64": [
+                0.00103723640759973,
+                0.0010089720493683897
+              ],
+              "deltaActual": -2.8264126740396023e-05,
+              "deltaReference": -2.8264358231340275e-05,
+              "deltaRawDoubleTable": -2.8264397454826062e-05,
+              "rawDoubleReference": [
+                0.001037236482953863,
+                0.001008972085499037
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.682896137237549,
+                -2.6774256229400635
+              ],
+              "resourceIndices": [
+                11,
+                12
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 0.00035736742258051364,
+                  "normalisedF32": 0.001009501051157713
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": 0.0002949252766248387,
+                  "normalisedF32": 0.0009470588411204517
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.00013055465851075933,
+                  "normalisedF32": 0.000782688264735043
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": -4.3263472042436615e-05,
+                  "normalisedF32": 0.0006088701193220913
+                }
+              ],
+              "actualFloat": [
+                0.0008563848678022623,
+                0.0008236286230385303
+              ],
+              "numpyFloat64": [
+                0.0008563850656586647,
+                0.0008236288698313688
+              ],
+              "scipyLinearFloat64": [
+                0.0008563850656586646,
+                0.0008236288698313687
+              ],
+              "deltaActual": -3.2756244763731956e-05,
+              "deltaReference": -3.275619582729589e-05,
+              "deltaRawDoubleTable": -3.275627331461258e-05,
+              "rawDoubleReference": [
+                0.0008563853418898214,
+                0.0008236290685752089
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.7155959606170654,
+                -2.710125207901001
+              ],
+              "resourceIndices": [
+                10,
+                11
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 9,
+                  "logExposure": -2.7529411764705882,
+                  "rawDensity": 0.00019265507452727372,
+                  "normalisedF32": 0.0008856970816850662
+                },
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 5.860784870626558e-05,
+                  "normalisedF32": 0.0007516499026678503
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": -2.3098961244935986e-05,
+                  "normalisedF32": 0.0006699430523440242
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": -3.533869259165572e-05,
+                  "normalisedF32": 0.000657703320030123
+                }
+              ],
+              "actualFloat": [
+                0.0007222003769129515,
+                0.0007059169001877308
+              ],
+              "numpyFloat64": [
+                0.000722200181191796,
+                0.0007059165765509723
+              ],
+              "scipyLinearFloat64": [
+                0.000722200181191796,
+                0.0007059165765509723
+              ],
+              "deltaActual": -1.628347672522068e-05,
+              "deltaReference": -1.6283604640823703e-05,
+              "deltaRawDoubleTable": -1.6283489553954632e-05,
+              "rawDoubleReference": [
+                0.0007222000639947586,
+                0.000705916574440804
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 290,
+          "outputChannel": 1,
+          "outputU16": [
+            3497,
+            3496
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.6728639602661133,
+                -2.6673929691314697
+              ],
+              "resourceIndices": [
+                11,
+                13
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 0.0004731854749374507,
+                  "normalisedF32": 0.0012042992748320103
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": 0.0004203584298883801,
+                  "normalisedF32": 0.001151472213678062
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.0002957962657230822,
+                  "normalisedF32": 0.0010269101476296782
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 0.00014168822973908973,
+                  "normalisedF32": 0.0008728020475246012
+                },
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": 3.543238228899582e-06,
+                  "normalisedF32": 0.0007346570491790771
+                }
+              ],
+              "actualFloat": [
+                0.0010372361866757274,
+                0.0010089720599353313
+              ],
+              "numpyFloat64": [
+                0.00103723640759973,
+                0.0010089720493683897
+              ],
+              "scipyLinearFloat64": [
+                0.00103723640759973,
+                0.0010089720493683897
+              ],
+              "deltaActual": -2.8264126740396023e-05,
+              "deltaReference": -2.8264358231340275e-05,
+              "deltaRawDoubleTable": -2.8264397454826062e-05,
+              "rawDoubleReference": [
+                0.001037236482953863,
+                0.001008972085499037
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.682896137237549,
+                -2.6774256229400635
+              ],
+              "resourceIndices": [
+                11,
+                12
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 0.00035736742258051364,
+                  "normalisedF32": 0.001009501051157713
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": 0.0002949252766248387,
+                  "normalisedF32": 0.0009470588411204517
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.00013055465851075933,
+                  "normalisedF32": 0.000782688264735043
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": -4.3263472042436615e-05,
+                  "normalisedF32": 0.0006088701193220913
+                }
+              ],
+              "actualFloat": [
+                0.0008563848678022623,
+                0.0008236286230385303
+              ],
+              "numpyFloat64": [
+                0.0008563850656586647,
+                0.0008236288698313688
+              ],
+              "scipyLinearFloat64": [
+                0.0008563850656586646,
+                0.0008236288698313687
+              ],
+              "deltaActual": -3.2756244763731956e-05,
+              "deltaReference": -3.275619582729589e-05,
+              "deltaRawDoubleTable": -3.275627331461258e-05,
+              "rawDoubleReference": [
+                0.0008563853418898214,
+                0.0008236290685752089
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.7155959606170654,
+                -2.710125207901001
+              ],
+              "resourceIndices": [
+                10,
+                11
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 9,
+                  "logExposure": -2.7529411764705882,
+                  "rawDensity": 0.00019265507452727372,
+                  "normalisedF32": 0.0008856970816850662
+                },
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 5.860784870626558e-05,
+                  "normalisedF32": 0.0007516499026678503
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": -2.3098961244935986e-05,
+                  "normalisedF32": 0.0006699430523440242
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": -3.533869259165572e-05,
+                  "normalisedF32": 0.000657703320030123
+                }
+              ],
+              "actualFloat": [
+                0.0007222003769129515,
+                0.0007059169001877308
+              ],
+              "numpyFloat64": [
+                0.000722200181191796,
+                0.0007059165765509723
+              ],
+              "scipyLinearFloat64": [
+                0.000722200181191796,
+                0.0007059165765509723
+              ],
+              "deltaActual": -1.628347672522068e-05,
+              "deltaReference": -1.6283604640823703e-05,
+              "deltaRawDoubleTable": -1.6283489553954632e-05,
+              "rawDoubleReference": [
+                0.0007222000639947586,
+                0.000705916574440804
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 297,
+          "outputChannel": 0,
+          "outputU16": [
+            3259,
+            3258
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.634568691253662,
+                -2.6290979385375977
+              ],
+              "resourceIndices": [
+                13,
+                14
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.0002957962657230822,
+                  "normalisedF32": 0.0010269101476296782
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 0.00014168822973908973,
+                  "normalisedF32": 0.0008728020475246012
+                },
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": 3.543238228899582e-06,
+                  "normalisedF32": 0.0007346570491790771
+                },
+                {
+                  "index": 15,
+                  "logExposure": -2.588235294117647,
+                  "rawDensity": -8.849183911188881e-05,
+                  "normalisedF32": 0.0006426220061257482
+                }
+              ],
+              "actualFloat": [
+                0.0008296815794892609,
+                0.0008021504618227482
+              ],
+              "numpyFloat64": [
+                0.0008296816780936593,
+                0.0008021505838238579
+              ],
+              "scipyLinearFloat64": [
+                0.0008296816780936592,
+                0.0008021505838238578
+              ],
+              "deltaActual": -2.7531117666512728e-05,
+              "deltaReference": -2.75310942698014e-05,
+              "deltaRawDoubleTable": -2.7531151045192106e-05,
+              "rawDoubleReference": [
+                0.0008296814166982403,
+                0.0008021502656530482
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.6446008682250977,
+                -2.639130115509033
+              ],
+              "resourceIndices": [
+                12,
+                14
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": 0.0002949252766248387,
+                  "normalisedF32": 0.0009470588411204517
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.00013055465851075933,
+                  "normalisedF32": 0.000782688264735043
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": -4.3263472042436615e-05,
+                  "normalisedF32": 0.0006088701193220913
+                },
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": -0.00013930735300549368,
+                  "normalisedF32": 0.0005128262564539909
+                },
+                {
+                  "index": 15,
+                  "logExposure": -2.588235294117647,
+                  "rawDensity": -0.00012421541750842394,
+                  "normalisedF32": 0.000527918164152652
+                }
+              ],
+              "actualFloat": [
+                0.0006181375356391072,
+                0.0005948503385297954
+              ],
+              "numpyFloat64": [
+                0.0006181378640691783,
+                0.000594850341288565
+              ],
+              "scipyLinearFloat64": [
+                0.0006181378640691785,
+                0.0005948503412885649
+              ],
+              "deltaActual": -2.328719710931182e-05,
+              "deltaReference": -2.3287522780613377e-05,
+              "deltaRawDoubleTable": -2.3287465198138023e-05,
+              "rawDoubleReference": [
+                0.0006181376393074175,
+                0.0005948501741092795
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.6773009300231934,
+                -2.67182993888855
+              ],
+              "resourceIndices": [
+                11,
+                12
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 5.860784870626558e-05,
+                  "normalisedF32": 0.0007516499026678503
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": -2.3098961244935986e-05,
+                  "normalisedF32": 0.0006699430523440242
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": -3.533869259165572e-05,
+                  "normalisedF32": 0.000657703320030123
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 8.812941361272739e-06,
+                  "normalisedF32": 0.0007018549949862063
+                }
+              ],
+              "actualFloat": [
+                0.0006606962997466326,
+                0.000658256933093071
+              ],
+              "numpyFloat64": [
+                0.0006606963341809497,
+                0.0006582569558922258
+              ],
+              "scipyLinearFloat64": [
+                0.0006606963341809496,
+                0.0006582569558922258
+              ],
+              "deltaActual": -2.439366653561592e-06,
+              "deltaReference": -2.4393782887239352e-06,
+              "deltaRawDoubleTable": -2.4393832472174035e-06,
+              "rawDoubleReference": [
+                0.000660696371142613,
+                0.0006582569878953956
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 297,
+          "outputChannel": 1,
+          "outputU16": [
+            3496,
+            3495
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.634568691253662,
+                -2.6290979385375977
+              ],
+              "resourceIndices": [
+                13,
+                14
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.0002957962657230822,
+                  "normalisedF32": 0.0010269101476296782
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 0.00014168822973908973,
+                  "normalisedF32": 0.0008728020475246012
+                },
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": 3.543238228899582e-06,
+                  "normalisedF32": 0.0007346570491790771
+                },
+                {
+                  "index": 15,
+                  "logExposure": -2.588235294117647,
+                  "rawDensity": -8.849183911188881e-05,
+                  "normalisedF32": 0.0006426220061257482
+                }
+              ],
+              "actualFloat": [
+                0.0008296815794892609,
+                0.0008021504618227482
+              ],
+              "numpyFloat64": [
+                0.0008296816780936593,
+                0.0008021505838238579
+              ],
+              "scipyLinearFloat64": [
+                0.0008296816780936592,
+                0.0008021505838238578
+              ],
+              "deltaActual": -2.7531117666512728e-05,
+              "deltaReference": -2.75310942698014e-05,
+              "deltaRawDoubleTable": -2.7531151045192106e-05,
+              "rawDoubleReference": [
+                0.0008296814166982403,
+                0.0008021502656530482
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.6446008682250977,
+                -2.639130115509033
+              ],
+              "resourceIndices": [
+                12,
+                14
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": 0.0002949252766248387,
+                  "normalisedF32": 0.0009470588411204517
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.00013055465851075933,
+                  "normalisedF32": 0.000782688264735043
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": -4.3263472042436615e-05,
+                  "normalisedF32": 0.0006088701193220913
+                },
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": -0.00013930735300549368,
+                  "normalisedF32": 0.0005128262564539909
+                },
+                {
+                  "index": 15,
+                  "logExposure": -2.588235294117647,
+                  "rawDensity": -0.00012421541750842394,
+                  "normalisedF32": 0.000527918164152652
+                }
+              ],
+              "actualFloat": [
+                0.0006181375356391072,
+                0.0005948503385297954
+              ],
+              "numpyFloat64": [
+                0.0006181378640691783,
+                0.000594850341288565
+              ],
+              "scipyLinearFloat64": [
+                0.0006181378640691785,
+                0.0005948503412885649
+              ],
+              "deltaActual": -2.328719710931182e-05,
+              "deltaReference": -2.3287522780613377e-05,
+              "deltaRawDoubleTable": -2.3287465198138023e-05,
+              "rawDoubleReference": [
+                0.0006181376393074175,
+                0.0005948501741092795
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.6773009300231934,
+                -2.67182993888855
+              ],
+              "resourceIndices": [
+                11,
+                12
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 5.860784870626558e-05,
+                  "normalisedF32": 0.0007516499026678503
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": -2.3098961244935986e-05,
+                  "normalisedF32": 0.0006699430523440242
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": -3.533869259165572e-05,
+                  "normalisedF32": 0.000657703320030123
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 8.812941361272739e-06,
+                  "normalisedF32": 0.0007018549949862063
+                }
+              ],
+              "actualFloat": [
+                0.0006606962997466326,
+                0.000658256933093071
+              ],
+              "numpyFloat64": [
+                0.0006606963341809497,
+                0.0006582569558922258
+              ],
+              "scipyLinearFloat64": [
+                0.0006606963341809496,
+                0.0006582569558922258
+              ],
+              "deltaActual": -2.439366653561592e-06,
+              "deltaReference": -2.4393782887239352e-06,
+              "deltaRawDoubleTable": -2.4393832472174035e-06,
+              "rawDoubleReference": [
+                0.000660696371142613,
+                0.0006582569878953956
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 308,
+          "outputChannel": 0,
+          "outputU16": [
+            3258,
+            3257
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.574390172958374,
+                -2.5689196586608887
+              ],
+              "resourceIndices": [
+                15,
+                16
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": 3.543238228899582e-06,
+                  "normalisedF32": 0.0007346570491790771
+                },
+                {
+                  "index": 15,
+                  "logExposure": -2.588235294117647,
+                  "rawDensity": -8.849183911188881e-05,
+                  "normalisedF32": 0.0006426220061257482
+                },
+                {
+                  "index": 16,
+                  "logExposure": -2.56078431372549,
+                  "rawDensity": -0.0001224064132013654,
+                  "normalisedF32": 0.0006087074289098382
+                },
+                {
+                  "index": 17,
+                  "logExposure": -2.533333333333333,
+                  "rawDensity": -9.53069238945908e-05,
+                  "normalisedF32": 0.0006358069367706776
+                }
+              ],
+              "actualFloat": [
+                0.0006255168118514121,
+                0.0006187582039274275
+              ],
+              "numpyFloat64": [
+                0.0006255168504559857,
+                0.000618758265330145
+              ],
+              "scipyLinearFloat64": [
+                0.0006255168504559856,
+                0.0006187582653301449
+              ],
+              "deltaActual": -6.758607923984528e-06,
+              "deltaReference": -6.7585851258407294e-06,
+              "deltaRawDoubleTable": -6.758598774949916e-06,
+              "rawDoubleReference": [
+                0.0006255169128621578,
+                0.0006187583140872079
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.5844223499298096,
+                -2.578951835632324
+              ],
+              "resourceIndices": [
+                15,
+                16
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": -0.00013930735300549368,
+                  "normalisedF32": 0.0005128262564539909
+                },
+                {
+                  "index": 15,
+                  "logExposure": -2.588235294117647,
+                  "rawDensity": -0.00012421541750842394,
+                  "normalisedF32": 0.000527918164152652
+                },
+                {
+                  "index": 16,
+                  "logExposure": -2.56078431372549,
+                  "rawDensity": -2.4850134220404537e-05,
+                  "normalisedF32": 0.0006272834725677967
+                },
+                {
+                  "index": 17,
+                  "logExposure": -2.533333333333333,
+                  "rawDensity": 0.00010243656533594155,
+                  "normalisedF32": 0.0007545701810158789
+                }
+              ],
+              "actualFloat": [
+                0.0005417203065007925,
+                0.0005615221452899277
+              ],
+              "numpyFloat64": [
+                0.0005417202918384153,
+                0.0005615220688502228
+              ],
+              "scipyLinearFloat64": [
+                0.0005417202918384153,
+                0.0005615220688502227
+              ],
+              "deltaActual": 1.9801838789135218e-05,
+              "deltaReference": 1.9801777011807498e-05,
+              "deltaRawDoubleTable": 1.9801813819957234e-05,
+              "rawDoubleReference": [
+                0.0005417200217935582,
+                0.0005615218356135154
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.6171226501464844,
+                -2.611651659011841
+              ],
+              "resourceIndices": [
+                13,
+                15
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": -3.533869259165572e-05,
+                  "normalisedF32": 0.000657703320030123
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 8.812941361272739e-06,
+                  "normalisedF32": 0.0007018549949862063
+                },
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": 8.767754616404184e-05,
+                  "normalisedF32": 0.0007807195652276278
+                },
+                {
+                  "index": 15,
+                  "logExposure": -2.588235294117647,
+                  "rawDensity": 0.000185581635115658,
+                  "normalisedF32": 0.0008786236867308617
+                },
+                {
+                  "index": 16,
+                  "logExposure": -2.56078431372549,
+                  "rawDensity": 0.00028952608974926154,
+                  "normalisedF32": 0.000982568133622408
+                }
+              ],
+              "actualFloat": [
+                0.0007765928748995066,
+                0.0007951087318360806
+              ],
+              "numpyFloat64": [
+                0.0007765926997644048,
+                0.0007951088019115584
+              ],
+              "scipyLinearFloat64": [
+                0.0007765926997644047,
+                0.0007951088019115584
+              ],
+              "deltaActual": 1.8515856936573982e-05,
+              "deltaReference": 1.851610214715358e-05,
+              "deltaRawDoubleTable": 1.851608009156955e-05,
+              "rawDoubleReference": [
+                0.000776592981592161,
+                0.0007951090616837305
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 343,
+          "outputChannel": 1,
+          "outputU16": [
+            3497,
+            3496
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.382913589477539,
+                -2.3774428367614746
+              ],
+              "resourceIndices": [
+                22,
+                23
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 21,
+                  "logExposure": -2.423529411764706,
+                  "rawDensity": 0.00043785132474733607,
+                  "normalisedF32": 0.0011689651291817427
+                },
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.0004788909124381468,
+                  "normalisedF32": 0.0012100047897547483
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.00038775360992894314,
+                  "normalisedF32": 0.0011188674252480268
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.00018506040161493816,
+                  "normalisedF32": 0.0009161742636933923
+                }
+              ],
+              "actualFloat": [
+                0.0011662977049127221,
+                0.0011481348192319274
+              ],
+              "numpyFloat64": [
+                0.0011662974510541775,
+                0.001148134410798037
+              ],
+              "scipyLinearFloat64": [
+                0.0011662974510541777,
+                0.0011481344107980372
+              ],
+              "deltaActual": -1.8162885680794716e-05,
+              "deltaReference": -1.816304025614051e-05,
+              "deltaRawDoubleTable": -1.81629085050628e-05,
+              "rawDoubleReference": [
+                0.0011662974527423306,
+                0.0011481345442372678
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.3929460048675537,
+                -2.3874752521514893
+              ],
+              "resourceIndices": [
+                22,
+                23
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 21,
+                  "logExposure": -2.423529411764706,
+                  "rawDensity": 0.0002474867011532146,
+                  "normalisedF32": 0.0008996202959679067
+                },
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.0001664515878168263,
+                  "normalisedF32": 0.000818585162051022
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 6.802781387606926e-05,
+                  "normalisedF32": 0.0007201614207588136
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 3.9084969776292196e-06,
+                  "normalisedF32": 0.0006560420733876526
+                }
+              ],
+              "actualFloat": [
+                0.000807354343123734,
+                0.0007877392927184701
+              ],
+              "numpyFloat64": [
+                0.0008073542709117963,
+                0.0007877391066493002
+              ],
+              "scipyLinearFloat64": [
+                0.0008073542709117964,
+                0.0007877391066493003
+              ],
+              "deltaActual": -1.96150504052639e-05,
+              "deltaReference": -1.9615164262496137e-05,
+              "deltaRawDoubleTable": -1.961504182799816e-05,
+              "rawDoubleReference": [
+                0.0008073540589776811,
+                0.0007877390171496829
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.4256458282470703,
+                -2.420175075531006
+              ],
+              "resourceIndices": [
+                20,
+                22
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 19,
+                  "logExposure": -2.4784313725490197,
+                  "rawDensity": 0.0003816809681805227,
+                  "normalisedF32": 0.0010747229680418968
+                },
+                {
+                  "index": 20,
+                  "logExposure": -2.450980392156863,
+                  "rawDensity": 0.00028172346223766747,
+                  "normalisedF32": 0.0009747655130922794
+                },
+                {
+                  "index": 21,
+                  "logExposure": -2.423529411764706,
+                  "rawDensity": 0.0001697364977302364,
+                  "normalisedF32": 0.0008627785136923194
+                },
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.00012254475252941342,
+                  "normalisedF32": 0.0008155867690220475
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.0001969210232258407,
+                  "normalisedF32": 0.0008899630629457533
+                }
+              ],
+              "actualFloat": [
+                0.0008714123396202922,
+                0.000857011997140944
+              ],
+              "numpyFloat64": [
+                0.000871412575371986,
+                0.0008570120364583388
+              ],
+              "scipyLinearFloat64": [
+                0.000871412575371986,
+                0.0008570120364583387
+              ],
+              "deltaActual": -1.4400342479348183e-05,
+              "deltaReference": -1.4400538913647131e-05,
+              "deltaRawDoubleTable": -1.4400507111399013e-05,
+              "rawDoubleReference": [
+                0.0008714125067125398,
+                0.0008570119996011408
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 346,
+          "outputChannel": 2,
+          "outputU16": [
+            4306,
+            4305
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.3665010929107666,
+                -2.3610305786132812
+              ],
+              "resourceIndices": [
+                23,
+                24
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.0004788909124381468,
+                  "normalisedF32": 0.0012100047897547483
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.00038775360992894314,
+                  "normalisedF32": 0.0011188674252480268
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.00018506040161493816,
+                  "normalisedF32": 0.0009161742636933923
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": -4.82480104754176e-05,
+                  "normalisedF32": 0.0006828658515587449
+                }
+              ],
+              "actualFloat": [
+                0.0011031660251319408,
+                0.0010627727024257183
+              ],
+              "numpyFloat64": [
+                0.001103166090259528,
+                0.0010627728700205877
+              ],
+              "scipyLinearFloat64": [
+                0.0011031660902595278,
+                0.0010627728700205877
+              ],
+              "deltaActual": -4.0393322706222534e-05,
+              "deltaReference": -4.039322023894026e-05,
+              "deltaRawDoubleTable": -4.039331485595154e-05,
+              "rawDoubleReference": [
+                0.0011031667943723006,
+                0.001062773479516349
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.3765337467193604,
+                -2.371062994003296
+              ],
+              "resourceIndices": [
+                22,
+                23
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 21,
+                  "logExposure": -2.423529411764706,
+                  "rawDensity": 0.0002474867011532146,
+                  "normalisedF32": 0.0008996202959679067
+                },
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.0001664515878168263,
+                  "normalisedF32": 0.000818585162051022
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 6.802781387606926e-05,
+                  "normalisedF32": 0.0007201614207588136
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 3.9084969776292196e-06,
+                  "normalisedF32": 0.0006560420733876526
+                }
+              ],
+              "actualFloat": [
+                0.0007485092501156032,
+                0.0007288941997103393
+              ],
+              "numpyFloat64": [
+                0.000748508778124308,
+                0.0007288936138618118
+              ],
+              "scipyLinearFloat64": [
+                0.000748508778124308,
+                0.0007288936138618118
+              ],
+              "deltaActual": -1.96150504052639e-05,
+              "deltaReference": -1.9615164262496137e-05,
+              "deltaRawDoubleTable": -1.961504182799805e-05,
+              "rawDoubleReference": [
+                0.0007485089334936867,
+                0.0007288938916656886
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.409233331680298,
+                -2.4037628173828125
+              ],
+              "resourceIndices": [
+                21,
+                22
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 20,
+                  "logExposure": -2.450980392156863,
+                  "rawDensity": 0.00028172346223766747,
+                  "normalisedF32": 0.0009747655130922794
+                },
+                {
+                  "index": 21,
+                  "logExposure": -2.423529411764706,
+                  "rawDensity": 0.0001697364977302364,
+                  "normalisedF32": 0.0008627785136923194
+                },
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.00012254475252941342,
+                  "normalisedF32": 0.0008155867690220475
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.0001969210232258407,
+                  "normalisedF32": 0.0008899630629457533
+                }
+              ],
+              "actualFloat": [
+                0.0008382017840631306,
+                0.0008287972304970026
+              ],
+              "numpyFloat64": [
+                0.000838201819691044,
+                0.0008287973261141242
+              ],
+              "scipyLinearFloat64": [
+                0.0008382018196910439,
+                0.0008287973261141242
+              ],
+              "deltaActual": -9.404553566128016e-06,
+              "deltaReference": -9.404493576919753e-06,
+              "deltaRawDoubleTable": -9.404513542188341e-06,
+              "rawDoubleReference": [
+                0.0008382017429006985,
+                0.0008287972293585102
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 348,
+          "outputChannel": 0,
+          "outputU16": [
+            3260,
+            3259
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.355559825897217,
+                -2.3500888347625732
+              ],
+              "resourceIndices": [
+                23,
+                24
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.0004788909124381468,
+                  "normalisedF32": 0.0012100047897547483
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.00038775360992894314,
+                  "normalisedF32": 0.0011188674252480268
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.00018506040161493816,
+                  "normalisedF32": 0.0009161742636933923
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": -4.82480104754176e-05,
+                  "normalisedF32": 0.0006828658515587449
+                }
+              ],
+              "actualFloat": [
+                0.0010223776334896684,
+                0.000981980818323791
+              ],
+              "numpyFloat64": [
+                0.0010223778893449409,
+                0.000981981148232587
+              ],
+              "scipyLinearFloat64": [
+                0.0010223778893449407,
+                0.0009819811482325868
+              ],
+              "deltaActual": -4.039681516587734e-05,
+              "deltaReference": -4.039674111235383e-05,
+              "deltaRawDoubleTable": -4.039683573761241e-05,
+              "rawDoubleReference": [
+                0.001022378404219567,
+                0.0009819815684819545
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.3655920028686523,
+                -2.360121250152588
+              ],
+              "resourceIndices": [
+                23,
+                24
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.0001664515878168263,
+                  "normalisedF32": 0.000818585162051022
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 6.802781387606926e-05,
+                  "normalisedF32": 0.0007201614207588136
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 3.9084969776292196e-06,
+                  "normalisedF32": 0.0006560420733876526
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": 3.182405978100706e-05,
+                  "normalisedF32": 0.0006839576526544988
+                }
+              ],
+              "actualFloat": [
+                0.0007130710873752832,
+                0.000700292584951967
+              ],
+              "numpyFloat64": [
+                0.0007130710810731354,
+                0.0007002926539267662
+              ],
+              "scipyLinearFloat64": [
+                0.0007130710810731353,
+                0.0007002926539267661
+              ],
+              "deltaActual": -1.277850242331624e-05,
+              "deltaReference": -1.2778427146369238e-05,
+              "deltaRawDoubleTable": -1.2778448057708088e-05,
+              "rawDoubleReference": [
+                0.0007130712802649394,
+                0.0007002928322072313
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.398292064666748,
+                -2.3928213119506836
+              ],
+              "resourceIndices": [
+                21,
+                23
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 20,
+                  "logExposure": -2.450980392156863,
+                  "rawDensity": 0.00028172346223766747,
+                  "normalisedF32": 0.0009747655130922794
+                },
+                {
+                  "index": 21,
+                  "logExposure": -2.423529411764706,
+                  "rawDensity": 0.0001697364977302364,
+                  "normalisedF32": 0.0008627785136923194
+                },
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.00012254475252941342,
+                  "normalisedF32": 0.0008155867690220475
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.0001969210232258407,
+                  "normalisedF32": 0.0008899630629457533
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.00039216532765188553,
+                  "normalisedF32": 0.0010852073319256306
+                }
+              ],
+              "actualFloat": [
+                0.0008193923276849091,
+                0.0008244114578701556
+              ],
+              "numpyFloat64": [
+                0.0008193924226660527,
+                0.0008244115130338921
+              ],
+              "scipyLinearFloat64": [
+                0.0008193924226660526,
+                0.0008244115130338921
+              ],
+              "deltaActual": 5.019130185246468e-06,
+              "deltaReference": 5.019090367839392e-06,
+              "deltaRawDoubleTable": 5.019390034707643e-06,
+              "rawDoubleReference": [
+                0.0008193923059443,
+                0.0008244116959790077
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 352,
+          "outputChannel": 0,
+          "outputU16": [
+            3259,
+            3258
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.333676815032959,
+                -2.3282060623168945
+              ],
+              "resourceIndices": [
+                24,
+                25
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.00038775360992894314,
+                  "normalisedF32": 0.0011188674252480268
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.00018506040161493816,
+                  "normalisedF32": 0.0009161742636933923
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": -4.82480104754176e-05,
+                  "normalisedF32": 0.0006828658515587449
+                },
+                {
+                  "index": 26,
+                  "logExposure": -2.2862745098039214,
+                  "rawDensity": -0.00020636091785317362,
+                  "normalisedF32": 0.0005247529479674995
+                }
+              ],
+              "actualFloat": [
+                0.0008524336735717952,
+                0.0008059372194111347
+              ],
+              "numpyFloat64": [
+                0.0008524338008391872,
+                0.000805937467527495
+              ],
+              "scipyLinearFloat64": [
+                0.0008524338008391872,
+                0.0008059374675274949
+              ],
+              "deltaActual": -4.6496454160660505e-05,
+              "deltaReference": -4.6496333311692195e-05,
+              "deltaRawDoubleTable": -4.649643148951646e-05,
+              "rawDoubleReference": [
+                0.000852433976148912,
+                0.0008059375446593956
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.3437089920043945,
+                -2.338238477706909
+              ],
+              "resourceIndices": [
+                23,
+                25
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.0001664515878168263,
+                  "normalisedF32": 0.000818585162051022
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 6.802781387606926e-05,
+                  "normalisedF32": 0.0007201614207588136
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 3.9084969776292196e-06,
+                  "normalisedF32": 0.0006560420733876526
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": 3.182405978100706e-05,
+                  "normalisedF32": 0.0006839576526544988
+                },
+                {
+                  "index": 26,
+                  "logExposure": -2.2862745098039214,
+                  "rawDensity": 0.00017716660460610675,
+                  "normalisedF32": 0.0008293002028949559
+                }
+              ],
+              "actualFloat": [
+                0.000661957252305001,
+                0.00065902981441468
+              ],
+              "numpyFloat64": [
+                0.0006619573724876585,
+                0.0006590298244629305
+              ],
+              "scipyLinearFloat64": [
+                0.0006619573724876584,
+                0.0006590298244629304
+              ],
+              "deltaActual": -2.9274378903210163e-06,
+              "deltaReference": -2.9275480247279275e-06,
+              "deltaRawDoubleTable": -2.9276848146093243e-06,
+              "rawDoubleReference": [
+                0.0006619574880341072,
+                0.0006590298032194979
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.3764090538024902,
+                -2.3709380626678467
+              ],
+              "resourceIndices": [
+                22,
+                23
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 21,
+                  "logExposure": -2.423529411764706,
+                  "rawDensity": 0.0001697364977302364,
+                  "normalisedF32": 0.0008627785136923194
+                },
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.00012254475252941342,
+                  "normalisedF32": 0.0008155867690220475
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.0001969210232258407,
+                  "normalisedF32": 0.0008899630629457533
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.00039216532765188553,
+                  "normalisedF32": 0.0010852073319256306
+                }
+              ],
+              "actualFloat": [
+                0.000868879200424999,
+                0.0008837024215608835
+              ],
+              "numpyFloat64": [
+                0.0008688795408713384,
+                0.0008837028627979761
+              ],
+              "scipyLinearFloat64": [
+                0.0008688795408713384,
+                0.0008837028627979761
+              ],
+              "deltaActual": 1.4823221135884523e-05,
+              "deltaReference": 1.4823321926637654e-05,
+              "deltaRawDoubleTable": 1.4823219855720072e-05,
+              "rawDoubleReference": [
+                0.000868879417617046,
+                0.0008837026374727661
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 356,
+          "outputChannel": 0,
+          "outputU16": [
+            3258,
+            3257
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.311793804168701,
+                -2.3063230514526367
+              ],
+              "resourceIndices": [
+                25,
+                26
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.00018506040161493816,
+                  "normalisedF32": 0.0009161742636933923
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": -4.82480104754176e-05,
+                  "normalisedF32": 0.0006828658515587449
+                },
+                {
+                  "index": 26,
+                  "logExposure": -2.2862745098039214,
+                  "rawDensity": -0.00020636091785317362,
+                  "normalisedF32": 0.0005247529479674995
+                },
+                {
+                  "index": 27,
+                  "logExposure": -2.2588235294117647,
+                  "rawDensity": -0.00021438212289863877,
+                  "normalisedF32": 0.00051673169946298
+                }
+              ],
+              "actualFloat": [
+                0.0006717398064211011,
+                0.0006402292056009173
+              ],
+              "numpyFloat64": [
+                0.0006717398050328692,
+                0.0006402292812630911
+              ],
+              "scipyLinearFloat64": [
+                0.0006717398050328691,
+                0.0006402292812630909
+              ],
+              "deltaActual": -3.1510600820183754e-05,
+              "deltaReference": -3.151052376977809e-05,
+              "deltaRawDoubleTable": -3.151059106540517e-05,
+              "rawDoubleReference": [
+                0.0006717396497583598,
+                0.0006402290586929547
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.3218259811401367,
+                -2.3163552284240723
+              ],
+              "resourceIndices": [
+                24,
+                25
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 6.802781387606926e-05,
+                  "normalisedF32": 0.0007201614207588136
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 3.9084969776292196e-06,
+                  "normalisedF32": 0.0006560420733876526
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": 3.182405978100706e-05,
+                  "normalisedF32": 0.0006839576526544988
+                },
+                {
+                  "index": 26,
+                  "logExposure": -2.2862745098039214,
+                  "rawDensity": 0.00017716660460610675,
+                  "normalisedF32": 0.0008293002028949559
+                }
+              ],
+              "actualFloat": [
+                0.0006757201044820249,
+                0.0006812834180891514
+              ],
+              "numpyFloat64": [
+                0.0006757200619271076,
+                0.0006812833935974255
+              ],
+              "scipyLinearFloat64": [
+                0.0006757200619271076,
+                0.0006812833935974254
+              ],
+              "deltaActual": 5.563313607126474e-06,
+              "deltaReference": 5.563331670317825e-06,
+              "deltaRawDoubleTable": 5.563340137413773e-06,
+              "rawDoubleReference": [
+                0.000675720066085332,
+                0.0006812834062227457
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.3545258045196533,
+                -2.349055290222168
+              ],
+              "resourceIndices": [
+                23,
+                24
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.00012254475252941342,
+                  "normalisedF32": 0.0008155867690220475
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.0001969210232258407,
+                  "normalisedF32": 0.0008899630629457533
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.00039216532765188553,
+                  "normalisedF32": 0.0010852073319256306
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": 0.0006480148256244128,
+                  "normalisedF32": 0.0013410568935796618
+                }
+              ],
+              "actualFloat": [
+                0.000990261323750019,
+                0.0010291701182723045
+              ],
+              "numpyFloat64": [
+                0.0009902610773055026,
+                0.0010291698628649467
+              ],
+              "scipyLinearFloat64": [
+                0.0009902610773055024,
+                0.0010291698628649465
+              ],
+              "deltaActual": 3.890879452228546e-05,
+              "deltaReference": 3.890878555944414e-05,
+              "deltaRawDoubleTable": 3.890887478723466e-05,
+              "rawDoubleReference": [
+                0.0009902606107415517,
+                0.0010291694855287864
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "film": "kodak_ektar_100",
+      "profilePath": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\resources-original\\profiles\\kodak_ektar_100.json",
+      "profileSha256": "f2a8c9092153b2d1ee90c5aa588ece7c199c8687520e250946484ff3294b0319",
+      "existingTrace": [
+        {
+          "name": "0018-log_exposure-17-1025-3.f32",
+          "sha256": "5898cd677a599776fc3d6b17768074ce8f2103693cb618ee175977707c878706"
+        },
+        {
+          "name": "0019-film_curves_exact-17-1025-3.f32",
+          "sha256": "9ca066791fb4921db71c1bfa126b8e3614cd8b9fcfa99421d707d5638179b51d"
+        }
+      ],
+      "queryCount": 531,
+      "querySha256": "8c846836c3081ed0ce10fafcb6be81f2c380ad644c3cfa974c2826eb81ecca82",
+      "nativeLocalReportSha256": "5ae94e81b05f14cffc3327d294da1a1ed3194b5757309f60eaddb9490d89f704",
+      "rawTable": {
+        "shape": [
+          256,
+          3
+        ],
+        "xStrictlyIncreasing": true,
+        "rangePerChannel": [
+          [
+            -0.0007381419889066706,
+            -0.0006682582063381493,
+            -0.0007895119592313875
+          ],
+          [
+            1.8901205443811073,
+            1.7804058000001994,
+            2.2698956225115388
+          ]
+        ],
+        "negativeAdjacentCountPerChannel": [
+          27,
+          23,
+          25
+        ],
+        "maxDownwardStepPerChannel": [
+          -0.0002794107572887672,
+          -0.00024007960005967277,
+          -0.0003119152533042069
+        ],
+        "normalisationPreservesDifferences": true
+      },
+      "referenceErrors": {
+        "rawDoubleNumpyVsScipyMaxAbs": 4.440892098500626e-16,
+        "tableRoundingVsRawDoubleMaxAbs": 1.3911292207069437e-07,
+        "numpyVsScipyMaxAbs": 8.881784197001252e-16,
+        "gpuVsNumpyMaxAbs": 1.204263502252445e-07,
+        "cpu32VsGpuMaxAbs": 2.9802322387695312e-08,
+        "affectedGpuVsRawDoubleMaxAbs": 1.6548128024124198e-09,
+        "affectedGpuVsRoundedTableFloat64MaxAbs": 7.218401093869731e-10,
+        "observedGpuVsOriginalTraceMaxAbs": 0.0,
+        "linearInterpolationOutsideBracketCount": 0
+      },
+      "sublayerDiagnosticOnly": {
+        "summedLayerNegativeStepsPerChannel": [
+          0,
+          0,
+          0
+        ],
+        "layersSumVsCdfMaxAbs": 5.551115123125783e-17,
+        "runtimeWithGrainOffUsesLayers": false
+      },
+      "modelDiagnosticOnly": {
+        "runtimeFilmUsesModel": false,
+        "allAmplitudesPositive": true,
+        "allSigmasPositive": true,
+        "cdfNegativeStepsPerChannel": [
+          0,
+          0,
+          0
+        ],
+        "cppEvaluatorVsScipyNdtrMaxAbs": 4.440892098500626e-16,
+        "sampledTableMinusFittedMaxAbsPerChannel": [
+          0.003779626934785285,
+          0.003560162708230452,
+          0.0045381001509794405
+        ],
+        "notProposedAsFix": true
+      },
+      "affectedOutputNeighbourhoods": [
+        {
+          "outputIndex": 286,
+          "outputChannel": 1,
+          "outputU16": [
+            1136,
+            1135
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.6885135173797607,
+                -2.6830430030822754
+              ],
+              "resourceIndices": [
+                11,
+                12
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 0.00047595006010459057,
+                  "normalisedF32": 0.0012140920152887702
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": 0.00042205657128021316,
+                  "normalisedF32": 0.0011601985897868872
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.00029559177886635097,
+                  "normalisedF32": 0.0010337337153032422
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 0.00013909938421956668,
+                  "normalisedF32": 0.0008772413711994886
+                }
+              ],
+              "actualFloat": [
+                0.0011163139715790749,
+                0.001091111684218049
+              ],
+              "numpyFloat64": [
+                0.0011163140547496315,
+                0.001091111805752539
+              ],
+              "scipyLinearFloat64": [
+                0.0011163140547496312,
+                0.001091111805752539
+              ],
+              "deltaActual": -2.520228736102581e-05,
+              "deltaReference": -2.520224899709247e-05,
+              "deltaRawDoubleTable": -2.5202285861753966e-05,
+              "rawDoubleReference": [
+                0.0011163143184687067,
+                0.0010911120326069527
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.7062554359436035,
+                -2.700784683227539
+              ],
+              "resourceIndices": [
+                10,
+                11
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 9,
+                  "logExposure": -2.7529411764705882,
+                  "rawDensity": 0.00028423834266705914,
+                  "normalisedF32": 0.0009524965425953269
+                },
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 0.0003616064108544306,
+                  "normalisedF32": 0.001029864652082324
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": 0.00029629878822754033,
+                  "normalisedF32": 0.0009645569953136146
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.0001262638837234859,
+                  "normalisedF32": 0.0007945221150293946
+                }
+              ],
+              "actualFloat": [
+                0.0009841041173785925,
+                0.0009710888843983412
+              ],
+              "numpyFloat64": [
+                0.0009841038582673696,
+                0.0009710884983725069
+              ],
+              "scipyLinearFloat64": [
+                0.0009841038582673698,
+                0.000971088498372507
+              ],
+              "deltaActual": -1.3015232980251312e-05,
+              "deltaReference": -1.301535989486262e-05,
+              "deltaRawDoubleTable": -1.3015267533681633e-05,
+              "rawDoubleReference": [
+                0.000984103903430859,
+                0.0009710886358971774
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.721792221069336,
+                -2.7163214683532715
+              ],
+              "resourceIndices": [
+                10,
+                11
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 9,
+                  "logExposure": -2.7529411764705882,
+                  "rawDensity": 0.00022371727191895655,
+                  "normalisedF32": 0.0010132292518392205
+                },
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 7.205441568836173e-05,
+                  "normalisedF32": 0.0008615663973614573
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": -1.9655065548922383e-05,
+                  "normalisedF32": 0.0007698569097556174
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": -3.179754231798184e-05,
+                  "normalisedF32": 0.0007577144424431026
+                }
+              ],
+              "actualFloat": [
+                0.000849212403409183,
+                0.0008309354307129979
+              ],
+              "numpyFloat64": [
+                0.0008492122961362511,
+                0.0008309352357420806
+              ],
+              "scipyLinearFloat64": [
+                0.0008492122961362512,
+                0.0008309352357420807
+              ],
+              "deltaActual": -1.8276972696185112e-05,
+              "deltaReference": -1.8277060394170487e-05,
+              "deltaRawDoubleTable": -1.8276938979967577e-05,
+              "rawDoubleReference": [
+                0.0008492120121659334,
+                0.0008309350731859658
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 290,
+          "outputChannel": 0,
+          "outputU16": [
+            2197,
+            2196
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.666630506515503,
+                -2.6611599922180176
+              ],
+              "resourceIndices": [
+                12,
+                13
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": 0.00042205657128021316,
+                  "normalisedF32": 0.0011601985897868872
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.00029559177886635097,
+                  "normalisedF32": 0.0010337337153032422
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 0.00013909938421956668,
+                  "normalisedF32": 0.0008772413711994886
+                },
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": -1.5472206540424333e-06,
+                  "normalisedF32": 0.0007365947822108865
+                }
+              ],
+              "actualFloat": [
+                0.0010111713781952858,
+                0.0009799851104617119
+              ],
+              "numpyFloat64": [
+                0.001011171460338571,
+                0.0009799852591238494
+              ],
+              "scipyLinearFloat64": [
+                0.001011171460338571,
+                0.0009799852591238492
+              ],
+              "deltaActual": -3.1186267733573914e-05,
+              "deltaReference": -3.118620121472164e-05,
+              "deltaRawDoubleTable": -3.118627714322189e-05,
+              "rawDoubleReference": [
+                0.0010111715698085057,
+                0.0009799852926652838
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.6843724250793457,
+                -2.678901433944702
+              ],
+              "resourceIndices": [
+                11,
+                12
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 0.0003616064108544306,
+                  "normalisedF32": 0.001029864652082324
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": 0.00029629878822754033,
+                  "normalisedF32": 0.0009645569953136146
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.0001262638837234859,
+                  "normalisedF32": 0.0007945221150293946
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": -5.3881250014487264e-05,
+                  "normalisedF32": 0.0006143769714981318
+                }
+              ],
+              "actualFloat": [
+                0.0008799026836641133,
+                0.0008460146491415799
+              ],
+              "numpyFloat64": [
+                0.0008799028460098891,
+                0.000846014899390337
+              ],
+              "scipyLinearFloat64": [
+                0.0008799028460098891,
+                0.0008460148993903369
+              ],
+              "deltaActual": -3.388803452253342e-05,
+              "deltaReference": -3.388794661955208e-05,
+              "deltaRawDoubleTable": -3.3888023008002335e-05,
+              "rawDoubleReference": [
+                0.0008799031351213835,
+                0.0008460151121133812
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.699909210205078,
+                -2.6944384574890137
+              ],
+              "resourceIndices": [
+                10,
+                12
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 9,
+                  "logExposure": -2.7529411764705882,
+                  "rawDensity": 0.00022371727191895655,
+                  "normalisedF32": 0.0010132292518392205
+                },
+                {
+                  "index": 10,
+                  "logExposure": -2.7254901960784315,
+                  "rawDensity": 7.205441568836173e-05,
+                  "normalisedF32": 0.0008615663973614573
+                },
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": -1.9655065548922383e-05,
+                  "normalisedF32": 0.0007698569097556174
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": -3.179754231798184e-05,
+                  "normalisedF32": 0.0007577144424431026
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 2.0825077597524243e-05,
+                  "normalisedF32": 0.0008103370200842619
+                }
+              ],
+              "actualFloat": [
+                0.0007761046290397644,
+                0.0007682641153223813
+              ],
+              "numpyFloat64": [
+                0.0007761040545595692,
+                0.0007682641455611645
+              ],
+              "scipyLinearFloat64": [
+                0.0007761040545595692,
+                0.0007682641455611644
+              ],
+              "deltaActual": -7.840513717383146e-06,
+              "deltaReference": -7.839908998404695e-06,
+              "deltaRawDoubleTable": -7.840097035614847e-06,
+              "rawDoubleReference": [
+                0.0007761042562460633,
+                0.0007682641592104485
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 299,
+          "outputChannel": 0,
+          "outputU16": [
+            2196,
+            2195
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.6173934936523438,
+                -2.6119229793548584
+              ],
+              "resourceIndices": [
+                13,
+                15
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.00029559177886635097,
+                  "normalisedF32": 0.0010337337153032422
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 0.00013909938421956668,
+                  "normalisedF32": 0.0008772413711994886
+                },
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": -1.5472206540424333e-06,
+                  "normalisedF32": 0.0007365947822108865
+                },
+                {
+                  "index": 15,
+                  "logExposure": -2.588235294117647,
+                  "rawDensity": -9.600607592806721e-05,
+                  "normalisedF32": 0.0006421359139494598
+                },
+                {
+                  "index": 16,
+                  "logExposure": -2.56078431372549,
+                  "rawDensity": -0.00013226916296603733,
+                  "normalisedF32": 0.0006058728322386742
+                }
+              ],
+              "actualFloat": [
+                0.0007453419966623187,
+                0.000723645614925772
+              ],
+              "numpyFloat64": [
+                0.0007453422871505882,
+                0.0007236455237045995
+              ],
+              "scipyLinearFloat64": [
+                0.0007453422871505881,
+                0.0007236455237045996
+              ],
+              "deltaActual": -2.1696381736546755e-05,
+              "deltaReference": -2.1696763445988696e-05,
+              "deltaRawDoubleTable": -2.1696533969259193e-05,
+              "rawDoubleReference": [
+                0.0007453417992418041,
+                0.0007236452652725449
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.6351354122161865,
+                -2.629664659500122
+              ],
+              "resourceIndices": [
+                13,
+                14
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": 0.0001262638837234859,
+                  "normalisedF32": 0.0007945221150293946
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": -5.3881250014487264e-05,
+                  "normalisedF32": 0.0006143769714981318
+                },
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": -0.00015497462931868,
+                  "normalisedF32": 0.000513283594045788
+                },
+                {
+                  "index": 15,
+                  "logExposure": -2.588235294117647,
+                  "rawDensity": -0.00014306882142714459,
+                  "normalisedF32": 0.0005251893890090287
+                }
+              ],
+              "actualFloat": [
+                0.0005849088192917407,
+                0.0005647617508657277
+              ],
+              "numpyFloat64": [
+                0.0005849088902907496,
+                0.0005647618611689872
+              ],
+              "scipyLinearFloat64": [
+                0.0005849088902907496,
+                0.0005647618611689872
+              ],
+              "deltaActual": -2.0147068426012993e-05,
+              "deltaReference": -2.0147029121762383e-05,
+              "deltaRawDoubleTable": -2.014707203545137e-05,
+              "rawDoubleReference": [
+                0.0005849086711764919,
+                0.0005647615991410405
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.650672435760498,
+                -2.6452016830444336
+              ],
+              "resourceIndices": [
+                12,
+                13
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 11,
+                  "logExposure": -2.6980392156862747,
+                  "rawDensity": -1.9655065548922383e-05,
+                  "normalisedF32": 0.0007698569097556174
+                },
+                {
+                  "index": 12,
+                  "logExposure": -2.6705882352941175,
+                  "rawDensity": -3.179754231798184e-05,
+                  "normalisedF32": 0.0007577144424431026
+                },
+                {
+                  "index": 13,
+                  "logExposure": -2.6431372549019607,
+                  "rawDensity": 2.0825077597524243e-05,
+                  "normalisedF32": 0.0008103370200842619
+                },
+                {
+                  "index": 14,
+                  "logExposure": -2.615686274509804,
+                  "rawDensity": 0.00011361521121370675,
+                  "normalisedF32": 0.0009031271911226213
+                }
+              ],
+              "actualFloat": [
+                0.0007958923815749586,
+                0.0008063795976340771
+              ],
+              "numpyFloat64": [
+                0.000795892296653693,
+                0.0008063795177844582
+              ],
+              "scipyLinearFloat64": [
+                0.0007958922966536929,
+                0.0008063795177844581
+              ],
+              "deltaActual": 1.048721605911851e-05,
+              "deltaReference": 1.0487221130765171e-05,
+              "deltaRawDoubleTable": 1.0487251701634466e-05,
+              "rawDoubleReference": [
+                0.0007958923447760662,
+                0.0008063795964777006
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 346,
+          "outputChannel": 0,
+          "outputU16": [
+            2197,
+            2196
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.3602678775787354,
+                -2.354797124862671
+              ],
+              "resourceIndices": [
+                23,
+                24
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.0004417934460694922,
+                  "normalisedF32": 0.001179935410618782
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.00033879338791777705,
+                  "normalisedF32": 0.0010769353248178959
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.00012096416727046347,
+                  "normalisedF32": 0.0008591061341576278
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": -0.00013065516041124188,
+                  "normalisedF32": 0.0006074868142604828
+                }
+              ],
+              "actualFloat": [
+                0.0010105996625497937,
+                0.0009671880397945642
+              ],
+              "numpyFloat64": [
+                0.001010599754353575,
+                0.0009671882949840315
+              ],
+              "scipyLinearFloat64": [
+                0.0010105997543535749,
+                0.0009671882949840314
+              ],
+              "deltaActual": -4.341162275522947e-05,
+              "deltaReference": -4.341145936954363e-05,
+              "deltaRawDoubleTable": -4.341155701801389e-05,
+              "rawDoubleReference": [
+                0.0010106004287456097,
+                0.0009671888717275958
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.3780100345611572,
+                -2.3725390434265137
+              ],
+              "resourceIndices": [
+                22,
+                23
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 21,
+                  "logExposure": -2.423529411764706,
+                  "rawDensity": 0.00018536208958706396,
+                  "normalisedF32": 0.0008536202949471772
+                },
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 8.55977679668981e-05,
+                  "normalisedF32": 0.0007538559730164707
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": -3.558399057743093e-05,
+                  "normalisedF32": 0.0006326742004603148
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": -0.00012626982683175555,
+                  "normalisedF32": 0.000541988352779299
+                }
+              ],
+              "actualFloat": [
+                0.0006740937824361026,
+                0.0006499422015622258
+              ],
+              "numpyFloat64": [
+                0.0006740932603229341,
+                0.000649941526867606
+              ],
+              "scipyLinearFloat64": [
+                0.0006740932603229342,
+                0.0006499415268676061
+              ],
+              "deltaActual": -2.415158087387681e-05,
+              "deltaReference": -2.415173345532808e-05,
+              "deltaRawDoubleTable": -2.4151571900359785e-05,
+              "rawDoubleReference": [
+                0.0006740934278166607,
+                0.000649941855916301
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.3935465812683105,
+                -2.388075828552246
+              ],
+              "resourceIndices": [
+                22,
+                23
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 21,
+                  "logExposure": -2.423529411764706,
+                  "rawDensity": 0.0002555762970635595,
+                  "normalisedF32": 0.0010450882837176323
+                },
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.00021510144272627067,
+                  "normalisedF32": 0.001004613353870809
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.0003163334131219121,
+                  "normalisedF32": 0.0011058453237637877
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.0005591932101420338,
+                  "normalisedF32": 0.0013487051473930478
+                }
+              ],
+              "actualFloat": [
+                0.0010139498626813293,
+                0.0010341245215386152
+              ],
+              "numpyFloat64": [
+                0.0010139499032710327,
+                0.0010341247278814036
+              ],
+              "scipyLinearFloat64": [
+                0.0010139499032710327,
+                0.0010341247278814038
+              ],
+              "deltaActual": 2.0174658857285976e-05,
+              "deltaReference": 2.0174824610370845e-05,
+              "deltaRawDoubleTable": 2.0174692090514212e-05,
+              "rawDoubleReference": [
+                0.0010139501968967452,
+                0.0010341248889872594
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 351,
+          "outputChannel": 0,
+          "outputU16": [
+            2196,
+            2195
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.332914113998413,
+                -2.3274433612823486
+              ],
+              "resourceIndices": [
+                24,
+                25
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.00033879338791777705,
+                  "normalisedF32": 0.0010769353248178959
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.00012096416727046347,
+                  "normalisedF32": 0.0008591061341576278
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": -0.00013065516041124188,
+                  "normalisedF32": 0.0006074868142604828
+                },
+                {
+                  "index": 26,
+                  "logExposure": -2.2862745098039214,
+                  "rawDensity": -0.00031040890507012575,
+                  "normalisedF32": 0.0004277330881450325
+                }
+              ],
+              "actualFloat": [
+                0.0007833719137124717,
+                0.0007332263048738241
+              ],
+              "numpyFloat64": [
+                0.0007833720799701697,
+                0.0007332265423165723
+              ],
+              "scipyLinearFloat64": [
+                0.0007833720799701695,
+                0.0007332265423165721
+              ],
+              "deltaActual": -5.0145608838647604e-05,
+              "deltaReference": -5.0145537653597345e-05,
+              "deltaRawDoubleTable": -5.0145645097698704e-05,
+              "rawDoubleReference": [
+                0.0007833722996627938,
+                0.0007332266545650951
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.350656032562256,
+                -2.3451850414276123
+              ],
+              "resourceIndices": [
+                23,
+                24
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 8.55977679668981e-05,
+                  "normalisedF32": 0.0007538559730164707
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": -3.558399057743093e-05,
+                  "normalisedF32": 0.0006326742004603148
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": -0.00012626982683175555,
+                  "normalisedF32": 0.000541988352779299
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": -0.00012881829366391968,
+                  "normalisedF32": 0.0005394399049691856
+                }
+              ],
+              "actualFloat": [
+                0.0005733043071813881,
+                0.0005552305956371129
+              ],
+              "numpyFloat64": [
+                0.0005733044196190669,
+                0.0005552307328541737
+              ],
+              "scipyLinearFloat64": [
+                0.0005733044196190668,
+                0.0005552307328541736
+              ],
+              "deltaActual": -1.8073711544275284e-05,
+              "deltaReference": -1.807368676489318e-05,
+              "deltaRawDoubleTable": -1.8073722653887646e-05,
+              "rawDoubleReference": [
+                0.0005733046382577337,
+                0.0005552309156038461
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.3661928176879883,
+                -2.360722064971924
+              ],
+              "resourceIndices": [
+                23,
+                24
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 22,
+                  "logExposure": -2.396078431372549,
+                  "rawDensity": 0.00021510144272627067,
+                  "normalisedF32": 0.001004613353870809
+                },
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.0003163334131219121,
+                  "normalisedF32": 0.0011058453237637877
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.0005591932101420338,
+                  "normalisedF32": 0.0013487051473930478
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": 0.0008753488394117854,
+                  "normalisedF32": 0.001664860756136477
+                }
+              ],
+              "actualFloat": [
+                0.0011273854179307818,
+                0.0011757854372262955
+              ],
+              "numpyFloat64": [
+                0.0011273854279770102,
+                0.0011757852743613229
+              ],
+              "scipyLinearFloat64": [
+                0.00112738542797701,
+                0.0011757852743613229
+              ],
+              "deltaActual": 4.840001929551363e-05,
+              "deltaReference": 4.839984638431265e-05,
+              "deltaRawDoubleTable": 4.839994328764696e-05,
+              "rawDoubleReference": [
+                0.001127384659430295,
+                0.001175784602717942
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 358,
+          "outputChannel": 0,
+          "outputU16": [
+            2195,
+            2194
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.294618844985962,
+                -2.2891480922698975
+              ],
+              "resourceIndices": [
+                25,
+                26
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.00012096416727046347,
+                  "normalisedF32": 0.0008591061341576278
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": -0.00013065516041124188,
+                  "normalisedF32": 0.0006074868142604828
+                },
+                {
+                  "index": 26,
+                  "logExposure": -2.2862745098039214,
+                  "rawDensity": -0.00031040890507012575,
+                  "normalisedF32": 0.0004277330881450325
+                },
+                {
+                  "index": 27,
+                  "logExposure": -2.2588235294117647,
+                  "rawDensity": -0.00034424487162841816,
+                  "normalisedF32": 0.0003938971203751862
+                }
+              ],
+              "actualFloat": [
+                0.0004823733470402658,
+                0.00044654993689619005
+              ],
+              "numpyFloat64": [
+                0.00048237361221453734,
+                0.0004465502611102527
+              ],
+              "scipyLinearFloat64": [
+                0.0004823736122145373,
+                0.00044655026111025265
+              ],
+              "deltaActual": -3.582341014407575e-05,
+              "deltaReference": -3.582335110428463e-05,
+              "deltaRawDoubleTable": -3.582343044827342e-05,
+              "rawDoubleReference": [
+                0.0004823732268927543,
+                0.00044654979644448087
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.3123605251312256,
+                -2.306889772415161
+              ],
+              "resourceIndices": [
+                25,
+                26
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": -0.00012626982683175555,
+                  "normalisedF32": 0.000541988352779299
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": -0.00012881829366391968,
+                  "normalisedF32": 0.0005394399049691856
+                },
+                {
+                  "index": 26,
+                  "logExposure": -2.2862745098039214,
+                  "rawDensity": -1.894211555299272e-05,
+                  "normalisedF32": 0.0006493160617537796
+                },
+                {
+                  "index": 27,
+                  "logExposure": -2.2588235294117647,
+                  "rawDensity": 0.00016600734394675882,
+                  "normalisedF32": 0.0008342655492015183
+                }
+              ],
+              "actualFloat": [
+                0.0005449032760225236,
+                0.0005668007070198655
+              ],
+              "numpyFloat64": [
+                0.0005449032706485599,
+                0.0005668006311514287
+              ],
+              "scipyLinearFloat64": [
+                0.0005449032706485598,
+                0.0005668006311514285
+              ],
+              "deltaActual": 2.189743099734187e-05,
+              "deltaReference": 2.1897360502868765e-05,
+              "deltaRawDoubleTable": 2.1897410993848652e-05,
+              "rawDoubleReference": [
+                0.0005449033657982496,
+                0.0005668007767920982
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.327897548675537,
+                -2.3224267959594727
+              ],
+              "resourceIndices": [
+                24,
+                25
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 23,
+                  "logExposure": -2.368627450980392,
+                  "rawDensity": 0.0003163334131219121,
+                  "normalisedF32": 0.0011058453237637877
+                },
+                {
+                  "index": 24,
+                  "logExposure": -2.3411764705882354,
+                  "rawDensity": 0.0005591932101420338,
+                  "normalisedF32": 0.0013487051473930478
+                },
+                {
+                  "index": 25,
+                  "logExposure": -2.313725490196078,
+                  "rawDensity": 0.0008753488394117854,
+                  "normalisedF32": 0.001664860756136477
+                },
+                {
+                  "index": 26,
+                  "logExposure": -2.2862745098039214,
+                  "rawDensity": 0.0011723593664565506,
+                  "normalisedF32": 0.0019618712831288576
+                }
+              ],
+              "actualFloat": [
+                0.0015016401885077357,
+                0.001564647420309484
+              ],
+              "numpyFloat64": [
+                0.0015016399107602597,
+                0.0015646469683626735
+              ],
+              "scipyLinearFloat64": [
+                0.0015016399107602595,
+                0.0015646469683626733
+              ],
+              "deltaActual": 6.300723180174828e-05,
+              "deltaReference": 6.300705760241385e-05,
+              "deltaRawDoubleTable": 6.300719474560952e-05,
+              "rawDoubleReference": [
+                0.0015016398133591224,
+                0.001564647008104732
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        },
+        {
+          "outputIndex": 397,
+          "outputChannel": 0,
+          "outputU16": [
+            2196,
+            2195
+          ],
+          "channels": [
+            {
+              "channel": 0,
+              "logQuery": [
+                -2.08125901222229,
+                -2.0757882595062256
+              ],
+              "resourceIndices": [
+                33,
+                34
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 32,
+                  "logExposure": -2.1215686274509804,
+                  "rawDensity": 0.0001105519083670642,
+                  "normalisedF32": 0.0008486938895657659
+                },
+                {
+                  "index": 33,
+                  "logExposure": -2.0941176470588236,
+                  "rawDensity": 1.915073721993262e-05,
+                  "normalisedF32": 0.0007572927279397845
+                },
+                {
+                  "index": 34,
+                  "logExposure": -2.0666666666666664,
+                  "rawDensity": -2.6929476488727082e-05,
+                  "normalisedF32": 0.0007112125167623162
+                },
+                {
+                  "index": 35,
+                  "logExposure": -2.0392156862745097,
+                  "rawDensity": 2.7020649031400613e-05,
+                  "normalisedF32": 0.000765162636525929
+                }
+              ],
+              "actualFloat": [
+                0.0007357077556662261,
+                0.0007265243912115693
+              ],
+              "numpyFloat64": [
+                0.0007357078121914269,
+                0.0007265244276817239
+              ],
+              "scipyLinearFloat64": [
+                0.0007357078121914269,
+                0.0007265244276817239
+              ],
+              "deltaActual": -9.18336445465684e-06,
+              "deltaReference": -9.183384509703005e-06,
+              "deltaRawDoubleTable": -9.18340440676953e-06,
+              "rawDoubleReference": [
+                0.0007357077541946583,
+                0.0007265243497878887
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 1,
+              "logQuery": [
+                -2.099000930786133,
+                -2.0935299396514893
+              ],
+              "resourceIndices": [
+                32,
+                34
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 31,
+                  "logExposure": -2.149019607843137,
+                  "rawDensity": 0.0003270214808590513,
+                  "normalisedF32": 0.0009952796390280128
+                },
+                {
+                  "index": 32,
+                  "logExposure": -2.1215686274509804,
+                  "rawDensity": 0.00034384175924677087,
+                  "normalisedF32": 0.0010121000232174993
+                },
+                {
+                  "index": 33,
+                  "logExposure": -2.0941176470588236,
+                  "rawDensity": 0.000522672720730363,
+                  "normalisedF32": 0.0011909309541806579
+                },
+                {
+                  "index": 34,
+                  "logExposure": -2.0666666666666664,
+                  "rawDensity": 0.0008437757599878457,
+                  "normalisedF32": 0.0015120339812710881
+                },
+                {
+                  "index": 35,
+                  "logExposure": -2.0392156862745097,
+                  "rawDensity": 0.0011901662598815862,
+                  "normalisedF32": 0.0018584245117381215
+                }
+              ],
+              "actualFloat": [
+                0.0011591188376769423,
+                0.001197805511765182
+              ],
+              "numpyFloat64": [
+                0.0011591185627200852,
+                0.0011978054783323532
+              ],
+              "scipyLinearFloat64": [
+                0.0011591185627200852,
+                0.001197805478332353
+              ],
+              "deltaActual": 3.868667408823967e-05,
+              "deltaReference": 3.8686915612268094e-05,
+              "deltaRawDoubleTable": 3.8687032072068014e-05,
+              "rawDoubleReference": [
+                0.0011591184995458368,
+                0.0011978055316179048
+              ],
+              "oldTraceExact": true
+            },
+            {
+              "channel": 2,
+              "logQuery": [
+                -2.1145377159118652,
+                -2.109066963195801
+              ],
+              "resourceIndices": [
+                32,
+                33
+              ],
+              "resourceNeighbourhood": [
+                {
+                  "index": 31,
+                  "logExposure": -2.149019607843137,
+                  "rawDensity": 0.002680340931535584,
+                  "normalisedF32": 0.003469852963462472
+                },
+                {
+                  "index": 32,
+                  "logExposure": -2.1215686274509804,
+                  "rawDensity": 0.003358705682646293,
+                  "normalisedF32": 0.004148217849433422
+                },
+                {
+                  "index": 33,
+                  "logExposure": -2.0941176470588236,
+                  "rawDensity": 0.004097731653154975,
+                  "normalisedF32": 0.0048872437328100204
+                },
+                {
+                  "index": 34,
+                  "logExposure": -2.0666666666666664,
+                  "rawDensity": 0.004826651821909523,
+                  "normalisedF32": 0.005616163834929466
+                }
+              ],
+              "actualFloat": [
+                0.004337503109127283,
+                0.004484784789383411
+              ],
+              "numpyFloat64": [
+                0.004337502649419316,
+                0.004484784067543302
+              ],
+              "scipyLinearFloat64": [
+                0.004337502649419316,
+                0.004484784067543301
+              ],
+              "deltaActual": 0.0001472816802561283,
+              "deltaReference": 0.00014728141812398593,
+              "deltaRawDoubleTable": 0.00014728174650394978,
+              "rawDoubleReference": [
+                0.004337501454314481,
+                0.0044847832008184305
+              ],
+              "oldTraceExact": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

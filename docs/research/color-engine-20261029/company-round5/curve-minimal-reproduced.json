@@ -1,0 +1,46 @@
+{
+  "version": "ProfileTwoPointReproductionV1",
+  "cases": [
+    {
+      "film": "kodak_portra_400",
+      "channel": 0,
+      "rawResourceSlope": -0.004537621694592939,
+      "queries": [
+        -2.6783347129821777,
+        -2.6728639602661133
+      ],
+      "numpyRawDensity": [
+        0.0003309468509371045,
+        0.00030612264472693724
+      ],
+      "scipyRawDensity": [
+        0.00033094685093710456,
+        0.00030612264472693724
+      ],
+      "numpyDelta": -2.4824206210167273e-05,
+      "scipyDelta": -2.4824206210167328e-05,
+      "maxReferenceDifference": 5.421010862427522e-20
+    },
+    {
+      "film": "kodak_ektar_100",
+      "channel": 0,
+      "rawResourceSlope": -0.004606931723647779,
+      "queries": [
+        -2.6885135173797607,
+        -2.6830430030822754
+      ],
+      "numpyRawDensity": [
+        0.0003781723295620361,
+        0.0003529700437002821
+      ],
+      "scipyRawDensity": [
+        0.00037817232956203605,
+        0.0003529700437002821
+      ],
+      "numpyDelta": -2.520228586175402e-05,
+      "scipyDelta": -2.5202285861753966e-05,
+      "maxReferenceDifference": 5.421010862427522e-20
+    }
+  ],
+  "fixedResourceNoMutation": true
+}

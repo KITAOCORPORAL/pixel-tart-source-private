@@ -1,0 +1,18 @@
+{
+  "version": "Round5LocalExecutionV1",
+  "root": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\round5",
+  "curveExecutable": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\round5\\curve-neighbour-probe-final.exe",
+  "curveProbeBuild": "clang20.1.2 -O3 -DNDEBUG -std=c++20; linked original engine/core/volk static libraries, no source changes",
+  "decodeTraceSource": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\round5\\source-decode-trace",
+  "decodeTraceSourceSha256": "ae545ca76c6ab3c9a8a547b1136111268ac50627b66e235697a6a3bae4af9712",
+  "decodeTraceBuild": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\round5\\build-decode-trace",
+  "mainRenders": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\round5\\bt-complete-sealed",
+  "supplementRenders": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\round5\\bt-supplement-sealed",
+  "curveLocalRawQueriesAndNativeReports": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\round5\\curve-final-source-run",
+  "oldTraceUsed": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\trace2-kodak_portra_400 and trace2-kodak_ektar_100",
+  "completeRenderCases": 64,
+  "freshReopenRenderCases": 64,
+  "fullOldHardeningRerun": false,
+  "d80014ScanOrRetry": false,
+  "originalUpstreamSourceClean": true
+}

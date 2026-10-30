@@ -1,0 +1,249 @@
+{
+  "version": "CompanyRound5DeliveryV1",
+  "baseCommit": "be2c33b6b23986b1275ad29244e0cab3cc41412b",
+  "branch": "research/color-engine-company-20261030",
+  "status": "VERIFIED_BOUNDED_RESEARCH_PRODUCT_DISABLED",
+  "excludesItself": true,
+  "files": [
+    {
+      "path": "docs/research/color-engine-20261029/BACKEND_CONTRACT_V2.md",
+      "bytes": 10605,
+      "sha256": "9ed331c5321a17b0c6d76e8cad575dfe29500da1e1e00b47c8cf6c70cb2ee08b"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/BT_NODE_COMPARISON_ROUND4.md",
+      "bytes": 3687,
+      "sha256": "06bd5062d9bec77deba46a7b94d40e380e0406807af2091f4009bfbf15f1a884"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/COMPANY_ROUND5_REPORT.md",
+      "bytes": 10495,
+      "sha256": "df69064cf3b7fb8207f00a2d7ddb41f7ed15341ecff0aa202d9fa968703ab42e"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/CURVE_NODE_COMPARISON_ROUND5.md",
+      "bytes": 5013,
+      "sha256": "26da9aa9a562d4f4e5220cba5451c12df9bc2be39235a98228af31912e42e001"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/LICENSE_ROUND5.md",
+      "bytes": 1300,
+      "sha256": "006c6e0ae9edb072f456278fc92f0053b16d9ba12f04f5157c7234c111ff19b8"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/REPRODUCE_ROUND5.md",
+      "bytes": 7027,
+      "sha256": "fa44930cfcff864aedca73d9fefa0746e582be6235f5bdd79425fc89e22eb4ca"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/EXECUTION_STATUS.json",
+      "bytes": 1953,
+      "sha256": "d1fecc029ea7aadb5c190138a0b54e7e241f2d1e7839d2599da2e8baca258d4e"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/R55_CAPABILITIES.json",
+      "bytes": 2475,
+      "sha256": "7d413301d74f1a8be1ac4d8b564a9233a8c62bade28a3568b4407847d9e566bd"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/bt-actual-decode.json",
+      "bytes": 60891,
+      "sha256": "3c2d3e6149430ed25d5535a93bb4f5746c4bf5dfc435976d762e8cf13b69f659"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/bt-complete-path.json",
+      "bytes": 194299,
+      "sha256": "434ceca888fd3691e6d79e1d082f5b5829162b61723765cb5eb59d3c3f5f6229"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/bt-effect-summary.json",
+      "bytes": 9098,
+      "sha256": "5e2dfe72dda052fdcc6fd8bb4373c3d24171003c753b920e414636eef9d34ce2"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/bt-gradient-decode.json",
+      "bytes": 16747,
+      "sha256": "19c7993f14b562874b1be2e3720c600cd6363e88577ffabe890c092e373c327b"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/bt-gradient-propagation.json",
+      "bytes": 11443,
+      "sha256": "f79f3b4f215d15b9b0aca90048c7f3dfcb1b88e2b7997db36d86ac518f95f0bb"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/bt-internal-defaults.json",
+      "bytes": 1420,
+      "sha256": "771ff88e943ff0e0897742e01a4f7e3110637bc7b38790460ff147940856652e"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/bt-spatial-propagation.json",
+      "bytes": 11395,
+      "sha256": "d871c5ca0a2967deb46e0686bc5503b96228b01c82aabc57ff3ac5f762aa971b"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/bt-supplement.json",
+      "bytes": 196371,
+      "sha256": "5a5f4a688242c342d7d10aee8b6f7c8aa6b8f432132d51bd3320dc49db7cfb08"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/curve-minimal-fixture.json",
+      "bytes": 2377,
+      "sha256": "24d171db91095ebe74e7ce72bd947a5eaa215892f2aeb41caf7d7ad2782e98fb"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/curve-minimal-reproduced.json",
+      "bytes": 1227,
+      "sha256": "bcaa811168700401d0d649bcd079d8023117215f8bfa5f9fb08025160c3b1085"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/curve-reference-provenance.json",
+      "bytes": 1901,
+      "sha256": "4761912f9315a073328392e5e54d614cd0a0f29b2a5c231457fecabe8a870be1"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/curve-root-cause.json",
+      "bytes": 122910,
+      "sha256": "cdb2d9e0c4f38a74e470f2df1c710df95c9807f9113bb285ee7477e5ffc2a4a8"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/decode-trace-build-summary.txt",
+      "bytes": 603,
+      "sha256": "4c4733ea224e685229196d8b6930214db2c81bc85b2ce34ad9e94b963eedc68f"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/decode-trace-configure.txt",
+      "bytes": 867,
+      "sha256": "2346aceb41434df4f2bffce88e2a6d9e162e77b9f790f86f024766d47a00fcab"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/driver-build-provenance.json",
+      "bytes": 2282,
+      "sha256": "b2481c9b4185126a5b7ca2edbbcd7dc56d4998acccdb6bd5ac73bfdc860e6380"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/environment.json",
+      "bytes": 3773,
+      "sha256": "69aa1267bff256b37de207a973eec6fee27cfd2d32be3b27b23a7387d0da2554"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/external-source-manifest.json",
+      "bytes": 2000,
+      "sha256": "072903519d5b13d8ad0c517cd04f3ba49754420867c4dd2eacda32dbe0eac47d"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/local-execution.json",
+      "bytes": 1291,
+      "sha256": "2c1e1a8a3349e2e513d5a4c96fd2551370bd40cf6113231c487fc95a65adeb29"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/old-research-preservation.json",
+      "bytes": 22338,
+      "sha256": "33295beee4d269cd62554fb322877875ffc4044f4e5793d2244614ad0c3e94ab"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/original-pointwise-regression.txt",
+      "bytes": 363,
+      "sha256": "46ef6608b949de0a92361bcfbda1912894ac137c041681f372057ce5bf25959a"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/patched-pointwise-regression.txt",
+      "bytes": 361,
+      "sha256": "428135204b0ec4d5bb9a897bd63ef0e7a9d0b1adb3575e79b434a9c14ce0cae3"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/preservation-check.json",
+      "bytes": 2120,
+      "sha256": "80429fd96d3b7e6bd0d5f787a4132e3575fa39e6f038848eade6e9d34d7c7ca5"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/profile-lineage.json",
+      "bytes": 1993,
+      "sha256": "6438e54bf88ef41c4d916dd7a6c8e31bdfdcda7f744cb4d99c5c00784aa3bd08"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/refs.txt",
+      "bytes": 24763,
+      "sha256": "213ccad28485104b72bc3a812e49eb1874714a71285c29bdccb18abc2cbb8c74"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/remotes.txt",
+      "bytes": 326,
+      "sha256": "9c45546a7a3ee6e0098944a48577ed7b2667dc3cb87b792b500a83c494d6205c"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/saved-output-audit.json",
+      "bytes": 9014,
+      "sha256": "e9cc94fb858851dc628a1f6a5ef51d2b7d5967b614d1ce5172cf74ba4092fb22"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/sealed-rerun-check.json",
+      "bytes": 7513,
+      "sha256": "9bf1a117477edc16c8e36e9c498d185e029ee7676a2efd5c609f92b88d524e66"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/states-after.txt",
+      "bytes": 16376,
+      "sha256": "735e8b6febf881ab8597778f33023d9bcb75aaf75789699443788fccf93bc9f5"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/states.txt",
+      "bytes": 14271,
+      "sha256": "ff28049f4e4d1753c17e434733a3c75dbe7e7c46ed7d0d8b0f64f4c0c1b11a13"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/verification.txt",
+      "bytes": 193,
+      "sha256": "7ae98d6db6d1c8bb2d58104fea8876fe15ee2d55353b5924bf18e8c6b620929b"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/vulkan-summary.txt",
+      "bytes": 473,
+      "sha256": "c4a60a206620130c0e5f1eb63db0c05257967416a390402c757abf31fc9485d3"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round5/worktrees.txt",
+      "bytes": 9528,
+      "sha256": "42f9f03e35faeef35a142a8fc8185909b322f1a88df7979a95e18bc5d5d5b4a2"
+    },
+    {
+      "path": "tools/spektralab-research/apply_decode_tap.py",
+      "bytes": 2008,
+      "sha256": "b375d3f7c29e6a1e864a215631730847d30345e7441035dcf52bf49440916fde"
+    },
+    {
+      "path": "tools/spektralab-research/bt_complete_path.py",
+      "bytes": 8877,
+      "sha256": "938f22824da4acb34fd4b87e78e8b10e1bac4c6187f46bc1f961251203864e7c"
+    },
+    {
+      "path": "tools/spektralab-research/bt_decode_tap.py",
+      "bytes": 2909,
+      "sha256": "8821ee33c0d0a857153a0866455dd5fb35e6646f97f62be5bc4f0a432509d641"
+    },
+    {
+      "path": "tools/spektralab-research/bt_spatial_trace.py",
+      "bytes": 2187,
+      "sha256": "34c739bd49aad12292f0e9409f1453bf389e861841a1fb1e41d8fcb47154ffc4"
+    },
+    {
+      "path": "tools/spektralab-research/curve_minimal_repro.py",
+      "bytes": 1200,
+      "sha256": "53b71e8749e8274eded30735132ab8f440db53358e29f6379dc4ce66e5098efa"
+    },
+    {
+      "path": "tools/spektralab-research/curve_neighbour_probe.cpp",
+      "bytes": 2898,
+      "sha256": "1965f0c81317680802a07e5c680964a3192d1346c1f5ead136f160dabce4d740"
+    },
+    {
+      "path": "tools/spektralab-research/curve_root_cause.py",
+      "bytes": 8812,
+      "sha256": "0141b3075b66179ec577a88c693ba4c092dc946e2f1c7cd734e66cc00a3a9076"
+    },
+    {
+      "path": "tools/spektralab-research/verify_round5.py",
+      "bytes": 3398,
+      "sha256": "4743cb7beea01fdaa9ca9b2b0033da83b54481b62de4e2d18480739a4d20c2fd"
+    }
+  ]
+}

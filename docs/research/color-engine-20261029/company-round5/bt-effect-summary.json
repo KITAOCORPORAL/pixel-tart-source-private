@@ -1,0 +1,425 @@
+{
+  "version": "BtBoundedEffectSummaryV1",
+  "ordinaryOriginalVsPatchAllExact": true,
+  "patchedDefaultVsOsAllExact": true,
+  "osRepairJoin": [
+    {
+      "case": "709-join-kodak_portra_400",
+      "left": "original-os",
+      "right": "patched-os",
+      "changedPixels": 21,
+      "changedRgbChannels": 56,
+      "maxAbsU16": 9,
+      "meanAbsRgbU16": 0.47619047619047616,
+      "changedXColumns": [
+        8,
+        9,
+        10
+      ],
+      "changedYRows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "changedInputChannelBits": [
+        "0x3da66553",
+        "0x3da66554",
+        "0x3da66555"
+      ],
+      "bbox": [
+        8,
+        0,
+        10,
+        6
+      ],
+      "alphaChanged": false
+    },
+    {
+      "case": "709-join-kodak_ektar_100",
+      "left": "original-os",
+      "right": "patched-os",
+      "changedPixels": 21,
+      "changedRgbChannels": 42,
+      "maxAbsU16": 4,
+      "meanAbsRgbU16": 0.20634920634920634,
+      "changedXColumns": [
+        8,
+        9,
+        10
+      ],
+      "changedYRows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "changedInputChannelBits": [
+        "0x3da66553",
+        "0x3da66554",
+        "0x3da66555"
+      ],
+      "bbox": [
+        8,
+        0,
+        10,
+        6
+      ],
+      "alphaChanged": false
+    },
+    {
+      "case": "020-join-kodak_portra_400",
+      "left": "original-os",
+      "right": "patched-os",
+      "changedPixels": 21,
+      "changedRgbChannels": 56,
+      "maxAbsU16": 9,
+      "meanAbsRgbU16": 0.47619047619047616,
+      "changedXColumns": [
+        8,
+        9,
+        10
+      ],
+      "changedYRows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "changedInputChannelBits": [
+        "0x3da66553",
+        "0x3da66554",
+        "0x3da66555"
+      ],
+      "bbox": [
+        8,
+        0,
+        10,
+        6
+      ],
+      "alphaChanged": false
+    },
+    {
+      "case": "020-join-kodak_ektar_100",
+      "left": "original-os",
+      "right": "patched-os",
+      "changedPixels": 21,
+      "changedRgbChannels": 42,
+      "maxAbsU16": 4,
+      "meanAbsRgbU16": 0.20634920634920634,
+      "changedXColumns": [
+        8,
+        9,
+        10
+      ],
+      "changedYRows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "changedInputChannelBits": [
+        "0x3da66553",
+        "0x3da66554",
+        "0x3da66555"
+      ],
+      "bbox": [
+        8,
+        0,
+        10,
+        6
+      ],
+      "alphaChanged": false
+    }
+  ],
+  "osRepairSaturated": [
+    {
+      "case": "709-saturated-kodak_portra_400",
+      "left": "original-os",
+      "right": "patched-os",
+      "changedPixels": 9,
+      "changedRgbChannels": 15,
+      "maxAbsU16": 6,
+      "meanAbsRgbU16": 0.5,
+      "changedXColumns": [
+        9,
+        10,
+        11
+      ],
+      "changedYRows": [
+        0,
+        1,
+        2
+      ],
+      "changedInputChannelBits": [
+        "0x00000000",
+        "0x3da66554",
+        "0x3f800000"
+      ],
+      "bbox": [
+        9,
+        0,
+        11,
+        2
+      ],
+      "alphaChanged": false
+    },
+    {
+      "case": "709-saturated-kodak_ektar_100",
+      "left": "original-os",
+      "right": "patched-os",
+      "changedPixels": 12,
+      "changedRgbChannels": 18,
+      "maxAbsU16": 7,
+      "meanAbsRgbU16": 0.5833333333333334,
+      "changedXColumns": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "changedYRows": [
+        0,
+        1,
+        2
+      ],
+      "changedInputChannelBits": [
+        "0x00000000",
+        "0x3da66554",
+        "0x3f000000",
+        "0x3f800000",
+        "0x40000000",
+        "0xbe800000"
+      ],
+      "bbox": [
+        8,
+        0,
+        11,
+        2
+      ],
+      "alphaChanged": false
+    },
+    {
+      "case": "020-saturated-kodak_portra_400",
+      "left": "original-os",
+      "right": "patched-os",
+      "changedPixels": 12,
+      "changedRgbChannels": 18,
+      "maxAbsU16": 4,
+      "meanAbsRgbU16": 0.4444444444444444,
+      "changedXColumns": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "changedYRows": [
+        0,
+        1,
+        2
+      ],
+      "changedInputChannelBits": [
+        "0x00000000",
+        "0x3da66554",
+        "0x3f000000",
+        "0x3f800000",
+        "0x40000000",
+        "0xbe800000"
+      ],
+      "bbox": [
+        8,
+        0,
+        11,
+        2
+      ],
+      "alphaChanged": false
+    },
+    {
+      "case": "020-saturated-kodak_ektar_100",
+      "left": "original-os",
+      "right": "patched-os",
+      "changedPixels": 12,
+      "changedRgbChannels": 15,
+      "maxAbsU16": 3,
+      "meanAbsRgbU16": 0.25,
+      "changedXColumns": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "changedYRows": [
+        0,
+        1,
+        2
+      ],
+      "changedInputChannelBits": [
+        "0x00000000",
+        "0x3da66554",
+        "0x3f000000",
+        "0x3f800000",
+        "0x40000000",
+        "0xbe800000"
+      ],
+      "bbox": [
+        8,
+        0,
+        11,
+        2
+      ],
+      "alphaChanged": false
+    }
+  ],
+  "verticalReplication": [
+    {
+      "variant": "original",
+      "case": "709-join-kodak_portra_400",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "original",
+      "case": "709-join-kodak_ektar_100",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "original",
+      "case": "020-join-kodak_portra_400",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "original",
+      "case": "020-join-kodak_ektar_100",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "patched",
+      "case": "709-join-kodak_portra_400",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "patched",
+      "case": "709-join-kodak_ektar_100",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "patched",
+      "case": "020-join-kodak_portra_400",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "patched",
+      "case": "020-join-kodak_ektar_100",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "709-join-kodak_portra_400",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "709-join-kodak_ektar_100",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "020-join-kodak_portra_400",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "original-os",
+      "case": "020-join-kodak_ektar_100",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "709-join-kodak_portra_400",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "709-join-kodak_ektar_100",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "020-join-kodak_portra_400",
+      "height7Vs1AllRowsExact": true
+    },
+    {
+      "variant": "patched-os",
+      "case": "020-join-kodak_ektar_100",
+      "height7Vs1AllRowsExact": true
+    }
+  ],
+  "gradients": [
+    {
+      "case": "709-gradient-kodak_portra_400",
+      "left": "original-os",
+      "right": "patched-os",
+      "changedPixels": 0,
+      "changedRgbChannels": 0,
+      "maxAbsU16": 0,
+      "meanAbsRgbU16": 0.0,
+      "changedXColumns": [],
+      "changedYRows": [],
+      "changedInputChannelBits": [],
+      "bbox": null,
+      "alphaChanged": false
+    },
+    {
+      "case": "709-gradient-kodak_ektar_100",
+      "left": "original-os",
+      "right": "patched-os",
+      "changedPixels": 0,
+      "changedRgbChannels": 0,
+      "maxAbsU16": 0,
+      "meanAbsRgbU16": 0.0,
+      "changedXColumns": [],
+      "changedYRows": [],
+      "changedInputChannelBits": [],
+      "bbox": null,
+      "alphaChanged": false
+    },
+    {
+      "case": "020-gradient-kodak_portra_400",
+      "left": "original-os",
+      "right": "patched-os",
+      "changedPixels": 0,
+      "changedRgbChannels": 0,
+      "maxAbsU16": 0,
+      "meanAbsRgbU16": 0.0,
+      "changedXColumns": [],
+      "changedYRows": [],
+      "changedInputChannelBits": [],
+      "bbox": null,
+      "alphaChanged": false
+    },
+    {
+      "case": "020-gradient-kodak_ektar_100",
+      "left": "original-os",
+      "right": "patched-os",
+      "changedPixels": 0,
+      "changedRgbChannels": 0,
+      "maxAbsU16": 0,
+      "meanAbsRgbU16": 0.0,
+      "changedXColumns": [],
+      "changedYRows": [],
+      "changedInputChannelBits": [],
+      "bbox": null,
+      "alphaChanged": false
+    }
+  ]
+}

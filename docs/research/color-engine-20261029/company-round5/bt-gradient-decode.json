@@ -1,0 +1,491 @@
+{
+  "version": "BtActualDecodeTapV1",
+  "passiveTraceLibrarySha256": "bc9a9073d7e471024257b6f95260b365eb2a94b58625f301e03d63d925fc06b8",
+  "inputName": "gradient",
+  "cases": [
+    {
+      "variant": "original",
+      "space": "ITU-R BT.709",
+      "decodeTapSha256": "a1ac09056d3a87bea34338b2d03f6c887c7f90520c1309dd1b211bbe8ddb5daf",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.009999999776482582,
+          "inputBits": "0xbc23d70a",
+          "decoded": -0.002222222276031971,
+          "decodedBits": "0xbb11a2b4",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.002222222172551685,
+          "powerReference": -0.0037514987093345328
+        },
+        {
+          "column": 127,
+          "input": 0.5902734398841858,
+          "inputBits": "0x3f171c29",
+          "decoded": 0.35462066531181335,
+          "decodedBits": "0x3eb590d7",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.13117187552981907,
+          "powerReference": 0.3546206986158728
+        },
+        {
+          "column": 128,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.018055101856589317,
+          "decodedBits": "0x3c93e84b",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 129,
+          "input": 0.5997265577316284,
+          "inputBits": "0x3f1987ae",
+          "decoded": 0.36551907658576965,
+          "decodedBits": "0x3ebb2551",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1332725683848063,
+          "powerReference": 0.36551911779028023
+        },
+        {
+          "column": 256,
+          "input": 1.2000000476837158,
+          "inputBits": "0x3f99999a",
+          "decoded": 1.4499696493148804,
+          "decodedBits": "0x3fb9989b",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.26666667726304794,
+          "powerReference": 1.4499694206580998
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "space": "ITU-R BT.2020",
+      "decodeTapSha256": "a1ac09056d3a87bea34338b2d03f6c887c7f90520c1309dd1b211bbe8ddb5daf",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.009999999776482582,
+          "inputBits": "0xbc23d70a",
+          "decoded": -0.002222222276031971,
+          "decodedBits": "0xbb11a2b4",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.002222222172551685,
+          "powerReference": -0.0037514987093345328
+        },
+        {
+          "column": 127,
+          "input": 0.5902734398841858,
+          "inputBits": "0x3f171c29",
+          "decoded": 0.35462066531181335,
+          "decodedBits": "0x3eb590d7",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.13117187552981907,
+          "powerReference": 0.3546206986158728
+        },
+        {
+          "column": 128,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.018055101856589317,
+          "decodedBits": "0x3c93e84b",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 129,
+          "input": 0.5997265577316284,
+          "inputBits": "0x3f1987ae",
+          "decoded": 0.36551907658576965,
+          "decodedBits": "0x3ebb2551",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1332725683848063,
+          "powerReference": 0.36551911779028023
+        },
+        {
+          "column": 256,
+          "input": 1.2000000476837158,
+          "inputBits": "0x3f99999a",
+          "decoded": 1.4499696493148804,
+          "decodedBits": "0x3fb9989b",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.26666667726304794,
+          "powerReference": 1.4499694206580998
+        }
+      ]
+    },
+    {
+      "variant": "patched",
+      "space": "ITU-R BT.709",
+      "decodeTapSha256": "a1ac09056d3a87bea34338b2d03f6c887c7f90520c1309dd1b211bbe8ddb5daf",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.009999999776482582,
+          "inputBits": "0xbc23d70a",
+          "decoded": -0.002222222276031971,
+          "decodedBits": "0xbb11a2b4",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.002222222172551685,
+          "powerReference": -0.0037514987093345328
+        },
+        {
+          "column": 127,
+          "input": 0.5902734398841858,
+          "inputBits": "0x3f171c29",
+          "decoded": 0.35462066531181335,
+          "decodedBits": "0x3eb590d7",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.13117187552981907,
+          "powerReference": 0.3546206986158728
+        },
+        {
+          "column": 128,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.018055101856589317,
+          "decodedBits": "0x3c93e84b",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 129,
+          "input": 0.5997265577316284,
+          "inputBits": "0x3f1987ae",
+          "decoded": 0.36551907658576965,
+          "decodedBits": "0x3ebb2551",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1332725683848063,
+          "powerReference": 0.36551911779028023
+        },
+        {
+          "column": 256,
+          "input": 1.2000000476837158,
+          "inputBits": "0x3f99999a",
+          "decoded": 1.4499696493148804,
+          "decodedBits": "0x3fb9989b",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.26666667726304794,
+          "powerReference": 1.4499694206580998
+        }
+      ]
+    },
+    {
+      "variant": "patched",
+      "space": "ITU-R BT.2020",
+      "decodeTapSha256": "a1ac09056d3a87bea34338b2d03f6c887c7f90520c1309dd1b211bbe8ddb5daf",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.009999999776482582,
+          "inputBits": "0xbc23d70a",
+          "decoded": -0.002222222276031971,
+          "decodedBits": "0xbb11a2b4",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.002222222172551685,
+          "powerReference": -0.0037514987093345328
+        },
+        {
+          "column": 127,
+          "input": 0.5902734398841858,
+          "inputBits": "0x3f171c29",
+          "decoded": 0.35462066531181335,
+          "decodedBits": "0x3eb590d7",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.13117187552981907,
+          "powerReference": 0.3546206986158728
+        },
+        {
+          "column": 128,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.018055101856589317,
+          "decodedBits": "0x3c93e84b",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 129,
+          "input": 0.5997265577316284,
+          "inputBits": "0x3f1987ae",
+          "decoded": 0.36551907658576965,
+          "decodedBits": "0x3ebb2551",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1332725683848063,
+          "powerReference": 0.36551911779028023
+        },
+        {
+          "column": 256,
+          "input": 1.2000000476837158,
+          "inputBits": "0x3f99999a",
+          "decoded": 1.4499696493148804,
+          "decodedBits": "0x3fb9989b",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.26666667726304794,
+          "powerReference": 1.4499694206580998
+        }
+      ]
+    },
+    {
+      "variant": "original-os",
+      "space": "ITU-R BT.709",
+      "decodeTapSha256": "7eb50eb954a5bba3be6869ac32057faf0830d5e5604c15def8637c1e0b9e57c5",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.009999999776482582,
+          "inputBits": "0xbc23d70a",
+          "decoded": -0.002222222276031971,
+          "decodedBits": "0xbb11a2b4",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.002222222172551685,
+          "powerReference": -0.0037514987093345328
+        },
+        {
+          "column": 127,
+          "input": 0.5902734398841858,
+          "inputBits": "0x3f171c29",
+          "decoded": 0.35462066531181335,
+          "decodedBits": "0x3eb590d7",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.13117187552981907,
+          "powerReference": 0.3546206986158728
+        },
+        {
+          "column": 128,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.017999999225139618,
+          "decodedBits": "0x3c9374bc",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 129,
+          "input": 0.5997265577316284,
+          "inputBits": "0x3f1987ae",
+          "decoded": 0.36551907658576965,
+          "decodedBits": "0x3ebb2551",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1332725683848063,
+          "powerReference": 0.36551911779028023
+        },
+        {
+          "column": 256,
+          "input": 1.2000000476837158,
+          "inputBits": "0x3f99999a",
+          "decoded": 1.4499696493148804,
+          "decodedBits": "0x3fb9989b",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.26666667726304794,
+          "powerReference": 1.4499694206580998
+        }
+      ]
+    },
+    {
+      "variant": "original-os",
+      "space": "ITU-R BT.2020",
+      "decodeTapSha256": "7eb50eb954a5bba3be6869ac32057faf0830d5e5604c15def8637c1e0b9e57c5",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.009999999776482582,
+          "inputBits": "0xbc23d70a",
+          "decoded": -0.002222222276031971,
+          "decodedBits": "0xbb11a2b4",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.002222222172551685,
+          "powerReference": -0.0037514987093345328
+        },
+        {
+          "column": 127,
+          "input": 0.5902734398841858,
+          "inputBits": "0x3f171c29",
+          "decoded": 0.35462066531181335,
+          "decodedBits": "0x3eb590d7",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.13117187552981907,
+          "powerReference": 0.3546206986158728
+        },
+        {
+          "column": 128,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.017999999225139618,
+          "decodedBits": "0x3c9374bc",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 129,
+          "input": 0.5997265577316284,
+          "inputBits": "0x3f1987ae",
+          "decoded": 0.36551907658576965,
+          "decodedBits": "0x3ebb2551",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1332725683848063,
+          "powerReference": 0.36551911779028023
+        },
+        {
+          "column": 256,
+          "input": 1.2000000476837158,
+          "inputBits": "0x3f99999a",
+          "decoded": 1.4499696493148804,
+          "decodedBits": "0x3fb9989b",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.26666667726304794,
+          "powerReference": 1.4499694206580998
+        }
+      ]
+    },
+    {
+      "variant": "patched-os",
+      "space": "ITU-R BT.709",
+      "decodeTapSha256": "a1ac09056d3a87bea34338b2d03f6c887c7f90520c1309dd1b211bbe8ddb5daf",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.009999999776482582,
+          "inputBits": "0xbc23d70a",
+          "decoded": -0.002222222276031971,
+          "decodedBits": "0xbb11a2b4",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.002222222172551685,
+          "powerReference": -0.0037514987093345328
+        },
+        {
+          "column": 127,
+          "input": 0.5902734398841858,
+          "inputBits": "0x3f171c29",
+          "decoded": 0.35462066531181335,
+          "decodedBits": "0x3eb590d7",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.13117187552981907,
+          "powerReference": 0.3546206986158728
+        },
+        {
+          "column": 128,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.018055101856589317,
+          "decodedBits": "0x3c93e84b",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 129,
+          "input": 0.5997265577316284,
+          "inputBits": "0x3f1987ae",
+          "decoded": 0.36551907658576965,
+          "decodedBits": "0x3ebb2551",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1332725683848063,
+          "powerReference": 0.36551911779028023
+        },
+        {
+          "column": 256,
+          "input": 1.2000000476837158,
+          "inputBits": "0x3f99999a",
+          "decoded": 1.4499696493148804,
+          "decodedBits": "0x3fb9989b",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.26666667726304794,
+          "powerReference": 1.4499694206580998
+        }
+      ]
+    },
+    {
+      "variant": "patched-os",
+      "space": "ITU-R BT.2020",
+      "decodeTapSha256": "a1ac09056d3a87bea34338b2d03f6c887c7f90520c1309dd1b211bbe8ddb5daf",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.009999999776482582,
+          "inputBits": "0xbc23d70a",
+          "decoded": -0.002222222276031971,
+          "decodedBits": "0xbb11a2b4",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.002222222172551685,
+          "powerReference": -0.0037514987093345328
+        },
+        {
+          "column": 127,
+          "input": 0.5902734398841858,
+          "inputBits": "0x3f171c29",
+          "decoded": 0.35462066531181335,
+          "decodedBits": "0x3eb590d7",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.13117187552981907,
+          "powerReference": 0.3546206986158728
+        },
+        {
+          "column": 128,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.018055101856589317,
+          "decodedBits": "0x3c93e84b",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 129,
+          "input": 0.5997265577316284,
+          "inputBits": "0x3f1987ae",
+          "decoded": 0.36551907658576965,
+          "decodedBits": "0x3ebb2551",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1332725683848063,
+          "powerReference": 0.36551911779028023
+        },
+        {
+          "column": 256,
+          "input": 1.2000000476837158,
+          "inputBits": "0x3f99999a",
+          "decoded": 1.4499696493148804,
+          "decodedBits": "0x3fb9989b",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.26666667726304794,
+          "powerReference": 1.4499694206580998
+        }
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "space": "ITU-R BT.709",
+      "decodeChangedColumns": [
+        128
+      ],
+      "decodeChangedInputBits": [
+        "0x3da66554"
+      ]
+    },
+    {
+      "space": "ITU-R BT.2020",
+      "decodeChangedColumns": [
+        128
+      ],
+      "decodeChangedInputBits": [
+        "0x3da66554"
+      ]
+    }
+  ]
+}

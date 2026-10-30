@@ -1,0 +1,41 @@
+{
+  "version": "Round5PreservationV1",
+  "researchWorktree": "D:/AI AGENT/worktrees/color-engine-company-20261030",
+  "productSourceDiff": [],
+  "otherTreeObservedStateChanges": [
+    {
+      "path": "E:/Kitao-Worktrees/company-lighttable-lifecycle-20261030",
+      "before": [
+        "## company/lighttable-lifecycle-20261030...origin/company/lighttable-lifecycle-20261030"
+      ],
+      "after": [
+        "## company/lighttable-lifecycle-20261030...origin/company/lighttable-lifecycle-20261030",
+        " M src/RAWSelectionAssistant.Core/Services/Projects/ColorStudioSessionStore.cs",
+        " M src/RAWSelectionAssistant.Core/Services/Projects/ViewingTableState.cs",
+        " M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.FilmBackend.cs",
+        " M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ViewingTable.cs",
+        " M src/RAWSelectionAssistant/Views/PhotoGradePageView.MultiCompare.cs",
+        " M src/RAWSelectionAssistant/Views/PhotoGradePageView.R53.cs",
+        " M src/RAWSelectionAssistant/Views/PhotoGradePageView.R54.cs",
+        " M src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml",
+        " M src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs",
+        " M src/RAWSelectionAssistant/Views/StudioNodeGraphView.cs",
+        " M src/RAWSelectionAssistant/Views/StudioViewingTableView.cs",
+        "?? src/RAWSelectionAssistant.Core/Services/Projects/LightTablePort/",
+        "?? src/RAWSelectionAssistant/Services/ViewingPreferences.cs",
+        "?? src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ViewingLayout.cs",
+        "?? src/RAWSelectionAssistant/Views/PhotoGradePageView.R55.Entry.cs",
+        "?? src/RAWSelectionAssistant/Views/R55MechanicalSound.cs",
+        "?? src/RAWSelectionAssistant/Views/StudioViewingTableView.Interaction.cs",
+        "?? src/RAWSelectionAssistant/Views/StudioViewingTableView.R55.cs"
+      ]
+    }
+  ],
+  "commandsNotUsed": [
+    "reset",
+    "stash",
+    "merge",
+    "clean"
+  ],
+  "otherTreeWritesByThisSession": false
+}

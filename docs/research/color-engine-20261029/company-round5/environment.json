@@ -1,0 +1,79 @@
+{
+  "version": "CompanyRound5EnvironmentV1",
+  "clientDate": "2026-10-30",
+  "clientTimezone": "Europe/Berlin",
+  "hostClockObserved": "2026-10-30T11:28:16.851099+08:00",
+  "gpu": "NVIDIA GeForce GTX1650 4096MiB",
+  "driver": "572.70",
+  "python": "3.13.13 (tags/v3.13.13:01104ce, Apr  7 2026, 19:25:48) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.4.6",
+  "scipy": "1.18.1",
+  "tifffile": "2026.10.15 (isolated python-tools)",
+  "clang": "20.1.2",
+  "glslang": "16.6.0",
+  "cmake": "3.31.10",
+  "baseCommit": "be2c33b6b23986b1275ad29244e0cab3cc41412b",
+  "sourceCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "binaryHashes": [
+    {
+      "path": "C:\\Program Files\\Python313\\python.exe",
+      "sha256": "dc7ecf75280678175b4f931ce05f1ef9c10d48984399ca7de6beee69d71bcb1b"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\AppData\\Roaming\\Python\\Python313\\site-packages\\numpy\\_core\\_multiarray_umath.cp313-win_amd64.pyd",
+      "sha256": "322ad38e97638cc83da31ec28185dd65fc722f0ade096f8620660f08c7cd9dd4"
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\Lib\\site-packages\\scipy\\interpolate\\_dierckx.cp313-win_amd64.pyd",
+      "sha256": "e2b25b6b5efdcecd9b41a330e97af592ae7b59ff747d33f64e526ce0cb0c9773"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\round5\\curve-neighbour-probe.exe",
+      "sha256": "3417c3c65a4131319355e07cf9227c4ddb7ecf4fb9d5d19e5a145c437888fa22"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\round5\\build-decode-trace\\engine\\spektrafilm_engine.dll",
+      "sha256": "bc9a9073d7e471024257b6f95260b365eb2a94b58625f301e03d63d925fc06b8"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\toolchain\\llvm-mingw-20250402-ucrt-x86_64\\bin\\clang++.exe",
+      "sha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\glslang\\bin\\glslang.exe",
+      "sha256": "9643709c02c83e26773f96b6a87f197ab2e84f78be0879ad8fb3619418b5d9ad"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\build-vulkan\\engine\\spektrafilm_engine.dll",
+      "sha256": "38d4e4ec6c29ea871ada425b2322e4711154a987e60e87bc5db362a112ed98a9"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\build-patch\\engine\\spektrafilm_engine.dll",
+      "sha256": "4dae2dcf046af1756a5fa79f5ef419d9d7af7e306fbc4b14bfd7d06de810cf6f"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\build-trace\\engine\\spektrafilm_engine.dll",
+      "sha256": "51c7fdd1e0225b632d1329b673cca74349f94f38a74d85ac664440886c94cd17"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\build-vulkan\\engine\\libspektralab_engine.a",
+      "sha256": "8c3d1d48bfc3c8e6e994bad1da07c5fcb1a4d64316387667ac9691ae4dccff8d"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\build-vulkan\\engine\\libspektralab_core.a",
+      "sha256": "ad319057156aeaa979024cc574a66b01d2c3b765411cf33e82434c3ff720ef57"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\build-vulkan\\engine\\libspk_volk.a",
+      "sha256": "b023e61d03d25d5d97ab082cd2a904f162f634becfece755a38c6154b9c75617"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\round5\\curve-neighbour-probe-final.exe",
+      "sha256": "5ea7014f4f5a80580c28e95b10efc4b46e24dbe346e20a86a2c2a694b94a4a5b"
+    }
+  ],
+  "productIntegration": false,
+  "curveResourceEdits": false,
+  "seedExtension": false,
+  "d80014": "NOT_RUN_SOURCE_ABSENT; previous availability record reused; no new scan"
+}

@@ -1,0 +1,71 @@
+{
+  "version": "ProfileDeclineTwoPointFixtureV1",
+  "sourceCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "scope": "two original sampled densities and two actual log inputs per stock; no data changes",
+  "cases": [
+    {
+      "film": "kodak_portra_400",
+      "resourceSha256": "140c49bbff6d7b6589058ce0836e3286fa995e9433bb8a62a0189d6e1a04da9f",
+      "channel": 0,
+      "resourceIndices": [
+        11,
+        12
+      ],
+      "x": [
+        -2.6980392156862747,
+        -2.6705882352941175
+      ],
+      "originalRawY": [
+        0.0004203584298883801,
+        0.0002957962657230822
+      ],
+      "queries": [
+        -2.6783347129821777,
+        -2.6728639602661133
+      ],
+      "expectedDirection": "declining (negative slope already in source samples)",
+      "oldGpuNormalisedOutput": [
+        0.0010620603570714593,
+        0.0010372361866757274
+      ],
+      "normalisationOffset": "subtract original table per-channel nanmin; does not alter slope"
+    },
+    {
+      "film": "kodak_ektar_100",
+      "resourceSha256": "f2a8c9092153b2d1ee90c5aa588ece7c199c8687520e250946484ff3294b0319",
+      "channel": 0,
+      "resourceIndices": [
+        11,
+        12
+      ],
+      "x": [
+        -2.6980392156862747,
+        -2.6705882352941175
+      ],
+      "originalRawY": [
+        0.00042205657128021316,
+        0.00029559177886635097
+      ],
+      "queries": [
+        -2.6885135173797607,
+        -2.6830430030822754
+      ],
+      "expectedDirection": "declining (negative slope already in source samples)",
+      "oldGpuNormalisedOutput": [
+        0.0011163139715790749,
+        0.001091111684218049
+      ],
+      "normalisationOffset": "subtract original table per-channel nanmin; does not alter slope"
+    }
+  ],
+  "attribution": {
+    "author": "Andrea Volpato",
+    "profileLicense": "CC BY-SA4.0",
+    "upstreamProject": "andreavolpato/spektrafilm",
+    "upstreamCommit": "3bb2c2d2801ff68b92019cf1dbcbb133d60832bc",
+    "profileLastChange": "ad5c8d2b5bbf295f6d3912091f3b137b0aef805a",
+    "excerpt": "Unmodified two-point numeric excerpts from named original profiles; query inputs from our research",
+    "modificationsToProfiles": "NONE",
+    "sourceDataRights": "Metadata names Kodak/Fujifilm sheets and other respective holders; no product permission inferred"
+  }
+}

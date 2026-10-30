@@ -1,0 +1,40 @@
+{
+  "version": "ProfileSourceLineageV1",
+  "upstreamCommit": "3bb2c2d2801ff68b92019cf1dbcbb133d60832bc",
+  "profileLastChangeCommit": "ad5c8d2b5bbf295f6d3912091f3b137b0aef805a",
+  "profileLastChangeMessage": "chore: refit and update license of profiles",
+  "profiles": [
+    {
+      "stock": "kodak_portra_400",
+      "upstreamPath": "src/spektrafilm/data/profiles/kodak_portra_400.json",
+      "upstreamSha256": "140c49bbff6d7b6589058ce0836e3286fa995e9433bb8a62a0189d6e1a04da9f",
+      "runtimeSha256": "140c49bbff6d7b6589058ce0836e3286fa995e9433bb8a62a0189d6e1a04da9f",
+      "exactBytesMatch": true
+    },
+    {
+      "stock": "kodak_ektar_100",
+      "upstreamPath": "src/spektrafilm/data/profiles/kodak_ektar_100.json",
+      "upstreamSha256": "f2a8c9092153b2d1ee90c5aa588ece7c199c8687520e250946484ff3294b0319",
+      "runtimeSha256": "f2a8c9092153b2d1ee90c5aa588ece7c199c8687520e250946484ff3294b0319",
+      "exactBytesMatch": true
+    }
+  ],
+  "implementationFiles": [
+    {
+      "path": "src/spektrafilm/model/density_curves.py",
+      "sha256": "79c8b420d33843a96d417be3ba3aa47f6a0cdc71646013dc5c8c6fed810c9c45"
+    },
+    {
+      "path": "src/spektrafilm/utils/fast_interp.py",
+      "sha256": "e21b53052b2ebc886378ec920eb36993aa41f5d3ac05a3ab166fa7c3a48ef5a8"
+    },
+    {
+      "path": "src/spektrafilm/profiles/io.py",
+      "sha256": "39a37db439fb25f40c5bbd997c6ba6c4cdcdc1585da11b2052455a995c45443b"
+    }
+  ],
+  "upstreamRuntimeExecution": "NOT_RUN; no Numba installed; do not substitute extracted source execution",
+  "measurementGeneration": "Underlying raw measurement extraction/fitting pipeline and truth not supplied by these frozen profiles; no claim that wiggles are physical",
+  "runtimeFilmPath": "interpolate_exposure_to_density -> fast_interp raw samples; layer fit is separate",
+  "license": "Upstream code GPLv3; profile copyright Andrea Volpato CC BY-SA4.0; data-source rights separate; local read-only reference only"
+}

@@ -33,3 +33,16 @@
 最小C ABI顺序：create(resources,NULL)，构造spk_image{float*,w,h,3}，open(engine,image,完整params,&out_json)，复制并string_free(out_json)，render(session,"full",&result)，依stride复制RGBA16，result_free，session_release，engine_destroy。每一步检查错误；成功/异常/取消都做各自所有权释放。产品调用者必须另行版本化输入域/方向/alpha、完整resolved recipe、backend/resource集合及确定性策略。
 
 尚缺：授权且场景明确的自然开发/验证划分、D80014候选全链、家庭补丁/跨Metal oracle、完整性能/尺寸空间效应矩阵、产品项目与灯箱集成验收、GPL代码组合分发批准、逐资源权利批准。全部继续禁用；独立进程、DLL或烘焙LUT不自动解决许可。不得整分支合入产品。
+
+## 2026-10-30 第五批：R5.5能力增补（不升级既有算法）
+
+产品评估名称仅 **“负片/印相模拟·研究中”**，研究默认关闭，不注册Spektra、不改UI或任务桥、不扩产品输入范围。机器可读清单见`company-round5/R55_CAPABILITIES.json`。
+
+- neutral下降已补根因：Portra/Ektar原`density_curves`采样表本身有局部负斜率，减nanmin+正确分段线性插值会保留；两点原profile邻域、NumPy/SciPy固定参考与真实shader复现已完成。CDF模型及layer和单调，但当前grain关闭film路径不使用它们替换sample表；本轮**无曲线修复版本/资源修改**。不平滑/钳制，不以1code声称可见或物理色准失败。
+- BT追加**完整受支持引擎路径证据**：外部研究显式`input_color_space="ITU-R BT.709"/"ITU-R BT.2020"`与`input_cctf_decoding=true`，关闭grain/glare/halation/DIR/autoExposure，原/补丁/各decode-Os四条件。断点图/渐变/负值/>1/饱和mixed RGB/高度1与7共64个小图render，均RGBA16保存、99字段resolved参数及input/backend/resources hash、新进程完整render重开与TIFF16回读通过。它们是研究输入，不扩产品适配承诺。
+- 公司普通原/补丁一致；受控-Os断点图只在实际decode输入bits`0x3da66554`改变，final RGBA16 Portra最大9、Ektar最大4code。源码固定scanner unsharp默认{sigma0.7pixel,amount0.7}仍在链内，它不是grain/glare；被动trace显示差异在`print_scan_finish`扩散到邻列，最终量化只留下部分像素。gradient实际decode亦有差异但RGBA16量化后本组0差异，不能称未经过BT。
+- 兼容断点`0x3da66555`不等于double rounded常数/连续规范约定；继续沿BT_NODE_COMPARISON_ROUND4语义边界。家庭RTX5060Ti补丁仍NOT_RUN，不伪报跨设备通过。
+- 任意grain_seed仍UNSUPPORTED，不扩seed；alpha仍丢弃、输出opaque；RGBA16最终clamp不是HDR；spk_cancel在节点边界、释放须等render结束；result独立所有权与stride规则、串行session限制沿本契约。不能从测试确定性配方推广随机空间效果/任意尺寸稳定。
+- D80014沿第四批NOT_RUN_SOURCE_ABSENT，本轮未扫描/重试；V2身份/所有权/回调修复保留而不重复整轮。WB余量冻结，无新参数/收益合并。LightTable非商业条款与Spektra GPL代码及资源权利是**不同事项**，任何一项都不能替代另项准入；DLL/进程/LUT也非自动许可解决。
+
+有界根因与BT全链数据见COMPANY_ROUND5_REPORT、CURVE_NODE_COMPARISON_ROUND5与REPRODUCE_ROUND5。产品src/旧PV4/5/6、旧recipe全部保持。

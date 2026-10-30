@@ -12,3 +12,7 @@
 - 预览/保存/重开/导出：公司确定性三输入×三胶片9组合，original/patch均重复、新进程resolved-recipe重开、sRGB ICC TIFF16逐像素读回；9组原补丁bit-exact（这些配方未进入BT输入decode分支）。断点probe才是修复像素差异证据。家庭补丁重验、自然验证保留组、Metal全图oracle仍NOT_RUN。
 - PV4/5/6/旧recipe：产品src未改；本轮不重跑全套golden，不暗迁。WB余量仍拒绝产品应用，和此补丁不混算。
 - 科学边界：CalibrationEligible=false；未做真实相机/胶片校准、C1对照或肉眼缺陷判断。
+
+## 第五批实际完整BT路径补证
+
+原9组合未走BT输入decode的限制保留。第五批使用ABI支持的BT.709/BT.2020输入与decode=true，断点/渐变/负值/>1/饱和色/两种高度，原/补丁普通与-Os条件实际走完整engine→CPU RGBA16→TIFF16保存→新进程resolved-recipe重开。64个小case结果、真实decode tap及scanner邻域传播见company-round5；受控-Os断点图Portra最大9、Ektar最大4code，普通公司原/补丁一致。不是新增BT标准曲线，不更改既有补丁，家庭复验仍未运行。

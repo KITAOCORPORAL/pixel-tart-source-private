@@ -1,0 +1,64 @@
+{
+  "version": "ResearchCapabilitiesR55V1",
+  "defaultEnabled": false,
+  "productBackendRegistration": false,
+  "productLabel": "负片/印相模拟·研究中",
+  "productSrcModified": false,
+  "taskBridgeModified": false,
+  "seed": {
+    "arbitraryGrainSeed": "UNSUPPORTED",
+    "extensionImplemented": false,
+    "initialRngStateIsUserSeed": false
+  },
+  "input": {
+    "externalResearchProbeOnly": [
+      "ITU-R BT.709 encoded RGB float32",
+      "ITU-R BT.2020 encoded RGB float32"
+    ],
+    "productInputRangeExpanded": false,
+    "alpha": "DISCARDED; output opaque",
+    "sourceD80014": "NOT_RUN_SOURCE_ABSENT; not rescanned"
+  },
+  "output": {
+    "storage": "owned CPU RGBA16",
+    "range": "final clamp[0,1], *65535+0.5; alpha65535",
+    "hdrFloat": false,
+    "colorSpace": "sRGB D65 encoded for these resolved recipes"
+  },
+  "cancellation": {
+    "method": "spk_cancel from another thread",
+    "granularity": "next node boundary, no shader preemption",
+    "releaseRule": "wait for render completion/join before session release"
+  },
+  "ownership": {
+    "open": "copies input",
+    "result": "owns CPU pixels, can outlive session/engine, caller must spk_result_free after copy",
+    "stride": "row_stride_px is pixels",
+    "strings": "caller-owned out_json uses spk_string_free; engine-owned JSON must not be freed",
+    "threading": "serial render/set_params/release per session; last_error thread-local"
+  },
+  "curve": {
+    "rootCause": "original sampled resource negative slopes, preserved by linear interpolation",
+    "candidateFix": "NONE",
+    "resourceModified": false,
+    "physicalAccuracy": "NOT_MEASURED",
+    "singleCodeVisibility": "NOT_DETERMINED"
+  },
+  "bt": {
+    "repair": "SpektraBtJoinFloatV1 unchanged compatibility breakpoint0x3da66555",
+    "ordinaryCompany": "original and patch equal for tested BT full paths",
+    "controlledOs": "case0x3da66554 flip, actual full RGBA16 differences recorded",
+    "householdPatchedGpu": "NOT_RUN"
+  },
+  "licensing": {
+    "LightTableNonCommercialTerms": "SEPARATE_NOT_SPEKTRA_APPROVAL",
+    "SpektraCode": "GPL distribution compatibility gate remains NOT_APPROVED",
+    "SpektraResources": "individual CC BY-SA/source-data rights gate remains NOT_APPROVED",
+    "processDllOrLutExemption": "NOT_ASSUMED"
+  },
+  "scientificClaims": {
+    "CalibrationEligible": false,
+    "C1Accuracy": false,
+    "physicalFilmMatch": false
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "version": "Round5ExternalSourceManifestV1",
+  "files": [
+    {
+      "checkout": "source2",
+      "path": "engine/src/core/profile.cpp",
+      "sha256": "dcce3289754e154f49f9c0f6cec5d9476bfdeefc9f7a12e5a2abcf8975d422f7"
+    },
+    {
+      "checkout": "source2",
+      "path": "engine/src/core/curves.cpp",
+      "sha256": "86181e4acb6f15e8b3fd670b2ae3a546fbfd7f90a8197a8c0e2d69ce96481a9e"
+    },
+    {
+      "checkout": "source2",
+      "path": "engine/src/core/params.hpp",
+      "sha256": "49b802a8a923c5e2be3087e6ba152220a636d846d550003cfdaa8b7dd9f9e018"
+    },
+    {
+      "checkout": "source2",
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "sha256": "013104bca52118c78318bcbfd9fd9e104898e6d27606b7c0332cdc86fa8eec62"
+    },
+    {
+      "checkout": "source2",
+      "path": "engine/src/shaders/vulkan/spk_curves.comp",
+      "sha256": "bb04e62faec6be775c279237b30bd5336d8ca2735f45618bd5bcce2f837c5082"
+    },
+    {
+      "checkout": "source2",
+      "path": "engine/src/shaders/vulkan/spk_log10_guarded.comp",
+      "sha256": "2659864a10e626bc1423637582f97eccdb84e7bb5165d5224dfbc394a02f04c9"
+    },
+    {
+      "checkout": "source2",
+      "path": "engine/tools/bake_resources.py",
+      "sha256": "2b037fb7d5ac791cdb0e080cfea42b12f4aa126e18a98380442d88726fc151d7"
+    },
+    {
+      "checkout": "round5/source-decode-trace",
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "sha256": "ae545ca76c6ab3c9a8a547b1136111268ac50627b66e235697a6a3bae4af9712"
+    }
+  ],
+  "newCurveFix": "NONE",
+  "existingBtRepair": "SpektraBtJoinFloatV1 unchanged",
+  "oldSource2StillClean": true,
+  "oldPatchStatus": " M engine/CMakeLists.txt\n M engine/src/shaders/vulkan/spk_cctf_decode.comp\n?? engine/tests/bt_probe.cpp\n",
+  "generatedDecodeTapReproductionSourceHash": "ae545ca76c6ab3c9a8a547b1136111268ac50627b66e235697a6a3bae4af9712",
+  "actualDecodeTapSourceHash": "ae545ca76c6ab3c9a8a547b1136111268ac50627b66e235697a6a3bae4af9712"
+}

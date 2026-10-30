@@ -1,0 +1,44 @@
+{
+  "version": "CompanyRound5ExecutionStatusV1",
+  "status": "VERIFIED_BOUNDED_RESEARCH_PRODUCT_DISABLED",
+  "executed": {
+    "profileNegativeSlopeCause": "CONFIRMED_IN_PINNED_ORIGINAL_DOUBLE_TABLE",
+    "runtimeProfileByteLineage": "MATCH_PINNED_UPSTREAM",
+    "curveGpuMatchesOldTap": "EXACT",
+    "twoPointReproduction": "PASS_NUMPY_AND_SCIPY",
+    "twoReferences": "NumPy2.4.6 b832a09 / SciPy1.18.1 e4e854e; actual calls, different interpolation backends",
+    "curveOvershoot": "ZERO_OBSERVED_AT_TESTED_QUERIES",
+    "curveFix": "NONE",
+    "completeBtEngineSavedReopenCases": 64,
+    "completeBtFreshProcessRerenderCases": 64,
+    "btDecodeBranchActual": "ONLY_BITS0x3da66554_DIFF_IN_CONTROLLED_OS",
+    "btPostprocessingPropagation": "SCANNER_UNSHARP_THEN_QUANTISATION_SEPARATELY_OBSERVED",
+    "originalPointwiseCurrent": "1/1_PASS",
+    "patchedPointwiseCurrent": "1/1_PASS",
+    "r55Capabilities": "UPDATED_DOCUMENTATION_ONLY"
+  },
+  "historicalFailuresPreserved": [
+    "household original BT CTest10/11",
+    "company original controlled decode-Os CTest10/11",
+    "Portra/Ektar original profile nonmonotonic intervals, no smoothing"
+  ],
+  "notRun": {
+    "d80014": "NOT_RUN_SOURCE_ABSENT_NO_RESCAN",
+    "d800TrueCancellation": "SOURCE_ABSENT",
+    "householdPatchedGpu": "NOT_RUN",
+    "metalWholeImage": "NOT_RUN",
+    "spektrafilmFullPythonRuntime": "NOT_RUN_NO_NUMBA",
+    "physicalAccuracyOrVisibility": "NOT_MEASURED",
+    "newCurveCandidate": "NOT_IMPLEMENTED",
+    "arbitrarySeedExtension": "NOT_IMPLEMENTED",
+    "newProductInputs": "NOT_IMPLEMENTED",
+    "productUiAndTaskBridge": "OUT_OF_SCOPE_UNMODIFIED",
+    "fullPv456Suites": "NOT_RERUN_PRODUCT_UNCHANGED",
+    "fullV2Hardening": "NOT_RERUN_RETAINED"
+  },
+  "licenseGates": {
+    "lightTableNonCommercial": "SEPARATE",
+    "spektralabCode": "NOT_APPROVED_FOR_PRODUCT",
+    "spektralabResources": "NOT_APPROVED_FOR_PRODUCT"
+  }
+}

@@ -1,0 +1,1770 @@
+{
+  "version": "BtActualDecodeTapV1",
+  "passiveTraceLibrarySha256": "bc9a9073d7e471024257b6f95260b365eb2a94b58625f301e03d63d925fc06b8",
+  "cases": [
+    {
+      "variant": "original",
+      "space": "ITU-R BT.709",
+      "decodeTapSha256": "8512a2e164398b7a16321adce69c13211c0abb399efb923a4d4abfedd339831b",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.25,
+          "inputBits": "0xbe800000",
+          "decoded": -0.0555555559694767,
+          "decodedBits": "0xbd638e39",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.05555555555555555,
+          "powerReference": -0.012145025170036029
+        },
+        {
+          "column": 1,
+          "input": 0.0,
+          "inputBits": "0x0",
+          "decoded": 0.0,
+          "decodedBits": "0x0",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.0,
+          "powerReference": 0.0
+        },
+        {
+          "column": 2,
+          "input": 0.017999999225139618,
+          "inputBits": "0x3c9374bc",
+          "decoded": 0.003999999724328518,
+          "decodedBits": "0x3b83126e",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.003999999827808804,
+          "powerReference": 0.006889626104268884
+        },
+        {
+          "column": 3,
+          "input": 0.08100000023841858,
+          "inputBits": "0x3da5e354",
+          "decoded": 0.018000001087784767,
+          "decodedBits": "0x3c9374bd",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018000000052981906,
+          "powerReference": 0.01794501573911738
+        },
+        {
+          "column": 4,
+          "input": 0.08124791830778122,
+          "inputBits": "0x3da6654f",
+          "decoded": 0.01805509254336357,
+          "decodedBits": "0x3c93e846",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055092957284715,
+          "powerReference": 0.017999986596317005
+        },
+        {
+          "column": 5,
+          "input": 0.08124792575836182,
+          "inputBits": "0x3da66550",
+          "decoded": 0.01805509440600872,
+          "decodedBits": "0x3c93e847",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055094612969294,
+          "powerReference": 0.017999988249723403
+        },
+        {
+          "column": 6,
+          "input": 0.08124793320894241,
+          "inputBits": "0x3da66551",
+          "decoded": 0.01805509626865387,
+          "decodedBits": "0x3c93e848",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.01805509626865387,
+          "powerReference": 0.017999989903129888
+        },
+        {
+          "column": 7,
+          "input": 0.08124794065952301,
+          "inputBits": "0x3da66552",
+          "decoded": 0.01805509813129902,
+          "decodedBits": "0x3c93e849",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055097924338445,
+          "powerReference": 0.017999991556536452
+        },
+        {
+          "column": 8,
+          "input": 0.08124794811010361,
+          "inputBits": "0x3da66553",
+          "decoded": 0.018055099993944168,
+          "decodedBits": "0x3c93e84a",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055099580023024,
+          "powerReference": 0.0179999932099431
+        },
+        {
+          "column": 9,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.018055101856589317,
+          "decodedBits": "0x3c93e84b",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 10,
+          "input": 0.0812479630112648,
+          "inputBits": "0x3da66555",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510289139218,
+          "powerReference": 0.017999996516756656
+        },
+        {
+          "column": 11,
+          "input": 0.0812479704618454,
+          "inputBits": "0x3da66556",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055104547076754,
+          "powerReference": 0.017999998170163553
+        },
+        {
+          "column": 12,
+          "input": 0.081247977912426,
+          "inputBits": "0x3da66557",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055106202761333,
+          "powerReference": 0.017999999823570537
+        },
+        {
+          "column": 13,
+          "input": 0.08124798536300659,
+          "inputBits": "0x3da66558",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510785844591,
+          "powerReference": 0.0180000014769776
+        },
+        {
+          "column": 14,
+          "input": 0.08124799281358719,
+          "inputBits": "0x3da66559",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055109514130488,
+          "powerReference": 0.018000003130384752
+        },
+        {
+          "column": 15,
+          "input": 0.08124800026416779,
+          "inputBits": "0x3da6655a",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055111169815063,
+          "powerReference": 0.018000004783791986
+        },
+        {
+          "column": 16,
+          "input": 0.08124800771474838,
+          "inputBits": "0x3da6655b",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805511282549964,
+          "powerReference": 0.018000006437199307
+        },
+        {
+          "column": 17,
+          "input": 0.18000000715255737,
+          "inputBits": "0x3e3851ec",
+          "decoded": 0.047522950917482376,
+          "decodedBits": "0x3d42a76d",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.04000000158945719,
+          "powerReference": 0.047522935584792515
+        },
+        {
+          "column": 18,
+          "input": 0.5,
+          "inputBits": "0x3f000000",
+          "decoded": 0.25958946347236633,
+          "decodedBits": "0x3e84e8e9",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1111111111111111,
+          "powerReference": 0.2595893737840021
+        },
+        {
+          "column": 19,
+          "input": 1.0,
+          "inputBits": "0x3f800000",
+          "decoded": 1.0,
+          "decodedBits": "0x3f800000",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.2222222222222222,
+          "powerReference": 1.0
+        },
+        {
+          "column": 20,
+          "input": 2.0,
+          "inputBits": "0x40000000",
+          "decoded": 4.211892604827881,
+          "decodedBits": "0x4086c7d3",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.4444444444444444,
+          "powerReference": 4.21189225627484
+        }
+      ]
+    },
+    {
+      "variant": "original",
+      "space": "ITU-R BT.2020",
+      "decodeTapSha256": "8512a2e164398b7a16321adce69c13211c0abb399efb923a4d4abfedd339831b",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.25,
+          "inputBits": "0xbe800000",
+          "decoded": -0.0555555559694767,
+          "decodedBits": "0xbd638e39",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.05555555555555555,
+          "powerReference": -0.012145025170036029
+        },
+        {
+          "column": 1,
+          "input": 0.0,
+          "inputBits": "0x0",
+          "decoded": 0.0,
+          "decodedBits": "0x0",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.0,
+          "powerReference": 0.0
+        },
+        {
+          "column": 2,
+          "input": 0.017999999225139618,
+          "inputBits": "0x3c9374bc",
+          "decoded": 0.003999999724328518,
+          "decodedBits": "0x3b83126e",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.003999999827808804,
+          "powerReference": 0.006889626104268884
+        },
+        {
+          "column": 3,
+          "input": 0.08100000023841858,
+          "inputBits": "0x3da5e354",
+          "decoded": 0.018000001087784767,
+          "decodedBits": "0x3c9374bd",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018000000052981906,
+          "powerReference": 0.01794501573911738
+        },
+        {
+          "column": 4,
+          "input": 0.08124791830778122,
+          "inputBits": "0x3da6654f",
+          "decoded": 0.01805509254336357,
+          "decodedBits": "0x3c93e846",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055092957284715,
+          "powerReference": 0.017999986596317005
+        },
+        {
+          "column": 5,
+          "input": 0.08124792575836182,
+          "inputBits": "0x3da66550",
+          "decoded": 0.01805509440600872,
+          "decodedBits": "0x3c93e847",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055094612969294,
+          "powerReference": 0.017999988249723403
+        },
+        {
+          "column": 6,
+          "input": 0.08124793320894241,
+          "inputBits": "0x3da66551",
+          "decoded": 0.01805509626865387,
+          "decodedBits": "0x3c93e848",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.01805509626865387,
+          "powerReference": 0.017999989903129888
+        },
+        {
+          "column": 7,
+          "input": 0.08124794065952301,
+          "inputBits": "0x3da66552",
+          "decoded": 0.01805509813129902,
+          "decodedBits": "0x3c93e849",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055097924338445,
+          "powerReference": 0.017999991556536452
+        },
+        {
+          "column": 8,
+          "input": 0.08124794811010361,
+          "inputBits": "0x3da66553",
+          "decoded": 0.018055099993944168,
+          "decodedBits": "0x3c93e84a",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055099580023024,
+          "powerReference": 0.0179999932099431
+        },
+        {
+          "column": 9,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.018055101856589317,
+          "decodedBits": "0x3c93e84b",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 10,
+          "input": 0.0812479630112648,
+          "inputBits": "0x3da66555",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510289139218,
+          "powerReference": 0.017999996516756656
+        },
+        {
+          "column": 11,
+          "input": 0.0812479704618454,
+          "inputBits": "0x3da66556",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055104547076754,
+          "powerReference": 0.017999998170163553
+        },
+        {
+          "column": 12,
+          "input": 0.081247977912426,
+          "inputBits": "0x3da66557",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055106202761333,
+          "powerReference": 0.017999999823570537
+        },
+        {
+          "column": 13,
+          "input": 0.08124798536300659,
+          "inputBits": "0x3da66558",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510785844591,
+          "powerReference": 0.0180000014769776
+        },
+        {
+          "column": 14,
+          "input": 0.08124799281358719,
+          "inputBits": "0x3da66559",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055109514130488,
+          "powerReference": 0.018000003130384752
+        },
+        {
+          "column": 15,
+          "input": 0.08124800026416779,
+          "inputBits": "0x3da6655a",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055111169815063,
+          "powerReference": 0.018000004783791986
+        },
+        {
+          "column": 16,
+          "input": 0.08124800771474838,
+          "inputBits": "0x3da6655b",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805511282549964,
+          "powerReference": 0.018000006437199307
+        },
+        {
+          "column": 17,
+          "input": 0.18000000715255737,
+          "inputBits": "0x3e3851ec",
+          "decoded": 0.047522950917482376,
+          "decodedBits": "0x3d42a76d",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.04000000158945719,
+          "powerReference": 0.047522935584792515
+        },
+        {
+          "column": 18,
+          "input": 0.5,
+          "inputBits": "0x3f000000",
+          "decoded": 0.25958946347236633,
+          "decodedBits": "0x3e84e8e9",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1111111111111111,
+          "powerReference": 0.2595893737840021
+        },
+        {
+          "column": 19,
+          "input": 1.0,
+          "inputBits": "0x3f800000",
+          "decoded": 1.0,
+          "decodedBits": "0x3f800000",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.2222222222222222,
+          "powerReference": 1.0
+        },
+        {
+          "column": 20,
+          "input": 2.0,
+          "inputBits": "0x40000000",
+          "decoded": 4.211892604827881,
+          "decodedBits": "0x4086c7d3",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.4444444444444444,
+          "powerReference": 4.21189225627484
+        }
+      ]
+    },
+    {
+      "variant": "patched",
+      "space": "ITU-R BT.709",
+      "decodeTapSha256": "8512a2e164398b7a16321adce69c13211c0abb399efb923a4d4abfedd339831b",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.25,
+          "inputBits": "0xbe800000",
+          "decoded": -0.0555555559694767,
+          "decodedBits": "0xbd638e39",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.05555555555555555,
+          "powerReference": -0.012145025170036029
+        },
+        {
+          "column": 1,
+          "input": 0.0,
+          "inputBits": "0x0",
+          "decoded": 0.0,
+          "decodedBits": "0x0",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.0,
+          "powerReference": 0.0
+        },
+        {
+          "column": 2,
+          "input": 0.017999999225139618,
+          "inputBits": "0x3c9374bc",
+          "decoded": 0.003999999724328518,
+          "decodedBits": "0x3b83126e",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.003999999827808804,
+          "powerReference": 0.006889626104268884
+        },
+        {
+          "column": 3,
+          "input": 0.08100000023841858,
+          "inputBits": "0x3da5e354",
+          "decoded": 0.018000001087784767,
+          "decodedBits": "0x3c9374bd",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018000000052981906,
+          "powerReference": 0.01794501573911738
+        },
+        {
+          "column": 4,
+          "input": 0.08124791830778122,
+          "inputBits": "0x3da6654f",
+          "decoded": 0.01805509254336357,
+          "decodedBits": "0x3c93e846",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055092957284715,
+          "powerReference": 0.017999986596317005
+        },
+        {
+          "column": 5,
+          "input": 0.08124792575836182,
+          "inputBits": "0x3da66550",
+          "decoded": 0.01805509440600872,
+          "decodedBits": "0x3c93e847",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055094612969294,
+          "powerReference": 0.017999988249723403
+        },
+        {
+          "column": 6,
+          "input": 0.08124793320894241,
+          "inputBits": "0x3da66551",
+          "decoded": 0.01805509626865387,
+          "decodedBits": "0x3c93e848",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.01805509626865387,
+          "powerReference": 0.017999989903129888
+        },
+        {
+          "column": 7,
+          "input": 0.08124794065952301,
+          "inputBits": "0x3da66552",
+          "decoded": 0.01805509813129902,
+          "decodedBits": "0x3c93e849",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055097924338445,
+          "powerReference": 0.017999991556536452
+        },
+        {
+          "column": 8,
+          "input": 0.08124794811010361,
+          "inputBits": "0x3da66553",
+          "decoded": 0.018055099993944168,
+          "decodedBits": "0x3c93e84a",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055099580023024,
+          "powerReference": 0.0179999932099431
+        },
+        {
+          "column": 9,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.018055101856589317,
+          "decodedBits": "0x3c93e84b",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 10,
+          "input": 0.0812479630112648,
+          "inputBits": "0x3da66555",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510289139218,
+          "powerReference": 0.017999996516756656
+        },
+        {
+          "column": 11,
+          "input": 0.0812479704618454,
+          "inputBits": "0x3da66556",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055104547076754,
+          "powerReference": 0.017999998170163553
+        },
+        {
+          "column": 12,
+          "input": 0.081247977912426,
+          "inputBits": "0x3da66557",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055106202761333,
+          "powerReference": 0.017999999823570537
+        },
+        {
+          "column": 13,
+          "input": 0.08124798536300659,
+          "inputBits": "0x3da66558",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510785844591,
+          "powerReference": 0.0180000014769776
+        },
+        {
+          "column": 14,
+          "input": 0.08124799281358719,
+          "inputBits": "0x3da66559",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055109514130488,
+          "powerReference": 0.018000003130384752
+        },
+        {
+          "column": 15,
+          "input": 0.08124800026416779,
+          "inputBits": "0x3da6655a",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055111169815063,
+          "powerReference": 0.018000004783791986
+        },
+        {
+          "column": 16,
+          "input": 0.08124800771474838,
+          "inputBits": "0x3da6655b",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805511282549964,
+          "powerReference": 0.018000006437199307
+        },
+        {
+          "column": 17,
+          "input": 0.18000000715255737,
+          "inputBits": "0x3e3851ec",
+          "decoded": 0.047522950917482376,
+          "decodedBits": "0x3d42a76d",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.04000000158945719,
+          "powerReference": 0.047522935584792515
+        },
+        {
+          "column": 18,
+          "input": 0.5,
+          "inputBits": "0x3f000000",
+          "decoded": 0.25958946347236633,
+          "decodedBits": "0x3e84e8e9",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1111111111111111,
+          "powerReference": 0.2595893737840021
+        },
+        {
+          "column": 19,
+          "input": 1.0,
+          "inputBits": "0x3f800000",
+          "decoded": 1.0,
+          "decodedBits": "0x3f800000",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.2222222222222222,
+          "powerReference": 1.0
+        },
+        {
+          "column": 20,
+          "input": 2.0,
+          "inputBits": "0x40000000",
+          "decoded": 4.211892604827881,
+          "decodedBits": "0x4086c7d3",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.4444444444444444,
+          "powerReference": 4.21189225627484
+        }
+      ]
+    },
+    {
+      "variant": "patched",
+      "space": "ITU-R BT.2020",
+      "decodeTapSha256": "8512a2e164398b7a16321adce69c13211c0abb399efb923a4d4abfedd339831b",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.25,
+          "inputBits": "0xbe800000",
+          "decoded": -0.0555555559694767,
+          "decodedBits": "0xbd638e39",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.05555555555555555,
+          "powerReference": -0.012145025170036029
+        },
+        {
+          "column": 1,
+          "input": 0.0,
+          "inputBits": "0x0",
+          "decoded": 0.0,
+          "decodedBits": "0x0",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.0,
+          "powerReference": 0.0
+        },
+        {
+          "column": 2,
+          "input": 0.017999999225139618,
+          "inputBits": "0x3c9374bc",
+          "decoded": 0.003999999724328518,
+          "decodedBits": "0x3b83126e",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.003999999827808804,
+          "powerReference": 0.006889626104268884
+        },
+        {
+          "column": 3,
+          "input": 0.08100000023841858,
+          "inputBits": "0x3da5e354",
+          "decoded": 0.018000001087784767,
+          "decodedBits": "0x3c9374bd",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018000000052981906,
+          "powerReference": 0.01794501573911738
+        },
+        {
+          "column": 4,
+          "input": 0.08124791830778122,
+          "inputBits": "0x3da6654f",
+          "decoded": 0.01805509254336357,
+          "decodedBits": "0x3c93e846",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055092957284715,
+          "powerReference": 0.017999986596317005
+        },
+        {
+          "column": 5,
+          "input": 0.08124792575836182,
+          "inputBits": "0x3da66550",
+          "decoded": 0.01805509440600872,
+          "decodedBits": "0x3c93e847",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055094612969294,
+          "powerReference": 0.017999988249723403
+        },
+        {
+          "column": 6,
+          "input": 0.08124793320894241,
+          "inputBits": "0x3da66551",
+          "decoded": 0.01805509626865387,
+          "decodedBits": "0x3c93e848",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.01805509626865387,
+          "powerReference": 0.017999989903129888
+        },
+        {
+          "column": 7,
+          "input": 0.08124794065952301,
+          "inputBits": "0x3da66552",
+          "decoded": 0.01805509813129902,
+          "decodedBits": "0x3c93e849",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055097924338445,
+          "powerReference": 0.017999991556536452
+        },
+        {
+          "column": 8,
+          "input": 0.08124794811010361,
+          "inputBits": "0x3da66553",
+          "decoded": 0.018055099993944168,
+          "decodedBits": "0x3c93e84a",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055099580023024,
+          "powerReference": 0.0179999932099431
+        },
+        {
+          "column": 9,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.018055101856589317,
+          "decodedBits": "0x3c93e84b",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 10,
+          "input": 0.0812479630112648,
+          "inputBits": "0x3da66555",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510289139218,
+          "powerReference": 0.017999996516756656
+        },
+        {
+          "column": 11,
+          "input": 0.0812479704618454,
+          "inputBits": "0x3da66556",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055104547076754,
+          "powerReference": 0.017999998170163553
+        },
+        {
+          "column": 12,
+          "input": 0.081247977912426,
+          "inputBits": "0x3da66557",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055106202761333,
+          "powerReference": 0.017999999823570537
+        },
+        {
+          "column": 13,
+          "input": 0.08124798536300659,
+          "inputBits": "0x3da66558",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510785844591,
+          "powerReference": 0.0180000014769776
+        },
+        {
+          "column": 14,
+          "input": 0.08124799281358719,
+          "inputBits": "0x3da66559",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055109514130488,
+          "powerReference": 0.018000003130384752
+        },
+        {
+          "column": 15,
+          "input": 0.08124800026416779,
+          "inputBits": "0x3da6655a",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055111169815063,
+          "powerReference": 0.018000004783791986
+        },
+        {
+          "column": 16,
+          "input": 0.08124800771474838,
+          "inputBits": "0x3da6655b",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805511282549964,
+          "powerReference": 0.018000006437199307
+        },
+        {
+          "column": 17,
+          "input": 0.18000000715255737,
+          "inputBits": "0x3e3851ec",
+          "decoded": 0.047522950917482376,
+          "decodedBits": "0x3d42a76d",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.04000000158945719,
+          "powerReference": 0.047522935584792515
+        },
+        {
+          "column": 18,
+          "input": 0.5,
+          "inputBits": "0x3f000000",
+          "decoded": 0.25958946347236633,
+          "decodedBits": "0x3e84e8e9",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1111111111111111,
+          "powerReference": 0.2595893737840021
+        },
+        {
+          "column": 19,
+          "input": 1.0,
+          "inputBits": "0x3f800000",
+          "decoded": 1.0,
+          "decodedBits": "0x3f800000",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.2222222222222222,
+          "powerReference": 1.0
+        },
+        {
+          "column": 20,
+          "input": 2.0,
+          "inputBits": "0x40000000",
+          "decoded": 4.211892604827881,
+          "decodedBits": "0x4086c7d3",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.4444444444444444,
+          "powerReference": 4.21189225627484
+        }
+      ]
+    },
+    {
+      "variant": "original-os",
+      "space": "ITU-R BT.709",
+      "decodeTapSha256": "5bfd55b32cc26d792a45db9156b3dd452cb9ff8a2c8acf9bb32d7a90289fa7ec",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.25,
+          "inputBits": "0xbe800000",
+          "decoded": -0.0555555559694767,
+          "decodedBits": "0xbd638e39",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.05555555555555555,
+          "powerReference": -0.012145025170036029
+        },
+        {
+          "column": 1,
+          "input": 0.0,
+          "inputBits": "0x0",
+          "decoded": 0.0,
+          "decodedBits": "0x0",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.0,
+          "powerReference": 0.0
+        },
+        {
+          "column": 2,
+          "input": 0.017999999225139618,
+          "inputBits": "0x3c9374bc",
+          "decoded": 0.003999999724328518,
+          "decodedBits": "0x3b83126e",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.003999999827808804,
+          "powerReference": 0.006889626104268884
+        },
+        {
+          "column": 3,
+          "input": 0.08100000023841858,
+          "inputBits": "0x3da5e354",
+          "decoded": 0.018000001087784767,
+          "decodedBits": "0x3c9374bd",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018000000052981906,
+          "powerReference": 0.01794501573911738
+        },
+        {
+          "column": 4,
+          "input": 0.08124791830778122,
+          "inputBits": "0x3da6654f",
+          "decoded": 0.01805509254336357,
+          "decodedBits": "0x3c93e846",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055092957284715,
+          "powerReference": 0.017999986596317005
+        },
+        {
+          "column": 5,
+          "input": 0.08124792575836182,
+          "inputBits": "0x3da66550",
+          "decoded": 0.01805509440600872,
+          "decodedBits": "0x3c93e847",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055094612969294,
+          "powerReference": 0.017999988249723403
+        },
+        {
+          "column": 6,
+          "input": 0.08124793320894241,
+          "inputBits": "0x3da66551",
+          "decoded": 0.01805509626865387,
+          "decodedBits": "0x3c93e848",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.01805509626865387,
+          "powerReference": 0.017999989903129888
+        },
+        {
+          "column": 7,
+          "input": 0.08124794065952301,
+          "inputBits": "0x3da66552",
+          "decoded": 0.01805509813129902,
+          "decodedBits": "0x3c93e849",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055097924338445,
+          "powerReference": 0.017999991556536452
+        },
+        {
+          "column": 8,
+          "input": 0.08124794811010361,
+          "inputBits": "0x3da66553",
+          "decoded": 0.018055099993944168,
+          "decodedBits": "0x3c93e84a",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055099580023024,
+          "powerReference": 0.0179999932099431
+        },
+        {
+          "column": 9,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.017999999225139618,
+          "decodedBits": "0x3c9374bc",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 10,
+          "input": 0.0812479630112648,
+          "inputBits": "0x3da66555",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510289139218,
+          "powerReference": 0.017999996516756656
+        },
+        {
+          "column": 11,
+          "input": 0.0812479704618454,
+          "inputBits": "0x3da66556",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055104547076754,
+          "powerReference": 0.017999998170163553
+        },
+        {
+          "column": 12,
+          "input": 0.081247977912426,
+          "inputBits": "0x3da66557",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055106202761333,
+          "powerReference": 0.017999999823570537
+        },
+        {
+          "column": 13,
+          "input": 0.08124798536300659,
+          "inputBits": "0x3da66558",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510785844591,
+          "powerReference": 0.0180000014769776
+        },
+        {
+          "column": 14,
+          "input": 0.08124799281358719,
+          "inputBits": "0x3da66559",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055109514130488,
+          "powerReference": 0.018000003130384752
+        },
+        {
+          "column": 15,
+          "input": 0.08124800026416779,
+          "inputBits": "0x3da6655a",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055111169815063,
+          "powerReference": 0.018000004783791986
+        },
+        {
+          "column": 16,
+          "input": 0.08124800771474838,
+          "inputBits": "0x3da6655b",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805511282549964,
+          "powerReference": 0.018000006437199307
+        },
+        {
+          "column": 17,
+          "input": 0.18000000715255737,
+          "inputBits": "0x3e3851ec",
+          "decoded": 0.047522950917482376,
+          "decodedBits": "0x3d42a76d",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.04000000158945719,
+          "powerReference": 0.047522935584792515
+        },
+        {
+          "column": 18,
+          "input": 0.5,
+          "inputBits": "0x3f000000",
+          "decoded": 0.25958946347236633,
+          "decodedBits": "0x3e84e8e9",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1111111111111111,
+          "powerReference": 0.2595893737840021
+        },
+        {
+          "column": 19,
+          "input": 1.0,
+          "inputBits": "0x3f800000",
+          "decoded": 1.0,
+          "decodedBits": "0x3f800000",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.2222222222222222,
+          "powerReference": 1.0
+        },
+        {
+          "column": 20,
+          "input": 2.0,
+          "inputBits": "0x40000000",
+          "decoded": 4.211892604827881,
+          "decodedBits": "0x4086c7d3",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.4444444444444444,
+          "powerReference": 4.21189225627484
+        }
+      ]
+    },
+    {
+      "variant": "original-os",
+      "space": "ITU-R BT.2020",
+      "decodeTapSha256": "5bfd55b32cc26d792a45db9156b3dd452cb9ff8a2c8acf9bb32d7a90289fa7ec",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.25,
+          "inputBits": "0xbe800000",
+          "decoded": -0.0555555559694767,
+          "decodedBits": "0xbd638e39",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.05555555555555555,
+          "powerReference": -0.012145025170036029
+        },
+        {
+          "column": 1,
+          "input": 0.0,
+          "inputBits": "0x0",
+          "decoded": 0.0,
+          "decodedBits": "0x0",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.0,
+          "powerReference": 0.0
+        },
+        {
+          "column": 2,
+          "input": 0.017999999225139618,
+          "inputBits": "0x3c9374bc",
+          "decoded": 0.003999999724328518,
+          "decodedBits": "0x3b83126e",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.003999999827808804,
+          "powerReference": 0.006889626104268884
+        },
+        {
+          "column": 3,
+          "input": 0.08100000023841858,
+          "inputBits": "0x3da5e354",
+          "decoded": 0.018000001087784767,
+          "decodedBits": "0x3c9374bd",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018000000052981906,
+          "powerReference": 0.01794501573911738
+        },
+        {
+          "column": 4,
+          "input": 0.08124791830778122,
+          "inputBits": "0x3da6654f",
+          "decoded": 0.01805509254336357,
+          "decodedBits": "0x3c93e846",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055092957284715,
+          "powerReference": 0.017999986596317005
+        },
+        {
+          "column": 5,
+          "input": 0.08124792575836182,
+          "inputBits": "0x3da66550",
+          "decoded": 0.01805509440600872,
+          "decodedBits": "0x3c93e847",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055094612969294,
+          "powerReference": 0.017999988249723403
+        },
+        {
+          "column": 6,
+          "input": 0.08124793320894241,
+          "inputBits": "0x3da66551",
+          "decoded": 0.01805509626865387,
+          "decodedBits": "0x3c93e848",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.01805509626865387,
+          "powerReference": 0.017999989903129888
+        },
+        {
+          "column": 7,
+          "input": 0.08124794065952301,
+          "inputBits": "0x3da66552",
+          "decoded": 0.01805509813129902,
+          "decodedBits": "0x3c93e849",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055097924338445,
+          "powerReference": 0.017999991556536452
+        },
+        {
+          "column": 8,
+          "input": 0.08124794811010361,
+          "inputBits": "0x3da66553",
+          "decoded": 0.018055099993944168,
+          "decodedBits": "0x3c93e84a",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055099580023024,
+          "powerReference": 0.0179999932099431
+        },
+        {
+          "column": 9,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.017999999225139618,
+          "decodedBits": "0x3c9374bc",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 10,
+          "input": 0.0812479630112648,
+          "inputBits": "0x3da66555",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510289139218,
+          "powerReference": 0.017999996516756656
+        },
+        {
+          "column": 11,
+          "input": 0.0812479704618454,
+          "inputBits": "0x3da66556",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055104547076754,
+          "powerReference": 0.017999998170163553
+        },
+        {
+          "column": 12,
+          "input": 0.081247977912426,
+          "inputBits": "0x3da66557",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055106202761333,
+          "powerReference": 0.017999999823570537
+        },
+        {
+          "column": 13,
+          "input": 0.08124798536300659,
+          "inputBits": "0x3da66558",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510785844591,
+          "powerReference": 0.0180000014769776
+        },
+        {
+          "column": 14,
+          "input": 0.08124799281358719,
+          "inputBits": "0x3da66559",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055109514130488,
+          "powerReference": 0.018000003130384752
+        },
+        {
+          "column": 15,
+          "input": 0.08124800026416779,
+          "inputBits": "0x3da6655a",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055111169815063,
+          "powerReference": 0.018000004783791986
+        },
+        {
+          "column": 16,
+          "input": 0.08124800771474838,
+          "inputBits": "0x3da6655b",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805511282549964,
+          "powerReference": 0.018000006437199307
+        },
+        {
+          "column": 17,
+          "input": 0.18000000715255737,
+          "inputBits": "0x3e3851ec",
+          "decoded": 0.047522950917482376,
+          "decodedBits": "0x3d42a76d",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.04000000158945719,
+          "powerReference": 0.047522935584792515
+        },
+        {
+          "column": 18,
+          "input": 0.5,
+          "inputBits": "0x3f000000",
+          "decoded": 0.25958946347236633,
+          "decodedBits": "0x3e84e8e9",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1111111111111111,
+          "powerReference": 0.2595893737840021
+        },
+        {
+          "column": 19,
+          "input": 1.0,
+          "inputBits": "0x3f800000",
+          "decoded": 1.0,
+          "decodedBits": "0x3f800000",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.2222222222222222,
+          "powerReference": 1.0
+        },
+        {
+          "column": 20,
+          "input": 2.0,
+          "inputBits": "0x40000000",
+          "decoded": 4.211892604827881,
+          "decodedBits": "0x4086c7d3",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.4444444444444444,
+          "powerReference": 4.21189225627484
+        }
+      ]
+    },
+    {
+      "variant": "patched-os",
+      "space": "ITU-R BT.709",
+      "decodeTapSha256": "8512a2e164398b7a16321adce69c13211c0abb399efb923a4d4abfedd339831b",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.25,
+          "inputBits": "0xbe800000",
+          "decoded": -0.0555555559694767,
+          "decodedBits": "0xbd638e39",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.05555555555555555,
+          "powerReference": -0.012145025170036029
+        },
+        {
+          "column": 1,
+          "input": 0.0,
+          "inputBits": "0x0",
+          "decoded": 0.0,
+          "decodedBits": "0x0",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.0,
+          "powerReference": 0.0
+        },
+        {
+          "column": 2,
+          "input": 0.017999999225139618,
+          "inputBits": "0x3c9374bc",
+          "decoded": 0.003999999724328518,
+          "decodedBits": "0x3b83126e",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.003999999827808804,
+          "powerReference": 0.006889626104268884
+        },
+        {
+          "column": 3,
+          "input": 0.08100000023841858,
+          "inputBits": "0x3da5e354",
+          "decoded": 0.018000001087784767,
+          "decodedBits": "0x3c9374bd",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018000000052981906,
+          "powerReference": 0.01794501573911738
+        },
+        {
+          "column": 4,
+          "input": 0.08124791830778122,
+          "inputBits": "0x3da6654f",
+          "decoded": 0.01805509254336357,
+          "decodedBits": "0x3c93e846",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055092957284715,
+          "powerReference": 0.017999986596317005
+        },
+        {
+          "column": 5,
+          "input": 0.08124792575836182,
+          "inputBits": "0x3da66550",
+          "decoded": 0.01805509440600872,
+          "decodedBits": "0x3c93e847",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055094612969294,
+          "powerReference": 0.017999988249723403
+        },
+        {
+          "column": 6,
+          "input": 0.08124793320894241,
+          "inputBits": "0x3da66551",
+          "decoded": 0.01805509626865387,
+          "decodedBits": "0x3c93e848",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.01805509626865387,
+          "powerReference": 0.017999989903129888
+        },
+        {
+          "column": 7,
+          "input": 0.08124794065952301,
+          "inputBits": "0x3da66552",
+          "decoded": 0.01805509813129902,
+          "decodedBits": "0x3c93e849",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055097924338445,
+          "powerReference": 0.017999991556536452
+        },
+        {
+          "column": 8,
+          "input": 0.08124794811010361,
+          "inputBits": "0x3da66553",
+          "decoded": 0.018055099993944168,
+          "decodedBits": "0x3c93e84a",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055099580023024,
+          "powerReference": 0.0179999932099431
+        },
+        {
+          "column": 9,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.018055101856589317,
+          "decodedBits": "0x3c93e84b",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 10,
+          "input": 0.0812479630112648,
+          "inputBits": "0x3da66555",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510289139218,
+          "powerReference": 0.017999996516756656
+        },
+        {
+          "column": 11,
+          "input": 0.0812479704618454,
+          "inputBits": "0x3da66556",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055104547076754,
+          "powerReference": 0.017999998170163553
+        },
+        {
+          "column": 12,
+          "input": 0.081247977912426,
+          "inputBits": "0x3da66557",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055106202761333,
+          "powerReference": 0.017999999823570537
+        },
+        {
+          "column": 13,
+          "input": 0.08124798536300659,
+          "inputBits": "0x3da66558",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510785844591,
+          "powerReference": 0.0180000014769776
+        },
+        {
+          "column": 14,
+          "input": 0.08124799281358719,
+          "inputBits": "0x3da66559",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055109514130488,
+          "powerReference": 0.018000003130384752
+        },
+        {
+          "column": 15,
+          "input": 0.08124800026416779,
+          "inputBits": "0x3da6655a",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055111169815063,
+          "powerReference": 0.018000004783791986
+        },
+        {
+          "column": 16,
+          "input": 0.08124800771474838,
+          "inputBits": "0x3da6655b",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805511282549964,
+          "powerReference": 0.018000006437199307
+        },
+        {
+          "column": 17,
+          "input": 0.18000000715255737,
+          "inputBits": "0x3e3851ec",
+          "decoded": 0.047522950917482376,
+          "decodedBits": "0x3d42a76d",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.04000000158945719,
+          "powerReference": 0.047522935584792515
+        },
+        {
+          "column": 18,
+          "input": 0.5,
+          "inputBits": "0x3f000000",
+          "decoded": 0.25958946347236633,
+          "decodedBits": "0x3e84e8e9",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1111111111111111,
+          "powerReference": 0.2595893737840021
+        },
+        {
+          "column": 19,
+          "input": 1.0,
+          "inputBits": "0x3f800000",
+          "decoded": 1.0,
+          "decodedBits": "0x3f800000",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.2222222222222222,
+          "powerReference": 1.0
+        },
+        {
+          "column": 20,
+          "input": 2.0,
+          "inputBits": "0x40000000",
+          "decoded": 4.211892604827881,
+          "decodedBits": "0x4086c7d3",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.4444444444444444,
+          "powerReference": 4.21189225627484
+        }
+      ]
+    },
+    {
+      "variant": "patched-os",
+      "space": "ITU-R BT.2020",
+      "decodeTapSha256": "8512a2e164398b7a16321adce69c13211c0abb399efb923a4d4abfedd339831b",
+      "fullOutputUnaffectedByTap": true,
+      "samples": [
+        {
+          "column": 0,
+          "input": -0.25,
+          "inputBits": "0xbe800000",
+          "decoded": -0.0555555559694767,
+          "decodedBits": "0xbd638e39",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": -0.05555555555555555,
+          "powerReference": -0.012145025170036029
+        },
+        {
+          "column": 1,
+          "input": 0.0,
+          "inputBits": "0x0",
+          "decoded": 0.0,
+          "decodedBits": "0x0",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.0,
+          "powerReference": 0.0
+        },
+        {
+          "column": 2,
+          "input": 0.017999999225139618,
+          "inputBits": "0x3c9374bc",
+          "decoded": 0.003999999724328518,
+          "decodedBits": "0x3b83126e",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.003999999827808804,
+          "powerReference": 0.006889626104268884
+        },
+        {
+          "column": 3,
+          "input": 0.08100000023841858,
+          "inputBits": "0x3da5e354",
+          "decoded": 0.018000001087784767,
+          "decodedBits": "0x3c9374bd",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018000000052981906,
+          "powerReference": 0.01794501573911738
+        },
+        {
+          "column": 4,
+          "input": 0.08124791830778122,
+          "inputBits": "0x3da6654f",
+          "decoded": 0.01805509254336357,
+          "decodedBits": "0x3c93e846",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055092957284715,
+          "powerReference": 0.017999986596317005
+        },
+        {
+          "column": 5,
+          "input": 0.08124792575836182,
+          "inputBits": "0x3da66550",
+          "decoded": 0.01805509440600872,
+          "decodedBits": "0x3c93e847",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055094612969294,
+          "powerReference": 0.017999988249723403
+        },
+        {
+          "column": 6,
+          "input": 0.08124793320894241,
+          "inputBits": "0x3da66551",
+          "decoded": 0.01805509626865387,
+          "decodedBits": "0x3c93e848",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.01805509626865387,
+          "powerReference": 0.017999989903129888
+        },
+        {
+          "column": 7,
+          "input": 0.08124794065952301,
+          "inputBits": "0x3da66552",
+          "decoded": 0.01805509813129902,
+          "decodedBits": "0x3c93e849",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055097924338445,
+          "powerReference": 0.017999991556536452
+        },
+        {
+          "column": 8,
+          "input": 0.08124794811010361,
+          "inputBits": "0x3da66553",
+          "decoded": 0.018055099993944168,
+          "decodedBits": "0x3c93e84a",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.018055099580023024,
+          "powerReference": 0.0179999932099431
+        },
+        {
+          "column": 9,
+          "input": 0.0812479555606842,
+          "inputBits": "0x3da66554",
+          "decoded": 0.018055101856589317,
+          "decodedBits": "0x3c93e84b",
+          "nearestAnalyticBranch": "linear",
+          "linearReference": 0.0180551012357076,
+          "powerReference": 0.017999994863349838
+        },
+        {
+          "column": 10,
+          "input": 0.0812479630112648,
+          "inputBits": "0x3da66555",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510289139218,
+          "powerReference": 0.017999996516756656
+        },
+        {
+          "column": 11,
+          "input": 0.0812479704618454,
+          "inputBits": "0x3da66556",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055104547076754,
+          "powerReference": 0.017999998170163553
+        },
+        {
+          "column": 12,
+          "input": 0.081247977912426,
+          "inputBits": "0x3da66557",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055106202761333,
+          "powerReference": 0.017999999823570537
+        },
+        {
+          "column": 13,
+          "input": 0.08124798536300659,
+          "inputBits": "0x3da66558",
+          "decoded": 0.018000004813075066,
+          "decodedBits": "0x3c9374bf",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805510785844591,
+          "powerReference": 0.0180000014769776
+        },
+        {
+          "column": 14,
+          "input": 0.08124799281358719,
+          "inputBits": "0x3da66559",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055109514130488,
+          "powerReference": 0.018000003130384752
+        },
+        {
+          "column": 15,
+          "input": 0.08124800026416779,
+          "inputBits": "0x3da6655a",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.018055111169815063,
+          "powerReference": 0.018000004783791986
+        },
+        {
+          "column": 16,
+          "input": 0.08124800771474838,
+          "inputBits": "0x3da6655b",
+          "decoded": 0.018000010401010513,
+          "decodedBits": "0x3c9374c2",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.01805511282549964,
+          "powerReference": 0.018000006437199307
+        },
+        {
+          "column": 17,
+          "input": 0.18000000715255737,
+          "inputBits": "0x3e3851ec",
+          "decoded": 0.047522950917482376,
+          "decodedBits": "0x3d42a76d",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.04000000158945719,
+          "powerReference": 0.047522935584792515
+        },
+        {
+          "column": 18,
+          "input": 0.5,
+          "inputBits": "0x3f000000",
+          "decoded": 0.25958946347236633,
+          "decodedBits": "0x3e84e8e9",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.1111111111111111,
+          "powerReference": 0.2595893737840021
+        },
+        {
+          "column": 19,
+          "input": 1.0,
+          "inputBits": "0x3f800000",
+          "decoded": 1.0,
+          "decodedBits": "0x3f800000",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.2222222222222222,
+          "powerReference": 1.0
+        },
+        {
+          "column": 20,
+          "input": 2.0,
+          "inputBits": "0x40000000",
+          "decoded": 4.211892604827881,
+          "decodedBits": "0x4086c7d3",
+          "nearestAnalyticBranch": "power",
+          "linearReference": 0.4444444444444444,
+          "powerReference": 4.21189225627484
+        }
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "space": "ITU-R BT.709",
+      "decodeChangedColumns": [
+        9
+      ],
+      "decodeChangedInputBits": [
+        "0x3da66554"
+      ]
+    },
+    {
+      "space": "ITU-R BT.2020",
+      "decodeChangedColumns": [
+        9
+      ],
+      "decodeChangedInputBits": [
+        "0x3da66554"
+      ]
+    }
+  ]
+}

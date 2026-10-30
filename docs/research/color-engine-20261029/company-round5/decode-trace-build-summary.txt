@@ -1,0 +1,4 @@
+D:/AI AGENT/tmp/color-engine-company-20261030/round5/source-decode-trace/engine/src/pipeline/engine.cpp:1828:8: warning: 'medium_probe_params' has C-linkage specified, but returns user-defined type 'Params' which is incompatible with C [-Wreturn-type-c-linkage]
+D:/AI AGENT/tmp/color-engine-company-20261030/round5/source-decode-trace/engine/src/pipeline/engine.cpp:1899:6: warning: 'side_json' has C-linkage specified, but returns user-defined type 'Json' which is incompatible with C [-Wreturn-type-c-linkage]
+2 warnings generated.
+[60/60] Linking CXX shared library engine\spektrafilm_engine.dll
