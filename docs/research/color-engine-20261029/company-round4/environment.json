@@ -1,0 +1,81 @@
+{
+  "version": "CompanyEnvironmentV1",
+  "clientDate": "2026-10-30",
+  "clientTimezone": "Europe/Berlin",
+  "hostClockObservedNotSchedule": "2026-10-30T10:10:26.213792+08:00",
+  "baseCommit": "ce292f2a067e77d1d48fcb5e90fb18b9d642466f",
+  "gpu": "NVIDIA GeForce GTX 1650",
+  "driver": "572.70",
+  "vulkanInstance": "1.4.303",
+  "vulkanDeviceApi": "1.4.303",
+  "tools": [
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\toolchain\\llvm-mingw-20250402-ucrt-x86_64\\bin\\clang++.exe",
+      "sha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5",
+      "bytes": 16896
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\glslang\\bin\\glslang.exe",
+      "sha256": "9643709c02c83e26773f96b6a87f197ab2e84f78be0879ad8fb3619418b5d9ad",
+      "bytes": 5119488
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\pytools\\cmake\\data\\bin\\cmake.exe",
+      "sha256": "3c05de86fbc0ec0610bbee201588e4fc1017347ec61b0f8080981fc6bfe93681",
+      "bytes": 12112976
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\pytools\\bin\\ninja.exe",
+      "sha256": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597",
+      "bytes": 564736
+    },
+    {
+      "path": "C:\\Program Files\\Python313\\python.exe",
+      "sha256": "dc7ecf75280678175b4f931ce05f1ef9c10d48984399ca7de6beee69d71bcb1b",
+      "bytes": 105816
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\llvm-mingw-20250402-ucrt-x86_64.zip",
+      "sha256": "4edc13d878b4ec49c2f1a6e9161abb093bbaefc8b7d129f3b3f57a22a4a41d38",
+      "bytes": 151989367
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\glslang.zip",
+      "sha256": "82bf434e69b9bb4829de7e2b4bc2c5e7a7861e53d66cf75e5cc70f5f694a8d9b",
+      "bytes": 13734779
+    }
+  ],
+  "seedExpansion": "NOT_IMPLEMENTED",
+  "productIntegration": "DISABLED",
+  "versions": {
+    "python": "3.13.13 (tags/v3.13.13:01104ce, Apr  7 2026, 19:25:48) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.4.6",
+    "pillow": "12.2.0",
+    "tifffile": "2026.10.15",
+    "cmake": "3.31.10",
+    "ninja": "1.11.1.4",
+    "clang": "20.1.2",
+    "glslang": "16.6.0",
+    "dotnetSdk": "10.0.302"
+  },
+  "externalSources": {
+    "source2": {
+      "commit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+      "status": ""
+    },
+    "source-patch": {
+      "commit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+      "status": " M engine/CMakeLists.txt\n M engine/src/shaders/vulkan/spk_cctf_decode.comp\n?? engine/tests/bt_probe.cpp\n"
+    },
+    "source-trace": {
+      "commit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+      "status": " M engine/src/pipeline/pipeline.cpp\n"
+    },
+    "Vulkan-Headers": {
+      "commit": "b5c8f996196ba4aa6d8f97e52b5d3b6e70f7e4e2",
+      "status": ""
+    }
+  },
+  "hostTimezone": "observed Windows +08:00; not used for client date",
+  "clientLocalDate": "2026-10-30"
+}

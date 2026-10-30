@@ -1,0 +1,28 @@
+{
+  "version": "IsolatedResearchPatchManifestV1",
+  "baseCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "variant": "SpektraBtJoinFloatV1",
+  "distribution": "RESEARCH_ONLY_NOT_PRODUCT",
+  "files": [
+    {
+      "path": "engine/CMakeLists.txt",
+      "sha256": "eb8dc10b7593e1e84aa71eb7ba731ed31c3b7bd888742adc36b546fb2035e34a"
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_cctf_decode.comp",
+      "sha256": "ee3369fa63613aa277d95bfaf2da339e191c198480763a7c3fe00283fec44fff"
+    },
+    {
+      "path": "engine/tests/bt_probe.cpp",
+      "sha256": "eb790cbe6c09ae002943f71b59331b0b0a3134173f51a189fb46e40f3d2bb60b"
+    }
+  ],
+  "traceFiles": [
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "sha256": "0d4ec9445023ae7c70b2fe1d6093fcae88af8265a92cad33665cf84c549c908b"
+    }
+  ],
+  "reproductionGenerator": "tools/spektralab-research/apply_company_patch.py",
+  "source2StillClean": true
+}

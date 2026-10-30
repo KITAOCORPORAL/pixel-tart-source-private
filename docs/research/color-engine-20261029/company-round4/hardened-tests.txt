@@ -1,0 +1,19 @@
+test_bad_master_hash (__main__.HardenedContract.test_bad_master_hash) ... ok
+test_bad_master_length (__main__.HardenedContract.test_bad_master_length) ... ok
+test_dependency_change (__main__.HardenedContract.test_dependency_change) ... ok
+test_fresh_process_full_domain (__main__.HardenedContract.test_fresh_process_full_domain) ... ok
+test_lifecycle (__main__.HardenedContract.test_lifecycle) ... ok
+test_matrix_change (__main__.HardenedContract.test_matrix_change) ... ok
+test_missing_identity (__main__.HardenedContract.test_missing_identity) ... ok
+test_nonfinite_with_valid_hash (__main__.HardenedContract.test_nonfinite_with_valid_hash) ... ok
+test_source_implementation_change (__main__.HardenedContract.test_source_implementation_change) ... ok
+test_unknown_parameter (__main__.HardenedContract.test_unknown_parameter) ... ok
+test_unknown_version (__main__.HardenedContract.test_unknown_version) ... ok
+test_wb_change (__main__.HardenedContract.test_wb_change) ... ok
+test_wrong_dimension (__main__.HardenedContract.test_wrong_dimension) ... ok
+test_wrong_domain (__main__.HardenedContract.test_wrong_domain) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 32.440s
+
+OK

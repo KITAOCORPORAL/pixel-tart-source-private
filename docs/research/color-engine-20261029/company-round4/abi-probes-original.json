@@ -1,0 +1,32 @@
+{
+  "version": "CompanyAbiProbesV1",
+  "libraryHash": "38d4e4ec6c29ea871ada425b2322e4711154a987e60e87bc5db362a112ed98a9",
+  "grainSeed": "UNSUPPORTED",
+  "params": {
+    "grain_active": false,
+    "glare_active": false,
+    "halation_active": false,
+    "dir_couplers_active": false,
+    "auto_exposure": false,
+    "input_color_space": "sRGB",
+    "input_cctf_decoding": true,
+    "output_color_space": "sRGB",
+    "output_cctf_encoding": true
+  },
+  "alpha": {
+    "input": 0.125,
+    "outputMin": 65535,
+    "outputMax": 65535,
+    "rowStride": 31,
+    "width": 31
+  },
+  "seedRejected": "unknown parameter 'grain_seed'",
+  "cancel": {
+    "status": -7,
+    "cancelCalls": 33,
+    "sessionReleasedOnlyAfterJoin": true,
+    "grain": false,
+    "glare": false,
+    "granularity": "node boundary; not shader-preemptive"
+  }
+}

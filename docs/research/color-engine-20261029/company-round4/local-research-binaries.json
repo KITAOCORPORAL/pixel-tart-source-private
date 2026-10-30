@@ -1,0 +1,27 @@
+{
+  "version": "LocalResearchBinariesV2",
+  "baseCommit": "ce292f2a067e77d1d48fcb5e90fb18b9d642466f",
+  "runtimeArtifacts": [
+    {
+      "path": "tools/color-research-decoder/bin/Debug/net10.0/ResearchDecoder.dll",
+      "bytes": 87552,
+      "sha256": "bac26d706b6696a48957642f051ac2e781c9f6e9e29ba4c56e22016771de6c4d"
+    },
+    {
+      "path": "tools/color-research-decoder/bin/Debug/net10.0/RAWSelectionAssistant.Core.dll",
+      "bytes": 8035328,
+      "sha256": "4de797af621089439ff5e9d8e28dd263ba7cecf510453492c6602f2a59ab2dc5"
+    },
+    {
+      "path": "tools/color-research-decoder/bin/Debug/net10.0/Sdcb.LibRaw.dll",
+      "bytes": 75776,
+      "sha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3"
+    },
+    {
+      "path": "tools/color-research-decoder/bin/Debug/net10.0/runtimes/win-x64/native/raw_r.dll",
+      "bytes": 1102848,
+      "sha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9"
+    }
+  ],
+  "productsModified": false
+}

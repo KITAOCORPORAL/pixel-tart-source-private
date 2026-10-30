@@ -1,0 +1,51 @@
+{
+  "version": "FrozenSourceReadbackV1",
+  "checks": [
+    {
+      "path": "tools/color-research-decoder/Program.cs",
+      "match": true
+    },
+    {
+      "path": "tools/color-research-decoder/ResearchContract.cs",
+      "match": true
+    },
+    {
+      "path": "tools/color-research-decoder/ResearchDecoder.csproj",
+      "match": true
+    },
+    {
+      "path": "tools/color-research-decoder/effective-matrix-v1.json",
+      "match": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/ProfessionalRawDecoder.cs",
+      "match": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/ProfessionalLibRawAdapter.cs",
+      "match": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawPipeline.cs",
+      "match": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+      "match": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/GraphPixelAllocation.cs",
+      "match": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Export/TiffExport.cs",
+      "match": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/ControlledIcc/LcmsRgbEngine.cs",
+      "match": true
+    }
+  ],
+  "allMatch": true,
+  "gitBlobVsWorkingBytesNote": "recipe locks physical source bytes; Git text checkout line-ending changes are rejected, not silently ignored. Use original artifact/runtime environment to reopen V2."
+}

@@ -1,0 +1,100 @@
+{
+  "version": "BtTwoReferenceComparisonV1",
+  "colour": {
+    "version": "0.4.6",
+    "commit": "0c6f868c4b5c5ae861f868ba8015be3abf0f92f0",
+    "functions": [
+      "colour/models/rgb/transfer_functions/itur_bt_709.py:oetf_BT709/oetf_inverse_BT709",
+      "itur_bt_601.py:oetf_BT601/oetf_inverse_BT601"
+    ],
+    "license": "BSD-3-Clause",
+    "inputs": [
+      -0.01,
+      0.0,
+      0.01799999,
+      0.018,
+      0.01800001,
+      0.018053968510807,
+      0.18,
+      1.0,
+      2.0
+    ],
+    "encoded": [
+      -0.045,
+      0.0,
+      0.080999955,
+      0.08124794403514046,
+      0.08124798909711958,
+      0.08149093665597165,
+      0.4090077288641504,
+      1.0,
+      1.4022782421730806
+    ],
+    "decodeJoinInput": [
+      0.0812479555606842,
+      0.0812479630112648,
+      0.0812479704618454
+    ],
+    "decoded": [
+      0.018000002557708877,
+      0.01800000421111611,
+      0.018000005864523428
+    ]
+  },
+  "ffmpeg": {
+    "version": "n7.1",
+    "commit": "b08d7969c550a804a59511c7b83f2dd8cc0499b8",
+    "function": "libavutil/csp.c:trc_bt709",
+    "license": "LGPL-2.1-or-later",
+    "inputs": [
+      -0.01,
+      0.0,
+      0.01799999,
+      0.018,
+      0.01800001,
+      0.018053968510807,
+      0.18,
+      1.0,
+      2.0
+    ],
+    "encoded": [
+      0.0,
+      0.0,
+      0.080999955,
+      0.08099999999999999,
+      0.081000045,
+      0.0812428582986,
+      0.4088481088912239,
+      1.0,
+      1.4023868927346204
+    ],
+    "constantConvention": "continuous alpha1.099296826809442 beta0.018053968510807; clamps negative; NOT same rounded discontinuous curve"
+  },
+  "legacyFloatCompatibility": {
+    "breakpoint": 0.0812479630112648,
+    "bits": "0x3da66555",
+    "decoded": [
+      0.0180551012357076,
+      0.017999996516756656,
+      0.017999998170163553
+    ],
+    "differenceFromColour": [
+      5.509867799872309e-05,
+      -7.694359455134858e-09,
+      -7.69435987493794e-09
+    ]
+  },
+  "encodeReferenceMaxDifference": 0.045,
+  "sourceHashes": {
+    "csp.c": "3024742047974396a6027872310f4a1927288512bcf9d6571115140e408f3cc7",
+    "colour-package/colour/models/rgb/transfer_functions/itur_bt_709.py": "240fa8e479332a94c313221e0ae2083e41d8a0c77716cec900aac0291734cb53",
+    "colour-package/colour/models/rgb/transfer_functions/itur_bt_601.py": "4d1f0644d845cb58df23c5f7d4152fcd47747a8eb4298f8e786f7b1daf71e680",
+    "ffmpeg_probe.c": "0f891245f3f536c2e3c66681b2b681efc6e027ec32fa05df75450e40bb3e89b8",
+    "ffmpeg_probe.exe": "a2c6a45673ac69af50cf7b2609e8d5cd35f78690fa9c44ddb3f66f3e50e57526"
+  },
+  "conclusion": "Freeze compatibility breakpoint only; do not swap constants across implementations or claim normative accuracy. No product acceptance.",
+  "alternativeNumpyFloatBreakpoint": {
+    "bits": "0x3da66554",
+    "reason": "NumPy float32 power rounds differently from pinned clang C++ std::pow; do not compute compatibility identity using arbitrary libm."
+  }
+}

@@ -1,0 +1,389 @@
+{
+  "version": "CompanyResearchDeliveryV1",
+  "baseCommit": "ce292f2a067e77d1d48fcb5e90fb18b9d642466f",
+  "branch": "research/color-engine-company-20261030",
+  "status": "PARTIAL_RESEARCH_ONLY",
+  "manifestExcludesItself": true,
+  "files": [
+    {
+      "path": "docs/research/color-engine-20261029/BACKEND_CONTRACT_V1.md",
+      "bytes": 6217,
+      "sha256": "790c3e63534d439c4b6a53edc557fa8834f8c9a68e36f76e718794b8ecdfcade"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/BACKEND_CONTRACT_V2.md",
+      "bytes": 7958,
+      "sha256": "c3fb48a2b087322b57415896ce3b9d8b157b77d4a07aaa5396428d346aaff3c3"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/BT_NODE_COMPARISON_ROUND4.md",
+      "bytes": 3124,
+      "sha256": "2c74673f48efc07e57f9d3fef9abe609903a2663bc58fb1a63e320596d823b14"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/COMPANY_ROUND4_REPORT.md",
+      "bytes": 10081,
+      "sha256": "00658d478946a11aef8dcf8d1ee6af103d8fd9f868aad4536ebcf7d6442ced35"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/LICENSE_ROUND4.md",
+      "bytes": 1158,
+      "sha256": "98fb684646078b3d792330b3cc2d7a56e5c8f5565d03ec5e0106b35dc6efbc37"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/REPRODUCE_ROUND4.md",
+      "bytes": 8092,
+      "sha256": "1e2ffeccec7a0a9a6e9ca2a378b9540f7c4f566ce1f7822c1007cfee5f0e0056"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/SPEKTRALAB_LICENSE_REVIEW.md",
+      "bytes": 4829,
+      "sha256": "329ce256630df6c6cf4be08ef33cc85e8ca3f22130721ae2bd5d2fa45e6176c1"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/SPEKTRALAB_PREFLIGHT.md",
+      "bytes": 3345,
+      "sha256": "76eace332f41cc530bf3d5d36be3bc776e929291e7886c8ed624ed0ef2730bd3"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/EXECUTION_STATUS.json",
+      "bytes": 2505,
+      "sha256": "9549af68bd655e95a3ed760f8afabd5d4eaeaa0c042589059f90804ee21b900e"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/abi-probes-original.json",
+      "bytes": 858,
+      "sha256": "ca2c810f12b5abab8db71fff68494f8e3883fadedd76889da2ed9c78846c6878"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/abi-probes-patch.json",
+      "bytes": 858,
+      "sha256": "bd9ebb9405c957b7ca19223b2fe3ba1b9d994164e0fd66fe953296766facb746"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/bt-instrumented-os.txt",
+      "bytes": 7124,
+      "sha256": "cc4fe28a47a3cea4fd70231c764cf3d53abf9d09be66bba55cc2cab31b560ef0"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/bt-instrumented.txt",
+      "bytes": 7124,
+      "sha256": "b47b1af0fbb578a58f701cc039b23bed364e462c3f259b7f1051068eb3105ec3"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/bt-original-os.txt",
+      "bytes": 7380,
+      "sha256": "6520c85e38178233a7a1ff26c15f773a8ecd5c3ab45443ef9b31b883140698da"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/bt-original.txt",
+      "bytes": 7380,
+      "sha256": "596c3bfd4035959ab0c24f714ffc30fb40e32701e088690d5fec7221f3187d0b"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/bt-patch-os.txt",
+      "bytes": 7380,
+      "sha256": "596c3bfd4035959ab0c24f714ffc30fb40e32701e088690d5fec7221f3187d0b"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/bt-patch.txt",
+      "bytes": 7380,
+      "sha256": "596c3bfd4035959ab0c24f714ffc30fb40e32701e088690d5fec7221f3187d0b"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/bt-reference-comparison.json",
+      "bytes": 3009,
+      "sha256": "d7ab0475ac809e82f30e62c035676946ff691d3fa7caef841a917fd3599f4724"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/bt-references-reproduced.json",
+      "bytes": 1115,
+      "sha256": "b7a9560e200387fa85a5d272b5da8665adb9f0f4d8a32119bfc038bcd71bbb20"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/bt-shader-compilation.json",
+      "bytes": 3456,
+      "sha256": "07f45d53627325057bd05c0bc0f3701bdc5ea887a566aa0d4c83833d8ac438e8"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/compiler-version.txt",
+      "bytes": 401,
+      "sha256": "dcbdd3d4d3dd78e442a4475110725960da2879ddd3f8aa5613f1711b40cc898a"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/ctest-original-decode-os.txt",
+      "bytes": 1731,
+      "sha256": "096cc4d365261002842ee0a3bad6ac8d8ec9c0d4fd77be81c3d7df05df3e67aa"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/ctest-patched-decode-os.txt",
+      "bytes": 1460,
+      "sha256": "0d287431eee073765d5a88f9e6d86d5e7068f318c66134b0772cf3dc1bc1d820"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/d800-source-availability.json",
+      "bytes": 995,
+      "sha256": "2b34d230ec8ff901e5be449933e26f3f092b6f4bf0a84db7d5ae88cdfa6d5bec"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/decoder-build-original.txt",
+      "bytes": 3116,
+      "sha256": "23f09c67bf9e8bc4c84bb83571ca12ec7b59daf87b538bee28b208ec80af0a58"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/decoder-build-v2.txt",
+      "bytes": 476,
+      "sha256": "fa20d1778e381d4a2a8202aa4a891015aafbf9b5c90aff597b4a3c4e0cd9ad18"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/dotnet.txt",
+      "bytes": 1262,
+      "sha256": "45b48cf271fa89c07221b099733d16378871e81ae836c4400b2c26af7aa1b139"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/environment.json",
+      "bytes": 3054,
+      "sha256": "1b58f5b66196b57026139e14cbbc16549df71b8d751ba846d866e4ac42e86d60"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/evidence-formatting.json",
+      "bytes": 2967,
+      "sha256": "8a6e097ef7fdc93fe305f4f14e0ab9c955658de8307fb30f5b1c8ea42677b708"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/frozen-source-check.json",
+      "bytes": 1588,
+      "sha256": "b0701e7bf759cb2bf4cf1f043ddf36690fdd5c44248bffd9982680a354c7eab9"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/glslang-version.txt",
+      "bytes": 317,
+      "sha256": "179e1f0c5570fa6ddc62106f3f0f8ecbc6b89a63b7af2b0a4be9f4feff2d7b1c"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/gpu.json",
+      "bytes": 468,
+      "sha256": "0cf0ce2e0dda42ed4ec6f47fdd3028b1565fa9579b873b3245bc2e7b7ba22ac4"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/hardened-tests-initial-failure.txt",
+      "bytes": 2917,
+      "sha256": "d697ec58c350154cd6b84b007197034a3af767dc80e4a5c4a67bc01667be9c62"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/hardened-tests.txt",
+      "bytes": 1243,
+      "sha256": "8e669d57465a89729c6ddab23c321b483c61ee244181d1b0fd05ad34ea523b67"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/isolated-patch-manifest.json",
+      "bytes": 950,
+      "sha256": "dc54d9d89799a1745130700d9710937dda3e5a1b68103daf3f636dd90a1f53ef"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/legacy-rejections.txt",
+      "bytes": 580,
+      "sha256": "ad3108d59df34d77255d340f55306f852bc8a0d96e3bce789411c7eb3d2ad3b7"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/local-outputs-location.json",
+      "bytes": 506,
+      "sha256": "932ec44b461922867af8511f3be03cce85badad2b06a2770873307307edc76ff"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/local-research-binaries.json",
+      "bytes": 1020,
+      "sha256": "9b8d429582c779e371c93bede2dffcec0df4e76b2be74cd969b7f3e3b8463708"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/neutral-declines.json",
+      "bytes": 143100,
+      "sha256": "037478cff4e8650df320b47e8b9ca80d46057484a0ae744673d823325eba6c46"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/nvidia.csv",
+      "bytes": 85,
+      "sha256": "9ce3c1f36dc399dd20936dad5900ffef018f7e4471d0769d16d2ee7cc3085554"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/patch-build-final.txt",
+      "bytes": 534,
+      "sha256": "469270e33a32166ef458b67231e20f82c8ac61818be0188d209aaf26a1f32a7a"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/pointwise-os.txt",
+      "bytes": 173,
+      "sha256": "83d1036c82042ef5f572e42c0feb736ebe56a7f865fbe54175a6aaa68ae1fbf7"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/pointwise-patch-os.txt",
+      "bytes": 176,
+      "sha256": "4550237018710f50b710343859eacf627cb5631fda6221261ab3f7fc0e82a185"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/preservation-check.json",
+      "bytes": 464,
+      "sha256": "1656dd3a594e33486c53d363aa4cee657703ec15046075c001a504a898f443ea"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/recorded-observation.txt",
+      "bytes": 121,
+      "sha256": "1749ab2cd1e373168a7428f22d9e949c83689683eec7448236a558426e59e3df"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/reference-source-readback.json",
+      "bytes": 626,
+      "sha256": "b947f3c890674434e251eb286d2bcd26741dd1584e9f2f07e7c252ef5e551ae1"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/refs-before.txt",
+      "bytes": 24253,
+      "sha256": "b68b38575f786cd895b3cdb47322ece1827c688cac8b21bb3198f3f58a6c31ed"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/remotes.txt",
+      "bytes": 330,
+      "sha256": "544548f25619a275418b3ed0453e61fa4d93f61c1755261c89143996bca40069"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/spektra-lifecycle.json",
+      "bytes": 60904,
+      "sha256": "6024e6cc532e6e3177a3047d2d9bb7d0869dd814e5adce30cedba56c6ca5bf2e"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/spektra-matrix-comparison.json",
+      "bytes": 3642,
+      "sha256": "951f2d688e9268df3830ae6c88f622e055585083ee0db251697ba93251127c46"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/spektra-matrix-original.json",
+      "bytes": 46150,
+      "sha256": "3c56b733f720215d541c91e7e01cc5c10b52dc3f765ae52ebd70a3c10bef4928"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/spektra-matrix-patch.json",
+      "bytes": 46149,
+      "sha256": "0851bd70e51f5675c9e1ac67ddd90e4d2db9336a596226c48e61bfe5ee25b92a"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/spektra-original-build-ctest.txt",
+      "bytes": 13010,
+      "sha256": "c8ba2943a5a18c5565804d5273e16a85a79924527c3a41de1db57acdd27ebdb2"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/spektra-original-inventory.json",
+      "bytes": 160006,
+      "sha256": "15a34cd26b60594533b2a203dc78e93b436ac0fd9668012c105e5e3dbf66948c"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/spektra-patch-ctest.txt",
+      "bytes": 1460,
+      "sha256": "906a6620cfbdae1f9b43f255cc9a513ebc93a2774055f736fbdf46561d46c3a6"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/spektra-patch-inventory.json",
+      "bytes": 160278,
+      "sha256": "e411c1d428e143acd86f66e19b7565d3f5b610e0862eef4b00c5d5f146c63cf0"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/spektra-stripes.json",
+      "bytes": 217223,
+      "sha256": "28ff990cc1a5436cff6d0d55694f91b9652611ade36fe362f86eefd004db9d12"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/states-after.txt",
+      "bytes": 14113,
+      "sha256": "0d40e608922c734b6d6ad91d819d641d54217a4393fca755f43e4a333eec2888"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/states-before.txt",
+      "bytes": 14066,
+      "sha256": "91fdca452d14ac8a766e99624bed59f29e4e1882bbf853e4b9dea620a4f48d79"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/synthetic-recipe-v2.json",
+      "bytes": 11187,
+      "sha256": "305bb2e7332c49725d896750704a90d63247c56e5539c0b7646b85cd57b6d8a0"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/synthetic-reopen.json",
+      "bytes": 326,
+      "sha256": "36121f8fd0fdaab99a7c95ce5468b90577dc9421d2b3aeacefebb3f0bf104747"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/trace-build-refined.txt",
+      "bytes": 533,
+      "sha256": "ea33319f4e404e4e97b811411ca7cf962c05648ea1df6069cb3643325ef7275c"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/trace-configure.txt",
+      "bytes": 853,
+      "sha256": "436f3de65625056ca1d5c73f765e6ca065d62cfffd2e655d580bb2820f0ce474"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/vulkan-summary.txt",
+      "bytes": 2232,
+      "sha256": "3aba6d8a88e93276927241920e2754f5bd7d6c2761bf85044e97b0dfb9b3b11e"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round4/worktrees-before.txt",
+      "bytes": 9359,
+      "sha256": "1904e98a86d12d1fe8a76485a25866027e8ffd1a6c25de6e7b0b496521089ca6"
+    },
+    {
+      "path": "tools/color-research-decoder/Program.cs",
+      "bytes": 20726,
+      "sha256": "c6782375e7a487af4d272d00cce24892e4cdab1ae8a9e80a2eee5094a32f9b2b"
+    },
+    {
+      "path": "tools/color-research-decoder/ResearchContract.cs",
+      "bytes": 15734,
+      "sha256": "ca7f7f1358568016a3163f294df8b96fbb7695bc5cd7c976cda6f4e2cc1ac405"
+    },
+    {
+      "path": "tools/color-research-decoder/effective-matrix-v1.json",
+      "bytes": 1766,
+      "sha256": "d8d6cc012879ee74587eb1f3ffe61783b53f793953cd49ee3cff1e1c8adc0030"
+    },
+    {
+      "path": "tools/color-research-decoder/test_hardened_contract.py",
+      "bytes": 3104,
+      "sha256": "9beffaf16feb32909392b4a8ec905be5dabde60de5fee3d631beea948f791a9f"
+    },
+    {
+      "path": "tools/color-research-decoder/test_recipe_rejection.py",
+      "bytes": 1949,
+      "sha256": "0abcf6cb60284377ec70a5154f67ff7e977e5ebb994056661860494ef77c67fb"
+    },
+    {
+      "path": "tools/spektralab-research/apply_company_patch.py",
+      "bytes": 4540,
+      "sha256": "a38eaeefce629762ec4a56558723d385377198709ef6dfac44df9270b818edc6"
+    },
+    {
+      "path": "tools/spektralab-research/bt_probe.cpp",
+      "bytes": 1560,
+      "sha256": "eb790cbe6c09ae002943f71b59331b0b0a3134173f51a189fb46e40f3d2bb60b"
+    },
+    {
+      "path": "tools/spektralab-research/bt_references.py",
+      "bytes": 2026,
+      "sha256": "c682787753afdf7e58a8348a63514fa7e4b266af3c5775183fc9707e7e58eba4"
+    },
+    {
+      "path": "tools/spektralab-research/company_abi_probes.py",
+      "bytes": 2330,
+      "sha256": "ef0ba4e056adfb09f0f3987b0c5e10534ff94cfb30e968fc6a670c41da9820ea"
+    },
+    {
+      "path": "tools/spektralab-research/company_matrix.py",
+      "bytes": 5421,
+      "sha256": "1bf3f58c0f86f3fbbed84c81c4492613dd2558d3c4288b1e95ee543bf1d8a966"
+    },
+    {
+      "path": "tools/spektralab-research/summarize_neutral.py",
+      "bytes": 1818,
+      "sha256": "772bece701e64c0a0f946ee8bcd00466ba2e448c686070481a4a890f58c53497"
+    }
+  ]
+}

@@ -35,3 +35,7 @@ dotnet run --project tools/color-research-decoder/ResearchDecoder.csproj -- reop
 最小例：`tools/spektralab-research/run_matrix.py <固定checkout> <build> <研究overlay资源> <验证过的stage目录> <float文件> <新输出目录>`。脚本实际演示9组合、stride、完整recipe、哈希、结果释放、重复、取消及生命周期。这里引用外部测试绑定而非复制GPL到产品；该研究调用样例本身的分发仍需许可审查。
 
 不交付为可接入批准提交：GPU CTest 10/11通过，BT传递函数边界1失败；无跨Metal/Python全图oracle、无自然图保留集、无主观偏好。产品线只能在另轮门禁通过后显式接入新变体，不整分支合入。
+
+## 2026-10-30 公司接续说明（不覆写第三批历史）
+
+本V1为家庭第三批冻结记录，SpektraLab已构建并完成9组渲染；旧preflight中的“未构建”仅属更早时间点。公司结果和更严格的研究定义/生命周期读取规则以`BACKEND_CONTRACT_V2.md`为准。V1少数字段不是完整算法重建合同；旧archive只读、不自动升级。公司GTX1650常规CTest原/补丁11/11不抵消家庭RTX5060Ti原版BT失败；公司受控-Os最小复现与隔离补丁见COMPANY_ROUND4_REPORT。

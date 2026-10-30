@@ -1,0 +1,30 @@
+{
+  "version": "AuthorizedSourceAvailabilityV1",
+  "sourceSha256": "593E1B0EE73EF7E699D73465E3BD8222AD0ED79BEB69E9265E440756D4B50A1A",
+  "pathsChecked": [
+    {
+      "path": "N:/pixart/RAW/Real/nikon/RAW_NIKON_D800_14bit_FX_LOSSLESS.NEF",
+      "exists": false
+    },
+    {
+      "path": "N:/pixart/RAW/Real/nikon/RAW_NIKON_D800_12bit_FX_LOSSLESS.NEF",
+      "exists": false
+    },
+    {
+      "path": "D:/AI AGENT/PixelTart-TestAssets/RAW/Real/nikon/RAW_NIKON_D800_14bit_FX_LOSSLESS.NEF",
+      "exists": false
+    }
+  ],
+  "companyDeclaredFixtureDirectory": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW",
+  "directoryNamesOnly": [
+    "DSC09916.ARW",
+    "DSCF0347.RAF",
+    "DSCF0370.RAF",
+    "LMAN1714.RAF",
+    "TNAN8886.CR3"
+  ],
+  "fileContentsRead": false,
+  "unrelatedDirectoriesScanned": false,
+  "candidateD80014EndToEnd": "NOT_RUN_SOURCE_ABSENT",
+  "developmentValidationSplit": "NOT_ESTABLISHED; no scene-labeled admitted natural images available"
+}

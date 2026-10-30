@@ -1,0 +1,1757 @@
+{
+  "cases": {
+    "input_copy_independence": {
+      "bit_exact": true,
+      "input_python_allocation_released": true,
+      "reference": {
+        "elapsed_ms": 15.3284,
+        "height": 129,
+        "negative_was_cached": false,
+        "reprint": false,
+        "row_stride_px": 193,
+        "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+        "width": 193
+      },
+      "retained_output": {
+        "elapsed_ms": 68.5693,
+        "height": 129,
+        "negative_was_cached": false,
+        "reprint": false,
+        "row_stride_px": 193,
+        "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+        "width": 193
+      },
+      "success": true
+    },
+    "multi_session_and_cache_cycles": {
+      "audit_violations": 0,
+      "cycles": [
+        {
+          "calls": [
+            {
+              "elapsed_ms": 14.8811,
+              "height": 129,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "full",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 4.6819,
+              "height": 129,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "full",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 28.8728,
+              "height": 601,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 901,
+              "session": "large",
+              "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+              "tier": "full",
+              "width": 901
+            },
+            {
+              "elapsed_ms": 9.9732,
+              "height": 601,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 901,
+              "session": "large",
+              "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+              "tier": "full",
+              "width": 901
+            },
+            {
+              "elapsed_ms": 15.609,
+              "height": 129,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "live",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 4.3453,
+              "height": 129,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "live",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 25.3406,
+              "height": 533,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 800,
+              "session": "large",
+              "sha256": "c48d06bcf2e854e8c229a84aab165c93e8a2b444749156a6498a7a93b31a4f7c",
+              "tier": "live",
+              "width": 800
+            },
+            {
+              "elapsed_ms": 8.1488,
+              "height": 533,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 800,
+              "session": "large",
+              "sha256": "c48d06bcf2e854e8c229a84aab165c93e8a2b444749156a6498a7a93b31a4f7c",
+              "tier": "live",
+              "width": 800
+            },
+            {
+              "elapsed_ms": 14.3028,
+              "height": 129,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "preview",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 4.5147,
+              "height": 129,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "preview",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 30.3855,
+              "height": 601,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 901,
+              "session": "large",
+              "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+              "tier": "preview",
+              "width": 901
+            },
+            {
+              "elapsed_ms": 9.7752,
+              "height": 601,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 901,
+              "session": "large",
+              "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+              "tier": "preview",
+              "width": 901
+            }
+          ],
+          "cycle": 1,
+          "memory": {
+            "persistent": {
+              "buffers": 63,
+              "bytes": 32241028,
+              "cached_negative_bytes": 19009116,
+              "file_backed_buffers": 0,
+              "file_backed_bytes": 0,
+              "negatives": 6,
+              "sessions": [
+                {
+                  "cached_negative_bytes": 896292,
+                  "negatives": 3,
+                  "session_id": "s1",
+                  "source_bytes": 298764
+                },
+                {
+                  "cached_negative_bytes": 18112824,
+                  "negatives": 3,
+                  "session_id": "s5",
+                  "source_bytes": 6498012
+                }
+              ],
+              "source_bytes": 6796776
+            },
+            "pool": {
+              "audit": {
+                "allocations": 30,
+                "live_underflows": 0,
+                "over_releases": 0,
+                "pending_held": 0,
+                "persistent_allocations": 170,
+                "reclaim_while_encoding": 0,
+                "reuse_bytes_requested": 1820061304,
+                "reuse_bytes_taken": 2063817896,
+                "reuse_max_taken": 6498012,
+                "reuse_max_taken_for_request": 4332008,
+                "reuses": 1940
+              },
+              "buffers": 18,
+              "frame_high_water_bytes": 19792824,
+              "free_buffers": 18,
+              "free_bytes": 43245460,
+              "live_buffers": 0,
+              "live_bytes": 0,
+              "pending_buffers": 0,
+              "pending_bytes": 0,
+              "total_bytes": 43245460
+            },
+            "pressure": {
+              "critical_events": 0,
+              "critical_pending": false,
+              "idle_trim_seconds": 0,
+              "idle_trims": 0,
+              "monitor": false,
+              "warn_events": 0
+            },
+            "total_bytes": 75486488
+          }
+        },
+        {
+          "calls": [
+            {
+              "elapsed_ms": 14.6411,
+              "height": 129,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "full",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 4.4978,
+              "height": 129,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "full",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 28.6423,
+              "height": 601,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 901,
+              "session": "large",
+              "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+              "tier": "full",
+              "width": 901
+            },
+            {
+              "elapsed_ms": 9.2061,
+              "height": 601,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 901,
+              "session": "large",
+              "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+              "tier": "full",
+              "width": 901
+            },
+            {
+              "elapsed_ms": 15.9707,
+              "height": 129,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "live",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 4.7887,
+              "height": 129,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "live",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 24.6194,
+              "height": 533,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 800,
+              "session": "large",
+              "sha256": "c48d06bcf2e854e8c229a84aab165c93e8a2b444749156a6498a7a93b31a4f7c",
+              "tier": "live",
+              "width": 800
+            },
+            {
+              "elapsed_ms": 8.2103,
+              "height": 533,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 800,
+              "session": "large",
+              "sha256": "c48d06bcf2e854e8c229a84aab165c93e8a2b444749156a6498a7a93b31a4f7c",
+              "tier": "live",
+              "width": 800
+            },
+            {
+              "elapsed_ms": 14.6623,
+              "height": 129,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "preview",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 4.6106,
+              "height": 129,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "preview",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 30.5146,
+              "height": 601,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 901,
+              "session": "large",
+              "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+              "tier": "preview",
+              "width": 901
+            },
+            {
+              "elapsed_ms": 9.9959,
+              "height": 601,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 901,
+              "session": "large",
+              "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+              "tier": "preview",
+              "width": 901
+            }
+          ],
+          "cycle": 2,
+          "memory": {
+            "persistent": {
+              "buffers": 63,
+              "bytes": 32241028,
+              "cached_negative_bytes": 19009116,
+              "file_backed_buffers": 0,
+              "file_backed_bytes": 0,
+              "negatives": 6,
+              "sessions": [
+                {
+                  "cached_negative_bytes": 896292,
+                  "negatives": 3,
+                  "session_id": "s1",
+                  "source_bytes": 298764
+                },
+                {
+                  "cached_negative_bytes": 18112824,
+                  "negatives": 3,
+                  "session_id": "s5",
+                  "source_bytes": 6498012
+                }
+              ],
+              "source_bytes": 6796776
+            },
+            "pool": {
+              "audit": {
+                "allocations": 30,
+                "live_underflows": 0,
+                "over_releases": 0,
+                "pending_held": 0,
+                "persistent_allocations": 224,
+                "reclaim_while_encoding": 0,
+                "reuse_bytes_requested": 2828453800,
+                "reuse_bytes_taken": 3200304368,
+                "reuse_max_taken": 6498012,
+                "reuse_max_taken_for_request": 4332008,
+                "reuses": 2876
+              },
+              "buffers": 18,
+              "frame_high_water_bytes": 19792824,
+              "free_buffers": 18,
+              "free_bytes": 43245460,
+              "live_buffers": 0,
+              "live_bytes": 0,
+              "pending_buffers": 0,
+              "pending_bytes": 0,
+              "total_bytes": 43245460
+            },
+            "pressure": {
+              "critical_events": 0,
+              "critical_pending": false,
+              "idle_trim_seconds": 0,
+              "idle_trims": 0,
+              "monitor": false,
+              "warn_events": 0
+            },
+            "total_bytes": 75486488
+          }
+        },
+        {
+          "calls": [
+            {
+              "elapsed_ms": 15.7374,
+              "height": 129,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "full",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 4.6909,
+              "height": 129,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "full",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 29.6081,
+              "height": 601,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 901,
+              "session": "large",
+              "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+              "tier": "full",
+              "width": 901
+            },
+            {
+              "elapsed_ms": 10.028,
+              "height": 601,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 901,
+              "session": "large",
+              "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+              "tier": "full",
+              "width": 901
+            },
+            {
+              "elapsed_ms": 16.1436,
+              "height": 129,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "live",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 4.9992,
+              "height": 129,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "live",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 26.0389,
+              "height": 533,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 800,
+              "session": "large",
+              "sha256": "c48d06bcf2e854e8c229a84aab165c93e8a2b444749156a6498a7a93b31a4f7c",
+              "tier": "live",
+              "width": 800
+            },
+            {
+              "elapsed_ms": 8.8032,
+              "height": 533,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 800,
+              "session": "large",
+              "sha256": "c48d06bcf2e854e8c229a84aab165c93e8a2b444749156a6498a7a93b31a4f7c",
+              "tier": "live",
+              "width": 800
+            },
+            {
+              "elapsed_ms": 15.2188,
+              "height": 129,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "preview",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 4.4292,
+              "height": 129,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 193,
+              "session": "small",
+              "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+              "tier": "preview",
+              "width": 193
+            },
+            {
+              "elapsed_ms": 30.3069,
+              "height": 601,
+              "negative_was_cached": false,
+              "reprint": false,
+              "row_stride_px": 901,
+              "session": "large",
+              "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+              "tier": "preview",
+              "width": 901
+            },
+            {
+              "elapsed_ms": 9.681,
+              "height": 601,
+              "negative_was_cached": true,
+              "reprint": true,
+              "row_stride_px": 901,
+              "session": "large",
+              "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+              "tier": "preview",
+              "width": 901
+            }
+          ],
+          "cycle": 3,
+          "memory": {
+            "persistent": {
+              "buffers": 63,
+              "bytes": 32241028,
+              "cached_negative_bytes": 19009116,
+              "file_backed_buffers": 0,
+              "file_backed_bytes": 0,
+              "negatives": 6,
+              "sessions": [
+                {
+                  "cached_negative_bytes": 896292,
+                  "negatives": 3,
+                  "session_id": "s1",
+                  "source_bytes": 298764
+                },
+                {
+                  "cached_negative_bytes": 18112824,
+                  "negatives": 3,
+                  "session_id": "s5",
+                  "source_bytes": 6498012
+                }
+              ],
+              "source_bytes": 6796776
+            },
+            "pool": {
+              "audit": {
+                "allocations": 30,
+                "live_underflows": 0,
+                "over_releases": 0,
+                "pending_held": 0,
+                "persistent_allocations": 278,
+                "reclaim_while_encoding": 0,
+                "reuse_bytes_requested": 3836846296,
+                "reuse_bytes_taken": 4336790840,
+                "reuse_max_taken": 6498012,
+                "reuse_max_taken_for_request": 4332008,
+                "reuses": 3812
+              },
+              "buffers": 18,
+              "frame_high_water_bytes": 19792824,
+              "free_buffers": 18,
+              "free_bytes": 43245460,
+              "live_buffers": 0,
+              "live_bytes": 0,
+              "pending_buffers": 0,
+              "pending_bytes": 0,
+              "total_bytes": 43245460
+            },
+            "pressure": {
+              "critical_events": 0,
+              "critical_pending": false,
+              "idle_trim_seconds": 0,
+              "idle_trims": 0,
+              "monitor": false,
+              "warn_events": 0
+            },
+            "total_bytes": 75486488
+          }
+        }
+      ],
+      "success": true,
+      "warm": [
+        {
+          "elapsed_ms": 16.9159,
+          "height": 129,
+          "negative_was_cached": false,
+          "reprint": false,
+          "row_stride_px": 193,
+          "session": "small",
+          "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+          "tier": "full",
+          "width": 193
+        },
+        {
+          "elapsed_ms": 65.6768,
+          "height": 601,
+          "negative_was_cached": false,
+          "reprint": false,
+          "row_stride_px": 901,
+          "session": "large",
+          "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+          "tier": "full",
+          "width": 901
+        },
+        {
+          "elapsed_ms": 14.2533,
+          "height": 129,
+          "negative_was_cached": false,
+          "reprint": false,
+          "row_stride_px": 193,
+          "session": "small",
+          "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+          "tier": "live",
+          "width": 193
+        },
+        {
+          "elapsed_ms": 127.0763,
+          "height": 533,
+          "negative_was_cached": false,
+          "reprint": false,
+          "row_stride_px": 800,
+          "session": "large",
+          "sha256": "c48d06bcf2e854e8c229a84aab165c93e8a2b444749156a6498a7a93b31a4f7c",
+          "tier": "live",
+          "width": 800
+        },
+        {
+          "elapsed_ms": 15.3007,
+          "height": 129,
+          "negative_was_cached": false,
+          "reprint": false,
+          "row_stride_px": 193,
+          "session": "small",
+          "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+          "tier": "preview",
+          "width": 193
+        },
+        {
+          "elapsed_ms": 28.6217,
+          "height": 601,
+          "negative_was_cached": false,
+          "reprint": false,
+          "row_stride_px": 901,
+          "session": "large",
+          "sha256": "cb9d04158ac54150021426391a3c6088d66dce96c072ec4ee605f2341cbbce58",
+          "tier": "preview",
+          "width": 901
+        }
+      ],
+      "warmed_ledger_stable": true
+    },
+    "result_survives_engine_destruction": {
+      "freed_after_engine_destroy": true,
+      "sha256_after_destroy": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+      "success": true
+    },
+    "session_release_and_pool_trim": {
+      "after_release": {
+        "persistent": {
+          "buffers": 0,
+          "bytes": 0,
+          "cached_negative_bytes": 0,
+          "file_backed_buffers": 0,
+          "file_backed_bytes": 0,
+          "negatives": 0,
+          "sessions": [],
+          "source_bytes": 0
+        },
+        "pool": {
+          "audit": {
+            "allocations": 49,
+            "live_underflows": 0,
+            "over_releases": 0,
+            "pending_held": 0,
+            "persistent_allocations": 308,
+            "reclaim_while_encoding": 0,
+            "reuse_bytes_requested": 3852522756,
+            "reuse_bytes_taken": 4364403720,
+            "reuse_max_taken": 6498012,
+            "reuse_max_taken_for_request": 4332008,
+            "reuses": 4611
+          },
+          "buffers": 19,
+          "frame_high_water_bytes": 1831972,
+          "free_buffers": 19,
+          "free_bytes": 2281276,
+          "live_buffers": 0,
+          "live_bytes": 0,
+          "pending_buffers": 0,
+          "pending_bytes": 0,
+          "total_bytes": 2281276
+        },
+        "pressure": {
+          "critical_events": 0,
+          "critical_pending": false,
+          "idle_trim_seconds": 0,
+          "idle_trims": 0,
+          "monitor": false,
+          "warn_events": 0
+        },
+        "total_bytes": 2281276
+      },
+      "after_small_reopen": {
+        "persistent": {
+          "buffers": 25,
+          "bytes": 753176,
+          "cached_negative_bytes": 0,
+          "file_backed_buffers": 0,
+          "file_backed_bytes": 0,
+          "negatives": 0,
+          "sessions": [
+            {
+              "cached_negative_bytes": 0,
+              "negatives": 0,
+              "session_id": "s50",
+              "source_bytes": 96276
+            }
+          ],
+          "source_bytes": 96276
+        },
+        "pool": {
+          "audit": {
+            "allocations": 49,
+            "live_underflows": 0,
+            "over_releases": 0,
+            "pending_held": 0,
+            "persistent_allocations": 333,
+            "reclaim_while_encoding": 0,
+            "reuse_bytes_requested": 3852522756,
+            "reuse_bytes_taken": 4364403720,
+            "reuse_max_taken": 6498012,
+            "reuse_max_taken_for_request": 4332008,
+            "reuses": 4611
+          },
+          "buffers": 0,
+          "frame_high_water_bytes": 0,
+          "free_buffers": 0,
+          "free_bytes": 0,
+          "live_buffers": 0,
+          "live_bytes": 0,
+          "pending_buffers": 0,
+          "pending_bytes": 0,
+          "total_bytes": 0
+        },
+        "pressure": {
+          "critical_events": 0,
+          "critical_pending": false,
+          "idle_trim_seconds": 0,
+          "idle_trims": 0,
+          "monitor": false,
+          "warn_events": 0
+        },
+        "total_bytes": 753176
+      },
+      "success": true
+    },
+    "striped_transfer_regression": {
+      "pre_existing_issue": null,
+      "progress": {
+        "auto_exposure_ev": null,
+        "cancelled": false,
+        "done": true,
+        "memory_pressure_critical": false,
+        "node_times": {},
+        "pct": 100,
+        "progress_id": "p49",
+        "stage": "scanning.cctf",
+        "strip_segments": [
+          {
+            "crossings": 4,
+            "passes": 16,
+            "plan": [
+              {
+                "rows": 17,
+                "y0": 0
+              },
+              {
+                "rows": 17,
+                "y0": 17
+              },
+              {
+                "rows": 17,
+                "y0": 34
+              },
+              {
+                "rows": 17,
+                "y0": 51
+              },
+              {
+                "rows": 17,
+                "y0": 68
+              },
+              {
+                "rows": 17,
+                "y0": 85
+              },
+              {
+                "rows": 17,
+                "y0": 102
+              },
+              {
+                "rows": 10,
+                "y0": 119
+              }
+            ],
+            "runs": 2,
+            "stage": "film",
+            "stages": [
+              {
+                "band_able": true,
+                "class": "pointwise",
+                "halo": 0,
+                "name": "film_scale_and_expose",
+                "resolution": "banded"
+              },
+              {
+                "band_able": false,
+                "class": "whole",
+                "halo": 0,
+                "name": "film_boost",
+                "resolution": "whole"
+              },
+              {
+                "band_able": false,
+                "class": "whole",
+                "halo": 0,
+                "name": "film_overscan",
+                "resolution": "whole"
+              },
+              {
+                "band_able": true,
+                "class": "neighbourhood",
+                "halo": 2,
+                "name": "film_blurs",
+                "resolution": "banded"
+              },
+              {
+                "band_able": true,
+                "class": "pointwise",
+                "halo": 2,
+                "name": "film_log_and_curves",
+                "resolution": "banded"
+              },
+              {
+                "band_able": false,
+                "class": "neighbourhood",
+                "halo": 0,
+                "launches": 2,
+                "name": "film_couplers",
+                "resolution": "swept",
+                "swept": [
+                  {
+                    "rows": 129,
+                    "y0": 0
+                  }
+                ]
+              },
+              {
+                "band_able": false,
+                "class": "whole",
+                "halo": 0,
+                "name": "film_grain",
+                "resolution": "whole"
+              }
+            ]
+          },
+          {
+            "crossings": 4,
+            "passes": 16,
+            "plan": [
+              {
+                "rows": 17,
+                "y0": 0
+              },
+              {
+                "rows": 17,
+                "y0": 17
+              },
+              {
+                "rows": 17,
+                "y0": 34
+              },
+              {
+                "rows": 17,
+                "y0": 51
+              },
+              {
+                "rows": 17,
+                "y0": 68
+              },
+              {
+                "rows": 17,
+                "y0": 85
+              },
+              {
+                "rows": 17,
+                "y0": 102
+              },
+              {
+                "rows": 10,
+                "y0": 119
+              }
+            ],
+            "runs": 2,
+            "stage": "print",
+            "stages": [
+              {
+                "band_able": true,
+                "class": "pointwise",
+                "halo": 0,
+                "name": "print_spectral",
+                "resolution": "banded"
+              },
+              {
+                "band_able": false,
+                "class": "whole",
+                "halo": 0,
+                "name": "print_glare",
+                "resolution": "whole"
+              },
+              {
+                "band_able": true,
+                "class": "pointwise",
+                "halo": 2,
+                "name": "print_linear",
+                "resolution": "banded"
+              },
+              {
+                "band_able": true,
+                "class": "neighbourhood",
+                "halo": 2,
+                "name": "print_scan_finish",
+                "resolution": "banded"
+              },
+              {
+                "band_able": true,
+                "class": "pointwise",
+                "halo": 2,
+                "name": "print_output",
+                "resolution": "banded"
+              }
+            ]
+          }
+        ]
+      },
+      "reference_striped": {
+        "elapsed_ms": 87.7745,
+        "height": 129,
+        "negative_was_cached": false,
+        "reprint": false,
+        "row_stride_px": 193,
+        "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+        "width": 193
+      },
+      "reference_whole": {
+        "elapsed_ms": 23.9636,
+        "height": 129,
+        "negative_was_cached": false,
+        "reprint": false,
+        "row_stride_px": 193,
+        "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+        "width": 193
+      },
+      "reference_whole_vs_striped": {
+        "bit_exact": true,
+        "changed_channel_values": 0,
+        "changed_pixels": 0,
+        "changed_values_per_channel": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "maximum_absolute_u16": 0,
+        "maximum_absolute_u16_per_channel": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "result": {
+        "elapsed_ms": 86.2206,
+        "height": 129,
+        "negative_was_cached": false,
+        "reprint": false,
+        "row_stride_px": 193,
+        "sha256": "cb3af0d33064a93d823340f41195d9a0462ef46be3d8a6d91cf7cdfcd68dfee5",
+        "width": 193
+      },
+      "strip_rows": 17,
+      "striped_vs_reference": {
+        "bit_exact": true,
+        "changed_channel_values": 0,
+        "changed_pixels": 0,
+        "changed_values_per_channel": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "maximum_absolute_u16": 0,
+        "maximum_absolute_u16_per_channel": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "success": true,
+      "transfer_regression_bit_exact": true,
+      "validation_mode": "strict_stripe_parity",
+      "whole_frame_parity": true,
+      "whole_vs_reference": {
+        "bit_exact": true,
+        "changed_channel_values": 0,
+        "changed_pixels": 0,
+        "changed_values_per_channel": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "maximum_absolute_u16": 0,
+        "maximum_absolute_u16_per_channel": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "whole_vs_striped": {
+        "bit_exact": true,
+        "changed_channel_values": 0,
+        "changed_pixels": 0,
+        "changed_values_per_channel": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "maximum_absolute_u16": 0,
+        "maximum_absolute_u16_per_channel": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "environment": {
+    "build_info": "spektrafilm-native 0.1.0 (Oct 30 2026 09:36:35, math=probed)",
+    "capabilities": {
+      "backend": {
+        "concurrent": true,
+        "gpu": "NVIDIA GeForce GTX 1650",
+        "gpu_available": true,
+        "host": "native",
+        "math_mode": "Vulkan probe passed (precise product + fused fma; full shader parity pending)",
+        "render_core": "native-vulkan",
+        "session_cache": {
+          "enabled": false,
+          "entries": 0,
+          "hits": 0,
+          "max_entries": 0,
+          "misses": 0,
+          "setup_cam16": 0,
+          "setup_tc_luts": 0
+        },
+        "spectral": "native",
+        "unsupported_features": [
+          "digital_intermediate",
+          "scene_latitude_mapping",
+          "contrast_mask",
+          "overscan",
+          "date_imprint"
+        ],
+        "working_precision": "float32"
+      },
+      "engine": "spektrafilm.native",
+      "max_mp": 151.301008,
+      "max_pixels": 151301008,
+      "max_texture_dimension_2d": 32768,
+      "schema_version": 1,
+      "tiers": {
+        "full": null,
+        "live": 1600,
+        "preview": 3400
+      },
+      "transport_version": 1,
+      "version": "spektrafilm-native 0.1.0 (Oct 30 2026 09:36:35, math=probed)"
+    },
+    "library": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\build-patch\\engine\\spektrafilm_engine.dll",
+    "library_sha256": "4dae2dcf046af1756a5fa79f5ef419d9d7af7e306fbc4b14bfd7d06de810cf6f",
+    "numpy": "2.4.6",
+    "resources": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\resources-patch"
+  },
+  "external_parity": "unverified",
+  "format_version": 1,
+  "harness_sha256": "1bcd5ed4620b6ac171996fb7c849bcca416484496c7016f58abc6ee30678242b",
+  "memory_scope": "engine allocation ledger; not measured physical VRAM residency",
+  "params_delta": {
+    "auto_exposure": false,
+    "film_stock": "kodak_portra_400",
+    "glare_active": false,
+    "grain_active": false,
+    "input_cctf_decoding": false,
+    "input_color_space": "ProPhoto RGB",
+    "output_cctf_encoding": true,
+    "output_color_space": "sRGB",
+    "preview_long_edge": 800,
+    "print_stock": "kodak_portra_endura"
+  },
+  "reference_environment": {
+    "build_info": "spektrafilm-native 0.1.0 (Oct 30 2026 09:33:14, math=probed)",
+    "library": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\build-vulkan\\engine\\spektrafilm_engine.dll",
+    "library_sha256": "38d4e4ec6c29ea871ada425b2322e4711154a987e60e87bc5db362a112ed98a9",
+    "resources": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\resources-original"
+  },
+  "reference_resources": {
+    "baked_scope": "all files except vulkan/ and .spv/.metallib kernels",
+    "baked_sha256": "25cabaf82853080e8c31f967bfefaea8b4e820fb9f0c6316aa22bd52a226da1e",
+    "directory": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\resources-original",
+    "files": {
+      "io/README.txt": {
+        "byte_count": 576,
+        "sha256": "4bb0896891b5dc79d7f0449c8cfcc669788101d144e5c938ea2f6159294656bd"
+      },
+      "io/sRGB.icc": {
+        "byte_count": 588,
+        "sha256": "f869f25625302eef46cd74fe56ec11adbfa7cf20db6f70b8efdddcbeec4323a0"
+      },
+      "neutral_print_filters.json": {
+        "byte_count": 17569,
+        "sha256": "fdced9a78e79a9d3a1423de3f34b811a1684485b2bdf0844950ce1fc9f0b7794"
+      },
+      "print_luts.json": {
+        "byte_count": 1617,
+        "sha256": "27b43228c85e55ffaa82079a696f579ef3c00ce057a27f58f11fbc3e0e26f589"
+      },
+      "profiles/cinestill_800t.json": {
+        "byte_count": 846,
+        "sha256": "b4539181be0fc2c6260d8a7ca04fcfd88be0a45fa52b460fd159dd39d2b42611"
+      },
+      "profiles/fujifilm_c200.json": {
+        "byte_count": 213881,
+        "sha256": "33c1acc77ca85963e6165f7fa7fed545803f0c955732e500681e4f3946d44e4a"
+      },
+      "profiles/fujifilm_crystal_archive_typeii.json": {
+        "byte_count": 223158,
+        "sha256": "8aa83ca1d1fafdc72813f1abae0c17facbb6680b566c0f8e8bbd505251c76700"
+      },
+      "profiles/fujifilm_neopan_acros_100_ii.json": {
+        "byte_count": 80357,
+        "sha256": "4429b45664a06c7ee8d16687bcc7adf656403e534fba584f83762e160abdc4f9"
+      },
+      "profiles/fujifilm_pro_400h.json": {
+        "byte_count": 214186,
+        "sha256": "beff34f309c5a9c102a87f48876986e7a7bbb20da7994cfc8d08629f6121ae46"
+      },
+      "profiles/fujifilm_provia_100f.json": {
+        "byte_count": 216444,
+        "sha256": "04c42273d861d26838b0c760579a59e4a985483081f1ff100d7cab9007f54a2f"
+      },
+      "profiles/fujifilm_velvia_100.json": {
+        "byte_count": 216258,
+        "sha256": "4678399aaf2e623dc482e46255093f79ddee93ae963759627e58eee002d7ec84"
+      },
+      "profiles/fujifilm_xtra_400.json": {
+        "byte_count": 214049,
+        "sha256": "8d2369fc3a8f707f07d04c17283fbc5bb66d95e65addc09d06be222c785ff92d"
+      },
+      "profiles/ilford_hp5_plus_400.json": {
+        "byte_count": 87530,
+        "sha256": "a09ccdb57816f220ab598e534318a743ef79e16a300f8bd2de7453d451fe8ec5"
+      },
+      "profiles/ilford_multigrade_iv_rc.json": {
+        "byte_count": 81711,
+        "sha256": "0f776f1f26f04aca4ec438ed377dc1acf4073dc1a8ae32c51607a6cb1a02521d"
+      },
+      "profiles/kodak_2383.json": {
+        "byte_count": 223095,
+        "sha256": "a7a494c593ff5da06767d6293f7c796a146ca6346cdddd369f1b55cdfef855cf"
+      },
+      "profiles/kodak_2393.json": {
+        "byte_count": 223080,
+        "sha256": "db1d293d5f515c22d3f19b8aa91d874ec9c8c6ebfbfa731dd04de9a303c2a129"
+      },
+      "profiles/kodak_ektachrome_100.json": {
+        "byte_count": 215834,
+        "sha256": "3113bde02c05e707e353911b7628f66ffb1931493dc3a0581c546498e9ab75a2"
+      },
+      "profiles/kodak_ektacolor_edge.json": {
+        "byte_count": 222479,
+        "sha256": "d05b37d843af82057316717844898be9440e61b0e7a0ab36fe9efb83e629a3c7"
+      },
+      "profiles/kodak_ektar_100.json": {
+        "byte_count": 214224,
+        "sha256": "f2a8c9092153b2d1ee90c5aa588ece7c199c8687520e250946484ff3294b0319"
+      },
+      "profiles/kodak_endura_premier.json": {
+        "byte_count": 222708,
+        "sha256": "3f63b8c5a56967776fa9782914079156736c0b1e0ec739ff946d8b1aa2950a6e"
+      },
+      "profiles/kodak_gold_200.json": {
+        "byte_count": 213961,
+        "sha256": "8190c24d1e2f0aa9daeff89a8325f9051d2d2e9a96d867386fbded7fe3a82004"
+      },
+      "profiles/kodak_kodachrome_64.json": {
+        "byte_count": 215666,
+        "sha256": "75b07bf032c80353383b73fbfde6ea5d718ec3d2b05db06aa83a6f960b07f28d"
+      },
+      "profiles/kodak_portra_160.json": {
+        "byte_count": 214158,
+        "sha256": "54caffc4246619e5135996a00386393d37a2dfc7c6fdf4ebf3f32d68281ee0cc"
+      },
+      "profiles/kodak_portra_400.json": {
+        "byte_count": 214265,
+        "sha256": "140c49bbff6d7b6589058ce0836e3286fa995e9433bb8a62a0189d6e1a04da9f"
+      },
+      "profiles/kodak_portra_800.json": {
+        "byte_count": 214012,
+        "sha256": "ba2863125ef4ad4039616c1be76ee38e7bff28706a769b4010a7dfca3e786ee2"
+      },
+      "profiles/kodak_portra_800_push1.json": {
+        "byte_count": 214250,
+        "sha256": "db6b9623e6c64f9188c9e9afb5926895f8d55965b68102e97768694f3ea572b3"
+      },
+      "profiles/kodak_portra_800_push2.json": {
+        "byte_count": 214224,
+        "sha256": "502b232a7395ef6a961c51cd65f53813e2ecbd4ae861802800b7d8cc02d3da6b"
+      },
+      "profiles/kodak_portra_endura.json": {
+        "byte_count": 222541,
+        "sha256": "28bee939504da48e3556c58fc880696f471c2d63bd00e3b8e1831dd0ff5cd25c"
+      },
+      "profiles/kodak_supra_endura.json": {
+        "byte_count": 222808,
+        "sha256": "b3ea5143e10b6bd1cb10026391a425a2ac901aeb96549918d3e1093b395a6b68"
+      },
+      "profiles/kodak_tmax_100.json": {
+        "byte_count": 80983,
+        "sha256": "c9160236872034b86fb42b67be3a9252088bfa7bdbb450148b0c20ad83e3033a"
+      },
+      "profiles/kodak_tri_x_400.json": {
+        "byte_count": 78602,
+        "sha256": "a54be071c6a055a9a49acb7072d10bf0b1bcddf9c0a459b0800a9b14bb66b1f1"
+      },
+      "profiles/kodak_ultra_endura.json": {
+        "byte_count": 222834,
+        "sha256": "c92bcbcb01c917592be523a66140f4110b29f7331546bb58574aa4111d8a7b2c"
+      },
+      "profiles/kodak_ultramax_400.json": {
+        "byte_count": 214054,
+        "sha256": "c36ab49d63ea72cf558c83e4c665ca9d25e3008387ecb8eeb862bf6a996590f6"
+      },
+      "profiles/kodak_verita_200d.json": {
+        "byte_count": 214035,
+        "sha256": "8c5373730fa9eb3bb443e670a915b24530af6ae6468a1e2a369c5e43bf0658de"
+      },
+      "profiles/kodak_vision3_200t.json": {
+        "byte_count": 214403,
+        "sha256": "843fed6fe82eae9c13a2191547347c368634921abb635e1ac5fc7cc7169e72f0"
+      },
+      "profiles/kodak_vision3_250d.json": {
+        "byte_count": 214154,
+        "sha256": "d67d4f551bda1489a1590a2a63fe420f275713682453276b2d99e2f72019d12a"
+      },
+      "profiles/kodak_vision3_500t.json": {
+        "byte_count": 214062,
+        "sha256": "192b85a7050586b88467101a3af96fdffc7317f81332fa07aa4679e67af2b17d"
+      },
+      "profiles/kodak_vision3_50d.json": {
+        "byte_count": 214185,
+        "sha256": "f252ef031edda4be305f9cde8dd52257a7d34a94210ef86c4e6471544f1600c8"
+      },
+      "spektrafilm_constants.bin": {
+        "byte_count": 9450196,
+        "sha256": "f2c06600606fa169171f58b6639d2669f372a2b39ebe9c72e3edeff5f6d7d31d"
+      },
+      "vulkan/spk_affine3.spv": {
+        "byte_count": 2456,
+        "sha256": "17f1d8322e569ac4dac0d78b10d61669f9d4220c91d690d2f96299615427bbdf"
+      },
+      "vulkan/spk_boost.spv": {
+        "byte_count": 2992,
+        "sha256": "0b95d2bf9c52724a3d822ae9b5f55363fa8eb7058812251147bbae6ef8f00917"
+      },
+      "vulkan/spk_bw_correct.spv": {
+        "byte_count": 2940,
+        "sha256": "a8515c1208c676e176c689a25a1456d0f535101f54bf1a9e9145059f5085b313"
+      },
+      "vulkan/spk_cam16ucs_compress.spv": {
+        "byte_count": 24184,
+        "sha256": "179d9fd5f8ab7c1de03b21aac7464b28bb47ea20be6fb744605db76743e68753"
+      },
+      "vulkan/spk_cctf_decode.spv": {
+        "byte_count": 4600,
+        "sha256": "4b71817eed371b305d985eae01b92b75692a56f1bd07ad9edf72a59e0a130f3d"
+      },
+      "vulkan/spk_cctf_encode_matrix.spv": {
+        "byte_count": 6024,
+        "sha256": "6ac2d962eb6c0285483fe226d04f0b1f2f5bfcaf21ceb9a170ae5ce9b019d49b"
+      },
+      "vulkan/spk_couplers_correction.spv": {
+        "byte_count": 4860,
+        "sha256": "9f0e990bb40e0ec0b92f387d0355773d1d277f1a4e9a425878a8ba8e03343ce3"
+      },
+      "vulkan/spk_curves.spv": {
+        "byte_count": 5496,
+        "sha256": "9fcd8d055fc2c9b339b34688d4c932719c915cda4695ce8e0d21eae710940a29"
+      },
+      "vulkan/spk_di_normalise.spv": {
+        "byte_count": 2860,
+        "sha256": "2d28f3e2c37099970291a59a3fa69a5cf7b4aa1850a746a9915362d798762f8c"
+      },
+      "vulkan/spk_edr.spv": {
+        "byte_count": 5000,
+        "sha256": "e4bb2921dbc1fdd31411515c1649ec6394280326a18f00a8d0bc18fd5f5c4bbe"
+      },
+      "vulkan/spk_geometry_resample_df.spv": {
+        "byte_count": 16432,
+        "sha256": "29265ee65dba649e31fb803fe64aeee08a125556c2be4e30197bab7ad3c816fb"
+      },
+      "vulkan/spk_glare_add.spv": {
+        "byte_count": 2504,
+        "sha256": "7a6c9090207120238a2f7c2bf8919b7309f6da69836ae33329706be709799ca0"
+      },
+      "vulkan/spk_grain_layer_one.spv": {
+        "byte_count": 18880,
+        "sha256": "c72354e98bfc4c710c749403c2d6fc779d1a40d4de60399c04ac090b859d51f9"
+      },
+      "vulkan/spk_grain_layers.spv": {
+        "byte_count": 19144,
+        "sha256": "205e31884070a4254723c4789c5bb5b80b8e2f8af1ffa11f8dbdc8c279d8d2ed"
+      },
+      "vulkan/spk_grain_simple.spv": {
+        "byte_count": 15176,
+        "sha256": "ce7444a69e7b7b3b5302d2ffc2fcb2a797f1f240250f164cbaa92db6f826c69d"
+      },
+      "vulkan/spk_iir_df_acc.spv": {
+        "byte_count": 16348,
+        "sha256": "134349601a35b8d70665779c5e25c5ff1eda8f5fe470bb1cb1a7186727c31019"
+      },
+      "vulkan/spk_lincomb3.spv": {
+        "byte_count": 2724,
+        "sha256": "40b03156066cc213051f4d5eece6a38dca0c2e834e203a81ead644db2fbd7f95"
+      },
+      "vulkan/spk_log10_guarded.spv": {
+        "byte_count": 2320,
+        "sha256": "fef81ad5a0f94c34517a29f6ac3f142d951d484775ca52633026b5d0c6de636b"
+      },
+      "vulkan/spk_lognormal_field.spv": {
+        "byte_count": 8284,
+        "sha256": "6e578f77e4276a1862ef5576db316a54bdf873f4793c880e09d7f7248bbd02f2"
+      },
+      "vulkan/spk_lut2d_cubic.spv": {
+        "byte_count": 9228,
+        "sha256": "46c801214f6d2005e04325e782f587b1ed6cd22b4091ef1ce1d6e1174ff49990"
+      },
+      "vulkan/spk_lut3d_trilinear.spv": {
+        "byte_count": 9160,
+        "sha256": "d893b19f909d051c641a8e7d433c45098d935a0e792788e3779a184138c2c029"
+      },
+      "vulkan/spk_math_probe.spv": {
+        "byte_count": 1896,
+        "sha256": "7a2525eae5486bccd5c812deb9af44e399c1a414d3e24aa1fe39634fbf31b009"
+      },
+      "vulkan/spk_matmul3.spv": {
+        "byte_count": 3504,
+        "sha256": "72d95e7cd08613d77201b8b993b2fd8b90041cf56d3ddc105de04f428cae5a88"
+      },
+      "vulkan/spk_mul.spv": {
+        "byte_count": 2068,
+        "sha256": "a06b20e80c080f474613391dca716468ba64b07ef45ceacbf9cdb3415582057c"
+      },
+      "vulkan/spk_print_exposure.spv": {
+        "byte_count": 2440,
+        "sha256": "b870b4a752ea3d21bb152b3d43a4b4e2484e95e2def63b1756f5fe29873e4e54"
+      },
+      "vulkan/spk_reduce_max.spv": {
+        "byte_count": 3032,
+        "sha256": "4e14d2b8ed6ba39925601a3dd3b7772358ab8bfee01da70800c4bb74fec18058"
+      },
+      "vulkan/spk_rng_probe.spv": {
+        "byte_count": 16480,
+        "sha256": "f963c76fecbfe2267342d3af806cb546589655bc862f685a63b91de5249f1c4a"
+      },
+      "vulkan/spk_sep_fir_acc.spv": {
+        "byte_count": 8996,
+        "sha256": "cd513a95a1a4d2c2114be19b3bc55f705dd51065ceb791531566742b46533d1e"
+      },
+      "vulkan/spk_spectral_epilogue.spv": {
+        "byte_count": 5640,
+        "sha256": "c8c2ee007692b4a088ec981479eb6621079c2fe15961c491bf54f9dd21328fb0"
+      },
+      "vulkan/spk_stride_sample.spv": {
+        "byte_count": 2932,
+        "sha256": "907a232b33daa425515dec1e5bb2ea7f7f3879d1b16e073457f69ec8578ead13"
+      },
+      "vulkan/spk_take_rgb.spv": {
+        "byte_count": 2300,
+        "sha256": "f15e7535f12a12e5586878b5379b66c2ba7d6a5439330fb99a00e59d6a4c87eb"
+      },
+      "vulkan/spk_tc_b.spv": {
+        "byte_count": 4800,
+        "sha256": "02a90468abf11433432e580d92603437dfc985821934f060f9df01a3e5fd0165"
+      },
+      "vulkan/spk_to_rgba16.spv": {
+        "byte_count": 3140,
+        "sha256": "63622bfc67e79c8fad09404add7d86d7faf2f58baf54436c8d4e9d2822a2ae6b"
+      },
+      "vulkan/spk_zoom_bilinear_mirror.spv": {
+        "byte_count": 13736,
+        "sha256": "a748e2df3a7759928c3c86949cadd8ba3be7e4e5a44f93d196b2c6dff4edd1d0"
+      }
+    },
+    "tree_sha256": "d678bf3013239ea68b6e5a43e8568778e235a7915a5b8b5c7a4fc0b544c6c708"
+  },
+  "resources": {
+    "baked_scope": "all files except vulkan/ and .spv/.metallib kernels",
+    "baked_sha256": "25cabaf82853080e8c31f967bfefaea8b4e820fb9f0c6316aa22bd52a226da1e",
+    "directory": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\resources-patch",
+    "files": {
+      "io/README.txt": {
+        "byte_count": 576,
+        "sha256": "4bb0896891b5dc79d7f0449c8cfcc669788101d144e5c938ea2f6159294656bd"
+      },
+      "io/sRGB.icc": {
+        "byte_count": 588,
+        "sha256": "f869f25625302eef46cd74fe56ec11adbfa7cf20db6f70b8efdddcbeec4323a0"
+      },
+      "neutral_print_filters.json": {
+        "byte_count": 17569,
+        "sha256": "fdced9a78e79a9d3a1423de3f34b811a1684485b2bdf0844950ce1fc9f0b7794"
+      },
+      "print_luts.json": {
+        "byte_count": 1617,
+        "sha256": "27b43228c85e55ffaa82079a696f579ef3c00ce057a27f58f11fbc3e0e26f589"
+      },
+      "profiles/cinestill_800t.json": {
+        "byte_count": 846,
+        "sha256": "b4539181be0fc2c6260d8a7ca04fcfd88be0a45fa52b460fd159dd39d2b42611"
+      },
+      "profiles/fujifilm_c200.json": {
+        "byte_count": 213881,
+        "sha256": "33c1acc77ca85963e6165f7fa7fed545803f0c955732e500681e4f3946d44e4a"
+      },
+      "profiles/fujifilm_crystal_archive_typeii.json": {
+        "byte_count": 223158,
+        "sha256": "8aa83ca1d1fafdc72813f1abae0c17facbb6680b566c0f8e8bbd505251c76700"
+      },
+      "profiles/fujifilm_neopan_acros_100_ii.json": {
+        "byte_count": 80357,
+        "sha256": "4429b45664a06c7ee8d16687bcc7adf656403e534fba584f83762e160abdc4f9"
+      },
+      "profiles/fujifilm_pro_400h.json": {
+        "byte_count": 214186,
+        "sha256": "beff34f309c5a9c102a87f48876986e7a7bbb20da7994cfc8d08629f6121ae46"
+      },
+      "profiles/fujifilm_provia_100f.json": {
+        "byte_count": 216444,
+        "sha256": "04c42273d861d26838b0c760579a59e4a985483081f1ff100d7cab9007f54a2f"
+      },
+      "profiles/fujifilm_velvia_100.json": {
+        "byte_count": 216258,
+        "sha256": "4678399aaf2e623dc482e46255093f79ddee93ae963759627e58eee002d7ec84"
+      },
+      "profiles/fujifilm_xtra_400.json": {
+        "byte_count": 214049,
+        "sha256": "8d2369fc3a8f707f07d04c17283fbc5bb66d95e65addc09d06be222c785ff92d"
+      },
+      "profiles/ilford_hp5_plus_400.json": {
+        "byte_count": 87530,
+        "sha256": "a09ccdb57816f220ab598e534318a743ef79e16a300f8bd2de7453d451fe8ec5"
+      },
+      "profiles/ilford_multigrade_iv_rc.json": {
+        "byte_count": 81711,
+        "sha256": "0f776f1f26f04aca4ec438ed377dc1acf4073dc1a8ae32c51607a6cb1a02521d"
+      },
+      "profiles/kodak_2383.json": {
+        "byte_count": 223095,
+        "sha256": "a7a494c593ff5da06767d6293f7c796a146ca6346cdddd369f1b55cdfef855cf"
+      },
+      "profiles/kodak_2393.json": {
+        "byte_count": 223080,
+        "sha256": "db1d293d5f515c22d3f19b8aa91d874ec9c8c6ebfbfa731dd04de9a303c2a129"
+      },
+      "profiles/kodak_ektachrome_100.json": {
+        "byte_count": 215834,
+        "sha256": "3113bde02c05e707e353911b7628f66ffb1931493dc3a0581c546498e9ab75a2"
+      },
+      "profiles/kodak_ektacolor_edge.json": {
+        "byte_count": 222479,
+        "sha256": "d05b37d843af82057316717844898be9440e61b0e7a0ab36fe9efb83e629a3c7"
+      },
+      "profiles/kodak_ektar_100.json": {
+        "byte_count": 214224,
+        "sha256": "f2a8c9092153b2d1ee90c5aa588ece7c199c8687520e250946484ff3294b0319"
+      },
+      "profiles/kodak_endura_premier.json": {
+        "byte_count": 222708,
+        "sha256": "3f63b8c5a56967776fa9782914079156736c0b1e0ec739ff946d8b1aa2950a6e"
+      },
+      "profiles/kodak_gold_200.json": {
+        "byte_count": 213961,
+        "sha256": "8190c24d1e2f0aa9daeff89a8325f9051d2d2e9a96d867386fbded7fe3a82004"
+      },
+      "profiles/kodak_kodachrome_64.json": {
+        "byte_count": 215666,
+        "sha256": "75b07bf032c80353383b73fbfde6ea5d718ec3d2b05db06aa83a6f960b07f28d"
+      },
+      "profiles/kodak_portra_160.json": {
+        "byte_count": 214158,
+        "sha256": "54caffc4246619e5135996a00386393d37a2dfc7c6fdf4ebf3f32d68281ee0cc"
+      },
+      "profiles/kodak_portra_400.json": {
+        "byte_count": 214265,
+        "sha256": "140c49bbff6d7b6589058ce0836e3286fa995e9433bb8a62a0189d6e1a04da9f"
+      },
+      "profiles/kodak_portra_800.json": {
+        "byte_count": 214012,
+        "sha256": "ba2863125ef4ad4039616c1be76ee38e7bff28706a769b4010a7dfca3e786ee2"
+      },
+      "profiles/kodak_portra_800_push1.json": {
+        "byte_count": 214250,
+        "sha256": "db6b9623e6c64f9188c9e9afb5926895f8d55965b68102e97768694f3ea572b3"
+      },
+      "profiles/kodak_portra_800_push2.json": {
+        "byte_count": 214224,
+        "sha256": "502b232a7395ef6a961c51cd65f53813e2ecbd4ae861802800b7d8cc02d3da6b"
+      },
+      "profiles/kodak_portra_endura.json": {
+        "byte_count": 222541,
+        "sha256": "28bee939504da48e3556c58fc880696f471c2d63bd00e3b8e1831dd0ff5cd25c"
+      },
+      "profiles/kodak_supra_endura.json": {
+        "byte_count": 222808,
+        "sha256": "b3ea5143e10b6bd1cb10026391a425a2ac901aeb96549918d3e1093b395a6b68"
+      },
+      "profiles/kodak_tmax_100.json": {
+        "byte_count": 80983,
+        "sha256": "c9160236872034b86fb42b67be3a9252088bfa7bdbb450148b0c20ad83e3033a"
+      },
+      "profiles/kodak_tri_x_400.json": {
+        "byte_count": 78602,
+        "sha256": "a54be071c6a055a9a49acb7072d10bf0b1bcddf9c0a459b0800a9b14bb66b1f1"
+      },
+      "profiles/kodak_ultra_endura.json": {
+        "byte_count": 222834,
+        "sha256": "c92bcbcb01c917592be523a66140f4110b29f7331546bb58574aa4111d8a7b2c"
+      },
+      "profiles/kodak_ultramax_400.json": {
+        "byte_count": 214054,
+        "sha256": "c36ab49d63ea72cf558c83e4c665ca9d25e3008387ecb8eeb862bf6a996590f6"
+      },
+      "profiles/kodak_verita_200d.json": {
+        "byte_count": 214035,
+        "sha256": "8c5373730fa9eb3bb443e670a915b24530af6ae6468a1e2a369c5e43bf0658de"
+      },
+      "profiles/kodak_vision3_200t.json": {
+        "byte_count": 214403,
+        "sha256": "843fed6fe82eae9c13a2191547347c368634921abb635e1ac5fc7cc7169e72f0"
+      },
+      "profiles/kodak_vision3_250d.json": {
+        "byte_count": 214154,
+        "sha256": "d67d4f551bda1489a1590a2a63fe420f275713682453276b2d99e2f72019d12a"
+      },
+      "profiles/kodak_vision3_500t.json": {
+        "byte_count": 214062,
+        "sha256": "192b85a7050586b88467101a3af96fdffc7317f81332fa07aa4679e67af2b17d"
+      },
+      "profiles/kodak_vision3_50d.json": {
+        "byte_count": 214185,
+        "sha256": "f252ef031edda4be305f9cde8dd52257a7d34a94210ef86c4e6471544f1600c8"
+      },
+      "spektrafilm_constants.bin": {
+        "byte_count": 9450196,
+        "sha256": "f2c06600606fa169171f58b6639d2669f372a2b39ebe9c72e3edeff5f6d7d31d"
+      },
+      "vulkan/spk_affine3.spv": {
+        "byte_count": 2456,
+        "sha256": "17f1d8322e569ac4dac0d78b10d61669f9d4220c91d690d2f96299615427bbdf"
+      },
+      "vulkan/spk_boost.spv": {
+        "byte_count": 2992,
+        "sha256": "0b95d2bf9c52724a3d822ae9b5f55363fa8eb7058812251147bbae6ef8f00917"
+      },
+      "vulkan/spk_bw_correct.spv": {
+        "byte_count": 2940,
+        "sha256": "a8515c1208c676e176c689a25a1456d0f535101f54bf1a9e9145059f5085b313"
+      },
+      "vulkan/spk_cam16ucs_compress.spv": {
+        "byte_count": 24184,
+        "sha256": "179d9fd5f8ab7c1de03b21aac7464b28bb47ea20be6fb744605db76743e68753"
+      },
+      "vulkan/spk_cctf_decode.spv": {
+        "byte_count": 4404,
+        "sha256": "125c2ccb53705b9a7cb7011b462fb0cd6bd44f06f2654ad03434b1734555f6b4"
+      },
+      "vulkan/spk_cctf_encode_matrix.spv": {
+        "byte_count": 6024,
+        "sha256": "6ac2d962eb6c0285483fe226d04f0b1f2f5bfcaf21ceb9a170ae5ce9b019d49b"
+      },
+      "vulkan/spk_couplers_correction.spv": {
+        "byte_count": 4860,
+        "sha256": "9f0e990bb40e0ec0b92f387d0355773d1d277f1a4e9a425878a8ba8e03343ce3"
+      },
+      "vulkan/spk_curves.spv": {
+        "byte_count": 5496,
+        "sha256": "9fcd8d055fc2c9b339b34688d4c932719c915cda4695ce8e0d21eae710940a29"
+      },
+      "vulkan/spk_di_normalise.spv": {
+        "byte_count": 2860,
+        "sha256": "2d28f3e2c37099970291a59a3fa69a5cf7b4aa1850a746a9915362d798762f8c"
+      },
+      "vulkan/spk_edr.spv": {
+        "byte_count": 5000,
+        "sha256": "e4bb2921dbc1fdd31411515c1649ec6394280326a18f00a8d0bc18fd5f5c4bbe"
+      },
+      "vulkan/spk_geometry_resample_df.spv": {
+        "byte_count": 16432,
+        "sha256": "29265ee65dba649e31fb803fe64aeee08a125556c2be4e30197bab7ad3c816fb"
+      },
+      "vulkan/spk_glare_add.spv": {
+        "byte_count": 2504,
+        "sha256": "7a6c9090207120238a2f7c2bf8919b7309f6da69836ae33329706be709799ca0"
+      },
+      "vulkan/spk_grain_layer_one.spv": {
+        "byte_count": 18880,
+        "sha256": "c72354e98bfc4c710c749403c2d6fc779d1a40d4de60399c04ac090b859d51f9"
+      },
+      "vulkan/spk_grain_layers.spv": {
+        "byte_count": 19144,
+        "sha256": "205e31884070a4254723c4789c5bb5b80b8e2f8af1ffa11f8dbdc8c279d8d2ed"
+      },
+      "vulkan/spk_grain_simple.spv": {
+        "byte_count": 15176,
+        "sha256": "ce7444a69e7b7b3b5302d2ffc2fcb2a797f1f240250f164cbaa92db6f826c69d"
+      },
+      "vulkan/spk_iir_df_acc.spv": {
+        "byte_count": 16348,
+        "sha256": "134349601a35b8d70665779c5e25c5ff1eda8f5fe470bb1cb1a7186727c31019"
+      },
+      "vulkan/spk_lincomb3.spv": {
+        "byte_count": 2724,
+        "sha256": "40b03156066cc213051f4d5eece6a38dca0c2e834e203a81ead644db2fbd7f95"
+      },
+      "vulkan/spk_log10_guarded.spv": {
+        "byte_count": 2320,
+        "sha256": "fef81ad5a0f94c34517a29f6ac3f142d951d484775ca52633026b5d0c6de636b"
+      },
+      "vulkan/spk_lognormal_field.spv": {
+        "byte_count": 8284,
+        "sha256": "6e578f77e4276a1862ef5576db316a54bdf873f4793c880e09d7f7248bbd02f2"
+      },
+      "vulkan/spk_lut2d_cubic.spv": {
+        "byte_count": 9228,
+        "sha256": "46c801214f6d2005e04325e782f587b1ed6cd22b4091ef1ce1d6e1174ff49990"
+      },
+      "vulkan/spk_lut3d_trilinear.spv": {
+        "byte_count": 9160,
+        "sha256": "d893b19f909d051c641a8e7d433c45098d935a0e792788e3779a184138c2c029"
+      },
+      "vulkan/spk_math_probe.spv": {
+        "byte_count": 1896,
+        "sha256": "7a2525eae5486bccd5c812deb9af44e399c1a414d3e24aa1fe39634fbf31b009"
+      },
+      "vulkan/spk_matmul3.spv": {
+        "byte_count": 3504,
+        "sha256": "72d95e7cd08613d77201b8b993b2fd8b90041cf56d3ddc105de04f428cae5a88"
+      },
+      "vulkan/spk_mul.spv": {
+        "byte_count": 2068,
+        "sha256": "a06b20e80c080f474613391dca716468ba64b07ef45ceacbf9cdb3415582057c"
+      },
+      "vulkan/spk_print_exposure.spv": {
+        "byte_count": 2440,
+        "sha256": "b870b4a752ea3d21bb152b3d43a4b4e2484e95e2def63b1756f5fe29873e4e54"
+      },
+      "vulkan/spk_reduce_max.spv": {
+        "byte_count": 3032,
+        "sha256": "4e14d2b8ed6ba39925601a3dd3b7772358ab8bfee01da70800c4bb74fec18058"
+      },
+      "vulkan/spk_rng_probe.spv": {
+        "byte_count": 16480,
+        "sha256": "f963c76fecbfe2267342d3af806cb546589655bc862f685a63b91de5249f1c4a"
+      },
+      "vulkan/spk_sep_fir_acc.spv": {
+        "byte_count": 8996,
+        "sha256": "cd513a95a1a4d2c2114be19b3bc55f705dd51065ceb791531566742b46533d1e"
+      },
+      "vulkan/spk_spectral_epilogue.spv": {
+        "byte_count": 5640,
+        "sha256": "c8c2ee007692b4a088ec981479eb6621079c2fe15961c491bf54f9dd21328fb0"
+      },
+      "vulkan/spk_stride_sample.spv": {
+        "byte_count": 2932,
+        "sha256": "907a232b33daa425515dec1e5bb2ea7f7f3879d1b16e073457f69ec8578ead13"
+      },
+      "vulkan/spk_take_rgb.spv": {
+        "byte_count": 2300,
+        "sha256": "f15e7535f12a12e5586878b5379b66c2ba7d6a5439330fb99a00e59d6a4c87eb"
+      },
+      "vulkan/spk_tc_b.spv": {
+        "byte_count": 4800,
+        "sha256": "02a90468abf11433432e580d92603437dfc985821934f060f9df01a3e5fd0165"
+      },
+      "vulkan/spk_to_rgba16.spv": {
+        "byte_count": 3140,
+        "sha256": "63622bfc67e79c8fad09404add7d86d7faf2f58baf54436c8d4e9d2822a2ae6b"
+      },
+      "vulkan/spk_zoom_bilinear_mirror.spv": {
+        "byte_count": 13736,
+        "sha256": "a748e2df3a7759928c3c86949cadd8ba3be7e4e5a44f93d196b2c6dff4edd1d0"
+      }
+    },
+    "tree_sha256": "dac137c5089a5337212ecd01e73f7e795ba5eb33bebe7b9e7a2cf279bbd27074"
+  },
+  "success": true,
+  "verification": "c_api_lifetime_cache_and_allocation_ledger"
+}

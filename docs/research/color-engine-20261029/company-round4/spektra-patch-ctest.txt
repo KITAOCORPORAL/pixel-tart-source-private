@@ -1,0 +1,28 @@
+Internal ctest changing into directory: D:/AI AGENT/tmp/color-engine-company-20261030/build-patch
+Test project D:/AI AGENT/tmp/color-engine-company-20261030/build-patch
+      Start  1: spk_core_schema
+ 1/11 Test  #1: spk_core_schema ..................   Passed    0.18 sec
+      Start  2: spk_core_setup
+ 2/11 Test  #2: spk_core_setup ...................   Passed    1.02 sec
+      Start  3: spk_vulkan_smoke
+ 3/11 Test  #3: spk_vulkan_smoke .................   Passed    1.29 sec
+      Start  4: spk_vulkan_grain
+ 4/11 Test  #4: spk_vulkan_grain .................   Passed    0.57 sec
+      Start  5: spk_vulkan_pointwise
+ 5/11 Test  #5: spk_vulkan_pointwise .............   Passed    0.27 sec
+      Start  6: spk_vulkan_resample
+ 6/11 Test  #6: spk_vulkan_resample ..............   Passed    0.68 sec
+      Start  7: spk_vulkan_transfer
+ 7/11 Test  #7: spk_vulkan_transfer ..............   Passed    0.34 sec
+      Start  8: spk_vulkan_geometry
+ 8/11 Test  #8: spk_vulkan_geometry ..............   Passed    0.52 sec
+      Start  9: spk_vulkan_lut_di
+ 9/11 Test  #9: spk_vulkan_lut_di ................   Passed    0.40 sec
+      Start 10: spk_windows_feature_boundaries
+10/11 Test #10: spk_windows_feature_boundaries ...   Passed    0.83 sec
+      Start 11: spk_windows_c_abi
+11/11 Test #11: spk_windows_c_abi ................   Passed    0.66 sec
+
+100% tests passed, 0 tests failed out of 11
+
+Total Test time (real) =   6.78 sec

@@ -18,3 +18,5 @@ NOTICE 描述 engine/resources 28个 spektrafilm 原始资料为 CC BY-SA 4.0；
 源码文档要求 Windows Vulkan 的输出 `spk_result.rgba16` 属于结果句柄的独立 CPU RGBA16，按 `row_stride_px` 读取，以 `spk_result_free` 释放，不能把 texture 当 VkImage。线性宽域须准确转换至引擎真实输入域并核查曝光、WB、转移、输出，处理过的 sRGB 仅能作创意模拟；双重 WB/tone/色域映射未测。颗粒和光晕不是 LUT 可以完整承载的空间过程，边界和性能 NOT_RUN。
 
 A 完整后端：GPL/数据权利和最小 ABI 渲染全部开放门禁，暂缓。B 获许可的轻量颜色预设 + 独立空间效果：只能作为另行设计的替代，不能用未经授权的本项目资源/LUT自动规避许可；精确效果及证据仍待验证。未来保持现有布局与普通胶片配方模型，宝丽来另线；不改UI或默认产品。
+
+> 历史说明（2026-10-30）：下面“未构建”描述的是早期预检时点，已由ROUND3_REPORT中的家庭成功构建、9组渲染及10/11 CTest实测取代；公司接续见COMPANY_ROUND4_REPORT，不据本文旧阻点报告当前状态。

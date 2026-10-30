@@ -1,0 +1,49 @@
+WARNING: [Loader Message] Code 0 : windows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.
+WARNING: [Loader Message] Code 0 : Layer VK_LAYER_bandicam_helper uses API version 1.2 which is older than the application specified API version of 1.4. May cause issues.
+==========
+VULKANINFO
+==========
+
+Vulkan Instance Version: 1.4.303
+
+
+Instance Extensions: count = 16
+-------------------------------
+VK_EXT_debug_report                    : extension revision 10
+VK_EXT_debug_utils                     : extension revision 2
+VK_EXT_surface_maintenance1            : extension revision 1
+VK_EXT_swapchain_colorspace            : extension revision 5
+VK_KHR_device_group_creation           : extension revision 1
+VK_KHR_external_fence_capabilities     : extension revision 1
+VK_KHR_external_memory_capabilities    : extension revision 1
+VK_KHR_external_semaphore_capabilities : extension revision 1
+VK_KHR_get_physical_device_properties2 : extension revision 2
+VK_KHR_get_surface_capabilities2       : extension revision 1
+VK_KHR_portability_enumeration         : extension revision 1
+VK_KHR_surface                         : extension revision 25
+VK_KHR_surface_protected_capabilities  : extension revision 1
+VK_KHR_win32_surface                   : extension revision 6
+VK_LUNARG_direct_driver_loading        : extension revision 1
+VK_NV_external_memory_capabilities     : extension revision 1
+
+Instance Layers: count = 3
+--------------------------
+VK_LAYER_NV_gr2608       NVIDIA GR2608 layer    1.4.303  version 1
+VK_LAYER_NV_optimus      NVIDIA Optimus layer   1.4.303  version 1
+VK_LAYER_bandicam_helper Vulkan Bandicam Helper 1.2.141  version 1
+
+Devices:
+========
+GPU0:
+	apiVersion         = 1.4.303
+	driverVersion      = 572.70.0.0
+	vendorID           = 0x10de
+	deviceID           = 0x2188
+	deviceType         = PHYSICAL_DEVICE_TYPE_DISCRETE_GPU
+	deviceName         = NVIDIA GeForce GTX 1650
+	driverID           = DRIVER_ID_NVIDIA_PROPRIETARY
+	driverName         = NVIDIA
+	driverInfo         = 572.70
+	conformanceVersion = 1.4.1.0
+	deviceUUID         = 62902bdf-fa33-7891-af9b-ed029c901505
+	driverUUID         = ebaea3da-38b5-5350-a639-2b065f3e1db7

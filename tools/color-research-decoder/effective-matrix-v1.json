@@ -1,0 +1,104 @@
+{
+  "Greybox": {
+    "Location": {
+      "IsEmpty": true,
+      "X": 0,
+      "Y": 0
+    },
+    "Size": {
+      "IsEmpty": false,
+      "Width": -1,
+      "Height": -1
+    },
+    "X": 0,
+    "Y": 0,
+    "Width": -1,
+    "Height": -1,
+    "Left": 0,
+    "Top": 0,
+    "Right": -1,
+    "Bottom": -1,
+    "IsEmpty": false
+  },
+  "Cropbox": {
+    "Location": {
+      "IsEmpty": true,
+      "X": 0,
+      "Y": 0
+    },
+    "Size": {
+      "IsEmpty": false,
+      "Width": -1,
+      "Height": -1
+    },
+    "X": 0,
+    "Y": 0,
+    "Width": -1,
+    "Height": -1,
+    "Left": 0,
+    "Top": 0,
+    "Right": -1,
+    "Bottom": -1,
+    "IsEmpty": false
+  },
+  "Aber": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "Gamma": [
+    1,
+    1,
+    0.9999999999999964,
+    0.9999999999999964,
+    0,
+    1
+  ],
+  "UserMultipliers": [
+    505,
+    256,
+    352,
+    256
+  ],
+  "Brightness": 1,
+  "Threshold": 0,
+  "HalfSize": false,
+  "FourColorRgb": false,
+  "HighlightMode": 0,
+  "UseAutoWb": false,
+  "UseCameraWb": false,
+  "UseCameraMatrix": true,
+  "OutputColor": 4,
+  "OutputProfile": null,
+  "CameraProfile": null,
+  "BadPixels": null,
+  "DarkFrame": null,
+  "OutputBps": 16,
+  "OutputTiff": false,
+  "OutputFlags": 0,
+  "UserFlip": 0,
+  "UserQual": 3,
+  "UserBlack": -1,
+  "UserCBlack": [
+    -1000001,
+    -1000001,
+    -1000001,
+    -1000001
+  ],
+  "UserSaturation": -1,
+  "MedianPasses": 0,
+  "AutoBrightThr": 0.01,
+  "AdjustMaximumThr": 0,
+  "NoAutoBright": true,
+  "UseFujiRotate": true,
+  "GreenMatching": 0,
+  "DcbIterations": 0,
+  "DcbEnhanceFl": 0,
+  "FbddNoiserd": 0,
+  "ExpCorrec": false,
+  "ExpShift": 1,
+  "ExpPreser": 0,
+  "AutoScale": true,
+  "Interpolation": true
+}

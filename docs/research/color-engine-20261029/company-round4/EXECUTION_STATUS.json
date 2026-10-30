@@ -1,0 +1,66 @@
+{
+  "version": "CompanyRound4ExecutionStatusV1",
+  "overall": "PARTIAL_RESEARCH_ONLY",
+  "productDefaultEnabled": false,
+  "executed": {
+    "decoderBuild": "PASS",
+    "contractTargetedTests": 14,
+    "legacyRejectionTests": 6,
+    "syntheticFreshProcessFullDomain": "PASS_NOT_RAW",
+    "recordedOptionsMatrix": "PASS_NOT_NEW_DECODE",
+    "originalCtest": {
+      "pass": 11,
+      "fail": 0
+    },
+    "patchedCtest": {
+      "pass": 11,
+      "fail": 0
+    },
+    "originalDecodeOsCtest": {
+      "pass": 10,
+      "fail": 1
+    },
+    "patchedDecodeOsCtest": {
+      "pass": 11,
+      "fail": 0
+    },
+    "deterministicCompanyMatrix": {
+      "originalCases": 9,
+      "patchedCases": 9,
+      "allBitExact": true,
+      "newProcessReopenAndTiff16": true
+    },
+    "abiAlphaSeedAndCancellation": "PASS_ORIGINAL_AND_PATCH",
+    "lifecycle": "5_CASES_PASS",
+    "stripes": "no_halation/no_couplers rows1/7/17 exact"
+  },
+  "retainedFailures": [
+    "household original case114/index13; RTX5060Ti",
+    "company original decode -Os case114/index13; GTX1650",
+    "Portra/Ektar neutral gradients decline -1 U16; cause not fully closed",
+    "initial targeted-test expected error-string mismatch; rejection itself worked"
+  ],
+  "notRun": {
+    "d80014NewCandidateEndToEnd": "SOURCE_ABSENT",
+    "d800NativeMidDecodeCancellation": "SOURCE_ABSENT",
+    "naturalSceneDevelopmentValidationSplit": "NO_SCENE_LABELED_ADMITTED_SOURCE",
+    "expandedLayouts": "NOT_AUTHORIZED_BY_EVIDENCE",
+    "householdPatchedGpu": "NOT_RUN",
+    "metalWholeImageOracle": "NOT_RUN",
+    "productUiProjectIntegration": "OUT_OF_SCOPE",
+    "fullPv456GoldenRerun": "PRODUCT_UNCHANGED_NOT_RUN",
+    "seedExtension": "NOT_IMPLEMENTED",
+    "broadPerformanceVram": "NOT_RUN"
+  },
+  "licenses": {
+    "codeDistribution": "NOT_APPROVED",
+    "resourceDistribution": "NOT_APPROVED"
+  },
+  "operationalErrorsRetainedLocally": [
+    "Initial contract build missing Projects using; corrected and final build passes",
+    "Research JSON/summary script syntax and source-file UTF-8 decoding errors corrected; final AST and numeric summary reproduced",
+    "tifffile unavailable requested patch version corrected to existing fixed2026.10.15, installed only isolated root",
+    "Initial child reopen import path corrected; final sealed9+9 matrix passes",
+    "Wrong expected error string in one targeted test; original rejection worked; raw initial failure kept in Git"
+  ]
+}

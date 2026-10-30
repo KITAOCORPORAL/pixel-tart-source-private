@@ -1,0 +1,81 @@
+{
+  "version": "BtShaderCompilationFactsV1",
+  "originalSource": {
+    "path": "engine/src/shaders/vulkan/spk_cctf_decode.comp",
+    "sha256": "6e47601110d4e4242dc1585e82df52548e5d1d710fe876e2cc803d01e3244336"
+  },
+  "commands": [
+    {
+      "label": "original",
+      "argv": [
+        "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\glslang\\bin\\glslang.exe",
+        "-V",
+        "--target-env",
+        "vulkan1.0",
+        "-o",
+        "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\original-frozen.spv",
+        "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\source2\\engine\\src\\shaders\\vulkan\\spk_cctf_decode.comp"
+      ],
+      "sourceSha256": "6e47601110d4e4242dc1585e82df52548e5d1d710fe876e2cc803d01e3244336",
+      "spirvSha256": "4b71817eed371b305d985eae01b92b75692a56f1bd07ad9edf72a59e0a130f3d"
+    },
+    {
+      "label": "original-os",
+      "argv": [
+        "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\glslang\\bin\\glslang.exe",
+        "-V",
+        "--target-env",
+        "vulkan1.0",
+        "-Os",
+        "-o",
+        "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\original-os-frozen.spv",
+        "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\source2\\engine\\src\\shaders\\vulkan\\spk_cctf_decode.comp"
+      ],
+      "sourceSha256": "6e47601110d4e4242dc1585e82df52548e5d1d710fe876e2cc803d01e3244336",
+      "spirvSha256": "d727a62b369776ab85aed4e268490c29f6ac52e4f3f60beee66d067f042d4bb8"
+    },
+    {
+      "label": "patched",
+      "argv": [
+        "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\glslang\\bin\\glslang.exe",
+        "-V",
+        "--target-env",
+        "vulkan1.0",
+        "-o",
+        "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\patched-frozen.spv",
+        "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\source-patch\\engine\\src\\shaders\\vulkan\\spk_cctf_decode.comp"
+      ],
+      "sourceSha256": "ee3369fa63613aa277d95bfaf2da339e191c198480763a7c3fe00283fec44fff",
+      "spirvSha256": "125c2ccb53705b9a7cb7011b462fb0cd6bd44f06f2654ad03434b1734555f6b4"
+    },
+    {
+      "label": "patched-os",
+      "argv": [
+        "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\glslang\\bin\\glslang.exe",
+        "-V",
+        "--target-env",
+        "vulkan1.0",
+        "-Os",
+        "-o",
+        "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\patched-os-frozen.spv",
+        "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\source-patch\\engine\\src\\shaders\\vulkan\\spk_cctf_decode.comp"
+      ],
+      "sourceSha256": "ee3369fa63613aa277d95bfaf2da339e191c198480763a7c3fe00283fec44fff",
+      "spirvSha256": "7131504c9352f258c1899616884a72c14da6fa363cd504387c99cfafa3b992ef"
+    }
+  ],
+  "originalRuntimeSpirvMatchesHousehold": true,
+  "legacyCpuBreakpointBits": "0x3da66555",
+  "optimizedBreakpointBits": "0x3da66554",
+  "unoptimized": {
+    "breakpointExpression": "GLSL.std.450 Pow followed by FMul and FSub, then FOrdGreaterThan",
+    "comparison": "bp > value (strict)"
+  },
+  "optimized": {
+    "constantDecimalBits": 1034315092,
+    "constantHexBits": "0x3da66554",
+    "comparison": "constant > value (strict)",
+    "runtimeBreakpointComputation": "constant folded away"
+  },
+  "limitations": "Household driver machine code was not captured; exact driver optimization origin there is inferred, not observed. Company -Os gives controlled reproduction."
+}

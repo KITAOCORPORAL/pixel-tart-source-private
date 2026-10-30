@@ -1,0 +1,10 @@
+"""Execute two pinned local references; source stays in isolated directory."""
+from pathlib import Path
+import argparse,sys,subprocess,json,re,hashlib,numpy as np
+p=argparse.ArgumentParser();p.add_argument('references',type=Path);p.add_argument('clang',type=Path);p.add_argument('output',type=Path);a=p.parse_args();sys.path.insert(0,str(a.references/'colour-package'));import colour
+if colour.__version__!='0.4.6':raise ValueError('Wrong Colour')
+text=(a.references/'csp.c').read_text();constants=re.search(r'#define BT709_alpha.*?\n#define BT709_beta[^\n]+',text,re.S).group();fn=re.search(r'static double trc_bt709\(double Lc\)\s*\{.*?\n\}',text,re.S).group();source=a.references/'ffmpeg_probe.c';source.write_text('#include <math.h>\n#include <stdio.h>\n#include <stdlib.h>\n'+constants+'\n'+fn+'\nint main(int argc,char**argv){for(int i=1;i<argc;i++)printf("%.17g\\n",trc_bt709(strtod(argv[i],0)));}')
+exe=a.references/'ffmpeg_probe.exe';subprocess.run([str(a.clang),'-O3',str(source),'-o',str(exe)],check=True)
+inputs=np.array([-.01,0,.01799999,.018,.01800001,.018053968510807,.18,1,2]);ff=list(map(float,subprocess.check_output([str(exe),*map(str,inputs)],text=True).splitlines()));bp=np.array(0x3da66555,dtype=np.uint32).view(np.float32);xs=np.array([np.nextafter(bp,np.float32(0)),bp,np.nextafter(bp,np.float32(1))],np.float32).astype(float);legacy=np.where(xs<float(bp),xs/4.5,((xs+float(np.float32(1.099)-1))/float(np.float32(1.099)))**float(np.float32(1)/np.float32(.45)))
+result={'colourCommit':'0c6f868c4b5c5ae861f868ba8015be3abf0f92f0','ffmpegCommit':'b08d7969c550a804a59511c7b83f2dd8cc0499b8','inputs':inputs.tolist(),'colourEncoded':colour.models.oetf_BT709(inputs).tolist(),'ffmpegEncoded':ff,'decodeJoinInput':xs.tolist(),'colourDecoded':colour.models.oetf_inverse_BT709(xs).tolist(),'legacyFloatDecoded':legacy.tolist(),'referenceConvention':'Colour rounded/discontinuous; FFmpeg continuous constants and negative clamp; not equivalent'}
+with a.output.open('x') as f:json.dump(result,f,indent=2)

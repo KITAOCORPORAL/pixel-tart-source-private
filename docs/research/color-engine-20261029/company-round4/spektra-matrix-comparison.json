@@ -1,0 +1,150 @@
+{
+  "version": "CompanyMatrixComparisonV1",
+  "all9BitExact": true,
+  "cases": [
+    {
+      "input": "linear",
+      "film": "kodak_portra_400",
+      "outputExact": true,
+      "originalReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "patchedReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "originalTiff16Exact": true,
+      "patchedTiff16Exact": true,
+      "declineCount": 1
+    },
+    {
+      "input": "linear",
+      "film": "kodak_ektar_100",
+      "outputExact": true,
+      "originalReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "patchedReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "originalTiff16Exact": true,
+      "patchedTiff16Exact": true,
+      "declineCount": 3
+    },
+    {
+      "input": "linear",
+      "film": "kodak_tri_x_400",
+      "outputExact": true,
+      "originalReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "patchedReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "originalTiff16Exact": true,
+      "patchedTiff16Exact": true,
+      "declineCount": 0
+    },
+    {
+      "input": "display",
+      "film": "kodak_portra_400",
+      "outputExact": true,
+      "originalReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "patchedReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "originalTiff16Exact": true,
+      "patchedTiff16Exact": true,
+      "declineCount": 1
+    },
+    {
+      "input": "display",
+      "film": "kodak_ektar_100",
+      "outputExact": true,
+      "originalReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "patchedReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "originalTiff16Exact": true,
+      "patchedTiff16Exact": true,
+      "declineCount": 1
+    },
+    {
+      "input": "display",
+      "film": "kodak_tri_x_400",
+      "outputExact": true,
+      "originalReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "patchedReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "originalTiff16Exact": true,
+      "patchedTiff16Exact": true,
+      "declineCount": 6
+    },
+    {
+      "input": "neutral_log",
+      "film": "kodak_portra_400",
+      "outputExact": true,
+      "originalReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "patchedReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "originalTiff16Exact": true,
+      "patchedTiff16Exact": true,
+      "declineCount": 11
+    },
+    {
+      "input": "neutral_log",
+      "film": "kodak_ektar_100",
+      "outputExact": true,
+      "originalReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "patchedReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "originalTiff16Exact": true,
+      "patchedTiff16Exact": true,
+      "declineCount": 7
+    },
+    {
+      "input": "neutral_log",
+      "film": "kodak_tri_x_400",
+      "outputExact": true,
+      "originalReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "patchedReopen": {
+        "freshProcess": true,
+        "renderExact": true
+      },
+      "originalTiff16Exact": true,
+      "patchedTiff16Exact": true,
+      "declineCount": 0
+    }
+  ]
+}
