@@ -1,3 +1,17 @@
+## 当前公司R5.5交互修复交接 2026-10-30 Europe/Helsinki
+- 正确当前产品e0ff14ab57316fe47d112743f56add7d6ba26e0e（111faf54/a7463d17/e0ff14ab）；测试支持dd191d41e4c7acff3c09ee30bb47dd54a2fdf5e6仅tests；后续文档HEAD另记。company/lighttable-lifecycle-20261030，从fefd53f2/旧R5.5产品f7b53078继续。旧9f7ef4e4仅历史，不可再作为当前产品。
+- 完成通知一次消费、改选/补帧不抢回；暂停/黑场/入片/声音统一所有权、Space repeat去重、恢复/手动翻页语义明确、慢解码timer不重启；多选比较按稳定Z取两张，单张才下一张；结果与冻结来源比较不靠灯箱卡存在。
+- 放大镜使用实际Uniform矩形与WPF仿射变换，横竖方/旋转/缩放/台面视口已知像素验证，照片外隐藏不夹边；代理≤1600和有效细节封顶仍在。捕获丢失/失焦/退出/Esc/异常手势收尾，批量Z保留原相对序，跨项目undo/临时结果清理。
+- 反馈显式可见且代际拒绝迟到；右栏来源/预检/按钮同步，固定列表筛选不复位；普通卡片选择保留渐进加载，不变为全量等待/100路RAW。
+- 灯板R55BoardResponse2修100–160%饱和，仅展示不处理照片。实际proxy/比较及重算比较/两次CaptureR54Still/输出PNG像素和字节一致。MIT原作者fuyuan9972-svg/Windows hqiy0831完整文本随包；两个固定实现同源，不称独立光学科学验证。完整玻璃折射/散射、ProjectionMotion全部光学美术仍部分，不能写PORT_MAP A-D全完成。
+- 最终发布7项目DLL绑定后68唯一受影响PASS/0FAIL；WPF30/Core32/独立3/完整宿主1/同机性能2，不叠加旧38或重复运行。完整宿主1366/1920共20状态截图已查看，OFFSCREEN合成输入；物理鼠标/DPI/ACM/HDR和全量suite NOT_RUN。EXE及实际隔离CMD启动/日志SHA/正常退出0通过。
+- 公司100自建JPEG和5授权RAW同机输入新旧对照；100全成功，RAW仍3成功/1不支持/1预算拒绝；部分耗时更高，不作性能全提升。Fuji旧native重复性/家庭缺7源/超大RAW仍OPEN，没改RAW数学、预算或胶片输入域。
+- 完整自包含公司包E:/Kitao-Deliveries/company-r55-interactions-20261030/Guangjing-R55-InteractionFix-Diagnostic-win-x64.zip，同名目录Start-Guangjing-Diagnostic.cmd；294文件，WholeAppDiagnosticBuild=true / PhotographerTrialBuild=false，完整模块/策划15/教程退役保留，无Setup、私照/用户库/研究引擎。
+- R5.5设计原ZIP及相对文件索引已保存在docs/design/r55/，hash aafe6fe6567bf33c609d76eda3f46e0d18e68f8a8af2de42defdd049454a014c，权威规则不变。指定DOCX缺件不拿旧导出另hash冒充。
+- 当前唯一报告/发布绑定/原始TRX/截图/ZIP/CMD/源/显示光学对照见docs/validation/company-r55-interactions-20261030/FINAL_REPORT.md；总体PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE。透光叠底/ROI/EDR/色温/Spektra/跨崩溃任务仍后续，遵守ComputerUse/Browser/WebView/CDP禁用。
+
+## 历史交接（以下各批只为历史，不覆盖上述当前身份）
+
 ## 当前公司接续 2026-10-30 Europe/Berlin：灯箱请求所有权与渐进加载
 - 独立company/lighttable-lifecycle-20261030，E:/Kitao-Worktrees/company-lighttable-lifecycle-20261030；起点家庭7a6b98e9d48e3f21f91cd69449939b26531e5804，fetch复查未更新。旧公司f8beaa37/其他dirty保留，不合main/强推/研究整线。
 - 当前产品9f7ef4e45c383b66b048d1a183bc41d5e0a61d6d；包含a8a52410主实现、08d76a62测试支持、9f7ef4e4密集重叠可见项修正。文档HEAD另记，不当产品SHA。

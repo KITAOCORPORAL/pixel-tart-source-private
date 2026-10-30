@@ -1,0 +1,278 @@
+{
+  "productSourceSha": "e0ff14ab57316fe47d112743f56add7d6ba26e0e",
+  "testSupportSha": "dd191d41e4c7acff3c09ee30bb47dd54a2fdf5e6",
+  "authority": "final-published-DLL bound affected automatic verification, OFFSCREEN not physical",
+  "designArchive": "../../design/r55/R55-final.zip",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 43,
+      "sha256": "50524bc54be6323af4266e11f2ca0b4d574bad39253c8c5293eca7d3173fa822"
+    },
+    {
+      "path": "BASELINE_CONTROL.json",
+      "bytes": 302,
+      "sha256": "87a0c75379304a099a33d16cd0883360db55946d682c7b5cb7a6d4f5877c1f60"
+    },
+    {
+      "path": "BASELINE_PERFORMANCE.json",
+      "bytes": 47969,
+      "sha256": "ac8f5b589e3ebb748842a33a4283f8c284f47a72ab0fe92ae2c2371fdd943314"
+    },
+    {
+      "path": "BASELINE_PUBLISHED_BINDING.json",
+      "bytes": 1106,
+      "sha256": "eb79ee2dcf370b9eb91d59612bc227745f59535a7e45494bcf78ed780f21a8c7"
+    },
+    {
+      "path": "CMD_OS_SMOKE.json",
+      "bytes": 685,
+      "sha256": "a6b3dc9c5ab3266577bac69c9c7ca32b8fa8e947a999d9e971094245548360b9"
+    },
+    {
+      "path": "compare_optical.py",
+      "bytes": 2949,
+      "sha256": "d1144b8da3ef4af0b0248f6c36149a0fe927fc68374dfbaaebeaca0706203666"
+    },
+    {
+      "path": "DIRTY_BEFORE.json",
+      "bytes": 11939,
+      "sha256": "a0cfc4a065f1dce592acf8c700e33473d64deefc0c2f8df1fd2a0ec219440c72"
+    },
+    {
+      "path": "DISPLAY_NODE_COMPARISON.md",
+      "bytes": 1806,
+      "sha256": "941ea3e43ca23204208fa4e961c78111b4e1c202d51a5fda9ea8ddac7842d010"
+    },
+    {
+      "path": "FINAL_CONTROL.json",
+      "bytes": 301,
+      "sha256": "1f449e545314f7aa82fda1a7f0023905f2676f4dea8fe324c2a95cb9736b9103"
+    },
+    {
+      "path": "FINAL_PERFORMANCE.json",
+      "bytes": 47968,
+      "sha256": "8177ea2973002d9657d350acdf4cc1973958e3fe99c43ea0d0f7ea450e328125"
+    },
+    {
+      "path": "FINAL_REPORT.md",
+      "bytes": 9960,
+      "sha256": "cf18e72cb649676643593434ef47dc1cd306f7253a16dd0f67a5d4ae7cadf134"
+    },
+    {
+      "path": "LAMP_ISOLATION.json",
+      "bytes": 290,
+      "sha256": "b1a6e8ba667f1e55862470e5e1cba3b4a89cefe6f6185d2f1fe547b26e6d787f"
+    },
+    {
+      "path": "OPTICAL_REFERENCE_COMPARISON.json",
+      "bytes": 2376,
+      "sha256": "5185670bf56f20571e06b201754c246ab18bff4ff93f226ca8ee47d699a915d3"
+    },
+    {
+      "path": "OPTICAL_SAMPLES.json",
+      "bytes": 54698,
+      "sha256": "4b538114440ead3eb246bfcf38925a801646b30d37f12f456f46ba1b5f310595"
+    },
+    {
+      "path": "OS_SMOKE.json",
+      "bytes": 480,
+      "sha256": "cc415608a8af5cf57122072e75f0e6c18ec83f195fd8084bd7a5f13bea076307"
+    },
+    {
+      "path": "PUBLISHED_BINDING.json",
+      "bytes": 1152,
+      "sha256": "d1c224c112ef55cf8e42051db7918dd1f06ca6e55521ee52480662aefcd75fbc"
+    },
+    {
+      "path": "references/LICENSE-LightTable-MIT.txt",
+      "bytes": 1092,
+      "sha256": "3af59e673fb50122f71f4202bb2205dcf6304aea2ad174526fef4034e93d7fa8"
+    },
+    {
+      "path": "references/original-LightResponse.swift",
+      "bytes": 4290,
+      "sha256": "56cfa78da0082943ddc38779a62d786d8e176d766ec8e97034581b2f6677a7ea"
+    },
+    {
+      "path": "references/windows-LightResponse.cs",
+      "bytes": 2139,
+      "sha256": "63e87ebfb7abede197f63e82c52954b2eb7ff18ff8ed91a120b2bd8dedfb72c2"
+    },
+    {
+      "path": "REFS_BEFORE.txt",
+      "bytes": 24753,
+      "sha256": "7bbf4251ca8c139027621906280b93cbef2ab4c04430500002281c59bc9f4db5"
+    },
+    {
+      "path": "REPRODUCE.ps1",
+      "bytes": 1861,
+      "sha256": "2f60d4e094654da019b9f482d62317a0d37799d1b1692cb4c3639cfb986be9d1"
+    },
+    {
+      "path": "screenshots/FINAL3-HOST-REVIEW-0.png",
+      "bytes": 183209,
+      "sha256": "9ddfcd1608d425f28d222da82dde02da9208be984e184533e757a3c3a676ffe8"
+    },
+    {
+      "path": "screenshots/FINAL3-HOST-REVIEW-1.png",
+      "bytes": 181160,
+      "sha256": "f9209ec4ff1ff71dc1731afc5cb3cbc5663a001dc2fdcadbb91410c2292fb157"
+    },
+    {
+      "path": "screenshots/FINAL3-HOST-REVIEW-2.png",
+      "bytes": 163262,
+      "sha256": "8d6050684ddae5378bbe411f31488982f56bc76a836a6387518d1687ef13ef2d"
+    },
+    {
+      "path": "screenshots/FINAL3-HOST-REVIEW-3.png",
+      "bytes": 277989,
+      "sha256": "dd3449e464385eee2d0497e668022deb678d2e6c9737d9270f76c29cc3fe0c67"
+    },
+    {
+      "path": "screenshots/FINAL3-HOST-REVIEW-4.png",
+      "bytes": 183263,
+      "sha256": "96580d84fb42e139233156a62e0e420a9c0ba7ad8b260845fdcdb42bcc29fc9a"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-compare-1366.png",
+      "bytes": 100531,
+      "sha256": "2c1b6478cade057b013efc0afa212eb6b45c336709140efb149381b80aff6d15"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-compare-1920.png",
+      "bytes": 177227,
+      "sha256": "26c995c629c3b11b40edb82718c2f86dc5bced68b7bfb3acc3875418f525961a"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-detail-1366.png",
+      "bytes": 114588,
+      "sha256": "c3b7192b35fd99929beb2eacea4928403356f537fee0950781fa7f44b0ae989c"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-detail-1920.png",
+      "bytes": 235082,
+      "sha256": "11d1eb178531833fa8e2fc16d8dafc688d55f4e1c39db5f78497ec55f9c62e2e"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-film-1366.png",
+      "bytes": 77943,
+      "sha256": "4e1b05fbc4adfa00b78ddcb170efac444460ed3eff09af4ab7e9e69ece9f4151"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-film-1920.png",
+      "bytes": 84510,
+      "sha256": "c2645e9b9795bcfdc14891ab1672d58440cc2244649450e5435570418197546e"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-info-1366.png",
+      "bytes": 68009,
+      "sha256": "4395a075560205a4de5529740e51949554aeb14b99e5df7324f9fe9f1106be93"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-info-1920.png",
+      "bytes": 74068,
+      "sha256": "c5e15ade9333285cd4bfbf50776551ec88c1523d45e336d21ffd8d368187da2c"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-lit-1366.png",
+      "bytes": 60790,
+      "sha256": "bfc55806b672d00037a23986afddaf9fb3f3669cc91cbb71c508f1852faf91ed"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-lit-1920.png",
+      "bytes": 67242,
+      "sha256": "f4571ccb66413945c0d298245a8a2dd490a4d4d49069c01ae9f857471c8c7fa4"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-loupe-1366.png",
+      "bytes": 66920,
+      "sha256": "00d8f61a60e636526a48e2a65954d5cae6ffc406f080a19e15cf1c1e69ea5513"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-loupe-1920.png",
+      "bytes": 73108,
+      "sha256": "f0fce56fac425d25f5019f154abec1ba7071c6e9fd61e3294c6b164b370dd42f"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-stage-summary-1366.png",
+      "bytes": 169726,
+      "sha256": "52942957291c5a514f67901e93c9724162cb69d76f573f04ca17fe22090e6478"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-stage-summary-1920.png",
+      "bytes": 256186,
+      "sha256": "698bcfc6486ef3d941afc17046a1aac6dc69521fb32b85d3934ad73fe905a1d9"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-task-running-1366.png",
+      "bytes": 83998,
+      "sha256": "65c7080c1b59ccf40d4c1dd386f29ebb7bfd8b67fa133826c21762b25550d997"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-task-running-1920.png",
+      "bytes": 91342,
+      "sha256": "4dfa5054e216cc36a85ae5a9e4d287fda85480874dcfff5fa89c1a77c8235a02"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-task-success-1366.png",
+      "bytes": 93342,
+      "sha256": "6ec1a3e30ac6d5312bba103a71e71b8d1fec27207fed7bd2f8a761b5b6c2d29f"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-task-success-1920.png",
+      "bytes": 101308,
+      "sha256": "6d27936a80edbb1af7478df674e9c0098b95e352ebcef345cb3e4922332a7171"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-unlit-1366.png",
+      "bytes": 65239,
+      "sha256": "b9262ad330c9cfc5a574f26881206e9ae1184ed1f012a77866dc588a590f86ac"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-r55-host-unlit-1920.png",
+      "bytes": 67660,
+      "sha256": "623a88616eda2cbe824498c8aa024c5c58c8b813195476e39b33551753da7a20"
+    },
+    {
+      "path": "test-results/Final3Core.trx",
+      "bytes": 45265,
+      "sha256": "89996499782f009d2a0acfe20bdd82bcfd67be7723b56033394be4c3d1f55fa6"
+    },
+    {
+      "path": "test-results/Final3Host.trx",
+      "bytes": 2679,
+      "sha256": "b50b23e21f7df8fb554c748c11eeb24d36865f1658ef879a3f9e291cb43d8c13"
+    },
+    {
+      "path": "test-results/Final3Performance.trx",
+      "bytes": 4072,
+      "sha256": "bf51d2a836d090fbb778843fafca1f8604a65148e210b815da974964ac2d88c2"
+    },
+    {
+      "path": "test-results/Final4Independent.trx",
+      "bytes": 5328,
+      "sha256": "911ca95669785b657ab008d9d6db9cd4b0851aa61822eab52573564ae4aa5aa1"
+    },
+    {
+      "path": "test-results/Final4Workflow.trx",
+      "bytes": 44294,
+      "sha256": "2d7172d1c372fd2ca7be5c85eb8daeafbc1bdbcdcbafd59676cd26fc45eff44d"
+    },
+    {
+      "path": "TEST_SUMMARY.json",
+      "bytes": 9840,
+      "sha256": "299765b60101976fb777dcd256f40ec1fcc8fe2514e4b1b8cdbb55c6a67b49aa"
+    },
+    {
+      "path": "WORKTREES_BEFORE.txt",
+      "bytes": 9530,
+      "sha256": "61f239d5604da9a925ca2e0af131d5f871650fd2d43fd3bec4263f72cac6a290"
+    },
+    {
+      "path": "ZIP_IDENTITY.json",
+      "bytes": 532,
+      "sha256": "1d3895869824a6cf157318e0b8c19972acc7281a259db8018742565e7593779e"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "version": "R55BoardResponse2",
+  "domain": "board material only, SDR encoded RGB8 D65; no ICC/RAW image transform; no camera calibration",
+  "referenceWindows": {
+    "commit": "cb8f4c89d845634688627f1c01225cb5d851248f",
+    "file": "E:\\Kitao-Worktrees\\company-lighttable-lifecycle-20261030\\docs\\validation\\company-r55-interactions-20261030\\references\\windows-LightResponse.cs",
+    "sha256": "63e87ebfb7abede197f63e82c52954b2eb7ff18ff8ed91a120b2bd8dedfb72c2",
+    "function": "LightResponse.PanelWhite/Sample",
+    "license": "MIT; notice and complete license distributed"
+  },
+  "referenceOriginal": {
+    "commit": "8e1868df40e69e6b1a08e207d7ab05cf463532ab",
+    "file": "E:\\Kitao-Worktrees\\company-lighttable-lifecycle-20261030\\docs\\validation\\company-r55-interactions-20261030\\references\\original-LightResponse.swift",
+    "sha256": "56cfa78da0082943ddc38779a62d786d8e176d766ec8e97034581b2f6677a7ea",
+    "function": "LightResponse.panelWhite/sample",
+    "license": "MIT original source only; LightTableEDR not imported"
+  },
+  "referenceIndependence": "Windows port derives from original; these are two pinned implementations, NOT two scientifically independent optical oracles. No physical-light accuracy claim.",
+  "testedBrightnessSamples": 151,
+  "maxAbsPanelWhiteErrorWindows": 2.220446049250313e-16,
+  "maxAbsPanelWhiteErrorOriginal": 0.0,
+  "adaptation": {
+    "unlit": "R55 authoritative E3D9BF, not upstream .84/.81/.70",
+    "lit": "R55 authoritative F5F5F2",
+    "atOrBelow100": "upstream PanelWhite(p,0)/.9 applied only to board base",
+    "above100": "(PanelWhite-.9)/(.948-.9) of remaining encoded channel headroom, max 80 percent; 1.0/1.2/1.6 yield distinct displayed board pixels",
+    "flare": "board remaining headroom * .6 * flare; no photo multiplication",
+    "time": "Windows2s vs original1.1s; same ease when time normalized; not claimed identical wall-time",
+    "loupe": "affine selected-image crop, no refraction/distortion shader; true glass optical scattering remains incomplete"
+  },
+  "isolation": "actual proxy/comparison/recomputed comparison/snapshot/encoded PNG test exact",
+  "admission": "EXPLICIT_DISPLAY_ONLY_DIAGNOSTIC; no change to photo pixel nodes/PV4/PV5/PV6",
+  "limitations": "No physical display luminance measurement or HDR/ACM acceptance; SDR material response only."
+}
