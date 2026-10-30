@@ -1,4 +1,4 @@
-## 当前公司接续 2026-10-30 Asia/Shanghai：灯箱请求所有权与渐进加载
+## 当前公司接续 2026-10-30 Europe/Berlin：灯箱请求所有权与渐进加载
 - 独立company/lighttable-lifecycle-20261030，E:/Kitao-Worktrees/company-lighttable-lifecycle-20261030；起点家庭7a6b98e9d48e3f21f91cd69449939b26531e5804，fetch复查未更新。旧公司f8beaa37/其他dirty保留，不合main/强推/研究整线。
 - 当前产品9f7ef4e45c383b66b048d1a183bc41d5e0a61d6d；包含a8a52410主实现、08d76a62测试支持、9f7ef4e4密集重叠可见项修正。文档HEAD另记，不当产品SHA。
 - 统一detail/compare/slide/refresh/back/close代际、迟到成功失败拒绝；渐进逐项、可见优先、卡片视区虚拟化、逐项重试/滚动取消、源句柄可靠变化检测及有界缓存账本。固定nearest RGB16观片代理直接样本复制，LibRaw设置/数学不改；RAW全局串行和预算拒绝，不嵌JPEG冒充调色结果。

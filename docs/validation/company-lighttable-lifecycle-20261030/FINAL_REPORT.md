@@ -1,5 +1,5 @@
 # 公司灯箱生命周期、渐进观片与有界资源
-2026-10-30（Asia/Shanghai；原始执行主机收据保留其时区）。**本批修复已交付；整体 PARTIAL_DIAGNOSTIC，不能发行。**
+2026-10-30（Europe/Berlin；原始执行主机收据保留其时区）。**本批修复已交付；整体 PARTIAL_DIAGNOSTIC，不能发行。**
 
 ## 接续与范围
 - fetch全部已配置相关remote，远端家庭home/r54-design-fixes-20261029仍为7a6b98e9d48e3f21f91cd69449939b26531e5804，无额外增量；家庭产品f70ecf7d1179b6f42c721a787a4a2d7a7acc8109。公司f8beaa37是家庭祖先；从家庭HEAD新建company/lighttable-lifecycle-20261030，E:/Kitao-Worktrees/company-lighttable-lifecycle-20261030。
