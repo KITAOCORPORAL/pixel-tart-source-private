@@ -1,0 +1,23 @@
+{
+  "version": "StreamingRound8EnvironmentV1",
+  "clientDate": "2026-10-30",
+  "clientTimezone": "Europe/Berlin",
+  "hostObserved": "2026-10-30T18:10:41.60074+08:00",
+  "gpu": "name, driver_version, memory.total [MiB], memory.used [MiB], memory.free [MiB]\nNVIDIA GeForce GTX 1650, 572.70, 4096 MiB, 1920 MiB, 2016 MiB\n",
+  "hostMemoryNow": {
+    "total": 34189107200,
+    "available": 17098825728,
+    "percent": 50.0,
+    "used": 17090281472,
+    "free": 17098825728
+  },
+  "python": "3.13.13 (tags/v3.13.13:01104ce, Apr  7 2026, 19:25:48) [MSC v.1944 64 bit (AMD64)]",
+  "clang": "20.1.2",
+  "glslang": "16.6.0",
+  "cmake": "3.31.10",
+  "newRuntimeDependency": "bcrypt Windows built-in SHA256; no product dependency",
+  "localRoot": "E:\\Kitao-Research\\color-engine-round8-20261030",
+  "capRaised": false,
+  "otherProgramsClosed": false,
+  "globalGpuUsedIsNotProcessPeak": true
+}

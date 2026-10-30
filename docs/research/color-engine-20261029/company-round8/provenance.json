@@ -1,0 +1,49 @@
+{
+  "version": "StreamingResearchProvenanceV1",
+  "baseCommit": "078a77f491d60c373989e15e8ea48c5ae5d4182c",
+  "externalBaseCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "researchVariant": "SpektraStreamingResearchV1",
+  "sourceManifest": [
+    {
+      "path": "engine/src/pipeline/engine.cpp",
+      "sha256": "3b84ffcee1cddbb9d503b07be8ea4bf13f9e19ee407bc37944c4c9e36eb3bbe8"
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "sha256": "f6a76b5eeab6f2ee1d6c1222289f236c6a8ce2d6f5638580e5ddf94046f2448a"
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.hpp",
+      "sha256": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4"
+    },
+    {
+      "path": "engine/src/gpu/gpu.hpp",
+      "sha256": "dd539f383b5aa44c7aa2c23cf3232dea5e2c826a64b5e8f06b8a7568127ad3e3"
+    },
+    {
+      "path": "engine/src/gpu/vulkan_gpu.cpp",
+      "sha256": "56e5456314e660e1111af5c0b9d24bce04a854b09568ac72cb43c7a9c560722b"
+    },
+    {
+      "path": "engine/windows_exports.def",
+      "sha256": "23478dd64f06804b336f2edd3c21eb79de936c6e88b852b6d33979f55cfeb39d"
+    },
+    {
+      "path": "engine/CMakeLists.txt",
+      "sha256": "ef17371c86921bc613989d3821fa5cfbb4f074d07e8873f5a1097351361aca3d"
+    },
+    {
+      "path": "API-SPEC-callable-render-service.md",
+      "sha256": "23a2b699fa76bf4eac19587343f1429120a4f8746d0541790efd3a9f1aefd5a9"
+    }
+  ],
+  "librarySha256": "be1b408f5007dce56c928dbb7cef8a790376325a099b9679c747cad8c8fd0bb7",
+  "compiledResourceManifestSha256": "60e45914333231a5f76373452dd11ff27cca0e5d7271a0edf25b6ad47e6a10ad",
+  "libraryFrozenBeforeFullAndControls": true,
+  "originalUpstreamSourceClean": true,
+  "changedExternalStatus": " M engine/CMakeLists.txt\n M engine/src/gpu/gpu.hpp\n M engine/src/gpu/vulkan_gpu.cpp\n M engine/src/pipeline/engine.cpp\n M engine/src/pipeline/pipeline.cpp\n M engine/src/pipeline/pipeline.hpp\n M engine/windows_exports.def\n",
+  "sourceReproducedExact": true,
+  "hostCallerCorrectedAfterOnlyFullRun": "input mmap closed before output phase + TIFF direct row offsets + monitor blocks final commit if host cap exceeded",
+  "closedExperimentsRerun": false,
+  "externalApiSpecAddendum": "Isolated entry documented; added after compiled library without pixel/source-code changes"
+}

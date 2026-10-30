@@ -76,3 +76,17 @@
 - 最小外部`SpektraStreamingResearchV1`方案只为PROPOSED_NOT_IMPLEMENTED，不是上游或产品能力，无新streaming源码/二进制/像素通过声明。任何实现须新版本/源码与DLLhash/小whole输出exact/halo与frame/global参数/取消释放及full逐行结果再验。
 
 任意grain_seed仍不支持、alpha丢弃opaque、RGBA16最终clamp非HDR、取消节点粒度、result独立所有权与stride/串行session限制不变。曲线/BT已闭合不重跑，WB冻结，D80014/家庭GPU/有效肤色强高光缺口保留。UI/模型/任务桥/默认链不改，仍“负片/印相模拟·研究中”、不注册。LightTable非商业条款不替代Spektra代码/逐资源许可，技术隔离验证继续、产品分发未批准。
+
+## 第八批：最小流式接口已实现，full像素完成但host门禁PARTIAL
+
+最新能力快照company-round8/R55_CAPABILITIES.json（V4）。`SpektraStreamingResearchV1`已在新外部固定checkout实现/编译/执行；不是把第七批提案再写一遍，也不是上游或产品注册能力。完整独立研究ABI合同见STREAMING_BACKEND_CONTRACT_V1，源码/DLL/资源身份及8文件generator复现见本批清单。
+
+- 只允许已冻结PortraA、线性ProPhotoD50、方向1/finite负/>1、prepared input/backend/resources hash、完整99resolved及hidden defaults；unknown/effect拒绝。grain/glare/halation/DIR/autoExposure关，defaultscannerunsharp.7/.7保持，不扩B/三stock/seed。
+- 不调用spk_open上传fullsource：两pass有界rows、negative临时磁盘store、GPU只strip+原halo2，完整frame长边/pixelpitch保留；直接复用原film/print/Gaussian/reflect/encoding/quantise，consumer只中心行。不内部组装fullGPU/CPUresult。已active全局量为inactive或原host常数，没有strip-local统计代替global。
+- rows真受host/device/staging预算，硬Vulkan allocator含所有pooled/persistent/staging及替换旧+新；每strip清空空闲pool。callback借用指针只在回调有效，异常return非0，不跨C；poll取消后join再卸载，nativebusy并发−30，顺序repeat可复用，success/fail/cancel live0/negative删除。
+- 10natural小图＋4synthetic负/>1/nearzero＋2sameprocess重复wholeexact，height215/430同width/rows峰值不变；rows4096预算压到26仍exact。没有取消unsharp或放宽差异。
+- 同5496×3670只1次native流式，raw/TIFF全像素hash1c4a97a1...48c2a7b8a，device43,848,656/staging25,523,424bytes、live0。没有该尺寸wholeoracle；依据仅小图等价实现＋实际full输出身份/读回。原publicABI预算阻点仍事实，但新研究入口已绕开full常驻。
+- 首轮callerpostnativeI/O保留mapping+预读导致RSS659,144,704>host536,870,912：native完成不等于整个预算门禁通过。原report副本/像素保留并审计success=false，raw/TIFF明确重命名.initial-host-overbudget，不能当全门禁PASS产物。
+- 修正caller关闭inputmap后有界rowTIFF写/offset回读，跨post阶段hostguard超cap阻止最终rename。对已保存fullraw在独立进程writer+readerexact约38.49MB；独立只读重开exact约36.23MB；**未发起第二次20MPnative**，故修正后组合fullhostgate未闭合，能力仍PARTIAL。不能以分阶段分别通过冒称组合全链已验收。
+
+研究默认关闭，不注册产品、不改UI/项目模型/任务桥/默认/PV4/5/6；alpha丢弃opaque、RGBA16clamp非HDR、任意seed不支持、node/strip取消及所有权限制保持。D80014/家庭GPU/有效肤色强高光缺口保留，BT/曲线/桥不重复，WB冻结。LightTable授权与Spektra代码/逐资源权利独立，隔离实验继续不被商业许可批准阻断，产品分发仍未批准。

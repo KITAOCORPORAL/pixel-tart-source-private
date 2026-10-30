@@ -1,0 +1,19 @@
+{
+  "version": "CorrectedFullRowIOV1",
+  "renderCalls": 0,
+  "width": 5496,
+  "height": 3670,
+  "sourcePixelHash": "1c4a97a126b420fb24561df5cfb03bfc1b3d7648a5ee77c3d13102c48c2a7b8a",
+  "tiffPixelHash": "1c4a97a126b420fb24561df5cfb03bfc1b3d7648a5ee77c3d13102c48c2a7b8a",
+  "expectedHash": "1c4a97a126b420fb24561df5cfb03bfc1b3d7648a5ee77c3d13102c48c2a7b8a",
+  "allExact": true,
+  "maxRowBytes": 43968,
+  "hostCapBytes": 536870912,
+  "sampledPeakRssBytes": 38473728,
+  "osPeakWorkingSetBytes": 38490112,
+  "writeMs": 214.01029999833554,
+  "readbackMs": 128.30400001257658,
+  "wallMs": 343.0072999326512,
+  "success": true,
+  "scope": "Full-size corrected output writer+reader on already rendered pixels only. Does not rerun GPU or prove corrected combined native+IO full process under cap."
+}

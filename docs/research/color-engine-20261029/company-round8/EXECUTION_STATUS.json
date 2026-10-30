@@ -1,0 +1,37 @@
+{
+  "version": "StreamingRound8ExecutionStatusV1",
+  "overall": "PARTIAL_FULL_PIXELS_NATIVE_BUDGETS_PASS_INITIAL_HOST_FULL_GATE_FAILED",
+  "actuallyExecuted": {
+    "newExternalStreamABI": "implemented compiled executed",
+    "sourceGeneratorReproduction": "8files exact",
+    "smallNaturalWholeStream": 10,
+    "syntheticWholeStream": 4,
+    "sameProcessRepeat": 2,
+    "nativeFailureCases": 10,
+    "rowsBudgetReduction": "4096->26 with16MiBdevice/1MiBstaging exact",
+    "heightScaling": "samewidth321 rows37 height215/430 peaksidentical",
+    "nativeConcurrency": "second-30 firstcancel-7 joinlive0",
+    "single20MPNativeRender": 1,
+    "fullPixelHash": "1c4a97a126b420fb24561df5cfb03bfc1b3d7648a5ee77c3d13102c48c2a7b8a",
+    "fullIndependentSavedReopen": "exact rows3670 no render",
+    "correctedFullWriterAndReader": "exact on saved pixels no render"
+  },
+  "failedOrPartial": {
+    "initialCombined20MPHostRss": "659144704 >536870912, original report preserved, audited status false, outputs renamed",
+    "correctedCombinedFullNativeIOHostGate": "NOT_RUN, no secondfullnative",
+    "initialCompile": "bcrypt headerorder fixed;failedbuild retained",
+    "initialStagingPolicy": "hard budget caught overrun, denominator corrected, samewholeexact",
+    "initialBudgetTestAssertion": "1MiB staging could succeed with automaticrowreduction, testedlowercap instead"
+  },
+  "notRun": {
+    "20MPWholeOracle": "BUDGET_BLOCKED_ORIGINAL_ABI",
+    "D80014": "SOURCE_ABSENT_NO_SCAN",
+    "householdGpuPatch": "NOT_RUN",
+    "skinStrongHighlights": "NOT_COVERED",
+    "BT64CurveBridgeWB": "CLOSED_OR_FROZEN_NOT_REPEATED",
+    "threeFilmsBSeedRandomExpansion": "NOT_IMPLEMENTED",
+    "productUiModelsTaskBridgeDefaults": "UNMODIFIED_NO_REGISTRATION",
+    "fullPv456Regression": "NOT_RERUN_UNCHANGED"
+  },
+  "licensing": "isolatedtechnicalexecution independent from code/resource distribution approval"
+}

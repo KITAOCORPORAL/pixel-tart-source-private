@@ -1,0 +1,27 @@
+{
+  "version": "Round8WorkspaceProtectionV1",
+  "productAndMatrixV2Diff": [],
+  "otherTreeObservedChanges": [
+    {
+      "path": "E:/Kitao-Worktrees/company-lighttable-lifecycle-20261030",
+      "before": [
+        "## company/lighttable-lifecycle-20261030...origin/company/lighttable-lifecycle-20261030"
+      ],
+      "after": [
+        "## company/lighttable-lifecycle-20261030...origin/company/lighttable-lifecycle-20261030",
+        " M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ViewingLayout.cs",
+        " M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ViewingTable.cs",
+        " M src/RAWSelectionAssistant/Views/StudioViewingTableView.Interaction.cs",
+        " M src/RAWSelectionAssistant/Views/StudioViewingTableView.R55.cs",
+        " M src/RAWSelectionAssistant/Views/StudioViewingTableView.cs",
+        " M tests/RAWSelectionAssistant.WpfTests/CompanyViewingMeasurementsTests.cs",
+        " M tests/RAWSelectionAssistant.WpfTests/R53UiCorrectionTests.cs",
+        "?? src/RAWSelectionAssistant/Services/ViewingTableDiagnostics.cs",
+        "?? tests/RAWSelectionAssistant.WpfTests/R55PolishTests.cs"
+      ]
+    }
+  ],
+  "otherTreesWrittenByResearch": false,
+  "resetStashMergeCleanUsed": false,
+  "originalResearchTreesPreserved": true
+}

@@ -1,0 +1,28 @@
+{
+  "version": "Round8LocalArtifactsV1",
+  "localRoot": "E:\\Kitao-Research\\color-engine-round8-20261030",
+  "externalSource": "E:\\Kitao-Research\\color-engine-round8-20261030\\source-stream-v1",
+  "externalDll": "E:\\Kitao-Research\\color-engine-round8-20261030\\build-stream-v1\\engine\\spektrafilm_engine.dll",
+  "privateFullPixelOutputs": [
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round8-20261030\\full5496x3670-portraA-stream-once\\rgba16.initial-host-overbudget.bin",
+      "bytes": 161362560,
+      "sha256": "1c4a97a126b420fb24561df5cfb03bfc1b3d7648a5ee77c3d13102c48c2a7b8a"
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round8-20261030\\full5496x3670-portraA-stream-once\\display-rgba16.initial-host-overbudget.tif",
+      "bytes": 161385472,
+      "sha256": "3a55bb3348e0e0b1b6a5e08239a37ddf914789622db27838cf6ccd6519cde6db"
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round8-20261030\\full-corrected-row-io\\display-rgba16.tif",
+      "bytes": 161385472,
+      "sha256": "9016743505d92fa87e62ff7987e110f2f43da88bb19ae9d223e95f57303b4557"
+    }
+  ],
+  "oldReportsAndFailedEvidencePreserved": true,
+  "initialReport": "E:\\Kitao-Research\\color-engine-round8-20261030\\full5496x3670-portraA-stream-once\\report-original-native-pixel-success.json",
+  "evaluatedStatus": "E:\\Kitao-Research\\color-engine-round8-20261030\\full5496x3670-portraA-stream-once\\report.json",
+  "noImagesOrEngineBinariesInGit": true,
+  "negativeIntermediateCurrentlyExists": []
+}

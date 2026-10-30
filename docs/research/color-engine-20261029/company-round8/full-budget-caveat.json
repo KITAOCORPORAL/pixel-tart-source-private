@@ -1,0 +1,15 @@
+{
+  "version": "FullOutputBudgetCaveatV1",
+  "nativeRenderSuccess": true,
+  "nativeHardDeviceAndStagingWithinCaps": true,
+  "initialEndToEndCallerRssBytes": 659144704,
+  "intendedCallerHostCap": 536870912,
+  "initialEntireProcessWithinHostCap": false,
+  "cause": "Post-native source file mapping still alive while full output mmap and tifffile segments read-ahead coexisted. Native callbacks polled RSS but not post-native TIFF phase. No claim complete initial host-cap gate passed.",
+  "correction": "Close input mapping after native return; strict uncompressed one-row TIFF offsets/direct byte reads. Independent reopened full output validates corrected bounded reader without another render.",
+  "fullNativeRenderCalls": 1,
+  "fullRerenderAfterCorrection": false,
+  "correctedWriterFull20MPPipelineRerun": "NOT_RUN to honor single20MPrender; independent row reopen exact under cap, small corrected caller revalidated; do not upgrade full end-to-end host-budget gate",
+  "finalHostGuard": "Monitor spans preparation/native/write; overbudget blocks final rename/success after cleanup. It is a responsive process-RSS guard, not OS allocation reservation.",
+  "correctedFullSizeWriterAndReaderSeparateProcess": "PASS on saved output, no GPU render, exact full pixel hash under512MiB"
+}

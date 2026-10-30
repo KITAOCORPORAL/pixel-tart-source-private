@@ -1,0 +1,16 @@
+{
+  "version": "NativeLibraryFreezeReadbackV1",
+  "sameLibraryUsedForSmallControlsAndOneFull": true,
+  "librarySha256": "be1b408f5007dce56c928dbb7cef8a790376325a099b9679c747cad8c8fd0bb7",
+  "smallCaseCount": 10,
+  "nativeControlAndSyntheticRepeatCount": 16,
+  "fullNativeCalls": 1,
+  "fullInputShape": [
+    3670,
+    5496,
+    3
+  ],
+  "fullRows": 127,
+  "sourceReproducedFiles": 8,
+  "callerAfterFullChangedOnlyIOHostGuardNotEngine": true
+}

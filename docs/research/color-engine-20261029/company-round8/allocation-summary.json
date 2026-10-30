@@ -1,0 +1,223 @@
+{
+  "version": "StreamMeasuredAllocationSummaryV1",
+  "small": [
+    {
+      "size": [
+        321,
+        215
+      ],
+      "rows": 1,
+      "halo": 2,
+      "devicePeakBytes": 746416,
+      "stagingPeakBytes": 465480,
+      "hostVectorsBudgetedPeakBytes": 2129252,
+      "osProcessPeakWorkingSetBytes": 106438656,
+      "allocations": 3253,
+      "liveAfter": [
+        0,
+        0
+      ],
+      "wholeExact": true
+    },
+    {
+      "size": [
+        321,
+        215
+      ],
+      "rows": 17,
+      "halo": 2,
+      "devicePeakBytes": 1054576,
+      "stagingPeakBytes": 508108,
+      "hostVectorsBudgetedPeakBytes": 2231972,
+      "osProcessPeakWorkingSetBytes": 106541056,
+      "allocations": 220,
+      "liveAfter": [
+        0,
+        0
+      ],
+      "wholeExact": true
+    },
+    {
+      "size": [
+        321,
+        215
+      ],
+      "rows": 37,
+      "halo": 2,
+      "devicePeakBytes": 1439776,
+      "stagingPeakBytes": 585148,
+      "hostVectorsBudgetedPeakBytes": 2360372,
+      "osProcessPeakWorkingSetBytes": 106569728,
+      "allocations": 115,
+      "liveAfter": [
+        0,
+        0
+      ],
+      "wholeExact": true
+    },
+    {
+      "size": [
+        321,
+        215
+      ],
+      "rows": 113,
+      "halo": 2,
+      "devicePeakBytes": 2865056,
+      "stagingPeakBytes": 1320624,
+      "hostVectorsBudgetedPeakBytes": 2848292,
+      "osProcessPeakWorkingSetBytes": 106631168,
+      "allocations": 56,
+      "liveAfter": [
+        0,
+        0
+      ],
+      "wholeExact": true
+    },
+    {
+      "size": [
+        641,
+        429
+      ],
+      "rows": 17,
+      "halo": 2,
+      "devicePeakBytes": 1457776,
+      "stagingPeakBytes": 573388,
+      "hostVectorsBudgetedPeakBytes": 2366372,
+      "osProcessPeakWorkingSetBytes": 106459136,
+      "allocations": 415,
+      "liveAfter": [
+        0,
+        0
+      ],
+      "wholeExact": true
+    },
+    {
+      "size": [
+        641,
+        429
+      ],
+      "rows": 37,
+      "halo": 2,
+      "devicePeakBytes": 2226976,
+      "stagingPeakBytes": 727228,
+      "hostVectorsBudgetedPeakBytes": 2622772,
+      "osProcessPeakWorkingSetBytes": 106627072,
+      "allocations": 205,
+      "liveAfter": [
+        0,
+        0
+      ],
+      "wholeExact": true
+    },
+    {
+      "size": [
+        641,
+        429
+      ],
+      "rows": 113,
+      "halo": 2,
+      "devicePeakBytes": 5149936,
+      "stagingPeakBytes": 2653740,
+      "hostVectorsBudgetedPeakBytes": 3597092,
+      "osProcessPeakWorkingSetBytes": 106622976,
+      "allocations": 88,
+      "liveAfter": [
+        0,
+        0
+      ],
+      "wholeExact": true
+    },
+    {
+      "size": [
+        1200,
+        801
+      ],
+      "rows": 17,
+      "halo": 2,
+      "devicePeakBytes": 2162096,
+      "stagingPeakBytes": 687424,
+      "hostVectorsBudgetedPeakBytes": 2601152,
+      "osProcessPeakWorkingSetBytes": 106692608,
+      "allocations": 745,
+      "liveAfter": [
+        0,
+        0
+      ],
+      "wholeExact": true
+    },
+    {
+      "size": [
+        1200,
+        801
+      ],
+      "rows": 37,
+      "halo": 2,
+      "devicePeakBytes": 3602096,
+      "stagingPeakBytes": 1684800,
+      "hostVectorsBudgetedPeakBytes": 3081152,
+      "osProcessPeakWorkingSetBytes": 108331008,
+      "allocations": 358,
+      "liveAfter": [
+        0,
+        0
+      ],
+      "wholeExact": true
+    },
+    {
+      "size": [
+        1200,
+        801
+      ],
+      "rows": 113,
+      "halo": 2,
+      "devicePeakBytes": 9074096,
+      "stagingPeakBytes": 4968000,
+      "hostVectorsBudgetedPeakBytes": 4905152,
+      "osProcessPeakWorkingSetBytes": 112582656,
+      "allocations": 148,
+      "liveAfter": [
+        0,
+        0
+      ],
+      "wholeExact": true
+    }
+  ],
+  "full": {
+    "size": [
+      5496,
+      3670
+    ],
+    "rows": 127,
+    "devicePeakBytes": 43848656,
+    "stagingPeakBytes": 25523424,
+    "nativeHostVectorsBudgetedPeakBytes": 16496672,
+    "initialWholeProcessRssPeak": 659144704,
+    "nativeHardBudgets": {
+      "deviceBytes": 268435456,
+      "stagingBytes": 67108864,
+      "hostBytes": 536870912,
+      "currentFreeGpuBytes": 1522532352,
+      "reserveBytes": 268435456,
+      "researchCapUnchanged": 2147483648
+    },
+    "nativeLiveAfter": [
+      0,
+      0
+    ],
+    "whole20MPOracle": "NOT_RUN",
+    "initialHostCapPassed": false
+  },
+  "timingFull": {
+    "initMs": 424.1962,
+    "sourceReadMs": 75.5199,
+    "uploadMs": 114.08789999999999,
+    "computeMs": 433.1151,
+    "readbackMs": 72.35029999999999,
+    "negativeStoreMs": 412.96290000000005,
+    "consumerMs": 123.11730000000001,
+    "wallMs": 1967.3192
+  },
+  "fullSeparateTiffWriteMs": 128.04729992058128,
+  "fullSeparateTiffReadbackMs": 206.625199993141,
+  "limits": "Allocation counters cover Vulkan buffers requested through patched allocator, actual requirements size. Not driver-internal/pipeline memory or physical residency/globalnvidia-smi. Full CPU process cap initially failed and is not inferred from native vector budget."
+}

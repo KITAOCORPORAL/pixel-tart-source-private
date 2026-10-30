@@ -1,0 +1,162 @@
+{
+  "version": "ResearchCapabilitiesR55V4",
+  "defaultEnabled": false,
+  "productBackendRegistration": false,
+  "productLabel": "\u8d1f\u7247/\u5370\u76f8\u6a21\u62df\u00b7\u7814\u7a76\u4e2d",
+  "productSrcModified": false,
+  "taskBridgeModified": false,
+  "seed": {
+    "arbitraryGrainSeed": "UNSUPPORTED",
+    "extensionImplemented": false,
+    "initialRngStateIsUserSeed": false
+  },
+  "input": {
+    "externalResearchProbeOnly": [
+      "ITU-R BT.709 encoded RGB float32",
+      "ITU-R BT.2020 encoded RGB float32",
+      "Authorized production-linear natural sample via existing D50 bridge",
+      "Production display-sRGB creative natural sample"
+    ],
+    "productInputRangeExpanded": false,
+    "alpha": "DISCARDED; output opaque",
+    "sourceD80014": "NOT_RUN_SOURCE_ABSENT; not rescanned"
+  },
+  "output": {
+    "storage": "owned CPU RGBA16",
+    "range": "final clamp[0,1], *65535+0.5; alpha65535",
+    "hdrFloat": false,
+    "colorSpace": "sRGB D65 encoded for these resolved recipes"
+  },
+  "cancellation": {
+    "method": "spk_cancel from another thread",
+    "granularity": "next node boundary, no shader preemption",
+    "releaseRule": "wait for render completion/join before session release"
+  },
+  "ownership": {
+    "open": "copies input",
+    "result": "owns CPU pixels, can outlive session/engine, caller must spk_result_free after copy",
+    "stride": "row_stride_px is pixels",
+    "strings": "caller-owned out_json uses spk_string_free; engine-owned JSON must not be freed",
+    "threading": "serial render/set_params/release per session; last_error thread-local"
+  },
+  "curve": {
+    "rootCause": "original sampled resource negative slopes, preserved by linear interpolation",
+    "candidateFix": "NONE",
+    "resourceModified": false,
+    "physicalAccuracy": "NOT_MEASURED",
+    "singleCodeVisibility": "NOT_DETERMINED",
+    "round6Repeated": false
+  },
+  "bt": {
+    "repair": "SpektraBtJoinFloatV1 unchanged compatibility breakpoint0x3da66555",
+    "ordinaryCompany": "original and patch equal for tested BT full paths",
+    "controlledOs": "case0x3da66554 flip, actual full RGBA16 differences recorded",
+    "householdPatchedGpu": "NOT_RUN",
+    "round6Repeated": false
+  },
+  "licensing": {
+    "LightTableNonCommercialTerms": "SEPARATE_NOT_SPEKTRA_APPROVAL",
+    "SpektraCode": "GPL distribution compatibility gate remains NOT_APPROVED",
+    "SpektraResources": "individual CC BY-SA/source-data rights gate remains NOT_APPROVED",
+    "processDllOrLutExemption": "NOT_ASSUMED"
+  },
+  "scientificClaims": {
+    "CalibrationEligible": false,
+    "C1Accuracy": false,
+    "physicalFilmMatch": false
+  },
+  "naturalEvaluation": {
+    "status": "PARTIAL_DEVELOPMENT_ONLY",
+    "sourceRoot": "CompanyRAW explicitly authorized",
+    "decodedScenes": 1,
+    "camera": "Canon EOS R6",
+    "dimensions": [
+      5496,
+      3670
+    ],
+    "renderedProxyDimensions": [
+      1200,
+      801
+    ],
+    "fullResolutionRender": "6_CASES_REFUSED_RESOURCE_BUDGET_BEFORE_UPLOAD",
+    "nativeWindowRender": "4 registered640x640 windows,24cases; not full-frame context",
+    "successfulUniqueCases": 30,
+    "freshProcessReopens": 8,
+    "repeatChecks": 8,
+    "tiff16Readback": "38successful invocations including reopens",
+    "personCoverage": "people silhouettes present, usable skin NOT_COVERED",
+    "strongHighlightCoverage": false,
+    "heldOutValidationSet": false,
+    "inputs": {
+      "A": "Existing production linear LibRawProPhotoD65 -> existing BradfordD50/engineProPhoto bridge; no extraWB/display",
+      "B": "Actual production Display EV0 sRGB creative input; decode CCTF once in engine, no duplicate upstream display"
+    },
+    "resourceBudget": {
+      "fullGpuEstimateBytes": 1633607616,
+      "observedAdmissionLimitBytes": [
+        883949568,
+        892338176
+      ],
+      "policy": "reserve256MiB current GPU free, research cap2GiB; heuristic admission, not peak benchmark",
+      "noSilentResize": true
+    },
+    "productionDecoderFailures": [
+      "one ARW open rejected",
+      "X-T5/GFX actual >1GiB production budget rejection",
+      "second X-T5 metadata-only; no redundant decode"
+    ],
+    "scannerUnsharp": "default.7pixel/.7amount unchanged, actual before/after native-window trace",
+    "inputRouteDifference": "A/B are intentionally different domains/order; do not combine benefits",
+    "physicalAccuracyOrPreference": "NOT_VALIDATED",
+    "additionalFinalDriverCheck": "One extra PortraA proxy fresh reopen after source guard added; not counted as a distinct sample",
+    "primaryGpuRenderCallsIncludingRepeatsAndReopens": 46,
+    "allSuccessfulGpuRenderCallsIncludingPassiveAndFinalDriverChecks": 49
+  },
+  "round7": {
+    "admission": "NaturalAdmissionManifestV2 required first case and reopen; bounded hash/finite and separateCPU/GPU budgets",
+    "legacyResults": "round6 remain V1 legacy evidence, not relabeled as V2",
+    "fullResolution": "BLOCKED_CURRENT_PUBLIC_ABI_DEVICE_LOCAL_LOWER_BOUND",
+    "necessaryLowerBoundBytes": 1129537920,
+    "observedSafeAdmissionBytes": 1095761920,
+    "fullCreateUploadRenderCalls": 0,
+    "stripedIsStreaming": false,
+    "stripBudgetActuallyControlsRows": false,
+    "wholeStripeSmallExact": 5,
+    "newStreamingInterface": "PROPOSAL_ONLY_NOT_IMPLEMENTED",
+    "bridge": "full independently checked;ExistingResearchD65ToD50V1 unchanged;micro-negative counts retained",
+    "resourceOutputOwnership": "public ABI still owns fullCPUresult;tool now row-writes without full clone",
+    "productRegistered": false
+  },
+  "round8": {
+    "streamVariant": "SpektraStreamingResearchV1_EXECUTABLE_ISOLATED_NOT_UPSTREAM_PRODUCT",
+    "onlyConfiguration": "compiled PortraA linear ProPhotoD50 fixed99resolved + hiddenunsharp.7/.7",
+    "spkOpenFullUploadUsed": false,
+    "gpuFullSourceNegativeResultAssembled": false,
+    "negativeStore": "temporary disk row store, grows with frame height, removed after success/failure",
+    "rowsFromBudgets": true,
+    "hardDeviceAndStagingAllocatorLimits": true,
+    "hostLimit": "native explicitvectors + caller mapped/processRSS guard, initial fullpostIO overcap caveat",
+    "smallNaturalOracleCases": 10,
+    "syntheticOracleCases": 4,
+    "sameProcessRepeatedCases": 2,
+    "nativeFaultControls": 10,
+    "heightBound": "321 width,rows37,heights215/430 exact samepeaks",
+    "full5496x3670": {
+      "nativeCalls": 1,
+      "pixelOutput": "COMPLETE",
+      "pixelSha256": "1c4a97a126b420fb24561df5cfb03bfc1b3d7648a5ee77c3d13102c48c2a7b8a",
+      "wholeOracle": "NOT_RUN",
+      "devicePeakBytes": 43848656,
+      "stagingPeakBytes": 25523424,
+      "nativeLiveAfter": 0,
+      "firstCombinedHostRssPeak": 659144704,
+      "intendedHostCap": 536870912,
+      "firstCombinedHostGate": "FAILED",
+      "initialOutputs": "audited failure report + .initial-host-overbudget names",
+      "correctedFullOutputIO": "separate fresh process write/read exact,peak38.49MB",
+      "correctedCombinedNativePlusIOFullRun": "NOT_RERUN_TO_KEEP_ONE_NATIVE_FULL",
+      "overall": "PARTIAL_NOT_PRODUCT_ACCEPTED"
+    },
+    "newThreeStockBRouteSeedOrRandomEffects": false
+  }
+}

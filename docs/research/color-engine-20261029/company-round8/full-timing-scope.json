@@ -1,0 +1,16 @@
+{
+  "version": "StreamFullTimingScopeV1",
+  "nativePhases": {
+    "initMs": 424.1962,
+    "sourceReadMs": 75.5199,
+    "uploadMs": 114.08789999999999,
+    "computeMs": 433.1151,
+    "readbackMs": 72.35029999999999,
+    "negativeStoreMs": 412.96290000000005,
+    "consumerMs": 123.11730000000001,
+    "wallMs": 1967.3192
+  },
+  "callerWallMs": 4023.284299997613,
+  "estimatedPreNativePreparationAndValidationPlusPythonSetupMs": 1720.706400112249,
+  "note": "Residual includes module/manifest/file hash/finite/map/cleanup and is not independently instrumented CPU prepare timer. Native phase wall timers include synchronous GPU dispatch; consumerMs is bounded raw writing+hash callback, not TIFF encoding. No whole20MP render/comparison."
+}

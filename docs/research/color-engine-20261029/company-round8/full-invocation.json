@@ -1,0 +1,32 @@
+{
+  "version": "Single20MPStreamInvocationV1",
+  "gateSmallExactCases": 10,
+  "faultControls": 10,
+  "argv": [
+    "C:\\Program Files\\Python313\\python.exe",
+    "D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\tools\\spektralab-research\\stream_case.py",
+    "E:\\Kitao-Research\\color-engine-round7-20261030\\bounded-preparation-v2\\A-linear-d50-full.npy",
+    "E:\\Kitao-Research\\color-engine-round8-20261030\\full5496x3670-portraA-stream-once",
+    "--manifest",
+    "E:\\Kitao-Research\\color-engine-round7-20261030\\bounded-preparation-v2\\admission-manifest-v2.json",
+    "--manifest-sha",
+    "54baac3f0fe1621bdf6671a7849e1596d1b616a776b3278934b305d3a038dcfb",
+    "--library",
+    "E:\\Kitao-Research\\color-engine-round8-20261030\\build-stream-v1\\engine\\spektrafilm_engine.dll",
+    "--resources",
+    "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\resources-patch",
+    "--rows",
+    "127",
+    "--consumer-rows",
+    "7",
+    "--device-mib",
+    "256",
+    "--staging-mib",
+    "64",
+    "--host-mib",
+    "512"
+  ],
+  "fullCallsRequested": 1,
+  "whole20MPOracle": "NOT_RUN_BUDGET_BLOCKED",
+  "smallExactPlusFullOutputConsistencyOnly": true
+}

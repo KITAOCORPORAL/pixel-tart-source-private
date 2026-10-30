@@ -1,0 +1,51 @@
+{
+  "version": "Round8FinalDriverSourcesV1",
+  "baseCommit": "078a77f491d60c373989e15e8ea48c5ae5d4182c",
+  "files": [
+    {
+      "path": "tools/spektralab-research/apply_stream_v1.py",
+      "sha256": "97bf85bc685eaeb7d80626646a29484d002b0044db906cce025200ae6eb7953d"
+    },
+    {
+      "path": "tools/spektralab-research/stream_case.py",
+      "sha256": "9cccc55ade134dd31eb29cedf5a5644d7b5a9951878e0a7b7b8fbf05c3226e0e"
+    },
+    {
+      "path": "tools/spektralab-research/stream_concurrency_test.py",
+      "sha256": "193e1b3a92f407cc538ee7079ce9f48d8aacf67a3e869a6d8a4a87221c7722f2"
+    },
+    {
+      "path": "tools/spektralab-research/stream_controls.py",
+      "sha256": "5e8db8869c4a2ec740fa5a6be9e969f43d5c9e4e743b372620e974c6c4ddc791"
+    },
+    {
+      "path": "tools/spektralab-research/stream_exact_gate.py",
+      "sha256": "30ceb3c7578519d05019bc4fde9a985eb41aa5e13427946f3601a9f907e41e50"
+    },
+    {
+      "path": "tools/spektralab-research/stream_full_once.py",
+      "sha256": "abf054fe241124c248b5e15b1774a78b730924abfb1d5284711078bc0dbcf8c7"
+    },
+    {
+      "path": "tools/spektralab-research/stream_height_proof.py",
+      "sha256": "e8dc4e6c10bada2bd075d0e7c94ed84d223aac59d426b60cf82e1257640f80e5"
+    },
+    {
+      "path": "tools/spektralab-research/stream_saved_reopen.py",
+      "sha256": "bbe9a40b73fcf08725e1441101561775250b92a91fef63cacaa49b5128a4fb09"
+    },
+    {
+      "path": "tools/spektralab-research/stream_saved_rewrite.py",
+      "sha256": "4dd8ac469a450d3341ad32a39220fa25c140f045746c5a1e09293f621af1029e"
+    },
+    {
+      "path": "tools/spektralab-research/verify_round8.py",
+      "sha256": "c8495bf3705d7e91d57109581217cbf4634858be4339abb990cbde04796bbe7a"
+    }
+  ],
+  "frozenNativeLibrarySha256": "be1b408f5007dce56c928dbb7cef8a790376325a099b9679c747cad8c8fd0bb7",
+  "callerIOChangedAfterSingleFullNative": true,
+  "newFullNativeInvocationsAfterChange": 0,
+  "hostFullGate": "PARTIAL_NOT_RERUN",
+  "noPrivatePixelsOrEngineBinariesStaged": true
+}

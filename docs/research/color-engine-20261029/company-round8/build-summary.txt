@@ -1,0 +1,7 @@
+E:/Kitao-Research/color-engine-round8-20261030/source-stream-v1/engine/src/pipeline/engine.cpp:1828:8: warning: 'medium_probe_params' has C-linkage specified, but returns user-defined type 'Params' which is incompatible with C [-Wreturn-type-c-linkage]
+E:/Kitao-Research/color-engine-round8-20261030/source-stream-v1/engine/src/pipeline/engine.cpp:1899:6: warning: 'side_json' has C-linkage specified, but returns user-defined type 'Json' which is incompatible with C [-Wreturn-type-c-linkage]
+E:/Kitao-Research/color-engine-round8-20261030/source-stream-v1/engine/src/pipeline/engine.cpp:2388:102: warning: 'u8path<const char *, 0>' is deprecated [-Wdeprecated-declarations]
+E:/Kitao-Research/color-engine-round8-20261030/source-stream-v1/engine/src/pipeline/engine.cpp:2388:234: warning: 'u8path<const char *, 0>' is deprecated [-Wdeprecated-declarations]
+E:/Kitao-Research/color-engine-round8-20261030/source-stream-v1/engine/src/pipeline/engine.cpp:2389:37: warning: 'u8path<std::string, 0>' is deprecated [-Wdeprecated-declarations]
+5 warnings generated.
+[3/3] Linking CXX shared library engine\spektrafilm_engine.dll
