@@ -30,7 +30,7 @@ public sealed class StudioViewingTableView:DockPanel
  {
   if(closed||updatingViewport)return;updatingViewport=true;try{
    var width=Math.Max(600,scroll.ViewportWidth);var height=Math.Max(400,scroll.ViewportHeight);var visible=new Rect(scroll.HorizontalOffset-220,scroll.VerticalOffset-160,width+440,height+320);
-   var items=workspace.ViewingTable.Items.Where(i=>visible.IntersectsWith(new Rect(i.X-210*Math.Min(i.Scale,8),i.Y-150*Math.Min(i.Scale,8),420*Math.Min(i.Scale,8),300*Math.Min(i.Scale,8)))).Take(32).ToArray();var wanted=items.Select(i=>i.VariantId).ToHashSet();
+   var items=workspace.ViewingTable.Items.Where(i=>visible.IntersectsWith(new Rect(i.X-210*Math.Min(i.Scale,8),i.Y-150*Math.Min(i.Scale,8),420*Math.Min(i.Scale,8),300*Math.Min(i.Scale,8)))).ToArray();var wanted=items.Select(i=>i.VariantId).ToHashSet();
    foreach(var id in realized.Keys.Where(id=>!wanted.Contains(id)).ToArray()){canvas.Children.Remove(realized[id]);realized[id].Child=null;realized.Remove(id);}
    foreach(var item in items){var frame=workspace.ViewingFrames.FirstOrDefault(f=>f.Item.TargetId==item.TargetId&&f.Item.VariantId==item.VariantId);if(!realized.TryGetValue(item.VariantId,out var card)){card=CreateCard(item);realized[item.VariantId]=card;canvas.Children.Add(card);}UpdateCard(card,item,frame);}
   }finally{updatingViewport=false;}
