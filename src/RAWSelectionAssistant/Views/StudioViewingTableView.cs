@@ -26,24 +26,25 @@ public sealed partial class StudioViewingTableView:DockPanel
  internal int RealizedCardCount=>realized.Count;internal Task ViewportWork=>viewportWork;
  internal async Task RefreshForViewportAsync(){if(closed)return;await RefreshAsync();}
  private void UpdateCards()
- {
+ {using var profileScope=RAWSelectionAssistant.Services.ViewingTableDiagnostics.Measure("ui.cards");
   if(closed||updatingViewport)return;updatingViewport=true;try{
    var viewport=workspace.ViewingTable.Viewport;var scale=viewport.Scale;var width=Math.Max(600,scroll.ViewportWidth)/scale;var height=Math.Max(400,scroll.ViewportHeight)/scale;var visible=new Rect((scroll.HorizontalOffset-viewport.X)/scale-240,(scroll.VerticalOffset-viewport.Y)/scale-180,width+480,height+360);
    var items=workspace.ViewingTable.Items.Where(i=>IntersectsItem(i,visible)).ToArray();var wanted=items.Select(i=>i.VariantId).ToHashSet();
-   foreach(var id in realized.Keys.Where(id=>!wanted.Contains(id)).ToArray()){canvas.Children.Remove(realized[id]);realized[id].Child=null;realized.Remove(id);}
+   foreach(var id in realized.Keys.Where(id=>!wanted.Contains(id)).ToArray()){canvas.Children.Remove(realized[id]);realized[id].Child=null;realized.Remove(id);cardImageFrames.Remove(id);}
    foreach(var item in items.OrderBy(i=>i.Z)){var frame=workspace.ViewingFrames.FirstOrDefault(f=>f.Item.TargetId==item.TargetId&&f.Item.VariantId==item.VariantId);if(!realized.TryGetValue(item.VariantId,out var card)){card=CreateCard(item);realized[item.VariantId]=card;canvas.Children.Add(card);}UpdateCard(card,item,frame);}
+   UpdateSelectionBorders();
   }finally{updatingViewport=false;}
  }
  private Border CreateCard(ViewingTableItem item)=>CreateR55Card(item);
  private void UpdateCard(Border card,ViewingTableItem item,ViewingFrame? frame)=>UpdateR55Card(card,item,frame);
- private async Task RetryAsync(ViewingTableItem item){if(closed)return;StopSlideshow();var request=BeginRequest();try{await workspace.RetryViewingItemAsync(item,request.Cancellation.Token);if(Current(request)){UpdateCards();if(workspace.ViewingFailures.Any(f=>f.StartsWith(ReferenceColorWorkspaceViewModel.ViewingFailurePrefix(item),StringComparison.Ordinal)))ShowFeedback(workspace.ViewingFailures.First(f=>f.StartsWith(ReferenceColorWorkspaceViewModel.ViewingFailurePrefix(item),StringComparison.Ordinal)));else status.Text=workspace.ViewingStatus;}}catch(Exception error)when(error is IOException or InvalidOperationException or NotSupportedException or ArgumentException or OperationCanceledException){if(Current(request))ShowFeedback(error.Message);}finally{Finish(request);}}
+ private async Task RetryAsync(ViewingTableItem item){if(closed)return;StopSlideshow();var request=BeginRequest();try{await workspace.RetryViewingItemAsync(item,request.Cancellation.Token);if(Current(request)){UpdateCards();if(workspace.ViewingFailures.Any(f=>f.StartsWith(ReferenceColorWorkspaceViewModel.ViewingFailurePrefix(item),StringComparison.Ordinal)))ShowFeedback(workspace.ViewingFailures.First(f=>f.StartsWith(ReferenceColorWorkspaceViewModel.ViewingFailurePrefix(item),StringComparison.Ordinal)));else status.Text=DisplayViewingStatus();}}catch(Exception error)when(error is IOException or InvalidOperationException or NotSupportedException or ArgumentException or OperationCanceledException){if(Current(request))ShowFeedback(error.Message);}finally{Finish(request);}}
  internal void ScrollForTest(double y)=>scroll.ScrollToVerticalOffset(y);
  public Task RefreshAsync()=>RefreshAsync(false);
  private async Task RefreshAsync(bool visibleOnly)
  {
   if(closed)return;StopSlideshow();loupeMode=false;loupe.Visibility=Visibility.Collapsed;var request=BeginRequest(true);detail.Content=null;detail.Visibility=Visibility.Collapsed;UpdateCards();status.Text="准备固定变体代理…";var state=workspace.ViewingTable;var priority=realized.Keys.ToArray();
-  System.ComponentModel.PropertyChangedEventHandler changed=(_,e)=>{if(!Current(request))return;if(e.PropertyName is nameof(workspace.ViewingFrames) or nameof(workspace.ViewingFailures)){UpdateCards();if(!transientFeedback)status.Text=workspace.ViewingStatus;}};workspace.PropertyChanged+=changed;
-  loadingBar.Visibility=Visibility.Visible;UpdateR55Chrome();try{await Dispatcher.InvokeAsync(()=>{},System.Windows.Threading.DispatcherPriority.Render);if(!Current(request))return;if(RefreshLoader is{} load)await load(request.Cancellation.Token);else await workspace.PrepareViewingTableAsync(request.Cancellation.Token,priority,visibleOnly);if(!Current(request)||!ReferenceEquals(state,workspace.ViewingTable))return;UpdateCards();selected=workspace.ViewingFrames.FirstOrDefault(f=>selection.Contains(f.Item.VariantId));UpdateR55Chrome();if(!transientFeedback)status.Text=workspace.ViewingStatus;}
+  System.ComponentModel.PropertyChangedEventHandler changed=(_,e)=>{if(!Current(request))return;if(e.PropertyName is nameof(workspace.ViewingFrames) or nameof(workspace.ViewingFailures)){if(!transientFeedback)status.Text=DisplayViewingStatus();}};workspace.PropertyChanged+=changed;
+  loadingBar.Visibility=Visibility.Visible;UpdateR55Chrome();try{await Dispatcher.InvokeAsync(()=>{},System.Windows.Threading.DispatcherPriority.Render);if(!Current(request))return;if(RefreshLoader is{} load)await load(request.Cancellation.Token);else await workspace.PrepareViewingTableAsync(request.Cancellation.Token,priority,visibleOnly);if(!Current(request)||!ReferenceEquals(state,workspace.ViewingTable))return;UpdateCards();selected=workspace.ViewingFrames.FirstOrDefault(f=>selection.Contains(f.Item.VariantId));UpdateR55Chrome();if(!transientFeedback)status.Text=DisplayViewingStatus();}
   catch(Exception e)when(e is IOException or InvalidOperationException or NotSupportedException or ArgumentException or OperationCanceledException){if(Current(request))ShowFeedback(e is OperationCanceledException?"操作已取消":e.Message);}
   finally{workspace.PropertyChanged-=changed;if(Current(request)){loadingBar.Visibility=Visibility.Collapsed;UpdateR55Chrome();}Finish(request);}
  }
@@ -67,5 +68,5 @@ public sealed partial class StudioViewingTableView:DockPanel
  internal IReadOnlyList<Guid> LastComparisonVariants{get;private set;}=[];
  internal void SelectVariantsForTest(params Guid[] ids){pendingCompletedVariant=null;selection.Clear();foreach(var id in ids)selection.Add(id);selected=workspace.ViewingFrames.FirstOrDefault(f=>selection.Contains(f.Item.VariantId));UpdateR55Chrome();}
  private async Task ReturnToDarkroomAsync(){if(closed)return;EndGesture(true);slide.Stop();var request=BeginRequest();var frame=selected;try{if(frame is not null)await workspace.ReturnViewingToDarkroomAsync(frame.Item,request.Cancellation.Token);if(!Current(request))return;Close();ReturnRequested?.Invoke();}finally{Finish(request);}}
- public void Close(){if(closed)return;EndGesture(true);closed=true;slide.Stop();InvalidateRequests();workspace.CancelFilmBackendTask();workspace.ReleaseViewing();StopR55();dragged?.ReleaseMouseCapture();dragged=null;drag=null;selected=null;canvas.Children.Clear();realized.Clear();detail.Content=null;}
+ public void Close(){if(closed)return;EndGesture(true);closed=true;slide.Stop();InvalidateRequests();workspace.CancelFilmBackendTask();workspace.ReleaseViewing();StopR55();dragged?.ReleaseMouseCapture();dragged=null;drag=null;selected=null;canvas.Children.Clear();realized.Clear();cardImageFrames.Clear();detail.Content=null;}
 }

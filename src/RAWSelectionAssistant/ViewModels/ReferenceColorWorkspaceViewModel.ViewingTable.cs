@@ -6,6 +6,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private readonly Dictionary<string,BitmapSource> viewingCache=[];private readonly Dictionary<string,IDisposable> viewingCacheReservations=[];private readonly SemaphoreSlim viewingGate=new(1,1);private CancellationTokenSource? viewingCancellation;private long viewingRevision;
  public ViewingTableState ViewingTable=>Layout.ViewingTable??ViewingTableState.Empty;
  public IReadOnlyList<ViewingFrame> ViewingFrames{get;private set;}=[];
+ public bool IsViewingLoading{get;private set;}
  public string ViewingStatus{get;private set;}="中性观片 · 不改变导出像素";
  public IReadOnlyList<string> ViewingFailures{get;private set;}=[];
  public long ViewingCacheBytes=>viewingCache.Values.Sum(x=>(long)x.PixelWidth*x.PixelHeight*4);
@@ -23,7 +24,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public void RemoveViewingItem(Guid target,Guid variant){InvalidateViewingRequests();SetViewingState(ViewingTable with{Items=ViewingTable.Items.Where(i=>i.TargetId!=target||i.VariantId!=variant).ToArray()});ViewingFrames=ViewingFrames.Where(f=>f.Item.TargetId!=target||f.Item.VariantId!=variant).ToArray();OnPropertyChanged(nameof(ViewingFrames));}
  public void SetViewingLight(bool enabled)=>SetViewingState(ViewingTable with{PresentationLight=enabled});
  internal void InvalidateViewingRequests(){viewingRevision++;viewingCancellation?.Cancel();}
- public void CancelViewing(){InvalidateViewingRequests();ViewingStatus="已取消载入";OnPropertyChanged(nameof(ViewingStatus));}
+ public void CancelViewing(){InvalidateViewingRequests();IsViewingLoading=false;OnPropertyChanged(nameof(IsViewingLoading));ViewingStatus="已取消载入";OnPropertyChanged(nameof(ViewingStatus));}
  public void ReleaseViewing(){CancelViewing();ViewingFrames=[];ViewingFailures=[];OnPropertyChanged(nameof(ViewingFrames));OnPropertyChanged(nameof(ViewingFailures));viewingCache.Clear();foreach(var reservation in viewingCacheReservations.Values)reservation.Dispose();viewingCacheReservations.Clear();viewingIdentities.Clear();}
  internal Func<ViewingTableItem,int,CancellationToken,Task<BitmapSource>>? ViewingRenderOverride;
  private readonly Dictionary<string,(ViewingSourceLease.Stamp Stamp,string Hash)> viewingIdentities=new(StringComparer.OrdinalIgnoreCase);
@@ -32,14 +33,14 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public Task PrepareViewingTableAsync(CancellationToken token=default)=>PrepareViewingTableAsync(token,null,false);
  internal async Task PrepareViewingTableAsync(CancellationToken token,IReadOnlyList<Guid>? priorityVariants,bool visibleOnly=false)
  {
-  InvalidateViewingRequests();ViewingFrames=[];ViewingFailures=[];OnPropertyChanged(nameof(ViewingFrames));var revision=viewingRevision;using var c=CancellationTokenSource.CreateLinkedTokenSource(token);viewingCancellation=c;
+  InvalidateViewingRequests();ViewingFrames=[];ViewingFailures=[];OnPropertyChanged(nameof(ViewingFrames));var revision=viewingRevision;using var c=CancellationTokenSource.CreateLinkedTokenSource(token);viewingCancellation=c;IsViewingLoading=true;OnPropertyChanged(nameof(IsViewingLoading));
   var state=ViewingTable.Validate();var priorities=(priorityVariants??[]).ToHashSet();var items=state.Items.Where(i=>!visibleOnly||priorities.Contains(i.VariantId)).OrderByDescending(i=>priorities.Contains(i.VariantId)).ToArray();
   var frames=new List<ViewingFrame>();var failures=new List<string>();var edge=ViewingProxyEdge(state.Items.Count);
   bool Current()=>!_disposed&&revision==viewingRevision&&!c.IsCancellationRequested;
-  void Publish(){if(!Current())return;ViewingFrames=frames.ToArray();ViewingFailures=failures.ToArray();ViewingStatus=$"灯箱 {frames.Count}/{items.Length} · 失败{failures.Count} · 固定{state.Items.Count} · 中性sRGB代理";OnPropertyChanged(nameof(ViewingFrames));if(!Current())return;OnPropertyChanged(nameof(ViewingFailures));OnPropertyChanged(nameof(ViewingStatus));}
+  void Publish(){using var publishProfile=ViewingTableDiagnostics.Measure("vm.publish");if(!Current())return;ViewingFrames=frames.ToArray();ViewingFailures=failures.ToArray();ViewingStatus=$"灯箱 {frames.Count}/{items.Length} · 失败{failures.Count} · 固定{state.Items.Count} · 中性sRGB代理";OnPropertyChanged(nameof(ViewingFrames));if(!Current())return;OnPropertyChanged(nameof(ViewingFailures));OnPropertyChanged(nameof(ViewingStatus));}
   try{foreach(var item in items){c.Token.ThrowIfCancellationRequested();try{var image=await (ViewingRenderOverride??RenderViewingItemAsync)(item,edge,c.Token);if(!Current())return;frames.Add(new(item,image,$"代理 {image.PixelWidth}×{image.PixelHeight} · 最长边最多1600px，不是原图细节"));}catch(Exception e)when(e is IOException or InvalidOperationException or NotSupportedException or ArgumentException){if(!Current())return;failures.Add(ViewingFailurePrefix(item)+" / "+(Targets.FirstOrDefault(t=>t.Id==item.TargetId)?.FileName??"缺少目标")+"："+ViewingFailureReason(e));}Publish();await Task.Yield();}}
   catch(OperationCanceledException){if(Current()){ViewingStatus="灯箱载入已取消";OnPropertyChanged(nameof(ViewingStatus));}}
-  finally{if(ReferenceEquals(viewingCancellation,c))viewingCancellation=null;}
+  finally{if(ReferenceEquals(viewingCancellation,c)){viewingCancellation=null;IsViewingLoading=false;OnPropertyChanged(nameof(IsViewingLoading));}}
  }
  internal async Task RetryViewingItemAsync(ViewingTableItem item,CancellationToken token=default)
  {
@@ -49,23 +50,23 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  }
  internal static int ViewingProxyEdge(int count)=>Math.Min(640,Math.Max(128,(int)Math.Sqrt(32d*1024*1024/Math.Max(1,count)/4)));
  internal static string ViewingFailurePrefix(ViewingTableItem item)=>item.TargetId+" / variant="+item.VariantId;
- internal static string ViewingFailureReason(Exception e)=>e switch{RAWSelectionAssistant.Core.Services.RawToJpeg.RawDecodeException raw=>$"解码失败 [{raw.ErrorCode}; stage={raw.Stage}; native={raw.NativeName??"unavailable"}]：{raw.Message}",StudioBudgetException budget=>$"预算拒绝 [required={budget.RequiredBytes}; available={budget.AvailableBytes}]：{e.Message}",_=>e.Message};
+ internal static string ViewingFailureReason(Exception e)=>e switch{FileNotFoundException or DirectoryNotFoundException=>"源照片缺失；固定快照已保留",RAWSelectionAssistant.Core.Services.RawToJpeg.RawDecodeException raw=>$"解码失败 [{raw.ErrorCode}; stage={raw.Stage}; native={raw.NativeName??"unavailable"}]：{raw.Message}",StudioBudgetException budget=>$"预算拒绝 [required={budget.RequiredBytes}; available={budget.AvailableBytes}]：{e.Message}",_=>e.Message};
  internal async Task<BitmapSource> RenderViewingItemAsync(ViewingTableItem item,int edge,CancellationToken token)
- {
+ {using var profileScope=RAWSelectionAssistant.Services.ViewingTableDiagnostics.Measure("vm.render-item");
   token.ThrowIfCancellationRequested();item.Validate();if(edge is <1 or >1600)throw new ArgumentOutOfRangeException(nameof(edge));var target=Targets.SingleOrDefault(t=>t.Id==item.TargetId)??throw new IOException("灯箱照片已不在当前项目");
   // Preserve repository resolution for library targets; file-only targets use reliable handle identity below.
   if(target.LibraryId is not null&&!await ValidateTargetIdentityAsync(target,token))throw new IOException(target.Error);
   if(!string.Equals(target.SourceHash,item.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("固定源身份不符");
   var epoch=viewingRevision;await viewingGate.WaitAsync(token);try{
    token.ThrowIfCancellationRequested();if(_disposed||epoch!=viewingRevision)throw new OperationCanceledException(token);
-   using var lease=new ViewingSourceLease(target.Path);var stamp=lease.Identity;string hash;
+   using var identityProfile=ViewingTableDiagnostics.Measure("source.identity-and-cache");using var lease=new ViewingSourceLease(target.Path);var stamp=lease.Identity;string hash;
    if(stamp is{} current&&viewingIdentities.TryGetValue(target.Path,out var previous)&&previous.Stamp==current)hash=previous.Hash;
-   else{ViewingHashReads++;hash=Convert.ToHexString(await SHA256.HashDataAsync(lease.Stream,token));token.ThrowIfCancellationRequested();if(_disposed||epoch!=viewingRevision)throw new OperationCanceledException(token);if(stamp is{} fresh){if(viewingIdentities.Count>=100)viewingIdentities.Remove(viewingIdentities.Keys.First());viewingIdentities[target.Path]=(fresh,hash);}}
+   else{ViewingHashReads++;using var hashProfile=ViewingTableDiagnostics.Measure("source.full-hash");hash=Convert.ToHexString(await SHA256.HashDataAsync(lease.Stream,token));token.ThrowIfCancellationRequested();if(_disposed||epoch!=viewingRevision)throw new OperationCanceledException(token);if(stamp is{} fresh){if(viewingIdentities.Count>=100)viewingIdentities.Remove(viewingIdentities.Keys.First());viewingIdentities[target.Path]=(fresh,hash);}}
    if(!string.Equals(hash,item.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("源文件内容已变化，固定变体未自动替换");
    var key=Path.GetFullPath(target.Path)+"/"+item.SourceHash+item.RecipeHash+"/"+edge;
-   if(viewingCache.TryGetValue(key,out var cached))return cached;
-   ViewingActiveRenders++;ViewingPeakActiveRenders=Math.Max(ViewingPeakActiveRenders,ViewingActiveRenders);BitmapSource image;
-   try{ViewingDecodeCount++;image=await RenderFrozenVersionAsync(target,item.FrozenVariant,edge,token);}finally{ViewingActiveRenders--;}
+   if(viewingCache.TryGetValue(key,out var cached)){using var cacheProfile=ViewingTableDiagnostics.Measure("source.cache-hit");return cached;}
+   identityProfile.Dispose();ViewingActiveRenders++;ViewingPeakActiveRenders=Math.Max(ViewingPeakActiveRenders,ViewingActiveRenders);BitmapSource image;
+   try{using var decodeProfile=ViewingTableDiagnostics.Measure("source.decode-render");ViewingDecodeCount++;image=await RenderFrozenVersionAsync(target,item.FrozenVariant,edge,token);}finally{ViewingActiveRenders--;}
    token.ThrowIfCancellationRequested();if(_disposed||epoch!=viewingRevision)throw new OperationCanceledException(token);
    // The held handle prevents writes; independently reopen the path to detect replacement via a renamed parent.
    using(var verify=new ViewingSourceLease(target.Path)){if(stamp is{} before&&verify.Identity is{} after){if(before!=after)throw new IOException("源路径身份在载入期间变化");}else{ViewingHashReads++;var finalHash=Convert.ToHexString(await SHA256.HashDataAsync(verify.Stream,token));if(!string.Equals(finalHash,item.SourceHash,StringComparison.OrdinalIgnoreCase))throw new IOException("源文件在载入期间改变");}}

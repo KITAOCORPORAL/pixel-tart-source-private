@@ -6,9 +6,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  private readonly Stack<ViewingTableState> viewingUndo=[],viewingRedo=[];private ViewingTableState? viewingGesture;
  public bool CanUndoViewing=>viewingUndo.Count>0;public bool CanRedoViewing=>viewingRedo.Count>0;
  private static void BoundViewingHistory(Stack<ViewingTableState> history){if(history.Count<=40)return;var keep=history.Take(40).Reverse().ToArray();history.Clear();foreach(var state in keep)history.Push(state);}
- private void SetViewingState(ViewingTableState next,bool remember=true){next=next.Validate();if(JsonSerializer.Serialize(next)==JsonSerializer.Serialize(ViewingTable))return;if(remember&&viewingGesture is null){viewingUndo.Push(ViewingTable);BoundViewingHistory(viewingUndo);viewingRedo.Clear();}Layout=Layout with{ViewingTable=next};NotifyR53Edit();OnPropertyChanged(nameof(ViewingTable));}
+ private static bool SameViewingState(ViewingTableState a,ViewingTableState b)=>ReferenceEquals(a,b)||a.Version==b.Version&&a.PresentationLight==b.PresentationLight&&a.Brightness==b.Brightness&&a.Viewport==b.Viewport&&a.Items.SequenceEqual(b.Items);
+ private void SetViewingState(ViewingTableState next,bool remember=true){using var profileScope=RAWSelectionAssistant.Services.ViewingTableDiagnostics.Measure("vm.layout-state");next=next.Validate();if(SameViewingState(next,ViewingTable))return;if(remember&&viewingGesture is null){viewingUndo.Push(ViewingTable);BoundViewingHistory(viewingUndo);viewingRedo.Clear();}Layout=Layout with{ViewingTable=next};NotifyR53Edit();OnPropertyChanged(nameof(ViewingTable));}
  public void BeginViewingGesture(){viewingGesture??=ViewingTable;}
- public void CommitViewingGesture(){var before=viewingGesture;viewingGesture=null;if(before is not null&&JsonSerializer.Serialize(before)!=JsonSerializer.Serialize(ViewingTable)){viewingUndo.Push(before);BoundViewingHistory(viewingUndo);viewingRedo.Clear();}}
+ public void CommitViewingGesture(){var before=viewingGesture;viewingGesture=null;if(before is not null&&!SameViewingState(before,ViewingTable)){viewingUndo.Push(before);BoundViewingHistory(viewingUndo);viewingRedo.Clear();}}
  public void CancelViewingGesture(){var before=viewingGesture;viewingGesture=null;if(before is not null)SetViewingState(before,false);}
  internal bool ViewingGestureActive=>viewingGesture is not null;
  public void UndoViewing(){if(!viewingUndo.TryPop(out var state))return;viewingRedo.Push(ViewingTable);SetViewingState(state,false);}
