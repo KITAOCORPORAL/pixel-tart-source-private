@@ -22,12 +22,10 @@ public partial class PhotoGradePageView
     private Window? developedRecipeWindow;
     private void ShowDevelopedStage(RAWSelectionAssistant.Core.Services.Projects.DevelopedStageProjection stage)
     {
-        developedRecipeWindow?.Close();
-        EditModes.SelectedIndex=0;OpenR53Panel();
-        var box=new TextBox{Text=stage.FrozenRecipeJson,IsReadOnly=true,TextWrapping=TextWrapping.Wrap,VerticalScrollBarVisibility=ScrollBarVisibility.Auto,Height=240,ToolTip="冻结配方只读；执行由现有显影管线负责。"};
-        var panel=new StackPanel{Margin=new Thickness(4)};panel.Children.Add(new TextBlock{Text="即时胶片 · 已显影 · 系统锁定",TextWrapping=TextWrapping.Wrap});panel.Children.Add(new TextBlock{Text=$"变体 {stage.VariantId}\n来源 {stage.SourceVariantId?.ToString()??"原图"}\n配方版本 {stage.RecipeVersion} / {stage.RecipeSha256}",TextWrapping=TextWrapping.Wrap});panel.Children.Add(box);
-        var dialog=new Window{Title="光镜 · 冻结显影配方",Owner=Window.GetWindow(this),Width=560,Height=420,Content=panel,Background=new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(29,29,32)),ShowInTaskbar=false};developedRecipeWindow=dialog;dialog.Closed+=(_,_)=>{if(ReferenceEquals(developedRecipeWindow,dialog))developedRecipeWindow=null;};dialog.Show();
+        developedRecipeWindow?.Close();EditModes.SelectedIndex=0;OpenR53Panel();
+        var body=new StackPanel{Margin=new Thickness(8)};body.Children.Add(new TextBlock{Text="配方摘要 · 已冻结",FontSize=12,Margin=new Thickness(0,6,0,10)});body.Children.Add(new TextBlock{Text="来源："+(stage.SourceVariantId is null?"原图":"固定变体"),TextWrapping=TextWrapping.Wrap});body.Children.Add(new TextBlock{Text="相纸 / 相框："+stage.FrameId,TextWrapping=TextWrapping.Wrap,Margin=new Thickness(0,6,0,6)});body.Children.Add(new TextBlock{Text="效果：即时胶片响应 → 照片窗口调整 → 独立纸框",TextWrapping=TextWrapping.Wrap});var advanced=new Expander{Header="高级详情",IsExpanded=false,Margin=new Thickness(0,12,0,0)};var stack=new StackPanel();stack.Children.Add(new TextBlock{Text=$"版本 {stage.RecipeVersion} / {stage.RecipeSha256}",TextWrapping=TextWrapping.Wrap});var copy=new Button{Content="复制 JSON"};copy.Click+=(_,_)=>Clipboard.SetText(stage.FrozenRecipeJson);stack.Children.Add(copy);stack.Children.Add(new TextBox{Text=stage.FrozenRecipeJson,IsReadOnly=true,TextWrapping=TextWrapping.Wrap,MaxHeight=240,VerticalScrollBarVisibility=ScrollBarVisibility.Auto});advanced.Content=stack;body.Children.Add(advanced);var close=new Button{Content="返回参数",Margin=new Thickness(0,12,0,0)};close.Click+=(_,_)=>{if(developedSummary is not null){RightPanel.Children.Remove(developedSummary);developedSummary=null;}};body.Children.Add(close);if(developedSummary is not null)RightPanel.Children.Remove(developedSummary);developedSummary=new Border{Child=new ScrollViewer{Content=body},Background=RightPanel.Background};Grid.SetRow(developedSummary,1);Grid.SetRowSpan(developedSummary,3);Panel.SetZIndex(developedSummary,40);RightPanel.Children.Add(developedSummary);
     }
+    private Border? developedSummary;
     private void SaveR54GraphLayout()
     {
         if(model is null||r54Graph is null||r54SavingLayout)return;

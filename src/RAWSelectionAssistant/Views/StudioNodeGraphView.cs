@@ -22,7 +22,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
     public event Action<DevelopedStageProjection>? StageSelected;
     private bool stageSelected;private DevelopedStageProjection? stageCache;private string? stageError;
     internal void RefreshDevelopedStage(){stageSelected=false;try{stageCache=DevelopedStage?.Invoke();stageError=null;}catch(Exception e)when(e is InvalidDataException or ArgumentException or NotSupportedException){stageCache=null;stageError="显影配方不可用："+e.Message;}InvalidateVisual();}
-    private Rect StageRect()=>new(190,64,164,88);
+    private Rect StageRect()=>new(12,50,164,136);
     internal DevelopedStageProjection? Stage=>stageCache;
     internal bool SelectStageAt(Point world){if(Stage is not{} stage||!StageRect().Contains(world))return false;stageSelected=true;StageSelected?.Invoke(stage);InvalidateVisual();return true;}
     public double Zoom=>zoom;public Point Pan=>pan;
@@ -37,12 +37,13 @@ public sealed class StudioNodeGraphView:FrameworkElement
     public void Restore(Point p,double z){pan=p;zoom=Math.Clamp(z,.25,2);InvalidateVisual();}
     public void Fit()
     {
-        if(Stage is not null){zoom=Math.Clamp(Math.Min(Math.Max(1,ActualWidth)/760,Math.Max(1,ActualHeight)/160),.5,1.4);pan=new(8,8);LayoutChanged?.Invoke();InvalidateVisual();return;}
+        if(Stage is not null){zoom=Math.Clamp(Math.Min(Math.Max(1,ActualWidth)/920,Math.Max(1,ActualHeight)/210),.5,1.4);pan=new(8,8);LayoutChanged?.Invoke();InvalidateVisual();return;}
         var ps=editor.GraphView.Positions;if(ps.Count==0)return;
         var l=ps.Min(p=>p.X)-20;var t=ps.Min(p=>p.Y)-20;var w=ps.Max(p=>p.X)+(Stage is null?140:344)-l;var h=ps.Max(p=>p.Y)+108-t;
         zoom=Math.Clamp(Math.Min(Math.Max(1,ActualWidth)/w,Math.Max(1,ActualHeight)/h),.25,1.4);pan=new(-l*zoom,-t*zoom);LayoutChanged?.Invoke();InvalidateVisual();
     }
-    private Point World(Point p)=>new((p.X-pan.X)/zoom,(p.Y-pan.Y)/zoom);
+    private Point RawWorld(Point p)=>new((p.X-pan.X)/zoom,(p.Y-pan.Y)/zoom);
+ private Point World(Point p){var w=RawWorld(p);return Stage is not null?new Point(w.X-208,w.Y):w;}
     private StudioGraphPosition? Hit(Point w)=>editor.GraphView.Positions.LastOrDefault(p=>new Rect(p.X,p.Y,132,88).Contains(w));
     private Point Port(StudioGraphPosition p,bool output,string input="rgb")=>new(p.X+(output?132:0),p.Y+(input=="base"?23:input=="layer"?49:36));
     private bool IsMix(Guid id)=>editor.AdjustmentNodes.Any(n=>n.Id==id&&n.Type==ColorStudioNodeType.GraphMix);
@@ -83,10 +84,12 @@ public sealed class StudioNodeGraphView:FrameworkElement
     }
     private void DrawCommittedStage(DrawingContext d,DevelopedStageProjection stage)
     {
-        // System execution boundary, not StudioNodeGraph edges. Order matches CandidateRenderSession.
-        var labels=new[]{"冻结输入","即时胶片","照片窗口调色","纸框与成品"};
-        for(int i=0;i<4;i++){var rect=new Rect(16+i*174,64,i==1?164:156,88);d.DrawRoundedRectangle(Color("#25272A"),new Pen(i==1&&stageSelected?Brushes.White:Color("#7FA89F"),i==1&&stageSelected?2:1),rect,3,3);Text(d,labels[i]+(i==1?" · 锁定":""),new(rect.X+6,rect.Y+7),11);Text(d,i switch{0=>stage.SourceVariantId?.ToString("N")[..8]??"原图",1=>"配方 "+stage.RecipeSha256[..8],2=>"仅作用照片窗口",_=>"独立纸框合成"},new(rect.X+6,rect.Y+30),10);if(i==3&&DevelopedThumbnail?.Invoke() is{} image)DrawImageFit(d,image,new Rect(rect.X+8,rect.Y+46,136,36));if(i<3){var a=new Point(rect.Right+2,108);var b=new Point(16+(i+1)*174-3,108);d.DrawLine(new Pen(Color("#9CC4BA"),1.4),a,b);d.DrawLine(new Pen(Color("#9CC4BA"),1.4),b,b+new Vector(-4,-4));d.DrawLine(new Pen(Color("#9CC4BA"),1.4),b,b+new Vector(-4,4));}}
-        Text(d,"系统执行阶段 · 只读",new(16,36),11,Color("#9CC4BA"));
+        // Independent read-only execution lane, never edges/ports in the editable graph.
+        var outline=new Pen(Color("#767A7D"),1){DashStyle=DashStyles.Dash};d.DrawRoundedRectangle(Color("#1D1F22"),outline,new Rect(8,26,174,166),5,5);Text(d,"显影流程 · 只读",new(16,30),11,Color("#A6A6AB"));
+        string[] labels=["冻结输入","即时胶片响应","照片窗口调整","纸框与成品"];
+        for(int i=0;i<4;i++){var rect=new Rect(18,54+i*32,154,24);d.DrawRoundedRectangle(Color("#333638"),new Pen(stageSelected?Color("#929B9C"):Color("#606568"),.7),rect,10,10);Text(d,labels[i],new(rect.X+9,rect.Y+4),11,Color("#C0C3C3"));if(i<3)d.DrawLine(new Pen(Color("#767A7D"),.6),new(95,rect.Bottom),new(95,rect.Bottom+8));}
+        // Editable photo-window nodes remain a separate lane and retain their actual data.
+        d.PushTransform(new TranslateTransform(208,0));var graph=editor.GraphView;var by=graph.Positions.ToDictionary(p=>p.NodeId);foreach(var edge in graph.Edges)DrawEdge(d,Port(by[edge.From],true),Port(by[edge.To],false,edge.Input),Color("#6E9B91"));foreach(var position in graph.Positions){var node=editor.AdjustmentNodes.FirstOrDefault(n=>n.Id==position.NodeId);d.DrawRoundedRectangle(Color("#2E4440"),new Pen(Color("#6E9B91"),1),new Rect(position.X,position.Y,132,88),3,3);Text(d,node?.Name??(position.NodeId==StudioNodeGraph.Source?"输入":"输出"),new(position.X+7,position.Y+12),11);if(position.NodeId!=StudioNodeGraph.Source)foreach(var port in InputPorts(position.NodeId))d.DrawEllipse(Color("#9CC4BA"),null,Port(position,false,port),4,4);if(position.NodeId!=StudioNodeGraph.Output)d.DrawEllipse(Color("#9CC4BA"),null,Port(position,true),4,4);}d.Pop();
     }
     private static void DrawImageFit(DrawingContext d,ImageSource image,Rect box)
     {double ratio=image.Width/Math.Max(1,image.Height);double w=Math.Min(box.Width,box.Height*ratio),h=w/ratio;d.DrawImage(image,new Rect(box.X+(box.Width-w)/2,box.Y+(box.Height-h)/2,w,h));}
@@ -105,7 +108,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
     }
     private void Down(object sender,MouseButtonEventArgs e)
     {
-        Focus();var w=World(e.GetPosition(this));if(Stage is not null||stageError is not null){SelectStageAt(w);e.Handled=true;return;}stageSelected=false;var graph=editor.GraphView;var hit=Hit(w);
+        Focus();var w=World(e.GetPosition(this));if(stageError is not null){e.Handled=true;return;}if(Stage is not null&&SelectStageAt(RawWorld(e.GetPosition(this)))){e.Handled=true;return;}stageSelected=false;var graph=editor.GraphView;var hit=Hit(w);
         if(e.ChangedButton==MouseButton.Right){if(hit is not null)editor.SelectedAdjustmentNode=editor.AdjustmentNodes.FirstOrDefault(n=>n.Id==hit.NodeId);OpenMenu(e.GetPosition(this),EdgeAt(w));e.Handled=true;return;}
         if(e.ChangedButton!=MouseButton.Left&&e.ChangedButton!=MouseButton.Middle)return;
         before=graph;start=e.GetPosition(this);moved=false;
@@ -148,7 +151,7 @@ public sealed class StudioNodeGraphView:FrameworkElement
     private void Keys(object sender,KeyEventArgs e)
     {
         if(Keyboard.FocusedElement is System.Windows.Controls.Primitives.TextBoxBase or PasswordBox)return;
-        if(Stage is not null||stageSelected||stageError is not null){e.Handled=true;return;}
+        if(stageSelected||stageError is not null){e.Handled=true;return;}
         if(Keyboard.Modifiers==ModifierKeys.Control&&e.Key==Key.C){editor.CopyGraphSettings();e.Handled=true;return;}
         if(Keyboard.Modifiers==ModifierKeys.Control&&e.Key==Key.V){editor.PasteGraphSettings();e.Handled=true;return;}
         if(Keyboard.Modifiers==ModifierKeys.Alt&&e.SystemKey==Key.O){ToolTip="外部反向蒙版节点尚未实现";e.Handled=true;return;}

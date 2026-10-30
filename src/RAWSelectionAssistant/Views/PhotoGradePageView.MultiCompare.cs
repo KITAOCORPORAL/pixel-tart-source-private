@@ -7,11 +7,23 @@ public partial class PhotoGradePageView
 {
  private Window? r53MultiWindow;
  private void R53MultiCompare(object sender,RoutedEventArgs e)=>OpenR53SharedComparison(null);
- private Window? viewingWindow;
- private async void OpenViewingTable(object sender,RoutedEventArgs e)
+ private StudioViewingTableView? viewingTable;private Grid? viewingHost;private Border? viewingTop;private Panel? stripParent;private int stripIndex;
+ internal bool ViewingMode=>viewingTable is not null;
+ internal StudioViewingTableView? ViewingControl=>viewingTable;
+ private async void OpenViewingTable(object sender,RoutedEventArgs e)=>await ToggleViewingTableAsync();
+ internal async Task ToggleViewingTableAsync()
  {
-  if(model is null)return;if(viewingWindow is not null){viewingWindow.Activate();return;}var table=new StudioViewingTableView(model);var window=new Window{Title="光镜 · 灯箱观片",Owner=Window.GetWindow(this),Width=1150,Height=780,Content=table,Background=Background};viewingWindow=window;table.ReturnRequested+=()=>window.Close();window.Closed+=(_,_)=>{table.Close();if(ReferenceEquals(viewingWindow,window))viewingWindow=null;};window.Show();try{if(model.ViewingTable.Items.Count==0)model.PinSelectedViewingVariants();await table.RefreshAsync();}catch(Exception error)when(error is IOException or InvalidOperationException or ArgumentException or NotSupportedException){window.ToolTip=error.Message;}
+  if(viewingTable is not null){ExitViewingTable();return;}if(model is null)return;
+  var table=new StudioViewingTableView(model);viewingTable=table;table.ReturnRequested+=ExitViewingTable;
+  viewingHost=new Grid{Background=Background};viewingHost.RowDefinitions.Add(new RowDefinition());viewingHost.RowDefinitions.Add(new RowDefinition{Height=new GridLength(114)});viewingHost.Children.Add(table);Grid.SetColumn(viewingHost,1);Grid.SetColumnSpan(viewingHost,4);Panel.SetZIndex(viewingHost,50);
+  stripParent=(Panel)FilmstripArea.Parent;stripIndex=stripParent.Children.IndexOf(FilmstripArea);stripParent.Children.Remove(FilmstripArea);Grid.SetRow(FilmstripArea,1);Grid.SetColumn(FilmstripArea,0);Grid.SetColumnSpan(FilmstripArea,1);viewingHost.Children.Add(FilmstripArea);R53MainLayout.Children.Add(viewingHost);
+  var back=new Button{Content="← 返回暗室 · "+(model.SessionPath is null?"未命名项目":System.IO.Path.GetFileNameWithoutExtension(model.SessionPath)),ToolTip="返回暗室 Ctrl+L"};System.Windows.Automation.AutomationProperties.SetName(back,"返回暗室");back.Click+=(_,_)=>ExitViewingTable();viewingTop=new Border{Background=Background,Child=back};Grid.SetRow(viewingTop,1);Panel.SetZIndex(viewingTop,50);R3Root.Children.Add(viewingTop);ApplyR53Layout();table.Focus();await table.RefreshAsync();
  }
+ private void ExitViewingTable()
+ {
+  var table=viewingTable;if(table is null)return;viewingTable=null;table.Close();if(viewingHost is not null){viewingHost.Children.Remove(FilmstripArea);R53MainLayout.Children.Remove(viewingHost);viewingHost=null;}if(stripParent is not null){Grid.SetRow(FilmstripArea,3);Grid.SetColumn(FilmstripArea,0);Grid.SetColumnSpan(FilmstripArea,2);stripParent.Children.Insert(Math.Min(stripIndex,stripParent.Children.Count),FilmstripArea);stripParent=null;}if(viewingTop is not null){R3Root.Children.Remove(viewingTop);viewingTop=null;}ApplyR53Layout();
+ }
+ private void ApplyViewingHostLayout(){if(viewingTable is null)return;ResourceColumn.Width=new GridLength(0);PanelColumn.MinWidth=0;PanelColumn.Width=new GridLength(0);SplitterColumn.Width=new GridLength(0);R53Resources.Visibility=Visibility.Collapsed;RightPanel.Visibility=Visibility.Collapsed;R53ParameterRail.Visibility=Visibility.Collapsed;PanelSplitter.Visibility=Visibility.Collapsed;R53SerialNodes.Visibility=Visibility.Collapsed;R53NodeRow.Height=new GridLength(0);R54ScopesArea.Visibility=Visibility.Collapsed;R53FilmRow.Height=new GridLength(0);PhotoStrip.Visibility=Visibility.Visible;R53FilmContentRow.Height=new GridLength(92);}
  private async void OpenR53SharedComparison(StudioStillSnapshot? still)
  {
   if(model is null)return;var workspace=model;var select=new ListBox{ItemsSource=workspace.R53Variants,DisplayMemberPath="Name",SelectionMode=SelectionMode.Multiple,Height=100};foreach(var v in (still is null?workspace.R53Variants.Take(2):workspace.R53Variants.Where(v=>v.Id==workspace.ActiveTarget?.ActiveEditVersionId)))select.SelectedItems.Add(v);

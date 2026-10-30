@@ -138,7 +138,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
         foreach (var target in restored) Targets.Add(target);
         if(!_skipSessionPreparation)Kitao.InstantFilm.Research.CandidateProcessingEvidence.Enter("SessionCommit",token);
         FilterScope = document.FilterScope; MinimumRating = document.MinimumRating; ColorLabelFilter = document.ColorLabelFilter;
-        Layout = document.Layout ?? new(); Editor.ContextRailOpen = Layout.AuxiliaryOpen;
+        viewingUndo.Clear();viewingRedo.Clear();viewingGesture=null;Layout = document.Layout ?? new(); Editor.ContextRailOpen = Layout.AuxiliaryOpen;
         var missing = 0;
         foreach (var target in restored)
         {

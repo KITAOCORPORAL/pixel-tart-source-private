@@ -35,6 +35,7 @@ public sealed record ColorStudioLayout(double AuxiliaryWidth = 290, double Editi
     public IReadOnlyList<string> R53Recents {get;init;}=[];
     public ColorStudioLayout Normalize() {ViewingTable?.Validate();ManualMonitorProfile?.Bytes();FilmDraft?.Validate();return this with
     {
+        ViewingTable=ViewingTable?.Validate(),
         R54Stills=(R54Stills??[]).Select(s=>s.Freeze()).TakeLast(8).ToArray(),
         R53Favorites=(R53Favorites??[]).Where(x=>!string.IsNullOrWhiteSpace(x)).Distinct().Take(100).ToArray(),R53Recents=(R53Recents??[]).Where(x=>!string.IsNullOrWhiteSpace(x)).Distinct().Take(20).ToArray(),
         Darkroom = Darkroom?.Normalize(),

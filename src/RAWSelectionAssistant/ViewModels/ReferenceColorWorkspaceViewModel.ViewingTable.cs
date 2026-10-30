@@ -15,16 +15,16 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   if(ActiveTarget is{} active){Editor.CopyCurrentLookTo([active]);CaptureEditVersion(active);}
   var selectedIds=SelectedTargets.Select(t=>t.Id).ToHashSet();var items=ViewingTable.Items.Where(x=>!replaceExisting||!selectedIds.Contains(x.TargetId)).ToList();
   foreach(var target in SelectedTargets.Take(100)){CaptureEditVersion(target);EnsureR53Variants(target);var version=target.EditVersions.FirstOrDefault(v=>v.Id==target.ActiveEditVersionId&&!v.Archived);if(version is null||target.SourceHash is null||items.Any(x=>x.TargetId==target.Id&&x.VariantId==version.Id))continue;if(items.Count==100)break;var frozen=JsonSerializer.Deserialize<StudioEditVersion>(JsonSerializer.Serialize(version))!;items.Add(new(target.Id,version.Id,target.SourceHash,FilmBackendBindingV1.HashRecipe(frozen),frozen,20+items.Count%5*230,20+items.Count/5*170));}
-  InvalidateViewingRequests();Layout=Layout with{ViewingTable=new ViewingTableState(1,items,ViewingTable.PresentationLight).Validate()};NotifyR53Edit();OnPropertyChanged(nameof(ViewingTable));
+  InvalidateViewingRequests();SetViewingState(ViewingTable with{Version=2,Items=items.Select((i,n)=>i with{Z=n}).ToArray()});
  }
  public void SetViewingPlacement(Guid target,Guid variant,double x,double y,double scale,double rotation)
- {var items=ViewingTable.Items.Select(i=>i.TargetId==target&&i.VariantId==variant?(i with{X=x,Y=y,Scale=scale,Rotation=rotation}).Validate():i).ToArray();Layout=Layout with{ViewingTable=ViewingTable with{Items=items}};NotifyR53Edit();}
- public void ClearViewingPlacements(){ReleaseViewing();Layout=Layout with{ViewingTable=ViewingTableState.Empty};NotifyR53Edit();OnPropertyChanged(nameof(ViewingTable));}
- public void RemoveViewingItem(Guid target,Guid variant){ReleaseViewing();Layout=Layout with{ViewingTable=ViewingTable with{Items=ViewingTable.Items.Where(i=>i.TargetId!=target||i.VariantId!=variant).ToArray()}};NotifyR53Edit();OnPropertyChanged(nameof(ViewingTable));}
- public void SetViewingLight(bool enabled){Layout=Layout with{ViewingTable=ViewingTable with{PresentationLight=enabled}};NotifyR53Edit();OnPropertyChanged(nameof(ViewingTable));}
+ {var items=ViewingTable.Items.Select(i=>i.TargetId==target&&i.VariantId==variant?(i with{X=x,Y=y,Scale=scale,Rotation=rotation}).Validate():i).ToArray();SetViewingState(ViewingTable with{Items=items});}
+ public void ClearViewingPlacements(){ReleaseViewing();SetViewingState(ViewingTable with{Items=[]});}
+ public void RemoveViewingItem(Guid target,Guid variant){InvalidateViewingRequests();SetViewingState(ViewingTable with{Items=ViewingTable.Items.Where(i=>i.TargetId!=target||i.VariantId!=variant).ToArray()});ViewingFrames=ViewingFrames.Where(f=>f.Item.TargetId!=target||f.Item.VariantId!=variant).ToArray();OnPropertyChanged(nameof(ViewingFrames));}
+ public void SetViewingLight(bool enabled)=>SetViewingState(ViewingTable with{PresentationLight=enabled});
  internal void InvalidateViewingRequests(){viewingRevision++;viewingCancellation?.Cancel();}
- public void CancelViewing(){InvalidateViewingRequests();ViewingFrames=[];ViewingFailures=[];OnPropertyChanged(nameof(ViewingFrames));OnPropertyChanged(nameof(ViewingFailures));}
- public void ReleaseViewing(){CancelViewing();viewingCache.Clear();foreach(var reservation in viewingCacheReservations.Values)reservation.Dispose();viewingCacheReservations.Clear();viewingIdentities.Clear();}
+ public void CancelViewing(){InvalidateViewingRequests();ViewingStatus="已取消载入";OnPropertyChanged(nameof(ViewingStatus));}
+ public void ReleaseViewing(){CancelViewing();ViewingFrames=[];ViewingFailures=[];OnPropertyChanged(nameof(ViewingFrames));OnPropertyChanged(nameof(ViewingFailures));viewingCache.Clear();foreach(var reservation in viewingCacheReservations.Values)reservation.Dispose();viewingCacheReservations.Clear();viewingIdentities.Clear();}
  internal Func<ViewingTableItem,int,CancellationToken,Task<BitmapSource>>? ViewingRenderOverride;
  private readonly Dictionary<string,(ViewingSourceLease.Stamp Stamp,string Hash)> viewingIdentities=new(StringComparer.OrdinalIgnoreCase);
  internal long ViewingHashReads{get;private set;} internal long ViewingDecodeCount{get;private set;}
@@ -32,7 +32,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public Task PrepareViewingTableAsync(CancellationToken token=default)=>PrepareViewingTableAsync(token,null,false);
  internal async Task PrepareViewingTableAsync(CancellationToken token,IReadOnlyList<Guid>? priorityVariants,bool visibleOnly=false)
  {
-  CancelViewing();var revision=viewingRevision;using var c=CancellationTokenSource.CreateLinkedTokenSource(token);viewingCancellation=c;
+  InvalidateViewingRequests();ViewingFrames=[];ViewingFailures=[];OnPropertyChanged(nameof(ViewingFrames));var revision=viewingRevision;using var c=CancellationTokenSource.CreateLinkedTokenSource(token);viewingCancellation=c;
   var state=ViewingTable.Validate();var priorities=(priorityVariants??[]).ToHashSet();var items=state.Items.Where(i=>!visibleOnly||priorities.Contains(i.VariantId)).OrderByDescending(i=>priorities.Contains(i.VariantId)).ToArray();
   var frames=new List<ViewingFrame>();var failures=new List<string>();var edge=ViewingProxyEdge(state.Items.Count);
   bool Current()=>!_disposed&&revision==viewingRevision&&!c.IsCancellationRequested;

@@ -16,7 +16,7 @@ public partial class PhotoGradePageView:UserControl
   PhotoViewport.State.Changed+=(_,_)=>{DrawGuides();DrawMaskOverlay();};
   AddHandler(Expander.ExpandedEvent,new RoutedEventHandler(SectionExpanded));
   AddHandler(Expander.CollapsedEvent,new RoutedEventHandler(SectionCollapsed));
-  InitializePanelLayout();InitializeR53();
+  InitializePanelLayout();InitializeR53();InitializeR55Tray();
   PreviewKeyDown+=(_,e)=>
   {
    if(e.Handled||Keyboard.FocusedElement is TextBox or ComboBox||Keyboard.Modifiers!=ModifierKeys.Control)return;
@@ -41,7 +41,7 @@ public partial class PhotoGradePageView:UserControl
  }
  private void Detach(bool cancel)
  {
-  viewingWindow?.Close();developedRecipeWindow?.Close();var presets=r53PresetCancellation;r53PresetCancellation=null;presets?.Cancel();StopMaskOverlay();CancelMaskStroke();r53MultiWindow?.Close();r53ResourceWindow?.Close();
+  ExitViewingTable();developedRecipeWindow?.Close();var presets=r53PresetCancellation;r53PresetCancellation=null;presets?.Cancel();StopMaskOverlay();CancelMaskStroke();r53MultiWindow?.Close();r53ResourceWindow?.Close();
   if(model is not null){PropertyChangedEventManager.RemoveHandler(model.Editor,MaskEditorChanged,string.Empty);PropertyChangedEventManager.RemoveHandler(model.Editor,R54EditorChanged,string.Empty);}
   ReleaseR53Compare();closeR53Inspection?.Invoke();
   if(model is not null){PropertyChangedEventManager.RemoveHandler(model,Changed,string.Empty);if(cancel){model.CancelFramePhotoPreviews();model.ExitInstantPresentationForLifecycle();}}
@@ -59,7 +59,7 @@ public partial class PhotoGradePageView:UserControl
  private void ZoomOut(object sender,RoutedEventArgs e)=>PhotoViewport.State.SetZoom(PhotoViewport.State.Zoom/1.25);
  private void ZoomIn(object sender,RoutedEventArgs e)=>PhotoViewport.State.SetZoom(PhotoViewport.State.Zoom*1.25);
  private void PhotoWheel(object sender,MouseWheelEventArgs e){PhotoViewport.State.ZoomAbout(e.GetPosition(PhotoViewport),e.Delta>0?1.15:1/1.15);e.Handled=true;}
- private async void PhotoDown(object sender,MouseButtonEventArgs e){if(model?.Editor.IsSampling==true){await SampleR54ColorAsync(e.GetPosition(PhotoViewport));e.Handled=true;return;}if(CropDown(e.GetPosition(PhotoViewport))){e.Handled=true;return;}if(BeginMask(e.GetPosition(PhotoViewport))){e.Handled=true;return;}if(activeTool=="缩放"){PhotoViewport.State.ZoomAbout(e.GetPosition(PhotoViewport),Keyboard.Modifiers==ModifierKeys.Alt?.8:1.25);return;}if(e.ClickCount==2){PhotoViewport.State.Fit();return;}panStart=e.GetPosition(PhotoViewport);PhotoViewport.CaptureMouse();}
+ private async void PhotoDown(object sender,MouseButtonEventArgs e){if(activeTool=="白平衡吸管"){SampleR55WhiteBalance(e.GetPosition(PhotoViewport));e.Handled=true;return;}if(model?.Editor.IsSampling==true){await SampleR54ColorAsync(e.GetPosition(PhotoViewport));e.Handled=true;return;}if(CropDown(e.GetPosition(PhotoViewport))){e.Handled=true;return;}if(BeginMask(e.GetPosition(PhotoViewport))){e.Handled=true;return;}if(activeTool=="缩放"){PhotoViewport.State.ZoomAbout(e.GetPosition(PhotoViewport),Keyboard.Modifiers==ModifierKeys.Alt?.8:1.25);return;}if(e.ClickCount==2){PhotoViewport.State.Fit();return;}panStart=e.GetPosition(PhotoViewport);PhotoViewport.CaptureMouse();}
  private void PhotoMove(object sender,MouseEventArgs e){if(CropMove(e.GetPosition(PhotoViewport))){e.Handled=true;return;}if(MoveMask(e.GetPosition(PhotoViewport))){e.Handled=true;return;}if(panStart is{} start&&e.LeftButton==MouseButtonState.Pressed){var next=e.GetPosition(PhotoViewport);PhotoViewport.State.PanBy(next-start);panStart=next;}}
  private void PhotoUp(object sender,MouseButtonEventArgs e){if(CropUp()){e.Handled=true;return;}if(EndMask()){e.Handled=true;return;}panStart=null;PhotoViewport.ReleaseMouseCapture();}
  private void EditingModeChanged(object sender,SelectionChangedEventArgs e)
@@ -94,7 +94,7 @@ public partial class PhotoGradePageView:UserControl
  private async void OpenExport(object sender,RoutedEventArgs e){if(model is null)return;await model.PrepareR53MainExportAsync();var window=new DarkroomExportDialog(model){Owner=Window.GetWindow(this)};window.ShowDialog();}
  private void Changed(object? sender,PropertyChangedEventArgs e)
  {
-  if(e.PropertyName is nameof(ReferenceColorWorkspaceViewModel.ActiveTarget) or nameof(ReferenceColorWorkspaceViewModel.IsLoading) or nameof(ReferenceColorWorkspaceViewModel.IsLightPrintLocked)){developedRecipeWindow?.Close();r54Graph?.RefreshDevelopedStage();}
+  if(e.PropertyName is nameof(ReferenceColorWorkspaceViewModel.ActiveTarget) or nameof(ReferenceColorWorkspaceViewModel.IsLoading) or nameof(ReferenceColorWorkspaceViewModel.IsLightPrintLocked)){developedRecipeWindow?.Close();if(developedSummary is not null){RightPanel.Children.Remove(developedSummary);developedSummary=null;}r54Graph?.RefreshDevelopedStage();}
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.Layout)&&!savingPanelLayout){RestorePanelLayout();ApplyR53Layout();}
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.R53Professional))ApplyR53Layout();
   if(e.PropertyName==nameof(ReferenceColorWorkspaceViewModel.R53SaveStatus)&&model?.R53SaveStatus=="已保存"&&EditModes.SelectedIndex==1)Dispatcher.BeginInvoke(new Action(()=>{if(IsVisible&&EditModes.SelectedIndex==1)model?.RequestLightPrintPreview();}));

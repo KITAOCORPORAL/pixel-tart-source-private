@@ -20,19 +20,24 @@ public partial class PhotoGradePageView
         PreviewKeyDown+=async(_,e)=>
         {
             if(Keyboard.FocusedElement is System.Windows.Controls.Primitives.TextBoxBase or PasswordBox or ComboBox || model is null)return;
+            if(Keyboard.Modifiers==ModifierKeys.Control&&e.Key==Key.L){await ToggleViewingTableAsync();e.Handled=true;return;}
+            if(ViewingMode){if(viewingTable!.HandleShortcut(e.Key,Keyboard.Modifiers))e.Handled=true;return;}
             if(r54Graph?.IsKeyboardFocusWithin==true&&(e.Key is Key.F2 or Key.Delete||Keyboard.Modifiers==ModifierKeys.Control&&e.Key==Key.D)){r54Graph.ExecuteGraphKey(e.Key,Keyboard.Modifiers);e.Handled=true;return;}
             if(Keyboard.Modifiers==(ModifierKeys.Control|ModifierKeys.Alt)&&e.Key==Key.G){model.CaptureR54Still();r53ResourceTab="剧照";RenderR53Resources();e.Handled=true;return;}
             if(Keyboard.Modifiers==ModifierKeys.Control&&(e.Key is Key.D1 or Key.D2)){model.R53Professional=e.Key==Key.D2;ApplyR53Layout();EditModes.SelectedIndex=0;e.Handled=true;return;}
             if(Keyboard.Modifiers==ModifierKeys.Shift&&e.Key==Key.H){if(model.Editor.SelectedAdjustmentNode?.Type==ColorStudioNodeType.ColorRange)model.Editor.ShowSelection=!model.Editor.ShowSelection;e.Handled=true;return;}
             if(Keyboard.Modifiers==ModifierKeys.Shift&&e.Key==Key.N){R53ToggleNodes(this,new());e.Handled=true;return;}
+            if(Keyboard.Modifiers==ModifierKeys.Shift&&e.Key==Key.W){activeTool="白平衡吸管";ToolLabel.Text=activeTool;PhotoViewport.Cursor=Cursors.Cross;e.Handled=true;return;}
             if(Keyboard.Modifiers!=ModifierKeys.None)return;
             if(activeTool=="画笔"&&(e.Key is Key.X or Key.OemOpenBrackets or Key.OemCloseBrackets)){if(e.Key==Key.X)maskErasing=!maskErasing;else maskRadius=Math.Clamp(maskRadius*(e.Key==Key.OemOpenBrackets?.8:1.25),.002,.5);maskPanelRaw=null;ConfigureMaskPanel();e.Handled=true;}
-            else if(e.Key==Key.W&&r54SelectedStill is not null){R54CompareStill(r54SelectedStill);e.Handled=true;}
+            else if(e.Key==Key.W){if(r54SelectedStill is not null)R54CompareStill(r54SelectedStill);else model.Editor.ViewMode="左右对比";e.Handled=true;}
+            else if(e.Key==Key.B&&activeTool!="画笔"){r53CompareHeld=true;model.Editor.HoldOriginal(true);e.Handled=true;}
             else if(ExecuteR53PointerShortcut(e.Key)){e.Handled=true;}
             else if(e.Key==Key.F2&&FilmstripArea.IsKeyboardFocusWithin){await model.CreateR53VariantAsync(true);e.Handled=true;}
             else if(e.Key==Key.F3&&FilmstripArea.IsKeyboardFocusWithin){await model.CreateR53VariantAsync(false);e.Handled=true;}
             else if(e.Key==Key.Escape){CancelMaskStroke();if(model.Editor.IsSampling)model.Editor.CancelSamplingCommand.Execute(null);r53MultiWindow?.Close();closeR53Inspection?.Invoke();e.Handled=true;}
         };
+        PreviewKeyUp+=(_,e)=>{if(e.Key==Key.B&&r53CompareHeld){ReleaseR53Compare();e.Handled=true;}};
         Loaded+=(_,_)=>{var window=Window.GetWindow(this);ApplyR53Layout();if(ReferenceEquals(window,r53Owner))return;if(r53Owner is not null)r53Owner.Deactivated-=R53WindowDeactivated;r53Owner=window;if(r53Owner is not null)r53Owner.Deactivated+=R53WindowDeactivated;};
         Unloaded+=(_,_)=>{ReleaseR53Compare();closeR53Inspection?.Invoke();if(r53Owner is not null)r53Owner.Deactivated-=R53WindowDeactivated;r53Owner=null;};
     }
@@ -40,7 +45,7 @@ public partial class PhotoGradePageView
     {
         if(model is null)return false;
         if(key==Key.V){SelectTool(this,new());return true;}if(key==Key.H){HandTool(this,new());return true;}if(key==Key.Z){ZoomTool(this,new());return true;}if(key==Key.C){CropTool(this,new());return true;}
-        if(key==Key.B){R53Brush(this,new());return true;}
+        if(key==Key.B&&activeTool=="画笔"){R53Brush(this,new());return true;}
         if(key==Key.Oem5){model.Editor.ViewMode=model.Editor.ViewMode=="原片"?"仿色结果":"原片";return true;}
         return false;
     }
@@ -80,7 +85,7 @@ public partial class PhotoGradePageView
         if(!r53FilmCollapsed&&model?.ActiveTarget?.VariantsExpanded==true)R53FilmRow.Height=GridLength.Auto;
         R53SimpleMode.Background=new SolidColorBrush(professional?Color.FromRgb(25,25,27):Color.FromRgb(48,68,62));R53ProMode.Background=new SolidColorBrush(professional?Color.FromRgb(48,68,62):Color.FromRgb(25,25,27));
         HistogramPanel.Visibility=EditModes.SelectedIndex==4?Visibility.Collapsed:Visibility.Visible;HistogramRow.Height=new GridLength(EditModes.SelectedIndex==4?0:98);
-        ApplyR53ParameterHierarchy(professional,film);
+        ApplyR53ParameterHierarchy(professional,film);ApplyViewingHostLayout();
     }
     private void R53ParameterCategory(object sender,RoutedEventArgs e)
     {
