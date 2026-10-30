@@ -58,3 +58,5 @@ B D80014：首次V2真实decode崩溃0xC0000005（惰性cameraMultipler在contex
 
 ## 交付结论
 技术门禁：家庭small等价/一条full像素与I/O/BT补丁/D80014V2链有实际进展；最终hardened caller full发布host范围、跨设备首差、whole20MP均未越界宣称完成。旧家庭source/build/resources不动。技术通过不等于代码或资源分发许可；继承第八批GPL/CC BY-SA/厂家数据边界，未提前注册产品、没合产品分支。RAW/私人图/大缓冲/外部引擎资源只本地。下一批最有价值工作：明确授权再一次最终caller full预算实跑，以及拿到公司small raw才能做首差归因；不扩stock/B/seed/曲线/WB余量。
+
+提交后V2源码字节检查：全部工作树hash仍等于实测recipe；Git LF blob与Windows CRLF字节范围已单独记录v2-checkout-bytes.json，不把换行存储区别当数学漂移，也不重写旧recipe。家庭研究技术与许可准入结论不变。

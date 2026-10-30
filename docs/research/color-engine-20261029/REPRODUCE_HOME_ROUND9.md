@@ -61,3 +61,6 @@ python -O tools/color-research-decoder/test_hardened_contract.py -v
 修复的惰性WB值快照会更新source/implementation hash，新V2 recipe自含；不得把旧V2 identity改写成新版。取消home脚本已在固定本机路径执行一次；复跑须新输出/报告名，不覆盖。cancel实测在unpack后检查点，未宣称全部阶段可抢占。
 
 跨设备：公司private RGBA16没在家，不可从SHA反推出首差。拿到合法same-input whole/stream输出后在行级对照先记count/first位置，不调阈值。home whole20MP因publicABI host下界>512MiB拒绝，无一次强制upload。
+
+### V2源码字节与Git换行
+此批recipe锁定实际Windows工作树字节。提交后逐项核对：Program.cs按-text保留实测字节；其他既有文件Git blob为LF、Windows工作树为CRLF，在本机core.autocrlf=true下可精确重建，全部记录hash匹配。详见home-round9/v2-checkout-bytes.json。不能把Git blob LF哈希直接与工作树CRLF哈希比较后宣称算法变动。不同系统/路径重建DLL会改变依赖身份，必须新建变体recipe，不能覆写旧recipe来假装兼容。

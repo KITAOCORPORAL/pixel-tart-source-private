@@ -1,0 +1,108 @@
+{
+  "version": "HomeV2SourceCheckoutBytesV1",
+  "recipeSourceDigestScope": "actual Windows working-tree bytes at execution time, not canonical Git LF blobs",
+  "gitAutoCrlf": "true",
+  "records": [
+    {
+      "path": "tools/color-research-decoder/Program.cs",
+      "expected": "04B8A9BE1BD3D561AFFF9D7D9098339033B3FFF9256AA167F944DAC162AE62D4",
+      "workingTreeHash": "04B8A9BE1BD3D561AFFF9D7D9098339033B3FFF9256AA167F944DAC162AE62D4",
+      "gitBlobHash": "04B8A9BE1BD3D561AFFF9D7D9098339033B3FFF9256AA167F944DAC162AE62D4",
+      "gitBlobEqualsRecorded": true,
+      "windowsCrlfReconstructionEqualsRecorded": true,
+      "pass": true
+    },
+    {
+      "path": "tools/color-research-decoder/ResearchContract.cs",
+      "expected": "CA7F7F1358568016A3163F294DF8B96FBB7695BC5CD7C976CDA6F4E2CC1AC405",
+      "workingTreeHash": "CA7F7F1358568016A3163F294DF8B96FBB7695BC5CD7C976CDA6F4E2CC1AC405",
+      "gitBlobHash": "1E6BE01B3717CA690EE8EEB3921278067A3A19C45B4F16AB514390B411AAC9E3",
+      "gitBlobEqualsRecorded": false,
+      "windowsCrlfReconstructionEqualsRecorded": true,
+      "pass": true
+    },
+    {
+      "path": "tools/color-research-decoder/ResearchDecoder.csproj",
+      "expected": "18D2845CFDB8AFC8B4638C8A7CD1FC4E1DAF609080C5AB667B098F6ABE51E92B",
+      "workingTreeHash": "18D2845CFDB8AFC8B4638C8A7CD1FC4E1DAF609080C5AB667B098F6ABE51E92B",
+      "gitBlobHash": "C006369DE6AAC730A6B36538994F15656482416FEB96F11C60140BCBE8236979",
+      "gitBlobEqualsRecorded": false,
+      "windowsCrlfReconstructionEqualsRecorded": true,
+      "pass": true
+    },
+    {
+      "path": "tools/color-research-decoder/effective-matrix-v1.json",
+      "expected": "D8D6CC012879EE74587EB1F3FFE61783B53F793953CD49EE3CFF1E1C8ADC0030",
+      "workingTreeHash": "D8D6CC012879EE74587EB1F3FFE61783B53F793953CD49EE3CFF1E1C8ADC0030",
+      "gitBlobHash": "7E66BA06EEDE624CEEB7413CE95C42CAF32936355914D532597106B821BD7C36",
+      "gitBlobEqualsRecorded": false,
+      "windowsCrlfReconstructionEqualsRecorded": true,
+      "pass": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/ProfessionalRawDecoder.cs",
+      "expected": "FA04CB2525D352848BC6B1E94C492FEED4A161D860D977680B01AC86D1A0F131",
+      "workingTreeHash": "FA04CB2525D352848BC6B1E94C492FEED4A161D860D977680B01AC86D1A0F131",
+      "gitBlobHash": "02612C3CBEE6BE86EA2155337F119EB60C0761F3B83F5FEF60A15BA7DEC59283",
+      "gitBlobEqualsRecorded": false,
+      "windowsCrlfReconstructionEqualsRecorded": true,
+      "pass": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/ProfessionalLibRawAdapter.cs",
+      "expected": "5A607BB073F62B89B610931E9F0D66C213A7589DD5F4147D4ACF4C7E03F4F20E",
+      "workingTreeHash": "5A607BB073F62B89B610931E9F0D66C213A7589DD5F4147D4ACF4C7E03F4F20E",
+      "gitBlobHash": "D35AC43C80619F77D54C7CF135AC4EB8F117CA65C4DECC98DE0E419B330748D5",
+      "gitBlobEqualsRecorded": false,
+      "windowsCrlfReconstructionEqualsRecorded": true,
+      "pass": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawPipeline.cs",
+      "expected": "D7977AFF8AC18EE5F8D43583C378448E636B96402BDFECDC7819ABFF94286951",
+      "workingTreeHash": "D7977AFF8AC18EE5F8D43583C378448E636B96402BDFECDC7819ABFF94286951",
+      "gitBlobHash": "7CFFCDB4BBC9946A10FC216C9B8DCA814385244698CE37CCE405609F0AD0ECA9",
+      "gitBlobEqualsRecorded": false,
+      "windowsCrlfReconstructionEqualsRecorded": true,
+      "pass": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+      "expected": "34E8893800D9C3B6D384296F23D2F4A6919981BA0077910DC75D0B1735BE08B7",
+      "workingTreeHash": "34E8893800D9C3B6D384296F23D2F4A6919981BA0077910DC75D0B1735BE08B7",
+      "gitBlobHash": "A9ED2F10B8B78E769F49487E32D50584224D006CE78566CF6CC4BA522C1CBC9C",
+      "gitBlobEqualsRecorded": false,
+      "windowsCrlfReconstructionEqualsRecorded": true,
+      "pass": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/GraphPixelAllocation.cs",
+      "expected": "F4C8EA4EE7BFBC5A7482B67730EF8F4F1C5C9E781DAEC18B6E771B0373C5D1BE",
+      "workingTreeHash": "F4C8EA4EE7BFBC5A7482B67730EF8F4F1C5C9E781DAEC18B6E771B0373C5D1BE",
+      "gitBlobHash": "DBFA4C0688500C4EA8244C35C30D7C5C4A2E700D44E6F53563C1AB4158C07B36",
+      "gitBlobEqualsRecorded": false,
+      "windowsCrlfReconstructionEqualsRecorded": true,
+      "pass": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Export/TiffExport.cs",
+      "expected": "852EC049149FC55DBCF664222A5D87897123980436C04E9C7C2C5ED99E12CB8D",
+      "workingTreeHash": "852EC049149FC55DBCF664222A5D87897123980436C04E9C7C2C5ED99E12CB8D",
+      "gitBlobHash": "196C6965EAA63C9CC6C631008842AE8172F1B7B9AC235C83FA3AD73BBC21D939",
+      "gitBlobEqualsRecorded": false,
+      "windowsCrlfReconstructionEqualsRecorded": true,
+      "pass": true
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/ControlledIcc/LcmsRgbEngine.cs",
+      "expected": "C2994B462261E884C77E89BD6B256E118E42EF9C5811970F4B2C4DACCE2F163A",
+      "workingTreeHash": "C2994B462261E884C77E89BD6B256E118E42EF9C5811970F4B2C4DACCE2F163A",
+      "gitBlobHash": "05E238FCA34CFEC8237850D7553D8E133B3AAA1A1913EF17E9143B9882DC1BAC",
+      "gitBlobEqualsRecorded": false,
+      "windowsCrlfReconstructionEqualsRecorded": true,
+      "pass": true
+    }
+  ],
+  "allMatch": true,
+  "newCheckoutRebuildNote": "Program.cs is -text preserving executed bytes; other existing tracked files use the repository Windows checkout line endings. Rebuild changes dependency hashes and must create a new variant recipe; never rewrite an old recipe to bypass identity."
+}
