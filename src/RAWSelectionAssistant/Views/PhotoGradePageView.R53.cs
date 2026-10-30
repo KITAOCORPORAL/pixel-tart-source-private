@@ -21,7 +21,7 @@ public partial class PhotoGradePageView
         {
             if(Keyboard.FocusedElement is System.Windows.Controls.Primitives.TextBoxBase or PasswordBox or ComboBox || model is null)return;
             if(Keyboard.Modifiers==ModifierKeys.Control&&e.Key==Key.L){await ToggleViewingTableAsync();e.Handled=true;return;}
-            if(ViewingMode){if(viewingTable!.HandleShortcut(e.Key,Keyboard.Modifiers))e.Handled=true;return;}
+            if(ViewingMode){if(viewingTable!.HandleShortcut(e.Key,Keyboard.Modifiers,e.IsRepeat))e.Handled=true;return;}
             if(r54Graph?.IsKeyboardFocusWithin==true&&(e.Key is Key.F2 or Key.Delete||Keyboard.Modifiers==ModifierKeys.Control&&e.Key==Key.D)){r54Graph.ExecuteGraphKey(e.Key,Keyboard.Modifiers);e.Handled=true;return;}
             if(Keyboard.Modifiers==(ModifierKeys.Control|ModifierKeys.Alt)&&e.Key==Key.G){model.CaptureR54Still();r53ResourceTab="剧照";RenderR53Resources();e.Handled=true;return;}
             if(Keyboard.Modifiers==ModifierKeys.Control&&(e.Key is Key.D1 or Key.D2)){model.R53Professional=e.Key==Key.D2;ApplyR53Layout();EditModes.SelectedIndex=0;e.Handled=true;return;}
@@ -37,7 +37,7 @@ public partial class PhotoGradePageView
             else if(e.Key==Key.F3&&FilmstripArea.IsKeyboardFocusWithin){await model.CreateR53VariantAsync(false);e.Handled=true;}
             else if(e.Key==Key.Escape){CancelMaskStroke();if(model.Editor.IsSampling)model.Editor.CancelSamplingCommand.Execute(null);r53MultiWindow?.Close();closeR53Inspection?.Invoke();e.Handled=true;}
         };
-        PreviewKeyUp+=(_,e)=>{if(e.Key==Key.B&&r53CompareHeld){ReleaseR53Compare();e.Handled=true;}};
+        PreviewKeyUp+=(_,e)=>{if(e.Key==Key.Space&&ViewingMode)viewingTable!.ReleaseSpaceForTest();if(e.Key==Key.B&&r53CompareHeld){ReleaseR53Compare();e.Handled=true;}};
         Loaded+=(_,_)=>{var window=Window.GetWindow(this);ApplyR53Layout();if(ReferenceEquals(window,r53Owner))return;if(r53Owner is not null)r53Owner.Deactivated-=R53WindowDeactivated;r53Owner=window;if(r53Owner is not null)r53Owner.Deactivated+=R53WindowDeactivated;};
         Unloaded+=(_,_)=>{ReleaseR53Compare();closeR53Inspection?.Invoke();if(r53Owner is not null)r53Owner.Deactivated-=R53WindowDeactivated;r53Owner=null;};
     }

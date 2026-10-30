@@ -75,6 +75,7 @@ public sealed partial class ReferenceColorWorkspaceViewModel
     }
     public async Task LoadSessionAsync(string path, CancellationToken token = default)
     {
+        ResetViewingFilmCompletion();
         CancelLightPrintTask(true);await LightPrintPreviewWork;ClearPhotographerPreviews();await StopComparisonAsync();
         if(_skipSessionPreparation){await LoadSessionCoreAsync(path,token);return;}
         if(_disposed||IsLoading||IsInstantGenerating||IsExporting||IsFilmTaskRunning||filmRequestPending)throw new InvalidOperationException("工作区正在处理，未开始加载项目。");ReleaseViewing();

@@ -6,6 +6,7 @@ sealed class R55MechanicalSound:System.IDisposable
 readonly string file;SoundPlayer? player;
 public R55MechanicalSound(){file=Path.Combine(Path.GetTempPath(),"guangjing-viewing-"+System.Guid.NewGuid().ToString("N")+".wav");Synthesize(file,false);try{player=new SoundPlayer(file);player.Load();}catch(System.Exception e)when(e is System.InvalidOperationException or IOException){}}
 public void Play(){try{player?.Play();}catch(System.InvalidOperationException){}}
+public void Stop()=>player?.Stop();
 public void Dispose(){player?.Stop();player?.Dispose();try{File.Delete(file);}catch(IOException){}}
     static void Synthesize(string path,bool first)
     {
