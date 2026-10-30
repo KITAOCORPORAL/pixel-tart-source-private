@@ -18,10 +18,10 @@ public sealed partial class ReferenceColorWorkspaceViewModel
   InvalidateViewingRequests();SetViewingState(ViewingTable with{Version=2,Items=items.Select((i,n)=>i with{Z=n}).ToArray()});
  }
  public void SetViewingPlacement(Guid target,Guid variant,double x,double y,double scale,double rotation)
- {var items=ViewingTable.Items.Select(i=>i.TargetId==target&&i.VariantId==variant?(i with{X=x,Y=y,Scale=scale,Rotation=rotation}).Validate():i).ToArray();SetViewingState(ViewingTable with{Items=items});}
+ {var items=ViewingTable.Items.Select(i=>i.TargetId==target&&i.VariantId==variant?(i with{X=x,Y=y,Scale=scale,Rotation=rotation}).ValidatePlacement():i).ToArray();SetViewingState(ViewingTable with{Items=items},geometryOnly:true);}
  public void ClearViewingPlacements(){ReleaseViewing();SetViewingState(ViewingTable with{Items=[]});}
  public void RemoveViewingItem(Guid target,Guid variant){InvalidateViewingRequests();SetViewingState(ViewingTable with{Items=ViewingTable.Items.Where(i=>i.TargetId!=target||i.VariantId!=variant).ToArray()});ViewingFrames=ViewingFrames.Where(f=>f.Item.TargetId!=target||f.Item.VariantId!=variant).ToArray();OnPropertyChanged(nameof(ViewingFrames));}
- public void SetViewingLight(bool enabled)=>SetViewingState(ViewingTable with{PresentationLight=enabled});
+ public void SetViewingLight(bool enabled)=>SetViewingState(ViewingTable with{PresentationLight=enabled},geometryOnly:true);
  internal void InvalidateViewingRequests(){viewingRevision++;viewingCancellation?.Cancel();}
  public void CancelViewing(){InvalidateViewingRequests();ViewingStatus="已取消载入";OnPropertyChanged(nameof(ViewingStatus));}
  public void ReleaseViewing(){CancelViewing();ViewingFrames=[];ViewingFailures=[];OnPropertyChanged(nameof(ViewingFrames));OnPropertyChanged(nameof(ViewingFailures));viewingCache.Clear();foreach(var reservation in viewingCacheReservations.Values)reservation.Dispose();viewingCacheReservations.Clear();viewingIdentities.Clear();}
@@ -32,11 +32,11 @@ public sealed partial class ReferenceColorWorkspaceViewModel
  public Task PrepareViewingTableAsync(CancellationToken token=default)=>PrepareViewingTableAsync(token,null,false);
  internal async Task PrepareViewingTableAsync(CancellationToken token,IReadOnlyList<Guid>? priorityVariants,bool visibleOnly=false)
  {
-  InvalidateViewingRequests();ViewingFrames=[];ViewingFailures=[];OnPropertyChanged(nameof(ViewingFrames));var revision=viewingRevision;using var c=CancellationTokenSource.CreateLinkedTokenSource(token);viewingCancellation=c;
+  InvalidateViewingRequests();var hadFailures=ViewingFailures.Count>0;ViewingFrames=[];ViewingFailures=[];OnPropertyChanged(nameof(ViewingFrames));if(hadFailures)OnPropertyChanged(nameof(ViewingFailures));var revision=viewingRevision;using var c=CancellationTokenSource.CreateLinkedTokenSource(token);viewingCancellation=c;
   var state=ViewingTable.Validate();var priorities=(priorityVariants??[]).ToHashSet();var items=state.Items.Where(i=>!visibleOnly||priorities.Contains(i.VariantId)).OrderByDescending(i=>priorities.Contains(i.VariantId)).ToArray();
   var frames=new List<ViewingFrame>();var failures=new List<string>();var edge=ViewingProxyEdge(state.Items.Count);
   bool Current()=>!_disposed&&revision==viewingRevision&&!c.IsCancellationRequested;
-  void Publish(){if(!Current())return;ViewingFrames=frames.ToArray();ViewingFailures=failures.ToArray();ViewingStatus=$"灯箱 {frames.Count}/{items.Length} · 失败{failures.Count} · 固定{state.Items.Count} · 中性sRGB代理";OnPropertyChanged(nameof(ViewingFrames));if(!Current())return;OnPropertyChanged(nameof(ViewingFailures));OnPropertyChanged(nameof(ViewingStatus));}
+  void Publish(){if(!Current())return;var framesChanged=ViewingFrames.Count!=frames.Count;var failuresChanged=ViewingFailures.Count!=failures.Count;if(framesChanged)ViewingFrames=frames.ToArray();if(failuresChanged)ViewingFailures=failures.ToArray();ViewingStatus=$"灯箱 {frames.Count}/{items.Length} · 失败{failures.Count} · 固定{state.Items.Count} · 中性sRGB代理";if(framesChanged)OnPropertyChanged(nameof(ViewingFrames));if(!Current())return;if(failuresChanged)OnPropertyChanged(nameof(ViewingFailures));if(!Current())return;OnPropertyChanged(nameof(ViewingStatus));}
   try{foreach(var item in items){c.Token.ThrowIfCancellationRequested();try{var image=await (ViewingRenderOverride??RenderViewingItemAsync)(item,edge,c.Token);if(!Current())return;frames.Add(new(item,image,$"代理 {image.PixelWidth}×{image.PixelHeight} · 最长边最多1600px，不是原图细节"));}catch(Exception e)when(e is IOException or InvalidOperationException or NotSupportedException or ArgumentException){if(!Current())return;failures.Add(ViewingFailurePrefix(item)+" / "+(Targets.FirstOrDefault(t=>t.Id==item.TargetId)?.FileName??"缺少目标")+"："+ViewingFailureReason(e));}Publish();await Task.Yield();}}
   catch(OperationCanceledException){if(Current()){ViewingStatus="灯箱载入已取消";OnPropertyChanged(nameof(ViewingStatus));}}
   finally{if(ReferenceEquals(viewingCancellation,c))viewingCancellation=null;}

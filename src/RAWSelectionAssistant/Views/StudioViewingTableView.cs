@@ -31,7 +31,7 @@ public sealed partial class StudioViewingTableView:DockPanel
    var viewport=workspace.ViewingTable.Viewport;var scale=viewport.Scale;var width=Math.Max(600,scroll.ViewportWidth)/scale;var height=Math.Max(400,scroll.ViewportHeight)/scale;var visible=new Rect((scroll.HorizontalOffset-viewport.X)/scale-240,(scroll.VerticalOffset-viewport.Y)/scale-180,width+480,height+360);
    var items=workspace.ViewingTable.Items.Where(i=>IntersectsItem(i,visible)).ToArray();var wanted=items.Select(i=>i.VariantId).ToHashSet();
    foreach(var id in realized.Keys.Where(id=>!wanted.Contains(id)).ToArray()){canvas.Children.Remove(realized[id]);realized[id].Child=null;realized.Remove(id);}
-   foreach(var item in items.OrderBy(i=>i.Z)){var frame=workspace.ViewingFrames.FirstOrDefault(f=>f.Item.TargetId==item.TargetId&&f.Item.VariantId==item.VariantId);if(!realized.TryGetValue(item.VariantId,out var card)){card=CreateCard(item);realized[item.VariantId]=card;canvas.Children.Add(card);}UpdateCard(card,item,frame);}
+   var frames=workspace.ViewingFrames.ToDictionary(f=>(f.Item.TargetId,f.Item.VariantId));foreach(var item in items.OrderBy(i=>i.Z)){frames.TryGetValue((item.TargetId,item.VariantId),out var frame);if(!realized.TryGetValue(item.VariantId,out var card)){card=CreateCard(item);realized[item.VariantId]=card;canvas.Children.Add(card);}UpdateCard(card,item,frame);}UpdateSelectionBorders();
   }finally{updatingViewport=false;}
  }
  private Border CreateCard(ViewingTableItem item)=>CreateR55Card(item);
@@ -42,10 +42,10 @@ public sealed partial class StudioViewingTableView:DockPanel
  private async Task RefreshAsync(bool visibleOnly)
  {
   if(closed)return;StopSlideshow();loupeMode=false;loupe.Visibility=Visibility.Collapsed;var request=BeginRequest(true);detail.Content=null;detail.Visibility=Visibility.Collapsed;UpdateCards();status.Text="准备固定变体代理…";var state=workspace.ViewingTable;var priority=realized.Keys.ToArray();
-  System.ComponentModel.PropertyChangedEventHandler changed=(_,e)=>{if(!Current(request))return;if(e.PropertyName is nameof(workspace.ViewingFrames) or nameof(workspace.ViewingFailures)){UpdateCards();if(!transientFeedback)status.Text=workspace.ViewingStatus;}};workspace.PropertyChanged+=changed;
+
   loadingBar.Visibility=Visibility.Visible;UpdateR55Chrome();try{await Dispatcher.InvokeAsync(()=>{},System.Windows.Threading.DispatcherPriority.Render);if(!Current(request))return;if(RefreshLoader is{} load)await load(request.Cancellation.Token);else await workspace.PrepareViewingTableAsync(request.Cancellation.Token,priority,visibleOnly);if(!Current(request)||!ReferenceEquals(state,workspace.ViewingTable))return;UpdateCards();selected=workspace.ViewingFrames.FirstOrDefault(f=>selection.Contains(f.Item.VariantId));UpdateR55Chrome();if(!transientFeedback)status.Text=workspace.ViewingStatus;}
   catch(Exception e)when(e is IOException or InvalidOperationException or NotSupportedException or ArgumentException or OperationCanceledException){if(Current(request))ShowFeedback(e is OperationCanceledException?"操作已取消":e.Message);}
-  finally{workspace.PropertyChanged-=changed;if(Current(request)){loadingBar.Visibility=Visibility.Collapsed;UpdateR55Chrome();}Finish(request);}
+  finally{if(Current(request)){loadingBar.Visibility=Visibility.Collapsed;UpdateR55Chrome();}Finish(request);}
  }
  private bool Current((long Revision,CancellationTokenSource Cancellation) request)=>!closed&&request.Revision==detailRevision&&!request.Cancellation.IsCancellationRequested;
  private void Finish((long Revision,CancellationTokenSource Cancellation) request){if(ReferenceEquals(detailCancellation,request.Cancellation)){detailCancellation=null;detailRequestIsLoading=false;}request.Cancellation.Dispose();}
