@@ -1,0 +1,14 @@
+VSTest 版本 18.7.0 (x64)
+
+正在启动测试执行，请稍候...
+总共 1 个测试文件与指定模式相匹配。
+  失败 FullApplicationHostedRailAndMenuOffscreenEvidence [22 s]
+  错误消息:
+   Assert.IsNotNull 失败。‘value’表达式:‘eligible’。 Real original film fixture must be pinned
+  堆栈跟踪:
+     at RAWSelectionAssistant.WpfTests.R53UiCorrectionTests.FullApplicationHostedRailAndMenuOffscreenEvidence()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+结果文件: N:/pixart/Guangjing-R55-Home-20261030/final-host2-tests\final-host2.trx
+
+失败!  - 失败:     1，通过:     0，已跳过:     0，总计:     1，持续时间: 22 s - RAWSelectionAssistant.WpfTests.dll (net10.0)

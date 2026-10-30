@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="c3466a09-ece6-48f4-9b62-1b968de0e942" name="Admin@DESKTOP-HO0JJEQ 2026-10-30 20:47:17" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-30T20:47:17.5513039+08:00" queuing="2026-10-30T20:47:17.5513041+08:00" start="2026-10-30T20:47:02.2830432+08:00" finish="2026-10-30T20:47:17.9007227+08:00" />
+  <TestSettings name="default" id="63204fcf-5763-4f1e-9f2c-b1fe21f2ba5f">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-30_20_47_17" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="db06f98a-c897-4c6c-bfd3-fb03628b704d" testId="1430ba5a-f92b-808c-9f6f-d38d78130c74" testName="ExactAuthorizedFujiRepeatabilityNoDecoderChanges" computerName="DESKTOP-HO0JJEQ" duration="00:00:14.7563364" startTime="2026-10-30T20:47:02.7601876+08:00" endTime="2026-10-30T20:47:17.5294550+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db06f98a-c897-4c6c-bfd3-fb03628b704d" />
+    <UnitTestResult executionId="53e53166-2462-4a03-81d1-d16454ce90fa" testId="1345bc2b-1aac-8757-9208-e6471b73c787" testName="StableOwnedInputPixelAndExportABFixture" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.2342618" startTime="2026-10-30T20:47:17.5364088+08:00" endTime="2026-10-30T20:47:17.7712665+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="53e53166-2462-4a03-81d1-d16454ce90fa" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ExactAuthorizedFujiRepeatabilityNoDecoderChanges" storage="n:/pixart/guangjing-r55-home-20261030/baseline-ab-testhost/rawselectionassistant.wpftests.dll" id="1430ba5a-f92b-808c-9f6f-d38d78130c74">
+      <Execution id="db06f98a-c897-4c6c-bfd3-fb03628b704d" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/baseline-ab-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.HomeR55MeasurementsTests" name="ExactAuthorizedFujiRepeatabilityNoDecoderChanges" />
+    </UnitTest>
+    <UnitTest name="StableOwnedInputPixelAndExportABFixture" storage="n:/pixart/guangjing-r55-home-20261030/baseline-ab-testhost/rawselectionassistant.wpftests.dll" id="1345bc2b-1aac-8757-9208-e6471b73c787">
+      <Execution id="53e53166-2462-4a03-81d1-d16454ce90fa" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/baseline-ab-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.HomeR55RefreshTests" name="StableOwnedInputPixelAndExportABFixture" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1430ba5a-f92b-808c-9f6f-d38d78130c74" executionId="db06f98a-c897-4c6c-bfd3-fb03628b704d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1345bc2b-1aac-8757-9208-e6471b73c787" executionId="53e53166-2462-4a03-81d1-d16454ce90fa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

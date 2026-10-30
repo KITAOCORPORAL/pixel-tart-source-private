@@ -1,0 +1,11 @@
+VSTest 版本 18.7.0 (x64)
+
+正在启动测试执行，请稍候...
+总共 1 个测试文件与指定模式相匹配。
+活动的测试运行已中止。原因: 测试主机进程崩溃 : CLR: Assert failure(PID 44972 [0x0000afac], Thread: 33704 [0x83a8]): !"Attempt to execute managed code after the .NET runtime thread state has been destroyed."
+    File: D:\a\_work\1\s\src\runtime\src\coreclr\vm\ceemain.cpp:1721 Image:
+N:\pixart\Guangjing-R55-Home-20261030\final-testhost\testhost.exe
+
+结果文件: N:/pixart/Guangjing-R55-Home-20261030/final-host4-tests\final-host4.trx
+
+测试运行已中止。

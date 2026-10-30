@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="2d0f3b3a-a091-4dca-8ae2-a8527a5fb460" name="Admin@DESKTOP-HO0JJEQ 2026-10-30 21:21:48" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-30T21:21:48.0962458+08:00" queuing="2026-10-30T21:21:48.0962461+08:00" start="2026-10-30T21:21:47.5495456+08:00" finish="2026-10-30T21:21:48.3400292+08:00" />
+  <TestSettings name="default" id="ad4f4ac5-da32-4042-862f-14d6be119cbd">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-30_21_21_48" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="360b9aba-82b4-4803-a668-44902190923e" testId="15b8bac6-dc60-8573-9b3a-911236c88574" testName="FrozenContentAndVersionRejectTamperAndLegacyDoesNotChange" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0270850" startTime="2026-10-30T21:21:48.1747678+08:00" endTime="2026-10-30T21:21:48.2019834+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="360b9aba-82b4-4803-a668-44902190923e" />
+    <UnitTestResult executionId="223ecba1-2e51-4bd4-a4be-f655f3a21c7d" testId="1d79bab9-494b-8fd4-8e58-e15a44bffeb8" testName="DisconnectMeansIdentityAndDetachedNodesPersist" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0299629" startTime="2026-10-30T21:21:48.0566195+08:00" endTime="2026-10-30T21:21:48.0872566+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="223ecba1-2e51-4bd4-a4be-f655f3a21c7d" />
+    <UnitTestResult executionId="aa13647f-bf37-42aa-a87a-f02bd93ef1ae" testId="1c7c0c70-b8fd-8967-a942-ef8bfb79408c" testName="LayoutPersistenceClampsInvalidViewport" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0107443" startTime="2026-10-30T21:21:48.0566468+08:00" endTime="2026-10-30T21:21:48.0717091+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aa13647f-bf37-42aa-a87a-f02bd93ef1ae" />
+    <UnitTestResult executionId="0b449e9f-7a42-4140-8e56-5e35f74156e4" testId="11f70bf2-ce32-8347-94f8-c065cae42d54" testName="DisabledFilmAndZeroParametersAreExactIdentity" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0157674" startTime="2026-10-30T21:21:48.0391858+08:00" endTime="2026-10-30T21:21:48.0717249+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0b449e9f-7a42-4140-8e56-5e35f74156e4" />
+    <UnitTestResult executionId="074f516e-7fc6-40ce-9b88-f23eb2c33f12" testId="1f34f9e0-74d2-8153-abb4-c4f94204ca35" testName="LatestOnlyCancelsAndRejectsStaleResultEvenIfRendererIgnoresToken" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0036967" startTime="2026-10-30T21:21:48.2330695+08:00" endTime="2026-10-30T21:21:48.2390996+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="074f516e-7fc6-40ce-9b88-f23eb2c33f12" />
+    <UnitTestResult executionId="927a77d5-04e9-46f6-acf1-525df31f85da" testId="1b033e9d-b6d3-80cd-a753-0111089a6423" testName="RotatedPlacementAndInverseHitAreConsistent" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0137508" startTime="2026-10-30T21:21:48.0391441+08:00" endTime="2026-10-30T21:21:48.0717020+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="927a77d5-04e9-46f6-acf1-525df31f85da" />
+    <UnitTestResult executionId="371654fc-2a07-47f0-865c-d666e39e580a" testId="10ddf117-5073-8da9-93f6-8bfa3525f0b8" testName="HalationIsWarmEdgeAndBloomIsIndependent" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0133650" startTime="2026-10-30T21:21:48.0567012+08:00" endTime="2026-10-30T21:21:48.0717290+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="371654fc-2a07-47f0-865c-d666e39e580a" />
+    <UnitTestResult executionId="f9e0ab87-eba5-467d-bc28-322acc3cddb3" testId="12598bec-db02-8f3b-bd8a-7956bf55437a" testName="StrongCurvesAndLevelsFallBackWithoutChangingNumericalBudget" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0003827" startTime="2026-10-30T21:21:48.2740614+08:00" endTime="2026-10-30T21:21:48.2744930+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f9e0ab87-eba5-467d-bc28-322acc3cddb3" />
+    <UnitTestResult executionId="5a81d7ef-b97d-4c68-9e40-83119c48f673" testId="17e4e542-7164-8f5b-ba7e-dd0e73b40063" testName="HalationIsLocalizedToHighlightsAndBlackStaysBlack" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0169759" startTime="2026-10-30T21:21:48.0391736+08:00" endTime="2026-10-30T21:21:48.0717005+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5a81d7ef-b97d-4c68-9e40-83119c48f673" />
+    <UnitTestResult executionId="428b9eca-ebaf-4e29-bb28-31de8dece5c1" testId="1ce84144-9900-894e-bae1-e72d103cf884" testName="RiskAdmissionSeparatesHighFrequencyFineMasksGeometryAndSpatialTools" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0037095" startTime="2026-10-30T21:21:48.2291715+08:00" endTime="2026-10-30T21:21:48.2330108+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="428b9eca-ebaf-4e29-bb28-31de8dece5c1" />
+    <UnitTestResult executionId="90ddc95d-6951-497d-b823-c8b24836196d" testId="11c815ab-9972-8e3b-ac0d-68e0281753eb" testName="GrainIsDeterministicAndSeedChangesOnlyOnExplicitChange" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0167909" startTime="2026-10-30T21:21:48.0392073+08:00" endTime="2026-10-30T21:21:48.0716782+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="90ddc95d-6951-497d-b823-c8b24836196d" />
+    <UnitTestResult executionId="930127a4-17f0-460c-98bf-848a8bd74ab9" testId="1dc05fe9-b7e4-83be-9bf8-75a6965afbf5" testName="LayoutDoesNotChangeHistoricalSerialPixelsOrOrder" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0542480" startTime="2026-10-30T21:21:48.0391507+08:00" endTime="2026-10-30T21:21:48.1083606+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="930127a4-17f0-460c-98bf-848a8bd74ab9" />
+    <UnitTestResult executionId="67e6bb5b-32c2-46f7-89c2-81a5fd89c1a7" testId="160b5457-cd8a-8e4a-8505-ffe17e0d9181" testName="FilmPipelineHonorsCancellationInsideSpatialPasses" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0245928" startTime="2026-10-30T21:21:48.0391576+08:00" endTime="2026-10-30T21:21:48.0787201+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="67e6bb5b-32c2-46f7-89c2-81a5fd89c1a7" />
+    <UnitTestResult executionId="68028bb1-e9ef-4bf2-8d72-03807515d9e7" testId="1e0cc2b2-71bf-86ad-ad7d-d5268302c5a6" testName="LegacyViewingMigratesExplicitlyAndUnknownVersionRejects" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0146791" startTime="2026-10-30T21:21:48.0391788+08:00" endTime="2026-10-30T21:21:48.0716787+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="68028bb1-e9ef-4bf2-8d72-03807515d9e7" />
+    <UnitTestResult executionId="09a269c3-1e56-4772-a8e9-7c698bbb270a" testId="1a3a1111-4c38-8c96-9d89-55e1f797f730" testName="GrainSizeIsContinuousAndTextureIsDeterministic" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0136623" startTime="2026-10-30T21:21:48.0571123+08:00" endTime="2026-10-30T21:21:48.0716781+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="09a269c3-1e56-4772-a8e9-7c698bbb270a" />
+    <UnitTestResult executionId="d99760ab-6d91-4b9d-bea7-eb99b5c8a2ff" testId="1cbe2811-b5ba-8984-becb-84766ecc9187" testName="ProceduralTexturesDoNotRepeatOnShortPeriods" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0277142" startTime="2026-10-30T21:21:48.0565757+08:00" endTime="2026-10-30T21:21:48.0849883+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d99760ab-6d91-4b9d-bea7-eb99b5c8a2ff" />
+    <UnitTestResult executionId="7a4e48ea-35a8-493e-b1ef-197baa273c7d" testId="18d4a9b1-c78a-803d-acd4-48523751ad39" testName="ConnectionsDriveActualPixelsNotListOrder" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0358684" startTime="2026-10-30T21:21:48.0391647+08:00" endTime="2026-10-30T21:21:48.0899705+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7a4e48ea-35a8-493e-b1ef-197baa273c7d" />
+    <UnitTestResult executionId="f218611b-074a-4754-8505-06bef621cfa3" testId="11180f81-d1e9-8d1c-bc78-61a9fa7fa6f5" testName="LampCurveKeepsReferenceEndpointsAndReducedMotion" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0137612" startTime="2026-10-30T21:21:48.0392010+08:00" endTime="2026-10-30T21:21:48.0717232+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f218611b-074a-4754-8505-06bef621cfa3" />
+    <UnitTestResult executionId="d1f03d60-3592-4586-8363-4d8736615423" testId="12b75aad-85a8-8882-9bba-92ef5385e54a" testName="SpatialToneReplacementDoesNotDoubleOldBiasAndAmountZero" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0067447" startTime="2026-10-30T21:21:48.2030409+08:00" endTime="2026-10-30T21:21:48.2098428+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d1f03d60-3592-4586-8363-4d8736615423" />
+    <UnitTestResult executionId="aa8f6eea-17ab-47fc-8c09-b1800eacf87f" testId="1c97dad0-8c25-82d9-a0c4-0fcb885bb98f" testName="ExactProxySamplesMatchHistoricalFullFloatProxyAllOrientations" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0057498" startTime="2026-10-30T21:21:48.2771449+08:00" endTime="2026-10-30T21:21:48.2829747+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aa8f6eea-17ab-47fc-8c09-b1800eacf87f" />
+    <UnitTestResult executionId="c9ce7a6c-325d-40b8-8a2c-03926c2f4a76" testId="14b7655c-bbec-867a-809f-0034c61e0b89" testName="InvalidPortsCycleAndBranchesRejected" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0281751" startTime="2026-10-30T21:21:48.0566025+08:00" endTime="2026-10-30T21:21:48.0854639+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c9ce7a6c-325d-40b8-8a2c-03926c2f4a76" />
+    <UnitTestResult executionId="62bbc0ba-0622-4169-9dec-2181449a96ee" testId="1b7fd733-576f-8b81-b035-fd665d3990d1" testName="FilmSettingsAndReferenceLookRoundTripThroughJson" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.1162738" startTime="2026-10-30T21:21:48.0567217+08:00" endTime="2026-10-30T21:21:48.1736206+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="62bbc0ba-0622-4169-9dec-2181449a96ee" />
+    <UnitTestResult executionId="9cdc9766-f2fd-4197-a489-610e664148c0" testId="1d6396fb-d919-84d6-84ea-87766e704198" testName="InsertDeleteAndSerializationAreExplicit" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0897908" startTime="2026-10-30T21:21:48.0566563+08:00" endTime="2026-10-30T21:21:48.1470500+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9cdc9766-f2fd-4197-a489-610e664148c0" />
+    <UnitTestResult executionId="c17f28bf-615b-43f0-aa61-48a4c52e526c" testId="1b586f03-d446-83bd-b5ec-fc92cc15cf01" testName="CacheBypassesFinalResolutionAndInvalidatesMaskGeometryAndSource" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0026573" startTime="2026-10-30T21:21:48.2713055+08:00" endTime="2026-10-30T21:21:48.2740243+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c17f28bf-615b-43f0-aa61-48a4c52e526c" />
+    <UnitTestResult executionId="1fb35b81-fbe7-41bd-aa2a-6adb1a0c5863" testId="1fa2de8b-ae27-8643-b010-1700284250aa" testName="VignetteFallsOffSmoothlyFromCenterToCorners" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0142493" startTime="2026-10-30T21:21:48.0566814+08:00" endTime="2026-10-30T21:21:48.0717407+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1fb35b81-fbe7-41bd-aa2a-6adb1a0c5863" />
+    <UnitTestResult executionId="05953d85-9872-46fe-a576-7ac1af029a93" testId="1479e48c-2bf3-87d0-a0f1-d8ae6f4336a0" testName="BloomSpreadsNeutralLightBeyondHighlight" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0131578" startTime="2026-10-30T21:21:48.0567120+08:00" endTime="2026-10-30T21:21:48.0716892+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="05953d85-9872-46fe-a576-7ac1af029a93" />
+    <UnitTestResult executionId="8afdebde-1681-425d-8fed-86fe0f7075ba" testId="11913ff2-f13d-8d48-82b7-a6f7d7d55426" testName="EmitProductCandidateSamplesForFrozenOfflineParity" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0191606" startTime="2026-10-30T21:21:48.2098834+08:00" endTime="2026-10-30T21:21:48.2291215+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8afdebde-1681-425d-8fed-86fe0f7075ba" />
+    <UnitTestResult executionId="da246468-79a6-46b8-950b-3146905fcabe" testId="141b42b4-8e7a-80de-8b02-02ffa8015cbe" testName="AnalyticModelIsContinuousNeutralAndStrengthZeroExact" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0008673" startTime="2026-10-30T21:21:48.2020930+08:00" endTime="2026-10-30T21:21:48.2030148+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="da246468-79a6-46b8-950b-3146905fcabe" />
+    <UnitTestResult executionId="9b94ca57-4729-4d3a-badb-1c3caba52aff" testId="1a5086eb-06af-818c-bbc6-cfc46b0f99af" testName="BoundedIndependentTiffOrientationRejectsMalformedAmbiguousAndAbsent" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0092877" startTime="2026-10-30T21:21:48.2830118+08:00" endTime="2026-10-30T21:21:48.2929806+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9b94ca57-4729-4d3a-badb-1c3caba52aff" />
+    <UnitTestResult executionId="bba74c33-62a1-440f-8a80-4bedd7ca462a" testId="15bd1ac2-0faf-80e7-acb8-036f2104f479" testName="ProfilesArePixelTartOwnedAndValidateBounds" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0113312" startTime="2026-10-30T21:21:48.0566905+08:00" endTime="2026-10-30T21:21:48.0717416+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bba74c33-62a1-440f-8a80-4bedd7ca462a" />
+    <UnitTestResult executionId="ed60d06e-443a-4448-a6d4-7dead6c740d1" testId="125460f0-5acc-82f7-bcb3-a39c0546d371" testName="InteractiveDependencyCacheIsExactInvalidatesByInputAndReleases" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0320388" startTime="2026-10-30T21:21:48.2391482+08:00" endTime="2026-10-30T21:21:48.2712659+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ed60d06e-443a-4448-a6d4-7dead6c740d1" />
+    <UnitTestResult executionId="493994f8-29ba-4de0-a528-b3272a4c38bf" testId="18242841-9b67-8f36-b429-73a8b5c03235" testName="CancelledGraphCacheStaysBoundedAndRetiredGenerationCannotPublish" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0019388" startTime="2026-10-30T21:21:48.2751452+08:00" endTime="2026-10-30T21:21:48.2771265+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="493994f8-29ba-4de0-a528-b3272a4c38bf" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="BoundedIndependentTiffOrientationRejectsMalformedAmbiguousAndAbsent" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1a5086eb-06af-818c-bbc6-cfc46b0f99af">
+      <Execution id="9b94ca57-4729-4d3a-badb-1c3caba52aff" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ViewingProxyTests" name="BoundedIndependentTiffOrientationRejectsMalformedAmbiguousAndAbsent" />
+    </UnitTest>
+    <UnitTest name="HalationIsWarmEdgeAndBloomIsIndependent" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="10ddf117-5073-8da9-93f6-8bfa3525f0b8">
+      <Execution id="371654fc-2a07-47f0-865c-d666e39e580a" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PixelTartFilmTests" name="HalationIsWarmEdgeAndBloomIsIndependent" />
+    </UnitTest>
+    <UnitTest name="CancelledGraphCacheStaysBoundedAndRetiredGenerationCannotPublish" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="18242841-9b67-8f36-b429-73a8b5c03235">
+      <Execution id="493994f8-29ba-4de0-a528-b3272a4c38bf" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.NodeProxyResponseTests" name="CancelledGraphCacheStaysBoundedAndRetiredGenerationCannotPublish" />
+    </UnitTest>
+    <UnitTest name="FilmSettingsAndReferenceLookRoundTripThroughJson" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1b7fd733-576f-8b81-b035-fd665d3990d1">
+      <Execution id="62bbc0ba-0622-4169-9dec-2181449a96ee" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PixelTartFilmTests" name="FilmSettingsAndReferenceLookRoundTripThroughJson" />
+    </UnitTest>
+    <UnitTest name="EmitProductCandidateSamplesForFrozenOfflineParity" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="11913ff2-f13d-8d48-82b7-a6f7d7d55426">
+      <Execution id="8afdebde-1681-425d-8fed-86fe0f7075ba" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.InstantColorComponentTests" name="EmitProductCandidateSamplesForFrozenOfflineParity" />
+    </UnitTest>
+    <UnitTest name="LampCurveKeepsReferenceEndpointsAndReducedMotion" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="11180f81-d1e9-8d1c-bc78-61a9fa7fa6f5">
+      <Execution id="f218611b-074a-4754-8505-06bef621cfa3" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R55ViewingStateTests" name="LampCurveKeepsReferenceEndpointsAndReducedMotion" />
+    </UnitTest>
+    <UnitTest name="LayoutDoesNotChangeHistoricalSerialPixelsOrOrder" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1dc05fe9-b7e4-83be-9bf8-75a6965afbf5">
+      <Execution id="930127a4-17f0-460c-98bf-848a8bd74ab9" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54GraphTests" name="LayoutDoesNotChangeHistoricalSerialPixelsOrOrder" />
+    </UnitTest>
+    <UnitTest name="DisconnectMeansIdentityAndDetachedNodesPersist" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1d79bab9-494b-8fd4-8e58-e15a44bffeb8">
+      <Execution id="223ecba1-2e51-4bd4-a4be-f655f3a21c7d" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54GraphTests" name="DisconnectMeansIdentityAndDetachedNodesPersist" />
+    </UnitTest>
+    <UnitTest name="RotatedPlacementAndInverseHitAreConsistent" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1b033e9d-b6d3-80cd-a753-0111089a6423">
+      <Execution id="927a77d5-04e9-46f6-acf1-525df31f85da" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R55ViewingStateTests" name="RotatedPlacementAndInverseHitAreConsistent" />
+    </UnitTest>
+    <UnitTest name="GrainIsDeterministicAndSeedChangesOnlyOnExplicitChange" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="11c815ab-9972-8e3b-ac0d-68e0281753eb">
+      <Execution id="90ddc95d-6951-497d-b823-c8b24836196d" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PixelTartFilmTests" name="GrainIsDeterministicAndSeedChangesOnlyOnExplicitChange" />
+    </UnitTest>
+    <UnitTest name="FilmPipelineHonorsCancellationInsideSpatialPasses" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="160b5457-cd8a-8e4a-8505-ffe17e0d9181">
+      <Execution id="67e6bb5b-32c2-46f7-89c2-81a5fd89c1a7" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PixelTartFilmTests" name="FilmPipelineHonorsCancellationInsideSpatialPasses" />
+    </UnitTest>
+    <UnitTest name="InsertDeleteAndSerializationAreExplicit" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1d6396fb-d919-84d6-84ea-87766e704198">
+      <Execution id="9cdc9766-f2fd-4197-a489-610e664148c0" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54GraphTests" name="InsertDeleteAndSerializationAreExplicit" />
+    </UnitTest>
+    <UnitTest name="CacheBypassesFinalResolutionAndInvalidatesMaskGeometryAndSource" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1b586f03-d446-83bd-b5ec-fc92cc15cf01">
+      <Execution id="c17f28bf-615b-43f0-aa61-48a4c52e526c" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.NodeProxyResponseTests" name="CacheBypassesFinalResolutionAndInvalidatesMaskGeometryAndSource" />
+    </UnitTest>
+    <UnitTest name="StrongCurvesAndLevelsFallBackWithoutChangingNumericalBudget" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="12598bec-db02-8f3b-bd8a-7956bf55437a">
+      <Execution id="f9e0ab87-eba5-467d-bc28-322acc3cddb3" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.NodeProxyResponseTests" name="StrongCurvesAndLevelsFallBackWithoutChangingNumericalBudget" />
+    </UnitTest>
+    <UnitTest name="LayoutPersistenceClampsInvalidViewport" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1c7c0c70-b8fd-8967-a942-ef8bfb79408c">
+      <Execution id="aa13647f-bf37-42aa-a87a-f02bd93ef1ae" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54GraphTests" name="LayoutPersistenceClampsInvalidViewport" />
+    </UnitTest>
+    <UnitTest name="InvalidPortsCycleAndBranchesRejected" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="14b7655c-bbec-867a-809f-0034c61e0b89">
+      <Execution id="c9ce7a6c-325d-40b8-8a2c-03926c2f4a76" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54GraphTests" name="InvalidPortsCycleAndBranchesRejected" />
+    </UnitTest>
+    <UnitTest name="LatestOnlyCancelsAndRejectsStaleResultEvenIfRendererIgnoresToken" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1f34f9e0-74d2-8153-abb4-c4f94204ca35">
+      <Execution id="074f516e-7fc6-40ce-9b88-f23eb2c33f12" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.NodeProxyResponseTests" name="LatestOnlyCancelsAndRejectsStaleResultEvenIfRendererIgnoresToken" />
+    </UnitTest>
+    <UnitTest name="ProfilesArePixelTartOwnedAndValidateBounds" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="15bd1ac2-0faf-80e7-acb8-036f2104f479">
+      <Execution id="bba74c33-62a1-440f-8a80-4bedd7ca462a" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PixelTartFilmTests" name="ProfilesArePixelTartOwnedAndValidateBounds" />
+    </UnitTest>
+    <UnitTest name="ProceduralTexturesDoNotRepeatOnShortPeriods" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1cbe2811-b5ba-8984-becb-84766ecc9187">
+      <Execution id="d99760ab-6d91-4b9d-bea7-eb99b5c8a2ff" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PixelTartFilmTests" name="ProceduralTexturesDoNotRepeatOnShortPeriods" />
+    </UnitTest>
+    <UnitTest name="AnalyticModelIsContinuousNeutralAndStrengthZeroExact" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="141b42b4-8e7a-80de-8b02-02ffa8015cbe">
+      <Execution id="da246468-79a6-46b8-950b-3146905fcabe" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.InstantColorComponentTests" name="AnalyticModelIsContinuousNeutralAndStrengthZeroExact" />
+    </UnitTest>
+    <UnitTest name="BloomSpreadsNeutralLightBeyondHighlight" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1479e48c-2bf3-87d0-a0f1-d8ae6f4336a0">
+      <Execution id="05953d85-9872-46fe-a576-7ac1af029a93" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PixelTartFilmTests" name="BloomSpreadsNeutralLightBeyondHighlight" />
+    </UnitTest>
+    <UnitTest name="HalationIsLocalizedToHighlightsAndBlackStaysBlack" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="17e4e542-7164-8f5b-ba7e-dd0e73b40063">
+      <Execution id="5a81d7ef-b97d-4c68-9e40-83119c48f673" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PixelTartFilmTests" name="HalationIsLocalizedToHighlightsAndBlackStaysBlack" />
+    </UnitTest>
+    <UnitTest name="GrainSizeIsContinuousAndTextureIsDeterministic" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1a3a1111-4c38-8c96-9d89-55e1f797f730">
+      <Execution id="09a269c3-1e56-4772-a8e9-7c698bbb270a" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PixelTartFilmTests" name="GrainSizeIsContinuousAndTextureIsDeterministic" />
+    </UnitTest>
+    <UnitTest name="RiskAdmissionSeparatesHighFrequencyFineMasksGeometryAndSpatialTools" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1ce84144-9900-894e-bae1-e72d103cf884">
+      <Execution id="428b9eca-ebaf-4e29-bb28-31de8dece5c1" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.NodeProxyResponseTests" name="RiskAdmissionSeparatesHighFrequencyFineMasksGeometryAndSpatialTools" />
+    </UnitTest>
+    <UnitTest name="LegacyViewingMigratesExplicitlyAndUnknownVersionRejects" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1e0cc2b2-71bf-86ad-ad7d-d5268302c5a6">
+      <Execution id="68028bb1-e9ef-4bf2-8d72-03807515d9e7" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R55ViewingStateTests" name="LegacyViewingMigratesExplicitlyAndUnknownVersionRejects" />
+    </UnitTest>
+    <UnitTest name="InteractiveDependencyCacheIsExactInvalidatesByInputAndReleases" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="125460f0-5acc-82f7-bcb3-a39c0546d371">
+      <Execution id="ed60d06e-443a-4448-a6d4-7dead6c740d1" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.NodeProxyResponseTests" name="InteractiveDependencyCacheIsExactInvalidatesByInputAndReleases" />
+    </UnitTest>
+    <UnitTest name="ExactProxySamplesMatchHistoricalFullFloatProxyAllOrientations" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1c97dad0-8c25-82d9-a0c4-0fcb885bb98f">
+      <Execution id="aa8f6eea-17ab-47fc-8c09-b1800eacf87f" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ViewingProxyTests" name="ExactProxySamplesMatchHistoricalFullFloatProxyAllOrientations" />
+    </UnitTest>
+    <UnitTest name="ConnectionsDriveActualPixelsNotListOrder" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="18d4a9b1-c78a-803d-acd4-48523751ad39">
+      <Execution id="7a4e48ea-35a8-493e-b1ef-197baa273c7d" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.R54GraphTests" name="ConnectionsDriveActualPixelsNotListOrder" />
+    </UnitTest>
+    <UnitTest name="VignetteFallsOffSmoothlyFromCenterToCorners" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1fa2de8b-ae27-8643-b010-1700284250aa">
+      <Execution id="1fb35b81-fbe7-41bd-aa2a-6adb1a0c5863" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PixelTartFilmTests" name="VignetteFallsOffSmoothlyFromCenterToCorners" />
+    </UnitTest>
+    <UnitTest name="FrozenContentAndVersionRejectTamperAndLegacyDoesNotChange" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="15b8bac6-dc60-8573-9b3a-911236c88574">
+      <Execution id="360b9aba-82b4-4803-a668-44902190923e" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.InstantColorComponentTests" name="FrozenContentAndVersionRejectTamperAndLegacyDoesNotChange" />
+    </UnitTest>
+    <UnitTest name="SpatialToneReplacementDoesNotDoubleOldBiasAndAmountZero" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="12b75aad-85a8-8882-9bba-92ef5385e54a">
+      <Execution id="d1f03d60-3592-4586-8363-4d8736615423" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.InstantColorComponentTests" name="SpatialToneReplacementDoesNotDoubleOldBiasAndAmountZero" />
+    </UnitTest>
+    <UnitTest name="DisabledFilmAndZeroParametersAreExactIdentity" storage="n:/pixart/guangjing-r55-home-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="11f70bf2-ce32-8347-94f8-c065cae42d54">
+      <Execution id="0b449e9f-7a42-4140-8e56-5e35f74156e4" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PixelTartFilmTests" name="DisabledFilmAndZeroParametersAreExactIdentity" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="15b8bac6-dc60-8573-9b3a-911236c88574" executionId="360b9aba-82b4-4803-a668-44902190923e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d79bab9-494b-8fd4-8e58-e15a44bffeb8" executionId="223ecba1-2e51-4bd4-a4be-f655f3a21c7d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c7c0c70-b8fd-8967-a942-ef8bfb79408c" executionId="aa13647f-bf37-42aa-a87a-f02bd93ef1ae" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11f70bf2-ce32-8347-94f8-c065cae42d54" executionId="0b449e9f-7a42-4140-8e56-5e35f74156e4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f34f9e0-74d2-8153-abb4-c4f94204ca35" executionId="074f516e-7fc6-40ce-9b88-f23eb2c33f12" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b033e9d-b6d3-80cd-a753-0111089a6423" executionId="927a77d5-04e9-46f6-acf1-525df31f85da" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10ddf117-5073-8da9-93f6-8bfa3525f0b8" executionId="371654fc-2a07-47f0-865c-d666e39e580a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12598bec-db02-8f3b-bd8a-7956bf55437a" executionId="f9e0ab87-eba5-467d-bc28-322acc3cddb3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17e4e542-7164-8f5b-ba7e-dd0e73b40063" executionId="5a81d7ef-b97d-4c68-9e40-83119c48f673" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ce84144-9900-894e-bae1-e72d103cf884" executionId="428b9eca-ebaf-4e29-bb28-31de8dece5c1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11c815ab-9972-8e3b-ac0d-68e0281753eb" executionId="90ddc95d-6951-497d-b823-c8b24836196d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1dc05fe9-b7e4-83be-9bf8-75a6965afbf5" executionId="930127a4-17f0-460c-98bf-848a8bd74ab9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="160b5457-cd8a-8e4a-8505-ffe17e0d9181" executionId="67e6bb5b-32c2-46f7-89c2-81a5fd89c1a7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e0cc2b2-71bf-86ad-ad7d-d5268302c5a6" executionId="68028bb1-e9ef-4bf2-8d72-03807515d9e7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a3a1111-4c38-8c96-9d89-55e1f797f730" executionId="09a269c3-1e56-4772-a8e9-7c698bbb270a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1cbe2811-b5ba-8984-becb-84766ecc9187" executionId="d99760ab-6d91-4b9d-bea7-eb99b5c8a2ff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18d4a9b1-c78a-803d-acd4-48523751ad39" executionId="7a4e48ea-35a8-493e-b1ef-197baa273c7d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11180f81-d1e9-8d1c-bc78-61a9fa7fa6f5" executionId="f218611b-074a-4754-8505-06bef621cfa3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12b75aad-85a8-8882-9bba-92ef5385e54a" executionId="d1f03d60-3592-4586-8363-4d8736615423" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c97dad0-8c25-82d9-a0c4-0fcb885bb98f" executionId="aa8f6eea-17ab-47fc-8c09-b1800eacf87f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14b7655c-bbec-867a-809f-0034c61e0b89" executionId="c9ce7a6c-325d-40b8-8a2c-03926c2f4a76" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b7fd733-576f-8b81-b035-fd665d3990d1" executionId="62bbc0ba-0622-4169-9dec-2181449a96ee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d6396fb-d919-84d6-84ea-87766e704198" executionId="9cdc9766-f2fd-4197-a489-610e664148c0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b586f03-d446-83bd-b5ec-fc92cc15cf01" executionId="c17f28bf-615b-43f0-aa61-48a4c52e526c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1fa2de8b-ae27-8643-b010-1700284250aa" executionId="1fb35b81-fbe7-41bd-aa2a-6adb1a0c5863" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1479e48c-2bf3-87d0-a0f1-d8ae6f4336a0" executionId="05953d85-9872-46fe-a576-7ac1af029a93" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11913ff2-f13d-8d48-82b7-a6f7d7d55426" executionId="8afdebde-1681-425d-8fed-86fe0f7075ba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="141b42b4-8e7a-80de-8b02-02ffa8015cbe" executionId="da246468-79a6-46b8-950b-3146905fcabe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a5086eb-06af-818c-bbc6-cfc46b0f99af" executionId="9b94ca57-4729-4d3a-badb-1c3caba52aff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15bd1ac2-0faf-80e7-acb8-036f2104f479" executionId="bba74c33-62a1-440f-8a80-4bedd7ca462a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="125460f0-5acc-82f7-bcb3-a39c0546d371" executionId="ed60d06e-443a-4448-a6d4-7dead6c740d1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18242841-9b67-8f36-b429-73a8b5c03235" executionId="493994f8-29ba-4de0-a528-b3272a4c38bf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="32" executed="32" passed="32" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 N:/pixart/Guangjing-R55-Home-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 28，Scope: MethodLevel)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

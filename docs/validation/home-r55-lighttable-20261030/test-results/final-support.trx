@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="c4d620d1-7c07-42e9-affb-1497b304e181" name="Admin@DESKTOP-HO0JJEQ 2026-10-30 21:41:40" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-30T21:41:40.1764256+08:00" queuing="2026-10-30T21:41:40.1764259+08:00" start="2026-10-30T21:41:38.3519280+08:00" finish="2026-10-30T21:41:48.4745267+08:00" />
+  <TestSettings name="default" id="f215c901-28e2-496d-97bf-b6e42c666540">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-30_21_41_40" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="8875d08a-b87e-40cf-a211-d70453a0a9ba" testId="1767b54a-51fc-818a-8a53-8006735ffa68" testName="RetryOnlyFailedItemKeepsSuccessfulFramesAndScrollCancelsObsoleteWork" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0879564" startTime="2026-10-30T21:41:47.6432871+08:00" endTime="2026-10-30T21:41:47.7313121+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8875d08a-b87e-40cf-a211-d70453a0a9ba" />
+    <UnitTestResult executionId="b837f4ba-36ca-4c09-8840-b7a5fe400b60" testId="1682cea8-3ce1-8aa4-908c-f27abdba2b14" testName="LostCaptureFinalizesOnceStableOrderingAndCrossProjectHistoryReset" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.2035485" startTime="2026-10-30T21:41:46.2646054+08:00" endTime="2026-10-30T21:41:46.4682347+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b837f4ba-36ca-4c09-8840-b7a5fe400b60" />
+    <UnitTestResult executionId="512a689a-52f4-426e-afc1-251a87705c72" testId="13eafbe0-ada0-82ca-b95e-4399f729d591" testName="PinArrangeFilmCancelAndSaveActualProject" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.1762009" startTime="2026-10-30T21:41:40.0282046+08:00" endTime="2026-10-30T21:41:40.2045124+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="512a689a-52f4-426e-afc1-251a87705c72" />
+    <UnitTestResult executionId="1b5fda2c-aba2-4679-90d3-8d8fe18770a0" testId="1432886d-388a-8a0e-b0e5-726b150a3535" testName="FrozenStageIdentitySurvivesSelectionWindowAndReshoot" computerName="DESKTOP-HO0JJEQ" duration="00:00:02.8247939" startTime="2026-10-30T21:41:40.8618139+08:00" endTime="2026-10-30T21:41:43.6868466+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1b5fda2c-aba2-4679-90d3-8d8fe18770a0" />
+    <UnitTestResult executionId="959d3ccb-0d6c-4cce-86d7-b17f7a1f053f" testId="17fc4ddb-56a4-8c75-aea0-f6dae1a227c5" testName="RealUniformImageMappingLandscapePortraitSquareRotatedViewport" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0447239" startTime="2026-10-30T21:41:46.2197572+08:00" endTime="2026-10-30T21:41:46.2645665+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="959d3ccb-0d6c-4cce-86d7-b17f7a1f053f" />
+    <UnitTestResult executionId="ebeb9c6f-5c87-4156-bb30-a7fc26e3bce8" testId="1d81fb92-4319-8302-8292-9e7519954dce" testName="TwoVariantsOneSourceRetryKeepsOtherFailure" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0025514" startTime="2026-10-30T21:41:47.7313560+08:00" endTime="2026-10-30T21:41:47.7339633+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ebeb9c6f-5c87-4156-bb30-a7fc26e3bce8" />
+    <UnitTestResult executionId="b1a2bf55-0410-4754-8930-3c70004f543f" testId="1da4b944-b565-82fe-9458-f628c372c66b" testName="NonAdjacentSelectionComparisonAndInvalidCountsHaveVisibleFeedback" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0468697" startTime="2026-10-30T21:41:45.9611816+08:00" endTime="2026-10-30T21:41:46.0081396+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b1a2bf55-0410-4754-8930-3c70004f543f" />
+    <UnitTestResult executionId="f7fab3bc-172e-46c9-a8c1-da485e0cc61b" testId="1e673d6a-6cbb-8f93-af70-89446281e82f" testName="StageSelectionAndRecipeWindowRetireOnVariantSwitch" computerName="DESKTOP-HO0JJEQ" duration="00:00:02.0800660" startTime="2026-10-30T21:41:43.6872908+08:00" endTime="2026-10-30T21:41:45.7675394+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f7fab3bc-172e-46c9-a8c1-da485e0cc61b" />
+    <UnitTestResult executionId="6b243a0f-ede4-49b4-b629-7228f789a645" testId="1f31769c-dd82-82bc-b64f-f777638b4352" testName="IndependentLayersKeepPhotoGeometryAndSelectionOutOfLabel" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.6397083" startTime="2026-10-30T21:41:38.7991774+08:00" endTime="2026-10-30T21:41:39.4514407+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6b243a0f-ede4-49b4-b629-7228f789a645" />
+    <UnitTestResult executionId="ea25deeb-8a4a-4bd2-81d0-f12c81b3a771" testId="11ea7541-ac5d-807c-af0b-404f9a935a8b" testName="SaveDiscardCancelRetainsThreeDistinctAccessibleActions" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0057798" startTime="2026-10-30T21:41:48.3893107+08:00" endTime="2026-10-30T21:41:48.3951535+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ea25deeb-8a4a-4bd2-81d0-f12c81b3a771" />
+    <UnitTestResult executionId="6923506b-24af-4cf7-ac69-17fa28075d6f" testId="11f0e438-6eab-8e1e-a6eb-783dd960d341" testName="VirtualCardsStayBoundedWithHundredPinnedPlaceholders" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0367387" startTime="2026-10-30T21:41:47.5924482+08:00" endTime="2026-10-30T21:41:47.6292496+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6923506b-24af-4cf7-ac69-17fa28075d6f" />
+    <UnitTestResult executionId="d85d9186-0973-4fc0-ace7-fe00d5c5ab17" testId="15ebd012-35ab-82a2-943c-21dc0dd9cfed" testName="OwnedPortraitLoupeAndSlideshowProductionScreens" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.2124477" startTime="2026-10-30T21:41:39.7902628+08:00" endTime="2026-10-30T21:41:40.0028040+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d85d9186-0973-4fc0-ace7-fe00d5c5ab17" />
+    <UnitTestResult executionId="a46bffb8-3877-46b2-9b13-b9160e41149b" testId="140e0389-35d6-8553-b2c2-b36c5723f6c8" testName="FullHundredFilmSavesNewVariantWithoutDroppingPinnedItems" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0200575" startTime="2026-10-30T21:41:47.3142738+08:00" endTime="2026-10-30T21:41:47.3344026+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a46bffb8-3877-46b2-9b13-b9160e41149b" />
+    <UnitTestResult executionId="e59c474a-98cd-4a98-a7a2-2f55f970f6fa" testId="14f2bd4f-614f-887a-a27e-5f2632ed3278" testName="SidebarSourcePreflightAndFilterFollowCurrentSelection" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0410724" startTime="2026-10-30T21:41:46.4682798+08:00" endTime="2026-10-30T21:41:46.5094320+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e59c474a-98cd-4a98-a7a2-2f55f970f6fa" />
+    <UnitTestResult executionId="46b45b02-9d45-4e3b-bdea-5dc72ed94f59" testId="1345bc2b-1aac-8757-9208-e6471b73c787" testName="StableOwnedInputPixelAndExportABFixture" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0247164" startTime="2026-10-30T21:41:40.0028909+08:00" endTime="2026-10-30T21:41:40.0281732+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="46b45b02-9d45-4e3b-bdea-5dc72ed94f59" />
+    <UnitTestResult executionId="3e87bd56-c0fd-4d68-91b9-fd9305907e7f" testId="1c3f0f99-579c-8421-89e7-5ddf7aa389c9" testName="CancelKeepsCompletedFrameAndGestureUndoRestoresLayout" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0285448" startTime="2026-10-30T21:41:47.2856087+08:00" endTime="2026-10-30T21:41:47.3142384+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3e87bd56-c0fd-4d68-91b9-fd9305907e7f" />
+    <UnitTestResult executionId="08c0daa4-83f2-4588-9190-453d12cfeaf0" testId="1fdca7a7-733e-8850-a402-5bbf6bf3f1a3" testName="ReverseDetailCompletionKeepsBAndStopRejectsInFlightSlide" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0148369" startTime="2026-10-30T21:41:47.5624494+08:00" endTime="2026-10-30T21:41:47.5773564+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="08c0daa4-83f2-4588-9190-453d12cfeaf0" />
+    <UnitTestResult executionId="23cd06b4-d448-4607-8995-c5e329cfc448" testId="1f58a4f9-9519-83b7-aabc-6469b062a249" testName="SidebarsPreflightAndLampKeepFrozenRecipe" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0374875" startTime="2026-10-30T21:41:47.4908995+08:00" endTime="2026-10-30T21:41:47.5284633+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="23cd06b4-d448-4607-8995-c5e329cfc448" />
+    <UnitTestResult executionId="b57e25c3-7db0-4ce2-aaee-2b7112ee166b" testId="14bcd9a3-5e9a-813f-906b-1dae4ee5a500" testName="FullShellKeepsPrimaryNavigationAndContentTemplates" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.6551692" startTime="2026-10-30T21:41:47.7339898+08:00" endTime="2026-10-30T21:41:48.3892772+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b57e25c3-7db0-4ce2-aaee-2b7112ee166b" />
+    <UnitTestResult executionId="776d76cc-9550-4fe4-b7e9-fe00242e10c8" testId="14ddacce-6914-8fb4-a686-565c69ed9cab" testName="LayoutViewportOrderPreferencesAndProjectReopen" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.1563070" startTime="2026-10-30T21:41:47.3344471+08:00" endTime="2026-10-30T21:41:47.4908501+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="776d76cc-9550-4fe4-b7e9-fe00242e10c8" />
+    <UnitTestResult executionId="8e4bb73a-c65d-468d-b251-091481f568b2" testId="1b0447bf-d36f-87a0-b94b-f6b3bed8541a" testName="PauseEachSlidePhaseRejectsLateImageAndSoundAndSpaceRepeat" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.2114342" startTime="2026-10-30T21:41:46.0081786+08:00" endTime="2026-10-30T21:41:46.2197081+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8e4bb73a-c65d-468d-b251-091481f568b2" />
+    <UnitTestResult executionId="14f33a62-c585-43ce-9201-c5d6e5c9d4c2" testId="12c4f650-3fd2-8455-8ee7-c889667ca6a5" testName="DetailThenCompareRejectsLateSuccessAndLateError" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0337803" startTime="2026-10-30T21:41:47.5285067+08:00" endTime="2026-10-30T21:41:47.5624090+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="14f33a62-c585-43ce-9201-c5d6e5c9d4c2" />
+    <UnitTestResult executionId="6102476b-deb6-4052-9c20-533afc6dc015" testId="130df51b-471a-835d-b3c4-8614717f1728" testName="WorkspaceProgressiveLatestSnapshotAndCancellationAreDeterministic" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0023728" startTime="2026-10-30T21:41:47.5899857+08:00" endTime="2026-10-30T21:41:47.5924207+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6102476b-deb6-4052-9c20-533afc6dc015" />
+    <UnitTestResult executionId="00cc873b-2b8d-4a44-b6c3-3f90c20bac45" testId="1a0a04b8-f4c1-8022-98d7-4cf0150bb7a5" testName="ReplacementAndCanceledViewingKeepPinnedIdentity" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.4737834" startTime="2026-10-30T21:41:40.3879049+08:00" endTime="2026-10-30T21:41:40.8617780+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="00cc873b-2b8d-4a44-b6c3-3f90c20bac45" />
+    <UnitTestResult executionId="1d9d85e6-75ec-48ea-836b-4bba8d5aa785" testId="16a971f6-6060-80c9-bc65-05a5286d3695" testName="ExistingTaskCenterTracksFilmBackendCompletion" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.1645101" startTime="2026-10-30T21:41:40.2232864+08:00" endTime="2026-10-30T21:41:40.3878648+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1d9d85e6-75ec-48ea-836b-4bba8d5aa785" />
+    <UnitTestResult executionId="d3885334-9193-4b22-92b8-05c39408aa5f" testId="1aec47d4-5125-897f-b0c7-f97648a01b55" testName="MissingAndChangedSourcesNeverCommitOrReuseStalePixels" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0186080" startTime="2026-10-30T21:41:40.2045685+08:00" endTime="2026-10-30T21:41:40.2232483+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d3885334-9193-4b22-92b8-05c39408aa5f" />
+    <UnitTestResult executionId="9f1f4758-4993-4f6e-b5b4-b84c9c1d6507" testId="14678566-0d2f-85a7-b635-115a450c780c" testName="RealTaskExplicitCancelHasNoPartialVariant" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0483181" startTime="2026-10-30T21:41:45.9126963+08:00" endTime="2026-10-30T21:41:45.9611219+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9f1f4758-4993-4f6e-b5b4-b84c9c1d6507" />
+    <UnitTestResult executionId="63935878-d2d1-4a0b-bb54-25033e1bca14" testId="1bd1b8e8-97b9-8a29-9d97-92cf313e4f2a" testName="RefreshCrossingCloseAndOldFailureNeverFillNewView" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0118324" startTime="2026-10-30T21:41:47.5773948+08:00" endTime="2026-10-30T21:41:47.5892946+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="63935878-d2d1-4a0b-bb54-25033e1bca14" />
+    <UnitTestResult executionId="0cf2f0f4-21ee-47c9-8e2a-24eb2c3264a6" testId="1a4db3c0-2812-86ea-851f-0263a4ec94d2" testName="FilmNumericEntryResetAndTaskDisabledStateUseActualSettings" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.2667473" startTime="2026-10-30T21:41:39.5050251+08:00" endTime="2026-10-30T21:41:39.7718573+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0cf2f0f4-21ee-47c9-8e2a-24eb2c3264a6" />
+    <UnitTestResult executionId="066d3580-c712-4239-a4d2-07c33a75b94f" testId="13b89a26-8847-8ba9-89c9-135d02c61172" testName="ExportPinnedOpticalResponseForTwoReferenceComparison" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0080157" startTime="2026-10-30T21:41:46.5534783+08:00" endTime="2026-10-30T21:41:46.5615684+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="066d3580-c712-4239-a4d2-07c33a75b94f" />
+    <UnitTestResult executionId="833f670e-cacb-47a7-888e-d0c51582c868" testId="16bf7025-0bb3-8a90-ba93-94f1388e3fcc" testName="RealGenerateButtonCloseSidebarContinuesThenSelectOnceAndFrozenSourceComparison" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.1445670" startTime="2026-10-30T21:41:45.7678999+08:00" endTime="2026-10-30T21:41:45.9126304+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="833f670e-cacb-47a7-888e-d0c51582c868" />
+    <UnitTestResult executionId="f9640d6f-80bc-4e97-9903-f5244d9d602f" testId="186c0e51-8052-8a7a-8073-1285b18bb119" testName="ActualWorkspaceCloseDuringDecoderDiscardsAndReleasesCache" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0058380" startTime="2026-10-30T21:41:47.6373449+08:00" endTime="2026-10-30T21:41:47.6432496+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f9640d6f-80bc-4e97-9903-f5244d9d602f" />
+    <UnitTestResult executionId="b2e959f0-bd2d-4e3b-8fa6-1c943c7fe193" testId="13072d21-be53-84e9-899d-303d5aad0dcc" testName="CentralHostRestoresFilmstripAndOriginalTarget" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.6889490" startTime="2026-10-30T21:41:46.5964332+08:00" endTime="2026-10-30T21:41:47.2855532+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b2e959f0-bd2d-4e3b-8fa6-1c943c7fe193" />
+    <UnitTestResult executionId="970f5f45-18cf-4934-a475-8b1dbdd2fb72" testId="11d094b2-c201-8d5d-8ef8-f641d9c4d4c5" testName="CacheHitChecksHandleChangeEvenWithSameLengthAndRestoredMtime" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0079516" startTime="2026-10-30T21:41:47.6292876+08:00" endTime="2026-10-30T21:41:47.6373078+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="970f5f45-18cf-4934-a475-8b1dbdd2fb72" />
+    <UnitTestResult executionId="8fa6a9fa-8f0c-4190-a274-c19e6dd04262" testId="1fd23f90-0b9b-87d8-a176-f9930ebddca6" testName="GeometryFastPathKeepsFrozenReferencesUndoAndFullBoundaryRejection" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0182608" startTime="2026-10-30T21:41:39.7719025+08:00" endTime="2026-10-30T21:41:39.7902309+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8fa6a9fa-8f0c-4190-a274-c19e6dd04262" />
+    <UnitTestResult executionId="fac4505c-aada-44d1-8630-cdd95a0a20f7" testId="17fdf660-282f-8a5b-a417-21dc0e4580df" testName="LampWholeRangeKeepsComparisonStillAndEncodedOutputIdentical" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0438682" startTime="2026-10-30T21:41:46.5094817+08:00" endTime="2026-10-30T21:41:46.5534306+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fac4505c-aada-44d1-8630-cdd95a0a20f7" />
+    <UnitTestResult executionId="ec9ffa9a-4feb-479d-8a62-2aca98fc0595" testId="1ade27b3-f491-8445-9dd4-8df5e4498304" testName="DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0052293" startTime="2026-10-30T21:41:48.3951934+08:00" endTime="2026-10-30T21:41:48.4010674+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ec9ffa9a-4feb-479d-8a62-2aca98fc0595" />
+    <UnitTestResult executionId="423fa85a-b8f8-4080-99b9-1095e4e05f5b" testId="19f9e889-8df5-852f-8eec-8c64e07ecb31" testName="SelectingLoadedCardKeepsProgressiveWorkButDoesNotStealSelection" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0339163" startTime="2026-10-30T21:41:46.5623902+08:00" endTime="2026-10-30T21:41:46.5963894+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="423fa85a-b8f8-4080-99b9-1095e4e05f5b" />
+    <UnitTestResult executionId="860d27c7-47eb-41f4-bc06-09f36dec6ffc" testId="1355b3cc-c9aa-810f-90ca-88a89c4282e7" testName="RefreshRetainsFixedRowsAndInfoControlsAndOnlyNotifiesNewFailures" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0499518" startTime="2026-10-30T21:41:39.4544419+08:00" endTime="2026-10-30T21:41:39.5046705+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="860d27c7-47eb-41f4-bc06-09f36dec6ffc" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LayoutViewportOrderPreferencesAndProjectReopen" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="14ddacce-6914-8fb4-a686-565c69ed9cab">
+      <Execution id="776d76cc-9550-4fe4-b7e9-fe00242e10c8" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55ViewingTests" name="LayoutViewportOrderPreferencesAndProjectReopen" />
+    </UnitTest>
+    <UnitTest name="RefreshCrossingCloseAndOldFailureNeverFillNewView" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1bd1b8e8-97b9-8a29-9d97-92cf313e4f2a">
+      <Execution id="63935878-d2d1-4a0b-bb54-25033e1bca14" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ViewingLifecycleTests" name="RefreshCrossingCloseAndOldFailureNeverFillNewView" />
+    </UnitTest>
+    <UnitTest name="RealUniformImageMappingLandscapePortraitSquareRotatedViewport" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="17fc4ddb-56a4-8c75-aea0-f6dae1a227c5">
+      <Execution id="959d3ccb-0d6c-4cce-86d7-b17f7a1f053f" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55InteractionFixTests" name="RealUniformImageMappingLandscapePortraitSquareRotatedViewport" />
+    </UnitTest>
+    <UnitTest name="LostCaptureFinalizesOnceStableOrderingAndCrossProjectHistoryReset" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1682cea8-3ce1-8aa4-908c-f27abdba2b14">
+      <Execution id="b837f4ba-36ca-4c09-8840-b7a5fe400b60" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55InteractionFixTests" name="LostCaptureFinalizesOnceStableOrderingAndCrossProjectHistoryReset" />
+    </UnitTest>
+    <UnitTest name="ReverseDetailCompletionKeepsBAndStopRejectsInFlightSlide" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1fdca7a7-733e-8850-a402-5bbf6bf3f1a3">
+      <Execution id="08c0daa4-83f2-4588-9190-453d12cfeaf0" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ViewingLifecycleTests" name="ReverseDetailCompletionKeepsBAndStopRejectsInFlightSlide" />
+    </UnitTest>
+    <UnitTest name="DetailThenCompareRejectsLateSuccessAndLateError" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="12c4f650-3fd2-8455-8ee7-c889667ca6a5">
+      <Execution id="14f33a62-c585-43ce-9201-c5d6e5c9d4c2" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ViewingLifecycleTests" name="DetailThenCompareRejectsLateSuccessAndLateError" />
+    </UnitTest>
+    <UnitTest name="ReplacementAndCanceledViewingKeepPinnedIdentity" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1a0a04b8-f4c1-8022-98d7-4cf0150bb7a5">
+      <Execution id="00cc873b-2b8d-4a44-b6c3-3f90c20bac45" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LightTableWorkflowTests" name="ReplacementAndCanceledViewingKeepPinnedIdentity" />
+    </UnitTest>
+    <UnitTest name="ExportPinnedOpticalResponseForTwoReferenceComparison" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="13b89a26-8847-8ba9-89c9-135d02c61172">
+      <Execution id="066d3580-c712-4239-a4d2-07c33a75b94f" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55InteractionFixTests" name="ExportPinnedOpticalResponseForTwoReferenceComparison" />
+    </UnitTest>
+    <UnitTest name="StageSelectionAndRecipeWindowRetireOnVariantSwitch" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1e673d6a-6cbb-8f93-af70-89446281e82f">
+      <Execution id="f7fab3bc-172e-46c9-a8c1-da485e0cc61b" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R54DevelopedStageTests" name="StageSelectionAndRecipeWindowRetireOnVariantSwitch" />
+    </UnitTest>
+    <UnitTest name="FilmNumericEntryResetAndTaskDisabledStateUseActualSettings" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1a4db3c0-2812-86ea-851f-0263a4ec94d2">
+      <Execution id="0cf2f0f4-21ee-47c9-8e2a-24eb2c3264a6" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.HomeR55RefreshTests" name="FilmNumericEntryResetAndTaskDisabledStateUseActualSettings" />
+    </UnitTest>
+    <UnitTest name="StableOwnedInputPixelAndExportABFixture" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1345bc2b-1aac-8757-9208-e6471b73c787">
+      <Execution id="46b45b02-9d45-4e3b-bdea-5dc72ed94f59" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.HomeR55RefreshTests" name="StableOwnedInputPixelAndExportABFixture" />
+    </UnitTest>
+    <UnitTest name="SidebarSourcePreflightAndFilterFollowCurrentSelection" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="14f2bd4f-614f-887a-a27e-5f2632ed3278">
+      <Execution id="e59c474a-98cd-4a98-a7a2-2f55f970f6fa" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55InteractionFixTests" name="SidebarSourcePreflightAndFilterFollowCurrentSelection" />
+    </UnitTest>
+    <UnitTest name="RetryOnlyFailedItemKeepsSuccessfulFramesAndScrollCancelsObsoleteWork" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1767b54a-51fc-818a-8a53-8006735ffa68">
+      <Execution id="8875d08a-b87e-40cf-a211-d70453a0a9ba" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ViewingLifecycleTests" name="RetryOnlyFailedItemKeepsSuccessfulFramesAndScrollCancelsObsoleteWork" />
+    </UnitTest>
+    <UnitTest name="RealTaskExplicitCancelHasNoPartialVariant" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="14678566-0d2f-85a7-b635-115a450c780c">
+      <Execution id="9f1f4758-4993-4f6e-b5b4-b84c9c1d6507" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55InteractionFixTests" name="RealTaskExplicitCancelHasNoPartialVariant" />
+    </UnitTest>
+    <UnitTest name="NonAdjacentSelectionComparisonAndInvalidCountsHaveVisibleFeedback" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1da4b944-b565-82fe-9458-f628c372c66b">
+      <Execution id="b1a2bf55-0410-4754-8930-3c70004f543f" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55InteractionFixTests" name="NonAdjacentSelectionComparisonAndInvalidCountsHaveVisibleFeedback" />
+    </UnitTest>
+    <UnitTest name="ActualWorkspaceCloseDuringDecoderDiscardsAndReleasesCache" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="186c0e51-8052-8a7a-8073-1285b18bb119">
+      <Execution id="f9640d6f-80bc-4e97-9903-f5244d9d602f" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ViewingLifecycleTests" name="ActualWorkspaceCloseDuringDecoderDiscardsAndReleasesCache" />
+    </UnitTest>
+    <UnitTest name="SelectingLoadedCardKeepsProgressiveWorkButDoesNotStealSelection" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="19f9e889-8df5-852f-8eec-8c64e07ecb31">
+      <Execution id="423fa85a-b8f8-4080-99b9-1095e4e05f5b" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55InteractionFixTests" name="SelectingLoadedCardKeepsProgressiveWorkButDoesNotStealSelection" />
+    </UnitTest>
+    <UnitTest name="CentralHostRestoresFilmstripAndOriginalTarget" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="13072d21-be53-84e9-899d-303d5aad0dcc">
+      <Execution id="b2e959f0-bd2d-4e3b-8fa6-1c943c7fe193" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55ViewingTests" name="CentralHostRestoresFilmstripAndOriginalTarget" />
+    </UnitTest>
+    <UnitTest name="RefreshRetainsFixedRowsAndInfoControlsAndOnlyNotifiesNewFailures" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1355b3cc-c9aa-810f-90ca-88a89c4282e7">
+      <Execution id="860d27c7-47eb-41f4-bc06-09f36dec6ffc" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.HomeR55RefreshTests" name="RefreshRetainsFixedRowsAndInfoControlsAndOnlyNotifiesNewFailures" />
+    </UnitTest>
+    <UnitTest name="MissingAndChangedSourcesNeverCommitOrReuseStalePixels" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1aec47d4-5125-897f-b0c7-f97648a01b55">
+      <Execution id="d3885334-9193-4b22-92b8-05c39408aa5f" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LightTableWorkflowTests" name="MissingAndChangedSourcesNeverCommitOrReuseStalePixels" />
+    </UnitTest>
+    <UnitTest name="PinArrangeFilmCancelAndSaveActualProject" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="13eafbe0-ada0-82ca-b95e-4399f729d591">
+      <Execution id="512a689a-52f4-426e-afc1-251a87705c72" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LightTableWorkflowTests" name="PinArrangeFilmCancelAndSaveActualProject" />
+    </UnitTest>
+    <UnitTest name="PauseEachSlidePhaseRejectsLateImageAndSoundAndSpaceRepeat" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1b0447bf-d36f-87a0-b94b-f6b3bed8541a">
+      <Execution id="8e4bb73a-c65d-468d-b251-091481f568b2" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55InteractionFixTests" name="PauseEachSlidePhaseRejectsLateImageAndSoundAndSpaceRepeat" />
+    </UnitTest>
+    <UnitTest name="SidebarsPreflightAndLampKeepFrozenRecipe" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1f58a4f9-9519-83b7-aabc-6469b062a249">
+      <Execution id="23cd06b4-d448-4607-8995-c5e329cfc448" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55ViewingTests" name="SidebarsPreflightAndLampKeepFrozenRecipe" />
+    </UnitTest>
+    <UnitTest name="OwnedPortraitLoupeAndSlideshowProductionScreens" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="15ebd012-35ab-82a2-943c-21dc0dd9cfed">
+      <Execution id="d85d9186-0973-4fc0-ace7-fe00d5c5ab17" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.HomeR55RefreshTests" name="OwnedPortraitLoupeAndSlideshowProductionScreens" />
+    </UnitTest>
+    <UnitTest name="FrozenStageIdentitySurvivesSelectionWindowAndReshoot" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1432886d-388a-8a0e-b0e5-726b150a3535">
+      <Execution id="1b5fda2c-aba2-4679-90d3-8d8fe18770a0" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R54DevelopedStageTests" name="FrozenStageIdentitySurvivesSelectionWindowAndReshoot" />
+    </UnitTest>
+    <UnitTest name="IndependentLayersKeepPhotoGeometryAndSelectionOutOfLabel" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1f31769c-dd82-82bc-b64f-f777638b4352">
+      <Execution id="6b243a0f-ede4-49b4-b629-7228f789a645" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.HomeR55RefreshTests" name="IndependentLayersKeepPhotoGeometryAndSelectionOutOfLabel" />
+    </UnitTest>
+    <UnitTest name="ExistingTaskCenterTracksFilmBackendCompletion" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="16a971f6-6060-80c9-bc65-05a5286d3695">
+      <Execution id="1d9d85e6-75ec-48ea-836b-4bba8d5aa785" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.LightTableWorkflowTests" name="ExistingTaskCenterTracksFilmBackendCompletion" />
+    </UnitTest>
+    <UnitTest name="TwoVariantsOneSourceRetryKeepsOtherFailure" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1d81fb92-4319-8302-8292-9e7519954dce">
+      <Execution id="ebeb9c6f-5c87-4156-bb30-a7fc26e3bce8" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ViewingLifecycleTests" name="TwoVariantsOneSourceRetryKeepsOtherFailure" />
+    </UnitTest>
+    <UnitTest name="FullHundredFilmSavesNewVariantWithoutDroppingPinnedItems" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="140e0389-35d6-8553-b2c2-b36c5723f6c8">
+      <Execution id="a46bffb8-3877-46b2-9b13-b9160e41149b" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55ViewingTests" name="FullHundredFilmSavesNewVariantWithoutDroppingPinnedItems" />
+    </UnitTest>
+    <UnitTest name="CancelKeepsCompletedFrameAndGestureUndoRestoresLayout" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1c3f0f99-579c-8421-89e7-5ddf7aa389c9">
+      <Execution id="3e87bd56-c0fd-4d68-91b9-fd9305907e7f" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55ViewingTests" name="CancelKeepsCompletedFrameAndGestureUndoRestoresLayout" />
+    </UnitTest>
+    <UnitTest name="WorkspaceProgressiveLatestSnapshotAndCancellationAreDeterministic" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="130df51b-471a-835d-b3c4-8614717f1728">
+      <Execution id="6102476b-deb6-4052-9c20-533afc6dc015" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ViewingLifecycleTests" name="WorkspaceProgressiveLatestSnapshotAndCancellationAreDeterministic" />
+    </UnitTest>
+    <UnitTest name="VirtualCardsStayBoundedWithHundredPinnedPlaceholders" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="11f0e438-6eab-8e1e-a6eb-783dd960d341">
+      <Execution id="6923506b-24af-4cf7-ac69-17fa28075d6f" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ViewingLifecycleTests" name="VirtualCardsStayBoundedWithHundredPinnedPlaceholders" />
+    </UnitTest>
+    <UnitTest name="SaveDiscardCancelRetainsThreeDistinctAccessibleActions" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="11ea7541-ac5d-807c-af0b-404f9a935a8b">
+      <Execution id="ea25deeb-8a4a-4bd2-81d0-f12c81b3a771" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests" name="SaveDiscardCancelRetainsThreeDistinctAccessibleActions" />
+    </UnitTest>
+    <UnitTest name="DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1ade27b3-f491-8445-9dd4-8df5e4498304">
+      <Execution id="ec9ffa9a-4feb-479d-8a62-2aca98fc0595" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests" name="DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration" />
+    </UnitTest>
+    <UnitTest name="FullShellKeepsPrimaryNavigationAndContentTemplates" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="14bcd9a3-5e9a-813f-906b-1dae4ee5a500">
+      <Execution id="b57e25c3-7db0-4ce2-aaee-2b7112ee166b" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests" name="FullShellKeepsPrimaryNavigationAndContentTemplates" />
+    </UnitTest>
+    <UnitTest name="GeometryFastPathKeepsFrozenReferencesUndoAndFullBoundaryRejection" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="1fd23f90-0b9b-87d8-a176-f9930ebddca6">
+      <Execution id="8fa6a9fa-8f0c-4190-a274-c19e6dd04262" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.HomeR55RefreshTests" name="GeometryFastPathKeepsFrozenReferencesUndoAndFullBoundaryRejection" />
+    </UnitTest>
+    <UnitTest name="RealGenerateButtonCloseSidebarContinuesThenSelectOnceAndFrozenSourceComparison" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="16bf7025-0bb3-8a90-ba93-94f1388e3fcc">
+      <Execution id="833f670e-cacb-47a7-888e-d0c51582c868" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55InteractionFixTests" name="RealGenerateButtonCloseSidebarContinuesThenSelectOnceAndFrozenSourceComparison" />
+    </UnitTest>
+    <UnitTest name="CacheHitChecksHandleChangeEvenWithSameLengthAndRestoredMtime" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="11d094b2-c201-8d5d-8ef8-f641d9c4d4c5">
+      <Execution id="970f5f45-18cf-4934-a475-8b1dbdd2fb72" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.ViewingLifecycleTests" name="CacheHitChecksHandleChangeEvenWithSameLengthAndRestoredMtime" />
+    </UnitTest>
+    <UnitTest name="LampWholeRangeKeepsComparisonStillAndEncodedOutputIdentical" storage="n:/pixart/guangjing-r55-home-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="17fdf660-282f-8a5b-a417-21dc0e4580df">
+      <Execution id="fac4505c-aada-44d1-8630-cdd95a0a20f7" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-Home-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.R55InteractionFixTests" name="LampWholeRangeKeepsComparisonStillAndEncodedOutputIdentical" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1767b54a-51fc-818a-8a53-8006735ffa68" executionId="8875d08a-b87e-40cf-a211-d70453a0a9ba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1682cea8-3ce1-8aa4-908c-f27abdba2b14" executionId="b837f4ba-36ca-4c09-8840-b7a5fe400b60" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13eafbe0-ada0-82ca-b95e-4399f729d591" executionId="512a689a-52f4-426e-afc1-251a87705c72" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1432886d-388a-8a0e-b0e5-726b150a3535" executionId="1b5fda2c-aba2-4679-90d3-8d8fe18770a0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17fc4ddb-56a4-8c75-aea0-f6dae1a227c5" executionId="959d3ccb-0d6c-4cce-86d7-b17f7a1f053f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d81fb92-4319-8302-8292-9e7519954dce" executionId="ebeb9c6f-5c87-4156-bb30-a7fc26e3bce8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1da4b944-b565-82fe-9458-f628c372c66b" executionId="b1a2bf55-0410-4754-8930-3c70004f543f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e673d6a-6cbb-8f93-af70-89446281e82f" executionId="f7fab3bc-172e-46c9-a8c1-da485e0cc61b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f31769c-dd82-82bc-b64f-f777638b4352" executionId="6b243a0f-ede4-49b4-b629-7228f789a645" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11ea7541-ac5d-807c-af0b-404f9a935a8b" executionId="ea25deeb-8a4a-4bd2-81d0-f12c81b3a771" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11f0e438-6eab-8e1e-a6eb-783dd960d341" executionId="6923506b-24af-4cf7-ac69-17fa28075d6f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15ebd012-35ab-82a2-943c-21dc0dd9cfed" executionId="d85d9186-0973-4fc0-ace7-fe00d5c5ab17" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="140e0389-35d6-8553-b2c2-b36c5723f6c8" executionId="a46bffb8-3877-46b2-9b13-b9160e41149b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14f2bd4f-614f-887a-a27e-5f2632ed3278" executionId="e59c474a-98cd-4a98-a7a2-2f55f970f6fa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1345bc2b-1aac-8757-9208-e6471b73c787" executionId="46b45b02-9d45-4e3b-bdea-5dc72ed94f59" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c3f0f99-579c-8421-89e7-5ddf7aa389c9" executionId="3e87bd56-c0fd-4d68-91b9-fd9305907e7f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1fdca7a7-733e-8850-a402-5bbf6bf3f1a3" executionId="08c0daa4-83f2-4588-9190-453d12cfeaf0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f58a4f9-9519-83b7-aabc-6469b062a249" executionId="23cd06b4-d448-4607-8995-c5e329cfc448" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14bcd9a3-5e9a-813f-906b-1dae4ee5a500" executionId="b57e25c3-7db0-4ce2-aaee-2b7112ee166b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14ddacce-6914-8fb4-a686-565c69ed9cab" executionId="776d76cc-9550-4fe4-b7e9-fe00242e10c8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b0447bf-d36f-87a0-b94b-f6b3bed8541a" executionId="8e4bb73a-c65d-468d-b251-091481f568b2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12c4f650-3fd2-8455-8ee7-c889667ca6a5" executionId="14f33a62-c585-43ce-9201-c5d6e5c9d4c2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="130df51b-471a-835d-b3c4-8614717f1728" executionId="6102476b-deb6-4052-9c20-533afc6dc015" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a0a04b8-f4c1-8022-98d7-4cf0150bb7a5" executionId="00cc873b-2b8d-4a44-b6c3-3f90c20bac45" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16a971f6-6060-80c9-bc65-05a5286d3695" executionId="1d9d85e6-75ec-48ea-836b-4bba8d5aa785" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1aec47d4-5125-897f-b0c7-f97648a01b55" executionId="d3885334-9193-4b22-92b8-05c39408aa5f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14678566-0d2f-85a7-b635-115a450c780c" executionId="9f1f4758-4993-4f6e-b5b4-b84c9c1d6507" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1bd1b8e8-97b9-8a29-9d97-92cf313e4f2a" executionId="63935878-d2d1-4a0b-bb54-25033e1bca14" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a4db3c0-2812-86ea-851f-0263a4ec94d2" executionId="0cf2f0f4-21ee-47c9-8e2a-24eb2c3264a6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13b89a26-8847-8ba9-89c9-135d02c61172" executionId="066d3580-c712-4239-a4d2-07c33a75b94f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16bf7025-0bb3-8a90-ba93-94f1388e3fcc" executionId="833f670e-cacb-47a7-888e-d0c51582c868" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="186c0e51-8052-8a7a-8073-1285b18bb119" executionId="f9640d6f-80bc-4e97-9903-f5244d9d602f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13072d21-be53-84e9-899d-303d5aad0dcc" executionId="b2e959f0-bd2d-4e3b-8fa6-1c943c7fe193" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11d094b2-c201-8d5d-8ef8-f641d9c4d4c5" executionId="970f5f45-18cf-4934-a475-8b1dbdd2fb72" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1fd23f90-0b9b-87d8-a176-f9930ebddca6" executionId="8fa6a9fa-8f0c-4190-a274-c19e6dd04262" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17fdf660-282f-8a5b-a417-21dc0e4580df" executionId="fac4505c-aada-44d1-8630-cdd95a0a20f7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ade27b3-f491-8445-9dd4-8df5e4498304" executionId="ec9ffa9a-4feb-479d-8a62-2aca98fc0595" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19f9e889-8df5-852f-8eec-8c64e07ecb31" executionId="423fa85a-b8f8-4080-99b9-1095e4e05f5b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1355b3cc-c9aa-810f-90ca-88a89c4282e7" executionId="860d27c7-47eb-41f4-bc06-09f36dec6ffc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="39" executed="39" passed="39" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>
