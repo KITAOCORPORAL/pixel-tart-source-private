@@ -23,6 +23,25 @@ public sealed class RawMatchTiff16ProductPipeline(IRawDecoder decoder)
         return HighBitDepthImageBuffer.FromRaw(decoded);
     }
 
+    /// <summary>Same professional RGB48 decode and historical nearest proxy samples, but convert only
+    /// selected samples to float instead of materializing a full RGB-float master. Viewing-only.</summary>
+    public async Task<HighBitDepthImageBuffer> DecodeViewingProxyAsync(string path,int maximumEdge,CancellationToken token=default)
+    {
+        if(maximumEdge is <1 or >1600)throw new ArgumentOutOfRangeException(nameof(maximumEdge));
+        if(!IsRaw(path))throw new NotSupportedException("Viewing RAW proxy requires RAW input");
+        await ProfessionalRawResourcePolicy.HeavyWork.WaitAsync(token).ConfigureAwait(false);
+        try
+        {
+            using var reservation=decoder is LibRawDecoder?null:StudioGlobalResources.ReserveWork(1024L*1024*1024);
+            var decoded=decoder is LibRawDecoder native?await native.DecodeViewingProxyAsync(path,maximumEdge,token).ConfigureAwait(false):await decoder.DecodeAsync(path,new RawToJpegOptions(AutoRotate:false,DecodeMode:RawDecodeMode.ProfessionalDecode),token).ConfigureAwait(false);
+            if(!decoded.IsProfessionalPrecision||decoded.Channels!=3||decoded.Rgb48Pixels!.Length!=checked(decoded.Width*decoded.Height*3)||decoded.Metadata.ColorSpace!="sRGB"||decoded.Metadata.Orientation is <1 or >8)throw new InvalidDataException("Unsupported viewing RAW precision/color/orientation");
+            var scale=Math.Min(1,maximumEdge/(double)Math.Max(decoded.Width,decoded.Height));int width=Math.Max(1,(int)Math.Round(decoded.Width*scale)),height=Math.Max(1,(int)Math.Round(decoded.Height*scale));var values=new float[width*height*3];
+            for(int y=0;y<height;y++){token.ThrowIfCancellationRequested();int sy=Math.Min(decoded.Height-1,(int)((y+.5)*decoded.Height/height));for(int x=0;x<width;x++){int sx=Math.Min(decoded.Width-1,(int)((x+.5)*decoded.Width/width));for(int c=0;c<3;c++)values[(y*width+x)*3+c]=decoded.Rgb48Pixels[(sy*decoded.Width+sx)*3+c]/65535f;}}
+            return new(width,height,values,"16","sRGB",decoded.Metadata.Orientation,decoded.Metadata);
+        }
+        finally{ProfessionalRawResourcePolicy.HeavyWork.Release();}
+    }
+
     public async Task<FrozenRawMaster> DecodeFrozenMasterAsync(string path, CancellationToken token = default)
     {
         var image = await DecodeMasterAsync(path, token).ConfigureAwait(false);
