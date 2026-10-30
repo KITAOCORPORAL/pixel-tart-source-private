@@ -3,8 +3,8 @@
   "files": [
     {
       "path": ".gitattributes",
-      "bytes": 44,
-      "sha256": "d63ee73e00c9734f0ed5446c050accab94bb949633d18ce2352ff778d45da0b2"
+      "bytes": 81,
+      "sha256": "0c6ad22eed8d14227ecd3b8b9861707e4c9e238d8e18ecf20fb7d43c700add22"
     },
     {
       "path": "BASELINE_EXPORT.json",
@@ -185,6 +185,11 @@
       "path": "REFERENCE_PINS.json",
       "bytes": 1134,
       "sha256": "0080997b5e5891f5cb848023c4f8ab4ec2adf6b9608e430907f8f752e1b26c06"
+    },
+    {
+      "path": "REMOTE_READBACK.json",
+      "bytes": 564,
+      "sha256": "25900f8aaed2f55986ad2531554340121ef432ee28dc3d74a0b62205ad389bf0"
     },
     {
       "path": "REPRODUCE.ps1",
