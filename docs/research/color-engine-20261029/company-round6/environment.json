@@ -1,0 +1,54 @@
+{
+  "version": "NaturalRound6EnvironmentV1",
+  "clientDate": "2026-10-30",
+  "clientTimezone": "Europe/Berlin",
+  "hostClockObserved": "2026-10-30T14:09:03.742401+08:00",
+  "gpu": "name, driver_version, memory.total [MiB], memory.used [MiB], memory.free [MiB]\nNVIDIA GeForce GTX 1650, 572.70, 4096 MiB, 2525 MiB, 1411 MiB\n",
+  "python": "3.13.13 (tags/v3.13.13:01104ce, Apr  7 2026, 19:25:48) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.4.6",
+  "Pillow": "12.2.0",
+  "psutil": "7.2.2",
+  "tifffile": "2026.10.15 research python-tools",
+  "dotnetSdk": "10.0.302 workspace .dotnet",
+  "hostMemoryCurrent": {
+    "total": 34189107200,
+    "available": 13169414144,
+    "percent": 61.5,
+    "used": 21019693056,
+    "free": 13169414144
+  },
+  "localRoot": "E:\\Kitao-Research\\color-engine-round6-20261030",
+  "freeDiskCurrentBytes": 685426188288,
+  "sourceCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "baseCommit": "8a9f14a8b0281133cb5b829b5debece8589da303",
+  "nativeBackends": [
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\build-patch\\engine\\spektrafilm_engine.dll",
+      "sha256": "4dae2dcf046af1756a5fa79f5ef419d9d7af7e306fbc4b14bfd7d06de810cf6f"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\build-trace\\engine\\spektrafilm_engine.dll",
+      "sha256": "51c7fdd1e0225b632d1329b673cca74349f94f38a74d85ac664440886c94cd17"
+    },
+    {
+      "path": "tools\\spektra-natural-input\\bin\\Debug\\net10.0\\NaturalInput.dll",
+      "sha256": "f122e90e3310385af0cbfb1c2f33ae7f011b1020cc35489f663b072783d7f6af"
+    },
+    {
+      "path": "tools\\spektra-natural-input\\bin\\Debug\\net10.0\\RAWSelectionAssistant.Core.dll",
+      "sha256": "deb8c587b88dc09805b50ad00e9bde4ac3d2284649b4a9bc39a5ff337057125b"
+    },
+    {
+      "path": "tools\\spektra-natural-input\\bin\\Debug\\net10.0\\Sdcb.LibRaw.dll",
+      "sha256": "6df698647c79df05e754072ed393a02315d780af7287c455d765a767df93d4a3"
+    },
+    {
+      "path": "tools\\spektra-natural-input\\bin\\Debug\\net10.0\\runtimes\\win-x64\\native\\raw_r.dll",
+      "sha256": "f500c0732feb21b188d5b52cea05fd824d5b3c8016eb2ca68d8312acc9f914b9"
+    }
+  ],
+  "d80014Status": "NOT_RUN_SOURCE_ABSENT; not rescanned",
+  "householdPatchedGpu": "NOT_RUN",
+  "oldCurveAndBtCauseRepeated": false,
+  "newSeedOrWbHeadroomExperiment": false
+}

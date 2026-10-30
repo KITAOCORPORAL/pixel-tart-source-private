@@ -1,0 +1,38 @@
+{
+  "version": "Round6WorktreePreservationV1",
+  "researchBaseCommit": "8a9f14a8b0281133cb5b829b5debece8589da303",
+  "productAndMatrixV2Diff": [],
+  "otherTreeObservedChanges": [
+    {
+      "path": "E:/Kitao-Worktrees/company-lighttable-lifecycle-20261030",
+      "before": [
+        "## company/lighttable-lifecycle-20261030...origin/company/lighttable-lifecycle-20261030"
+      ],
+      "after": [
+        "## company/lighttable-lifecycle-20261030...origin/company/lighttable-lifecycle-20261030",
+        " M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.FilmBackend.cs",
+        " M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs",
+        " M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.ViewingLayout.cs",
+        " M src/RAWSelectionAssistant/Views/PhotoGradePageView.R53.cs",
+        " M src/RAWSelectionAssistant/Views/R55MechanicalSound.cs",
+        " M src/RAWSelectionAssistant/Views/StudioViewingTableView.Interaction.cs",
+        " M src/RAWSelectionAssistant/Views/StudioViewingTableView.R55.cs",
+        " M src/RAWSelectionAssistant/Views/StudioViewingTableView.Results.cs",
+        " M src/RAWSelectionAssistant/Views/StudioViewingTableView.cs",
+        " M tests/RAWSelectionAssistant.WpfTests/R53UiCorrectionTests.cs",
+        " M tests/RAWSelectionAssistant.WpfTests/R54DevelopedStageTests.cs",
+        " M tests/RAWSelectionAssistant.WpfTests/R55ViewingTests.cs",
+        "?? src/RAWSelectionAssistant/Views/ViewingImageMapping.cs",
+        "?? tests/RAWSelectionAssistant.WpfTests/R55InteractionFixTests.cs"
+      ]
+    }
+  ],
+  "otherTreeWritesByResearch": false,
+  "commandsNotUsed": [
+    "reset",
+    "stash",
+    "merge",
+    "clean"
+  ],
+  "interpretation": "Parallel product R5.5 work may change its tree; retained read-only, never reset or included here"
+}

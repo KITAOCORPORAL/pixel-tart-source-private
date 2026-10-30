@@ -1,0 +1,43 @@
+{
+  "version": "NaturalLocalArtifactLocationsV1",
+  "localRoot": "E:\\Kitao-Research\\color-engine-round6-20261030",
+  "privateImageFiles": [
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\contact-proxy.png",
+      "bytes": 514860,
+      "sha256": "06c0e31de339c4d2ffb032090a5bfc7ce56be74f4c55ad2f32c0ae33080b7a99"
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\unsharp-impact.png",
+      "bytes": 1182578,
+      "sha256": "76d091c014c67ea6a96202b73787228b3923de38b53732115206be49a9a17913"
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\window-edge_people.png",
+      "bytes": 673965,
+      "sha256": "dbe25fad6019cdac153efa4719c0c7bfcea8c4a55c6588380c8fb76734c4099c"
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\window-shadow_vehicle.png",
+      "bytes": 173065,
+      "sha256": "982acf15cfff3dfbc3cd3549e89d6d9d7f918d639850107fd01609cfa1c69185"
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\window-sky_wire.png",
+      "bytes": 734954,
+      "sha256": "35aab0b6d4d22b6049529018e4b21c71c4432a7b3c48232dbb4ca9c3d1a03417"
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\window-wire_edge.png",
+      "bytes": 743604,
+      "sha256": "249f6048d1faaf5e1e5979b90fcbcaf8297d9f225269487628930c74ff9f14d0"
+    }
+  ],
+  "fullAandBInputs": {
+    "A": "E:\\Kitao-Research\\color-engine-round6-20261030\\canon-inputs\\A-linear-d50-full.npy",
+    "B": "E:\\Kitao-Research\\color-engine-round6-20261030\\canon-inputs\\B-display-srgb-full.npy"
+  },
+  "noPrivateImagesInGit": true,
+  "inputSourceRoot": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW",
+  "totalLocalResearchBytes": 2031113728
+}

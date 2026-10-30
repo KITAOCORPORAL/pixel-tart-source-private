@@ -1,0 +1,28 @@
+{
+  "version": "NaturalCallerProvenanceV1",
+  "sourceBaseline": "8a9f14a8b0281133cb5b829b5debece8589da303",
+  "newCaller": [
+    "tools/spektra-natural-input/Program.cs",
+    "tools/spektra-natural-input/NaturalInput.csproj"
+  ],
+  "usesUnchangedProductionFiles": [
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/RawToJpeg/ProfessionalRawDecoder.cs",
+      "sha256": "fa04cb2525d352848bc6b1e94c492feed4a161d860d977680b01ac86d1a0f131"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawPipeline.cs",
+      "sha256": "d7977aff8ac18ee5f8d43583c378448e636b96402bdfecdc7819abff94286951"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Projects/ProfessionalRawResourcePolicy.cs",
+      "sha256": "afb89c2f8df4c1f7a6a686f6877ce75ebf05f8047018aa2e341280d67d9aa547"
+    },
+    {
+      "path": "src/RAWSelectionAssistant.Core/Services/Color/HighBitDepthImageBuffer.cs",
+      "sha256": "34e8893800d9c3b6d384296f23d2f4a6919981ba0077910dc75d0b1735be08b7"
+    }
+  ],
+  "MatrixDecodeResearchV2Modified": false,
+  "productChangedPaths": []
+}

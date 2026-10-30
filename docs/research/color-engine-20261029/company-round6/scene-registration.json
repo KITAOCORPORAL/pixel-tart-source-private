@@ -1,0 +1,35 @@
+{
+  "version": "CompanyNaturalSceneRegistrationV1",
+  "developmentSample": "CompanyRAW/TNAN8886.CR3",
+  "sceneCount": 1,
+  "categories": [
+    "dusk/sunset",
+    "backlit silhouettes",
+    "dark vehicle foreground",
+    "sky gradient",
+    "pole/wires",
+    "building edge"
+  ],
+  "humansPresent": true,
+  "usableSkinIllumination": false,
+  "strongHighlights": false,
+  "heldOutSet": false,
+  "viewedImages": [
+    "E:\\Kitao-Research\\color-engine-round6-20261030\\source-preview.png",
+    "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\contact-proxy.png",
+    "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\window-edge_people.png",
+    "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\window-shadow_vehicle.png",
+    "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\window-sky_wire.png",
+    "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\unsharp-impact.png",
+    "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\window-wire_edge.png"
+  ],
+  "visualObservations": [
+    "At EV0 production scene is very dark; people appear as silhouettes, no usable skin assessment",
+    "Portra appears warmer, Ektar more red-purple in this dusk image; TriX is gray with small output RGB channel differences",
+    "Dark foreground baseline detail becomes less differentiated in film observations; not black-clipped to0 at final output for tested windows",
+    "No conclusion about high-light clipping stress, physical fit or absolute color accuracy",
+    "Unsharp before/after display shows edge/noise-contrast change; numerical delta does not establish perceptual preference"
+  ],
+  "privateOutputsLocalOnly": true,
+  "regionCorrection": "Original id sky_wire contains sky only; added registered native wire_edge x3500,y1350 without resampling; same development scene"
+}

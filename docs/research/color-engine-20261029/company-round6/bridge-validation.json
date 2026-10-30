@@ -1,0 +1,41 @@
+{
+  "version": "ExistingBridgeNaturalCheckV1",
+  "bridgeVersion": "ExistingResearchD65ToD50V1",
+  "ColourVersion": "0.4.6",
+  "ColourCommit": "0c6f868c4b5c5ae861f868ba8015be3abf0f92f0",
+  "independentBradfordMatrixMaxAbs": 1.0736989639395511e-17,
+  "sourceSampleChecks": [
+    {
+      "xy": [
+        0,
+        0
+      ],
+      "maxAbs": 0.0
+    },
+    {
+      "xy": [
+        1000,
+        500
+      ],
+      "maxAbs": 0.0
+    },
+    {
+      "xy": [
+        2600,
+        1600
+      ],
+      "maxAbs": 0.0
+    },
+    {
+      "xy": [
+        5495,
+        3669
+      ],
+      "maxAbs": 0.0
+    }
+  ],
+  "extraWb": false,
+  "inputAHasDisplayMapping": false,
+  "inputBUsesActualProductionDisplayOnlyOnce": true,
+  "precisionCaution": "Engine blob rounded matrices; tiny negatives retained, not signal recovery."
+}

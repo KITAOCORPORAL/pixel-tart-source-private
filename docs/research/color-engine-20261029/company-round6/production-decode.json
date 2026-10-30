@@ -1,0 +1,123 @@
+{
+  "version": "ProductionNaturalInputV1",
+  "status": "DECODED",
+  "sourceSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+  "sourceUnchanged": true,
+  "width": 5496,
+  "height": 3670,
+  "storedOrientation": 1,
+  "originalOrientation": 1,
+  "originalWidth": 5496,
+  "originalHeight": 3670,
+  "Contract": {
+    "DecoderVersion": "0.21.1-Release",
+    "Make": "Canon",
+    "Model": "EOS R6",
+    "SourceSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "DecodeKey": "LibRaw021LinearProPhotoD65V1:Camera:1:1:1",
+    "CameraWhiteBalance": [
+      1833,
+      1024,
+      1618,
+      1024
+    ],
+    "AppliedWhiteBalance": [
+      1833,
+      1024,
+      1618,
+      1024
+    ],
+    "CameraToRgbMatrix": [
+      1.7471526861190796,
+      -0.8485950231552124,
+      0.10144229978322983,
+      0,
+      -0.1794297993183136,
+      1.6552962064743042,
+      -0.475866436958313,
+      0,
+      0.0017740848707035184,
+      -0.607358455657959,
+      1.6055843830108643,
+      0
+    ],
+    "WhiteLevel": 16383,
+    "BlackLevelPolicy": "LibRaw metadata: user_black=-1, user_cblack=-1000001 (all channels)",
+    "OutputSpace": "LibRaw Linear ProPhoto D65",
+    "OutputBits": 16,
+    "WhiteBalanceApplied": true,
+    "CameraMatrixApplied": true,
+    "AutoBright": false,
+    "Gamma": "1,1",
+    "HighlightMode": 0,
+    "DecoderClipped": true,
+    "SaturatedChannelSamples": 0,
+    "Characterization": "LibRaw embedded/builtin camera matrix; no proprietary profile",
+    "UnpackParametersJson": "{\u0022UseRawSpeed\u0022:0,\u0022UseDngSdk\u0022:0,\u0022Options\u0022:2,\u0022ShotSelect\u0022:0,\u0022Specials\u0022:0,\u0022MaxRawMemoryMb\u0022:2048,\u0022SonyArw2PosterizationThr\u0022:0,\u0022CoolscanNefGamma\u0022:1}",
+    "OutputParametersJson": "{\u0022Greybox\u0022:{\u0022Location\u0022:{\u0022IsEmpty\u0022:true,\u0022X\u0022:0,\u0022Y\u0022:0},\u0022Size\u0022:{\u0022IsEmpty\u0022:false,\u0022Width\u0022:-1,\u0022Height\u0022:-1},\u0022X\u0022:0,\u0022Y\u0022:0,\u0022Width\u0022:-1,\u0022Height\u0022:-1,\u0022Left\u0022:0,\u0022Top\u0022:0,\u0022Right\u0022:-1,\u0022Bottom\u0022:-1,\u0022IsEmpty\u0022:false},\u0022Cropbox\u0022:{\u0022Location\u0022:{\u0022IsEmpty\u0022:true,\u0022X\u0022:0,\u0022Y\u0022:0},\u0022Size\u0022:{\u0022IsEmpty\u0022:false,\u0022Width\u0022:-1,\u0022Height\u0022:-1},\u0022X\u0022:0,\u0022Y\u0022:0,\u0022Width\u0022:-1,\u0022Height\u0022:-1,\u0022Left\u0022:0,\u0022Top\u0022:0,\u0022Right\u0022:-1,\u0022Bottom\u0022:-1,\u0022IsEmpty\u0022:false},\u0022Aber\u0022:[1,1,1,1],\u0022Gamma\u0022:[1,1,0.9999999999999964,0.9999999999999964,0,1],\u0022UserMultipliers\u0022:[1833,1024,1618,1024],\u0022Brightness\u0022:1,\u0022Threshold\u0022:0,\u0022HalfSize\u0022:false,\u0022FourColorRgb\u0022:false,\u0022HighlightMode\u0022:0,\u0022UseAutoWb\u0022:false,\u0022UseCameraWb\u0022:false,\u0022UseCameraMatrix\u0022:true,\u0022OutputColor\u0022:4,\u0022OutputProfile\u0022:null,\u0022CameraProfile\u0022:null,\u0022BadPixels\u0022:null,\u0022DarkFrame\u0022:null,\u0022OutputBps\u0022:16,\u0022OutputTiff\u0022:false,\u0022OutputFlags\u0022:0,\u0022UserFlip\u0022:0,\u0022UserQual\u0022:3,\u0022UserBlack\u0022:-1,\u0022UserCBlack\u0022:[-1000001,-1000001,-1000001,-1000001],\u0022UserSaturation\u0022:-1,\u0022MedianPasses\u0022:0,\u0022AutoBrightThr\u0022:0.01,\u0022AdjustMaximumThr\u0022:0,\u0022NoAutoBright\u0022:true,\u0022UseFujiRotate\u0022:true,\u0022GreenMatching\u0022:0,\u0022DcbIterations\u0022:0,\u0022DcbEnhanceFl\u0022:0,\u0022FbddNoiserd\u0022:0,\u0022ExpCorrec\u0022:false,\u0022ExpShift\u0022:1,\u0022ExpPreser\u0022:0,\u0022AutoScale\u0022:true,\u0022Interpolation\u0022:true}",
+    "BlackLevel": 2048,
+    "ChannelBlackLevels": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "BlackPatternRows": 0,
+    "BlackPatternColumns": 0,
+    "BlackPatternSha256": "8F8D55AFC740451AD55820EAFC6F84A5974010D51663588C328821353DA2828C",
+    "NormalizedWhiteBalance": [
+      1.7900390625,
+      1,
+      1.580078125,
+      1
+    ],
+    "ZeroChannelSamples": 2115397,
+    "DecoderWarnings": "None",
+    "WhiteBalanceSource": "Metadata cam_mul; explicit user_mul, auto/camera flags off",
+    "Demosaic": "AHD (user_qual=3), three-color Bayer only",
+    "ClippingPolicy": "LibRaw black subtraction, scale_colors and convert_to_rgb clip to uint16; no lost signal recovery"
+  },
+  "definition": {
+    "ProcessingVersion": 4,
+    "WhiteBalance": "Camera",
+    "RedGain": 1,
+    "GreenGain": 1,
+    "BlueGain": 1,
+    "ExposureEv": 0,
+    "InputConfiguration": "LibRaw021LinearProPhotoD65V1",
+    "DisplayTransform": "LuminanceShoulderNeutralGamutV1",
+    "DecodeKey": "LibRaw021LinearProPhotoD65V1:Camera:1:1:1"
+  },
+  "stages": [
+    "Unpacked",
+    "DemosaicWBMatrix",
+    "NativeRGB16",
+    "FloatMaster"
+  ],
+  "decodeMs": 1541.7598,
+  "prepareAndWriteRowsMs": 13046.8977,
+  "minimum": [
+    0,
+    0,
+    0
+  ],
+  "maximum": [
+    0.2713511884212494,
+    0.1767299920320511,
+    0.08967727422714233
+  ],
+  "zeroChannels": [
+    225156,
+    1029633,
+    860608
+  ],
+  "oneChannels": [
+    0,
+    0,
+    0
+  ],
+  "productionLinearSha256": "E062FB55B7A5F0D3B09B6AF37A664F782A643999DED9FBD833DB63FCCEDC1D2C",
+  "productionDisplaySha256": "D0D5BF59CB649F52164396E6404A7A686A42895CC340E7CAC62AABBC5EE67169",
+  "processPeakWorkingSetBytes": 609456128,
+  "limits": "Existing production integer LibRawWB\u002Bdemosaic\u002Bmatrix clipping retained; not MatrixDecodeResearchV2. Display=unchanged production RenderOutputPixel EV0 once. Row coordinate orientation applied equally."
+}

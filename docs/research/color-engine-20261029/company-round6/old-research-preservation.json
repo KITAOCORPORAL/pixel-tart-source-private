@@ -1,0 +1,312 @@
+{
+  "version": "OldResearchPreservationRound6V1",
+  "allMatch": true,
+  "checks": [
+    {
+      "path": "source-patch/engine/CMakeLists.txt",
+      "unchanged": true
+    },
+    {
+      "path": "source-patch/engine/src/shaders/vulkan/spk_cctf_decode.comp",
+      "unchanged": true
+    },
+    {
+      "path": "source-patch/engine/tests/bt_probe.cpp",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/io/README.txt",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/io/sRGB.icc",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/neutral_print_filters.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/print_luts.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/cinestill_800t.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/fujifilm_c200.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/fujifilm_crystal_archive_typeii.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/fujifilm_neopan_acros_100_ii.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/fujifilm_pro_400h.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/fujifilm_provia_100f.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/fujifilm_velvia_100.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/fujifilm_xtra_400.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/ilford_hp5_plus_400.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/ilford_multigrade_iv_rc.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_2383.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_2393.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_ektachrome_100.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_ektacolor_edge.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_ektar_100.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_endura_premier.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_gold_200.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_kodachrome_64.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_portra_160.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_portra_400.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_portra_800.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_portra_800_push1.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_portra_800_push2.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_portra_endura.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_supra_endura.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_tmax_100.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_tri_x_400.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_ultra_endura.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_ultramax_400.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_verita_200d.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_vision3_200t.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_vision3_250d.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_vision3_500t.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/profiles/kodak_vision3_50d.json",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/spektrafilm_constants.bin",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_affine3.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_boost.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_bw_correct.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_cam16ucs_compress.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_cctf_decode.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_cctf_encode_matrix.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_couplers_correction.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_curves.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_di_normalise.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_edr.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_geometry_resample_df.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_glare_add.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_grain_layer_one.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_grain_layers.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_grain_simple.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_iir_df_acc.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_lincomb3.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_log10_guarded.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_lognormal_field.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_lut2d_cubic.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_lut3d_trilinear.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_math_probe.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_matmul3.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_mul.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_print_exposure.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_reduce_max.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_rng_probe.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_sep_fir_acc.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_spectral_epilogue.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_stride_sample.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_take_rgb.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_tc_b.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_to_rgba16.spv",
+      "unchanged": true
+    },
+    {
+      "path": "resources-original/vulkan/spk_zoom_bilinear_mirror.spv",
+      "unchanged": true
+    }
+  ],
+  "source2Clean": true,
+  "productAndMatrixV2Diff": []
+}

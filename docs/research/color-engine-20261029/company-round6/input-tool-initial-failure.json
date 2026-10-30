@@ -1,0 +1,15 @@
+{
+  "version": "ProductionNaturalInputV1",
+  "status": "REJECTED_OR_FAILED",
+  "sourceSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+  "sourceUnchanged": true,
+  "stages": [
+    "Unpacked",
+    "DemosaicWBMatrix",
+    "NativeRGB16",
+    "FloatMaster"
+  ],
+  "error": "System.IO.IOException: The process cannot access the file \u0027E:\\Kitao-Research\\color-engine-round6-20261030\\canon-production\\production-linear-d65.f32\u0027 because it is being used by another process.\r\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)\r\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable\u00601 unixCreateMode)\r\n   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable\u00601 unixCreateMode)\r\n   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable\u00601 unixCreateMode)\r\n   at System.IO.File.OpenRead(String path)\r\n   at Program.\u003C\u003CMain\u003E$\u003Eg__Hash|0_0(String p) in D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\tools\\spektra-natural-input\\Program.cs:line 10\r\n   at Program.\u003CMain\u003E$(String[] args) in D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\tools\\spektra-natural-input\\Program.cs:line 31",
+  "elapsedMs": 1479.7332,
+  "processPeakWorkingSetBytes": 609505280
+}

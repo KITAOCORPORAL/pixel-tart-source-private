@@ -1,0 +1,60 @@
+{
+  "version": "NaturalRound6ExecutionStatusV1",
+  "overall": "PARTIAL_DEVELOPMENT_ONLY_PRODUCT_DISABLED",
+  "sourceSceneCount": 1,
+  "heldOutSet": false,
+  "executed": {
+    "productionDecode": "ONE_CANON_5496x3670_PASS",
+    "AProductionLinearBridgeAndBActualProductionDisplay": "FULL_INPUTS_PREPARED_NOT_FULL_ENGINE_OUTPUT",
+    "uniqueProxyCases": 6,
+    "uniqueNativeWindowCases": 24,
+    "freshProcessReopens": 8,
+    "sameSessionRepeatChecks": 8,
+    "successfulRenderInvocationsIncludingReopen": 38,
+    "allSuccessfulTiff16Readback": "EXACT",
+    "fullResolutionCandidates": "6_REFUSED_RESOURCE_BUDGET_BEFORE_UPLOAD",
+    "defaultUnsharpPassiveTrace": "2_NATIVE_WINDOWS_OUTPUT_HASH_MATCH",
+    "contactAnd4WindowImages": "ACTUALLY_VIEWED_LOCAL_ONLY",
+    "inputBridgeIndependentCheck": "PASS",
+    "filesBeforeAfter": "NO_SOURCE_CHANGES",
+    "additionalFinalDriverIdentityCheck": "1extra PortraA proxy fresh-process reopen, same input/resources/output hash; not a new configuration",
+    "renderCallAccounting": {
+      "primaryCaseRenderCalls": 30,
+      "freshProcessReopenRenderCalls": 8,
+      "sameSessionRepeatRenderCalls": 8,
+      "primaryGpuRenderCallsTotal": 46,
+      "extraFinalDriverReopen": 1,
+      "passiveTraceRenders": 2,
+      "totalSuccessfulGpuRenderCallsIncludingDiagnostics": 49,
+      "interpretation": "38 successful CLI cases in main index, not38unique scenes or all GPU calls"
+    }
+  },
+  "failures": {
+    "ARW": "CURRENT_LIBRAW_OPEN_REJECTED",
+    "X_T5": "ACTUAL_PRODUCTION_BUDGET_REJECTED; filters9 also outside Bayer contract",
+    "GFX": "ACTUAL_PRODUCTION_BUDGET_REJECTED",
+    "inputCallerInitial": "OUTPUT_HASH_BEFORE_FILE_CLOSE_FAILURE_RETAINED_CORRECTED_NEW_DIRECTORY"
+  },
+  "notRun": {
+    "fullNaturalEngineOutputs": "RESOURCE_BUDGET_REFUSED_NO_SILENT_RESIZE",
+    "secondXT5": "METADATA_ONLY_SAME_BUDGET_LAYOUT_NOT_REDUNDANTLY_DECODED",
+    "usableSkin": "NOT_COVERED_SILHOUETTES",
+    "strongHighlights": "NOT_COVERED",
+    "independentValidationSet": "NOT_ESTABLISHED",
+    "physicalAccuracyOrUserPreference": "NOT_MEASURED",
+    "d80014": "NOT_RUN_SOURCE_ABSENT_NO_RESCAN",
+    "householdPatchedGPU": "NOT_RUN",
+    "BT64Repeat": "NOT_RUN_CLOSED_ISSUE",
+    "curveRootCauseRepeat": "NOT_RUN_CLOSED_ISSUE",
+    "newCurveOrResourceFix": "NOT_IMPLEMENTED",
+    "seedExtension": "NOT_IMPLEMENTED",
+    "wbHeadroomTuning": "FROZEN",
+    "productUIBridgeModelsAndDefaultChain": "UNMODIFIED",
+    "fullPv456Suites": "NOT_RERUN_PRODUCT_UNCHANGED"
+  },
+  "license": {
+    "codeDistribution": "NOT_APPROVED",
+    "resourceDistribution": "NOT_APPROVED",
+    "LightTableTerms": "SEPARATE_NOT_SUBSTITUTE"
+  }
+}

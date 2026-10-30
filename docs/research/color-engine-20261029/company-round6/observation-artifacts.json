@@ -1,0 +1,707 @@
+{
+  "version": "NaturalLocalObservationArtifactsV1",
+  "privateImagesRemainLocal": true,
+  "contactSheet": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\contact-proxy.png",
+  "regions": [
+    {
+      "window": "edge_people",
+      "sourceBox": {
+        "left": 2050,
+        "top": 1370,
+        "width": 640,
+        "height": 640
+      },
+      "cases": [
+        {
+          "route": "A",
+          "film": "portra",
+          "outputHash": "cfdff3e50bf59b6e44c77bba1cc5e571dfdde9f0ddcd9247ef7e9a8272262feb",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.14755746817449272,
+            0.117583245639129,
+            0.10640792569812127
+          ],
+          "lumaPercentiles": [
+            0.053392840466926064,
+            0.1480308079652094,
+            0.1873143206225681
+          ]
+        },
+        {
+          "route": "A",
+          "film": "ektar",
+          "outputHash": "facd840309cbbd62cd4e4ded12cf7c385602a9fd0da2591e04b7dc0edbaaa270",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.09316680226913049,
+            0.04596004196367187,
+            0.07202556314552373
+          ],
+          "lumaPercentiles": [
+            0.023151943236438544,
+            0.06681025558861678,
+            0.10096103471427488
+          ]
+        },
+        {
+          "route": "A",
+          "film": "trix",
+          "outputHash": "d0b813ac674a995c6c8d1f60427e902f79ff49a339a47f0616d78a6a9256c8a0",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.15853042427739694,
+            0.15855894788208968,
+            0.15855167093799488
+          ],
+          "lumaPercentiles": [
+            0.08488269474326696,
+            0.1835263035019455,
+            0.23009521629663537
+          ]
+        },
+        {
+          "route": "B",
+          "film": "portra",
+          "outputHash": "348927ad0fccf1bf26611652c178b339728a012fa1055104335628746c00f7bc",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.14652300293913118,
+            0.11684597995600209,
+            0.10585448592864
+          ],
+          "lumaPercentiles": [
+            0.05339173876554512,
+            0.14687457999542228,
+            0.18610172414740214
+          ]
+        },
+        {
+          "route": "B",
+          "film": "ektar",
+          "outputHash": "b688a45498864de8a15ab495b7178a8ea1c882f1554e60fe1f09a84b82e71836",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.09227608003757021,
+            0.04539414508038517,
+            0.07167726509271616
+          ],
+          "lumaPercentiles": [
+            0.023151943236438544,
+            0.06591201953154803,
+            0.09992188522163732
+          ]
+        },
+        {
+          "route": "B",
+          "film": "trix",
+          "outputHash": "be7c9c2fbacd9f6663dea1ceda96fc4b9b8189354cb320df6c4a03a801d1b37e",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.15782242484692902,
+            0.15785082477009657,
+            0.15784360825113253
+          ],
+          "lumaPercentiles": [
+            0.08489360799572747,
+            0.1822461676966506,
+            0.22956115053025097
+          ]
+        }
+      ]
+    },
+    {
+      "window": "shadow_vehicle",
+      "sourceBox": {
+        "left": 0,
+        "top": 1980,
+        "width": 640,
+        "height": 640
+      },
+      "cases": [
+        {
+          "route": "A",
+          "film": "portra",
+          "outputHash": "c461c3d6c0f45838a386da4f8a88cde90a1177c243ba180defaad214e2db72c3",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.05292311390104804,
+            0.054994265423873506,
+            0.06638393200357512
+          ],
+          "lumaPercentiles": [
+            0.05339173876554512,
+            0.053459421683070114,
+            0.1487871873655299
+          ]
+        },
+        {
+          "route": "A",
+          "film": "ektar",
+          "outputHash": "a322d21e8cafc031cfb732a1387a3825b255724b3ddedd9a8910651cc1151648",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.03550656767511496,
+            0.017852753456072942,
+            0.05101676938885833
+          ],
+          "lumaPercentiles": [
+            0.023151943236438544,
+            0.023169265278095673,
+            0.06497856025024797
+          ]
+        },
+        {
+          "route": "A",
+          "film": "trix",
+          "outputHash": "64e5734e7908995e187a0a136e3e13489cdf2697a1cfb22a7ffa4196307c204a",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.08667542369068769,
+            0.08669126666074625,
+            0.08669063554968683
+          ],
+          "lumaPercentiles": [
+            0.0848478309300374,
+            0.08491321278706035,
+            0.1731530339208058
+          ]
+        },
+        {
+          "route": "B",
+          "film": "portra",
+          "outputHash": "431089369f2a908d34c02eaf65670af2a82027b77441a692bcb26410549e9349",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.05287423034288247,
+            0.05496003611475114,
+            0.06636061971249353
+          ],
+          "lumaPercentiles": [
+            0.05338849469748988,
+            0.053459482719157694,
+            0.14709089082169838
+          ]
+        },
+        {
+          "route": "B",
+          "film": "ektar",
+          "outputHash": "ac2b1142442ce336afe1100617888b0fe6a5ad7c83761554220c2d290079e76b",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.03546595930506505,
+            0.01783184062383205,
+            0.051006396867555565
+          ],
+          "lumaPercentiles": [
+            0.023151943236438544,
+            0.023169265278095673,
+            0.06375421853971162
+          ]
+        },
+        {
+          "route": "B",
+          "film": "trix",
+          "outputHash": "1ba4b4a69d987eedf62c71a9c7716f378d2d0e973256ff54d837e3abc9a916d4",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.0866389379387987,
+            0.08665476298993749,
+            0.08665417632226947
+          ],
+          "lumaPercentiles": [
+            0.08485107499809263,
+            0.08491321278706035,
+            0.1712596719310292
+          ]
+        }
+      ]
+    },
+    {
+      "window": "sky_wire",
+      "sourceBox": {
+        "left": 3050,
+        "top": 380,
+        "width": 640,
+        "height": 640
+      },
+      "cases": [
+        {
+          "route": "A",
+          "film": "portra",
+          "outputHash": "c4c6722b5b5cea0c74cca7451e27bfd97221aa781892ceb83a7caa87d92c228f",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.11297595016468931,
+            0.11882490749215746,
+            0.12396935320819236
+          ],
+          "lumaPercentiles": [
+            0.09361134959945067,
+            0.11757341268024718,
+            0.1450038280003052
+          ]
+        },
+        {
+          "route": "A",
+          "film": "ektar",
+          "outputHash": "3205ad25ab8f4f911c2ae7ec15d3d1cd12410ad1a0d0bc7913886cc9c26cd409",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.06318952889856187,
+            0.04391143639104039,
+            0.07890415456673676
+          ],
+          "lumaPercentiles": [
+            0.03602492213321126,
+            0.05007015182726787,
+            0.06900319963378349
+          ]
+        },
+        {
+          "route": "A",
+          "film": "trix",
+          "outputHash": "539efeb1ba05befc8a5d2e347e84a8af253fad9e928aeab18e8741616f18e7fa",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.17613476625835986,
+            0.17616699360318264,
+            0.17615727786058066
+          ],
+          "lumaPercentiles": [
+            0.13996341802090484,
+            0.17620359502555885,
+            0.2124144648203251
+          ]
+        },
+        {
+          "route": "B",
+          "film": "portra",
+          "outputHash": "374581bca44164949defbc80efeb0d3232ead1a0c589488932d2f44f8b47bbfc",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.11276763847562261,
+            0.1188333754297366,
+            0.12404415016932291
+          ],
+          "lumaPercentiles": [
+            0.09372916289005873,
+            0.1175419333180743,
+            0.1447603207446403
+          ]
+        },
+        {
+          "route": "B",
+          "film": "ektar",
+          "outputHash": "513ab0a7dc92689c48237d4f32768d1ecda2aab78c56a81da9ad29749239d492",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.0630523545013524,
+            0.043940455876692326,
+            0.07894981227230463
+          ],
+          "lumaPercentiles": [
+            0.036059970672159915,
+            0.05007219501029984,
+            0.06890794659342338
+          ]
+        },
+        {
+          "route": "B",
+          "film": "trix",
+          "outputHash": "ba70ee01066ad96b5a7f0f7f060e9fc5e683a1a8d914a00b7fd69a9a9fac2b05",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.17616040219747112,
+            0.17619264340058582,
+            0.17618288805754376
+          ],
+          "lumaPercentiles": [
+            0.13969305793850614,
+            0.17623411306935227,
+            0.21271964525825904
+          ]
+        }
+      ]
+    },
+    {
+      "window": "wire_edge",
+      "sourceBox": {
+        "left": 3500,
+        "top": 1350,
+        "width": 640,
+        "height": 640
+      },
+      "cases": [
+        {
+          "route": "A",
+          "film": "portra",
+          "outputHash": "dc7268d6f40784f8d7cdf224ed254915c95925bec014a14c868718d32fc61056",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.12587584926737763,
+            0.10604173487755796,
+            0.09797855019626
+          ],
+          "lumaPercentiles": [
+            0.05343200714122224,
+            0.11518295872434575,
+            0.14647262708476386
+          ]
+        },
+        {
+          "route": "A",
+          "film": "ektar",
+          "outputHash": "be2d69057612c098ff5b139a7cfbf0228ab0d582c7f5376c832f9a98479e872a",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.07232252252489131,
+            0.03418169192299857,
+            0.06525890641093396
+          ],
+          "lumaPercentiles": [
+            0.023159533073929962,
+            0.04526723582818342,
+            0.06783697389181353
+          ]
+        },
+        {
+          "route": "A",
+          "film": "trix",
+          "outputHash": "f9121278da9e41e28a46268bde4a411e0949d6d13f28c029f4a3fe9fc652be82",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.14807460898017832,
+            0.14810276146578935,
+            0.14809444243033856
+          ],
+          "lumaPercentiles": [
+            0.08483691767757687,
+            0.1525564568551156,
+            0.2010725890897994
+          ]
+        },
+        {
+          "route": "B",
+          "film": "portra",
+          "outputHash": "c3b2d1c33c8c701e1020842b5cf05ab83daf8e0b5be1c8cbc51cb3c749507e8a",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.12509167088374787,
+            0.10553352428695371,
+            0.09763267455044301
+          ],
+          "lumaPercentiles": [
+            0.05342998641947051,
+            0.11451347829404135,
+            0.14580867408255133
+          ]
+        },
+        {
+          "route": "B",
+          "film": "ektar",
+          "outputHash": "538e8a28808808fcec08cfcc34a12a602e6e1e0726f194bbb6c9d1155153db0c",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.07181523947122702,
+            0.0339078514149448,
+            0.0650667217124069
+          ],
+          "lumaPercentiles": [
+            0.0231627771419852,
+            0.044878986800946055,
+            0.06737778918135347
+          ]
+        },
+        {
+          "route": "B",
+          "film": "trix",
+          "outputHash": "802113c429774b4eeedc8d646db7ae66f1b12181c663dd116cb1e73f166063aa",
+          "zeroChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "maximumChannels": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "meanEncodedRGB": [
+            0.14747557021659202,
+            0.14750363448598333,
+            0.14749533530663234
+          ],
+          "lumaPercentiles": [
+            0.08483691767757687,
+            0.15178915999084455,
+            0.20081315327687496
+          ]
+        }
+      ]
+    }
+  ],
+  "routeComparisons": [
+    {
+      "film": "portra",
+      "A_vs_B_changedPixels": 875709,
+      "maxAbsU16": 11235,
+      "meanAbsRgbU16": 27.72764079622694,
+      "interpretation": "different intentional input routes; NOT independent accuracy error"
+    },
+    {
+      "film": "ektar",
+      "A_vs_B_changedPixels": 792077,
+      "maxAbsU16": 8848,
+      "meanAbsRgbU16": 19.51635490359273,
+      "interpretation": "different intentional input routes; NOT independent accuracy error"
+    },
+    {
+      "film": "trix",
+      "A_vs_B_changedPixels": 636700,
+      "maxAbsU16": 3619,
+      "meanAbsRgbU16": 28.859985781661813,
+      "interpretation": "different intentional input routes; NOT independent accuracy error"
+    }
+  ],
+  "images": [
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\contact-proxy.png",
+      "sha256": "06c0e31de339c4d2ffb032090a5bfc7ce56be74f4c55ad2f32c0ae33080b7a99",
+      "bytes": 514860
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\unsharp-impact.png",
+      "sha256": "76d091c014c67ea6a96202b73787228b3923de38b53732115206be49a9a17913",
+      "bytes": 1182578
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\window-edge_people.png",
+      "sha256": "dbe25fad6019cdac153efa4719c0c7bfcea8c4a55c6588380c8fb76734c4099c",
+      "bytes": 673965
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\window-shadow_vehicle.png",
+      "sha256": "982acf15cfff3dfbc3cd3549e89d6d9d7f918d639850107fd01609cfa1c69185",
+      "bytes": 173065
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\window-sky_wire.png",
+      "sha256": "35aab0b6d4d22b6049529018e4b21c71c4432a7b3c48232dbb4ca9c3d1a03417",
+      "bytes": 734954
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\window-wire_edge.png",
+      "sha256": "249f6048d1faaf5e1e5979b90fcbcaf8297d9f225269487628930c74ff9f14d0",
+      "bytes": 743604
+    }
+  ],
+  "limits": "No skin/color accuracy/highlight stress validation. Native-window input excludes outside pixels; not full-frame exact crop."
+}

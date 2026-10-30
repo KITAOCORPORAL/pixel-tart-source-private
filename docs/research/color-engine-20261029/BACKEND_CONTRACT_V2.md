@@ -46,3 +46,18 @@
 - D80014沿第四批NOT_RUN_SOURCE_ABSENT，本轮未扫描/重试；V2身份/所有权/回调修复保留而不重复整轮。WB余量冻结，无新参数/收益合并。LightTable非商业条款与Spektra GPL代码及资源权利是**不同事项**，任何一项都不能替代另项准入；DLL/进程/LUT也非自动许可解决。
 
 有界根因与BT全链数据见COMPANY_ROUND5_REPORT、CURVE_NODE_COMPARISON_ROUND5与REPRODUCE_ROUND5。产品src/旧PV4/5/6、旧recipe全部保持。
+
+
+## 第六批：授权自然图的隔离实用评估增补
+
+最新R5.5能力清单为`company-round6/R55_CAPABILITIES.json`（ResearchCapabilitiesR55V2），第五批清单作为历史不改。产品仍“负片/印相模拟·研究中”，默认关闭、不注册、不扩产品输入范围；本批未改UI/模型/任务桥/默认处理链。
+
+- 只使用用户明确授权的CompanyRAW根：1张当前生产decoder可解码的Canon EOS R6暮色逆光人物剪影，5496×3670，开发样本而非保留验证集。人物存在但无可用肤色照明、没有强高光stress覆盖。其它授权项的打开失败/预算拒绝/metadata-only单列，不更换解码器或放宽MatrixDecodeResearchV2 D800白名单。
+- A：真实生产LibRawLinearProPhotoD65 master（已有uint16WB/demosaic/matrix裁切保留），按既定桥接D65→BradfordD50→engine标准ProPhotoD50；无额外WB、不做Display。B：同master通过实际生产RenderOutputPixel EV0 Display一次所得sRGB，作为创意输入由engine解transfer一次。B不是原生RAW胶片模拟，A/B不合算收益，不拿输入域差当色准误差。
+- A桥接在黑暗近零处出现最小−2.45e-6小负值，全部对应原同通道<1e-4；既有舍入矩阵链结果保留，不夹成0，也不称高光恢复。独立Colour Bradford检查与桥矩阵差≤1.08e-17，4源坐标写出核对exact。实际生产master无>1/1满值，输入裁切能力不由这张暗照片证明。
+- 6代理（1200×801，明确BOX平均）+24原始采样640×640同坐标窗口完成，另8重复和8新进程重开，成功调用TIFF16均全像素回读一致。原始采样窗口只证明局部输入，不包含全画面光谱/空间上下文，不称全图crop验收。图像只在授权本地研究目录，Git仅报告/数值/hash。
+- 六个5496×3670全分辨率render在上传前被当前GPU预算拒绝：保守估算1,633,607,616bytes，安全余量后允许883,949,568–892,338,176bytes；无静默降尺寸。不是宣称该设备/引擎永远不支持，也未执行/验收全分辨率条带省内存方案。strip_budget_bytes本固定源码不自动选择rows，产品不能当现成预算控制器。
+- 三胶片沿固定相纸，grain/glare/halation/DIR/autoExposure关闭；完整99字段resolved、隐藏scanner unsharp{0.7full-tier pixel,0.7amount}、DLL/resource/input hash记录。该native窗口unsharp提高边缘/噪声对比，前后线性RGB最大差A0.00863/B0.00841，本点集无新负/>1溢出；不拿截图证明物理拟合或偏好。
+- 任意grain_seed仍UNSUPPORTED、alpha丢弃/opaque、结果CPU RGBA16最终clamp非HDR、取消节点粒度、复制后result_free及独立所有权/stride/串行session限制均保持。没有seed扩展或随机效果尺寸保证。
+- 代理时序只适用于这张公司场景/尺寸/参数：init138–163ms，open/upload275–294ms，render+readback87–92ms；RSS峰值约147–158MiB，engine分配ledger约59–70MiB（不是物理VRAM峰值）；不外推到全分辨率/家庭GPU。内部upload/compute/readback分离不由当前C ABI提供。
+- 代码与逐资源分发许可仍未批准；LightTable非商业条款不是Spektra许可。曲线原因/BT64组不重跑；D80014缺源、家庭补丁、自然肤色/高光/独立验证及全分辨率门禁仍开放；WB余量冻结。

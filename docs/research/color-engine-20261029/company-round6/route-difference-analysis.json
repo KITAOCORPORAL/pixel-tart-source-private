@@ -1,0 +1,187 @@
+{
+  "version": "NaturalRouteDifferenceLocalisationV1",
+  "globalInputLinearSrgbDeltaMax": 0.06537543992683596,
+  "globalInputLinearSrgbDeltaMean": 8.319964480342372e-05,
+  "AImpliedLinearSrgbNegativeFraction": [
+    0.008215771951727008,
+    0.005852059925093633,
+    0.0005555555555555556
+  ],
+  "cases": [
+    {
+      "film": "portra",
+      "maxOutputDifference": {
+        "xyChannel": [
+          1139,
+          602,
+          0
+        ],
+        "maxCode": 11235,
+        "AOutput": [
+          15598,
+          5100,
+          4513
+        ],
+        "BOutput": [
+          4363,
+          3676,
+          4392
+        ]
+      },
+      "AInput": [
+        0.04121953248977661,
+        0.001415595761500299,
+        0.0008642179309390485
+      ],
+      "BInputEncoded": [
+        0.13898754119873047,
+        0.007675147615373135,
+        0.04172356426715851
+      ],
+      "AImpliedLinearSrgb": [
+        0.0825486426351995,
+        -0.007686760382222719,
+        0.0004365568846551534
+      ],
+      "BDecodedLinearSrgb": [
+        0.017173202708363533,
+        0.0005940516712144017,
+        0.0032320015598088503
+      ],
+      "parameterDifferences": {
+        "input_cctf_decoding": [
+          false,
+          true
+        ],
+        "input_color_space": [
+          "ProPhoto RGB",
+          "sRGB"
+        ]
+      },
+      "sourceFootprintApprox": [
+        5216.62,
+        2758.227215980025,
+        5221.2,
+        2762.808988764045
+      ],
+      "inputRouteMeaning": "A scene-linear after D50 bridge; B production gamut/display mapping once then encoded-domain box averaging; not equal inputs by design"
+    },
+    {
+      "film": "ektar",
+      "maxOutputDifference": {
+        "xyChannel": [
+          1139,
+          602,
+          0
+        ],
+        "maxCode": 8848,
+        "AOutput": [
+          11443,
+          850,
+          4315
+        ],
+        "BOutput": [
+          2595,
+          1140,
+          3382
+        ]
+      },
+      "AInput": [
+        0.04121953248977661,
+        0.001415595761500299,
+        0.0008642179309390485
+      ],
+      "BInputEncoded": [
+        0.13898754119873047,
+        0.007675147615373135,
+        0.04172356426715851
+      ],
+      "AImpliedLinearSrgb": [
+        0.0825486426351995,
+        -0.007686760382222719,
+        0.0004365568846551534
+      ],
+      "BDecodedLinearSrgb": [
+        0.017173202708363533,
+        0.0005940516712144017,
+        0.0032320015598088503
+      ],
+      "parameterDifferences": {
+        "input_cctf_decoding": [
+          false,
+          true
+        ],
+        "input_color_space": [
+          "ProPhoto RGB",
+          "sRGB"
+        ]
+      },
+      "sourceFootprintApprox": [
+        5216.62,
+        2758.227215980025,
+        5221.2,
+        2762.808988764045
+      ],
+      "inputRouteMeaning": "A scene-linear after D50 bridge; B production gamut/display mapping once then encoded-domain box averaging; not equal inputs by design"
+    },
+    {
+      "film": "trix",
+      "maxOutputDifference": {
+        "xyChannel": [
+          1139,
+          602,
+          1
+        ],
+        "maxCode": 3619,
+        "AOutput": [
+          9747,
+          9749,
+          9748
+        ],
+        "BOutput": [
+          6129,
+          6130,
+          6130
+        ]
+      },
+      "AInput": [
+        0.04121953248977661,
+        0.001415595761500299,
+        0.0008642179309390485
+      ],
+      "BInputEncoded": [
+        0.13898754119873047,
+        0.007675147615373135,
+        0.04172356426715851
+      ],
+      "AImpliedLinearSrgb": [
+        0.0825486426351995,
+        -0.007686760382222719,
+        0.0004365568846551534
+      ],
+      "BDecodedLinearSrgb": [
+        0.017173202708363533,
+        0.0005940516712144017,
+        0.0032320015598088503
+      ],
+      "parameterDifferences": {
+        "input_cctf_decoding": [
+          false,
+          true
+        ],
+        "input_color_space": [
+          "ProPhoto RGB",
+          "sRGB"
+        ]
+      },
+      "sourceFootprintApprox": [
+        5216.62,
+        2758.227215980025,
+        5221.2,
+        2762.808988764045
+      ],
+      "inputRouteMeaning": "A scene-linear after D50 bridge; B production gamut/display mapping once then encoded-domain box averaging; not equal inputs by design"
+    }
+  ],
+  "rootCauseLevel": "Intentional domains/order differ before film; no accuracy ranking"
+}

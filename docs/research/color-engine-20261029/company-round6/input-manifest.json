@@ -1,0 +1,278 @@
+{
+  "version": "NaturalSpektraInputsV1",
+  "sourceSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+  "productionContract": {
+    "DecoderVersion": "0.21.1-Release",
+    "Make": "Canon",
+    "Model": "EOS R6",
+    "SourceSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "DecodeKey": "LibRaw021LinearProPhotoD65V1:Camera:1:1:1",
+    "CameraWhiteBalance": [
+      1833,
+      1024,
+      1618,
+      1024
+    ],
+    "AppliedWhiteBalance": [
+      1833,
+      1024,
+      1618,
+      1024
+    ],
+    "CameraToRgbMatrix": [
+      1.7471526861190796,
+      -0.8485950231552124,
+      0.10144229978322983,
+      0,
+      -0.1794297993183136,
+      1.6552962064743042,
+      -0.475866436958313,
+      0,
+      0.0017740848707035184,
+      -0.607358455657959,
+      1.6055843830108643,
+      0
+    ],
+    "WhiteLevel": 16383,
+    "BlackLevelPolicy": "LibRaw metadata: user_black=-1, user_cblack=-1000001 (all channels)",
+    "OutputSpace": "LibRaw Linear ProPhoto D65",
+    "OutputBits": 16,
+    "WhiteBalanceApplied": true,
+    "CameraMatrixApplied": true,
+    "AutoBright": false,
+    "Gamma": "1,1",
+    "HighlightMode": 0,
+    "DecoderClipped": true,
+    "SaturatedChannelSamples": 0,
+    "Characterization": "LibRaw embedded/builtin camera matrix; no proprietary profile",
+    "UnpackParametersJson": "{\"UseRawSpeed\":0,\"UseDngSdk\":0,\"Options\":2,\"ShotSelect\":0,\"Specials\":0,\"MaxRawMemoryMb\":2048,\"SonyArw2PosterizationThr\":0,\"CoolscanNefGamma\":1}",
+    "OutputParametersJson": "{\"Greybox\":{\"Location\":{\"IsEmpty\":true,\"X\":0,\"Y\":0},\"Size\":{\"IsEmpty\":false,\"Width\":-1,\"Height\":-1},\"X\":0,\"Y\":0,\"Width\":-1,\"Height\":-1,\"Left\":0,\"Top\":0,\"Right\":-1,\"Bottom\":-1,\"IsEmpty\":false},\"Cropbox\":{\"Location\":{\"IsEmpty\":true,\"X\":0,\"Y\":0},\"Size\":{\"IsEmpty\":false,\"Width\":-1,\"Height\":-1},\"X\":0,\"Y\":0,\"Width\":-1,\"Height\":-1,\"Left\":0,\"Top\":0,\"Right\":-1,\"Bottom\":-1,\"IsEmpty\":false},\"Aber\":[1,1,1,1],\"Gamma\":[1,1,0.9999999999999964,0.9999999999999964,0,1],\"UserMultipliers\":[1833,1024,1618,1024],\"Brightness\":1,\"Threshold\":0,\"HalfSize\":false,\"FourColorRgb\":false,\"HighlightMode\":0,\"UseAutoWb\":false,\"UseCameraWb\":false,\"UseCameraMatrix\":true,\"OutputColor\":4,\"OutputProfile\":null,\"CameraProfile\":null,\"BadPixels\":null,\"DarkFrame\":null,\"OutputBps\":16,\"OutputTiff\":false,\"OutputFlags\":0,\"UserFlip\":0,\"UserQual\":3,\"UserBlack\":-1,\"UserCBlack\":[-1000001,-1000001,-1000001,-1000001],\"UserSaturation\":-1,\"MedianPasses\":0,\"AutoBrightThr\":0.01,\"AdjustMaximumThr\":0,\"NoAutoBright\":true,\"UseFujiRotate\":true,\"GreenMatching\":0,\"DcbIterations\":0,\"DcbEnhanceFl\":0,\"FbddNoiserd\":0,\"ExpCorrec\":false,\"ExpShift\":1,\"ExpPreser\":0,\"AutoScale\":true,\"Interpolation\":true}",
+    "BlackLevel": 2048,
+    "ChannelBlackLevels": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "BlackPatternRows": 0,
+    "BlackPatternColumns": 0,
+    "BlackPatternSha256": "8F8D55AFC740451AD55820EAFC6F84A5974010D51663588C328821353DA2828C",
+    "NormalizedWhiteBalance": [
+      1.7900390625,
+      1,
+      1.580078125,
+      1
+    ],
+    "ZeroChannelSamples": 2115397,
+    "DecoderWarnings": "None",
+    "WhiteBalanceSource": "Metadata cam_mul; explicit user_mul, auto/camera flags off",
+    "Demosaic": "AHD (user_qual=3), three-color Bayer only",
+    "ClippingPolicy": "LibRaw black subtraction, scale_colors and convert_to_rgb clip to uint16; no lost signal recovery"
+  },
+  "fullDimensions": [
+    5496,
+    3670
+  ],
+  "proxyDimensions": [
+    1200,
+    801
+  ],
+  "orientation": 1,
+  "exposureEv": 0,
+  "bridge": {
+    "version": "ExistingResearchD65ToD50V1",
+    "P": [
+      [
+        0.529317,
+        0.330092,
+        0.140588
+      ],
+      [
+        0.098368,
+        0.873465,
+        0.028169
+      ],
+      [
+        0.016879,
+        0.117663,
+        0.865457
+      ]
+    ],
+    "sRGBtoXYZD65": [
+      [
+        0.4124,
+        0.3576,
+        0.1805
+      ],
+      [
+        0.2126,
+        0.7152,
+        0.0722
+      ],
+      [
+        0.0193,
+        0.1192,
+        0.9505
+      ]
+    ],
+    "Bradford": [
+      [
+        0.8951,
+        0.2664,
+        -0.1614
+      ],
+      [
+        -0.7502,
+        1.7135,
+        0.0367
+      ],
+      [
+        0.0389,
+        -0.0685,
+        1.0296
+      ]
+    ],
+    "sourceWhiteXY": [
+      0.3127,
+      0.329
+    ],
+    "destinationWhiteXY": [
+      0.3457,
+      0.3585
+    ],
+    "engineProPhotoD50toXYZ": [
+      [
+        0.7977,
+        0.1352,
+        0.0313
+      ],
+      [
+        0.288,
+        0.7119,
+        0.0001
+      ],
+      [
+        0.0,
+        0.0,
+        0.8249
+      ]
+    ],
+    "combinedMatrix": [
+      [
+        1.0000217911832863,
+        9.591835077327627e-05,
+        7.133026177363171e-05
+      ],
+      [
+        -6.627610126724364e-05,
+        1.000014905953994,
+        -2.2700840720611326e-05
+      ],
+      [
+        -6.64219880696861e-05,
+        2.8858865072908588e-05,
+        1.0002334640951398
+      ]
+    ],
+    "order": "LibRawProPhotoD65 inverse -> linear sRGB D65 -> XYZ D65 -> Bradford D50 -> standard engine ProPhoto D50",
+    "extraWB": false,
+    "displayMappingOnA": false
+  },
+  "AStatistics": {
+    "min": [
+      0.0,
+      -8.433867151325103e-07,
+      -2.449454086672631e-06
+    ],
+    "max": [
+      0.2713578939437866,
+      0.17672018706798553,
+      0.08969578146934509
+    ],
+    "negative": [
+      0,
+      942981,
+      590359
+    ],
+    "aboveOne": [
+      0,
+      0,
+      0
+    ]
+  },
+  "B": "Unchanged production RenderOutputPixel EV0 once; sRGB encoded, no display repeated before engine",
+  "prepareFullAndWriteMs": 4360.6104999780655,
+  "proxyMethod": "Pillow F BOX; explicit proxy, not full output; channel-domain box averaging",
+  "regions": {
+    "edge_people": {
+      "left": 2050,
+      "top": 1370,
+      "width": 640,
+      "height": 640
+    },
+    "shadow_vehicle": {
+      "left": 0,
+      "top": 1980,
+      "width": 640,
+      "height": 640
+    },
+    "sky_wire": {
+      "left": 3050,
+      "top": 380,
+      "width": 640,
+      "height": 640
+    }
+  },
+  "files": [
+    {
+      "path": "A-linear-d50-crop-edge_people.npy",
+      "bytes": 4915328,
+      "sha256": "7e21ef54742dbdd8a509dbe9ca0908fd6d52fbbf3b3b0668b94ab446f3570108"
+    },
+    {
+      "path": "A-linear-d50-crop-shadow_vehicle.npy",
+      "bytes": 4915328,
+      "sha256": "c5c961a8221b53baa69bdabeba355aeac343e37082147785ca42ad73c196c2fd"
+    },
+    {
+      "path": "A-linear-d50-crop-sky_wire.npy",
+      "bytes": 4915328,
+      "sha256": "5e8730da8e2759b532cb571f1195b3afc922355741ed083a38c9465ec00997b4"
+    },
+    {
+      "path": "A-linear-d50-full.npy",
+      "bytes": 242043968,
+      "sha256": "77f49b1580eb55c9274278d1019adebec098ff2a3d630af0fc5b994d4b6041c3"
+    },
+    {
+      "path": "A-linear-d50-proxy.npy",
+      "bytes": 11534528,
+      "sha256": "d45f0a16ba328f6dcdbc030c7f80dfd1b56544d07f2909fbf396ed59a64f2ca5"
+    },
+    {
+      "path": "B-display-srgb-crop-edge_people.npy",
+      "bytes": 4915328,
+      "sha256": "b6c2f3bd9b58394ca6ca1a387b8151a47c55b7ed14a7e2fb03937fd2e7a2b879"
+    },
+    {
+      "path": "B-display-srgb-crop-shadow_vehicle.npy",
+      "bytes": 4915328,
+      "sha256": "7128e7c19dc46f5ab328549c93487d25cc884076cb5cb7a6eb82d60d6d854790"
+    },
+    {
+      "path": "B-display-srgb-crop-sky_wire.npy",
+      "bytes": 4915328,
+      "sha256": "2c66f7c3ec985ec46488ee2f543b0bbf23d8a94ac3bbe1abcbbc3036d504228d"
+    },
+    {
+      "path": "B-display-srgb-full.npy",
+      "bytes": 242043968,
+      "sha256": "b638c6daa7929e5f69a4fd82e5d24e134a04a9c5fba76de426ee8913fdd960c9"
+    },
+    {
+      "path": "B-display-srgb-proxy.npy",
+      "bytes": 11534528,
+      "sha256": "86dcb00420b3343601c374274b707293f5c650919fd6865dbf81ccbd9da5b57d"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "version": "Round6FinalSourceProvenanceV1",
+  "newInputCaller": {
+    "project": "tools/spektra-natural-input/NaturalInput.csproj",
+    "sourceSha256": "d3e31c6004b1f5f672ca3bbf3615ed8d9fa1f7a3dbfa7109270828b4672bdca0",
+    "assemblySha256": "1e9e35766edb82ea1b544a181a2beb4e26680228376960c9b8c8eb8a1784ed14",
+    "coreAssemblySha256": "deb8c587b88dc09805b50ad00e9bde4ac3d2284649b4a9bc39a5ff337057125b",
+    "finalBuild": "PASS",
+    "sourceOnlyWhitespaceNormalisedAfterActualDecode": true
+  },
+  "newResearchDrivers": [
+    {
+      "path": "tools/spektra-natural-input/NaturalInput.csproj",
+      "sha256": "ce69e7799d6407cdd89bb78ea4bf1dbb1ef34a71a0f16d5132c97999ab9dcd0f"
+    },
+    {
+      "path": "tools/spektra-natural-input/Program.cs",
+      "sha256": "d3e31c6004b1f5f672ca3bbf3615ed8d9fa1f7a3dbfa7109270828b4672bdca0"
+    },
+    {
+      "path": "tools/spektralab-research/natural_case.py",
+      "sha256": "d39609966a94e1e03fe0d9e122deabc73f956301dc3d1e4652cbabd25436cc8b"
+    },
+    {
+      "path": "tools/spektralab-research/natural_contact.py",
+      "sha256": "b8d22b237f9907e6d3d703fffb8acd11b8f782a36908fc9fe590cc359f292e66"
+    },
+    {
+      "path": "tools/spektralab-research/natural_diagnostics.py",
+      "sha256": "675bb68088bcbda9aa04f712c8efbea624aca769a17f8fd3b6d925a41df00ca5"
+    },
+    {
+      "path": "tools/spektralab-research/natural_extra_window.py",
+      "sha256": "7d8156bb45c2d4ffc8567ae9951343f41917d1f82c0a694a862cb3e3556f4c4f"
+    },
+    {
+      "path": "tools/spektralab-research/natural_prepare.py",
+      "sha256": "7102aa3219c864a93d4fd7517d219b8fb8c15dd38a9ab4d8c1ba1610f61a59d5"
+    },
+    {
+      "path": "tools/spektralab-research/natural_run.py",
+      "sha256": "c77650cd5bbc5991d1c758b33ea1c369461b345a3a0b22bd5b80a99547e3a254"
+    },
+    {
+      "path": "tools/spektralab-research/natural_trace.py",
+      "sha256": "6832e75721231157d906bdde22e3727f24bb3ddaef0fe7c741ad387c0303dc1d"
+    },
+    {
+      "path": "tools/spektralab-research/natural_unsharp.py",
+      "sha256": "6504686009875eeba26a8b672cb011f86b73e0836542e6ca7b0998297ec02d5b"
+    },
+    {
+      "path": "tools/spektralab-research/verify_round6.py",
+      "sha256": "39fa7639e446cda4f99a9308f49d60d5c305c098b9b92d9c713d1146d769c053"
+    }
+  ],
+  "noPrivateImagesStaged": true,
+  "protectedProductAndV2PathsModified": false
+}

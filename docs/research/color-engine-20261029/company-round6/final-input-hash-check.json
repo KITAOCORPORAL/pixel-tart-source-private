@@ -1,0 +1,54 @@
+{
+  "version": "FinalNaturalInputHashCheckV1",
+  "allMatch": true,
+  "checks": [
+    {
+      "file": "production-linear-d65.f32",
+      "match": true
+    },
+    {
+      "file": "production-display-srgb.f32",
+      "match": true
+    },
+    {
+      "file": "A-linear-d50-crop-edge_people.npy",
+      "match": true
+    },
+    {
+      "file": "A-linear-d50-crop-shadow_vehicle.npy",
+      "match": true
+    },
+    {
+      "file": "A-linear-d50-crop-sky_wire.npy",
+      "match": true
+    },
+    {
+      "file": "A-linear-d50-full.npy",
+      "match": true
+    },
+    {
+      "file": "A-linear-d50-proxy.npy",
+      "match": true
+    },
+    {
+      "file": "B-display-srgb-crop-edge_people.npy",
+      "match": true
+    },
+    {
+      "file": "B-display-srgb-crop-shadow_vehicle.npy",
+      "match": true
+    },
+    {
+      "file": "B-display-srgb-crop-sky_wire.npy",
+      "match": true
+    },
+    {
+      "file": "B-display-srgb-full.npy",
+      "match": true
+    },
+    {
+      "file": "B-display-srgb-proxy.npy",
+      "match": true
+    }
+  ]
+}

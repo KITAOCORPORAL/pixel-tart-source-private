@@ -1,0 +1,12 @@
+{
+  "version": "ProductionNaturalInputV1",
+  "status": "REJECTED_OR_FAILED",
+  "sourceSha256": "AE1414F77B8A18BB003C275AB2B30BBBA9A1D6A27F569268C3503F12C9B5D644",
+  "sourceUnchanged": true,
+  "stages": [
+    "Unpacked"
+  ],
+  "error": "System.NotSupportedException: RAW\u89E3\u7801\u5DE5\u4F5C\u96C6\u4F30\u8BA1\u8D85\u8FC71GiB\u51C6\u5165\u9884\u7B97\uFF0C\u672A\u964D\u4F4E\u5C3A\u5BF8\u6216\u4F4D\u6DF1\u3002\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.ProfessionalRawDecoder.Decode(String path, ProfessionalRawDefinition definition, CancellationToken token) in D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\src\\RAWSelectionAssistant.Core\\Services\\RawToJpeg\\ProfessionalRawDecoder.cs:line 68\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.ProfessionalRawDecoder.\u003C\u003Ec__DisplayClass2_0.\u003CDecodeAsync\u003Eb__0() in D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\src\\RAWSelectionAssistant.Core\\Services\\RawToJpeg\\ProfessionalRawDecoder.cs:line 20\r\n   at System.Threading.Tasks.Task\u00601.InnerInvoke()\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n--- End of stack trace from previous location ---\r\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\r\n   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task\u0026 currentTaskSlot, Thread threadPoolThread)\r\n--- End of stack trace from previous location ---\r\n   at RAWSelectionAssistant.Core.Services.RawToJpeg.ProfessionalRawDecoder.DecodeAsync(String path, ProfessionalRawDefinition definition, CancellationToken token) in D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\src\\RAWSelectionAssistant.Core\\Services\\RawToJpeg\\ProfessionalRawDecoder.cs:line 20\r\n   at Program.\u003CMain\u003E$(String[] args) in D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\tools\\spektra-natural-input\\Program.cs:line 20",
+  "elapsedMs": 1327.5524,
+  "processPeakWorkingSetBytes": 241061888
+}

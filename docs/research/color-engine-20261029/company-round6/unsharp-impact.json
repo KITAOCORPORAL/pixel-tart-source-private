@@ -1,0 +1,64 @@
+{
+  "version": "NaturalScannerUnsharpImpactV1",
+  "internalDefault": {
+    "sigmaFullTierPixels": 0.7,
+    "amount": 0.7,
+    "scannerLensBlur": 0
+  },
+  "pixels": {
+    "nativeWindow": [
+      640,
+      640
+    ],
+    "fullFrameAccepted": false,
+    "interiorExcludesPixels": 16
+  },
+  "cases": [
+    {
+      "route": "A",
+      "beforeHash": "c103cb386a45930af996c8fc2e36fa46dabdcd0923b6a16e06df5cd3d98c7e64",
+      "afterHash": "dc40b10e55ff8a18767b28c7843360fd9c26539302b3a894e8c5182435b0fee9",
+      "maxAbsLinearRgb": 0.008632857352495193,
+      "meanAbsLinearRgb": 0.00048071343917399645,
+      "interiorMaxAbs": 0.008632857352495193,
+      "interiorMeanAbs": 0.0004928145208396018,
+      "beforeMinMax": [
+        0.003816842334344983,
+        0.0606788694858551
+      ],
+      "afterMinMax": [
+        0.002320504980161786,
+        0.06796156615018845
+      ],
+      "newNegativeSamples": 0,
+      "newAboveOneSamples": 0,
+      "changedFraction": 1.0,
+      "limits": "float linear-sRGB scanner-stage comparison; does not establish full-frame spatial-context equality, perceptual significance, or no-unsharp final output"
+    },
+    {
+      "route": "B",
+      "beforeHash": "ab6ee0e8801dc0896cb4b77deb54fa8b4443fccfdee3e44ce4d4d40f10dacaef",
+      "afterHash": "ebfa3d80253ca01fab5fb34b93630064df94230e85bea8f9bec01dbf7be2076c",
+      "maxAbsLinearRgb": 0.008408840745687485,
+      "meanAbsLinearRgb": 0.0004747788480017334,
+      "interiorMaxAbs": 0.008408840745687485,
+      "interiorMeanAbs": 0.0004866212257184088,
+      "beforeMinMax": [
+        0.003873248351737857,
+        0.05937368795275688
+      ],
+      "afterMinMax": [
+        0.002359089208766818,
+        0.06645826250314713
+      ],
+      "newNegativeSamples": 0,
+      "newAboveOneSamples": 0,
+      "changedFraction": 1.0,
+      "limits": "float linear-sRGB scanner-stage comparison; does not establish full-frame spatial-context equality, perceptual significance, or no-unsharp final output"
+    }
+  ],
+  "observationImage": {
+    "path": "E:\\Kitao-Research\\color-engine-round6-20261030\\observations\\unsharp-impact.png",
+    "sha256": "76d091c014c67ea6a96202b73787228b3923de38b53732115206be49a9a17913"
+  }
+}

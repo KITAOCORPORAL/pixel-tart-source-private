@@ -1,0 +1,194 @@
+STATE D:/AI AGENT/RAWSelectionAssistant
+## feature/pixel-tart-product-redesign
+STATE D:/AI AGENT/color-studio-closure-20261013
+## feature/color-studio-spatial-closure-20261013...origin/feature/color-studio-spatial-closure-20261013
+STATE D:/AI AGENT/kitao-company-merged-release-20261015
+## HEAD (no branch)
+STATE D:/AI AGENT/kitao-company-validation-20261015
+## integration/kitao-company-validation-20261015...origin/integration/kitao-company-validation-20261015
+STATE D:/AI AGENT/kitao-controlled-icc-20261015
+## feature/kitao-controlled-icc-20261015...origin/feature/kitao-controlled-icc-20261015
+STATE D:/AI AGENT/kitao-icc-raw-followup-20261015
+## research/kitao-icc-raw-followup-20261015...origin/integration/kitao-company-validation-20261015
+?? docs/evidence/icc-raw-followup-20261015/
+?? tools/icc-raw-followup/
+STATE D:/AI AGENT/kitao-integration-20261013
+## integration/kitao-color-startup-20261013...origin/integration/kitao-color-startup-20261013
+STATE D:/AI AGENT/kitao-night-ab-company-20261015
+## integration/kitao-night-ab-company-20261015...origin/integration/kitao-night-ab-company-20261015
+STATE D:/AI AGENT/kitao-planning-company-20261014
+## feature/kitao-planning-company-20261014...origin/feature/kitao-planning-company-20261014
+STATE D:/AI AGENT/kitao-planning-r7-20261014
+## feature/kitao-planning-r7-20261014...origin/feature/kitao-planning-r7-20261014
+STATE D:/AI AGENT/kitao-planning-r7-closure-20261014
+## fix/kitao-planning-r7-closure-20261014...origin/fix/kitao-planning-r7-closure-20261014
+STATE D:/AI AGENT/kitao-planning-rich-flow-20261014
+## fix/kitao-planning-rich-flow-20261014...origin/feature/kitao-planning-company-20261014
+STATE D:/AI AGENT/kitao-planning-rich-flow-r6-20261014
+## fix/kitao-planning-rich-flow-r6-20261014...origin/fix/kitao-planning-rich-flow-r6-20261014
+STATE D:/AI AGENT/kitao-planning-table-content-20261014
+## feature/kitao-planning-table-content-20261014...origin/feature/kitao-planning-table-content-20261014
+STATE D:/AI AGENT/kitao-planning-tray-images-20261014
+## feature/kitao-planning-tray-images-20261014...origin/feature/kitao-planning-tray-images-20261014
+STATE D:/AI AGENT/kitao-startup-fix-20261013
+## fix/kitao-startup-preferences-20261013...origin/fix/kitao-startup-preferences-20261013
+STATE D:/AI AGENT/kitao-studio-product-master-spec-20261012
+## docs/kitao-studio-product-master-spec-20261012...origin/docs/kitao-studio-product-master-spec-20261012
+STATE D:/AI AGENT/kitao-validation-closure-20261015
+## research/kitao-validation-closure-20261015...origin/research/kitao-validation-closure-20261015
+STATE D:/AI AGENT/pixel-tart-batch09-20261012
+## feature/pixel-tart-batch09-instant-film-quality-20261012...origin/feature/pixel-tart-batch09-instant-film-quality-20261012
+STATE D:/AI AGENT/pixel-tart-batch10-20261012
+## feature/pixel-tart-batch10-raw-current-edits-20261012...origin/feature/pixel-tart-batch10-raw-current-edits-20261012
+STATE D:/AI AGENT/pixel-tart-batch11-20261013
+## feature/kitao-studio-batch11-raw-memory-color-20261013...origin/feature/kitao-studio-batch11-raw-memory-color-20261013
+STATE D:/AI AGENT/pixel-tart-batch12-20261013
+## feature/kitao-studio-batch12-public-color-validation-20261013...origin/feature/kitao-studio-batch12-public-color-validation-20261013
+STATE D:/AI AGENT/pixel-tart-batch12-closure-20261013
+## fix/kitao-batch12-wpf-native-acceptance-20261013...origin/fix/kitao-batch12-wpf-native-acceptance-20261013
+ M docs/evidence/ui-guardian/P0_ROOT_CAUSE_ANALYSIS.json
+ M docs/evidence/ui-guardian/P0_ROOT_CAUSE_ANALYSIS.md
+ M docs/evidence/ui-guardian/static-xaml-lint.json
+STATE D:/AI AGENT/RAWSelectionAssistant_sqlite_gate
+## HEAD (no branch)
+ M tests/RAWSelectionAssistant.Tests/TestSupport.cs
+ M tests/RAWSelectionAssistant.Tests/Version210RecoveryCoordinatorTests.cs
+ M tests/RAWSelectionAssistant.Tests/Version210StressTests.cs
+ M tests/RAWSelectionAssistant.Tests/Version220BookingDomainTests.cs
+ M tests/RAWSelectionAssistant.Tests/Version220CalendarSchemaTests.cs
+ M tests/RAWSelectionAssistant.Tests/Version220DocumentReminderTests.cs
+ M tests/RAWSelectionAssistant.Tests/Version220DocumentWorkflowTests.cs
+STATE D:/AI AGENT/worktrees/al-f01-foundation
+## feature/asset-library-import-foundation-hardening...source-private/feature/asset-library-import-foundation-hardening
+STATE D:/AI AGENT/worktrees/asset-library-v1
+## feature/asset-library-v1
+STATE D:/AI AGENT/worktrees/color-engine-company-20261030
+## research/color-engine-company-20261030...source-private/research/color-engine-company-20261030
+STATE D:/AI AGENT/worktrees/migration-asset-library-20260911
+## migration/asset-library-work-20260911...source-private/migration/asset-library-work-20260911
+STATE D:/AI AGENT/worktrees/modular-harness-v1
+## feature/asset-library-eagle-shell-context-p36...source-private/feature/asset-library-eagle-shell-context-p36 [ahead 1]
+ M src/RAWSelectionAssistant.Core/Models/CollageModels.cs
+ M src/RAWSelectionAssistant.Core/Services/AssetLibrary/AssetLibraryContainerService.cs
+ M src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.P3.cs
+ M src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.V15.cs
+ M src/RAWSelectionAssistant.Core/Services/AssetLibrary/SqliteAssetLibraryRepository.cs
+ M src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAnalysisPersistence.cs
+ M src/RAWSelectionAssistant.Core/Services/AssetLibrary/VisualAnalysis/VisualAssetQueryService.cs
+ M src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentService.cs
+ M src/RAWSelectionAssistant.Core/Services/Bookings/BookingDocumentWorkflowService.cs
+ M src/RAWSelectionAssistant.Core/Services/Business/BusinessServices.cs
+ M src/RAWSelectionAssistant.Core/Services/Database/CalendarWorkflowSchemaMigration.cs
+ M src/RAWSelectionAssistant.Core/Services/Database/SqliteBookingDocumentRepository.cs
+ M src/RAWSelectionAssistant.Core/Services/Database/SqliteBusinessRepositories.cs
+ M src/RAWSelectionAssistant.Core/Services/Database/SqliteShootBookingRepository.cs
+ M src/RAWSelectionAssistant.Core/Services/OrganizeService.cs
+ M src/RAWSelectionAssistant.Core/Services/RawToJpeg/RawToJpegSafeConversionService.cs
+ M src/RAWSelectionAssistant.Core/Services/Tethering/WatchFolderCameraAdapter.cs
+ M tests/RAWSelectionAssistant.WpfTests/DesignSystemAv2LockTests.cs
+?? docs/design/DESIGN_SYSTEM_IMPLEMENTATION_REPORT.md
+STATE D:/AI AGENT/worktrees/online-selection-v1
+## feature/online-selection-v1
+?? src/RAWSelectionAssistant/artifacts/
+STATE D:/AI AGENT/worktrees/pixel-tart-developer-preview-rc6
+## integration/pixel-tart-developer-preview...source-private/integration/pixel-tart-developer-preview
+STATE D:/AI AGENT/worktrees/polaroid-offline-research-20261028
+## research/polaroid-offline-20261028...origin/research/polaroid-offline-20261028
+STATE E:/Kitao-Worktrees/company-home-sync-performance-20261021
+## company/guangjing-home-sync-performance-20261021...origin/company/guangjing-home-sync-performance-20261021
+STATE E:/Kitao-Worktrees/company-lighttable-lifecycle-20261030
+## company/lighttable-lifecycle-20261030...origin/company/lighttable-lifecycle-20261030
+STATE E:/Kitao-Worktrees/darkroom-r3-company-20261020
+## feature/darkroom-lightprint-r3-20261019...origin/feature/darkroom-lightprint-r3-20261019
+STATE E:/Kitao-Worktrees/guangjing-whole-app-followup-20261022
+## validation/guangjing-whole-app-followup-20261022...origin/validation/guangjing-whole-app-followup-20261022
+STATE E:/Kitao-Worktrees/guangjing-whole-app-validation-20261020
+## validation/guangjing-whole-app-20261020...origin/validation/guangjing-whole-app-20261020
+STATE E:/Kitao-Worktrees/kitao-icc-reliability-20261015
+## fix/kitao-icc-reliability-20261015
+STATE E:/Kitao-Worktrees/kitao-photo-engine-candidate-20261016
+## feature/kitao-photo-engine-candidate-20261016...origin/feature/kitao-photo-engine-candidate-20261016
+STATE E:/Kitao-Worktrees/kitao-v3-company-sync-20261019
+## feature/kitao-v3-corrections-colorpage-20261017...origin/feature/kitao-v3-corrections-colorpage-20261017
+ M src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateRecipe.cs
+ M src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateRenderSession.cs
+ M src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/InstantV3ProductPipeline.cs
+ M src/RAWSelectionAssistant.Core/Services/Projects/StudioEditVersion.cs
+ M src/RAWSelectionAssistant/MainWindow.xaml
+ M src/RAWSelectionAssistant/RAWSelectionAssistant.csproj
+ M src/RAWSelectionAssistant/ViewModels/MainViewModel.cs
+ M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.InstantFilm.cs
+ M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.InstantV3.cs
+ M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.PhotoGradePage.cs
+ M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Photographer.cs
+ M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Session.cs
+ M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Versions.cs
+ M src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.cs
+ M src/RAWSelectionAssistant/Views/InstantV3Editor.xaml
+ M src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml
+ M src/RAWSelectionAssistant/Views/PhotoGradePageView.xaml.cs
+ M tests/RAWSelectionAssistant.WpfTests/PhotoGradePageV1Tests.cs
+ M tests/RAWSelectionAssistant.WpfTests/PhotographerTrialPageTests.cs
+?? docs/darkroom-r3/
+?? src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidateFrameAsset.cs
+?? src/RAWSelectionAssistant.Core/Services/Projects/InstantV3/CandidatePostAdjustment.cs
+?? src/RAWSelectionAssistant/Assets/FramesR34/
+?? src/RAWSelectionAssistant/Services/DarkroomFrameCatalog.cs
+?? src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.Darkroom.cs
+?? src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.DarkroomFrames.cs
+?? src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.DarkroomImport.cs
+?? src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.DarkroomPaths.cs
+?? src/RAWSelectionAssistant/ViewModels/ReferenceColorWorkspaceViewModel.DarkroomPost.cs
+?? src/RAWSelectionAssistant/Views/DarkroomThumbnailConverter.cs
+?? tests/RAWSelectionAssistant.WpfTests/DarkroomR3Tests.cs
+?? tests/RAWSelectionAssistant.WpfTests/FrameCompositionReferenceTests.cs
+STATE E:/Kitao-Worktrees/kitao-wpf-failures-20261016
+## fix/kitao-wpf-failures-20261016...origin/fix/kitao-wpf-failures-20261016
+STATE E:/Kitao-Worktrees/kitao-wpf-icc-gates-20261015
+## validation/kitao-wpf-icc-gates-20261015...origin/validation/kitao-wpf-icc-gates-20261015
+STATE E:/Kitao-Worktrees/kitao-wpf-result-completeness-20261016
+## fix/kitao-wpf-result-completeness-20261016...origin/fix/kitao-wpf-result-completeness-20261016
+STATE E:/Kitao-Worktrees/planning-bounded-thumbnails-20261023
+## company/planning-bounded-thumbnails-20261023...origin/company/planning-bounded-thumbnails-20261023
+STATE E:/Kitao-Worktrees/planning-current-root-import-20261022
+## feature/planning-current-root-import-20261022...origin/feature/planning-current-root-import-20261022
+STATE E:/Kitao-Worktrees/planning-owned-jpeg-company-20261023
+## company/planning-owned-jpeg-20261023...origin/company/planning-owned-jpeg-20261023
+STATE E:/Kitao-Worktrees/planning-owned-resources-20261022
+## company/planning-owned-resources-20261022...origin/company/planning-summary-images-20261021
+ M src/RAWSelectionAssistant.Core/Services/Projects/PlanningCenter.cs
+ M src/RAWSelectionAssistant.Core/Services/Projects/PlanningDocument.cs
+ M src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.Document.cs
+ M src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.References.cs
+ M src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs
+?? src/RAWSelectionAssistant.Core/Services/Projects/PlanningOwnedResource.cs
+?? src/RAWSelectionAssistant.Core/Services/Projects/PlanningProjectStore.OwnedResources.cs
+?? src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.OwnedResources.cs
+?? src/RAWSelectionAssistant/Views/PlanningCenterView.OwnedResources.cs
+STATE E:/Kitao-Worktrees/planning-project-copies-20261022
+## feature/planning-project-copies-20261022...origin/feature/planning-project-copies-20261022
+STATE E:/Kitao-Worktrees/planning-project-packages-20261022
+## feature/planning-project-packages-20261022...origin/feature/planning-project-packages-20261022
+STATE E:/Kitao-Worktrees/planning-shot-link-lifecycle-company-20261023
+## company/planning-shot-link-lifecycle-20261023...origin/company/planning-shot-link-lifecycle-20261023
+STATE E:/Kitao-Worktrees/planning-summary-desktop-entry-20261021
+## company/planning-summary-desktop-entry-20261021...origin/company/guangjing-home-sync-performance-20261021
+ M src/RAWSelectionAssistant/Views/PlanningCenterView.Docx.cs
+ M src/RAWSelectionAssistant/Views/PlanningCenterView.xaml.cs
+?? src/RAWSelectionAssistant.Core/Services/Projects/PlanningReadableSummary.cs
+?? src/RAWSelectionAssistant/Services/PlanningSummaryDocument.cs
+?? src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.SummaryExport.cs
+?? tests/RAWSelectionAssistant.Tests/PlanningReadableSummaryTests.cs
+?? tests/RAWSelectionAssistant.WpfTests/PlanningSummaryExportTests.cs
+STATE E:/Kitao-Worktrees/planning-summary-docx-r2-20261021
+## company/planning-summary-docx-r2-20261021...origin/company/planning-summary-docx-r2-20261021
+STATE E:/Kitao-Worktrees/planning-summary-images-20261021
+## company/planning-summary-images-20261021...origin/company/planning-summary-images-20261021
+STATE E:/Kitao-Worktrees/r53-color-tools-film-20261028
+## company/r53-color-tools-film-20261028
+STATE E:/Kitao-Worktrees/r53-stage-a-completion-20261027
+## company/r53-stage-a-completion-20261027
+STATE E:/Kitao-Worktrees/r54-closure-20261029
+## company/r54-closure-20261029...origin/company/r54-closure-20261029
+STATE E:/Kitao-Worktrees/whole-app-ui-copy-cleanup-20261026
+## company/whole-app-ui-copy-cleanup-20261026...origin/company/whole-app-ui-copy-cleanup-20261026
