@@ -38,14 +38,14 @@ public partial class PlanningCenterView : UserControl
         DataContextChanged += (_, e) =>
         {
             _trayPickerVersion++;_ownedPreviewGeneration++;_ownedPreviewCancellation?.Cancel();PreviewImage.Source=null;
-            if (_vm is not null) { ClosePlanningDock(); FlushSimpleEditors(); _vm.CapturePendingEditorDraft = null; _vm.ReadEditorHistoryImages=null; _vm.DocumentPresentationChanged -= PresentationChanged; _vm.PropertyChanged -= ViewModelChanged; }
+            if (_vm is not null) { _vm.CancelCanvasCapture();ClosePlanningDock(); FlushSimpleEditors(); _vm.CapturePendingEditorDraft = null; _vm.ReadEditorHistoryImages=null; _vm.DocumentPresentationChanged -= PresentationChanged; _vm.PropertyChanged -= ViewModelChanged; }
             _vm = e.NewValue as PlanningCenterViewModel;
             if (_vm is not null) { _vm.CapturePendingEditorDraft = FlushSimpleEditors; _vm.ReadEditorHistoryImages=()=>DocumentContent.Children.OfType<PlanningRichEditor>().SelectMany(e=>e.RetainedHistoryImages).ToArray(); _vm.DocumentPresentationChanged += PresentationChanged; _vm.PropertyChanged += ViewModelChanged; }
             Render();
         };
         Loaded += (_, _) => Render();
-        Unloaded += async (_, _) => { _trayPickerVersion++; if (_vm is not null) await FlushDocumentAsync(); };
-        IsVisibleChanged += async (_, _) => { if (!IsVisible && _vm is not null) await FlushDocumentAsync(); };
+        Unloaded += async (_, _) => { _trayPickerVersion++; if (_vm is not null) {_vm.CancelCanvasCapture();await FlushDocumentAsync();} };
+        IsVisibleChanged += async (_, _) => { if (!IsVisible && _vm is not null) {_vm.CancelCanvasCapture();await FlushDocumentAsync();} };
         SizeChanged += (_, _) => UpdateResponsiveLayout();
         void OverlayChanged(object sender, DependencyPropertyChangedEventArgs args)
         {
@@ -391,7 +391,7 @@ public partial class PlanningCenterView : UserControl
             }
         }
         var items = ReferencesFor(page).ToArray();
-        if (items.Length == 0 && interactive) { var empty = Text("还没有" + page + "，可添加参考图。", 18); empty.Margin = new Thickness(0, 70, 0, 40); DocumentContent.Children.Add(empty); }
+        if (items.Length == 0 && interactive) { var empty = Text(page=="情绪板"&&_vm.DocumentCanvasRevisions.Count>0?"已固定画布版本，可继续添加参考图。":"还没有" + page + "，可添加参考图。", 18); empty.Margin = new Thickness(0, 70, 0, 40); DocumentContent.Children.Add(empty); }
         foreach (var group in items.GroupBy(item => page == "服化道" ? (_vm.StylingGroups.Contains(item.Group) ? item.Group : "未分组造型参考") : page == "情绪板" ? item.Group : "")
             .OrderBy(group => page == "服化道" ? group.Key switch { "服装" => 0, "妆发" => 1, "道具" => 2, _ => 3 } : 0))
         {
@@ -404,20 +404,22 @@ public partial class PlanningCenterView : UserControl
         {
             foreach (var revision in _vm.DocumentCanvasRevisions)
             {
-                DocumentContent.Children.Add(Text("已保存画布版本 · " + revision.CapturedAt.ToLocalTime().ToString("g"), 13));
+                DocumentContent.Children.Add(Text("已保存画布版本 · " + revision.CapturedAt.ToLocalTime().ToString("g")+(revision.RenderVersion==2?" · "+revision.PreviewWidth+"×"+revision.PreviewHeight:""), 13));
                 if (revision.PreviewPngBase64 is { } encoded)
                 {
                     using var bytes = new MemoryStream(Convert.FromBase64String(encoded));
                     var image = new System.Windows.Media.Imaging.BitmapImage(); image.BeginInit(); image.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad; image.StreamSource = bytes; image.EndInit(); image.Freeze();
-                    DocumentContent.Children.Add(new Image { Source = image, MaxHeight = 420, Stretch = Stretch.Uniform });
+                    DocumentContent.Children.Add(new Border{Background=Brush("SurfaceSecondaryBrush"),Child=new Image { Source = image, Height=Math.Min(320,image.PixelHeight), Stretch = Stretch.Uniform, HorizontalAlignment=HorizontalAlignment.Center }});
                 }
             }
             Heading(DocumentContent, "关联的灵感板与自由画布", 17);
+            var cancel=Action("取消生成画布版本",()=>_vm?.CancelCanvasCapture());cancel.SetBinding(VisibilityProperty,new Binding(nameof(_vm.IsCanvasCaptureRunning)){Source=_vm,Converter=new BooleanToVisibilityConverter()});DocumentContent.Children.Add(cancel);
             foreach (var board in _vm.ProjectBoards) DocumentContent.Children.Add(Text(board.Name + " · " + board.EntryCount + " 张参考", 14));
             foreach (var canvas in _vm.ProjectCanvases)
             {
                 DocumentContent.Children.Add(Action(canvas.Name, () => _vm.OpenLinkedCanvas(canvas)));
-                DocumentContent.Children.Add(Action("插入/更新画布版本 · " + canvas.Name, async () => { try { await _vm.CaptureCanvasDocumentAsync(canvas); } catch (Exception error) { _vm.Dialogs.ShowError("画布快照未保存：" + error.Message); } }));
+                var capture=Action("插入/更新画布版本 · " + canvas.Name, async () => {var owner=_vm;if(owner is null)return;try{await owner.CaptureCanvasDocumentAsync(canvas);}catch(OperationCanceledException){}catch(Exception error){owner.Dialogs.ShowError("画布版本未保存，旧版本保留："+error.Message);} });
+                capture.SetBinding(IsEnabledProperty,new Binding(nameof(_vm.IsCanvasCaptureRunning)){Source=_vm,Converter=new CanvasCaptureIdleConverter()});DocumentContent.Children.Add(capture);
             }
         }
     }

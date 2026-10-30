@@ -80,6 +80,15 @@ public sealed partial class PlanningProjectStore(string directory)
     public bool Exists(Guid projectId) => File.Exists(FilePath(projectId));
     public Task UpdateDocumentAsync(Guid projectId, PlanningDocument document, PlanningSummary summary, CancellationToken token = default) =>
         UpdateAsync(projectId, state => state with { Document = PrepareDocument(document, state.Document?.Package, projectId), Summary = summary }, token);
+    /// <summary>Append only after rendering, without journaling a not-yet-committed revision or replacing concurrent text edits.</summary>
+    public Task AppendCanvasRevisionAsync(Guid projectId,Guid documentId,PlanningCanvasRevision revision,CancellationToken token=default,Action? beforeCommit=null)=>
+        UpdateAsync(projectId,state=>{
+            var document=(state.Document??throw new InvalidDataException("策划文档尚未保存。")).EnsureIdentity(projectId);
+            if(document.Package!.DocumentId!=documentId||revision.EditableSnapshot.ProjectId!=projectId)throw new InvalidDataException("策划/画布项目或文档身份已改变。");
+            revision.Validate();RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocumentStore.Validate(revision.EditableSnapshot);
+            if(document.Package.CanvasRevisions.Any(r=>r.RevisionId==revision.RevisionId))return Task.FromResult(state);
+            return Task.FromResult(state with{Document=document with{Package=document.Package with{CanvasRevisions=document.Package.CanvasRevisions.Append(revision).ToArray()}}});
+        },token,beforeCommit:beforeCommit);
     private PlanningDocument PrepareDocument(PlanningDocument document, PlanningDocumentPackage? existing, Guid projectId)
     {
         var migrated = (document with { Package = document.Package ?? existing }).EnsureIdentity(projectId);
@@ -144,7 +153,7 @@ public sealed partial class PlanningProjectStore(string directory)
 
     private Task UpdateAsync(Guid projectId, Func<PlanningProjectState, PlanningProjectState> update, CancellationToken token) =>
         UpdateAsync(projectId, state => Task.FromResult(update(state)), token);
-    private async Task UpdateAsync(Guid projectId, Func<PlanningProjectState, Task<PlanningProjectState>> update, CancellationToken token, Action? rollback = null)
+    private async Task UpdateAsync(Guid projectId, Func<PlanningProjectState, Task<PlanningProjectState>> update, CancellationToken token, Action? rollback = null,Action? beforeCommit=null)
     {
         if (projectId == Guid.Empty) throw new ArgumentException("A project is required.", nameof(projectId));
         var path = FilePath(projectId); var gate = Gates.GetOrAdd(path, _ => new(1, 1)); await gate.WaitAsync(token).ConfigureAwait(false);
@@ -157,7 +166,7 @@ public sealed partial class PlanningProjectStore(string directory)
             await using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
             { await JsonSerializer.SerializeAsync(stream, next, cancellationToken: token).ConfigureAwait(false); await stream.FlushAsync(token).ConfigureAwait(false); stream.Flush(true); }
             token.ThrowIfCancellationRequested(); PlanningMigrationBackup.PreserveLegacy(path, shots: false);
-            token.ThrowIfCancellationRequested(); File.Move(temporary, path, true);
+            beforeCommit?.Invoke();token.ThrowIfCancellationRequested(); File.Move(temporary, path, true);
         }
         catch { rollback?.Invoke(); throw; }
         finally { if (File.Exists(temporary)) File.Delete(temporary); gate.Release(); }

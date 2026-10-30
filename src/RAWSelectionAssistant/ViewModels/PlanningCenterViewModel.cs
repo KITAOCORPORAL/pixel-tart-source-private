@@ -115,7 +115,7 @@ public sealed partial class PlanningCenterViewModel : ObservableObject
     public async Task LoadAsync(Guid projectId,Guid? bookingId=null,CancellationToken token=default)
     {
         if(IsPlanningLoading)throw new InvalidOperationException("策划正在载入，请等待当前操作完成。");
-        IsPlanningLoading=true;
+        CancelCanvasCapture();IsPlanningLoading=true;
         try{await LoadPlanningCoreAsync(projectId,bookingId,token);}
         finally{IsPlanningLoading=false;}
     }

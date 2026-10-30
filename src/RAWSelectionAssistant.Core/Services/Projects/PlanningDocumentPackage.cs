@@ -10,6 +10,13 @@ public sealed record PlanningAssetReference(Guid LibraryId, Guid AssetId, string
 public sealed record PlanningCanvasRevision(Guid RevisionId, Guid CanvasId, DateTimeOffset CapturedAt,
     CanvasDocument EditableSnapshot, string? PreviewPngBase64 = null)
 {
+    // 1 = historical WPF bounds/opaque preview. Absent fields keep old PNGs byte-for-byte.
+    public int RenderVersion {get;init;}=1;
+    public string? SamplingContract {get;init;}
+    public int? PreviewWidth {get;init;}
+    public int? PreviewHeight {get;init;}
+    public PlanningCanvasRevision Validate(){if(RenderVersion is not(1 or 2))throw new InvalidDataException("不支持的策划画布快照渲染版本。");if(RenderVersion==2){if(EditableSnapshot is null||SamplingContract!="CanvasPremultipliedBilinear.ArtboardCenters.v2"||PreviewWidth is not(>0 and <=1400)||PreviewHeight is not(>0 and <=1400)||EditableSnapshot.ProjectId is null||string.IsNullOrEmpty(PreviewPngBase64))throw new InvalidDataException("策划画布快照v2身份或尺寸无效。");double scale=Math.Min(1,1400d/Math.Max(EditableSnapshot.PixelWidth,EditableSnapshot.PixelHeight));if(PreviewWidth!=Math.Max(1,(int)Math.Round(EditableSnapshot.PixelWidth*scale))||PreviewHeight!=Math.Max(1,(int)Math.Round(EditableSnapshot.PixelHeight*scale)))throw new InvalidDataException("策划画布快照比例与画板不符。");if(PreviewPngBase64.Length>32*1024*1024)throw new InvalidDataException("策划画布快照超出编码预算。");var bytes=Convert.FromBase64String(PreviewPngBase64);if(bytes.Length<24||!bytes.AsSpan(0,8).SequenceEqual(new byte[]{137,80,78,71,13,10,26,10})||System.Buffers.Binary.BinaryPrimitives.ReadInt32BigEndian(bytes.AsSpan(16,4))!=PreviewWidth||System.Buffers.Binary.BinaryPrimitives.ReadInt32BigEndian(bytes.AsSpan(20,4))!=PreviewHeight)throw new InvalidDataException("策划画布快照PNG与记录尺寸不符。");}return this;}
+
     [JsonExtensionData] public Dictionary<string, JsonElement>? Extensions { get; init; }
 }
 public sealed record PlanningDocumentPackage
@@ -32,6 +39,7 @@ public sealed record PlanningDocumentPackage
         if (Assets is null || ShotIds is null || CanvasRevisions is null) throw new InvalidDataException("文档包集合不能为 null。");
         if (Assets.Any(a => a.LibraryId == Guid.Empty || a.AssetId == Guid.Empty) || ShotIds.Any(id => id == Guid.Empty)) throw new InvalidDataException("文档引用身份无效。");
         if (CanvasRevisions.Any(x => x.RevisionId == Guid.Empty || x.CanvasId == Guid.Empty || x.EditableSnapshot is null || x.EditableSnapshot.CanvasId != x.CanvasId)) throw new InvalidDataException("画布版本身份无效。");
+        foreach(var revision in CanvasRevisions){revision.Validate();if(revision.RenderVersion==2&&revision.EditableSnapshot.ProjectId!=ProjectId)throw new InvalidDataException("快照所属项目不匹配。");}
         if (CanvasRevisions.Any(x => x.PreviewPngBase64?.Length > 32 * 1024 * 1024)) throw new InvalidDataException("画布快照超过允许大小。");
         return this;
     }

@@ -153,30 +153,13 @@ public sealed class FreeCanvasSurface : FrameworkElement
         {
             dc.PushTransform(new RotateTransform(item.Rotation, item.X+item.Width/2,item.Y+item.Height/2));
             var rect = DisplayRect(item);dc.PushOpacity(item.Opacity??1);
-            if(item.IsBrush){var brushItem=item;if(_gesture=="brush"&&brushLayer==item.ObjectId&&brushPoints.Count>0)brushItem=item with{BrushStrokes=item.BrushStrokes!.Append(new CanvasBrushStroke(brushPoints.ToArray(),BrushColor,BrushSize,BrushOpacity,BrushHardness)).ToArray()};CanvasPixelRenderer.DrawBrush(dc,brushItem);}
-            else if (item.IsText)
-            {
-                Brush textBrush; try { textBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(item.TextColor)); } catch { textBrush = Brushes.White; }
-                var text = new FormattedText(item.Text ?? "",CultureInfo.CurrentUICulture,FlowDirection.LeftToRight,new Typeface("Microsoft YaHei UI"),item.FontSize,textBrush,VisualTreeHelper.GetDpi(this).PixelsPerDip) { MaxTextWidth=item.Width,MaxTextHeight=item.Height };
-                dc.DrawText(text,new(item.X,item.Y));
-            }
-            else if (item.Palette is { } palette)
-            {
-                var colors=palette.Colors.OrderByDescending(color=>color.Weight).ToArray();var total=Math.Max(.0001,colors.Sum(color=>color.Weight));var x=rect.X;
-                foreach(var color in colors){Brush swatch;try{swatch=new SolidColorBrush((Color)ColorConverter.ConvertFromString(color.Hex));}catch{swatch=Brushes.Gray;}var width=rect.Width*color.Weight/total;dc.DrawRectangle(swatch,null,new(x,rect.Y,width,rect.Height-34));x+=width;}
-                var paletteLabel = palette.Combined ? "组合配色 · " + palette.SourceAssetIds.Count + " 张" : "配色 · " + colors.Length + " 色";
-                DrawLabel(dc,paletteLabel,new(rect.X+8,rect.Bottom-28));
-            }
-            else if (_images.TryGetValue(item.ObjectId,out var bitmap))
-            {
-                dc.PushClip(new RectangleGeometry(rect));
-                dc.PushTransform(new ScaleTransform(item.FlipX ? -1 : 1,item.FlipY ? -1 : 1,rect.X+rect.Width/2,rect.Y+rect.Height/2));
-                var crop = CropMode && Editor.Selection.Contains(item.ObjectId) ? new CanvasCrop() : item.CropRect;
-                if(item.Monochrome)bitmap=new FormatConvertedBitmap(bitmap,PixelFormats.Gray8,null,0);
-                dc.DrawImage(bitmap,new(rect.X-crop.X*rect.Width/crop.Width,rect.Y-crop.Y*rect.Height/crop.Height,rect.Width/crop.Width,rect.Height/crop.Height));
-                dc.Pop(); dc.Pop();
-            }
-            else { dc.DrawRectangle(Brush("Brush.Panel",Colors.DimGray),null,rect); DrawLabel(dc,"预览暂不可用",new(item.X+12,item.Y+12)); }
+            // Pixel content shares the export/snapshot drawing contract; editor adorners stay outside it.
+            var drawing=item with{Rotation=0,Opacity=1};
+            if(item.IsBrush&&_gesture=="brush"&&brushLayer==item.ObjectId&&brushPoints.Count>0)drawing=drawing with{BrushStrokes=item.BrushStrokes!.Append(new CanvasBrushStroke(brushPoints.ToArray(),BrushColor,BrushSize,BrushOpacity,BrushHardness)).ToArray()};
+            if(CropMode&&Editor.Selection.Contains(item.ObjectId))drawing=drawing with{CropRect=new()};
+            _images.TryGetValue(item.ObjectId,out var bitmap);
+            if(!item.IsImage||bitmap is not null)CanvasPixelRenderer.DrawCanvasContent(dc,drawing,bitmap);
+            else{dc.DrawRectangle(Brush("Brush.Panel",Colors.DimGray),null,rect);DrawLabel(dc,"预览暂不可用",new(item.X+12,item.Y+12));}
             dc.Pop();
             if (Editor.Selection.Contains(item.ObjectId)) dc.DrawRectangle(null,new Pen(accent,1.5/_zoom),rect);
             if (item.Locked) DrawLabel(dc,"已锁定",new(item.X+6,item.Y+6));

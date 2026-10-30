@@ -78,7 +78,7 @@ public sealed partial class PlanningCenterViewModel
     }
     public async Task OpenImportedProjectRootAsync(string root,Guid id,CancellationToken token=default)
     {
-        if(!await FlushAsync(token))throw new InvalidOperationException("先保存当前策划。");
+        CancelCanvasCapture();if(!await FlushAsync(token))throw new InvalidOperationException("先保存当前策划。");
         root=Path.GetFullPath(root);PlanningImageStorage.RejectLinks(Path.GetPathRoot(root)!,root);
         var databasePath=Path.Combine(root,"project.db");if(!File.Exists(databasePath))throw new InvalidDataException("目标不是已导入项目数据根，未建立空数据库");PlanningImageStorage.RejectLinks(root,databasePath);
         var planning=new PlanningProjectStore(Path.Combine(root,"planning"));var planned=await planning.LoadAsync(id,token);if(planned.Document is null)throw new InvalidDataException("目标不含策划文档");await new ProjectShotStore(Path.Combine(root,"shots")).LoadAsync(id,token);

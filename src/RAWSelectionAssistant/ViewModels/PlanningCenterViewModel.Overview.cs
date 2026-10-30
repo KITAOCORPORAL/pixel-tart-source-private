@@ -42,7 +42,7 @@ public sealed partial class PlanningCenterViewModel
 
     public async Task ShowOverviewAsync(CancellationToken token = default)
     {
-        if (!await FlushAsync()) return;
+        CancelCanvasCapture();if (!await FlushAsync()) return;
         IsOverview = true;
         IsPreviewMode = false;
         await RefreshPlanningListAsync(token);

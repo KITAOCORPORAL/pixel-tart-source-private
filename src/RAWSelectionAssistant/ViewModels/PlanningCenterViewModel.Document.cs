@@ -32,15 +32,50 @@ public sealed partial class PlanningCenterViewModel
     }
     public IDialogService Dialogs => _dialogs;
     public void OpenLinkedCanvas(RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocument canvas) => CanvasRequested?.Invoke(this, canvas);
-    public async Task CaptureCanvasDocumentAsync(RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocument canvas)
+    private long _canvasCaptureGeneration;
+    private CancellationTokenSource? _canvasCaptureCancellation;
+    private bool _isCanvasCaptureRunning;
+    public bool IsCanvasCaptureRunning{get=>_isCanvasCaptureRunning;private set=>SetProperty(ref _isCanvasCaptureRunning,value);}
+    internal Func<RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocument,CancellationToken,Task<string>> CanvasSnapshotRenderer=PlanningCanvasSnapshot.RenderAsync;
+    internal Func<CancellationToken,Task>? CanvasBeforeCommit;
+    public void CancelCanvasCapture(){Interlocked.Increment(ref _canvasCaptureGeneration);_canvasCaptureCancellation?.Cancel();IsCanvasCaptureRunning=false;}
+    public async Task CaptureCanvasDocumentAsync(RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocument canvas,CancellationToken token=default)
     {
-        if (ProjectId is not Guid project) return;
-        canvas = (await _canvases.ListAsync(project)).FirstOrDefault(x => x.CanvasId == canvas.CanvasId) ?? canvas;
-        var preview = PlanningCanvasSnapshot.Render(canvas);
-        var package = _document.Package ?? new PlanningDocumentPackage { ProjectId = project, Body = _document.Body };
-        UpdateDocument(_document with { Package = package.CaptureCanvas(canvas, preview) });
-        SaveStatus = "已插入画布版本；后续更新会保留旧版本";
-        PresentationChanged();
+        if(ProjectId is not Guid project||PlanningDocumentId is not Guid documentId||IsPlanningLoading||IsOverview)throw new InvalidOperationException("请先打开当前策划。");
+        CancelCanvasCapture();var generation=Interlocked.Increment(ref _canvasCaptureGeneration);using var cancellation=CancellationTokenSource.CreateLinkedTokenSource(token);_canvasCaptureCancellation=cancellation;cancellation.CancelAfter(TimeSpan.FromSeconds(30));
+        var store=_planning;var canvases=_canvases;var editorGeneration=EditorGeneration;IsCanvasCaptureRunning=true;SaveStatus="正在生成画布版本…";
+        bool Current()=>!cancellation.IsCancellationRequested&&generation==Interlocked.Read(ref _canvasCaptureGeneration)&&ProjectId==project&&PlanningDocumentId==documentId&&EditorGeneration==editorGeneration&&ReferenceEquals(store,_planning)&&!IsOverview;
+        void RequireCurrent(){cancellation.Token.ThrowIfCancellationRequested();if(!Current())throw new OperationCanceledException("策划已切换，未发布画布版本。",cancellation.Token);}
+        try{
+            if((await store.LoadAsync(project,cancellation.Token)).Document is null){RequireCurrent();QueueDocumentSave();}if(!await FlushAsync(cancellation.Token))throw new IOException("策划保存未完成，未插入画布版本。");RequireCurrent();
+            var saved=await canvases.LoadAsync(canvas.CanvasId,cancellation.Token)??throw new IOException("画布尚未保存或已移除，旧版本保留。");RequireCurrent();
+            if(saved.ProjectId!=project)throw new InvalidDataException("画布不属于当前项目。");
+            var frozen=System.Text.Json.JsonSerializer.Deserialize<RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocument>(System.Text.Json.JsonSerializer.Serialize(saved))! with{StorageRoot=saved.StorageRoot};
+            foreach(var item in frozen.Objects.Where(o=>o.PlanningSource is not null)){
+                var owned=item.PlanningSource!;var copy=owned.Copy;
+                bool projectCopy=copy.ProjectId==project&&copy.DocumentId==documentId&&Path.GetFullPath(owned.PlanningRoot).Equals(store.StorageRoot,StringComparison.OrdinalIgnoreCase);
+                bool canvasCopy=copy.ProjectId==frozen.CanvasId&&copy.DocumentId==frozen.CanvasId&&frozen.StorageRoot is{} root&&Path.GetFullPath(owned.PlanningRoot).Equals(Path.GetFullPath(root),StringComparison.OrdinalIgnoreCase);
+                if(!projectCopy&&!canvasCopy)throw new InvalidDataException("画布图片副本不属于当前项目/画布。");
+            }
+            frozen=await Task.Run(()=>PixelTart.Modules.AssetLibrary.FreeCanvas.CanvasPixelRenderer.FreezeSnapshotSources(frozen,cancellation.Token),cancellation.Token);RequireCurrent();
+            SaveStatus="正在生成画布版本…";var preview=await CanvasSnapshotRenderer(frozen,cancellation.Token);RequireCurrent();
+            double scale=Math.Min(1,1400d/Math.Max(frozen.PixelWidth,frozen.PixelHeight));
+            var revision=new PlanningCanvasRevision(Guid.NewGuid(),frozen.CanvasId,DateTimeOffset.UtcNow,frozen,preview){RenderVersion=PlanningCanvasSnapshot.RenderVersion,SamplingContract=PlanningCanvasSnapshot.SamplingContract,PreviewWidth=Math.Max(1,(int)Math.Round(frozen.PixelWidth*scale)),PreviewHeight=Math.Max(1,(int)Math.Round(frozen.PixelHeight*scale))};
+            revision.Validate();
+            if(CanvasBeforeCommit is{} wait)await wait(cancellation.Token);RequireCurrent();
+            // Capture rich edits before the transaction, serialize all pending writes, then append atomically.
+            if(!await FlushAsync(cancellation.Token))throw new IOException("策划保存失败，旧画布版本保留。");RequireCurrent();
+            await _saveGate.WaitAsync(cancellation.Token);try{
+                IDisposable? leases=null;try{RequireCurrent();await store.AppendCanvasRevisionAsync(project,documentId,revision,cancellation.Token,()=>{RequireCurrent();leases=PixelTart.Modules.AssetLibrary.FreeCanvas.CanvasPixelRenderer.OpenVisibleSourceLeases(frozen,cancellation.Token);RequireCurrent();});}finally{leases?.Dispose();}
+                // Commit is final. Only publish into this exact editor; a later switch never receives old data.
+                if(!Current())return;
+                var package=_document.Package!;_document=_document with{Package=package with{CanvasRevisions=package.CanvasRevisions.Append(revision).ToArray()}};
+                if(_pendingDocuments.TryGetValue(project,out var pending))_pendingDocuments[project]=(pending.Document with{Package=pending.Document.Package! with{CanvasRevisions=pending.Document.Package.CanvasRevisions.Append(revision).ToArray()}},pending.Summary);
+                SaveStatus="已保存画布新版本；旧版本保留";OnPropertyChanged(nameof(DocumentCanvasRevisions));PresentationChanged();
+            }finally{_saveGate.Release();}
+        }catch(OperationCanceledException){if(generation==Interlocked.Read(ref _canvasCaptureGeneration)&&ProjectId==project)SaveStatus="画布版本已取消；旧版本保留";throw;}
+        catch(Exception error)when(IsRecoverableProjectError(error)||error is InvalidOperationException or NotSupportedException or FormatException){if(generation==Interlocked.Read(ref _canvasCaptureGeneration)&&ProjectId==project)SaveStatus="画布版本未保存；旧版本保留";throw;}
+        finally{if(ReferenceEquals(_canvasCaptureCancellation,cancellation)){_canvasCaptureCancellation=null;IsCanvasCaptureRunning=false;}}
     }
     public IReadOnlyList<PlanningCanvasRevision> DocumentCanvasRevisions => _document.Package?.CanvasRevisions ?? [];
     private PlanningDocument _document = new();
