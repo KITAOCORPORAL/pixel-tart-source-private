@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="787541cf-7517-49c7-88b3-a9688958fb77" name="Admin@DESKTOP-HO0JJEQ 2026-10-30 23:51:30" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-30T23:51:30.9554209+08:00" queuing="2026-10-30T23:51:30.9554210+08:00" start="2026-10-30T23:51:30.1653145+08:00" finish="2026-10-30T23:51:30.9607903+08:00" />
+  <TestSettings name="default" id="0bf48446-5b35-45b9-8fa7-830f85a099a8">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-30_23_51_30" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="87753c7d-488c-475f-a0bd-dc84e9134d5c" testId="13f527fe-8133-8874-8c9a-17c15e9ed048" testName="CancelDuringEditsReleasesWorkAndNeverReturnsMaster" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0025650" startTime="2026-10-30T23:51:30.8401786+08:00" endTime="2026-10-30T23:51:30.8427920+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="87753c7d-488c-475f-a0bd-dc84e9134d5c" />
+    <UnitTestResult executionId="8c424c24-dc94-49fb-95fd-c162a193e448" testId="1b065a98-9317-8865-ad99-78cfb7a3e731" testName="RenderedLegacyRawMatchesExistingFullPrecisionExportAndRejectsRepeatedGains" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.2149974" startTime="2026-10-30T23:51:30.6103406+08:00" endTime="2026-10-30T23:51:30.8363884+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8c424c24-dc94-49fb-95fd-c162a193e448" />
+    <UnitTestResult executionId="9576a41d-72f4-4ee7-8fd4-d86d3c6c9f89" testId="1789f92e-402f-8598-9e2d-3d99e4333bd3" testName="UnsupportedReferencesEnginesAndVersionsFailExplicitly" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0006119" startTime="2026-10-30T23:51:30.8391465+08:00" endTime="2026-10-30T23:51:30.8399492+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9576a41d-72f4-4ee7-8fd4-d86d3c6c9f89" />
+    <UnitTestResult executionId="3259216a-1778-4df6-beb1-be824d3071af" testId="1687e421-a759-8c3e-9fe6-efa1565c519f" testName="CancellationInsideLargeEditLoopIsPromptAndReleasesAdmission" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0298311" startTime="2026-10-30T23:51:30.8428122+08:00" endTime="2026-10-30T23:51:30.8746940+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3259216a-1778-4df6-beb1-be824d3071af" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="RenderedLegacyRawMatchesExistingFullPrecisionExportAndRejectsRepeatedGains" storage="n:/pixart/guangjing-r55-planningcanvas-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1b065a98-9317-8865-ad99-78cfb7a3e731">
+      <Execution id="8c424c24-dc94-49fb-95fd-c162a193e448" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-PlanningCanvas-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.BatchTenLegacyRawTests" name="RenderedLegacyRawMatchesExistingFullPrecisionExportAndRejectsRepeatedGains" />
+    </UnitTest>
+    <UnitTest name="CancelDuringEditsReleasesWorkAndNeverReturnsMaster" storage="n:/pixart/guangjing-r55-planningcanvas-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="13f527fe-8133-8874-8c9a-17c15e9ed048">
+      <Execution id="87753c7d-488c-475f-a0bd-dc84e9134d5c" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-PlanningCanvas-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.BatchTenLegacyRawTests" name="CancelDuringEditsReleasesWorkAndNeverReturnsMaster" />
+    </UnitTest>
+    <UnitTest name="CancellationInsideLargeEditLoopIsPromptAndReleasesAdmission" storage="n:/pixart/guangjing-r55-planningcanvas-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1687e421-a759-8c3e-9fe6-efa1565c519f">
+      <Execution id="3259216a-1778-4df6-beb1-be824d3071af" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-PlanningCanvas-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.BatchTenLegacyRawTests" name="CancellationInsideLargeEditLoopIsPromptAndReleasesAdmission" />
+    </UnitTest>
+    <UnitTest name="UnsupportedReferencesEnginesAndVersionsFailExplicitly" storage="n:/pixart/guangjing-r55-planningcanvas-20261030/final-core-testhost/rawselectionassistant.tests.dll" id="1789f92e-402f-8598-9e2d-3d99e4333bd3">
+      <Execution id="9576a41d-72f4-4ee7-8fd4-d86d3c6c9f89" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-PlanningCanvas-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.BatchTenLegacyRawTests" name="UnsupportedReferencesEnginesAndVersionsFailExplicitly" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="13f527fe-8133-8874-8c9a-17c15e9ed048" executionId="87753c7d-488c-475f-a0bd-dc84e9134d5c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b065a98-9317-8865-ad99-78cfb7a3e731" executionId="8c424c24-dc94-49fb-95fd-c162a193e448" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1789f92e-402f-8598-9e2d-3d99e4333bd3" executionId="9576a41d-72f4-4ee7-8fd4-d86d3c6c9f89" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1687e421-a759-8c3e-9fe6-efa1565c519f" executionId="3259216a-1778-4df6-beb1-be824d3071af" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 N:/pixart/Guangjing-R55-PlanningCanvas-20261030/final-core-testhost/RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 28，Scope: MethodLevel)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

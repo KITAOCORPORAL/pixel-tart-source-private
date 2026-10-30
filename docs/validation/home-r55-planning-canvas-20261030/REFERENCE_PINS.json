@@ -1,0 +1,36 @@
+[
+  {
+    "repository": "python-pillow/Pillow",
+    "commit": "bb1d8e8ab8d29048624d96e3ee53cecf7c13d13d",
+    "files": [
+      {
+        "path": "src/libImaging/AlphaComposite.c",
+        "sha256": "0063c136b8bb2be51e2fb76fac222a7ae96b438f3c09706834862d9c1ac62c93",
+        "bytes": 2679
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "15181e7363dca9aed78b79bebebc7fde7f1814b8bd311ea3b87ae8ccadfc185b",
+        "bytes": 1457
+      }
+    ],
+    "distribution": "external numerical research only; source/engine binary not in product"
+  },
+  {
+    "repository": "FFmpeg/FFmpeg",
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "files": [
+      {
+        "path": "libavfilter/vf_overlay.c",
+        "sha256": "3e3c15dc3e207a5e990033d233912345d6826c92d955ba5d1205994000c0124a",
+        "bytes": 52239
+      },
+      {
+        "path": "COPYING.LGPLv2.1",
+        "sha256": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30",
+        "bytes": 26517
+      }
+    ],
+    "distribution": "external numerical research only; source/engine binary not in product"
+  }
+]

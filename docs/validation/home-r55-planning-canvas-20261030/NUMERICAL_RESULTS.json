@@ -1,0 +1,106 @@
+{
+  "pillowVersion": "12.3.0",
+  "pillowImagingSha256": "c8c519ec72bf75b2945b4fc4afa854af2fca8b970a403134f9ddda3e164d85e9",
+  "ffmpegVersion": "ffmpeg version 9.0.2-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+  "ffmpegSha256": "589e50b766d251afdf181dd664d40bd94407e200b019989fd7468c7d118a28d0",
+  "alpha": [
+    {
+      "reference": "pillow",
+      "maximumCode": 1,
+      "meanCode": 0.0009891196834817012,
+      "alphaMaximum": 0,
+      "visiblePixelCount": 1011,
+      "tolerance": 1,
+      "pass": true
+    },
+    {
+      "reference": "ffmpeg",
+      "maximumCode": 1,
+      "meanCode": 0.06998021760633037,
+      "alphaMaximum": 0,
+      "visiblePixelCount": 1011,
+      "tolerance": 1,
+      "pass": true
+    }
+  ],
+  "sampling": [
+    {
+      "edge": 1400,
+      "width": 420,
+      "height": 300,
+      "maxCode": 1,
+      "meanCode": 5.9523809523809525e-06,
+      "alphaMaxCode": 1,
+      "differentComponents": 3,
+      "tolerance": 1,
+      "pass": true,
+      "oracleMs": 211.0887000017101
+    },
+    {
+      "edge": 140,
+      "width": 140,
+      "height": 100,
+      "maxCode": 0,
+      "meanCode": 0.0,
+      "alphaMaxCode": 0,
+      "differentComponents": 0,
+      "tolerance": 1,
+      "pass": true,
+      "oracleMs": 21.31779999763239
+    }
+  ],
+  "inputFiles": [
+    {
+      "path": "reference-samples\\bottom.png",
+      "sha256": "74b0aa77225128a44efe17a995cfd5363825a2da761d033e345916a6d49de703"
+    },
+    {
+      "path": "reference-samples\\product.png",
+      "sha256": "0de067ec733aafc19ad89bebeab072f2bbaa40f6874b63e6e30cbce0d97bcb86"
+    },
+    {
+      "path": "reference-samples\\top.png",
+      "sha256": "9c0a13abb0c1b76d23c43048f97888d23df90ad5013448bcd8d8c28dd357f854"
+    },
+    {
+      "path": "sampling\\layer-0.bgra",
+      "sha256": "42c4885cdde0807bb93619b70a1ba15b4454cb0e1080dac6e3e7f4546b5b689e"
+    },
+    {
+      "path": "sampling\\layer-1.bgra",
+      "sha256": "a9f8e1aba7aea68ea12c1c17e353aacd207161d476828baa7a88d5a67596aa0c"
+    },
+    {
+      "path": "sampling\\layer-2.bgra",
+      "sha256": "42c4885cdde0807bb93619b70a1ba15b4454cb0e1080dac6e3e7f4546b5b689e"
+    },
+    {
+      "path": "sampling\\layer-3.bgra",
+      "sha256": "ae27a2ccbc479c568c8ce9feca573abad964fe2ceda8158f6c579a38c79f7c40"
+    },
+    {
+      "path": "sampling\\layer-4.bgra",
+      "sha256": "9d82bb48a5f4161b89cddbc1d99669656650a29cc3d7ceb510289a2f3a619d4e"
+    },
+    {
+      "path": "sampling\\legacy-export.png",
+      "sha256": "7d753f58770448618a42e4fd202185874f17acaf3071779d3977a805efd5dcd0"
+    },
+    {
+      "path": "sampling\\LEGACY_EXPORT_HASH.json",
+      "sha256": "e9bb05b22e8769a11f08250b7e580d88f5c1afa8d0b48e0f27ce45534087688f"
+    },
+    {
+      "path": "sampling\\ORACLE_INPUT.json",
+      "sha256": "818528fd14094fc2a90b17066cb619868317058fd6cef2061b49ee48b82f05bf"
+    },
+    {
+      "path": "sampling\\product-140.bgra",
+      "sha256": "d58c140dc749e59195bfc0d13f1921d924fe9f55af5d7cee6df8a957383e7acb"
+    },
+    {
+      "path": "sampling\\product-1400.bgra",
+      "sha256": "e4c3a7da87baee44d6a15318f706340479c77b02497dd7d438da0c9be01cdd11"
+    }
+  ]
+}

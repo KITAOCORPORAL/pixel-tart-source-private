@@ -1,0 +1,17 @@
+VSTest 版本 18.7.0 (x64)
+
+正在启动测试执行，请稍候...
+总共 1 个测试文件与指定模式相匹配。
+  失败 RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets [215 ms]
+  错误消息:
+   测试方法 RAWSelectionAssistant.Tests.PlanningProjectPackageTests。RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets 引发了异常: 
+System.IO.IOException: 客户端没有所需的特权。 : 'C:\Users\Admin\AppData\Local\Temp\RAWSelectionAssistant.Tests\da5bcd36e3d642228a5e199b0b8db0de\15a7cf5557cc4bc1a0d3d6fb72a85084\planning\project-copies\15a7cf5557cc4bc1a0d3d6fb72a85084\6956061ffccd3e7ecde5833e8cef220c\.staging\ea8b50ff93ff45d1be460bdb2166ebd7.part'.
+  堆栈跟踪:
+     at Interop.Kernel32.CreateSymbolicLink(String symlinkFileName, String targetFileName, Boolean isDirectory)
+   at System.IO.File.CreateSymbolicLink(String path, String pathToTarget)
+   at RAWSelectionAssistant.Tests.PlanningProjectPackageTests.RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407
+
+结果文件: N:/pixart/Guangjing-R55-PlanningCanvas-20261030/baseline-permission-tests\baseline-permission.trx
+
+失败!  - 失败:     1，通过:     0，已跳过:     0，总计:     1，持续时间: 228 ms - RAWSelectionAssistant.Tests.dll (net10.0)

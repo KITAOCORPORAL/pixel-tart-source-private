@@ -1,0 +1,562 @@
+{
+  "productSource": "69bbf22935f3471013ad6bb3728f95b8b562acfc",
+  "uniqueMethods": 102,
+  "passed": 100,
+  "failed": 1,
+  "notExecuted": 1,
+  "runs": [
+    {
+      "path": "test-results/final-workflow.trx",
+      "sha256": "414fff3aba90823c89ca1056487ea527560172cf8b95c1473893ed00e0ba7ea6",
+      "results": [
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests.ResourcesRoundTripUndoArchiveDuplicateAndReadOnlyLedger",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.SameDocumentSnapshotMatchesExistingExportIncludingHiddenOfflineAndBrush",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.PreviewBudgetArtboardRatioAndLegacyExportAreExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.CanvasProductClosureWpfTests.TransparentImportTransformGestureSaveExportAndMissingSource",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.EightDirectionsAndMonochromeUseSameExportContract",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.EmitMixedCompositorSamplingOracleAndHistoricalExport",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.CanvasObjectTransformTests.StepLayerMovesSelectionOneLevelAndUndoRestoresOrder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests.NestedListDocxUsesRealLevelsAndPreservesHierarchy",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.CreateIndependentReopenFixture",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests.EditableRowsCancelAndRoundTripReorderCopyArchiveAndColumns",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests.ModesKeepIdentityContentAndSourcesWithSingleUndoAndFailureGate",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningOwnedCanvasTests.DecoderMovePreservesAllEightCompanyOrientations",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.CanvasSurfaceInteractionTests.RealSurfaceRoutesDeleteAndRestoresSavedObjects",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.ViewportNonImageContentRetainsFullObjectCoordinateBounds",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningOwnedCanvasTests.DifferentProjectsAndStaleOwnedCardDoNotCrossSourcesOrExpandPackageBoundary",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.CanvasSurfaceInteractionTests.SaveFailureKeepsDocumentAvailableForRetry",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.BatchTwoDocumentWpfTests.SavedCanvasPreviewAndNativePaginationAreReal",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningOwnedCanvasTests.OwnedReferenceSendSaveReopenCacheDeletionMissingChangedAndRepeatedSend",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.HistoricalExportFixtureUsesOnlyExistingApis",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests.ShellFlushCapturesUncommittedRowAndInvalidTextRemainsRecoverable",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.CanvasObjectTransformTests.AtomicDocumentRoundTripPreservesReferences",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.CanvasObjectTransformTests.R53VisibilityOpacityAreVersionedUndoableAndPersisted",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests.InvalidDraftAndIoFailureBlockSwitchAndRecoverAcrossNewWorkspace",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.SnapshotCancellationAndLargeArtboardWorkingSetAreBounded",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests.AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningOwnedCanvasTests.LateExternalCompletionCannotOverwriteOwnedSourceAfterSwitch",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.CanvasProductClosureWpfTests.BrushCoverageDoesNotAccumulateInsideOneStrokeButSeparateStrokesDo",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningFoundationWpfTests.DocxConfirmDiffRecoveryUndoAndRepeatedImportAreReal",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.MissingTamperedAndSaveFailureKeepPriorVersionAndFile",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.CanvasObjectTransformTests.AddMoveScaleDuplicateAndRemoveOnlyChangeObjects",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.EmitExistingCompositorReferenceSamples",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.DocumentIdentityMismatchAndUnhashedExternalReplacementRejectAppend",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.EmbeddedProfileParityAndUnsupportedSixteenBitStayExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.SourceReplacementAfterRenderAndNewerRequestCannotPublishOldResult",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.CaptureSavesBeforePublishAndManualUpdateKeepsOldVersion",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.WholeAppDiagnosticPackageTests.FullShellKeepsPrimaryNavigationAndContentTemplates",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.CancelLateGenerationAndProjectSwitchCannotPublish",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.CanvasSurfaceInteractionTests.DocumentChangeSaveDiscardCancelPreserveExpectedVersion",
+          "outcome": "Passed"
+        }
+      ],
+      "counters": {
+        "total": "42",
+        "executed": "42",
+        "passed": "42",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "path": "test-results/final-independent.trx",
+      "sha256": "7b734d749e680065eff825681f1884b28f514f96d8ff556ce14c4ed44d468175",
+      "results": [
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.WpfTests.CanvasProductClosureWpfTests.IndependentProcessReopenAndExportPixelsMatch",
+          "outcome": "Passed"
+        }
+      ],
+      "counters": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "path": "test-results/final-host.trx",
+      "sha256": "6be234048a320d59832fb4ebdd643b4625bab7ef8226d6e1581c5287f76a5973",
+      "results": [
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasHostedTests.CompleteHostActualCaptureButtonAndFreeCanvasLayout",
+          "outcome": "Passed"
+        }
+      ],
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "path": "test-results/final-core.trx",
+      "sha256": "e40246a524c5893580f6b0419bf1d32be1a3c13c84ce7787cff2d25a120400b0",
+      "results": [
+        {
+          "name": "RAWSelectionAssistant.Tests.R53ProfessionalLocalTests.PreviewIsAreaAverageOfFullEffectsAndExtendedCompositeDomainIsExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.R54GraphTests.DisconnectMeansIdentityAndDetachedNodesPersist",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningDocumentPersistenceTests.CrashDraftRoundTripsAndClearsOnlyAfterExplicitCommit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningDocumentPersistenceTests.LegacyVersionOneJsonDoesNotRequireDocumentAndShotEnumsAreUnchanged",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningProjectPackageTests.CancelExportAndMissingCopyCannotPublishPartialPackage",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningDocumentTextEditingTests.BoldAndItalicWrapSelectionAndBoldCanToggleOff",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.BatchTwoDocumentTests.ExplicitReferenceOutcomeDoesNotFollowShotAndIsIdempotent",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.R53ProfessionalLocalTests.BvhPreservesV1ExactOverlapEraseInverseSemantics",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningProjectPackageTests.CancelValidationAndExtractionLeaveNoVisibleProjectAndPreserveSource",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.ProfessionalPipelineNoOpPrecisionTests.ProfessionalV4UsesFloatOutputAndPreservesFineTonalSteps",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.R54GraphTests.ConnectionsDriveActualPixelsNotListOrder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.LinearWideToolsTests.LinearWorkingMaskZeroOpacityAndSerializationKeepDefinition",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.R54GraphTests.LayoutPersistenceClampsInvalidViewport",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.BatchTwoDocumentTests.CanvasExplicitUpdateKeepsPreviousObjectSnapshot",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.ProfessionalPipelineNoOpPrecisionTests.Rgb48NoOpColorStudioToTiff16PreservesPrecision",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningProjectPackageTests.ValidatedPackageImportsIntoFreshRootReopensCopiesAndNeverOverwritesIdOrSameName",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningProjectPackageTests.RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+          "outcome": "Failed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.R54GraphTests.InvalidPortsCycleAndBranchesRejected",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningProjectPackageTests.TamperMissingDuplicateTraversalAndUnsupportedVersionAreRejectedBeforeAnyImportWrites",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.LinearWideToolsTests.OldV2ExposureOnlyKeepsExactHistoricalPerChannelResult",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests.SessionRejectsMixedLegacyStackAndMismatchedSelectedDefinition",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests.UnsupportedFileAndRenderedJpegFailRatherThanLegacyFallback",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests.PreviewSamplesExactlySameRenderedPixelsAndDefinitionMustMatchDecode",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.R54GraphTests.InsertDeleteAndSerializationAreExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningDocumentTextEditingTests.HeadingsListsAndQuotesApplyToCompleteSelectedLines",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.R53ProfessionalLocalTests.AllExifOrientationsGeometryCropTurnAndRowsKeepSameSourcePosition",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests.DefinitionAndInputPersistInVersionAndV1SessionWithoutOldStackMigration",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningDocumentPersistenceTests.DocumentAutosaveMergesWithoutOverwritingExecutionAndLegacyLinks",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningFoundationTests.LegacyReadDoesNotWriteAndIdentityMigrationIsStableAndLossless",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.R54GraphTests.LayoutDoesNotChangeHistoricalSerialPixelsOrOrder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.CanvasPlanningSourceTests.ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.LinearWideToolsTests.VersionedWbAndToneRetainHdrRangeNeutralIdentityAndLegacyExposure",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningDocumentTextEditingTests.InvalidSelectionIsClampedInsteadOfThrowing",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests.WhiteBalanceSelectsCameraOnceAndRejectsRenderedInputsAndMissingConfiguration",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.ProfessionalPipelineNoOpPrecisionTests.ProfessionalReferenceMatchUsesFloatBufferWithoutPrecisionBreak",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.ProfessionalPipelineNoOpPrecisionTests.QuantizationDetectorRejectsRgb8PromotedToRgb48",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningFoundationTests.OldNotesBecomeActionOnceAndBatchRetainsUnknownCatalogAndShotFields",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.BatchTwoDocumentTests.StudioVersionOneOptionalIdentityRoundTrips",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningProjectPackageTests.RecoveryOnlyCleansExpiredReceiptOwnedPartAndAuditsOrphanWithoutDeletingValidOrUnknown",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests.SignedExtendedIntermediatesRemainAndWrongDomainsAreRejected",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningDocumentTextEditingTests.EmptySelectionProducesStableCaretAndDividerDoesNotDeleteAdjacentText",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.CanvasProductClosureTests.BrushLayerIsSameUndoModelAndPersistsOneStroke",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.CanvasPlanningSourceTests.ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.BatchTwoDocumentTests.LegacyDocumentGetsStablePackageAndPreservesUnknownFields",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.BatchTwoColorGoldenTests.CandidateThreePinsLinearExposureAndRejectsImplicitMigration",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.BatchTwoColorGoldenTests.LegacyAndCurrentRenderUsePinnedSyntheticOutput",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests.ExposureIsLinearAndDisplayIsBoundedMonotonicWithSoftShoulder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.PlanningFoundationTests.ColumnsArchiveWithoutDroppingValuesAndInvalidSchemaFailsClosed",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.CanvasProductClosureTests.OneGestureUndoLockedTransformsAndViewIndependentDocumentSize",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests.SyntheticNeutralExposureStaircaseAndBlackBoundaryAreMathematical",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.LinearWideToolsTests.NativeLcmsBradfordMatchesIndependentPinnedReferenceCases",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.R53ProfessionalLocalTests.LegacyDefinitionUnchangedExplicitExtensionMatchesSharedSrgbStack",
+          "outcome": "Passed"
+        }
+      ],
+      "counters": {
+        "total": "52",
+        "executed": "51",
+        "passed": "50",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "path": "test-results/final-package-scope.trx",
+      "sha256": "a191ee1f3d1dbd1d83bd77804e154ba1ecae5743a67ee7e2a96105160ee495e5",
+      "results": [
+        {
+          "name": "RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests.SnapshotRevisionDoesNotExpandPtplanV1WorkspaceContents",
+          "outcome": "Passed"
+        }
+      ],
+      "counters": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    },
+    {
+      "path": "test-results/final-pv6.trx",
+      "sha256": "b09039c9e28bc318cbf4e397b73ca36ae92cfc67b2c3c2c23bf757d439ee5bc8",
+      "results": [
+        {
+          "name": "RAWSelectionAssistant.Tests.BatchTenLegacyRawTests.CancelDuringEditsReleasesWorkAndNeverReturnsMaster",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.BatchTenLegacyRawTests.RenderedLegacyRawMatchesExistingFullPrecisionExportAndRejectsRepeatedGains",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.BatchTenLegacyRawTests.UnsupportedReferencesEnginesAndVersionsFailExplicitly",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RAWSelectionAssistant.Tests.BatchTenLegacyRawTests.CancellationInsideLargeEditLoopIsPromptAndReleasesAdmission",
+          "outcome": "Passed"
+        }
+      ],
+      "counters": {
+        "total": "4",
+        "executed": "4",
+        "passed": "4",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      }
+    }
+  ],
+  "scope": "bounded affected collection; original Core1 permission FAIL and1 optional numeric NOT_RUN retained; not all suite"
+}

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="aac46f55-8801-4478-9cc5-f200df92b75e" name="Admin@DESKTOP-HO0JJEQ 2026-10-30 23:36:12" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-30T23:36:12.4974119+08:00" queuing="2026-10-30T23:36:12.4974120+08:00" start="2026-10-30T23:36:11.5813195+08:00" finish="2026-10-30T23:36:12.5010324+08:00" />
+  <TestSettings name="default" id="3d09f5d0-467c-415c-89c5-2a0b4f917b9f">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-30_23_36_12" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="dcc57f20-573e-4462-a42d-f03d5ce3559d" testId="19d9320d-7d9f-8d7b-b92e-96f0400e7943" testName="IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0538552" startTime="2026-10-30T23:36:12.3523667+08:00" endTime="2026-10-30T23:36:12.4068261+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dcc57f20-573e-4462-a42d-f03d5ce3559d" />
+    <UnitTestResult executionId="d2f97d59-c185-44b4-8ce5-788f6d129751" testId="166f5b87-0000-8c78-af6f-4f42234c80a2" testName="IndependentProcessReopenAndExportPixelsMatch" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.3375878" startTime="2026-10-30T23:36:11.9997310+08:00" endTime="2026-10-30T23:36:12.3497951+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d2f97d59-c185-44b4-8ce5-788f6d129751" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="IndependentProcessReopenAndExportPixelsMatch" storage="n:/pixart/guangjing-r55-planningcanvas-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="166f5b87-0000-8c78-af6f-4f42234c80a2">
+      <Execution id="d2f97d59-c185-44b4-8ce5-788f6d129751" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-PlanningCanvas-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasProductClosureWpfTests" name="IndependentProcessReopenAndExportPixelsMatch" />
+    </UnitTest>
+    <UnitTest name="IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources" storage="n:/pixart/guangjing-r55-planningcanvas-20261030/final-testhost/rawselectionassistant.wpftests.dll" id="19d9320d-7d9f-8d7b-b92e-96f0400e7943">
+      <Execution id="dcc57f20-573e-4462-a42d-f03d5ce3559d" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-PlanningCanvas-20261030/final-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests" name="IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="19d9320d-7d9f-8d7b-b92e-96f0400e7943" executionId="dcc57f20-573e-4462-a42d-f03d5ce3559d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="166f5b87-0000-8c78-af6f-4f42234c80a2" executionId="d2f97d59-c185-44b4-8ce5-788f6d129751" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

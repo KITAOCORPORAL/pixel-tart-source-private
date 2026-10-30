@@ -1,3 +1,11 @@
+## 2026-10-30 家庭当前：策划画布一致性（优先于以下历史）
+- 当前产品源码 **69bbf22935f3471013ad6bb3728f95b8b562acfc**；新分支 `home/r55-planning-canvas-20261030`，独立树 `N:/pixart/guangjing-r55-planning-canvas-20261030`。上游灯台eae800e7/产品1ec06eb5冻结，色彩研究未整合；测试支持f720f1a8、文档HEAD另记。
+- 旧策划Snapshot独立合成器已替换为CanvasPixelRenderer有界公共入口：Hidden/Opacity/画笔/文字/色板/方向/crop/flip/rotate同合同，固定画板透明裁切。1400边/1.96MP/256MiB估算/1000层，STA串行取消，不为预览分配最大画板float。
+- 新快照RenderVersion2；旧缺省1保留PNG不重算。实际落盘原子追加后才发布VM，手动更新保留旧版；项目/策划/操作代次拒绝迟到，缺源/来源变化/保存失败不发布半成品。原.ptplan v1范围、全部模块/策划15/教程退役保持。
+- 同尺寸混合快照与旧DLL导出像素和PNG字节相同；缩小采样独立oracle0码；Pillow/FFmpeg两个固定实现alpha最大1码。发布绑定WPF42+独立2+完整宿主1+范围1、Core50+PV6 4通过；去重100PASS/1旧符号链接权限FAIL/1LCMS参考矩阵NOT_RUN，不能称全套PASS或实机。
+- 家庭最终完整包：`N:/pixart/Guangjing-R55-PlanningCanvas-20261030/Guangjing-R55-PlanningCanvas-Final-Diagnostic-win-x64.zip`；同名目录Start-Guangjing-Diagnostic.cmd，WholeAppDiagnosticBuild=true / PhotographerTrialBuild=false，win-x64自包含，不Setup。
+- 唯一当前收据：`docs/validation/home-r55-planning-canvas-20261030/FINAL_REPORT.md`。6张真实1366/1920生产控件离屏图已逐张打开；实际EXE/CMD OS启动与正常退出0通过。真实鼠标/DPI/ACM/HDR、通用16位/ICC未验，WIC既有RGB48+ICC拒绝保持。总体PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE。
+
 ## 2026-10-30 家庭当前产品（优先于下方历史）
 - 当前产品源码 **1ec06eb5edcb0343d8587304e0536b554c3002d1**；家庭分支 `home/r55-lighttable-20261030`，独立树 `N:/pixart/guangjing-r55-lighttable-20261030`。测试支持5ceb1c55（src无差异），文档HEAD另记。
 - 公司b1443ed4/产品e0ff14ab为本批上游，家庭旧7a6b98e9为其祖先（公司ahead13/无分叉）；旧树与dirty保全，研究引擎未整合。
