@@ -1,0 +1,5 @@
+# Public diagnostic artifacts and executed tool identities are exact-byte contracts.
+*.npy -text
+*.json -text whitespace=cr-at-eol,-blank-at-eof
+*.py -text whitespace=cr-at-eol,-blank-at-eof
+*.ps1 -text whitespace=cr-at-eol,-blank-at-eof

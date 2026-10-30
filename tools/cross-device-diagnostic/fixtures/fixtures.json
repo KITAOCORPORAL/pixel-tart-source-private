@@ -1,0 +1,76 @@
+{
+  "version": "SyntheticPortraCrossDeviceV1",
+  "naturalSource": null,
+  "privatePhotosIncluded": false,
+  "inputDomain": "standard ProPhoto D50 linear float32; negative/>1 allowed",
+  "orientation": 1,
+  "fixtures": [
+    {
+      "id": "gray-boundaries",
+      "path": "gray-boundaries.npy",
+      "shape": [
+        17,
+        33,
+        3
+      ],
+      "dtype": "<f4",
+      "fileSha256": "a4c31c5528ee18667b7ac632e5e24ec5c4a16343dbded160c0210c93ee93720e",
+      "pixelSha256": "48d44e82df7b9c4d6066a03403b68c174cf2714586ea760110c2579990d34d86",
+      "identity": "SyntheticPortraCrossDeviceV1:gray-boundaries",
+      "meaning": "neutral log ramp, near-zero, negatives/>1, BT code vector; ProPhoto linear when used by PortraA"
+    },
+    {
+      "id": "saturated-colors",
+      "path": "saturated-colors.npy",
+      "shape": [
+        19,
+        35,
+        3
+      ],
+      "dtype": "<f4",
+      "fileSha256": "a0a61d4bfc205fb5b562c397e3aa3095de37d2a4892e76019d5ee9b0199c5c14",
+      "pixelSha256": "3c4ab4e848294f1969f63b1ef8df11d6908408a08a8d44a2676e035cb7063866",
+      "identity": "SyntheticPortraCrossDeviceV1:saturated-colors",
+      "meaning": "primaries/secondaries and saturated RGB, not natural color accuracy"
+    },
+    {
+      "id": "edge-small",
+      "path": "edge-small.npy",
+      "shape": [
+        21,
+        37,
+        3
+      ],
+      "dtype": "<f4",
+      "fileSha256": "030bfa036e1e46c508e85e65002d9c1565dfd238a48fd39b07d05936e3406cde",
+      "pixelSha256": "e66a3df77a6ed8f841eea49e245278f7563f28e376520862c7976e17c32e5bda",
+      "identity": "SyntheticPortraCrossDeviceV1:edge-small",
+      "meaning": "edge/corners and crossing stripes for finite-radius print finish"
+    }
+  ],
+  "bt": {
+    "cpuFloatJoinBits": "3da66555",
+    "inputBits": [
+      "3da6654f",
+      "3da66550",
+      "3da66551",
+      "3da66552",
+      "3da66553",
+      "3da66554",
+      "3da66555",
+      "3da66556",
+      "3da66557",
+      "3da66558",
+      "3da66559",
+      "3da6655a",
+      "3da6655b"
+    ],
+    "testMode": 3,
+    "purpose": "direct transfer-function diagnostic, not a new film recipe"
+  },
+  "comparisonPolicy": {
+    "sameDeviceWholeStream": "EXACT_0_RGBA16_CHANNEL_DIFFERENCES",
+    "crossDevice": "MEASURE_AND_LOCALIZE_ONLY; no post-hoc acceptance threshold",
+    "stages": "passive readbacks; must verify traced final equals untraced final on same device"
+  }
+}

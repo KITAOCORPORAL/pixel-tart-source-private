@@ -1,0 +1,7 @@
+# Executed source freeze is byte based; retain new V3 caller/helper bytes verbatim.
+host_budget.py -text whitespace=cr-at-eol,-blank-at-eof
+stream_case.py -text whitespace=cr-at-eol,-blank-at-eof
+stream_full_once.py -text whitespace=cr-at-eol,-blank-at-eof
+stream_saved_reopen.py -text whitespace=cr-at-eol,-blank-at-eof
+execution_freeze.py -text whitespace=cr-at-eol,-blank-at-eof
+native_wait.py -text whitespace=cr-at-eol,-blank-at-eof

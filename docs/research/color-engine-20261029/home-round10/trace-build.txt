@@ -1,0 +1,194 @@
+[1/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/cam16.cpp.obj
+[2/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/curves.cpp.obj
+[3/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/colour.cpp.obj
+[4/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/blob.cpp.obj
+[5/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/digital_intermediate.cpp.obj
+[6/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/hanatos.cpp.obj
+[7/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/json.cpp.obj
+[8/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/latitude_fit.cpp.obj
+[9/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/numeric.cpp.obj
+[10/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/printing.cpp.obj
+[11/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/params.cpp.obj
+[12/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/print_lut.cpp.obj
+[13/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/profile.cpp.obj
+[14/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/setup_cache.cpp.obj
+[15/60] Building CXX object engine/CMakeFiles/spektralab_core.dir/src/core/spectral.cpp.obj
+[16/60] Linking CXX static library engine\libspektralab_core.a
+[17/60] Building CXX object engine/CMakeFiles/spektralab_pipeline.dir/src/pipeline/blur.cpp.obj
+[18/60] Building CXX object engine/CMakeFiles/spektralab_pipeline.dir/src/pipeline/windows_unported.cpp.obj
+[19/60] Building C object engine/CMakeFiles/spk_volk.dir/third_party/volk/volk.c.obj
+[20/60] Building CXX object engine/CMakeFiles/spektralab_pipeline.dir/src/pipeline/scene_latitude.cpp.obj
+[21/60] Linking C static library engine\libspk_volk.a
+[22/60] Generating resources/vulkan/spk_affine3.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_affine3.comp
+
+[23/60] Generating resources/vulkan/spk_boost.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_boost.comp
+
+[24/60] Generating resources/vulkan/spk_bw_correct.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_bw_correct.comp
+
+[25/60] Generating resources/vulkan/spk_cam16ucs_compress.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_cam16ucs_compress.comp
+
+[26/60] Generating resources/vulkan/spk_cctf_decode.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_cctf_decode.comp
+
+[27/60] Generating resources/vulkan/spk_cctf_encode_matrix.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_cctf_encode_matrix.comp
+
+[28/60] Generating resources/vulkan/spk_couplers_correction.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_couplers_correction.comp
+
+[29/60] Generating resources/vulkan/spk_curves.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_curves.comp
+[30/60] Generating resources/vulkan/spk_di_normalise.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_di_normalise.comp
+[31/60] Building CXX object engine/CMakeFiles/spektralab_pipeline.dir/src/pipeline/pipeline.cpp.obj
+[32/60] Generating resources/vulkan/spk_edr.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_edr.comp
+[33/60] Generating resources/vulkan/spk_geometry_resample_df.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_geometry_resample_df.comp
+[34/60] Generating resources/vulkan/spk_glare_add.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_glare_add.comp
+[35/60] Generating resources/vulkan/spk_grain_layer_one.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_grain_layer_one.comp
+[36/60] Generating resources/vulkan/spk_grain_layers.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_grain_layers.comp
+[37/60] Generating resources/vulkan/spk_grain_simple.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_grain_simple.comp
+[38/60] Generating resources/vulkan/spk_iir_df_acc.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_iir_df_acc.comp
+[39/60] Generating resources/vulkan/spk_lincomb3.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_lincomb3.comp
+[40/60] Generating resources/vulkan/spk_log10_guarded.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_log10_guarded.comp
+[41/60] Generating resources/vulkan/spk_lognormal_field.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_lognormal_field.comp
+[42/60] Generating resources/vulkan/spk_lut2d_cubic.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_lut2d_cubic.comp
+[43/60] Generating resources/vulkan/spk_lut3d_trilinear.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_lut3d_trilinear.comp
+[44/60] Generating resources/vulkan/spk_math_probe.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_math_probe.comp
+
+[45/60] Generating resources/vulkan/spk_matmul3.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_matmul3.comp
+
+[46/60] Generating resources/vulkan/spk_mul.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_mul.comp
+
+[47/60] Generating resources/vulkan/spk_print_exposure.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_print_exposure.comp
+
+[48/60] Generating resources/vulkan/spk_reduce_max.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_reduce_max.comp
+
+[49/60] Generating resources/vulkan/spk_rng_probe.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_rng_probe.comp
+
+[50/60] Generating resources/vulkan/spk_sep_fir_acc.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_sep_fir_acc.comp
+
+[51/60] Generating resources/vulkan/spk_spectral_epilogue.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_spectral_epilogue.comp
+[52/60] Generating resources/vulkan/spk_stride_sample.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_stride_sample.comp
+[53/60] Generating resources/vulkan/spk_take_rgb.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_take_rgb.comp
+[54/60] Generating resources/vulkan/spk_tc_b.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_tc_b.comp
+
+[55/60] Generating resources/vulkan/spk_to_rgba16.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_to_rgba16.comp
+
+[56/60] Generating resources/vulkan/spk_zoom_bilinear_mirror.spv
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/shaders/vulkan/spk_zoom_bilinear_mirror.comp
+
+[57/60] C:\WINDOWS\system32\cmd.exe /C "cd /D N:\pixart\ColorResearchHome-20261030\round10-build-trace-v2\engine && N:\pixart\ColorResearchHome-20261030\deps\pytools\cmake\data\bin\cmake.exe -E copy_directory N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/resources N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources"
+[58/60] Building CXX object engine/CMakeFiles/spektralab_pipeline.dir/src/pipeline/engine.cpp.obj
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/pipeline/engine.cpp:1828:8: warning: 'medium_probe_params' has C-linkage specified, but returns user-defined type 'Params' which is incompatible with C [-Wreturn-type-c-linkage]
+ 1828 | Params medium_probe_params(const Params& session) {
+      |        ^
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/pipeline/engine.cpp:1899:6: warning: 'side_json' has C-linkage specified, but returns user-defined type 'Json' which is incompatible with C [-Wreturn-type-c-linkage]
+ 1899 | Json side_json(const slm::Side& s) {
+      |      ^
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/pipeline/engine.cpp:2388:102: warning: 'u8path<const char *, 0>' is deprecated [-Wdeprecated-declarations]
+ 2388 |   size_t seen=0;for(const auto& entry:std::filesystem::recursive_directory_iterator(std::filesystem::u8path(resources_dir))){if(!entry.is_regular_file())continue;const auto rel=std::filesystem::relative(entry.path(),std::filesystem::u8path(resources_dir)).generic_string();r8_need(resource_manifest.has(rel)&&r8_hashfile(entry.path())==resource_manifest.at(rel).as_string(),"Resource bytes/collection changed");++seen;}r8_need(seen==resource_manifest.fields().size(),"Missing resource");
+      |                                                                                                      ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__filesystem/u8path.h:78:23: note: 'u8path<const char *, 0>' has been explicitly marked deprecated here
+   78 | _LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_WITH_CHAR8_T path u8path(const _Source& __s) {
+      |                       ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__config:749:45: note: expanded from macro '_LIBCPP_DEPRECATED_WITH_CHAR8_T'
+  749 | #    define _LIBCPP_DEPRECATED_WITH_CHAR8_T _LIBCPP_DEPRECATED
+      |                                             ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__config:698:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  698 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/pipeline/engine.cpp:2388:234: warning: 'u8path<const char *, 0>' is deprecated [-Wdeprecated-declarations]
+ 2388 |   size_t seen=0;for(const auto& entry:std::filesystem::recursive_directory_iterator(std::filesystem::u8path(resources_dir))){if(!entry.is_regular_file())continue;const auto rel=std::filesystem::relative(entry.path(),std::filesystem::u8path(resources_dir)).generic_string();r8_need(resource_manifest.has(rel)&&r8_hashfile(entry.path())==resource_manifest.at(rel).as_string(),"Resource bytes/collection changed");++seen;}r8_need(seen==resource_manifest.fields().size(),"Missing resource");
+      |                                                                                                                                                                                                                                          ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__filesystem/u8path.h:78:23: note: 'u8path<const char *, 0>' has been explicitly marked deprecated here
+   78 | _LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_WITH_CHAR8_T path u8path(const _Source& __s) {
+      |                       ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__config:749:45: note: expanded from macro '_LIBCPP_DEPRECATED_WITH_CHAR8_T'
+  749 | #    define _LIBCPP_DEPRECATED_WITH_CHAR8_T _LIBCPP_DEPRECATED
+      |                                             ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__config:698:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  698 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/pipeline/engine.cpp:2389:37: warning: 'u8path<std::string, 0>' is deprecated [-Wdeprecated-declarations]
+ 2389 |   const auto store=std::filesystem::u8path(request.at("negativeStore").as_string());const auto allowed=std::filesystem::weakly_canonical(std::filesystem::path("N:/pixart/ColorResearchHome-20261030"));const auto parent=std::filesystem::weakly_canonical(store.parent_path());const auto rel=std::filesystem::relative(parent,allowed);r8_need(!rel.empty()&&*rel.begin()!=".."&&!std::filesystem::exists(store),"Negative store must be new authorized local path");
+      |                                     ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__filesystem/u8path.h:78:23: note: 'u8path<std::string, 0>' has been explicitly marked deprecated here
+   78 | _LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_WITH_CHAR8_T path u8path(const _Source& __s) {
+      |                       ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__config:749:45: note: expanded from macro '_LIBCPP_DEPRECATED_WITH_CHAR8_T'
+  749 | #    define _LIBCPP_DEPRECATED_WITH_CHAR8_T _LIBCPP_DEPRECATED
+      |                                             ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__config:698:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  698 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/pipeline/engine.cpp:2456:102: warning: 'u8path<const char *, 0>' is deprecated [-Wdeprecated-declarations]
+ 2456 |   size_t seen=0;for(const auto& entry:std::filesystem::recursive_directory_iterator(std::filesystem::u8path(resources_dir))){if(!entry.is_regular_file())continue;const auto rel=std::filesystem::relative(entry.path(),std::filesystem::u8path(resources_dir)).generic_string();r8_need(resource_manifest.has(rel)&&r8_hashfile(entry.path())==resource_manifest.at(rel).as_string(),"Resource bytes/collection changed");++seen;}r8_need(seen==resource_manifest.fields().size(),"Missing resource");
+      |                                                                                                      ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__filesystem/u8path.h:78:23: note: 'u8path<const char *, 0>' has been explicitly marked deprecated here
+   78 | _LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_WITH_CHAR8_T path u8path(const _Source& __s) {
+      |                       ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__config:749:45: note: expanded from macro '_LIBCPP_DEPRECATED_WITH_CHAR8_T'
+  749 | #    define _LIBCPP_DEPRECATED_WITH_CHAR8_T _LIBCPP_DEPRECATED
+      |                                             ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__config:698:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  698 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/pipeline/engine.cpp:2456:234: warning: 'u8path<const char *, 0>' is deprecated [-Wdeprecated-declarations]
+ 2456 |   size_t seen=0;for(const auto& entry:std::filesystem::recursive_directory_iterator(std::filesystem::u8path(resources_dir))){if(!entry.is_regular_file())continue;const auto rel=std::filesystem::relative(entry.path(),std::filesystem::u8path(resources_dir)).generic_string();r8_need(resource_manifest.has(rel)&&r8_hashfile(entry.path())==resource_manifest.at(rel).as_string(),"Resource bytes/collection changed");++seen;}r8_need(seen==resource_manifest.fields().size(),"Missing resource");
+      |                                                                                                                                                                                                                                          ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__filesystem/u8path.h:78:23: note: 'u8path<const char *, 0>' has been explicitly marked deprecated here
+   78 | _LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_WITH_CHAR8_T path u8path(const _Source& __s) {
+      |                       ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__config:749:45: note: expanded from macro '_LIBCPP_DEPRECATED_WITH_CHAR8_T'
+  749 | #    define _LIBCPP_DEPRECATED_WITH_CHAR8_T _LIBCPP_DEPRECATED
+      |                                             ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__config:698:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  698 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/src/pipeline/engine.cpp:2457:37: warning: 'u8path<std::string, 0>' is deprecated [-Wdeprecated-declarations]
+ 2457 |   const auto store=std::filesystem::u8path(request.at("negativeStore").as_string());const auto allowed=std::filesystem::weakly_canonical(std::filesystem::path("N:/pixart/ColorResearchHome-20261030"));const auto parent=std::filesystem::weakly_canonical(store.parent_path());const auto rel=std::filesystem::relative(parent,allowed);r8_need(!rel.empty()&&*rel.begin()!=".."&&!std::filesystem::exists(store),"Negative store must be new authorized local path");
+      |                                     ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__filesystem/u8path.h:78:23: note: 'u8path<std::string, 0>' has been explicitly marked deprecated here
+   78 | _LIBCPP_HIDE_FROM_ABI _LIBCPP_DEPRECATED_WITH_CHAR8_T path u8path(const _Source& __s) {
+      |                       ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__config:749:45: note: expanded from macro '_LIBCPP_DEPRECATED_WITH_CHAR8_T'
+  749 | #    define _LIBCPP_DEPRECATED_WITH_CHAR8_T _LIBCPP_DEPRECATED
+      |                                             ^
+N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/include/c++/v1/__config:698:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+
+  698 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+
+      |                                                 ^
+
+8 warnings generated.
+
+[59/60] Building CXX object engine/CMakeFiles/spektralab_engine_shared.dir/src/gpu/vulkan_gpu.cpp.obj
+[60/60] Linking CXX shared library engine\spektrafilm_engine.dll

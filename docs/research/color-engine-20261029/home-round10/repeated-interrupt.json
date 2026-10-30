@@ -1,0 +1,21 @@
+{
+  "version": "RepeatedNativeInterruptControlV1",
+  "success": true,
+  "signalsSent": [
+    1,
+    1,
+    1
+  ],
+  "signalsObserved": [
+    21,
+    21,
+    21
+  ],
+  "exitCode": 3,
+  "nativeCancelStatus": -7,
+  "workerJoined": true,
+  "nativeLive0": true,
+  "noFinalGroup": true,
+  "readHoldSeconds": 1.5,
+  "testedNativeCase": "small321x215 read callback hold; not every possible shader checkpoint"
+}

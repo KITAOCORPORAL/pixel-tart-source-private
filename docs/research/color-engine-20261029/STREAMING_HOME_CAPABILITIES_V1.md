@@ -1,3 +1,18 @@
+# 第十批冻结状态补充（2026-10-30，Europe/Berlin）
+
+**固定PortraA流式研究原型：HOME_5060Ti_FINAL_CALLER20MP_PASSED_AND_FROZEN。** 第九批PARTIAL记录保留为历史，本次新输出/新快照并非改旧AUDITED_STATUS。
+
+- V3caller调用前freeze＋child再核验，source/99resolved/依赖/DLL/resource/SPIRV/environment/manifest/pixel hash全登记。唯一新20MP实际完成，成功组提交预算终点命名为`SUCCESS_GROUP_COMMIT`，预先固定不再微移。
+- cap仍device256MiB/staging64MiB/caller512MiB；终点采样RSS与OS peak均380588032bytes。先monitor join/cleanup、临时report serialize/fsync、budget、raw/TIFF/report发布、一次OS峰值检查；预分配receipt记录此检查并绑定reportSHA，console打印/进程退出不属于渲染验收范围。
+- 成功组需report.json＋有效acceptance.json，无FAILED/AUDITED_STATUS，receipt的reportHash/outputHash/峰值合同匹配。仅raw/TIFF或无效/空receipt不成功。取消/提交错误回滚；primary与cleanup分列。
+- 重复定向Ctrl-Break三次，以及真实held native回调中受控SIGINT/SIGINT/SIGBREAK，都native−7/join/live0无final；不扩大到shader任意位置抢占。
+- 独立saved audit全3670行raw/TIFF exact，renderCalls0，不当重新渲染。本次full1call，不循环重试。
+- 独立synthetic诊断身份：兄弟symbol只白名单公开3fixture hash，自然Canon入口未弱化且实际拒绝synthetic。3×4rows whole/stream0差；whole12stage/stream36stage与final小RGBA16可机器比较，trace不改final。BT另mode3读取，不改变PortraA输入transfer。
+- 跨1650/5060Ti自然hash差异未归因，首差仍缺公司pixels；合成公司运行NOT_RUN，比较无事后PASS阈值。技术阶段冻结不等通用胶片/产品注册/商业资源许可全部通过。
+
+权威结果HOME_ROUND10_REPORT、home-round10/execution-freeze/full-acceptance/independent-saved-audit，复现REPRODUCE_HOME_ROUND10及tools/cross-device-diagnostic/README。
+
+---
 # 家庭流式能力合同补充 V1
 
 继承 `STREAMING_BACKEND_CONTRACT_V1.md` 唯一PortraA wire、sourceSHA、资源集合与原pixel数学。本文件不注册产品。

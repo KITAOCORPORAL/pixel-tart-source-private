@@ -1,0 +1,61 @@
+{
+  "version": "Round10FrozenChainFinalCheckV1",
+  "preInvocationFreezeSha256": "968f46de93e97014fd333905544968401b22491bb0280ac5b6b18ce6f93a09e6",
+  "callerChainChangedAfterSuccess": false,
+  "files": [
+    {
+      "name": "stream_case.py",
+      "expected": "794a7a60e07582462db2a5112affb4450bc3d19849aa0bd8653bf60bd2451098",
+      "actual": "794a7a60e07582462db2a5112affb4450bc3d19849aa0bd8653bf60bd2451098",
+      "match": true
+    },
+    {
+      "name": "stream_full_once.py",
+      "expected": "a7bf832ed2f939533e85df891f5144a1fd39adb0bc472c1a9df6b939da3a3d4a",
+      "actual": "a7bf832ed2f939533e85df891f5144a1fd39adb0bc472c1a9df6b939da3a3d4a",
+      "match": true
+    },
+    {
+      "name": "host_budget.py",
+      "expected": "a75071fc0471dc81410a7cfb9cf43595d5f574b6cb230c0b9dd64104a6fbb26e",
+      "actual": "a75071fc0471dc81410a7cfb9cf43595d5f574b6cb230c0b9dd64104a6fbb26e",
+      "match": true
+    },
+    {
+      "name": "native_wait.py",
+      "expected": "8d70de85d9f7cd6bcd5cdfdb971c5542ab24438731d307337bb2df24cade4d11",
+      "actual": "8d70de85d9f7cd6bcd5cdfdb971c5542ab24438731d307337bb2df24cade4d11",
+      "match": true
+    },
+    {
+      "name": "natural_admission.py",
+      "expected": "fffc77adaa17a42f330602ddccfb9aedd23a15b6f9fdac81047c56d435350288",
+      "actual": "fffc77adaa17a42f330602ddccfb9aedd23a15b6f9fdac81047c56d435350288",
+      "match": true
+    },
+    {
+      "name": "host_environment.py",
+      "expected": "150e650bcedeb76584b0b37dd159b9ba0c088b342d24615b905b1e6b4abe9c94",
+      "actual": "150e650bcedeb76584b0b37dd159b9ba0c088b342d24615b905b1e6b4abe9c94",
+      "match": true
+    },
+    {
+      "name": "execution_freeze.py",
+      "expected": "f15c0c33460666080c528610a133d3718cb35e7b6bc8180da86e575a3fb80d8e",
+      "actual": "f15c0c33460666080c528610a133d3718cb35e7b6bc8180da86e575a3fb80d8e",
+      "match": true
+    },
+    {
+      "name": "stream_saved_reopen.py",
+      "expected": "5768ac6291f629bcb47885e80d840390bce30cf80bc89f241cd9a0f874e4d0ef",
+      "actual": "5768ac6291f629bcb47885e80d840390bce30cf80bc89f241cd9a0f874e4d0ef",
+      "match": true
+    },
+    {
+      "name": "natural-cases.json",
+      "expected": "78bf55506a81325f3a3096f7209cb2e027a2b7052363ee281bbfea140621674c",
+      "actual": "78bf55506a81325f3a3096f7209cb2e027a2b7052363ee281bbfea140621674c",
+      "match": true
+    }
+  ]
+}

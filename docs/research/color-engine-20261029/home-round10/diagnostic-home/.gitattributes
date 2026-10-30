@@ -1,0 +1,4 @@
+# Public diagnostic artifacts retain exact recorded bytes across platforms.
+*.f32 -text
+*.rgba16 -text
+*.json -text whitespace=cr-at-eol,-blank-at-eof

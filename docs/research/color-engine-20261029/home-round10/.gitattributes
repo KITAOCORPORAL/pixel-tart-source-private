@@ -1,0 +1,7 @@
+# Small synthetic execution outputs only; never natural images/RAW/engine assets.
+*.f32 -text
+*.rgba16 -text
+# The pre-call freeze and commit receipt hashes are exact local evidence bytes.
+execution-freeze.json -text whitespace=cr-at-eol,-blank-at-eof
+full-report.json -text whitespace=cr-at-eol,-blank-at-eof
+full-acceptance.json -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol

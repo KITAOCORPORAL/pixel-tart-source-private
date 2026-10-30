@@ -1,0 +1,16 @@
+{
+  "version": "FrozenPortraStreamSourceIdentityV1",
+  "baseCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "companyNativeRoot": "E:/Kitao-Research",
+  "files": {
+    "engine/src/pipeline/engine.cpp": "3b84ffcee1cddbb9d503b07be8ea4bf13f9e19ee407bc37944c4c9e36eb3bbe8",
+    "engine/src/pipeline/pipeline.cpp": "f6a76b5eeab6f2ee1d6c1222289f236c6a8ce2d6f5638580e5ddf94046f2448a",
+    "engine/src/pipeline/pipeline.hpp": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4",
+    "engine/src/gpu/gpu.hpp": "dd539f383b5aa44c7aa2c23cf3232dea5e2c826a64b5e8f06b8a7568127ad3e3",
+    "engine/src/gpu/vulkan_gpu.cpp": "56e5456314e660e1111af5c0b9d24bce04a854b09568ac72cb43c7a9c560722b",
+    "engine/windows_exports.def": "23478dd64f06804b336f2edd3c21eb79de936c6e88b852b6d33979f55cfeb39d",
+    "engine/CMakeLists.txt": "ef17371c86921bc613989d3821fa5cfbb4f074d07e8873f5a1097351361aca3d",
+    "API-SPEC-callable-render-service.md": "23a2b699fa76bf4eac19587343f1429120a4f8746d0541790efd3a9f1aefd5a9"
+  },
+  "permittedVariation": "engine.cpp authorized-root literal only; all other bytes normalize to frozen company source hash"
+}

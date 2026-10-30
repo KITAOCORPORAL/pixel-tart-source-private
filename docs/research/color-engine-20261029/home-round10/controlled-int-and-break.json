@@ -1,0 +1,14 @@
+{
+  "version": "ControlledInterruptDispatchV1",
+  "success": true,
+  "signalsObserved": [
+    2,
+    2,
+    21
+  ],
+  "nativeStatus": -7,
+  "joinedBeforeRelease": true,
+  "noFinalGroup": true,
+  "mechanism": "signal.raise_signal under real held native call; targeted Ctrl-Break separately tested in another process",
+  "doesNotBroadcastToOtherApps": true
+}

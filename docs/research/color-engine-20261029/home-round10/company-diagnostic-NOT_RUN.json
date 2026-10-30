@@ -1,0 +1,13 @@
+{
+ "version":"SyntheticDiagnosticCompanyExecutionPlanV1",
+ "status":"NOT_RUN",
+ "reason":"Company GTX1650 device is not available in this home session",
+ "naturalPrivatePhotosRequired":false,
+ "inputIdentity":"SyntheticPortraCrossDeviceV1",
+ "sameDeviceWholeStreamRequiredChangedChannels":0,
+ "crossDeviceMode":"quantify and localize only, no post-hoc threshold",
+ "referenceHomeRun":"diagnostic-home/run.json",
+ "companyMustRecord":["GPU and driver","source hashes incl native-root delta","compiler binary/version/options","DLL/runtime hashes","resources/SPIRV per-file hashes","complete99resolved","stage whole/stream samples","BT direct decode values","small RGBA16 artifacts"],
+ "compareEntry":"tools/cross-device-diagnostic/compare_packages.py",
+ "forbidden":["claim company passed from home results","pass Canon source identity for synthetic","delete natural whitelist","modify curves/profile/precision to force agreement"]
+}

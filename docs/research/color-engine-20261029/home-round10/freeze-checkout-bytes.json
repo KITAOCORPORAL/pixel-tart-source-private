@@ -1,0 +1,70 @@
+{
+  "version": "Round10CommittedFreezeCheckoutBytesV1",
+  "scope": "executed -text files exact; inherited files use existing core.autocrlf Windows checkout; no algorithm modification inferred from LF/CRLF storage difference",
+  "allMatch": true,
+  "records": [
+    {
+      "path": "tools/spektralab-research/stream_case.py",
+      "executionExpected": "794a7a60e07582462db2a5112affb4450bc3d19849aa0bd8653bf60bd2451098",
+      "gitBlobSha256": "794a7a60e07582462db2a5112affb4450bc3d19849aa0bd8653bf60bd2451098",
+      "blobExact": true,
+      "windowsCheckoutByteReconstructionMatches": true
+    },
+    {
+      "path": "tools/spektralab-research/stream_full_once.py",
+      "executionExpected": "a7bf832ed2f939533e85df891f5144a1fd39adb0bc472c1a9df6b939da3a3d4a",
+      "gitBlobSha256": "a7bf832ed2f939533e85df891f5144a1fd39adb0bc472c1a9df6b939da3a3d4a",
+      "blobExact": true,
+      "windowsCheckoutByteReconstructionMatches": true
+    },
+    {
+      "path": "tools/spektralab-research/host_budget.py",
+      "executionExpected": "a75071fc0471dc81410a7cfb9cf43595d5f574b6cb230c0b9dd64104a6fbb26e",
+      "gitBlobSha256": "a75071fc0471dc81410a7cfb9cf43595d5f574b6cb230c0b9dd64104a6fbb26e",
+      "blobExact": true,
+      "windowsCheckoutByteReconstructionMatches": true
+    },
+    {
+      "path": "tools/spektralab-research/native_wait.py",
+      "executionExpected": "8d70de85d9f7cd6bcd5cdfdb971c5542ab24438731d307337bb2df24cade4d11",
+      "gitBlobSha256": "8d70de85d9f7cd6bcd5cdfdb971c5542ab24438731d307337bb2df24cade4d11",
+      "blobExact": true,
+      "windowsCheckoutByteReconstructionMatches": true
+    },
+    {
+      "path": "tools/spektralab-research/natural_admission.py",
+      "executionExpected": "fffc77adaa17a42f330602ddccfb9aedd23a15b6f9fdac81047c56d435350288",
+      "gitBlobSha256": "8213a0232e803f812b934ae7f1f8c03dc2812371b8359f754d9621a1cdc3d14a",
+      "blobExact": false,
+      "windowsCheckoutByteReconstructionMatches": true
+    },
+    {
+      "path": "tools/spektralab-research/host_environment.py",
+      "executionExpected": "150e650bcedeb76584b0b37dd159b9ba0c088b342d24615b905b1e6b4abe9c94",
+      "gitBlobSha256": "9b8b5da3b7d5c4c1232a0a6c924faa17be2e402209bb63f0786f5d82ff7822e0",
+      "blobExact": false,
+      "windowsCheckoutByteReconstructionMatches": true
+    },
+    {
+      "path": "tools/spektralab-research/execution_freeze.py",
+      "executionExpected": "f15c0c33460666080c528610a133d3718cb35e7b6bc8180da86e575a3fb80d8e",
+      "gitBlobSha256": "f15c0c33460666080c528610a133d3718cb35e7b6bc8180da86e575a3fb80d8e",
+      "blobExact": true,
+      "windowsCheckoutByteReconstructionMatches": true
+    },
+    {
+      "path": "tools/spektralab-research/stream_saved_reopen.py",
+      "executionExpected": "5768ac6291f629bcb47885e80d840390bce30cf80bc89f241cd9a0f874e4d0ef",
+      "gitBlobSha256": "5768ac6291f629bcb47885e80d840390bce30cf80bc89f241cd9a0f874e4d0ef",
+      "blobExact": true,
+      "windowsCheckoutByteReconstructionMatches": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/company-round6/natural-cases.json",
+      "executionExpected": "78bf55506a81325f3a3096f7209cb2e027a2b7052363ee281bbfea140621674c",
+      "gitBlobSha256": "80b80cd03afbc57977da414deb776d5339ad6d2981c573c656b3b28469f0d508",
+      "blobExact": false,
+      "windowsCheckoutByteReconstructionMatches": true
+    }
+  ]
+}

@@ -6,7 +6,10 @@ from host_budget import HostBudget
 import tifffile
 
 def audit(result,output):
- output=output_path(output);need(not (result/'FAILED.json').exists() and not (result/'AUDITED_STATUS.json').exists(),'Saved group has explicit failure or incomplete audit marker');saved=load_json(result/'report.json');need(saved.get('success') is True and saved.get('status')=='COMPLETE','Saved group not COMPLETE');h,w=saved['height'],saved['width'];budget=HostBudget(512*1048576).start();start=time.perf_counter();report={'version':'StreamSavedReopenHomeV2','success':False,'renderCalls':0,'newProcess':True,'operation':'saved raw/TIFF byte and pixel audit only; no native rerender','width':w,'height':h,'primaryError':None,'cleanupErrors':[]}
+ output=output_path(output);need(not (result/'FAILED.json').exists() and not (result/'AUDITED_STATUS.json').exists(),'Saved group has explicit failure or incomplete audit marker');saved=load_json(result/'report.json');need(saved.get('success') is True and saved.get('status')=='COMPLETE','Saved group not COMPLETE');h,w=saved['height'],saved['width'];
+ if saved.get('acceptanceReceipt'):
+  receipt=load_json(result/saved['acceptanceReceipt']);need(receipt.get('success') is True and receipt['reportSha256']==__import__('natural_admission').sha(result/'report.json') and receipt['outputPixelSha256']==saved['outputPixelSha256'] and max(receipt['sampledProcessPeakRssBytes'],receipt['osProcessPeakWorkingSetBytes'])<=512*1048576,'Commit receipt mismatch')
+ budget=HostBudget(512*1048576).start();start=time.perf_counter();report={'version':'StreamSavedReopenHomeV2','success':False,'renderCalls':0,'newProcess':True,'operation':'saved raw/TIFF byte and pixel audit only; no native rerender','width':w,'height':h,'primaryError':None,'cleanupErrors':[]}
  try:
   rawhash=hashlib.sha256();tiffhash=hashlib.sha256();count=0
   with (result/'rgba16.bin').open('rb') as f:

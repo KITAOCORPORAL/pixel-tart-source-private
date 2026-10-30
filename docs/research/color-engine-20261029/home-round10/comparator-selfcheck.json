@@ -1,0 +1,4311 @@
+{
+  "version": "CrossMachineSyntheticComparisonV1",
+  "purpose": "quantify and localize; NO cross-device pass threshold",
+  "leftGpu": "NVIDIA GeForce RTX 5060 Ti, 610.88\n",
+  "rightGpu": "NVIDIA GeForce RTX 5060 Ti, 610.88\n",
+  "sameInputParamsResources": true,
+  "libraryHashes": [
+    {
+      "sha256": "ed4935f2966f129cf4b47d3475ac6f7ad5a186d9359c3e06dfff2b32d5990d55",
+      "traceSha256": "263a04c0aafa446c5adb4134365a8d27757b064449945dc3bee5adfe47a11c86"
+    },
+    {
+      "sha256": "ed4935f2966f129cf4b47d3475ac6f7ad5a186d9359c3e06dfff2b32d5990d55",
+      "traceSha256": "263a04c0aafa446c5adb4134365a8d27757b064449945dc3bee5adfe47a11c86"
+    }
+  ],
+  "cases": [
+    {
+      "id": "gray-boundaries",
+      "whole": {
+        "shape": [
+          17,
+          33,
+          4
+        ],
+        "dtype": "<u2",
+        "channelValues": 2244,
+        "changedChannels": 0,
+        "exact": true,
+        "firstDifference": null,
+        "maxAbsoluteDelta": 0.0,
+        "meanAbsoluteDelta": 0.0,
+        "absoluteDeltaQuantiles": {
+          "0": 0,
+          "0.5": 0,
+          "0.9": 0,
+          "0.95": 0,
+          "0.99": 0,
+          "0.999": 0,
+          "1": 0
+        },
+        "quantileMethod": "higher exact integer histogram",
+        "nonfinitePairs": 0
+      },
+      "stream": [
+        {
+          "rows": 1,
+          "shape": [
+            17,
+            33,
+            4
+          ],
+          "dtype": "<u2",
+          "channelValues": 2244,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0,
+            "0.5": 0,
+            "0.9": 0,
+            "0.95": 0,
+            "0.99": 0,
+            "0.999": 0,
+            "1": 0
+          },
+          "quantileMethod": "higher exact integer histogram",
+          "nonfinitePairs": 0
+        },
+        {
+          "rows": 7,
+          "shape": [
+            17,
+            33,
+            4
+          ],
+          "dtype": "<u2",
+          "channelValues": 2244,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0,
+            "0.5": 0,
+            "0.9": 0,
+            "0.95": 0,
+            "0.99": 0,
+            "0.999": 0,
+            "1": 0
+          },
+          "quantileMethod": "higher exact integer histogram",
+          "nonfinitePairs": 0
+        },
+        {
+          "rows": 17,
+          "shape": [
+            17,
+            33,
+            4
+          ],
+          "dtype": "<u2",
+          "channelValues": 2244,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0,
+            "0.5": 0,
+            "0.9": 0,
+            "0.95": 0,
+            "0.99": 0,
+            "0.999": 0,
+            "1": 0
+          },
+          "quantileMethod": "higher exact integer histogram",
+          "nonfinitePairs": 0
+        },
+        {
+          "rows": 64,
+          "shape": [
+            17,
+            33,
+            4
+          ],
+          "dtype": "<u2",
+          "channelValues": 2244,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0,
+            "0.5": 0,
+            "0.9": 0,
+            "0.95": 0,
+            "0.99": 0,
+            "0.999": 0,
+            "1": 0
+          },
+          "quantileMethod": "higher exact integer histogram",
+          "nonfinitePairs": 0
+        }
+      ],
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "shape": [
+            17,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1683,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_boost",
+          "shape": [
+            17,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1683,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_overscan",
+          "shape": [
+            17,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1683,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_blurs",
+          "shape": [
+            17,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1683,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_log_and_curves",
+          "shape": [
+            17,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1683,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_couplers",
+          "shape": [
+            17,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1683,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_grain",
+          "shape": [
+            17,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1683,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_spectral",
+          "shape": [
+            17,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1683,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_glare",
+          "shape": [
+            17,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1683,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_linear",
+          "shape": [
+            17,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1683,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_scan_finish",
+          "shape": [
+            17,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1683,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_output",
+          "shape": [
+            17,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1683,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        }
+      ],
+      "streamStages": [
+        {
+          "executionIndex": 0,
+          "stage": "film_scale_and_expose",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 1,
+          "stage": "film_boost",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 2,
+          "stage": "film_overscan",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 3,
+          "stage": "film_blurs",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 4,
+          "stage": "film_log_and_curves",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 5,
+          "stage": "film_couplers",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 6,
+          "stage": "film_grain",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 7,
+          "stage": "film_scale_and_expose",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 8,
+          "stage": "film_boost",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 9,
+          "stage": "film_overscan",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 10,
+          "stage": "film_blurs",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 11,
+          "stage": "film_log_and_curves",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 12,
+          "stage": "film_couplers",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 13,
+          "stage": "film_grain",
+          "shape": [
+            7,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 693,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 14,
+          "stage": "film_scale_and_expose",
+          "shape": [
+            3,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 297,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 15,
+          "stage": "film_boost",
+          "shape": [
+            3,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 297,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 16,
+          "stage": "film_overscan",
+          "shape": [
+            3,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 297,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 17,
+          "stage": "film_blurs",
+          "shape": [
+            3,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 297,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 18,
+          "stage": "film_log_and_curves",
+          "shape": [
+            3,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 297,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 19,
+          "stage": "film_couplers",
+          "shape": [
+            3,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 297,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 20,
+          "stage": "film_grain",
+          "shape": [
+            3,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 297,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 21,
+          "stage": "print_spectral",
+          "shape": [
+            9,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 891,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 22,
+          "stage": "print_glare",
+          "shape": [
+            9,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 891,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 23,
+          "stage": "print_linear",
+          "shape": [
+            9,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 891,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 24,
+          "stage": "print_scan_finish",
+          "shape": [
+            9,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 891,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 25,
+          "stage": "print_output",
+          "shape": [
+            9,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 891,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 26,
+          "stage": "print_spectral",
+          "shape": [
+            11,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1089,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 27,
+          "stage": "print_glare",
+          "shape": [
+            11,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1089,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 28,
+          "stage": "print_linear",
+          "shape": [
+            11,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1089,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 29,
+          "stage": "print_scan_finish",
+          "shape": [
+            11,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1089,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 30,
+          "stage": "print_output",
+          "shape": [
+            11,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1089,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 31,
+          "stage": "print_spectral",
+          "shape": [
+            5,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 495,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 32,
+          "stage": "print_glare",
+          "shape": [
+            5,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 495,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 33,
+          "stage": "print_linear",
+          "shape": [
+            5,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 495,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 34,
+          "stage": "print_scan_finish",
+          "shape": [
+            5,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 495,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 35,
+          "stage": "print_output",
+          "shape": [
+            5,
+            33,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 495,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        }
+      ]
+    },
+    {
+      "id": "saturated-colors",
+      "whole": {
+        "shape": [
+          19,
+          35,
+          4
+        ],
+        "dtype": "<u2",
+        "channelValues": 2660,
+        "changedChannels": 0,
+        "exact": true,
+        "firstDifference": null,
+        "maxAbsoluteDelta": 0.0,
+        "meanAbsoluteDelta": 0.0,
+        "absoluteDeltaQuantiles": {
+          "0": 0,
+          "0.5": 0,
+          "0.9": 0,
+          "0.95": 0,
+          "0.99": 0,
+          "0.999": 0,
+          "1": 0
+        },
+        "quantileMethod": "higher exact integer histogram",
+        "nonfinitePairs": 0
+      },
+      "stream": [
+        {
+          "rows": 1,
+          "shape": [
+            19,
+            35,
+            4
+          ],
+          "dtype": "<u2",
+          "channelValues": 2660,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0,
+            "0.5": 0,
+            "0.9": 0,
+            "0.95": 0,
+            "0.99": 0,
+            "0.999": 0,
+            "1": 0
+          },
+          "quantileMethod": "higher exact integer histogram",
+          "nonfinitePairs": 0
+        },
+        {
+          "rows": 7,
+          "shape": [
+            19,
+            35,
+            4
+          ],
+          "dtype": "<u2",
+          "channelValues": 2660,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0,
+            "0.5": 0,
+            "0.9": 0,
+            "0.95": 0,
+            "0.99": 0,
+            "0.999": 0,
+            "1": 0
+          },
+          "quantileMethod": "higher exact integer histogram",
+          "nonfinitePairs": 0
+        },
+        {
+          "rows": 17,
+          "shape": [
+            19,
+            35,
+            4
+          ],
+          "dtype": "<u2",
+          "channelValues": 2660,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0,
+            "0.5": 0,
+            "0.9": 0,
+            "0.95": 0,
+            "0.99": 0,
+            "0.999": 0,
+            "1": 0
+          },
+          "quantileMethod": "higher exact integer histogram",
+          "nonfinitePairs": 0
+        },
+        {
+          "rows": 64,
+          "shape": [
+            19,
+            35,
+            4
+          ],
+          "dtype": "<u2",
+          "channelValues": 2660,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0,
+            "0.5": 0,
+            "0.9": 0,
+            "0.95": 0,
+            "0.99": 0,
+            "0.999": 0,
+            "1": 0
+          },
+          "quantileMethod": "higher exact integer histogram",
+          "nonfinitePairs": 0
+        }
+      ],
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "shape": [
+            19,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1995,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_boost",
+          "shape": [
+            19,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1995,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_overscan",
+          "shape": [
+            19,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1995,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_blurs",
+          "shape": [
+            19,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1995,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_log_and_curves",
+          "shape": [
+            19,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1995,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_couplers",
+          "shape": [
+            19,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1995,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_grain",
+          "shape": [
+            19,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1995,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_spectral",
+          "shape": [
+            19,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1995,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_glare",
+          "shape": [
+            19,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1995,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_linear",
+          "shape": [
+            19,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1995,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_scan_finish",
+          "shape": [
+            19,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1995,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_output",
+          "shape": [
+            19,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1995,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        }
+      ],
+      "streamStages": [
+        {
+          "executionIndex": 0,
+          "stage": "film_scale_and_expose",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 1,
+          "stage": "film_boost",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 2,
+          "stage": "film_overscan",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 3,
+          "stage": "film_blurs",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 4,
+          "stage": "film_log_and_curves",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 5,
+          "stage": "film_couplers",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 6,
+          "stage": "film_grain",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 7,
+          "stage": "film_scale_and_expose",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 8,
+          "stage": "film_boost",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 9,
+          "stage": "film_overscan",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 10,
+          "stage": "film_blurs",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 11,
+          "stage": "film_log_and_curves",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 12,
+          "stage": "film_couplers",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 13,
+          "stage": "film_grain",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 14,
+          "stage": "film_scale_and_expose",
+          "shape": [
+            5,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 525,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 15,
+          "stage": "film_boost",
+          "shape": [
+            5,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 525,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 16,
+          "stage": "film_overscan",
+          "shape": [
+            5,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 525,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 17,
+          "stage": "film_blurs",
+          "shape": [
+            5,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 525,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 18,
+          "stage": "film_log_and_curves",
+          "shape": [
+            5,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 525,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 19,
+          "stage": "film_couplers",
+          "shape": [
+            5,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 525,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 20,
+          "stage": "film_grain",
+          "shape": [
+            5,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 525,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 21,
+          "stage": "print_spectral",
+          "shape": [
+            9,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 945,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 22,
+          "stage": "print_glare",
+          "shape": [
+            9,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 945,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 23,
+          "stage": "print_linear",
+          "shape": [
+            9,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 945,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 24,
+          "stage": "print_scan_finish",
+          "shape": [
+            9,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 945,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 25,
+          "stage": "print_output",
+          "shape": [
+            9,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 945,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 26,
+          "stage": "print_spectral",
+          "shape": [
+            11,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1155,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 27,
+          "stage": "print_glare",
+          "shape": [
+            11,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1155,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 28,
+          "stage": "print_linear",
+          "shape": [
+            11,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1155,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 29,
+          "stage": "print_scan_finish",
+          "shape": [
+            11,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1155,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 30,
+          "stage": "print_output",
+          "shape": [
+            11,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1155,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 31,
+          "stage": "print_spectral",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 32,
+          "stage": "print_glare",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 33,
+          "stage": "print_linear",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 34,
+          "stage": "print_scan_finish",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 35,
+          "stage": "print_output",
+          "shape": [
+            7,
+            35,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 735,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        }
+      ]
+    },
+    {
+      "id": "edge-small",
+      "whole": {
+        "shape": [
+          21,
+          37,
+          4
+        ],
+        "dtype": "<u2",
+        "channelValues": 3108,
+        "changedChannels": 0,
+        "exact": true,
+        "firstDifference": null,
+        "maxAbsoluteDelta": 0.0,
+        "meanAbsoluteDelta": 0.0,
+        "absoluteDeltaQuantiles": {
+          "0": 0,
+          "0.5": 0,
+          "0.9": 0,
+          "0.95": 0,
+          "0.99": 0,
+          "0.999": 0,
+          "1": 0
+        },
+        "quantileMethod": "higher exact integer histogram",
+        "nonfinitePairs": 0
+      },
+      "stream": [
+        {
+          "rows": 1,
+          "shape": [
+            21,
+            37,
+            4
+          ],
+          "dtype": "<u2",
+          "channelValues": 3108,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0,
+            "0.5": 0,
+            "0.9": 0,
+            "0.95": 0,
+            "0.99": 0,
+            "0.999": 0,
+            "1": 0
+          },
+          "quantileMethod": "higher exact integer histogram",
+          "nonfinitePairs": 0
+        },
+        {
+          "rows": 7,
+          "shape": [
+            21,
+            37,
+            4
+          ],
+          "dtype": "<u2",
+          "channelValues": 3108,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0,
+            "0.5": 0,
+            "0.9": 0,
+            "0.95": 0,
+            "0.99": 0,
+            "0.999": 0,
+            "1": 0
+          },
+          "quantileMethod": "higher exact integer histogram",
+          "nonfinitePairs": 0
+        },
+        {
+          "rows": 17,
+          "shape": [
+            21,
+            37,
+            4
+          ],
+          "dtype": "<u2",
+          "channelValues": 3108,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0,
+            "0.5": 0,
+            "0.9": 0,
+            "0.95": 0,
+            "0.99": 0,
+            "0.999": 0,
+            "1": 0
+          },
+          "quantileMethod": "higher exact integer histogram",
+          "nonfinitePairs": 0
+        },
+        {
+          "rows": 64,
+          "shape": [
+            21,
+            37,
+            4
+          ],
+          "dtype": "<u2",
+          "channelValues": 3108,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0,
+            "0.5": 0,
+            "0.9": 0,
+            "0.95": 0,
+            "0.99": 0,
+            "0.999": 0,
+            "1": 0
+          },
+          "quantileMethod": "higher exact integer histogram",
+          "nonfinitePairs": 0
+        }
+      ],
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "shape": [
+            21,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 2331,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_boost",
+          "shape": [
+            21,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 2331,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_overscan",
+          "shape": [
+            21,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 2331,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_blurs",
+          "shape": [
+            21,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 2331,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_log_and_curves",
+          "shape": [
+            21,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 2331,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_couplers",
+          "shape": [
+            21,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 2331,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "film_grain",
+          "shape": [
+            21,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 2331,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_spectral",
+          "shape": [
+            21,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 2331,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_glare",
+          "shape": [
+            21,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 2331,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_linear",
+          "shape": [
+            21,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 2331,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_scan_finish",
+          "shape": [
+            21,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 2331,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "stage": "print_output",
+          "shape": [
+            21,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 2331,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        }
+      ],
+      "streamStages": [
+        {
+          "executionIndex": 0,
+          "stage": "film_scale_and_expose",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 1,
+          "stage": "film_boost",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 2,
+          "stage": "film_overscan",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 3,
+          "stage": "film_blurs",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 4,
+          "stage": "film_log_and_curves",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 5,
+          "stage": "film_couplers",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 6,
+          "stage": "film_grain",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 7,
+          "stage": "film_scale_and_expose",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 8,
+          "stage": "film_boost",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 9,
+          "stage": "film_overscan",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 10,
+          "stage": "film_blurs",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 11,
+          "stage": "film_log_and_curves",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 12,
+          "stage": "film_couplers",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 13,
+          "stage": "film_grain",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 14,
+          "stage": "film_scale_and_expose",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 15,
+          "stage": "film_boost",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 16,
+          "stage": "film_overscan",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 17,
+          "stage": "film_blurs",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 18,
+          "stage": "film_log_and_curves",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 19,
+          "stage": "film_couplers",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 20,
+          "stage": "film_grain",
+          "shape": [
+            7,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 777,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 21,
+          "stage": "print_spectral",
+          "shape": [
+            9,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 999,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 22,
+          "stage": "print_glare",
+          "shape": [
+            9,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 999,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 23,
+          "stage": "print_linear",
+          "shape": [
+            9,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 999,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 24,
+          "stage": "print_scan_finish",
+          "shape": [
+            9,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 999,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 25,
+          "stage": "print_output",
+          "shape": [
+            9,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 999,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 26,
+          "stage": "print_spectral",
+          "shape": [
+            11,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1221,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 27,
+          "stage": "print_glare",
+          "shape": [
+            11,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1221,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 28,
+          "stage": "print_linear",
+          "shape": [
+            11,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1221,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 29,
+          "stage": "print_scan_finish",
+          "shape": [
+            11,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1221,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 30,
+          "stage": "print_output",
+          "shape": [
+            11,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 1221,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 31,
+          "stage": "print_spectral",
+          "shape": [
+            9,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 999,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 32,
+          "stage": "print_glare",
+          "shape": [
+            9,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 999,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 33,
+          "stage": "print_linear",
+          "shape": [
+            9,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 999,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 34,
+          "stage": "print_scan_finish",
+          "shape": [
+            9,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 999,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        },
+        {
+          "executionIndex": 35,
+          "stage": "print_output",
+          "shape": [
+            9,
+            37,
+            3
+          ],
+          "dtype": "<f4",
+          "channelValues": 999,
+          "changedChannels": 0,
+          "exact": true,
+          "firstDifference": null,
+          "maxAbsoluteDelta": 0.0,
+          "meanAbsoluteDelta": 0.0,
+          "absoluteDeltaQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.95": 0.0,
+            "0.99": 0.0,
+            "0.999": 0.0,
+            "1": 0.0
+          },
+          "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+          "nonfinitePairs": 0
+        }
+      ]
+    }
+  ],
+  "firstDivergentStage": null,
+  "btDecode": {
+    "shape": [
+      1,
+      13,
+      1
+    ],
+    "dtype": "<f4",
+    "channelValues": 13,
+    "changedChannels": 0,
+    "exact": true,
+    "firstDifference": null,
+    "maxAbsoluteDelta": 0.0,
+    "meanAbsoluteDelta": 0.0,
+    "absoluteDeltaQuantiles": {
+      "0": 0.0,
+      "0.5": 0.0,
+      "0.9": 0.0,
+      "0.95": 0.0,
+      "0.99": 0.0,
+      "0.999": 0.0,
+      "1": 0.0
+    },
+    "quantileMethod": "linear NumPy quantile, all small finite stage samples",
+    "nonfinitePairs": 0
+  }
+}

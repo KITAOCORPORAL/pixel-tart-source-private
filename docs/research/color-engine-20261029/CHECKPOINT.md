@@ -1,3 +1,15 @@
+# 当前检查点：家庭第十批（2026-10-30，Europe/Berlin）
+
+接续575b0b1614010c20bcbd9bf38ac2356d6ac7467f，远端无新增。只完成最终caller一次20MP收尾＋公开合成跨设备包。**固定PortraA流式研究阶段最终caller合同已通过并冻结**，通用胶片/产品/许可仍OPEN。
+
+1. 唯一full新目录round10-full-final-caller-once；调用前freezeSHA968f46...a09e6、child核验；最终成功组提交OS/sample峰值380588032<512MiB，device43848656<256MiB、staging25523424<64MiB，live0/negative删除。receipt固定终点SUCCESS_GROUP_COMMIT，报告发布后一次OS峰值检查，之后不追加新范围。旧第九批AUDITED_STATUS/输出保持不动。
+2. saved audit新进程全行hash exact、renderCalls0。重复Ctrl-Break和受控INT/INT/BREAK小图native−7/join/live0；caller链成功后未改。
+3. 公司/家庭99resolved、输入、全部resource/SPIRV和记录工具exe hash一致，native算法仅授权路径根差异；GPU/driver/运行时及完整编译命令仍混杂，不从自然hash猜首差。
+4. tools/cross-device-diagnostic公开fixture/whole/stream/BT/12+36stage样本及小RGBA16已家庭执行并入Git。natural入口拒绝synthetic；跨设备比较器给first/count/max/mean/分位数，无事后阈值。公司执行NOT_RUN，下一步公司设备合法运行包后逐阶段定位即可；不是等私人照片才有工作。
+
+D80014 V2/BT家庭补丁/WB/曲线/桥本轮冻结，不重复大RAW/全部回归；UI/项目/任务桥/default/PV4/5/6没改。实际执行与许可单列。权威HOME_ROUND10_REPORT.md、STREAMING_HOME_CAPABILITIES_V1.md顶部、REPRODUCE_HOME_ROUND10.md、LICENSE_HOME_ROUND10.md、home-round10/，旧记录以下保留。
+
+---
 # 当前家庭接续：公司第八批→家庭第九批（2026-10-30，Europe/Berlin）
 
 独立家庭树/分支research/color-engine-home-20261030，基点0f3204c09b15e041c8e70cf95ddbee789fcf7cec。旧research/color-engine-20261029及像素/外部source/build/resources不覆盖。
