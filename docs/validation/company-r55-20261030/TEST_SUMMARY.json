@@ -1,0 +1,317 @@
+{
+  "productSourceSha": "f7b5307865d59dc13e424f5643c19a31567cf203",
+  "publishedDlls": 7,
+  "runs": [
+    {
+      "path": "R55Combined.trx",
+      "passed": 14,
+      "results": [
+        {
+          "name": "ActualWorkspaceCloseDuringDecoderDiscardsAndReleasesCache",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CacheHitChecksHandleChangeEvenWithSameLengthAndRestoredMtime",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SidebarsPreflightLampNeverMutateRecipeAndClosePanelKeepsTask",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FullHundredFilmSavesNewVariantWithoutDroppingPinnedItems",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ReverseDetailCompletionKeepsBAndStopRejectsInFlightSlide",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DetailThenCompareRejectsLateSuccessAndLateError",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CentralHostRestoresFilmstripAndOriginalTarget",
+          "outcome": "Passed"
+        },
+        {
+          "name": "WorkspaceProgressiveLatestSnapshotAndCancellationAreDeterministic",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutViewportOrderPreferencesAndProjectReopen",
+          "outcome": "Passed"
+        },
+        {
+          "name": "VirtualCardsStayBoundedWithHundredPinnedPlaceholders",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CancelKeepsCompletedFrameAndGestureUndoRestoresLayout",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RetryOnlyFailedItemKeepsSuccessfulFramesAndScrollCancelsObsoleteWork",
+          "outcome": "Passed"
+        },
+        {
+          "name": "TwoVariantsOneSourceRetryKeepsOtherFailure",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RefreshCrossingCloseAndOldFailureNeverFillNewView",
+          "outcome": "Passed"
+        }
+      ],
+      "sha256": "1c40092c4462b0b7628375df52b4b9de7908275ed4bd76d1fad3db0b12544222"
+    },
+    {
+      "path": "R55Core.trx",
+      "passed": 22,
+      "results": [
+        {
+          "name": "ConnectionsDriveActualPixelsNotListOrder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LampCurveKeepsReferenceEndpointsAndReducedMotion",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FilmPipelineHonorsCancellationInsideSpatialPasses",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ExactProxySamplesMatchHistoricalFullFloatProxyAllOrientations",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutDoesNotChangeHistoricalSerialPixelsOrOrder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "GrainSizeIsContinuousAndTextureIsDeterministic",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutPersistenceClampsInvalidViewport",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProfilesArePixelTartOwnedAndValidateBounds",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RotatedPlacementAndInverseHitAreConsistent",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DisabledFilmAndZeroParametersAreExactIdentity",
+          "outcome": "Passed"
+        },
+        {
+          "name": "InvalidPortsCycleAndBranchesRejected",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BloomSpreadsNeutralLightBeyondHighlight",
+          "outcome": "Passed"
+        },
+        {
+          "name": "InsertDeleteAndSerializationAreExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FilmSettingsAndReferenceLookRoundTripThroughJson",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProceduralTexturesDoNotRepeatOnShortPeriods",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HalationIsLocalizedToHighlightsAndBlackStaysBlack",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BoundedIndependentTiffOrientationRejectsMalformedAmbiguousAndAbsent",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HalationIsWarmEdgeAndBloomIsIndependent",
+          "outcome": "Passed"
+        },
+        {
+          "name": "VignetteFallsOffSmoothlyFromCenterToCorners",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LegacyViewingMigratesExplicitlyAndUnknownVersionRejects",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DisconnectMeansIdentityAndDetachedNodesPersist",
+          "outcome": "Passed"
+        },
+        {
+          "name": "GrainIsDeterministicAndSeedChangesOnlyOnExplicitChange",
+          "outcome": "Passed"
+        }
+      ],
+      "sha256": "804e9a34d0cb770ced6969c417dabdbfa84f1991076b54c52aebeac44427a165"
+    },
+    {
+      "path": "R55Dev5.trx",
+      "passed": 14,
+      "results": [
+        {
+          "name": "TwoVariantsOneSourceRetryKeepsOtherFailure",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CancelKeepsCompletedFrameAndGestureUndoRestoresLayout",
+          "outcome": "Passed"
+        },
+        {
+          "name": "WorkspaceProgressiveLatestSnapshotAndCancellationAreDeterministic",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FullHundredFilmSavesNewVariantWithoutDroppingPinnedItems",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RefreshCrossingCloseAndOldFailureNeverFillNewView",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RetryOnlyFailedItemKeepsSuccessfulFramesAndScrollCancelsObsoleteWork",
+          "outcome": "Passed"
+        },
+        {
+          "name": "VirtualCardsStayBoundedWithHundredPinnedPlaceholders",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CacheHitChecksHandleChangeEvenWithSameLengthAndRestoredMtime",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ActualWorkspaceCloseDuringDecoderDiscardsAndReleasesCache",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DetailThenCompareRejectsLateSuccessAndLateError",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ReverseDetailCompletionKeepsBAndStopRejectsInFlightSlide",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutViewportOrderPreferencesAndProjectReopen",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CentralHostRestoresFilmstripAndOriginalTarget",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SidebarsPreflightLampNeverMutateRecipeAndClosePanelKeepsTask",
+          "outcome": "Passed"
+        }
+      ],
+      "sha256": "f52053b17dee4ab4da0221788e55beda6e3d5c6a3ca58363003fc100dced752a"
+    },
+    {
+      "path": "R55Final.trx",
+      "passed": 14,
+      "results": [
+        {
+          "name": "WorkspaceProgressiveLatestSnapshotAndCancellationAreDeterministic",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutViewportOrderPreferencesAndProjectReopen",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ReverseDetailCompletionKeepsBAndStopRejectsInFlightSlide",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RetryOnlyFailedItemKeepsSuccessfulFramesAndScrollCancelsObsoleteWork",
+          "outcome": "Passed"
+        },
+        {
+          "name": "VirtualCardsStayBoundedWithHundredPinnedPlaceholders",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DetailThenCompareRejectsLateSuccessAndLateError",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CancelKeepsCompletedFrameAndGestureUndoRestoresLayout",
+          "outcome": "Passed"
+        },
+        {
+          "name": "TwoVariantsOneSourceRetryKeepsOtherFailure",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RefreshCrossingCloseAndOldFailureNeverFillNewView",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FullHundredFilmSavesNewVariantWithoutDroppingPinnedItems",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ActualWorkspaceCloseDuringDecoderDiscardsAndReleasesCache",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CentralHostRestoresFilmstripAndOriginalTarget",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SidebarsPreflightLampNeverMutateRecipeAndClosePanelKeepsTask",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CacheHitChecksHandleChangeEvenWithSameLengthAndRestoredMtime",
+          "outcome": "Passed"
+        }
+      ],
+      "sha256": "6205d3a27d83a8800a25da17ffed8efc1bc3dc9924e4e97063c7b293170179f5"
+    },
+    {
+      "path": "R55HostFinal2.trx",
+      "passed": 1,
+      "results": [
+        {
+          "name": "FullApplicationHostedRailAndMenuOffscreenEvidence",
+          "outcome": "Passed"
+        }
+      ],
+      "sha256": "dc968cfebf326f6548ce7acb2a4816507ea2fedd50c25a40c36f996f231dd5b7"
+    },
+    {
+      "path": "R55IndependentFinal.trx",
+      "passed": 1,
+      "results": [
+        {
+          "name": "IndependentR55LayoutReopen",
+          "outcome": "Passed"
+        }
+      ],
+      "sha256": "2444391e6ea0579cc8c64e5d90638bee9c12d04bf4043c2a29bf82f77abfa764"
+    }
+  ],
+  "uniquePassed": 38,
+  "failed": 0,
+  "notRunInSelected": 0,
+  "fullSuite": "NOT_RUN",
+  "nativeAcceptance": "NOT_RUN"
+}
