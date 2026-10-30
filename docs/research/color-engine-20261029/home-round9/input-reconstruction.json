@@ -1,0 +1,99 @@
+{
+  "version": "HomeSameInputReconstructionV1",
+  "sourceSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+  "companyA": {
+    "path": "A-linear-d50-full.npy",
+    "fileSha256": "77f49b1580eb55c9274278d1019adebec098ff2a3d630af0fc5b994d4b6041c3",
+    "shape": [
+      3670,
+      5496,
+      3
+    ],
+    "route": "A",
+    "orientation": 1,
+    "domain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+    "bridgeVersion": "ExistingResearchD65ToD50V1",
+    "pixelSha256": "cd47a182e9814bc45c4130b9b90fc45bca49a06923958df739180699ac0f50f9",
+    "bytes": 242043968
+  },
+  "homeA": {
+    "path": "A-linear-d50-full.npy",
+    "fileSha256": "77f49b1580eb55c9274278d1019adebec098ff2a3d630af0fc5b994d4b6041c3",
+    "shape": [
+      3670,
+      5496,
+      3
+    ],
+    "route": "A",
+    "orientation": 1,
+    "domain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+    "bridgeVersion": "ExistingResearchD65ToD50V1",
+    "pixelSha256": "cd47a182e9814bc45c4130b9b90fc45bca49a06923958df739180699ac0f50f9",
+    "bytes": 242043968
+  },
+  "samePixelHash": true,
+  "sameFileHash": true,
+  "smallFiles": [
+    {
+      "path": "whole-scene-321x214.npy",
+      "fileSha256": "37e8ef5afc2af1c67fea3d7e210d2adebdd7ae042ac22989ceab57dbc73b1917",
+      "shape": [
+        214,
+        321,
+        3
+      ],
+      "route": "A",
+      "orientation": 1,
+      "domain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "5b9e0da6d7fecf23409750c88a80c22d718b8d986e71e46e2410d72aef87c50e",
+      "bytes": 824456
+    },
+    {
+      "path": "whole-scene-641x428.npy",
+      "fileSha256": "260fa2ad3d680ab15b2f8e5361685e6d54ad59ee1b7045b28a933abd7b1bcacb",
+      "shape": [
+        428,
+        641,
+        3
+      ],
+      "route": "A",
+      "orientation": 1,
+      "domain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "70fd1ec9875319236f0c63f968be9566388d2d8dad9d729ec1a3e41ead02edf2",
+      "bytes": 3292304
+    },
+    {
+      "path": "whole-scene-1200x801.npy",
+      "fileSha256": "d45f0a16ba328f6dcdbc030c7f80dfd1b56544d07f2909fbf396ed59a64f2ca5",
+      "shape": [
+        801,
+        1200,
+        3
+      ],
+      "route": "A",
+      "orientation": 1,
+      "domain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "4ac591589af7ca1d41a57baa12e9a8277627a380a3869426d3d8e855c8bf8349",
+      "bytes": 11534528
+    },
+    {
+      "path": "synthetic.npy",
+      "fileSha256": "af34dd0956235822f7e117490c1d712f02db569e55d3483c9a84bd0ac9fcc151",
+      "shape": [
+        65,
+        97,
+        3
+      ],
+      "route": "A",
+      "orientation": 1,
+      "domain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "839cf7a76245c101e56d7e25e7f5cfe26bfb1280b0a255da3b431d057c99296a",
+      "bytes": 75788,
+      "synthetic": true
+    }
+  ]
+}

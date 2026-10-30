@@ -1,0 +1,33 @@
+{
+  "version": "HomeMigrationFailureLedgerV1",
+  "failures": [
+    {
+      "phase": "first preparation output gate",
+      "error": "Output outside authorized research root",
+      "cause": "initial exact-string replacement did not replace company constants",
+      "action": "corrected explicit host config; no output created by that failed call"
+    },
+    {
+      "phase": "Python import",
+      "error": "ModuleNotFoundError psutil",
+      "action": "installed isolated pinned NumPy2.4.6 psutil7.2.2 tifffile2026.10.15 under N; no system PATH change"
+    },
+    {
+      "phase": "initial small preparation",
+      "error": "321x215 missing because helper generated321x214; also641x428",
+      "action": "retained wrong-size directory, built exact company sizes in new small-inputs-v2"
+    },
+    {
+      "phase": "D80014 first V2",
+      "error": "0xC0000005 after native context disposal, JSON lazily enumerated CameraMultiplierIndexer",
+      "action": "owned double[] snapshot inside context; no guard relaxation; new real decode and fresh reopen passed"
+    },
+    {
+      "phase": "single full host scope",
+      "error": "OS high-water was not reread after success report publication",
+      "action": "original report retained and local AUDITED_STATUS success=false; final publication hardening small/fault verified, no second20MP"
+    }
+  ],
+  "fullNativeCalls": 1,
+  "companyAndOldHomeEvidencePreserved": true
+}

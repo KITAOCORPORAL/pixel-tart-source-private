@@ -2,8 +2,10 @@
 from pathlib import Path
 import hashlib,json,os,struct,sys,ctypes
 import numpy as np
-AUTHORIZED_OUTPUT=Path('E:/Kitao-Research').resolve()
-SOURCE_ROOT=Path('D:/AI AGENT/PixelTart-TestAssets/CompanyRAW').resolve()
+from host_environment import environment
+_HOST=environment()
+AUTHORIZED_OUTPUT=Path(_HOST['authorizedOutputRoot']).resolve()
+SOURCE_ROOT=Path(_HOST['sourceRoot']).resolve()
 DOMAINS={'A':'standard ProPhoto RGB D50 linear float32; negatives/>1 retained','B':'production display sRGB D65 encoded float32 creative input'}
 def need(ok,text):
  if not ok:raise ValueError(text)

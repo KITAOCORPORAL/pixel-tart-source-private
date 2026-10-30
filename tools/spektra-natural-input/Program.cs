@@ -6,7 +6,7 @@ using System.Text.Json;
 using RAWSelectionAssistant.Core.Services.RawToJpeg;
 using RAWSelectionAssistant.Core.Services.Projects;
 using Sdcb.LibRaw;
-var root=Path.GetFullPath("D:/AI AGENT/PixelTart-TestAssets/CompanyRAW");
+var configPath=Environment.GetEnvironmentVariable("COLOR_RESEARCH_ENV")??throw new ArgumentException("Explicit COLOR_RESEARCH_ENV required");using var hostConfig=JsonDocument.Parse(File.ReadAllText(configPath));if(hostConfig.RootElement.GetProperty("version").GetString()!="ColorEngineHomeEnvironmentV1")throw new InvalidDataException("Host config version");var root=Path.GetDirectoryName(Path.GetFullPath(hostConfig.RootElement.GetProperty("sourceFile").GetString()!))!;
 void Report(string file,object report){var temp=file+".partial-"+Guid.NewGuid().ToString("N");File.WriteAllText(temp,JsonSerializer.Serialize(report,new JsonSerializerOptions{WriteIndented=true}));File.Move(temp,file,false);}
 string Hash(string p){using var f=File.OpenRead(p);return Convert.ToHexString(SHA256.HashData(f));}
 if(args.Length==1&&args[0]=="inventory"){
@@ -15,7 +15,7 @@ if(args.Length==1&&args[0]=="inventory"){
  }Console.WriteLine(JsonSerializer.Serialize(records,new JsonSerializerOptions{WriteIndented=true}));return;
 }
 string ValidateOutput(string path){
- var allowed=Path.GetFullPath("E:/Kitao-Research").TrimEnd(Path.DirectorySeparatorChar);
+ var allowed=Path.GetFullPath(hostConfig.RootElement.GetProperty("authorizedOutputRoot").GetString()!).TrimEnd(Path.DirectorySeparatorChar);
  var dest=Path.GetFullPath(path);var source=Path.GetFullPath(root).TrimEnd(Path.DirectorySeparatorChar);
  bool Under(string child,string parent)=>child.StartsWith(parent+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase);
  if(!Under(dest,allowed)||dest.Equals(allowed,StringComparison.OrdinalIgnoreCase)||Under(dest,source)||Under(source,dest)||dest.Equals(source,StringComparison.OrdinalIgnoreCase))throw new IOException("Output outside authorized research root or overlaps CompanyRAW");
@@ -25,8 +25,8 @@ string ValidateOutput(string path){
  return dest;
 }
 if(args.Length==2&&args[0]=="validate-output"){Console.WriteLine(ValidateOutput(args[1]));return;}
-if(args.Length!=3)throw new ArgumentException("<explicit authorized filename> <expectedSHA256> <new output under E:/Kitao-Research>");
-var file=Path.GetFullPath(Path.Combine(root,args[0]));if(Path.GetDirectoryName(file)!=root)throw new InvalidDataException("Outside CompanyRAW root");var dest=ValidateOutput(args[2]);
+if(args.Length!=3)throw new ArgumentException("<explicit authorized filename> <expectedSHA256> <new output under explicit host research root>");
+var file=Path.GetFullPath(Path.Combine(root,args[0]));if(Path.GetDirectoryName(file)!=root)throw new InvalidDataException("Outside CompanyRAW root");if(!file.Equals(Path.GetFullPath(hostConfig.RootElement.GetProperty("sourceFile").GetString()!),StringComparison.OrdinalIgnoreCase)||args[1]!=hostConfig.RootElement.GetProperty("sourceSha256").GetString())throw new InvalidDataException("Frozen source whitelist mismatch");var dest=ValidateOutput(args[2]);
 using var cancel=new CancellationTokenSource();Console.CancelKeyPress+=(_,e)=>{e.Cancel=true;cancel.Cancel();};var before=Hash(file);if(before!=args[1])throw new InvalidDataException("Source hash differs");Directory.CreateDirectory(dest);var watch=Stopwatch.StartNew();var stages=new List<string>();
 try{
  var definition=new ProfessionalRawDefinition(ExposureEv:0);var master=await new ProfessionalRawDecoder(s=>stages.Add(s)).DecodeAsync(file,definition,cancel.Token);watch.Stop();double decodeMs=watch.Elapsed.TotalMilliseconds;

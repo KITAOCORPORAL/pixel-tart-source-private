@@ -3,7 +3,7 @@ Calls original pixel nodes; no GPL implementation/resource vendored into product
 """
 from pathlib import Path
 import argparse,subprocess,json,hashlib
-p=argparse.ArgumentParser();p.add_argument('source',type=Path);p.add_argument('resources',type=Path);a=p.parse_args();root=a.source.resolve()
+p=argparse.ArgumentParser();p.add_argument('source',type=Path);p.add_argument('resources',type=Path);p.add_argument('--environment',type=Path,required=True);a=p.parse_args();root=a.source.resolve();from host_environment import environment;host=environment(a.environment)
 if subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip()!='c1447c6ab618fa4b1cb11fd2fe12826855007059':raise ValueError('Wrong engine commit')
 if subprocess.check_output(['git','-C',str(root),'status','--porcelain'],text=True).strip():raise ValueError('Use new clean external checkout')
 if (root/'src/RAWSelectionAssistant.Core').exists():raise ValueError('Product source prohibited')
@@ -117,7 +117,7 @@ extern "C" __declspec(dllexport) int spk_stream_research_v1(
   r8_need(Json::parse(r8_resources,resource_manifest,error),"Invalid compiled resource manifest");
   r8_need(request.at("resourceManifestSha256").as_string()=="RESOURCE_SHA","Resource manifest identity mismatch");
   size_t seen=0;for(const auto& entry:std::filesystem::recursive_directory_iterator(std::filesystem::u8path(resources_dir))){if(!entry.is_regular_file())continue;const auto rel=std::filesystem::relative(entry.path(),std::filesystem::u8path(resources_dir)).generic_string();r8_need(resource_manifest.has(rel)&&r8_hashfile(entry.path())==resource_manifest.at(rel).as_string(),"Resource bytes/collection changed");++seen;}r8_need(seen==resource_manifest.fields().size(),"Missing resource");
-  const auto store=std::filesystem::u8path(request.at("negativeStore").as_string());const auto allowed=std::filesystem::weakly_canonical(std::filesystem::path("E:/Kitao-Research"));const auto parent=std::filesystem::weakly_canonical(store.parent_path());const auto rel=std::filesystem::relative(parent,allowed);r8_need(!rel.empty()&&*rel.begin()!=".."&&!std::filesystem::exists(store),"Negative store must be new authorized local path");
+  const auto store=std::filesystem::u8path(request.at("negativeStore").as_string());const auto allowed=std::filesystem::weakly_canonical(std::filesystem::path("__RESEARCH_AUTHORIZED_ROOT__"));const auto parent=std::filesystem::weakly_canonical(store.parent_path());const auto rel=std::filesystem::relative(parent,allowed);r8_need(!rel.empty()&&*rel.begin()!=".."&&!std::filesystem::exists(store),"Negative store must be new authorized local path");
   // Rows are a policy result, not an ignored hint. Hard allocator caps catch every live Vulkan allocation including staging.
   const uint64_t fixed=8ull*1024*1024;const uint64_t denom=uint64_t(width)*160;
   r8_need(device_cap>fixed&&staging_cap>65536&&host_cap>2*1024*1024,"Insufficient bounded budgets");
@@ -153,7 +153,7 @@ extern "C" __declspec(dllexport) int spk_stream_research_v1(
 }
 '''
 cpp=cpp.replace('EXPECTED_JSON',json.dumps(expected,sort_keys=True,separators=(',',':'))).replace('RESOURCE_JSON',json.dumps(hashes,sort_keys=True,separators=(',',':'))).replace('RESOURCE_SHA',hashlib.sha256(json.dumps(hashes,sort_keys=True,separators=(',',':')).encode()).hexdigest())
-p=root/'engine/src/pipeline/engine.cpp';p.write_text(p.read_text(encoding='utf-8')+'\n'+cpp,encoding='utf-8')
+p=root/'engine/src/pipeline/engine.cpp';p.write_text(p.read_text(encoding='utf-8')+'\n'+cpp.replace('__RESEARCH_AUTHORIZED_ROOT__',str(Path(host['authorizedOutputRoot']).resolve()).replace(chr(92),'/')),encoding='utf-8')
 p=root/'engine/windows_exports.def';p.write_text(p.read_text()+'\n    spk_stream_research_v1\n')
 p=root/'engine/CMakeLists.txt';p.write_text(p.read_text(encoding='utf-8')+'\nif(WIN32)\n target_link_libraries(spektralab_engine_shared PRIVATE bcrypt)\nendif()\n',encoding='utf-8')
 # External live-wire addendum only; the original service/API is not registered or changed.

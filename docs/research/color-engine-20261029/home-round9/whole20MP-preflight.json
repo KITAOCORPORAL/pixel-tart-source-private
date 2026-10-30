@@ -1,0 +1,17 @@
+{
+  "version": "HomeWhole20MPAdmissionV1",
+  "pixels": 20170320,
+  "deviceEstimate76nPlus96MiB": 1633607616,
+  "measuredRound7Device72nPlusFixed": 1453063040,
+  "freeMinusReserveCap": 2147483648,
+  "hostNecessaryPublicAbiHoldings": {
+    "sourceFileMapping": 242043840,
+    "uploadAndReadStagingMinimum": 484087680,
+    "ownedResult": 161362560
+  },
+  "callerCap": 536870912,
+  "decision": "NOT_RUN_HOST_BUDGET",
+  "why": "public ABI necessary source mapping + staging + owned result = 44n >512MiB; do not force whole upload even though home device memory permits",
+  "stream20MPAlreadyExecuted": true,
+  "wholeCalls": 0
+}

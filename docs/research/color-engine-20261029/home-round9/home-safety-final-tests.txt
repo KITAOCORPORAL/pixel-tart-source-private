@@ -1,0 +1,12 @@
+test_monitor_join_even_on_exception (__main__.Safety.test_monitor_join_even_on_exception) ... ok
+test_os_peak_not_sampling_is_gate (__main__.Safety.test_os_peak_not_sampling_is_gate) ... ok
+test_peak_exceeded_by_report_serialization_cannot_commit (__main__.Safety.test_peak_exceeded_by_report_serialization_cannot_commit) ... ok
+test_report_preparation_failure_keeps_outputs_provisional (__main__.Safety.test_report_preparation_failure_keeps_outputs_provisional) ... ok
+test_second_rename_failure_leaves_no_complete_group (__main__.Safety.test_second_rename_failure_leaves_no_complete_group) ... ok
+test_success_group_report_is_last (__main__.Safety.test_success_group_report_is_last) ... ok
+test_whole_gate_does_not_use_assert (__main__.Safety.test_whole_gate_does_not_use_assert) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.205s
+
+OK

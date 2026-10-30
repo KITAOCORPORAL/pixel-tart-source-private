@@ -1,0 +1,33 @@
+{
+  "version": "HomeStreamingHeightProofV1",
+  "sameWidth": 321,
+  "heights": [
+    215,
+    430
+  ],
+  "rows": 37,
+  "peaks": {
+    "devicePeakBytes": [
+      1439776,
+      1439776
+    ],
+    "stagingPeakBytes": [
+      585152,
+      585152
+    ],
+    "hostPeakBudgetedBytes": [
+      2360372,
+      2360372
+    ]
+  },
+  "wholeExact": {
+    "wholeVsStreamExact": true,
+    "changedChannels": 0,
+    "maxAbsU16": 0,
+    "firstDifference": null,
+    "wholeHash": "10dc73058b75a11708d750307adadb23b755cd9008051a3ef7f02f3b01842626"
+  },
+  "sameDevice": true,
+  "no20MPrender": true,
+  "success": true
+}

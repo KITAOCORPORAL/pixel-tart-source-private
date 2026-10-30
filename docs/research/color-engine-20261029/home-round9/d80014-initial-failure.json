@@ -1,0 +1,21 @@
+{
+  "version": "HomeD80014FirstFailureV1",
+  "phase": "ValidateObservation serialization after LibRaw context disposal",
+  "exitCode": -1073741819,
+  "nativeException": "0xC0000005",
+  "stackAnchor": [
+    "Sdcb.LibRaw.Natives.LibRawNative.GetCameraMultiplier",
+    "Sdcb.LibRaw.Indexers.CameraMultiplerIndexer.GetEnumerator",
+    "System.Text.Json.JsonSerializer.SerializeToNode",
+    "ResearchContract.ValidateObservation",
+    "Program.Main"
+  ],
+  "actualCause": "Observation stored lazy context.CameraMultipler indexer; serialization enumerated freed native handle",
+  "minimalFix": "Materialize double[] via context.CameraMultipler.Select(x=>(double)x).ToArray() while context alive",
+  "sourceWhitelistAbiAlgorithmGuardsRelaxed": false,
+  "failedDirectoryRetained": "N:/pixart/ColorResearchHome-20261030/d80014-matrix-v2",
+  "rerunSuccess": "d80014-matrix-v2-snapshot",
+  "successMasterSha256": "C32DD30440583E522B452DDE556FDEEF87D342CEE37142ADB52A9000E0D6782A",
+  "followupContractTests": "14/14 PASS",
+  "note": "Fatal stack copied as a minimal factual summary from tool output; not claimed full original stderr artifact"
+}

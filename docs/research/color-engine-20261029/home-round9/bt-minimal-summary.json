@@ -1,0 +1,21 @@
+{
+  "version": "HomeBtJoinMinimalRecheckV1",
+  "cpuJoinBits": "3da66555",
+  "cases": [
+    {
+      "variant": "original",
+      "mode3Count": 13,
+      "maxAbsCpuFloatCompatibilityError": 5.509642263253414e-05,
+      "atMinus1Ulp": "mode=3 offset=-1 input=0.081247955560684204 input_bits=3da66554 output=0.018000004813075066 output_bits=3c9374bf cpu_branch=linear cpu_ref=0.0180551012357076 delta=5.5096422632534142e-05"
+    },
+    {
+      "variant": "compatibilityPatch",
+      "mode3Count": 13,
+      "maxAbsCpuFloatCompatibilityError": 8.296318410039305e-09,
+      "atMinus1Ulp": "mode=3 offset=-1 input=0.081247955560684204 input_bits=3da66554 output=0.018055101856589317 output_bits=3c93e84b cpu_branch=linear cpu_ref=0.0180551012357076 delta=6.2088171756680133e-10"
+    }
+  ],
+  "rawModes6and7NotUsed": "probe not instrumented; identity output not evidence of GPU breakpoint",
+  "neededRegression": "pointwise and c_abi 2/2 passed",
+  "thresholdNotChanged": true
+}

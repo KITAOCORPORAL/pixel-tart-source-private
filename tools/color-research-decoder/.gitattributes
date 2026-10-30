@@ -1,0 +1,3 @@
+# V2 recipe hashes exact implementation bytes, including tested Windows line endings.
+# Preserve pre-existing trailing newline bytes; do not rewrite after a passed V2 run.
+Program.cs -text whitespace=cr-at-eol,-blank-at-eof

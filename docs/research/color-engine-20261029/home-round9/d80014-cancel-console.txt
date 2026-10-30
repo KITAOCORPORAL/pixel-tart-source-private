@@ -1,0 +1,5 @@
+Unhandled exception. System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at Program.<Main>$(String[] args) in N:\pixart\guangjing-color-engine-home-20261030\tools\color-research-decoder\Program.cs:line 57
+   at Program.<Main>(String[] args)

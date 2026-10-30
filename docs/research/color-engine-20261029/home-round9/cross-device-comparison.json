@@ -1,0 +1,45 @@
+{
+  "version": "HomeCompanyGpuHashComparisonV1",
+  "sameSourceAndFullPreparedInput": true,
+  "smallHashComparisons": [
+    {
+      "size": [
+        321,
+        215
+      ],
+      "companyStreamHash": "428bda76a836c1b18e75002dd6c43c8e3e783607cdf886dcebc926c9857c2d13",
+      "homeWholeAndStreamHash": "dd82efd787cdcf5b43a4e752d16f325dc5368bd01cb7fc0597f2ba95c6173cc8",
+      "sameHash": false,
+      "companyInputHash": "4dc6bd358e4013e0e735e1d3803f9f73ff349828b34ca64a4a8305ae82f782ed",
+      "homeInputHash": "4dc6bd358e4013e0e735e1d3803f9f73ff349828b34ca64a4a8305ae82f782ed"
+    },
+    {
+      "size": [
+        641,
+        429
+      ],
+      "companyStreamHash": "abc8184a7556be4692a3a99b5eea9b8ea43fd205dd4289a6d272834afdc4d33c",
+      "homeWholeAndStreamHash": "6a042a1238b60a940478886bcbbc9d46c827e2bd33280c6a6a2a0d14f604149b",
+      "sameHash": false,
+      "companyInputHash": "f91d9c1c77b412ed1b894789ae35d33fa00c5444ba48536dafca7c628156c3bb",
+      "homeInputHash": "f91d9c1c77b412ed1b894789ae35d33fa00c5444ba48536dafca7c628156c3bb"
+    },
+    {
+      "size": [
+        1200,
+        801
+      ],
+      "companyStreamHash": "0142d40bd3d40f9e98830a0e4ca7e59a0f312c7aaadf42895da8182596785cfa",
+      "homeWholeAndStreamHash": "62afe385eba6ec67f7bf4d5d4c57cf7af15aa21f161b9600e0936ced1111deb4",
+      "sameHash": false,
+      "companyInputHash": "4ac591589af7ca1d41a57baa12e9a8277627a380a3869426d3d8e855c8bf8349",
+      "homeInputHash": "4ac591589af7ca1d41a57baa12e9a8277627a380a3869426d3d8e855c8bf8349"
+    }
+  ],
+  "fullCompanyStreamHash": "1c4a97a126b420fb24561df5cfb03bfc1b3d7648a5ee77c3d13102c48c2a7b8a",
+  "fullHomeStreamHash": "f5539589141fdd65df6aed587f2e8ab5c5c0f743dc581c1f035f67d1f2e2e9a5",
+  "sameFullHash": false,
+  "channelDifferenceCount": null,
+  "firstDifference": null,
+  "limitation": "Company raw RGBA16 not transferred and not present at home. Hash mismatch establishes difference only; cannot locate first differing pixel or quantify delta from hash. No byte-equivalence claimed. Home whole/stream small gate is separate and exact."
+}

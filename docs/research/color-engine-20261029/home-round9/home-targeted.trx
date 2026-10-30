@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="5cbd0c53-5cd6-4061-9559-af2788da87e6" name="Admin@DESKTOP-HO0JJEQ 2026-10-30 20:41:58" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-30T20:41:58.1171236+08:00" queuing="2026-10-30T20:41:58.1171238+08:00" start="2026-10-30T20:41:57.5662133+08:00" finish="2026-10-30T20:41:58.2720536+08:00" />
+  <TestSettings name="default" id="004cfb73-dc32-45bb-81c9-15fd5fa16338">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-10-30_20_41_58" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="0c8361f4-6087-4fa3-a826-15b883797da7" testId="15f28276-8574-85f9-ba05-e13efacc8d0c" testName="PreviewSamplesExactlySameRenderedPixelsAndDefinitionMustMatchDecode" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0111397" startTime="2026-10-30T20:41:58.0675862+08:00" endTime="2026-10-30T20:41:58.0930211+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0c8361f4-6087-4fa3-a826-15b883797da7" />
+    <UnitTestResult executionId="ade05d81-2136-4118-b6b9-229d4714323c" testId="1f076042-9a96-87fc-bf0d-f789ccd94959" testName="DefinitionAndInputPersistInVersionAndV1SessionWithoutOldStackMigration" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.1491295" startTime="2026-10-30T20:41:58.0675507+08:00" endTime="2026-10-30T20:41:58.2314466+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ade05d81-2136-4118-b6b9-229d4714323c" />
+    <UnitTestResult executionId="f17260c7-6351-4a6a-91e8-d9acb9873139" testId="1950bb1b-5bef-8188-abe5-135b7ea58450" testName="SessionRejectsMixedLegacyStackAndMismatchedSelectedDefinition" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.1079579" startTime="2026-10-30T20:41:58.0675792+08:00" endTime="2026-10-30T20:41:58.1898690+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f17260c7-6351-4a6a-91e8-d9acb9873139" />
+    <UnitTestResult executionId="ac7aeeea-e193-4f71-96b3-904b1fbdb99e" testId="15e80439-e716-8255-9e62-15e16bf38a90" testName="RawCapabilityListsFormatsWithoutClaimingVerification" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0095792" startTime="2026-10-30T20:41:58.0845111+08:00" endTime="2026-10-30T20:41:58.0946402+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ac7aeeea-e193-4f71-96b3-904b1fbdb99e" />
+    <UnitTestResult executionId="f985719a-e602-4e71-a6cf-70a7861b069d" testId="1d6df581-16bc-8aea-92b9-24dc7f3bb92d" testName="SyntheticNeutralExposureStaircaseAndBlackBoundaryAreMathematical" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0076484" startTime="2026-10-30T20:41:58.0675919+08:00" endTime="2026-10-30T20:41:58.0930083+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f985719a-e602-4e71-a6cf-70a7861b069d" />
+    <UnitTestResult executionId="296ea072-eccd-4334-946a-fb07cc3d69dd" testId="13c494bd-355f-8feb-b402-54e6cf55c3d3" testName="TiffCancellationStopsBeforeCompletion" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0058012" startTime="2026-10-30T20:41:58.0845201+08:00" endTime="2026-10-30T20:41:58.0930255+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="296ea072-eccd-4334-946a-fb07cc3d69dd" />
+    <UnitTestResult executionId="bb4d09e2-80bc-4f63-bdc8-314fea841ab5" testId="1073f929-b767-88fb-966c-a6fd1d2d2446" testName="TiffIccRejectsInvalidProfile" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0042483" startTime="2026-10-30T20:41:58.0845002+08:00" endTime="2026-10-30T20:41:58.0930213+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bb4d09e2-80bc-4f63-bdc8-314fea841ab5" />
+    <UnitTestResult executionId="d9659d74-9c36-4ced-81db-57bcf740c368" testId="12ae8617-2fa3-8982-8786-836cd5b852fc" testName="UnsupportedFileAndRenderedJpegFailRatherThanLegacyFallback" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0229114" startTime="2026-10-30T20:41:58.0675658+08:00" endTime="2026-10-30T20:41:58.1063960+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d9659d74-9c36-4ced-81db-57bcf740c368" />
+    <UnitTestResult executionId="47f4a3c7-fd2a-4fb5-8144-f2dcb82698df" testId="166c370e-9100-80e9-b301-9a4c7f9f633e" testName="ExposureIsLinearAndDisplayIsBoundedMonotonicWithSoftShoulder" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0076232" startTime="2026-10-30T20:41:58.0675726+08:00" endTime="2026-10-30T20:41:58.0930162+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="47f4a3c7-fd2a-4fb5-8144-f2dcb82698df" />
+    <UnitTestResult executionId="986a6423-f3a0-4471-b3b4-3021ab9c30f2" testId="19e8c375-8a6d-857a-aac2-ffb447053170" testName="D65ProfileNeutralAdaptsToD50AndDoesNotRoundtripThroughSrgb" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0184157" startTime="2026-10-30T20:41:58.0675590+08:00" endTime="2026-10-30T20:41:58.1003037+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="986a6423-f3a0-4471-b3b4-3021ab9c30f2" />
+    <UnitTestResult executionId="f72756df-63cd-4132-8303-a5a11c793e62" testId="154d111c-ce11-84db-99af-197599bf1e8e" testName="DefaultOldDefinitionUnchangedWideMasterBypassesDisplayAndPreservesExtendedValues" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.1145817" startTime="2026-10-30T20:41:58.0676047+08:00" endTime="2026-10-30T20:41:58.1964749+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f72756df-63cd-4132-8303-a5a11c793e62" />
+    <UnitTestResult executionId="e21b8531-5b08-42f2-ad06-99d33a6f7229" testId="1f651c96-ba36-8f46-ae60-e6042304dffb" testName="SignedExtendedIntermediatesRemainAndWrongDomainsAreRejected" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0121340" startTime="2026-10-30T20:41:58.0676051+08:00" endTime="2026-10-30T20:41:58.0940077+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e21b8531-5b08-42f2-ad06-99d33a6f7229" />
+    <UnitTestResult executionId="cda18d84-75d9-410b-a3e2-d7b1aa4429f7" testId="170a42a5-4960-8bff-980e-b599cde9e483" testName="WhiteBalanceSelectsCameraOnceAndRejectsRenderedInputsAndMissingConfiguration" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0084191" startTime="2026-10-30T20:41:58.0845314+08:00" endTime="2026-10-30T20:41:58.0933667+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cda18d84-75d9-410b-a3e2-d7b1aa4429f7" />
+    <UnitTestResult executionId="fbe80a86-0c6e-4736-9674-106132c40b43" testId="1c0894b3-055a-8b50-87a1-600b6bfe52f7" testName="Tiff16BitPreservesDimensions" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.0079293" startTime="2026-10-30T20:41:58.0845376+08:00" endTime="2026-10-30T20:41:58.0930275+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fbe80a86-0c6e-4736-9674-106132c40b43" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TiffCancellationStopsBeforeCompletion" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="13c494bd-355f-8feb-b402-54e6cf55c3d3">
+      <Execution id="296ea072-eccd-4334-946a-fb07cc3d69dd" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ProfessionalRawTiffTests" name="TiffCancellationStopsBeforeCompletion" />
+    </UnitTest>
+    <UnitTest name="ExposureIsLinearAndDisplayIsBoundedMonotonicWithSoftShoulder" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="166c370e-9100-80e9-b301-9a4c7f9f633e">
+      <Execution id="47f4a3c7-fd2a-4fb5-8144-f2dcb82698df" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests" name="ExposureIsLinearAndDisplayIsBoundedMonotonicWithSoftShoulder" />
+    </UnitTest>
+    <UnitTest name="DefinitionAndInputPersistInVersionAndV1SessionWithoutOldStackMigration" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="1f076042-9a96-87fc-bf0d-f789ccd94959">
+      <Execution id="ade05d81-2136-4118-b6b9-229d4714323c" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests" name="DefinitionAndInputPersistInVersionAndV1SessionWithoutOldStackMigration" />
+    </UnitTest>
+    <UnitTest name="D65ProfileNeutralAdaptsToD50AndDoesNotRoundtripThroughSrgb" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="19e8c375-8a6d-857a-aac2-ffb447053170">
+      <Execution id="986a6423-f3a0-4471-b3b4-3021ab9c30f2" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.RawWideOutputTests" name="D65ProfileNeutralAdaptsToD50AndDoesNotRoundtripThroughSrgb" />
+    </UnitTest>
+    <UnitTest name="SyntheticNeutralExposureStaircaseAndBlackBoundaryAreMathematical" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="1d6df581-16bc-8aea-92b9-24dc7f3bb92d">
+      <Execution id="f985719a-e602-4e71-a6cf-70a7861b069d" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests" name="SyntheticNeutralExposureStaircaseAndBlackBoundaryAreMathematical" />
+    </UnitTest>
+    <UnitTest name="UnsupportedFileAndRenderedJpegFailRatherThanLegacyFallback" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="12ae8617-2fa3-8982-8786-836cd5b852fc">
+      <Execution id="d9659d74-9c36-4ced-81db-57bcf740c368" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests" name="UnsupportedFileAndRenderedJpegFailRatherThanLegacyFallback" />
+    </UnitTest>
+    <UnitTest name="WhiteBalanceSelectsCameraOnceAndRejectsRenderedInputsAndMissingConfiguration" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="170a42a5-4960-8bff-980e-b599cde9e483">
+      <Execution id="cda18d84-75d9-410b-a3e2-d7b1aa4429f7" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests" name="WhiteBalanceSelectsCameraOnceAndRejectsRenderedInputsAndMissingConfiguration" />
+    </UnitTest>
+    <UnitTest name="DefaultOldDefinitionUnchangedWideMasterBypassesDisplayAndPreservesExtendedValues" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="154d111c-ce11-84db-99af-197599bf1e8e">
+      <Execution id="f72756df-63cd-4132-8303-a5a11c793e62" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.RawWideOutputTests" name="DefaultOldDefinitionUnchangedWideMasterBypassesDisplayAndPreservesExtendedValues" />
+    </UnitTest>
+    <UnitTest name="Tiff16BitPreservesDimensions" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="1c0894b3-055a-8b50-87a1-600b6bfe52f7">
+      <Execution id="fbe80a86-0c6e-4736-9674-106132c40b43" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ProfessionalRawTiffTests" name="Tiff16BitPreservesDimensions" />
+    </UnitTest>
+    <UnitTest name="TiffIccRejectsInvalidProfile" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="1073f929-b767-88fb-966c-a6fd1d2d2446">
+      <Execution id="bb4d09e2-80bc-4f63-bdc8-314fea841ab5" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ProfessionalRawTiffTests" name="TiffIccRejectsInvalidProfile" />
+    </UnitTest>
+    <UnitTest name="PreviewSamplesExactlySameRenderedPixelsAndDefinitionMustMatchDecode" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="15f28276-8574-85f9-ba05-e13efacc8d0c">
+      <Execution id="0c8361f4-6087-4fa3-a826-15b883797da7" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests" name="PreviewSamplesExactlySameRenderedPixelsAndDefinitionMustMatchDecode" />
+    </UnitTest>
+    <UnitTest name="SessionRejectsMixedLegacyStackAndMismatchedSelectedDefinition" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="1950bb1b-5bef-8188-abe5-135b7ea58450">
+      <Execution id="f17260c7-6351-4a6a-91e8-d9acb9873139" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests" name="SessionRejectsMixedLegacyStackAndMismatchedSelectedDefinition" />
+    </UnitTest>
+    <UnitTest name="SignedExtendedIntermediatesRemainAndWrongDomainsAreRejected" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="1f651c96-ba36-8f46-ae60-e6042304dffb">
+      <Execution id="e21b8531-5b08-42f2-ad06-99d33a6f7229" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ProfessionalRawPipelineTests" name="SignedExtendedIntermediatesRemainAndWrongDomainsAreRejected" />
+    </UnitTest>
+    <UnitTest name="RawCapabilityListsFormatsWithoutClaimingVerification" storage="n:\pixart\guangjing-color-engine-home-20261030\tests\rawselectionassistant.tests\bin\debug\net10.0\rawselectionassistant.tests.dll" id="15e80439-e716-8255-9e62-15e16bf38a90">
+      <Execution id="ac7aeeea-e193-4f71-96b3-904b1fbdb99e" />
+      <TestMethod codeBase="N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.ProfessionalRawTiffTests" name="RawCapabilityListsFormatsWithoutClaimingVerification" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="15f28276-8574-85f9-ba05-e13efacc8d0c" executionId="0c8361f4-6087-4fa3-a826-15b883797da7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f076042-9a96-87fc-bf0d-f789ccd94959" executionId="ade05d81-2136-4118-b6b9-229d4714323c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1950bb1b-5bef-8188-abe5-135b7ea58450" executionId="f17260c7-6351-4a6a-91e8-d9acb9873139" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15e80439-e716-8255-9e62-15e16bf38a90" executionId="ac7aeeea-e193-4f71-96b3-904b1fbdb99e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d6df581-16bc-8aea-92b9-24dc7f3bb92d" executionId="f985719a-e602-4e71-a6cf-70a7861b069d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13c494bd-355f-8feb-b402-54e6cf55c3d3" executionId="296ea072-eccd-4334-946a-fb07cc3d69dd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1073f929-b767-88fb-966c-a6fd1d2d2446" executionId="bb4d09e2-80bc-4f63-bdc8-314fea841ab5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12ae8617-2fa3-8982-8786-836cd5b852fc" executionId="d9659d74-9c36-4ced-81db-57bcf740c368" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="166c370e-9100-80e9-b301-9a4c7f9f633e" executionId="47f4a3c7-fd2a-4fb5-8144-f2dcb82698df" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19e8c375-8a6d-857a-aac2-ffb447053170" executionId="986a6423-f3a0-4471-b3b4-3021ab9c30f2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="154d111c-ce11-84db-99af-197599bf1e8e" executionId="f72756df-63cd-4132-8303-a5a11c793e62" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f651c96-ba36-8f46-ae60-e6042304dffb" executionId="e21b8531-5b08-42f2-ad06-99d33a6f7229" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="170a42a5-4960-8bff-980e-b599cde9e483" executionId="cda18d84-75d9-410b-a3e2-d7b1aa4429f7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c0894b3-055a-8b50-87a1-600b6bfe52f7" executionId="fbe80a86-0c6e-4736-9674-106132c40b43" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="14" executed="14" passed="14" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 N:\pixart\guangjing-color-engine-home-20261030\tests\RAWSelectionAssistant.Tests\bin\Debug\net10.0\RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 28，Scope: MethodLevel)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

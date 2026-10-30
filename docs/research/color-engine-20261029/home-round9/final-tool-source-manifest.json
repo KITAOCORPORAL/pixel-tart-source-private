@@ -1,0 +1,26 @@
+{
+  "version": "HomeFinalToolsSourceManifestV1",
+  "baseCommit": "0f3204c09b15e041c8e70cf95ddbee789fcf7cec",
+  "stage": "final source after the only full run; not relabelled as full execution bytes",
+  "files": {
+    "apply_stream_v1.py": "4489e90f1b50a154bc4d8a01598a9f0f8100a70692e1c630a7753ce579877a92",
+    "natural_admission.py": "fffc77adaa17a42f330602ddccfb9aedd23a15b6f9fdac81047c56d435350288",
+    "stream_case.py": "ee3ac80ffa4008c439e704429924db2b563e96312c762b14e10766f517b8a44f",
+    "stream_concurrency_test.py": "b7edcdd4c0d10220e2dd00c8d1ffec60179d6277b91d32b3209e8c9150228983",
+    "stream_controls.py": "992af69510646102c0286b608320aa39485b6f945c351e9e842df4778c552152",
+    "stream_exact_gate.py": "2d1000a665a6597c3dd00005e81c7c1abb205c2cec3cbf602b507e5533f34ba4",
+    "stream_full_once.py": "6f1f0643c7f5671add2436ac009ec89ba9242155ddc65c8ca056c31829b401fc",
+    "stream_height_proof.py": "f79aa09456a890cfec608ebc75bed10d2e1875970465b17ffeba36016fc359d4",
+    "stream_saved_reopen.py": "dc88d80c15148ef12a237e799fc4755d8783494fa2a94442a766eb18517ff89c",
+    "home_prepare_a.py": "1610dd5b1172558dd31caaa392d02445c5265cc8d1f605fc388b8ab82022c773",
+    "home_prepare_small.py": "84ab05cd48dbcd7c727b571b957228750e11b0752f72d9181a4496b99381dc30",
+    "home_provenance.py": "156a6f61ef8292c8d4842205fefb74f2833605074dbc5964041f68fb84fb7d8d",
+    "home_sequential_controls.py": "4158347ead0fcd32d9b35f548a9b0a357899c62373801f794f7d45722e1bf0fd",
+    "home_small_gates.py": "a828099b68d7280f95bb2a2a8f6521ac8bd46f57c86641ad193de1fc3cf78b0e",
+    "host_budget.py": "eb7330f78c74a64dff89b262126d2ecc1ebbbd65c999141114126f0d3f0fad99",
+    "host_environment.py": "150e650bcedeb76584b0b37dd159b9ba0c088b342d24615b905b1e6b4abe9c94",
+    "test_home_safety.py": "9edafa59c85e2ed3debcc57991d09e30ccd071d19ade275cd08392c1b821f240",
+    "test_saved_audit.py": "fa2456976f6a042833c4950c70829b9477c0f8a1b9d578942a6609fcc8a53618",
+    "verify_home_round9.py": "dedced37d897159b78ff49b25a9aee5b7efeadcfb5f53dc6ecab72c3184e3b4a"
+  }
+}

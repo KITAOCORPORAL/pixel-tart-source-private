@@ -1,3 +1,14 @@
+# 当前家庭接续：公司第八批→家庭第九批（2026-10-30，Europe/Berlin）
+
+独立家庭树/分支research/color-engine-home-20261030，基点0f3204c09b15e041c8e70cf95ddbee789fcf7cec。旧research/color-engine-20261029及像素/外部source/build/resources不覆盖。
+
+已完成same-source B7D358...33401生产/桥输入恢复（全hash相同）、家庭GPU small whole/stream0差、native/live0/取消/失败/顺序/height门禁、一次20MP输出与完整raw/TIFF字节audit。379.4MB最后报告前host峰值通过，但publication后OS峰值未取样；原输出已AUDITED_STATUS明确降级，最终hardened helper小图/故障通过，未第二次full，所以最终full host合同仍PARTIAL。
+
+跨设备hash不同，缺公司private像素，firstDifference/changedCount保留null。家庭whole20MP host下界拒绝不强上。BT原失败复现与兼容补丁必要2回归通过；D80014惰性WB生命周期崩溃已保留并修成值快照，V2完整链/fresh reopen/取消和14合同测试通过。不注册产品或作色准/审美结论。
+
+本批权威：HOME_ROUND9_REPORT.md、STREAMING_HOME_CAPABILITIES_V1.md、REPRODUCE_HOME_ROUND9.md、home-round9/全统计与失败。技术与许可分开。下一步若明确新批准跑一次full，使用最终helper；跨设备逐像素需合法拿公司输出。不要重复闭合调查、扩stock/B/seed/曲线/WB或更改Grok布局。
+
+---
 # 当前接续检查点：第三批已落地（2026-10-29）
 
 当前研究状态仍 OPEN，完整结果见 `ROUND3_REPORT.md`，最小后端契约 `BACKEND_CONTRACT_V1.md`，复跑 `REPRODUCE_ROUND3.md`。以下第0号保留为历史，不再代表“尚未运行”的当前状态。

@@ -1,0 +1,17 @@
+{
+  "version": "HomeSingleFullBudgetScopeAuditV1",
+  "fullNativeCalls": 1,
+  "nativeAndRowIoAndReadbackAndCleanup": "EXECUTED_WITHIN_CAP",
+  "sampledRssAndWindowsPeakAtLastPreReportCheck": 379396096,
+  "callerCap": 536870912,
+  "fullOriginalSuccessReportPreserved": true,
+  "fullSnapshotCoversMonitorJoinAndCleanup": true,
+  "scopeGap": "The single full run used V2 first finalize_group: sampled OS peak immediately before final report serialization, but did not sample again after success JSON serialization/publication. Therefore final-report-publication high-water is not independently proven for that full process.",
+  "laterHardening": "Final caller serializes/fsyncs success report at provisional name, checks whole-process OS peak, publishes report last, then checks again and rolls back group on overshoot; tested on real small frame and injected publication/rename/OS-peak failures.",
+  "finalHardenedCaller20MPRerun": "NOT_RUN_SINGLE_FULL_LIMIT",
+  "fullTotalHostGateIncludingFinalReportPublication": "PARTIAL_NOT_UPGRADED",
+  "finalCallerSmallExact": true,
+  "savedOutputAuditIsNotRerender": true,
+  "samplingAndOSPeakSeparate": true,
+  "noThresholdChange": true
+}

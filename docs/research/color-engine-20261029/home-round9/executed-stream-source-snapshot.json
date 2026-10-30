@@ -1,0 +1,14 @@
+{
+  "version": "HomePostRunPreFinalSourceSnapshotV1",
+  "files": {
+    "stream_case.py": "5cd0bf59e1a02e867c08f60eb195745099f399885c08e89bef2f0df50f89eaa1",
+    "stream_full_once.py": "3ee7e21251cf32f0b97388fe4dec07af127fcf6146b2905a0617968152daad29",
+    "stream_saved_reopen.py": "adf92d0140ac85b59c2f3326e511886ef3143e3ce61e728f2f2f7d2965f40545",
+    "host_budget.py": "6675956e49af6b2fb5c0d45c365e8ffcee42cc5494a006392335ebeb423f10ac",
+    "host_environment.py": "b3b27143f1ae9f4112fff65bb6f0bed901d6fc061380b3a1fef142024845ac73",
+    "natural_admission.py": "346eaf06d494709e42dbeca1e50ffae3112b22194ad8b786abdcf4649cd37f3f",
+    "apply_stream_v1.py": "7c06d8e29ff73e9ae62769191a6f7b4ca50c67a64c6e3fc17f4028dc542e56a9",
+    "home-environment-v1.json": "87bc87508f3e99285b13113470280805b5a989ee36882c4f59143c9f5e7edf88"
+  },
+  "note": "Captured after the full execution and before final publication-hardening. The streaming code used for full is represented by run report/version, but exact byte identity of every helper at invocation time is NOT independently sealed; this is not a signed or timestamped execution manifest."
+}

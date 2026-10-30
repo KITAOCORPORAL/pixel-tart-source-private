@@ -1,0 +1,78 @@
+{
+  "version": "HomeSmallWholeOracleV1",
+  "cases": [
+    {
+      "size": [
+        321,
+        215
+      ],
+      "inputPixelHash": "4dc6bd358e4013e0e735e1d3803f9f73ff349828b34ca64a4a8305ae82f782ed",
+      "outputHash": "dd82efd787cdcf5b43a4e752d16f325dc5368bd01cb7fc0597f2ba95c6173cc8",
+      "result": {
+        "width": 321,
+        "height": 215,
+        "row_stride_px": 321,
+        "elapsed_ms": 14.7989,
+        "reprint": false,
+        "negative_was_cached": false,
+        "sha256": "dd82efd787cdcf5b43a4e752d16f325dc5368bd01cb7fc0597f2ba95c6173cc8"
+      },
+      "wallMs": 386.0953000112204
+    },
+    {
+      "size": [
+        641,
+        429
+      ],
+      "inputPixelHash": "f91d9c1c77b412ed1b894789ae35d33fa00c5444ba48536dafca7c628156c3bb",
+      "outputHash": "6a042a1238b60a940478886bcbbc9d46c827e2bd33280c6a6a2a0d14f604149b",
+      "result": {
+        "width": 641,
+        "height": 429,
+        "row_stride_px": 641,
+        "elapsed_ms": 22.1044,
+        "reprint": false,
+        "negative_was_cached": false,
+        "sha256": "6a042a1238b60a940478886bcbbc9d46c827e2bd33280c6a6a2a0d14f604149b"
+      },
+      "wallMs": 241.7767000006279
+    },
+    {
+      "size": [
+        1200,
+        801
+      ],
+      "inputPixelHash": "4ac591589af7ca1d41a57baa12e9a8277627a380a3869426d3d8e855c8bf8349",
+      "outputHash": "62afe385eba6ec67f7bf4d5d4c57cf7af15aa21f161b9600e0936ced1111deb4",
+      "result": {
+        "width": 1200,
+        "height": 801,
+        "row_stride_px": 1200,
+        "elapsed_ms": 59.984,
+        "reprint": false,
+        "negative_was_cached": false,
+        "sha256": "62afe385eba6ec67f7bf4d5d4c57cf7af15aa21f161b9600e0936ced1111deb4"
+      },
+      "wallMs": 296.64990000310354
+    },
+    {
+      "size": [
+        97,
+        65
+      ],
+      "inputPixelHash": "839cf7a76245c101e56d7e25e7f5cfe26bfb1280b0a255da3b431d057c99296a",
+      "outputHash": "59970d55a1425f0654228639946f7d2207937a1fd5c98edbae88432c3f82c91d",
+      "result": {
+        "width": 97,
+        "height": 65,
+        "row_stride_px": 97,
+        "elapsed_ms": 9.3243,
+        "reprint": false,
+        "negative_was_cached": false,
+        "sha256": "59970d55a1425f0654228639946f7d2207937a1fd5c98edbae88432c3f82c91d"
+      },
+      "wallMs": 223.51189999608323
+    }
+  ],
+  "libraryHash": "a77b51a9fe60a543bee2f1d6685ea4e4ba59b7b0c7b2f80e873508f5cc544636"
+}
