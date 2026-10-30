@@ -1,3 +1,9 @@
+# 当前公司灯箱接续 2026-10-30 Asia/Shanghai
+当前产品9f7ef4e45c383b66b048d1a183bc41d5e0a61d6d，company/lighttable-lifecycle-20261030。已修detail/compare/slide/refresh/back/close统一代际，渐进发布/占位/视区虚拟化/逐项重试/滚动取消，可靠源变化检测和有界native代理复制。固定快照、8位已有胶片任务和独立项目重开保持。
+公司输入与性能：100自建JPEG非家庭自然图；5CompanyRAW最终3成功/1不支持/1预算拒绝。家庭7份源不可用不能声称恢复；Fuji原生重复性/超大RAW/100自然样本准入仍OPEN。报告../validation/company-lighttable-lifecycle-20261030/FINAL_REPORT.md为当前唯一收据。
+SpektraLab仍未加载、未打包，研究另线；不增加任何RAW/16位/宽域胶片后端、ROI或跨崩溃任务系统。完整模块/策划15/旧教程退役保留。下文家庭结果为历史参考，未当公司交付。
+
+## 家庭开发记录
 # 光镜灯箱与胶片后端联动开发大纲
 当前：2026-10-29 America/Los_Angeles；家庭产品f70ecf7d1179b6f42c721a787a4a2d7a7acc8109，总体诊断版，非完整LightTable复刻。
 

@@ -1,4 +1,12 @@
 # R5.4 暗室当前开发大纲
+## 当前公司状态 2026-10-30 Asia/Shanghai
+产品9f7ef4e45c383b66b048d1a183bc41d5e0a61d6d，company/lighttable-lifecycle-20261030从家庭7a6b98e9继承，不重复已做显影阶段/四轮/A-B。
+灯箱代际所有权、迟到拒绝、渐进可见优先/占位/视区卡片、逐项重试/滚动取消、有界串行解码/缓存和可靠本地源身份已接。100自建JPEG全成功，首图控件40ms；不是100自然RAW验收。RAW5最终3成功1不支持1预算拒绝；内存下降不能掩盖成功数变化。家庭7源不可用精确复现、Fuji旧原生重复性、超大图准入仍OPEN。
+已有8位创意胶片与独立保存重开不变；Spektra未加载/未打包，任务跨崩溃/ROI/宽域后端后续。完整产品/策划15保留，旧教程退役，50唯一受影响自动PASS，物理鼠标/DPI/HDR/ACM未验，整体PARTIAL诊断。
+当前权威../validation/company-lighttable-lifecycle-20261030/FINAL_REPORT.md；后文原家庭/公司历史保留，不并列当当前。
+
+## 历史开发大纲
+# R5.4 暗室当前开发大纲
 ## 当前状态 2026-10-29 America/Los_Angeles
 当前家庭产品源码f70ecf7d1179b6f42c721a787a4a2d7a7acc8109，home/r54-design-fixes-20261029。暗室只读系统执行视图/四色轮完整量测与旧包像素A/B已补；中性灯箱固定变体最小闭环、8位已有创意胶片任务/后端契约和项目独立重开已接入。全部模块/策划15和旧教程退役保留，整体仍PARTIAL_DIAGNOSTIC。
 新总联动大纲：LIGHTTABLE_SPEKTRALAB_INTEGRATION.md。Spektra研究ce292f2a只读，默认未加载；不引入未经许可/色彩/seed门禁的研究资源。当前唯一证据/包身份见../validation/home-lighttable-film-20261029/FINAL_REPORT.md。历史状态仅为历史，不再当当前未注册/未交付结论。

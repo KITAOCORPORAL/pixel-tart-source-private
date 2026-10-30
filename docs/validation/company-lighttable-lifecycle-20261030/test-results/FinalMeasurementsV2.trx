@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="43f46506-47e7-4370-9965-8e04880c738d" name="Administrator@PC-20250309WEIZ 2026-10-30 10:16:14" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-30T10:16:14.6928523+08:00" queuing="2026-10-30T10:16:14.6928525+08:00" start="2026-10-30T10:15:57.7748819+08:00" finish="2026-10-30T10:16:41.2853471+08:00" />
+  <TestSettings name="default" id="5dbbd20d-8c3e-4490-a601-2a55a99d9415">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-10-30_10_16_14" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="501b889e-1c3c-4aab-a52d-5c2b4774974b" testId="196abd15-8063-8a1f-a4d9-5c0e38fbb450" testName="NativeDecodeRepeatabilityAndExactProxyExtraction" computerName="PC-20250309WEIZ" duration="00:00:25.8781179" startTime="2026-10-30T10:16:15.2323597+08:00" endTime="2026-10-30T10:16:41.1105697+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="501b889e-1c3c-4aab-a52d-5c2b4774974b" />
+    <UnitTestResult executionId="eec623d7-3043-4774-b074-fe64c5904183" testId="14b0b82a-25a1-8301-b022-48e2b13832a7" testName="ActualColdControlFirstScreenAndCancellation" computerName="PC-20250309WEIZ" duration="00:00:00.5509020" startTime="2026-10-30T10:16:14.6807228+08:00" endTime="2026-10-30T10:16:15.2319841+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eec623d7-3043-4774-b074-fe64c5904183" />
+    <UnitTestResult executionId="613d35cd-fba4-4bc4-8472-37fe165ea539" testId="1fdc9e81-eda2-86ae-9ef9-8c13a2a57cce" testName="CompanySameInputViewingBaselineAndFinal" computerName="PC-20250309WEIZ" duration="00:00:16.3640882" startTime="2026-10-30T10:15:58.2917384+08:00" endTime="2026-10-30T10:16:14.6720110+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="613d35cd-fba4-4bc4-8472-37fe165ea539" />
+    <UnitTestResult executionId="66a62841-2aa3-4d87-a74d-d16396637d38" testId="1e801429-632e-8d9a-bb12-6a6da109d992" testName="RealNativeCancellationWaitsForCurrentNativeStageWithoutPublishing" computerName="PC-20250309WEIZ" duration="00:00:00.1040931" startTime="2026-10-30T10:16:41.1109498+08:00" endTime="2026-10-30T10:16:41.2170031+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="66a62841-2aa3-4d87-a74d-d16396637d38" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="CompanySameInputViewingBaselineAndFinal" storage="e:\kitao-worktrees\company-lighttable-lifecycle-20261030\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1fdc9e81-eda2-86ae-9ef9-8c13a2a57cce">
+      <Execution id="613d35cd-fba4-4bc4-8472-37fe165ea539" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\company-lighttable-lifecycle-20261030\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CompanyViewingMeasurementsTests" name="CompanySameInputViewingBaselineAndFinal" />
+    </UnitTest>
+    <UnitTest name="RealNativeCancellationWaitsForCurrentNativeStageWithoutPublishing" storage="e:\kitao-worktrees\company-lighttable-lifecycle-20261030\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1e801429-632e-8d9a-bb12-6a6da109d992">
+      <Execution id="66a62841-2aa3-4d87-a74d-d16396637d38" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\company-lighttable-lifecycle-20261030\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CompanyViewingMeasurementsTests" name="RealNativeCancellationWaitsForCurrentNativeStageWithoutPublishing" />
+    </UnitTest>
+    <UnitTest name="NativeDecodeRepeatabilityAndExactProxyExtraction" storage="e:\kitao-worktrees\company-lighttable-lifecycle-20261030\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="196abd15-8063-8a1f-a4d9-5c0e38fbb450">
+      <Execution id="501b889e-1c3c-4aab-a52d-5c2b4774974b" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\company-lighttable-lifecycle-20261030\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CompanyViewingMeasurementsTests" name="NativeDecodeRepeatabilityAndExactProxyExtraction" />
+    </UnitTest>
+    <UnitTest name="ActualColdControlFirstScreenAndCancellation" storage="e:\kitao-worktrees\company-lighttable-lifecycle-20261030\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="14b0b82a-25a1-8301-b022-48e2b13832a7">
+      <Execution id="eec623d7-3043-4774-b074-fe64c5904183" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\company-lighttable-lifecycle-20261030\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CompanyViewingMeasurementsTests" name="ActualColdControlFirstScreenAndCancellation" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="196abd15-8063-8a1f-a4d9-5c0e38fbb450" executionId="501b889e-1c3c-4aab-a52d-5c2b4774974b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14b0b82a-25a1-8301-b022-48e2b13832a7" executionId="eec623d7-3043-4774-b074-fe64c5904183" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1fdc9e81-eda2-86ae-9ef9-8c13a2a57cce" executionId="613d35cd-fba4-4bc4-8472-37fe165ea539" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e801429-632e-8d9a-bb12-6a6da109d992" executionId="66a62841-2aa3-4d87-a74d-d16396637d38" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

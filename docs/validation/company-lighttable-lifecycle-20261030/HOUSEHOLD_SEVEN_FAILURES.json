@@ -1,0 +1,43 @@
+{
+  "originalArtifactSha256": "135aa1c296f33b12f2eede6d9814aee18f4ac01e93f332556b4622ae30dc20c5",
+  "sourceAvailableOnCompany": false,
+  "records": [
+    {
+      "failure": "c1cdbb31-fd3f-4383-9d90-7aed8ee9cf03 / RAW_SIGMA_DP1.X3F：The RAW file could not be decoded safely.",
+      "classification": "Legacy RAW decoder failure; native stage/code absent in household artifact, cannot prove unsupported vs corrupt on company without source",
+      "status": "NOT_REPRODUCED_SOURCE_UNAVAILABLE"
+    },
+    {
+      "failure": "a0a3eb62-8320-4072-bb94-03f2fc1e3850 / RAW_LEICA_M240.DNG：RAW元数据解析失败；未猜测方向或回退像素：RAW_LEICA_M240.DNG",
+      "classification": "MetadataExtractor orientation read failure; bounded TIFF IFD0 recovery implemented, actual file not rerun",
+      "status": "NOT_REPRODUCED_SOURCE_UNAVAILABLE"
+    },
+    {
+      "failure": "0ffaf67c-c21c-468c-881c-3ff99e85bdda / RAW_SIGMA_SD10.X3F：The RAW file could not be decoded safely.",
+      "classification": "Legacy RAW decoder failure; native stage/code absent in household artifact, cannot prove unsupported vs corrupt on company without source",
+      "status": "NOT_REPRODUCED_SOURCE_UNAVAILABLE"
+    },
+    {
+      "failure": "a25cda63-f5ce-4b27-9381-c58c160962b6 / RAW_SIGMA_SD14.X3F：The RAW file could not be decoded safely.",
+      "classification": "Legacy RAW decoder failure; native stage/code absent in household artifact, cannot prove unsupported vs corrupt on company without source",
+      "status": "NOT_REPRODUCED_SOURCE_UNAVAILABLE"
+    },
+    {
+      "failure": "0a601946-ac9b-41d1-8168-66ffd8eb0128 / RAW_SIGMA_SD9_SRGB.X3F：The RAW file could not be decoded safely.",
+      "classification": "Legacy RAW decoder failure; native stage/code absent in household artifact, cannot prove unsupported vs corrupt on company without source",
+      "status": "NOT_REPRODUCED_SOURCE_UNAVAILABLE"
+    },
+    {
+      "failure": "03ae1df7-5988-4798-a707-bfa3e6dc9b6f / RAW_SIGMA_DP1S.X3F：The RAW file could not be decoded safely.",
+      "classification": "Legacy RAW decoder failure; native stage/code absent in household artifact, cannot prove unsupported vs corrupt on company without source",
+      "status": "NOT_REPRODUCED_SOURCE_UNAVAILABLE"
+    },
+    {
+      "failure": "cdd8c2e5-622b-4e25-8c72-ff0fc881c326 / RAW_POLAROID_X530.X3F：The RAW file could not be decoded safely.",
+      "classification": "Legacy RAW decoder failure; native stage/code absent in household artifact, cannot prove unsupported vs corrupt on company without source",
+      "status": "NOT_REPRODUCED_SOURCE_UNAVAILABLE"
+    }
+  ],
+  "budgetFailuresInHouseholdRecord": 0,
+  "noClaimThatSevenNowRecovered": true
+}

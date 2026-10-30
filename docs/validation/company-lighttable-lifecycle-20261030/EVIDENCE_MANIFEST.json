@@ -1,0 +1,201 @@
+{
+  "productSourceSha": "9f7ef4e45c383b66b048d1a183bc41d5e0a61d6d",
+  "scope": "final-published affected automatic checks; no natural photo pixels in Git",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 43,
+      "sha256": "50524bc54be6323af4266e11f2ca0b4d574bad39253c8c5293eca7d3173fa822"
+    },
+    {
+      "path": "BASELINE_BINDING.json",
+      "bytes": 971,
+      "sha256": "6823b1a9837443e3556166bbef56f18d02552ffcce9f32c3707e80a154b842bb"
+    },
+    {
+      "path": "BASELINE_CONTROL.json",
+      "bytes": 307,
+      "sha256": "6ae04a4d4668b14fdf9e17a669839dd51c58b93a99b0fc1fcf9436486ccafffd"
+    },
+    {
+      "path": "BASELINE_MEASUREMENTS.json",
+      "bytes": 48487,
+      "sha256": "3b47b3b2acf63e7b22c7468c08c6332b0fd22668066ed823d3abafdb5fb5036f"
+    },
+    {
+      "path": "BASELINE_NATIVE_REPEATABILITY.json",
+      "bytes": 474,
+      "sha256": "59dd421308385401ce462db2711eb668944629295ec41f7edb03a2eb832fafa3"
+    },
+    {
+      "path": "DESIGN_READBACK.json",
+      "bytes": 1397,
+      "sha256": "a4a0f994ec1be0b5dfc7a5348834b5908d671c972ac905a3872ca1f15d05f9b8"
+    },
+    {
+      "path": "DESIGN_REVIEW.md",
+      "bytes": 777,
+      "sha256": "4595823091b1597f634afbe11d26e5c15d8bf91d9bbd7aca1962bc0383118dcf"
+    },
+    {
+      "path": "DEVELOPMENT_FAILURES.md",
+      "bytes": 960,
+      "sha256": "f00535e9927b2601da56e2a430c823956b94c73852994f67f9f7f5bf91b8b8d7"
+    },
+    {
+      "path": "DIRTY_TREES_BEFORE.json",
+      "bytes": 11742,
+      "sha256": "5845fbed59040379fac4eab219bf48bf5fa9b7504ac8d446458af025526a250d"
+    },
+    {
+      "path": "FINAL_CONTROL.json",
+      "bytes": 302,
+      "sha256": "1be3c8c646c73c5ddcb74397b5bc3ccd7b20da89b214f0d48a9c4e23847e203e"
+    },
+    {
+      "path": "FINAL_MEASUREMENTS.json",
+      "bytes": 48768,
+      "sha256": "a03f5acba98cc2be38b55f118765cf33b9d223d30ed8dd533496f478b1b19aee"
+    },
+    {
+      "path": "FINAL_REPORT.md",
+      "bytes": 9267,
+      "sha256": "db8b257ae28f00491feaa256575acc143ba643047a99df4f97a6e0f47c1c8aea"
+    },
+    {
+      "path": "HOUSEHOLD_SEVEN_FAILURES.json",
+      "bytes": 2751,
+      "sha256": "89bf0b0a2282936d9d47cafddf292ced144e0b54ad362d93c4e91c03eab52cc1"
+    },
+    {
+      "path": "NATIVE_CANCEL.json",
+      "bytes": 207,
+      "sha256": "24b0080ae0869b153e9a918a46a0835c9fdf362d649c8aa29e6de7e7d7dd8492"
+    },
+    {
+      "path": "NATIVE_REPEATABILITY.json",
+      "bytes": 653,
+      "sha256": "33f6e85108c828bdbe508ce68c4dc13fb68fbfe827c437086e1cc4f0bce70f73"
+    },
+    {
+      "path": "OS_SMOKE.json",
+      "bytes": 480,
+      "sha256": "0d80486b28ea75f8387075a7f41898ced06298f0adcbb54d24d2eb246f9efccc"
+    },
+    {
+      "path": "PIXEL_PARITY.json",
+      "bytes": 15666,
+      "sha256": "d88bb7f798008a737fb5efb6b34a42033afd151c7b18a444502f0c7f848e7b55"
+    },
+    {
+      "path": "PRODUCT_SCOPE.json",
+      "bytes": 747,
+      "sha256": "a8efa00b8b1ae162d671aa0a3fef3d6d50cc9f4986746adc4b4650cc63192adc"
+    },
+    {
+      "path": "PUBLISHED_BINDING.json",
+      "bytes": 1113,
+      "sha256": "0487b99aec1a8645fa7dcfe53279e0f254932fc0e5aef2e7a2b600c4b536aef5"
+    },
+    {
+      "path": "REFS_BEFORE.txt",
+      "bytes": 24152,
+      "sha256": "eefac8224c402ef01f39f188c2fa812eee5e954d6454523230634725d0c27a59"
+    },
+    {
+      "path": "REPRODUCE.ps1",
+      "bytes": 1359,
+      "sha256": "f00adea4730c32db1ef81a58ae63c9a2b22bd38b60fdb5550d4c640912b67874"
+    },
+    {
+      "path": "screenshots/final-published-measure-v2-cold-control-OFFSCREEN.png",
+      "bytes": 536886,
+      "sha256": "61b6e726b1169055a526a39c0aab9fefe4f6915dde718ed4f7b975f6ecb97be5"
+    },
+    {
+      "path": "screenshots/final-published-measure-v2-owned100-OFFSCREEN.png",
+      "bytes": 552367,
+      "sha256": "a5c7be66b83cc386b9632034904d937a39ec203c4c53635ab1d353c40dc592b3"
+    },
+    {
+      "path": "screenshots/final-workflow-v2-lighttable-OFFSCREEN.png",
+      "bytes": 45283,
+      "sha256": "c14640bcbf77c4b544992c7389959b3d093c0efc890ec00f9fedfd493bdb7c16"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-hosted-instant-1366.png",
+      "bytes": 275540,
+      "sha256": "6d777c918c02504ec2e6e38a87aadd40142a54989a265b003c5785e7adeffec3"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-hosted-instant-1920.png",
+      "bytes": 436312,
+      "sha256": "6c1b775faaa5630e371e71f9048608021a81ab0a2be4fd151a1aad274a9d2361"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-hosted-pro-1366.png",
+      "bytes": 169322,
+      "sha256": "6613323f60d9fa2b41898f4070d34bc45e63c80154347759cb7411ea509256e6"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-hosted-pro-1920.png",
+      "bytes": 249654,
+      "sha256": "d892a022785b9b9cf8aad28574265f234acc492c6cac530c268077a886abbacb"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-hosted-simple-1366.png",
+      "bytes": 198363,
+      "sha256": "cf1eecfd6d0230460b8c2b990335c216cb51ba102f27f945df8934bd957f2989"
+    },
+    {
+      "path": "screenshots/OFFSCREEN-hosted-simple-1920.png",
+      "bytes": 253666,
+      "sha256": "e075020cbaf45b77739f4d6ff207d1926b21b5c5ab0a8fe16b9665a96a644bef"
+    },
+    {
+      "path": "test-results/FinalCleanPerformance.trx",
+      "bytes": 4072,
+      "sha256": "af188a87ee203c4e4067bccbb3beee219d70fd436cf7cc5658fa97a1e4a3caab"
+    },
+    {
+      "path": "test-results/FinalCoreV2.trx",
+      "bytes": 41179,
+      "sha256": "4c18b1740bb694874ddda6191596e5c48f0719dd8260e69dab662eacc2d56ebb"
+    },
+    {
+      "path": "test-results/FinalHostV2.trx",
+      "bytes": 2679,
+      "sha256": "4dfafb140857abdcd608f30948229ea337e2a93a1c6e496a6aba5eef5885aba4"
+    },
+    {
+      "path": "test-results/FinalIndependentV2.trx",
+      "bytes": 2643,
+      "sha256": "c3389a6a705928068272795c1e6b5012307444bbce13e16640ff37f5ec7b3f93"
+    },
+    {
+      "path": "test-results/FinalMeasurementsV2.trx",
+      "bytes": 6977,
+      "sha256": "9eddb9db9caaba7caa1a971ead95c8e6384920239d272b9abee1d3b54b7fa291"
+    },
+    {
+      "path": "test-results/FinalWorkflowV2.trx",
+      "bytes": 22766,
+      "sha256": "907a0bd58e0537d410875eb80b2948de578b0ade976cb2ea9658c9b30a3d719d"
+    },
+    {
+      "path": "TEST_SUMMARY.json",
+      "bytes": 7761,
+      "sha256": "776d188a428d9bfae3b5d096cc81b22f51f379a8a68925ee939d8f634993ba1b"
+    },
+    {
+      "path": "WORKTREES_BEFORE.txt",
+      "bytes": 9188,
+      "sha256": "50a68e283f4b28bf91f2031d7bd91fed0405b511819413499083f710469f7f8d"
+    },
+    {
+      "path": "ZIP_IDENTITY.json",
+      "bytes": 550,
+      "sha256": "3ed2e58b3b1ec403c0fa9f6d0899d4a34fd32eb8a13994651c7706c05c4751f9"
+    }
+  ]
+}

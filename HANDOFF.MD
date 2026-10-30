@@ -1,3 +1,17 @@
+## 当前公司接续 2026-10-30 Asia/Shanghai：灯箱请求所有权与渐进加载
+- 独立company/lighttable-lifecycle-20261030，E:/Kitao-Worktrees/company-lighttable-lifecycle-20261030；起点家庭7a6b98e9d48e3f21f91cd69449939b26531e5804，fetch复查未更新。旧公司f8beaa37/其他dirty保留，不合main/强推/研究整线。
+- 当前产品9f7ef4e45c383b66b048d1a183bc41d5e0a61d6d；包含a8a52410主实现、08d76a62测试支持、9f7ef4e4密集重叠可见项修正。文档HEAD另记，不当产品SHA。
+- 统一detail/compare/slide/refresh/back/close代际、迟到成功失败拒绝；渐进逐项、可见优先、卡片视区虚拟化、逐项重试/滚动取消、源句柄可靠变化检测及有界缓存账本。固定nearest RGB16观片代理直接样本复制，LibRaw设置/数学不改；RAW全局串行和预算拒绝，不嵌JPEG冒充调色结果。
+- 公司同机100自建JPEG（不是家庭100自然RAW）全部100成功，首图控件含render约40ms，旧357ms；VM全完成332ms，旧350ms。冷控件全完成555ms比旧404ms更慢，渐进有成本，不只报好项。标准视区实现30卡（visual tree214 vs494）。
+- 公司5授权RAW基线4成功/1不支持，最终3成功/1不支持/1预算拒绝；内存采样3.78GB→0.80GB，少解一张超大图须一起报告。Sony OpenFile FileUnsupported；LMAN1714.RAF估算2.89GB超既有2GiB预算。只一组公司素材，不泛化家庭100。
+- 100JPEG和CR3像素一致；两Fuji旧完整decoder重复本身不一致，新旧跨次hash不能全部宣称相同；固定RGB16代理8方向精确相同。家庭7失败源不在公司，6通用decoder错误无native stage/code，Leica元数据越界可有界读取显式IFD0方向但实际文件未复跑，仍列未复现，不称已修好7张。
+- 原8位创意胶片固定变体→新结果→灯箱→暗室→保存独立重开与任务中心保留，Spektra未加载/未打包；RAW/16/宽域后端、原图ROI、跨崩溃任务后续。家庭阶段/四轮量测/旧编码A/B不重复做。
+- 发布7程序集绑定后50唯一自动PASS；完整OS启动/退出0/SHA读回。真实鼠标/设备DPI/ACM/HDR NOT_RUN，遵守ComputerUse/Browser/WebView/CDP禁用，整体PARTIAL_NOT_FOR_RELEASE。
+- 完整自包含win-x64公司包E:/Kitao-Deliveries/company-lighttable-lifecycle-20261030/Guangjing-Company-LightTable-Diagnostic-win-x64.zip，同名目录隔离CMD，295文件，无Setup。完整模块/策划15/教程退役保留。
+- 当前唯一报告/性能/失败清单/设计本机读回/原始TRX/绑定/ZIP见docs/validation/company-lighttable-lifecycle-20261030/FINAL_REPORT.md。后文旧N盘交付仅家庭历史，不能代替本公司包。
+
+## 历史交接（下文为各批当时状态，不覆盖上述当前结论）
+
 ## 2026-10-29 America/Los_Angeles 灯箱/胶片后端当前交接
 - 当前家庭产品f70ecf7d1179b6f42c721a787a4a2d7a7acc8109，分支home/r54-design-fixes-20261029，起点29e09c08/旧cedd5ce5。权威docs/validation/home-lighttable-film-20261029/FINAL_REPORT.md，联动总纲docs/roadmap/LIGHTTABLE_SPEKTRALAB_INTEGRATION.md。
 - 暗室冻结阶段系统执行视图、选中/配方切换保护、完整四色轮量测、旧包像素A/B已做，旧处理数学/两款宝丽来/共享比较保留。

@@ -1,0 +1,256 @@
+{
+  "productSourceSha": "9f7ef4e45c383b66b048d1a183bc41d5e0a61d6d",
+  "testSupportSha": "08d76a6212975c63718686eb21e6cd5ae9fbee5c",
+  "publishedDllBinding": 7,
+  "runs": [
+    {
+      "path": "test-results/FinalCoreV2.trx",
+      "results": [
+        {
+          "name": "CacheBypassesFinalResolutionAndInvalidatesMaskGeometryAndSource",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FilmSettingsAndReferenceLookRoundTripThroughJson",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ConnectionsDriveActualPixelsNotListOrder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "GrainIsDeterministicAndSeedChangesOnlyOnExplicitChange",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FilmPipelineHonorsCancellationInsideSpatialPasses",
+          "outcome": "Passed"
+        },
+        {
+          "name": "InsertDeleteAndSerializationAreExplicit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LatestOnlyCancelsAndRejectsStaleResultEvenIfRendererIgnoresToken",
+          "outcome": "Passed"
+        },
+        {
+          "name": "StrongCurvesAndLevelsFallBackWithoutChangingNumericalBudget",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProfilesArePixelTartOwnedAndValidateBounds",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BoundedIndependentTiffOrientationRejectsMalformedAmbiguousAndAbsent",
+          "outcome": "Passed"
+        },
+        {
+          "name": "BloomSpreadsNeutralLightBeyondHighlight",
+          "outcome": "Passed"
+        },
+        {
+          "name": "InteractiveDependencyCacheIsExactInvalidatesByInputAndReleases",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HalationIsWarmEdgeAndBloomIsIndependent",
+          "outcome": "Passed"
+        },
+        {
+          "name": "GrainSizeIsContinuousAndTextureIsDeterministic",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ExactProxySamplesMatchHistoricalFullFloatProxyAllOrientations",
+          "outcome": "Passed"
+        },
+        {
+          "name": "HalationIsLocalizedToHighlightsAndBlackStaysBlack",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RiskAdmissionSeparatesHighFrequencyFineMasksGeometryAndSpatialTools",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProceduralTexturesDoNotRepeatOnShortPeriods",
+          "outcome": "Passed"
+        },
+        {
+          "name": "VignetteFallsOffSmoothlyFromCenterToCorners",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrozenContentAndVersionRejectTamperAndLegacyDoesNotChange",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SpatialToneReplacementDoesNotDoubleOldBiasAndAmountZero",
+          "outcome": "Passed"
+        },
+        {
+          "name": "InvalidPortsCycleAndBranchesRejected",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutPersistenceClampsInvalidViewport",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DisabledFilmAndZeroParametersAreExactIdentity",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AnalyticModelIsContinuousNeutralAndStrengthZeroExact",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DisconnectMeansIdentityAndDetachedNodesPersist",
+          "outcome": "Passed"
+        },
+        {
+          "name": "LayoutDoesNotChangeHistoricalSerialPixelsOrOrder",
+          "outcome": "Passed"
+        },
+        {
+          "name": "EmitProductCandidateSamplesForFrozenOfflineParity",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CancelledGraphCacheStaysBoundedAndRetiredGenerationCannotPublish",
+          "outcome": "Passed"
+        }
+      ],
+      "sha256": "4c18b1740bb694874ddda6191596e5c48f0719dd8260e69dab662eacc2d56ebb"
+    },
+    {
+      "path": "test-results/FinalWorkflowV2.trx",
+      "results": [
+        {
+          "name": "TwoVariantsOneSourceRetryKeepsOtherFailure",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CacheHitChecksHandleChangeEvenWithSameLengthAndRestoredMtime",
+          "outcome": "Passed"
+        },
+        {
+          "name": "VirtualCardsStayBoundedWithHundredPinnedPlaceholders",
+          "outcome": "Passed"
+        },
+        {
+          "name": "PinArrangeFilmCancelAndSaveActualProject",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ActualWorkspaceCloseDuringDecoderDiscardsAndReleasesCache",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RefreshCrossingCloseAndOldFailureNeverFillNewView",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ExistingTaskCenterTracksFilmBackendCompletion",
+          "outcome": "Passed"
+        },
+        {
+          "name": "WorkspaceProgressiveLatestSnapshotAndCancellationAreDeterministic",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RetryOnlyFailedItemKeepsSuccessfulFramesAndScrollCancelsObsoleteWork",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DetailThenCompareRejectsLateSuccessAndLateError",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ReplacementAndCanceledViewingKeepPinnedIdentity",
+          "outcome": "Passed"
+        },
+        {
+          "name": "MissingAndChangedSourcesNeverCommitOrReuseStalePixels",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ReverseDetailCompletionKeepsBAndStopRejectsInFlightSlide",
+          "outcome": "Passed"
+        }
+      ],
+      "sha256": "907a0bd58e0537d410875eb80b2948de578b0ade976cb2ea9658c9b30a3d719d"
+    },
+    {
+      "path": "test-results/FinalIndependentV2.trx",
+      "results": [
+        {
+          "name": "IndependentViewingTableAndFilmReopen",
+          "outcome": "Passed"
+        }
+      ],
+      "sha256": "c3389a6a705928068272795c1e6b5012307444bbce13e16640ff37f5ec7b3f93"
+    },
+    {
+      "path": "test-results/FinalMeasurementsV2.trx",
+      "results": [
+        {
+          "name": "NativeDecodeRepeatabilityAndExactProxyExtraction",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ActualColdControlFirstScreenAndCancellation",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CompanySameInputViewingBaselineAndFinal",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RealNativeCancellationWaitsForCurrentNativeStageWithoutPublishing",
+          "outcome": "Passed"
+        }
+      ],
+      "sha256": "9eddb9db9caaba7caa1a971ead95c8e6384920239d272b9abee1d3b54b7fa291"
+    },
+    {
+      "path": "test-results/FinalCleanPerformance.trx",
+      "results": [
+        {
+          "name": "ActualColdControlFirstScreenAndCancellation",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CompanySameInputViewingBaselineAndFinal",
+          "outcome": "Passed"
+        }
+      ],
+      "sha256": "af188a87ee203c4e4067bccbb3beee219d70fd436cf7cc5658fa97a1e4a3caab"
+    },
+    {
+      "path": "test-results/FinalHostV2.trx",
+      "results": [
+        {
+          "name": "FullApplicationHostedRailAndMenuOffscreenEvidence",
+          "outcome": "Passed"
+        }
+      ],
+      "sha256": "4dfafb140857abdcd608f30948229ea337e2a93a1c6e496a6aba5eef5885aba4"
+    }
+  ],
+  "uniquePassed": 50,
+  "failed": 0,
+  "notRunInSelected": 0,
+  "fullSuite": "NOT_RUN",
+  "nativeMouseDpiAcmHdr": "NOT_RUN"
+}
