@@ -1,0 +1,9 @@
+{
+  "version": "AllocationDiagnosticOutputIdentityV1",
+  "checks": {
+    "diagnosticOutputVsFrozenPatch": true,
+    "diagnosticInputVsFrozenPrepared": true,
+    "wholeStripeAllExact": true,
+    "diagnosticSourceGeneratorReproduced": true
+  }
+}

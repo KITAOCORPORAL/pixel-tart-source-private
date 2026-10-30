@@ -1,0 +1,12 @@
+{
+  "version": "Round7ExternalDiagnosticProvenanceV1",
+  "baseEngineCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "variant": "ResearchAllocationLedgerV1 diagnostics only stable VkDeviceMemory id",
+  "sourcePath": "engine/src/gpu/vulkan_gpu.cpp",
+  "sourceSha256": "99c7e74aa65b912b4d268acd8278da504697cf9a572a8c107c3744ca75dae917",
+  "dllSha256": "a211023dc35d74d67dcf24ab6f5fdf323a233fa0504c9631e463abb3757d80b0",
+  "oldSource2Clean": true,
+  "pixelMathModified": false,
+  "knownDiagnosticFailure": "first pointer&Buffer event id moved during staging replacement; retained initial logs then corrected to stable VkDeviceMemory handles; final8measurements all allocations freed",
+  "oldCompatPatchUnchanged": true
+}

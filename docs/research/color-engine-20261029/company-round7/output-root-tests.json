@@ -1,0 +1,22 @@
+[
+  {
+    "path": "D:/AI AGENT/PixelTart-TestAssets/CompanyRAW/new-output",
+    "accepted": false,
+    "message": "Unhandled exception. System.IO.IOException: Output outside authorized research root or overlaps CompanyRAW\n   at Program.<>c__DisplayClass0_0.<<Main>$>g__ValidateOutput|2(String path) in D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\tools\\spektra-natural-input\\Program.cs:line 21\n   at Program.<Main>$(String[] args) in D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\tools\\spektra-natural-input\\Program.cs:line 27\n   at Program.<Main>(String[] args)\n"
+  },
+  {
+    "path": "E:/Kitao-Research",
+    "accepted": false,
+    "message": "Unhandled exception. System.IO.IOException: Output outside authorized research root or overlaps CompanyRAW\n   at Program.<>c__DisplayClass0_0.<<Main>$>g__ValidateOutput|2(String path) in D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\tools\\spektra-natural-input\\Program.cs:line 21\n   at Program.<Main>$(String[] args) in D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\tools\\spektra-natural-input\\Program.cs:line 27\n   at Program.<Main>(String[] args)\n"
+  },
+  {
+    "path": "E:/Kitao-Research/color-engine-round6-20261030",
+    "accepted": false,
+    "message": "Unhandled exception. System.IO.IOException: Output already exists\n   at Program.<>c__DisplayClass0_0.<<Main>$>g__ValidateOutput|2(String path) in D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\tools\\spektra-natural-input\\Program.cs:line 22\n   at Program.<Main>$(String[] args) in D:\\AI AGENT\\worktrees\\color-engine-company-20261030\\tools\\spektra-natural-input\\Program.cs:line 27\n   at Program.<Main>(String[] args)\n"
+  },
+  {
+    "path": "E:/Kitao-Research/round7-new-output-check",
+    "accepted": true,
+    "message": "E:\\Kitao-Research\\round7-new-output-check\n"
+  }
+]

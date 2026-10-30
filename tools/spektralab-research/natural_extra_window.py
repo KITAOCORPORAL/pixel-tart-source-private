@@ -1,4 +1,5 @@
 """One explicitly registered extra native-coordinate window, not another scene."""
+raise SystemExit("Legacy round6 batch is frozen and cannot satisfy V2 admission. Use natural_prepare --library/--resources and natural_case --manifest/--manifest-sha; do not resubmit six full tasks.")
 from pathlib import Path
 import argparse,json,subprocess,sys
 import numpy as np

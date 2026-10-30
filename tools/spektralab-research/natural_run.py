@@ -1,4 +1,5 @@
 """Dispatch serial, each case in a fresh process; no implicit proxy substitution."""
+raise SystemExit("Legacy round6 batch is frozen and cannot satisfy V2 admission. Use natural_prepare --library/--resources and natural_case --manifest/--manifest-sha; do not resubmit six full tasks.")
 from pathlib import Path
 import argparse,json,subprocess,sys
 p=argparse.ArgumentParser();p.add_argument('local',type=Path);p.add_argument('engine',type=Path);a=p.parse_args();root=a.local;source=a.engine/'source2';library=a.engine/'build-patch/engine/spektrafilm_engine.dll';resources=a.engine/'resources-patch';script=Path(__file__).with_name('natural_case.py');pairs=[('portra','kodak_portra_400','kodak_portra_endura'),('ektar','kodak_ektar_100','kodak_ultra_endura'),('trix','kodak_tri_x_400','ilford_multigrade_iv_rc')];records=[]

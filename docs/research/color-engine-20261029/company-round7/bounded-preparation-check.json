@@ -1,0 +1,54 @@
+{
+  "version": "BoundedPreparationV2Check",
+  "sameMathSameFullAndProxyBytes": true,
+  "checks": [
+    {
+      "path": "A-linear-d50-crop-edge_people.npy",
+      "sameFileHash": true
+    },
+    {
+      "path": "A-linear-d50-crop-shadow_vehicle.npy",
+      "sameFileHash": true
+    },
+    {
+      "path": "A-linear-d50-crop-sky_wire.npy",
+      "sameFileHash": true
+    },
+    {
+      "path": "A-linear-d50-full.npy",
+      "sameFileHash": true
+    },
+    {
+      "path": "A-linear-d50-proxy.npy",
+      "sameFileHash": true
+    },
+    {
+      "path": "B-display-srgb-crop-edge_people.npy",
+      "sameFileHash": true
+    },
+    {
+      "path": "B-display-srgb-crop-shadow_vehicle.npy",
+      "sameFileHash": true
+    },
+    {
+      "path": "B-display-srgb-crop-sky_wire.npy",
+      "sameFileHash": true
+    },
+    {
+      "path": "B-display-srgb-full.npy",
+      "sameFileHash": true
+    },
+    {
+      "path": "B-display-srgb-proxy.npy",
+      "sameFileHash": true
+    }
+  ],
+  "cpuPreparationBudget": {
+    "mappedInputAndOutputBytes": 484087680,
+    "bridgeWorkRows": 32,
+    "proxyMaximumChannelCloneBytes": 80681280,
+    "independentOfGpu": true
+  },
+  "newAdmissionManifestSha256": "54baac3f0fe1621bdf6671a7849e1596d1b616a776b3278934b305d3a038dcfb",
+  "oldRound6FilesUntouched": true
+}

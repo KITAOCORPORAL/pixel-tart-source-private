@@ -1,0 +1,38 @@
+{
+  "version": "Round7EnvironmentV1",
+  "clientDate": "2026-10-30",
+  "clientTimezone": "Europe/Berlin",
+  "hostObserved": "2026-10-30T15:57:32.010024+08:00",
+  "gpuSnapshot": "name, driver_version, memory.total [MiB], memory.used [MiB], memory.free [MiB]\nNVIDIA GeForce GTX 1650, 572.70, 4096 MiB, 2625 MiB, 1311 MiB\n",
+  "hostMemory": {
+    "total": 34189107200,
+    "available": 15584456704,
+    "percent": 54.4,
+    "used": 18604650496,
+    "free": 15584456704
+  },
+  "python": "3.13.13 (tags/v3.13.13:01104ce, Apr  7 2026, 19:25:48) [MSC v.1944 64 bit (AMD64)]",
+  "numpy": "2.4.6",
+  "localRoot": "E:\\Kitao-Research\\color-engine-round7-20261030",
+  "researchGpuCapBytes": 2147483648,
+  "safetyReserveBytes": 268435456,
+  "capRaised": false,
+  "otherProcessesClosed": false,
+  "privateInputRootsScanned": false,
+  "d80014Rescanned": false,
+  "closedCurveOrBTMatrixRerun": false,
+  "runtimeHashes": [
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\build-patch\\engine\\spektrafilm_engine.dll",
+      "sha256": "4dae2dcf046af1756a5fa79f5ef419d9d7af7e306fbc4b14bfd7d06de810cf6f"
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round7-20261030\\build-allocation-ledger\\engine\\spektrafilm_engine.dll",
+      "sha256": "a211023dc35d74d67dcf24ab6f5fdf323a233fa0504c9631e463abb3757d80b0"
+    },
+    {
+      "path": "tools\\spektra-natural-input\\bin\\Debug\\net10.0\\NaturalInput.dll",
+      "sha256": "93dbbb3724e7c419f3d388429fc1185559b5d825f815b7f35539755caff616ae"
+    }
+  ]
+}

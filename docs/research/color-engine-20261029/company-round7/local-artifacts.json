@@ -1,0 +1,30 @@
+{
+  "version": "Round7LocalArtifactsV1",
+  "localRoot": "E:\\Kitao-Research\\color-engine-round7-20261030",
+  "privatePixelsAndExternalSourceRemainLocal": true,
+  "newPreparationPath": "E:\\Kitao-Research\\color-engine-round7-20261030\\bounded-preparation-v2",
+  "measurementRoot": "E:\\Kitao-Research\\color-engine-round7-20261030\\allocation-measurements-bound",
+  "externalDiagnosticSource": "E:\\Kitao-Research\\color-engine-round7-20261030\\source-allocation-ledger",
+  "externalDiagnosticBinary": "E:\\Kitao-Research\\color-engine-round7-20261030\\build-allocation-ledger\\engine\\spektrafilm_engine.dll",
+  "oldEvidenceNotDeleted": true,
+  "sourceHashes": [
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\source2\\engine\\src\\gpu\\vulkan_gpu.cpp",
+      "sha256": "b98a9307cea151562b2c863d8e6d8f48c0701c9cf7403dc2e66abee2221c1e26"
+    },
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round7-20261030\\source-allocation-ledger\\engine\\src\\gpu\\vulkan_gpu.cpp",
+      "sha256": "99c7e74aa65b912b4d268acd8278da504697cf9a572a8c107c3744ca75dae917"
+    },
+    {
+      "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\source-patch\\engine\\src\\shaders\\vulkan\\spk_cctf_decode.comp",
+      "sha256": "ee3369fa63613aa277d95bfaf2da339e191c198480763a7c3fe00283fec44fff"
+    }
+  ],
+  "referenceBinaryHashes": [
+    {
+      "path": "E:\\Kitao-Research\\color-engine-round7-20261030\\reference-tools\\PyOpenColorIO\\PyOpenColorIO.pyd",
+      "sha256": "dabcac845fb85ce72b68cc7c98974f8b8d6b32b512c11d8c2d623d99f83288fa"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "version": "Round7FinalSourceProvenanceV1",
+  "baseCommit": "6dba62e133f2aff75226661b61dd8850ff5289c7",
+  "drivers": [
+    {
+      "path": "tools/spektra-natural-input/Program.cs",
+      "sha256": "cb03bc3562fee2f98c0303c1b1e981f915a66f8ebd82403a7fa533f1d61e45b0"
+    },
+    {
+      "path": "tools/spektralab-research/allocation_measure.py",
+      "sha256": "0b99222979f527d3930d44a6937d655e1e9aec14e806893944167b43845b3890"
+    },
+    {
+      "path": "tools/spektralab-research/apply_allocation_ledger.py",
+      "sha256": "c3ca2cd12088c38f6886973e34941898eb12664c0783efc7985b5d57c8164fb6"
+    },
+    {
+      "path": "tools/spektralab-research/bridge_complete_check.py",
+      "sha256": "891d866b8246fb0eebb808de1fb7383e0ce675a40aa702b657e761095cd0d84a"
+    },
+    {
+      "path": "tools/spektralab-research/natural_admission.py",
+      "sha256": "3dd33d14490d5162b04d07ab40a09c37505b8d0eb3e42efa208acd37542e1886"
+    },
+    {
+      "path": "tools/spektralab-research/natural_case.py",
+      "sha256": "95bfea96523d44805ca9cc6eadd6f32b07dfcd8bd9befc601f038836e677e291"
+    },
+    {
+      "path": "tools/spektralab-research/natural_extra_window.py",
+      "sha256": "7e68fb76935b32d655c9765f1dc4580dd94d77b9529c15e1785f07ce3485d8bb"
+    },
+    {
+      "path": "tools/spektralab-research/natural_prepare.py",
+      "sha256": "8031c8b51390919f9401e03e45a66f9b1ec2422cda712dffee11b9853d31f978"
+    },
+    {
+      "path": "tools/spektralab-research/natural_run.py",
+      "sha256": "acde9339ec3e60093b59debb6f69fbfa67f04db1091ac78cb9fbe85289c68f63"
+    },
+    {
+      "path": "tools/spektralab-research/reproduce_full_blocker.py",
+      "sha256": "da892bf59bed379e03ce09ffa1b47a06d539fc611a457328dbe75b9f1ad873e0"
+    },
+    {
+      "path": "tools/spektralab-research/seal_natural_manifest.py",
+      "sha256": "775c125d78cde09965a67c48332c6993ffe616ae11c153b421978d0f58c914f9"
+    },
+    {
+      "path": "tools/spektralab-research/test_natural_admission.py",
+      "sha256": "763b3625fa8b71e9ffb82ef920e683f6367dccf03a09462df3ee1c09e48e5a1d"
+    },
+    {
+      "path": "tools/spektralab-research/verify_round6.py",
+      "sha256": "e7d5f7ad6cbbd239446a0031a0afe51ba96926c4dc7e18c068b5be2c61530bcb"
+    },
+    {
+      "path": "tools/spektralab-research/verify_round7.py",
+      "sha256": "0a0822a95971b3a2a1e7375db1ad92451ac3be3b544bb34943ddfd4a586e64ed"
+    }
+  ],
+  "inputCallerAssemblySha256": "93dbbb3724e7c419f3d388429fc1185559b5d825f815b7f35539755caff616ae",
+  "diagnosticSourceSha256": "99c7e74aa65b912b4d268acd8278da504697cf9a572a8c107c3744ca75dae917",
+  "diagnosticLibrarySha256": "a211023dc35d74d67dcf24ab6f5fdf323a233fa0504c9631e463abb3757d80b0",
+  "productAndMatrixV2ChangedPaths": [],
+  "streamingInterface": "PROPOSED_NOT_IMPLEMENTED"
+}

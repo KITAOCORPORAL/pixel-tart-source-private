@@ -1,0 +1,635 @@
+{
+  "version": "NaturalAdmissionManifestV2",
+  "inputRoot": "E:\\Kitao-Research\\color-engine-round7-20261030\\bounded-preparation-v2",
+  "sourceSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+  "productionReportSha256": "4a0cdb76d3301fa1ae8c08ce2e01661789ceb5978f345289f0f72c1f14c6dce1",
+  "orientation": 1,
+  "bridge": {
+    "version": "ExistingResearchD65ToD50V1",
+    "P": [
+      [
+        0.529317,
+        0.330092,
+        0.140588
+      ],
+      [
+        0.098368,
+        0.873465,
+        0.028169
+      ],
+      [
+        0.016879,
+        0.117663,
+        0.865457
+      ]
+    ],
+    "sRGBtoXYZD65": [
+      [
+        0.4124,
+        0.3576,
+        0.1805
+      ],
+      [
+        0.2126,
+        0.7152,
+        0.0722
+      ],
+      [
+        0.0193,
+        0.1192,
+        0.9505
+      ]
+    ],
+    "Bradford": [
+      [
+        0.8951,
+        0.2664,
+        -0.1614
+      ],
+      [
+        -0.7502,
+        1.7135,
+        0.0367
+      ],
+      [
+        0.0389,
+        -0.0685,
+        1.0296
+      ]
+    ],
+    "sourceWhiteXY": [
+      0.3127,
+      0.329
+    ],
+    "destinationWhiteXY": [
+      0.3457,
+      0.3585
+    ],
+    "engineProPhotoD50toXYZ": [
+      [
+        0.7977,
+        0.1352,
+        0.0313
+      ],
+      [
+        0.288,
+        0.7119,
+        0.0001
+      ],
+      [
+        0.0,
+        0.0,
+        0.8249
+      ]
+    ],
+    "combinedMatrix": [
+      [
+        1.0000217911832863,
+        9.591835077327627e-05,
+        7.133026177363171e-05
+      ],
+      [
+        -6.627610126724364e-05,
+        1.000014905953994,
+        -2.2700840720611326e-05
+      ],
+      [
+        -6.64219880696861e-05,
+        2.8858865072908588e-05,
+        1.0002334640951398
+      ]
+    ],
+    "order": "LibRawProPhotoD65 inverse -> linear sRGB D65 -> XYZ D65 -> Bradford D50 -> standard engine ProPhoto D50",
+    "extraWB": false,
+    "displayMappingOnA": false
+  },
+  "backend": {
+    "path": "D:\\AI AGENT\\tmp\\color-engine-company-20261030\\build-patch\\engine\\spektrafilm_engine.dll",
+    "sha256": "4dae2dcf046af1756a5fa79f5ef419d9d7af7e306fbc4b14bfd7d06de810cf6f"
+  },
+  "resources": [
+    {
+      "path": "io/README.txt",
+      "bytes": 576,
+      "sha256": "4bb0896891b5dc79d7f0449c8cfcc669788101d144e5c938ea2f6159294656bd"
+    },
+    {
+      "path": "io/sRGB.icc",
+      "bytes": 588,
+      "sha256": "f869f25625302eef46cd74fe56ec11adbfa7cf20db6f70b8efdddcbeec4323a0"
+    },
+    {
+      "path": "neutral_print_filters.json",
+      "bytes": 17569,
+      "sha256": "fdced9a78e79a9d3a1423de3f34b811a1684485b2bdf0844950ce1fc9f0b7794"
+    },
+    {
+      "path": "print_luts.json",
+      "bytes": 1617,
+      "sha256": "27b43228c85e55ffaa82079a696f579ef3c00ce057a27f58f11fbc3e0e26f589"
+    },
+    {
+      "path": "profiles/cinestill_800t.json",
+      "bytes": 846,
+      "sha256": "b4539181be0fc2c6260d8a7ca04fcfd88be0a45fa52b460fd159dd39d2b42611"
+    },
+    {
+      "path": "profiles/fujifilm_c200.json",
+      "bytes": 213881,
+      "sha256": "33c1acc77ca85963e6165f7fa7fed545803f0c955732e500681e4f3946d44e4a"
+    },
+    {
+      "path": "profiles/fujifilm_crystal_archive_typeii.json",
+      "bytes": 223158,
+      "sha256": "8aa83ca1d1fafdc72813f1abae0c17facbb6680b566c0f8e8bbd505251c76700"
+    },
+    {
+      "path": "profiles/fujifilm_neopan_acros_100_ii.json",
+      "bytes": 80357,
+      "sha256": "4429b45664a06c7ee8d16687bcc7adf656403e534fba584f83762e160abdc4f9"
+    },
+    {
+      "path": "profiles/fujifilm_pro_400h.json",
+      "bytes": 214186,
+      "sha256": "beff34f309c5a9c102a87f48876986e7a7bbb20da7994cfc8d08629f6121ae46"
+    },
+    {
+      "path": "profiles/fujifilm_provia_100f.json",
+      "bytes": 216444,
+      "sha256": "04c42273d861d26838b0c760579a59e4a985483081f1ff100d7cab9007f54a2f"
+    },
+    {
+      "path": "profiles/fujifilm_velvia_100.json",
+      "bytes": 216258,
+      "sha256": "4678399aaf2e623dc482e46255093f79ddee93ae963759627e58eee002d7ec84"
+    },
+    {
+      "path": "profiles/fujifilm_xtra_400.json",
+      "bytes": 214049,
+      "sha256": "8d2369fc3a8f707f07d04c17283fbc5bb66d95e65addc09d06be222c785ff92d"
+    },
+    {
+      "path": "profiles/ilford_hp5_plus_400.json",
+      "bytes": 87530,
+      "sha256": "a09ccdb57816f220ab598e534318a743ef79e16a300f8bd2de7453d451fe8ec5"
+    },
+    {
+      "path": "profiles/ilford_multigrade_iv_rc.json",
+      "bytes": 81711,
+      "sha256": "0f776f1f26f04aca4ec438ed377dc1acf4073dc1a8ae32c51607a6cb1a02521d"
+    },
+    {
+      "path": "profiles/kodak_2383.json",
+      "bytes": 223095,
+      "sha256": "a7a494c593ff5da06767d6293f7c796a146ca6346cdddd369f1b55cdfef855cf"
+    },
+    {
+      "path": "profiles/kodak_2393.json",
+      "bytes": 223080,
+      "sha256": "db1d293d5f515c22d3f19b8aa91d874ec9c8c6ebfbfa731dd04de9a303c2a129"
+    },
+    {
+      "path": "profiles/kodak_ektachrome_100.json",
+      "bytes": 215834,
+      "sha256": "3113bde02c05e707e353911b7628f66ffb1931493dc3a0581c546498e9ab75a2"
+    },
+    {
+      "path": "profiles/kodak_ektacolor_edge.json",
+      "bytes": 222479,
+      "sha256": "d05b37d843af82057316717844898be9440e61b0e7a0ab36fe9efb83e629a3c7"
+    },
+    {
+      "path": "profiles/kodak_ektar_100.json",
+      "bytes": 214224,
+      "sha256": "f2a8c9092153b2d1ee90c5aa588ece7c199c8687520e250946484ff3294b0319"
+    },
+    {
+      "path": "profiles/kodak_endura_premier.json",
+      "bytes": 222708,
+      "sha256": "3f63b8c5a56967776fa9782914079156736c0b1e0ec739ff946d8b1aa2950a6e"
+    },
+    {
+      "path": "profiles/kodak_gold_200.json",
+      "bytes": 213961,
+      "sha256": "8190c24d1e2f0aa9daeff89a8325f9051d2d2e9a96d867386fbded7fe3a82004"
+    },
+    {
+      "path": "profiles/kodak_kodachrome_64.json",
+      "bytes": 215666,
+      "sha256": "75b07bf032c80353383b73fbfde6ea5d718ec3d2b05db06aa83a6f960b07f28d"
+    },
+    {
+      "path": "profiles/kodak_portra_160.json",
+      "bytes": 214158,
+      "sha256": "54caffc4246619e5135996a00386393d37a2dfc7c6fdf4ebf3f32d68281ee0cc"
+    },
+    {
+      "path": "profiles/kodak_portra_400.json",
+      "bytes": 214265,
+      "sha256": "140c49bbff6d7b6589058ce0836e3286fa995e9433bb8a62a0189d6e1a04da9f"
+    },
+    {
+      "path": "profiles/kodak_portra_800.json",
+      "bytes": 214012,
+      "sha256": "ba2863125ef4ad4039616c1be76ee38e7bff28706a769b4010a7dfca3e786ee2"
+    },
+    {
+      "path": "profiles/kodak_portra_800_push1.json",
+      "bytes": 214250,
+      "sha256": "db6b9623e6c64f9188c9e9afb5926895f8d55965b68102e97768694f3ea572b3"
+    },
+    {
+      "path": "profiles/kodak_portra_800_push2.json",
+      "bytes": 214224,
+      "sha256": "502b232a7395ef6a961c51cd65f53813e2ecbd4ae861802800b7d8cc02d3da6b"
+    },
+    {
+      "path": "profiles/kodak_portra_endura.json",
+      "bytes": 222541,
+      "sha256": "28bee939504da48e3556c58fc880696f471c2d63bd00e3b8e1831dd0ff5cd25c"
+    },
+    {
+      "path": "profiles/kodak_supra_endura.json",
+      "bytes": 222808,
+      "sha256": "b3ea5143e10b6bd1cb10026391a425a2ac901aeb96549918d3e1093b395a6b68"
+    },
+    {
+      "path": "profiles/kodak_tmax_100.json",
+      "bytes": 80983,
+      "sha256": "c9160236872034b86fb42b67be3a9252088bfa7bdbb450148b0c20ad83e3033a"
+    },
+    {
+      "path": "profiles/kodak_tri_x_400.json",
+      "bytes": 78602,
+      "sha256": "a54be071c6a055a9a49acb7072d10bf0b1bcddf9c0a459b0800a9b14bb66b1f1"
+    },
+    {
+      "path": "profiles/kodak_ultra_endura.json",
+      "bytes": 222834,
+      "sha256": "c92bcbcb01c917592be523a66140f4110b29f7331546bb58574aa4111d8a7b2c"
+    },
+    {
+      "path": "profiles/kodak_ultramax_400.json",
+      "bytes": 214054,
+      "sha256": "c36ab49d63ea72cf558c83e4c665ca9d25e3008387ecb8eeb862bf6a996590f6"
+    },
+    {
+      "path": "profiles/kodak_verita_200d.json",
+      "bytes": 214035,
+      "sha256": "8c5373730fa9eb3bb443e670a915b24530af6ae6468a1e2a369c5e43bf0658de"
+    },
+    {
+      "path": "profiles/kodak_vision3_200t.json",
+      "bytes": 214403,
+      "sha256": "843fed6fe82eae9c13a2191547347c368634921abb635e1ac5fc7cc7169e72f0"
+    },
+    {
+      "path": "profiles/kodak_vision3_250d.json",
+      "bytes": 214154,
+      "sha256": "d67d4f551bda1489a1590a2a63fe420f275713682453276b2d99e2f72019d12a"
+    },
+    {
+      "path": "profiles/kodak_vision3_500t.json",
+      "bytes": 214062,
+      "sha256": "192b85a7050586b88467101a3af96fdffc7317f81332fa07aa4679e67af2b17d"
+    },
+    {
+      "path": "profiles/kodak_vision3_50d.json",
+      "bytes": 214185,
+      "sha256": "f252ef031edda4be305f9cde8dd52257a7d34a94210ef86c4e6471544f1600c8"
+    },
+    {
+      "path": "spektrafilm_constants.bin",
+      "bytes": 9450196,
+      "sha256": "f2c06600606fa169171f58b6639d2669f372a2b39ebe9c72e3edeff5f6d7d31d"
+    },
+    {
+      "path": "vulkan/spk_affine3.spv",
+      "bytes": 2456,
+      "sha256": "17f1d8322e569ac4dac0d78b10d61669f9d4220c91d690d2f96299615427bbdf"
+    },
+    {
+      "path": "vulkan/spk_boost.spv",
+      "bytes": 2992,
+      "sha256": "0b95d2bf9c52724a3d822ae9b5f55363fa8eb7058812251147bbae6ef8f00917"
+    },
+    {
+      "path": "vulkan/spk_bw_correct.spv",
+      "bytes": 2940,
+      "sha256": "a8515c1208c676e176c689a25a1456d0f535101f54bf1a9e9145059f5085b313"
+    },
+    {
+      "path": "vulkan/spk_cam16ucs_compress.spv",
+      "bytes": 24184,
+      "sha256": "179d9fd5f8ab7c1de03b21aac7464b28bb47ea20be6fb744605db76743e68753"
+    },
+    {
+      "path": "vulkan/spk_cctf_decode.spv",
+      "bytes": 4404,
+      "sha256": "125c2ccb53705b9a7cb7011b462fb0cd6bd44f06f2654ad03434b1734555f6b4"
+    },
+    {
+      "path": "vulkan/spk_cctf_encode_matrix.spv",
+      "bytes": 6024,
+      "sha256": "6ac2d962eb6c0285483fe226d04f0b1f2f5bfcaf21ceb9a170ae5ce9b019d49b"
+    },
+    {
+      "path": "vulkan/spk_couplers_correction.spv",
+      "bytes": 4860,
+      "sha256": "9f0e990bb40e0ec0b92f387d0355773d1d277f1a4e9a425878a8ba8e03343ce3"
+    },
+    {
+      "path": "vulkan/spk_curves.spv",
+      "bytes": 5496,
+      "sha256": "9fcd8d055fc2c9b339b34688d4c932719c915cda4695ce8e0d21eae710940a29"
+    },
+    {
+      "path": "vulkan/spk_di_normalise.spv",
+      "bytes": 2860,
+      "sha256": "2d28f3e2c37099970291a59a3fa69a5cf7b4aa1850a746a9915362d798762f8c"
+    },
+    {
+      "path": "vulkan/spk_edr.spv",
+      "bytes": 5000,
+      "sha256": "e4bb2921dbc1fdd31411515c1649ec6394280326a18f00a8d0bc18fd5f5c4bbe"
+    },
+    {
+      "path": "vulkan/spk_geometry_resample_df.spv",
+      "bytes": 16432,
+      "sha256": "29265ee65dba649e31fb803fe64aeee08a125556c2be4e30197bab7ad3c816fb"
+    },
+    {
+      "path": "vulkan/spk_glare_add.spv",
+      "bytes": 2504,
+      "sha256": "7a6c9090207120238a2f7c2bf8919b7309f6da69836ae33329706be709799ca0"
+    },
+    {
+      "path": "vulkan/spk_grain_layer_one.spv",
+      "bytes": 18880,
+      "sha256": "c72354e98bfc4c710c749403c2d6fc779d1a40d4de60399c04ac090b859d51f9"
+    },
+    {
+      "path": "vulkan/spk_grain_layers.spv",
+      "bytes": 19144,
+      "sha256": "205e31884070a4254723c4789c5bb5b80b8e2f8af1ffa11f8dbdc8c279d8d2ed"
+    },
+    {
+      "path": "vulkan/spk_grain_simple.spv",
+      "bytes": 15176,
+      "sha256": "ce7444a69e7b7b3b5302d2ffc2fcb2a797f1f240250f164cbaa92db6f826c69d"
+    },
+    {
+      "path": "vulkan/spk_iir_df_acc.spv",
+      "bytes": 16348,
+      "sha256": "134349601a35b8d70665779c5e25c5ff1eda8f5fe470bb1cb1a7186727c31019"
+    },
+    {
+      "path": "vulkan/spk_lincomb3.spv",
+      "bytes": 2724,
+      "sha256": "40b03156066cc213051f4d5eece6a38dca0c2e834e203a81ead644db2fbd7f95"
+    },
+    {
+      "path": "vulkan/spk_log10_guarded.spv",
+      "bytes": 2320,
+      "sha256": "fef81ad5a0f94c34517a29f6ac3f142d951d484775ca52633026b5d0c6de636b"
+    },
+    {
+      "path": "vulkan/spk_lognormal_field.spv",
+      "bytes": 8284,
+      "sha256": "6e578f77e4276a1862ef5576db316a54bdf873f4793c880e09d7f7248bbd02f2"
+    },
+    {
+      "path": "vulkan/spk_lut2d_cubic.spv",
+      "bytes": 9228,
+      "sha256": "46c801214f6d2005e04325e782f587b1ed6cd22b4091ef1ce1d6e1174ff49990"
+    },
+    {
+      "path": "vulkan/spk_lut3d_trilinear.spv",
+      "bytes": 9160,
+      "sha256": "d893b19f909d051c641a8e7d433c45098d935a0e792788e3779a184138c2c029"
+    },
+    {
+      "path": "vulkan/spk_math_probe.spv",
+      "bytes": 1896,
+      "sha256": "7a2525eae5486bccd5c812deb9af44e399c1a414d3e24aa1fe39634fbf31b009"
+    },
+    {
+      "path": "vulkan/spk_matmul3.spv",
+      "bytes": 3504,
+      "sha256": "72d95e7cd08613d77201b8b993b2fd8b90041cf56d3ddc105de04f428cae5a88"
+    },
+    {
+      "path": "vulkan/spk_mul.spv",
+      "bytes": 2068,
+      "sha256": "a06b20e80c080f474613391dca716468ba64b07ef45ceacbf9cdb3415582057c"
+    },
+    {
+      "path": "vulkan/spk_print_exposure.spv",
+      "bytes": 2440,
+      "sha256": "b870b4a752ea3d21bb152b3d43a4b4e2484e95e2def63b1756f5fe29873e4e54"
+    },
+    {
+      "path": "vulkan/spk_reduce_max.spv",
+      "bytes": 3032,
+      "sha256": "4e14d2b8ed6ba39925601a3dd3b7772358ab8bfee01da70800c4bb74fec18058"
+    },
+    {
+      "path": "vulkan/spk_rng_probe.spv",
+      "bytes": 16480,
+      "sha256": "f963c76fecbfe2267342d3af806cb546589655bc862f685a63b91de5249f1c4a"
+    },
+    {
+      "path": "vulkan/spk_sep_fir_acc.spv",
+      "bytes": 8996,
+      "sha256": "cd513a95a1a4d2c2114be19b3bc55f705dd51065ceb791531566742b46533d1e"
+    },
+    {
+      "path": "vulkan/spk_spectral_epilogue.spv",
+      "bytes": 5640,
+      "sha256": "c8c2ee007692b4a088ec981479eb6621079c2fe15961c491bf54f9dd21328fb0"
+    },
+    {
+      "path": "vulkan/spk_stride_sample.spv",
+      "bytes": 2932,
+      "sha256": "907a232b33daa425515dec1e5bb2ea7f7f3879d1b16e073457f69ec8578ead13"
+    },
+    {
+      "path": "vulkan/spk_take_rgb.spv",
+      "bytes": 2300,
+      "sha256": "f15e7535f12a12e5586878b5379b66c2ba7d6a5439330fb99a00e59d6a4c87eb"
+    },
+    {
+      "path": "vulkan/spk_tc_b.spv",
+      "bytes": 4800,
+      "sha256": "02a90468abf11433432e580d92603437dfc985821934f060f9df01a3e5fd0165"
+    },
+    {
+      "path": "vulkan/spk_to_rgba16.spv",
+      "bytes": 3140,
+      "sha256": "63622bfc67e79c8fad09404add7d86d7faf2f58baf54436c8d4e9d2822a2ae6b"
+    },
+    {
+      "path": "vulkan/spk_zoom_bilinear_mirror.spv",
+      "bytes": 13736,
+      "sha256": "a748e2df3a7759928c3c86949cadd8ba3be7e4e5a44f93d196b2c6dff4edd1d0"
+    }
+  ],
+  "preparationIdentity": {
+    "sourceSha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+    "productionLinearSha256": "E062FB55B7A5F0D3B09B6AF37A664F782A643999DED9FBD833DB63FCCEDC1D2C",
+    "productionDisplaySha256": "D0D5BF59CB649F52164396E6404A7A686A42895CC340E7CAC62AABBC5EE67169",
+    "mode": "New bounded-row preparation with unchanged ExistingResearchD65ToD50V1 math"
+  },
+  "files": [
+    {
+      "path": "A-linear-d50-crop-edge_people.npy",
+      "fileSha256": "7e21ef54742dbdd8a509dbe9ca0908fd6d52fbbf3b3b0668b94ab446f3570108",
+      "shape": [
+        640,
+        640,
+        3
+      ],
+      "route": "A",
+      "orientation": 1,
+      "domain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "569de69f6f7ba2478b7f6224a6d8c79d460f7d2d9cbb05fbcb64a78a972300e2",
+      "bytes": 4915328
+    },
+    {
+      "path": "A-linear-d50-crop-shadow_vehicle.npy",
+      "fileSha256": "c5c961a8221b53baa69bdabeba355aeac343e37082147785ca42ad73c196c2fd",
+      "shape": [
+        640,
+        640,
+        3
+      ],
+      "route": "A",
+      "orientation": 1,
+      "domain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "e1292c710da5d970aa964187626026af888b2f136ec8e2e16d52a67848e0b555",
+      "bytes": 4915328
+    },
+    {
+      "path": "A-linear-d50-crop-sky_wire.npy",
+      "fileSha256": "5e8730da8e2759b532cb571f1195b3afc922355741ed083a38c9465ec00997b4",
+      "shape": [
+        640,
+        640,
+        3
+      ],
+      "route": "A",
+      "orientation": 1,
+      "domain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "502a954afff39a4805c620526f3d871570b05004b24fa3d725b65389ce9acad7",
+      "bytes": 4915328
+    },
+    {
+      "path": "A-linear-d50-full.npy",
+      "fileSha256": "77f49b1580eb55c9274278d1019adebec098ff2a3d630af0fc5b994d4b6041c3",
+      "shape": [
+        3670,
+        5496,
+        3
+      ],
+      "route": "A",
+      "orientation": 1,
+      "domain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "cd47a182e9814bc45c4130b9b90fc45bca49a06923958df739180699ac0f50f9",
+      "bytes": 242043968
+    },
+    {
+      "path": "A-linear-d50-proxy.npy",
+      "fileSha256": "d45f0a16ba328f6dcdbc030c7f80dfd1b56544d07f2909fbf396ed59a64f2ca5",
+      "shape": [
+        801,
+        1200,
+        3
+      ],
+      "route": "A",
+      "orientation": 1,
+      "domain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "4ac591589af7ca1d41a57baa12e9a8277627a380a3869426d3d8e855c8bf8349",
+      "bytes": 11534528
+    },
+    {
+      "path": "B-display-srgb-crop-edge_people.npy",
+      "fileSha256": "b6c2f3bd9b58394ca6ca1a387b8151a47c55b7ed14a7e2fb03937fd2e7a2b879",
+      "shape": [
+        640,
+        640,
+        3
+      ],
+      "route": "B",
+      "orientation": 1,
+      "domain": "production display sRGB D65 encoded float32 creative input",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "ab228f8027aebec4cf7cce4288291f854c5ef302a186b34a94c8afd1b9ded100",
+      "bytes": 4915328
+    },
+    {
+      "path": "B-display-srgb-crop-shadow_vehicle.npy",
+      "fileSha256": "7128e7c19dc46f5ab328549c93487d25cc884076cb5cb7a6eb82d60d6d854790",
+      "shape": [
+        640,
+        640,
+        3
+      ],
+      "route": "B",
+      "orientation": 1,
+      "domain": "production display sRGB D65 encoded float32 creative input",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "3eef209db09e20931ce610b932860b690d07c44cee4b756466ff726f44986e16",
+      "bytes": 4915328
+    },
+    {
+      "path": "B-display-srgb-crop-sky_wire.npy",
+      "fileSha256": "2c66f7c3ec985ec46488ee2f543b0bbf23d8a94ac3bbe1abcbbc3036d504228d",
+      "shape": [
+        640,
+        640,
+        3
+      ],
+      "route": "B",
+      "orientation": 1,
+      "domain": "production display sRGB D65 encoded float32 creative input",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "b308b436ce3b708492c871780d2536f2677b5eef85493710cf7ddd6c7b2b4798",
+      "bytes": 4915328
+    },
+    {
+      "path": "B-display-srgb-full.npy",
+      "fileSha256": "b638c6daa7929e5f69a4fd82e5d24e134a04a9c5fba76de426ee8913fdd960c9",
+      "shape": [
+        3670,
+        5496,
+        3
+      ],
+      "route": "B",
+      "orientation": 1,
+      "domain": "production display sRGB D65 encoded float32 creative input",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "d0d5bf59cb649f52164396e6404a7a686a42895cc340e7cac62aabbc5ee67169",
+      "bytes": 242043968
+    },
+    {
+      "path": "B-display-srgb-proxy.npy",
+      "fileSha256": "86dcb00420b3343601c374274b707293f5c650919fd6865dbf81ccbd9da5b57d",
+      "shape": [
+        801,
+        1200,
+        3
+      ],
+      "route": "B",
+      "orientation": 1,
+      "domain": "production display sRGB D65 encoded float32 creative input",
+      "bridgeVersion": "ExistingResearchD65ToD50V1",
+      "pixelSha256": "b81ecbe870d26c8d7304c81b5a0bb485a0617fa42bf8e8c57bad7a6c93b5ebc7",
+      "bytes": 11534528
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "version": "PinnedAllocationSourceAnchorsV1",
+  "commit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "files": [
+    {
+      "path": "engine/src/pipeline/engine.cpp",
+      "sha256": "2e503759ea7798f6a4537f693e914aa5eadf15804906c85df4d537a7bee3fb49",
+      "anchors": [
+        {
+          "literal": "uploaded.buf = engine->gpu->upload_file_backed",
+          "lines": [
+            894
+          ]
+        },
+        {
+          "literal": "kept.buf = gpu->alloc_file_backed",
+          "lines": [
+            1114
+          ]
+        },
+        {
+          "literal": "bool materialise",
+          "lines": [
+            1135
+          ]
+        },
+        {
+          "literal": "gpu->alloc_persistent(bytes",
+          "lines": [
+            1140
+          ]
+        },
+        {
+          "literal": "spk_status render_tier",
+          "lines": [
+            1169
+          ]
+        }
+      ]
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "sha256": "013104bca52118c78318bcbfd9fd9e104898e6d27606b7c0332cdc86fa8eec62",
+      "anchors": [
+        {
+          "literal": "choose_strip_height",
+          "lines": [
+            2119,
+            2129,
+            2155
+          ]
+        },
+        {
+          "literal": "plane_out.cur.buf = gpu_->alloc",
+          "lines": [
+            2247
+          ]
+        },
+        {
+          "literal": "plane_out.log_e_film.buf = gpu_->alloc",
+          "lines": [
+            2256
+          ]
+        },
+        {
+          "literal": "bool Pipeline::band_from",
+          "lines": [
+            2310
+          ]
+        },
+        {
+          "literal": "bool Pipeline::node_unsharp",
+          "lines": [
+            1783
+          ]
+        },
+        {
+          "literal": "bool Pipeline::film_prefix",
+          "lines": [
+            1846
+          ]
+        }
+      ]
+    },
+    {
+      "path": "engine/src/gpu/vulkan_gpu.cpp",
+      "sha256": "b98a9307cea151562b2c863d8e6d8f48c0701c9cf7403dc2e66abee2221c1e26",
+      "anchors": [
+        {
+          "literal": "BufferRef alloc_file_backed",
+          "lines": [
+            413
+          ]
+        },
+        {
+          "literal": "BufferRef upload_file_backed",
+          "lines": [
+            416
+          ]
+        },
+        {
+          "literal": "void release(Buffer* b)",
+          "lines": [
+            428
+          ]
+        },
+        {
+          "literal": "bool create_buffer",
+          "lines": [
+            847
+          ]
+        },
+        {
+          "literal": "bool read(Buffer* src",
+          "lines": [
+            458
+          ]
+        },
+        {
+          "literal": "void* texture",
+          "lines": [
+            587
+          ]
+        },
+        {
+          "literal": "size_t trim_pool",
+          "lines": [
+            629
+          ]
+        },
+        {
+          "literal": "out.persistent_bytes +=",
+          "lines": [
+            618
+          ]
+        },
+        {
+          "literal": "bool ensure_staging",
+          "lines": [
+            722
+          ]
+        }
+      ]
+    }
+  ]
+}

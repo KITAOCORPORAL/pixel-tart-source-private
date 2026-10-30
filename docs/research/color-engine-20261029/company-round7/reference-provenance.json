@@ -1,0 +1,17 @@
+{
+  "version": "BridgeReferencesV1",
+  "colour": {
+    "version": "0.4.6",
+    "commit": "0c6f868c4b5c5ae861f868ba8015be3abf0f92f0",
+    "entry": "RGB_to_RGB, explicit actual source/destination RGB_Colourspace, Bradford",
+    "license": "BSD-3-Clause"
+  },
+  "OpenColorIO": {
+    "version": "2.5.1",
+    "commit": "004f80009653fa322c1133ba2c57b8ed526599c9",
+    "entry": "MatrixTransform, GroupTransform, CPUProcessor.applyRGB",
+    "install": "isolated round7/reference-tools, no product dependency",
+    "license": "BSD-3-Clause"
+  },
+  "scope": "Colour computes CAT and colourspace path; OCIO independently executes staged/inverse matrix chain. OCIO supplied CAT coefficients are not an independent CAT estimator. Complete bridge no longer only Bradford equality."
+}

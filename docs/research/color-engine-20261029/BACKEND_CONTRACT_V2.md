@@ -61,3 +61,18 @@
 - 任意grain_seed仍UNSUPPORTED、alpha丢弃/opaque、结果CPU RGBA16最终clamp非HDR、取消节点粒度、复制后result_free及独立所有权/stride/串行session限制均保持。没有seed扩展或随机效果尺寸保证。
 - 代理时序只适用于这张公司场景/尺寸/参数：init138–163ms，open/upload275–294ms，render+readback87–92ms；RSS峰值约147–158MiB，engine分配ledger约59–70MiB（不是物理VRAM峰值）；不外推到全分辨率/家庭GPU。内部upload/compute/readback分离不由当前C ABI提供。
 - 代码与逐资源分发许可仍未批准；LightTable非商业条款不是Spektra许可。曲线原因/BT64组不重跑；D80014缺源、家庭补丁、自然肤色/高光/独立验证及全分辨率门禁仍开放；WB余量冻结。
+
+## 第七批：安全输入准入及full阻点（不改变输入数学/产品链）
+
+最新能力快照为`company-round7/R55_CAPABILITIES.json`（V3）；此前第六批1开发场景/30独立配置，不是30场景或full输出已过。旧结果及失败保持不重贴标签。
+
+- `NaturalAdmissionManifestV2`首次case也必须绑定准备manifest及其SHA：source/production报告、具体文件SHA+pixelSHA、shape/dtype/length、A/B route、方向/域、桥版本/系数、backend和完整resource列表。不是先接受任意同shape NPY后再自封重开基线。旧round6只有显式 frozen-evidence sealer可核对后绑定，不自动迁移。
+- 先校验NPY头/shape/dtype/尺寸溢出/确切长度、CPU预算，再32行块hash/finite/stat，之后backend/resources和GPU准入；拒绝不得创建engine或上传，无成功标记。24针对性控制含篡改/互换/非有限/缺失重复/预算/异常清理。失败atomic report保留primary error，cleanup errors单列。
+- 输出只允许E:/Kitao-Research下新路径，禁止CompanyRAW重叠/已有证据/reparse；NaturalInput输出验证与取消逐行检查。session/result/engine cleanup尝试完整，render取消先cancel并join再release，不因cleanup失败吞原异常。
+- 准备32行块、B写出分块；代理为保留原Pillow BOX数学只保留1个CPU已预算channel clone，不暗换缩图算法。统计/重开避免整图bool、percentile/复制，TIFF逐行写/segments回读，但**public ABI内部仍完整CPU结果**。
+- 完整桥补Colour/OCIO实际入口、blob实际系数、各阶段/组合/中性原色饱和负/>1/自然样本；double负数量也为[0,942981,590359]，不clamp或换矩阵。新有界准备全部10文件hash与旧一致。详细语义/参考限制见BRIDGE_COMPARISON_ROUND7。
+- 固定源码Vulkan file_backed=普通persistent DEVICE_LOCAL，striped仍完整source/negative、assembledplanes、RGB/RGBA16与CPU结果；strip_budget_bytes忽略不控rows，不能称低内存流式能力。allocation-ledger独立外部诊断库测8smallruns并释放归0；whole/stripe5配对RGBA16 exact，默认scanner unsharp/首尾/不整除/完整画面尺度保持。
+- 当前5496×3670必要device-local下界56n=1,129,537,920bytes，超过本次安全准入1,095,761,920bytes；实测whole~72n、stripe更高。**一次可行性决策后full engine/open/render全0次**；未加cap、没关其它程序、不降尺寸、不改曝光/隐藏效果。没有本轮20MP输出/回读，明确BLOCKED_CURRENT_ABI_BUDGET。
+- 最小外部`SpektraStreamingResearchV1`方案只为PROPOSED_NOT_IMPLEMENTED，不是上游或产品能力，无新streaming源码/二进制/像素通过声明。任何实现须新版本/源码与DLLhash/小whole输出exact/halo与frame/global参数/取消释放及full逐行结果再验。
+
+任意grain_seed仍不支持、alpha丢弃opaque、RGBA16最终clamp非HDR、取消节点粒度、result独立所有权与stride/串行session限制不变。曲线/BT已闭合不重跑，WB冻结，D80014/家庭GPU/有效肤色强高光缺口保留。UI/模型/任务桥/默认链不改，仍“负片/印相模拟·研究中”、不注册。LightTable非商业条款不替代Spektra代码/逐资源许可，技术隔离验证继续、产品分发未批准。

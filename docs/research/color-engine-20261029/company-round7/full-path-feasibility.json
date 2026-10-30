@@ -1,0 +1,62 @@
+{
+  "version": "SingleFullPathFeasibilityV1",
+  "route": "A",
+  "film": "Portra400/PortraEndura",
+  "input": [
+    5496,
+    3670
+  ],
+  "pixels": 20170320,
+  "inputSha256": "77f49b1580eb55c9274278d1019adebec098ff2a3d630af0fc5b994d4b6041c3",
+  "boundedInputScan": {
+    "pixelSha256": "cd47a182e9814bc45c4130b9b90fc45bca49a06923958df739180699ac0f50f9",
+    "min": [
+      0.0,
+      -8.433867151325103e-07,
+      -2.449454086672631e-06
+    ],
+    "max": [
+      0.2713578939437866,
+      0.17672018706798553,
+      0.08969578146934509
+    ],
+    "negative": [
+      0,
+      942981,
+      590359
+    ],
+    "aboveOne": [
+      0,
+      0,
+      0
+    ],
+    "blockRows": 16,
+    "maximumFiniteBooleanBytes": 263808
+  },
+  "currentGpuSnapshot": "NVIDIA GeForce GTX 1650, 572.70, 4096, 2635, 1301",
+  "researchCapBytes": 2147483648,
+  "reservedFreeBytes": 268435456,
+  "currentAdmissionBytes": 1095761920,
+  "sourceBasedHoldings": {
+    "fullSourceDeviceLocal": 242043840,
+    "cachedNegativeDeviceLocal": 242043840,
+    "atLeastTwoRetainedFullRgbPlanes": 484087680,
+    "gpuRgba16": 161362560,
+    "requiredDeviceLocalLowerBound56n": 1129537920,
+    "observedThreeRetainedRgbPoolFullPlaneFloorPlusPersistentAndRgba68n": 1371581760,
+    "uploadAndReadStagingHostVisibleMinimumAtFull": 484087680,
+    "cpuOwnedPublicResult": 161362560,
+    "callerInputFileMapping": 242043840
+  },
+  "measurementExtrapolation": {
+    "wholeDeviceLocal72nPlusFixed": 1453063040,
+    "stripeDeviceLocal68nPlusFixedAndBands": "68*n + at least retained band buffers; measured1200x801 stripe larger than whole",
+    "notClaimedAsExact20MPPeak": true
+  },
+  "decision": "REFUSED_WITHOUT_FULL_RENDER",
+  "fullEngineCreateCalls": 0,
+  "fullOpenUploadCalls": 0,
+  "fullRenderCalls": 0,
+  "why": "Public ABI/full-plane assembling/retained allocator necessary56n exceeds current free-minus-reserve; measured ordinary path materially larger. No cap increase, no program closure, no silent resize, no six repeated full submissions.",
+  "streamingProposal": "See STREAMING_INTERFACE_PROPOSAL_ROUND7.md; NOT_IMPLEMENTED_NOT_UPSTREAM_CAPABILITY"
+}
