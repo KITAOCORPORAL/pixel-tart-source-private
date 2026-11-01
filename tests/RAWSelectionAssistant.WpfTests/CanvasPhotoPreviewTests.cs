@@ -61,4 +61,47 @@ namespace RAWSelectionAssistant.WpfTests;
   EnsureTestApplication();Directory.CreateDirectory(Root);var path=Path.Combine(Path.GetDirectoryName(Inputs()[0])!,"photo24-420.jpg");Assert.IsTrue(File.Exists(path));using var stream=File.OpenRead(path);var header=BitmapDecoder.Create(stream,BitmapCreateOptions.IgnoreColorProfile,BitmapCacheOption.OnDemand).Frames[0];var b=CanvasJpegNativePreview.Read(stream,header.PixelWidth,header.PixelHeight,200L*1024*1024,CancellationToken.None,out var w,out var h);Assert.AreEqual(1500,w);Assert.AreEqual(1000,h);var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(b));using(var output=File.Create(Path.Combine(Root,"photo24-420-native-LOCAL-ONLY.png")))encoder.Save(output);var doc=new CanvasDocument{PixelWidth=1920,PixelHeight=1080};doc=doc with{Objects=[new(){CanvasId=doc.CanvasId,SourcePath=path,ContentHash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path))),X=20,Y=80,Width=1500,Height=900,Rotation=7,Opacity=.8}]};var render=CanvasPixelRenderer.RenderPhotoPreview(doc,out var metrics);Assert.AreEqual(1,metrics.NativeJpegDecodes);Assert.AreEqual(0,metrics.RetainedCacheBytes);File.WriteAllText(Path.Combine(Root,"CHROMA420.json"),JsonSerializer.Serialize(new{sourceSha256=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path))),width=header.PixelWidth,height=header.PixelHeight,w,h,metrics}));await Task.CompletedTask;
  });
 
+
+ [TestMethod]
+ public Task RepeatedLargePhotoTasksReleaseCacheAndSourceLeases()=>RunSta(async()=>
+ {
+  EnsureTestApplication();
+  Directory.CreateDirectory(Root);
+  var doc=new CanvasDocument{PixelWidth=1920,PixelHeight=1080};
+  var path=Inputs()[0];
+  var hash=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path)));
+  var photo=new CanvasObject{CanvasId=doc.CanvasId,SourcePath=path,ContentHash=hash,Width=1400,Height=900,X=80,Y=50,Rotation=7,Opacity=.8};
+  doc=doc with{Objects=[photo,photo with{ObjectId=Guid.NewGuid(),X=450,Y=200}]};
+  var rows=new List<object>();
+  string? expectedHash=null;
+  GC.Collect();GC.WaitForPendingFinalizers();GC.Collect();
+  using(var initial=Process.GetCurrentProcess())
+   rows.Add(new{phase="before",ws=initial.WorkingSet64,privateBytes=initial.PrivateMemorySize64,managedBytes=GC.GetTotalMemory(false)});
+  for(int n=0;n<8;n++)
+  {
+   var sample=RenderAndReleasePhotoTask(doc);
+   expectedHash??=sample.Hash;
+   Assert.AreEqual(expectedHash,sample.Hash,"Same frozen input must keep identical PNG bytes across fresh tasks");
+   Assert.AreEqual(0,sample.Metrics.RetainedCacheBytes);
+   Assert.AreEqual(1,sample.Metrics.SourceDecodes);
+   Assert.AreEqual(1,sample.Metrics.CacheHits);
+   Assert.IsTrue(sample.Metrics.PeakCacheBytes<=32L*1024*1024);
+   GC.Collect();GC.WaitForPendingFinalizers();GC.Collect();
+   // The rendered bitmap and native decoder must no longer retain the original source handle.
+   using(var exclusive=new FileStream(path,FileMode.Open,FileAccess.Read,FileShare.None))
+    Assert.IsTrue(exclusive.Length>0);
+   using var process=Process.GetCurrentProcess();
+   rows.Add(new{phase="after-task",n,sample.ElapsedMs,sample.Hash,sample.Metrics,ws=process.WorkingSet64,privateBytes=process.PrivateMemorySize64,managedBytes=GC.GetTotalMemory(false)});
+  }
+  File.WriteAllText(Path.Combine(Root,"RELEASE_AFTER_GC.json"),JsonSerializer.Serialize(new{rows,scope="Eight fresh tasks; output bytes not retained; full GC only for lifetime diagnosis, not admission; source exclusive-open verified after each task; no process-memory cap assertion"},new JsonSerializerOptions{WriteIndented=true}));
+  await Task.CompletedTask;
+ });
+ [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+ static (string Hash,CanvasPhotoPreviewMetrics Metrics,double ElapsedMs) RenderAndReleasePhotoTask(CanvasDocument doc)
+ {
+  var clock=Stopwatch.StartNew();
+  var bitmap=CanvasPixelRenderer.RenderPhotoPreview(doc,out var metrics);
+  var png=CanvasPixelRenderer.EncodePngBase64(bitmap);
+  return(Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(Convert.FromBase64String(png))),metrics,clock.Elapsed.TotalMilliseconds);
+ }
 }
