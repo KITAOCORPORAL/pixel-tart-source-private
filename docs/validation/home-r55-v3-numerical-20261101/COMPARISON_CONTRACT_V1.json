@@ -1,0 +1,70 @@
+{
+  "id": "CanvasV3.StageDiagnosis.1",
+  "status": "FROZEN_BEFORE_HOLDOUT_RUN",
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "purpose": "Cause diagnosis and stage attribution only; NOT a replacement acceptance threshold for the old photograph comparisons",
+  "baseline": "17e9788f37926e52faeca2dd599b8b9efbbef2cf",
+  "product": "146c0fd254de387ad5ccb9570cff6c54697389d4",
+  "unchangedOldGates": {
+    "ffmpeg": {
+      "max": 24,
+      "mean": 1.5,
+      "p95": 3
+    },
+    "lcms": {
+      "max": 1
+    },
+    "oldFailuresMustRemain": true
+  },
+  "newRelations": [
+    {
+      "id": "JPEG-IDCT-AREA",
+      "expectation": "Neutral DC=128; horizontalAC3 holdout WIC reduced2x2 follows average of four IDCT samples within1 code, FFmpeg lowres2 discardsAC3 exactly. Comparison proves distinct kernels, not general JPEG byte equivalence",
+      "tolerance": 1
+    },
+    {
+      "id": "JPEG-SCALE-GRID",
+      "expectation": "4:2:0 native factor4 WIC default Cb/Cr dimension equals output; PreserveSubsampling Cb/Cr are half output; FF lowres2 Cb/Cr half output. Channel order and full-range601 independent reconstruction <=1 where WIC default planar is full output",
+      "tolerance": 1
+    },
+    {
+      "id": "ICC-SYSTEM-EXACT",
+      "expectation": "WIC Bgr24->Bgra32 ICC stage equals explicit MSCMS BEST_MODE BM_xRGBQUADS BGRA 8-bit pipeline with same original profile byte digests. Exact0, including alpha compared separately",
+      "tolerance": 0
+    },
+    {
+      "id": "ICC-ORACLE-DOMAIN",
+      "expectation": "Declared matrix/TRC profile oracle agrees with NOOPTIMIZE/float LCMS quantized output <=1; WIC cross-engine difference is measured with old <=1 test still FAIL if exceeded; no general profile approval",
+      "tolerance": 1
+    },
+    {
+      "id": "EXIF-ONLY",
+      "expectation": "Orientation6 equals exact NumPy clockwise90 permutation of already ICC-converted pixels",
+      "tolerance": 0
+    },
+    {
+      "id": "PRODUCT-COMPAT",
+      "expectation": "No src change, no republish; all old package files/hashes and savedv1/v2/v3 bytes remain unchanged"
+    }
+  ],
+  "heldoutFixtures": [
+    {
+      "name": "hold-y-ac3-96",
+      "type": "4096x64 baseline444 coefficient u3=96, DC128, quant1"
+    },
+    {
+      "name": "hold-cb-ac3-64",
+      "type": "4096x64 baseline420 Cb u3=64, DC128, quant1"
+    },
+    {
+      "name": "hold-icc-dark-grid",
+      "type": "17x23 deterministic RGB modular arithmetic + gray ramps; exact frozen original ICC bytes; orientation1"
+    },
+    {
+      "name": "hold-icc-rotated",
+      "type": "23x17 deterministic RGB modular arithmetic TIFF; same sourceICC bytes; orientation6 generated not natural"
+    }
+  ],
+  "forbidden": "No product full-resolution decode, no budget raise, no changed old thresholds, no original-photo replacement, no sourceICC or targetICC substitution"
+}
