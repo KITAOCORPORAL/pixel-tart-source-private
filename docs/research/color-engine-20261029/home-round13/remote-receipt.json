@@ -1,0 +1,14 @@
+{
+  "version": "Round13RemoteReceiptV1",
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "branch": "research/color-engine-home-20261030",
+  "implementationLocalHead": "ec53effe66c64590b26b3d99ee3469a28af0cffe",
+  "implementationRemoteHead": "ec53effe66c64590b26b3d99ee3469a28af0cffe",
+  "push": "SUCCESS",
+  "readback": "MATCH",
+  "worktreeBeforeReceipt": "",
+  "protectedPathsDiff": "",
+  "candidateStatus": "KEEP_FROZEN_RESEARCH_ONLY_NOT_ADMITTED",
+  "note": "This later receipt commit cannot embed its own future commit hash; finalHEAD returned after its own push/readback."
+}

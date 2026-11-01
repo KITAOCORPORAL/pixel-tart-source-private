@@ -6,6 +6,8 @@
 
 结论KEEP_FROZEN_RESEARCH_ONLY / NOT_ADMITTED：NEX5R下冲/零值消除，但阶跃/脉冲锐化完全退回原输入，正弦细节增益削弱、噪声仍1.248×，自然梯度增量仅保留44.7%–67.0%，部分色相/肤色响应变化。不拿零值少判胜，不在本轮调参/另立第二候选。仅ratio1，真实preview尺度/独立验证/人工偏好/产品链/许可仍OPEN。R6仅整理有效曝光域与hidden defaults，不改像素。公司NOT_RUN（home5060Ti）。
 
+实现/证据提交 ec53effe66c64590b26b3d99ee3469a28af0cffe 已正常推送并远端读回匹配；收据home-round13/remote-receipt.json，最终HEAD另读回。
+
 权威HOME_ROUND13_UNSHARP_REPORT、CAPABILITIES_HOME_ROUND13_V1、UNSHARP_NODE_COMPARISON_ROUND13与home-round13。自然A/B/匿名图、外部源码/候选shader/runner及binary留N:/pixart/ColorResearchHome-20261030/round13-unsharp-v1。下一步先人工匿名偏好和独立验证目标，不重复本批/20MP；若改数学另显式版本并预冻结门槛。Git交接见本批remote-receipt（生成后）及最终读回。
 
 ---
