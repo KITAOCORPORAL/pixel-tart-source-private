@@ -1,0 +1,20 @@
+test_changed_bytes (__main__.SavedStageDataTests.test_changed_bytes) ... ok
+test_existing_report_refused_before_reading_data (__main__.SavedStageDataTests.test_existing_report_refused_before_reading_data) ... ok
+test_resealed_nan_rejected (__main__.SavedStageDataTests.test_resealed_nan_rejected) ... ok
+test_resealed_truncated_rejected (__main__.SavedStageDataTests.test_resealed_truncated_rejected) ... ok
+test_valid_data (__main__.SavedStageDataTests.test_valid_data) ... ok
+test_wrong_statistics (__main__.SavedStageDataTests.test_wrong_statistics) ... ok
+test_duplicate_photo (__main__.SavedStageManifestTests.test_duplicate_photo) ... ok
+test_duplicate_stage (__main__.SavedStageManifestTests.test_duplicate_stage) ... ok
+test_false_trace (__main__.SavedStageManifestTests.test_false_trace) ... ok
+test_missing_photo (__main__.SavedStageManifestTests.test_missing_photo) ... ok
+test_missing_stage (__main__.SavedStageManifestTests.test_missing_stage) ... ok
+test_nonfinite_range (__main__.SavedStageManifestTests.test_nonfinite_range) ... ok
+test_recorded_nonfinite (__main__.SavedStageManifestTests.test_recorded_nonfinite) ... ok
+test_valid_72_stage_manifest (__main__.SavedStageManifestTests.test_valid_72_stage_manifest) ... ok
+test_wrong_shape (__main__.SavedStageManifestTests.test_wrong_shape) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.293s
+
+OK

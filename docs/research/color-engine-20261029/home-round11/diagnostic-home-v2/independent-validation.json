@@ -1,0 +1,26 @@
+{
+  "version": "PackageIndependentValidationV2",
+  "deviceRole": "home",
+  "dataChecksRecomputed": true,
+  "cases": [
+    {
+      "id": "gray-boundaries",
+      "sameDeviceWholeStreamDataExact": true,
+      "traceFinalDataExact": true,
+      "stageFilesValidated": 48
+    },
+    {
+      "id": "saturated-colors",
+      "sameDeviceWholeStreamDataExact": true,
+      "traceFinalDataExact": true,
+      "stageFilesValidated": 48
+    },
+    {
+      "id": "edge-small",
+      "sameDeviceWholeStreamDataExact": true,
+      "traceFinalDataExact": true,
+      "stageFilesValidated": 48
+    }
+  ],
+  "legacySealedRound10": false
+}

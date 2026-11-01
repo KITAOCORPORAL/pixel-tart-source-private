@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "renderCalls": 0,
+  "rawDecodeCalls": 0,
+  "pythonSyntaxFiles": 24,
+  "results": [
+    {
+      "name": "saved-audit-tests-completion",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-O",
+        "tools/color-round11/test_saved_outputs.py",
+        "-v"
+      ]
+    },
+    {
+      "name": "saved-natural-audit-completion",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-O",
+        "tools/color-round11/verify_saved_outputs.py",
+        "--evidence",
+        "docs/research/color-engine-20261029/home-round11",
+        "--inputs",
+        "N:/pixart/ColorResearchHome-20261030/round11/natural-inputs-v1",
+        "--outputs",
+        "N:/pixart/ColorResearchHome-20261030/round11/natural-coverage-run1",
+        "--stages",
+        "N:/pixart/ColorResearchHome-20261030/round11/natural-stage-finite-v1",
+        "--output",
+        "N:\\pixart\\guangjing-color-engine-home-20261030\\docs\\research\\color-engine-20261029\\home-round11\\resume-20261101\\saved-natural-audit.json"
+      ]
+    },
+    {
+      "name": "sealed-report-completion",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-O",
+        "tools/color-round11/verify_round11.py",
+        "docs/research/color-engine-20261029/home-round11"
+      ]
+    }
+  ],
+  "priorFailure": "checks-final.json saved-natural-audit: assumed per-photo sequence; corrected to measured process-global counter without altering pixels or prior files"
+}

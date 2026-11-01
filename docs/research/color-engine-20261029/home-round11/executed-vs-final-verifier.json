@@ -1,0 +1,62 @@
+{
+  "version": "Round11ExecutedVsFinalVerifierV1",
+  "purpose": "preserve actual execution snapshot without relabeling final verifier changes as pre-run bytes",
+  "runnerSourceStillMatches": true,
+  "records": [
+    {
+      "path": "tools/color-round11/diagnostic/collect_build_identity.py",
+      "executedSnapshotHash": "9ed5ead6318a659869773d4bf6951bcaae381d386aeeaad89208322ce3c087ce",
+      "finalSourceHash": "9ed5ead6318a659869773d4bf6951bcaae381d386aeeaad89208322ce3c087ce",
+      "sameBytes": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/compare_packages.py",
+      "executedSnapshotHash": "a4fd185d25a5056da1dbc6d75c428fc8dac437c89939aeca3e94ed7f76908c77",
+      "finalSourceHash": "a4fd185d25a5056da1dbc6d75c428fc8dac437c89939aeca3e94ed7f76908c77",
+      "sameBytes": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/compare_rows.py",
+      "executedSnapshotHash": "2ca1420e9e4a3a4814ebab6366cfcac749b9ab3e9c976a190009c2e12a273bcb",
+      "finalSourceHash": "2ca1420e9e4a3a4814ebab6366cfcac749b9ab3e9c976a190009c2e12a273bcb",
+      "sameBytes": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/generate_inputs.py",
+      "executedSnapshotHash": "fbe856fcb8e1ea84642a2b4af563401df6f05ea32e345a9e45836964a4c3e2cb",
+      "finalSourceHash": "fbe856fcb8e1ea84642a2b4af563401df6f05ea32e345a9e45836964a4c3e2cb",
+      "sameBytes": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/package_validation.py",
+      "executedSnapshotHash": "ea29697f220d07773a4d20a9ac984def025c6675aee6e0a74a250fa6e0c0847e",
+      "finalSourceHash": "bdf3eee954e5bd9a202a243f09ed9b8e47b575bc2109044966435e74d516d538",
+      "sameBytes": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/run_diagnostic.py",
+      "executedSnapshotHash": "c03756e58095ae72cf8760a9667c6816532f0ea7b8a74045814085bb66118f07",
+      "finalSourceHash": "c03756e58095ae72cf8760a9667c6816532f0ea7b8a74045814085bb66118f07",
+      "sameBytes": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/test_independent_validation.py",
+      "executedSnapshotHash": "8d0d3b0d2a5b0a6a320661b6cda27053c67cdebeb65dcb863736fc2b28e4d589",
+      "finalSourceHash": "9935175bc18516290f8f42296830d1300f09221da024d64daf5de64c36456658",
+      "sameBytes": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/test_two_side_compare.py",
+      "executedSnapshotHash": "f5f3b8b811f496095db74f75a5ce30f4eb05b9a9feb4b83ec41738c4bcf37395",
+      "finalSourceHash": "f5f3b8b811f496095db74f75a5ce30f4eb05b9a9feb4b83ec41738c4bcf37395",
+      "sameBytes": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/verify_run.py",
+      "executedSnapshotHash": "2cf3b2dd136161691151792c8d20c08c87bb31ca9f8746b67e33b4a5d0be6f12",
+      "finalSourceHash": "2cf3b2dd136161691151792c8d20c08c87bb31ca9f8746b67e33b4a5d0be6f12",
+      "sameBytes": true
+    }
+  ],
+  "finalVerification": "shared validator final code executed independently after rendering; output data gates recomputed, not old recorded booleans"
+}

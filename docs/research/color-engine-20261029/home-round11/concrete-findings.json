@@ -1,0 +1,185 @@
+{
+  "version": "NaturalConcreteFindingsV1",
+  "endpointRecords": [
+    {
+      "id": "canon600d",
+      "firstCleanInputOutputZeroProxyXY": [
+        761,
+        67
+      ],
+      "outputAnyZeroPixels": 308,
+      "outputZeroWithAllProxyChannelsStrictInteriorAndNoPriorEndpointFootprint": 308,
+      "interpretation": "Processing endpoint evidence after admission, not proof of sensor clipping or which internal film node caused it; input standard ProPhoto D50 interior and underlying final-master endpoint-free support only."
+    },
+    {
+      "id": "canon6d",
+      "firstCleanInputOutputZeroProxyXY": [
+        418,
+        9
+      ],
+      "outputAnyZeroPixels": 1088,
+      "outputZeroWithAllProxyChannelsStrictInteriorAndNoPriorEndpointFootprint": 1018,
+      "interpretation": "Processing endpoint evidence after admission, not proof of sensor clipping or which internal film node caused it; input standard ProPhoto D50 interior and underlying final-master endpoint-free support only."
+    },
+    {
+      "id": "canon5d3",
+      "firstCleanInputOutputZeroProxyXY": [
+        199,
+        0
+      ],
+      "outputAnyZeroPixels": 3338,
+      "outputZeroWithAllProxyChannelsStrictInteriorAndNoPriorEndpointFootprint": 446,
+      "interpretation": "Processing endpoint evidence after admission, not proof of sensor clipping or which internal film node caused it; input standard ProPhoto D50 interior and underlying final-master endpoint-free support only."
+    },
+    {
+      "id": "nikond5100",
+      "firstCleanInputOutputZeroProxyXY": [
+        311,
+        143
+      ],
+      "outputAnyZeroPixels": 350,
+      "outputZeroWithAllProxyChannelsStrictInteriorAndNoPriorEndpointFootprint": 350,
+      "interpretation": "Processing endpoint evidence after admission, not proof of sensor clipping or which internal film node caused it; input standard ProPhoto D50 interior and underlying final-master endpoint-free support only."
+    },
+    {
+      "id": "sonynex5r",
+      "firstCleanInputOutputZeroProxyXY": [
+        1051,
+        2
+      ],
+      "outputAnyZeroPixels": 11563,
+      "outputZeroWithAllProxyChannelsStrictInteriorAndNoPriorEndpointFootprint": 11562,
+      "interpretation": "Processing endpoint evidence after admission, not proof of sensor clipping or which internal film node caused it; input standard ProPhoto D50 interior and underlying final-master endpoint-free support only."
+    },
+    {
+      "id": "canonr6",
+      "firstCleanInputOutputZeroProxyXY": null,
+      "outputAnyZeroPixels": 0,
+      "outputZeroWithAllProxyChannelsStrictInteriorAndNoPriorEndpointFootprint": 0,
+      "interpretation": "Processing endpoint evidence after admission, not proof of sensor clipping or which internal film node caused it; input standard ProPhoto D50 interior and underlying final-master endpoint-free support only."
+    }
+  ],
+  "relativeRoi": [
+    {
+      "id": "canonr6",
+      "label": "vehicle_shadow",
+      "boxXYWH": [
+        0,
+        500,
+        300,
+        250
+      ],
+      "linearYBeforeQuantiles": [
+        4.446582575449389e-06,
+        0.00016492908779850712,
+        0.0005029390090568301,
+        0.01450014556284376,
+        0.04153133964178295
+      ],
+      "linearYAfterQuantiles": [
+        0.0033755428267699316,
+        0.004259119091833083,
+        0.004264334360436611,
+        0.00582668194437974,
+        0.018202011568165928
+      ],
+      "linearYStdBefore": 0.00470563350282087,
+      "linearYStdAfter": 0.0006195546080390833,
+      "stdRatio": 0.13166231659726177,
+      "medianYRatio": 8.478830004523983,
+      "meanDisplayRgbBefore": [
+        0.029582099508012077,
+        0.022231399244650445,
+        0.024728495962512
+      ],
+      "meanDisplayRgbAfter": [
+        0.05242650919348274,
+        0.05513596439557314,
+        0.06654264703347136
+      ],
+      "domain": "display sRGB EOTF luma comparison; not film density or physical accuracy",
+      "roiSelection": "manual development review after seeing images; not holdout or optimization target"
+    },
+    {
+      "id": "nikond5100",
+      "label": "skin_arm_small",
+      "boxXYWH": [
+        310,
+        390,
+        35,
+        60
+      ],
+      "linearYBeforeQuantiles": [
+        0.009878074357241964,
+        0.03743918226191944,
+        0.09125992192144869,
+        0.1305639570756798,
+        0.14004571401048013
+      ],
+      "linearYAfterQuantiles": [
+        0.004820562547342875,
+        0.014024914865792514,
+        0.060638867901598406,
+        0.10778377834582308,
+        0.1187383057913198
+      ],
+      "linearYStdBefore": 0.029995880382738017,
+      "linearYStdAfter": 0.030186313061887744,
+      "stdRatio": 1.0063486277688758,
+      "medianYRatio": 0.6644632893045084,
+      "meanDisplayRgbBefore": [
+        0.3818774867838337,
+        0.3107892097266657,
+        0.2745985665278775
+      ],
+      "meanDisplayRgbAfter": [
+        0.31821453458166815,
+        0.25204085058147796,
+        0.22328821749192682
+      ],
+      "domain": "display sRGB EOTF luma comparison; not film density or physical accuracy",
+      "roiSelection": "manual development review after seeing images; not holdout or optimization target"
+    },
+    {
+      "id": "sonynex5r",
+      "label": "flower_detail",
+      "boxXYWH": [
+        270,
+        400,
+        300,
+        250
+      ],
+      "linearYBeforeQuantiles": [
+        0.0059719149894766265,
+        0.017966192504439333,
+        0.10870553347021547,
+        0.2959277340233732,
+        0.9079677027172449
+      ],
+      "linearYAfterQuantiles": [
+        0.0,
+        0.005069981679197041,
+        0.07400551974672495,
+        0.32412708426161246,
+        0.7071394255641712
+      ],
+      "linearYStdBefore": 0.13158271257887635,
+      "linearYStdAfter": 0.125718557252557,
+      "stdRatio": 0.9554336948115117,
+      "medianYRatio": 0.6807888925636147,
+      "meanDisplayRgbBefore": [
+        0.35171445289902387,
+        0.3672721911904216,
+        0.34477689830730357
+      ],
+      "meanDisplayRgbAfter": [
+        0.29930125439331917,
+        0.3124994377559194,
+        0.3103385441876034
+      ],
+      "domain": "display sRGB EOTF luma comparison; not film density or physical accuracy",
+      "roiSelection": "manual development review after seeing images; not holdout or optimization target"
+    }
+  ],
+  "algorithmChanged": false
+}

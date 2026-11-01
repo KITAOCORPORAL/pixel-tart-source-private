@@ -1,0 +1,1428 @@
+{
+  "version": "Round11PublicationScopeAuditV1",
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "scope": "pre-stage explicit path/type audit and common embedded credential patterns, not a proof of absence of all sensitive text",
+  "fileCount": 283,
+  "totalBytes": 3030425,
+  "publicSyntheticBinaryFiles": 173,
+  "violations": [],
+  "suspectCredentialFiles": [],
+  "files": [
+    {
+      "path": "docs/research/color-engine-20261029/CAPABILITIES_HOME_ROUND11_V1.md",
+      "bytes": 2837,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/HOME_ROUND11_REPORT.md",
+      "bytes": 11648,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/LICENSE_HOME_ROUND11.md",
+      "bytes": 1267,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/REPRODUCE_HOME_ROUND11.md",
+      "bytes": 7802,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/.gitattributes",
+      "bytes": 172,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/company-status.json",
+      "bytes": 781,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/concrete-findings.json",
+      "bytes": 6516,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/coverage-ledger.json",
+      "bytes": 7608,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-build-before-run.json",
+      "bytes": 148446,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/bt-decode.f32",
+      "bytes": 52,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/bt-input.f32",
+      "bytes": 52,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/build-provenance.json",
+      "bytes": 148446,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/input.npy",
+      "bytes": 9452,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0108-film_scale_and_expose-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0109-film_boost-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0110-film_overscan-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0111-film_blurs-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0112-film_log_and_curves-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0113-film_couplers-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0114-film_grain-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0115-film_scale_and_expose-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0116-film_boost-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0117-film_overscan-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0118-film_blurs-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0119-film_log_and_curves-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0120-film_couplers-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0121-film_grain-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0122-film_scale_and_expose-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0123-film_boost-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0124-film_overscan-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0125-film_blurs-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0126-film_log_and_curves-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0127-film_couplers-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0128-film_grain-7-37-3.f32",
+      "bytes": 3108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0129-print_spectral-9-37-3.f32",
+      "bytes": 3996,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0130-print_glare-9-37-3.f32",
+      "bytes": 3996,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0131-print_linear-9-37-3.f32",
+      "bytes": 3996,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0132-print_scan_finish-9-37-3.f32",
+      "bytes": 3996,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0133-print_output-9-37-3.f32",
+      "bytes": 3996,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0134-print_spectral-11-37-3.f32",
+      "bytes": 4884,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0135-print_glare-11-37-3.f32",
+      "bytes": 4884,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0136-print_linear-11-37-3.f32",
+      "bytes": 4884,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0137-print_scan_finish-11-37-3.f32",
+      "bytes": 4884,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0138-print_output-11-37-3.f32",
+      "bytes": 4884,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0139-print_spectral-9-37-3.f32",
+      "bytes": 3996,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0140-print_glare-9-37-3.f32",
+      "bytes": 3996,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0141-print_linear-9-37-3.f32",
+      "bytes": 3996,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0142-print_scan_finish-9-37-3.f32",
+      "bytes": 3996,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-stream/0143-print_output-9-37-3.f32",
+      "bytes": 3996,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-whole/0096-film_scale_and_expose-21-37-3.f32",
+      "bytes": 9324,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-whole/0097-film_boost-21-37-3.f32",
+      "bytes": 9324,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-whole/0098-film_overscan-21-37-3.f32",
+      "bytes": 9324,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-whole/0099-film_blurs-21-37-3.f32",
+      "bytes": 9324,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-whole/0100-film_log_and_curves-21-37-3.f32",
+      "bytes": 9324,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-whole/0101-film_couplers-21-37-3.f32",
+      "bytes": 9324,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-whole/0102-film_grain-21-37-3.f32",
+      "bytes": 9324,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-whole/0103-print_spectral-21-37-3.f32",
+      "bytes": 9324,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-whole/0104-print_glare-21-37-3.f32",
+      "bytes": 9324,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-whole/0105-print_linear-21-37-3.f32",
+      "bytes": 9324,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-whole/0106-print_scan_finish-21-37-3.f32",
+      "bytes": 9324,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stages-whole/0107-print_output-21-37-3.f32",
+      "bytes": 9324,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stream-r1.rgba16",
+      "bytes": 6216,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stream-r17.rgba16",
+      "bytes": 6216,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stream-r64.rgba16",
+      "bytes": 6216,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stream-r7.rgba16",
+      "bytes": 6216,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/stream-traced-r7.rgba16",
+      "bytes": 6216,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/whole-traced.rgba16",
+      "bytes": 6216,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/edge-small/whole.rgba16",
+      "bytes": 6216,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/execution-before-render.json",
+      "bytes": 151117,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/input.npy",
+      "bytes": 6860,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0012-film_scale_and_expose-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0013-film_boost-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0014-film_overscan-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0015-film_blurs-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0016-film_log_and_curves-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0017-film_couplers-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0018-film_grain-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0019-film_scale_and_expose-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0020-film_boost-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0021-film_overscan-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0022-film_blurs-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0023-film_log_and_curves-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0024-film_couplers-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0025-film_grain-7-33-3.f32",
+      "bytes": 2772,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0026-film_scale_and_expose-3-33-3.f32",
+      "bytes": 1188,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0027-film_boost-3-33-3.f32",
+      "bytes": 1188,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0028-film_overscan-3-33-3.f32",
+      "bytes": 1188,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0029-film_blurs-3-33-3.f32",
+      "bytes": 1188,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0030-film_log_and_curves-3-33-3.f32",
+      "bytes": 1188,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0031-film_couplers-3-33-3.f32",
+      "bytes": 1188,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0032-film_grain-3-33-3.f32",
+      "bytes": 1188,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0033-print_spectral-9-33-3.f32",
+      "bytes": 3564,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0034-print_glare-9-33-3.f32",
+      "bytes": 3564,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0035-print_linear-9-33-3.f32",
+      "bytes": 3564,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0036-print_scan_finish-9-33-3.f32",
+      "bytes": 3564,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0037-print_output-9-33-3.f32",
+      "bytes": 3564,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0038-print_spectral-11-33-3.f32",
+      "bytes": 4356,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0039-print_glare-11-33-3.f32",
+      "bytes": 4356,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0040-print_linear-11-33-3.f32",
+      "bytes": 4356,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0041-print_scan_finish-11-33-3.f32",
+      "bytes": 4356,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0042-print_output-11-33-3.f32",
+      "bytes": 4356,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0043-print_spectral-5-33-3.f32",
+      "bytes": 1980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0044-print_glare-5-33-3.f32",
+      "bytes": 1980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0045-print_linear-5-33-3.f32",
+      "bytes": 1980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0046-print_scan_finish-5-33-3.f32",
+      "bytes": 1980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-stream/0047-print_output-5-33-3.f32",
+      "bytes": 1980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-whole/0000-film_scale_and_expose-17-33-3.f32",
+      "bytes": 6732,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-whole/0001-film_boost-17-33-3.f32",
+      "bytes": 6732,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-whole/0002-film_overscan-17-33-3.f32",
+      "bytes": 6732,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-whole/0003-film_blurs-17-33-3.f32",
+      "bytes": 6732,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-whole/0004-film_log_and_curves-17-33-3.f32",
+      "bytes": 6732,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-whole/0005-film_couplers-17-33-3.f32",
+      "bytes": 6732,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-whole/0006-film_grain-17-33-3.f32",
+      "bytes": 6732,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-whole/0007-print_spectral-17-33-3.f32",
+      "bytes": 6732,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-whole/0008-print_glare-17-33-3.f32",
+      "bytes": 6732,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-whole/0009-print_linear-17-33-3.f32",
+      "bytes": 6732,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-whole/0010-print_scan_finish-17-33-3.f32",
+      "bytes": 6732,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stages-whole/0011-print_output-17-33-3.f32",
+      "bytes": 6732,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stream-r1.rgba16",
+      "bytes": 4488,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stream-r17.rgba16",
+      "bytes": 4488,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stream-r64.rgba16",
+      "bytes": 4488,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stream-r7.rgba16",
+      "bytes": 4488,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/stream-traced-r7.rgba16",
+      "bytes": 4488,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/whole-traced.rgba16",
+      "bytes": 4488,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/gray-boundaries/whole.rgba16",
+      "bytes": 4488,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/independent-validation.json",
+      "bytes": 646,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/run.json",
+      "bytes": 487760,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/input.npy",
+      "bytes": 8108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0060-film_scale_and_expose-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0061-film_boost-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0062-film_overscan-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0063-film_blurs-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0064-film_log_and_curves-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0065-film_couplers-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0066-film_grain-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0067-film_scale_and_expose-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0068-film_boost-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0069-film_overscan-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0070-film_blurs-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0071-film_log_and_curves-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0072-film_couplers-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0073-film_grain-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0074-film_scale_and_expose-5-35-3.f32",
+      "bytes": 2100,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0075-film_boost-5-35-3.f32",
+      "bytes": 2100,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0076-film_overscan-5-35-3.f32",
+      "bytes": 2100,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0077-film_blurs-5-35-3.f32",
+      "bytes": 2100,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0078-film_log_and_curves-5-35-3.f32",
+      "bytes": 2100,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0079-film_couplers-5-35-3.f32",
+      "bytes": 2100,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0080-film_grain-5-35-3.f32",
+      "bytes": 2100,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0081-print_spectral-9-35-3.f32",
+      "bytes": 3780,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0082-print_glare-9-35-3.f32",
+      "bytes": 3780,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0083-print_linear-9-35-3.f32",
+      "bytes": 3780,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0084-print_scan_finish-9-35-3.f32",
+      "bytes": 3780,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0085-print_output-9-35-3.f32",
+      "bytes": 3780,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0086-print_spectral-11-35-3.f32",
+      "bytes": 4620,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0087-print_glare-11-35-3.f32",
+      "bytes": 4620,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0088-print_linear-11-35-3.f32",
+      "bytes": 4620,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0089-print_scan_finish-11-35-3.f32",
+      "bytes": 4620,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0090-print_output-11-35-3.f32",
+      "bytes": 4620,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0091-print_spectral-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0092-print_glare-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0093-print_linear-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0094-print_scan_finish-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-stream/0095-print_output-7-35-3.f32",
+      "bytes": 2940,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-whole/0048-film_scale_and_expose-19-35-3.f32",
+      "bytes": 7980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-whole/0049-film_boost-19-35-3.f32",
+      "bytes": 7980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-whole/0050-film_overscan-19-35-3.f32",
+      "bytes": 7980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-whole/0051-film_blurs-19-35-3.f32",
+      "bytes": 7980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-whole/0052-film_log_and_curves-19-35-3.f32",
+      "bytes": 7980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-whole/0053-film_couplers-19-35-3.f32",
+      "bytes": 7980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-whole/0054-film_grain-19-35-3.f32",
+      "bytes": 7980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-whole/0055-print_spectral-19-35-3.f32",
+      "bytes": 7980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-whole/0056-print_glare-19-35-3.f32",
+      "bytes": 7980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-whole/0057-print_linear-19-35-3.f32",
+      "bytes": 7980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-whole/0058-print_scan_finish-19-35-3.f32",
+      "bytes": 7980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stages-whole/0059-print_output-19-35-3.f32",
+      "bytes": 7980,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stream-r1.rgba16",
+      "bytes": 5320,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stream-r17.rgba16",
+      "bytes": 5320,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stream-r64.rgba16",
+      "bytes": 5320,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stream-r7.rgba16",
+      "bytes": 5320,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/stream-traced-r7.rgba16",
+      "bytes": 5320,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/whole-traced.rgba16",
+      "bytes": 5320,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-home-v2/saturated-colors/whole.rgba16",
+      "bytes": 5320,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/diagnostic-validation-tests.txt",
+      "bytes": 2112,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/executed-vs-final-verifier.json",
+      "bytes": 3104,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/failures-and-boundaries.json",
+      "bytes": 1437,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/final-round10-preservation.json",
+      "bytes": 3751,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/final-tool-identity.json",
+      "bytes": 3145,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/finite-trace-build.txt",
+      "bytes": 19931,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/finite-trace-configure.txt",
+      "bytes": 859,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/finite-trace-generation.json",
+      "bytes": 1107,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-build.txt",
+      "bytes": 19479,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-configure.txt",
+      "bytes": 849,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-coverage-metrics.json",
+      "bytes": 103171,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-execution-identity.json",
+      "bytes": 2245,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-generated-source.json",
+      "bytes": 1109,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-generator-console.txt",
+      "bytes": 1045,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-guard-controls.json",
+      "bytes": 962,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-input-manifest.json",
+      "bytes": 24616,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-math-preservation.json",
+      "bytes": 1024,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-numeric-review.json",
+      "bytes": 7932,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-original-entry-preservation.json",
+      "bytes": 476,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-source-reproduction.json",
+      "bytes": 1868,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/natural-stage-finite.json",
+      "bytes": 39933,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/new-home-diagnostic-run.json",
+      "bytes": 487760,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/new-home-diagnostic-validation.json",
+      "bytes": 646,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/new-home-machine-execution.json",
+      "bytes": 151117,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/oldhome-vs-newhome-validation.json",
+      "bytes": 123802,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/photo-admission-tests.txt",
+      "bytes": 351,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/photo-summary.json",
+      "bytes": 3154,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/prior-endpoint-footprint-audit.json",
+      "bytes": 3911,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/production-decode-reports.json",
+      "bytes": 33594,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/relative-roi-metrics.json",
+      "bytes": 9787,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/CLOSURE.md",
+      "bytes": 3519,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/branch-readback.json",
+      "bytes": 460,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/checks-completion.json",
+      "bytes": 1763,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/checks-final.json",
+      "bytes": 2922,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/checks-initial.json",
+      "bytes": 1617,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/frozen-stage.json",
+      "bytes": 3751,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/frozen-stage.txt",
+      "bytes": 29,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/home-package-final.txt",
+      "bytes": 648,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/independent-final.txt",
+      "bytes": 2112,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/independent-validation.txt",
+      "bytes": 2112,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/legacy-package-final.txt",
+      "bytes": 647,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/photo-admission.txt",
+      "bytes": 351,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/powershell-syntax.txt",
+      "bytes": 45,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/run_completion_checks.py",
+      "bytes": 1804,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/run_resume_checks.py",
+      "bytes": 2253,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/saved-audit-tests-completion.txt",
+      "bytes": 1546,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/saved-audit-tests.txt",
+      "bytes": 1433,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/saved-natural-audit-completion.txt",
+      "bytes": 101,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/saved-natural-audit.json",
+      "bytes": 29614,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/saved-natural-audit.txt",
+      "bytes": 1423,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/sealed-report-completion.txt",
+      "bytes": 205,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/sealed-report-final.txt",
+      "bytes": 205,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/sealed-report.txt",
+      "bytes": 139,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/tool-identity.json",
+      "bytes": 9277,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/two-side-cli.txt",
+      "bytes": 275,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/resume-20261101/two-side-final.txt",
+      "bytes": 512,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/round10-preservation.json",
+      "bytes": 3337,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/shared-validator-new-home.txt",
+      "bytes": 648,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/shared-validator-sealed-round10.txt",
+      "bytes": 647,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/two-side-cli-tests.txt",
+      "bytes": 275,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/verification.txt",
+      "bytes": 139,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "docs/research/color-engine-20261029/home-round11/visual-review.json",
+      "bytes": 3809,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/.gitattributes",
+      "bytes": 390,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/.gitignore",
+      "bytes": 94,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/README.md",
+      "bytes": 4596,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/audit_prior_endpoints.py",
+      "bytes": 2194,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/audit_stage_finite.py",
+      "bytes": 2979,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/concrete_findings.py",
+      "bytes": 2652,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/README.md",
+      "bytes": 5146,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/collect_build_identity.py",
+      "bytes": 3171,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/compare_packages.py",
+      "bytes": 1930,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/compare_rows.py",
+      "bytes": 2735,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/expected-resources.json",
+      "bytes": 7548,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/fixtures/edge-small.npy",
+      "bytes": 9452,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/fixtures/fixtures.json",
+      "bytes": 2471,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/fixtures/gray-boundaries.npy",
+      "bytes": 6860,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/fixtures/saturated-colors.npy",
+      "bytes": 8108,
+      "publicSyntheticBinary": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/generate_inputs.py",
+      "bytes": 2571,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/package_validation.py",
+      "bytes": 10236,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/resolved-portraA.json",
+      "bytes": 3086,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/run_company.ps1",
+      "bytes": 1863,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/run_diagnostic.py",
+      "bytes": 12244,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/test_independent_validation.py",
+      "bytes": 5995,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/test_two_side_compare.py",
+      "bytes": 2891,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/verify_run.py",
+      "bytes": 387,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/generate_natural_backend.py",
+      "bytes": 7667,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/inventory_natural.py",
+      "bytes": 2163,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/photo-preparation/PhotoPrepare.csproj",
+      "bytes": 338,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/photo-preparation/Program.cs",
+      "bytes": 6570,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/photo-preparation/sources-v1.json",
+      "bytes": 3061,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/photo_numeric_review.py",
+      "bytes": 1983,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/prepare_photos.py",
+      "bytes": 4415,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/review_photos.py",
+      "bytes": 2736,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/run_photos.py",
+      "bytes": 9661,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/test_natural_guards.py",
+      "bytes": 3211,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/test_photo_admission.py",
+      "bytes": 1004,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/test_saved_outputs.py",
+      "bytes": 4898,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/verify_frozen_stage.py",
+      "bytes": 2341,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/verify_round11.py",
+      "bytes": 2828,
+      "publicSyntheticBinary": false
+    },
+    {
+      "path": "tools/color-round11/verify_saved_outputs.py",
+      "bytes": 7053,
+      "publicSyntheticBinary": false
+    }
+  ]
+}

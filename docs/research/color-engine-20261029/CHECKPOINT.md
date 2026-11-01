@@ -1,3 +1,24 @@
+# 续接检查点：第十一批收尾（2026-11-01，Europe/Helsinki）
+
+已从原会话未提交现场接续。保留第十批冻结链、原第十一批运行和失败证据；本次仅补验证和交接，GPU/RAW/full20MP 调用均 0。43 项唯一测试通过；6 图既有像素 whole/r17/r37/trace 共18次比较0差，72阶段读回与统计通过。补齐只读审计器及阶段报告门禁，最终源码身份另存；首次全局stage编号定位错误及修复结果均保留。
+
+详细结果：home-round11/resume-20261101/CLOSURE.md。公司实跑仍 NOT_RUN，暗部压缩/新增零值未解决，不能批准一般摄影或产品接入；下一步真实公司公开小包诊断，然后按 POLICY 另立暗部问题候选。Git封存状态见同目录 git-receipt.json（实际生成后才代表已推送）。不重复20MP。
+
+---
+
+# 当前检查点：家庭第十一批（2026-10-30，Europe/Berlin）
+
+基线07df3c56c551c38893abc1e4b7eaefb8e4a83be4，fetch无新增。第十批固定PortraA流式20MP已通过并冻结；本轮20MP engine调用0次，旧caller链/freeze/receipt/output/failed/AUDITED_STATUS原样保留。只新tools/color-round11和home-round11证据，产品src/UI/default/PV4/5/6不改。
+
+- 诊断V2显式home/company角色，实际machine/GPU/driver/Python/tool/build身份。verify_run/compare_packages共享同一函数且左右各自实际读数据重验whole/4rows/trace0差，固定输入/shape/resolved/resource+SPIRV/stage顺序/域/finite/长度。22测试PASS，CLI坏左/坏右两个subcase均拒绝；改stream且同步重封hash不能绕过。
+- 当前仍家庭5060Ti，公司新诊断NOT_RUN；新run_company.ps1先采本机identity再role=company执行/验证。旧第十批home record不改，精确sealed V1可显式验证。
+- 6张SHA匹配授权开发照片，PortraA、最长1200、每图r17/r37全行whole/stream0差，输入finite，live0。新独立NaturalCoverageAdmission/ProxyAdmission/NaturalPhotographyStream合同及symbol精确source+proxyPixel+shape，原Canon守卫byte-prefix及实际拒绝新源都保留。
+- 已看全部前后与12同坐标局部；发现CanonR6阴影蓝灰底/细节方差压缩（Y标准差比0.132）及NEX5R11,562个无旧端点足迹的新output0像素。未改算法、没以胶片风格批准。有限肤色仅shade-lit手臂，高光旧前端满值干扰，色准/偏好/独立holdout/物理拟合NOT_RUN。
+
+本批权威HOME_ROUND11_REPORT、CAPABILITIES_HOME_ROUND11_V1、REPRODUCE_HOME_ROUND11、LICENSE_HOME_ROUND11、home-round11。私人照片/RAW/大buffer只N盘round11。下一最有价值任务：公司实际跑公开包定位跨设备首stage；另列POLICY对照后定位固定PortraA暗部/新增端点问题，不直接调曲线。技术与分发许可独立，不注册产品。
+
+---
+
 # 当前检查点：家庭第十批（2026-10-30，Europe/Berlin）
 
 接续575b0b1614010c20bcbd9bf38ac2356d6ac7467f，远端无新增。只完成最终caller一次20MP收尾＋公开合成跨设备包。**固定PortraA流式研究阶段最终caller合同已通过并冻结**，通用胶片/产品/许可仍OPEN。

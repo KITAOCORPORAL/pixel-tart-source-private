@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "scope": "read-only validators and predecode rejection; no GPU render/RAW decode",
+  "results": [
+    {
+      "name": "independent-validation",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-O",
+        "tools/color-round11/diagnostic/test_independent_validation.py",
+        "-v"
+      ]
+    },
+    {
+      "name": "two-side-cli",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-O",
+        "tools/color-round11/diagnostic/test_two_side_compare.py",
+        "-v"
+      ]
+    },
+    {
+      "name": "photo-admission",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "-O",
+        "tools/color-round11/test_photo_admission.py",
+        "-v"
+      ]
+    },
+    {
+      "name": "frozen-stage",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "tools/color-round11/verify_frozen_stage.py",
+        "--output",
+        "docs\\research\\color-engine-20261029\\home-round11\\resume-20261101\\frozen-stage.json"
+      ]
+    },
+    {
+      "name": "sealed-report",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "tools/color-round11/verify_round11.py",
+        "docs\\research\\color-engine-20261029\\home-round11"
+      ]
+    }
+  ]
+}

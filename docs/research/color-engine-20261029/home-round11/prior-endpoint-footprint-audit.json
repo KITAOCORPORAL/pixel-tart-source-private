@@ -1,0 +1,90 @@
+{
+  "version": "PriorEndpointFootprintAuditV1",
+  "method": "Pillow F BOX of zero/one indicator per source master channel; any positive endpoint coverage counts contaminated footprint",
+  "records": [
+    {
+      "id": "canon600d",
+      "shape": [
+        799,
+        1200,
+        3
+      ],
+      "priorEndpointSupportPixelFraction": 0.00902377972465582,
+      "outputZeroPixelsWithPriorSupport": 0,
+      "outputZeroPixelsWithoutAnyPriorEndpointSupport": 308,
+      "outputMaxPixelsWithoutPriorEndpointSupport": 0,
+      "allOutputZeroPixels": 308,
+      "classification": "Same proxy footprint support of production integer-master endpoints; no raw sensor claim; working-space/gamut changes can still create zeros. Independent source masks do not isolate which internal film node clipped."
+    },
+    {
+      "id": "canon6d",
+      "shape": [
+        1200,
+        801,
+        3
+      ],
+      "priorEndpointSupportPixelFraction": 0.0021296296296296298,
+      "outputZeroPixelsWithPriorSupport": 70,
+      "outputZeroPixelsWithoutAnyPriorEndpointSupport": 1018,
+      "outputMaxPixelsWithoutPriorEndpointSupport": 0,
+      "allOutputZeroPixels": 1088,
+      "classification": "Same proxy footprint support of production integer-master endpoints; no raw sensor claim; working-space/gamut changes can still create zeros. Independent source masks do not isolate which internal film node clipped."
+    },
+    {
+      "id": "canon5d3",
+      "shape": [
+        801,
+        1200,
+        3
+      ],
+      "priorEndpointSupportPixelFraction": 0.5620214315439035,
+      "outputZeroPixelsWithPriorSupport": 2892,
+      "outputZeroPixelsWithoutAnyPriorEndpointSupport": 446,
+      "outputMaxPixelsWithoutPriorEndpointSupport": 0,
+      "allOutputZeroPixels": 3338,
+      "classification": "Same proxy footprint support of production integer-master endpoints; no raw sensor claim; working-space/gamut changes can still create zeros. Independent source masks do not isolate which internal film node clipped."
+    },
+    {
+      "id": "nikond5100",
+      "shape": [
+        795,
+        1200,
+        3
+      ],
+      "priorEndpointSupportPixelFraction": 0.04865303983228512,
+      "outputZeroPixelsWithPriorSupport": 0,
+      "outputZeroPixelsWithoutAnyPriorEndpointSupport": 350,
+      "outputMaxPixelsWithoutPriorEndpointSupport": 0,
+      "allOutputZeroPixels": 350,
+      "classification": "Same proxy footprint support of production integer-master endpoints; no raw sensor claim; working-space/gamut changes can still create zeros. Independent source masks do not isolate which internal film node clipped."
+    },
+    {
+      "id": "sonynex5r",
+      "shape": [
+        799,
+        1200,
+        3
+      ],
+      "priorEndpointSupportPixelFraction": 0.05836462244472257,
+      "outputZeroPixelsWithPriorSupport": 1,
+      "outputZeroPixelsWithoutAnyPriorEndpointSupport": 11562,
+      "outputMaxPixelsWithoutPriorEndpointSupport": 0,
+      "allOutputZeroPixels": 11563,
+      "classification": "Same proxy footprint support of production integer-master endpoints; no raw sensor claim; working-space/gamut changes can still create zeros. Independent source masks do not isolate which internal film node clipped."
+    },
+    {
+      "id": "canonr6",
+      "shape": [
+        801,
+        1200,
+        3
+      ],
+      "priorEndpointSupportPixelFraction": 0.2983874323761964,
+      "outputZeroPixelsWithPriorSupport": 0,
+      "outputZeroPixelsWithoutAnyPriorEndpointSupport": 0,
+      "outputMaxPixelsWithoutPriorEndpointSupport": 0,
+      "allOutputZeroPixels": 0,
+      "classification": "Same proxy footprint support of production integer-master endpoints; no raw sensor claim; working-space/gamut changes can still create zeros. Independent source masks do not isolate which internal film node clipped."
+    }
+  ]
+}

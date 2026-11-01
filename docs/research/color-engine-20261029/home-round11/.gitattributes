@@ -1,0 +1,5 @@
+# Public synthetic artifacts only; no natural photographs or RAW in this directory.
+*.f32 -text -diff -merge
+*.rgba16 -text -diff -merge
+*.npy -text -diff -merge
+*.json -text whitespace=cr-at-eol,-blank-at-eof

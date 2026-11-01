@@ -1,0 +1,169 @@
+{
+  "version": "NaturalEndpointDarkReviewV1",
+  "records": [
+    {
+      "id": "canon600d",
+      "midDarkPixelCount": 22898,
+      "medianDarkYRatio": 0.5059135604281951,
+      "darkOutputNearConstantCodeBins": 949,
+      "note": "Natural image value histograms are not a monotonic gradient oracle; no smoothness proof or noise estimate.",
+      "conditionalEndpointCounts": {
+        "inputDisplayInteriorPixels": 958798,
+        "outputAnyZeroGivenAllInputInterior": 308
+      },
+      "spatialJumpObservations": {
+        "before": {
+          "medianAllVerticalDeltaY": 0.0007654629262201784,
+          "maxAllVerticalDeltaY": 0.15932739729449139,
+          "medianAt17rowSeams": 0.0007759610266641253,
+          "maxAt17rowSeams": 0.1254362157315183,
+          "interpretation": "actual image edges confound absolute row jumps; decisive seam test is exact whole/stream pixel comparison at all rows"
+        },
+        "after": {
+          "medianAllVerticalDeltaY": 0.00027662540452021546,
+          "maxAllVerticalDeltaY": 0.2587424130615834,
+          "medianAt17rowSeams": 0.0002921264616261923,
+          "maxAt17rowSeams": 0.20064174575464194,
+          "interpretation": "actual image edges confound absolute row jumps; decisive seam test is exact whole/stream pixel comparison at all rows"
+        }
+      }
+    },
+    {
+      "id": "canon6d",
+      "midDarkPixelCount": 145298,
+      "medianDarkYRatio": 0.7905220057087495,
+      "darkOutputNearConstantCodeBins": 5083,
+      "note": "Natural image value histograms are not a monotonic gradient oracle; no smoothness proof or noise estimate.",
+      "conditionalEndpointCounts": {
+        "inputDisplayInteriorPixels": 957015,
+        "outputAnyZeroGivenAllInputInterior": 1088
+      },
+      "spatialJumpObservations": {
+        "before": {
+          "medianAllVerticalDeltaY": 0.0014266273356713481,
+          "maxAllVerticalDeltaY": 0.3670827175345784,
+          "medianAt17rowSeams": 0.0014447724265949508,
+          "maxAt17rowSeams": 0.10623786126181772,
+          "interpretation": "actual image edges confound absolute row jumps; decisive seam test is exact whole/stream pixel comparison at all rows"
+        },
+        "after": {
+          "medianAllVerticalDeltaY": 0.0011374648754895519,
+          "maxAllVerticalDeltaY": 0.44841271510831715,
+          "medianAt17rowSeams": 0.0011593164475210884,
+          "maxAt17rowSeams": 0.14685973603194602,
+          "interpretation": "actual image edges confound absolute row jumps; decisive seam test is exact whole/stream pixel comparison at all rows"
+        }
+      }
+    },
+    {
+      "id": "canon5d3",
+      "midDarkPixelCount": 36790,
+      "medianDarkYRatio": 0.7764968977704789,
+      "darkOutputNearConstantCodeBins": 6479,
+      "note": "Natural image value histograms are not a monotonic gradient oracle; no smoothness proof or noise estimate.",
+      "conditionalEndpointCounts": {
+        "inputDisplayInteriorPixels": 951734,
+        "outputAnyZeroGivenAllInputInterior": 3337
+      },
+      "spatialJumpObservations": {
+        "before": {
+          "medianAllVerticalDeltaY": 0.005181920594322141,
+          "maxAllVerticalDeltaY": 0.4942353350668712,
+          "medianAt17rowSeams": 0.005195745642513211,
+          "maxAt17rowSeams": 0.1832034435240064,
+          "interpretation": "actual image edges confound absolute row jumps; decisive seam test is exact whole/stream pixel comparison at all rows"
+        },
+        "after": {
+          "medianAllVerticalDeltaY": 0.004658095384881387,
+          "maxAllVerticalDeltaY": 0.4081860018885365,
+          "medianAt17rowSeams": 0.004704531580737324,
+          "maxAt17rowSeams": 0.25824102532536203,
+          "interpretation": "actual image edges confound absolute row jumps; decisive seam test is exact whole/stream pixel comparison at all rows"
+        }
+      }
+    },
+    {
+      "id": "nikond5100",
+      "midDarkPixelCount": 183960,
+      "medianDarkYRatio": 0.7644749276243875,
+      "darkOutputNearConstantCodeBins": 2454,
+      "note": "Natural image value histograms are not a monotonic gradient oracle; no smoothness proof or noise estimate.",
+      "conditionalEndpointCounts": {
+        "inputDisplayInteriorPixels": 953988,
+        "outputAnyZeroGivenAllInputInterior": 350
+      },
+      "spatialJumpObservations": {
+        "before": {
+          "medianAllVerticalDeltaY": 0.0011641158121249349,
+          "maxAllVerticalDeltaY": 0.4324284197103887,
+          "medianAt17rowSeams": 0.0011588362923951566,
+          "maxAt17rowSeams": 0.320659158281819,
+          "interpretation": "actual image edges confound absolute row jumps; decisive seam test is exact whole/stream pixel comparison at all rows"
+        },
+        "after": {
+          "medianAllVerticalDeltaY": 0.0005283295863121231,
+          "maxAllVerticalDeltaY": 0.4660506650925462,
+          "medianAt17rowSeams": 0.0005157847472638697,
+          "maxAt17rowSeams": 0.3449374734094579,
+          "interpretation": "actual image edges confound absolute row jumps; decisive seam test is exact whole/stream pixel comparison at all rows"
+        }
+      }
+    },
+    {
+      "id": "sonynex5r",
+      "midDarkPixelCount": 14029,
+      "medianDarkYRatio": 0.5687454482033721,
+      "darkOutputNearConstantCodeBins": 2281,
+      "note": "Natural image value histograms are not a monotonic gradient oracle; no smoothness proof or noise estimate.",
+      "conditionalEndpointCounts": {
+        "inputDisplayInteriorPixels": 958133,
+        "outputAnyZeroGivenAllInputInterior": 11563
+      },
+      "spatialJumpObservations": {
+        "before": {
+          "medianAllVerticalDeltaY": 0.005633383146695247,
+          "maxAllVerticalDeltaY": 0.7346635779859447,
+          "medianAt17rowSeams": 0.005677350918705977,
+          "maxAt17rowSeams": 0.7346635779859447,
+          "interpretation": "actual image edges confound absolute row jumps; decisive seam test is exact whole/stream pixel comparison at all rows"
+        },
+        "after": {
+          "medianAllVerticalDeltaY": 0.004554668161822355,
+          "maxAllVerticalDeltaY": 0.7632425625419592,
+          "medianAt17rowSeams": 0.004545732494570672,
+          "maxAt17rowSeams": 0.7247979850087328,
+          "interpretation": "actual image edges confound absolute row jumps; decisive seam test is exact whole/stream pixel comparison at all rows"
+        }
+      }
+    },
+    {
+      "id": "canonr6",
+      "midDarkPixelCount": 401741,
+      "medianDarkYRatio": 5.145611057962661,
+      "darkOutputNearConstantCodeBins": 2545,
+      "note": "Natural image value histograms are not a monotonic gradient oracle; no smoothness proof or noise estimate.",
+      "conditionalEndpointCounts": {
+        "inputDisplayInteriorPixels": 961173,
+        "outputAnyZeroGivenAllInputInterior": 0
+      },
+      "spatialJumpObservations": {
+        "before": {
+          "medianAllVerticalDeltaY": 0.00037711951255895663,
+          "maxAllVerticalDeltaY": 0.04485170019437918,
+          "medianAt17rowSeams": 0.0003722318166007976,
+          "maxAt17rowSeams": 0.04170040310804922,
+          "interpretation": "actual image edges confound absolute row jumps; decisive seam test is exact whole/stream pixel comparison at all rows"
+        },
+        "after": {
+          "medianAllVerticalDeltaY": 0.0001302536373320247,
+          "maxAllVerticalDeltaY": 0.024040548289412267,
+          "medianAt17rowSeams": 0.00012206267546739646,
+          "maxAt17rowSeams": 0.020806072156484508,
+          "interpretation": "actual image edges confound absolute row jumps; decisive seam test is exact whole/stream pixel comparison at all rows"
+        }
+      }
+    }
+  ],
+  "absoluteAccuracy": "NOT_RUN",
+  "smoothGradientBanding": "NOT_ESTABLISHED_FROM_NATURAL_HISTOGRAM"
+}

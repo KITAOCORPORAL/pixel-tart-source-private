@@ -1,0 +1,72 @@
+{
+  "version": "SixPhotoLiteralVisualReviewV1",
+  "method": "Opened before-contact, after/before-contact, full Nikon before+after, and all6 1:1 local panels; derived numeric support in concrete-findings and ROI metrics",
+  "reviewer": "assistant visual inspection, not user preference or calibrated monitor judgment",
+  "photos": [
+    {
+      "id": "canon600d",
+      "coverage": "white petals, fine petal boundaries and dark green backdrop",
+      "local": "Petal texture remains visible; background becomes much darker and less green. No local stripe boundary visible. Small newly zero-valued output channels exist, not explainable solely by pre-existing master endpoints.",
+      "risks": [
+        "dark/background color separation reduced"
+      ],
+      "highlights": "No new max-code output channels; neutral petal accuracy unmeasured"
+    },
+    {
+      "id": "canon6d",
+      "coverage": "snow/white packaging, red and blue wrapping, small dark details",
+      "local": "Snow appears slightly cooler/darker; packaging shadows become harder to distinguish. No obvious local band seam.",
+      "risks": [
+        "shadow compression",
+        "color paper response not calibrated"
+      ],
+      "highlights": "Snow is high-reflectance subject, not uniformly sensor-saturated strong-highlight ground truth"
+    },
+    {
+      "id": "canon5d3",
+      "coverage": "pink/red saturated tulips with bright backlight and dark petal gradients",
+      "local": "Dark petals show deeper shadows and warmer/redder appearance; brightest background/petals already have green-channel master max endpoints. Fine grain-like source noise is present even though film grain is disabled.",
+      "risks": [
+        "existing frontend highlight clipping confounds bright-petal hue judgment",
+        "no paired reference"
+      ],
+      "highlights": "Prior final production master G=1 fraction about1.053%, not sensor saturation diagnosis"
+    },
+    {
+      "id": "nikond5100",
+      "coverage": "limited arm/hand skin, magenta shirt, hair/bright sky edge",
+      "local": "Arm/hand darkens but no obvious abrupt isolated skin hue discontinuity in inspected crop. Hair shadows deepen, bright sky becomes greyish/cooler.",
+      "risks": [
+        "limited shade-lit skin only",
+        "not a face/skin chart",
+        "no preference approval"
+      ],
+      "highlights": "Blue-channel master max fraction about3.293%, so sky hue cannot be attributed only to film backend"
+    },
+    {
+      "id": "sonynex5r",
+      "coverage": "pink/white flowers and greens, vehicles, bright sky/building edges",
+      "local": "Flower-bed shadow regions lose separation and contain more black points. Building boundary remains continuous with no whole/stream seam. Many bright source channels already clipped, separate from new output zero endpoints.",
+      "risks": [
+        "11562 endpoint-free/interior-input pixels acquire at least one output zero"
+      ],
+      "highlights": "Blue-channel prior master max fraction about4.437%, output no65535 channels"
+    },
+    {
+      "id": "canonr6",
+      "coverage": "dusk silhouette, wires and deep vehicle shadow",
+      "local": "Vehicle shadow becomes a near-uniform blue-grey floor: source relative median luma rises but spatial variation collapses. Silhouette/sky boundary continuous; no observed stream seam.",
+      "risks": [
+        "black floor/relative shadow contrast regression candidate"
+      ],
+      "highlights": "No strong highlights in this sample; do not generalize from silhouette"
+    }
+  ],
+  "notClaimed": [
+    "color accuracy",
+    "better film aesthetic",
+    "sensor highlight reconstruction",
+    "physical film calibration",
+    "formal natural-gradient monotonicity proof"
+  ]
+}

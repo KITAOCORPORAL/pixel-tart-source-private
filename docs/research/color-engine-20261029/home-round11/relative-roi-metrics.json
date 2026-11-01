@@ -1,0 +1,343 @@
+{
+  "version": "NaturalRelativeRoiReviewV1",
+  "metrics": [
+    {
+      "id": "canon600d",
+      "zone": "petal_highlight",
+      "boxXYXY": [
+        650,
+        130,
+        950,
+        380
+      ],
+      "source": "same-coordinate proxy, not sensor ROI",
+      "meanLinearYBefore": 0.11772681715282744,
+      "meanLinearYAfter": 0.10442970936141108,
+      "medianLinearYRatio": 0.8557331646478836,
+      "relativeLuminanceStops": -0.22476709037842774,
+      "newZeroChannels": 263,
+      "outputZeroPixelFraction": 0.0015333333333333334,
+      "meanDisplayRgbBefore": [
+        0.35898666789303224,
+        0.34951554082314173,
+        0.3234430105541895
+      ],
+      "meanDisplayRgbAfter": [
+        0.32074525347788374,
+        0.3140127947914263,
+        0.31838860334151653
+      ],
+      "relativeResponseNotAccuracy": true
+    },
+    {
+      "id": "canon600d",
+      "zone": "background_dark",
+      "boxXYXY": [
+        60,
+        40,
+        360,
+        290
+      ],
+      "source": "same-coordinate proxy, not sensor ROI",
+      "meanLinearYBefore": 0.046573381417950935,
+      "meanLinearYAfter": 0.03922649092957891,
+      "medianLinearYRatio": 0.42873350522068676,
+      "relativeLuminanceStops": -1.2218469277280533,
+      "newZeroChannels": 0,
+      "outputZeroPixelFraction": 0.0,
+      "meanDisplayRgbBefore": [
+        0.17046298593019446,
+        0.18875603803396224,
+        0.1135936966255866
+      ],
+      "meanDisplayRgbAfter": [
+        0.13127854957910817,
+        0.13829309956511743,
+        0.14157044408842057
+      ],
+      "relativeResponseNotAccuracy": true
+    },
+    {
+      "id": "canon6d",
+      "zone": "snow_white",
+      "boxXYXY": [
+        200,
+        700,
+        500,
+        950
+      ],
+      "source": "same-coordinate proxy, not sensor ROI",
+      "meanLinearYBefore": 0.05814191128562127,
+      "meanLinearYAfter": 0.04087323375891431,
+      "medianLinearYRatio": 0.6707178463518921,
+      "relativeLuminanceStops": -0.5762221053278463,
+      "newZeroChannels": 346,
+      "outputZeroPixelFraction": 0.003106666666666667,
+      "meanDisplayRgbBefore": [
+        0.2355851122785484,
+        0.23081059170783808,
+        0.24590285612196972
+      ],
+      "meanDisplayRgbAfter": [
+        0.17430853701584478,
+        0.18956849846138082,
+        0.20775862811219314
+      ],
+      "relativeResponseNotAccuracy": true
+    },
+    {
+      "id": "canon6d",
+      "zone": "saturated_goods",
+      "boxXYXY": [
+        140,
+        170,
+        440,
+        420
+      ],
+      "source": "same-coordinate proxy, not sensor ROI",
+      "meanLinearYBefore": 0.03269647915352242,
+      "meanLinearYAfter": 0.018111051977896336,
+      "medianLinearYRatio": 0.4654774078516823,
+      "relativeLuminanceStops": -1.1032169472349798,
+      "newZeroChannels": 31,
+      "outputZeroPixelFraction": 0.0004133333333333333,
+      "meanDisplayRgbBefore": [
+        0.18836852386490652,
+        0.16817868146733692,
+        0.15416136414315232
+      ],
+      "meanDisplayRgbAfter": [
+        0.11549694992498064,
+        0.1164422817324082,
+        0.12121152585132727
+      ],
+      "relativeResponseNotAccuracy": true
+    },
+    {
+      "id": "canon5d3",
+      "zone": "backlit_petal",
+      "boxXYXY": [
+        340,
+        20,
+        640,
+        270
+      ],
+      "source": "same-coordinate proxy, not sensor ROI",
+      "meanLinearYBefore": 0.3191653262330084,
+      "meanLinearYAfter": 0.25975923863511946,
+      "medianLinearYRatio": 0.8173207169880223,
+      "relativeLuminanceStops": -0.29102579128376893,
+      "newZeroChannels": 123,
+      "outputZeroPixelFraction": 0.00164,
+      "meanDisplayRgbBefore": [
+        0.6851020445039837,
+        0.5021168280545514,
+        0.3879701404623928
+      ],
+      "meanDisplayRgbAfter": [
+        0.5894193305358065,
+        0.46539727209378084,
+        0.40079888771903344
+      ],
+      "relativeResponseNotAccuracy": true
+    },
+    {
+      "id": "canon5d3",
+      "zone": "shadow_petal",
+      "boxXYXY": [
+        20,
+        480,
+        320,
+        730
+      ],
+      "source": "same-coordinate proxy, not sensor ROI",
+      "meanLinearYBefore": 0.051270473773660105,
+      "meanLinearYAfter": 0.03286593918279101,
+      "medianLinearYRatio": 0.5328346343616277,
+      "relativeLuminanceStops": -0.9082402339537831,
+      "newZeroChannels": 203,
+      "outputZeroPixelFraction": 0.00264,
+      "meanDisplayRgbBefore": [
+        0.2975033165514718,
+        0.20060988246254932,
+        0.18721498094058286
+      ],
+      "meanDisplayRgbAfter": [
+        0.21112935703568117,
+        0.1522544663665754,
+        0.1460578135856166
+      ],
+      "relativeResponseNotAccuracy": true
+    },
+    {
+      "id": "nikond5100",
+      "zone": "arm_skin",
+      "boxXYXY": [
+        300,
+        350,
+        600,
+        600
+      ],
+      "source": "same-coordinate proxy, not sensor ROI",
+      "meanLinearYBefore": 0.036332263398689876,
+      "meanLinearYAfter": 0.018372826961435294,
+      "medianLinearYRatio": 0.38984071191623304,
+      "relativeLuminanceStops": -1.3590433326326525,
+      "newZeroChannels": 0,
+      "outputZeroPixelFraction": 0.0,
+      "meanDisplayRgbBefore": [
+        0.22823401611079772,
+        0.18261657871256273,
+        0.1561304142903785
+      ],
+      "meanDisplayRgbAfter": [
+        0.13679289926502797,
+        0.11834907392995503,
+        0.11299153836371811
+      ],
+      "relativeResponseNotAccuracy": true
+    },
+    {
+      "id": "nikond5100",
+      "zone": "hair_sky_edge",
+      "boxXYXY": [
+        140,
+        110,
+        440,
+        360
+      ],
+      "source": "same-coordinate proxy, not sensor ROI",
+      "meanLinearYBefore": 0.3438982816622158,
+      "meanLinearYAfter": 0.2445958659548132,
+      "medianLinearYRatio": 0.703817632384213,
+      "relativeLuminanceStops": -0.5067264372439223,
+      "newZeroChannels": 515,
+      "outputZeroPixelFraction": 0.0031466666666666665,
+      "meanDisplayRgbBefore": [
+        0.46087271659297246,
+        0.45488083335882673,
+        0.4480527583690236
+      ],
+      "meanDisplayRgbAfter": [
+        0.37498321914487565,
+        0.37490762900245367,
+        0.3773831005314211
+      ],
+      "relativeResponseNotAccuracy": true
+    },
+    {
+      "id": "sonynex5r",
+      "zone": "flowers_saturated",
+      "boxXYXY": [
+        270,
+        400,
+        570,
+        650
+      ],
+      "source": "same-coordinate proxy, not sensor ROI",
+      "meanLinearYBefore": 0.13577348975665401,
+      "meanLinearYAfter": 0.11790452290415711,
+      "medianLinearYRatio": 0.7010946063948527,
+      "relativeLuminanceStops": -0.5123189588292788,
+      "newZeroChannels": 3355,
+      "outputZeroPixelFraction": 0.02396,
+      "meanDisplayRgbBefore": [
+        0.35171445289902387,
+        0.3672721911904216,
+        0.34477689830730357
+      ],
+      "meanDisplayRgbAfter": [
+        0.29930125439331917,
+        0.3124994377559194,
+        0.3103385441876034
+      ],
+      "relativeResponseNotAccuracy": true
+    },
+    {
+      "id": "sonynex5r",
+      "zone": "sky_building_edge",
+      "boxXYXY": [
+        100,
+        0,
+        400,
+        250
+      ],
+      "source": "same-coordinate proxy, not sensor ROI",
+      "meanLinearYBefore": 0.2822753874495224,
+      "meanLinearYAfter": 0.2519107050298483,
+      "medianLinearYRatio": 0.9681284996504367,
+      "relativeLuminanceStops": -0.046729545832976255,
+      "newZeroChannels": 23,
+      "outputZeroPixelFraction": 0.0002666666666666667,
+      "meanDisplayRgbBefore": [
+        0.5179373241666952,
+        0.5227930493396521,
+        0.5179948763473828
+      ],
+      "meanDisplayRgbAfter": [
+        0.4753586865033845,
+        0.49228564909334316,
+        0.5027043090460515
+      ],
+      "relativeResponseNotAccuracy": true
+    },
+    {
+      "id": "canonr6",
+      "zone": "silhouette_sky",
+      "boxXYXY": [
+        420,
+        180,
+        720,
+        430
+      ],
+      "source": "same-coordinate proxy, not sensor ROI",
+      "meanLinearYBefore": 0.03902276642586664,
+      "meanLinearYAfter": 0.017119182472626383,
+      "medianLinearYRatio": 0.4247410832974553,
+      "relativeLuminanceStops": -1.2353444340407174,
+      "newZeroChannels": 0,
+      "outputZeroPixelFraction": 0.0,
+      "meanDisplayRgbBefore": [
+        0.22720567318027335,
+        0.19293520144346257,
+        0.17552321298643403
+      ],
+      "meanDisplayRgbAfter": [
+        0.1496268947380798,
+        0.12879637689789203,
+        0.12130011322187575
+      ],
+      "relativeResponseNotAccuracy": true
+    },
+    {
+      "id": "canonr6",
+      "zone": "shadow_vehicle",
+      "boxXYXY": [
+        0,
+        500,
+        300,
+        750
+      ],
+      "source": "same-coordinate proxy, not sensor ROI",
+      "meanLinearYBefore": 0.002452268113501358,
+      "meanLinearYAfter": 0.00446649043740271,
+      "medianLinearYRatio": 8.477906041692634,
+      "relativeLuminanceStops": 3.0837079774881686,
+      "newZeroChannels": 0,
+      "outputZeroPixelFraction": 0.0,
+      "meanDisplayRgbBefore": [
+        0.029582099508012077,
+        0.022231399244650445,
+        0.024728495962512
+      ],
+      "meanDisplayRgbAfter": [
+        0.05242650919348274,
+        0.05513596439557314,
+        0.06654264703347136
+      ],
+      "relativeResponseNotAccuracy": true
+    }
+  ],
+  "skinHueAccuracy": "NOT_RUN_NO_PAIRED_REFERENCE",
+  "sampling": "hand-selected after initial image review, descriptive development evidence only"
+}

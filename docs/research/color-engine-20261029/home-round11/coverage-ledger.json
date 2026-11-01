@@ -1,0 +1,210 @@
+{
+  "version": "SixPhotoCoverageLedgerV1",
+  "limit": 6,
+  "actualPhotos": 6,
+  "selectionScope": "Only listed SHA-matched authorized Real fixtures, no unrelated directory scan",
+  "role": "development exploration; not independent validation/holdout",
+  "photos": [
+    {
+      "id": "canon600d",
+      "filename": "RAW_CANON_EOS_600D.CR2",
+      "sha256": "9A91AE88D13D7401B0D2A188B4D24AA8947E84EA94610367CDF9EF32E8E4AA89",
+      "permission": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "make": "Canon",
+      "model": "EOS 600D",
+      "originalOrientation": 1,
+      "storedOrientation": 1,
+      "sceneObserved": "White flowers against shaded green foliage",
+      "observedCoverage": [
+        "neutral-ish petal",
+        "dark foliage",
+        "petal fine edges"
+      ],
+      "sceneIndependence": "not verified from capture provenance; no cross-split assignment",
+      "inputFullMasterEndpoints": {
+        "zeroFraction": [
+          0.0,
+          0.0,
+          0.000576146321409513
+        ],
+        "oneFraction": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "longEdge": 1200,
+      "sameDeviceWholeStreamExact": true,
+      "status": "executed and visually reviewed, not accuracy-approved"
+    },
+    {
+      "id": "canon6d",
+      "filename": "RAW_CANON_6D.CR2",
+      "sha256": "FEC7395A77D608A2700A4342FB933E6D600D2C22E2F6F88FBD06918CBABA00DC",
+      "permission": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "make": "Canon",
+      "model": "EOS 6D",
+      "originalOrientation": 8,
+      "storedOrientation": 1,
+      "sceneObserved": "Snow-covered gifts and snowman",
+      "observedCoverage": [
+        "white snow",
+        "red/blue/yellow packaging",
+        "dark background"
+      ],
+      "sceneIndependence": "not verified from capture provenance; no cross-split assignment",
+      "inputFullMasterEndpoints": {
+        "zeroFraction": [
+          5.25524632231913e-06,
+          7.287935937555775e-06,
+          0.00013346342546870848
+        ],
+        "oneFraction": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "longEdge": 1200,
+      "sameDeviceWholeStreamExact": true,
+      "status": "executed and visually reviewed, not accuracy-approved"
+    },
+    {
+      "id": "canon5d3",
+      "filename": "RAW_CANON_EOS_5DMARK3.CR2",
+      "sha256": "09FEE3EBB29DA5F2F50191BF8B863735A20CD31789B33454ECDE88A67DE457E4",
+      "permission": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "make": "Canon",
+      "model": "EOS 5D Mark III",
+      "originalOrientation": 1,
+      "storedOrientation": 1,
+      "sceneObserved": "Backlit pink/red tulips",
+      "observedCoverage": [
+        "strong backlight/bright petals",
+        "saturated flower color",
+        "shadow petal gradients"
+      ],
+      "sceneIndependence": "not verified from capture provenance; no cross-split assignment",
+      "inputFullMasterEndpoints": {
+        "zeroFraction": [
+          0.008191963449799647,
+          0.043062488074284505,
+          0.0804852049796438
+        ],
+        "oneFraction": [
+          8.916422802503018e-08,
+          0.01053038449398409,
+          1.2037170783379074e-06
+        ]
+      },
+      "longEdge": 1200,
+      "sameDeviceWholeStreamExact": true,
+      "status": "executed and visually reviewed, not accuracy-approved"
+    },
+    {
+      "id": "nikond5100",
+      "filename": "RAW_NIKON_D5100.NEF",
+      "sha256": "ABE9F7783BDF77A36F078831B47F3250DA62FD7ECF23D6F4B4C3798AA91EB974",
+      "permission": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "make": "Nikon",
+      "model": "D5100",
+      "originalOrientation": 1,
+      "storedOrientation": 1,
+      "sceneObserved": "Person holding basketball outdoors under cloudy sky",
+      "observedCoverage": [
+        "limited arm/hand skin",
+        "bright sky/hair boundary",
+        "dark hair/shirt",
+        "magenta shirt"
+      ],
+      "sceneIndependence": "not verified from capture provenance; no cross-split assignment",
+      "inputFullMasterEndpoints": {
+        "zeroFraction": [
+          6.7778062582566e-07,
+          4.990930062898042e-06,
+          0.00010203679239702664
+        ],
+        "oneFraction": [
+          0.0,
+          8.194983930437526e-06,
+          0.03292861614448804
+        ]
+      },
+      "longEdge": 1200,
+      "sameDeviceWholeStreamExact": true,
+      "status": "executed and visually reviewed, not accuracy-approved"
+    },
+    {
+      "id": "sonynex5r",
+      "filename": "RAW_SONY_NEX-5R.ARW",
+      "sha256": "2CAFACA4C03567A852DEA648C87F30C9851FDBCE1E44CCE909299F5FFEC93102",
+      "permission": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "make": "Sony",
+      "model": "NEX-5R",
+      "originalOrientation": 1,
+      "storedOrientation": 1,
+      "sceneObserved": "City street with cars and flowers",
+      "observedCoverage": [
+        "saturated flowers/green foliage",
+        "sky/building/vehicle highlights",
+        "fine buildings/leaf edges"
+      ],
+      "sceneIndependence": "not verified from capture provenance; no cross-split assignment",
+      "inputFullMasterEndpoints": {
+        "zeroFraction": [
+          3.350308228357009e-06,
+          7.941471356105503e-06,
+          2.928417562563904e-05
+        ],
+        "oneFraction": [
+          0.0035417100965881455,
+          0.006038310154163813,
+          0.044371047877145436
+        ]
+      },
+      "longEdge": 1200,
+      "sameDeviceWholeStreamExact": true,
+      "status": "executed and visually reviewed, not accuracy-approved"
+    },
+    {
+      "id": "canonr6",
+      "filename": "TNAN8886.CR3",
+      "sha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+      "permission": "docs/color-studio/real-camera-company/COMPANY_RAW_FIXTURE_MANIFEST.json company-05",
+      "make": "Canon",
+      "model": "EOS R6",
+      "originalOrientation": 1,
+      "storedOrientation": 1,
+      "sceneObserved": "Dusk silhouettes and vehicle",
+      "observedCoverage": [
+        "deep shadows",
+        "silhouette/wire boundaries",
+        "smooth dusk sky"
+      ],
+      "sceneIndependence": "not verified from capture provenance; no cross-split assignment",
+      "inputFullMasterEndpoints": {
+        "zeroFraction": [
+          0.011162738122151756,
+          0.05104693430743786,
+          0.04266704742413606
+        ],
+        "oneFraction": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "longEdge": 1200,
+      "sameDeviceWholeStreamExact": true,
+      "status": "executed and visually reviewed, not accuracy-approved"
+    }
+  ],
+  "missing": [
+    "controlled skin under known illumination or frontal skin reference",
+    "absolute color chart/paired calibrated reference",
+    "independent held-out scenes",
+    "recoverable highlight texture ground truth",
+    "pure continuous natural dark gradient for formal banding test"
+  ],
+  "visualReview": "contact sheet before/after plus all6 same-coordinate local panels actually opened in assistant tools; no preference approval"
+}

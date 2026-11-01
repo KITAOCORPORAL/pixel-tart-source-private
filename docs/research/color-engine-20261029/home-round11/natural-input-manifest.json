@@ -1,0 +1,903 @@
+{
+  "version": "NaturalProxyAdmissionV1",
+  "sourcesAdmissionSha256": "5bc62e03d79c0ba0aa56d419ef815e05b750338d71d31e4e130bd62bc084e1ff",
+  "maxLongEdge": 1200,
+  "sources": [
+    {
+      "id": "canon600d",
+      "path": "N:/pixart/RAW/Real/canon/RAW_CANON_EOS_600D.CR2",
+      "sha256": "9A91AE88D13D7401B0D2A188B4D24AA8947E84EA94610367CDF9EF32E8E4AA89",
+      "authorizedScope": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "role": "development_exploration_only",
+      "scene": "TO_BE_VISUALLY_REVIEWED",
+      "noRedistribution": true,
+      "productionReportSha256": "5cf79ee8e8528b8e9139900b7592eb4c37a04ff9f183b3b2b21c5aa4b4d2f1ac",
+      "productionLinearSha256": "E5C192D35503723F48A8B2AEC25B204237873A5A94CDA69CACB6B6A26D4F1562",
+      "productionDisplaySha256": "522C6BDB499D42C35C2C591BE154C4250162BE6F49DE7EABAFA9C90526A2965E",
+      "originalSize": [
+        5202,
+        3464
+      ],
+      "proxyShape": [
+        799,
+        1200,
+        3
+      ],
+      "sourceOrientation": 1,
+      "storedOrientation": 1,
+      "inputDomain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridge": {
+        "version": "ExistingResearchD65ToD50V1",
+        "P": [
+          [
+            0.529317,
+            0.330092,
+            0.140588
+          ],
+          [
+            0.098368,
+            0.873465,
+            0.028169
+          ],
+          [
+            0.016879,
+            0.117663,
+            0.865457
+          ]
+        ],
+        "sRGBtoXYZD65": [
+          [
+            0.4124,
+            0.3576,
+            0.1805
+          ],
+          [
+            0.2126,
+            0.7152,
+            0.0722
+          ],
+          [
+            0.0193,
+            0.1192,
+            0.9505
+          ]
+        ],
+        "Bradford": [
+          [
+            0.8951,
+            0.2664,
+            -0.1614
+          ],
+          [
+            -0.7502,
+            1.7135,
+            0.0367
+          ],
+          [
+            0.0389,
+            -0.0685,
+            1.0296
+          ]
+        ],
+        "sourceWhiteXY": [
+          0.3127,
+          0.329
+        ],
+        "destinationWhiteXY": [
+          0.3457,
+          0.3585
+        ],
+        "engineProPhotoD50toXYZ": [
+          [
+            0.7977,
+            0.1352,
+            0.0313
+          ],
+          [
+            0.288,
+            0.7119,
+            0.0001
+          ],
+          [
+            0.0,
+            0.0,
+            0.8249
+          ]
+        ],
+        "combinedMatrix": [
+          [
+            1.0000217911832863,
+            9.591835077327627e-05,
+            7.133026177363171e-05
+          ],
+          [
+            -6.627610126724364e-05,
+            1.000014905953994,
+            -2.2700840720611326e-05
+          ],
+          [
+            -6.64219880696861e-05,
+            2.8858865072908588e-05,
+            1.0002334640951398
+          ]
+        ],
+        "order": "LibRawProPhotoD65 inverse -> linear sRGB D65 -> XYZ D65 -> Bradford D50 -> standard engine ProPhoto D50",
+        "extraWB": false,
+        "displayMappingOnA": false
+      },
+      "file": "canon600d-A-proxy.npy",
+      "fileSha256": "24fdaa998ae0e4ddbd6286854831cd2789c2f935b0b1b189442ed7f2859bc512",
+      "pixelSha256": "903e5e09a8f9d8dc7ad2a4b29d21fccb2c357911dccc97160c240c87ebbb6f1c",
+      "proxyMin": [
+        0.005383809097111225,
+        0.0076499818824231625,
+        0.0011094090295955539
+      ],
+      "proxyMax": [
+        0.3512240946292877,
+        0.36016845703125,
+        0.3484813868999481
+      ],
+      "fullMasterZeroFractionByChannel": [
+        0.0,
+        0.0,
+        0.000576146321409513
+      ],
+      "fullMasterOneFractionByChannel": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "priorLossScope": "final production master endpoints; no sensor saturation attribution",
+      "exposureEv": 0,
+      "resize": "Pillow F BOX independently per channel; full scene, no ROI stitch"
+    },
+    {
+      "id": "canon6d",
+      "path": "N:/pixart/RAW/Real/canon/RAW_CANON_6D.CR2",
+      "sha256": "FEC7395A77D608A2700A4342FB933E6D600D2C22E2F6F88FBD06918CBABA00DC",
+      "authorizedScope": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "role": "development_exploration_only",
+      "scene": "TO_BE_VISUALLY_REVIEWED",
+      "noRedistribution": true,
+      "productionReportSha256": "897aaab24377ba629d511f03b6aead27f16cced42a187c7e53b37b5a9756b03e",
+      "productionLinearSha256": "1F23CDE14BB707535174E875D938BC531188C3C6044ED51BF58B8979284CC06B",
+      "productionDisplaySha256": "0C461208FA1110C0914BB9B7549A40FE47348AFD4A28B4306DF9C770425EA63A",
+      "originalSize": [
+        3670,
+        5496
+      ],
+      "proxyShape": [
+        1200,
+        801,
+        3
+      ],
+      "sourceOrientation": 8,
+      "storedOrientation": 1,
+      "inputDomain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridge": {
+        "version": "ExistingResearchD65ToD50V1",
+        "P": [
+          [
+            0.529317,
+            0.330092,
+            0.140588
+          ],
+          [
+            0.098368,
+            0.873465,
+            0.028169
+          ],
+          [
+            0.016879,
+            0.117663,
+            0.865457
+          ]
+        ],
+        "sRGBtoXYZD65": [
+          [
+            0.4124,
+            0.3576,
+            0.1805
+          ],
+          [
+            0.2126,
+            0.7152,
+            0.0722
+          ],
+          [
+            0.0193,
+            0.1192,
+            0.9505
+          ]
+        ],
+        "Bradford": [
+          [
+            0.8951,
+            0.2664,
+            -0.1614
+          ],
+          [
+            -0.7502,
+            1.7135,
+            0.0367
+          ],
+          [
+            0.0389,
+            -0.0685,
+            1.0296
+          ]
+        ],
+        "sourceWhiteXY": [
+          0.3127,
+          0.329
+        ],
+        "destinationWhiteXY": [
+          0.3457,
+          0.3585
+        ],
+        "engineProPhotoD50toXYZ": [
+          [
+            0.7977,
+            0.1352,
+            0.0313
+          ],
+          [
+            0.288,
+            0.7119,
+            0.0001
+          ],
+          [
+            0.0,
+            0.0,
+            0.8249
+          ]
+        ],
+        "combinedMatrix": [
+          [
+            1.0000217911832863,
+            9.591835077327627e-05,
+            7.133026177363171e-05
+          ],
+          [
+            -6.627610126724364e-05,
+            1.000014905953994,
+            -2.2700840720611326e-05
+          ],
+          [
+            -6.64219880696861e-05,
+            2.8858865072908588e-05,
+            1.0002334640951398
+          ]
+        ],
+        "order": "LibRawProPhotoD65 inverse -> linear sRGB D65 -> XYZ D65 -> Bradford D50 -> standard engine ProPhoto D50",
+        "extraWB": false,
+        "displayMappingOnA": false
+      },
+      "file": "canon6d-A-proxy.npy",
+      "fileSha256": "25ca40a8290f1469ad589e1fd6981aadca664c157298a9399bf96b1445d8341c",
+      "pixelSha256": "3bc73a83bf1a31719eaa5ac8baf0719def75559687589866bb21fe6dff568f4f",
+      "proxyMin": [
+        0.0005458544474095106,
+        0.0005998011911287904,
+        0.0004501981311477721
+      ],
+      "proxyMax": [
+        0.8110783696174622,
+        0.40099433064460754,
+        0.20596188306808472
+      ],
+      "fullMasterZeroFractionByChannel": [
+        5.25524632231913e-06,
+        7.287935937555775e-06,
+        0.00013346342546870848
+      ],
+      "fullMasterOneFractionByChannel": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "priorLossScope": "final production master endpoints; no sensor saturation attribution",
+      "exposureEv": 0,
+      "resize": "Pillow F BOX independently per channel; full scene, no ROI stitch"
+    },
+    {
+      "id": "canon5d3",
+      "path": "N:/pixart/RAW/Real/canon/RAW_CANON_EOS_5DMARK3.CR2",
+      "sha256": "09FEE3EBB29DA5F2F50191BF8B863735A20CD31789B33454ECDE88A67DE457E4",
+      "authorizedScope": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "role": "development_exploration_only",
+      "scene": "TO_BE_VISUALLY_REVIEWED",
+      "noRedistribution": true,
+      "productionReportSha256": "186588878e4328c04dfb51cc4e4f5353ac5cec4a19c653e16450e08ef2ad2d8a",
+      "productionLinearSha256": "7236DD6AE2D0A9DE15F52376AC5681FDC8706AEE031A4217BDDB8E8C31088CEE",
+      "productionDisplaySha256": "FC574B6D71C6AC865485FC37FD37F91C035C4AD2C75135449CAC0DB4346F19AA",
+      "originalSize": [
+        5796,
+        3870
+      ],
+      "proxyShape": [
+        801,
+        1200,
+        3
+      ],
+      "sourceOrientation": 1,
+      "storedOrientation": 1,
+      "inputDomain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridge": {
+        "version": "ExistingResearchD65ToD50V1",
+        "P": [
+          [
+            0.529317,
+            0.330092,
+            0.140588
+          ],
+          [
+            0.098368,
+            0.873465,
+            0.028169
+          ],
+          [
+            0.016879,
+            0.117663,
+            0.865457
+          ]
+        ],
+        "sRGBtoXYZD65": [
+          [
+            0.4124,
+            0.3576,
+            0.1805
+          ],
+          [
+            0.2126,
+            0.7152,
+            0.0722
+          ],
+          [
+            0.0193,
+            0.1192,
+            0.9505
+          ]
+        ],
+        "Bradford": [
+          [
+            0.8951,
+            0.2664,
+            -0.1614
+          ],
+          [
+            -0.7502,
+            1.7135,
+            0.0367
+          ],
+          [
+            0.0389,
+            -0.0685,
+            1.0296
+          ]
+        ],
+        "sourceWhiteXY": [
+          0.3127,
+          0.329
+        ],
+        "destinationWhiteXY": [
+          0.3457,
+          0.3585
+        ],
+        "engineProPhotoD50toXYZ": [
+          [
+            0.7977,
+            0.1352,
+            0.0313
+          ],
+          [
+            0.288,
+            0.7119,
+            0.0001
+          ],
+          [
+            0.0,
+            0.0,
+            0.8249
+          ]
+        ],
+        "combinedMatrix": [
+          [
+            1.0000217911832863,
+            9.591835077327627e-05,
+            7.133026177363171e-05
+          ],
+          [
+            -6.627610126724364e-05,
+            1.000014905953994,
+            -2.2700840720611326e-05
+          ],
+          [
+            -6.64219880696861e-05,
+            2.8858865072908588e-05,
+            1.0002334640951398
+          ]
+        ],
+        "order": "LibRawProPhotoD65 inverse -> linear sRGB D65 -> XYZ D65 -> Bradford D50 -> standard engine ProPhoto D50",
+        "extraWB": false,
+        "displayMappingOnA": false
+      },
+      "file": "canon5d3-A-proxy.npy",
+      "fileSha256": "dadf9530422c6d9db1561b9a045602466dcc641bc242706768aa06c8982b2f52",
+      "pixelSha256": "324d2b1d4eb5b1fef65692fca3526e4901cc07e2f484d4034693e28266beebf5",
+      "proxyMin": [
+        0.001335009466856718,
+        -1.6379574390157359e-06,
+        -4.494446557146148e-07
+      ],
+      "proxyMax": [
+        1.000173807144165,
+        0.999944269657135,
+        1.0001806020736694
+      ],
+      "fullMasterZeroFractionByChannel": [
+        0.008191963449799647,
+        0.043062488074284505,
+        0.0804852049796438
+      ],
+      "fullMasterOneFractionByChannel": [
+        8.916422802503018e-08,
+        0.01053038449398409,
+        1.2037170783379074e-06
+      ],
+      "priorLossScope": "final production master endpoints; no sensor saturation attribution",
+      "exposureEv": 0,
+      "resize": "Pillow F BOX independently per channel; full scene, no ROI stitch"
+    },
+    {
+      "id": "nikond5100",
+      "path": "N:/pixart/RAW/Real/nikon/RAW_NIKON_D5100.NEF",
+      "sha256": "ABE9F7783BDF77A36F078831B47F3250DA62FD7ECF23D6F4B4C3798AA91EB974",
+      "authorizedScope": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "role": "development_exploration_only",
+      "scene": "TO_BE_VISUALLY_REVIEWED",
+      "noRedistribution": true,
+      "productionReportSha256": "a9aa83175b1b1b472b4ec665795add5852c65b4d2954b30ec212bb363afc1b24",
+      "productionLinearSha256": "AA91A9F913DFD90753645A45D2F52B0D4F31AEB8E0C79CC70B4EAB1D3606E578",
+      "productionDisplaySha256": "74CB7007F1114D4B2F13C1264EC1170F80C9992D556FB772DD10E9855D2677F3",
+      "originalSize": [
+        4948,
+        3280
+      ],
+      "proxyShape": [
+        795,
+        1200,
+        3
+      ],
+      "sourceOrientation": 1,
+      "storedOrientation": 1,
+      "inputDomain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridge": {
+        "version": "ExistingResearchD65ToD50V1",
+        "P": [
+          [
+            0.529317,
+            0.330092,
+            0.140588
+          ],
+          [
+            0.098368,
+            0.873465,
+            0.028169
+          ],
+          [
+            0.016879,
+            0.117663,
+            0.865457
+          ]
+        ],
+        "sRGBtoXYZD65": [
+          [
+            0.4124,
+            0.3576,
+            0.1805
+          ],
+          [
+            0.2126,
+            0.7152,
+            0.0722
+          ],
+          [
+            0.0193,
+            0.1192,
+            0.9505
+          ]
+        ],
+        "Bradford": [
+          [
+            0.8951,
+            0.2664,
+            -0.1614
+          ],
+          [
+            -0.7502,
+            1.7135,
+            0.0367
+          ],
+          [
+            0.0389,
+            -0.0685,
+            1.0296
+          ]
+        ],
+        "sourceWhiteXY": [
+          0.3127,
+          0.329
+        ],
+        "destinationWhiteXY": [
+          0.3457,
+          0.3585
+        ],
+        "engineProPhotoD50toXYZ": [
+          [
+            0.7977,
+            0.1352,
+            0.0313
+          ],
+          [
+            0.288,
+            0.7119,
+            0.0001
+          ],
+          [
+            0.0,
+            0.0,
+            0.8249
+          ]
+        ],
+        "combinedMatrix": [
+          [
+            1.0000217911832863,
+            9.591835077327627e-05,
+            7.133026177363171e-05
+          ],
+          [
+            -6.627610126724364e-05,
+            1.000014905953994,
+            -2.2700840720611326e-05
+          ],
+          [
+            -6.64219880696861e-05,
+            2.8858865072908588e-05,
+            1.0002334640951398
+          ]
+        ],
+        "order": "LibRawProPhotoD65 inverse -> linear sRGB D65 -> XYZ D65 -> Bradford D50 -> standard engine ProPhoto D50",
+        "extraWB": false,
+        "displayMappingOnA": false
+      },
+      "file": "nikond5100-A-proxy.npy",
+      "fileSha256": "7a44a84f2f82cfbb4b5be5c1e222f710b422b90162b64735dc945abeedc2fe5a",
+      "pixelSha256": "dad3d0f95c3de4dc65ad66e7fbc01bf94c819a436d88daa97d98c7e7bf4580fd",
+      "proxyMin": [
+        0.0006815259112045169,
+        0.0007828109664842486,
+        0.0005255764117464423
+      ],
+      "proxyMax": [
+        0.999519944190979,
+        0.9978525638580322,
+        1.0002039670944214
+      ],
+      "fullMasterZeroFractionByChannel": [
+        6.7778062582566e-07,
+        4.990930062898042e-06,
+        0.00010203679239702664
+      ],
+      "fullMasterOneFractionByChannel": [
+        0.0,
+        8.194983930437526e-06,
+        0.03292861614448804
+      ],
+      "priorLossScope": "final production master endpoints; no sensor saturation attribution",
+      "exposureEv": 0,
+      "resize": "Pillow F BOX independently per channel; full scene, no ROI stitch"
+    },
+    {
+      "id": "sonynex5r",
+      "path": "N:/pixart/RAW/Real/sony/RAW_SONY_NEX-5R.ARW",
+      "sha256": "2CAFACA4C03567A852DEA648C87F30C9851FDBCE1E44CCE909299F5FFEC93102",
+      "authorizedScope": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "role": "development_exploration_only",
+      "scene": "TO_BE_VISUALLY_REVIEWED",
+      "noRedistribution": true,
+      "productionReportSha256": "fcedab8158a8089cb8f00c1a8caa71e78c4b89f797605c69168358367748ffe8",
+      "productionLinearSha256": "AC83944013C3151EA3BB1B8605DFAB03442D25C14E8E01FA21E27A2C7D0E8219",
+      "productionDisplaySha256": "7E5DCCC49256AA2E5A07EFE313180FAC3BF45BCED2056F755BEA6BF0EABD7DFC",
+      "originalSize": [
+        4920,
+        3276
+      ],
+      "proxyShape": [
+        799,
+        1200,
+        3
+      ],
+      "sourceOrientation": 1,
+      "storedOrientation": 1,
+      "inputDomain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridge": {
+        "version": "ExistingResearchD65ToD50V1",
+        "P": [
+          [
+            0.529317,
+            0.330092,
+            0.140588
+          ],
+          [
+            0.098368,
+            0.873465,
+            0.028169
+          ],
+          [
+            0.016879,
+            0.117663,
+            0.865457
+          ]
+        ],
+        "sRGBtoXYZD65": [
+          [
+            0.4124,
+            0.3576,
+            0.1805
+          ],
+          [
+            0.2126,
+            0.7152,
+            0.0722
+          ],
+          [
+            0.0193,
+            0.1192,
+            0.9505
+          ]
+        ],
+        "Bradford": [
+          [
+            0.8951,
+            0.2664,
+            -0.1614
+          ],
+          [
+            -0.7502,
+            1.7135,
+            0.0367
+          ],
+          [
+            0.0389,
+            -0.0685,
+            1.0296
+          ]
+        ],
+        "sourceWhiteXY": [
+          0.3127,
+          0.329
+        ],
+        "destinationWhiteXY": [
+          0.3457,
+          0.3585
+        ],
+        "engineProPhotoD50toXYZ": [
+          [
+            0.7977,
+            0.1352,
+            0.0313
+          ],
+          [
+            0.288,
+            0.7119,
+            0.0001
+          ],
+          [
+            0.0,
+            0.0,
+            0.8249
+          ]
+        ],
+        "combinedMatrix": [
+          [
+            1.0000217911832863,
+            9.591835077327627e-05,
+            7.133026177363171e-05
+          ],
+          [
+            -6.627610126724364e-05,
+            1.000014905953994,
+            -2.2700840720611326e-05
+          ],
+          [
+            -6.64219880696861e-05,
+            2.8858865072908588e-05,
+            1.0002334640951398
+          ]
+        ],
+        "order": "LibRawProPhotoD65 inverse -> linear sRGB D65 -> XYZ D65 -> Bradford D50 -> standard engine ProPhoto D50",
+        "extraWB": false,
+        "displayMappingOnA": false
+      },
+      "file": "sonynex5r-A-proxy.npy",
+      "fileSha256": "6e48f0a85d3c46ec22e84754025b5c7ba83003b08a5911d5728b14e17f35dc94",
+      "pixelSha256": "7cc89824945fc53f1fb463512a7d0798f38918bbe81a4a7608f856a91db68e63",
+      "proxyMin": [
+        0.001806352287530899,
+        0.0028169036377221346,
+        0.0036704286467283964
+      ],
+      "proxyMax": [
+        1.0001879930496216,
+        0.9999330043792725,
+        1.0002048015594482
+      ],
+      "fullMasterZeroFractionByChannel": [
+        3.350308228357009e-06,
+        7.941471356105503e-06,
+        2.928417562563904e-05
+      ],
+      "fullMasterOneFractionByChannel": [
+        0.0035417100965881455,
+        0.006038310154163813,
+        0.044371047877145436
+      ],
+      "priorLossScope": "final production master endpoints; no sensor saturation attribution",
+      "exposureEv": 0,
+      "resize": "Pillow F BOX independently per channel; full scene, no ROI stitch"
+    },
+    {
+      "id": "canonr6",
+      "path": "N:/pixart/RAW/Real/canon/TNAN8886.CR3",
+      "sha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+      "authorizedScope": "docs/color-studio/real-camera-company/COMPANY_RAW_FIXTURE_MANIFEST.json company-05",
+      "role": "development_exploration_only",
+      "scene": "TO_BE_VISUALLY_REVIEWED",
+      "noRedistribution": true,
+      "productionReportSha256": "701a64770cc9a1acb24dcb482fbf75a290a8a20e6a8b6690efae34fa6b283b90",
+      "productionLinearSha256": "E062FB55B7A5F0D3B09B6AF37A664F782A643999DED9FBD833DB63FCCEDC1D2C",
+      "productionDisplaySha256": "D0D5BF59CB649F52164396E6404A7A686A42895CC340E7CAC62AABBC5EE67169",
+      "originalSize": [
+        5496,
+        3670
+      ],
+      "proxyShape": [
+        801,
+        1200,
+        3
+      ],
+      "sourceOrientation": 1,
+      "storedOrientation": 1,
+      "inputDomain": "standard ProPhoto RGB D50 linear float32; negatives/>1 retained",
+      "bridge": {
+        "version": "ExistingResearchD65ToD50V1",
+        "P": [
+          [
+            0.529317,
+            0.330092,
+            0.140588
+          ],
+          [
+            0.098368,
+            0.873465,
+            0.028169
+          ],
+          [
+            0.016879,
+            0.117663,
+            0.865457
+          ]
+        ],
+        "sRGBtoXYZD65": [
+          [
+            0.4124,
+            0.3576,
+            0.1805
+          ],
+          [
+            0.2126,
+            0.7152,
+            0.0722
+          ],
+          [
+            0.0193,
+            0.1192,
+            0.9505
+          ]
+        ],
+        "Bradford": [
+          [
+            0.8951,
+            0.2664,
+            -0.1614
+          ],
+          [
+            -0.7502,
+            1.7135,
+            0.0367
+          ],
+          [
+            0.0389,
+            -0.0685,
+            1.0296
+          ]
+        ],
+        "sourceWhiteXY": [
+          0.3127,
+          0.329
+        ],
+        "destinationWhiteXY": [
+          0.3457,
+          0.3585
+        ],
+        "engineProPhotoD50toXYZ": [
+          [
+            0.7977,
+            0.1352,
+            0.0313
+          ],
+          [
+            0.288,
+            0.7119,
+            0.0001
+          ],
+          [
+            0.0,
+            0.0,
+            0.8249
+          ]
+        ],
+        "combinedMatrix": [
+          [
+            1.0000217911832863,
+            9.591835077327627e-05,
+            7.133026177363171e-05
+          ],
+          [
+            -6.627610126724364e-05,
+            1.000014905953994,
+            -2.2700840720611326e-05
+          ],
+          [
+            -6.64219880696861e-05,
+            2.8858865072908588e-05,
+            1.0002334640951398
+          ]
+        ],
+        "order": "LibRawProPhotoD65 inverse -> linear sRGB D65 -> XYZ D65 -> Bradford D50 -> standard engine ProPhoto D50",
+        "extraWB": false,
+        "displayMappingOnA": false
+      },
+      "file": "canonr6-A-proxy.npy",
+      "fileSha256": "d45f0a16ba328f6dcdbc030c7f80dfd1b56544d07f2909fbf396ed59a64f2ca5",
+      "pixelSha256": "4ac591589af7ca1d41a57baa12e9a8277627a380a3869426d3d8e855c8bf8349",
+      "proxyMin": [
+        2.8627428036998026e-06,
+        -7.520647926639867e-08,
+        -1.3997271786081456e-08
+      ],
+      "proxyMax": [
+        0.08200068771839142,
+        0.06767834722995758,
+        0.05371915549039841
+      ],
+      "fullMasterZeroFractionByChannel": [
+        0.011162738122151756,
+        0.05104693430743786,
+        0.04266704742413606
+      ],
+      "fullMasterOneFractionByChannel": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "priorLossScope": "final production master endpoints; no sensor saturation attribution",
+      "exposureEv": 0,
+      "resize": "Pillow F BOX independently per channel; full scene, no ROI stitch"
+    }
+  ],
+  "privatePhotosLocalOnly": true,
+  "originalCanonWhitelistUntouched": true
+}

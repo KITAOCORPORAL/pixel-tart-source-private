@@ -1,0 +1,12 @@
+{
+ "version":"Round11CompanyDiagnosticStatusV1",
+ "status":"NOT_RUN",
+ "reason":"Current host is home RTX5060Ti, not the company GTX1650 environment",
+ "homeExecution":"EXECUTED role=home, actual machine/GPU/driver and pre-run build identity included",
+ "requiredEntry":"tools/color-round11/diagnostic/run_diagnostic.py --device-role company --build-provenance <current-machine-record>",
+ "verification":"verify_run.py and compare_packages.py both invoke package_validation.validate_package independently on each package",
+ "crossDeviceNaturalDifferenceCount":null,
+ "crossDeviceNaturalFirstDifference":null,
+ "comparisonPolicy":"same-device zero RGBA16 differences; cross-device measure and localize only, no post-hoc PASS threshold",
+ "oldRound10CompanyStatusUnmodified":true
+}

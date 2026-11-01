@@ -1,0 +1,24 @@
+{
+  "version": "Round11FailureAndBoundaryLedgerV1",
+  "runtimeMathChanges": false,
+  "failures": [
+    {
+      "case": "Resource-tamper unit test after provenance hardening",
+      "initialResult": "Expected message resource/SPIRV, actual earlier rejection Embedded provenance mismatch; then Build/runtime identity mismatch",
+      "meaning": "Validator rejected, but the test no longer isolated the fixed-resource-contract gate",
+      "repair": "Deep-copy temporary provenance, then deliberately reseal its temporary resource identity/hash too so the test reaches and rejects the fixed resource contract",
+      "finalResult": "PASS in22-test suite",
+      "thresholdChanged": false,
+      "originalRawLogAvailable": false,
+      "evidenceScope": "minimal factual summary of intermediate test output, not a preserved complete console transcript"
+    }
+  ],
+  "colorIssuesNotSilentlyApproved": [
+    "CanonR6 low-signal blue-grey floor and local contrast compression",
+    "NEX5R processing-added zero endpoints on strict-interior proxy pixels without old master endpoint support"
+  ],
+  "companyExecution": "NOT_RUN",
+  "formalAccuracyOrPreference": "NOT_RUN",
+  "internalNaturalFloatIntermediateFiniteAudit": "PASS: six1200px proxies,12 passive whole stage readbacks each finite and traced final exact. Not every arithmetic operation or independent stream internal tap.",
+  "allPrivatePhotosRemainLocal": true
+}

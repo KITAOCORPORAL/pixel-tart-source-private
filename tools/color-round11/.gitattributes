@@ -1,0 +1,9 @@
+# Keep exact new tool/data identity bytes; no product sources covered.
+*.py -text whitespace=cr-at-eol,-blank-at-eof
+*.json -text whitespace=cr-at-eol,-blank-at-eof
+*.cs -text whitespace=cr-at-eol,-blank-at-eof
+*.csproj -text whitespace=cr-at-eol,-blank-at-eof
+*.npy -text -diff -merge
+
+# Preserve company-entry script identity across checkout platforms.
+*.ps1 -text whitespace=cr-at-eol,-blank-at-eof

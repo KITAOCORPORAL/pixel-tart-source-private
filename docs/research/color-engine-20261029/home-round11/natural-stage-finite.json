@@ -1,0 +1,1196 @@
+{
+  "version": "NaturalPassiveStageFiniteV1",
+  "traceLibrarySha256": "c64357cf8b2c236b58d5bf03d12d5396c86fcbefa0c2cdbfaf886c9a72801561",
+  "scope": "whole fixed1200px pipeline 12stages, passive readback; does not inspect every arithmetic instruction; stream final equals whole separately",
+  "privateStageFilesRemainLocal": true,
+  "cases": [
+    {
+      "id": "canon600d",
+      "tracedOutputExact": true,
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "d14c52600ac679bb3b0736a8b901669aba04e45447988ea3ffbbef4863e1d1d7",
+          "nonfiniteSamples": 0,
+          "min": 0.005082740914076567,
+          "max": 1.9339046478271484,
+          "negativeSamples": 0,
+          "aboveOneSamples": 174601,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_boost",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "d14c52600ac679bb3b0736a8b901669aba04e45447988ea3ffbbef4863e1d1d7",
+          "nonfiniteSamples": 0,
+          "min": 0.005082740914076567,
+          "max": 1.9339046478271484,
+          "negativeSamples": 0,
+          "aboveOneSamples": 174601,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_overscan",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "d14c52600ac679bb3b0736a8b901669aba04e45447988ea3ffbbef4863e1d1d7",
+          "nonfiniteSamples": 0,
+          "min": 0.005082740914076567,
+          "max": 1.9339046478271484,
+          "negativeSamples": 0,
+          "aboveOneSamples": 174601,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_blurs",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "d14c52600ac679bb3b0736a8b901669aba04e45447988ea3ffbbef4863e1d1d7",
+          "nonfiniteSamples": 0,
+          "min": 0.005082740914076567,
+          "max": 1.9339046478271484,
+          "negativeSamples": 0,
+          "aboveOneSamples": 174601,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_log_and_curves",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "2f4057572afd7ebdd098ff655dc444df27faf03294c79cf742f6a58f92027f81",
+          "nonfiniteSamples": 0,
+          "min": 0.001511043286882341,
+          "max": 1.0019062757492065,
+          "negativeSamples": 0,
+          "aboveOneSamples": 5,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_couplers",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "2f4057572afd7ebdd098ff655dc444df27faf03294c79cf742f6a58f92027f81",
+          "nonfiniteSamples": 0,
+          "min": 0.001511043286882341,
+          "max": 1.0019062757492065,
+          "negativeSamples": 0,
+          "aboveOneSamples": 5,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_grain",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "2f4057572afd7ebdd098ff655dc444df27faf03294c79cf742f6a58f92027f81",
+          "nonfiniteSamples": 0,
+          "min": 0.001511043286882341,
+          "max": 1.0019062757492065,
+          "negativeSamples": 0,
+          "aboveOneSamples": 5,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_spectral",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "96818e83a57823adf4bfc88c52841cd94fbc61820d22343835eb704f5508ed63",
+          "nonfiniteSamples": 0,
+          "min": 0.0043423972092568874,
+          "max": 0.3650885820388794,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_glare",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "96818e83a57823adf4bfc88c52841cd94fbc61820d22343835eb704f5508ed63",
+          "nonfiniteSamples": 0,
+          "min": 0.0043423972092568874,
+          "max": 0.3650885820388794,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_linear",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "4a8eee1f3c45a68b576f6e630517e5224d19d4eb7b6d6474aa0a74002d4287e6",
+          "nonfiniteSamples": 0,
+          "min": 0.003945565782487392,
+          "max": 0.3852077126502991,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_scan_finish",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "ab439d20f023348b2505ba97ef4fc9a9fa44bd78b234948319716126e1d0a51e",
+          "nonfiniteSamples": 0,
+          "min": -0.014110282994806767,
+          "max": 0.38749322295188904,
+          "negativeSamples": 643,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_output",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "ec8bffaa7e84b8b86683563b3f8d9733f56d3ec89eab760d9c3a0eb5f3c838f6",
+          "nonfiniteSamples": 0,
+          "min": -0.1823071837425232,
+          "max": 0.655720055103302,
+          "negativeSamples": 643,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        }
+      ]
+    },
+    {
+      "id": "canon6d",
+      "tracedOutputExact": true,
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "shape": [
+            1200,
+            801,
+            3
+          ],
+          "sha256": "11946be51e5d4dddc4598c37adc45dd3f39528646046802f9ada052154e028b9",
+          "nonfiniteSamples": 0,
+          "min": 0.0019713069777935743,
+          "max": 5.916475296020508,
+          "negativeSamples": 0,
+          "aboveOneSamples": 436,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_boost",
+          "shape": [
+            1200,
+            801,
+            3
+          ],
+          "sha256": "11946be51e5d4dddc4598c37adc45dd3f39528646046802f9ada052154e028b9",
+          "nonfiniteSamples": 0,
+          "min": 0.0019713069777935743,
+          "max": 5.916475296020508,
+          "negativeSamples": 0,
+          "aboveOneSamples": 436,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_overscan",
+          "shape": [
+            1200,
+            801,
+            3
+          ],
+          "sha256": "11946be51e5d4dddc4598c37adc45dd3f39528646046802f9ada052154e028b9",
+          "nonfiniteSamples": 0,
+          "min": 0.0019713069777935743,
+          "max": 5.916475296020508,
+          "negativeSamples": 0,
+          "aboveOneSamples": 436,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_blurs",
+          "shape": [
+            1200,
+            801,
+            3
+          ],
+          "sha256": "11946be51e5d4dddc4598c37adc45dd3f39528646046802f9ada052154e028b9",
+          "nonfiniteSamples": 0,
+          "min": 0.0019713069777935743,
+          "max": 5.916475296020508,
+          "negativeSamples": 0,
+          "aboveOneSamples": 436,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_log_and_curves",
+          "shape": [
+            1200,
+            801,
+            3
+          ],
+          "sha256": "f75205e90befd90a8462dfc75942156de4a359d4aadc341cb33049eda93221df",
+          "nonfiniteSamples": 0,
+          "min": 0.0005167816416360438,
+          "max": 1.1080094575881958,
+          "negativeSamples": 0,
+          "aboveOneSamples": 5,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_couplers",
+          "shape": [
+            1200,
+            801,
+            3
+          ],
+          "sha256": "f75205e90befd90a8462dfc75942156de4a359d4aadc341cb33049eda93221df",
+          "nonfiniteSamples": 0,
+          "min": 0.0005167816416360438,
+          "max": 1.1080094575881958,
+          "negativeSamples": 0,
+          "aboveOneSamples": 5,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_grain",
+          "shape": [
+            1200,
+            801,
+            3
+          ],
+          "sha256": "f75205e90befd90a8462dfc75942156de4a359d4aadc341cb33049eda93221df",
+          "nonfiniteSamples": 0,
+          "min": 0.0005167816416360438,
+          "max": 1.1080094575881958,
+          "negativeSamples": 0,
+          "aboveOneSamples": 5,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_spectral",
+          "shape": [
+            1200,
+            801,
+            3
+          ],
+          "sha256": "e20247aa5c8c7f6ba72fbac665c2f8af2b1be5c9368a50ff8ef215c5397bb7ec",
+          "nonfiniteSamples": 0,
+          "min": 0.0041222237050533295,
+          "max": 0.4117732644081116,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_glare",
+          "shape": [
+            1200,
+            801,
+            3
+          ],
+          "sha256": "e20247aa5c8c7f6ba72fbac665c2f8af2b1be5c9368a50ff8ef215c5397bb7ec",
+          "nonfiniteSamples": 0,
+          "min": 0.0041222237050533295,
+          "max": 0.4117732644081116,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_linear",
+          "shape": [
+            1200,
+            801,
+            3
+          ],
+          "sha256": "e9012be03535f4294e012ada0b0a25a8047b8e758c232bad59ec11d1e5b8c5ec",
+          "nonfiniteSamples": 0,
+          "min": 0.0018560602329671383,
+          "max": 0.6839665770530701,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_scan_finish",
+          "shape": [
+            1200,
+            801,
+            3
+          ],
+          "sha256": "ea03c21a5d1b336702680b4d88dba59c9d4e8c13eb97899e5ae8afeb2992d113",
+          "nonfiniteSamples": 0,
+          "min": -0.058923326432704926,
+          "max": 0.8421658277511597,
+          "negativeSamples": 1517,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_output",
+          "shape": [
+            1200,
+            801,
+            3
+          ],
+          "sha256": "70f92810fb0c9652067db184849161dd318079c00ea4981375c7ccf89d905ad6",
+          "nonfiniteSamples": 0,
+          "min": -0.7612836956977844,
+          "max": 0.9271258115768433,
+          "negativeSamples": 1516,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        }
+      ]
+    },
+    {
+      "id": "canon5d3",
+      "tracedOutputExact": true,
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "057abe0f40424303a8dd6710b50d4d13bbeb337dce9933cc3ea57095dc998c82",
+          "nonfiniteSamples": 0,
+          "min": 0.002271088073030114,
+          "max": 7.476399898529053,
+          "negativeSamples": 0,
+          "aboveOneSamples": 367523,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_boost",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "057abe0f40424303a8dd6710b50d4d13bbeb337dce9933cc3ea57095dc998c82",
+          "nonfiniteSamples": 0,
+          "min": 0.002271088073030114,
+          "max": 7.476399898529053,
+          "negativeSamples": 0,
+          "aboveOneSamples": 367523,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_overscan",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "057abe0f40424303a8dd6710b50d4d13bbeb337dce9933cc3ea57095dc998c82",
+          "nonfiniteSamples": 0,
+          "min": 0.002271088073030114,
+          "max": 7.476399898529053,
+          "negativeSamples": 0,
+          "aboveOneSamples": 367523,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_blurs",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "057abe0f40424303a8dd6710b50d4d13bbeb337dce9933cc3ea57095dc998c82",
+          "nonfiniteSamples": 0,
+          "min": 0.002271088073030114,
+          "max": 7.476399898529053,
+          "negativeSamples": 0,
+          "aboveOneSamples": 367523,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_log_and_curves",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "bb3a39227e8285d7c7768745eb4545c9f690507a3df69e91b21e25284f8a5adb",
+          "nonfiniteSamples": 0,
+          "min": 0.0005184075562283397,
+          "max": 1.2812278270721436,
+          "negativeSamples": 0,
+          "aboveOneSamples": 91862,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_couplers",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "bb3a39227e8285d7c7768745eb4545c9f690507a3df69e91b21e25284f8a5adb",
+          "nonfiniteSamples": 0,
+          "min": 0.0005184075562283397,
+          "max": 1.2812278270721436,
+          "negativeSamples": 0,
+          "aboveOneSamples": 91862,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_grain",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "bb3a39227e8285d7c7768745eb4545c9f690507a3df69e91b21e25284f8a5adb",
+          "nonfiniteSamples": 0,
+          "min": 0.0005184075562283397,
+          "max": 1.2812278270721436,
+          "negativeSamples": 0,
+          "aboveOneSamples": 91862,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_spectral",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "091b4ff0de6ea217ffe686d1dbaf85af9c6c372e61c7f8082b4d95eebb5975be",
+          "nonfiniteSamples": 0,
+          "min": 0.004135899245738983,
+          "max": 0.6870673298835754,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_glare",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "091b4ff0de6ea217ffe686d1dbaf85af9c6c372e61c7f8082b4d95eebb5975be",
+          "nonfiniteSamples": 0,
+          "min": 0.004135899245738983,
+          "max": 0.6870673298835754,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_linear",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "0a9c620e6048429123fbf33631fc01b6654aeecb782a20838b9c2e4475f1d176",
+          "nonfiniteSamples": 0,
+          "min": 0.001652899431064725,
+          "max": 0.7241106033325195,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_scan_finish",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "b90ee1dc1dc68cf5281080173b1a91a77cf8bd58b18c74364fb767fdb358221f",
+          "nonfiniteSamples": 0,
+          "min": -0.03467406705021858,
+          "max": 0.7279128432273865,
+          "negativeSamples": 3822,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_output",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "02dbea93ffc21dded559fe3321975375c9bac1cda655691a0953b4b6ea1a946e",
+          "nonfiniteSamples": 0,
+          "min": -0.44797831773757935,
+          "max": 0.8692416548728943,
+          "negativeSamples": 3822,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        }
+      ]
+    },
+    {
+      "id": "nikond5100",
+      "tracedOutputExact": true,
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "shape": [
+            795,
+            1200,
+            3
+          ],
+          "sha256": "e30fffd15257a196294951a6f18f48c926511507c265ba3e6f69c93c4d421df5",
+          "nonfiniteSamples": 0,
+          "min": 0.002285172464326024,
+          "max": 5.509331703186035,
+          "negativeSamples": 0,
+          "aboveOneSamples": 604180,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_boost",
+          "shape": [
+            795,
+            1200,
+            3
+          ],
+          "sha256": "e30fffd15257a196294951a6f18f48c926511507c265ba3e6f69c93c4d421df5",
+          "nonfiniteSamples": 0,
+          "min": 0.002285172464326024,
+          "max": 5.509331703186035,
+          "negativeSamples": 0,
+          "aboveOneSamples": 604180,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_overscan",
+          "shape": [
+            795,
+            1200,
+            3
+          ],
+          "sha256": "e30fffd15257a196294951a6f18f48c926511507c265ba3e6f69c93c4d421df5",
+          "nonfiniteSamples": 0,
+          "min": 0.002285172464326024,
+          "max": 5.509331703186035,
+          "negativeSamples": 0,
+          "aboveOneSamples": 604180,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_blurs",
+          "shape": [
+            795,
+            1200,
+            3
+          ],
+          "sha256": "e30fffd15257a196294951a6f18f48c926511507c265ba3e6f69c93c4d421df5",
+          "nonfiniteSamples": 0,
+          "min": 0.002285172464326024,
+          "max": 5.509331703186035,
+          "negativeSamples": 0,
+          "aboveOneSamples": 604180,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_log_and_curves",
+          "shape": [
+            795,
+            1200,
+            3
+          ],
+          "sha256": "353ea4fd79f122973f5a67e6516c373113e000c993a6874fabb1fbb3c6776177",
+          "nonfiniteSamples": 0,
+          "min": 0.0005167811177670956,
+          "max": 1.282358169555664,
+          "negativeSamples": 0,
+          "aboveOneSamples": 319474,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_couplers",
+          "shape": [
+            795,
+            1200,
+            3
+          ],
+          "sha256": "353ea4fd79f122973f5a67e6516c373113e000c993a6874fabb1fbb3c6776177",
+          "nonfiniteSamples": 0,
+          "min": 0.0005167811177670956,
+          "max": 1.282358169555664,
+          "negativeSamples": 0,
+          "aboveOneSamples": 319474,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_grain",
+          "shape": [
+            795,
+            1200,
+            3
+          ],
+          "sha256": "353ea4fd79f122973f5a67e6516c373113e000c993a6874fabb1fbb3c6776177",
+          "nonfiniteSamples": 0,
+          "min": 0.0005167811177670956,
+          "max": 1.282358169555664,
+          "negativeSamples": 0,
+          "aboveOneSamples": 319474,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_spectral",
+          "shape": [
+            795,
+            1200,
+            3
+          ],
+          "sha256": "1569628966778f5dd77b07a287ba239e254affbf784dc75f6855ace699a44f6e",
+          "nonfiniteSamples": 0,
+          "min": 0.00412203511223197,
+          "max": 0.6864945292472839,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_glare",
+          "shape": [
+            795,
+            1200,
+            3
+          ],
+          "sha256": "1569628966778f5dd77b07a287ba239e254affbf784dc75f6855ace699a44f6e",
+          "nonfiniteSamples": 0,
+          "min": 0.00412203511223197,
+          "max": 0.6864945292472839,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_linear",
+          "shape": [
+            795,
+            1200,
+            3
+          ],
+          "sha256": "4326920905564480b7c3b3327566c06c38ddea0aca689debecd827c0a67ac3f5",
+          "nonfiniteSamples": 0,
+          "min": 0.0038977370131760836,
+          "max": 0.6537197828292847,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_scan_finish",
+          "shape": [
+            795,
+            1200,
+            3
+          ],
+          "sha256": "29466d4d50e02d9f98c0bfdcc70ec46c4a4b93dc1868b3a114cf329f84ea5904",
+          "nonfiniteSamples": 0,
+          "min": -0.054909706115722656,
+          "max": 0.6778280138969421,
+          "negativeSamples": 700,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_output",
+          "shape": [
+            795,
+            1200,
+            3
+          ],
+          "sha256": "3bb1b47118b8f628e0d61ccfab1af700449982adecccba3ea1065b019a30a55a",
+          "nonfiniteSamples": 0,
+          "min": -0.7094407677650452,
+          "max": 0.8421980738639832,
+          "negativeSamples": 700,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        }
+      ]
+    },
+    {
+      "id": "sonynex5r",
+      "tracedOutputExact": true,
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "cbb525d637fd2818d26fd59bba2d3144c77a6e7c956238dc4bdde19f380ac0ba",
+          "nonfiniteSamples": 0,
+          "min": 0.004013717640191317,
+          "max": 5.967618942260742,
+          "negativeSamples": 0,
+          "aboveOneSamples": 664890,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_boost",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "cbb525d637fd2818d26fd59bba2d3144c77a6e7c956238dc4bdde19f380ac0ba",
+          "nonfiniteSamples": 0,
+          "min": 0.004013717640191317,
+          "max": 5.967618942260742,
+          "negativeSamples": 0,
+          "aboveOneSamples": 664890,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_overscan",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "cbb525d637fd2818d26fd59bba2d3144c77a6e7c956238dc4bdde19f380ac0ba",
+          "nonfiniteSamples": 0,
+          "min": 0.004013717640191317,
+          "max": 5.967618942260742,
+          "negativeSamples": 0,
+          "aboveOneSamples": 664890,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_blurs",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "cbb525d637fd2818d26fd59bba2d3144c77a6e7c956238dc4bdde19f380ac0ba",
+          "nonfiniteSamples": 0,
+          "min": 0.004013717640191317,
+          "max": 5.967618942260742,
+          "negativeSamples": 0,
+          "aboveOneSamples": 664890,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_log_and_curves",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "9a499745bf5a08d621e825635b538206a7ef025775a3ccb74406506901027058",
+          "nonfiniteSamples": 0,
+          "min": 0.0005190917872823775,
+          "max": 1.2848516702651978,
+          "negativeSamples": 0,
+          "aboveOneSamples": 219145,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_couplers",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "9a499745bf5a08d621e825635b538206a7ef025775a3ccb74406506901027058",
+          "nonfiniteSamples": 0,
+          "min": 0.0005190917872823775,
+          "max": 1.2848516702651978,
+          "negativeSamples": 0,
+          "aboveOneSamples": 219145,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_grain",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "9a499745bf5a08d621e825635b538206a7ef025775a3ccb74406506901027058",
+          "nonfiniteSamples": 0,
+          "min": 0.0005190917872823775,
+          "max": 1.2848516702651978,
+          "negativeSamples": 0,
+          "aboveOneSamples": 219145,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_spectral",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "96978bae826c6bf161c134490530d6d616c806684fb34cbfa3cc96069070837e",
+          "nonfiniteSamples": 0,
+          "min": 0.004180462099611759,
+          "max": 0.6870673298835754,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_glare",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "96978bae826c6bf161c134490530d6d616c806684fb34cbfa3cc96069070837e",
+          "nonfiniteSamples": 0,
+          "min": 0.004180462099611759,
+          "max": 0.6870673298835754,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_linear",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "6b86fc4caeaf19f395f0f8910248a6a1430a22a3914465c2b4981d856f9ce0b3",
+          "nonfiniteSamples": 0,
+          "min": 0.001817053183913231,
+          "max": 0.6733074188232422,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_scan_finish",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "76dc9f3542f60c689b2d988169544d4ddf36439707c96aa6091c56de5a88cbac",
+          "nonfiniteSamples": 0,
+          "min": -0.05993208289146423,
+          "max": 0.7972294092178345,
+          "negativeSamples": 22324,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_output",
+          "shape": [
+            799,
+            1200,
+            3
+          ],
+          "sha256": "d4480bccb97e9751b8a92ef9e668fde7e90080ef34365e37096e0b78508fe7e1",
+          "nonfiniteSamples": 0,
+          "min": -0.7743316888809204,
+          "max": 0.9049645662307739,
+          "negativeSamples": 22323,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        }
+      ]
+    },
+    {
+      "id": "canonr6",
+      "tracedOutputExact": true,
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "bb0f8962b28a8f70675821a36c2fb9581e73ddfb078c7d9a0c3aacdaba6e2cb8",
+          "nonfiniteSamples": 0,
+          "min": 6.193603894644184e-06,
+          "max": 0.5209385752677917,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_boost",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "bb0f8962b28a8f70675821a36c2fb9581e73ddfb078c7d9a0c3aacdaba6e2cb8",
+          "nonfiniteSamples": 0,
+          "min": 6.193603894644184e-06,
+          "max": 0.5209385752677917,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_overscan",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "bb0f8962b28a8f70675821a36c2fb9581e73ddfb078c7d9a0c3aacdaba6e2cb8",
+          "nonfiniteSamples": 0,
+          "min": 6.193603894644184e-06,
+          "max": 0.5209385752677917,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_blurs",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "bb0f8962b28a8f70675821a36c2fb9581e73ddfb078c7d9a0c3aacdaba6e2cb8",
+          "nonfiniteSamples": 0,
+          "min": 6.193603894644184e-06,
+          "max": 0.5209385752677917,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_log_and_curves",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "066de44b4845838480829529bcf16adf712c29d17f4227172f30947897e20db6",
+          "nonfiniteSamples": 0,
+          "min": 0.0,
+          "max": 0.558632493019104,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 48382,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_couplers",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "066de44b4845838480829529bcf16adf712c29d17f4227172f30947897e20db6",
+          "nonfiniteSamples": 0,
+          "min": 0.0,
+          "max": 0.558632493019104,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 48382,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "film_grain",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "066de44b4845838480829529bcf16adf712c29d17f4227172f30947897e20db6",
+          "nonfiniteSamples": 0,
+          "min": 0.0,
+          "max": 0.558632493019104,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 48382,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_spectral",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "6bf6d216a535f08843e7fdadd4c2e0021c3b1cc6d8eca0b1e4df0c0875dd196a",
+          "nonfiniteSamples": 0,
+          "min": 0.004117914475500584,
+          "max": 0.04276368021965027,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_glare",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "6bf6d216a535f08843e7fdadd4c2e0021c3b1cc6d8eca0b1e4df0c0875dd196a",
+          "nonfiniteSamples": 0,
+          "min": 0.004117914475500584,
+          "max": 0.04276368021965027,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_linear",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "8a4497481e144e8e795805b241db5bb775091d1db712d16d4b4cbdcbee95d050",
+          "nonfiniteSamples": 0,
+          "min": 0.003890669671818614,
+          "max": 0.06480438262224197,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_scan_finish",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "20d216fe5908c94c1d6e0bc4259a5596cdfb5dd14aa146a9d76b6e98e49e7111",
+          "nonfiniteSamples": 0,
+          "min": 0.0003657087800092995,
+          "max": 0.06960002332925797,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        },
+        {
+          "stage": "print_output",
+          "shape": [
+            801,
+            1200,
+            3
+          ],
+          "sha256": "8aa143111fa2bbaf0298aaea9734183223c99a3d1dbe0e1d651ed97be830ba2b",
+          "nonfiniteSamples": 0,
+          "min": 0.004726271610707045,
+          "max": 0.29254084825515747,
+          "negativeSamples": 0,
+          "aboveOneSamples": 0,
+          "zeroSamples": 0,
+          "note": "range depends on stage domain; >1 negative density is not output clipping"
+        }
+      ]
+    }
+  ]
+}

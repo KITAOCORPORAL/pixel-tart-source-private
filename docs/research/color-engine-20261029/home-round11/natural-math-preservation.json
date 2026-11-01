@@ -1,0 +1,30 @@
+{
+  "version": "NaturalRunMathPreservationV1",
+  "fixedSourceChecks": [
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "sameBytes": true,
+      "sha256": "f6a76b5eeab6f2ee1d6c1222289f236c6a8ce2d6f5638580e5ddf94046f2448a"
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.hpp",
+      "sameBytes": true,
+      "sha256": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4"
+    },
+    {
+      "path": "engine/src/gpu/gpu.hpp",
+      "sameBytes": true,
+      "sha256": "dd539f383b5aa44c7aa2c23cf3232dea5e2c826a64b5e8f06b8a7568127ad3e3"
+    },
+    {
+      "path": "engine/src/gpu/vulkan_gpu.cpp",
+      "sameBytes": true,
+      "sha256": "56e5456314e660e1111af5c0b9d24bce04a854b09568ac72cb43c7a9c560722b"
+    }
+  ],
+  "originalNaturalTranslationUnitPrefixUnmodified": true,
+  "pixelMathChanged": false,
+  "onlyNewGuardedEntryAppended": true,
+  "resourcesAndShaders": "60e45914333231a5f76373452dd11ff27cca0e5d7271a0edf25b6ad47e6a10ad",
+  "allByteChecksPass": true
+}

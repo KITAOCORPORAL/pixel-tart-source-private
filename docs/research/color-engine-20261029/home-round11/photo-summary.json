@@ -1,0 +1,109 @@
+{
+  "version": "SixPhotoSummaryV1",
+  "rows": [
+    {
+      "id": "canon600d",
+      "width": 1200,
+      "height": 799,
+      "wholeMs": 61.709700006758794,
+      "stream17Ms": 606.6581000050064,
+      "stream37Ms": 457.93819999380503,
+      "sampledRssMiB": 190.5625,
+      "osLifetimePeakMiB": 216.71484375,
+      "outputAnyZeroPixels": 308,
+      "outputZeroPixelsWithoutPriorEndpointAndProxyAllInterior": 308,
+      "outputMaxFraction": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "canon6d",
+      "width": 801,
+      "height": 1200,
+      "wholeMs": 59.74219999916386,
+      "stream17Ms": 795.9425999870291,
+      "stream37Ms": 528.322099999059,
+      "sampledRssMiB": 230.28515625,
+      "osLifetimePeakMiB": 234.1875,
+      "outputAnyZeroPixels": 1088,
+      "outputZeroPixelsWithoutPriorEndpointAndProxyAllInterior": 1018,
+      "outputMaxFraction": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "canon5d3",
+      "width": 1200,
+      "height": 801,
+      "wholeMs": 81.96630000020377,
+      "stream17Ms": 672.9416000016499,
+      "stream37Ms": 458.82450000499375,
+      "sampledRssMiB": 244.7890625,
+      "osLifetimePeakMiB": 247.8671875,
+      "outputAnyZeroPixels": 3338,
+      "outputZeroPixelsWithoutPriorEndpointAndProxyAllInterior": 446,
+      "outputMaxFraction": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "nikond5100",
+      "width": 1200,
+      "height": 795,
+      "wholeMs": 60.0758000073256,
+      "stream17Ms": 602.0926000055624,
+      "stream37Ms": 433.69810000876896,
+      "sampledRssMiB": 257.19140625,
+      "osLifetimePeakMiB": 262.50390625,
+      "outputAnyZeroPixels": 350,
+      "outputZeroPixelsWithoutPriorEndpointAndProxyAllInterior": 350,
+      "outputMaxFraction": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "sonynex5r",
+      "width": 1200,
+      "height": 799,
+      "wholeMs": 59.95210001128726,
+      "stream17Ms": 591.4552000031108,
+      "stream37Ms": 448.2753999909619,
+      "sampledRssMiB": 271.7109375,
+      "osLifetimePeakMiB": 276.50390625,
+      "outputAnyZeroPixels": 11563,
+      "outputZeroPixelsWithoutPriorEndpointAndProxyAllInterior": 11562,
+      "outputMaxFraction": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "canonr6",
+      "width": 1200,
+      "height": 801,
+      "wholeMs": 62.09580000722781,
+      "stream17Ms": 608.2628000003751,
+      "stream37Ms": 431.3680000050226,
+      "sampledRssMiB": 286.15234375,
+      "osLifetimePeakMiB": 286.15234375,
+      "outputAnyZeroPixels": 0,
+      "outputZeroPixelsWithoutPriorEndpointAndProxyAllInterior": 0,
+      "outputMaxFraction": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "timingScope": "whole includes native render+owned output copy; stream includes init/resource SHA/bands/store/consumer; not directly comparable speed claim",
+  "rssScope": "one sequential process; interval sampled RSS; OS process lifetime peak cumulative across photos; decoder memory separate"
+}

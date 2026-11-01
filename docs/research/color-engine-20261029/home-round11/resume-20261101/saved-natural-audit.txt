@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "N:\pixart\guangjing-color-engine-home-20261030\tools\color-round11\verify_saved_outputs.py", line 122, in <module>
+    main()
+  File "N:\pixart\guangjing-color-engine-home-20261030\tools\color-round11\verify_saved_outputs.py", line 114, in main
+    report = validate_saved_outputs(args.evidence, args.inputs, args.outputs, args.stages)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\pixart\guangjing-color-engine-home-20261030\tools\color-round11\verify_saved_outputs.py", line 99, in validate_saved_outputs
+    stage_checks.append(validate_stage_file(safe(stages, filename), record))
+                                            ^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\pixart\guangjing-color-engine-home-20261030\tools\color-round11\diagnostic\package_validation.py", line 22, in safe
+    p=(root/name).resolve();need(p.is_relative_to(root.resolve()) and p.is_file(),'Missing or escaped artifact '+name);return p
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\pixart\guangjing-color-engine-home-20261030\tools\color-round11\diagnostic\package_validation.py", line 11, in need
+    if not c:raise ValueError(m)
+             ^^^^^^^^^^^^^^^^^^^
+ValueError: Missing or escaped artifact canon6d/0000-film_scale_and_expose-1200-801-3.f32

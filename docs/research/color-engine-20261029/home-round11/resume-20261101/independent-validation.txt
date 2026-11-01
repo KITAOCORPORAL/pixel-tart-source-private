@@ -1,0 +1,27 @@
+test_duplicate_case (__main__.IndependentValidation.test_duplicate_case) ... ok
+test_duplicate_stage (__main__.IndependentValidation.test_duplicate_stage) ... ok
+test_execution_file_role_drift (__main__.IndependentValidation.test_execution_file_role_drift) ... ok
+test_input_identity (__main__.IndependentValidation.test_input_identity) ... ok
+test_invalid_role (__main__.IndependentValidation.test_invalid_role) ... ok
+test_missing_case (__main__.IndependentValidation.test_missing_case) ... ok
+test_missing_stage (__main__.IndependentValidation.test_missing_stage) ... ok
+test_packaged_input_changed (__main__.IndependentValidation.test_packaged_input_changed) ... ok
+test_resolved_both_sides_cannot_change_contract (__main__.IndependentValidation.test_resolved_both_sides_cannot_change_contract) ... ok
+test_resources_resealed (__main__.IndependentValidation.test_resources_resealed) ... ok
+test_stage_domain (__main__.IndependentValidation.test_stage_domain) ... ok
+test_stage_nonfinite_rehashed (__main__.IndependentValidation.test_stage_nonfinite_rehashed) ... ok
+test_stage_order (__main__.IndependentValidation.test_stage_order) ... ok
+test_stage_truncated_rehashed (__main__.IndependentValidation.test_stage_truncated_rehashed) ... ok
+test_stream_pixel_and_hash_resealed_still_rejected (__main__.IndependentValidation.test_stream_pixel_and_hash_resealed_still_rejected) ... ok
+test_stream_trace_altered (__main__.IndependentValidation.test_stream_trace_altered) ... ok
+test_tool_identity_missing (__main__.IndependentValidation.test_tool_identity_missing) ... ok
+test_trace_pixel_rejected_even_bool_true (__main__.IndependentValidation.test_trace_pixel_rejected_even_bool_true) ... ok
+test_valid (__main__.IndependentValidation.test_valid) ... ok
+test_wrong_gpu_record (__main__.IndependentValidation.test_wrong_gpu_record) ... ok
+test_wrong_role (__main__.IndependentValidation.test_wrong_role) ... ok
+test_wrong_shape (__main__.IndependentValidation.test_wrong_shape) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 4.822s
+
+OK

@@ -1,0 +1,196 @@
+{
+  "version": "Round11ContinuationToolIdentityV1",
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "phase": "final-read-only-validation-source-not-render-time-source",
+  "priorSnapshotSha256": "a744308a7cd465cafeff989da2fea5ab6b0f8c079b536c378830d07d42d77d59",
+  "renderedExecutionSnapshotUnmodified": true,
+  "records": [
+    {
+      "path": "tools/color-round11/audit_prior_endpoints.py",
+      "sha256": "03754d77854e47069b1365eacc5f62779528f562d6cf8dcc116934cf912b0122",
+      "previousSnapshotSha256": "03754d77854e47069b1365eacc5f62779528f562d6cf8dcc116934cf912b0122",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/audit_stage_finite.py",
+      "sha256": "699f2b9d35ef970c93da95ef5c1335b755b0755be1e484d2dc8f7ef0437e1cb4",
+      "previousSnapshotSha256": null,
+      "unchangedFromPriorSnapshot": null
+    },
+    {
+      "path": "tools/color-round11/concrete_findings.py",
+      "sha256": "57a00345e9d97293cdd9a9d806a9d91b524cb90b9000d9fb3b9ae2cabdd9d7c4",
+      "previousSnapshotSha256": "57a00345e9d97293cdd9a9d806a9d91b524cb90b9000d9fb3b9ae2cabdd9d7c4",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/collect_build_identity.py",
+      "sha256": "9ed5ead6318a659869773d4bf6951bcaae381d386aeeaad89208322ce3c087ce",
+      "previousSnapshotSha256": "9ed5ead6318a659869773d4bf6951bcaae381d386aeeaad89208322ce3c087ce",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/compare_packages.py",
+      "sha256": "a4fd185d25a5056da1dbc6d75c428fc8dac437c89939aeca3e94ed7f76908c77",
+      "previousSnapshotSha256": "a4fd185d25a5056da1dbc6d75c428fc8dac437c89939aeca3e94ed7f76908c77",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/compare_rows.py",
+      "sha256": "2ca1420e9e4a3a4814ebab6366cfcac749b9ab3e9c976a190009c2e12a273bcb",
+      "previousSnapshotSha256": "2ca1420e9e4a3a4814ebab6366cfcac749b9ab3e9c976a190009c2e12a273bcb",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/expected-resources.json",
+      "sha256": "ee39138735771e0f3ce29256677ea2b60e810943bb778cb0188d8d5ca14ba7ff",
+      "previousSnapshotSha256": null,
+      "unchangedFromPriorSnapshot": null
+    },
+    {
+      "path": "tools/color-round11/diagnostic/fixtures/fixtures.json",
+      "sha256": "bbb0277b828bf15ec1963df81565faad09faf863525063ae1a03b7a79a3515bc",
+      "previousSnapshotSha256": null,
+      "unchangedFromPriorSnapshot": null
+    },
+    {
+      "path": "tools/color-round11/diagnostic/generate_inputs.py",
+      "sha256": "fbe856fcb8e1ea84642a2b4af563401df6f05ea32e345a9e45836964a4c3e2cb",
+      "previousSnapshotSha256": "fbe856fcb8e1ea84642a2b4af563401df6f05ea32e345a9e45836964a4c3e2cb",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/package_validation.py",
+      "sha256": "bdf3eee954e5bd9a202a243f09ed9b8e47b575bc2109044966435e74d516d538",
+      "previousSnapshotSha256": "bdf3eee954e5bd9a202a243f09ed9b8e47b575bc2109044966435e74d516d538",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/resolved-portraA.json",
+      "sha256": "2036432956d149bc265a851c26d0241bd5753a7882a679aaa2c560a9d5c8710b",
+      "previousSnapshotSha256": null,
+      "unchangedFromPriorSnapshot": null
+    },
+    {
+      "path": "tools/color-round11/diagnostic/run_company.ps1",
+      "sha256": "fb9f4eaba2ab735ff007c2f889438fcc321df8fb774fed629c9c0c6cf3d653a3",
+      "previousSnapshotSha256": null,
+      "unchangedFromPriorSnapshot": null
+    },
+    {
+      "path": "tools/color-round11/diagnostic/run_diagnostic.py",
+      "sha256": "c03756e58095ae72cf8760a9667c6816532f0ea7b8a74045814085bb66118f07",
+      "previousSnapshotSha256": "c03756e58095ae72cf8760a9667c6816532f0ea7b8a74045814085bb66118f07",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/test_independent_validation.py",
+      "sha256": "9935175bc18516290f8f42296830d1300f09221da024d64daf5de64c36456658",
+      "previousSnapshotSha256": "9935175bc18516290f8f42296830d1300f09221da024d64daf5de64c36456658",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/diagnostic/test_two_side_compare.py",
+      "sha256": "28fe72f3df2e4aacf4f06a729802b18a990a402d123f5dae9cc5baf91fdffc16",
+      "previousSnapshotSha256": "f5f3b8b811f496095db74f75a5ce30f4eb05b9a9feb4b83ec41738c4bcf37395",
+      "unchangedFromPriorSnapshot": false
+    },
+    {
+      "path": "tools/color-round11/diagnostic/verify_run.py",
+      "sha256": "2cf3b2dd136161691151792c8d20c08c87bb31ca9f8746b67e33b4a5d0be6f12",
+      "previousSnapshotSha256": "2cf3b2dd136161691151792c8d20c08c87bb31ca9f8746b67e33b4a5d0be6f12",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/generate_natural_backend.py",
+      "sha256": "a0cccbadbbf80982a0fe0256d4517bb11525107f72f07bc03e305dc1e2064602",
+      "previousSnapshotSha256": "a0cccbadbbf80982a0fe0256d4517bb11525107f72f07bc03e305dc1e2064602",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/inventory_natural.py",
+      "sha256": "50682dabb5554a936752cba734685b117518e2e276a89daf156ff6e8414c13c6",
+      "previousSnapshotSha256": "50682dabb5554a936752cba734685b117518e2e276a89daf156ff6e8414c13c6",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/photo-preparation/PhotoPrepare.csproj",
+      "sha256": "cf669b985bcc0d8a2b663a1079ef8d55c8a3f36aa0c92d722e32260ac0ddc16c",
+      "previousSnapshotSha256": "cf669b985bcc0d8a2b663a1079ef8d55c8a3f36aa0c92d722e32260ac0ddc16c",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/photo-preparation/Program.cs",
+      "sha256": "38077b80db1ab67fa97371302d74b514c21b1275b776e1b9ed069c8ae893438f",
+      "previousSnapshotSha256": "38077b80db1ab67fa97371302d74b514c21b1275b776e1b9ed069c8ae893438f",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/photo-preparation/sources-v1.json",
+      "sha256": "5bc62e03d79c0ba0aa56d419ef815e05b750338d71d31e4e130bd62bc084e1ff",
+      "previousSnapshotSha256": "5bc62e03d79c0ba0aa56d419ef815e05b750338d71d31e4e130bd62bc084e1ff",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/photo_numeric_review.py",
+      "sha256": "9e4f71d107ae34cf7caff7883bd81dd8e239f25421244a2a74da8b417e094d19",
+      "previousSnapshotSha256": "9e4f71d107ae34cf7caff7883bd81dd8e239f25421244a2a74da8b417e094d19",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/prepare_photos.py",
+      "sha256": "0df7c0771093a7d72cd9db04297458b18afd99fbcd75cbab453a9c7ccd870262",
+      "previousSnapshotSha256": "0df7c0771093a7d72cd9db04297458b18afd99fbcd75cbab453a9c7ccd870262",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/review_photos.py",
+      "sha256": "796cf6a6c4e7721ba9ae5b58457d1101b670d14d15514233982e6fe95a3df2b8",
+      "previousSnapshotSha256": "796cf6a6c4e7721ba9ae5b58457d1101b670d14d15514233982e6fe95a3df2b8",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/run_photos.py",
+      "sha256": "19e1ca081259c7b852ecb7dc70fa92fbc95f9729e4c11835cd3efc45c2e12a93",
+      "previousSnapshotSha256": "19e1ca081259c7b852ecb7dc70fa92fbc95f9729e4c11835cd3efc45c2e12a93",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/test_natural_guards.py",
+      "sha256": "6646c894aba85bbfb5ca6e0e8bcd39a53f697a08dfd7adedaa711d9893696cd8",
+      "previousSnapshotSha256": "6646c894aba85bbfb5ca6e0e8bcd39a53f697a08dfd7adedaa711d9893696cd8",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/test_photo_admission.py",
+      "sha256": "b3ca59205f354aea259a0f6b759245c9d1589ce66510d62020dce7c5c2719a5a",
+      "previousSnapshotSha256": "b3ca59205f354aea259a0f6b759245c9d1589ce66510d62020dce7c5c2719a5a",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/test_saved_outputs.py",
+      "sha256": "dcaada91998127a1e7dc03aaf334040c48d0b5cbc607fc2737bb3b50dc23dae1",
+      "previousSnapshotSha256": null,
+      "unchangedFromPriorSnapshot": null
+    },
+    {
+      "path": "tools/color-round11/verify_frozen_stage.py",
+      "sha256": "66a7d0c8509581b3dde84ad226b1c075fe4b6168e367c10bd93456c3ceb5aaf6",
+      "previousSnapshotSha256": "66a7d0c8509581b3dde84ad226b1c075fe4b6168e367c10bd93456c3ceb5aaf6",
+      "unchangedFromPriorSnapshot": true
+    },
+    {
+      "path": "tools/color-round11/verify_round11.py",
+      "sha256": "e63bc91bd39e40157d0a49850bb5f3f17c7a881f39c1aa9459fde6f1d884d96a",
+      "previousSnapshotSha256": "e5ea0844a818ef9b88e9918cc1f79ed9b3d3229d70edc2ca6810fbef126b0a79",
+      "unchangedFromPriorSnapshot": false
+    },
+    {
+      "path": "tools/color-round11/verify_saved_outputs.py",
+      "sha256": "c147cc7dc3b9dd131932185f7c34525f2261ef74614f7ca69c749beb3adcdfdc",
+      "previousSnapshotSha256": null,
+      "unchangedFromPriorSnapshot": null
+    }
+  ]
+}

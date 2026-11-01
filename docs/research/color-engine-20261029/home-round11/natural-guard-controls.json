@@ -1,0 +1,38 @@
+{
+  "version": "NaturalCoverageExplicitGuardControlsV1",
+  "cases": [
+    {
+      "case": "new-wrong-source",
+      "status": -1,
+      "readCallbacks": 0,
+      "deviceLive": 0,
+      "stagingLive": 0,
+      "error": "Unknown authorized source/input identity"
+    },
+    {
+      "case": "new-wrong-pixel",
+      "status": -1,
+      "readCallbacks": 0,
+      "deviceLive": 0,
+      "stagingLive": 0,
+      "error": "Unknown authorized source/input identity"
+    },
+    {
+      "case": "new-wrong-shape",
+      "status": -1,
+      "readCallbacks": 0,
+      "deviceLive": 0,
+      "stagingLive": 0,
+      "error": "Unknown authorized source/input identity"
+    },
+    {
+      "case": "original-entry-still-rejects-new-source",
+      "status": -1,
+      "readCallbacks": 0,
+      "deviceLive": 0,
+      "stagingLive": 0,
+      "error": "Unknown authorized source/input identity"
+    }
+  ],
+  "sourceWhitelistUnchanged": true
+}

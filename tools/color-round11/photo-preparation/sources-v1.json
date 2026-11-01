@@ -1,0 +1,64 @@
+{
+  "version": "NaturalCoverageAdmissionV1",
+  "maxPhotos": 6,
+  "sourceRoot": "N:/pixart/RAW",
+  "outputRoot": "N:/pixart/ColorResearchHome-20261030/round11",
+  "pixelDomain": "current production LibRaw ProPhoto D65 linear, originalWB/AHD/matrix uint16 retained",
+  "parameters": "frozen PortraA99, EV0, no stock/effect changes",
+  "entries": [
+    {
+      "id": "canon600d",
+      "path": "N:/pixart/RAW/Real/canon/RAW_CANON_EOS_600D.CR2",
+      "sha256": "9A91AE88D13D7401B0D2A188B4D24AA8947E84EA94610367CDF9EF32E8E4AA89",
+      "authorizedScope": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "role": "development_exploration_only",
+      "scene": "TO_BE_VISUALLY_REVIEWED",
+      "noRedistribution": true
+    },
+    {
+      "id": "canon6d",
+      "path": "N:/pixart/RAW/Real/canon/RAW_CANON_6D.CR2",
+      "sha256": "FEC7395A77D608A2700A4342FB933E6D600D2C22E2F6F88FBD06918CBABA00DC",
+      "authorizedScope": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "role": "development_exploration_only",
+      "scene": "TO_BE_VISUALLY_REVIEWED",
+      "noRedistribution": true
+    },
+    {
+      "id": "canon5d3",
+      "path": "N:/pixart/RAW/Real/canon/RAW_CANON_EOS_5DMARK3.CR2",
+      "sha256": "09FEE3EBB29DA5F2F50191BF8B863735A20CD31789B33454ECDE88A67DE457E4",
+      "authorizedScope": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "role": "development_exploration_only",
+      "scene": "TO_BE_VISUALLY_REVIEWED",
+      "noRedistribution": true
+    },
+    {
+      "id": "nikond5100",
+      "path": "N:/pixart/RAW/Real/nikon/RAW_NIKON_D5100.NEF",
+      "sha256": "ABE9F7783BDF77A36F078831B47F3250DA62FD7ECF23D6F4B4C3798AA91EB974",
+      "authorizedScope": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "role": "development_exploration_only",
+      "scene": "TO_BE_VISUALLY_REVIEWED",
+      "noRedistribution": true
+    },
+    {
+      "id": "sonynex5r",
+      "path": "N:/pixart/RAW/Real/sony/RAW_SONY_NEX-5R.ARW",
+      "sha256": "2CAFACA4C03567A852DEA648C87F30C9851FDBCE1E44CCE909299F5FFEC93102",
+      "authorizedScope": "docs/color-studio/raw-compatibility/01_RAW_CORPUS_MANIFEST.md THIRD_PARTY_TEST_FIXTURE LOCAL_COMPATIBILITY_TEST_ONLY",
+      "role": "development_exploration_only",
+      "scene": "TO_BE_VISUALLY_REVIEWED",
+      "noRedistribution": true
+    },
+    {
+      "id": "canonr6",
+      "path": "N:/pixart/RAW/Real/canon/TNAN8886.CR3",
+      "sha256": "B7D358517DB0CD5B5C54215AA089A5A30C79234AEF50E9381931128493E33401",
+      "authorizedScope": "docs/color-studio/real-camera-company/COMPANY_RAW_FIXTURE_MANIFEST.json company-05",
+      "role": "development_exploration_only",
+      "scene": "TO_BE_VISUALLY_REVIEWED",
+      "noRedistribution": true
+    }
+  ]
+}
