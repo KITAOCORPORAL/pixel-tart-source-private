@@ -1,0 +1,37 @@
+{
+  "version": "Round11ContinuationGitReceiptV1",
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "branch": "research/color-engine-home-20261030",
+  "implementationCommit": "a95071d0ad773f3e885f36b70081b5d88c8917ec",
+  "baseCommit": "07df3c56c551c38893abc1e4b7eaefb8e4a83be4",
+  "commitReadback": {
+    "version": "Round11CommitByteReadbackV1",
+    "date": "2026-11-01",
+    "timezone": "Europe/Helsinki",
+    "implementationCommit": "a95071d0ad773f3e885f36b70081b5d88c8917ec",
+    "sourceFiles": 31,
+    "allSourceBlobHashesMatch": true,
+    "protectedPathsDiff": "",
+    "statusBeforeReceipt": ""
+  },
+  "pushStatus": "FAILED_NETWORK",
+  "remoteReadbackStatus": "NOT_VERIFIED_AFTER_COMMIT",
+  "lastSuccessfulFetchedRemoteHead": "07df3c56c551c38893abc1e4b7eaefb8e4a83be4",
+  "attempts": [
+    {
+      "attempt": 1,
+      "method": "normal git push origin research/color-engine-home-20261030",
+      "pushError": "Recv failure: Connection was reset",
+      "readbackError": "curl 28 Failed to connect to github.com port 443 after 21051 ms: Could not connect to server"
+    },
+    {
+      "attempt": 2,
+      "method": "one retry with per-command http.version=HTTP/1.1 and lowSpeedTime=20; no persisted config change",
+      "pushError": "Failed to connect to github.com port 443 after 21135 ms: Could not connect to server",
+      "readbackError": "Failed to connect to github.com port 443 after 21115 ms: Could not connect to server"
+    }
+  ],
+  "nextStep": "When network is restored, normal push of this branch then ls-remote readback. Do not force-push or rerender.",
+  "scope": "This receipt cannot include its own future commit identity. implementationCommit is the completed code/evidence commit; git log identifies the later receipt commit."
+}
