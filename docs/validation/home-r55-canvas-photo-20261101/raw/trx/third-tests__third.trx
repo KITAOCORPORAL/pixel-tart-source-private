@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="673b6594-ab2f-4048-a820-42dc59ab5970" name="Admin@DESKTOP-HO0JJEQ 2026-11-01 16:57:39" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-01T16:57:39.6699407+08:00" queuing="2026-11-01T16:57:39.6699408+08:00" start="2026-11-01T16:57:35.1849058+08:00" finish="2026-11-01T16:57:44.9601366+08:00" />
+  <TestSettings name="default" id="e63ace45-7a75-4a0c-a274-d0a35a3dcaec">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-11-01_16_57_39" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="045484e5-0079-4148-a433-a0b107550df2" testId="190d08b9-6e47-8690-94b6-ecb1dd1226cc" testName="NativeJpegProxyIdentityCacheAndNumericalFixtures" computerName="DESKTOP-HO0JJEQ" duration="00:00:02.6627970" startTime="2026-11-01T16:57:39.6520706+08:00" endTime="2026-11-01T16:57:42.3153767+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="045484e5-0079-4148-a433-a0b107550df2" />
+    <UnitTestResult executionId="28e33dd3-fe7a-427c-a9ac-fead538e1000" testId="190e7a42-d9ac-8a2f-9bb1-44ec829c9001" testName="AuthorizedLargePhotoCaptureMeasuresColdRepeatAndRelease" computerName="DESKTOP-HO0JJEQ" duration="00:00:04.0005801" startTime="2026-11-01T16:57:35.6319331+08:00" endTime="2026-11-01T16:57:39.6451101+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="28e33dd3-fe7a-427c-a9ac-fead538e1000" />
+    <UnitTestResult executionId="7489b48c-dd69-4b1b-a71e-205c2d886edf" testId="141ebca5-5f68-8122-9ea4-e0826e11333f" testName="V3SmallImagesExactlyPreserveV2AndLegacySavedPngs" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.3826319" startTime="2026-11-01T16:57:42.3174031+08:00" endTime="2026-11-01T16:57:42.7001904+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7489b48c-dd69-4b1b-a71e-205c2d886edf" />
+    <UnitTestResult executionId="db91c83a-8a2a-4a0f-bf64-3310273514a1" testId="143928aa-2184-8519-b3f1-224130e91854" testName="LargePhotoCancellationAndSourceReplacementKeepOldSnapshot" computerName="DESKTOP-HO0JJEQ" duration="00:00:01.2667314" startTime="2026-11-01T16:57:43.5438955+08:00" endTime="2026-11-01T16:57:44.8121964+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db91c83a-8a2a-4a0f-bf64-3310273514a1" />
+    <UnitTestResult executionId="06ef1968-960f-4d5c-8f0c-b3a785ef77f1" testId="1768948d-45fb-88e1-bca5-4cddcc07c360" testName="LargePhotoIndependentFixtureAndManualUpdate" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.8432644" startTime="2026-11-01T16:57:42.7002493+08:00" endTime="2026-11-01T16:57:43.5436384+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="06ef1968-960f-4d5c-8f0c-b3a785ef77f1" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LargePhotoCancellationAndSourceReplacementKeepOldSnapshot" storage="n:\pixart\guangjing-r55-canvas-photo-preview-20261101\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="143928aa-2184-8519-b3f1-224130e91854">
+      <Execution id="db91c83a-8a2a-4a0f-bf64-3310273514a1" />
+      <TestMethod codeBase="N:\pixart\guangjing-r55-canvas-photo-preview-20261101\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasPhotoPreviewTests" name="LargePhotoCancellationAndSourceReplacementKeepOldSnapshot" />
+    </UnitTest>
+    <UnitTest name="NativeJpegProxyIdentityCacheAndNumericalFixtures" storage="n:\pixart\guangjing-r55-canvas-photo-preview-20261101\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="190d08b9-6e47-8690-94b6-ecb1dd1226cc">
+      <Execution id="045484e5-0079-4148-a433-a0b107550df2" />
+      <TestMethod codeBase="N:\pixart\guangjing-r55-canvas-photo-preview-20261101\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasPhotoPreviewTests" name="NativeJpegProxyIdentityCacheAndNumericalFixtures" />
+    </UnitTest>
+    <UnitTest name="LargePhotoIndependentFixtureAndManualUpdate" storage="n:\pixart\guangjing-r55-canvas-photo-preview-20261101\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1768948d-45fb-88e1-bca5-4cddcc07c360">
+      <Execution id="06ef1968-960f-4d5c-8f0c-b3a785ef77f1" />
+      <TestMethod codeBase="N:\pixart\guangjing-r55-canvas-photo-preview-20261101\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasPhotoPreviewTests" name="LargePhotoIndependentFixtureAndManualUpdate" />
+    </UnitTest>
+    <UnitTest name="V3SmallImagesExactlyPreserveV2AndLegacySavedPngs" storage="n:\pixart\guangjing-r55-canvas-photo-preview-20261101\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="141ebca5-5f68-8122-9ea4-e0826e11333f">
+      <Execution id="7489b48c-dd69-4b1b-a71e-205c2d886edf" />
+      <TestMethod codeBase="N:\pixart\guangjing-r55-canvas-photo-preview-20261101\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasPhotoPreviewTests" name="V3SmallImagesExactlyPreserveV2AndLegacySavedPngs" />
+    </UnitTest>
+    <UnitTest name="AuthorizedLargePhotoCaptureMeasuresColdRepeatAndRelease" storage="n:\pixart\guangjing-r55-canvas-photo-preview-20261101\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="190e7a42-d9ac-8a2f-9bb1-44ec829c9001">
+      <Execution id="28e33dd3-fe7a-427c-a9ac-fead538e1000" />
+      <TestMethod codeBase="N:\pixart\guangjing-r55-canvas-photo-preview-20261101\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasPhotoPreviewTests" name="AuthorizedLargePhotoCaptureMeasuresColdRepeatAndRelease" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="190d08b9-6e47-8690-94b6-ecb1dd1226cc" executionId="045484e5-0079-4148-a433-a0b107550df2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="190e7a42-d9ac-8a2f-9bb1-44ec829c9001" executionId="28e33dd3-fe7a-427c-a9ac-fead538e1000" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="141ebca5-5f68-8122-9ea4-e0826e11333f" executionId="7489b48c-dd69-4b1b-a71e-205c2d886edf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="143928aa-2184-8519-b3f1-224130e91854" executionId="db91c83a-8a2a-4a0f-bf64-3310273514a1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1768948d-45fb-88e1-bca5-4cddcc07c360" executionId="06ef1968-960f-4d5c-8f0c-b3a785ef77f1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

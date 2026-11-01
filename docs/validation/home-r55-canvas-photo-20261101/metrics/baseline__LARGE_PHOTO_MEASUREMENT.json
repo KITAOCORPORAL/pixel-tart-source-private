@@ -1,0 +1,27 @@
+{
+  "error": "InvalidDataException: 策划画布图层超过预览内存预算；未读取缩略缓存或降低导出精度。",
+  "elapsedMs": 79.2664,
+  "baseWs": 132612096,
+  "peakWs": 134291456,
+  "wsDelta": 1679360,
+  "basePrivate": 48287744,
+  "peakPrivate": 65708032,
+  "privateDelta": 17420288,
+  "snapshots": 0,
+  "input": [
+    {
+      "inputId": "authorized-0",
+      "sha256": "729280b2d7a17b8b303273fe64be0e009f115bfc23e6fb658c6702a5fa857c30"
+    },
+    {
+      "inputId": "authorized-1",
+      "sha256": "a384036828ee139347a5f5983147d51d8cabbc01560cecc427d891b6c5311529"
+    },
+    {
+      "inputId": "authorized-2",
+      "sha256": "ed56f0fd4d804c5b85a17d3199bfce18994224604418bc412021d3d62a884f27"
+    }
+  ],
+  "scope": "authorized photographic derivatives, no private pixels in Git; 5ms process sample; work budget != whole process cap",
+  "redaction": "input paths replaced with stable IDs and SHA256; raw original kept locally"
+}

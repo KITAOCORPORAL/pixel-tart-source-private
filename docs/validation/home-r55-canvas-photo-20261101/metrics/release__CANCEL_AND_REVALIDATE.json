@@ -1,0 +1,15 @@
+{
+  "requestMs": 25.2511,
+  "retirementMs": 169.7983,
+  "metrics": {
+    "SourceDecodes": 1,
+    "NativeJpegDecodes": 1,
+    "CacheHits": 14,
+    "PeakCacheBytes": 6000000,
+    "RetainedCacheBytes": 0,
+    "LargestDecodedWidth": 1500,
+    "LargestDecodedHeight": 1000,
+    "Contract": "CanvasJpegNative1024.ArtboardCenters.v3"
+  },
+  "scope": "request posted while actual worker active; WIC substage unknown, no native preemption claim"
+}

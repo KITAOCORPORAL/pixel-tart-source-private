@@ -1,0 +1,7 @@
+{
+  "provenance": "Transcribed from actual tool execution output; not represented as original file log",
+  "commandKind": "node subprocess python numerical verifier",
+  "exitCode": 1,
+  "error": "ModuleNotFoundError: No module named 'numpy'",
+  "remediation": "Used pre-existing configured PowerShell Python312 with numpy2.5.0; no installation; final numerical verifier still returned1 for ICC/chroma gate failures"
+}

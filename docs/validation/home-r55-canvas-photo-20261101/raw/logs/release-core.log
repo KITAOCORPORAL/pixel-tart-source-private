@@ -1,0 +1,18 @@
+VSTest 版本 18.7.0 (x64)
+
+正在启动测试执行，请稍候...
+总共 1 个测试文件与指定模式相匹配。
+  已跳过 NativeLcmsBradfordMatchesIndependentPinnedReferenceCases [14 ms]
+  失败 RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets [223 ms]
+  错误消息:
+   测试方法 RAWSelectionAssistant.Tests.PlanningProjectPackageTests。RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets 引发了异常: 
+System.IO.IOException: 客户端没有所需的特权。 : 'C:\Users\Admin\AppData\Local\Temp\RAWSelectionAssistant.Tests\a5fbb35dd35a44f595f5b7f7089fc272\7047a5b76c80403dbd828548122bfa39\planning\project-copies\7047a5b76c80403dbd828548122bfa39\5e4230a442f8c68d6bbe5245bee1f7ee\.staging\e165c74efb094ddd800989cf0d2e2f00.part'.
+  堆栈跟踪:
+     at Interop.Kernel32.CreateSymbolicLink(String symlinkFileName, String targetFileName, Boolean isDirectory)
+   at System.IO.File.CreateSymbolicLink(String path, String pathToTarget)
+   at RAWSelectionAssistant.Tests.PlanningProjectPackageTests.RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets()
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407
+
+结果文件: N:/pixart/Guangjing-R55-CanvasPhoto-20261101/release-core-tests\release-core.trx
+
+失败!  - 失败:     1，通过:    54，已跳过:     1，总计:    56，持续时间: 579 ms - RAWSelectionAssistant.Tests.dll (net10.0)

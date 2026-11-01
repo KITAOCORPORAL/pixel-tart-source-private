@@ -1,0 +1,82 @@
+{
+  "rows": [
+    {
+      "maxCode": 0,
+      "meanCode": 0.0,
+      "p95Code": 0.0,
+      "reference": "Pillow draft native factor",
+      "sourceSha256": "729280b2d7a17b8b303273fe64be0e009f115bfc23e6fb658c6702a5fa857c30",
+      "width": 1500,
+      "height": 1000,
+      "pass": true
+    },
+    {
+      "maxCode": 18,
+      "meanCode": 0.8563277777777778,
+      "p95Code": 3.0,
+      "reference": "FFmpeg native lowres2 IDCT",
+      "sourceSha256": "729280b2d7a17b8b303273fe64be0e009f115bfc23e6fb658c6702a5fa857c30",
+      "width": 1500,
+      "height": 1000,
+      "pass": true
+    },
+    {
+      "maxCode": 3,
+      "meanCode": 1.0234926666666666,
+      "p95Code": 3.0,
+      "reference": "Pillow LCMS ICC then EXIF",
+      "sourceSha256": "729280b2d7a17b8b303273fe64be0e009f115bfc23e6fb658c6702a5fa857c30",
+      "orientation": 1,
+      "width": 1500,
+      "height": 1000,
+      "pass": false
+    },
+    {
+      "maxCode": 0,
+      "meanCode": 0.0,
+      "p95Code": 0.0,
+      "reference": "Pillow draft native factor",
+      "sourceSha256": "a384036828ee139347a5f5983147d51d8cabbc01560cecc427d891b6c5311529",
+      "width": 1752,
+      "height": 1168,
+      "pass": true
+    },
+    {
+      "maxCode": 17,
+      "meanCode": 0.8629586408748775,
+      "p95Code": 3.0,
+      "reference": "FFmpeg native lowres2 IDCT",
+      "sourceSha256": "a384036828ee139347a5f5983147d51d8cabbc01560cecc427d891b6c5311529",
+      "width": 1752,
+      "height": 1168,
+      "pass": true
+    },
+    {
+      "maxCode": 3,
+      "meanCode": 0.6597015348408082,
+      "p95Code": 2.0,
+      "reference": "Pillow LCMS ICC then EXIF",
+      "sourceSha256": "a384036828ee139347a5f5983147d51d8cabbc01560cecc427d891b6c5311529",
+      "orientation": 6,
+      "width": 1168,
+      "height": 1752,
+      "pass": false
+    },
+    {
+      "maxCode": 1,
+      "meanCode": 8.837926033357505e-05,
+      "p95Code": 0.0,
+      "reference": "independent float64 proxy compositor",
+      "alphaMax": 1,
+      "rowBoundaryMax": 1,
+      "width": 1400,
+      "height": 788,
+      "pass": true
+    }
+  ],
+  "pillow": "12.3.0",
+  "pillowImagingSha256": "c8c519ec72bf75b2945b4fc4afa854af2fca8b970a403134f9ddda3e164d85e9",
+  "ffmpegVersion": "ffmpeg version 9.0.2-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+  "privacy": "private source/decoded pixels are LOCAL ONLY; report contains digests/parameters/errors, not image data",
+  "scope": "native JPEG sampling differs from v2 full-resolution sampling; same factor independent IDCT comparisons, no camera calibration"
+}

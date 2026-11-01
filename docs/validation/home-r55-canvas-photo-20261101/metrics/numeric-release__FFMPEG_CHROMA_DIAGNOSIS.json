@@ -1,0 +1,36 @@
+{
+  "source": "deterministic WPF JPEG, subsampled chroma",
+  "observations": [
+    {
+      "upsample": "neighbor",
+      "max": 116,
+      "mean": 9.086256888888888,
+      "p95": 54.0
+    },
+    {
+      "upsample": "bilinear",
+      "max": 116,
+      "mean": 9.086256888888888,
+      "p95": 54.0
+    },
+    {
+      "upsample": "bicubic",
+      "max": 116,
+      "mean": 9.086256888888888,
+      "p95": 54.0
+    },
+    {
+      "upsample": "area",
+      "max": 116,
+      "mean": 9.086256888888888,
+      "p95": 54.0
+    },
+    {
+      "upsample": "lanczos",
+      "max": 116,
+      "mean": 9.086256888888888,
+      "p95": 54.0
+    }
+  ],
+  "note": "WIC=Pillow native exact; FFmpeg different lowres chroma reconstruction; do not alter product math/tolerance to force equality"
+}

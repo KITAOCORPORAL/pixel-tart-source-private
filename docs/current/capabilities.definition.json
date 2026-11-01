@@ -18,6 +18,32 @@
     { "id": "3DColorSpaceRenderer", "module": "ColorStudio", "implementation_status": "PARTIAL", "verification_status": "NOT_RUN", "evidence": ["src/RAWSelectionAssistant/Views/ColorSpace3DViewport.cs", "tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs", "tests/RAWSelectionAssistant.WpfTests/NativeClosureObservationTests.cs", "src/RAWSelectionAssistant.Core/Services/Projects/ColorSpaceRendererContract.cs", "tests/RAWSelectionAssistant.Tests/ColorSpaceBoundsFitTests.cs"], "required_tests": ["tests/RAWSelectionAssistant.WpfTests/ColorSpace3DViewportTests.cs", "tests/RAWSelectionAssistant.WpfTests/NativeClosureObservationTests.cs", "tests/RAWSelectionAssistant.Tests/ColorSpaceBoundsFitTests.cs"], "acceptance_artifacts": ["docs/evidence/ui-guardian/3D_MODEL_CAPTURE_STATE_TRACE.md", "docs/evidence/ui-guardian/3D_NATIVE_POINTER_ACCEPTANCE.md", "docs/evidence/ui-guardian/FINAL_NATIVE_CLOSURE_REPORT.md", "docs/evidence/ui-guardian/BOUNDS_AWARE_3D_FIT_VALIDATION.md", "docs/evidence/ui-guardian/NATIVE_HARNESS_CLOSURE_REPORT.md"], "next_gate": "Bounds-aware Fit automated PASS; native pointer/resize gates require permitted input/capture environment; user visual review" },
     { "id": "GPUFullPixel", "module": "GPU", "implementation_status": "PARTIAL", "verification_status": "NOT_RUN", "evidence": ["src/PixelTart.MatchV4.Dx12/", "docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md"], "required_tests": [], "acceptance_artifacts": ["docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md"], "next_gate": "Full product integration" },
     { "id": "ICCRegistry", "module": "ICC", "implementation_status": "PARTIAL", "verification_status": "PASS", "evidence": ["src/RAWSelectionAssistant.Core/Services/Color/ColorProfileRegistry.cs", "docs/color-studio/ICC_PIPELINE_AUDIT.md"], "required_tests": [], "acceptance_artifacts": ["docs/color-studio/ICC_PIPELINE_AUDIT.md"], "next_gate": "Validated conversion" },
-    { "id": "ICCConversion", "module": "ICC", "implementation_status": "PARTIAL", "verification_status": "NOT_RUN", "evidence": ["src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs"], "required_tests": [], "acceptance_artifacts": ["docs/color-studio/ICC_PIPELINE_AUDIT.md"], "next_gate": "Pixel conversion validation" }
+    { "id": "ICCConversion", "module": "ICC", "implementation_status": "PARTIAL", "verification_status": "NOT_RUN", "evidence": ["src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs"], "required_tests": [], "acceptance_artifacts": ["docs/color-studio/ICC_PIPELINE_AUDIT.md"], "next_gate": "Pixel conversion validation" },
+    {
+      "id": "PlanningCanvasPhotoPreviewV3",
+      "module": "Planning/FreeCanvas",
+      "implementation_status": "PARTIAL",
+      "verification_status": "FAIL",
+      "evidence": [
+        "src/PixelTart.Modules.AssetLibrary/FreeCanvas/CanvasPhotoPreviewSession.cs",
+        "src/PixelTart.Modules.AssetLibrary/FreeCanvas/CanvasJpegNativePreview.cs",
+        "src/RAWSelectionAssistant/Services/PlanningCanvasSnapshot.cs"
+      ],
+      "required_tests": [
+        "tests/RAWSelectionAssistant.WpfTests/CanvasPhotoPreviewTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/PlanningCanvasConsistencyTests.cs"
+      ],
+      "acceptance_artifacts": [
+        "docs/validation/home-r55-canvas-photo-20261101/FINAL_REPORT.md",
+        "docs/validation/home-r55-canvas-photo-20261101/NONPASS.json",
+        "docs/validation/home-r55-canvas-photo-20261101/TEST_SUMMARY.json"
+      ],
+      "next_gate": "Independent ICC and subsampled-JPEG second-reference thresholds remain unmet; native pointer/DPI/ACM/HDR not tested. No production scientific approval.",
+      "render_version": 3,
+      "product_source": "146c0fd254de387ad5ccb9570cff6c54697389d4",
+      "test_support_source": "5d94691b34f8762532199e991d7b2b44852b1b47",
+      "calibration_eligible": false,
+      "scope": "Baseline 8-bit large JPEG preview only; no generic RAW/16-bit support; <=256MiB estimated renderer work is not process limit"
+    }
   ]
 }

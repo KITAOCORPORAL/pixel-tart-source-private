@@ -1,0 +1,106 @@
+{
+  "files": [
+    {
+      "source": "release-host-owned/hosted/OFFSCREEN-free-canvas-1366.png",
+      "sha256": "db2e9c439b9150db27f98ff2fc112c25708b2f4073f63debb1a7efd670e4839d",
+      "bytes": 175161,
+      "private": false,
+      "git": true,
+      "claim": "OFFSCREEN production controls only; no native pointer/DPI/ACM/HDR acceptance"
+    },
+    {
+      "source": "release-host-owned/hosted/OFFSCREEN-free-canvas-1920.png",
+      "sha256": "3170c557eb6e48fe905629951ee7bac6fdfadedf0f6afcf6a4fa7a0697bd44c5",
+      "bytes": 328726,
+      "private": false,
+      "git": true,
+      "claim": "OFFSCREEN production controls only; no native pointer/DPI/ACM/HDR acceptance"
+    },
+    {
+      "source": "release-host-owned/hosted/OFFSCREEN-planning-fixed-1366.png",
+      "sha256": "a80c64be9b18111807a430fa4bf35115c1ab0e8dccf5f1486674cc87e32ec205",
+      "bytes": 170677,
+      "private": false,
+      "git": true,
+      "claim": "OFFSCREEN production controls only; no native pointer/DPI/ACM/HDR acceptance"
+    },
+    {
+      "source": "release-host-owned/hosted/OFFSCREEN-planning-fixed-1920.png",
+      "sha256": "82411c175c9a95fd42e31648d35b60488471986773696bc5bf7d81b281d50a24",
+      "bytes": 206124,
+      "private": false,
+      "git": true,
+      "claim": "OFFSCREEN production controls only; no native pointer/DPI/ACM/HDR acceptance"
+    },
+    {
+      "source": "release-host-owned/hosted/OFFSCREEN-planning-two-versions-1366.png",
+      "sha256": "3b864b226e10e70870d2d1ba51a70315c3b128cd5163635c281a34754bfb4190",
+      "bytes": 172968,
+      "private": false,
+      "git": true,
+      "claim": "OFFSCREEN production controls only; no native pointer/DPI/ACM/HDR acceptance"
+    },
+    {
+      "source": "release-host-owned/hosted/OFFSCREEN-planning-two-versions-1920.png",
+      "sha256": "7c0c5cd0c3387b87c93e1b68f7e57f8573ee889a8867d9dc836ba1876e5efa33",
+      "bytes": 249474,
+      "private": false,
+      "git": true,
+      "claim": "OFFSCREEN production controls only; no native pointer/DPI/ACM/HDR acceptance"
+    },
+    {
+      "source": "release-host-photo-local-only/hosted/OFFSCREEN-free-canvas-1366.png",
+      "sha256": "62f6020059d0720b9a49ea68d5c23e3ab3c7042bd70603197b8d621c715c8dea",
+      "bytes": 316465,
+      "private": true,
+      "git": false,
+      "claim": "OFFSCREEN production controls only; no native pointer/DPI/ACM/HDR acceptance"
+    },
+    {
+      "source": "release-host-photo-local-only/hosted/OFFSCREEN-free-canvas-1920.png",
+      "sha256": "0fd0d3926cdd68c3748f20d75b43268d1d3af15993bd7080563e8e8b7e252039",
+      "bytes": 824168,
+      "private": true,
+      "git": false,
+      "claim": "OFFSCREEN production controls only; no native pointer/DPI/ACM/HDR acceptance"
+    },
+    {
+      "source": "release-host-photo-local-only/hosted/OFFSCREEN-planning-fixed-1366.png",
+      "sha256": "3b8dcb3fc0a1f066e2d43cd561b20cb5494980e1ca5c2cdcea9ddfadb6cf6754",
+      "bytes": 306718,
+      "private": true,
+      "git": false,
+      "claim": "OFFSCREEN production controls only; no native pointer/DPI/ACM/HDR acceptance"
+    },
+    {
+      "source": "release-host-photo-local-only/hosted/OFFSCREEN-planning-fixed-1920.png",
+      "sha256": "b5f552ae20133d8a27886e255324501919aa045f4afa86f33af8de790c85ea7a",
+      "bytes": 349425,
+      "private": true,
+      "git": false,
+      "claim": "OFFSCREEN production controls only; no native pointer/DPI/ACM/HDR acceptance"
+    },
+    {
+      "source": "release-host-photo-local-only/hosted/OFFSCREEN-planning-two-versions-1366.png",
+      "sha256": "bfd1af69802d195bf4e9240b1e61a3ca4977361b79fdf7e81e948b59871bb12f",
+      "bytes": 330750,
+      "private": true,
+      "git": false,
+      "claim": "OFFSCREEN production controls only; no native pointer/DPI/ACM/HDR acceptance"
+    },
+    {
+      "source": "release-host-photo-local-only/hosted/OFFSCREEN-planning-two-versions-1920.png",
+      "sha256": "fae88619de51144b87ab5cb6bcf2b206062fcbd72bed3e115f1e4d98ba0a783f",
+      "bytes": 535200,
+      "private": true,
+      "git": false,
+      "claim": "OFFSCREEN production controls only; no native pointer/DPI/ACM/HDR acceptance"
+    }
+  ],
+  "priorThreadViewedAll": true,
+  "resumeInspected": [
+    "OFFSCREEN-free-canvas-1366.png",
+    "OFFSCREEN-planning-two-versions-1920.png"
+  ],
+  "limitations": "Only synthetic owned screenshots committed; six private photograph views remain local. Layout is not full Grok visual acceptance."
+}

@@ -1,0 +1,53 @@
+[
+  {
+    "repository": "python-pillow/Pillow",
+    "commit": "bb1d8e8ab8d29048624d96e3ee53cecf7c13d13d",
+    "files": [
+      {
+        "path": "src/PIL/JpegImagePlugin.py",
+        "sha256": "27ebe8f59a7a12e40277f8f84ce4637c300145e181fb5bd05ad894b89c391bb1",
+        "bytes": 31334
+      },
+      {
+        "path": "src/libImaging/JpegDecode.c",
+        "sha256": "895fc76b3f04e93fbc8a31f952e168432ecd140ae38fc1bba3c70d5803ed4682",
+        "bytes": 9862
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "15181e7363dca9aed78b79bebebc7fde7f1814b8bd311ea3b87ae8ccadfc185b",
+        "bytes": 1457
+      }
+    ],
+    "license": "MIT-CMU; external numerical tool only"
+  },
+  {
+    "repository": "FFmpeg/FFmpeg",
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "files": [
+      {
+        "path": "libavcodec/mjpegdec.c",
+        "sha256": "c8cf4d8f824d88acba8893a6de2da1bc2396fcbc05aac03c9b43a43fe5055aa9",
+        "bytes": 111858
+      },
+      {
+        "path": "COPYING.LGPLv2.1",
+        "sha256": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30",
+        "bytes": 26517
+      }
+    ],
+    "license": "Source LGPL base; installed full build GPL/version3; no product distribution"
+  },
+  {
+    "repository": "microsoft/win32metadata",
+    "commit": "64ed9177fb76eb244fc9051c74b8a93fdfe20873",
+    "files": [
+      {
+        "path": "generation/WinSDK/RecompiledIdlHeaders/um/wincodec.h",
+        "sha256": "ebee2063f56098e0e897e2a6e34641412d52567fedfd2d640b38ca3690b04374",
+        "bytes": 441798
+      }
+    ],
+    "license": "System ABI reference only; product uses system WindowsCodecs"
+  }
+]

@@ -1,0 +1,77 @@
+{
+  "overall": "PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE",
+  "items": [
+    {
+      "id": "ICC-INDEPENDENT",
+      "state": "OPEN",
+      "result": "Two WIC vs LCMS ICC cases max3 > preset1 code; mean1.02349/0.65970; original and resumed numeric failure retained",
+      "action": "No tolerance or color-math change; generic ICC equivalence not approved"
+    },
+    {
+      "id": "JPEG-420-INDEPENDENT",
+      "state": "OPEN",
+      "result": "Pillow native exact; FFmpeg lowres2 max40/mean1.63357/P95=4 exceeds max24/mean1.5/P95=3",
+      "action": "Document different chroma reconstruction; second-reference gate remains unmet, no production equivalence approval"
+    },
+    {
+      "id": "SYMLINK-PRIVILEGE",
+      "state": "FAIL_ENVIRONMENT",
+      "result": "RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets: IOException client lacks required privilege",
+      "action": "Assertion unchanged, no admin escalation or skip retrofit"
+    },
+    {
+      "id": "LCMS-REFERENCE-INPUTS",
+      "state": "NOT_RUN",
+      "result": "NativeLcmsBradfordMatchesIndependentPinnedReferenceCases lacks explicit reference fixture",
+      "action": "No fabricated matrix input"
+    },
+    {
+      "id": "BASELINE-BUDGET",
+      "state": "EXPECTED_REPRODUCTION",
+      "result": "Baseline 0 snapshots, layer budget rejection on photographic derivatives",
+      "action": "Keep baseline failure separate from final test failure"
+    },
+    {
+      "id": "NATIVE-ACCEPTANCE",
+      "state": "NOT_RUN",
+      "result": "Physical pointer/DPI/multi-monitor/ACM/HDR not tested; OFFSCREEN not desktop acceptance",
+      "action": "ComputerUse/Browser/WebView/CDP remain disabled"
+    },
+    {
+      "id": "FORMAT-LIMIT",
+      "state": "EXPLICIT_UNSUPPORTED",
+      "result": "Large progressive/nonbaseline JPEG, over-budget large PNG, RGB48+ICC remain rejected; no new RAW or16-bit decoder",
+      "action": "No full-decode fallback"
+    },
+    {
+      "id": "SMALL-REGRESSION-ORACLE",
+      "state": "PASS_WITHIN_PRESET",
+      "result": "Independent float64 max1 alpha1 seam1; small alpha refs max1; not universal scientific calibration",
+      "action": "Keep small v2 same-path exact and saved v1/v2 PNG untouched"
+    },
+    {
+      "id": "RESUME-FIXTURE-CONFIG",
+      "state": "RETESTED_WITH_EXPLICIT_CONFIG",
+      "result": "First resume independent run 2PASS/1NOT_RUN missing KITAO_CANVAS_PRODUCT_REOPEN; corrected run 2PASS/1FAIL because large-photo fixture already contains2 versions",
+      "action": "Both raw receipts retained; fresh setup1PASS + fresh independent reopen/update1PASS; no relaxed assertion"
+    },
+    {
+      "id": "NUMERIC-PYTHON-PATH",
+      "state": "ENVIRONMENT_DIAGNOSIS",
+      "result": "Initial node subprocess used Python without numpy; normal configured PowerShell Python succeeded and returned1 for actual numerical gate failures",
+      "action": "No dependency installation; explicit final numerical log retained"
+    },
+    {
+      "id": "INPUT-PROVENANCE",
+      "state": "BOUNDED_EVIDENCE",
+      "result": "24MP/33MP are resampled authorized existing TIFF photographic derivatives, not camera-native24MP/33MP sensor captures",
+      "action": "No private photo/image/PNG-base64 in Git; camera calibration=false"
+    },
+    {
+      "id": "PREEXISTING-ICC-ORIENTATION-SOURCE",
+      "state": "NOT_RUN",
+      "result": "Original authorized TIFFs have no embedded ICC, orientations1/8. Test JPEG ICC and orientations1/6 were explicitly authored during input generation.",
+      "action": "Generated-profile ICC/EXIF regression is covered, but user request for pre-existing embeddedICC+orientation photographic source is not certified. No broad private directory scan to invent evidence."
+    }
+  ]
+}

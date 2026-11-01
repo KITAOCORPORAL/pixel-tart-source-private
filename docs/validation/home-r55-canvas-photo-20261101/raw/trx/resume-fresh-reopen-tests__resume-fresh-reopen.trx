@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="eb2c7437-fcc7-4db2-95e0-73366e908d71" name="@DESKTOP-HO0JJEQ 2026-11-01 18:14:41" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-01T18:14:41.1858021+08:00" queuing="2026-11-01T18:14:41.1858023+08:00" start="2026-11-01T18:14:39.9288135+08:00" finish="2026-11-01T18:14:41.1895031+08:00" />
+  <TestSettings name="default" id="e9d67222-04d8-4f9b-8a88-38f61dca1b5b">
+    <Deployment runDeploymentRoot="_DESKTOP-HO0JJEQ_2026-11-01_18_14_41" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="cb0f9e1b-5a6d-432d-a167-4a2e5e03011a" testId="1d637a5b-855c-8a64-beb9-e757b7a3b073" testName="IndependentLargePhotoReopenAndExplicitUpdate" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.7150939" startTime="2026-11-01T18:14:40.3523924+08:00" endTime="2026-11-01T18:14:41.0808813+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cb0f9e1b-5a6d-432d-a167-4a2e5e03011a" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="IndependentLargePhotoReopenAndExplicitUpdate" storage="n:/pixart/guangjing-r55-canvasphoto-20261101/resume-testhost/rawselectionassistant.wpftests.dll" id="1d637a5b-855c-8a64-beb9-e757b7a3b073">
+      <Execution id="cb0f9e1b-5a6d-432d-a167-4a2e5e03011a" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-CanvasPhoto-20261101/resume-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasPhotoPreviewTests" name="IndependentLargePhotoReopenAndExplicitUpdate" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1d637a5b-855c-8a64-beb9-e757b7a3b073" executionId="cb0f9e1b-5a6d-432d-a167-4a2e5e03011a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

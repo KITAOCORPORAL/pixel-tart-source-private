@@ -1,6 +1,6 @@
 # 画布JPEG照片有界预览v3 · 节点/解码采样对照
 
-2026-11-01 Asia/Shanghai（用户时间）；执行宿主原始时间+08保留。目标是1400边策划预览，不提高256MiB、不改变已有导出/RAW数学。
+2026-11-01 Europe/Helsinki（当前用户时区）；执行宿主原始时间+08保留；此前会话的Asia/Shanghai是宿主记录，不是当前用户时区。目标是1400边策划预览，不提高256MiB、不改变已有导出/RAW数学。
 
 ## v2障碍与分配分析
 CanvasPixelRenderer.CheckLayerBudget以output×32+source×32拒绝24/33MP；ReadSource无edge时原WIC frame→ICC→orientation→BGRA CopyPixels+BitmapSource，RenderPixels再复制BGRA，可能多份完整源缓存。不能只删除门禁。旧Import/viewport有1024 edge，但那是查看代理，不可冒充新的固定版本来源。v3独立源验证、独立native JPEG帧，从同一已验证读lease建立解码器；没有GetThumbnail/GetPreview/API缓存读取。
@@ -28,3 +28,9 @@ API契约另外核验Microsoft WIC GetClosestSize/CopyPixels官方文档，JPEG 
 
 ## ICC不同已知结果（未放宽门槛）
 Pillow LCMS独立转换与WIC现有ColorConvertedBitmap相差max3码，mean1.023/.660；已核对使用WIC真实目标ICC字节，并检查四种intent均相同，源sRGB built-in与目标sRGB IEC61966-2.1不同profile。预设1码未达到，原始两次数值失败保留；本轮不以放宽阈值或切换色彩数学强行PASS，记OBSERVED_NOT_EQUIVALENT_EXISTING_WIC_ICC。沿既有WIC合同重新编码native代理＋ICC＋EXIF的v2路径和v3逐像素比较作为“没有回退/漏掉颜色方向”的强回归，独立LCMS差异仍OPEN；不声称通用ICC科学门禁完成。
+
+## 续接终检：门禁未全通过
+实际普通4:2:0 JPEG摄影派生输入，WIC/Pillow native max0；FFmpeg lowres2 max40、mean1.633569、P95=4，超过原max24/mean1.5/P95=3，不放宽阈值，不宣称第二参考覆盖全部格式。独立ICC两例max3>1同样保留FAIL；verify_photo_numerical.py明确返回非零，overallPass=false。EXPLICIT_VERSION_DIAGNOSTIC仅描述当前诊断包实现，**不是POLICY科学准入完成或可发行批准**。详见NONPASS.json、metrics/resume-numeric-explicit__NUMERICAL_RESULTS.json。
+
+### 输入原始性补核（不补造素材）
+两份已授权原TIFF本来无嵌入ICC，方向分别1/8；本轮24/33MP JPEG使用Pillow LANCZOS重采样、quality94/subsampling0，并显式写入新建sRGB ICC和方向1/6。已测的是摄影内容＋生成ICC/方向回归，**不是已有相机原始ICC/方向的科学验证**；“至少一张此前已有ICC和方向的受支持摄影源”尚未证实，记NOT_RUN，不把新写元数据冒充原始来源。生成配置补在INPUT_IDENTITIES.json。

@@ -1,0 +1,18 @@
+{
+  "sourceSha256": "459440e7d5bfa41f49205eadff35c796b711f29d4718082f67f63bd762fcd225",
+  "rows": [
+    {
+      "reference": "Pillow",
+      "maxCode": 0,
+      "meanCode": 0.0,
+      "p95": 0.0
+    },
+    {
+      "reference": "FFmpeg",
+      "maxCode": 40,
+      "meanCode": 1.6335693333333334,
+      "p95": 4.0
+    }
+  ],
+  "scope": "native IDCT/color reconstruction differences; not post-scale equivalence"
+}

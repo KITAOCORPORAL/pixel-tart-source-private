@@ -1,0 +1,24 @@
+{
+  "inputSha256": "203a2ab8837ddd2de0937d97b390ebd49ab3e91fcf4904f243e02b83d25585fa",
+  "width": 6000,
+  "height": 4000,
+  "decoded": [
+    1500,
+    1000
+  ],
+  "rows": [
+    {
+      "reference": "Pillow native IDCT4",
+      "maxCode": 0,
+      "meanCode": 0.0,
+      "p95": 0.0
+    },
+    {
+      "reference": "FFmpeg lowres2",
+      "maxCode": 116,
+      "meanCode": 9.086256888888888,
+      "p95": 54.0
+    }
+  ],
+  "scope": "deterministic owned synthetic JPEG; native IDCT quantization is different across decoders"
+}

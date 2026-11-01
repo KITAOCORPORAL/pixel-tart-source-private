@@ -1,0 +1,65 @@
+{
+  "permission": "Existing authorized N:/pixart/RAW photographic derivatives; no new directory scan",
+  "privateImagesDistributed": false,
+  "inputs": [
+    {
+      "inputId": "authorized-0",
+      "sourceSha256": "9208ecdb7d8a02a3fa619d754613a22ae7ebe07249cb0721293841b6095d4ad7",
+      "sha256": "729280b2d7a17b8b303273fe64be0e009f115bfc23e6fb658c6702a5fa857c30",
+      "width": 6000,
+      "height": 4000,
+      "orientation": 1,
+      "iccSha256": "aca1f6f3a5856485b39f917fdb151cb93da3c117e45f497af426f0ce46eb9596",
+      "provenance": "authorized existing photographic TIFF output; explicitly resampled derivative, NOT native 24/33MP camera capture"
+    },
+    {
+      "inputId": "authorized-1",
+      "sourceSha256": "8627e7a0af25e8812838186adc0b131ff1709cf99f5fa4ed04c9a514437413b0",
+      "sha256": "a384036828ee139347a5f5983147d51d8cabbc01560cecc427d891b6c5311529",
+      "width": 7008,
+      "height": 4672,
+      "orientation": 6,
+      "iccSha256": "aca1f6f3a5856485b39f917fdb151cb93da3c117e45f497af426f0ce46eb9596",
+      "provenance": "authorized existing photographic TIFF output; explicitly resampled derivative, NOT native 24/33MP camera capture"
+    },
+    {
+      "inputId": "authorized-2",
+      "sha256": "ed56f0fd4d804c5b85a17d3199bfce18994224604418bc412021d3d62a884f27",
+      "width": 1200,
+      "height": 802,
+      "provenance": "authorized photographic derivative with synthetic gradient alpha, no native transparent sensor claim"
+    },
+    {
+      "inputId": "authorized-chroma420",
+      "sha256": "459440e7d5bfa41f49205eadff35c796b711f29d4718082f67f63bd762fcd225",
+      "width": 6000,
+      "height": 4000,
+      "provenance": "Explicit 4:2:0 JPEG derivative from authorized-0; not camera-native capture"
+    }
+  ],
+  "generation": {
+    "tool": "Pillow 12.3.0",
+    "photographs": {
+      "sourceDecode": "Existing authorized RGB TIFF outputs, not native RAW decode in this round",
+      "resize": "LANCZOS",
+      "jpegQuality": 94,
+      "subsampling": 0,
+      "embeddedICC": "New ImageCms built-in sRGB profile bytes, not camera-original profile",
+      "exifOrientation": "Explicit1 for24MP derivative; explicit6 for33MP derivative, not original camera orientation"
+    },
+    "transparentPNG": {
+      "mode": "RGBA",
+      "thumbnailBounds": [
+        1200,
+        900
+      ],
+      "alpha": "synthetic horizontal linear0..255"
+    },
+    "chroma420": {
+      "quality": 94,
+      "subsampling": 2,
+      "iccAndExif": "Pillow re-encode does not preserve by default; sampling-only test"
+    }
+  },
+  "preexistingProfileAndOrientationPhotoEvidence": "NOT_COMPLETED: inspected two original TIFFs: no embedded ICC; original orientation1/8. Generated JPEGs have explicitly assigned profile/orientation. This is not pre-existing real-camera ICC validation."
+}

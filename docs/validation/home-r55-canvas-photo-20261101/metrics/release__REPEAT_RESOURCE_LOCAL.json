@@ -1,0 +1,28 @@
+{
+  "repeats": [
+    {
+      "n": 0,
+      "elapsedMs": 567.5779,
+      "ws": 284114944,
+      "privateBytes": 258641920,
+      "managedBytes": 176581856
+    },
+    {
+      "n": 1,
+      "elapsedMs": 923.3799,
+      "ws": 296566784,
+      "privateBytes": 276455424,
+      "managedBytes": 202293904
+    },
+    {
+      "n": 2,
+      "elapsedMs": 1148.7813,
+      "ws": 288432128,
+      "privateBytes": 298868736,
+      "managedBytes": 247201584
+    }
+  ],
+  "retainedSnapshotCount": 4,
+  "taskCacheRetainedBytes": 0,
+  "scope": "after completion process memory includes saved PNG versions, CLR and WIC; not all memory is cache"
+}

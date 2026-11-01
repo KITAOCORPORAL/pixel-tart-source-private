@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-30T02:48:45.9532271+00:00",
-  "generated_from_head": "68cf45bfc557d616682de01dc416c8a1efaf04a9",
-  "branch": "integration/pixel-tart-developer-preview",
+  "generated_at": "2026-11-01T10:32:41.9640421+00:00",
+  "generated_from_head": "5d94691b34f8762532199e991d7b2b44852b1b47",
+  "branch": "home/r55-canvas-photo-preview-20261101",
   "capabilities": [
     {
       "id": "ReferenceMatchV3",
@@ -309,6 +309,32 @@
         "docs/color-studio/ICC_PIPELINE_AUDIT.md"
       ],
       "next_gate": "Pixel conversion validation"
+    },
+    {
+      "id": "PlanningCanvasPhotoPreviewV3",
+      "module": "Planning/FreeCanvas",
+      "implementation_status": "PARTIAL",
+      "verification_status": "FAIL",
+      "evidence": [
+        "src/PixelTart.Modules.AssetLibrary/FreeCanvas/CanvasPhotoPreviewSession.cs",
+        "src/PixelTart.Modules.AssetLibrary/FreeCanvas/CanvasJpegNativePreview.cs",
+        "src/RAWSelectionAssistant/Services/PlanningCanvasSnapshot.cs"
+      ],
+      "required_tests": [
+        "tests/RAWSelectionAssistant.WpfTests/CanvasPhotoPreviewTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/PlanningCanvasConsistencyTests.cs"
+      ],
+      "acceptance_artifacts": [
+        "docs/validation/home-r55-canvas-photo-20261101/FINAL_REPORT.md",
+        "docs/validation/home-r55-canvas-photo-20261101/NONPASS.json",
+        "docs/validation/home-r55-canvas-photo-20261101/TEST_SUMMARY.json"
+      ],
+      "next_gate": "Independent ICC and subsampled-JPEG second-reference thresholds remain unmet; native pointer/DPI/ACM/HDR not tested. No production scientific approval.",
+      "render_version": 3,
+      "product_source": "146c0fd254de387ad5ccb9570cff6c54697389d4",
+      "test_support_source": "5d94691b34f8762532199e991d7b2b44852b1b47",
+      "calibration_eligible": false,
+      "scope": "Baseline 8-bit large JPEG preview only; no generic RAW/16-bit support; <=256MiB estimated renderer work is not process limit"
     }
   ]
 }

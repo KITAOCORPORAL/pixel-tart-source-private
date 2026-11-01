@@ -1,3 +1,13 @@
+## 2026-11-01 家庭当前：大照片画布预览 v3（Europe/Helsinki；优先于下文历史）
+- 当前产品源码 **146c0fd254de387ad5ccb9570cff6c54697389d4**；分支 home/r55-canvas-photo-preview-20261101，工作树 N:/pixart/guangjing-r55-canvas-photo-preview-20261101；从40919e48/产品69bbf229接续。测试支持 **5d94691b34f8762532199e991d7b2b44852b1b47**，文档HEAD与远端读回另记。灯台冻结，研究分支不合入，旧树/未提交资料保留。
+- 新固定快照RenderVersion3，CanvasJpegNative1024.ArtboardCenters.v3。大baseline 8位JPEG从原图已校验读lease进行WIC native IDCT缩小，源ICC→sRGB后方向；24MP/33MP照片派生输入实际native为1500×1000 / 1752×1168，不能称原图细节或固定1024输出。小图走原v2数学，旧v1/v2保存PNG字节不重算，旧导出不暗改。
+- 256MiB是渲染工作估算，不是整应用上限；最多32MiB/8来源任务缓存，每次命中重验来源hash，结束/取消清空。渐进大JPEG、大PNG超预算、RGB48+ICC明确拒绝，不放宽RAW/16位支持。
+- 真实授权既有TIFF派生24MP/33MP JPEG＋透明PNG，基线0快照预算拒绝；发布版首次631.7ms，续接复核657.4ms/1快照。完整宿主渲染增量工作集87,908,352B/私有125,042,688B，进程峰值412,651,520B/416,169,984B。八轮新任务cache残留0、PNG hash相同、源句柄可独占重开；强制GC仅寿命诊断，不是预算准入手段。
+- 相关自动测试去重 **119PASS/1既有符号链接权限FAIL/1缺LCMS参考NOT_RUN**；新发布绑定60PASS及独立新进程重开/手动更新通过，历史配置/重复夹具失败保留。独立数值有 **ICC max3>1码、4:2:0 FFmpeg max40/mean1.63357/P95=4超预设**，门槛未放宽；不能宣称开源/通用ICC科学门禁全过。Pillow native相同、float64合成/64行边界最大1码；CalibrationEligible=false。
+- 完整win-x64自包含诊断包 N:/pixart/Guangjing-R55-CanvasPhoto-20261101/Guangjing-R55-CanvasPhoto-Diagnostic-win-x64.zip；同名目录Start-Guangjing-Diagnostic.cmd。294文件逐项SHA256与ZIP读回通过；全部模块/策划15/教程退役保留，WholeAppDiagnosticBuild=true / PhotographerTrialBuild=false，无Setup/私照/研究程序。
+- 唯一当前报告 docs/validation/home-r55-canvas-photo-20261101/FINAL_REPORT.md，原始TRX、数值失败、绑定、ZIP身份已归档；私人照片/预览/截图只留本地。OFFSCREEN不是鼠标/DPI/ACM/HDR验收；Browser/WebView/ComputerUse/CDP未启用。总体 **PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE**，独立数值门禁及物理验收仍未完成。
+- 输入补核：两原TIFF无嵌入ICC，JPEG测试profile/方向为新写入，原有真实ICC+方向源验证NOT_RUN；不以生成元数据冒充原生来源。
+
 ## 2026-10-30 家庭当前：策划画布一致性（优先于以下历史）
 - 当前产品源码 **69bbf22935f3471013ad6bb3728f95b8b562acfc**；新分支 `home/r55-planning-canvas-20261030`，独立树 `N:/pixart/guangjing-r55-planning-canvas-20261030`。上游灯台eae800e7/产品1ec06eb5冻结，色彩研究未整合；测试支持f720f1a8、文档HEAD另记。
 - 旧策划Snapshot独立合成器已替换为CanvasPixelRenderer有界公共入口：Hidden/Opacity/画笔/文字/色板/方向/crop/flip/rotate同合同，固定画板透明裁切。1400边/1.96MP/256MiB估算/1000层，STA串行取消，不为预览分配最大画板float。
