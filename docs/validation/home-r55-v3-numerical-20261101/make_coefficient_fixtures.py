@@ -4,6 +4,7 @@ import struct,json,hashlib
 root=Path(__import__('sys').argv[1]);root.mkdir(parents=True,exist_ok=True)
 def marker(code,data):return b'\xff'+bytes([code])+struct.pack('>H',len(data)+2)+data
 def jpeg(name,subsampling,channel,u,amplitude):
+ assert amplitude==0 or 64<=amplitude<=127,'Fixed Huffman fixture category7 requires amplitude64..127'
  w,h=4096,64
  # Quantization=1, DC category0 only. AC EOB=0, coefficient1(size7)=10, coefficient3(size7)=110.
  dht=bytes([0])+bytes([1]+[0]*15)+bytes([0])+bytes([0x10])+bytes([1,1,1]+[0]*13)+bytes([0,0x07,0x57])

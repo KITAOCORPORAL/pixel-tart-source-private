@@ -21,7 +21,7 @@ for stage in json.loads((s/'STAGES.json').read_text()):
  w,h=stage['width'],stage['height'];a=np.frombuffer((s/(name+'-native.bgra')).read_bytes(),np.uint8).reshape(h,w,4);actual=np.frombuffer((s/(name+'-icc.bgra')).read_bytes(),np.uint8).reshape(h,w,4);rgb=np.ascontiguousarray(a[:,:,:3][:,:,::-1]);wic=actual[:,:,:3][:,:,::-1]
  row={'name':name,'sourceICC':hashlib.sha256(src.read_bytes()).hexdigest(),'targetICC':hashlib.sha256((s/'wic-target.icc').read_bytes()).hexdigest(),'lcms':[],'mscms':[]}
  for intent in range(4):
-  for flags in [0,8192,256,16384,8192|256,8192|16384]:
+  for flags in [0,8192,256,16384,8192|256,8192|16384,1024,2048,8192|1024,8192|2048]:
    ref=np.asarray(ImageCms.profileToProfile(Image.fromarray(rgb),str(src),str(s/'wic-target.icc'),renderingIntent=intent,outputMode='RGB',flags=flags));row['lcms'].append({'intent':intent,'flags':flags,**err(ref,wic)})
  sh,dh=profile(src),profile(s/'wic-target.icc');handles=(c.c_void_p*2)(sh,dh)
  try:
