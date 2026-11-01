@@ -1,0 +1,7 @@
+{
+  "version": "Round13ExecutedVsFinalRunnerV1",
+  "executedRunnerSha256": "4efddcca67877d9f39d01f12f5933be9a7650b806dbf381e21bbe5d6727f8b29",
+  "finalRunnerSha256": "ca7c828a115277c1241d18a02b4c30a9023219ab415c5074724d6b15c6c7113a",
+  "onlyChange": "Added explicit default-off CLI enable gate before output/GPU. Both actual A/B batches had been explicitly invoked as research candidate runs. No candidate math, dispatch, resources, input or thresholds changed; no GPU rerun.",
+  "candidateShaderUnmodified": true
+}

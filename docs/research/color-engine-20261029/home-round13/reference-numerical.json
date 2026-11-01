@@ -1,0 +1,1416 @@
+{
+  "version": "Round13FixedReferenceNumericalV1",
+  "scope": "Executed original isolated CPU functions; Lab L*0..100 nominal, RT internal L scaled327.68; negatives/>100 are explicit out-of-contract stress, not linear RGB or a photographic accuracy oracle",
+  "width": 65,
+  "height": 33,
+  "configs": {
+    "dt-zero": {
+      "sigma": 0.7,
+      "amount": 0.7,
+      "thresholdLStar": 0,
+      "rad": 2,
+      "border": "2px unchanged"
+    },
+    "dt-threshold": {
+      "sigma": 0.7,
+      "amount": 0.7,
+      "thresholdLStar": 0.5
+    },
+    "rt-open": {
+      "radius": 0.7,
+      "amountPercent": 70,
+      "contrastMask": 0,
+      "threshold": [
+        0,
+        0,
+        false
+      ],
+      "halocontrol": false,
+      "scalarGaussian": "actual recursive standard at sigma.7"
+    },
+    "rt-threshold": {
+      "radius": 0.7,
+      "amountPercent": 70,
+      "contrastMask": 0,
+      "threshold": [
+        20,
+        80,
+        2000,
+        1200,
+        false
+      ],
+      "halocontrol": false
+    },
+    "rt-halo": {
+      "radius": 0.7,
+      "amountPercent": 70,
+      "contrastMask": 0,
+      "threshold": [
+        20,
+        80,
+        2000,
+        1200,
+        false
+      ],
+      "halocontrol": true,
+      "haloAmountPercent": 100,
+      "border": "2px unchanged; environment3x3 smoothing and rolling3min/max; not5x5 hard minmax"
+    }
+  },
+  "records": [
+    {
+      "case": "flat",
+      "mode": "dt-zero",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-zero",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\flat.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\flat-dt-zero.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 105.34439998446032,
+      "inputSha256": "f97e1f6d59b5dc86d65d848548149e043a180412743460859fc3f73117f30be9",
+      "outputSha256": "f97e1f6d59b5dc86d65d848548149e043a180412743460859fc3f73117f30be9",
+      "finite": true,
+      "LRange": [
+        40.0,
+        40.0
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 0.0,
+      "meanAbsLDelta": 0.0,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": 0.0
+    },
+    {
+      "case": "flat",
+      "mode": "dt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\flat.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\flat-dt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0.5"
+      ],
+      "elapsedProcessMs": 7.348200015258044,
+      "inputSha256": "f97e1f6d59b5dc86d65d848548149e043a180412743460859fc3f73117f30be9",
+      "outputSha256": "f97e1f6d59b5dc86d65d848548149e043a180412743460859fc3f73117f30be9",
+      "finite": true,
+      "LRange": [
+        40.0,
+        40.0
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 0.0,
+      "meanAbsLDelta": 0.0,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": 0.0
+    },
+    {
+      "case": "flat",
+      "mode": "rt-open",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-open",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\flat.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\flat-rt-open.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 101.81219998048618,
+      "inputSha256": "f97e1f6d59b5dc86d65d848548149e043a180412743460859fc3f73117f30be9",
+      "outputSha256": "f97e1f6d59b5dc86d65d848548149e043a180412743460859fc3f73117f30be9",
+      "finite": true,
+      "LRange": [
+        40.0,
+        40.0
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 0.0,
+      "meanAbsLDelta": 0.0,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": 0.0
+    },
+    {
+      "case": "flat",
+      "mode": "rt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\flat.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\flat-rt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.44349998421967,
+      "inputSha256": "f97e1f6d59b5dc86d65d848548149e043a180412743460859fc3f73117f30be9",
+      "outputSha256": "f97e1f6d59b5dc86d65d848548149e043a180412743460859fc3f73117f30be9",
+      "finite": true,
+      "LRange": [
+        40.0,
+        40.0
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 0.0,
+      "meanAbsLDelta": 0.0,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": 0.0
+    },
+    {
+      "case": "flat",
+      "mode": "rt-halo",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-halo",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\flat.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\flat-rt-halo.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "100"
+      ],
+      "elapsedProcessMs": 11.523099965415895,
+      "inputSha256": "f97e1f6d59b5dc86d65d848548149e043a180412743460859fc3f73117f30be9",
+      "outputSha256": "f97e1f6d59b5dc86d65d848548149e043a180412743460859fc3f73117f30be9",
+      "finite": true,
+      "LRange": [
+        40.0,
+        40.0
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 0.0,
+      "meanAbsLDelta": 0.0,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": 0.0
+    },
+    {
+      "case": "step",
+      "mode": "dt-zero",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-zero",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\step.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\step-dt-zero.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.509899965953082,
+      "inputSha256": "cc64b021fe3da86e7cd8d425da49aaaebd575e0313a73db964b5e0b3613b97bc",
+      "outputSha256": "2be1992ba2c950da591fd17561be593cf3f5b52ce217fb38b61dddedfb8c3d31",
+      "finite": true,
+      "LRange": [
+        -2.042449951171875,
+        102.04244232177734
+      ],
+      "belowInputMin": 58,
+      "aboveInputMax": 58,
+      "maxAbsLDelta": 12.042449951171875,
+      "meanAbsLDelta": 0.3401929438114166,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "step",
+      "mode": "dt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\step.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\step-dt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0.5"
+      ],
+      "elapsedProcessMs": 7.342299970332533,
+      "inputSha256": "cc64b021fe3da86e7cd8d425da49aaaebd575e0313a73db964b5e0b3613b97bc",
+      "outputSha256": "a657f062cce77a7059bc02c1c7084c8c90bd254f8e4fc883facc5bd4a6ce3093",
+      "finite": true,
+      "LRange": [
+        -1.6924505233764648,
+        101.69244384765625
+      ],
+      "belowInputMin": 58,
+      "aboveInputMax": 58,
+      "maxAbsLDelta": 11.692450523376465,
+      "meanAbsLDelta": 0.32126232981681824,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "step",
+      "mode": "rt-open",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-open",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\step.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\step-rt-open.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.731800025794655,
+      "inputSha256": "cc64b021fe3da86e7cd8d425da49aaaebd575e0313a73db964b5e0b3613b97bc",
+      "outputSha256": "eabede49eb2909238fb7ac278f4f851c1e63d65ad4edfbc5d6cec722edb16ab4",
+      "finite": true,
+      "LRange": [
+        -2.4796292781829834,
+        102.47962951660156
+      ],
+      "belowInputMin": 330,
+      "aboveInputMax": 297,
+      "maxAbsLDelta": 12.479629516601562,
+      "meanAbsLDelta": 0.4740000069141388,
+      "borderChangedL": 76,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "step",
+      "mode": "rt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\step.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\step-rt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.778000028338283,
+      "inputSha256": "cc64b021fe3da86e7cd8d425da49aaaebd575e0313a73db964b5e0b3613b97bc",
+      "outputSha256": "bced78a90f11bb680ce2ed09416201c7b5d77f02798603c6c8c3c38a1bc3ea11",
+      "finite": true,
+      "LRange": [
+        7.542035102844238,
+        92.45796203613281
+      ],
+      "belowInputMin": 99,
+      "aboveInputMax": 99,
+      "maxAbsLDelta": 2.4579648971557617,
+      "meanAbsLDelta": 0.08810104429721832,
+      "borderChangedL": 24,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "step",
+      "mode": "rt-halo",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-halo",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\step.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\step-rt-halo.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "100"
+      ],
+      "elapsedProcessMs": 7.428999990224838,
+      "inputSha256": "cc64b021fe3da86e7cd8d425da49aaaebd575e0313a73db964b5e0b3613b97bc",
+      "outputSha256": "cc64b021fe3da86e7cd8d425da49aaaebd575e0313a73db964b5e0b3613b97bc",
+      "finite": true,
+      "LRange": [
+        10.0,
+        90.0
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 0.0,
+      "meanAbsLDelta": 0.0,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "impulse",
+      "mode": "dt-zero",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-zero",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\impulse.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\impulse-dt-zero.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.610399974510074,
+      "inputSha256": "df34a3768742a7fe584dc4eb9e6007f41c84b8adc1815d317283e7e9af754d05",
+      "outputSha256": "fbf51d30b3a76a8c08b0102290106e1a19fa208ac98a1db7d13d660d362ec80b",
+      "finite": true,
+      "LRange": [
+        14.263396263122559,
+        123.08478546142578
+      ],
+      "belowInputMin": 24,
+      "aboveInputMax": 1,
+      "maxAbsLDelta": 33.08478546142578,
+      "meanAbsLDelta": 0.03084828145802021,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "impulse",
+      "mode": "dt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\impulse.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\impulse-dt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0.5"
+      ],
+      "elapsedProcessMs": 7.85100000211969,
+      "inputSha256": "df34a3768742a7fe584dc4eb9e6007f41c84b8adc1815d317283e7e9af754d05",
+      "outputSha256": "252a472df40be4e21619a0b922e93284fe544be69b02cc2f96af076954cc84a2",
+      "finite": true,
+      "LRange": [
+        14.613395690917969,
+        122.73478698730469
+      ],
+      "belowInputMin": 8,
+      "aboveInputMax": 1,
+      "maxAbsLDelta": 32.73478698730469,
+      "meanAbsLDelta": 0.028509175404906273,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "impulse",
+      "mode": "rt-open",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-open",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\impulse.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\impulse-rt-open.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.348299957811832,
+      "inputSha256": "df34a3768742a7fe584dc4eb9e6007f41c84b8adc1815d317283e7e9af754d05",
+      "outputSha256": "ebe0be0104d1a7db45aaf593fe76eb807217385fe000b086d569f2245abe4023",
+      "finite": true,
+      "LRange": [
+        15.139375686645508,
+        123.94487762451172
+      ],
+      "belowInputMin": 218,
+      "aboveInputMax": 1,
+      "maxAbsLDelta": 33.94487762451172,
+      "meanAbsLDelta": 0.03165031597018242,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "impulse",
+      "mode": "rt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\impulse.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\impulse-rt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.499600003939122,
+      "inputSha256": "df34a3768742a7fe584dc4eb9e6007f41c84b8adc1815d317283e7e9af754d05",
+      "outputSha256": "b17f63afe971678371a33c6a50d0b85a5e87b94c8b67fe9eb9356746419ff72a",
+      "finite": true,
+      "LRange": [
+        18.430721282958984,
+        90.0
+      ],
+      "belowInputMin": 32,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 1.5692787170410156,
+      "meanAbsLDelta": 0.006322214379906654,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "impulse",
+      "mode": "rt-halo",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-halo",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\impulse.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\impulse-rt-halo.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "100"
+      ],
+      "elapsedProcessMs": 8.026800001971424,
+      "inputSha256": "df34a3768742a7fe584dc4eb9e6007f41c84b8adc1815d317283e7e9af754d05",
+      "outputSha256": "df34a3768742a7fe584dc4eb9e6007f41c84b8adc1815d317283e7e9af754d05",
+      "finite": true,
+      "LRange": [
+        20.0,
+        90.0
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 0.0,
+      "meanAbsLDelta": 0.0,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "saturated_edge",
+      "mode": "dt-zero",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-zero",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\saturated_edge.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\saturated_edge-dt-zero.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.05979997292161,
+      "inputSha256": "5a4e262ccd4c73f56c4457f5d774e3322739491fc0ed90aa4a9eae02312eec90",
+      "outputSha256": "c6ab94afdff9354b6d7a8ee569b18c9d42350649340283b10e8b78558f37f4c3",
+      "finite": true,
+      "LRange": [
+        30.484081268310547,
+        69.51592254638672
+      ],
+      "belowInputMin": 58,
+      "aboveInputMax": 58,
+      "maxAbsLDelta": 4.515922546386719,
+      "meanAbsLDelta": 0.12757137417793274,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "saturated_edge",
+      "mode": "dt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\saturated_edge.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\saturated_edge-dt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0.5"
+      ],
+      "elapsedProcessMs": 7.798299950081855,
+      "inputSha256": "5a4e262ccd4c73f56c4457f5d774e3322739491fc0ed90aa4a9eae02312eec90",
+      "outputSha256": "36b302d61b508ce34a2a250825d615e4632bea1b692959ecaebec59d37d23a33",
+      "finite": true,
+      "LRange": [
+        30.834081649780273,
+        69.1659164428711
+      ],
+      "belowInputMin": 29,
+      "aboveInputMax": 29,
+      "maxAbsLDelta": 4.165918350219727,
+      "meanAbsLDelta": 0.11264485120773315,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "saturated_edge",
+      "mode": "rt-open",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-open",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\saturated_edge.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\saturated_edge-rt-open.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.630000007338822,
+      "inputSha256": "5a4e262ccd4c73f56c4457f5d774e3322739491fc0ed90aa4a9eae02312eec90",
+      "outputSha256": "b3c783a4edb39c576c898be2059a6ca4652c5d8f49ad5bead8ac98b74d880df3",
+      "finite": true,
+      "LRange": [
+        30.320138931274414,
+        69.67985534667969
+      ],
+      "belowInputMin": 297,
+      "aboveInputMax": 297,
+      "maxAbsLDelta": 4.679861068725586,
+      "meanAbsLDelta": 0.1777498424053192,
+      "borderChangedL": 72,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "saturated_edge",
+      "mode": "rt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\saturated_edge.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\saturated_edge-rt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.44499999564141,
+      "inputSha256": "5a4e262ccd4c73f56c4457f5d774e3322739491fc0ed90aa4a9eae02312eec90",
+      "outputSha256": "c34ac37333672aa872bed498c6d80478b414454686927ffb62631c3bbd73c9b1",
+      "finite": true,
+      "LRange": [
+        34.07826232910156,
+        65.92173767089844
+      ],
+      "belowInputMin": 66,
+      "aboveInputMax": 66,
+      "maxAbsLDelta": 0.9217376708984375,
+      "meanAbsLDelta": 0.03217333182692528,
+      "borderChangedL": 16,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "saturated_edge",
+      "mode": "rt-halo",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-halo",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\saturated_edge.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\saturated_edge-rt-halo.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "100"
+      ],
+      "elapsedProcessMs": 7.428499986417592,
+      "inputSha256": "5a4e262ccd4c73f56c4457f5d774e3322739491fc0ed90aa4a9eae02312eec90",
+      "outputSha256": "2b2c9de30632d9ffec55d316521e2a61883489c8c97adaa0c432c0f5dc0ca09d",
+      "finite": true,
+      "LRange": [
+        34.999996185302734,
+        65.00000762939453
+      ],
+      "belowInputMin": 58,
+      "aboveInputMax": 58,
+      "maxAbsLDelta": 7.62939453125e-06,
+      "meanAbsLDelta": 3.0944397622079123e-07,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "negative_above_range",
+      "mode": "dt-zero",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-zero",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\negative_above_range.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\negative_above_range-dt-zero.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.022299978416413,
+      "inputSha256": "a126099ecf39dab1f18a478be2a4cc841760efd6f6afddafb00d22b1bf32324f",
+      "outputSha256": "f74fbe235322445f17e3e73103fcad146ec3197985e3250ad5a07e8bbde0454a",
+      "finite": true,
+      "LRange": [
+        -23.816328048706055,
+        138.8163299560547
+      ],
+      "belowInputMin": 58,
+      "aboveInputMax": 58,
+      "maxAbsLDelta": 18.816329956054688,
+      "meanAbsLDelta": 0.5315473079681396,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "negative_above_range",
+      "mode": "dt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\negative_above_range.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\negative_above_range-dt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0.5"
+      ],
+      "elapsedProcessMs": 8.006000018212944,
+      "inputSha256": "a126099ecf39dab1f18a478be2a4cc841760efd6f6afddafb00d22b1bf32324f",
+      "outputSha256": "1c0556d4d887138b96174270e9901fac02bc31d64f75803e4439f686e5aea5d1",
+      "finite": true,
+      "LRange": [
+        -23.46632957458496,
+        138.46633911132812
+      ],
+      "belowInputMin": 58,
+      "aboveInputMax": 58,
+      "maxAbsLDelta": 18.466339111328125,
+      "meanAbsLDelta": 0.5126197338104248,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "negative_above_range",
+      "mode": "rt-open",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-open",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\negative_above_range.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\negative_above_range-rt-open.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.203000015579164,
+      "inputSha256": "a126099ecf39dab1f18a478be2a4cc841760efd6f6afddafb00d22b1bf32324f",
+      "outputSha256": "3b3b224961accf46a05970b46b8e3002a750510024285acb3d5130b352a35993",
+      "finite": true,
+      "LRange": [
+        -24.499420166015625,
+        139.49942016601562
+      ],
+      "belowInputMin": 330,
+      "aboveInputMax": 297,
+      "maxAbsLDelta": 19.499420166015625,
+      "meanAbsLDelta": 0.7406277060508728,
+      "borderChangedL": 230,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "negative_above_range",
+      "mode": "rt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\negative_above_range.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\negative_above_range-rt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 9.03489999473095,
+      "inputSha256": "a126099ecf39dab1f18a478be2a4cc841760efd6f6afddafb00d22b1bf32324f",
+      "outputSha256": "1884374a0ee365aff193bba6ab2e033c8e238222e6a58fa67eb7633e0c39c4e0",
+      "finite": true,
+      "LRange": [
+        -5.970580101013184,
+        120.97058868408203
+      ],
+      "belowInputMin": 99,
+      "aboveInputMax": 99,
+      "maxAbsLDelta": 0.9705886840820312,
+      "meanAbsLDelta": 0.05008946731686592,
+      "borderChangedL": 202,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "negative_above_range",
+      "mode": "rt-halo",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-halo",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\negative_above_range.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\negative_above_range-rt-halo.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "100"
+      ],
+      "elapsedProcessMs": 7.13550002546981,
+      "inputSha256": "a126099ecf39dab1f18a478be2a4cc841760efd6f6afddafb00d22b1bf32324f",
+      "outputSha256": "bc47ad2925c7e03e713fca9c0ba4d24e6dd8a2fd60c0d9f5bbb5bc9cf9bb3034",
+      "finite": true,
+      "LRange": [
+        -5.0,
+        119.99999237060547
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 7.62939453125e-06,
+      "meanAbsLDelta": 3.8733851397410035e-06,
+      "borderChangedL": 190,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "boundary",
+      "mode": "dt-zero",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-zero",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\boundary.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\boundary-dt-zero.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 8.678100013639778,
+      "inputSha256": "1bc0fb223e0290887c830aa3ca5b2db7614fc669827bce85e61469d9b2a9fa4d",
+      "outputSha256": "40600e24d15223198463bcc52dab389efcbf462627f7c52f489014063b99e900",
+      "finite": true,
+      "LRange": [
+        5.0,
+        90.0
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 0.4040412902832031,
+      "meanAbsLDelta": 0.01009136252105236,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "boundary",
+      "mode": "dt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\boundary.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\boundary-dt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0.5"
+      ],
+      "elapsedProcessMs": 6.982100021559745,
+      "inputSha256": "1bc0fb223e0290887c830aa3ca5b2db7614fc669827bce85e61469d9b2a9fa4d",
+      "outputSha256": "2ac3390a02c1fc7e188af301f9e5cd52d342a3fff22ea012a8f0abc7ae3aacc2",
+      "finite": true,
+      "LRange": [
+        5.0,
+        90.0
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 0.05404090881347656,
+      "meanAbsLDelta": 0.0007054291199892759,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "boundary",
+      "mode": "rt-open",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-open",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\boundary.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\boundary-rt-open.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.533700030762702,
+      "inputSha256": "1bc0fb223e0290887c830aa3ca5b2db7614fc669827bce85e61469d9b2a9fa4d",
+      "outputSha256": "742b83eafca5932feeee82be042fccb0d133ef4856d299e3e66f8d37e8721ecb",
+      "finite": true,
+      "LRange": [
+        -6.173786640167236,
+        110.53351593017578
+      ],
+      "belowInputMin": 65,
+      "aboveInputMax": 32,
+      "maxAbsLDelta": 20.53351593017578,
+      "meanAbsLDelta": 0.5758910179138184,
+      "borderChangedL": 376,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "boundary",
+      "mode": "rt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\boundary.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\boundary-rt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.316500006709248,
+      "inputSha256": "1bc0fb223e0290887c830aa3ca5b2db7614fc669827bce85e61469d9b2a9fa4d",
+      "outputSha256": "984aefaeed4faeb1e2cfbdb9e1f777424a90b6407821f7f35e3ac3a310d6300b",
+      "finite": true,
+      "LRange": [
+        4.149782657623291,
+        90.0
+      ],
+      "belowInputMin": 62,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 2.4672279357910156,
+      "meanAbsLDelta": 0.10584534704685211,
+      "borderChangedL": 341,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "boundary",
+      "mode": "rt-halo",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-halo",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\boundary.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\boundary-rt-halo.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "100"
+      ],
+      "elapsedProcessMs": 8.957599988207221,
+      "inputSha256": "1bc0fb223e0290887c830aa3ca5b2db7614fc669827bce85e61469d9b2a9fa4d",
+      "outputSha256": "70f23b45391a0a6e75643e73b492f78c8810fd66f30ce1f1937f6051d03a9753",
+      "finite": true,
+      "LRange": [
+        5.0,
+        90.0
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 1.843475341796875,
+      "meanAbsLDelta": 0.028279520571231842,
+      "borderChangedL": 279,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "low_detail",
+      "mode": "dt-zero",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-zero",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\low_detail.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\low_detail-dt-zero.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 8.031899982597679,
+      "inputSha256": "a1496c687bf2aef59dcf699a1936a8bb216ea8009b5ba18e99a9afa9aac57bf2",
+      "outputSha256": "d8ee4d28561cd542614963e07f661bf1bd22de493ff1fd046ab2174b4f513640",
+      "finite": true,
+      "LRange": [
+        49.78045654296875,
+        50.21954345703125
+      ],
+      "belowInputMin": 232,
+      "aboveInputMax": 232,
+      "maxAbsLDelta": 0.019542694091796875,
+      "meanAbsLDelta": 0.009831860661506653,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "low_detail",
+      "mode": "dt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\low_detail.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\low_detail-dt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0.5"
+      ],
+      "elapsedProcessMs": 6.9340000045485795,
+      "inputSha256": "a1496c687bf2aef59dcf699a1936a8bb216ea8009b5ba18e99a9afa9aac57bf2",
+      "outputSha256": "a1496c687bf2aef59dcf699a1936a8bb216ea8009b5ba18e99a9afa9aac57bf2",
+      "finite": true,
+      "LRange": [
+        49.79999923706055,
+        50.20000076293945
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 0.0,
+      "meanAbsLDelta": 0.0,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "low_detail",
+      "mode": "rt-open",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-open",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\low_detail.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\low_detail-rt-open.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.083399978000671,
+      "inputSha256": "a1496c687bf2aef59dcf699a1936a8bb216ea8009b5ba18e99a9afa9aac57bf2",
+      "outputSha256": "fbfdc0b59c00ef2baa1a8eaadecdb26f8c46326a6c0a2ec8dd8372db957fc128",
+      "finite": true,
+      "LRange": [
+        49.77156066894531,
+        50.22843551635742
+      ],
+      "belowInputMin": 264,
+      "aboveInputMax": 264,
+      "maxAbsLDelta": 0.028438568115234375,
+      "meanAbsLDelta": 0.01745687611401081,
+      "borderChangedL": 324,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "low_detail",
+      "mode": "rt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\low_detail.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\low_detail-rt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 10.030999954324216,
+      "inputSha256": "a1496c687bf2aef59dcf699a1936a8bb216ea8009b5ba18e99a9afa9aac57bf2",
+      "outputSha256": "50ba7a7c950f18ce9f1334f304192d5238710c54ed235cd1cee56a2ec59da90b",
+      "finite": true,
+      "LRange": [
+        49.79999923706055,
+        50.19999694824219
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 3.814697265625e-06,
+      "meanAbsLDelta": 1.4085036355027114e-06,
+      "borderChangedL": 125,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "low_detail",
+      "mode": "rt-halo",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-halo",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\low_detail.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\low_detail-rt-halo.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "100"
+      ],
+      "elapsedProcessMs": 8.455800008960068,
+      "inputSha256": "a1496c687bf2aef59dcf699a1936a8bb216ea8009b5ba18e99a9afa9aac57bf2",
+      "outputSha256": "50ba7a7c950f18ce9f1334f304192d5238710c54ed235cd1cee56a2ec59da90b",
+      "finite": true,
+      "LRange": [
+        49.79999923706055,
+        50.19999694824219
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 3.814697265625e-06,
+      "meanAbsLDelta": 1.4085036355027114e-06,
+      "borderChangedL": 125,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "detail",
+      "mode": "dt-zero",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-zero",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\detail.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\detail-dt-zero.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.142200018279254,
+      "inputSha256": "de27ff6429efd82050a6a9e928f3805639ad8000f484f7eaedb41dbd8443742c",
+      "outputSha256": "20745e3b1920da5f116440160131deb7ed9cdf574e387bd1af845694cd4ca011",
+      "finite": true,
+      "LRange": [
+        44.5114860534668,
+        55.4885139465332
+      ],
+      "belowInputMin": 232,
+      "aboveInputMax": 232,
+      "maxAbsLDelta": 0.4885139465332031,
+      "meanAbsLDelta": 0.24577927589416504,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "detail",
+      "mode": "dt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\detail.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\detail-dt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0.5"
+      ],
+      "elapsedProcessMs": 8.411300019361079,
+      "inputSha256": "de27ff6429efd82050a6a9e928f3805639ad8000f484f7eaedb41dbd8443742c",
+      "outputSha256": "34b2df02176ab4944c6b9b8f75d7e76bb5cce22a0b98ea463491d6b18d30ac0e",
+      "finite": true,
+      "LRange": [
+        44.861488342285156,
+        55.138511657714844
+      ],
+      "belowInputMin": 232,
+      "aboveInputMax": 232,
+      "maxAbsLDelta": 0.13851165771484375,
+      "meanAbsLDelta": 0.02996242791414261,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "detail",
+      "mode": "rt-open",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-open",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\detail.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\detail-rt-open.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 7.42869998794049,
+      "inputSha256": "de27ff6429efd82050a6a9e928f3805639ad8000f484f7eaedb41dbd8443742c",
+      "outputSha256": "42083d3622fcb44f6bb166ee770ccdc3dd1b9da36969faec6d3db778b493921d",
+      "finite": true,
+      "LRange": [
+        44.28898239135742,
+        55.711021423339844
+      ],
+      "belowInputMin": 264,
+      "aboveInputMax": 264,
+      "maxAbsLDelta": 0.7110214233398438,
+      "meanAbsLDelta": 0.4364114999771118,
+      "borderChangedL": 324,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "detail",
+      "mode": "rt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\detail.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\detail-rt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 8.721899997908622,
+      "inputSha256": "de27ff6429efd82050a6a9e928f3805639ad8000f484f7eaedb41dbd8443742c",
+      "outputSha256": "3613c8f007e7d9129fdfc4ccf2a06c5d90bfcdc6a952a031691d02b7ae2e2273",
+      "finite": true,
+      "LRange": [
+        44.28898239135742,
+        55.711021423339844
+      ],
+      "belowInputMin": 264,
+      "aboveInputMax": 264,
+      "maxAbsLDelta": 0.7110214233398438,
+      "meanAbsLDelta": 0.4363988935947418,
+      "borderChangedL": 316,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "detail",
+      "mode": "rt-halo",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-halo",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\detail.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\detail-rt-halo.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "100"
+      ],
+      "elapsedProcessMs": 8.724600018467754,
+      "inputSha256": "de27ff6429efd82050a6a9e928f3805639ad8000f484f7eaedb41dbd8443742c",
+      "outputSha256": "c5eca27c5085c1d7b25310c40eb58d001de38d96043e9af314f999c3a6ffae35",
+      "finite": true,
+      "LRange": [
+        45.0,
+        55.000003814697266
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 264,
+      "maxAbsLDelta": 0.5028266906738281,
+      "meanAbsLDelta": 0.19708409905433655,
+      "borderChangedL": 32,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "noise",
+      "mode": "dt-zero",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-zero",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\noise.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\noise-dt-zero.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 8.222099975682795,
+      "inputSha256": "f078c586c7893a0e858646e98f09f227085b135fc45429813a6670531d948c93",
+      "outputSha256": "1cb1390016aff292f826abf5b43764201e5711b5badb04ffa69e7891309521d1",
+      "finite": true,
+      "LRange": [
+        39.227176666259766,
+        40.72890090942383
+      ],
+      "belowInputMin": 16,
+      "aboveInputMax": 19,
+      "maxAbsLDelta": 0.2630195617675781,
+      "meanAbsLDelta": 0.0496254600584507,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "noise",
+      "mode": "dt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe",
+        "dt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\noise.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\noise-dt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0.5"
+      ],
+      "elapsedProcessMs": 8.347800001502037,
+      "inputSha256": "f078c586c7893a0e858646e98f09f227085b135fc45429813a6670531d948c93",
+      "outputSha256": "f078c586c7893a0e858646e98f09f227085b135fc45429813a6670531d948c93",
+      "finite": true,
+      "LRange": [
+        39.47401428222656,
+        40.52747344970703
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 0.0,
+      "meanAbsLDelta": 0.0,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "noise",
+      "mode": "rt-open",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-open",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\noise.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\noise-rt-open.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 9.48509998852387,
+      "inputSha256": "f078c586c7893a0e858646e98f09f227085b135fc45429813a6670531d948c93",
+      "outputSha256": "98d0645f315a45d6ae4709c5631ccbc2673c45178f34a880240bb88ab8234369",
+      "finite": true,
+      "LRange": [
+        39.225711822509766,
+        40.73051452636719
+      ],
+      "belowInputMin": 22,
+      "aboveInputMax": 21,
+      "maxAbsLDelta": 0.25629425048828125,
+      "meanAbsLDelta": 0.05956904590129852,
+      "borderChangedL": 376,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "noise",
+      "mode": "rt-threshold",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-threshold",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\noise.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\noise-rt-threshold.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "0"
+      ],
+      "elapsedProcessMs": 8.423499995842576,
+      "inputSha256": "f078c586c7893a0e858646e98f09f227085b135fc45429813a6670531d948c93",
+      "outputSha256": "f52dc2527e1fd2d55332a1c6208fc09bf2c36c9ea3ff882f5b5d7d043cd8206c",
+      "finite": true,
+      "LRange": [
+        39.225711822509766,
+        40.73051452636719
+      ],
+      "belowInputMin": 22,
+      "aboveInputMax": 20,
+      "maxAbsLDelta": 0.25629425048828125,
+      "meanAbsLDelta": 0.02379305474460125,
+      "borderChangedL": 194,
+      "abExact": true,
+      "flatResidual": null
+    },
+    {
+      "case": "noise",
+      "mode": "rt-halo",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe",
+        "rt-halo",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\noise.f32",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-fixtures\\noise-rt-halo.f32",
+        "65",
+        "33",
+        ".7",
+        ".7",
+        "100"
+      ],
+      "elapsedProcessMs": 8.270799997262657,
+      "inputSha256": "f078c586c7893a0e858646e98f09f227085b135fc45429813a6670531d948c93",
+      "outputSha256": "732e5cf97604038ec0e879ef061fa6a066a862df1215947f2906643a9d989b72",
+      "finite": true,
+      "LRange": [
+        39.47401428222656,
+        40.52747344970703
+      ],
+      "belowInputMin": 0,
+      "aboveInputMax": 0,
+      "maxAbsLDelta": 0.17525482177734375,
+      "meanAbsLDelta": 0.0007004228536970913,
+      "borderChangedL": 0,
+      "abExact": true,
+      "flatResidual": null
+    }
+  ],
+  "referenceCalls": 45,
+  "gpuCalls": 0,
+  "allFinite": true,
+  "a_b_passThrough": true
+}

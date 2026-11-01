@@ -1,0 +1,532 @@
+{
+  "version": "Round13NumericalAddendaV1",
+  "referenceBoundary": [
+    {
+      "case": "flat",
+      "mode": "dt-zero",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "flat",
+      "mode": "dt-threshold",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "flat",
+      "mode": "rt-open",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "flat",
+      "mode": "rt-threshold",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "flat",
+      "mode": "rt-halo",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": true
+    },
+    {
+      "case": "step",
+      "mode": "dt-zero",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "step",
+      "mode": "dt-threshold",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "step",
+      "mode": "rt-open",
+      "maxAbsBorderLDelta": 12.479629516601562,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "step",
+      "mode": "rt-threshold",
+      "maxAbsBorderLDelta": 2.4579648971557617,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "step",
+      "mode": "rt-halo",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": true
+    },
+    {
+      "case": "impulse",
+      "mode": "dt-zero",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "impulse",
+      "mode": "dt-threshold",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "impulse",
+      "mode": "rt-open",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "impulse",
+      "mode": "rt-threshold",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "impulse",
+      "mode": "rt-halo",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": true
+    },
+    {
+      "case": "saturated_edge",
+      "mode": "dt-zero",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "saturated_edge",
+      "mode": "dt-threshold",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "saturated_edge",
+      "mode": "rt-open",
+      "maxAbsBorderLDelta": 4.679861068725586,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "saturated_edge",
+      "mode": "rt-threshold",
+      "maxAbsBorderLDelta": 0.9217376708984375,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "saturated_edge",
+      "mode": "rt-halo",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": true
+    },
+    {
+      "case": "negative_above_range",
+      "mode": "dt-zero",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "negative_above_range",
+      "mode": "dt-threshold",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "negative_above_range",
+      "mode": "rt-open",
+      "maxAbsBorderLDelta": 19.499420166015625,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "negative_above_range",
+      "mode": "rt-threshold",
+      "maxAbsBorderLDelta": 0.9705886840820312,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "negative_above_range",
+      "mode": "rt-halo",
+      "maxAbsBorderLDelta": 7.62939453125e-06,
+      "nativeInternalRoundtripOnlyAtHaloBorder": true
+    },
+    {
+      "case": "boundary",
+      "mode": "dt-zero",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "boundary",
+      "mode": "dt-threshold",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "boundary",
+      "mode": "rt-open",
+      "maxAbsBorderLDelta": 20.53351593017578,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "boundary",
+      "mode": "rt-threshold",
+      "maxAbsBorderLDelta": 2.4672279357910156,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "boundary",
+      "mode": "rt-halo",
+      "maxAbsBorderLDelta": 1.9073486328125e-06,
+      "nativeInternalRoundtripOnlyAtHaloBorder": true
+    },
+    {
+      "case": "low_detail",
+      "mode": "dt-zero",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "low_detail",
+      "mode": "dt-threshold",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "low_detail",
+      "mode": "rt-open",
+      "maxAbsBorderLDelta": 0.028438568115234375,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "low_detail",
+      "mode": "rt-threshold",
+      "maxAbsBorderLDelta": 3.814697265625e-06,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "low_detail",
+      "mode": "rt-halo",
+      "maxAbsBorderLDelta": 3.814697265625e-06,
+      "nativeInternalRoundtripOnlyAtHaloBorder": true
+    },
+    {
+      "case": "detail",
+      "mode": "dt-zero",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "detail",
+      "mode": "dt-threshold",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "detail",
+      "mode": "rt-open",
+      "maxAbsBorderLDelta": 0.7110214233398438,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "detail",
+      "mode": "rt-threshold",
+      "maxAbsBorderLDelta": 0.7110214233398438,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "detail",
+      "mode": "rt-halo",
+      "maxAbsBorderLDelta": 3.814697265625e-06,
+      "nativeInternalRoundtripOnlyAtHaloBorder": true
+    },
+    {
+      "case": "noise",
+      "mode": "dt-zero",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "noise",
+      "mode": "dt-threshold",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "noise",
+      "mode": "rt-open",
+      "maxAbsBorderLDelta": 0.25295257568359375,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "noise",
+      "mode": "rt-threshold",
+      "maxAbsBorderLDelta": 0.25295257568359375,
+      "nativeInternalRoundtripOnlyAtHaloBorder": null
+    },
+    {
+      "case": "noise",
+      "mode": "rt-halo",
+      "maxAbsBorderLDelta": 0.0,
+      "nativeInternalRoundtripOnlyAtHaloBorder": true
+    }
+  ],
+  "rtHaloBoundaryExplanation": "Exact upstream loop leaves native internal2px L unchanged; wrapper L*->327.68L*->L* introduces small float roundtrip changes at those pixels. Distinguish from actual sharpening boundary changes.",
+  "synthetic": [
+    {
+      "case": "flat",
+      "sourceMinMax": [
+        0.4000000059604645,
+        0.4000000059604645
+      ],
+      "legacyMinMax": [
+        0.4000000059604645,
+        0.4000000059604645
+      ],
+      "candidateMinMax": [
+        0.4000000059604645,
+        0.4000000059604645
+      ],
+      "meanDriftLegacy": 0.0,
+      "meanDriftCandidate": 0.0,
+      "candidateExactOriginal": true,
+      "candidateDetailIncrementNonzeroComponents": 0,
+      "legacyDetailIncrementNonzeroComponents": 0
+    },
+    {
+      "case": "step",
+      "sourceMinMax": [
+        0.10000000149011612,
+        0.8999999761581421
+      ],
+      "legacyMinMax": [
+        -0.020424496382474896,
+        1.020424485206604
+      ],
+      "candidateMinMax": [
+        0.10000000149011612,
+        0.8999999761581421
+      ],
+      "meanDriftLegacy": 4.0118510729239546e-10,
+      "meanDriftCandidate": 0.0,
+      "candidateExactOriginal": true,
+      "candidateDetailIncrementNonzeroComponents": 0,
+      "legacyDetailIncrementNonzeroComponents": 396
+    },
+    {
+      "case": "impulse",
+      "sourceMinMax": [
+        0.4000000059604645,
+        0.8999999761581421
+      ],
+      "legacyMinMax": [
+        0.35902425646781916,
+        1.136319875717163
+      ],
+      "candidateMinMax": [
+        0.4000000059604645,
+        0.8999999761581421
+      ],
+      "meanDriftLegacy": 9.72569958005698e-11,
+      "meanDriftCandidate": 0.0,
+      "candidateExactOriginal": true,
+      "candidateDetailIncrementNonzeroComponents": 0,
+      "legacyDetailIncrementNonzeroComponents": 75
+    },
+    {
+      "case": "saturated_edge",
+      "sourceMinMax": [
+        0.1386259992968291,
+        0.22066999427564443
+      ],
+      "legacyMinMax": [
+        0.12627586626410484,
+        0.2330201422125101
+      ],
+      "candidateMinMax": [
+        0.1386259992968291,
+        0.22066999427564443
+      ],
+      "meanDriftLegacy": 3.1217416946321534e-09,
+      "meanDriftCandidate": 0.0,
+      "candidateExactOriginal": true,
+      "candidateDetailIncrementNonzeroComponents": 0,
+      "legacyDetailIncrementNonzeroComponents": 3399
+    },
+    {
+      "case": "negative_above_range",
+      "sourceMinMax": [
+        -0.05000000074505806,
+        1.2000000476837158
+      ],
+      "legacyMinMax": [
+        -0.23816329240798947,
+        1.388163447380066
+      ],
+      "candidateMinMax": [
+        -0.05000000074505806,
+        1.2000000476837158
+      ],
+      "meanDriftLegacy": 5.9375396142066134e-08,
+      "meanDriftCandidate": 0.0,
+      "candidateExactOriginal": true,
+      "candidateDetailIncrementNonzeroComponents": 0,
+      "legacyDetailIncrementNonzeroComponents": 3465
+    },
+    {
+      "case": "boundary",
+      "sourceMinMax": [
+        0.05000000074505806,
+        0.8999999761581421
+      ],
+      "legacyMinMax": [
+        -0.06600911915302275,
+        1.0896739959716797
+      ],
+      "candidateMinMax": [
+        0.05000000074505806,
+        0.8999999761581421
+      ],
+      "meanDriftLegacy": 1.4525592859063205e-09,
+      "meanDriftCandidate": -1.3759211226776789e-05,
+      "candidateExactOriginal": false,
+      "candidateDetailIncrementNonzeroComponents": 12,
+      "legacyDetailIncrementNonzeroComponents": 855
+    },
+    {
+      "case": "low_detail",
+      "sourceMinMax": [
+        0.49799999594688416,
+        0.5019999742507935
+      ],
+      "legacyMinMax": [
+        0.49780458211898804,
+        0.502195417881012
+      ],
+      "candidateMinMax": [
+        0.49799999594688416,
+        0.5019999742507935
+      ],
+      "meanDriftLegacy": 2.6134344246817256e-08,
+      "meanDriftCandidate": 2.1549371572641226e-08,
+      "candidateExactOriginal": false,
+      "candidateDetailIncrementNonzeroComponents": 3168,
+      "legacyDetailIncrementNonzeroComponents": 4950
+    },
+    {
+      "case": "detail",
+      "sourceMinMax": [
+        0.44999998807907104,
+        0.550000011920929
+      ],
+      "legacyMinMax": [
+        0.44511488080024714,
+        0.55488520860672
+      ],
+      "candidateMinMax": [
+        0.44999998807907104,
+        0.550000011920929
+      ],
+      "meanDriftLegacy": 2.7051338774991125e-08,
+      "meanDriftCandidate": 1.4671912560096155e-08,
+      "candidateExactOriginal": false,
+      "candidateDetailIncrementNonzeroComponents": 3168,
+      "legacyDetailIncrementNonzeroComponents": 4950
+    },
+    {
+      "case": "noise",
+      "sourceMinMax": [
+        0.39474013447761536,
+        0.40527474880218506
+      ],
+      "legacyMinMax": [
+        0.3922717869281769,
+        0.407289057970047
+      ],
+      "candidateMinMax": [
+        0.39474013447761536,
+        0.40527474880218506
+      ],
+      "meanDriftLegacy": 2.300822651410102e-08,
+      "meanDriftCandidate": 4.975834648647262e-06,
+      "candidateExactOriginal": false,
+      "candidateDetailIncrementNonzeroComponents": 5865,
+      "legacyDetailIncrementNonzeroComponents": 6435
+    }
+  ],
+  "fixedSkinROI": {
+    "xywh": [
+      310,
+      390,
+      35,
+      60
+    ],
+    "response": {
+      "originalNegativeComponents": 0,
+      "legacyNegativeComponents": 0,
+      "candidateNegativeComponents": 0,
+      "legacyOutsideLocalEnvelopeComponents": 308,
+      "candidateOutsideLocalEnvelopeComponents": 104,
+      "legacyRgbZeroPixels": 0,
+      "candidateRgbZeroPixels": 0,
+      "legacyAnyZeroPixels": 0,
+      "candidateAnyZeroPixels": 0,
+      "legacyMeanDeltaLinearY": 8.22777732129068e-06,
+      "candidateMeanDeltaLinearY": 8.73656860991774e-06,
+      "gradientMeanOriginal": 0.0021855737820050316,
+      "gradientMeanLegacy": 0.0026160862979060515,
+      "gradientMeanCandidate": 0.0025645179206619743,
+      "linearYStdOriginal": 0.030123943945787567,
+      "linearYStdLegacy": 0.030184871365182515,
+      "linearYStdCandidate": 0.030160395667746944,
+      "modifiedPixels": 184,
+      "candidateEqualsOriginalPixels": 41,
+      "deltaDirectionCosineMin": 0.9999997834466966,
+      "encodedLabResponseChangeNotAccuracy": {
+        "hueValidPixels": 2092,
+        "hueDeltaDegQuantiles": [
+          0.0,
+          0.5919675991729426,
+          9.853192475662576
+        ],
+        "chromaDeltaQuantiles": [
+          -1.5328431036899008,
+          0.0,
+          0.0,
+          0.9943024067257085
+        ],
+        "LDeltaQuantiles": [
+          -0.4153656189036994,
+          0.0,
+          0.0,
+          0.6499015263298382
+        ]
+      }
+    },
+    "envelopeStatisticsLocalCropWarning": "ROI envelope in descriptive metric reflects crop edge; full-image contract gate above is authoritative"
+  },
+  "naturalTiming": {
+    "0": {
+      "minStageMs": 20.1063,
+      "maxStageMs": 28.4924,
+      "scope": "one shot stage A+B and encode/pack/readback; not pure candidate speedup"
+    },
+    "17": {
+      "minStageMs": 90.8439,
+      "maxStageMs": 128.136,
+      "scope": "one shot stage A+B and encode/pack/readback; not pure candidate speedup"
+    },
+    "37": {
+      "minStageMs": 51.343,
+      "maxStageMs": 72.6975,
+      "scope": "one shot stage A+B and encode/pack/readback; not pure candidate speedup"
+    }
+  },
+  "metricsLimit": "Gradient boost is descriptive edge/noise response, not proven true detail. Hue is output Lab delta relative to legacy, not skin/physical accuracy.",
+  "callsAdded": {
+    "gpu": 0,
+    "raw": 0
+  },
+  "scaleContract": "Only ratio1; scaled preview not executed or approved. Stream halo2 exact tests do not substitute scaled preview."
+}

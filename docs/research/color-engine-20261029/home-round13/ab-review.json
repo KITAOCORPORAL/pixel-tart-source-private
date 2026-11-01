@@ -1,0 +1,237 @@
+{
+  "version": "Round13FrozenABReviewV1",
+  "natural": [
+    {
+      "id": "canon600d",
+      "fullEnvelopeViolationComponents": 0,
+      "gradientGainLegacy": 1.1719976115110016,
+      "gradientGainCandidate": 1.1151621231702826,
+      "retainedGradientBoostFraction": 0.669556525573708,
+      "pixelsModifiedFraction": 0.2695629954109303,
+      "incrementDirection": {
+        "domain": "linearRGB increment direction only; magnitude>=1e-5 in both to avoid zero/tiny float conditioning; not hue guarantee",
+        "validPixels": 826187,
+        "cosineQuantiles": [
+          0.9999990677080961,
+          0.9999999999852629,
+          1.0,
+          1.0
+        ],
+        "maxPerComponentResidualFromBestSharedGain": 1.7054988432803342e-08
+      },
+      "fixedCrop": [
+        650,
+        130,
+        300,
+        250
+      ],
+      "anonymousImageHash": "8b6cbcddde9dda4e78ef3fb773d9d8c4107425355f8f30ff2df2fff6fd13b0b7",
+      "savedReopenExact": true,
+      "pngDisplayRoundTo8bitExact": true,
+      "tiff16SavedReadbackExact": true,
+      "tiffSha256": "59400a4aa88cce890295cfef03232d7e34f5987e4c92db5c1bd69fd64226d59e"
+    },
+    {
+      "id": "canon6d",
+      "fullEnvelopeViolationComponents": 0,
+      "gradientGainLegacy": 1.173359455554886,
+      "gradientGainCandidate": 1.0982889051328413,
+      "retainedGradientBoostFraction": 0.5669659310952482,
+      "pixelsModifiedFraction": 0.2367082813150229,
+      "incrementDirection": {
+        "domain": "linearRGB increment direction only; magnitude>=1e-5 in both to avoid zero/tiny float conditioning; not hue guarantee",
+        "validPixels": 861180,
+        "cosineQuantiles": [
+          0.9999997781866664,
+          0.9999999999940129,
+          1.0,
+          1.0
+        ],
+        "maxPerComponentResidualFromBestSharedGain": 1.3193264265798366e-08
+      },
+      "fixedCrop": [
+        140,
+        170,
+        300,
+        250
+      ],
+      "anonymousImageHash": "a556d1340bcfcaddc807225643491476a6852f71467ec0d47e2edc741d816bb9",
+      "savedReopenExact": true,
+      "pngDisplayRoundTo8bitExact": true,
+      "tiff16SavedReadbackExact": true,
+      "tiffSha256": "ad9f598408807cd8b94161c34e7000695a3d7dd32e7086f98708ee427f66036b"
+    },
+    {
+      "id": "canon5d3",
+      "fullEnvelopeViolationComponents": 0,
+      "gradientGainLegacy": 1.3866015850636877,
+      "gradientGainCandidate": 1.213764063873243,
+      "retainedGradientBoostFraction": 0.55293116255079,
+      "pixelsModifiedFraction": 0.4372742405326675,
+      "incrementDirection": {
+        "domain": "linearRGB increment direction only; magnitude>=1e-5 in both to avoid zero/tiny float conditioning; not hue guarantee",
+        "validPixels": 813295,
+        "cosineQuantiles": [
+          0.9999969013475837,
+          0.9999999999989084,
+          1.0,
+          1.0
+        ],
+        "maxPerComponentResidualFromBestSharedGain": 3.453262606423202e-08
+      },
+      "fixedCrop": [
+        20,
+        480,
+        300,
+        250
+      ],
+      "anonymousImageHash": "59d4b7bec8340af38fea63619457a7a3393cf074bef9c26890ef3b22f9c784ff",
+      "savedReopenExact": true,
+      "pngDisplayRoundTo8bitExact": true,
+      "tiff16SavedReadbackExact": true,
+      "tiffSha256": "0b1ddea2b7a89ec7759f86f9f3b0035f1f93a63550f15c132e8ed8fade2b30b0"
+    },
+    {
+      "id": "nikond5100",
+      "fullEnvelopeViolationComponents": 0,
+      "gradientGainLegacy": 1.1751780430910157,
+      "gradientGainCandidate": 1.1143527920728997,
+      "retainedGradientBoostFraction": 0.6527803944783562,
+      "pixelsModifiedFraction": 0.2250314465408805,
+      "incrementDirection": {
+        "domain": "linearRGB increment direction only; magnitude>=1e-5 in both to avoid zero/tiny float conditioning; not hue guarantee",
+        "validPixels": 810770,
+        "cosineQuantiles": [
+          0.9999948064495103,
+          0.9999999999867367,
+          1.0,
+          1.0
+        ],
+        "maxPerComponentResidualFromBestSharedGain": 3.749246319309507e-08
+      },
+      "fixedCrop": [
+        300,
+        350,
+        300,
+        250
+      ],
+      "anonymousImageHash": "36cac05790ad651cd9ff7d2f30048cf8fdb3da41ce009b00eb6ee41c94a3afec",
+      "fixedRoiEnvelopeCorrectGlobalContext": {
+        "xywh": [
+          310,
+          390,
+          35,
+          60
+        ],
+        "violationComponents": 0,
+        "note": "Original earlier ROI descriptive table reflects crop edge, not global scene; this uses full-image neighbors and is authoritative"
+      },
+      "savedReopenExact": true,
+      "pngDisplayRoundTo8bitExact": true,
+      "tiff16SavedReadbackExact": true,
+      "tiffSha256": "5cc1ee66d107c286013f8d5aef62ce5bb8cb48d57be64f9261272dd8cb7acf67"
+    },
+    {
+      "id": "sonynex5r",
+      "fullEnvelopeViolationComponents": 0,
+      "gradientGainLegacy": 1.3137578486337096,
+      "gradientGainCandidate": 1.1618095486141236,
+      "retainedGradientBoostFraction": 0.5157147440892385,
+      "pixelsModifiedFraction": 0.347514601585315,
+      "incrementDirection": {
+        "domain": "linearRGB increment direction only; magnitude>=1e-5 in both to avoid zero/tiny float conditioning; not hue guarantee",
+        "validPixels": 830789,
+        "cosineQuantiles": [
+          0.9999949824759263,
+          0.9999999999989666,
+          1.0,
+          1.0
+        ],
+        "maxPerComponentResidualFromBestSharedGain": 3.7174181743288015e-08
+      },
+      "fixedCrop": [
+        270,
+        400,
+        300,
+        250
+      ],
+      "anonymousImageHash": "20fa112ed8bdf62c2af9d40f5401639059633d745822083c41a8273d4f18a747",
+      "fixedRoiEnvelopeCorrectGlobalContext": {
+        "xywh": [
+          270,
+          400,
+          300,
+          250
+        ],
+        "violationComponents": 0,
+        "note": "Original earlier ROI descriptive table reflects crop edge, not global scene; this uses full-image neighbors and is authoritative"
+      },
+      "savedReopenExact": true,
+      "pngDisplayRoundTo8bitExact": true,
+      "tiff16SavedReadbackExact": true,
+      "tiffSha256": "d7d722e34384d12f908c860c2b6ce3de83b0be73114a4b83a2f07d99e033d6f4"
+    },
+    {
+      "id": "canonr6",
+      "fullEnvelopeViolationComponents": 0,
+      "gradientGainLegacy": 1.4975693204169438,
+      "gradientGainCandidate": 1.2225673033344249,
+      "retainedGradientBoostFraction": 0.44730913704229613,
+      "pixelsModifiedFraction": 0.48713066999583854,
+      "incrementDirection": {
+        "domain": "linearRGB increment direction only; magnitude>=1e-5 in both to avoid zero/tiny float conditioning; not hue guarantee",
+        "validPixels": 496154,
+        "cosineQuantiles": [
+          0.9999999874965809,
+          0.9999999999848675,
+          1.0,
+          1.0
+        ],
+        "maxPerComponentResidualFromBestSharedGain": 1.9493809423122045e-09
+      },
+      "fixedCrop": [
+        0,
+        500,
+        300,
+        250
+      ],
+      "anonymousImageHash": "1ad5a34ba338b800c629558592f4ce8ba2c3a778545f9ce039905ed8a6a7a3dc",
+      "fixedRoiEnvelopeCorrectGlobalContext": {
+        "xywh": [
+          0,
+          500,
+          300,
+          250
+        ],
+        "violationComponents": 0,
+        "note": "Original earlier ROI descriptive table reflects crop edge, not global scene; this uses full-image neighbors and is authoritative"
+      },
+      "savedReopenExact": true,
+      "pngDisplayRoundTo8bitExact": true,
+      "tiff16SavedReadbackExact": true,
+      "tiffSha256": "1332b949f0e37fe946e2012f9e755398dd2a22bc613cc720bbc12534b5df261e"
+    }
+  ],
+  "syntheticTradeoffs": {
+    "noiseStdGainLegacy": 1.4722870261144532,
+    "noiseStdGainCandidate": 1.2482901136360862,
+    "detailStdGainLegacy": 1.0978575285463144,
+    "detailStdGainCandidate": 1.0497688343150233,
+    "lowDetailStdGainLegacy": 1.0978653980402149,
+    "lowDetailStdGainCandidate": 1.04977152831702,
+    "stepAndImpulseCandidateEqualsInput": true,
+    "interpretation": "No-tuning V1 removes extrema overshoot but returns pure step/impulse to original, retaining less sharpening. Noise still amplified; not a denoiser."
+  },
+  "resourceSummary": {
+    "wholeDevicePoolPeakMax": 65361648,
+    "streamDevicePoolPeakMax": 3513648,
+    "osPeakWorkingSetMax": 148418560,
+    "scope": "Stage-only includes original and candidate+downstream together; not full pipeline or candidate-only performance"
+  },
+  "preference": "NOT_RUN_AWAITING_HUMAN",
+  "independentValidation": "NOT_RUN_DEVELOPMENT_ONLY",
+  "productAcceptance": "NOT_ADMITTED",
+  "scale": "Only explicit ratio1; product800/1600 NOT_RUN",
+  "rawDecode": 0,
+  "newGpuCalls": 0
+}

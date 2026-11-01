@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "N:/pixart/guangjing-color-engine-home-20261030/tools/color-round13/run_candidate_ab.py", line 7, in <module>
+    if len(sys.argv)!=5 or sys.argv[3]!='--enable-candidate' or sys.argv[4]!='SharedIncrementEnvelopeUnsharpV1':raise ValueError('Candidate is default-off; explicit --enable-candidate SharedIncrementEnvelopeUnsharpV1 required before any GPU or output')
+                                                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Candidate is default-off; explicit --enable-candidate SharedIncrementEnvelopeUnsharpV1 required before any GPU or output

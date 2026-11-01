@@ -1,0 +1,259 @@
+{
+  "version": "Round13ReferenceCrossComparisonV1",
+  "domain": "native Lab L* numeric fixtures, no colour accuracy claim",
+  "records": [
+    {
+      "case": "flat",
+      "dtThresholdVsNoThreshold": {
+        "maxAbsLStarUnit": 0.0,
+        "meanAbsLStarUnit": 0.0,
+        "changedValues": 0
+      },
+      "rtHaloVsSameThresholdUncontrolled": {
+        "maxAbsLStarUnit": 0.0,
+        "meanAbsLStarUnit": 0.0,
+        "changedValues": 0
+      },
+      "dtVsRtOpen": {
+        "maxAbsLStarUnit": 0.0,
+        "meanAbsLStarUnit": 0.0,
+        "changedValues": 0
+      },
+      "referenceInputLMinMax": [
+        40.0,
+        40.0
+      ],
+      "scaledScalarShapeProbe": {
+        "note": "For diagnostics only: L*=100*x is a numeric fixture scaling, NOT a valid linearRGB-to-Lab colour conversion. Saturated/other nonidentical fixtures excluded.",
+        "inputMaxDelta": 0.0,
+        "legacyVsDtNoThresholdInterior": {
+          "maxAbsLStarUnit": 0.0,
+          "meanAbsLStarUnit": 0.0,
+          "changedValues": 0
+        }
+      }
+    },
+    {
+      "case": "step",
+      "dtThresholdVsNoThreshold": {
+        "maxAbsLStarUnit": 0.34999942779541016,
+        "meanAbsLStarUnit": 0.01893067348809231,
+        "changedValues": 957
+      },
+      "rtHaloVsSameThresholdUncontrolled": {
+        "maxAbsLStarUnit": 2.4579648971557617,
+        "meanAbsLStarUnit": 0.0881010495699369,
+        "changedValues": 198
+      },
+      "dtVsRtOpen": {
+        "maxAbsLStarUnit": 12.479629516601562,
+        "meanAbsLStarUnit": 0.13381305719033265,
+        "changedValues": 1265
+      },
+      "referenceInputLMinMax": [
+        10.0,
+        90.0
+      ],
+      "scaledScalarShapeProbe": {
+        "note": "For diagnostics only: L*=100*x is a numeric fixture scaling, NOT a valid linearRGB-to-Lab colour conversion. Saturated/other nonidentical fixtures excluded.",
+        "inputMaxDelta": 0.0,
+        "legacyVsDtNoThresholdInterior": {
+          "maxAbsLStarUnit": 7.62939453125e-06,
+          "meanAbsLStarUnit": 3.881141787669697e-06,
+          "changedValues": 928
+        }
+      }
+    },
+    {
+      "case": "impulse",
+      "dtThresholdVsNoThreshold": {
+        "maxAbsLStarUnit": 0.35000038146972656,
+        "meanAbsLStarUnit": 0.0023391030051491475,
+        "changedValues": 25
+      },
+      "rtHaloVsSameThresholdUncontrolled": {
+        "maxAbsLStarUnit": 1.5692787170410156,
+        "meanAbsLStarUnit": 0.006322214264413971,
+        "changedValues": 32
+      },
+      "dtVsRtOpen": {
+        "maxAbsLStarUnit": 0.8759794235229492,
+        "meanAbsLStarUnit": 0.005928174710218167,
+        "changedValues": 219
+      },
+      "referenceInputLMinMax": [
+        20.0,
+        90.0
+      ]
+    },
+    {
+      "case": "saturated_edge",
+      "dtThresholdVsNoThreshold": {
+        "maxAbsLStarUnit": 0.350006103515625,
+        "meanAbsLStarUnit": 0.014926520038595844,
+        "changedValues": 116
+      },
+      "rtHaloVsSameThresholdUncontrolled": {
+        "maxAbsLStarUnit": 0.9217376708984375,
+        "meanAbsLStarUnit": 0.032173023357257975,
+        "changedValues": 132
+      },
+      "dtVsRtOpen": {
+        "maxAbsLStarUnit": 4.679861068725586,
+        "meanAbsLStarUnit": 0.050178466476760546,
+        "changedValues": 594
+      },
+      "referenceInputLMinMax": [
+        35.0,
+        65.0
+      ]
+    },
+    {
+      "case": "negative_above_range",
+      "dtThresholdVsNoThreshold": {
+        "maxAbsLStarUnit": 0.34999990463256836,
+        "meanAbsLStarUnit": 0.018927572601602907,
+        "changedValues": 116
+      },
+      "rtHaloVsSameThresholdUncontrolled": {
+        "maxAbsLStarUnit": 0.9705963134765625,
+        "meanAbsLStarUnit": 0.05008630018967849,
+        "changedValues": 198
+      },
+      "dtVsRtOpen": {
+        "maxAbsLStarUnit": 19.499420166015625,
+        "meanAbsLStarUnit": 0.20908042823240194,
+        "changedValues": 1419
+      },
+      "referenceInputLMinMax": [
+        -5.0,
+        120.0
+      ],
+      "scaledScalarShapeProbe": {
+        "note": "For diagnostics only: L*=100*x is a numeric fixture scaling, NOT a valid linearRGB-to-Lab colour conversion. Saturated/other nonidentical fixtures excluded.",
+        "inputMaxDelta": 7.62939453125e-06,
+        "legacyVsDtNoThresholdInterior": {
+          "maxAbsLStarUnit": 1.52587890625e-05,
+          "meanAbsLStarUnit": 7.66847954421747e-06,
+          "changedValues": 957
+        }
+      }
+    },
+    {
+      "case": "boundary",
+      "dtThresholdVsNoThreshold": {
+        "maxAbsLStarUnit": 0.35000038146972656,
+        "meanAbsLStarUnit": 0.009385933687081148,
+        "changedValues": 89
+      },
+      "rtHaloVsSameThresholdUncontrolled": {
+        "maxAbsLStarUnit": 2.4672298431396484,
+        "meanAbsLStarUnit": 0.07756616307861043,
+        "changedValues": 280
+      },
+      "dtVsRtOpen": {
+        "maxAbsLStarUnit": 20.53351593017578,
+        "meanAbsLStarUnit": 0.5657997006302947,
+        "changedValues": 2145
+      },
+      "referenceInputLMinMax": [
+        5.0,
+        90.0
+      ]
+    },
+    {
+      "case": "low_detail",
+      "dtThresholdVsNoThreshold": {
+        "maxAbsLStarUnit": 0.019542694091796875,
+        "meanAbsLStarUnit": 0.009831860237744027,
+        "changedValues": 1769
+      },
+      "rtHaloVsSameThresholdUncontrolled": {
+        "maxAbsLStarUnit": 0.0,
+        "meanAbsLStarUnit": 0.0,
+        "changedValues": 0
+      },
+      "dtVsRtOpen": {
+        "maxAbsLStarUnit": 0.028438568115234375,
+        "meanAbsLStarUnit": 0.007626460148737981,
+        "changedValues": 2093
+      },
+      "referenceInputLMinMax": [
+        49.79999923706055,
+        50.20000076293945
+      ],
+      "scaledScalarShapeProbe": {
+        "note": "For diagnostics only: L*=100*x is a numeric fixture scaling, NOT a valid linearRGB-to-Lab colour conversion. Saturated/other nonidentical fixtures excluded.",
+        "inputMaxDelta": 3.814697265625e-06,
+        "legacyVsDtNoThresholdInterior": {
+          "maxAbsLStarUnit": 1.1444091796875e-05,
+          "meanAbsLStarUnit": 4.189913390112705e-06,
+          "changedValues": 1305
+        }
+      }
+    },
+    {
+      "case": "detail",
+      "dtThresholdVsNoThreshold": {
+        "maxAbsLStarUnit": 0.3500022888183594,
+        "meanAbsLStarUnit": 0.21581685170704945,
+        "changedValues": 1334
+      },
+      "rtHaloVsSameThresholdUncontrolled": {
+        "maxAbsLStarUnit": 0.7110176086425781,
+        "meanAbsLStarUnit": 0.23931480354362433,
+        "changedValues": 809
+      },
+      "dtVsRtOpen": {
+        "maxAbsLStarUnit": 0.7110214233398438,
+        "meanAbsLStarUnit": 0.19063223992194328,
+        "changedValues": 1716
+      },
+      "referenceInputLMinMax": [
+        45.0,
+        55.0
+      ],
+      "scaledScalarShapeProbe": {
+        "note": "For diagnostics only: L*=100*x is a numeric fixture scaling, NOT a valid linearRGB-to-Lab colour conversion. Saturated/other nonidentical fixtures excluded.",
+        "inputMaxDelta": 0.0,
+        "legacyVsDtNoThresholdInterior": {
+          "maxAbsLStarUnit": 7.62939453125e-06,
+          "meanAbsLStarUnit": 3.376945120389344e-06,
+          "changedValues": 899
+        }
+      }
+    },
+    {
+      "case": "noise",
+      "dtThresholdVsNoThreshold": {
+        "maxAbsLStarUnit": 0.2630195617675781,
+        "meanAbsLStarUnit": 0.04962545719457951,
+        "changedValues": 1768
+      },
+      "rtHaloVsSameThresholdUncontrolled": {
+        "maxAbsLStarUnit": 0.25629425048828125,
+        "meanAbsLStarUnit": 0.02309263180463742,
+        "changedValues": 1062
+      },
+      "dtVsRtOpen": {
+        "maxAbsLStarUnit": 0.25295257568359375,
+        "meanAbsLStarUnit": 0.013595874492938701,
+        "changedValues": 2144
+      },
+      "referenceInputLMinMax": [
+        39.47401428222656,
+        40.52747344970703
+      ],
+      "scaledScalarShapeProbe": {
+        "note": "For diagnostics only: L*=100*x is a numeric fixture scaling, NOT a valid linearRGB-to-Lab colour conversion. Saturated/other nonidentical fixtures excluded.",
+        "inputMaxDelta": 3.814697265625e-06,
+        "legacyVsDtNoThresholdInterior": {
+          "maxAbsLStarUnit": 1.52587890625e-05,
+          "meanAbsLStarUnit": 3.5192684779536463e-06,
+          "changedValues": 1207
+        }
+      }
+    }
+  ],
+  "gpuCallsAdded": 0
+}

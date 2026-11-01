@@ -1,0 +1,20 @@
+"""Run fixed upstream CPU references on declared Lab-domain fixtures."""
+import sys,os,json,hashlib,subprocess,time
+from pathlib import Path
+import numpy as np
+root=Path(sys.argv[1]);repo=Path(__file__).resolve().parents[2];out=root/'reference-fixtures'
+if out.exists():raise ValueError('New fixtures required')
+out.mkdir();h,w=33,65;y,x=np.mgrid[:h,:w];cases={}
+def lab(L,a=0,b=0):
+ q=np.zeros((h,w,3),np.float32);q[:,:,0]=L;q[:,:,1]=a;q[:,:,2]=b;return q
+cases['flat']=lab(40);cases['step']=lab(np.where(x<w//2,10,90));imp=np.full((h,w),20,np.float32);imp[h//2,w//2]=90;cases['impulse']=lab(imp);cases['saturated_edge']=lab(np.where(x<w//2,35,65),np.where(x<w//2,70,-55),np.where(x<w//2,60,-45));cases['negative_above_range']=lab(np.where(x<w//2,-5,120),20,-20);edge=np.full((h,w),30,np.float32);edge[:,0]=90;edge[0,:]=5;cases['boundary']=lab(edge);cases['low_detail']=lab(50+.2*np.sin(x*np.pi/4));cases['detail']=lab(50+5*np.sin(x*np.pi/4));rng=np.random.default_rng(613);cases['noise']=lab(40+rng.normal(0,.15,(h,w)));configs=[('dt-zero','dt',0),('dt-threshold','dt',.5),('rt-open','rt',0),('rt-threshold','rt',0),('rt-halo','rt',100)]
+env=os.environ.copy();compiler=Path('N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin');env['PATH']=str(compiler)+os.pathsep+env['PATH'];records=[]
+for name,image in cases.items():
+ source=out/(name+'.f32');image.tofile(source)
+ for mode,exe,param in configs:
+  dest=out/(name+'-'+mode+'.f32');command=[str(root/'reference-build-v2'/(exe+'-probe.exe')),mode,str(source),str(dest),str(w),str(h),'.7','.7',str(param)];t=time.perf_counter();r=subprocess.run(command,env=env,capture_output=True,text=True);elapsed=(time.perf_counter()-t)*1000
+  if r.returncode:raise ValueError(r.stderr)
+  result=np.fromfile(dest,dtype='<f4').reshape(h,w,3);delta=result[:,:,0]-image[:,:,0];border=np.ones((h,w),bool);border[2:-2,2:-2]=False;records.append({'case':name,'mode':mode,'command':command,'elapsedProcessMs':elapsed,'inputSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'outputSha256':hashlib.sha256(dest.read_bytes()).hexdigest(),'finite':bool(np.isfinite(result).all()),'LRange':[float(result[:,:,0].min()),float(result[:,:,0].max())],'belowInputMin':int((result[:,:,0]<image[:,:,0].min()).sum()),'aboveInputMax':int((result[:,:,0]>image[:,:,0].max()).sum()),'maxAbsLDelta':float(np.abs(delta).max()),'meanAbsLDelta':float(np.abs(delta).mean()),'borderChangedL':int(np.count_nonzero(delta[border])),'abExact':bool(np.array_equal(image[:,:,1:],result[:,:,1:])),'flatResidual':float(np.abs(delta).max()) if name=='flat' else None})
+report={'version':'Round13FixedReferenceNumericalV1','scope':'Executed original isolated CPU functions; Lab L*0..100 nominal, RT internal L scaled327.68; negatives/>100 are explicit out-of-contract stress, not linear RGB or a photographic accuracy oracle','width':w,'height':h,'configs':{'dt-zero':{'sigma':.7,'amount':.7,'thresholdLStar':0,'rad':2,'border':'2px unchanged'},'dt-threshold':{'sigma':.7,'amount':.7,'thresholdLStar':.5},'rt-open':{'radius':.7,'amountPercent':70,'contrastMask':0,'threshold':[0,0,False],'halocontrol':False,'scalarGaussian':'actual recursive standard at sigma.7'},'rt-threshold':{'radius':.7,'amountPercent':70,'contrastMask':0,'threshold':[20,80,2000,1200,False],'halocontrol':False},'rt-halo':{'radius':.7,'amountPercent':70,'contrastMask':0,'threshold':[20,80,2000,1200,False],'halocontrol':True,'haloAmountPercent':100,'border':'2px unchanged; environment3x3 smoothing and rolling3min/max; not5x5 hard minmax'}},'records':records,'referenceCalls':len(records),'gpuCalls':0,'allFinite':all(r['finite'] for r in records),'a_b_passThrough':all(r['abExact'] for r in records)}
+with (repo/'docs/research/color-engine-20261029/home-round13/reference-numerical.json').open('x') as f:json.dump(report,f,indent=2)
+print(json.dumps({'referenceCalls':len(records),'allFinite':report['allFinite'],'sample':[r for r in records if r['case'] in ['step','flat','low_detail','negative_above_range']]},indent=2))

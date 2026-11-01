@@ -1,0 +1,1188 @@
+{
+  "version": "Round13FrozenCandidateABV1",
+  "mode": "natural",
+  "candidate": "SharedIncrementEnvelopeUnsharpV1",
+  "definitionSha256": "c0cfe1e429382a26d0e97dfd0e72288cb8b8b51083429e21e2711f2c1c91a05a",
+  "stageReplayCalls": 18,
+  "gpuDispatches": 3656,
+  "rawDecodeCalls": 0,
+  "upstreamFilmRenderCalls": 0,
+  "full20MPCalls": 0,
+  "allTechnicalPassed": true,
+  "records": [
+    {
+      "id": "canon600d",
+      "shape": [
+        799,
+        1200,
+        3
+      ],
+      "inputSha256": "4a8eee1f3c45a68b576f6e630517e5224d19d4eb7b6d6474aa0a74002d4287e6",
+      "frozenLegacy": {
+        "stageExact": true,
+        "encodedExact": true,
+        "finalExact": true
+      },
+      "parity": [
+        {
+          "rows": 17,
+          "file": "legacy.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "legacy-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "legacy.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate.rgba16",
+          "exact": true
+        }
+      ],
+      "runs": [
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 65198448,
+          "dispatches": 8,
+          "halo": 2,
+          "height": 799,
+          "osPeakWorkingSetBytes": 148172800,
+          "persistentAfter": 0,
+          "rows": 0,
+          "stageReplayMs": 28.2077,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        },
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 1785648,
+          "dispatches": 376,
+          "halo": 2,
+          "height": 799,
+          "osPeakWorkingSetBytes": 128352256,
+          "persistentAfter": 0,
+          "rows": 17,
+          "stageReplayMs": 91.6169,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        },
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 3513648,
+          "dispatches": 176,
+          "halo": 2,
+          "height": 799,
+          "osPeakWorkingSetBytes": 129155072,
+          "persistentAfter": 0,
+          "rows": 37,
+          "stageReplayMs": 51.343,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        }
+      ],
+      "response": {
+        "originalNegativeComponents": 0,
+        "legacyNegativeComponents": 643,
+        "candidateNegativeComponents": 0,
+        "legacyOutsideLocalEnvelopeComponents": 357680,
+        "candidateOutsideLocalEnvelopeComponents": 0,
+        "legacyRgbZeroPixels": 124,
+        "candidateRgbZeroPixels": 0,
+        "legacyAnyZeroPixels": 308,
+        "candidateAnyZeroPixels": 0,
+        "legacyMeanDeltaLinearY": 2.928876163231306e-09,
+        "candidateMeanDeltaLinearY": -2.9510578022040753e-06,
+        "gradientMeanOriginal": 0.0023786552342704792,
+        "gradientMeanLegacy": 0.0027877782531731433,
+        "gradientMeanCandidate": 0.0026525862213391737,
+        "linearYStdOriginal": 0.06563160466817644,
+        "linearYStdLegacy": 0.06582804217188212,
+        "linearYStdCandidate": 0.06576979627064602,
+        "modifiedPixels": 258457,
+        "candidateEqualsOriginalPixels": 102191,
+        "deltaDirectionCosineMin": 0.9976164980489189,
+        "encodedLabResponseChangeNotAccuracy": {
+          "hueValidPixels": 425533,
+          "hueDeltaDegQuantiles": [
+            0.0,
+            2.3806915463076748,
+            55.80458865576331
+          ],
+          "chromaDeltaQuantiles": [
+            -7.035471370508794,
+            0.0,
+            0.030989579392644545,
+            9.74770829697405
+          ],
+          "LDeltaQuantiles": [
+            -4.483595322656157,
+            0.0,
+            0.03235209752886239,
+            9.168046094726353
+          ]
+        }
+      },
+      "outputHashes": {
+        "legacy.f32": "ab439d20f023348b2505ba97ef4fc9a9fa44bd78b234948319716126e1d0a51e",
+        "candidate.f32": "e6502c57b51840a523a2ed1b726465fcd7e22581d4f695c3dd5dd9d4202564a0",
+        "legacy-encoded.f32": "ec8bffaa7e84b8b86683563b3f8d9733f56d3ec89eab760d9c3a0eb5f3c838f6",
+        "candidate-encoded.f32": "f2ba7d6bde18030b34fd69d074bcf98d3a46a0c959fca8afe15381c09602b7bf",
+        "legacy.rgba16": "b5390343a92bcb96c974b9c03c9d40c50595a8003aa8397daa8bd611609ae350",
+        "candidate.rgba16": "9e82001f7586f7c6dfcc24da5e4090debd852e433b19063e8d8d1d2e537519e4"
+      }
+    },
+    {
+      "id": "canon6d",
+      "shape": [
+        1200,
+        801,
+        3
+      ],
+      "inputSha256": "e9012be03535f4294e012ada0b0a25a8047b8e758c232bad59ec11d1e5b8c5ec",
+      "frozenLegacy": {
+        "stageExact": true,
+        "encodedExact": true,
+        "finalExact": true
+      },
+      "parity": [
+        {
+          "rows": 17,
+          "file": "legacy.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "legacy-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "legacy.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate.rgba16",
+          "exact": true
+        }
+      ],
+      "runs": [
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 65361648,
+          "dispatches": 8,
+          "halo": 2,
+          "height": 1200,
+          "osPeakWorkingSetBytes": 148418560,
+          "persistentAfter": 0,
+          "rows": 0,
+          "stageReplayMs": 28.4924,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 801
+        },
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 1191936,
+          "dispatches": 568,
+          "halo": 2,
+          "height": 1200,
+          "osPeakWorkingSetBytes": 126136320,
+          "persistentAfter": 0,
+          "rows": 17,
+          "stageReplayMs": 128.136,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 801
+        },
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 2345376,
+          "dispatches": 264,
+          "halo": 2,
+          "height": 1200,
+          "osPeakWorkingSetBytes": 127098880,
+          "persistentAfter": 0,
+          "rows": 37,
+          "stageReplayMs": 72.6975,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 801
+        }
+      ],
+      "response": {
+        "originalNegativeComponents": 0,
+        "legacyNegativeComponents": 1517,
+        "candidateNegativeComponents": 0,
+        "legacyOutsideLocalEnvelopeComponents": 340549,
+        "candidateOutsideLocalEnvelopeComponents": 0,
+        "legacyRgbZeroPixels": 118,
+        "candidateRgbZeroPixels": 0,
+        "legacyAnyZeroPixels": 1088,
+        "candidateAnyZeroPixels": 0,
+        "legacyMeanDeltaLinearY": 2.465142872974891e-09,
+        "candidateMeanDeltaLinearY": 2.1439910159177473e-06,
+        "gradientMeanOriginal": 0.0022661029230538732,
+        "gradientMeanLegacy": 0.0026589532920258284,
+        "gradientMeanCandidate": 0.0024888356982791697,
+        "linearYStdOriginal": 0.039772523109355626,
+        "linearYStdLegacy": 0.04000704420902146,
+        "linearYStdCandidate": 0.039931891068189625,
+        "modifiedPixels": 227524,
+        "candidateEqualsOriginalPixels": 71682,
+        "deltaDirectionCosineMin": 0.9310882433311045,
+        "encodedLabResponseChangeNotAccuracy": {
+          "hueValidPixels": 720332,
+          "hueDeltaDegQuantiles": [
+            0.0,
+            2.675734263934405,
+            173.32693720454103
+          ],
+          "chromaDeltaQuantiles": [
+            -9.609669344031914,
+            0.0,
+            0.06377002176421329,
+            18.063559721201617
+          ],
+          "LDeltaQuantiles": [
+            -8.301722317599456,
+            0.0,
+            0.12904012598291983,
+            15.236082534454138
+          ]
+        }
+      },
+      "outputHashes": {
+        "legacy.f32": "ea03c21a5d1b336702680b4d88dba59c9d4e8c13eb97899e5ae8afeb2992d113",
+        "candidate.f32": "f1b55f04abb295424ee363ce17fcf38d79c16ff5599277b53f99aebc502c2488",
+        "legacy-encoded.f32": "70f92810fb0c9652067db184849161dd318079c00ea4981375c7ccf89d905ad6",
+        "candidate-encoded.f32": "4087ee00cdbc5b1f8e3ae5f7cb43b46294ede4b3f08491b2dd6745d13b20d410",
+        "legacy.rgba16": "1f5487ba3f01ab00b0370420d3f86860479360e75c8bba494dbabfa139bce59e",
+        "candidate.rgba16": "ac67f0bb7b68d6e06b853f2bdbc2c803fa0be454e5a990878cc4d4d0835b0c6f"
+      }
+    },
+    {
+      "id": "canon5d3",
+      "shape": [
+        801,
+        1200,
+        3
+      ],
+      "inputSha256": "0a9c620e6048429123fbf33631fc01b6654aeecb782a20838b9c2e4475f1d176",
+      "frozenLegacy": {
+        "stageExact": true,
+        "encodedExact": true,
+        "finalExact": true
+      },
+      "parity": [
+        {
+          "rows": 17,
+          "file": "legacy.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "legacy-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "legacy.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate.rgba16",
+          "exact": true
+        }
+      ],
+      "runs": [
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 65361648,
+          "dispatches": 8,
+          "halo": 2,
+          "height": 801,
+          "osPeakWorkingSetBytes": 148369408,
+          "persistentAfter": 0,
+          "rows": 0,
+          "stageReplayMs": 20.1063,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        },
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 1785648,
+          "dispatches": 384,
+          "halo": 2,
+          "height": 801,
+          "osPeakWorkingSetBytes": 128585728,
+          "persistentAfter": 0,
+          "rows": 17,
+          "stageReplayMs": 95.4266,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        },
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 3513648,
+          "dispatches": 176,
+          "halo": 2,
+          "height": 801,
+          "osPeakWorkingSetBytes": 129372160,
+          "persistentAfter": 0,
+          "rows": 37,
+          "stageReplayMs": 55.2258,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        }
+      ],
+      "response": {
+        "originalNegativeComponents": 0,
+        "legacyNegativeComponents": 3822,
+        "candidateNegativeComponents": 0,
+        "legacyOutsideLocalEnvelopeComponents": 547383,
+        "candidateOutsideLocalEnvelopeComponents": 0,
+        "legacyRgbZeroPixels": 133,
+        "candidateRgbZeroPixels": 0,
+        "legacyAnyZeroPixels": 3338,
+        "candidateAnyZeroPixels": 0,
+        "legacyMeanDeltaLinearY": 4.792269897595303e-09,
+        "candidateMeanDeltaLinearY": 2.78051810773041e-05,
+        "gradientMeanOriginal": 0.006188906118866568,
+        "gradientMeanLegacy": 0.008581547034230738,
+        "gradientMeanCandidate": 0.007511871841765465,
+        "linearYStdOriginal": 0.1285766112654383,
+        "linearYStdLegacy": 0.12889494483216996,
+        "linearYStdCandidate": 0.12878673451668887,
+        "modifiedPixels": 420308,
+        "candidateEqualsOriginalPixels": 146834,
+        "deltaDirectionCosineMin": 0.9388321697184846,
+        "encodedLabResponseChangeNotAccuracy": {
+          "hueValidPixels": 889561,
+          "hueDeltaDegQuantiles": [
+            0.0,
+            12.83654244100579,
+            179.70024171401775
+          ],
+          "chromaDeltaQuantiles": [
+            -27.559772769671664,
+            0.0,
+            0.39638864113188166,
+            17.15296641201671
+          ],
+          "LDeltaQuantiles": [
+            -4.552348666026745,
+            0.0,
+            0.9445866925173241,
+            18.55445011995029
+          ]
+        }
+      },
+      "outputHashes": {
+        "legacy.f32": "b90ee1dc1dc68cf5281080173b1a91a77cf8bd58b18c74364fb767fdb358221f",
+        "candidate.f32": "d834181fa009cf6fe8e2f619519cb14431c2e340684bbf0d67bc6a858b0a2093",
+        "legacy-encoded.f32": "02dbea93ffc21dded559fe3321975375c9bac1cda655691a0953b4b6ea1a946e",
+        "candidate-encoded.f32": "985d4aa4b19b28b89d5b90d2fd31b645cc2c3bf8b7f812f1f9bba601ee70a1af",
+        "legacy.rgba16": "24a031363f2a7114c9f5828c0eae5e7aa3cd5f038aae31f0144e14c91eafbec9",
+        "candidate.rgba16": "bace636c58c9bccd4d3d9da6980b12fb0878c321abf40fff66cc6284125b156e"
+      }
+    },
+    {
+      "id": "nikond5100",
+      "shape": [
+        795,
+        1200,
+        3
+      ],
+      "inputSha256": "4326920905564480b7c3b3327566c06c38ddea0aca689debecd827c0a67ac3f5",
+      "frozenLegacy": {
+        "stageExact": true,
+        "encodedExact": true,
+        "finalExact": true
+      },
+      "parity": [
+        {
+          "rows": 17,
+          "file": "legacy.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "legacy-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "legacy.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate.rgba16",
+          "exact": true
+        }
+      ],
+      "runs": [
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 64872048,
+          "dispatches": 8,
+          "halo": 2,
+          "height": 795,
+          "osPeakWorkingSetBytes": 147644416,
+          "persistentAfter": 0,
+          "rows": 0,
+          "stageReplayMs": 22.3971,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        },
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 1785648,
+          "dispatches": 376,
+          "halo": 2,
+          "height": 795,
+          "osPeakWorkingSetBytes": 127987712,
+          "persistentAfter": 0,
+          "rows": 17,
+          "stageReplayMs": 91.5768,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        },
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 3513648,
+          "dispatches": 176,
+          "halo": 2,
+          "height": 795,
+          "osPeakWorkingSetBytes": 128794624,
+          "persistentAfter": 0,
+          "rows": 37,
+          "stageReplayMs": 53.207,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        }
+      ],
+      "response": {
+        "originalNegativeComponents": 0,
+        "legacyNegativeComponents": 700,
+        "candidateNegativeComponents": 0,
+        "legacyOutsideLocalEnvelopeComponents": 288612,
+        "candidateOutsideLocalEnvelopeComponents": 0,
+        "legacyRgbZeroPixels": 139,
+        "candidateRgbZeroPixels": 0,
+        "legacyAnyZeroPixels": 350,
+        "candidateAnyZeroPixels": 0,
+        "legacyMeanDeltaLinearY": 6.206195644928146e-09,
+        "candidateMeanDeltaLinearY": 1.6234346215082997e-06,
+        "gradientMeanOriginal": 0.0023389119757952284,
+        "gradientMeanLegacy": 0.0027486379986771774,
+        "gradientMeanCandidate": 0.0026063730906401555,
+        "linearYStdOriginal": 0.2009979294176733,
+        "linearYStdLegacy": 0.20115747465131273,
+        "linearYStdCandidate": 0.2011277133741711,
+        "modifiedPixels": 214680,
+        "candidateEqualsOriginalPixels": 87795,
+        "deltaDirectionCosineMin": 0.9162775476620134,
+        "encodedLabResponseChangeNotAccuracy": {
+          "hueValidPixels": 498614,
+          "hueDeltaDegQuantiles": [
+            0.0,
+            2.276220598356776,
+            98.25517329642807
+          ],
+          "chromaDeltaQuantiles": [
+            -19.860208813855564,
+            0.0,
+            0.020184347208539698,
+            16.80444572947161
+          ],
+          "LDeltaQuantiles": [
+            -4.02447301641611,
+            0.0,
+            0.05255749067465299,
+            24.743254094831407
+          ]
+        }
+      },
+      "outputHashes": {
+        "legacy.f32": "29466d4d50e02d9f98c0bfdcc70ec46c4a4b93dc1868b3a114cf329f84ea5904",
+        "candidate.f32": "431bd148eb94fe32bf61ac13f2094a66bbdfbbb5cbdbc881e593971f3a01ae97",
+        "legacy-encoded.f32": "3bb1b47118b8f628e0d61ccfab1af700449982adecccba3ea1065b019a30a55a",
+        "candidate-encoded.f32": "d5d82cc574949cc560c5f5076a2cf5f193c61c6c8fed03db83f5bb64faba2eb4",
+        "legacy.rgba16": "834f2677017b61b4b6e9ded27f021a38ebd39ae6aa48e3a589a271690ac77cdd",
+        "candidate.rgba16": "4acdabba26931c8929b8fea786d829130502e7e7a0f2c274f5c6897958f46c2e"
+      },
+      "fixedRoi": {
+        "xywh": [
+          310,
+          390,
+          35,
+          60
+        ],
+        "response": {
+          "originalNegativeComponents": 0,
+          "legacyNegativeComponents": 0,
+          "candidateNegativeComponents": 0,
+          "legacyOutsideLocalEnvelopeComponents": 308,
+          "candidateOutsideLocalEnvelopeComponents": 104,
+          "legacyRgbZeroPixels": 0,
+          "candidateRgbZeroPixels": 0,
+          "legacyAnyZeroPixels": 0,
+          "candidateAnyZeroPixels": 0,
+          "legacyMeanDeltaLinearY": 8.22777732129068e-06,
+          "candidateMeanDeltaLinearY": 8.73656860991774e-06,
+          "gradientMeanOriginal": 0.0021855737820050316,
+          "gradientMeanLegacy": 0.0026160862979060515,
+          "gradientMeanCandidate": 0.0025645179206619743,
+          "linearYStdOriginal": 0.030123943945787567,
+          "linearYStdLegacy": 0.030184871365182515,
+          "linearYStdCandidate": 0.030160395667746944,
+          "modifiedPixels": 184,
+          "candidateEqualsOriginalPixels": 41,
+          "deltaDirectionCosineMin": 0.9999997834466966,
+          "encodedLabResponseChangeNotAccuracy": {
+            "hueValidPixels": 2092,
+            "hueDeltaDegQuantiles": [
+              0.0,
+              0.5919675991729426,
+              9.853192475662576
+            ],
+            "chromaDeltaQuantiles": [
+              -1.5328431036899008,
+              0.0,
+              0.0,
+              0.9943024067257085
+            ],
+            "LDeltaQuantiles": [
+              -0.4153656189036994,
+              0.0,
+              0.0,
+              0.6499015263298382
+            ]
+          }
+        },
+        "envelopeStatisticsLocalCropWarning": "ROI envelope in descriptive metric reflects crop edge; full-image contract gate above is authoritative"
+      }
+    },
+    {
+      "id": "sonynex5r",
+      "shape": [
+        799,
+        1200,
+        3
+      ],
+      "inputSha256": "6b86fc4caeaf19f395f0f8910248a6a1430a22a3914465c2b4981d856f9ce0b3",
+      "frozenLegacy": {
+        "stageExact": true,
+        "encodedExact": true,
+        "finalExact": true
+      },
+      "parity": [
+        {
+          "rows": 17,
+          "file": "legacy.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "legacy-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "legacy.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate.rgba16",
+          "exact": true
+        }
+      ],
+      "runs": [
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 65198448,
+          "dispatches": 8,
+          "halo": 2,
+          "height": 799,
+          "osPeakWorkingSetBytes": 148082688,
+          "persistentAfter": 0,
+          "rows": 0,
+          "stageReplayMs": 26.636,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        },
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 1785648,
+          "dispatches": 376,
+          "halo": 2,
+          "height": 799,
+          "osPeakWorkingSetBytes": 128389120,
+          "persistentAfter": 0,
+          "rows": 17,
+          "stageReplayMs": 90.8439,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        },
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 3513648,
+          "dispatches": 176,
+          "halo": 2,
+          "height": 799,
+          "osPeakWorkingSetBytes": 129159168,
+          "persistentAfter": 0,
+          "rows": 37,
+          "stageReplayMs": 51.3938,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        }
+      ],
+      "response": {
+        "originalNegativeComponents": 0,
+        "legacyNegativeComponents": 22324,
+        "candidateNegativeComponents": 0,
+        "legacyOutsideLocalEnvelopeComponents": 558224,
+        "candidateOutsideLocalEnvelopeComponents": 0,
+        "legacyRgbZeroPixels": 4443,
+        "candidateRgbZeroPixels": 0,
+        "legacyAnyZeroPixels": 11563,
+        "candidateAnyZeroPixels": 0,
+        "legacyMeanDeltaLinearY": 7.0910527529066646e-09,
+        "candidateMeanDeltaLinearY": -0.00010078915866533039,
+        "gradientMeanOriginal": 0.014215394010185482,
+        "gradientMeanLegacy": 0.0186755854523018,
+        "gradientMeanCandidate": 0.01651558049834551,
+        "linearYStdOriginal": 0.17178875611227548,
+        "linearYStdLegacy": 0.17405524936838992,
+        "linearYStdCandidate": 0.17284090918563008,
+        "modifiedPixels": 333197,
+        "candidateEqualsOriginalPixels": 125080,
+        "deltaDirectionCosineMin": 0.9128708949360449,
+        "encodedLabResponseChangeNotAccuracy": {
+          "hueValidPixels": 748952,
+          "hueDeltaDegQuantiles": [
+            0.0,
+            8.165894505217855,
+            178.35972302109525
+          ],
+          "chromaDeltaQuantiles": [
+            -21.655610504113085,
+            0.0,
+            0.18340020488253336,
+            19.1827332040905
+          ],
+          "LDeltaQuantiles": [
+            -10.094292512754947,
+            0.0,
+            1.7058205824652692,
+            33.15471025391399
+          ]
+        }
+      },
+      "outputHashes": {
+        "legacy.f32": "76dc9f3542f60c689b2d988169544d4ddf36439707c96aa6091c56de5a88cbac",
+        "candidate.f32": "3afde65886f4d540222ff23d570b186da5c104ca0a31457aa50f8278aa5ae00e",
+        "legacy-encoded.f32": "d4480bccb97e9751b8a92ef9e668fde7e90080ef34365e37096e0b78508fe7e1",
+        "candidate-encoded.f32": "7fe45312232835ec87bdd5ca444a6d048a2349417e4b827b85bc9c35b0e7dc95",
+        "legacy.rgba16": "226d9309acb3f405908f6b62fafbfbbbc7b751a2cdb78caf3c55d4c9458125e6",
+        "candidate.rgba16": "cbf89078685be2e0b1fd4b98e18957f645cfb8ce73ca999035e689316b71db69"
+      },
+      "fixedRoi": {
+        "xywh": [
+          270,
+          400,
+          300,
+          250
+        ],
+        "response": {
+          "originalNegativeComponents": 0,
+          "legacyNegativeComponents": 3355,
+          "candidateNegativeComponents": 0,
+          "legacyOutsideLocalEnvelopeComponents": 42790,
+          "candidateOutsideLocalEnvelopeComponents": 457,
+          "legacyRgbZeroPixels": 640,
+          "candidateRgbZeroPixels": 0,
+          "legacyAnyZeroPixels": 1797,
+          "candidateAnyZeroPixels": 0,
+          "legacyMeanDeltaLinearY": -1.8665230634741711e-06,
+          "candidateMeanDeltaLinearY": -6.203901533849283e-05,
+          "gradientMeanOriginal": 0.023194509197074782,
+          "gradientMeanLegacy": 0.030949499982131336,
+          "gradientMeanCandidate": 0.02780983913726979,
+          "linearYStdOriginal": 0.12176113637197343,
+          "linearYStdLegacy": 0.12577263872876376,
+          "linearYStdCandidate": 0.12389915822424831,
+          "modifiedPixels": 21774,
+          "candidateEqualsOriginalPixels": 5761,
+          "deltaDirectionCosineMin": 0.9128708949360449,
+          "encodedLabResponseChangeNotAccuracy": {
+            "hueValidPixels": 62786,
+            "hueDeltaDegQuantiles": [
+              0.0,
+              7.540955360656354,
+              164.72582816326283
+            ],
+            "chromaDeltaQuantiles": [
+              -21.655610504113085,
+              0.0,
+              0.1816213853800172,
+              13.499540340261117
+            ],
+            "LDeltaQuantiles": [
+              -7.233643196102648,
+              0.0,
+              3.1283788805481865,
+              23.992562543818586
+            ]
+          }
+        },
+        "envelopeStatisticsLocalCropWarning": "ROI envelope in descriptive metric reflects crop edge; full-image contract gate above is authoritative"
+      }
+    },
+    {
+      "id": "canonr6",
+      "shape": [
+        801,
+        1200,
+        3
+      ],
+      "inputSha256": "8a4497481e144e8e795805b241db5bb775091d1db712d16d4b4cbdcbee95d050",
+      "frozenLegacy": {
+        "stageExact": true,
+        "encodedExact": true,
+        "finalExact": true
+      },
+      "parity": [
+        {
+          "rows": 17,
+          "file": "legacy.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "legacy-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "legacy.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 17,
+          "file": "candidate.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate-encoded.f32",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "legacy.rgba16",
+          "exact": true
+        },
+        {
+          "rows": 37,
+          "file": "candidate.rgba16",
+          "exact": true
+        }
+      ],
+      "runs": [
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 65361648,
+          "dispatches": 8,
+          "halo": 2,
+          "height": 801,
+          "osPeakWorkingSetBytes": 148361216,
+          "persistentAfter": 0,
+          "rows": 0,
+          "stageReplayMs": 27.5108,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        },
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 1785648,
+          "dispatches": 384,
+          "halo": 2,
+          "height": 801,
+          "osPeakWorkingSetBytes": 128593920,
+          "persistentAfter": 0,
+          "rows": 17,
+          "stageReplayMs": 100.4919,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        },
+        {
+          "device": "NVIDIA GeForce RTX 5060 Ti",
+          "deviceLiveAfter": 0,
+          "devicePoolPeakBytes": 3513648,
+          "dispatches": 176,
+          "halo": 2,
+          "height": 801,
+          "osPeakWorkingSetBytes": 129372160,
+          "persistentAfter": 0,
+          "rows": 37,
+          "stageReplayMs": 55.3265,
+          "version": "SharedIncrementEnvelopeStageReplayV1",
+          "width": 1200
+        }
+      ],
+      "response": {
+        "originalNegativeComponents": 0,
+        "legacyNegativeComponents": 0,
+        "candidateNegativeComponents": 0,
+        "legacyOutsideLocalEnvelopeComponents": 635412,
+        "candidateOutsideLocalEnvelopeComponents": 0,
+        "legacyRgbZeroPixels": 0,
+        "candidateRgbZeroPixels": 0,
+        "legacyAnyZeroPixels": 0,
+        "candidateAnyZeroPixels": 0,
+        "legacyMeanDeltaLinearY": 6.328910346671842e-10,
+        "candidateMeanDeltaLinearY": 4.864616919296434e-09,
+        "gradientMeanOriginal": 0.0002879662370331742,
+        "gradientMeanLegacy": 0.0004312494018967952,
+        "gradientMeanCandidate": 0.00035205810586100956,
+        "linearYStdOriginal": 0.007917512349133203,
+        "linearYStdLegacy": 0.007930166711756965,
+        "linearYStdCandidate": 0.007922785150699004,
+        "modifiedPixels": 468230,
+        "candidateEqualsOriginalPixels": 177074,
+        "deltaDirectionCosineMin": 0.9324191886294172,
+        "encodedLabResponseChangeNotAccuracy": {
+          "hueValidPixels": 316322,
+          "hueDeltaDegQuantiles": [
+            0.0,
+            6.349958552478686,
+            37.0492215660266
+          ],
+          "chromaDeltaQuantiles": [
+            -4.597261869122914,
+            0.0,
+            0.06550599845263101,
+            1.6851939403682277
+          ],
+          "LDeltaQuantiles": [
+            -2.3304014824181856,
+            0.0,
+            0.11168757699924842,
+            2.0655901986824006
+          ]
+        }
+      },
+      "outputHashes": {
+        "legacy.f32": "20d216fe5908c94c1d6e0bc4259a5596cdfb5dd14aa146a9d76b6e98e49e7111",
+        "candidate.f32": "f33f5357aacc970ca6d4738d08ebfc28676e78787279bde3880c634becb0306c",
+        "legacy-encoded.f32": "8aa143111fa2bbaf0298aaea9734183223c99a3d1dbe0e1d651ed97be830ba2b",
+        "candidate-encoded.f32": "8a7fc2acbdb1d9727ea8ede20bc1156099ad199ec9cfd5dd8bb8f779ed11fd00",
+        "legacy.rgba16": "62afe385eba6ec67f7bf4d5d4c57cf7af15aa21f161b9600e0936ced1111deb4",
+        "candidate.rgba16": "6c7d3aad2029d5873465b96fa99a368317f4467459e6c5998a87318decc125b4"
+      },
+      "fixedRoi": {
+        "xywh": [
+          0,
+          500,
+          300,
+          250
+        ],
+        "response": {
+          "originalNegativeComponents": 0,
+          "legacyNegativeComponents": 0,
+          "candidateNegativeComponents": 0,
+          "legacyOutsideLocalEnvelopeComponents": 57100,
+          "candidateOutsideLocalEnvelopeComponents": 379,
+          "legacyRgbZeroPixels": 0,
+          "candidateRgbZeroPixels": 0,
+          "legacyAnyZeroPixels": 0,
+          "candidateAnyZeroPixels": 0,
+          "legacyMeanDeltaLinearY": -5.325907467429618e-08,
+          "candidateMeanDeltaLinearY": -1.84820358527203e-07,
+          "gradientMeanOriginal": 2.4442197113295373e-05,
+          "gradientMeanLegacy": 3.2523428340174914e-05,
+          "gradientMeanCandidate": 2.874820149805591e-05,
+          "linearYStdOriginal": 0.0006130024842574491,
+          "linearYStdLegacy": 0.0006195251011594444,
+          "linearYStdCandidate": 0.0006160873487961557,
+          "modifiedPixels": 40164,
+          "candidateEqualsOriginalPixels": 12869,
+          "deltaDirectionCosineMin": 0.9959783543092513,
+          "encodedLabResponseChangeNotAccuracy": {
+            "hueValidPixels": 997,
+            "hueDeltaDegQuantiles": [
+              0.0,
+              2.518861722387845,
+              12.622963588816205
+            ],
+            "chromaDeltaQuantiles": [
+              -0.8000311545460783,
+              0.0,
+              0.0021791898853303127,
+              0.7361372016706835
+            ],
+            "LDeltaQuantiles": [
+              -1.5141235286683532,
+              0.0,
+              0.0014542690060412875,
+              0.8640921038681952
+            ]
+          }
+        },
+        "envelopeStatisticsLocalCropWarning": "ROI envelope in descriptive metric reflects crop edge; full-image contract gate above is authoritative"
+      }
+    }
+  ],
+  "scope": "Stage-only GPU replay of synthetic or existing print_linear; exact old downstream matrix/OETF/u16; not full RAW pipeline, product preview or saved-project acceptance. Quality metrics descriptive, not reference color accuracy."
+}

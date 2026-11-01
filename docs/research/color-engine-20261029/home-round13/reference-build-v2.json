@@ -1,0 +1,129 @@
+{
+  "version": "Round13FixedReferenceHarnessV1",
+  "compilerSha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5",
+  "results": [
+    {
+      "kind": "dt",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\deps\\toolchain\\llvm-mingw-20250402-ucrt-x86_64\\bin\\clang++.exe",
+        "-O2",
+        "-std=gnu++20",
+        "-ffp-contract=off",
+        "-U__SSE2__",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.cpp",
+        "-IN:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2",
+        "-o",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\dt-probe.exe"
+      ],
+      "exitCode": 0,
+      "sourceSha256": "f1b46ea3a484e16707793a902aad66b9d3b84e7fd1b6ff940418fea6c40e4a51",
+      "executableSha256": "24f10301e1843ff17ae0a3e1afbec33fbf5c7a2f7543e7d91943cab34b1ff13c"
+    },
+    {
+      "kind": "rt",
+      "command": [
+        "N:\\pixart\\ColorResearchHome-20261030\\deps\\toolchain\\llvm-mingw-20250402-ucrt-x86_64\\bin\\clang++.exe",
+        "-O2",
+        "-std=gnu++20",
+        "-ffp-contract=off",
+        "-U__SSE2__",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.cpp",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\gauss.cc",
+        "-IN:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2",
+        "-o",
+        "N:\\pixart\\ColorResearchHome-20261030\\round13-unsharp-v1\\reference-build-v2\\rt-probe.exe"
+      ],
+      "exitCode": 0,
+      "sourceSha256": "2133f0810a45faf49a282b3a6dbcbaa9d82060d051972f85109f6757b1d2125d",
+      "executableSha256": "e2fb2be38f9c3ac6693fc7b8e79a2fb06ea880d8deac321ae8e9c9503d3a59c2"
+    }
+  ],
+  "scope": "Exact upstream process/sharpening/halo/Threshold and real gauss scalar; adapters allocation/Lab struct only. RT contrast=0 explicitly selects actual all-one buildBlendMask branch; no bilateral/rld/preblur. Not complete app pipeline or SIMD parity.",
+  "references": [
+    {
+      "file": "dt-license",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "file": "dt-sharpen.c",
+      "sha256": "360e3051f38cc7ba20031d6ddc0898b47aeb28f5720c39b6420c90aec5b4b31e"
+    },
+    {
+      "file": "rt-alignedbuffer.h",
+      "sha256": "1723b87cde732df8d2206481eab3b9b5203f885fe02d036d00727c6961ca8805"
+    },
+    {
+      "file": "rt-array2D.h",
+      "sha256": "d92ed39d56e227cb7de6490aec687ea70a72a7353722556130ed15f1dac54c49"
+    },
+    {
+      "file": "rt-boxblur.cc",
+      "sha256": "0b5c1256a6a5c11a399acffc84e58a52aca5b80c2a3753c0b1b1036baba7a932"
+    },
+    {
+      "file": "rt-boxblur.h",
+      "sha256": "7e8b3a0cc1d2b2669438bf913e4147e32e461ddc5b93a8f35c3abcc0cdeb9566"
+    },
+    {
+      "file": "rt-gauss.cc",
+      "sha256": "1b1e0d40fdf411e6a5768fa5b0fc6b989eb4bc9c86b3c26c160dbc9c0820b689"
+    },
+    {
+      "file": "rt-gauss.h",
+      "sha256": "21c795d771c8efa18619f6de0e44b9fa4cb35cfd2fceeab1ab5f502d1cd60c80"
+    },
+    {
+      "file": "rt-improcfun.cc",
+      "sha256": "adba83f7a2cdc9351e465239b4a2edadfc36f760765df6dc89b584e84c921f6b"
+    },
+    {
+      "file": "rt-improcfun.h",
+      "sha256": "58ddc4c734078490e17aa8c0ee081b81e08db3b7f1f572f5125ce773733880b7"
+    },
+    {
+      "file": "rt-ipsharpen.cc",
+      "sha256": "eca57400ccc9d2a5523070f60bddf34749446bebacb299bf024af29b0a4a44be"
+    },
+    {
+      "file": "rt-ipsharpenedges.cc",
+      "sha256": "8e7b2d290a1b98c1b888c0bba4d021637afd37e61c4dfa4003fe1b6e3660dfd7"
+    },
+    {
+      "file": "rt-jaggedarray.h",
+      "sha256": "9bf215302bd31fe83116d17dab7a9a3968193b063cd17083c0bc994e482eea75"
+    },
+    {
+      "file": "rt-license",
+      "sha256": "8c75a9231db8906865e29706ed63aad18fd918c92c15dbefbb13c25fe42850b4"
+    },
+    {
+      "file": "rt-opthelper.h",
+      "sha256": "4dcbe8df5759ae0dfc5464383571de4c17345ffde9c0b9272cdc18825b1b08a7"
+    },
+    {
+      "file": "rt-procparams.cc",
+      "sha256": "971251e9a5c31d473afdb2d03827766635fe5b368ecae3ae66c71351b6077b5c"
+    },
+    {
+      "file": "rt-procparams.h",
+      "sha256": "64bca55a2adec4d4b2eff2f3ca88112390266972de997c3ce459d5779b6eba24"
+    },
+    {
+      "file": "rt-rt_algo.cc",
+      "sha256": "91b0d0aca800f40e8decde2e373b1143f611a43723ae7a68d3f74904d43c8a9d"
+    },
+    {
+      "file": "rt-rt_algo.h",
+      "sha256": "f89444544dcada9e73b7489467d3bf44acfaffcabff4bbb5f913b1fbf3421735"
+    },
+    {
+      "file": "rt-rt_math.h",
+      "sha256": "88c382a75bcb5dcafb62f6a527c713b2368f0d61b86e811ce3b97504a704706e"
+    }
+  ],
+  "extractedBodies": {
+    "dtProcessSha256": "a787bebc0bb69bebd3a6f027cd872580b797f2b8c9b6f3f32ef4e07050f703d2",
+    "rtSharpeningSha256": "bee61257350d7ec0592429ef80a27bc606636fce7dff1cafd1d979c0c9ed029c",
+    "rtHaloSha256": "033ed6d9c6834147b467b828dc029e756f98ba4602274dd3c487fea39a3dfefd"
+  }
+}

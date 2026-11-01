@@ -1,0 +1,144 @@
+{
+  "version": "Round13FinalSourceIdentityV1",
+  "localRoot": "N:/pixart/ColorResearchHome-20261030/round13-unsharp-v1",
+  "localSources": [
+    {
+      "path": "candidate_stage.cpp",
+      "sha256": "1ff17095ac516cfa2717242c6db8390f9ff71db1b3c7d473d6b942f61412b073",
+      "bytes": 4707,
+      "localOnly": true
+    },
+    {
+      "path": "candidate_stage-v2.cpp",
+      "sha256": "da37d4bcaa687c6f965477f723761ff480403f45d65523c2bd591ae18adfe620",
+      "bytes": 4839,
+      "localOnly": true
+    },
+    {
+      "path": "candidate_stage-v3.cpp",
+      "sha256": "ffc3ed4ed07aeae84acafc5a019edf647e510e789dde14717654ae56e775b787",
+      "bytes": 4852,
+      "localOnly": true
+    },
+    {
+      "path": "shared_increment_envelope_v1.comp",
+      "sha256": "c592fc60b95f3d51baec18203d5b4b251f7842e31da9b413c287235739439c6a",
+      "bytes": 1369,
+      "localOnly": true
+    },
+    {
+      "path": "candidate-build-v3/vulkan_gpu.cpp",
+      "sha256": "3f46f7909448ee145c300c3da16598b47fcc16d1ad36c825bf0ea386c6682019",
+      "bytes": 53792,
+      "localOnly": true
+    },
+    {
+      "path": "candidate-build-v3/candidate-stage.exe",
+      "sha256": "1c20cfb21d6bd0f8c62aa30eb627b151c8a38996d654ab355e0c7b0ba6ec4c16",
+      "bytes": 360960,
+      "localOnly": true
+    },
+    {
+      "path": "candidate-build-v3/resources/vulkan/spk_r13_envelope_v1.spv",
+      "sha256": "acf70469cce82f8d7b706fe7739e922a1773f64a23e0ea98deb0197b8d83c4de",
+      "bytes": 8300,
+      "localOnly": true
+    },
+    {
+      "path": "reference-build-v2/dt-probe.cpp",
+      "sha256": "f1b46ea3a484e16707793a902aad66b9d3b84e7fd1b6ff940418fea6c40e4a51",
+      "bytes": 8037,
+      "localOnly": true
+    },
+    {
+      "path": "reference-build-v2/rt-probe.cpp",
+      "sha256": "2133f0810a45faf49a282b3a6dbcbaa9d82060d051972f85109f6757b1d2125d",
+      "bytes": 27587,
+      "localOnly": true
+    },
+    {
+      "path": "reference-build-v2/dt-probe.exe",
+      "sha256": "24f10301e1843ff17ae0a3e1afbec33fbf5c7a2f7543e7d91943cab34b1ff13c",
+      "bytes": 113152,
+      "localOnly": true
+    },
+    {
+      "path": "reference-build-v2/rt-probe.exe",
+      "sha256": "e2fb2be38f9c3ac6693fc7b8e79a2fb06ea880d8deac321ae8e9c9503d3a59c2",
+      "bytes": 167424,
+      "localOnly": true
+    },
+    {
+      "path": "output-matrix.f32",
+      "sha256": "ed749b38f7a02ce1bd0739592024f3a147f4e440b427488461c9cf2bf736c03f",
+      "bytes": 36,
+      "localOnly": true
+    }
+  ],
+  "tools": [
+    {
+      "path": "tools/color-round13/.gitattributes",
+      "sha256": "1295cbe814c8498fa4f2982f53e6816324e3f3a843f12146cfa8287880f4f45f",
+      "bytes": 46
+    },
+    {
+      "path": "tools/color-round13/.gitignore",
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793",
+      "bytes": 19
+    },
+    {
+      "path": "tools/color-round13/build_candidate.py",
+      "sha256": "e820d1f6a9b573b264f39eb2a1757285e2899ff1eafd480f551dfe186f5a4311",
+      "bytes": 2979
+    },
+    {
+      "path": "tools/color-round13/build_reference_probes.py",
+      "sha256": "43b101ead9b33200f1e8a4eb5de04ef869b36b65b9ef4bd2c86ecf46ad36f4db",
+      "bytes": 9000
+    },
+    {
+      "path": "tools/color-round13/compare_reference_outputs.py",
+      "sha256": "c870488bdd4cb4437b497b61f06e9cbb94705f6b18427ce15f5b51be7c943b01",
+      "bytes": 2396
+    },
+    {
+      "path": "tools/color-round13/numerical_addenda.py",
+      "sha256": "1723604dd15b726ba45bbc3f0bd162c27e32f54c04ae07ec6d08fb9dc9a7dc45",
+      "bytes": 3406
+    },
+    {
+      "path": "tools/color-round13/README.md",
+      "sha256": "ba6f534fbc0563409f13ce64ceca606a5a77594da65038a28b7a6fd482b1999d",
+      "bytes": 2729
+    },
+    {
+      "path": "tools/color-round13/review_ab.py",
+      "sha256": "3642df6c0b04f6f98557cdb503e7b4f11404326c95c371f960ad9cc582587392",
+      "bytes": 6872
+    },
+    {
+      "path": "tools/color-round13/run_candidate_ab.py",
+      "sha256": "ca7c828a115277c1241d18a02b4c30a9023219ab415c5074724d6b15c6c7113a",
+      "bytes": 9584
+    },
+    {
+      "path": "tools/color-round13/run_reference_fixtures.py",
+      "sha256": "4b3e9893d5e5effb6118d772818cdd5f687cef03f912d50c51c85ad14d8574e9",
+      "bytes": 4040
+    },
+    {
+      "path": "tools/color-round13/seal_round13.py",
+      "sha256": "b806d96ca02864dbc793080a21c7663dd65309c749b71fc0c8a35faa9ed323bd",
+      "bytes": 2482
+    },
+    {
+      "path": "tools/color-round13/test_frozen_ab.py",
+      "sha256": "1062b056b3c45b2b72512c8714baf9d8754debc26aee44a069f121a945d7123a",
+      "bytes": 6540
+    }
+  ],
+  "originalRoot": "N:/pixart/ColorResearchHome-20261030/round11/source-natural-v1",
+  "originalSourceBindings": "saved-stage-admission.json all match",
+  "actualBuild": "candidate-build-v3 only, algorithm shader unchanged across host compile attempts",
+  "originalDefinitionHash": "c0cfe1e429382a26d0e97dfd0e72288cb8b8b51083429e21e2711f2c1c91a05a"
+}

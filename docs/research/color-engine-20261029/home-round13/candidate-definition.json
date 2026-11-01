@@ -1,0 +1,18 @@
+{
+  "version": "SharedIncrementEnvelopeUnsharpV1",
+  "enabledByDefault": false,
+  "baseSigmaFullPixels": 0.7,
+  "amount": 0.7,
+  "truncate": 3,
+  "envelopeRadius": 2,
+  "envelopeExpansion": 0,
+  "commonGainSafety": 9.5367431640625e-7,
+  "input": "linear sRGB D65 float32 print_linear; WB/film/paper/gamut already applied; negative/>1 allowed; orientation1 RGB no alpha",
+  "algorithm": "Compute unchanged legacy unsharp U. For each RGB channel with delta=U-I, derive max gain keeping I+gain*delta within original reflected5x5 channel extrema. Use minimum gain across all channels, bounded[0,1]. If limited gain in(0,1), multiply by1-2^-20. Return legacy U for gain1, original I for gain0, else I+gain*delta. No output clamp, no lifting black. Common gain preserves direction of original RGB increment, not guaranteed hue invariance.",
+  "boundaries": "Original reflect repeats edge; Gaussian vertical then horizontal. Fixed scale ratio1 only: sigma .7px, envelope radius2, halo2. Global boundaries reflected; internal band halos are real neighboring rows.",
+  "supportedScale": "Only ratio1 at supplied complete stage extent, input long edge<=1200. At this prototype scale sigma=.7px/envelope radius2/halo2. Other tier ratios are unsupported rather than silently reused; product preview800/1600 agreement NOT_RUN.",
+  "outputs": "Same original matrix/OETF and final RGBA16 pack; original pack remains unchanged",
+  "noProductRegistration": true,
+  "referenceGate": "fixed two original CPU implementations executed on9Labfixtures/5configs45calls; no Lab equation transplanted; distinct independent linearRGB increment constraint",
+  "frozenBeforeCandidateSynthetic": true
+}

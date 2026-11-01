@@ -1,0 +1,51 @@
+{
+  "version": "Round13ExecutionScopeV1",
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "base": "3f7fe01beafc4ed83d113013ab00b300292a7461",
+  "fetch": "SUCCESS_BASE_MATCH",
+  "branch": "research/color-engine-home-20261030",
+  "deviceRole": "home",
+  "videoControllers": [
+    {
+      "Name": "MuMu Virtual Display Adapter",
+      "DriverVersion": "20.36.41.498"
+    },
+    {
+      "Name": "NVIDIA GeForce RTX 5060 Ti",
+      "DriverVersion": "32.0.16.1088"
+    }
+  ],
+  "runtimeDevice": "NVIDIA GeForce RTX 5060 Ti",
+  "companyDiagnostic": "NOT_RUN_HOME_MACHINE",
+  "counts": {
+    "rawDecode": 0,
+    "upstreamFilmPipelineRender": 0,
+    "full20MPEngine": 0,
+    "newPhotos": 0,
+    "newStocks": 0,
+    "pixelCandidates": 1,
+    "referenceCpuProcessCalls": 45,
+    "syntheticGpuStageReplayProcesses": 18,
+    "naturalGpuStageReplayProcesses": 18,
+    "gpuStageReplayProcesses": 36,
+    "gpuDispatches": 4088
+  },
+  "candidateBuilds": {
+    "shaderCompilations": 3,
+    "hostBuildAttempts": 3,
+    "successfulHostBuilds": 2,
+    "exercised": "candidate-build-v3 only",
+    "algorithmVariants": 1,
+    "reason": "v1 failed JSON explicit types/include; v2 compiled but version constchar would resolve Json(bool), corrected logging to std::string in v3; candidate shader/math unchanged"
+  },
+  "referenceBuilds": {
+    "attempts": 2,
+    "successfulFinalExecutables": 2,
+    "firstFailure": "only framework adapter type/min/restrict/default-argument compile errors, original function bodies unchanged"
+  },
+  "stageReplayMath": "legacy original GPU Blur/unsharp and encode/pack executed alongside unique candidate; not fullRAW/native pipeline",
+  "boundaries": "fullsigma.7px envelope2 halo2 ratio1, all bands exact; other preview scales NOT_RUN",
+  "stagingPeak": "NOT_SEPARATELY_MEASURED, not inferred from device pool or process high-water",
+  "timing": "one shot combined A/B stage ranges only; no pure candidate or end-to-end performance claim"
+}

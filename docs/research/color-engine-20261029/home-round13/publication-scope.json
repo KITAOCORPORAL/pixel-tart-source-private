@@ -1,0 +1,237 @@
+{
+  "version": "Round13PublicationScopeAuditV1",
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "fileCount": 45,
+  "totalBytes": 305508,
+  "issues": [],
+  "commonCredentialPatternMatches": [],
+  "scope": "Explicit research paths/text-only suffix audit; natural pixels/references/candidate source/compiled artifacts excluded, listed only by hash. Not proof of absence of all private information.",
+  "inventory": [
+    {
+      "file": "docs/research/color-engine-20261029/CAPABILITIES_HOME_ROUND13_V1.md",
+      "bytes": 2293,
+      "sha256": "0f791eb9620191db8ce0f886407ef14075054ce59bde1eccb6f566e1f4eb3ae6"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/HOME_ROUND13_UNSHARP_REPORT.md",
+      "bytes": 12054,
+      "sha256": "680c2b403395bbf58aaf996124ea0b18e1b024600c19bf3f85308ed9a1268c72"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/R6_EXPOSURE_ADMISSION_ROUND13.md",
+      "bytes": 1068,
+      "sha256": "f81d9d5c0502f06833fc0e50870622344aaa7ca3a712401d957ba5aa1b4d297e"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/UNSHARP_NODE_COMPARISON_ROUND13.md",
+      "bytes": 3639,
+      "sha256": "b4c07b2018a1d804015ab536e7a89e51f3151fc8d48295919331ffdd1dceaa73"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/.gitattributes",
+      "bytes": 48,
+      "sha256": "8f8f1d619f53a9948ea29f703f21c233ccd54e33501ab2fd73983a8c0deb6d45"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/ab-review.json",
+      "bytes": 8807,
+      "sha256": "4bc4cdf43984569a2f138311b0495c65f3b13bcd10c3d624f386c7245649ae24"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/candidate-build-v2.json",
+      "bytes": 10472,
+      "sha256": "4015a806da07b892262292a945515fbd7275adbd48392c52a6e0a4afccc231f0"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/candidate-build-v3.json",
+      "bytes": 10472,
+      "sha256": "8605163fe5bc8c0cd75d8624f747f55aad20660ada865a5406292aabeb7413b0"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/candidate-build.json",
+      "bytes": 10263,
+      "sha256": "4573f07fc84f12d4fc1a1b215a398e627fe056db357f9af1a8a2d8f924fbbb16"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/candidate-definition.json",
+      "bytes": 1673,
+      "sha256": "c0cfe1e429382a26d0e97dfd0e72288cb8b8b51083429e21e2711f2c1c91a05a"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/candidate-natural.json",
+      "bytes": 37682,
+      "sha256": "5f86ccb71bde714f4537ea05a9766e17517fc7fd99c88540c09011d655a0ca53"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/candidate-synthetic.json",
+      "bytes": 35190,
+      "sha256": "879cd2cc70c69d599acae84e2fc30e6af781ee8f59f4f42e9bfac2829df90590"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/default-off-refusal.txt",
+      "bytes": 987,
+      "sha256": "ee7eecd5ed7d44f21fef003fbdf38463b7c880a66dbd11bde01577b0617678df"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/evaluation-plan.json",
+      "bytes": 2156,
+      "sha256": "b90ce40695c2d35d8d7ce32f066884e2d059854c4b2ffaa4e275c75da77cd43c"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/executed-vs-final-runner.json",
+      "bytes": 516,
+      "sha256": "58c38a7033f0536259a32d188d2ce6e485c92c6b0060b3bc6720a284f8ea0478"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/execution-scope.json",
+      "bytes": 1962,
+      "sha256": "e84c911bc2ed9799eeeb7c83be4e5a0048517248499c5c372c78f4871487c0b6"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/failures-and-limits.json",
+      "bytes": 2078,
+      "sha256": "c2c4211e2e196b681950111d5fc27d47b01678f31087b399723200196c76ea22"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/numerical-addenda.json",
+      "bytes": 15425,
+      "sha256": "160113d58fe8894014edc21778d9d9c2b2134d5568d29ce0f20554ea3c70dd39"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/r6-admission.json",
+      "bytes": 2196,
+      "sha256": "5b048318688f4cee368f9fd792079952ff97f2fb5546d3e481ad872792a19751"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/reference-build-v2.json",
+      "bytes": 5090,
+      "sha256": "cacae5d94d7e07e545e28da088488e681605a1ca57533dd14f8d74c03e2c3e45"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/reference-build.json",
+      "bytes": 4945,
+      "sha256": "339c9bf190030b65466ae4cf821a4566452170b3414f0bba0d9a0935df3d0195"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/reference-cross-comparison.json",
+      "bytes": 8499,
+      "sha256": "5d9ec0cac570638b3bf4a969958cc3956dc6c05d7dcc3b48e636be975dedba84"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/reference-files.json",
+      "bytes": 8419,
+      "sha256": "69486e30d6f2f2c38549ba67f1041c5c5a688574c5c1b6b0556e78d1b9eac905"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/reference-numerical.json",
+      "bytes": 49639,
+      "sha256": "4f91336001ad63e941998cf6015d26010d31f3782b10fa11b93d846ecee8db0f"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/round10-preservation.json",
+      "bytes": 3751,
+      "sha256": "3db2e34f5e1e586fd8baf5c0ee2a63598c04a6147acbca8525254855d1ee06ad"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/round10-preservation.txt",
+      "bytes": 29,
+      "sha256": "2c25f02ed140ad7766eb244f70940d0b8e3937c830066f7c9f290d637ecca59e"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/saved-stage-admission.json",
+      "bytes": 3613,
+      "sha256": "c7147aa6eadcc001fc27a4cdd7cee4094f5b2d3046d7ef8b455eb665153c752b"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/sealed-check.json",
+      "bytes": 746,
+      "sha256": "1ea233c160b7d12fac13d907b9a32a8b7e1b8e3197041ed0fc965962abd3922a"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/sealed-check.txt",
+      "bytes": 649,
+      "sha256": "91fbe838ad966fc71fe221ffed16a26b8ffd0becea7a154edcfc6fdd3050eafd"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/source-identity.json",
+      "bytes": 4873,
+      "sha256": "829f51b5406c2329c7ba6f8862ca22f5deeb756f14c5ce76f7ca03209933a46b"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/tests-closure.txt",
+      "bytes": 1696,
+      "sha256": "094f5d264a7b6233b64cba6d6a47d150dd002069892e884154f83203e5b6b418"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/tests-final-with-enable-gate.txt",
+      "bytes": 2883,
+      "sha256": "d030c536a87d4302fb4afe53ef1afdcf1f2ae84462d98871f72c414d4a801665"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-round13/tests-final.txt",
+      "bytes": 1602,
+      "sha256": "cf6833780ca975fd93e230b2a752b505934ead6591e640883dfefb4ec046cc7c"
+    },
+    {
+      "file": "tools/color-round13/.gitattributes",
+      "bytes": 46,
+      "sha256": "1295cbe814c8498fa4f2982f53e6816324e3f3a843f12146cfa8287880f4f45f"
+    },
+    {
+      "file": "tools/color-round13/.gitignore",
+      "bytes": 19,
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"
+    },
+    {
+      "file": "tools/color-round13/README.md",
+      "bytes": 2729,
+      "sha256": "ba6f534fbc0563409f13ce64ceca606a5a77594da65038a28b7a6fd482b1999d"
+    },
+    {
+      "file": "tools/color-round13/build_candidate.py",
+      "bytes": 2979,
+      "sha256": "e820d1f6a9b573b264f39eb2a1757285e2899ff1eafd480f551dfe186f5a4311"
+    },
+    {
+      "file": "tools/color-round13/build_reference_probes.py",
+      "bytes": 9000,
+      "sha256": "43b101ead9b33200f1e8a4eb5de04ef869b36b65b9ef4bd2c86ecf46ad36f4db"
+    },
+    {
+      "file": "tools/color-round13/compare_reference_outputs.py",
+      "bytes": 2396,
+      "sha256": "c870488bdd4cb4437b497b61f06e9cbb94705f6b18427ce15f5b51be7c943b01"
+    },
+    {
+      "file": "tools/color-round13/numerical_addenda.py",
+      "bytes": 3406,
+      "sha256": "1723604dd15b726ba45bbc3f0bd162c27e32f54c04ae07ec6d08fb9dc9a7dc45"
+    },
+    {
+      "file": "tools/color-round13/review_ab.py",
+      "bytes": 6872,
+      "sha256": "3642df6c0b04f6f98557cdb503e7b4f11404326c95c371f960ad9cc582587392"
+    },
+    {
+      "file": "tools/color-round13/run_candidate_ab.py",
+      "bytes": 9584,
+      "sha256": "ca7c828a115277c1241d18a02b4c30a9023219ab415c5074724d6b15c6c7113a"
+    },
+    {
+      "file": "tools/color-round13/run_reference_fixtures.py",
+      "bytes": 4040,
+      "sha256": "4b3e9893d5e5effb6118d772818cdd5f687cef03f912d50c51c85ad14d8574e9"
+    },
+    {
+      "file": "tools/color-round13/seal_round13.py",
+      "bytes": 2482,
+      "sha256": "b806d96ca02864dbc793080a21c7663dd65309c749b71fc0c8a35faa9ed323bd"
+    },
+    {
+      "file": "tools/color-round13/test_frozen_ab.py",
+      "bytes": 6540,
+      "sha256": "1062b056b3c45b2b72512c8714baf9d8754debc26aee44a069f121a945d7123a"
+    }
+  ]
+}

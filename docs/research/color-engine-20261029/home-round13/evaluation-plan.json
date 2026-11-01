@@ -1,0 +1,62 @@
+{
+  "version": "Round13EvaluationPlanV1",
+  "frozenBeforeCandidateRun": true,
+  "candidate": "SharedIncrementEnvelopeUnsharpV1",
+  "candidateDefinitionSha256": "c0cfe1e429382a26d0e97dfd0e72288cb8b8b51083429e21e2711f2c1c91a05a",
+  "reference": "2 fixed original CPU function implementations, 45 calls complete; Lab domains not converted into matching oracle",
+  "synthetic": [
+    "flat",
+    "step",
+    "impulse",
+    "saturated_edge",
+    "negative_above_range",
+    "boundary",
+    "low_detail",
+    "detail",
+    "noise"
+  ],
+  "naturalIds": [
+    "canon600d",
+    "canon6d",
+    "canon5d3",
+    "nikond5100",
+    "sonynex5r",
+    "canonr6"
+  ],
+  "naturalInput": "exact already-saved print_linear for six existing1200px proxies; no upstream rerender, noRAW",
+  "naturalRows": [
+    0,
+    17,
+    37
+  ],
+  "syntheticRows": [
+    0,
+    7
+  ],
+  "technicalGates": {
+    "sameDeviceWholeStream": "ALL_FLOAT_AND_RGBA16_CHANNELS_EXACT_ZERO_DIFFERENCE",
+    "legacyAgainstFrozen": "print_scan_finish/output/RGBA16 all exact for natural; stop and retain failure if not",
+    "noNewLocalEnvelopeExtrema": "candidate respects original5x5 channel envelope, negatives/>1 retained rather than global clamp",
+    "noNonfinite": "all outputs finite",
+    "release": "pool live/persistent0"
+  },
+  "qualityMeasurements": [
+    "edge under/overshoot and mean bias",
+    "impulse and sinusoidal detail retention",
+    "flat/noise RMS and noise amplification",
+    "linearRGB increment-direction and chromaticity",
+    "encoded hue/chroma proxy non-calibrated",
+    "fixed skin_arm ROI",
+    "NEX5R fixed flower ROI",
+    "existing R6 vehicle ROI descriptive no tuning"
+  ],
+  "qualityDecision": "No sole zero-count win. Significant detail or noise/color tradeoffs retained; no photography approval without independent validation and user preference. No numeric thresholds adjusted after inspection.",
+  "limits": [
+    "six developmental not holdout",
+    "stage-only prototype not product pipeline",
+    "scale ratio1 only; preview scales NOT_RUN",
+    "no20MP/performancegeneralization",
+    "noindependentcameraaccuracy",
+    "R6noExposureOrProfileChanges"
+  ]
+}

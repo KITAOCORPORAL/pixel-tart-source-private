@@ -1,3 +1,15 @@
+# 当前检查点：第十三批唯一受约束锐化候选（2026-11-01，Europe/Helsinki）
+
+基线3f7fe01beafc4ed83d113013ab00b300292a7461，fetch/本地/远端一致。固定dt/RT原函数及依赖已读、实际9夹具5配置共45次CPU运行完成；非完整应用/线性RGB等价oracle。
+
+唯一SharedIncrementEnvelopeUnsharpV1：默认关闭、显式研究启用，线性RGB原unsharp增量共享gain约束在原5×5局部包络，未移植Lab公式。原sigma/amount、PortraA及资源不动。合成9例whole/r7、自然6既有1200 stage whole/r17/r37均float/encoded/RGBA16全通道0差，旧分支与冻结结果0差。RAW/上游film/20MP0，GPU stage36进程4088dispatch；15项只读专项测试通过。
+
+结论KEEP_FROZEN_RESEARCH_ONLY / NOT_ADMITTED：NEX5R下冲/零值消除，但阶跃/脉冲锐化完全退回原输入，正弦细节增益削弱、噪声仍1.248×，自然梯度增量仅保留44.7%–67.0%，部分色相/肤色响应变化。不拿零值少判胜，不在本轮调参/另立第二候选。仅ratio1，真实preview尺度/独立验证/人工偏好/产品链/许可仍OPEN。R6仅整理有效曝光域与hidden defaults，不改像素。公司NOT_RUN（home5060Ti）。
+
+权威HOME_ROUND13_UNSHARP_REPORT、CAPABILITIES_HOME_ROUND13_V1、UNSHARP_NODE_COMPARISON_ROUND13与home-round13。自然A/B/匿名图、外部源码/候选shader/runner及binary留N:/pixart/ColorResearchHome-20261030/round13-unsharp-v1。下一步先人工匿名偏好和独立验证目标，不重复本批/20MP；若改数学另显式版本并预冻结门槛。Git交接见本批remote-receipt（生成后）及最终读回。
+
+---
+
 # 当前检查点：第十二批两项原因定位（2026-11-01，Europe/Helsinki）
 
 基线603e8a49c7e35546053ad51339eaed2ad7989793，fetch和远端身份核对成功。旧FAILED_NETWORK收据原样保留，仅代表当时失败，不代表当前状态。

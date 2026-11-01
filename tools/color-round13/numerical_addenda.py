@@ -1,0 +1,17 @@
+"""Read-only addenda: native-domain boundary rounding and frozen quality tradeoffs."""
+from pathlib import Path
+import sys,json
+import numpy as np
+repo=Path(__file__).resolve().parents[2];root=Path(sys.argv[1]);ev=repo/'docs/research/color-engine-20261029/home-round13'
+def read(p):return json.loads(Path(p).read_text())
+def dump(p,j):
+ with p.open('x') as f:json.dump(j,f,indent=2)
+refs=read(ev/'reference-numerical.json');h,w=refs['height'],refs['width'];border=np.ones((h,w),bool);border[2:-2,2:-2]=False;items=[]
+for rec in refs['records']:
+ src=np.fromfile(rec['command'][2],dtype='<f4').reshape(h,w,3);dst=np.fromfile(rec['command'][3],dtype='<f4').reshape(h,w,3);d=dst[:,:,0]-src[:,:,0];items.append({'case':rec['case'],'mode':rec['mode'],'maxAbsBorderLDelta':float(np.abs(d[border]).max()),'nativeInternalRoundtripOnlyAtHaloBorder':bool(np.array_equal(dst[:,:,0][border],((src[:,:,0]*np.float32(327.68))/np.float32(327.68))[border])) if rec['mode']=='rt-halo' else None})
+# Full-frame linear luminance noise/detail metrics in native pixel-domain fixtures.
+syn=read(ev/'candidate-synthetic.json');measure=[]
+for rec in syn['records']:
+ name=rec['id'];shape=rec['shape'];folder=root/'candidate-synthetic';source=np.fromfile(folder/(name+'-input.f32'),dtype='<f4').reshape(shape);a=np.fromfile(folder/(name+'-whole/legacy.f32'),dtype='<f4').reshape(shape);b=np.fromfile(folder/(name+'-whole/candidate.f32'),dtype='<f4').reshape(shape);lum=np.array([.2126,.7152,.0722]);x=source@lum;y=a@lum;z=b@lum;measure.append({'case':name,'sourceMinMax':[float(x.min()),float(x.max())],'legacyMinMax':[float(y.min()),float(y.max())],'candidateMinMax':[float(z.min()),float(z.max())],'meanDriftLegacy':float((y-x).mean()),'meanDriftCandidate':float((z-x).mean()),'candidateExactOriginal':bool(np.array_equal(source,b)),'candidateDetailIncrementNonzeroComponents':int(np.count_nonzero(b!=source)),'legacyDetailIncrementNonzeroComponents':int(np.count_nonzero(a!=source))})
+needSkin=next(r for r in read(ev/'candidate-natural.json')['records'] if r['id']=='nikond5100')['fixedRoi'];n=read(ev/'candidate-natural.json');runs=[x for r in n['records'] for x in r['runs']];byrows={str(k):{'minStageMs':min(x['stageReplayMs'] for x in runs if x['rows']==k),'maxStageMs':max(x['stageReplayMs'] for x in runs if x['rows']==k),'scope':'one shot stage A+B and encode/pack/readback; not pure candidate speedup'} for k in [0,17,37]}
+report={'version':'Round13NumericalAddendaV1','referenceBoundary':items,'rtHaloBoundaryExplanation':'Exact upstream loop leaves native internal2px L unchanged; wrapper L*->327.68L*->L* introduces small float roundtrip changes at those pixels. Distinguish from actual sharpening boundary changes.','synthetic':measure,'fixedSkinROI':needSkin,'naturalTiming':byrows,'metricsLimit':'Gradient boost is descriptive edge/noise response, not proven true detail. Hue is output Lab delta relative to legacy, not skin/physical accuracy.','callsAdded':{'gpu':0,'raw':0},'scaleContract':'Only ratio1; scaled preview not executed or approved. Stream halo2 exact tests do not substitute scaled preview.'};dump(ev/'numerical-addenda.json',report);print(json.dumps({'rtHaloBorderMax':max(r['maxAbsBorderLDelta'] for r in items if r['mode']=='rt-halo'),'rtHaloBorderAllRoundtrip':all(r['nativeInternalRoundtripOnlyAtHaloBorder'] for r in items if r['mode']=='rt-halo'),'timing':byrows,'synth':measure},indent=2))

@@ -1,0 +1,66 @@
+{
+  "version": "R6ProfileExposureAdmissionV1",
+  "researchOnly": true,
+  "doesNotChangePixels": true,
+  "sourceEvidenceBase": "home-round12; no new exposure fitting or rerender",
+  "input": "standard ProPhoto D50 linear float32 prepared proxy, existing fixed bridge; not sensor RAW values",
+  "filmExposureDomain": "relative sensitivity-weighted linear film exposure (not RGB)",
+  "logTransform": "log10(max(exposure,0)+1e-10)",
+  "profile": {
+    "stock": "kodak_portra_400",
+    "profileSha256": "140c49bbff6d7b6589058ce0836e3286fa995e9433bb8a62a0189d6e1a04da9f",
+    "logExposureValidTableDomain": [
+      -3,
+      4
+    ],
+    "densityGamma": 1,
+    "extrapolation": "constant endpoint extension; not validated physical data outside table"
+  },
+  "fixedRoi": {
+    "xywh": [
+      0,
+      500,
+      300,
+      250
+    ],
+    "pixelCount": 75000,
+    "componentCount": 225000,
+    "atOrBelowLowByChannel": [
+      5462,
+      9601,
+      4504
+    ],
+    "fractionsByChannel": [
+      0.07282666666666666,
+      0.12801333333333334,
+      0.060053333333333334
+    ],
+    "combinedLowFraction": 0.08696444444444444,
+    "atOrAboveHigh": 0,
+    "zeroExposure": 0,
+    "negativeExposure": 0,
+    "priorMasterEndpointFootprintPixels": 54321,
+    "provenance": "home-round12/cause-analysis-v1.json and local-domain-details.json; frozen no retuning"
+  },
+  "hiddenDefaults": {
+    "unsharpSigmaFullPixels": 0.7,
+    "unsharpAmount": 0.7,
+    "scannerLensBlur": 0,
+    "scannerBlackCorrection": false,
+    "scannerWhiteCorrection": false,
+    "previewMode": false,
+    "deactivateSpatial": false,
+    "paperMorph": false,
+    "normalizePrintExposure": true,
+    "printExposureCompensation": true,
+    "printGain": [
+      0.8357499244020927,
+      0.8357499244020927,
+      0.8357499244020927
+    ]
+  },
+  "admissionDecision": "WARN_RESEARCH_EXPOSURE_RANGE_ONLY_NOT_CAMERA_CALIBRATED",
+  "automaticBehavior": "NONE: no exposure pull, curve extrapolation, black-level shift or profile replacement",
+  "unchangedConclusion": "Low-domain film density collapse plus fixed paper/scanner black response; candidate unsharp does not restore discarded density information",
+  "candidateCountThisBatch": 1
+}

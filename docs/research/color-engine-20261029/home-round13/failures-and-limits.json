@@ -1,0 +1,39 @@
+{
+  "version": "Round13FailuresAndLimitsV1",
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "retainedFailures": [
+    {
+      "stage": "fixed raw source curl.exe",
+      "reason": "connection reset and timeout; Node public HTTPS fetch succeeded pinned files; exact bytes/hash retained"
+    },
+    {
+      "stage": "initial reference compile",
+      "reason": "Framework adapters min int/float, restrict pointer type, RT min/max using collision and default args. Bodies not modified; new v2 build succeeds. First logs retained."
+    },
+    {
+      "stage": "candidate host v1 compile",
+      "reason": "Explicit Json constructor calls and include gpu path. Shader compiled; host did not run. New v2 succeeds."
+    },
+    {
+      "stage": "candidate v2 inspection",
+      "reason": "Json(constchar) can resolve bool; version field log corrected to std::string in v3. No algorithm change. Only v3 executed."
+    },
+    {
+      "stage": "Default-off test subprocess",
+      "reason": "First added subprocess did not inherit frozen NumPy sys.path and failed before gate; test now explicitly passes same frozen dependency path. Original failure log kept; final15 passed. No GPU rerun."
+    }
+  ],
+  "scopeLimits": [
+    "Reference scalar CPU functions not full application/SIMD parity; noLab->linearRGB identity claim",
+    "Prototype only ratio1 sigma.7/envelope2/halo2, productpreview800/1600 NOT_RUN",
+    "NaturalROI envelope metric initially used cropped context; left immutable with warning; authoritative full-image context shows0 violations",
+    "Raw delta direction min is ill-conditioned at tiny increments; conditioned magnitude>=1e-5 stats reported separately, not hidden",
+    "Per-candidate staging peak not measured; resource maxima combined A/B stage only",
+    "TIFF16 exact file readback has noembeddedICC claimed; productcolor-managedexport not run",
+    "No holdout/independent evaluation or human preference approval"
+  ],
+  "pixelDecision": "KEEP_FROZEN_RESEARCH_ONLY_NOT_ADMITTED",
+  "singleCandidate": true,
+  "noMathRetuneAfterSynthetic": true
+}
