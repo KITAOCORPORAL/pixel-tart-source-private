@@ -1,3 +1,11 @@
+## 2026-11-01 v3两项数值归因收尾（Europe/Helsinki）
+- 本轮仅tests/docs，产品源码仍146c0fd254de387ad5ccb9570cff6c54697389d4；家庭基线17e9788f，测试支持fa171e47f5d3b3921676fb11afa0bb5a996338a6。不改src/灯台/UI/研究引擎，不再次发布/打ZIP；原完整294文件ZIP d394e3ab463531f66eb4ae74ef571becb26bec20754965ef07251a35c560cf5d逐项读回保持。
+- JPEG已用分量/系数因果闭环：FFmpeg lowres2 2x2核只保留低阶，与WIC/IJG area型含AC3/5/7不同；WIC420 native输出Cb/Cr1500×1000，FF750×500。BT601全范围/通道正确，色度重建反事实max36–39，原max40不靠舍入/“不同解码器”空解释。
+- ICC同native/源目标ICC，独立MSCMS BEST_MODE BGRA与WIC原照片/保留夹具max0，方向max0；LCMS参数/精度排查后，受限独立matrixTRC oracle与LCMS0，WIC3，属于系统CMM颜色/量化阶段差异；专有CMM内部BPC/适配值不可读，保留未知。
+- 事前冻结阶段合同6关系通过，原max24/mean1.5/P95=3、ICCmax1门槛不改，旧照片脚本仍exit1（三项数值FAIL）。能力verification_status保留FAIL，diagnostic归因完成；不将新诊断关系通过当旧验收通过，不无限重做同一归因。
+- 仅原授权RAW/Real与closure两根支持栅格12文件无已有ICC+方向匹配，继续NOT_RUN；生成profile/方向不能冒充真实原始性。真实鼠标/DPI/ACM/HDR未验。
+- 相关发布DLL回归34＋独立重开2＋阶段探针1唯一方法通过，能力一致性1通过（合计38唯一方法）；原符号链接FAIL/通用LCMS参考NOT_RUN保留，非全套测试。权威报告docs/validation/home-r55-v3-numerical-20261101/FINAL_REPORT.md，原失败/探针错误/holdout/源码与包身份分记。
+
 ## 2026-11-01 家庭当前：大照片画布预览 v3（Europe/Helsinki；优先于下文历史）
 - 当前产品源码 **146c0fd254de387ad5ccb9570cff6c54697389d4**；分支 home/r55-canvas-photo-preview-20261101，工作树 N:/pixart/guangjing-r55-canvas-photo-preview-20261101；从40919e48/产品69bbf229接续。测试支持 **5d94691b34f8762532199e991d7b2b44852b1b47**，文档HEAD与远端读回另记。灯台冻结，研究分支不合入，旧树/未提交资料保留。
 - 新固定快照RenderVersion3，CanvasJpegNative1024.ArtboardCenters.v3。大baseline 8位JPEG从原图已校验读lease进行WIC native IDCT缩小，源ICC→sRGB后方向；24MP/33MP照片派生输入实际native为1500×1000 / 1752×1168，不能称原图细节或固定1024输出。小图走原v2数学，旧v1/v2保存PNG字节不重算，旧导出不暗改。

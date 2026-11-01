@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-01T10:32:41.9640421+00:00",
-  "generated_from_head": "5d94691b34f8762532199e991d7b2b44852b1b47",
+  "generated_at": "2026-11-01T15:45:04.6919860+00:00",
+  "generated_from_head": "fa171e47f5d3b3921676fb11afa0bb5a996338a6",
   "branch": "home/r55-canvas-photo-preview-20261101",
   "capabilities": [
     {
@@ -322,19 +322,23 @@
       ],
       "required_tests": [
         "tests/RAWSelectionAssistant.WpfTests/CanvasPhotoPreviewTests.cs",
-        "tests/RAWSelectionAssistant.WpfTests/PlanningCanvasConsistencyTests.cs"
+        "tests/RAWSelectionAssistant.WpfTests/PlanningCanvasConsistencyTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/V3NumericalStageTests.cs"
       ],
       "acceptance_artifacts": [
         "docs/validation/home-r55-canvas-photo-20261101/FINAL_REPORT.md",
         "docs/validation/home-r55-canvas-photo-20261101/NONPASS.json",
-        "docs/validation/home-r55-canvas-photo-20261101/TEST_SUMMARY.json"
+        "docs/validation/home-r55-canvas-photo-20261101/TEST_SUMMARY.json",
+        "docs/validation/home-r55-v3-numerical-20261101/FINAL_REPORT.md",
+        "docs/validation/home-r55-v3-numerical-20261101/HOLDOUT_RESULTS.json"
       ],
-      "next_gate": "Independent ICC and subsampled-JPEG second-reference thresholds remain unmet; native pointer/DPI/ACM/HDR not tested. No production scientific approval.",
+      "next_gate": "JPEG/ICC stage attribution closed by heldout contract; original cross-engine acceptance thresholds remain FAIL. Pre-existing photographic ICC+orientation source not found; physical validation not run. No need to re-diagnose known kernel/CMM differences.",
       "render_version": 3,
       "product_source": "146c0fd254de387ad5ccb9570cff6c54697389d4",
-      "test_support_source": "5d94691b34f8762532199e991d7b2b44852b1b47",
+      "test_support_source": "fa171e47f5d3b3921676fb11afa0bb5a996338a6",
       "calibration_eligible": false,
-      "scope": "Baseline 8-bit large JPEG preview only; no generic RAW/16-bit support; <=256MiB estimated renderer work is not process limit"
+      "scope": "Baseline 8-bit large JPEG preview only; no generic RAW/16-bit support; <=256MiB estimated renderer work is not process limit",
+      "diagnostic_status": "DIAGNOSIS_COMPLETE_OLD_ACCEPTANCE_FAIL_RETAINED"
     }
   ]
 }

@@ -1,0 +1,125 @@
+[
+  {
+    "relation": "JPEG-IDCT-AREA",
+    "name": "hold-y-ac3-96",
+    "expectedFirstTwo": [
+      124,
+      132
+    ],
+    "wicFirstTwo": [
+      124,
+      132
+    ],
+    "ffUnique": [
+      128
+    ],
+    "pass": true
+  },
+  {
+    "relation": "JPEG-SCALE-GRID",
+    "name": "hold-cb-ac3-64",
+    "output": [
+      1024,
+      16
+    ],
+    "defaultCb": [
+      1024,
+      16
+    ],
+    "preserveCb": [
+      512,
+      8
+    ],
+    "pass": true
+  },
+  {
+    "relation": "ICC-SYSTEM-EXACT + EXIF-ONLY",
+    "name": "hold-icc-dark-grid",
+    "systemMax": 0,
+    "orientationMax": 0,
+    "oldLcmsResult": {
+      "intent": 0,
+      "flags": 0,
+      "max": 3,
+      "mean": 0.3358908780903666,
+      "p95": 2.0,
+      "exactFraction": 0.7382779198635976
+    },
+    "pass": true,
+    "oldLcmsStillFail": true
+  },
+  {
+    "relation": "ICC-SYSTEM-EXACT + EXIF-ONLY",
+    "name": "hold-icc-rotated",
+    "systemMax": 0,
+    "orientationMax": 0,
+    "oldLcmsResult": {
+      "intent": 0,
+      "flags": 0,
+      "max": 3,
+      "mean": 0.32310315430520037,
+      "p95": 2.0,
+      "exactFraction": 0.7476555839727195
+    },
+    "pass": true,
+    "oldLcmsStillFail": true
+  },
+  {
+    "relation": "ICC-ORACLE-DOMAIN",
+    "name": "hold-icc-dark-grid",
+    "maxVsLcms": 0.0,
+    "maxVsWic": 3.0,
+    "grayExpected": [
+      0.0,
+      12.993720092745887,
+      25.99729414581485,
+      38.99450516003743,
+      52.00112605014981,
+      65.00094932460024,
+      78.00046002907649,
+      90.99820713440172,
+      103.9947910698214,
+      116.99482091299647,
+      129.99414202298217,
+      142.99329580460054,
+      155.99263090486178,
+      168.99328816605683,
+      181.9914336120554,
+      194.99094857457894,
+      207.99021878490595
+    ],
+    "pass": true
+  },
+  {
+    "relation": "ICC-ORACLE-DOMAIN",
+    "name": "hold-icc-rotated",
+    "maxVsLcms": 0.0,
+    "maxVsWic": 3.0,
+    "grayExpected": [
+      0.0,
+      12.993720092745887,
+      25.99729414581485,
+      38.99450516003743,
+      52.00112605014981,
+      65.00094932460024,
+      78.00046002907649,
+      90.99820713440172,
+      103.9947910698214,
+      116.99482091299647,
+      129.99414202298217,
+      142.99329580460054,
+      155.99263090486178,
+      168.99328816605683,
+      181.9914336120554,
+      194.99094857457894,
+      207.99021878490595,
+      220.98910518061533,
+      233.9894687962767,
+      246.98804443031557,
+      3.9647317376158098,
+      16.95832757597361,
+      29.970674387754553
+    ],
+    "pass": true
+  }
+]

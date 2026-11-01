@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "N:\pixart\guangjing-r55-canvas-photo-preview-20261101\docs\validation\home-r55-v3-numerical-20261101\analyze_icc_mechanism.py", line 15, in <module>
+    a=(data.copy() if fmt==8 else rgb.copy())if bits==8 else(rgb.astype(np.uint16)*257);b=np.zeros_like(a);channels=4 if fmt==8 else 3;assert m.TranslateBitmapBits(t,a.ctypes.data,fmt,w,h,w*channels*(bits//8),b.ctypes.data,fmt,256*channels*(bits//8),None,None)
+                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: exception: access violation writing 0x000001DAF288F262

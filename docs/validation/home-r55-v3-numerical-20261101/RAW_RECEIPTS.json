@@ -1,0 +1,311 @@
+{
+  "privatePhotosCommitted": false,
+  "files": [
+    {
+      "origin": "capability-final-tests/capability-final.trx",
+      "path": "raw/capability-final-tests__capability-final.trx",
+      "sha256": "8fd823f4284953b7291720b493774080aacc3cc9e8a609d901a450d610f9e682",
+      "bytes": 2521
+    },
+    {
+      "origin": "capability-final.log",
+      "path": "raw/capability-final.log",
+      "sha256": "c08100ede6b50b367b25f364a71385f3074c8348976fee32c91fd39520c10ddd",
+      "bytes": 379
+    },
+    {
+      "origin": "capability-tests/capability.trx",
+      "path": "raw/capability-tests__capability.trx",
+      "sha256": "be1fe82acca8438bf648b2c80992cad06adfdf6e3b53c8b946a6726fc5e8f59b",
+      "bytes": 2521
+    },
+    {
+      "origin": "capability.log",
+      "path": "raw/capability.log",
+      "sha256": "57020c72ea520de7ed3b806d058d043d2b9a094f7acd26542a2d7a8325361d69",
+      "bytes": 367
+    },
+    {
+      "origin": "coefficient-generation.log",
+      "path": "raw/coefficient-generation.log",
+      "sha256": "e452a8b8dfa29cb937cc0cd25a27ef879b8b2c726eadf1ae0fc7e79427fea7e1",
+      "bytes": 1983
+    },
+    {
+      "origin": "coefficient-tests/coefficient.trx",
+      "path": "raw/coefficient-tests__coefficient.trx",
+      "sha256": "6afb2446a89103959d9bc7e6b1ab6bc323181e699b12362e8f45aecc104600ac",
+      "bytes": 2465
+    },
+    {
+      "origin": "coefficient.log",
+      "path": "raw/coefficient.log",
+      "sha256": "c83a75849afe2d2dc097182f6f3c4df0dda97ea61e659c1398e4c3f6d0a2b75a",
+      "bytes": 370
+    },
+    {
+      "origin": "coefficients-analysis.log",
+      "path": "raw/coefficients-analysis.log",
+      "sha256": "5e4ac4e4dd3dd12e2703f9db2bb6e841497da9f7131a500a01af61b6e8cc0173",
+      "bytes": 13903
+    },
+    {
+      "origin": "contract-holdout-icc.log",
+      "path": "raw/contract-holdout-icc.log",
+      "sha256": "79aeda6b86324ef1eaabf5dee9c58b6d466f3d66296df2631f3972cd9fe2da06",
+      "bytes": 17606
+    },
+    {
+      "origin": "contract-holdout-oracle-dark.log",
+      "path": "raw/contract-holdout-oracle-dark.log",
+      "sha256": "a768fd292695ef4fe71889f84df5cfd9a81bc63431b392cf7b9309453e259472",
+      "bytes": 1859
+    },
+    {
+      "origin": "contract-holdout-oracle-rotated.log",
+      "path": "raw/contract-holdout-oracle-rotated.log",
+      "sha256": "248bca07b8a0a2c9fad226c8b3be9980bb51b1a6cb71fc663c527cb29b7e38fa",
+      "bytes": 2289
+    },
+    {
+      "origin": "contract-holdout-tests/contract-holdout.trx",
+      "path": "raw/contract-holdout-tests__contract-holdout.trx",
+      "sha256": "47cfd116ade0289cc16668b277ebf74c2e3f74a5ad740018160230cd9f17ab45",
+      "bytes": 2465
+    },
+    {
+      "origin": "contract-holdout.log",
+      "path": "raw/contract-holdout.log",
+      "sha256": "81dfc3918bf3d85e9f0d5ed51ba97cff13c3fd498085dbc065eec355db011e68",
+      "bytes": 380
+    },
+    {
+      "origin": "final-probe-build.log",
+      "path": "raw/final-probe-build.log",
+      "sha256": "8aadc27106e444342bdb467f0d9d39a7a5a93b0a336ce67ecb08fe0c49139304",
+      "bytes": 320162
+    },
+    {
+      "origin": "final-stage-tests/final-stages.trx",
+      "path": "raw/final-stage-tests__final-stages.trx",
+      "sha256": "dbe3c7248d7483c52bbc6f37913133d7d78e98f520de81d7a61a0c63485b5acf",
+      "bytes": 2465
+    },
+    {
+      "origin": "final-stages.log",
+      "path": "raw/final-stages.log",
+      "sha256": "5b63aa8b729ab82152ba2f4076c147f52873258e30bd5c96d1e1bce406021ac3",
+      "bytes": 368
+    },
+    {
+      "origin": "holdout-contract-verification.log",
+      "path": "raw/holdout-contract-verification.log",
+      "sha256": "d21dd2c12fe000b7fd997afb3ca3dd75c137cb6a1e3d2dde1e6cec38ba5790d1",
+      "bytes": 2630
+    },
+    {
+      "origin": "holdout-final.log",
+      "path": "raw/holdout-final.log",
+      "sha256": "d21dd2c12fe000b7fd997afb3ca3dd75c137cb6a1e3d2dde1e6cec38ba5790d1",
+      "bytes": 2630
+    },
+    {
+      "origin": "holdout-icc-analysis.log",
+      "path": "raw/holdout-icc-analysis.log",
+      "sha256": "76e6838c5ab9506419244b69ab601f21913e1542eebe9875e46007ae59eb7898",
+      "bytes": 17603
+    },
+    {
+      "origin": "holdout-oracle-dark-corrected.log",
+      "path": "raw/holdout-oracle-dark-corrected.log",
+      "sha256": "92e3ed8527c6526717101530f1def3dcd930dfa5908f09334a6f6c7a00d762a2",
+      "bytes": 1984
+    },
+    {
+      "origin": "holdout-oracle-dark-final.log",
+      "path": "raw/holdout-oracle-dark-final.log",
+      "sha256": "a74ce09679833b4093463cbb740b508f06d293be02078d1edf90af357e786bdc",
+      "bytes": 783
+    },
+    {
+      "origin": "holdout-oracle-dark.log",
+      "path": "raw/holdout-oracle-dark.log",
+      "sha256": "4047c23088729147c7c88a5cb6a81254bcb273222063860ee96fe34f79fbb42c",
+      "bytes": 430
+    },
+    {
+      "origin": "holdout-oracle-guarded.log",
+      "path": "raw/holdout-oracle-guarded.log",
+      "sha256": "92e3ed8527c6526717101530f1def3dcd930dfa5908f09334a6f6c7a00d762a2",
+      "bytes": 1984
+    },
+    {
+      "origin": "holdout-oracle-rotated-corrected.log",
+      "path": "raw/holdout-oracle-rotated-corrected.log",
+      "sha256": "248bca07b8a0a2c9fad226c8b3be9980bb51b1a6cb71fc663c527cb29b7e38fa",
+      "bytes": 2289
+    },
+    {
+      "origin": "holdout-oracle-rotated-final.log",
+      "path": "raw/holdout-oracle-rotated-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "origin": "holdout-oracle-rotated.log",
+      "path": "raw/holdout-oracle-rotated.log",
+      "sha256": "4047c23088729147c7c88a5cb6a81254bcb273222063860ee96fe34f79fbb42c",
+      "bytes": 430
+    },
+    {
+      "origin": "holdout-tests/holdout.trx",
+      "path": "raw/holdout-tests__holdout.trx",
+      "sha256": "b8968133e8acdb45a935577624dabe1207ce57df19180a4ceef6226dc92e4280",
+      "bytes": 2465
+    },
+    {
+      "origin": "holdout-verification-final.log",
+      "path": "raw/holdout-verification-final.log",
+      "sha256": "59c246b0cf1d479fc5f155c64d57aabc88b9c276f7c5cb593a668fb474c459d5",
+      "bytes": 2628
+    },
+    {
+      "origin": "holdout-verification.log",
+      "path": "raw/holdout-verification.log",
+      "sha256": "97c66f34b8c9dc6d7e7746f07fc50e80c1f99a251f58c7c7804763a8f49843c6",
+      "bytes": 1244
+    },
+    {
+      "origin": "holdout.log",
+      "path": "raw/holdout.log",
+      "sha256": "d199d833d0fad591d56113db6fc4672e762c87c78adf3f71f75aaf594f77f338",
+      "bytes": 362
+    },
+    {
+      "origin": "icc-analysis.log",
+      "path": "raw/icc-analysis.log",
+      "sha256": "5c95626bc915e83822b4c181a9013f676888226c27923c8b7c8346d1992ef5ba",
+      "bytes": 27022
+    },
+    {
+      "origin": "icc-corrected-analysis.log",
+      "path": "raw/icc-corrected-analysis.log",
+      "sha256": "36b92bd923aed165cbb427b9daff7c2fe4719e7ca50239e76e5317fea2e72781",
+      "bytes": 26253
+    },
+    {
+      "origin": "icc-hold-options-complete.log",
+      "path": "raw/icc-hold-options-complete.log",
+      "sha256": "7534689a0a63b405316e113ca773b4129499a8ef4921da99b8ff5cb175c24878",
+      "bytes": 23614
+    },
+    {
+      "origin": "icc-mechanism-final.log",
+      "path": "raw/icc-mechanism-final.log",
+      "sha256": "6e582be19ce8cbe9532bae94d75fa63195ed8bab5b615bff2e115fea26701f03",
+      "bytes": 2144
+    },
+    {
+      "origin": "icc-mechanism.log",
+      "path": "raw/icc-mechanism.log",
+      "sha256": "3b292ea51cb7a6b7835f07a0ad1f2038da57c2dc2eec1c5ac3a613fc3e3b7329",
+      "bytes": 1722
+    },
+    {
+      "origin": "icc-options-complete.log",
+      "path": "raw/icc-options-complete.log",
+      "sha256": "0174ea160ce50c2b30d33f51ce68e802f805d223dd582c7077dfe20a1a845724",
+      "bytes": 35273
+    },
+    {
+      "origin": "icc-precision-final.log",
+      "path": "raw/icc-precision-final.log",
+      "sha256": "95b4aec2c041d4a44940cd8317b8dcc4b177979ee7028139676ce80295cbf109",
+      "bytes": 25991
+    },
+    {
+      "origin": "icc-precision.log",
+      "path": "raw/icc-precision.log",
+      "sha256": "95b4aec2c041d4a44940cd8317b8dcc4b177979ee7028139676ce80295cbf109",
+      "bytes": 25991
+    },
+    {
+      "origin": "icc-ramp-analysis.log",
+      "path": "raw/icc-ramp-analysis.log",
+      "sha256": "99835d1bb2b4d9c71b7acb06a50213622d86c6dd45ebc1c208b81e123855068d",
+      "bytes": 8730
+    },
+    {
+      "origin": "icc-ramp-tests/icc-ramps.trx",
+      "path": "raw/icc-ramp-tests__icc-ramps.trx",
+      "sha256": "63822ecb9f4dcaa749a87f3f2f085c6934f3a8064f74683acb33828ec7df5673",
+      "bytes": 2465
+    },
+    {
+      "origin": "icc-ramps.log",
+      "path": "raw/icc-ramps.log",
+      "sha256": "b4e5b07105725a7943357b1b348785583fd4d86746982338ba75a4d6f9fb5957",
+      "bytes": 365
+    },
+    {
+      "origin": "jpeg-analysis.log",
+      "path": "raw/jpeg-analysis.log",
+      "sha256": "2b676b0c50d24bb5a85b2b9000fb441bdae8f7eafc1722ce29ad04d4ebf29f9c",
+      "bytes": 16043
+    },
+    {
+      "origin": "original-gates-replay.log",
+      "path": "raw/original-gates-replay.log",
+      "sha256": "951e883930b5538197c771ee8daeee963564ce3e93f9347750ec020c0b365d87",
+      "bytes": 2675
+    },
+    {
+      "origin": "probe-build.log",
+      "path": "raw/probe-build.log",
+      "sha256": "26ea615897f24fd1b81c12fe2c43d00703dc6c18c664644245d16f2701f5fb79",
+      "bytes": 320162
+    },
+    {
+      "origin": "reconstruction.log",
+      "path": "raw/reconstruction.log",
+      "sha256": "3c0f9a7e0b09d0089e0df9de61cf8c797faeedeb3e131749ad7a80078d2c0e83",
+      "bytes": 11559
+    },
+    {
+      "origin": "regression-tests/regression.trx",
+      "path": "raw/regression-tests__regression.trx",
+      "sha256": "e59a19ff2729c2de28031138ad122bccfb5add65bac0471c54852b341c217c93",
+      "bytes": 44878
+    },
+    {
+      "origin": "regression.log",
+      "path": "raw/regression.log",
+      "sha256": "563253b526c5f281978753d9b550c62b8dac4bcabc20c0c1ddc2a1d9cf4db1ae",
+      "bytes": 366
+    },
+    {
+      "origin": "reopen-tests/reopen.trx",
+      "path": "raw/reopen-tests__reopen.trx",
+      "sha256": "98f9111826a09620befe6cc02c9b49931ef6a90a2b34f3e9b6f5869d4c7e0278",
+      "bytes": 3798
+    },
+    {
+      "origin": "reopen.log",
+      "path": "raw/reopen.log",
+      "sha256": "6c323721d1ae86dab770eb1642bc568c7b5425ae8a022b3dbe065f85f7b7631b",
+      "bytes": 360
+    },
+    {
+      "origin": "stage-tests/stages.trx",
+      "path": "raw/stage-tests__stages.trx",
+      "sha256": "dbf986b96b6f8da556537a17990753e2bbb715914fdc66e5a8187cccbb5aaad2",
+      "bytes": 2465
+    },
+    {
+      "origin": "stages.log",
+      "path": "raw/stages.log",
+      "sha256": "37a54d6064ef438cb5d0d256619c1efff3530f1fee388a387160e9145ef645dd",
+      "bytes": 356
+    }
+  ]
+}

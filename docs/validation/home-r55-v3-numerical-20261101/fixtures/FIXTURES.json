@@ -1,0 +1,72 @@
+[
+  {
+    "name": "dc-444",
+    "sha256": "db50250a98f8afff9758f526972d129dee0b0c77987d374f13e8847c86bdc754",
+    "width": 4096,
+    "height": 64,
+    "sampling": 0,
+    "component": 0,
+    "u": 0,
+    "amplitude": 0,
+    "quantization": 1,
+    "profile": false,
+    "orientation": false,
+    "provenance": "Original coefficient-defined deterministic JPEG, not a photograph"
+  },
+  {
+    "name": "y-ac1-444",
+    "sha256": "75473766e1d4ec269d2b7e3270ff3231e0fab8b699e1e55bdfbabb79a0d6939b",
+    "width": 4096,
+    "height": 64,
+    "sampling": 0,
+    "component": 0,
+    "u": 1,
+    "amplitude": 80,
+    "quantization": 1,
+    "profile": false,
+    "orientation": false,
+    "provenance": "Original coefficient-defined deterministic JPEG, not a photograph"
+  },
+  {
+    "name": "y-ac3-444",
+    "sha256": "351daa77b463c99abeeb8dc70386f07398327823e5d714381bec05985c3f8903",
+    "width": 4096,
+    "height": 64,
+    "sampling": 0,
+    "component": 0,
+    "u": 3,
+    "amplitude": 80,
+    "quantization": 1,
+    "profile": false,
+    "orientation": false,
+    "provenance": "Original coefficient-defined deterministic JPEG, not a photograph"
+  },
+  {
+    "name": "cb-ac3-420",
+    "sha256": "4cd2e6f1bf92dc4e405be67d90b42bd58314472bb15af1c39f989ee8035dd48a",
+    "width": 4096,
+    "height": 64,
+    "sampling": 2,
+    "component": 1,
+    "u": 3,
+    "amplitude": 80,
+    "quantization": 1,
+    "profile": false,
+    "orientation": false,
+    "provenance": "Original coefficient-defined deterministic JPEG, not a photograph"
+  },
+  {
+    "name": "cr-ac1-420",
+    "sha256": "9f9de5df0fb07eae9e176b3854f05865b2090b7ea765bda16f29150b20c9389f",
+    "width": 4096,
+    "height": 64,
+    "sampling": 2,
+    "component": 2,
+    "u": 1,
+    "amplitude": 80,
+    "quantization": 1,
+    "profile": false,
+    "orientation": false,
+    "provenance": "Original coefficient-defined deterministic JPEG, not a photograph"
+  }
+]

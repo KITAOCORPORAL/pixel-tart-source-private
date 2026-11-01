@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="bdb6513f-245c-4870-851f-9ca37c779308" name="Admin@DESKTOP-HO0JJEQ 2026-11-01 23:17:32" runUser="DESKTOP-HO0JJEQ\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-01T23:17:32.2059846+08:00" queuing="2026-11-01T23:17:32.2059848+08:00" start="2026-11-01T23:17:31.4925744+08:00" finish="2026-11-01T23:17:32.2095567+08:00" />
+  <TestSettings name="default" id="5da2acbb-ef75-4378-98a5-982b8d1798a9">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-HO0JJEQ_2026-11-01_23_17_32" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="13746659-6968-4702-8189-cd68ce24b63c" testId="1de0b26a-4e06-8f4b-a665-b505f11248ce" testName="ExtractNativeColorAndOrientationStages" computerName="DESKTOP-HO0JJEQ" duration="00:00:00.1814748" startTime="2026-11-01T23:17:31.9242829+08:00" endTime="2026-11-01T23:17:32.1195873+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="13746659-6968-4702-8189-cd68ce24b63c" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ExtractNativeColorAndOrientationStages" storage="n:/pixart/guangjing-r55-v3-numerical-20261101/testhost/rawselectionassistant.wpftests.dll" id="1de0b26a-4e06-8f4b-a665-b505f11248ce">
+      <Execution id="13746659-6968-4702-8189-cd68ce24b63c" />
+      <TestMethod codeBase="N:/pixart/Guangjing-R55-V3-Numerical-20261101/testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.V3NumericalStageTests" name="ExtractNativeColorAndOrientationStages" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1de0b26a-4e06-8f4b-a665-b505f11248ce" executionId="13746659-6968-4702-8189-cd68ce24b63c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

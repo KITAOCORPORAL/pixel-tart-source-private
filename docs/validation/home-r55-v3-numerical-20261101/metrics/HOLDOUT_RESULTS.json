@@ -1,0 +1,129 @@
+{
+  "contractSha256": "a21a68ffbaafbdb1d386885f8e227f07df5d6dea33d0c21ec7d82345287f7ed4",
+  "relations": [
+    {
+      "relation": "JPEG-IDCT-AREA",
+      "name": "hold-y-ac3-96",
+      "expectedFirstTwo": [
+        124,
+        132
+      ],
+      "wicFirstTwo": [
+        124,
+        132
+      ],
+      "ffUnique": [
+        128
+      ],
+      "pass": true
+    },
+    {
+      "relation": "JPEG-SCALE-GRID",
+      "name": "hold-cb-ac3-64",
+      "output": [
+        1024,
+        16
+      ],
+      "defaultCb": [
+        1024,
+        16
+      ],
+      "preserveCb": [
+        512,
+        8
+      ],
+      "pass": true
+    },
+    {
+      "relation": "ICC-SYSTEM-EXACT + EXIF-ONLY",
+      "name": "hold-icc-dark-grid",
+      "systemMax": 0,
+      "orientationMax": 0,
+      "oldLcmsResult": {
+        "intent": 0,
+        "flags": 0,
+        "max": 3,
+        "mean": 0.3793691389599318,
+        "p95": 2.0,
+        "exactFraction": 0.7212276214833759
+      },
+      "pass": true,
+      "oldLcmsStillFail": true
+    },
+    {
+      "relation": "ICC-SYSTEM-EXACT + EXIF-ONLY",
+      "name": "hold-icc-rotated",
+      "systemMax": 0,
+      "orientationMax": 0,
+      "oldLcmsResult": {
+        "intent": 0,
+        "flags": 0,
+        "max": 3,
+        "mean": 0.32310315430520037,
+        "p95": 2.0,
+        "exactFraction": 0.7476555839727195
+      },
+      "pass": true,
+      "oldLcmsStillFail": true
+    },
+    {
+      "relation": "ICC-ORACLE-DOMAIN",
+      "name": "hold-icc-dark-grid",
+      "maxVsLcms": 0.0,
+      "maxVsWic": 3.0,
+      "grayExpected": [
+        0.0,
+        0.9913886836296402,
+        1.9827773672592803,
+        3.024019423322938,
+        4.015408106952577,
+        5.006796790582218,
+        5.9981854742118585,
+        6.989574157841498,
+        7.980962841471138,
+        9.022204897534795,
+        10.013593581164436,
+        10.983301383378896,
+        12.003643799887804,
+        12.993137435298411,
+        13.991488013286597,
+        14.999433445615079,
+        16.008465029855945
+      ],
+      "pass": true
+    },
+    {
+      "relation": "ICC-ORACLE-DOMAIN",
+      "name": "hold-icc-rotated",
+      "maxVsLcms": 0.0,
+      "maxVsWic": 3.0,
+      "grayExpected": [
+        0.0,
+        12.993720092745887,
+        25.99729414581485,
+        38.99450516003743,
+        52.00112605014981,
+        65.00094932460024,
+        78.00046002907649,
+        90.99820713440172,
+        103.9947910698214,
+        116.99482091299647,
+        129.99414202298217,
+        142.99329580460054,
+        155.99263090486178,
+        168.99328816605683,
+        181.9914336120554,
+        194.99094857457894,
+        207.99021878490595,
+        220.98910518061533,
+        233.9894687962767,
+        246.98804443031557,
+        3.9647317376158098,
+        16.95832757597361,
+        29.970674387754553
+      ],
+      "pass": true
+    }
+  ],
+  "scope": "Frozen diagnostic relation passed; original cross-engine acceptance FAIL retained"
+}

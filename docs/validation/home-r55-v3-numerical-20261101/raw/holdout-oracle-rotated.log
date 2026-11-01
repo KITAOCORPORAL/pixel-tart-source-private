@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "N:\pixart\guangjing-r55-canvas-photo-preview-20261101\docs\validation\home-r55-v3-numerical-20261101\analyze_icc_mechanism.py", line 22, in <module>
+    x=tags(s/name+'-source.icc');y=tags(s/'wic-target.icc');fixed=lambda b:np.array(struct.unpack('>'+str(len(b)//4)+'i',b))/65536
+           ~~~~~~^~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'WindowsPath' and 'str'

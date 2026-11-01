@@ -1,0 +1,90 @@
+[
+  {
+    "repo": "libjpeg-turbo/libjpeg-turbo",
+    "commit": "9217719d3a58633923b096af4c1d50d304768a64",
+    "files": [
+      {
+        "file": "installed-jdmaster.c",
+        "sha256": "aeaf73d414cdac5fe34c9c5ae3594a22433c241e56da927d8d77231ee9663c7d",
+        "bytes": 34678
+      },
+      {
+        "file": "installed-jidctred.c",
+        "sha256": "39350089fa43432f299f49412f2b43d1d15974c3570a114df87b2946bfe623f4",
+        "bytes": 14563
+      },
+      {
+        "file": "installed-jdsample.c",
+        "sha256": "7736ee967c5df3afaa0f86e7638bd550e67774b670d484e070d9f8685ced12c0",
+        "bytes": 19070
+      }
+    ],
+    "distribution": "read-only source reference; external code not copied into product/test algorithms; actual system closed-source remains unknown",
+    "license": "IJG/BSD/zlib multiple components; only reference source read, no redistribution of implementation"
+  },
+  {
+    "repo": "FFmpeg/FFmpeg",
+    "commit": "946fcce07b6dcd0331c8cc609192aeff5e1924f8",
+    "files": [
+      {
+        "file": "idctdsp.c",
+        "sha256": "f3c97a39f0861a43e70516a6e6fb0d9f0195a391cc3ef3b8d4c6100696407596",
+        "bytes": 10358
+      },
+      {
+        "file": "jrevdct.c",
+        "sha256": "7e8d6215664de8f620e94a7d6304f19675bc5174a9db4cb86611749e188c35bc",
+        "bytes": 44399
+      }
+    ],
+    "distribution": "read-only source reference; external code not copied into product/test algorithms; actual system closed-source remains unknown",
+    "license": "GPL configured external FFmpeg build, LGPL/GPL source files read only; no code or engine copied"
+  },
+  {
+    "repo": "mm2/Little-CMS",
+    "commit": "b76633e60c8387a77268fb3359277ca25b5fd75c",
+    "files": [
+      {
+        "file": "cmsopt.c",
+        "sha256": "7f2a07bb7c7228cd76232e06234a9ec67fa4c29182098986efa2792c8bf96d61",
+        "bytes": 66265
+      },
+      {
+        "file": "cmscnvrt.c",
+        "sha256": "e5710de5e8eca8bfc2c79d5fee0fc1b81ecb77e59b32fbc6ca26c94bcb758c7d",
+        "bytes": 43942
+      }
+    ],
+    "distribution": "read-only source reference; external code not copied into product/test algorithms; actual system closed-source remains unknown",
+    "license": "MIT; existing LCMS2.12 DLL and Pillow embedded2.19 are external diagnostic references, product unchanged"
+  },
+  {
+    "repo": "dotnet/wpf",
+    "commit": "dbd3026982f09a279e4595666c07bb6136f579c3",
+    "files": [
+      {
+        "file": "ColorConvertedBitmap.cs",
+        "sha256": "b31b797a04c12695525abaad8a8dfe10d41841f8ff0e955ddaf109ac8203b492",
+        "bytes": 8486
+      },
+      {
+        "file": "ColorTransformHelper.cs",
+        "sha256": "da1fa9c7693d79f4f38dc27ac635c32c0d6b033be99d09faa86a8fb5f43176cc",
+        "bytes": 4730
+      }
+    ],
+    "distribution": "read-only source reference; external code not copied into product/test algorithms; actual system closed-source remains unknown",
+    "license": "MIT; WPF source used to verify wrapper call only, not closed WIC internals"
+  },
+  {
+    "repo": "python-pillow/Pillow",
+    "commit": "bb1d8e8ab8d29048624d96e3ee53cecf7c13d13d",
+    "sourceEntry": "src/libImaging/JpegDecode.c; src/_imagingcms.c",
+    "runtime": "Pillow12.3.0, embedded libjpeg3.1.4.1, LCMS2.19",
+    "runtimeSha256": {
+      "imaging": "c8c519ec72bf75b2945b4fc4afa854af2fca8b970a403134f9ddda3e164d85e9",
+      "imagingCms": "c89c633ae1bf3f26a327d14ff688db66628e19c9866ab925479f27dcb60a2d6f"
+    },
+    "distribution": "External existing Python tools only; no new dependency copied into product"
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "productSource": "146c0fd254de387ad5ccb9570cff6c54697389d4",
+  "productChanged": false,
+  "automated": {
+    "relatedRegression": {
+      "passed": 34,
+      "failed": 0,
+      "notRun": 0
+    },
+    "independentReopen": {
+      "passed": 2,
+      "failed": 0,
+      "notRun": 0
+    },
+    "stageExtractor": {
+      "uniqueMethods": 1,
+      "finalPassed": 1,
+      "additionalFixtureRuns": 4
+    },
+    "note": "34 regression +2 independent reopen +1 unique staged method +1 capability consistency =38; fixture replay invocations not added as unique methods",
+    "capabilityConsistency": {
+      "passed": 1,
+      "failed": 0,
+      "notRun": 0
+    },
+    "uniqueFinalMethods": {
+      "passed": 38,
+      "failed": 0,
+      "notRun": 0
+    }
+  },
+  "frozenDiagnosticRelations": {
+    "passed": 6,
+    "oldAcceptanceReclassified": false
+  },
+  "numericalAcceptance": {
+    "pass": 6,
+    "fail": 3,
+    "overallPass": false,
+    "exitCode": 1
+  },
+  "historicalNotRerun": [
+    "SYMLINK privilege",
+    "LCMS missing reference"
+  ],
+  "scope": "No full product rerun; no pixel source mutation; source/budget/cache/atomic save/project switching/reopen compatibility regressions selected",
+  "testSupport": "fa171e47f5d3b3921676fb11afa0bb5a996338a6"
+}

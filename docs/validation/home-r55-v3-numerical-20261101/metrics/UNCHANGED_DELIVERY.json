@@ -1,0 +1,22 @@
+{
+  "packageIntegrity": "PASS",
+  "sha256": "d394e3ab463531f66eb4ae74ef571becb26bec20754965ef07251a35c560cf5d",
+  "fileCount": 294,
+  "bytes": 77254817,
+  "bindings": [
+    {
+      "receipt": "PUBLISHED_BINDING.json",
+      "matchedDllCount": 20
+    },
+    {
+      "receipt": "CORE_BINDING.json",
+      "matchedDllCount": 9
+    },
+    {
+      "receipt": "RESUME_BINDING.json",
+      "matchedDllCount": 20
+    }
+  ],
+  "productSource": "146c0fd254de387ad5ccb9570cff6c54697389d4",
+  "scope": "Archive and DLL integrity only; numerical/physical acceptance is separate"
+}

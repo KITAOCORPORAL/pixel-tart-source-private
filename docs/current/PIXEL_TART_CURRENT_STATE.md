@@ -1,7 +1,7 @@
 # Pixel Tart current capability state
 
-Generated: 2026-11-01T10:32:41.9640421+00:00
-Generated from source HEAD: 5d94691b34f8762532199e991d7b2b44852b1b47
+Generated: 2026-11-01T15:45:04.6919860+00:00
+Generated from source HEAD: fa171e47f5d3b3921676fb11afa0bb5a996338a6
 Branch: home/r55-canvas-photo-preview-20261101
 
 | Capability | Implementation | Verification | Evidence | Next gate |
@@ -25,6 +25,6 @@ Branch: home/r55-canvas-photo-preview-20261101
 | GPUFullPixel | PARTIAL | NOT_RUN | src/PixelTart.MatchV4.Dx12/<br>docs/color-studio/COLOR_MATCH_GPU_CURRENT_STATE_2026-09-28.md | Full product integration |
 | ICCRegistry | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Color/ColorProfileRegistry.cs<br>docs/color-studio/ICC_PIPELINE_AUDIT.md | Validated conversion |
 | ICCConversion | PARTIAL | NOT_RUN | src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs | Pixel conversion validation |
-| PlanningCanvasPhotoPreviewV3 | PARTIAL | FAIL | src/PixelTart.Modules.AssetLibrary/FreeCanvas/CanvasPhotoPreviewSession.cs<br>src/PixelTart.Modules.AssetLibrary/FreeCanvas/CanvasJpegNativePreview.cs<br>src/RAWSelectionAssistant/Services/PlanningCanvasSnapshot.cs | Independent ICC and subsampled-JPEG second-reference thresholds remain unmet; native pointer/DPI/ACM/HDR not tested. No production scientific approval. |
+| PlanningCanvasPhotoPreviewV3 | PARTIAL | FAIL | src/PixelTart.Modules.AssetLibrary/FreeCanvas/CanvasPhotoPreviewSession.cs<br>src/PixelTart.Modules.AssetLibrary/FreeCanvas/CanvasJpegNativePreview.cs<br>src/RAWSelectionAssistant/Services/PlanningCanvasSnapshot.cs | JPEG/ICC stage attribution closed by heldout contract; original cross-engine acceptance thresholds remain FAIL. Pre-existing photographic ICC+orientation source not found; physical validation not run. No need to re-diagnose known kernel/CMM differences. |
 
 This file is generated from the explicit mapping in `scripts/generate-current-capabilities.ps1`. Historical acceptance and roadmap documents remain preserved evidence, not the current source of truth.

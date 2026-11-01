@@ -1,0 +1,869 @@
+[
+  {
+    "name": "neutral-0",
+    "factor": 1,
+    "sampling": [
+      [
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        3,
+        1,
+        1,
+        1
+      ]
+    ],
+    "width": 512,
+    "height": 384,
+    "planes": [
+      {
+        "options": 0,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      }
+    ],
+    "planarToWicRgb601": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    },
+    "pillowNative": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    }
+  },
+  {
+    "name": "neutral-2",
+    "factor": 1,
+    "sampling": [
+      [
+        1,
+        2,
+        2,
+        0
+      ],
+      [
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        3,
+        1,
+        1,
+        1
+      ]
+    ],
+    "width": 512,
+    "height": 384,
+    "planes": [
+      {
+        "options": 0,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      }
+    ],
+    "pillowNative": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    }
+  },
+  {
+    "name": "chroma-0",
+    "factor": 1,
+    "sampling": [
+      [
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        3,
+        1,
+        1,
+        1
+      ]
+    ],
+    "width": 512,
+    "height": 384,
+    "planes": [
+      {
+        "options": 0,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.03515625,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.03515625,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      }
+    ],
+    "planarToWicRgb601": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    },
+    "pillowNative": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    }
+  },
+  {
+    "name": "chroma-2",
+    "factor": 1,
+    "sampling": [
+      [
+        1,
+        2,
+        2,
+        0
+      ],
+      [
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        3,
+        1,
+        1,
+        1
+      ]
+    ],
+    "width": 512,
+    "height": 384,
+    "planes": [
+      {
+        "options": 0,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.0390625,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.020833333333333332,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.0390625,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.020833333333333332,
+          "p95": 0.0
+        }
+      }
+    ],
+    "pillowNative": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    }
+  },
+  {
+    "name": "checker-0",
+    "factor": 1,
+    "sampling": [
+      [
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        3,
+        1,
+        1,
+        1
+      ]
+    ],
+    "width": 512,
+    "height": 384,
+    "planes": [
+      {
+        "options": 0,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.008697509765625,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.01171875,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.036458333333333336,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.008697509765625,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.01171875,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.036458333333333336,
+          "p95": 0.0
+        }
+      }
+    ],
+    "planarToWicRgb601": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    },
+    "pillowNative": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    }
+  },
+  {
+    "name": "checker-2",
+    "factor": 1,
+    "sampling": [
+      [
+        1,
+        2,
+        2,
+        0
+      ],
+      [
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        3,
+        1,
+        1,
+        1
+      ]
+    ],
+    "width": 512,
+    "height": 384,
+    "planes": [
+      {
+        "options": 0,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.008697509765625,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.01171875,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.036458333333333336,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.008697509765625,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.01171875,
+          "p95": 0.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 1,
+          "mean": 0.036458333333333336,
+          "p95": 0.0
+        }
+      }
+    ],
+    "pillowNative": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    }
+  },
+  {
+    "name": "photo24",
+    "factor": 4,
+    "sampling": [
+      [
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        3,
+        1,
+        1,
+        1
+      ]
+    ],
+    "width": 1500,
+    "height": 1000,
+    "planes": [
+      {
+        "options": 0,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 15,
+          "mean": 0.6051093333333334,
+          "p95": 2.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 7,
+          "mean": 0.3188973333333333,
+          "p95": 1.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 5,
+          "mean": 0.345618,
+          "p95": 1.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 15,
+          "mean": 0.6051093333333334,
+          "p95": 2.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 7,
+          "mean": 0.3188973333333333,
+          "p95": 1.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 5,
+          "mean": 0.345618,
+          "p95": 1.0
+        }
+      }
+    ],
+    "planarToWicRgb601": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    },
+    "pillowNative": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    }
+  },
+  {
+    "name": "photo33",
+    "factor": 4,
+    "sampling": [
+      [
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        3,
+        1,
+        1,
+        1
+      ]
+    ],
+    "width": 1752,
+    "height": 1168,
+    "planes": [
+      {
+        "options": 0,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 15,
+          "mean": 0.6264117916119347,
+          "p95": 2.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 7,
+          "mean": 0.2994566874648152,
+          "p95": 1.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 4,
+          "mean": 0.3270049493338337,
+          "p95": 1.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 15,
+          "mean": 0.6264117916119347,
+          "p95": 2.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 7,
+          "mean": 0.2994566874648152,
+          "p95": 1.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 4,
+          "mean": 0.3270049493338337,
+          "p95": 1.0
+        }
+      }
+    ],
+    "planarToWicRgb601": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    },
+    "pillowNative": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    }
+  },
+  {
+    "name": "photo24-420",
+    "factor": 4,
+    "sampling": [
+      [
+        1,
+        2,
+        2,
+        0
+      ],
+      [
+        2,
+        1,
+        1,
+        1
+      ],
+      [
+        3,
+        1,
+        1,
+        1
+      ]
+    ],
+    "width": 1500,
+    "height": 1000,
+    "planes": [
+      {
+        "options": 0,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 15,
+          "mean": 0.604728,
+          "p95": 2.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 1,
+        "against": "FF chroma one larger IDCT block",
+        "error": {
+          "max": 6,
+          "mean": 0.2323,
+          "p95": 1.0
+        }
+      },
+      {
+        "options": 0,
+        "channel": 2,
+        "against": "FF chroma one larger IDCT block",
+        "error": {
+          "max": 7,
+          "mean": 0.279432,
+          "p95": 1.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 0,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 15,
+          "mean": 0.604728,
+          "p95": 2.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 1,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 3,
+          "mean": 0.22447733333333333,
+          "p95": 1.0
+        }
+      },
+      {
+        "options": 1,
+        "channel": 2,
+        "against": "FF same reduced IDCT",
+        "error": {
+          "max": 3,
+          "mean": 0.24340266666666666,
+          "p95": 1.0
+        }
+      }
+    ],
+    "planarToWicRgb601": {
+      "max": 1,
+      "mean": 2.2222222222222222e-07,
+      "p95": 0.0
+    },
+    "pillowNative": {
+      "max": 0,
+      "mean": 0.0,
+      "p95": 0.0
+    }
+  }
+]

@@ -1,0 +1,63 @@
+{
+  "scope": "Two v3 numerical discrepancies only",
+  "status": "DIAGNOSIS_COMPLETE_OLD_ACCEPTANCE_FAIL_RETAINED",
+  "productChanged": false,
+  "productSource": "146c0fd254de387ad5ccb9570cff6c54697389d4",
+  "items": [
+    {
+      "id": "JPEG-420-INDEPENDENT",
+      "diagnosis": "Closed stage attribution: distinct reduced-IDCT frequency kernels + component scaling + FFmpeg default low-quality chroma conversion; not just rounding",
+      "oldAcceptance": "FAIL_UNCHANGED",
+      "original": {
+        "max": 40,
+        "mean": 1.6335693333333334,
+        "p95": 4
+      },
+      "newRelation": "Frozen holdout verified WIC area AC3 response vs FF AC3 truncation, chroma grid dimensions, full-range601 reconstruction",
+      "productFix": "NOT_REQUIRED_FOR_CALL_DOMAIN_OR_IMPLEMENTATION_ERROR",
+      "equivalence": "No general byte equivalence between different kernels; WIC/Pillow exact on same native pipeline only"
+    },
+    {
+      "id": "ICC-INDEPENDENT",
+      "diagnosis": "Closed observable stage attribution: same native+profiles, WIC equals system MSCMS BEST_MODE BGRA exact; LCMS/matrixTRC oracle exact; original difference occurs in Windows CMM color/quantization stage, not orientation",
+      "oldAcceptance": "FAIL_UNCHANGED",
+      "original": {
+        "max": 3,
+        "mean": [
+          1.0234926666666666,
+          0.6597015348408082
+        ]
+      },
+      "newRelation": "Heldout Windows exact0, orientation0, independent ICC oracle vsLCMS0; oldWIC-vsLCMS3 retained",
+      "remainingUnknown": "Proprietary Windows CMM internal algorithm/implicit BPC and adaptation parameters not exposed. No claim that entire3code gap is only final8bit rounding or general ICC correctness.",
+      "productFix": "NOT_REQUIRED_FOR_CALL_DOMAIN_OR_IMPLEMENTATION_ERROR",
+      "policy": "Diagnosis is not permission to change or approve v3 ICC semantics"
+    },
+    {
+      "id": "PREEXISTING-ICC-ORIENTATION-SOURCE",
+      "status": "NOT_RUN_NO_MATCH",
+      "count": 12,
+      "roots": [
+        "RAW/Real",
+        "RAW/closure-final",
+        "RAW/closure-baseline"
+      ],
+      "reason": "No supported existing raster has both embeddedICC and orientation; generated fixtures not relabeled natural"
+    },
+    {
+      "id": "SYMLINK-PRIVILEGE",
+      "status": "HISTORICAL_FAIL_NOT_RERUN",
+      "reason": "Outside these two numeric scopes; prior raw failure retained"
+    },
+    {
+      "id": "LCMS-REFERENCE-INPUTS",
+      "status": "HISTORICAL_NOT_RUN",
+      "reason": "New two-specific-profile oracle is not missing general Bradford test input; do not relabel old NOT_RUN"
+    },
+    {
+      "id": "PHYSICAL",
+      "status": "NOT_RUN",
+      "reason": "No Browser/ComputerUse/CDP/DPI/ACM/HDR acceptance"
+    }
+  ]
+}

@@ -1,0 +1,539 @@
+[
+  {
+    "name": "photo24-420",
+    "ffmpegRGB": [
+      {
+        "filter": "nearest",
+        "matrix": "601",
+        "limited": false,
+        "vsDefault": {
+          "max": 2,
+          "mean": 0.5539964444444444,
+          "p95": 1.0
+        }
+      },
+      {
+        "filter": "nearest",
+        "matrix": "601",
+        "limited": true,
+        "vsDefault": {
+          "max": 22,
+          "mean": 10.100801555555556,
+          "p95": 15.0
+        }
+      },
+      {
+        "filter": "nearest",
+        "matrix": "709",
+        "limited": false,
+        "vsDefault": {
+          "max": 8,
+          "mean": 1.322138888888889,
+          "p95": 3.0
+        }
+      },
+      {
+        "filter": "nearest",
+        "matrix": "709",
+        "limited": true,
+        "vsDefault": {
+          "max": 26,
+          "mean": 9.874392888888888,
+          "p95": 15.0
+        }
+      },
+      {
+        "filter": "linear-center",
+        "matrix": "601",
+        "limited": false,
+        "vsDefault": {
+          "max": 19,
+          "mean": 0.7618015555555555,
+          "p95": 2.0
+        }
+      },
+      {
+        "filter": "linear-center",
+        "matrix": "601",
+        "limited": true,
+        "vsDefault": {
+          "max": 35,
+          "mean": 10.11542911111111,
+          "p95": 15.0
+        }
+      },
+      {
+        "filter": "linear-center",
+        "matrix": "709",
+        "limited": false,
+        "vsDefault": {
+          "max": 20,
+          "mean": 1.4461226666666667,
+          "p95": 3.0
+        }
+      },
+      {
+        "filter": "linear-center",
+        "matrix": "709",
+        "limited": true,
+        "vsDefault": {
+          "max": 35,
+          "mean": 9.889253555555555,
+          "p95": 15.0
+        }
+      },
+      {
+        "filter": "linear-left",
+        "matrix": "601",
+        "limited": false,
+        "vsDefault": {
+          "max": 31,
+          "mean": 0.8602673333333334,
+          "p95": 2.0
+        }
+      },
+      {
+        "filter": "linear-left",
+        "matrix": "601",
+        "limited": true,
+        "vsDefault": {
+          "max": 49,
+          "mean": 10.116476666666667,
+          "p95": 15.0
+        }
+      },
+      {
+        "filter": "linear-left",
+        "matrix": "709",
+        "limited": false,
+        "vsDefault": {
+          "max": 30,
+          "mean": 1.5106744444444444,
+          "p95": 4.0
+        }
+      },
+      {
+        "filter": "linear-left",
+        "matrix": "709",
+        "limited": true,
+        "vsDefault": {
+          "max": 48,
+          "mean": 9.892114666666666,
+          "p95": 16.0
+        }
+      }
+    ],
+    "crossKernel": [
+      {
+        "flags": "default",
+        "vsDefault": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "flags": "neighbor",
+        "vsDefault": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "flags": "bilinear",
+        "vsDefault": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "flags": "bicubic",
+        "vsDefault": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "flags": "neighbor+full_chroma_int+accurate_rnd",
+        "vsDefault": {
+          "max": 2,
+          "mean": 0.5539964444444444,
+          "p95": 1.0
+        }
+      },
+      {
+        "flags": "bilinear+full_chroma_int+accurate_rnd",
+        "vsDefault": {
+          "max": 19,
+          "mean": 0.7618137777777778,
+          "p95": 2.0
+        }
+      }
+    ],
+    "holdWicYChangeOnlyChroma": {
+      "nearest": {
+        "max": 36,
+        "mean": 1.2963508888888888,
+        "p95": 4.0
+      },
+      "linear-center": {
+        "max": 39,
+        "mean": 1.3558635555555556,
+        "p95": 4.0
+      }
+    }
+  },
+  {
+    "name": "chroma-2",
+    "ffmpegRGB": [
+      {
+        "filter": "nearest",
+        "matrix": "601",
+        "limited": false,
+        "vsDefault": {
+          "max": 2,
+          "mean": 0.6176622178819444,
+          "p95": 2.0
+        }
+      },
+      {
+        "filter": "nearest",
+        "matrix": "601",
+        "limited": true,
+        "vsDefault": {
+          "max": 18,
+          "mean": 9.954786512586805,
+          "p95": 18.0
+        }
+      },
+      {
+        "filter": "nearest",
+        "matrix": "709",
+        "limited": false,
+        "vsDefault": {
+          "max": 24,
+          "mean": 8.851826985677084,
+          "p95": 23.0
+        }
+      },
+      {
+        "filter": "nearest",
+        "matrix": "709",
+        "limited": true,
+        "vsDefault": {
+          "max": 24,
+          "mean": 15.673326280381945,
+          "p95": 24.0
+        }
+      },
+      {
+        "filter": "linear-center",
+        "matrix": "601",
+        "limited": false,
+        "vsDefault": {
+          "max": 56,
+          "mean": 4.225780910915798,
+          "p95": 27.0
+        }
+      },
+      {
+        "filter": "linear-center",
+        "matrix": "601",
+        "limited": true,
+        "vsDefault": {
+          "max": 51,
+          "mean": 11.915695190429688,
+          "p95": 23.0
+        }
+      },
+      {
+        "filter": "linear-center",
+        "matrix": "709",
+        "limited": false,
+        "vsDefault": {
+          "max": 53,
+          "mean": 11.400458441840279,
+          "p95": 29.0
+        }
+      },
+      {
+        "filter": "linear-center",
+        "matrix": "709",
+        "limited": true,
+        "vsDefault": {
+          "max": 48,
+          "mean": 17.05149163140191,
+          "p95": 28.0
+        }
+      },
+      {
+        "filter": "linear-left",
+        "matrix": "601",
+        "limited": false,
+        "vsDefault": {
+          "max": 110,
+          "mean": 4.359246148003472,
+          "p95": 35.0
+        }
+      },
+      {
+        "filter": "linear-left",
+        "matrix": "601",
+        "limited": true,
+        "vsDefault": {
+          "max": 108,
+          "mean": 13.025634765625,
+          "p95": 34.0
+        }
+      },
+      {
+        "filter": "linear-left",
+        "matrix": "709",
+        "limited": false,
+        "vsDefault": {
+          "max": 110,
+          "mean": 11.875037299262154,
+          "p95": 33.0
+        }
+      },
+      {
+        "filter": "linear-left",
+        "matrix": "709",
+        "limited": true,
+        "vsDefault": {
+          "max": 108,
+          "mean": 18.421966552734375,
+          "p95": 30.0
+        }
+      }
+    ],
+    "crossKernel": [
+      {
+        "flags": "default",
+        "vsDefault": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "flags": "neighbor",
+        "vsDefault": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "flags": "bilinear",
+        "vsDefault": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "flags": "bicubic",
+        "vsDefault": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "flags": "neighbor+full_chroma_int+accurate_rnd",
+        "vsDefault": {
+          "max": 2,
+          "mean": 0.6176622178819444,
+          "p95": 2.0
+        }
+      },
+      {
+        "flags": "bilinear+full_chroma_int+accurate_rnd",
+        "vsDefault": {
+          "max": 56,
+          "mean": 4.225789388020833,
+          "p95": 27.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "checker-2",
+    "ffmpegRGB": [
+      {
+        "filter": "nearest",
+        "matrix": "601",
+        "limited": false,
+        "vsDefault": {
+          "max": 2,
+          "mean": 0.3993513319227431,
+          "p95": 1.0
+        }
+      },
+      {
+        "filter": "nearest",
+        "matrix": "601",
+        "limited": true,
+        "vsDefault": {
+          "max": 21,
+          "mean": 3.137018839518229,
+          "p95": 15.0
+        }
+      },
+      {
+        "filter": "nearest",
+        "matrix": "709",
+        "limited": false,
+        "vsDefault": {
+          "max": 33,
+          "mean": 6.404712253146702,
+          "p95": 27.0
+        }
+      },
+      {
+        "filter": "nearest",
+        "matrix": "709",
+        "limited": true,
+        "vsDefault": {
+          "max": 40,
+          "mean": 9.216257731119791,
+          "p95": 38.0
+        }
+      },
+      {
+        "filter": "linear-center",
+        "matrix": "601",
+        "limited": false,
+        "vsDefault": {
+          "max": 58,
+          "mean": 7.4962310791015625,
+          "p95": 30.0
+        }
+      },
+      {
+        "filter": "linear-center",
+        "matrix": "601",
+        "limited": true,
+        "vsDefault": {
+          "max": 67,
+          "mean": 8.669926961263021,
+          "p95": 47.0
+        }
+      },
+      {
+        "filter": "linear-center",
+        "matrix": "709",
+        "limited": false,
+        "vsDefault": {
+          "max": 57,
+          "mean": 11.382971869574654,
+          "p95": 44.0
+        }
+      },
+      {
+        "filter": "linear-center",
+        "matrix": "709",
+        "limited": true,
+        "vsDefault": {
+          "max": 67,
+          "mean": 13.055884467230904,
+          "p95": 54.0
+        }
+      },
+      {
+        "filter": "linear-left",
+        "matrix": "601",
+        "limited": false,
+        "vsDefault": {
+          "max": 114,
+          "mean": 8.834781222873264,
+          "p95": 56.0
+        }
+      },
+      {
+        "filter": "linear-left",
+        "matrix": "601",
+        "limited": true,
+        "vsDefault": {
+          "max": 130,
+          "mean": 10.341539171006945,
+          "p95": 60.0
+        }
+      },
+      {
+        "filter": "linear-left",
+        "matrix": "709",
+        "limited": false,
+        "vsDefault": {
+          "max": 115,
+          "mean": 13.480463663736979,
+          "p95": 52.0
+        }
+      },
+      {
+        "filter": "linear-left",
+        "matrix": "709",
+        "limited": true,
+        "vsDefault": {
+          "max": 131,
+          "mean": 15.380279541015625,
+          "p95": 56.0
+        }
+      }
+    ],
+    "crossKernel": [
+      {
+        "flags": "default",
+        "vsDefault": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "flags": "neighbor",
+        "vsDefault": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "flags": "bilinear",
+        "vsDefault": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "flags": "bicubic",
+        "vsDefault": {
+          "max": 0,
+          "mean": 0.0,
+          "p95": 0.0
+        }
+      },
+      {
+        "flags": "neighbor+full_chroma_int+accurate_rnd",
+        "vsDefault": {
+          "max": 2,
+          "mean": 0.3993513319227431,
+          "p95": 1.0
+        }
+      },
+      {
+        "flags": "bilinear+full_chroma_int+accurate_rnd",
+        "vsDefault": {
+          "max": 58,
+          "mean": 7.496361626519097,
+          "p95": 30.0
+        }
+      }
+    ]
+  }
+]
