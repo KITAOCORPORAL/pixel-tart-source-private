@@ -60,7 +60,7 @@ public sealed partial class PlanningCenterViewModel
             frozen=await Task.Run(()=>PixelTart.Modules.AssetLibrary.FreeCanvas.CanvasPixelRenderer.FreezeSnapshotSources(frozen,cancellation.Token),cancellation.Token);RequireCurrent();
             SaveStatus="正在生成画布版本…";var preview=await CanvasSnapshotRenderer(frozen,cancellation.Token);RequireCurrent();
             double scale=Math.Min(1,1400d/Math.Max(frozen.PixelWidth,frozen.PixelHeight));
-            var revision=new PlanningCanvasRevision(Guid.NewGuid(),frozen.CanvasId,DateTimeOffset.UtcNow,frozen,preview){RenderVersion=PlanningCanvasSnapshot.RenderVersion,SamplingContract=PlanningCanvasSnapshot.SamplingContract,PreviewWidth=Math.Max(1,(int)Math.Round(frozen.PixelWidth*scale)),PreviewHeight=Math.Max(1,(int)Math.Round(frozen.PixelHeight*scale))};
+            var revision=new PlanningCanvasRevision(Guid.NewGuid(),frozen.CanvasId,DateTimeOffset.UtcNow,frozen,preview){RenderVersion=PlanningCanvasSnapshot.RenderVersion,SamplingContract=PlanningCanvasSnapshot.SamplingContract,PreviewParameters=PlanningCanvasSnapshot.PreviewParameters,PreviewWidth=Math.Max(1,(int)Math.Round(frozen.PixelWidth*scale)),PreviewHeight=Math.Max(1,(int)Math.Round(frozen.PixelHeight*scale))};
             revision.Validate();
             if(CanvasBeforeCommit is{} wait)await wait(cancellation.Token);RequireCurrent();
             // Capture rich edits before the transaction, serialize all pending writes, then append atomically.

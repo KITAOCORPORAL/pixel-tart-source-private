@@ -6,9 +6,10 @@ namespace RAWSelectionAssistant.Services;
 /// <summary>Versioned adapter over the canvas renderer, not another compositor. Legacy saved PNGs are never recomputed.</summary>
 public static class PlanningCanvasSnapshot
 {
- public const int RenderVersion=2;
- public const string SamplingContract="CanvasPremultipliedBilinear.ArtboardCenters.v2";
- public static string Render(CanvasDocument document)=>CanvasPixelRenderer.EncodePngBase64(CanvasPixelRenderer.RenderPreview(document));
+ public const int RenderVersion=3;
+ public const string PreviewParameters="JPEG:source>4194304;requestEdge=1024;nativeClosest<=3072,4194304px;ICC=sRGB;EXIF=afterICC;cache=task32MiB,8;outputCenters=v2";
+ public const string SamplingContract="CanvasJpegNative1024.ArtboardCenters.v3";
+ public static string Render(CanvasDocument document)=>CanvasPixelRenderer.EncodePngBase64(CanvasPixelRenderer.RenderPhotoPreview(document,out _));
  private static readonly SemaphoreSlim Workers=new(1,1);
  public static async Task<string> RenderAsync(CanvasDocument document,CancellationToken token=default)
  {
@@ -18,5 +19,5 @@ public static class PlanningCanvasSnapshot
    thread.SetApartmentState(ApartmentState.STA);thread.Start();return await completion.Task;
   }finally{Workers.Release();}
  }
- private static string Render(CanvasDocument document,CancellationToken token)=>CanvasPixelRenderer.EncodePngBase64(CanvasPixelRenderer.RenderPreview(document,token:token),token);
+ private static string Render(CanvasDocument document,CancellationToken token)=>CanvasPixelRenderer.EncodePngBase64(CanvasPixelRenderer.RenderPhotoPreview(document,out _,token:token),token);
 }

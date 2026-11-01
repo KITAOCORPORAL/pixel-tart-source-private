@@ -213,6 +213,7 @@ public sealed partial class FreeCanvasView : UserControl
         _undoButton.IsEnabled=Editor.CanUndo; _redoButton.IsEnabled=Editor.CanRedo;
         _zoomButton.Content=$"视图 · {Surface.Zoom:P0} ▾";_floating.Children.Clear();_floatingBorder.Visibility=Visibility.Collapsed;
         if(Editor.Selected.Count==0)return;
+        var chosen=Editor.Selected.FirstOrDefault();if(chosen is not null){var title=string.IsNullOrWhiteSpace(chosen.Name)?chosen.IsText?"文字":chosen.IsBrush?"绘画层":chosen.IsPalette?"色板":"照片":chosen.Name;_floating.Children.Add(new TextBlock{Text=title,FontWeight=FontWeights.SemiBold,TextTrimming=TextTrimming.CharacterEllipsis,Margin=new Thickness(0,2,0,6)});_floating.Children.Add(new TextBlock{Text=$"X {chosen.X:0.#}   Y {chosen.Y:0.#}\n宽 {chosen.Width:0.#}   高 {chosen.Height:0.#}\n旋转 {chosen.Rotation:0.#}°",TextWrapping=TextWrapping.Wrap,Margin=new Thickness(0,0,0,8)});}
         var bounds=Editor.Bounds();var top=Surface.WorldToScreen(new(bounds.X,bounds.Y));_floatingBorder.Margin=new(Math.Clamp(top.X,8,Math.Max(8,Surface.ActualWidth-580)),Math.Clamp(top.Y-48,8,Math.Max(8,Surface.ActualHeight-44)),0,0);
         if(Surface.CropMode)
         {
@@ -226,7 +227,7 @@ public sealed partial class FreeCanvasView : UserControl
         }
 
 
-        var opacity=new Slider{Minimum=0,Maximum=1,Value=Editor.Selected.FirstOrDefault()?.Opacity??1,Width=75,IsEnabled=Editor.Selected.All(x=>!x.Locked),ToolTip="对象透明度"};opacity.PreviewMouseLeftButtonDown+=(_,_)=>{opacityDragging=true;Editor.BeginGesture();};opacity.PreviewMouseLeftButtonUp+=(_,_)=>{Editor.EndGesture();opacityDragging=false;UpdateTools();};opacity.LostMouseCapture+=(_,_)=>{Editor.EndGesture();opacityDragging=false;UpdateTools();};opacity.ValueChanged+=(_,_)=>Editor.SetOpacity(opacity.Value);_floating.Children.Add(opacity);
+        var opacityRow=new DockPanel{Margin=new Thickness(0,6,0,6)};opacityRow.Children.Add(new TextBlock{Text="不透明度",VerticalAlignment=VerticalAlignment.Center});var opacityNumber=new TextBlock{Text=$"{(Editor.Selected.FirstOrDefault()?.Opacity??1)*100:0}%",Width=42,TextAlignment=TextAlignment.Right,VerticalAlignment=VerticalAlignment.Center};DockPanel.SetDock(opacityNumber,Dock.Right);opacityRow.Children.Add(opacityNumber);var opacity=new Slider{Minimum=0,Maximum=1,Value=Editor.Selected.FirstOrDefault()?.Opacity??1,MinWidth=90,Margin=new Thickness(8,0,4,0),IsEnabled=Editor.Selected.All(x=>!x.Locked),ToolTip="对象不透明度"};System.Windows.Automation.AutomationProperties.SetName(opacity,"所选图层不透明度");opacity.PreviewMouseLeftButtonDown+=(_,_)=>{opacityDragging=true;Editor.BeginGesture();};opacity.PreviewMouseLeftButtonUp+=(_,_)=>{Editor.EndGesture();opacityDragging=false;UpdateTools();};opacity.LostMouseCapture+=(_,_)=>{Editor.EndGesture();opacityDragging=false;UpdateTools();};opacity.ValueChanged+=(_,_)=>{opacityNumber.Text=$"{opacity.Value*100:0}%";Editor.SetOpacity(opacity.Value);};opacityRow.Children.Add(opacity);_floating.Children.Add(opacityRow);
         _floating.Children.Add(Button(Editor.Selected.All(x=>x.Hidden)?"显示":"隐藏",()=>Editor.SetVisible(Editor.Selected.All(x=>x.Hidden))));
         _floating.Children.Add(Button(Editor.Selected.All(item=>item.Locked)?"解锁":"锁定",()=>Editor.SetLocked(!Editor.Selected.All(item=>item.Locked))));
         if(Editor.Selected.Count>1)_floating.Children.Add(Button("移出画布",Editor.Remove));

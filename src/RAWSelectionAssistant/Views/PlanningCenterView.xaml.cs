@@ -404,7 +404,7 @@ public partial class PlanningCenterView : UserControl
         {
             foreach (var revision in _vm.DocumentCanvasRevisions)
             {
-                DocumentContent.Children.Add(Text("已保存画布版本 · " + revision.CapturedAt.ToLocalTime().ToString("g")+(revision.RenderVersion==2?" · "+revision.PreviewWidth+"×"+revision.PreviewHeight:""), 13));
+                DocumentContent.Children.Add(Text("已保存画布版本 · " + revision.CapturedAt.ToLocalTime().ToString("g")+(revision.RenderVersion>=2?" · "+revision.PreviewWidth+"×"+revision.PreviewHeight:""), 13));
                 if (revision.PreviewPngBase64 is { } encoded)
                 {
                     using var bytes = new MemoryStream(Convert.FromBase64String(encoded));
@@ -418,7 +418,7 @@ public partial class PlanningCenterView : UserControl
             foreach (var canvas in _vm.ProjectCanvases)
             {
                 DocumentContent.Children.Add(Action(canvas.Name, () => _vm.OpenLinkedCanvas(canvas)));
-                var capture=Action("插入/更新画布版本 · " + canvas.Name, async () => {var owner=_vm;if(owner is null)return;try{await owner.CaptureCanvasDocumentAsync(canvas);}catch(OperationCanceledException){}catch(Exception error){owner.Dialogs.ShowError("画布版本未保存，旧版本保留："+error.Message);} });
+                var capture=Action("插入/更新画布版本 · " + canvas.Name, async () => {var owner=_vm;if(owner is null)return;try{await owner.CaptureCanvasDocumentAsync(canvas);}catch(OperationCanceledException){}catch(Exception error){new RAWSelectionAssistant.Core.Services.FileLogService().Error("画布版本捕获失败",error);owner.Dialogs.ShowError("画布版本未保存，旧版本保留："+(error is System.Runtime.InteropServices.COMException?"照片格式无法预览，请检查源图或使用标准8位JPEG副本。":error.Message));} });
                 capture.SetBinding(IsEnabledProperty,new Binding(nameof(_vm.IsCanvasCaptureRunning)){Source=_vm,Converter=new CanvasCaptureIdleConverter()});DocumentContent.Children.Add(capture);
             }
         }
