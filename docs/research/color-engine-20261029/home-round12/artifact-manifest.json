@@ -1,0 +1,189 @@
+{
+  "version": "Round12ArtifactManifestV1",
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "tools": [
+    {
+      "path": "tools/color-round12/.gitattributes",
+      "sha256": "db847547ee85e1fb6ee479af0717ecb03feaba589d0f80e397d1042d3c3795ff",
+      "bytes": 94
+    },
+    {
+      "path": "tools/color-round12/.gitignore",
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793",
+      "bytes": 19
+    },
+    {
+      "path": "tools/color-round12/analyze_existing.py",
+      "sha256": "1fd629e158908db0d1b460dcb5b52d391d66619bd1bc169be9b9a78c88f75dc1",
+      "bytes": 14489
+    },
+    {
+      "path": "tools/color-round12/analyze_paper.py",
+      "sha256": "f35e8f8cea780705658bcb90a4a1290133f362587c25a4d20af5e1ef3f4e5746",
+      "bytes": 6375
+    },
+    {
+      "path": "tools/color-round12/audit_prior_intermediates.py",
+      "sha256": "84a110f5ae0f41c485c64193bffed54e7e9da4c6c22b5c3e54c2984698c6c5b3",
+      "bytes": 2310
+    },
+    {
+      "path": "tools/color-round12/build_cpu_probe.py",
+      "sha256": "a5c95ab3184597fe1d42a62695e4d4589cce1a925e3a36484c65b668f3e9d513",
+      "bytes": 2183
+    },
+    {
+      "path": "tools/color-round12/endpoint_details.py",
+      "sha256": "83ad1b16e6a782fd63de57af38b9f7857d3d737a996a3b4ab7d3fc4bd0e75144",
+      "bytes": 1225
+    },
+    {
+      "path": "tools/color-round12/local_domain_details.py",
+      "sha256": "44a968b8649fecaff6ea36eef9943135815e128830a85485c27e99411ebe0b4d",
+      "bytes": 4283
+    },
+    {
+      "path": "tools/color-round12/README.md",
+      "sha256": "5c1c3fde95819a4f6090a8269c3148b17fdccf2c4b1ca52fe6713b4cbe2006db",
+      "bytes": 1895
+    },
+    {
+      "path": "tools/color-round12/test_causal_analysis.py",
+      "sha256": "8d81c741e8928fabb37cad746ac52db5aaa554fba5e508e97d8db0fb172b339a",
+      "bytes": 6086
+    },
+    {
+      "path": "tools/color-round12/verify_round12.py",
+      "sha256": "84f08f1594fa4cfc671e43ebdd2a62d255b2efce0ea62b3c3651701826b4d1a2",
+      "bytes": 2361
+    },
+    {
+      "path": "tools/color-round12/visual_correspondence.py",
+      "sha256": "e0a0e32787a0585ec45dc174e90abbb3fbe604a4bf14c4522dfb3ceb17f1b650",
+      "bytes": 4965
+    }
+  ],
+  "localOnly": {
+    "root": "N:/pixart/ColorResearchHome-20261030/round12-cause-v2",
+    "files": [
+      {
+        "name": "analysis-console.txt",
+        "sha256": "d4a5d20aa49713b3169ee21cf7c978b994b3801482cdcbf98ccca425f38b2a6e",
+        "bytes": 7828
+      },
+      {
+        "name": "blob-keys.json",
+        "sha256": "1f4e75648a8c06cc48b8364f95bee986f5a9a6d7248b420dcad4b7c82374af27",
+        "bytes": 2592
+      },
+      {
+        "name": "cpu-build.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "name": "cpu-constants.dat",
+        "sha256": "d4af035f0e149bf276fdef1ff09255f38c90ab726dd81012ecf3031babb46874",
+        "bytes": 27784
+      },
+      {
+        "name": "cpu-constants.idx",
+        "sha256": "96f64e1131a92e4d946201656091ba6f5e1e38eb78b4dba2cad4a334ee90e465",
+        "bytes": 315
+      },
+      {
+        "name": "cpu-resolved.json",
+        "sha256": "b7a3ec7c09be3c579f8d50eb117abd43e8804f1c6ea9de264796a30944d7444f",
+        "bytes": 2621
+      },
+      {
+        "name": "cpu-run.txt",
+        "sha256": "1b98755e042237f243541ec73145ca8b6305d30a44c798ed1fc820d197ee13b0",
+        "bytes": 32
+      },
+      {
+        "name": "cpu_setup_probe.cpp",
+        "sha256": "123491ebafbcafd19fa61699272b8a3d7e94c549ceead7a528d3e85f8d2d76f5",
+        "bytes": 3720
+      },
+      {
+        "name": "cpu_setup_probe.exe",
+        "sha256": "50c16caa2f7da15f2927f01c1cd6dbb86e720bfc24e09c908e4d77d9f7f00a6b",
+        "bytes": 387584
+      },
+      {
+        "name": "nex5r-fixed-correspondence.png",
+        "sha256": "97a56e34a50ed64d17a5f0fa2831da3074d4faead11d69276829c4b605e0af9a",
+        "bytes": 352556
+      },
+      {
+        "name": "nex5r-fixed-flower-overlay.png",
+        "sha256": "9cc4ae50ee49bca7132f6c3fe19e55a1206dbac9a893b3f8f30925d3b3ca3ce0",
+        "bytes": 170700
+      },
+      {
+        "name": "nex5r-fixed-flower.png",
+        "sha256": "5eb60b24684b643ef00f51b181bf22082822111bcb3fee10aef23aa7b05140de",
+        "bytes": 170069
+      },
+      {
+        "name": "nex5r-neighborhood-examples.json",
+        "sha256": "5bc349b5cbb8cdda9b1159bafc5fe93560725c10746f6b0a226ade7a5d3f9087",
+        "bytes": 6287
+      },
+      {
+        "name": "nex5r-selected-neighborhoods.npz",
+        "sha256": "56030f40287801e2407d41631da05f6d9d1952eeb2f0fc801d0347be92489fb3",
+        "bytes": 1331441
+      },
+      {
+        "name": "nex5r-selected-pixels-all-channels.csv",
+        "sha256": "052cfc9adccda76c601024c996434c0c81e4f1366e864543f1321138655015cf",
+        "bytes": 2748814
+      },
+      {
+        "name": "nex5r-selected-zero-pixels.npy",
+        "sha256": "d23ab4236e66ccf06c512fe7262962588be216f79fed13562fd7f5000d1a6a5f",
+        "bytes": 958928
+      },
+      {
+        "name": "nex5r-sign-flip-coordinates.json",
+        "sha256": "f9dfcb729d3d016b0c6d8c6322366085867950549c49a3650d708af74849243c",
+        "bytes": 419
+      },
+      {
+        "name": "nex5r-zero-channels.csv",
+        "sha256": "71f3d7560905c75abf3c944de79806ba322e991d86b53b470bb96fa6bf19f537",
+        "bytes": 3998315
+      },
+      {
+        "name": "nex5r-zero-map.png",
+        "sha256": "6834c1c109224decdaaa6217fd2bc37af2e38f3ca4b4054a359d0c1abfee6eb3",
+        "bytes": 1904233
+      },
+      {
+        "name": "paper-analysis-console.txt",
+        "sha256": "acc5abc983fcd0551880b9abd4b3728e407e42c26340a34448dde9d12b698690",
+        "bytes": 7873
+      },
+      {
+        "name": "r6-paper-chain-analytic.npz",
+        "sha256": "609c9a02b4f5f860f31b843df53f806900fa7ef81295a6c82d76690ff183288d",
+        "bytes": 2700770
+      },
+      {
+        "name": "r6-roi-channel-lineage.csv",
+        "sha256": "846a9a023eb9d1537a6bc75b359ae4c3d98df0115efdba1d2acec2fdee9a2684",
+        "bytes": 35845431
+      },
+      {
+        "name": "r6-zero-density-roi-mask.npy",
+        "sha256": "a3f1ebb5c883b8bd4e9e1d0012bf2647fb4cdf867791fd2c2ba9edd5e967404d",
+        "bytes": 961328
+      }
+    ]
+  },
+  "classification": "Natural spatial files, ROI, buffers, external core helper and constant data excluded from Git; listed by hash only",
+  "historicalPathsUnchanged": true
+}

@@ -1,0 +1,6 @@
+from pathlib import Path
+import sys,json,csv
+import numpy as np
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from analyze_existing import read,sha,dump,load_stages
+root,out,summary=map(Path,sys.argv[1:4]);repo=Path(__file__).resolve().parents[2];finite=read(repo/'docs/research/color-engine-20261029/home-round11/natural-stage-finite.json');s=load_stages(root,finite,'sonynex5r');q=np.fromfile(root/'round11/natural-coverage-run1/sonynex5r/whole.rgba16',dtype='<u2').reshape(s['print_output'].shape[:2]+(4,))[:,:,:3];v=s['print_output'];sel=np.load(out/'nex5r-selected-zero-pixels.npy');small=v[(q==0)&(v>0)&sel[:,:,None]];data={'version':'Round12EndpointDetailsV1','positiveQuantizedZeroValues':small.astype(float).tolist(),'roundingZeroThresholdEncoded':.5/65535,'scope':'component values only; spatial coordinate tables local','signFlipBeforeAfterCount':int(np.count_nonzero((s['print_scan_finish']<0)!=(v<0))),'actualQuantizationMethod':'uint(clamp(encoded,0,1)*65535+0.5), verified exact against saved final output','allSelectedPixelCsvSha256':sha(out/'nex5r-selected-pixels-all-channels.csv'),'allSelectedZeroComponentCsvSha256':sha(out/'nex5r-zero-channels.csv')};dump(summary,data);print(json.dumps(data))

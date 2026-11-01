@@ -1,0 +1,37 @@
+{
+  "version": "Round12PixelVisualCorrespondenceV1",
+  "imageHash": "295275051cf87de9d9da63f25eee376a29c81bd53328d933148e6f4b209c4e94",
+  "imageBoundToU16Rounding": true,
+  "fixedFlowerRoi": [
+    270,
+    400,
+    300,
+    250
+  ],
+  "selectedPixelsInRoi": 1796,
+  "rgbBlackPixelsInRoi": 640,
+  "preSharpenMinAtFinalBlackPixels": [
+    0.00423185620456934,
+    0.005905799567699432,
+    0.006710599176585674
+  ],
+  "preSharpenMaxAtFinalBlackPixels": [
+    0.04547383263707161,
+    0.04655950888991356,
+    0.05258270353078842
+  ],
+  "localNeighborhoodFileHash": "56030f40287801e2407d41631da05f6d9d1952eeb2f0fc801d0347be92489fb3",
+  "allSelectedZeroComponents": 22326,
+  "finishBelowAllInputNeighbors": 22326,
+  "centerBelowNeighborhoodMean": 22326,
+  "interpretation": "Observed zero masks coincide with dark-side high-contrast flower/leaf edges; black appearance needs three zero channels, not one. This is occurrence attribution, not automatic aesthetic/error verdict.",
+  "r6PriorLossOverlap": {
+    "roiPixels": 75000,
+    "priorEndpointFootprintPixels": 54321,
+    "zeroDensityComponentsWithPriorFootprint": 19554,
+    "zeroDensityComponentsWithoutPriorFootprint": 13,
+    "allZeroDensityPixelsWithPriorFootprint": 242,
+    "allZeroDensityPixelsWithoutPriorFootprint": 0,
+    "interpretation": "Saved proxy values are distinct even where master footprint includes endpoints. Loss before saved proxy is not reconstructed or ruled out."
+  }
+}

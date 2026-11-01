@@ -1,0 +1,23 @@
+{
+  "version": "Round12PriorIntermediateIdentityV1",
+  "rawDecodeCalls": 0,
+  "gpuCalls": 0,
+  "scope": "existing decoded master read only; does not revisit RAW or render20MP",
+  "records": [
+    {
+      "id": "sonynex5r",
+      "masterHashMatches": true,
+      "supportMaskSha256": "ea28267d7a1328a7a62187e67cd611175e54eecd7c983ef406d60d8ddbbaf1c9",
+      "supportRecomputedExact": true
+    },
+    {
+      "id": "canonr6",
+      "masterHashMatches": true,
+      "supportMaskSha256": "1617af370517573fe5272db4b8e5d3518516fe95696269a7f2eb8bd1cbdcd54b",
+      "supportRecomputedExact": true,
+      "displayProxySha256": "86dcb00420b3343601c374274b707293f5c650919fd6865dbf81ccbd9da5b57d",
+      "displayProxyRecomputedExact": true,
+      "fixedRoiPixelsWithPriorMasterEndpointSupport": 54321
+    }
+  ]
+}

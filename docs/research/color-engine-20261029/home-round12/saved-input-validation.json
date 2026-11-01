@@ -1,0 +1,928 @@
+{
+  "version": "Round11SavedOutputAuditV1",
+  "renderCalls": 0,
+  "rawDecodeCalls": 0,
+  "scope": "existing saved data only; not a performance or preference test",
+  "photos": [
+    {
+      "id": "canon600d",
+      "proxyPixelSha256": "903e5e09a8f9d8dc7ad2a4b29d21fccb2c357911dccc97160c240c87ebbb6f1c",
+      "wholeSha256": "b5390343a92bcb96c974b9c03c9d40c50595a8003aa8397daa8bd611609ae350",
+      "comparisons": [
+        {
+          "artifact": "stream-r17.rgba16",
+          "comparison": {
+            "shape": [
+              799,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3835200,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        },
+        {
+          "artifact": "stream-r37.rgba16",
+          "comparison": {
+            "shape": [
+              799,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3835200,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        },
+        {
+          "artifact": "traced.rgba16",
+          "comparison": {
+            "shape": [
+              799,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3835200,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        }
+      ],
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "sha256": "d14c52600ac679bb3b0736a8b901669aba04e45447988ea3ffbbef4863e1d1d7",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_boost",
+          "sha256": "d14c52600ac679bb3b0736a8b901669aba04e45447988ea3ffbbef4863e1d1d7",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_overscan",
+          "sha256": "d14c52600ac679bb3b0736a8b901669aba04e45447988ea3ffbbef4863e1d1d7",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_blurs",
+          "sha256": "d14c52600ac679bb3b0736a8b901669aba04e45447988ea3ffbbef4863e1d1d7",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_log_and_curves",
+          "sha256": "2f4057572afd7ebdd098ff655dc444df27faf03294c79cf742f6a58f92027f81",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_couplers",
+          "sha256": "2f4057572afd7ebdd098ff655dc444df27faf03294c79cf742f6a58f92027f81",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_grain",
+          "sha256": "2f4057572afd7ebdd098ff655dc444df27faf03294c79cf742f6a58f92027f81",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_spectral",
+          "sha256": "96818e83a57823adf4bfc88c52841cd94fbc61820d22343835eb704f5508ed63",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_glare",
+          "sha256": "96818e83a57823adf4bfc88c52841cd94fbc61820d22343835eb704f5508ed63",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_linear",
+          "sha256": "4a8eee1f3c45a68b576f6e630517e5224d19d4eb7b6d6474aa0a74002d4287e6",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_scan_finish",
+          "sha256": "ab439d20f023348b2505ba97ef4fc9a9fa44bd78b234948319716126e1d0a51e",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_output",
+          "sha256": "ec8bffaa7e84b8b86683563b3f8d9733f56d3ec89eab760d9c3a0eb5f3c838f6",
+          "dataChecksRecomputed": true
+        }
+      ]
+    },
+    {
+      "id": "canon6d",
+      "proxyPixelSha256": "3bc73a83bf1a31719eaa5ac8baf0719def75559687589866bb21fe6dff568f4f",
+      "wholeSha256": "1f5487ba3f01ab00b0370420d3f86860479360e75c8bba494dbabfa139bce59e",
+      "comparisons": [
+        {
+          "artifact": "stream-r17.rgba16",
+          "comparison": {
+            "shape": [
+              1200,
+              801,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3844800,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        },
+        {
+          "artifact": "stream-r37.rgba16",
+          "comparison": {
+            "shape": [
+              1200,
+              801,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3844800,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        },
+        {
+          "artifact": "traced.rgba16",
+          "comparison": {
+            "shape": [
+              1200,
+              801,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3844800,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        }
+      ],
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "sha256": "11946be51e5d4dddc4598c37adc45dd3f39528646046802f9ada052154e028b9",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_boost",
+          "sha256": "11946be51e5d4dddc4598c37adc45dd3f39528646046802f9ada052154e028b9",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_overscan",
+          "sha256": "11946be51e5d4dddc4598c37adc45dd3f39528646046802f9ada052154e028b9",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_blurs",
+          "sha256": "11946be51e5d4dddc4598c37adc45dd3f39528646046802f9ada052154e028b9",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_log_and_curves",
+          "sha256": "f75205e90befd90a8462dfc75942156de4a359d4aadc341cb33049eda93221df",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_couplers",
+          "sha256": "f75205e90befd90a8462dfc75942156de4a359d4aadc341cb33049eda93221df",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_grain",
+          "sha256": "f75205e90befd90a8462dfc75942156de4a359d4aadc341cb33049eda93221df",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_spectral",
+          "sha256": "e20247aa5c8c7f6ba72fbac665c2f8af2b1be5c9368a50ff8ef215c5397bb7ec",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_glare",
+          "sha256": "e20247aa5c8c7f6ba72fbac665c2f8af2b1be5c9368a50ff8ef215c5397bb7ec",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_linear",
+          "sha256": "e9012be03535f4294e012ada0b0a25a8047b8e758c232bad59ec11d1e5b8c5ec",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_scan_finish",
+          "sha256": "ea03c21a5d1b336702680b4d88dba59c9d4e8c13eb97899e5ae8afeb2992d113",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_output",
+          "sha256": "70f92810fb0c9652067db184849161dd318079c00ea4981375c7ccf89d905ad6",
+          "dataChecksRecomputed": true
+        }
+      ]
+    },
+    {
+      "id": "canon5d3",
+      "proxyPixelSha256": "324d2b1d4eb5b1fef65692fca3526e4901cc07e2f484d4034693e28266beebf5",
+      "wholeSha256": "24a031363f2a7114c9f5828c0eae5e7aa3cd5f038aae31f0144e14c91eafbec9",
+      "comparisons": [
+        {
+          "artifact": "stream-r17.rgba16",
+          "comparison": {
+            "shape": [
+              801,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3844800,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        },
+        {
+          "artifact": "stream-r37.rgba16",
+          "comparison": {
+            "shape": [
+              801,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3844800,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        },
+        {
+          "artifact": "traced.rgba16",
+          "comparison": {
+            "shape": [
+              801,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3844800,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        }
+      ],
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "sha256": "057abe0f40424303a8dd6710b50d4d13bbeb337dce9933cc3ea57095dc998c82",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_boost",
+          "sha256": "057abe0f40424303a8dd6710b50d4d13bbeb337dce9933cc3ea57095dc998c82",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_overscan",
+          "sha256": "057abe0f40424303a8dd6710b50d4d13bbeb337dce9933cc3ea57095dc998c82",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_blurs",
+          "sha256": "057abe0f40424303a8dd6710b50d4d13bbeb337dce9933cc3ea57095dc998c82",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_log_and_curves",
+          "sha256": "bb3a39227e8285d7c7768745eb4545c9f690507a3df69e91b21e25284f8a5adb",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_couplers",
+          "sha256": "bb3a39227e8285d7c7768745eb4545c9f690507a3df69e91b21e25284f8a5adb",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_grain",
+          "sha256": "bb3a39227e8285d7c7768745eb4545c9f690507a3df69e91b21e25284f8a5adb",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_spectral",
+          "sha256": "091b4ff0de6ea217ffe686d1dbaf85af9c6c372e61c7f8082b4d95eebb5975be",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_glare",
+          "sha256": "091b4ff0de6ea217ffe686d1dbaf85af9c6c372e61c7f8082b4d95eebb5975be",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_linear",
+          "sha256": "0a9c620e6048429123fbf33631fc01b6654aeecb782a20838b9c2e4475f1d176",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_scan_finish",
+          "sha256": "b90ee1dc1dc68cf5281080173b1a91a77cf8bd58b18c74364fb767fdb358221f",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_output",
+          "sha256": "02dbea93ffc21dded559fe3321975375c9bac1cda655691a0953b4b6ea1a946e",
+          "dataChecksRecomputed": true
+        }
+      ]
+    },
+    {
+      "id": "nikond5100",
+      "proxyPixelSha256": "dad3d0f95c3de4dc65ad66e7fbc01bf94c819a436d88daa97d98c7e7bf4580fd",
+      "wholeSha256": "834f2677017b61b4b6e9ded27f021a38ebd39ae6aa48e3a589a271690ac77cdd",
+      "comparisons": [
+        {
+          "artifact": "stream-r17.rgba16",
+          "comparison": {
+            "shape": [
+              795,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3816000,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        },
+        {
+          "artifact": "stream-r37.rgba16",
+          "comparison": {
+            "shape": [
+              795,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3816000,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        },
+        {
+          "artifact": "traced.rgba16",
+          "comparison": {
+            "shape": [
+              795,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3816000,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        }
+      ],
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "sha256": "e30fffd15257a196294951a6f18f48c926511507c265ba3e6f69c93c4d421df5",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_boost",
+          "sha256": "e30fffd15257a196294951a6f18f48c926511507c265ba3e6f69c93c4d421df5",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_overscan",
+          "sha256": "e30fffd15257a196294951a6f18f48c926511507c265ba3e6f69c93c4d421df5",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_blurs",
+          "sha256": "e30fffd15257a196294951a6f18f48c926511507c265ba3e6f69c93c4d421df5",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_log_and_curves",
+          "sha256": "353ea4fd79f122973f5a67e6516c373113e000c993a6874fabb1fbb3c6776177",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_couplers",
+          "sha256": "353ea4fd79f122973f5a67e6516c373113e000c993a6874fabb1fbb3c6776177",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_grain",
+          "sha256": "353ea4fd79f122973f5a67e6516c373113e000c993a6874fabb1fbb3c6776177",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_spectral",
+          "sha256": "1569628966778f5dd77b07a287ba239e254affbf784dc75f6855ace699a44f6e",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_glare",
+          "sha256": "1569628966778f5dd77b07a287ba239e254affbf784dc75f6855ace699a44f6e",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_linear",
+          "sha256": "4326920905564480b7c3b3327566c06c38ddea0aca689debecd827c0a67ac3f5",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_scan_finish",
+          "sha256": "29466d4d50e02d9f98c0bfdcc70ec46c4a4b93dc1868b3a114cf329f84ea5904",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_output",
+          "sha256": "3bb1b47118b8f628e0d61ccfab1af700449982adecccba3ea1065b019a30a55a",
+          "dataChecksRecomputed": true
+        }
+      ]
+    },
+    {
+      "id": "sonynex5r",
+      "proxyPixelSha256": "7cc89824945fc53f1fb463512a7d0798f38918bbe81a4a7608f856a91db68e63",
+      "wholeSha256": "226d9309acb3f405908f6b62fafbfbbbc7b751a2cdb78caf3c55d4c9458125e6",
+      "comparisons": [
+        {
+          "artifact": "stream-r17.rgba16",
+          "comparison": {
+            "shape": [
+              799,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3835200,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        },
+        {
+          "artifact": "stream-r37.rgba16",
+          "comparison": {
+            "shape": [
+              799,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3835200,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        },
+        {
+          "artifact": "traced.rgba16",
+          "comparison": {
+            "shape": [
+              799,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3835200,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        }
+      ],
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "sha256": "cbb525d637fd2818d26fd59bba2d3144c77a6e7c956238dc4bdde19f380ac0ba",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_boost",
+          "sha256": "cbb525d637fd2818d26fd59bba2d3144c77a6e7c956238dc4bdde19f380ac0ba",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_overscan",
+          "sha256": "cbb525d637fd2818d26fd59bba2d3144c77a6e7c956238dc4bdde19f380ac0ba",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_blurs",
+          "sha256": "cbb525d637fd2818d26fd59bba2d3144c77a6e7c956238dc4bdde19f380ac0ba",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_log_and_curves",
+          "sha256": "9a499745bf5a08d621e825635b538206a7ef025775a3ccb74406506901027058",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_couplers",
+          "sha256": "9a499745bf5a08d621e825635b538206a7ef025775a3ccb74406506901027058",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_grain",
+          "sha256": "9a499745bf5a08d621e825635b538206a7ef025775a3ccb74406506901027058",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_spectral",
+          "sha256": "96978bae826c6bf161c134490530d6d616c806684fb34cbfa3cc96069070837e",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_glare",
+          "sha256": "96978bae826c6bf161c134490530d6d616c806684fb34cbfa3cc96069070837e",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_linear",
+          "sha256": "6b86fc4caeaf19f395f0f8910248a6a1430a22a3914465c2b4981d856f9ce0b3",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_scan_finish",
+          "sha256": "76dc9f3542f60c689b2d988169544d4ddf36439707c96aa6091c56de5a88cbac",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_output",
+          "sha256": "d4480bccb97e9751b8a92ef9e668fde7e90080ef34365e37096e0b78508fe7e1",
+          "dataChecksRecomputed": true
+        }
+      ]
+    },
+    {
+      "id": "canonr6",
+      "proxyPixelSha256": "4ac591589af7ca1d41a57baa12e9a8277627a380a3869426d3d8e855c8bf8349",
+      "wholeSha256": "62afe385eba6ec67f7bf4d5d4c57cf7af15aa21f161b9600e0936ced1111deb4",
+      "comparisons": [
+        {
+          "artifact": "stream-r17.rgba16",
+          "comparison": {
+            "shape": [
+              801,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3844800,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        },
+        {
+          "artifact": "stream-r37.rgba16",
+          "comparison": {
+            "shape": [
+              801,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3844800,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        },
+        {
+          "artifact": "traced.rgba16",
+          "comparison": {
+            "shape": [
+              801,
+              1200,
+              4
+            ],
+            "dtype": "<u2",
+            "channelValues": 3844800,
+            "changedChannels": 0,
+            "exact": true,
+            "firstDifference": null,
+            "maxAbsoluteDelta": 0.0,
+            "meanAbsoluteDelta": 0.0,
+            "absoluteDeltaQuantiles": {
+              "0": 0,
+              "0.5": 0,
+              "0.9": 0,
+              "0.95": 0,
+              "0.99": 0,
+              "0.999": 0,
+              "1": 0
+            },
+            "quantileMethod": "higher exact integer histogram",
+            "nonfinitePairs": 0
+          }
+        }
+      ],
+      "stages": [
+        {
+          "stage": "film_scale_and_expose",
+          "sha256": "bb0f8962b28a8f70675821a36c2fb9581e73ddfb078c7d9a0c3aacdaba6e2cb8",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_boost",
+          "sha256": "bb0f8962b28a8f70675821a36c2fb9581e73ddfb078c7d9a0c3aacdaba6e2cb8",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_overscan",
+          "sha256": "bb0f8962b28a8f70675821a36c2fb9581e73ddfb078c7d9a0c3aacdaba6e2cb8",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_blurs",
+          "sha256": "bb0f8962b28a8f70675821a36c2fb9581e73ddfb078c7d9a0c3aacdaba6e2cb8",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_log_and_curves",
+          "sha256": "066de44b4845838480829529bcf16adf712c29d17f4227172f30947897e20db6",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_couplers",
+          "sha256": "066de44b4845838480829529bcf16adf712c29d17f4227172f30947897e20db6",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "film_grain",
+          "sha256": "066de44b4845838480829529bcf16adf712c29d17f4227172f30947897e20db6",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_spectral",
+          "sha256": "6bf6d216a535f08843e7fdadd4c2e0021c3b1cc6d8eca0b1e4df0c0875dd196a",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_glare",
+          "sha256": "6bf6d216a535f08843e7fdadd4c2e0021c3b1cc6d8eca0b1e4df0c0875dd196a",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_linear",
+          "sha256": "8a4497481e144e8e795805b241db5bb775091d1db712d16d4b4cbdcbee95d050",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_scan_finish",
+          "sha256": "20d216fe5908c94c1d6e0bc4259a5596cdfb5dd14aa146a9d76b6e98e49e7111",
+          "dataChecksRecomputed": true
+        },
+        {
+          "stage": "print_output",
+          "sha256": "8aa143111fa2bbaf0298aaea9734183223c99a3d1dbe0e1d651ed97be830ba2b",
+          "dataChecksRecomputed": true
+        }
+      ]
+    }
+  ],
+  "allPassed": true,
+  "stageFilesRecomputed": 72
+}

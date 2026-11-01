@@ -1,0 +1,268 @@
+{
+  "version": "Round12SourceIdentityV1",
+  "baseEngineCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "baseResearchCommit": "603e8a49c7e35546053ad51339eaed2ad7989793",
+  "sourceRows": [
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "sourceSha256": "f6a76b5eeab6f2ee1d6c1222289f236c6a8ce2d6f5638580e5ddf94046f2448a",
+      "traceSha256": "1b0bd5f89cbc7a2341d12f7628fc3e13929168e43f54b8e3fc2cb4f4cec46a3c",
+      "identicalNaturalAndTrace": false,
+      "upstreamGitBlobSha256": "b1059765643394dff92230c9b6f192e409eead624b81c96add70ecd9acf34b7b",
+      "upstreamEqualAfterNewlineNormalization": false
+    },
+    {
+      "path": "engine/src/pipeline/blur.cpp",
+      "sourceSha256": "eea271005a447a74ffa4d0e7f23660426664983c50fb479deebf7c04af5b9c93",
+      "traceSha256": "eea271005a447a74ffa4d0e7f23660426664983c50fb479deebf7c04af5b9c93",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "7a173792e149c088f93b57426a38895f9b2b5f22e8d60427886da78cad9e4270",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/pipeline/engine.cpp",
+      "sourceSha256": "b5011e78ac9716a283562ebe831d5b44a0386df350c53b457a4ed0f5f08f1e8d",
+      "traceSha256": "b5011e78ac9716a283562ebe831d5b44a0386df350c53b457a4ed0f5f08f1e8d",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "5a4f74685dbc82438157d6456ab34ccc267c93bb542540c7404c0447feb62dc8",
+      "upstreamEqualAfterNewlineNormalization": false
+    },
+    {
+      "path": "engine/src/core/params.hpp",
+      "sourceSha256": "49b802a8a923c5e2be3087e6ba152220a636d846d550003cfdaa8b7dd9f9e018",
+      "traceSha256": "49b802a8a923c5e2be3087e6ba152220a636d846d550003cfdaa8b7dd9f9e018",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "5fecd7587bd5cd3b973bb647ec0e0f9ac844131d60559f66c5067354a56ae7b5",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/core/params.cpp",
+      "sourceSha256": "ae083bdbfc1f6d23a4ceffd1ffb79f658e7fcc85476aedac3f18a6434bebe834",
+      "traceSha256": "ae083bdbfc1f6d23a4ceffd1ffb79f658e7fcc85476aedac3f18a6434bebe834",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "f855f4684bf2f5b046aa486ef2a75ef1d5318913bc126ea89b895652da0bb5d5",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/core/profile.cpp",
+      "sourceSha256": "dcce3289754e154f49f9c0f6cec5d9476bfdeefc9f7a12e5a2abcf8975d422f7",
+      "traceSha256": "dcce3289754e154f49f9c0f6cec5d9476bfdeefc9f7a12e5a2abcf8975d422f7",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "6bf9801b0ab80ba5a9e08bfd294d28e5b46e5259355dee3d9a9f1ba656530d53",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/core/curves.cpp",
+      "sourceSha256": "86181e4acb6f15e8b3fd670b2ae3a546fbfd7f90a8197a8c0e2d69ce96481a9e",
+      "traceSha256": "86181e4acb6f15e8b3fd670b2ae3a546fbfd7f90a8197a8c0e2d69ce96481a9e",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "1cde1154d92bf7671f8a427b0798ab9aa284e5ee15d94788b6677095cec57c85",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/core/numeric.cpp",
+      "sourceSha256": "de5f5fc26fa5362f878051fbeaf6e4a7f218a3b465f2042d4044f77192997bad",
+      "traceSha256": "de5f5fc26fa5362f878051fbeaf6e4a7f218a3b465f2042d4044f77192997bad",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "e79c70d752b2ede0d56d0e529029efbb371c686ae1143531feb68f1d066fb378",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/core/printing.cpp",
+      "sourceSha256": "4534c2ba1454bb3c3b37ba0df48995e4de9c42a1df527ee096bc6636e7ce4b96",
+      "traceSha256": "4534c2ba1454bb3c3b37ba0df48995e4de9c42a1df527ee096bc6636e7ce4b96",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "6da2ec0d19d5f35671a86dcd7eee33c73c2ba8449adc329d4b009fb09d272ad8",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/core/spectral.cpp",
+      "sourceSha256": "fa526d54f9c90a5c3e6311d49252e8e4b409c9d7647a5433944c72d6d9056345",
+      "traceSha256": "fa526d54f9c90a5c3e6311d49252e8e4b409c9d7647a5433944c72d6d9056345",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "f8b733fda96ba5e26b37ec414135af3aabfe2f641b20974f2a859f2f8896ee6f",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/core/colour.cpp",
+      "sourceSha256": "ee47ffc6987a25145279609979b137e4462251c7c80dcfa69ec8e567c57094da",
+      "traceSha256": "ee47ffc6987a25145279609979b137e4462251c7c80dcfa69ec8e567c57094da",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "2e507db29568cf798958bb242fb1174303a469ebca072243a30070a76f6b4243",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/core/blob.cpp",
+      "sourceSha256": "728e952814ca261be4e5e71a08802ed75b65d8ce1fe64de2faf4ef292192f3c9",
+      "traceSha256": "728e952814ca261be4e5e71a08802ed75b65d8ce1fe64de2faf4ef292192f3c9",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "0352985d7c1cbc9202170eda8b2f3b9883c13b8593efd36c03c3ba5ea76af661",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_sep_fir_acc.comp",
+      "sourceSha256": "b55f0a7bf6e538a0528a67520031f129b39e919b619d9a393da3c7e3f7404a83",
+      "traceSha256": "b55f0a7bf6e538a0528a67520031f129b39e919b619d9a393da3c7e3f7404a83",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "bf40caa52dfff49e59365055327211cdd55198211eeb38e84a79c69ac7333609",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_lincomb3.comp",
+      "sourceSha256": "b9fdbffd23a7bba359dbf937d5ebbaf4c548327490d327cd9035798c3693fc49",
+      "traceSha256": "b9fdbffd23a7bba359dbf937d5ebbaf4c548327490d327cd9035798c3693fc49",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "0ad7da930f8597ad762646ba0bee7e1eb5563ded8850daf140455ea2553d8681",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_curves.comp",
+      "sourceSha256": "bb04e62faec6be775c279237b30bd5336d8ca2735f45618bd5bcce2f837c5082",
+      "traceSha256": "bb04e62faec6be775c279237b30bd5336d8ca2735f45618bd5bcce2f837c5082",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "bcff6181dd9aa56a6c04b7b1bf8c0a7435f88813163bd2fe42018d11ab3738bf",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_log10_guarded.comp",
+      "sourceSha256": "2659864a10e626bc1423637582f97eccdb84e7bb5165d5224dfbc394a02f04c9",
+      "traceSha256": "2659864a10e626bc1423637582f97eccdb84e7bb5165d5224dfbc394a02f04c9",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "69d11a9d5faef02c8e3e683568e84b5f2e21754a3acc4856f5bf236d89aee16f",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_cctf_encode_matrix.comp",
+      "sourceSha256": "c2ce005c38362fe63dc050391ab0c8d54afa4c060ccdcc7bc5c05da62be84014",
+      "traceSha256": "c2ce005c38362fe63dc050391ab0c8d54afa4c060ccdcc7bc5c05da62be84014",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "b60dbaafbfb0c19d4474ffdc65764d352948494901c47a96c60e75f73913ea27",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_to_rgba16.comp",
+      "sourceSha256": "2d8967797252f30c8c577e2764a5da82a04b4fa798184144c86266d44ff7cede",
+      "traceSha256": "2d8967797252f30c8c577e2764a5da82a04b4fa798184144c86266d44ff7cede",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "b7b59b3f262ce29e85a7ff973fdb84d86767f0e3c6e2c13279694145d5b199c4",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_spectral_epilogue.comp",
+      "sourceSha256": "38c265ca3c448e6c9d09c84f619fd7b1057070991831ff23c54a76175e604a54",
+      "traceSha256": "38c265ca3c448e6c9d09c84f619fd7b1057070991831ff23c54a76175e604a54",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "8185466f9e0859937c345bb38e0f5bb65708529f49dbdde0a5ed2ed62ff16053",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_print_exposure.comp",
+      "sourceSha256": "fa8ad1822ec6b9c1be06646c178cdafae79fa951af32b693a7470f2acbf5d04e",
+      "traceSha256": "fa8ad1822ec6b9c1be06646c178cdafae79fa951af32b693a7470f2acbf5d04e",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "1ee17450d2f2038c8bb2d64dd298cc3bf455773912bd6ea89a6932b979682eb7",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_cam16ucs_compress.comp",
+      "sourceSha256": "3de0d152bc3b22c5b9d551fcae6f0c908411ee28fe0abf47dfd585acb8750050",
+      "traceSha256": "3de0d152bc3b22c5b9d551fcae6f0c908411ee28fe0abf47dfd585acb8750050",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "1bdd96a0bd39b4d56fb13729b0c584bb7325ace746909b58bcbbfdd28c25f941",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "LICENSE.txt",
+      "sourceSha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+      "traceSha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "upstreamEqualAfterNewlineNormalization": true
+    },
+    {
+      "path": "engine/resources_product/NOTICE.md",
+      "sourceSha256": "6fcca5f5361ec790cefc4c0bb2a34e3b77b6153851d381354e9cfe50ce82d0f3",
+      "traceSha256": "6fcca5f5361ec790cefc4c0bb2a34e3b77b6153851d381354e9cfe50ce82d0f3",
+      "identicalNaturalAndTrace": true,
+      "upstreamGitBlobSha256": "44425f1dbf29983482087f2b439730db389866bbf19cf90159cf915b2956b96c",
+      "upstreamEqualAfterNewlineNormalization": true
+    }
+  ],
+  "traceMatches": [
+    {
+      "path": "engine/src/pipeline/engine.cpp",
+      "expected": "b5011e78ac9716a283562ebe831d5b44a0386df350c53b457a4ed0f5f08f1e8d",
+      "actual": "b5011e78ac9716a283562ebe831d5b44a0386df350c53b457a4ed0f5f08f1e8d",
+      "match": true
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "expected": "1b0bd5f89cbc7a2341d12f7628fc3e13929168e43f54b8e3fc2cb4f4cec46a3c",
+      "actual": "1b0bd5f89cbc7a2341d12f7628fc3e13929168e43f54b8e3fc2cb4f4cec46a3c",
+      "match": true
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.hpp",
+      "expected": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4",
+      "actual": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4",
+      "match": true
+    },
+    {
+      "path": "engine/src/gpu/gpu.hpp",
+      "expected": "dd539f383b5aa44c7aa2c23cf3232dea5e2c826a64b5e8f06b8a7568127ad3e3",
+      "actual": "dd539f383b5aa44c7aa2c23cf3232dea5e2c826a64b5e8f06b8a7568127ad3e3",
+      "match": true
+    },
+    {
+      "path": "engine/src/gpu/vulkan_gpu.cpp",
+      "expected": "56e5456314e660e1111af5c0b9d24bce04a854b09568ac72cb43c7a9c560722b",
+      "actual": "56e5456314e660e1111af5c0b9d24bce04a854b09568ac72cb43c7a9c560722b",
+      "match": true
+    },
+    {
+      "path": "engine/windows_exports.def",
+      "expected": "302aa155f88625ac13af06a24f55bea785ca35979ab2566dd23eff4938c4ceaa",
+      "actual": "302aa155f88625ac13af06a24f55bea785ca35979ab2566dd23eff4938c4ceaa",
+      "match": true
+    },
+    {
+      "path": "engine/CMakeLists.txt",
+      "expected": "ef17371c86921bc613989d3821fa5cfbb4f074d07e8873f5a1097351361aca3d",
+      "actual": "ef17371c86921bc613989d3821fa5cfbb4f074d07e8873f5a1097351361aca3d",
+      "match": true
+    },
+    {
+      "path": "API-SPEC-callable-render-service.md",
+      "expected": "23a2b699fa76bf4eac19587343f1429120a4f8746d0541790efd3a9f1aefd5a9",
+      "actual": "23a2b699fa76bf4eac19587343f1429120a4f8746d0541790efd3a9f1aefd5a9",
+      "match": true
+    }
+  ],
+  "libraries": [
+    {
+      "path": "N:/pixart/ColorResearchHome-20261030/round11/build-natural-finite-trace/engine/spektrafilm_engine.dll",
+      "expected": "c64357cf8b2c236b58d5bf03d12d5396c86fcbefa0c2cdbfaf886c9a72801561",
+      "actual": "c64357cf8b2c236b58d5bf03d12d5396c86fcbefa0c2cdbfaf886c9a72801561",
+      "match": true
+    },
+    {
+      "path": "N:/pixart/ColorResearchHome-20261030/round11/build-natural-v1/engine/spektrafilm_engine.dll",
+      "expected": "3b391fa6dee1c2e697b4832a3461ebf16c27d03126126464aba843f31caeb5fb",
+      "actual": "3b391fa6dee1c2e697b4832a3461ebf16c27d03126126464aba843f31caeb5fb",
+      "match": true
+    },
+    {
+      "path": "N:/pixart/ColorResearchHome-20261030/build-patch/engine/spektrafilm_engine.dll",
+      "expected": "a77b51a9fe60a543bee2f1d6685ea4e4ba59b7b0c7b2f80e873508f5cc544636",
+      "actual": "a77b51a9fe60a543bee2f1d6685ea4e4ba59b7b0c7b2f80e873508f5cc544636",
+      "match": true
+    }
+  ],
+  "allHistoricalBindingsMatch": true,
+  "localHelperOnly": {
+    "source": "N:/pixart/ColorResearchHome-20261030/round12-cause-v2/cpu_setup_probe.cpp",
+    "sourceSha256": "123491ebafbcafd19fa61699272b8a3d7e94c549ceead7a528d3e85f8d2d76f5",
+    "licenseBoundary": "Calls fixed external core locally; source, binary, full constant data remain outside Git"
+  },
+  "analysisScope": "Frozen files read only; source branch drift checked by SHA, not inferred from old report"
+}

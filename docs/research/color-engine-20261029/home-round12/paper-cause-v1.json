@@ -1,0 +1,288 @@
+{
+  "version": "Round12PaperCauseProbeV1",
+  "gpuCalls": 0,
+  "rawDecodeCalls": 0,
+  "roiXYWH": [
+    0,
+    500,
+    300,
+    250
+  ],
+  "hiddenParamsActualCpuSetup": {
+    "scannerBlur": 0.0,
+    "unsharpSigma": 0.7,
+    "unsharpAmount": 0.7,
+    "blackCorrection": 0.0,
+    "whiteCorrection": 0.0,
+    "previewMode": 0.0,
+    "deactivateSpatial": 0.0,
+    "lutMode": 0.0,
+    "paperMorphActive": 0.0,
+    "normalizePrintExposure": 1.0,
+    "printExposureCompensation": 1.0
+  },
+  "fixedPublicResolvedCount": 99,
+  "printGain": [
+    0.8357499244020927,
+    0.8357499244020927,
+    0.8357499244020927
+  ],
+  "printOffset": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "paperSetupMatchesFrozenConfig": true,
+  "paperChainCpuAgainstSavedXYZ": {
+    "changedComponents": 144292,
+    "maxAbs": 7.450580596923828e-09,
+    "meanAbs": 4.492348266972436e-10,
+    "signMismatch": 0,
+    "zeroMismatch": 0
+  },
+  "paperLogExposureRange": {
+    "min": [
+      0.4006846845149994,
+      0.3624488413333893,
+      0.35500067472457886
+    ],
+    "max": [
+      0.7914839386940002,
+      0.844650387763977,
+      0.8646479845046997
+    ]
+  },
+  "paperProfileDomain": {
+    "low": [
+      -3.0,
+      -3.0,
+      -3.0
+    ],
+    "high": [
+      4.0,
+      4.0,
+      4.0
+    ],
+    "outOfLowComponents": 0,
+    "outOfHighComponents": 0,
+    "densityMax": [
+      2.462132279808925,
+      2.0678883369609347,
+      1.8213486385486952
+    ]
+  },
+  "paperDensityStats": {
+    "domain": "paper dye density coefficients (not RGB)",
+    "pixels": 75000,
+    "uniqueTriples": 73841,
+    "largestRepeatedTripleCount": 242,
+    "channels": [
+      {
+        "min": 1.7980862855911255,
+        "max": 2.329383134841919,
+        "quantiles": [
+          1.7980862855911255,
+          2.1359710693359375,
+          2.3286402225494385,
+          2.3293659687042236,
+          2.329383134841919
+        ],
+        "stdInOwnDomain": 0.07179952412843704,
+        "uniqueValues": 21160,
+        "mostFrequentValue": 2.329383134841919,
+        "mostFrequentCount": 268,
+        "zero": 0,
+        "negative": 0,
+        "equalHorizontalEdges": 44,
+        "equalVerticalEdges": 65,
+        "meanAbsHorizontalDelta": 0.00347169268968512,
+        "meanAbsVerticalDelta": 0.00341219129651745
+      },
+      {
+        "min": 1.3791409730911255,
+        "max": 1.9296634197235107,
+        "quantiles": [
+          1.3791409730911255,
+          1.8167291820049285,
+          1.9290317296981812,
+          1.9295830726623535,
+          1.9296634197235107
+        ],
+        "stdInOwnDomain": 0.0387418232858181,
+        "uniqueValues": 28000,
+        "mostFrequentValue": 1.9296095371246338,
+        "mostFrequentCount": 253,
+        "zero": 0,
+        "negative": 0,
+        "equalHorizontalEdges": 45,
+        "equalVerticalEdges": 38,
+        "meanAbsHorizontalDelta": 0.0018037350743909345,
+        "meanAbsVerticalDelta": 0.00179985729885229
+      },
+      {
+        "min": 1.3835257291793823,
+        "max": 1.8094877004623413,
+        "quantiles": [
+          1.3835257291793823,
+          1.7770749509334565,
+          1.8093692064285278,
+          1.8094804286956787,
+          1.8094877004623413
+        ],
+        "stdInOwnDomain": 0.011653878726065159,
+        "uniqueValues": 23498,
+        "mostFrequentValue": 1.8094877004623413,
+        "mostFrequentCount": 249,
+        "zero": 0,
+        "negative": 0,
+        "equalHorizontalEdges": 96,
+        "equalVerticalEdges": 91,
+        "meanAbsHorizontalDelta": 0.0011205125333473434,
+        "meanAbsVerticalDelta": 0.0010861844390909995
+      }
+    ]
+  },
+  "zeroFilmDensityChain": {
+    "filmDensity": [
+      0,
+      0,
+      0
+    ],
+    "paperLogExposureAnalytic": [
+      0.7914839386940002,
+      0.8445562720298767,
+      0.8646479845046997
+    ],
+    "paperDensityAnalytic": [
+      2.329383134841919,
+      1.9296095371246338,
+      1.8094877004623413
+    ],
+    "paperAsymptoticDensityMax": [
+      2.462132279808925,
+      2.0678883369609347,
+      1.8213486385486952
+    ],
+    "scanXYZAnalytic": [
+      0.004117914475500584,
+      0.004235013388097286,
+      0.004402602557092905
+    ],
+    "scanXYZObserved": [
+      0.004117914475500584,
+      0.004235012922435999,
+      0.004402602557092905
+    ],
+    "relativeY": 0.004235013388097286,
+    "blackWhiteCorrectionActive": false,
+    "important": "zero film density retains film base_density and paper dye/base spectral response; not optical zero or display RGB black"
+  },
+  "xyzToLinearRgbBeforeGamutAnalytic": {
+    "domain": "CAT02-adapted linear sRGB before CAM16 mapping (CPU analytic)",
+    "zeroDensityRGB": [
+      0.003905236386924335,
+      0.004238161486535607,
+      0.005496180666606161
+    ],
+    "zeroDensityAfterGamutObserved": [
+      0.0039053496439009905,
+      0.004238378256559372,
+      0.005496244411915541
+    ],
+    "allRoiDifferenceAgainstAfterGamut": {
+      "changedComponents": 224999,
+      "maxAbs": 9.076204150915146e-06,
+      "meanAbs": 1.3342710211873053e-07,
+      "signMismatch": 0,
+      "zeroMismatch": 0
+    },
+    "negativeInputComponents": 0
+  },
+  "scannerUnsharpAgainstSavedRoi": {
+    "changedComponents": 85095,
+    "maxAbs": 1.862645149230957e-09,
+    "meanAbs": 1.7786812451150683e-10,
+    "signMismatch": 0,
+    "zeroMismatch": 0
+  },
+  "displayYComparison": {
+    "domain": "sRGB EOTF Y in both before/after; different display rendering, not physical accuracy",
+    "beforeStd": 0.00470563350282087,
+    "afterStd": 0.0006195546080390833,
+    "ratio": 0.13166231659726177,
+    "beforeMedian": 0.0005029390090568301,
+    "afterMedian": 0.004264334360436611,
+    "notOptimizationTarget": true
+  },
+  "finalQuantizedRoiStats": {
+    "pixels": 75000,
+    "uniqueTriples": 20305,
+    "largestRepeatedTripleCount": 1338,
+    "channels": [
+      {
+        "min": 2868.0,
+        "max": 8214.0,
+        "quantiles": [
+          2868.0,
+          3252.0,
+          3259.0,
+          4694.050000000003,
+          8214.0
+        ],
+        "stdInOwnDomain": 570.5980071765307,
+        "uniqueValues": 3318,
+        "mostFrequentValue": 3261.0,
+        "mostFrequentCount": 8970,
+        "zero": 0,
+        "negative": 0,
+        "equalHorizontalEdges": 7361,
+        "equalVerticalEdges": 7303,
+        "meanAbsHorizontalDelta": 40.368147157190634,
+        "meanAbsVerticalDelta": 39.24246318607764
+      },
+      {
+        "min": 2757.0,
+        "max": 9772.0,
+        "quantiles": [
+          2757.0,
+          3492.0,
+          3497.0,
+          4414.0,
+          9772.0
+        ],
+        "stdInOwnDomain": 333.7429043374824,
+        "uniqueValues": 2033,
+        "mostFrequentValue": 3496.0,
+        "mostFrequentCount": 13763,
+        "zero": 0,
+        "negative": 0,
+        "equalHorizontalEdges": 11528,
+        "equalVerticalEdges": 11400,
+        "meanAbsHorizontalDelta": 17.90401337792642,
+        "meanAbsVerticalDelta": 17.475649263721554
+      },
+      {
+        "min": 3632.0,
+        "max": 10187.0,
+        "quantiles": [
+          3632.0,
+          4304.0,
+          4306.0,
+          4734.0,
+          10187.0
+        ],
+        "stdInOwnDomain": 156.39245064292786,
+        "uniqueValues": 1009,
+        "mostFrequentValue": 4305.0,
+        "mostFrequentCount": 24866,
+        "zero": 0,
+        "negative": 0,
+        "equalHorizontalEdges": 19351,
+        "equalVerticalEdges": 19295,
+        "meanAbsHorizontalDelta": 14.386648829431438,
+        "meanAbsVerticalDelta": 13.77239625167336
+      }
+    ]
+  },
+  "sameDensityPixelsPostSharpen": "different neighbor context can reintroduce differences; not recovered original lost signal"
+}

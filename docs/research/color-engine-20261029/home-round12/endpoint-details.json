@@ -1,0 +1,15 @@
+{
+  "version": "Round12EndpointDetailsV1",
+  "positiveQuantizedZeroValues": [
+    2.8478013973654015e-06,
+    3.3842507036752068e-06,
+    6.837120963609777e-06,
+    1.5786844187459792e-06
+  ],
+  "roundingZeroThresholdEncoded": 7.629510948348211e-06,
+  "scope": "component values only; spatial coordinate tables local",
+  "signFlipBeforeAfterCount": 1,
+  "actualQuantizationMethod": "uint(clamp(encoded,0,1)*65535+0.5), verified exact against saved final output",
+  "allSelectedPixelCsvSha256": "052cfc9adccda76c601024c996434c0c81e4f1366e864543f1321138655015cf",
+  "allSelectedZeroComponentCsvSha256": "71f3d7560905c75abf3c944de79806ba322e991d86b53b470bb96fa6bf19f537"
+}

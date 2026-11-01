@@ -1,0 +1,35 @@
+{
+  "version": "Round12ExecutionScopeV1",
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "researchBranch": "research/color-engine-home-20261030",
+  "startLocalHead": "603e8a49c7e35546053ad51339eaed2ad7989793",
+  "startRemoteHead": "603e8a49c7e35546053ad51339eaed2ad7989793",
+  "fetchResult": "SUCCESS",
+  "machine": "DESKTOP-HO0JJEQ",
+  "system": "Windows-11-10.0.26200-SP0",
+  "videoControllerProbe": "Win32_VideoController",
+  "videoControllers": [
+    {
+      "name": "NVIDIA GeForce RTX 5060 Ti",
+      "driverVersion": "32.0.16.1088"
+    },
+    {
+      "name": "MuMu Virtual Display Adapter",
+      "driverVersion": "20.36.41.498"
+    }
+  ],
+  "nvidiaSmi": "command unavailable/failed; driver recorded from WMI not invented new GPU execution",
+  "deviceRole": "home",
+  "companyDiagnostic": "NOT_RUN",
+  "counts": {
+    "rawDecode": 0,
+    "gpuRender": 0,
+    "gpuDispatch": 0,
+    "full20MPEngine": 0,
+    "newObservationDLL": 0,
+    "cpuSetupOnlyHelperRuns": 1
+  },
+  "newData": "None. 6 existing proxies/72 stages validated, causal work on NEX5R and R6 only.",
+  "history": "Old FAILED_NETWORK receipt remains unchanged; successful current fetch confirmed603e8a49"
+}

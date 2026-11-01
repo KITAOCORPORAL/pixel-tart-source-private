@@ -1,0 +1,55 @@
+{
+  "version": "Round12FailuresAndReferenceGateV1",
+  "date": "2026-11-01",
+  "timezone": "Europe/Helsinki",
+  "analysisFailures": [
+    {
+      "step": "analyze_existing first attempt",
+      "error": "KeyError: 'colour/colourspace/sRGB/matrix_XYZ_to_RGB'",
+      "resolution": "Read actual blob key inventory; corrected to colour/cs/sRGB; new local output directory v2; no original files modified",
+      "retainedLocal": "N:/pixart/ColorResearchHome-20261030/round12-cause-v1/analysis-attempt1.txt"
+    },
+    {
+      "step": "visual_correspondence first attempt",
+      "error": "ModuleNotFoundError: No module named 'analyze_existing'",
+      "resolution": "Explicit sibling import path for runpy wrapper; no pixel/file emitted before failure"
+    },
+    {
+      "step": "targeted tests first attempt",
+      "error": "ResourceWarning: unclosed CSV handle; all tests passed",
+      "resolution": "Context manager for CSV and NPZ; final15 tests without warnings; original test log retained"
+    },
+    {
+      "step": "sealed report checker first attempt",
+      "error": "ValueError: Client timezone",
+      "resolution": "Checker erroneously expected Asia/Shanghai; corrected expectation to client Europe/Helsinki. Evidence dates already used client timezone; no data changed."
+    }
+  ],
+  "referenceAttempts": [
+    {
+      "project": "darktable-org/darktable",
+      "commit": "fb0eb997e62c6dd52966cd35911c74afa150e209",
+      "path": "src/iop/sharpen.c",
+      "exitCode": 4,
+      "reason": "To get started with GitHub CLI, please run:  gh auth login\nAlternatively, populate the GH_TOKEN environment variable with a GitHub API authentication token.\n"
+    },
+    {
+      "project": "RawTherapee/RawTherapee",
+      "commit": "db575c6690d30ce6428c0e1383bec8b8f1fb8d21",
+      "path": "rtengine/ipsharpen.cc",
+      "exitCode": 4,
+      "reason": "To get started with GitHub CLI, please run:  gh auth login\nAlternatively, populate the GH_TOKEN environment variable with a GitHub API authentication token.\n"
+    }
+  ],
+  "publicFallback": {
+    "backend": "agent-reach Jina Reader via curl.exe",
+    "exitCode": 35,
+    "error": "curl (35) Recv failure: Connection was reset"
+  },
+  "additionalDependencies": "scipy not available in frozen Python; not installed; original NumPy probe is analytic evidence, not two independent photo implementations",
+  "gate": "NOT_RUN_FIXED_IMPLEMENTATION_READ_AND_NUMERICAL_COMPARISON",
+  "pixelCandidate": "NOT_CREATED_NOT_ADMITTED",
+  "priorRound5": "Existing NumPy/SciPy curve-boundary evidence is historical and not reused as completed new sharpening comparison",
+  "noCredentialRead": true,
+  "noBrowser": true
+}

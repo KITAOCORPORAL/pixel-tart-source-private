@@ -1,0 +1,33 @@
+{
+  "version": "Round12CpuSetupOnlyV1",
+  "gpuCalls": 0,
+  "rawDecodeCalls": 0,
+  "compileCommand": [
+    "N:\\pixart\\ColorResearchHome-20261030\\deps\\toolchain\\llvm-mingw-20250402-ucrt-x86_64\\bin\\clang++.exe",
+    "-std=c++20",
+    "-O2",
+    "N:\\pixart\\ColorResearchHome-20261030\\round12-cause-v2\\cpu_setup_probe.cpp",
+    "-IN:\\pixart\\ColorResearchHome-20261030\\round11\\source-natural-v1\\engine\\src\\core",
+    "-IN:\\pixart\\ColorResearchHome-20261030\\round11\\source-natural-v1\\engine\\tests",
+    "N:\\pixart\\ColorResearchHome-20261030\\round11\\build-natural-v1\\engine\\libspektralab_core.a",
+    "-o",
+    "N:\\pixart\\ColorResearchHome-20261030\\round12-cause-v2\\cpu_setup_probe.exe"
+  ],
+  "runCommand": [
+    "N:\\pixart\\ColorResearchHome-20261030\\round12-cause-v2\\cpu_setup_probe.exe",
+    "N:\\pixart\\ColorResearchHome-20261030\\resources-patch",
+    "N:\\pixart\\guangjing-color-engine-home-20261030\\tools\\color-round11\\diagnostic\\resolved-portraA.json",
+    "N:\\pixart\\ColorResearchHome-20261030\\round12-cause-v2\\cpu-constants.dat",
+    "N:\\pixart\\ColorResearchHome-20261030\\round12-cause-v2\\cpu-constants.idx",
+    "N:\\pixart\\ColorResearchHome-20261030\\round12-cause-v2\\cpu-resolved.json"
+  ],
+  "exitCode": 0,
+  "compilerSha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5",
+  "archiveSha256": "ad319057156aeaa979024cc574a66b01d2c3b765411cf33e82434c3ff720ef57",
+  "wrapperSha256": "123491ebafbcafd19fa61699272b8a3d7e94c549ceead7a528d3e85f8d2d76f5",
+  "exeSha256": "50c16caa2f7da15f2927f01c1cd6dbb86e720bfc24e09c908e4d77d9f7f00a6b",
+  "noGpuLink": "Only libspektralab_core.a, no pipeline/GPU/engine library",
+  "resolvedMatchesFrozen": true,
+  "dataSha256": "d4af035f0e149bf276fdef1ff09255f38c90ab726dd81012ecf3031babb46874",
+  "indexSha256": "96f64e1131a92e4d946201656091ba6f5e1e38eb78b4dba2cad4a334ee90e465"
+}

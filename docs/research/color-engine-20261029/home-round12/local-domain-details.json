@@ -1,0 +1,161 @@
+{
+  "version": "Round12LocalDomainDetailV1",
+  "rawDecodeCalls": 0,
+  "gpuCalls": 0,
+  "fixedRoiXYWH": [
+    0,
+    500,
+    300,
+    250
+  ],
+  "filmCurveQueryAndSlope": [
+    {
+      "channel": 0,
+      "logExposureQuantiles": [
+        -5.208049561006353,
+        -3.0868989285575026,
+        -2.4064280456819955,
+        -0.9618679555264945,
+        -0.6609030442408647
+      ],
+      "curveSlopeUnit": "density coefficient per log10 relative film exposure",
+      "inRangeSlopeQuantiles": [
+        -0.008499092154719995,
+        -0.007383824017153063,
+        0.004076931415197658,
+        0.4699456982024266,
+        0.593270349997201
+      ],
+      "inRangeNegativeSlopeComponents": 20479,
+      "atOrBelowFirstKnot": 5462,
+      "atOrAboveLastKnot": 0
+    },
+    {
+      "channel": 1,
+      "logExposureQuantiles": [
+        -4.434328394309025,
+        -3.1583462790138332,
+        -2.582053917056511,
+        -1.1685976597378496,
+        -0.6324609245268216
+      ],
+      "curveSlopeUnit": "density coefficient per log10 relative film exposure",
+      "inRangeSlopeQuantiles": [
+        -0.006331946184437874,
+        -0.0059877868027270985,
+        0.004577571160156021,
+        0.4041879768033657,
+        0.5663076663322139
+      ],
+      "inRangeNegativeSlopeComponents": 13958,
+      "atOrBelowFirstKnot": 9601,
+      "atOrAboveLastKnot": 0
+    },
+    {
+      "channel": 2,
+      "logExposureQuantiles": [
+        -4.267955389052268,
+        -3.044587977542631,
+        -2.385808841360523,
+        -1.2432645544148662,
+        -0.6648339390615113
+      ],
+      "curveSlopeUnit": "density coefficient per log10 relative film exposure",
+      "inRangeSlopeQuantiles": [
+        -0.004883148940622457,
+        -0.004079525135627861,
+        0.006128379202917211,
+        0.44968331090867264,
+        0.6880878771708291
+      ],
+      "inRangeNegativeSlopeComponents": 15240,
+      "atOrBelowFirstKnot": 4504,
+      "atOrAboveLastKnot": 0
+    }
+  ],
+  "floatTableAnalyticAgainstObserved": {
+    "changedComponents": 95640,
+    "maxAbs": 1.1920928955078125e-07,
+    "meanAbs": 3.512072377955317e-09,
+    "signMismatch": 0,
+    "zeroMismatch": 0
+  },
+  "tripletCounts": [
+    {
+      "stage": "film_log_and_curves",
+      "uniqueInputTriples": 75000,
+      "uniqueOutputTriples": 74759,
+      "difference": -241,
+      "limit": "spatial stage can gain distinct values from neighbors; counts are finite-precision repeats, not photographic accuracy"
+    },
+    {
+      "stage": "film_couplers",
+      "uniqueInputTriples": 74759,
+      "uniqueOutputTriples": 74759,
+      "difference": 0,
+      "limit": "spatial stage can gain distinct values from neighbors; counts are finite-precision repeats, not photographic accuracy"
+    },
+    {
+      "stage": "film_grain",
+      "uniqueInputTriples": 74759,
+      "uniqueOutputTriples": 74759,
+      "difference": 0,
+      "limit": "spatial stage can gain distinct values from neighbors; counts are finite-precision repeats, not photographic accuracy"
+    },
+    {
+      "stage": "print_spectral",
+      "uniqueInputTriples": 74759,
+      "uniqueOutputTriples": 73812,
+      "difference": -947,
+      "limit": "spatial stage can gain distinct values from neighbors; counts are finite-precision repeats, not photographic accuracy"
+    },
+    {
+      "stage": "print_glare",
+      "uniqueInputTriples": 73812,
+      "uniqueOutputTriples": 73812,
+      "difference": 0,
+      "limit": "spatial stage can gain distinct values from neighbors; counts are finite-precision repeats, not photographic accuracy"
+    },
+    {
+      "stage": "print_linear",
+      "uniqueInputTriples": 73812,
+      "uniqueOutputTriples": 72661,
+      "difference": -1151,
+      "limit": "spatial stage can gain distinct values from neighbors; counts are finite-precision repeats, not photographic accuracy"
+    },
+    {
+      "stage": "print_scan_finish",
+      "uniqueInputTriples": 72661,
+      "uniqueOutputTriples": 75000,
+      "difference": 2339,
+      "limit": "spatial stage can gain distinct values from neighbors; counts are finite-precision repeats, not photographic accuracy"
+    },
+    {
+      "stage": "print_output",
+      "uniqueInputTriples": 75000,
+      "uniqueOutputTriples": 75000,
+      "difference": 0,
+      "limit": "spatial stage can gain distinct values from neighbors; counts are finite-precision repeats, not photographic accuracy"
+    }
+  ],
+  "observedRoiTwoNonzeroNeighborsCollapse": [
+    {
+      "axis": "vertical",
+      "inputDistinctComponents": 224100,
+      "collapsedComponents": 5789,
+      "collapsedToZeroComponents": 5789
+    },
+    {
+      "axis": "horizontal",
+      "inputDistinctComponents": 224250,
+      "collapsedComponents": 5791,
+      "collapsedToZeroComponents": 5791
+    }
+  ],
+  "interpretation": "Lower-bound clamping explains exact zero density; in-range toe and profile nonmonotonicity remain separate. Does not attribute the full 0.132 display response ratio to the floor alone.",
+  "allSelectedPixelTable": {
+    "rows": 11562,
+    "sha256": "052cfc9adccda76c601024c996434c0c81e4f1366e864543f1321138655015cf",
+    "pathLocalOnly": "nex5r-selected-pixels-all-channels.csv"
+  }
+}

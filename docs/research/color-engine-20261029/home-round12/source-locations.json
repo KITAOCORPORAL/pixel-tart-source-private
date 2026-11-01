@@ -1,0 +1,127 @@
+{
+  "version": "Round12ReadSourceLocationsV1",
+  "root": "N:/pixart/ColorResearchHome-20261030/round11/source-natural-v1",
+  "baseCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "records": [
+    {
+      "path": "engine/src/core/params.hpp",
+      "line": 357,
+      "anchor": "struct ScannerParams"
+    },
+    {
+      "path": "engine/src/core/params.hpp",
+      "line": 369,
+      "anchor": "unsharp_mask[2]"
+    },
+    {
+      "path": "engine/src/core/params.hpp",
+      "line": 169,
+      "anchor": "struct PrintCurvesMorphParams"
+    },
+    {
+      "path": "engine/src/core/profile.cpp",
+      "line": 168,
+      "anchor": "normalized_curves.assign"
+    },
+    {
+      "path": "engine/src/core/curves.cpp",
+      "line": 98,
+      "anchor": "void build_interp_tables"
+    },
+    {
+      "path": "engine/src/core/curves.cpp",
+      "line": 167,
+      "anchor": "bool print_curves_morph"
+    },
+    {
+      "path": "engine/src/core/printing.cpp",
+      "line": 75,
+      "anchor": "bool print_constants"
+    },
+    {
+      "path": "engine/src/core/printing.cpp",
+      "line": 113,
+      "anchor": "density_spectral_for"
+    },
+    {
+      "path": "engine/src/core/printing.cpp",
+      "line": 161,
+      "anchor": "geomean"
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_curves.comp",
+      "line": 19,
+      "anchor": "float interpolate"
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_curves.comp",
+      "line": 22,
+      "anchor": "value <= x0"
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_cctf_encode_matrix.comp",
+      "line": 21,
+      "anchor": "float encode"
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_cctf_encode_matrix.comp",
+      "line": 42,
+      "anchor": "float v[3]"
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_to_rgba16.comp",
+      "line": 21,
+      "anchor": "uint red"
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_sep_fir_acc.comp",
+      "line": 19,
+      "anchor": "int reflect_index"
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_sep_fir_acc.comp",
+      "line": 29,
+      "anchor": "int mirror_index"
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_sep_fir_acc.comp",
+      "line": 48,
+      "anchor": "for (int k"
+    },
+    {
+      "path": "engine/src/shaders/vulkan/spk_lincomb3.comp",
+      "line": 23,
+      "anchor": "output_data.value[i]"
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "line": 1963,
+      "anchor": "bool Pipeline::film_log_and_curves"
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "line": 2035,
+      "anchor": "bool Pipeline::print_scan_finish"
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "line": 1783,
+      "anchor": "bool Pipeline::node_unsharp"
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "line": 1007,
+      "anchor": "double Pipeline::unsharp_sigma"
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "line": 1993,
+      "anchor": "bool Pipeline::print_spectral"
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "line": 1745,
+      "anchor": "bool Pipeline::node_edr"
+    }
+  ]
+}
