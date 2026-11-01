@@ -7,6 +7,8 @@
 - 只读复核6代理/72阶段；实际定位只2图。RAW/GPU/full20MP调用均0，新观察DLL0；固定PortraA CPU setup-only辅助1次。15项分析专用测试通过。
 - 本批无像素修复；两个成熟实现本轮固定代码/数值对照未完成，候选门禁NOT_RUN。公司NOT_RUN（本机家庭5060Ti）。不调参、不扩功能、不改产品或旧20MP链。
 
+实现/证据提交 4ff110e1ba83a740aef54b363b0622cad520a537 已正常推送，远端读回相同；收据home-round12/remote-receipt.json。
+
 权威HOME_ROUND12_CAUSE_REPORT、CAPABILITIES_HOME_ROUND12_V1和home-round12；私有坐标/邻域/图像/CPU外部helper留N:/pixart/ColorResearchHome-20261030/round12-cause-v2。下一步先补成熟实现固定域对照，再决定另立像素候选；不重做本批或20MP。
 
 ---
