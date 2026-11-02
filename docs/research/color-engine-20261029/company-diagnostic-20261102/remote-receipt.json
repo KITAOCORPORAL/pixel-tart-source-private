@@ -1,0 +1,20 @@
+{
+  "version": "CompanyPublicDiagnosticRemoteReceiptV1",
+  "timezone": "Asia/Shanghai",
+  "verifiedAtLocalTime": "2026-11-02T14:19:44.053416+08:00",
+  "status": "NORMAL_PUSH_AND_INDEPENDENT_LS_REMOTE_MATCH",
+  "branch": "research/color-engine-company-diagnostic-20261102",
+  "payloadLocalHead": "0c572c1b8da681b684f4f6937affac5836d821fe",
+  "payloadRemoteHead": "0c572c1b8da681b684f4f6937affac5836d821fe",
+  "payloadWorkspaceStatus": "CLEAN",
+  "payloadManifestSha256": "6b6b4680ca57bde0a28873229acb9e88d406ae0e5ac71de91fce6b4c7139bcea",
+  "payloadManifestFilesChecked": 218,
+  "manifestAllMatch": true,
+  "reviewedHomeBase": "93b553d1c22937a2870743a40adc43d6df8b526d",
+  "companyLocalRun": "E:/Kitao-Research/color-engine-company-diagnostic-20261102-run/run",
+  "gpuExecutionAttempts": 1,
+  "successfulGpuOutputApiCalls": 22,
+  "candidateOrPrivateOrFullRerender": false,
+  "historicalReceiptsModified": false,
+  "receiptScope": "Records the already pushed payload commit. Receipt itself will be a separate metadata-only commit; final thread LOCAL_HEAD/REMOTE_HEAD read back after that push, no circular self-hash claim."
+}
