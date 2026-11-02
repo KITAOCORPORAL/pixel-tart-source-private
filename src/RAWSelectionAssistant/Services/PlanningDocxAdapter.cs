@@ -33,6 +33,15 @@ public static partial class PlanningDocxAdapter
                 }
                 W.Run ImageRun(Image image)
                 {
+                    if(image.Tag is PlanningSummaryCanvasImage snapshot)
+                    {
+                        Image? loaded=null;
+                        try { loaded=snapshot.Read(); }
+                        catch(Exception error)when(error is IOException or InvalidDataException or UnauthorizedAccessException or ArgumentException or FormatException or NotSupportedException or InvalidOperationException or System.Runtime.InteropServices.COMException)
+                        { return new W.Run(new W.Text(snapshot.Failure(error)){Space=DocumentFormat.OpenXml.SpaceProcessingModeValues.Preserve}); }
+                        try { return ImageRun(loaded); }
+                        finally { if(loaded is not null)loaded.Source=null; }
+                    }
                     if(image.Source is not BitmapSource bitmap)throw new NotSupportedException("DOCX 暂不支持此嵌入对象。");
                     var part=main.AddImagePart(ImagePartType.Png);using(var bytes=new MemoryStream()){var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(bitmap));encoder.Save(bytes);bytes.Position=0;part.FeedData(bytes);}
                     var relationship=main.GetIdOfPart(part);var width=(long)((double.IsFinite(image.Width)?image.Width:480)*9525);var height=(long)((double.IsFinite(image.Height)?image.Height:width/9525d*bitmap.PixelHeight/bitmap.PixelWidth)*9525);var drawing=new W.Drawing();

@@ -35,7 +35,7 @@ public sealed partial class PlanningCenterViewModel
         source=PlanningProjectCopyStorage.Bind(source,_planning.StorageRoot);
         var input=new PlanningSummaryInput(project,ProjectName,source,_state?.Summary??new(),Shots.Select(s=>ShotDraft(s.ShotId)).ToArray(),_booking,expenses,expenseState,_state?.VisualLinks);
         var result=PlanningSummaryDocument.Export(PlanningReadableSummaryBuilder.Build(input),source,full);
-        SummaryExportStatus=$"15区汇总DOCX已导出；{result.Warnings.Count}项文档图片警告。项目自有参考按安全PNG规则呈现；普通附件列名称/状态；未导入外链不打包。";
+        SummaryExportStatus=$"15区汇总DOCX已导出；{result.Warnings.Count}项图片/固定快照警告。已保存画布PNG按版本顺序呈现；项目自有参考按安全图片规则呈现。普通附件列名称/状态；未导入外链不打包，不是可编辑画布或项目包。";
         OnPropertyChanged(nameof(SummaryExportStatus));return result;
     }
 }

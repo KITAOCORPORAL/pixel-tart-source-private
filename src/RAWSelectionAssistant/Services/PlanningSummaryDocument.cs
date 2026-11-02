@@ -7,6 +7,15 @@ using RAWSelectionAssistant.Core.Services.Projects;
 namespace RAWSelectionAssistant.Services;
 
 public sealed record PlanningSummaryExportResult(string Path,int Sections,IReadOnlyList<string> Warnings);
+internal sealed record PlanningSummaryCanvasImage(PlanningCanvasRevision Revision,Guid ProjectId,double Width,double Height,ICollection<string> Warnings)
+{
+    public Image Read()=>PlanningSummaryOwnedImage.ReadSnapshot(Revision,ProjectId,Width,Height);
+    public string Failure(Exception error)
+    {
+        var message=$"[画布固定快照未呈现：版本 {Revision.RevisionId:D}；{error.Message} 未读取当前画布、源照片或其他版本替代。]";
+        Warnings.Add(message);return message;
+    }
+}
 public static class PlanningSummaryDocument
 {
     public static FlowDocument Create(PlanningReadableSummary summary,PlanningDocument source,ICollection<string> warnings)
@@ -16,9 +25,10 @@ public static class PlanningSummaryDocument
         document.Tag=source.Package?.RichLayout?.HeaderFooter??new PlanningHeaderFooter();
         document.Blocks.Add(new Paragraph(new Run("摄影策划 · 15区汇总")){FontSize=22,FontWeight=FontWeights.Bold});
         Text($"项目 {summary.ProjectId:D} · 文档 {summary.DocumentId:D}");
-        Text("只读阅读快照：按现有15区顺序。经身份/Hash校验的项目自有PNG/JPEG参考副本可嵌入；外链和素材库原件仅列状态。不是可搬迁项目包，未选择导入的附件仍为外链；自有附件仅列名称与状态，不嵌入DOCX。汇总不回写15区资源，原摄影DOCX往返合同不变。");
+        Text("只读阅读快照：按现有15区顺序。已保存的画布固定PNG按保存顺序呈现；经身份/Hash校验的项目自有PNG/JPEG参考副本可嵌入。外链和素材库原件仅列状态。不是可编辑画布或可搬迁项目包；普通附件仅列名称与状态，不嵌入DOCX。汇总不回写15区资源，原摄影DOCX往返合同不变。");
         var contentWidth=document.PageWidth-document.PagePadding.Left-document.PagePadding.Right;
         var contentHeight=document.PageHeight-document.PagePadding.Top-document.PagePadding.Bottom;
+        var renderedSnapshots=new HashSet<Guid>();
         for(int index=0;index<summary.Sections.Count;index++)
         {
             var section=summary.Sections[index];document.Blocks.Add(new Paragraph(new Run($"{index+1:00} {section.Name}")){FontSize=18,FontWeight=FontWeights.Bold,Tag=new PlanningBlockSemantic(document.Blocks.Count,"Heading1"),KeepWithNext=true});
@@ -31,7 +41,16 @@ public static class PlanningSummaryDocument
                     if(index==1&&field.Key=="内容"&&source.Package?.RichTextPackageBase64 is{} rich)
                     {AppendRich(rich,source.Package.RichLayout);continue;}
                     if(index==14&&field.Key=="内容"&&source.Package?.RichTextPackageBase64 is not null)Text("本区共用的持久富文本已在02文字完整列出；以下为原补充文档内容，不重复创建另一份正文。");
-                    Text(field.Key+"："+field.Value);
+                    Text(field.Key+"："+field.Value,entry.CanvasRevision is not null);
+                }
+                if(entry.CanvasRevision is{} revision)
+                {
+                    if(renderedSnapshots.Add(revision.RevisionId))
+                    {
+                        if(index!=14)Text($"画布固定快照 · 版本 {revision.RevisionId:D} · 保存于 {revision.CapturedAt:yyyy-MM-dd HH:mm:ss zzz}",true);
+                        document.Blocks.Add(new Paragraph(new InlineUIContainer(SnapshotImage(revision))){Margin=new Thickness(0,2,0,8)});
+                    }
+                    else Text("固定快照已在正文或灯位的明确关联位置呈现。");
                 }
             }
             foreach(var image in section.OwnedImages)AppendOwned(image);
@@ -46,7 +65,8 @@ public static class PlanningSummaryDocument
         }
         if(warnings.Count>0){Text("导出警告（保留原资料，不替换源文件）");foreach(var warning in warnings)Text(warning);}
         return document;
-        void Text(string value)=>document.Blocks.Add(new Paragraph(new Run(value)){Margin=new Thickness(0,2,0,6)});
+        void Text(string value,bool keepWithNext=false)=>document.Blocks.Add(new Paragraph(new Run(value)){Margin=new Thickness(0,2,0,6),KeepWithNext=keepWithNext});
+        Image SnapshotImage(PlanningCanvasRevision revision)=>new(){Tag=new PlanningSummaryCanvasImage(revision,summary.ProjectId,contentWidth,contentHeight,warnings)};
         Image ReadImage(PlanningDocumentImage meta)=>PlanningSummaryOwnedImage.Read(meta,summary.DocumentId??Guid.Empty,contentWidth,contentHeight);
         string Failure(PlanningDocumentImage meta,Exception e){var message=$"[文档图片不可用：{meta.Title} / {meta.DocumentImageId:D}；{e.GetType().Name}：{e.Message}；保留原引用，未替换其他文件]";warnings.Add(message);return message;}
         void AppendOwned(PlanningDocumentImage meta)
@@ -74,7 +94,24 @@ public static class PlanningSummaryDocument
                 }
                 if(matches.Count==0)warnings.Add($"文档图片 {meta.DocumentImageId:D}（{meta.Title}）没有匹配正文位置；未擅自追加图片。");
             }
-            foreach(var block in body.Blocks.ToArray()){body.Blocks.Remove(block);document.Blocks.Add(block);}
+            foreach(var block in body.Blocks.ToArray())
+            {
+                body.Blocks.Remove(block);
+                if(block.Tag is PlanningBlockSemantic{CanvasRevisionId:Guid revisionId}&&source.Package?.CanvasRevisions.FirstOrDefault(revision=>revision.RevisionId==revisionId) is{} revision)
+                {
+                    var image=SnapshotImage(revision);
+                    if(block is BlockUIContainer container)container.Child=image;
+                    else if(block is Paragraph paragraph)
+                    {
+                        foreach(var inline in paragraph.Inlines.OfType<InlineUIContainer>().ToArray())paragraph.Inlines.Remove(inline);
+                        paragraph.Inlines.Add(new InlineUIContainer(image));
+                    }
+                    else document.Blocks.Add(new Paragraph(new InlineUIContainer(image)));
+                    renderedSnapshots.Add(revisionId);
+                    Text($"画布固定快照 · 版本 {revision.RevisionId:D} · 保存于 {revision.CapturedAt:yyyy-MM-dd HH:mm:ss zzz}",true);
+                }
+                document.Blocks.Add(block);
+            }
         }
     }
     public static PlanningSummaryExportResult Export(PlanningReadableSummary summary,PlanningDocument source,string path)

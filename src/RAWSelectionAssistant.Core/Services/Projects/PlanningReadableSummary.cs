@@ -12,6 +12,7 @@ public sealed record PlanningSummaryEntry(string Title,IReadOnlyList<KeyValuePai
 {
     public IReadOnlyList<PlanningDocumentImage> OwnedImages {get;init;}=[];
     public IReadOnlyList<PlanningProjectCopy> ProjectCopies {get;init;}=[];
+    public PlanningCanvasRevision? CanvasRevision {get;init;}
 }
 public sealed record PlanningSummarySection(string Name,IReadOnlyList<PlanningSummaryEntry> Entries)
 {
@@ -67,6 +68,8 @@ public static class PlanningReadableSummaryBuilder
             foreach(var property in JsonSerializer.SerializeToElement(resource,resource.GetType()).EnumerateObject())fields.Add((ResourceLabel(property.Name),property.Value));
             if(resource is PlanningLight light&&!string.IsNullOrWhiteSpace(light.ReferencePath))fields.Add(("灯位原图状态",ReferenceState(light.ReferencePath)));
             Add(section,resource.Name,fields.ToArray());
+            if(resource is PlanningLight {CanvasRevisionId:Guid revisionId})
+                sections[section][^1]=sections[section][^1] with{CanvasRevision=d.Package?.CanvasRevisions.FirstOrDefault(revision=>revision.RevisionId==revisionId)};
             if(resource is PlanningLight imageLight)Attach(section,owned.Where(i=>OwnPathMatches(i,imageLight.ReferencePath)));
         }
         if(input.Booking is{} booking)
@@ -82,7 +85,12 @@ public static class PlanningReadableSummaryBuilder
         if(d.Package is{} package)
         {
             foreach(var image in package.RichLayout?.Images??[])Add(14,"文档自有图片记录",("图片ID",image.DocumentImageId),("标题",image.Title),("图注",image.Caption),("原顺序",image.Order),("正文位置",image.Position),("副本相对路径",image.CopyPath),("副本Hash",image.CopyHash),("关联镜头ID",image.ShotId),("说明","正文原位置保留可用图片；图片缺失/变化的说明见文字区与导出警告；此记录不代表文件已打包"));
-            foreach(var revision in package.CanvasRevisions)Add(14,"已有画布快照引用",("修订ID",revision.RevisionId),("画布ID",revision.CanvasId),("快照时间",revision.CapturedAt),("范围","元数据引用；汇总DOCX不还原可编辑自由画布"));
+            var revisionNumber=0;
+            foreach(var revision in package.CanvasRevisions)
+            {
+                Add(14,$"已有画布快照 · 版本 {++revisionNumber:00}",("版本ID",revision.RevisionId),("保存时间",revision.CapturedAt.ToString("yyyy-MM-dd HH:mm:ss zzz",CultureInfo.InvariantCulture)),("范围","已保存的固定PNG阅读快照；不读取当前画布或源照片，不还原可编辑自由画布"));
+                sections[14][^1]=sections[14][^1] with{CanvasRevision=revision};
+            }
             foreach(var asset in package.Assets)Add(14,"文档素材引用",("库ID",asset.LibraryId),("素材ID",asset.AssetId),("内容Hash",asset.ContentHash),("引用状态","库引用未解析；不伪称已嵌入原文件"));
         }
         foreach(var image in owned)

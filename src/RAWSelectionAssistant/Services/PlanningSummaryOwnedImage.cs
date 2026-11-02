@@ -12,6 +12,37 @@ public static class PlanningSummaryOwnedImage
 {
     public const long MaximumBytes=64L*1024*1024;
     public const long MaximumPixels=40_000_000;
+    public const int MaximumSnapshotBase64Characters=32*1024*1024;
+    public const int MaximumSnapshotBytes=24*1024*1024;
+    public const long MaximumSnapshotPixels=4_194_304;
+    public static Image ReadSnapshot(PlanningCanvasRevision revision,Guid projectId,double contentWidth,double contentHeight)
+    {
+        if(revision.RevisionId==Guid.Empty||revision.CanvasId==Guid.Empty||revision.EditableSnapshot?.CanvasId!=revision.CanvasId||revision.EditableSnapshot.ProjectId is Guid owner&&owner!=projectId)
+            throw new InvalidDataException("快照身份与当前策划不匹配。");
+        var encoded=revision.PreviewPngBase64;
+        if(string.IsNullOrWhiteSpace(encoded))throw new InvalidDataException("未保存PNG预览。");
+        if(encoded.Length>MaximumSnapshotBase64Characters)throw new InvalidDataException("PNG编码超过32MiB字符预算。");
+        byte[] data;
+        try { data=Convert.FromBase64String(encoded); }
+        catch(FormatException error){throw new InvalidDataException("PNG编码已损坏，无法读取该固定版本。",error);}
+        if(data.Length<33||data.Length>MaximumSnapshotBytes)throw new InvalidDataException("PNG编码字节不在33字节至24MiB范围内。");
+        if(!data.AsSpan(0,8).SequenceEqual(new byte[]{137,80,78,71,13,10,26,10})||!data.AsSpan(12,4).SequenceEqual("IHDR"u8))throw new NotSupportedException("保存的预览不是支持的PNG。");
+        var width=BinaryPrimitives.ReadUInt32BigEndian(data.AsSpan(16,4));var height=BinaryPrimitives.ReadUInt32BigEndian(data.AsSpan(20,4));
+        if(width==0||height==0||width>16384||height>16384||(long)width*height>MaximumSnapshotPixels)
+            throw new InvalidDataException("快照超过单图4194304像素预算（解码工作估算64MiB，不含编码字节）。");
+        if(revision.PreviewWidth is int savedWidth&&savedWidth!=width||revision.PreviewHeight is int savedHeight&&savedHeight!=height)
+            throw new InvalidDataException("保存的PNG尺寸与版本记录不一致。");
+        if(data[24]!=8)throw new NotSupportedException("固定快照阅读导出仅支持8位PNG，不自动降低精度。");
+        var position=8;
+        while(position<=data.Length-12)
+        {
+            var length=BinaryPrimitives.ReadUInt32BigEndian(data.AsSpan(position,4));
+            if(length>data.Length-position-12)throw new InvalidDataException("PNG数据块不完整。");
+            if(data.AsSpan(position+4,4).SequenceEqual("acTL"u8))throw new NotSupportedException("动画PNG不在固定快照阅读范围内。");
+            position=checked(position+(int)length+12);
+        }
+        return Decode(data,width,height,contentWidth,contentHeight,"已保存画布固定快照");
+    }
     public static Image Read(PlanningDocumentImage meta,Guid documentId,double contentWidth,double contentHeight)
     {
         meta.Validate();
