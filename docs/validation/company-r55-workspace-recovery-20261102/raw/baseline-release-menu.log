@@ -1,0 +1,32 @@
+VSTest 版本 18.6.0 (x64)
+
+正在启动测试执行，请稍候...
+总共 1 个测试文件与指定模式相匹配。
+  失败 FailedSwitchRepairsSavesThenSwitchesBackWithoutPoisonedDispose [17 s]
+  错误消息:
+   测试方法 RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests。FailedSwitchRepairsSavesThenSwitchesBackWithoutPoisonedDispose 引发了异常: 
+System.IO.IOException: 画布未能保存，无法释放工作区。
+  堆栈跟踪:
+     at PixelTart.Modules.AssetLibrary.AssetLibraryPage.DisposeCoreAsync()
+   at PixelTart.Modules.AssetLibrary.AssetLibraryPage.CompleteDisposeAsync(TaskCompletionSource completion)
+   at PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost.DisposeCoreAsync()
+   at RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests.Fixture.DisposeAsync()
+   at RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests.<>c.<<FailedSwitchRepairsSavesThenSwitchesBackWithoutPoisonedDispose>b__8_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407
+
+  失败 FailedHostCloseNeverReturnsFalseSuccessAndCanRetryAfterSave [1 s]
+  错误消息:
+   测试方法 RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests。FailedHostCloseNeverReturnsFalseSuccessAndCanRetryAfterSave 引发了异常: 
+System.IO.IOException: 画布未能保存，无法释放工作区。
+  堆栈跟踪:
+     at PixelTart.Modules.AssetLibrary.AssetLibraryPage.DisposeCoreAsync()
+   at PixelTart.Modules.AssetLibrary.AssetLibraryPage.CompleteDisposeAsync(TaskCompletionSource completion)
+   at RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests.Fixture.DisposeAsync()
+   at RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests.<>c.<<FailedHostCloseNeverReturnsFalseSuccessAndCanRetryAfterSave>b__9_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407
+
+结果文件: E:/Guangjing-Workspace-Recovery-20261102/raw\baseline-release-menu.trx
+
+失败!  - 失败:     2，通过:     0，已跳过:     0，总计:     2，持续时间: 18 s - RAWSelectionAssistant.WpfTests.dll (net10.0)

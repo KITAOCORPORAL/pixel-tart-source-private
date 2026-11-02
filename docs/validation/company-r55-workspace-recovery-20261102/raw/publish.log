@@ -1,0 +1,26 @@
+  正在确定要还原的项目…
+  已还原 E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.Modules.OnlineSelection\PixelTart.Modules.OnlineSelection.csproj (用时 226 毫秒)。
+  已还原 E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.Kernel\PixelTart.Kernel.csproj (用时 220 毫秒)。
+  已还原 E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant\RAWSelectionAssistant.csproj (用时 240 毫秒)。
+  已还原 E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant.Core\RAWSelectionAssistant.Core.csproj (用时 239 毫秒)。
+  已还原 E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.Modules.RawTool\PixelTart.Modules.RawTool.csproj (用时 240 毫秒)。
+  已还原 E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.Modules.AssetLibrary\PixelTart.Modules.AssetLibrary.csproj (用时 240 毫秒)。
+  已还原 E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.MatchV4.Dx12\PixelTart.MatchV4.Dx12.csproj (用时 240 毫秒)。
+  PixelTart.Kernel -> E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.Kernel\bin\Release\net10.0\PixelTart.Kernel.dll
+  PixelTart.Modules.OnlineSelection -> E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.Modules.OnlineSelection\bin\Release\net10.0\PixelTart.Modules.OnlineSelection.dll
+E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant.Core\Services\OnboardingService.cs(13,21): warning CS9113: 参数“settingsService”未读。 [E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant.Core\RAWSelectionAssistant.Core.csproj]
+E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant.Core\Services\OnboardingService.cs(15,18): warning CS9113: 参数“logService”未读。 [E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant.Core\RAWSelectionAssistant.Core.csproj]
+E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant.Core\Services\Projects\PlanningProjectPackage.cs(90,34): warning CS8602: 解引用可能出现空引用。 [E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant.Core\RAWSelectionAssistant.Core.csproj]
+E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant.Core\Services\Projects\PlanningCurrentRootImport.cs(81,190): warning CS8602: 解引用可能出现空引用。 [E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant.Core\RAWSelectionAssistant.Core.csproj]
+  RAWSelectionAssistant.Core -> E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant.Core\bin\Release\net10.0\RAWSelectionAssistant.Core.dll
+  PixelTart.Modules.RawTool -> E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.Modules.RawTool\bin\Release\net10.0\PixelTart.Modules.RawTool.dll
+  PixelTart.MatchV4.Dx12 -> E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.MatchV4.Dx12\bin\Release\net10.0-windows10.0.19041.0\PixelTart.MatchV4.Dx12.dll
+E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.Modules.AssetLibrary\FreeCanvas\CanvasJpegNativePreview.cs(19,122): warning CS9191: 与 “in” 参数对应的参数 2 的 “ref” 修饰符等效于 “in”。请考虑改用 “in”。 [E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.Modules.AssetLibrary\PixelTart.Modules.AssetLibrary_fhpm1eyp_wpftmp.csproj]
+E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.Modules.AssetLibrary\FreeCanvas\CanvasJpegNativePreview.cs(19,122): warning CS9191: 与 “in” 参数对应的参数 2 的 “ref” 修饰符等效于 “in”。请考虑改用 “in”。 [E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.Modules.AssetLibrary\PixelTart.Modules.AssetLibrary.csproj]
+  PixelTart.Modules.AssetLibrary -> E:\Kitao-Worktrees\r55-workflow-company-20261102\src\PixelTart.Modules.AssetLibrary\bin\Release\net10.0-windows10.0.19041.0\PixelTart.Modules.AssetLibrary.dll
+E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant\ViewModels\MainViewModel.cs(1018,32): warning CS0067: 从不使用事件“MainViewModel.UpgradeTutorialOfferRequested” [E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant\RAWSelectionAssistant_wlvz1qsm_wpftmp.csproj]
+E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant\Views\PhotoGradePageView.R54.cs(22,21): warning CS0649: 从未对字段“PhotoGradePageView.developedRecipeWindow”赋值，字段将一直保持其默认值 null [E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant\RAWSelectionAssistant_wlvz1qsm_wpftmp.csproj]
+E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant\Views\PhotoGradePageView.R54.cs(22,21): warning CS0649: 从未对字段“PhotoGradePageView.developedRecipeWindow”赋值，字段将一直保持其默认值 null [E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant\RAWSelectionAssistant.csproj]
+E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant\ViewModels\MainViewModel.cs(1018,32): warning CS0067: 从不使用事件“MainViewModel.UpgradeTutorialOfferRequested” [E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant\RAWSelectionAssistant.csproj]
+  RAWSelectionAssistant -> E:\Kitao-Worktrees\r55-workflow-company-20261102\src\RAWSelectionAssistant\bin\Release\net10.0-windows10.0.19041.0\win-x64\KitaoPhotoSelector.dll
+  RAWSelectionAssistant -> E:\Guangjing-Workspace-Recovery-20261102\Guangjing-R55-WorkspaceRecovery-Diagnostic-win-x64\

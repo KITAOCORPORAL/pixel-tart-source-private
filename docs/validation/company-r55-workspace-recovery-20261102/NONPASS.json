@@ -1,0 +1,14 @@
+{
+  "scope":"Save-failure workspace disposal and library-switch recovery only",
+  "status":"TARGETED_RECOVERY_PASS_OVERALL_PARTIAL_DIAGNOSTIC",
+  "productSource":"89b64fd220bcb806065a13a061f0c392a2fdb050",
+  "testSupport":"a03d990702c169570111d87ef73ac2b7087ac511",
+  "items":[
+    {"id":"PAGE_FAULTED_DISPOSE_CACHE","status":"REPRODUCED_FIXED_VERIFIED","baseline":"raw/baseline-recovery-v4.trx","final":"raw/release-final-preservation.trx"},
+    {"id":"HOST_SECOND_CLOSE_FALSE_SUCCESS","status":"REPRODUCED_FIXED_VERIFIED","baseline":"baseline/CLOSE_RETRY_BLOCKED.json","final":"release/CLOSE_RETRY_BLOCKED.json"},
+    {"id":"IRREVERSIBLE_NON_SAVE_FAILURE","status":"EXPLICIT_FAULT_RETAINED_NO_AUTOMATIC_RETRY","evidence":"release/TERMINAL_CLEANUP_FAULT.json","note":"Injected boundary test, not general cleanup recovery approval"},
+    {"id":"CANDIDATE_CLEANUP_FAILURE","status":"INJECTED_FAULT_LEASE_AND_GATE_RELEASE_VERIFIED","evidence":"release/CANDIDATE_CLEANUP_FAULT.json","note":"Faulted repository drain remains a failure; test-only teardown is not a product discard mechanism"},
+    {"id":"PHYSICAL_MOUSE_DPI","status":"NOT_RUN","reason":"No ComputerUse/Browser/WebView/CDP; no user mouse receipt"},
+    {"id":"PRIOR_NUMERICAL_GATES","status":"ORIGINAL_FAIL_AND_NOT_RUN_RETAINED_NOT_RERUN","authority":"../home-r55-v3-numerical-20261101/NONPASS.json"}
+  ]
+}

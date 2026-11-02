@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="2823329c-e858-4e5b-bc62-c4726220a248" name="Administrator@PC-20250309WEIZ 2026-11-02 13:57:11" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-02T13:57:11.5096604+08:00" queuing="2026-11-02T13:57:11.5096608+08:00" start="2026-11-02T13:57:07.4770469+08:00" finish="2026-11-02T13:57:12.1378092+08:00" />
+  <TestSettings name="default" id="bb673e7c-366e-4aff-84a2-4d2632146575">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-02_13_57_11" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="829e942c-2e76-4f16-bd59-7de49427de84" testId="1756cff6-2f5c-8c98-9798-7a5bfec27f06" testName="FailedSwitchRepairsSavesThenSwitchesBackWithoutPoisonedDispose" computerName="PC-20250309WEIZ" duration="00:00:01.9626946" startTime="2026-11-02T13:57:08.7380690+08:00" endTime="2026-11-02T13:57:10.7230857+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="829e942c-2e76-4f16-bd59-7de49427de84">
+      <Output>
+        <ErrorInfo>
+          <Message>测试方法 RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests。FailedSwitchRepairsSavesThenSwitchesBackWithoutPoisonedDispose 引发了异常: &#xD;
+Microsoft.Data.Sqlite.SqliteException: SQLite Error 1: 'no such table: Projects'.</Message>
+          <StackTrace>   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)&#xD;
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()&#xD;
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()&#xD;
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()&#xD;
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)&#xD;
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)&#xD;
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CancellationToken cancellationToken)&#xD;
+   at RAWSelectionAssistant.Core.Services.Database.SqliteProjectRepository.ListAsync(CancellationToken cancellationToken)&#xD;
+   at RAWSelectionAssistant.Core.Services.Database.SqliteProjectRepository.ListAsync(CancellationToken cancellationToken)&#xD;
+   at RAWSelectionAssistant.Core.Services.Database.SqliteProjectRepository.ListAsync(CancellationToken cancellationToken)&#xD;
+   at PixelTart.Modules.AssetLibrary.AssetLibraryViewModel.CanvasProjectsAsync()&#xD;
+   at PixelTart.Modules.AssetLibrary.AssetLibraryPage.ShowCanvasAsync(CanvasDocument document)&#xD;
+   at RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests.Fixture.Create(String scenario)&#xD;
+   at RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests.&lt;&gt;c.&lt;&lt;FailedSwitchRepairsSavesThenSwitchesBackWithoutPoisonedDispose&gt;b__7_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407&#xD;
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="28fdbe95-92fe-4bf6-86b9-ef6486fd54d2" testId="19a49d06-5aa0-8e37-80a3-cba3ee23ee8e" testName="FailedHostCloseNeverReturnsFalseSuccessAndCanRetryAfterSave" computerName="PC-20250309WEIZ" duration="00:00:01.2676577" startTime="2026-11-02T13:57:10.7266524+08:00" endTime="2026-11-02T13:57:11.9955756+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="28fdbe95-92fe-4bf6-86b9-ef6486fd54d2">
+      <Output>
+        <ErrorInfo>
+          <Message>测试方法 RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests。FailedHostCloseNeverReturnsFalseSuccessAndCanRetryAfterSave 引发了异常: &#xD;
+Microsoft.Data.Sqlite.SqliteException: SQLite Error 1: 'no such table: Projects'.</Message>
+          <StackTrace>   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)&#xD;
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()&#xD;
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()&#xD;
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()&#xD;
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)&#xD;
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)&#xD;
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CancellationToken cancellationToken)&#xD;
+   at RAWSelectionAssistant.Core.Services.Database.SqliteProjectRepository.ListAsync(CancellationToken cancellationToken)&#xD;
+   at RAWSelectionAssistant.Core.Services.Database.SqliteProjectRepository.ListAsync(CancellationToken cancellationToken)&#xD;
+   at RAWSelectionAssistant.Core.Services.Database.SqliteProjectRepository.ListAsync(CancellationToken cancellationToken)&#xD;
+   at PixelTart.Modules.AssetLibrary.AssetLibraryViewModel.CanvasProjectsAsync()&#xD;
+   at PixelTart.Modules.AssetLibrary.AssetLibraryPage.ShowCanvasAsync(CanvasDocument document)&#xD;
+   at RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests.Fixture.Create(String scenario)&#xD;
+   at RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests.&lt;&gt;c.&lt;&lt;FailedHostCloseNeverReturnsFalseSuccessAndCanRetryAfterSave&gt;b__8_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407&#xD;
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="FailedSwitchRepairsSavesThenSwitchesBackWithoutPoisonedDispose" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1756cff6-2f5c-8c98-9798-7a5bfec27f06">
+      <Execution id="829e942c-2e76-4f16-bd59-7de49427de84" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests" name="FailedSwitchRepairsSavesThenSwitchesBackWithoutPoisonedDispose" />
+    </UnitTest>
+    <UnitTest name="FailedHostCloseNeverReturnsFalseSuccessAndCanRetryAfterSave" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19a49d06-5aa0-8e37-80a3-cba3ee23ee8e">
+      <Execution id="28fdbe95-92fe-4bf6-86b9-ef6486fd54d2" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests" name="FailedHostCloseNeverReturnsFalseSuccessAndCanRetryAfterSave" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1756cff6-2f5c-8c98-9798-7a5bfec27f06" executionId="829e942c-2e76-4f16-bd59-7de49427de84" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19a49d06-5aa0-8e37-80a3-cba3ee23ee8e" executionId="28fdbe95-92fe-4bf6-86b9-ef6486fd54d2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="2" executed="2" passed="0" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

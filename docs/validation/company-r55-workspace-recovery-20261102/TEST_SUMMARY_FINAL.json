@@ -1,0 +1,231 @@
+{
+  "uniqueMethods": 37,
+  "passed": 37,
+  "executions": 37,
+  "scope": "Final frozen published DLL-bound recovery and preservation only",
+  "failed": 0,
+  "rows": [
+    {
+      "outcome": "Passed",
+      "testName": "SnapshotRevisionDoesNotExpandPtplanV1WorkspaceContents",
+      "duration": "00:00:00.2339444",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "DisposeClosesP3GateDrainsTrackedWorkAndOnlyThenDisposesRepository",
+      "duration": "00:00:00.4446185",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "SaveFailureKeepsDocumentAvailableForRetry",
+      "duration": "00:00:00.1104028",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "ViewportNonImageContentRetainsFullObjectCoordinateBounds",
+      "duration": "00:00:00.3519975",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+      "duration": "00:00:00.0668248",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "CaptureSavesBeforePublishAndManualUpdateKeepsOldVersion",
+      "duration": "00:00:00.4710915",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "FailedSwitchRepairsSavesThenSwitchesBackWithoutPoisonedDispose",
+      "duration": "00:00:01.6201460",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "RealSurfaceRoutesDeleteAndRestoresSavedObjects",
+      "duration": "00:00:00.4957225",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "SourceReplacementAfterRenderAndNewerRequestCannotPublishOldResult",
+      "duration": "00:00:00.1931958",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "PageConcurrentDisposeCallersAwaitTheSameViewModelCleanup",
+      "duration": "00:00:00.4348899",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "CreateIndependentReopenFixture",
+      "duration": "00:00:00.3090939",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "EightDirectionsAndMonochromeUseSameExportContract",
+      "duration": "00:00:00.3174876",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "FullShellKeepsPrimaryNavigationAndContentTemplates",
+      "duration": "00:00:00.7858938",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "SnapshotCancellationAndLargeArtboardWorkingSetAreBounded",
+      "duration": "00:00:00.0384872",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "DocumentIdentityMismatchAndUnhashedExternalReplacementRejectAppend",
+      "duration": "00:00:00.2745519",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "HistoricalExportFixtureUsesOnlyExistingApis",
+      "duration": "00:00:00.2994671",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "MissingTamperedAndSaveFailureKeepPriorVersionAndFile",
+      "duration": "00:00:00.2038681",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+      "duration": "00:00:00.0082089",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "CancelLateGenerationAndProjectSwitchCannotPublish",
+      "duration": "00:00:00.1295011",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "ConcurrentPageAndHostDisposalShareOneExecutionAndWaitForBackgroundDrain",
+      "duration": "00:00:01.2412502",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "FailedHostCloseNeverReturnsFalseSuccessAndCanRetryAfterSave",
+      "duration": "00:00:01.1617000",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+      "duration": "00:00:00.9293393",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+      "duration": "00:00:00.0093473",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "IrreversibleCleanupFailureKeepsOriginalFaultAndDoesNotRestartCleanup",
+      "duration": "00:00:01.2826420",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "PreviewBudgetArtboardRatioAndLegacyExportAreExplicit",
+      "duration": "00:00:00.1842328",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "ConcurrentSaveFailureSharesAttemptAndPreservesLiveLeaseUntilRetry",
+      "duration": "00:00:01.1667422",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "EmbeddedProfileParityAndUnsupportedSixteenBitStayExplicit",
+      "duration": "00:00:00.0822920",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "ExistingSaveConfirmationRejectsCloseUntilWriteRecovery",
+      "duration": "00:00:01.1081564",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop",
+      "duration": "00:00:01.0532501",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "EmitExistingCompositorReferenceSamples",
+      "duration": "00:00:00.0670133",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "EmitMixedCompositorSamplingOracleAndHistoricalExport",
+      "duration": "00:00:00.3782748",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "CandidateCleanupFailureStillReleasesCandidateLeaseAndSwitchGate",
+      "duration": "00:00:01.3211243",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "SameDocumentSnapshotMatchesExistingExportIncludingHiddenOfflineAndBrush",
+      "duration": "00:00:00.4631831",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "DocumentChangeSaveDiscardCancelPreserveExpectedVersion",
+      "duration": "00:00:00.1410118",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "SwitchPersistsAcrossReloadAndRemoveRecentNeverDeletesLibrary",
+      "duration": "00:00:00.6435589",
+      "receipt": "release-final-preservation.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "IndependentProcessReopensRecoveredCanvasAndBothLibraryLeases",
+      "duration": "00:00:00.6917925",
+      "receipt": "release-final-independent.trx"
+    },
+    {
+      "outcome": "Passed",
+      "testName": "IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources",
+      "duration": "00:00:00.2542205",
+      "receipt": "release-final-independent.trx"
+    }
+  ]
+}

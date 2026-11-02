@@ -1,3 +1,12 @@
+## 2026-11-02 公司当前：保存失败后的退出与切库恢复（Asia/Shanghai）
+- 基线7c8da76139c098666f90636d3d2e34449fb8de0a/产品fc811b54，fetch无产品线新增；实际公司树E:/Kitao-Worktrees/r55-workflow-company-20261102，继续home/r55-canvas-photo-preview-20261101。旧灯台27794d2f的4独有未推提交/未跟踪资料原样保留，不合main/研究、不reset/clean/stash。
+- 已真实复现：A画布保存失败将page释放任务永久fault，修复写入并保存后仍切不了B；host首轮失败后第二次释放CompletedTask假成功。原失败TRX/逐阶段JSON保留，非静态猜测。
+- 产品源 **89b64fd220bcb806065a13a061f0c392a2fdb050**；最终测试 **a03d990702c169570111d87ef73ac2b7087ac511**（初始4129fc7a）。仅改AssetLibraryPage/AssetLibraryWorkspaceHost：保存前失败可再试、并发共享原任务；不可逆清理后原fault不重置；候选页失败仍finally释放候选lease/gate；成功释放后清除引用，保留既有保存确认机制。
+- 发布20共享DLL绑定后 **37唯一/37执行PASS，0FAIL/0跳过**；最近库菜单→失败保留A→实际保存→再切B→回A→独立进程重开，A/B lease/数据库可独占，4页repository和后台任务释放；并发/第二次退出不假成功、不可逆故障边界和旧快照/取消/源校验/原子保存回归通过。没有重复上一轮完整大照片闭环或数值研究。
+- 完整自包含诊断包E:/Guangjing-Workspace-Recovery-20261102/Guangjing-R55-WorkspaceRecovery-Diagnostic-win-x64.zip；294文件逐项hash读回，SHA256 F922E56BDE16E5D334351572EC95589813A124DB1DD8FCD2E0918690B068426E。同名目录Start-Guangjing-Diagnostic.cmd固定隔离根，OS启动身份和EXE/CMD退出0。
+- WholeAppDiagnosticBuild=true / PhotographerTrialBuild=false；全模块/策划15/教程退役，无Setup/单模块。Canvas数学/v1/v2/v3/256MiB/recipe/RAW/色彩研究/灯台均不改。旧JPEG/ICC FAIL、历史门禁收据保留；鼠标/DPI/ACM/HDR仍NOT_RUN。总体PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE。
+- 当前报告docs/validation/company-r55-workspace-recovery-20261102/FINAL_REPORT.md；产品/测试/包/文档HEAD与远端分记。新记录Asia/Shanghai，历史收据不改。
+
 ## 2026-11-02 公司当前：完整画布固定快照闭环（Asia/Shanghai）
 - 从家庭8da827794364da66f52c574aad401078fbda503a/产品146c0fd254de387ad5ccb9570cff6c54697389d4接续；实际树E:/Kitao-Worktrees/r55-workflow-company-20261102，分支home/r55-canvas-photo-preview-20261101。公司灯台27794d2f的4个未推独有提交及原未跟踪资料原样保留，不合main/研究，不reset/clean/stash。
 - 产品源码 **fc811b54a4a140543a4c9bead47de8b60e7529f2**；测试支持 **dd71c1f857d105229b4ffb3e3e08438a9670c09b**。仅修当前素材库重开自锁/占用异常行内提示，以及画布写入失败路径/权限/空间/占用的可操作指引；不改v3/解码核/ICC/预算/灯台，不扩功能或重画R5.5。
