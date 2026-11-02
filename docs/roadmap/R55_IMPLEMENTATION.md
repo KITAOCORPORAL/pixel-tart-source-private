@@ -1,3 +1,12 @@
+## 2026-11-02 公司当前：15区汇总DOCX固定快照（Asia/Shanghai）
+- 从6e01f26f/产品89b64fd2接续，fetch无产品线新增；旧灯台4独有未推提交、旧树/未提交资料/历史失败原样保留，不合main/研究、不强推。保存失败恢复专项冻结，只跑必要保全。
+- 产品源码 **5116daa77fdbf17f705497efc6df5b4cdcabd7a0**；测试支持 **c5222046aa7705ccf1adcd93b44e2fa37b91b518**。基线两版快照DOCX media0缺图已复现；现15区汇总仅从已保存PreviewPngBase64逐版嵌入，版本/时间图注，缺失损坏超预算原位占位+Warnings，不重渲染或访问源照片。
+- 沿已保存顺序，无明确关系放15文档内容；尊重正文PlanningBlockSemantic/灯位PlanningLight显式revision关联，不猜情绪板。只读输出，原JSON/画布/PNG/revision不变；.ptplan v1不扩，可读DOCX不称可编辑画布/项目包。
+- 单图32MiB Base64字符/24MiB编码字节/8位静态PNG/4194304像素，复用既有PNG和DOCX编码，逐图延迟解码后解除Source引用；不是进程硬上限，不改Canvas v1/v2/v3及256MiB预算。
+- 发布20共享DLL绑WPF/9绑Core，58唯一PASS（45+独立/渲染3+Core10），所选0FAIL/0跳过；四份可分发合成DOCX及14页产品读回PNG逐页查看通过。canonical render_docx.py因无soffice.exe失败日志保留，独立Word/WPS/LibreOffice排版仍NOT_RUN；鼠标/DPI/ACM/HDR未验，禁用工具未启用。
+- 完整诊断包E:/Guangjing-Summary-Snapshots-20261102/Guangjing-R55-SummarySnapshots-Diagnostic-win-x64.zip，294文件逐项SHA/ZIP读回通过，SHA256 81B2F834DDB2D37BDFAB3A7078540767BF615F39CB6DBF095F74C38FBDCACD5F；同名目录Start-Guangjing-Diagnostic.cmd固定隔离根，OS启动身份和EXE/CMD退出0。WholeAppDiagnosticBuild=true/PhotographerTrialBuild=false，全模块/策划15/教程退役，无Setup/单模块/私照。
+- 仅阅读交付改善，不宣称整个策划中心全验收；总体PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE。原JPEG/ICC FAIL、六图/20MP研究边界未改未复跑。当前报告docs/validation/company-r55-summary-snapshots-20261102/FINAL_REPORT.md；能力边界另见CAPABILITY_BOUNDARY和current清单。新时间Asia/Shanghai，不改历史收据。
+
 ## 2026-11-02 公司当前：保存失败后的退出与切库恢复（Asia/Shanghai）
 - 基线7c8da76139c098666f90636d3d2e34449fb8de0a/产品fc811b54，fetch无产品线新增；实际公司树E:/Kitao-Worktrees/r55-workflow-company-20261102，继续home/r55-canvas-photo-preview-20261101。旧灯台27794d2f的4独有未推提交/未跟踪资料原样保留，不合main/研究、不reset/clean/stash。
 - 已真实复现：A画布保存失败将page释放任务永久fault，修复写入并保存后仍切不了B；host首轮失败后第二次释放CompletedTask假成功。原失败TRX/逐阶段JSON保留，非静态猜测。

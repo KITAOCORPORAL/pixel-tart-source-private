@@ -1,0 +1,44 @@
+{
+  "WholeAppDiagnosticBuild": true,
+  "testAssemblies": [
+    {
+      "sha256": "699A18F2C48DF5CB7A5050B3D900B4F775E5D52DF216B171B8819B426DE34FDC",
+      "host": "release-testhost",
+      "file": "RAWSelectionAssistant.WpfTests.dll"
+    },
+    {
+      "sha256": "8EE59D51DF7AE55C278F3A4183A964E394942943F05AF3481804401B9F37A2A1",
+      "host": "release-core-testhost",
+      "file": "RAWSelectionAssistant.Tests.dll"
+    }
+  ],
+  "sourceTree": "62c91d782751261b88b9432b2f7bbbadaa8592d3",
+  "testSupport": "c5222046aa7705ccf1adcd93b44e2fa37b91b518",
+  "published": [
+    {
+      "sha256": "F1D7CDEE9A596AB2EC0621BFB34FE998E163E53558710B3E51A8B5AB95479095",
+      "file": "KitaoPhotoSelector.exe"
+    },
+    {
+      "sha256": "A6732F821F03848984F3188CE771910542FCC9FEE668417B13A1FACB0B3D6415",
+      "file": "KitaoPhotoSelector.dll"
+    },
+    {
+      "sha256": "26DAE1D2CE7FDF007AB9EED6E609BF0EAD321D2BB19A9CC00A3415FED13C2733",
+      "file": "RAWSelectionAssistant.Core.dll"
+    },
+    {
+      "sha256": "9797E3C94596EA0D271FCD52F4D826BDF8B897A91A52BCE7F5436D02EDC2FC48",
+      "file": "PixelTart.Modules.AssetLibrary.dll"
+    }
+  ],
+  "productSource": "5116daa77fdbf17f705497efc6df5b4cdcabd7a0",
+  "branch": "home/r55-canvas-photo-preview-20261101",
+  "baselineHead": "6e01f26f2fd491155aad3ccb4b2c8dac604030bf",
+  "documentationHead": "Final live LOCAL_HEAD/REMOTE_HEAD and pushed evidence readback recorded separately; not self-referential",
+  "recordedAtShanghai": "2026-11-02T17:08:28+08:00",
+  "testTree": "256da16f9efc53557e5fdbe95734cc5a055a2bde",
+  "baselineProduct": "89b64fd220bcb806065a13a061f0c392a2fdb050",
+  "PhotographerTrialBuild": false,
+  "worktree": "E:\\Kitao-Worktrees\\r55-workflow-company-20261102"
+}

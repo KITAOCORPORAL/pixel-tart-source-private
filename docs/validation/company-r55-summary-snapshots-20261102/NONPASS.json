@@ -1,0 +1,11 @@
+{
+  "status":"READING_DELIVERY_IMPLEMENTED_OVERALL_PARTIAL_DIAGNOSTIC",
+  "productSource":"5116daa77fdbf17f705497efc6df5b4cdcabd7a0",
+  "testSupport":"c5222046aa7705ccf1adcd93b44e2fa37b91b518",
+  "items":[
+    {"id":"SUMMARY_METADATA_ONLY_CANVAS","status":"REPRODUCED_FIXED_VERIFIED","before":"raw/baseline-missing-snapshots.trx","after":"raw/release-summary-regression.trx"},
+    {"id":"INDEPENDENT_OFFICE_RENDER","status":"NOT_RUN_NO_RENDERER","evidence":"raw/canonical-render-baseline.log","reason":"No soffice.exe, usable Word or WPS renderer; actual DOCX product readback and 14 page PNG review are separately recorded"},
+    {"id":"PHYSICAL_USER_WORKFLOW","status":"NOT_RUN","reason":"No mouse/DPI/ACM/HDR/teams-device receipt; prohibited tools not enabled"},
+    {"id":"HISTORICAL_NUMERICAL","status":"ORIGINAL_FAIL_RETAINED_NOT_RERUN","authority":"../home-r55-v3-numerical-20261101/NONPASS.json"}
+  ]
+}

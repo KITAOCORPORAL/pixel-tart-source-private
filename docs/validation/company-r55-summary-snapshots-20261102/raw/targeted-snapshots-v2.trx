@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="7505b2df-9c09-40a3-82e7-7a32b8301dc7" name="Administrator@PC-20250309WEIZ 2026-11-02 15:45:59" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-02T15:45:59.3045150+08:00" queuing="2026-11-02T15:45:59.3045151+08:00" start="2026-11-02T15:45:57.4359983+08:00" finish="2026-11-02T15:45:59.3096359+08:00" />
+  <TestSettings name="default" id="f158c852-92cb-420d-b381-9ecbf5ecf489">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-02_15_45_59" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="69be5bcc-0dee-47cb-b004-4e773e0b478c" testId="11251b4e-b81a-8fde-96e1-ef2b31b066fe" testName="ProjectSwitchOrRevisionChangeWhileReadingNeverPublishesMixedSummary" computerName="PC-20250309WEIZ" duration="00:00:00.0258851" startTime="2026-11-02T15:45:59.0813690+08:00" endTime="2026-11-02T15:45:59.1084568+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="69be5bcc-0dee-47cb-b004-4e773e0b478c">
+      <Output>
+        <ErrorInfo>
+          <Message>测试方法 RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests。ProjectSwitchOrRevisionChangeWhileReadingNeverPublishesMixedSummary 引发了异常: &#xD;
+System.IO.InvalidDataException: 策划文档尚未保存。</Message>
+          <StackTrace>   at RAWSelectionAssistant.Core.Services.Projects.PlanningProjectStore.&lt;&gt;c__DisplayClass10_0.&lt;AppendCanvasRevisionAsync&gt;b__0(PlanningProjectState state)&#xD;
+   at RAWSelectionAssistant.Core.Services.Projects.PlanningProjectStore.UpdateAsync(Guid projectId, Func`2 update, CancellationToken token, Action rollback, Action beforeCommit)&#xD;
+   at RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests.&lt;&gt;c.&lt;&lt;ProjectSwitchOrRevisionChangeWhileReadingNeverPublishesMixedSummary&gt;b__8_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407&#xD;
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="fc45bd23-49b9-41b6-bd21-8fde26e7d8cb" testId="18f71316-dc03-8bc4-bd13-a8aeed176023" testName="MissingCorruptUnsupportedAndOverBudgetSnapshotsHavePlaceholdersAndWarnings" computerName="PC-20250309WEIZ" duration="00:00:00.0539939" startTime="2026-11-02T15:45:58.9769962+08:00" endTime="2026-11-02T15:45:59.0312802+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fc45bd23-49b9-41b6-bd21-8fde26e7d8cb">
+      <Output>
+        <ErrorInfo>
+          <Message>测试方法 RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests。MissingCorruptUnsupportedAndOverBudgetSnapshotsHavePlaceholdersAndWarnings 引发了异常: &#xD;
+System.IO.InvalidDataException: 策划文档尚未保存。</Message>
+          <StackTrace>   at RAWSelectionAssistant.Core.Services.Projects.PlanningProjectStore.&lt;&gt;c__DisplayClass10_0.&lt;AppendCanvasRevisionAsync&gt;b__0(PlanningProjectState state)&#xD;
+   at RAWSelectionAssistant.Core.Services.Projects.PlanningProjectStore.UpdateAsync(Guid projectId, Func`2 update, CancellationToken token, Action rollback, Action beforeCommit)&#xD;
+   at RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests.&lt;&gt;c.&lt;&lt;MissingCorruptUnsupportedAndOverBudgetSnapshotsHavePlaceholdersAndWarnings&gt;b__5_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407&#xD;
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="da78d396-8920-4152-bd5b-07f0986bed84" testId="1ca8c015-4517-83b4-9498-152d0a8a6445" testName="SnapshotDecodesAreDeferredAndPageBoundsRespectActualContentArea" computerName="PC-20250309WEIZ" duration="00:00:00.0210776" startTime="2026-11-02T15:45:59.0315324+08:00" endTime="2026-11-02T15:45:59.0526679+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="da78d396-8920-4152-bd5b-07f0986bed84" />
+    <UnitTestResult executionId="70c8ba2a-86dc-4cb1-9f2e-2f5101e0f682" testId="1af31cd3-4bc0-86ad-a919-852bf4e0be8a" testName="SavedTwoRevisionSummaryEmbedsFrozenPngsInDocumentOrderWithoutReadingSources" computerName="PC-20250309WEIZ" duration="00:00:00.9630805" startTime="2026-11-02T15:45:57.9937887+08:00" endTime="2026-11-02T15:45:58.9727776+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="70c8ba2a-86dc-4cb1-9f2e-2f5101e0f682" />
+    <UnitTestResult executionId="fca81999-890f-4520-86bf-30c58561526b" testId="16579d64-7114-8237-9926-061e1840b80c" testName="SnapshotSummaryFailureNeverOverwritesExistingOutputOrLeavesStages" computerName="PC-20250309WEIZ" duration="00:00:00.0284697" startTime="2026-11-02T15:45:59.0528150+08:00" endTime="2026-11-02T15:45:59.0813370+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fca81999-890f-4520-86bf-30c58561526b">
+      <Output>
+        <ErrorInfo>
+          <Message>测试方法 RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests。SnapshotSummaryFailureNeverOverwritesExistingOutputOrLeavesStages 引发了异常: &#xD;
+System.IO.InvalidDataException: 策划文档尚未保存。</Message>
+          <StackTrace>   at RAWSelectionAssistant.Core.Services.Projects.PlanningProjectStore.&lt;&gt;c__DisplayClass10_0.&lt;AppendCanvasRevisionAsync&gt;b__0(PlanningProjectState state)&#xD;
+   at RAWSelectionAssistant.Core.Services.Projects.PlanningProjectStore.UpdateAsync(Guid projectId, Func`2 update, CancellationToken token, Action rollback, Action beforeCommit)&#xD;
+   at RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests.&lt;&gt;c.&lt;&lt;SnapshotSummaryFailureNeverOverwritesExistingOutputOrLeavesStages&gt;b__7_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.Execution.TestMethodInfo.ExecuteInternalAsync(Object[] arguments, CancellationTokenSource timeoutTokenSource) in /_/src/Adapter/MSTestAdapter.PlatformServices/Execution/TestMethodInfo.cs:line 407&#xD;
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="SavedTwoRevisionSummaryEmbedsFrozenPngsInDocumentOrderWithoutReadingSources" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1af31cd3-4bc0-86ad-a919-852bf4e0be8a">
+      <Execution id="70c8ba2a-86dc-4cb1-9f2e-2f5101e0f682" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests" name="SavedTwoRevisionSummaryEmbedsFrozenPngsInDocumentOrderWithoutReadingSources" />
+    </UnitTest>
+    <UnitTest name="SnapshotDecodesAreDeferredAndPageBoundsRespectActualContentArea" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1ca8c015-4517-83b4-9498-152d0a8a6445">
+      <Execution id="da78d396-8920-4152-bd5b-07f0986bed84" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests" name="SnapshotDecodesAreDeferredAndPageBoundsRespectActualContentArea" />
+    </UnitTest>
+    <UnitTest name="SnapshotSummaryFailureNeverOverwritesExistingOutputOrLeavesStages" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16579d64-7114-8237-9926-061e1840b80c">
+      <Execution id="fca81999-890f-4520-86bf-30c58561526b" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests" name="SnapshotSummaryFailureNeverOverwritesExistingOutputOrLeavesStages" />
+    </UnitTest>
+    <UnitTest name="MissingCorruptUnsupportedAndOverBudgetSnapshotsHavePlaceholdersAndWarnings" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="18f71316-dc03-8bc4-bd13-a8aeed176023">
+      <Execution id="fc45bd23-49b9-41b6-bd21-8fde26e7d8cb" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests" name="MissingCorruptUnsupportedAndOverBudgetSnapshotsHavePlaceholdersAndWarnings" />
+    </UnitTest>
+    <UnitTest name="ProjectSwitchOrRevisionChangeWhileReadingNeverPublishesMixedSummary" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="11251b4e-b81a-8fde-96e1-ef2b31b066fe">
+      <Execution id="69be5bcc-0dee-47cb-b004-4e773e0b478c" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests" name="ProjectSwitchOrRevisionChangeWhileReadingNeverPublishesMixedSummary" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="11251b4e-b81a-8fde-96e1-ef2b31b066fe" executionId="69be5bcc-0dee-47cb-b004-4e773e0b478c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18f71316-dc03-8bc4-bd13-a8aeed176023" executionId="fc45bd23-49b9-41b6-bd21-8fde26e7d8cb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ca8c015-4517-83b4-9498-152d0a8a6445" executionId="da78d396-8920-4152-bd5b-07f0986bed84" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1af31cd3-4bc0-86ad-a919-852bf4e0be8a" executionId="70c8ba2a-86dc-4cb1-9f2e-2f5101e0f682" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16579d64-7114-8237-9926-061e1840b80c" executionId="fca81999-890f-4520-86bf-30c58561526b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="5" executed="5" passed="2" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,357 @@
+{
+  "uniqueMethods": 58,
+  "scope": "Published-DLL-bound summary image and recovery regressions only",
+  "rows": [
+    {
+      "testName": "SourceReplacementAfterRenderAndNewerRequestCannotPublishOldResult",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.1905961",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ViewportNonImageContentRetainsFullObjectCoordinateBounds",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.3925085",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "SameDocumentSnapshotMatchesExistingExportIncludingHiddenOfflineAndBrush",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.6950635",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ProjectSwitchOrRevisionChangeWhileReadingNeverPublishesMixedSummary",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0495687",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "MissingCorruptUnsupportedAndOverBudgetSnapshotsHavePlaceholdersAndWarnings",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.2135501",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "SnapshotCancellationAndLargeArtboardWorkingSetAreBounded",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0379096",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "PreviewBudgetArtboardRatioAndLegacyExportAreExplicit",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.1713159",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "LedgerReadFailureIsExplicitAndUiSummaryActionDoesNotReplaceOldExport",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0470962",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "FullShellKeepsPrimaryNavigationAndContentTemplates",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.7827602",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "MissingTamperedAndSaveFailureKeepPriorVersionAndFile",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.1674241",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "SnapshotRevisionDoesNotExpandPtplanV1WorkspaceContents",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.2142088",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ExportDeclinesAProjectChangeDuringLedgerReadAndKeepsExistingFile",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0278575",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "CreateIndependentReopenFixture",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.2694482",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "FailedSwitchRepairsSavesThenSwitchesBackWithoutPoisonedDispose",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:01.8539506",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ExclusiveReadDeniedCopyIsExplainedWithoutReadingAnotherFile",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0432269",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "CandidateCleanupFailureStillReleasesCandidateLeaseAndSwitchGate",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:01.2992991",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ConcurrentPageAndHostDisposalShareOneExecutionAndWaitForBackgroundDrain",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:01.1175198",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0232874",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "EmitMixedCompositorSamplingOracleAndHistoricalExport",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.3941193",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "OwnedImageWithoutRichInsertionIsExplicitlyRetainedInDocumentContent",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0430091",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "EightDirectionsAndMonochromeUseSameExportContract",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.2903080",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "EmptySectionsAndUiSavePathSuccessCancelAndFailureAreExplicit",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0878029",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ChangedUnsupportedOversizedAndForeignImagesAreExplainedNotSubstituted",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0870711",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "TableImageKeepsAspectRatioAndFitsCellWithoutChangingSavedDimensions",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0869445",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ExistingSaveConfirmationRejectsCloseUntilWriteRecovery",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:01.1969850",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:01.1340067",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "EmitExistingCompositorReferenceSamples",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0440380",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ConcurrentSaveFailureSharesAttemptAndPreservesLiveLeaseUntilRetry",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:01.0789413",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ExplicitRichBlockAndLightPlacementUseFrozenRevisionInsteadOfEmbeddedStaleImage",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0882098",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "EmbeddedProfileParityAndUnsupportedSixteenBitStayExplicit",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0679407",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "AllFifteenSectionsExportOneDocxAndSurviveSaveReopenWithoutMutatingReferences",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.4182087",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "MultipleOwnedImagesLongBodyRepeatedReferencesMissingCopyAndReopenRemainConsistent",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:04.4527405",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "MissingOwnedImageIsDeclaredAtItsPositionAndFailedSaveCannotReplaceDestination",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0760679",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "CaptureSavesBeforePublishAndManualUpdateKeepsOldVersion",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.5086931",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "DocumentIdentityMismatchAndUnhashedExternalReplacementRejectAppend",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.2765322",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "SnapshotDecodesAreDeferredAndPageBoundsRespectActualContentArea",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0323264",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "HistoricalExportFixtureUsesOnlyExistingApis",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.2225588",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "SavedTwoRevisionSummaryEmbedsFrozenPngsInDocumentOrderWithoutReadingSources",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.4589231",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "CancelLateGenerationAndProjectSwitchCannotPublish",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.1170918",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.9479813",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "SnapshotSummaryFailureNeverOverwritesExistingOutputOrLeavesStages",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.1109832",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0624496",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "IrreversibleCleanupFailureKeepsOriginalFaultAndDoesNotRestartCleanup",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:01.1109883",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "FailedHostCloseNeverReturnsFalseSuccessAndCanRetryAfterSave",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:01.1794355",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+      "receipt": "release-summary-regression.trx",
+      "duration": "00:00:00.0064621",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "RenderExportedDocxPagesForVisualInspection",
+      "receipt": "release-independent-and-render.trx",
+      "duration": "00:00:00.8238062",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "IndependentProcessReopensRecoveredCanvasAndBothLibraryLeases",
+      "receipt": "release-independent-and-render.trx",
+      "duration": "00:00:00.5945238",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources",
+      "receipt": "release-independent-and-render.trx",
+      "duration": "00:00:00.2595474",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ReferenceStatusNeverFetchesUrlsOrInventsPortableFiles",
+      "receipt": "release-core.trx",
+      "duration": "00:00:00.0066747",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+      "receipt": "release-core.trx",
+      "duration": "00:00:00.2583926",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "CancelExportAndMissingCopyCannotPublishPartialPackage",
+      "receipt": "release-core.trx",
+      "duration": "00:00:00.2344761",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "TamperMissingDuplicateTraversalAndUnsupportedVersionAreRejectedBeforeAnyImportWrites",
+      "receipt": "release-core.trx",
+      "duration": "00:00:00.2435748",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "CancelValidationAndExtractionLeaveNoVisibleProjectAndPreserveSource",
+      "receipt": "release-core.trx",
+      "duration": "00:00:00.2564836",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "FifteenSectionsKeepStoredOrderFieldsReferencesAndDoNotMutateInput",
+      "receipt": "release-core.trx",
+      "duration": "00:00:00.1899976",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ValidatedPackageImportsIntoFreshRootReopensCopiesAndNeverOverwritesIdOrSameName",
+      "receipt": "release-core.trx",
+      "duration": "00:00:00.4148607",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "RecoveryOnlyCleansExpiredReceiptOwnedPartAndAuditsOrphanWithoutDeletingValidOrUnknown",
+      "receipt": "release-core.trx",
+      "duration": "00:00:00.2972786",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "ForeignProjectDocumentOrShotFailsClosed",
+      "receipt": "release-core.trx",
+      "duration": "00:00:00.0186039",
+      "outcome": "Passed"
+    },
+    {
+      "testName": "SummaryUsesShotOrderAndCurrentSectionReferenceClassification",
+      "receipt": "release-core.trx",
+      "duration": "00:00:00.0450658",
+      "outcome": "Passed"
+    }
+  ],
+  "failed": 0,
+  "passed": 58,
+  "executions": 58
+}

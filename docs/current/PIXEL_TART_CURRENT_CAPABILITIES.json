@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-01T15:45:04.6919860+00:00",
-  "generated_from_head": "fa171e47f5d3b3921676fb11afa0bb5a996338a6",
+  "generated_at": "2026-11-02T17:02:38+08:00",
+  "generated_from_head": "c5222046aa7705ccf1adcd93b44e2fa37b91b518",
   "branch": "home/r55-canvas-photo-preview-20261101",
   "capabilities": [
     {
@@ -339,6 +339,27 @@
       "calibration_eligible": false,
       "scope": "Baseline 8-bit large JPEG preview only; no generic RAW/16-bit support; <=256MiB estimated renderer work is not process limit",
       "diagnostic_status": "DIAGNOSIS_COMPLETE_OLD_ACCEPTANCE_FAIL_RETAINED"
+    },
+    {
+      "id": "PlanningSummaryFixedCanvasSnapshots",
+      "module": "Planning/DOCX",
+      "implementation_status": "PARTIAL",
+      "verification_status": "PASS",
+      "evidence": [
+        "src/RAWSelectionAssistant.Core/Services/Projects/PlanningReadableSummary.cs",
+        "src/RAWSelectionAssistant/Services/PlanningSummaryDocument.cs",
+        "src/RAWSelectionAssistant/Services/PlanningSummaryOwnedImage.cs",
+        "src/RAWSelectionAssistant/Services/PlanningDocxAdapter.cs"
+      ],
+      "required_tests": [
+        "tests/RAWSelectionAssistant.WpfTests/PlanningSummaryCanvasSnapshotTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/PlanningSummaryImageExportTests.cs",
+        "tests/RAWSelectionAssistant.WpfTests/WorkspaceSaveRecoveryTests.cs"
+      ],
+      "acceptance_artifacts": [
+        "docs/validation/company-r55-summary-snapshots-20261102/CAPABILITY_BOUNDARY.md"
+      ],
+      "next_gate": "Synthetic published-DLL DOCX content/alpha/layout readback passed; independent Word/WPS/LibreOffice and physical user workflow NOT_RUN. Read-only saved PNG delivery, not editable canvas or ptplan protocol expansion; not whole planning-center acceptance."
     }
   ]
 }

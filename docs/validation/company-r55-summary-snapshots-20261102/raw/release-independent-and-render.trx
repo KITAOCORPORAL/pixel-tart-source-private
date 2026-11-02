@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="0c07722b-b930-4f94-8cef-53a6bb9f7d28" name="Administrator@PC-20250309WEIZ 2026-11-02 16:50:51" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-02T16:50:51.1744815+08:00" queuing="2026-11-02T16:50:51.1744816+08:00" start="2026-11-02T16:50:49.2964645+08:00" finish="2026-11-02T16:50:51.5692149+08:00" />
+  <TestSettings name="default" id="ddbfaa76-a118-45ef-b61d-7db17f848124">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-02_16_50_51" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="a03dea18-9109-45cc-9dd1-8da7a2c28339" testId="153492a5-1895-808a-8176-88a924c921a1" testName="RenderExportedDocxPagesForVisualInspection" computerName="PC-20250309WEIZ" duration="00:00:00.8238062" startTime="2026-11-02T16:50:50.0857537+08:00" endTime="2026-11-02T16:50:50.9097113+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a03dea18-9109-45cc-9dd1-8da7a2c28339" />
+    <UnitTestResult executionId="a8b28138-96d1-4de4-9e8c-5781c93bf5e8" testId="159b8ad5-e4f2-8411-8a87-a5242e05c1df" testName="IndependentProcessReopensRecoveredCanvasAndBothLibraryLeases" computerName="PC-20250309WEIZ" duration="00:00:00.5945238" startTime="2026-11-02T16:50:50.9101526+08:00" endTime="2026-11-02T16:50:51.5053937+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a8b28138-96d1-4de4-9e8c-5781c93bf5e8" />
+    <UnitTestResult executionId="81009ee5-78bc-4259-bb20-e9a3ff44e374" testId="19d9320d-7d9f-8d7b-b92e-96f0400e7943" testName="IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources" computerName="PC-20250309WEIZ" duration="00:00:00.2595474" startTime="2026-11-02T16:50:49.8065535+08:00" endTime="2026-11-02T16:50:50.0823102+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="81009ee5-78bc-4259-bb20-e9a3ff44e374" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources" storage="e:/guangjing-summary-snapshots-20261102/release-testhost/rawselectionassistant.wpftests.dll" id="19d9320d-7d9f-8d7b-b92e-96f0400e7943">
+      <Execution id="81009ee5-78bc-4259-bb20-e9a3ff44e374" />
+      <TestMethod codeBase="E:/Guangjing-Summary-Snapshots-20261102/release-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests" name="IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources" />
+    </UnitTest>
+    <UnitTest name="RenderExportedDocxPagesForVisualInspection" storage="e:/guangjing-summary-snapshots-20261102/release-testhost/rawselectionassistant.wpftests.dll" id="153492a5-1895-808a-8176-88a924c921a1">
+      <Execution id="a03dea18-9109-45cc-9dd1-8da7a2c28339" />
+      <TestMethod codeBase="E:/Guangjing-Summary-Snapshots-20261102/release-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningSummaryCanvasSnapshotTests" name="RenderExportedDocxPagesForVisualInspection" />
+    </UnitTest>
+    <UnitTest name="IndependentProcessReopensRecoveredCanvasAndBothLibraryLeases" storage="e:/guangjing-summary-snapshots-20261102/release-testhost/rawselectionassistant.wpftests.dll" id="159b8ad5-e4f2-8411-8a87-a5242e05c1df">
+      <Execution id="a8b28138-96d1-4de4-9e8c-5781c93bf5e8" />
+      <TestMethod codeBase="E:/Guangjing-Summary-Snapshots-20261102/release-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.WorkspaceSaveRecoveryTests" name="IndependentProcessReopensRecoveredCanvasAndBothLibraryLeases" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="153492a5-1895-808a-8176-88a924c921a1" executionId="a03dea18-9109-45cc-9dd1-8da7a2c28339" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="159b8ad5-e4f2-8411-8a87-a5242e05c1df" executionId="a8b28138-96d1-4de4-9e8c-5781c93bf5e8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19d9320d-7d9f-8d7b-b92e-96f0400e7943" executionId="81009ee5-78bc-4259-bb20-e9a3ff44e374" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,32 @@
+{
+  "recordedAtShanghai": "2026-11-02T17:01:44+08:00",
+  "limitations": "Product readback not Word/WPS/LibreOffice exact pagination. render_docx.py invocation failed because no installed soffice.exe; original failure log retained.",
+  "independentOffice": "NOT_RUN_NO_SOFFICE",
+  "renderer": "Actual exported DOCX -> product PlanningDocxAdapter.Import -> WPF paginator; actual OOXML page size/margins restored for QA",
+  "reviewed": [
+    {
+      "result": "PASS",
+      "sample": "saved-two-revisions",
+      "pages": 3,
+      "notes": "All pages viewed at native size. Horizontal transparent and portrait images uncropped, ratio exact, version/time labels readable, margins/page breaks clean."
+    },
+    {
+      "result": "PASS",
+      "sample": "snapshot-placeholders",
+      "pages": 3,
+      "notes": "All pages viewed. Missing/corrupt/unsupported/over-budget explanations readable in corresponding positions; no silent substitution."
+    },
+    {
+      "result": "PASS",
+      "sample": "narrow-portrait",
+      "pages": 5,
+      "notes": "All pages viewed at actual 500x700 page size with saved 80/100/90/110 margins. Portrait scales within 330x490 content, caption with image."
+    },
+    {
+      "result": "PASS",
+      "sample": "explicit-placements",
+      "pages": 3,
+      "notes": "All pages viewed. Rich block image replaced with frozen revision in section02; explicit light association in section06; version index remains in section15."
+    }
+  ]
+}

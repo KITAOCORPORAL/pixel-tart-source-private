@@ -1,7 +1,7 @@
 # Pixel Tart current capability state
 
-Generated: 2026-11-01T15:45:04.6919860+00:00
-Generated from source HEAD: fa171e47f5d3b3921676fb11afa0bb5a996338a6
+Generated: 2026-11-02T17:02:38+08:00
+Generated from source HEAD: c5222046aa7705ccf1adcd93b44e2fa37b91b518
 Branch: home/r55-canvas-photo-preview-20261101
 
 | Capability | Implementation | Verification | Evidence | Next gate |
@@ -26,5 +26,6 @@ Branch: home/r55-canvas-photo-preview-20261101
 | ICCRegistry | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Color/ColorProfileRegistry.cs<br>docs/color-studio/ICC_PIPELINE_AUDIT.md | Validated conversion |
 | ICCConversion | PARTIAL | NOT_RUN | src/RAWSelectionAssistant/Services/Publishing/WpfPublishingRenderer.cs | Pixel conversion validation |
 | PlanningCanvasPhotoPreviewV3 | PARTIAL | FAIL | src/PixelTart.Modules.AssetLibrary/FreeCanvas/CanvasPhotoPreviewSession.cs<br>src/PixelTart.Modules.AssetLibrary/FreeCanvas/CanvasJpegNativePreview.cs<br>src/RAWSelectionAssistant/Services/PlanningCanvasSnapshot.cs | JPEG/ICC stage attribution closed by heldout contract; original cross-engine acceptance thresholds remain FAIL. Pre-existing photographic ICC+orientation source not found; physical validation not run. No need to re-diagnose known kernel/CMM differences. |
+| PlanningSummaryFixedCanvasSnapshots | PARTIAL | PASS | src/RAWSelectionAssistant.Core/Services/Projects/PlanningReadableSummary.cs<br>src/RAWSelectionAssistant/Services/PlanningSummaryDocument.cs<br>src/RAWSelectionAssistant/Services/PlanningSummaryOwnedImage.cs<br>src/RAWSelectionAssistant/Services/PlanningDocxAdapter.cs | Synthetic published-DLL DOCX content/alpha/layout readback passed; independent Word/WPS/LibreOffice and physical user workflow NOT_RUN. Read-only saved PNG delivery, not editable canvas or ptplan protocol expansion; not whole planning-center acceptance. |
 
 This file is generated from the explicit mapping in `scripts/generate-current-capabilities.ps1`. Historical acceptance and roadmap documents remain preserved evidence, not the current source of truth.
