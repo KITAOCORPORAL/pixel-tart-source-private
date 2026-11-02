@@ -24,6 +24,7 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private bool _disposed;
     private readonly object _disposeSync = new();
     private Task? _disposeTask;
+    internal bool HasStartedDisposal => _disposed;
     private bool _applyingViewModelSelection;
     // WPF raises one SelectionChanged event for every item added to SelectedItems.
     // Keep the grid event path at one dispatcher turn so a bulk selection performs
@@ -182,14 +183,21 @@ public partial class AssetLibraryPage : UserControl, IAsyncDisposable
     private async Task CompleteDisposeAsync(TaskCompletionSource completion)
     {
         try { await DisposeCoreAsync(); completion.TrySetResult(); }
-        catch (Exception exception) { completion.TrySetException(exception); }
+        catch (Exception exception)
+        {
+            lock (_disposeSync)
+            {
+                if (!_disposed) _disposeTask = null;
+                completion.TrySetException(exception);
+            }
+        }
     }
 
     private async Task DisposeCoreAsync()
     {
         if (_canvas is not null && !await _canvas.FlushAsync()) throw new IOException("画布未能保存，无法释放工作区。");
-        if (_canvasOwner is not null) _canvasOwner.Closing -= CanvasOwnerClosing;
         _disposed = true;
+        if (_canvasOwner is not null) _canvasOwner.Closing -= CanvasOwnerClosing;
         CloseToolbarPopups();
         PreviewMouseDown -= PopupOutsideClick;
         _visualRevision++;

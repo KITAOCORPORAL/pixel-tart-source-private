@@ -31,6 +31,8 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
     private AssetLibraryWriteLease? _lease;
     private Task? _startupTask;
     private Task? _disposeTask;
+    private readonly object _disposeSync = new();
+    private bool _disposeCleanupStarted;
     private int _disposed;
 
     public AssetLibraryWorkspaceHost(
@@ -276,6 +278,9 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         AssetLibraryPage? nextPage = null;
         try
         {
+            lock (_disposeSync)
+                if (_disposeTask is not null || _disposed != 0)
+                    throw new InvalidOperationException("工作区正在退出或已停止，不能切换素材库；请等待退出结果。");
             if (_page is not null && _lease is not null && _descriptor?.LibraryId == descriptor.LibraryId &&
                 string.Equals(Path.GetFullPath(_descriptor.ContainerPath), Path.GetFullPath(descriptor.ContainerPath), StringComparison.OrdinalIgnoreCase))
             {
@@ -310,9 +315,12 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         }
         finally
         {
-            if (nextPage is not null) await nextPage.DisposeAsync();
-            if (nextLease is not null) await nextLease.DisposeAsync();
-            _switchGate.Release();
+            try { if (nextPage is not null) await nextPage.DisposeAsync(); }
+            finally
+            {
+                try { if (nextLease is not null) await nextLease.DisposeAsync(); }
+                finally { _switchGate.Release(); }
+            }
         }
     }
 
@@ -480,18 +488,49 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
 
     public ValueTask DisposeAsync()
     {
-        if (Interlocked.Exchange(ref _disposed, 1) != 0) return ValueTask.CompletedTask;
-        _disposeTask ??= DisposeCoreAsync();
-        return new ValueTask(_disposeTask);
+        TaskCompletionSource? starter = null;
+        Task task;
+        lock (_disposeSync)
+        {
+            if (_disposeTask is null)
+            {
+                starter = new(TaskCreationOptions.RunContinuationsAsynchronously);
+                _disposeTask = starter.Task;
+            }
+            task = _disposeTask;
+        }
+        if (starter is not null) _ = CompleteDisposeAsync(starter);
+        return new ValueTask(task);
+    }
+
+    private async Task CompleteDisposeAsync(TaskCompletionSource completion)
+    {
+        try { await DisposeCoreAsync(); completion.TrySetResult(); }
+        catch (Exception exception)
+        {
+            lock (_disposeSync)
+            {
+                if (!_disposeCleanupStarted && _page?.HasStartedDisposal != true) _disposeTask = null;
+                completion.TrySetException(exception);
+            }
+        }
     }
 
     private async Task DisposeCoreAsync()
     {
         if (_startupTask is not null) await _startupTask;
-        if (_page is not null) await _page.DisposeAsync();
-        if (_lease is not null) await _lease.DisposeAsync();
-        _page = null;
-        _lease = null;
-        _switchGate.Dispose();
+        await _switchGate.WaitAsync();
+        try
+        {
+            if (_page is not null) await _page.DisposeAsync();
+            _disposeCleanupStarted = true;
+            if (_lease is not null) await _lease.DisposeAsync();
+            _page = null;
+            _lease = null;
+            _descriptor = null;
+            _content.Content = null;
+            Volatile.Write(ref _disposed, 1);
+        }
+        finally { _switchGate.Release(); }
     }
 }
