@@ -40,6 +40,20 @@ public sealed class WorkspaceSaveRecoveryTests
     {
         await using var lease=await new AssetLibraryContainerService().AcquireWriteLeaseAsync(descriptor);
     });
+    private static async Task OpenRecent(Fixture fixture,AssetLibraryContainerDescriptor descriptor,bool expectSuccess)
+    {
+        var recent=fixture.Host.ProductHarnessMenu.Items.OfType<MenuItem>().Single(item=>Equals(item.Header,descriptor.DisplayName));
+        var command=recent.Items.OfType<MenuItem>().Single(item=>Equals(item.Header,"打开 / 切换"));
+        var created=fixture.Pages.Count;command.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+        var deadline=DateTime.UtcNow.AddSeconds(15);
+        while(DateTime.UtcNow<deadline)
+        {
+            var state=(TextBlock)typeof(AssetLibraryWorkspaceHost).GetField("_state",BindingFlags.Instance|BindingFlags.NonPublic)!.GetValue(fixture.Host)!;
+            if(fixture.Pages.Count>created&&(expectSuccess?fixture.Host.CurrentDescriptor?.LibraryId==descriptor.LibraryId:state.Text.StartsWith("切换失败")))return;
+            await Task.Delay(20);
+        }
+        Assert.Fail("Recent-library product command did not reach expected switch result");
+    }
     [TestMethod]
     public Task FailedSwitchRepairsSavesThenSwitchesBackWithoutPoisonedDispose()=>RunSta(async()=>
     {
@@ -47,7 +61,7 @@ public sealed class WorkspaceSaveRecoveryTests
         canvas.Editor.Rename("A库尚未保存的恢复标题");var document=canvas.Editor.Document;var savedBytes=await File.ReadAllBytesAsync(fixture.CanvasPath);
         using(var blocked=new FileStream(fixture.CanvasPath,FileMode.Open,FileAccess.Read,FileShare.Read))
         {
-            await fixture.Host.SwitchToContainerAsync(fixture.Second.ContainerPath);
+            await OpenRecent(fixture,fixture.Second,false);
             Assert.AreSame(original,fixture.Host.CurrentPage);Assert.AreSame(canvas,original.ActiveCanvas);Assert.AreSame(document,canvas.Editor.Document);Assert.IsTrue(original.ViewModel.IsReady);
             await AssertLeaseHeld(fixture.First);await AssertLeaseAvailable(fixture.Second);
             CollectionAssert.AreEqual(savedBytes,await File.ReadAllBytesAsync(fixture.CanvasPath));
@@ -56,7 +70,7 @@ public sealed class WorkspaceSaveRecoveryTests
             await Record("SWITCH_SAVE_FAILURE",new{pid=Environment.ProcessId,currentPageRetained=true,documentRetained=true,originalReady=original.ViewModel.IsReady,secondCandidateDisposed=fixture.Pages[1].ViewModel.P3RepositoryDisposeStarted,cachedTaskFaulted=PageDisposeTask(original)?.IsFaulted});
         }
         await SaveButton(canvas);Assert.AreEqual(document.Name,(await fixture.Store.LoadAsync(document.CanvasId))!.Name);
-        await fixture.Host.SwitchToContainerAsync(fixture.Second.ContainerPath);var switched=fixture.Host.CurrentDescriptor?.LibraryId==fixture.Second.LibraryId;
+        await OpenRecent(fixture,fixture.Second,true);var switched=fixture.Host.CurrentDescriptor?.LibraryId==fixture.Second.LibraryId;
         await Record("SWITCH_AFTER_REPAIR",new{pid=Environment.ProcessId,switchedToB=switched,currentLibrary=fixture.Host.CurrentDescriptor?.LibraryId,expected=fixture.Second.LibraryId,originalIsReady=original.ViewModel.IsReady,cachedTaskFaulted=PageDisposeTask(original)?.IsFaulted});
         Assert.IsTrue(switched,"Repair + actual Save must permit the next A-to-B switch");
         Assert.AreEqual(0,original.ViewModel.P3PendingOperationCount);Assert.IsTrue(original.ViewModel.P3RepositoryDisposeStarted);await AssertLeaseAvailable(fixture.First);
@@ -225,7 +239,7 @@ public sealed class WorkspaceSaveRecoveryTests
         {
             var directory=Path.Combine(Root,scenario+"-"+Guid.NewGuid().ToString("N"));System.IO.Directory.CreateDirectory(directory);
             var containers=new AssetLibraryContainerService();var first=await containers.CreateAsync(Path.Combine(directory,"A.ptlibrary"),"恢复A库");var second=await containers.CreateAsync(Path.Combine(directory,"B.ptlibrary"),"恢复B库");
-            var pages=new List<AssetLibraryPage>();var settings=new AssetLibraryPortableSettings();settings.RecordOpened(first.LibraryId,first.DisplayName,first.ContainerPath,DateTimeOffset.UtcNow);
+            var pages=new List<AssetLibraryPage>();var settings=new AssetLibraryPortableSettings();settings.RecordOpened(second.LibraryId,second.DisplayName,second.ContainerPath,DateTimeOffset.UtcNow.AddMinutes(-1));settings.RecordOpened(first.LibraryId,first.DisplayName,first.ContainerPath,DateTimeOffset.UtcNow);
             Fixture? fixture=null;
             var host=new AssetLibraryWorkspaceHost(Path.Combine(directory,"legacy.db"),path=>
             {
