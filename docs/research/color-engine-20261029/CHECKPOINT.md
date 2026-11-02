@@ -1,3 +1,19 @@
+# 公司公开合成诊断已执行（2026-11-02，Asia/Shanghai）
+
+接续已审查家庭`research/color-engine-home-20261030@93b553d1c22937a2870743a40adc43d6df8b526d`，fetch无增量。公司原研究树HEAD0f3204c0、clean、unpushed0；新独立分支`research/color-engine-company-diagnostic-20261102`承接，旧树/失败/第十至十三批历史均保留，不合入产品。
+
+按修正后的`tools/color-round11/diagnostic/run_company.ps1`显式Checkout/Library/TraceLibrary/Resources/Output/Python执行一次。公司GTX1650/572.70、Windows10build19045、Python3.13.13，运行前真实build身份已冻结。3公开合成输入，whole/rows1/7/17/64与trace-final全通道0差；144stage文件/域/尺寸/顺序/finite/hash和来源独立验证通过。
+
+家庭/公司各最终whole变化通道数：gray17、saturated31、edge31，max均1U16；各rows模式相同。BT独立既有13值探针1值变化max5.58794e-9。whole与stream最早记录分歧都`film_scale_and_expose`，不直接归因GPU；固定commit/工具字节/flags/73resources34SPIRV/resolved一致，授权根字面量、DLL/构建路径、OS/Python/Pillow、GPU/驱动混杂分列。跨设备无事后PASS阈值。
+
+本轮实际GPU输出API22（21Portra+1既有BTprobe），3自然入口拒绝发生GPU前；底层dispatch及初始化math-probe未独立计数，不把22当vkdispatch。RAW0、20MP0、六图0、第十三批候选0；只运行验证器负控制22+比较器3tests，无GPU重跑。公司包与完整比较在company-diagnostic-20261102，入口run attempts1/retries0。
+
+SharedIncrementEnvelopeUnsharpV1保持默认关闭、NOT_ADMITTED，未调包络/曲线/旧unsharp、未开第二候选；家庭私人A/B目录未迁移，人工偏好NOT_RUN。下一步若授权定位具体差异，仅拆`film_scale_and_expose`内部setup/tc_b矩阵/LUT插值/曝光，不从已不同的下游锐化倒推根因。本次只报告定位需求，未执行新调查。
+
+权威COMPANY_PUBLIC_SYNTHETIC_DIAGNOSTIC_20261102.md、CAPABILITIES_COMPANY_DIAGNOSTIC_20261102.md与company-diagnostic-20261102收据/包。当前公司执行取代“公司尚未执行”这一当前状态，但下方旧NOT_RUN历史与收据原样保留；不把公司synthetic执行写成公司候选/自然照片/20MP验收。最终LOCAL_HEAD/REMOTE_HEAD实际push读回提供。
+
+---
+
 # 当前检查点：第十三批唯一受约束锐化候选（2026-11-01，Europe/Helsinki）
 
 基线3f7fe01beafc4ed83d113013ab00b300292a7461，fetch/本地/远端一致。固定dt/RT原函数及依赖已读、实际9夹具5配置共45次CPU运行完成；非完整应用/线性RGB等价oracle。

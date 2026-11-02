@@ -1,0 +1,15 @@
+{
+  "version": "ExplicitCompanyEntrypointInvocationV1",
+  "entry": "tools/color-round11/diagnostic/run_company.ps1",
+  "Checkout": "E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/source-diagnostic",
+  "Library": "E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/spektrafilm_engine.dll",
+  "TraceLibrary": "E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/spektrafilm_engine.dll",
+  "Resources": "D:/AI AGENT/tmp/color-engine-company-20261030/resources-patch",
+  "Output": "E:/Kitao-Research/color-engine-company-diagnostic-20261102-run",
+  "Python": "C:/Program Files/Python313/python.exe",
+  "OutputWasAbsent": true,
+  "entrySha256": "fb9f4eaba2ab735ff007c2f889438fcc321df8fb774fed629c9c0c6cf3d653a3",
+  "calledOnce": true,
+  "buildRecordedBeforeRender": true,
+  "noGPURepeatAfterEntry": true
+}

@@ -1,0 +1,581 @@
+{
+  "version": "CompanyHomeBuildConfoundsV1",
+  "homeExecution": {
+    "version": "DiagnosticMachineExecutionV1",
+    "deviceRole": "home",
+    "machine": "DESKTOP-HO0JJEQ",
+    "system": "Windows-11-10.0.26200-SP0",
+    "architecture": "AMD64",
+    "gpu": "NVIDIA GeForce RTX 5060 Ti",
+    "driver": "610.88",
+    "status": "EXECUTED",
+    "harnessSha256": "c03756e58095ae72cf8760a9667c6816532f0ea7b8a74045814085bb66118f07",
+    "dependencies": {
+      "numpy": "2.4.6",
+      "Pillow": "12.3.0"
+    },
+    "pythonVersion": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "pythonExecutableHash": "4d6f5f81a4bca11191c4c7c6b43632694d0a4ce74e068619d8fdc161d469859a",
+    "buildProvenanceSha256": "0b33d0dfa39398eba2f2915a3dc06b6e66b0f322e7c4209d5c286d5ebd95f3d0",
+    "utc": "2026-10-30T15:55:43.900837+00:00"
+  },
+  "companyExecution": {
+    "version": "DiagnosticMachineExecutionV1",
+    "deviceRole": "company",
+    "machine": "PC-20250309WEIZ",
+    "system": "Windows-10-10.0.19045-SP0",
+    "architecture": "AMD64",
+    "gpu": "NVIDIA GeForce GTX 1650",
+    "driver": "572.70",
+    "status": "EXECUTED",
+    "harnessSha256": "c03756e58095ae72cf8760a9667c6816532f0ea7b8a74045814085bb66118f07",
+    "dependencies": {
+      "numpy": "2.4.6",
+      "Pillow": "12.2.0"
+    },
+    "pythonVersion": "3.13.13 (tags/v3.13.13:01104ce, Apr  7 2026, 19:25:48) [MSC v.1944 64 bit (AMD64)]",
+    "pythonExecutableHash": "dc7ecf75280678175b4f931ce05f1ef9c10d48984399ca7de6beee69d71bcb1b",
+    "buildProvenanceSha256": "6c5646554f1c61f22198cafa7974f41d9c9e21feaaee8e383fd2ceb5cb633721",
+    "utc": "2026-11-02T05:50:00.346756+00:00"
+  },
+  "sameEngineBaseCommit": true,
+  "resourcesExact": true,
+  "resolvedExact": true,
+  "roles": {
+    "main": {
+      "sourceDifferences": {
+        "engine/src/pipeline/engine.cpp": {
+          "home": "3b54bd4c814e0816c9af0ecebcad7efdd886c6eac2c5d23fe410b01067a53e7d",
+          "company": "6aa2e99e5cdb28470b983d8a8ff6fd958fee55ed2cefef046b5f55dfc71f8d52"
+        }
+      },
+      "runtimeDifferencesIncludingEngineDll": {
+        "spektrafilm_engine.dll": {
+          "home": "ed4935f2966f129cf4b47d3475ac6f7ad5a186d9359c3e06dfff2b32d5990d55",
+          "company": "76f3818077e522e4bc618623a5df930301eb6a5c88028152a61232db79144e41"
+        }
+      },
+      "buildSettingDifferences": {
+        "CMAKE_CXX_COMPILER": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang++.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang++.exe"
+        },
+        "CMAKE_CXX_COMPILER_AR": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ar.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ar.exe"
+        },
+        "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang-scan-deps.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang-scan-deps.exe"
+        },
+        "CMAKE_CXX_COMPILER_RANLIB": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ranlib.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ranlib.exe"
+        },
+        "CMAKE_C_COMPILER": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang.exe"
+        },
+        "CMAKE_C_COMPILER_AR": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ar.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ar.exe"
+        },
+        "CMAKE_C_COMPILER_CLANG_SCAN_DEPS": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang-scan-deps.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang-scan-deps.exe"
+        },
+        "CMAKE_C_COMPILER_RANLIB": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ranlib.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ranlib.exe"
+        },
+        "SPEKTRALAB_DEPS_DIR": {
+          "home": "N:/pixart/ColorResearchHome-20261030/round10-source-diagnostic-v2/engine/../build/deps",
+          "company": "E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/source-diagnostic/engine/../build/deps"
+        },
+        "SPEKTRALAB_GLSLANG": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/glslang/bin/glslang.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/glslang/bin/glslang.exe"
+        },
+        "SPEKTRALAB_REPO_ROOT": {
+          "home": "N:/pixart/ColorResearchHome-20261030/round10-source-diagnostic-v2/engine/..",
+          "company": "E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/source-diagnostic/engine/.."
+        },
+        "SPEKTRALAB_VULKAN_HEADERS": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/Vulkan-Headers/include",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/Vulkan-Headers/include"
+        },
+        "SPEKTRALAB_VULKAN_SPIRV": {
+          "home": "N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_math_probe.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_take_rgb.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_matmul3.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_stride_sample.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_affine3.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_tc_b.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_lut2d_cubic.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_sep_fir_acc.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_iir_df_acc.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_lincomb3.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_log10_guarded.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_curves.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_couplers_correction.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_spectral_epilogue.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_print_exposure.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_cam16ucs_compress.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_cctf_encode_matrix.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_to_rgba16.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_grain_layers.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_grain_layer_one.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_grain_simple.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_lognormal_field.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_rng_probe.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_mul.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_glare_add.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_reduce_max.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_boost.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_bw_correct.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_edr.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_cctf_decode.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_zoom_bilinear_mirror.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_geometry_resample_df.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_lut3d_trilinear.spv;N:/pixart/ColorResearchHome-20261030/round10-build-diagnostic-v2/engine/resources/vulkan/spk_di_normalise.spv",
+          "company": "E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_math_probe.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_take_rgb.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_matmul3.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_stride_sample.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_affine3.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_tc_b.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_lut2d_cubic.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_sep_fir_acc.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_iir_df_acc.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_lincomb3.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_log10_guarded.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_curves.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_couplers_correction.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_spectral_epilogue.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_print_exposure.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_cam16ucs_compress.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_cctf_encode_matrix.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_to_rgba16.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_grain_layers.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_grain_layer_one.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_grain_simple.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_lognormal_field.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_rng_probe.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_mul.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_glare_add.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_reduce_max.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_boost.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_bw_correct.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_edr.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_cctf_decode.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_zoom_bilinear_mirror.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_geometry_resample_df.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_lut3d_trilinear.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-diagnostic/engine/resources/vulkan/spk_di_normalise.spv"
+        }
+      },
+      "toolBinaryMatches": {
+        "CMAKE_CXX_COMPILER": {
+          "sameBytes": true,
+          "home": {
+            "path": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang++.exe",
+            "sha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5"
+          },
+          "company": {
+            "path": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang++.exe",
+            "sha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5"
+          }
+        },
+        "CMAKE_C_COMPILER": {
+          "sameBytes": true,
+          "home": {
+            "path": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang.exe",
+            "sha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5"
+          },
+          "company": {
+            "path": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang.exe",
+            "sha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5"
+          }
+        },
+        "CMAKE_MAKE_PROGRAM": {
+          "sameBytes": true,
+          "home": {
+            "path": "N:/pixart/ColorResearchHome-20261030/deps/pytools/bin/ninja.exe",
+            "sha256": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597"
+          },
+          "company": {
+            "path": "D:/AI AGENT/tmp/color-engine-company-20261030/pytools/bin/ninja.exe",
+            "sha256": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597"
+          }
+        },
+        "SPEKTRALAB_GLSLANG": {
+          "sameBytes": true,
+          "home": {
+            "path": "N:/pixart/ColorResearchHome-20261030/deps/glslang/bin/glslang.exe",
+            "sha256": "9643709c02c83e26773f96b6a87f197ab2e84f78be0879ad8fb3619418b5d9ad"
+          },
+          "company": {
+            "path": "D:/AI AGENT/tmp/color-engine-company-20261030/glslang/bin/glslang.exe",
+            "sha256": "9643709c02c83e26773f96b6a87f197ab2e84f78be0879ad8fb3619418b5d9ad"
+          }
+        },
+        "CMAKE_COMMAND": {
+          "sameBytes": true,
+          "home": {
+            "path": "N:/pixart/ColorResearchHome-20261030/deps/pytools/cmake/data/bin/cmake.exe",
+            "sha256": "3c05de86fbc0ec0610bbee201588e4fc1017347ec61b0f8080981fc6bfe93681"
+          },
+          "company": {
+            "path": "D:/AI AGENT/tmp/color-engine-company-20261030/pytools/cmake/data/bin/cmake.exe",
+            "sha256": "3c05de86fbc0ec0610bbee201588e4fc1017347ec61b0f8080981fc6bfe93681"
+          }
+        }
+      },
+      "homeCommandCount": 84,
+      "companyCommandCount": 84,
+      "homeCommandFlags": [
+        "--target-env",
+        "-DNDEBUG",
+        "-Dspektralab_engine_shared_EXPORTS",
+        "-E",
+        "-IN:",
+        "-MD",
+        "-MF",
+        "-MT",
+        "-O3",
+        "-V",
+        "-Wl",
+        "-c",
+        "-f",
+        "-ladvapi32",
+        "-lbcrypt",
+        "-lcomdlg32",
+        "-lgdi32",
+        "-lkernel32",
+        "-lole32",
+        "-loleaut32",
+        "-lshell32",
+        "-luser32",
+        "-luuid",
+        "-lwinspool",
+        "-o",
+        "-shared",
+        "-std=gnu++20"
+      ],
+      "companyCommandFlags": [
+        "--target-env",
+        "-DNDEBUG",
+        "-Dspektralab_engine_shared_EXPORTS",
+        "-E",
+        "-I",
+        "-IE:",
+        "-MD",
+        "-MF",
+        "-MT",
+        "-O3",
+        "-V",
+        "-Wl",
+        "-c",
+        "-f",
+        "-ladvapi32",
+        "-lbcrypt",
+        "-lcomdlg32",
+        "-lgdi32",
+        "-lkernel32",
+        "-lole32",
+        "-loleaut32",
+        "-lshell32",
+        "-luser32",
+        "-luuid",
+        "-lwinspool",
+        "-o",
+        "-shared",
+        "-std=gnu++20"
+      ],
+      "sourceTextChecks": [
+        {
+          "file": "engine/src/pipeline/engine.cpp",
+          "companyLiteral": "E:/Kitao-Research",
+          "sealedHomeLiteral": "N:/pixart/ColorResearchHome-20261030",
+          "replacements": 2,
+          "allOtherBytesExactAfterOnlyLiteralNormalisation": true,
+          "normalisedCompanySha256": "3b54bd4c814e0816c9af0ecebcad7efdd886c6eac2c5d23fe410b01067a53e7d",
+          "sealedHomeSha256": "3b54bd4c814e0816c9af0ecebcad7efdd886c6eac2c5d23fe410b01067a53e7d"
+        }
+      ],
+      "effectiveConfigurationComparison": {
+        "CMAKE_BUILD_TYPE": {
+          "home": "Release",
+          "company": "Release",
+          "same": true
+        },
+        "CMAKE_C_FLAGS": {
+          "home": "",
+          "company": "",
+          "same": true
+        },
+        "CMAKE_C_FLAGS_RELEASE": {
+          "home": "-O3 -DNDEBUG",
+          "company": "-O3 -DNDEBUG",
+          "same": true
+        },
+        "CMAKE_CXX_FLAGS": {
+          "home": "",
+          "company": "",
+          "same": true
+        },
+        "CMAKE_CXX_FLAGS_RELEASE": {
+          "home": "-O3 -DNDEBUG",
+          "company": "-O3 -DNDEBUG",
+          "same": true
+        },
+        "SPEKTRALAB_REQUIRE_VULKAN": {
+          "home": "ON",
+          "company": "ON",
+          "same": true
+        },
+        "SPEKTRALAB_BUILD_TEST_DLL": {
+          "home": "ON",
+          "company": "ON",
+          "same": true
+        },
+        "SPEKTRALAB_BUILD_NATIVE_RAW": {
+          "home": "OFF",
+          "company": "OFF",
+          "same": true
+        },
+        "SPEKTRALAB_BUILD_DESKTOP": {
+          "home": "OFF",
+          "company": "OFF",
+          "same": true
+        }
+      },
+      "pathOnlyDifferenceCaution": "Full per-object argv saved in provenance. Include/compiler/build paths differ, engine.cpp authorized-path literal normalized exactly; build date/path metadata may change DLL. No claim binary equivalence just because flags/tool files match.",
+      "homeCommandFlagsRegexOnlyCaution": "-IN:/-IE:/ from absolute include-path tokenisation are not genuine flag semantics; use effectiveConfigurationComparison and complete perObjectCommands.",
+      "runtimeSetNamesExact": true,
+      "runtimeDllCount": 12
+    },
+    "trace": {
+      "sourceDifferences": {
+        "engine/src/pipeline/engine.cpp": {
+          "home": "3b54bd4c814e0816c9af0ecebcad7efdd886c6eac2c5d23fe410b01067a53e7d",
+          "company": "6aa2e99e5cdb28470b983d8a8ff6fd958fee55ed2cefef046b5f55dfc71f8d52"
+        }
+      },
+      "runtimeDifferencesIncludingEngineDll": {
+        "spektrafilm_engine.dll": {
+          "home": "263a04c0aafa446c5adb4134365a8d27757b064449945dc3bee5adfe47a11c86",
+          "company": "f74b584c24a1904f5f20f9a9d2f272d591a4eda6d4c768a5851a8d59ccc97589"
+        }
+      },
+      "buildSettingDifferences": {
+        "CMAKE_CXX_COMPILER": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang++.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang++.exe"
+        },
+        "CMAKE_CXX_COMPILER_AR": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ar.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ar.exe"
+        },
+        "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang-scan-deps.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang-scan-deps.exe"
+        },
+        "CMAKE_CXX_COMPILER_RANLIB": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ranlib.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ranlib.exe"
+        },
+        "CMAKE_C_COMPILER": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang.exe"
+        },
+        "CMAKE_C_COMPILER_AR": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ar.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ar.exe"
+        },
+        "CMAKE_C_COMPILER_CLANG_SCAN_DEPS": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang-scan-deps.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang-scan-deps.exe"
+        },
+        "CMAKE_C_COMPILER_RANLIB": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ranlib.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/llvm-ranlib.exe"
+        },
+        "SPEKTRALAB_DEPS_DIR": {
+          "home": "N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/../build/deps",
+          "company": "E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/source-trace/engine/../build/deps"
+        },
+        "SPEKTRALAB_GLSLANG": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/glslang/bin/glslang.exe",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/glslang/bin/glslang.exe"
+        },
+        "SPEKTRALAB_REPO_ROOT": {
+          "home": "N:/pixart/ColorResearchHome-20261030/round10-source-trace-v2/engine/..",
+          "company": "E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/source-trace/engine/.."
+        },
+        "SPEKTRALAB_VULKAN_HEADERS": {
+          "home": "N:/pixart/ColorResearchHome-20261030/deps/Vulkan-Headers/include",
+          "company": "D:/AI AGENT/tmp/color-engine-company-20261030/Vulkan-Headers/include"
+        },
+        "SPEKTRALAB_VULKAN_SPIRV": {
+          "home": "N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_math_probe.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_take_rgb.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_matmul3.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_stride_sample.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_affine3.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_tc_b.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_lut2d_cubic.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_sep_fir_acc.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_iir_df_acc.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_lincomb3.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_log10_guarded.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_curves.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_couplers_correction.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_spectral_epilogue.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_print_exposure.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_cam16ucs_compress.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_cctf_encode_matrix.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_to_rgba16.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_grain_layers.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_grain_layer_one.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_grain_simple.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_lognormal_field.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_rng_probe.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_mul.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_glare_add.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_reduce_max.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_boost.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_bw_correct.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_edr.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_cctf_decode.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_zoom_bilinear_mirror.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_geometry_resample_df.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_lut3d_trilinear.spv;N:/pixart/ColorResearchHome-20261030/round10-build-trace-v2/engine/resources/vulkan/spk_di_normalise.spv",
+          "company": "E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_math_probe.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_take_rgb.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_matmul3.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_stride_sample.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_affine3.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_tc_b.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_lut2d_cubic.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_sep_fir_acc.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_iir_df_acc.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_lincomb3.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_log10_guarded.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_curves.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_couplers_correction.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_spectral_epilogue.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_print_exposure.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_cam16ucs_compress.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_cctf_encode_matrix.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_to_rgba16.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_grain_layers.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_grain_layer_one.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_grain_simple.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_lognormal_field.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_rng_probe.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_mul.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_glare_add.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_reduce_max.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_boost.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_bw_correct.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_edr.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_cctf_decode.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_zoom_bilinear_mirror.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_geometry_resample_df.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_lut3d_trilinear.spv;E:/Kitao-Research/color-engine-company-diagnostic-20261102-build/build-trace/engine/resources/vulkan/spk_di_normalise.spv"
+        }
+      },
+      "toolBinaryMatches": {
+        "CMAKE_CXX_COMPILER": {
+          "sameBytes": true,
+          "home": {
+            "path": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang++.exe",
+            "sha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5"
+          },
+          "company": {
+            "path": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang++.exe",
+            "sha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5"
+          }
+        },
+        "CMAKE_C_COMPILER": {
+          "sameBytes": true,
+          "home": {
+            "path": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang.exe",
+            "sha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5"
+          },
+          "company": {
+            "path": "D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang.exe",
+            "sha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5"
+          }
+        },
+        "CMAKE_MAKE_PROGRAM": {
+          "sameBytes": true,
+          "home": {
+            "path": "N:/pixart/ColorResearchHome-20261030/deps/pytools/bin/ninja.exe",
+            "sha256": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597"
+          },
+          "company": {
+            "path": "D:/AI AGENT/tmp/color-engine-company-20261030/pytools/bin/ninja.exe",
+            "sha256": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597"
+          }
+        },
+        "SPEKTRALAB_GLSLANG": {
+          "sameBytes": true,
+          "home": {
+            "path": "N:/pixart/ColorResearchHome-20261030/deps/glslang/bin/glslang.exe",
+            "sha256": "9643709c02c83e26773f96b6a87f197ab2e84f78be0879ad8fb3619418b5d9ad"
+          },
+          "company": {
+            "path": "D:/AI AGENT/tmp/color-engine-company-20261030/glslang/bin/glslang.exe",
+            "sha256": "9643709c02c83e26773f96b6a87f197ab2e84f78be0879ad8fb3619418b5d9ad"
+          }
+        },
+        "CMAKE_COMMAND": {
+          "sameBytes": true,
+          "home": {
+            "path": "N:/pixart/ColorResearchHome-20261030/deps/pytools/cmake/data/bin/cmake.exe",
+            "sha256": "3c05de86fbc0ec0610bbee201588e4fc1017347ec61b0f8080981fc6bfe93681"
+          },
+          "company": {
+            "path": "D:/AI AGENT/tmp/color-engine-company-20261030/pytools/cmake/data/bin/cmake.exe",
+            "sha256": "3c05de86fbc0ec0610bbee201588e4fc1017347ec61b0f8080981fc6bfe93681"
+          }
+        }
+      },
+      "homeCommandCount": 84,
+      "companyCommandCount": 84,
+      "homeCommandFlags": [
+        "--target-env",
+        "-DNDEBUG",
+        "-Dspektralab_engine_shared_EXPORTS",
+        "-E",
+        "-IN:",
+        "-MD",
+        "-MF",
+        "-MT",
+        "-O3",
+        "-V",
+        "-Wl",
+        "-c",
+        "-f",
+        "-ladvapi32",
+        "-lbcrypt",
+        "-lcomdlg32",
+        "-lgdi32",
+        "-lkernel32",
+        "-lole32",
+        "-loleaut32",
+        "-lshell32",
+        "-luser32",
+        "-luuid",
+        "-lwinspool",
+        "-o",
+        "-shared",
+        "-std=gnu++20"
+      ],
+      "companyCommandFlags": [
+        "--target-env",
+        "-DNDEBUG",
+        "-Dspektralab_engine_shared_EXPORTS",
+        "-E",
+        "-I",
+        "-IE:",
+        "-MD",
+        "-MF",
+        "-MT",
+        "-O3",
+        "-V",
+        "-Wl",
+        "-c",
+        "-f",
+        "-ladvapi32",
+        "-lbcrypt",
+        "-lcomdlg32",
+        "-lgdi32",
+        "-lkernel32",
+        "-lole32",
+        "-loleaut32",
+        "-lshell32",
+        "-luser32",
+        "-luuid",
+        "-lwinspool",
+        "-o",
+        "-shared",
+        "-std=gnu++20"
+      ],
+      "sourceTextChecks": [
+        {
+          "file": "engine/src/pipeline/engine.cpp",
+          "companyLiteral": "E:/Kitao-Research",
+          "sealedHomeLiteral": "N:/pixart/ColorResearchHome-20261030",
+          "replacements": 2,
+          "allOtherBytesExactAfterOnlyLiteralNormalisation": true,
+          "normalisedCompanySha256": "3b54bd4c814e0816c9af0ecebcad7efdd886c6eac2c5d23fe410b01067a53e7d",
+          "sealedHomeSha256": "3b54bd4c814e0816c9af0ecebcad7efdd886c6eac2c5d23fe410b01067a53e7d"
+        }
+      ],
+      "effectiveConfigurationComparison": {
+        "CMAKE_BUILD_TYPE": {
+          "home": "Release",
+          "company": "Release",
+          "same": true
+        },
+        "CMAKE_C_FLAGS": {
+          "home": "",
+          "company": "",
+          "same": true
+        },
+        "CMAKE_C_FLAGS_RELEASE": {
+          "home": "-O3 -DNDEBUG",
+          "company": "-O3 -DNDEBUG",
+          "same": true
+        },
+        "CMAKE_CXX_FLAGS": {
+          "home": "",
+          "company": "",
+          "same": true
+        },
+        "CMAKE_CXX_FLAGS_RELEASE": {
+          "home": "-O3 -DNDEBUG",
+          "company": "-O3 -DNDEBUG",
+          "same": true
+        },
+        "SPEKTRALAB_REQUIRE_VULKAN": {
+          "home": "ON",
+          "company": "ON",
+          "same": true
+        },
+        "SPEKTRALAB_BUILD_TEST_DLL": {
+          "home": "ON",
+          "company": "ON",
+          "same": true
+        },
+        "SPEKTRALAB_BUILD_NATIVE_RAW": {
+          "home": "OFF",
+          "company": "OFF",
+          "same": true
+        },
+        "SPEKTRALAB_BUILD_DESKTOP": {
+          "home": "OFF",
+          "company": "OFF",
+          "same": true
+        }
+      },
+      "pathOnlyDifferenceCaution": "Full per-object argv saved in provenance. Include/compiler/build paths differ, engine.cpp authorized-path literal normalized exactly; build date/path metadata may change DLL. No claim binary equivalence just because flags/tool files match.",
+      "homeCommandFlagsRegexOnlyCaution": "-IN:/-IE:/ from absolute include-path tokenisation are not genuine flag semantics; use effectiveConfigurationComparison and complete perObjectCommands.",
+      "runtimeSetNamesExact": true,
+      "runtimeDllCount": 12
+    }
+  },
+  "harnessSourceDifferences": {
+    "package_validation.py": {
+      "home": "ea29697f220d07773a4d20a9ac984def025c6675aee6e0a74a250fa6e0c0847e",
+      "company": "bdf3eee954e5bd9a202a243f09ed9b8e47b575bc2109044966435e74d516d538"
+    },
+    "test_independent_validation.py": {
+      "home": "8d0d3b0d2a5b0a6a320661b6cda27053c67cdebeb65dcb863736fc2b28e4d589",
+      "company": "9935175bc18516290f8f42296830d1300f09221da024d64daf5de64c36456658"
+    },
+    "test_two_side_compare.py": {
+      "home": "f5f3b8b811f496095db74f75a5ce30f4eb05b9a9feb4b83ec41738c4bcf37395",
+      "company": "28fe72f3df2e4aacf4f06a729802b18a990a402d123f5dae9cc5baf91fdffc16"
+    }
+  },
+  "interpretation": {
+    "matched": [
+      "same fixed engine commit",
+      "all seven inventoried source files exact except two engine.cpp native-root literals; after replacing those literals all bytes match",
+      "CMake/clang wrappers/Ninja/glslang binary hashes",
+      "all 73 runtime resources including34SPIRV",
+      "all non-engine runtime DLLs",
+      "resolved99parameters",
+      "3 input bytes/pixels",
+      "runner and comparator source hashes"
+    ],
+    "different": [
+      "NVIDIA GPU GTX1650 vsRTX5060Ti",
+      "driver572.70 vs610.88",
+      "Windows build19045 vs26200 (see actual platform strings)",
+      "CPU/architecture/platform runtime environment; homeCPUmodel not present in sealed package",
+      "Python3.13.13 vs3.12.10",
+      "Pillow12.2.0 vs12.3.0",
+      "authorized-root literals E:/ vsN:/",
+      "object commands/absolute paths/build timestamps/engineDLL bytes",
+      "package_validation and two negative-test script hashes updated since frozen home run (current shared validation validates both)"
+    ],
+    "notEstablished": "None of these variables isolated experimentally; cannot attribute measured differences to GPU hardware alone. Earliest recorded whole stage is a compound film_scale_and_expose stage, not proven individual operator.",
+    "remainingUninventoriedToolchainScope": "Collector hashes the named compiler/wrapper/CMake/Ninja/glslang files and copied runtime DLLs; not a complete independent audit of every compiler-internal executable/linker/header. Keep this residual confound, do not infer hardware-only cause."
+  }
+}

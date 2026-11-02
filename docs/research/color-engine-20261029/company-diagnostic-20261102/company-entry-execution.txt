@@ -1,0 +1,29 @@
+{"version": "Round11BuildIdentityV1", "output": "E:\\Kitao-Research\\color-engine-company-diagnostic-20261102-run\\build-before-run.json", "library": "76f3818077e522e4bc618623a5df930301eb6a5c88028152a61232db79144e41"}
+{"syntheticCases": 3, "sameDeviceExact": true, "executedDeviceRole": "company", "output": "E:\\Kitao-Research\\color-engine-company-diagnostic-20261102-run\\run"}
+{
+  "version": "PackageIndependentValidationV2",
+  "deviceRole": "company",
+  "dataChecksRecomputed": true,
+  "cases": [
+    {
+      "id": "gray-boundaries",
+      "sameDeviceWholeStreamDataExact": true,
+      "traceFinalDataExact": true,
+      "stageFilesValidated": 48
+    },
+    {
+      "id": "saturated-colors",
+      "sameDeviceWholeStreamDataExact": true,
+      "traceFinalDataExact": true,
+      "stageFilesValidated": 48
+    },
+    {
+      "id": "edge-small",
+      "sameDeviceWholeStreamDataExact": true,
+      "traceFinalDataExact": true,
+      "stageFilesValidated": 48
+    }
+  ],
+  "legacySealedRound10": false
+}
+Company execution COMPLETE. Compare with sealed HOME package separately: E:\Kitao-Research\color-engine-company-diagnostic-20261102-run\run

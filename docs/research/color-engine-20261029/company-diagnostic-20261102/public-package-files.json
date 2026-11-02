@@ -1,0 +1,878 @@
+{
+  "version": "CompanyPublicPackageFilesV1",
+  "privatePhotosIncluded": false,
+  "artifactCount": 174,
+  "stageFileCount": 144,
+  "files": [
+    {
+      "path": "company-package/bt-decode.f32",
+      "bytes": 52,
+      "sha256": "70758aaabd3e03c7038f23ded1834470ce255c1825d6b6c8ffce948b5b463fec"
+    },
+    {
+      "path": "company-package/bt-input.f32",
+      "bytes": 52,
+      "sha256": "ece9684a8cf26597e0c12c0db7fc03ac2b14662d2dc33c99557e2ab680343904"
+    },
+    {
+      "path": "company-package/build-provenance.json",
+      "bytes": 156498,
+      "sha256": "6c5646554f1c61f22198cafa7974f41d9c9e21feaaee8e383fd2ceb5cb633721"
+    },
+    {
+      "path": "company-package/edge-small/input.npy",
+      "bytes": 9452,
+      "sha256": "030bfa036e1e46c508e85e65002d9c1565dfd238a48fd39b07d05936e3406cde"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0108-film_scale_and_expose-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "561851974696f48f9b1b86c7731c4fce5109250a49fe17adae01c19c68bfa11d"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0109-film_boost-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "561851974696f48f9b1b86c7731c4fce5109250a49fe17adae01c19c68bfa11d"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0110-film_overscan-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "561851974696f48f9b1b86c7731c4fce5109250a49fe17adae01c19c68bfa11d"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0111-film_blurs-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "561851974696f48f9b1b86c7731c4fce5109250a49fe17adae01c19c68bfa11d"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0112-film_log_and_curves-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "e7ae4e5dc2426f03cc4522357de334e6f553061b67d0c2a8e00700d8d958679e"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0113-film_couplers-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "e7ae4e5dc2426f03cc4522357de334e6f553061b67d0c2a8e00700d8d958679e"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0114-film_grain-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "e7ae4e5dc2426f03cc4522357de334e6f553061b67d0c2a8e00700d8d958679e"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0115-film_scale_and_expose-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "8007a45a55570ed3f0742f78fdb10af7fc9dd1145b0e69e37a8bdd1cf78acff7"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0116-film_boost-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "8007a45a55570ed3f0742f78fdb10af7fc9dd1145b0e69e37a8bdd1cf78acff7"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0117-film_overscan-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "8007a45a55570ed3f0742f78fdb10af7fc9dd1145b0e69e37a8bdd1cf78acff7"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0118-film_blurs-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "8007a45a55570ed3f0742f78fdb10af7fc9dd1145b0e69e37a8bdd1cf78acff7"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0119-film_log_and_curves-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "dc974fbb1923dd216e98471b118a2973a44a81e13fdcb762536029a3ed75ae09"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0120-film_couplers-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "dc974fbb1923dd216e98471b118a2973a44a81e13fdcb762536029a3ed75ae09"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0121-film_grain-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "dc974fbb1923dd216e98471b118a2973a44a81e13fdcb762536029a3ed75ae09"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0122-film_scale_and_expose-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "83a31c5b987d561f8318c34312b0d791c8ad045ca7223d24181f00d9af2c37da"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0123-film_boost-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "83a31c5b987d561f8318c34312b0d791c8ad045ca7223d24181f00d9af2c37da"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0124-film_overscan-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "83a31c5b987d561f8318c34312b0d791c8ad045ca7223d24181f00d9af2c37da"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0125-film_blurs-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "83a31c5b987d561f8318c34312b0d791c8ad045ca7223d24181f00d9af2c37da"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0126-film_log_and_curves-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "98c9b66aad6265c3fdb433b13ff5360893ac27d54d420ecbbf7023ed4eb0e289"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0127-film_couplers-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "98c9b66aad6265c3fdb433b13ff5360893ac27d54d420ecbbf7023ed4eb0e289"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0128-film_grain-7-37-3.f32",
+      "bytes": 3108,
+      "sha256": "98c9b66aad6265c3fdb433b13ff5360893ac27d54d420ecbbf7023ed4eb0e289"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0129-print_spectral-9-37-3.f32",
+      "bytes": 3996,
+      "sha256": "59d9d70f6ccf4c4714e2feb89b4b15e662ee4bd1f0fde2a5bc08d62d4aaeea00"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0130-print_glare-9-37-3.f32",
+      "bytes": 3996,
+      "sha256": "59d9d70f6ccf4c4714e2feb89b4b15e662ee4bd1f0fde2a5bc08d62d4aaeea00"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0131-print_linear-9-37-3.f32",
+      "bytes": 3996,
+      "sha256": "4f3ed7f73162de069ac220d588ee52be06f5c6d9c605917de6ca500e90aeae03"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0132-print_scan_finish-9-37-3.f32",
+      "bytes": 3996,
+      "sha256": "dd106a64f462b1a182719f929f35daa038e209d11b2219dc6943b50046ed0f23"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0133-print_output-9-37-3.f32",
+      "bytes": 3996,
+      "sha256": "b7300a87e641f796ee016b3fd5ef34ef51b64675e72a7e45cbdeebff9e665d68"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0134-print_spectral-11-37-3.f32",
+      "bytes": 4884,
+      "sha256": "af40506c57dd58c87abaa001af4fe666e193ff27255ec6f6ef4b76fc47637d11"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0135-print_glare-11-37-3.f32",
+      "bytes": 4884,
+      "sha256": "af40506c57dd58c87abaa001af4fe666e193ff27255ec6f6ef4b76fc47637d11"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0136-print_linear-11-37-3.f32",
+      "bytes": 4884,
+      "sha256": "f7ecad8c49b1b3655f4f46b51424836425f400a3189ce68eb66169141bc0eab7"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0137-print_scan_finish-11-37-3.f32",
+      "bytes": 4884,
+      "sha256": "8541d2e0ec019754f4a3267dd3532969250c095faeaa6c8623dcdb18e451fc2e"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0138-print_output-11-37-3.f32",
+      "bytes": 4884,
+      "sha256": "1cab7838f46f3749777ad599271cea2b1fff92ce679ce4d5da91567f24f4f3e3"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0139-print_spectral-9-37-3.f32",
+      "bytes": 3996,
+      "sha256": "a7e1cd1d9b90fce5f22ed77b0b023d53e89138e989e19a4943ea4571b9cbcfd7"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0140-print_glare-9-37-3.f32",
+      "bytes": 3996,
+      "sha256": "a7e1cd1d9b90fce5f22ed77b0b023d53e89138e989e19a4943ea4571b9cbcfd7"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0141-print_linear-9-37-3.f32",
+      "bytes": 3996,
+      "sha256": "c024b610a4c1a10dcfd7f2d8d4570aa0f38ac01806b411a280266d34f5da424d"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0142-print_scan_finish-9-37-3.f32",
+      "bytes": 3996,
+      "sha256": "ab7e962b8237ddb63cabebdd990cb5b7d683e1cd93f9f73052cf47cb4d82e9c5"
+    },
+    {
+      "path": "company-package/edge-small/stages-stream/0143-print_output-9-37-3.f32",
+      "bytes": 3996,
+      "sha256": "156f02880d5653bd91264d58b113fb79fbd5e2ad3a8ab0dfdbcb60422ac91ff8"
+    },
+    {
+      "path": "company-package/edge-small/stages-whole/0096-film_scale_and_expose-21-37-3.f32",
+      "bytes": 9324,
+      "sha256": "ae02782eabe580354059b3f52cd18a52bf69251c2e2b08da68b00f8b5dba0aa5"
+    },
+    {
+      "path": "company-package/edge-small/stages-whole/0097-film_boost-21-37-3.f32",
+      "bytes": 9324,
+      "sha256": "ae02782eabe580354059b3f52cd18a52bf69251c2e2b08da68b00f8b5dba0aa5"
+    },
+    {
+      "path": "company-package/edge-small/stages-whole/0098-film_overscan-21-37-3.f32",
+      "bytes": 9324,
+      "sha256": "ae02782eabe580354059b3f52cd18a52bf69251c2e2b08da68b00f8b5dba0aa5"
+    },
+    {
+      "path": "company-package/edge-small/stages-whole/0099-film_blurs-21-37-3.f32",
+      "bytes": 9324,
+      "sha256": "ae02782eabe580354059b3f52cd18a52bf69251c2e2b08da68b00f8b5dba0aa5"
+    },
+    {
+      "path": "company-package/edge-small/stages-whole/0100-film_log_and_curves-21-37-3.f32",
+      "bytes": 9324,
+      "sha256": "5cc1fa50ba553635dbfa99ad409066c3fb0fcdab5a6129852a8f1d12e70cf619"
+    },
+    {
+      "path": "company-package/edge-small/stages-whole/0101-film_couplers-21-37-3.f32",
+      "bytes": 9324,
+      "sha256": "5cc1fa50ba553635dbfa99ad409066c3fb0fcdab5a6129852a8f1d12e70cf619"
+    },
+    {
+      "path": "company-package/edge-small/stages-whole/0102-film_grain-21-37-3.f32",
+      "bytes": 9324,
+      "sha256": "5cc1fa50ba553635dbfa99ad409066c3fb0fcdab5a6129852a8f1d12e70cf619"
+    },
+    {
+      "path": "company-package/edge-small/stages-whole/0103-print_spectral-21-37-3.f32",
+      "bytes": 9324,
+      "sha256": "bf87b01e15213cfe9cee78703ecdf01024ae0a7dd8029e4dab11d0e366ffcdc9"
+    },
+    {
+      "path": "company-package/edge-small/stages-whole/0104-print_glare-21-37-3.f32",
+      "bytes": 9324,
+      "sha256": "bf87b01e15213cfe9cee78703ecdf01024ae0a7dd8029e4dab11d0e366ffcdc9"
+    },
+    {
+      "path": "company-package/edge-small/stages-whole/0105-print_linear-21-37-3.f32",
+      "bytes": 9324,
+      "sha256": "da9cd4a305924625aee1a8a3dbe0872b54c0d59eadd678f383f15272d330a592"
+    },
+    {
+      "path": "company-package/edge-small/stages-whole/0106-print_scan_finish-21-37-3.f32",
+      "bytes": 9324,
+      "sha256": "5fe4d6acb1ac8e164dae4e528567bb693dccf11f2ac2197e3e702447b1f13b75"
+    },
+    {
+      "path": "company-package/edge-small/stages-whole/0107-print_output-21-37-3.f32",
+      "bytes": 9324,
+      "sha256": "bd3610ca4b6d8c3a1220fcb2ecd96f63ddfe0922e0f9d3de246aec7c65f74198"
+    },
+    {
+      "path": "company-package/edge-small/stream-r1.rgba16",
+      "bytes": 6216,
+      "sha256": "ff0c38055a82cdf353c360065828e836d871487efd26724b82771170a2690ee9"
+    },
+    {
+      "path": "company-package/edge-small/stream-r17.rgba16",
+      "bytes": 6216,
+      "sha256": "ff0c38055a82cdf353c360065828e836d871487efd26724b82771170a2690ee9"
+    },
+    {
+      "path": "company-package/edge-small/stream-r64.rgba16",
+      "bytes": 6216,
+      "sha256": "ff0c38055a82cdf353c360065828e836d871487efd26724b82771170a2690ee9"
+    },
+    {
+      "path": "company-package/edge-small/stream-r7.rgba16",
+      "bytes": 6216,
+      "sha256": "ff0c38055a82cdf353c360065828e836d871487efd26724b82771170a2690ee9"
+    },
+    {
+      "path": "company-package/edge-small/stream-traced-r7.rgba16",
+      "bytes": 6216,
+      "sha256": "ff0c38055a82cdf353c360065828e836d871487efd26724b82771170a2690ee9"
+    },
+    {
+      "path": "company-package/edge-small/whole-traced.rgba16",
+      "bytes": 6216,
+      "sha256": "ff0c38055a82cdf353c360065828e836d871487efd26724b82771170a2690ee9"
+    },
+    {
+      "path": "company-package/edge-small/whole.rgba16",
+      "bytes": 6216,
+      "sha256": "ff0c38055a82cdf353c360065828e836d871487efd26724b82771170a2690ee9"
+    },
+    {
+      "path": "company-package/execution-before-render.json",
+      "bytes": 159169,
+      "sha256": "f929c0cc85c6abed765e31cde6a836b54a2c75b8bcc210a4b2f3eee943d4b5bb"
+    },
+    {
+      "path": "company-package/gray-boundaries/input.npy",
+      "bytes": 6860,
+      "sha256": "a4c31c5528ee18667b7ac632e5e24ec5c4a16343dbded160c0210c93ee93720e"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0012-film_scale_and_expose-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "47da21c00a6961f47c133d7287a1c1c952037016bd9cce8353383fe6e40851f3"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0013-film_boost-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "47da21c00a6961f47c133d7287a1c1c952037016bd9cce8353383fe6e40851f3"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0014-film_overscan-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "47da21c00a6961f47c133d7287a1c1c952037016bd9cce8353383fe6e40851f3"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0015-film_blurs-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "47da21c00a6961f47c133d7287a1c1c952037016bd9cce8353383fe6e40851f3"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0016-film_log_and_curves-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "a675b2cc54465874c636d558131199508ff54eab8964a43e2a44511eb0445666"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0017-film_couplers-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "a675b2cc54465874c636d558131199508ff54eab8964a43e2a44511eb0445666"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0018-film_grain-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "a675b2cc54465874c636d558131199508ff54eab8964a43e2a44511eb0445666"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0019-film_scale_and_expose-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "fd7e5cc7d31ef6c1606c9ff316b1f0e004da40afa3f15e9b3c30c940370e1c6a"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0020-film_boost-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "fd7e5cc7d31ef6c1606c9ff316b1f0e004da40afa3f15e9b3c30c940370e1c6a"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0021-film_overscan-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "fd7e5cc7d31ef6c1606c9ff316b1f0e004da40afa3f15e9b3c30c940370e1c6a"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0022-film_blurs-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "fd7e5cc7d31ef6c1606c9ff316b1f0e004da40afa3f15e9b3c30c940370e1c6a"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0023-film_log_and_curves-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "1d28c6ea0ab421f1182c352bc5f31fe3b33914906573d500645865569ad063f7"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0024-film_couplers-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "1d28c6ea0ab421f1182c352bc5f31fe3b33914906573d500645865569ad063f7"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0025-film_grain-7-33-3.f32",
+      "bytes": 2772,
+      "sha256": "1d28c6ea0ab421f1182c352bc5f31fe3b33914906573d500645865569ad063f7"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0026-film_scale_and_expose-3-33-3.f32",
+      "bytes": 1188,
+      "sha256": "eb84efc2d7cb2a71370c7df2ae02f7ad23da1ebfe9a323a201e0eb7600a88a71"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0027-film_boost-3-33-3.f32",
+      "bytes": 1188,
+      "sha256": "eb84efc2d7cb2a71370c7df2ae02f7ad23da1ebfe9a323a201e0eb7600a88a71"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0028-film_overscan-3-33-3.f32",
+      "bytes": 1188,
+      "sha256": "eb84efc2d7cb2a71370c7df2ae02f7ad23da1ebfe9a323a201e0eb7600a88a71"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0029-film_blurs-3-33-3.f32",
+      "bytes": 1188,
+      "sha256": "eb84efc2d7cb2a71370c7df2ae02f7ad23da1ebfe9a323a201e0eb7600a88a71"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0030-film_log_and_curves-3-33-3.f32",
+      "bytes": 1188,
+      "sha256": "e9e386a105ce0a75323ac2ee5b0ca6090f2642d89b71fb9a14317e4b938dc4b0"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0031-film_couplers-3-33-3.f32",
+      "bytes": 1188,
+      "sha256": "e9e386a105ce0a75323ac2ee5b0ca6090f2642d89b71fb9a14317e4b938dc4b0"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0032-film_grain-3-33-3.f32",
+      "bytes": 1188,
+      "sha256": "e9e386a105ce0a75323ac2ee5b0ca6090f2642d89b71fb9a14317e4b938dc4b0"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0033-print_spectral-9-33-3.f32",
+      "bytes": 3564,
+      "sha256": "ef172d59aadd9c527b78ae6e73d7485e274649acd7bbccba7ed7a4dc1ba0adce"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0034-print_glare-9-33-3.f32",
+      "bytes": 3564,
+      "sha256": "ef172d59aadd9c527b78ae6e73d7485e274649acd7bbccba7ed7a4dc1ba0adce"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0035-print_linear-9-33-3.f32",
+      "bytes": 3564,
+      "sha256": "36f2c64e94faa0127d3aee36c0da830584f06bfb15f5d58bbf3a5de5fdc5d39b"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0036-print_scan_finish-9-33-3.f32",
+      "bytes": 3564,
+      "sha256": "b82245fe14cabf996d226e363868031fe93fd75d340fdf93bb9106e194d2d55f"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0037-print_output-9-33-3.f32",
+      "bytes": 3564,
+      "sha256": "4d1055f40dd1a2fccae36f4e53a2988a2ea3d93d423715c1926ba0a89dfeb6a3"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0038-print_spectral-11-33-3.f32",
+      "bytes": 4356,
+      "sha256": "923597fc7d81cd7e880a337ea28dfa83a70a1548ab7ac3cf943141379e051b0f"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0039-print_glare-11-33-3.f32",
+      "bytes": 4356,
+      "sha256": "923597fc7d81cd7e880a337ea28dfa83a70a1548ab7ac3cf943141379e051b0f"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0040-print_linear-11-33-3.f32",
+      "bytes": 4356,
+      "sha256": "595293f24ab648f7dd8098d1e40c6062b6057210104a496f55e27b9d8b2b4f2e"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0041-print_scan_finish-11-33-3.f32",
+      "bytes": 4356,
+      "sha256": "d4baceb6fde4396a9c3a812d08fd782ad1ec1cfe26ab07a091d3b3419b732ad4"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0042-print_output-11-33-3.f32",
+      "bytes": 4356,
+      "sha256": "306b47736f14c000850f4327935afbc46ea7c4ea2da03b521c2a32800e27739e"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0043-print_spectral-5-33-3.f32",
+      "bytes": 1980,
+      "sha256": "0a61006bf812c4689ed69ef9fb40277802b09ce31c6762fc3b67fc86da7d133e"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0044-print_glare-5-33-3.f32",
+      "bytes": 1980,
+      "sha256": "0a61006bf812c4689ed69ef9fb40277802b09ce31c6762fc3b67fc86da7d133e"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0045-print_linear-5-33-3.f32",
+      "bytes": 1980,
+      "sha256": "1e031099d836301a8fb05a28a58621b0eec329f6f535ce4c30d2ec58bb5d09c1"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0046-print_scan_finish-5-33-3.f32",
+      "bytes": 1980,
+      "sha256": "f9fee0575710b70b7189f5e5b8d3e4c58f6f901d40f973d9a806ebe5ab9c6433"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-stream/0047-print_output-5-33-3.f32",
+      "bytes": 1980,
+      "sha256": "7bbece3df2c5f0d75b5c46cdd6b41e74d03358a1c37527adf105f8426593b24b"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-whole/0000-film_scale_and_expose-17-33-3.f32",
+      "bytes": 6732,
+      "sha256": "a6372c191b487444f1bc5d5f981c95fc839cd82a3c4102e0a06736448b2a6bd3"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-whole/0001-film_boost-17-33-3.f32",
+      "bytes": 6732,
+      "sha256": "a6372c191b487444f1bc5d5f981c95fc839cd82a3c4102e0a06736448b2a6bd3"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-whole/0002-film_overscan-17-33-3.f32",
+      "bytes": 6732,
+      "sha256": "a6372c191b487444f1bc5d5f981c95fc839cd82a3c4102e0a06736448b2a6bd3"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-whole/0003-film_blurs-17-33-3.f32",
+      "bytes": 6732,
+      "sha256": "a6372c191b487444f1bc5d5f981c95fc839cd82a3c4102e0a06736448b2a6bd3"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-whole/0004-film_log_and_curves-17-33-3.f32",
+      "bytes": 6732,
+      "sha256": "818e0ca2e3ac6195f9e9bb5daa3a8d7a616afe25d834fae0ce8c7ab2629a78c9"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-whole/0005-film_couplers-17-33-3.f32",
+      "bytes": 6732,
+      "sha256": "818e0ca2e3ac6195f9e9bb5daa3a8d7a616afe25d834fae0ce8c7ab2629a78c9"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-whole/0006-film_grain-17-33-3.f32",
+      "bytes": 6732,
+      "sha256": "818e0ca2e3ac6195f9e9bb5daa3a8d7a616afe25d834fae0ce8c7ab2629a78c9"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-whole/0007-print_spectral-17-33-3.f32",
+      "bytes": 6732,
+      "sha256": "674632db2b383bd00d6740786a486dd4321ea7d0a8a51d48bae5ae29df0d1959"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-whole/0008-print_glare-17-33-3.f32",
+      "bytes": 6732,
+      "sha256": "674632db2b383bd00d6740786a486dd4321ea7d0a8a51d48bae5ae29df0d1959"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-whole/0009-print_linear-17-33-3.f32",
+      "bytes": 6732,
+      "sha256": "7a8a66dd01de6a6b1eb1f7d00e86bbd3abe5e0b3d8fbaa660ad2092997dffce6"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-whole/0010-print_scan_finish-17-33-3.f32",
+      "bytes": 6732,
+      "sha256": "ad50e0ea298cf69ae1042d5c6b13df766770091b70c65c4b0924a69bd03dc280"
+    },
+    {
+      "path": "company-package/gray-boundaries/stages-whole/0011-print_output-17-33-3.f32",
+      "bytes": 6732,
+      "sha256": "665705e5ba28b2a38b02241cedc21a883d48c86aad416c6e35690216e4fecaf9"
+    },
+    {
+      "path": "company-package/gray-boundaries/stream-r1.rgba16",
+      "bytes": 4488,
+      "sha256": "214805479a6e9470c3bcd2bd18d27eb30e41309fc352494ba856114fbbebbf98"
+    },
+    {
+      "path": "company-package/gray-boundaries/stream-r17.rgba16",
+      "bytes": 4488,
+      "sha256": "214805479a6e9470c3bcd2bd18d27eb30e41309fc352494ba856114fbbebbf98"
+    },
+    {
+      "path": "company-package/gray-boundaries/stream-r64.rgba16",
+      "bytes": 4488,
+      "sha256": "214805479a6e9470c3bcd2bd18d27eb30e41309fc352494ba856114fbbebbf98"
+    },
+    {
+      "path": "company-package/gray-boundaries/stream-r7.rgba16",
+      "bytes": 4488,
+      "sha256": "214805479a6e9470c3bcd2bd18d27eb30e41309fc352494ba856114fbbebbf98"
+    },
+    {
+      "path": "company-package/gray-boundaries/stream-traced-r7.rgba16",
+      "bytes": 4488,
+      "sha256": "214805479a6e9470c3bcd2bd18d27eb30e41309fc352494ba856114fbbebbf98"
+    },
+    {
+      "path": "company-package/gray-boundaries/whole-traced.rgba16",
+      "bytes": 4488,
+      "sha256": "214805479a6e9470c3bcd2bd18d27eb30e41309fc352494ba856114fbbebbf98"
+    },
+    {
+      "path": "company-package/gray-boundaries/whole.rgba16",
+      "bytes": 4488,
+      "sha256": "214805479a6e9470c3bcd2bd18d27eb30e41309fc352494ba856114fbbebbf98"
+    },
+    {
+      "path": "company-package/independent-validation.json",
+      "bytes": 649,
+      "sha256": "b87ed31eb8384ca282df8e1301ebcb94103af86b4d24497c58dd2b2b2f15ab2f"
+    },
+    {
+      "path": "company-package/run.json",
+      "bytes": 495697,
+      "sha256": "63ab5239277ea97ac2b5855f453340e3efc9cee52c1b0b56da5042c40f64ffb0"
+    },
+    {
+      "path": "company-package/saturated-colors/input.npy",
+      "bytes": 8108,
+      "sha256": "a0a61d4bfc205fb5b562c397e3aa3095de37d2a4892e76019d5ee9b0199c5c14"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0060-film_scale_and_expose-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "bdfb84ae19ae49a0f28b7d60fdb6742b5c3e30ae2b120b8cc983667adcb9ed0a"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0061-film_boost-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "bdfb84ae19ae49a0f28b7d60fdb6742b5c3e30ae2b120b8cc983667adcb9ed0a"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0062-film_overscan-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "bdfb84ae19ae49a0f28b7d60fdb6742b5c3e30ae2b120b8cc983667adcb9ed0a"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0063-film_blurs-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "bdfb84ae19ae49a0f28b7d60fdb6742b5c3e30ae2b120b8cc983667adcb9ed0a"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0064-film_log_and_curves-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "f670a3f999e65fd6e8b6ea57dcf6481add3cd8bfc12cf7eb7546271b1f357979"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0065-film_couplers-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "f670a3f999e65fd6e8b6ea57dcf6481add3cd8bfc12cf7eb7546271b1f357979"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0066-film_grain-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "f670a3f999e65fd6e8b6ea57dcf6481add3cd8bfc12cf7eb7546271b1f357979"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0067-film_scale_and_expose-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "b4f1974edbae208bde6564de09cbdf70f9d1521dc0f2f96f3114adff9e07c074"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0068-film_boost-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "b4f1974edbae208bde6564de09cbdf70f9d1521dc0f2f96f3114adff9e07c074"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0069-film_overscan-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "b4f1974edbae208bde6564de09cbdf70f9d1521dc0f2f96f3114adff9e07c074"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0070-film_blurs-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "b4f1974edbae208bde6564de09cbdf70f9d1521dc0f2f96f3114adff9e07c074"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0071-film_log_and_curves-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "a0851caa2e291a369637f526308ff20f7e3c83526f59206a89e5a67a90fac69d"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0072-film_couplers-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "a0851caa2e291a369637f526308ff20f7e3c83526f59206a89e5a67a90fac69d"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0073-film_grain-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "a0851caa2e291a369637f526308ff20f7e3c83526f59206a89e5a67a90fac69d"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0074-film_scale_and_expose-5-35-3.f32",
+      "bytes": 2100,
+      "sha256": "9c3bd8a25d84b796870004834285bd3db88616e0a2eb2a4d2580d643c9833379"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0075-film_boost-5-35-3.f32",
+      "bytes": 2100,
+      "sha256": "9c3bd8a25d84b796870004834285bd3db88616e0a2eb2a4d2580d643c9833379"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0076-film_overscan-5-35-3.f32",
+      "bytes": 2100,
+      "sha256": "9c3bd8a25d84b796870004834285bd3db88616e0a2eb2a4d2580d643c9833379"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0077-film_blurs-5-35-3.f32",
+      "bytes": 2100,
+      "sha256": "9c3bd8a25d84b796870004834285bd3db88616e0a2eb2a4d2580d643c9833379"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0078-film_log_and_curves-5-35-3.f32",
+      "bytes": 2100,
+      "sha256": "60a4494b46e07eda08ef0b3c916813ff86a368d7e47327e59e7a87adb42d40a4"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0079-film_couplers-5-35-3.f32",
+      "bytes": 2100,
+      "sha256": "60a4494b46e07eda08ef0b3c916813ff86a368d7e47327e59e7a87adb42d40a4"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0080-film_grain-5-35-3.f32",
+      "bytes": 2100,
+      "sha256": "60a4494b46e07eda08ef0b3c916813ff86a368d7e47327e59e7a87adb42d40a4"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0081-print_spectral-9-35-3.f32",
+      "bytes": 3780,
+      "sha256": "33f7feaac1b861819aec96e243d7ab3237225116bb4afaa48bf48b4b764f5393"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0082-print_glare-9-35-3.f32",
+      "bytes": 3780,
+      "sha256": "33f7feaac1b861819aec96e243d7ab3237225116bb4afaa48bf48b4b764f5393"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0083-print_linear-9-35-3.f32",
+      "bytes": 3780,
+      "sha256": "4bc234b0f1ed99fbde8875fecdef7f9ed03cb3b9dd297fe9da2be9f0e4835026"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0084-print_scan_finish-9-35-3.f32",
+      "bytes": 3780,
+      "sha256": "7212836d3b296c430b36a21311b638cdb2d8d72d44022d2d4678f6619b31834f"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0085-print_output-9-35-3.f32",
+      "bytes": 3780,
+      "sha256": "8fdab96000983052d046136c9c4e4261cbfecb991738677b63c6795524cef13d"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0086-print_spectral-11-35-3.f32",
+      "bytes": 4620,
+      "sha256": "5acb8e57bc84b63f8be7d52c4ae7bc8e0a99ab5ee15cc51fb5000fe8071cbf4a"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0087-print_glare-11-35-3.f32",
+      "bytes": 4620,
+      "sha256": "5acb8e57bc84b63f8be7d52c4ae7bc8e0a99ab5ee15cc51fb5000fe8071cbf4a"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0088-print_linear-11-35-3.f32",
+      "bytes": 4620,
+      "sha256": "a646ba00e78e572436aaab412d0821b03435572dd3c7cd7c4d93b8aabe28fdaa"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0089-print_scan_finish-11-35-3.f32",
+      "bytes": 4620,
+      "sha256": "277d21c5f24b2f3b81a89ceb772f8eeab85aa6b91ad63f66b68e3fdaa656ad37"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0090-print_output-11-35-3.f32",
+      "bytes": 4620,
+      "sha256": "d1c48dd974d3502a18a18657d1e017958b45f54c175d87ed6f9fedad8a46ec3d"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0091-print_spectral-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "87c6cdbfae0c9ce0f096b4f821b39cf1c0058945b85f46faa8bc7a03d78e9ddc"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0092-print_glare-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "87c6cdbfae0c9ce0f096b4f821b39cf1c0058945b85f46faa8bc7a03d78e9ddc"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0093-print_linear-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "bf98130bbdb718ad719b93485b4289aa8477d232ee241f6f0f5046addb1c6630"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0094-print_scan_finish-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "575d3b645fc16ca1462727eb6f8d2607d1312c89373c0d28e08a60e6e9e818cd"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-stream/0095-print_output-7-35-3.f32",
+      "bytes": 2940,
+      "sha256": "e58239eba5492c599dafe13480578b053f9ca0c9359e8fe1cac0a4ad64076156"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-whole/0048-film_scale_and_expose-19-35-3.f32",
+      "bytes": 7980,
+      "sha256": "5aa924ef3b1993f6a136cf9051fd1b63cd38f9339cca6fe270cb092edd1b7527"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-whole/0049-film_boost-19-35-3.f32",
+      "bytes": 7980,
+      "sha256": "5aa924ef3b1993f6a136cf9051fd1b63cd38f9339cca6fe270cb092edd1b7527"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-whole/0050-film_overscan-19-35-3.f32",
+      "bytes": 7980,
+      "sha256": "5aa924ef3b1993f6a136cf9051fd1b63cd38f9339cca6fe270cb092edd1b7527"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-whole/0051-film_blurs-19-35-3.f32",
+      "bytes": 7980,
+      "sha256": "5aa924ef3b1993f6a136cf9051fd1b63cd38f9339cca6fe270cb092edd1b7527"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-whole/0052-film_log_and_curves-19-35-3.f32",
+      "bytes": 7980,
+      "sha256": "2c50c1de9cdbaa803cf63457b7eae155a73e445e92e168b4492b8a9bc2375e03"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-whole/0053-film_couplers-19-35-3.f32",
+      "bytes": 7980,
+      "sha256": "2c50c1de9cdbaa803cf63457b7eae155a73e445e92e168b4492b8a9bc2375e03"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-whole/0054-film_grain-19-35-3.f32",
+      "bytes": 7980,
+      "sha256": "2c50c1de9cdbaa803cf63457b7eae155a73e445e92e168b4492b8a9bc2375e03"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-whole/0055-print_spectral-19-35-3.f32",
+      "bytes": 7980,
+      "sha256": "c93bd1138d8dbab7401cc919a2c8f2ce58d04e0695f4e56adede73223a5aa34e"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-whole/0056-print_glare-19-35-3.f32",
+      "bytes": 7980,
+      "sha256": "c93bd1138d8dbab7401cc919a2c8f2ce58d04e0695f4e56adede73223a5aa34e"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-whole/0057-print_linear-19-35-3.f32",
+      "bytes": 7980,
+      "sha256": "1064b9e683c99fcc1b6d9def42bd82cef34b943db7559e89ed8d21631def4985"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-whole/0058-print_scan_finish-19-35-3.f32",
+      "bytes": 7980,
+      "sha256": "5eab9f2c65f6c318d475e304d15105eed8e5cf501cf9970c345c275b61aa086e"
+    },
+    {
+      "path": "company-package/saturated-colors/stages-whole/0059-print_output-19-35-3.f32",
+      "bytes": 7980,
+      "sha256": "31a908b23486d47914f0406c853ee37e50250090f805c37473d2d439fc39e0c4"
+    },
+    {
+      "path": "company-package/saturated-colors/stream-r1.rgba16",
+      "bytes": 5320,
+      "sha256": "260888f6bbf330346b10a663dc19a376873c87a015269fcfb65f05b89e45cbf7"
+    },
+    {
+      "path": "company-package/saturated-colors/stream-r17.rgba16",
+      "bytes": 5320,
+      "sha256": "260888f6bbf330346b10a663dc19a376873c87a015269fcfb65f05b89e45cbf7"
+    },
+    {
+      "path": "company-package/saturated-colors/stream-r64.rgba16",
+      "bytes": 5320,
+      "sha256": "260888f6bbf330346b10a663dc19a376873c87a015269fcfb65f05b89e45cbf7"
+    },
+    {
+      "path": "company-package/saturated-colors/stream-r7.rgba16",
+      "bytes": 5320,
+      "sha256": "260888f6bbf330346b10a663dc19a376873c87a015269fcfb65f05b89e45cbf7"
+    },
+    {
+      "path": "company-package/saturated-colors/stream-traced-r7.rgba16",
+      "bytes": 5320,
+      "sha256": "260888f6bbf330346b10a663dc19a376873c87a015269fcfb65f05b89e45cbf7"
+    },
+    {
+      "path": "company-package/saturated-colors/whole-traced.rgba16",
+      "bytes": 5320,
+      "sha256": "260888f6bbf330346b10a663dc19a376873c87a015269fcfb65f05b89e45cbf7"
+    },
+    {
+      "path": "company-package/saturated-colors/whole.rgba16",
+      "bytes": 5320,
+      "sha256": "260888f6bbf330346b10a663dc19a376873c87a015269fcfb65f05b89e45cbf7"
+    }
+  ]
+}

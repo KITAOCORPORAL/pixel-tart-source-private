@@ -1,0 +1,43 @@
+{
+  "version": "CompanyActualRuntimeSupplementV1",
+  "timezone": "Asia/Shanghai",
+  "at": "2026-11-02T14:03:43.748141+08:00",
+  "queries": {
+    "cpu": {
+      "returncode": 0,
+      "stdout": "{\n    \"Name\":  \"12th Gen Intel(R) Core(TM) i5-12400F\",\n    \"NumberOfCores\":  6,\n    \"NumberOfLogicalProcessors\":  12\n}\n",
+      "stderr": ""
+    },
+    "os": {
+      "returncode": 0,
+      "stdout": "{\n    \"Caption\":  \"Microsoft Windows 10 Pro\",\n    \"Version\":  \"10.0.19045\",\n    \"BuildNumber\":  \"19045\"\n}\n",
+      "stderr": ""
+    },
+    "gpuWmi": {
+      "returncode": 0,
+      "stdout": "[\n    {\n        \"Name\":  \"MuMu Virtual Display Adapter\",\n        \"DriverVersion\":  \"20.36.41.498\",\n        \"DriverDate\":  \"\\/Date(1773273600000)\\/\"\n    },\n    {\n        \"Name\":  \"NVIDIA GeForce GTX 1650\",\n        \"DriverVersion\":  \"32.0.15.7270\",\n        \"DriverDate\":  \"\\/Date(1740960000000)\\/\"\n    }\n]\n",
+      "stderr": ""
+    }
+  },
+  "vulkan": "==========\nVULKANINFO\n==========\n\nVulkan Instance Version: 1.4.303\n\n\nInstance Extensions: count = 16\n-------------------------------\nVK_EXT_debug_report                    : extension revision 10\nVK_EXT_debug_utils                     : extension revision 2\nVK_EXT_surface_maintenance1            : extension revision 1\nVK_EXT_swapchain_colorspace            : extension revision 5\nVK_KHR_device_group_creation           : extension revision 1\nVK_KHR_external_fence_capabilities     : extension revision 1\nVK_KHR_external_memory_capabilities    : extension revision 1\nVK_KHR_external_semaphore_capabilities : extension revision 1\nVK_KHR_get_physical_device_properties2 : extension revision 2\nVK_KHR_get_surface_capabilities2       : extension revision 1\nVK_KHR_portability_enumeration         : extension revision 1\nVK_KHR_surface                         : extension revision 25\nVK_KHR_surface_protected_capabilities  : extension revision 1\nVK_KHR_win32_surface                   : extension revision 6\nVK_LUNARG_direct_driver_loading        : extension revision 1\nVK_NV_external_memory_capabilities     : extension revision 1\n\nInstance Layers: count = 3\n--------------------------\nVK_LAYER_NV_gr2608       NVIDIA GR2608 layer    1.4.303  version 1\nVK_LAYER_NV_optimus      NVIDIA Optimus layer   1.4.303  version 1\nVK_LAYER_bandicam_helper Vulkan Bandicam Helper 1.2.141  version 1\n\nDevices:\n========\nGPU0:\n\tapiVersion         = 1.4.303\n\tdriverVersion      = 572.70.0.0\n\tvendorID           = 0x10de\n\tdeviceID           = 0x2188\n\tdeviceType         = PHYSICAL_DEVICE_TYPE_DISCRETE_GPU\n\tdeviceName         = NVIDIA GeForce GTX 1650\n\tdriverID           = DRIVER_ID_NVIDIA_PROPRIETARY\n\tdriverName         = NVIDIA\n\tdriverInfo         = 572.70\n\tconformanceVersion = 1.4.1.0\n\tdeviceUUID         = 62902bdf-fa33-7891-af9b-ed029c901505\n\tdriverUUID         = ebaea3da-38b5-5350-a639-2b065f3e1db7\n",
+  "vulkanWarnings": "WARNING: [Loader Message] Code 0 : windows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.\nWARNING: [Loader Message] Code 0 : Layer VK_LAYER_bandicam_helper uses API version 1.2 which is older than the application specified API version of 1.4. May cause issues.\n",
+  "gpu": "name, driver_version, memory.total [MiB], memory.used [MiB], memory.free [MiB]\nNVIDIA GeForce GTX 1650, 572.70, 4096 MiB, 3144 MiB, 792 MiB\n",
+  "toolVersions": {
+    "clang++.exe": "clang version 20.1.2 (https://github.com/llvm/llvm-project.git 58df0ef89dd64126512e4ee27b4ac3fd8ddf6247)\nTarget: x86_64-w64-windows-gnu\nThread model: posix\nInstalledDir: D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin\nConfiguration file: D:/AI AGENT/tmp/color-engine-company-20261030/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/x86_64-w64-windows-gnu.cfg\n",
+    "glslang.exe": "Glslang Version: 11:16.6.0\nESSL Version: OpenGL ES GLSL 3.20 glslang Khronos. 16.6.0\nGLSL Version: 4.60 glslang Khronos. 16.6.0\nSPIR-V Version 0x00010600, Revision 1\nGLSL.std.450 Version 100, Revision 1\nKhronos Tool ID 8\nSPIR-V Generator Version 11\nGL_KHR_vulkan_glsl version 100\nARB_GL_gl_spirv version 100\n",
+    "cmake.exe": "cmake version 3.31.10\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n",
+    "ninja.exe": "1.11.1.git.kitware.jobserver-1\n"
+  },
+  "toolHashes": {
+    "clang++.exe": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5",
+    "glslang.exe": "9643709c02c83e26773f96b6a87f197ab2e84f78be0879ad8fb3619418b5d9ad",
+    "cmake.exe": "3c05de86fbc0ec0610bbee201588e4fc1017347ec61b0f8080981fc6bfe93681",
+    "ninja.exe": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597"
+  },
+  "vulkanHeadersCommit": "b5c8f996196ba4aa6d8f97e52b5d3b6e70f7e4e2",
+  "homeCpuModel": "NOT_PRESENT_IN_SEALED_PACKAGE",
+  "homeVulkanLoaderApi": "NOT_PRESENT_IN_V2_PRE_RUN_IDENTITY",
+  "noDriverOrPersistentNetworkChange": true,
+  "companyCpuObserved": "12th Gen Intel Core i5-12400F,6cores/12logical",
+  "companyOsObserved": "Windows10 Professional build19045"
+}

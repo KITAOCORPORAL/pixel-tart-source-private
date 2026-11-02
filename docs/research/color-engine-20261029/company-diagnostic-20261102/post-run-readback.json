@@ -1,0 +1,11 @@
+{
+  "version": "CompanyPostRunReadbackV1",
+  "buildIdentityBeforeAfterExact": true,
+  "buildBeforeSha256": "6c5646554f1c61f22198cafa7974f41d9c9e21feaaee8e383fd2ceb5cb633721",
+  "buildAfterSha256": "6c5646554f1c61f22198cafa7974f41d9c9e21feaaee8e383fd2ceb5cb633721",
+  "deliveredPackageComparisonMatchesLocalExact": true,
+  "localComparisonSha256": "d01a14ce486126cae4e2549a741bdeb6478b46720f8dcbb480b59e6e161dc9d4",
+  "deliveredComparisonSha256": "d01a14ce486126cae4e2549a741bdeb6478b46720f8dcbb480b59e6e161dc9d4",
+  "postRunCommandsGpuCalls": 0,
+  "toolchainIdentityScopeCaution": "Collector hashes the named compiler/wrapper/CMake/Ninja/glslang files and copied runtime DLLs; not a complete independent audit of every compiler-internal executable/linker/header. Keep this residual confound, do not infer hardware-only cause."
+}

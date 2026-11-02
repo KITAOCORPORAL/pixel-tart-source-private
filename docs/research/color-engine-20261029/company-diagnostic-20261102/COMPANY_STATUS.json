@@ -1,0 +1,37 @@
+{
+  "version": "CompanyPublicDiagnosticStatus20261102V1",
+  "date": "2026-11-02",
+  "timezone": "Asia/Shanghai",
+  "reviewedHomeHead": "93b553d1c22937a2870743a40adc43d6df8b526d",
+  "companyStatus": "EXECUTED_AND_INDEPENDENTLY_VALIDATED",
+  "sameDeviceStatus": "EXACT_ZERO_CHANNEL_DIFFERENCE_REQUIRED_AND_OBSERVED",
+  "crossDeviceStatus": "MEASURED_DIFFERENCES_LOCALIZED_NO_ACCEPTANCE_THRESHOLD",
+  "firstObservedStage": "film_scale_and_expose",
+  "inputCount": 3,
+  "privatePhotosIncluded": false,
+  "newCandidateCount": 0,
+  "round13SharedIncrementEnvelopeUnsharpV1": {
+    "status": "KEEP_FROZEN_DEFAULT_OFF_NOT_ADMITTED",
+    "executedInThisCompanyRun": false,
+    "parametersChanged": false,
+    "secondSharpenCandidateStarted": false,
+    "manualPreference": "NOT_RUN_PRIVATE_HOME_AB_FILES_NOT_MIGRATED"
+  },
+  "rawDecodes": 0,
+  "full20MP": 0,
+  "sixDevelopmentPictures": 0,
+  "newScopes": "none beyond existing public synthetic package",
+  "libraryOrResourceDistributed": false,
+  "historicalCompanyNOT_RUN": "preserved in home-round10/11/12/13 records as historical facts",
+  "remainingConfounds": [
+    "GPU+driver",
+    "Windows+CPU environment",
+    "Python+Pillow",
+    "native allowed-root literals and build paths/timestamps/engine DLL bytes",
+    "verifier/test source revision changes documented; runner/comparator sources exact"
+  ],
+  "machine": "PC-20250309WEIZ",
+  "gpu": "NVIDIA GeForce GTX 1650",
+  "driver": "572.70",
+  "localResultRoot": "E:\\Kitao-Research\\color-engine-company-diagnostic-20261102-run"
+}
