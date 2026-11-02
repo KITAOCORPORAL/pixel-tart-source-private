@@ -114,8 +114,8 @@ public sealed partial class FreeCanvasView : UserControl
     {
         if(_discardPending)return true;
         _saveTimer.Stop();await _saveGate.WaitAsync();
-        try { while(!ReferenceEquals(_saved,Editor.Document)){var snapshot=Editor.Document;await _store.SaveAsync(snapshot);_saved=snapshot;}_status.Text="已保存";return true; }
-        catch(Exception exception)when(exception is IOException or UnauthorizedAccessException or InvalidDataException){new RAWSelectionAssistant.Core.Services.FileLogService().Error("画布保存失败",exception);_status.Text="保存失败，请重试";return false;}
+        try { while(!ReferenceEquals(_saved,Editor.Document)){var snapshot=Editor.Document;await _store.SaveAsync(snapshot);_saved=snapshot;}_status.Text="已保存";_status.ToolTip=null;return true; }
+        catch(Exception exception)when(exception is IOException or UnauthorizedAccessException or InvalidDataException){new RAWSelectionAssistant.Core.Services.FileLogService().Error("画布保存失败",exception);_status.Text="保存失败，未保存修改已保留；请检查目标路径、写入权限、磁盘空间或文件占用后点击“保存”重试。";_status.TextWrapping=TextWrapping.Wrap;_status.ToolTip=$"目标目录：{_store.DirectoryPath}{Environment.NewLine}{exception.Message}";return false;}
         finally{_saveGate.Release();}
     }
     public Task<bool> PrepareDocumentChangeAsync() => PrepareDocumentChangeAsync(() => MessageBox.Show(Window.GetWindow(this),

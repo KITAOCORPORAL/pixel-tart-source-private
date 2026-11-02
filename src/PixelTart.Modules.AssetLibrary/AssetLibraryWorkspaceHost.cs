@@ -259,10 +259,11 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
     {
         try
         {
+            if (_startupTask is not null) await _startupTask;
             var descriptor = await _containers.OpenAsync(containerPath);
             await SwitchToDescriptorAsync(descriptor, recordRecent: true);
         }
-        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException or ArgumentException)
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException or ArgumentException)
         {
             _state.Text = $"切换失败：{exception.Message}；仍保留当前库。";
         }
@@ -275,6 +276,12 @@ public sealed class AssetLibraryWorkspaceHost : UserControl, IAsyncDisposable
         AssetLibraryPage? nextPage = null;
         try
         {
+            if (_page is not null && _lease is not null && _descriptor?.LibraryId == descriptor.LibraryId &&
+                string.Equals(Path.GetFullPath(_descriptor.ContainerPath), Path.GetFullPath(descriptor.ContainerPath), StringComparison.OrdinalIgnoreCase))
+            {
+                _state.Text = "当前素材库已打开；继续使用现有画布与未保存内容。";
+                return;
+            }
             nextLease = await _containers.AcquireWriteLeaseAsync(descriptor);
             nextPage = _pageFactory(descriptor.DatabasePath);
             await nextPage.InitializeForSessionAsync();
