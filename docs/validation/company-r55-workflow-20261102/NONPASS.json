@@ -1,0 +1,14 @@
+{
+  "status": "WORKFLOW_PASS_OVERALL_PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE",
+  "productSource": "fc811b54a4a140543a4c9bead47de8b60e7529f2",
+  "testSupport": "dd71c1f857d105229b4ffb3e3e08438a9670c09b",
+  "items": [
+    {"id":"CURRENT_LIBRARY_SELF_LOCK","status":"FIXED_VERIFIED","before":["raw/company-reopen-b.trx","raw/company-reopen-b-startup-ready.trx"],"after":["raw/release-reopen.trx","raw/release-busy.trx"]},
+    {"id":"CANVAS_SAVE_GUIDANCE","status":"FIXED_VERIFIED","before":"raw/save-guidance-before.trx","after":"raw/release-regression.trx"},
+    {"id":"HISTORICAL_NUMERICAL","status":"ORIGINAL_FAIL_RETAINED_NOT_RERUN","authority":"../home-r55-v3-numerical-20261101/NONPASS.json","thresholdsChanged":false},
+    {"id":"REAL_RASTER_INPUTS","status":"NOT_RUN","reason":"Only explicitly authorized CompanyRAW directory checked; five RAW files, no matching standard JPEG/transparent PNG; deterministic synthetic mechanism evidence used"},
+    {"id":"PHYSICAL_MOUSE_DPI","status":"NOT_RUN","reason":"ComputerUse/Browser/WebView/CDP remain prohibited; no user mouse receipt"},
+    {"id":"ACM_HDR_MULTISCREEN","status":"NOT_RUN","reason":"OS resolution/registry DPI and offscreen DIP layouts are not physical acceptance"},
+    {"id":"HISTORICAL_SYMLINK_AND_GENERAL_LCMS","status":"HISTORICAL_FAIL_AND_NOT_RUN_RETAINED","rerun":false}
+  ]
+}

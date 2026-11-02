@@ -1,3 +1,12 @@
+## 2026-11-02 公司当前：完整画布固定快照闭环（Asia/Shanghai）
+- 从家庭8da827794364da66f52c574aad401078fbda503a/产品146c0fd254de387ad5ccb9570cff6c54697389d4接续；实际树E:/Kitao-Worktrees/r55-workflow-company-20261102，分支home/r55-canvas-photo-preview-20261101。公司灯台27794d2f的4个未推独有提交及原未跟踪资料原样保留，不合main/研究，不reset/clean/stash。
+- 产品源码 **fc811b54a4a140543a4c9bead47de8b60e7529f2**；测试支持 **dd71c1f857d105229b4ffb3e3e08438a9670c09b**。仅修当前素材库重开自锁/占用异常行内提示，以及画布写入失败路径/权限/空间/占用的可操作指引；不改v3/解码核/ICC/预算/灯台，不扩功能或重画R5.5。
+- 完整App以可分发合成24MP JPEG、透明PNG、文字、画笔、三色色板验证保存→固定快照→独立进程重开→修改→手动更新→第三进程；两版身份与旧PNG保留、编辑不偷偷更新快照。实际公司已授权CompanyRAW仅5个RAW，未扫描其他目录，合成输入不冒充私照/实拍验收。
+- 发布20共享DLL绑定WPF/9绑定Core：**51唯一方法PASS、53执行、所选最终0FAIL/0跳过**；含全壳10主导航、策划15、教程first/upgrade/restart、异常/取消/源变/项目切换和1366/1920离屏宿主。开发失败和原收据保留，非全仓测试全过。
+- 新完整自包含win-x64诊断ZIP E:/Guangjing-Company-Workflow-20261102/Guangjing-R55-CompanyWorkflow-Diagnostic-win-x64.zip，294文件逐项hash读回，SHA256 B73364132707F19D4B73FAD42A46B22E2ACD7FFB40187AC8CE7871BDD71A0C2C。同名目录Start-Guangjing-Diagnostic.cmd固定隔离资料根可保存重开；实际CMD/EXE启动/日志产品SHA/退出0。WholeAppDiagnosticBuild=true / PhotographerTrialBuild=false；无Setup/单模块/私照/研究程序。
+- 数值归因已阶段结束，家庭原JPEG/ICC FAIL/阈值及NONPASS字节保留，本轮没有新同类数值报告。鼠标、多DPI/多屏、ACM/HDR/真实素材闭环仍NOT_RUN；ComputerUse/Browser/WebView/CDP未启用。总体 **PARTIAL_DIAGNOSTIC_NOT_FOR_RELEASE**。
+- 当前权威报告docs/validation/company-r55-workflow-20261102/FINAL_REPORT.md；产品/测试/包/文档HEAD与远端另见IDENTITY/REMOTE_READBACK。新记录Asia/Shanghai，历史时间不改。
+
 ## 2026-11-01 v3两项数值归因收尾（Europe/Helsinki）
 - 本轮仅tests/docs，产品源码仍146c0fd254de387ad5ccb9570cff6c54697389d4；家庭基线17e9788f，测试支持fa171e47f5d3b3921676fb11afa0bb5a996338a6。不改src/灯台/UI/研究引擎，不再次发布/打ZIP；原完整294文件ZIP d394e3ab463531f66eb4ae74ef571becb26bec20754965ef07251a35c560cf5d逐项读回保持。
 - JPEG已用分量/系数因果闭环：FFmpeg lowres2 2x2核只保留低阶，与WIC/IJG area型含AC3/5/7不同；WIC420 native输出Cb/Cr1500×1000，FF750×500。BT601全范围/通道正确，色度重建反事实max36–39，原max40不靠舍入/“不同解码器”空解释。

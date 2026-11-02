@@ -1,0 +1,790 @@
+{
+  "uniqueMethods": 51,
+  "executions": 53,
+  "rows": [
+    {
+      "receipt": "release-create.trx",
+      "outcome": "Passed",
+      "duration": "00:00:11.0886365",
+      "testName": "CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot"
+    },
+    {
+      "receipt": "release-reopen.trx",
+      "outcome": "Passed",
+      "duration": "00:00:10.0941956",
+      "testName": "IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot"
+    },
+    {
+      "receipt": "release-third.trx",
+      "outcome": "Passed",
+      "duration": "00:00:08.6008591",
+      "testName": "ThirdCompleteAppReopenKeepsBothSnapshotIdentitiesAndLayerStates"
+    },
+    {
+      "receipt": "release-busy.trx",
+      "outcome": "Passed",
+      "duration": "00:00:07.7714927",
+      "testName": "BusyLibraryReportsInlineAndPreservesCurrentCanvas"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.7226897",
+      "testName": "RealSurfaceRoutesDeleteAndRestoresSavedObjects"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1802886",
+      "testName": "PreviewBudgetArtboardRatioAndLegacyExportAreExplicit"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0084675",
+      "testName": "DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.2076133",
+      "testName": "SourceReplacementAfterRenderAndNewerRequestCannotPublishOldResult"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.8547197",
+      "testName": "FullShellKeepsPrimaryNavigationAndContentTemplates"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.2295109",
+      "testName": "CaptureSavesBeforePublishAndManualUpdateKeepsOldVersion"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1922991",
+      "testName": "MissingTamperedAndSaveFailureKeepPriorVersionAndFile"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.4010727",
+      "testName": "ViewportNonImageContentRetainsFullObjectCoordinateBounds"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.3709972",
+      "testName": "DocumentChangeSaveDiscardCancelPreserveExpectedVersion"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:01.2400610",
+      "testName": "AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.4708129",
+      "testName": "SameDocumentSnapshotMatchesExistingExportIncludingHiddenOfflineAndBrush"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0081685",
+      "testName": "SaveDiscardCancelRetainsThreeDistinctAccessibleActions"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.3620272",
+      "testName": "EmitMixedCompositorSamplingOracleAndHistoricalExport"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:01.4679310",
+      "testName": "MeasureOwnedLayoutEventsAndExplicitReloadIntegrity"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.3029344",
+      "testName": "CreateIndependentReopenFixture"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.2814415",
+      "testName": "DocumentIdentityMismatchAndUnhashedExternalReplacementRejectAppend"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:01.0442454",
+      "testName": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0784540",
+      "testName": "EmbeddedProfileParityAndUnsupportedSixteenBitStayExplicit"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0506818",
+      "testName": "SnapshotCancellationAndLargeArtboardWorkingSetAreBounded"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1088906",
+      "testName": "SaveFailureKeepsDocumentAvailableForRetry"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.3230225",
+      "testName": "EightDirectionsAndMonochromeUseSameExportContract"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.2483174",
+      "testName": "HistoricalExportFixtureUsesOnlyExistingApis"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.2339620",
+      "testName": "SnapshotRevisionDoesNotExpandPtplanV1WorkspaceContents"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0833655",
+      "testName": "EmitExistingCompositorReferenceSamples"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1282960",
+      "testName": "CancelLateGenerationAndProjectSwitchCannotPublish"
+    },
+    {
+      "receipt": "release-regression.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0689554",
+      "testName": "ProductXamlAndTranslationValuesHaveNoVisibleOldBrand"
+    },
+    {
+      "receipt": "release-photo-lifecycle.trx",
+      "outcome": "Passed",
+      "duration": "00:00:01.1275927",
+      "testName": "LargePhotoCancellationAndSourceReplacementKeepOldSnapshot"
+    },
+    {
+      "receipt": "release-photo-lifecycle.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.9389755",
+      "testName": "V3ActualCancellationAndSourceRevalidationRetireTaskCache"
+    },
+    {
+      "receipt": "release-photo-lifecycle.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1206856",
+      "testName": "IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources"
+    },
+    {
+      "receipt": "release-photo-lifecycle.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.7944097",
+      "testName": "LargePhotoSwitchProjectAndLockedSaveNeverPublishPartialVersion"
+    },
+    {
+      "receipt": "release-photo-lifecycle.trx",
+      "outcome": "Passed",
+      "duration": "00:00:01.9052477",
+      "testName": "RepeatedLargePhotoTasksReleaseCacheAndSourceLeases"
+    },
+    {
+      "receipt": "release-photo-lifecycle.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1783664",
+      "testName": "LayerNamesAndOpacityHaveAccessibleLabelsAndValues"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1891529",
+      "testName": "ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0190571",
+      "testName": "BrushLayerIsSameUndoModelAndPersistsOneStroke"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0152721",
+      "testName": "ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1268146",
+      "testName": "OldNotesBecomeActionOnceAndBatchRetainsUnknownCatalogAndShotFields"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1434145",
+      "testName": "ColumnsArchiveWithoutDroppingValuesAndInvalidSchemaFailsClosed"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.3971125",
+      "testName": "ValidatedPackageImportsIntoFreshRootReopensCopiesAndNeverOverwritesIdOrSameName"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1347170",
+      "testName": "LegacyReadDoesNotWriteAndIdentityMigrationIsStableAndLossless"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.2822213",
+      "testName": "RecoveryOnlyCleansExpiredReceiptOwnedPartAndAuditsOrphanWithoutDeletingValidOrUnknown"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.0279668",
+      "testName": "OneGestureUndoLockedTransformsAndViewIndependentDocumentSize"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.1812796",
+      "testName": "CancelExportAndMissingCopyCannotPublishPartialPackage"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.2121886",
+      "testName": "TamperMissingDuplicateTraversalAndUnsupportedVersionAreRejectedBeforeAnyImportWrites"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.2282270",
+      "testName": "CancelValidationAndExtractionLeaveNoVisibleProjectAndPreserveSource"
+    },
+    {
+      "receipt": "release-core.trx",
+      "outcome": "Passed",
+      "duration": "00:00:00.2065876",
+      "testName": "RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets"
+    },
+    {
+      "receipt": "release-retirement-v2-first.trx",
+      "outcome": "Passed",
+      "duration": "00:00:07.5724310",
+      "testName": "FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks"
+    },
+    {
+      "receipt": "release-retirement-v2-upgrade.trx",
+      "outcome": "Passed",
+      "duration": "00:00:07.3676144",
+      "testName": "FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks"
+    },
+    {
+      "receipt": "release-retirement-v2-restart.trx",
+      "outcome": "Passed",
+      "duration": "00:00:07.4082640",
+      "testName": "FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks"
+    },
+    {
+      "receipt": "release-hosted-layout.trx",
+      "outcome": "Passed",
+      "duration": "00:00:14.1112455",
+      "testName": "CompleteHostActualCaptureButtonAndFreeCanvasLayout"
+    }
+  ],
+  "selectedFailures": 0,
+  "unique": [
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "AllFifteenSectionsAndModesConstructAtNarrowWidthsWithoutDesktop",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "BrushLayerIsSameUndoModelAndPersistsOneStroke",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "BusyLibraryReportsInlineAndPreservesCurrentCanvas",
+      "receipts": [
+        "release-busy.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "CancelExportAndMissingCopyCannotPublishPartialPackage",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "CancelLateGenerationAndProjectSwitchCannotPublish",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "CancelValidationAndExtractionLeaveNoVisibleProjectAndPreserveSource",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "CaptureSavesBeforePublishAndManualUpdateKeepsOldVersion",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "ColumnsArchiveWithoutDroppingValuesAndInvalidSchemaFailsClosed",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot",
+      "receipts": [
+        "release-create.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "CompleteHostActualCaptureButtonAndFreeCanvasLayout",
+      "receipts": [
+        "release-hosted-layout.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "CreateIndependentReopenFixture",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "DiagnosticBuildRejectsFocusedShellAndGuardsDataBeforeMigration",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "DocumentChangeSaveDiscardCancelPreserveExpectedVersion",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "DocumentIdentityMismatchAndUnhashedExternalReplacementRejectAppend",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "EightDirectionsAndMonochromeUseSameExportContract",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "EmbeddedProfileParityAndUnsupportedSixteenBitStayExplicit",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "EmitExistingCompositorReferenceSamples",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "EmitMixedCompositorSamplingOracleAndHistoricalExport",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks",
+      "receipts": [
+        "release-retirement-v2-first.trx",
+        "release-retirement-v2-upgrade.trx",
+        "release-retirement-v2-restart.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "FullShellKeepsPrimaryNavigationAndContentTemplates",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "HistoricalExportFixtureUsesOnlyExistingApis",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot",
+      "receipts": [
+        "release-reopen.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources",
+      "receipts": [
+        "release-photo-lifecycle.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "LargePhotoCancellationAndSourceReplacementKeepOldSnapshot",
+      "receipts": [
+        "release-photo-lifecycle.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "LargePhotoSwitchProjectAndLockedSaveNeverPublishPartialVersion",
+      "receipts": [
+        "release-photo-lifecycle.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "LayerNamesAndOpacityHaveAccessibleLabelsAndValues",
+      "receipts": [
+        "release-photo-lifecycle.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "LegacyReadDoesNotWriteAndIdentityMigrationIsStableAndLossless",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "MeasureOwnedLayoutEventsAndExplicitReloadIntegrity",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "MissingTamperedAndSaveFailureKeepPriorVersionAndFile",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "OldNotesBecomeActionOnceAndBatchRetainsUnknownCatalogAndShotFields",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "OneGestureUndoLockedTransformsAndViewIndependentDocumentSize",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "PreviewBudgetArtboardRatioAndLegacyExportAreExplicit",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "ProductXamlAndTranslationValuesHaveNoVisibleOldBrand",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "RealShellAndHelpHaveNoRetiredTutorialTreeOrLegacyVisibleBrand",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "RealSurfaceRoutesDeleteAndRestoresSavedObjects",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "RecoveryOnlyCleansExpiredReceiptOwnedPartAndAuditsOrphanWithoutDeletingValidOrUnknown",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "RepeatedLargePhotoTasksReleaseCacheAndSourceLeases",
+      "receipts": [
+        "release-photo-lifecycle.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "SameDocumentSnapshotMatchesExistingExportIncludingHiddenOfflineAndBrush",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "SaveDiscardCancelRetainsThreeDistinctAccessibleActions",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "SaveFailureKeepsDocumentAvailableForRetry",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "SnapshotCancellationAndLargeArtboardWorkingSetAreBounded",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "SnapshotRevisionDoesNotExpandPtplanV1WorkspaceContents",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "SourceReplacementAfterRenderAndNewerRequestCannotPublishOldResult",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "TamperMissingDuplicateTraversalAndUnsupportedVersionAreRejectedBeforeAnyImportWrites",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "ThirdCompleteAppReopenKeepsBothSnapshotIdentitiesAndLayerStates",
+      "receipts": [
+        "release-third.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "V3ActualCancellationAndSourceRevalidationRetireTaskCache",
+      "receipts": [
+        "release-photo-lifecycle.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "ValidatedPackageImportsIntoFreshRootReopensCopiesAndNeverOverwritesIdOrSameName",
+      "receipts": [
+        "release-core.trx"
+      ]
+    },
+    {
+      "outcomes": [
+        "Passed"
+      ],
+      "testName": "ViewportNonImageContentRetainsFullObjectCoordinateBounds",
+      "receipts": [
+        "release-regression.trx"
+      ]
+    }
+  ],
+  "scope": "Selected publish-bound regressions, not all historical/numerical/physical acceptance",
+  "passedUnique": 51
+}

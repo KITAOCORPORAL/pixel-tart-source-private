@@ -1,0 +1,24 @@
+{
+  "origin": "Deterministic generated fixtures, NOT real photographs or household private sources",
+  "jpeg": {
+    "path": "E:/Guangjing-Company-Workflow-20261102/release-workflow\\synthetic-inputs\\synthetic-24mp.jpg",
+    "width": 6000,
+    "height": 4000,
+    "sha256": "A7CF46AB2B94C749540AD5C375235FE015C26271E7582960799EC0F769310251"
+  },
+  "png": {
+    "path": "E:/Guangjing-Company-Workflow-20261102/release-workflow\\synthetic-inputs\\synthetic-alpha.png",
+    "alpha": true,
+    "sha256": "01F10DF9C9D8224BA0926D50083F46CA70964DEF96F59B1FCFAD659067575EC2"
+  },
+  "metrics": {
+    "SourceDecodes": 2,
+    "NativeJpegDecodes": 1,
+    "CacheHits": 0,
+    "PeakCacheBytes": 6012288,
+    "RetainedCacheBytes": 0,
+    "LargestDecodedWidth": 1500,
+    "LargestDecodedHeight": 1000,
+    "Contract": "CanvasJpegNative1024.ArtboardCenters.v3"
+  }
+}
