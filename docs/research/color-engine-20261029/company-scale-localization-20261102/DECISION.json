@@ -1,0 +1,85 @@
+{
+  "version": "FilmScaleLocalizationDecisionV1",
+  "timezone": "Asia/Shanghai",
+  "at": "2026-11-02T16:55:52.430292+08:00",
+  "reviewedCompanyBase": "7309911e1ad501b517877a073a86e468a9507941",
+  "question": "Can first cross-end divergence be reduced from compound film_scale_and_expose to a concrete operation or preparation?",
+  "answer": "PARTIAL_COMPANY_CARRIER_BEFORE_EXPOSURE_CONFIRMED_PAIRED_FIRST_OPERATOR_NOT_YET_CONFIRMED",
+  "located": {
+    "companyCarrier": "Hanatos node_upsample/spk_lut2d_cubic completed output",
+    "beforeExposure": true,
+    "companyExposureBitIdentity": true,
+    "companyCpuNarrowUploadDeviceByteChecks": [
+      {
+        "constant": "tc-b-matrix",
+        "cpuDoubleCount": 9,
+        "cpuDoubleSha256": "88b03d204358890d370bd292c218bcc580cb740642e8b403a2606a6b23a8eebf",
+        "uploadSha256": "e5548e918c2804591968b46cfa2352b173a6990556ad109859a561dc6a90df11",
+        "deviceReadbackSha256": "e5548e918c2804591968b46cfa2352b173a6990556ad109859a561dc6a90df11",
+        "cpuCastVsActualUploadBitDifferences": 0,
+        "actualUploadVsDeviceBitDifferences": 0,
+        "homeActualUploadCounterpart": "MISSING"
+      },
+      {
+        "constant": "tc-lut",
+        "cpuDoubleCount": 110592,
+        "cpuDoubleSha256": "260d59c1194773a9daa866e64417f1ecd8f0e5103d08b01ace9dfeff42201f23",
+        "uploadSha256": "63105d14c4c1f4ba923121cd2de847aefed7f1626afc0d252e73de56125244c3",
+        "deviceReadbackSha256": "63105d14c4c1f4ba923121cd2de847aefed7f1626afc0d252e73de56125244c3",
+        "cpuCastVsActualUploadBitDifferences": 0,
+        "actualUploadVsDeviceBitDifferences": 0,
+        "homeActualUploadCounterpart": "MISSING"
+      }
+    ],
+    "companyInputDeviceExact": true,
+    "observedCompanyFinalVsSealedRgba16ChangedChannels": 0
+  },
+  "notProved": [
+    "Home and company actual uploaded matrix/LUT bytes identical",
+    "Home exposure uploaded constants and pre/post bytes observed identical",
+    "Whether CPU constants already differ across environments",
+    "Whether tc_b or Mitchell spectral LUT interpolation is first paired output difference",
+    "Hardware vsdriver/runtime/compilerJIT cause isolated"
+  ],
+  "canExclude": [
+    "Input fixture bytes or99resolved mismatch",
+    "Resource/SPIRV bytes mismatch",
+    "Pillow executing this numerical path",
+    "Company staging copy or float narrowing deviating from capturedCPUcast",
+    "Company EV0 exposure introducing/changing the captured binary32 values",
+    "New observed library changing sealed company finalRGBA16",
+    "First difference arising only at unsharp"
+  ],
+  "homeRequired": [
+    "film-sensitivity.cpu.f64",
+    "tc-b-matrix.cpu.f64 and actual .uploaded.f32 and .device.f32",
+    "tc-lut.cpu.f64 and actual .uploaded.f32 and .device.f32",
+    "00-input.device.f32",
+    "01-tc.device.f32",
+    "02-brightness.device.f32",
+    "03-upsample.device.f32",
+    "exposure-scale/offset cpu and actualupload,04-exposure",
+    "selected-math-mode.jsonl and runtimecapabilities/buildbefore/provenance"
+  ],
+  "stopCondition": "No corresponding home taps available. Stop newGPU after onegraywhole; supply fixed observer/source/tool identity + minimal home handoff, no guessed constants.",
+  "algorithmRepair": "NOT_ESTABLISHED_NOT_IMPLEMENTED",
+  "noMathDriverPrecisionChanges": true,
+  "candidate": "SharedIncrementEnvelopeUnsharpV1 defaultoff NOT_ADMITTED frozen",
+  "calls": {
+    "offlineAnalysisGpu": 0,
+    "minimalObservationAttempts": 1,
+    "engineCreate": 1,
+    "open": 1,
+    "wholeRender": 1,
+    "streamRender": 0,
+    "addedPassiveReads": 7,
+    "extraArithmeticShaderDispatches": 0,
+    "raw": 0,
+    "20MP": 0,
+    "sixPhotos": 0,
+    "BT": 0,
+    "candidate": 0,
+    "totalDriverDispatches": "not separately instrumented, initialization mathprobe remains original"
+  },
+  "localResult": "E:/Kitao-Research/color-engine-scale-localization-20261102-v2/gray-once"
+}

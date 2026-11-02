@@ -1,0 +1,29 @@
+{
+  "version": "ScaleLocalizationWorktreeProtectionV1",
+  "base": "7309911e1ad501b517877a073a86e468a9507941",
+  "otherTreeObservedChanges": [
+    {
+      "path": "E:/Kitao-Worktrees/r55-workflow-company-20261102",
+      "before": [
+        "## home/r55-canvas-photo-preview-20261101...origin/home/r55-canvas-photo-preview-20261101",
+        " M src/RAWSelectionAssistant.Core/Services/Projects/PlanningReadableSummary.cs",
+        " M src/RAWSelectionAssistant/Services/PlanningDocxAdapter.cs",
+        " M src/RAWSelectionAssistant/Services/PlanningSummaryDocument.cs",
+        " M src/RAWSelectionAssistant/Services/PlanningSummaryOwnedImage.cs",
+        " M src/RAWSelectionAssistant/ViewModels/PlanningCenterViewModel.SummaryExport.cs",
+        "?? tests/RAWSelectionAssistant.WpfTests/PlanningSummaryCanvasSnapshotTests.cs"
+      ],
+      "after": [
+        "## home/r55-canvas-photo-preview-20261101...origin/home/r55-canvas-photo-preview-20261101 [ahead 2]",
+        " M docs/current/PIXEL_TART_CURRENT_CAPABILITIES.json",
+        " M docs/current/PIXEL_TART_CURRENT_STATE.md",
+        " M docs/current/capabilities.definition.json",
+        "?? docs/validation/company-r55-summary-snapshots-20261102/"
+      ]
+    }
+  ],
+  "otherTreeWritesByResearch": false,
+  "resetStashMergeCleanUsed": false,
+  "productAndMatrixV2Diff": [],
+  "oldPreexistingResearchOutputsOverwritten": false
+}

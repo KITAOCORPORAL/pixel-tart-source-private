@@ -1,0 +1,176 @@
+{
+  "version": "GrayCompanySubstageConclusionsV1",
+  "gpuCallsForThisAnalysis": 0,
+  "singleObservedRun": {
+    "api": {
+      "engineCreate": 1,
+      "open": 1,
+      "wholeRender": 1,
+      "streamRender": 0,
+      "btProbe": 0
+    },
+    "success": true,
+    "finalCompanyRgba16ChangedChannels": 0
+  },
+  "inputDeviceBitsEqualPrepared": true,
+  "constantByteChecks": [
+    {
+      "constant": "tc-b-matrix",
+      "cpuDoubleCount": 9,
+      "cpuDoubleSha256": "88b03d204358890d370bd292c218bcc580cb740642e8b403a2606a6b23a8eebf",
+      "uploadSha256": "e5548e918c2804591968b46cfa2352b173a6990556ad109859a561dc6a90df11",
+      "deviceReadbackSha256": "e5548e918c2804591968b46cfa2352b173a6990556ad109859a561dc6a90df11",
+      "cpuCastVsActualUploadBitDifferences": 0,
+      "actualUploadVsDeviceBitDifferences": 0,
+      "homeActualUploadCounterpart": "MISSING"
+    },
+    {
+      "constant": "tc-lut",
+      "cpuDoubleCount": 110592,
+      "cpuDoubleSha256": "260d59c1194773a9daa866e64417f1ecd8f0e5103d08b01ace9dfeff42201f23",
+      "uploadSha256": "63105d14c4c1f4ba923121cd2de847aefed7f1626afc0d252e73de56125244c3",
+      "deviceReadbackSha256": "63105d14c4c1f4ba923121cd2de847aefed7f1626afc0d252e73de56125244c3",
+      "cpuCastVsActualUploadBitDifferences": 0,
+      "actualUploadVsDeviceBitDifferences": 0,
+      "homeActualUploadCounterpart": "MISSING"
+    }
+  ],
+  "exposure": {
+    "actualUploadedScale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "actualUploadedOffset": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "upsampleVsExposureBitDifferences": 0,
+    "exposureVsSealedCompanyCompoundBitDifferences": 0,
+    "interpretation": "Company exposure neither introduces nor changes any observed binary32 value. Home exposure constants still not observed, so sourceEV0 semantics are code inference only for home."
+  },
+  "upsampleCarriesCrossEndCompoundDifference": {
+    "changedChannelsVsHomeCompound": 1520,
+    "maxAbsVsHomeCompound": 3.814697265625e-06,
+    "notAPairedHomeUpsampleComparison": true
+  },
+  "selectedMathMode": [
+    {
+      "kernel": "spk_tc_b",
+      "fused_fma_runtime": 1,
+      "specialization_id": 0,
+      "specialization_bool": 1
+    },
+    {
+      "kernel": "spk_lut2d_cubic",
+      "fused_fma_runtime": 1,
+      "specialization_id": 0,
+      "specialization_bool": 1
+    },
+    {
+      "kernel": "spk_affine3",
+      "fused_fma_runtime": 1,
+      "specialization_id": 0,
+      "specialization_bool": 1
+    }
+  ],
+  "actualEngineMathMode": "Vulkan probe passed (precise product + fused fma; full shader parity pending)",
+  "relevantShaderSpecializationCaution": "These three fixed shaders do not declare SPK_FUSED_FMA constant_id0; runtime bool1 is passed but does not select an alternative operation here. Math-probe pass is not bit-equivalence proof for matrix/divide/Mitchell path.",
+  "binary64ContextOnly": {
+    "brightnessGpuVsDoubleDotSumMaxAbs": 1.7136335372924805e-07,
+    "meaning": "Difference from float64 dots is normal rounding context, NOT evidence of a GPU error or cross-device rootcause"
+  },
+  "points": [
+    {
+      "xyChannel": [
+        2,
+        0,
+        0
+      ],
+      "inputRGB": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.18000000715255737
+      ],
+      "tc": [
+        0.4456430971622467,
+        0.520524263381958
+      ],
+      "brightness": 0.5180099606513977,
+      "upsampleRGB": [
+        0.9905756711959839,
+        0.9679553508758545,
+        0.8977500796318054
+      ],
+      "exposureRGB": [
+        0.9905756711959839,
+        0.9679553508758545,
+        0.8977500796318054
+      ],
+      "sealedCompanyCompoundRGB": [
+        0.9905756711959839,
+        0.9679553508758545,
+        0.8977500796318054
+      ],
+      "homeCompoundRGB": [
+        0.9905756115913391,
+        0.9679553508758545,
+        0.8977500200271606
+      ],
+      "carrierDeltaVsHome": 5.960464477539063e-08
+    },
+    {
+      "xyChannel": [
+        32,
+        0,
+        1
+      ],
+      "inputRGB": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "tc": [
+        0.4456430971622467,
+        0.520524263381958
+      ],
+      "brightness": 5.755666255950928,
+      "upsampleRGB": [
+        11.006396293640137,
+        10.755059242248535,
+        9.975000381469727
+      ],
+      "exposureRGB": [
+        11.006396293640137,
+        10.755059242248535,
+        9.975000381469727
+      ],
+      "sealedCompanyCompoundRGB": [
+        11.006396293640137,
+        10.755059242248535,
+        9.975000381469727
+      ],
+      "homeCompoundRGB": [
+        11.006396293640137,
+        10.75505542755127,
+        9.97500228881836
+      ],
+      "carrierDeltaVsHome": 3.814697265625e-06
+    }
+  ],
+  "localizedCompanyCarrier": "spk_lut2d_cubic completed output (Hanatos upsample), before exposure; CPU-preparation/tc_b/LUT first cross-end divergence not distinguished",
+  "causalClassification": "CURRENT_OBSERVATION_INSUFFICIENT_FOR_CROSS_END_FIRST_OPERATOR",
+  "requiredHomeObservation": [
+    "film-sensitivity.cpu.f64",
+    "tc-b-matrix.cpu.f64 and actual .uploaded.f32 and .device.f32",
+    "tc-lut.cpu.f64 and actual .uploaded.f32 and .device.f32",
+    "00-input.device.f32",
+    "01-tc.device.f32",
+    "02-brightness.device.f32",
+    "03-upsample.device.f32",
+    "exposure-scale/offset cpu and actualupload,04-exposure",
+    "selected-math-mode.jsonl and runtimecapabilities/buildbefore/provenance"
+  ],
+  "algorithmFixCurrentlyRequired": "NOT_ESTABLISHED; no pixelmath/profile/precision/driver fix implemented"
+}

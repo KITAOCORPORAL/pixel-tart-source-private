@@ -1,0 +1,23 @@
+{
+  "version": "MinimalHomeHandoffGuardsV1",
+  "tests": [
+    {
+      "control": "Public subset cannot stand in for complete local capture",
+      "expectedRejection": true,
+      "returncode": 1,
+      "missingFirstRequiredFile": "film-sensitivity.cpu.f64",
+      "GPUCalls": 0
+    },
+    {
+      "control": "Company capture cannot be accepted as missing home capture",
+      "expectedRejection": true,
+      "returncode": 1,
+      "errorTail": "ValueError: Run/role/cleanup failed",
+      "comparisonCreated": false,
+      "GPUCalls": 0
+    }
+  ],
+  "notAPairedHomeRun": true,
+  "totalGPUCalls": 0,
+  "initialHarnessAssertionCorrection": "First test correctly rejected missing film-sensitivity before missingLUT; assertion changed to exact first missingfile, no validator logic/threshold relaxed"
+}

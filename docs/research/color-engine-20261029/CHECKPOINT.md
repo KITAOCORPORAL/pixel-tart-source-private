@@ -1,3 +1,15 @@
+# 公司gray子阶段定位（2026-11-02，Asia/Shanghai）
+
+接续`research/color-engine-company-diagnostic-20261102@7309911e1ad501b517877a073a86e468a9507941`，fetch无增量、开工clean。先离线GPU0核对gray首差(2,0,R)1ULP、max代表(32,0,G)4ULP，nearzero/negative/normal分账，无新跨设备阈值。固定真实链：CPUfilmSensitivity/runtimeLUT/CAT16矩阵→实际f32upload→tc_b→MitchellLUT→EV0affine；Pillow未入数值路径，不当同等嫌疑。
+
+旧包缺实际上传常数/子输出，故独立FilmScaleSubstageTapV1只公司graywhole执行一次：engineCreate1/open1/render1、7被动GPUreads、0新增数学dispatch、stream/BT/RAW/20MP/六图/候选0。source/shader/flags/模式不改，最终RGBA16对封存公司gray0差。矩阵/LUT CPUcast=实际staging=device逐bit0差；scale1offset0，upsample→exposure及exposure→旧stage逐bit0差。
+
+公司差异承载收窄到Hanatosupsample输出、曝光之前，但home无同tap，**未确认跨端首因在CPU准备、tc_b或LUT插值哪个环节**，也没分离hardware/driver。到此停止GPU，下一步最小任务仅家庭一次同版graytap，先常数字节后tc/b/upsample比较；不靠改数学归零。本轮算法修复需求NOT_ESTABLISHED。
+
+SharedIncrementEnvelopeUnsharpV1仍defaultoff/NOT_ADMITTED，产品src/UI/任务桥/default/PV456不改。私人偏好NOT_RUN，旧公司诊断/家庭十至十三批/失败时间收据全部保留。完整runtimeLUT/sensitivity仅本地，Git是明确publicsubset+hash。权威COMPANY_FILM_SCALE_LOCALIZATION_20261102、CAPABILITIES_FILM_SCALE_LOCALIZATION_20261102、REPRODUCE_SCALE_LOCALIZATION_20261102和company-scale-localization-20261102。新收据Asia/Shanghai，最终LOCAL_HEAD/REMOTE_HEAD实际push读回。
+
+---
+
 # 公司公开合成诊断已执行（2026-11-02，Asia/Shanghai）
 
 接续已审查家庭`research/color-engine-home-20261030@93b553d1c22937a2870743a40adc43d6df8b526d`，fetch无增量。公司原研究树HEAD0f3204c0、clean、unpushed0；新独立分支`research/color-engine-company-diagnostic-20261102`承接，旧树/失败/第十至十三批历史均保留，不合入产品。

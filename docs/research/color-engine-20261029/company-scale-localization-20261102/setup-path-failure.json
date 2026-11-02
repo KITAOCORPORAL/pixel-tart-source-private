@@ -1,0 +1,7 @@
+{
+  "reason": "Incorrect derived HOME/workspace path did not resolve external source repository; initial directory and empty stdout preserved",
+  "correctiveDecision": "Use actual existing diagnostic checkout for git and actual sealed CMakeCache tool paths, new root -v2, not automatic retry loop",
+  "version": "SetupPathFailureV1",
+  "gpuCalls": 0,
+  "status": "BEFORE_GPU_BEFORE_BUILD"
+}

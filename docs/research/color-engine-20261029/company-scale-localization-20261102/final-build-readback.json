@@ -1,0 +1,47 @@
+{
+  "version": "ScaleSubstageFinalBuildReadbackV1",
+  "newLibrarySha256": "08b9e146263d6988cb962cb791ad786ca3301b872d471f2ad53e366b9e09cb63",
+  "runLibrarySha256": "08b9e146263d6988cb962cb791ad786ca3301b872d471f2ad53e366b9e09cb63",
+  "sameLibraryAsOnlyRun": true,
+  "actualObservationSourceHashes": {
+    "engine/src/pipeline/engine.cpp": "6aa2e99e5cdb28470b983d8a8ff6fd958fee55ed2cefef046b5f55dfc71f8d52",
+    "engine/src/pipeline/pipeline.cpp": "0bde625bc41c8a667374b62e91f7e8ae8b15da81680f3d43043afb4424db36b4",
+    "engine/src/pipeline/pipeline.hpp": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4",
+    "engine/src/pipeline/blur.cpp": "19977757598cc8b6f896b6188fa83983d3bcdcf47dbb4aa435c04eb3132c5fcc",
+    "engine/src/gpu/gpu.hpp": "e6241cb55502e466bdc7f36c9416b285f0dcd7f96abdbe9169f033efb955b5da",
+    "engine/src/gpu/vulkan_gpu.cpp": "bf1560949805a49ca184292631d3be3753fd562a7f5ce4492c177b899f2aeba2",
+    "engine/src/core/hanatos.cpp": "4ab0a165cd1567dc551271d88f16d4739807a219d0a22fae778afcfde3a06be1",
+    "engine/src/core/setup_cache.cpp": "ca1cdb1407fdd33b2ea5da92a01122f17f7f761459edc6b6fc77ed13a83997c6",
+    "engine/CMakeLists.txt": "ef17371c86921bc613989d3821fa5cfbb4f074d07e8873f5a1097351361aca3d",
+    "engine/windows_exports.def": "de6232d8d2fb28c0f3854b26fca2bbddbef17e0ed1984f1fafe26832d1f45c53"
+  },
+  "sourceHashesStillMatchRun": true,
+  "currentObserverTools": [
+    {
+      "path": "tools/color-round11/diagnostic/analyze_gray_scale_existing.py",
+      "sha256": "0f82078e3437956faf8b43f8c1a70e32ee51dd352da72a5216218d0b2ec583d4"
+    },
+    {
+      "path": "tools/color-round11/diagnostic/analyze_gray_scale_taps.py",
+      "sha256": "4cfab9414998d0b7a332a83159e50fe1c9e02d2994ec85f51951113b0cc02a53"
+    },
+    {
+      "path": "tools/color-round11/diagnostic/compare_gray_scale_taps.py",
+      "sha256": "e41a53c5411258a2adf0818ae133c7f0b690804a571668af8dae13d4b458eae7"
+    },
+    {
+      "path": "tools/color-round11/diagnostic/run_gray_scale_tap.py",
+      "sha256": "1088ba8d5897949a6752330ef23a6eee52d83278d21530232824020688a5178a"
+    },
+    {
+      "path": "tools/color-round11/diagnostic/verify_gray_scale_tap.py",
+      "sha256": "52e23422314e83e01395aaf28d5004e0c4cfca1c821d8b775073b7c01db5ea45"
+    },
+    {
+      "path": "tools/color-round11/diagnostic/generate_scale_substage_tap.py",
+      "sha256": "ed073469c8bd8b9f378dd6ded1ae9bb2a13ed7891f6bb83b5478b2b72205587a"
+    }
+  ],
+  "compiledSpirvVsRunResources": "Resources supplied were old frozen73collection; newbuildshaderproducts unused",
+  "sourceOrBinaryModifiedAfterOnlyRun": false
+}

@@ -1,0 +1,508 @@
+{
+  "version": "GrayCompoundStageOfflineLocalizationV1",
+  "gpuCalls": 0,
+  "primaryCase": "gray-boundaries",
+  "fixedReviewedHead": "7309911e1ad501b517877a073a86e468a9507941",
+  "identity": {
+    "inputFileHashExact": true,
+    "inputPixelIdentityExact": true,
+    "resolved99Exact": true,
+    "all73ResourceAnd34SpirvHashesExact": true,
+    "actualUploadedCpuConstantsHome": "NOT_CAPTURED_BY_COMPOUND_STAGE_PACKAGE",
+    "actualUploadedCpuConstantsCompany": "NOT_CAPTURED_BY_COMPOUND_STAGE_PACKAGE",
+    "sameSetupConfigurationIsActualUploadedByteProof": false
+  },
+  "firstDifference": {
+    "xyChannel": [
+      2,
+      0,
+      0
+    ],
+    "home": 0.9905756115913391,
+    "company": 0.9905756711959839,
+    "absDelta": 5.960464477539063e-08,
+    "relativeSymmetric": 6.017172287648274e-08,
+    "ulpDistance": 1,
+    "homeBits": "3f7d965d",
+    "companyBits": "3f7d965e"
+  },
+  "maximumCoordinatesYXC": [
+    [
+      0,
+      32,
+      1
+    ],
+    [
+      1,
+      32,
+      1
+    ],
+    [
+      2,
+      32,
+      1
+    ],
+    [
+      3,
+      32,
+      1
+    ],
+    [
+      4,
+      32,
+      1
+    ],
+    [
+      5,
+      32,
+      1
+    ],
+    [
+      6,
+      32,
+      1
+    ],
+    [
+      7,
+      32,
+      1
+    ],
+    [
+      8,
+      32,
+      1
+    ],
+    [
+      9,
+      32,
+      1
+    ],
+    [
+      10,
+      32,
+      1
+    ],
+    [
+      11,
+      32,
+      1
+    ],
+    [
+      12,
+      32,
+      1
+    ],
+    [
+      13,
+      32,
+      1
+    ],
+    [
+      14,
+      32,
+      1
+    ],
+    [
+      15,
+      32,
+      1
+    ],
+    [
+      16,
+      32,
+      1
+    ]
+  ],
+  "maximumRepresentative": {
+    "xyChannel": [
+      32,
+      0,
+      1
+    ],
+    "home": 10.75505542755127,
+    "company": 10.755059242248535,
+    "absDelta": 3.814697265625e-06,
+    "relativeSymmetric": 3.546886334795744e-07,
+    "ulpDistance": 4,
+    "homeBits": "412c14b5",
+    "companyBits": "412c14b9"
+  },
+  "metrics": [
+    {
+      "kind": "stageWhole",
+      "homeFile": "gray-boundaries/stages-whole/0000-film_scale_and_expose-17-33-3.f32",
+      "companyFile": "gray-boundaries/stages-whole/0000-film_scale_and_expose-17-33-3.f32",
+      "stage": "film_scale_and_expose",
+      "shape": [
+        17,
+        33,
+        3
+      ],
+      "values": 1683,
+      "changed": 1520,
+      "maxAbsolute": 3.814697265625e-06,
+      "meanAbsolute": 1.1724637701304725e-07,
+      "maxRelativeSymmetricExcludingZero": 2.412848692041932e-06,
+      "classes": [
+        {
+          "class": "zero_either",
+          "count": 0,
+          "changed": 0
+        },
+        {
+          "class": "near_zero_nonzero",
+          "count": 363,
+          "changed": 345,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "meanAbsolute": 2.85538351457313e-14,
+          "absoluteQuantiles": {
+            "0": 0.0,
+            "0.5": 7.105427357601002e-15,
+            "0.9": 1.1368683772161603e-13,
+            "0.99": 1.1368683772161603e-13,
+            "1": 1.1368683772161603e-13
+          },
+          "relativeDefinedCount": 363,
+          "maxRelativeSymmetric": 4.232244949471651e-07,
+          "maxUlpSameSign": 5,
+          "ulpSameSignQuantiles": {
+            "0.5": 2.0,
+            "0.9": 4.0,
+            "0.99": 5.0,
+            "1": 5.0
+          }
+        },
+        {
+          "class": "negative_normal",
+          "count": 3,
+          "changed": 0,
+          "maxAbsolute": 0.0,
+          "meanAbsolute": 0.0,
+          "absoluteQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.99": 0.0,
+            "1": 0.0
+          },
+          "relativeDefinedCount": 3,
+          "maxRelativeSymmetric": 0.0,
+          "maxUlpSameSign": 0,
+          "ulpSameSignQuantiles": {
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.99": 0.0,
+            "1": 0.0
+          }
+        },
+        {
+          "class": "positive_normal",
+          "count": 1317,
+          "changed": 1175,
+          "maxAbsolute": 3.814697265625e-06,
+          "meanAbsolute": 1.4982964475923795e-07,
+          "absoluteQuantiles": {
+            "0": 0.0,
+            "0.5": 2.9103830456733704e-10,
+            "0.9": 2.384185791015625e-07,
+            "0.99": 3.814697265625e-06,
+            "1": 3.814697265625e-06
+          },
+          "relativeDefinedCount": 1317,
+          "maxRelativeSymmetric": 2.412848692041932e-06,
+          "maxUlpSameSign": 23,
+          "ulpSameSignQuantiles": {
+            "0.5": 2.0,
+            "0.9": 5.0,
+            "0.99": 10.0,
+            "1": 23.0
+          }
+        },
+        {
+          "class": "sign_disagreement",
+          "count": 0,
+          "changed": 0
+        }
+      ],
+      "ulpPolicy": "binary32 ordered-bit distance only reported for same-sign finite pairs; +0/-0 treated value-equal, relative undefined at zero excluded; nearzero descriptive cutoff1e-6 is NOT acceptance threshold"
+    },
+    {
+      "kind": "stageStream",
+      "homeFile": "gray-boundaries/stages-stream/0012-film_scale_and_expose-7-33-3.f32",
+      "companyFile": "gray-boundaries/stages-stream/0012-film_scale_and_expose-7-33-3.f32",
+      "stage": "film_scale_and_expose",
+      "shape": [
+        7,
+        33,
+        3
+      ],
+      "values": 693,
+      "changed": 619,
+      "maxAbsolute": 3.814697265625e-06,
+      "meanAbsolute": 1.2448764121578261e-07,
+      "maxRelativeSymmetricExcludingZero": 2.412848692041932e-06,
+      "classes": [
+        {
+          "class": "zero_either",
+          "count": 0,
+          "changed": 0
+        },
+        {
+          "class": "near_zero_nonzero",
+          "count": 147,
+          "changed": 138,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "meanAbsolute": 2.8204196348028466e-14,
+          "absoluteQuantiles": {
+            "0": 0.0,
+            "0.5": 7.105427357601002e-15,
+            "0.9": 1.1368683772161603e-13,
+            "0.99": 1.1368683772161603e-13,
+            "1": 1.1368683772161603e-13
+          },
+          "relativeDefinedCount": 147,
+          "maxRelativeSymmetric": 4.232244949471651e-07,
+          "maxUlpSameSign": 5,
+          "ulpSameSignQuantiles": {
+            "0.5": 2.0,
+            "0.9": 4.0,
+            "0.99": 5.0,
+            "1": 5.0
+          }
+        },
+        {
+          "class": "negative_normal",
+          "count": 3,
+          "changed": 0,
+          "maxAbsolute": 0.0,
+          "meanAbsolute": 0.0,
+          "absoluteQuantiles": {
+            "0": 0.0,
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.99": 0.0,
+            "1": 0.0
+          },
+          "relativeDefinedCount": 3,
+          "maxRelativeSymmetric": 0.0,
+          "maxUlpSameSign": 0,
+          "ulpSameSignQuantiles": {
+            "0.5": 0.0,
+            "0.9": 0.0,
+            "0.99": 0.0,
+            "1": 0.0
+          }
+        },
+        {
+          "class": "positive_normal",
+          "count": 543,
+          "changed": 481,
+          "maxAbsolute": 3.814697265625e-06,
+          "meanAbsolute": 1.5887648474497327e-07,
+          "absoluteQuantiles": {
+            "0": 0.0,
+            "0.5": 2.3283064365386963e-10,
+            "0.9": 4.76837158203125e-07,
+            "0.99": 3.814697265625e-06,
+            "1": 3.814697265625e-06
+          },
+          "relativeDefinedCount": 543,
+          "maxRelativeSymmetric": 2.412848692041932e-06,
+          "maxUlpSameSign": 23,
+          "ulpSameSignQuantiles": {
+            "0.5": 2.0,
+            "0.9": 5.0,
+            "0.99": 10.0,
+            "1": 23.0
+          }
+        },
+        {
+          "class": "sign_disagreement",
+          "count": 0,
+          "changed": 0
+        }
+      ],
+      "ulpPolicy": "binary32 ordered-bit distance only reported for same-sign finite pairs; +0/-0 treated value-equal, relative undefined at zero excluded; nearzero descriptive cutoff1e-6 is NOT acceptance threshold"
+    },
+    {
+      "kind": "stageStream",
+      "homeFile": "gray-boundaries/stages-stream/0019-film_scale_and_expose-7-33-3.f32",
+      "companyFile": "gray-boundaries/stages-stream/0019-film_scale_and_expose-7-33-3.f32",
+      "stage": "film_scale_and_expose",
+      "shape": [
+        7,
+        33,
+        3
+      ],
+      "values": 693,
+      "changed": 630,
+      "maxAbsolute": 3.814697265625e-06,
+      "meanAbsolute": 1.0916718427550319e-07,
+      "maxRelativeSymmetricExcludingZero": 7.523615823969746e-07,
+      "classes": [
+        {
+          "class": "zero_either",
+          "count": 0,
+          "changed": 0
+        },
+        {
+          "class": "near_zero_nonzero",
+          "count": 168,
+          "changed": 161,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "meanAbsolute": 2.8791783771945724e-14,
+          "absoluteQuantiles": {
+            "0": 0.0,
+            "0.5": 7.105427357601002e-15,
+            "0.9": 1.1368683772161603e-13,
+            "0.99": 1.1368683772161603e-13,
+            "1": 1.1368683772161603e-13
+          },
+          "relativeDefinedCount": 168,
+          "maxRelativeSymmetric": 4.232244949471651e-07,
+          "maxUlpSameSign": 5,
+          "ulpSameSignQuantiles": {
+            "0.5": 2.0,
+            "0.9": 4.0,
+            "0.99": 5.0,
+            "1": 5.0
+          }
+        },
+        {
+          "class": "negative_normal",
+          "count": 0,
+          "changed": 0
+        },
+        {
+          "class": "positive_normal",
+          "count": 525,
+          "changed": 469,
+          "maxAbsolute": 3.814697265625e-06,
+          "meanAbsolute": 1.441006740302934e-07,
+          "absoluteQuantiles": {
+            "0": 0.0,
+            "0.5": 2.3283064365386963e-10,
+            "0.9": 2.384185791015625e-07,
+            "0.99": 3.814697265625e-06,
+            "1": 3.814697265625e-06
+          },
+          "relativeDefinedCount": 525,
+          "maxRelativeSymmetric": 7.523615823969746e-07,
+          "maxUlpSameSign": 10,
+          "ulpSameSignQuantiles": {
+            "0.5": 2.0,
+            "0.9": 5.0,
+            "0.99": 10.0,
+            "1": 10.0
+          }
+        },
+        {
+          "class": "sign_disagreement",
+          "count": 0,
+          "changed": 0
+        }
+      ],
+      "ulpPolicy": "binary32 ordered-bit distance only reported for same-sign finite pairs; +0/-0 treated value-equal, relative undefined at zero excluded; nearzero descriptive cutoff1e-6 is NOT acceptance threshold"
+    },
+    {
+      "kind": "stageStream",
+      "homeFile": "gray-boundaries/stages-stream/0026-film_scale_and_expose-3-33-3.f32",
+      "companyFile": "gray-boundaries/stages-stream/0026-film_scale_and_expose-3-33-3.f32",
+      "stage": "film_scale_and_expose",
+      "shape": [
+        3,
+        33,
+        3
+      ],
+      "values": 297,
+      "changed": 271,
+      "maxAbsolute": 3.814697265625e-06,
+      "meanAbsolute": 1.1920154359426756e-07,
+      "maxRelativeSymmetricExcludingZero": 7.523615823969746e-07,
+      "classes": [
+        {
+          "class": "zero_either",
+          "count": 0,
+          "changed": 0
+        },
+        {
+          "class": "near_zero_nonzero",
+          "count": 48,
+          "changed": 46,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "meanAbsolute": 2.8791783771945724e-14,
+          "absoluteQuantiles": {
+            "0": 0.0,
+            "0.5": 7.105427357601002e-15,
+            "0.9": 1.1368683772161603e-13,
+            "0.99": 1.1368683772161603e-13,
+            "1": 1.1368683772161603e-13
+          },
+          "relativeDefinedCount": 48,
+          "maxRelativeSymmetric": 4.232244949471651e-07,
+          "maxUlpSameSign": 5,
+          "ulpSameSignQuantiles": {
+            "0.5": 2.0,
+            "0.9": 4.0,
+            "0.99": 5.0,
+            "1": 5.0
+          }
+        },
+        {
+          "class": "negative_normal",
+          "count": 0,
+          "changed": 0
+        },
+        {
+          "class": "positive_normal",
+          "count": 249,
+          "changed": 225,
+          "maxAbsolute": 3.814697265625e-06,
+          "meanAbsolute": 1.4218014885739695e-07,
+          "absoluteQuantiles": {
+            "0": 0.0,
+            "0.5": 1.3969838619232178e-09,
+            "0.9": 2.384185791015625e-07,
+            "0.99": 2.8991699218750195e-06,
+            "1": 3.814697265625e-06
+          },
+          "relativeDefinedCount": 249,
+          "maxRelativeSymmetric": 7.523615823969746e-07,
+          "maxUlpSameSign": 10,
+          "ulpSameSignQuantiles": {
+            "0.5": 2.0,
+            "0.9": 5.0,
+            "0.99": 9.04000000000002,
+            "1": 10.0
+          }
+        },
+        {
+          "class": "sign_disagreement",
+          "count": 0,
+          "changed": 0
+        }
+      ],
+      "ulpPolicy": "binary32 ordered-bit distance only reported for same-sign finite pairs; +0/-0 treated value-equal, relative undefined at zero excluded; nearzero descriptive cutoff1e-6 is NOT acceptance threshold"
+    }
+  ],
+  "earliestCapturedStage": "film_scale_and_expose",
+  "missingObservation": "Per-end actual uploaded tc_b matrix / spectral LUT / exposure constants and tc_b(tc,brightness)/upsample/exposure outputs, actual math probe selection",
+  "notExcluded": [
+    "CPU generated constants may differ before upload",
+    "native narrowing/upload bytes may differ",
+    "same uploaded bytes could produce different tc_b or LUT shader outputs",
+    "runtime/compiler/JIT/hardware not isolated"
+  ],
+  "excludedAtCurrentLevel": [
+    "Input file/pixel mismatch",
+    "resolved or resource/SPIRV mismatch",
+    "same-device stream/whole or passive trace changing final result in sealed package",
+    "differences starting only after sharpening; compound stage is already different"
+  ],
+  "environmentParticipation": {
+    "Pillow": "not used by Engine/ctypes whole numerical path after fixed fixture np.load; metadata only in this run",
+    "PythonNumPy": "loads frozen binary32 arrays and ctypes transport; exact bytes verified, not a spectral-LUT CPU setup implementation",
+    "nativeCppCpuSetup": "actual double math pow/illum/window/LUT contraction/compression and upload narrowing participate; uploaded results absent in home package",
+    "GPUdriver": "tc_b arithmetic/divides/clamps and Mitchell interpolation participate; cause not isolated"
+  }
+}

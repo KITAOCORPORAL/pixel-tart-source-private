@@ -1,0 +1,63 @@
+{
+  "version": "PassiveSubstageTapGeneratorReproductionV1",
+  "checks": [
+    {
+      "file": "engine/src/pipeline/engine.cpp",
+      "actualSha256": "6aa2e99e5cdb28470b983d8a8ff6fd958fee55ed2cefef046b5f55dfc71f8d52",
+      "reproducedSha256": "6aa2e99e5cdb28470b983d8a8ff6fd958fee55ed2cefef046b5f55dfc71f8d52",
+      "same": true
+    },
+    {
+      "file": "engine/src/pipeline/pipeline.cpp",
+      "actualSha256": "0bde625bc41c8a667374b62e91f7e8ae8b15da81680f3d43043afb4424db36b4",
+      "reproducedSha256": "0bde625bc41c8a667374b62e91f7e8ae8b15da81680f3d43043afb4424db36b4",
+      "same": true
+    },
+    {
+      "file": "engine/src/pipeline/pipeline.hpp",
+      "actualSha256": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4",
+      "reproducedSha256": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4",
+      "same": true
+    },
+    {
+      "file": "engine/src/gpu/gpu.hpp",
+      "actualSha256": "e6241cb55502e466bdc7f36c9416b285f0dcd7f96abdbe9169f033efb955b5da",
+      "reproducedSha256": "e6241cb55502e466bdc7f36c9416b285f0dcd7f96abdbe9169f033efb955b5da",
+      "same": true
+    },
+    {
+      "file": "engine/src/gpu/vulkan_gpu.cpp",
+      "actualSha256": "bf1560949805a49ca184292631d3be3753fd562a7f5ce4492c177b899f2aeba2",
+      "reproducedSha256": "bf1560949805a49ca184292631d3be3753fd562a7f5ce4492c177b899f2aeba2",
+      "same": true
+    },
+    {
+      "file": "engine/CMakeLists.txt",
+      "actualSha256": "ef17371c86921bc613989d3821fa5cfbb4f074d07e8873f5a1097351361aca3d",
+      "reproducedSha256": "ef17371c86921bc613989d3821fa5cfbb4f074d07e8873f5a1097351361aca3d",
+      "same": true
+    },
+    {
+      "file": "engine/windows_exports.def",
+      "actualSha256": "de6232d8d2fb28c0f3854b26fca2bbddbef17e0ed1984f1fafe26832d1f45c53",
+      "reproducedSha256": "de6232d8d2fb28c0f3854b26fca2bbddbef17e0ed1984f1fafe26832d1f45c53",
+      "same": true
+    },
+    {
+      "file": "engine/src/pipeline/blur.cpp",
+      "actualSha256": "19977757598cc8b6f896b6188fa83983d3bcdcf47dbb4aa435c04eb3132c5fcc",
+      "reproducedSha256": "19977757598cc8b6f896b6188fa83983d3bcdcf47dbb4aa435c04eb3132c5fcc",
+      "same": true
+    },
+    {
+      "file": "API-SPEC-callable-render-service.md",
+      "actualSha256": "7908622f41b3dec72ed617a58b2d5f6f75befc08622e8f9c8cba30b9fd9120d5",
+      "reproducedSha256": "7908622f41b3dec72ed617a58b2d5f6f75befc08622e8f9c8cba30b9fd9120d5",
+      "same": true
+    }
+  ],
+  "allExact": true,
+  "GPUCalls": 0,
+  "builds": 0,
+  "permittedHomeVariation": "Only two original engine.cpp authorized-root literals normalize to sealed company file; no arithmetic alteration"
+}

@@ -1,0 +1,114 @@
+{
+  "version": "ActualFilmScaleSourceAnchorsV1",
+  "files": [
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "sha256": "0bde625bc41c8a667374b62e91f7e8ae8b15da81680f3d43043afb4424db36b4",
+      "anchors": [
+        {
+          "literal": "bool Pipeline::film_scale_and_expose",
+          "lines": [
+            1927
+          ]
+        },
+        {
+          "literal": "bool Pipeline::node_upsample",
+          "lines": [
+            894
+          ]
+        },
+        {
+          "literal": "bool Pipeline::node_exposure",
+          "lines": [
+            924
+          ]
+        },
+        {
+          "literal": "baked_.tc_lut =",
+          "lines": [
+            221
+          ]
+        },
+        {
+          "literal": "baked_.tc_b_matrix =",
+          "lines": [
+            234
+          ]
+        }
+      ]
+    },
+    {
+      "path": "engine/src/core/hanatos.cpp",
+      "sha256": "4ab0a165cd1567dc551271d88f16d4739807a219d0a22fae778afcfde3a06be1",
+      "anchors": [
+        {
+          "literal": "bool film_sensitivity",
+          "lines": [
+            159
+          ]
+        },
+        {
+          "literal": "bool tc_b_matrix",
+          "lines": [
+            203
+          ]
+        },
+        {
+          "literal": "bool tc_lut_weights",
+          "lines": [
+            212
+          ]
+        },
+        {
+          "literal": "bool build_tc_lut",
+          "lines": [
+            237
+          ]
+        }
+      ]
+    },
+    {
+      "path": "engine/src/gpu/vulkan_gpu.cpp",
+      "sha256": "bf1560949805a49ca184292631d3be3753fd562a7f5ce4492c177b899f2aeba2",
+      "anchors": [
+        {
+          "literal": "BufferRef upload_data",
+          "lines": [
+            772
+          ]
+        },
+        {
+          "literal": "bool check_math_mode",
+          "lines": [
+            238
+          ]
+        },
+        {
+          "literal": "stage.pSpecializationInfo",
+          "lines": [
+            1003
+          ]
+        },
+        {
+          "literal": "scale_upload_label",
+          "lines": [
+            786,
+            787
+          ]
+        }
+      ]
+    },
+    {
+      "path": "engine/src/pipeline/blur.cpp",
+      "sha256": "19977757598cc8b6f896b6188fa83983d3bcdcf47dbb4aa435c04eb3132c5fcc",
+      "anchors": [
+        {
+          "literal": "bool Blur::affine",
+          "lines": [
+            291
+          ]
+        }
+      ]
+    }
+  ]
+}

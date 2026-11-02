@@ -1,0 +1,8 @@
+# Exact-byte synthetic observations/provenance only; no engine LUT or private photos.
+*.json -text whitespace=cr-at-eol,-blank-at-eof
+*.jsonl -text whitespace=cr-at-eol,-blank-at-eof
+*.txt -text whitespace=cr-at-eol,-blank-at-eof
+*.f32 -text -diff -merge
+*.f64 -text -diff -merge
+*.rgba16 -text -diff -merge
+*.npy -text -diff -merge

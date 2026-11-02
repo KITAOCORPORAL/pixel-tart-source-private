@@ -1,0 +1,44 @@
+{
+  "version": "LocalSetupConstantObservationIndexV1",
+  "fullLutAndSensitivityPublished": false,
+  "localRun": "E:\\Kitao-Research\\color-engine-scale-localization-20261102-v2\\gray-once",
+  "notIncludedInGit": [
+    {
+      "file": "taps/film-sensitivity.cpu.f64",
+      "bytes": 1944,
+      "sha256": "217c802fb6721a6573ec00c3b7991b1d0ab8588b62a0862443bf8173651b3078",
+      "dtype": "<f8",
+      "values": 243,
+      "min": 5.562630623896514e-10,
+      "max": 0.5788969216656503
+    },
+    {
+      "file": "taps/tc-lut.cpu.f64",
+      "bytes": 884736,
+      "sha256": "260d59c1194773a9daa866e64417f1ecd8f0e5103d08b01ace9dfeff42201f23",
+      "dtype": "<f8",
+      "values": 110592,
+      "min": 0.06606023848447437,
+      "max": 10.796976830403361
+    },
+    {
+      "file": "taps/tc-lut.device.f32",
+      "bytes": 442368,
+      "sha256": "63105d14c4c1f4ba923121cd2de847aefed7f1626afc0d252e73de56125244c3",
+      "dtype": "<f4",
+      "values": 110592,
+      "min": 0.06606023758649826,
+      "max": 10.796977043151855
+    },
+    {
+      "file": "taps/tc-lut.uploaded.f32",
+      "bytes": 442368,
+      "sha256": "63105d14c4c1f4ba923121cd2de847aefed7f1626afc0d252e73de56125244c3",
+      "dtype": "<f4",
+      "values": 110592,
+      "min": 0.06606023758649826,
+      "max": 10.796977043151855
+    }
+  ],
+  "reason": "Full runtime LUT/sensitivity are engine/profile-derived setup arrays, kept with external resources locally; publish hashes/byte-equality/selected small numeric metrics only."
+}

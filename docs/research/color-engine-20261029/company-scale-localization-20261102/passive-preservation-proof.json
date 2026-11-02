@@ -1,0 +1,251 @@
+{
+  "version": "PassiveScaleSourcePreservationV1",
+  "baseEngineCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "unchangedShaderSources": [
+    {
+      "file": "engine/src/shaders/vulkan/spk_affine3.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_boost.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_bw_correct.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_cam16ucs_compress.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_cctf_decode.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_cctf_encode_matrix.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_couplers_correction.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_curves.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_di_normalise.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_edr.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_geometry_resample_df.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_glare_add.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_grain_layer_one.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_grain_layers.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_grain_simple.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_iir_df_acc.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_lincomb3.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_log10_guarded.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_lognormal_field.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_lut2d_cubic.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_lut3d_trilinear.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_math_probe.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_matmul3.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_mul.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_print_exposure.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_reduce_max.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_rng.glsl",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_rng_probe.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_sep_fir_acc.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_spectral_epilogue.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_stride_sample.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_take_rgb.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_tc_b.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_to_rgba16.comp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_zoom_bilinear_mirror.comp",
+      "sameSha256": true
+    }
+  ],
+  "unchangedNumericalCpuAndOldEntrySource": [
+    {
+      "file": "engine/src/core/hanatos.cpp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/core/setup_cache.cpp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/core/numeric.cpp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/core/colour.cpp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/core/profile.cpp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/core/params.cpp",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/CMakeLists.txt",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/windows_exports.def",
+      "sameSha256": true
+    },
+    {
+      "file": "engine/src/pipeline/engine.cpp",
+      "sameSha256": true
+    }
+  ],
+  "compilerAndShaderFlags": {
+    "CMAKE_BUILD_TYPE": {
+      "old": "Release",
+      "new": "Release",
+      "same": true
+    },
+    "CMAKE_C_FLAGS": {
+      "old": "",
+      "new": "",
+      "same": true
+    },
+    "CMAKE_C_FLAGS_RELEASE": {
+      "old": "-O3 -DNDEBUG",
+      "new": "-O3 -DNDEBUG",
+      "same": true
+    },
+    "CMAKE_CXX_FLAGS": {
+      "old": "",
+      "new": "",
+      "same": true
+    },
+    "CMAKE_CXX_FLAGS_RELEASE": {
+      "old": "-O3 -DNDEBUG",
+      "new": "-O3 -DNDEBUG",
+      "same": true
+    },
+    "SPEKTRALAB_BUILD_NATIVE_RAW": {
+      "old": "OFF",
+      "new": "OFF",
+      "same": true
+    },
+    "SPEKTRALAB_BUILD_DESKTOP": {
+      "old": "OFF",
+      "new": "OFF",
+      "same": true
+    },
+    "SPEKTRALAB_GLSLANG": {
+      "old": "D:/AI AGENT/tmp/color-engine-company-20261030/glslang/bin/glslang.exe",
+      "new": "D:/AI AGENT/tmp/color-engine-company-20261030/glslang/bin/glslang.exe",
+      "same": true
+    },
+    "SPEKTRALAB_VULKAN_HEADERS": {
+      "old": "D:/AI AGENT/tmp/color-engine-company-20261030/Vulkan-Headers/include",
+      "new": "D:/AI AGENT/tmp/color-engine-company-20261030/Vulkan-Headers/include",
+      "same": true
+    }
+  },
+  "shaderSpecializationDeclarations": {
+    "spk_tc_b.comp": false,
+    "spk_lut2d_cubic.comp": false,
+    "spk_affine3.comp": false
+  },
+  "originalArithmeticDispatchSequence": [
+    "spk_tc_b",
+    "spk_lut2d_cubic",
+    "spk_affine3"
+  ],
+  "newReadbackOperations": 7,
+  "mathShadersOrOptimizationChanged": false,
+  "addedGpuProducingApiCalls": {
+    "engineCreate": 1,
+    "open": 1,
+    "wholeRender": 1,
+    "streamRender": 0,
+    "bt": 0
+  },
+  "notCounted": "startup/check_math_mode numerical dispatch count not separately instrumented; seven readbacks are copy operations not new numerical kernels"
+}
