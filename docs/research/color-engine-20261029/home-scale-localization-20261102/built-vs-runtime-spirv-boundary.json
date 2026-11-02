@@ -1,0 +1,15 @@
+{
+  "version": "BuiltVsFrozenRuntimeSpirvV1",
+  "engineCalls": 0,
+  "mismatch": [
+    {
+      "file": "spk_cctf_decode.spv",
+      "newBuilt": "4b71817eed371b305d985eae01b92b75692a56f1bd07ad9edf72a59e0a130f3d",
+      "oldBuilt": "4b71817eed371b305d985eae01b92b75692a56f1bd07ad9edf72a59e0a130f3d",
+      "runtimeExpected": "125c2ccb53705b9a7cb7011b462fb0cd6bd44f06f2654ad03434b1734555f6b4",
+      "oldNewBuiltExact": true
+    }
+  ],
+  "rule": "Run only frozen resources-patch; fresh CMake internal resource tree is not selected runtime. Need prove original home generated SPIRV parity and exact selected runtime73 files, especially tc_b/lut2d_cubic/affine3.",
+  "noBtCall": true
+}

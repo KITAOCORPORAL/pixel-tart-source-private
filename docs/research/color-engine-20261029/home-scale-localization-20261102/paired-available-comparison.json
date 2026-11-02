@@ -1,0 +1,696 @@
+{
+  "version": "HomeCompanyGrayPartialMaterialComparisonV1",
+  "gpuCallsForComparison": 0,
+  "acceptanceThreshold": "NONE_DESCRIPTIVE_ONLY",
+  "homeCompleteLocalValidation": {
+    "version": "CompleteLocalGraySubstageValidationV1",
+    "role": "home",
+    "finiteArtifacts": 16,
+    "fixedGrayInputExact": true,
+    "constantByteObservations": [
+      {
+        "constant": "tc-b-matrix",
+        "cpuNarrowVsUploadChangedBits": 0,
+        "uploadVsDeviceChangedBits": 0
+      },
+      {
+        "constant": "tc-lut",
+        "cpuNarrowVsUploadChangedBits": 0,
+        "uploadVsDeviceChangedBits": 0
+      }
+    ],
+    "narrowedStagingDeviceBytesExact": true,
+    "EV0ActualConstantsExpected": true,
+    "EV0ExposureBitIdentityObserved": true,
+    "numericalObservationsAreNotValidatorAssumptions": true,
+    "sealedSideFinalExact": true,
+    "GPUCallsForValidation": 0,
+    "fullLocalCaptureValidated": true
+  },
+  "companyMaterialScope": {
+    "publicSubsetManifestVerified": true,
+    "publicFilesVerified": 17,
+    "companyFullRuntimeArraysPresent": false,
+    "missingCompanyFiles": [
+      "taps/film-sensitivity.cpu.f64",
+      "taps/tc-lut.cpu.f64",
+      "taps/tc-lut.device.f32",
+      "taps/tc-lut.uploaded.f32"
+    ],
+    "completeCompanyValidatorInvoked": false,
+    "fullPairedComparatorInvoked": false,
+    "historicalCompanyCompleteValidationReadOnly": {
+      "version": "CompleteLocalGraySubstageValidationV1",
+      "role": "company",
+      "finiteArtifacts": 16,
+      "fixedGrayInputExact": true,
+      "constantByteObservations": [
+        {
+          "constant": "tc-b-matrix",
+          "cpuNarrowVsUploadChangedBits": 0,
+          "uploadVsDeviceChangedBits": 0
+        },
+        {
+          "constant": "tc-lut",
+          "cpuNarrowVsUploadChangedBits": 0,
+          "uploadVsDeviceChangedBits": 0
+        }
+      ],
+      "narrowedStagingDeviceBytesExact": true,
+      "EV0ActualConstantsExpected": true,
+      "EV0ExposureBitIdentityObserved": true,
+      "numericalObservationsAreNotValidatorAssumptions": true,
+      "sealedSideFinalExact": true,
+      "GPUCallsForValidation": 0,
+      "fullLocalCaptureValidated": true
+    }
+  },
+  "summaryHashOnly": [
+    {
+      "file": "taps/film-sensitivity.cpu.f64",
+      "homeSha256": "91e3777e4a7311d4d0af6821894c48caf2023f2a1237a34635db4fbb1f26c073",
+      "companyRecordedSha256": "217c802fb6721a6573ec00c3b7991b1d0ab8588b62a0862443bf8173651b3078",
+      "hashIdentityEqual": false,
+      "companyBytesAvailable": false,
+      "comparisonAuthority": "SHA256_IDENTITY_ONLY_FROM_SEALED_COMPANY_OBSERVATION",
+      "pairwiseByteComparisonPerformed": false,
+      "changedValues": null,
+      "maxAbs": null,
+      "homeValues": 243,
+      "companyValuesRecorded": 243
+    },
+    {
+      "file": "taps/tc-lut.cpu.f64",
+      "homeSha256": "5c1db4fde41b5d92d211ed495642e2e5b17fa5ca06d285e3c648c34a5887e9ee",
+      "companyRecordedSha256": "260d59c1194773a9daa866e64417f1ecd8f0e5103d08b01ace9dfeff42201f23",
+      "hashIdentityEqual": false,
+      "companyBytesAvailable": false,
+      "comparisonAuthority": "SHA256_IDENTITY_ONLY_FROM_SEALED_COMPANY_OBSERVATION",
+      "pairwiseByteComparisonPerformed": false,
+      "changedValues": null,
+      "maxAbs": null,
+      "homeValues": 110592,
+      "companyValuesRecorded": 110592
+    },
+    {
+      "file": "taps/tc-lut.device.f32",
+      "homeSha256": "63105d14c4c1f4ba923121cd2de847aefed7f1626afc0d252e73de56125244c3",
+      "companyRecordedSha256": "63105d14c4c1f4ba923121cd2de847aefed7f1626afc0d252e73de56125244c3",
+      "hashIdentityEqual": true,
+      "companyBytesAvailable": false,
+      "comparisonAuthority": "SHA256_IDENTITY_ONLY_FROM_SEALED_COMPANY_OBSERVATION",
+      "pairwiseByteComparisonPerformed": false,
+      "changedValues": null,
+      "maxAbs": null,
+      "homeValues": 110592,
+      "companyValuesRecorded": 110592
+    },
+    {
+      "file": "taps/tc-lut.uploaded.f32",
+      "homeSha256": "63105d14c4c1f4ba923121cd2de847aefed7f1626afc0d252e73de56125244c3",
+      "companyRecordedSha256": "63105d14c4c1f4ba923121cd2de847aefed7f1626afc0d252e73de56125244c3",
+      "hashIdentityEqual": true,
+      "companyBytesAvailable": false,
+      "comparisonAuthority": "SHA256_IDENTITY_ONLY_FROM_SEALED_COMPANY_OBSERVATION",
+      "pairwiseByteComparisonPerformed": false,
+      "changedValues": null,
+      "maxAbs": null,
+      "homeValues": 110592,
+      "companyValuesRecorded": 110592
+    }
+  ],
+  "directPaired": [
+    {
+      "file": "taps/tc-b-matrix.cpu.f64",
+      "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+      "homeSha256": "88b03d204358890d370bd292c218bcc580cb740642e8b403a2606a6b23a8eebf",
+      "companySha256": "88b03d204358890d370bd292c218bcc580cb740642e8b403a2606a6b23a8eebf",
+      "byteEqual": true,
+      "componentCount": 9,
+      "changedBitPatterns": 0,
+      "changedNumericValues": 0,
+      "maxAbs": 0.0,
+      "meanAbs": 0.0,
+      "maxSymmetricRelativeNonzero": 0.0,
+      "maxSameSignNonzeroULP": 0,
+      "maxU16CodeDelta": null,
+      "firstBitDifference": null
+    },
+    {
+      "file": "taps/tc-b-matrix.uploaded.f32",
+      "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+      "homeSha256": "e5548e918c2804591968b46cfa2352b173a6990556ad109859a561dc6a90df11",
+      "companySha256": "e5548e918c2804591968b46cfa2352b173a6990556ad109859a561dc6a90df11",
+      "byteEqual": true,
+      "componentCount": 9,
+      "changedBitPatterns": 0,
+      "changedNumericValues": 0,
+      "maxAbs": 0.0,
+      "meanAbs": 0.0,
+      "maxSymmetricRelativeNonzero": 0.0,
+      "maxSameSignNonzeroULP": 0,
+      "maxU16CodeDelta": null,
+      "firstBitDifference": null
+    },
+    {
+      "file": "taps/tc-b-matrix.device.f32",
+      "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+      "homeSha256": "e5548e918c2804591968b46cfa2352b173a6990556ad109859a561dc6a90df11",
+      "companySha256": "e5548e918c2804591968b46cfa2352b173a6990556ad109859a561dc6a90df11",
+      "byteEqual": true,
+      "componentCount": 9,
+      "changedBitPatterns": 0,
+      "changedNumericValues": 0,
+      "maxAbs": 0.0,
+      "meanAbs": 0.0,
+      "maxSymmetricRelativeNonzero": 0.0,
+      "maxSameSignNonzeroULP": 0,
+      "maxU16CodeDelta": null,
+      "firstBitDifference": null
+    },
+    {
+      "file": "taps/00-input.device.f32",
+      "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+      "homeSha256": "48d44e82df7b9c4d6066a03403b68c174cf2714586ea760110c2579990d34d86",
+      "companySha256": "48d44e82df7b9c4d6066a03403b68c174cf2714586ea760110c2579990d34d86",
+      "byteEqual": true,
+      "componentCount": 1683,
+      "changedBitPatterns": 0,
+      "changedNumericValues": 0,
+      "maxAbs": 0.0,
+      "meanAbs": 0.0,
+      "maxSymmetricRelativeNonzero": 0.0,
+      "maxSameSignNonzeroULP": 0,
+      "maxU16CodeDelta": null,
+      "firstBitDifference": null
+    },
+    {
+      "file": "taps/01-tc.device.f32",
+      "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+      "homeSha256": "f284b46b6e37369c13025174e37f540d53791c63a2b3734cf52ac9d834838122",
+      "companySha256": "f14a13a47f4e5b6ec55b9bc1cf8144b84175fbf1757081414af491d4ac91cccd",
+      "byteEqual": false,
+      "componentCount": 1122,
+      "changedBitPatterns": 487,
+      "changedNumericValues": 487,
+      "maxAbs": 1.1920928955078125e-07,
+      "meanAbs": 3.296317476214784e-08,
+      "maxSymmetricRelativeNonzero": 2.2901771211534615e-07,
+      "maxSameSignNonzeroULP": 3,
+      "maxU16CodeDelta": null,
+      "firstBitDifference": {
+        "flatIndex": 7,
+        "home": 0.5205242037773132,
+        "company": 0.520524263381958,
+        "homeBits": "0x3f054113",
+        "companyBits": "0x3f054114",
+        "absDelta": 5.960464477539063e-08,
+        "xyChannel": [
+          3,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "file": "taps/02-brightness.device.f32",
+      "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+      "homeSha256": "e45de4344f4edd44968d98c803db7ef2a2517da3ae182d502f70d74b79dd6a2a",
+      "companySha256": "3aab315a8cdc311e8ffd9fd7e8cd03567406f9227539aa943c031196c47dc60a",
+      "byteEqual": false,
+      "componentCount": 561,
+      "changedBitPatterns": 82,
+      "changedNumericValues": 82,
+      "maxAbs": 2.384185791015625e-07,
+      "meanAbs": 8.156130003107609e-09,
+      "maxSymmetricRelativeNonzero": 1.3048970175273767e-07,
+      "maxSameSignNonzeroULP": 2,
+      "maxU16CodeDelta": null,
+      "firstBitDifference": {
+        "flatIndex": 8,
+        "home": 6.085873565098154e-07,
+        "company": 6.085872996663966e-07,
+        "homeBits": "0x35235dce",
+        "companyBits": "0x35235dcd",
+        "absDelta": 5.684341886080802e-14,
+        "xyChannel": [
+          8,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "taps/03-upsample.device.f32",
+      "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+      "homeSha256": "987067407572515b5af82cd7877752ef2aceb2bb9f8ee911692bc720a0d8bc5f",
+      "companySha256": "a6372c191b487444f1bc5d5f981c95fc839cd82a3c4102e0a06736448b2a6bd3",
+      "byteEqual": false,
+      "componentCount": 1683,
+      "changedBitPatterns": 1520,
+      "changedNumericValues": 1520,
+      "maxAbs": 3.814697265625e-06,
+      "meanAbs": 1.1724637701304725e-07,
+      "maxSymmetricRelativeNonzero": 2.412848692041932e-06,
+      "maxSameSignNonzeroULP": 23,
+      "maxU16CodeDelta": null,
+      "firstBitDifference": {
+        "flatIndex": 6,
+        "home": 0.9905756115913391,
+        "company": 0.9905756711959839,
+        "homeBits": "0x3f7d965d",
+        "companyBits": "0x3f7d965e",
+        "absDelta": 5.960464477539063e-08,
+        "xyChannel": [
+          2,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "taps/exposure-scale.cpu.f64",
+      "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+      "homeSha256": "cc143326a2646c605ea66139d7b440df7cbde18c050f1f8cf4dd30f42cfe7123",
+      "companySha256": "cc143326a2646c605ea66139d7b440df7cbde18c050f1f8cf4dd30f42cfe7123",
+      "byteEqual": true,
+      "componentCount": 3,
+      "changedBitPatterns": 0,
+      "changedNumericValues": 0,
+      "maxAbs": 0.0,
+      "meanAbs": 0.0,
+      "maxSymmetricRelativeNonzero": 0.0,
+      "maxSameSignNonzeroULP": 0,
+      "maxU16CodeDelta": null,
+      "firstBitDifference": null
+    },
+    {
+      "file": "taps/exposure-offset.cpu.f64",
+      "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+      "homeSha256": "9d908ecfb6b256def8b49a7c504e6c889c4b0e41fe6ce3e01863dd7b61a20aa0",
+      "companySha256": "9d908ecfb6b256def8b49a7c504e6c889c4b0e41fe6ce3e01863dd7b61a20aa0",
+      "byteEqual": true,
+      "componentCount": 3,
+      "changedBitPatterns": 0,
+      "changedNumericValues": 0,
+      "maxAbs": 0.0,
+      "meanAbs": 0.0,
+      "maxSymmetricRelativeNonzero": 0.0,
+      "maxSameSignNonzeroULP": 0,
+      "maxU16CodeDelta": null,
+      "firstBitDifference": null
+    },
+    {
+      "file": "taps/exposure-scale.uploaded.f32",
+      "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+      "homeSha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1",
+      "companySha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1",
+      "byteEqual": true,
+      "componentCount": 3,
+      "changedBitPatterns": 0,
+      "changedNumericValues": 0,
+      "maxAbs": 0.0,
+      "meanAbs": 0.0,
+      "maxSymmetricRelativeNonzero": 0.0,
+      "maxSameSignNonzeroULP": 0,
+      "maxU16CodeDelta": null,
+      "firstBitDifference": null
+    },
+    {
+      "file": "taps/exposure-offset.uploaded.f32",
+      "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+      "homeSha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+      "companySha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+      "byteEqual": true,
+      "componentCount": 3,
+      "changedBitPatterns": 0,
+      "changedNumericValues": 0,
+      "maxAbs": 0.0,
+      "meanAbs": 0.0,
+      "maxSymmetricRelativeNonzero": 0.0,
+      "maxSameSignNonzeroULP": 0,
+      "maxU16CodeDelta": null,
+      "firstBitDifference": null
+    },
+    {
+      "file": "taps/04-exposure.device.f32",
+      "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+      "homeSha256": "987067407572515b5af82cd7877752ef2aceb2bb9f8ee911692bc720a0d8bc5f",
+      "companySha256": "a6372c191b487444f1bc5d5f981c95fc839cd82a3c4102e0a06736448b2a6bd3",
+      "byteEqual": false,
+      "componentCount": 1683,
+      "changedBitPatterns": 1520,
+      "changedNumericValues": 1520,
+      "maxAbs": 3.814697265625e-06,
+      "meanAbs": 1.1724637701304725e-07,
+      "maxSymmetricRelativeNonzero": 2.412848692041932e-06,
+      "maxSameSignNonzeroULP": 23,
+      "maxU16CodeDelta": null,
+      "firstBitDifference": {
+        "flatIndex": 6,
+        "home": 0.9905756115913391,
+        "company": 0.9905756711959839,
+        "homeBits": "0x3f7d965d",
+        "companyBits": "0x3f7d965e",
+        "absDelta": 5.960464477539063e-08,
+        "xyChannel": [
+          2,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "effectiveFloatLutIdentity": {
+    "equalBySealedSha256": true,
+    "pairwiseByteComparisonPerformed": false,
+    "scope": "Both110592-entryfloatupload/device SHA identity match; not full company content comparison"
+  },
+  "firstCpuPreparationDifference": {
+    "status": "DIFFERENT_BY_RECORDED_SHA256",
+    "files": [
+      "taps/film-sensitivity.cpu.f64",
+      "taps/tc-lut.cpu.f64"
+    ],
+    "magnitudeAndCoordinates": "UNKNOWN_COMPANY_ARRAYS_NOT_MIGRATED",
+    "effect": "DoubleLUT narrowing converges to identical recorded floatSHA; sensitivity isCPU input to runtimeLUT, not separate shader constant"
+  },
+  "firstEffectiveGpuOutputDifference": {
+    "operation": "spk_tc_b",
+    "sameDispatchOutputs": [
+      "01-tc.device.f32",
+      "02-brightness.device.f32"
+    ],
+    "tcDifferent": true,
+    "brightnessDifferent": true,
+    "basis": "Input1683float andmatrix9float directly byte-equal; tc_b does not read runtimeLUT. These two output files are directly paired and differ. Cannot order them within the dispatch or distinguish dot/add/divide/clamp internal instruction."
+  },
+  "homeExposureIdentity": {
+    "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+    "homeSha256": "987067407572515b5af82cd7877752ef2aceb2bb9f8ee911692bc720a0d8bc5f",
+    "companySha256": "987067407572515b5af82cd7877752ef2aceb2bb9f8ee911692bc720a0d8bc5f",
+    "byteEqual": true,
+    "componentCount": 1683,
+    "changedBitPatterns": 0,
+    "changedNumericValues": 0,
+    "maxAbs": 0.0,
+    "meanAbs": 0.0,
+    "maxSymmetricRelativeNonzero": 0.0,
+    "maxSameSignNonzeroULP": 0,
+    "maxU16CodeDelta": null,
+    "firstBitDifference": null
+  },
+  "homeExposureVsOldCompound": {
+    "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+    "homeSha256": "987067407572515b5af82cd7877752ef2aceb2bb9f8ee911692bc720a0d8bc5f",
+    "companySha256": "987067407572515b5af82cd7877752ef2aceb2bb9f8ee911692bc720a0d8bc5f",
+    "byteEqual": true,
+    "componentCount": 1683,
+    "changedBitPatterns": 0,
+    "changedNumericValues": 0,
+    "maxAbs": 0.0,
+    "meanAbs": 0.0,
+    "maxSymmetricRelativeNonzero": 0.0,
+    "maxSameSignNonzeroULP": 0,
+    "maxU16CodeDelta": null,
+    "firstBitDifference": null
+  },
+  "companyExposureVsOldCompound": {
+    "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+    "homeSha256": "a6372c191b487444f1bc5d5f981c95fc839cd82a3c4102e0a06736448b2a6bd3",
+    "companySha256": "a6372c191b487444f1bc5d5f981c95fc839cd82a3c4102e0a06736448b2a6bd3",
+    "byteEqual": true,
+    "componentCount": 1683,
+    "changedBitPatterns": 0,
+    "changedNumericValues": 0,
+    "maxAbs": 0.0,
+    "meanAbs": 0.0,
+    "maxSymmetricRelativeNonzero": 0.0,
+    "maxSameSignNonzeroULP": 0,
+    "maxU16CodeDelta": null,
+    "firstBitDifference": null
+  },
+  "homeFinalVsFrozen": {
+    "comparisonAuthority": "DIRECT_PAIRED_BYTES_AND_VALUES",
+    "homeSha256": "f7f776b80a3cacc1f5d1abb3259653bbda4fa9ef29cef8b873cc29727cbee1c6",
+    "companySha256": "f7f776b80a3cacc1f5d1abb3259653bbda4fa9ef29cef8b873cc29727cbee1c6",
+    "byteEqual": true,
+    "componentCount": 2244,
+    "changedBitPatterns": 0,
+    "changedNumericValues": 0,
+    "maxAbs": 0.0,
+    "meanAbs": 0.0,
+    "maxSymmetricRelativeNonzero": 0.0,
+    "maxSameSignNonzeroULP": null,
+    "maxU16CodeDelta": 0,
+    "firstBitDifference": null
+  },
+  "selectedPoints": [
+    {
+      "xyChannel": [
+        2,
+        0,
+        0
+      ],
+      "tc": {
+        "home": [
+          0.4456430971622467,
+          0.520524263381958
+        ],
+        "company": [
+          0.4456430971622467,
+          0.520524263381958
+        ]
+      },
+      "brightness": {
+        "home": [
+          0.5180099606513977
+        ],
+        "company": [
+          0.5180099606513977
+        ]
+      },
+      "upsample": {
+        "home": [
+          0.9905756115913391,
+          0.9679553508758545,
+          0.8977500200271606
+        ],
+        "company": [
+          0.9905756711959839,
+          0.9679553508758545,
+          0.8977500796318054
+        ]
+      },
+      "exposure": {
+        "home": [
+          0.9905756115913391,
+          0.9679553508758545,
+          0.8977500200271606
+        ],
+        "company": [
+          0.9905756711959839,
+          0.9679553508758545,
+          0.8977500796318054
+        ]
+      }
+    },
+    {
+      "xyChannel": [
+        32,
+        0,
+        1
+      ],
+      "tc": {
+        "home": [
+          0.4456430971622467,
+          0.5205242037773132
+        ],
+        "company": [
+          0.4456430971622467,
+          0.520524263381958
+        ]
+      },
+      "brightness": {
+        "home": [
+          5.755666255950928
+        ],
+        "company": [
+          5.755666255950928
+        ]
+      },
+      "upsample": {
+        "home": [
+          11.006396293640137,
+          10.75505542755127,
+          9.97500228881836
+        ],
+        "company": [
+          11.006396293640137,
+          10.755059242248535,
+          9.975000381469727
+        ]
+      },
+      "exposure": {
+        "home": [
+          11.006396293640137,
+          10.75505542755127,
+          9.97500228881836
+        ],
+        "company": [
+          11.006396293640137,
+          10.755059242248535,
+          9.975000381469727
+        ]
+      }
+    }
+  ],
+  "mathModes": {
+    "home": [
+      {
+        "kernel": "spk_tc_b",
+        "fused_fma_runtime": 1,
+        "specialization_id": 0,
+        "specialization_bool": 1
+      },
+      {
+        "kernel": "spk_lut2d_cubic",
+        "fused_fma_runtime": 1,
+        "specialization_id": 0,
+        "specialization_bool": 1
+      },
+      {
+        "kernel": "spk_affine3",
+        "fused_fma_runtime": 1,
+        "specialization_id": 0,
+        "specialization_bool": 1
+      }
+    ],
+    "company": [
+      {
+        "kernel": "spk_tc_b",
+        "fused_fma_runtime": 1,
+        "specialization_id": 0,
+        "specialization_bool": 1
+      },
+      {
+        "kernel": "spk_lut2d_cubic",
+        "fused_fma_runtime": 1,
+        "specialization_id": 0,
+        "specialization_bool": 1
+      },
+      {
+        "kernel": "spk_affine3",
+        "fused_fma_runtime": 1,
+        "specialization_id": 0,
+        "specialization_bool": 1
+      }
+    ],
+    "recordEqual": true,
+    "caution": "Relevantthreefixedshadersdonotdeclareconstant_id0; identicalrecordnotbitparityproof"
+  },
+  "buildConfounds": {
+    "homeGpu": "NVIDIA GeForce RTX 5060 Ti, WindowsDriverVersion=32.0.16.1088 (WMI; NVML unavailable)",
+    "companyGpu": "NVIDIA GeForce GTX 1650, 572.70",
+    "toolHashes": {
+      "CMAKE_CXX_COMPILER": {
+        "home": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5",
+        "company": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5",
+        "hashEqual": true
+      },
+      "CMAKE_C_COMPILER": {
+        "home": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5",
+        "company": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5",
+        "hashEqual": true
+      },
+      "CMAKE_MAKE_PROGRAM": {
+        "home": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597",
+        "company": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597",
+        "hashEqual": true
+      },
+      "SPEKTRALAB_GLSLANG": {
+        "home": "9643709c02c83e26773f96b6a87f197ab2e84f78be0879ad8fb3619418b5d9ad",
+        "company": "9643709c02c83e26773f96b6a87f197ab2e84f78be0879ad8fb3619418b5d9ad",
+        "hashEqual": true
+      },
+      "CMAKE_COMMAND": {
+        "home": "3c05de86fbc0ec0610bbee201588e4fc1017347ec61b0f8080981fc6bfe93681",
+        "company": "3c05de86fbc0ec0610bbee201588e4fc1017347ec61b0f8080981fc6bfe93681",
+        "hashEqual": true
+      }
+    },
+    "runtimeDllHashes": {
+      "libc++.dll": {
+        "home": "15ac1814681ea8d00fe57582cdff6099ab831108992261b9dfe54942db308b47",
+        "company": "15ac1814681ea8d00fe57582cdff6099ab831108992261b9dfe54942db308b47",
+        "hashEqual": true
+      },
+      "libclang-cpp.dll": {
+        "home": "49c33a5ceadd429de63b22852a99ae9b4b70f3371d4b00b9902f8dff9f8ebef3",
+        "company": "49c33a5ceadd429de63b22852a99ae9b4b70f3371d4b00b9902f8dff9f8ebef3",
+        "hashEqual": true
+      },
+      "libclang_rt.asan_dynamic-x86_64.dll": {
+        "home": "7ede170bf0a69ff29e9bcc1a1698d297a3c94f63a5de9e6c3739d2d7141dcaba",
+        "company": "7ede170bf0a69ff29e9bcc1a1698d297a3c94f63a5de9e6c3739d2d7141dcaba",
+        "hashEqual": true
+      },
+      "libffi-8.dll": {
+        "home": "bab57aa79ae1f9a3954da2c634fb94c5a8468b0c84a95f8f65815a0208f31b2e",
+        "company": "bab57aa79ae1f9a3954da2c634fb94c5a8468b0c84a95f8f65815a0208f31b2e",
+        "hashEqual": true
+      },
+      "liblldb.dll": {
+        "home": "93fe0b488d7fe845f26fc711014bd810c9dbc54a4873e1a00945bb99ba3a857c",
+        "company": "93fe0b488d7fe845f26fc711014bd810c9dbc54a4873e1a00945bb99ba3a857c",
+        "hashEqual": true
+      },
+      "libLLVM-20.dll": {
+        "home": "a801fea3179449e0a4f5369e7562e26ae14015bd4d7e465976e3c76b65628fc8",
+        "company": "a801fea3179449e0a4f5369e7562e26ae14015bd4d7e465976e3c76b65628fc8",
+        "hashEqual": true
+      },
+      "libomp.dll": {
+        "home": "7365d7a5f150fe87124818819b206fdc345b988b5546c6f2254d4a0d816c912c",
+        "company": "7365d7a5f150fe87124818819b206fdc345b988b5546c6f2254d4a0d816c912c",
+        "hashEqual": true
+      },
+      "libpython3.12.dll": {
+        "home": "4694b74f741a790b5b119c28cab43a7117f25d3716bcf57de3e418766c8d8f2d",
+        "company": "4694b74f741a790b5b119c28cab43a7117f25d3716bcf57de3e418766c8d8f2d",
+        "hashEqual": true
+      },
+      "libpython3.dll": {
+        "home": "37de1a2e1076d8f1b3215f2bf9680df9ed151fa3077e752d5797695651c39b8c",
+        "company": "37de1a2e1076d8f1b3215f2bf9680df9ed151fa3077e752d5797695651c39b8c",
+        "hashEqual": true
+      },
+      "libunwind.dll": {
+        "home": "16c6558eeb444ae530be2dc8be7c7e4e8d8ebc7db070e8ae9701ea79ed496941",
+        "company": "16c6558eeb444ae530be2dc8be7c7e4e8d8ebc7db070e8ae9701ea79ed496941",
+        "hashEqual": true
+      },
+      "libwinpthread-1.dll": {
+        "home": "6ee3d36ff10b2b8a335ee73bb96cf3fc51c6180456d5d6e14f885068a929e603",
+        "company": "6ee3d36ff10b2b8a335ee73bb96cf3fc51c6180456d5d6e14f885068a929e603",
+        "hashEqual": true
+      }
+    },
+    "numericalSourceIdentity": "pre-gpu-freeze normalized9source/numericalCPU/shader matches",
+    "DLLDifferent": true,
+    "objectCommands": "fullcommandsretained;rootsanddevice/driver/runtimeCPUhostconfoundsnotcontrolled"
+  },
+  "conclusion": "CPU_DOUBLE_PREPARATION_HASHES_ALREADY_DIFFER_BUT_EFFECTIVE_FLOAT_INPUT_MATRIX_EQUAL_AND_FIRST_PAIRED_GPU_OUTPUT_DIVERGES_AT_TC_B",
+  "notClaimed": [
+    "firstdifferenceatLUTshader",
+    "hardwarevsdriverseparated",
+    "algorithmfixrequired",
+    "completecompanyarraybytecomparison",
+    "allphotosorproductaccuracy"
+  ],
+  "remainingPrecise": [
+    "companyfullfilm-sensitivity.cpu.f64 andtc-lut.cpu.f64/uploaded/devicearraysnotavailableforpairwisecount/max/coordinates",
+    "tc_binternalXYZ/dot/intermediatenotcaptured;withinoperationcauseunknown",
+    "hardware,driver,JIT/nativeCPUruntimecontributionsnotisolated;noadditionalexperimentauthorized"
+  ]
+}

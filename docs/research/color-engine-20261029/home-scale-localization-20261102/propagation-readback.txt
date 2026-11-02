@@ -1,0 +1,46 @@
+{
+  "version": "HomeGrayPropagationReadbackV1",
+  "gpuCalls": 0,
+  "pixelCount": 561,
+  "sameTcPixels": 192,
+  "sameBrightnessPixels": 479,
+  "sameTcAndBrightnessPixels": 158,
+  "upsampleChangedPixels": 559,
+  "upsampleChangedPixelsWithSameTcBrightness": 156,
+  "upsampleChangedComponentsWithSameTcBrightness": 429,
+  "maxAbsSameTcBrightnessSubset": 1.1920928955078125e-07,
+  "firstSameInputsUpsampleDifference": {
+    "xyChannel": [
+      2,
+      0,
+      0
+    ],
+    "homeTc": [
+      0.4456430971622467,
+      0.520524263381958
+    ],
+    "companyTc": [
+      0.4456430971622467,
+      0.520524263381958
+    ],
+    "homeBrightness": [
+      0.5180099606513977
+    ],
+    "companyBrightness": [
+      0.5180099606513977
+    ],
+    "homeUpsample": [
+      0.9905756115913391,
+      0.9679553508758545,
+      0.8977500200271606
+    ],
+    "companyUpsample": [
+      0.9905756711959839,
+      0.9679553508758545,
+      0.8977500796318054
+    ],
+    "absDifference": 5.960464477539063e-08
+  },
+  "lutIdentityAuthority": "Full float runtime LUT upload/device SHA256 equal in sealed records; company complete arrays not migrated, direct full-content comparison NOT_PERFORMED.",
+  "conclusion": "Earliest paired GPU output difference is tc_b. Not every downstream difference is proven to be propagated from tc_b: same per-pixel tc/b inputs already show LUT output differences. No claim about specific FMA/instruction/driver/hardware cause."
+}

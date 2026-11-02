@@ -1,0 +1,38 @@
+{
+  "version": "HomeScaleFailuresAndRemainingV1",
+  "timezone": "Asia/Shanghai",
+  "failures": [
+    {
+      "stage": "managedworktreeUItool",
+      "error": "sourceRoot must be chat working directory or workspace folder",
+      "remediation": "Native git worktree add from explicitly inspected repository into workspace. Old worktrees not modified."
+    },
+    {
+      "stage": "identity preflight",
+      "error": "nvidia-smi exit255: Failed to initialize NVML: Unknown Error",
+      "remediation": "No driver changes. WMI reports actual home RTX5060Ti driver32.0.16.1088. Runner identity-only fallback before GPU; original runner hash and change recorded."
+    },
+    {
+      "stage": "initial pre-GPU SPIRV check",
+      "error": "Built SPIRV differs from sealed bytes",
+      "remediation": "No engine had run. Found only spk_cctf_decode.spv, freshbuild exactly equals originalhomebuild; selectedsealed resources-patch intentionallyhas historicalBT SPIRV. Relevant tc_b/lut/affine bytesexact. Runtime not substituted andBT0."
+    },
+    {
+      "stage": "first CPU partial comparison",
+      "error": "IndexError boolean index mismatched uint16 view width",
+      "remediation": "Fixed dtype-sized bit view and separated U16 code delta from float ULP; saved failure log retained, no GPU rerun."
+    }
+  ],
+  "hashVsBytes": "Company4restrictedsetupfilesremainabsent. No full local company validator/comparator invoked. Small public17filemanifest verified and direct paired12arrays compared; fullLUT/sensitivitySHA summary separate.",
+  "remaining": [
+    "company film-sensitivity.cpu.f64 (243 doubles) complete bytes",
+    "company tc-lut.cpu.f64 (110592 doubles) complete bytes",
+    "company tc-lut.uploaded.f32 and tc-lut.device.f32 (110592floats each) for direct full-content check despiteequalSHA",
+    "tc_b internal XYZ/dot/add/divide/clamp instruction cause not sampled",
+    "hardware/driver/JIT vs CPUhostmath contributions not controlled"
+  ],
+  "notRequiredForThisStop": "Missingcompanyarraysdidnotblocktheauthorizedonehomecapture; currenttaskstopsatpairedboundary.",
+  "futurePixelFix": "NOT_ESTABLISHED",
+  "candidate": "FROZEN_DEFAULT_OFF_NOT_ADMITTED",
+  "noExtraExperiments": true
+}

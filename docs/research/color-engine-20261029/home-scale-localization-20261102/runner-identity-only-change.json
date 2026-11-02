@@ -1,0 +1,8 @@
+{
+  "version": "HomeGrayIdentityFallbackV1",
+  "originalRunnerSha256": "1088ba8d5897949a6752330ef23a6eee52d83278d21530232824020688a5178a",
+  "homeRunnerSha256": "8c26e49b78c6b78a908ef78a825f297b4ec4b01cfb301aee67d04990c0c1f975",
+  "change": "Only device identity collection: real NVML failure retained and actual WMI NVIDIA DriverVersion fallback. No numerical/call ordering/output/tap change.",
+  "beforeGpu": true,
+  "companyRunnerUnmodifiedInParentCommit": true
+}

@@ -1,0 +1,25 @@
+{
+  "version": "CompleteLocalGraySubstageValidationV1",
+  "role": "home",
+  "finiteArtifacts": 16,
+  "fixedGrayInputExact": true,
+  "constantByteObservations": [
+    {
+      "constant": "tc-b-matrix",
+      "cpuNarrowVsUploadChangedBits": 0,
+      "uploadVsDeviceChangedBits": 0
+    },
+    {
+      "constant": "tc-lut",
+      "cpuNarrowVsUploadChangedBits": 0,
+      "uploadVsDeviceChangedBits": 0
+    }
+  ],
+  "narrowedStagingDeviceBytesExact": true,
+  "EV0ActualConstantsExpected": true,
+  "EV0ExposureBitIdentityObserved": true,
+  "numericalObservationsAreNotValidatorAssumptions": true,
+  "sealedSideFinalExact": true,
+  "GPUCallsForValidation": 0,
+  "fullLocalCaptureValidated": true
+}

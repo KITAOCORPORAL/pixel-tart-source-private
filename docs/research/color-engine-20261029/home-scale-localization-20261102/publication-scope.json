@@ -1,0 +1,327 @@
+{
+  "version": "HomeGrayPublicationScopeV1",
+  "date": "2026-11-02",
+  "timezone": "Asia/Shanghai",
+  "files": [
+    {
+      "file": "docs/research/color-engine-20261029/CAPABILITIES_HOME_FILM_SCALE_20261102.md",
+      "bytes": 2032,
+      "sha256": "7080be56e829b9242e7e576f0cfe6c6262159657de00a3446b39714c5affc0c5"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/HOME_FILM_SCALE_LOCALIZATION_20261102.md",
+      "bytes": 10222,
+      "sha256": "34a1b91771fd7c000eb1cb7b548a360368d60d61c25f16a0e00586cb654b568f"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/.gitattributes",
+      "bytes": 200,
+      "sha256": "d5b30f57c04c26f5493da95920383b3b1c2a0379dbc3c4489698be8dc0c0505f"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/CAPABILITIES.json",
+      "bytes": 2516,
+      "sha256": "737a732bced56c7b8d981ba4e0099a079f3c146a90406c4c8235687efc2c5308"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/build-identity.json",
+      "bytes": 7366,
+      "sha256": "d3d029f740ff79cc5ad44f9ad207fa240e0783ef88d583652f7d8b4e148146bc"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/build.txt",
+      "bytes": 20420,
+      "sha256": "4edcfecec26a917af7402939619a03fa7d9987f4892652bd664e4c43367a3543"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/built-vs-runtime-spirv-boundary.json",
+      "bytes": 680,
+      "sha256": "f86384374d77d1afddbdbf607d57cf85c7fbdb0dd3e00bfd9a84b0d56cce9f64"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/complete-home-validation.json",
+      "bytes": 691,
+      "sha256": "f934ff55a58bc0c1bd452837db8d01621acb6fdc8fedd5ba3d44b23f90e3a3e7"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/complete-home-validation.txt",
+      "bytes": 716,
+      "sha256": "7657fec0421eebf684588faa4aca2cade8d55cf5901f381df4987efbc0df8d03"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/configure.txt",
+      "bytes": 870,
+      "sha256": "ca17a7f07c0a1d3d7335075774fc50b012e0dadf925dd4ef31297f12c01e3494"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/execution-scope.json",
+      "bytes": 1542,
+      "sha256": "7ae6ed09c88c715f559526f4f661a6e867f3d36429db2466e949c323f2bb677b"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/failures-and-remaining.json",
+      "bytes": 2205,
+      "sha256": "6db71e3d43c863dda4da201d5a6a1a77a8612dce756927449418e7e4683748a5"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/local-only-setup-observations.json",
+      "bytes": 1499,
+      "sha256": "299c824cbf1e5a4d7a1240260d133659d6c6811bb9a83144306185e58b14bd83"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/old-home-round10-preservation.json",
+      "bytes": 3751,
+      "sha256": "3db2e34f5e1e586fd8baf5c0ee2a63598c04a6147acbca8525254855d1ee06ad"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/paired-available-comparison-final.txt",
+      "bytes": 12235,
+      "sha256": "1e90a854820406aa8b67c6752f531ef294ada3216d9799b2003b78771ff4be92"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/paired-available-comparison-readback.json",
+      "bytes": 24959,
+      "sha256": "9699c9de8dda30d86adbb0e3e5e998e47dbd7f88d7e9d6c16f5ccff62e1b8fef"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/paired-available-comparison.json",
+      "bytes": 24959,
+      "sha256": "9699c9de8dda30d86adbb0e3e5e998e47dbd7f88d7e9d6c16f5ccff62e1b8fef"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/paired-available-comparison.txt",
+      "bytes": 3097,
+      "sha256": "10f36aac01aa57e203e052437c52532488e37cb9b79bc5353eec8461f4444257"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/pre-gpu-freeze-final.txt",
+      "bytes": 190,
+      "sha256": "0225ab6780eb1d4675512c25ae2d21ac737aedc13ad1b54e00e9bdc05eebff12"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/pre-gpu-freeze.json",
+      "bytes": 103134,
+      "sha256": "499b4ad237ce9d60374c9d46486b933aa22fd9f034b6e8174af1a19f089c6dac"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/pre-gpu-freeze.txt",
+      "bytes": 1626,
+      "sha256": "a52d2abf492c3c7d02f6e714c32558a9229fa34553218aaf782a1663377efddd"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/preservation-final.json",
+      "bytes": 658073,
+      "sha256": "89ee724415d7a7b8675541ad7e35a739473df326fa714562c7f5a24eeac5e4d2"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/propagation-readback.json",
+      "bytes": 1484,
+      "sha256": "c9c0a65b356f1a3ea15061c62ef7f178eca8cbb6bf81ab13426fb4a8fde149ce"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/propagation-readback.txt",
+      "bytes": 1486,
+      "sha256": "d48b5956b2cc74bab4d8fa296f7d84797a0557dace044bfa6e0fd01792b6e690"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/execution-before.json",
+      "bytes": 95181,
+      "sha256": "54e25fcec46c402c92b0d4417f1a08e7f94d15100c8c3ce156fa5e7571e07df7"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/input.npy",
+      "bytes": 6860,
+      "sha256": "a4c31c5528ee18667b7ac632e5e24ec5c4a16343dbded160c0210c93ee93720e"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/run.json",
+      "bytes": 9614,
+      "sha256": "797cf1f061293443706effeac1e8df58413bdbc7fa68719c70760c1f98595546"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/00-input.device.f32",
+      "bytes": 6732,
+      "sha256": "48d44e82df7b9c4d6066a03403b68c174cf2714586ea760110c2579990d34d86"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/01-tc.device.f32",
+      "bytes": 4488,
+      "sha256": "f284b46b6e37369c13025174e37f540d53791c63a2b3734cf52ac9d834838122"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/02-brightness.device.f32",
+      "bytes": 2244,
+      "sha256": "e45de4344f4edd44968d98c803db7ef2a2517da3ae182d502f70d74b79dd6a2a"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/03-upsample.device.f32",
+      "bytes": 6732,
+      "sha256": "987067407572515b5af82cd7877752ef2aceb2bb9f8ee911692bc720a0d8bc5f"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/04-exposure.device.f32",
+      "bytes": 6732,
+      "sha256": "987067407572515b5af82cd7877752ef2aceb2bb9f8ee911692bc720a0d8bc5f"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/exposure-offset.cpu.f64",
+      "bytes": 24,
+      "sha256": "9d908ecfb6b256def8b49a7c504e6c889c4b0e41fe6ce3e01863dd7b61a20aa0"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/exposure-offset.uploaded.f32",
+      "bytes": 12,
+      "sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/exposure-scale.cpu.f64",
+      "bytes": 24,
+      "sha256": "cc143326a2646c605ea66139d7b440df7cbde18c050f1f8cf4dd30f42cfe7123"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/exposure-scale.uploaded.f32",
+      "bytes": 12,
+      "sha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/selected-math-mode.jsonl",
+      "bytes": 283,
+      "sha256": "b2d5663fd45b46a06f06c1486cf44c8d0cc214464093f7c1e7eebac127051091"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/tc-b-matrix.cpu.f64",
+      "bytes": 72,
+      "sha256": "88b03d204358890d370bd292c218bcc580cb740642e8b403a2606a6b23a8eebf"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/tc-b-matrix.device.f32",
+      "bytes": 36,
+      "sha256": "e5548e918c2804591968b46cfa2352b173a6990556ad109859a561dc6a90df11"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/taps/tc-b-matrix.uploaded.f32",
+      "bytes": 36,
+      "sha256": "e5548e918c2804591968b46cfa2352b173a6990556ad109859a561dc6a90df11"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-gray-taps/whole-observed.rgba16",
+      "bytes": 4488,
+      "sha256": "f7f776b80a3cacc1f5d1abb3259653bbda4fa9ef29cef8b873cc29727cbee1c6"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/public-subset-index.json",
+      "bytes": 3738,
+      "sha256": "423816ad6e915059299190ea8b2d484edace276d90c9fb1269a3decc99baa3ab"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/publication-subset.txt",
+      "bytes": 66,
+      "sha256": "19e2d80f871fa13a3e048ffdacfe66f02ca9a0f9cf73424d6f7bd7eefd1d3c28"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/runner-identity-only-change.json",
+      "bytes": 467,
+      "sha256": "a4900841b37366afca03cf3e5d18937b249ceca6a891685e6c7dc2105dfed4c0"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/sealed-check.json",
+      "bytes": 598,
+      "sha256": "fc426b51a91d1337b16f51cf743597cb159f77caa45f7cfb8d54b69c2dcbda2c"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/sealed-check.txt",
+      "bytes": 525,
+      "sha256": "a6ab9b648dd14d2386d7640839ad6cca1cddc149412ade86206e79f742d80699"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/single-invocation-reservation.json",
+      "bytes": 859,
+      "sha256": "850f4db53cb776694515a28dc7fcb216af195d5a45a6e463fd12e2abc819e0fb"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/single-invocation-result.json",
+      "bytes": 362,
+      "sha256": "52763e9e1e92b4b7924df1503f4753994fce88a22cd512e28adb3b2c4065cda6"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/source-generation.json",
+      "bytes": 1679,
+      "sha256": "cc751b583e3673a7a04782f33b9bd8eb7d80585b591b24d80110941be64f42e1"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/source-identity.json",
+      "bytes": 7199,
+      "sha256": "516ea8a0ee2f92c9ca31cf2ee29517dcfa907530c7244a63f55043c1277980fd"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/targeted-cpu-controls-final.txt",
+      "bytes": 1437,
+      "sha256": "1cc676338af56e6bc4f27b5e858a4881e50a61007db14fd84036901e44a41970"
+    },
+    {
+      "file": "docs/research/color-engine-20261029/home-scale-localization-20261102/targeted-cpu-controls.txt",
+      "bytes": 1437,
+      "sha256": "582940bc3807ca9c71cb2d14a67136d21f46e64a80453841efc4f6d7822830e8"
+    },
+    {
+      "file": "tools/home-scale-20261102/.gitattributes",
+      "bytes": 46,
+      "sha256": "1295cbe814c8498fa4f2982f53e6816324e3f3a843f12146cfa8287880f4f45f"
+    },
+    {
+      "file": "tools/home-scale-20261102/.gitignore",
+      "bytes": 19,
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"
+    },
+    {
+      "file": "tools/home-scale-20261102/README.md",
+      "bytes": 1948,
+      "sha256": "a33208ac11371c88befb6936ecbd7cc9f87af450d48136dcf3dc3bb1b83eab41"
+    },
+    {
+      "file": "tools/home-scale-20261102/analyze_propagation.py",
+      "bytes": 2461,
+      "sha256": "4c4150672cb6941df5ed3ee2732e1b41f1a28dcc288866776ec238490986eb16"
+    },
+    {
+      "file": "tools/home-scale-20261102/compare_available.py",
+      "bytes": 10768,
+      "sha256": "7489ebceb639aa09b3608389144906f583a0e820cdf6665761edc62bcca9213b"
+    },
+    {
+      "file": "tools/home-scale-20261102/freeze_before.py",
+      "bytes": 5801,
+      "sha256": "18456327bc1dd8af9b589034cafb117136bcdbc26d79192115f5cc79d0228b46"
+    },
+    {
+      "file": "tools/home-scale-20261102/prepare_build.py",
+      "bytes": 3144,
+      "sha256": "4851ef8fae5fc81afe417d59379c1ba5e7245f80a3e531ebd0386f80df61a7bd"
+    },
+    {
+      "file": "tools/home-scale-20261102/preserve_history.py",
+      "bytes": 3048,
+      "sha256": "19c5315ee7da95d834153585a4002220ab94d829cfe424b76fbcb0b69e75cb54"
+    },
+    {
+      "file": "tools/home-scale-20261102/publish_subset.py",
+      "bytes": 2218,
+      "sha256": "a6d8ce74b60ffdc7795ec39ed698dd28ff509d41b8287faa37a2c8db22712cae"
+    },
+    {
+      "file": "tools/home-scale-20261102/seal_existing.py",
+      "bytes": 3050,
+      "sha256": "0678074d6e9e360d48e641f6476a893739b1e23cbd17d1a4e076ba9ac0dc0b2f"
+    },
+    {
+      "file": "tools/home-scale-20261102/test_saved_gray.py",
+      "bytes": 4450,
+      "sha256": "de9fd486f5f6659d44df308b5814cc2fd89555d61b2b99a0f322277f1c1a39ca"
+    }
+  ],
+  "violations": [],
+  "commonCredentialHits": [],
+  "publicNumericFiles": 14,
+  "restrictedSetupArraysPublished": false,
+  "scope": "Only same permitted company public subset plus own tools/hash/metadata. Pattern audit not proof of all sensitive absence."
+}

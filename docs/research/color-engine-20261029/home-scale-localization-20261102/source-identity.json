@@ -1,0 +1,215 @@
+{
+  "version": "HomeScaleFinalIdentityV1",
+  "date": "2026-11-02",
+  "timezone": "Asia/Shanghai",
+  "researchBase": "099b2fb8dbd43fa872703cef84e04b3776c96aab",
+  "tools": [
+    {
+      "path": "tools/home-scale-20261102/.gitattributes",
+      "sha256": "1295cbe814c8498fa4f2982f53e6816324e3f3a843f12146cfa8287880f4f45f",
+      "bytes": 46
+    },
+    {
+      "path": "tools/home-scale-20261102/.gitignore",
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793",
+      "bytes": 19
+    },
+    {
+      "path": "tools/home-scale-20261102/analyze_propagation.py",
+      "sha256": "4c4150672cb6941df5ed3ee2732e1b41f1a28dcc288866776ec238490986eb16",
+      "bytes": 2461
+    },
+    {
+      "path": "tools/home-scale-20261102/compare_available.py",
+      "sha256": "7489ebceb639aa09b3608389144906f583a0e820cdf6665761edc62bcca9213b",
+      "bytes": 10768
+    },
+    {
+      "path": "tools/home-scale-20261102/freeze_before.py",
+      "sha256": "18456327bc1dd8af9b589034cafb117136bcdbc26d79192115f5cc79d0228b46",
+      "bytes": 5801
+    },
+    {
+      "path": "tools/home-scale-20261102/prepare_build.py",
+      "sha256": "4851ef8fae5fc81afe417d59379c1ba5e7245f80a3e531ebd0386f80df61a7bd",
+      "bytes": 3144
+    },
+    {
+      "path": "tools/home-scale-20261102/preserve_history.py",
+      "sha256": "19c5315ee7da95d834153585a4002220ab94d829cfe424b76fbcb0b69e75cb54",
+      "bytes": 3048
+    },
+    {
+      "path": "tools/home-scale-20261102/publish_subset.py",
+      "sha256": "a6d8ce74b60ffdc7795ec39ed698dd28ff509d41b8287faa37a2c8db22712cae",
+      "bytes": 2218
+    },
+    {
+      "path": "tools/home-scale-20261102/README.md",
+      "sha256": "a33208ac11371c88befb6936ecbd7cc9f87af450d48136dcf3dc3bb1b83eab41",
+      "bytes": 1948
+    },
+    {
+      "path": "tools/home-scale-20261102/seal_existing.py",
+      "sha256": "0678074d6e9e360d48e641f6476a893739b1e23cbd17d1a4e076ba9ac0dc0b2f",
+      "bytes": 3050
+    },
+    {
+      "path": "tools/home-scale-20261102/test_saved_gray.py",
+      "sha256": "de9fd486f5f6659d44df308b5814cc2fd89555d61b2b99a0f322277f1c1a39ca",
+      "bytes": 4450
+    },
+    {
+      "path": "tools/color-round11/diagnostic/run_gray_scale_tap.py",
+      "sha256": "8c26e49b78c6b78a908ef78a825f297b4ec4b01cfb301aee67d04990c0c1f975"
+    }
+  ],
+  "captureRoot": "N:/pixart/ColorResearchHome-20261030/home-scale-localization-20261102/gray-once",
+  "captureFiles": [
+    {
+      "path": "execution-before.json",
+      "bytes": 95181,
+      "sha256": "54e25fcec46c402c92b0d4417f1a08e7f94d15100c8c3ce156fa5e7571e07df7",
+      "localOnly": false
+    },
+    {
+      "path": "input.npy",
+      "bytes": 6860,
+      "sha256": "a4c31c5528ee18667b7ac632e5e24ec5c4a16343dbded160c0210c93ee93720e",
+      "localOnly": false
+    },
+    {
+      "path": "run.json",
+      "bytes": 9614,
+      "sha256": "797cf1f061293443706effeac1e8df58413bdbc7fa68719c70760c1f98595546",
+      "localOnly": false
+    },
+    {
+      "path": "taps/00-input.device.f32",
+      "bytes": 6732,
+      "sha256": "48d44e82df7b9c4d6066a03403b68c174cf2714586ea760110c2579990d34d86",
+      "localOnly": false
+    },
+    {
+      "path": "taps/01-tc.device.f32",
+      "bytes": 4488,
+      "sha256": "f284b46b6e37369c13025174e37f540d53791c63a2b3734cf52ac9d834838122",
+      "localOnly": false
+    },
+    {
+      "path": "taps/02-brightness.device.f32",
+      "bytes": 2244,
+      "sha256": "e45de4344f4edd44968d98c803db7ef2a2517da3ae182d502f70d74b79dd6a2a",
+      "localOnly": false
+    },
+    {
+      "path": "taps/03-upsample.device.f32",
+      "bytes": 6732,
+      "sha256": "987067407572515b5af82cd7877752ef2aceb2bb9f8ee911692bc720a0d8bc5f",
+      "localOnly": false
+    },
+    {
+      "path": "taps/04-exposure.device.f32",
+      "bytes": 6732,
+      "sha256": "987067407572515b5af82cd7877752ef2aceb2bb9f8ee911692bc720a0d8bc5f",
+      "localOnly": false
+    },
+    {
+      "path": "taps/exposure-offset.cpu.f64",
+      "bytes": 24,
+      "sha256": "9d908ecfb6b256def8b49a7c504e6c889c4b0e41fe6ce3e01863dd7b61a20aa0",
+      "localOnly": false
+    },
+    {
+      "path": "taps/exposure-offset.uploaded.f32",
+      "bytes": 12,
+      "sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+      "localOnly": false
+    },
+    {
+      "path": "taps/exposure-scale.cpu.f64",
+      "bytes": 24,
+      "sha256": "cc143326a2646c605ea66139d7b440df7cbde18c050f1f8cf4dd30f42cfe7123",
+      "localOnly": false
+    },
+    {
+      "path": "taps/exposure-scale.uploaded.f32",
+      "bytes": 12,
+      "sha256": "8a31a40ecac0ceb4d87b30bd156ca7a547e8e33dc071454b765fbc777d1c34a1",
+      "localOnly": false
+    },
+    {
+      "path": "taps/film-sensitivity.cpu.f64",
+      "bytes": 1944,
+      "sha256": "91e3777e4a7311d4d0af6821894c48caf2023f2a1237a34635db4fbb1f26c073",
+      "localOnly": true
+    },
+    {
+      "path": "taps/selected-math-mode.jsonl",
+      "bytes": 283,
+      "sha256": "b2d5663fd45b46a06f06c1486cf44c8d0cc214464093f7c1e7eebac127051091",
+      "localOnly": false
+    },
+    {
+      "path": "taps/tc-b-matrix.cpu.f64",
+      "bytes": 72,
+      "sha256": "88b03d204358890d370bd292c218bcc580cb740642e8b403a2606a6b23a8eebf",
+      "localOnly": false
+    },
+    {
+      "path": "taps/tc-b-matrix.device.f32",
+      "bytes": 36,
+      "sha256": "e5548e918c2804591968b46cfa2352b173a6990556ad109859a561dc6a90df11",
+      "localOnly": false
+    },
+    {
+      "path": "taps/tc-b-matrix.uploaded.f32",
+      "bytes": 36,
+      "sha256": "e5548e918c2804591968b46cfa2352b173a6990556ad109859a561dc6a90df11",
+      "localOnly": false
+    },
+    {
+      "path": "taps/tc-lut.cpu.f64",
+      "bytes": 884736,
+      "sha256": "5c1db4fde41b5d92d211ed495642e2e5b17fa5ca06d285e3c648c34a5887e9ee",
+      "localOnly": true
+    },
+    {
+      "path": "taps/tc-lut.device.f32",
+      "bytes": 442368,
+      "sha256": "63105d14c4c1f4ba923121cd2de847aefed7f1626afc0d252e73de56125244c3",
+      "localOnly": true
+    },
+    {
+      "path": "taps/tc-lut.uploaded.f32",
+      "bytes": 442368,
+      "sha256": "63105d14c4c1f4ba923121cd2de847aefed7f1626afc0d252e73de56125244c3",
+      "localOnly": true
+    },
+    {
+      "path": "whole-observed.rgba16",
+      "bytes": 4488,
+      "sha256": "f7f776b80a3cacc1f5d1abb3259653bbda4fa9ef29cef8b873cc29727cbee1c6",
+      "localOnly": false
+    }
+  ],
+  "observedLibrarySha256": "573a96ca466a5867fd177ae01a712301257c64e68e07b00aab0099f740034aac",
+  "actualRunnerMatches": true,
+  "originalCompanyToolsUnchanged": [
+    {
+      "name": "generate_scale_substage_tap.py",
+      "originalGitBlobSha256": "ed073469c8bd8b9f378dd6ded1ae9bb2a13ed7891f6bb83b5478b2b72205587a",
+      "currentSha256": "ed073469c8bd8b9f378dd6ded1ae9bb2a13ed7891f6bb83b5478b2b72205587a"
+    },
+    {
+      "name": "verify_gray_scale_tap.py",
+      "originalGitBlobSha256": "52e23422314e83e01395aaf28d5004e0c4cfca1c821d8b775073b7c01db5ea45",
+      "currentSha256": "52e23422314e83e01395aaf28d5004e0c4cfca1c821d8b775073b7c01db5ea45"
+    },
+    {
+      "name": "compare_gray_scale_taps.py",
+      "originalGitBlobSha256": "e41a53c5411258a2adf0818ae133c7f0b690804a571668af8dae13d4b458eae7",
+      "currentSha256": "e41a53c5411258a2adf0818ae133c7f0b690804a571668af8dae13d4b458eae7"
+    }
+  ]
+}

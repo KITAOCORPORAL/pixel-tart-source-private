@@ -1,0 +1,22 @@
+{
+  "version": "HomeGrayScaleSealV1",
+  "pass": true,
+  "timezone": "Asia/Shanghai",
+  "GPUCallsForSeal": 0,
+  "homeFullCaptureValidated": true,
+  "publicIsCompleteCapture": false,
+  "finalFrozenExact": true,
+  "oneWholeScope": {
+    "engineCreate": 1,
+    "open": 1,
+    "wholeRender": 1,
+    "streamRender": 0,
+    "btProbe": 0
+  },
+  "firstPairedOutput": "spk_tc_b",
+  "firstCPUPreparation": "DIFFERENT_SEALED_DOUBLE_HASHES_NO_COMPLETE_COMPANY_CONTENT",
+  "notHardwareDriverIsolation": true,
+  "syntaxFiles": 9,
+  "restrictedCompanyArraysMissing": 4,
+  "stopReached": true
+}

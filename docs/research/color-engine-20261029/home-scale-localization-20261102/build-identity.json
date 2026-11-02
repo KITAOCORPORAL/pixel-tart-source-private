@@ -1,0 +1,193 @@
+{
+  "version": "HomeScalePassiveBuildV1",
+  "gpuCalls": 0,
+  "commands": [
+    [
+      "N:/pixart/ColorResearchHome-20261030/deps/pytools/cmake/data/bin/cmake.exe",
+      "-S",
+      "N:\\pixart\\ColorResearchHome-20261030\\home-scale-localization-20261102\\source-tap-v1",
+      "-B",
+      "N:\\pixart\\ColorResearchHome-20261030\\home-scale-localization-20261102\\build-tap-v1",
+      "-G",
+      "Ninja",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DBUILD_TESTING=ON",
+      "-DSPEKTRALAB_REQUIRE_VULKAN=ON",
+      "-DSPEKTRALAB_BUILD_TEST_DLL=ON",
+      "-DSPEKTRALAB_BUILD_NATIVE_RAW=OFF",
+      "-DSPEKTRALAB_BUILD_DESKTOP=OFF",
+      "-DCMAKE_CXX_COMPILER=N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang++.exe",
+      "-DCMAKE_C_COMPILER=N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang.exe",
+      "-DCMAKE_MAKE_PROGRAM=N:/pixart/ColorResearchHome-20261030/deps/pytools/bin/ninja.exe",
+      "-DSPEKTRALAB_VULKAN_HEADERS=N:/pixart/ColorResearchHome-20261030/deps/Vulkan-Headers/include",
+      "-DSPEKTRALAB_GLSLANG=N:/pixart/ColorResearchHome-20261030/deps/glslang/bin/glslang.exe"
+    ],
+    [
+      "N:/pixart/ColorResearchHome-20261030/deps/pytools/cmake/data/bin/cmake.exe",
+      "--build",
+      "N:\\pixart\\ColorResearchHome-20261030\\home-scale-localization-20261102\\build-tap-v1",
+      "--target",
+      "spektralab_engine_shared",
+      "--parallel",
+      "4"
+    ]
+  ],
+  "sealedOldBuild": "N:\\pixart\\ColorResearchHome-20261030\\round10-build-diagnostic-v2",
+  "newBuild": "N:\\pixart\\ColorResearchHome-20261030\\home-scale-localization-20261102\\build-tap-v1",
+  "flags": {
+    "CMAKE_BUILD_TYPE": {
+      "old": "Release",
+      "new": "Release",
+      "equal": true
+    },
+    "CMAKE_CXX_FLAGS": {
+      "old": "",
+      "new": "",
+      "equal": true
+    },
+    "CMAKE_CXX_FLAGS_DEBUG": {
+      "old": "-g",
+      "new": "-g",
+      "equal": true
+    },
+    "CMAKE_CXX_FLAGS_MINSIZEREL": {
+      "old": "-Os -DNDEBUG",
+      "new": "-Os -DNDEBUG",
+      "equal": true
+    },
+    "CMAKE_CXX_FLAGS_RELEASE": {
+      "old": "-O3 -DNDEBUG",
+      "new": "-O3 -DNDEBUG",
+      "equal": true
+    },
+    "CMAKE_CXX_FLAGS_RELWITHDEBINFO": {
+      "old": "-O2 -g -DNDEBUG",
+      "new": "-O2 -g -DNDEBUG",
+      "equal": true
+    },
+    "CMAKE_C_FLAGS": {
+      "old": "",
+      "new": "",
+      "equal": true
+    },
+    "CMAKE_C_FLAGS_DEBUG": {
+      "old": "-g",
+      "new": "-g",
+      "equal": true
+    },
+    "CMAKE_C_FLAGS_MINSIZEREL": {
+      "old": "-Os -DNDEBUG",
+      "new": "-Os -DNDEBUG",
+      "equal": true
+    },
+    "CMAKE_C_FLAGS_RELEASE": {
+      "old": "-O3 -DNDEBUG",
+      "new": "-O3 -DNDEBUG",
+      "equal": true
+    },
+    "CMAKE_C_FLAGS_RELWITHDEBINFO": {
+      "old": "-O2 -g -DNDEBUG",
+      "new": "-O2 -g -DNDEBUG",
+      "equal": true
+    },
+    "CMAKE_CXX_FLAGS-ADVANCED": {
+      "old": "1",
+      "new": "1",
+      "equal": true
+    },
+    "CMAKE_CXX_FLAGS_DEBUG-ADVANCED": {
+      "old": "1",
+      "new": "1",
+      "equal": true
+    },
+    "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED": {
+      "old": "1",
+      "new": "1",
+      "equal": true
+    },
+    "CMAKE_CXX_FLAGS_RELEASE-ADVANCED": {
+      "old": "1",
+      "new": "1",
+      "equal": true
+    },
+    "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED": {
+      "old": "1",
+      "new": "1",
+      "equal": true
+    },
+    "CMAKE_C_FLAGS-ADVANCED": {
+      "old": "1",
+      "new": "1",
+      "equal": true
+    },
+    "CMAKE_C_FLAGS_DEBUG-ADVANCED": {
+      "old": "1",
+      "new": "1",
+      "equal": true
+    },
+    "CMAKE_C_FLAGS_MINSIZEREL-ADVANCED": {
+      "old": "1",
+      "new": "1",
+      "equal": true
+    },
+    "CMAKE_C_FLAGS_RELEASE-ADVANCED": {
+      "old": "1",
+      "new": "1",
+      "equal": true
+    },
+    "CMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED": {
+      "old": "1",
+      "new": "1",
+      "equal": true
+    }
+  },
+  "oldRuntimeDlls": {
+    "libc++.dll": "15ac1814681ea8d00fe57582cdff6099ab831108992261b9dfe54942db308b47",
+    "libclang-cpp.dll": "49c33a5ceadd429de63b22852a99ae9b4b70f3371d4b00b9902f8dff9f8ebef3",
+    "libclang_rt.asan_dynamic-x86_64.dll": "7ede170bf0a69ff29e9bcc1a1698d297a3c94f63a5de9e6c3739d2d7141dcaba",
+    "libffi-8.dll": "bab57aa79ae1f9a3954da2c634fb94c5a8468b0c84a95f8f65815a0208f31b2e",
+    "liblldb.dll": "93fe0b488d7fe845f26fc711014bd810c9dbc54a4873e1a00945bb99ba3a857c",
+    "libLLVM-20.dll": "a801fea3179449e0a4f5369e7562e26ae14015bd4d7e465976e3c76b65628fc8",
+    "libomp.dll": "7365d7a5f150fe87124818819b206fdc345b988b5546c6f2254d4a0d816c912c",
+    "libpython3.12.dll": "4694b74f741a790b5b119c28cab43a7117f25d3716bcf57de3e418766c8d8f2d",
+    "libpython3.dll": "37de1a2e1076d8f1b3215f2bf9680df9ed151fa3077e752d5797695651c39b8c",
+    "libunwind.dll": "16c6558eeb444ae530be2dc8be7c7e4e8d8ebc7db070e8ae9701ea79ed496941",
+    "libwinpthread-1.dll": "6ee3d36ff10b2b8a335ee73bb96cf3fc51c6180456d5d6e14f885068a929e603"
+  },
+  "newRuntimeDlls": {
+    "libc++.dll": "15ac1814681ea8d00fe57582cdff6099ab831108992261b9dfe54942db308b47",
+    "libclang-cpp.dll": "49c33a5ceadd429de63b22852a99ae9b4b70f3371d4b00b9902f8dff9f8ebef3",
+    "libclang_rt.asan_dynamic-x86_64.dll": "7ede170bf0a69ff29e9bcc1a1698d297a3c94f63a5de9e6c3739d2d7141dcaba",
+    "libffi-8.dll": "bab57aa79ae1f9a3954da2c634fb94c5a8468b0c84a95f8f65815a0208f31b2e",
+    "liblldb.dll": "93fe0b488d7fe845f26fc711014bd810c9dbc54a4873e1a00945bb99ba3a857c",
+    "libLLVM-20.dll": "a801fea3179449e0a4f5369e7562e26ae14015bd4d7e465976e3c76b65628fc8",
+    "libomp.dll": "7365d7a5f150fe87124818819b206fdc345b988b5546c6f2254d4a0d816c912c",
+    "libpython3.12.dll": "4694b74f741a790b5b119c28cab43a7117f25d3716bcf57de3e418766c8d8f2d",
+    "libpython3.dll": "37de1a2e1076d8f1b3215f2bf9680df9ed151fa3077e752d5797695651c39b8c",
+    "libunwind.dll": "16c6558eeb444ae530be2dc8be7c7e4e8d8ebc7db070e8ae9701ea79ed496941",
+    "libwinpthread-1.dll": "6ee3d36ff10b2b8a335ee73bb96cf3fc51c6180456d5d6e14f885068a929e603"
+  },
+  "librarySha256": "573a96ca466a5867fd177ae01a712301257c64e68e07b00aab0099f740034aac",
+  "tools": {
+    "CMAKE_COMMAND": {
+      "path": "N:/pixart/ColorResearchHome-20261030/deps/pytools/cmake/data/bin/cmake.exe",
+      "sha256": "3c05de86fbc0ec0610bbee201588e4fc1017347ec61b0f8080981fc6bfe93681"
+    },
+    "CMAKE_CXX_COMPILER": {
+      "path": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang++.exe",
+      "sha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5"
+    },
+    "CMAKE_C_COMPILER": {
+      "path": "N:/pixart/ColorResearchHome-20261030/deps/toolchain/llvm-mingw-20250402-ucrt-x86_64/bin/clang.exe",
+      "sha256": "daac42985e1aa1083a278a9dfedbf2652dc10632fb03e3b0ace40513d73f95a5"
+    },
+    "CMAKE_MAKE_PROGRAM": {
+      "path": "N:/pixart/ColorResearchHome-20261030/deps/pytools/bin/ninja.exe",
+      "sha256": "9ee2fc6bc8c0acd1de6e6dcadf009c0598e6336646b87cfb5ed2918604b81597"
+    },
+    "SPEKTRALAB_GLSLANG": {
+      "path": "N:/pixart/ColorResearchHome-20261030/deps/glslang/bin/glslang.exe",
+      "sha256": "9643709c02c83e26773f96b6a87f197ab2e84f78be0879ad8fb3619418b5d9ad"
+    }
+  }
+}

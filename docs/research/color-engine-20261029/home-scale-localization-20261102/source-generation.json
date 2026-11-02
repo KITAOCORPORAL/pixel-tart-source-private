@@ -1,0 +1,47 @@
+{
+  "version": "FilmScaleSubstageTapV1SourceGeneration",
+  "baseEngineCommit": "c1447c6ab618fa4b1cb11fd2fe12826855007059",
+  "sealedSource": "N:\\pixart\\ColorResearchHome-20261030\\round10-source-diagnostic-v2",
+  "sourceFiles": [
+    {
+      "path": "engine/src/pipeline/engine.cpp",
+      "sha256": "3b54bd4c814e0816c9af0ecebcad7efdd886c6eac2c5d23fe410b01067a53e7d"
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.cpp",
+      "sha256": "0bde625bc41c8a667374b62e91f7e8ae8b15da81680f3d43043afb4424db36b4"
+    },
+    {
+      "path": "engine/src/pipeline/pipeline.hpp",
+      "sha256": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4"
+    },
+    {
+      "path": "engine/src/gpu/gpu.hpp",
+      "sha256": "e6241cb55502e466bdc7f36c9416b285f0dcd7f96abdbe9169f033efb955b5da"
+    },
+    {
+      "path": "engine/src/gpu/vulkan_gpu.cpp",
+      "sha256": "bf1560949805a49ca184292631d3be3753fd562a7f5ce4492c177b899f2aeba2"
+    },
+    {
+      "path": "engine/CMakeLists.txt",
+      "sha256": "ef17371c86921bc613989d3821fa5cfbb4f074d07e8873f5a1097351361aca3d"
+    },
+    {
+      "path": "engine/windows_exports.def",
+      "sha256": "de6232d8d2fb28c0f3854b26fca2bbddbef17e0ed1984f1fafe26832d1f45c53"
+    },
+    {
+      "path": "engine/src/pipeline/blur.cpp",
+      "sha256": "19977757598cc8b6f896b6188fa83983d3bcdcf47dbb4aa435c04eb3132c5fcc"
+    },
+    {
+      "path": "API-SPEC-callable-render-service.md",
+      "sha256": "7908622f41b3dec72ed617a58b2d5f6f75befc08622e8f9c8cba30b9fd9120d5"
+    }
+  ],
+  "shaderChanges": false,
+  "originalDispatchOrderChanged": false,
+  "pixelMathChange": false,
+  "newEntry": false
+}

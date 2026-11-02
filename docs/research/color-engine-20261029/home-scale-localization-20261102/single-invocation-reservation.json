@@ -1,0 +1,21 @@
+{
+  "version": "HomeGraySingleInvocationReservationV1",
+  "role": "home",
+  "case": "gray-boundaries17x33",
+  "maxEngineCreate": 1,
+  "maxOpen": 1,
+  "maxWhole": 1,
+  "stream": 0,
+  "BT": 0,
+  "RAW": 0,
+  "full20MP": 0,
+  "natural": 0,
+  "candidate13": 0,
+  "noAutomaticRetry": true,
+  "checkout": "N:/pixart/ColorResearchHome-20261030/home-scale-localization-20261102/source-tap-v1",
+  "library": "N:/pixart/ColorResearchHome-20261030/home-scale-localization-20261102/build-tap-v1/engine/spektrafilm_engine.dll",
+  "resources": "N:/pixart/ColorResearchHome-20261030/resources-patch",
+  "output": "N:/pixart/ColorResearchHome-20261030/home-scale-localization-20261102/gray-once",
+  "preGpuFreezeSha256": "499b4ad237ce9d60374c9d46486b933aa22fd9f034b6e8174af1a19f089c6dac",
+  "runnerSha256": "8c26e49b78c6b78a908ef78a825f297b4ec4b01cfb301aee67d04990c0c1f975"
+}
