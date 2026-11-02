@@ -1,0 +1,23 @@
+{
+  "version": "GrayScaleLocalizationRemoteReceiptV1",
+  "timezone": "Asia/Shanghai",
+  "verifiedAtLocalTime": "2026-11-02T17:17:29.453430+08:00",
+  "status": "NORMAL_PUSH_LS_REMOTE_MATCH",
+  "branch": "research/color-engine-company-diagnostic-20261102",
+  "payloadLocalHead": "4c4bf7889e66cd0d7b9489a5c257252ef55caf52",
+  "payloadRemoteHead": "4c4bf7889e66cd0d7b9489a5c257252ef55caf52",
+  "payloadWorkspaceStatus": "CLEAN",
+  "payloadManifestSha256": "a2368f1d78265f129cdafc47919bfd801acbfec99efcee260a9072c17e6c35a5",
+  "payloadManifestFilesChecked": 59,
+  "oldFrozenFilesChecked": 709,
+  "oldHistoryAllExact": true,
+  "sourceAndBuildReadback": "unchanged since only gray run",
+  "gpuObservationWholeCalls": 1,
+  "addedPassiveReadbacks": 7,
+  "streamRaw20MPPhotosBtCandidateCalls": 0,
+  "classification": "COMPANY_UPSAMPLE_CARRIER_CONFIRMED_CROSS_END_FIRST_OPERATION_NOT_CONFIRMED",
+  "homeRequired": "one same-version realgraywhole with actualupload+tc/b+upsample/exposure and mathmode provenance",
+  "algorithmRepair": "NOT_ESTABLISHED_NOT_IMPLEMENTED",
+  "localResult": "E:/Kitao-Research/color-engine-scale-localization-20261102-v2/gray-once",
+  "receiptScope": "Already pushed payload identity. Receipt itself is metadata-only separate commit; final LOCAL_HEAD/REMOTE_HEAD reported after push, not circular self-identity."
+}
