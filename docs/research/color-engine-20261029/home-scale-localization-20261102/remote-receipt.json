@@ -1,0 +1,19 @@
+{
+  "version": "HomeGrayScaleRemoteReceiptV1",
+  "date": "2026-11-02",
+  "timezone": "Asia/Shanghai",
+  "branch": "research/color-engine-home-scale-20261102",
+  "companyBase": "099b2fb8dbd43fa872703cef84e04b3776c96aab",
+  "implementationLocalHead": "e9c2c166907927d357de75a11bcb3d88cc348aff",
+  "implementationRemoteHead": "e9c2c166907927d357de75a11bcb3d88cc348aff",
+  "push": "SUCCESS",
+  "readback": "MATCH",
+  "worktreeBeforeReceipt": "",
+  "homeOutput": "N:/pixart/ColorResearchHome-20261030/home-scale-localization-20261102/gray-once",
+  "oneWholeCompleted": true,
+  "additionalGpuCallsAfterSingleRun": 0,
+  "stopReached": true,
+  "oldHomeHead": "93b553d1c22937a2870743a40adc43d6df8b526d",
+  "oldHomeStatus": "## research/color-engine-home-20261030...origin/research/color-engine-home-20261030",
+  "note": "Receipt is committed after implementation; final receipt commit HEAD is separately read back. No self-referential SHA claim."
+}

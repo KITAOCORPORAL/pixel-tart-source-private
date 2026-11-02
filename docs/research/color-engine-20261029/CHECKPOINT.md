@@ -6,7 +6,9 @@
 
 跨端：sensitivity/LUTdouble封存SHA已不同（公司完整数组不在家，误差坐标/幅度未知），floatLUTupload/deviceSHA相同；input/matrix可直接字节0差。首个实际成对GPU输出差异是spk_tc_b：tc487/1122、brightness82/561同dispatch，不能分内部指令。upsample1520/1683不同；同tc/b输入的158像素中156仍upsample不同，不能全归前级传播。EV0各端upsample→exposure→旧compoundbit0差。硬件/驱动/JIT未分离，不改数学/FMA/精度/驱动。
 
-公司完整sensitivity/LUTdouble和floatupload/device四文件仍缺直接内容比较，仅hash分层；public17文件明确非fullcapture。权威HOME_FILM_SCALE_LOCALIZATION_20261102、CAPABILITIES_HOME_FILM_SCALE_20261102与home-scale-localization-20261102/。完整home输出N:/pixart/ColorResearchHome-20261030/home-scale-localization-20261102/gray-once，restricted只本地。11项CPU控制PASS，旧1760历史/product+旧home20MPhash保全。RAW/20MP/natural6/stream/BT/candidate13均0；候选默认关闭NOT_ADMITTED。到此停止，不自动扩大实验。Git最终状态另由remote-receipt和实际读回确认。
+公司完整sensitivity/LUTdouble和floatupload/device四文件仍缺直接内容比较，仅hash分层；public17文件明确非fullcapture。实现/证据提交 e9c2c166907927d357de75a11bcb3d88cc348aff 已正常推送并远端读回匹配；收据home-scale-localization-20261102/remote-receipt.json，最终HEAD另读回。
+
+权威HOME_FILM_SCALE_LOCALIZATION_20261102、CAPABILITIES_HOME_FILM_SCALE_20261102与home-scale-localization-20261102/。完整home输出N:/pixart/ColorResearchHome-20261030/home-scale-localization-20261102/gray-once，restricted只本地。11项CPU控制PASS，旧1760历史/product+旧home20MPhash保全。RAW/20MP/natural6/stream/BT/candidate13均0；候选默认关闭NOT_ADMITTED。到此停止，不自动扩大实验。Git最终状态另由remote-receipt和实际读回确认。
 
 ---
 
