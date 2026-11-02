@@ -1,0 +1,21 @@
+{
+  "analysisArtifactsHashMatchSealed": true,
+  "recordedAtShanghai": "2026-11-02T17:31:58+08:00",
+  "newGpuApiCalls": 0,
+  "scope": "Only current checkpoint prepend and new readback documents/receipts",
+  "newReadbacks": 0,
+  "priorCheckpointHistoricalSuffixExact": true,
+  "rawTwentyMpSixPhotosBtCandidate": 0,
+  "productSrcDiff": [],
+  "priorHistoricalFilesExact": 709,
+  "priorPayloadUnchangedFiles": 58,
+  "version": "ReadbackFinalPreservationV1",
+  "newBuilds": 0,
+  "checkpoint": [
+    {
+      "authority": "6c47fb5b Git blob and exact preserved current suffix",
+      "status": "EXACT_OLD_SUFFIX_PRESERVED",
+      "path": "docs/research/color-engine-20261029/CHECKPOINT.md"
+    }
+  ]
+}

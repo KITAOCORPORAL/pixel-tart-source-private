@@ -1,0 +1,57 @@
+{
+  "observerSourceHashFailures": [],
+  "newEngineApiCalls": 0,
+  "observerSourceFilesChecked": 10,
+  "newGpuReadbacks": 0,
+  "algorithmRepair": "NOT_ESTABLISHED_NOT_IMPLEMENTED",
+  "observedCompletedWorkHead": "6c47fb5bf1f8c6734aafe49209ac89ec03d95223",
+  "observerLibraryExact": true,
+  "unchangedNumericalCpuAndOldEntryFiles": 9,
+  "priorFrozenHistoryFilesChecked": 709,
+  "observerLibrarySha256": "08b9e146263d6988cb962cb791ad786ca3301b872d471f2ad53e366b9e09cb63",
+  "newGpuMathDispatches": 0,
+  "version": "FilmScaleZeroGpuExistingEvidenceReadbackV1",
+  "recordedAtShanghai": "2026-11-02T17:27:49+08:00",
+  "raw": 0,
+  "newObserverSourceVersions": 0,
+  "fullThreeCaseReruns": 0,
+  "homePairedTap": "MISSING_NOT_EXECUTED",
+  "newBuilds": 0,
+  "priorPayloadHashesExact": true,
+  "twentyMp": 0,
+  "priorFrozenHistoryHashesExact": true,
+  "mathModeRecords": [
+    {
+      "kernel": "spk_tc_b",
+      "fused_fma_runtime": 1,
+      "specialization_id": 0,
+      "specialization_bool": 1
+    },
+    {
+      "kernel": "spk_lut2d_cubic",
+      "fused_fma_runtime": 1,
+      "specialization_id": 0,
+      "specialization_bool": 1
+    },
+    {
+      "kernel": "spk_affine3",
+      "fused_fma_runtime": 1,
+      "specialization_id": 0,
+      "specialization_bool": 1
+    }
+  ],
+  "localResult": "E:/Kitao-Research/color-engine-scale-localization-20261102-v2/gray-once",
+  "unchangedShaderFiles": 35,
+  "requestedBaseline": "7309911e1ad501b517877a073a86e468a9507941",
+  "newCandidate": 0,
+  "sixPhotos": 0,
+  "priorPayloadFilesChecked": 59,
+  "bt": 0,
+  "historicalObservation": {
+    "open": 1,
+    "engineCreate": 1,
+    "wholeRender": 1,
+    "readbacks": 7,
+    "newMathDispatches": 0
+  }
+}

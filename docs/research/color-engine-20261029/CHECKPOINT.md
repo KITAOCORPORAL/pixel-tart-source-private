@@ -1,3 +1,15 @@
+# 公司定位续接只读核验（2026-11-02，Asia/Shanghai）
+
+本次fetch确认已审查7309911e之后已有4c4bf788公司子tap和6c47fb5b收据，研究树clean/远端一致。没有重复相同gray观测：新增engine/API/GPUreadback/dispatch/build全部0，RAW/20MP/六图/新候选/BT继续0。
+
+重新CPU验证完整localcapture，矩阵/LUT的CPU窄化→实际staging→device逐bit0差，finalRGBA16对公司封存结果逐通道0差；59payload/709历史文件、10source/DLL和35shader/9数值CPU旧入口身份只读核验一致，离线指标与子阶段分析SHA完全重现。旧报告/失败/时间和NOT_RUN不改。
+
+结论不升级：公司差异承载已在Hanatos upsample完成输出、曝光之前；家庭没有同版实际常数/tc/b/upsample/exposure tap，因此跨端首个operator或CPU准备仍NOT_CONFIRMED、hardware/driver未分离、算法修复需求NOT_ESTABLISHED。下一步仅家庭一次同版graytap并先验证家庭final0，先常数字节后子输出比较；公司到此停止，不增加泛化验证。
+
+SharedIncrementEnvelopeUnsharpV1 defaultoff/NOT_ADMITTED，产品src/UI/任务桥/default/PV456不改。当前读回COMPANY_FILM_SCALE_READBACK_20261102.md及CAPABILITIES_FILM_SCALE_READBACK_20261102.md；原家庭最小接续REPRODUCE_SCALE_LOCALIZATION_20261102.md继续有效。研究不等于产品或分发许可批准。新本地输出E:/Kitao-Research/color-engine-scale-localization-readback-20261102，仅元数据/公开描述结果入Git，fullruntimeLUT/sensitivity仍本地。
+
+---
+
 # 公司gray子阶段定位（2026-11-02，Asia/Shanghai）
 
 接续`research/color-engine-company-diagnostic-20261102@7309911e1ad501b517877a073a86e468a9507941`，fetch无增量、开工clean。先离线GPU0核对gray首差(2,0,R)1ULP、max代表(32,0,G)4ULP，nearzero/negative/normal分账，无新跨设备阈值。固定真实链：CPUfilmSensitivity/runtimeLUT/CAT16矩阵→实际f32upload→tc_b→MitchellLUT→EV0affine；Pillow未入数值路径，不当同等嫌疑。
