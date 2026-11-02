@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="8d34f487-de62-4510-bd2b-ae26e4fff9e9" name="Administrator@PC-20250309WEIZ 2026-11-02 10:20:02" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-02T10:20:02.1135842+08:00" queuing="2026-11-02T10:20:02.1135845+08:00" start="2026-11-02T10:20:00.1660826+08:00" finish="2026-11-02T10:20:06.2973344+08:00" />
+  <TestSettings name="default" id="844a84b0-b14c-42ea-b995-5d780fceb558">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-02_10_20_02" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="619ed231-f29c-4f8e-b390-dc3297169c68" testId="1d2b2d5d-95a2-84ff-94c1-93ff2b636dc8" testName="V3ActualCancellationAndSourceRevalidationRetireTaskCache" computerName="PC-20250309WEIZ" duration="00:00:00.9990149" startTime="2026-11-02T10:20:02.7523245+08:00" endTime="2026-11-02T10:20:03.7514357+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="619ed231-f29c-4f8e-b390-dc3297169c68" />
+    <UnitTestResult executionId="af8cf1ea-a454-40c3-8dd8-6983c2b5995f" testId="155042b6-02fd-852f-8301-3815b86eba71" testName="LargePhotoSwitchProjectAndLockedSaveNeverPublishPartialVersion" computerName="PC-20250309WEIZ" duration="00:00:00.9079210" startTime="2026-11-02T10:20:01.8436389+08:00" endTime="2026-11-02T10:20:02.7519166+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="af8cf1ea-a454-40c3-8dd8-6983c2b5995f" />
+    <UnitTestResult executionId="c55411cb-a428-4790-8259-8d38c31f2eee" testId="10ade6c2-3314-8b66-bd5f-4e68de0ed7b9" testName="LayerNamesAndOpacityHaveAccessibleLabelsAndValues" computerName="PC-20250309WEIZ" duration="00:00:00.1845149" startTime="2026-11-02T10:20:03.7515102+08:00" endTime="2026-11-02T10:20:03.9409471+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c55411cb-a428-4790-8259-8d38c31f2eee" />
+    <UnitTestResult executionId="f1ce0782-2113-4dd2-991e-265fb3f91cf9" testId="1ab84254-d7a2-85eb-bbdb-b50182d05a06" testName="RepeatedLargePhotoTasksReleaseCacheAndSourceLeases" computerName="PC-20250309WEIZ" duration="00:00:02.1127807" startTime="2026-11-02T10:20:03.9411190+08:00" endTime="2026-11-02T10:20:06.0546804+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f1ce0782-2113-4dd2-991e-265fb3f91cf9" />
+    <UnitTestResult executionId="18f43196-c59b-4f04-b0ce-964de8d9e9fc" testId="143928aa-2184-8519-b3f1-224130e91854" testName="LargePhotoCancellationAndSourceReplacementKeepOldSnapshot" computerName="PC-20250309WEIZ" duration="00:00:01.0495654" startTime="2026-11-02T10:20:00.7728845+08:00" endTime="2026-11-02T10:20:01.8398989+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="18f43196-c59b-4f04-b0ce-964de8d9e9fc" />
+    <UnitTestResult executionId="919ec14e-c345-419b-8f2e-0b9f740f604d" testId="19d9320d-7d9f-8d7b-b92e-96f0400e7943" testName="IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources" computerName="PC-20250309WEIZ" duration="00:00:00.1299871" startTime="2026-11-02T10:20:06.0547582+08:00" endTime="2026-11-02T10:20:06.1861619+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="919ec14e-c345-419b-8f2e-0b9f740f604d" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="LayerNamesAndOpacityHaveAccessibleLabelsAndValues" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="10ade6c2-3314-8b66-bd5f-4e68de0ed7b9">
+      <Execution id="c55411cb-a428-4790-8259-8d38c31f2eee" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasPhotoPreviewTests" name="LayerNamesAndOpacityHaveAccessibleLabelsAndValues" />
+    </UnitTest>
+    <UnitTest name="IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="19d9320d-7d9f-8d7b-b92e-96f0400e7943">
+      <Execution id="919ec14e-c345-419b-8f2e-0b9f740f604d" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningCanvasConsistencyTests" name="IndependentReopenPreservesPngWithoutReadingOfflineCanvasSources" />
+    </UnitTest>
+    <UnitTest name="LargePhotoCancellationAndSourceReplacementKeepOldSnapshot" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="143928aa-2184-8519-b3f1-224130e91854">
+      <Execution id="18f43196-c59b-4f04-b0ce-964de8d9e9fc" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasPhotoPreviewTests" name="LargePhotoCancellationAndSourceReplacementKeepOldSnapshot" />
+    </UnitTest>
+    <UnitTest name="RepeatedLargePhotoTasksReleaseCacheAndSourceLeases" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1ab84254-d7a2-85eb-bbdb-b50182d05a06">
+      <Execution id="f1ce0782-2113-4dd2-991e-265fb3f91cf9" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasPhotoPreviewTests" name="RepeatedLargePhotoTasksReleaseCacheAndSourceLeases" />
+    </UnitTest>
+    <UnitTest name="LargePhotoSwitchProjectAndLockedSaveNeverPublishPartialVersion" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="155042b6-02fd-852f-8301-3815b86eba71">
+      <Execution id="af8cf1ea-a454-40c3-8dd8-6983c2b5995f" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasPhotoPreviewTests" name="LargePhotoSwitchProjectAndLockedSaveNeverPublishPartialVersion" />
+    </UnitTest>
+    <UnitTest name="V3ActualCancellationAndSourceRevalidationRetireTaskCache" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1d2b2d5d-95a2-84ff-94c1-93ff2b636dc8">
+      <Execution id="619ed231-f29c-4f8e-b390-dc3297169c68" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CanvasPhotoPreviewTests" name="V3ActualCancellationAndSourceRevalidationRetireTaskCache" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1d2b2d5d-95a2-84ff-94c1-93ff2b636dc8" executionId="619ed231-f29c-4f8e-b390-dc3297169c68" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="155042b6-02fd-852f-8301-3815b86eba71" executionId="af8cf1ea-a454-40c3-8dd8-6983c2b5995f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10ade6c2-3314-8b66-bd5f-4e68de0ed7b9" executionId="c55411cb-a428-4790-8259-8d38c31f2eee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ab84254-d7a2-85eb-bbdb-b50182d05a06" executionId="f1ce0782-2113-4dd2-991e-265fb3f91cf9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="143928aa-2184-8519-b3f1-224130e91854" executionId="18f43196-c59b-4f04-b0ce-964de8d9e9fc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19d9320d-7d9f-8d7b-b92e-96f0400e7943" executionId="919ec14e-c345-419b-8f2e-0b9f740f604d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="6" executed="6" passed="6" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

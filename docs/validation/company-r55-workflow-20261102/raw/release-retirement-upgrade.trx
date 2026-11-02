@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="21f32baf-f464-42e1-966a-fca646c5eb6a" name="Administrator@PC-20250309WEIZ 2026-11-02 10:28:21" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-02T10:28:21.2273255+08:00" queuing="2026-11-02T10:28:21.2273257+08:00" start="2026-11-02T10:28:13.2321093+08:00" finish="2026-11-02T10:28:21.2334372+08:00" />
+  <TestSettings name="default" id="fd81fa0d-325f-47dc-a374-e93288fe734a">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-02_10_28_21" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="05f9c342-0ec5-4d5b-a020-e1324e7158f3" testId="19110759-40be-866c-a013-b312e9da30b8" testName="FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks" computerName="PC-20250309WEIZ" duration="00:00:07.2719523" startTime="2026-11-02T10:28:13.7828510+08:00" endTime="2026-11-02T10:28:21.0719499+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="05f9c342-0ec5-4d5b-a020-e1324e7158f3">
+      <Output>
+        <ErrorInfo>
+          <Message>测试方法 RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests。FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks 引发了异常: &#xD;
+System.InvalidOperationException: Copied file count differs</Message>
+          <StackTrace>   at RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks()&#xD;
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)&#xD;
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks" storage="e:/guangjing-company-workflow-20261102/release-testhost/rawselectionassistant.wpftests.dll" id="19110759-40be-866c-a013-b312e9da30b8">
+      <Execution id="05f9c342-0ec5-4d5b-a020-e1324e7158f3" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests" name="FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="19110759-40be-866c-a013-b312e9da30b8" executionId="05f9c342-0ec5-4d5b-a020-e1324e7158f3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

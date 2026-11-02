@@ -1,0 +1,27 @@
+E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll (.NETCoreApp,Version=v10.0)的测试运行
+总共 1 个测试文件与指定模式相匹配。
+  失败 CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot [9 s]
+  错误消息:
+   System.IO.InvalidDataException: 画布对象数据无效。
+   at RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocumentStore.Validate(CanvasDocument document)
+   at RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasEditor.Commit(CanvasDocument next)
+   at RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasEditor.Add(IEnumerable`1 objects)
+   at RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasEditor.AddPalette(Double x, Double y, CanvasPalette palette)
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.<>c.<<CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot>b__15_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.<>c__DisplayClass14_1.<<RunHost>b__1>d.MoveNext()
+  堆栈跟踪:
+     at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.RunHost(Func`3 action)
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  标准输出消息:
+ 
+ 
+ 调试跟踪:
+ {"Event":"CanvasFit","Utc":"2026-11-02T02:08:23.2163147+00:00","Before":{"Zoom":1,"PanX":80,"PanY":70},"Zoom":1,"PanX":966.6666666666666,"PanY":663.6666666666666,"ActualWidth":1933.3333333333333,"ActualHeight":1327.3333333333333,"Bounds":{"X":0,"Y":0,"Width":1,"Height":1},"VisibleTopLeft":{"X":966.6666666666666,"Y":663.6666666666666},"VisibleBottomRight":{"X":967.6666666666666,"Y":664.6666666666666},"Dpi":1.5}
+
+
+结果文件: E:\Guangjing-Company-Workflow-20261102\raw\company-create-a.trx
+
+失败!  - 失败:     1，通过:     0，已跳过:     0，总计:     1，持续时间: 9 s - RAWSelectionAssistant.WpfTests.dll (net10.0)

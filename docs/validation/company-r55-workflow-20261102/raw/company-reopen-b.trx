@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="a0ad31a5-9fa6-40fc-9d15-6c752e613e48" name="Administrator@PC-20250309WEIZ 2026-11-02 10:11:08" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-02T10:11:08.9438611+08:00" queuing="2026-11-02T10:11:08.9438614+08:00" start="2026-11-02T10:11:00.1670479+08:00" finish="2026-11-02T10:11:08.9490270+08:00" />
+  <TestSettings name="default" id="3e8e9223-f807-4643-a13b-835293ae84ff">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-02_10_11_08" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="023ffe57-541a-426d-a47c-3e77c7b5f5c3" testId="153bc5a1-c26f-8e3f-8578-ab035bad2368" testName="IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot" computerName="PC-20250309WEIZ" duration="00:00:08.0275800" startTime="2026-11-02T10:11:00.7334434+08:00" endTime="2026-11-02T10:11:08.7785446+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="023ffe57-541a-426d-a47c-3e77c7b5f5c3">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException: 此素材库正在被另一个光镜实例使用。&#xD;
+ ---&gt; System.IO.IOException: The process cannot access the file 'E:\Guangjing-Company-Workflow-20261102\workflow-b\workflow.ptlibrary\locks\writer.lock' because it is being used by another process.&#xD;
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)&#xD;
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)&#xD;
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)&#xD;
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)&#xD;
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, Boolean useAsync)&#xD;
+   at RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryWriteLease.AcquireAsync(String lockDirectory, Guid libraryId, CancellationToken cancellationToken)&#xD;
+   --- End of inner exception stack trace ---&#xD;
+   at RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryWriteLease.AcquireAsync(String lockDirectory, Guid libraryId, CancellationToken cancellationToken)&#xD;
+   at RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryContainerService.AcquireWriteLeaseAsync(AssetLibraryContainerDescriptor descriptor, CancellationToken cancellationToken)&#xD;
+   at PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost.SwitchToDescriptorAsync(AssetLibraryContainerDescriptor descriptor, Boolean recordRecent)&#xD;
+   at PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost.SwitchToDescriptorAsync(AssetLibraryContainerDescriptor descriptor, Boolean recordRecent)&#xD;
+   at PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost.SwitchToContainerAsync(String containerPath)&#xD;
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.OpenCanvas(MainWindow window, MainViewModel main, String library, CanvasDocument document)&#xD;
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.&lt;&gt;c.&lt;&lt;IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot&gt;b__16_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.&lt;&gt;c__DisplayClass14_1.&lt;&lt;RunHost&gt;b__1&gt;d.MoveNext()</Message>
+          <StackTrace>   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.RunHost(Func`3 action)&#xD;
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot()&#xD;
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="153bc5a1-c26f-8e3f-8578-ab035bad2368">
+      <Execution id="023ffe57-541a-426d-a47c-3e77c7b5f5c3" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests" name="IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="153bc5a1-c26f-8e3f-8578-ab035bad2368" executionId="023ffe57-541a-426d-a47c-3e77c7b5f5c3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

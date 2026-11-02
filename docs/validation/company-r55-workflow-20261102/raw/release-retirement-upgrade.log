@@ -1,0 +1,16 @@
+VSTest 版本 18.6.0 (x64)
+
+正在启动测试执行，请稍候...
+总共 1 个测试文件与指定模式相匹配。
+  失败 FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks [7 s]
+  错误消息:
+   测试方法 RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests。FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks 引发了异常: 
+System.InvalidOperationException: Copied file count differs
+  堆栈跟踪:
+     at RAWSelectionAssistant.WpfTests.TutorialRetirementProductTests.FullAppFirstUpgradeAndRestartDoNotActivateTutorialAndNormalSplitWorks()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+
+结果文件: E:/Guangjing-Company-Workflow-20261102/raw\release-retirement-upgrade.trx
+
+失败!  - 失败:     1，通过:     0，已跳过:     0，总计:     1，持续时间: 7 s - RAWSelectionAssistant.WpfTests.dll (net10.0)

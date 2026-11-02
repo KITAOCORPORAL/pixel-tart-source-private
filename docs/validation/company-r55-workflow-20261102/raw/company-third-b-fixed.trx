@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="272c028b-a9dc-421f-a3d1-aa6cafb3f3f9" name="Administrator@PC-20250309WEIZ 2026-11-02 10:16:31" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-02T10:16:31.2665664+08:00" queuing="2026-11-02T10:16:31.2665669+08:00" start="2026-11-02T10:16:22.1828677+08:00" finish="2026-11-02T10:16:31.2714773+08:00" />
+  <TestSettings name="default" id="a64615a4-95f9-4a78-841f-3a0f43f324de">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-02_10_16_31" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="12c81fd9-c3cc-43c6-9f6f-7d399f2abe78" testId="1f230d03-3bba-8b1c-955d-23b5d39b69ac" testName="ThirdCompleteAppReopenKeepsBothSnapshotIdentitiesAndLayerStates" computerName="PC-20250309WEIZ" duration="00:00:08.3284387" startTime="2026-11-02T10:16:22.7535425+08:00" endTime="2026-11-02T10:16:31.0986437+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="12c81fd9-c3cc-43c6-9f6f-7d399f2abe78">
+      <Output>
+        <StdOut>调试跟踪:&#xD;
+{"Event":"CanvasFit","Utc":"2026-11-02T02:16:30.7639834+00:00","Before":{"Zoom":1,"PanX":80,"PanY":70},"Zoom":1.3593720240241605,"PanX":123.78805411229419,"PanY":199.835714114005,"ActualWidth":1933.3333333333333,"ActualHeight":1327.3333333333333,"Bounds":{"X":-39.900016098327825,"Y":-117.58055285030949,"Width":1319.9000160983278,"Height":917.5805528503095},"VisibleTopLeft":{"X":69.5490884701137,"Y":40},"VisibleBottomRight":{"X":1863.7842448632198,"Y":1287.3333333333333},"Dpi":1.5}</StdOut>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ThirdCompleteAppReopenKeepsBothSnapshotIdentitiesAndLayerStates" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="1f230d03-3bba-8b1c-955d-23b5d39b69ac">
+      <Execution id="12c81fd9-c3cc-43c6-9f6f-7d399f2abe78" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests" name="ThirdCompleteAppReopenKeepsBothSnapshotIdentitiesAndLayerStates" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1f230d03-3bba-8b1c-955d-23b5d39b69ac" executionId="12c81fd9-c3cc-43c6-9f6f-7d399f2abe78" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

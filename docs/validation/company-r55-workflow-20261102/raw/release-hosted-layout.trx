@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="2d3760be-f677-40c0-a899-6f11f8adbc1d" name="Administrator@PC-20250309WEIZ 2026-11-02 10:35:20" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-02T10:35:20.6358294+08:00" queuing="2026-11-02T10:35:20.6358298+08:00" start="2026-11-02T10:35:05.6972386+08:00" finish="2026-11-02T10:35:20.6413051+08:00" />
+  <TestSettings name="default" id="b568259b-6252-4317-b39a-f050a641ee20">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-02_10_35_20" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="1d84a0c9-7cca-4d18-a2a8-57c0561f88e0" testId="1312e289-d026-8fe2-93f3-a5ffd7dca148" testName="CompleteHostActualCaptureButtonAndFreeCanvasLayout" computerName="PC-20250309WEIZ" duration="00:00:14.1112455" startTime="2026-11-02T10:35:06.3344666+08:00" endTime="2026-11-02T10:35:20.4637730+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1d84a0c9-7cca-4d18-a2a8-57c0561f88e0">
+      <Output>
+        <StdOut>调试跟踪:&#xD;
+{"Event":"CanvasFit","Utc":"2026-11-02T02:35:17.915013+00:00","Before":{"Zoom":1,"PanX":80,"PanY":70},"Zoom":0.9652777777777778,"PanX":40,"PanY":142.41666666666663,"ActualWidth":1933.3333333333333,"ActualHeight":1327.3333333333333,"Bounds":{"X":0,"Y":0,"Width":1920,"Height":1080},"VisibleTopLeft":{"X":40,"Y":142.41666666666663},"VisibleBottomRight":{"X":1893.3333333333333,"Y":1184.9166666666665},"Dpi":1.5}&#xD;
+{"Event":"CanvasFit","Utc":"2026-11-02T02:35:18.3023249+00:00","Before":{"Zoom":0.9652777777777778,"PanX":40,"PanY":142.41666666666663},"Zoom":0.625,"PanX":40,"PanY":139.5,"ActualWidth":1280,"ActualHeight":954,"Bounds":{"X":0,"Y":0,"Width":1920,"Height":1080},"VisibleTopLeft":{"X":40,"Y":139.5},"VisibleBottomRight":{"X":1240,"Y":814.5},"Dpi":1.5}&#xD;
+{"Event":"CanvasFit","Utc":"2026-11-02T02:35:18.3854269+00:00","Before":{"Zoom":0.625,"PanX":40,"PanY":139.5},"Zoom":0.33645833333333336,"PanX":40,"PanY":295.3125,"ActualWidth":726,"ActualHeight":954,"Bounds":{"X":0,"Y":0,"Width":1920,"Height":1080},"VisibleTopLeft":{"X":40,"Y":295.3125},"VisibleBottomRight":{"X":686,"Y":658.6875},"Dpi":1.5}&#xD;
+{"Event":"CanvasFit","Utc":"2026-11-02T02:35:18.4568433+00:00","Before":{"Zoom":0.33645833333333336,"PanX":40,"PanY":295.3125},"Zoom":0.33645833333333336,"PanX":40,"PanY":139.64583333333331,"ActualWidth":726,"ActualHeight":642.6666666666666,"Bounds":{"X":0,"Y":0,"Width":1920,"Height":1080},"VisibleTopLeft":{"X":40,"Y":139.64583333333331},"VisibleBottomRight":{"X":686,"Y":503.0208333333333},"Dpi":1.5}&#xD;
+{"Event":"CanvasFit","Utc":"2026-11-02T02:35:18.6874572+00:00","Before":{"Zoom":0.33645833333333336,"PanX":40,"PanY":139.64583333333331},"Zoom":0.33645833333333336,"PanX":40,"PanY":139.64583333333331,"ActualWidth":726,"ActualHeight":642.6666666666666,"Bounds":{"X":0,"Y":0,"Width":1920,"Height":1080},"VisibleTopLeft":{"X":40,"Y":139.64583333333331},"VisibleBottomRight":{"X":686,"Y":503.0208333333333},"Dpi":1.5}&#xD;
+{"Event":"CanvasFit","Utc":"2026-11-02T02:35:18.8408083+00:00","Before":{"Zoom":0.33645833333333336,"PanX":40,"PanY":139.64583333333331},"Zoom":0.5209876543209876,"PanX":139.8518518518519,"PanY":40,"ActualWidth":1280,"ActualHeight":642.6666666666666,"Bounds":{"X":0,"Y":0,"Width":1920,"Height":1080},"VisibleTopLeft":{"X":139.8518518518519,"Y":40},"VisibleBottomRight":{"X":1140.148148148148,"Y":602.6666666666666},"Dpi":1.5}&#xD;
+{"Event":"CanvasFit","Utc":"2026-11-02T02:35:18.903113+00:00","Before":{"Zoom":0.5209876543209876,"PanX":139.8518518518519,"PanY":40},"Zoom":0.625,"PanX":40,"PanY":139.5,"ActualWidth":1280,"ActualHeight":954,"Bounds":{"X":0,"Y":0,"Width":1920,"Height":1080},"VisibleTopLeft":{"X":40,"Y":139.5},"VisibleBottomRight":{"X":1240,"Y":814.5},"Dpi":1.5}&#xD;
+{"Event":"CanvasFit","Utc":"2026-11-02T02:35:19.1304443+00:00","Before":{"Zoom":0.625,"PanX":40,"PanY":139.5},"Zoom":0.625,"PanX":40,"PanY":139.5,"ActualWidth":1280,"ActualHeight":954,"Bounds":{"X":0,"Y":0,"Width":1920,"Height":1080},"VisibleTopLeft":{"X":40,"Y":139.5},"VisibleBottomRight":{"X":1240,"Y":814.5},"Dpi":1.5}</StdOut>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="CompleteHostActualCaptureButtonAndFreeCanvasLayout" storage="e:/guangjing-company-workflow-20261102/release-testhost/rawselectionassistant.wpftests.dll" id="1312e289-d026-8fe2-93f3-a5ffd7dca148">
+      <Execution id="1d84a0c9-7cca-4d18-a2a8-57c0561f88e0" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-testhost/RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.PlanningCanvasHostedTests" name="CompleteHostActualCaptureButtonAndFreeCanvasLayout" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1312e289-d026-8fe2-93f3-a5ffd7dca148" executionId="1d84a0c9-7cca-4d18-a2a8-57c0561f88e0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

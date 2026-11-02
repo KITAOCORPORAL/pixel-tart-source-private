@@ -1,0 +1,30 @@
+E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll (.NETCoreApp,Version=v10.0)的测试运行
+总共 1 个测试文件与指定模式相匹配。
+  失败 IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot [7 s]
+  错误消息:
+   System.InvalidOperationException: 此素材库正在被另一个光镜实例使用。
+ ---> System.IO.IOException: The process cannot access the file 'E:\Guangjing-Company-Workflow-20261102\workflow-b\workflow.ptlibrary\locks\writer.lock' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, Boolean useAsync)
+   at RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryWriteLease.AcquireAsync(String lockDirectory, Guid libraryId, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryWriteLease.AcquireAsync(String lockDirectory, Guid libraryId, CancellationToken cancellationToken)
+   at RAWSelectionAssistant.Core.Services.AssetLibrary.AssetLibraryContainerService.AcquireWriteLeaseAsync(AssetLibraryContainerDescriptor descriptor, CancellationToken cancellationToken)
+   at PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost.SwitchToDescriptorAsync(AssetLibraryContainerDescriptor descriptor, Boolean recordRecent)
+   at PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost.SwitchToDescriptorAsync(AssetLibraryContainerDescriptor descriptor, Boolean recordRecent)
+   at PixelTart.Modules.AssetLibrary.AssetLibraryWorkspaceHost.SwitchToContainerAsync(String containerPath)
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.OpenCanvas(MainWindow window, MainViewModel main, String library, CanvasDocument document)
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.<>c.<<IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot>b__16_0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.<>c__DisplayClass14_1.<<RunHost>b__1>d.MoveNext()
+  堆栈跟踪:
+     at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.RunHost(Func`3 action)
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.IndependentCompleteAppReopenEditAndManuallyUpdateSnapshot()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+结果文件: E:\Guangjing-Company-Workflow-20261102\raw\company-reopen-b-startup-ready.trx
+
+失败!  - 失败:     1，通过:     0，已跳过:     0，总计:     1，持续时间: 7 s - RAWSelectionAssistant.WpfTests.dll (net10.0)

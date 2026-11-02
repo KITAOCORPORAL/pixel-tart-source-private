@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6ef38479-784a-4006-af96-9ea49139cab4" name="Administrator@PC-20250309WEIZ 2026-11-02 10:08:24" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-02T10:08:24.3224045+08:00" queuing="2026-11-02T10:08:24.3224050+08:00" start="2026-11-02T10:08:13.8083925+08:00" finish="2026-11-02T10:08:24.3331011+08:00" />
+  <TestSettings name="default" id="bfc2a6f2-000c-4dc0-b4ca-410e13729ae1">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-02_10_08_24" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="768bbe49-1354-4104-a786-164394eae6ad" testId="16502041-5d64-879a-a700-12683b93ff71" testName="CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot" computerName="PC-20250309WEIZ" duration="00:00:09.5537577" startTime="2026-11-02T10:08:14.5712302+08:00" endTime="2026-11-02T10:08:24.1466500+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="768bbe49-1354-4104-a786-164394eae6ad">
+      <Output>
+        <StdOut>调试跟踪:&#xD;
+{"Event":"CanvasFit","Utc":"2026-11-02T02:08:23.2163147+00:00","Before":{"Zoom":1,"PanX":80,"PanY":70},"Zoom":1,"PanX":966.6666666666666,"PanY":663.6666666666666,"ActualWidth":1933.3333333333333,"ActualHeight":1327.3333333333333,"Bounds":{"X":0,"Y":0,"Width":1,"Height":1},"VisibleTopLeft":{"X":966.6666666666666,"Y":663.6666666666666},"VisibleBottomRight":{"X":967.6666666666666,"Y":664.6666666666666},"Dpi":1.5}</StdOut>
+        <ErrorInfo>
+          <Message>System.IO.InvalidDataException: 画布对象数据无效。&#xD;
+   at RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasDocumentStore.Validate(CanvasDocument document)&#xD;
+   at RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasEditor.Commit(CanvasDocument next)&#xD;
+   at RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasEditor.Add(IEnumerable`1 objects)&#xD;
+   at RAWSelectionAssistant.Core.Services.FreeCanvas.CanvasEditor.AddPalette(Double x, Double y, CanvasPalette palette)&#xD;
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.&lt;&gt;c.&lt;&lt;CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot&gt;b__15_0&gt;d.MoveNext()&#xD;
+--- End of stack trace from previous location ---&#xD;
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.&lt;&gt;c__DisplayClass14_1.&lt;&lt;RunHost&gt;b__1&gt;d.MoveNext()</Message>
+          <StackTrace>   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.RunHost(Func`3 action)&#xD;
+   at RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests.CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot()&#xD;
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)&#xD;
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot" storage="e:\kitao-worktrees\r55-workflow-company-20261102\tests\rawselectionassistant.wpftests\bin\release\net10.0-windows10.0.19041.0\rawselectionassistant.wpftests.dll" id="16502041-5d64-879a-a700-12683b93ff71">
+      <Execution id="768bbe49-1354-4104-a786-164394eae6ad" />
+      <TestMethod codeBase="E:\Kitao-Worktrees\r55-workflow-company-20261102\tests\RAWSelectionAssistant.WpfTests\bin\Release\net10.0-windows10.0.19041.0\RAWSelectionAssistant.WpfTests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.WpfTests.CompanyCanvasWorkflowTests" name="CompleteAppCreateMixedCanvasSaveAndInsertFixedSnapshot" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="16502041-5d64-879a-a700-12683b93ff71" executionId="768bbe49-1354-4104-a786-164394eae6ad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" passed="0" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+</TestRun>

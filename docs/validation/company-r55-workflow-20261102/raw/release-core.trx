@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="a6cace46-b75f-44e0-b5ac-5bcbf996cf8a" name="Administrator@PC-20250309WEIZ 2026-11-02 10:27:41" runUser="PC-20250309WEIZ\Administrator" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-02T10:27:41.4899902+08:00" queuing="2026-11-02T10:27:41.4899905+08:00" start="2026-11-02T10:27:40.6847269+08:00" finish="2026-11-02T10:27:41.7028738+08:00" />
+  <TestSettings name="default" id="353284b2-3026-40dc-828f-b7120166d1f9">
+    <Deployment runDeploymentRoot="Administrator_PC-20250309WEIZ_2026-11-02_10_27_41" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="43f1b388-6305-40bc-9c28-ce67ca83aa3f" testId="11570e7f-43de-8648-ab10-0f794624ff38" testName="ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal" computerName="PC-20250309WEIZ" duration="00:00:00.1891529" startTime="2026-11-02T10:27:41.2386310+08:00" endTime="2026-11-02T10:27:41.4471845+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="43f1b388-6305-40bc-9c28-ce67ca83aa3f" />
+    <UnitTestResult executionId="27cac3b3-d2b5-4947-b180-81ec390ae3e9" testId="1fc20c0c-0295-8606-b65e-aa1d9cc82655" testName="BrushLayerIsSameUndoModelAndPersistsOneStroke" computerName="PC-20250309WEIZ" duration="00:00:00.0190571" startTime="2026-11-02T10:27:41.2621643+08:00" endTime="2026-11-02T10:27:41.2817113+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="27cac3b3-d2b5-4947-b180-81ec390ae3e9" />
+    <UnitTestResult executionId="ad3cbbb0-74a2-494c-a942-79027548c817" testId="11958889-422d-8a15-8891-e2b755fece49" testName="ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave" computerName="PC-20250309WEIZ" duration="00:00:00.0152721" startTime="2026-11-02T10:27:41.2386380+08:00" endTime="2026-11-02T10:27:41.2765757+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ad3cbbb0-74a2-494c-a942-79027548c817" />
+    <UnitTestResult executionId="8b228163-21bd-4f85-9a48-5d9da88cb229" testId="14fd5626-9a4e-838c-a000-1f1ae00dee2d" testName="OldNotesBecomeActionOnceAndBatchRetainsUnknownCatalogAndShotFields" computerName="PC-20250309WEIZ" duration="00:00:00.1268146" startTime="2026-11-02T10:27:41.2386928+08:00" endTime="2026-11-02T10:27:41.3866300+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8b228163-21bd-4f85-9a48-5d9da88cb229" />
+    <UnitTestResult executionId="fe831eed-8b8d-4642-9bca-0404ce9eec3e" testId="1d68f877-736a-8e2f-bcd3-876fba8dc1db" testName="ColumnsArchiveWithoutDroppingValuesAndInvalidSchemaFailsClosed" computerName="PC-20250309WEIZ" duration="00:00:00.1434145" startTime="2026-11-02T10:27:41.2386866+08:00" endTime="2026-11-02T10:27:41.4014503+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fe831eed-8b8d-4642-9bca-0404ce9eec3e" />
+    <UnitTestResult executionId="114cd388-9060-465a-83a6-212e5f8cc03c" testId="1a9330f8-f287-89db-ab1f-39faedf1ef6c" testName="ValidatedPackageImportsIntoFreshRootReopensCopiesAndNeverOverwritesIdOrSameName" computerName="PC-20250309WEIZ" duration="00:00:00.3971125" startTime="2026-11-02T10:27:41.2386730+08:00" endTime="2026-11-02T10:27:41.6558729+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="114cd388-9060-465a-83a6-212e5f8cc03c" />
+    <UnitTestResult executionId="1c2e02a5-b471-4b4c-8467-4391727fc416" testId="120d8982-33f0-85c2-af0f-9dbc5d60cba8" testName="LegacyReadDoesNotWriteAndIdentityMigrationIsStableAndLossless" computerName="PC-20250309WEIZ" duration="00:00:00.1347170" startTime="2026-11-02T10:27:41.2621550+08:00" endTime="2026-11-02T10:27:41.3973839+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1c2e02a5-b471-4b4c-8467-4391727fc416" />
+    <UnitTestResult executionId="24f81089-8d5b-4238-8a45-6f68354a41d5" testId="19815622-e27c-88df-84cd-dbfcf99b46bc" testName="RecoveryOnlyCleansExpiredReceiptOwnedPartAndAuditsOrphanWithoutDeletingValidOrUnknown" computerName="PC-20250309WEIZ" duration="00:00:00.2822213" startTime="2026-11-02T10:27:41.2386458+08:00" endTime="2026-11-02T10:27:41.5402453+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="24f81089-8d5b-4238-8a45-6f68354a41d5" />
+    <UnitTestResult executionId="a8c57638-8272-4e23-b148-4dfc9284a0bf" testId="17a3e66b-56b2-8e1c-bd21-65336d936cfb" testName="OneGestureUndoLockedTransformsAndViewIndependentDocumentSize" computerName="PC-20250309WEIZ" duration="00:00:00.0279668" startTime="2026-11-02T10:27:41.2386539+08:00" endTime="2026-11-02T10:27:41.2867441+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a8c57638-8272-4e23-b148-4dfc9284a0bf" />
+    <UnitTestResult executionId="a468df0a-6ebb-46ce-a7a4-a9735fd7f209" testId="10c804f6-4bb1-8337-9af5-56bf64b5e153" testName="CancelExportAndMissingCopyCannotPublishPartialPackage" computerName="PC-20250309WEIZ" duration="00:00:00.1812796" startTime="2026-11-02T10:27:41.2836802+08:00" endTime="2026-11-02T10:27:41.4650296+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a468df0a-6ebb-46ce-a7a4-a9735fd7f209" />
+    <UnitTestResult executionId="94d0fa5a-f679-4a8e-8040-5bb28aab3dac" testId="1184cf75-e986-8950-b00c-367dbd4bc993" testName="TamperMissingDuplicateTraversalAndUnsupportedVersionAreRejectedBeforeAnyImportWrites" computerName="PC-20250309WEIZ" duration="00:00:00.2121886" startTime="2026-11-02T10:27:41.2386804+08:00" endTime="2026-11-02T10:27:41.4702259+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="94d0fa5a-f679-4a8e-8040-5bb28aab3dac" />
+    <UnitTestResult executionId="8afe67dc-6a0c-49c7-bae0-98ebebe60e17" testId="16c20f4a-bd50-8060-a4bb-59ad68dcdb4f" testName="CancelValidationAndExtractionLeaveNoVisibleProjectAndPreserveSource" computerName="PC-20250309WEIZ" duration="00:00:00.2282270" startTime="2026-11-02T10:27:41.2386647+08:00" endTime="2026-11-02T10:27:41.4862643+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8afe67dc-6a0c-49c7-bae0-98ebebe60e17" />
+    <UnitTestResult executionId="f14ef87d-a75e-43f5-833c-562733a40bcb" testId="1c05f000-b69a-87d4-9997-f4cdd79f8c4d" testName="RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets" computerName="PC-20250309WEIZ" duration="00:00:00.2065876" startTime="2026-11-02T10:27:41.2831729+08:00" endTime="2026-11-02T10:27:41.4898454+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f14ef87d-a75e-43f5-833c-562733a40bcb" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="11958889-422d-8a15-8891-e2b755fece49">
+      <Execution id="ad3cbbb0-74a2-494c-a942-79027548c817" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.CanvasPlanningSourceTests" name="ConflictingFallbackAndNonReferenceReceiptAreRejectedBeforeSave" />
+    </UnitTest>
+    <UnitTest name="ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="11570e7f-43de-8648-ab10-0f794624ff38">
+      <Execution id="43f1b388-6305-40bc-9c28-ce67ca83aa3f" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.CanvasPlanningSourceTests" name="ReceiptPersistsAndRebindsWithoutSerializingTransientCopyRootOrUsingOriginal" />
+    </UnitTest>
+    <UnitTest name="ColumnsArchiveWithoutDroppingValuesAndInvalidSchemaFailsClosed" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="1d68f877-736a-8e2f-bcd3-876fba8dc1db">
+      <Execution id="fe831eed-8b8d-4642-9bca-0404ce9eec3e" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningFoundationTests" name="ColumnsArchiveWithoutDroppingValuesAndInvalidSchemaFailsClosed" />
+    </UnitTest>
+    <UnitTest name="OneGestureUndoLockedTransformsAndViewIndependentDocumentSize" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="17a3e66b-56b2-8e1c-bd21-65336d936cfb">
+      <Execution id="a8c57638-8272-4e23-b148-4dfc9284a0bf" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.CanvasProductClosureTests" name="OneGestureUndoLockedTransformsAndViewIndependentDocumentSize" />
+    </UnitTest>
+    <UnitTest name="TamperMissingDuplicateTraversalAndUnsupportedVersionAreRejectedBeforeAnyImportWrites" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="1184cf75-e986-8950-b00c-367dbd4bc993">
+      <Execution id="94d0fa5a-f679-4a8e-8040-5bb28aab3dac" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningProjectPackageTests" name="TamperMissingDuplicateTraversalAndUnsupportedVersionAreRejectedBeforeAnyImportWrites" />
+    </UnitTest>
+    <UnitTest name="BrushLayerIsSameUndoModelAndPersistsOneStroke" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="1fc20c0c-0295-8606-b65e-aa1d9cc82655">
+      <Execution id="27cac3b3-d2b5-4947-b180-81ec390ae3e9" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.CanvasProductClosureTests" name="BrushLayerIsSameUndoModelAndPersistsOneStroke" />
+    </UnitTest>
+    <UnitTest name="RecoveryOnlyCleansExpiredReceiptOwnedPartAndAuditsOrphanWithoutDeletingValidOrUnknown" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="19815622-e27c-88df-84cd-dbfcf99b46bc">
+      <Execution id="24f81089-8d5b-4238-8a45-6f68354a41d5" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningProjectPackageTests" name="RecoveryOnlyCleansExpiredReceiptOwnedPartAndAuditsOrphanWithoutDeletingValidOrUnknown" />
+    </UnitTest>
+    <UnitTest name="CancelExportAndMissingCopyCannotPublishPartialPackage" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="10c804f6-4bb1-8337-9af5-56bf64b5e153">
+      <Execution id="a468df0a-6ebb-46ce-a7a4-a9735fd7f209" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningProjectPackageTests" name="CancelExportAndMissingCopyCannotPublishPartialPackage" />
+    </UnitTest>
+    <UnitTest name="CancelValidationAndExtractionLeaveNoVisibleProjectAndPreserveSource" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="16c20f4a-bd50-8060-a4bb-59ad68dcdb4f">
+      <Execution id="8afe67dc-6a0c-49c7-bae0-98ebebe60e17" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningProjectPackageTests" name="CancelValidationAndExtractionLeaveNoVisibleProjectAndPreserveSource" />
+    </UnitTest>
+    <UnitTest name="ValidatedPackageImportsIntoFreshRootReopensCopiesAndNeverOverwritesIdOrSameName" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="1a9330f8-f287-89db-ab1f-39faedf1ef6c">
+      <Execution id="114cd388-9060-465a-83a6-212e5f8cc03c" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningProjectPackageTests" name="ValidatedPackageImportsIntoFreshRootReopensCopiesAndNeverOverwritesIdOrSameName" />
+    </UnitTest>
+    <UnitTest name="RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="1c05f000-b69a-87d4-9997-f4cdd79f8c4d">
+      <Execution id="f14ef87d-a75e-43f5-833c-562733a40bcb" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningProjectPackageTests" name="RecoveryKeepsLiveAndRecentStagesMalformedOwnersAndReparseTargets" />
+    </UnitTest>
+    <UnitTest name="LegacyReadDoesNotWriteAndIdentityMigrationIsStableAndLossless" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="120d8982-33f0-85c2-af0f-9dbc5d60cba8">
+      <Execution id="1c2e02a5-b471-4b4c-8467-4391727fc416" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningFoundationTests" name="LegacyReadDoesNotWriteAndIdentityMigrationIsStableAndLossless" />
+    </UnitTest>
+    <UnitTest name="OldNotesBecomeActionOnceAndBatchRetainsUnknownCatalogAndShotFields" storage="e:/guangjing-company-workflow-20261102/release-core-testhost/rawselectionassistant.tests.dll" id="14fd5626-9a4e-838c-a000-1f1ae00dee2d">
+      <Execution id="8b228163-21bd-4f85-9a48-5d9da88cb229" />
+      <TestMethod codeBase="E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll" adapterTypeName="executor://mstestadapter/v4" className="RAWSelectionAssistant.Tests.PlanningFoundationTests" name="OldNotesBecomeActionOnceAndBatchRetainsUnknownCatalogAndShotFields" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="11570e7f-43de-8648-ab10-0f794624ff38" executionId="43f1b388-6305-40bc-9c28-ce67ca83aa3f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1fc20c0c-0295-8606-b65e-aa1d9cc82655" executionId="27cac3b3-d2b5-4947-b180-81ec390ae3e9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="11958889-422d-8a15-8891-e2b755fece49" executionId="ad3cbbb0-74a2-494c-a942-79027548c817" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14fd5626-9a4e-838c-a000-1f1ae00dee2d" executionId="8b228163-21bd-4f85-9a48-5d9da88cb229" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d68f877-736a-8e2f-bcd3-876fba8dc1db" executionId="fe831eed-8b8d-4642-9bca-0404ce9eec3e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1a9330f8-f287-89db-ab1f-39faedf1ef6c" executionId="114cd388-9060-465a-83a6-212e5f8cc03c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="120d8982-33f0-85c2-af0f-9dbc5d60cba8" executionId="1c2e02a5-b471-4b4c-8467-4391727fc416" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19815622-e27c-88df-84cd-dbfcf99b46bc" executionId="24f81089-8d5b-4238-8a45-6f68354a41d5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17a3e66b-56b2-8e1c-bd21-65336d936cfb" executionId="a8c57638-8272-4e23-b148-4dfc9284a0bf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10c804f6-4bb1-8337-9af5-56bf64b5e153" executionId="a468df0a-6ebb-46ce-a7a4-a9735fd7f209" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1184cf75-e986-8950-b00c-367dbd4bc993" executionId="94d0fa5a-f679-4a8e-8040-5bb28aab3dac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16c20f4a-bd50-8060-a4bb-59ad68dcdb4f" executionId="8afe67dc-6a0c-49c7-bae0-98ebebe60e17" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c05f000-b69a-87d4-9997-f4cdd79f8c4d" executionId="f14ef87d-a75e-43f5-833c-562733a40bcb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="13" executed="13" passed="13" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>已为 E:/Guangjing-Company-Workflow-20261102/release-core-testhost/RAWSelectionAssistant.Tests.dll 启用测试并行化(Workers: 12，Scope: MethodLevel)&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
