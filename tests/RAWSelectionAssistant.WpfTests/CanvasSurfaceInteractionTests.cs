@@ -68,7 +68,19 @@ public sealed class CanvasSurfaceInteractionTests
         var blocker=Path.Combine(root,"blocked");await File.WriteAllTextAsync(blocker,"not a directory");
         var editor=CanvasFixtures.Create();
         var view=new FreeCanvasView(editor,new WpfAssetThumbnailProvider(),new CanvasDocumentStore(blocker));
-        try{Assert.IsFalse(await view.FlushAsync());Assert.HasCount(1,editor.Document.Objects);}
+        try
+        {
+            Assert.IsFalse(await view.FlushAsync());Assert.HasCount(1,editor.Document.Objects);
+            var status=((System.Windows.Controls.DockPanel)view.Content).Children.OfType<System.Windows.Controls.TextBlock>().Single();
+            StringAssert.Contains(status.Text,"未保存修改已保留");
+            StringAssert.Contains(status.Text,"路径");
+            StringAssert.Contains(status.Text,"重试");
+            StringAssert.Contains(status.ToolTip?.ToString()??"",blocker);
+            File.Delete(blocker);Directory.CreateDirectory(blocker);
+            Assert.IsTrue(await view.FlushAsync());
+            Assert.AreEqual("已保存",status.Text);Assert.IsNull(status.ToolTip);
+            Assert.HasCount(1,(await new CanvasDocumentStore(blocker).LoadAsync(editor.Document.CanvasId))!.Objects);
+        }
         finally{Directory.Delete(root,true);}
     });
 }
