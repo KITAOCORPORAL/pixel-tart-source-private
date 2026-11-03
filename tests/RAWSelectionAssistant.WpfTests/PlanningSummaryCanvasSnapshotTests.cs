@@ -140,6 +140,45 @@ public sealed class PlanningSummaryCanvasSnapshotTests
     {
         using var bytes=new MemoryStream(png);var bitmap=new FormatConvertedBitmap(BitmapDecoder.Create(bytes,BitmapCreateOptions.IgnoreColorProfile,BitmapCacheOption.OnLoad).Frames[0],PixelFormats.Bgra32,null,0);var result=new byte[bitmap.PixelWidth*bitmap.PixelHeight*4];bitmap.CopyPixels(result,bitmap.PixelWidth*4,0);return result;
     }
+    [TestMethod]
+    public Task MissingRichAndLightRevisionLinksWarnInPlaceWithoutExportingStaleRtfImages()=>RunSta(async()=>
+    {
+        EnsureTestApplication();Directory.CreateDirectory(Root);using var fixture=await PlanningFoundationWpfTests.Fixture.Create();await fixture.Vm.LoadAsync(fixture.Id);fixture.Vm.DocumentTitle="失效关联反馈";Assert.IsTrue(await fixture.Vm.FlushAsync());
+        var canvas=Guid.NewGuid();var valid=Revision(fixture.Id,canvas,Png(40,30,0),40,30,1);await fixture.Planning.AppendCanvasRevisionAsync(fixture.Id,fixture.Vm.PlanningDocumentId!.Value,valid);await fixture.Vm.LoadAsync(fixture.Id);
+        var missingBody=Guid.Parse("33333333-3333-4333-8333-333333333333");var missingLight=Guid.Parse("44444444-4444-4444-8444-444444444444");var missingBlock=Guid.Parse("55555555-5555-4555-8555-555555555555");var missingTable=Guid.Parse("66666666-6666-4666-8666-666666666666");
+        var rich=new FlowDocument();rich.Blocks.Add(new Paragraph(new Run("正文前段保留")));
+        Image StaleImage(){using var stream=new MemoryStream(Png(24,24,1));var bitmap=BitmapDecoder.Create(stream,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad).Frames[0];bitmap.Freeze();return new Image{Source=bitmap,Width=24,Height=24};}
+        var invalid=new Paragraph(new Run("失效位置前文")){Tag=new PlanningBlockSemantic(1,CanvasId:canvas,CanvasRevisionId:missingBody)};invalid.Inlines.Add(new Span(new InlineUIContainer(StaleImage())));invalid.Inlines.Add(new Run("失效位置后文"));rich.Blocks.Add(invalid);
+        rich.Blocks.Add(new BlockUIContainer(StaleImage()){Tag=new PlanningBlockSemantic(2,CanvasId:canvas,CanvasRevisionId:missingBlock)});
+        var table=new Table{Tag=new PlanningBlockSemantic(3,CanvasId:canvas,CanvasRevisionId:missingTable)};table.Columns.Add(new TableColumn());var group=new TableRowGroup();table.RowGroups.Add(group);var row=new TableRow();group.Rows.Add(row);var cellContent=new Paragraph(new Run("表格正文保留"));cellContent.Inlines.Add(new InlineUIContainer(StaleImage()));row.Cells.Add(new TableCell(cellContent));rich.Blocks.Add(table);
+        rich.Blocks.Add(new BlockUIContainer(StaleImage()){Tag=new PlanningBlockSemantic(4,CanvasId:canvas,CanvasRevisionId:valid.RevisionId)});rich.Blocks.Add(new Paragraph(new Run("正文末段保留")));
+        var layout=PlanningDocumentLayout.Capture(rich,new(),[]);fixture.Vm.SaveRichText(PlanningDocumentImages.Serialize(rich),new TextRange(rich.ContentStart,rich.ContentEnd).Text,layout);Assert.IsTrue(await fixture.Vm.FlushAsync());
+        Assert.IsTrue(await fixture.Vm.SaveResourceAsync(new PlanningLight{Name="失效灯位位置",CanvasRevisionId=missingLight}));Assert.IsTrue(await fixture.Vm.SaveResourceAsync(new PlanningLight{Name="有效灯位保留",CanvasRevisionId=valid.RevisionId}));
+        var source=Path.Combine(fixture.Planning.StorageRoot,fixture.Id.ToString("N")+".planning.json");var before=File.ReadAllBytes(source);var path=Path.Combine(Root,"missing-revision-links.docx");var dialogs=await ExportViaView(fixture,path);
+        using var package=WordprocessingDocument.Open(path,false);var text=package.MainDocumentPart!.Document.Body!.InnerText;var drawings=package.MainDocumentPart.ImageParts.ToArray();
+        await File.WriteAllTextAsync(Path.Combine(Root,"MISSING_LINK_REPRO.json"),JsonSerializer.Serialize(new{warnings=dialogs.Infos,errors=dialogs.Errors,mediaCount=drawings.Length,missingBodyReported=text.Contains("[画布固定快照未呈现：版本 "+missingBody),missingLightReported=text.Contains("[画布固定快照未呈现：版本 "+missingLight),hasWarningAggregate=text.Contains("导出警告（保留原资料，不替换源文件）")},new JsonSerializerOptions{WriteIndented=true}));
+        StringAssert.Contains(text,"[画布固定快照未呈现：版本 "+missingBody);StringAssert.Contains(text,"[画布固定快照未呈现：版本 "+missingLight);StringAssert.Contains(text,"[画布固定快照未呈现：版本 "+missingBlock);StringAssert.Contains(text,"[画布固定快照未呈现：版本 "+missingTable);StringAssert.Contains(text,"表格正文保留");
+        Assert.IsTrue(text.IndexOf("失效位置前文",StringComparison.Ordinal)<text.IndexOf("[画布固定快照未呈现：版本 "+missingBody,StringComparison.Ordinal));Assert.IsTrue(text.IndexOf("[画布固定快照未呈现：版本 "+missingBody,StringComparison.Ordinal)<text.IndexOf("失效位置后文",StringComparison.Ordinal));
+        StringAssert.Contains(text,"正文前段保留");StringAssert.Contains(text,"正文末段保留");StringAssert.Contains(text,"有效灯位保留");Assert.AreEqual(1,drawings.Length,"Only the valid saved revision may be embedded; stale RTF is not a substitute");
+        using var raw=drawings[0].GetStream();using var bytes=new MemoryStream();raw.CopyTo(bytes);CollectionAssert.AreEqual(Pixels(Convert.FromBase64String(valid.PreviewPngBase64!)),Pixels(bytes.ToArray()));
+        StringAssert.Contains(dialogs.Infos.Single(),"4项图片/固定快照警告");CollectionAssert.AreEqual(before,File.ReadAllBytes(source));Assert.IsEmpty(new OpenXmlValidator().Validate(package));
+    });
+    [TestMethod]
+    public Task DeferredSnapshotWarningsMatchPlaceholdersReturnedWarningsAndDocxSummary()=>RunSta(async()=>
+    {
+        EnsureTestApplication();Directory.CreateDirectory(Root);using var fixture=await PlanningFoundationWpfTests.Fixture.Create();await fixture.Vm.LoadAsync(fixture.Id);fixture.Vm.DocumentTitle="延迟警告一致性";Assert.IsTrue(await fixture.Vm.FlushAsync());
+        var broken=Revision(fixture.Id,Guid.NewGuid(),Png(24,18,0),24,18,1) with{PreviewPngBase64="invalid base64"};await fixture.Planning.AppendCanvasRevisionAsync(fixture.Id,fixture.Vm.PlanningDocumentId!.Value,broken);await fixture.Vm.LoadAsync(fixture.Id);
+        var path=Path.Combine(Root,"deferred-warning-summary.docx");var dialogs=await ExportViaView(fixture,path);var result=await fixture.Vm.ExportPlanningSummaryDocxAsync(Path.Combine(Root,"deferred-warning-result.docx"));Assert.IsNotNull(result);Assert.AreEqual(1,result.Warnings.Count);
+        using var package=WordprocessingDocument.Open(path,false);var text=package.MainDocumentPart!.Document.Body!.InnerText;var marker="导出警告（保留原资料，不替换源文件）";
+        await File.WriteAllTextAsync(Path.Combine(Root,"DEFERRED_WARNING_REPRO.json"),JsonSerializer.Serialize(new{returnedWarnings=result.Warnings.Count,placeholderCount=text.Split("[画布固定快照未呈现：").Length-1,hasAggregate=text.Contains(marker)},new JsonSerializerOptions{WriteIndented=true}));
+        StringAssert.Contains(text,marker);var parts=text.Split(marker);Assert.AreEqual(2,parts.Length);StringAssert.Contains(parts[0],result.Warnings[0]);StringAssert.Contains(parts[1],result.Warnings[0]);Assert.AreEqual(2,text.Split(result.Warnings[0]).Length-1);StringAssert.Contains(dialogs.Infos.Single(),"1项图片/固定快照警告");
+    });
+    private static async Task<SnapshotDialogs> ExportViaView(PlanningFoundationWpfTests.Fixture fixture,string path)
+    {
+        var dialogs=new SnapshotDialogs{Output=path};var viewModel=new RAWSelectionAssistant.ViewModels.PlanningCenterViewModel(fixture.Projects,fixture.Bookings,dialogs,fixture.Shots,fixture.Planning);await viewModel.LoadAsync(fixture.Id);
+        var view=new RAWSelectionAssistant.Views.PlanningCenterView{DataContext=viewModel};view.Measure(new Size(1400,900));view.Arrange(new Rect(0,0,1400,900));view.UpdateLayout();
+        var method=typeof(RAWSelectionAssistant.Views.PlanningCenterView).GetMethod("ExportPlanningSummaryFromViewAsync",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic)!;try{await (Task)method.Invoke(view,null)!;Assert.IsEmpty(dialogs.Errors);Assert.IsTrue(File.Exists(path));return dialogs;}finally{view.DataContext=null;}
+    }
     private sealed class SnapshotDialogs:IDialogService
     {
         public required string Output;public List<string> Infos=[];public List<string> Errors=[];
@@ -176,7 +215,7 @@ public sealed class PlanningSummaryCanvasSnapshotTests
     public Task RenderExportedDocxPagesForVisualInspection()=>RunSta(async()=>
     {
         EnsureTestApplication();
-        foreach(var name in new[]{"saved-two-revisions","snapshot-placeholders","narrow-portrait","explicit-placements"})
+        foreach(var name in new[]{"saved-two-revisions","snapshot-placeholders","narrow-portrait","explicit-placements","missing-revision-links","deferred-warning-summary"})
         {
         var path=Path.Combine(Root,name+".docx");if(!File.Exists(path))continue;var imported=PlanningDocxAdapter.Import(path);var document=imported.Document;
         using(var package=WordprocessingDocument.Open(path,false))
