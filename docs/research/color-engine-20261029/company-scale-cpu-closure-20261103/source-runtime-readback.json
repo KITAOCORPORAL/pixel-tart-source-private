@@ -1,0 +1,417 @@
+{
+  "version": "CompanySourceRuntimeCpuReadbackV1",
+  "GPUCalls": 0,
+  "companySource": "E:\\Kitao-Research\\color-engine-scale-localization-20261102-v2\\source-scale-tap-v1",
+  "sourceChecks": [
+    {
+      "file": "engine/src/pipeline/engine.cpp",
+      "authority": "COMPANY_ACTUAL_SOURCE_FILE_VS_HOME_FROZEN_NORMALIZED_SOURCE_SHA",
+      "companyActualSha256": "6aa2e99e5cdb28470b983d8a8ff6fd958fee55ed2cefef046b5f55dfc71f8d52",
+      "homeRawSourceSha256": "3b54bd4c814e0816c9af0ecebcad7efdd886c6eac2c5d23fe410b01067a53e7d",
+      "homeRootNormalizedSha256": "6aa2e99e5cdb28470b983d8a8ff6fd958fee55ed2cefef046b5f55dfc71f8d52",
+      "companyExpectedSha256": "6aa2e99e5cdb28470b983d8a8ff6fd958fee55ed2cefef046b5f55dfc71f8d52",
+      "companyMatchesFrozenNormalizedHome": true,
+      "homeSourceFileReread": false
+    },
+    {
+      "file": "engine/src/pipeline/pipeline.cpp",
+      "authority": "COMPANY_ACTUAL_SOURCE_FILE_VS_HOME_FROZEN_NORMALIZED_SOURCE_SHA",
+      "companyActualSha256": "0bde625bc41c8a667374b62e91f7e8ae8b15da81680f3d43043afb4424db36b4",
+      "homeRawSourceSha256": "0bde625bc41c8a667374b62e91f7e8ae8b15da81680f3d43043afb4424db36b4",
+      "homeRootNormalizedSha256": "0bde625bc41c8a667374b62e91f7e8ae8b15da81680f3d43043afb4424db36b4",
+      "companyExpectedSha256": "0bde625bc41c8a667374b62e91f7e8ae8b15da81680f3d43043afb4424db36b4",
+      "companyMatchesFrozenNormalizedHome": true,
+      "homeSourceFileReread": false
+    },
+    {
+      "file": "engine/src/pipeline/pipeline.hpp",
+      "authority": "COMPANY_ACTUAL_SOURCE_FILE_VS_HOME_FROZEN_NORMALIZED_SOURCE_SHA",
+      "companyActualSha256": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4",
+      "homeRawSourceSha256": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4",
+      "homeRootNormalizedSha256": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4",
+      "companyExpectedSha256": "ac1436fa4237f4edc674606cdd7ccaef1ad81f546cad0a291d71a36410a0e1c4",
+      "companyMatchesFrozenNormalizedHome": true,
+      "homeSourceFileReread": false
+    },
+    {
+      "file": "engine/src/gpu/gpu.hpp",
+      "authority": "COMPANY_ACTUAL_SOURCE_FILE_VS_HOME_FROZEN_NORMALIZED_SOURCE_SHA",
+      "companyActualSha256": "e6241cb55502e466bdc7f36c9416b285f0dcd7f96abdbe9169f033efb955b5da",
+      "homeRawSourceSha256": "e6241cb55502e466bdc7f36c9416b285f0dcd7f96abdbe9169f033efb955b5da",
+      "homeRootNormalizedSha256": "e6241cb55502e466bdc7f36c9416b285f0dcd7f96abdbe9169f033efb955b5da",
+      "companyExpectedSha256": "e6241cb55502e466bdc7f36c9416b285f0dcd7f96abdbe9169f033efb955b5da",
+      "companyMatchesFrozenNormalizedHome": true,
+      "homeSourceFileReread": false
+    },
+    {
+      "file": "engine/src/gpu/vulkan_gpu.cpp",
+      "authority": "COMPANY_ACTUAL_SOURCE_FILE_VS_HOME_FROZEN_NORMALIZED_SOURCE_SHA",
+      "companyActualSha256": "bf1560949805a49ca184292631d3be3753fd562a7f5ce4492c177b899f2aeba2",
+      "homeRawSourceSha256": "bf1560949805a49ca184292631d3be3753fd562a7f5ce4492c177b899f2aeba2",
+      "homeRootNormalizedSha256": "bf1560949805a49ca184292631d3be3753fd562a7f5ce4492c177b899f2aeba2",
+      "companyExpectedSha256": "bf1560949805a49ca184292631d3be3753fd562a7f5ce4492c177b899f2aeba2",
+      "companyMatchesFrozenNormalizedHome": true,
+      "homeSourceFileReread": false
+    },
+    {
+      "file": "engine/CMakeLists.txt",
+      "authority": "COMPANY_ACTUAL_SOURCE_FILE_VS_HOME_FROZEN_NORMALIZED_SOURCE_SHA",
+      "companyActualSha256": "ef17371c86921bc613989d3821fa5cfbb4f074d07e8873f5a1097351361aca3d",
+      "homeRawSourceSha256": "ef17371c86921bc613989d3821fa5cfbb4f074d07e8873f5a1097351361aca3d",
+      "homeRootNormalizedSha256": "ef17371c86921bc613989d3821fa5cfbb4f074d07e8873f5a1097351361aca3d",
+      "companyExpectedSha256": "ef17371c86921bc613989d3821fa5cfbb4f074d07e8873f5a1097351361aca3d",
+      "companyMatchesFrozenNormalizedHome": true,
+      "homeSourceFileReread": false
+    },
+    {
+      "file": "engine/windows_exports.def",
+      "authority": "COMPANY_ACTUAL_SOURCE_FILE_VS_HOME_FROZEN_NORMALIZED_SOURCE_SHA",
+      "companyActualSha256": "de6232d8d2fb28c0f3854b26fca2bbddbef17e0ed1984f1fafe26832d1f45c53",
+      "homeRawSourceSha256": "de6232d8d2fb28c0f3854b26fca2bbddbef17e0ed1984f1fafe26832d1f45c53",
+      "homeRootNormalizedSha256": "de6232d8d2fb28c0f3854b26fca2bbddbef17e0ed1984f1fafe26832d1f45c53",
+      "companyExpectedSha256": "de6232d8d2fb28c0f3854b26fca2bbddbef17e0ed1984f1fafe26832d1f45c53",
+      "companyMatchesFrozenNormalizedHome": true,
+      "homeSourceFileReread": false
+    },
+    {
+      "file": "engine/src/pipeline/blur.cpp",
+      "authority": "COMPANY_ACTUAL_SOURCE_FILE_VS_HOME_FROZEN_NORMALIZED_SOURCE_SHA",
+      "companyActualSha256": "19977757598cc8b6f896b6188fa83983d3bcdcf47dbb4aa435c04eb3132c5fcc",
+      "homeRawSourceSha256": "19977757598cc8b6f896b6188fa83983d3bcdcf47dbb4aa435c04eb3132c5fcc",
+      "homeRootNormalizedSha256": "19977757598cc8b6f896b6188fa83983d3bcdcf47dbb4aa435c04eb3132c5fcc",
+      "companyExpectedSha256": "19977757598cc8b6f896b6188fa83983d3bcdcf47dbb4aa435c04eb3132c5fcc",
+      "companyMatchesFrozenNormalizedHome": true,
+      "homeSourceFileReread": false
+    },
+    {
+      "file": "API-SPEC-callable-render-service.md",
+      "authority": "COMPANY_ACTUAL_SOURCE_FILE_VS_HOME_FROZEN_NORMALIZED_SOURCE_SHA",
+      "companyActualSha256": "7908622f41b3dec72ed617a58b2d5f6f75befc08622e8f9c8cba30b9fd9120d5",
+      "homeRawSourceSha256": "7908622f41b3dec72ed617a58b2d5f6f75befc08622e8f9c8cba30b9fd9120d5",
+      "homeRootNormalizedSha256": "7908622f41b3dec72ed617a58b2d5f6f75befc08622e8f9c8cba30b9fd9120d5",
+      "companyExpectedSha256": "7908622f41b3dec72ed617a58b2d5f6f75befc08622e8f9c8cba30b9fd9120d5",
+      "companyMatchesFrozenNormalizedHome": true,
+      "homeSourceFileReread": false
+    }
+  ],
+  "numericCpuSources": [
+    {
+      "file": "engine/src/core/hanatos.cpp",
+      "authority": "COMPANY_ACTUAL_CPU_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "4ab0a165cd1567dc551271d88f16d4739807a219d0a22fae778afcfde3a06be1",
+      "homeRecordedSha256": "4ab0a165cd1567dc551271d88f16d4739807a219d0a22fae778afcfde3a06be1",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/core/setup_cache.cpp",
+      "authority": "COMPANY_ACTUAL_CPU_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "ca1cdb1407fdd33b2ea5da92a01122f17f7f761459edc6b6fc77ed13a83997c6",
+      "homeRecordedSha256": "ca1cdb1407fdd33b2ea5da92a01122f17f7f761459edc6b6fc77ed13a83997c6",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/core/numeric.cpp",
+      "authority": "COMPANY_ACTUAL_CPU_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "de5f5fc26fa5362f878051fbeaf6e4a7f218a3b465f2042d4044f77192997bad",
+      "homeRecordedSha256": "de5f5fc26fa5362f878051fbeaf6e4a7f218a3b465f2042d4044f77192997bad",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/core/colour.cpp",
+      "authority": "COMPANY_ACTUAL_CPU_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "ee47ffc6987a25145279609979b137e4462251c7c80dcfa69ec8e567c57094da",
+      "homeRecordedSha256": "ee47ffc6987a25145279609979b137e4462251c7c80dcfa69ec8e567c57094da",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/core/profile.cpp",
+      "authority": "COMPANY_ACTUAL_CPU_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "dcce3289754e154f49f9c0f6cec5d9476bfdeefc9f7a12e5a2abcf8975d422f7",
+      "homeRecordedSha256": "dcce3289754e154f49f9c0f6cec5d9476bfdeefc9f7a12e5a2abcf8975d422f7",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/core/params.cpp",
+      "authority": "COMPANY_ACTUAL_CPU_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "ae083bdbfc1f6d23a4ceffd1ffb79f658e7fcc85476aedac3f18a6434bebe834",
+      "homeRecordedSha256": "ae083bdbfc1f6d23a4ceffd1ffb79f658e7fcc85476aedac3f18a6434bebe834",
+      "equalBySha": true
+    }
+  ],
+  "shaderSources": [
+    {
+      "file": "engine/src/shaders/vulkan/spk_affine3.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "b8bb35dd93c522c8a8ab7a0e726057df7303f03bc49239eade877dcb16f90c25",
+      "homeRecordedSha256": "b8bb35dd93c522c8a8ab7a0e726057df7303f03bc49239eade877dcb16f90c25",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_boost.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "045446aabee24c00c2169dd39e90766004b0b83b8cfe4c71323e81001c2da5b4",
+      "homeRecordedSha256": "045446aabee24c00c2169dd39e90766004b0b83b8cfe4c71323e81001c2da5b4",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_bw_correct.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "b1716ce9adcda0b8de0f200fd259587ac2e28731e572f62de32df286e4c6ea09",
+      "homeRecordedSha256": "b1716ce9adcda0b8de0f200fd259587ac2e28731e572f62de32df286e4c6ea09",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_cam16ucs_compress.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "3de0d152bc3b22c5b9d551fcae6f0c908411ee28fe0abf47dfd585acb8750050",
+      "homeRecordedSha256": "3de0d152bc3b22c5b9d551fcae6f0c908411ee28fe0abf47dfd585acb8750050",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_cctf_decode.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "6e47601110d4e4242dc1585e82df52548e5d1d710fe876e2cc803d01e3244336",
+      "homeRecordedSha256": "6e47601110d4e4242dc1585e82df52548e5d1d710fe876e2cc803d01e3244336",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_cctf_encode_matrix.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "c2ce005c38362fe63dc050391ab0c8d54afa4c060ccdcc7bc5c05da62be84014",
+      "homeRecordedSha256": "c2ce005c38362fe63dc050391ab0c8d54afa4c060ccdcc7bc5c05da62be84014",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_couplers_correction.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "e8daedcf301e445c62ca7842aadffa3f8df455b5eaa8c9e3c8c238398ab70f55",
+      "homeRecordedSha256": "e8daedcf301e445c62ca7842aadffa3f8df455b5eaa8c9e3c8c238398ab70f55",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_curves.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "bb04e62faec6be775c279237b30bd5336d8ca2735f45618bd5bcce2f837c5082",
+      "homeRecordedSha256": "bb04e62faec6be775c279237b30bd5336d8ca2735f45618bd5bcce2f837c5082",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_di_normalise.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "85282408ee6dc7734b61398674a6c69b5e5ef192c8f28f068056581895716d07",
+      "homeRecordedSha256": "85282408ee6dc7734b61398674a6c69b5e5ef192c8f28f068056581895716d07",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_edr.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "c9c5bb03a928b74e918be58457f18be37813ecfd9996e6d35b129ca30c084509",
+      "homeRecordedSha256": "c9c5bb03a928b74e918be58457f18be37813ecfd9996e6d35b129ca30c084509",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_geometry_resample_df.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "48b35146193f41586ad151b6fd4ad5efdc62b1d0564e0364394a7ea7b832827d",
+      "homeRecordedSha256": "48b35146193f41586ad151b6fd4ad5efdc62b1d0564e0364394a7ea7b832827d",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_glare_add.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "3f9c86557e31d18657215b8fde6abea08b4abc9b14a75578f30a2cc99724bf3f",
+      "homeRecordedSha256": "3f9c86557e31d18657215b8fde6abea08b4abc9b14a75578f30a2cc99724bf3f",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_grain_layer_one.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "3d37def546cde9ba4b761f679386db4e2516941d3468666ed29e8a34a9789e78",
+      "homeRecordedSha256": "3d37def546cde9ba4b761f679386db4e2516941d3468666ed29e8a34a9789e78",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_grain_layers.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "948cdca40636eb124ebb0f4391f3698587efb5efa6f850b9a78c130ecb0ceead",
+      "homeRecordedSha256": "948cdca40636eb124ebb0f4391f3698587efb5efa6f850b9a78c130ecb0ceead",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_grain_simple.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "ae1671c0ea7ed4c42a3ee532ac9ddfb314c2b6dd58ef3e3c7a0d5f567e058fc3",
+      "homeRecordedSha256": "ae1671c0ea7ed4c42a3ee532ac9ddfb314c2b6dd58ef3e3c7a0d5f567e058fc3",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_iir_df_acc.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "5fb7ec962063b01080132267af94794509a247399233b71dddc6f4f2679c316f",
+      "homeRecordedSha256": "5fb7ec962063b01080132267af94794509a247399233b71dddc6f4f2679c316f",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_lincomb3.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "b9fdbffd23a7bba359dbf937d5ebbaf4c548327490d327cd9035798c3693fc49",
+      "homeRecordedSha256": "b9fdbffd23a7bba359dbf937d5ebbaf4c548327490d327cd9035798c3693fc49",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_log10_guarded.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "2659864a10e626bc1423637582f97eccdb84e7bb5165d5224dfbc394a02f04c9",
+      "homeRecordedSha256": "2659864a10e626bc1423637582f97eccdb84e7bb5165d5224dfbc394a02f04c9",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_lognormal_field.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "1dabc132d5666b8b83868316d368c7b74181ff0169a75e4f43a21fd47b93a6a2",
+      "homeRecordedSha256": "1dabc132d5666b8b83868316d368c7b74181ff0169a75e4f43a21fd47b93a6a2",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_lut2d_cubic.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "523bebab08403386c176b611c62573e15abf391945882672ae5741c053696faf",
+      "homeRecordedSha256": "523bebab08403386c176b611c62573e15abf391945882672ae5741c053696faf",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_lut3d_trilinear.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "b84eafda44ec57808faf006cf86996279f759f735049b1a643ad08c7f61885f3",
+      "homeRecordedSha256": "b84eafda44ec57808faf006cf86996279f759f735049b1a643ad08c7f61885f3",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_math_probe.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "7fe1479359b2d64c7979876a80b68cf1cdd00700e85791e75232c30c620bf635",
+      "homeRecordedSha256": "7fe1479359b2d64c7979876a80b68cf1cdd00700e85791e75232c30c620bf635",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_matmul3.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "538b86a68a0fa561e65c6f960e7b426ec7b4a256c03bcd3a59e01574ec602101",
+      "homeRecordedSha256": "538b86a68a0fa561e65c6f960e7b426ec7b4a256c03bcd3a59e01574ec602101",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_mul.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "6b3199a59f4d115909f3d6b5764971d5bb177b83f05faecf15dfcbf26753885d",
+      "homeRecordedSha256": "6b3199a59f4d115909f3d6b5764971d5bb177b83f05faecf15dfcbf26753885d",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_print_exposure.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "fa8ad1822ec6b9c1be06646c178cdafae79fa951af32b693a7470f2acbf5d04e",
+      "homeRecordedSha256": "fa8ad1822ec6b9c1be06646c178cdafae79fa951af32b693a7470f2acbf5d04e",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_reduce_max.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "149c3524b45e448785f7906c581179a8aa0a6fc9246cd7b9c22bd948b8133c5c",
+      "homeRecordedSha256": "149c3524b45e448785f7906c581179a8aa0a6fc9246cd7b9c22bd948b8133c5c",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_rng.glsl",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "8e2034025675f171c871510e6ed5c421156debb0af6dff520cab7479cdd27aa0",
+      "homeRecordedSha256": "8e2034025675f171c871510e6ed5c421156debb0af6dff520cab7479cdd27aa0",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_rng_probe.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "11d38b10c9dc3617db7e861a336ceae7daa70366ffdac9b9eef3752c3b312178",
+      "homeRecordedSha256": "11d38b10c9dc3617db7e861a336ceae7daa70366ffdac9b9eef3752c3b312178",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_sep_fir_acc.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "b55f0a7bf6e538a0528a67520031f129b39e919b619d9a393da3c7e3f7404a83",
+      "homeRecordedSha256": "b55f0a7bf6e538a0528a67520031f129b39e919b619d9a393da3c7e3f7404a83",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_spectral_epilogue.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "38c265ca3c448e6c9d09c84f619fd7b1057070991831ff23c54a76175e604a54",
+      "homeRecordedSha256": "38c265ca3c448e6c9d09c84f619fd7b1057070991831ff23c54a76175e604a54",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_stride_sample.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "2aa9ad23586d6647c6428da1660b6bfa3d39b3aff292d1b17c837ccf1deba053",
+      "homeRecordedSha256": "2aa9ad23586d6647c6428da1660b6bfa3d39b3aff292d1b17c837ccf1deba053",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_take_rgb.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "952aa6e1d5ca0856590d6493756a81131fdce01bc791dc4c27ee1ec4eb12766d",
+      "homeRecordedSha256": "952aa6e1d5ca0856590d6493756a81131fdce01bc791dc4c27ee1ec4eb12766d",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_tc_b.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "8bcd6b002211217c9b4a32a43cd058aaf598424ba390ac91bacc727c46746665",
+      "homeRecordedSha256": "8bcd6b002211217c9b4a32a43cd058aaf598424ba390ac91bacc727c46746665",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_to_rgba16.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "2d8967797252f30c8c577e2764a5da82a04b4fa798184144c86266d44ff7cede",
+      "homeRecordedSha256": "2d8967797252f30c8c577e2764a5da82a04b4fa798184144c86266d44ff7cede",
+      "equalBySha": true
+    },
+    {
+      "file": "engine/src/shaders/vulkan/spk_zoom_bilinear_mirror.comp",
+      "authority": "COMPANY_ACTUAL_SHADER_SOURCE_VS_HOME_FROZEN_SHA",
+      "actualCompanySha256": "274470823996680e412bd97c7caf880fc58a233b159dfe32f451a3f0aef37c22",
+      "homeRecordedSha256": "274470823996680e412bd97c7caf880fc58a233b159dfe32f451a3f0aef37c22",
+      "equalBySha": true
+    }
+  ],
+  "companyRuntimeResourcesRead": 73,
+  "runtimeSpirvCount": 34,
+  "allSelectedRuntimeHashesMatchBothRecordedSides": true,
+  "relevantSpirv": [
+    {
+      "file": "vulkan/spk_tc_b.spv",
+      "actualCompanyRuntimeSha256": "02a90468abf11433432e580d92603437dfc985821934f060f9df01a3e5fd0165",
+      "homeRecordedRuntimeSha256": "02a90468abf11433432e580d92603437dfc985821934f060f9df01a3e5fd0165",
+      "sameHash": true,
+      "authority": "COMPANY_RUNTIME_FILE_VS_HOME_SELECTED_RUNTIME_SEALED_SHA"
+    },
+    {
+      "file": "vulkan/spk_lut2d_cubic.spv",
+      "actualCompanyRuntimeSha256": "46c801214f6d2005e04325e782f587b1ed6cd22b4091ef1ce1d6e1174ff49990",
+      "homeRecordedRuntimeSha256": "46c801214f6d2005e04325e782f587b1ed6cd22b4091ef1ce1d6e1174ff49990",
+      "sameHash": true,
+      "authority": "COMPANY_RUNTIME_FILE_VS_HOME_SELECTED_RUNTIME_SEALED_SHA"
+    },
+    {
+      "file": "vulkan/spk_affine3.spv",
+      "actualCompanyRuntimeSha256": "17f1d8322e569ac4dac0d78b10d61669f9d4220c91d690d2f96299615427bbdf",
+      "homeRecordedRuntimeSha256": "17f1d8322e569ac4dac0d78b10d61669f9d4220c91d690d2f96299615427bbdf",
+      "sameHash": true,
+      "authority": "COMPANY_RUNTIME_FILE_VS_HOME_SELECTED_RUNTIME_SEALED_SHA"
+    }
+  ],
+  "mathModeAuthority": "selected-math-mode.jsonl smallfiles directlyread bothsides, all3records exact; nativecapabilities fromsealedcapture reports not a freshGPUquery",
+  "modeInterpretation": "Three relevant shaders have no constant_id0, equalfusedspecialization record is not a proof of bitparity or hardware-driver isolation",
+  "builtVsRuntimeBoundary": "Home internalbuilt spk_cctf_decode differs from selected frozenruntime due oldBTpatch; inputdecode false, noBTcall. Compare selected73runtime files, not newly built directory. No build or shader change now."
+}

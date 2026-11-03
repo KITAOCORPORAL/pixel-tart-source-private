@@ -1,0 +1,3 @@
+# Metadata only. Restricted complete setup arrays remain in authorized local handoff.
+*.json -text whitespace=cr-at-eol,-blank-at-eof
+*.txt -text whitespace=cr-at-eol,-blank-at-eof

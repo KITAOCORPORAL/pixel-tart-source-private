@@ -1,3 +1,17 @@
+# 公司既有capture CPU收口并停止（2026-11-03，Asia/Shanghai）
+
+fetch家庭`research/color-engine-home-scale-20261102@0fa710e606b962efac66727215fb6c8f0c76a5ed`准确，无增量。公司旧树099b2fb8clean/unpushed0，另建`research/color-engine-company-scale-closure-20261103`，旧公司/家庭/失败与历史时间保留。
+
+仅CPU实际读公司完整E:/Kitao-Research/color-engine-scale-localization-20261102-v2/gray-once，先核身份/17观察hash后已有completevalidator通过。公司实际sensitivity/LUTdoubleSHA与home封存不同、floatLUTupload/deviceSHA与home封存相同；home完整4数组未迁移，差量/首坐标保持null，不调用fullpairedcomparator冒充闭环。公开小数组直接复读确认tc_b输出tc487/brightness82不同；158同tc/b像素中156仍upsample变429分量。保留已定位层级，不回compound、不只归LUT，不拆shader指令。
+
+21文件公司完整localhandoffcopy+shape/format/hash清单已核验，restrictedLUT/sensitivity仍只本地不进Git。检查只授权研究根顶层/相关读回目录和home已知N路径，无其它盘/私人目录扫描，无home重生成。
+
+新增engine/GPU/readback/RAW/20MP/六图/stream/BT/候选/build/sourcegeneration全部0。当前无实现错误证据：**保留跨环境数值差异及未决原因，暂不修改像素数学；本阶段交付后停止数值定位扩张。** 不把max1code外推所有照片，不把跨GPUbitexact当其它研究前提。SharedIncrementEnvelopeUnsharpV1继续defaultoff/NOT_ADMITTED，产品src/UI/default/PV456/任务桥不改，许可单列。
+
+后续摄影评价的匿名人工偏好、独立样本与细节/肤色/噪声目标单列，不自动重渲六图或扩精度实验。权威COMPANY_FILM_SCALE_CPU_CLOSURE_20261103、CAPABILITIES_FILM_SCALE_CPU_CLOSURE_20261103和company-scale-cpu-closure-20261103。本地材料E:/Kitao-Research/color-engine-scale-cpu-closure-20261103/readback，最终LOCAL_HEAD/REMOTE_HEAD实际push后读回。
+
+---
+
 # 家庭一次gray子阶段观测（2026-11-02，Asia/Shanghai）
 
 接公司research/color-engine-company-diagnostic-20261102@099b2fb8dbd43fa872703cef84e04b3776c96aab，新家庭独立research/color-engine-home-scale-20261102，旧家庭93b553d1clean/unpushed0保留。同版tap/Release/原runtime已冻结；只runner身份采集在NVML UnknownError时保留失败并读取真实WMI家庭GPU/driver，未改数字路径。

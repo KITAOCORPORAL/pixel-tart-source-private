@@ -1,0 +1,121 @@
+{
+  "version": "CompanyExistingCapturePrevalidationV1",
+  "companyCapture": "E:\\Kitao-Research\\color-engine-scale-localization-20261102-v2\\gray-once",
+  "actualRole": "company",
+  "actualRecordedMachine": "PC-20250309WEIZ",
+  "recordedGPU": "NVIDIA GeForce GTX 1650, 572.70",
+  "originalWholeRenderRecord": {
+    "engineCreate": 1,
+    "open": 1,
+    "wholeRender": 1,
+    "streamRender": 0,
+    "btProbe": 0
+  },
+  "newGpuCalls": 0,
+  "receiptBindingMatches": true,
+  "outputHashMatches": true,
+  "observationChecks": [
+    {
+      "file": "taps/00-input.device.f32",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/01-tc.device.f32",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/02-brightness.device.f32",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/03-upsample.device.f32",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/04-exposure.device.f32",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/exposure-offset.cpu.f64",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/exposure-offset.uploaded.f32",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/exposure-scale.cpu.f64",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/exposure-scale.uploaded.f32",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/film-sensitivity.cpu.f64",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/selected-math-mode.jsonl",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/tc-b-matrix.cpu.f64",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/tc-b-matrix.device.f32",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/tc-b-matrix.uploaded.f32",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/tc-lut.cpu.f64",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/tc-lut.device.f32",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    },
+    {
+      "file": "taps/tc-lut.uploaded.f32",
+      "exists": true,
+      "lengthMatches": true,
+      "shaMatches": true
+    }
+  ]
+}

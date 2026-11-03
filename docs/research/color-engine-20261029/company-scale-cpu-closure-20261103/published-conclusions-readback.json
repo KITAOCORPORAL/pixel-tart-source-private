@@ -1,0 +1,65 @@
+{
+  "version": "HomeConclusionsCompanyReadbackV1",
+  "GPUCalls": 0,
+  "smallArrayReportsRecomputedFromAccessibleBothSides": [
+    {
+      "file": "taps/tc-b-matrix.cpu.f64",
+      "sameDescriptiveStatsAsHomeCommittedReport": true
+    },
+    {
+      "file": "taps/tc-b-matrix.uploaded.f32",
+      "sameDescriptiveStatsAsHomeCommittedReport": true
+    },
+    {
+      "file": "taps/tc-b-matrix.device.f32",
+      "sameDescriptiveStatsAsHomeCommittedReport": true
+    },
+    {
+      "file": "taps/00-input.device.f32",
+      "sameDescriptiveStatsAsHomeCommittedReport": true
+    },
+    {
+      "file": "taps/01-tc.device.f32",
+      "sameDescriptiveStatsAsHomeCommittedReport": true
+    },
+    {
+      "file": "taps/02-brightness.device.f32",
+      "sameDescriptiveStatsAsHomeCommittedReport": true
+    },
+    {
+      "file": "taps/03-upsample.device.f32",
+      "sameDescriptiveStatsAsHomeCommittedReport": true
+    },
+    {
+      "file": "taps/exposure-scale.cpu.f64",
+      "sameDescriptiveStatsAsHomeCommittedReport": true
+    },
+    {
+      "file": "taps/exposure-offset.cpu.f64",
+      "sameDescriptiveStatsAsHomeCommittedReport": true
+    },
+    {
+      "file": "taps/exposure-scale.uploaded.f32",
+      "sameDescriptiveStatsAsHomeCommittedReport": true
+    },
+    {
+      "file": "taps/exposure-offset.uploaded.f32",
+      "sameDescriptiveStatsAsHomeCommittedReport": true
+    },
+    {
+      "file": "taps/04-exposure.device.f32",
+      "sameDescriptiveStatsAsHomeCommittedReport": true
+    }
+  ],
+  "tcAndBrightnessSameDispatch": "preserved",
+  "firstDirectPairedOutput": "spk_tc_b, not compound-only, no internal instruction order claim",
+  "sameInputUpsample": {
+    "pixelsWithSameTcAndBrightness": 158,
+    "changedUpsamplePixels": 156,
+    "changedUpsampleComponents": 429,
+    "maxAbs": 1.1920928955078125e-07
+  },
+  "restrictedDoubleStats": "NULL_NO_HOME_FULL_ARRAYS",
+  "homeCompleteValidationInThisSession": "NOT_RUN_HOME_FULL_MISSING",
+  "noClaimFullDualCaptureComparison": true
+}
