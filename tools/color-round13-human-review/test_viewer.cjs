@@ -1,0 +1,58 @@
+/* Synthetic UI smoke only. Never run this against private photography. */
+'use strict';
+const {chromium} = require('playwright');
+const fs = require('fs');
+const path = require('path');
+const {pathToFileURL} = require('url');
+const assert = require('assert/strict');
+(async()=>{
+ const root=path.resolve(process.argv[2]||'');
+ if(path.basename(root)!=='synthetic-ui-test')throw new Error('Only the generated synthetic-ui-test directory is allowed');
+ const browser=await chromium.launch({channel:'msedge',headless:true,args:['--disable-gpu']});
+ try{
+  const context=await browser.newContext({viewport:{width:1360,height:1000},acceptDownloads:true});
+  const page=await context.newPage();
+  const errors=[],network=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  page.on('request',r=>{if(/^https?:/.test(r.url()))network.push(r.url());});
+  await page.goto(pathToFileURL(path.join(root,'review.html')).href);
+  await page.locator('#scene option').last().waitFor({state:'attached'});
+  assert.equal(await page.locator('#error').textContent(),'');
+  assert.equal(await page.locator('#scene option').count(),6);
+  for(const id of ['detail','dark_halo','color_edge','noise','preference'])assert.equal(await page.locator('#'+id).inputValue(),'');
+  await page.locator('#one').click();
+  await page.locator('#viewport').evaluate(v=>{v.scrollLeft=187;v.scrollTop=93;});
+  const before=await page.locator('#viewport').evaluate(v=>[v.scrollLeft,v.scrollTop]);
+  const geometry=await page.locator('#stage').boundingBox();
+  assert.equal(geometry.width,2400);
+  assert.equal(geometry.height,1800);
+  await page.locator('#y').click();
+  assert.deepEqual(await page.locator('#viewport').evaluate(v=>[v.scrollLeft,v.scrollTop]),before);
+  assert.equal(await page.locator('#imageX').isVisible(),false);
+  assert.equal(await page.locator('#imageY').isVisible(),true);
+  assert.equal((await page.locator('#stage').boundingBox()).width,geometry.width);
+  await page.locator('#viewport').focus();await page.keyboard.press('Space');
+  assert.equal(await page.locator('#imageX').isVisible(),true);
+  await page.locator('#goRoi').click();
+  assert.equal((await page.locator('#stage').boundingBox()).width,2400);
+  const downloadPromise=page.waitForEvent('download');await page.locator('#export').click();
+  const download=await downloadPromise;
+  const answerPath=path.join(root,'synthetic-blank-export.json');await download.saveAs(answerPath);
+  const answer=JSON.parse(fs.readFileSync(answerPath,'utf8'));
+  assert.equal(answer.humanPreference,'NOT_RUN_AWAITING_HUMAN');
+  assert.equal(answer.answeredItems,0);
+  assert(answer.records.every(r=>Object.values(r.answers).every(x=>x===null)&&r.reason===null));
+  assert(!JSON.stringify(answer).includes('candidate'));
+  await page.locator('#next').click();assert.equal(await page.locator('#scene').inputValue(),'1');
+  await page.locator('#fit').click();
+  const fitted=await page.locator('#stage').boundingBox();
+  assert(fitted.width<=await page.locator('#viewport').evaluate(v=>v.clientWidth));
+  assert.equal(await page.locator('#imageX').evaluate(v=>getComputedStyle(v).filter),'none');
+  await page.screenshot({path:path.join(root,'synthetic-ui-desktop.png'),fullPage:true});
+  await page.setViewportSize({width:390,height:844});await page.screenshot({path:path.join(root,'synthetic-ui-mobile.png'),fullPage:true});
+  assert.equal(await page.locator('body').evaluate(v=>v.scrollWidth<=window.innerWidth),true);
+  assert.deepEqual(errors,[]);assert.deepEqual(network,[]);
+  const report={version:'Round13SyntheticViewerSmokeV1',pass:true,browser:browser.version(),scope:'Generated tiny nonphotographic fixture stretched only for UI geometry testing; not the frozen six photos or a pixel-candidate render',checks:['six scenes','answers initially empty','100% geometry','X/Y same scale and scroll','keyboard switch','existing ROI control','blank local export remains NOT_RUN','scene navigation','fit','identical no-filter display','desktop/mobile layout','zero page errors','zero http requests'],realHumanAnswers:0,realPhotographyEvaluated:false};
+  fs.writeFileSync(path.join(root,'ui-smoke.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

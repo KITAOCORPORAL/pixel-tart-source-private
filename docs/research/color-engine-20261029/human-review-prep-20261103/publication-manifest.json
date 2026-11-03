@@ -1,0 +1,93 @@
+{
+  "version": "Round13HumanReviewPreparationPublicationManifestV1",
+  "baseSha": "9b8c52715b45540ffaf1d1fc99e0a7bd832678fc",
+  "hashBasis": "Git index/blob bytes, not platform-dependent worktree line endings",
+  "selfExcluded": true,
+  "remoteReceiptExcluded": true,
+  "fileCount": 16,
+  "files": [
+    {
+      "path": "docs/research/color-engine-20261029/CAPABILITIES_ROUND13_HUMAN_REVIEW_20261103.md",
+      "bytes": 1838,
+      "sha256": "18c3c96769fd243fe08bf322529b4b8c44de69dad60a7efdcc0ff45a8233dcd2"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/CHECKPOINT.md",
+      "bytes": 29414,
+      "sha256": "a342ce243d6d75fa406cbe4225f97d0a266a9fb64209769b6637389ef0b1632e"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/ROUND13_HUMAN_REVIEW_PREPARATION_20261103.md",
+      "bytes": 6635,
+      "sha256": "7a21ce7ab55554ee4f55ec2c9a7172561e80bd1a6aa1c70a423977bc85a4dcd7"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/human-review-prep-20261103/.gitattributes",
+      "bytes": 25,
+      "sha256": "eee31f63511ef7e43e7afe24a41003b895ad633fd32b01fbe82d0e5509544cd5"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/human-review-prep-20261103/MISSING_FILES_COMPANY_EXPLICIT_PATHS.json",
+      "bytes": 16584,
+      "sha256": "784104a7c3aaa6469f8754cc92ec5f66983f09e3e0b8747104fb436791e9f2e0"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/human-review-prep-20261103/MISSING_FILES_HOME_PATHS.json",
+      "bytes": 17844,
+      "sha256": "13c76227aec9233d6d743b38f80957d7ccad1b633be08fb3ec9790ff6f09cb34"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/human-review-prep-20261103/execution-receipt.json",
+      "bytes": 3860,
+      "sha256": "a5c945140547fbd25000035d792fdd98fbc49eab55a630ed5c73a88fbc21d3e6"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/human-review-prep-20261103/synthetic-ui-smoke.json",
+      "bytes": 665,
+      "sha256": "f23aed5e6169b1d5a339d95449935aa458a2340effc3dd4ed368bf22d53f271b"
+    },
+    {
+      "path": "docs/research/color-engine-20261029/human-review-prep-20261103/unit-tests.txt",
+      "bytes": 1278,
+      "sha256": "bf872a56e06fca2623b4fd4aa704c77dc03f070a006dc3cc29b7c5e84e72750b"
+    },
+    {
+      "path": "tools/color-round13-human-review/.gitattributes",
+      "bytes": 66,
+      "sha256": "d5b012cc60796f0fbe048223f4ff43912ca28bb79d21caf2267cd9dd1b8d13b1"
+    },
+    {
+      "path": "tools/color-round13-human-review/.gitignore",
+      "bytes": 19,
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"
+    },
+    {
+      "path": "tools/color-round13-human-review/README.md",
+      "bytes": 5607,
+      "sha256": "c944060a3549de1cdb675a3ce444984e03e32aae6e9ae261ef8484e0edc56426"
+    },
+    {
+      "path": "tools/color-round13-human-review/prepare_review.py",
+      "bytes": 11595,
+      "sha256": "31618fe787e9b5a5b29e417ae0e6271b2b0d9bb9cc91754d332ca2f6c51cfd54"
+    },
+    {
+      "path": "tools/color-round13-human-review/test_prepare_review.py",
+      "bytes": 6969,
+      "sha256": "dac28d7224336bb202d1b16d976b646fe28cd7536d68dcae7ba1a9035c3da342"
+    },
+    {
+      "path": "tools/color-round13-human-review/test_viewer.cjs",
+      "bytes": 4307,
+      "sha256": "a7a906c6c5ab3d20f8cd45c4506bbe83bb5b541790b907312e91788134bc7119"
+    },
+    {
+      "path": "tools/color-round13-human-review/viewer.html",
+      "bytes": 10537,
+      "sha256": "374fec9e4b31902d967f83383eeb4016ca50d148c1d729d66906057e01a8c626"
+    }
+  ],
+  "scope": "Self-authored local viewer/validator/tests, documentation and metadata only; no private photographs/evaluation images, arrays, binaries, restricted LUT or source resources",
+  "oldCheckpointBody": "UNCHANGED_SUFFIX",
+  "oldProductToolsAndPixelCode": "UNCHANGED"
+}

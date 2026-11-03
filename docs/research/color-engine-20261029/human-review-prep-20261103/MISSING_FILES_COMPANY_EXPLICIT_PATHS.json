@@ -1,0 +1,424 @@
+{
+  "version": "Round13HumanReviewAvailabilityV1",
+  "readOnly": true,
+  "root": "E:\\Kitao-Research\\round13-unsharp-v1",
+  "stages": "E:\\Kitao-Research\\round11\\natural-stage-finite-v1",
+  "requiredFiles": [
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\review-v1\\anonymous-key.json",
+      "role": "anonymous-key",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round11\\natural-stage-finite-v1\\canon600d\\0009-print_linear-799-1200-3.f32",
+      "role": "input-f32",
+      "expectedSha256": "4a8eee1f3c45a68b576f6e630517e5224d19d4eb7b6d6474aa0a74002d4287e6",
+      "bytes": 11505600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon600d-whole\\legacy.f32",
+      "role": "output",
+      "expectedSha256": "ab439d20f023348b2505ba97ef4fc9a9fa44bd78b234948319716126e1d0a51e",
+      "bytes": 11505600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon600d-whole\\candidate.f32",
+      "role": "output",
+      "expectedSha256": "e6502c57b51840a523a2ed1b726465fcd7e22581d4f695c3dd5dd9d4202564a0",
+      "bytes": 11505600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon600d-whole\\legacy-encoded.f32",
+      "role": "output",
+      "expectedSha256": "ec8bffaa7e84b8b86683563b3f8d9733f56d3ec89eab760d9c3a0eb5f3c838f6",
+      "bytes": 11505600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon600d-whole\\candidate-encoded.f32",
+      "role": "output",
+      "expectedSha256": "f2ba7d6bde18030b34fd69d074bcf98d3a46a0c959fca8afe15381c09602b7bf",
+      "bytes": 11505600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon600d-whole\\legacy.rgba16",
+      "role": "output",
+      "expectedSha256": "b5390343a92bcb96c974b9c03c9d40c50595a8003aa8397daa8bd611609ae350",
+      "bytes": 7670400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon600d-whole\\candidate.rgba16",
+      "role": "output",
+      "expectedSha256": "9e82001f7586f7c6dfcc24da5e4090debd852e433b19063e8d8d1d2e537519e4",
+      "bytes": 7670400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon600d-A.png",
+      "role": "display-png",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon600d-B.png",
+      "role": "display-png",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\review-v1\\canon600d-crop-anonymous.png",
+      "role": "anonymous-crop",
+      "expectedSha256": "8b6cbcddde9dda4e78ef3fb773d9d8c4107425355f8f30ff2df2fff6fd13b0b7",
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round11\\natural-stage-finite-v1\\canon6d\\0021-print_linear-1200-801-3.f32",
+      "role": "input-f32",
+      "expectedSha256": "e9012be03535f4294e012ada0b0a25a8047b8e758c232bad59ec11d1e5b8c5ec",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon6d-whole\\legacy.f32",
+      "role": "output",
+      "expectedSha256": "ea03c21a5d1b336702680b4d88dba59c9d4e8c13eb97899e5ae8afeb2992d113",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon6d-whole\\candidate.f32",
+      "role": "output",
+      "expectedSha256": "f1b55f04abb295424ee363ce17fcf38d79c16ff5599277b53f99aebc502c2488",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon6d-whole\\legacy-encoded.f32",
+      "role": "output",
+      "expectedSha256": "70f92810fb0c9652067db184849161dd318079c00ea4981375c7ccf89d905ad6",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon6d-whole\\candidate-encoded.f32",
+      "role": "output",
+      "expectedSha256": "4087ee00cdbc5b1f8e3ae5f7cb43b46294ede4b3f08491b2dd6745d13b20d410",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon6d-whole\\legacy.rgba16",
+      "role": "output",
+      "expectedSha256": "1f5487ba3f01ab00b0370420d3f86860479360e75c8bba494dbabfa139bce59e",
+      "bytes": 7689600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon6d-whole\\candidate.rgba16",
+      "role": "output",
+      "expectedSha256": "ac67f0bb7b68d6e06b853f2bdbc2c803fa0be454e5a990878cc4d4d0835b0c6f",
+      "bytes": 7689600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon6d-A.png",
+      "role": "display-png",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon6d-B.png",
+      "role": "display-png",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\review-v1\\canon6d-crop-anonymous.png",
+      "role": "anonymous-crop",
+      "expectedSha256": "a556d1340bcfcaddc807225643491476a6852f71467ec0d47e2edc741d816bb9",
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round11\\natural-stage-finite-v1\\canon5d3\\0033-print_linear-801-1200-3.f32",
+      "role": "input-f32",
+      "expectedSha256": "0a9c620e6048429123fbf33631fc01b6654aeecb782a20838b9c2e4475f1d176",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon5d3-whole\\legacy.f32",
+      "role": "output",
+      "expectedSha256": "b90ee1dc1dc68cf5281080173b1a91a77cf8bd58b18c74364fb767fdb358221f",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon5d3-whole\\candidate.f32",
+      "role": "output",
+      "expectedSha256": "d834181fa009cf6fe8e2f619519cb14431c2e340684bbf0d67bc6a858b0a2093",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon5d3-whole\\legacy-encoded.f32",
+      "role": "output",
+      "expectedSha256": "02dbea93ffc21dded559fe3321975375c9bac1cda655691a0953b4b6ea1a946e",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon5d3-whole\\candidate-encoded.f32",
+      "role": "output",
+      "expectedSha256": "985d4aa4b19b28b89d5b90d2fd31b645cc2c3bf8b7f812f1f9bba601ee70a1af",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon5d3-whole\\legacy.rgba16",
+      "role": "output",
+      "expectedSha256": "24a031363f2a7114c9f5828c0eae5e7aa3cd5f038aae31f0144e14c91eafbec9",
+      "bytes": 7689600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon5d3-whole\\candidate.rgba16",
+      "role": "output",
+      "expectedSha256": "bace636c58c9bccd4d3d9da6980b12fb0878c321abf40fff66cc6284125b156e",
+      "bytes": 7689600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon5d3-A.png",
+      "role": "display-png",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canon5d3-B.png",
+      "role": "display-png",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\review-v1\\canon5d3-crop-anonymous.png",
+      "role": "anonymous-crop",
+      "expectedSha256": "59d4b7bec8340af38fea63619457a7a3393cf074bef9c26890ef3b22f9c784ff",
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round11\\natural-stage-finite-v1\\nikond5100\\0045-print_linear-795-1200-3.f32",
+      "role": "input-f32",
+      "expectedSha256": "4326920905564480b7c3b3327566c06c38ddea0aca689debecd827c0a67ac3f5",
+      "bytes": 11448000,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\nikond5100-whole\\legacy.f32",
+      "role": "output",
+      "expectedSha256": "29466d4d50e02d9f98c0bfdcc70ec46c4a4b93dc1868b3a114cf329f84ea5904",
+      "bytes": 11448000,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\nikond5100-whole\\candidate.f32",
+      "role": "output",
+      "expectedSha256": "431bd148eb94fe32bf61ac13f2094a66bbdfbbb5cbdbc881e593971f3a01ae97",
+      "bytes": 11448000,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\nikond5100-whole\\legacy-encoded.f32",
+      "role": "output",
+      "expectedSha256": "3bb1b47118b8f628e0d61ccfab1af700449982adecccba3ea1065b019a30a55a",
+      "bytes": 11448000,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\nikond5100-whole\\candidate-encoded.f32",
+      "role": "output",
+      "expectedSha256": "d5d82cc574949cc560c5f5076a2cf5f193c61c6c8fed03db83f5bb64faba2eb4",
+      "bytes": 11448000,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\nikond5100-whole\\legacy.rgba16",
+      "role": "output",
+      "expectedSha256": "834f2677017b61b4b6e9ded27f021a38ebd39ae6aa48e3a589a271690ac77cdd",
+      "bytes": 7632000,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\nikond5100-whole\\candidate.rgba16",
+      "role": "output",
+      "expectedSha256": "4acdabba26931c8929b8fea786d829130502e7e7a0f2c274f5c6897958f46c2e",
+      "bytes": 7632000,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\nikond5100-A.png",
+      "role": "display-png",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\nikond5100-B.png",
+      "role": "display-png",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\review-v1\\nikond5100-crop-anonymous.png",
+      "role": "anonymous-crop",
+      "expectedSha256": "36cac05790ad651cd9ff7d2f30048cf8fdb3da41ce009b00eb6ee41c94a3afec",
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round11\\natural-stage-finite-v1\\sonynex5r\\0057-print_linear-799-1200-3.f32",
+      "role": "input-f32",
+      "expectedSha256": "6b86fc4caeaf19f395f0f8910248a6a1430a22a3914465c2b4981d856f9ce0b3",
+      "bytes": 11505600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\sonynex5r-whole\\legacy.f32",
+      "role": "output",
+      "expectedSha256": "76dc9f3542f60c689b2d988169544d4ddf36439707c96aa6091c56de5a88cbac",
+      "bytes": 11505600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\sonynex5r-whole\\candidate.f32",
+      "role": "output",
+      "expectedSha256": "3afde65886f4d540222ff23d570b186da5c104ca0a31457aa50f8278aa5ae00e",
+      "bytes": 11505600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\sonynex5r-whole\\legacy-encoded.f32",
+      "role": "output",
+      "expectedSha256": "d4480bccb97e9751b8a92ef9e668fde7e90080ef34365e37096e0b78508fe7e1",
+      "bytes": 11505600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\sonynex5r-whole\\candidate-encoded.f32",
+      "role": "output",
+      "expectedSha256": "7fe45312232835ec87bdd5ca444a6d048a2349417e4b827b85bc9c35b0e7dc95",
+      "bytes": 11505600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\sonynex5r-whole\\legacy.rgba16",
+      "role": "output",
+      "expectedSha256": "226d9309acb3f405908f6b62fafbfbbbc7b751a2cdb78caf3c55d4c9458125e6",
+      "bytes": 7670400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\sonynex5r-whole\\candidate.rgba16",
+      "role": "output",
+      "expectedSha256": "cbf89078685be2e0b1fd4b98e18957f645cfb8ce73ca999035e689316b71db69",
+      "bytes": 7670400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\sonynex5r-A.png",
+      "role": "display-png",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\sonynex5r-B.png",
+      "role": "display-png",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\review-v1\\sonynex5r-crop-anonymous.png",
+      "role": "anonymous-crop",
+      "expectedSha256": "20fa112ed8bdf62c2af9d40f5401639059633d745822083c41a8273d4f18a747",
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round11\\natural-stage-finite-v1\\canonr6\\0069-print_linear-801-1200-3.f32",
+      "role": "input-f32",
+      "expectedSha256": "8a4497481e144e8e795805b241db5bb775091d1db712d16d4b4cbdcbee95d050",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canonr6-whole\\legacy.f32",
+      "role": "output",
+      "expectedSha256": "20d216fe5908c94c1d6e0bc4259a5596cdfb5dd14aa146a9d76b6e98e49e7111",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canonr6-whole\\candidate.f32",
+      "role": "output",
+      "expectedSha256": "f33f5357aacc970ca6d4738d08ebfc28676e78787279bde3880c634becb0306c",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canonr6-whole\\legacy-encoded.f32",
+      "role": "output",
+      "expectedSha256": "8aa143111fa2bbaf0298aaea9734183223c99a3d1dbe0e1d651ed97be830ba2b",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canonr6-whole\\candidate-encoded.f32",
+      "role": "output",
+      "expectedSha256": "8a7fc2acbdb1d9727ea8ede20bc1156099ad199ec9cfd5dd8bb8f779ed11fd00",
+      "bytes": 11534400,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canonr6-whole\\legacy.rgba16",
+      "role": "output",
+      "expectedSha256": "62afe385eba6ec67f7bf4d5d4c57cf7af15aa21f161b9600e0936ced1111deb4",
+      "bytes": 7689600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canonr6-whole\\candidate.rgba16",
+      "role": "output",
+      "expectedSha256": "6c7d3aad2029d5873465b96fa99a368317f4467459e6c5998a87318decc125b4",
+      "bytes": 7689600,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canonr6-A.png",
+      "role": "display-png",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\candidate-natural\\canonr6-B.png",
+      "role": "display-png",
+      "expectedSha256": null,
+      "exists": false
+    },
+    {
+      "path": "E:\\Kitao-Research\\round13-unsharp-v1\\review-v1\\canonr6-crop-anonymous.png",
+      "role": "anonymous-crop",
+      "expectedSha256": "1ad5a34ba338b800c629558592f4ce8ba2c3a778545f9ce039905ed8a6a7a3dc",
+      "exists": false
+    }
+  ],
+  "requiredCount": 61,
+  "missingCount": 61,
+  "humanPreference": "NOT_RUN_AWAITING_HUMAN",
+  "independentValidation": "NOT_RUN_DEVELOPMENT_ONLY",
+  "product": "DEFAULT_OFF_NOT_ADMITTED",
+  "observedAt": "2026-11-03T14:08:38.723319+08:00",
+  "timezone": "Asia/Shanghai",
+  "scope": "Company access to explicit expected paths only. This is not an assertion that the home machine lost its files. No other drive or recursive photo search."
+}

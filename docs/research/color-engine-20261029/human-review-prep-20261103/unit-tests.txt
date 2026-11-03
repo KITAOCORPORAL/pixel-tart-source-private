@@ -1,0 +1,13 @@
+test_bundle_stays_private_no_overwrite_and_no_answers_prefilled (__main__.FrozenReviewTests.test_bundle_stays_private_no_overwrite_and_no_answers_prefilled) ... ok
+test_finite_and_size_defense_even_if_test_hash_is_rebound (__main__.FrozenReviewTests.test_finite_and_size_defense_even_if_test_hash_is_rebound) ... ok
+test_input_and_output_hash_drift_refused (__main__.FrozenReviewTests.test_input_and_output_hash_drift_refused) ... ok
+test_key_and_existing_crop_drift_refused (__main__.FrozenReviewTests.test_key_and_existing_crop_drift_refused) ... ok
+test_missing_files_exact_and_no_output_or_placeholder (__main__.FrozenReviewTests.test_missing_files_exact_and_no_output_or_placeholder) ... ok
+test_png_pixel_change_and_per_version_metadata_refused (__main__.FrozenReviewTests.test_png_pixel_change_and_per_version_metadata_refused) ... ok
+test_real_frozen_manifest_has_only_six_development_cases_and_61_paths (__main__.FrozenReviewTests.test_real_frozen_manifest_has_only_six_development_cases_and_61_paths) ... ok
+test_six_cases_validate_and_embed_original_anonymous_png_bytes (__main__.FrozenReviewTests.test_six_cases_validate_and_embed_original_anonymous_png_bytes) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.205s
+
+OK

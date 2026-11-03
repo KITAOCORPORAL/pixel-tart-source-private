@@ -1,0 +1,23 @@
+{
+  "version": "Round13SyntheticViewerSmokeV1",
+  "pass": true,
+  "browser": "92.0.902.67",
+  "scope": "Generated tiny nonphotographic fixture stretched only for UI geometry testing; not the frozen six photos or a pixel-candidate render",
+  "checks": [
+    "six scenes",
+    "answers initially empty",
+    "100% geometry",
+    "X/Y same scale and scroll",
+    "keyboard switch",
+    "existing ROI control",
+    "blank local export remains NOT_RUN",
+    "scene navigation",
+    "fit",
+    "identical no-filter display",
+    "desktop/mobile layout",
+    "zero page errors",
+    "zero http requests"
+  ],
+  "realHumanAnswers": 0,
+  "realPhotographyEvaluated": false
+}

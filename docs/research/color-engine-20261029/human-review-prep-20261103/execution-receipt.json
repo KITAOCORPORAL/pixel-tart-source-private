@@ -1,0 +1,87 @@
+{
+  "version": "Round13HumanReviewPreparationReceiptV1",
+  "observedAt": "2026-11-03T14:08:38.723319+08:00",
+  "timezone": "Asia/Shanghai",
+  "baseBranch": "research/color-engine-company-scale-closure-20261103",
+  "baseSha": "9b8c52715b45540ffaf1d1fc99e0a7bd832678fc",
+  "fetchIncrementCount": 0,
+  "branch": "research/color-engine-round13-human-review-20261103",
+  "startingWorktree": "CLEAN_REUSED_INDEPENDENT_COMPANY_RESEARCH_CHECKOUT",
+  "localOutput": "E:\\Kitao-Research\\color-engine-round13-human-review-20261103",
+  "companyAvailability": "NOT_FOUND_IN_CHECKED_AUTHORIZED_LOCATIONS",
+  "checkedLocations": [
+    "E:/Kitao-Research immediate children (names only)",
+    "E:/Kitao-Research/round13-unsharp-v1",
+    "E:/Kitao-Research/color-engine-round13-20261101",
+    "N:/pixart/ColorResearchHome-20261030/round13-unsharp-v1"
+  ],
+  "scanLimit": "No other drive scan, no recursive search, no substitute photos or migration",
+  "requiredFileCounts": {
+    "stageInputs": 6,
+    "frozenWholeOutputs": 36,
+    "originalFullPng": 12,
+    "existingAnonymousCrop": 6,
+    "existingAnonymousKey": 1,
+    "total": 61
+  },
+  "companyExplicitPaths": {
+    "required": 61,
+    "missing": 61,
+    "exitCode": 2,
+    "outputDirectoryCreated": false
+  },
+  "homePathsFromCompany": {
+    "required": 61,
+    "missing": 61,
+    "exitCode": 2,
+    "homeMachineCurrentState": "NOT_OBSERVED"
+  },
+  "tests": {
+    "offlineGeneratedFileTests": 8,
+    "offlineGeneratedFileTestsPassed": 8,
+    "syntheticBrowserSmoke": "PASS",
+    "humanAnswersWritten": 0,
+    "blankExportNullItems": 30,
+    "realSixPhotoViewerGeneration": "NOT_RUN_MISSING_PRIVATE_FILES"
+  },
+  "tools": {
+    "python": "3.13.13 (tags/v3.13.13:01104ce, Apr  7 2026, 19:25:48) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.4.6",
+    "pillow": "12.2.0",
+    "node": "v24.15.0",
+    "browser": "Microsoft Edge 92.0.902.67 headless, --disable-gpu; existing local install"
+  },
+  "newResearchCalls": {
+    "engineCreate": 0,
+    "engineRender": 0,
+    "gpuComputeDispatch": 0,
+    "gpuReadback": 0,
+    "rawDecode": 0,
+    "full20MP": 0,
+    "naturalPhotoRender": 0,
+    "BT": 0,
+    "build": 0,
+    "newPixelCandidate": 0,
+    "independentSampleExperiment": 0,
+    "productIntegration": 0
+  },
+  "scopeNotes": [
+    "Only new viewer file-validation / generated tiny synthetic file tests / browser UI smoke were executed. Browser UI drawing is not an engine or natural-photograph render.",
+    "CPU closure validator/hash/localcopy was not rerun.",
+    "Retained CPU double identity-difference and independent tc_b / same-input-subset upsample difference conclusions without new numerical localization.",
+    "No implementation error established; no pixel math change. Missing four home full arrays remain a separate material gap, not a prerequisite for this entry.",
+    "Original full PNG historical byte hashes were not recorded; verify full decoded RGB against frozen RGBA16 and record actual PNG SHA at home."
+  ],
+  "humanPreference": "NOT_RUN_AWAITING_HUMAN",
+  "independentValidation": "NOT_RUN_DEVELOPMENT_ONLY",
+  "candidate": "DEFAULT_OFF_NOT_ADMITTED",
+  "productSource": "UNCHANGED",
+  "phaseDecision": "WAIT_FOR_ACTUAL_HUMAN_PHOTOGRAPHY_REVIEW_NO_AUTOMATIC_FOLLOWUP",
+  "failuresAndLimits": [
+    "Expected missing-file refusals (exit 2), no output created.",
+    "No real private file integrity test or natural-photo browser review possible on this company machine.",
+    "Synthetic UI/file tests do not replace real photo review or product acceptance.",
+    "A development shell quoting error occurred before a patch command ran; corrected with stdin script. No research device call occurred.",
+    "Precommit audit caught generated Python bytecode and CRLF whitespace warnings; bytecode excluded/ignored and new text normalized before commit. No private images or binaries committed."
+  ]
+}

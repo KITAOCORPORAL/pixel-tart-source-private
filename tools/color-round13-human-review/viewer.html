@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>第十三批 · 匿名摄影评价</title>
+<style>
+:root{color-scheme:dark;font:15px system-ui,sans-serif;background:#181818;color:#ececec}*{box-sizing:border-box}body{margin:0;padding:20px;max-width:1600px;margin:auto}h1{font-size:24px;margin:0 0 12px}h2{font-size:18px}p{line-height:1.6}.muted{color:#b7b7b7}.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}button,select,input,textarea{font:inherit;color:inherit;background:#303030;border:1px solid #777;border-radius:5px;padding:9px}button{cursor:pointer}button[aria-pressed=true]{border-color:#fff;outline:2px solid #aaa}button:focus-visible,select:focus-visible{outline:3px solid #bce}#viewport{position:relative;height:65vh;min-height:280px;overflow:auto;background:#242424;border:1px solid #777;overscroll-behavior:contain}#stage{position:relative}#stage img{position:absolute;inset:0;width:100%;height:100%;max-width:none;filter:none;opacity:1;transition:none;user-select:none;pointer-events:none}#stage img[hidden]{display:none}#status{min-height:24px}#questionnaire{border:1px solid #666;padding:16px;margin-top:18px}.question{display:grid;grid-template-columns:minmax(220px,1fr) minmax(210px,1fr);gap:14px;align-items:center;margin:12px 0}textarea{width:100%;min-height:70px}label{line-height:1.5}.notice{padding:12px;background:#292929;border-left:3px solid #aaa}.small{font-size:13px}#error{color:#ffb8b8}a{color:#cde}@media(max-width:650px){.question{grid-template-columns:1fr}body{padding:10px}}
+</style>
+</head>
+<body>
+<h1>第十三批 · 匿名摄影评价</h1>
+<p class="notice">这 6 张图是既有<strong>开发样本</strong>，不是独立验证集。只比较已冻结的 X / Y；没有重新渲染、调参或单独增强。请先记录真实观察，再决定偏好。任何方向均可，也可选择无明显差异或无法评估。</p>
+<div class="bar"><label for="scene">场景</label><select id="scene"></select><button id="prev">上一张</button><button id="next">下一张</button><span id="progress"></span></div>
+<div class="bar"><button id="x" aria-pressed="true">X</button><button id="y" aria-pressed="false">Y</button><button id="toggle">切换 X / Y（空格）</button><button id="fit">适合窗口</button><button id="one">100% 源像素</button><label for="roi">既有局部</label><select id="roi"></select><button id="goRoi">100% 查看局部</button></div>
+<div id="status" role="status" aria-live="polite"></div>
+<div id="viewport" tabindex="0" aria-label="图像视口，可滚动查看；空格切换同坐标版本"><div id="stage"><img id="imageX" alt="匿名版本 X" draggable="false"><img id="imageY" alt="匿名版本 Y" draggable="false" hidden></div></div>
+<p class="small muted">100% = 1 源图像像素 / 1 CSS 像素；请将浏览器页面缩放设为 100%。屏幕 DPI / 缩放和浏览器色彩管理仍会影响物理显示，不是色准验收。两版共用显示尺寸、滚动位置和浏览器通路；切换不会重置位置。原图均为同一 RGB8 显示转换，无额外锐化、对比度或颜色调整。可先看全图，再用既有局部或滚动观察。</p>
+<section id="questionnaire">
+<h2>当前场景的观察（不预填答案）</h2>
+<div id="questions"></div>
+<label for="reason">具体原因 / 观察位置（可写“不确定”或“不适用”）</label><textarea id="reason" placeholder="请描述实际观察，不必迎合任何预期。"></textarea>
+<div class="bar"><button id="export">导出人工记录 JSON（仅本地下载）</button><button id="reset">清空本页记录</button></div>
+<p id="exportStatus" role="status"></p>
+<p class="small muted">答案只暂存在此页面内存，不联网、不自动写回源文件、不保存到服务器或浏览器持久存储。关闭 / 刷新前请导出。未回答项保持 null；代理不得代填。导出不包含匿名映射，也不自动批准候选或产品接入。不要将此页面、照片或答案上传 Git。</p>
+</section>
+<p id="error" role="alert"></p>
+<script>
+'use strict';
+const DATA = /*__FROZEN_DATA__*/null;
+const QUESTIONS = [
+ ['detail','花瓣 / 叶片等细节是否过软？'],
+ ['dark_halo','暗侧黑点和光晕有何差异？'],
+ ['color_edge','肤色与饱和边缘是否出现不自然彩边？'],
+ ['noise','噪声变化能否接受？'],
+ ['preference','此场景总体偏好及原因？']
+];
+const DETAIL_OPTIONS = [['','未回答'],['no_difference','无明显差异'],['x_only','仅 X 有此现象'],['y_only','仅 Y 有此现象'],['both','两版均有此现象'],['cannot_assess','无法评估 / 不适用']];
+const HALO_OPTIONS = [['','未回答'],['x_less','X 较少'],['y_less','Y 较少'],['no_difference','无明显差异'],['cannot_assess','无法评估 / 不适用']];
+const NOISE_OPTIONS = [['','未回答'],['both_acceptable','两版均可接受'],['x_acceptable','仅 X 可接受'],['y_acceptable','仅 Y 可接受'],['neither','两版均不可接受'],['no_difference','无明显差异'],['cannot_assess','无法评估 / 不适用']];
+const PREF_OPTIONS = [['','未回答'],['X','X'],['Y','Y'],['no_preference','无明显偏好'],['cannot_assess','无法评估']];
+let index = 0, active = 'X', scale = 1, fitMode = true;
+const answers = {};
+const $ = id => document.getElementById(id);
+const option = (v,t) => {const o=document.createElement('option');o.value=v;o.textContent=t;return o;};
+function init(){
+ if(!DATA || DATA.cases.length!==6) throw new Error('冻结数据未装载；请先运行只读准备脚本。');
+ DATA.cases.forEach((c,i)=>{
+  $('scene').append(option(String(i),c.id));
+  answers[c.id]={scene:c.id, answers:Object.fromEntries(QUESTIONS.map(([id])=>[id,null])),reason:null};
+ });
+ QUESTIONS.forEach(([id,text])=>{
+  const row=document.createElement('div');row.className='question';
+  const label=document.createElement('label');label.htmlFor=id;label.textContent=text;
+  const select=document.createElement('select');select.id=id;
+  const options=id==='preference'?PREF_OPTIONS:id==='dark_halo'?HALO_OPTIONS:id==='noise'?NOISE_OPTIONS:DETAIL_OPTIONS;
+  options.forEach(([v,t])=>select.append(option(v,t)));
+  select.addEventListener('change',()=>{answers[DATA.cases[index].id].answers[id]=select.value||null;progress();});
+  row.append(label,select);$('questions').append(row);
+ });
+ $('reason').addEventListener('input',()=>{answers[DATA.cases[index].id].reason=$('reason').value||null;});
+ $('scene').addEventListener('change',()=>loadScene(Number($('scene').value)));
+ $('prev').onclick=()=>loadScene((index+5)%6);$('next').onclick=()=>loadScene((index+1)%6);
+ $('x').onclick=()=>show('X');$('y').onclick=()=>show('Y');$('toggle').onclick=toggle;
+ $('fit').onclick=()=>{fitMode=true;setScale();};$('one').onclick=()=>{fitMode=false;scale=1;setScale();};
+ $('goRoi').onclick=()=>{fitMode=false;scale=1;setScale();const [x,y,w,h]=DATA.cases[index].rois[Number($('roi').value)];$('viewport').scrollLeft=Math.max(0,x+w/2-$('viewport').clientWidth/2);$('viewport').scrollTop=Math.max(0,y+h/2-$('viewport').clientHeight/2);};
+ document.addEventListener('keydown',e=>{if(e.code==='Space'&&!['INPUT','TEXTAREA','SELECT','BUTTON'].includes(document.activeElement.tagName)){e.preventDefault();toggle();}});
+ window.addEventListener('resize',()=>{if(fitMode)setScale();});
+ $('export').onclick=exportAnswers;
+ $('reset').onclick=()=>{if(confirm('清空本页全部人工记录？请先确认已导出需要的内容。')){Object.values(answers).forEach(a=>{Object.keys(a.answers).forEach(k=>a.answers[k]=null);a.reason=null;});loadScene(index);}};
+ loadScene(0);
+}
+function toggle(){show(active==='X'?'Y':'X');}
+function show(label){active=label;$('imageX').hidden=label!=='X';$('imageY').hidden=label!=='Y';$('x').setAttribute('aria-pressed',String(label==='X'));$('y').setAttribute('aria-pressed',String(label==='Y'));status();}
+function status(){const c=DATA.cases[index];$('status').textContent=`${c.id} · 当前 ${active} · ${Math.round(scale*100)}% · ${c.width} × ${c.height} · 开发样本`;}
+function setScale(){const c=DATA.cases[index];if(fitMode)scale=Math.min(1,($('viewport').clientWidth-2)/c.width,($('viewport').clientHeight-2)/c.height);$('stage').style.width=`${c.width*scale}px`;$('stage').style.height=`${c.height*scale}px`;status();}
+function loadScene(i){index=i;const c=DATA.cases[i];$('scene').value=String(i);$('imageX').src=c.images.X;$('imageY').src=c.images.Y;$('roi').replaceChildren();c.rois.forEach((r,j)=>$('roi').append(option(String(j),`既有 ROI ${j+1} [${r.join(', ')}]`)));QUESTIONS.forEach(([id])=>$(id).value=answers[c.id].answers[id]||'');$('reason').value=answers[c.id].reason||'';$('viewport').scrollTo(0,0);setScale();show('X');progress();}
+function progress(){const count=Object.values(answers).filter(a=>QUESTIONS.every(([k])=>a.answers[k]!==null)).length;$('progress').textContent=`${count} / 6 场景五项已回答`;$('exportStatus').textContent='';}
+function exportAnswers(){
+ const records=DATA.cases.map(c=>({...answers[c.id],roiCoordinates:c.rois}));
+ const count=records.reduce((n,r)=>n+Object.values(r.answers).filter(v=>v!==null).length,0);
+ const result={version:DATA.version,sourceBase:DATA.sourceBase,createdAt:new Date().toISOString(),humanPreference:count===0?'NOT_RUN_AWAITING_HUMAN':count===30?'HUMAN_RECORDED_AWAITING_REVIEW':'HUMAN_PARTIAL_AWAITING_REVIEW',answeredItems:count,totalItems:30,developmentOnly:true,independentValidation:'NOT_RUN_DEVELOPMENT_ONLY',product:'DEFAULT_OFF_NOT_ADMITTED',records};
+ const blob=new Blob([JSON.stringify(result,null,2)+'\n'],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='round13-human-answers-local-only.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);$('exportStatus').textContent=`已触发本地下载（${count}/30 项）；请核对下载文件。`;
+}
+window.addEventListener('beforeunload',e=>{if(Object.values(answers).some(a=>a.reason||Object.values(a.answers).some(v=>v!==null))){e.preventDefault();e.returnValue='';}});
+try{init();}catch(e){$('error').textContent=String(e);document.querySelectorAll('button,select,textarea').forEach(el=>el.disabled=true);}
+</script>
+</body>
+</html>

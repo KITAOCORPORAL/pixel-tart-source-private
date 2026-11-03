@@ -1,3 +1,15 @@
+# 第十三批人工摄影评价准备已收口（2026-11-03，Asia/Shanghai）
+
+接续已审查 research/color-engine-company-scale-closure-20261103 @ 9b8c52715b45540ffaf1d1fc99e0a7bd832678fc，fetch 无增量，复用干净独立公司研究 checkout，新分支 research/color-engine-round13-human-review-20261103。CPU 数值定位停止；保留 double 身份差异与 tc_b / 相同输入子集 upsample 差异，无实现错误证据，不改像素数学。旧 validator/hash/localcopy 不重跑，缺家庭四完整数组不阻断此准备。
+
+限定 E:/Kitao-Research 顶层和明确 round13/原 N: 路径未发现冻结 A/B；不扫描其他盘、不换公司照片。家庭只读入口 tools/color-round13-human-review/README.md 已交付，61 个明确文件缺项清单入 human-review-prep-20261103。输入/输出 SHA、长度、finite、原 PNG 显示像素及旧匿名映射/裁片绑定，缺项拒绝，成功仅生成私有本地 HTML；X/Y 同尺度切换、100% 既有 ROI，不重渲染、调参或新增候选。
+
+8 项新入口离线合成文件测试和合成 UI smoke 通过，仅此入口测试，不是真实六图读回或摄影通过。公司真实六图入口生成/观看 NOT_RUN_MISSING_PRIVATE_FILES，人工偏好 NOT_RUN_AWAITING_HUMAN，独立验证 NOT_RUN_DEVELOPMENT_ONLY；代理未代填。新增研究 GPU/RAW/20MP/自然图/BT/build 全 0。照片/评价图/答案/引擎资源不入 Git。
+
+权威 ROUND13_HUMAN_REVIEW_PREPARATION_20261103.md、CAPABILITIES_ROUND13_HUMAN_REVIEW_20261103.md 与 human-review-prep-20261103。产品 UI/default/PV456、旧工具/配方/证据不变；SharedIncrementEnvelopeUnsharpV1 仍 DEFAULT_OFF / NOT_ADMITTED。交付后等待实际摄影评价，不自动第二候选、独立样本实验或产品接入。下方全部旧历史原字节保留；本轮新收据 Asia/Shanghai。
+
+---
+
 # 公司既有capture CPU收口并停止（2026-11-03，Asia/Shanghai）
 
 fetch家庭`research/color-engine-home-scale-20261102@0fa710e606b962efac66727215fb6c8f0c76a5ed`准确，无增量。公司旧树099b2fb8clean/unpushed0，另建`research/color-engine-company-scale-closure-20261103`，旧公司/家庭/失败与历史时间保留。
